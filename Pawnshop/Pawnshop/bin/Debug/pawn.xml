@@ -2,11 +2,23 @@
 <doc>
 <assembly>
 <name>
-Pawnshop
+pawn
 </name>
 </assembly>
 <members>
-<member name="P:Pawnshop.My.Resources.Resources.ResourceManager">
+<member name="M:Pawnshop.frmMoneyTransfer.GetCharge(System.Double)">
+	<summary>
+ Get Charge Table the corresponding charges for the specific amount
+ </summary>
+	<param name="amount">Money</param>
+	<returns>Money</returns>
+</member><member name="M:Pawnshop.frmMoneyTransfer.isEnter(System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ Identify if the KeyPress is enter
+ </summary>
+	<param name="e">KeyPressEventArgs</param>
+	<returns>Boolean</returns>
+</member><member name="P:Pawnshop.My.Resources.Resources.ResourceManager">
 	<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
@@ -19,18 +31,6 @@ Pawnshop
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.
 </summary>
-</member><member name="M:Pawnshop.frmMoneyTransfer.GetCharge(System.Double)">
-	<summary>
- Get Charge Table the corresponding charges for the specific amount
- </summary>
-	<param name="amount">Money</param>
-	<returns>Money</returns>
-</member><member name="M:Pawnshop.frmMoneyTransfer.isEnter(System.Windows.Forms.KeyPressEventArgs)">
-	<summary>
- Identify if the KeyPress is enter
- </summary>
-	<param name="e">KeyPressEventArgs</param>
-	<returns>Boolean</returns>
 </member>
 </members>
 </doc>

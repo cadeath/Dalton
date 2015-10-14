@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Pawnshop")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Microsoft")> 
-<Assembly: AssemblyProduct("Pawnshop")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2015")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTitle("Dalton Pawnshop")> 
+<Assembly: AssemblyDescription("Dalton Pawnshop and Jewelry")> 
+<Assembly: AssemblyCompany("Perfecto Group of Companies")> 
+<Assembly: AssemblyProduct("pawnshop")> 
+<Assembly: AssemblyCopyright("Copyright © CaDeAtH™")> 
+<Assembly: AssemblyTrademark("Aerauxel")> 
 
 <Assembly: ComVisible(False)>
 
