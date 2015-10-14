@@ -16,6 +16,10 @@
         frm.Show()
     End Sub
 
+    Friend Sub Alert()
+        MsgBox("Alert", MsgBoxStyle.Critical)
+    End Sub
+
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         End
     End Sub

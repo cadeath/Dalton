@@ -29,4 +29,8 @@
                 sfdPath.FileName = String.Format("JRNL{0}ROX.xls", Now.ToString("yyyyMMdd")) 'JRNL + Date + BranchCode
         End Select
     End Sub
+
+    Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
+
+    End Sub
 End Class

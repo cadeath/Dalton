@@ -54,6 +54,8 @@ Partial Class frmMain
         Me.Button3 = New System.Windows.Forms.Button()
         Me.frmClientMngmnt = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.OpenStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -71,7 +73,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenStoreToolStripMenuItem, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -185,7 +187,7 @@ Partial Class frmMain
         Me.pInfo.Controls.Add(Me.lblTitle)
         Me.pInfo.Location = New System.Drawing.Point(12, 161)
         Me.pInfo.Name = "pInfo"
-        Me.pInfo.Size = New System.Drawing.Size(365, 333)
+        Me.pInfo.Size = New System.Drawing.Size(365, 337)
         Me.pInfo.TabIndex = 5
         '
         'lblMessage
@@ -194,7 +196,7 @@ Partial Class frmMain
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblMessage.Location = New System.Drawing.Point(15, 41)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(310, 279)
+        Me.lblMessage.Size = New System.Drawing.Size(310, 283)
         Me.lblMessage.TabIndex = 5
         Me.lblMessage.Text = resources.GetString("lblMessage.Text")
         '
@@ -211,9 +213,6 @@ Partial Class frmMain
         '
         'pButton
         '
-        Me.pButton.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.pButton.Controls.Add(Me.Button7)
         Me.pButton.Controls.Add(Me.Button8)
@@ -318,12 +317,23 @@ Partial Class frmMain
         Me.Button1.Text = "Pawning"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'OpenStoreToolStripMenuItem
+        '
+        Me.OpenStoreToolStripMenuItem.Name = "OpenStoreToolStripMenuItem"
+        Me.OpenStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.OpenStoreToolStripMenuItem.Text = "&Open Store"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(168, 6)
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(185, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(908, 506)
+        Me.ClientSize = New System.Drawing.Size(908, 510)
         Me.Controls.Add(Me.pButton)
         Me.Controls.Add(Me.pbLogo)
         Me.Controls.Add(Me.msMenu)
@@ -374,5 +384,7 @@ Partial Class frmMain
     Friend WithEvents frmClientMngmnt As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents AboutUsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenStoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
 
 End Class
