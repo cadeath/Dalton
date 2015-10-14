@@ -86,7 +86,7 @@ Partial Class frmMain
         '
         Me.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
         Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.UpdateToolStripMenuItem.Text = "&Update"
+        Me.UpdateToolStripMenuItem.Text = "&Update Rate"
         '
         'SettingsToolStripMenuItem
         '
@@ -157,13 +157,13 @@ Partial Class frmMain
         'TutorialToolStripMenuItem
         '
         Me.TutorialToolStripMenuItem.Name = "TutorialToolStripMenuItem"
-        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
         Me.TutorialToolStripMenuItem.Text = "&Tutorial"
         '
         'AboutUsToolStripMenuItem
         '
         Me.AboutUsToolStripMenuItem.Name = "AboutUsToolStripMenuItem"
-        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
         Me.AboutUsToolStripMenuItem.Text = "&About Us"
         '
         'pbLogo
