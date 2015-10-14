@@ -13,3 +13,6 @@ D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.exe
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.xml
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.pdb
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.exe
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.xml
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.pdb
