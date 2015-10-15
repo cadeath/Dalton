@@ -6,21 +6,22 @@ Firebird Database
   - SQL Manager Lite Firebird (Optional)
     - Database Manager
 
-Forms ====================================
+[Forms]
 frmExtractor
----Variable
+{Variable}
 FormType as ExtractType
  - Expiry = 0
  - JournalEntry = 1
 
 frmClientInformation
----Sub
+{Sub}
+
 PhoneSeparator(TextBox,KeypressArgs,Optional isPhone Boolean=false)
  Identify if the entry encoded is a number or not
 
-Modules ==================================
+[Modules]
 mod_system
----Function
+{Function}
 DigitOnly(KeypressArgs)
  Allow only numbers and backspace
  Return: Boolean
