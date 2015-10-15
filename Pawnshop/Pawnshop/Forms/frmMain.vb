@@ -25,6 +25,24 @@
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
+        frmSettings.Show()
+    End Sub
 
+    Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
+        frmUserManagement.Show()
+    End Sub
+
+    Private Sub OpenStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenStoreToolStripMenuItem.Click
+        frmOpenStore.Show()
+    End Sub
+
+    Private Sub ExpiryGeneratorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryGeneratorToolStripMenuItem.Click
+        frmExtractor.FormType = frmExtractor.ExtractType.Expiry
+        frmExtractor.Show()
+    End Sub
+
+    Private Sub JournalEntriesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles JournalEntriesToolStripMenuItem.Click
+        frmExtractor.FormType = frmExtractor.ExtractType.JournalEntry
+        frmExtractor.Show()
     End Sub
 End Class

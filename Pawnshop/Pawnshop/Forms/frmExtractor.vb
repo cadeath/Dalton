@@ -3,7 +3,7 @@
         Expiry = 0
         JournalEntry = 1
     End Enum
-    Friend FormType As ExtractType = 0
+    Friend FormType As ExtractType = ExtractType.Expiry
 
     Private Sub txtPath_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPath.DoubleClick
         sfdPath.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
@@ -24,9 +24,13 @@
     Private Sub FormInit()
         Select Case FormType
             Case ExtractType.Expiry
+                Console.WriteLine("Expiry Type Activated")
                 sfdPath.FileName = String.Format("ROX{0}.xls", Now.ToString("MMddyyyy"))  'BranchCode + Date
+                Me.Text &= " - Expiry"
             Case ExtractType.JournalEntry
+                Console.WriteLine("Journal Entry Type Activated")
                 sfdPath.FileName = String.Format("JRNL{0}ROX.xls", Now.ToString("yyyyMMdd")) 'JRNL + Date + BranchCode
+                Me.Text &= " - Journal Entry"
         End Select
     End Sub
 

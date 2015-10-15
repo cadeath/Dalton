@@ -25,6 +25,8 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.UserManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -54,8 +56,6 @@ Partial Class frmMain
         Me.Button3 = New System.Windows.Forms.Button()
         Me.frmClientMngmnt = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.OpenStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -77,6 +77,17 @@ Partial Class frmMain
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
+        '
+        'OpenStoreToolStripMenuItem
+        '
+        Me.OpenStoreToolStripMenuItem.Name = "OpenStoreToolStripMenuItem"
+        Me.OpenStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.OpenStoreToolStripMenuItem.Text = "&Open Store"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(168, 6)
         '
         'UserManagementToolStripMenuItem
         '
@@ -316,17 +327,6 @@ Partial Class frmMain
         Me.Button1.TabIndex = 18
         Me.Button1.Text = "Pawning"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'OpenStoreToolStripMenuItem
-        '
-        Me.OpenStoreToolStripMenuItem.Name = "OpenStoreToolStripMenuItem"
-        Me.OpenStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.OpenStoreToolStripMenuItem.Text = "&Open Store"
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(168, 6)
         '
         'frmMain
         '

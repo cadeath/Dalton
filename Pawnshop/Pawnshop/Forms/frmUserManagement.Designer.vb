@@ -47,6 +47,7 @@ Partial Class frmUserManagement
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.tbSupervisor = New System.Windows.Forms.TabPage()
+        Me.CheckBox25 = New System.Windows.Forms.CheckBox()
         Me.CheckBox21 = New System.Windows.Forms.CheckBox()
         Me.CheckBox20 = New System.Windows.Forms.CheckBox()
         Me.CheckBox18 = New System.Windows.Forms.CheckBox()
@@ -63,9 +64,10 @@ Partial Class frmUserManagement
         Me.CheckBox23 = New System.Windows.Forms.CheckBox()
         Me.CheckBox22 = New System.Windows.Forms.CheckBox()
         Me.CheckBox19 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox25 = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
         Me.CheckBox26 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox27 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox28 = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -321,6 +323,16 @@ Partial Class frmUserManagement
         Me.tbSupervisor.Text = "Supervisor"
         Me.tbSupervisor.UseVisualStyleBackColor = True
         '
+        'CheckBox25
+        '
+        Me.CheckBox25.AutoSize = True
+        Me.CheckBox25.Location = New System.Drawing.Point(237, 58)
+        Me.CheckBox25.Name = "CheckBox25"
+        Me.CheckBox25.Size = New System.Drawing.Size(80, 17)
+        Me.CheckBox25.TabIndex = 12
+        Me.CheckBox25.Text = "Open Store"
+        Me.CheckBox25.UseVisualStyleBackColor = True
+        '
         'CheckBox21
         '
         Me.CheckBox21.AutoSize = True
@@ -485,18 +497,10 @@ Partial Class frmUserManagement
         Me.CheckBox19.Text = "User Management"
         Me.CheckBox19.UseVisualStyleBackColor = True
         '
-        'CheckBox25
-        '
-        Me.CheckBox25.AutoSize = True
-        Me.CheckBox25.Location = New System.Drawing.Point(237, 58)
-        Me.CheckBox25.Name = "CheckBox25"
-        Me.CheckBox25.Size = New System.Drawing.Size(80, 17)
-        Me.CheckBox25.TabIndex = 12
-        Me.CheckBox25.Text = "Open Store"
-        Me.CheckBox25.UseVisualStyleBackColor = True
-        '
         'tbSpecial
         '
+        Me.tbSpecial.Controls.Add(Me.CheckBox28)
+        Me.tbSpecial.Controls.Add(Me.CheckBox27)
         Me.tbSpecial.Controls.Add(Me.CheckBox26)
         Me.tbSpecial.Location = New System.Drawing.Point(4, 22)
         Me.tbSpecial.Name = "tbSpecial"
@@ -515,6 +519,26 @@ Partial Class frmUserManagement
         Me.CheckBox26.TabIndex = 3
         Me.CheckBox26.Text = "Cash In (Bank)"
         Me.CheckBox26.UseVisualStyleBackColor = True
+        '
+        'CheckBox27
+        '
+        Me.CheckBox27.AutoSize = True
+        Me.CheckBox27.Location = New System.Drawing.Point(13, 35)
+        Me.CheckBox27.Name = "CheckBox27"
+        Me.CheckBox27.Size = New System.Drawing.Size(104, 17)
+        Me.CheckBox27.TabIndex = 4
+        Me.CheckBox27.Text = "Cash Out (Bank)"
+        Me.CheckBox27.UseVisualStyleBackColor = True
+        '
+        'CheckBox28
+        '
+        Me.CheckBox28.AutoSize = True
+        Me.CheckBox28.Location = New System.Drawing.Point(374, 114)
+        Me.CheckBox28.Name = "CheckBox28"
+        Me.CheckBox28.Size = New System.Drawing.Size(70, 17)
+        Me.CheckBox28.TabIndex = 11
+        Me.CheckBox28.Text = "Select All"
+        Me.CheckBox28.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '
@@ -593,4 +617,6 @@ Partial Class frmUserManagement
     Friend WithEvents CheckBox25 As System.Windows.Forms.CheckBox
     Friend WithEvents tbSpecial As System.Windows.Forms.TabPage
     Friend WithEvents CheckBox26 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBox27 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBox28 As System.Windows.Forms.CheckBox
 End Class
