@@ -20,11 +20,15 @@ FormType as ExtractType
 *Sub*
 
 PhoneSeparator(TextBox,KeypressArgs,Optional isPhone Boolean=false)
+
  Identify if the entry encoded is a number or not
 
 ### Modules
 #### mod_system
 *Function*
+
 DigitOnly(KeypressArgs)
+
  Allow only numbers and backspace
+ 
  Return: Boolean
