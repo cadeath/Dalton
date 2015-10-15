@@ -40,4 +40,8 @@ Module database
 
         Return ready
     End Function
+
+    Friend Function SaveEntry(ByVal dsEntry As DataSet) As Boolean
+
+    End Function
 End Module
