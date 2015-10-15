@@ -6,12 +6,7 @@ Firebird Database
   - SQL Manager Lite Firebird (Optional)
     - Database Manager
 
-<<<<<<< HEAD
 [Forms]
-=======
-Forms ====================================
-
->>>>>>> origin/master
 frmExtractor
 {Variable}
 FormType as ExtractType
@@ -20,16 +15,10 @@ FormType as ExtractType
 
 frmClientInformation
 {Sub}
-
 PhoneSeparator(TextBox,KeypressArgs,Optional isPhone Boolean=false)
  Identify if the entry encoded is a number or not
 
-<<<<<<< HEAD
 [Modules]
-=======
-Modules ==================================
-
->>>>>>> origin/master
 mod_system
 {Function}
 DigitOnly(KeypressArgs)
