@@ -154,7 +154,7 @@ Partial Class frmClientInformation
         '
         Me.Label11.Location = New System.Drawing.Point(82, 194)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(168, 13)
+        Me.Label11.Size = New System.Drawing.Size(56, 13)
         Me.Label11.TabIndex = 19
         Me.Label11.Text = "Zip Code"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -165,7 +165,7 @@ Partial Class frmClientInformation
         Me.txtZip.Location = New System.Drawing.Point(85, 169)
         Me.txtZip.MaxLength = 5
         Me.txtZip.Name = "txtZip"
-        Me.txtZip.Size = New System.Drawing.Size(165, 22)
+        Me.txtZip.Size = New System.Drawing.Size(53, 22)
         Me.txtZip.TabIndex = 8
         Me.txtZip.Text = "9500"
         '
@@ -221,7 +221,7 @@ Partial Class frmClientInformation
         Me.txtBrgy.Name = "txtBrgy"
         Me.txtBrgy.Size = New System.Drawing.Size(165, 22)
         Me.txtBrgy.TabIndex = 5
-        Me.txtBrgy.Text = "Batomelong"
+        Me.txtBrgy.Text = "Lagao"
         '
         'Label7
         '
@@ -313,7 +313,7 @@ Partial Class frmClientInformation
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(99, 22)
         Me.txtMiddleName.TabIndex = 1
-        Me.txtMiddleName.Text = "Maquilang"
+        Me.txtMiddleName.Text = "Dingal"
         '
         'txtFirstName
         '

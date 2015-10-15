@@ -7,6 +7,25 @@
         If isReady() Then
             Console.WriteLine("Database connected")
         End If
+
+        Populate()
+    End Sub
+
+    Private Sub Populate()
+        txtFirstName.Text = "Eskie Cirrus James"
+        txtMiddleName.Text = "Dingal"
+        txtLastName.Text = "Maquilang"
+
+        txtStreet.Text = "153 Acacia St. Balite"
+        txtBrgy.Text = "Lagao"
+        txtCity.Text = "General Santos City"
+        txtProvince.Text = "South Cotabato"
+        txtZip.Text = "9500"
+
+        cboGender.Text = "Male"
+        dtpBday.Value = #11/7/1986#
+
+        txtCP1.Text = "0922-684-7559"
     End Sub
 
     Private Sub ClearFields()
@@ -93,4 +112,32 @@
         PhoneSeparator(txtTele, e, True)
     End Sub
 
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        Dim tmpClient As New Client
+        With tmpClient
+            .FirstName = txtFirstName.Text
+            .MiddleName = txtMiddleName.Text
+            .LastName = txtLastName.Text
+            .Suffix = txtSuffix.Text
+
+            .AddressSt = txtStreet.Text
+            .AddressBrgy = txtBrgy.Text
+            .AddressCity = txtCity.Text
+            .AddressProvince = txtProvince.Text
+            .ZipCode = txtZip.Text
+
+            .Sex = IIf(cboGender.Text = "Male", Client.Gender.Male, Client.Gender.Female)
+            .Birthday = dtpBday.Value
+
+            .Cellphone1 = txtCP1.Text
+            .Cellphone2 = txtCP2.Text
+            .Telephone = txtTele.Text
+            .OtherNumber = txtOthers.Text
+
+            .Save()
+        End With
+
+        'database.SaveEntry(tmpClient.DataSet)
+        MsgBox("Entry Saved", MsgBoxStyle.Information)
+    End Sub
 End Class

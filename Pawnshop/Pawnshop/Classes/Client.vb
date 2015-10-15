@@ -1,8 +1,11 @@
-﻿Public Class Client
+﻿Imports System.Data.Odbc
+
+Public Class Client
 
 #Region "Variables"
     Enum Gender As Integer : Male = 1 : Female = 0 : End Enum
 
+    Private _id As Integer = 0
     Private _firstName As String = String.Empty
     Private _middleName As String = String.Empty
     Private _lastName As String = String.Empty
@@ -21,9 +24,21 @@
     Private _cp2 As String = String.Empty
     Private _phone As String = String.Empty
     Private _otherNum As String = String.Empty
+
+    'Database
+    Private fillData As String = "tblClient"
 #End Region
 
 #Region "Properties"
+    Public Property ID As Integer
+        Get
+            Return _id
+        End Get
+        Set(ByVal value As Integer)
+            _id = value
+        End Set
+    End Property
+
     Public Property FirstName As String
         Set(ByVal value As String)
             _firstName = value
@@ -87,6 +102,24 @@
         End Set
     End Property
 
+    Public Property AddressProvince As String
+        Set(ByVal value As String)
+            _addrProvince = value
+        End Set
+        Get
+            Return _addrProvince
+        End Get
+    End Property
+
+    Public Property ZipCode As Integer
+        Set(ByVal value As Integer)
+            _addrZip = value
+        End Set
+        Get
+            Return _addrZip
+        End Get
+    End Property
+
     Public Property Sex As Gender
         Set(ByVal value As Gender)
             _gender = value
@@ -141,6 +174,97 @@
         End Get
     End Property
 #End Region
+
+    Public Sub Save()
+        dbOpen()
+        Dim da As OdbcDataAdapter
+        Dim ds As New DataSet
+        Dim fillData As String, mySql As String
+
+        mySql = "SELECT * FROM tblclient"
+        fillData = "Client"
+
+        ds.Clear()
+        da = New OdbcDataAdapter(mySql, con)
+        da.Fill(ds, fillData)
+        Dim cb As New OdbcCommandBuilder(da)
+        Dim MaxRow As Integer = ds.Tables(fillData).Rows.Count
+
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("FirstName") = _firstName
+            .Item("MiddleName") = _middleName
+            .Item("LastName") = _lastName
+            .Item("Suffix") = _suffixName
+            .Item("Addr_Street") = _addrSt
+            .Item("Addr_Brgy") = _addrBrgy
+            .Item("Addr_City") = _addrCity
+            .Item("Addr_Province") = _addrProvince
+            .Item("Addr_Zip") = _addrZip
+            .Item("Sex") = _gender
+            .Item("Birthday") = _bday
+            .Item("Phone1") = _cp1
+            .Item("Phone2") = _cp2
+            .Item("Phone3") = _phone
+            .Item("Phone_Others") = _otherNum
+        End With
+
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+        da.Update(ds, fillData)
+
+        dbClose()
+    End Sub
+
+    Public Function DataSet() As DataSet
+        'Creating Virtual Database
+        Dim ds As New DataSet, dt As New DataTable(fillData)
+
+        'Constructing Database
+        ds.Tables.Add(dt)
+        With ds.Tables(fillData).Columns
+            .Add(New DataColumn("ClientID", GetType(Integer))) 'AutoIncrement
+            .Add(New DataColumn("FirstName", GetType(String)))
+            .Add(New DataColumn("MiddleName", GetType(String)))
+            .Add(New DataColumn("LastName", GetType(String)))
+            .Add(New DataColumn("Suffix", GetType(String)))
+            .Add(New DataColumn("Addr_Street", GetType(String)))
+            .Add(New DataColumn("Addr_Brgy", GetType(String)))
+            .Add(New DataColumn("Addr_City", GetType(String)))
+            .Add(New DataColumn("Addr_Province", GetType(String)))
+            .Add(New DataColumn("Addr_Zip", GetType(Integer)))
+            .Add(New DataColumn("Sex", GetType(String)))
+            .Add(New DataColumn("Birthday", GetType(Date)))
+            .Add(New DataColumn("Phone1", GetType(String)))
+            .Add(New DataColumn("Phone2", GetType(String)))
+            .Add(New DataColumn("Phone3", GetType(String)))
+            .Add(New DataColumn("Phone_Others", GetType(String)))
+        End With
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("FirstName") = _firstName
+            .Item("MiddleName") = _middleName
+            .Item("LastName") = _lastName
+            .Item("Suffix") = _suffixName
+            .Item("Addr_Street") = _addrSt
+            .Item("Addr_Brgy") = _addrBrgy
+            .Item("Addr_City") = _addrCity
+            .Item("Addr_Province") = _addrProvince
+            .Item("Addr_Zip") = _addrZip
+            .Item("Sex") = _gender
+            .Item("Birthday") = _bday
+            .Item("Phone1") = _cp1
+            .Item("Phone2") = _cp2
+            .Item("Phone3") = _phone
+            .Item("Phone_Others") = _otherNum
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        Return ds
+    End Function
 
     Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
         str = str.Replace("'", "\'")

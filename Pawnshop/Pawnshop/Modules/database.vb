@@ -41,7 +41,32 @@ Module database
         Return ready
     End Function
 
+    ' Module 001
     Friend Function SaveEntry(ByVal dsEntry As DataSet) As Boolean
+        dbOpen()
 
+        Try
+            Dim da As OdbcDataAdapter
+            Dim ds As New DataSet, mySql As String, fillData As String
+            ds = dsEntry
+
+            'Save all tables in the dataset
+            For Each dsTable As DataTable In dsEntry.Tables
+                fillData = dsTable.TableName
+                mySql = "SELECT * FROM " & fillData
+
+                da = New OdbcDataAdapter(mySql, con)
+                Dim cb As New OdbcCommandBuilder(da) 'Required in Saving to Database
+                da.Update(ds, fillData)
+            Next
+
+            dbClose()
+
+            Return True
+        Catch ex As Exception
+            MsgBox("[Module 001 - SaveEntry]" & vbCr & ex.Message.ToString, MsgBoxStyle.Critical, "Saving Failed")
+            dbClose()
+            Return False
+        End Try
     End Function
 End Module
