@@ -7,6 +7,7 @@ Firebird Database
     - Database Manager
 
 Forms ====================================
+
 frmExtractor
 ---Variable
 FormType as ExtractType
@@ -19,6 +20,7 @@ PhoneSeparator(TextBox,KeypressArgs,Optional isPhone Boolean=false)
  Identify if the entry encoded is a number or not
 
 Modules ==================================
+
 mod_system
 ---Function
 DigitOnly(KeypressArgs)
