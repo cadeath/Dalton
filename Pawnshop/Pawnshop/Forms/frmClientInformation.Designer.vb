@@ -586,6 +586,7 @@ Partial Class frmClientInformation
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmClientInformation"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Client"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

@@ -3,6 +3,10 @@
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         txtFirstName.Focus()
+
+        If isReady() Then
+            Console.WriteLine("Database connected")
+        End If
     End Sub
 
     Private Sub ClearFields()
@@ -29,6 +33,7 @@
         txtOthers.Text = ""
 
         cboIDtype.DropDownStyle = ComboBoxStyle.DropDownList
+        cboIDtype.SelectedIndex = -1
         txtRef.Text = ""
         txtRemarks.Text = ""
         lvID.Items.Clear()
@@ -42,15 +47,50 @@
         DigitOnly(e)
     End Sub
 
+    Private Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
+        Dim charPos() As Integer = {}
+        If PhoneField.Text = Nothing Then Return
+
+        Select Case PhoneField.Text.Substring(0, 1)
+            Case "0"
+                charPos = {4, 8}
+            Case "9"
+                charPos = {3, 7} '922-797-7559
+            Case "+"
+                charPos = {3, 7, 11} '+63-919-797-7559
+            Case "6"
+                charPos = {2, 6, 10} '63-919-797-7559
+        End Select
+        If isPhone Then
+            Select Case PhoneField.Text.Substring(0, 1)
+                Case "0"
+                    charPos = {3, 7}
+                Case Else
+                    charPos = {2, 6}
+            End Select
+        End If
+
+        For Each pos In charPos
+            If PhoneField.TextLength = pos And Not e.KeyChar = vbBack Then
+                PhoneField.Text &= "-"
+                PhoneField.SelectionStart = pos + 1
+            End If
+        Next
+    End Sub
+
     Private Sub txtCP1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCP1.KeyPress
         DigitOnly(e)
+        PhoneSeparator(txtCP1, e)
     End Sub
 
     Private Sub txtCP2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCP2.KeyPress
         DigitOnly(e)
+        PhoneSeparator(txtCP2, e)
     End Sub
 
     Private Sub txtTele_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTele.KeyPress
         DigitOnly(e)
+        PhoneSeparator(txtTele, e, True)
     End Sub
+
 End Class
