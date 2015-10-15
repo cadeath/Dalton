@@ -8,27 +8,22 @@
     - Database Manager
 
 ## Codes
-**Forms**
-
-frmExtractor
-
+### Forms
+#### frmExtractor
 *Variable*
 
 FormType as ExtractType
  - Expiry = 0
  - JournalEntry = 1
 
-frmClientInformation
-
+#### frmClientInformation
 *Sub*
 
 PhoneSeparator(TextBox,KeypressArgs,Optional isPhone Boolean=false)
  Identify if the entry encoded is a number or not
 
-**Modules**
-
-mod_system
-
+### Modules
+#### mod_system
 *Function*
 DigitOnly(KeypressArgs)
  Allow only numbers and backspace
