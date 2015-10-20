@@ -2,11 +2,11 @@
 
 Module database
     Public con As OdbcConnection
-    Friend dbName As String = "W3W1LH4CKU.FDB"
+    Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
-    Private conStr As String = String.Empty
+    Friend conStr As String = String.Empty
 
     Private language() As String = _
         {"Connection error failed."}

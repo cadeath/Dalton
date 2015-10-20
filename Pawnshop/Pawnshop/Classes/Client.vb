@@ -1,6 +1,4 @@
-﻿Imports System.Data.Odbc
-
-Public Class Client
+﻿Public Class Client
 
 #Region "Variables"
     Enum Gender As Integer : Male = 1 : Female = 0 : End Enum
@@ -174,48 +172,6 @@ Public Class Client
         End Get
     End Property
 #End Region
-
-    Public Sub Save()
-        dbOpen()
-        Dim da As OdbcDataAdapter
-        Dim ds As New DataSet
-        Dim fillData As String, mySql As String
-
-        mySql = "SELECT * FROM tblclient"
-        fillData = "Client"
-
-        ds.Clear()
-        da = New OdbcDataAdapter(mySql, con)
-        da.Fill(ds, fillData)
-        Dim cb As New OdbcCommandBuilder(da)
-        Dim MaxRow As Integer = ds.Tables(fillData).Rows.Count
-
-
-        Dim dsNewRow As DataRow
-        dsNewRow = ds.Tables(fillData).NewRow
-        With dsNewRow
-            .Item("FirstName") = _firstName
-            .Item("MiddleName") = _middleName
-            .Item("LastName") = _lastName
-            .Item("Suffix") = _suffixName
-            .Item("Addr_Street") = _addrSt
-            .Item("Addr_Brgy") = _addrBrgy
-            .Item("Addr_City") = _addrCity
-            .Item("Addr_Province") = _addrProvince
-            .Item("Addr_Zip") = _addrZip
-            .Item("Sex") = _gender
-            .Item("Birthday") = _bday
-            .Item("Phone1") = _cp1
-            .Item("Phone2") = _cp2
-            .Item("Phone3") = _phone
-            .Item("Phone_Others") = _otherNum
-        End With
-
-        ds.Tables(fillData).Rows.Add(dsNewRow)
-        da.Update(ds, fillData)
-
-        dbClose()
-    End Sub
 
     Public Function DataSet() As DataSet
         'Creating Virtual Database
