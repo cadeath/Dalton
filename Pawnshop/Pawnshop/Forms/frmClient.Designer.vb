@@ -35,6 +35,7 @@ Partial Class frmClient
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,7 +48,7 @@ Partial Class frmClient
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(645, 68)
+        Me.GroupBox1.Size = New System.Drawing.Size(740, 68)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
@@ -55,7 +56,7 @@ Partial Class frmClient
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Location = New System.Drawing.Point(560, 31)
+        Me.Button1.Location = New System.Drawing.Point(655, 31)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(74, 23)
         Me.Button1.TabIndex = 2
@@ -69,7 +70,7 @@ Partial Class frmClient
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(9, 32)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(544, 22)
+        Me.TextBox1.Size = New System.Drawing.Size(639, 22)
         Me.TextBox1.TabIndex = 1
         Me.TextBox1.Text = "Kiko Mizuhara"
         '
@@ -87,12 +88,12 @@ Partial Class frmClient
         Me.lvClient.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
+        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
-        Me.lvClient.Location = New System.Drawing.Point(12, 86)
+        Me.lvClient.Location = New System.Drawing.Point(11, 86)
         Me.lvClient.Name = "lvClient"
-        Me.lvClient.Size = New System.Drawing.Size(644, 245)
+        Me.lvClient.Size = New System.Drawing.Size(739, 245)
         Me.lvClient.TabIndex = 1
         Me.lvClient.UseCompatibleStateImageBehavior = False
         Me.lvClient.View = System.Windows.Forms.View.Details
@@ -115,7 +116,7 @@ Partial Class frmClient
         'Button2
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.Location = New System.Drawing.Point(581, 337)
+        Me.Button2.Location = New System.Drawing.Point(676, 337)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 2
@@ -125,7 +126,7 @@ Partial Class frmClient
         'Button3
         '
         Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(500, 337)
+        Me.Button3.Location = New System.Drawing.Point(595, 337)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 3
@@ -155,18 +156,23 @@ Partial Class frmClient
         'Button6
         '
         Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button6.Location = New System.Drawing.Point(419, 337)
+        Me.Button6.Location = New System.Drawing.Point(514, 337)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 23)
         Me.Button6.TabIndex = 6
         Me.Button6.Text = "&Select"
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "#"
+        Me.ColumnHeader4.Width = 53
+        '
         'frmClient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(667, 367)
+        Me.ClientSize = New System.Drawing.Size(762, 367)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
@@ -194,4 +200,5 @@ Partial Class frmClient
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
 End Class
