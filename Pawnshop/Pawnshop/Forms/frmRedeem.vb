@@ -12,4 +12,9 @@
     Private Sub frmRedeem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Receiptdate.Value = Date.Now
     End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        frmNewloan.Show()
+
+    End Sub
 End Class
