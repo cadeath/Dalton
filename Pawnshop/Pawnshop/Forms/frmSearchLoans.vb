@@ -16,8 +16,8 @@
         frmNewloan.txtDesc.ReadOnly = False
         frmNewloan.txtAppraisal.ReadOnly = False
         frmNewloan.btnSave.Enabled = True
-        frmNewloan.ItemType.Enabled = True
-        frmNewloan.Category.Enabled = True
+        frmNewloan.cboItemtype.Enabled = True
+        frmNewloan.cboCategory.Enabled = True
         frmNewloan.Enabled = True
         frmNewloan.lblNticket.Visible = False
         frmNewloan.txtNticket.Visible = False
