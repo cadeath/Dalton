@@ -124,6 +124,12 @@
     <Compile Include="Forms\frmExtractor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmLoanlist.Designer.vb">
+      <DependentUpon>frmLoanlist.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLoanlist.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -137,10 +143,28 @@
     <Compile Include="Forms\frmMoneyTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmNewloan.designer.vb">
+      <DependentUpon>frmNewloan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmNewloan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmOpenStore.Designer.vb">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmOpenStore.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRedeem.Designer.vb">
+      <DependentUpon>frmRedeem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRedeem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSearchLoans.Designer.vb">
+      <DependentUpon>frmSearchLoans.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSearchLoans.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmSettings.Designer.vb">
@@ -183,14 +207,26 @@
     <EmbeddedResource Include="Forms\frmExtractor.resx">
       <DependentUpon>frmExtractor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLoanlist.resx">
+      <DependentUpon>frmLoanlist.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMoneyTransfer.resx">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewloan.resx">
+      <DependentUpon>frmNewloan.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOpenStore.resx">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRedeem.resx">
+      <DependentUpon>frmRedeem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSearchLoans.resx">
+      <DependentUpon>frmSearchLoans.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>
