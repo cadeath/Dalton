@@ -134,10 +134,14 @@
             .Telephone = txtTele.Text
             .OtherNumber = txtOthers.Text
 
-            .Save()
+            '.Save()
         End With
 
-        'database.SaveEntry(tmpClient.DataSet)
+        database.SaveEntry(tmpClient.DataSet)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub txtCP1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCP1.TextChanged
+
     End Sub
 End Class
