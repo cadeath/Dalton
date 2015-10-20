@@ -65,11 +65,7 @@
         End If
     End Sub
     Private Sub TextBox2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppraisal.KeyPress
-
-        If Not Char.IsDigit(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
-            e.Handled = True
-        End If
-        txtTotal.Text = txtAppraisal.Text
+        DigitOnly(e)
     End Sub
 
     Private Sub LoanDate_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanDate.ValueChanged
@@ -80,18 +76,7 @@
         frmSearchLoans.Show()
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
-        txtPawner.ReadOnly = False
-        txtDesc.ReadOnly = False
-        txtAppraisal.ReadOnly = False
-        btnSave.Enabled = True
-        btnBrowse.Enabled = False
-        Category.Enabled = True
-        ItemType.Enabled = True
-        btnNew.Enabled = False
-    End Sub
-
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmLoanlist.Show()
     End Sub
 
@@ -111,6 +96,26 @@
     End Sub
 
     Private Sub Maturity_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Maturity.ValueChanged
+
+    End Sub
+
+    Private Sub txtGrams_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtGrams.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtGrams_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtGrams.TextChanged
+
+    End Sub
+
+    Private Sub txtAppraisal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppraisal.TextChanged
+        txtTotal.Text = txtAppraisal.Text
+    End Sub
+
+    Private Sub txtTotal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTotal.TextChanged
+
+    End Sub
+
+    Private Sub txtPawner_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPawner.KeyPress
 
     End Sub
 End Class
