@@ -42,22 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-<<<<<<< HEAD
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="pawn.exe" size="343552">
-=======
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="pawn.exe" size="345600">
->>>>>>> refs/remotes/origin/Pawning-transactions
       <assemblyIdentity name="pawn" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-<<<<<<< HEAD
-        <dsig:DigestValue>rJkRFpuHxFRnBuRhY/czC5m4Qp8=</dsig:DigestValue>
-=======
         <dsig:DigestValue>w0Eqt5zq2NXbnJAOqbOtmnnxfdI=</dsig:DigestValue>
->>>>>>> refs/remotes/origin/Pawning-transactions
       </hash>
     </dependentAssembly>
   </dependency>
