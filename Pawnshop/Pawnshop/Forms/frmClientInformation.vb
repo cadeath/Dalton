@@ -1,5 +1,5 @@
 ﻿' Changelog
-' 1.1
+' v1.1 10/20/2015
 '  - ComputerBirthday Added
 '  - LockFields
 Public Class frmClientInformation
