@@ -1,4 +1,10 @@
-﻿Public Class frmClientInformation
+﻿' Changelog
+' 1.1
+'  - ComputerBirthday Added
+'  - LockFields
+Public Class frmClientInformation
+
+    Private lockForm As Boolean = False
 
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -8,9 +14,74 @@
             Console.WriteLine("Database connected")
         End If
 
-        Populate()
+        'Populate()
     End Sub
 
+    Friend Sub LoadClient(ByVal id As Integer)
+        Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & id
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        With ds.Tables(0).Rows(0)
+            txtFirstName.Text = .Item("FirstName")
+            txtMiddleName.Text = .Item("MiddleName")
+            txtLastName.Text = .Item("LastName")
+            txtSuffix.Text = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
+
+            txtStreet.Text = .Item("Addr_Street")
+            txtBrgy.Text = .Item("Addr_Brgy")
+            txtCity.Text = .Item("Addr_City")
+            txtProvince.Text = .Item("Addr_Province")
+            txtZip.Text = .Item("Addr_Zip")
+
+            cboGender.Text = IIf(.Item("Sex") = "M", "Male", "Female")
+            dtpBday.Value = .Item("Birthday")
+
+            txtCP1.Text = .Item("Phone1").ToString
+            txtCP2.Text = .Item("Phone2").ToString
+            txtTele.Text = .Item("Phone3").ToString
+            txtOthers.Text = .Item("Phone_Others").ToString
+
+            'ID Database
+        End With
+
+        ComputeBirthday()
+        LockFields(True)
+    End Sub
+
+    Private Sub ComputeBirthday()
+        lblAge.Text = "N/A"
+        lblAge.Text = GetCurrentAge(dtpBday.Value) & " years old"
+    End Sub
+
+    Private Sub LockFields(ByVal st As Boolean)
+        lockForm = st
+
+        txtFirstName.ReadOnly = st
+        txtMiddleName.ReadOnly = st
+        txtLastName.ReadOnly = st
+        txtSuffix.ReadOnly = st
+
+        txtStreet.ReadOnly = st
+        txtBrgy.ReadOnly = st
+        txtCity.ReadOnly = st
+        txtProvince.ReadOnly = st
+        txtZip.ReadOnly = st
+
+        'cboGender.Enabled = Not st
+        'dtpBday.Enabled = Not st
+
+        txtCP1.ReadOnly = st
+        txtCP2.ReadOnly = st
+        txtTele.ReadOnly = st
+        txtOthers.ReadOnly = st
+
+        txtRef.ReadOnly = st
+        txtRemarks.ReadOnly = st
+    End Sub
+
+    ' Remove in Final
+    ' This is to populate the form only
+    ' For development purposes
     Private Sub Populate()
         txtFirstName.Text = "Eskie Cirrus James"
         txtMiddleName.Text = "Dingal"
@@ -141,7 +212,19 @@
         MsgBox("Entry Saved", MsgBoxStyle.Information)
     End Sub
 
-    Private Sub txtCP1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCP1.TextChanged
+    Private Sub dtpBday_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles dtpBday.KeyPress
+        If lockForm Then
+            e.Handled = True
+        End If
+    End Sub
 
+    Private Sub dtpBday_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpBday.ValueChanged
+        ComputeBirthday()
+    End Sub
+
+    Private Sub cboGender_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboGender.KeyPress
+        If lockForm Then
+            e.Handled = True
+        End If
     End Sub
 End Class
