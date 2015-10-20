@@ -35,15 +35,15 @@ Partial Class frmSearchLoans
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnRenew = New System.Windows.Forms.Button()
         Me.btnRedeem = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -156,6 +156,11 @@ Partial Class frmSearchLoans
         Me.ColumnHeader4.Text = "Status"
         Me.ColumnHeader4.Width = 112
         '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.DisplayIndex = 7
+        Me.ColumnHeader8.Text = "Principal"
+        '
         'ColumnHeader5
         '
         Me.ColumnHeader5.DisplayIndex = 4
@@ -167,6 +172,11 @@ Partial Class frmSearchLoans
         Me.ColumnHeader6.DisplayIndex = 5
         Me.ColumnHeader6.Text = "Expiry Date"
         Me.ColumnHeader6.Width = 180
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.DisplayIndex = 6
+        Me.ColumnHeader7.Text = "Auction Date"
         '
         'btnRenew
         '
@@ -217,16 +227,6 @@ Partial Class frmSearchLoans
         Me.Button4.TabIndex = 56
         Me.Button4.Text = "&View"
         Me.Button4.UseVisualStyleBackColor = True
-        '
-        'ColumnHeader7
-        '
-        Me.ColumnHeader7.DisplayIndex = 6
-        Me.ColumnHeader7.Text = "Auction Date"
-        '
-        'ColumnHeader8
-        '
-        Me.ColumnHeader8.DisplayIndex = 7
-        Me.ColumnHeader8.Text = "Principal"
         '
         'frmSearchLoans
         '

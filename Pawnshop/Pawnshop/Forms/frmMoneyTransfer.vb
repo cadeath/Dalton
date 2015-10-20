@@ -194,4 +194,8 @@ Public Class frmMoneyTransfer
     Private Sub txtRecipientAddr_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRecipientAddr.TextChanged
 
     End Sub
+
+    Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
+
+    End Sub
 End Class

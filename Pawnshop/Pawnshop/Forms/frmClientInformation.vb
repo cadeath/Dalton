@@ -144,4 +144,8 @@
     Private Sub txtCP1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCP1.TextChanged
 
     End Sub
+
+    Private Sub txtFirstName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFirstName.TextChanged
+
+    End Sub
 End Class

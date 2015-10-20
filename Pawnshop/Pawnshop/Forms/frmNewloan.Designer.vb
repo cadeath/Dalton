@@ -44,8 +44,8 @@ Partial Class frmNewloan
         Me.txtDesc = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grpTicket = New System.Windows.Forms.GroupBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
+        Me.txtNticket = New System.Windows.Forms.TextBox()
+        Me.lblNticket = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.lblNet = New System.Windows.Forms.Label()
         Me.txtPrincipal = New System.Windows.Forms.TextBox()
@@ -334,8 +334,8 @@ Partial Class frmNewloan
         '
         'grpTicket
         '
-        Me.grpTicket.Controls.Add(Me.TextBox6)
-        Me.grpTicket.Controls.Add(Me.Label27)
+        Me.grpTicket.Controls.Add(Me.txtNticket)
+        Me.grpTicket.Controls.Add(Me.lblNticket)
         Me.grpTicket.Controls.Add(Me.txtTotal)
         Me.grpTicket.Controls.Add(Me.lblNet)
         Me.grpTicket.Controls.Add(Me.txtPrincipal)
@@ -359,24 +359,24 @@ Partial Class frmNewloan
         Me.grpTicket.TabStop = False
         Me.grpTicket.Text = "Ticket Information"
         '
-        'TextBox6
+        'txtNticket
         '
-        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(132, 42)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.ReadOnly = True
-        Me.TextBox6.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox6.TabIndex = 47
+        Me.txtNticket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNticket.Location = New System.Drawing.Point(133, 41)
+        Me.txtNticket.Name = "txtNticket"
+        Me.txtNticket.ReadOnly = True
+        Me.txtNticket.Size = New System.Drawing.Size(113, 22)
+        Me.txtNticket.TabIndex = 47
         '
-        'Label27
+        'lblNticket
         '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(5, 42)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(89, 16)
-        Me.Label27.TabIndex = 46
-        Me.Label27.Text = "New Ticket:"
+        Me.lblNticket.AutoSize = True
+        Me.lblNticket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNticket.Location = New System.Drawing.Point(5, 44)
+        Me.lblNticket.Name = "lblNticket"
+        Me.lblNticket.Size = New System.Drawing.Size(89, 16)
+        Me.lblNticket.TabIndex = 46
+        Me.lblNticket.Text = "New Ticket:"
         '
         'txtTotal
         '
@@ -930,8 +930,8 @@ Partial Class frmNewloan
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents LoanDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents btnVoid As System.Windows.Forms.Button
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents txtNticket As System.Windows.Forms.TextBox
+    Friend WithEvents lblNticket As System.Windows.Forms.Label
     Friend WithEvents grpReceipt As System.Windows.Forms.GroupBox
     Friend WithEvents txtless As System.Windows.Forms.TextBox
     Friend WithEvents lblLess As System.Windows.Forms.Label

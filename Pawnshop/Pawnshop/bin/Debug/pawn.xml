@@ -31,6 +31,12 @@ pawn
  </summary>
 	<param name="e">KeyPressEventArgs</param>
 	<returns>Boolean</returns>
+</member><member name="M:Pawnshop.frmNewloan.isEnter(System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ Identify if the KeyPress is enter
+ </summary>
+	<param name="e">KeyPressEventArgs</param>
+	<returns>Boolean</returns>
 </member><member name="M:Pawnshop.mod_system.DigitOnly(System.Windows.Forms.KeyPressEventArgs)">
 	<summary>
  Function use to input only numbers

@@ -69,15 +69,29 @@
     End Sub
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        frmSearchLoans.Show()
+        frmClient.Show()
     End Sub
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmLoanlist.Show()
     End Sub
 
+    ''' <summary>
+    ''' Identify if the KeyPress is enter
+    ''' </summary>
+    ''' <param name="e">KeyPressEventArgs</param>
+    ''' <returns>Boolean</returns>
+    Private Function isEnter(ByVal e As KeyPressEventArgs) As Boolean
+        If Asc(e.KeyChar) = 13 Then
+            Return True
+        End If
+        Return False
+    End Function
+
     Private Sub txtPawner_KeyPress(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPawner.KeyPress
-     
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
     End Sub
     Private Sub txtDesc_KeyPress(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesc.KeyPress
         'ItemType.Focus()
@@ -105,7 +119,7 @@
 
     Private Sub txtAppraisal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppraisal.TextChanged
         txtTotal.Text = txtAppraisal.Text
-        txtPrincipal.Text = txtAppraisal.Text
+        'txtPrincipal.Text = txtAppraisal.Text
     End Sub
 
     Private Sub txtTotal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTotal.TextChanged
@@ -136,6 +150,10 @@
     End Sub
 
     Private Sub txtDesc_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesc.TextChanged
+
+    End Sub
+
+    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
 
     End Sub
 End Class
