@@ -32,5 +32,28 @@
         frmNewloan.txtRedeemDue.Visible = True
         frmNewloan.lblRedeemDue.Visible = True
         frmNewloan.btnSearch.Visible = False
+        frmNewloan.txtTotal.Visible = False
+        frmNewloan.lblNet.Visible = False
+    End Sub
+
+    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        frmNewloan.Show()
+        frmNewloan.lblTranstype.Text = "LOAN RENEWAL"
+        'frmNewloan.grpPawner.Enabled = False
+        'frmNewloan.grpItem.Enabled = False
+        'frmNewloan.grpTicket.Enabled = False
+        frmNewloan.grpReceipt.Visible = True
+        frmNewloan.btnSave.Text = "&Renew"
+        frmNewloan.btnSave.Enabled = True
+        frmNewloan.txtRenewDue.Visible = True
+        frmNewloan.lblRenewDue.Visible = True
+        frmNewloan.btnSearch.Visible = False
+        frmNewloan.txtTotal.Visible = False
+        frmNewloan.lblNet.Visible = False
+        frmNewloan.btnLess.Visible = True
+    End Sub
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
     End Sub
 End Class

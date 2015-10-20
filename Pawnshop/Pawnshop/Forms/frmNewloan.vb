@@ -3,10 +3,6 @@
     Private Sub ComboBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Karat.SelectedIndexChanged
        
     End Sub
-
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        Me.Close()
-    End Sub
     Private Sub Expiry_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Expiry.ValueChanged
       
     End Sub
@@ -84,7 +80,7 @@
      
     End Sub
     Private Sub txtDesc_KeyPress(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesc.KeyPress
-        ItemType.Focus()
+        'ItemType.Focus()
     End Sub
 
     Private Sub Category_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Category.SelectedIndexChanged
@@ -109,6 +105,7 @@
 
     Private Sub txtAppraisal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppraisal.TextChanged
         txtTotal.Text = txtAppraisal.Text
+        txtPrincipal.Text = txtAppraisal.Text
     End Sub
 
     Private Sub txtTotal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTotal.TextChanged
@@ -116,6 +113,29 @@
     End Sub
 
     Private Sub txtPawner_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPawner.KeyPress
+
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnLess_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLess.Click
+        lblLess.Visible = True
+        txtless.Visible = True
+        txtless.ReadOnly = False
+        btnLess.Enabled = False
+    End Sub
+
+    Private Sub txtless_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtless.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtless_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtless.TextChanged
+
+    End Sub
+
+    Private Sub txtDesc_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesc.TextChanged
 
     End Sub
 End Class

@@ -22,7 +22,7 @@ Partial Class frmSearchLoans
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -41,6 +41,9 @@ Partial Class frmSearchLoans
         Me.btnRedeem = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -83,9 +86,9 @@ Partial Class frmSearchLoans
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(6, 16)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(219, 13)
+        Me.Label1.Size = New System.Drawing.Size(160, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Please Enter a valid Pawn ticket or Customer"
+        Me.Label1.Text = "Please Enter a valid Pawn ticket"
         '
         'Button6
         '
@@ -122,10 +125,10 @@ Partial Class frmSearchLoans
         Me.lvClient.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader8, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
-        Me.lvClient.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvClient.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvClient.Location = New System.Drawing.Point(17, 86)
         Me.lvClient.Name = "lvClient"
         Me.lvClient.Size = New System.Drawing.Size(760, 306)
@@ -141,26 +144,28 @@ Partial Class frmSearchLoans
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Pawner's Name"
-        Me.ColumnHeader2.Width = 256
+        Me.ColumnHeader2.Width = 197
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Item Description"
-        Me.ColumnHeader3.Width = 110
+        Me.ColumnHeader3.Width = 168
         '
         'ColumnHeader4
         '
         Me.ColumnHeader4.Text = "Status"
-        Me.ColumnHeader4.Width = 86
+        Me.ColumnHeader4.Width = 112
         '
         'ColumnHeader5
         '
-        Me.ColumnHeader5.Text = "Redeem Due"
+        Me.ColumnHeader5.DisplayIndex = 4
+        Me.ColumnHeader5.Text = "Item type"
         Me.ColumnHeader5.Width = 103
         '
         'ColumnHeader6
         '
-        Me.ColumnHeader6.Text = "Renew Due"
+        Me.ColumnHeader6.DisplayIndex = 5
+        Me.ColumnHeader6.Text = "Expiry Date"
         Me.ColumnHeader6.Width = 180
         '
         'btnRenew
@@ -196,18 +201,39 @@ Partial Class frmSearchLoans
         'btnClose
         '
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.Location = New System.Drawing.Point(257, 398)
+        Me.btnClose.Location = New System.Drawing.Point(337, 398)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(74, 35)
         Me.btnClose.TabIndex = 55
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(257, 398)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(74, 35)
+        Me.Button4.TabIndex = 56
+        Me.Button4.Text = "&View"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.DisplayIndex = 6
+        Me.ColumnHeader7.Text = "Auction Date"
+        '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.DisplayIndex = 7
+        Me.ColumnHeader8.Text = "Principal"
+        '
         'frmSearchLoans
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(825, 445)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnNew)
         Me.Controls.Add(Me.btnRenew)
@@ -242,4 +268,7 @@ Partial Class frmSearchLoans
     Friend WithEvents btnRedeem As System.Windows.Forms.Button
     Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
 End Class
