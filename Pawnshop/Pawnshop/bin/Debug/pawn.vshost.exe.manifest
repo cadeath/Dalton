@@ -24,6 +24,7 @@
       </applicationRequestMinimum>
     </security>
   </trustInfo>
+<<<<<<< HEAD
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
     <application>
       <!-- A list of all Windows versions that this application is designed to work with. Windows will automatically select the most compatible environment.-->
@@ -42,6 +43,30 @@
           publicKeyToken="6595b64144ccf1df"
           language="*"
         />
+=======
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="pawn.exe" size="345600">
+      <assemblyIdentity name="pawn" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>w0Eqt5zq2NXbnJAOqbOtmnnxfdI=</dsig:DigestValue>
+      </hash>
+>>>>>>> origin/master
     </dependentAssembly>
   </dependency>-->
 </asmv1:assembly>

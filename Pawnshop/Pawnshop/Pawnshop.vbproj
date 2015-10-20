@@ -79,12 +79,15 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
+<<<<<<< HEAD
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+=======
+>>>>>>> origin/master
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -149,10 +152,10 @@
     <Compile Include="Forms\frmMoneyTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmNewloan.designer.vb">
-      <DependentUpon>frmNewloan.vb</DependentUpon>
+    <Compile Include="Forms\frmNewLoan.designer.vb">
+      <DependentUpon>frmNewLoan.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmNewloan.vb">
+    <Compile Include="Forms\frmNewLoan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmOpenStore.Designer.vb">
@@ -222,8 +225,8 @@
     <EmbeddedResource Include="Forms\frmMoneyTransfer.resx">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmNewloan.resx">
-      <DependentUpon>frmNewloan.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmNewLoan.resx">
+      <DependentUpon>frmNewLoan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOpenStore.resx">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
