@@ -10,8 +10,6 @@ D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug
 D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmClient.resources
 D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmClientInformation.resources
 D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmMoneyTransfer.resources
-<<<<<<< HEAD
-=======
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.exe.manifest
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.application
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.exe
@@ -46,14 +44,3 @@ C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.fr
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmUserManagement.resources
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.Resources.resources
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbproj.GenerateResource.Cache
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.exe.manifest
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.application
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.exe
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.pdb
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.xml
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.exe.manifest
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.application
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.exe
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.xml
-C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.pdb
->>>>>>> refs/remotes/origin/Pawning-transactions

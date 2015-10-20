@@ -33,19 +33,19 @@ Partial Class frmNewloan
         Me.txtPawner = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.grpItem = New System.Windows.Forms.GroupBox()
-        Me.Karat = New System.Windows.Forms.ComboBox()
+        Me.cboKarat = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtGrams = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Category = New System.Windows.Forms.ComboBox()
+        Me.cboCategory = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ItemType = New System.Windows.Forms.ComboBox()
+        Me.cboItemtype = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtDesc = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grpTicket = New System.Windows.Forms.GroupBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
+        Me.txtNticket = New System.Windows.Forms.TextBox()
+        Me.lblNticket = New System.Windows.Forms.Label()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.lblNet = New System.Windows.Forms.Label()
         Me.txtPrincipal = New System.Windows.Forms.TextBox()
@@ -209,13 +209,13 @@ Partial Class frmNewloan
         '
         'grpItem
         '
-        Me.grpItem.Controls.Add(Me.Karat)
+        Me.grpItem.Controls.Add(Me.cboKarat)
         Me.grpItem.Controls.Add(Me.Label7)
         Me.grpItem.Controls.Add(Me.txtGrams)
         Me.grpItem.Controls.Add(Me.Label4)
-        Me.grpItem.Controls.Add(Me.Category)
+        Me.grpItem.Controls.Add(Me.cboCategory)
         Me.grpItem.Controls.Add(Me.Label6)
-        Me.grpItem.Controls.Add(Me.ItemType)
+        Me.grpItem.Controls.Add(Me.cboItemtype)
         Me.grpItem.Controls.Add(Me.Label5)
         Me.grpItem.Controls.Add(Me.txtDesc)
         Me.grpItem.Controls.Add(Me.Label1)
@@ -226,17 +226,17 @@ Partial Class frmNewloan
         Me.grpItem.TabStop = False
         Me.grpItem.Text = "Pawned Item Information"
         '
-        'Karat
+        'cboKarat
         '
-        Me.Karat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.Karat.Enabled = False
-        Me.Karat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Karat.FormattingEnabled = True
-        Me.Karat.Items.AddRange(New Object() {"10", "12", "14", "16", "18", "20", "21", "22", "24"})
-        Me.Karat.Location = New System.Drawing.Point(142, 139)
-        Me.Karat.Name = "Karat"
-        Me.Karat.Size = New System.Drawing.Size(124, 21)
-        Me.Karat.TabIndex = 26
+        Me.cboKarat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboKarat.Enabled = False
+        Me.cboKarat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cboKarat.FormattingEnabled = True
+        Me.cboKarat.Items.AddRange(New Object() {"10", "12", "14", "16", "18", "20", "21", "22", "24"})
+        Me.cboKarat.Location = New System.Drawing.Point(142, 139)
+        Me.cboKarat.Name = "cboKarat"
+        Me.cboKarat.Size = New System.Drawing.Size(124, 21)
+        Me.cboKarat.TabIndex = 26
         '
         'Label7
         '
@@ -268,16 +268,16 @@ Partial Class frmNewloan
         Me.Label4.TabIndex = 23
         Me.Label4.Text = "Grams:"
         '
-        'Category
+        'cboCategory
         '
-        Me.Category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.Category.Enabled = False
-        Me.Category.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Category.FormattingEnabled = True
-        Me.Category.Location = New System.Drawing.Point(142, 91)
-        Me.Category.Name = "Category"
-        Me.Category.Size = New System.Drawing.Size(124, 21)
-        Me.Category.TabIndex = 21
+        Me.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCategory.Enabled = False
+        Me.cboCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cboCategory.FormattingEnabled = True
+        Me.cboCategory.Location = New System.Drawing.Point(142, 91)
+        Me.cboCategory.Name = "cboCategory"
+        Me.cboCategory.Size = New System.Drawing.Size(124, 21)
+        Me.cboCategory.TabIndex = 21
         '
         'Label6
         '
@@ -289,17 +289,17 @@ Partial Class frmNewloan
         Me.Label6.TabIndex = 20
         Me.Label6.Text = "Category:"
         '
-        'ItemType
+        'cboItemtype
         '
-        Me.ItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ItemType.Enabled = False
-        Me.ItemType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ItemType.FormattingEnabled = True
-        Me.ItemType.Items.AddRange(New Object() {"APP", "CEL", "JWL", "BIG"})
-        Me.ItemType.Location = New System.Drawing.Point(142, 68)
-        Me.ItemType.Name = "ItemType"
-        Me.ItemType.Size = New System.Drawing.Size(124, 21)
-        Me.ItemType.TabIndex = 18
+        Me.cboItemtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboItemtype.Enabled = False
+        Me.cboItemtype.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cboItemtype.FormattingEnabled = True
+        Me.cboItemtype.Items.AddRange(New Object() {"APP", "CEL", "JWL", "BIG"})
+        Me.cboItemtype.Location = New System.Drawing.Point(142, 68)
+        Me.cboItemtype.Name = "cboItemtype"
+        Me.cboItemtype.Size = New System.Drawing.Size(124, 21)
+        Me.cboItemtype.TabIndex = 18
         '
         'Label5
         '
@@ -334,8 +334,8 @@ Partial Class frmNewloan
         '
         'grpTicket
         '
-        Me.grpTicket.Controls.Add(Me.TextBox6)
-        Me.grpTicket.Controls.Add(Me.Label27)
+        Me.grpTicket.Controls.Add(Me.txtNticket)
+        Me.grpTicket.Controls.Add(Me.lblNticket)
         Me.grpTicket.Controls.Add(Me.txtTotal)
         Me.grpTicket.Controls.Add(Me.lblNet)
         Me.grpTicket.Controls.Add(Me.txtPrincipal)
@@ -359,24 +359,24 @@ Partial Class frmNewloan
         Me.grpTicket.TabStop = False
         Me.grpTicket.Text = "Ticket Information"
         '
-        'TextBox6
+        'txtNticket
         '
-        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(132, 42)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.ReadOnly = True
-        Me.TextBox6.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox6.TabIndex = 47
+        Me.txtNticket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNticket.Location = New System.Drawing.Point(133, 41)
+        Me.txtNticket.Name = "txtNticket"
+        Me.txtNticket.ReadOnly = True
+        Me.txtNticket.Size = New System.Drawing.Size(113, 22)
+        Me.txtNticket.TabIndex = 47
         '
-        'Label27
+        'lblNticket
         '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(5, 42)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(89, 16)
-        Me.Label27.TabIndex = 46
-        Me.Label27.Text = "New Ticket:"
+        Me.lblNticket.AutoSize = True
+        Me.lblNticket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNticket.Location = New System.Drawing.Point(5, 44)
+        Me.lblNticket.Name = "lblNticket"
+        Me.lblNticket.Size = New System.Drawing.Size(89, 16)
+        Me.lblNticket.TabIndex = 46
+        Me.lblNticket.Text = "New Ticket:"
         '
         'txtTotal
         '
@@ -897,13 +897,13 @@ Partial Class frmNewloan
     Friend WithEvents txtPawner As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents grpItem As System.Windows.Forms.GroupBox
-    Friend WithEvents Karat As System.Windows.Forms.ComboBox
+    Friend WithEvents cboKarat As System.Windows.Forms.ComboBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtGrams As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Category As System.Windows.Forms.ComboBox
+    Friend WithEvents cboCategory As System.Windows.Forms.ComboBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents ItemType As System.Windows.Forms.ComboBox
+    Friend WithEvents cboItemtype As System.Windows.Forms.ComboBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtDesc As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
@@ -930,8 +930,8 @@ Partial Class frmNewloan
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents LoanDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents btnVoid As System.Windows.Forms.Button
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents txtNticket As System.Windows.Forms.TextBox
+    Friend WithEvents lblNticket As System.Windows.Forms.Label
     Friend WithEvents grpReceipt As System.Windows.Forms.GroupBox
     Friend WithEvents txtless As System.Windows.Forms.TextBox
     Friend WithEvents lblLess As System.Windows.Forms.Label
