@@ -178,9 +178,7 @@ Public Class frmMoneyTransfer
     End Sub
 
     Private Sub txtReceipt_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReceipt.KeyPress
-        If isEnter(e) Then
-            txtAmount.Focus()
-        End If
+        
     End Sub
 
     Private Sub txtReceipt_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtReceipt.TextChanged
@@ -192,6 +190,10 @@ Public Class frmMoneyTransfer
     End Sub
 
     Private Sub txtRecipientAddr_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRecipientAddr.TextChanged
+
+    End Sub
+
+    Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
 
     End Sub
 End Class

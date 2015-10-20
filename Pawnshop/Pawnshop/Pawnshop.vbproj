@@ -78,7 +78,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -106,6 +106,12 @@
   <ItemGroup>
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Forms\frmRedeem.Designer.vb">
+      <DependentUpon>frmRedeem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRedeem.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmClient.Designer.vb">
       <DependentUpon>frmClient.vb</DependentUpon>
     </Compile>
@@ -135,6 +141,12 @@
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmMoneyTransfer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmNewloan.Designer.vb">
+      <DependentUpon>frmNewloan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmNewloan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmOpenStore.Designer.vb">
@@ -174,6 +186,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\frmRedeem.resx">
+      <DependentUpon>frmRedeem.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClient.resx">
       <DependentUpon>frmClient.vb</DependentUpon>
     </EmbeddedResource>
@@ -188,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMoneyTransfer.resx">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewloan.resx">
+      <DependentUpon>frmNewloan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOpenStore.resx">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
@@ -210,6 +228,22 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\Client.datasource" />
+    <None Include="My Project\DataSources\Client.Gender.datasource" />
+    <None Include="My Project\DataSources\CollectionID.datasource" />
+    <None Include="My Project\DataSources\frmClient.datasource" />
+    <None Include="My Project\DataSources\frmClientInformation.datasource" />
+    <None Include="My Project\DataSources\frmExtractor.datasource" />
+    <None Include="My Project\DataSources\frmExtractor.ExtractType.datasource" />
+    <None Include="My Project\DataSources\frmMain.datasource" />
+    <None Include="My Project\DataSources\frmMoneyTransfer.datasource" />
+    <None Include="My Project\DataSources\frmNewloan.datasource" />
+    <None Include="My Project\DataSources\frmOpenStore.datasource" />
+    <None Include="My Project\DataSources\frmRedeem.datasource" />
+    <None Include="My Project\DataSources\frmSettings.datasource" />
+    <None Include="My Project\DataSources\frmUserManagement.datasource" />
+    <None Include="My Project\DataSources\Pawnshop.My.MyApplication.datasource" />
+    <None Include="My Project\DataSources\Pawnshop.My.MySettings.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
