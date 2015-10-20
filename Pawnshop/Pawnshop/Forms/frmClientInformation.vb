@@ -4,8 +4,6 @@
 '  - LockFields
 Public Class frmClientInformation
 
-    Private lockForm As Boolean = False
-
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         txtFirstName.Focus()
@@ -54,8 +52,6 @@ Public Class frmClientInformation
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
-        lockForm = st
-
         txtFirstName.ReadOnly = st
         txtMiddleName.ReadOnly = st
         txtLastName.ReadOnly = st
@@ -67,8 +63,8 @@ Public Class frmClientInformation
         txtProvince.ReadOnly = st
         txtZip.ReadOnly = st
 
-        'cboGender.Enabled = Not st
-        'dtpBday.Enabled = Not st
+        cboGender.Enabled = Not st
+        dtpBday.Enabled = Not st
 
         txtCP1.ReadOnly = st
         txtCP2.ReadOnly = st
@@ -212,19 +208,9 @@ Public Class frmClientInformation
         MsgBox("Entry Saved", MsgBoxStyle.Information)
     End Sub
 
-    Private Sub dtpBday_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles dtpBday.KeyPress
-        If lockForm Then
-            e.Handled = True
-        End If
-    End Sub
 
     Private Sub dtpBday_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpBday.ValueChanged
         ComputeBirthday()
     End Sub
 
-    Private Sub cboGender_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboGender.KeyPress
-        If lockForm Then
-            e.Handled = True
-        End If
-    End Sub
 End Class
