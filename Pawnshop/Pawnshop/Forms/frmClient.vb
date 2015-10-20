@@ -1,6 +1,9 @@
-﻿Imports System.Threading
+﻿Public Class frmClient
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Pawning-transactions
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
 
     End Sub
@@ -8,6 +11,7 @@
     Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
 
     End Sub
+<<<<<<< HEAD
 =======
 Public Class frmClient
 
@@ -90,4 +94,6 @@ Public Class frmClient
         frmClientInformation.Show()
     End Sub
 >>>>>>> refs/remotes/origin/master
+=======
+>>>>>>> origin/Pawning-transactions
 End Class
