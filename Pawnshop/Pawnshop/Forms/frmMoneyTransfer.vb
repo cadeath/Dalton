@@ -96,18 +96,6 @@ Public Class frmMoneyTransfer
         End If
     End Function
 
-    ''' <summary>
-    ''' Identify if the KeyPress is enter
-    ''' </summary>
-    ''' <param name="e">KeyPressEventArgs</param>
-    ''' <returns>Boolean</returns>
-    Private Function isEnter(ByVal e As KeyPressEventArgs) As Boolean
-        If Asc(e.KeyChar) = 13 Then
-            Return True
-        End If
-        Return False
-    End Function
-
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
         Console.WriteLine("Searching Performed")
         'Auto Search in the frmClient
@@ -192,10 +180,6 @@ Public Class frmMoneyTransfer
     End Sub
 
     Private Sub txtRecipientAddr_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRecipientAddr.TextChanged
-
-    End Sub
-
-    Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
 
     End Sub
 End Class

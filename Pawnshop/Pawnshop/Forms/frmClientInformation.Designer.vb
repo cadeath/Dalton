@@ -23,6 +23,7 @@ Partial Class frmClientInformation
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblAge = New System.Windows.Forms.Label()
         Me.dtpBday = New System.Windows.Forms.DateTimePicker()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.cboGender = New System.Windows.Forms.ComboBox()
@@ -79,6 +80,7 @@ Partial Class frmClientInformation
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lblAge)
         Me.GroupBox1.Controls.Add(Me.dtpBday)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.cboGender)
@@ -109,6 +111,15 @@ Partial Class frmClientInformation
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Basic Information"
+        '
+        'lblAge
+        '
+        Me.lblAge.AutoSize = True
+        Me.lblAge.Location = New System.Drawing.Point(433, 222)
+        Me.lblAge.Name = "lblAge"
+        Me.lblAge.Size = New System.Drawing.Size(27, 13)
+        Me.lblAge.TabIndex = 23
+        Me.lblAge.Text = "N/A"
         '
         'dtpBday
         '
@@ -154,7 +165,7 @@ Partial Class frmClientInformation
         '
         Me.Label11.Location = New System.Drawing.Point(82, 194)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(56, 13)
+        Me.Label11.Size = New System.Drawing.Size(81, 13)
         Me.Label11.TabIndex = 19
         Me.Label11.Text = "Zip Code"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -165,7 +176,7 @@ Partial Class frmClientInformation
         Me.txtZip.Location = New System.Drawing.Point(85, 169)
         Me.txtZip.MaxLength = 5
         Me.txtZip.Name = "txtZip"
-        Me.txtZip.Size = New System.Drawing.Size(53, 22)
+        Me.txtZip.Size = New System.Drawing.Size(78, 22)
         Me.txtZip.TabIndex = 8
         Me.txtZip.Text = "9500"
         '
@@ -647,4 +658,5 @@ Partial Class frmClientInformation
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnSelect As System.Windows.Forms.Button
     Friend WithEvents btnModify As System.Windows.Forms.Button
+    Friend WithEvents lblAge As System.Windows.Forms.Label
 End Class

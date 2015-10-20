@@ -1,8 +1,10 @@
 ﻿' Changelog
-' v1.1 10/20/2015
+' 1.1
 '  - ComputerBirthday Added
 '  - LockFields
 Public Class frmClientInformation
+
+    Private lockForm As Boolean = False
 
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -12,10 +14,9 @@ Public Class frmClientInformation
             Console.WriteLine("Database connected")
         End If
 
-        Populate()
+        'Populate()
     End Sub
 
-<<<<<<< HEAD
     Friend Sub LoadClient(ByVal id As Integer)
         Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & id
         Dim ds As DataSet = LoadSQL(mySql)
@@ -53,6 +54,8 @@ Public Class frmClientInformation
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
+        lockForm = st
+
         txtFirstName.ReadOnly = st
         txtMiddleName.ReadOnly = st
         txtLastName.ReadOnly = st
@@ -64,8 +67,8 @@ Public Class frmClientInformation
         txtProvince.ReadOnly = st
         txtZip.ReadOnly = st
 
-        cboGender.Enabled = Not st
-        dtpBday.Enabled = Not st
+        'cboGender.Enabled = Not st
+        'dtpBday.Enabled = Not st
 
         txtCP1.ReadOnly = st
         txtCP2.ReadOnly = st
@@ -79,8 +82,6 @@ Public Class frmClientInformation
     ' Remove in Final
     ' This is to populate the form only
     ' For development purposes
-=======
->>>>>>> origin/ClientManagement
     Private Sub Populate()
         txtFirstName.Text = "Eskie Cirrus James"
         txtMiddleName.Text = "Dingal"
@@ -211,17 +212,19 @@ Public Class frmClientInformation
         MsgBox("Entry Saved", MsgBoxStyle.Information)
     End Sub
 
-<<<<<<< HEAD
-=======
-    Private Sub txtCP1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCP1.TextChanged
->>>>>>> origin/ClientManagement
-
+    Private Sub dtpBday_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles dtpBday.KeyPress
+        If lockForm Then
+            e.Handled = True
+        End If
     End Sub
 
-<<<<<<< HEAD
-=======
-    Private Sub txtFirstName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFirstName.TextChanged
-
+    Private Sub dtpBday_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpBday.ValueChanged
+        ComputeBirthday()
     End Sub
->>>>>>> origin/ClientManagement
+
+    Private Sub cboGender_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboGender.KeyPress
+        If lockForm Then
+            e.Handled = True
+        End If
+    End Sub
 End Class
