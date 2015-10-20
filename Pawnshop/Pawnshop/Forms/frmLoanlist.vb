@@ -1,5 +1,5 @@
 ﻿Public Class frmLoanlist
-    Public Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+    Public Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmNewloan.Show()
         frmNewloan.txtPawner.ReadOnly = True
         frmNewloan.txtDesc.ReadOnly = True
@@ -12,7 +12,7 @@
         frmNewloan.txtAppraisal.ReadOnly = True
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.Close()
     End Sub
 End Class
