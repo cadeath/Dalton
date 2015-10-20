@@ -1,21 +1,8 @@
-﻿Public Class frmClient
+﻿Imports System.Threading
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/Pawning-transactions
-    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
-
-    End Sub
-
-    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
-
-    End Sub
-<<<<<<< HEAD
-=======
 Public Class frmClient
 
-    Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim th As Thread
         th = New Thread(AddressOf LoadClients)
         th.Start()
@@ -93,7 +80,4 @@ Public Class frmClient
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         frmClientInformation.Show()
     End Sub
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> origin/Pawning-transactions
 End Class

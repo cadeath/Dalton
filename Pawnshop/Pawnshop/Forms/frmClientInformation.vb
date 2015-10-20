@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-﻿Public Class frmClientInformation
-=======
 ﻿' Changelog
 ' v1.1 10/20/2015
 '  - ComputerBirthday Added
@@ -8,7 +5,6 @@
 Public Class frmClientInformation
 
     Private lockForm As Boolean = False
->>>>>>> refs/remotes/origin/master
 
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
