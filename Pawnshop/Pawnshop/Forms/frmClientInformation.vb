@@ -1,5 +1,5 @@
 ﻿' Changelog
-' 1.1
+' v1.1 10/20/2015
 '  - ComputerBirthday Added
 '  - LockFields
 Public Class frmClientInformation
@@ -12,9 +12,10 @@ Public Class frmClientInformation
             Console.WriteLine("Database connected")
         End If
 
-        'Populate()
+        Populate()
     End Sub
 
+<<<<<<< HEAD
     Friend Sub LoadClient(ByVal id As Integer)
         Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & id
         Dim ds As DataSet = LoadSQL(mySql)
@@ -78,6 +79,8 @@ Public Class frmClientInformation
     ' Remove in Final
     ' This is to populate the form only
     ' For development purposes
+=======
+>>>>>>> origin/ClientManagement
     Private Sub Populate()
         txtFirstName.Text = "Eskie Cirrus James"
         txtMiddleName.Text = "Dingal"
@@ -208,9 +211,17 @@ Public Class frmClientInformation
         MsgBox("Entry Saved", MsgBoxStyle.Information)
     End Sub
 
+<<<<<<< HEAD
+=======
+    Private Sub txtCP1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCP1.TextChanged
+>>>>>>> origin/ClientManagement
 
-    Private Sub dtpBday_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpBday.ValueChanged
-        ComputeBirthday()
     End Sub
 
+<<<<<<< HEAD
+=======
+    Private Sub txtFirstName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFirstName.TextChanged
+
+    End Sub
+>>>>>>> origin/ClientManagement
 End Class

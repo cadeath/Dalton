@@ -49,7 +49,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<<<<<<< HEAD
         <dsig:DigestValue>QUJhCRwmJtVKB5EmXw6wMmh8jZ0=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>VcM2KJ6qIISfaddYz51wY+rpk3I=</dsig:DigestValue>
+>>>>>>> origin/ClientManagement
       </hash>
     </dependentAssembly>
   </dependency>
