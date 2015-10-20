@@ -49,7 +49,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<<<<<<< HEAD
         <dsig:DigestValue>w0Eqt5zq2NXbnJAOqbOtmnnxfdI=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>rJkRFpuHxFRnBuRhY/czC5m4Qp8=</dsig:DigestValue>
+>>>>>>> parent of 7b43738... Populate Database
       </hash>
     </dependentAssembly>
   </dependency>
