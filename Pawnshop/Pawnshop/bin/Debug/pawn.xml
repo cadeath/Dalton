@@ -1,0 +1,56 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+pawn
+</name>
+</assembly>
+<members>
+<member name="M:Pawnshop.database.SaveEntry(System.Data.DataSet)">
+	<summary>
+ Module 001
+ Save the Dataset to the database
+ </summary>
+	<param name="dsEntry">Database with Table Name as Database Table Name</param>
+	<returns>Boolean: Success Result</returns>
+	<remarks></remarks>
+</member><member name="P:Pawnshop.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Pawnshop.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Pawnshop.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:Pawnshop.frmMoneyTransfer.GetCharge(System.Double)">
+	<summary>
+ Get Charge Table the corresponding charges for the specific amount
+ </summary>
+	<param name="amount">Money</param>
+	<returns>Money</returns>
+</member><member name="M:Pawnshop.mod_system.DigitOnly(System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ Function use to input only numbers
+ </summary>
+	<param name="e">Keypress Event</param>
+	<remarks>Use the Keypress Event when calling this function</remarks>
+</member><member name="M:Pawnshop.mod_system.isEnter(System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ Identify if the KeyPress is enter
+ </summary>
+	<param name="e">KeyPressEventArgs</param>
+	<returns>Boolean</returns>
+</member><member name="M:Pawnshop.mod_system.isMoney(System.Windows.Forms.TextBox)">
+	<summary>
+ Use to verify entry
+ </summary>
+	<param name="txtBox">TextBox of the Money</param>
+	<returns>Boolean</returns>
+</member>
+</members>
+</doc>
