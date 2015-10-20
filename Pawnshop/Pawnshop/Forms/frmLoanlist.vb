@@ -3,10 +3,10 @@
         frmNewloan.Show()
         frmNewloan.txtPawner.ReadOnly = True
         frmNewloan.txtDesc.ReadOnly = True
-        frmNewloan.ItemType.Enabled = False
-        frmNewloan.Category.Enabled = False
+        frmNewloan.cboItemtype.Enabled = False
+        frmNewloan.cboCategory.Enabled = False
         frmNewloan.txtGrams.ReadOnly = True
-        frmNewloan.Karat.Enabled = False
+        frmNewloan.cboKarat.Enabled = False
         frmNewloan.btnVoid.Enabled = True
         frmNewloan.btnSave.Enabled = False
         frmNewloan.txtAppraisal.ReadOnly = True
