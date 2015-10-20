@@ -16,8 +16,8 @@
         frmNewloan.txtDesc.ReadOnly = False
         frmNewloan.txtAppraisal.ReadOnly = False
         frmNewloan.btnSave.Enabled = True
-        frmNewloan.ItemType.Enabled = True
-        frmNewloan.Category.Enabled = True
+        frmNewloan.cboItemtype.Enabled = True
+        frmNewloan.cboCategory.Enabled = True
         frmNewloan.Enabled = True
         frmNewloan.lblNticket.Visible = False
         frmNewloan.txtNticket.Visible = False
@@ -78,5 +78,9 @@
         frmNewloan.btnSearch.Visible = False
         frmNewloan.txtTotal.Visible = False
         frmNewloan.lblNet.Visible = False
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
     End Sub
 End Class

@@ -1,58 +1,58 @@
 ﻿Public Class frmNewloan
 
-    Private Sub ComboBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Karat.SelectedIndexChanged
-       
+    Private Sub ComboBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboKarat.SelectedIndexChanged
+
     End Sub
     Private Sub Expiry_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Expiry.ValueChanged
-      
-    End Sub
-
-    Private Sub Category_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) 
 
     End Sub
 
-    Private Sub ItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemType.SelectedIndexChanged
-        Category.Items.Clear()
-        Category.Text = ""
+    Private Sub Category_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+
+    End Sub
+
+    Private Sub ItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboItemtype.SelectedIndexChanged
+        cboCategory.Items.Clear()
+        cboCategory.Text = ""
         'Enable Grams and Karat
-        If ItemType.SelectedItem = "JWL" Then
+        If cboItemtype.SelectedItem = "JWL" Then
             txtGrams.ReadOnly = False
-            Karat.Enabled = True
+            cboKarat.Enabled = True
         Else
             txtGrams.ReadOnly = True
-            Karat.Enabled = False
+            cboKarat.Enabled = False
         End If
         'Sub Category
-        If ItemType.SelectedItem = "APP" Then
-            Category.Items.Add("CAMERA")
-            Category.Items.Add("CARPENTRY TOOLS")
-            Category.Items.Add("HOME APP-SMALL")
-            Category.Items.Add("LAPTOP")
-            Category.Items.Add("NOTEBOOK")
+        If cboItemtype.SelectedItem = "APP" Then
+            cboCategory.Items.Add("CAMERA")
+            cboCategory.Items.Add("CARPENTRY TOOLS")
+            cboCategory.Items.Add("HOME APP-SMALL")
+            cboCategory.Items.Add("LAPTOP")
+            cboCategory.Items.Add("NOTEBOOK")
 
-        ElseIf ItemType.SelectedItem = "BIG" Then
-            Category.Items.Add("BIKE")
-            Category.Items.Add("HOME APP-BIG")
-            Category.Items.Add("MOTORCYCLE")
+        ElseIf cboItemtype.SelectedItem = "BIG" Then
+            cboCategory.Items.Add("BIKE")
+            cboCategory.Items.Add("HOME APP-BIG")
+            cboCategory.Items.Add("MOTORCYCLE")
 
-        ElseIf ItemType.SelectedItem = "CEL" Then
-            Category.Items.Add("CELLPHONE")
-            Category.Items.Add("TABLET")
+        ElseIf cboItemtype.SelectedItem = "CEL" Then
+            cboCategory.Items.Add("CELLPHONE")
+            cboCategory.Items.Add("TABLET")
 
-        ElseIf ItemType.SelectedItem = "JWL" Then
-            Category.Items.Add("ANKLET")
-            Category.Items.Add("BANGLE")
-            Category.Items.Add("BRACELET")
-            Category.Items.Add("BROUCH")
-            Category.Items.Add("EARRINGS")
-            Category.Items.Add("NECKLACE")
-            Category.Items.Add("PENDANT")
-            Category.Items.Add("RING")
+        ElseIf cboItemtype.SelectedItem = "JWL" Then
+            cboCategory.Items.Add("ANKLET")
+            cboCategory.Items.Add("BANGLE")
+            cboCategory.Items.Add("BRACELET")
+            cboCategory.Items.Add("BROUCH")
+            cboCategory.Items.Add("EARRINGS")
+            cboCategory.Items.Add("NECKLACE")
+            cboCategory.Items.Add("PENDANT")
+            cboCategory.Items.Add("RING")
         End If
         'Dates
         LoanDate.Value = Date.Now
         Maturity.Value = Date.Now.AddDays(30)
-        If ItemType.SelectedItem = "CEL" Then
+        If cboItemtype.SelectedItem = "CEL" Then
             Expiry.Value = Date.Now.AddDays(30)
             Auction.Value = Date.Now.AddDays(60)
         Else
@@ -94,12 +94,14 @@
         End If
     End Sub
     Private Sub txtDesc_KeyPress(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesc.KeyPress
-        'ItemType.Focus()
+        If isEnter(e) Then
+            cboItemtype.Focus()
+        End If
     End Sub
 
-    Private Sub Category_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Category.SelectedIndexChanged
-        If ItemType.SelectedItem = "JWL" Then
-            Category.Focus()
+    Private Sub Category_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboCategory.SelectedIndexChanged
+        If cboItemtype.SelectedItem = "JWL" Then
+            cboCategory.Focus()
         Else
             txtAppraisal.Focus()
         End If
@@ -154,6 +156,10 @@
     End Sub
 
     Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+
+    End Sub
+
+    Private Sub txtPawner_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPawner.TextChanged
 
     End Sub
 End Class

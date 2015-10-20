@@ -26,21 +26,21 @@ Public Class frmClient
 
             Dim tbl As String = "TBLCLIENT"
             Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
-            Dim ds As DataSet = LoadSQL(mySql, tbl)
+            'Dim ds As DataSet = LoadSQL(mySql, tbl)
 
-            lvClient.Items.Clear()
-            For Each pawner As DataRow In ds.Tables(0).Rows
-                With pawner
-                    Dim lv As ListViewItem = lvClient.Items.Add(.Item("ClientID"))
-                    lv.SubItems.Add(String.Format("{0}, {1} {2}", .Item("LastName"), .Item("FirstName"), .Item("MiddleName")))
-                    lv.SubItems.Add(String.Format("{0} {1} {2}", .Item("Addr_Street"), .Item("Addr_Brgy"), .Item("Addr_City")))
-                    lv.SubItems.Add(.Item("Phone1"))
-                    lv.ImageKey = "imgMale"
-                    If .Item("Sex") = "F" Then
-                        lv.ImageKey = "imgFemale"
-                    End If
-                End With
-            Next
+            'lvClient.Items.Clear()
+            'For Each pawner As DataRow In ds.Tables(0).Rows
+            '    With pawner
+            '        Dim lv As ListViewItem = lvClient.Items.Add(.Item("ClientID"))
+            '        lv.SubItems.Add(String.Format("{0}, {1} {2}", .Item("LastName"), .Item("FirstName"), .Item("MiddleName")))
+            '        lv.SubItems.Add(String.Format("{0} {1} {2}", .Item("Addr_Street"), .Item("Addr_Brgy"), .Item("Addr_City")))
+            '        lv.SubItems.Add(.Item("Phone1"))
+            '        lv.ImageKey = "imgMale"
+            '        If .Item("Sex") = "F" Then
+            '            lv.ImageKey = "imgFemale"
+            '        End If
+            '    End With
+            'Next
 
             lvClient.Enabled = True
         End If
@@ -49,7 +49,17 @@ Public Class frmClient
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-
+    ''' <summary>
+    ''' Identify if the KeyPress is enter
+    ''' </summary>
+    ''' <param name="e">KeyPressEventArgs</param>
+    ''' <returns>Boolean</returns>
+    Private Function isEnter(ByVal e As KeyPressEventArgs) As Boolean
+        If Asc(e.KeyChar) = 13 Then
+            Return True
+        End If
+        Return False
+    End Function
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
@@ -66,7 +76,7 @@ Public Class frmClient
         Console.WriteLine("ClientID : " & clientID)
 
         frmClientInformation.Show()
-        frmClientInformation.LoadClient(clientID)
+        'frmClientInformation.LoadClient(clientID)
     End Sub
 
     Private Sub lvClient_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvClient.DoubleClick
