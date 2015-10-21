@@ -65,9 +65,10 @@ Partial Class frmUserManagement
         Me.CheckBox22 = New System.Windows.Forms.CheckBox()
         Me.CheckBox19 = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
-        Me.CheckBox26 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox27 = New System.Windows.Forms.CheckBox()
         Me.CheckBox28 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox27 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox26 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox29 = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -499,6 +500,7 @@ Partial Class frmUserManagement
         '
         'tbSpecial
         '
+        Me.tbSpecial.Controls.Add(Me.CheckBox29)
         Me.tbSpecial.Controls.Add(Me.CheckBox28)
         Me.tbSpecial.Controls.Add(Me.CheckBox27)
         Me.tbSpecial.Controls.Add(Me.CheckBox26)
@@ -510,15 +512,15 @@ Partial Class frmUserManagement
         Me.tbSpecial.Text = "Special"
         Me.tbSpecial.UseVisualStyleBackColor = True
         '
-        'CheckBox26
+        'CheckBox28
         '
-        Me.CheckBox26.AutoSize = True
-        Me.CheckBox26.Location = New System.Drawing.Point(13, 12)
-        Me.CheckBox26.Name = "CheckBox26"
-        Me.CheckBox26.Size = New System.Drawing.Size(96, 17)
-        Me.CheckBox26.TabIndex = 3
-        Me.CheckBox26.Text = "Cash In (Bank)"
-        Me.CheckBox26.UseVisualStyleBackColor = True
+        Me.CheckBox28.AutoSize = True
+        Me.CheckBox28.Location = New System.Drawing.Point(374, 114)
+        Me.CheckBox28.Name = "CheckBox28"
+        Me.CheckBox28.Size = New System.Drawing.Size(70, 17)
+        Me.CheckBox28.TabIndex = 11
+        Me.CheckBox28.Text = "Select All"
+        Me.CheckBox28.UseVisualStyleBackColor = True
         '
         'CheckBox27
         '
@@ -530,15 +532,25 @@ Partial Class frmUserManagement
         Me.CheckBox27.Text = "Cash Out (Bank)"
         Me.CheckBox27.UseVisualStyleBackColor = True
         '
-        'CheckBox28
+        'CheckBox26
         '
-        Me.CheckBox28.AutoSize = True
-        Me.CheckBox28.Location = New System.Drawing.Point(374, 114)
-        Me.CheckBox28.Name = "CheckBox28"
-        Me.CheckBox28.Size = New System.Drawing.Size(70, 17)
-        Me.CheckBox28.TabIndex = 11
-        Me.CheckBox28.Text = "Select All"
-        Me.CheckBox28.UseVisualStyleBackColor = True
+        Me.CheckBox26.AutoSize = True
+        Me.CheckBox26.Location = New System.Drawing.Point(13, 12)
+        Me.CheckBox26.Name = "CheckBox26"
+        Me.CheckBox26.Size = New System.Drawing.Size(96, 17)
+        Me.CheckBox26.TabIndex = 3
+        Me.CheckBox26.Text = "Cash In (Bank)"
+        Me.CheckBox26.UseVisualStyleBackColor = True
+        '
+        'CheckBox29
+        '
+        Me.CheckBox29.AutoSize = True
+        Me.CheckBox29.Location = New System.Drawing.Point(13, 58)
+        Me.CheckBox29.Name = "CheckBox29"
+        Me.CheckBox29.Size = New System.Drawing.Size(111, 17)
+        Me.CheckBox29.TabIndex = 12
+        Me.CheckBox29.Text = "Void Transactions"
+        Me.CheckBox29.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '
@@ -619,4 +631,5 @@ Partial Class frmUserManagement
     Friend WithEvents CheckBox26 As System.Windows.Forms.CheckBox
     Friend WithEvents CheckBox27 As System.Windows.Forms.CheckBox
     Friend WithEvents CheckBox28 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBox29 As System.Windows.Forms.CheckBox
 End Class

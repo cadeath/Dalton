@@ -1,4 +1,8 @@
-﻿Public Class Client
+﻿' Changelog
+' v1.1 10/21/2015
+'  - LoadClient added
+
+Public Class Client
 
 #Region "Variables"
     Enum Gender As Integer : Male = 1 : Female = 0 : End Enum
@@ -173,7 +177,11 @@
     End Property
 #End Region
 
-    Public Function DataSet() As DataSet
+    Public Sub SaveClient()
+        database.SaveEntry(CreateDataSet)
+    End Sub
+
+    Private Function CreateDataSet() As DataSet
         'Creating Virtual Database
         Dim ds As New DataSet, dt As New DataTable(fillData)
 
@@ -221,6 +229,46 @@
 
         Return ds
     End Function
+
+    ' Client 001 - LoadClient
+    ''' <summary>
+    ''' This is use to load Client information
+    ''' </summary>
+    ''' <param name="id">ClientID</param>
+    ''' <remarks>to be added by ID List</remarks>
+    Public Sub LoadClient(ByVal id As Integer)
+        Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & id
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If IsNothing(ds) Then
+            MsgBox("[Client 001 - LoadClient] Failed to Load Client Information", MsgBoxStyle.Critical, "Information Not Found")
+            Exit Sub
+        End If
+
+        With ds.Tables(0).Rows(0)
+            _id = .Item("ClientID")
+            _firstName = .Item("FirstName")
+            _middleName = .Item("MiddleName")
+            _lastName = .Item("LastName")
+            _suffixName = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
+
+            _addrSt = .Item("Addr_Street")
+            _addrBrgy = .Item("Addr_Brgy")
+            _addrCity = .Item("Addr_City")
+            _addrProvince = .Item("Addr_Province")
+            _addrZip = .Item("Addr_Zip")
+
+            _gender = .Item("Sex")
+            _bday = .Item("Birthday")
+
+            _cp1 = .Item("Phone1").ToString
+            _cp2 = .Item("Phone2").ToString
+            _phone = .Item("Phone3").ToString
+            _otherNum = .Item("Phone_Others").ToString
+        End With
+
+        Console.WriteLine("Client ID " & id & " is loaded.")
+    End Sub
 
     Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
         str = str.Replace("'", "\'")
