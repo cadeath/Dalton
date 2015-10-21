@@ -25,16 +25,6 @@ Partial Class frmMoneyTransfer
         Me.btnSend = New System.Windows.Forms.Button()
         Me.btnReceive = New System.Windows.Forms.Button()
         Me.gpSend = New System.Windows.Forms.GroupBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.btnCharges = New System.Windows.Forms.Button()
-        Me.txtTotal = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtServiceFee = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtAmount = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtReceipt = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.gpReceive = New System.Windows.Forms.GroupBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -62,6 +52,16 @@ Partial Class frmMoneyTransfer
         Me.Label20 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnCharges = New System.Windows.Forms.Button()
+        Me.txtTotal = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtServiceFee = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtAmount = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtReceipt = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtRecipientAddr = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -80,15 +80,17 @@ Partial Class frmMoneyTransfer
         Me.cboType = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.gpSend.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.gpReceive.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
@@ -113,8 +115,8 @@ Partial Class frmMoneyTransfer
         '
         'gpSend
         '
-        Me.gpSend.Controls.Add(Me.GroupBox3)
         Me.gpSend.Controls.Add(Me.gpReceive)
+        Me.gpSend.Controls.Add(Me.GroupBox3)
         Me.gpSend.Controls.Add(Me.GroupBox2)
         Me.gpSend.Controls.Add(Me.GroupBox4)
         Me.gpSend.Controls.Add(Me.cboType)
@@ -126,109 +128,6 @@ Partial Class frmMoneyTransfer
         Me.gpSend.TabStop = False
         Me.gpSend.Text = "Send Money"
         '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.btnCharges)
-        Me.GroupBox3.Controls.Add(Me.txtTotal)
-        Me.GroupBox3.Controls.Add(Me.Label10)
-        Me.GroupBox3.Controls.Add(Me.txtServiceFee)
-        Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Controls.Add(Me.txtAmount)
-        Me.GroupBox3.Controls.Add(Me.Label8)
-        Me.GroupBox3.Controls.Add(Me.txtReceipt)
-        Me.GroupBox3.Controls.Add(Me.Label5)
-        Me.GroupBox3.Location = New System.Drawing.Point(474, 19)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(244, 241)
-        Me.GroupBox3.TabIndex = 20
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Transaction Information"
-        '
-        'btnCharges
-        '
-        Me.btnCharges.Location = New System.Drawing.Point(130, 212)
-        Me.btnCharges.Name = "btnCharges"
-        Me.btnCharges.Size = New System.Drawing.Size(96, 23)
-        Me.btnCharges.TabIndex = 13
-        Me.btnCharges.Text = "Ser&vice Charge"
-        Me.btnCharges.UseVisualStyleBackColor = True
-        '
-        'txtTotal
-        '
-        Me.txtTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotal.Location = New System.Drawing.Point(32, 177)
-        Me.txtTotal.Name = "txtTotal"
-        Me.txtTotal.Size = New System.Drawing.Size(194, 22)
-        Me.txtTotal.TabIndex = 12
-        Me.txtTotal.Text = "000000"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(6, 160)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(48, 16)
-        Me.Label10.TabIndex = 20
-        Me.Label10.Text = "Total:"
-        '
-        'txtServiceFee
-        '
-        Me.txtServiceFee.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtServiceFee.Location = New System.Drawing.Point(32, 133)
-        Me.txtServiceFee.Name = "txtServiceFee"
-        Me.txtServiceFee.Size = New System.Drawing.Size(194, 22)
-        Me.txtServiceFee.TabIndex = 11
-        Me.txtServiceFee.Text = "000000"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(6, 116)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(96, 16)
-        Me.Label9.TabIndex = 18
-        Me.Label9.Text = "Service Fee:"
-        '
-        'txtAmount
-        '
-        Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAmount.Location = New System.Drawing.Point(32, 88)
-        Me.txtAmount.Name = "txtAmount"
-        Me.txtAmount.Size = New System.Drawing.Size(194, 22)
-        Me.txtAmount.TabIndex = 10
-        Me.txtAmount.Text = "000000"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(6, 71)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(63, 16)
-        Me.Label8.TabIndex = 16
-        Me.Label8.Text = "Amount:"
-        '
-        'txtReceipt
-        '
-        Me.txtReceipt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtReceipt.Location = New System.Drawing.Point(32, 43)
-        Me.txtReceipt.Name = "txtReceipt"
-        Me.txtReceipt.Size = New System.Drawing.Size(194, 22)
-        Me.txtReceipt.TabIndex = 9
-        Me.txtReceipt.Text = "000000"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(6, 24)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(74, 16)
-        Me.Label5.TabIndex = 14
-        Me.Label5.Text = "Receipt #"
-        '
         'gpReceive
         '
         Me.gpReceive.Controls.Add(Me.GroupBox6)
@@ -239,7 +138,7 @@ Partial Class frmMoneyTransfer
         Me.gpReceive.Location = New System.Drawing.Point(0, 0)
         Me.gpReceive.Name = "gpReceive"
         Me.gpReceive.Size = New System.Drawing.Size(730, 387)
-        Me.gpReceive.TabIndex = 5
+        Me.gpReceive.TabIndex = 17
         Me.gpReceive.TabStop = False
         Me.gpReceive.Text = "Receive Money"
         '
@@ -511,6 +410,109 @@ Partial Class frmMoneyTransfer
         Me.Label21.TabIndex = 17
         Me.Label21.Text = "Service Type:"
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.btnCharges)
+        Me.GroupBox3.Controls.Add(Me.txtTotal)
+        Me.GroupBox3.Controls.Add(Me.Label10)
+        Me.GroupBox3.Controls.Add(Me.txtServiceFee)
+        Me.GroupBox3.Controls.Add(Me.Label9)
+        Me.GroupBox3.Controls.Add(Me.txtAmount)
+        Me.GroupBox3.Controls.Add(Me.Label8)
+        Me.GroupBox3.Controls.Add(Me.txtReceipt)
+        Me.GroupBox3.Controls.Add(Me.Label5)
+        Me.GroupBox3.Location = New System.Drawing.Point(474, 19)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(244, 241)
+        Me.GroupBox3.TabIndex = 20
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Transaction Information"
+        '
+        'btnCharges
+        '
+        Me.btnCharges.Location = New System.Drawing.Point(130, 212)
+        Me.btnCharges.Name = "btnCharges"
+        Me.btnCharges.Size = New System.Drawing.Size(96, 23)
+        Me.btnCharges.TabIndex = 13
+        Me.btnCharges.Text = "Ser&vice Charge"
+        Me.btnCharges.UseVisualStyleBackColor = True
+        '
+        'txtTotal
+        '
+        Me.txtTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotal.Location = New System.Drawing.Point(32, 177)
+        Me.txtTotal.Name = "txtTotal"
+        Me.txtTotal.Size = New System.Drawing.Size(194, 22)
+        Me.txtTotal.TabIndex = 12
+        Me.txtTotal.Text = "000000"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(6, 160)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(48, 16)
+        Me.Label10.TabIndex = 20
+        Me.Label10.Text = "Total:"
+        '
+        'txtServiceFee
+        '
+        Me.txtServiceFee.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtServiceFee.Location = New System.Drawing.Point(32, 133)
+        Me.txtServiceFee.Name = "txtServiceFee"
+        Me.txtServiceFee.Size = New System.Drawing.Size(194, 22)
+        Me.txtServiceFee.TabIndex = 11
+        Me.txtServiceFee.Text = "000000"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(6, 116)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(96, 16)
+        Me.Label9.TabIndex = 18
+        Me.Label9.Text = "Service Fee:"
+        '
+        'txtAmount
+        '
+        Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAmount.Location = New System.Drawing.Point(32, 88)
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.Size = New System.Drawing.Size(194, 22)
+        Me.txtAmount.TabIndex = 10
+        Me.txtAmount.Text = "000000"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(6, 71)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(63, 16)
+        Me.Label8.TabIndex = 16
+        Me.Label8.Text = "Amount:"
+        '
+        'txtReceipt
+        '
+        Me.txtReceipt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtReceipt.Location = New System.Drawing.Point(32, 43)
+        Me.txtReceipt.Name = "txtReceipt"
+        Me.txtReceipt.Size = New System.Drawing.Size(194, 22)
+        Me.txtReceipt.TabIndex = 9
+        Me.txtReceipt.Text = "000000"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(6, 24)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(74, 16)
+        Me.Label5.TabIndex = 14
+        Me.Label5.Text = "Receipt #"
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.txtRecipientAddr)
@@ -696,14 +698,14 @@ Partial Class frmMoneyTransfer
         Me.Label11.TabIndex = 3
         Me.Label11.Text = "Money Transfer"
         '
-        'Button1
+        'btnBrowse
         '
-        Me.Button1.Location = New System.Drawing.Point(222, 12)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(99, 61)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "&Browse"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnBrowse.Location = New System.Drawing.Point(222, 12)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(99, 61)
+        Me.btnBrowse.TabIndex = 6
+        Me.btnBrowse.Text = "&Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'Label22
         '
@@ -724,14 +726,34 @@ Partial Class frmMoneyTransfer
         Me.TextBox11.TabIndex = 16
         Me.TextBox11.Text = "10.01.2015"
         '
+        'btnClose
+        '
+        Me.btnClose.Location = New System.Drawing.Point(667, 472)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 17
+        Me.btnClose.Text = "&Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(586, 472)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 18
+        Me.Button2.Text = "&Post"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'frmMoneyTransfer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(754, 510)
+        Me.ClientSize = New System.Drawing.Size(754, 505)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.TextBox11)
         Me.Controls.Add(Me.Label22)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.gpSend)
         Me.Controls.Add(Me.btnReceive)
@@ -741,8 +763,6 @@ Partial Class frmMoneyTransfer
         Me.Text = "Money Transfer"
         Me.gpSend.ResumeLayout(False)
         Me.gpSend.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.gpReceive.ResumeLayout(False)
         Me.gpReceive.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
@@ -751,6 +771,8 @@ Partial Class frmMoneyTransfer
         Me.GroupBox7.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -790,6 +812,9 @@ Partial Class frmMoneyTransfer
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents TextBox11 As System.Windows.Forms.TextBox
     Friend WithEvents gpReceive As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
@@ -817,7 +842,6 @@ Partial Class frmMoneyTransfer
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents TextBox11 As System.Windows.Forms.TextBox
+    Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
