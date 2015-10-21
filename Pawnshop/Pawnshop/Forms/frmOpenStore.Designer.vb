@@ -22,27 +22,27 @@ Partial Class frmOpenStore
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.dtpCurrentDate = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtMoney = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtMaintaining = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtInitial = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnSetup = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'DateTimePicker1
+        'dtpCurrentDate
         '
-        Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(16, 32)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(412, 22)
-        Me.DateTimePicker1.TabIndex = 0
+        Me.dtpCurrentDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpCurrentDate.Location = New System.Drawing.Point(16, 32)
+        Me.dtpCurrentDate.Name = "dtpCurrentDate"
+        Me.dtpCurrentDate.Size = New System.Drawing.Size(412, 22)
+        Me.dtpCurrentDate.TabIndex = 0
         '
         'Label1
         '
@@ -56,11 +56,11 @@ Partial Class frmOpenStore
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.TextBox3)
+        Me.GroupBox1.Controls.Add(Me.txtMoney)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
+        Me.GroupBox1.Controls.Add(Me.txtMaintaining)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.txtInitial)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Location = New System.Drawing.Point(16, 60)
         Me.GroupBox1.Name = "GroupBox1"
@@ -69,52 +69,14 @@ Partial Class frmOpenStore
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Balance"
         '
-        'Label2
+        'txtMoney
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(3, 61)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(91, 16)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Initial Balance"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(6, 80)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(236, 22)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "10,000.00"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(9, 35)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(236, 22)
-        Me.TextBox2.TabIndex = 3
-        Me.TextBox2.Text = "50,000.00"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(6, 16)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(129, 16)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Maintaining Balance"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(9, 126)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(236, 22)
-        Me.TextBox3.TabIndex = 5
-        Me.TextBox3.Text = "40,000.00"
+        Me.txtMoney.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMoney.Location = New System.Drawing.Point(9, 126)
+        Me.txtMoney.Name = "txtMoney"
+        Me.txtMoney.Size = New System.Drawing.Size(236, 22)
+        Me.txtMoney.TabIndex = 3
+        Me.txtMoney.Text = "40,000.00"
         '
         'Label4
         '
@@ -126,6 +88,44 @@ Partial Class frmOpenStore
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "Replenishment/Deposit"
         '
+        'txtMaintaining
+        '
+        Me.txtMaintaining.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMaintaining.Location = New System.Drawing.Point(9, 35)
+        Me.txtMaintaining.Name = "txtMaintaining"
+        Me.txtMaintaining.Size = New System.Drawing.Size(236, 22)
+        Me.txtMaintaining.TabIndex = 1
+        Me.txtMaintaining.Text = "50,000.00"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(6, 16)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(129, 16)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Maintaining Balance"
+        '
+        'txtInitial
+        '
+        Me.txtInitial.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtInitial.Location = New System.Drawing.Point(6, 80)
+        Me.txtInitial.Name = "txtInitial"
+        Me.txtInitial.Size = New System.Drawing.Size(236, 22)
+        Me.txtInitial.TabIndex = 2
+        Me.txtInitial.Text = "10,000.00"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(3, 61)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(91, 16)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Initial Balance"
+        '
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
@@ -136,14 +136,14 @@ Partial Class frmOpenStore
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnSetup
         '
-        Me.Button2.Location = New System.Drawing.Point(272, 226)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 26)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "&Setup"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnSetup.Location = New System.Drawing.Point(272, 226)
+        Me.btnSetup.Name = "btnSetup"
+        Me.btnSetup.Size = New System.Drawing.Size(75, 26)
+        Me.btnSetup.TabIndex = 4
+        Me.btnSetup.Text = "&Setup"
+        Me.btnSetup.UseVisualStyleBackColor = True
         '
         'frmOpenStore
         '
@@ -151,11 +151,11 @@ Partial Class frmOpenStore
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(443, 262)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnSetup)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.DateTimePicker1)
+        Me.Controls.Add(Me.dtpCurrentDate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmOpenStore"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -166,15 +166,15 @@ Partial Class frmOpenStore
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpCurrentDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtInitial As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtMaintaining As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtMoney As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnSetup As System.Windows.Forms.Button
 End Class

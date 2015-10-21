@@ -32,10 +32,6 @@
         frmUserManagement.Show()
     End Sub
 
-    Private Sub OpenStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenStoreToolStripMenuItem.Click
-        frmOpenStore.Show()
-    End Sub
-
     Private Sub ExpiryGeneratorToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryGeneratorToolStripMenuItem.Click
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
@@ -44,5 +40,21 @@
     Private Sub JournalEntriesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles JournalEntriesToolStripMenuItem.Click
         frmExtractor.FormType = frmExtractor.ExtractType.JournalEntry
         frmExtractor.Show()
+    End Sub
+
+    Private Sub btnMoneyTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMoneyTransfer.Click
+        frmMoneyTransfer.Show()
+    End Sub
+
+    Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
+        frmDollar.Show()
+    End Sub
+
+    Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
+        frmCashInOut.Show()
+    End Sub
+
+    Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
+        frmOpenStore.Show()
     End Sub
 End Class

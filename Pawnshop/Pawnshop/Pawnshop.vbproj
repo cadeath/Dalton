@@ -75,19 +75,10 @@
     <ManifestKeyFile>Pawnshop_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
-<<<<<<< HEAD
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetZone>LocalIntranet</TargetZone>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
-=======
->>>>>>> origin/master
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -115,6 +106,18 @@
   <ItemGroup>
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Forms\frmBorrowing.Designer.vb">
+      <DependentUpon>frmBorrowing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBorrowing.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCashInOut.Designer.vb">
+      <DependentUpon>frmCashInOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCashInOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmClient.Designer.vb">
       <DependentUpon>frmClient.vb</DependentUpon>
     </Compile>
@@ -125,6 +128,12 @@
       <DependentUpon>frmClientInformation.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmClientInformation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDollar.Designer.vb">
+      <DependentUpon>frmDollar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDollar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmExtractor.Designer.vb">
@@ -152,10 +161,22 @@
     <Compile Include="Forms\frmMoneyTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmNewLoan.designer.vb">
-      <DependentUpon>frmNewLoan.vb</DependentUpon>
+    <Compile Include="Forms\frmMTlist.Designer.vb">
+      <DependentUpon>frmMTlist.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmNewLoan.vb">
+    <Compile Include="Forms\frmMTlist.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMTSend.Designer.vb">
+      <DependentUpon>frmMTSend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMTSend.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmNewloan.designer.vb">
+      <DependentUpon>frmNewloan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmNewloan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmOpenStore.Designer.vb">
@@ -207,11 +228,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\frmBorrowing.resx">
+      <DependentUpon>frmBorrowing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCashInOut.resx">
+      <DependentUpon>frmCashInOut.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClient.resx">
       <DependentUpon>frmClient.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClientInformation.resx">
       <DependentUpon>frmClientInformation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDollar.resx">
+      <DependentUpon>frmDollar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmExtractor.resx">
       <DependentUpon>frmExtractor.vb</DependentUpon>
@@ -225,8 +255,14 @@
     <EmbeddedResource Include="Forms\frmMoneyTransfer.resx">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmNewLoan.resx">
-      <DependentUpon>frmNewLoan.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmMTlist.resx">
+      <DependentUpon>frmMTlist.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMTSend.resx">
+      <DependentUpon>frmMTSend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewloan.resx">
+      <DependentUpon>frmNewloan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOpenStore.resx">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
@@ -251,7 +287,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

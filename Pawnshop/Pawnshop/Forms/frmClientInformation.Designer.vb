@@ -23,6 +23,7 @@ Partial Class frmClientInformation
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblAge = New System.Windows.Forms.Label()
         Me.dtpBday = New System.Windows.Forms.DateTimePicker()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.cboGender = New System.Windows.Forms.ComboBox()
@@ -59,7 +60,7 @@ Partial Class frmClientInformation
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.btnSelect = New System.Windows.Forms.Button()
+        Me.btnIDSelect = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.txtRemarks = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -72,6 +73,7 @@ Partial Class frmClientInformation
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnModify = New System.Windows.Forms.Button()
+        Me.btnSelect = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -79,6 +81,7 @@ Partial Class frmClientInformation
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lblAge)
         Me.GroupBox1.Controls.Add(Me.dtpBday)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.cboGender)
@@ -109,6 +112,15 @@ Partial Class frmClientInformation
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Basic Information"
+        '
+        'lblAge
+        '
+        Me.lblAge.AutoSize = True
+        Me.lblAge.Location = New System.Drawing.Point(433, 222)
+        Me.lblAge.Name = "lblAge"
+        Me.lblAge.Size = New System.Drawing.Size(27, 13)
+        Me.lblAge.TabIndex = 23
+        Me.lblAge.Text = "N/A"
         '
         'dtpBday
         '
@@ -154,7 +166,7 @@ Partial Class frmClientInformation
         '
         Me.Label11.Location = New System.Drawing.Point(82, 194)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(56, 13)
+        Me.Label11.Size = New System.Drawing.Size(81, 13)
         Me.Label11.TabIndex = 19
         Me.Label11.Text = "Zip Code"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -165,7 +177,7 @@ Partial Class frmClientInformation
         Me.txtZip.Location = New System.Drawing.Point(85, 169)
         Me.txtZip.MaxLength = 5
         Me.txtZip.Name = "txtZip"
-        Me.txtZip.Size = New System.Drawing.Size(53, 22)
+        Me.txtZip.Size = New System.Drawing.Size(78, 22)
         Me.txtZip.TabIndex = 8
         Me.txtZip.Text = "9500"
         '
@@ -430,7 +442,7 @@ Partial Class frmClientInformation
         Me.btnCancel.Location = New System.Drawing.Point(877, 361)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 23
+        Me.btnCancel.TabIndex = 24
         Me.btnCancel.Text = "&Close"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -439,13 +451,13 @@ Partial Class frmClientInformation
         Me.btnSave.Location = New System.Drawing.Point(715, 361)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 21
+        Me.btnSave.TabIndex = 22
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.btnSelect)
+        Me.GroupBox3.Controls.Add(Me.btnIDSelect)
         Me.GroupBox3.Controls.Add(Me.btnAdd)
         Me.GroupBox3.Controls.Add(Me.txtRemarks)
         Me.GroupBox3.Controls.Add(Me.Label20)
@@ -461,14 +473,14 @@ Partial Class frmClientInformation
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "ID List"
         '
-        'btnSelect
+        'btnIDSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(308, 243)
-        Me.btnSelect.Name = "btnSelect"
-        Me.btnSelect.Size = New System.Drawing.Size(75, 23)
-        Me.btnSelect.TabIndex = 20
-        Me.btnSelect.Text = "&Select"
-        Me.btnSelect.UseVisualStyleBackColor = True
+        Me.btnIDSelect.Location = New System.Drawing.Point(308, 243)
+        Me.btnIDSelect.Name = "btnIDSelect"
+        Me.btnIDSelect.Size = New System.Drawing.Size(75, 23)
+        Me.btnIDSelect.TabIndex = 20
+        Me.btnIDSelect.Text = "&Select"
+        Me.btnIDSelect.UseVisualStyleBackColor = True
         '
         'btnAdd
         '
@@ -567,9 +579,18 @@ Partial Class frmClientInformation
         Me.btnModify.Location = New System.Drawing.Point(796, 360)
         Me.btnModify.Name = "btnModify"
         Me.btnModify.Size = New System.Drawing.Size(75, 23)
-        Me.btnModify.TabIndex = 22
+        Me.btnModify.TabIndex = 23
         Me.btnModify.Text = "&Edit"
         Me.btnModify.UseVisualStyleBackColor = True
+        '
+        'btnSelect
+        '
+        Me.btnSelect.Location = New System.Drawing.Point(634, 361)
+        Me.btnSelect.Name = "btnSelect"
+        Me.btnSelect.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelect.TabIndex = 21
+        Me.btnSelect.Text = "Sele&ct"
+        Me.btnSelect.UseVisualStyleBackColor = True
         '
         'frmClientInformation
         '
@@ -577,6 +598,7 @@ Partial Class frmClientInformation
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(964, 396)
+        Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnModify)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.btnSave)
@@ -645,6 +667,8 @@ Partial Class frmClientInformation
     Friend WithEvents txtRemarks As System.Windows.Forms.TextBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents btnAdd As System.Windows.Forms.Button
-    Friend WithEvents btnSelect As System.Windows.Forms.Button
+    Friend WithEvents btnIDSelect As System.Windows.Forms.Button
     Friend WithEvents btnModify As System.Windows.Forms.Button
+    Friend WithEvents lblAge As System.Windows.Forms.Label
+    Friend WithEvents btnSelect As System.Windows.Forms.Button
 End Class
