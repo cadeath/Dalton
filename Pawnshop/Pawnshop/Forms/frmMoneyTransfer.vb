@@ -24,15 +24,15 @@
         End Select
     End Sub
 
-    Private Sub btnSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSend.Click
+    Private Sub btnSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         FormInit(FormType.Send)
     End Sub
 
-    Private Sub btnReceive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReceive.Click
+    Private Sub btnReceive_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         FormInit(FormType.Receive)
     End Sub
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmMTlist.Show()
     End Sub
 
