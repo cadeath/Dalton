@@ -1,4 +1,7 @@
-﻿Imports System.Data.Odbc
+﻿' Changelog
+' v1.1
+'  - SaveEntry added empty dataset binding
+Imports System.Data.Odbc
 
 Module database
     Public con As OdbcConnection
@@ -49,6 +52,10 @@ Module database
     ''' <returns>Boolean: Success Result</returns>
     ''' <remarks></remarks>
     Friend Function SaveEntry(ByVal dsEntry As DataSet) As Boolean
+        If dsEntry Is Nothing Then
+            Return False
+        End If
+
         dbOpen()
 
         Try

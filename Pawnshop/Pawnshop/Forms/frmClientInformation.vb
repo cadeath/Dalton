@@ -1,10 +1,12 @@
 ﻿' Changelog
-' 1.1
+' 1.1 10/20/2015
 '  - ComputerBirthday Added
 '  - LockFields
 Public Class frmClientInformation
 
     Private lockForm As Boolean = False
+    Friend FormOrigin As Form
+    Friend GetClient As Client 'Holds the selected client
 
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -15,6 +17,10 @@ Public Class frmClientInformation
         End If
 
         'Populate()
+    End Sub
+
+    Private Sub ReturnToOriginForm()
+        FormOrigin.Show()
     End Sub
 
     Friend Sub LoadClient(ByVal id As Integer)
@@ -67,8 +73,8 @@ Public Class frmClientInformation
         txtProvince.ReadOnly = st
         txtZip.ReadOnly = st
 
-        'cboGender.Enabled = Not st
-        'dtpBday.Enabled = Not st
+        cboGender.Enabled = Not st
+        dtpBday.Enabled = Not st
 
         txtCP1.ReadOnly = st
         txtCP2.ReadOnly = st
@@ -205,10 +211,9 @@ Public Class frmClientInformation
             .Telephone = txtTele.Text
             .OtherNumber = txtOthers.Text
 
-            '.Save()
+            .SaveClient()
         End With
 
-        database.SaveEntry(tmpClient.DataSet)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
     End Sub
 
