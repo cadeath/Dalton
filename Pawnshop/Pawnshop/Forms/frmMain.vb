@@ -57,4 +57,8 @@
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
         frmOpenStore.Show()
     End Sub
+
+    Private Sub btnClient_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClient.Click
+        frmClient.Show()
+    End Sub
 End Class
