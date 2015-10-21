@@ -10,11 +10,11 @@ D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug
 D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmClient.resources
 D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmClientInformation.resources
 D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmMoneyTransfer.resources
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.exe.manifest
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.application
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.exe
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.pdb
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawn.xml
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.exe.manifest
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.application
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.exe
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.pdb
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.xml
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmBorrowing.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmCashInOut.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmClient.resources
@@ -34,8 +34,8 @@ D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmS
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmUserManagement.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.Resources.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbproj.GenerateResource.Cache
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.exe.manifest
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.application
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.exe
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.xml
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawn.pdb
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe.manifest
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.application
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.xml
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.pdb
