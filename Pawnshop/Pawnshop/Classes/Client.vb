@@ -258,7 +258,7 @@ Public Class Client
             _addrProvince = .Item("Addr_Province")
             _addrZip = .Item("Addr_Zip")
 
-            _gender = .Item("Sex")
+            _gender = IIf(.Item("Sex") = "M", 1, 0)
             _bday = .Item("Birthday")
 
             _cp1 = .Item("Phone1").ToString
@@ -267,7 +267,32 @@ Public Class Client
             _otherNum = .Item("Phone_Others").ToString
         End With
 
-        Console.WriteLine("Client ID " & id & " is loaded.")
+        Console.WriteLine("[LoadClient] Client ID " & id & " is loaded.")
+    End Sub
+
+    Public Sub LoadClientByRow(ByVal dr As DataRow)
+        With dr
+            _id = .Item("ClientID")
+            _firstName = .Item("FirstName")
+            _middleName = .Item("MiddleName")
+            _lastName = .Item("LastName")
+            _suffixName = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
+
+            _addrSt = .Item("Addr_Street")
+            _addrBrgy = .Item("Addr_Brgy")
+            _addrCity = .Item("Addr_City")
+            _addrProvince = .Item("Addr_Province")
+            _addrZip = .Item("Addr_Zip")
+
+            _gender = IIf(.Item("Sex") = "M", 1, 0)
+            _bday = .Item("Birthday")
+
+            _cp1 = .Item("Phone1").ToString
+            _cp2 = .Item("Phone2").ToString
+            _phone = .Item("Phone3").ToString
+            _otherNum = .Item("Phone_Others").ToString
+        End With
+        Console.WriteLine("[LoadClientByRow] Client information Loaded.")
     End Sub
 
     Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
