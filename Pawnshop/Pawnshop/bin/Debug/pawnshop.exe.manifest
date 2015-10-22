@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="pawnshop.exe" size="421376">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="pawnshop.exe" size="421888">
       <assemblyIdentity name="pawnshop" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5Kfrzd2taa+uCLEiFGtxlA9N/Tk=</dsig:DigestValue>
+        <dsig:DigestValue>tXXsC7/+a3SoZEd/dpAYj4tWaSs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -78,7 +78,7 @@ Module database
                 End If
 
                 da = New OdbcDataAdapter(mySql, con)
-                If isNew Then Dim cb As New OdbcCommandBuilder(da) 'Required in Saving to Database
+                Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
                 da.Update(ds, fillData)
             Next
 

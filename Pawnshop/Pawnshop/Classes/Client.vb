@@ -185,29 +185,29 @@ Public Class Client
     End Sub
 
     Public Sub ModifyClient()
-        'Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & _id
-        'Dim ds As DataSet = LoadSQL(mySql, "TBLCLIENT")
+        Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & _id
+        Dim ds As DataSet = LoadSQL(mySql, "TBLCLIENT")
 
-        'With ds.Tables(0).Rows(0)
-        '    .Item("FirstName") = _firstName
-        '    .Item("MiddleName") = _middleName
-        '    .Item("LastName") = _lastName
-        '    .Item("Suffix") = _suffixName
-        '    .Item("Addr_Street") = _addrSt
-        '    .Item("Addr_Brgy") = _addrBrgy
-        '    .Item("Addr_City") = _addrCity
-        '    .Item("Addr_Province") = _addrProvince
-        '    .Item("Addr_Zip") = _addrZip
-        '    .Item("Sex") = _gender
-        '    .Item("Birthday") = _bday
-        '    .Item("Phone1") = _cp1
-        '    .Item("Phone2") = _cp2
-        '    .Item("Phone3") = _phone
-        '    .Item("Phone_Others") = _otherNum
-        'End With
+        With ds.Tables(0).Rows(0)
+            .Item("FirstName") = _firstName
+            .Item("MiddleName") = _middleName
+            .Item("LastName") = _lastName
+            .Item("Suffix") = _suffixName
+            .Item("Addr_Street") = _addrSt
+            .Item("Addr_Brgy") = _addrBrgy
+            .Item("Addr_City") = _addrCity
+            .Item("Addr_Province") = _addrProvince
+            .Item("Addr_Zip") = _addrZip
+            .Item("Sex") = _gender
+            .Item("Birthday") = _bday
+            .Item("Phone1") = _cp1
+            .Item("Phone2") = _cp2
+            .Item("Phone3") = _phone
+            .Item("Phone_Others") = _otherNum
+        End With
 
-        'database.SaveEntry(ds, False)
-        PureModify()
+        database.SaveEntry(ds, False)
+        'PureModify()
     End Sub
 
     Private Sub PureModify()
