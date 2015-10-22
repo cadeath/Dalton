@@ -55,3 +55,10 @@ C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vb
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.xml
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.pdb
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.devClient.resources
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmBorrowBrowse.resources
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmCashCount.resources
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmItemLookUp.resources
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmPOS.resources
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmInsurance.resources
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmLayAway.resources

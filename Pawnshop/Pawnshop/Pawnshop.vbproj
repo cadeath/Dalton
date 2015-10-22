@@ -115,6 +115,18 @@
     <Compile Include="Forms\devClient.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmLayAwayLookUp.Designer.vb">
+      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLayAwayLookUp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLayAway.Designer.vb">
+      <DependentUpon>frmLayAway.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLayAway.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmBorrowBrowse.Designer.vb">
       <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
     </Compile>
@@ -161,6 +173,12 @@
       <DependentUpon>frmExtractor.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmExtractor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmInsurance.Designer.vb">
+      <DependentUpon>frmInsurance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInsurance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmLoanlist.Designer.vb">
@@ -264,6 +282,9 @@
     <EmbeddedResource Include="Forms\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLayAwayLookUp.resx">
+      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBorrowBrowse.resx">
       <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
     </EmbeddedResource>
@@ -287,6 +308,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmExtractor.resx">
       <DependentUpon>frmExtractor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInsurance.resx">
+      <DependentUpon>frmInsurance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLayAway.resx">
+      <DependentUpon>frmLayAway.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLoanlist.resx">
       <DependentUpon>frmLoanlist.vb</DependentUpon>
