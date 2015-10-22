@@ -92,14 +92,14 @@ Public Class frmClient
         Dim src As String = txtSearch.Text
         Dim mySql As String = "SELECT * FROM tblClient " & vbCrLf
         mySql &= " WHERE "
-        mySql &= String.Format("FirstName LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("MiddleName LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("LastName LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Addr_Brgy LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Addr_City LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Phone1 LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Phone2 LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Phone_Others LIKE '%{0}%' " & vbCrLf, src)
+        mySql &= String.Format("UPPER(FirstName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(MiddleName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(LastName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Addr_Brgy) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Addr_City) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Phone1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Phone2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Phone_Others) LIKE UPPER('%{0}%') " & vbCrLf, src)
         mySql &= "ORDER BY LastName ASC, FirstName ASC"
 
         Console.WriteLine("SQL: " & mySql)
