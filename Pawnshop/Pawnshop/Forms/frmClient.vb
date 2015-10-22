@@ -90,4 +90,8 @@ Public Class frmClient
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         frmClientInformation.Show()
     End Sub
+
+    Private Sub frmClient_Load_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

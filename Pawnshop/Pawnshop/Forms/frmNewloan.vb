@@ -99,12 +99,16 @@
         End If
     End Sub
 
-    Private Sub Category_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboCategory.SelectedIndexChanged
-        If cboItemtype.SelectedItem = "JWL" Then
-            cboCategory.Focus()
+    Private Sub cboCategory_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboCategory.KeyPress
+        If cboItemtype.SelectedItem = "JWL" And isEnter(e) Then
+            txtGrams.Focus()
         Else
             txtAppraisal.Focus()
         End If
+    End Sub
+
+    Private Sub Category_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboCategory.SelectedIndexChanged
+      
     End Sub
 
     Private Sub Maturity_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Maturity.ValueChanged

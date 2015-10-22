@@ -154,4 +154,8 @@ Public Class frmClientInformation
     Private Sub txtFirstName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFirstName.TextChanged
 
     End Sub
+
+    Private Sub lvID_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvID.SelectedIndexChanged
+
+    End Sub
 End Class
