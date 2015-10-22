@@ -49,7 +49,7 @@ pawnshop
  </summary>
 	<param name="amount">Money</param>
 	<returns>Money</returns>
-</member><member name="M:Pawnshop.database.SaveEntry(System.Data.DataSet)">
+</member><member name="M:Pawnshop.database.SaveEntry(System.Data.DataSet,System.Boolean)">
 	<summary>
  Module 001
  Save the Dataset to the database

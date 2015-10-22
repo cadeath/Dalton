@@ -48,7 +48,7 @@ Public Class frmClient
     End Sub
 
     Private Delegate Sub LoadClient_delegate()
-    Private Sub LoadClients()
+    Friend Sub LoadClients()
         If lvClient.InvokeRequired Then
             lvClient.Invoke(New LoadClient_delegate(AddressOf LoadClients))
         Else
@@ -85,8 +85,11 @@ Public Class frmClient
         clientID = lvClient.FocusedItem.Text
         Console.WriteLine("ClientID : " & clientID)
 
+        Dim tmpCl As New Client
+        tmpCl.LoadClient(clientID)
+
         frmClientInformation.Show()
-        frmClientInformation.LoadClient(clientID)
+        frmClientInformation.LoadClientInForm(tmpCl)
     End Sub
 
     Private Sub lvClient_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvClient.DoubleClick

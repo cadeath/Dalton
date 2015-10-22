@@ -37,7 +37,6 @@ Partial Class frmClient
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -161,16 +160,6 @@ Partial Class frmClient
         Me.btnAdd.Text = "&Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
-        'btnUpdate
-        '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdate.Location = New System.Drawing.Point(89, 337)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 5
-        Me.btnUpdate.Text = "&Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
         'btnSelect
         '
         Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -188,7 +177,6 @@ Partial Class frmClient
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(762, 367)
         Me.Controls.Add(Me.btnSelect)
-        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
@@ -212,7 +200,6 @@ Partial Class frmClient
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents btnAdd As System.Windows.Forms.Button
-    Friend WithEvents btnUpdate As System.Windows.Forms.Button
     Friend WithEvents btnSelect As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents imgClient As System.Windows.Forms.ImageList

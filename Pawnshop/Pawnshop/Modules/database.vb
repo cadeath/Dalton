@@ -1,7 +1,9 @@
-﻿' Changelog
+﻿Imports System.Data.Odbc
+' Changelog
+' v1.2
+'  - ModifyEntry added
 ' v1.1
 '  - SaveEntry added empty dataset binding
-Imports System.Data.Odbc
 
 Module database
     Public con As OdbcConnection
@@ -51,7 +53,7 @@ Module database
     ''' <param name="dsEntry">Database with Table Name as Database Table Name</param>
     ''' <returns>Boolean: Success Result</returns>
     ''' <remarks></remarks>
-    Friend Function SaveEntry(ByVal dsEntry As DataSet) As Boolean
+    Friend Function SaveEntry(ByVal dsEntry As DataSet, Optional ByVal isNew As Boolean = True) As Boolean
         If dsEntry Is Nothing Then
             Return False
         End If
@@ -67,9 +69,16 @@ Module database
             For Each dsTable As DataTable In dsEntry.Tables
                 fillData = dsTable.TableName
                 mySql = "SELECT * FROM " & fillData
+                If Not isNew Then
+                    Dim colName As String = dsTable.Columns(0).ColumnName
+                    Dim idx As Integer = dsTable.Rows(0).Item(0)
+                    mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
+
+                    Console.WriteLine("ModifySQL: " & mySql)
+                End If
 
                 da = New OdbcDataAdapter(mySql, con)
-                Dim cb As New OdbcCommandBuilder(da) 'Required in Saving to Database
+                If isNew Then Dim cb As New OdbcCommandBuilder(da) 'Required in Saving to Database
                 da.Update(ds, fillData)
             Next
 
