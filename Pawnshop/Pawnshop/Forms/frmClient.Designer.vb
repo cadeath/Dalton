@@ -106,7 +106,7 @@ Partial Class frmClient
         'ColumnHeader4
         '
         Me.ColumnHeader4.Text = "ID"
-        Me.ColumnHeader4.Width = 53
+        Me.ColumnHeader4.Width = 52
         '
         'ColumnHeader1
         '

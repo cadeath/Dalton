@@ -1,17 +1,34 @@
 ﻿Imports System.Threading
 
+' Developer note
+' to Use this form as auto search form
+' use the Variable SearchStr to hold
+' your search variable and use .show
+' to display the form with result.
+' eg:
+'  frmClient.SearchStr = "Eskie"
+'  frmClient.Show()
+' Version
+' 1.1
+' - Auto Search Form
+
 Public Class frmClient
 
     Friend SearchStr As String = ""
 
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim th As Thread
-        th = New Thread(AddressOf LoadClients)
-        th.Start()
+        If SearchStr = "" Then
+            Dim th As Thread
+            th = New Thread(AddressOf LoadClients)
+            th.Start()
+        End If
 
         ClearField()
         txtSearch.Focus()
         txtSearch.Text = IIf(SearchStr <> "", SearchStr, "")
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 
     Private Sub AddItem(ByVal cl As Client)
