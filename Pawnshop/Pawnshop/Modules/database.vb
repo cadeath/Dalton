@@ -1,4 +1,7 @@
-﻿Imports System.Data.Odbc
+﻿' Changelog
+' v1.1
+'  - SaveEntry added empty dataset binding
+Imports System.Data.Odbc
 
 Module database
     Public con As OdbcConnection
@@ -41,8 +44,18 @@ Module database
         Return ready
     End Function
 
-    ' Module 001
+    ''' <summary>
+    ''' Module 001
+    ''' Save the Dataset to the database
+    ''' </summary>
+    ''' <param name="dsEntry">Database with Table Name as Database Table Name</param>
+    ''' <returns>Boolean: Success Result</returns>
+    ''' <remarks></remarks>
     Friend Function SaveEntry(ByVal dsEntry As DataSet) As Boolean
+        If dsEntry Is Nothing Then
+            Return False
+        End If
+
         dbOpen()
 
         Try
@@ -68,5 +81,20 @@ Module database
             dbClose()
             Return False
         End Try
+    End Function
+
+    ' Module 002
+    Friend Function LoadSQL(ByVal mySql As String, Optional ByVal tblName As String = "QuickSQL") As DataSet
+        dbOpen()
+
+        Dim da As OdbcDataAdapter
+        Dim ds As New DataSet, fillData As String = tblName
+
+        da = New OdbcDataAdapter(mySql, con)
+        da.Fill(ds, fillData)
+
+        dbClose()
+
+        Return ds
     End Function
 End Module

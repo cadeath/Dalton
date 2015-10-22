@@ -2,7 +2,7 @@
 
 Public Class frmClient
 
-    Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim th As Thread
         th = New Thread(AddressOf LoadClients)
         th.Start()

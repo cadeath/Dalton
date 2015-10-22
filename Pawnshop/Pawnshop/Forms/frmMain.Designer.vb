@@ -25,7 +25,7 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseOpenStore = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.UserManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -47,15 +47,15 @@ Partial Class frmMain
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.pButton = New System.Windows.Forms.Panel()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.frmClientMngmnt = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCash = New System.Windows.Forms.Button()
+        Me.btnPOS = New System.Windows.Forms.Button()
+        Me.btnBranch = New System.Windows.Forms.Button()
+        Me.btnDollarBuying = New System.Windows.Forms.Button()
+        Me.btnLayAway = New System.Windows.Forms.Button()
+        Me.btnInsurance = New System.Windows.Forms.Button()
+        Me.btnMoneyTransfer = New System.Windows.Forms.Button()
+        Me.btnClient = New System.Windows.Forms.Button()
+        Me.btnPawning = New System.Windows.Forms.Button()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -73,16 +73,16 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenStoreToolStripMenuItem, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
         '
-        'OpenStoreToolStripMenuItem
+        'CloseOpenStore
         '
-        Me.OpenStoreToolStripMenuItem.Name = "OpenStoreToolStripMenuItem"
-        Me.OpenStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.OpenStoreToolStripMenuItem.Text = "&Open Store"
+        Me.CloseOpenStore.Name = "CloseOpenStore"
+        Me.CloseOpenStore.Size = New System.Drawing.Size(171, 22)
+        Me.CloseOpenStore.Text = "&Open Store"
         '
         'ToolStripSeparator3
         '
@@ -225,108 +225,108 @@ Partial Class frmMain
         'pButton
         '
         Me.pButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.pButton.Controls.Add(Me.Button7)
-        Me.pButton.Controls.Add(Me.Button8)
-        Me.pButton.Controls.Add(Me.Button9)
-        Me.pButton.Controls.Add(Me.Button4)
-        Me.pButton.Controls.Add(Me.Button5)
-        Me.pButton.Controls.Add(Me.Button6)
-        Me.pButton.Controls.Add(Me.Button3)
-        Me.pButton.Controls.Add(Me.frmClientMngmnt)
-        Me.pButton.Controls.Add(Me.Button1)
+        Me.pButton.Controls.Add(Me.btnCash)
+        Me.pButton.Controls.Add(Me.btnPOS)
+        Me.pButton.Controls.Add(Me.btnBranch)
+        Me.pButton.Controls.Add(Me.btnDollarBuying)
+        Me.pButton.Controls.Add(Me.btnLayAway)
+        Me.pButton.Controls.Add(Me.btnInsurance)
+        Me.pButton.Controls.Add(Me.btnMoneyTransfer)
+        Me.pButton.Controls.Add(Me.btnClient)
+        Me.pButton.Controls.Add(Me.btnPawning)
         Me.pButton.Location = New System.Drawing.Point(393, 160)
         Me.pButton.Name = "pButton"
         Me.pButton.Size = New System.Drawing.Size(503, 334)
         Me.pButton.TabIndex = 0
         '
-        'Button7
+        'btnCash
         '
-        Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button7.Location = New System.Drawing.Point(349, 231)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(137, 90)
-        Me.Button7.TabIndex = 26
-        Me.Button7.Text = "Cash In/Out"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.btnCash.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCash.Location = New System.Drawing.Point(349, 231)
+        Me.btnCash.Name = "btnCash"
+        Me.btnCash.Size = New System.Drawing.Size(137, 90)
+        Me.btnCash.TabIndex = 26
+        Me.btnCash.Text = "Cash In/Out"
+        Me.btnCash.UseVisualStyleBackColor = True
         '
-        'Button8
+        'btnPOS
         '
-        Me.Button8.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button8.Location = New System.Drawing.Point(185, 231)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(137, 90)
-        Me.Button8.TabIndex = 25
-        Me.Button8.Text = "POS"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.btnPOS.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnPOS.Location = New System.Drawing.Point(185, 231)
+        Me.btnPOS.Name = "btnPOS"
+        Me.btnPOS.Size = New System.Drawing.Size(137, 90)
+        Me.btnPOS.TabIndex = 25
+        Me.btnPOS.Text = "POS"
+        Me.btnPOS.UseVisualStyleBackColor = True
         '
-        'Button9
+        'btnBranch
         '
-        Me.Button9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button9.Location = New System.Drawing.Point(22, 231)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(137, 90)
-        Me.Button9.TabIndex = 24
-        Me.Button9.Text = "Branch2Branch"
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.btnBranch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnBranch.Location = New System.Drawing.Point(22, 231)
+        Me.btnBranch.Name = "btnBranch"
+        Me.btnBranch.Size = New System.Drawing.Size(137, 90)
+        Me.btnBranch.TabIndex = 24
+        Me.btnBranch.Text = "Branch2Branch"
+        Me.btnBranch.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnDollarBuying
         '
-        Me.Button4.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.Button4.Location = New System.Drawing.Point(349, 120)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(137, 90)
-        Me.Button4.TabIndex = 23
-        Me.Button4.Text = "Dollar Buying"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnDollarBuying.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.btnDollarBuying.Location = New System.Drawing.Point(349, 120)
+        Me.btnDollarBuying.Name = "btnDollarBuying"
+        Me.btnDollarBuying.Size = New System.Drawing.Size(137, 90)
+        Me.btnDollarBuying.TabIndex = 23
+        Me.btnDollarBuying.Text = "Dollar Buying"
+        Me.btnDollarBuying.UseVisualStyleBackColor = True
         '
-        'Button5
+        'btnLayAway
         '
-        Me.Button5.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Button5.Location = New System.Drawing.Point(185, 120)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(137, 90)
-        Me.Button5.TabIndex = 22
-        Me.Button5.Text = "Lay Away"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.btnLayAway.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.btnLayAway.Location = New System.Drawing.Point(185, 120)
+        Me.btnLayAway.Name = "btnLayAway"
+        Me.btnLayAway.Size = New System.Drawing.Size(137, 90)
+        Me.btnLayAway.TabIndex = 22
+        Me.btnLayAway.Text = "Lay Away"
+        Me.btnLayAway.UseVisualStyleBackColor = True
         '
-        'Button6
+        'btnInsurance
         '
-        Me.Button6.Anchor = System.Windows.Forms.AnchorStyles.Left
-        Me.Button6.Location = New System.Drawing.Point(22, 120)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(137, 90)
-        Me.Button6.TabIndex = 21
-        Me.Button6.Text = "Insurance"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.btnInsurance.Anchor = System.Windows.Forms.AnchorStyles.Left
+        Me.btnInsurance.Location = New System.Drawing.Point(22, 120)
+        Me.btnInsurance.Name = "btnInsurance"
+        Me.btnInsurance.Size = New System.Drawing.Size(137, 90)
+        Me.btnInsurance.TabIndex = 21
+        Me.btnInsurance.Text = "Insurance"
+        Me.btnInsurance.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnMoneyTransfer
         '
-        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.Location = New System.Drawing.Point(349, 17)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(137, 90)
-        Me.Button3.TabIndex = 20
-        Me.Button3.Text = "Money Transfer"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnMoneyTransfer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMoneyTransfer.Location = New System.Drawing.Point(349, 17)
+        Me.btnMoneyTransfer.Name = "btnMoneyTransfer"
+        Me.btnMoneyTransfer.Size = New System.Drawing.Size(137, 90)
+        Me.btnMoneyTransfer.TabIndex = 20
+        Me.btnMoneyTransfer.Text = "Money Transfer"
+        Me.btnMoneyTransfer.UseVisualStyleBackColor = True
         '
-        'frmClientMngmnt
+        'btnClient
         '
-        Me.frmClientMngmnt.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.frmClientMngmnt.Location = New System.Drawing.Point(185, 17)
-        Me.frmClientMngmnt.Name = "frmClientMngmnt"
-        Me.frmClientMngmnt.Size = New System.Drawing.Size(137, 90)
-        Me.frmClientMngmnt.TabIndex = 19
-        Me.frmClientMngmnt.Text = "Client"
-        Me.frmClientMngmnt.UseVisualStyleBackColor = True
+        Me.btnClient.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.btnClient.Location = New System.Drawing.Point(185, 17)
+        Me.btnClient.Name = "btnClient"
+        Me.btnClient.Size = New System.Drawing.Size(137, 90)
+        Me.btnClient.TabIndex = 19
+        Me.btnClient.Text = "Client"
+        Me.btnClient.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnPawning
         '
-        Me.Button1.Location = New System.Drawing.Point(22, 17)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(137, 90)
-        Me.Button1.TabIndex = 18
-        Me.Button1.Text = "Pawning"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnPawning.Location = New System.Drawing.Point(22, 17)
+        Me.btnPawning.Name = "btnPawning"
+        Me.btnPawning.Size = New System.Drawing.Size(137, 90)
+        Me.btnPawning.TabIndex = 18
+        Me.btnPawning.Text = "Pawning"
+        Me.btnPawning.UseVisualStyleBackColor = True
         '
         'frmMain
         '
@@ -374,17 +374,17 @@ Partial Class frmMain
     Friend WithEvents lblMessage As System.Windows.Forms.Label
     Friend WithEvents lblTitle As System.Windows.Forms.Label
     Friend WithEvents pButton As System.Windows.Forms.Panel
-    Friend WithEvents Button7 As System.Windows.Forms.Button
-    Friend WithEvents Button8 As System.Windows.Forms.Button
-    Friend WithEvents Button9 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents frmClientMngmnt As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnCash As System.Windows.Forms.Button
+    Friend WithEvents btnPOS As System.Windows.Forms.Button
+    Friend WithEvents btnBranch As System.Windows.Forms.Button
+    Friend WithEvents btnDollarBuying As System.Windows.Forms.Button
+    Friend WithEvents btnLayAway As System.Windows.Forms.Button
+    Friend WithEvents btnInsurance As System.Windows.Forms.Button
+    Friend WithEvents btnMoneyTransfer As System.Windows.Forms.Button
+    Friend WithEvents btnClient As System.Windows.Forms.Button
+    Friend WithEvents btnPawning As System.Windows.Forms.Button
     Friend WithEvents AboutUsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents OpenStoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CloseOpenStore As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
 
 End Class

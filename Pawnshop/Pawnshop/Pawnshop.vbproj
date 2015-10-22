@@ -10,7 +10,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Pawnshop.My.MyApplication</StartupObject>
     <RootNamespace>Pawnshop</RootNamespace>
-    <AssemblyName>pawn</AssemblyName>
+    <AssemblyName>pawnshop</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -43,7 +43,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>pawn.xml</DocumentationFile>
+    <DocumentationFile>pawnshop.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -53,7 +53,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>pawn.xml</DocumentationFile>
+    <DocumentationFile>pawnshop.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -78,7 +78,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -106,6 +106,18 @@
   <ItemGroup>
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Forms\frmBorrowing.Designer.vb">
+      <DependentUpon>frmBorrowing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBorrowing.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCashInOut.Designer.vb">
+      <DependentUpon>frmCashInOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCashInOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmClient.Designer.vb">
       <DependentUpon>frmClient.vb</DependentUpon>
     </Compile>
@@ -116,6 +128,12 @@
       <DependentUpon>frmClientInformation.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmClientInformation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDollar.Designer.vb">
+      <DependentUpon>frmDollar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDollar.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmExtractor.Designer.vb">
@@ -143,10 +161,22 @@
     <Compile Include="Forms\frmMoneyTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmNewLoan.designer.vb">
-      <DependentUpon>frmNewLoan.vb</DependentUpon>
+    <Compile Include="Forms\frmMTlist.Designer.vb">
+      <DependentUpon>frmMTlist.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmNewLoan.vb">
+    <Compile Include="Forms\frmMTlist.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMTSend.Designer.vb">
+      <DependentUpon>frmMTSend.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMTSend.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmNewloan.designer.vb">
+      <DependentUpon>frmNewloan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmNewloan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmOpenStore.Designer.vb">
@@ -198,11 +228,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\frmBorrowing.resx">
+      <DependentUpon>frmBorrowing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCashInOut.resx">
+      <DependentUpon>frmCashInOut.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClient.resx">
       <DependentUpon>frmClient.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClientInformation.resx">
       <DependentUpon>frmClientInformation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDollar.resx">
+      <DependentUpon>frmDollar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmExtractor.resx">
       <DependentUpon>frmExtractor.vb</DependentUpon>
@@ -216,8 +255,14 @@
     <EmbeddedResource Include="Forms\frmMoneyTransfer.resx">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmNewLoan.resx">
-      <DependentUpon>frmNewLoan.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmMTlist.resx">
+      <DependentUpon>frmMTlist.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMTSend.resx">
+      <DependentUpon>frmMTSend.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmNewloan.resx">
+      <DependentUpon>frmNewloan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOpenStore.resx">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
