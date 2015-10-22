@@ -22,7 +22,7 @@ Partial Class frmSearchLoans
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("")
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -82,9 +82,9 @@ Partial Class frmSearchLoans
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(6, 16)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(219, 13)
+        Me.Label1.Size = New System.Drawing.Size(95, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Please Enter a valid Pawn ticket or Customer"
+        Me.Label1.Text = "Enter Pawn Ticket"
         '
         'Button6
         '
@@ -124,7 +124,7 @@ Partial Class frmSearchLoans
         Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
-        Me.lvClient.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.lvClient.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.lvClient.Location = New System.Drawing.Point(17, 86)
         Me.lvClient.Name = "lvClient"
         Me.lvClient.Size = New System.Drawing.Size(760, 308)
