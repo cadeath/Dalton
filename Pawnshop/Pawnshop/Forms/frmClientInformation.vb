@@ -232,4 +232,38 @@ Public Class frmClientInformation
             e.Handled = True
         End If
     End Sub
+
+    'ID Group===================
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        AddID()
+        ClearIDFields()
+        cboIDtype.Focus()
+    End Sub
+
+    Private Sub AddID()
+        If cboIDtype.Text = "" Or txtRef.Text = "" Or txtRemarks.Text = "" Then Exit Sub
+
+        Dim lv As ListViewItem = lvID.Items.Add(cboIDtype.Text)
+        lv.SubItems.Add(txtRef.Text)
+        lv.SubItems.Add(txtRemarks.Text)
+    End Sub
+
+    Private Sub txtRef_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRef.KeyPress
+        If isEnter(e) Then txtRemarks.Focus()
+    End Sub
+
+    Private Sub txtRemarks_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRemarks.KeyPress
+        If isEnter(e) Then btnAdd.PerformClick()
+    End Sub
+
+    Private Sub cboIDtype_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboIDtype.SelectedIndexChanged
+        'If Not cboIDtype.DroppedDown And cboIDtype.Text <> "" Then txtRef.Focus()
+    End Sub
+
+    Private Sub ClearIDFields()
+        cboIDtype.DroppedDown = True
+        txtRef.Text = ""
+        txtRemarks.Text = ""
+    End Sub
+    'END - ID Group===================
 End Class
