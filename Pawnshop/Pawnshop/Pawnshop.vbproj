@@ -106,6 +106,12 @@
   <ItemGroup>
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Forms\devClient.Designer.vb">
+      <DependentUpon>devClient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\devClient.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmBorrowBrowse.Designer.vb">
       <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
     </Compile>
@@ -252,6 +258,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\devClient.resx">
+      <DependentUpon>devClient.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBorrowBrowse.resx">
       <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
     </EmbeddedResource>

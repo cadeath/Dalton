@@ -2,6 +2,8 @@
 
 Public Class frmClient
 
+    Friend SearchStr As String = ""
+
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim th As Thread
         th = New Thread(AddressOf LoadClients)
@@ -9,6 +11,18 @@ Public Class frmClient
 
         ClearField()
         txtSearch.Focus()
+        txtSearch.Text = IIf(SearchStr <> "", SearchStr, "")
+    End Sub
+
+    Private Sub AddItem(ByVal cl As Client)
+        Dim lv As ListViewItem = lvClient.Items.Add(cl.ID)
+        lv.SubItems.Add(String.Format("{0}, {1} {2}", cl.LastName, cl.FirstName, cl.MiddleName))
+        lv.SubItems.Add(String.Format("{0} {1} {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity))
+        lv.SubItems.Add(cl.Cellphone1)
+        lv.ImageKey = "imgMale"
+        If cl.Sex = 0 Then
+            lv.ImageKey = "imgFemale"
+        End If
     End Sub
 
     Private Sub ClearField()
@@ -30,16 +44,9 @@ Public Class frmClient
 
             lvClient.Items.Clear()
             For Each pawner As DataRow In ds.Tables(0).Rows
-                With pawner
-                    Dim lv As ListViewItem = lvClient.Items.Add(.Item("ClientID"))
-                    lv.SubItems.Add(String.Format("{0}, {1} {2}", .Item("LastName"), .Item("FirstName"), .Item("MiddleName")))
-                    lv.SubItems.Add(String.Format("{0} {1} {2}", .Item("Addr_Street"), .Item("Addr_Brgy"), .Item("Addr_City")))
-                    lv.SubItems.Add(.Item("Phone1"))
-                    lv.ImageKey = "imgMale"
-                    If .Item("Sex") = "F" Then
-                        lv.ImageKey = "imgFemale"
-                    End If
-                End With
+                Dim tmpClient As New Client
+                tmpClient.LoadClient(pawner.Item("ClientID"))
+                AddItem(tmpClient)
             Next
 
             lvClient.Enabled = True
@@ -54,10 +61,6 @@ Public Class frmClient
         If isEnter(e) Then
             btnSearch.PerformClick()
         End If
-    End Sub
-
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
@@ -79,5 +82,44 @@ Public Class frmClient
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         frmClientInformation.Show()
+    End Sub
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        If txtSearch.Text = "" Then Exit Sub
+
+        txtSearch.SelectAll()
+
+        Dim src As String = txtSearch.Text
+        Dim mySql As String = "SELECT * FROM tblClient " & vbCrLf
+        mySql &= " WHERE "
+        mySql &= String.Format("FirstName LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("MiddleName LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("LastName LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Addr_Brgy LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Addr_City LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Phone1 LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Phone2 LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Phone_Others LIKE '%{0}%' " & vbCrLf, src)
+        mySql &= "ORDER BY LastName ASC, FirstName ASC"
+
+        Console.WriteLine("SQL: " & mySql)
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        If MaxRow <= 0 Then
+            Exit Sub
+        End If
+
+        lvClient.Items.Clear()
+        For Each clientRow As DataRow In ds.Tables(0).Rows
+            Dim tmpClient As New Client
+            tmpClient.LoadClientByRow(clientRow)
+            AddItem(tmpClient)
+        Next
+
+        MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
+    End Sub
+
+    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+
     End Sub
 End Class
