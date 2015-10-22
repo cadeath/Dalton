@@ -94,7 +94,7 @@ Partial Class frmClient
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
         Me.lvClient.LargeImageList = Me.imgClient
-        Me.lvClient.Location = New System.Drawing.Point(11, 86)
+        Me.lvClient.Location = New System.Drawing.Point(13, 86)
         Me.lvClient.Name = "lvClient"
         Me.lvClient.Size = New System.Drawing.Size(739, 245)
         Me.lvClient.SmallImageList = Me.imgClient
