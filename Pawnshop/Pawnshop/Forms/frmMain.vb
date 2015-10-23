@@ -61,4 +61,16 @@
     Private Sub btnClient_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClient.Click
         frmClient.Show()
     End Sub
+
+    Private Sub pbLogo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pbLogo.Click
+
+    End Sub
+
+    Private Sub pbLogo_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles pbLogo.DoubleClick
+        devClient.Show()
+    End Sub
+
+    Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
+        frmNewloan.Show()
+    End Sub
 End Class

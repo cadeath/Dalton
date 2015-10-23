@@ -17,7 +17,7 @@ Public Class frmClientInformation
             Console.WriteLine("Database connected")
         End If
 
-        Populate()
+        'Populate()
     End Sub
 
     Friend Sub LoadClientInForm(ByVal cl As Client)
