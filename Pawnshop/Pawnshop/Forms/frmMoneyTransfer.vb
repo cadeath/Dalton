@@ -21,4 +21,8 @@
         txtSender.Text = String.Format("{0} {1} {2}", cl.FirstName, cl.LastName, cl.Suffix)
         txtSenderAddr.Text = String.Format("{0} {1} {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
     End Sub
+
+    Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        MsgBox("This module is under construction", MsgBoxStyle.Information)
+    End Sub
 End Class

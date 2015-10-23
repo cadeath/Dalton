@@ -102,6 +102,7 @@ Public Class frmClient
 
         frmClientInformation.Show()
         frmClientInformation.LoadClientInForm(tmpCl)
+        frmClientInformation.btnSelect.Visible = False
     End Sub
 
     Private Sub lvClient_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvClient.DoubleClick
@@ -137,6 +138,7 @@ Public Class frmClient
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         If MaxRow <= 0 Then
             MsgBox("No result found", MsgBoxStyle.Critical)
+            txtSearch.SelectAll()
             Exit Sub
         End If
 
@@ -148,6 +150,8 @@ Public Class frmClient
         Next
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
+        lvClient.Focus()
+        lvClient.Items(0).Selected = True
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
@@ -161,6 +165,20 @@ Public Class frmClient
     End Sub
 
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+
+    End Sub
+
+    Private Sub lvClient_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvClient.KeyPress
+        If isEnter(e) Then
+            If fromOtherForm Then
+                btnSelect.PerformClick()
+            Else
+                btnView.PerformClick()
+            End If
+        End If
+    End Sub
+
+    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
 
     End Sub
 End Class
