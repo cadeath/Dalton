@@ -71,6 +71,6 @@
     End Sub
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
-        frmNewloan.Show()
+        frmPawning.Show()
     End Sub
 End Class

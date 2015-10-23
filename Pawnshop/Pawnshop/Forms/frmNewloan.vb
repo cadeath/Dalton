@@ -1,5 +1,9 @@
 ﻿Public Class frmNewloan
 
+    Dim maturityAdd As Integer = 30
+    Dim expiryAdd As Integer = 30
+    Dim auctionAdd As Integer = 30
+
     Private Sub ItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboItemtype.SelectedIndexChanged
         cboCategory.Items.Clear()
         cboCategory.Text = ""
@@ -58,6 +62,7 @@
     End Sub
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        frmClient.SearchSelect(txtPawner.Text, FormName.frmPawning)
         frmClient.Show()
     End Sub
 
@@ -104,10 +109,6 @@
         DigitOnly(e)
     End Sub
 
-    Private Sub txtGrams_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtGrams.TextChanged
-
-    End Sub
-
     Private Sub txtAppraisal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppraisal.TextChanged
         txtTotal.Text = txtAppraisal.Text
         'txtPrincipal.Text = txtAppraisal.Text
@@ -118,45 +119,118 @@
     End Sub
 
     Private Sub txtPawner_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPawner.KeyPress
-
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-        Me.Close()
-    End Sub
 
     Private Sub btnLess_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLess.Click
         lblLess.Visible = True
-        txtless.Visible = True
-        txtless.ReadOnly = False
+        txtLess.Visible = True
+        txtLess.ReadOnly = False
         btnLess.Enabled = False
     End Sub
 
-    Private Sub txtless_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtless.KeyPress
+    Private Sub txtless_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLess.KeyPress
         DigitOnly(e)
     End Sub
 
-    Private Sub txtless_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtless.TextChanged
-
+    Private Sub frmNewloan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ClearFields()
     End Sub
 
-    Private Sub txtDesc_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesc.TextChanged
+    Friend Sub NewLoan()
+        ' Pawner
+        txtPawner.ReadOnly = False
+        txtPawner.Focus()
 
+        ' Item Information
+        cboItemtype.Enabled = True
+        txtDesc.ReadOnly = False
+        cboCategory.Enabled = True
+        txtGrams.ReadOnly = False
+        cboKarat.Enabled = True
+
+        ' Ticket Information
+        LoanDate.Value = CurrentDate
+        Maturity.Value = LoanDate.Value.AddDays(maturityAdd) : Maturity.Enabled = False
+        Expiry.Value = Maturity.Value.AddDays(expiryAdd) : Expiry.Enabled = False
+        Auction.Value = Expiry.Value.AddDays(auctionAdd) : Auction.Enabled = False
+        txtAppraisal.ReadOnly = False
+        txtPrincipal.ReadOnly = False
+        txtTotal.ReadOnly = False
+
+        ' Receipt Information
+        txtRefNo.ReadOnly = False
+        dtpDate.Value = CurrentDate
+        txtAppr.ReadOnly = False
+        txtLess.ReadOnly = False
+        txtOverDue.ReadOnly = False
+        txtDelayInt.ReadOnly = False
+        txtPenalty.ReadOnly = False
+        txtSrvChrg.ReadOnly = False
+        txtEvat.ReadOnly = False
+        txtRenewDue.ReadOnly = False
+        txtRedeemDue.ReadOnly = False
+
+        cboAppraiser.Text = ""
     End Sub
 
-    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+    Friend Sub LoadPawnerInfo(ByVal cl As Client)
+        txtPawner.Text = String.Format("{0} {1} {2} {3}", cl.FirstName, cl.MiddleName, cl.LastName, cl.Suffix)
+        txtAddress.Text = String.Format("{0} {1} {2}, {3}" & vbCrLf & "{4}", cl.AddressSt, cl.AddressBrgy, cl.AddressProvince, cl.AddressCity, cl.ZipCode)
+        txtBDay.Text = cl.Birthday.ToString("MMM dd, yyyy")
+        lblAge.Text = GetCurrentAge(DateTime.Parse(txtBDay.Text)) & " years old"
+        txtPhone.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "") & IIf(cl.Telephone <> "", ", " & cl.Telephone, "")
+    End Sub
 
+    Private Sub ClearFields()
+        ' Pawner
+        txtPawner.Text = ""
+        txtAddress.Text = ""
+        txtBDay.Text = ""
+        txtPhone.Text = ""
+
+        ' Item Information
+        txtDesc.Text = ""
+        cboItemtype.Text = ""
+        ' Jewel
+        txtGrams.Text = ""
+        cboKarat.Text = ""
+
+        ' Ticket Information
+        txtTicket.Text = ""
+        txtNticket.Text = ""
+        LoanDate.Value = CurrentDate
+        Maturity.Value = LoanDate.Value.AddDays(maturityAdd)
+        Expiry.Value = Maturity.Value.AddDays(expiryAdd)
+        Auction.Value = Expiry.Value.AddDays(auctionAdd)
+        txtAppraisal.Text = ""
+        txtPrincipal.Text = ""
+        txtTotal.Text = ""
+
+        ' Receipt Information
+        txtRefNo.Text = ""
+        dtpDate.Value = CurrentDate
+        txtAppr.Text = ""
+        txtLess.Text = ""
+        txtOverDue.Text = ""
+        txtDelayInt.Text = ""
+        txtPenalty.Text = ""
+        txtSrvChrg.Text = ""
+        txtEvat.Text = ""
+        txtRenewDue.Text = ""
+        txtRedeemDue.Text = ""
+
+        cboAppraiser.Text = ""
+    End Sub
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
     End Sub
 
     Private Sub txtPawner_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPawner.TextChanged
-
-    End Sub
-
-    Private Sub frmNewloan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    Private Sub FormInit()
 
     End Sub
 End Class

@@ -54,7 +54,7 @@ Public Class frmClientInformation
         FormOrigin.Show()
     End Sub
 
-    Private Sub ComputeBirthday()
+    Friend Sub ComputeBirthday()
         lblAge.Text = "N/A"
         lblAge.Text = GetCurrentAge(dtpBday.Value) & " years old"
     End Sub

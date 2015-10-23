@@ -72,6 +72,6 @@ D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmM
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmMTSend.resources
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmNewloan.resources
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmRedeem.resources
-D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmSearchLoans.resources
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmItemLookUp.resources
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmPOS.resources
+D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmPawning.resources

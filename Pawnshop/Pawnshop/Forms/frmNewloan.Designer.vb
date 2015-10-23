@@ -23,9 +23,9 @@ Partial Class frmNewloan
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpPawner = New System.Windows.Forms.GroupBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.txtBDay = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -60,32 +60,32 @@ Partial Class frmNewloan
         Me.Label8 = New System.Windows.Forms.Label()
         Me.LoanDate = New System.Windows.Forms.DateTimePicker()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.txtTicket = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.cboAppraiser = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.grpReceipt = New System.Windows.Forms.GroupBox()
-        Me.txtless = New System.Windows.Forms.TextBox()
+        Me.txtLess = New System.Windows.Forms.TextBox()
         Me.lblLess = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtPenalty = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.txtRedeemDue = New System.Windows.Forms.TextBox()
         Me.lblRedeemDue = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtAppr = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.Receiptdate = New System.Windows.Forms.DateTimePicker()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.dtpDate = New System.Windows.Forms.DateTimePicker()
+        Me.txtRefNo = New System.Windows.Forms.TextBox()
         Me.txtRenewDue = New System.Windows.Forms.TextBox()
         Me.lblRenewDue = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.txtEvat = New System.Windows.Forms.TextBox()
         Me.Label23 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.txtSrvChrg = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.txtDelayInt = New System.Windows.Forms.TextBox()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.txtOverDue = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -93,6 +93,7 @@ Partial Class frmNewloan
         Me.Label29 = New System.Windows.Forms.Label()
         Me.lblTranstype = New System.Windows.Forms.Label()
         Me.btnLess = New System.Windows.Forms.Button()
+        Me.lblAge = New System.Windows.Forms.Label()
         Me.grpPawner.SuspendLayout()
         Me.grpItem.SuspendLayout()
         Me.grpTicket.SuspendLayout()
@@ -102,9 +103,10 @@ Partial Class frmNewloan
         '
         'grpPawner
         '
-        Me.grpPawner.Controls.Add(Me.TextBox7)
+        Me.grpPawner.Controls.Add(Me.lblAge)
+        Me.grpPawner.Controls.Add(Me.txtPhone)
         Me.grpPawner.Controls.Add(Me.Label16)
-        Me.grpPawner.Controls.Add(Me.TextBox5)
+        Me.grpPawner.Controls.Add(Me.txtBDay)
         Me.grpPawner.Controls.Add(Me.Label15)
         Me.grpPawner.Controls.Add(Me.txtAddress)
         Me.grpPawner.Controls.Add(Me.Label3)
@@ -118,14 +120,14 @@ Partial Class frmNewloan
         Me.grpPawner.TabStop = False
         Me.grpPawner.Text = "Pawner's Information"
         '
-        'TextBox7
+        'txtPhone
         '
-        Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(141, 140)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(250, 22)
-        Me.TextBox7.TabIndex = 18
+        Me.txtPhone.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPhone.Location = New System.Drawing.Point(141, 140)
+        Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.ReadOnly = True
+        Me.txtPhone.Size = New System.Drawing.Size(250, 22)
+        Me.txtPhone.TabIndex = 18
         '
         'Label16
         '
@@ -137,14 +139,14 @@ Partial Class frmNewloan
         Me.Label16.TabIndex = 19
         Me.Label16.Text = "Contact Number:"
         '
-        'TextBox5
+        'txtBDay
         '
-        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(142, 109)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.ReadOnly = True
-        Me.TextBox5.Size = New System.Drawing.Size(250, 22)
-        Me.TextBox5.TabIndex = 16
+        Me.txtBDay.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBDay.Location = New System.Drawing.Point(142, 109)
+        Me.txtBDay.Name = "txtBDay"
+        Me.txtBDay.ReadOnly = True
+        Me.txtBDay.Size = New System.Drawing.Size(250, 22)
+        Me.txtBDay.TabIndex = 16
         '
         'Label15
         '
@@ -194,7 +196,7 @@ Partial Class frmNewloan
         Me.txtPawner.Name = "txtPawner"
         Me.txtPawner.ReadOnly = True
         Me.txtPawner.Size = New System.Drawing.Size(250, 22)
-        Me.txtPawner.TabIndex = 1
+        Me.txtPawner.TabIndex = 0
         Me.txtPawner.Text = "Eskie Cirrus James Maquilang"
         '
         'Label2
@@ -233,7 +235,7 @@ Partial Class frmNewloan
         Me.cboKarat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboKarat.FormattingEnabled = True
         Me.cboKarat.Items.AddRange(New Object() {"10", "12", "14", "16", "18", "20", "21", "22", "24"})
-        Me.cboKarat.Location = New System.Drawing.Point(142, 139)
+        Me.cboKarat.Location = New System.Drawing.Point(142, 149)
         Me.cboKarat.Name = "cboKarat"
         Me.cboKarat.Size = New System.Drawing.Size(124, 21)
         Me.cboKarat.TabIndex = 26
@@ -242,7 +244,7 @@ Partial Class frmNewloan
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(6, 142)
+        Me.Label7.Location = New System.Drawing.Point(6, 152)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(48, 16)
         Me.Label7.TabIndex = 25
@@ -251,7 +253,7 @@ Partial Class frmNewloan
         'txtGrams
         '
         Me.txtGrams.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtGrams.Location = New System.Drawing.Point(142, 115)
+        Me.txtGrams.Location = New System.Drawing.Point(142, 123)
         Me.txtGrams.Name = "txtGrams"
         Me.txtGrams.ReadOnly = True
         Me.txtGrams.Size = New System.Drawing.Size(124, 22)
@@ -262,7 +264,7 @@ Partial Class frmNewloan
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(6, 118)
+        Me.Label4.Location = New System.Drawing.Point(6, 126)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(57, 16)
         Me.Label4.TabIndex = 23
@@ -274,7 +276,7 @@ Partial Class frmNewloan
         Me.cboCategory.Enabled = False
         Me.cboCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboCategory.FormattingEnabled = True
-        Me.cboCategory.Location = New System.Drawing.Point(142, 91)
+        Me.cboCategory.Location = New System.Drawing.Point(142, 96)
         Me.cboCategory.Name = "cboCategory"
         Me.cboCategory.Size = New System.Drawing.Size(124, 21)
         Me.cboCategory.TabIndex = 21
@@ -283,7 +285,7 @@ Partial Class frmNewloan
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(6, 90)
+        Me.Label6.Location = New System.Drawing.Point(6, 101)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(75, 16)
         Me.Label6.TabIndex = 20
@@ -296,7 +298,7 @@ Partial Class frmNewloan
         Me.cboItemtype.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboItemtype.FormattingEnabled = True
         Me.cboItemtype.Items.AddRange(New Object() {"APP", "CEL", "JWL", "BIG"})
-        Me.cboItemtype.Location = New System.Drawing.Point(142, 68)
+        Me.cboItemtype.Location = New System.Drawing.Point(142, 21)
         Me.cboItemtype.Name = "cboItemtype"
         Me.cboItemtype.Size = New System.Drawing.Size(124, 21)
         Me.cboItemtype.TabIndex = 18
@@ -305,7 +307,7 @@ Partial Class frmNewloan
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(6, 67)
+        Me.Label5.Location = New System.Drawing.Point(6, 20)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(81, 16)
         Me.Label5.TabIndex = 17
@@ -314,7 +316,7 @@ Partial Class frmNewloan
         'txtDesc
         '
         Me.txtDesc.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDesc.Location = New System.Drawing.Point(142, 18)
+        Me.txtDesc.Location = New System.Drawing.Point(142, 43)
         Me.txtDesc.Multiline = True
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ReadOnly = True
@@ -326,7 +328,7 @@ Partial Class frmNewloan
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 21)
+        Me.Label1.Location = New System.Drawing.Point(6, 46)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(91, 16)
         Me.Label1.TabIndex = 15
@@ -350,7 +352,7 @@ Partial Class frmNewloan
         Me.grpTicket.Controls.Add(Me.Label8)
         Me.grpTicket.Controls.Add(Me.LoanDate)
         Me.grpTicket.Controls.Add(Me.Label11)
-        Me.grpTicket.Controls.Add(Me.TextBox4)
+        Me.grpTicket.Controls.Add(Me.txtTicket)
         Me.grpTicket.Controls.Add(Me.Label12)
         Me.grpTicket.Location = New System.Drawing.Point(508, 66)
         Me.grpTicket.Name = "grpTicket"
@@ -512,14 +514,14 @@ Partial Class frmNewloan
         Me.Label11.TabIndex = 17
         Me.Label11.Text = "Loan Date:"
         '
-        'TextBox4
+        'txtTicket
         '
-        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(133, 18)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.ReadOnly = True
-        Me.TextBox4.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox4.TabIndex = 3
+        Me.txtTicket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTicket.Location = New System.Drawing.Point(133, 18)
+        Me.txtTicket.Name = "txtTicket"
+        Me.txtTicket.ReadOnly = True
+        Me.txtTicket.Size = New System.Drawing.Size(113, 22)
+        Me.txtTicket.TabIndex = 3
         '
         'Label12
         '
@@ -533,7 +535,7 @@ Partial Class frmNewloan
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.TextBox10)
+        Me.GroupBox4.Controls.Add(Me.cboAppraiser)
         Me.GroupBox4.Controls.Add(Me.Label19)
         Me.GroupBox4.Location = New System.Drawing.Point(508, 349)
         Me.GroupBox4.Name = "GroupBox4"
@@ -542,15 +544,16 @@ Partial Class frmNewloan
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Appraiser"
         '
-        'TextBox10
+        'cboAppraiser
         '
-        Me.TextBox10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox10.Location = New System.Drawing.Point(9, 35)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.ReadOnly = True
-        Me.TextBox10.Size = New System.Drawing.Size(237, 22)
-        Me.TextBox10.TabIndex = 1
-        Me.TextBox10.Text = "Eskie Cirrus James Maquilang"
+        Me.cboAppraiser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboAppraiser.Enabled = False
+        Me.cboAppraiser.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cboAppraiser.FormattingEnabled = True
+        Me.cboAppraiser.Location = New System.Drawing.Point(9, 35)
+        Me.cboAppraiser.Name = "cboAppraiser"
+        Me.cboAppraiser.Size = New System.Drawing.Size(237, 21)
+        Me.cboAppraiser.TabIndex = 22
         '
         'Label19
         '
@@ -593,23 +596,23 @@ Partial Class frmNewloan
         '
         'grpReceipt
         '
-        Me.grpReceipt.Controls.Add(Me.txtless)
+        Me.grpReceipt.Controls.Add(Me.txtLess)
         Me.grpReceipt.Controls.Add(Me.lblLess)
-        Me.grpReceipt.Controls.Add(Me.TextBox1)
+        Me.grpReceipt.Controls.Add(Me.txtPenalty)
         Me.grpReceipt.Controls.Add(Me.Label18)
         Me.grpReceipt.Controls.Add(Me.txtRedeemDue)
         Me.grpReceipt.Controls.Add(Me.lblRedeemDue)
-        Me.grpReceipt.Controls.Add(Me.TextBox2)
+        Me.grpReceipt.Controls.Add(Me.txtAppr)
         Me.grpReceipt.Controls.Add(Me.Label21)
-        Me.grpReceipt.Controls.Add(Me.Receiptdate)
-        Me.grpReceipt.Controls.Add(Me.TextBox3)
+        Me.grpReceipt.Controls.Add(Me.dtpDate)
+        Me.grpReceipt.Controls.Add(Me.txtRefNo)
         Me.grpReceipt.Controls.Add(Me.txtRenewDue)
         Me.grpReceipt.Controls.Add(Me.lblRenewDue)
-        Me.grpReceipt.Controls.Add(Me.TextBox8)
+        Me.grpReceipt.Controls.Add(Me.txtEvat)
         Me.grpReceipt.Controls.Add(Me.Label23)
-        Me.grpReceipt.Controls.Add(Me.TextBox9)
+        Me.grpReceipt.Controls.Add(Me.txtSrvChrg)
         Me.grpReceipt.Controls.Add(Me.Label24)
-        Me.grpReceipt.Controls.Add(Me.TextBox11)
+        Me.grpReceipt.Controls.Add(Me.txtDelayInt)
         Me.grpReceipt.Controls.Add(Me.Label25)
         Me.grpReceipt.Controls.Add(Me.txtOverDue)
         Me.grpReceipt.Controls.Add(Me.Label26)
@@ -621,17 +624,16 @@ Partial Class frmNewloan
         Me.grpReceipt.TabIndex = 13
         Me.grpReceipt.TabStop = False
         Me.grpReceipt.Text = "Receipt Information"
-        Me.grpReceipt.Visible = False
         '
-        'txtless
+        'txtLess
         '
-        Me.txtless.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtless.Location = New System.Drawing.Point(132, 89)
-        Me.txtless.Name = "txtless"
-        Me.txtless.ReadOnly = True
-        Me.txtless.Size = New System.Drawing.Size(113, 22)
-        Me.txtless.TabIndex = 53
-        Me.txtless.Visible = False
+        Me.txtLess.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLess.Location = New System.Drawing.Point(132, 89)
+        Me.txtLess.Name = "txtLess"
+        Me.txtLess.ReadOnly = True
+        Me.txtLess.Size = New System.Drawing.Size(113, 22)
+        Me.txtLess.TabIndex = 53
+        Me.txtLess.Visible = False
         '
         'lblLess
         '
@@ -644,14 +646,14 @@ Partial Class frmNewloan
         Me.lblLess.Text = "Less Principal"
         Me.lblLess.Visible = False
         '
-        'TextBox1
+        'txtPenalty
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(134, 212)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox1.TabIndex = 51
+        Me.txtPenalty.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPenalty.Location = New System.Drawing.Point(134, 212)
+        Me.txtPenalty.Name = "txtPenalty"
+        Me.txtPenalty.ReadOnly = True
+        Me.txtPenalty.Size = New System.Drawing.Size(113, 22)
+        Me.txtPenalty.TabIndex = 51
         '
         'Label18
         '
@@ -684,14 +686,14 @@ Partial Class frmNewloan
         Me.lblRedeemDue.Text = "Redeem Due:"
         Me.lblRedeemDue.Visible = False
         '
-        'TextBox2
+        'txtAppr
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(132, 65)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox2.TabIndex = 47
+        Me.txtAppr.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAppr.Location = New System.Drawing.Point(132, 65)
+        Me.txtAppr.Name = "txtAppr"
+        Me.txtAppr.ReadOnly = True
+        Me.txtAppr.Size = New System.Drawing.Size(113, 22)
+        Me.txtAppr.TabIndex = 47
         '
         'Label21
         '
@@ -703,23 +705,23 @@ Partial Class frmNewloan
         Me.Label21.TabIndex = 48
         Me.Label21.Text = "Appraisal:"
         '
-        'Receiptdate
+        'dtpDate
         '
-        Me.Receiptdate.Enabled = False
-        Me.Receiptdate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.Receiptdate.Location = New System.Drawing.Point(132, 42)
-        Me.Receiptdate.Name = "Receiptdate"
-        Me.Receiptdate.Size = New System.Drawing.Size(113, 20)
-        Me.Receiptdate.TabIndex = 46
+        Me.dtpDate.Enabled = False
+        Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpDate.Location = New System.Drawing.Point(132, 42)
+        Me.dtpDate.Name = "dtpDate"
+        Me.dtpDate.Size = New System.Drawing.Size(113, 20)
+        Me.dtpDate.TabIndex = 46
         '
-        'TextBox3
+        'txtRefNo
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(132, 17)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox3.TabIndex = 43
+        Me.txtRefNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRefNo.Location = New System.Drawing.Point(132, 17)
+        Me.txtRefNo.Name = "txtRefNo"
+        Me.txtRefNo.ReadOnly = True
+        Me.txtRefNo.Size = New System.Drawing.Size(113, 22)
+        Me.txtRefNo.TabIndex = 43
         '
         'txtRenewDue
         '
@@ -742,14 +744,14 @@ Partial Class frmNewloan
         Me.lblRenewDue.Text = "Renew Due:"
         Me.lblRenewDue.Visible = False
         '
-        'TextBox8
+        'txtEvat
         '
-        Me.TextBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox8.Location = New System.Drawing.Point(134, 262)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.ReadOnly = True
-        Me.TextBox8.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox8.TabIndex = 39
+        Me.txtEvat.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEvat.Location = New System.Drawing.Point(134, 262)
+        Me.txtEvat.Name = "txtEvat"
+        Me.txtEvat.ReadOnly = True
+        Me.txtEvat.Size = New System.Drawing.Size(113, 22)
+        Me.txtEvat.TabIndex = 39
         '
         'Label23
         '
@@ -761,14 +763,14 @@ Partial Class frmNewloan
         Me.Label23.TabIndex = 40
         Me.Label23.Text = "E-Vat:"
         '
-        'TextBox9
+        'txtSrvChrg
         '
-        Me.TextBox9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox9.Location = New System.Drawing.Point(134, 238)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.ReadOnly = True
-        Me.TextBox9.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox9.TabIndex = 37
+        Me.txtSrvChrg.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSrvChrg.Location = New System.Drawing.Point(134, 238)
+        Me.txtSrvChrg.Name = "txtSrvChrg"
+        Me.txtSrvChrg.ReadOnly = True
+        Me.txtSrvChrg.Size = New System.Drawing.Size(113, 22)
+        Me.txtSrvChrg.TabIndex = 37
         '
         'Label24
         '
@@ -780,14 +782,14 @@ Partial Class frmNewloan
         Me.Label24.TabIndex = 38
         Me.Label24.Text = "Service Charge:"
         '
-        'TextBox11
+        'txtDelayInt
         '
-        Me.TextBox11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox11.Location = New System.Drawing.Point(134, 187)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.ReadOnly = True
-        Me.TextBox11.Size = New System.Drawing.Size(113, 22)
-        Me.TextBox11.TabIndex = 35
+        Me.txtDelayInt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDelayInt.Location = New System.Drawing.Point(134, 187)
+        Me.txtDelayInt.Name = "txtDelayInt"
+        Me.txtDelayInt.ReadOnly = True
+        Me.txtDelayInt.Size = New System.Drawing.Size(113, 22)
+        Me.txtDelayInt.TabIndex = 35
         '
         'Label25
         '
@@ -859,6 +861,15 @@ Partial Class frmNewloan
         Me.btnLess.UseVisualStyleBackColor = True
         Me.btnLess.Visible = False
         '
+        'lblAge
+        '
+        Me.lblAge.AutoSize = True
+        Me.lblAge.Location = New System.Drawing.Point(398, 114)
+        Me.lblAge.Name = "lblAge"
+        Me.lblAge.Size = New System.Drawing.Size(16, 13)
+        Me.lblAge.TabIndex = 20
+        Me.lblAge.Text = " - "
+        '
         'frmNewloan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -909,7 +920,7 @@ Partial Class frmNewloan
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents grpTicket As System.Windows.Forms.GroupBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtTicket As System.Windows.Forms.TextBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtTotal As System.Windows.Forms.TextBox
     Friend WithEvents lblNet As System.Windows.Forms.Label
@@ -924,7 +935,6 @@ Partial Class frmNewloan
     Friend WithEvents Maturity As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox10 As System.Windows.Forms.TextBox
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
@@ -933,32 +943,34 @@ Partial Class frmNewloan
     Friend WithEvents txtNticket As System.Windows.Forms.TextBox
     Friend WithEvents lblNticket As System.Windows.Forms.Label
     Friend WithEvents grpReceipt As System.Windows.Forms.GroupBox
-    Friend WithEvents txtless As System.Windows.Forms.TextBox
+    Friend WithEvents txtLess As System.Windows.Forms.TextBox
     Friend WithEvents lblLess As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtPenalty As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents txtRedeemDue As System.Windows.Forms.TextBox
     Friend WithEvents lblRedeemDue As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtAppr As System.Windows.Forms.TextBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents Receiptdate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents dtpDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents txtRefNo As System.Windows.Forms.TextBox
     Friend WithEvents txtRenewDue As System.Windows.Forms.TextBox
     Friend WithEvents lblRenewDue As System.Windows.Forms.Label
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
+    Friend WithEvents txtEvat As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
-    Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
+    Friend WithEvents txtSrvChrg As System.Windows.Forms.TextBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents TextBox11 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDelayInt As System.Windows.Forms.TextBox
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents txtOverDue As System.Windows.Forms.TextBox
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label29 As System.Windows.Forms.Label
     Friend WithEvents lblTranstype As System.Windows.Forms.Label
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
+    Friend WithEvents txtPhone As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
+    Friend WithEvents txtBDay As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents btnLess As System.Windows.Forms.Button
+    Friend WithEvents cboAppraiser As System.Windows.Forms.ComboBox
+    Friend WithEvents lblAge As System.Windows.Forms.Label
 End Class
