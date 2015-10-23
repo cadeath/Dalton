@@ -95,6 +95,7 @@ Partial Class frmClient
         Me.lvClient.GridLines = True
         Me.lvClient.LargeImageList = Me.imgClient
         Me.lvClient.Location = New System.Drawing.Point(13, 86)
+        Me.lvClient.MultiSelect = False
         Me.lvClient.Name = "lvClient"
         Me.lvClient.Size = New System.Drawing.Size(739, 245)
         Me.lvClient.SmallImageList = Me.imgClient
@@ -169,6 +170,7 @@ Partial Class frmClient
         Me.btnSelect.TabIndex = 6
         Me.btnSelect.Text = "&Select"
         Me.btnSelect.UseVisualStyleBackColor = True
+        Me.btnSelect.Visible = False
         '
         'frmClient
         '

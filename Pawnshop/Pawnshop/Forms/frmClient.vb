@@ -6,26 +6,35 @@
 ' your search variable and use .show
 ' to display the form with result.
 ' eg:
-'  frmClient.SearchStr = "Eskie"
-'  frmClient.Show()
+'  call SelectSearch sub to autoSearch
+'  args: src - Search String, frm - Form of Origin
+'  frmClient.SelectSearch("frye",me)
+'  frmClient.show()
 ' Version
+' 1.1.1
+' - Enhance Auto Search Form
 ' 1.1
 ' - Auto Search Form
 
 Public Class frmClient
 
-    Friend SearchStr As String = ""
+    Dim origForm As Form
+    Dim fromOtherForm As Boolean = False
+    Friend GetClient As Client
 
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If SearchStr = "" Then
+        If origForm Is Nothing Then ClearField()
+
+        If txtSearch.Text = "" Then
             Dim th As Thread
             th = New Thread(AddressOf LoadClients)
             th.Start()
         End If
 
-        ClearField()
-        txtSearch.Focus()
-        txtSearch.Text = IIf(SearchStr <> "", SearchStr, "")
+        If origForm Is Nothing Then
+            txtSearch.Focus()
+        End If
+        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
         End If
@@ -45,6 +54,13 @@ Public Class frmClient
     Private Sub ClearField()
         txtSearch.Text = ""
         lvClient.Items.Clear()
+    End Sub
+
+    Friend Sub SearchSelect(ByVal src As String, ByVal frm As Form)
+        origForm = frm
+        btnSelect.Visible = True
+        txtSearch.Text = src
+        'btnSearch.PerformClick()
     End Sub
 
     Private Delegate Sub LoadClient_delegate()
@@ -72,6 +88,12 @@ Public Class frmClient
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub txtSearch_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSearch.DoubleClick
+        lvClient.Focus()
+        lvClient.Items(0).Selected = True
+        Console.WriteLine("Selected")
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
@@ -107,8 +129,6 @@ Public Class frmClient
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
 
-        txtSearch.SelectAll()
-
         Dim src As String = txtSearch.Text
         Dim mySql As String = "SELECT * FROM tblClient " & vbCrLf
         mySql &= " WHERE "
@@ -126,6 +146,7 @@ Public Class frmClient
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         If MaxRow <= 0 Then
+            MsgBox("No result found", MsgBoxStyle.Critical)
             Exit Sub
         End If
 
@@ -137,6 +158,15 @@ Public Class frmClient
         Next
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
+    End Sub
+
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+        Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
+        GetClient = New Client
+        GetClient.LoadClient(idx)
+        origForm.Show()
+
+        Me.Close()
     End Sub
 
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
