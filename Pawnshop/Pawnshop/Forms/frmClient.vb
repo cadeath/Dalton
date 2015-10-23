@@ -7,8 +7,8 @@
 ' to display the form with result.
 ' eg:
 '  call SelectSearch sub to autoSearch
-'  args: src - Search String, frm - Form of Origin
-'  frmClient.SelectSearch("frye",me)
+'  args: src - Search String
+'  frmClient.SelectSearch("frye")
 '  frmClient.show()
 ' Version
 ' 1.1.1
@@ -18,12 +18,12 @@
 
 Public Class frmClient
 
-    Dim origForm As Form
     Dim fromOtherForm As Boolean = False
     Friend GetClient As Client
+    Dim frmOrig As formSwitch.FormName
 
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If origForm Is Nothing Then ClearField()
+        If Not fromOtherForm Then ClearField()
 
         If txtSearch.Text = "" Then
             Dim th As Thread
@@ -31,7 +31,7 @@ Public Class frmClient
             th.Start()
         End If
 
-        If origForm Is Nothing Then
+        If Not fromOtherForm Then
             txtSearch.Focus()
         End If
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
@@ -56,11 +56,10 @@ Public Class frmClient
         lvClient.Items.Clear()
     End Sub
 
-    Friend Sub SearchSelect(ByVal src As String, ByVal frm As Form)
-        origForm = frm
+    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+        fromOtherForm = True
         btnSelect.Visible = True
         txtSearch.Text = src
-        'btnSearch.PerformClick()
     End Sub
 
     Private Delegate Sub LoadClient_delegate()
@@ -115,11 +114,11 @@ Public Class frmClient
     End Sub
 
     Private Sub lvClient_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvClient.DoubleClick
-        btnView.PerformClick()
-    End Sub
-
-    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
-
+        If Not fromOtherForm Then
+            btnView.PerformClick()
+        Else
+            btnSelect.PerformClick()
+        End If
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
@@ -164,7 +163,8 @@ Public Class frmClient
         Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
         GetClient = New Client
         GetClient.LoadClient(idx)
-        origForm.Show()
+
+        formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
 
         Me.Close()
     End Sub

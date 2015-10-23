@@ -3,7 +3,7 @@
     Dim SelectedClient As Client
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
-        frmClient.SearchSelect(txtSender.Text, Me)
+        frmClient.SearchSelect(txtSender.Text, FormName.frmMT)
         frmClient.Show()
     End Sub
 

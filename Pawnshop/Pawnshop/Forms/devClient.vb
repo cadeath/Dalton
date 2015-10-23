@@ -1,7 +1,7 @@
 ﻿Public Class devClient
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
-        frmClient.SearchSelect(txtSearch.Text, Me)
+        frmClient.SearchSelect(txtSearch.Text, FormName.devForm)
         frmClient.Show()
     End Sub
 
@@ -11,14 +11,8 @@
         End If
     End Sub
 
-    Friend Sub GetClient(ByVal cl As Client)
+    Friend Sub LoadClientInfo(ByVal cl As Client)
         txtID.Text = cl.ID
-        txtName.Text = cl.FirstName
-    End Sub
-
-    Private Sub devClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If Not frmClient.GetClient Is Nothing Then
-            GetClient(frmClient.GetClient)
-        End If
+        txtName.Text = cl.FirstName & " " & cl.LastName
     End Sub
 End Class

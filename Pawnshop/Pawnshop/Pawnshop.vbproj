@@ -232,6 +232,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\database.vb" />
+    <Compile Include="Modules\formSwitch.vb" />
     <Compile Include="Modules\mod_system.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
