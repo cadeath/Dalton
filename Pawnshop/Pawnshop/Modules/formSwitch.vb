@@ -9,6 +9,8 @@
         Select Case gotoForm
             Case FormName.devForm
                 devClient.LoadClientInfo(cl)
+            Case FormName.frmMT
+                frmMoneyTransfer.LoadClient_Sender(cl)
         End Select
     End Sub
 

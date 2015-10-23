@@ -17,7 +17,8 @@
         End If
     End Sub
 
-    Private Sub txtSender_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSender.TextChanged
-
+    Friend Sub LoadClient_Sender(ByVal cl As Client)
+        txtSender.Text = String.Format("{0} {1} {2}", cl.FirstName, cl.LastName, cl.Suffix)
+        txtSenderAddr.Text = String.Format("{0} {1} {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
     End Sub
 End Class

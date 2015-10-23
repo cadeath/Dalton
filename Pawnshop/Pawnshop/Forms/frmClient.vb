@@ -1,15 +1,5 @@
 ﻿Imports System.Threading
-
-' Developer note
-' to Use this form as auto search form
-' use the Variable SearchStr to hold
-' your search variable and use .show
-' to display the form with result.
-' eg:
-'  call SelectSearch sub to autoSearch
-'  args: src - Search String
-'  frmClient.SelectSearch("frye")
-'  frmClient.show()
+' USE README-DEVELOPER TO USE THIS PROPERLY.
 ' Version
 ' 1.1.1
 ' - Enhance Auto Search Form
@@ -60,6 +50,7 @@ Public Class frmClient
         fromOtherForm = True
         btnSelect.Visible = True
         txtSearch.Text = src
+        frmOrig = frmOrigin
     End Sub
 
     Private Delegate Sub LoadClient_delegate()
