@@ -23,6 +23,7 @@ Partial Class frmNewloan
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpPawner = New System.Windows.Forms.GroupBox()
+        Me.lblAge = New System.Windows.Forms.Label()
         Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtBDay = New System.Windows.Forms.TextBox()
@@ -93,7 +94,6 @@ Partial Class frmNewloan
         Me.Label29 = New System.Windows.Forms.Label()
         Me.lblTranstype = New System.Windows.Forms.Label()
         Me.btnLess = New System.Windows.Forms.Button()
-        Me.lblAge = New System.Windows.Forms.Label()
         Me.grpPawner.SuspendLayout()
         Me.grpItem.SuspendLayout()
         Me.grpTicket.SuspendLayout()
@@ -120,6 +120,15 @@ Partial Class frmNewloan
         Me.grpPawner.TabStop = False
         Me.grpPawner.Text = "Pawner's Information"
         '
+        'lblAge
+        '
+        Me.lblAge.AutoSize = True
+        Me.lblAge.Location = New System.Drawing.Point(398, 114)
+        Me.lblAge.Name = "lblAge"
+        Me.lblAge.Size = New System.Drawing.Size(16, 13)
+        Me.lblAge.TabIndex = 20
+        Me.lblAge.Text = " - "
+        '
         'txtPhone
         '
         Me.txtPhone.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -127,7 +136,7 @@ Partial Class frmNewloan
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.ReadOnly = True
         Me.txtPhone.Size = New System.Drawing.Size(250, 22)
-        Me.txtPhone.TabIndex = 18
+        Me.txtPhone.TabIndex = 4
         '
         'Label16
         '
@@ -146,7 +155,7 @@ Partial Class frmNewloan
         Me.txtBDay.Name = "txtBDay"
         Me.txtBDay.ReadOnly = True
         Me.txtBDay.Size = New System.Drawing.Size(250, 22)
-        Me.txtBDay.TabIndex = 16
+        Me.txtBDay.TabIndex = 3
         '
         'Label15
         '
@@ -166,7 +175,7 @@ Partial Class frmNewloan
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.Size = New System.Drawing.Size(250, 66)
-        Me.txtAddress.TabIndex = 3
+        Me.txtAddress.TabIndex = 2
         Me.txtAddress.Text = "Eskie Cirrus James Maquilang"
         '
         'Label3
@@ -185,7 +194,7 @@ Partial Class frmNewloan
         Me.btnSearch.Location = New System.Drawing.Point(398, 13)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.btnSearch.TabIndex = 2
+        Me.btnSearch.TabIndex = 1
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
@@ -238,7 +247,7 @@ Partial Class frmNewloan
         Me.cboKarat.Location = New System.Drawing.Point(142, 149)
         Me.cboKarat.Name = "cboKarat"
         Me.cboKarat.Size = New System.Drawing.Size(124, 21)
-        Me.cboKarat.TabIndex = 26
+        Me.cboKarat.TabIndex = 9
         '
         'Label7
         '
@@ -257,7 +266,7 @@ Partial Class frmNewloan
         Me.txtGrams.Name = "txtGrams"
         Me.txtGrams.ReadOnly = True
         Me.txtGrams.Size = New System.Drawing.Size(124, 22)
-        Me.txtGrams.TabIndex = 22
+        Me.txtGrams.TabIndex = 8
         Me.txtGrams.TabStop = False
         '
         'Label4
@@ -279,7 +288,7 @@ Partial Class frmNewloan
         Me.cboCategory.Location = New System.Drawing.Point(142, 96)
         Me.cboCategory.Name = "cboCategory"
         Me.cboCategory.Size = New System.Drawing.Size(124, 21)
-        Me.cboCategory.TabIndex = 21
+        Me.cboCategory.TabIndex = 7
         '
         'Label6
         '
@@ -301,7 +310,7 @@ Partial Class frmNewloan
         Me.cboItemtype.Location = New System.Drawing.Point(142, 21)
         Me.cboItemtype.Name = "cboItemtype"
         Me.cboItemtype.Size = New System.Drawing.Size(124, 21)
-        Me.cboItemtype.TabIndex = 18
+        Me.cboItemtype.TabIndex = 5
         '
         'Label5
         '
@@ -321,7 +330,7 @@ Partial Class frmNewloan
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ReadOnly = True
         Me.txtDesc.Size = New System.Drawing.Size(331, 48)
-        Me.txtDesc.TabIndex = 3
+        Me.txtDesc.TabIndex = 6
         Me.txtDesc.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
         '
         'Label1
@@ -368,7 +377,7 @@ Partial Class frmNewloan
         Me.txtNticket.Name = "txtNticket"
         Me.txtNticket.ReadOnly = True
         Me.txtNticket.Size = New System.Drawing.Size(113, 22)
-        Me.txtNticket.TabIndex = 47
+        Me.txtNticket.TabIndex = 11
         '
         'lblNticket
         '
@@ -387,7 +396,7 @@ Partial Class frmNewloan
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(113, 22)
-        Me.txtTotal.TabIndex = 41
+        Me.txtTotal.TabIndex = 18
         '
         'lblNet
         '
@@ -406,7 +415,7 @@ Partial Class frmNewloan
         Me.txtPrincipal.Name = "txtPrincipal"
         Me.txtPrincipal.ReadOnly = True
         Me.txtPrincipal.Size = New System.Drawing.Size(113, 22)
-        Me.txtPrincipal.TabIndex = 35
+        Me.txtPrincipal.TabIndex = 17
         '
         'Label14
         '
@@ -425,7 +434,7 @@ Partial Class frmNewloan
         Me.txtAppraisal.Name = "txtAppraisal"
         Me.txtAppraisal.ReadOnly = True
         Me.txtAppraisal.Size = New System.Drawing.Size(113, 22)
-        Me.txtAppraisal.TabIndex = 33
+        Me.txtAppraisal.TabIndex = 16
         '
         'Label13
         '
@@ -444,7 +453,7 @@ Partial Class frmNewloan
         Me.Auction.Location = New System.Drawing.Point(133, 134)
         Me.Auction.Name = "Auction"
         Me.Auction.Size = New System.Drawing.Size(113, 20)
-        Me.Auction.TabIndex = 32
+        Me.Auction.TabIndex = 15
         '
         'Label10
         '
@@ -463,7 +472,7 @@ Partial Class frmNewloan
         Me.Expiry.Location = New System.Drawing.Point(133, 112)
         Me.Expiry.Name = "Expiry"
         Me.Expiry.Size = New System.Drawing.Size(113, 20)
-        Me.Expiry.TabIndex = 30
+        Me.Expiry.TabIndex = 14
         '
         'Label9
         '
@@ -482,7 +491,7 @@ Partial Class frmNewloan
         Me.Maturity.Location = New System.Drawing.Point(133, 89)
         Me.Maturity.Name = "Maturity"
         Me.Maturity.Size = New System.Drawing.Size(113, 20)
-        Me.Maturity.TabIndex = 28
+        Me.Maturity.TabIndex = 13
         '
         'Label8
         '
@@ -501,7 +510,7 @@ Partial Class frmNewloan
         Me.LoanDate.Location = New System.Drawing.Point(133, 67)
         Me.LoanDate.Name = "LoanDate"
         Me.LoanDate.Size = New System.Drawing.Size(113, 20)
-        Me.LoanDate.TabIndex = 26
+        Me.LoanDate.TabIndex = 12
         Me.LoanDate.Value = New Date(2015, 10, 15, 0, 0, 0, 0)
         '
         'Label11
@@ -521,7 +530,7 @@ Partial Class frmNewloan
         Me.txtTicket.Name = "txtTicket"
         Me.txtTicket.ReadOnly = True
         Me.txtTicket.Size = New System.Drawing.Size(113, 22)
-        Me.txtTicket.TabIndex = 3
+        Me.txtTicket.TabIndex = 10
         '
         'Label12
         '
@@ -571,7 +580,7 @@ Partial Class frmNewloan
         Me.btnSave.Location = New System.Drawing.Point(92, 432)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(74, 35)
-        Me.btnSave.TabIndex = 8
+        Me.btnSave.TabIndex = 30
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -580,7 +589,7 @@ Partial Class frmNewloan
         Me.btnClose.Location = New System.Drawing.Point(172, 432)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(74, 35)
-        Me.btnClose.TabIndex = 9
+        Me.btnClose.TabIndex = 31
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -590,7 +599,7 @@ Partial Class frmNewloan
         Me.btnVoid.Location = New System.Drawing.Point(12, 432)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(74, 35)
-        Me.btnVoid.TabIndex = 10
+        Me.btnVoid.TabIndex = 33
         Me.btnVoid.Text = "&Void"
         Me.btnVoid.UseVisualStyleBackColor = True
         '
@@ -632,7 +641,7 @@ Partial Class frmNewloan
         Me.txtLess.Name = "txtLess"
         Me.txtLess.ReadOnly = True
         Me.txtLess.Size = New System.Drawing.Size(113, 22)
-        Me.txtLess.TabIndex = 53
+        Me.txtLess.TabIndex = 22
         Me.txtLess.Visible = False
         '
         'lblLess
@@ -653,7 +662,7 @@ Partial Class frmNewloan
         Me.txtPenalty.Name = "txtPenalty"
         Me.txtPenalty.ReadOnly = True
         Me.txtPenalty.Size = New System.Drawing.Size(113, 22)
-        Me.txtPenalty.TabIndex = 51
+        Me.txtPenalty.TabIndex = 25
         '
         'Label18
         '
@@ -672,7 +681,7 @@ Partial Class frmNewloan
         Me.txtRedeemDue.Name = "txtRedeemDue"
         Me.txtRedeemDue.ReadOnly = True
         Me.txtRedeemDue.Size = New System.Drawing.Size(113, 22)
-        Me.txtRedeemDue.TabIndex = 49
+        Me.txtRedeemDue.TabIndex = 29
         Me.txtRedeemDue.Visible = False
         '
         'lblRedeemDue
@@ -693,7 +702,7 @@ Partial Class frmNewloan
         Me.txtAppr.Name = "txtAppr"
         Me.txtAppr.ReadOnly = True
         Me.txtAppr.Size = New System.Drawing.Size(113, 22)
-        Me.txtAppr.TabIndex = 47
+        Me.txtAppr.TabIndex = 21
         '
         'Label21
         '
@@ -712,7 +721,7 @@ Partial Class frmNewloan
         Me.dtpDate.Location = New System.Drawing.Point(132, 42)
         Me.dtpDate.Name = "dtpDate"
         Me.dtpDate.Size = New System.Drawing.Size(113, 20)
-        Me.dtpDate.TabIndex = 46
+        Me.dtpDate.TabIndex = 20
         '
         'txtRefNo
         '
@@ -721,7 +730,7 @@ Partial Class frmNewloan
         Me.txtRefNo.Name = "txtRefNo"
         Me.txtRefNo.ReadOnly = True
         Me.txtRefNo.Size = New System.Drawing.Size(113, 22)
-        Me.txtRefNo.TabIndex = 43
+        Me.txtRefNo.TabIndex = 19
         '
         'txtRenewDue
         '
@@ -730,7 +739,7 @@ Partial Class frmNewloan
         Me.txtRenewDue.Name = "txtRenewDue"
         Me.txtRenewDue.ReadOnly = True
         Me.txtRenewDue.Size = New System.Drawing.Size(113, 22)
-        Me.txtRenewDue.TabIndex = 41
+        Me.txtRenewDue.TabIndex = 28
         Me.txtRenewDue.Visible = False
         '
         'lblRenewDue
@@ -751,7 +760,7 @@ Partial Class frmNewloan
         Me.txtEvat.Name = "txtEvat"
         Me.txtEvat.ReadOnly = True
         Me.txtEvat.Size = New System.Drawing.Size(113, 22)
-        Me.txtEvat.TabIndex = 39
+        Me.txtEvat.TabIndex = 27
         '
         'Label23
         '
@@ -770,7 +779,7 @@ Partial Class frmNewloan
         Me.txtSrvChrg.Name = "txtSrvChrg"
         Me.txtSrvChrg.ReadOnly = True
         Me.txtSrvChrg.Size = New System.Drawing.Size(113, 22)
-        Me.txtSrvChrg.TabIndex = 37
+        Me.txtSrvChrg.TabIndex = 26
         '
         'Label24
         '
@@ -789,7 +798,7 @@ Partial Class frmNewloan
         Me.txtDelayInt.Name = "txtDelayInt"
         Me.txtDelayInt.ReadOnly = True
         Me.txtDelayInt.Size = New System.Drawing.Size(113, 22)
-        Me.txtDelayInt.TabIndex = 35
+        Me.txtDelayInt.TabIndex = 24
         '
         'Label25
         '
@@ -808,7 +817,7 @@ Partial Class frmNewloan
         Me.txtOverDue.Name = "txtOverDue"
         Me.txtOverDue.ReadOnly = True
         Me.txtOverDue.Size = New System.Drawing.Size(113, 22)
-        Me.txtOverDue.TabIndex = 33
+        Me.txtOverDue.TabIndex = 23
         '
         'Label26
         '
@@ -856,19 +865,10 @@ Partial Class frmNewloan
         Me.btnLess.Location = New System.Drawing.Point(508, 429)
         Me.btnLess.Name = "btnLess"
         Me.btnLess.Size = New System.Drawing.Size(102, 35)
-        Me.btnLess.TabIndex = 15
+        Me.btnLess.TabIndex = 32
         Me.btnLess.Text = "&Less Principal"
         Me.btnLess.UseVisualStyleBackColor = True
         Me.btnLess.Visible = False
-        '
-        'lblAge
-        '
-        Me.lblAge.AutoSize = True
-        Me.lblAge.Location = New System.Drawing.Point(398, 114)
-        Me.lblAge.Name = "lblAge"
-        Me.lblAge.Size = New System.Drawing.Size(16, 13)
-        Me.lblAge.TabIndex = 20
-        Me.lblAge.Text = " - "
         '
         'frmNewloan
         '

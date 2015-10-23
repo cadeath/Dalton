@@ -241,7 +241,7 @@ Public Class frmClientInformation
                 MsgBox("Entry Updated", MsgBoxStyle.Information)
             End If
         End With
-        frmClient.LoadClients()
+        frmClient.btnSearch.PerformClick()
         Me.Close()
     End Sub
 
