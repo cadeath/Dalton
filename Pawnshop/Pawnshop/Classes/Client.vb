@@ -1,4 +1,7 @@
-﻿' Changelog
+﻿Imports System.Data.Odbc
+' Changelog
+' v1.1.1 10/22/2015
+'  - Change ZIP data type from Integer to String
 ' v1.1 10/21/2015
 '  - LoadClient added
 
@@ -113,8 +116,8 @@ Public Class Client
         End Get
     End Property
 
-    Public Property ZipCode As Integer
-        Set(ByVal value As Integer)
+    Public Property ZipCode As String
+        Set(ByVal value As String)
             _addrZip = value
         End Set
         Get
@@ -181,6 +184,68 @@ Public Class Client
         database.SaveEntry(CreateDataSet)
     End Sub
 
+    Public Sub ModifyClient()
+        Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & _id
+        Dim ds As DataSet = LoadSQL(mySql, "TBLCLIENT")
+
+        With ds.Tables(0).Rows(0)
+            .Item("FirstName") = _firstName
+            .Item("MiddleName") = _middleName
+            .Item("LastName") = _lastName
+            .Item("Suffix") = _suffixName
+            .Item("Addr_Street") = _addrSt
+            .Item("Addr_Brgy") = _addrBrgy
+            .Item("Addr_City") = _addrCity
+            .Item("Addr_Province") = _addrProvince
+            .Item("Addr_Zip") = _addrZip
+            .Item("Sex") = _gender
+            .Item("Birthday") = _bday
+            .Item("Phone1") = _cp1
+            .Item("Phone2") = _cp2
+            .Item("Phone3") = _phone
+            .Item("Phone_Others") = _otherNum
+        End With
+
+        database.SaveEntry(ds, False)
+        'PureModify()
+    End Sub
+
+    Private Sub PureModify()
+        dbOpen()
+
+        Dim da As OdbcDataAdapter
+        Dim ds As New DataSet, mySql As String, fillData As String = "Modify"
+
+        mySql = "SELECT * FROM tblClient WHERE clientID = " & _id
+        ds.Clear()
+
+        da = New OdbcDataAdapter(mySql, con)
+        da.Fill(ds, fillData)
+
+        Console.WriteLine("Result: " & ds.Tables(fillData).Rows.Count)
+
+        With ds.Tables(fillData).Rows(0)
+            .Item("FirstName") = _firstName
+            .Item("MiddleName") = _middleName
+            .Item("LastName") = _lastName
+            .Item("Suffix") = _suffixName
+            .Item("Addr_Street") = _addrSt
+            .Item("Addr_Brgy") = _addrBrgy
+            .Item("Addr_City") = _addrCity
+            .Item("Addr_Province") = _addrProvince
+            .Item("Addr_Zip") = _addrZip
+            .Item("Sex") = _gender
+            .Item("Birthday") = _bday
+            .Item("Phone1") = _cp1
+            .Item("Phone2") = _cp2
+            .Item("Phone3") = _phone
+            .Item("Phone_Others") = _otherNum
+        End With
+        da.Update(ds, fillData)
+
+        dbClose()
+    End Sub
+
     Private Function CreateDataSet() As DataSet
         'Creating Virtual Database
         Dim ds As New DataSet, dt As New DataTable(fillData)
@@ -197,7 +262,7 @@ Public Class Client
             .Add(New DataColumn("Addr_Brgy", GetType(String)))
             .Add(New DataColumn("Addr_City", GetType(String)))
             .Add(New DataColumn("Addr_Province", GetType(String)))
-            .Add(New DataColumn("Addr_Zip", GetType(Integer)))
+            .Add(New DataColumn("Addr_Zip", GetType(String)))
             .Add(New DataColumn("Sex", GetType(String)))
             .Add(New DataColumn("Birthday", GetType(Date)))
             .Add(New DataColumn("Phone1", GetType(String)))

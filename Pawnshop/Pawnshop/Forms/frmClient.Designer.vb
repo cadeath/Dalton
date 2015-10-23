@@ -33,7 +33,6 @@ Partial Class frmClient
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
@@ -91,12 +90,19 @@ Partial Class frmClient
         Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
-        Me.lvClient.Location = New System.Drawing.Point(12, 86)
+        Me.lvClient.LargeImageList = Me.imgClient
+        Me.lvClient.Location = New System.Drawing.Point(13, 86)
+        Me.lvClient.MultiSelect = False
         Me.lvClient.Name = "lvClient"
         Me.lvClient.Size = New System.Drawing.Size(644, 245)
         Me.lvClient.TabIndex = 1
         Me.lvClient.UseCompatibleStateImageBehavior = False
         Me.lvClient.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "ID"
+        Me.ColumnHeader4.Width = 52
         '
         'ColumnHeader1
         '
@@ -143,16 +149,6 @@ Partial Class frmClient
         Me.btnAdd.Text = "&Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
-        'btnUpdate
-        '
-        Me.btnUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdate.Location = New System.Drawing.Point(89, 337)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdate.TabIndex = 5
-        Me.btnUpdate.Text = "&Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
         'btnSelect
         '
         Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -162,6 +158,7 @@ Partial Class frmClient
         Me.btnSelect.TabIndex = 6
         Me.btnSelect.Text = "&Select"
         Me.btnSelect.UseVisualStyleBackColor = True
+        Me.btnSelect.Visible = False
         '
         'TextBox1
         '
@@ -180,7 +177,6 @@ Partial Class frmClient
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(667, 367)
         Me.Controls.Add(Me.btnSelect)
-        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
@@ -204,7 +200,6 @@ Partial Class frmClient
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents btnAdd As System.Windows.Forms.Button
-    Friend WithEvents btnUpdate As System.Windows.Forms.Button
     Friend WithEvents btnSelect As System.Windows.Forms.Button
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class

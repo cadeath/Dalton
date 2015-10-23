@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Forms\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
@@ -249,6 +250,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\database.vb" />
+    <Compile Include="Modules\formSwitch.vb" />
     <Compile Include="Modules\mod_system.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -395,6 +397,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README-DEVELOPER.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

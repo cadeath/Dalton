@@ -1,17 +1,33 @@
 ﻿Imports System.Threading
+' USE README-DEVELOPER TO USE THIS PROPERLY.
+' Version
+' 1.1.1
+' - Enhance Auto Search Form
+' 1.1
+' - Auto Search Form
 
 Public Class frmClient
 
-    Friend SearchStr As String = ""
+    Dim fromOtherForm As Boolean = False
+    Friend GetClient As Client
+    Dim frmOrig As formSwitch.FormName
 
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim th As Thread
-        th = New Thread(AddressOf LoadClients)
-        th.Start()
+        If Not fromOtherForm Then ClearField()
 
-        ClearField()
-        txtSearch.Focus()
-        txtSearch.Text = IIf(SearchStr <> "", SearchStr, "")
+        If txtSearch.Text = "" Then
+            Dim th As Thread
+            th = New Thread(AddressOf LoadClients)
+            th.Start()
+        End If
+
+        If Not fromOtherForm Then
+            txtSearch.Focus()
+        End If
+        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 
     Private Sub AddItem(ByVal cl As Client)
@@ -30,8 +46,15 @@ Public Class frmClient
         lvClient.Items.Clear()
     End Sub
 
+    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+        fromOtherForm = True
+        btnSelect.Visible = True
+        txtSearch.Text = src
+        frmOrig = frmOrigin
+    End Sub
+
     Private Delegate Sub LoadClient_delegate()
-    Private Sub LoadClients()
+    Friend Sub LoadClients()
         If lvClient.InvokeRequired Then
             lvClient.Invoke(New LoadClient_delegate(AddressOf LoadClients))
         Else
@@ -56,17 +79,13 @@ Public Class frmClient
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-    ''' <summary>
-    ''' Identify if the KeyPress is enter
-    ''' </summary>
-    ''' <param name="e">KeyPressEventArgs</param>
-    ''' <returns>Boolean</returns>
-    Private Function isEnter(ByVal e As KeyPressEventArgs) As Boolean
-        If Asc(e.KeyChar) = 13 Then
-            Return True
-        End If
-        Return False
-    End Function
+
+    Private Sub txtSearch_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSearch.DoubleClick
+        lvClient.Focus()
+        lvClient.Items(0).Selected = True
+        Console.WriteLine("Selected")
+    End Sub
+
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
@@ -78,16 +97,19 @@ Public Class frmClient
         clientID = lvClient.FocusedItem.Text
         Console.WriteLine("ClientID : " & clientID)
 
+        Dim tmpCl As New Client
+        tmpCl.LoadClient(clientID)
+
         frmClientInformation.Show()
-        'frmClientInformation.LoadClient(clientID)
+        frmClientInformation.LoadClientInForm(tmpCl)
     End Sub
 
     Private Sub lvClient_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvClient.DoubleClick
-        btnView.PerformClick()
-    End Sub
-
-    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
-
+        If Not fromOtherForm Then
+            btnView.PerformClick()
+        Else
+            btnSelect.PerformClick()
+        End If
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
@@ -97,25 +119,24 @@ Public Class frmClient
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
 
-        txtSearch.SelectAll()
-
         Dim src As String = txtSearch.Text
         Dim mySql As String = "SELECT * FROM tblClient " & vbCrLf
         mySql &= " WHERE "
-        mySql &= String.Format("FirstName LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("MiddleName LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("LastName LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Addr_Brgy LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Addr_City LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Phone1 LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Phone2 LIKE '%{0}%' OR " & vbCrLf, src)
-        mySql &= String.Format("Phone_Others LIKE '%{0}%' " & vbCrLf, src)
+        mySql &= String.Format("UPPER(FirstName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(MiddleName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(LastName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Addr_Brgy) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Addr_City) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Phone1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Phone2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(Phone_Others) LIKE UPPER('%{0}%') " & vbCrLf, src)
         mySql &= "ORDER BY LastName ASC, FirstName ASC"
 
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         If MaxRow <= 0 Then
+            MsgBox("No result found", MsgBoxStyle.Critical)
             Exit Sub
         End If
 
@@ -127,6 +148,16 @@ Public Class frmClient
         Next
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
+    End Sub
+
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+        Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
+        GetClient = New Client
+        GetClient.LoadClient(idx)
+
+        formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
+
+        Me.Close()
     End Sub
 
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
