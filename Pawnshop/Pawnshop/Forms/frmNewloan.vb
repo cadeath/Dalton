@@ -1,16 +1,5 @@
 ﻿Public Class frmNewloan
 
-    Private Sub ComboBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboKarat.SelectedIndexChanged
-
-    End Sub
-    Private Sub Expiry_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Expiry.ValueChanged
-
-    End Sub
-
-    Private Sub Category_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
-
-    End Sub
-
     Private Sub ItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboItemtype.SelectedIndexChanged
         cboCategory.Items.Clear()
         cboCategory.Text = ""
@@ -160,6 +149,14 @@
     End Sub
 
     Private Sub txtPawner_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPawner.TextChanged
+
+    End Sub
+
+    Private Sub frmNewloan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub FormInit()
 
     End Sub
 End Class
