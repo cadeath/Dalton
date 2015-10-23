@@ -22,19 +22,22 @@ Partial Class frmClient
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmClient))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lvClient = New System.Windows.Forms.ListView()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.imgClient = New System.Windows.Forms.ImageList(Me.components)
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnSelect = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,7 +50,7 @@ Partial Class frmClient
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(645, 68)
+        Me.GroupBox1.Size = New System.Drawing.Size(740, 68)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
@@ -55,7 +58,7 @@ Partial Class frmClient
         'btnSearch
         '
         Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.Location = New System.Drawing.Point(560, 31)
+        Me.btnSearch.Location = New System.Drawing.Point(655, 31)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(74, 23)
         Me.btnSearch.TabIndex = 2
@@ -69,7 +72,7 @@ Partial Class frmClient
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(9, 32)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(544, 22)
+        Me.txtSearch.Size = New System.Drawing.Size(639, 22)
         Me.txtSearch.TabIndex = 1
         Me.txtSearch.Text = "Kiko Mizuhara"
         '
@@ -87,14 +90,15 @@ Partial Class frmClient
         Me.lvClient.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
+        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
         Me.lvClient.LargeImageList = Me.imgClient
         Me.lvClient.Location = New System.Drawing.Point(13, 86)
         Me.lvClient.MultiSelect = False
         Me.lvClient.Name = "lvClient"
-        Me.lvClient.Size = New System.Drawing.Size(644, 245)
+        Me.lvClient.Size = New System.Drawing.Size(739, 245)
+        Me.lvClient.SmallImageList = Me.imgClient
         Me.lvClient.TabIndex = 1
         Me.lvClient.UseCompatibleStateImageBehavior = False
         Me.lvClient.View = System.Windows.Forms.View.Details
@@ -119,10 +123,18 @@ Partial Class frmClient
         Me.ColumnHeader3.Text = "Number"
         Me.ColumnHeader3.Width = 110
         '
+        'imgClient
+        '
+        Me.imgClient.ImageStream = CType(resources.GetObject("imgClient.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.imgClient.TransparentColor = System.Drawing.Color.Transparent
+        Me.imgClient.Images.SetKeyName(0, "imgMale")
+        Me.imgClient.Images.SetKeyName(1, "imgFemale")
+        '
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnClose.Location = New System.Drawing.Point(581, 337)
+        Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnClose.Location = New System.Drawing.Point(676, 337)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 2
@@ -132,7 +144,7 @@ Partial Class frmClient
         'btnView
         '
         Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnView.Location = New System.Drawing.Point(500, 337)
+        Me.btnView.Location = New System.Drawing.Point(595, 337)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 3
@@ -152,7 +164,7 @@ Partial Class frmClient
         'btnSelect
         '
         Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelect.Location = New System.Drawing.Point(419, 337)
+        Me.btnSelect.Location = New System.Drawing.Point(514, 337)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(75, 23)
         Me.btnSelect.TabIndex = 6
@@ -160,22 +172,12 @@ Partial Class frmClient
         Me.btnSelect.UseVisualStyleBackColor = True
         Me.btnSelect.Visible = False
         '
-        'TextBox1
-        '
-        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(9, 32)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(544, 22)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "Kiko Mizuhara"
-        '
         'frmClient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(667, 367)
+        Me.CancelButton = Me.btnClose
+        Me.ClientSize = New System.Drawing.Size(762, 367)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnView)
@@ -201,5 +203,6 @@ Partial Class frmClient
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnSelect As System.Windows.Forms.Button
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents imgClient As System.Windows.Forms.ImageList
 End Class
