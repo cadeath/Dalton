@@ -75,10 +75,13 @@
     <ManifestKeyFile>Pawnshop_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -106,10 +109,29 @@
   <ItemGroup>
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Classes\IdentificationCard.vb" />
+    <Compile Include="Forms\devClient.Designer.vb">
+      <DependentUpon>devClient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\devClient.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBorrowBrowse.Designer.vb">
+      <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBorrowBrowse.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmBorrowing.Designer.vb">
       <DependentUpon>frmBorrowing.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmBorrowing.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCashCount.Designer.vb">
+      <DependentUpon>frmCashCount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCashCount.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmCashInOut.Designer.vb">
@@ -210,6 +232,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\database.vb" />
+    <Compile Include="Modules\formSwitch.vb" />
     <Compile Include="Modules\mod_system.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -226,10 +249,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="POS\frmItemLookUp.Designer.vb">
+      <DependentUpon>frmItemLookUp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="POS\frmItemLookUp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\frmPOS.Designer.vb">
+      <DependentUpon>frmPOS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="POS\frmPOS.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\devClient.resx">
+      <DependentUpon>devClient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBorrowBrowse.resx">
+      <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBorrowing.resx">
       <DependentUpon>frmBorrowing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCashCount.resx">
+      <DependentUpon>frmCashCount.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashInOut.resx">
       <DependentUpon>frmCashInOut.vb</DependentUpon>
@@ -285,8 +329,15 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="POS\frmItemLookUp.resx">
+      <DependentUpon>frmItemLookUp.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\frmPOS.resx">
+      <DependentUpon>frmPOS.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -319,6 +370,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README-DEVELOPER.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

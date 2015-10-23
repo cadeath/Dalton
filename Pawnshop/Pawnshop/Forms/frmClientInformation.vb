@@ -6,7 +6,8 @@ Public Class frmClientInformation
 
     Private lockForm As Boolean = False
     Friend FormOrigin As Form
-    Friend GetClient As Client 'Holds the selected client
+    Friend SelectedClient As Client 'Holds Client
+    Private isNew As Boolean = True
 
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -16,42 +17,41 @@ Public Class frmClientInformation
             Console.WriteLine("Database connected")
         End If
 
-        'Populate()
+        Populate()
+    End Sub
+
+    Friend Sub LoadClientInForm(ByVal cl As Client)
+        ' Display select buttons
+        btnIDSelect.Visible = True
+        btnSelect.Visible = True
+
+        txtFirstName.Text = cl.FirstName
+        txtMiddleName.Text = cl.MiddleName
+        txtLastName.Text = cl.LastName
+        txtSuffix.Text = cl.Suffix
+
+        txtStreet.Text = cl.AddressSt
+        txtBrgy.Text = cl.AddressBrgy
+        txtCity.Text = cl.AddressCity
+        txtProvince.Text = cl.AddressProvince
+        txtZip.Text = cl.ZipCode
+
+        cboGender.Text = IIf(cl.Sex = Client.Gender.Male, "Male", "Female")
+        dtpBday.Value = cl.Birthday
+
+        txtCP1.Text = cl.Cellphone1
+        txtCP2.Text = cl.Cellphone2
+        txtTele.Text = cl.Telephone
+        txtOthers.Text = cl.OtherNumber
+
+        SelectedClient = cl
+
+        ComputeBirthday()
+        LockFields(True)
     End Sub
 
     Private Sub ReturnToOriginForm()
         FormOrigin.Show()
-    End Sub
-
-    Friend Sub LoadClient(ByVal id As Integer)
-        Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & id
-        Dim ds As DataSet = LoadSQL(mySql)
-
-        With ds.Tables(0).Rows(0)
-            txtFirstName.Text = .Item("FirstName")
-            txtMiddleName.Text = .Item("MiddleName")
-            txtLastName.Text = .Item("LastName")
-            txtSuffix.Text = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
-
-            txtStreet.Text = .Item("Addr_Street")
-            txtBrgy.Text = .Item("Addr_Brgy")
-            txtCity.Text = .Item("Addr_City")
-            txtProvince.Text = .Item("Addr_Province")
-            txtZip.Text = .Item("Addr_Zip")
-
-            cboGender.Text = IIf(.Item("Sex") = "M", "Male", "Female")
-            dtpBday.Value = .Item("Birthday")
-
-            txtCP1.Text = .Item("Phone1").ToString
-            txtCP2.Text = .Item("Phone2").ToString
-            txtTele.Text = .Item("Phone3").ToString
-            txtOthers.Text = .Item("Phone_Others").ToString
-
-            'ID Database
-        End With
-
-        ComputeBirthday()
-        LockFields(True)
     End Sub
 
     Private Sub ComputeBirthday()
@@ -62,7 +62,9 @@ Public Class frmClientInformation
     Private Sub LockFields(ByVal st As Boolean)
         lockForm = st
 
+        Console.WriteLine(txtFirstName.BackColor)
         txtFirstName.ReadOnly = st
+        'txtFirstName.BackColor = SystemColors.Window
         txtMiddleName.ReadOnly = st
         txtLastName.ReadOnly = st
         txtSuffix.ReadOnly = st
@@ -81,17 +83,24 @@ Public Class frmClientInformation
         txtTele.ReadOnly = st
         txtOthers.ReadOnly = st
 
+        cboIDtype.Enabled = Not st
         txtRef.ReadOnly = st
         txtRemarks.ReadOnly = st
+
+        If st Then
+            btnSave.Text = "&Modify"
+        Else
+            btnSave.Text = "&Save"
+        End If
     End Sub
 
     ' Remove in Final
     ' This is to populate the form only
     ' For development purposes
     Private Sub Populate()
-        txtFirstName.Text = "Eskie Cirrus James"
-        txtMiddleName.Text = "Dingal"
-        txtLastName.Text = "Maquilang"
+        txtFirstName.Text = "Jacob"
+        txtMiddleName.Text = "X"
+        txtLastName.Text = "Fyre"
 
         txtStreet.Text = "153 Acacia St. Balite"
         txtBrgy.Text = "Lagao"
@@ -190,7 +199,20 @@ Public Class frmClientInformation
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If btnSave.Text = "&Modify" Then
+            isNew = False
+            LockFields(False)
+
+            Exit Sub
+        End If
+        If txtFirstName.Text = "" Or txtMiddleName.Text = "" Or txtLastName.Text = "" Then
+            MsgBox("Please fill up information", MsgBoxStyle.Critical, "Empty Fields")
+            Exit Sub
+        End If
+
         Dim tmpClient As New Client
+        If Not isNew Then tmpClient = SelectedClient
+
         With tmpClient
             .FirstName = txtFirstName.Text
             .MiddleName = txtMiddleName.Text
@@ -211,10 +233,16 @@ Public Class frmClientInformation
             .Telephone = txtTele.Text
             .OtherNumber = txtOthers.Text
 
-            .SaveClient()
+            If isNew Then
+                .SaveClient()
+                MsgBox("Entry Saved", MsgBoxStyle.Information)
+            Else
+                .ModifyClient()
+                MsgBox("Entry Updated", MsgBoxStyle.Information)
+            End If
         End With
-
-        MsgBox("Entry Saved", MsgBoxStyle.Information)
+        frmClient.LoadClients()
+        Me.Close()
     End Sub
 
     Private Sub dtpBday_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles dtpBday.KeyPress
@@ -232,4 +260,38 @@ Public Class frmClientInformation
             e.Handled = True
         End If
     End Sub
+
+    'ID Group===================
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        AddID()
+        ClearIDFields()
+        cboIDtype.Focus()
+    End Sub
+
+    Private Sub AddID()
+        If cboIDtype.Text = "" Or txtRef.Text = "" Or txtRemarks.Text = "" Then Exit Sub
+
+        Dim lv As ListViewItem = lvID.Items.Add(cboIDtype.Text)
+        lv.SubItems.Add(txtRef.Text)
+        lv.SubItems.Add(txtRemarks.Text)
+    End Sub
+
+    Private Sub txtRef_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRef.KeyPress
+        If isEnter(e) Then txtRemarks.Focus()
+    End Sub
+
+    Private Sub txtRemarks_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRemarks.KeyPress
+        If isEnter(e) Then btnAdd.PerformClick()
+    End Sub
+
+    Private Sub cboIDtype_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboIDtype.SelectedIndexChanged
+        'If Not cboIDtype.DroppedDown And cboIDtype.Text <> "" Then txtRef.Focus()
+    End Sub
+
+    Private Sub ClearIDFields()
+        cboIDtype.DroppedDown = True
+        txtRef.Text = ""
+        txtRemarks.Text = ""
+    End Sub
+    'END - ID Group===================
 End Class
