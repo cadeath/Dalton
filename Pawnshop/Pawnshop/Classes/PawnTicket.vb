@@ -8,11 +8,7 @@
     Private _matuDate As Date
     Private _expiryDate As Date
     Private _auctionDate As Date
-    Private _itemType As ItemClass
-    Public Enum ItemClass As Integer
-        Jewel = 0 : Appliances = 1
-        BigAppliances = 2 : Cellphone = 3
-    End Enum
+    Private _itemType As String
     Private _catID As Integer
     Private _description As String
     Private _karat As String
@@ -24,7 +20,6 @@
     Private _evat As Double
     Private _appraiserID As Integer
 
-    Private _transType As String
     Private _newTicket As Integer
     Private _orNum As Integer
     Private _orDate As Date
@@ -35,6 +30,7 @@
     Private _serviceCharge As Double
     Private _renewDue As Double
     Private _redeemDue As Double
+    Private _status As String
 
 #End Region
 
@@ -99,8 +95,8 @@
         End Get
     End Property
 
-    Public Property ItemType As ItemClass
-        Set(ByVal value As ItemClass)
+    Public Property ItemType As String
+        Set(ByVal value As String)
             _itemType = value
         End Set
         Get
@@ -198,12 +194,12 @@
         End Get
     End Property
 
-    Public Property TransactionType As String
+    Public Property Status As String
         Get
-            Return _transType
+            Return _status
         End Get
         Set(ByVal value As String)
-            _transType = value
+            _status = value
         End Set
     End Property
 
@@ -300,7 +296,7 @@
 
 #Region "Procedures and Functions"
     Public Sub SaveTicket()
-
+        database.SaveEntry(CreateDataSet)
     End Sub
 
     Private Function CreateDataSet() As DataSet
@@ -339,26 +335,40 @@
             .Add(New DataColumn("ServiceCharge", GetType(Double)))
             .Add(New DataColumn("RenewDue", GetType(Double)))
             .Add(New DataColumn("RedeemDue", GetType(Double)))
+            .Add(New DataColumn("Status", GetType(String)))
         End With
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
-            '.Item("FirstName") = _firstName
-            '.Item("MiddleName") = _middleName
-            '.Item("LastName") = _lastName
-            '.Item("Suffix") = _suffixName
-            '.Item("Addr_Street") = _addrSt
-            '.Item("Addr_Brgy") = _addrBrgy
-            '.Item("Addr_City") = _addrCity
-            '.Item("Addr_Province") = _addrProvince
-            '.Item("Addr_Zip") = _addrZip
-            '.Item("Sex") = _gender
-            '.Item("Birthday") = _bday
-            '.Item("Phone1") = _cp1
-            '.Item("Phone2") = _cp2
-            '.Item("Phone3") = _phone
-            '.Item("Phone_Others") = _otherNum
+            .Item("PawnTicket") = _pawnTicket
+            .Item("ClientID") = Pawner.ID
+            .Item("LoanDate") = _loanDate
+            .Item("MatuDate") = _matuDate
+            .Item("ExpiryDate") = _expiryDate
+            .Item("AuctionDate") = _auctionDate
+            .Item("ItemType") = _itemType
+            .Item("CatID") = _catID
+            .Item("Description") = _description
+            .Item("Karat") = _karat
+            .Item("Grams") = _grams
+            .Item("Appraisal") = _appraisal
+            .Item("Principal") = _principal
+            .Item("Interest") = _interest
+            .Item("NetAmount") = _netAmount
+            .Item("Evat") = _evat
+            .Item("AppraiserID") = _appraiserID
+            .Item("NewTicket") = _newTicket
+            .Item("ORNum") = _orNum
+            .Item("ORDate") = _orDate
+            .Item("LessPrincipal") = _lessPrincipal
+            .Item("DaysOverDue") = _daysOverDue
+            .Item("DelayInt") = _delayInt
+            .Item("Penalty") = _penalty
+            .Item("ServiceCharge") = _serviceCharge
+            .Item("RenewDue") = _renewDue
+            .Item("RedeemDue") = _redeemDue
+            .Item("Status") = _status
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 

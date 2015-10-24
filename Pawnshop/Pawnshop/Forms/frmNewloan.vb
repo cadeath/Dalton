@@ -1,5 +1,9 @@
 ﻿Public Class frmNewloan
 
+    Dim Pawner As Client
+    Dim currentPawnTicket As Integer = 10026
+    Dim transactionType As String
+
     Private Sub LoadItemType()
         Dim itmType As String() = {"JWL", "APP", "BIG", "CEL"}
         cboItemtype.Items.Clear()
@@ -99,14 +103,6 @@
         End If
     End Sub
 
-    Private Sub Category_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboCategory.SelectedIndexChanged
-        If cboItemtype.SelectedItem = "JWL" Then
-            cboCategory.Focus()
-        Else
-            txtAppraisal.Focus()
-        End If
-    End Sub
-
     Private Sub Maturity_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Maturity.ValueChanged
 
     End Sub
@@ -149,6 +145,8 @@
     End Sub
 
     Friend Sub NewLoan()
+        transactionType = "A"
+
         ' Pawner
         txtPawner.ReadOnly = False
         txtPawner.Focus()
@@ -185,6 +183,8 @@
 
         cboAppraiser.Text = ""
         cboAppraiser.Enabled = True
+
+        LoadCurrentPawnTicket()
     End Sub
 
     Friend Sub LoadPawnerInfo(ByVal cl As Client)
@@ -195,6 +195,11 @@
         txtPhone.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "") & IIf(cl.Telephone <> "", ", " & cl.Telephone, "")
 
         cboItemtype.Focus()
+        Pawner = cl
+    End Sub
+
+    Private Sub LoadCurrentPawnTicket()
+        txtTicket.Text = String.Format("{0:000000}", currentPawnTicket)
     End Sub
 
     Private Sub ClearFields()
@@ -253,8 +258,8 @@
         End If
     End Sub
 
-    Private Sub cboKarat_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboKarat.SelectedIndexChanged
-
+    Private Sub cboKarat_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboKarat.LostFocus
+        txtAppraisal.Focus()
     End Sub
 
     Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
@@ -262,7 +267,108 @@
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        Dim tmpPawnTicket As New PawnTicket
+        With tmpPawnTicket
+            .PawnTicket = txtTicket.Text
+            .Pawner = Pawner
+            .LoanDate = LoanDate.Value
+            .MaturityDate = Maturity.Value
+            .ExpiryDate = Expiry.Value
+            .AuctionDate = Auction.Value
+            .ItemType = cboItemtype.Text
+            .CategoryID = GetCategoryID(cboCategory.Text)
+            .Description = txtDesc.Text
+            If cboItemtype.Text = "JWL" Then
+                .Karat = cboKarat.Text
+                .Grams = txtGrams.Text
+            End If
+            .Appraisal = txtAppraisal.Text
+            .Principal = txtPrincipal.Text
+            .NetAmount = txtTotal.Text
+            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
+            .Status = transactionType
+            If transactionType <> "A" Then
+                .Interest = txtDelayInt.Text
+                .NewTicket = txtNticket.Text
+                .OfficialReceiptNumber = txtRefNo.Text
+                .OfficialReceiptDate = dtpDate.Value
+                .LessPrincipal = txtLess.Text
+                .EVAT = txtEvat.Text
+                .DaysOverDue = txtOverDue.Text
+                .DelayInterest = txtDelayInt.Text
+                .Penalty = txtPenalty.Text
+                .ServiceCharge = txtSrvChrg.Text
+                .RenewDue = txtRenewDue.Text
+                .RedeemDue = txtRedeemDue.Text
+            End If
 
+            .SaveTicket()
+        End With
+    End Sub
+
+    Private Function GetCategoryID(ByVal typ As String) As Integer
+        ' Must be in the database
+        Select Case typ
+            Case "CAMERA"
+                Return 0
+            Case "CARPENTRY TOOLS"
+                Return 1
+            Case "HOME APP-SMALL"
+                Return 2
+            Case "LAPTOP"
+                Return 3
+            Case "NOTEBOOK"
+                Return 4
+            Case "BIKE"
+                Return 5
+            Case "HOME APP-BIG"
+                Return 6
+            Case "MOTORCYCLE"
+                Return 7
+            Case "CELLPHONE"
+                Return 8
+            Case "TABLET"
+                Return 9
+            Case "ANKLET"
+                Return 10
+            Case "BANGLE"
+                Return 11
+            Case "BROUCH"
+                Return 12
+            Case "EARRINGS"
+                Return 13
+            Case "NECKLASE"
+                Return 14
+            Case "PENDANT"
+                Return 15
+            Case "RING"
+                Return 16
+            Case Else
+                Return 99
+        End Select
+    End Function
+
+    Private Function GetAppraiserID(ByVal name As String) As Integer
+        Select Case name
+            Case "Eskie"
+                Return 0
+            Case "Frances"
+                Return 1
+            Case "Mai2"
+                Return 2
+            Case "Jayr"
+                Return 3
+            Case Else
+                Return 99
+        End Select
+    End Function
+
+    Private Sub cboCategory_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboCategory.LostFocus
+        If cboItemtype.Text = "JWL" Then
+            txtGrams.Focus()
+        Else
+            txtAppraisal.Focus()
+        End If
     End Sub
 End Class
 
