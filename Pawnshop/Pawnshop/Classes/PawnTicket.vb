@@ -23,6 +23,19 @@
     Private _netAmount As Double
     Private _evat As Double
     Private _appraiserID As Integer
+
+    Private _transType As String
+    Private _newTicket As Integer
+    Private _orNum As Integer
+    Private _orDate As Date
+    Private _lessPrincipal As Double
+    Private _daysOverDue As Double
+    Private _delayInt As Double
+    Private _penalty As Double
+    Private _serviceCharge As Double
+    Private _renewDue As Double
+    Private _redeemDue As Double
+
 #End Region
 
 #Region "Properties"
@@ -184,5 +197,172 @@
             Return _appraiserID
         End Get
     End Property
+
+    Public Property TransactionType As String
+        Get
+            Return _transType
+        End Get
+        Set(ByVal value As String)
+            _transType = value
+        End Set
+    End Property
+
+    Public Property NewTicket As Integer
+        Set(ByVal value As Integer)
+            _newTicket = value
+        End Set
+        Get
+            Return _newTicket
+        End Get
+    End Property
+
+    Public Property OfficialReceiptNumber As Integer
+        Set(ByVal value As Integer)
+            _orNum = value
+        End Set
+        Get
+            Return _orNum
+        End Get
+    End Property
+
+    Public Property OfficialReceiptDate As Date
+        Set(ByVal value As Date)
+            _orDate = value
+        End Set
+        Get
+            Return _orDate
+        End Get
+    End Property
+
+    Public Property LessPrincipal As Double
+        Set(ByVal value As Double)
+            _lessPrincipal = value
+        End Set
+        Get
+            Return _lessPrincipal
+        End Get
+    End Property
+
+    Public Property DaysOverDue As Double
+        Set(ByVal value As Double)
+            _daysOverDue = value
+        End Set
+        Get
+            Return _daysOverDue
+        End Get
+    End Property
+
+    Public Property DelayInterest As Double
+        Set(ByVal value As Double)
+            _delayInt = value
+        End Set
+        Get
+            Return _delayInt
+        End Get
+    End Property
+
+    Public Property Penalty As Double
+        Set(ByVal value As Double)
+            _penalty = value
+        End Set
+        Get
+            Return _penalty
+        End Get
+    End Property
+
+    Public Property ServiceCharge As Double
+        Set(ByVal value As Double)
+            _serviceCharge = value
+        End Set
+        Get
+            Return _serviceCharge
+        End Get
+    End Property
+
+    Public Property RenewDue As Double
+        Set(ByVal value As Double)
+            _renewDue = value
+        End Set
+        Get
+            Return _renewDue
+        End Get
+    End Property
+
+    Public Property RedeemDue As Double
+        Set(ByVal value As Double)
+            _redeemDue = value
+        End Set
+        Get
+            Return _redeemDue
+        End Get
+    End Property
+#End Region
+
+#Region "Procedures and Functions"
+    Public Sub SaveTicket()
+
+    End Sub
+
+    Private Function CreateDataSet() As DataSet
+        Dim fillData As String = "tblPawn"
+        'Creating Virtual Database
+        Dim ds As New DataSet, dt As New DataTable(fillData)
+
+        'Constructing Database
+        ds.Tables.Add(dt)
+        With ds.Tables(fillData).Columns
+            .Add(New DataColumn("PawnID", GetType(Integer))) 'AutoIncrement
+            .Add(New DataColumn("PawnTicket", GetType(Integer)))
+            .Add(New DataColumn("ClientID", GetType(Integer)))
+            .Add(New DataColumn("LoanDate", GetType(Date)))
+            .Add(New DataColumn("MatuDate", GetType(Date)))
+            .Add(New DataColumn("ExpiryDate", GetType(Date)))
+            .Add(New DataColumn("AuctionDate", GetType(Date)))
+            .Add(New DataColumn("ItemType", GetType(String)))
+            .Add(New DataColumn("CatID", GetType(Integer)))
+            .Add(New DataColumn("Description", GetType(String)))
+            .Add(New DataColumn("Karat", GetType(String)))
+            .Add(New DataColumn("Grams", GetType(Double)))
+            .Add(New DataColumn("Appraisal", GetType(Double)))
+            .Add(New DataColumn("Principal", GetType(Double)))
+            .Add(New DataColumn("Interest", GetType(Double)))
+            .Add(New DataColumn("NetAmount", GetType(Double)))
+            .Add(New DataColumn("Evat", GetType(Double)))
+            .Add(New DataColumn("AppraiserID", GetType(Integer)))
+            .Add(New DataColumn("NewTicket", GetType(Integer)))
+            .Add(New DataColumn("ORNum", GetType(Integer)))
+            .Add(New DataColumn("ORDate", GetType(Date)))
+            .Add(New DataColumn("LessPrincipal", GetType(Double)))
+            .Add(New DataColumn("DaysOverDue", GetType(Double)))
+            .Add(New DataColumn("DelayInt", GetType(Double)))
+            .Add(New DataColumn("Penalty", GetType(Double)))
+            .Add(New DataColumn("ServiceCharge", GetType(Double)))
+            .Add(New DataColumn("RenewDue", GetType(Double)))
+            .Add(New DataColumn("RedeemDue", GetType(Double)))
+        End With
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            '.Item("FirstName") = _firstName
+            '.Item("MiddleName") = _middleName
+            '.Item("LastName") = _lastName
+            '.Item("Suffix") = _suffixName
+            '.Item("Addr_Street") = _addrSt
+            '.Item("Addr_Brgy") = _addrBrgy
+            '.Item("Addr_City") = _addrCity
+            '.Item("Addr_Province") = _addrProvince
+            '.Item("Addr_Zip") = _addrZip
+            '.Item("Sex") = _gender
+            '.Item("Birthday") = _bday
+            '.Item("Phone1") = _cp1
+            '.Item("Phone2") = _cp2
+            '.Item("Phone3") = _phone
+            '.Item("Phone_Others") = _otherNum
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        Return ds
+    End Function
 #End Region
 End Class
