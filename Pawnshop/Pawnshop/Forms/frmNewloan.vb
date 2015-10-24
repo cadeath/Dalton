@@ -4,6 +4,12 @@
     Dim expiryAdd As Integer = 30
     Dim auctionAdd As Integer = 30
 
+    Private Sub LoadItemType()
+        Dim itmType As String() = {"JWL", "APP", "BIG", "CEL"}
+        cboItemtype.Items.Clear()
+        cboItemtype.Items.AddRange(itmType)
+    End Sub
+
     Private Sub ItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboItemtype.SelectedIndexChanged
         cboCategory.Items.Clear()
         cboCategory.Text = ""
