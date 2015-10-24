@@ -1,9 +1,5 @@
 ﻿Public Class frmNewloan
 
-    Dim maturityAdd As Integer = 30
-    Dim expiryAdd As Integer = 30
-    Dim auctionAdd As Integer = 30
-
     Private Sub LoadItemType()
         Dim itmType As String() = {"JWL", "APP", "BIG", "CEL"}
         cboItemtype.Items.Clear()
@@ -48,23 +44,27 @@
             cboCategory.Items.Add("PENDANT")
             cboCategory.Items.Add("RING")
         End If
+
         'Dates
         LoanDate.Value = Date.Now
-        Maturity.Value = Date.Now.AddDays(30)
+        Maturity.Value = LoanDate.Value.AddDays(30)
         If cboItemtype.SelectedItem = "CEL" Then
-            Expiry.Value = Date.Now.AddDays(30)
-            Auction.Value = Date.Now.AddDays(60)
+            Expiry.Value = LoanDate.Value.AddDays(30)
+            Auction.Value = LoanDate.Value.AddDays(63)
         Else
-            Expiry.Value = Date.Now.AddDays(90)
-            Auction.Value = Date.Now.AddDays(123)
+            Expiry.Value = LoanDate.Value.AddDays(90)
+            Auction.Value = LoanDate.Value.AddDays(123)
         End If
     End Sub
     Private Sub TextBox2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppraisal.KeyPress
         DigitOnly(e)
     End Sub
 
-    Private Sub LoanDate_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanDate.ValueChanged
 
+    Private Sub LoadAppraisers()
+        Dim users() As String = {"Eskie", "Frances", "Mai2", "Jayr"}
+        cboAppraiser.Items.Clear()
+        cboAppraiser.Items.AddRange(users)
     End Sub
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -117,7 +117,7 @@
 
     Private Sub txtAppraisal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppraisal.TextChanged
         txtTotal.Text = txtAppraisal.Text
-        'txtPrincipal.Text = txtAppraisal.Text
+        txtPrincipal.Text = txtAppraisal.Text
     End Sub
 
     Private Sub txtTotal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTotal.TextChanged
@@ -144,6 +144,8 @@
 
     Private Sub frmNewloan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
+        LoadAppraisers()
+        NewLoan()
     End Sub
 
     Friend Sub NewLoan()
@@ -160,14 +162,15 @@
 
         ' Ticket Information
         LoanDate.Value = CurrentDate
-        Maturity.Value = LoanDate.Value.AddDays(maturityAdd) : Maturity.Enabled = False
-        Expiry.Value = Maturity.Value.AddDays(expiryAdd) : Expiry.Enabled = False
-        Auction.Value = Expiry.Value.AddDays(auctionAdd) : Auction.Enabled = False
+        Maturity.Value = LoanDate.Value.AddDays(30) : Maturity.Enabled = False
+        Expiry.Value = LoanDate.Value.AddDays(60) : Expiry.Enabled = False
+        Auction.Value = LoanDate.Value.AddDays(90) : Auction.Enabled = False
         txtAppraisal.ReadOnly = False
         txtPrincipal.ReadOnly = False
         txtTotal.ReadOnly = False
 
         ' Receipt Information
+        grpReceipt.Enabled = False
         txtRefNo.ReadOnly = False
         dtpDate.Value = CurrentDate
         txtAppr.ReadOnly = False
@@ -181,6 +184,7 @@
         txtRedeemDue.ReadOnly = False
 
         cboAppraiser.Text = ""
+        cboAppraiser.Enabled = True
     End Sub
 
     Friend Sub LoadPawnerInfo(ByVal cl As Client)
@@ -189,6 +193,8 @@
         txtBDay.Text = cl.Birthday.ToString("MMM dd, yyyy")
         lblAge.Text = GetCurrentAge(DateTime.Parse(txtBDay.Text)) & " years old"
         txtPhone.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "") & IIf(cl.Telephone <> "", ", " & cl.Telephone, "")
+
+        cboItemtype.Focus()
     End Sub
 
     Private Sub ClearFields()
@@ -209,9 +215,9 @@
         txtTicket.Text = ""
         txtNticket.Text = ""
         LoanDate.Value = CurrentDate
-        Maturity.Value = LoanDate.Value.AddDays(maturityAdd)
-        Expiry.Value = Maturity.Value.AddDays(expiryAdd)
-        Auction.Value = Expiry.Value.AddDays(auctionAdd)
+        Maturity.Value = LoanDate.Value.AddDays(30)
+        Expiry.Value = LoanDate.Value.AddDays(60)
+        Auction.Value = LoanDate.Value.AddDays(90)
         txtAppraisal.Text = ""
         txtPrincipal.Text = ""
         txtTotal.Text = ""
@@ -230,6 +236,7 @@
         txtRedeemDue.Text = ""
 
         cboAppraiser.Text = ""
+        cboAppraiser.Items.Clear()
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -237,6 +244,24 @@
     End Sub
 
     Private Sub txtPawner_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPawner.TextChanged
+
+    End Sub
+
+    Private Sub cboKarat_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboKarat.KeyPress
+        If isEnter(e) Then
+            txtAppraisal.Focus()
+        End If
+    End Sub
+
+    Private Sub cboKarat_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboKarat.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+        txtTotal.Text = txtPrincipal.Text
+    End Sub
+
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
 
     End Sub
 End Class

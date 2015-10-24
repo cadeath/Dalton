@@ -116,7 +116,7 @@ Partial Class frmNewloan
         Me.grpPawner.Location = New System.Drawing.Point(12, 66)
         Me.grpPawner.Name = "grpPawner"
         Me.grpPawner.Size = New System.Drawing.Size(479, 181)
-        Me.grpPawner.TabIndex = 4
+        Me.grpPawner.TabIndex = 0
         Me.grpPawner.TabStop = False
         Me.grpPawner.Text = "Pawner's Information"
         '
@@ -233,7 +233,7 @@ Partial Class frmNewloan
         Me.grpItem.Location = New System.Drawing.Point(12, 247)
         Me.grpItem.Name = "grpItem"
         Me.grpItem.Size = New System.Drawing.Size(479, 176)
-        Me.grpItem.TabIndex = 5
+        Me.grpItem.TabIndex = 1
         Me.grpItem.TabStop = False
         Me.grpItem.Text = "Pawned Item Information"
         '
@@ -247,7 +247,7 @@ Partial Class frmNewloan
         Me.cboKarat.Location = New System.Drawing.Point(142, 149)
         Me.cboKarat.Name = "cboKarat"
         Me.cboKarat.Size = New System.Drawing.Size(124, 21)
-        Me.cboKarat.TabIndex = 9
+        Me.cboKarat.TabIndex = 4
         '
         'Label7
         '
@@ -266,7 +266,7 @@ Partial Class frmNewloan
         Me.txtGrams.Name = "txtGrams"
         Me.txtGrams.ReadOnly = True
         Me.txtGrams.Size = New System.Drawing.Size(124, 22)
-        Me.txtGrams.TabIndex = 8
+        Me.txtGrams.TabIndex = 3
         Me.txtGrams.TabStop = False
         '
         'Label4
@@ -288,7 +288,7 @@ Partial Class frmNewloan
         Me.cboCategory.Location = New System.Drawing.Point(142, 96)
         Me.cboCategory.Name = "cboCategory"
         Me.cboCategory.Size = New System.Drawing.Size(124, 21)
-        Me.cboCategory.TabIndex = 7
+        Me.cboCategory.TabIndex = 2
         '
         'Label6
         '
@@ -310,7 +310,7 @@ Partial Class frmNewloan
         Me.cboItemtype.Location = New System.Drawing.Point(142, 21)
         Me.cboItemtype.Name = "cboItemtype"
         Me.cboItemtype.Size = New System.Drawing.Size(124, 21)
-        Me.cboItemtype.TabIndex = 5
+        Me.cboItemtype.TabIndex = 0
         '
         'Label5
         '
@@ -330,7 +330,7 @@ Partial Class frmNewloan
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ReadOnly = True
         Me.txtDesc.Size = New System.Drawing.Size(331, 48)
-        Me.txtDesc.TabIndex = 6
+        Me.txtDesc.TabIndex = 1
         Me.txtDesc.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
         '
         'Label1
@@ -576,7 +576,6 @@ Partial Class frmNewloan
         '
         'btnSave
         '
-        Me.btnSave.Enabled = False
         Me.btnSave.Location = New System.Drawing.Point(92, 432)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(74, 35)
@@ -586,6 +585,7 @@ Partial Class frmNewloan
         '
         'btnClose
         '
+        Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Location = New System.Drawing.Point(172, 432)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(74, 35)
@@ -874,6 +874,7 @@ Partial Class frmNewloan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(1096, 494)
         Me.Controls.Add(Me.btnLess)
         Me.Controls.Add(Me.lblTranstype)
