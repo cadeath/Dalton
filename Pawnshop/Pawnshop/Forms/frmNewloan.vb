@@ -145,7 +145,7 @@
     End Sub
 
     Friend Sub NewLoan()
-        transactionType = "A"
+        transactionType = "L"
 
         ' Pawner
         txtPawner.ReadOnly = False
