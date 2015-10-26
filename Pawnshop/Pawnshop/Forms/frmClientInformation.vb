@@ -9,6 +9,8 @@ Public Class frmClientInformation
     Friend SelectedClient As Client 'Holds Client
     Private isNew As Boolean = True
 
+    Private ClientIDs As New CollectionID
+
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         txtFirstName.Focus()
@@ -45,7 +47,6 @@ Public Class frmClientInformation
         txtOthers.Text = cl.OtherNumber
 
         SelectedClient = cl
-
         ComputeBirthday()
         LockFields(True)
     End Sub
@@ -241,6 +242,9 @@ Public Class frmClientInformation
                 MsgBox("Entry Updated", MsgBoxStyle.Information)
             End If
         End With
+
+
+
         frmClient.btnSearch.PerformClick()
         Me.Close()
     End Sub
@@ -263,17 +267,24 @@ Public Class frmClientInformation
 
     'ID Group===================
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        AddID()
+        If cboIDtype.Text = "" Or txtRef.Text = "" Or txtRemarks.Text = "" Then Exit Sub
+
+        Dim tmpID As New IdentificationCard
+        tmpID.IDType = cboIDtype.Text
+        tmpID.ReferenceNumber = txtRef.Text
+        tmpID.Remarks = txtRemarks.Text
+
+        AddID(tmpID)
         ClearIDFields()
         cboIDtype.Focus()
     End Sub
 
-    Private Sub AddID()
-        If cboIDtype.Text = "" Or txtRef.Text = "" Or txtRemarks.Text = "" Then Exit Sub
+    Private Sub AddID(ByVal cID As IdentificationCard)
+        Dim lv As ListViewItem = lvID.Items.Add(cID.IDType)
+        lv.SubItems.Add(cID.ReferenceNumber)
+        lv.SubItems.Add(cID.Remarks)
 
-        Dim lv As ListViewItem = lvID.Items.Add(cboIDtype.Text)
-        lv.SubItems.Add(txtRef.Text)
-        lv.SubItems.Add(txtRemarks.Text)
+        ClientIDs.Add(cID)
     End Sub
 
     Private Sub txtRef_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRef.KeyPress
@@ -292,6 +303,27 @@ Public Class frmClientInformation
         cboIDtype.DroppedDown = True
         txtRef.Text = ""
         txtRemarks.Text = ""
+    End Sub
+
+    Private Sub LoadID(ByVal cl As Client)
+        Dim mySql As String
+        mySql = "SELECT * FROM tblIdentification WHERE clientID = " & cl.ID
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpID As New IdentificationCard
+            tmpID.LoadID(dr.Item("id"))
+
+            AddID(tmpID)
+        Next
+    End Sub
+
+    Private Sub idSelected(ByVal SelID As IdentificationCard)
+        SelID.Selected()
+    End Sub
+
+    Private Sub SaveIDs()
+
     End Sub
     'END - ID Group===================
 End Class

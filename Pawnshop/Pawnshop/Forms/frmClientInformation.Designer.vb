@@ -60,6 +60,7 @@ Partial Class frmClientInformation
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnIDModify = New System.Windows.Forms.Button()
         Me.btnIDSelect = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.txtRemarks = New System.Windows.Forms.TextBox()
@@ -73,7 +74,6 @@ Partial Class frmClientInformation
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
-        Me.btnIDModify = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -474,6 +474,15 @@ Partial Class frmClientInformation
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "ID List"
         '
+        'btnIDModify
+        '
+        Me.btnIDModify.Location = New System.Drawing.Point(86, 243)
+        Me.btnIDModify.Name = "btnIDModify"
+        Me.btnIDModify.Size = New System.Drawing.Size(75, 23)
+        Me.btnIDModify.TabIndex = 26
+        Me.btnIDModify.Text = "&Edit"
+        Me.btnIDModify.UseVisualStyleBackColor = True
+        '
         'btnIDSelect
         '
         Me.btnIDSelect.Location = New System.Drawing.Point(308, 243)
@@ -585,15 +594,6 @@ Partial Class frmClientInformation
         Me.btnSelect.Text = "Sele&ct"
         Me.btnSelect.UseVisualStyleBackColor = True
         Me.btnSelect.Visible = False
-        '
-        'btnIDModify
-        '
-        Me.btnIDModify.Location = New System.Drawing.Point(86, 243)
-        Me.btnIDModify.Name = "btnIDModify"
-        Me.btnIDModify.Size = New System.Drawing.Size(75, 23)
-        Me.btnIDModify.TabIndex = 26
-        Me.btnIDModify.Text = "&Edit"
-        Me.btnIDModify.UseVisualStyleBackColor = True
         '
         'frmClientInformation
         '

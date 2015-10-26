@@ -1,12 +1,16 @@
 ﻿Public Class IdentificationCard
 
+#Region "Variables"
     Private _id As Integer
     Private _clientID As Integer
     Private _IDType As String = String.Empty
     Private _RefNum As String = String.Empty
     Private _Remarks As String = String.Empty
+    Private _isSelected As Boolean = 0
     Private fillData As String = "ShowID"
+#End Region
 
+#Region "Properties"
     Public ReadOnly Property ID As Integer
         Get
             Return _id
@@ -49,6 +53,17 @@
         End Set
     End Property
 
+    Public Property isSelected As Boolean
+        Set(ByVal value As Boolean)
+            _isSelected = value
+        End Set
+        Get
+            Return _isSelected
+        End Get
+    End Property
+#End Region
+
+#Region "Functions and Procedures"
     Public Function Save() As Boolean
         'Creating Virtual Database
         Dim ds As New DataSet, dt As New DataTable(fillData)
@@ -61,6 +76,7 @@
             .Add(New DataColumn("ClientID", GetType(Integer)))
             .Add(New DataColumn("IDType", GetType(String)))
             .Add(New DataColumn("RefNum", GetType(String)))
+            .Add(New DataColumn("isSelected", GetType(Boolean)))
             .Add(New DataColumn("Remarks", GetType(String)))
         End With
 
@@ -81,4 +97,60 @@
             Return False
         End Try
     End Function
+
+    Public Function Modify() As Boolean
+        Dim mySql As String, ds As DataSet
+
+        mySql = "SELECT * FROM id = " & Me.ID
+        ds = LoadSQL(mySql)
+
+        With ds.Tables(0).Rows(0)
+            .Item("IDType") = _IDType
+            .Item("RefNum") = _RefNum
+            .Item("Remarks") = _Remarks
+            .Item("isSelected") = _isSelected
+        End With
+
+        database.SaveEntry(ds, False)
+
+        Return True
+    End Function
+
+    Public Sub Selected()
+        Dim mySql As String
+
+        mySql = "SELECT * FROM tblIdentification WHERE ClientID = " & Me.ClientID
+        Dim ds As DataSet = LoadSQL(mySql)
+        For Each dr As DataRow In ds.Tables(0).Rows
+            With dr
+                .Item("isSelected") = 0
+            End With
+        Next
+        database.SaveEntry(ds, False) 'Deselect all
+
+        mySql = "SELECT * FROM tblIdentification WHERE ID = " & _id
+        ds.Clear()
+        ds = LoadSQL(mySql)
+        With ds.Tables(0).Rows(0)
+            .Item("isSelected") = 1
+        End With
+
+        database.SaveEntry(ds, False)
+        Console.WriteLine(String.Format("ID Type {0} selected", Me.IDType))
+    End Sub
+
+    Public Sub LoadID(ByVal id As Integer)
+        Dim mySql As String = "SELECT * FROM id = " & id
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        With ds.Tables(0).Rows(0)
+            _id = .Item("id")
+            _clientID = .Item("clientID")
+            _IDType = .Item("IDType")
+            _RefNum = .Item("RefNum")
+            _Remarks = .Item("Remarks")
+            _isSelected = .Item("isSelected")
+        End With
+    End Sub
+#End Region
 End Class
