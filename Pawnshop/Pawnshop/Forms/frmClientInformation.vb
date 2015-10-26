@@ -54,7 +54,7 @@ Public Class frmClientInformation
         FormOrigin.Show()
     End Sub
 
-    Private Sub ComputeBirthday()
+    Friend Sub ComputeBirthday()
         lblAge.Text = "N/A"
         lblAge.Text = GetCurrentAge(dtpBday.Value) & " years old"
     End Sub
@@ -241,7 +241,7 @@ Public Class frmClientInformation
                 MsgBox("Entry Updated", MsgBoxStyle.Information)
             End If
         End With
-        frmClient.LoadClients()
+        frmClient.btnSearch.PerformClick()
         Me.Close()
     End Sub
 
