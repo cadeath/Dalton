@@ -385,9 +385,9 @@ Partial Class frmNewloan
         Me.lblNticket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNticket.Location = New System.Drawing.Point(5, 44)
         Me.lblNticket.Name = "lblNticket"
-        Me.lblNticket.Size = New System.Drawing.Size(89, 16)
+        Me.lblNticket.Size = New System.Drawing.Size(83, 16)
         Me.lblNticket.TabIndex = 46
-        Me.lblNticket.Text = "New Ticket:"
+        Me.lblNticket.Text = "Old Ticket:"
         '
         'txtTotal
         '
@@ -396,7 +396,7 @@ Partial Class frmNewloan
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(113, 22)
-        Me.txtTotal.TabIndex = 18
+        Me.txtTotal.TabIndex = 99
         '
         'lblNet
         '

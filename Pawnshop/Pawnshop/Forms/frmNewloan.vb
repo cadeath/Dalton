@@ -4,6 +4,15 @@
     Dim currentPawnTicket As Integer = 10026
     Dim transactionType As String
 
+    Private Function GetLastNum() As Integer
+        Dim mySql As String = "SELECT * FROM opt_keys = 'PawnLastNum'"
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim ret As Integer
+        ret = CInt(ds.Tables(0).Rows(0).Item("opt_values"))
+
+        Return ret
+    End Function
+
     Private Sub LoadItemType()
         Dim itmType As String() = {"JWL", "APP", "BIG", "CEL"}
         cboItemtype.Items.Clear()
@@ -74,10 +83,6 @@
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmClient.SearchSelect(txtPawner.Text, FormName.frmPawning)
         frmClient.Show()
-    End Sub
-
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        frmLoanlist.Show()
     End Sub
 
     ''' <summary>
@@ -165,7 +170,7 @@
         Auction.Value = LoanDate.Value.AddDays(90) : Auction.Enabled = False
         txtAppraisal.ReadOnly = False
         txtPrincipal.ReadOnly = False
-        txtTotal.ReadOnly = False
+        txtTotal.BackColor = System.Drawing.SystemColors.Window
 
         ' Receipt Information
         grpReceipt.Enabled = False
@@ -212,6 +217,7 @@
         ' Item Information
         txtDesc.Text = ""
         cboItemtype.Text = ""
+        cboCategory.Text = ""
         ' Jewel
         txtGrams.Text = ""
         cboKarat.Text = ""
@@ -262,11 +268,18 @@
         txtAppraisal.Focus()
     End Sub
 
+    Private Sub txtPrincipal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPrincipal.KeyPress
+
+    End Sub
+
     Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
         txtTotal.Text = txtPrincipal.Text
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If txtAppraisal.Text = "" Then txtAppraisal.Focus() : Exit Sub
+        If txtTotal.Text = "" Then txtTotal.Focus() : Exit Sub
+
         Dim tmpPawnTicket As New PawnTicket
         With tmpPawnTicket
             .PawnTicket = txtTicket.Text
@@ -287,9 +300,9 @@
             .NetAmount = txtTotal.Text
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
             .Status = transactionType
-            If transactionType <> "A" Then
+            If transactionType <> "L" Then
                 .Interest = txtDelayInt.Text
-                .NewTicket = txtNticket.Text
+                .OldTicket = txtNticket.Text
                 .OfficialReceiptNumber = txtRefNo.Text
                 .OfficialReceiptDate = dtpDate.Value
                 .LessPrincipal = txtLess.Text
@@ -304,6 +317,16 @@
 
             .SaveTicket()
         End With
+
+        MsgBox("Ticket Posted", MsgBoxStyle.Information, "Transaction Saved")
+        Dim ans As DialogResult = MsgBox("Do you want to enter another one?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Question")
+        If ans = Windows.Forms.DialogResult.Yes Then
+            ClearFields()
+            NewLoan()
+        Else
+            Me.Close()
+        End If
+
     End Sub
 
     Private Function GetCategoryID(ByVal typ As String) As Integer
@@ -369,6 +392,16 @@
         Else
             txtAppraisal.Focus()
         End If
+    End Sub
+
+    Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
+        If isEnter(e) And cboAppraiser.Text <> "" Then
+            AddAuthentication()
+        End If
+    End Sub
+
+    Private Sub AddAuthentication()
+        btnSave.PerformClick()
     End Sub
 End Class
 

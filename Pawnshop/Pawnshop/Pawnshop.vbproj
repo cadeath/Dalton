@@ -183,12 +183,6 @@
     <Compile Include="Forms\frmInsurance.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmLoanlist.Designer.vb">
-      <DependentUpon>frmLoanlist.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmLoanlist.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -317,9 +311,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLayAway.resx">
       <DependentUpon>frmLayAway.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLoanlist.resx">
-      <DependentUpon>frmLoanlist.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>

@@ -20,7 +20,7 @@
     Private _evat As Double
     Private _appraiserID As Integer
 
-    Private _newTicket As Integer
+    Private _oldTicket As Integer
     Private _orNum As Integer
     Private _orDate As Date
     Private _lessPrincipal As Double
@@ -203,12 +203,12 @@
         End Set
     End Property
 
-    Public Property NewTicket As Integer
+    Public Property OldTicket As Integer
         Set(ByVal value As Integer)
-            _newTicket = value
+            _oldTicket = value
         End Set
         Get
-            Return _newTicket
+            Return _oldTicket
         End Get
     End Property
 
@@ -358,7 +358,7 @@
             .Item("NetAmount") = _netAmount
             .Item("Evat") = _evat
             .Item("AppraiserID") = _appraiserID
-            .Item("NewTicket") = _newTicket
+            .Item("OldTicket") = _oldTicket
             .Item("ORNum") = _orNum
             .Item("ORDate") = _orDate
             .Item("LessPrincipal") = _lessPrincipal
@@ -374,5 +374,80 @@
 
         Return ds
     End Function
+
+    Public Sub LoadTicket(ByVal id As Integer)
+        Dim mySql As String = "SELECT * FROM tblpawn WHERE PAWNID = " & id
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        With ds.Tables(0).Rows(0)
+            _pawnid = .Item("PawnID")
+            _pawnTicket = .Item("PawnTicket")
+            Dim tmpClient As New Client
+            tmpClient.LoadClient(.Item("ClientID"))
+            _client = tmpClient
+            _loanDate = .Item("LoanDate")
+            _matuDate = .Item("MatuDate")
+            _expiryDate = .Item("ExpiryDate")
+            _auctionDate = .Item("AuctionDate")
+            _itemType = .Item("ItemType")
+            _catID = .Item("CatID")
+            _description = .Item("Description")
+            _karat = .Item("Karat")
+            _grams = .Item("Grams")
+            _appraisal = .Item("Appraisal")
+            _principal = .Item("Principal")
+            _interest = .Item("Interest")
+            _netAmount = .Item("NetAmount")
+            _evat = .Item("Evat")
+            _appraiserID = .Item("AppraiserID")
+            _oldTicket = .Item("OldTicket")
+            _orNum = .Item("ORNum")
+            _orDate = .Item("ORDate")
+            _lessPrincipal = .Item("LessPrincipal")
+            _daysOverDue = .Item("DaysOverDue")
+            _delayInt = .Item("DelayInt")
+            _penalty = .Item("Penalty")
+            _serviceCharge = .Item("ServiceCharge")
+            _renewDue = .Item("RenewDue")
+            _redeemDue = .Item("RedeemDue")
+            _status = .Item("Status")
+        End With
+    End Sub
+
+    Public Sub LoadTicketInRow(ByVal dr As DataRow)
+        With dr
+            _pawnid = .Item("PawnID")
+            _pawnTicket = .Item("PawnTicket")
+            Dim tmpClient As New Client
+            tmpClient.LoadClient(.Item("ClientID"))
+            _client = tmpClient
+            _loanDate = .Item("LoanDate")
+            _matuDate = .Item("MatuDate")
+            _expiryDate = .Item("ExpiryDate")
+            _auctionDate = .Item("AuctionDate")
+            _itemType = .Item("ItemType")
+            _catID = .Item("CatID")
+            _description = .Item("Description")
+            _karat = .Item("Karat")
+            _grams = .Item("Grams")
+            _appraisal = .Item("Appraisal")
+            _principal = .Item("Principal")
+            _interest = .Item("Interest")
+            _netAmount = .Item("NetAmount")
+            _evat = .Item("Evat")
+            _appraiserID = .Item("AppraiserID")
+            _oldTicket = .Item("OldTicket")
+            _orNum = .Item("ORNum")
+            _orDate = .Item("ORDate")
+            _lessPrincipal = .Item("LessPrincipal")
+            _daysOverDue = .Item("DaysOverDue")
+            _delayInt = .Item("DelayInt")
+            _penalty = .Item("Penalty")
+            _serviceCharge = .Item("ServiceCharge")
+            _renewDue = .Item("RenewDue")
+            _redeemDue = .Item("RedeemDue")
+            _status = .Item("Status")
+        End With
+    End Sub
 #End Region
 End Class
