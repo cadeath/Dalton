@@ -70,6 +70,8 @@ Partial Class frmNewloan
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.grpReceipt = New System.Windows.Forms.GroupBox()
+        Me.txtInt = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.txtLess = New System.Windows.Forms.TextBox()
         Me.lblLess = New System.Windows.Forms.Label()
         Me.txtPenalty = New System.Windows.Forms.TextBox()
@@ -96,8 +98,9 @@ Partial Class frmNewloan
         Me.btnLess = New System.Windows.Forms.Button()
         Me.btnRenew = New System.Windows.Forms.Button()
         Me.btnRedeem = New System.Windows.Forms.Button()
-        Me.txtInt = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.txtPayment = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.grpPawner.SuspendLayout()
         Me.grpItem.SuspendLayout()
         Me.grpTicket.SuspendLayout()
@@ -117,7 +120,7 @@ Partial Class frmNewloan
         Me.grpPawner.Controls.Add(Me.btnSearch)
         Me.grpPawner.Controls.Add(Me.txtPawner)
         Me.grpPawner.Controls.Add(Me.Label2)
-        Me.grpPawner.Location = New System.Drawing.Point(12, 66)
+        Me.grpPawner.Location = New System.Drawing.Point(12, 37)
         Me.grpPawner.Name = "grpPawner"
         Me.grpPawner.Size = New System.Drawing.Size(479, 181)
         Me.grpPawner.TabIndex = 0
@@ -234,7 +237,7 @@ Partial Class frmNewloan
         Me.grpItem.Controls.Add(Me.Label5)
         Me.grpItem.Controls.Add(Me.txtDesc)
         Me.grpItem.Controls.Add(Me.Label1)
-        Me.grpItem.Location = New System.Drawing.Point(12, 247)
+        Me.grpItem.Location = New System.Drawing.Point(12, 218)
         Me.grpItem.Name = "grpItem"
         Me.grpItem.Size = New System.Drawing.Size(479, 176)
         Me.grpItem.TabIndex = 1
@@ -367,7 +370,7 @@ Partial Class frmNewloan
         Me.grpTicket.Controls.Add(Me.Label11)
         Me.grpTicket.Controls.Add(Me.txtTicket)
         Me.grpTicket.Controls.Add(Me.Label12)
-        Me.grpTicket.Location = New System.Drawing.Point(508, 66)
+        Me.grpTicket.Location = New System.Drawing.Point(508, 37)
         Me.grpTicket.Name = "grpTicket"
         Me.grpTicket.Size = New System.Drawing.Size(265, 282)
         Me.grpTicket.TabIndex = 6
@@ -396,7 +399,7 @@ Partial Class frmNewloan
         'txtTotal
         '
         Me.txtTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotal.Location = New System.Drawing.Point(132, 226)
+        Me.txtTotal.Location = New System.Drawing.Point(133, 250)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(113, 22)
@@ -406,7 +409,7 @@ Partial Class frmNewloan
         '
         Me.lblNet.AutoSize = True
         Me.lblNet.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNet.Location = New System.Drawing.Point(5, 229)
+        Me.lblNet.Location = New System.Drawing.Point(6, 253)
         Me.lblNet.Name = "lblNet"
         Me.lblNet.Size = New System.Drawing.Size(91, 16)
         Me.lblNet.TabIndex = 42
@@ -550,7 +553,7 @@ Partial Class frmNewloan
         '
         Me.GroupBox4.Controls.Add(Me.cboAppraiser)
         Me.GroupBox4.Controls.Add(Me.Label19)
-        Me.GroupBox4.Location = New System.Drawing.Point(508, 349)
+        Me.GroupBox4.Location = New System.Drawing.Point(508, 320)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(265, 74)
         Me.GroupBox4.TabIndex = 7
@@ -580,7 +583,7 @@ Partial Class frmNewloan
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(92, 432)
+        Me.btnSave.Location = New System.Drawing.Point(92, 403)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(74, 35)
         Me.btnSave.TabIndex = 30
@@ -590,7 +593,7 @@ Partial Class frmNewloan
         'btnClose
         '
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Location = New System.Drawing.Point(172, 432)
+        Me.btnClose.Location = New System.Drawing.Point(172, 403)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(74, 35)
         Me.btnClose.TabIndex = 31
@@ -600,7 +603,7 @@ Partial Class frmNewloan
         'btnVoid
         '
         Me.btnVoid.Enabled = False
-        Me.btnVoid.Location = New System.Drawing.Point(12, 432)
+        Me.btnVoid.Location = New System.Drawing.Point(12, 403)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(74, 35)
         Me.btnVoid.TabIndex = 33
@@ -609,6 +612,8 @@ Partial Class frmNewloan
         '
         'grpReceipt
         '
+        Me.grpReceipt.Controls.Add(Me.txtPayment)
+        Me.grpReceipt.Controls.Add(Me.Label20)
         Me.grpReceipt.Controls.Add(Me.txtInt)
         Me.grpReceipt.Controls.Add(Me.Label17)
         Me.grpReceipt.Controls.Add(Me.txtLess)
@@ -633,12 +638,33 @@ Partial Class frmNewloan
         Me.grpReceipt.Controls.Add(Me.Label26)
         Me.grpReceipt.Controls.Add(Me.Label28)
         Me.grpReceipt.Controls.Add(Me.Label29)
-        Me.grpReceipt.Location = New System.Drawing.Point(779, 66)
+        Me.grpReceipt.Location = New System.Drawing.Point(779, 37)
         Me.grpReceipt.Name = "grpReceipt"
-        Me.grpReceipt.Size = New System.Drawing.Size(311, 357)
+        Me.grpReceipt.Size = New System.Drawing.Size(260, 357)
         Me.grpReceipt.TabIndex = 13
         Me.grpReceipt.TabStop = False
         Me.grpReceipt.Text = "Receipt Information"
+        '
+        'txtInt
+        '
+        Me.txtInt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtInt.Location = New System.Drawing.Point(134, 113)
+        Me.txtInt.Name = "txtInt"
+        Me.txtInt.ReadOnly = True
+        Me.txtInt.Size = New System.Drawing.Size(113, 22)
+        Me.txtInt.TabIndex = 23
+        Me.txtInt.Visible = False
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(7, 115)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(67, 16)
+        Me.Label17.TabIndex = 56
+        Me.Label17.Text = "Interest :"
+        Me.Label17.Visible = False
         '
         'txtLess
         '
@@ -664,17 +690,17 @@ Partial Class frmNewloan
         'txtPenalty
         '
         Me.txtPenalty.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPenalty.Location = New System.Drawing.Point(134, 222)
+        Me.txtPenalty.Location = New System.Drawing.Point(133, 189)
         Me.txtPenalty.Name = "txtPenalty"
         Me.txtPenalty.ReadOnly = True
         Me.txtPenalty.Size = New System.Drawing.Size(113, 22)
-        Me.txtPenalty.TabIndex = 25
+        Me.txtPenalty.TabIndex = 26
         '
         'Label18
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(5, 225)
+        Me.Label18.Location = New System.Drawing.Point(4, 192)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(64, 16)
         Me.Label18.TabIndex = 52
@@ -683,18 +709,18 @@ Partial Class frmNewloan
         'txtRedeemDue
         '
         Me.txtRedeemDue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRedeemDue.Location = New System.Drawing.Point(134, 323)
+        Me.txtRedeemDue.Location = New System.Drawing.Point(133, 290)
         Me.txtRedeemDue.Name = "txtRedeemDue"
         Me.txtRedeemDue.ReadOnly = True
         Me.txtRedeemDue.Size = New System.Drawing.Size(113, 22)
-        Me.txtRedeemDue.TabIndex = 29
+        Me.txtRedeemDue.TabIndex = 30
         Me.txtRedeemDue.Visible = False
         '
         'lblRedeemDue
         '
         Me.lblRedeemDue.AutoSize = True
         Me.lblRedeemDue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRedeemDue.Location = New System.Drawing.Point(7, 326)
+        Me.lblRedeemDue.Location = New System.Drawing.Point(6, 293)
         Me.lblRedeemDue.Name = "lblRedeemDue"
         Me.lblRedeemDue.Size = New System.Drawing.Size(103, 16)
         Me.lblRedeemDue.TabIndex = 50
@@ -741,18 +767,18 @@ Partial Class frmNewloan
         'txtRenewDue
         '
         Me.txtRenewDue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRenewDue.Location = New System.Drawing.Point(134, 298)
+        Me.txtRenewDue.Location = New System.Drawing.Point(133, 265)
         Me.txtRenewDue.Name = "txtRenewDue"
         Me.txtRenewDue.ReadOnly = True
         Me.txtRenewDue.Size = New System.Drawing.Size(113, 22)
-        Me.txtRenewDue.TabIndex = 28
+        Me.txtRenewDue.TabIndex = 29
         Me.txtRenewDue.Visible = False
         '
         'lblRenewDue
         '
         Me.lblRenewDue.AutoSize = True
         Me.lblRenewDue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRenewDue.Location = New System.Drawing.Point(7, 301)
+        Me.lblRenewDue.Location = New System.Drawing.Point(6, 268)
         Me.lblRenewDue.Name = "lblRenewDue"
         Me.lblRenewDue.Size = New System.Drawing.Size(91, 16)
         Me.lblRenewDue.TabIndex = 42
@@ -762,17 +788,17 @@ Partial Class frmNewloan
         'txtEvat
         '
         Me.txtEvat.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEvat.Location = New System.Drawing.Point(134, 272)
+        Me.txtEvat.Location = New System.Drawing.Point(133, 239)
         Me.txtEvat.Name = "txtEvat"
         Me.txtEvat.ReadOnly = True
         Me.txtEvat.Size = New System.Drawing.Size(113, 22)
-        Me.txtEvat.TabIndex = 27
+        Me.txtEvat.TabIndex = 28
         '
         'Label23
         '
         Me.Label23.AutoSize = True
         Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(7, 275)
+        Me.Label23.Location = New System.Drawing.Point(6, 242)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(50, 16)
         Me.Label23.TabIndex = 40
@@ -781,17 +807,17 @@ Partial Class frmNewloan
         'txtSrvChrg
         '
         Me.txtSrvChrg.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSrvChrg.Location = New System.Drawing.Point(134, 248)
+        Me.txtSrvChrg.Location = New System.Drawing.Point(133, 215)
         Me.txtSrvChrg.Name = "txtSrvChrg"
         Me.txtSrvChrg.ReadOnly = True
         Me.txtSrvChrg.Size = New System.Drawing.Size(113, 22)
-        Me.txtSrvChrg.TabIndex = 26
+        Me.txtSrvChrg.TabIndex = 27
         '
         'Label24
         '
         Me.Label24.AutoSize = True
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(7, 251)
+        Me.Label24.Location = New System.Drawing.Point(6, 218)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(119, 16)
         Me.Label24.TabIndex = 38
@@ -800,17 +826,17 @@ Partial Class frmNewloan
         'txtDelayInt
         '
         Me.txtDelayInt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDelayInt.Location = New System.Drawing.Point(134, 197)
+        Me.txtDelayInt.Location = New System.Drawing.Point(133, 164)
         Me.txtDelayInt.Name = "txtDelayInt"
         Me.txtDelayInt.ReadOnly = True
         Me.txtDelayInt.Size = New System.Drawing.Size(113, 22)
-        Me.txtDelayInt.TabIndex = 24
+        Me.txtDelayInt.TabIndex = 25
         '
         'Label25
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(7, 198)
+        Me.Label25.Location = New System.Drawing.Point(6, 165)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(126, 16)
         Me.Label25.TabIndex = 36
@@ -819,17 +845,17 @@ Partial Class frmNewloan
         'txtOverDue
         '
         Me.txtOverDue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOverDue.Location = New System.Drawing.Point(134, 172)
+        Me.txtOverDue.Location = New System.Drawing.Point(133, 139)
         Me.txtOverDue.Name = "txtOverDue"
         Me.txtOverDue.ReadOnly = True
         Me.txtOverDue.Size = New System.Drawing.Size(113, 22)
-        Me.txtOverDue.TabIndex = 23
+        Me.txtOverDue.TabIndex = 24
         '
         'Label26
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(7, 173)
+        Me.Label26.Location = New System.Drawing.Point(6, 140)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(117, 16)
         Me.Label26.TabIndex = 34
@@ -868,7 +894,7 @@ Partial Class frmNewloan
         '
         'btnLess
         '
-        Me.btnLess.Location = New System.Drawing.Point(988, 432)
+        Me.btnLess.Location = New System.Drawing.Point(937, 403)
         Me.btnLess.Name = "btnLess"
         Me.btnLess.Size = New System.Drawing.Size(102, 35)
         Me.btnLess.TabIndex = 32
@@ -877,7 +903,7 @@ Partial Class frmNewloan
         '
         'btnRenew
         '
-        Me.btnRenew.Location = New System.Drawing.Point(508, 432)
+        Me.btnRenew.Location = New System.Drawing.Point(508, 403)
         Me.btnRenew.Name = "btnRenew"
         Me.btnRenew.Size = New System.Drawing.Size(102, 35)
         Me.btnRenew.TabIndex = 34
@@ -886,40 +912,51 @@ Partial Class frmNewloan
         '
         'btnRedeem
         '
-        Me.btnRedeem.Location = New System.Drawing.Point(616, 432)
+        Me.btnRedeem.Location = New System.Drawing.Point(616, 403)
         Me.btnRedeem.Name = "btnRedeem"
         Me.btnRedeem.Size = New System.Drawing.Size(102, 35)
         Me.btnRedeem.TabIndex = 35
         Me.btnRedeem.Text = "&Redeem"
         Me.btnRedeem.UseVisualStyleBackColor = True
         '
-        'txtInt
+        'lblTitle
         '
-        Me.txtInt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInt.Location = New System.Drawing.Point(134, 113)
-        Me.txtInt.Name = "txtInt"
-        Me.txtInt.ReadOnly = True
-        Me.txtInt.Size = New System.Drawing.Size(113, 22)
-        Me.txtInt.TabIndex = 55
-        Me.txtInt.Visible = False
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.Location = New System.Drawing.Point(18, 9)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(101, 25)
+        Me.lblTitle.TabIndex = 36
+        Me.lblTitle.Text = "Pawning"
         '
-        'Label17
+        'txtPayment
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(7, 115)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(67, 16)
-        Me.Label17.TabIndex = 56
-        Me.Label17.Text = "Interest :"
-        Me.Label17.Visible = False
+        Me.txtPayment.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPayment.Location = New System.Drawing.Point(134, 318)
+        Me.txtPayment.Name = "txtPayment"
+        Me.txtPayment.ReadOnly = True
+        Me.txtPayment.Size = New System.Drawing.Size(113, 22)
+        Me.txtPayment.TabIndex = 31
+        Me.txtPayment.Visible = False
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(7, 320)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(91, 16)
+        Me.Label20.TabIndex = 58
+        Me.Label20.Text = "Net Amount:"
+        Me.Label20.Visible = False
         '
         'frmNewloan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(1096, 478)
+        Me.ClientSize = New System.Drawing.Size(1054, 446)
+        Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnRedeem)
         Me.Controls.Add(Me.btnRenew)
         Me.Controls.Add(Me.btnLess)
@@ -933,6 +970,7 @@ Partial Class frmNewloan
         Me.Controls.Add(Me.grpItem)
         Me.Controls.Add(Me.grpPawner)
         Me.KeyPreview = True
+        Me.MaximizeBox = False
         Me.Name = "frmNewloan"
         Me.Text = "New Loan"
         Me.grpPawner.ResumeLayout(False)
@@ -1025,4 +1063,7 @@ Partial Class frmNewloan
     Friend WithEvents btnRedeem As System.Windows.Forms.Button
     Friend WithEvents txtInt As System.Windows.Forms.TextBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents lblTitle As System.Windows.Forms.Label
+    Friend WithEvents txtPayment As System.Windows.Forms.TextBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
 End Class

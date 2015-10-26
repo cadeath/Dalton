@@ -1,6 +1,7 @@
 ﻿Public Class frmNewloan
 
     Dim Pawner As Client
+    Dim PawnItem As PawnTicket
     Dim currentPawnTicket As Integer = GetLastNum()
     Dim currentOR As Integer = GetORNum()
     Dim transactionType As String
@@ -133,6 +134,8 @@
 
     Friend Sub NewLoan()
         transactionType = "L"
+        Me.Text = "New Loan"
+        lblTitle.Text = "New Loan"
 
         ' Pawner
         txtPawner.ReadOnly = False
@@ -211,6 +214,8 @@
         LoadAppraisers()
         cboAppraiser.Text = GetAppraiserById(tk.AppraiserID)
 
+        PawnItem = tk
+
         Select Case tt
             Case "D" 'Display
                 ' Pawner
@@ -238,6 +243,9 @@
                 btnLess.Enabled = False
                 btnRedeem.Visible = True
                 btnRenew.Visible = True
+
+                Me.Text = "Pawn Ticket Number " & tk.PawnTicket
+                lblTitle.Text = "Display"
         End Select
     End Sub
 
@@ -446,6 +454,27 @@
 
     Private Sub AddAuthentication()
         btnSave.PerformClick()
+    End Sub
+
+    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        Renewal()
+    End Sub
+
+    ' Fixing Renewal Procedures
+    Private Sub Renewal()
+        transactionType = "R"
+
+        grpPawner.Enabled = False
+        grpItem.Enabled = False
+        grpTicket.Enabled = False
+        grpReceipt.Enabled = True
+
+        txtRefNo.Text = String.Format("{0:000000}", currentOR)
+        dtpDate.Value = CurrentDate
+        txtAppr.Text = PawnItem.Appraisal
+        txtLess.Text = 0
+        txtInt.Text = PawnItem.Interest
+
     End Sub
 End Class
 
