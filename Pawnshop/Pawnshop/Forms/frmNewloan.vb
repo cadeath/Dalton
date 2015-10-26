@@ -212,7 +212,7 @@
         cboAppraiser.Text = GetAppraiserById(tk.AppraiserID)
 
         Select Case tt
-            Case "V" 'Viewing
+            Case "D" 'Display
                 ' Pawner
                 txtPawner.ReadOnly = True
 

@@ -100,7 +100,7 @@
         Dim idx As Integer = CInt(lvPawners.FocusedItem.Text)
         Dim tmpTicket As New PawnTicket
         tmpTicket.LoadTicket(idx, "PawnTicket")
-        frmNewloan.LoadPawnTicket(tmpTicket, "V")
+        frmNewloan.LoadPawnTicket(tmpTicket, "D")
         frmNewloan.Show()
     End Sub
 
