@@ -1,4 +1,6 @@
 ﻿' Changelog
+' 1.2 10/26/2015
+'  - Fixing ID List
 ' 1.1 10/20/2015
 '  - ComputerBirthday Added
 '  - LockFields
@@ -47,6 +49,8 @@ Public Class frmClientInformation
         txtOthers.Text = cl.OtherNumber
 
         SelectedClient = cl
+
+        LoadID(cl)
         ComputeBirthday()
         LockFields(True)
     End Sub
@@ -87,6 +91,8 @@ Public Class frmClientInformation
         cboIDtype.Enabled = Not st
         txtRef.ReadOnly = st
         txtRemarks.ReadOnly = st
+
+        grpID.Enabled = Not st
 
         If st Then
             btnSave.Text = "&Modify"
@@ -236,13 +242,19 @@ Public Class frmClientInformation
 
             If isNew Then
                 .SaveClient()
-                MsgBox("Entry Saved", MsgBoxStyle.Information)
+
             Else
                 .ModifyClient()
-                MsgBox("Entry Updated", MsgBoxStyle.Information)
             End If
         End With
 
+        SaveIDs(tmpClient)
+
+        If isNew Then
+            MsgBox("Entry Saved", MsgBoxStyle.Information)
+        Else
+            MsgBox("Entry Updated", MsgBoxStyle.Information)
+        End If
 
 
         frmClient.btnSearch.PerformClick()
@@ -267,7 +279,7 @@ Public Class frmClientInformation
 
     'ID Group===================
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        If cboIDtype.Text = "" Or txtRef.Text = "" Or txtRemarks.Text = "" Then Exit Sub
+        If cboIDtype.Text = "" Or txtRef.Text = "" Then Exit Sub
 
         Dim tmpID As New IdentificationCard
         tmpID.IDType = cboIDtype.Text
@@ -284,6 +296,11 @@ Public Class frmClientInformation
         lv.SubItems.Add(cID.ReferenceNumber)
         lv.SubItems.Add(cID.Remarks)
 
+        If cID.isSelected Then
+            lv.BackColor = Color.ForestGreen
+        End If
+
+        cID.ClientID = SelectedClient.ID
         ClientIDs.Add(cID)
     End Sub
 
@@ -322,8 +339,51 @@ Public Class frmClientInformation
         SelID.Selected()
     End Sub
 
-    Private Sub SaveIDs()
+    Private Sub SaveIDs(Optional ByVal cl As Client = Nothing)
+        defaultID()
 
+        Dim xIdx As Integer = 0
+        For Each cID As IdentificationCard In ClientIDs
+            If cID.ID = Nothing Then
+                cID.ClientID = cl.ID
+                cID.Save()
+            Else
+                cID.Modify()
+                Console.WriteLine("cID#: " & cID.ID)
+            End If
+            xIdx += 1
+        Next
+    End Sub
+
+    Private Sub defaultID()
+        Dim hasSelected As Boolean = False, cnt As Integer = 0
+
+        For Each lv As ListViewItem In lvID.Items
+            If lv.BackColor = Color.ForestGreen Then
+                hasSelected = True
+            End If
+        Next
+
+        If Not hasSelected And lvID.Items.Count > 0 Then
+            lvID.Items(0).BackColor = Color.ForestGreen
+            ClientIDs.Item(0).Selected()
+        End If
+    End Sub
+
+    Private Sub btnIDSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDSelect.Click
+        Dim idx As Integer
+        idx = lvID.FocusedItem.Index
+
+        For cnt As Integer = 0 To lvID.Items.Count - 1
+            Dim lv As ListViewItem = lvID.Items(cnt)
+            lv.BackColor = System.Drawing.SystemColors.Window
+            ClientIDs.Item(cnt).isSelected = False
+        Next
+
+        'ListViewItem Highlight
+        lvID.FocusedItem.BackColor = Color.ForestGreen
+        ClientIDs.Item(idx).Selected()
+        'lvID.FocusedItem.Selected = True
     End Sub
     'END - ID Group===================
 End Class

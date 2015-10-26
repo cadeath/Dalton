@@ -7,7 +7,7 @@
     Private _RefNum As String = String.Empty
     Private _Remarks As String = String.Empty
     Private _isSelected As Boolean = 0
-    Private fillData As String = "ShowID"
+    Private fillData As String = "tblidentification"
 #End Region
 
 #Region "Properties"
@@ -72,11 +72,11 @@
         ds.Tables.Add(dt)
         With ds.Tables(fillData).Columns
             ' Primary not required
-            '.Add(New DataColumn("id", GetType(Integer))) 'AutoIncrement
+            .Add(New DataColumn("id", GetType(Integer))) 'AutoIncrement
             .Add(New DataColumn("ClientID", GetType(Integer)))
             .Add(New DataColumn("IDType", GetType(String)))
             .Add(New DataColumn("RefNum", GetType(String)))
-            .Add(New DataColumn("isSelected", GetType(Boolean)))
+            .Add(New DataColumn("isSelected", GetType(Integer)))
             .Add(New DataColumn("Remarks", GetType(String)))
         End With
 
@@ -101,8 +101,8 @@
     Public Function Modify() As Boolean
         Dim mySql As String, ds As DataSet
 
-        mySql = "SELECT * FROM id = " & Me.ID
-        ds = LoadSQL(mySql)
+        mySql = "SELECT * FROM tblIdentification WHERE id = " & Me.ID
+        ds = LoadSQL(mySql, fillData)
 
         With ds.Tables(0).Rows(0)
             .Item("IDType") = _IDType
@@ -117,30 +117,24 @@
     End Function
 
     Public Sub Selected()
+        _isSelected = True
+    End Sub
+
+    Private Sub ClearSelected()
         Dim mySql As String
 
         mySql = "SELECT * FROM tblIdentification WHERE ClientID = " & Me.ClientID
-        Dim ds As DataSet = LoadSQL(mySql)
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
         For Each dr As DataRow In ds.Tables(0).Rows
             With dr
                 .Item("isSelected") = 0
             End With
         Next
         database.SaveEntry(ds, False) 'Deselect all
-
-        mySql = "SELECT * FROM tblIdentification WHERE ID = " & _id
-        ds.Clear()
-        ds = LoadSQL(mySql)
-        With ds.Tables(0).Rows(0)
-            .Item("isSelected") = 1
-        End With
-
-        database.SaveEntry(ds, False)
-        Console.WriteLine(String.Format("ID Type {0} selected", Me.IDType))
     End Sub
 
     Public Sub LoadID(ByVal id As Integer)
-        Dim mySql As String = "SELECT * FROM id = " & id
+        Dim mySql As String = "SELECT * FROM tblIdentification WHERE id = " & id
         Dim ds As DataSet = LoadSQL(mySql)
 
         With ds.Tables(0).Rows(0)
