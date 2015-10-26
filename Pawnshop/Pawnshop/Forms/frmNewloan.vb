@@ -1,16 +1,16 @@
 ﻿Public Class frmNewloan
 
     Dim Pawner As Client
-    Dim currentPawnTicket As Integer = 10026
+    Dim currentPawnTicket As Integer = GetLastNum()
+    Dim currentOR As Integer = GetORNum()
     Dim transactionType As String
 
-    Private Function GetLastNum() As Integer
-        Dim mySql As String = "SELECT * FROM opt_keys = 'PawnLastNum'"
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim ret As Integer
-        ret = CInt(ds.Tables(0).Rows(0).Item("opt_values"))
+    Private Function GetORNum() As Integer
+        Return GetOption("ORLastNum")
+    End Function
 
-        Return ret
+    Private Function GetLastNum() As Integer
+        Return GetOption("PawnLastNum")
     End Function
 
     Private Sub LoadItemType()
@@ -69,10 +69,10 @@
             Auction.Value = LoanDate.Value.AddDays(123)
         End If
     End Sub
+
     Private Sub TextBox2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppraisal.KeyPress
         DigitOnly(e)
     End Sub
-
 
     Private Sub LoadAppraisers()
         Dim users() As String = {"Eskie", "Frances", "Mai2", "Jayr"}
@@ -85,31 +85,16 @@
         frmClient.Show()
     End Sub
 
-    ''' <summary>
-    ''' Identify if the KeyPress is enter
-    ''' </summary>
-    ''' <param name="e">KeyPressEventArgs</param>
-    ''' <returns>Boolean</returns>
-    Private Function isEnter(ByVal e As KeyPressEventArgs) As Boolean
-        If Asc(e.KeyChar) = 13 Then
-            Return True
-        End If
-        Return False
-    End Function
-
     Private Sub txtPawner_KeyPress(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPawner.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
         End If
     End Sub
+
     Private Sub txtDesc_KeyPress(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesc.KeyPress
         If isEnter(e) Then
             cboItemtype.Focus()
         End If
-    End Sub
-
-    Private Sub Maturity_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Maturity.ValueChanged
-
     End Sub
 
     Private Sub txtGrams_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtGrams.KeyPress
@@ -121,16 +106,11 @@
         txtPrincipal.Text = txtAppraisal.Text
     End Sub
 
-    Private Sub txtTotal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTotal.TextChanged
-
-    End Sub
-
     Private Sub txtPawner_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPawner.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
         End If
     End Sub
-
 
     Private Sub btnLess_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLess.Click
         lblLess.Visible = True
@@ -144,9 +124,11 @@
     End Sub
 
     Private Sub frmNewloan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ClearFields()
-        LoadAppraisers()
-        NewLoan()
+        If IsNothing(Pawner) Then
+            ClearFields()
+            LoadAppraisers()
+            NewLoan()
+        End If
     End Sub
 
     Friend Sub NewLoan()
@@ -190,6 +172,73 @@
         cboAppraiser.Enabled = True
 
         LoadCurrentPawnTicket()
+
+        btnRedeem.Enabled = False
+        btnRenew.Enabled = False
+    End Sub
+
+    Friend Sub LoadPawnTicket(ByVal tk As PawnTicket, ByVal tt As String)
+        transactionType = tt
+
+        ' Pawner
+        LoadPawnerInfo(tk.Pawner)
+        Pawner = tk.Pawner
+        btnSearch.Enabled = False
+
+        ' Item Information
+        cboItemtype.Text = tk.ItemType
+        txtDesc.Text = tk.Description
+        cboCategory.Text = GetCategoryByID(tk.CategoryID)
+        txtGrams.Text = IIf(tk.Grams = 0, "", tk.Grams)
+        cboKarat.Text = tk.Karat
+        txtAppraisal.Text = tk.Appraisal
+        txtPrincipal.Text = tk.Principal
+        txtTotal.Text = tk.NetAmount
+
+        ' Receipt Information
+        txtRefNo.Text = tk.OfficialReceiptNumber
+        dtpDate.Value = IIf(tk.OfficialReceiptDate = #12:00:00 AM#, dtpDate.MinDate, tk.OfficialReceiptDate)
+        txtAppr.Text = tk.Appraisal
+        txtLess.Text = tk.LessPrincipal
+        txtOverDue.Text = tk.DaysOverDue
+        txtDelayInt.Text = tk.DelayInterest
+        txtPenalty.Text = tk.Penalty
+        txtSrvChrg.Text = tk.ServiceCharge
+        txtEvat.Text = tk.EVAT
+        txtRenewDue.Text = tk.RenewDue
+        txtRedeemDue.Text = tk.RedeemDue
+
+        LoadAppraisers()
+        cboAppraiser.Text = GetAppraiserById(tk.AppraiserID)
+
+        Select Case tt
+            Case "V" 'Viewing
+                ' Pawner
+                txtPawner.ReadOnly = True
+
+                ' Item Information
+                cboItemtype.Enabled = False
+                txtDesc.ReadOnly = True
+                cboCategory.Enabled = False
+                txtGrams.ReadOnly = True
+                cboKarat.Enabled = False
+
+                ' Ticket Information
+                Maturity.Enabled = False
+                Expiry.Enabled = False
+                Auction.Enabled = False
+                txtAppraisal.ReadOnly = True
+                txtPrincipal.ReadOnly = True
+
+                ' Receipt Information
+                grpReceipt.Enabled = False
+
+                cboAppraiser.Enabled = False
+                btnSave.Enabled = False
+                btnLess.Enabled = False
+                btnRedeem.Visible = True
+                btnRenew.Visible = True
+        End Select
     End Sub
 
     Friend Sub LoadPawnerInfo(ByVal cl As Client)
@@ -213,11 +262,12 @@
         txtAddress.Text = ""
         txtBDay.Text = ""
         txtPhone.Text = ""
+        lblAge.Text = "-"
 
         ' Item Information
         txtDesc.Text = ""
-        cboItemtype.Text = ""
-        cboCategory.Text = ""
+        cboItemtype.SelectedIndex = -1
+        cboCategory.SelectedIndex = -1
         ' Jewel
         txtGrams.Text = ""
         cboKarat.Text = ""
@@ -246,16 +296,12 @@
         txtRenewDue.Text = ""
         txtRedeemDue.Text = ""
 
-        cboAppraiser.Text = ""
-        cboAppraiser.Items.Clear()
+        cboAppraiser.SelectedIndex = -1
+        LoadCurrentPawnTicket()
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
-    End Sub
-
-    Private Sub txtPawner_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPawner.TextChanged
-
     End Sub
 
     Private Sub cboKarat_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboKarat.KeyPress
@@ -269,7 +315,9 @@
     End Sub
 
     Private Sub txtPrincipal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPrincipal.KeyPress
-
+        If isEnter(e) Then
+            txtTotal.Focus()
+        End If
     End Sub
 
     Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
@@ -316,6 +364,8 @@
             End If
 
             .SaveTicket()
+            currentPawnTicket += 1
+            database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
         End With
 
         MsgBox("Ticket Posted", MsgBoxStyle.Information, "Transaction Saved")
@@ -324,63 +374,57 @@
             ClearFields()
             NewLoan()
         Else
+            frmPawning.LoadActive()
             Me.Close()
         End If
-
     End Sub
+
+    Private Function GetCategoryByID(ByVal id As Integer) As String
+        Dim cat() As String
+        cat = {"CAMERA", "CARPENTRY TOOLS", "HOME APP-SMALL", "LAPTOP", "NOTEBOOK", _
+               "BIKE", "HOME APP-BIG", "MOTORCYCLE", "CELLPHONE", "TABLET", "ANKLET", _
+               "BANGLE", "BRACELET", "BROUCH", "EARRINGS", "NECKLACE", "PENDANT", "RING"}
+        Return cat(id)
+    End Function
 
     Private Function GetCategoryID(ByVal typ As String) As Integer
         ' Must be in the database
         Select Case typ
-            Case "CAMERA"
-                Return 0
-            Case "CARPENTRY TOOLS"
-                Return 1
-            Case "HOME APP-SMALL"
-                Return 2
-            Case "LAPTOP"
-                Return 3
-            Case "NOTEBOOK"
-                Return 4
-            Case "BIKE"
-                Return 5
-            Case "HOME APP-BIG"
-                Return 6
-            Case "MOTORCYCLE"
-                Return 7
-            Case "CELLPHONE"
-                Return 8
-            Case "TABLET"
-                Return 9
-            Case "ANKLET"
-                Return 10
-            Case "BANGLE"
-                Return 11
-            Case "BROUCH"
-                Return 12
-            Case "EARRINGS"
-                Return 13
-            Case "NECKLASE"
-                Return 14
-            Case "PENDANT"
-                Return 15
-            Case "RING"
-                Return 16
-            Case Else
-                Return 99
+            Case "CAMERA" : Return 0
+            Case "CARPENTRY TOOLS" : Return 1
+            Case "HOME APP-SMALL" : Return 2
+            Case "LAPTOP" : Return 3
+            Case "NOTEBOOK" : Return 4
+            Case "BIKE" : Return 5
+            Case "HOME APP-BIG" : Return 6
+            Case "MOTORCYCLE" : Return 7
+            Case "CELLPHONE" : Return 8
+            Case "TABLET" : Return 9
+            Case "ANKLET" : Return 10
+            Case "BANGLE" : Return 11
+            Case "BRACELET" : Return 12
+            Case "BROUCH" : Return 13
+            Case "EARRINGS" : Return 14
+            Case "NECKLACE" : Return 15
+            Case "PENDANT" : Return 16
+            Case "RING" : Return 17
+            Case Else : Return 99
         End Select
+    End Function
+
+    Private Function GetAppraiserById(ByVal id As Integer) As String
+        Dim app() As String
+        app = {"Eskie", "Frances", "Mai2", "Jayr"}
+
+        Return app(id)
     End Function
 
     Private Function GetAppraiserID(ByVal name As String) As Integer
         Select Case name
-            Case "Eskie"
-                Return 0
-            Case "Frances"
-                Return 1
-            Case "Mai2"
-                Return 2
-            Case "Jayr"
-                Return 3
+            Case "Eskie" : Return 0
+            Case "Frances" : Return 1
+            Case "Mai2" : Return 2
+            Case "Jayr" : Return 3
             Case Else
                 Return 99
         End Select

@@ -226,6 +226,9 @@
             _orDate = value
         End Set
         Get
+            If _orDate = #12:00:00 AM# Then
+                _orDate = Nothing
+            End If
             Return _orDate
         End Get
     End Property
@@ -325,7 +328,7 @@
             .Add(New DataColumn("NetAmount", GetType(Double)))
             .Add(New DataColumn("Evat", GetType(Double)))
             .Add(New DataColumn("AppraiserID", GetType(Integer)))
-            .Add(New DataColumn("NewTicket", GetType(Integer)))
+            .Add(New DataColumn("OldTicket", GetType(Integer)))
             .Add(New DataColumn("ORNum", GetType(Integer)))
             .Add(New DataColumn("ORDate", GetType(Date)))
             .Add(New DataColumn("LessPrincipal", GetType(Double)))
@@ -375,8 +378,8 @@
         Return ds
     End Function
 
-    Public Sub LoadTicket(ByVal id As Integer)
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE PAWNID = " & id
+    Public Sub LoadTicket(ByVal id As Integer, Optional ByVal col As String = "PAWNID")
+        Dim mySql As String = "SELECT * FROM tblpawn WHERE " & col & " = " & id
         Dim ds As DataSet = LoadSQL(mySql)
 
         With ds.Tables(0).Rows(0)

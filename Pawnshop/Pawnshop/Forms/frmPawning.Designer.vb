@@ -40,6 +40,7 @@ Partial Class frmPawning
         Me.btnRenew = New System.Windows.Forms.Button()
         Me.btnRedeem = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -52,7 +53,7 @@ Partial Class frmPawning
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 74)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(742, 70)
+        Me.GroupBox1.Size = New System.Drawing.Size(775, 70)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search Item"
@@ -60,7 +61,7 @@ Partial Class frmPawning
         'btnSearch
         '
         Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.Location = New System.Drawing.Point(662, 38)
+        Me.btnSearch.Location = New System.Drawing.Point(695, 38)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(74, 23)
         Me.btnSearch.TabIndex = 6
@@ -74,7 +75,7 @@ Partial Class frmPawning
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(6, 38)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(650, 22)
+        Me.txtSearch.Size = New System.Drawing.Size(683, 22)
         Me.txtSearch.TabIndex = 0
         Me.txtSearch.Text = "Kiko Mizuhara"
         '
@@ -96,8 +97,9 @@ Partial Class frmPawning
         Me.lvPawners.FullRowSelect = True
         Me.lvPawners.GridLines = True
         Me.lvPawners.Location = New System.Drawing.Point(12, 150)
+        Me.lvPawners.MultiSelect = False
         Me.lvPawners.Name = "lvPawners"
-        Me.lvPawners.Size = New System.Drawing.Size(743, 179)
+        Me.lvPawners.Size = New System.Drawing.Size(776, 226)
         Me.lvPawners.TabIndex = 1
         Me.lvPawners.UseCompatibleStateImageBehavior = False
         Me.lvPawners.View = System.Windows.Forms.View.Details
@@ -176,19 +178,31 @@ Partial Class frmPawning
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Location = New System.Drawing.Point(680, 336)
+        Me.btnClose.Location = New System.Drawing.Point(713, 383)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 2
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'btnView
+        '
+        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnView.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnView.Location = New System.Drawing.Point(626, 382)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 23)
+        Me.btnView.TabIndex = 6
+        Me.btnView.Text = "&View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
         'frmPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(767, 371)
+        Me.ClientSize = New System.Drawing.Size(800, 418)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnRedeem)
         Me.Controls.Add(Me.btnRenew)
@@ -221,4 +235,5 @@ Partial Class frmPawning
     Friend WithEvents btnRenew As System.Windows.Forms.Button
     Friend WithEvents btnRedeem As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents btnView As System.Windows.Forms.Button
 End Class

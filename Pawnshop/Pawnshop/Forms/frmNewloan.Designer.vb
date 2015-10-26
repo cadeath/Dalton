@@ -94,6 +94,8 @@ Partial Class frmNewloan
         Me.Label29 = New System.Windows.Forms.Label()
         Me.lblTranstype = New System.Windows.Forms.Label()
         Me.btnLess = New System.Windows.Forms.Button()
+        Me.btnRenew = New System.Windows.Forms.Button()
+        Me.btnRedeem = New System.Windows.Forms.Button()
         Me.grpPawner.SuspendLayout()
         Me.grpItem.SuspendLayout()
         Me.grpTicket.SuspendLayout()
@@ -862,20 +864,39 @@ Partial Class frmNewloan
         '
         'btnLess
         '
-        Me.btnLess.Location = New System.Drawing.Point(508, 429)
+        Me.btnLess.Location = New System.Drawing.Point(988, 432)
         Me.btnLess.Name = "btnLess"
         Me.btnLess.Size = New System.Drawing.Size(102, 35)
         Me.btnLess.TabIndex = 32
         Me.btnLess.Text = "&Less Principal"
         Me.btnLess.UseVisualStyleBackColor = True
-        Me.btnLess.Visible = False
+        '
+        'btnRenew
+        '
+        Me.btnRenew.Location = New System.Drawing.Point(508, 432)
+        Me.btnRenew.Name = "btnRenew"
+        Me.btnRenew.Size = New System.Drawing.Size(102, 35)
+        Me.btnRenew.TabIndex = 34
+        Me.btnRenew.Text = "&Renew"
+        Me.btnRenew.UseVisualStyleBackColor = True
+        '
+        'btnRedeem
+        '
+        Me.btnRedeem.Location = New System.Drawing.Point(616, 432)
+        Me.btnRedeem.Name = "btnRedeem"
+        Me.btnRedeem.Size = New System.Drawing.Size(102, 35)
+        Me.btnRedeem.TabIndex = 35
+        Me.btnRedeem.Text = "&Redeem"
+        Me.btnRedeem.UseVisualStyleBackColor = True
         '
         'frmNewloan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(1096, 494)
+        Me.ClientSize = New System.Drawing.Size(1096, 478)
+        Me.Controls.Add(Me.btnRedeem)
+        Me.Controls.Add(Me.btnRenew)
         Me.Controls.Add(Me.btnLess)
         Me.Controls.Add(Me.lblTranstype)
         Me.Controls.Add(Me.grpReceipt)
@@ -886,6 +907,7 @@ Partial Class frmNewloan
         Me.Controls.Add(Me.grpTicket)
         Me.Controls.Add(Me.grpItem)
         Me.Controls.Add(Me.grpPawner)
+        Me.KeyPreview = True
         Me.Name = "frmNewloan"
         Me.Text = "New Loan"
         Me.grpPawner.ResumeLayout(False)
@@ -974,4 +996,6 @@ Partial Class frmNewloan
     Friend WithEvents btnLess As System.Windows.Forms.Button
     Friend WithEvents cboAppraiser As System.Windows.Forms.ComboBox
     Friend WithEvents lblAge As System.Windows.Forms.Label
+    Friend WithEvents btnRenew As System.Windows.Forms.Button
+    Friend WithEvents btnRedeem As System.Windows.Forms.Button
 End Class

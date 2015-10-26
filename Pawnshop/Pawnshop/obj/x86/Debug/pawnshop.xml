@@ -24,12 +24,6 @@ pawnshop
  </summary>
 	<param name="txtBox">TextBox of the Money</param>
 	<returns>Boolean</returns>
-</member><member name="M:Pawnshop.frmNewloan.isEnter(System.Windows.Forms.KeyPressEventArgs)">
-	<summary>
- Identify if the KeyPress is enter
- </summary>
-	<param name="e">KeyPressEventArgs</param>
-	<returns>Boolean</returns>
 </member><member name="M:Pawnshop.Client.LoadClient(System.Int32)">
 	<summary>
  This is use to load Client information
