@@ -60,36 +60,60 @@ Module database
 
         dbOpen()
 
-        Try
-            Dim da As OdbcDataAdapter
-            Dim ds As New DataSet, mySql As String, fillData As String
-            ds = dsEntry
+        Dim da As OdbcDataAdapter
+        Dim ds As New DataSet, mySql As String, fillData As String
+        ds = dsEntry
 
-            'Save all tables in the dataset
-            For Each dsTable As DataTable In dsEntry.Tables
-                fillData = dsTable.TableName
-                mySql = "SELECT * FROM " & fillData
-                If Not isNew Then
-                    Dim colName As String = dsTable.Columns(0).ColumnName
-                    Dim idx As Integer = dsTable.Rows(0).Item(0)
-                    mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
+        'Save all tables in the dataset
+        For Each dsTable As DataTable In dsEntry.Tables
+            fillData = dsTable.TableName
+            mySql = "SELECT * FROM " & fillData
+            If Not isNew Then
+                Dim colName As String = dsTable.Columns(0).ColumnName
+                Dim idx As Integer = dsTable.Rows(0).Item(0)
+                mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
 
-                    Console.WriteLine("ModifySQL: " & mySql)
-                End If
+                Console.WriteLine("ModifySQL: " & mySql)
+            End If
 
-                da = New OdbcDataAdapter(mySql, con)
-                Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
-                da.Update(ds, fillData)
-            Next
+            da = New OdbcDataAdapter(mySql, con)
+            Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
+            da.Update(ds, fillData)
+        Next
 
-            dbClose()
+        dbClose()
+        Return True
 
-            Return True
-        Catch ex As Exception
-            MsgBox("[Module 001 - SaveEntry]" & vbCr & ex.Message.ToString, MsgBoxStyle.Critical, "Saving Failed")
-            dbClose()
-            Return False
-        End Try
+        'Try
+        '    Dim da As OdbcDataAdapter
+        '    Dim ds As New DataSet, mySql As String, fillData As String
+        '    ds = dsEntry
+
+        '    'Save all tables in the dataset
+        '    For Each dsTable As DataTable In dsEntry.Tables
+        '        fillData = dsTable.TableName
+        '        mySql = "SELECT * FROM " & fillData
+        '        If Not isNew Then
+        '            Dim colName As String = dsTable.Columns(0).ColumnName
+        '            Dim idx As Integer = dsTable.Rows(0).Item(0)
+        '            mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
+
+        '            Console.WriteLine("ModifySQL: " & mySql)
+        '        End If
+
+        '        da = New OdbcDataAdapter(mySql, con)
+        '        Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
+        '        da.Update(ds, fillData)
+        '    Next
+
+        '    dbClose()
+
+        '    Return True
+        'Catch ex As Exception
+        '    MsgBox("[Module 001 - SaveEntry]" & vbCr & ex.Message.ToString, MsgBoxStyle.Critical, "Saving Failed")
+        '    dbClose()
+        '    Return False
+        'End Try
     End Function
 
     ' Module 002

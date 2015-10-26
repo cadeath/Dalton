@@ -1,16 +1,16 @@
 ﻿Public Class CollectionID
     Inherits System.Collections.CollectionBase
 
-    Public ReadOnly Property Item(ByVal index As Integer) As DataSet
+    Public ReadOnly Property Item(ByVal index As Integer) As IdentificationCard
         Get
             ' The appropriate item is retrieved from the List object and 
             ' explicitly cast to the Widget type, then returned to the 
             ' caller.
-            Return CType(List.Item(index), DataSet)
+            Return CType(List.Item(index), IdentificationCard)
         End Get
     End Property
 
-    Public Sub Add(ByVal IDCard As DataSet)
+    Public Sub Add(ByVal IDCard As IdentificationCard)
         ' Invokes Add method of the List object to add a widget.
         List.Add(IDCard)
     End Sub
