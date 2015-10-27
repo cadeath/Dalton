@@ -79,10 +79,37 @@
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Single = ds.Tables(0).Rows.Count
+        Dim clientID As Integer = 0
 
         If MaxRow = 0 Then
-            Exit Sub
+
+            mySql = "SELECT * FROM tblClient WHERE "
+            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
+            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
+            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & txtSearch.Text & "%')"
+
+            ds.Clear()
+            ds = LoadSQL(mySql)
+            MaxRow = ds.Tables(0).Rows.Count
+            If MaxRow = 0 Then
+                Console.WriteLine("No Pawn, No Client, No found")
+                MsgBox("Query not found", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
+            clientID = ds.Tables(0).Rows(0).Item("ClientID")
+            ds.Clear()
+
+            mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
+            ds = LoadSQL(mySql)
+            MaxRow = ds.Tables(0).Rows.Count
+            If MaxRow = 0 Then
+                Console.WriteLine("No Pawn, No Client, No found")
+                MsgBox("Query not found", MsgBoxStyle.Information)
+                Exit Sub
+            End If
         End If
+
 
         If MaxRow > 0 Then
             lvPawners.Items.Clear()

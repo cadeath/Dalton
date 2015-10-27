@@ -541,9 +541,10 @@
 
     Private Sub CancelTrans()
         LoadPawnTicket(PawnItem, "D")
+        txtTotal.ReadOnly = True
     End Sub
 
-    Private Sub Renewal()
+    Friend Sub Renewal()
         transactionType = "R"
 
         'Buttons
@@ -650,7 +651,7 @@
         Redeem()
     End Sub
 
-    Private Sub Redeem()
+    Friend Sub Redeem()
         transactionType = "X"
 
         'Buttons
