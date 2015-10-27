@@ -110,10 +110,29 @@
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
+    <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Forms\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\devClient.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\diagPayloan.Designer.vb">
+      <DependentUpon>diagPayloan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\diagPayloan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLayAwayLookUp.Designer.vb">
+      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLayAwayLookUp.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLayAway.Designer.vb">
+      <DependentUpon>frmLayAway.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLayAway.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBorrowBrowse.Designer.vb">
@@ -164,10 +183,10 @@
     <Compile Include="Forms\frmExtractor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmLoanlist.Designer.vb">
-      <DependentUpon>frmLoanlist.vb</DependentUpon>
+    <Compile Include="Forms\frmInsurance.Designer.vb">
+      <DependentUpon>frmInsurance.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmLoanlist.vb">
+    <Compile Include="Forms\frmInsurance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmMain.vb">
@@ -195,7 +214,7 @@
     <Compile Include="Forms\frmMTSend.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmNewloan.designer.vb">
+    <Compile Include="Forms\frmNewloan.Designer.vb">
       <DependentUpon>frmNewloan.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmNewloan.vb">
@@ -207,16 +226,16 @@
     <Compile Include="Forms\frmOpenStore.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmPawning.Designer.vb">
+      <DependentUpon>frmPawning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPawning.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmRedeem.Designer.vb">
       <DependentUpon>frmRedeem.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmRedeem.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmSearchLoans.Designer.vb">
-      <DependentUpon>frmSearchLoans.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmSearchLoans.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmSettings.Designer.vb">
@@ -266,6 +285,12 @@
     <EmbeddedResource Include="Forms\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\diagPayloan.resx">
+      <DependentUpon>diagPayloan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLayAwayLookUp.resx">
+      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBorrowBrowse.resx">
       <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
     </EmbeddedResource>
@@ -290,8 +315,11 @@
     <EmbeddedResource Include="Forms\frmExtractor.resx">
       <DependentUpon>frmExtractor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLoanlist.resx">
-      <DependentUpon>frmLoanlist.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmInsurance.resx">
+      <DependentUpon>frmInsurance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLayAway.resx">
+      <DependentUpon>frmLayAway.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
@@ -305,17 +333,17 @@
     <EmbeddedResource Include="Forms\frmMTSend.resx">
       <DependentUpon>frmMTSend.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmNewloan.resx">
+    <EmbeddedResource Include="Forms\frmNewLoan.resx">
       <DependentUpon>frmNewloan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOpenStore.resx">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPawning.resx">
+      <DependentUpon>frmPawning.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRedeem.resx">
       <DependentUpon>frmRedeem.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmSearchLoans.resx">
-      <DependentUpon>frmSearchLoans.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>

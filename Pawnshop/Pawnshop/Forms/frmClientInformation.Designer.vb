@@ -59,7 +59,8 @@ Partial Class frmClientInformation
         Me.Label12 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.grpID = New System.Windows.Forms.GroupBox()
+        Me.btnIDModify = New System.Windows.Forms.Button()
         Me.btnIDSelect = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.txtRemarks = New System.Windows.Forms.TextBox()
@@ -73,10 +74,9 @@ Partial Class frmClientInformation
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
-        Me.btnIDModify = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.grpID.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -455,24 +455,34 @@ Partial Class frmClientInformation
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'GroupBox3
+        'grpID
         '
-        Me.GroupBox3.Controls.Add(Me.btnIDModify)
-        Me.GroupBox3.Controls.Add(Me.btnIDSelect)
-        Me.GroupBox3.Controls.Add(Me.btnAdd)
-        Me.GroupBox3.Controls.Add(Me.txtRemarks)
-        Me.GroupBox3.Controls.Add(Me.Label20)
-        Me.GroupBox3.Controls.Add(Me.txtRef)
-        Me.GroupBox3.Controls.Add(Me.Label19)
-        Me.GroupBox3.Controls.Add(Me.cboIDtype)
-        Me.GroupBox3.Controls.Add(Me.Label18)
-        Me.GroupBox3.Controls.Add(Me.lvID)
-        Me.GroupBox3.Location = New System.Drawing.Point(563, 15)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(389, 274)
-        Me.GroupBox3.TabIndex = 5
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "ID List"
+        Me.grpID.Controls.Add(Me.btnIDModify)
+        Me.grpID.Controls.Add(Me.btnIDSelect)
+        Me.grpID.Controls.Add(Me.btnAdd)
+        Me.grpID.Controls.Add(Me.txtRemarks)
+        Me.grpID.Controls.Add(Me.Label20)
+        Me.grpID.Controls.Add(Me.txtRef)
+        Me.grpID.Controls.Add(Me.Label19)
+        Me.grpID.Controls.Add(Me.cboIDtype)
+        Me.grpID.Controls.Add(Me.Label18)
+        Me.grpID.Controls.Add(Me.lvID)
+        Me.grpID.Location = New System.Drawing.Point(563, 15)
+        Me.grpID.Name = "grpID"
+        Me.grpID.Size = New System.Drawing.Size(389, 274)
+        Me.grpID.TabIndex = 5
+        Me.grpID.TabStop = False
+        Me.grpID.Text = "ID List"
+        '
+        'btnIDModify
+        '
+        Me.btnIDModify.Location = New System.Drawing.Point(86, 243)
+        Me.btnIDModify.Name = "btnIDModify"
+        Me.btnIDModify.Size = New System.Drawing.Size(75, 23)
+        Me.btnIDModify.TabIndex = 26
+        Me.btnIDModify.Text = "&Edit"
+        Me.btnIDModify.UseVisualStyleBackColor = True
+        Me.btnIDModify.Visible = False
         '
         'btnIDSelect
         '
@@ -555,7 +565,9 @@ Partial Class frmClientInformation
         'lvID
         '
         Me.lvID.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
+        Me.lvID.FullRowSelect = True
         Me.lvID.Location = New System.Drawing.Point(6, 99)
+        Me.lvID.MultiSelect = False
         Me.lvID.Name = "lvID"
         Me.lvID.Size = New System.Drawing.Size(377, 138)
         Me.lvID.TabIndex = 18
@@ -586,15 +598,6 @@ Partial Class frmClientInformation
         Me.btnSelect.UseVisualStyleBackColor = True
         Me.btnSelect.Visible = False
         '
-        'btnIDModify
-        '
-        Me.btnIDModify.Location = New System.Drawing.Point(86, 243)
-        Me.btnIDModify.Name = "btnIDModify"
-        Me.btnIDModify.Size = New System.Drawing.Size(75, 23)
-        Me.btnIDModify.TabIndex = 26
-        Me.btnIDModify.Text = "&Edit"
-        Me.btnIDModify.UseVisualStyleBackColor = True
-        '
         'frmClientInformation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -602,7 +605,7 @@ Partial Class frmClientInformation
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(964, 396)
         Me.Controls.Add(Me.btnSelect)
-        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.grpID)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox2)
@@ -616,8 +619,8 @@ Partial Class frmClientInformation
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.grpID.ResumeLayout(False)
+        Me.grpID.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -657,7 +660,7 @@ Partial Class frmClientInformation
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents dtpBday As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpID As System.Windows.Forms.GroupBox
     Friend WithEvents lvID As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader

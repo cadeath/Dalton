@@ -360,6 +360,17 @@ Public Class Client
         Console.WriteLine("[LoadClientByRow] Client information Loaded.")
     End Sub
 
+    Public Function LoadLastEntry() As Client
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM clientID"
+        ds = LoadSQL(mySql)
+
+        Dim LastRow As Integer = ds.Tables(0).Rows.Count
+        LoadClient(ds.Tables(0).Rows(LastRow - 1).Item("ClientID"))
+
+        Return Me
+    End Function
+
     Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
         str = str.Replace("'", "\'")
         str = str.Replace("""", "\""")

@@ -60,36 +60,60 @@ Module database
 
         dbOpen()
 
-        Try
-            Dim da As OdbcDataAdapter
-            Dim ds As New DataSet, mySql As String, fillData As String
-            ds = dsEntry
+        Dim da As OdbcDataAdapter
+        Dim ds As New DataSet, mySql As String, fillData As String
+        ds = dsEntry
 
-            'Save all tables in the dataset
-            For Each dsTable As DataTable In dsEntry.Tables
-                fillData = dsTable.TableName
-                mySql = "SELECT * FROM " & fillData
-                If Not isNew Then
-                    Dim colName As String = dsTable.Columns(0).ColumnName
-                    Dim idx As Integer = dsTable.Rows(0).Item(0)
-                    mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
+        'Save all tables in the dataset
+        For Each dsTable As DataTable In dsEntry.Tables
+            fillData = dsTable.TableName
+            mySql = "SELECT * FROM " & fillData
+            If Not isNew Then
+                Dim colName As String = dsTable.Columns(0).ColumnName
+                Dim idx As Integer = dsTable.Rows(0).Item(0)
+                mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
 
-                    Console.WriteLine("ModifySQL: " & mySql)
-                End If
+                Console.WriteLine("ModifySQL: " & mySql)
+            End If
 
-                da = New OdbcDataAdapter(mySql, con)
-                Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
-                da.Update(ds, fillData)
-            Next
+            da = New OdbcDataAdapter(mySql, con)
+            Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
+            da.Update(ds, fillData)
+        Next
 
-            dbClose()
+        dbClose()
+        Return True
 
-            Return True
-        Catch ex As Exception
-            MsgBox("[Module 001 - SaveEntry]" & vbCr & ex.Message.ToString, MsgBoxStyle.Critical, "Saving Failed")
-            dbClose()
-            Return False
-        End Try
+        'Try
+        '    Dim da As OdbcDataAdapter
+        '    Dim ds As New DataSet, mySql As String, fillData As String
+        '    ds = dsEntry
+
+        '    'Save all tables in the dataset
+        '    For Each dsTable As DataTable In dsEntry.Tables
+        '        fillData = dsTable.TableName
+        '        mySql = "SELECT * FROM " & fillData
+        '        If Not isNew Then
+        '            Dim colName As String = dsTable.Columns(0).ColumnName
+        '            Dim idx As Integer = dsTable.Rows(0).Item(0)
+        '            mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
+
+        '            Console.WriteLine("ModifySQL: " & mySql)
+        '        End If
+
+        '        da = New OdbcDataAdapter(mySql, con)
+        '        Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
+        '        da.Update(ds, fillData)
+        '    Next
+
+        '    dbClose()
+
+        '    Return True
+        'Catch ex As Exception
+        '    MsgBox("[Module 001 - SaveEntry]" & vbCr & ex.Message.ToString, MsgBoxStyle.Critical, "Saving Failed")
+        '    dbClose()
+        '    Return False
+        'End Try
     End Function
 
     ' Module 002
@@ -106,4 +130,26 @@ Module database
 
         Return ds
     End Function
+
+    Friend Function GetOption(ByVal keys As String) As String
+        Dim mySql As String = "SELECT * FROM tblmaintenance WHERE opt_keys = '" & keys & "'"
+        Dim ret As String
+        Try
+            Dim ds As DataSet = LoadSQL(mySql)
+            ret = ds.Tables(0).Rows(0).Item("opt_values")
+        Catch ex As Exception
+            ret = 0
+        End Try
+
+        Return ret
+    End Function
+
+    Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)
+        Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
+        Dim ds As DataSet = LoadSQL(mySql, "tblMaintenance")
+
+        ds.Tables(0).Rows(0).Item("opt_values") = value
+        SaveEntry(ds, False)
+        Console.WriteLine("Option updated. " & key)
+    End Sub
 End Module

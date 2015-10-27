@@ -1,4 +1,6 @@
 ﻿' Changelog
+' 1.2 10/26/2015
+'  - Fixing ID List
 ' 1.1 10/20/2015
 '  - ComputerBirthday Added
 '  - LockFields
@@ -8,6 +10,8 @@ Public Class frmClientInformation
     Friend FormOrigin As Form
     Friend SelectedClient As Client 'Holds Client
     Private isNew As Boolean = True
+
+    Private ClientIDs As New CollectionID
 
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -46,6 +50,7 @@ Public Class frmClientInformation
 
         SelectedClient = cl
 
+        LoadID(cl)
         ComputeBirthday()
         LockFields(True)
     End Sub
@@ -54,7 +59,7 @@ Public Class frmClientInformation
         FormOrigin.Show()
     End Sub
 
-    Private Sub ComputeBirthday()
+    Friend Sub ComputeBirthday()
         lblAge.Text = "N/A"
         lblAge.Text = GetCurrentAge(dtpBday.Value) & " years old"
     End Sub
@@ -86,6 +91,8 @@ Public Class frmClientInformation
         cboIDtype.Enabled = Not st
         txtRef.ReadOnly = st
         txtRemarks.ReadOnly = st
+
+        grpID.Enabled = Not st
 
         If st Then
             btnSave.Text = "&Modify"
@@ -235,13 +242,22 @@ Public Class frmClientInformation
 
             If isNew Then
                 .SaveClient()
-                MsgBox("Entry Saved", MsgBoxStyle.Information)
+
             Else
                 .ModifyClient()
-                MsgBox("Entry Updated", MsgBoxStyle.Information)
             End If
         End With
-        frmClient.LoadClients()
+
+        SaveIDs(tmpClient)
+
+        If isNew Then
+            MsgBox("Entry Saved", MsgBoxStyle.Information)
+        Else
+            MsgBox("Entry Updated", MsgBoxStyle.Information)
+        End If
+
+
+        frmClient.btnSearch.PerformClick()
         Me.Close()
     End Sub
 
@@ -263,17 +279,29 @@ Public Class frmClientInformation
 
     'ID Group===================
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        AddID()
+        If cboIDtype.Text = "" Or txtRef.Text = "" Then Exit Sub
+
+        Dim tmpID As New IdentificationCard
+        tmpID.IDType = cboIDtype.Text
+        tmpID.ReferenceNumber = txtRef.Text
+        tmpID.Remarks = txtRemarks.Text
+
+        AddID(tmpID)
         ClearIDFields()
         cboIDtype.Focus()
     End Sub
 
-    Private Sub AddID()
-        If cboIDtype.Text = "" Or txtRef.Text = "" Or txtRemarks.Text = "" Then Exit Sub
+    Private Sub AddID(ByVal cID As IdentificationCard)
+        Dim lv As ListViewItem = lvID.Items.Add(cID.IDType)
+        lv.SubItems.Add(cID.ReferenceNumber)
+        lv.SubItems.Add(cID.Remarks)
 
-        Dim lv As ListViewItem = lvID.Items.Add(cboIDtype.Text)
-        lv.SubItems.Add(txtRef.Text)
-        lv.SubItems.Add(txtRemarks.Text)
+        If cID.isSelected Then
+            lv.BackColor = Color.ForestGreen
+        End If
+
+        cID.ClientID = SelectedClient.ID
+        ClientIDs.Add(cID)
     End Sub
 
     Private Sub txtRef_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRef.KeyPress
@@ -292,6 +320,70 @@ Public Class frmClientInformation
         cboIDtype.DroppedDown = True
         txtRef.Text = ""
         txtRemarks.Text = ""
+    End Sub
+
+    Private Sub LoadID(ByVal cl As Client)
+        Dim mySql As String
+        mySql = "SELECT * FROM tblIdentification WHERE clientID = " & cl.ID
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpID As New IdentificationCard
+            tmpID.LoadID(dr.Item("id"))
+
+            AddID(tmpID)
+        Next
+    End Sub
+
+    Private Sub idSelected(ByVal SelID As IdentificationCard)
+        SelID.Selected()
+    End Sub
+
+    Private Sub SaveIDs(Optional ByVal cl As Client = Nothing)
+        defaultID()
+
+        Dim xIdx As Integer = 0
+        For Each cID As IdentificationCard In ClientIDs
+            If cID.ID = Nothing Then
+                cID.ClientID = cl.ID
+                cID.Save()
+            Else
+                cID.Modify()
+                Console.WriteLine("cID#: " & cID.ID)
+            End If
+            xIdx += 1
+        Next
+    End Sub
+
+    Private Sub defaultID()
+        Dim hasSelected As Boolean = False, cnt As Integer = 0
+
+        For Each lv As ListViewItem In lvID.Items
+            If lv.BackColor = Color.ForestGreen Then
+                hasSelected = True
+            End If
+        Next
+
+        If Not hasSelected And lvID.Items.Count > 0 Then
+            lvID.Items(0).BackColor = Color.ForestGreen
+            ClientIDs.Item(0).Selected()
+        End If
+    End Sub
+
+    Private Sub btnIDSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDSelect.Click
+        Dim idx As Integer
+        idx = lvID.FocusedItem.Index
+
+        For cnt As Integer = 0 To lvID.Items.Count - 1
+            Dim lv As ListViewItem = lvID.Items(cnt)
+            lv.BackColor = System.Drawing.SystemColors.Window
+            ClientIDs.Item(cnt).isSelected = False
+        Next
+
+        'ListViewItem Highlight
+        lvID.FocusedItem.BackColor = Color.ForestGreen
+        ClientIDs.Item(idx).Selected()
+        'lvID.FocusedItem.Selected = True
     End Sub
     'END - ID Group===================
 End Class

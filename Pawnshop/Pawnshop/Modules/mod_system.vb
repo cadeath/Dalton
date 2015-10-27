@@ -5,6 +5,10 @@
 
 Module mod_system
 
+#Region "Global Variables"
+    Public CurrentDate As Date = Now
+#End Region
+
     ''' <summary>
     ''' Function use to input only numbers
     ''' </summary>

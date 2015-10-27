@@ -150,11 +150,14 @@ Public Class frmClient
         Next
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
-        lvClient.Focus()
-        lvClient.Items(0).Selected = True
+        lvClient.Items(0).Focused = True
+        'lvClient.Items(0).Selected = True
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+        If lvClient.SelectedItems.Count = 0 Then
+            lvClient.Items(0).Focused = True
+        End If
         Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
         GetClient = New Client
         GetClient.LoadClient(idx)
