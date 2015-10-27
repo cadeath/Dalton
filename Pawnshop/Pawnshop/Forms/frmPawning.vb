@@ -21,7 +21,8 @@
     Private Sub frmPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadActive()
-        MsgBox("Under development")
+        frmOpenStore.Show()
+        frmOpenStore.Focus()
     End Sub
 
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
@@ -55,6 +56,12 @@
         lv.SubItems.Add(tk.ExpiryDate)
         lv.SubItems.Add(tk.AuctionDate)
         lv.SubItems.Add(tk.Principal)
+
+        Select Case tk.Status
+            Case "0" : lv.BackColor = Color.Gray
+            Case "X" : lv.BackColor = Color.Red
+            Case "W" : lv.BackColor = Color.Red
+        End Select
     End Sub
 
     Private Sub ClearFields()
@@ -72,10 +79,37 @@
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Single = ds.Tables(0).Rows.Count
+        Dim clientID As Integer = 0
 
         If MaxRow = 0 Then
-            Exit Sub
+
+            mySql = "SELECT * FROM tblClient WHERE "
+            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
+            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
+            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & txtSearch.Text & "%')"
+
+            ds.Clear()
+            ds = LoadSQL(mySql)
+            MaxRow = ds.Tables(0).Rows.Count
+            If MaxRow = 0 Then
+                Console.WriteLine("No Pawn, No Client, No found")
+                MsgBox("Query not found", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
+            clientID = ds.Tables(0).Rows(0).Item("ClientID")
+            ds.Clear()
+
+            mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
+            ds = LoadSQL(mySql)
+            MaxRow = ds.Tables(0).Rows.Count
+            If MaxRow = 0 Then
+                Console.WriteLine("No Pawn, No Client, No found")
+                MsgBox("Query not found", MsgBoxStyle.Information)
+                Exit Sub
+            End If
         End If
+
 
         If MaxRow > 0 Then
             lvPawners.Items.Clear()
@@ -113,9 +147,5 @@
         If isEnter(e) Then
             btnView.PerformClick()
         End If
-    End Sub
-
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
     End Sub
 End Class

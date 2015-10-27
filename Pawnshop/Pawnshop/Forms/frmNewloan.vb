@@ -60,19 +60,15 @@
         End If
 
         'Dates
-        LoanDate.Value = Date.Now
-        Maturity.Value = LoanDate.Value.AddDays(30)
+        'LoanDate.Value = Date.Now
+        Maturity.Value = LoanDate.Value.AddDays(29)
         If cboItemtype.SelectedItem = "CEL" Then
-            Expiry.Value = LoanDate.Value.AddDays(30)
+            Expiry.Value = Maturity.Value
             Auction.Value = LoanDate.Value.AddDays(63)
         Else
-            Expiry.Value = LoanDate.Value.AddDays(90)
+            Expiry.Value = LoanDate.Value.AddDays(89)
             Auction.Value = LoanDate.Value.AddDays(123)
         End If
-    End Sub
-
-    Private Sub TextBox2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppraisal.KeyPress
-        DigitOnly(e)
     End Sub
 
     Private Sub LoadAppraisers()
@@ -100,6 +96,13 @@
 
     Private Sub txtGrams_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtGrams.KeyPress
         DigitOnly(e)
+    End Sub
+
+    Private Sub txtAppraisal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppraisal.KeyPress
+        DigitOnly(e)
+        If isEnter(e) Then
+            txtPrincipal.Focus()
+        End If
     End Sub
 
     Private Sub txtAppraisal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppraisal.TextChanged
@@ -143,9 +146,14 @@
 
         ' Ticket Information
         LoanDate.Value = CurrentDate
-        Maturity.Value = LoanDate.Value.AddDays(30) : Maturity.Enabled = False
-        Expiry.Value = LoanDate.Value.AddDays(60) : Expiry.Enabled = False
-        Auction.Value = LoanDate.Value.AddDays(90) : Auction.Enabled = False
+        Maturity.Value = LoanDate.Value.AddDays(29) : Maturity.Enabled = False
+        If PawnItem.ItemType = "CEL" Then
+            Expiry.Value = Maturity.Value : Expiry.Enabled = False
+            Auction.Value = LoanDate.Value.AddDays(63) : Auction.Enabled = False
+        Else
+            Expiry.Value = LoanDate.Value.AddDays(89) : Expiry.Enabled = False
+            Auction.Value = LoanDate.Value.AddDays(123) : Auction.Enabled = False
+        End If
         txtAppraisal.ReadOnly = False
         txtPrincipal.ReadOnly = False
         txtTotal.BackColor = System.Drawing.SystemColors.Window
@@ -302,9 +310,9 @@
         txtTicket.Text = ""
         txtNticket.Text = ""
         LoanDate.Value = CurrentDate
-        Maturity.Value = LoanDate.Value.AddDays(30)
-        Expiry.Value = LoanDate.Value.AddDays(60)
-        Auction.Value = LoanDate.Value.AddDays(90)
+        Maturity.Value = LoanDate.Value.AddDays(29)
+        Expiry.Value = LoanDate.Value.AddDays(89)
+        Auction.Value = LoanDate.Value.AddDays(123)
         txtAppraisal.Text = ""
         txtPrincipal.Text = ""
         txtTotal.Text = ""
@@ -445,7 +453,7 @@
     Private Sub RedeemPawnTicket()
         Dim mySql As String = "SELECT * FROM TBLPAWN WHERE pawnID = " & PawnItem.PawnID
         Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
-        ds.Tables("tblPawn").Rows(0).Item("Status") = "x"
+        ds.Tables("tblPawn").Rows(0).Item("Status") = "X"
         database.SaveEntry(ds)
 
         MsgBox(String.Format("Pawn Ticket: {0} redeem", PawnItem.PawnTicket), MsgBoxStyle.Information, "Thank you")
@@ -523,10 +531,20 @@
     End Sub
 
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        If btnRenew.Text <> "&Renew" Then
+            btnRenew.Text = "&Renew"
+            CancelTrans()
+            Exit Sub
+        End If
         Renewal()
     End Sub
 
-    Private Sub Renewal()
+    Private Sub CancelTrans()
+        LoadPawnTicket(PawnItem, "D")
+        txtTotal.ReadOnly = True
+    End Sub
+
+    Friend Sub Renewal()
         transactionType = "R"
 
         'Buttons
@@ -553,22 +571,28 @@
         txtTicket.Text = String.Format("{0:000000}", currentPawnTicket)
         txtNticket.Text = String.Format("{0:000000}", PawnItem.PawnTicket)
         LoanDate.Value = CurrentDate
-        Maturity.Value = LoanDate.Value.AddDays(30)
-        Expiry.Value = LoanDate.Value.AddDays(60)
-        Auction.Value = LoanDate.Value.AddDays(90)
+        Maturity.Value = LoanDate.Value.AddDays(29) : Maturity.Enabled = False
+        If PawnItem.ItemType = "CEL" Then
+            Expiry.Value = Maturity.Value : Expiry.Enabled = False
+            Auction.Value = LoanDate.Value.AddDays(63) : Auction.Enabled = False
+        Else
+            Expiry.Value = LoanDate.Value.AddDays(89) : Expiry.Enabled = False
+            Auction.Value = LoanDate.Value.AddDays(123) : Auction.Enabled = False
+        End If
         txtAppraisal.Text = PawnItem.Appraisal
         txtPrincipal.Text = PawnItem.Principal
 
         txtRefNo.Text = String.Format("{0:000000}", currentOR)
         dtpDate.Value = CurrentDate
         txtAppr.Text = PawnItem.Appraisal
-        Dim diff = CurrentDate - Maturity.Value
+        Dim diff = CurrentDate - PawnItem.MaturityDate
         If diff.Days > 0 Then
             txtOverDue.Text = diff.Days
         Else
             txtOverDue.Text = 0
         End If
-        txtPenalty.Text = GetPenalty(CInt(txtOverDue.Text), PawnItem.Principal)
+        txtDelayInt.Text = GetInterest(PawnItem.Principal)
+        txtPenalty.Text = GetPenalty(PawnItem.Principal)
         txtSrvChrg.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = GetOption("Evat") ' No EVAT implemented
 
@@ -580,34 +604,54 @@
         txtTotal.SelectAll()
     End Sub
 
-    Private Function GetServiceCharge(ByVal appraisal As Double) As Double
+    Private Function GetServiceCharge(ByVal principal As Double) As Double
         Return 3
     End Function
 
-    Private Function GetPenalty(ByVal days As Integer, ByVal appraisal As Double) As Double
+    Private Function GetPenalty(ByVal principal As Double) As Double
         Dim rate As Double
-        rate = 0.02
-        Return rate * appraisal
+        Dim diff = CurrentDate - PawnItem.LoanDate
+        rate = GetPawnshop(diff.Days, PawnItem.ItemType, "Penalty")
+
+        Return rate * principal
     End Function
 
-    Private Function GetInterest(ByVal transDate As Date, ByVal appraisal As Double) As Double
+    Private Function GetInterest(ByVal principal As Double) As Double
         Dim int As Double
-        int = 0.25
+        Dim diff = CurrentDate - PawnItem.LoanDate
+        int = GetPawnshop(diff.Days, PawnItem.ItemType)
 
-        Return appraisal * int
+        Console.WriteLine("GetInterest")
+        Console.WriteLine("Loan: " & PawnItem.LoanDate)
+        Console.WriteLine("Matu: " & PawnItem.MaturityDate)
+        Console.WriteLine("Date: " & CurrentDate)
+        Console.WriteLine("Day: " & diff.Days + 1)
+        Console.WriteLine("Int: " & int)
+        Console.WriteLine("Prin: " & principal)
+        Console.WriteLine("NetDue: " & int * principal)
+
+        Return principal * int
     End Function
 
     Private Sub txtTotal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTotal.KeyPress
         If (transactionType = "R" Or transactionType = "X") And isEnter(e) Then
             btnSave.PerformClick()
         End If
+        If transactionType = "L" Then
+            cboAppraiser.Focus()
+        End If
     End Sub
 
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+        If btnRedeem.Text <> "R&edeem" Then
+            btnRedeem.Text = "R&edeem"
+            CancelTrans()
+            Exit Sub
+        End If
         Redeem()
     End Sub
 
-    Private Sub Redeem()
+    Friend Sub Redeem()
         transactionType = "X"
 
         'Buttons
@@ -642,7 +686,7 @@
         Else
             txtOverDue.Text = 0
         End If
-        txtPenalty.Text = GetPenalty(CInt(txtOverDue.Text), PawnItem.Principal)
+        txtPenalty.Text = GetPenalty(PawnItem.Principal)
         txtSrvChrg.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = GetOption("Evat") ' No EVAT implemented
 
@@ -653,5 +697,26 @@
         txtTotal.Focus()
         txtTotal.SelectAll()
     End Sub
+
+#Region "Pawnshop Information"
+    Friend Function GetPawnshop(ByVal day As Integer, ByVal pawnItemType As String, Optional ByVal mainType As String = "Interest") As Double
+        Dim mySql As String = "SELECT * FROM tblint WHERE ItemType = '" & pawnItemType & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+        day += 1 'Include the Loan Date
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim min As Integer = 0, max As Integer = 0
+            min = dr.Item("DayFrom") : max = dr.Item("DayTo")
+
+            Select Case day
+                Case min To max
+                    Return dr.Item(mainType)
+            End Select
+        Next
+
+        MsgBox("Day " & day & " is out of bound.", MsgBoxStyle.Critical)
+        Return 0
+    End Function
+#End Region
 End Class
 
