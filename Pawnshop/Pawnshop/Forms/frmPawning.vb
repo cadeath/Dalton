@@ -21,7 +21,8 @@
     Private Sub frmPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadActive()
-        MsgBox("Under development")
+        frmOpenStore.Show()
+        frmOpenStore.Focus()
     End Sub
 
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
@@ -119,9 +120,5 @@
         If isEnter(e) Then
             btnView.PerformClick()
         End If
-    End Sub
-
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
     End Sub
 End Class
