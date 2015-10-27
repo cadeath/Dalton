@@ -133,9 +133,15 @@ Module database
 
     Friend Function GetOption(ByVal keys As String) As String
         Dim mySql As String = "SELECT * FROM tblmaintenance WHERE opt_keys = '" & keys & "'"
-        Dim ds As DataSet = LoadSQL(mySql)
+        Dim ret As String
+        Try
+            Dim ds As DataSet = LoadSQL(mySql)
+            ret = ds.Tables(0).Rows(0).Item("opt_values")
+        Catch ex As Exception
+            ret = 0
+        End Try
 
-        Return ds.Tables(0).Rows(0).Item("opt_values")
+        Return ret
     End Function
 
     Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)

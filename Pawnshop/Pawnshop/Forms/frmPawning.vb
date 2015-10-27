@@ -30,9 +30,10 @@
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE Status = 'L' OR Status = 'R' OR Status = 'S'"
+        Dim mySql As String = "SELECT * FROM tblpawn WHERE Status = 'L' OR Status = 'R' OR Status = 'S' ORDER BY LoanDate ASC, PAWNID ASC"
         Dim ds As DataSet = LoadSQL(mySql)
 
+        lvPawners.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpPawn As New PawnTicket
             tmpPawn.LoadTicketInRow(dr)
@@ -53,7 +54,7 @@
         lv.SubItems.Add(tk.MaturityDate)
         lv.SubItems.Add(tk.ExpiryDate)
         lv.SubItems.Add(tk.AuctionDate)
-        lv.SubItems.Add(tk.NetAmount)
+        lv.SubItems.Add(tk.Principal)
     End Sub
 
     Private Sub ClearFields()

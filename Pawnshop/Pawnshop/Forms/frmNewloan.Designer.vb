@@ -70,10 +70,6 @@ Partial Class frmNewloan
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.grpReceipt = New System.Windows.Forms.GroupBox()
-        Me.txtInt = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.txtLess = New System.Windows.Forms.TextBox()
-        Me.lblLess = New System.Windows.Forms.Label()
         Me.txtPenalty = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.txtRedeemDue = New System.Windows.Forms.TextBox()
@@ -95,12 +91,9 @@ Partial Class frmNewloan
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.lblTranstype = New System.Windows.Forms.Label()
-        Me.btnLess = New System.Windows.Forms.Button()
         Me.btnRenew = New System.Windows.Forms.Button()
         Me.btnRedeem = New System.Windows.Forms.Button()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.txtPayment = New System.Windows.Forms.TextBox()
-        Me.Label20 = New System.Windows.Forms.Label()
         Me.grpPawner.SuspendLayout()
         Me.grpItem.SuspendLayout()
         Me.grpTicket.SuspendLayout()
@@ -612,12 +605,6 @@ Partial Class frmNewloan
         '
         'grpReceipt
         '
-        Me.grpReceipt.Controls.Add(Me.txtPayment)
-        Me.grpReceipt.Controls.Add(Me.Label20)
-        Me.grpReceipt.Controls.Add(Me.txtInt)
-        Me.grpReceipt.Controls.Add(Me.Label17)
-        Me.grpReceipt.Controls.Add(Me.txtLess)
-        Me.grpReceipt.Controls.Add(Me.lblLess)
         Me.grpReceipt.Controls.Add(Me.txtPenalty)
         Me.grpReceipt.Controls.Add(Me.Label18)
         Me.grpReceipt.Controls.Add(Me.txtRedeemDue)
@@ -644,48 +631,6 @@ Partial Class frmNewloan
         Me.grpReceipt.TabIndex = 13
         Me.grpReceipt.TabStop = False
         Me.grpReceipt.Text = "Receipt Information"
-        '
-        'txtInt
-        '
-        Me.txtInt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInt.Location = New System.Drawing.Point(134, 113)
-        Me.txtInt.Name = "txtInt"
-        Me.txtInt.ReadOnly = True
-        Me.txtInt.Size = New System.Drawing.Size(113, 22)
-        Me.txtInt.TabIndex = 23
-        Me.txtInt.Visible = False
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(7, 115)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(67, 16)
-        Me.Label17.TabIndex = 56
-        Me.Label17.Text = "Interest :"
-        Me.Label17.Visible = False
-        '
-        'txtLess
-        '
-        Me.txtLess.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLess.Location = New System.Drawing.Point(132, 89)
-        Me.txtLess.Name = "txtLess"
-        Me.txtLess.ReadOnly = True
-        Me.txtLess.Size = New System.Drawing.Size(113, 22)
-        Me.txtLess.TabIndex = 22
-        Me.txtLess.Visible = False
-        '
-        'lblLess
-        '
-        Me.lblLess.AutoSize = True
-        Me.lblLess.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLess.Location = New System.Drawing.Point(5, 91)
-        Me.lblLess.Name = "lblLess"
-        Me.lblLess.Size = New System.Drawing.Size(106, 16)
-        Me.lblLess.TabIndex = 54
-        Me.lblLess.Text = "Less Principal"
-        Me.lblLess.Visible = False
         '
         'txtPenalty
         '
@@ -714,7 +659,6 @@ Partial Class frmNewloan
         Me.txtRedeemDue.ReadOnly = True
         Me.txtRedeemDue.Size = New System.Drawing.Size(113, 22)
         Me.txtRedeemDue.TabIndex = 30
-        Me.txtRedeemDue.Visible = False
         '
         'lblRedeemDue
         '
@@ -725,7 +669,6 @@ Partial Class frmNewloan
         Me.lblRedeemDue.Size = New System.Drawing.Size(103, 16)
         Me.lblRedeemDue.TabIndex = 50
         Me.lblRedeemDue.Text = "Redeem Due:"
-        Me.lblRedeemDue.Visible = False
         '
         'txtAppr
         '
@@ -772,7 +715,6 @@ Partial Class frmNewloan
         Me.txtRenewDue.ReadOnly = True
         Me.txtRenewDue.Size = New System.Drawing.Size(113, 22)
         Me.txtRenewDue.TabIndex = 29
-        Me.txtRenewDue.Visible = False
         '
         'lblRenewDue
         '
@@ -783,7 +725,6 @@ Partial Class frmNewloan
         Me.lblRenewDue.Size = New System.Drawing.Size(91, 16)
         Me.lblRenewDue.TabIndex = 42
         Me.lblRenewDue.Text = "Renew Due:"
-        Me.lblRenewDue.Visible = False
         '
         'txtEvat
         '
@@ -892,15 +833,6 @@ Partial Class frmNewloan
         Me.lblTranstype.Size = New System.Drawing.Size(0, 47)
         Me.lblTranstype.TabIndex = 14
         '
-        'btnLess
-        '
-        Me.btnLess.Location = New System.Drawing.Point(937, 403)
-        Me.btnLess.Name = "btnLess"
-        Me.btnLess.Size = New System.Drawing.Size(102, 35)
-        Me.btnLess.TabIndex = 32
-        Me.btnLess.Text = "&Less Principal"
-        Me.btnLess.UseVisualStyleBackColor = True
-        '
         'btnRenew
         '
         Me.btnRenew.Location = New System.Drawing.Point(508, 403)
@@ -916,7 +848,7 @@ Partial Class frmNewloan
         Me.btnRedeem.Name = "btnRedeem"
         Me.btnRedeem.Size = New System.Drawing.Size(102, 35)
         Me.btnRedeem.TabIndex = 35
-        Me.btnRedeem.Text = "&Redeem"
+        Me.btnRedeem.Text = "R&edeem"
         Me.btnRedeem.UseVisualStyleBackColor = True
         '
         'lblTitle
@@ -929,27 +861,6 @@ Partial Class frmNewloan
         Me.lblTitle.TabIndex = 36
         Me.lblTitle.Text = "Pawning"
         '
-        'txtPayment
-        '
-        Me.txtPayment.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPayment.Location = New System.Drawing.Point(134, 318)
-        Me.txtPayment.Name = "txtPayment"
-        Me.txtPayment.ReadOnly = True
-        Me.txtPayment.Size = New System.Drawing.Size(113, 22)
-        Me.txtPayment.TabIndex = 31
-        Me.txtPayment.Visible = False
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(7, 320)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(91, 16)
-        Me.Label20.TabIndex = 58
-        Me.Label20.Text = "Net Amount:"
-        Me.Label20.Visible = False
-        '
         'frmNewloan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -959,7 +870,6 @@ Partial Class frmNewloan
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnRedeem)
         Me.Controls.Add(Me.btnRenew)
-        Me.Controls.Add(Me.btnLess)
         Me.Controls.Add(Me.lblTranstype)
         Me.Controls.Add(Me.grpReceipt)
         Me.Controls.Add(Me.btnVoid)
@@ -1029,8 +939,6 @@ Partial Class frmNewloan
     Friend WithEvents txtNticket As System.Windows.Forms.TextBox
     Friend WithEvents lblNticket As System.Windows.Forms.Label
     Friend WithEvents grpReceipt As System.Windows.Forms.GroupBox
-    Friend WithEvents txtLess As System.Windows.Forms.TextBox
-    Friend WithEvents lblLess As System.Windows.Forms.Label
     Friend WithEvents txtPenalty As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents txtRedeemDue As System.Windows.Forms.TextBox
@@ -1056,14 +964,9 @@ Partial Class frmNewloan
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents txtBDay As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents btnLess As System.Windows.Forms.Button
     Friend WithEvents cboAppraiser As System.Windows.Forms.ComboBox
     Friend WithEvents lblAge As System.Windows.Forms.Label
     Friend WithEvents btnRenew As System.Windows.Forms.Button
     Friend WithEvents btnRedeem As System.Windows.Forms.Button
-    Friend WithEvents txtInt As System.Windows.Forms.TextBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents lblTitle As System.Windows.Forms.Label
-    Friend WithEvents txtPayment As System.Windows.Forms.TextBox
-    Friend WithEvents Label20 As System.Windows.Forms.Label
 End Class
