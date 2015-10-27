@@ -647,7 +647,7 @@
         txtEvat.Text = GetOption("Evat") ' No EVAT implemented
 
         txtRenewDue.Text = CDbl(txtDelayInt.Text) + CDbl(txtPenalty.Text) + CDbl(txtSrvChrg.Text)
-        txtRedeemDue.Text = CDbl(txtDelayInt.Text) + CDbl(txtPenalty.Text) + CDbl(txtSrvChrg.Text) + CDbl(PawnItem.Appraisal)
+        txtRedeemDue.Text = CDbl(txtDelayInt.Text) + CDbl(txtPenalty.Text) + CDbl(txtSrvChrg.Text) + CDbl(PawnItem.Principal)
 
         txtTotal.Text = txtRedeemDue.Text ' Total
         txtTotal.Focus()
