@@ -55,6 +55,12 @@
         lv.SubItems.Add(tk.ExpiryDate)
         lv.SubItems.Add(tk.AuctionDate)
         lv.SubItems.Add(tk.Principal)
+
+        Select Case tk.Status
+            Case "0" : lv.BackColor = Color.Gray
+            Case "X" : lv.BackColor = Color.Red
+            Case "W" : lv.BackColor = Color.Red
+        End Select
     End Sub
 
     Private Sub ClearFields()

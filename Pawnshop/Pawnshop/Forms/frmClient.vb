@@ -70,6 +70,8 @@ Public Class frmClient
                 Dim tmpClient As New Client
                 tmpClient.LoadClient(pawner.Item("ClientID"))
                 AddItem(tmpClient)
+
+                Application.DoEvents()
             Next
 
             lvClient.Enabled = True

@@ -445,7 +445,7 @@
     Private Sub RedeemPawnTicket()
         Dim mySql As String = "SELECT * FROM TBLPAWN WHERE pawnID = " & PawnItem.PawnID
         Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
-        ds.Tables("tblPawn").Rows(0).Item("Status") = "x"
+        ds.Tables("tblPawn").Rows(0).Item("Status") = "X"
         database.SaveEntry(ds)
 
         MsgBox(String.Format("Pawn Ticket: {0} redeem", PawnItem.PawnTicket), MsgBoxStyle.Information, "Thank you")
