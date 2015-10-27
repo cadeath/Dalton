@@ -147,7 +147,7 @@
         ' Ticket Information
         LoanDate.Value = CurrentDate
         Maturity.Value = LoanDate.Value.AddDays(29) : Maturity.Enabled = False
-        If PawnItem.ItemType = "CEL" Then
+        If cboItemtype.Text = "CEL" Then
             Expiry.Value = Maturity.Value : Expiry.Enabled = False
             Auction.Value = LoanDate.Value.AddDays(63) : Auction.Enabled = False
         Else
@@ -440,6 +440,8 @@
         End If
 
         MsgBox("Ticket Posted", MsgBoxStyle.Information, "Transaction Saved")
+        If transactionType <> "L" Then Exit Sub
+
         Dim ans As DialogResult = MsgBox("Do you want to enter another one?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Question")
         If ans = Windows.Forms.DialogResult.Yes Then
             ClearFields()

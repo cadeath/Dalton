@@ -1,6 +1,9 @@
 ﻿Public Class frmMain
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        frmOpenStore.Show()
+        frmOpenStore.Focus()
+
         ' Set the color in the MDI client.
         For Each ctl As Control In Me.Controls
             If TypeOf ctl Is MdiClient Then
