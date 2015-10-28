@@ -36,7 +36,7 @@
             _date = value
         End Set
         Get
-
+            Return _date
         End Get
     End Property
 #End Region

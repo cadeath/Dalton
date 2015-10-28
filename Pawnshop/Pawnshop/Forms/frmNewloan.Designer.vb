@@ -245,7 +245,7 @@ Partial Class frmNewloan
         Me.cboKarat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboKarat.FormattingEnabled = True
         Me.cboKarat.Items.AddRange(New Object() {"10", "12", "14", "16", "18", "20", "21", "22", "24"})
-        Me.cboKarat.Location = New System.Drawing.Point(142, 149)
+        Me.cboKarat.Location = New System.Drawing.Point(349, 143)
         Me.cboKarat.Name = "cboKarat"
         Me.cboKarat.Size = New System.Drawing.Size(124, 21)
         Me.cboKarat.TabIndex = 4
@@ -254,7 +254,7 @@ Partial Class frmNewloan
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(6, 152)
+        Me.Label7.Location = New System.Drawing.Point(285, 148)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(48, 16)
         Me.Label7.TabIndex = 25
@@ -263,7 +263,7 @@ Partial Class frmNewloan
         'txtGrams
         '
         Me.txtGrams.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtGrams.Location = New System.Drawing.Point(142, 123)
+        Me.txtGrams.Location = New System.Drawing.Point(142, 145)
         Me.txtGrams.Name = "txtGrams"
         Me.txtGrams.ReadOnly = True
         Me.txtGrams.Size = New System.Drawing.Size(124, 22)
@@ -274,7 +274,7 @@ Partial Class frmNewloan
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(6, 126)
+        Me.Label4.Location = New System.Drawing.Point(6, 148)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(57, 16)
         Me.Label4.TabIndex = 23
@@ -286,7 +286,7 @@ Partial Class frmNewloan
         Me.cboCategory.Enabled = False
         Me.cboCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboCategory.FormattingEnabled = True
-        Me.cboCategory.Location = New System.Drawing.Point(142, 96)
+        Me.cboCategory.Location = New System.Drawing.Point(142, 118)
         Me.cboCategory.Name = "cboCategory"
         Me.cboCategory.Size = New System.Drawing.Size(124, 21)
         Me.cboCategory.TabIndex = 2
@@ -295,7 +295,7 @@ Partial Class frmNewloan
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(6, 101)
+        Me.Label6.Location = New System.Drawing.Point(6, 123)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(75, 16)
         Me.Label6.TabIndex = 20
@@ -330,7 +330,8 @@ Partial Class frmNewloan
         Me.txtDesc.Multiline = True
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ReadOnly = True
-        Me.txtDesc.Size = New System.Drawing.Size(331, 48)
+        Me.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDesc.Size = New System.Drawing.Size(331, 69)
         Me.txtDesc.TabIndex = 1
         Me.txtDesc.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
         '
