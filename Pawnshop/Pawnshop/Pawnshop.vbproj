@@ -110,6 +110,7 @@
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
+    <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Forms\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>

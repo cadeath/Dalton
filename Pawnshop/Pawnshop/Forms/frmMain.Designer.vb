@@ -72,7 +72,7 @@ Partial Class frmMain
         Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ReportToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.msMenu.Location = New System.Drawing.Point(0, 0)
         Me.msMenu.Name = "msMenu"
-        Me.msMenu.Size = New System.Drawing.Size(908, 24)
+        Me.msMenu.Size = New System.Drawing.Size(936, 24)
         Me.msMenu.TabIndex = 0
         Me.msMenu.Text = "msMenu"
         '
@@ -190,7 +190,7 @@ Partial Class frmMain
         Me.pbLogo.Image = CType(resources.GetObject("pbLogo.Image"), System.Drawing.Image)
         Me.pbLogo.Location = New System.Drawing.Point(0, 24)
         Me.pbLogo.Name = "pbLogo"
-        Me.pbLogo.Size = New System.Drawing.Size(908, 120)
+        Me.pbLogo.Size = New System.Drawing.Size(936, 120)
         Me.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pbLogo.TabIndex = 1
         Me.pbLogo.TabStop = False
@@ -203,7 +203,7 @@ Partial Class frmMain
         Me.pInfo.Controls.Add(Me.lblTitle)
         Me.pInfo.Location = New System.Drawing.Point(12, 161)
         Me.pInfo.Name = "pInfo"
-        Me.pInfo.Size = New System.Drawing.Size(365, 337)
+        Me.pInfo.Size = New System.Drawing.Size(365, 417)
         Me.pInfo.TabIndex = 5
         '
         'lblMessage
@@ -212,7 +212,7 @@ Partial Class frmMain
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblMessage.Location = New System.Drawing.Point(15, 41)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(310, 283)
+        Me.lblMessage.Size = New System.Drawing.Size(310, 366)
         Me.lblMessage.TabIndex = 5
         Me.lblMessage.Text = resources.GetString("lblMessage.Text")
         '
@@ -336,9 +336,9 @@ Partial Class frmMain
         'statusStrip
         '
         Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate})
-        Me.statusStrip.Location = New System.Drawing.Point(0, 488)
+        Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
-        Me.statusStrip.Size = New System.Drawing.Size(908, 22)
+        Me.statusStrip.Size = New System.Drawing.Size(936, 22)
         Me.statusStrip.TabIndex = 6
         Me.statusStrip.Text = "ss"
         '
@@ -357,7 +357,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(185, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(908, 510)
+        Me.ClientSize = New System.Drawing.Size(936, 603)
         Me.Controls.Add(Me.statusStrip)
         Me.Controls.Add(Me.pButton)
         Me.Controls.Add(Me.pbLogo)

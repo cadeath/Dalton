@@ -340,6 +340,7 @@
             .Add(New DataColumn("RedeemDue", GetType(Double)))
             .Add(New DataColumn("Status", GetType(String)))
             .Add(New DataColumn("SystemInfo", GetType(Date)))
+            .Add(New DataColumn("EncoderID", GetType(Integer)))
         End With
 
         Dim dsNewRow As DataRow
@@ -374,6 +375,7 @@
             .Item("RedeemDue") = _redeemDue
             .Item("Status") = _status
             .Item("SystemInfo") = Now
+            .Item("EncoderID") = UserID
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 

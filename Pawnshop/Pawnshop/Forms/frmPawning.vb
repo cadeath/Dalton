@@ -160,14 +160,14 @@
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
-            frmNewloan.Renewal()
+            frmNewloan.SwitchTransaction("RENEW")
         End If
     End Sub
 
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
-            frmNewloan.Redeem()
+            frmNewloan.SwitchTransaction("REDEEM")
         End If
     End Sub
 End Class
