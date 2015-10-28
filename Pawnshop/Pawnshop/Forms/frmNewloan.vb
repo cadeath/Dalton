@@ -120,6 +120,21 @@
         DigitOnly(e)
     End Sub
 
+    Private Sub frmNewloan_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F4
+                Console.WriteLine("Renewal")
+                Renewal()
+            Case Keys.F5
+                Console.WriteLine("Redeem")
+                Redeem()
+        End Select
+    End Sub
+
+    Private Sub frmNewloan_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
+
+    End Sub
+
     Private Sub frmNewloan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If IsNothing(Pawner) Then
             ClearFields()
@@ -593,6 +608,8 @@
     End Sub
 
     Friend Sub Renewal()
+        If transactionType = "L" Then Exit Sub
+
         transactionType = "R"
 
         'Buttons
@@ -700,6 +717,8 @@
     End Sub
 
     Friend Sub Redeem()
+        If transactionType = "L" Then Exit Sub
+
         transactionType = "X"
 
         'Buttons
