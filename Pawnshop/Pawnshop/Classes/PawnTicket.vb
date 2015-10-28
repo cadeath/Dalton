@@ -373,6 +373,7 @@
             .Item("RenewDue") = _renewDue
             .Item("RedeemDue") = _redeemDue
             .Item("Status") = _status
+            .Item("SystemInfo") = Now
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
