@@ -7,6 +7,7 @@ Module mod_system
 
 #Region "Global Variables"
     Public CurrentDate As Date = Now
+    Public UserID As Integer = 1
 #End Region
 
     ''' <summary>
