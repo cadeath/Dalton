@@ -13,8 +13,10 @@
                 txtSearch.Focus()
             Case Keys.F4
                 Console.WriteLine("Renewal")
+                btnRenew.PerformClick()
             Case Keys.F5
                 Console.WriteLine("Redeem")
+                btnRedeem.PerformClick()
         End Select
     End Sub
 
@@ -142,6 +144,20 @@
     Private Sub lvPawners_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvPawners.KeyPress
         If isEnter(e) Then
             btnView.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        If lvPawners.SelectedItems.Count > 0 Then
+            btnView.PerformClick()
+            frmNewloan.Renewal()
+        End If
+    End Sub
+
+    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+        If lvPawners.SelectedItems.Count > 0 Then
+            btnView.PerformClick()
+            frmNewloan.Redeem()
         End If
     End Sub
 End Class
