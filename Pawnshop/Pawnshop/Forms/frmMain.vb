@@ -73,4 +73,8 @@
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         frmPawning.Show()
     End Sub
+
+    Private Sub btnInsurance_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsurance.Click
+        frmInsurance.Show()
+    End Sub
 End Class
