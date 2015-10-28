@@ -272,6 +272,11 @@
 
                 Me.Text = "Pawn Ticket Number " & tk.PawnTicket & " [" & st & "]"
                 lblTitle.Text = "Display"
+
+                If tk.Status = "0" Or tk.Status = "V" Or tk.Status = "W" Or tk.Status = "S" Or tk.Status = "X" Then
+                    btnRenew.Enabled = False
+                    btnRedeem.Enabled = False
+                End If
         End Select
     End Sub
 
@@ -357,9 +362,24 @@
         txtTotal.Text = txtPrincipal.Text
     End Sub
 
+    Private Function checkPayments() As Boolean
+        If transactionType = "L" Then Return True
+
+        Dim shouldPay As Double = CDbl(txtRedeemDue.Text)
+        If CDbl(txtTotal.Text) > shouldPay Then
+            Return False
+        End If
+        Return True
+    End Function
+
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If txtAppraisal.Text = "" Then txtAppraisal.Focus() : Exit Sub
         If txtTotal.Text = "" Then txtTotal.Focus() : Exit Sub
+
+        If Not checkPayments() Then
+            MsgBox("Check payment", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         If transactionType = "X" Then
             Dim netAmt As Double = CDbl(txtTotal.Text)
@@ -440,7 +460,11 @@
         End If
 
         MsgBox("Ticket Posted", MsgBoxStyle.Information, "Transaction Saved")
-        If transactionType <> "L" Then Exit Sub
+        If transactionType <> "L" Then
+            frmPawning.LoadActive()
+            Me.Close()
+            Exit Sub
+        End If
 
         Dim ans As DialogResult = MsgBox("Do you want to enter another one?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Question")
         If ans = Windows.Forms.DialogResult.Yes Then
