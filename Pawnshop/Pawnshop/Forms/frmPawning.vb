@@ -97,28 +97,24 @@
                 Exit Sub
             End If
 
-            clientID = ds.Tables(0).Rows(0).Item("ClientID")
-            ds.Clear()
-
-            mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
-            ds = LoadSQL(mySql)
-            MaxRow = ds.Tables(0).Rows.Count
-            If MaxRow = 0 Then
-                Console.WriteLine("No Pawn, No Client, No found")
-                MsgBox("Query not found", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-        End If
-
-
-        If MaxRow > 0 Then
-            lvPawners.Items.Clear()
             For Each dr As DataRow In ds.Tables(0).Rows
-                Dim tmpTicket As New PawnTicket
-                tmpTicket.LoadTicketInRow(dr)
-                AddItem(tmpTicket)
+                clientID = dr.Item("ClientID")
+                Dim xDs As DataSet
+
+                mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
+                xDs = LoadSQL(mySql)
+                MaxRow = xDs.Tables(0).Rows.Count
+                If MaxRow > 0 Then
+                    lvPawners.Items.Clear()
+                    For Each xdr As DataRow In xDs.Tables(0).Rows
+                        Dim tmpTicket As New PawnTicket
+                        tmpTicket.LoadTicketInRow(xdr)
+                        AddItem(tmpTicket)
+                    Next
+                End If
             Next
         End If
+
         lvPawners.Focus()
         MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
     End Sub

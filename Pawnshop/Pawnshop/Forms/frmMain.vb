@@ -76,4 +76,8 @@
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         frmPawning.Show()
     End Sub
+
+    Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
+        tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+    End Sub
 End Class
