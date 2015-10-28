@@ -39,6 +39,53 @@
             Return _date
         End Get
     End Property
+
+    Public Property Sender As Client
+        Set(ByVal value As Client)
+            _client1 = value
+        End Set
+        Get
+            Return _client1
+        End Get
+    End Property
+
+    Public Property Receiver As Client
+        Set(ByVal value As Client)
+            _client2 = value
+        End Set
+        Get
+            Return _client2
+        End Get
+    End Property
+
+    Public Property TransferAmount As Double
+        Set(ByVal value As Double)
+            _amount = value
+        End Set
+        Get
+            Return _amount
+        End Get
+    End Property
+
+    Public Property ServiceCharge As Double
+        Set(ByVal value As Double)
+            _service = value
+        End Set
+        Get
+            Return _service
+        End Get
+    End Property
+
+    Public Property NetAmount As Double
+        Set(ByVal value As Double)
+            _netAmount = value
+        End Set
+        Get
+            Return _netAmount
+        End Get
+    End Property
 #End Region
+
+
 
 End Class

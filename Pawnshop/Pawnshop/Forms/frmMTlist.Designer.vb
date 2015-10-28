@@ -105,6 +105,7 @@ Partial Class frmMTlist
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Location = New System.Drawing.Point(651, 442)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
@@ -156,6 +157,7 @@ Partial Class frmMTlist
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(738, 474)
         Me.Controls.Add(Me.btnNew)
         Me.Controls.Add(Me.Button3)
