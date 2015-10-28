@@ -273,9 +273,21 @@
                 Me.Text = "Pawn Ticket Number " & tk.PawnTicket & " [" & st & "]"
                 lblTitle.Text = "Display"
 
+                ' Disable renew
                 If tk.Status = "0" Or tk.Status = "V" Or tk.Status = "W" Or tk.Status = "S" Or tk.Status = "X" Then
                     btnRenew.Enabled = False
                     btnRedeem.Enabled = False
+                End If
+
+                ' Activate Void
+                If tk.Status = "L" Or tk.Status = "R" Or tk.Status = "W" Then
+                    btnVoid.Enabled = True
+                End If
+
+                ' Activate Cancel
+                If tk.Status = "X" Then
+                    btnVoid.Enabled = True
+                    btnVoid.Text = "CANCEL"
                 End If
         End Select
     End Sub
@@ -744,5 +756,32 @@
         Return 0
     End Function
 #End Region
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim ans As DialogResult = _
+        MsgBox("Do you want to void this transaction?", vbCritical + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "W A R N I N G")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        If PawnItem.LoanDate <> CurrentDate Then
+            MsgBox("You cannot VOID in a different DATE", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        If PawnItem.Status = "L" Then
+            Dim mySql As String = "SELECT * FROM tblPawn WHERE PawnID = " & PawnItem.PawnID
+            Dim tbl As String = "tblPawn", ds As DataSet
+            ds = LoadSQL(mySql, tbl)
+            ds.Tables(0).Rows(0).Item("Status") = "V"
+            database.SaveEntry(ds, False)
+        End If
+
+        If PawnItem.Status = "R" Or PawnItem.Status = "0" Then
+
+        End If
+
+        MsgBox("PT# " & PawnItem.PawnTicket & vbCr & "Is now VOID", MsgBoxStyle.Information)
+        frmPawning.LoadActive()
+        Me.Close()
+    End Sub
 End Class
 

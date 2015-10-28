@@ -339,6 +339,7 @@
             .Add(New DataColumn("RenewDue", GetType(Double)))
             .Add(New DataColumn("RedeemDue", GetType(Double)))
             .Add(New DataColumn("Status", GetType(String)))
+            .Add(New DataColumn("SystemInfo", GetType(Date)))
         End With
 
         Dim dsNewRow As DataRow
