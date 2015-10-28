@@ -86,6 +86,27 @@
     End Property
 #End Region
 
+#Region "Procedures and Functions"
+    Public Sub LoadTransaction(ByVal id As Integer)
+        Dim ds As DataSet, mySql As String
+        mySql = "SELECT * FROM tblMoneyTransfer WHERE ID = " & id
+        ds = LoadSQL(mySql)
 
+        With ds.Tables(0).Rows(0)
+            _type = .Item("TransType")
+            _ref = .Item("RefNum")
+            _date = .Item("TransDate")
+            Dim tmpClient As New Client
+            tmpClient.LoadClient(.Item("SenderID"))
+            _client1 = tmpClient
+            tmpClient.LoadClient(.Item("ReceiverID"))
+            _client2 = tmpClient
+            _amount = .Item("Amount")
+            _service = .Item("ServiceCharge")
+            _netAmount = .Item("NetAmount")
+        End With
 
+        Console.WriteLine("Transaction Loaded")
+    End Sub
+#End Region
 End Class
