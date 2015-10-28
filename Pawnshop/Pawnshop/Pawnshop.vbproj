@@ -232,12 +232,6 @@
     <Compile Include="Forms\frmPawning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmRedeem.Designer.vb">
-      <DependentUpon>frmRedeem.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmRedeem.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmSettings.Designer.vb">
       <DependentUpon>frmSettings.vb</DependentUpon>
     </Compile>
@@ -341,9 +335,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawning.resx">
       <DependentUpon>frmPawning.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmRedeem.resx">
-      <DependentUpon>frmRedeem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>
