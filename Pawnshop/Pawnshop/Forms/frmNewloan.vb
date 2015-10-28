@@ -1,7 +1,7 @@
 ﻿Public Class frmNewloan
 
     Dim Pawner As Client
-    Dim PawnItem As PawnTicket
+    Dim PawnItem As PawnTicket, VoidPawnItem As PawnTicket
     Dim currentPawnTicket As Integer = GetLastNum()
     Dim currentOR As Integer = GetORNum()
     Dim transactionType As String
@@ -283,6 +283,12 @@
                 If tk.Status = "L" Or tk.Status = "R" Or tk.Status = "W" Then
                     btnVoid.Enabled = True
                 End If
+                If tk.Status = "V" Then
+                    If GetOldPT() <> Nothing Then
+                        lblVOID.Text = "New Ticket: " & GetOldPT()
+                        lblVOID.Visible = True
+                    End If
+                End If
 
                 ' Activate Cancel
                 If tk.Status = "X" Then
@@ -438,6 +444,8 @@
                     Dim lessPrin As Double
                     lessPrin = Math.Abs(CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text))
                     .Principal = CDbl(txtPrincipal.Text) - lessPrin
+                Else
+                    .Principal = txtPrincipal.Text
                 End If
             Else
                 .Principal = txtPrincipal.Text
@@ -470,6 +478,8 @@
             dsInactive.Tables("tblPawn").Rows(0).Item("STATUS") = 0
             database.SaveEntry(dsInactive, False)
         End If
+
+        VoidTheOldTicket()
 
         MsgBox("Ticket Posted", MsgBoxStyle.Information, "Transaction Saved")
         If transactionType <> "L" Then
@@ -762,7 +772,7 @@
         MsgBox("Do you want to void this transaction?", vbCritical + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "W A R N I N G")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        If PawnItem.LoanDate <> CurrentDate Then
+        If PawnItem.LoanDate <> CurrentDate.Date Then
             MsgBox("You cannot VOID in a different DATE", MsgBoxStyle.Critical)
             Exit Sub
         End If
@@ -776,12 +786,44 @@
         End If
 
         If PawnItem.Status = "R" Or PawnItem.Status = "0" Then
+            VoidPawnItem = PawnItem
+            Renewal()
 
+            'Disable Buttons
+            btnRenew.Enabled = False
+            btnRedeem.Enabled = False
+
+            Exit Sub
         End If
 
         MsgBox("PT# " & PawnItem.PawnTicket & vbCr & "Is now VOID", MsgBoxStyle.Information)
         frmPawning.LoadActive()
         Me.Close()
+    End Sub
+
+    Private Function GetOldPT() As Integer
+        On Error Resume Next
+
+        Dim pt As Integer = PawnItem.PawnTicket
+        Dim ds As DataSet, mySql As String = _
+            "SELECT * FROM tblPawn WHERE OldTicket = " & pt
+        ds = LoadSQL(mySql)
+
+        Dim newPT As Integer
+        newPT = ds.Tables(0).Rows(0).Item("PawnTicket")
+
+        Return newPT
+    End Function
+
+    Private Sub VoidTheOldTicket()
+        If VoidPawnItem Is Nothing Then Exit Sub
+
+        Dim tbl As String = "tblPawn", mySql As String, ds As DataSet
+        mySql = "SELECT * FROM tblPawn WHERE PawnID = " & VoidPawnItem.PawnID
+        ds = LoadSQL(mySql, tbl)
+
+        ds.Tables(0).Rows(0).Item("Status") = "V"
+        database.SaveEntry(ds, False)
     End Sub
 End Class
 

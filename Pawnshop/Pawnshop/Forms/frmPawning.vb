@@ -60,9 +60,10 @@
         lv.SubItems.Add(tk.Principal)
 
         Select Case tk.Status
-            Case "0" : lv.BackColor = Color.Gray
+            Case "0" : lv.BackColor = Color.LightGray
             Case "X" : lv.BackColor = Color.Red
             Case "W" : lv.BackColor = Color.Red
+            Case "V" : lv.BackColor = Color.Gray
         End Select
     End Sub
 
@@ -79,10 +80,12 @@
         mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & txtSearch.Text & "%')"
         mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & txtSearch.Text & "%')"
 
+        Console.WriteLine(mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Single = ds.Tables(0).Rows.Count
         Dim clientID As Integer = 0
 
+        lvPawners.Items.Clear()
         If MaxRow = 0 Then
 
             mySql = "SELECT * FROM tblClient WHERE "
@@ -115,7 +118,14 @@
                     Next
                 End If
             Next
+        Else
+            For Each dr As DataRow In ds.Tables(0).Rows
+                Dim tmpTicket As New PawnTicket
+                tmpTicket.LoadTicketInRow(dr)
+                AddItem(tmpTicket)
+            Next
         End If
+
 
         lvPawners.Focus()
         MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
