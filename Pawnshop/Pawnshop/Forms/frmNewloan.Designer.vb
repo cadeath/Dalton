@@ -94,6 +94,7 @@ Partial Class frmNewloan
         Me.btnRenew = New System.Windows.Forms.Button()
         Me.btnRedeem = New System.Windows.Forms.Button()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.lblVOID = New System.Windows.Forms.Label()
         Me.grpPawner.SuspendLayout()
         Me.grpItem.SuspendLayout()
         Me.grpTicket.SuspendLayout()
@@ -861,12 +862,25 @@ Partial Class frmNewloan
         Me.lblTitle.TabIndex = 36
         Me.lblTitle.Text = "Pawning"
         '
+        'lblVOID
+        '
+        Me.lblVOID.AutoSize = True
+        Me.lblVOID.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblVOID.ForeColor = System.Drawing.Color.DarkRed
+        Me.lblVOID.Location = New System.Drawing.Point(822, 405)
+        Me.lblVOID.Name = "lblVOID"
+        Me.lblVOID.Size = New System.Drawing.Size(217, 25)
+        Me.lblVOID.TabIndex = 38
+        Me.lblVOID.Text = "NEW PT#99999999"
+        Me.lblVOID.Visible = False
+        '
         'frmNewloan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(1054, 446)
+        Me.Controls.Add(Me.lblVOID)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnRedeem)
         Me.Controls.Add(Me.btnRenew)
@@ -969,4 +983,5 @@ Partial Class frmNewloan
     Friend WithEvents btnRenew As System.Windows.Forms.Button
     Friend WithEvents btnRedeem As System.Windows.Forms.Button
     Friend WithEvents lblTitle As System.Windows.Forms.Label
+    Friend WithEvents lblVOID As System.Windows.Forms.Label
 End Class

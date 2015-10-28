@@ -1,7 +1,7 @@
 ﻿Public Class frmNewloan
 
     Dim Pawner As Client
-    Dim PawnItem As PawnTicket
+    Dim PawnItem As PawnTicket, VoidPawnItem As PawnTicket
     Dim currentPawnTicket As Integer = GetLastNum()
     Dim currentOR As Integer = GetORNum()
     Dim transactionType As String
@@ -120,6 +120,21 @@
         DigitOnly(e)
     End Sub
 
+    Private Sub frmNewloan_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        Select Case e.KeyCode
+            Case Keys.F4
+                Console.WriteLine("Renewal")
+                Renewal()
+            Case Keys.F5
+                Console.WriteLine("Redeem")
+                Redeem()
+        End Select
+    End Sub
+
+    Private Sub frmNewloan_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
+
+    End Sub
+
     Private Sub frmNewloan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If IsNothing(Pawner) Then
             ClearFields()
@@ -147,7 +162,7 @@
         ' Ticket Information
         LoanDate.Value = CurrentDate
         Maturity.Value = LoanDate.Value.AddDays(29) : Maturity.Enabled = False
-        If PawnItem.ItemType = "CEL" Then
+        If cboItemtype.Text = "CEL" Then
             Expiry.Value = Maturity.Value : Expiry.Enabled = False
             Auction.Value = LoanDate.Value.AddDays(63) : Auction.Enabled = False
         Else
@@ -272,6 +287,29 @@
 
                 Me.Text = "Pawn Ticket Number " & tk.PawnTicket & " [" & st & "]"
                 lblTitle.Text = "Display"
+
+                ' Disable renew
+                If tk.Status = "0" Or tk.Status = "V" Or tk.Status = "W" Or tk.Status = "S" Or tk.Status = "X" Then
+                    btnRenew.Enabled = False
+                    btnRedeem.Enabled = False
+                End If
+
+                ' Activate Void
+                If tk.Status = "L" Or tk.Status = "R" Or tk.Status = "W" Then
+                    btnVoid.Enabled = True
+                End If
+                If tk.Status = "V" Then
+                    If GetOldPT() <> Nothing Then
+                        lblVOID.Text = "New Ticket: " & GetOldPT()
+                        lblVOID.Visible = True
+                    End If
+                End If
+
+                ' Activate Cancel
+                If tk.Status = "X" Then
+                    btnVoid.Enabled = True
+                    btnVoid.Text = "CANCEL"
+                End If
         End Select
     End Sub
 
@@ -357,9 +395,24 @@
         txtTotal.Text = txtPrincipal.Text
     End Sub
 
+    Private Function checkPayments() As Boolean
+        If transactionType = "L" Then Return True
+
+        Dim shouldPay As Double = CDbl(txtRedeemDue.Text)
+        If CDbl(txtTotal.Text) > shouldPay Then
+            Return False
+        End If
+        Return True
+    End Function
+
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If txtAppraisal.Text = "" Then txtAppraisal.Focus() : Exit Sub
         If txtTotal.Text = "" Then txtTotal.Focus() : Exit Sub
+
+        If Not checkPayments() Then
+            MsgBox("Check payment", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         If transactionType = "X" Then
             Dim netAmt As Double = CDbl(txtTotal.Text)
@@ -406,6 +459,8 @@
                     Dim lessPrin As Double
                     lessPrin = Math.Abs(CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text))
                     .Principal = CDbl(txtPrincipal.Text) - lessPrin
+                Else
+                    .Principal = txtPrincipal.Text
                 End If
             Else
                 .Principal = txtPrincipal.Text
@@ -439,7 +494,15 @@
             database.SaveEntry(dsInactive, False)
         End If
 
+        VoidTheOldTicket()
+
         MsgBox("Ticket Posted", MsgBoxStyle.Information, "Transaction Saved")
+        If transactionType <> "L" Then
+            frmPawning.LoadActive()
+            Me.Close()
+            Exit Sub
+        End If
+
         Dim ans As DialogResult = MsgBox("Do you want to enter another one?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Question")
         If ans = Windows.Forms.DialogResult.Yes Then
             ClearFields()
@@ -545,6 +608,8 @@
     End Sub
 
     Friend Sub Renewal()
+        If transactionType = "L" Then Exit Sub
+
         transactionType = "R"
 
         'Buttons
@@ -652,6 +717,8 @@
     End Sub
 
     Friend Sub Redeem()
+        If transactionType = "L" Then Exit Sub
+
         transactionType = "X"
 
         'Buttons
@@ -718,5 +785,64 @@
         Return 0
     End Function
 #End Region
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim ans As DialogResult = _
+        MsgBox("Do you want to void this transaction?", vbCritical + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "W A R N I N G")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        If PawnItem.LoanDate <> CurrentDate.Date Then
+            MsgBox("You cannot VOID in a different DATE", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        If PawnItem.Status = "L" Then
+            Dim mySql As String = "SELECT * FROM tblPawn WHERE PawnID = " & PawnItem.PawnID
+            Dim tbl As String = "tblPawn", ds As DataSet
+            ds = LoadSQL(mySql, tbl)
+            ds.Tables(0).Rows(0).Item("Status") = "V"
+            database.SaveEntry(ds, False)
+        End If
+
+        If PawnItem.Status = "R" Or PawnItem.Status = "0" Then
+            VoidPawnItem = PawnItem
+            Renewal()
+
+            'Disable Buttons
+            btnRenew.Enabled = False
+            btnRedeem.Enabled = False
+
+            Exit Sub
+        End If
+
+        MsgBox("PT# " & PawnItem.PawnTicket & vbCr & "Is now VOID", MsgBoxStyle.Information)
+        frmPawning.LoadActive()
+        Me.Close()
+    End Sub
+
+    Private Function GetOldPT() As Integer
+        On Error Resume Next
+
+        Dim pt As Integer = PawnItem.PawnTicket
+        Dim ds As DataSet, mySql As String = _
+            "SELECT * FROM tblPawn WHERE OldTicket = " & pt
+        ds = LoadSQL(mySql)
+
+        Dim newPT As Integer
+        newPT = ds.Tables(0).Rows(0).Item("PawnTicket")
+
+        Return newPT
+    End Function
+
+    Private Sub VoidTheOldTicket()
+        If VoidPawnItem Is Nothing Then Exit Sub
+
+        Dim tbl As String = "tblPawn", mySql As String, ds As DataSet
+        mySql = "SELECT * FROM tblPawn WHERE PawnID = " & VoidPawnItem.PawnID
+        ds = LoadSQL(mySql, tbl)
+
+        ds.Tables(0).Rows(0).Item("Status") = "V"
+        database.SaveEntry(ds, False)
+    End Sub
 End Class
 
