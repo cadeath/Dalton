@@ -35,17 +35,21 @@ Partial Class frmMTlist
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnNew = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lvMoneyTransfer
         '
+        Me.lvMoneyTransfer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvMoneyTransfer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
         Me.lvMoneyTransfer.FullRowSelect = True
         Me.lvMoneyTransfer.GridLines = True
         Me.lvMoneyTransfer.Location = New System.Drawing.Point(12, 55)
         Me.lvMoneyTransfer.Name = "lvMoneyTransfer"
-        Me.lvMoneyTransfer.Size = New System.Drawing.Size(704, 242)
-        Me.lvMoneyTransfer.TabIndex = 0
+        Me.lvMoneyTransfer.Size = New System.Drawing.Size(714, 378)
+        Me.lvMoneyTransfer.TabIndex = 2
         Me.lvMoneyTransfer.UseCompatibleStateImageBehavior = False
         Me.lvMoneyTransfer.View = System.Windows.Forms.View.Details
         '
@@ -80,28 +84,31 @@ Partial Class frmMTlist
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 306)
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Location = New System.Drawing.Point(12, 442)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1
+        Me.Button1.TabIndex = 5
         Me.Button1.Text = "&View"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(93, 306)
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button2.Location = New System.Drawing.Point(93, 442)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 2
+        Me.Button2.TabIndex = 6
         Me.Button2.Text = "&Void"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(641, 306)
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Location = New System.Drawing.Point(651, 442)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 3
+        Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "&Close"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -112,8 +119,8 @@ Partial Class frmMTlist
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(12, 27)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(623, 22)
-        Me.txtSearch.TabIndex = 5
+        Me.txtSearch.Size = New System.Drawing.Size(633, 22)
+        Me.txtSearch.TabIndex = 0
         Me.txtSearch.Text = "WU 15215"
         '
         'Label1
@@ -127,18 +134,30 @@ Partial Class frmMTlist
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(641, 26)
+        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button3.Location = New System.Drawing.Point(651, 26)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 6
+        Me.Button3.TabIndex = 1
         Me.Button3.Text = "&Search"
         Me.Button3.UseVisualStyleBackColor = True
+        '
+        'btnNew
+        '
+        Me.btnNew.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNew.Location = New System.Drawing.Point(570, 442)
+        Me.btnNew.Name = "btnNew"
+        Me.btnNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnNew.TabIndex = 3
+        Me.btnNew.Text = "&New"
+        Me.btnNew.UseVisualStyleBackColor = True
         '
         'frmMTlist
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(728, 341)
+        Me.ClientSize = New System.Drawing.Size(738, 474)
+        Me.Controls.Add(Me.btnNew)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.Label1)
@@ -165,4 +184,5 @@ Partial Class frmMTlist
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents btnNew As System.Windows.Forms.Button
 End Class
