@@ -1,15 +1,21 @@
 ﻿Public Class MoneyTransfer
 
+    Private fillData As String = "tblMoneyTransfer"
+
 #Region "Variables"
     Private _id As Integer
     Private _ref As String
     Private _date As Date
-    Private _type As String
+    Private _serviceType As String
+    Private _transType As Integer = 0
     Private _client1 As Client
     Private _client2 As Client
     Private _amount As Double = 0
+    Private _location As String
     Private _service As Double = 0
     Private _netAmount As Double = 0
+    Private _encoderID As Integer
+    Private _status As String
 #End Region
 
 #Region "Properties"
@@ -40,6 +46,24 @@
         End Get
     End Property
 
+    Public Property ServiceType As String
+        Get
+            Return _serviceType
+        End Get
+        Set(ByVal value As String)
+            _serviceType = value
+        End Set
+    End Property
+
+    Public Property TransactionType As String
+        Set(ByVal value As String)
+            _type = value
+        End Set
+        Get
+            Return _type
+        End Get
+    End Property
+
     Public Property Sender As Client
         Set(ByVal value As Client)
             _client1 = value
@@ -67,6 +91,15 @@
         End Get
     End Property
 
+    Public Property Location As String
+        Get
+            Return _location
+        End Get
+        Set(ByVal value As String)
+            _location = value
+        End Set
+    End Property
+
     Public Property ServiceCharge As Double
         Set(ByVal value As Double)
             _service = value
@@ -84,6 +117,15 @@
             Return _netAmount
         End Get
     End Property
+
+    Public Property Status As String
+        Set(ByVal value As String)
+            _status = value
+        End Set
+        Get
+            Return _status
+        End Get
+    End Property
 #End Region
 
 #Region "Procedures and Functions"
@@ -92,21 +134,54 @@
         mySql = "SELECT * FROM tblMoneyTransfer WHERE ID = " & id
         ds = LoadSQL(mySql)
 
-        With ds.Tables(0).Rows(0)
-            _type = .Item("TransType")
-            _ref = .Item("RefNum")
-            _date = .Item("TransDate")
+        loadByRow(ds.Tables(0).Rows(0))
+    End Sub
+
+    Public Sub LoadTransactionByRow(ByVal dr As DataRow)
+        loadByRow(dr)
+    End Sub
+
+    Private Sub loadByRow(ByVal dr As DataRow)
+        With dr
+            _transType = .Item("Transaction")
+            _serviceType = .Item("ServiceType")
             Dim tmpClient As New Client
             tmpClient.LoadClient(.Item("SenderID"))
             _client1 = tmpClient
             tmpClient.LoadClient(.Item("ReceiverID"))
             _client2 = tmpClient
+            _ref = .Item("RefNum")
             _amount = .Item("Amount")
+            _location = .Item("location")
+            _date = .Item("TransDate")
             _service = .Item("ServiceCharge")
             _netAmount = .Item("NetAmount")
+            _encoderID = .Item("EncoderID")
+            _status = .Item("Status")
         End With
+    End Sub
 
-        Console.WriteLine("Transaction Loaded")
+    Public Sub Save()
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM " & fillData
+        ds = LoadSQL(mySql)
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("TransType") = _type
+            .Item("RefNum") = _ref
+            .Item("TransDate") = _date
+            .Item("TransType") = _type
+            .Item("SenderID") = _client1.ID
+            .Item("ReceiverID") = _client2.ID
+            .Item("Amount") = _amount
+            .Item("ServiceCharge") = _service
+            .Item("NetAmount") = _netAmount
+            .Item("EncoderID") = _encoderID
+            .Item("SystemInfo") = Now
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
     End Sub
 #End Region
 End Class

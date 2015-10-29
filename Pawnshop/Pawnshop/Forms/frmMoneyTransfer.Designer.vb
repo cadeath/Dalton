@@ -26,8 +26,8 @@ Partial Class frmMoneyTransfer
         Me.btnClose = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.rbReceive = New System.Windows.Forms.RadioButton()
+        Me.rbSend = New System.Windows.Forms.RadioButton()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cboType = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -92,8 +92,8 @@ Partial Class frmMoneyTransfer
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.RadioButton2)
-        Me.GroupBox1.Controls.Add(Me.RadioButton1)
+        Me.GroupBox1.Controls.Add(Me.rbReceive)
+        Me.GroupBox1.Controls.Add(Me.rbSend)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(171, 84)
@@ -101,29 +101,29 @@ Partial Class frmMoneyTransfer
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Transaction"
         '
-        'RadioButton2
+        'rbReceive
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton2.Location = New System.Drawing.Point(15, 47)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(121, 20)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.Text = "Receive Money"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.rbReceive.AutoSize = True
+        Me.rbReceive.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbReceive.Location = New System.Drawing.Point(15, 47)
+        Me.rbReceive.Name = "rbReceive"
+        Me.rbReceive.Size = New System.Drawing.Size(121, 20)
+        Me.rbReceive.TabIndex = 1
+        Me.rbReceive.Text = "Receive Money"
+        Me.rbReceive.UseVisualStyleBackColor = True
         '
-        'RadioButton1
+        'rbSend
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Checked = True
-        Me.RadioButton1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton1.Location = New System.Drawing.Point(15, 19)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(102, 20)
-        Me.RadioButton1.TabIndex = 0
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Send Money"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.rbSend.AutoSize = True
+        Me.rbSend.Checked = True
+        Me.rbSend.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbSend.Location = New System.Drawing.Point(15, 19)
+        Me.rbSend.Name = "rbSend"
+        Me.rbSend.Size = New System.Drawing.Size(102, 20)
+        Me.rbSend.TabIndex = 0
+        Me.rbSend.TabStop = True
+        Me.rbSend.Text = "Send Money"
+        Me.rbSend.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -436,8 +436,8 @@ Partial Class frmMoneyTransfer
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
+    Friend WithEvents rbSend As System.Windows.Forms.RadioButton
+    Friend WithEvents rbReceive As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox

@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' v1.2 10/29/15
+'  - Simplify Codes
 ' v1.1.1 10/22/2015
 '  - Change ZIP data type from Integer to String
 ' v1.1 10/21/2015
@@ -247,29 +249,10 @@ Public Class Client
     End Sub
 
     Private Function CreateDataSet() As DataSet
-        'Creating Virtual Database
-        Dim ds As New DataSet, dt As New DataTable(fillData)
+        Dim ds As DataSet
 
-        'Constructing Database
-        ds.Tables.Add(dt)
-        With ds.Tables(fillData).Columns
-            .Add(New DataColumn("ClientID", GetType(Integer))) 'AutoIncrement
-            .Add(New DataColumn("FirstName", GetType(String)))
-            .Add(New DataColumn("MiddleName", GetType(String)))
-            .Add(New DataColumn("LastName", GetType(String)))
-            .Add(New DataColumn("Suffix", GetType(String)))
-            .Add(New DataColumn("Addr_Street", GetType(String)))
-            .Add(New DataColumn("Addr_Brgy", GetType(String)))
-            .Add(New DataColumn("Addr_City", GetType(String)))
-            .Add(New DataColumn("Addr_Province", GetType(String)))
-            .Add(New DataColumn("Addr_Zip", GetType(String)))
-            .Add(New DataColumn("Sex", GetType(String)))
-            .Add(New DataColumn("Birthday", GetType(Date)))
-            .Add(New DataColumn("Phone1", GetType(String)))
-            .Add(New DataColumn("Phone2", GetType(String)))
-            .Add(New DataColumn("Phone3", GetType(String)))
-            .Add(New DataColumn("Phone_Others", GetType(String)))
-        End With
+        Dim mySql As String = "SELECT * FROM tblClient"
+        ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
