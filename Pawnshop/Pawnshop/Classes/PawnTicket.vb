@@ -299,49 +299,9 @@
 
 #Region "Procedures and Functions"
     Public Sub SaveTicket()
-        database.SaveEntry(CreateDataSet)
-    End Sub
-
-    Private Function CreateDataSet() As DataSet
         Dim fillData As String = "tblPawn"
-        'Creating Virtual Database
-        Dim ds As New DataSet, dt As New DataTable(fillData)
-
-        'Constructing Database
-        ds.Tables.Add(dt)
-        With ds.Tables(fillData).Columns
-            .Add(New DataColumn("PawnID", GetType(Integer))) 'AutoIncrement
-            .Add(New DataColumn("PawnTicket", GetType(Integer)))
-            .Add(New DataColumn("ClientID", GetType(Integer)))
-            .Add(New DataColumn("LoanDate", GetType(Date)))
-            .Add(New DataColumn("MatuDate", GetType(Date)))
-            .Add(New DataColumn("ExpiryDate", GetType(Date)))
-            .Add(New DataColumn("AuctionDate", GetType(Date)))
-            .Add(New DataColumn("ItemType", GetType(String)))
-            .Add(New DataColumn("CatID", GetType(Integer)))
-            .Add(New DataColumn("Description", GetType(String)))
-            .Add(New DataColumn("Karat", GetType(String)))
-            .Add(New DataColumn("Grams", GetType(Double)))
-            .Add(New DataColumn("Appraisal", GetType(Double)))
-            .Add(New DataColumn("Principal", GetType(Double)))
-            .Add(New DataColumn("Interest", GetType(Double)))
-            .Add(New DataColumn("NetAmount", GetType(Double)))
-            .Add(New DataColumn("Evat", GetType(Double)))
-            .Add(New DataColumn("AppraiserID", GetType(Integer)))
-            .Add(New DataColumn("OldTicket", GetType(Integer)))
-            .Add(New DataColumn("ORNum", GetType(Integer)))
-            .Add(New DataColumn("ORDate", GetType(Date)))
-            .Add(New DataColumn("LessPrincipal", GetType(Double)))
-            .Add(New DataColumn("DaysOverDue", GetType(Double)))
-            .Add(New DataColumn("DelayInt", GetType(Double)))
-            .Add(New DataColumn("Penalty", GetType(Double)))
-            .Add(New DataColumn("ServiceCharge", GetType(Double)))
-            .Add(New DataColumn("RenewDue", GetType(Double)))
-            .Add(New DataColumn("RedeemDue", GetType(Double)))
-            .Add(New DataColumn("Status", GetType(String)))
-            .Add(New DataColumn("SystemInfo", GetType(Date)))
-            .Add(New DataColumn("EncoderID", GetType(Integer)))
-        End With
+        Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
+        ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
@@ -379,8 +339,8 @@
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
-        Return ds
-    End Function
+        database.SaveEntry(ds)
+    End Sub
 
     Public Sub LoadTicket(ByVal id As Integer, Optional ByVal col As String = "PAWNID")
         Dim mySql As String = "SELECT * FROM tblpawn WHERE " & col & " = " & id

@@ -51,8 +51,8 @@
         End With
     End Sub
 
-    Friend Sub LoadSenderInfo()
-
+    Friend Sub LoadSenderInfo(ByVal cl As Client)
+        txtSender.Text = String.Format("{0} {1}", cl.FirstName, cl.LastName)
     End Sub
 
     Friend Sub LoadReceiverInfo()
