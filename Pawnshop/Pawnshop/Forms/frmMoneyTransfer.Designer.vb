@@ -24,7 +24,7 @@ Partial Class frmMoneyTransfer
     Private Sub InitializeComponent()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnPost = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rbReceive = New System.Windows.Forms.RadioButton()
         Me.rbSend = New System.Windows.Forms.RadioButton()
@@ -40,20 +40,20 @@ Partial Class frmMoneyTransfer
         Me.txtSender = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtReceiverID = New System.Windows.Forms.TextBox()
+        Me.txtReceiverIDNum = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtReceiverAddr = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.btnSearchReceiver = New System.Windows.Forms.Button()
+        Me.txtReceiver = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.txtLocation = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.txtRefNum = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -81,14 +81,14 @@ Partial Class frmMoneyTransfer
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnPost
         '
-        Me.Button2.Location = New System.Drawing.Point(597, 449)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 18
-        Me.Button2.Text = "&Post"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnPost.Location = New System.Drawing.Point(597, 449)
+        Me.btnPost.Name = "btnPost"
+        Me.btnPost.Size = New System.Drawing.Size(75, 23)
+        Me.btnPost.TabIndex = 18
+        Me.btnPost.Text = "&Post"
+        Me.btnPost.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -239,13 +239,13 @@ Partial Class frmMoneyTransfer
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.TextBox1)
-        Me.GroupBox4.Controls.Add(Me.TextBox2)
+        Me.GroupBox4.Controls.Add(Me.txtReceiverID)
+        Me.GroupBox4.Controls.Add(Me.txtReceiverIDNum)
         Me.GroupBox4.Controls.Add(Me.Label1)
-        Me.GroupBox4.Controls.Add(Me.TextBox3)
+        Me.GroupBox4.Controls.Add(Me.txtReceiverAddr)
         Me.GroupBox4.Controls.Add(Me.Label5)
-        Me.GroupBox4.Controls.Add(Me.Button1)
-        Me.GroupBox4.Controls.Add(Me.TextBox4)
+        Me.GroupBox4.Controls.Add(Me.btnSearchReceiver)
+        Me.GroupBox4.Controls.Add(Me.txtReceiver)
         Me.GroupBox4.Controls.Add(Me.Label6)
         Me.GroupBox4.Location = New System.Drawing.Point(12, 290)
         Me.GroupBox4.Name = "GroupBox4"
@@ -254,23 +254,23 @@ Partial Class frmMoneyTransfer
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Receiver's Information"
         '
-        'TextBox1
+        'txtReceiverID
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(111, 116)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(129, 22)
-        Me.TextBox1.TabIndex = 4
-        Me.TextBox1.Text = "Driver's License"
+        Me.txtReceiverID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtReceiverID.Location = New System.Drawing.Point(111, 116)
+        Me.txtReceiverID.Name = "txtReceiverID"
+        Me.txtReceiverID.Size = New System.Drawing.Size(129, 22)
+        Me.txtReceiverID.TabIndex = 4
+        Me.txtReceiverID.Text = "Driver's License"
         '
-        'TextBox2
+        'txtReceiverIDNum
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(111, 144)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(296, 22)
-        Me.TextBox2.TabIndex = 5
-        Me.TextBox2.Text = "MMMMMMMMMMMMMMMMMMM"
+        Me.txtReceiverIDNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtReceiverIDNum.Location = New System.Drawing.Point(111, 144)
+        Me.txtReceiverIDNum.Name = "txtReceiverIDNum"
+        Me.txtReceiverIDNum.Size = New System.Drawing.Size(296, 22)
+        Me.txtReceiverIDNum.TabIndex = 5
+        Me.txtReceiverIDNum.Text = "MMMMMMMMMMMMMMMMMMM"
         '
         'Label1
         '
@@ -282,15 +282,15 @@ Partial Class frmMoneyTransfer
         Me.Label1.TabIndex = 17
         Me.Label1.Text = "ID Information"
         '
-        'TextBox3
+        'txtReceiverAddr
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(111, 42)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(331, 67)
-        Me.TextBox3.TabIndex = 3
-        Me.TextBox3.Text = "Eskie Cirrus James Maquilang"
+        Me.txtReceiverAddr.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtReceiverAddr.Location = New System.Drawing.Point(111, 42)
+        Me.txtReceiverAddr.Multiline = True
+        Me.txtReceiverAddr.Name = "txtReceiverAddr"
+        Me.txtReceiverAddr.Size = New System.Drawing.Size(331, 67)
+        Me.txtReceiverAddr.TabIndex = 3
+        Me.txtReceiverAddr.Text = "Eskie Cirrus James Maquilang"
         '
         'Label5
         '
@@ -302,23 +302,23 @@ Partial Class frmMoneyTransfer
         Me.Label5.TabIndex = 15
         Me.Label5.Text = "Full Address:"
         '
-        'Button1
+        'btnSearchReceiver
         '
-        Me.Button1.Location = New System.Drawing.Point(367, 13)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Search"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnSearchReceiver.Location = New System.Drawing.Point(367, 13)
+        Me.btnSearchReceiver.Name = "btnSearchReceiver"
+        Me.btnSearchReceiver.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearchReceiver.TabIndex = 2
+        Me.btnSearchReceiver.Text = "Search"
+        Me.btnSearchReceiver.UseVisualStyleBackColor = True
         '
-        'TextBox4
+        'txtReceiver
         '
-        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(65, 13)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(296, 22)
-        Me.TextBox4.TabIndex = 1
-        Me.TextBox4.Text = "Eskie Cirrus James Maquilang"
+        Me.txtReceiver.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtReceiver.Location = New System.Drawing.Point(65, 13)
+        Me.txtReceiver.Name = "txtReceiver"
+        Me.txtReceiver.Size = New System.Drawing.Size(296, 22)
+        Me.txtReceiver.TabIndex = 1
+        Me.txtReceiver.Text = "Eskie Cirrus James Maquilang"
         '
         'Label6
         '
@@ -332,11 +332,11 @@ Partial Class frmMoneyTransfer
         '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.ComboBox1)
+        Me.GroupBox5.Controls.Add(Me.txtLocation)
         Me.GroupBox5.Controls.Add(Me.Label9)
-        Me.GroupBox5.Controls.Add(Me.TextBox6)
+        Me.GroupBox5.Controls.Add(Me.txtAmount)
         Me.GroupBox5.Controls.Add(Me.Label8)
-        Me.GroupBox5.Controls.Add(Me.TextBox5)
+        Me.GroupBox5.Controls.Add(Me.txtRefNum)
         Me.GroupBox5.Controls.Add(Me.Label7)
         Me.GroupBox5.Location = New System.Drawing.Point(487, 40)
         Me.GroupBox5.Name = "GroupBox5"
@@ -345,15 +345,14 @@ Partial Class frmMoneyTransfer
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Transaction"
         '
-        'ComboBox1
+        'txtLocation
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(9, 121)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(250, 24)
-        Me.ComboBox1.TabIndex = 9
-        Me.ComboBox1.Text = "Pera Padala"
+        Me.txtLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLocation.Location = New System.Drawing.Point(6, 121)
+        Me.txtLocation.Name = "txtLocation"
+        Me.txtLocation.Size = New System.Drawing.Size(253, 22)
+        Me.txtLocation.TabIndex = 9
+        Me.txtLocation.Text = "International"
         '
         'Label9
         '
@@ -365,14 +364,14 @@ Partial Class frmMoneyTransfer
         Me.Label9.TabIndex = 8
         Me.Label9.Text = "Location"
         '
-        'TextBox6
+        'txtAmount
         '
-        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(6, 78)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(253, 22)
-        Me.TextBox6.TabIndex = 5
-        Me.TextBox6.Text = "Eskie Cirrus James Maquilang"
+        Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAmount.Location = New System.Drawing.Point(6, 78)
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.Size = New System.Drawing.Size(253, 22)
+        Me.txtAmount.TabIndex = 5
+        Me.txtAmount.Text = "Eskie Cirrus James Maquilang"
         '
         'Label8
         '
@@ -384,14 +383,14 @@ Partial Class frmMoneyTransfer
         Me.Label8.TabIndex = 6
         Me.Label8.Text = "Amount"
         '
-        'TextBox5
+        'txtRefNum
         '
-        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(6, 34)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(253, 22)
-        Me.TextBox5.TabIndex = 3
-        Me.TextBox5.Text = "Eskie Cirrus James Maquilang"
+        Me.txtRefNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRefNum.Location = New System.Drawing.Point(6, 34)
+        Me.txtRefNum.Name = "txtRefNum"
+        Me.txtRefNum.Size = New System.Drawing.Size(253, 22)
+        Me.txtRefNum.TabIndex = 3
+        Me.txtRefNum.Text = "Eskie Cirrus James Maquilang"
         '
         'Label7
         '
@@ -413,7 +412,7 @@ Partial Class frmMoneyTransfer
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.Label11)
         Me.Name = "frmMoneyTransfer"
@@ -434,7 +433,7 @@ Partial Class frmMoneyTransfer
     End Sub
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents btnClose As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnPost As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents rbSend As System.Windows.Forms.RadioButton
     Friend WithEvents rbReceive As System.Windows.Forms.RadioButton
@@ -450,19 +449,19 @@ Partial Class frmMoneyTransfer
     Friend WithEvents txtSender As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtReceiverID As System.Windows.Forms.TextBox
+    Friend WithEvents txtReceiverIDNum As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtReceiverAddr As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents btnSearchReceiver As System.Windows.Forms.Button
+    Friend WithEvents txtReceiver As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
+    Friend WithEvents txtRefNum As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents txtAmount As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtLocation As System.Windows.Forms.TextBox
 End Class

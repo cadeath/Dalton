@@ -5,7 +5,7 @@
     End Sub
 
     Private Sub frmMTlist_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        LoadActive()
     End Sub
 
     Friend Sub LoadActive()
@@ -53,5 +53,9 @@
         Next
 
         MsgBox(ds.Tables(0).Rows.Count & " result found.", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+
     End Sub
 End Class

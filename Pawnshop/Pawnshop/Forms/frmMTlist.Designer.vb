@@ -26,6 +26,7 @@ Partial Class frmMTlist
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -36,7 +37,6 @@ Partial Class frmMTlist
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'lvMoneyTransfer
@@ -67,6 +67,10 @@ Partial Class frmMTlist
         '
         Me.ColumnHeader3.Text = "Type"
         Me.ColumnHeader3.Width = 62
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Company"
         '
         'ColumnHeader4
         '
@@ -153,10 +157,6 @@ Partial Class frmMTlist
         Me.btnNew.TabIndex = 3
         Me.btnNew.Text = "&New"
         Me.btnNew.UseVisualStyleBackColor = True
-        '
-        'ColumnHeader7
-        '
-        Me.ColumnHeader7.Text = "Company"
         '
         'frmMTlist
         '

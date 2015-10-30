@@ -55,12 +55,12 @@
         End Set
     End Property
 
-    Public Property TransactionType As String
-        Set(ByVal value As String)
-            _type = value
+    Public Property TransactionType As Integer
+        Set(ByVal value As Integer)
+            _transType = value
         End Set
         Get
-            Return _type
+            Return _transType
         End Get
     End Property
 
@@ -164,24 +164,30 @@
     Public Sub Save()
         Dim mySql As String, ds As DataSet
         mySql = "SELECT * FROM " & fillData
-        ds = LoadSQL(mySql)
+        ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
-            .Item("TransType") = _type
-            .Item("RefNum") = _ref
+            .Item("Transaction") = _transType
+            .Item("ServiceType") = _serviceType
             .Item("TransDate") = _date
-            .Item("TransType") = _type
             .Item("SenderID") = _client1.ID
+            .Item("SenderName") = String.Format("{0} {1}", _client1.FirstName, _client1.LastName)
             .Item("ReceiverID") = _client2.ID
+            .Item("ReceiverName") = String.Format("{0} {1}", _client2.FirstName, _client2.LastName)
+            .Item("RefNum") = _ref
             .Item("Amount") = _amount
+            .Item("Location") = _location
             .Item("ServiceCharge") = _service
             .Item("NetAmount") = _netAmount
+            .Item("Status") = _status
             .Item("EncoderID") = _encoderID
             .Item("SystemInfo") = Now
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds, False)
     End Sub
 #End Region
 End Class
