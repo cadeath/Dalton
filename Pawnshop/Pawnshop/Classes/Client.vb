@@ -1,5 +1,8 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' v1.3 10/30/2015
+'  - Load from View_Client
+'  - Include the ID
 ' v1.2 10/29/15
 '  - Simplify Codes
 ' v1.1.1 10/22/2015
@@ -31,6 +34,11 @@ Public Class Client
     Private _cp2 As String = String.Empty
     Private _phone As String = String.Empty
     Private _otherNum As String = String.Empty
+
+    'ID
+    Private _idType As String = String.Empty
+    Private _idNum As String = String.Empty
+    Private _remarks As String = String.Empty
 
     'Database
     Private fillData As String = "tblClient"
@@ -180,6 +188,33 @@ Public Class Client
             Return _otherNum
         End Get
     End Property
+
+    Public Property IDType As String
+        Set(ByVal value As String)
+            _idType = value
+        End Set
+        Get
+            Return _idType
+        End Get
+    End Property
+
+    Public Property IDNumber As String
+        Set(ByVal value As String)
+            _idNum = value
+        End Set
+        Get
+            Return _idNum
+        End Get
+    End Property
+
+    Public Property Remarks As String
+        Set(ByVal value As String)
+            _remarks = value
+        End Set
+        Get
+            Return _remarks
+        End Get
+    End Property
 #End Region
 
     Public Sub SaveClient()
@@ -285,7 +320,7 @@ Public Class Client
     ''' <param name="id">ClientID</param>
     ''' <remarks>to be added by ID List</remarks>
     Public Sub LoadClient(ByVal id As Integer)
-        Dim mySql As String = "SELECT * FROM TBLCLIENT WHERE ClientID = " & id
+        Dim mySql As String = "SELECT * FROM VIEW_CLIENT WHERE ClientID = " & id
         Dim ds As DataSet = LoadSQL(mySql)
 
         If IsNothing(ds) Then
@@ -293,32 +328,12 @@ Public Class Client
             Exit Sub
         End If
 
-        With ds.Tables(0).Rows(0)
-            _id = .Item("ClientID")
-            _firstName = .Item("FirstName")
-            _middleName = .Item("MiddleName")
-            _lastName = .Item("LastName")
-            _suffixName = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
-
-            _addrSt = .Item("Addr_Street")
-            _addrBrgy = .Item("Addr_Brgy")
-            _addrCity = .Item("Addr_City")
-            _addrProvince = .Item("Addr_Province")
-            _addrZip = .Item("Addr_Zip")
-
-            _gender = IIf(.Item("Sex") = "M", 1, 0)
-            _bday = .Item("Birthday")
-
-            _cp1 = .Item("Phone1").ToString
-            _cp2 = .Item("Phone2").ToString
-            _phone = .Item("Phone3").ToString
-            _otherNum = .Item("Phone_Others").ToString
-        End With
+        loadClientInfoByRow(ds.Tables(0).Rows(0))
 
         Console.WriteLine("[LoadClient] Client ID " & id & " is loaded.")
     End Sub
 
-    Public Sub LoadClientByRow(ByVal dr As DataRow)
+    Private Sub loadClientInfoByRow(ByVal dr As DataRow)
         With dr
             _id = .Item("ClientID")
             _firstName = .Item("FirstName")
@@ -339,7 +354,16 @@ Public Class Client
             _cp2 = .Item("Phone2").ToString
             _phone = .Item("Phone3").ToString
             _otherNum = .Item("Phone_Others").ToString
+
+            'ID
+            _idType = IIf(IsDBNull(.Item("IDType")), "", .Item("IDType"))
+            _idNum = IIf(IsDBNull(.Item("RefNum")), "", .Item("RefNum"))
+            _remarks = IIf(IsDBNull(.Item("Remarks")), "", .Item("Remarks"))
         End With
+    End Sub
+
+    Public Sub LoadClientByRow(ByVal dr As DataRow)
+        loadClientInfoByRow(dr)
         Console.WriteLine("[LoadClientByRow] Client information Loaded.")
     End Sub
 
