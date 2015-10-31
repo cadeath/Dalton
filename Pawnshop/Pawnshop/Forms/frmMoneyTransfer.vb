@@ -54,7 +54,25 @@
         txtNetAmount.ReadOnly = st
     End Sub
 
+    Private Function isValid() As Boolean
+        If Not (rbReceive.Checked Or rbSend.Checked) Then Return False
+
+        If txtReceiver.Text = "" Then MsgBox("Please select receiver", MsgBoxStyle.Critical) : Return False
+        If txtReceiverIDNum.Text = "" Then MsgBox("Please enter ID", MsgBoxStyle.Critical) : Return False
+
+        If txtSender.Text = "" Then MsgBox("Please select sender", MsgBoxStyle.Critical) : Return False
+        If txtSenderIDNum.Text = "" Then MsgBox("Please enter ID", MsgBoxStyle.Critical) : Return False
+
+        If txtAmount.Text = "" Then txtAmount.Focus() : Return False
+        If txtNetAmount.Text = "" Then txtNetAmount.Focus() : Return False
+        If txtLocation.Text = "" Then txtLocation.Focus() : Return False
+
+        Return True
+    End Function
+
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
+        If Not isValid() Then Exit Sub
+
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             .TransactionType = IIf(rbReceive.Checked, 1, 0)

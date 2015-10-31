@@ -59,6 +59,7 @@ Partial Class frmMoneyTransfer
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtRefNum = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.gbTrans.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -338,6 +339,7 @@ Partial Class frmMoneyTransfer
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.Label13)
         Me.GroupBox5.Controls.Add(Me.txtNetAmount)
         Me.GroupBox5.Controls.Add(Me.Label12)
         Me.GroupBox5.Controls.Add(Me.txtCharge)
@@ -450,6 +452,16 @@ Partial Class frmMoneyTransfer
         Me.Label7.TabIndex = 4
         Me.Label7.Text = "Reference Number"
         '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(99, 231)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(160, 13)
+        Me.Label13.TabIndex = 13
+        Me.Label13.Text = "Branch/(Local and International)"
+        '
         'frmMoneyTransfer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -517,4 +529,5 @@ Partial Class frmMoneyTransfer
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtCharge As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
 End Class
