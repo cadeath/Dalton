@@ -398,7 +398,7 @@ Partial Class frmNewloan
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(113, 22)
-        Me.txtTotal.TabIndex = 99
+        Me.txtTotal.TabIndex = 7
         '
         'lblNet
         '
@@ -417,7 +417,7 @@ Partial Class frmNewloan
         Me.txtPrincipal.Name = "txtPrincipal"
         Me.txtPrincipal.ReadOnly = True
         Me.txtPrincipal.Size = New System.Drawing.Size(113, 22)
-        Me.txtPrincipal.TabIndex = 17
+        Me.txtPrincipal.TabIndex = 6
         '
         'Label14
         '
@@ -436,7 +436,7 @@ Partial Class frmNewloan
         Me.txtAppraisal.Name = "txtAppraisal"
         Me.txtAppraisal.ReadOnly = True
         Me.txtAppraisal.Size = New System.Drawing.Size(113, 22)
-        Me.txtAppraisal.TabIndex = 16
+        Me.txtAppraisal.TabIndex = 5
         '
         'Label13
         '

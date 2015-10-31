@@ -443,28 +443,8 @@
             Exit Sub
         End If
 
-        Console.WriteLine("Saving")
-        Console.WriteLine("Trans: " & transactionType)
-
-        If transactionType = "X" Then
-            Dim netAmt As Double = CDbl(txtTotal.Text)
-            Dim redeemDue As Double = CDbl(txtRedeemDue.Text)
-
-            If netAmt < redeemDue Then
-                MsgBox("Please pay the exact for REDEEM DUE", MsgBoxStyle.Critical)
-                Exit Sub
-            End If
-
-            RedeemPawnTicket()
-            Exit Sub
-        End If
-
-        Dim oldPT As Integer = 0
-        If transactionType = "R" Then
-            oldPT = PawnItem.PawnID
-        End If
-        Dim ptToBeSave As New PawnTicket
-        With ptToBeSave
+        Dim newPawnItem As New PawnTicket
+        With newPawnItem
             .PawnTicket = txtTicket.Text
             .Pawner = Pawner
             .LoanDate = LoanDate.Value
@@ -480,16 +460,13 @@
             End If
             .Appraisal = txtAppraisal.Text
             If transactionType = "R" Then
-                Console.WriteLine("Less: " & CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text))
-                If CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text) < 0 Then
+                If CDbl(txtRedeemDue.Text) - CDbl(txtTotal.Text) < 0 Then
                     Dim lessPrin As Double
                     lessPrin = Math.Abs(CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text))
                     .Principal = CDbl(txtPrincipal.Text) - lessPrin
                 Else
                     .Principal = txtPrincipal.Text
                 End If
-            Else
-                .Principal = txtPrincipal.Text
             End If
             .NetAmount = txtTotal.Text
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
@@ -513,27 +490,20 @@
             database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
         End With
 
-        If transactionType = "R" Then
-            PawnItem = ptToBeSave
-            RenewPawnTicket(oldPT)
-        End If
+        Select Case transactionType
+            Case "R"
+                PawnItem.RedeemTicket()
+                currentOR += 1
+                database.UpdateOptions("", CInt(currentOR))
+        End Select
 
-        VoidTheOldTicket()
-
-        MsgBox("Ticket Posted", MsgBoxStyle.Information, "Transaction Saved")
-        If transactionType <> "L" Then
+        Dim ans As DialogResult = MsgBox("Do you want to enter more?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then
             frmPawning.LoadActive()
             Me.Close()
-            Exit Sub
-        End If
-
-        Dim ans As DialogResult = MsgBox("Do you want to enter another one?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Question")
-        If ans = Windows.Forms.DialogResult.Yes Then
-            ClearFields()
-            NewLoan()
         Else
-            frmPawning.LoadActive()
-            Me.Close()
+            NewLoan()
+            txtPawner.Focus()
         End If
     End Sub
 
@@ -612,14 +582,6 @@
     Private Sub cboCategory_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboCategory.KeyPress
         If isEnter(e) Then
             txtDesc.Focus()
-        End If
-    End Sub
-
-    Private Sub cboCategory_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboCategory.LostFocus
-        If cboItemtype.Text = "JWL" Then
-            txtGrams.Focus()
-        Else
-            txtAppraisal.Focus()
         End If
     End Sub
 
@@ -953,7 +915,7 @@
 
         If PawnItem.Status = "X" Then
             Console.WriteLine("OLD: " & PawnItem.OldTicket)
-            PawnItem.CancelTicket()
+            'PawnItem.CancelTicket()
 
             MsgBox("PT#" & PawnItem.PawnTicket & vbCr & "Is now restored", MsgBoxStyle.Information)
             frmPawning.LoadActive()
