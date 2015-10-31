@@ -448,6 +448,10 @@
                 PawnItem.RenewTicket()
                 currentOR += 1
                 database.UpdateOptions("ORLastNum", CInt(currentOR))
+            Case "X"
+                PawnItem.RenewTicket()
+                currentOR += 1
+                database.UpdateOptions("ORLastNum", CInt(currentOR))
         End Select
 
         Dim newPawnItem As New PawnTicket
@@ -495,8 +499,10 @@
             End If
 
             .SaveTicket()
-            currentPawnTicket += 1
-            database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
+            If transactionType <> "X" Then
+                currentPawnTicket += 1
+                database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
+            End If
         End With
 
         If transactionType <> "L" Then
@@ -808,11 +814,13 @@
                 btnRedeem.Text = "C&ancel"
                 btnRenew.Text = "&Renew"
                 txtTotal.Text = txtRedeemDue.Text ' Total
+                txtTotal.ReadOnly = True
             Case "RENEW"
                 transactionType = "R"
                 btnRedeem.Text = "R&edeem"
                 btnRenew.Text = "C&ancel"
                 txtTotal.Text = txtRenewDue.Text ' Total
+                txtTotal.ReadOnly = False
             Case Else
                 Exit Sub
         End Select

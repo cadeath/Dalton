@@ -441,7 +441,7 @@
     End Sub
 
     Public Sub RedeemTicket()
-        
+        ChangeStatus(0) 'Inactive
     End Sub
 
     Public Sub RenewTicket()
