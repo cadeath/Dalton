@@ -65,20 +65,8 @@
 
 #Region "Functions and Procedures"
     Public Function Save() As Boolean
-        'Creating Virtual Database
-        Dim ds As New DataSet, dt As New DataTable(fillData)
-
-        'Constructing Database
-        ds.Tables.Add(dt)
-        With ds.Tables(fillData).Columns
-            ' Primary not required
-            .Add(New DataColumn("id", GetType(Integer))) 'AutoIncrement
-            .Add(New DataColumn("ClientID", GetType(Integer)))
-            .Add(New DataColumn("IDType", GetType(String)))
-            .Add(New DataColumn("RefNum", GetType(String)))
-            .Add(New DataColumn("isSelected", GetType(Integer)))
-            .Add(New DataColumn("Remarks", GetType(String)))
-        End With
+        Dim ds As New DataSet, mySql As String = "SELECT * FROM " & fillData
+        ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
@@ -86,6 +74,7 @@
             .Item("ClientID") = _clientID
             .Item("IDType") = _IDType
             .Item("RefNum") = _RefNum
+            .Item("isSelected") = _isSelected
             .Item("Remarks") = _Remarks
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)

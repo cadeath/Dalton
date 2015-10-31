@@ -328,6 +328,7 @@ Public Class Client
             Exit Sub
         End If
 
+        If ds.Tables(0).Rows.Count = 0 Then MsgBox("Client Info Failed", MsgBoxStyle.Critical) : Exit Sub
         loadClientInfoByRow(ds.Tables(0).Rows(0))
 
         Console.WriteLine("[LoadClient] Client ID " & id & " is loaded.")
