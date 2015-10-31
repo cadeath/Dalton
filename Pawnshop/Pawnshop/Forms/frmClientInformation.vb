@@ -25,6 +25,8 @@ Public Class frmClientInformation
     End Sub
 
     Friend Sub LoadClientInForm(ByVal cl As Client)
+        If cl.FirstName = "" Then Exit Sub
+
         ' Display select buttons
         btnIDSelect.Visible = True
         btnSelect.Visible = True
@@ -205,6 +207,17 @@ Public Class frmClientInformation
         PhoneSeparator(txtTele, e, True)
     End Sub
 
+    Private Function isValid() As Boolean
+        If txtFirstName.Text = "" Then txtFirstName.Focus() : Return False
+        If txtLastName.Text = "" Then txtLastName.Focus() : Return False
+        If txtCity.Text = "" Then txtCity.Focus() : Return False
+        If cboGender.Text = "" Then cboGender.Focus() : Return False
+        If dtpBday.Value >= Now.Date Then dtpBday.Focus() : Return False
+
+
+        Return True
+    End Function
+
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If btnSave.Text = "&Modify" Then
             isNew = False
@@ -212,10 +225,9 @@ Public Class frmClientInformation
 
             Exit Sub
         End If
-        If txtFirstName.Text = "" Or txtMiddleName.Text = "" Or txtLastName.Text = "" Then
-            MsgBox("Please fill up information", MsgBoxStyle.Critical, "Empty Fields")
-            Exit Sub
-        End If
+        
+        If Not isValid() Then Exit Sub
+
 
         Dim tmpClient As New Client
         If Not isNew Then tmpClient = SelectedClient
@@ -312,10 +324,6 @@ Public Class frmClientInformation
         If isEnter(e) Then btnAdd.PerformClick()
     End Sub
 
-    Private Sub cboIDtype_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboIDtype.SelectedIndexChanged
-        'If Not cboIDtype.DroppedDown And cboIDtype.Text <> "" Then txtRef.Focus()
-    End Sub
-
     Private Sub ClearIDFields()
         cboIDtype.DroppedDown = True
         txtRef.Text = ""
@@ -346,6 +354,7 @@ Public Class frmClientInformation
         For Each cID As IdentificationCard In ClientIDs
             If cID.ID = Nothing Then
                 cID.ClientID = cl.ID
+                'idSelected(cID)
                 cID.Save()
             Else
                 cID.Modify()
@@ -371,6 +380,8 @@ Public Class frmClientInformation
     End Sub
 
     Private Sub btnIDSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDSelect.Click
+        If lvID.SelectedItems.Count <= 0 Then Exit Sub
+
         Dim idx As Integer
         idx = lvID.FocusedItem.Index
 
