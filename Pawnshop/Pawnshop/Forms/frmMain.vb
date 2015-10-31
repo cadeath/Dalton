@@ -46,7 +46,7 @@
     End Sub
 
     Private Sub btnMoneyTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMoneyTransfer.Click
-        frmMoneyTransfer.Show()
+        frmMTlist.Show()
     End Sub
 
     Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
