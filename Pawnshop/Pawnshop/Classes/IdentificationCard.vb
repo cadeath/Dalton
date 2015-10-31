@@ -1,4 +1,8 @@
-﻿Public Class IdentificationCard
+﻿'Changelog
+' v1.1
+'  - Fix ID selected
+
+Public Class IdentificationCard
 
 #Region "Variables"
     Private _id As Integer
