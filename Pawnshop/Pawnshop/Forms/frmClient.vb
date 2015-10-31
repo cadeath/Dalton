@@ -84,6 +84,9 @@ Public Class frmClient
 
     Private Sub txtSearch_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSearch.DoubleClick
         lvClient.Focus()
+
+        If lvClient.SelectedItems.Count <= 0 Then Exit Sub
+
         lvClient.Items(0).Selected = True
         Console.WriteLine("Selected")
     End Sub

@@ -147,6 +147,7 @@ Partial Class frmOpenStore
         '
         'frmOpenStore
         '
+        Me.AcceptButton = Me.btnSetup
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel

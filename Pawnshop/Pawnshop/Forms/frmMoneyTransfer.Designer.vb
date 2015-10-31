@@ -350,7 +350,7 @@ Partial Class frmMoneyTransfer
         Me.GroupBox5.Controls.Add(Me.Label7)
         Me.GroupBox5.Location = New System.Drawing.Point(487, 40)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(265, 311)
+        Me.GroupBox5.Size = New System.Drawing.Size(265, 244)
         Me.GroupBox5.TabIndex = 4
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Transaction"
