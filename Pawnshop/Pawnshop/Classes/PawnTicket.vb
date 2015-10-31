@@ -1,5 +1,7 @@
 ﻿Public Class PawnTicket
 
+    Dim fillData As String = "tblPawn"
+
 #Region "Variables"
     Private _pawnid As Integer
     Private _pawnTicket As Integer
@@ -415,6 +417,32 @@
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
         End With
+    End Sub
+
+    Public Sub CancelTicket()
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM tblPawn WHERE PawnTicket = " & _oldTicket
+        ds = LoadSQL(mySql, "tblPawn")
+
+        Me.LoadTicket(ds.Tables(0).Rows(0).Item("PawnID"))
+
+        If _oldTicket <> Nothing Then
+            _status = "R"
+        Else
+            _status = "L"
+        End If
+
+        ds.Tables(0).Rows(0).Item("status") = _status
+        database.SaveEntry(ds)
+    End Sub
+
+    Public Sub RedeemTicket()
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM " & fillData & " WHERE PawnID = " & _pawnid
+        ds = LoadSQL(mySql, fillData)
+        Me.LoadTicket(ds.Tables(0).Rows(0).Item("PawnID"))
+
+
     End Sub
 #End Region
 End Class

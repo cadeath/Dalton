@@ -156,7 +156,9 @@
         txtDesc.ReadOnly = False
         cboCategory.Enabled = True
         txtGrams.ReadOnly = False
+        txtGrams.Text = ""
         cboKarat.Enabled = True
+        cboKarat.Text = ""
 
         ' Ticket Information
         LoanDate.Value = CurrentDate
@@ -301,6 +303,7 @@
                     If GetOldPT() <> Nothing Then
                         lblVOID.Text = "New Ticket: " & GetOldPT()
                         lblVOID.Visible = True
+                        btnVoid.Visible = False
                     End If
                 End If
 
@@ -371,6 +374,7 @@
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        'frmPawning.LoadActive()
         Me.Close()
     End Sub
 
@@ -607,7 +611,7 @@
 
     Private Sub cboCategory_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboCategory.KeyPress
         If isEnter(e) Then
-            txtGrams.Focus()
+            txtDesc.Focus()
         End If
     End Sub
 
@@ -633,9 +637,14 @@
         If btnRenew.Text <> "&Renew" Then
             btnRenew.Text = "&Renew"
             CancelTrans()
+            transactionType = "D"
             Exit Sub
         End If
-        SwitchTransaction("RENEW")
+        If transactionType = "D" Then
+            SwitchTransaction("RENEW")
+        Else
+            MsgBox("Please cancel current transaction mode", MsgBoxStyle.Information)
+        End If
     End Sub
 
     Private Sub CancelTrans()
@@ -757,9 +766,14 @@
         If btnRedeem.Text <> "R&edeem" Then
             btnRedeem.Text = "R&edeem"
             CancelTrans()
+            transactionType = "D"
             Exit Sub
         End If
-        SwitchTransaction("REDEEM")
+        If transactionType = "D" Then
+            SwitchTransaction("REDEEM")
+        Else
+            MsgBox("Please cancel current transaction mode", MsgBoxStyle.Information)
+        End If
     End Sub
 
     Friend Sub SwitchTransaction(ByVal typ As String)
@@ -922,15 +936,28 @@
             database.SaveEntry(ds, False)
         End If
 
-        If PawnItem.Status = "R" Or PawnItem.Status = "0" Then
+        If PawnItem.Status = "R" Then
             VoidPawnItem = PawnItem
             'Renewal()
             SwitchTransaction("RENEW")
+            PawnItem.LoadTicket(VoidPawnItem.OldTicket, "OldTicket")
+            LoadPawnTicket(PawnItem, "R")
+            LoadCurrentPawnTicket()
 
             'Disable Buttons
             btnRenew.Enabled = False
             btnRedeem.Enabled = False
 
+            Exit Sub
+        End If
+
+        If PawnItem.Status = "X" Then
+            Console.WriteLine("OLD: " & PawnItem.OldTicket)
+            PawnItem.CancelTicket()
+
+            MsgBox("PT#" & PawnItem.PawnTicket & vbCr & "Is now restored", MsgBoxStyle.Information)
+            frmPawning.LoadActive()
+            Me.Close()
             Exit Sub
         End If
 
@@ -964,5 +991,8 @@
         database.SaveEntry(ds, False)
     End Sub
 
+    Private Sub cboCategory_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboCategory.SelectedIndexChanged
+
+    End Sub
 End Class
 
