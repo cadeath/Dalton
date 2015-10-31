@@ -54,7 +54,24 @@
         txtNetAmount.ReadOnly = st
     End Sub
 
+    Private Function isValid() As Boolean
+        If cboType.Text = "" Then cboType.Focus() : Return False
+
+        If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+        If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+        If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+        If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+
+        If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
+        If txtAmount.Text = "" Then txtAmount.Focus() : Return False
+        If txtLocation.Text = "" Then txtLocation.Focus() : Return False
+
+        Return True
+    End Function
+
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
+        If Not isValid() Then Exit Sub
+
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             .TransactionType = IIf(rbReceive.Checked, 1, 0)
@@ -102,5 +119,33 @@
         If isEnter(e) Then
             txtAmount.Focus()
         End If
+    End Sub
+
+    Private Function GetCharge(ByVal amt As Double) As Double
+        Dim type As String = "perapadala", fillData As String = "tblCharge"
+        Dim ds As DataSet, mySql As String
+        mySql = "SELECT * FROM " & fillData
+        ds = LoadSQL(mySql)
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            If amt <= CDbl(dr.Item("AMOUNT")) Then
+                Console.WriteLine("Max: " & dr.Item("AMOUNT") & "| Charge: " & dr.Item("Charge"))
+                Return CDbl(dr.Item("Charge"))
+            End If
+        Next
+
+        Console.WriteLine(String.Format("LIMIT! for  {0} with 1.5% of {1}", amt, amt * 0.015))
+        Return amt + (amt * 0.015)
+    End Function
+
+    Private Sub txtAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAmount.LostFocus
+        txtCharge.Text = GetCharge(CDbl(txtAmount.Text))
+        ComputeNet()
+    End Sub
+
+    Private Sub ComputeNet()
+        Dim net As Double = CDbl(txtCharge.Text) + CDbl(txtAmount.Text)
+
+        txtNetAmount.Text = "P " & net
     End Sub
 End Class
