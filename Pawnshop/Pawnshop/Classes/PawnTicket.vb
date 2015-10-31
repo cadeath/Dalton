@@ -422,12 +422,17 @@
     End Sub
 
     Private Sub ChangeStatus(ByVal str As String)
-        mySql = "SELECT * FROM " & fillData
+        mySql = "SELECT * FROM " & fillData & " WHERE PawnID = " & _pawnid
         ds = LoadSQL(mySql, fillData)
-        ds.Tables(0).Select("PawnID = " & _pawnid)
-        Me.LoadTicket(ds.Tables(0).Rows(0).Item("PawnID"))
+        'ds.Tables(0).Select("PawnID = " & _pawnid)
+        'Me.LoadTicket(ds.Tables(0).Rows(0).Item("PawnID"))
 
-        _status = str
+        Console.WriteLine("PawnID: " & Me._pawnid)
+        Console.WriteLine("PawnTicket: " & Me._pawnTicket)
+        Console.WriteLine("Client: " & Me._client.FirstName)
+        Console.WriteLine("Status: " & Me._status)
+
+        ds.Tables(0).Rows(0).Item("status") = str
         database.SaveEntry(ds, False)
     End Sub
 
@@ -441,9 +446,6 @@
 
     Public Sub RenewTicket()
         ChangeStatus(0) 'Inactive
-
-        _status = "R"
-        SaveTicket()
     End Sub
 #End Region
 End Class

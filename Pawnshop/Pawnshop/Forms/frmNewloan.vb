@@ -344,7 +344,7 @@
         cboCategory.SelectedIndex = -1
         ' Jewel
         txtGrams.Text = ""
-        cboKarat.Text = ""
+        cboKarat.SelectedIndex = -1
 
         ' Ticket Information
         txtTicket.Text = ""
@@ -443,6 +443,13 @@
             Exit Sub
         End If
 
+        Select Case transactionType
+            Case "R"
+                PawnItem.RenewTicket()
+                currentOR += 1
+                database.UpdateOptions("ORLastNum", CInt(currentOR))
+        End Select
+
         Dim newPawnItem As New PawnTicket
         With newPawnItem
             .PawnTicket = txtTicket.Text
@@ -460,13 +467,15 @@
             End If
             .Appraisal = txtAppraisal.Text
             If transactionType = "R" Then
-                If CDbl(txtRedeemDue.Text) - CDbl(txtTotal.Text) < 0 Then
+                If CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text) < 0 Then
                     Dim lessPrin As Double
                     lessPrin = Math.Abs(CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text))
                     .Principal = CDbl(txtPrincipal.Text) - lessPrin
                 Else
                     .Principal = txtPrincipal.Text
                 End If
+            ElseIf transactionType = "L" Then
+                .Principal = txtPrincipal.Text
             End If
             .NetAmount = txtTotal.Text
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
@@ -490,18 +499,20 @@
             database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
         End With
 
-        Select Case transactionType
-            Case "R"
-                PawnItem.RedeemTicket()
-                currentOR += 1
-                database.UpdateOptions("", CInt(currentOR))
-        End Select
+        If transactionType <> "L" Then
+            MsgBox("Transaction Successful", MsgBoxStyle.Information)
+            frmPawning.LoadActive()
+            Me.Close()
+
+            Exit Sub
+        End If
 
         Dim ans As DialogResult = MsgBox("Do you want to enter more?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then
             frmPawning.LoadActive()
             Me.Close()
         Else
+            ClearFields()
             NewLoan()
             txtPawner.Focus()
         End If
@@ -953,8 +964,10 @@
         database.SaveEntry(ds, False)
     End Sub
 
-    Private Sub cboCategory_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboCategory.SelectedIndexChanged
-
+    Private Sub txtDesc_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDesc.LostFocus
+        If cboItemtype.Text = "JWL" Then
+            txtGrams.Focus()
+        End If
     End Sub
 End Class
 
