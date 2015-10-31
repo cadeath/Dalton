@@ -70,6 +70,8 @@ Public Class frmClient
                 Dim tmpClient As New Client
                 tmpClient.LoadClient(pawner.Item("ClientID"))
                 AddItem(tmpClient)
+
+                Application.DoEvents()
             Next
 
             lvClient.Enabled = True
@@ -121,7 +123,7 @@ Public Class frmClient
         If txtSearch.Text = "" Then Exit Sub
 
         Dim src As String = txtSearch.Text
-        Dim mySql As String = "SELECT * FROM tblClient " & vbCrLf
+        Dim mySql As String = "SELECT * FROM VIEW_CLIENT " & vbCrLf
         mySql &= " WHERE "
         mySql &= String.Format("UPPER(FirstName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(MiddleName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
@@ -150,11 +152,14 @@ Public Class frmClient
         Next
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
-        lvClient.Focus()
-        lvClient.Items(0).Selected = True
+        lvClient.Items(0).Focused = True
+        'lvClient.Items(0).Selected = True
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+        If lvClient.SelectedItems.Count = 0 Then
+            lvClient.Items(0).Focused = True
+        End If
         Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
         GetClient = New Client
         GetClient.LoadClient(idx)

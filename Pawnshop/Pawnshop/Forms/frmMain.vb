@@ -1,6 +1,9 @@
 ﻿Public Class frmMain
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        frmOpenStore.Show()
+        frmOpenStore.Focus()
+
         ' Set the color in the MDI client.
         For Each ctl As Control In Me.Controls
             If TypeOf ctl Is MdiClient Then
@@ -43,7 +46,7 @@
     End Sub
 
     Private Sub btnMoneyTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMoneyTransfer.Click
-        frmMoneyTransfer.Show()
+        frmMTlist.Show()
     End Sub
 
     Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
@@ -72,5 +75,9 @@
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         frmPawning.Show()
+    End Sub
+
+    Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
+        tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
     End Sub
 End Class

@@ -20,7 +20,7 @@
     Private _evat As Double
     Private _appraiserID As Integer
 
-    Private _newTicket As Integer
+    Private _oldTicket As Integer
     Private _orNum As Integer
     Private _orDate As Date
     Private _lessPrincipal As Double
@@ -203,12 +203,12 @@
         End Set
     End Property
 
-    Public Property NewTicket As Integer
+    Public Property OldTicket As Integer
         Set(ByVal value As Integer)
-            _newTicket = value
+            _oldTicket = value
         End Set
         Get
-            Return _newTicket
+            Return _oldTicket
         End Get
     End Property
 
@@ -226,6 +226,9 @@
             _orDate = value
         End Set
         Get
+            If _orDate = #12:00:00 AM# Then
+                _orDate = Nothing
+            End If
             Return _orDate
         End Get
     End Property
@@ -296,47 +299,9 @@
 
 #Region "Procedures and Functions"
     Public Sub SaveTicket()
-        database.SaveEntry(CreateDataSet)
-    End Sub
-
-    Private Function CreateDataSet() As DataSet
         Dim fillData As String = "tblPawn"
-        'Creating Virtual Database
-        Dim ds As New DataSet, dt As New DataTable(fillData)
-
-        'Constructing Database
-        ds.Tables.Add(dt)
-        With ds.Tables(fillData).Columns
-            .Add(New DataColumn("PawnID", GetType(Integer))) 'AutoIncrement
-            .Add(New DataColumn("PawnTicket", GetType(Integer)))
-            .Add(New DataColumn("ClientID", GetType(Integer)))
-            .Add(New DataColumn("LoanDate", GetType(Date)))
-            .Add(New DataColumn("MatuDate", GetType(Date)))
-            .Add(New DataColumn("ExpiryDate", GetType(Date)))
-            .Add(New DataColumn("AuctionDate", GetType(Date)))
-            .Add(New DataColumn("ItemType", GetType(String)))
-            .Add(New DataColumn("CatID", GetType(Integer)))
-            .Add(New DataColumn("Description", GetType(String)))
-            .Add(New DataColumn("Karat", GetType(String)))
-            .Add(New DataColumn("Grams", GetType(Double)))
-            .Add(New DataColumn("Appraisal", GetType(Double)))
-            .Add(New DataColumn("Principal", GetType(Double)))
-            .Add(New DataColumn("Interest", GetType(Double)))
-            .Add(New DataColumn("NetAmount", GetType(Double)))
-            .Add(New DataColumn("Evat", GetType(Double)))
-            .Add(New DataColumn("AppraiserID", GetType(Integer)))
-            .Add(New DataColumn("NewTicket", GetType(Integer)))
-            .Add(New DataColumn("ORNum", GetType(Integer)))
-            .Add(New DataColumn("ORDate", GetType(Date)))
-            .Add(New DataColumn("LessPrincipal", GetType(Double)))
-            .Add(New DataColumn("DaysOverDue", GetType(Double)))
-            .Add(New DataColumn("DelayInt", GetType(Double)))
-            .Add(New DataColumn("Penalty", GetType(Double)))
-            .Add(New DataColumn("ServiceCharge", GetType(Double)))
-            .Add(New DataColumn("RenewDue", GetType(Double)))
-            .Add(New DataColumn("RedeemDue", GetType(Double)))
-            .Add(New DataColumn("Status", GetType(String)))
-        End With
+        Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
+        ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
@@ -358,7 +323,7 @@
             .Item("NetAmount") = _netAmount
             .Item("Evat") = _evat
             .Item("AppraiserID") = _appraiserID
-            .Item("NewTicket") = _newTicket
+            .Item("OldTicket") = _oldTicket
             .Item("ORNum") = _orNum
             .Item("ORDate") = _orDate
             .Item("LessPrincipal") = _lessPrincipal
@@ -369,10 +334,87 @@
             .Item("RenewDue") = _renewDue
             .Item("RedeemDue") = _redeemDue
             .Item("Status") = _status
+            .Item("SystemInfo") = Now
+            .Item("EncoderID") = UserID
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
-        Return ds
-    End Function
+        database.SaveEntry(ds)
+    End Sub
+
+    Public Sub LoadTicket(ByVal id As Integer, Optional ByVal col As String = "PAWNID")
+        Dim mySql As String = "SELECT * FROM tblpawn WHERE " & col & " = " & id
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        With ds.Tables(0).Rows(0)
+            _pawnid = .Item("PawnID")
+            _pawnTicket = .Item("PawnTicket")
+            Dim tmpClient As New Client
+            tmpClient.LoadClient(.Item("ClientID"))
+            _client = tmpClient
+            _loanDate = .Item("LoanDate")
+            _matuDate = .Item("MatuDate")
+            _expiryDate = .Item("ExpiryDate")
+            _auctionDate = .Item("AuctionDate")
+            _itemType = .Item("ItemType")
+            _catID = .Item("CatID")
+            _description = .Item("Description")
+            _karat = .Item("Karat")
+            _grams = .Item("Grams")
+            _appraisal = .Item("Appraisal")
+            _principal = .Item("Principal")
+            _interest = .Item("Interest")
+            _netAmount = .Item("NetAmount")
+            _evat = .Item("Evat")
+            _appraiserID = .Item("AppraiserID")
+            _oldTicket = .Item("OldTicket")
+            _orNum = .Item("ORNum")
+            _orDate = .Item("ORDate")
+            _lessPrincipal = .Item("LessPrincipal")
+            _daysOverDue = .Item("DaysOverDue")
+            _delayInt = .Item("DelayInt")
+            _penalty = .Item("Penalty")
+            _serviceCharge = .Item("ServiceCharge")
+            _renewDue = .Item("RenewDue")
+            _redeemDue = .Item("RedeemDue")
+            _status = .Item("Status")
+        End With
+    End Sub
+
+    Public Sub LoadTicketInRow(ByVal dr As DataRow)
+        With dr
+            _pawnid = .Item("PawnID")
+            _pawnTicket = .Item("PawnTicket")
+            Dim tmpClient As New Client
+            tmpClient.LoadClient(.Item("ClientID"))
+            _client = tmpClient
+            _loanDate = .Item("LoanDate")
+            _matuDate = .Item("MatuDate")
+            _expiryDate = .Item("ExpiryDate")
+            _auctionDate = .Item("AuctionDate")
+            _itemType = .Item("ItemType")
+            _catID = .Item("CatID")
+            _description = .Item("Description")
+            _karat = .Item("Karat")
+            _grams = .Item("Grams")
+            _appraisal = .Item("Appraisal")
+            _principal = .Item("Principal")
+            _interest = .Item("Interest")
+            _netAmount = .Item("NetAmount")
+            _evat = .Item("Evat")
+            _appraiserID = .Item("AppraiserID")
+            _oldTicket = .Item("OldTicket")
+            _orNum = .Item("ORNum")
+            _orDate = .Item("ORDate")
+            _lessPrincipal = .Item("LessPrincipal")
+            _daysOverDue = .Item("DaysOverDue")
+            _delayInt = .Item("DelayInt")
+            _penalty = .Item("Penalty")
+            _serviceCharge = .Item("ServiceCharge")
+            _renewDue = .Item("RenewDue")
+            _redeemDue = .Item("RedeemDue")
+            _status = .Item("Status")
+        End With
+    End Sub
 #End Region
 End Class

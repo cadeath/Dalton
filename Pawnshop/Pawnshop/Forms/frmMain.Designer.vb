@@ -22,6 +22,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -56,10 +57,14 @@ Partial Class frmMain
         Me.btnMoneyTransfer = New System.Windows.Forms.Button()
         Me.btnClient = New System.Windows.Forms.Button()
         Me.btnPawning = New System.Windows.Forms.Button()
+        Me.statusStrip = New System.Windows.Forms.StatusStrip()
+        Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
         Me.pButton.SuspendLayout()
+        Me.statusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'msMenu
@@ -67,7 +72,7 @@ Partial Class frmMain
         Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ReportToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.msMenu.Location = New System.Drawing.Point(0, 0)
         Me.msMenu.Name = "msMenu"
-        Me.msMenu.Size = New System.Drawing.Size(908, 24)
+        Me.msMenu.Size = New System.Drawing.Size(936, 24)
         Me.msMenu.TabIndex = 0
         Me.msMenu.Text = "msMenu"
         '
@@ -185,7 +190,7 @@ Partial Class frmMain
         Me.pbLogo.Image = CType(resources.GetObject("pbLogo.Image"), System.Drawing.Image)
         Me.pbLogo.Location = New System.Drawing.Point(0, 24)
         Me.pbLogo.Name = "pbLogo"
-        Me.pbLogo.Size = New System.Drawing.Size(908, 120)
+        Me.pbLogo.Size = New System.Drawing.Size(936, 120)
         Me.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pbLogo.TabIndex = 1
         Me.pbLogo.TabStop = False
@@ -198,7 +203,7 @@ Partial Class frmMain
         Me.pInfo.Controls.Add(Me.lblTitle)
         Me.pInfo.Location = New System.Drawing.Point(12, 161)
         Me.pInfo.Name = "pInfo"
-        Me.pInfo.Size = New System.Drawing.Size(365, 337)
+        Me.pInfo.Size = New System.Drawing.Size(365, 417)
         Me.pInfo.TabIndex = 5
         '
         'lblMessage
@@ -207,7 +212,7 @@ Partial Class frmMain
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblMessage.Location = New System.Drawing.Point(15, 41)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(310, 283)
+        Me.lblMessage.Size = New System.Drawing.Size(310, 366)
         Me.lblMessage.TabIndex = 5
         Me.lblMessage.Text = resources.GetString("lblMessage.Text")
         '
@@ -328,12 +333,32 @@ Partial Class frmMain
         Me.btnPawning.Text = "Pawning"
         Me.btnPawning.UseVisualStyleBackColor = True
         '
+        'statusStrip
+        '
+        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate})
+        Me.statusStrip.Location = New System.Drawing.Point(0, 581)
+        Me.statusStrip.Name = "statusStrip"
+        Me.statusStrip.Size = New System.Drawing.Size(936, 22)
+        Me.statusStrip.TabIndex = 6
+        Me.statusStrip.Text = "ss"
+        '
+        'tsCurrentDate
+        '
+        Me.tsCurrentDate.Name = "tsCurrentDate"
+        Me.tsCurrentDate.Size = New System.Drawing.Size(57, 17)
+        Me.tsCurrentDate.Text = "Today is: "
+        '
+        'tmrCurrent
+        '
+        Me.tmrCurrent.Enabled = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(185, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(908, 510)
+        Me.ClientSize = New System.Drawing.Size(936, 603)
+        Me.Controls.Add(Me.statusStrip)
         Me.Controls.Add(Me.pButton)
         Me.Controls.Add(Me.pbLogo)
         Me.Controls.Add(Me.msMenu)
@@ -349,6 +374,8 @@ Partial Class frmMain
         Me.pInfo.ResumeLayout(False)
         Me.pInfo.PerformLayout()
         Me.pButton.ResumeLayout(False)
+        Me.statusStrip.ResumeLayout(False)
+        Me.statusStrip.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -386,5 +413,8 @@ Partial Class frmMain
     Friend WithEvents AboutUsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CloseOpenStore As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents statusStrip As System.Windows.Forms.StatusStrip
+    Friend WithEvents tsCurrentDate As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents tmrCurrent As System.Windows.Forms.Timer
 
 End Class

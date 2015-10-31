@@ -130,4 +130,26 @@ Module database
 
         Return ds
     End Function
+
+    Friend Function GetOption(ByVal keys As String) As String
+        Dim mySql As String = "SELECT * FROM tblmaintenance WHERE opt_keys = '" & keys & "'"
+        Dim ret As String
+        Try
+            Dim ds As DataSet = LoadSQL(mySql)
+            ret = ds.Tables(0).Rows(0).Item("opt_values")
+        Catch ex As Exception
+            ret = 0
+        End Try
+
+        Return ret
+    End Function
+
+    Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)
+        Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
+        Dim ds As DataSet = LoadSQL(mySql, "tblMaintenance")
+
+        ds.Tables(0).Rows(0).Item("opt_values") = value
+        SaveEntry(ds, False)
+        Console.WriteLine("Option updated. " & key)
+    End Sub
 End Module
