@@ -424,8 +424,6 @@
     Private Sub ChangeStatus(ByVal str As String)
         mySql = "SELECT * FROM " & fillData & " WHERE PawnID = " & _pawnid
         ds = LoadSQL(mySql, fillData)
-        'ds.Tables(0).Select("PawnID = " & _pawnid)
-        'Me.LoadTicket(ds.Tables(0).Rows(0).Item("PawnID"))
 
         Console.WriteLine("PawnID: " & Me._pawnid)
         Console.WriteLine("PawnTicket: " & Me._pawnTicket)
@@ -437,7 +435,7 @@
     End Sub
 
     Public Sub VoidCancelTicket()
-        
+        ChangeStatus("V")
     End Sub
 
     Public Sub RedeemTicket()

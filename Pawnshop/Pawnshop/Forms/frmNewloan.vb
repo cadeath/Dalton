@@ -77,6 +77,11 @@
         cboAppraiser.Items.AddRange(users)
     End Sub
 
+    Private Sub AddPTNumber()
+        currentPawnTicket += 1
+        database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
+    End Sub
+
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmClient.SearchSelect(txtPawner.Text, FormName.frmPawning)
         frmClient.Show()
@@ -500,8 +505,7 @@
 
             .SaveTicket()
             If transactionType <> "X" Then
-                currentPawnTicket += 1
-                database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
+                AddPTNumber()
             End If
         End With
 
@@ -829,55 +833,6 @@
         txtTotal.SelectAll()
     End Sub
 
-    'Friend Sub Redeem()
-    '    If transactionType = "L" Then Exit Sub
-
-    '    transactionType = "X"
-
-    '    'Buttons
-    '    btnRenew.Text = "&Renew"
-    '    btnRedeem.Text = "C&ancel"
-    '    btnSave.Enabled = True
-
-    '    grpPawner.Enabled = False : grpItem.Enabled = False
-    '    grpTicket.Enabled = True : txtTicket.ReadOnly = True
-    '    txtNticket.ReadOnly = True : LoanDate.Enabled = False
-    '    Maturity.Enabled = False : Expiry.Enabled = False
-    '    Auction.Enabled = False : txtAppraisal.ReadOnly = True
-    '    txtPrincipal.ReadOnly = True : txtTotal.ReadOnly = False
-
-    '    grpReceipt.Enabled = True
-
-    '    'Ticket Information
-    '    txtTicket.Text = String.Format("{0:000000}", PawnItem.PawnTicket)
-    '    LoanDate.Value = PawnItem.LoanDate
-    '    Maturity.Value = LoanDate.Value.AddDays(30)
-    '    Expiry.Value = LoanDate.Value.AddDays(60)
-    '    Auction.Value = LoanDate.Value.AddDays(90)
-    '    txtAppraisal.Text = PawnItem.Appraisal
-    '    txtPrincipal.Text = PawnItem.Principal
-
-    '    txtRefNo.Text = String.Format("{0:000000}", currentOR)
-    '    dtpDate.Value = CurrentDate
-    '    txtAppr.Text = PawnItem.Appraisal
-    '    Dim diff = CurrentDate - Maturity.Value
-    '    If diff.Days > 0 Then
-    '        txtOverDue.Text = diff.Days
-    '    Else
-    '        txtOverDue.Text = 0
-    '    End If
-    '    txtPenalty.Text = GetPenalty(PawnItem.Principal)
-    '    txtSrvChrg.Text = GetServiceCharge(PawnItem.Principal)
-    '    txtEvat.Text = GetOption("Evat") ' No EVAT implemented
-
-    '    txtRenewDue.Text = CDbl(txtDelayInt.Text) + CDbl(txtPenalty.Text) + CDbl(txtSrvChrg.Text)
-    '    txtRedeemDue.Text = CDbl(txtDelayInt.Text) + CDbl(txtPenalty.Text) + CDbl(txtSrvChrg.Text) + CDbl(PawnItem.Principal)
-
-    '    txtTotal.Text = txtRedeemDue.Text ' Total
-    '    txtTotal.Focus()
-    '    txtTotal.SelectAll()
-    'End Sub
-
 #Region "Pawnshop Information"
     Friend Function GetPawnshop(ByVal day As Integer, ByVal pawnItemType As String, Optional ByVal mainType As String = "Interest") As Double
         Dim mySql As String = "SELECT * FROM tblint WHERE ItemType = '" & pawnItemType & "'"
@@ -909,40 +864,25 @@
             Exit Sub
         End If
 
+        PawnItem.VoidCancelTicket()
+
+        ' Wrong Pawn
         If PawnItem.Status = "L" Then
-            Dim mySql As String = "SELECT * FROM tblPawn WHERE PawnID = " & PawnItem.PawnID
-            Dim tbl As String = "tblPawn", ds As DataSet
-            ds = LoadSQL(mySql, tbl)
-            ds.Tables(0).Rows(0).Item("Status") = "V"
-            database.SaveEntry(ds, False)
-        End If
-
-        If PawnItem.Status = "R" Then
-            VoidPawnItem = PawnItem
-            'Renewal()
-            SwitchTransaction("RENEW")
-            PawnItem.LoadTicket(VoidPawnItem.OldTicket, "OldTicket")
-            LoadPawnTicket(PawnItem, "R")
-            LoadCurrentPawnTicket()
-
-            'Disable Buttons
-            btnRenew.Enabled = False
-            btnRedeem.Enabled = False
-
-            Exit Sub
-        End If
-
-        If PawnItem.Status = "X" Then
-            Console.WriteLine("OLD: " & PawnItem.OldTicket)
-            'PawnItem.CancelTicket()
-
-            MsgBox("PT#" & PawnItem.PawnTicket & vbCr & "Is now restored", MsgBoxStyle.Information)
             frmPawning.LoadActive()
             Me.Close()
             Exit Sub
         End If
 
+        PawnItem.LoadTicket(PawnItem.OldTicket, "PawnTicket")
+        If PawnItem.OldTicket = Nothing Then
+            PawnItem.Status = "L"
+        Else
+            PawnItem.Status = "R"
+        End If
+
+        PawnItem.SaveTicket()
         MsgBox("PT# " & PawnItem.PawnTicket & vbCr & "Is now VOID", MsgBoxStyle.Information)
+
         frmPawning.LoadActive()
         Me.Close()
     End Sub
@@ -960,17 +900,6 @@
 
         Return newPT
     End Function
-
-    Private Sub VoidTheOldTicket()
-        If VoidPawnItem Is Nothing Then Exit Sub
-
-        Dim tbl As String = "tblPawn", mySql As String, ds As DataSet
-        mySql = "SELECT * FROM tblPawn WHERE PawnID = " & VoidPawnItem.PawnID
-        ds = LoadSQL(mySql, tbl)
-
-        ds.Tables(0).Rows(0).Item("Status") = "V"
-        database.SaveEntry(ds, False)
-    End Sub
 
     Private Sub txtDesc_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDesc.LostFocus
         If cboItemtype.Text = "JWL" Then
