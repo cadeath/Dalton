@@ -380,6 +380,8 @@ Public Class frmClientInformation
     End Sub
 
     Private Sub btnIDSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIDSelect.Click
+        If lvID.SelectedItems.Count <= 0 Then Exit Sub
+
         Dim idx As Integer
         idx = lvID.FocusedItem.Index
 

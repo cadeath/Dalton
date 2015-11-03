@@ -58,6 +58,7 @@
         lv.SubItems.Add(tk.ExpiryDate)
         lv.SubItems.Add(tk.AuctionDate)
         lv.SubItems.Add(tk.Principal)
+        lv.Tag = tk.PawnID
 
         Select Case tk.Status
             Case "0" : lv.BackColor = Color.LightGray
@@ -126,7 +127,6 @@
             Next
         End If
 
-
         lvPawners.Focus()
         MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
     End Sub
@@ -140,9 +140,9 @@
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
         If lvPawners.SelectedItems.Count <= 0 Then Exit Sub
 
-        Dim idx As Integer = CInt(lvPawners.FocusedItem.Text)
+        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
         Dim tmpTicket As New PawnTicket
-        tmpTicket.LoadTicket(idx, "PawnTicket")
+        tmpTicket.LoadTicket(idx)
         frmNewloan.LoadPawnTicket(tmpTicket, "D")
         frmNewloan.Show()
     End Sub
