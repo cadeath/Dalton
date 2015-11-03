@@ -30,6 +30,8 @@
         Else
             txtGrams.ReadOnly = True
             cboKarat.Enabled = False
+            txtGrams.Text = ""
+            cboKarat.SelectedIndex = -1
         End If
         'Sub Category
         If cboItemtype.SelectedItem = "APP" Then
@@ -635,68 +637,6 @@
         txtTotal.ReadOnly = True
     End Sub
 
-    'Friend Sub Renewal()
-    '    If transactionType = "L" Then Exit Sub
-
-    '    transactionType = "R"
-
-    '    'Buttons
-    '    btnRenew.Text = "C&ancel"
-    '    btnRedeem.Text = "R&edeem"
-    '    btnSave.Enabled = True
-
-    '    grpPawner.Enabled = False
-    '    grpItem.Enabled = False
-    '    grpTicket.Enabled = True
-    '    txtTicket.ReadOnly = True
-    '    txtNticket.ReadOnly = True
-    '    LoanDate.Enabled = False
-    '    Maturity.Enabled = False
-    '    Expiry.Enabled = False
-    '    Auction.Enabled = False
-    '    txtAppraisal.ReadOnly = True
-    '    txtPrincipal.ReadOnly = True
-    '    txtTotal.ReadOnly = False
-
-    '    grpReceipt.Enabled = True
-
-    '    'Ticket Information
-    '    txtTicket.Text = String.Format("{0:000000}", currentPawnTicket)
-    '    txtNticket.Text = String.Format("{0:000000}", PawnItem.PawnTicket)
-    '    LoanDate.Value = CurrentDate
-    '    Maturity.Value = LoanDate.Value.AddDays(29) : Maturity.Enabled = False
-    '    If PawnItem.ItemType = "CEL" Then
-    '        Expiry.Value = Maturity.Value : Expiry.Enabled = False
-    '        Auction.Value = LoanDate.Value.AddDays(63) : Auction.Enabled = False
-    '    Else
-    '        Expiry.Value = LoanDate.Value.AddDays(89) : Expiry.Enabled = False
-    '        Auction.Value = LoanDate.Value.AddDays(123) : Auction.Enabled = False
-    '    End If
-    '    txtAppraisal.Text = PawnItem.Appraisal
-    '    txtPrincipal.Text = PawnItem.Principal
-
-    '    txtRefNo.Text = String.Format("{0:000000}", currentOR)
-    '    dtpDate.Value = CurrentDate
-    '    txtAppr.Text = PawnItem.Appraisal
-    '    Dim diff = CurrentDate - PawnItem.MaturityDate
-    '    If diff.Days > 0 Then
-    '        txtOverDue.Text = diff.Days
-    '    Else
-    '        txtOverDue.Text = 0
-    '    End If
-    '    txtDelayInt.Text = GetInterest(PawnItem.Principal)
-    '    txtPenalty.Text = GetPenalty(PawnItem.Principal)
-    '    txtSrvChrg.Text = GetServiceCharge(PawnItem.Principal)
-    '    txtEvat.Text = GetOption("Evat") ' No EVAT implemented
-
-    '    txtRenewDue.Text = CDbl(txtDelayInt.Text) + CDbl(txtPenalty.Text) + CDbl(txtSrvChrg.Text)
-    '    txtRedeemDue.Text = CDbl(txtDelayInt.Text) + CDbl(txtPenalty.Text) + CDbl(txtSrvChrg.Text) + CDbl(PawnItem.Appraisal)
-
-    '    txtTotal.Text = txtRenewDue.Text ' Total
-    '    txtTotal.Focus()
-    '    txtTotal.SelectAll()
-    'End Sub
-
     Private Function GetServiceCharge(ByVal principal As Double) As Double
         Dim srvPrin As Double = CDbl(txtPrincipal.Text)
         Dim ret As Double = 0
@@ -780,21 +720,6 @@
 
         grpReceipt.Enabled = True
 
-        'Ticket Information
-        txtTicket.Text = String.Format("{0:000000}", currentPawnTicket)
-        txtNticket.Text = String.Format("{0:000000}", PawnItem.PawnTicket)
-        LoanDate.Value = CurrentDate
-        Maturity.Value = LoanDate.Value.AddDays(29) : Maturity.Enabled = False
-        If PawnItem.ItemType = "CEL" Then
-            Expiry.Value = Maturity.Value : Expiry.Enabled = False
-            Auction.Value = LoanDate.Value.AddDays(63) : Auction.Enabled = False
-        Else
-            Expiry.Value = LoanDate.Value.AddDays(89) : Expiry.Enabled = False
-            Auction.Value = LoanDate.Value.AddDays(123) : Auction.Enabled = False
-        End If
-        txtAppraisal.Text = PawnItem.Appraisal
-        txtPrincipal.Text = PawnItem.Principal
-
         txtRefNo.Text = String.Format("{0:000000}", currentOR)
         dtpDate.Value = CurrentDate
         txtAppr.Text = PawnItem.Appraisal
@@ -814,12 +739,37 @@
 
         Select Case typ
             Case "REDEEM"
+                'Ticket Information
+                txtTicket.Text = String.Format("{0:000000}", PawnItem.PawnTicket)
+                txtNticket.Text = String.Format("{0:000000}", PawnItem.OldTicket)
+                LoanDate.Value = PawnItem.LoanDate
+                Maturity.Value = PawnItem.MaturityDate
+                Expiry.Value = PawnItem.ExpiryDate
+                Auction.Value = PawnItem.AuctionDate
+                txtAppraisal.Text = PawnItem.Appraisal
+                txtPrincipal.Text = PawnItem.Principal
+
                 transactionType = "X"
                 btnRedeem.Text = "C&ancel"
                 btnRenew.Text = "&Renew"
                 txtTotal.Text = txtRedeemDue.Text ' Total
                 txtTotal.ReadOnly = True
             Case "RENEW"
+                'Ticket Information
+                txtTicket.Text = String.Format("{0:000000}", currentPawnTicket)
+                txtNticket.Text = String.Format("{0:000000}", PawnItem.PawnTicket)
+                LoanDate.Value = CurrentDate
+                Maturity.Value = LoanDate.Value.AddDays(29) : Maturity.Enabled = False
+                If PawnItem.ItemType = "CEL" Then
+                    Expiry.Value = Maturity.Value : Expiry.Enabled = False
+                    Auction.Value = LoanDate.Value.AddDays(63) : Auction.Enabled = False
+                Else
+                    Expiry.Value = LoanDate.Value.AddDays(89) : Expiry.Enabled = False
+                    Auction.Value = LoanDate.Value.AddDays(123) : Auction.Enabled = False
+                End If
+                txtAppraisal.Text = PawnItem.Appraisal
+                txtPrincipal.Text = PawnItem.Principal
+
                 transactionType = "R"
                 btnRedeem.Text = "R&edeem"
                 btnRenew.Text = "C&ancel"
