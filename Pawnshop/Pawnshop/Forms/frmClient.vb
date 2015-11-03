@@ -60,6 +60,7 @@ Public Class frmClient
         Else
             lvClient.Enabled = False
             lvClient.BackColor = Color.White
+            btnView.Enabled = False
 
             Dim tbl As String = "TBLCLIENT"
             Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
@@ -75,6 +76,7 @@ Public Class frmClient
             Next
 
             lvClient.Enabled = True
+            btnView.Enabled = True
         End If
     End Sub
 

@@ -22,18 +22,18 @@ Public Class frmClientInformation
         End If
 
         cboCity.Items.AddRange(GetDistinct("Addr_City"))
+        cboProv.Items.AddRange(GetDistinct("Addr_Province"))
         'Populate()
     End Sub
 
     Private Function GetDistinct(ByVal col As String) As String()
-        Dim mySql As String = "SELECT DISTINCT " & col & " FROM tblClient ORDER BY ADDR_CITY ASC"
+        Dim mySql As String = "SELECT DISTINCT " & col & " FROM tblClient WHERE " & col & " <> '' ORDER BY " & col & " ASC"
         Dim ds As DataSet = LoadSQL(mySql)
 
         Dim MaxCount As Integer = ds.Tables(0).Rows.Count
         Dim str(MaxCount - 1) As String
         For cnt As Integer = 0 To MaxCount - 1
-            Dim tmpStr As String = ds.Tables(0).Rows(0).Item(col)
-            Console.WriteLine(tmpStr)
+            Dim tmpStr As String = ds.Tables(0).Rows(cnt).Item(0)
             str(cnt) = tmpStr
         Next
 
@@ -55,7 +55,7 @@ Public Class frmClientInformation
         txtStreet.Text = cl.AddressSt
         txtBrgy.Text = cl.AddressBrgy
         cboCity.Text = cl.AddressCity
-        txtProvince.Text = cl.AddressProvince
+        cboProv.Text = cl.AddressProvince
         txtZip.Text = cl.ZipCode
 
         cboGender.Text = IIf(cl.Sex = Client.Gender.Male, "Male", "Female")
@@ -95,7 +95,7 @@ Public Class frmClientInformation
         txtStreet.ReadOnly = st
         txtBrgy.ReadOnly = st
         cboCity.Enabled = Not st
-        txtProvince.ReadOnly = st
+        cboProv.Enabled = Not st
         txtZip.ReadOnly = st
 
         cboGender.Enabled = Not st
@@ -130,7 +130,7 @@ Public Class frmClientInformation
         txtStreet.Text = "153 Acacia St. Balite"
         txtBrgy.Text = "Lagao"
         cboCity.Text = "General Santos City"
-        txtProvince.Text = "South Cotabato"
+        cboProv.Text = "South Cotabato"
         txtZip.Text = "9500"
 
         cboGender.Text = "Male"
@@ -148,7 +148,7 @@ Public Class frmClientInformation
         txtStreet.Text = ""
         txtBrgy.Text = ""
         cboCity.Text = ""
-        txtProvince.Text = ""
+        cboProv.Text = ""
         txtZip.Text = ""
 
         cboGender.DropDownStyle = ComboBoxStyle.DropDownList
@@ -257,7 +257,7 @@ Public Class frmClientInformation
             .AddressSt = txtStreet.Text
             .AddressBrgy = txtBrgy.Text
             .AddressCity = cboCity.Text
-            .AddressProvince = txtProvince.Text
+            .AddressProvince = cboProv.Text
             .ZipCode = txtZip.Text
 
             .Sex = IIf(cboGender.Text = "Male", Client.Gender.Male, Client.Gender.Female)
