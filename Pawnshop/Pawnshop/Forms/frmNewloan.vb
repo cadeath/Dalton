@@ -830,7 +830,7 @@
             PawnItem.Status = "R"
         End If
 
-        PawnItem.SaveTicket()
+        PawnItem.SaveTicket(False)
         MsgBox("PT# " & PawnItem.PawnTicket & vbCr & "Is now VOID", MsgBoxStyle.Information)
 
         frmPawning.LoadActive()
