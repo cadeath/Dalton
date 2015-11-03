@@ -9,11 +9,12 @@
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT * FROM tblMoneyTransfer WHERE Status = '1' ORDER BY TransDate ASC"
+        Dim mySql As String = "SELECT * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate ASC"
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
         lvMoneyTransfer.Items.Clear()
+        Console.WriteLine("Record Found: " & ds.Tables(0).Rows.Count)
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpMT As New MoneyTransfer
             tmpMT.LoadTransactionByRow(dr)
@@ -29,7 +30,7 @@
         lv.SubItems.Add(String.Format("{0} {1}", mt.Receiver.FirstName, mt.Receiver.LastName))
         lv.SubItems.Add(mt.TransferAmount)
         If mt.Status = "V" Then lv.BackColor = Color.LightGray
-        If mt.Status = 0 Then lv.BackColor = Color.Red
+        If mt.Status = "I" Then lv.BackColor = Color.Red
         lv.Tag = mt.ID
     End Sub
 

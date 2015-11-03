@@ -84,9 +84,13 @@
             .ServiceCharge = txtCharge.Text
             .NetAmount = txtNetAmount.Text
             .Location = txtLocation.Text
+            .Status = "A" 'Active
 
             .Save()
         End With
+
+        MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        Me.Close()
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
@@ -94,6 +98,9 @@
         txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)
         txtSenderID.Text = cl.IDType
         txtSenderIDNum.Text = cl.IDNumber
+
+        senderClient = cl
+        txtReceiver.Focus()
     End Sub
 
     Friend Sub LoadReceiverInfo(ByVal cl As Client)
@@ -101,6 +108,9 @@
         txtReceiverAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)
         txtReceiverID.Text = cl.IDType
         txtReceiverIDNum.Text = cl.IDNumber
+
+        receiverClient = cl
+        txtRefNum.Focus()
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
@@ -146,6 +156,18 @@
     Private Sub ComputeNet()
         Dim net As Double = CDbl(txtCharge.Text) + CDbl(txtAmount.Text)
 
-        txtNetAmount.Text = "P " & net
+        txtNetAmount.Text = net
+    End Sub
+
+    Private Sub txtReceiver_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReceiver.KeyPress
+        If isEnter(e) Then
+            btnSearchReceiver.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLocation.KeyPress
+        If isEnter(e) Then
+            btnPost.PerformClick()
+        End If
     End Sub
 End Class

@@ -143,7 +143,7 @@
 
     Private Sub loadByRow(ByVal dr As DataRow)
         With dr
-            _transType = .Item("Transaction")
+            _transType = .Item("MoneyTrans")
             _serviceType = .Item("ServiceType")
             Dim tmpClient As New Client
             tmpClient.LoadClient(.Item("SenderID"))
@@ -163,13 +163,13 @@
 
     Public Sub Save()
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM " & fillData
+        mySql = "SELECT * FROM tblMoneyTransfer"
         ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
-            .Item("Transaction") = _transType
+            .Item("MoneyTrans") = _transType
             .Item("ServiceType") = _serviceType
             .Item("TransDate") = _date
             .Item("SenderID") = _client1.ID
@@ -187,7 +187,7 @@
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
-        database.SaveEntry(ds, False)
+        database.SaveEntry(ds)
     End Sub
 #End Region
 End Class

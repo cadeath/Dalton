@@ -84,15 +84,6 @@ Public Class frmClient
         Me.Close()
     End Sub
 
-    Private Sub txtSearch_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSearch.DoubleClick
-        lvClient.Focus()
-
-        If lvClient.SelectedItems.Count <= 0 Then Exit Sub
-
-        lvClient.Items(0).Selected = True
-        Console.WriteLine("Selected")
-    End Sub
-
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
