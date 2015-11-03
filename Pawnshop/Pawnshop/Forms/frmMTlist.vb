@@ -5,7 +5,14 @@
     End Sub
 
     Private Sub frmMTlist_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ClearField()
         LoadActive()
+        txtSearch.Focus()
+    End Sub
+
+    Private Sub ClearField()
+        txtSearch.Text = ""
+        lvMoneyTransfer.Items.Clear()
     End Sub
 
     Friend Sub LoadActive()
@@ -48,6 +55,7 @@
             Exit Sub
         End If
 
+        lvMoneyTransfer.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpMT As New MoneyTransfer
             tmpMT.LoadTransactionByRow(dr)
@@ -62,11 +70,43 @@
 
         Dim tmpMT As New MoneyTransfer
         tmpMT.LoadTransaction(lvMoneyTransfer.SelectedItems(0).Tag)
-        frmMoneyTransfer.LoadMT(tmpMT)
         frmMoneyTransfer.Show()
+        frmMoneyTransfer.LoadMT(tmpMT)
     End Sub
 
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
         frmMoneyTransfer.Show()
+    End Sub
+
+    Private Sub lvMoneyTransfer_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvMoneyTransfer.DoubleClick
+        btnView.PerformClick()
+    End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
+        Dim tmpMT As New MoneyTransfer
+        tmpMT.LoadTransaction(idx)
+
+        Console.WriteLine("Today is " & CurrentDate)
+        Console.WriteLine("Trans: " & tmpMT.TransactionDate.Date)
+        If CurrentDate.Date <> tmpMT.TransactionDate Then MsgBox("You cannot void a transaction in a DIFFERENT date", MsgBoxStyle.Critical) : Exit Sub
+
+        Dim ans = InputBox("Please indicate reason", "Voiding #" & tmpMT.ReferenceNumber)
+        If ans.Length <= 5 Or ans = "" Then
+            MsgBox("Please INDICATE reason", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        tmpMT.VoidTransaction(ans)
+        MsgBox(String.Format("Transaction #{0} is now void.", tmpMT.ReferenceNumber), MsgBoxStyle.Information, "Transaction Void")
+        LoadActive()
+    End Sub
+
+    Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 End Class

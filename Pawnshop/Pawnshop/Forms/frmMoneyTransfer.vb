@@ -20,6 +20,11 @@
 
     Friend Sub LoadMT(ByVal mt As MoneyTransfer)
         LockFields(True)
+        txtSender.ReadOnly = True
+        txtReceiver.ReadOnly = True
+        txtRefNum.ReadOnly = True
+        txtAmount.ReadOnly = True
+        txtLocation.ReadOnly = True
 
         Select Case mt.TransactionType
             Case 1 : rbReceive.Checked = True
@@ -29,6 +34,16 @@
         cboType.Text = mt.ServiceType
         LoadSenderInfo(mt.Sender)
         LoadReceiverInfo(mt.Receiver)
+
+        txtRefNum.Text = mt.ReferenceNumber
+        txtAmount.Text = mt.TransferAmount
+        txtCharge.Text = mt.ServiceCharge
+        txtNetAmount.Text = mt.NetAmount
+        txtLocation.Text = mt.Location
+
+        btnPost.Enabled = False
+
+        Me.Text &= "| Date: " & mt.TransactionDate
     End Sub
 
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

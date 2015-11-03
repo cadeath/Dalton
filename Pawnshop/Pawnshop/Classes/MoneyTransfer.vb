@@ -200,5 +200,17 @@
 
         database.SaveEntry(ds)
     End Sub
+
+    Public Sub VoidTransaction(ByVal reason As String)
+        If reason = "" Then Exit Sub
+
+        Dim mySql As String = "SELECT * FROM " & fillData & " WHERE ID = " & _id
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+        ds.Tables(0).Rows(0).Item("Status") = "V"
+        ds.Tables(0).Rows(0).Item("Remarks") = reason
+        database.SaveEntry(ds, False)
+        Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
+    End Sub
 #End Region
 End Class
