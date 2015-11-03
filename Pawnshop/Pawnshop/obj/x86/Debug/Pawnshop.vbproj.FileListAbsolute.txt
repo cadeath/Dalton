@@ -65,6 +65,7 @@ D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmM
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmNewloan.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmOpenStore.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmPawning.resources
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmPawnTrans.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmSettings.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmUserManagement.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.Resources.resources
@@ -74,4 +75,3 @@ D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbpr
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.xml
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.pdb
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmPawnTrans.resources

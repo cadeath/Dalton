@@ -33,7 +33,6 @@ Partial Class frmClientInformation
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtProvince = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtCity = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtBrgy = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -74,6 +73,7 @@ Partial Class frmClientInformation
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
+        Me.cboCity = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpID.SuspendLayout()
@@ -81,6 +81,7 @@ Partial Class frmClientInformation
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cboCity)
         Me.GroupBox1.Controls.Add(Me.lblAge)
         Me.GroupBox1.Controls.Add(Me.dtpBday)
         Me.GroupBox1.Controls.Add(Me.Label17)
@@ -91,7 +92,6 @@ Partial Class frmClientInformation
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.txtProvince)
         Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Controls.Add(Me.txtCity)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.txtBrgy)
         Me.GroupBox1.Controls.Add(Me.Label7)
@@ -207,15 +207,6 @@ Partial Class frmClientInformation
         Me.Label9.TabIndex = 15
         Me.Label9.Text = "City/Munical City"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'txtCity
-        '
-        Me.txtCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCity.Location = New System.Drawing.Point(82, 128)
-        Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(273, 22)
-        Me.txtCity.TabIndex = 6
-        Me.txtCity.Text = "General Santos City"
         '
         'Label8
         '
@@ -598,6 +589,14 @@ Partial Class frmClientInformation
         Me.btnSelect.UseVisualStyleBackColor = True
         Me.btnSelect.Visible = False
         '
+        'cboCity
+        '
+        Me.cboCity.FormattingEnabled = True
+        Me.cboCity.Location = New System.Drawing.Point(85, 128)
+        Me.cboCity.Name = "cboCity"
+        Me.cboCity.Size = New System.Drawing.Size(270, 21)
+        Me.cboCity.TabIndex = 24
+        '
         'frmClientInformation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -638,7 +637,6 @@ Partial Class frmClientInformation
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtStreet As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents txtCity As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txtBrgy As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
@@ -676,4 +674,5 @@ Partial Class frmClientInformation
     Friend WithEvents lblAge As System.Windows.Forms.Label
     Friend WithEvents btnSelect As System.Windows.Forms.Button
     Friend WithEvents btnIDModify As System.Windows.Forms.Button
+    Friend WithEvents cboCity As System.Windows.Forms.ComboBox
 End Class
