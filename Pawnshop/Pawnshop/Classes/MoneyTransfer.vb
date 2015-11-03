@@ -152,6 +152,7 @@
 
     Private Sub loadByRow(ByVal dr As DataRow)
         With dr
+            _id = .Item("ID")
             _transType = .Item("MoneyTrans")
             _serviceType = .Item("ServiceType")
             Dim tmpClient As New Client

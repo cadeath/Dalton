@@ -18,6 +18,19 @@
         End If
     End Sub
 
+    Friend Sub LoadMT(ByVal mt As MoneyTransfer)
+        LockFields(True)
+
+        Select Case mt.TransactionType
+            Case 1 : rbReceive.Checked = True
+            Case 0 : rbSend.Checked = True
+        End Select
+
+        cboType.Text = mt.ServiceType
+        LoadSenderInfo(mt.Sender)
+        LoadReceiverInfo(mt.Receiver)
+    End Sub
+
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         LockFields(True)

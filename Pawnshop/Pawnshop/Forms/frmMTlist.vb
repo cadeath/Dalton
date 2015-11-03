@@ -58,7 +58,12 @@
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+        If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
 
+        Dim tmpMT As New MoneyTransfer
+        tmpMT.LoadTransaction(lvMoneyTransfer.SelectedItems(0).Tag)
+        frmMoneyTransfer.LoadMT(tmpMT)
+        frmMoneyTransfer.Show()
     End Sub
 
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click

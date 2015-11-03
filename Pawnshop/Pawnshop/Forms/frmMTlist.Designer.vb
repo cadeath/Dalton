@@ -48,6 +48,7 @@ Partial Class frmMTlist
         Me.lvMoneyTransfer.FullRowSelect = True
         Me.lvMoneyTransfer.GridLines = True
         Me.lvMoneyTransfer.Location = New System.Drawing.Point(12, 55)
+        Me.lvMoneyTransfer.MultiSelect = False
         Me.lvMoneyTransfer.Name = "lvMoneyTransfer"
         Me.lvMoneyTransfer.Size = New System.Drawing.Size(701, 371)
         Me.lvMoneyTransfer.TabIndex = 2
