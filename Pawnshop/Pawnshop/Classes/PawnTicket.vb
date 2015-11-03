@@ -302,7 +302,7 @@
 #End Region
 
 #Region "Procedures and Functions"
-    Public Sub SaveTicket()
+    Public Sub SaveTicket(Optional ByVal isNew As Boolean = True)
         Dim fillData As String = "tblPawn"
         Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
         ds = LoadSQL(mySql, fillData)
@@ -343,7 +343,7 @@
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
-        database.SaveEntry(ds)
+        database.SaveEntry(ds, isNew)
     End Sub
 
     Public Sub LoadTicket(ByVal id As Integer, Optional ByVal col As String = "PAWNID")

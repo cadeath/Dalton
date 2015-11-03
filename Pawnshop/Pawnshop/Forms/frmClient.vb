@@ -60,6 +60,9 @@ Public Class frmClient
         Else
             lvClient.Enabled = False
             lvClient.BackColor = Color.White
+            btnView.Enabled = False
+            txtSearch.ReadOnly = True
+            btnSearch.Enabled = False
 
             Dim tbl As String = "TBLCLIENT"
             Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
@@ -75,20 +78,14 @@ Public Class frmClient
             Next
 
             lvClient.Enabled = True
+            btnView.Enabled = True
+            txtSearch.ReadOnly = False
+            btnSearch.Enabled = True
         End If
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
-    End Sub
-
-    Private Sub txtSearch_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSearch.DoubleClick
-        lvClient.Focus()
-
-        If lvClient.SelectedItems.Count <= 0 Then Exit Sub
-
-        lvClient.Items(0).Selected = True
-        Console.WriteLine("Selected")
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress

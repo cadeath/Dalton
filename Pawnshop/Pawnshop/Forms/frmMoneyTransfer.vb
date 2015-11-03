@@ -18,6 +18,34 @@
         End If
     End Sub
 
+    Friend Sub LoadMT(ByVal mt As MoneyTransfer)
+        LockFields(True)
+        txtSender.ReadOnly = True
+        txtReceiver.ReadOnly = True
+        txtRefNum.ReadOnly = True
+        txtAmount.ReadOnly = True
+        txtLocation.ReadOnly = True
+
+        Select Case mt.TransactionType
+            Case 1 : rbReceive.Checked = True
+            Case 0 : rbSend.Checked = True
+        End Select
+
+        cboType.Text = mt.ServiceType
+        LoadSenderInfo(mt.Sender)
+        LoadReceiverInfo(mt.Receiver)
+
+        txtRefNum.Text = mt.ReferenceNumber
+        txtAmount.Text = mt.TransferAmount
+        txtCharge.Text = mt.ServiceCharge
+        txtNetAmount.Text = mt.NetAmount
+        txtLocation.Text = mt.Location
+
+        btnPost.Enabled = False
+
+        Me.Text &= "| Date: " & mt.TransactionDate
+    End Sub
+
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         LockFields(True)
@@ -84,9 +112,15 @@
             .ServiceCharge = txtCharge.Text
             .NetAmount = txtNetAmount.Text
             .Location = txtLocation.Text
+            .Status = "A" 'Active
+            .EncoderID = UserID
 
             .Save()
         End With
+
+        MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        frmMTlist.LoadActive()
+        Me.Close()
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
@@ -94,6 +128,9 @@
         txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)
         txtSenderID.Text = cl.IDType
         txtSenderIDNum.Text = cl.IDNumber
+
+        senderClient = cl
+        txtReceiver.Focus()
     End Sub
 
     Friend Sub LoadReceiverInfo(ByVal cl As Client)
@@ -101,6 +138,9 @@
         txtReceiverAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)
         txtReceiverID.Text = cl.IDType
         txtReceiverIDNum.Text = cl.IDNumber
+
+        receiverClient = cl
+        txtRefNum.Focus()
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
@@ -146,6 +186,18 @@
     Private Sub ComputeNet()
         Dim net As Double = CDbl(txtCharge.Text) + CDbl(txtAmount.Text)
 
-        txtNetAmount.Text = "P " & net
+        txtNetAmount.Text = net
+    End Sub
+
+    Private Sub txtReceiver_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReceiver.KeyPress
+        If isEnter(e) Then
+            btnSearchReceiver.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLocation.KeyPress
+        If isEnter(e) Then
+            btnPost.PerformClick()
+        End If
     End Sub
 End Class
