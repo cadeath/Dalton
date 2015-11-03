@@ -25,7 +25,8 @@
     Private Sub AddItem(ByVal mt As MoneyTransfer)
         Dim lv As ListViewItem = lvMoneyTransfer.Items.Add(mt.ReferenceNumber)
         lv.SubItems.Add(mt.TransactionDate)
-        lv.SubItems.Add(mt.TransactionType)
+        lv.SubItems.Add(IIf(mt.TransactionType = 1, "In", "Out"))
+        lv.SubItems.Add(mt.ServiceType)
         lv.SubItems.Add(String.Format("{0} {1}", mt.Sender.FirstName, mt.Sender.LastName))
         lv.SubItems.Add(String.Format("{0} {1}", mt.Receiver.FirstName, mt.Receiver.LastName))
         lv.SubItems.Add(mt.TransferAmount)
@@ -58,5 +59,9 @@
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
 
+    End Sub
+
+    Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
+        frmMoneyTransfer.Show()
     End Sub
 End Class

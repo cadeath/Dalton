@@ -85,11 +85,13 @@
             .NetAmount = txtNetAmount.Text
             .Location = txtLocation.Text
             .Status = "A" 'Active
+            .EncoderID = UserID
 
             .Save()
         End With
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        frmMTlist.LoadActive()
         Me.Close()
     End Sub
 

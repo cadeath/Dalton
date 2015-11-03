@@ -8,8 +8,8 @@
     Private _date As Date
     Private _serviceType As String
     Private _transType As Integer = 0
-    Private _client1 As Client
-    Private _client2 As Client
+    Private _client1 As Client 'Sender
+    Private _client2 As Client 'Receiver
     Private _amount As Double = 0
     Private _location As String
     Private _service As Double = 0
@@ -126,6 +126,15 @@
             Return _status
         End Get
     End Property
+
+    Public Property EncoderID As Integer
+        Set(ByVal value As Integer)
+            _encoderID = value
+        End Set
+        Get
+            Return _encoderID
+        End Get
+    End Property
 #End Region
 
 #Region "Procedures and Functions"
@@ -148,8 +157,9 @@
             Dim tmpClient As New Client
             tmpClient.LoadClient(.Item("SenderID"))
             _client1 = tmpClient
-            tmpClient.LoadClient(.Item("ReceiverID"))
-            _client2 = tmpClient
+            Dim tmpClient2 As New Client
+            tmpClient2.LoadClient(.Item("ReceiverID"))
+            _client2 = tmpClient2
             _ref = .Item("RefNum")
             _amount = .Item("Amount")
             _location = .Item("location")
