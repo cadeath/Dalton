@@ -286,16 +286,16 @@ Partial Class frmNewloan
         Me.cboCategory.Enabled = False
         Me.cboCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboCategory.FormattingEnabled = True
-        Me.cboCategory.Location = New System.Drawing.Point(142, 118)
+        Me.cboCategory.Location = New System.Drawing.Point(142, 47)
         Me.cboCategory.Name = "cboCategory"
         Me.cboCategory.Size = New System.Drawing.Size(124, 21)
-        Me.cboCategory.TabIndex = 2
+        Me.cboCategory.TabIndex = 1
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(6, 123)
+        Me.Label6.Location = New System.Drawing.Point(6, 52)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(75, 16)
         Me.Label6.TabIndex = 20
@@ -326,20 +326,20 @@ Partial Class frmNewloan
         'txtDesc
         '
         Me.txtDesc.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDesc.Location = New System.Drawing.Point(142, 43)
+        Me.txtDesc.Location = New System.Drawing.Point(142, 72)
         Me.txtDesc.Multiline = True
         Me.txtDesc.Name = "txtDesc"
         Me.txtDesc.ReadOnly = True
         Me.txtDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtDesc.Size = New System.Drawing.Size(331, 69)
-        Me.txtDesc.TabIndex = 1
+        Me.txtDesc.TabIndex = 2
         Me.txtDesc.Text = "AAAAAAAAAAAAAAAAAAAAAAAAA"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 46)
+        Me.Label1.Location = New System.Drawing.Point(6, 75)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(91, 16)
         Me.Label1.TabIndex = 15
@@ -398,7 +398,7 @@ Partial Class frmNewloan
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(113, 22)
-        Me.txtTotal.TabIndex = 99
+        Me.txtTotal.TabIndex = 7
         '
         'lblNet
         '
@@ -417,7 +417,7 @@ Partial Class frmNewloan
         Me.txtPrincipal.Name = "txtPrincipal"
         Me.txtPrincipal.ReadOnly = True
         Me.txtPrincipal.Size = New System.Drawing.Size(113, 22)
-        Me.txtPrincipal.TabIndex = 17
+        Me.txtPrincipal.TabIndex = 6
         '
         'Label14
         '
@@ -436,7 +436,7 @@ Partial Class frmNewloan
         Me.txtAppraisal.Name = "txtAppraisal"
         Me.txtAppraisal.ReadOnly = True
         Me.txtAppraisal.Size = New System.Drawing.Size(113, 22)
-        Me.txtAppraisal.TabIndex = 16
+        Me.txtAppraisal.TabIndex = 5
         '
         'Label13
         '
@@ -578,7 +578,7 @@ Partial Class frmNewloan
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(92, 403)
+        Me.btnSave.Location = New System.Drawing.Point(11, 405)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(74, 35)
         Me.btnSave.TabIndex = 30
@@ -588,7 +588,7 @@ Partial Class frmNewloan
         'btnClose
         '
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Location = New System.Drawing.Point(172, 403)
+        Me.btnClose.Location = New System.Drawing.Point(91, 405)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(74, 35)
         Me.btnClose.TabIndex = 31
@@ -598,7 +598,7 @@ Partial Class frmNewloan
         'btnVoid
         '
         Me.btnVoid.Enabled = False
-        Me.btnVoid.Location = New System.Drawing.Point(12, 403)
+        Me.btnVoid.Location = New System.Drawing.Point(968, 403)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(74, 35)
         Me.btnVoid.TabIndex = 33
@@ -881,7 +881,6 @@ Partial Class frmNewloan
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(1054, 446)
-        Me.Controls.Add(Me.lblVOID)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.btnRedeem)
         Me.Controls.Add(Me.btnRenew)
@@ -894,6 +893,7 @@ Partial Class frmNewloan
         Me.Controls.Add(Me.grpTicket)
         Me.Controls.Add(Me.grpItem)
         Me.Controls.Add(Me.grpPawner)
+        Me.Controls.Add(Me.lblVOID)
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "frmNewloan"
