@@ -94,13 +94,23 @@
         End Set
     End Property
 
-    Private _status As String
+    Private _status As String = "A"
     Public Property Status() As String
         Get
             Return _status
         End Get
         Set(ByVal value As String)
             _status = value
+        End Set
+    End Property
+
+    Private _netAmount As Double
+    Public Property NetAmount() As Double
+        Get
+            Return _netAmount
+        End Get
+        Set(ByVal value As Double)
+            _netAmount = value
         End Set
     End Property
 
@@ -144,13 +154,20 @@
         With dsNewRow
             .Item("TransDate") = _transDate
             .Item("PesoRate") = _pesoRate
-            .Item("ClientID") = _customer.ID
-            .Item("FullName") = _fullName
+            If Not _customer Is Nothing Then
+                .Item("ClientID") = _customer.ID
+                .Item("FullName") = _fullName
+            End If
             .Item("Denomination") = _denomination
             .Item("Serial") = _serial
+            .Item("Status") = _status
+            .Item("NetAmount") = _netAmount
             .Item("UserID") = _encoderID
             .Item("SystemInfo") = Now
         End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds)
     End Sub
 #End Region
 
