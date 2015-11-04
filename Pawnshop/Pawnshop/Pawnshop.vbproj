@@ -125,6 +125,12 @@
     <Compile Include="Forms\diagPayloan.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmDollarList.Designer.vb">
+      <DependentUpon>frmDollarList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDollarList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmLayAwayLookUp.Designer.vb">
       <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
     </Compile>
@@ -289,6 +295,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagPayloan.resx">
       <DependentUpon>diagPayloan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDollarList.resx">
+      <DependentUpon>frmDollarList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLayAwayLookUp.resx">
       <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>

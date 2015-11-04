@@ -131,13 +131,17 @@
             _dollarID = .Item("DollarID")
             _transDate = .Item("TransDate")
             _pesoRate = .Item("PesoRate")
-            Dim tmpClient As New Client
-            tmpClient.LoadClient(.Item("ClientID"))
-            _customer = tmpClient
-            _fullName = String.Format("{0} {1}", tmpClient.FirstName, tmpClient.LastName)
+            If Not IsDBNull(.Item("ClientID")) Then
+                Dim tmpClient As New Client
+                tmpClient.LoadClient(.Item("ClientID"))
+                _customer = tmpClient
+                _fullName = String.Format("{0} {1}", tmpClient.FirstName, tmpClient.LastName)
+            End If
             _denomination = .Item("Denomination")
+            _netAmount = .Item("NetAmount")
+            _status = .Item("Status")
             _serial = .Item("Serial")
-            _remarks = .Item("Remarks")
+            _remarks = IIf(IsDBNull(.Item("Remarks")), "", .Item("Remarks"))
         End With
     End Sub
 

@@ -2,6 +2,7 @@
 
     Dim currentRate As Double = GetOption("PesoRate")
     Dim customer As Client
+    Dim isViewing As Boolean = False
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -114,13 +115,15 @@
     End Sub
 
     Friend Sub LoadCustomer(ByVal cl As Client)
+        On Error Resume Next
+
         txtClient.Text = String.Format("{0} {1}", cl.FirstName, cl.LastName)
         txtAddr.Text = String.Format("{0} {1}, {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
         txtNum.Text = cl.Cellphone1
 
         customer = cl
         cboDenomination.Focus()
-        cboDenomination.DroppedDown = True
+        'If Not isViewing Then cboDenomination.DroppedDown = True
     End Sub
 
     Private Sub txtClient_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtClient.KeyPress
@@ -138,5 +141,40 @@
 
     Private Sub txtNetAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNetAmount.KeyPress
         DigitOnly(e)
+    End Sub
+
+    Friend Sub LoadDollar(ByVal dl As DollarTransaction)
+        LockFields(True)
+
+        LoadCustomer(dl.Customer)
+        txtPesoRate.Text = dl.CurrentRate
+        cboDenomination.Text = dl.Denomination
+        txtNetAmount.Text = dl.NetAmount
+        txtSerial.Text = dl.Serial
+
+        txtNetAmount.Focus()
+        isViewing = True
+        btnPost.Enabled = False
+    End Sub
+
+    Private Sub LockFields(ByVal st As Boolean)
+        txtPesoRate.ReadOnly = st
+        txtClient.ReadOnly = st
+        btnSearch.Enabled = Not st
+        cboDenomination.Enabled = Not st
+        txtNetAmount.ReadOnly = st
+        txtSerial.ReadOnly = st
+    End Sub
+
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        frmDollarList.Show()
+    End Sub
+
+    Private Sub btnMove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMove.Click
+        If isViewing Then Exit Sub
+
+        txtNetAmount.Text = txtCur2.Text
+        cboDenomination.Focus()
+        cboDenomination.DroppedDown = True
     End Sub
 End Class
