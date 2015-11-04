@@ -34,18 +34,18 @@ Partial Class frmDollar
         Me.cboCur2 = New System.Windows.Forms.ComboBox()
         Me.cboCur1 = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtSerial = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.cboDenomination = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtSerial = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.txtNum = New System.Windows.Forms.TextBox()
+        Me.txtAddr = New System.Windows.Forms.TextBox()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtClient = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnSearch = New System.Windows.Forms.Button()
-        Me.txtAddr = New System.Windows.Forms.TextBox()
-        Me.txtNum = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnPost = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -180,33 +180,6 @@ Partial Class frmDollar
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Transaction"
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(1, 79)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(33, 13)
-        Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Serial"
-        '
-        'txtSerial
-        '
-        Me.txtSerial.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSerial.Location = New System.Drawing.Point(4, 95)
-        Me.txtSerial.Name = "txtSerial"
-        Me.txtSerial.Size = New System.Drawing.Size(288, 26)
-        Me.txtSerial.TabIndex = 1
-        Me.txtSerial.Text = "45"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(3, 22)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(72, 13)
-        Me.Label5.TabIndex = 8
-        Me.Label5.Text = "Denomination"
-        '
         'cboDenomination
         '
         Me.cboDenomination.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -217,6 +190,33 @@ Partial Class frmDollar
         Me.cboDenomination.Size = New System.Drawing.Size(86, 28)
         Me.cboDenomination.TabIndex = 0
         Me.cboDenomination.Text = "$1"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(3, 22)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(72, 13)
+        Me.Label5.TabIndex = 8
+        Me.Label5.Text = "Denomination"
+        '
+        'txtSerial
+        '
+        Me.txtSerial.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSerial.Location = New System.Drawing.Point(4, 95)
+        Me.txtSerial.Name = "txtSerial"
+        Me.txtSerial.Size = New System.Drawing.Size(288, 26)
+        Me.txtSerial.TabIndex = 1
+        Me.txtSerial.Text = "45"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(1, 79)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(33, 13)
+        Me.Label3.TabIndex = 6
+        Me.Label3.Text = "Serial"
         '
         'GroupBox4
         '
@@ -231,6 +231,37 @@ Partial Class frmDollar
         Me.GroupBox4.TabIndex = 1
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Customer"
+        '
+        'txtNum
+        '
+        Me.txtNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNum.Location = New System.Drawing.Point(6, 135)
+        Me.txtNum.Name = "txtNum"
+        Me.txtNum.ReadOnly = True
+        Me.txtNum.Size = New System.Drawing.Size(235, 26)
+        Me.txtNum.TabIndex = 3
+        Me.txtNum.Text = "09226847559"
+        '
+        'txtAddr
+        '
+        Me.txtAddr.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAddr.Location = New System.Drawing.Point(6, 70)
+        Me.txtAddr.Multiline = True
+        Me.txtAddr.Name = "txtAddr"
+        Me.txtAddr.ReadOnly = True
+        Me.txtAddr.Size = New System.Drawing.Size(322, 59)
+        Me.txtAddr.TabIndex = 2
+        Me.txtAddr.Text = "Address"
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSearch.Location = New System.Drawing.Point(262, 38)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 26)
+        Me.btnSearch.TabIndex = 1
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'txtClient
         '
@@ -250,64 +281,33 @@ Partial Class frmDollar
         Me.Label6.TabIndex = 8
         Me.Label6.Text = "Name"
         '
-        'btnSearch
+        'btnCancel
         '
-        Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSearch.Location = New System.Drawing.Point(262, 38)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(75, 26)
-        Me.btnSearch.TabIndex = 1
-        Me.btnSearch.Text = "Search"
-        Me.btnSearch.UseVisualStyleBackColor = True
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(602, 311)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 26)
+        Me.btnCancel.TabIndex = 5
+        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'txtAddr
+        'btnPost
         '
-        Me.txtAddr.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddr.Location = New System.Drawing.Point(6, 70)
-        Me.txtAddr.Multiline = True
-        Me.txtAddr.Name = "txtAddr"
-        Me.txtAddr.ReadOnly = True
-        Me.txtAddr.Size = New System.Drawing.Size(322, 59)
-        Me.txtAddr.TabIndex = 2
-        Me.txtAddr.Text = "Address"
-        '
-        'txtNum
-        '
-        Me.txtNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNum.Location = New System.Drawing.Point(6, 135)
-        Me.txtNum.Name = "txtNum"
-        Me.txtNum.ReadOnly = True
-        Me.txtNum.Size = New System.Drawing.Size(235, 26)
-        Me.txtNum.TabIndex = 3
-        Me.txtNum.Text = "09226847559"
-        '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(602, 311)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 26)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "&Cancel"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(521, 311)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 26)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "&Post"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnPost.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPost.Location = New System.Drawing.Point(521, 311)
+        Me.btnPost.Name = "btnPost"
+        Me.btnPost.Size = New System.Drawing.Size(75, 26)
+        Me.btnPost.TabIndex = 4
+        Me.btnPost.Text = "&Post"
+        Me.btnPost.UseVisualStyleBackColor = True
         '
         'frmDollar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(689, 349)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnPost)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
@@ -352,6 +352,6 @@ Partial Class frmDollar
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents txtNum As System.Windows.Forms.TextBox
     Friend WithEvents txtAddr As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnPost As System.Windows.Forms.Button
 End Class
