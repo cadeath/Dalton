@@ -173,6 +173,23 @@
 
         database.SaveEntry(ds)
     End Sub
+
+    Public Sub VoidTransaction(ByVal reason As String)
+        mySql = "SELECT * FROM " & fillData & " WHERE dollarID = " & _dollarID
+        ds.Clear()
+
+        ds = LoadSQL(mySql, fillData)
+        If ds.Tables(0).Rows.Count <= 0 Then
+            MsgBox("Transaction not found!", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        ds.Tables(0).Rows(0).Item("Status") = "V"
+        ds.Tables(0).Rows(0).Item("Remarks") = reason
+        database.SaveEntry(ds, False)
+
+        Console.WriteLine("Transaction #" & _dollarID & " void")
+    End Sub
 #End Region
 
 End Class

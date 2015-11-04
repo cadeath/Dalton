@@ -123,7 +123,6 @@
 
         customer = cl
         cboDenomination.Focus()
-        'If Not isViewing Then cboDenomination.DroppedDown = True
     End Sub
 
     Private Sub txtClient_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtClient.KeyPress
@@ -155,6 +154,7 @@
         txtNetAmount.Focus()
         isViewing = True
         btnPost.Enabled = False
+        If dl.Status <> "A" Then Me.Text &= " [VOID]"
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
