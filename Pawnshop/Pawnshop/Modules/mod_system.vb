@@ -8,6 +8,7 @@ Module mod_system
 #Region "Global Variables"
     Public CurrentDate As Date = Now
     Public UserID As Integer = 1
+    Public BranchCode As String = "ROX"
 #End Region
 
     ''' <summary>

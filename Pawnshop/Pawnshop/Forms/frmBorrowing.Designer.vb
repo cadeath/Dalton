@@ -23,8 +23,8 @@ Partial Class frmBorrowing
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBorrowing))
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnPost = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtParticulars = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cboBranch = New System.Windows.Forms.ComboBox()
@@ -32,30 +32,31 @@ Partial Class frmBorrowing
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtRef = New System.Windows.Forms.TextBox()
+        Me.sfdMoneyFile = New System.Windows.Forms.SaveFileDialog()
         Me.SuspendLayout()
         '
-        'Button2
+        'btnPost
         '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(342, 212)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(88, 29)
-        Me.Button2.TabIndex = 28
-        Me.Button2.Text = "&Post"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnPost.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPost.Location = New System.Drawing.Point(342, 212)
+        Me.btnPost.Name = "btnPost"
+        Me.btnPost.Size = New System.Drawing.Size(88, 29)
+        Me.btnPost.TabIndex = 3
+        Me.btnPost.Text = "&Post"
+        Me.btnPost.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnCancel
         '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(436, 212)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(88, 29)
-        Me.Button1.TabIndex = 27
-        Me.Button1.Text = "&Cancel"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(436, 212)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(88, 29)
+        Me.btnCancel.TabIndex = 4
+        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'txtParticulars
         '
@@ -64,7 +65,7 @@ Partial Class frmBorrowing
         Me.txtParticulars.Multiline = True
         Me.txtParticulars.Name = "txtParticulars"
         Me.txtParticulars.Size = New System.Drawing.Size(431, 106)
-        Me.txtParticulars.TabIndex = 26
+        Me.txtParticulars.TabIndex = 2
         Me.txtParticulars.Text = resources.GetString("txtParticulars.Text")
         '
         'Label4
@@ -79,13 +80,13 @@ Partial Class frmBorrowing
         '
         'cboBranch
         '
+        Me.cboBranch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboBranch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboBranch.FormattingEnabled = True
         Me.cboBranch.Location = New System.Drawing.Point(94, 40)
         Me.cboBranch.Name = "cboBranch"
         Me.cboBranch.Size = New System.Drawing.Size(185, 24)
-        Me.cboBranch.TabIndex = 24
-        Me.cboBranch.Text = "BRANCH HERE"
+        Me.cboBranch.TabIndex = 0
         '
         'Label3
         '
@@ -113,7 +114,7 @@ Partial Class frmBorrowing
         Me.txtAmount.Location = New System.Drawing.Point(94, 72)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(126, 22)
-        Me.txtAmount.TabIndex = 31
+        Me.txtAmount.TabIndex = 1
         Me.txtAmount.Text = "10000"
         '
         'Label5
@@ -126,15 +127,15 @@ Partial Class frmBorrowing
         Me.Label5.TabIndex = 30
         Me.Label5.Text = "Amount"
         '
-        'Button3
+        'btnBrowse
         '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(12, 212)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(88, 29)
-        Me.Button3.TabIndex = 32
-        Me.Button3.Text = "&Browse"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBrowse.Location = New System.Drawing.Point(12, 212)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(88, 29)
+        Me.btnBrowse.TabIndex = 6
+        Me.btnBrowse.Text = "&Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -156,6 +157,11 @@ Partial Class frmBorrowing
         Me.txtRef.TabIndex = 34
         Me.txtRef.Text = "10000"
         '
+        'sfdMoneyFile
+        '
+        Me.sfdMoneyFile.DefaultExt = "esk|Borrowing File"
+        Me.sfdMoneyFile.Filter = "Borrowing Files|*.esk"
+        '
         'frmBorrowing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -163,12 +169,12 @@ Partial Class frmBorrowing
         Me.ClientSize = New System.Drawing.Size(535, 247)
         Me.Controls.Add(Me.txtRef)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.txtAmount)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnPost)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.txtParticulars)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.cboBranch)
@@ -181,8 +187,8 @@ Partial Class frmBorrowing
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnPost As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents txtParticulars As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents cboBranch As System.Windows.Forms.ComboBox
@@ -190,7 +196,8 @@ Partial Class frmBorrowing
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtAmount As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtRef As System.Windows.Forms.TextBox
+    Friend WithEvents sfdMoneyFile As System.Windows.Forms.SaveFileDialog
 End Class
