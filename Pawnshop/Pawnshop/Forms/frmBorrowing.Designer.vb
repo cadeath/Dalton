@@ -33,6 +33,8 @@ Partial Class frmBorrowing
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtRef = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Button2
@@ -134,11 +136,33 @@ Partial Class frmBorrowing
         Me.Button3.Text = "&Browse"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(13, 15)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(60, 16)
+        Me.Label2.TabIndex = 33
+        Me.Label2.Text = "Ref Num"
+        '
+        'txtRef
+        '
+        Me.txtRef.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRef.Location = New System.Drawing.Point(94, 12)
+        Me.txtRef.Name = "txtRef"
+        Me.txtRef.ReadOnly = True
+        Me.txtRef.Size = New System.Drawing.Size(77, 22)
+        Me.txtRef.TabIndex = 34
+        Me.txtRef.Text = "10000"
+        '
         'frmBorrowing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(535, 247)
+        Me.Controls.Add(Me.txtRef)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.txtAmount)
         Me.Controls.Add(Me.Label5)
@@ -167,4 +191,6 @@ Partial Class frmBorrowing
     Friend WithEvents txtAmount As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents txtRef As System.Windows.Forms.TextBox
 End Class
