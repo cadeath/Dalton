@@ -84,15 +84,39 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="DeathCodez">
+      <HintPath>.\DeathCodez.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -107,16 +131,23 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
-    <Compile Include="Forms\devClient.Designer.vb">
+    <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\devClient.vb">
+    <Compile Include="Developer\devClient.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\devVerifyESK.Designer.vb">
+      <DependentUpon>devVerifyESK.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\diagPayloan.Designer.vb">
@@ -261,6 +292,7 @@
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
     <Compile Include="Modules\mod_system.vb" />
+    <Compile Include="Modules\security.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -290,8 +322,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\devClient.resx">
+    <EmbeddedResource Include="Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\devVerifyESK.resx">
+      <DependentUpon>devVerifyESK.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagPayloan.resx">
       <DependentUpon>diagPayloan.vb</DependentUpon>
