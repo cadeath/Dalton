@@ -20,7 +20,7 @@
             For Each pawner As DataRow In ds.Tables(0).Rows
                 Dim tmpClient As New Client
                 tmpClient.LoadClient(pawner.Item("ClientID"))
-                AddItem(tmpClient)
+                'AddItem(tmpClient)
             Next
 
             lvClient.Enabled = True
