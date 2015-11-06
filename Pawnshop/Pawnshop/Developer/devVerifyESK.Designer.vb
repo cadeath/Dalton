@@ -27,6 +27,12 @@ Partial Class devVerifyESK
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnCheck = New System.Windows.Forms.Button()
         Me.ofdESK = New System.Windows.Forms.OpenFileDialog()
+        Me.txtCode = New System.Windows.Forms.TextBox()
+        Me.txtRef = New System.Windows.Forms.TextBox()
+        Me.txtDate = New System.Windows.Forms.TextBox()
+        Me.txtAmnt = New System.Windows.Forms.TextBox()
+        Me.txtRemarks = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'rtbValue
@@ -67,11 +73,66 @@ Partial Class devVerifyESK
         Me.ofdESK.FileName = "OpenFileDialog1"
         Me.ofdESK.Filter = "Borrowing File|*.esk"
         '
+        'txtCode
+        '
+        Me.txtCode.Location = New System.Drawing.Point(254, 38)
+        Me.txtCode.Name = "txtCode"
+        Me.txtCode.Size = New System.Drawing.Size(100, 20)
+        Me.txtCode.TabIndex = 2
+        Me.txtCode.Text = "ROX"
+        '
+        'txtRef
+        '
+        Me.txtRef.Location = New System.Drawing.Point(254, 12)
+        Me.txtRef.Name = "txtRef"
+        Me.txtRef.Size = New System.Drawing.Size(100, 20)
+        Me.txtRef.TabIndex = 3
+        Me.txtRef.Text = "ROG00012"
+        '
+        'txtDate
+        '
+        Me.txtDate.Location = New System.Drawing.Point(254, 64)
+        Me.txtDate.Name = "txtDate"
+        Me.txtDate.Size = New System.Drawing.Size(100, 20)
+        Me.txtDate.TabIndex = 4
+        Me.txtDate.Text = "11/6/2015"
+        '
+        'txtAmnt
+        '
+        Me.txtAmnt.Location = New System.Drawing.Point(254, 90)
+        Me.txtAmnt.Name = "txtAmnt"
+        Me.txtAmnt.Size = New System.Drawing.Size(100, 20)
+        Me.txtAmnt.TabIndex = 5
+        Me.txtAmnt.Text = "2000"
+        '
+        'txtRemarks
+        '
+        Me.txtRemarks.Location = New System.Drawing.Point(254, 116)
+        Me.txtRemarks.Name = "txtRemarks"
+        Me.txtRemarks.Size = New System.Drawing.Size(100, 20)
+        Me.txtRemarks.TabIndex = 6
+        Me.txtRemarks.Text = "SAMPLE GENERATE KEY"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(254, 142)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 7
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'devVerifyESK
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(505, 291)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.txtRemarks)
+        Me.Controls.Add(Me.txtAmnt)
+        Me.Controls.Add(Me.txtDate)
+        Me.Controls.Add(Me.txtRef)
+        Me.Controls.Add(Me.txtCode)
         Me.Controls.Add(Me.btnCheck)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.txtURL)
@@ -88,4 +149,10 @@ Partial Class devVerifyESK
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents btnCheck As System.Windows.Forms.Button
     Friend WithEvents ofdESK As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents txtCode As System.Windows.Forms.TextBox
+    Friend WithEvents txtRef As System.Windows.Forms.TextBox
+    Friend WithEvents txtDate As System.Windows.Forms.TextBox
+    Friend WithEvents txtAmnt As System.Windows.Forms.TextBox
+    Friend WithEvents txtRemarks As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

@@ -10,6 +10,54 @@
         ESKload()
     End Sub
 
+    Private Sub ExecuteBorrowings()
+        Dim ht As New Hashtable
+        ht = LoadBorrowing(txtURL.Text)
+        If ht Is Nothing Then Exit Sub
+
+
+    End Sub
+
+    Private Function LoadBorrowing(ByVal url As String) As Hashtable
+        If System.IO.File.Exists(txtURL.Text) = False Then Return Nothing
+
+        Dim fs As New System.IO.FileStream(txtURL.Text, IO.FileMode.Open)
+        Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
+
+        Dim hashTable As New Hashtable
+        Try
+            hashTable = bf.Deserialize(fs)
+        Catch ex As Exception
+            Console.WriteLine("It seems the file is being tampered.")
+            fs.Close()
+            Return Nothing
+        End Try
+        fs.Close()
+
+        Dim isValid As Boolean = False
+        If hashTable(5) = _
+            security.HashString( _
+                hashTable(0) & hashTable(1) & _
+                hashTable(2) & hashTable(3) & _
+                hashTable(4)) Then
+            isValid = True
+        Else
+            isValid = False
+        End If
+
+        If isValid Then Return hashTable
+        Return Nothing
+    End Function
+
+    Private Function GetIntegrity(ByVal hx As Hashtable) As Boolean
+        Dim xStr As String = security.HashString(hx(0) & hx(1) & hx(2) & hx(3) & hx(4))
+        If hx(5) = xStr Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
     Private Sub ESKload()
         If System.IO.File.Exists(txtURL.Text) = False Then Exit Sub
 
@@ -41,4 +89,18 @@
         rtbValue.AppendText("Valid: " & isValid)
     End Sub
 
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim file As String = "D:\cadeath\Desktop\xSample.esk"
+        Dim ht As New Hashtable
+        With ht
+            .Add(0, txtRef.Text) 'RefNum
+            .Add(1, txtDate.Text) 'TransDate
+            .Add(2, txtCode.Text) 'BranchCode
+            .Add(3, txtAmnt.Text) 'Amount
+            .Add(4, txtRemarks.Text) 'Remarks
+        End With
+
+        CreateEsk(file, ht)
+        MsgBox("DONE")
+    End Sub
 End Class
