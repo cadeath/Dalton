@@ -66,24 +66,16 @@ Public Class Insurance
 #End Region
 
     Public Sub Save()
-        Dim ds As New DataSet, dt As New DataTable(fillData)
+        Dim ds As DataSet
+        Dim mySQL As String
+        mySQL = "SELECT * FROM " & fillData
+        ds = LoadSQL(mySQL, fillData)
 
-        ds.Tables.Add(dt)
-        With ds.Tables(fillData).Columns
-            .Add(New DataColumn("insuranceid", GetType(Integer)))
-            .Add(New DataColumn("ciono", GetType(Integer)))
-            .Add(New DataColumn("clientid", GetType(Integer)))
-            .Add(New DataColumn("transdate", GetType(Date)))
-            .Add(New DataColumn("amount", GetType(Double)))
-            .Add(New DataColumn("validdate", GetType(Date)))
-            .Add(New DataColumn("encoderid", GetType(Integer)))
-            .Add(New DataColumn("systeminfo", GetType(Date)))
-        End With
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
             .Item("ciono") = _coi
-            .Item("clienid") = _cid
+            .Item("clientid") = _cid
             .Item("transdate") = _date
             .Item("amount") = _amount
             .Item("validdate") = _valid

@@ -167,10 +167,6 @@ Public Class frmClient
         Me.Close()
     End Sub
 
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
-    End Sub
-
     Private Sub lvClient_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvClient.KeyPress
         If isEnter(e) Then
             If fromOtherForm Then
@@ -179,9 +175,5 @@ Public Class frmClient
                 btnView.PerformClick()
             End If
         End If
-    End Sub
-
-    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
-
     End Sub
 End Class

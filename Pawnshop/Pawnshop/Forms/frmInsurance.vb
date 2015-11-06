@@ -1,5 +1,5 @@
 ﻿Public Class frmInsurance
-
+    Dim Holder As Client
     Private Sub DateTimePicker1_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpDate.ValueChanged
     End Sub
 
@@ -10,6 +10,12 @@
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         dtpDate.Value = Date.Now
         dtpExpiry.Value = dtpDate.Value.AddDays(120)
+    End Sub
+
+    Private Sub txtHolder_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHolder.KeyPress
+        If isEnter(e) Then
+            btnSearch.Focus()
+        End If
     End Sub
     Private Sub txtSender_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtHolder.TextChanged
 
@@ -30,12 +36,8 @@
         btnBrowse.Enabled = False
         txtAmount.ReadOnly = False
         btnSearch.Enabled = True
+        txtCoi.Text = "0001"
     End Sub
-
-    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-
-    End Sub
-
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmClient.SearchSelect(txtHolder.Text, FormName.frmInsurance)
         frmClient.Show()
@@ -44,17 +46,28 @@
         txtHolder.Text = String.Format("{0} {1} {2}", cl.FirstName, cl.LastName, cl.Suffix)
         txtSenderAddr.Text = String.Format("{0} {1} {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
         txtBirthdate.Text = cl.Birthday.ToString("MMM dd, yyyy")
+        Holder = cl
     End Sub
 
     Private Sub txtAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmount.KeyPress
         DigitOnly(e)
+        If isEnter(e) Then
+            btnSave.Focus()
+        End If
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+
         Dim SaveInsurance As New Insurance
         SaveInsurance.COI = txtCoi.Text
         With SaveInsurance
             .TransDate = dtpDate.Value
+            .ValidDate = dtpExpiry.Value
+            .Amount = txtAmount.Text
+            .CID = Holder.ID
+            .Save()
         End With
+        MsgBox("Entry Saved", MsgBoxStyle.Information)
+        Me.Close()
     End Sub
 End Class

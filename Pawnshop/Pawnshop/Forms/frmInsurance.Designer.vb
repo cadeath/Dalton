@@ -83,7 +83,6 @@ Partial Class frmInsurance
         Me.txtBirthdate.ReadOnly = True
         Me.txtBirthdate.Size = New System.Drawing.Size(296, 25)
         Me.txtBirthdate.TabIndex = 25
-        Me.txtBirthdate.Text = "MMMMMMMMMMMMMMMMMMM"
         '
         'Label17
         '
@@ -104,7 +103,6 @@ Partial Class frmInsurance
         Me.txtSenderID.ReadOnly = True
         Me.txtSenderID.Size = New System.Drawing.Size(296, 25)
         Me.txtSenderID.TabIndex = 4
-        Me.txtSenderID.Text = "Driver's License"
         '
         'txtSenderIDNum
         '
@@ -114,7 +112,6 @@ Partial Class frmInsurance
         Me.txtSenderIDNum.ReadOnly = True
         Me.txtSenderIDNum.Size = New System.Drawing.Size(296, 25)
         Me.txtSenderIDNum.TabIndex = 5
-        Me.txtSenderIDNum.Text = "MMMMMMMMMMMMMMMMMMM"
         '
         'Label4
         '
@@ -136,7 +133,6 @@ Partial Class frmInsurance
         Me.txtSenderAddr.ReadOnly = True
         Me.txtSenderAddr.Size = New System.Drawing.Size(296, 67)
         Me.txtSenderAddr.TabIndex = 3
-        Me.txtSenderAddr.Text = "Eskie Cirrus James Maquilang"
         '
         'Label3
         '
@@ -168,7 +164,6 @@ Partial Class frmInsurance
         Me.txtHolder.ReadOnly = True
         Me.txtHolder.Size = New System.Drawing.Size(296, 25)
         Me.txtHolder.TabIndex = 1
-        Me.txtHolder.Text = "Eskie Cirrus James Maquilang"
         '
         'Label2
         '

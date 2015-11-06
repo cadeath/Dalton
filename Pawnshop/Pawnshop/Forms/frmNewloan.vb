@@ -379,7 +379,6 @@
         Dim ptToBeSave As New PawnTicket
         With ptToBeSave
             .PawnTicket = txtTicket.Text
-            .Pawner = Pawner
             .LoanDate = LoanDate.Value
             .MaturityDate = Maturity.Value
             .ExpiryDate = Expiry.Value
