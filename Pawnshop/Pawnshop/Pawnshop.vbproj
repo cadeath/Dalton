@@ -84,8 +84,8 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="eskey">
-      <HintPath>.\eskey.dll</HintPath>
+    <Reference Include="DeathCodez">
+      <HintPath>.\DeathCodez.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -138,10 +138,16 @@
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
-    <Compile Include="Forms\devClient.Designer.vb">
+    <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\devClient.vb">
+    <Compile Include="Developer\devClient.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\devVerifyESK.Designer.vb">
+      <DependentUpon>devVerifyESK.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\diagPayloan.Designer.vb">
@@ -316,8 +322,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\devClient.resx">
+    <EmbeddedResource Include="Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\devVerifyESK.resx">
+      <DependentUpon>devVerifyESK.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagPayloan.resx">
       <DependentUpon>diagPayloan.vb</DependentUpon>

@@ -8,7 +8,13 @@
 
     Private Sub LoadLastRefNum()
         Dim num As Integer = GetOption("BorrowingLastNum")
-        txtRef.Text = String.Format("{0:000000}", num)
+        txtRef.Text = String.Format("{1}{0:000000}", num, BranchCode)
+    End Sub
+
+    Private Sub AddRefNum()
+        Dim num As Integer = GetOption("BorrowingLastNum")
+        num += 1
+        UpdateOptions("BorrowingLastNum", num)
     End Sub
 
     Private Sub ClearFields()
@@ -39,12 +45,48 @@
         DigitOnly(e)
     End Sub
 
+    Private Function GetBranchCode(ByVal branchName As String) As String
+        Dim mySql As String = "SELECT * FROM tblBranches WHERE BranchName = '" & branchName & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("SapCode")
+    End Function
+
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
         If Not sfdMoneyFile.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
 
+        Dim fileSave As String = sfdMoneyFile.FileName
+
+        Dim saveBorrow As New Borrowings
+        With saveBorrow
+            .ReferenceNumber = txtRef.Text
+            .TransactionDate = CurrentDate
+            .BranchCode = GetBranchCode(cboBranch.Text)
+            .BranchName = cboBranch.Text
+            .Amount = txtAmount.Text
+            .Remarks = txtParticulars.Text
+            .Status = "C" 'Credit
+            .EncoderID = UserID
+
+            .SaveBorrowings()
+            AddRefNum()
+        End With
+
+        Dim brwFile As New Hashtable
+        With brwFile
+            .Add(0, saveBorrow.ReferenceNumber) 'RefNum
+            .Add(1, saveBorrow.TransactionDate.Date.ToShortDateString) 'TransDate
+            .Add(2, saveBorrow.BranchCode) 'BranchCode
+            .Add(3, saveBorrow.Amount) 'Amount
+            .Add(4, saveBorrow.Remarks) 'Remarks
+        End With
+
+        'Generate File
+        CreateEsk(fileSave, brwFile)
 
         MsgBox("Saved!", MsgBoxStyle.Information)
+        ClearFields()
     End Sub
 
     Private Function isValid() As Boolean

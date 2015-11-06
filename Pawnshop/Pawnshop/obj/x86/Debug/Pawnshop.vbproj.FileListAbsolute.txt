@@ -45,7 +45,6 @@ C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.fr
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.exe
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.pdb
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.xml
-D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\eskey.dll
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.dll
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Data.DataSetExtensions.dll
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Data.dll
@@ -87,3 +86,6 @@ D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbpr
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.xml
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.pdb
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbprojResolveAssemblyReference.cache
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\DeathCodez.dll
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.devVerifyESK.resources

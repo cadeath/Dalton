@@ -1,6 +1,6 @@
 ﻿Public Class Borrowings
 
-    Private fillData As String = "tblBranches"
+    Private fillData As String = "tblBorrow"
     Private mySql As String = String.Empty
 
 #Region "Variables"
@@ -11,6 +11,26 @@
         End Get
         Set(ByVal value As Integer)
             _borrowID = value
+        End Set
+    End Property
+
+    Private _refNum As String
+    Public Property ReferenceNumber() As String
+        Get
+            Return _refNum
+        End Get
+        Set(ByVal value As String)
+            _refNum = value
+        End Set
+    End Property
+
+    Private _transDate As Date
+    Public Property TransactionDate() As Date
+        Get
+            Return _transDate
+        End Get
+        Set(ByVal value As Date)
+            _transDate = value
         End Set
     End Property
 
@@ -83,6 +103,8 @@
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
+            .Item("RefNum") = _refNum
+            .Item("TransDate") = _transDate
             .Item("BranchCode") = _branchCode
             .Item("BranchName") = _branchName
             .Item("Amount") = _amount
@@ -107,6 +129,8 @@
     Public Sub LoadBorrowByRow(ByVal dr As DataRow)
         With dr
             _borrowID = .Item("BrwID")
+            _refNum = .Item("RefNum")
+            _transDate = .Item("TransDate")
             _branchCode = .Item("BranchCode")
             _branchName = .Item("BranchName")
             _amount = .Item("Amount")

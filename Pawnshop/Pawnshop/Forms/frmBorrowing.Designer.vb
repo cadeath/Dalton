@@ -153,7 +153,7 @@ Partial Class frmBorrowing
         Me.txtRef.Location = New System.Drawing.Point(94, 12)
         Me.txtRef.Name = "txtRef"
         Me.txtRef.ReadOnly = True
-        Me.txtRef.Size = New System.Drawing.Size(77, 22)
+        Me.txtRef.Size = New System.Drawing.Size(102, 22)
         Me.txtRef.TabIndex = 34
         Me.txtRef.Text = "10000"
         '
