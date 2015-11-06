@@ -111,4 +111,12 @@
         If ofdEskFile.FileName = Nothing Then Exit Sub
         txtUrl.Text = ofdEskFile.FileName
     End Sub
+
+    Private Sub GroupBox1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox1.DoubleClick
+        devVerifyESK.Show()
+    End Sub
+
+    Private Sub GroupBox1_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GroupBox1.Enter
+
+    End Sub
 End Class

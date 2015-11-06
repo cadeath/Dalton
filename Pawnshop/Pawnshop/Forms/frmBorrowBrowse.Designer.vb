@@ -22,7 +22,7 @@ Partial Class frmBorrowBrowse
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"ROX00001", "11/01/2015", "PEN", "(1000)", "wala kwarta"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"ROX00001", "11/01/2015", "PEN", "(1000)", "wala kwarta"}, -1)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.txtDate = New System.Windows.Forms.TextBox()
@@ -234,7 +234,7 @@ Partial Class frmBorrowBrowse
         Me.lvBorrowings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvBorrowings.FullRowSelect = True
         Me.lvBorrowings.GridLines = True
-        Me.lvBorrowings.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem6})
+        Me.lvBorrowings.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvBorrowings.Location = New System.Drawing.Point(491, 47)
         Me.lvBorrowings.MultiSelect = False
         Me.lvBorrowings.Name = "lvBorrowings"
