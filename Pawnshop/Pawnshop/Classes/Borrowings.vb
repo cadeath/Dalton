@@ -140,5 +140,14 @@
         End With
         Console.WriteLine(String.Format("[loaded] Borrowing ID {0} loaded", _borrowID))
     End Sub
+
+    Public Sub VoidBorrowings()
+        mySql = "SELECT * FROM " & fillData & " WHERE brwID = " & _borrowID
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Dim cur As String = ds.Tables(0).Rows(0).Item("Status")
+        ds.Tables(0).Rows(0).Item("Status") = "V" & ds.Tables(0).Rows(0).Item("Status")
+
+        Console.WriteLine(String.Format("Transaction {0} void.", _borrowID))
+    End Sub
 #End Region
 End Class

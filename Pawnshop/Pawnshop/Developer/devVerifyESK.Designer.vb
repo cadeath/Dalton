@@ -39,14 +39,14 @@ Partial Class devVerifyESK
         '
         'txtURL
         '
-        Me.txtURL.Location = New System.Drawing.Point(254, 12)
+        Me.txtURL.Location = New System.Drawing.Point(12, 232)
         Me.txtURL.Name = "txtURL"
-        Me.txtURL.Size = New System.Drawing.Size(199, 20)
+        Me.txtURL.Size = New System.Drawing.Size(195, 20)
         Me.txtURL.TabIndex = 1
         '
         'btnBrowse
         '
-        Me.btnBrowse.Location = New System.Drawing.Point(459, 10)
+        Me.btnBrowse.Location = New System.Drawing.Point(213, 230)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(35, 23)
         Me.btnBrowse.TabIndex = 0
@@ -55,7 +55,7 @@ Partial Class devVerifyESK
         '
         'btnCheck
         '
-        Me.btnCheck.Location = New System.Drawing.Point(418, 39)
+        Me.btnCheck.Location = New System.Drawing.Point(173, 259)
         Me.btnCheck.Name = "btnCheck"
         Me.btnCheck.Size = New System.Drawing.Size(75, 23)
         Me.btnCheck.TabIndex = 1
@@ -71,7 +71,7 @@ Partial Class devVerifyESK
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(505, 228)
+        Me.ClientSize = New System.Drawing.Size(505, 291)
         Me.Controls.Add(Me.btnCheck)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.txtURL)
