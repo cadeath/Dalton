@@ -5,6 +5,7 @@
         frmMTSend = 1 'Money Transfer
         frmPawning = 2
         frmMTReceive = 4
+        frmDollar = 5
     End Enum
 
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
@@ -17,6 +18,8 @@
                 frmNewloan.LoadPawnerInfo(cl)
             Case FormName.frmMTReceive
                 frmMoneyTransfer.LoadReceiverInfo(cl)
+            Case FormName.frmDollar
+                frmDollar.LoadCustomer(cl)
         End Select
     End Sub
 
