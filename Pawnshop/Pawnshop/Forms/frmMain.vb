@@ -80,4 +80,8 @@
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
         tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
     End Sub
+
+    Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click
+        frmBorrowing.Show()
+    End Sub
 End Class

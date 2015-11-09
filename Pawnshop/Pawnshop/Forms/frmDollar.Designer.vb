@@ -34,6 +34,8 @@ Partial Class frmDollar
         Me.cboCur2 = New System.Windows.Forms.ComboBox()
         Me.cboCur1 = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.txtNetAmount = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.cboDenomination = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtSerial = New System.Windows.Forms.TextBox()
@@ -46,8 +48,8 @@ Partial Class frmDollar
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
-        Me.txtNetAmount = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.btnMove = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -96,6 +98,7 @@ Partial Class frmDollar
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.btnMove)
         Me.GroupBox2.Controls.Add(Me.txtCur2)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.txtCur1)
@@ -185,6 +188,24 @@ Partial Class frmDollar
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Transaction"
+        '
+        'txtNetAmount
+        '
+        Me.txtNetAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNetAmount.Location = New System.Drawing.Point(134, 38)
+        Me.txtNetAmount.Name = "txtNetAmount"
+        Me.txtNetAmount.Size = New System.Drawing.Size(100, 26)
+        Me.txtNetAmount.TabIndex = 1
+        Me.txtNetAmount.Text = "1000"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(131, 22)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(63, 13)
+        Me.Label7.TabIndex = 10
+        Me.Label7.Text = "Net Amount"
         '
         'cboDenomination
         '
@@ -308,23 +329,23 @@ Partial Class frmDollar
         Me.btnPost.Text = "&Post"
         Me.btnPost.UseVisualStyleBackColor = True
         '
-        'txtNetAmount
+        'btnBrowse
         '
-        Me.txtNetAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNetAmount.Location = New System.Drawing.Point(134, 38)
-        Me.txtNetAmount.Name = "txtNetAmount"
-        Me.txtNetAmount.Size = New System.Drawing.Size(100, 26)
-        Me.txtNetAmount.TabIndex = 1
-        Me.txtNetAmount.Text = "1000"
+        Me.btnBrowse.Location = New System.Drawing.Point(12, 8)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(75, 23)
+        Me.btnBrowse.TabIndex = 9
+        Me.btnBrowse.Text = "&Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
         '
-        'Label7
+        'btnMove
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(131, 22)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(63, 13)
-        Me.Label7.TabIndex = 10
-        Me.Label7.Text = "Net Amount"
+        Me.btnMove.Location = New System.Drawing.Point(392, 14)
+        Me.btnMove.Name = "btnMove"
+        Me.btnMove.Size = New System.Drawing.Size(39, 31)
+        Me.btnMove.TabIndex = 4
+        Me.btnMove.Text = ">>"
+        Me.btnMove.UseVisualStyleBackColor = True
         '
         'frmDollar
         '
@@ -332,6 +353,7 @@ Partial Class frmDollar
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(689, 349)
+        Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox4)
@@ -382,4 +404,6 @@ Partial Class frmDollar
     Friend WithEvents btnPost As System.Windows.Forms.Button
     Friend WithEvents txtNetAmount As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents btnMove As System.Windows.Forms.Button
 End Class
