@@ -150,21 +150,12 @@
     <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-<<<<<<< HEAD
-=======
-    <Compile Include="Forms\diagPayloan.Designer.vb">
-      <DependentUpon>diagPayloan.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\diagPayloan.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
       <DependentUpon>frmDollarList.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmDollarList.vb">
       <SubType>Form</SubType>
     </Compile>
->>>>>>> refs/remotes/origin/Branch2Branch
     <Compile Include="Forms\frmLayAwayLookUp.Designer.vb">
       <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
     </Compile>
@@ -322,18 +313,12 @@
     <EmbeddedResource Include="Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
-=======
     <EmbeddedResource Include="Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\diagPayloan.resx">
-      <DependentUpon>diagPayloan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>
     </EmbeddedResource>
->>>>>>> refs/remotes/origin/Branch2Branch
     <EmbeddedResource Include="Forms\frmLayAwayLookUp.resx">
       <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
     </EmbeddedResource>
