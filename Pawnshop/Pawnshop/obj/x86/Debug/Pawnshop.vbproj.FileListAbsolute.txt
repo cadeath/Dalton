@@ -56,7 +56,6 @@ D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Windows.Fo
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Xml.dll
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Xml.Linq.dll
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbprojResolveAssemblyReference.cache
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.devClient.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.devVerifyESK.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmDollarList.resources
