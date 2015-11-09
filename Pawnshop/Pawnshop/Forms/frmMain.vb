@@ -1,8 +1,18 @@
 ﻿Public Class frmMain
 
+    Friend dateSet As Boolean = False
+
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        frmOpenStore.Show()
-        frmOpenStore.Focus()
+        'frmOpenStore.Show()
+        'frmOpenStore.Focus()
+
+        If POSuser.UserID = Nothing Then
+            frmLogin.TopMost = True
+            frmLogin.Show()
+            frmLogin.Focus()
+
+            Me.Enabled = False
+        End If
 
         ' Set the color in the MDI client.
         For Each ctl As Control In Me.Controls
@@ -78,7 +88,7 @@
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
-        tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+        If dateSet Then tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
     End Sub
 
     Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click
