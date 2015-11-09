@@ -9,7 +9,8 @@ Module mod_system
 
 #Region "Global Variables"
     Public CurrentDate As Date = Now
-    Public UserID As Integer = 1
+    Public POSuser As New ComputerUser
+    Public UserID As Integer = POSuser.UserID
     Public BranchCode As String = "ROX"
 #End Region
 

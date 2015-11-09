@@ -134,6 +134,7 @@
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
@@ -226,6 +227,12 @@
       <DependentUpon>frmInsurance.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmInsurance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmMain.vb">
@@ -366,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLayAway.resx">
       <DependentUpon>frmLayAway.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
