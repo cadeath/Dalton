@@ -91,7 +91,7 @@ Partial Class frmBorrowBrowse
         '
         Me.txtDate.BackColor = System.Drawing.SystemColors.Window
         Me.txtDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDate.Location = New System.Drawing.Point(112, 33)
+        Me.txtDate.Location = New System.Drawing.Point(112, 35)
         Me.txtDate.Name = "txtDate"
         Me.txtDate.ReadOnly = True
         Me.txtDate.Size = New System.Drawing.Size(142, 22)
