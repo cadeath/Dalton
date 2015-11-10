@@ -1,6 +1,9 @@
 ﻿Public Class frmUserManagement
 
     Private Sub frmUserManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Dim tmp As New ComputerUser
+        tmp.CreateAdministrator()
+
         ClearFields()
         LoadActive()
     End Sub
