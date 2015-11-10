@@ -379,7 +379,7 @@ Partial Class frmNewloan
         Me.txtNticket.Name = "txtNticket"
         Me.txtNticket.ReadOnly = True
         Me.txtNticket.Size = New System.Drawing.Size(113, 22)
-        Me.txtNticket.TabIndex = 11
+        Me.txtNticket.TabIndex = 1
         '
         'lblNticket
         '
@@ -532,7 +532,7 @@ Partial Class frmNewloan
         Me.txtTicket.Name = "txtTicket"
         Me.txtTicket.ReadOnly = True
         Me.txtTicket.Size = New System.Drawing.Size(113, 22)
-        Me.txtTicket.TabIndex = 10
+        Me.txtTicket.TabIndex = 0
         '
         'Label12
         '
@@ -564,7 +564,7 @@ Partial Class frmNewloan
         Me.cboAppraiser.Location = New System.Drawing.Point(9, 35)
         Me.cboAppraiser.Name = "cboAppraiser"
         Me.cboAppraiser.Size = New System.Drawing.Size(237, 21)
-        Me.cboAppraiser.TabIndex = 22
+        Me.cboAppraiser.TabIndex = 8
         '
         'Label19
         '

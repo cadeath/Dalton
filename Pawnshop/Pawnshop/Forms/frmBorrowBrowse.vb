@@ -212,4 +212,8 @@
             MsgBox(String.Format("{0} result found", lvBorrowings.Items.Count))
         End If
     End Sub
+
+    Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then btnSearch.PerformClick()
+    End Sub
 End Class

@@ -428,13 +428,13 @@
 
         'Jewel
         If cboItemtype.Text = "JWL" Then
-            If txtGrams.Text = "" Then txtGrams.Focus() : ret = False
+            If txtGrams.Text = "" Or Not checkNumeric(txtGrams) Then txtGrams.Focus() : ret = False
             If cboKarat.Text = "" Then cboKarat.Focus() : ret = False
         End If
 
         ' Ticket
-        If txtAppraisal.Text = "" Then txtAppraisal.Focus() : ret = False
-        If txtPrincipal.Text = "" Then txtPrincipal.Focus() : ret = False
+        If txtAppraisal.Text = "" Or Not checkNumeric(txtAppraisal) Then txtAppraisal.Focus() : ret = False
+        If txtPrincipal.Text = "" Or Not checkNumeric(txtPrincipal) Then txtPrincipal.Focus() : ret = False
         If txtTotal.Text = "" Then txtTotal.Focus() : ret = False
 
         If cboAppraiser.Text = "" Then cboAppraiser.Focus() : ret = False
@@ -449,6 +449,12 @@
             MsgBox("Check payment", MsgBoxStyle.Critical, "Payment Problem")
             Exit Sub
         End If
+
+        Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
+        If ans = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
 
         Select Case transactionType
             Case "R"
@@ -519,7 +525,7 @@
             Exit Sub
         End If
 
-        Dim ans As DialogResult = MsgBox("Do you want to enter more?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        ans = MsgBox("Do you want to enter more?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then
             frmPawning.LoadActive()
             Me.Close()
@@ -807,6 +813,8 @@
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         Dim ans As DialogResult = _
         MsgBox("Do you want to void this transaction?", vbCritical + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "W A R N I N G")
+        Dim currentPT As Integer = PawnItem.PawnTicket
+
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         If PawnItem.LoanDate <> CurrentDate.Date Then
@@ -825,13 +833,13 @@
 
         PawnItem.LoadTicket(PawnItem.OldTicket, "PawnTicket")
         If PawnItem.OldTicket = Nothing Then
-            PawnItem.Status = "L"
+            PawnItem.ChangeStatus("L")
         Else
-            PawnItem.Status = "R"
+            PawnItem.ChangeStatus("R")
         End If
 
-        PawnItem.SaveTicket()
-        MsgBox("PT# " & PawnItem.PawnTicket & vbCr & "Is now VOID", MsgBoxStyle.Information)
+        'PawnItem.SaveTicket(False)
+        MsgBox("PT# " & currentPT & vbCr & "Is now VOID", MsgBoxStyle.Information)
 
         frmPawning.LoadActive()
         Me.Close()
@@ -854,6 +862,8 @@
     Private Sub txtDesc_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDesc.LostFocus
         If cboItemtype.Text = "JWL" Then
             txtGrams.Focus()
+        Else
+            txtAppraisal.Focus()
         End If
     End Sub
 End Class

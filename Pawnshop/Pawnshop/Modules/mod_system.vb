@@ -74,6 +74,14 @@ Module mod_system
         Return Not (Char.IsDigit(e.KeyChar))
     End Function
 
+    Friend Function checkNumeric(ByVal txt As TextBox) As Boolean
+        If IsNumeric(txt.Text) Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
     Friend Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
         str = str.Replace("'", "\'")
         str = str.Replace("""", "\""")
