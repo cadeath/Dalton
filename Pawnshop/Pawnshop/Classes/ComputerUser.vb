@@ -74,6 +74,63 @@ Public Class ComputerUser
 
 #Region "Privileges"
 
+    Private _level As String
+    Public ReadOnly Property Level As String
+        Get
+            Return _level
+        End Get
+    End Property
+
+    'Encoder
+    Private _pawn As Boolean, _clientList As Boolean, _moneyTransfer As Boolean
+    Private _insurance As Boolean, _layAway As Boolean, _dollarBuying As Boolean
+    Private _pos As Boolean, _cio As Boolean
+
+    'Supervisor
+    Private _expiryList As Boolean, _journalEntries As Boolean, _cashCount As Boolean, _backUp As Boolean
+    Private _viewUserManagement As Boolean, _viewRates As Boolean, _openStore As Boolean
+
+    'Manager
+    Private _userManagement As Boolean, _updateRates As Boolean, _settings As Boolean, _borrow As Boolean
+
+    'Special
+    Private _cashInBank As Boolean, _cashOutBank As Boolean, _void As Boolean
+    Public Sub UpdatePrivilege()
+        Dim parts() As String = _privilege.Split("|")
+        Dim privList() As Boolean = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+        Dim x As Integer, y As Integer
+        'Encoder
+        y = 0
+        Console.WriteLine("Encoder : " & privList.Count & "| " & parts(y))
+        For x = 0 To parts(y).Length - 1
+            privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
+        Next
+
+        'Supervisor
+        y = 1
+        privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewRates, _openStore}
+        Console.WriteLine("Supervisor : " & privList.Count & "| " & parts(y))
+        For x = 0 To parts(y).Length - 1
+            privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
+        Next
+
+        'Manager
+        y = 2
+        privList = {_userManagement, _updateRates, _settings, _borrow}
+        Console.WriteLine("Manager : " & privList.Count & "| " & parts(y))
+        For x = 0 To parts(y).Length - 1
+            privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
+        Next
+
+
+        'Special
+        y = 3
+        privList = {_cashInBank, _cashOutBank, _void}
+        Console.WriteLine("Special : " & privList.Count & "| " & parts(y))
+        For x = 0 To parts(y).Length - 1
+            privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
+        Next
+    End Sub
 #End Region
 
 #Region "Procedures and Functions"
@@ -101,7 +158,7 @@ Public Class ComputerUser
         database.SaveEntry(ds, True)
     End Sub
 
-    Private Sub loadbyRow(ByVal dr As DataRow)
+    Public Sub LoadUserByRow(ByVal dr As DataRow)
         On Error Resume Next
 
         With dr
@@ -119,7 +176,7 @@ Public Class ComputerUser
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub
 
-        loadbyRow(ds.Tables(0).Rows(0))
+        LoadUserByRow(ds.Tables(0).Rows(0))
         Console.WriteLine(String.Format("[ComputerUser] UserID {0} - {1} Loaded", _userID, _userName))
     End Sub
 

@@ -33,8 +33,8 @@ Partial Class frmUserManagement
         Me.txtFullname = New System.Windows.Forms.TextBox()
         Me.txtPass1 = New System.Windows.Forms.TextBox()
         Me.txtPass2 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
         Me.tbPrivileges = New System.Windows.Forms.TabControl()
         Me.tbEncoder = New System.Windows.Forms.TabPage()
         Me.chkEnAll = New System.Windows.Forms.CheckBox()
@@ -57,9 +57,10 @@ Partial Class frmUserManagement
         Me.chkR1 = New System.Windows.Forms.CheckBox()
         Me.chkBU = New System.Windows.Forms.CheckBox()
         Me.chkCC = New System.Windows.Forms.CheckBox()
-        Me.txtJE = New System.Windows.Forms.CheckBox()
+        Me.chkJE = New System.Windows.Forms.CheckBox()
         Me.chkEL = New System.Windows.Forms.CheckBox()
         Me.tbManager = New System.Windows.Forms.TabPage()
+        Me.chkBorrowings = New System.Windows.Forms.CheckBox()
         Me.chkMaAll = New System.Windows.Forms.CheckBox()
         Me.chkUS = New System.Windows.Forms.CheckBox()
         Me.chkUR = New System.Windows.Forms.CheckBox()
@@ -69,7 +70,6 @@ Partial Class frmUserManagement
         Me.chkSpAll = New System.Windows.Forms.CheckBox()
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
-        Me.chkBorrowings = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -164,23 +164,23 @@ Partial Class frmUserManagement
         Me.txtPass2.Size = New System.Drawing.Size(178, 20)
         Me.txtPass2.TabIndex = 7
         '
-        'Button1
+        'btnClose
         '
-        Me.Button1.Location = New System.Drawing.Point(679, 258)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 8
-        Me.Button1.Text = "&Edit"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnClose.Location = New System.Drawing.Point(679, 258)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 8
+        Me.btnClose.Text = "&Close"
+        Me.btnClose.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnAdd
         '
-        Me.Button2.Location = New System.Drawing.Point(598, 258)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 9
-        Me.Button2.Text = "&Add"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnAdd.Location = New System.Drawing.Point(598, 258)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.TabIndex = 9
+        Me.btnAdd.Text = "&Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
         '
         'tbPrivileges
         '
@@ -315,7 +315,7 @@ Partial Class frmUserManagement
         Me.tbSupervisor.Controls.Add(Me.chkR1)
         Me.tbSupervisor.Controls.Add(Me.chkBU)
         Me.tbSupervisor.Controls.Add(Me.chkCC)
-        Me.tbSupervisor.Controls.Add(Me.txtJE)
+        Me.tbSupervisor.Controls.Add(Me.chkJE)
         Me.tbSupervisor.Controls.Add(Me.chkEL)
         Me.tbSupervisor.Location = New System.Drawing.Point(4, 22)
         Me.tbSupervisor.Name = "tbSupervisor"
@@ -425,15 +425,15 @@ Partial Class frmUserManagement
         Me.chkCC.Text = "Cash Count"
         Me.chkCC.UseVisualStyleBackColor = True
         '
-        'txtJE
+        'chkJE
         '
-        Me.txtJE.AutoSize = True
-        Me.txtJE.Location = New System.Drawing.Point(13, 35)
-        Me.txtJE.Name = "txtJE"
-        Me.txtJE.Size = New System.Drawing.Size(95, 17)
-        Me.txtJE.TabIndex = 2
-        Me.txtJE.Text = "Journal Entries"
-        Me.txtJE.UseVisualStyleBackColor = True
+        Me.chkJE.AutoSize = True
+        Me.chkJE.Location = New System.Drawing.Point(13, 35)
+        Me.chkJE.Name = "chkJE"
+        Me.chkJE.Size = New System.Drawing.Size(95, 17)
+        Me.chkJE.TabIndex = 2
+        Me.chkJE.Text = "Journal Entries"
+        Me.chkJE.UseVisualStyleBackColor = True
         '
         'chkEL
         '
@@ -459,6 +459,16 @@ Partial Class frmUserManagement
         Me.tbManager.TabIndex = 2
         Me.tbManager.Text = "Manager"
         Me.tbManager.UseVisualStyleBackColor = True
+        '
+        'chkBorrowings
+        '
+        Me.chkBorrowings.AutoSize = True
+        Me.chkBorrowings.Location = New System.Drawing.Point(13, 81)
+        Me.chkBorrowings.Name = "chkBorrowings"
+        Me.chkBorrowings.Size = New System.Drawing.Size(78, 17)
+        Me.chkBorrowings.TabIndex = 11
+        Me.chkBorrowings.Text = "Borrowings"
+        Me.chkBorrowings.UseVisualStyleBackColor = True
         '
         'chkMaAll
         '
@@ -554,24 +564,14 @@ Partial Class frmUserManagement
         Me.chkCashInBank.Text = "Cash In (Bank)"
         Me.chkCashInBank.UseVisualStyleBackColor = True
         '
-        'chkBorrowings
-        '
-        Me.chkBorrowings.AutoSize = True
-        Me.chkBorrowings.Location = New System.Drawing.Point(13, 81)
-        Me.chkBorrowings.Name = "chkBorrowings"
-        Me.chkBorrowings.Size = New System.Drawing.Size(78, 17)
-        Me.chkBorrowings.TabIndex = 11
-        Me.chkBorrowings.Text = "Borrowings"
-        Me.chkBorrowings.UseVisualStyleBackColor = True
-        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(767, 289)
         Me.Controls.Add(Me.tbPrivileges)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.txtPass2)
         Me.Controls.Add(Me.txtPass1)
         Me.Controls.Add(Me.txtFullname)
@@ -608,8 +608,8 @@ Partial Class frmUserManagement
     Friend WithEvents txtFullname As System.Windows.Forms.TextBox
     Friend WithEvents txtPass1 As System.Windows.Forms.TextBox
     Friend WithEvents txtPass2 As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents tbPrivileges As System.Windows.Forms.TabControl
     Friend WithEvents tbEncoder As System.Windows.Forms.TabPage
     Friend WithEvents tbSupervisor As System.Windows.Forms.TabPage
@@ -622,7 +622,7 @@ Partial Class frmUserManagement
     Friend WithEvents chkDB As System.Windows.Forms.CheckBox
     Friend WithEvents chkCIO As System.Windows.Forms.CheckBox
     Friend WithEvents chkEL As System.Windows.Forms.CheckBox
-    Friend WithEvents txtJE As System.Windows.Forms.CheckBox
+    Friend WithEvents chkJE As System.Windows.Forms.CheckBox
     Friend WithEvents chkBU As System.Windows.Forms.CheckBox
     Friend WithEvents chkCC As System.Windows.Forms.CheckBox
     Friend WithEvents chkR4 As System.Windows.Forms.CheckBox
