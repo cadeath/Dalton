@@ -74,9 +74,13 @@ Public Class ComputerUser
 
 #Region "Privileges"
 
-    Private _level As String
+    Private _level As String = String.Empty
     Public ReadOnly Property Level As String
         Get
+            If _level = Nothing Then
+                UpdatePrivilege()
+            End If
+
             Return _level
         End Get
     End Property
@@ -104,14 +108,16 @@ Public Class ComputerUser
         Console.WriteLine("Encoder : " & privList.Count & "| " & parts(y))
         For x = 0 To parts(y).Length - 1
             privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
+            _level = IIf(privList(x) = "1", "Encoder", "")
         Next
 
         'Supervisor
         y = 1
-        privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewRates, _openStore}
+        privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
         Console.WriteLine("Supervisor : " & privList.Count & "| " & parts(y))
         For x = 0 To parts(y).Length - 1
             privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
+            _level = IIf(privList(x) = "1", "Supervisor", "")
         Next
 
         'Manager
@@ -120,6 +126,7 @@ Public Class ComputerUser
         Console.WriteLine("Manager : " & privList.Count & "| " & parts(y))
         For x = 0 To parts(y).Length - 1
             privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
+            _level = IIf(privList(x) = "1", "Manager", "")
         Next
 
 
@@ -130,6 +137,8 @@ Public Class ComputerUser
         For x = 0 To parts(y).Length - 1
             privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
         Next
+
+        Console.WriteLine("Level is " & _level)
     End Sub
 #End Region
 

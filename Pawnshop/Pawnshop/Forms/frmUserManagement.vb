@@ -9,6 +9,7 @@
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
+        lvUsers.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim posUser As New ComputerUser
             posUser.LoadUserByRow(dr)
