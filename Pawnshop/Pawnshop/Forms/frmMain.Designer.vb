@@ -60,6 +60,7 @@ Partial Class frmMain
         Me.statusStrip = New System.Windows.Forms.StatusStrip()
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
+        Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -78,7 +79,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -352,6 +353,12 @@ Partial Class frmMain
         '
         Me.tmrCurrent.Enabled = True
         '
+        'LogOutToolStripMenuItem
+        '
+        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.LogOutToolStripMenuItem.Text = "&Log Out"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -416,5 +423,6 @@ Partial Class frmMain
     Friend WithEvents statusStrip As System.Windows.Forms.StatusStrip
     Friend WithEvents tsCurrentDate As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tmrCurrent As System.Windows.Forms.Timer
+    Friend WithEvents LogOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
