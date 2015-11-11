@@ -1,19 +1,44 @@
 ﻿Public Class frmMain
 
+    'NOTE
+    ' NotYetLogin sub don't have REPORTS DISABLE YET
+    ' Please add reports and add it also at NotYetLogin
+    ' sub.
+
     Friend dateSet As Boolean = False
 
-    Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'frmOpenStore.Show()
-        'frmOpenStore.Focus()
+    Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
+        pButton.Enabled = Not st
 
-        If POSuser.UserID = Nothing Then
-            frmLogin.TopMost = True
-            frmLogin.Show()
-            frmLogin.Focus()
-
-            Me.Enabled = False
+        'File
+        CloseOpenStore.Enabled = Not st
+        UserManagementToolStripMenuItem.Enabled = Not st
+        UpdateToolStripMenuItem.Enabled = Not st
+        SettingsToolStripMenuItem.Enabled = Not st
+        If Not st Then
+            LogOutToolStripMenuItem.Text = "&Log Out"
+        Else
+            LogOutToolStripMenuItem.Text = "&Login"
         End If
 
+        'Tools
+        ExpiryGeneratorToolStripMenuItem.Enabled = Not st
+        JournalEntriesToolStripMenuItem.Enabled = Not st
+        CashCountToolStripMenuItem.Enabled = Not st
+        BackupToolStripMenuItem.Enabled = Not st
+
+        'Reports
+
+    End Sub
+
+    Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If POSuser.UserName = "" Then
+            Console.WriteLine("Not Yet Login")
+            NotYetLogin()
+        Else
+            Console.WriteLine(POSuser.FullName & " welcome!")
+            NotYetLogin(False)
+        End If
         ' Set the color in the MDI client.
         For Each ctl As Control In Me.Controls
             If TypeOf ctl Is MdiClient Then
@@ -93,5 +118,16 @@
 
     Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click
         frmBorrowing.Show()
+    End Sub
+
+    Private Sub LogOutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LogOutToolStripMenuItem.Click
+        If LogOutToolStripMenuItem.Text = "&Login" Then
+            frmLogin.Show()
+        Else
+            POSuser = Nothing
+            MsgBox("Thank you!", MsgBoxStyle.Information)
+            NotYetLogin()
+            frmLogin.Show()
+        End If
     End Sub
 End Class

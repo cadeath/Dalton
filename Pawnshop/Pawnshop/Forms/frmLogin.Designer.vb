@@ -75,6 +75,7 @@ Partial Class frmLogin
         '
         'btnExit
         '
+        Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnExit.Location = New System.Drawing.Point(169, 162)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(82, 66)
@@ -93,9 +94,11 @@ Partial Class frmLogin
         '
         'frmLogin
         '
+        Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.CancelButton = Me.btnExit
         Me.ClientSize = New System.Drawing.Size(299, 240)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.btnExit)

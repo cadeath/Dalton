@@ -72,8 +72,11 @@
 
         ' Success!
         POSuser = loginUser
+        POSuser.UpdateLogin()
+        MsgBox("Welcome " & POSuser.FullName)
 
         frmMain.Show()
+        frmMain.NotYetLogin(False)
         Me.Close()
     End Sub
 End Class

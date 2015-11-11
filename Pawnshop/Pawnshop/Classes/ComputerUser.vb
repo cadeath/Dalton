@@ -247,8 +247,8 @@ Public Class ComputerUser
     End Sub
 
     Public Function LoginUser(ByVal user As String, ByVal password As String) As Boolean
-        mySql = "SELECT * FROM " & fillData
-        mySql &= vbCrLf & String.Format("WHERE LOWER(Username) = LOWER('{0}') AND UserPass = '{1}'", user, Encrypt(password))
+        mySql = "SELECT UserID, LOWER(Username) FROM " & fillData
+        mySql &= vbCrLf & String.Format(" WHERE LOWER(Username) = LOWER('{0}') AND UserPass = '{1}'", user, Encrypt(password))
         Dim ds As DataSet
 
         ds = LoadSQL(mySql)
@@ -258,5 +258,13 @@ Public Class ComputerUser
 
         Return True
     End Function
+
+    Public Sub UpdateLogin()
+        mySql = "SELECT * FROM " & fillData & " WHERE UserID = " & _userID
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds.Tables(0).Rows(0).Item("LastLogin") = Now
+        database.SaveEntry(ds, False)
+        Console.WriteLine("Login Saved")
+    End Sub
 #End Region
 End Class
