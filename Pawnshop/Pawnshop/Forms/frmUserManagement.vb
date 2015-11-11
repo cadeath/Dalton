@@ -1,6 +1,7 @@
 ﻿Public Class frmUserManagement
 
     Private selectedUser As New ComputerUser
+    Private moduleName As String = "User Management"
 
     Private Sub frmUserManagement_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         ClearFields()
@@ -11,7 +12,7 @@
             Return True
         End If
 
-        MsgBox("Password must be atleast 4 characters but not more than 8 characters", MsgBoxStyle.Critical)
+        MsgBox("Password must be atleast 4 characters but not more than 8 characters", MsgBoxStyle.Critical, moduleName)
         Return False
     End Function
 
@@ -115,7 +116,7 @@
             tbPrivileges.Enabled = False
             Exit Sub
         End If
-        tbPrivileges.Enabled = False
+        tbPrivileges.Enabled = True
         Dim privParts() As String = selectedUser.Privilege.Split("|")
 
         For y As Integer = 0 To privParts.Count - 1
@@ -209,11 +210,6 @@
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If Not PasswordPolicy() Then Exit Sub
 
-        If txtPass1.Text <> txtPass2.Text Then
-            MsgBox("Password is not MATCHED", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
-
         If btnAdd.Text = "&Add" Then
             Console.WriteLine("Priv is " & Privileger())
             Dim tmpUser As New ComputerUser
@@ -226,13 +222,15 @@
             tmpUser.EncoderID = UserID
 
             tmpUser.SaveUser()
-            MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information)
-            ClearFields()
-            LoadActive()
+            MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
         Else
-            If EncryptString(txtPass1.Text) <> selectedUser.Password Then
-                MsgBox("Please input the password before changes", MsgBoxStyle.Critical)
+            If EncryptString(txtPass1.Text) <> selectedUser.Password And txtPass2.Text = "" Then
+                MsgBox("Please input the password before changing", MsgBoxStyle.Critical, moduleName)
                 txtPass1.Focus()
+                Exit Sub
+            End If
+            If txtPass1.Text <> txtPass2.Text And Not txtPass2.Text = "" Then
+                MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
                 Exit Sub
             End If
             With selectedUser
@@ -247,6 +245,8 @@
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
         End If
 
+        ClearFields()
+        LoadActive()
     End Sub
 
     Private Sub lvUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUsers.DoubleClick
@@ -267,4 +267,5 @@
 
         txtPass1.Focus()
     End Sub
+
 End Class
