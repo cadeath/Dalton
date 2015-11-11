@@ -97,19 +97,164 @@ Public Class ComputerUser
     End Property
 
     'Encoder
-    Private _pawn As Boolean, _clientList As Boolean, _moneyTransfer As Boolean
-    Private _insurance As Boolean, _layAway As Boolean, _dollarBuying As Boolean
-    Private _pos As Boolean, _cio As Boolean
+    Private _pawn As Boolean
+    Public ReadOnly Property canPawn() As Boolean
+        Get
+            Return _pawn
+        End Get
+    End Property
+
+    Private _clientList As Boolean
+    Public ReadOnly Property canClientManage() As Boolean
+        Get
+            Return _clientList
+        End Get
+    End Property
+
+    Private _moneyTransfer As Boolean
+    Public ReadOnly Property canMoneyTransfer() As Boolean
+        Get
+            Return _moneyTransfer
+        End Get
+    End Property
+
+    Private _insurance As Boolean
+    Public ReadOnly Property canInsurance() As Boolean
+        Get
+            Return _insurance
+        End Get
+    End Property
+
+    Private _layAway As Boolean
+    Public ReadOnly Property canLayAway() As Boolean
+        Get
+            Return _layAway
+        End Get
+    End Property
+
+    Private _dollarBuying As Boolean
+    Public ReadOnly Property canDollarBuying() As Boolean
+        Get
+            Return _dollarBuying
+        End Get
+    End Property
+
+    Private _pos As Boolean
+    Public ReadOnly Property canPOS() As Boolean
+        Get
+            Return _pos
+        End Get
+    End Property
+
+    Private _cio As Boolean
+    Public ReadOnly Property canCashInOut() As Boolean
+        Get
+            Return _cio
+        End Get
+    End Property
 
     'Supervisor
-    Private _expiryList As Boolean, _journalEntries As Boolean, _cashCount As Boolean, _backUp As Boolean
-    Private _viewUserManagement As Boolean, _viewRates As Boolean, _openStore As Boolean
+    Private _expiryList As Boolean
+    Public ReadOnly Property canExpiryListGenerate() As Boolean
+        Get
+            Return _expiryList
+        End Get
+    End Property
+
+    Private _journalEntries As Boolean
+    Public ReadOnly Property canJournalEntryGenerate() As Boolean
+        Get
+            Return _journalEntries
+        End Get
+    End Property
+
+    Private _cashCount As Boolean
+    Public ReadOnly Property canCashCount() As Boolean
+        Get
+            Return _cashCount
+        End Get
+    End Property
+
+    Private _backUp As Boolean
+    Public ReadOnly Property canBackup() As Boolean
+        Get
+            Return _backUp
+        End Get
+    End Property
+
+    Private _viewUserManagement As Boolean
+    Public ReadOnly Property canViewUserManage() As Boolean
+        Get
+            Return _viewUserManagement
+        End Get
+    End Property
+
+    Private _viewRates As Boolean
+    Public ReadOnly Property canViewRates() As Boolean
+        Get
+            Return _viewRates
+        End Get
+    End Property
+
+    Private _openStore As Boolean
+    Public ReadOnly Property canOpenStore() As Boolean
+        Get
+            Return _openStore
+        End Get
+    End Property
 
     'Manager
-    Private _userManagement As Boolean, _updateRates As Boolean, _settings As Boolean, _borrow As Boolean
+    Private _userManagement As Boolean
+    Public ReadOnly Property canUserManage() As Boolean
+        Get
+            Return _userManagement
+        End Get
+    End Property
+
+    Private _updateRates As Boolean
+    Public ReadOnly Property canUpdateRates() As Boolean
+        Get
+            Return _updateRates
+        End Get
+    End Property
+
+    Private _settings As Boolean
+    Public ReadOnly Property canSettings() As Boolean
+        Get
+            Return _settings
+        End Get
+    End Property
+
+    Private _borrow As Boolean
+    Public ReadOnly Property canBorrow() As Boolean
+        Get
+            Return _borrow
+        End Get
+    End Property
+
 
     'Special
-    Private _cashInBank As Boolean, _cashOutBank As Boolean, _void As Boolean
+    Private _cashInBank As Boolean
+    Public ReadOnly Property canCashInBank() As Boolean
+        Get
+            Return _cashInBank
+        End Get
+    End Property
+
+    Private _cashOutBank As Boolean
+    Public ReadOnly Property canCashOutBank() As Boolean
+        Get
+            Return _cashOutBank
+        End Get
+    End Property
+
+    Private _void As Boolean
+    Public ReadOnly Property canVoid() As Boolean
+        Get
+            Return _void
+        End Get
+    End Property
+
     Public Sub UpdatePrivilege()
         Dim parts() As String = _privilege.Split("|")
         Dim privList() As Boolean = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
@@ -154,12 +299,24 @@ Public Class ComputerUser
 
     Private Sub getPrivilege()
         Dim superAdmin As String = "PDuNxp8S9q0="
-        'mySql = "SELECT * FROM " & fillData & " WHERE UserID = " & _userID
-        'Dim ds As DataSet = LoadSQL(mySql)
-
-        '_privilege = ds.Tables(0).Rows(0).Item("Privilege")
         If _privilege = superAdmin Then
             _level = "Super User"
+
+            Dim TabCnt As Integer = 4
+            Dim privList() As Boolean
+
+            For cnt As Integer = 0 To TabCnt - 1
+                Select Case cnt
+                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+                    Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                    Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
+                    Case 3 : privList = {_cashInBank, _cashOutBank, _void}
+                End Select
+
+                For Each e In privList
+                    e = True
+                Next
+            Next
         Else
             UpdatePrivilege()
         End If

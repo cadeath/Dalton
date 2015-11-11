@@ -67,6 +67,7 @@
                 MsgBox("You have reached the MAXIMUM logins. This is a recording.", MsgBoxStyle.Critical)
                 End
             End If
+            MsgBox("Invalid Username and password", MsgBoxStyle.Critical)
             Exit Sub
         End If
 
