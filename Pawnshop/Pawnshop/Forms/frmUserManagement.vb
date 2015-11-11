@@ -1,8 +1,19 @@
 ﻿Public Class frmUserManagement
 
+    Private selectedUser As New ComputerUser
+
     Private Sub frmUserManagement_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         ClearFields()
     End Sub
+
+    Private Function PasswordPolicy() As Boolean
+        If txtPass1.Text.Length >= 4 And txtPass1.Text.Length <= 8 Then
+            Return True
+        End If
+
+        MsgBox("Password must be atleast 4 characters but not more than 8 characters", MsgBoxStyle.Critical)
+        Return False
+    End Function
 
     Private Sub frmUserManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim tmp As New ComputerUser
@@ -10,6 +21,19 @@
 
         ClearFields()
         LoadActive()
+    End Sub
+
+    Private Sub LoadUser()
+        If lvUsers.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer = lvUsers.FocusedItem.Tag
+        With selectedUser
+            .LoadUser(idx)
+            txtUser.Text = .UserName
+            txtFullname.Text = .FullName
+        End With
+
+        LoadPrivilege()
     End Sub
 
     Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit ORDER BY Username ASC")
@@ -43,6 +67,8 @@
         chkSuAll.Checked = False
         chkMaAll.Checked = False
         chkSpAll.Checked = False
+
+        btnAdd.Text = "&Add"
     End Sub
 
     Private Function Privileger() As String
@@ -80,6 +106,40 @@
 
         Return priv
     End Function
+
+    Private Sub LoadPrivilege()
+        If selectedUser.Privilege = "PDuNxp8S9q0=" Then
+            chkEnAll.Checked = True : chkSuAll.Checked = True
+            chkMaAll.Checked = True : chkSpAll.Checked = True
+
+            tbPrivileges.Enabled = False
+            Exit Sub
+        End If
+        tbPrivileges.Enabled = False
+        Dim privParts() As String = selectedUser.Privilege.Split("|")
+
+        For y As Integer = 0 To privParts.Count - 1
+            For x As Integer = 0 To privParts(y).Length - 1
+                Dim chkList() As CheckBox
+                Select Case y
+                    Case 0 'Encoder
+                        chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO}
+                        Console.WriteLine("Encoder Length: " & privParts(y).Length)
+                    Case 1 'Supervisor
+                        chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
+                        Console.WriteLine("Supervisor Length: " & privParts(y).Length)
+                    Case 2 'Manager
+                        chkList = {chkUM, chkUR, chkUS, chkBorrowings}
+                        Console.WriteLine("Manager Length: " & privParts(y).Length)
+                    Case 3 'Special
+                        chkList = {chkCashInBank, chkCashOutBank, chkVoid}
+                        Console.WriteLine("Special Length: " & privParts(y).Length)
+                End Select
+
+                chkList(x).Checked = IIf(privParts(y).Substring(x, 1) = "1", True, False)
+            Next
+        Next
+    End Sub
 
 #Region "SelectAll"
 
@@ -147,24 +207,64 @@
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        If Not PasswordPolicy() Then Exit Sub
+
         If txtPass1.Text <> txtPass2.Text Then
             MsgBox("Password is not MATCHED", MsgBoxStyle.Critical)
             Exit Sub
         End If
 
-        Console.WriteLine("Priv is " & Privileger())
-        Dim tmpUser As New ComputerUser
+        If btnAdd.Text = "&Add" Then
+            Console.WriteLine("Priv is " & Privileger())
+            Dim tmpUser As New ComputerUser
 
-        tmpUser.UserName = txtUser.Text
-        tmpUser.Password = txtPass2.Text
-        tmpUser.FullName = txtFullname.Text
-        tmpUser.Privilege = Privileger()
-        tmpUser.UpdatePrivilege()
-        tmpUser.EncoderID = UserID
+            tmpUser.UserName = txtUser.Text
+            tmpUser.Password = txtPass2.Text
+            tmpUser.FullName = txtFullname.Text
+            tmpUser.Privilege = Privileger()
+            tmpUser.UpdatePrivilege()
+            tmpUser.EncoderID = UserID
 
-        tmpUser.SaveUser()
-        MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information)
-        ClearFields()
-        LoadActive()
+            tmpUser.SaveUser()
+            MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information)
+            ClearFields()
+            LoadActive()
+        Else
+            If EncryptString(txtPass1.Text) <> selectedUser.Password Then
+                MsgBox("Please input the password before changes", MsgBoxStyle.Critical)
+                txtPass1.Focus()
+                Exit Sub
+            End If
+            With selectedUser
+                .FullName = txtFullname.Text
+                .Password = txtPass2.Text
+                .Privilege = Privileger()
+                .UpdatePrivilege()
+
+                .SaveUser(False)
+            End With
+
+            MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
+        End If
+
+    End Sub
+
+    Private Sub lvUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUsers.DoubleClick
+        LoadUser()
+        EditMode()
+    End Sub
+
+    Private Sub SaveMode()
+        btnAdd.Text = "&Add"
+        txtUser.ReadOnly = False
+    End Sub
+
+    Private Sub EditMode()
+        btnAdd.Text = "&Update"
+        txtUser.ReadOnly = True
+        txtPass1.Text = ""
+        txtPass2.Text = ""
+
+        txtPass1.Focus()
     End Sub
 End Class

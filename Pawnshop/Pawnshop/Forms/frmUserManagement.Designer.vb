@@ -83,6 +83,7 @@ Partial Class frmUserManagement
         Me.lvUsers.FullRowSelect = True
         Me.lvUsers.GridLines = True
         Me.lvUsers.Location = New System.Drawing.Point(12, 12)
+        Me.lvUsers.MultiSelect = False
         Me.lvUsers.Name = "lvUsers"
         Me.lvUsers.Size = New System.Drawing.Size(275, 265)
         Me.lvUsers.TabIndex = 0

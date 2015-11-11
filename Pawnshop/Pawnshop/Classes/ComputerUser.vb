@@ -206,24 +206,34 @@ Public Class ComputerUser
         getPrivilege()
     End Sub
 
-    Public Sub SaveUser()
+    Public Sub SaveUser(Optional ByVal isNew As Boolean = True)
         mySql = "SELECT * FROM " & fillData
+        If Not isNew Then mySql &= " WHERE UserID = " & _userID
+
         Dim ds As DataSet = LoadSQL(mySql, fillData)
+        If isNew Then
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(fillData).NewRow
+            With dsNewRow
+                .Item("Username") = _userName
+                .Item("UserPass") = Encrypt(_password)
+                .Item("FullName") = _fullName
+                .Item("Privilege") = _privilege
+                .Item("LastLogin") = _lastLogin
+                .Item("EncoderID") = _encoderID
+                .Item("SystemInfo") = Now
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+        Else
+            With ds.Tables(0).Rows(0)
+                .Item("Username") = _userName
+                .Item("UserPass") = Encrypt(_password)
+                .Item("FullName") = _fullName
+                .Item("Privilege") = _privilege
+            End With
+        End If
 
-        Dim dsNewRow As DataRow
-        dsNewRow = ds.Tables(fillData).NewRow
-        With dsNewRow
-            .Item("Username") = _userName
-            .Item("UserPass") = Encrypt(_password)
-            .Item("FullName") = _fullName
-            .Item("Privilege") = _privilege
-            .Item("LastLogin") = _lastLogin
-            .Item("EncoderID") = _encoderID
-            .Item("SystemInfo") = Now
-        End With
-        ds.Tables(fillData).Rows.Add(dsNewRow)
-        database.SaveEntry(ds)
-
+        database.SaveEntry(ds, isNew)
         Console.WriteLine(_userName & " saved.")
     End Sub
 
