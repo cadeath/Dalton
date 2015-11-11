@@ -70,6 +70,17 @@ Public Class ComputerUser
         End Set
     End Property
 
+    Private _encoderID As Integer
+    Public Property EncoderID() As Integer
+        Get
+            Return _encoderID
+        End Get
+        Set(ByVal value As Integer)
+            _encoderID = value
+        End Set
+    End Property
+
+
 #End Region
 
 #Region "Privileges"
@@ -108,7 +119,7 @@ Public Class ComputerUser
         Console.WriteLine("Encoder : " & privList.Count & "| " & parts(y))
         For x = 0 To parts(y).Length - 1
             privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
-            _level = IIf(privList(x) = "1", "Encoder", "")
+            If privList(x) = "1" Then _level = "Encoder"
         Next
 
         'Supervisor
@@ -117,7 +128,7 @@ Public Class ComputerUser
         Console.WriteLine("Supervisor : " & privList.Count & "| " & parts(y))
         For x = 0 To parts(y).Length - 1
             privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
-            _level = IIf(privList(x) = "1", "Supervisor", "")
+            If privList(x) = "1" Then _level = "Supervisor"
         Next
 
         'Manager
@@ -126,7 +137,7 @@ Public Class ComputerUser
         Console.WriteLine("Manager : " & privList.Count & "| " & parts(y))
         For x = 0 To parts(y).Length - 1
             privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
-            _level = IIf(privList(x) = "1", "Manager", "")
+            If privList(x) = "1" Then _level = "Manager"
         Next
 
 
@@ -139,6 +150,19 @@ Public Class ComputerUser
         Next
 
         Console.WriteLine("Level is " & _level)
+    End Sub
+
+    Private Sub getPrivilege()
+        Dim superAdmin As String = "PDuNxp8S9q0="
+        'mySql = "SELECT * FROM " & fillData & " WHERE UserID = " & _userID
+        'Dim ds As DataSet = LoadSQL(mySql)
+
+        '_privilege = ds.Tables(0).Rows(0).Item("Privilege")
+        If _privilege = superAdmin Then
+            _level = "Super User"
+        Else
+            UpdatePrivilege()
+        End If
     End Sub
 #End Region
 
@@ -178,6 +202,29 @@ Public Class ComputerUser
             _privilege = .Item("Privilege")
             _lastLogin = .Item("LastLogin")
         End With
+
+        getPrivilege()
+    End Sub
+
+    Public Sub SaveUser()
+        mySql = "SELECT * FROM " & fillData
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("Username") = _userName
+            .Item("UserPass") = Encrypt(_password)
+            .Item("FullName") = _fullName
+            .Item("Privilege") = _privilege
+            .Item("LastLogin") = _lastLogin
+            .Item("EncoderID") = _encoderID
+            .Item("SystemInfo") = Now
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+        database.SaveEntry(ds)
+
+        Console.WriteLine(_userName & " saved.")
     End Sub
 
     Public Sub LoadUser(ByVal id As Integer)

@@ -1,5 +1,9 @@
 ﻿Public Class frmUserManagement
 
+    Private Sub frmUserManagement_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        ClearFields()
+    End Sub
+
     Private Sub frmUserManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim tmp As New ComputerUser
         tmp.CreateAdministrator()
@@ -32,6 +36,13 @@
         txtFullname.Text = ""
         txtPass1.Text = ""
         txtPass2.Text = ""
+
+        lvUsers.Items.Clear()
+
+        chkEnAll.Checked = False
+        chkSuAll.Checked = False
+        chkMaAll.Checked = False
+        chkSpAll.Checked = False
     End Sub
 
     Private Function Privileger() As String
@@ -136,9 +147,24 @@
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        If txtPass1.Text <> txtPass2.Text Then
+            MsgBox("Password is not MATCHED", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
         Console.WriteLine("Priv is " & Privileger())
         Dim tmpUser As New ComputerUser
+
+        tmpUser.UserName = txtUser.Text
+        tmpUser.Password = txtPass2.Text
+        tmpUser.FullName = txtFullname.Text
         tmpUser.Privilege = Privileger()
         tmpUser.UpdatePrivilege()
+        tmpUser.EncoderID = UserID
+
+        tmpUser.SaveUser()
+        MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information)
+        ClearFields()
+        LoadActive()
     End Sub
 End Class
