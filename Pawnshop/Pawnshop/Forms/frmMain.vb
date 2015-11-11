@@ -109,6 +109,10 @@
     End Sub
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
+        If Not POSuser.canPawn Then
+            MsgBoxAuthoriation("You don't have access to pawning")
+            Exit Sub
+        End If
         frmPawning.Show()
     End Sub
 
@@ -129,5 +133,9 @@
             NotYetLogin()
             frmLogin.Show()
         End If
+    End Sub
+
+    Private Sub MsgBoxAuthoriation(ByVal msg As String)
+        MsgBox(msg, MsgBoxStyle.Critical, "Authorization Invalid")
     End Sub
 End Class

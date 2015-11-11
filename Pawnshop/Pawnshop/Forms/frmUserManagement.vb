@@ -235,7 +235,7 @@
             End If
             With selectedUser
                 .FullName = txtFullname.Text
-                .Password = txtPass2.Text
+                .Password = txtPass1.Text
                 .Privilege = Privileger()
                 .UpdatePrivilege()
 

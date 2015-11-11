@@ -80,7 +80,6 @@ Public Class ComputerUser
         End Set
     End Property
 
-
 #End Region
 
 #Region "Privileges"
@@ -257,42 +256,55 @@ Public Class ComputerUser
 
     Public Sub UpdatePrivilege()
         Dim parts() As String = _privilege.Split("|")
-        Dim privList() As Boolean = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
         Dim x As Integer, y As Integer
         'Encoder
         y = 0
-        Console.WriteLine("Encoder : " & privList.Count & "| " & parts(y))
-        For x = 0 To parts(y).Length - 1
-            privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
-            If privList(x) = "1" Then _level = "Encoder"
+        _pawn = IIf(parts(y).Substring(0, 1) = "1", True, False)
+        _clientList = IIf(parts(y).Substring(1, 1) = "1", True, False)
+        _moneyTransfer = IIf(parts(y).Substring(2, 1) = "1", True, False)
+        _insurance = IIf(parts(y).Substring(3, 1) = "1", True, False)
+        _layAway = IIf(parts(y).Substring(4, 1) = "1", True, False)
+        _dollarBuying = IIf(parts(y).Substring(5, 1) = "1", True, False)
+        _pos = IIf(parts(y).Substring(6, 1) = "1", True, False)
+        _cio = IIf(parts(y).Substring(7, 1) = "1", True, False)
+        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+        For Each var As Boolean In privList
+            If var Then _level = "Encoder"
         Next
 
         'Supervisor
         y = 1
-        privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
-        Console.WriteLine("Supervisor : " & privList.Count & "| " & parts(y))
-        For x = 0 To parts(y).Length - 1
-            privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
-            If privList(x) = "1" Then _level = "Supervisor"
+        _expiryList = IIf(parts(y).Substring(0, 1) = "1", True, False)
+        _journalEntries = IIf(parts(y).Substring(1, 1) = "1", True, False)
+        _cashCount = IIf(parts(y).Substring(2, 1) = "1", True, False)
+        _backUp = IIf(parts(y).Substring(3, 1) = "1", True, False)
+        _viewUserManagement = IIf(parts(y).Substring(8, 1) = "1", True, False)
+        _viewRates = IIf(parts(y).Substring(9, 1) = "1", True, False)
+        _openStore = IIf(parts(y).Substring(10, 1) = "1", True, False)
+
+        privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _
+                    _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+        For Each var As Boolean In privList
+            If var Then _level = "Supervisor"
         Next
 
         'Manager
         y = 2
+        _userManagement = IIf(parts(y).Substring(0, 1) = "1", True, False)
+        _updateRates = IIf(parts(y).Substring(1, 1) = "1", True, False)
+        _settings = IIf(parts(y).Substring(2, 1) = "1", True, False)
+        _borrow = IIf(parts(y).Substring(3, 1) = "1", True, False)
         privList = {_userManagement, _updateRates, _settings, _borrow}
-        Console.WriteLine("Manager : " & privList.Count & "| " & parts(y))
-        For x = 0 To parts(y).Length - 1
-            privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
-            If privList(x) = "1" Then _level = "Manager"
+        For Each var As Boolean In privList
+            If var Then _level = "Manager"
         Next
-
 
         'Special
         y = 3
+        _cashInBank = IIf(parts(y).Substring(0, 1) = "1", True, False)
+        _cashOutBank = IIf(parts(y).Substring(1, 1) = "1", True, False)
+        _void = IIf(parts(y).Substring(2, 1) = "1", True, False)
         privList = {_cashInBank, _cashOutBank, _void}
-        Console.WriteLine("Special : " & privList.Count & "| " & parts(y))
-        For x = 0 To parts(y).Length - 1
-            privList(x) = IIf(parts(y).Substring(x, 1) = "1", True, False)
-        Next
 
         Console.WriteLine("Level is " & _level)
     End Sub
@@ -349,7 +361,7 @@ Public Class ComputerUser
     End Sub
 
     Public Sub LoadUserByRow(ByVal dr As DataRow)
-        On Error Resume Next
+        'On Error Resume Next
 
         With dr
             _userID = .Item("UserID")
