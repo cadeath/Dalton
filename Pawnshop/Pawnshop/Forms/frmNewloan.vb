@@ -84,6 +84,7 @@
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpUser As New ComputerUser
             tmpUser.LoadUserByRow(dr)
+            Console.WriteLine(tmpUser.FullName & " loaded.")
 
             appraisal.Add(tmpUser.UserID, tmpUser.UserName)
         Next
