@@ -99,7 +99,7 @@ Partial Class frmLogin
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.CancelButton = Me.btnExit
-        Me.ClientSize = New System.Drawing.Size(299, 240)
+        Me.ClientSize = New System.Drawing.Size(301, 241)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.txtPassword)
