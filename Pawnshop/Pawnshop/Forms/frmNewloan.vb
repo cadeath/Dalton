@@ -5,6 +5,7 @@
     Dim currentPawnTicket As Integer = GetLastNum()
     Dim currentOR As Integer = GetORNum()
     Dim transactionType As String
+    Dim appraisal As Hashtable
 
     Private Function GetORNum() As Integer
         Return GetOption("ORLastNum")
@@ -75,8 +76,21 @@
 
     Private Sub LoadAppraisers()
         Dim users() As String = {"Eskie", "Frances", "Mai2", "Jayr"}
+
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        appraisal.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpUser As New ComputerUser
+            tmpUser.LoadUserByRow(dr)
+
+            appraisal.Add(tmpUser.UserID, tmpUser.UserName)
+        Next
+
+
         cboAppraiser.Items.Clear()
-        cboAppraiser.Items.AddRange(users)
+        cboAppraiser.Items.AddRange(appraisal.Values)
     End Sub
 
     Private Sub AddPTNumber()
