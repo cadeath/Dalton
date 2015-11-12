@@ -80,17 +80,22 @@
         Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
         Dim ds As DataSet = LoadSQL(mySql)
 
-        appraisal.Clear()
+        Try
+            appraisal = New Hashtable
+            appraisal.Clear()
+            cboAppraiser.Items.Clear()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpUser As New ComputerUser
             tmpUser.LoadUserByRow(dr)
+            Console.WriteLine(tmpUser.FullName & " loaded.")
 
             appraisal.Add(tmpUser.UserID, tmpUser.UserName)
+            cboAppraiser.Items.Add(tmpUser.UserName)
         Next
-
-
-        cboAppraiser.Items.Clear()
-        cboAppraiser.Items.AddRange(appraisal.Values)
     End Sub
 
     Private Sub AddPTNumber()
@@ -136,6 +141,12 @@
 
     Private Sub txtless_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
+    End Sub
+
+    Private Sub frmNewloan_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        For Each eL As DictionaryEntry In appraisal
+            Console.WriteLine(eL)
+        Next
     End Sub
 
     Private Sub frmNewloan_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -257,8 +268,9 @@
         txtRenewDue.Text = tk.RenewDue
         txtRedeemDue.Text = tk.RedeemDue
 
-        LoadAppraisers()
-        cboAppraiser.Text = GetAppraiserById(tk.AppraiserID)
+        Dim appraiser As New ComputerUser
+        appraiser.LoadUser(tk.AppraiserID)
+        cboAppraiser.Text = appraiser.UserName
 
         PawnItem = tk
 
@@ -509,7 +521,7 @@
                 .Principal = txtPrincipal.Text
             End If
             .NetAmount = txtTotal.Text
-            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
+            .AppraiserID = appraisal(cboAppraiser.Text)
             .Status = transactionType
             If transactionType <> "L" Then
                 .Interest = txtDelayInt.Text
@@ -602,13 +614,6 @@
             Case "RING" : Return 17
             Case Else : Return 99
         End Select
-    End Function
-
-    Private Function GetAppraiserById(ByVal id As Integer) As String
-        Dim app() As String
-        app = {"Eskie", "Frances", "Mai2", "Jayr"}
-
-        Return app(id)
     End Function
 
     Private Function GetAppraiserID(ByVal name As String) As Integer
@@ -880,5 +885,5 @@
             txtAppraisal.Focus()
         End If
     End Sub
-End Class
 
+End Class
