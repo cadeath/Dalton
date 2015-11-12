@@ -421,7 +421,7 @@
         End With
     End Sub
 
-    Private Sub ChangeStatus(ByVal str As String)
+    Public Sub ChangeStatus(ByVal str As String)
         mySql = "SELECT * FROM " & fillData & " WHERE PawnID = " & _pawnid
         ds = LoadSQL(mySql, fillData)
 
