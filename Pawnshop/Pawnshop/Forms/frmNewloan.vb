@@ -5,7 +5,7 @@
     Dim currentPawnTicket As Integer = GetLastNum()
     Dim currentOR As Integer = GetORNum()
     Dim transactionType As String
-    Dim appraisal As Hashtable
+    Dim appraiser As Hashtable
 
     Private Function GetORNum() As Integer
         Return GetOption("ORLastNum")
@@ -80,18 +80,18 @@
         Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
         Dim ds As DataSet = LoadSQL(mySql)
 
-        appraisal.Clear()
+        appraiser.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpUser As New ComputerUser
             tmpUser.LoadUserByRow(dr)
             Console.WriteLine(tmpUser.FullName & " loaded.")
 
-            appraisal.Add(tmpUser.UserID, tmpUser.UserName)
+            appraiser.Add(tmpUser.UserID, tmpUser.UserName)
         Next
 
 
         cboAppraiser.Items.Clear()
-        cboAppraiser.Items.AddRange(appraisal.Values)
+        cboAppraiser.Items.AddRange(appraiser.Values)
     End Sub
 
     Private Sub AddPTNumber()
@@ -613,14 +613,12 @@
     End Function
 
     Private Function GetAppraiserID(ByVal name As String) As Integer
-        Select Case name
-            Case "Eskie" : Return 0
-            Case "Frances" : Return 1
-            Case "Mai2" : Return 2
-            Case "Jayr" : Return 3
-            Case Else
-                Return 99
-        End Select
+        For Each user In appraiser
+            If user.value = name Then
+                Return user.key
+            End If
+        Next
+        Return 999999
     End Function
 
     Private Sub cboCategory_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboCategory.KeyPress

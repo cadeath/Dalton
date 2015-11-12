@@ -256,7 +256,7 @@ Public Class ComputerUser
 
     Public Sub UpdatePrivilege()
         Dim parts() As String = _privilege.Split("|")
-        Dim x As Integer, y As Integer
+        Dim y As Integer
         'Encoder
         y = 0
         _pawn = IIf(parts(y).Substring(0, 1) = "1", True, False)
