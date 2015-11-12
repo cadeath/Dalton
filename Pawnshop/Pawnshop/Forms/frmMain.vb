@@ -95,7 +95,7 @@
     End Sub
 
     Private Sub btnMoneyTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMoneyTransfer.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canMoneyTransfer Then
             MsgBoxAuthoriation("You don't have access to Money Transfer")
@@ -105,7 +105,7 @@
     End Sub
 
     Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canDollarBuying Then
             MsgBoxAuthoriation("You don't have access to Dollar Buying")
@@ -115,7 +115,7 @@
     End Sub
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canCashInOut Then
             MsgBoxAuthoriation("You don't have access to Cash In/Out")
@@ -133,7 +133,7 @@
     End Sub
 
     Private Sub btnClient_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClient.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canClientManage Then
             MsgBoxAuthoriation("You don't have access to Client Management")
@@ -147,7 +147,7 @@
     End Sub
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canPawn Then
             MsgBoxAuthoriation("You don't have access to pawning")
@@ -161,7 +161,7 @@
     End Sub
 
     Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canBorrow Then
             MsgBoxAuthoriation("You don't have access to Borrowings")
@@ -187,7 +187,7 @@
     End Sub
 
     Private Sub btnInsurance_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsurance.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canInsurance Then
             MsgBoxAuthoriation("You don't have access to insurance.")
@@ -197,7 +197,7 @@
     End Sub
 
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canLayAway Then
             MsgBoxAuthoriation("You don't have access to Lay away.")
@@ -206,7 +206,7 @@
     End Sub
 
     Private Sub btnPOS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPOS.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canPOS Then
             MsgBoxAuthoriation("You don't have access to POS")
@@ -215,7 +215,7 @@
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         If Not POSuser.canCashCount Then
             MsgBoxAuthoriation("You don't have access to Cash Count")
@@ -231,6 +231,6 @@
     End Sub
 
     Private Sub UpdateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdateToolStripMenuItem.Click
-        If dateSet Then MsgBox("Please Open the Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
     End Sub
 End Class

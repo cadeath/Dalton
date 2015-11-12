@@ -354,7 +354,7 @@ Partial Class frmMain
         '
         Me.tsCurrentDate.Name = "tsCurrentDate"
         Me.tsCurrentDate.Size = New System.Drawing.Size(70, 17)
-        Me.tsCurrentDate.Text = "Please login"
+        Me.tsCurrentDate.Text = "Date not set"
         '
         'tsUser
         '
