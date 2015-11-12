@@ -60,8 +60,8 @@ Partial Class frmMain
         Me.btnPawning = New System.Windows.Forms.Button()
         Me.statusStrip = New System.Windows.Forms.StatusStrip()
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -354,11 +354,7 @@ Partial Class frmMain
         '
         Me.tsCurrentDate.Name = "tsCurrentDate"
         Me.tsCurrentDate.Size = New System.Drawing.Size(70, 17)
-        Me.tsCurrentDate.Text = "Please login"
-        '
-        'tmrCurrent
-        '
-        Me.tmrCurrent.Enabled = True
+        Me.tsCurrentDate.Text = "Date not set"
         '
         'tsUser
         '
@@ -366,6 +362,10 @@ Partial Class frmMain
         Me.tsUser.Name = "tsUser"
         Me.tsUser.Size = New System.Drawing.Size(68, 17)
         Me.tsUser.Text = "No User yet"
+        '
+        'tmrCurrent
+        '
+        Me.tmrCurrent.Enabled = True
         '
         'frmMain
         '
