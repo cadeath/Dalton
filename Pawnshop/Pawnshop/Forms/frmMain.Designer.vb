@@ -61,6 +61,7 @@ Partial Class frmMain
         Me.statusStrip = New System.Windows.Forms.StatusStrip()
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
+        Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -342,7 +343,7 @@ Partial Class frmMain
         '
         'statusStrip
         '
-        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate})
+        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser})
         Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
         Me.statusStrip.Size = New System.Drawing.Size(936, 22)
@@ -352,12 +353,19 @@ Partial Class frmMain
         'tsCurrentDate
         '
         Me.tsCurrentDate.Name = "tsCurrentDate"
-        Me.tsCurrentDate.Size = New System.Drawing.Size(57, 17)
-        Me.tsCurrentDate.Text = "Today is: "
+        Me.tsCurrentDate.Size = New System.Drawing.Size(70, 17)
+        Me.tsCurrentDate.Text = "Please login"
         '
         'tmrCurrent
         '
         Me.tmrCurrent.Enabled = True
+        '
+        'tsUser
+        '
+        Me.tsUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.tsUser.Name = "tsUser"
+        Me.tsUser.Size = New System.Drawing.Size(68, 17)
+        Me.tsUser.Text = "No User yet"
         '
         'frmMain
         '
@@ -424,5 +432,6 @@ Partial Class frmMain
     Friend WithEvents tsCurrentDate As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tmrCurrent As System.Windows.Forms.Timer
     Friend WithEvents LogOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsUser As System.Windows.Forms.ToolStripStatusLabel
 
 End Class

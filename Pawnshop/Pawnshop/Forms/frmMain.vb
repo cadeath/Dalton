@@ -27,6 +27,12 @@
         CashCountToolStripMenuItem.Enabled = Not st
         BackupToolStripMenuItem.Enabled = Not st
 
+        If st Then
+            tsUser.Text = "No User yet"
+        Else
+            tsUser.Text = "Greetings " & POSuser.FullName
+        End If
+
         'Reports
 
     End Sub
