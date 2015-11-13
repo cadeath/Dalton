@@ -12,6 +12,8 @@ Module mod_system
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
     Public BranchCode As String = "ROX"
+
+    Friend isAuthorized As Boolean = False
 #End Region
 
     Friend Sub CreateEsk(ByVal url As String, ByVal data As Hashtable)

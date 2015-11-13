@@ -4,8 +4,7 @@
     Dim PawnItem As PawnTicket, VoidPawnItem As PawnTicket
     Dim currentPawnTicket As Integer = GetLastNum()
     Dim currentOR As Integer = GetORNum()
-    Dim transactionType As String
-    Dim appraiser As Hashtable
+    Dim transactionType As String, appraiser As Hashtable
 
     Private Function GetORNum() As Integer
         Return GetOption("ORLastNum")
@@ -75,23 +74,19 @@
     End Sub
 
     Private Sub LoadAppraisers()
-        Dim users() As String = {"Eskie", "Frances", "Mai2", "Jayr"}
-
         Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
         Dim ds As DataSet = LoadSQL(mySql)
 
-        appraiser.Clear()
+        appraiser = New Hashtable
+        cboAppraiser.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpUser As New ComputerUser
             tmpUser.LoadUserByRow(dr)
             Console.WriteLine(tmpUser.FullName & " loaded.")
 
             appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+            cboAppraiser.Items.Add(tmpUser.UserName)
         Next
-
-
-        cboAppraiser.Items.Clear()
-        cboAppraiser.Items.AddRange(appraiser.Values)
     End Sub
 
     Private Sub AddPTNumber()
@@ -458,6 +453,7 @@
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not mod_system.isAuthorized Then diagAuthorization.Show() : Exit Sub
         If Not CompleteFields() Then Exit Sub
 
         If Not checkPayments() Then
@@ -606,14 +602,18 @@
     End Function
 
     Private Function GetAppraiserById(ByVal id As Integer) As String
-        Dim app() As String
-        app = {"Eskie", "Frances", "Mai2", "Jayr"}
+        For Each user In appraiser
+            If user.key = id Then
+                Return user.value
+            End If
+        Next
 
-        Return app(id)
+        Return "N/A"
     End Function
 
     Private Function GetAppraiserID(ByVal name As String) As Integer
         For Each user In appraiser
+            Console.Write(user.value & " USER VALUE")
             If user.value = name Then
                 Return user.key
             End If
@@ -625,6 +625,13 @@
         If isEnter(e) Then
             txtDesc.Focus()
         End If
+    End Sub
+
+    Private Sub cboAppraiser_DropDownClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboAppraiser.DropDownClosed
+        diagAuthorization.Show()
+        diagAuthorization.fromForm = Me
+        diagAuthorization.txtUser.Text = cboAppraiser.Text
+        diagAuthorization.txtUser.ReadOnly = True
     End Sub
 
     Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
@@ -877,6 +884,14 @@
             txtGrams.Focus()
         Else
             txtAppraisal.Focus()
+        End If
+    End Sub
+
+    Private Sub cboAppraiser_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboAppraiser.SelectedIndexChanged
+        If POSuser.UserName = cboAppraiser.Text Then
+            mod_system.isAuthorized = True
+        Else
+            mod_system.isAuthorized = False
         End If
     End Sub
 End Class
