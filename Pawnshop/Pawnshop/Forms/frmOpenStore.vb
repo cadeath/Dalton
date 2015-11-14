@@ -10,7 +10,10 @@
 
     Private Sub btnSetup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetup.Click
         CurrentDate = dtpCurrentDate.Value
-        MsgBox("Today is" & vbCr & dtpCurrentDate.Value.ToString("MMM d, yyyy"), MsgBoxStyle.Information, "Current Date Set")
+        Dim ans As DialogResult = MsgBox("TODAY IS: " & vbCrLf & dtpCurrentDate.Value.ToString("MMM d, yyyy"), MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Please CHECK")
+        If Not ans = Windows.Forms.DialogResult.Yes Then
+            Exit Sub
+        End If
         frmMain.dateSet = True
         Me.Close()
     End Sub

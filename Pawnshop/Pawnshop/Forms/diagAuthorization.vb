@@ -7,6 +7,11 @@
 
     End Sub
 
+    Friend Sub LoadUser(ByVal pos As ComputerUser)
+        txtUser.Text = pos.UserName
+        txtUser.ReadOnly = True
+    End Sub
+
     Private Sub verify()
         Static err As Integer
 

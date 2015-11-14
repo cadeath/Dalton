@@ -21,6 +21,8 @@
     End Sub
 
     Private Sub ItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboItemtype.SelectedIndexChanged
+        ComputeNetAmount()
+
         cboCategory.Items.Clear()
         cboCategory.Text = ""
         'Enable Grams and Karat
@@ -413,7 +415,19 @@
     End Sub
 
     Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
-        txtTotal.Text = txtPrincipal.Text
+        ComputeNetAmount()
+    End Sub
+
+    Private Sub ComputeNetAmount()
+        If txtPrincipal.Text = "" Then Exit Sub
+
+        If advanceInterestNumberofMonth > 0 Then
+            Dim int = GetPawnshop(30, cboItemtype.Text)
+
+            txtTotal.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * int)
+        Else
+            txtTotal.Text = txtPrincipal.Text
+        End If
     End Sub
 
     Private Function checkPayments() As Boolean
@@ -453,7 +467,7 @@
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If Not mod_system.isAuthorized Then diagAuthorization.Show() : Exit Sub
+        If Not mod_system.isAuthorized Then OpenAuthorization() : Exit Sub
         If Not CompleteFields() Then Exit Sub
 
         If Not checkPayments() Then
@@ -508,6 +522,7 @@
             .NetAmount = txtTotal.Text
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
             .Status = transactionType
+            .AdvanceInterestPerDays = advanceInterestNumberofMonth
             If transactionType <> "L" Then
                 .Interest = txtDelayInt.Text
                 .OldTicket = txtNticket.Text
@@ -628,10 +643,19 @@
     End Sub
 
     Private Sub cboAppraiser_DropDownClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboAppraiser.DropDownClosed
+        OpenAuthorization()
+    End Sub
+
+    Private Sub OpenAuthorization()
+        If POSuser.UserName = cboAppraiser.Text Then
+            mod_system.isAuthorized = True
+            Exit Sub
+        End If
         diagAuthorization.Show()
         diagAuthorization.fromForm = Me
-        diagAuthorization.txtUser.Text = cboAppraiser.Text
-        diagAuthorization.txtUser.ReadOnly = True
+        Dim tmpUser As New ComputerUser
+        tmpUser.LoadUser(GetAppraiserID(cboAppraiser.Text))
+        diagAuthorization.LoadUser(tmpUser)
     End Sub
 
     Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
@@ -687,7 +711,11 @@
     Private Function GetInterest(ByVal principal As Double) As Double
         Dim int As Double
         Dim diff = CurrentDate - PawnItem.LoanDate
-        int = GetPawnshop(diff.Days, PawnItem.ItemType)
+        If PawnItem.AdvanceInterestPerDays > diff.Days Then
+            int = 0
+        Else
+            int = GetPawnshop(diff.Days - PawnItem.AdvanceInterestPerDays, PawnItem.ItemType)
+        End If
 
         Console.WriteLine("GetInterest")
         Console.WriteLine("Loan: " & PawnItem.LoanDate)
@@ -726,6 +754,11 @@
     End Sub
 
     Friend Sub SwitchTransaction(ByVal typ As String)
+        Try
+
+        Catch ex As Exception
+
+        End Try
         If transactionType = "L" Then Exit Sub
 
         'Buttons
@@ -866,7 +899,7 @@
     End Sub
 
     Private Function GetOldPT() As Integer
-        On Error Resume Next
+        'On Error Resume Next
 
         Dim pt As Integer = PawnItem.PawnTicket
         Dim ds As DataSet, mySql As String = _
@@ -894,5 +927,5 @@
             mod_system.isAuthorized = False
         End If
     End Sub
-End Class
 
+End Class

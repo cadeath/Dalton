@@ -14,6 +14,7 @@ Module mod_system
     Public BranchCode As String = "ROX"
 
     Friend isAuthorized As Boolean = False
+    Public advanceInterestNumberofMonth As Integer = 33
 #End Region
 
     Friend Sub CreateEsk(ByVal url As String, ByVal data As Hashtable)
