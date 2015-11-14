@@ -711,10 +711,18 @@
     Private Function GetInterest(ByVal principal As Double) As Double
         Dim int As Double
         Dim diff = CurrentDate - PawnItem.LoanDate
-        If PawnItem.AdvanceInterestPerDays > diff.Days Then
-            int = 0
+        If PawnItem.OldTicket = 0 Then
+            If PawnItem.AdvanceInterestPerDays > diff.Days Then
+                int = 0
+            Else
+                If diff.Days - PawnItem.AdvanceInterestPerDays >= 9 Then
+                    int = GetPawnshop(diff.Days - PawnItem.AdvanceInterestPerDays, PawnItem.ItemType)
+                Else
+                    int = GetPawnshop(9, PawnItem.ItemType)
+                End If
+            End If
         Else
-            int = GetPawnshop(diff.Days - PawnItem.AdvanceInterestPerDays, PawnItem.ItemType)
+            int = GetPawnshop(diff.Days, PawnItem.ItemType)
         End If
 
         Console.WriteLine("GetInterest")
@@ -725,6 +733,9 @@
         Console.WriteLine("Int: " & int)
         Console.WriteLine("Prin: " & principal)
         Console.WriteLine("NetDue: " & int * principal)
+        If advanceInterestNumberofMonth > 0 Then
+            Console.WriteLine("with One Month Advance Interest")
+        End If
 
         Return principal * int
     End Function
