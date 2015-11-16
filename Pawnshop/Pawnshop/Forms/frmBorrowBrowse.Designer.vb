@@ -23,6 +23,7 @@ Partial Class frmBorrowBrowse
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"ROX00001", "11/01/2015", "PEN", "(1000)", "wala kwarta"}, -1)
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBorrowBrowse))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.txtDate = New System.Windows.Forms.TextBox()
@@ -325,6 +326,7 @@ Partial Class frmBorrowBrowse
         Me.Controls.Add(Me.lvBorrowings)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmBorrowBrowse"
         Me.Text = "Borrowing List"
