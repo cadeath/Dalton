@@ -134,6 +134,7 @@
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
@@ -150,10 +151,10 @@
     <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\diagPayloan.Designer.vb">
-      <DependentUpon>diagPayloan.vb</DependentUpon>
+    <Compile Include="Forms\diagAuthorization.Designer.vb">
+      <DependentUpon>diagAuthorization.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\diagPayloan.vb">
+    <Compile Include="Forms\diagAuthorization.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
@@ -228,6 +229,12 @@
     <Compile Include="Forms\frmInsurance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -269,12 +276,6 @@
       <DependentUpon>frmPawning.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmPawning.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmPawnTrans.Designer.vb">
-      <DependentUpon>frmPawnTrans.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmPawnTrans.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmSettings.Designer.vb">
@@ -328,8 +329,8 @@
     <EmbeddedResource Include="Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\diagPayloan.resx">
-      <DependentUpon>diagPayloan.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\diagAuthorization.resx">
+      <DependentUpon>diagAuthorization.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>
@@ -367,6 +368,9 @@
     <EmbeddedResource Include="Forms\frmLayAway.resx">
       <DependentUpon>frmLayAway.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -387,9 +391,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawning.resx">
       <DependentUpon>frmPawning.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmPawnTrans.resx">
-      <DependentUpon>frmPawnTrans.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>

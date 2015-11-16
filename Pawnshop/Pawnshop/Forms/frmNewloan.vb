@@ -4,7 +4,7 @@
     Dim PawnItem As PawnTicket, VoidPawnItem As PawnTicket
     Dim currentPawnTicket As Integer = GetLastNum()
     Dim currentOR As Integer = GetORNum()
-    Dim transactionType As String
+    Dim transactionType As String, appraiser As Hashtable
 
     Private Function GetORNum() As Integer
         Return GetOption("ORLastNum")
@@ -21,6 +21,8 @@
     End Sub
 
     Private Sub ItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboItemtype.SelectedIndexChanged
+        ComputeNetAmount()
+
         cboCategory.Items.Clear()
         cboCategory.Text = ""
         'Enable Grams and Karat
@@ -74,9 +76,19 @@
     End Sub
 
     Private Sub LoadAppraisers()
-        Dim users() As String = {"Eskie", "Frances", "Mai2", "Jayr"}
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        appraiser = New Hashtable
         cboAppraiser.Items.Clear()
-        cboAppraiser.Items.AddRange(users)
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpUser As New ComputerUser
+            tmpUser.LoadUserByRow(dr)
+            Console.WriteLine(tmpUser.FullName & " loaded.")
+
+            appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+            cboAppraiser.Items.Add(tmpUser.UserName)
+        Next
     End Sub
 
     Private Sub AddPTNumber()
@@ -403,7 +415,19 @@
     End Sub
 
     Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
-        txtTotal.Text = txtPrincipal.Text
+        ComputeNetAmount()
+    End Sub
+
+    Private Sub ComputeNetAmount()
+        If txtPrincipal.Text = "" Then Exit Sub
+
+        If advanceInterestNumberofMonth > 0 Then
+            Dim int = GetPawnshop(30, cboItemtype.Text)
+
+            txtTotal.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * int)
+        Else
+            txtTotal.Text = txtPrincipal.Text
+        End If
     End Sub
 
     Private Function checkPayments() As Boolean
@@ -428,13 +452,13 @@
 
         'Jewel
         If cboItemtype.Text = "JWL" Then
-            If txtGrams.Text = "" Then txtGrams.Focus() : ret = False
+            If txtGrams.Text = "" Or Not checkNumeric(txtGrams) Then txtGrams.Focus() : ret = False
             If cboKarat.Text = "" Then cboKarat.Focus() : ret = False
         End If
 
         ' Ticket
-        If txtAppraisal.Text = "" Then txtAppraisal.Focus() : ret = False
-        If txtPrincipal.Text = "" Then txtPrincipal.Focus() : ret = False
+        If txtAppraisal.Text = "" Or Not checkNumeric(txtAppraisal) Then txtAppraisal.Focus() : ret = False
+        If txtPrincipal.Text = "" Or Not checkNumeric(txtPrincipal) Then txtPrincipal.Focus() : ret = False
         If txtTotal.Text = "" Then txtTotal.Focus() : ret = False
 
         If cboAppraiser.Text = "" Then cboAppraiser.Focus() : ret = False
@@ -443,12 +467,19 @@
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not mod_system.isAuthorized Then OpenAuthorization() : Exit Sub
         If Not CompleteFields() Then Exit Sub
 
         If Not checkPayments() Then
             MsgBox("Check payment", MsgBoxStyle.Critical, "Payment Problem")
             Exit Sub
         End If
+
+        Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
+        If ans = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
 
         Select Case transactionType
             Case "R"
@@ -491,6 +522,7 @@
             .NetAmount = txtTotal.Text
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
             .Status = transactionType
+            .AdvanceInterestPerDays = advanceInterestNumberofMonth
             If transactionType <> "L" Then
                 .Interest = txtDelayInt.Text
                 .OldTicket = txtNticket.Text
@@ -519,7 +551,7 @@
             Exit Sub
         End If
 
-        Dim ans As DialogResult = MsgBox("Do you want to enter more?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        ans = MsgBox("Do you want to enter more?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then
             frmPawning.LoadActive()
             Me.Close()
@@ -585,27 +617,45 @@
     End Function
 
     Private Function GetAppraiserById(ByVal id As Integer) As String
-        Dim app() As String
-        app = {"Eskie", "Frances", "Mai2", "Jayr"}
+        For Each user In appraiser
+            If user.key = id Then
+                Return user.value
+            End If
+        Next
 
-        Return app(id)
+        Return "N/A"
     End Function
 
     Private Function GetAppraiserID(ByVal name As String) As Integer
-        Select Case name
-            Case "Eskie" : Return 0
-            Case "Frances" : Return 1
-            Case "Mai2" : Return 2
-            Case "Jayr" : Return 3
-            Case Else
-                Return 99
-        End Select
+        For Each user In appraiser
+            Console.Write(user.value & " USER VALUE")
+            If user.value = name Then
+                Return user.key
+            End If
+        Next
+        Return 999999
     End Function
 
     Private Sub cboCategory_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboCategory.KeyPress
         If isEnter(e) Then
             txtDesc.Focus()
         End If
+    End Sub
+
+    Private Sub cboAppraiser_DropDownClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboAppraiser.DropDownClosed
+        OpenAuthorization()
+    End Sub
+
+    Private Sub OpenAuthorization()
+        If POSuser.UserName = cboAppraiser.Text Then
+            mod_system.isAuthorized = True
+            Exit Sub
+        End If
+        diagAuthorization.Show()
+        diagAuthorization.fromForm = Me
+        Dim tmpUser As New ComputerUser
+        tmpUser.LoadUser(GetAppraiserID(cboAppraiser.Text))
+        diagAuthorization.LoadUser(tmpUser)
     End Sub
 
     Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
@@ -661,7 +711,19 @@
     Private Function GetInterest(ByVal principal As Double) As Double
         Dim int As Double
         Dim diff = CurrentDate - PawnItem.LoanDate
-        int = GetPawnshop(diff.Days, PawnItem.ItemType)
+        If PawnItem.OldTicket = 0 Then
+            If PawnItem.AdvanceInterestPerDays > diff.Days Then
+                int = 0
+            Else
+                If diff.Days - PawnItem.AdvanceInterestPerDays >= 9 Then
+                    int = GetPawnshop(diff.Days - PawnItem.AdvanceInterestPerDays, PawnItem.ItemType)
+                Else
+                    int = GetPawnshop(9, PawnItem.ItemType)
+                End If
+            End If
+        Else
+            int = GetPawnshop(diff.Days, PawnItem.ItemType)
+        End If
 
         Console.WriteLine("GetInterest")
         Console.WriteLine("Loan: " & PawnItem.LoanDate)
@@ -671,6 +733,9 @@
         Console.WriteLine("Int: " & int)
         Console.WriteLine("Prin: " & principal)
         Console.WriteLine("NetDue: " & int * principal)
+        If advanceInterestNumberofMonth > 0 Then
+            Console.WriteLine("with One Month Advance Interest")
+        End If
 
         Return principal * int
     End Function
@@ -700,6 +765,11 @@
     End Sub
 
     Friend Sub SwitchTransaction(ByVal typ As String)
+        Try
+
+        Catch ex As Exception
+
+        End Try
         If transactionType = "L" Then Exit Sub
 
         'Buttons
@@ -807,6 +877,8 @@
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         Dim ans As DialogResult = _
         MsgBox("Do you want to void this transaction?", vbCritical + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "W A R N I N G")
+        Dim currentPT As Integer = PawnItem.PawnTicket
+
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         If PawnItem.LoanDate <> CurrentDate.Date Then
@@ -825,20 +897,20 @@
 
         PawnItem.LoadTicket(PawnItem.OldTicket, "PawnTicket")
         If PawnItem.OldTicket = Nothing Then
-            PawnItem.Status = "L"
+            PawnItem.ChangeStatus("L")
         Else
-            PawnItem.Status = "R"
+            PawnItem.ChangeStatus("R")
         End If
 
-        PawnItem.SaveTicket()
-        MsgBox("PT# " & PawnItem.PawnTicket & vbCr & "Is now VOID", MsgBoxStyle.Information)
+        'PawnItem.SaveTicket(False)
+        MsgBox("PT# " & currentPT & vbCr & "Is now VOID", MsgBoxStyle.Information)
 
         frmPawning.LoadActive()
         Me.Close()
     End Sub
 
     Private Function GetOldPT() As Integer
-        On Error Resume Next
+        'On Error Resume Next
 
         Dim pt As Integer = PawnItem.PawnTicket
         Dim ds As DataSet, mySql As String = _
@@ -854,7 +926,17 @@
     Private Sub txtDesc_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDesc.LostFocus
         If cboItemtype.Text = "JWL" Then
             txtGrams.Focus()
+        Else
+            txtAppraisal.Focus()
         End If
     End Sub
-End Class
 
+    Private Sub cboAppraiser_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboAppraiser.SelectedIndexChanged
+        If POSuser.UserName = cboAppraiser.Text Then
+            mod_system.isAuthorized = True
+        Else
+            mod_system.isAuthorized = False
+        End If
+    End Sub
+
+End Class
