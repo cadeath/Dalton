@@ -15,6 +15,8 @@ Module mod_system
 
     Friend isAuthorized As Boolean = False
     Public advanceInterestNumberofMonth As Integer = 33
+
+    Public backupPath As String = "."
 #End Region
 
     Friend Sub CreateEsk(ByVal url As String, ByVal data As Hashtable)
