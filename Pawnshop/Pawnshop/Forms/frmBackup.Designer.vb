@@ -40,12 +40,16 @@ Partial Class frmBackup
         Me.btnExecute = New System.Windows.Forms.Button()
         Me.btnBrowseFile = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.chkOn2 = New System.Windows.Forms.CheckBox()
+        Me.chkOn3 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.chkOn3)
+        Me.GroupBox1.Controls.Add(Me.chkOn2)
         Me.GroupBox1.Controls.Add(Me.chkPath3)
         Me.GroupBox1.Controls.Add(Me.chkPath2)
         Me.GroupBox1.Controls.Add(Me.chkPath1)
@@ -126,6 +130,7 @@ Partial Class frmBackup
         '
         Me.txtPath3.Location = New System.Drawing.Point(9, 202)
         Me.txtPath3.Name = "txtPath3"
+        Me.txtPath3.ReadOnly = True
         Me.txtPath3.Size = New System.Drawing.Size(239, 20)
         Me.txtPath3.TabIndex = 6
         '
@@ -142,6 +147,7 @@ Partial Class frmBackup
         '
         Me.txtPath2.Location = New System.Drawing.Point(9, 113)
         Me.txtPath2.Name = "txtPath2"
+        Me.txtPath2.ReadOnly = True
         Me.txtPath2.Size = New System.Drawing.Size(239, 20)
         Me.txtPath2.TabIndex = 3
         '
@@ -158,6 +164,7 @@ Partial Class frmBackup
         '
         Me.txtPath1.Location = New System.Drawing.Point(9, 32)
         Me.txtPath1.Name = "txtPath1"
+        Me.txtPath1.ReadOnly = True
         Me.txtPath1.Size = New System.Drawing.Size(239, 20)
         Me.txtPath1.TabIndex = 0
         '
@@ -205,21 +212,41 @@ Partial Class frmBackup
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnSave
         '
-        Me.Button1.Location = New System.Drawing.Point(458, 70)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(121, 23)
-        Me.Button1.TabIndex = 12
-        Me.Button1.Text = "&Save Settings"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(458, 70)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(121, 23)
+        Me.btnSave.TabIndex = 12
+        Me.btnSave.Text = "&Save Settings"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'chkOn2
+        '
+        Me.chkOn2.AutoSize = True
+        Me.chkOn2.Location = New System.Drawing.Point(208, 93)
+        Me.chkOn2.Name = "chkOn2"
+        Me.chkOn2.Size = New System.Drawing.Size(40, 17)
+        Me.chkOn2.TabIndex = 15
+        Me.chkOn2.Text = "On"
+        Me.chkOn2.UseVisualStyleBackColor = True
+        '
+        'chkOn3
+        '
+        Me.chkOn3.AutoSize = True
+        Me.chkOn3.Location = New System.Drawing.Point(208, 182)
+        Me.chkOn3.Name = "chkOn3"
+        Me.chkOn3.Size = New System.Drawing.Size(40, 17)
+        Me.chkOn3.TabIndex = 16
+        Me.chkOn3.Text = "On"
+        Me.chkOn3.UseVisualStyleBackColor = True
         '
         'frmBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(586, 284)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnBrowseFile)
         Me.Controls.Add(Me.btnExecute)
@@ -252,5 +279,7 @@ Partial Class frmBackup
     Friend WithEvents btnExecute As System.Windows.Forms.Button
     Friend WithEvents btnBrowseFile As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents chkOn3 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkOn2 As System.Windows.Forms.CheckBox
 End Class
