@@ -137,9 +137,9 @@
     End Sub
 
     Private Sub frmNewloan_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
-        For Each eL As DictionaryEntry In appraisal
-            Console.WriteLine(eL)
-        Next
+        'For Each eL As DictionaryEntry In appraisal
+        '    Console.WriteLine(eL)
+        'Next
     End Sub
 
     Private Sub frmNewloan_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
@@ -526,7 +526,7 @@
                 .Principal = txtPrincipal.Text
             End If
             .NetAmount = txtTotal.Text
-            .AppraiserID = appraisal(cboAppraiser.Text)
+            '.AppraiserID = appraisal(cboAppraiser.Text)
             .Status = transactionType
             .AdvanceInterestPerDays = advanceInterestNumberofMonth
             If transactionType <> "L" Then

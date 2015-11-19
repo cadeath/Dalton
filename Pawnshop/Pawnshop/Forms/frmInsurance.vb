@@ -8,9 +8,7 @@
     End Sub
 
     Private Sub txtHolder_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHolder.KeyPress
-        If isEnter(e) Then
-            btnSearch.Focus()
-        End If
+        If isEnter(e) Then btnSearch.PerformClick()
     End Sub
 
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
@@ -18,7 +16,7 @@
         btnNew.Enabled = False
         btnSave.Enabled = True
         btnBrowse.Enabled = False
-        txtAmount.ReadOnly = False
+        'txtAmount.ReadOnly = False
         btnSearch.Enabled = True
         txtCoi.Text = GetOption("InsuranceLastNum")
     End Sub
@@ -30,17 +28,26 @@
         txtHolder.Text = String.Format("{0} {1} {2}", cl.FirstName, cl.LastName, cl.Suffix)
         txtSenderAddr.Text = String.Format("{0} {1} {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
         txtBirthdate.Text = cl.Birthday.ToString("MMM dd, yyyy")
+
+        txtSenderID.Text = cl.IDType
+        txtSenderIDNum.Text = cl.IDNumber
+        txtBirthdate.Text = cl.Birthday
         Holder = cl
+
+        txtAmount.Focus()
     End Sub
 
     Private Sub txtAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmount.KeyPress
         DigitOnly(e)
         If isEnter(e) Then
-            btnSave.Focus()
+            btnSave.PerformClick()
         End If
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Posting")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
         Dim newInsurance As New Insurance
         With newInsurance
             .COInumber = txtCoi.Text
@@ -61,5 +68,9 @@
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        frmInsuranceList.Show()
     End Sub
 End Class

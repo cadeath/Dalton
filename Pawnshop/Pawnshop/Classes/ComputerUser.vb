@@ -315,7 +315,7 @@ Public Class ComputerUser
             _level = "Super User"
 
             Dim TabCnt As Integer = 4
-            Dim privList() As Boolean
+            Dim privList() As Boolean = {}
 
             For cnt As Integer = 0 To TabCnt - 1
                 Select Case cnt

@@ -206,6 +206,7 @@ Partial Class frmInsurance
         Me.txtAmount.ReadOnly = True
         Me.txtAmount.Size = New System.Drawing.Size(107, 25)
         Me.txtAmount.TabIndex = 4
+        Me.txtAmount.Text = "20"
         '
         'Label1
         '
