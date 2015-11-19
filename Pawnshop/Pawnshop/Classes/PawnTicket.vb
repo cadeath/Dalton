@@ -299,6 +299,17 @@
             Return _redeemDue
         End Get
     End Property
+
+    Private _advanceInterest As Integer
+    Public Property AdvanceInterestPerDays() As Integer
+        Get
+            Return _advanceInterest
+        End Get
+        Set(ByVal value As Integer)
+            _advanceInterest = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -340,6 +351,7 @@
             .Item("Status") = _status
             .Item("SystemInfo") = Now
             .Item("EncoderID") = UserID
+            .Item("AdvInt") = _advanceInterest
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
@@ -382,6 +394,7 @@
             _renewDue = .Item("RenewDue")
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
+            _advanceInterest = .Item("AdvInt")
         End With
     End Sub
 
@@ -418,6 +431,7 @@
             _renewDue = .Item("RenewDue")
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
+            _advanceInterest = .Item("AdvInt")
         End With
     End Sub
 

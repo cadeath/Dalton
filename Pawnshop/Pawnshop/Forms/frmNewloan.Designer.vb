@@ -22,6 +22,7 @@ Partial Class frmNewloan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNewloan))
         Me.grpPawner = New System.Windows.Forms.GroupBox()
         Me.lblAge = New System.Windows.Forms.Label()
         Me.txtPhone = New System.Windows.Forms.TextBox()
@@ -894,6 +895,7 @@ Partial Class frmNewloan
         Me.Controls.Add(Me.grpItem)
         Me.Controls.Add(Me.grpPawner)
         Me.Controls.Add(Me.lblVOID)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "frmNewloan"

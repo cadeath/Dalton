@@ -12,7 +12,31 @@ Module mod_system
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
     Public BranchCode As String = "ROX"
+
+    Friend isAuthorized As Boolean = False
+    Public advanceInterestNumberofMonth As Integer = 33
+
+    Public backupPath As String = "."
 #End Region
+
+    Public Function CommandPrompt(ByVal app As String, ByVal args As String) As String
+        Dim oProcess As New Process()
+        Dim oStartInfo As New ProcessStartInfo(app, args)
+        oStartInfo.UseShellExecute = False
+        oStartInfo.RedirectStandardOutput = True
+        oStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+        oStartInfo.CreateNoWindow = True
+        oProcess.StartInfo = oStartInfo
+
+        oProcess.Start()
+
+        Dim sOutput As String
+        Using oStreamReader As System.IO.StreamReader = oProcess.StandardOutput
+            sOutput = oStreamReader.ReadToEnd()
+        End Using
+
+        Return sOutput
+    End Function
 
     Friend Sub CreateEsk(ByVal url As String, ByVal data As Hashtable)
         If System.IO.File.Exists(url) Then System.IO.File.Delete(url)

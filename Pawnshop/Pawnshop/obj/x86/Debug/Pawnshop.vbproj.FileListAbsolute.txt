@@ -42,6 +42,11 @@ C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.fr
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmPOS.resources
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmInsurance.resources
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmLayAway.resources
+<<<<<<< HEAD
+=======
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Rar.exe
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\W3W1LH4CKU.FDB
+>>>>>>> refs/remotes/origin/Backup
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.exe
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.pdb
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.xml
@@ -56,9 +61,10 @@ D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Windows.Fo
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Xml.dll
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Xml.Linq.dll
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbprojResolveAssemblyReference.cache
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.devClient.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.devVerifyESK.resources
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.diagAuthorization.resources
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmBackup.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmDollarList.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmLayAwayLookUp.resources
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmBorrowBrowse.resources
@@ -88,6 +94,7 @@ D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbpr
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.xml
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.pdb
+<<<<<<< HEAD
 D:\cadeath\Documents\GitHub\Dalton-Pawning-Eskie\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe
 D:\cadeath\Documents\GitHub\Dalton-Pawning-Eskie\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.xml
 D:\cadeath\Documents\GitHub\Dalton-Pawning-Eskie\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.pdb
@@ -134,3 +141,5 @@ D:\cadeath\Documents\GitHub\Dalton-Pawning-Eskie\Pawnshop\Pawnshop\obj\x86\Debug
 D:\cadeath\Documents\GitHub\Dalton-Pawning-Eskie\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmItemLookUp.resources
 D:\cadeath\Documents\GitHub\Dalton-Pawning-Eskie\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmPOS.resources
 D:\cadeath\Documents\GitHub\Dalton-Pawning-Eskie\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbproj.GenerateResource.Cache
+=======
+>>>>>>> refs/remotes/origin/Backup
