@@ -121,7 +121,7 @@
 
         For y As Integer = 0 To privParts.Count - 1
             For x As Integer = 0 To privParts(y).Length - 1
-                Dim chkList() As CheckBox
+                Dim chkList() As CheckBox = {}
                 Select Case y
                     Case 0 'Encoder
                         chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO}

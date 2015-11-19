@@ -194,6 +194,7 @@
             Exit Sub
         End If
         'Insurance show form
+        frmInsurance.Show()
     End Sub
 
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click

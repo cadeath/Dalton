@@ -1,4 +1,6 @@
 ﻿' Changelog
+' v1.3 11/19/15
+'  - CommandPrompt Added
 ' v1.2 11/6/15
 '  - Added ESK File
 ' v1.1 10/20/15
