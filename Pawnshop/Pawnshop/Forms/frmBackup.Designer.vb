@@ -42,7 +42,7 @@ Partial Class frmBackup
         Me.btnBrowseFile = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
+        Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -233,11 +233,6 @@ Partial Class frmBackup
         Me.btnSave.Text = "&Save Settings"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'sfdPath
-        '
-        Me.sfdPath.DefaultExt = "noEXT"
-        Me.sfdPath.Filter = "Eskie|*.noEXT"
-        '
         'frmBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -278,5 +273,5 @@ Partial Class frmBackup
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents chkOn3 As System.Windows.Forms.CheckBox
     Friend WithEvents chkOn2 As System.Windows.Forms.CheckBox
-    Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
 End Class

@@ -115,7 +115,7 @@
     End Sub
 
     Friend Sub LoadCustomer(ByVal cl As Client)
-        On Error Resume Next
+        'On Error Resume Next
 
         txtClient.Text = String.Format("{0} {1}", cl.FirstName, cl.LastName)
         txtAddr.Text = String.Format("{0} {1}, {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)

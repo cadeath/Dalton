@@ -14,7 +14,15 @@
         If Not ans = Windows.Forms.DialogResult.Yes Then
             Exit Sub
         End If
+
+        If Not frmMain.dateSet Then
+            ans = MsgBox("Do you want to execute backup procedure?", MsgBoxStyle.YesNo + MsgBoxStyle.Information, "Daily Backup")
+            If ans = Windows.Forms.DialogResult.Yes Then
+                frmBackup.StartupExecute()
+            End If
+        End If
         frmMain.dateSet = True
+
         Me.Close()
     End Sub
 End Class

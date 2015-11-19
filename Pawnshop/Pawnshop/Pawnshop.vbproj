@@ -86,6 +86,9 @@
   <PropertyGroup>
     <ApplicationIcon>Antialiasfactory-Jewelry-Stone-Ring.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DeathCodez">
       <HintPath>.\DeathCodez.dll</HintPath>
@@ -134,6 +137,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />

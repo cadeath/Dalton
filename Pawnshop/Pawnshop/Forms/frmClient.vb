@@ -55,7 +55,7 @@ Public Class frmClient
 
     Private Delegate Sub LoadClient_delegate()
     Friend Sub LoadClients()
-        On Error Resume Next
+        'On Error Resume Next
 
         If lvClient.InvokeRequired Then
             lvClient.Invoke(New LoadClient_delegate(AddressOf LoadClients))
