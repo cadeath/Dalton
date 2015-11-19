@@ -33,8 +33,20 @@ Public Class Insurance
         End Get
         Set(ByVal value As Client)
             _client = value
+            _fullName = String.Format("{0} {1}", _client.FirstName, _client.LastName)
         End Set
     End Property
+
+    Private _fullName As String
+    Public Property ClientName() As String
+        Get
+            Return _fullName
+        End Get
+        Set(ByVal value As String)
+            _fullName = value
+        End Set
+    End Property
+
 
     Private _transDate As Date
     Public Property TransactionDate() As Date
@@ -53,6 +65,16 @@ Public Class Insurance
         End Get
         Set(ByVal value As Double)
             _amount = value
+        End Set
+    End Property
+
+    Private _status As String
+    Public Property Status() As String
+        Get
+            Return _status
+        End Get
+        Set(ByVal value As String)
+            _status = value
         End Set
     End Property
 
@@ -88,9 +110,11 @@ Public Class Insurance
         With dsNewRow
             .Item("CoiNo") = _coiNo
             .Item("ClientID") = _client.ID
+            .Item("ClientName") = _fullName
             .Item("TransDate") = _transDate
             .Item("Amount") = _amount
             .Item("ValidDate") = _validity
+            .Item("Status") = "A"
             .Item("EncoderID") = _encoderID
             .Item("SystemInfo") = Now
         End With
@@ -101,23 +125,36 @@ Public Class Insurance
 
     Public Sub LoadInsurance(ByVal id As String)
         mySql = "SELECT * FROM " & fillData & " WHERE InsuranceID = " & id
-        Dim ds As DataSet = LoadSQL(mySql)
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
 
         LoadByRow(ds.Tables(fillData).Rows(0))
     End Sub
 
     Public Sub LoadByRow(ByVal dr As DataRow)
         With dr
+            _id = .Item("InsuranceID")
             _coiNo = .Item("CoiNo")
             Dim tmpC As New Client
             tmpC.LoadClient(.Item("ClientID"))
             _client = tmpC
+            _fullName = String.Format("{0} {1}", _client.FirstName, _client.LastName)
             _transDate = .Item("TransDate")
             _amount = .Item("Amount")
+            _status = .Item("Status")
             _validity = .Item("ValidDate")
             _encoderID = .Item("EncoderID")
         End With
     End Sub
+
+    Public Sub VoidTransaction()
+        _status = "V"
+        mySql = "SELECT * FROM " & fillData & " WHERE InsuranceID = " & _id
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds.Tables(fillData).Rows(0).Item("Status") = _status
+
+        database.SaveEntry(ds, False)
+    End Sub
+
 #End Region
 
 End Class

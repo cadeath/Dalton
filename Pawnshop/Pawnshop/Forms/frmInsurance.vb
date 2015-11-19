@@ -1,21 +1,35 @@
 ﻿Public Class frmInsurance
     Dim Holder As Client
+    Dim curInsurance As New Insurance
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        dtpDate.Value = CurrentDate
-        dtpExpiry.Enabled = False
-        dtpExpiry.Value = dtpDate.Value.AddDays(120)
+        ClearFields()
     End Sub
 
     Private Sub txtHolder_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHolder.KeyPress
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
 
+    Private Sub ClearFields()
+        txtHolder.Text = ""
+        txtSenderAddr.Text = ""
+        txtSenderID.Text = ""
+        txtSenderIDNum.Text = ""
+        txtBirthdate.Text = ""
+
+        dtpDate.Value = CurrentDate
+        dtpExpiry.Enabled = False
+        dtpExpiry.Value = dtpDate.Value.AddDays(120)
+    End Sub
+
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
+        ClearFields()
+
         txtHolder.ReadOnly = False
         btnNew.Enabled = False
         btnSave.Enabled = True
         btnBrowse.Enabled = False
+        btnVoid.Enabled = False
         'txtAmount.ReadOnly = False
         btnSearch.Enabled = True
         txtCoi.Text = GetOption("InsuranceLastNum")
@@ -45,7 +59,27 @@
         End If
     End Sub
 
+    Friend Sub LoadInsurance(ByVal id As Integer)
+        Dim getInsurance As New Insurance
+        getInsurance.LoadInsurance(id)
+
+        LoadHolder(getInsurance.Client)
+        txtCoi.Text = getInsurance.COInumber
+        dtpDate.Value = getInsurance.TransactionDate
+        dtpExpiry.Value = getInsurance.ValidDate
+        txtAmount.Text = getInsurance.Amount
+
+        curInsurance = getInsurance
+        btnVoid.Enabled = True
+    End Sub
+
+    Private Function isValid() As Boolean
+        If Holder Is Nothing Then txtHolder.Focus() : Return False
+        Return True
+    End Function
+
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not isValid() Then Exit Sub
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Posting")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -73,5 +107,9 @@
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmInsuranceList.Show()
+    End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+
     End Sub
 End Class
