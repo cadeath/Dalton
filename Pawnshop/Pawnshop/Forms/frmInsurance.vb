@@ -19,6 +19,7 @@
         'txtAmount.ReadOnly = False
         btnSearch.Enabled = True
         txtCoi.Text = GetOption("InsuranceLastNum")
+        txtAmount.Text = GetOption("InsuranceAmount")
     End Sub
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmClient.SearchSelect(txtHolder.Text, FormName.frmInsurance)
