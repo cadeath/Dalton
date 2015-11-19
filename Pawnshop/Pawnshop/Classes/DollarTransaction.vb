@@ -131,13 +131,17 @@
             _dollarID = .Item("DollarID")
             _transDate = .Item("TransDate")
             _pesoRate = .Item("PesoRate")
-            Dim tmpClient As New Client
-            tmpClient.LoadClient(.Item("ClientID"))
-            _customer = tmpClient
-            _fullName = String.Format("{0} {1}", tmpClient.FirstName, tmpClient.LastName)
+            If Not IsDBNull(.Item("ClientID")) Then
+                Dim tmpClient As New Client
+                tmpClient.LoadClient(.Item("ClientID"))
+                _customer = tmpClient
+                _fullName = String.Format("{0} {1}", tmpClient.FirstName, tmpClient.LastName)
+            End If
             _denomination = .Item("Denomination")
+            _netAmount = .Item("NetAmount")
+            _status = .Item("Status")
             _serial = .Item("Serial")
-            _remarks = .Item("Remarks")
+            _remarks = IIf(IsDBNull(.Item("Remarks")), "", .Item("Remarks"))
         End With
     End Sub
 
@@ -169,6 +173,26 @@
 
         database.SaveEntry(ds)
     End Sub
+<<<<<<< HEAD
+=======
+
+    Public Sub VoidTransaction(ByVal reason As String)
+        mySql = "SELECT * FROM " & fillData & " WHERE dollarID = " & _dollarID
+        ds.Clear()
+
+        ds = LoadSQL(mySql, fillData)
+        If ds.Tables(0).Rows.Count <= 0 Then
+            MsgBox("Transaction not found!", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        ds.Tables(0).Rows(0).Item("Status") = "V"
+        ds.Tables(0).Rows(0).Item("Remarks") = reason
+        database.SaveEntry(ds, False)
+
+        Console.WriteLine("Transaction #" & _dollarID & " void")
+    End Sub
+>>>>>>> refs/remotes/origin/master
 #End Region
 
 End Class

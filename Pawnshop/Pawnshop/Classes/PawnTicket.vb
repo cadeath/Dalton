@@ -1,5 +1,9 @@
 ﻿Public Class PawnTicket
 
+    Dim fillData As String = "tblPawn"
+    Dim mySql As String = ""
+    Dim ds As DataSet
+
 #Region "Variables"
     Private _pawnid As Integer
     Private _pawnTicket As Integer
@@ -295,51 +299,24 @@
             Return _redeemDue
         End Get
     End Property
+
+    Private _advanceInterest As Integer
+    Public Property AdvanceInterestPerDays() As Integer
+        Get
+            Return _advanceInterest
+        End Get
+        Set(ByVal value As Integer)
+            _advanceInterest = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures and Functions"
-    Public Sub SaveTicket()
-        database.SaveEntry(CreateDataSet)
-    End Sub
-
-    Private Function CreateDataSet() As DataSet
+    Public Sub SaveTicket(Optional ByVal isNew As Boolean = True)
         Dim fillData As String = "tblPawn"
-        'Creating Virtual Database
-        Dim ds As New DataSet, dt As New DataTable(fillData)
-
-        'Constructing Database
-        ds.Tables.Add(dt)
-        With ds.Tables(fillData).Columns
-            .Add(New DataColumn("PawnID", GetType(Integer))) 'AutoIncrement
-            .Add(New DataColumn("PawnTicket", GetType(Integer)))
-            .Add(New DataColumn("ClientID", GetType(Integer)))
-            .Add(New DataColumn("LoanDate", GetType(Date)))
-            .Add(New DataColumn("MatuDate", GetType(Date)))
-            .Add(New DataColumn("ExpiryDate", GetType(Date)))
-            .Add(New DataColumn("AuctionDate", GetType(Date)))
-            .Add(New DataColumn("ItemType", GetType(String)))
-            .Add(New DataColumn("CatID", GetType(Integer)))
-            .Add(New DataColumn("Description", GetType(String)))
-            .Add(New DataColumn("Karat", GetType(String)))
-            .Add(New DataColumn("Grams", GetType(Double)))
-            .Add(New DataColumn("Appraisal", GetType(Double)))
-            .Add(New DataColumn("Principal", GetType(Double)))
-            .Add(New DataColumn("Interest", GetType(Double)))
-            .Add(New DataColumn("NetAmount", GetType(Double)))
-            .Add(New DataColumn("Evat", GetType(Double)))
-            .Add(New DataColumn("AppraiserID", GetType(Integer)))
-            .Add(New DataColumn("OldTicket", GetType(Integer)))
-            .Add(New DataColumn("ORNum", GetType(Integer)))
-            .Add(New DataColumn("ORDate", GetType(Date)))
-            .Add(New DataColumn("LessPrincipal", GetType(Double)))
-            .Add(New DataColumn("DaysOverDue", GetType(Double)))
-            .Add(New DataColumn("DelayInt", GetType(Double)))
-            .Add(New DataColumn("Penalty", GetType(Double)))
-            .Add(New DataColumn("ServiceCharge", GetType(Double)))
-            .Add(New DataColumn("RenewDue", GetType(Double)))
-            .Add(New DataColumn("RedeemDue", GetType(Double)))
-            .Add(New DataColumn("Status", GetType(String)))
-        End With
+        Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
+        ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
@@ -372,11 +349,14 @@
             .Item("RenewDue") = _renewDue
             .Item("RedeemDue") = _redeemDue
             .Item("Status") = _status
+            .Item("SystemInfo") = Now
+            .Item("EncoderID") = UserID
+            .Item("AdvInt") = _advanceInterest
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
-        Return ds
-    End Function
+        database.SaveEntry(ds, isNew)
+    End Sub
 
     Public Sub LoadTicket(ByVal id As Integer, Optional ByVal col As String = "PAWNID")
         Dim mySql As String = "SELECT * FROM tblpawn WHERE " & col & " = " & id
@@ -414,6 +394,7 @@
             _renewDue = .Item("RenewDue")
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
+            _advanceInterest = .Item("AdvInt")
         End With
     End Sub
 
@@ -450,7 +431,33 @@
             _renewDue = .Item("RenewDue")
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
+            _advanceInterest = .Item("AdvInt")
         End With
+    End Sub
+
+    Public Sub ChangeStatus(ByVal str As String)
+        mySql = "SELECT * FROM " & fillData & " WHERE PawnID = " & _pawnid
+        ds = LoadSQL(mySql, fillData)
+
+        Console.WriteLine("PawnID: " & Me._pawnid)
+        Console.WriteLine("PawnTicket: " & Me._pawnTicket)
+        Console.WriteLine("Client: " & Me._client.FirstName)
+        Console.WriteLine("Status: " & Me._status)
+
+        ds.Tables(0).Rows(0).Item("status") = str
+        database.SaveEntry(ds, False)
+    End Sub
+
+    Public Sub VoidCancelTicket()
+        ChangeStatus("V")
+    End Sub
+
+    Public Sub RedeemTicket()
+        ChangeStatus(0) 'Inactive
+    End Sub
+
+    Public Sub RenewTicket()
+        ChangeStatus(0) 'Inactive
     End Sub
 #End Region
 End Class

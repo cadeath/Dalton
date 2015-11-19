@@ -13,15 +13,18 @@
                 txtSearch.Focus()
             Case Keys.F4
                 Console.WriteLine("Renewal")
+                btnRenew.PerformClick()
             Case Keys.F5
                 Console.WriteLine("Redeem")
+                btnRedeem.PerformClick()
         End Select
     End Sub
 
     Private Sub frmPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadActive()
-        MsgBox("Under development")
+        'frmOpenStore.Show()
+        'frmOpenStore.Focus()
     End Sub
 
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
@@ -55,6 +58,14 @@
         lv.SubItems.Add(tk.ExpiryDate)
         lv.SubItems.Add(tk.AuctionDate)
         lv.SubItems.Add(tk.Principal)
+        lv.Tag = tk.PawnID
+
+        Select Case tk.Status
+            Case "0" : lv.BackColor = Color.LightGray
+            Case "X" : lv.BackColor = Color.Red
+            Case "W" : lv.BackColor = Color.Red
+            Case "V" : lv.BackColor = Color.Gray
+        End Select
     End Sub
 
     Private Sub ClearFields()
@@ -70,21 +81,52 @@
         mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & txtSearch.Text & "%')"
         mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & txtSearch.Text & "%')"
 
+        Console.WriteLine(mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Single = ds.Tables(0).Rows.Count
+        Dim clientID As Integer = 0
 
+        lvPawners.Items.Clear()
         If MaxRow = 0 Then
-            Exit Sub
-        End If
 
-        If MaxRow > 0 Then
-            lvPawners.Items.Clear()
+            mySql = "SELECT * FROM tblClient WHERE "
+            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
+            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
+            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & txtSearch.Text & "%')"
+
+            ds.Clear()
+            ds = LoadSQL(mySql)
+            MaxRow = ds.Tables(0).Rows.Count
+            If MaxRow = 0 Then
+                Console.WriteLine("No Pawn, No Client, No found")
+                MsgBox("Query not found", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
+            For Each dr As DataRow In ds.Tables(0).Rows
+                clientID = dr.Item("ClientID")
+                Dim xDs As DataSet
+
+                mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
+                xDs = LoadSQL(mySql)
+                MaxRow = xDs.Tables(0).Rows.Count
+                If MaxRow > 0 Then
+                    lvPawners.Items.Clear()
+                    For Each xdr As DataRow In xDs.Tables(0).Rows
+                        Dim tmpTicket As New PawnTicket
+                        tmpTicket.LoadTicketInRow(xdr)
+                        AddItem(tmpTicket)
+                    Next
+                End If
+            Next
+        Else
             For Each dr As DataRow In ds.Tables(0).Rows
                 Dim tmpTicket As New PawnTicket
                 tmpTicket.LoadTicketInRow(dr)
                 AddItem(tmpTicket)
             Next
         End If
+
         lvPawners.Focus()
         MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
     End Sub
@@ -98,9 +140,9 @@
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
         If lvPawners.SelectedItems.Count <= 0 Then Exit Sub
 
-        Dim idx As Integer = CInt(lvPawners.FocusedItem.Text)
+        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
         Dim tmpTicket As New PawnTicket
-        tmpTicket.LoadTicket(idx, "PawnTicket")
+        tmpTicket.LoadTicket(idx)
         frmNewloan.LoadPawnTicket(tmpTicket, "D")
         frmNewloan.Show()
     End Sub
@@ -115,7 +157,17 @@
         End If
     End Sub
 
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        If lvPawners.SelectedItems.Count > 0 Then
+            btnView.PerformClick()
+            frmNewloan.SwitchTransaction("RENEW")
+        End If
+    End Sub
 
+    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+        If lvPawners.SelectedItems.Count > 0 Then
+            btnView.PerformClick()
+            frmNewloan.SwitchTransaction("REDEEM")
+        End If
     End Sub
 End Class

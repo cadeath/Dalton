@@ -8,8 +8,8 @@
     Private _date As Date
     Private _serviceType As String
     Private _transType As Integer = 0
-    Private _client1 As Client
-    Private _client2 As Client
+    Private _client1 As Client 'Sender
+    Private _client2 As Client 'Receiver
     Private _amount As Double = 0
     Private _location As String
     Private _service As Double = 0
@@ -126,6 +126,15 @@
             Return _status
         End Get
     End Property
+
+    Public Property EncoderID As Integer
+        Set(ByVal value As Integer)
+            _encoderID = value
+        End Set
+        Get
+            Return _encoderID
+        End Get
+    End Property
 #End Region
 
 #Region "Procedures and Functions"
@@ -143,13 +152,15 @@
 
     Private Sub loadByRow(ByVal dr As DataRow)
         With dr
-            _transType = .Item("Transaction")
+            _id = .Item("ID")
+            _transType = .Item("MoneyTrans")
             _serviceType = .Item("ServiceType")
             Dim tmpClient As New Client
             tmpClient.LoadClient(.Item("SenderID"))
             _client1 = tmpClient
-            tmpClient.LoadClient(.Item("ReceiverID"))
-            _client2 = tmpClient
+            Dim tmpClient2 As New Client
+            tmpClient2.LoadClient(.Item("ReceiverID"))
+            _client2 = tmpClient2
             _ref = .Item("RefNum")
             _amount = .Item("Amount")
             _location = .Item("location")
@@ -163,13 +174,13 @@
 
     Public Sub Save()
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM " & fillData
+        mySql = "SELECT * FROM tblMoneyTransfer"
         ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
-            .Item("Transaction") = _transType
+            .Item("MoneyTrans") = _transType
             .Item("ServiceType") = _serviceType
             .Item("TransDate") = _date
             .Item("SenderID") = _client1.ID
@@ -187,7 +198,19 @@
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
+        database.SaveEntry(ds)
+    End Sub
+
+    Public Sub VoidTransaction(ByVal reason As String)
+        If reason = "" Then Exit Sub
+
+        Dim mySql As String = "SELECT * FROM " & fillData & " WHERE ID = " & _id
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+        ds.Tables(0).Rows(0).Item("Status") = "V"
+        ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
+        Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 #End Region
 End Class

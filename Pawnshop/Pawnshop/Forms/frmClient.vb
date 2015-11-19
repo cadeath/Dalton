@@ -55,11 +55,16 @@ Public Class frmClient
 
     Private Delegate Sub LoadClient_delegate()
     Friend Sub LoadClients()
+        'On Error Resume Next
+
         If lvClient.InvokeRequired Then
             lvClient.Invoke(New LoadClient_delegate(AddressOf LoadClients))
         Else
             lvClient.Enabled = False
             lvClient.BackColor = Color.White
+            btnView.Enabled = False
+            txtSearch.ReadOnly = True
+            btnSearch.Enabled = False
 
             Dim tbl As String = "TBLCLIENT"
             Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
@@ -70,20 +75,19 @@ Public Class frmClient
                 Dim tmpClient As New Client
                 tmpClient.LoadClient(pawner.Item("ClientID"))
                 AddItem(tmpClient)
+
+                Application.DoEvents()
             Next
 
             lvClient.Enabled = True
+            btnView.Enabled = True
+            txtSearch.ReadOnly = False
+            btnSearch.Enabled = True
         End If
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
-    End Sub
-
-    Private Sub txtSearch_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtSearch.DoubleClick
-        lvClient.Focus()
-        lvClient.Items(0).Selected = True
-        Console.WriteLine("Selected")
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
@@ -121,7 +125,7 @@ Public Class frmClient
         If txtSearch.Text = "" Then Exit Sub
 
         Dim src As String = txtSearch.Text
-        Dim mySql As String = "SELECT * FROM tblClient " & vbCrLf
+        Dim mySql As String = "SELECT * FROM VIEW_CLIENT " & vbCrLf
         mySql &= " WHERE "
         mySql &= String.Format("UPPER(FirstName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(MiddleName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
@@ -131,6 +135,7 @@ Public Class frmClient
         mySql &= String.Format("UPPER(Phone1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(Phone2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(Phone_Others) LIKE UPPER('%{0}%') " & vbCrLf, src)
+        'mySql &= "isSelect = 1 or isSelect is NULL" & vbCrLf
         mySql &= "ORDER BY LastName ASC, FirstName ASC"
 
         Console.WriteLine("SQL: " & mySql)

@@ -22,7 +22,10 @@ Partial Class frmClientInformation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmClientInformation))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cboProv = New System.Windows.Forms.ComboBox()
+        Me.cboCity = New System.Windows.Forms.ComboBox()
         Me.lblAge = New System.Windows.Forms.Label()
         Me.dtpBday = New System.Windows.Forms.DateTimePicker()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -31,9 +34,7 @@ Partial Class frmClientInformation
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtZip = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtProvince = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtCity = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtBrgy = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -81,6 +82,8 @@ Partial Class frmClientInformation
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cboProv)
+        Me.GroupBox1.Controls.Add(Me.cboCity)
         Me.GroupBox1.Controls.Add(Me.lblAge)
         Me.GroupBox1.Controls.Add(Me.dtpBday)
         Me.GroupBox1.Controls.Add(Me.Label17)
@@ -89,9 +92,7 @@ Partial Class frmClientInformation
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.txtZip)
         Me.GroupBox1.Controls.Add(Me.Label10)
-        Me.GroupBox1.Controls.Add(Me.txtProvince)
         Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Controls.Add(Me.txtCity)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.txtBrgy)
         Me.GroupBox1.Controls.Add(Me.Label7)
@@ -112,6 +113,26 @@ Partial Class frmClientInformation
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Basic Information"
+        '
+        'cboProv
+        '
+        Me.cboProv.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboProv.FormattingEnabled = True
+        Me.cboProv.Location = New System.Drawing.Point(364, 126)
+        Me.cboProv.Name = "cboProv"
+        Me.cboProv.Size = New System.Drawing.Size(165, 24)
+        Me.cboProv.TabIndex = 7
+        Me.cboProv.Text = "South Cotabato"
+        '
+        'cboCity
+        '
+        Me.cboCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboCity.FormattingEnabled = True
+        Me.cboCity.Location = New System.Drawing.Point(85, 126)
+        Me.cboCity.Name = "cboCity"
+        Me.cboCity.Size = New System.Drawing.Size(270, 24)
+        Me.cboCity.TabIndex = 6
+        Me.cboCity.Text = "General Santos City"
         '
         'lblAge
         '
@@ -190,15 +211,6 @@ Partial Class frmClientInformation
         Me.Label10.Text = "Province"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'txtProvince
-        '
-        Me.txtProvince.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtProvince.Location = New System.Drawing.Point(364, 128)
-        Me.txtProvince.Name = "txtProvince"
-        Me.txtProvince.Size = New System.Drawing.Size(165, 22)
-        Me.txtProvince.TabIndex = 7
-        Me.txtProvince.Text = "South Cotabato"
-        '
         'Label9
         '
         Me.Label9.Location = New System.Drawing.Point(79, 153)
@@ -207,15 +219,6 @@ Partial Class frmClientInformation
         Me.Label9.TabIndex = 15
         Me.Label9.Text = "City/Munical City"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'txtCity
-        '
-        Me.txtCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCity.Location = New System.Drawing.Point(82, 128)
-        Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(273, 22)
-        Me.txtCity.TabIndex = 6
-        Me.txtCity.Text = "General Santos City"
         '
         'Label8
         '
@@ -611,6 +614,7 @@ Partial Class frmClientInformation
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmClientInformation"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -638,11 +642,9 @@ Partial Class frmClientInformation
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtStreet As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents txtCity As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txtBrgy As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtProvince As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtZip As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
@@ -676,4 +678,6 @@ Partial Class frmClientInformation
     Friend WithEvents lblAge As System.Windows.Forms.Label
     Friend WithEvents btnSelect As System.Windows.Forms.Button
     Friend WithEvents btnIDModify As System.Windows.Forms.Button
+    Friend WithEvents cboCity As System.Windows.Forms.ComboBox
+    Friend WithEvents cboProv As System.Windows.Forms.ComboBox
 End Class
