@@ -262,6 +262,12 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmMIS.Designer.vb">
+      <DependentUpon>frmMIS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMIS.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmMoneyTransfer.Designer.vb">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </Compile>
@@ -296,6 +302,12 @@
       <DependentUpon>frmPawning.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmPawning.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRate.Designer.vb">
+      <DependentUpon>frmRate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmSettings.Designer.vb">
@@ -400,6 +412,9 @@
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMIS.resx">
+      <DependentUpon>frmMIS.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMoneyTransfer.resx">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </EmbeddedResource>
@@ -417,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawning.resx">
       <DependentUpon>frmPawning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRate.resx">
+      <DependentUpon>frmRate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>
