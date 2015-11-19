@@ -47,7 +47,7 @@ Partial Class frmInsurance
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -284,7 +284,7 @@ Partial Class frmInsurance
         Me.GroupBox3.Controls.Add(Me.btnBrowse)
         Me.GroupBox3.Controls.Add(Me.btnNew)
         Me.GroupBox3.Controls.Add(Me.btnVoid)
-        Me.GroupBox3.Controls.Add(Me.Button2)
+        Me.GroupBox3.Controls.Add(Me.btnClose)
         Me.GroupBox3.Controls.Add(Me.btnSave)
         Me.GroupBox3.Font = New System.Drawing.Font("Segoe UI Symbol", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.Location = New System.Drawing.Point(1, -1)
@@ -339,20 +339,20 @@ Partial Class frmInsurance
         Me.btnVoid.Text = "&Void"
         Me.btnVoid.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btnClose
         '
-        Me.Button2.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.Black
-        Me.Button2.Location = New System.Drawing.Point(338, 21)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(79, 55)
-        Me.Button2.TabIndex = 39
-        Me.Button2.Text = "&Close"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnClose.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnClose.BackgroundImage = CType(resources.GetObject("btnClose.BackgroundImage"), System.Drawing.Image)
+        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.btnClose.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.Black
+        Me.btnClose.Location = New System.Drawing.Point(338, 21)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(79, 55)
+        Me.btnClose.TabIndex = 39
+        Me.btnClose.Text = "&Close"
+        Me.btnClose.UseVisualStyleBackColor = False
         '
         'btnSave
         '
@@ -413,7 +413,7 @@ Partial Class frmInsurance
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents btnVoid As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents txtBirthdate As System.Windows.Forms.TextBox
 End Class

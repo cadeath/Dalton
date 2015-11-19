@@ -173,8 +173,6 @@
 
         database.SaveEntry(ds)
     End Sub
-<<<<<<< HEAD
-=======
 
     Public Sub VoidTransaction(ByVal reason As String)
         mySql = "SELECT * FROM " & fillData & " WHERE dollarID = " & _dollarID
@@ -192,7 +190,6 @@
 
         Console.WriteLine("Transaction #" & _dollarID & " void")
     End Sub
->>>>>>> refs/remotes/origin/master
 #End Region
 
 End Class

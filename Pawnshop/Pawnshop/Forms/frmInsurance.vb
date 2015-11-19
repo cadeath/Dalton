@@ -1,14 +1,9 @@
 ﻿Public Class frmInsurance
     Dim Holder As Client
-    Private Sub DateTimePicker1_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpDate.ValueChanged
-    End Sub
-
-    Private Sub dtpExpiry_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpExpiry.ValueChanged
-
-    End Sub
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        dtpDate.Value = Date.Now
+        dtpDate.Value = CurrentDate
+        dtpExpiry.Enabled = False
         dtpExpiry.Value = dtpDate.Value.AddDays(120)
     End Sub
 
@@ -16,17 +11,6 @@
         If isEnter(e) Then
             btnSearch.Focus()
         End If
-    End Sub
-    Private Sub txtSender_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtHolder.TextChanged
-
-    End Sub
-
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        Me.Close()
-    End Sub
-
-    Private Sub GroupBox3_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GroupBox3.Enter
-
     End Sub
 
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
@@ -36,7 +20,7 @@
         btnBrowse.Enabled = False
         txtAmount.ReadOnly = False
         btnSearch.Enabled = True
-        txtCoi.Text = "0001"
+        txtCoi.Text = GetOption("InsuranceLastNum")
     End Sub
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmClient.SearchSelect(txtHolder.Text, FormName.frmInsurance)
@@ -57,17 +41,25 @@
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-
-        Dim SaveInsurance As New Insurance
-        SaveInsurance.COI = txtCoi.Text
-        With SaveInsurance
-            .TransDate = dtpDate.Value
+        Dim newInsurance As New Insurance
+        With newInsurance
+            .COInumber = txtCoi.Text
+            .TransactionDate = dtpDate.Value
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
-            .CID = Holder.ID
-            .Save()
+            .Client = Holder
+            .EncoderID = POSuser.UserID
+
+            .SaveInsurance()
         End With
+
+        UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
+        btnNew.PerformClick()
         MsgBox("Entry Saved", MsgBoxStyle.Information)
+        Me.Close()
+    End Sub
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
 End Class
