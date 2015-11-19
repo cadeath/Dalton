@@ -24,9 +24,11 @@ Partial Class frmBackup
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBackup))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.chkPath3 = New System.Windows.Forms.CheckBox()
-        Me.chkPath2 = New System.Windows.Forms.CheckBox()
-        Me.chkPath1 = New System.Windows.Forms.CheckBox()
+        Me.chkOn3 = New System.Windows.Forms.CheckBox()
+        Me.chkOn2 = New System.Windows.Forms.CheckBox()
+        Me.chkCP3 = New System.Windows.Forms.CheckBox()
+        Me.chkCP2 = New System.Windows.Forms.CheckBox()
+        Me.chkCP1 = New System.Windows.Forms.CheckBox()
         Me.btnBrowse3 = New System.Windows.Forms.Button()
         Me.btnBrowse2 = New System.Windows.Forms.Button()
         Me.btnBrowse1 = New System.Windows.Forms.Button()
@@ -41,8 +43,6 @@ Partial Class frmBackup
         Me.btnBrowseFile = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.chkOn2 = New System.Windows.Forms.CheckBox()
-        Me.chkOn3 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,9 +50,9 @@ Partial Class frmBackup
         '
         Me.GroupBox1.Controls.Add(Me.chkOn3)
         Me.GroupBox1.Controls.Add(Me.chkOn2)
-        Me.GroupBox1.Controls.Add(Me.chkPath3)
-        Me.GroupBox1.Controls.Add(Me.chkPath2)
-        Me.GroupBox1.Controls.Add(Me.chkPath1)
+        Me.GroupBox1.Controls.Add(Me.chkCP3)
+        Me.GroupBox1.Controls.Add(Me.chkCP2)
+        Me.GroupBox1.Controls.Add(Me.chkCP1)
         Me.GroupBox1.Controls.Add(Me.btnBrowse3)
         Me.GroupBox1.Controls.Add(Me.btnBrowse2)
         Me.GroupBox1.Controls.Add(Me.btnBrowse1)
@@ -69,35 +69,55 @@ Partial Class frmBackup
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Redundancy"
         '
-        'chkPath3
+        'chkOn3
         '
-        Me.chkPath3.AutoSize = True
-        Me.chkPath3.Location = New System.Drawing.Point(9, 228)
-        Me.chkPath3.Name = "chkPath3"
-        Me.chkPath3.Size = New System.Drawing.Size(82, 17)
-        Me.chkPath3.TabIndex = 7
-        Me.chkPath3.Text = "Copy/Paste"
-        Me.chkPath3.UseVisualStyleBackColor = True
+        Me.chkOn3.AutoSize = True
+        Me.chkOn3.Location = New System.Drawing.Point(208, 182)
+        Me.chkOn3.Name = "chkOn3"
+        Me.chkOn3.Size = New System.Drawing.Size(40, 17)
+        Me.chkOn3.TabIndex = 16
+        Me.chkOn3.Text = "On"
+        Me.chkOn3.UseVisualStyleBackColor = True
         '
-        'chkPath2
+        'chkOn2
         '
-        Me.chkPath2.AutoSize = True
-        Me.chkPath2.Location = New System.Drawing.Point(9, 139)
-        Me.chkPath2.Name = "chkPath2"
-        Me.chkPath2.Size = New System.Drawing.Size(82, 17)
-        Me.chkPath2.TabIndex = 4
-        Me.chkPath2.Text = "Copy/Paste"
-        Me.chkPath2.UseVisualStyleBackColor = True
+        Me.chkOn2.AutoSize = True
+        Me.chkOn2.Location = New System.Drawing.Point(208, 93)
+        Me.chkOn2.Name = "chkOn2"
+        Me.chkOn2.Size = New System.Drawing.Size(40, 17)
+        Me.chkOn2.TabIndex = 15
+        Me.chkOn2.Text = "On"
+        Me.chkOn2.UseVisualStyleBackColor = True
         '
-        'chkPath1
+        'chkCP3
         '
-        Me.chkPath1.AutoSize = True
-        Me.chkPath1.Location = New System.Drawing.Point(9, 58)
-        Me.chkPath1.Name = "chkPath1"
-        Me.chkPath1.Size = New System.Drawing.Size(82, 17)
-        Me.chkPath1.TabIndex = 1
-        Me.chkPath1.Text = "Copy/Paste"
-        Me.chkPath1.UseVisualStyleBackColor = True
+        Me.chkCP3.AutoSize = True
+        Me.chkCP3.Location = New System.Drawing.Point(9, 228)
+        Me.chkCP3.Name = "chkCP3"
+        Me.chkCP3.Size = New System.Drawing.Size(82, 17)
+        Me.chkCP3.TabIndex = 7
+        Me.chkCP3.Text = "Copy/Paste"
+        Me.chkCP3.UseVisualStyleBackColor = True
+        '
+        'chkCP2
+        '
+        Me.chkCP2.AutoSize = True
+        Me.chkCP2.Location = New System.Drawing.Point(9, 139)
+        Me.chkCP2.Name = "chkCP2"
+        Me.chkCP2.Size = New System.Drawing.Size(82, 17)
+        Me.chkCP2.TabIndex = 4
+        Me.chkCP2.Text = "Copy/Paste"
+        Me.chkCP2.UseVisualStyleBackColor = True
+        '
+        'chkCP1
+        '
+        Me.chkCP1.AutoSize = True
+        Me.chkCP1.Location = New System.Drawing.Point(9, 58)
+        Me.chkCP1.Name = "chkCP1"
+        Me.chkCP1.Size = New System.Drawing.Size(82, 17)
+        Me.chkCP1.TabIndex = 1
+        Me.chkCP1.Text = "Copy/Paste"
+        Me.chkCP1.UseVisualStyleBackColor = True
         '
         'btnBrowse3
         '
@@ -128,6 +148,7 @@ Partial Class frmBackup
         '
         'txtPath3
         '
+        Me.txtPath3.BackColor = System.Drawing.SystemColors.Window
         Me.txtPath3.Location = New System.Drawing.Point(9, 202)
         Me.txtPath3.Name = "txtPath3"
         Me.txtPath3.ReadOnly = True
@@ -145,6 +166,7 @@ Partial Class frmBackup
         '
         'txtPath2
         '
+        Me.txtPath2.BackColor = System.Drawing.SystemColors.Window
         Me.txtPath2.Location = New System.Drawing.Point(9, 113)
         Me.txtPath2.Name = "txtPath2"
         Me.txtPath2.ReadOnly = True
@@ -162,6 +184,7 @@ Partial Class frmBackup
         '
         'txtPath1
         '
+        Me.txtPath1.BackColor = System.Drawing.SystemColors.Window
         Me.txtPath1.Location = New System.Drawing.Point(9, 32)
         Me.txtPath1.Name = "txtPath1"
         Me.txtPath1.ReadOnly = True
@@ -221,26 +244,6 @@ Partial Class frmBackup
         Me.btnSave.Text = "&Save Settings"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'chkOn2
-        '
-        Me.chkOn2.AutoSize = True
-        Me.chkOn2.Location = New System.Drawing.Point(208, 93)
-        Me.chkOn2.Name = "chkOn2"
-        Me.chkOn2.Size = New System.Drawing.Size(40, 17)
-        Me.chkOn2.TabIndex = 15
-        Me.chkOn2.Text = "On"
-        Me.chkOn2.UseVisualStyleBackColor = True
-        '
-        'chkOn3
-        '
-        Me.chkOn3.AutoSize = True
-        Me.chkOn3.Location = New System.Drawing.Point(208, 182)
-        Me.chkOn3.Name = "chkOn3"
-        Me.chkOn3.Size = New System.Drawing.Size(40, 17)
-        Me.chkOn3.TabIndex = 16
-        Me.chkOn3.Text = "On"
-        Me.chkOn3.UseVisualStyleBackColor = True
-        '
         'frmBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -263,9 +266,9 @@ Partial Class frmBackup
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents chkPath3 As System.Windows.Forms.CheckBox
-    Friend WithEvents chkPath2 As System.Windows.Forms.CheckBox
-    Friend WithEvents chkPath1 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkCP3 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkCP2 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkCP1 As System.Windows.Forms.CheckBox
     Friend WithEvents btnBrowse3 As System.Windows.Forms.Button
     Friend WithEvents btnBrowse2 As System.Windows.Forms.Button
     Friend WithEvents btnBrowse1 As System.Windows.Forms.Button

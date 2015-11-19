@@ -57,7 +57,6 @@ D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Windows.Fo
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Xml.dll
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\System.Xml.Linq.dll
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Microsoft.VisualBasic.PowerPacks.Vs.xml
-D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbprojResolveAssemblyReference.cache
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.devClient.resources
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.devVerifyESK.resources
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.diagAuthorization.resources
@@ -91,3 +90,4 @@ D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbpr
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.xml
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.pdb
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\W3W1LH4CKU.FDB
