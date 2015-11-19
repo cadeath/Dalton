@@ -91,3 +91,4 @@ D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.exe
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.xml
 D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\pawnshop.pdb
 D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\W3W1LH4CKU.FDB
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbprojResolveAssemblyReference.cache

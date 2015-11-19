@@ -28,7 +28,6 @@ Partial Class frmBackup
         Me.chkOn2 = New System.Windows.Forms.CheckBox()
         Me.chkCP3 = New System.Windows.Forms.CheckBox()
         Me.chkCP2 = New System.Windows.Forms.CheckBox()
-        Me.chkCP1 = New System.Windows.Forms.CheckBox()
         Me.btnBrowse3 = New System.Windows.Forms.Button()
         Me.btnBrowse2 = New System.Windows.Forms.Button()
         Me.btnBrowse1 = New System.Windows.Forms.Button()
@@ -43,6 +42,7 @@ Partial Class frmBackup
         Me.btnBrowseFile = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -52,7 +52,6 @@ Partial Class frmBackup
         Me.GroupBox1.Controls.Add(Me.chkOn2)
         Me.GroupBox1.Controls.Add(Me.chkCP3)
         Me.GroupBox1.Controls.Add(Me.chkCP2)
-        Me.GroupBox1.Controls.Add(Me.chkCP1)
         Me.GroupBox1.Controls.Add(Me.btnBrowse3)
         Me.GroupBox1.Controls.Add(Me.btnBrowse2)
         Me.GroupBox1.Controls.Add(Me.btnBrowse1)
@@ -108,16 +107,6 @@ Partial Class frmBackup
         Me.chkCP2.TabIndex = 4
         Me.chkCP2.Text = "Copy/Paste"
         Me.chkCP2.UseVisualStyleBackColor = True
-        '
-        'chkCP1
-        '
-        Me.chkCP1.AutoSize = True
-        Me.chkCP1.Location = New System.Drawing.Point(9, 58)
-        Me.chkCP1.Name = "chkCP1"
-        Me.chkCP1.Size = New System.Drawing.Size(82, 17)
-        Me.chkCP1.TabIndex = 1
-        Me.chkCP1.Text = "Copy/Paste"
-        Me.chkCP1.UseVisualStyleBackColor = True
         '
         'btnBrowse3
         '
@@ -244,6 +233,11 @@ Partial Class frmBackup
         Me.btnSave.Text = "&Save Settings"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'sfdPath
+        '
+        Me.sfdPath.DefaultExt = "noEXT"
+        Me.sfdPath.Filter = "Eskie|*.noEXT"
+        '
         'frmBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -268,7 +262,6 @@ Partial Class frmBackup
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents chkCP3 As System.Windows.Forms.CheckBox
     Friend WithEvents chkCP2 As System.Windows.Forms.CheckBox
-    Friend WithEvents chkCP1 As System.Windows.Forms.CheckBox
     Friend WithEvents btnBrowse3 As System.Windows.Forms.Button
     Friend WithEvents btnBrowse2 As System.Windows.Forms.Button
     Friend WithEvents btnBrowse1 As System.Windows.Forms.Button
@@ -285,4 +278,5 @@ Partial Class frmBackup
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents chkOn3 As System.Windows.Forms.CheckBox
     Friend WithEvents chkOn2 As System.Windows.Forms.CheckBox
+    Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
 End Class
