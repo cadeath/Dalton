@@ -25,7 +25,7 @@ Partial Class frmOpenStore
         Me.dtpCurrentDate = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.txtMoney = New System.Windows.Forms.TextBox()
+        Me.txtRepDep = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtMaintaining = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -56,7 +56,7 @@ Partial Class frmOpenStore
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.txtMoney)
+        Me.GroupBox1.Controls.Add(Me.txtRepDep)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.txtMaintaining)
         Me.GroupBox1.Controls.Add(Me.Label3)
@@ -69,14 +69,16 @@ Partial Class frmOpenStore
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Balance"
         '
-        'txtMoney
+        'txtRepDep
         '
-        Me.txtMoney.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMoney.Location = New System.Drawing.Point(9, 126)
-        Me.txtMoney.Name = "txtMoney"
-        Me.txtMoney.Size = New System.Drawing.Size(236, 22)
-        Me.txtMoney.TabIndex = 3
-        Me.txtMoney.Text = "40,000.00"
+        Me.txtRepDep.BackColor = System.Drawing.SystemColors.Window
+        Me.txtRepDep.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRepDep.Location = New System.Drawing.Point(9, 126)
+        Me.txtRepDep.Name = "txtRepDep"
+        Me.txtRepDep.ReadOnly = True
+        Me.txtRepDep.Size = New System.Drawing.Size(236, 22)
+        Me.txtRepDep.TabIndex = 3
+        Me.txtRepDep.Text = "40,000.00"
         '
         'Label4
         '
@@ -90,9 +92,11 @@ Partial Class frmOpenStore
         '
         'txtMaintaining
         '
+        Me.txtMaintaining.BackColor = System.Drawing.SystemColors.Window
         Me.txtMaintaining.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMaintaining.Location = New System.Drawing.Point(9, 35)
         Me.txtMaintaining.Name = "txtMaintaining"
+        Me.txtMaintaining.ReadOnly = True
         Me.txtMaintaining.Size = New System.Drawing.Size(236, 22)
         Me.txtMaintaining.TabIndex = 1
         Me.txtMaintaining.Text = "50,000.00"
@@ -109,9 +113,11 @@ Partial Class frmOpenStore
         '
         'txtInitial
         '
+        Me.txtInitial.BackColor = System.Drawing.SystemColors.Window
         Me.txtInitial.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtInitial.Location = New System.Drawing.Point(6, 80)
         Me.txtInitial.Name = "txtInitial"
+        Me.txtInitial.ReadOnly = True
         Me.txtInitial.Size = New System.Drawing.Size(236, 22)
         Me.txtInitial.TabIndex = 2
         Me.txtInitial.Text = "10,000.00"
@@ -175,7 +181,7 @@ Partial Class frmOpenStore
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtMaintaining As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents txtMoney As System.Windows.Forms.TextBox
+    Friend WithEvents txtRepDep As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnSetup As System.Windows.Forms.Button

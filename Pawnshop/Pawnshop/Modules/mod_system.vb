@@ -16,9 +16,13 @@ Module mod_system
     Public BranchCode As String = "ROX"
 
     Friend isAuthorized As Boolean = False
-    Public advanceInterestNumberofMonth As Integer = 33
-
     Public backupPath As String = "."
+
+    Friend advanceInterestNumberofMonth As Integer = 33
+    Friend MaintainBal As Double = GetOption("MaintainingBalance")
+    Friend InitialBal As Double = 0
+    Friend RepDep As Double = 0
+
 #End Region
 
 #Region "Store"
@@ -44,9 +48,9 @@ Module mod_system
         dsNewRow = ds.Tables(storeDB).NewRow
         With dsNewRow
             .Item("CurrentDate") = CurrentDate
-            '.Item("MaintainBal")
-            '.Item("InitialBal")
-            '.Item("RepDep")
+            .Item("MaintainBal") = MaintainBal
+            .Item("InitialBal") = InitialBal 
+            .Item("RepDep") = RepDep
             '.Item("CashCount")'No CashCount on OPENING
             .Item("Status") = 1
             .Item("SystemInfo") = Now
@@ -58,6 +62,13 @@ Module mod_system
         Console.WriteLine("Store is now OPEN!")
 
         Return True
+    End Function
+
+    Friend Function LoadLastOpening() As DataSet
+        Dim mySql As String = "SELECT * FROM tblDaily ORDER BY ID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds
     End Function
 
     Friend Sub LoadCurrentDate()
@@ -79,8 +90,10 @@ Module mod_system
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
 
         If ds.Tables(storeDB).Rows.Count = 1 Then
-            ds.Tables(storeDB).Rows(0).Item("CashCount") = cc
-            ds.Tables(storeDB).Rows(0).Item("Status") = 0
+            With ds.Tables(storeDB).Rows(0)
+                .Item("CashCount") = cc
+                .Item("Status") = 0
+            End With
 
             database.SaveEntry(ds, False)
             MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
