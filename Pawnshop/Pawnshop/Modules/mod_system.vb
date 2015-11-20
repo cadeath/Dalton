@@ -21,6 +21,33 @@ Module mod_system
     Public backupPath As String = "."
 #End Region
 
+#Region "Store"
+    Private storeDB As String = "tblDaily"
+
+    Friend Sub OpenStore()
+        Dim mySql As String = "SELECT * FROM " & storeDB
+        mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate)
+        Dim ds As DataSet = LoadSQL(mySql, storeDB)
+
+        ' Do not allow previous date to OPEN if closed.
+        If ds.Tables(storeDB).Rows.Count = 1 Then
+            If ds.Tables(storeDB).Rows(0).Item("Status") = 0 Then
+                MsgBox("You cannot select to open a previous date", MsgBoxStyle.Critical)
+            Else
+                MsgBox("Error in OPENING STORE", MsgBoxStyle.Critical)
+            End If
+            Exit Sub
+        End If
+
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(storeDB).NewRow
+        With dsNewRow
+
+        End With
+    End Sub
+#End Region
+
     Public Function CommandPrompt(ByVal app As String, ByVal args As String) As String
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo(app, args)
