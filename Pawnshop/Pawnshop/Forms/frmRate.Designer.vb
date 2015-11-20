@@ -25,8 +25,8 @@ Partial Class frmRate
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lvInt = New System.Windows.Forms.ListView()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.lvInt = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -53,15 +53,15 @@ Partial Class frmRate
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(51, 18)
+        Me.Label1.Size = New System.Drawing.Size(81, 18)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Rate #"
+        Me.Label1.Text = "Control No"
         '
         'TextBox1
         '
         Me.TextBox1.BackColor = System.Drawing.SystemColors.Window
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(69, 8)
+        Me.TextBox1.Location = New System.Drawing.Point(99, 8)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.Size = New System.Drawing.Size(148, 22)
@@ -78,6 +78,16 @@ Partial Class frmRate
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Pawning"
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(6, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(51, 16)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Interest"
+        '
         'lvInt
         '
         Me.lvInt.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
@@ -89,16 +99,6 @@ Partial Class frmRate
         Me.lvInt.TabIndex = 0
         Me.lvInt.UseCompatibleStateImageBehavior = False
         Me.lvInt.View = System.Windows.Forms.View.Details
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(6, 16)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(51, 16)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Interest"
         '
         'ColumnHeader1
         '
@@ -128,7 +128,7 @@ Partial Class frmRate
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(492, 36)
+        Me.Label3.Location = New System.Drawing.Point(496, 43)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(76, 16)
         Me.Label3.TabIndex = 3
@@ -137,7 +137,7 @@ Partial Class frmRate
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(530, 55)
+        Me.TextBox2.Location = New System.Drawing.Point(534, 62)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(53, 22)
         Me.TextBox2.TabIndex = 4
@@ -147,7 +147,7 @@ Partial Class frmRate
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(492, 58)
+        Me.Label4.Location = New System.Drawing.Point(496, 65)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(32, 16)
         Me.Label4.TabIndex = 5
@@ -157,7 +157,7 @@ Partial Class frmRate
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(492, 123)
+        Me.Label5.Location = New System.Drawing.Point(605, 65)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(32, 16)
         Me.Label5.TabIndex = 8
@@ -166,7 +166,7 @@ Partial Class frmRate
         'TextBox3
         '
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(530, 120)
+        Me.TextBox3.Location = New System.Drawing.Point(643, 62)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(53, 22)
         Me.TextBox3.TabIndex = 7
@@ -176,7 +176,7 @@ Partial Class frmRate
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(492, 101)
+        Me.Label6.Location = New System.Drawing.Point(605, 43)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(114, 16)
         Me.Label6.TabIndex = 6
@@ -212,7 +212,7 @@ Partial Class frmRate
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(533, 427)
+        Me.Button2.Location = New System.Drawing.Point(644, 427)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 12
@@ -232,7 +232,7 @@ Partial Class frmRate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(620, 460)
+        Me.ClientSize = New System.Drawing.Size(731, 460)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
