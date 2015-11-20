@@ -158,7 +158,11 @@
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
-        If dateSet Then tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+        If dateSet Then
+            tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+        Else
+            tsCurrentDate.Text = "Date not set"
+        End If
     End Sub
 
     Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click

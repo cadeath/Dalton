@@ -24,7 +24,7 @@ Module mod_system
 #Region "Store"
     Private storeDB As String = "tblDaily"
 
-    Friend Sub OpenStore()
+    Friend Function OpenStore() As Boolean
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
@@ -36,7 +36,7 @@ Module mod_system
             Else
                 MsgBox("Error in OPENING STORE", MsgBoxStyle.Critical)
             End If
-            Exit Sub
+            Return False
         End If
 
 
@@ -56,7 +56,9 @@ Module mod_system
 
         database.SaveEntry(ds)
         Console.WriteLine("Store is now OPEN!")
-    End Sub
+
+        Return True
+    End Function
 
     Friend Sub LoadCurrentDate()
         Dim mySql As String = "SELECT * FROM " & storeDB
@@ -78,7 +80,7 @@ Module mod_system
 
         If ds.Tables(storeDB).Rows.Count = 1 Then
             ds.Tables(storeDB).Rows(0).Item("CashCount") = cc
-            ds.Tables(storeDB).Rows(0).Item("Status") = 1
+            ds.Tables(storeDB).Rows(0).Item("Status") = 0
 
             database.SaveEntry(ds, False)
             MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)

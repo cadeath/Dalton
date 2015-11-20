@@ -47,7 +47,7 @@
             Case Else : lbl = Nothing
         End Select
 
-        lbl.Text = "P " & CInt(txt.Text) * amt
+        lbl.Text = "P " & CDbl(txt.Text) * amt
     End Sub
 
 #Region "KeyPress"
@@ -140,4 +140,18 @@
     End Sub
 #End Region
 
+    Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
+        Dim ans As DialogResult = MsgBox("Do you want to POST this cash count?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        Dim total As Double
+        'Console.WriteLine(">>" & CDbl(lbl25c.Text.Substring(2)))
+        total = CDbl(lbl25c.Text.Substring(2)) + CDbl(lbl50c.Text.Substring(2)) + CDbl(lbl1.Text.Substring(2)) + CDbl(lbl5.Text.Substring(2)) + CDbl(lbl10.Text.Substring(2)) + CDbl(lbl20.Text.Substring(2)) + CDbl(lbl50.Text.Substring(2))
+        total += CDbl(lbl100.Text.Substring(2)) + CDbl(lbl200.Text.Substring(2)) + CDbl(lbl500.Text.Substring(2)) + CDbl(lbl1000.Text.Substring(2))
+
+        Console.WriteLine("CashCount >>" & total)
+        mod_system.CloseStore(total)
+        frmMain.dateSet = False
+        Me.Close()
+    End Sub
 End Class
