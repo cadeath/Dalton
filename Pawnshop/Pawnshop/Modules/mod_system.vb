@@ -43,8 +43,47 @@ Module mod_system
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(storeDB).NewRow
         With dsNewRow
-
+            .Item("CurrentDate") = CurrentDate
+            '.Item("MaintainBal")
+            '.Item("InitialBal")
+            '.Item("RepDep")
+            '.Item("CashCount")'No CashCount on OPENING
+            .Item("Status") = 1
+            .Item("SystemInfo") = Now
+            .Item("Openner") = UserID
         End With
+        ds.Tables(storeDB).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds)
+        Console.WriteLine("Store is now OPEN!")
+    End Sub
+
+    Friend Sub LoadCurrentDate()
+        Dim mySql As String = "SELECT * FROM " & storeDB
+        mySql &= String.Format(" WHERE CurrentDate = {0} AND Status = 1 ", CurrentDate)
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
+        Else
+            MsgBox("Failed to load current date" + vbCr + "Please contact your IT", MsgBoxStyle.Critical)
+        End If
+    End Sub
+
+    Friend Sub CloseStore(ByVal cc As Double)
+        Dim mySql As String = "SELECT * FROM " & storeDB
+        mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate)
+        Dim ds As DataSet = LoadSQL(mySql, storeDB)
+
+        If ds.Tables(storeDB).Rows.Count = 1 Then
+            ds.Tables(storeDB).Rows(0).Item("CashCount") = cc
+            ds.Tables(storeDB).Rows(0).Item("Status") = 1
+
+            database.SaveEntry(ds, False)
+            MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
+        Else
+            MsgBox("Error in closing store" + vbCr + "Contact your IT Department", MsgBoxStyle.Critical)
+        End If
     End Sub
 #End Region
 
