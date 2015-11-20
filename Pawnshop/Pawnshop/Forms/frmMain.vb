@@ -223,6 +223,8 @@
             MsgBoxAuthoriation("You don't have access to Cash Count")
             Exit Sub
         End If
+
+        frmCashCount.Show()
     End Sub
 
     Private Sub BackupToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupToolStripMenuItem.Click

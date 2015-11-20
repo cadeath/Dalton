@@ -35,6 +35,13 @@ pawnshop
  NOTE: Privilege PDuNxp8S9q0= means SUPER USER
  </summary>
 	<remarks>NOTE: Privilege PDuNxp8S9q0= means SUPER USER</remarks>
+</member><member name="M:Pawnshop.frmCashCount.ComputeMe(System.Windows.Forms.TextBox,System.Double)">
+	<summary>
+ Insert this to the KeyUp event
+ </summary>
+	<param name="txt"></param>
+	<param name="amt"></param>
+	<remarks></remarks>
 </member><member name="P:Pawnshop.My.Resources.Resources.ResourceManager">
 	<summary>
   Returns the cached ResourceManager instance used by this class.

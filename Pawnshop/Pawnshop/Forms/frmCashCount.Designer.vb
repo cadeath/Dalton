@@ -28,23 +28,23 @@ Partial Class frmCashCount
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
+        Me.lbl1000 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.txt1000 = New System.Windows.Forms.TextBox()
         Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label33 = New System.Windows.Forms.Label()
+        Me.lbl500 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.txt500 = New System.Windows.Forms.TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
+        Me.lbl200 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.txt200 = New System.Windows.Forms.TextBox()
         Me.Label38 = New System.Windows.Forms.Label()
-        Me.Label39 = New System.Windows.Forms.Label()
+        Me.lbl100 = New System.Windows.Forms.Label()
         Me.Label40 = New System.Windows.Forms.Label()
         Me.txt100 = New System.Windows.Forms.TextBox()
         Me.Label41 = New System.Windows.Forms.Label()
-        Me.Label42 = New System.Windows.Forms.Label()
+        Me.lbl50 = New System.Windows.Forms.Label()
         Me.Label43 = New System.Windows.Forms.Label()
         Me.txt50 = New System.Windows.Forms.TextBox()
         Me.Label44 = New System.Windows.Forms.Label()
@@ -54,32 +54,32 @@ Partial Class frmCashCount
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
+        Me.lbl20 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.txt20 = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.lbl10 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txt10 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lbl5 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txt5 = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lbl1 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txt1 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lbl50c = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txt50c = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lbl25c = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txt25c = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label45 = New System.Windows.Forms.Label()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.txtCurDate = New System.Windows.Forms.TextBox()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
@@ -92,23 +92,23 @@ Partial Class frmCashCount
         Me.GroupBox1.Controls.Add(Me.Label27)
         Me.GroupBox1.Controls.Add(Me.Label28)
         Me.GroupBox1.Controls.Add(Me.Label29)
-        Me.GroupBox1.Controls.Add(Me.Label30)
+        Me.GroupBox1.Controls.Add(Me.lbl1000)
         Me.GroupBox1.Controls.Add(Me.Label31)
         Me.GroupBox1.Controls.Add(Me.txt1000)
         Me.GroupBox1.Controls.Add(Me.Label32)
-        Me.GroupBox1.Controls.Add(Me.Label33)
+        Me.GroupBox1.Controls.Add(Me.lbl500)
         Me.GroupBox1.Controls.Add(Me.Label34)
         Me.GroupBox1.Controls.Add(Me.txt500)
         Me.GroupBox1.Controls.Add(Me.Label35)
-        Me.GroupBox1.Controls.Add(Me.Label36)
+        Me.GroupBox1.Controls.Add(Me.lbl200)
         Me.GroupBox1.Controls.Add(Me.Label37)
         Me.GroupBox1.Controls.Add(Me.txt200)
         Me.GroupBox1.Controls.Add(Me.Label38)
-        Me.GroupBox1.Controls.Add(Me.Label39)
+        Me.GroupBox1.Controls.Add(Me.lbl100)
         Me.GroupBox1.Controls.Add(Me.Label40)
         Me.GroupBox1.Controls.Add(Me.txt100)
         Me.GroupBox1.Controls.Add(Me.Label41)
-        Me.GroupBox1.Controls.Add(Me.Label42)
+        Me.GroupBox1.Controls.Add(Me.lbl50)
         Me.GroupBox1.Controls.Add(Me.Label43)
         Me.GroupBox1.Controls.Add(Me.txt50)
         Me.GroupBox1.Controls.Add(Me.Label44)
@@ -118,27 +118,27 @@ Partial Class frmCashCount
         Me.GroupBox1.Controls.Add(Me.Label21)
         Me.GroupBox1.Controls.Add(Me.Label20)
         Me.GroupBox1.Controls.Add(Me.Label19)
-        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.lbl20)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.txt20)
         Me.GroupBox1.Controls.Add(Me.Label18)
-        Me.GroupBox1.Controls.Add(Me.Label13)
+        Me.GroupBox1.Controls.Add(Me.lbl10)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.txt10)
         Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.Label10)
+        Me.GroupBox1.Controls.Add(Me.lbl5)
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.txt5)
         Me.GroupBox1.Controls.Add(Me.Label12)
-        Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Controls.Add(Me.lbl1)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.txt1)
         Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.lbl50c)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txt50c)
         Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.lbl25c)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.txt25c)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -199,15 +199,15 @@ Partial Class frmCashCount
         Me.Label29.TabIndex = 50
         Me.Label29.Text = "x"
         '
-        'Label30
+        'lbl1000
         '
-        Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(184, 329)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(94, 18)
-        Me.Label30.TabIndex = 49
-        Me.Label30.Text = "P 999,999.00"
+        Me.lbl1000.AutoSize = True
+        Me.lbl1000.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl1000.Location = New System.Drawing.Point(184, 329)
+        Me.lbl1000.Name = "lbl1000"
+        Me.lbl1000.Size = New System.Drawing.Size(94, 18)
+        Me.lbl1000.TabIndex = 49
+        Me.lbl1000.Text = "P 999,999.00"
         '
         'Label31
         '
@@ -238,15 +238,15 @@ Partial Class frmCashCount
         Me.Label32.TabIndex = 46
         Me.Label32.Text = "P 1000"
         '
-        'Label33
+        'lbl500
         '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(184, 299)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(94, 18)
-        Me.Label33.TabIndex = 45
-        Me.Label33.Text = "P 999,999.00"
+        Me.lbl500.AutoSize = True
+        Me.lbl500.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl500.Location = New System.Drawing.Point(184, 299)
+        Me.lbl500.Name = "lbl500"
+        Me.lbl500.Size = New System.Drawing.Size(94, 18)
+        Me.lbl500.TabIndex = 45
+        Me.lbl500.Text = "P 999,999.00"
         '
         'Label34
         '
@@ -277,15 +277,15 @@ Partial Class frmCashCount
         Me.Label35.TabIndex = 42
         Me.Label35.Text = "P 500"
         '
-        'Label36
+        'lbl200
         '
-        Me.Label36.AutoSize = True
-        Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.Location = New System.Drawing.Point(184, 269)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(94, 18)
-        Me.Label36.TabIndex = 41
-        Me.Label36.Text = "P 999,999.00"
+        Me.lbl200.AutoSize = True
+        Me.lbl200.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl200.Location = New System.Drawing.Point(184, 269)
+        Me.lbl200.Name = "lbl200"
+        Me.lbl200.Size = New System.Drawing.Size(94, 18)
+        Me.lbl200.TabIndex = 41
+        Me.lbl200.Text = "P 999,999.00"
         '
         'Label37
         '
@@ -316,15 +316,15 @@ Partial Class frmCashCount
         Me.Label38.TabIndex = 38
         Me.Label38.Text = "P 200"
         '
-        'Label39
+        'lbl100
         '
-        Me.Label39.AutoSize = True
-        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(184, 239)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(94, 18)
-        Me.Label39.TabIndex = 37
-        Me.Label39.Text = "P 999,999.00"
+        Me.lbl100.AutoSize = True
+        Me.lbl100.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl100.Location = New System.Drawing.Point(184, 239)
+        Me.lbl100.Name = "lbl100"
+        Me.lbl100.Size = New System.Drawing.Size(94, 18)
+        Me.lbl100.TabIndex = 37
+        Me.lbl100.Text = "P 999,999.00"
         '
         'Label40
         '
@@ -355,15 +355,15 @@ Partial Class frmCashCount
         Me.Label41.TabIndex = 34
         Me.Label41.Text = "P 100"
         '
-        'Label42
+        'lbl50
         '
-        Me.Label42.AutoSize = True
-        Me.Label42.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label42.Location = New System.Drawing.Point(184, 209)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(94, 18)
-        Me.Label42.TabIndex = 33
-        Me.Label42.Text = "P 999,999.00"
+        Me.lbl50.AutoSize = True
+        Me.lbl50.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl50.Location = New System.Drawing.Point(184, 209)
+        Me.lbl50.Name = "lbl50"
+        Me.lbl50.Size = New System.Drawing.Size(94, 18)
+        Me.lbl50.TabIndex = 33
+        Me.lbl50.Text = "P 999,999.00"
         '
         'Label43
         '
@@ -454,15 +454,15 @@ Partial Class frmCashCount
         Me.Label19.TabIndex = 24
         Me.Label19.Text = "x"
         '
-        'Label16
+        'lbl20
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(184, 179)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(94, 18)
-        Me.Label16.TabIndex = 23
-        Me.Label16.Text = "P 999,999.00"
+        Me.lbl20.AutoSize = True
+        Me.lbl20.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl20.Location = New System.Drawing.Point(184, 179)
+        Me.lbl20.Name = "lbl20"
+        Me.lbl20.Size = New System.Drawing.Size(94, 18)
+        Me.lbl20.TabIndex = 23
+        Me.lbl20.Text = "P 999,999.00"
         '
         'Label17
         '
@@ -493,15 +493,15 @@ Partial Class frmCashCount
         Me.Label18.TabIndex = 20
         Me.Label18.Text = "P 20"
         '
-        'Label13
+        'lbl10
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(184, 149)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(94, 18)
-        Me.Label13.TabIndex = 19
-        Me.Label13.Text = "P 999,999.00"
+        Me.lbl10.AutoSize = True
+        Me.lbl10.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl10.Location = New System.Drawing.Point(184, 149)
+        Me.lbl10.Name = "lbl10"
+        Me.lbl10.Size = New System.Drawing.Size(94, 18)
+        Me.lbl10.TabIndex = 19
+        Me.lbl10.Text = "P 999,999.00"
         '
         'Label14
         '
@@ -532,15 +532,15 @@ Partial Class frmCashCount
         Me.Label15.TabIndex = 16
         Me.Label15.Text = "P 10"
         '
-        'Label10
+        'lbl5
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(184, 119)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(94, 18)
-        Me.Label10.TabIndex = 15
-        Me.Label10.Text = "P 999,999.00"
+        Me.lbl5.AutoSize = True
+        Me.lbl5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl5.Location = New System.Drawing.Point(184, 119)
+        Me.lbl5.Name = "lbl5"
+        Me.lbl5.Size = New System.Drawing.Size(94, 18)
+        Me.lbl5.TabIndex = 15
+        Me.lbl5.Text = "P 999,999.00"
         '
         'Label11
         '
@@ -571,15 +571,15 @@ Partial Class frmCashCount
         Me.Label12.TabIndex = 12
         Me.Label12.Text = "P 5"
         '
-        'Label7
+        'lbl1
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(184, 89)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(94, 18)
-        Me.Label7.TabIndex = 11
-        Me.Label7.Text = "P 999,999.00"
+        Me.lbl1.AutoSize = True
+        Me.lbl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl1.Location = New System.Drawing.Point(184, 89)
+        Me.lbl1.Name = "lbl1"
+        Me.lbl1.Size = New System.Drawing.Size(94, 18)
+        Me.lbl1.TabIndex = 11
+        Me.lbl1.Text = "P 999,999.00"
         '
         'Label8
         '
@@ -610,15 +610,15 @@ Partial Class frmCashCount
         Me.Label9.TabIndex = 8
         Me.Label9.Text = "P 1"
         '
-        'Label4
+        'lbl50c
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(184, 59)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(94, 18)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "P 999,999.00"
+        Me.lbl50c.AutoSize = True
+        Me.lbl50c.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl50c.Location = New System.Drawing.Point(184, 59)
+        Me.lbl50c.Name = "lbl50c"
+        Me.lbl50c.Size = New System.Drawing.Size(94, 18)
+        Me.lbl50c.TabIndex = 7
+        Me.lbl50c.Text = "P 999,999.00"
         '
         'Label5
         '
@@ -649,15 +649,15 @@ Partial Class frmCashCount
         Me.Label6.TabIndex = 4
         Me.Label6.Text = "P 0.5"
         '
-        'Label3
+        'lbl25c
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(184, 29)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(94, 18)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "P 999,999.00"
+        Me.lbl25c.AutoSize = True
+        Me.lbl25c.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl25c.Location = New System.Drawing.Point(184, 29)
+        Me.lbl25c.Name = "lbl25c"
+        Me.lbl25c.Size = New System.Drawing.Size(94, 18)
+        Me.lbl25c.TabIndex = 3
+        Me.lbl25c.Text = "P 999,999.00"
         '
         'Label2
         '
@@ -698,16 +698,16 @@ Partial Class frmCashCount
         Me.Label45.TabIndex = 1
         Me.Label45.Text = "Today is"
         '
-        'TextBox12
+        'txtCurDate
         '
-        Me.TextBox12.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox12.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox12.Location = New System.Drawing.Point(15, 409)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.ReadOnly = True
-        Me.TextBox12.Size = New System.Drawing.Size(253, 24)
-        Me.TextBox12.TabIndex = 11
-        Me.TextBox12.Text = "Jan. 7, 2015 5:30 PM"
+        Me.txtCurDate.BackColor = System.Drawing.SystemColors.Window
+        Me.txtCurDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCurDate.Location = New System.Drawing.Point(15, 409)
+        Me.txtCurDate.Name = "txtCurDate"
+        Me.txtCurDate.ReadOnly = True
+        Me.txtCurDate.Size = New System.Drawing.Size(253, 24)
+        Me.txtCurDate.TabIndex = 11
+        Me.txtCurDate.Text = "Jan. 7, 2015 5:30 PM"
         '
         'btnClose
         '
@@ -735,7 +735,7 @@ Partial Class frmCashCount
         Me.ClientSize = New System.Drawing.Size(312, 513)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.TextBox12)
+        Me.Controls.Add(Me.txtCurDate)
         Me.Controls.Add(Me.Label45)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -755,23 +755,23 @@ Partial Class frmCashCount
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label29 As System.Windows.Forms.Label
-    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents lbl1000 As System.Windows.Forms.Label
     Friend WithEvents Label31 As System.Windows.Forms.Label
     Friend WithEvents txt1000 As System.Windows.Forms.TextBox
     Friend WithEvents Label32 As System.Windows.Forms.Label
-    Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents lbl500 As System.Windows.Forms.Label
     Friend WithEvents Label34 As System.Windows.Forms.Label
     Friend WithEvents txt500 As System.Windows.Forms.TextBox
     Friend WithEvents Label35 As System.Windows.Forms.Label
-    Friend WithEvents Label36 As System.Windows.Forms.Label
+    Friend WithEvents lbl200 As System.Windows.Forms.Label
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents txt200 As System.Windows.Forms.TextBox
     Friend WithEvents Label38 As System.Windows.Forms.Label
-    Friend WithEvents Label39 As System.Windows.Forms.Label
+    Friend WithEvents lbl100 As System.Windows.Forms.Label
     Friend WithEvents Label40 As System.Windows.Forms.Label
     Friend WithEvents txt100 As System.Windows.Forms.TextBox
     Friend WithEvents Label41 As System.Windows.Forms.Label
-    Friend WithEvents Label42 As System.Windows.Forms.Label
+    Friend WithEvents lbl50 As System.Windows.Forms.Label
     Friend WithEvents Label43 As System.Windows.Forms.Label
     Friend WithEvents txt50 As System.Windows.Forms.TextBox
     Friend WithEvents Label44 As System.Windows.Forms.Label
@@ -781,32 +781,32 @@ Partial Class frmCashCount
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents lbl20 As System.Windows.Forms.Label
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents txt20 As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents lbl10 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents txt10 As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents lbl5 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txt5 As System.Windows.Forms.TextBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents lbl1 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txt1 As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents lbl50c As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txt50c As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lbl25c As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txt25c As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label45 As System.Windows.Forms.Label
-    Friend WithEvents TextBox12 As System.Windows.Forms.TextBox
+    Friend WithEvents txtCurDate As System.Windows.Forms.TextBox
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnPost As System.Windows.Forms.Button
 End Class
