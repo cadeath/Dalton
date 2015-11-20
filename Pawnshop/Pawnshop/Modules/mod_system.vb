@@ -26,7 +26,7 @@ Module mod_system
 
     Friend Sub OpenStore()
         Dim mySql As String = "SELECT * FROM " & storeDB
-        mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate)
+        mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
 
         ' Do not allow previous date to OPEN if closed.
@@ -60,19 +60,20 @@ Module mod_system
 
     Friend Sub LoadCurrentDate()
         Dim mySql As String = "SELECT * FROM " & storeDB
-        mySql &= String.Format(" WHERE CurrentDate = {0} AND Status = 1 ", CurrentDate)
+        mySql &= String.Format(" WHERE Status = 1")
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 1 Then
             CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
+            frmMain.dateSet = True
         Else
-            MsgBox("Failed to load current date" + vbCr + "Please contact your IT", MsgBoxStyle.Critical)
+            frmMain.dateSet = False
         End If
     End Sub
 
     Friend Sub CloseStore(ByVal cc As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB
-        mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate)
+        mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
 
         If ds.Tables(storeDB).Rows.Count = 1 Then

@@ -9,8 +9,6 @@
     End Sub
 
     Private Sub btnSetup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetup.Click
-        mod_system.OpenStore()
-
         CurrentDate = dtpCurrentDate.Value
         Dim ans As DialogResult = MsgBox("TODAY IS: " & vbCrLf & dtpCurrentDate.Value.ToString("MMM d, yyyy"), MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Please CHECK")
         If Not ans = Windows.Forms.DialogResult.Yes Then
@@ -24,6 +22,7 @@
             End If
         End If
         frmMain.dateSet = True
+        mod_system.OpenStore()
 
         Me.Close()
     End Sub

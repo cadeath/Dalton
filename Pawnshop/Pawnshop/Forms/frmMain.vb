@@ -53,15 +53,16 @@
         Next ctl
     End Sub
 
+    Friend Sub CheckStoreStatus()
+        mod_system.LoadCurrentDate()
+        CloseOpenStore.Enabled = Not dateSet
+    End Sub
+
     Friend Sub LoadChild(ByVal frm As Form)
         frm.MdiParent = Me
         frm.TopMost = True
         frm.BringToFront()
         frm.Show()
-    End Sub
-
-    Friend Sub Alert()
-        MsgBox("Alert", MsgBoxStyle.Critical)
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
