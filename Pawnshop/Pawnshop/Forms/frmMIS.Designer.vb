@@ -23,22 +23,22 @@ Partial Class frmMIS
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Button7 = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -64,52 +64,43 @@ Partial Class frmMIS
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Database"
         '
-        'Label1
+        'Button5
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(29, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Path"
+        Me.Button5.Location = New System.Drawing.Point(329, 119)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(73, 22)
+        Me.Button5.TabIndex = 11
+        Me.Button5.Text = "&Password"
+        Me.Button5.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'Button6
         '
-        Me.TextBox1.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(9, 32)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(235, 22)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "C:\"
+        Me.Button6.Location = New System.Drawing.Point(250, 119)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(73, 22)
+        Me.Button6.TabIndex = 10
+        Me.Button6.Text = "Browse"
+        Me.Button6.UseVisualStyleBackColor = True
         '
-        'Button1
+        'TextBox3
         '
-        Me.Button1.Location = New System.Drawing.Point(250, 32)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(73, 22)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Browse"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.TextBox3.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Location = New System.Drawing.Point(9, 119)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.Size = New System.Drawing.Size(235, 22)
+        Me.TextBox3.TabIndex = 9
+        Me.TextBox3.Text = "C:\file.noEXT"
         '
-        'Button2
+        'Label3
         '
-        Me.Button2.Location = New System.Drawing.Point(329, 32)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(73, 22)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "&Save"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 58)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(44, 13)
-        Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Restore"
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(6, 103)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(73, 13)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "Get Password"
         '
         'Button3
         '
@@ -140,43 +131,52 @@ Partial Class frmMIS
         Me.TextBox2.TabIndex = 5
         Me.TextBox2.Text = "C:\file.noEXT"
         '
-        'TextBox3
+        'Label2
         '
-        Me.TextBox3.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(9, 119)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(235, 22)
-        Me.TextBox3.TabIndex = 9
-        Me.TextBox3.Text = "C:\file.noEXT"
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(6, 58)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(44, 13)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Restore"
         '
-        'Label3
+        'Button2
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 103)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(73, 13)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Get Password"
+        Me.Button2.Location = New System.Drawing.Point(329, 32)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(73, 22)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "&Save"
+        Me.Button2.UseVisualStyleBackColor = True
         '
-        'Button5
+        'Button1
         '
-        Me.Button5.Location = New System.Drawing.Point(329, 119)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(73, 22)
-        Me.Button5.TabIndex = 11
-        Me.Button5.Text = "&Password"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button1.Location = New System.Drawing.Point(250, 32)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(73, 22)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "Browse"
+        Me.Button1.UseVisualStyleBackColor = True
         '
-        'Button6
+        'TextBox1
         '
-        Me.Button6.Location = New System.Drawing.Point(250, 119)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(73, 22)
-        Me.Button6.TabIndex = 10
-        Me.Button6.Text = "Browse"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.TextBox1.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(9, 32)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(235, 22)
+        Me.TextBox1.TabIndex = 1
+        Me.TextBox1.Text = "C:\"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(6, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(29, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Path"
         '
         'GroupBox2
         '
@@ -190,34 +190,34 @@ Partial Class frmMIS
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "User Management"
         '
+        'TextBox4
+        '
+        Me.TextBox4.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.Location = New System.Drawing.Point(9, 40)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.ReadOnly = True
+        Me.TextBox4.Size = New System.Drawing.Size(178, 22)
+        Me.TextBox4.TabIndex = 12
+        Me.TextBox4.Text = "newpassword"
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(193, 40)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(73, 22)
+        Me.Button7.TabIndex = 11
+        Me.Button7.Text = "Change"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(6, 24)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(73, 13)
+        Me.Label4.Size = New System.Drawing.Size(60, 13)
         Me.Label4.TabIndex = 10
-        Me.Label4.Text = "Reset POS IT"
-        '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(6, 40)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(73, 22)
-        Me.Button7.TabIndex = 11
-        Me.Button7.Text = "Reset"
-        Me.Button7.UseVisualStyleBackColor = True
-        '
-        'TextBox4
-        '
-        Me.TextBox4.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(88, 40)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.ReadOnly = True
-        Me.TextBox4.Size = New System.Drawing.Size(178, 22)
-        Me.TextBox4.TabIndex = 12
-        Me.TextBox4.Text = "eskiegwapo"
+        Me.Label4.Text = "IT Account"
         '
         'frmMIS
         '
@@ -227,6 +227,7 @@ Partial Class frmMIS
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "frmMIS"
         Me.Text = "MIS CONTROL PANEL"
         Me.GroupBox1.ResumeLayout(False)

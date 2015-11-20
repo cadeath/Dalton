@@ -231,7 +231,6 @@ Public Class ComputerUser
         End Get
     End Property
 
-
     'Special
     Private _cashInBank As Boolean
     Public ReadOnly Property canCashInBank() As Boolean
