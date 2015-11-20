@@ -253,6 +253,13 @@ Public Class ComputerUser
         End Get
     End Property
 
+    Private _superUser As Boolean
+    Public ReadOnly Property isSuperUser() As Boolean
+        Get
+            Return _superUser
+        End Get
+    End Property
+
     Public Sub UpdatePrivilege()
         Dim parts() As String = _privilege.Split("|")
         Dim y As Integer
@@ -312,6 +319,7 @@ Public Class ComputerUser
         Dim superAdmin As String = "PDuNxp8S9q0="
         If _privilege = superAdmin Then
             _level = "Super User"
+            _superUser = True
 
             Dim TabCnt As Integer = 4
             Dim privList() As Boolean = {}

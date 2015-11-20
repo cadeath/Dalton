@@ -96,6 +96,8 @@ Module mod_system
             End With
 
             database.SaveEntry(ds, False)
+
+            UpdateOptions("CurrentBalance", cc)
             MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
         Else
             MsgBox("Error in closing store" + vbCr + "Contact your IT Department", MsgBoxStyle.Critical)

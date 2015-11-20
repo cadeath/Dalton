@@ -23,8 +23,28 @@
         UpdateOptions("BranchName", txtName.Text)
         UpdateOptions("BranchArea", txtArea.Text)
         UpdateOptions("MaintainingBalance", txtBal.Text)
+        UpdateOptions("CurrentBalance", txtBal.Text)
         UpdateOptions("ORLastNum", txtOR.Text)
         UpdateOptions("BorrowingLastNum", txtBorrow.Text)
         UpdateOptions("InsuranceLastNum", txtInsurance.Text)
+
+        MsgBox("New Branch has been setup", MsgBoxStyle.Information)
+        Me.Close()
+    End Sub
+
+    Private Sub txtBal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBal.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtOR_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOR.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtBorrow_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBorrow.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtInsurance_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInsurance.KeyPress
+        DigitOnly(e)
     End Sub
 End Class
