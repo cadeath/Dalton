@@ -428,6 +428,8 @@
 
         btnRedeem.Enabled = False
         btnRenew.Enabled = False
+
+        lblInt.Text = "Advance Interest:"
     End Sub
 
     Friend Sub LoadPawnTicket(ByVal tk As PawnTicket, ByVal tt As String)
@@ -615,6 +617,9 @@
             Dim int = GetPawnshop(30, cboItemtype.Text)
 
             txtTotal.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * int)
+            If transactionType = "L" Then
+                txtDelayInt.Text = (CDbl(txtPrincipal.Text) * int)
+            End If
         Else
             txtTotal.Text = txtPrincipal.Text
         End If
