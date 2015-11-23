@@ -191,6 +191,9 @@
         If LogOutToolStripMenuItem.Text = "&Login" Then
             frmLogin.Show()
         Else
+            Dim ans As DialogResult = MsgBox("Do you want to LOGOUT?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Logout")
+            If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
             POSuser = Nothing
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
