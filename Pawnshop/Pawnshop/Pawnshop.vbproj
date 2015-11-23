@@ -139,6 +139,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\Borrowings.vb" />
+    <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
@@ -169,6 +170,12 @@
       <DependentUpon>frmBackup.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCashInOutBrowse.Designer.vb">
+      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCashInOutBrowse.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
@@ -367,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackup.resx">
       <DependentUpon>frmBackup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCashInOutBrowse.resx">
+      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>
