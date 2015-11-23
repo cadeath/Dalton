@@ -140,6 +140,7 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
+    <Compile Include="Classes\CashInOutTransaction.vb" />
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />

@@ -63,4 +63,10 @@
         ds = LoadSQL(mySql, fillData)
 
     End Sub
+
+    Public Sub LoadCashInOutByRow(ByVal dr As DataRow)
+        With dr
+            _cashID = .Item("")
+        End With
+    End Sub
 End Class
