@@ -51,6 +51,17 @@
                 ctl.BackColor = Me.BackColor
             End If
         Next ctl
+
+        If Not CheckSystem() Then
+            frmSettings.Show()
+            frmSettings.Focus()
+            frmSettings.TopMost = True
+        End If
+    End Sub
+
+    Friend Sub CheckStoreStatus()
+        mod_system.LoadCurrentDate()
+        CloseOpenStore.Enabled = Not dateSet
     End Sub
 
     Friend Sub LoadChild(ByVal frm As Form)
@@ -60,15 +71,16 @@
         frm.Show()
     End Sub
 
-    Friend Sub Alert()
-        MsgBox("Alert", MsgBoxStyle.Critical)
-    End Sub
-
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         End
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
+        If Not POSuser.canSettings Then
+            MsgBoxAuthoriation("You don't have access to Settings")
+            Exit Sub
+        End If
+
         frmSettings.Show()
     End Sub
 
@@ -157,7 +169,11 @@
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
-        If dateSet Then tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+        If dateSet Then
+            tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+        Else
+            tsCurrentDate.Text = "Date not set"
+        End If
     End Sub
 
     Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click
@@ -194,6 +210,7 @@
             Exit Sub
         End If
         'Insurance show form
+        frmInsurance.Show()
     End Sub
 
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
@@ -221,6 +238,8 @@
             MsgBoxAuthoriation("You don't have access to Cash Count")
             Exit Sub
         End If
+
+        frmCashCount.Show()
     End Sub
 
     Private Sub BackupToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupToolStripMenuItem.Click
@@ -228,9 +247,22 @@
             MsgBoxAuthoriation("You don't have access to Backup")
             Exit Sub
         End If
+
+        frmBackup.Show()
     End Sub
 
     Private Sub UpdateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdateToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
+        frmRate.Show()
+    End Sub
+
+    Private Sub ConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsoleToolStripMenuItem.Click
+        If Not POSuser.isSuperUser Then
+            MsgBoxAuthoriation("You don't have access to the Console")
+            Exit Sub
+        End If
+
+        frmMIS.Show()
     End Sub
 End Class

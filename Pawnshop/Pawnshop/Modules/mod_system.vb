@@ -1,4 +1,6 @@
 ﻿' Changelog
+' v1.3 11/19/15
+'  - CommandPrompt Added
 ' v1.2 11/6/15
 '  - Added ESK File
 ' v1.1 10/20/15
@@ -14,8 +16,113 @@ Module mod_system
     Public BranchCode As String = "ROX"
 
     Friend isAuthorized As Boolean = False
-    Public advanceInterestNumberofMonth As Integer = 33
+    Public backupPath As String = "."
+
+    Friend advanceInterestNumberofMonth As Integer = 33
+    Friend MaintainBal As Double = GetOption("MaintainingBalance")
+    Friend InitialBal As Double = 0
+    Friend RepDep As Double = 0
+
 #End Region
+
+#Region "Store"
+    Private storeDB As String = "tblDaily"
+
+    Friend Function OpenStore() As Boolean
+        Dim mySql As String = "SELECT * FROM " & storeDB
+        mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
+        Dim ds As DataSet = LoadSQL(mySql, storeDB)
+
+        ' Do not allow previous date to OPEN if closed.
+        If ds.Tables(storeDB).Rows.Count = 1 Then
+            If ds.Tables(storeDB).Rows(0).Item("Status") = 0 Then
+                MsgBox("You cannot select to open a previous date", MsgBoxStyle.Critical)
+            Else
+                MsgBox("Error in OPENING STORE", MsgBoxStyle.Critical)
+            End If
+            Return False
+        End If
+
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(storeDB).NewRow
+        With dsNewRow
+            .Item("CurrentDate") = CurrentDate
+            .Item("MaintainBal") = MaintainBal
+            .Item("InitialBal") = InitialBal 
+            .Item("RepDep") = RepDep
+            '.Item("CashCount")'No CashCount on OPENING
+            .Item("Status") = 1
+            .Item("SystemInfo") = Now
+            .Item("Openner") = UserID
+        End With
+        ds.Tables(storeDB).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds)
+        Console.WriteLine("Store is now OPEN!")
+
+        Return True
+    End Function
+
+    Friend Function LoadLastOpening() As DataSet
+        Dim mySql As String = "SELECT * FROM tblDaily ORDER BY ID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds
+    End Function
+
+    Friend Sub LoadCurrentDate()
+        Dim mySql As String = "SELECT * FROM " & storeDB
+        mySql &= String.Format(" WHERE Status = 1")
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
+            frmMain.dateSet = True
+        Else
+            frmMain.dateSet = False
+        End If
+    End Sub
+
+    Friend Sub CloseStore(ByVal cc As Double)
+        Dim mySql As String = "SELECT * FROM " & storeDB
+        mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
+        Dim ds As DataSet = LoadSQL(mySql, storeDB)
+
+        If ds.Tables(storeDB).Rows.Count = 1 Then
+            With ds.Tables(storeDB).Rows(0)
+                .Item("CashCount") = cc
+                .Item("Status") = 0
+            End With
+
+            database.SaveEntry(ds, False)
+
+            UpdateOptions("CurrentBalance", cc)
+            MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
+        Else
+            MsgBox("Error in closing store" + vbCr + "Contact your IT Department", MsgBoxStyle.Critical)
+        End If
+    End Sub
+#End Region
+
+    Public Function CommandPrompt(ByVal app As String, ByVal args As String) As String
+        Dim oProcess As New Process()
+        Dim oStartInfo As New ProcessStartInfo(app, args)
+        oStartInfo.UseShellExecute = False
+        oStartInfo.RedirectStandardOutput = True
+        oStartInfo.WindowStyle = ProcessWindowStyle.Hidden
+        oStartInfo.CreateNoWindow = True
+        oProcess.StartInfo = oStartInfo
+
+        oProcess.Start()
+
+        Dim sOutput As String
+        Using oStreamReader As System.IO.StreamReader = oProcess.StandardOutput
+            sOutput = oStreamReader.ReadToEnd()
+        End Using
+
+        Return sOutput
+    End Function
 
     Friend Sub CreateEsk(ByVal url As String, ByVal data As Hashtable)
         If System.IO.File.Exists(url) Then System.IO.File.Delete(url)

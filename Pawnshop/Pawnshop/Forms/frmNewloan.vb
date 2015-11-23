@@ -136,6 +136,12 @@
         DigitOnly(e)
     End Sub
 
+    Private Sub frmNewloan_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        'For Each eL As DictionaryEntry In appraisal
+        '    Console.WriteLine(eL)
+        'Next
+    End Sub
+
     Private Sub frmNewloan_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyCode
             Case Keys.F4
@@ -255,8 +261,9 @@
         txtRenewDue.Text = tk.RenewDue
         txtRedeemDue.Text = tk.RedeemDue
 
-        LoadAppraisers()
-        cboAppraiser.Text = GetAppraiserById(tk.AppraiserID)
+        Dim appraiser As New ComputerUser
+        appraiser.LoadUser(tk.AppraiserID)
+        cboAppraiser.Text = appraiser.UserName
 
         PawnItem = tk
 
@@ -495,7 +502,6 @@
         Dim newPawnItem As New PawnTicket
         With newPawnItem
             .PawnTicket = txtTicket.Text
-            .Pawner = Pawner
             .LoanDate = LoanDate.Value
             .MaturityDate = Maturity.Value
             .ExpiryDate = Expiry.Value
@@ -520,7 +526,7 @@
                 .Principal = txtPrincipal.Text
             End If
             .NetAmount = txtTotal.Text
-            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
+            '.AppraiserID = appraisal(cboAppraiser.Text)
             .Status = transactionType
             .AdvanceInterestPerDays = advanceInterestNumberofMonth
             If transactionType <> "L" Then

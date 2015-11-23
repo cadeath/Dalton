@@ -231,7 +231,6 @@ Public Class ComputerUser
         End Get
     End Property
 
-
     'Special
     Private _cashInBank As Boolean
     Public ReadOnly Property canCashInBank() As Boolean
@@ -251,6 +250,13 @@ Public Class ComputerUser
     Public ReadOnly Property canVoid() As Boolean
         Get
             Return _void
+        End Get
+    End Property
+
+    Private _superUser As Boolean
+    Public ReadOnly Property isSuperUser() As Boolean
+        Get
+            Return _superUser
         End Get
     End Property
 
@@ -313,9 +319,10 @@ Public Class ComputerUser
         Dim superAdmin As String = "PDuNxp8S9q0="
         If _privilege = superAdmin Then
             _level = "Super User"
+            _superUser = True
 
             Dim TabCnt As Integer = 4
-            Dim privList() As Boolean
+            Dim privList() As Boolean = {}
 
             For cnt As Integer = 0 To TabCnt - 1
                 Select Case cnt

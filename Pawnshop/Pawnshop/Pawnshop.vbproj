@@ -83,6 +83,12 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Antialiasfactory-Jewelry-Stone-Ring.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DeathCodez">
       <HintPath>.\DeathCodez.dll</HintPath>
@@ -131,12 +137,16 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\Borrowings.vb" />
+    <Compile Include="Classes\CashInOut.vb" />
+    <Compile Include="Classes\CashInOutTransaction.vb" />
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
+    <Compile Include="Classes\Insurance.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Developer\devClient.Designer.vb">
@@ -157,10 +167,28 @@
     <Compile Include="Forms\diagAuthorization.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmBackup.Designer.vb">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCashInOutBrowse.Designer.vb">
+      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCashInOutBrowse.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
       <DependentUpon>frmDollarList.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmDollarList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmInsuranceList.Designer.vb">
+      <DependentUpon>frmInsuranceList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInsuranceList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmLayAwayLookUp.Designer.vb">
@@ -242,6 +270,12 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmMIS.Designer.vb">
+      <DependentUpon>frmMIS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMIS.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmMoneyTransfer.Designer.vb">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </Compile>
@@ -278,6 +312,12 @@
     <Compile Include="Forms\frmPawning.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmRate.Designer.vb">
+      <DependentUpon>frmRate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmSettings.Designer.vb">
       <DependentUpon>frmSettings.vb</DependentUpon>
     </Compile>
@@ -293,6 +333,7 @@
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
     <Compile Include="Modules\mod_system.vb" />
+    <Compile Include="Modules\newSetup.vb" />
     <Compile Include="Modules\security.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -332,8 +373,17 @@
     <EmbeddedResource Include="Forms\diagAuthorization.resx">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBackup.resx">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCashInOutBrowse.resx">
+      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInsuranceList.resx">
+      <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLayAwayLookUp.resx">
       <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
@@ -374,6 +424,9 @@
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMIS.resx">
+      <DependentUpon>frmMIS.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMoneyTransfer.resx">
       <DependentUpon>frmMoneyTransfer.vb</DependentUpon>
     </EmbeddedResource>
@@ -391,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawning.resx">
       <DependentUpon>frmPawning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRate.resx">
+      <DependentUpon>frmRate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>
@@ -422,7 +478,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="W3W1LH4CKU.FDB" />
+    <None Include="W3W1LH4CKU.FDB">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -447,6 +505,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Antialiasfactory-Jewelry-Stone-Ring.ico" />
+    <Content Include="Rar.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="README-DEVELOPER.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
