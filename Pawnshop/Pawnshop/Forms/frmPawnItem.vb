@@ -3,11 +3,16 @@
     Friend transactionType As String = "L"
     Friend PawnItem As PawnTicket
 
+    Private PawnInfo() As ArrayList
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
-    Private PawnInfo() As Hashtable
+
+    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        LoadInformation()
+    End Sub
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        ClearFields()
+        'LoadInformation()
     End Sub
 
 #Region "GUI"
@@ -85,7 +90,7 @@
     End Function
 
     Private Sub LoadInformation()
-
+        LoadPawnInfo()
     End Sub
 
     Private Sub LoadPawnInfo()
@@ -96,28 +101,36 @@
         'Type
         Dim mySql As String = "SELECT DISTINCT TYPE FROM tblClass ORDER BY TYPE ASC"
         Dim ds As DataSet = LoadSQL(mySql)
-        Dim cnt As Integer = 0, classCNT As Integer = ds.Tables(0).Rows.Count
+        Dim classCNT As Integer = ds.Tables(0).Rows.Count
         For Each dr As DataRow In ds.Tables(0).Rows
             cboType.Items.Add(dr.Item("TYPE"))
-            cnt += 1
         Next
         cboType.SelectedIndex = 0
 
         'Category
-        cnt = 0 : mySql = "SELECT * FROM tblClass WHERE "
+        ReDim PawnInfo(classCNT - 1)
+        Dim cnt As Integer = 0 : mySql = "SELECT * FROM tblClass WHERE "
         For cnt = 0 To classCNT - 1
             Dim str As String = mySql & String.Format("TYPE = '{0}'", cboType.Items(cnt)) & " ORDER BY CATEGORY ASC"
             ds.Clear()
             ds = LoadSQL(str)
-            Dim x As Integer = 0
+            Dim x As Integer = 1
+            cboCat.Items.Clear()
+
+            Dim tmpArr As New ArrayList
             For Each dr As DataRow In ds.Tables(0).Rows
-                PawnInfo(cnt).Add(x, dr.Item("Category"))
+                tmpArr.Add(dr.Item("Category"))
+                cboCat.Items.Add(dr.Item("Category"))
                 x += 1
             Next
+            PawnInfo(cnt).AddRange(tmparr)
         Next
 
 
     End Sub
 #End Region
 
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        Me.Close()
+    End Sub
 End Class

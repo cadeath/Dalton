@@ -66,7 +66,7 @@ Partial Class frmPawnItem
         Me.Label15 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.lblAuth = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.cboAppraiser = New System.Windows.Forms.ComboBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.txtRedeem = New System.Windows.Forms.TextBox()
         Me.Label30 = New System.Windows.Forms.Label()
@@ -88,11 +88,11 @@ Partial Class frmPawnItem
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txtReceipt = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnRenew = New System.Windows.Forms.Button()
+        Me.btnVoid = New System.Windows.Forms.Button()
+        Me.btnRedeem = New System.Windows.Forms.Button()
         Me.lblNPT = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -537,7 +537,7 @@ Partial Class frmPawnItem
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.lblAuth)
-        Me.GroupBox4.Controls.Add(Me.ComboBox4)
+        Me.GroupBox4.Controls.Add(Me.cboAppraiser)
         Me.GroupBox4.Location = New System.Drawing.Point(346, 340)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(249, 69)
@@ -555,15 +555,15 @@ Partial Class frmPawnItem
         Me.lblAuth.TabIndex = 5
         Me.lblAuth.Text = "Unconfirmed"
         '
-        'ComboBox4
+        'cboAppraiser
         '
-        Me.ComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(22, 19)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(194, 24)
-        Me.ComboBox4.TabIndex = 0
+        Me.cboAppraiser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboAppraiser.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboAppraiser.FormattingEnabled = True
+        Me.cboAppraiser.Location = New System.Drawing.Point(22, 19)
+        Me.cboAppraiser.Name = "cboAppraiser"
+        Me.cboAppraiser.Size = New System.Drawing.Size(194, 24)
+        Me.cboAppraiser.TabIndex = 0
         '
         'GroupBox5
         '
@@ -774,55 +774,55 @@ Partial Class frmPawnItem
         Me.Label21.TabIndex = 3
         Me.Label21.Text = "Receipt No"
         '
-        'Button2
+        'btnCancel
         '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(835, 431)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(88, 33)
-        Me.Button2.TabIndex = 8
-        Me.Button2.Text = "&Cancel"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(835, 431)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(88, 33)
+        Me.btnCancel.TabIndex = 8
+        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnSave
         '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(741, 431)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(88, 33)
-        Me.Button3.TabIndex = 5
-        Me.Button3.Text = "&Save"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Location = New System.Drawing.Point(741, 431)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(88, 33)
+        Me.btnSave.TabIndex = 5
+        Me.btnSave.Text = "&Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnRenew
         '
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(346, 431)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(88, 33)
-        Me.Button4.TabIndex = 6
-        Me.Button4.Text = "&Renew"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnRenew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRenew.Location = New System.Drawing.Point(346, 431)
+        Me.btnRenew.Name = "btnRenew"
+        Me.btnRenew.Size = New System.Drawing.Size(88, 33)
+        Me.btnRenew.TabIndex = 6
+        Me.btnRenew.Text = "&Renew"
+        Me.btnRenew.UseVisualStyleBackColor = True
         '
-        'Button5
+        'btnVoid
         '
-        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button5.Location = New System.Drawing.Point(551, 431)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(88, 33)
-        Me.Button5.TabIndex = 10
-        Me.Button5.Text = "&Void"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.btnVoid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVoid.Location = New System.Drawing.Point(551, 431)
+        Me.btnVoid.Name = "btnVoid"
+        Me.btnVoid.Size = New System.Drawing.Size(88, 33)
+        Me.btnVoid.TabIndex = 10
+        Me.btnVoid.Text = "&Void"
+        Me.btnVoid.UseVisualStyleBackColor = True
         '
-        'Button6
+        'btnRedeem
         '
-        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.Location = New System.Drawing.Point(440, 431)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(88, 33)
-        Me.Button6.TabIndex = 7
-        Me.Button6.Text = "&Redeem"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.btnRedeem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRedeem.Location = New System.Drawing.Point(440, 431)
+        Me.btnRedeem.Name = "btnRedeem"
+        Me.btnRedeem.Size = New System.Drawing.Size(88, 33)
+        Me.btnRedeem.TabIndex = 7
+        Me.btnRedeem.Text = "&Redeem"
+        Me.btnRedeem.UseVisualStyleBackColor = True
         '
         'lblNPT
         '
@@ -841,11 +841,11 @@ Partial Class frmPawnItem
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(935, 472)
         Me.Controls.Add(Me.lblNPT)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnRedeem)
+        Me.Controls.Add(Me.btnVoid)
+        Me.Controls.Add(Me.btnRenew)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
@@ -911,7 +911,7 @@ Partial Class frmPawnItem
     Friend WithEvents txtGram As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents ComboBox4 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboAppraiser As System.Windows.Forms.ComboBox
     Friend WithEvents lblAuth As System.Windows.Forms.Label
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents txtRedeem As System.Windows.Forms.TextBox
@@ -934,10 +934,10 @@ Partial Class frmPawnItem
     Friend WithEvents Label22 As System.Windows.Forms.Label
     Friend WithEvents txtReceipt As System.Windows.Forms.TextBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents btnRenew As System.Windows.Forms.Button
+    Friend WithEvents btnVoid As System.Windows.Forms.Button
+    Friend WithEvents btnRedeem As System.Windows.Forms.Button
     Friend WithEvents lblNPT As System.Windows.Forms.Label
 End Class
