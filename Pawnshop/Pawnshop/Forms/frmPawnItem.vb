@@ -3,16 +3,12 @@
     Friend transactionType As String = "L"
     Friend PawnItem As PawnTicket
 
-    Private PawnInfo() As ArrayList
+    Private PawnInfo(4) As ArrayList
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
-
-    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
-        LoadInformation()
-    End Sub
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
-        'LoadInformation()
+        LoadInformation()
     End Sub
 
 #Region "GUI"
@@ -61,6 +57,22 @@
     Private Sub txtGram_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtGram.KeyPress
         DigitOnly(e)
     End Sub
+
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        Me.Close()
+    End Sub
+
+    Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
+        On Error Resume Next
+
+        If cboType.Text = cboType.Text Then Exit Sub
+
+        Dim idx As Integer = cboType.SelectedIndex
+        cboCat.Items.Clear()
+        For Each dStr In PawnInfo(idx)
+            cboCat.Items.Add(dStr)
+        Next
+    End Sub
 #End Region
 
 #Region "Controller"
@@ -108,29 +120,28 @@
         cboType.SelectedIndex = 0
 
         'Category
-        ReDim PawnInfo(classCNT - 1)
+        'ReDim PawnInfo(classCNT - 1)
         Dim cnt As Integer = 0 : mySql = "SELECT * FROM tblClass WHERE "
         For cnt = 0 To classCNT - 1
             Dim str As String = mySql & String.Format("TYPE = '{0}'", cboType.Items(cnt)) & " ORDER BY CATEGORY ASC"
             ds.Clear()
             ds = LoadSQL(str)
-            Dim x As Integer = 1
+            Dim x As Integer = 0
             cboCat.Items.Clear()
 
+            PawnInfo(cnt) = New ArrayList
             Dim tmpArr As New ArrayList
+            Console.WriteLine("Batch " & cnt + 1 & " ===================")
             For Each dr As DataRow In ds.Tables(0).Rows
                 tmpArr.Add(dr.Item("Category"))
                 cboCat.Items.Add(dr.Item("Category"))
+                Console.WriteLine(x + 1 & ". " & dr.Item("Category"))
                 x += 1
             Next
-            PawnInfo(cnt).AddRange(tmparr)
+            PawnInfo(cnt).AddRange(tmpArr)
         Next
-
 
     End Sub
 #End Region
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.Close()
-    End Sub
 End Class

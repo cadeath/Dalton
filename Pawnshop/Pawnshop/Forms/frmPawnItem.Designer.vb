@@ -440,6 +440,7 @@ Partial Class frmPawnItem
         Me.cboKarat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboKarat.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboKarat.FormattingEnabled = True
+        Me.cboKarat.Items.AddRange(New Object() {"10", "12", "14", "16", "18", "20", "21", "22", "24"})
         Me.cboKarat.Location = New System.Drawing.Point(156, 169)
         Me.cboKarat.Name = "cboKarat"
         Me.cboKarat.Size = New System.Drawing.Size(121, 24)
