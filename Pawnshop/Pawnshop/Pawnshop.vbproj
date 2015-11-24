@@ -312,6 +312,12 @@
     <Compile Include="Forms\frmPawning.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmPawnItem.Designer.vb">
+      <DependentUpon>frmPawnItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPawnItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmRate.Designer.vb">
       <DependentUpon>frmRate.vb</DependentUpon>
     </Compile>
@@ -444,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawning.resx">
       <DependentUpon>frmPawning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPawnItem.resx">
+      <DependentUpon>frmPawnItem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate.resx">
       <DependentUpon>frmRate.vb</DependentUpon>
