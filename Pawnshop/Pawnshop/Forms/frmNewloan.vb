@@ -353,24 +353,6 @@
 #End Region
 
 #Region "Controllers"
-    Private Sub LoadItemType()
-        Dim itmType As String() = {"JWL", "APP", "BIG", "CEL"}
-        cboItemtype.Items.Clear()
-        cboItemtype.Items.AddRange(itmType)
-    End Sub
-
-    Private Function GetLastNum() As Integer
-        Return GetOption("PawnLastNum")
-    End Function
-
-    Private Function GetORNum() As Integer
-        Return GetOption("ORLastNum")
-    End Function
-
-    Private Sub AddPTNumber()
-        currentPawnTicket += 1
-        database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
-    End Sub
 
     ''' <summary>
     ''' Setup New Loan
@@ -431,6 +413,35 @@
 
         lblInt.Text = "Advance Interest:"
     End Sub
+
+    ''' <summary>
+    ''' Setup Redeem
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub Redeem()
+
+    End Sub
+
+    Private Sub LoadItemType()
+        Dim itmType As String() = {"JWL", "APP", "BIG", "CEL"}
+        cboItemtype.Items.Clear()
+        cboItemtype.Items.AddRange(itmType)
+    End Sub
+
+    Private Function GetLastNum() As Integer
+        Return GetOption("PawnLastNum")
+    End Function
+
+    Private Function GetORNum() As Integer
+        Return GetOption("ORLastNum")
+    End Function
+
+    Private Sub AddPTNumber()
+        currentPawnTicket += 1
+        database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
+    End Sub
+
+    
 
     Friend Sub LoadPawnTicket(ByVal tk As PawnTicket, ByVal tt As String)
         transactionType = tt
@@ -810,11 +821,6 @@
     End Function
 
     Friend Sub SwitchTransaction(ByVal typ As String)
-        Try
-
-        Catch ex As Exception
-
-        End Try
         If transactionType = "L" Then Exit Sub
 
         'Buttons
