@@ -36,6 +36,11 @@ pawnshop
  Setup New Loan
  </summary>
 	<remarks></remarks>
+</member><member name="M:Pawnshop.frmNewloan.Redeem">
+	<summary>
+ Setup Redeem
+ </summary>
+	<remarks></remarks>
 </member><member name="M:Pawnshop.Client.LoadClient(System.Int32)">
 	<summary>
  This is use to load Client information
