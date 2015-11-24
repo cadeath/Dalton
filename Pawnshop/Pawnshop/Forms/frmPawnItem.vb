@@ -6,9 +6,12 @@
     Private PawnInfo(4) As ArrayList
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
 
+    Private appraiser As Hashtable
+
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadInformation()
+        LoadAppraisers()
     End Sub
 
 #Region "GUI"
@@ -22,7 +25,7 @@
         cboCat.Text = ""
         txtDesc.Text = ""
         txtGram.Text = ""
-        cboKarat.Text = ""
+        'cboKarat.Text = ""
 
         txtTicket.Text = ""
         txtOldTicket.Text = ""
@@ -65,17 +68,80 @@
     Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
         On Error Resume Next
 
-        If cboType.Text = cboType.Text Then Exit Sub
-
         Dim idx As Integer = cboType.SelectedIndex
         cboCat.Items.Clear()
         For Each dStr In PawnInfo(idx)
             cboCat.Items.Add(dStr)
         Next
+
+        'for JWL
+        If cboType.Text = "JWL" Then
+            txtGram.ReadOnly = False
+            cboKarat.Enabled = True
+        Else
+            txtGram.ReadOnly = True
+            cboKarat.Enabled = False
+        End If
+    End Sub
+
+    Private Sub cboAppraiser_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboAppraiser.SelectedIndexChanged
+        If POSuser.UserName = cboAppraiser.Text Then
+            lblAuth.Text = "Verified"
+            mod_system.isAuthorized = True
+        Else
+            mod_system.isAuthorized = False
+            lblAuth.Text = "Unverified"
+
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        frmClient.SearchSelect(txtCustomer.Text, FormName.frmPawnItem)
+        frmClient.Show()
+    End Sub
+
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not mod_system.isAuthorized Then
+            diagAuthorization.Show()
+            diagAuthorization.txtUser.Text = cboAppraiser.Text
+            diagAuthorization.fromForm = Me
+        End If
+    End Sub
+
+    Private Sub tmrVerifier_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrVerifier.Tick
+        If mod_system.isAuthorized Then
+            lblAuth.Text = "Verified"
+        Else
+            lblAuth.Text = "Unverified"
+        End If
+    End Sub
+
+    Private Sub txtCustomer_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCustomer.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 #End Region
 
 #Region "Controller"
+    Private Function isReady() As Boolean
+        If txtCustomer.Text = "" Then txtCustomer.Focus() : Return False
+        If cboType.Text = "" Then cboType.Focus() : Return False
+        If cboCat.Text = "" Then cboCat.Focus() : Return False
+
+        If cboType.Text = "JWL" Then
+            If txtGram.Text = "" Then txtGram.Focus() : Return False
+            If cboKarat.Text = "" Then cboKarat.Focus() : Return False
+        End If
+
+        If txtAppr.Text = "" Then txtAppr.Focus() : Return False
+        If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
+        If cboAppraiser.Text = "" Then cboAppraiser.Focus() : Return False
+
+        Return True
+    End Function
+
     Friend Sub NewLoan()
         txtCustomer.Focus()
         transactionType = "L"
@@ -84,6 +150,13 @@
         txtLoan.Text = CurrentDate.ToShortDateString
         txtMatu.Text = CurrentDate.AddDays(29).ToShortDateString
         dateChange(cboType.Text)
+    End Sub
+
+    Friend Sub LoadClient(ByVal cl As Client)
+        txtCustomer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
+        txtAddr.Text = String.Format("{0} {1} " + vbCrLf + "{2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
+        txtBDay.Text = cl.Birthday
+        txtContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
     End Sub
 
     Private Sub dateChange(ByVal typ As String)
@@ -142,6 +215,23 @@
         Next
 
     End Sub
+
+    Private Sub LoadAppraisers()
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        appraiser = New Hashtable
+        cboAppraiser.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpUser As New ComputerUser
+            tmpUser.LoadUserByRow(dr)
+            Console.WriteLine(tmpUser.FullName & " loaded.")
+
+            appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+            cboAppraiser.Items.Add(tmpUser.UserName)
+        Next
+    End Sub
 #End Region
 
+    
 End Class

@@ -22,6 +22,7 @@ Partial Class frmPawnItem
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtContact = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -94,6 +95,7 @@ Partial Class frmPawnItem
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnRedeem = New System.Windows.Forms.Button()
         Me.lblNPT = New System.Windows.Forms.Label()
+        Me.tmrVerifier = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -552,9 +554,9 @@ Partial Class frmPawnItem
         Me.lblAuth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAuth.Location = New System.Drawing.Point(23, 46)
         Me.lblAuth.Name = "lblAuth"
-        Me.lblAuth.Size = New System.Drawing.Size(67, 13)
+        Me.lblAuth.Size = New System.Drawing.Size(55, 13)
         Me.lblAuth.TabIndex = 5
-        Me.lblAuth.Text = "Unconfirmed"
+        Me.lblAuth.Text = "Unverified"
         '
         'cboAppraiser
         '
@@ -836,6 +838,11 @@ Partial Class frmPawnItem
         Me.lblNPT.TabIndex = 12
         Me.lblNPT.Text = "New PT#"
         '
+        'tmrVerifier
+        '
+        Me.tmrVerifier.Enabled = True
+        Me.tmrVerifier.Interval = 1000
+        '
         'frmPawnItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -941,4 +948,5 @@ Partial Class frmPawnItem
     Friend WithEvents btnVoid As System.Windows.Forms.Button
     Friend WithEvents btnRedeem As System.Windows.Forms.Button
     Friend WithEvents lblNPT As System.Windows.Forms.Label
+    Friend WithEvents tmrVerifier As System.Windows.Forms.Timer
 End Class
