@@ -83,7 +83,7 @@ Partial Class frmPawnItem
         Me.Label25 = New System.Windows.Forms.Label()
         Me.txtOver = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.txtAppr2 = New System.Windows.Forms.TextBox()
+        Me.txtPrincipal2 = New System.Windows.Forms.TextBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.txtReceiptDate = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -246,7 +246,7 @@ Partial Class frmPawnItem
         Me.txtAdv.Name = "txtAdv"
         Me.txtAdv.ReadOnly = True
         Me.txtAdv.Size = New System.Drawing.Size(100, 20)
-        Me.txtAdv.TabIndex = 8
+        Me.txtAdv.TabIndex = 3
         '
         'Label14
         '
@@ -264,7 +264,7 @@ Partial Class frmPawnItem
         Me.txtAuction.Name = "txtAuction"
         Me.txtAuction.ReadOnly = True
         Me.txtAuction.Size = New System.Drawing.Size(130, 20)
-        Me.txtAuction.TabIndex = 5
+        Me.txtAuction.TabIndex = 9
         '
         'Label13
         '
@@ -282,7 +282,7 @@ Partial Class frmPawnItem
         Me.txtNet.Name = "txtNet"
         Me.txtNet.ReadOnly = True
         Me.txtNet.Size = New System.Drawing.Size(100, 20)
-        Me.txtNet.TabIndex = 9
+        Me.txtNet.TabIndex = 2
         '
         'Label12
         '
@@ -299,7 +299,7 @@ Partial Class frmPawnItem
         Me.txtPrincipal.Location = New System.Drawing.Point(104, 236)
         Me.txtPrincipal.Name = "txtPrincipal"
         Me.txtPrincipal.Size = New System.Drawing.Size(100, 20)
-        Me.txtPrincipal.TabIndex = 7
+        Me.txtPrincipal.TabIndex = 1
         '
         'Label11
         '
@@ -316,7 +316,7 @@ Partial Class frmPawnItem
         Me.txtAppr.Location = New System.Drawing.Point(104, 210)
         Me.txtAppr.Name = "txtAppr"
         Me.txtAppr.Size = New System.Drawing.Size(100, 20)
-        Me.txtAppr.TabIndex = 6
+        Me.txtAppr.TabIndex = 0
         '
         'Label10
         '
@@ -334,7 +334,7 @@ Partial Class frmPawnItem
         Me.txtExpiry.Name = "txtExpiry"
         Me.txtExpiry.ReadOnly = True
         Me.txtExpiry.Size = New System.Drawing.Size(130, 20)
-        Me.txtExpiry.TabIndex = 4
+        Me.txtExpiry.TabIndex = 8
         '
         'Label9
         '
@@ -352,7 +352,7 @@ Partial Class frmPawnItem
         Me.txtMatu.Name = "txtMatu"
         Me.txtMatu.ReadOnly = True
         Me.txtMatu.Size = New System.Drawing.Size(130, 20)
-        Me.txtMatu.TabIndex = 3
+        Me.txtMatu.TabIndex = 7
         '
         'Label8
         '
@@ -370,7 +370,7 @@ Partial Class frmPawnItem
         Me.txtLoan.Name = "txtLoan"
         Me.txtLoan.ReadOnly = True
         Me.txtLoan.Size = New System.Drawing.Size(130, 20)
-        Me.txtLoan.TabIndex = 2
+        Me.txtLoan.TabIndex = 6
         '
         'Label7
         '
@@ -388,7 +388,7 @@ Partial Class frmPawnItem
         Me.txtOldTicket.Name = "txtOldTicket"
         Me.txtOldTicket.ReadOnly = True
         Me.txtOldTicket.Size = New System.Drawing.Size(100, 20)
-        Me.txtOldTicket.TabIndex = 1
+        Me.txtOldTicket.TabIndex = 5
         '
         'Label6
         '
@@ -406,7 +406,7 @@ Partial Class frmPawnItem
         Me.txtTicket.Name = "txtTicket"
         Me.txtTicket.ReadOnly = True
         Me.txtTicket.Size = New System.Drawing.Size(100, 20)
-        Me.txtTicket.TabIndex = 0
+        Me.txtTicket.TabIndex = 4
         '
         'Label5
         '
@@ -584,7 +584,7 @@ Partial Class frmPawnItem
         Me.GroupBox5.Controls.Add(Me.Label25)
         Me.GroupBox5.Controls.Add(Me.txtOver)
         Me.GroupBox5.Controls.Add(Me.Label24)
-        Me.GroupBox5.Controls.Add(Me.txtAppr2)
+        Me.GroupBox5.Controls.Add(Me.txtPrincipal2)
         Me.GroupBox5.Controls.Add(Me.Label23)
         Me.GroupBox5.Controls.Add(Me.txtReceiptDate)
         Me.GroupBox5.Controls.Add(Me.Label22)
@@ -723,13 +723,13 @@ Partial Class frmPawnItem
         Me.Label24.TabIndex = 9
         Me.Label24.Text = "Days Over Due"
         '
-        'txtAppr2
+        'txtPrincipal2
         '
-        Me.txtAppr2.Location = New System.Drawing.Point(133, 71)
-        Me.txtAppr2.Name = "txtAppr2"
-        Me.txtAppr2.ReadOnly = True
-        Me.txtAppr2.Size = New System.Drawing.Size(100, 20)
-        Me.txtAppr2.TabIndex = 2
+        Me.txtPrincipal2.Location = New System.Drawing.Point(133, 71)
+        Me.txtPrincipal2.Name = "txtPrincipal2"
+        Me.txtPrincipal2.ReadOnly = True
+        Me.txtPrincipal2.Size = New System.Drawing.Size(100, 20)
+        Me.txtPrincipal2.TabIndex = 2
         '
         'Label23
         '
@@ -737,9 +737,9 @@ Partial Class frmPawnItem
         Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label23.Location = New System.Drawing.Point(16, 72)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(66, 16)
+        Me.Label23.Size = New System.Drawing.Size(60, 16)
         Me.Label23.TabIndex = 7
-        Me.Label23.Text = "Appraisal"
+        Me.Label23.Text = "Principal"
         '
         'txtReceiptDate
         '
@@ -779,6 +779,7 @@ Partial Class frmPawnItem
         '
         'btnCancel
         '
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Location = New System.Drawing.Point(835, 431)
         Me.btnCancel.Name = "btnCancel"
@@ -847,6 +848,7 @@ Partial Class frmPawnItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(935, 472)
         Me.Controls.Add(Me.lblNPT)
         Me.Controls.Add(Me.btnRedeem)
@@ -862,6 +864,7 @@ Partial Class frmPawnItem
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmPawnItem"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pawn Item"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -936,7 +939,7 @@ Partial Class frmPawnItem
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents txtOver As System.Windows.Forms.TextBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents txtAppr2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtPrincipal2 As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
     Friend WithEvents txtReceiptDate As System.Windows.Forms.TextBox
     Friend WithEvents Label22 As System.Windows.Forms.Label
