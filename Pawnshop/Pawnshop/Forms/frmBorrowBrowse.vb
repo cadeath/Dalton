@@ -1,4 +1,6 @@
 ﻿Public Class frmBorrowBrowse
+    ' Version 1.1
+    ' - Check branchCode
 
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
