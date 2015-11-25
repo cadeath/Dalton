@@ -66,6 +66,8 @@ Public Class frmClient
             txtSearch.ReadOnly = True
             btnSearch.Enabled = False
 
+            Me.Enabled = False
+
             Dim tbl As String = "TBLCLIENT"
             Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
             Dim ds As DataSet = LoadSQL(mySql, tbl)
@@ -83,6 +85,8 @@ Public Class frmClient
             btnView.Enabled = True
             txtSearch.ReadOnly = False
             btnSearch.Enabled = True
+
+            Me.Enabled = True
         End If
     End Sub
 
@@ -156,7 +160,6 @@ Public Class frmClient
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
         lvClient.Items(0).Focused = True
-        'lvClient.Items(0).Selected = True
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
