@@ -10,6 +10,7 @@
     Private PawnInfo() As Hashtable
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
     Private currentORNumber As Integer = GetOption("ORLastNum")
+    Private TypeInt As Double
 
     Private appraiser As Hashtable
 
@@ -246,6 +247,13 @@
             cboAppraiser.Focus()
         End If
     End Sub
+
+    Private Sub txtPrincipal_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
+        On Error Resume Next
+
+        txtPrincipal2.Text = txtPrincipal.Text
+        txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
+    End Sub
 #End Region
 
 #Region "Controller"
@@ -293,6 +301,8 @@
         btnRenew.Enabled = False
         btnRedeem.Enabled = False
         btnVoid.Enabled = False
+
+        AdvanceInterest()
     End Sub
 
     Friend Sub LoadClient(ByVal cl As Client)
@@ -315,6 +325,7 @@
                 txtExpiry.Text = CurrentDate.AddDays(89).ToShortDateString
                 txtAuction.Text = CurrentDate.AddDays(123).ToShortDateString
         End Select
+        AdvanceInterest()
     End Sub
 
     Private Function CurrentPTNumber() As String
@@ -390,11 +401,27 @@
             cboAppraiser.Items.Add(tmpUser.UserName)
         Next
     End Sub
-#End Region
 
-    Private Sub txtPrincipal_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        txtPrincipal2.Text = txtPrincipal.Text
-        txtNet.Text = txtPrincipal.Text
+    Private Sub AdvanceInterest()
+        Dim mySql As String = "SELECT * FROM tblInt WHERE ItemType = '" & cboType.Text & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim min As Integer = 0, max As Integer = 0
+            min = dr.Item("DayFrom") : max = dr.Item("DayTo")
+
+            Select Case 1
+                Case min To max
+                    TypeInt = dr.Item("Interest")
+                    Console.WriteLine("Interest is now " & TypeInt)
+            End Select
+        Next
+
+        If txtPrincipal.Text <> "" Then
+            txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
+        End If
     End Sub
+
+#End Region
 
 End Class

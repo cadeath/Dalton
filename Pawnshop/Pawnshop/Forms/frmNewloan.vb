@@ -227,7 +227,7 @@
             .NetAmount = txtTotal.Text
             '.AppraiserID = appraisal(cboAppraiser.Text)
             .Status = transactionType
-            .AdvanceInterestPerDays = advanceInterestNumberofMonth
+            .AdvanceInterestPerDays = advanceInterestDays
             If transactionType <> "L" Then
                 .Interest = txtDelayInt.Text
                 .OldTicket = txtNticket.Text
@@ -624,7 +624,7 @@
     Private Sub ComputeNetAmount()
         If txtPrincipal.Text = "" Then Exit Sub
 
-        If advanceInterestNumberofMonth > 0 Then
+        If advanceInterestDays > 0 Then
             Dim int = GetPawnshop(30, cboItemtype.Text)
 
             txtTotal.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * int)
@@ -813,7 +813,7 @@
         Console.WriteLine("Int: " & int)
         Console.WriteLine("Prin: " & principal)
         Console.WriteLine("NetDue: " & int * principal)
-        If advanceInterestNumberofMonth > 0 Then
+        If advanceInterestDays > 0 Then
             Console.WriteLine("with One Month Advance Interest")
         End If
 
