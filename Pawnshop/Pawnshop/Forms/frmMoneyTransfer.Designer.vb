@@ -22,6 +22,7 @@ Partial Class frmMoneyTransfer
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMoneyTransfer))
         Me.Label11 = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
@@ -464,6 +465,7 @@ Partial Class frmMoneyTransfer
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.Label11)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMoneyTransfer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Money Transfer"

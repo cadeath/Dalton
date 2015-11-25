@@ -44,13 +44,20 @@
         btnPost.Enabled = False
 
         Me.Text &= "| Date: " & mt.TransactionDate
+
+
+        cboType.Enabled = False
+        btnSearchSender.Enabled = False
+        btnSearchReceiver.Enabled = False
+        rbReceive.Enabled = False
+        rbSend.Enabled = False
     End Sub
 
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         LockFields(True)
 
-        MsgBox("This module is under construction", MsgBoxStyle.Information)
+        'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
     End Sub
 
