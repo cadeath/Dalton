@@ -45,7 +45,7 @@ Partial Class frmCashInOut
         Me.lblTrans.Name = "lblTrans"
         Me.lblTrans.Size = New System.Drawing.Size(244, 25)
         Me.lblTrans.TabIndex = 0
-        Me.lblTrans.Text = "Cash IN"
+        Me.lblTrans.Text = "Cash Receipt"
         Me.lblTrans.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btnCashIn
