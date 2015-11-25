@@ -125,7 +125,7 @@
     End Sub
 
     Private Function CheckAuth() As Boolean
-        If Not mod_system.isAuthorized Then
+        If Not mod_system.isAuthorized And cboAppraiser.Text <> "" Then
             diagAuthorization.Show()
             diagAuthorization.TopMost = True
             diagAuthorization.txtUser.Text = cboAppraiser.Text
