@@ -300,12 +300,12 @@
         End Get
     End Property
 
-    Private _advanceInterest As Integer
-    Public Property AdvanceInterestPerDays() As Integer
+    Private _advanceInterest As Double
+    Public Property AdvanceInterest() As Double
         Get
             Return _advanceInterest
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _advanceInterest = value
         End Set
     End Property

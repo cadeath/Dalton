@@ -25,6 +25,8 @@
 
 #Region "GUI"
     Private Sub ClearFields()
+        mod_system.isAuthorized = False
+
         txtCustomer.Text = ""
         txtAddr.Text = ""
         txtBDay.Text = ""
@@ -120,21 +122,15 @@
         dateChange(cboType.Text)
     End Sub
 
+    Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
+        If isEnter(e) Then
+            btnSave.PerformClick()
+        End If
+    End Sub
+
     Private Sub cboAppraiser_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboAppraiser.LostFocus
         CheckAuth()
     End Sub
-
-    Private Function CheckAuth() As Boolean
-        If Not mod_system.isAuthorized And cboAppraiser.Text <> "" Then
-            diagAuthorization.Show()
-            diagAuthorization.TopMost = True
-            diagAuthorization.txtUser.Text = cboAppraiser.Text
-            diagAuthorization.fromForm = Me
-            Return False
-        End If
-
-        Return True
-    End Function
 
     Private Sub cboAppraiser_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboAppraiser.SelectedIndexChanged
         If POSuser.UserName = cboAppraiser.Text Then
@@ -165,60 +161,62 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         PawnItem = New PawnTicket
-        Console.WriteLine("PT: " & currentPawnTicket)
-        Console.WriteLine("Customer: " & PawnCustomer.FirstName)
-        Console.WriteLine("LoanDate: " & txtLoan.Text)
-        Console.WriteLine("Maturity: " & txtMatu.Text)
-        Console.WriteLine("Expiry: " & txtExpiry.Text)
-        Console.WriteLine("Auc: " & txtAuction.Text)
-        Console.WriteLine("Type: " & cboType.Text)
-        Console.WriteLine("CatID: " & GetKey(PawnInfo(cboType.SelectedIndex), cboCat.Text))
-        Console.WriteLine("Desc: " & txtDesc.Text)
-        Console.WriteLine("Karat: " & cboKarat.Text)
-        Console.WriteLine("Gram: " & txtGram.Text)
-        Console.WriteLine("Appr: " & txtAppr.Text)
-        Console.WriteLine("Prin: " & txtPrincipal.Text)
-        Console.WriteLine("Net: " & txtNet.Text)
+        With PawnItem
+            .PawnTicket = currentPawnTicket
+            .Pawner = PawnCustomer
+            .LoanDate = txtLoan.Text
+            .MaturityDate = txtMatu.Text
+            .ExpiryDate = txtExpiry.Text
+            .AuctionDate = txtAuction.Text
+            .ItemType = cboType.Text
+            .CategoryID = GetKey(PawnInfo(cboType.SelectedIndex), cboCat.Text)
+            .Description = txtDesc.Text
+            If txtGram.Text <> "" Then .Karat = cboKarat.Text
+            If txtGram.Text <> "" Then .Grams = txtGram.Text
+            .Appraisal = txtAppr.Text
+            .Principal = txtPrincipal.Text
+            .NetAmount = txtNet.Text
+            If transactionType <> "L" Then
+                .OldTicket = txtOldTicket.Text
+                '.LessPrincipal= 'No Variable yet
+                .DaysOverDue = txtOver.Text
+                .Penalty = txtPenalty.Text
+                .ServiceCharge = txtService.Text
 
-        Console.WriteLine("Status: " & transactionType)
-        Console.WriteLine("Appraiser: " & GetKey(appraiser, cboAppraiser.Text))
-        'With PawnItem
-        '    .PawnTicket = currentPawnTicket
-        '    .Pawner = PawnCustomer
-        '    .LoanDate = txtLoan.Text
-        '    .MaturityDate = txtMatu.Text
-        '    .ExpiryDate = txtExpiry.Text
-        '    .AuctionDate = txtAuction.Text
-        '    .ItemType = cboType.Text
-        '    .CategoryID = PawnInfo(cboType.SelectedIndex)(cboCat.Text)
-        '    .Description = txtDesc.Text
-        '    .Karat = cboKarat.Text
-        '    .Grams = txtGram.Text
-        '    .Appraisal = txtAppr.Text
-        '    .Principal = txtPrincipal.Text
-        '    .NetAmount = txtNet.Text
-        '    If transactionType <> "L" Then
-        '        .OldTicket = txtOldTicket.Text
-        '        '.LessPrincipal= 'No Variable yet
-        '        .DaysOverDue = txtOver.Text
-        '        .Penalty = txtPenalty.Text
-        '        .ServiceCharge = txtService.Text
+                .OfficialReceiptNumber = txtReceipt.Text
+                .OfficialReceiptDate = txtReceiptDate.Text
+                .Interest = txtInt.Text
+                .EVAT = txtEvat.Text
 
-        '        .OfficialReceiptNumber = txtReceipt.Text
-        '        .OfficialReceiptDate = txtReceiptDate.Text
-        '        .Interest = txtInt.Text
-        '        .EVAT = txtEvat.Text
-
-        '        .RenewDue = txtRedeem.Text
-        '        .RedeemDue = txtRedeem.Text
-        '    End If
-        '    .Status = transactionType
-        '    .AppraiserID = appraiser(cboAppraiser.Text)
-
-        '    .SaveTicket()
-        'End With
+                .RenewDue = txtRedeem.Text
+                .RedeemDue = txtRedeem.Text
+            Else
+                .AdvanceInterest = txtAdv.Text
+            End If
+            .Status = transactionType
+            .AppraiserID = appraiser(cboAppraiser.Text)
+            .SaveTicket()
+        End With
+        AddPTNum()
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
+
+        ans = MsgBox("Do you want to enter another one?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        txtCustomer.Focus()
+        ClearFields()
+        NewLoan()
+    End Sub
+
+    Private Sub AddPTNum()
+        currentPawnTicket += 1
+        UpdateOptions("PawnLastNum", currentPawnTicket)
+    End Sub
+
+    Private Sub AddORNum()
+        currentORNumber += 1
+        UpdateOptions("ORLastNum", currentORNumber)
     End Sub
 
     Private Sub tmrVerifier_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrVerifier.Tick
@@ -253,10 +251,110 @@
 
         txtPrincipal2.Text = txtPrincipal.Text
         txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
+        If transactionType = "L" Then
+            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
+        End If
     End Sub
 #End Region
 
 #Region "Controller"
+    Private Function CheckAuth() As Boolean
+        If Not mod_system.isAuthorized And cboAppraiser.Text <> "" Then
+            diagAuthorization.Show()
+            diagAuthorization.TopMost = True
+            diagAuthorization.txtUser.Text = cboAppraiser.Text
+            diagAuthorization.fromForm = Me
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Friend Sub Redeem()
+        GenerateReceipt()
+        Dim delayInt As Double
+
+        'Get Days Over Due
+        Dim dayDiff = CurrentDate - PawnItem.MaturityDate
+        txtOver.Text = IIf(dayDiff.Days > 0, dayDiff, 0)
+        delayInt = GetInt(dayDiff.Days) * PawnItem.Principal
+        delayInt = delayInt - PawnItem.AdvanceInterest
+        txtOver.Text = delayInt
+
+        txtPenalty.Text = GetInt(dayDiff.Days, "Penalty") * PawnItem.Principal
+        txtService.Text = GetServiceCharge(PawnItem.Principal)
+        txtEvat.Text = PawnItem.EVAT
+
+        txtRenew.Text = delayInt + txtService.Text + txtEvat.Text + txtPenalty.Text
+        txtRedeem.Text = PawnItem.Principal - (delayInt + txtService.Text + txtEvat.Text + txtPenalty.Text)
+    End Sub
+
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="principal"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function GetServiceCharge(ByVal principal As Double) As Double
+        Dim srvPrin As Double = CDbl(txtPrincipal.Text)
+        Dim ret As Double = 0
+
+        If srvPrin < 500 Then
+            ret = srvPrin * 0.01
+        Else
+            ret = 5
+        End If
+
+        Return ret
+    End Function
+
+    Private Sub GenerateReceipt()
+        txtReceipt.Text = currentORNumber
+        txtReceiptDate.Text = CurrentDate.ToShortDateString
+    End Sub
+
+    Friend Sub LoadPawnTicket(ByVal pt As PawnTicket, ByVal type As String)
+        LoadClient(pt.Pawner)
+        cboType.Text = pt.ItemType
+        cboCat.Text = GetCatName(pt.CategoryID)
+        txtDesc.Text = pt.Description
+        txtGram.Text = pt.Grams
+        cboKarat.Text = pt.Karat
+
+        txtTicket.Text = pt.PawnTicket
+        txtOldTicket.Text = pt.OldTicket
+        txtLoan.Text = pt.LoanDate
+        txtMatu.Text = pt.MaturityDate
+        txtExpiry.Text = pt.ExpiryDate
+        txtAuction.Text = pt.AuctionDate
+
+        txtAppr.Text = pt.Appraisal
+        txtPrincipal.Text = pt.Principal
+        txtAdv.Text = pt.AdvanceInterest
+        txtNet.Text = pt.NetAmount
+
+        txtReceipt.Text = pt.OfficialReceiptNumber
+        txtReceiptDate.Text = pt.OfficialReceiptDate
+        txtPrincipal2.Text = pt.Principal
+
+        txtOver.Text = pt.DaysOverDue
+        txtInt.Text = pt.Interest
+        txtPenalty.Text = pt.Penalty
+        txtService.Text = pt.ServiceCharge
+        txtEvat.Text = pt.EVAT
+
+        txtRenew.Text = pt.RedeemDue
+        txtRedeem.Text = pt.RedeemDue
+
+        transactionType = type
+        PawnItem = pt
+    End Sub
+
+    Private Function GetCatName(ByVal id As Integer) As String
+        Dim idx As Integer = cboType.SelectedIndex
+        Return PawnInfo(idx).Item(id)
+    End Function
+
     Private Function isReady() As Boolean
         If txtCustomer.Text = "" Then txtCustomer.Focus() : Return False
         If cboType.Text = "" Then cboType.Focus() : Return False
@@ -293,11 +391,7 @@
         txtLoan.Text = CurrentDate.ToShortDateString
         txtMatu.Text = CurrentDate.AddDays(29).ToShortDateString
         dateChange(cboType.Text)
-
-        txtReceipt.Text = currentORNumber
-        txtReceiptDate.Text = CurrentDate.ToShortDateString
         txtPrincipal2.Text = txtPrincipal.Text
-
         btnRenew.Enabled = False
         btnRedeem.Enabled = False
         btnVoid.Enabled = False
@@ -403,24 +497,34 @@
     End Sub
 
     Private Sub AdvanceInterest()
+        TypeInt = GetInt(30)
+
+        If txtPrincipal.Text <> "" Then
+            txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
+            If transactionType = "L" Then
+                txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
+            End If
+        End If
+    End Sub
+
+    Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
         Dim mySql As String = "SELECT * FROM tblInt WHERE ItemType = '" & cboType.Text & "'"
-        Dim ds As DataSet = LoadSQL(mySql)
+        Dim ds As DataSet = LoadSQL(mySql), TypeInt As Double
 
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim min As Integer = 0, max As Integer = 0
             min = dr.Item("DayFrom") : max = dr.Item("DayTo")
 
-            Select Case 1
+            Select Case days
                 Case min To max
-                    TypeInt = dr.Item("Interest")
+                    TypeInt = dr.Item(tbl)
                     Console.WriteLine("Interest is now " & TypeInt)
+                    Return TypeInt
             End Select
         Next
 
-        If txtPrincipal.Text <> "" Then
-            txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
-        End If
-    End Sub
+        Return 0
+    End Function
 
 #End Region
 

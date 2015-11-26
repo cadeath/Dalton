@@ -227,7 +227,7 @@
             .NetAmount = txtTotal.Text
             '.AppraiserID = appraisal(cboAppraiser.Text)
             .Status = transactionType
-            .AdvanceInterestPerDays = advanceInterestDays
+            '.AdvanceInterestPerDays = advanceInterestDays
             If transactionType <> "L" Then
                 .Interest = txtDelayInt.Text
                 .OldTicket = txtNticket.Text
@@ -788,37 +788,37 @@
         Return rate * principal
     End Function
 
-    Private Function GetInterest(ByVal principal As Double) As Double
-        Dim int As Double
-        Dim diff = CurrentDate - PawnItem.LoanDate
-        If PawnItem.OldTicket = 0 Then
-            If PawnItem.AdvanceInterestPerDays > diff.Days Then
-                int = 0
-            Else
-                If diff.Days - PawnItem.AdvanceInterestPerDays >= 9 Then
-                    int = GetPawnshop(diff.Days - PawnItem.AdvanceInterestPerDays, PawnItem.ItemType)
-                Else
-                    int = GetPawnshop(9, PawnItem.ItemType)
-                End If
-            End If
-        Else
-            int = GetPawnshop(diff.Days, PawnItem.ItemType)
-        End If
+    'Private Function GetInterest(ByVal principal As Double) As Double
+    '    Dim int As Double
+    '    Dim diff = CurrentDate - PawnItem.LoanDate
+    '    If PawnItem.OldTicket = 0 Then
+    '        If PawnItem.AdvanceInterestPerDays > diff.Days Then
+    '            int = 0
+    '        Else
+    '            If diff.Days - PawnItem.AdvanceInterestPerDays >= 9 Then
+    '                int = GetPawnshop(diff.Days - PawnItem.AdvanceInterestPerDays, PawnItem.ItemType)
+    '            Else
+    '                int = GetPawnshop(9, PawnItem.ItemType)
+    '            End If
+    '        End If
+    '    Else
+    '        int = GetPawnshop(diff.Days, PawnItem.ItemType)
+    '    End If
 
-        Console.WriteLine("GetInterest")
-        Console.WriteLine("Loan: " & PawnItem.LoanDate)
-        Console.WriteLine("Matu: " & PawnItem.MaturityDate)
-        Console.WriteLine("Date: " & CurrentDate)
-        Console.WriteLine("Day: " & diff.Days + 1)
-        Console.WriteLine("Int: " & int)
-        Console.WriteLine("Prin: " & principal)
-        Console.WriteLine("NetDue: " & int * principal)
-        If advanceInterestDays > 0 Then
-            Console.WriteLine("with One Month Advance Interest")
-        End If
+    '    Console.WriteLine("GetInterest")
+    '    Console.WriteLine("Loan: " & PawnItem.LoanDate)
+    '    Console.WriteLine("Matu: " & PawnItem.MaturityDate)
+    '    Console.WriteLine("Date: " & CurrentDate)
+    '    Console.WriteLine("Day: " & diff.Days + 1)
+    '    Console.WriteLine("Int: " & int)
+    '    Console.WriteLine("Prin: " & principal)
+    '    Console.WriteLine("NetDue: " & int * principal)
+    '    If advanceInterestDays > 0 Then
+    '        Console.WriteLine("with One Month Advance Interest")
+    '    End If
 
-        Return principal * int
-    End Function
+    '    Return principal * int
+    'End Function
 
     Friend Sub SwitchTransaction(ByVal typ As String)
         If transactionType = "L" Then Exit Sub
@@ -850,7 +850,7 @@
         Else
             txtOverDue.Text = 0
         End If
-        txtDelayInt.Text = GetInterest(PawnItem.Principal)
+        'txtDelayInt.Text = GetInterest(PawnItem.Principal)
         txtPenalty.Text = GetPenalty(PawnItem.Principal)
         txtSrvChrg.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = GetOption("Evat") ' No EVAT implemented

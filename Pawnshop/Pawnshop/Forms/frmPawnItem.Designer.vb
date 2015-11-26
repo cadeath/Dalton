@@ -80,7 +80,7 @@ Partial Class frmPawnItem
         Me.txtPenalty = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtInt = New System.Windows.Forms.TextBox()
-        Me.Label25 = New System.Windows.Forms.Label()
+        Me.lblInterest = New System.Windows.Forms.Label()
         Me.txtOver = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.txtPrincipal2 = New System.Windows.Forms.TextBox()
@@ -581,7 +581,7 @@ Partial Class frmPawnItem
         Me.GroupBox5.Controls.Add(Me.txtPenalty)
         Me.GroupBox5.Controls.Add(Me.Label26)
         Me.GroupBox5.Controls.Add(Me.txtInt)
-        Me.GroupBox5.Controls.Add(Me.Label25)
+        Me.GroupBox5.Controls.Add(Me.lblInterest)
         Me.GroupBox5.Controls.Add(Me.txtOver)
         Me.GroupBox5.Controls.Add(Me.Label24)
         Me.GroupBox5.Controls.Add(Me.txtPrincipal2)
@@ -695,15 +695,15 @@ Partial Class frmPawnItem
         Me.txtInt.Size = New System.Drawing.Size(100, 20)
         Me.txtInt.TabIndex = 4
         '
-        'Label25
+        'lblInterest
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(16, 170)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(106, 16)
-        Me.Label25.TabIndex = 11
-        Me.Label25.Text = "Delayed Interest"
+        Me.lblInterest.AutoSize = True
+        Me.lblInterest.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInterest.Location = New System.Drawing.Point(16, 170)
+        Me.lblInterest.Name = "lblInterest"
+        Me.lblInterest.Size = New System.Drawing.Size(106, 16)
+        Me.lblInterest.TabIndex = 11
+        Me.lblInterest.Text = "Delayed Interest"
         '
         'txtOver
         '
@@ -936,7 +936,7 @@ Partial Class frmPawnItem
     Friend WithEvents txtPenalty As System.Windows.Forms.TextBox
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents txtInt As System.Windows.Forms.TextBox
-    Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents lblInterest As System.Windows.Forms.Label
     Friend WithEvents txtOver As System.Windows.Forms.TextBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents txtPrincipal2 As System.Windows.Forms.TextBox
