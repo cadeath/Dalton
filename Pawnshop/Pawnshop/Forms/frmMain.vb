@@ -61,7 +61,7 @@
 
     Friend Sub CheckStoreStatus()
         mod_system.LoadCurrentDate()
-        CloseOpenStore.Enabled = Not dateSet
+        'CloseOpenStore.Enabled = Not dateSet
     End Sub
 
     Friend Sub LoadChild(ByVal frm As Form)

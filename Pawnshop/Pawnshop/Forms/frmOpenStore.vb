@@ -24,6 +24,10 @@
         End If
 
         CurrentDate = dtpCurrentDate.Value
+        'Remove, for testing only
+        frmMain.dateSet = True
+        Me.Close()
+        Exit Sub 'Remove, for testing only
         If mod_system.OpenStore() Then
             frmMain.dateSet = True
         Else

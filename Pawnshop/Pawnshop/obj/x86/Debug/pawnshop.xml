@@ -6,13 +6,7 @@ pawnshop
 </name>
 </assembly>
 <members>
-<member name="M:Pawnshop.frmPawnItem.GetServiceCharge(System.Double)">
-	<summary>
-	</summary>
-	<param name="principal"></param>
-	<returns></returns>
-	<remarks></remarks>
-</member><member name="M:Pawnshop.mod_system.DigitOnly(System.Windows.Forms.KeyPressEventArgs)">
+<member name="M:Pawnshop.mod_system.DigitOnly(System.Windows.Forms.KeyPressEventArgs)">
 	<summary>
  Function use to input only numbers
  </summary>
