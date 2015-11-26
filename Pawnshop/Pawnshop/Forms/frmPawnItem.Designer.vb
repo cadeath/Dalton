@@ -96,6 +96,7 @@ Partial Class frmPawnItem
         Me.btnRedeem = New System.Windows.Forms.Button()
         Me.lblNPT = New System.Windows.Forms.Label()
         Me.tmrVerifier = New System.Windows.Forms.Timer(Me.components)
+        Me.lblTransaction = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -114,7 +115,7 @@ Partial Class frmPawnItem
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtCustomer)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 45)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(324, 244)
         Me.GroupBox1.TabIndex = 0
@@ -233,7 +234,7 @@ Partial Class frmPawnItem
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.txtTicket)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Location = New System.Drawing.Point(342, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(342, 45)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(253, 322)
         Me.GroupBox2.TabIndex = 2
@@ -430,7 +431,7 @@ Partial Class frmPawnItem
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.cboType)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 262)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 295)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(324, 202)
         Me.GroupBox3.TabIndex = 1
@@ -541,7 +542,7 @@ Partial Class frmPawnItem
         '
         Me.GroupBox4.Controls.Add(Me.lblAuth)
         Me.GroupBox4.Controls.Add(Me.cboAppraiser)
-        Me.GroupBox4.Location = New System.Drawing.Point(346, 340)
+        Me.GroupBox4.Location = New System.Drawing.Point(346, 373)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(249, 69)
         Me.GroupBox4.TabIndex = 4
@@ -590,7 +591,7 @@ Partial Class frmPawnItem
         Me.GroupBox5.Controls.Add(Me.Label22)
         Me.GroupBox5.Controls.Add(Me.txtReceipt)
         Me.GroupBox5.Controls.Add(Me.Label21)
-        Me.GroupBox5.Location = New System.Drawing.Point(601, 12)
+        Me.GroupBox5.Location = New System.Drawing.Point(601, 45)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(319, 352)
         Me.GroupBox5.TabIndex = 3
@@ -781,7 +782,7 @@ Partial Class frmPawnItem
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(835, 431)
+        Me.btnCancel.Location = New System.Drawing.Point(835, 464)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(88, 33)
         Me.btnCancel.TabIndex = 8
@@ -791,7 +792,7 @@ Partial Class frmPawnItem
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(741, 431)
+        Me.btnSave.Location = New System.Drawing.Point(741, 464)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(88, 33)
         Me.btnSave.TabIndex = 5
@@ -801,7 +802,7 @@ Partial Class frmPawnItem
         'btnRenew
         '
         Me.btnRenew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRenew.Location = New System.Drawing.Point(346, 431)
+        Me.btnRenew.Location = New System.Drawing.Point(346, 464)
         Me.btnRenew.Name = "btnRenew"
         Me.btnRenew.Size = New System.Drawing.Size(88, 33)
         Me.btnRenew.TabIndex = 6
@@ -811,7 +812,7 @@ Partial Class frmPawnItem
         'btnVoid
         '
         Me.btnVoid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVoid.Location = New System.Drawing.Point(551, 431)
+        Me.btnVoid.Location = New System.Drawing.Point(551, 464)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(88, 33)
         Me.btnVoid.TabIndex = 10
@@ -821,7 +822,7 @@ Partial Class frmPawnItem
         'btnRedeem
         '
         Me.btnRedeem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRedeem.Location = New System.Drawing.Point(440, 431)
+        Me.btnRedeem.Location = New System.Drawing.Point(440, 464)
         Me.btnRedeem.Name = "btnRedeem"
         Me.btnRedeem.Size = New System.Drawing.Size(88, 33)
         Me.btnRedeem.TabIndex = 7
@@ -832,24 +833,37 @@ Partial Class frmPawnItem
         '
         Me.lblNPT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNPT.ForeColor = System.Drawing.Color.Red
-        Me.lblNPT.Location = New System.Drawing.Point(758, 367)
+        Me.lblNPT.Location = New System.Drawing.Point(758, 400)
         Me.lblNPT.Name = "lblNPT"
         Me.lblNPT.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.lblNPT.Size = New System.Drawing.Size(162, 32)
         Me.lblNPT.TabIndex = 12
         Me.lblNPT.Text = "New PT#"
+        Me.lblNPT.Visible = False
         '
         'tmrVerifier
         '
         Me.tmrVerifier.Enabled = True
         Me.tmrVerifier.Interval = 1000
         '
+        'lblTransaction
+        '
+        Me.lblTransaction.AutoSize = True
+        Me.lblTransaction.Font = New System.Drawing.Font("Monotype Corsiva", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTransaction.ForeColor = System.Drawing.Color.Red
+        Me.lblTransaction.Location = New System.Drawing.Point(6, 9)
+        Me.lblTransaction.Name = "lblTransaction"
+        Me.lblTransaction.Size = New System.Drawing.Size(125, 33)
+        Me.lblTransaction.TabIndex = 13
+        Me.lblTransaction.Text = "New Loan"
+        '
         'frmPawnItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(935, 472)
+        Me.ClientSize = New System.Drawing.Size(935, 505)
+        Me.Controls.Add(Me.lblTransaction)
         Me.Controls.Add(Me.lblNPT)
         Me.Controls.Add(Me.btnRedeem)
         Me.Controls.Add(Me.btnVoid)
@@ -877,6 +891,7 @@ Partial Class frmPawnItem
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -952,4 +967,5 @@ Partial Class frmPawnItem
     Friend WithEvents btnRedeem As System.Windows.Forms.Button
     Friend WithEvents lblNPT As System.Windows.Forms.Label
     Friend WithEvents tmrVerifier As System.Windows.Forms.Timer
+    Friend WithEvents lblTransaction As System.Windows.Forms.Label
 End Class

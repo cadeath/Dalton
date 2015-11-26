@@ -10,7 +10,7 @@
     Private PawnInfo() As Hashtable
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
     Private currentORNumber As Integer = GetOption("ORLastNum")
-    Private TypeInt As Double
+    Private TypeInt As Double, bug As Boolean = False
 
     Private appraiser As Hashtable
 
@@ -18,9 +18,7 @@
         ClearFields()
         LoadInformation()
         LoadAppraisers()
-        If transactionType = "L" Then
-            NewLoan()
-        End If
+        If transactionType = "L" Then NewLoan()
     End Sub
 
 #Region "GUI"
@@ -194,7 +192,7 @@
                 .AdvanceInterest = txtAdv.Text
             End If
             .Status = transactionType
-            .AppraiserID = appraiser(cboAppraiser.Text)
+            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
             .SaveTicket()
         End With
         AddPTNum()
@@ -202,7 +200,12 @@
         MsgBox("Item Posted!", MsgBoxStyle.Information)
 
         ans = MsgBox("Do you want to enter another one?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        If ans = Windows.Forms.DialogResult.No Then
+            frmPawning.LoadActive()
+
+            Me.Close()
+            Exit Sub
+        End If
 
         txtCustomer.Focus()
         ClearFields()
@@ -271,22 +274,27 @@
     End Function
 
     Friend Sub Redeem()
+        transactionType = "X"
         GenerateReceipt()
         Dim delayInt As Double
 
         'Get Days Over Due
         Dim dayDiff = CurrentDate - PawnItem.MaturityDate
-        txtOver.Text = IIf(dayDiff.Days > 0, dayDiff, 0)
-        delayInt = GetInt(dayDiff.Days) * PawnItem.Principal
+        Dim daysDue As Integer = IIf(dayDiff.Days > 8, dayDiff.Days, 0)
+        txtOver.Text = daysDue
+        delayInt = GetInt(daysDue) * PawnItem.Principal
         delayInt = delayInt - PawnItem.AdvanceInterest
-        txtOver.Text = delayInt
+        txtInt.Text = delayInt
 
-        txtPenalty.Text = GetInt(dayDiff.Days, "Penalty") * PawnItem.Principal
+        txtPenalty.Text = GetInt(daysDue, "Penalty") * PawnItem.Principal
         txtService.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = PawnItem.EVAT
 
         txtRenew.Text = delayInt + txtService.Text + txtEvat.Text + txtPenalty.Text
         txtRedeem.Text = PawnItem.Principal - (delayInt + txtService.Text + txtEvat.Text + txtPenalty.Text)
+        txtNet.Text = txtRedeem.Text
+        txtNet.BackColor = Drawing.SystemColors.Window
+        txtNet.Focus()
     End Sub
 
     ''' <summary>
@@ -313,6 +321,10 @@
         txtReceiptDate.Text = CurrentDate.ToShortDateString
     End Sub
 
+    Friend Sub LoadCatName()
+        cboCat.Text = GetCatName(PawnItem.CategoryID)
+    End Sub
+
     Friend Sub LoadPawnTicket(ByVal pt As PawnTicket, ByVal type As String)
         LoadClient(pt.Pawner)
         cboType.Text = pt.ItemType
@@ -333,9 +345,9 @@
         txtAdv.Text = pt.AdvanceInterest
         txtNet.Text = pt.NetAmount
 
-        txtReceipt.Text = pt.OfficialReceiptNumber
-        txtReceiptDate.Text = pt.OfficialReceiptDate
-        txtPrincipal2.Text = pt.Principal
+        txtReceipt.Text = IIf(pt.OfficialReceiptNumber = 0, "", pt.OfficialReceiptNumber)
+        txtReceiptDate.Text = IIf(pt.OfficialReceiptDate = #12:00:00 AM#, "", pt.OfficialReceiptDate)
+        txtPrincipal2.Text = IIf(pt.Principal = 0, "", pt.Principal)
 
         txtOver.Text = pt.DaysOverDue
         txtInt.Text = pt.Interest
@@ -346,13 +358,48 @@
         txtRenew.Text = pt.RedeemDue
         txtRedeem.Text = pt.RedeemDue
 
+        cboAppraiser.Text = GetAppraiserByID(pt.AppraiserID)
+
         transactionType = type
         PawnItem = pt
+
+        If transactionType = "D" Then
+            LockFields(True)
+            btnSave.Enabled = False : btnRenew.Enabled = True
+            btnRedeem.Enabled = True : btnVoid.Enabled = True
+        End If
     End Sub
+
+    Private Function GetAppraiserByID(ByVal id As Integer) As String
+        For Each el As DictionaryEntry In appraiser
+            If el.Key = id Then
+                Return el.Value
+            End If
+        Next
+
+        Return "N/A"
+    End Function
+
+    Private Function GetAppraiserID(ByVal name As String) As Integer
+        For Each el As DictionaryEntry In appraiser
+            If el.Value = name Then
+                Return el.Key
+            End If
+        Next
+
+        Return 0
+    End Function
 
     Private Function GetCatName(ByVal id As Integer) As String
         Dim idx As Integer = cboType.SelectedIndex
-        Return PawnInfo(idx).Item(id)
+
+        For Each el As DictionaryEntry In PawnInfo(idx)
+            If el.Key = id Then
+                Return el.Value
+            End If
+        Next
+
+        Return "N/A"
     End Function
 
     Private Function isReady() As Boolean
@@ -407,7 +454,7 @@
 
         PawnCustomer = cl
         cboType.Focus()
-        cboType.DroppedDown = True
+        'cboType.DroppedDown = True
     End Sub
 
     Private Sub dateChange(ByVal typ As String)
@@ -526,6 +573,36 @@
         Return 0
     End Function
 
+    Private Sub LockFields(ByVal st As Boolean)
+        txtCustomer.ReadOnly = st
+        btnSearch.Enabled = Not st
+        cboType.Enabled = Not st
+        cboCat.Enabled = Not st
+        txtDesc.Enabled = Not st
+        txtGram.Enabled = Not st
+        cboKarat.Enabled = Not st
+        txtAppr.Enabled = Not st
+        txtPrincipal.Enabled = Not st
+        cboAppraiser.Enabled = Not st
+    End Sub
 #End Region
 
+    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+        If transactionType = "X" Then
+            btnRedeem.Text = "&Redeem"
+            transactionType = "D"
+            btnVoid.Enabled = True
+
+            LoadPawnTicket(PawnItem, "D")
+            Exit Sub
+        End If
+        If transactionType <> "D" Then
+            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Redeem()
+        btnRedeem.Text = "&Cancel"
+        btnVoid.Enabled = False
+    End Sub
 End Class

@@ -145,8 +145,8 @@
         Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
         Dim tmpTicket As New PawnTicket
         tmpTicket.LoadTicket(idx)
-        frmPawnItem.LoadPawnTicket(tmpTicket, "D")
         frmPawnItem.Show()
+        frmPawnItem.LoadPawnTicket(tmpTicket, "D")
     End Sub
 
     Private Sub lvPawners_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPawners.DoubleClick
