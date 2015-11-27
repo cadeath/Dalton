@@ -198,7 +198,10 @@
 
             .SaveTicket()
         End With
-        oldTicket.ChangeStatus(0)
+
+        If transactionType = "X" Then
+            oldTicket.ChangeStatus(0)
+        End If
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
 
@@ -302,19 +305,27 @@
         'GeneratePT()
 
         Dim delayInt As Double
-        Dim dayDiff = CurrentDate - PawnItem.MaturityDate
-        Dim daysDue As Integer = IIf(dayDiff.Days > 0, dayDiff.Days, 0)
+        Dim dayDiff = CurrentDate - PawnItem.LoanDate
+        Dim dayDiffNew As Integer = dayDiff.Days + 1
+        Dim overDays = CurrentDate - PawnItem.MaturityDate
+        Dim daysDue As Integer = IIf(overDays.Days > 0, overDays.Days, 0)
+
         txtOver.Text = daysDue
-        delayInt = GetInt(daysDue + 30) * PawnItem.Principal
+        delayInt = GetInt(dayDiffNew) * PawnItem.Principal
         delayInt = delayInt - PawnItem.AdvanceInterest
         txtInt.Text = delayInt
 
-        txtPenalty.Text = GetInt(daysDue + 30, "Penalty") * PawnItem.Principal
+        txtPenalty.Text = GetInt(dayDiffNew, "Penalty") * PawnItem.Principal
         txtService.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = PawnItem.EVAT
 
         txtRenew.Text = delayInt + txtService.Text + txtEvat.Text + txtPenalty.Text
-        txtRedeem.Text = PawnItem.Principal - (delayInt + txtService.Text + txtEvat.Text + txtPenalty.Text)
+        Console.WriteLine("Principal: " & PawnItem.Principal)
+        Console.WriteLine("Adv Int: " & PawnItem.AdvanceInterest)
+        Console.WriteLine("Interest: " & delayInt)
+        Console.WriteLine("Penalty: " & txtPenalty.Text)
+
+        txtRedeem.Text = PawnItem.Principal + txtService.Text + txtEvat.Text + txtPenalty.Text + delayInt
         txtNet.Text = txtRedeem.Text
         txtNet.BackColor = Drawing.SystemColors.Window
         txtNet.Focus()
