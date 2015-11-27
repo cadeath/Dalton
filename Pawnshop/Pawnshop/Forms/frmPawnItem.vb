@@ -1,4 +1,6 @@
 ﻿Public Class frmPawnItem
+    'Version 2.2
+    ' - Remake SAVE
     'Version 2.1
     ' - Fixing Auth
     ' - Fixing GUI
@@ -158,52 +160,21 @@
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        Dim oldTicket As PawnTicket = PawnItem
-        PawnItem = New PawnTicket
-        With PawnItem
-            .PawnTicket = currentPawnTicket
-            .Pawner = PawnCustomer
-            .LoanDate = txtLoan.Text
-            .MaturityDate = txtMatu.Text
-            .ExpiryDate = txtExpiry.Text
-            .AuctionDate = txtAuction.Text
-            .ItemType = cboType.Text
-            .CategoryID = GetKey(PawnInfo(cboType.SelectedIndex), cboCat.Text)
-            .Description = txtDesc.Text
-            If cboType.Text = "JWL" Then .Karat = cboKarat.Text
-            If cboType.Text = "JWL" Then .Grams = txtGram.Text
-            .Appraisal = txtAppr.Text
-            .Principal = txtPrincipal.Text
-            .NetAmount = txtNet.Text
-
-            If transactionType <> "L" Then
-                If transactionType = "R" Then .OldTicket = txtOldTicket.Text
-                '.LessPrincipal= 'No Variable yet
-                .DaysOverDue = txtOver.Text
-                .Penalty = txtPenalty.Text
-                .ServiceCharge = txtService.Text
-
-                .OfficialReceiptNumber = txtReceipt.Text
-                .OfficialReceiptDate = txtReceiptDate.Text
-                .Interest = txtInt.Text
-                .EVAT = txtEvat.Text
-
-                .RenewDue = txtRedeem.Text
-                .RedeemDue = txtRedeem.Text
-            Else
-                .AdvanceInterest = txtAdv.Text
-            End If
-            .Status = transactionType
-            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
-
-            .SaveTicket()
-        End With
-
-        If transactionType = "X" Then
-            oldTicket.ChangeStatus(0)
-        End If
+        Select Case transactionType
+            Case "L"
+                SaveNewLoan()
+            Case "X"
+                SaveRedeem()
+            Case "R"
+                SaveRenew()
+        End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
+        If transactionType = "R" Then
+            frmPawning.LoadActive()
+            Me.Close()
+            Exit Sub
+        End If
 
         AddPTNum()
         If transactionType = "X" Then
@@ -222,6 +193,7 @@
             Exit Sub
         End If
 
+        cboAppraiser.Text = ""
         txtCustomer.Focus()
         ClearFields()
         NewLoan()
@@ -276,9 +248,109 @@
             txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
         End If
     End Sub
+
+    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+        If transactionType = "X" Then
+            btnRedeem.Text = "&Redeem"
+            txtRedeem.BackColor = Drawing.SystemColors.Control
+            transactionType = "D"
+            btnVoid.Enabled = True
+            btnSave.Enabled = False
+
+            LoadPawnTicket(PawnItem, "D")
+            Exit Sub
+        End If
+        If transactionType <> "D" Then
+            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Redeem()
+        btnSave.Enabled = True
+        btnRedeem.Text = "&Cancel"
+        btnVoid.Enabled = False
+    End Sub
+
+    Private Sub txtRedeem_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRedeem.KeyPress
+        If isEnter(e) And transactionType = "X" Then
+            btnSave.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        If transactionType = "R" Then
+            btnRenew.Text = "Rene&w"
+            'txtRenew.BackColor = Drawing.SystemColors.Control
+            transactionType = "D"
+            btnVoid.Enabled = True
+            btnSave.Enabled = False
+
+            LoadPawnTicket(PawnItem, "D")
+            Exit Sub
+        End If
+        If transactionType <> "D" Then
+            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Redeem("R")
+        btnSave.Enabled = True
+        btnRenew.Text = "&Cancel"
+        btnVoid.Enabled = False
+    End Sub
+
+    Private Sub txtRenew_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRenew.KeyPress
+        DigitOnly(e)
+        If transactionType = "R" And isEnter(e) Then
+            btnSave.PerformClick()
+        End If
+    End Sub
 #End Region
 
 #Region "Controller"
+    Private Sub SaveRedeem()
+        With PawnItem
+            .OfficialReceiptNumber = currentORNumber
+            .OfficialReceiptDate = CurrentDate
+
+            .DaysOverDue = txtOver.Text
+            .DelayInterest = txtInt.Text
+            .Penalty = txtPenalty.Text
+            .ServiceCharge = txtService.Text
+            .EVAT = txtEvat.Text
+            .RedeemDue = txtRedeem.Text
+            .Status = transactionType
+
+            .SaveTicket(False)
+        End With
+    End Sub
+
+    Private Sub SaveNewLoan()
+        PawnItem = New PawnTicket
+        With PawnItem
+            .PawnTicket = currentPawnTicket
+            .Pawner = PawnCustomer
+            .LoanDate = txtLoan.Text
+            .MaturityDate = txtMatu.Text
+            .ExpiryDate = txtExpiry.Text
+            .AuctionDate = txtAuction.Text
+            .ItemType = cboType.Text
+            .CategoryID = GetKey(PawnInfo(cboType.SelectedIndex), cboCat.Text)
+            .Description = txtDesc.Text
+            If cboType.Text = "JWL" Then .Karat = cboKarat.Text
+            If cboType.Text = "JWL" Then .Grams = txtGram.Text
+            .Appraisal = txtAppr.Text
+            .Principal = txtPrincipal.Text
+            .AdvanceInterest = txtAdv.Text
+            .NetAmount = txtNet.Text
+
+            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
+            .Status = transactionType
+
+            .SaveTicket()
+        End With
+    End Sub
+
     Private Function CheckAuth() As Boolean
         If Not mod_system.isAuthorized And cboAppraiser.Text <> "" Then
             diagAuthorization.Show()
@@ -299,10 +371,9 @@
         If transactionType = "R" Then txtOldTicket.Text = CurrentPTNumber(PawnItem.OldTicket)
     End Sub
 
-    Friend Sub Redeem()
-        transactionType = "X"
+    Friend Sub Redeem(Optional ByVal typ As String = "X")
+        transactionType = typ
         GenerateReceipt()
-        'GeneratePT()
 
         Dim delayInt As Double
         Dim dayDiff = CurrentDate - PawnItem.LoanDate
@@ -319,16 +390,20 @@
         txtService.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = PawnItem.EVAT
 
-        txtRenew.Text = delayInt + txtService.Text + txtEvat.Text + txtPenalty.Text
         Console.WriteLine("Principal: " & PawnItem.Principal)
         Console.WriteLine("Adv Int: " & PawnItem.AdvanceInterest)
         Console.WriteLine("Interest: " & delayInt)
         Console.WriteLine("Penalty: " & txtPenalty.Text)
 
-        txtRedeem.Text = PawnItem.Principal + txtService.Text + txtEvat.Text + txtPenalty.Text + delayInt
-        txtNet.Text = txtRedeem.Text
-        txtNet.BackColor = Drawing.SystemColors.Window
-        txtNet.Focus()
+        txtRenew.Text = CDbl(txtService.Text) + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + CDbl(delayInt) + txtAdv.Text
+        txtRedeem.Text = PawnItem.Principal + CDbl(txtService.Text) + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + CDbl(delayInt)
+        If transactionType = "X" Then
+            txtRedeem.BackColor = Drawing.SystemColors.Window
+            txtRedeem.Focus()
+        Else
+            txtRenew.ReadOnly = False
+            txtRenew.Focus()
+        End If
 
         ChangeForm()
     End Sub
@@ -363,7 +438,7 @@
         txtGram.Text = pt.Grams
         cboKarat.Text = pt.Karat
 
-        txtTicket.Text = pt.PawnTicket
+        txtTicket.Text = CurrentPTNumber(pt.PawnTicket)
         currentPawnTicket = pt.PawnTicket
         txtOldTicket.Text = pt.OldTicket
         txtLoan.Text = pt.LoanDate
@@ -597,6 +672,7 @@
                 txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
             End If
         End If
+
     End Sub
 
     Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
@@ -630,31 +706,48 @@
         txtPrincipal.Enabled = Not st
         cboAppraiser.Enabled = Not st
     End Sub
+
+    Private Sub SaveRenew()
+        Dim oldPT As PawnTicket = PawnItem
+        Dim payment As Double = CDbl(txtRenew.Text) - (CDbl(txtAdv.Text))
+
+        'Redeem
+        With PawnItem
+            .OfficialReceiptNumber = currentORNumber
+            .OfficialReceiptDate = CurrentDate
+
+            .DaysOverDue = txtOver.Text
+            .DelayInterest = txtInt.Text
+            .Penalty = txtPenalty.Text
+            .ServiceCharge = txtService.Text
+            .EVAT = txtEvat.Text
+            .RenewDue = txtRenew.Text
+            .RedeemDue = txtRedeem.Text
+            .Status = "R"
+
+            .SaveTicket(False)
+        End With
+        AddORNum()
+        AddPTNum()
+
+        With PawnItem
+            .PawnTicket = CurrentPTNumber()
+            .OldTicket = oldPT.PawnTicket
+            .LoanDate = txtLoan.Text
+            .MaturityDate = txtMatu.Text
+            .ExpiryDate = txtExpiry.Text
+            .AuctionDate = txtAuction.Text
+
+            If payment > 0 Then .Principal -= payment
+            Dim advInt As Double = GetInt(30)
+            .AdvanceInterest = .Principal * advInt
+            .NetAmount = .Principal - .AdvanceInterest
+
+            '.OfficialReceiptNumber = CurrentOR()
+            '.OfficialReceiptDate = CurrentDate
+            .SaveTicket()
+        End With
+    End Sub
 #End Region
 
-    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
-        If transactionType = "X" Then
-            btnRedeem.Text = "&Redeem"
-            txtNet.BackColor = Drawing.SystemColors.Control
-            transactionType = "D"
-            btnVoid.Enabled = True
-            btnSave.Enabled = False
-
-            LoadPawnTicket(PawnItem, "D")
-            Exit Sub
-        End If
-        If transactionType <> "D" Then
-            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
-
-        Redeem()
-        btnSave.Enabled = True
-        btnRedeem.Text = "&Cancel"
-        btnVoid.Enabled = False
-    End Sub
-
-    Private Sub txtNet_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNet.TextChanged
-
-    End Sub
 End Class

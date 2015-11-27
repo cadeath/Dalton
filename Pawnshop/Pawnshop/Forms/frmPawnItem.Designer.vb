@@ -806,7 +806,7 @@ Partial Class frmPawnItem
         Me.btnRenew.Name = "btnRenew"
         Me.btnRenew.Size = New System.Drawing.Size(88, 33)
         Me.btnRenew.TabIndex = 6
-        Me.btnRenew.Text = "&Renew"
+        Me.btnRenew.Text = "Rene&w"
         Me.btnRenew.UseVisualStyleBackColor = True
         '
         'btnVoid
