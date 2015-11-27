@@ -329,6 +329,8 @@
         txtNet.Text = txtRedeem.Text
         txtNet.BackColor = Drawing.SystemColors.Window
         txtNet.Focus()
+
+        ChangeForm()
     End Sub
 
     Private Function GetServiceCharge(ByVal principal As Double) As Double
@@ -362,6 +364,7 @@
         cboKarat.Text = pt.Karat
 
         txtTicket.Text = pt.PawnTicket
+        currentPawnTicket = pt.PawnTicket
         txtOldTicket.Text = pt.OldTicket
         txtLoan.Text = pt.LoanDate
         txtMatu.Text = pt.MaturityDate
@@ -374,6 +377,7 @@
         txtNet.Text = pt.NetAmount
 
         txtReceipt.Text = IIf(pt.OfficialReceiptNumber = 0, "", pt.OfficialReceiptNumber)
+        'currentORNumber = pt.OfficialReceiptNumber
         txtReceiptDate.Text = IIf(pt.OfficialReceiptDate = #12:00:00 AM#, "", pt.OfficialReceiptDate)
         txtPrincipal2.Text = IIf(pt.Principal = 0, "", pt.Principal)
 
@@ -391,11 +395,27 @@
         transactionType = type
         PawnItem = pt
 
+        mod_system.isAuthorized = True
         If transactionType = "D" Then
             LockFields(True)
             btnSave.Enabled = False : btnRenew.Enabled = True
             btnRedeem.Enabled = True : btnVoid.Enabled = True
         End If
+
+        ChangeForm()
+    End Sub
+
+    Private Sub ChangeForm()
+        Select Case transactionType
+            Case "D"
+                lblTransaction.Text = "Display Ticket Information"
+            Case "L"
+                lblTransaction.Text = "New Loan"
+            Case "R"
+                lblTransaction.Text = "Renew"
+            Case "X"
+                lblTransaction.Text = "Redeem"
+        End Select
     End Sub
 
     Private Function GetAppraiserByID(ByVal id As Integer) As String
