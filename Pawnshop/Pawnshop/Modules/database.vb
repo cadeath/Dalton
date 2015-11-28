@@ -146,10 +146,22 @@ Module database
 
     Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)
         Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
-        Dim ds As DataSet = LoadSQL(mySql, "tblMaintenance")
+        Dim fillData As String = "tblMaintenance"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
 
-        ds.Tables(0).Rows(0).Item("opt_values") = value
-        SaveEntry(ds, False)
+        If ds.Tables(fillData).Rows.Count = 0 Then
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(fillData).NewRow
+            With dsNewRow
+                .Item("opt_keys") = key
+                .Item("opt_values") = value
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+            SaveEntry(ds)
+        Else
+            ds.Tables(0).Rows(0).Item("opt_values") = value
+            SaveEntry(ds, False)
+        End If
         Console.WriteLine("Option updated. " & key)
     End Sub
 End Module

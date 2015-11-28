@@ -22,6 +22,7 @@ Partial Class frmMTlist
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMTlist))
         Me.lvMoneyTransfer = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -37,6 +38,7 @@ Partial Class frmMTlist
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'lvMoneyTransfer
@@ -44,10 +46,11 @@ Partial Class frmMTlist
         Me.lvMoneyTransfer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvMoneyTransfer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader7, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvMoneyTransfer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader8, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader7, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
         Me.lvMoneyTransfer.FullRowSelect = True
         Me.lvMoneyTransfer.GridLines = True
         Me.lvMoneyTransfer.Location = New System.Drawing.Point(12, 55)
+        Me.lvMoneyTransfer.MultiSelect = False
         Me.lvMoneyTransfer.Name = "lvMoneyTransfer"
         Me.lvMoneyTransfer.Size = New System.Drawing.Size(701, 371)
         Me.lvMoneyTransfer.TabIndex = 2
@@ -56,7 +59,7 @@ Partial Class frmMTlist
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "Ref#"
+        Me.ColumnHeader1.Text = "ID"
         '
         'ColumnHeader2
         '
@@ -158,6 +161,10 @@ Partial Class frmMTlist
         Me.btnNew.Text = "&New"
         Me.btnNew.UseVisualStyleBackColor = True
         '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.Text = "Ref#"
+        '
         'frmMTlist
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -172,6 +179,7 @@ Partial Class frmMTlist
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.lvMoneyTransfer)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMTlist"
         Me.Text = "Money Transfer List"
         Me.ResumeLayout(False)
@@ -193,4 +201,5 @@ Partial Class frmMTlist
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
 End Class

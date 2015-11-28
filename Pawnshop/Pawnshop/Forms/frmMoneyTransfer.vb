@@ -2,6 +2,7 @@
 
     Dim senderClient As Client
     Dim receiverClient As Client
+    Dim transID As Integer = GetOption("MoneyTransNum")
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
         frmClient.SearchSelect(txtSender.Text, FormName.frmMTSend)
@@ -18,18 +19,60 @@
         End If
     End Sub
 
+    Friend Sub LoadMT(ByVal mt As MoneyTransfer)
+        LockFields(True)
+        txtRefNum.ReadOnly = True
+        txtSender.ReadOnly = True
+        txtReceiver.ReadOnly = True
+        txtRefNum.ReadOnly = True
+        txtAmount.ReadOnly = True
+        txtLocation.ReadOnly = True
+
+        Select Case mt.TransactionType
+            Case 1 : rbReceive.Checked = True
+            Case 0 : rbSend.Checked = True
+        End Select
+
+        cboType.Text = mt.ServiceType
+        LoadSenderInfo(mt.Sender)
+        LoadReceiverInfo(mt.Receiver)
+
+        txtRefNum.Text = mt.ReferenceNumber
+        txtAmount.Text = mt.TransferAmount
+        txtCharge.Text = mt.ServiceCharge
+        txtNetAmount.Text = mt.NetAmount
+        txtLocation.Text = mt.Location
+
+        btnPost.Enabled = False
+
+        Me.Text &= "| Date: " & mt.TransactionDate
+
+
+        cboType.Enabled = False
+        btnSearchSender.Enabled = False
+        btnSearchReceiver.Enabled = False
+        rbReceive.Enabled = False
+        rbSend.Enabled = False
+    End Sub
+
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         LockFields(True)
-
-        MsgBox("This module is under construction", MsgBoxStyle.Information)
+        lblWhere.Text = "Send To"
+        GetTransNumber()
+        'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
+    End Sub
+
+    Private Sub GetTransNumber()
+        txtTransNum.Text = String.Format("{0:000000}", transID)
     End Sub
 
     Private Sub ClearField()
         rbSend.Checked = True
         cboType.SelectedIndex = 0
 
+        txtTransNum.Text = ""
         txtSender.Text = "" : txtSenderAddr.Text = ""
         txtSenderID.Text = "" : txtSenderIDNum.Text = ""
 
@@ -57,6 +100,7 @@
     Private Function isValid() As Boolean
         If cboType.Text = "" Then cboType.Focus() : Return False
 
+        If cboType.Text = "Western Union" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
         If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
         If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
@@ -75,6 +119,7 @@
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             .TransactionType = IIf(rbReceive.Checked, 1, 0)
+            .TransactionID = transID
             .ServiceType = cboType.Text
             .TransactionDate = CurrentDate
             .Sender = senderClient
@@ -84,9 +129,21 @@
             .ServiceCharge = txtCharge.Text
             .NetAmount = txtNetAmount.Text
             .Location = txtLocation.Text
+            .Status = "A" 'Active
+            .EncoderID = UserID
 
             .Save()
         End With
+
+        AddTransID()
+        MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        frmMTlist.LoadActive()
+        Me.Close()
+    End Sub
+
+    Private Sub AddTransID()
+        transID += 1
+        UpdateOptions("TRANSID", transID)
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
@@ -94,6 +151,9 @@
         txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)
         txtSenderID.Text = cl.IDType
         txtSenderIDNum.Text = cl.IDNumber
+
+        senderClient = cl
+        txtReceiver.Focus()
     End Sub
 
     Friend Sub LoadReceiverInfo(ByVal cl As Client)
@@ -101,6 +161,9 @@
         txtReceiverAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)
         txtReceiverID.Text = cl.IDType
         txtReceiverIDNum.Text = cl.IDNumber
+
+        receiverClient = cl
+        txtRefNum.Focus()
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
@@ -122,6 +185,8 @@
     End Sub
 
     Private Function GetCharge(ByVal amt As Double) As Double
+        If rbReceive.Checked Then Return 0
+
         Dim type As String = "perapadala", fillData As String = "tblCharge"
         Dim ds As DataSet, mySql As String
         mySql = "SELECT * FROM " & fillData
@@ -144,8 +209,58 @@
     End Sub
 
     Private Sub ComputeNet()
+        If txtCharge.Text = "" Then Exit Sub
+        If txtAmount.Text = "" Then Exit Sub
+
         Dim net As Double = CDbl(txtCharge.Text) + CDbl(txtAmount.Text)
 
-        txtNetAmount.Text = "P " & net
+        txtNetAmount.Text = net
+    End Sub
+
+    Private Sub txtReceiver_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReceiver.KeyPress
+        If isEnter(e) Then
+            btnSearchReceiver.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLocation.KeyPress
+        If isEnter(e) Then
+            btnPost.PerformClick()
+        End If
+    End Sub
+
+    Private Sub CheckTracking()
+        Dim st As Boolean = False
+
+        If rbSend.Checked Then
+            If cboType.Text = "Western Union" Then
+                st = True
+            Else
+                st = False
+            End If
+        End If
+
+        If rbReceive.Checked Then
+            st = True
+        End If
+
+        txtRefNum.ReadOnly = Not st
+    End Sub
+
+    Private Sub rbSend_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbSend.CheckedChanged
+        If rbSend.Checked Then lblWhere.Text = "Send To"
+        CheckTracking()
+    End Sub
+
+    Private Sub rbReceive_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbReceive.CheckedChanged
+        If rbReceive.Checked Then
+            ComputeNet()
+            lblWhere.Text = "Send From"
+        End If
+        CheckTracking()
+    End Sub
+
+    Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
+        CheckTracking()
     End Sub
 End Class
