@@ -18,10 +18,11 @@ Module mod_system
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
 
-    Friend advanceInterestNumberofMonth As Integer = 33
+    Friend advanceInterestDays As Integer = 30
     Friend MaintainBal As Double = GetOption("MaintainingBalance")
     Friend InitialBal As Double = 0
     Friend RepDep As Double = 0
+    Friend DollarRate As Double = 48
 
 #End Region
 

@@ -28,8 +28,10 @@
     End Sub
 
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
-        frmNewloan.NewLoan()
-        frmNewloan.Show()
+        'frmNewloan.NewLoan()
+        'frmNewloan.Show()
+        frmPawnItem.NewLoan()
+        frmPawnItem.Show()
     End Sub
 
     Friend Sub LoadActive()
@@ -143,8 +145,8 @@
         Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
         Dim tmpTicket As New PawnTicket
         tmpTicket.LoadTicket(idx)
-        frmNewloan.LoadPawnTicket(tmpTicket, "D")
-        frmNewloan.Show()
+        frmPawnItem.Show()
+        frmPawnItem.LoadPawnTicket(tmpTicket, "D")
     End Sub
 
     Private Sub lvPawners_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPawners.DoubleClick
@@ -168,6 +170,7 @@
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
             frmNewloan.SwitchTransaction("REDEEM")
+
         End If
     End Sub
 End Class

@@ -300,12 +300,12 @@
         End Get
     End Property
 
-    Private _advanceInterest As Integer
-    Public Property AdvanceInterestPerDays() As Integer
+    Private _advanceInterest As Double
+    Public Property AdvanceInterest() As Double
         Get
             Return _advanceInterest
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _advanceInterest = value
         End Set
     End Property
@@ -316,44 +316,81 @@
     Public Sub SaveTicket(Optional ByVal isNew As Boolean = True)
         Dim fillData As String = "tblPawn"
         Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
+        If Not isNew Then mySql &= " WHERE PawnID = " & _pawnid
         ds = LoadSQL(mySql, fillData)
 
         Dim dsNewRow As DataRow
-        dsNewRow = ds.Tables(fillData).NewRow
-        With dsNewRow
-            .Item("PawnTicket") = _pawnTicket
-            .Item("ClientID") = Pawner.ID
-            .Item("LoanDate") = _loanDate
-            .Item("MatuDate") = _matuDate
-            .Item("ExpiryDate") = _expiryDate
-            .Item("AuctionDate") = _auctionDate
-            .Item("ItemType") = _itemType
-            .Item("CatID") = _catID
-            .Item("Description") = _description
-            .Item("Karat") = _karat
-            .Item("Grams") = _grams
-            .Item("Appraisal") = _appraisal
-            .Item("Principal") = _principal
-            .Item("Interest") = _interest
-            .Item("NetAmount") = _netAmount
-            .Item("Evat") = _evat
-            .Item("AppraiserID") = _appraiserID
-            .Item("OldTicket") = _oldTicket
-            .Item("ORNum") = _orNum
-            .Item("ORDate") = _orDate
-            .Item("LessPrincipal") = _lessPrincipal
-            .Item("DaysOverDue") = _daysOverDue
-            .Item("DelayInt") = _delayInt
-            .Item("Penalty") = _penalty
-            .Item("ServiceCharge") = _serviceCharge
-            .Item("RenewDue") = _renewDue
-            .Item("RedeemDue") = _redeemDue
-            .Item("Status") = _status
-            .Item("SystemInfo") = Now
-            .Item("EncoderID") = UserID
-            .Item("AdvInt") = _advanceInterest
-        End With
-        ds.Tables(fillData).Rows.Add(dsNewRow)
+        If isNew Then
+            dsNewRow = ds.Tables(fillData).NewRow
+            With dsNewRow
+                .Item("PawnTicket") = _pawnTicket
+                .Item("ClientID") = Pawner.ID
+                .Item("LoanDate") = _loanDate
+                .Item("MatuDate") = _matuDate
+                .Item("ExpiryDate") = _expiryDate
+                .Item("AuctionDate") = _auctionDate
+                .Item("ItemType") = _itemType
+                .Item("CatID") = _catID
+                .Item("Description") = _description
+                .Item("Karat") = _karat
+                .Item("Grams") = _grams
+                .Item("Appraisal") = _appraisal
+                .Item("Principal") = _principal
+                .Item("Interest") = _interest
+                .Item("NetAmount") = _netAmount
+                .Item("Evat") = _evat
+                .Item("AppraiserID") = _appraiserID
+                .Item("OldTicket") = _oldTicket
+                .Item("ORNum") = _orNum
+                .Item("ORDate") = _orDate
+                .Item("LessPrincipal") = _lessPrincipal
+                .Item("DaysOverDue") = _daysOverDue
+                .Item("DelayInt") = _delayInt
+                .Item("Penalty") = _penalty
+                .Item("ServiceCharge") = _serviceCharge
+                .Item("RenewDue") = _renewDue
+                .Item("RedeemDue") = _redeemDue
+                .Item("Status") = _status
+                .Item("SystemInfo") = Now
+                .Item("EncoderID") = UserID
+                .Item("AdvInt") = _advanceInterest
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+        Else
+            With ds.Tables(fillData).Rows(0)
+                .Item("PawnTicket") = _pawnTicket
+                .Item("ClientID") = Pawner.ID
+                .Item("LoanDate") = _loanDate
+                .Item("MatuDate") = _matuDate
+                .Item("ExpiryDate") = _expiryDate
+                .Item("AuctionDate") = _auctionDate
+                .Item("ItemType") = _itemType
+                .Item("CatID") = _catID
+                .Item("Description") = _description
+                .Item("Karat") = _karat
+                .Item("Grams") = _grams
+                .Item("Appraisal") = _appraisal
+                .Item("Principal") = _principal
+                .Item("Interest") = _interest
+                .Item("NetAmount") = _netAmount
+                .Item("Evat") = _evat
+                .Item("AppraiserID") = _appraiserID
+                .Item("OldTicket") = _oldTicket
+                .Item("ORNum") = _orNum
+                .Item("ORDate") = _orDate
+                .Item("LessPrincipal") = _lessPrincipal
+                .Item("DaysOverDue") = _daysOverDue
+                .Item("DelayInt") = _delayInt
+                .Item("Penalty") = _penalty
+                .Item("ServiceCharge") = _serviceCharge
+                .Item("RenewDue") = _renewDue
+                .Item("RedeemDue") = _redeemDue
+                .Item("Status") = _status
+                .Item("SystemInfo") = Now
+                .Item("EncoderID") = UserID
+                .Item("AdvInt") = _advanceInterest
+            End With
+        End If
 
         database.SaveEntry(ds, isNew)
     End Sub

@@ -30,7 +30,8 @@
     End Sub
 
     Private Sub AddItem(ByVal mt As MoneyTransfer)
-        Dim lv As ListViewItem = lvMoneyTransfer.Items.Add(mt.ReferenceNumber)
+        Dim lv As ListViewItem = lvMoneyTransfer.Items.Add(mt.TransactionID)
+        lv.SubItems.Add(mt.ReferenceNumber)
         lv.SubItems.Add(mt.TransactionDate)
         lv.SubItems.Add(IIf(mt.TransactionType = 1, "In", "Out"))
         lv.SubItems.Add(mt.ServiceType)

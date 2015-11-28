@@ -28,6 +28,16 @@
         End Get
     End Property
 
+    Private _transID As Integer
+    Public Property TransactionID() As Integer
+        Get
+            Return _transID
+        End Get
+        Set(ByVal value As Integer)
+            _transID = value
+        End Set
+    End Property
+
     Public Property ReferenceNumber As String
         Set(ByVal value As String)
             _ref = value
