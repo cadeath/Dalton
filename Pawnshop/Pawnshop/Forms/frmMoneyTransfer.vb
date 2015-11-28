@@ -3,8 +3,10 @@
     Dim senderClient As Client
     Dim receiverClient As Client
     Dim transID As Integer = GetOption("MoneyTransNum")
+    Friend displayOnly As Boolean = False
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
+        RequirementLevel = 3
         frmClient.SearchSelect(txtSender.Text, FormName.frmMTSend)
         frmClient.Show()
     End Sub
@@ -21,7 +23,6 @@
 
     Friend Sub LoadMT(ByVal mt As MoneyTransfer)
         LockFields(True)
-        txtRefNum.ReadOnly = True
         txtSender.ReadOnly = True
         txtReceiver.ReadOnly = True
         txtRefNum.ReadOnly = True
@@ -101,10 +102,15 @@
         If cboType.Text = "" Then cboType.Focus() : Return False
 
         If cboType.Text = "Western Union" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
-        If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
-        If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
-        If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
-        If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+        If rbSend.Checked Then
+            If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+            If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+            If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+        Else
+            If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+            If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+            If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+        End If
 
         If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
@@ -167,6 +173,7 @@
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
+        RequirementLevel = 1
         frmClient.SearchSelect(txtReceiver.Text, FormName.frmMTReceive)
         frmClient.Show()
     End Sub
@@ -231,6 +238,7 @@
 
     Private Sub CheckTracking()
         Dim st As Boolean = False
+        If displayOnly Then Exit Sub
 
         If rbSend.Checked Then
             If cboType.Text = "Western Union" Then
