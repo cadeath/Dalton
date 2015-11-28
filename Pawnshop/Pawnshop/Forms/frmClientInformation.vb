@@ -226,10 +226,19 @@ Public Class frmClientInformation
     Private Function isValid() As Boolean
         If txtFirstName.Text = "" Then txtFirstName.Focus() : Return False
         If txtLastName.Text = "" Then txtLastName.Focus() : Return False
-        If cboCity.Text = "" Then cboCity.Focus() : Return False
-        If cboGender.Text = "" Then cboGender.Focus() : Return False
-        If dtpBday.Value >= Now.Date Then dtpBday.Focus() : Return False
 
+        If RequirementLevel = 2 Then
+            If cboCity.Text = "" Then cboCity.Focus() : Return False
+            If cboGender.Text = "" Then cboGender.Focus() : Return False
+            If dtpBday.Value >= Now.Date Then dtpBday.Focus() : Return False
+        End If
+
+        If RequirementLevel >= 3 Then
+            If lvID.Items.Count < 1 Then
+                MsgBox("Must have atleast ONE Valid ID", MsgBoxStyle.Critical)
+                Return False
+            End If
+        End If
 
         Return True
     End Function

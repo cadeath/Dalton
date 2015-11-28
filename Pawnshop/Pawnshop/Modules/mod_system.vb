@@ -22,6 +22,8 @@ Module mod_system
     Friend MaintainBal As Double = GetOption("MaintainingBalance")
     Friend InitialBal As Double = 0
     Friend RepDep As Double = 0
+    Friend DollarRate As Double = 48
+    Friend RequirementLevel As Integer = 1
 
 #End Region
 

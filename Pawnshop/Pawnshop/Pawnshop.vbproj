@@ -186,6 +186,12 @@
     <Compile Include="Forms\frmDollarList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmDollorSimple.Designer.vb">
+      <DependentUpon>frmDollorSimple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDollorSimple.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmInsuranceList.Designer.vb">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </Compile>
@@ -289,12 +295,6 @@
     <Compile Include="Forms\frmMTlist.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMTSend.Designer.vb">
-      <DependentUpon>frmMTSend.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmMTSend.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmNewloan.Designer.vb">
       <DependentUpon>frmNewloan.vb</DependentUpon>
     </Compile>
@@ -392,6 +392,9 @@
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDollorSimple.resx">
+      <DependentUpon>frmDollorSimple.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInsuranceList.resx">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </EmbeddedResource>
@@ -442,9 +445,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMTlist.resx">
       <DependentUpon>frmMTlist.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMTSend.resx">
-      <DependentUpon>frmMTSend.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmNewLoan.resx">
       <DependentUpon>frmNewloan.vb</DependentUpon>

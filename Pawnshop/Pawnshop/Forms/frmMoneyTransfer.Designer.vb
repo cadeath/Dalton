@@ -50,12 +50,14 @@ Partial Class frmMoneyTransfer
         Me.txtReceiver = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.txtTransNum = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.txtNetAmount = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtCharge = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtLocation = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.lblWhere = New System.Windows.Forms.Label()
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtRefNum = New System.Windows.Forms.TextBox()
@@ -339,37 +341,59 @@ Partial Class frmMoneyTransfer
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.txtTransNum)
+        Me.GroupBox5.Controls.Add(Me.Label13)
         Me.GroupBox5.Controls.Add(Me.txtNetAmount)
         Me.GroupBox5.Controls.Add(Me.Label12)
         Me.GroupBox5.Controls.Add(Me.txtCharge)
         Me.GroupBox5.Controls.Add(Me.Label10)
         Me.GroupBox5.Controls.Add(Me.txtLocation)
-        Me.GroupBox5.Controls.Add(Me.Label9)
+        Me.GroupBox5.Controls.Add(Me.lblWhere)
         Me.GroupBox5.Controls.Add(Me.txtAmount)
         Me.GroupBox5.Controls.Add(Me.Label8)
         Me.GroupBox5.Controls.Add(Me.txtRefNum)
         Me.GroupBox5.Controls.Add(Me.Label7)
         Me.GroupBox5.Location = New System.Drawing.Point(487, 40)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(265, 244)
+        Me.GroupBox5.Size = New System.Drawing.Size(265, 286)
         Me.GroupBox5.TabIndex = 4
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Transaction"
         '
+        'txtTransNum
+        '
+        Me.txtTransNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTransNum.Location = New System.Drawing.Point(9, 34)
+        Me.txtTransNum.Name = "txtTransNum"
+        Me.txtTransNum.ReadOnly = True
+        Me.txtTransNum.Size = New System.Drawing.Size(253, 22)
+        Me.txtTransNum.TabIndex = 8
+        Me.txtTransNum.Text = "Eskie Cirrus James Maquilang"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(9, 18)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(114, 16)
+        Me.Label13.TabIndex = 13
+        Me.Label13.Text = "Transaction No"
+        '
         'txtNetAmount
         '
         Me.txtNetAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNetAmount.Location = New System.Drawing.Point(6, 165)
+        Me.txtNetAmount.Location = New System.Drawing.Point(6, 206)
         Me.txtNetAmount.Name = "txtNetAmount"
         Me.txtNetAmount.Size = New System.Drawing.Size(253, 22)
-        Me.txtNetAmount.TabIndex = 11
+        Me.txtNetAmount.TabIndex = 12
         Me.txtNetAmount.Text = "0"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(6, 146)
+        Me.Label12.Location = New System.Drawing.Point(6, 187)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(87, 16)
         Me.Label12.TabIndex = 12
@@ -378,17 +402,17 @@ Partial Class frmMoneyTransfer
         'txtCharge
         '
         Me.txtCharge.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCharge.Location = New System.Drawing.Point(6, 121)
+        Me.txtCharge.Location = New System.Drawing.Point(6, 162)
         Me.txtCharge.Name = "txtCharge"
         Me.txtCharge.Size = New System.Drawing.Size(253, 22)
-        Me.txtCharge.TabIndex = 10
+        Me.txtCharge.TabIndex = 11
         Me.txtCharge.Text = "0"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(6, 102)
+        Me.Label10.Location = New System.Drawing.Point(6, 143)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(115, 16)
         Me.Label10.TabIndex = 10
@@ -397,36 +421,36 @@ Partial Class frmMoneyTransfer
         'txtLocation
         '
         Me.txtLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLocation.Location = New System.Drawing.Point(6, 209)
+        Me.txtLocation.Location = New System.Drawing.Point(6, 250)
         Me.txtLocation.Name = "txtLocation"
         Me.txtLocation.Size = New System.Drawing.Size(253, 22)
-        Me.txtLocation.TabIndex = 12
+        Me.txtLocation.TabIndex = 13
         Me.txtLocation.Text = "International"
         '
-        'Label9
+        'lblWhere
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(6, 190)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(67, 16)
-        Me.Label9.TabIndex = 8
-        Me.Label9.Text = "Location"
+        Me.lblWhere.AutoSize = True
+        Me.lblWhere.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWhere.Location = New System.Drawing.Point(6, 231)
+        Me.lblWhere.Name = "lblWhere"
+        Me.lblWhere.Size = New System.Drawing.Size(67, 16)
+        Me.lblWhere.TabIndex = 8
+        Me.lblWhere.Text = "Location"
         '
         'txtAmount
         '
         Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAmount.Location = New System.Drawing.Point(6, 78)
+        Me.txtAmount.Location = New System.Drawing.Point(6, 119)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(253, 22)
-        Me.txtAmount.TabIndex = 9
+        Me.txtAmount.TabIndex = 10
         Me.txtAmount.Text = "Eskie Cirrus James Maquilang"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(6, 62)
+        Me.Label8.Location = New System.Drawing.Point(6, 103)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(59, 16)
         Me.Label8.TabIndex = 6
@@ -435,21 +459,22 @@ Partial Class frmMoneyTransfer
         'txtRefNum
         '
         Me.txtRefNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRefNum.Location = New System.Drawing.Point(6, 34)
+        Me.txtRefNum.Location = New System.Drawing.Point(6, 75)
         Me.txtRefNum.Name = "txtRefNum"
+        Me.txtRefNum.ReadOnly = True
         Me.txtRefNum.Size = New System.Drawing.Size(253, 22)
-        Me.txtRefNum.TabIndex = 8
+        Me.txtRefNum.TabIndex = 9
         Me.txtRefNum.Text = "Eskie Cirrus James Maquilang"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(6, 18)
+        Me.Label7.Location = New System.Drawing.Point(6, 59)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(138, 16)
+        Me.Label7.Size = New System.Drawing.Size(127, 16)
         Me.Label7.TabIndex = 4
-        Me.Label7.Text = "Reference Number"
+        Me.Label7.Text = "Tracking Number"
         '
         'frmMoneyTransfer
         '
@@ -511,7 +536,7 @@ Partial Class frmMoneyTransfer
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents txtRefNum As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents lblWhere As System.Windows.Forms.Label
     Friend WithEvents txtAmount As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents txtLocation As System.Windows.Forms.TextBox
@@ -519,4 +544,6 @@ Partial Class frmMoneyTransfer
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtCharge As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtTransNum As System.Windows.Forms.TextBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
 End Class

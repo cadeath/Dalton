@@ -2,8 +2,16 @@
 
     Dim senderClient As Client
     Dim receiverClient As Client
+    Dim transID As Integer = GetOption("MoneyTransNum")
+    Friend displayOnly As Boolean = False
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
+        If rbReceive.Checked Then
+            RequirementLevel = 1
+        Else
+            RequirementLevel = 3
+        End If
+
         frmClient.SearchSelect(txtSender.Text, FormName.frmMTSend)
         frmClient.Show()
     End Sub
@@ -56,15 +64,21 @@
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         LockFields(True)
-
+        lblWhere.Text = "Send To"
+        GetTransNumber()
         'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
+    End Sub
+
+    Private Sub GetTransNumber()
+        txtTransNum.Text = String.Format("{0:000000}", transID)
     End Sub
 
     Private Sub ClearField()
         rbSend.Checked = True
         cboType.SelectedIndex = 0
 
+        txtTransNum.Text = ""
         txtSender.Text = "" : txtSenderAddr.Text = ""
         txtSenderID.Text = "" : txtSenderIDNum.Text = ""
 
@@ -92,12 +106,18 @@
     Private Function isValid() As Boolean
         If cboType.Text = "" Then cboType.Focus() : Return False
 
-        If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
-        If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
-        If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
-        If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+        If cboType.Text = "Western Union" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
+        If rbSend.Checked Then
+            If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+            If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+            If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+        Else
+            If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+            If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+            If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+            If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
+        End If
 
-        If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
         If txtLocation.Text = "" Then txtLocation.Focus() : Return False
 
@@ -110,6 +130,7 @@
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             .TransactionType = IIf(rbReceive.Checked, 1, 0)
+            .TransactionID = transID
             .ServiceType = cboType.Text
             .TransactionDate = CurrentDate
             .Sender = senderClient
@@ -125,9 +146,15 @@
             .Save()
         End With
 
+        AddTransID()
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         frmMTlist.LoadActive()
         Me.Close()
+    End Sub
+
+    Private Sub AddTransID()
+        transID += 1
+        UpdateOptions("TRANSID", transID)
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
@@ -151,6 +178,11 @@
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
+        If rbSend.Checked Then
+            RequirementLevel = 3
+        Else
+            RequirementLevel = 1
+        End If
         frmClient.SearchSelect(txtReceiver.Text, FormName.frmMTReceive)
         frmClient.Show()
     End Sub
@@ -169,6 +201,8 @@
     End Sub
 
     Private Function GetCharge(ByVal amt As Double) As Double
+        If rbReceive.Checked Then Return 0
+
         Dim type As String = "perapadala", fillData As String = "tblCharge"
         Dim ds As DataSet, mySql As String
         mySql = "SELECT * FROM " & fillData
@@ -191,6 +225,9 @@
     End Sub
 
     Private Sub ComputeNet()
+        If txtCharge.Text = "" Then Exit Sub
+        If txtAmount.Text = "" Then Exit Sub
+
         Dim net As Double = CDbl(txtCharge.Text) + CDbl(txtAmount.Text)
 
         txtNetAmount.Text = net
@@ -206,5 +243,41 @@
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
+    End Sub
+
+    Private Sub CheckTracking()
+        Dim st As Boolean = False
+        If displayOnly Then Exit Sub
+
+        If rbSend.Checked Then
+            If cboType.Text = "Western Union" Then
+                st = True
+            Else
+                st = False
+            End If
+        End If
+
+        If rbReceive.Checked Then
+            st = True
+        End If
+
+        txtRefNum.ReadOnly = Not st
+    End Sub
+
+    Private Sub rbSend_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbSend.CheckedChanged
+        If rbSend.Checked Then lblWhere.Text = "Send To"
+        CheckTracking()
+    End Sub
+
+    Private Sub rbReceive_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbReceive.CheckedChanged
+        If rbReceive.Checked Then
+            ComputeNet()
+            lblWhere.Text = "Send From"
+        End If
+        CheckTracking()
+    End Sub
+
+    Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
+        CheckTracking()
     End Sub
 End Class

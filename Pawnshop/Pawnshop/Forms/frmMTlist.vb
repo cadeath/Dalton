@@ -30,7 +30,8 @@
     End Sub
 
     Private Sub AddItem(ByVal mt As MoneyTransfer)
-        Dim lv As ListViewItem = lvMoneyTransfer.Items.Add(mt.ReferenceNumber)
+        Dim lv As ListViewItem = lvMoneyTransfer.Items.Add(mt.TransactionID)
+        lv.SubItems.Add(mt.ReferenceNumber)
         lv.SubItems.Add(mt.TransactionDate)
         lv.SubItems.Add(IIf(mt.TransactionType = 1, "In", "Out"))
         lv.SubItems.Add(mt.ServiceType)
@@ -71,6 +72,7 @@
         Dim tmpMT As New MoneyTransfer
         tmpMT.LoadTransaction(lvMoneyTransfer.SelectedItems(0).Tag)
         frmMoneyTransfer.Show()
+        frmMoneyTransfer.displayOnly = True
         frmMoneyTransfer.LoadMT(tmpMT)
     End Sub
 
@@ -110,4 +112,11 @@
         End If
     End Sub
 
+    Private Sub lvMoneyTransfer_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvMoneyTransfer.KeyPress
+        If isEnter(e) Then
+            If lvMoneyTransfer.SelectedItems.Count = 1 Then
+                btnView.PerformClick()
+            End If
+        End If
+    End Sub
 End Class
