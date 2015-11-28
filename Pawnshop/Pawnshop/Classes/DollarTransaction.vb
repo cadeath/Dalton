@@ -160,7 +160,7 @@
             .Item("PesoRate") = _pesoRate
             If Not _customer Is Nothing Then
                 .Item("ClientID") = _customer.ID
-                .Item("FullName") = _fullName
+                .Item("FullName") = String.Format("{0} {1}", _customer.FirstName, _customer.LastName)
             End If
             .Item("Denomination") = _denomination
             .Item("Serial") = _serial

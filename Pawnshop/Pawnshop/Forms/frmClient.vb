@@ -55,6 +55,8 @@ Public Class frmClient
 
     Private Delegate Sub LoadClient_delegate()
     Friend Sub LoadClients()
+        'On Error Resume Next
+
         If lvClient.InvokeRequired Then
             lvClient.Invoke(New LoadClient_delegate(AddressOf LoadClients))
         Else
@@ -63,6 +65,8 @@ Public Class frmClient
             btnView.Enabled = False
             txtSearch.ReadOnly = True
             btnSearch.Enabled = False
+
+            Me.Enabled = False
 
             Dim tbl As String = "TBLCLIENT"
             Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
@@ -81,6 +85,8 @@ Public Class frmClient
             btnView.Enabled = True
             txtSearch.ReadOnly = False
             btnSearch.Enabled = True
+
+            Me.Enabled = True
         End If
     End Sub
 
@@ -154,7 +160,6 @@ Public Class frmClient
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
         lvClient.Items(0).Focused = True
-        'lvClient.Items(0).Selected = True
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
@@ -170,10 +175,6 @@ Public Class frmClient
         Me.Close()
     End Sub
 
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
-    End Sub
-
     Private Sub lvClient_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvClient.KeyPress
         If isEnter(e) Then
             If fromOtherForm Then
@@ -182,9 +183,5 @@ Public Class frmClient
                 btnView.PerformClick()
             End If
         End If
-    End Sub
-
-    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
-
     End Sub
 End Class
