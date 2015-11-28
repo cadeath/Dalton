@@ -38,6 +38,7 @@ Partial Class frmMTlist
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'lvMoneyTransfer
@@ -45,7 +46,7 @@ Partial Class frmMTlist
         Me.lvMoneyTransfer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvMoneyTransfer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader7, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvMoneyTransfer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader8, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader7, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
         Me.lvMoneyTransfer.FullRowSelect = True
         Me.lvMoneyTransfer.GridLines = True
         Me.lvMoneyTransfer.Location = New System.Drawing.Point(12, 55)
@@ -58,7 +59,7 @@ Partial Class frmMTlist
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "Ref#"
+        Me.ColumnHeader1.Text = "ID"
         '
         'ColumnHeader2
         '
@@ -160,6 +161,10 @@ Partial Class frmMTlist
         Me.btnNew.Text = "&New"
         Me.btnNew.UseVisualStyleBackColor = True
         '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.Text = "Ref#"
+        '
         'frmMTlist
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -196,4 +201,5 @@ Partial Class frmMTlist
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
 End Class
