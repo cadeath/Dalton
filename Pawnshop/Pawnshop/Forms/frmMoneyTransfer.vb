@@ -6,7 +6,12 @@
     Friend displayOnly As Boolean = False
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
-        RequirementLevel = 3
+        If rbReceive.Checked Then
+            RequirementLevel = 1
+        Else
+            RequirementLevel = 3
+        End If
+
         frmClient.SearchSelect(txtSender.Text, FormName.frmMTSend)
         frmClient.Show()
     End Sub
@@ -110,9 +115,9 @@
             If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
             If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
             If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+            If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         End If
 
-        If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
         If txtLocation.Text = "" Then txtLocation.Focus() : Return False
 
@@ -173,7 +178,11 @@
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
-        RequirementLevel = 1
+        If rbSend.Checked Then
+            RequirementLevel = 3
+        Else
+            RequirementLevel = 1
+        End If
         frmClient.SearchSelect(txtReceiver.Text, FormName.frmMTReceive)
         frmClient.Show()
     End Sub
