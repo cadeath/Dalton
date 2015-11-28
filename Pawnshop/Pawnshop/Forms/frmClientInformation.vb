@@ -285,6 +285,7 @@ Public Class frmClientInformation
             End If
         End With
 
+        tmpClient.LoadLastEntry()
         SaveIDs(tmpClient)
 
         If isNew Then
@@ -337,7 +338,9 @@ Public Class frmClientInformation
             lv.BackColor = Color.ForestGreen
         End If
 
-        cID.ClientID = SelectedClient.ID
+        If Not SelectedClient Is Nothing Then
+            cID.ClientID = SelectedClient.ID
+        End If
         ClientIDs.Add(cID)
     End Sub
 

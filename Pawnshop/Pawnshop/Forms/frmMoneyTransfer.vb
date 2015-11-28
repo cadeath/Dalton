@@ -178,7 +178,7 @@
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
-        If rbSend.Checked Then
+        If rbReceive.Checked Then
             RequirementLevel = 3
         Else
             RequirementLevel = 1
