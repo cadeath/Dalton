@@ -186,6 +186,12 @@
     <Compile Include="Forms\frmDollarList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmDollorSimple.Designer.vb">
+      <DependentUpon>frmDollorSimple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDollorSimple.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmInsuranceList.Designer.vb">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </Compile>
@@ -391,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDollorSimple.resx">
+      <DependentUpon>frmDollorSimple.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInsuranceList.resx">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
