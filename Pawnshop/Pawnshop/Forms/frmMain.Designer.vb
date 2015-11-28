@@ -32,6 +32,7 @@ Partial Class frmMain
         Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExpiryGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -39,6 +40,7 @@ Partial Class frmMain
         Me.CashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -59,6 +61,7 @@ Partial Class frmMain
         Me.btnPawning = New System.Windows.Forms.Button()
         Me.statusStrip = New System.Windows.Forms.StatusStrip()
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -78,7 +81,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -117,6 +120,12 @@ Partial Class frmMain
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(168, 6)
         '
+        'LogOutToolStripMenuItem
+        '
+        Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.LogOutToolStripMenuItem.Text = "&Log Out"
+        '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
@@ -125,7 +134,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -158,6 +167,12 @@ Partial Class frmMain
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
         Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.BackupToolStripMenuItem.Text = "&Backup"
+        '
+        'ConsoleToolStripMenuItem
+        '
+        Me.ConsoleToolStripMenuItem.Name = "ConsoleToolStripMenuItem"
+        Me.ConsoleToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ConsoleToolStripMenuItem.Text = "&Console"
         '
         'ReportToolStripMenuItem
         '
@@ -335,7 +350,7 @@ Partial Class frmMain
         '
         'statusStrip
         '
-        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate})
+        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser})
         Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
         Me.statusStrip.Size = New System.Drawing.Size(936, 22)
@@ -345,8 +360,15 @@ Partial Class frmMain
         'tsCurrentDate
         '
         Me.tsCurrentDate.Name = "tsCurrentDate"
-        Me.tsCurrentDate.Size = New System.Drawing.Size(57, 17)
-        Me.tsCurrentDate.Text = "Today is: "
+        Me.tsCurrentDate.Size = New System.Drawing.Size(70, 17)
+        Me.tsCurrentDate.Text = "Date not set"
+        '
+        'tsUser
+        '
+        Me.tsUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.tsUser.Name = "tsUser"
+        Me.tsUser.Size = New System.Drawing.Size(68, 17)
+        Me.tsUser.Text = "No User yet"
         '
         'tmrCurrent
         '
@@ -363,6 +385,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.pbLogo)
         Me.Controls.Add(Me.msMenu)
         Me.Controls.Add(Me.pInfo)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.msMenu
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -416,5 +439,8 @@ Partial Class frmMain
     Friend WithEvents statusStrip As System.Windows.Forms.StatusStrip
     Friend WithEvents tsCurrentDate As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tmrCurrent As System.Windows.Forms.Timer
+    Friend WithEvents LogOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsUser As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

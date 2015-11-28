@@ -1,4 +1,6 @@
 ﻿Public Class frmBorrowBrowse
+    ' Version 1.1
+    ' - Check branchCode
 
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -15,10 +17,10 @@
         lvBorrowings.Items.Clear()
     End Sub
 
-    Private Sub LoadBorrowings()
-        Dim mySql As String = "SELECT * FROM tblBorrow WHERE Status = 'C' or Status = 'D' ORDER BY TransDate DESC"
+    Private Sub LoadBorrowings(Optional ByVal mySql As String = "SELECT * FROM tblBorrow WHERE Status = 'C' or Status = 'D' ORDER BY TransDate DESC")
         Dim ds As DataSet = LoadSQL(mySql)
 
+        lvBorrowings.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpBB As New Borrowings
             tmpBB.LoadBorrowByRow(dr)
@@ -61,6 +63,10 @@
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
+        If MsgBox("Do you want to void this transaction?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "V O I D") _
+            = MsgBoxResult.No Then
+            Exit Sub
+        End If
 
         Dim idx As Integer = lvBorrowings.FocusedItem.Tag
         Dim tmpBB As New Borrowings
@@ -108,8 +114,10 @@
         If ht Is Nothing Then Exit Sub
 
         If Not GetIntegrity(ht) Then MsgBox("Invalid for file." & vbCr & "Please generate another key.", MsgBoxStyle.Critical) : Exit Sub
-        Dim refNum As String, TransDate As Date, branchCode As String, Amount As Double, Remarks As String
-        refNum = ht(0) : TransDate = ht(1) : branchCode = ht(2) : Amount = ht(3) : Remarks = ht(4)
+        Dim refNum As String, TransDate As Date, eskBrancCode As String, Amount As Double, Remarks As String
+        refNum = ht(0) : TransDate = ht(1) : eskBrancCode = ht(2) : Amount = ht(3) : Remarks = ht(4)
+
+        If eskBrancCode <> BranchCode Then MsgBox("This file is not for this branch", MsgBoxStyle.Critical) : Exit Sub
 
         'Check Ref Duplication
         Dim mySql As String = "SELECT * FROM tblBorrow WHERE RefNum = '" & refNum & "'"
@@ -123,7 +131,7 @@
         With tmpBB
             .ReferenceNumber = refNum
             .TransactionDate = TransDate
-            .BranchCode = branchCode
+            .BranchCode = eskBrancCode
             .BranchName = GetBranchName(branchCode)
             .Amount = Amount
             .Remarks = Remarks
@@ -194,4 +202,22 @@
 
         Return ds.Tables(0).Rows(0).Item("branchName")
     End Function
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        Dim mySql As String = "SELECT * FROM tblBorrow WHERE "
+        mySql &= String.Format("UPPER(REFNUM) LIKE '%{0}%' ", txtSearch.Text)
+        If IsNumeric(txtSearch.Text) Then mySql &= String.Format("OR AMOUNT = {0} ", txtSearch.Text)
+        mySql &= "ORDER BY TransDate DESC"
+
+        LoadBorrowings(mySql)
+        If lvBorrowings.Items.Count = 0 Then
+            MsgBox("No result found.", MsgBoxStyle.Critical)
+        Else
+            MsgBox(String.Format("{0} result found", lvBorrowings.Items.Count))
+        End If
+    End Sub
+
+    Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then btnSearch.PerformClick()
+    End Sub
 End Class

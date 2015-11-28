@@ -22,6 +22,7 @@ Partial Class frmMTlist
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMTlist))
         Me.lvMoneyTransfer = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -173,6 +174,7 @@ Partial Class frmMTlist
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.lvMoneyTransfer)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMTlist"
         Me.Text = "Money Transfer List"
         Me.ResumeLayout(False)

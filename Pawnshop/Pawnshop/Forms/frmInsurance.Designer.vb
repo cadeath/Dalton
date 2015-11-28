@@ -24,7 +24,7 @@ Partial Class frmInsurance
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmInsurance))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.dtpBday = New System.Windows.Forms.DateTimePicker()
+        Me.txtBirthdate = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.txtSenderID = New System.Windows.Forms.TextBox()
         Me.txtSenderIDNum = New System.Windows.Forms.TextBox()
@@ -36,10 +36,10 @@ Partial Class frmInsurance
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.txtCoi = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.dtpExpiry = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -47,7 +47,7 @@ Partial Class frmInsurance
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -56,8 +56,8 @@ Partial Class frmInsurance
         '
         'GroupBox1
         '
-        Me.GroupBox1.BackColor = System.Drawing.Color.Transparent
-        Me.GroupBox1.Controls.Add(Me.dtpBday)
+        Me.GroupBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.GroupBox1.Controls.Add(Me.txtBirthdate)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.txtSenderID)
         Me.GroupBox1.Controls.Add(Me.txtSenderIDNum)
@@ -75,15 +75,14 @@ Partial Class frmInsurance
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Policy Holder"
         '
-        'dtpBday
+        'txtBirthdate
         '
-        Me.dtpBday.Enabled = False
-        Me.dtpBday.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpBday.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpBday.Location = New System.Drawing.Point(119, 159)
-        Me.dtpBday.Name = "dtpBday"
-        Me.dtpBday.Size = New System.Drawing.Size(108, 25)
-        Me.dtpBday.TabIndex = 23
+        Me.txtBirthdate.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBirthdate.Location = New System.Drawing.Point(120, 162)
+        Me.txtBirthdate.Name = "txtBirthdate"
+        Me.txtBirthdate.ReadOnly = True
+        Me.txtBirthdate.Size = New System.Drawing.Size(296, 25)
+        Me.txtBirthdate.TabIndex = 25
         '
         'Label17
         '
@@ -104,7 +103,6 @@ Partial Class frmInsurance
         Me.txtSenderID.ReadOnly = True
         Me.txtSenderID.Size = New System.Drawing.Size(296, 25)
         Me.txtSenderID.TabIndex = 4
-        Me.txtSenderID.Text = "Driver's License"
         '
         'txtSenderIDNum
         '
@@ -114,7 +112,6 @@ Partial Class frmInsurance
         Me.txtSenderIDNum.ReadOnly = True
         Me.txtSenderIDNum.Size = New System.Drawing.Size(296, 25)
         Me.txtSenderIDNum.TabIndex = 5
-        Me.txtSenderIDNum.Text = "MMMMMMMMMMMMMMMMMMM"
         '
         'Label4
         '
@@ -136,7 +133,6 @@ Partial Class frmInsurance
         Me.txtSenderAddr.ReadOnly = True
         Me.txtSenderAddr.Size = New System.Drawing.Size(296, 67)
         Me.txtSenderAddr.TabIndex = 3
-        Me.txtSenderAddr.Text = "Eskie Cirrus James Maquilang"
         '
         'Label3
         '
@@ -151,6 +147,8 @@ Partial Class frmInsurance
         '
         'btnSearch
         '
+        Me.btnSearch.Enabled = False
+        Me.btnSearch.ForeColor = System.Drawing.SystemColors.ControlText
         Me.btnSearch.Location = New System.Drawing.Point(438, 13)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(55, 23)
@@ -166,7 +164,6 @@ Partial Class frmInsurance
         Me.txtHolder.ReadOnly = True
         Me.txtHolder.Size = New System.Drawing.Size(296, 25)
         Me.txtHolder.TabIndex = 1
-        Me.txtHolder.Text = "Eskie Cirrus James Maquilang"
         '
         'Label2
         '
@@ -201,14 +198,15 @@ Partial Class frmInsurance
         Me.Label5.TabIndex = 17
         Me.Label5.Text = "Amount:"
         '
-        'TextBox1
+        'txtAmount
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(121, 87)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(107, 25)
-        Me.TextBox1.TabIndex = 4
+        Me.txtAmount.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAmount.Location = New System.Drawing.Point(121, 87)
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.ReadOnly = True
+        Me.txtAmount.Size = New System.Drawing.Size(107, 25)
+        Me.txtAmount.TabIndex = 4
+        Me.txtAmount.Text = "20"
         '
         'Label1
         '
@@ -231,24 +229,24 @@ Partial Class frmInsurance
         Me.dtpDate.Size = New System.Drawing.Size(108, 25)
         Me.dtpDate.TabIndex = 23
         '
-        'TextBox4
+        'txtCoi
         '
-        Me.TextBox4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(120, 9)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.ReadOnly = True
-        Me.TextBox4.Size = New System.Drawing.Size(108, 25)
-        Me.TextBox4.TabIndex = 25
+        Me.txtCoi.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCoi.Location = New System.Drawing.Point(120, 9)
+        Me.txtCoi.Name = "txtCoi"
+        Me.txtCoi.ReadOnly = True
+        Me.txtCoi.Size = New System.Drawing.Size(108, 25)
+        Me.txtCoi.TabIndex = 25
         '
         'GroupBox2
         '
-        Me.GroupBox2.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox2.BackColor = System.Drawing.SystemColors.Control
         Me.GroupBox2.Controls.Add(Me.dtpExpiry)
         Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.TextBox4)
+        Me.GroupBox2.Controls.Add(Me.txtCoi)
         Me.GroupBox2.Controls.Add(Me.dtpDate)
         Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.TextBox1)
+        Me.GroupBox2.Controls.Add(Me.txtAmount)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.Label7)
         Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI Symbol", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -283,11 +281,11 @@ Partial Class frmInsurance
         '
         'GroupBox3
         '
-        Me.GroupBox3.BackColor = System.Drawing.Color.LightGray
+        Me.GroupBox3.BackColor = System.Drawing.SystemColors.Control
         Me.GroupBox3.Controls.Add(Me.btnBrowse)
         Me.GroupBox3.Controls.Add(Me.btnNew)
         Me.GroupBox3.Controls.Add(Me.btnVoid)
-        Me.GroupBox3.Controls.Add(Me.Button2)
+        Me.GroupBox3.Controls.Add(Me.btnClose)
         Me.GroupBox3.Controls.Add(Me.btnSave)
         Me.GroupBox3.Font = New System.Drawing.Font("Segoe UI Symbol", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.Location = New System.Drawing.Point(1, -1)
@@ -304,12 +302,11 @@ Partial Class frmInsurance
         Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnBrowse.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBrowse.ForeColor = System.Drawing.Color.Black
-        Me.btnBrowse.Location = New System.Drawing.Point(180, 50)
+        Me.btnBrowse.Location = New System.Drawing.Point(180, 21)
         Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(78, 26)
+        Me.btnBrowse.Size = New System.Drawing.Size(78, 55)
         Me.btnBrowse.TabIndex = 42
         Me.btnBrowse.Text = "&Browse"
-        Me.btnBrowse.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnBrowse.UseVisualStyleBackColor = False
         '
         'btnNew
@@ -320,12 +317,11 @@ Partial Class frmInsurance
         Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnNew.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNew.ForeColor = System.Drawing.Color.Black
-        Me.btnNew.Location = New System.Drawing.Point(24, 50)
+        Me.btnNew.Location = New System.Drawing.Point(24, 21)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(78, 26)
+        Me.btnNew.Size = New System.Drawing.Size(78, 55)
         Me.btnNew.TabIndex = 41
         Me.btnNew.Text = "&New"
-        Me.btnNew.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnNew.UseVisualStyleBackColor = False
         '
         'btnVoid
@@ -337,29 +333,27 @@ Partial Class frmInsurance
         Me.btnVoid.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnVoid.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnVoid.ForeColor = System.Drawing.Color.Black
-        Me.btnVoid.Location = New System.Drawing.Point(102, 50)
+        Me.btnVoid.Location = New System.Drawing.Point(102, 21)
         Me.btnVoid.Name = "btnVoid"
-        Me.btnVoid.Size = New System.Drawing.Size(78, 26)
+        Me.btnVoid.Size = New System.Drawing.Size(78, 55)
         Me.btnVoid.TabIndex = 40
         Me.btnVoid.Text = "&Void"
-        Me.btnVoid.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnVoid.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btnClose
         '
-        Me.Button2.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.Black
-        Me.Button2.Location = New System.Drawing.Point(335, 50)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(79, 26)
-        Me.Button2.TabIndex = 39
-        Me.Button2.Text = "&Close"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnClose.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnClose.BackgroundImage = CType(resources.GetObject("btnClose.BackgroundImage"), System.Drawing.Image)
+        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.btnClose.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.Black
+        Me.btnClose.Location = New System.Drawing.Point(338, 21)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(79, 55)
+        Me.btnClose.TabIndex = 39
+        Me.btnClose.Text = "&Close"
+        Me.btnClose.UseVisualStyleBackColor = False
         '
         'btnSave
         '
@@ -370,19 +364,18 @@ Partial Class frmInsurance
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.Black
-        Me.btnSave.Location = New System.Drawing.Point(257, 50)
+        Me.btnSave.Location = New System.Drawing.Point(257, 21)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(82, 26)
+        Me.btnSave.Size = New System.Drawing.Size(82, 55)
         Me.btnSave.TabIndex = 38
         Me.btnSave.Text = "&Save"
-        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnSave.UseVisualStyleBackColor = False
         '
         'frmInsurance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.White
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(500, 446)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
@@ -407,14 +400,13 @@ Partial Class frmInsurance
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtHolder As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents dtpBday As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtAmount As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents dtpDate As System.Windows.Forms.DateTimePicker
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtCoi As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents dtpExpiry As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label6 As System.Windows.Forms.Label
@@ -422,6 +414,7 @@ Partial Class frmInsurance
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents btnVoid As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents txtBirthdate As System.Windows.Forms.TextBox
 End Class
