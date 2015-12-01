@@ -385,7 +385,7 @@
         Dim daysDue As Integer = IIf(overDays.Days > 0, overDays.Days, 0)
 
         txtOver.Text = daysDue
-        delayInt = GetInt(dayDiffNew) * PawnItem.Principal
+        delayInt = GetInt(dayDiffNew) * PawnItem.Principal '+ AddServerCharge(PawnItem.Principal)
         delayInt = delayInt - PawnItem.AdvanceInterest
         txtInt.Text = delayInt
 
@@ -410,6 +410,10 @@
 
         ChangeForm()
     End Sub
+
+    Private Function AddServerCharge(ByVal principal As Double) As Double
+        Return GetServiceCharge(principal)
+    End Function
 
     Private Function GetServiceCharge(ByVal principal As Double) As Double
         Dim srvPrin As Double = principal
