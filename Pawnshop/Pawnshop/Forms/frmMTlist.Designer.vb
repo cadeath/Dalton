@@ -164,6 +164,7 @@ Partial Class frmMTlist
         Me.btnNew.TabIndex = 3
         Me.btnNew.Text = "&New"
         Me.btnNew.UseVisualStyleBackColor = True
+        Me.btnNew.Visible = False
         '
         'frmMTlist
         '

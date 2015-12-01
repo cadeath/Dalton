@@ -73,10 +73,6 @@ Public Class frmClientInformation
         LockFields(True)
     End Sub
 
-    Private Sub ReturnToOriginForm()
-        FormOrigin.Show()
-    End Sub
-
     Friend Sub ComputeBirthday()
         lblAge.Text = "N/A"
         lblAge.Text = GetCurrentAge(dtpBday.Value) & " years old"
@@ -253,7 +249,6 @@ Public Class frmClientInformation
 
         If Not isValid() Then Exit Sub
 
-
         Dim tmpClient As New Client
         If Not isNew Then tmpClient = SelectedClient
 
@@ -279,13 +274,12 @@ Public Class frmClientInformation
 
             If isNew Then
                 .SaveClient()
-
+                tmpClient.LoadLastEntry()
             Else
                 .ModifyClient()
             End If
         End With
 
-        tmpClient.LoadLastEntry()
         SaveIDs(tmpClient)
 
         If isNew Then
@@ -294,8 +288,9 @@ Public Class frmClientInformation
             MsgBox("Entry Updated", MsgBoxStyle.Information)
         End If
 
-
-        frmClient.btnSearch.PerformClick()
+        'frmClient.btnSearch.PerformClick()
+        tmpClient.LoadClient(tmpClient.ID)
+        frmClient.AutoSelect(tmpClient)
         Me.Close()
     End Sub
 

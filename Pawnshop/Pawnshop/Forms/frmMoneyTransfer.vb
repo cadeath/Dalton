@@ -32,7 +32,7 @@
         txtReceiver.ReadOnly = True
         txtRefNum.ReadOnly = True
         txtAmount.ReadOnly = True
-        txtLocation.ReadOnly = True
+        cboLocation.Enabled = False
 
         Select Case mt.TransactionType
             Case 1 : rbReceive.Checked = True
@@ -47,7 +47,7 @@
         txtAmount.Text = mt.TransferAmount
         txtCharge.Text = mt.ServiceCharge
         txtNetAmount.Text = mt.NetAmount
-        txtLocation.Text = mt.Location
+        cboLocation.Text = mt.Location
 
         btnPost.Enabled = False
 
@@ -70,6 +70,20 @@
         rbSend.Focus()
     End Sub
 
+    Private Function GetLocations() As String()
+        Dim mySql As String = "SELECT DISTINCT Location FROM tblMoneyTransfer ORDER BY Location ASC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        Dim tmpStr(MaxRow - 1) As String, cnt As Integer = 0
+        For Each dr As DataRow In ds.Tables(0).Rows
+            tmpStr(cnt) = dr.Item("Location")
+            cnt += 1
+        Next
+
+        Return tmpStr
+    End Function
+
     Private Sub GetTransNumber()
         txtTransNum.Text = String.Format("{0:000000}", transID)
     End Sub
@@ -87,7 +101,10 @@
 
         txtRefNum.Text = "" : txtAmount.Text = ""
         txtCharge.Text = "" : txtNetAmount.Text = ""
-        txtLocation.Text = ""
+        cboLocation.Text = ""
+
+        cboLocation.Items.Clear()
+        cboLocation.Items.AddRange(GetLocations)
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
@@ -108,18 +125,18 @@
 
         If cboType.Text = "Western Union" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If rbSend.Checked Then
-            If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+            If senderClient Is Nothing Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
             If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
-            If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+            If receiverClient Is Nothing Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
         Else
-            If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
-            If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+            If senderClient Is Nothing Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+            If receiverClient Is Nothing Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
             If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
             If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         End If
 
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
-        If txtLocation.Text = "" Then txtLocation.Focus() : Return False
+        If cboLocation.Text = "" Then cboLocation.Focus() : Return False
 
         Return True
     End Function
@@ -139,7 +156,7 @@
             .TransferAmount = txtAmount.Text
             .ServiceCharge = txtCharge.Text
             .NetAmount = txtNetAmount.Text
-            .Location = txtLocation.Text
+            .Location = cboLocation.Text
             .Status = "A" 'Active
             .EncoderID = UserID
 
@@ -190,7 +207,7 @@
     Private Sub txtAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmount.KeyPress
         DigitOnly(e)
         If isEnter(e) Then
-            txtLocation.Focus()
+            cboLocation.Focus()
         End If
     End Sub
 
@@ -239,7 +256,7 @@
         End If
     End Sub
 
-    Private Sub txtLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLocation.KeyPress
+    Private Sub txtLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
@@ -279,5 +296,15 @@
 
     Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
         CheckTracking()
+    End Sub
+
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        frmMTlist.Show()
+    End Sub
+
+    Private Sub cboLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboLocation.KeyPress
+        If isEnter(e) Then
+            btnPost.PerformClick()
+        End If
     End Sub
 End Class

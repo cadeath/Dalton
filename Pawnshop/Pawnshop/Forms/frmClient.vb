@@ -1,6 +1,8 @@
 ﻿Imports System.Threading
 ' USE README-DEVELOPER TO USE THIS PROPERLY.
 ' Version
+' 1.2
+' - AutoSelect Added
 ' 1.1.1
 ' - Enhance Auto Search Form
 ' 1.1
@@ -123,6 +125,7 @@ Public Class frmClient
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         frmClientInformation.Show()
+
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -172,6 +175,16 @@ Public Class frmClient
 
         formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
 
+        Me.Close()
+    End Sub
+
+    Friend Sub AutoSelect(ByVal cl As Client)
+        If Not fromOtherForm Then
+            txtSearch.Text = cl.FirstName
+            Exit Sub
+        End If
+
+        formSwitch.ReloadFormFromSearch(frmOrig, cl)
         Me.Close()
     End Sub
 
