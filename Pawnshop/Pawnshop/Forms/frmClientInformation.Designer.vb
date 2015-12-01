@@ -442,18 +442,18 @@ Partial Class frmClientInformation
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(877, 361)
+        Me.btnCancel.Location = New System.Drawing.Point(868, 344)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(84, 40)
         Me.btnCancel.TabIndex = 24
         Me.btnCancel.Text = "&Close"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(796, 361)
+        Me.btnSave.Location = New System.Drawing.Point(778, 344)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(84, 40)
         Me.btnSave.TabIndex = 22
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -593,9 +593,9 @@ Partial Class frmClientInformation
         '
         'btnSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(715, 361)
+        Me.btnSelect.Location = New System.Drawing.Point(688, 344)
         Me.btnSelect.Name = "btnSelect"
-        Me.btnSelect.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelect.Size = New System.Drawing.Size(84, 40)
         Me.btnSelect.TabIndex = 21
         Me.btnSelect.Text = "Sele&ct"
         Me.btnSelect.UseVisualStyleBackColor = True

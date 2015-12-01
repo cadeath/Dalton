@@ -243,10 +243,13 @@
         On Error Resume Next
 
         txtPrincipal2.Text = txtPrincipal.Text
-        txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
+        Dim advInt As Double
+        advInt = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
+        txtNet.Text = CDbl(txtPrincipal.Text) - advInt
         If transactionType = "L" Then
-            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
+            txtAdv.Text = advInt
         End If
+        Console.WriteLine("AdvInt: " & advInt)
     End Sub
 
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
@@ -382,7 +385,7 @@
         Dim daysDue As Integer = IIf(overDays.Days > 0, overDays.Days, 0)
 
         txtOver.Text = daysDue
-        delayInt = GetInt(dayDiffNew) * PawnItem.Principal
+        delayInt = GetInt(dayDiffNew) * PawnItem.Principal '+ AddServerCharge(PawnItem.Principal)
         delayInt = delayInt - PawnItem.AdvanceInterest
         txtInt.Text = delayInt
 
@@ -408,8 +411,12 @@
         ChangeForm()
     End Sub
 
+    Private Function AddServerCharge(ByVal principal As Double) As Double
+        Return GetServiceCharge(principal)
+    End Function
+
     Private Function GetServiceCharge(ByVal principal As Double) As Double
-        Dim srvPrin As Double = CDbl(txtPrincipal.Text)
+        Dim srvPrin As Double = principal
         Dim ret As Double = 0
 
         If srvPrin < 500 Then
@@ -669,7 +676,7 @@
         If txtPrincipal.Text <> "" Then
             txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
             If transactionType = "L" Then
-                txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
+                txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
             End If
         End If
 

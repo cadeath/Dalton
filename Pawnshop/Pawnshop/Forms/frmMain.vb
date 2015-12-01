@@ -113,7 +113,8 @@
             MsgBoxAuthoriation("You don't have access to Money Transfer")
             Exit Sub
         End If
-        frmMTlist.Show()
+        'frmMTlist.Show()
+        frmMoneyTransfer.Show()
     End Sub
 
     Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
@@ -123,7 +124,7 @@
             MsgBoxAuthoriation("You don't have access to Dollar Buying")
             Exit Sub
         End If
-        frmDollar.Show()
+        frmDollorSimple.Show()
     End Sub
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
