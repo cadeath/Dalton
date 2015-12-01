@@ -163,6 +163,7 @@
     Private Sub loadByRow(ByVal dr As DataRow)
         With dr
             _id = .Item("ID")
+            _transID = .Item("TransID")
             _transType = .Item("MoneyTrans")
             _serviceType = .Item("ServiceType")
             Dim tmpClient As New Client
@@ -193,6 +194,7 @@
             .Item("MoneyTrans") = _transType
             .Item("ServiceType") = _serviceType
             .Item("TransDate") = _date
+            .Item("TransID") = _transID
             .Item("SenderID") = _client1.ID
             .Item("SenderName") = String.Format("{0} {1}", _client1.FirstName, _client1.LastName)
             .Item("ReceiverID") = _client2.ID

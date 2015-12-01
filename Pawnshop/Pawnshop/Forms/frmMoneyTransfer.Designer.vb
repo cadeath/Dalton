@@ -50,18 +50,19 @@ Partial Class frmMoneyTransfer
         Me.txtReceiver = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.cboLocation = New System.Windows.Forms.ComboBox()
         Me.txtTransNum = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtNetAmount = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtCharge = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtLocation = New System.Windows.Forms.TextBox()
         Me.lblWhere = New System.Windows.Forms.Label()
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtRefNum = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.gbTrans.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -82,18 +83,18 @@ Partial Class frmMoneyTransfer
         'btnClose
         '
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Location = New System.Drawing.Point(678, 449)
+        Me.btnClose.Location = New System.Drawing.Point(672, 434)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.Size = New System.Drawing.Size(81, 38)
         Me.btnClose.TabIndex = 14
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'btnPost
         '
-        Me.btnPost.Location = New System.Drawing.Point(597, 449)
+        Me.btnPost.Location = New System.Drawing.Point(587, 434)
         Me.btnPost.Name = "btnPost"
-        Me.btnPost.Size = New System.Drawing.Size(75, 23)
+        Me.btnPost.Size = New System.Drawing.Size(79, 38)
         Me.btnPost.TabIndex = 13
         Me.btnPost.Text = "&Post"
         Me.btnPost.UseVisualStyleBackColor = True
@@ -341,13 +342,13 @@ Partial Class frmMoneyTransfer
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.cboLocation)
         Me.GroupBox5.Controls.Add(Me.txtTransNum)
         Me.GroupBox5.Controls.Add(Me.Label13)
         Me.GroupBox5.Controls.Add(Me.txtNetAmount)
         Me.GroupBox5.Controls.Add(Me.Label12)
         Me.GroupBox5.Controls.Add(Me.txtCharge)
         Me.GroupBox5.Controls.Add(Me.Label10)
-        Me.GroupBox5.Controls.Add(Me.txtLocation)
         Me.GroupBox5.Controls.Add(Me.lblWhere)
         Me.GroupBox5.Controls.Add(Me.txtAmount)
         Me.GroupBox5.Controls.Add(Me.Label8)
@@ -359,6 +360,15 @@ Partial Class frmMoneyTransfer
         Me.GroupBox5.TabIndex = 4
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Transaction"
+        '
+        'cboLocation
+        '
+        Me.cboLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboLocation.FormattingEnabled = True
+        Me.cboLocation.Location = New System.Drawing.Point(9, 250)
+        Me.cboLocation.Name = "cboLocation"
+        Me.cboLocation.Size = New System.Drawing.Size(250, 24)
+        Me.cboLocation.TabIndex = 17
         '
         'txtTransNum
         '
@@ -418,15 +428,6 @@ Partial Class frmMoneyTransfer
         Me.Label10.TabIndex = 10
         Me.Label10.Text = "Service Charge"
         '
-        'txtLocation
-        '
-        Me.txtLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLocation.Location = New System.Drawing.Point(6, 250)
-        Me.txtLocation.Name = "txtLocation"
-        Me.txtLocation.Size = New System.Drawing.Size(253, 22)
-        Me.txtLocation.TabIndex = 13
-        Me.txtLocation.Text = "International"
-        '
         'lblWhere
         '
         Me.lblWhere.AutoSize = True
@@ -476,12 +477,22 @@ Partial Class frmMoneyTransfer
         Me.Label7.TabIndex = 4
         Me.Label7.Text = "Tracking Number"
         '
+        'btnBrowse
+        '
+        Me.btnBrowse.Location = New System.Drawing.Point(502, 434)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(79, 38)
+        Me.btnBrowse.TabIndex = 15
+        Me.btnBrowse.Text = "&Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
+        '
         'frmMoneyTransfer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(765, 480)
+        Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
@@ -539,11 +550,12 @@ Partial Class frmMoneyTransfer
     Friend WithEvents lblWhere As System.Windows.Forms.Label
     Friend WithEvents txtAmount As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents txtLocation As System.Windows.Forms.TextBox
     Friend WithEvents txtNetAmount As System.Windows.Forms.TextBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents txtCharge As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents txtTransNum As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents cboLocation As System.Windows.Forms.ComboBox
 End Class

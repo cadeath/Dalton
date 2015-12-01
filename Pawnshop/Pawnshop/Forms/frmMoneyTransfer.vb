@@ -3,8 +3,15 @@
     Dim senderClient As Client
     Dim receiverClient As Client
     Dim transID As Integer = GetOption("MoneyTransNum")
+    Friend displayOnly As Boolean = False
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
+        If rbReceive.Checked Then
+            RequirementLevel = 1
+        Else
+            RequirementLevel = 3
+        End If
+
         frmClient.SearchSelect(txtSender.Text, FormName.frmMTSend)
         frmClient.Show()
     End Sub
@@ -21,12 +28,11 @@
 
     Friend Sub LoadMT(ByVal mt As MoneyTransfer)
         LockFields(True)
-        txtRefNum.ReadOnly = True
         txtSender.ReadOnly = True
         txtReceiver.ReadOnly = True
         txtRefNum.ReadOnly = True
         txtAmount.ReadOnly = True
-        txtLocation.ReadOnly = True
+        cboLocation.Enabled = False
 
         Select Case mt.TransactionType
             Case 1 : rbReceive.Checked = True
@@ -41,7 +47,7 @@
         txtAmount.Text = mt.TransferAmount
         txtCharge.Text = mt.ServiceCharge
         txtNetAmount.Text = mt.NetAmount
-        txtLocation.Text = mt.Location
+        cboLocation.Text = mt.Location
 
         btnPost.Enabled = False
 
@@ -64,6 +70,20 @@
         rbSend.Focus()
     End Sub
 
+    Private Function GetLocations() As String()
+        Dim mySql As String = "SELECT DISTINCT Location FROM tblMoneyTransfer ORDER BY Location ASC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        Dim tmpStr(MaxRow - 1) As String, cnt As Integer = 0
+        For Each dr As DataRow In ds.Tables(0).Rows
+            tmpStr(cnt) = dr.Item("Location")
+            cnt += 1
+        Next
+
+        Return tmpStr
+    End Function
+
     Private Sub GetTransNumber()
         txtTransNum.Text = String.Format("{0:000000}", transID)
     End Sub
@@ -81,7 +101,10 @@
 
         txtRefNum.Text = "" : txtAmount.Text = ""
         txtCharge.Text = "" : txtNetAmount.Text = ""
-        txtLocation.Text = ""
+        cboLocation.Text = ""
+
+        cboLocation.Items.Clear()
+        cboLocation.Items.AddRange(GetLocations)
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
@@ -101,14 +124,19 @@
         If cboType.Text = "" Then cboType.Focus() : Return False
 
         If cboType.Text = "Western Union" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
-        If txtSender.Text = "" Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
-        If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
-        If txtReceiver.Text = "" Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
-        If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+        If rbSend.Checked Then
+            If senderClient Is Nothing Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+            If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+            If receiverClient Is Nothing Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+        Else
+            If senderClient Is Nothing Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
+            If receiverClient Is Nothing Then txtReceiver.Focus() : MsgBox("Please select Receiver", MsgBoxStyle.Critical) : Return False
+            If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
+            If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
+        End If
 
-        If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
-        If txtLocation.Text = "" Then txtLocation.Focus() : Return False
+        If cboLocation.Text = "" Then cboLocation.Focus() : Return False
 
         Return True
     End Function
@@ -128,7 +156,7 @@
             .TransferAmount = txtAmount.Text
             .ServiceCharge = txtCharge.Text
             .NetAmount = txtNetAmount.Text
-            .Location = txtLocation.Text
+            .Location = cboLocation.Text
             .Status = "A" 'Active
             .EncoderID = UserID
 
@@ -167,6 +195,11 @@
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
+        If rbReceive.Checked Then
+            RequirementLevel = 3
+        Else
+            RequirementLevel = 1
+        End If
         frmClient.SearchSelect(txtReceiver.Text, FormName.frmMTReceive)
         frmClient.Show()
     End Sub
@@ -174,7 +207,7 @@
     Private Sub txtAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmount.KeyPress
         DigitOnly(e)
         If isEnter(e) Then
-            txtLocation.Focus()
+            cboLocation.Focus()
         End If
     End Sub
 
@@ -223,7 +256,7 @@
         End If
     End Sub
 
-    Private Sub txtLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLocation.KeyPress
+    Private Sub txtLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
@@ -231,6 +264,7 @@
 
     Private Sub CheckTracking()
         Dim st As Boolean = False
+        If displayOnly Then Exit Sub
 
         If rbSend.Checked Then
             If cboType.Text = "Western Union" Then
@@ -262,5 +296,15 @@
 
     Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
         CheckTracking()
+    End Sub
+
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        frmMTlist.Show()
+    End Sub
+
+    Private Sub cboLocation_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboLocation.KeyPress
+        If isEnter(e) Then
+            btnPost.PerformClick()
+        End If
     End Sub
 End Class
