@@ -118,7 +118,7 @@
 
 #Region "Procedures and Functions"
     Public Sub LoadDollar(ByVal id As Integer)
-        mySql = "SELECT * FROM " & fillData
+        mySql = "SELECT * FROM " & fillData & " WHERE DollarID = " & id
         ds = LoadSQL(mySql)
 
         For Each dr As DataRow In ds.Tables(0).Rows
