@@ -23,13 +23,9 @@
     Private Sub frmPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadActive()
-        'frmOpenStore.Show()
-        'frmOpenStore.Focus()
     End Sub
 
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
-        'frmNewloan.NewLoan()
-        'frmNewloan.Show()
         frmPawnItem.NewLoan()
         frmPawnItem.Show()
     End Sub

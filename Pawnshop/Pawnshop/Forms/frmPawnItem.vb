@@ -725,7 +725,8 @@
 
     Private Sub SaveRenew()
         Dim oldPT As PawnTicket = PawnItem
-        Dim payment As Double = CDbl(txtRenew.Text) - (CDbl(txtAdv.Text))
+        ComputeAdvanceInterest()
+        Dim payment As Double = CDbl(txtRenew.Text) - AdvanceInt
 
         'Redeem
         With PawnItem
@@ -739,25 +740,26 @@
             .EVAT = txtEvat.Text
             .RenewDue = txtRenew.Text
             .RedeemDue = txtRedeem.Text
-            .Status = "R"
+            .Status = "0"
 
             .SaveTicket(False)
         End With
         AddORNum()
         AddPTNum()
+        GeneratePT()
 
         With PawnItem
             .PawnTicket = CurrentPTNumber()
             .OldTicket = oldPT.PawnTicket
-            .LoanDate = txtLoan.Text
+            .LoanDate = CurrentDate
             .MaturityDate = txtMatu.Text
             .ExpiryDate = txtExpiry.Text
             .AuctionDate = txtAuction.Text
 
             If payment > 0 Then .Principal -= payment
-            Dim advInt As Double = GetInt(30)
-            .AdvanceInterest = .Principal * advInt
-            .NetAmount = .Principal - .AdvanceInterest
+            .AdvanceInterest = AdvanceInt
+            .NetAmount = .Principal - AdvanceInt
+            .Status = "R"
 
             '.OfficialReceiptNumber = CurrentOR()
             '.OfficialReceiptDate = CurrentDate
