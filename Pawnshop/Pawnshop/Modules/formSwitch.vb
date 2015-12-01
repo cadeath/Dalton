@@ -17,8 +17,8 @@
                 devClient.LoadClientInfo(cl)
             Case FormName.frmMTSend
                 frmMoneyTransfer.LoadSenderInfo(cl)
-            Case FormName.frmPawning
-                frmNewloan.LoadPawnerInfo(cl)
+                'Case FormName.frmPawning
+                '    frmNewloan.LoadPawnerInfo(cl)
             Case FormName.frmInsurance
                 frmInsurance.LoadHolder(cl)
             Case FormName.frmMTReceive

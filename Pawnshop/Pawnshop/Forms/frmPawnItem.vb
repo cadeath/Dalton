@@ -753,7 +753,4 @@
     End Sub
 #End Region
 
-    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
-
-    End Sub
 End Class
