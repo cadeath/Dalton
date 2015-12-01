@@ -242,14 +242,8 @@
     Private Sub txtPrincipal_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
         On Error Resume Next
 
+        ComputeAdvanceInterest()
         txtPrincipal2.Text = txtPrincipal.Text
-        Dim advInt As Double
-        advInt = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
-        txtNet.Text = CDbl(txtPrincipal.Text) - advInt
-        If transactionType = "L" Then
-            txtAdv.Text = advInt
-        End If
-        Console.WriteLine("AdvInt: " & advInt)
     End Sub
 
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
@@ -326,6 +320,21 @@
 
             .SaveTicket(False)
         End With
+    End Sub
+
+    Private Sub ComputeAdvanceInterest()
+        If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
+
+        Dim DelayInt As Double, ServiceCharge As Double
+        Dim ItemPrincipal As Double = CDbl(txtPrincipal.Text)
+
+        DelayInt = ItemPrincipal * GetInt(30)
+        ServiceCharge = GetServiceCharge(ItemPrincipal)
+
+        txtInt.Text = DelayInt
+        txtService.Text = ServiceCharge
+        txtAdv.Text = DelayInt + ServiceCharge
+        txtNet.Text = ItemPrincipal - (DelayInt + ServiceCharge)
     End Sub
 
     Private Sub SaveNewLoan()
@@ -757,4 +766,7 @@
     End Sub
 #End Region
 
+    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+
+    End Sub
 End Class
