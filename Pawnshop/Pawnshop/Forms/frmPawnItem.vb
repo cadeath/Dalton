@@ -16,6 +16,10 @@
 
     Private appraiser As Hashtable
 
+    'Advance Interest
+    Private DelayInt As Double, ServiceCharge As Double
+    Private ItemPrincipal As Double, AdvanceInt As Double
+
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadInformation()
@@ -325,16 +329,17 @@
     Private Sub ComputeAdvanceInterest()
         If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
 
-        Dim DelayInt As Double, ServiceCharge As Double
-        Dim ItemPrincipal As Double = CDbl(txtPrincipal.Text)
-
+        ItemPrincipal = CDbl(txtPrincipal.Text)
         DelayInt = ItemPrincipal * GetInt(30)
         ServiceCharge = GetServiceCharge(ItemPrincipal)
+        AdvanceInt = DelayInt + ServiceCharge
 
-        txtInt.Text = DelayInt
-        txtService.Text = ServiceCharge
-        txtAdv.Text = DelayInt + ServiceCharge
-        txtNet.Text = ItemPrincipal - (DelayInt + ServiceCharge)
+        If transactionType = "L" Or transactionType = "R" Then
+            txtInt.Text = DelayInt
+            txtService.Text = ServiceCharge
+            txtAdv.Text = AdvanceInt
+        End If
+        txtNet.Text = ItemPrincipal - AdvanceInt
     End Sub
 
     Private Sub SaveNewLoan()
@@ -387,28 +392,23 @@
         transactionType = typ
         GenerateReceipt()
 
-        Dim delayInt As Double
         Dim dayDiff = CurrentDate - PawnItem.LoanDate
         Dim dayDiffNew As Integer = dayDiff.Days + 1
         Dim overDays = CurrentDate - PawnItem.MaturityDate
         Dim daysDue As Integer = IIf(overDays.Days > 0, overDays.Days, 0)
+        ComputeAdvanceInterest()
 
         txtOver.Text = daysDue
-        delayInt = GetInt(dayDiffNew) * PawnItem.Principal '+ AddServerCharge(PawnItem.Principal)
-        delayInt = delayInt - PawnItem.AdvanceInterest
-        txtInt.Text = delayInt
+        If Not typ = "X" Then
+            txtInt.Text = DelayInt
+            txtService.Text = GetServiceCharge(PawnItem.Principal)
+        End If
 
         txtPenalty.Text = GetInt(dayDiffNew, "Penalty") * PawnItem.Principal
-        txtService.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = PawnItem.EVAT
 
-        Console.WriteLine("Principal: " & PawnItem.Principal)
-        Console.WriteLine("Adv Int: " & PawnItem.AdvanceInterest)
-        Console.WriteLine("Interest: " & delayInt)
-        Console.WriteLine("Penalty: " & txtPenalty.Text)
-
-        txtRenew.Text = CDbl(txtService.Text) + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + CDbl(delayInt) + txtAdv.Text
-        txtRedeem.Text = PawnItem.Principal + CDbl(txtService.Text) + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + CDbl(delayInt)
+        txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
+        txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
         If transactionType = "X" Then
             txtRedeem.BackColor = Drawing.SystemColors.Window
             txtRedeem.Focus()
