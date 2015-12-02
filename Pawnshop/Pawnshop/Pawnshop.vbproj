@@ -37,7 +37,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -45,6 +45,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>pawnshop.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -185,6 +186,12 @@
     <Compile Include="Forms\frmDollarList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmDollorSimple.Designer.vb">
+      <DependentUpon>frmDollorSimple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDollorSimple.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmInsuranceList.Designer.vb">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </Compile>
@@ -288,18 +295,6 @@
     <Compile Include="Forms\frmMTlist.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMTSend.Designer.vb">
-      <DependentUpon>frmMTSend.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmMTSend.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmNewloan.Designer.vb">
-      <DependentUpon>frmNewloan.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmNewloan.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmOpenStore.Designer.vb">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
     </Compile>
@@ -310,6 +305,12 @@
       <DependentUpon>frmPawning.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmPawning.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPawnItem.Designer.vb">
+      <DependentUpon>frmPawnItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPawnItem.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmRate.Designer.vb">
@@ -366,12 +367,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagAuthorization.resx">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackup.resx">
       <DependentUpon>frmBackup.vb</DependentUpon>
@@ -381,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDollorSimple.resx">
+      <DependentUpon>frmDollorSimple.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInsuranceList.resx">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
@@ -433,17 +440,14 @@
     <EmbeddedResource Include="Forms\frmMTlist.resx">
       <DependentUpon>frmMTlist.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMTSend.resx">
-      <DependentUpon>frmMTSend.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmNewLoan.resx">
-      <DependentUpon>frmNewloan.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOpenStore.resx">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawning.resx">
       <DependentUpon>frmPawning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPawnItem.resx">
+      <DependentUpon>frmPawnItem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate.resx">
       <DependentUpon>frmRate.vb</DependentUpon>
@@ -468,7 +472,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="My Project\app.manifest" />
+    <None Include="My Project\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

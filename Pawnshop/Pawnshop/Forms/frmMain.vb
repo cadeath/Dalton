@@ -61,7 +61,7 @@
 
     Friend Sub CheckStoreStatus()
         mod_system.LoadCurrentDate()
-        CloseOpenStore.Enabled = Not dateSet
+        'CloseOpenStore.Enabled = Not dateSet
     End Sub
 
     Friend Sub LoadChild(ByVal frm As Form)
@@ -113,7 +113,8 @@
             MsgBoxAuthoriation("You don't have access to Money Transfer")
             Exit Sub
         End If
-        frmMTlist.Show()
+        'frmMTlist.Show()
+        frmMoneyTransfer.Show()
     End Sub
 
     Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
@@ -123,7 +124,7 @@
             MsgBoxAuthoriation("You don't have access to Dollar Buying")
             Exit Sub
         End If
-        frmDollar.Show()
+        frmDollorSimple.Show()
     End Sub
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
@@ -191,6 +192,9 @@
         If LogOutToolStripMenuItem.Text = "&Login" Then
             frmLogin.Show()
         Else
+            Dim ans As DialogResult = MsgBox("Do you want to LOGOUT?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Logout")
+            If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
             POSuser = Nothing
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
