@@ -97,8 +97,6 @@ Partial Class frmPawnItem
         Me.lblNPT = New System.Windows.Forms.Label()
         Me.tmrVerifier = New System.Windows.Forms.Timer(Me.components)
         Me.lblTransaction = New System.Windows.Forms.Label()
-        Me.txtLessPrincipal = New System.Windows.Forms.TextBox()
-        Me.Label20 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -216,8 +214,6 @@ Partial Class frmPawnItem
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.txtLessPrincipal)
-        Me.GroupBox2.Controls.Add(Me.Label20)
         Me.GroupBox2.Controls.Add(Me.txtAdv)
         Me.GroupBox2.Controls.Add(Me.Label14)
         Me.GroupBox2.Controls.Add(Me.txtAuction)
@@ -861,24 +857,6 @@ Partial Class frmPawnItem
         Me.lblTransaction.TabIndex = 13
         Me.lblTransaction.Text = "New Loan"
         '
-        'txtLessPrincipal
-        '
-        Me.txtLessPrincipal.Location = New System.Drawing.Point(104, 184)
-        Me.txtLessPrincipal.Name = "txtLessPrincipal"
-        Me.txtLessPrincipal.ReadOnly = True
-        Me.txtLessPrincipal.Size = New System.Drawing.Size(100, 20)
-        Me.txtLessPrincipal.TabIndex = 20
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(6, 185)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(92, 16)
-        Me.Label20.TabIndex = 21
-        Me.Label20.Text = "Less Principal"
-        '
         'frmPawnItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -990,6 +968,4 @@ Partial Class frmPawnItem
     Friend WithEvents lblNPT As System.Windows.Forms.Label
     Friend WithEvents tmrVerifier As System.Windows.Forms.Timer
     Friend WithEvents lblTransaction As System.Windows.Forms.Label
-    Friend WithEvents txtLessPrincipal As System.Windows.Forms.TextBox
-    Friend WithEvents Label20 As System.Windows.Forms.Label
 End Class

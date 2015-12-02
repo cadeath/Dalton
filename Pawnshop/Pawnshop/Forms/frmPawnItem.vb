@@ -384,8 +384,12 @@
         txtTicket.Text = CurrentPTNumber()
         txtLoan.Text = CurrentDate.ToShortDateString
         txtMatu.Text = CurrentDate.AddDays(29).ToShortDateString
+        dateChange(cboType.Text)
 
-        If transactionType = "R" Then txtOldTicket.Text = CurrentPTNumber(PawnItem.OldTicket)
+        If transactionType = "R" Then
+            txtTicket.Text = CurrentPTNumber(GetOption("PawnLastNum"))
+            txtOldTicket.Text = CurrentPTNumber(PawnItem.PawnTicket)
+        End If
     End Sub
 
     Friend Sub Redeem(Optional ByVal typ As String = "X")
@@ -397,6 +401,10 @@
         Dim overDays = CurrentDate - PawnItem.MaturityDate
         Dim daysDue As Integer = IIf(overDays.Days > 0, overDays.Days, 0)
         ComputeAdvanceInterest()
+
+        If typ = "R" Then
+            GeneratePT()
+        End If
 
         txtOver.Text = daysDue
         If Not typ = "X" Then
@@ -724,10 +732,9 @@
     End Sub
 
     Private Sub SaveRenew()
-        Dim oldPT As PawnTicket = PawnItem
-        ComputeAdvanceInterest()
-        Dim payment As Double = CDbl(txtRenew.Text) - AdvanceInt
+        Dim oldPT As Integer = PawnItem.PawnTicket
 
+        ComputeAdvanceInterest()
         'Redeem
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
@@ -750,13 +757,13 @@
 
         With PawnItem
             .PawnTicket = CurrentPTNumber()
-            .OldTicket = oldPT.PawnTicket
+            .OldTicket = oldPT
             .LoanDate = CurrentDate
             .MaturityDate = txtMatu.Text
             .ExpiryDate = txtExpiry.Text
             .AuctionDate = txtAuction.Text
 
-            If payment > 0 Then .Principal -= payment
+            .Principal = txtPrincipal.Text
             .AdvanceInterest = AdvanceInt
             .NetAmount = .Principal - AdvanceInt
             .Status = "R"
