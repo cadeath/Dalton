@@ -143,6 +143,7 @@
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
     <Compile Include="Classes\Client.vb" />
+    <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
@@ -184,6 +185,12 @@
       <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCashInOutBrowse.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCIO_List.Designer.vb">
+      <DependentUpon>frmCIO_List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCIO_List.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
@@ -391,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashInOutBrowse.resx">
       <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCIO_List.resx">
+      <DependentUpon>frmCIO_List.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>

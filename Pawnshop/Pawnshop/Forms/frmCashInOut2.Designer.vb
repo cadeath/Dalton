@@ -215,6 +215,7 @@ Partial Class frmCashInOut2
         Me.lvDetails.GridLines = True
         Me.lvDetails.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvDetails.Location = New System.Drawing.Point(102, 221)
+        Me.lvDetails.MultiSelect = False
         Me.lvDetails.Name = "lvDetails"
         Me.lvDetails.Size = New System.Drawing.Size(746, 254)
         Me.lvDetails.TabIndex = 0
