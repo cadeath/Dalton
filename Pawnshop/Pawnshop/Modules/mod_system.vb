@@ -24,6 +24,7 @@ Module mod_system
     Friend RepDep As Double = 0
     Friend DollarRate As Double = 48
     Friend RequirementLevel As Integer = 1
+    Friend dailyID As Integer = 1
 
 #End Region
 
@@ -44,7 +45,6 @@ Module mod_system
             End If
             Return False
         End If
-
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(storeDB).NewRow
@@ -80,6 +80,7 @@ Module mod_system
 
         If ds.Tables(0).Rows.Count = 1 Then
             CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
+            dailyID = ds.Tables(0).Rows(0).Item("ID")
             frmMain.dateSet = True
         Else
             frmMain.dateSet = False

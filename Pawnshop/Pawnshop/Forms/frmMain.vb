@@ -140,7 +140,7 @@
             MsgBoxAuthoriation("You don't have access to Cash In/Out")
             Exit Sub
         End If
-        'frmCashInOut.Show()
+
         frmCashInOut2.Show()
     End Sub
 
