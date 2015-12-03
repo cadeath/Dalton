@@ -22,11 +22,11 @@ Partial Class frmCIO_List
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "Receipt", "1/1/2015", "ECPAY - LOAD", "Cash In Bank", "350", "Banks"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "Receipt", "1/1/2015", "ECPAY - LOAD", "Cash In Bank", "350", "Banks"}, -1)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.lvCIO = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -35,8 +35,8 @@ Partial Class frmCIO_List
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnVoid = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,29 +47,10 @@ Partial Class frmCIO_List
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(702, 62)
+        Me.GroupBox1.Size = New System.Drawing.Size(1070, 62)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 27)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(51, 16)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Search"
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearch.Location = New System.Drawing.Point(63, 22)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(391, 24)
-        Me.txtSearch.TabIndex = 1
-        Me.txtSearch.Text = "Remarks"
         '
         'btnSearch
         '
@@ -81,17 +62,36 @@ Partial Class frmCIO_List
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
+        'txtSearch
+        '
+        Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(63, 22)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(391, 24)
+        Me.txtSearch.TabIndex = 1
+        Me.txtSearch.Text = "Remarks"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(6, 27)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(51, 16)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Search"
+        '
         'lvCIO
         '
         Me.lvCIO.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvCIO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvCIO.FullRowSelect = True
         Me.lvCIO.GridLines = True
-        Me.lvCIO.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem3})
+        Me.lvCIO.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvCIO.Location = New System.Drawing.Point(12, 80)
         Me.lvCIO.MultiSelect = False
         Me.lvCIO.Name = "lvCIO"
-        Me.lvCIO.Size = New System.Drawing.Size(704, 336)
+        Me.lvCIO.Size = New System.Drawing.Size(1070, 336)
         Me.lvCIO.TabIndex = 1
         Me.lvCIO.UseCompatibleStateImageBehavior = False
         Me.lvCIO.View = System.Windows.Forms.View.Details
@@ -109,17 +109,17 @@ Partial Class frmCIO_List
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Date"
-        Me.ColumnHeader3.Width = 122
+        Me.ColumnHeader3.Width = 102
         '
         'ColumnHeader4
         '
         Me.ColumnHeader4.Text = "Category"
-        Me.ColumnHeader4.Width = 136
+        Me.ColumnHeader4.Width = 223
         '
         'ColumnHeader5
         '
         Me.ColumnHeader5.Text = "Transaction"
-        Me.ColumnHeader5.Width = 144
+        Me.ColumnHeader5.Width = 271
         '
         'ColumnHeader6
         '
@@ -129,40 +129,41 @@ Partial Class frmCIO_List
         'ColumnHeader7
         '
         Me.ColumnHeader7.Text = "Remarks"
-        Me.ColumnHeader7.Width = 140
+        Me.ColumnHeader7.Width = 256
         '
-        'Button1
+        'btnCancel
         '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(639, 427)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 30)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "&Close"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(1007, 427)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 30)
+        Me.btnCancel.TabIndex = 3
+        Me.btnCancel.Text = "&Close"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnVoid
         '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(12, 427)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 30)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "&Void"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnVoid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVoid.Location = New System.Drawing.Point(12, 427)
+        Me.btnVoid.Name = "btnVoid"
+        Me.btnVoid.Size = New System.Drawing.Size(75, 30)
+        Me.btnVoid.TabIndex = 4
+        Me.btnVoid.Text = "&Void"
+        Me.btnVoid.UseVisualStyleBackColor = True
         '
         'frmCIO_List
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(728, 469)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(1094, 469)
+        Me.Controls.Add(Me.btnVoid)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lvCIO)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmCIO_List"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cash In/Out List"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -181,6 +182,6 @@ Partial Class frmCIO_List
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnVoid As System.Windows.Forms.Button
 End Class

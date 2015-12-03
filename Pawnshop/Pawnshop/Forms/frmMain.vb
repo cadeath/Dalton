@@ -85,6 +85,11 @@
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
+        If Not POSuser.canUserManage Then
+            MsgBoxAuthoriation("You don't have access to User Management")
+            Exit Sub
+        End If
+
         frmUserManagement.Show()
     End Sub
 
@@ -134,7 +139,8 @@
             MsgBoxAuthoriation("You don't have access to Cash In/Out")
             Exit Sub
         End If
-        frmCashInOut.Show()
+        'frmCashInOut.Show()
+        frmCashInOut2.Show()
     End Sub
 
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
