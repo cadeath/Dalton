@@ -25,11 +25,12 @@
 
         CurrentDate = dtpCurrentDate.Value
         'Remove, for testing only
-        frmMain.dateSet = True
-        Me.Close()
-        Exit Sub 'Remove, for testing only
+        'frmMain.dateSet = True
+        'Me.Close()
+        'Exit Sub 'Remove, for testing only
         If mod_system.OpenStore() Then
             frmMain.dateSet = True
+            dailyID = LoadLastOpening.Tables(0).Rows(0).Item("ID")
         Else
             Exit Sub
         End If

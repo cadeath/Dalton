@@ -33,6 +33,16 @@
         End Set
     End Property
 
+    Private _category As String
+    Public Property Category() As String
+        Get
+            Return _category
+        End Get
+        Set(ByVal value As String)
+            _category = value
+        End Set
+    End Property
+
     Private _transName As String
     Public Property Transaction() As String
         Get
@@ -63,7 +73,7 @@
         End Set
     End Property
 
-    Private _status As Boolean
+    Private _status As Boolean = True
     Public Property Status() As Boolean
         Get
             Return _status
@@ -107,11 +117,34 @@
             _transID = .Item("TransID")
             _cashID = .Item("CashID")
             _type = .Item("Type")
+            _category = .Item("Category")
             _transDate = .Item("TransDate")
             _transName = .Item("TransName")
             _status = .Item("Status")
             _amount = .Item("Amount")
             _particulars = .Item("Remarks")
         End With
+    End Sub
+
+    Public Sub Save()
+        Dim mySql As String = "SELECT * FROM " & fillData
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Dim dsNewRow As DataRow
+
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("CashID") = _cashID
+            .Item("Type") = _type
+            .Item("Category") = _category
+            .Item("TransDate") = _transDate
+            .Item("TransName") = _transName
+            .Item("Status") = _status
+            .Item("Amount") = _amount
+            .Item("Remarks") = _particulars
+            .Item("EncoderID") = _encoderID
+            .Item("SystemInfo") = Now
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+        database.SaveEntry(ds)
     End Sub
 End Class
