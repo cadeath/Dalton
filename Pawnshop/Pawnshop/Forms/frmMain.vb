@@ -98,6 +98,7 @@
             MsgBoxAuthoriation("You don't have access to Expiry Generator")
             Exit Sub
         End If
+
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
     End Sub
