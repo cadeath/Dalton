@@ -63,6 +63,7 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
+        Me.ClosingStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -81,7 +82,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ClosingStoreToolStripMenuItem, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -374,6 +375,12 @@ Partial Class frmMain
         '
         Me.tmrCurrent.Enabled = True
         '
+        'ClosingStoreToolStripMenuItem
+        '
+        Me.ClosingStoreToolStripMenuItem.Name = "ClosingStoreToolStripMenuItem"
+        Me.ClosingStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ClosingStoreToolStripMenuItem.Text = "&Closing Store"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -442,5 +449,6 @@ Partial Class frmMain
     Friend WithEvents LogOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsUser As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ClosingStoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
