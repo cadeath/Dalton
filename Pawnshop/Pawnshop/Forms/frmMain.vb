@@ -177,6 +177,7 @@
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
+        ClosingStoreToolStripMenuItem.Enabled = dateSet
         If dateSet Then
             tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
         Else
@@ -275,5 +276,14 @@
         End If
 
         frmMIS.Show()
+    End Sub
+
+    Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
+        If Not POSuser.canOpenStore Then
+            MsgBoxAuthoriation("You cannot Close a Store.")
+            Exit Sub
+        End If
+        frmCashCount.Show()
+        frmCashCount.isClosing = True
     End Sub
 End Class

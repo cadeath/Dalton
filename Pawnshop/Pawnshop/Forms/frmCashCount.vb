@@ -1,6 +1,7 @@
 ﻿Public Class frmCashCount
 
     Dim fillData As String = "tblCashCount"
+    Friend isClosing As Boolean = False
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -175,9 +176,11 @@
         SaveCashCount()
         UpdateCashCount(total)
         MsgBox("Transaction Posted", MsgBoxStyle.Information)
-        Console.WriteLine("CashCount >>" & total)
-        'mod_system.CloseStore(total)
-        'frmMain.dateSet = False
+        Console.WriteLine("CashCount >> Php " & total)
+        If isClosing Then
+            mod_system.CloseStore(total)
+            frmMain.dateSet = False
+        End If
         Me.Close()
     End Sub
 

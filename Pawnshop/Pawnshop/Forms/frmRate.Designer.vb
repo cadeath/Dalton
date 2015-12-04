@@ -157,7 +157,7 @@ Partial Class frmRate
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(605, 65)
+        Me.Label5.Location = New System.Drawing.Point(496, 115)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(32, 16)
         Me.Label5.TabIndex = 8
@@ -166,7 +166,7 @@ Partial Class frmRate
         'TextBox3
         '
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(643, 62)
+        Me.TextBox3.Location = New System.Drawing.Point(534, 112)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(53, 22)
         Me.TextBox3.TabIndex = 7
@@ -176,7 +176,7 @@ Partial Class frmRate
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(605, 43)
+        Me.Label6.Location = New System.Drawing.Point(496, 93)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(114, 16)
         Me.Label6.TabIndex = 6
@@ -212,7 +212,7 @@ Partial Class frmRate
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(644, 427)
+        Me.Button2.Location = New System.Drawing.Point(535, 427)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 12
@@ -232,7 +232,7 @@ Partial Class frmRate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(731, 460)
+        Me.ClientSize = New System.Drawing.Size(624, 460)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -248,6 +248,7 @@ Partial Class frmRate
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "frmRate"
         Me.Text = "Rate"
         Me.GroupBox1.ResumeLayout(False)

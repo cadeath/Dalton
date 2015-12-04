@@ -165,12 +165,9 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L"
-                SaveNewLoan()
-            Case "X"
-                SaveRedeem()
-            Case "R"
-                SaveRenew()
+            Case "L" : SaveNewLoan()
+            Case "X" : SaveRedeem()
+            Case "R" : SaveRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
