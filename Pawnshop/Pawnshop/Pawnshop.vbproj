@@ -259,12 +259,6 @@
     <Compile Include="Forms\frmClientInformation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmDollar.Designer.vb">
-      <DependentUpon>frmDollar.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmDollar.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmExtractor.Designer.vb">
       <DependentUpon>frmExtractor.vb</DependentUpon>
     </Compile>
@@ -431,9 +425,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClientInformation.resx">
       <DependentUpon>frmClientInformation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmDollar.resx">
-      <DependentUpon>frmDollar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmExtractor.resx">
       <DependentUpon>frmExtractor.vb</DependentUpon>
