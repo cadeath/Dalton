@@ -177,7 +177,7 @@
             Exit Sub
         End If
 
-        AddPTNum()
+        If transactionType <> "X" Then AddPTNum()
         If transactionType = "X" Then
             AddORNum()
             frmPawning.LoadActive()
@@ -418,7 +418,7 @@
             txtRedeem.BackColor = Drawing.SystemColors.Window
             txtRedeem.Focus()
         Else
-            txtRenew.ReadOnly = False
+            'txtRenew.ReadOnly = False
             txtRenew.Focus()
         End If
 
@@ -460,7 +460,7 @@
         cboKarat.Text = pt.Karat
 
         txtTicket.Text = CurrentPTNumber(pt.PawnTicket)
-        currentPawnTicket = pt.PawnTicket
+        'currentPawnTicket = pt.PawnTicket
         txtOldTicket.Text = pt.OldTicket
         txtLoan.Text = pt.LoanDate
         txtMatu.Text = pt.MaturityDate
@@ -731,7 +731,7 @@
     Private Sub SaveRenew()
         Dim oldPT As Integer = PawnItem.PawnTicket
 
-        ComputeAdvanceInterest()
+        'ComputeAdvanceInterest()
         'Redeem
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
@@ -749,7 +749,6 @@
             .SaveTicket(False)
         End With
         AddORNum()
-        AddPTNum()
         GeneratePT()
 
         With PawnItem
@@ -769,10 +768,12 @@
             '.OfficialReceiptDate = CurrentDate
             .SaveTicket()
         End With
+
+        AddPTNum()
     End Sub
 #End Region
 
-    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
 
     End Sub
 End Class

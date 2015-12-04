@@ -1,4 +1,6 @@
 ﻿Public Class frmPawning
+    'Version 1.1
+    ' - Don't display item not equal or less than the current date
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -31,7 +33,8 @@
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE Status = 'L' OR Status = 'R' OR Status = 'S' ORDER BY LoanDate ASC, PAWNID ASC"
+        Dim mySql As String = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S') ORDER BY LoanDate ASC, PAWNID ASC"
         Dim ds As DataSet = LoadSQL(mySql)
 
         lvPawners.Items.Clear()
