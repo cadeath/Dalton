@@ -7,10 +7,12 @@
     Private Sub LoadMoney()
         txtMaintaining.Text = MaintainBal
         InitialBal = GetOption("CurrentBalance")
+        Dim repDep As Double = InitialBal - MaintainBal
         txtRepDep.Text = CDbl(MaintainBal) - CDbl(InitialBal)
         txtMaintaining.Text = String.Format("P {0:#,##0.00}", CDbl(txtMaintaining.Text))
-        txtInitial.Text = String.Format("P {0:#,##0.00}", CDbl(txtInitial.Text))
-        txtRepDep.Text = String.Format("P {0:#,##0.00}", CDbl(txtRepDep.Text))
+        txtInitial.Text = String.Format("P {0:#,##0.00}", InitialBal)
+        If repDep < 0 Then txtRepDep.ForeColor = Color.Red
+        txtRepDep.Text = String.Format("P {0:#,##0.00} ", Math.Abs(repDep)) & IIf(repDep > 0, "[Deposit]", "[Replenish]")
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -18,6 +20,7 @@
     End Sub
 
     Private Sub btnSetup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetup.Click
+        If frmMain.dateSet Then MsgBox("Please execute closing", MsgBoxStyle.Critical) : Exit Sub
         Dim ans As DialogResult = MsgBox("TODAY IS: " & vbCrLf & dtpCurrentDate.Value.ToString("MMM d, yyyy"), MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Please CHECK")
         If Not ans = Windows.Forms.DialogResult.Yes Then
             Exit Sub

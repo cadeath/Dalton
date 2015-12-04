@@ -36,7 +36,10 @@
         lv.SubItems.Add(tmpCIO.Transaction)
         lv.SubItems.Add(tmpCIO.Amount)
         lv.SubItems.Add(tmpCIO.Particulars)
+        lv.Tag = tmpCIO.TransactionID
         If tmpCIO.Status = 0 Then lv.BackColor = Color.LightGray
+
+        Console.WriteLine(String.Format("{0}. {1} - {2} {3}", lv.Tag, tmpCIO.TransactionID, tmpCIO.Transaction, tmpCIO.Amount))
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -64,13 +67,11 @@
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
 
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-
-    End Sub
-
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
-        Dim idx As Integer = lvCIO.FocusedItem.Index
+        Dim idx As Integer = lvCIO.FocusedItem.Tag
         VoidID(idx)
+        lvCIO.Items.Clear()
+        LoadActive()
     End Sub
 End Class
