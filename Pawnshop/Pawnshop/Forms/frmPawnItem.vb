@@ -16,6 +16,10 @@
 
     Private appraiser As Hashtable
 
+    'Advance Interest
+    Private DelayInt As Double, ServiceCharge As Double
+    Private ItemPrincipal As Double, AdvanceInt As Double
+
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadInformation()
@@ -161,12 +165,9 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L"
-                SaveNewLoan()
-            Case "X"
-                SaveRedeem()
-            Case "R"
-                SaveRenew()
+            Case "L" : SaveNewLoan()
+            Case "X" : SaveRedeem()
+            Case "R" : SaveRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
@@ -176,7 +177,7 @@
             Exit Sub
         End If
 
-        AddPTNum()
+        If transactionType <> "X" Then AddPTNum()
         If transactionType = "X" Then
             AddORNum()
             frmPawning.LoadActive()
@@ -242,14 +243,8 @@
     Private Sub txtPrincipal_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
         On Error Resume Next
 
+        ComputeAdvanceInterest()
         txtPrincipal2.Text = txtPrincipal.Text
-        Dim advInt As Double
-        advInt = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
-        txtNet.Text = CDbl(txtPrincipal.Text) - advInt
-        If transactionType = "L" Then
-            txtAdv.Text = advInt
-        End If
-        Console.WriteLine("AdvInt: " & advInt)
     End Sub
 
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
@@ -328,6 +323,22 @@
         End With
     End Sub
 
+    Private Sub ComputeAdvanceInterest()
+        If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
+
+        ItemPrincipal = CDbl(txtPrincipal.Text)
+        DelayInt = ItemPrincipal * GetInt(30)
+        ServiceCharge = GetServiceCharge(ItemPrincipal)
+        AdvanceInt = DelayInt + ServiceCharge
+
+        If transactionType = "L" Or transactionType = "R" Then
+            txtInt.Text = DelayInt
+            txtService.Text = ServiceCharge
+            txtAdv.Text = AdvanceInt
+        End If
+        txtNet.Text = ItemPrincipal - AdvanceInt
+    End Sub
+
     Private Sub SaveNewLoan()
         PawnItem = New PawnTicket
         With PawnItem
@@ -370,41 +381,44 @@
         txtTicket.Text = CurrentPTNumber()
         txtLoan.Text = CurrentDate.ToShortDateString
         txtMatu.Text = CurrentDate.AddDays(29).ToShortDateString
+        dateChange(cboType.Text)
 
-        If transactionType = "R" Then txtOldTicket.Text = CurrentPTNumber(PawnItem.OldTicket)
+        If transactionType = "R" Then
+            txtTicket.Text = CurrentPTNumber(GetOption("PawnLastNum"))
+            txtOldTicket.Text = CurrentPTNumber(PawnItem.PawnTicket)
+        End If
     End Sub
 
     Friend Sub Redeem(Optional ByVal typ As String = "X")
         transactionType = typ
         GenerateReceipt()
 
-        Dim delayInt As Double
         Dim dayDiff = CurrentDate - PawnItem.LoanDate
         Dim dayDiffNew As Integer = dayDiff.Days + 1
         Dim overDays = CurrentDate - PawnItem.MaturityDate
         Dim daysDue As Integer = IIf(overDays.Days > 0, overDays.Days, 0)
+        ComputeAdvanceInterest()
+
+        If typ = "R" Then
+            GeneratePT()
+        End If
 
         txtOver.Text = daysDue
-        delayInt = GetInt(dayDiffNew) * PawnItem.Principal '+ AddServerCharge(PawnItem.Principal)
-        delayInt = delayInt - PawnItem.AdvanceInterest
-        txtInt.Text = delayInt
+        If Not typ = "X" Then
+            txtInt.Text = DelayInt
+            txtService.Text = GetServiceCharge(PawnItem.Principal)
+        End If
 
         txtPenalty.Text = GetInt(dayDiffNew, "Penalty") * PawnItem.Principal
-        txtService.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = PawnItem.EVAT
 
-        Console.WriteLine("Principal: " & PawnItem.Principal)
-        Console.WriteLine("Adv Int: " & PawnItem.AdvanceInterest)
-        Console.WriteLine("Interest: " & delayInt)
-        Console.WriteLine("Penalty: " & txtPenalty.Text)
-
-        txtRenew.Text = CDbl(txtService.Text) + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + CDbl(delayInt) + txtAdv.Text
-        txtRedeem.Text = PawnItem.Principal + CDbl(txtService.Text) + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + CDbl(delayInt)
+        txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
+        txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
         If transactionType = "X" Then
             txtRedeem.BackColor = Drawing.SystemColors.Window
             txtRedeem.Focus()
         Else
-            txtRenew.ReadOnly = False
+            'txtRenew.ReadOnly = False
             txtRenew.Focus()
         End If
 
@@ -446,7 +460,7 @@
         cboKarat.Text = pt.Karat
 
         txtTicket.Text = CurrentPTNumber(pt.PawnTicket)
-        currentPawnTicket = pt.PawnTicket
+        'currentPawnTicket = pt.PawnTicket
         txtOldTicket.Text = pt.OldTicket
         txtLoan.Text = pt.LoanDate
         txtMatu.Text = pt.MaturityDate
@@ -715,9 +729,9 @@
     End Sub
 
     Private Sub SaveRenew()
-        Dim oldPT As PawnTicket = PawnItem
-        Dim payment As Double = CDbl(txtRenew.Text) - (CDbl(txtAdv.Text))
+        Dim oldPT As Integer = PawnItem.PawnTicket
 
+        'ComputeAdvanceInterest()
         'Redeem
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
@@ -730,31 +744,36 @@
             .EVAT = txtEvat.Text
             .RenewDue = txtRenew.Text
             .RedeemDue = txtRedeem.Text
-            .Status = "R"
+            .Status = "0"
 
             .SaveTicket(False)
         End With
         AddORNum()
-        AddPTNum()
+        GeneratePT()
 
         With PawnItem
             .PawnTicket = CurrentPTNumber()
-            .OldTicket = oldPT.PawnTicket
-            .LoanDate = txtLoan.Text
+            .OldTicket = oldPT
+            .LoanDate = CurrentDate
             .MaturityDate = txtMatu.Text
             .ExpiryDate = txtExpiry.Text
             .AuctionDate = txtAuction.Text
 
-            If payment > 0 Then .Principal -= payment
-            Dim advInt As Double = GetInt(30)
-            .AdvanceInterest = .Principal * advInt
-            .NetAmount = .Principal - .AdvanceInterest
+            .Principal = txtPrincipal.Text
+            .AdvanceInterest = AdvanceInt
+            .NetAmount = .Principal - AdvanceInt
+            .Status = "R"
 
             '.OfficialReceiptNumber = CurrentOR()
             '.OfficialReceiptDate = CurrentDate
             .SaveTicket()
         End With
+
+        AddPTNum()
     End Sub
 #End Region
 
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+
+    End Sub
 End Class

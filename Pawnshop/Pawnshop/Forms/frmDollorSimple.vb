@@ -69,7 +69,7 @@
         GroupBox1.Enabled = False
         txtName.Enabled = False
 
-        If tmpDollar.Status <> "A" Then
+        If tmpDollar.Status = "V" Then
             Me.Text = "[VOID] " & Me.Text
         End If
     End Sub

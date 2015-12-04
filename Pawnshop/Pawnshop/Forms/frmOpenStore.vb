@@ -1,5 +1,7 @@
 ﻿Public Class frmOpenStore
 
+    Dim isDisable As Boolean = True
+
     Private Sub frmOpenStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadMoney()
     End Sub
@@ -7,10 +9,12 @@
     Private Sub LoadMoney()
         txtMaintaining.Text = MaintainBal
         InitialBal = GetOption("CurrentBalance")
+        Dim repDep As Double = InitialBal - MaintainBal
         txtRepDep.Text = CDbl(MaintainBal) - CDbl(InitialBal)
         txtMaintaining.Text = String.Format("P {0:#,##0.00}", CDbl(txtMaintaining.Text))
-        txtInitial.Text = String.Format("P {0:#,##0.00}", CDbl(txtInitial.Text))
-        txtRepDep.Text = String.Format("P {0:#,##0.00}", CDbl(txtRepDep.Text))
+        txtInitial.Text = String.Format("P {0:#,##0.00}", InitialBal)
+        If repDep < 0 Then txtRepDep.ForeColor = Color.Red
+        txtRepDep.Text = String.Format("P {0:#,##0.00} ", Math.Abs(repDep)) & IIf(repDep > 0, "[Deposit]", "[Replenish]")
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -18,18 +22,22 @@
     End Sub
 
     Private Sub btnSetup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetup.Click
+        If frmMain.dateSet And Not isDisable Then MsgBox("Please execute closing", MsgBoxStyle.Critical) : Exit Sub
         Dim ans As DialogResult = MsgBox("TODAY IS: " & vbCrLf & dtpCurrentDate.Value.ToString("MMM d, yyyy"), MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Please CHECK")
         If Not ans = Windows.Forms.DialogResult.Yes Then
             Exit Sub
         End If
 
         CurrentDate = dtpCurrentDate.Value
-        'Remove, for testing only
-        frmMain.dateSet = True
-        Me.Close()
-        Exit Sub 'Remove, for testing only
+        If isDisable Then
+            frmMain.dateSet = True
+            Me.Close()
+            Exit Sub
+        End If
+        
         If mod_system.OpenStore() Then
             frmMain.dateSet = True
+            dailyID = LoadLastOpening.Tables(0).Rows(0).Item("ID")
         Else
             Exit Sub
         End If

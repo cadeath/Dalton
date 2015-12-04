@@ -112,6 +112,9 @@
     <EmbeddedResource Include="Forms\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

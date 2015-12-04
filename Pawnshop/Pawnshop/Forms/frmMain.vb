@@ -85,6 +85,11 @@
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
+        If Not POSuser.canUserManage Then
+            MsgBoxAuthoriation("You don't have access to User Management")
+            Exit Sub
+        End If
+
         frmUserManagement.Show()
     End Sub
 
@@ -93,6 +98,7 @@
             MsgBoxAuthoriation("You don't have access to Expiry Generator")
             Exit Sub
         End If
+
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
     End Sub
@@ -134,7 +140,8 @@
             MsgBoxAuthoriation("You don't have access to Cash In/Out")
             Exit Sub
         End If
-        frmCashInOut.Show()
+
+        frmCashInOut2.Show()
     End Sub
 
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
@@ -170,6 +177,7 @@
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
+        ClosingStoreToolStripMenuItem.Enabled = dateSet
         If dateSet Then
             tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
         Else
@@ -268,5 +276,14 @@
         End If
 
         frmMIS.Show()
+    End Sub
+
+    Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
+        If Not POSuser.canOpenStore Then
+            MsgBoxAuthoriation("You cannot Close a Store.")
+            Exit Sub
+        End If
+        frmCashCount.Show()
+        frmCashCount.isClosing = True
     End Sub
 End Class
