@@ -87,6 +87,12 @@ Module mod_system
         End If
     End Sub
 
+    Friend Function AutoSegregate() As Boolean
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate <= ''"
+
+        Return True
+    End Function
+
     Friend Sub CloseStore(ByVal cc As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
