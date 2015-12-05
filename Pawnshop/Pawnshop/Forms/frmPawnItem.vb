@@ -460,7 +460,6 @@
         cboKarat.Text = pt.Karat
 
         txtTicket.Text = CurrentPTNumber(pt.PawnTicket)
-        'currentPawnTicket = pt.PawnTicket
         txtOldTicket.Text = pt.OldTicket
         txtLoan.Text = pt.LoanDate
         txtMatu.Text = pt.MaturityDate
@@ -473,7 +472,6 @@
         txtNet.Text = pt.NetAmount
 
         txtReceipt.Text = IIf(pt.OfficialReceiptNumber = 0, "", pt.OfficialReceiptNumber)
-        'currentORNumber = pt.OfficialReceiptNumber
         txtReceiptDate.Text = IIf(pt.OfficialReceiptDate = #12:00:00 AM#, "", pt.OfficialReceiptDate)
         txtPrincipal2.Text = IIf(pt.Principal = 0, "", pt.Principal)
 
@@ -499,6 +497,9 @@
         End If
 
         ChangeForm()
+        If PawnItem.Status = "R" Then Me.Text &= " [RENEWED]"
+        If PawnItem.Status = "0" Then Me.Text &= " [INACTIVE]"
+        If PawnItem.Status = "X" Then Me.Text &= " [REDEEMED]"
     End Sub
 
     Private Sub ChangeForm()
@@ -613,7 +614,7 @@
         Select Case typ
             Case "CEL"
                 txtExpiry.Text = txtMatu.Text
-                txtAuction.Text = CurrentDate.AddDays(63).ToShortDateString
+                txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
             Case Else
                 txtExpiry.Text = CurrentDate.AddDays(89).ToShortDateString
                 txtAuction.Text = CurrentDate.AddDays(123).ToShortDateString

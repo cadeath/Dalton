@@ -33,8 +33,21 @@
     End Sub
 
     Friend Sub LoadActive()
+        Dim st As String = "1"
+
+        st &= IIf(chkRenew.Checked, "1", "0")
+        st &= IIf(chkRedeem.Checked, "1", "0")
+
         Dim mySql As String = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
-        mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S') ORDER BY LoanDate ASC, PAWNID ASC"
+        If st = "100" Then
+            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S') ORDER BY LoanDate ASC, PAWNID ASC"
+        Else
+            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S' "
+            If st.Substring(1, 1) = "1" Then mySql &= "OR Status = '0' "
+            If st.Substring(2, 1) = "1" Then mySql &= "OR Status = 'X' "
+
+            mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+        End If
         Dim ds As DataSet = LoadSQL(mySql)
 
         lvPawners.Items.Clear()
@@ -174,5 +187,13 @@
             'frmPawnItem.Redeem()
             frmPawnItem.btnRedeem.PerformClick()
         End If
+    End Sub
+
+    Private Sub chkRenew_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRenew.CheckedChanged
+        LoadActive()
+    End Sub
+
+    Private Sub chkRedeem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRedeem.CheckedChanged
+        LoadActive()
     End Sub
 End Class
