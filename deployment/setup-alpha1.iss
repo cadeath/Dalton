@@ -21,7 +21,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\cdt-S0ft\DaltonPawnshop
 DefaultGroupName=cdt-S0ft\DaltonPawnshop
-OutputBaseFilename=pawnshop-daltonA1
+OutputBaseFilename=pawnshop-a1
 Compression=lzma
 SolidCompression=yes
 
