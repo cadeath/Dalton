@@ -255,9 +255,9 @@ Partial Class frmPawnItem
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(6, 263)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(79, 16)
+        Me.Label14.Size = New System.Drawing.Size(82, 16)
         Me.Label14.TabIndex = 19
-        Me.Label14.Text = "Adv Int + SC"
+        Me.Label14.Text = "Interest + SC"
         '
         'txtAuction
         '

@@ -180,6 +180,7 @@
         If isClosing Then
             mod_system.CloseStore(total)
             frmMain.dateSet = False
+            frmMain.doSegregate = False
         End If
         Me.Close()
     End Sub

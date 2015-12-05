@@ -1,4 +1,5 @@
-﻿Public Class frmMain
+﻿
+Public Class frmMain
 
     'NOTE
     ' NotYetLogin sub don't have REPORTS DISABLE YET
@@ -6,6 +7,7 @@
     ' sub.
 
     Friend dateSet As Boolean = False
+    Friend doSegregate As Boolean = False
 
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
@@ -35,6 +37,10 @@
 
         'Reports
 
+    End Sub
+
+    Private Sub ExecuteSegregate()
+        doSegregate = AutoSegregate()
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -180,6 +186,7 @@
         ClosingStoreToolStripMenuItem.Enabled = dateSet
         If dateSet Then
             tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+            If Not doSegregate Then ExecuteSegregate()
         Else
             tsCurrentDate.Text = "Date not set"
         End If

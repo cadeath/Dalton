@@ -77,6 +77,7 @@
         Select Case tk.Status
             Case "0" : lv.BackColor = Color.LightGray
             Case "X" : lv.BackColor = Color.Red
+            Case "S" : lv.BackColor = Color.LightYellow
             Case "W" : lv.BackColor = Color.Red
             Case "V" : lv.BackColor = Color.Gray
         End Select
@@ -141,8 +142,13 @@
             Next
         End If
 
-        lvPawners.Focus()
         MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
+        'Auto Select
+        If lvPawners.Items.Count > 0 Then
+            lvPawners.Focus()
+            lvPawners.Items(0).Selected = True
+            lvPawners.Items(0).EnsureVisible()
+        End If
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
@@ -174,8 +180,6 @@
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
-            'frmNewloan.SwitchTransaction("RENEW")
-            'frmPawnItem.Redeem("R")
             frmPawnItem.btnRenew.PerformClick()
         End If
     End Sub
@@ -183,8 +187,6 @@
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
-            'frmNewloan.SwitchTransaction("REDEEM")
-            'frmPawnItem.Redeem()
             frmPawnItem.btnRedeem.PerformClick()
         End If
     End Sub

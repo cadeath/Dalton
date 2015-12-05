@@ -1,6 +1,6 @@
 ﻿Public Class frmOpenStore
 
-    Dim isDisable As Boolean = True
+    Dim isDisable As Boolean = False
 
     Private Sub frmOpenStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadMoney()

@@ -13,6 +13,7 @@
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
     Private currentORNumber As Integer = GetOption("ORLastNum")
     Private TypeInt As Double, bug As Boolean = False
+    Private daysDue As Integer
 
     Private appraiser As Hashtable
 
@@ -327,7 +328,12 @@
         If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
 
         ItemPrincipal = CDbl(txtPrincipal.Text)
-        DelayInt = ItemPrincipal * GetInt(30)
+        If transactionType <> "X" Then
+            DelayInt = ItemPrincipal * GetInt(30 + IIf(daysDue > 3, daysDue, 0))
+        Else
+            DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, 30, 0))
+        End If
+
         ServiceCharge = GetServiceCharge(ItemPrincipal)
         AdvanceInt = DelayInt + ServiceCharge
 
@@ -336,7 +342,7 @@
             txtService.Text = ServiceCharge
             txtAdv.Text = AdvanceInt
         End If
-        txtNet.Text = ItemPrincipal - AdvanceInt
+        If transactionType = "L" Then txtNet.Text = ItemPrincipal - AdvanceInt
     End Sub
 
     Private Sub SaveNewLoan()
@@ -396,7 +402,7 @@
         Dim dayDiff = CurrentDate - PawnItem.LoanDate
         Dim dayDiffNew As Integer = dayDiff.Days + 1
         Dim overDays = CurrentDate - PawnItem.MaturityDate
-        Dim daysDue As Integer = IIf(overDays.Days > 0, overDays.Days, 0)
+        daysDue = IIf(overDays.Days > 0, overDays.Days, 0)
         ComputeAdvanceInterest()
 
         If typ = "R" Then
@@ -404,8 +410,8 @@
         End If
 
         txtOver.Text = daysDue
+        txtInt.Text = DelayInt
         If Not typ = "X" Then
-            txtInt.Text = DelayInt
             txtService.Text = GetServiceCharge(PawnItem.Principal)
         End If
 
@@ -413,7 +419,8 @@
         txtEvat.Text = PawnItem.EVAT
 
         txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
-        txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
+        txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + CDbl(txtInt.Text)
+
         If transactionType = "X" Then
             txtRedeem.BackColor = Drawing.SystemColors.Window
             txtRedeem.Focus()
@@ -500,6 +507,13 @@
         If PawnItem.Status = "R" Then Me.Text &= " [RENEWED]"
         If PawnItem.Status = "0" Then Me.Text &= " [INACTIVE]"
         If PawnItem.Status = "X" Then Me.Text &= " [REDEEMED]"
+        If PawnItem.Status = "S" Then Me.Text &= " [SEGREGATED]"
+        If PawnItem.Status = "W" Then Me.Text &= " [WITHDRAW]"
+
+        Select Case PawnItem.Status
+            Case "0", "X", "S", "W"
+                LockFields(1)
+        End Select
     End Sub
 
     Private Sub ChangeForm()
@@ -616,8 +630,8 @@
                 txtExpiry.Text = txtMatu.Text
                 txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
             Case Else
-                txtExpiry.Text = CurrentDate.AddDays(89).ToShortDateString
-                txtAuction.Text = CurrentDate.AddDays(123).ToShortDateString
+                txtExpiry.Text = CurrentDate.AddDays(119).ToShortDateString
+                txtAuction.Text = CurrentDate.AddDays(152).ToShortDateString
         End Select
         AdvanceInterest()
     End Sub
@@ -738,6 +752,10 @@
         txtAppr.Enabled = Not st
         txtPrincipal.Enabled = Not st
         cboAppraiser.Enabled = Not st
+        btnRenew.Enabled = Not st
+        btnRedeem.Enabled = Not st
+        btnVoid.Enabled = Not st
+        btnSave.Enabled = Not st
     End Sub
 
     Private Sub SaveRenew()
@@ -781,6 +799,10 @@
 
         AddPTNum()
     End Sub
+
+    Private Function GetNewPT(ByVal curPT As Integer) As Integer
+
+    End Function
 #End Region
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
