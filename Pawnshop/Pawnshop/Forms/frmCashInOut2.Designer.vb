@@ -55,7 +55,7 @@ Partial Class frmCashInOut2
         Me.btnCashIn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCashIn.Location = New System.Drawing.Point(12, 12)
         Me.btnCashIn.Name = "btnCashIn"
-        Me.btnCashIn.Size = New System.Drawing.Size(84, 37)
+        Me.btnCashIn.Size = New System.Drawing.Size(84, 60)
         Me.btnCashIn.TabIndex = 0
         Me.btnCashIn.Text = "Cash In"
         Me.btnCashIn.UseVisualStyleBackColor = True
@@ -63,9 +63,9 @@ Partial Class frmCashInOut2
         'btnCashOut
         '
         Me.btnCashOut.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCashOut.Location = New System.Drawing.Point(12, 55)
+        Me.btnCashOut.Location = New System.Drawing.Point(12, 83)
         Me.btnCashOut.Name = "btnCashOut"
-        Me.btnCashOut.Size = New System.Drawing.Size(84, 37)
+        Me.btnCashOut.Size = New System.Drawing.Size(84, 60)
         Me.btnCashOut.TabIndex = 1
         Me.btnCashOut.Text = "Cash Out"
         Me.btnCashOut.UseVisualStyleBackColor = True
@@ -73,7 +73,7 @@ Partial Class frmCashInOut2
         'btnBrowse
         '
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(12, 98)
+        Me.btnBrowse.Location = New System.Drawing.Point(12, 481)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(84, 37)
         Me.btnBrowse.TabIndex = 2
