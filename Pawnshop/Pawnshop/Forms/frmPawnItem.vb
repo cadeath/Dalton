@@ -547,6 +547,17 @@
     End Function
 
     Private Function isReady() As Boolean
+        'Checking Numerics
+        If Not IsNumeric(txtGram.Text) And cboType.Text = "JWL" Then txtGram.Focus() : Return False
+        If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
+        If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
+
+        If CDbl(txtAppr.Text) < CDbl(txtPrincipal.Text) Then
+            MsgBox("Lesser Appraisal over Principal is not acceptable", MsgBoxStyle.Critical)
+            txtAppr.SelectAll() : txtAppr.Focus()
+            Return False
+        End If
+
         If txtCustomer.Text = "" Then txtCustomer.Focus() : Return False
         If cboType.Text = "" Then cboType.Focus() : Return False
         If cboCat.Text = "" Then cboCat.Focus() : Return False
