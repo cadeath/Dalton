@@ -764,8 +764,6 @@
             .NetAmount = .Principal - AdvanceInt
             .Status = "R"
 
-            '.OfficialReceiptNumber = CurrentOR()
-            '.OfficialReceiptDate = CurrentDate
             .SaveTicket()
         End With
 
@@ -774,6 +772,6 @@
 #End Region
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-
+        MsgBox("Missing", MsgBoxStyle.Information, "Under Construction")
     End Sub
 End Class
