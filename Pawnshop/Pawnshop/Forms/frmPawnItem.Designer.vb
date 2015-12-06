@@ -255,9 +255,9 @@ Partial Class frmPawnItem
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(6, 263)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(78, 16)
+        Me.Label14.Size = New System.Drawing.Size(82, 16)
         Me.Label14.TabIndex = 19
-        Me.Label14.Text = "Adv Interest"
+        Me.Label14.Text = "Interest + SC"
         '
         'txtAuction
         '
@@ -702,9 +702,9 @@ Partial Class frmPawnItem
         Me.lblInterest.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInterest.Location = New System.Drawing.Point(16, 170)
         Me.lblInterest.Name = "lblInterest"
-        Me.lblInterest.Size = New System.Drawing.Size(106, 16)
+        Me.lblInterest.Size = New System.Drawing.Size(51, 16)
         Me.lblInterest.TabIndex = 11
-        Me.lblInterest.Text = "Delayed Interest"
+        Me.lblInterest.Text = "Interest"
         '
         'txtOver
         '

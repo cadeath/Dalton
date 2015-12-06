@@ -1,4 +1,5 @@
-﻿Public Class frmMain
+﻿
+Public Class frmMain
 
     'NOTE
     ' NotYetLogin sub don't have REPORTS DISABLE YET
@@ -6,6 +7,7 @@
     ' sub.
 
     Friend dateSet As Boolean = False
+    Friend doSegregate As Boolean = False
 
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
@@ -35,6 +37,10 @@
 
         'Reports
 
+    End Sub
+
+    Private Sub ExecuteSegregate()
+        doSegregate = AutoSegregate()
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -85,6 +91,11 @@
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
+        If Not POSuser.canUserManage Then
+            MsgBoxAuthoriation("You don't have access to User Management")
+            Exit Sub
+        End If
+
         frmUserManagement.Show()
     End Sub
 
@@ -93,6 +104,7 @@
             MsgBoxAuthoriation("You don't have access to Expiry Generator")
             Exit Sub
         End If
+
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
     End Sub
@@ -134,7 +146,8 @@
             MsgBoxAuthoriation("You don't have access to Cash In/Out")
             Exit Sub
         End If
-        frmCashInOut.Show()
+
+        frmCashInOut2.Show()
     End Sub
 
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
@@ -170,8 +183,10 @@
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
+        ClosingStoreToolStripMenuItem.Enabled = dateSet
         If dateSet Then
             tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+            If Not doSegregate Then ExecuteSegregate()
         Else
             tsCurrentDate.Text = "Date not set"
         End If
@@ -268,5 +283,14 @@
         End If
 
         frmMIS.Show()
+    End Sub
+
+    Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
+        If Not POSuser.canOpenStore Then
+            MsgBoxAuthoriation("You cannot Close a Store.")
+            Exit Sub
+        End If
+        frmCashCount.Show()
+        frmCashCount.isClosing = True
     End Sub
 End Class
