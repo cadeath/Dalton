@@ -118,4 +118,20 @@
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
     End Sub
+
+    Public Sub Update()
+        Dim mySql As String = "SELECT * FROM " & fillData & _
+            " WHERE CashID = " & _cashID
+        Dim ds As New DataSet
+        ds = LoadSQL(mySql, fillData)
+        With ds.Tables(fillData).Rows(0)
+            .Item("Type") = _type
+            .Item("Category") = _category
+            .Item("TransName") = _transName
+            .Item("SAPaccount") = _SAPaccnt
+            .Item("Remarks") = _remarks
+            .Item("onHold") = _onHold
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
 End Class
