@@ -4,6 +4,8 @@
         If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
         Dim fsEsk As New System.IO.FileStream(url, IO.FileMode.CreateNew)
 
+        data.Tables.Add(VerificationTable(data))
+
         Dim esk As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
         esk.Serialize(fsEsk, data)
         fsEsk.Close()
@@ -25,6 +27,23 @@
         fsEsk.Close()
 
         Return ds
+    End Function
+
+    Friend Function VerificationTable(ByVal ds As DataSet) As DataTable
+        Dim tb As New DataTable
+        tb = New DataTable("Verify")
+        tb.Columns.Add("Key")
+        tb.Columns.Add("Value")
+        tb.Rows.Add("date", Now().Date)
+
+        Dim st As New System.IO.MemoryStream
+        Dim rFormat As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
+        rFormat.Serialize(st, ds)
+
+        Dim s As String = System.Text.ASCIIEncoding.ASCII.GetString(st.GetBuffer)
+        tb.Rows.Add("Eskie", security.HashString(s))
+
+        Return tb
     End Function
 
     Friend Sub CreateEsk(ByVal url As String, ByVal data As Hashtable)

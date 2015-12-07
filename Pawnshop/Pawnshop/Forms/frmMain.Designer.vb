@@ -27,6 +27,7 @@ Partial Class frmMain
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseOpenStore = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClosingStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.UserManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -63,7 +64,6 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
-        Me.ClosingStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -92,6 +92,12 @@ Partial Class frmMain
         Me.CloseOpenStore.Name = "CloseOpenStore"
         Me.CloseOpenStore.Size = New System.Drawing.Size(171, 22)
         Me.CloseOpenStore.Text = "&Open Store"
+        '
+        'ClosingStoreToolStripMenuItem
+        '
+        Me.ClosingStoreToolStripMenuItem.Name = "ClosingStoreToolStripMenuItem"
+        Me.ClosingStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ClosingStoreToolStripMenuItem.Text = "&Closing Store"
         '
         'ToolStripSeparator3
         '
@@ -374,12 +380,6 @@ Partial Class frmMain
         'tmrCurrent
         '
         Me.tmrCurrent.Enabled = True
-        '
-        'ClosingStoreToolStripMenuItem
-        '
-        Me.ClosingStoreToolStripMenuItem.Name = "ClosingStoreToolStripMenuItem"
-        Me.ClosingStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.ClosingStoreToolStripMenuItem.Text = "&Closing Store"
         '
         'frmMain
         '
