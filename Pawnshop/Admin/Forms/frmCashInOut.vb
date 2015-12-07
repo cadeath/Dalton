@@ -8,19 +8,20 @@
     Private ds As DataSet
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-        LoadAccounts()
+        LoadCategories()
         'Me.Close()
     End Sub
 
     Private Sub frmCashInOut_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
+        LoadCategories()
         LoadAccounts()
         LockFields(1)
     End Sub
 
     Private Sub LoadCategories()
-        LoadHashtable(catReceipt, "Receipt")
-        LoadHashtable(catReceipt, "Disbursement")
+        catReceipt = LoadHashtable("Receipt")
+        catDisburse = LoadHashtable("Disbursement")
     End Sub
 
     Private Sub LoadSubCat()
@@ -37,17 +38,21 @@
         End Select
     End Sub
 
-    Private Sub LoadHashtable(ByVal ht As Hashtable, ByVal type As String)
+    Private Function LoadHashtable(ByVal type As String)
         mySql = "SELECT DISTINCT Category FROM " & fillData & _
             " WHERE Type = '" & type & "' ORDER BY Category ASC"
         ds = New DataSet
-        ds = LoadSQL(mySql)
+        ds = LoadSQL(mySql, fillData)
 
-        catDisburse = New Hashtable
+        Dim ht As New Hashtable
+        Dim cnt As Integer = 0
         For Each dr As DataRow In ds.Tables(0).Rows
-            ht.Add(dr.Item("CashID"), dr.Item("Category"))
+            ht.Add(cnt, dr.Item("Category"))
+            cnt += 1
         Next
-    End Sub
+
+        Return ht
+    End Function
 
     Private Sub LoadAccounts()
         mySql = "SELECT * FROM " & fillData
@@ -168,6 +173,6 @@
     End Sub
 
     Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
-        LoadSubCat()
+        If Not cboCat.Text = "" Then LoadSubCat()
     End Sub
 End Class
