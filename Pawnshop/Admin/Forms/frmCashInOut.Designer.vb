@@ -22,7 +22,7 @@ Partial Class frmCashInOut
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "Disbursement", "AUCTION REDEEM", "Sales - Auctioned Cellphones", "_SYS0000000001", "", "False"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "Disbursement", "AUCTION REDEEM", "Sales - Auctioned Cellphones", "_SYS0000000001", "", "False"}, -1)
         Me.lvAccnt = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -58,7 +58,7 @@ Partial Class frmCashInOut
         Me.lvAccnt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvAccnt.FullRowSelect = True
         Me.lvAccnt.GridLines = True
-        Me.lvAccnt.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem4})
+        Me.lvAccnt.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvAccnt.Location = New System.Drawing.Point(12, 12)
         Me.lvAccnt.MultiSelect = False
         Me.lvAccnt.Name = "lvAccnt"

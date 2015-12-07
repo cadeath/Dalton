@@ -1,18 +1,52 @@
 ﻿Public Class frmCashInOut
 
     Dim isDisplaying As Boolean = False
+    Dim catReceipt As Hashtable
+    Dim catDisburse As Hashtable
 
     Private mySql As String, fillData As String = "tblCash"
     Private ds As DataSet
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-        Me.Close()
+        LoadAccounts()
+        'Me.Close()
     End Sub
 
     Private Sub frmCashInOut_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadAccounts()
         LockFields(1)
+    End Sub
+
+    Private Sub LoadCategories()
+        LoadHashtable(catReceipt, "Receipt")
+        LoadHashtable(catReceipt, "Disbursement")
+    End Sub
+
+    Private Sub LoadSubCat()
+        cboCat.Items.Clear()
+        Select Case cboType.Text
+            Case "Receipt"
+                For Each el As DictionaryEntry In catReceipt
+                    cboCat.Items.Add(el.Value)
+                Next
+            Case "Disbursement"
+                For Each el As DictionaryEntry In catDisburse
+                    cboCat.Items.Add(el.Value)
+                Next
+        End Select
+    End Sub
+
+    Private Sub LoadHashtable(ByVal ht As Hashtable, ByVal type As String)
+        mySql = "SELECT DISTINCT Category FROM " & fillData & _
+            " WHERE Type = '" & type & "' ORDER BY Category ASC"
+        ds = New DataSet
+        ds = LoadSQL(mySql)
+
+        catDisburse = New Hashtable
+        For Each dr As DataRow In ds.Tables(0).Rows
+            ht.Add(dr.Item("CashID"), dr.Item("Category"))
+        Next
     End Sub
 
     Private Sub LoadAccounts()
@@ -42,6 +76,7 @@
 
     Private Sub ClearFields()
         cboType.SelectedIndex = 0
+        cboCat.Items.Clear()
         cboCat.Text = ""
         txtTransName.Text = ""
         txtSAP.Text = ""
@@ -74,6 +109,7 @@
             Case "&New"
                 btnPost.Text = "&Add"
                 LockFields(0)
+                ClearFields()
             Case "&Add"
                 If Not isValid() Then Exit Sub
 
@@ -92,6 +128,7 @@
                 ClearFields()
                 LockFields(1)
                 LoadAccounts()
+                btnPost.Text = "&New"
         End Select
     End Sub
 
@@ -128,5 +165,9 @@
             btnModify.Text = "&Modify"
             btnPost.Text = "&New"
         End If
+    End Sub
+
+    Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
+        LoadSubCat()
     End Sub
 End Class

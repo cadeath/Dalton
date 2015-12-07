@@ -800,9 +800,6 @@
         AddPTNum()
     End Sub
 
-    Private Function GetNewPT(ByVal curPT As Integer) As Integer
-
-    End Function
 #End Region
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
