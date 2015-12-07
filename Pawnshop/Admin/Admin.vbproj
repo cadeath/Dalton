@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CashInOut.vb" />
-    <Compile Include="database.vb" />
+    <Compile Include="Modules\database.vb" />
     <Compile Include="Forms\devVerifyESK.Designer.vb">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
     </Compile>
@@ -92,6 +92,12 @@
     <Compile Include="Forms\frmCashInOut.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmFileGen.Designer.vb">
+      <DependentUpon>frmFileGen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFileGen.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,8 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\exportFile.vb" />
+    <Compile Include="Modules\mod_setup.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -114,7 +122,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="security.vb" />
+    <Compile Include="Modules\security.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\devVerifyESK.resx">
@@ -122,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashInOut.resx">
       <DependentUpon>frmCashInOut.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFileGen.resx">
+      <DependentUpon>frmFileGen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
