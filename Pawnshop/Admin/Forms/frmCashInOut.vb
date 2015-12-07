@@ -1,15 +1,15 @@
 ﻿Public Class frmCashInOut
 
     Dim isDisplaying As Boolean = False
-    Dim catReceipt As Hashtable
-    Dim catDisburse As Hashtable
+    Dim catReceipt As Hashtable, catDisburse As Hashtable
+    Dim selectedTrans As CashInOut
 
     Private mySql As String, fillData As String = "tblCash"
     Private ds As DataSet
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-        LoadCategories()
-        'Me.Close()
+        'LoadCategories()
+        Me.Close()
     End Sub
 
     Private Sub frmCashInOut_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -25,6 +25,9 @@
     End Sub
 
     Private Sub LoadSubCat()
+        If catDisburse Is Nothing Then Exit Sub
+        If catReceipt Is Nothing Then Exit Sub
+
         cboCat.Items.Clear()
         Select Case cboType.Text
             Case "Receipt"
@@ -115,6 +118,7 @@
                 btnPost.Text = "&Add"
                 LockFields(0)
                 ClearFields()
+                LoadSubCat()
             Case "&Add"
                 If Not isValid() Then Exit Sub
 
@@ -134,6 +138,25 @@
                 LockFields(1)
                 LoadAccounts()
                 btnPost.Text = "&New"
+            Case "&Save"
+                Console.WriteLine(selectedTrans.Remarks)
+                Console.WriteLine(selectedTrans.onHold)
+                With selectedTrans
+                    .Type = cboType.Text
+                    .Category = cboCat.Text
+                    .TransactionName = txtTransName.Text
+                    .SAPCode = txtSAP.Text
+                    .Remarks = txtRemarks.Text
+                    .onHold = chkHold.Checked
+
+                    .Update()
+                End With
+                MsgBox("Entry updated", MsgBoxStyle.Information)
+                ClearFields()
+                LoadAccounts()
+                LockFields(1)
+                btnPost.Text = "&New"
+                btnModify.Text = "&Modify"
         End Select
     End Sub
 
@@ -150,10 +173,12 @@
         cboCat.Text = tmpCio.Category
         txtTransName.Text = tmpCio.TransactionName
         txtSAP.Text = tmpCio.SAPCode
-        txtRemarks.Text = txtRemarks.Text
+        txtRemarks.Text = tmpCio.Remarks
         chkHold.Checked = tmpCio.onHold
 
         isDisplaying = True
+        selectedTrans = New CashInOut
+        selectedTrans = tmpCio
 
         'Enabling Buttons
         btnModify.Enabled = isDisplaying
@@ -173,6 +198,6 @@
     End Sub
 
     Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
-        If Not cboCat.Text = "" Then LoadSubCat()
+        If Not cboType.Text = "" Then LoadSubCat()
     End Sub
 End Class
