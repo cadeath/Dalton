@@ -8,6 +8,7 @@
     Private Sub tsbtnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnExport.Click
         'frmFileGen.Show()
         LoadChild(frmFileGen)
+        LoadChild(devVerifyESK)
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

@@ -20,6 +20,28 @@
         Dim ds As New DataSet
         Try
             ds = bf.Deserialize(fsEsk)
+
+            Console.WriteLine("Table Count: " & ds.Tables.Count)
+            Console.WriteLine("Table Name ==========")
+            For Each tbStr In ds.Tables
+                Console.WriteLine(tbStr)
+            Next
+
+            Dim tmpDS As New DataSet
+            tmpDS.Tables.Add(VerificationTable(ds))
+
+            'Checking Date
+            Dim curDate As Date = #12/7/2015#
+            Console.WriteLine("FileDate: " & tmpDS.Tables(0).Rows(0).Item("value"))
+            If curDate <> tmpDS.Tables(0).Rows(0).Item("date") Then
+                MsgBox("Time lockin period expired", MsgBoxStyle.Critical)
+                Return Nothing
+            End If
+
+            'Check HASH
+            Console.WriteLine("Hash: " & tmpDS.Tables(0).Rows(1).Item("value"))
+
+
         Catch ex As Exception
             Console.WriteLine("It seems the file is being tampered.")
             Return Nothing
