@@ -514,11 +514,23 @@
         If PawnItem.Status = "X" Then Me.Text &= " [REDEEMED]"
         If PawnItem.Status = "S" Then Me.Text &= " [SEGREGATED]"
         If PawnItem.Status = "W" Then Me.Text &= " [WITHDRAW]"
+        If PawnItem.Status = "V" Then Me.Text &= " [VOIDED]"
 
         Select Case PawnItem.Status
-            Case "0", "X", "S", "W"
+            Case "0", "S", "W", "V"
                 LockFields(1)
+            Case "X"
+                LockFields(1)
+                btnVoid.Enabled = True
         End Select
+
+        'Get New Number
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count <> 0 Then
+            lblNPT.Visible = True
+            lblNPT.Text &= CurrentPTNumber(ds.Tables(0).Rows(0).Item("PawnTicket"))
+        End If
     End Sub
 
     Private Sub ChangeForm()
@@ -807,6 +819,21 @@
 #End Region
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-        MsgBox("Missing", MsgBoxStyle.Information, "Under Construction")
+        Dim transDate As Date
+        If PawnItem.Status = "X" Then
+            transDate = PawnItem.OfficialReceiptDate
+        Else
+            transDate = PawnItem.LoanDate
+        End If
+
+        If CurrentDate.Date <> transDate Then
+            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        PawnItem.VoidCancelTicket()
+        MsgBox("Transaction Voided", MsgBoxStyle.Information)
+        frmPawning.LoadActive()
+        Me.Close()
     End Sub
 End Class
