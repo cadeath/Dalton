@@ -24,7 +24,7 @@
             Case configList(0)
                 mySql = "SELECT * FROM tblCash"
                 ds = LoadSQL(mySql, "tblCash")
-                ExportConfig(txtPath.Text, ds)
+                ExportConfig(txtPath.Text, ds, configList(0))
                 Console.WriteLine("File Created at " & txtPath.Text)
                 MsgBox("Configuration Exported", MsgBoxStyle.Information)
                 Exit Select

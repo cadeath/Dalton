@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CashInOut.vb" />
+    <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Modules\database.vb" />
     <Compile Include="Forms\devVerifyESK.Designer.vb">
       <DependentUpon>devVerifyESK.vb</DependentUpon>

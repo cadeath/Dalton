@@ -1,17 +1,17 @@
 ﻿Module exportFile
 
-    Friend Sub ExportConfig(ByVal url As String, ByVal data As DataSet)
+    Friend Sub ExportConfig(ByVal url As String, ByVal data As DataSet, ByVal type As String)
         If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
         Dim fsEsk As New System.IO.FileStream(url, IO.FileMode.CreateNew)
 
-        data.Tables.Add(VerificationTable(data))
+        data.Tables.Add(VerificationTable(data, type))
 
         Dim esk As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
         esk.Serialize(fsEsk, data)
         fsEsk.Close()
     End Sub
 
-    Friend Function ImportConfig(ByVal url As String) As DataSet
+    Friend Function ImportConfig(ByVal url As String, ByVal type As String) As DataSet
         If Not System.IO.File.Exists(url) Then Return Nothing
 
         Dim fsEsk As New System.IO.FileStream(url, IO.FileMode.Open)
@@ -28,7 +28,7 @@
             Next
 
             Dim tmpDS As New DataSet
-            tmpDS.Tables.Add(VerificationTable(ds))
+            tmpDS.Tables.Add(VerificationTable(ds, type))
 
             'Checking Date
             Dim curDate As Date = #12/7/2015#
@@ -51,11 +51,24 @@
         Return ds
     End Function
 
-    Friend Function VerificationTable(ByVal ds As DataSet) As DataTable
+    Private Function RandomString() As String
+        Dim KeyGen As RandomKeyGenerator
+
+        KeyGen = New RandomKeyGenerator
+        KeyGen.KeyLetters = "abcdefghijklmnopqrstuvwxyz"
+        KeyGen.KeyNumbers = "0123456789"
+        KeyGen.KeyChars = 8
+
+        Return KeyGen.Generate()
+    End Function
+
+    Friend Function VerificationTable(ByVal ds As DataSet, ByVal type As String) As DataTable
         Dim tb As New DataTable
         tb = New DataTable("Verify")
         tb.Columns.Add("Key")
         tb.Columns.Add("Value")
+        tb.Rows.Add("RefNum", RandomString)
+        tb.Rows.Add("Type", type)
         tb.Rows.Add("date", Now().Date)
 
         Dim st As New System.IO.MemoryStream
