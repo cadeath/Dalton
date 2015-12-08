@@ -7,6 +7,7 @@
 
 Friend Module database
     Public con As OdbcConnection
+    'Friend dbName As String = "..\..\..\Pawnshop\W3W1LH4CKU.FDB"
     Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
     'Friend dbName As String = "W3W1LH4CKU.FDB" 'ForDeployment
     Friend fbUser As String = "SYSDBA"

@@ -87,6 +87,26 @@ Module mod_system
         End If
     End Sub
 
+    Friend Function AutoSegregate() As Boolean
+        Console.WriteLine("Entering segregation module")
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
+        Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
+
+        If ds.Tables(0).Rows.Count = 0 Then Return True
+
+        Console.WriteLine("Segregating...")
+        For Each dr As DataRow In ds.Tables("tblPawn").Rows
+            Dim tmpPawnItem As New PawnTicket
+            tmpPawnItem.LoadTicketInRow(dr)
+            tmpPawnItem.Status = "S"
+            tmpPawnItem.SaveTicket(False)
+            Console.WriteLine("PT: " & tmpPawnItem.PawnTicket)
+        Next
+
+        Console.WriteLine("Segregation complete")
+        Return True
+    End Function
+
     Friend Sub CloseStore(ByVal cc As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
