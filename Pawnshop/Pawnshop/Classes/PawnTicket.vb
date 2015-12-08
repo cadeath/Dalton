@@ -488,6 +488,11 @@
     Public Sub VoidCancelTicket()
         Dim curStatus As String = _status
 
+        If _status = "L" Then
+            ChangeStatus("V")
+            Exit Sub
+        End If
+
         If _status <> "X" Then
             ChangeStatus("V")
         End If
