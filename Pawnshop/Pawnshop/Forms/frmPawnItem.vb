@@ -95,6 +95,7 @@
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        frmPawning.LoadActive()
         Me.Close()
     End Sub
 
@@ -279,7 +280,7 @@
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
         If transactionType = "R" Then
             btnRenew.Text = "Rene&w"
-            'txtRenew.BackColor = Drawing.SystemColors.Control
+            txtRenew.BackColor = Drawing.SystemColors.Control
             transactionType = "D"
             btnVoid.Enabled = True
             btnSave.Enabled = False
@@ -328,15 +329,23 @@
         If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
 
         ItemPrincipal = CDbl(txtPrincipal.Text)
+        'Dim loanInt As Double, redeemInt As Double
+        'loanInt = ItemPrincipal * GetInt(30 + IIf(daysDue > 3, daysDue, 0))
+        'redeemInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
+
         If transactionType <> "X" Then
             DelayInt = ItemPrincipal * GetInt(30 + IIf(daysDue > 3, daysDue, 0))
         Else
-            DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, 30, 0))
+            DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
         End If
 
         ServiceCharge = GetServiceCharge(ItemPrincipal)
         AdvanceInt = DelayInt + ServiceCharge
 
+        If daysDue > 3 Then
+            txtInt.Text = DelayInt
+            txtService.Text = ServiceCharge
+        End If
         If transactionType = "L" Or transactionType = "R" Then
             txtInt.Text = DelayInt
             txtService.Text = ServiceCharge
@@ -410,23 +419,19 @@
         End If
 
         txtOver.Text = daysDue
-        txtInt.Text = DelayInt
-        If Not typ = "X" Then
-            txtService.Text = GetServiceCharge(PawnItem.Principal)
-        End If
-
         txtPenalty.Text = GetInt(dayDiffNew, "Penalty") * PawnItem.Principal
         txtEvat.Text = PawnItem.EVAT
-
-        txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
-        txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + CDbl(txtInt.Text)
 
         If transactionType = "X" Then
             txtRedeem.BackColor = Drawing.SystemColors.Window
             txtRedeem.Focus()
+            txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + IIf(daysDue > 3, CDbl(txtInt.Text) + CDbl(txtService.Text), 0)
         Else
-            'txtRenew.ReadOnly = False
-            txtRenew.Focus()
+            If transactionType = "R" Then
+                txtRenew.Focus()
+                txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
+                txtRenew.BackColor = Drawing.SystemColors.Window
+            End If
         End If
 
         ChangeForm()
@@ -761,7 +766,6 @@
     Private Sub SaveRenew()
         Dim oldPT As Integer = PawnItem.PawnTicket
 
-        'ComputeAdvanceInterest()
         'Redeem
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
@@ -800,9 +804,6 @@
         AddPTNum()
     End Sub
 
-    Private Function GetNewPT(ByVal curPT As Integer) As Integer
-
-    End Function
 #End Region
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click

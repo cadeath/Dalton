@@ -89,7 +89,7 @@ Module mod_system
 
     Friend Function AutoSegregate() As Boolean
         Console.WriteLine("Entering segregation module")
-        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate & "' AND (Status = 'L' OR Status = 'R')"
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
         Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
 
         If ds.Tables(0).Rows.Count = 0 Then Return True
