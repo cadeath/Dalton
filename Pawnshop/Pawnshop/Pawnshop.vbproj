@@ -374,6 +374,11 @@
     <Compile Include="POS\frmPOS.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\dsReport.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\frmReport.Designer.vb">
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
@@ -510,6 +515,17 @@
     </None>
     <None Include="Pawnshop.My.MyApplication.datasource" />
     <None Include="Pawnshop.My.MySettings.datasource" />
+    <None Include="Reports\dsReport.xsc">
+      <DependentUpon>dsReport.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReport.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reports\dsReport.xss">
+      <DependentUpon>dsReport.xsd</DependentUpon>
+    </None>
     <None Include="W3W1LH4CKU.FDB">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
