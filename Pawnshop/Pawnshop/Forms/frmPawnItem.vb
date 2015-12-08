@@ -831,6 +831,8 @@
             Exit Sub
         End If
 
+        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
+
         PawnItem.VoidCancelTicket()
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
         frmPawning.LoadActive()

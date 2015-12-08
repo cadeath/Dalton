@@ -505,8 +505,8 @@
             End If
             ds.Tables(fillData).Rows(0).Item("Status") = st
             With ds.Tables(fillData).Rows(0)
-                .Item("OrNum") = Nothing
-                .Item("OrDate") = Nothing
+                .Item("OrNum") = 0
+                .Item("OrDate") = New Date
                 .Item("Principal") = 0
                 .Item("DAYSOVERDUE") = 0
                 .Item("DelayINT") = 0
