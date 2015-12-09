@@ -509,8 +509,8 @@
         End If
 
         ChangeForm()
-        If PawnItem.Status = "R" Then Me.Text &= " [RENEWED]"
-        If PawnItem.Status = "0" Then Me.Text &= " [INACTIVE]"
+        If PawnItem.Status = "R" Then Me.Text &= " [RENEW]"
+        If PawnItem.Status = "0" Then Me.Text &= " [INACTIVE/RENEWED]"
         If PawnItem.Status = "X" Then Me.Text &= " [REDEEMED]"
         If PawnItem.Status = "S" Then Me.Text &= " [SEGREGATED]"
         If PawnItem.Status = "W" Then Me.Text &= " [WITHDRAW]"
@@ -536,7 +536,7 @@
     Private Sub ChangeForm()
         Select Case transactionType
             Case "D"
-                lblTransaction.Text = "Display Ticket Information"
+                lblTransaction.Text = "Ticket Information"
             Case "L"
                 lblTransaction.Text = "New Loan"
             Case "R"
