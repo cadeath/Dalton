@@ -27,7 +27,10 @@ Public Class frmMain
         ExpiryGeneratorToolStripMenuItem.Enabled = Not st
         JournalEntriesToolStripMenuItem.Enabled = Not st
         CashCountToolStripMenuItem.Enabled = Not st
+        ItemPulloutToolStripMenuItem.Enabled = Not st
+        '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
+        ConsoleToolStripMenuItem.Enabled = Not st
 
         If st Then
             tsUser.Text = "No User yet"
@@ -294,5 +297,9 @@ Public Class frmMain
         End If
         frmCashCount.Show()
         frmCashCount.isClosing = True
+    End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
+        frmPullOut.Show()
     End Sub
 End Class
