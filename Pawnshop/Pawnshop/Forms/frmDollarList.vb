@@ -15,8 +15,7 @@
         lvDollar.Items.Clear()
     End Sub
 
-    Friend Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tblDollar WHERE status= 'A'")
-
+    Friend Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tblDollar WHERE status= 'A' ORDER BY DOLLARID DESC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
@@ -41,18 +40,7 @@
 
         lv.Tag = dl.DollarID
         If dl.Status <> "A" Then lv.BackColor = Color.LightGray
-    End Sub
-
-    Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-        If lvDollar.SelectedItems.Count = 0 Then Exit Sub
-
-        Dim tmpLoad As New DollarTransaction
-        Dim id As Integer = lvDollar.FocusedItem.Tag
-        tmpLoad.LoadDollar(id)
-
-        frmDollar.LoadDollar(tmpLoad)
-        frmDollar.Show()
-
+        Console.WriteLine(lv.Tag & ": " & dl.CustomersName)
     End Sub
 
     Private Sub lvDollar_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvDollar.DoubleClick
@@ -95,5 +83,21 @@
         If isEnter(e) Then
             btnSearch.PerformClick()
         End If
+    End Sub
+
+    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+        If lvDollar.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim id As Integer = lvDollar.FocusedItem.Tag
+        Console.WriteLine("ID: " & id)
+        Dim tmpLoad As New DollarTransaction
+        tmpLoad.LoadDollar(id)
+
+        frmDollorSimple.Show()
+        frmDollorSimple.LoadDollar(tmpLoad)
+    End Sub
+
+    Private Sub lvDollar_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvDollar.SelectedIndexChanged
+
     End Sub
 End Class

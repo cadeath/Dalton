@@ -5,14 +5,16 @@
 ' v1.1
 '  - SaveEntry added empty dataset binding
 
-Module database
+Friend Module database
     Public con As OdbcConnection
     Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
+    'Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
+    Private DBversion As String = "a1.0.1"
     Private language() As String = _
         {"Connection error failed."}
 
@@ -116,6 +118,19 @@ Module database
         'End Try
     End Function
 
+    Friend Function DBCompatibilityCheck() As Boolean
+        Console.WriteLine("Checking database compatibility...")
+        Dim strDB As String = GetOption("DBVersion")
+
+        If DBversion = strDB Then
+            Console.WriteLine("Success!")
+            Return True
+        Else
+            Console.WriteLine("Database Version didn't match... " & strDB)
+            Return False
+        End If
+    End Function
+
     ' Module 002
     Friend Function LoadSQL(ByVal mySql As String, Optional ByVal tblName As String = "QuickSQL") As DataSet
         dbOpen()
@@ -146,10 +161,22 @@ Module database
 
     Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)
         Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
-        Dim ds As DataSet = LoadSQL(mySql, "tblMaintenance")
+        Dim fillData As String = "tblMaintenance"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
 
-        ds.Tables(0).Rows(0).Item("opt_values") = value
-        SaveEntry(ds, False)
+        If ds.Tables(fillData).Rows.Count = 0 Then
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(fillData).NewRow
+            With dsNewRow
+                .Item("opt_keys") = key
+                .Item("opt_values") = value
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+            SaveEntry(ds)
+        Else
+            ds.Tables(0).Rows(0).Item("opt_values") = value
+            SaveEntry(ds, False)
+        End If
         Console.WriteLine("Option updated. " & key)
     End Sub
 End Module
