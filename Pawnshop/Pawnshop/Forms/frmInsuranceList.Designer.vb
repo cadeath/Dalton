@@ -34,6 +34,7 @@ Partial Class frmInsuranceList
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -80,7 +81,7 @@ Partial Class frmInsuranceList
         '
         'lvInsurance
         '
-        Me.lvInsurance.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
+        Me.lvInsurance.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.lvInsurance.FullRowSelect = True
         Me.lvInsurance.GridLines = True
         Me.lvInsurance.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
@@ -131,6 +132,10 @@ Partial Class frmInsuranceList
         Me.btnView.Text = "&View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "PT#"
+        '
         'frmInsuranceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -159,4 +164,5 @@ Partial Class frmInsuranceList
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
 End Class

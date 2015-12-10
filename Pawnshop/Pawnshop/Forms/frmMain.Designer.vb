@@ -64,6 +64,7 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
+        Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -76,7 +77,7 @@ Partial Class frmMain
         Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ReportToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.msMenu.Location = New System.Drawing.Point(0, 0)
         Me.msMenu.Name = "msMenu"
-        Me.msMenu.Size = New System.Drawing.Size(936, 24)
+        Me.msMenu.Size = New System.Drawing.Size(1058, 24)
         Me.msMenu.TabIndex = 0
         Me.msMenu.Text = "msMenu"
         '
@@ -141,7 +142,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -212,7 +213,7 @@ Partial Class frmMain
         Me.pbLogo.Image = CType(resources.GetObject("pbLogo.Image"), System.Drawing.Image)
         Me.pbLogo.Location = New System.Drawing.Point(0, 24)
         Me.pbLogo.Name = "pbLogo"
-        Me.pbLogo.Size = New System.Drawing.Size(936, 120)
+        Me.pbLogo.Size = New System.Drawing.Size(1058, 120)
         Me.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pbLogo.TabIndex = 1
         Me.pbLogo.TabStop = False
@@ -261,7 +262,7 @@ Partial Class frmMain
         Me.pButton.Controls.Add(Me.btnMoneyTransfer)
         Me.pButton.Controls.Add(Me.btnClient)
         Me.pButton.Controls.Add(Me.btnPawning)
-        Me.pButton.Location = New System.Drawing.Point(393, 160)
+        Me.pButton.Location = New System.Drawing.Point(543, 161)
         Me.pButton.Name = "pButton"
         Me.pButton.Size = New System.Drawing.Size(503, 334)
         Me.pButton.TabIndex = 0
@@ -360,7 +361,7 @@ Partial Class frmMain
         Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser})
         Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
-        Me.statusStrip.Size = New System.Drawing.Size(936, 22)
+        Me.statusStrip.Size = New System.Drawing.Size(1058, 22)
         Me.statusStrip.TabIndex = 6
         Me.statusStrip.Text = "ss"
         '
@@ -381,12 +382,18 @@ Partial Class frmMain
         '
         Me.tmrCurrent.Enabled = True
         '
+        'ItemPulloutToolStripMenuItem
+        '
+        Me.ItemPulloutToolStripMenuItem.Name = "ItemPulloutToolStripMenuItem"
+        Me.ItemPulloutToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ItemPulloutToolStripMenuItem.Text = "&Item Pullout"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(185, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(936, 603)
+        Me.ClientSize = New System.Drawing.Size(1058, 603)
         Me.Controls.Add(Me.statusStrip)
         Me.Controls.Add(Me.pButton)
         Me.Controls.Add(Me.pbLogo)
@@ -450,5 +457,6 @@ Partial Class frmMain
     Friend WithEvents tsUser As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ClosingStoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ItemPulloutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

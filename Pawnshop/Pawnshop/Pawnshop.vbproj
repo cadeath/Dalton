@@ -153,6 +153,7 @@
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
+    <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
@@ -323,6 +324,12 @@
     <Compile Include="Forms\frmPawnItem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmPullOut.Designer.vb">
+      <DependentUpon>frmPullOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPullOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmRate.Designer.vb">
       <DependentUpon>frmRate.vb</DependentUpon>
     </Compile>
@@ -469,6 +476,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawnItem.resx">
       <DependentUpon>frmPawnItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPullOut.resx">
+      <DependentUpon>frmPullOut.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate.resx">
       <DependentUpon>frmRate.vb</DependentUpon>
