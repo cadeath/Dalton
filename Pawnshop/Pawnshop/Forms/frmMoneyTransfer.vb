@@ -2,8 +2,10 @@
 
     Dim senderClient As Client
     Dim receiverClient As Client
-    Dim transID As Integer = GetOption("MoneyTransNum")
     Friend displayOnly As Boolean = False
+
+    Private idME As Integer = GetOption("MEnumLast")
+    Private idMR As Integer = GetOption("MRNumLast")
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
         If rbReceive.Checked Then
@@ -19,6 +21,23 @@
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
+
+#Region "Control Numbers"
+    Private Sub DisplayNumber(Optional ByVal num As Integer = 0)
+        If num = 0 Then num = idME
+        txtTransNum.Text = String.Format("{0:000000}", num)
+    End Sub
+
+    Private Sub AddME()
+        idME += 1
+        UpdateOptions("MEnumLast", idME)
+    End Sub
+
+    Private Sub AddMR()
+        idMR += 1
+        UpdateOptions("MRNumLast", idMR)
+    End Sub
+#End Region
 
     Private Sub txtSender_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSender.KeyPress
         If isEnter(e) Then
@@ -65,7 +84,7 @@
         ClearField()
         LockFields(True)
         lblWhere.Text = "Send To"
-        GetTransNumber()
+        DisplayNumber()
         'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
     End Sub
@@ -83,10 +102,6 @@
 
         Return tmpStr
     End Function
-
-    Private Sub GetTransNumber()
-        txtTransNum.Text = String.Format("{0:000000}", transID)
-    End Sub
 
     Private Sub ClearField()
         rbSend.Checked = True
@@ -144,6 +159,18 @@
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
 
+        Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim transID As Integer = 0
+        If cboType.Text <> "Western Union" Then
+            If rbSend.Checked Then
+                transID = idME
+            Else
+                transID = idMR
+            End If
+        End If
+
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             .TransactionType = IIf(rbReceive.Checked, 1, 0)
@@ -163,15 +190,17 @@
             .Save()
         End With
 
-        AddTransID()
+        If mtTrans.ServiceType <> "Western Union" Then
+            If rbSend.Checked Then
+                AddME()
+            Else
+                AddMR()
+            End If
+        End If
+
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         frmMTlist.LoadActive()
         Me.Close()
-    End Sub
-
-    Private Sub AddTransID()
-        transID += 1
-        UpdateOptions("TRANSID", transID)
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
@@ -268,13 +297,16 @@
 
         If rbSend.Checked Then
             If cboType.Text = "Western Union" Then
+                txtTransNum.Text = ""
                 st = True
             Else
+                DisplayNumber(idME)
                 st = False
             End If
         End If
 
         If rbReceive.Checked Then
+            If cboType.Text <> "Western Union" Then DisplayNumber(idMR)
             st = True
         End If
 
