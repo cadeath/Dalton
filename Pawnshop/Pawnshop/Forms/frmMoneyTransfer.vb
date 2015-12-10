@@ -138,7 +138,7 @@
     Private Function isValid() As Boolean
         If cboType.Text = "" Then cboType.Focus() : Return False
 
-        If cboType.Text = "Western Union" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
+        If cboType.Text = "Western Union" Or cboType.Text = "Cebuana Llhuiller" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If rbSend.Checked Then
             If senderClient Is Nothing Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
             If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False

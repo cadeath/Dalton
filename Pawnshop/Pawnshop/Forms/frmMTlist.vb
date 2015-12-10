@@ -1,5 +1,18 @@
 ﻿Public Class frmMTlist
 
+    Dim daltonService As MoneyTransferService()
+
+    Private Sub Main()
+        Dim tmp As New MoneyTransferService
+        With tmp
+            .Code = "0001"
+            .ServiceName = "Pera Padala"
+            .isGenerated = True
+
+        End With
+
+    End Sub
+
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
