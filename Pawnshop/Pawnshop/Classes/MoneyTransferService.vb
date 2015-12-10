@@ -57,8 +57,6 @@
         End Set
     End Property
 
-
-
 #End Region
 
     Public Function GetSendLast() As String

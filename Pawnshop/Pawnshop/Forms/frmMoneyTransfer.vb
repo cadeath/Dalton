@@ -4,8 +4,41 @@
     Dim receiverClient As Client
     Friend displayOnly As Boolean = False
 
-    Private idME As Integer = GetOption("MEnumLast")
-    Private idMR As Integer = GetOption("MRNumLast")
+    Dim idME As Integer, idMR As Integer
+
+    Private daltonService(2) As MoneyTransferService
+
+    Private Sub Main()
+        Dim tmp As New MoneyTransferService
+        With tmp
+            .Code = "0001"
+            .ServiceName = "Pera Padala"
+            .isGenerated = True
+            .KeySend = "MEnumLast"
+            .KeyReceived = "MRNumLast"
+        End With
+        daltonService(0) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0002"
+            .ServiceName = "Western Union"
+            .isGenerated = False
+        End With
+        daltonService(1) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0003"
+            .ServiceName = "Cebuana Llhuiller"
+            .isGenerated = False
+        End With
+        daltonService(2) = tmp
+
+        'Pera Padala
+        idME = daltonService(0).GetSendLast
+        idMR = daltonService(1).GetReceivedLast
+    End Sub
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
         If rbReceive.Checked Then
@@ -22,22 +55,10 @@
         Me.Close()
     End Sub
 
-#Region "Control Numbers"
     Private Sub DisplayNumber(Optional ByVal num As Integer = 0)
-        If num = 0 Then num = idME
+        If num = 0 Then txtTransNum.Text = ""
         txtTransNum.Text = String.Format("{0:000000}", num)
     End Sub
-
-    Private Sub AddME()
-        idME += 1
-        UpdateOptions("MEnumLast", idME)
-    End Sub
-
-    Private Sub AddMR()
-        idMR += 1
-        UpdateOptions("MRNumLast", idMR)
-    End Sub
-#End Region
 
     Private Sub txtSender_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSender.KeyPress
         If isEnter(e) Then
@@ -81,12 +102,21 @@
     End Sub
 
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Main()
         ClearField()
         LockFields(True)
+        LoadServices()
         lblWhere.Text = "Send To"
-        DisplayNumber()
         'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
+    End Sub
+
+    Private Sub LoadServices()
+        cboType.Items.Clear()
+        For Each el As MoneyTransferService In daltonService
+            cboType.Items.Add(el.ServiceName)
+        Next
+        If cboType.Items.Count > 0 Then cboType.SelectedIndex = 0
     End Sub
 
     Private Function GetLocations() As String()
@@ -136,9 +166,10 @@
     End Sub
 
     Private Function isValid() As Boolean
+        Dim idx As Integer = cboType.SelectedIndex
         If cboType.Text = "" Then cboType.Focus() : Return False
 
-        If cboType.Text = "Western Union" Or cboType.Text = "Cebuana Llhuiller" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
+        If Not daltonService(idx).isGenerated And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If rbSend.Checked Then
             If senderClient Is Nothing Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
             If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
@@ -163,13 +194,15 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Dim transID As Integer = 0
-        If cboType.Text <> "Western Union" Then
+        Dim idx As Integer = cboType.SelectedIndex
+        If daltonService(idx).isGenerated Then
             If rbSend.Checked Then
                 transID = idME
             Else
                 transID = idMR
             End If
         End If
+
 
         Dim mtTrans As New MoneyTransfer
         With mtTrans
@@ -190,11 +223,11 @@
             .Save()
         End With
 
-        If mtTrans.ServiceType <> "Western Union" Then
+        If daltonService(idx).isGenerated Then
             If rbSend.Checked Then
-                AddME()
+                idME += 1 : daltonService(idx).SetSendLast(idME)
             Else
-                AddMR()
+                idMR += 1 : daltonService(idx).SetReceivedLast(idMR)
             End If
         End If
 
@@ -292,21 +325,21 @@
     End Sub
 
     Private Sub CheckTracking()
+        Dim idx As Integer = cboType.SelectedIndex
         Dim st As Boolean = False
+        If cboType.Items.Count <= 0 Then Exit Sub
         If displayOnly Then Exit Sub
 
-        If rbSend.Checked Then
-            If cboType.Text = "Western Union" Then
-                txtTransNum.Text = ""
-                st = True
-            Else
+        If daltonService(idx).isGenerated Then
+            If rbSend.Checked Then
                 DisplayNumber(idME)
                 st = False
+            Else
+                DisplayNumber(idMR)
+                st = True
             End If
-        End If
-
-        If rbReceive.Checked Then
-            If cboType.Text <> "Western Union" Then DisplayNumber(idMR)
+        Else
+            txtTransNum.Text = ""
             st = True
         End If
 
