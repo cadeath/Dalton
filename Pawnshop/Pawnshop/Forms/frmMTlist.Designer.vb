@@ -25,6 +25,7 @@ Partial Class frmMTlist
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMTlist))
         Me.lvMoneyTransfer = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -38,7 +39,6 @@ Partial Class frmMTlist
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
-        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'lvMoneyTransfer
@@ -60,6 +60,10 @@ Partial Class frmMTlist
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "ID"
+        '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.Text = "Ref#"
         '
         'ColumnHeader2
         '
@@ -160,10 +164,7 @@ Partial Class frmMTlist
         Me.btnNew.TabIndex = 3
         Me.btnNew.Text = "&New"
         Me.btnNew.UseVisualStyleBackColor = True
-        '
-        'ColumnHeader8
-        '
-        Me.ColumnHeader8.Text = "Ref#"
+        Me.btnNew.Visible = False
         '
         'frmMTlist
         '

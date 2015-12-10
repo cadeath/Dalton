@@ -370,7 +370,7 @@ Public Class Client
 
     Public Function LoadLastEntry() As Client
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM clientID"
+        mySql = "SELECT * FROM " & fillData & " ORDER BY ClientID ASC"
         ds = LoadSQL(mySql)
 
         Dim LastRow As Integer = ds.Tables(0).Rows.Count

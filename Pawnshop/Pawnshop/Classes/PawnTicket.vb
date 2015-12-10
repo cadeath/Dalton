@@ -486,7 +486,45 @@
     End Sub
 
     Public Sub VoidCancelTicket()
-        ChangeStatus("V")
+        Dim curStatus As String = _status
+
+        If _status = "L" Then
+            ChangeStatus("V")
+            Exit Sub
+        End If
+
+        If _status <> "X" Then
+            ChangeStatus("V")
+        End If
+
+        If _oldTicket <> 0 Then
+            mySql = "SELECT * FROM " & fillData & " WHERE PawnTicket = " & _oldTicket
+            ds = New DataSet
+            ds = LoadSQL(mySql, fillData)
+
+            Dim st As String
+            If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
+                st = "L"
+            Else
+                st = "R"
+            End If
+            ds.Tables(fillData).Rows(0).Item("Status") = st
+            With ds.Tables(fillData).Rows(0)
+                .Item("OrNum") = 0
+                .Item("OrDate") = New Date
+                .Item("Principal") = 0
+                .Item("DAYSOVERDUE") = 0
+                .Item("DelayINT") = 0
+                .Item("Penalty") = 0
+                .Item("ServiceCharge") = 0
+                .Item("RenewDue") = 0
+                .Item("RedeemDue") = 0
+                .Item("AdvInt") = 0
+            End With
+            database.SaveEntry(ds, False)
+        Else
+            ChangeStatus("L")
+        End If
     End Sub
 
     Public Sub RedeemTicket()

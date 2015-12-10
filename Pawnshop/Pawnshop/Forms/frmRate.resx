@@ -117,4 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnServiceBrowse.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAOKSURBVDhPVZMLTFNXGMcPD7PGabItZJuJY9gsLMxlWWZ8
+        xNWY4TajbMFo6oZG3eaYYkwqDKc8tstDASsGhYFFZa2E1zqsijwntXZkIBmjZe1mGQWhFIFytZdQsLS3
+        9797bxu3/ZOT850v5/87X845HyGiEEYohMvliKAoRFIGRArZlRusLyRlj+enVtDNivKZoXW7O98T8vye
+        8KCPl1aLiKeLUCAP5T44bD9wvu0Jfujy+yr0LHakmXp4e4xsnzP26cHBQB6xYk1fdGKaY+v+vIkTh5RT
+        DSnnaMuxi8zCd7VMIEv9iD2ldXOFjS7vFf3Qw6Nne/p501LRui93UnWy6rE9p27Wm6l2I/PqHHK18yi+
+        6ULVnWk0Wry47fBB72Shsy5wtfdGJ3M0v40QsiNYRaqKdlwy+pBXP8td6PAEjKMT/vuDRj/zeCAwPdLE
+        3TA5oDJ4UNLsRkEjg9MND+i8atPkMmmaTAQcLHzYXaTzIF1Fs2W3vRixXQZt02DRcQvTv5eirPE+8puA
+        omuPcErL4My1CYbSDLhejsvcJgJ2ZTiqMzUMFGU0m3WVxrj9OjyD6WCG48BZlsLetB41ujqca/bxlSyi
+        Uj+7cKLCPBMVd3y7CIhPtiuOlMwg+exUQFFOY6inGL6FDMC/FmPWBHQbv8V431qYu3bjtJaF8oaHPXzG
+        4pZE7d0kAt5IMK3bSznYpFw3vinQw+/Zz5sPoa+rGDVmoJIfOTrg77sbcanmFpfdAOxK758j5Blp6NW/
+        WpKgGPpz27E5aKoOBgAJRs170DHmRa8XaHU+gdII/NxyEt8ri3zrP3eMrN6YUcSb//0/mz6zFMu+mEH7
+        lS1+jiHcL13laJkCOqd80A0vIr8D+PXmAW4whyD7/WU7hZP7KtcsASFhYhUbPup8580kF+pzj3LoJzAY
+        lOz5e1ygzrbIFdzl2AtNJtZZv4INWKPQXhg7tv2VuETBBwgtEPrXb386fP2TlF7Y8p5l5q3RqG1pRWmb
+        C9r2H+GsWwlfJ8H8g9jAWOVOvyE7Hu0liRqeIVTAU3i9vlkd89xrX38sJc9HG0vDjw/fibD98dNydxtF
+        Wg1HwmqdF8msOvklf/WX7+Iv1VbOaV7FpXxIxOYKKQj6jyR8/KJwWRQhQvdFyaTSLamyVd29GcthLCAD
+        fO7V/wPkWnEzDCQSCF6QMIMSAaLUm4kk6y0SH0MkovkfDHgTHQ4LqUIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="ofdESK.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

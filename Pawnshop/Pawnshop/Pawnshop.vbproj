@@ -94,6 +94,8 @@
     <Reference Include="DeathCodez">
       <HintPath>.\DeathCodez.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -109,6 +111,7 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms">
       <Private>True</Private>
     </Reference>
@@ -143,6 +146,7 @@
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
     <Compile Include="Classes\Client.vb" />
+    <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
@@ -174,10 +178,22 @@
     <Compile Include="Forms\frmBackup.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmCashInOut2.Designer.vb">
+      <DependentUpon>frmCashInOut2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCashInOut2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmCashInOutBrowse.Designer.vb">
       <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCashInOutBrowse.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCIO_List.Designer.vb">
+      <DependentUpon>frmCIO_List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCIO_List.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
@@ -246,12 +262,6 @@
     <Compile Include="Forms\frmClientInformation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmDollar.Designer.vb">
-      <DependentUpon>frmDollar.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmDollar.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmExtractor.Designer.vb">
       <DependentUpon>frmExtractor.vb</DependentUpon>
     </Compile>
@@ -295,12 +305,6 @@
     <Compile Include="Forms\frmMTlist.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmNewloan.Designer.vb">
-      <DependentUpon>frmNewloan.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmNewloan.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmOpenStore.Designer.vb">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
     </Compile>
@@ -317,6 +321,12 @@
       <DependentUpon>frmPawnItem.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmPawnItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPullOut.Designer.vb">
+      <DependentUpon>frmPullOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPullOut.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmRate.Designer.vb">
@@ -337,6 +347,7 @@
     <Compile Include="Forms\frmUserManagement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\dailyGospel.vb" />
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
     <Compile Include="Modules\mod_system.vb" />
@@ -369,6 +380,12 @@
     <Compile Include="POS\frmPOS.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\frmReport.Designer.vb">
+      <DependentUpon>frmReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Developer\devClient.resx">
@@ -385,9 +402,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackup.resx">
       <DependentUpon>frmBackup.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCashInOut2.resx">
+      <DependentUpon>frmCashInOut2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashInOutBrowse.resx">
       <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCIO_List.resx">
+      <DependentUpon>frmCIO_List.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDollarList.resx">
       <DependentUpon>frmDollarList.vb</DependentUpon>
@@ -419,9 +443,6 @@
     <EmbeddedResource Include="Forms\frmClientInformation.resx">
       <DependentUpon>frmClientInformation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmDollar.resx">
-      <DependentUpon>frmDollar.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmExtractor.resx">
       <DependentUpon>frmExtractor.vb</DependentUpon>
     </EmbeddedResource>
@@ -446,9 +467,6 @@
     <EmbeddedResource Include="Forms\frmMTlist.resx">
       <DependentUpon>frmMTlist.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmNewLoan.resx">
-      <DependentUpon>frmNewloan.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmOpenStore.resx">
       <DependentUpon>frmOpenStore.vb</DependentUpon>
     </EmbeddedResource>
@@ -457,6 +475,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawnItem.resx">
       <DependentUpon>frmPawnItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPullOut.resx">
+      <DependentUpon>frmPullOut.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate.resx">
       <DependentUpon>frmRate.vb</DependentUpon>
@@ -478,6 +499,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\frmPOS.resx">
       <DependentUpon>frmPOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmReport.resx">
+      <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

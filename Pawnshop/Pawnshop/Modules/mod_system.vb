@@ -23,6 +23,8 @@ Module mod_system
     Friend InitialBal As Double = 0
     Friend RepDep As Double = 0
     Friend DollarRate As Double = 48
+    Friend RequirementLevel As Integer = 1
+    Friend dailyID As Integer = 1
 
 #End Region
 
@@ -43,7 +45,6 @@ Module mod_system
             End If
             Return False
         End If
-
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(storeDB).NewRow
@@ -79,11 +80,32 @@ Module mod_system
 
         If ds.Tables(0).Rows.Count = 1 Then
             CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
+            dailyID = ds.Tables(0).Rows(0).Item("ID")
             frmMain.dateSet = True
         Else
             frmMain.dateSet = False
         End If
     End Sub
+
+    Friend Function AutoSegregate() As Boolean
+        Console.WriteLine("Entering segregation module")
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
+        Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
+
+        If ds.Tables(0).Rows.Count = 0 Then Return True
+
+        Console.WriteLine("Segregating...")
+        For Each dr As DataRow In ds.Tables("tblPawn").Rows
+            Dim tmpPawnItem As New PawnTicket
+            tmpPawnItem.LoadTicketInRow(dr)
+            tmpPawnItem.Status = "S"
+            tmpPawnItem.SaveTicket(False)
+            Console.WriteLine("PT: " & tmpPawnItem.PawnTicket)
+        Next
+
+        Console.WriteLine("Segregation complete")
+        Return True
+    End Function
 
     Friend Sub CloseStore(ByVal cc As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB

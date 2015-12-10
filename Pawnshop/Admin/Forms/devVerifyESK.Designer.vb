@@ -33,6 +33,7 @@ Partial Class devVerifyESK
         Me.txtAmnt = New System.Windows.Forms.TextBox()
         Me.txtRemarks = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'rtbValue
@@ -122,11 +123,21 @@ Partial Class devVerifyESK
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(92, 258)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 8
+        Me.Button2.Text = "&Verify"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'devVerifyESK
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(505, 291)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.txtRemarks)
         Me.Controls.Add(Me.txtAmnt)
@@ -155,4 +166,5 @@ Partial Class devVerifyESK
     Friend WithEvents txtAmnt As System.Windows.Forms.TextBox
     Friend WithEvents txtRemarks As System.Windows.Forms.TextBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
