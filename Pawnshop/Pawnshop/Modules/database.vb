@@ -14,7 +14,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "a1.0.1"
+    Private DBversion As String = "a1.0.2"
     Private language() As String = _
         {"Connection error failed."}
 
