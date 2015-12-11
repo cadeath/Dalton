@@ -36,6 +36,12 @@
     Private Sub cboDenomination_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDenomination.SelectedIndexChanged
         If cboDenomination.Text = "" Or txtRate.Text = "" Then Exit Sub
 
+        ComputeTotal()
+    End Sub
+
+    Private Sub ComputeTotal()
+        If Not IsNumeric(txtRate.Text) Then Exit Sub
+
         Dim getAmount As Integer = cboDenomination.Text.Substring(1)
         Dim getRate As Double = CDbl(txtRate.Text)
         Console.WriteLine("Rate: " & getRate)
@@ -84,7 +90,7 @@
 
         dollarEntry = New DollarTransaction
         With dollarEntry
-            .CurrentRate = DollarRate
+            .CurrentRate = CDbl(txtRate.Text)
             .TransactionDate = CurrentDate
             .Customer = dollarClient
             .Denomination = cboDenomination.Text
@@ -122,5 +128,9 @@
 
     Private Sub txtRate_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
         DigitOnly(e)
+    End Sub
+
+    Private Sub txtRate_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRate.KeyUp
+        ComputeTotal()
     End Sub
 End Class
