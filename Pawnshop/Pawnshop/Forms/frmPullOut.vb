@@ -118,7 +118,15 @@
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If lvPullOut.Items.Count <= 0 Then Exit Sub
 
+        Dim ans As DialogResult = MsgBox("Do you want to post this transactions?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        For Each itm As ListViewItem In lvPullOut.Items
+            Dim pt As New PawnTicket
+            pt.LoadTicket(itm.Tag)
+            pt.ChangeStatus("W")
+
+        Next
     End Sub
 
     Private Sub lvSeg_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvSeg.DoubleClick
