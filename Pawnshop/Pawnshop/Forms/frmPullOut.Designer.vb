@@ -193,6 +193,7 @@ Partial Class frmPullOut
         '
         'btnClose
         '
+        Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.Location = New System.Drawing.Point(945, 331)
         Me.btnClose.Name = "btnClose"
@@ -235,6 +236,7 @@ Partial Class frmPullOut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(1032, 379)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblCurrentDate)
