@@ -387,6 +387,12 @@
     <Compile Include="Reports\frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\qryLoan.Designer.vb">
+      <DependentUpon>qryLoan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryLoan.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Developer\devClient.resx">
@@ -503,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryLoan.resx">
+      <DependentUpon>qryLoan.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
