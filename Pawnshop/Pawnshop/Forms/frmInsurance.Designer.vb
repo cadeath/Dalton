@@ -41,6 +41,8 @@ Partial Class frmInsurance
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.txtCoi = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtPT = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpExpiry = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -163,7 +165,7 @@ Partial Class frmInsurance
         Me.txtHolder.Name = "txtHolder"
         Me.txtHolder.ReadOnly = True
         Me.txtHolder.Size = New System.Drawing.Size(296, 25)
-        Me.txtHolder.TabIndex = 1
+        Me.txtHolder.TabIndex = 0
         '
         'Label2
         '
@@ -192,7 +194,7 @@ Partial Class frmInsurance
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.Label5.Location = New System.Drawing.Point(45, 86)
+        Me.Label5.Location = New System.Drawing.Point(46, 113)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(61, 17)
         Me.Label5.TabIndex = 17
@@ -201,11 +203,11 @@ Partial Class frmInsurance
         'txtAmount
         '
         Me.txtAmount.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAmount.Location = New System.Drawing.Point(121, 87)
+        Me.txtAmount.Location = New System.Drawing.Point(122, 114)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.ReadOnly = True
         Me.txtAmount.Size = New System.Drawing.Size(107, 25)
-        Me.txtAmount.TabIndex = 4
+        Me.txtAmount.TabIndex = 8
         Me.txtAmount.Text = "20"
         '
         'Label1
@@ -213,7 +215,7 @@ Partial Class frmInsurance
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.Label1.Location = New System.Drawing.Point(6, 33)
+        Me.Label1.Location = New System.Drawing.Point(8, 35)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(93, 17)
         Me.Label1.TabIndex = 24
@@ -224,10 +226,10 @@ Partial Class frmInsurance
         Me.dtpDate.Enabled = False
         Me.dtpDate.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDate.Location = New System.Drawing.Point(120, 33)
+        Me.dtpDate.Location = New System.Drawing.Point(122, 35)
         Me.dtpDate.Name = "dtpDate"
         Me.dtpDate.Size = New System.Drawing.Size(108, 25)
-        Me.dtpDate.TabIndex = 23
+        Me.dtpDate.TabIndex = 6
         '
         'txtCoi
         '
@@ -236,11 +238,13 @@ Partial Class frmInsurance
         Me.txtCoi.Name = "txtCoi"
         Me.txtCoi.ReadOnly = True
         Me.txtCoi.Size = New System.Drawing.Size(108, 25)
-        Me.txtCoi.TabIndex = 25
+        Me.txtCoi.TabIndex = 4
         '
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Controls.Add(Me.txtPT)
+        Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.dtpExpiry)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.txtCoi)
@@ -253,27 +257,46 @@ Partial Class frmInsurance
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Desktop
         Me.GroupBox2.Location = New System.Drawing.Point(1, 299)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(499, 131)
+        Me.GroupBox2.Size = New System.Drawing.Size(499, 149)
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Insurance Information"
+        '
+        'txtPT
+        '
+        Me.txtPT.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPT.Location = New System.Drawing.Point(121, 88)
+        Me.txtPT.Name = "txtPT"
+        Me.txtPT.Size = New System.Drawing.Size(108, 25)
+        Me.txtPT.TabIndex = 5
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.SystemColors.Desktop
+        Me.Label8.Location = New System.Drawing.Point(48, 93)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(48, 17)
+        Me.Label8.TabIndex = 28
+        Me.Label8.Text = "PT No:"
         '
         'dtpExpiry
         '
         Me.dtpExpiry.Enabled = False
         Me.dtpExpiry.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpExpiry.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpExpiry.Location = New System.Drawing.Point(120, 58)
+        Me.dtpExpiry.Location = New System.Drawing.Point(122, 60)
         Me.dtpExpiry.Name = "dtpExpiry"
         Me.dtpExpiry.Size = New System.Drawing.Size(108, 25)
-        Me.dtpExpiry.TabIndex = 26
+        Me.dtpExpiry.TabIndex = 7
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.Label6.Location = New System.Drawing.Point(22, 58)
+        Me.Label6.Location = New System.Drawing.Point(24, 60)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(76, 17)
         Me.Label6.TabIndex = 27
@@ -351,7 +374,7 @@ Partial Class frmInsurance
         Me.btnClose.Location = New System.Drawing.Point(338, 21)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(79, 55)
-        Me.btnClose.TabIndex = 39
+        Me.btnClose.TabIndex = 10
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = False
         '
@@ -367,7 +390,7 @@ Partial Class frmInsurance
         Me.btnSave.Location = New System.Drawing.Point(257, 21)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(82, 55)
-        Me.btnSave.TabIndex = 38
+        Me.btnSave.TabIndex = 9
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = False
         '
@@ -376,7 +399,7 @@ Partial Class frmInsurance
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(500, 446)
+        Me.ClientSize = New System.Drawing.Size(500, 451)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -417,4 +440,6 @@ Partial Class frmInsurance
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents txtBirthdate As System.Windows.Forms.TextBox
+    Friend WithEvents txtPT As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
 End Class

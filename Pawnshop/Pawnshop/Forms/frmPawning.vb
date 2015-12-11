@@ -198,4 +198,5 @@
     Private Sub chkRedeem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRedeem.CheckedChanged
         LoadActive()
     End Sub
+
 End Class
