@@ -5,6 +5,10 @@
     ' - Fixing Auth
     ' - Fixing GUI
 
+    ' Functions
+    ' LoadPawnTicket(PawnTicket,Status)
+    ' Status = Transaction Type
+
     Friend transactionType As String = "L"
     Friend PawnItem As PawnTicket
     Friend PawnCustomer As Client
