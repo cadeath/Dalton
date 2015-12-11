@@ -21,6 +21,7 @@
         lv.SubItems.Add(ins.TransactionDate)
         lv.SubItems.Add(ins.ClientName)
         lv.SubItems.Add(ins.ValidDate)
+        lv.SubItems.Add(ins.TicketNum)
         lv.Tag = ins.ID
         If ins.Status = "V" Then lv.BackColor = Color.LightGray
     End Sub

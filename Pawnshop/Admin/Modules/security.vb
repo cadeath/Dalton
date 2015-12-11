@@ -3,6 +3,7 @@
 Module security
 
     Friend Function HashString(ByVal src As String) As String
+        Console.WriteLine("Hashing: " & src)
         Return Encrypt(src)
     End Function
 

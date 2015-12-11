@@ -49,7 +49,7 @@
         txtBirthdate.Text = cl.Birthday
         Holder = cl
 
-        txtAmount.Focus()
+        txtPT.Focus()
     End Sub
 
     Private Sub txtAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmount.KeyPress
@@ -71,10 +71,13 @@
 
         curInsurance = getInsurance
         btnVoid.Enabled = True
+        txtPT.Focus()
     End Sub
 
     Private Function isValid() As Boolean
         If Holder Is Nothing Then txtHolder.Focus() : Return False
+        'If Not IsNumeric(txtPT.Text) Then txtPT.Focus() : Return False
+
         Return True
     End Function
 
@@ -86,6 +89,7 @@
         Dim newInsurance As New Insurance
         With newInsurance
             .COInumber = txtCoi.Text
+            .TicketNum = txtPT.Text
             .TransactionDate = dtpDate.Value
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
@@ -111,5 +115,12 @@
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
 
+    End Sub
+
+    Private Sub txtPT_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress
+        DigitOnly(e)
+        If isEnter(e) Then
+            btnSave.PerformClick()
+        End If
     End Sub
 End Class
