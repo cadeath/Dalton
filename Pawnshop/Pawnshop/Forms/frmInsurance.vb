@@ -76,7 +76,7 @@
 
     Private Function isValid() As Boolean
         If Holder Is Nothing Then txtHolder.Focus() : Return False
-        If Not IsNumeric(txtPT.Text) Then txtPT.Focus() : Return False
+        'If Not IsNumeric(txtPT.Text) Then txtPT.Focus() : Return False
 
         Return True
     End Function
@@ -117,7 +117,8 @@
 
     End Sub
 
-    Private Sub txtPT_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPT.TextChanged
+    Private Sub txtPT_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress
+        DigitOnly(e)
         If isEnter(e) Then
             btnSave.PerformClick()
         End If

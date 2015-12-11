@@ -534,5 +534,15 @@
     Public Sub RenewTicket()
         ChangeStatus(0) 'Inactive
     End Sub
+
+    Public Sub PullOut(ByVal dt As Date)
+        ChangeStatus("W")
+
+        mySql = "SELECT * FROM " & fillData & _
+            " WHERE PawnID = " & _pawnid
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds.Tables(fillData).Rows(0).Item("PullOut") = dt
+        database.SaveEntry(ds, False)
+    End Sub
 #End Region
 End Class
