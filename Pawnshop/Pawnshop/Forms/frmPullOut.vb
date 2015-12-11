@@ -106,7 +106,7 @@
         For Each itm As ListViewItem In lvPullOut.Items
             Dim tmp As New PawnTicket
             tmp.LoadTicket(itm.Tag)
-            AddItemPull(tmp)
+            AddItemSeg(tmp)
         Next
         lvPullOut.Items.Clear()
     End Sub

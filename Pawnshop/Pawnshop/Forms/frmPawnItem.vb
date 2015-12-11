@@ -333,9 +333,6 @@
         If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
 
         ItemPrincipal = CDbl(txtPrincipal.Text)
-        'Dim loanInt As Double, redeemInt As Double
-        'loanInt = ItemPrincipal * GetInt(30 + IIf(daysDue > 3, daysDue, 0))
-        'redeemInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
 
         If transactionType <> "X" Then
             DelayInt = ItemPrincipal * GetInt(30 + IIf(daysDue > 3, daysDue, 0))
@@ -376,6 +373,10 @@
             .Principal = txtPrincipal.Text
             .AdvanceInterest = txtAdv.Text
             .NetAmount = txtNet.Text
+
+            If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text
+            If IsNumeric(txtService.Text) Then .ServiceCharge = txtService.Text
+            If IsNumeric(txtEvat.Text) Then .EVAT = txtEvat.Text
 
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
             .Status = transactionType
@@ -517,7 +518,7 @@
         If PawnItem.Status = "0" Then Me.Text &= " [INACTIVE/RENEWED]"
         If PawnItem.Status = "X" Then Me.Text &= " [REDEEMED]"
         If PawnItem.Status = "S" Then Me.Text &= " [SEGREGATED]"
-        If PawnItem.Status = "W" Then Me.Text &= " [WITHDRAW]"
+        If PawnItem.Status = "W" Then Me.Text &= " [WITHDRAW] - Pull Out: " & PawnItem.PullOutDate.ToShortDateString
         If PawnItem.Status = "V" Then Me.Text &= " [VOIDED]"
 
         Select Case PawnItem.Status

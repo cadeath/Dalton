@@ -310,6 +310,14 @@
         End Set
     End Property
 
+    Private _pullOut As Date
+    Public ReadOnly Property PullOutDate() As Date
+        Get
+            Return _pullOut
+        End Get
+    End Property
+
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -432,6 +440,7 @@
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
             _advanceInterest = .Item("AdvInt")
+            If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
         End With
     End Sub
 
@@ -469,6 +478,7 @@
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
             _advanceInterest = .Item("AdvInt")
+            If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
         End With
     End Sub
 
