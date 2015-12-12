@@ -39,6 +39,14 @@ Partial Class frmMIS
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.ofdImport = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -219,11 +227,83 @@ Partial Class frmMIS
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "IT Account"
         '
+        'ListView1
+        '
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView1.FullRowSelect = True
+        Me.ListView1.GridLines = True
+        Me.ListView1.Location = New System.Drawing.Point(433, 44)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(547, 207)
+        Me.ListView1.TabIndex = 2
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Line Num"
+        Me.ColumnHeader1.Width = 75
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Description"
+        Me.ColumnHeader2.Width = 421
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(433, 12)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(53, 16)
+        Me.Label5.TabIndex = 3
+        Me.Label5.Text = "Browse"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox5.Location = New System.Drawing.Point(492, 9)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(328, 22)
+        Me.TextBox5.TabIndex = 4
+        Me.TextBox5.Text = "C:\Windows"
+        '
+        'Button8
+        '
+        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button8.Location = New System.Drawing.Point(905, 6)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(75, 29)
+        Me.Button8.TabIndex = 5
+        Me.Button8.Text = "Import"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(826, 9)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(73, 22)
+        Me.Button9.TabIndex = 6
+        Me.Button9.Text = "Browse"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'ofdImport
+        '
+        Me.ofdImport.DefaultExt = "Excel 2003|*.xls|Excel 2007|*.xlsx"
+        Me.ofdImport.FileName = "Excel File"
+        Me.ofdImport.Filter = "Excel 2003|*.xls|Excel 2007|*.xlsx"
+        '
         'frmMIS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(440, 264)
+        Me.ClientSize = New System.Drawing.Size(992, 264)
+        Me.Controls.Add(Me.Button9)
+        Me.Controls.Add(Me.Button8)
+        Me.Controls.Add(Me.TextBox5)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -235,6 +315,7 @@ Partial Class frmMIS
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -254,4 +335,12 @@ Partial Class frmMIS
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents ListView1 As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
+    Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents ofdImport As System.Windows.Forms.OpenFileDialog
 End Class
