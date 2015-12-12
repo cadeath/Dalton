@@ -39,6 +39,14 @@ Partial Class frmMIS
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.lvImportResult = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtImportPath = New System.Windows.Forms.TextBox()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.btnImportBrowse = New System.Windows.Forms.Button()
+        Me.ofdImport = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -219,11 +227,85 @@ Partial Class frmMIS
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "IT Account"
         '
+        'lvImportResult
+        '
+        Me.lvImportResult.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lvImportResult.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvImportResult.FullRowSelect = True
+        Me.lvImportResult.GridLines = True
+        Me.lvImportResult.Location = New System.Drawing.Point(433, 44)
+        Me.lvImportResult.Name = "lvImportResult"
+        Me.lvImportResult.Size = New System.Drawing.Size(547, 207)
+        Me.lvImportResult.TabIndex = 2
+        Me.lvImportResult.UseCompatibleStateImageBehavior = False
+        Me.lvImportResult.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Line Num"
+        Me.ColumnHeader1.Width = 75
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Description"
+        Me.ColumnHeader2.Width = 421
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(433, 12)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(53, 16)
+        Me.Label5.TabIndex = 3
+        Me.Label5.Text = "Browse"
+        '
+        'txtImportPath
+        '
+        Me.txtImportPath.BackColor = System.Drawing.SystemColors.Window
+        Me.txtImportPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtImportPath.Location = New System.Drawing.Point(492, 9)
+        Me.txtImportPath.Name = "txtImportPath"
+        Me.txtImportPath.ReadOnly = True
+        Me.txtImportPath.Size = New System.Drawing.Size(328, 22)
+        Me.txtImportPath.TabIndex = 4
+        Me.txtImportPath.Text = "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Import Template.xlsx"
+        '
+        'btnImport
+        '
+        Me.btnImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImport.Location = New System.Drawing.Point(905, 6)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(75, 29)
+        Me.btnImport.TabIndex = 5
+        Me.btnImport.Text = "Import"
+        Me.btnImport.UseVisualStyleBackColor = True
+        '
+        'btnImportBrowse
+        '
+        Me.btnImportBrowse.Location = New System.Drawing.Point(826, 9)
+        Me.btnImportBrowse.Name = "btnImportBrowse"
+        Me.btnImportBrowse.Size = New System.Drawing.Size(73, 22)
+        Me.btnImportBrowse.TabIndex = 6
+        Me.btnImportBrowse.Text = "Browse"
+        Me.btnImportBrowse.UseVisualStyleBackColor = True
+        '
+        'ofdImport
+        '
+        Me.ofdImport.DefaultExt = "Excel 2003|*.xls|Excel 2007|*.xlsx"
+        Me.ofdImport.FileName = "Excel File"
+        Me.ofdImport.Filter = "Excel 2003|*.xls|Excel 2007|*.xlsx"
+        '
         'frmMIS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(440, 264)
+        Me.ClientSize = New System.Drawing.Size(992, 264)
+        Me.Controls.Add(Me.btnImportBrowse)
+        Me.Controls.Add(Me.btnImport)
+        Me.Controls.Add(Me.txtImportPath)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.lvImportResult)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -235,6 +317,7 @@ Partial Class frmMIS
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -254,4 +337,12 @@ Partial Class frmMIS
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents lvImportResult As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents txtImportPath As System.Windows.Forms.TextBox
+    Friend WithEvents btnImport As System.Windows.Forms.Button
+    Friend WithEvents btnImportBrowse As System.Windows.Forms.Button
+    Friend WithEvents ofdImport As System.Windows.Forms.OpenFileDialog
 End Class

@@ -77,7 +77,7 @@
         Select Case tk.Status
             Case "0" : lv.BackColor = Color.LightGray
             Case "X" : lv.BackColor = Color.Red
-            Case "S" : lv.BackColor = Color.LightYellow
+            Case "S" : lv.BackColor = Color.Yellow
             Case "W" : lv.BackColor = Color.Red
             Case "V" : lv.BackColor = Color.Gray
         End Select

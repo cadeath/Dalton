@@ -39,6 +39,7 @@ Partial Class frmMain
         Me.ExpiryGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.JournalEntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -64,7 +65,6 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
-        Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -164,6 +164,12 @@ Partial Class frmMain
         Me.CashCountToolStripMenuItem.Name = "CashCountToolStripMenuItem"
         Me.CashCountToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.CashCountToolStripMenuItem.Text = "&Cash Count"
+        '
+        'ItemPulloutToolStripMenuItem
+        '
+        Me.ItemPulloutToolStripMenuItem.Name = "ItemPulloutToolStripMenuItem"
+        Me.ItemPulloutToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ItemPulloutToolStripMenuItem.Text = "&Item Pullout"
         '
         'ToolStripSeparator2
         '
@@ -381,12 +387,6 @@ Partial Class frmMain
         'tmrCurrent
         '
         Me.tmrCurrent.Enabled = True
-        '
-        'ItemPulloutToolStripMenuItem
-        '
-        Me.ItemPulloutToolStripMenuItem.Name = "ItemPulloutToolStripMenuItem"
-        Me.ItemPulloutToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
-        Me.ItemPulloutToolStripMenuItem.Text = "&Item Pullout"
         '
         'frmMain
         '

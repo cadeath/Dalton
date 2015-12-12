@@ -106,7 +106,7 @@
         For Each itm As ListViewItem In lvPullOut.Items
             Dim tmp As New PawnTicket
             tmp.LoadTicket(itm.Tag)
-            AddItemPull(tmp)
+            AddItemSeg(tmp)
         Next
         lvPullOut.Items.Clear()
     End Sub
@@ -124,9 +124,11 @@
         For Each itm As ListViewItem In lvPullOut.Items
             Dim pt As New PawnTicket
             pt.LoadTicket(itm.Tag)
-            pt.ChangeStatus("W")
-
+            pt.PullOut(CurrentDate)
         Next
+
+        MsgBox("Items has been pull out", MsgBoxStyle.Information)
+        Me.Close()
     End Sub
 
     Private Sub lvSeg_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvSeg.DoubleClick
@@ -146,5 +148,9 @@
     Private Sub ViewPT(ByVal pt As PawnTicket)
         frmPawnItem.Show()
         frmPawnItem.LoadPawnTicket(pt, pt.Status)
+    End Sub
+
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+
     End Sub
 End Class
