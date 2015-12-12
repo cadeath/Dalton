@@ -39,13 +39,13 @@ Partial Class frmMIS
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.lvImportResult = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
+        Me.txtImportPath = New System.Windows.Forms.TextBox()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.btnImportBrowse = New System.Windows.Forms.Button()
         Me.ofdImport = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -227,18 +227,18 @@ Partial Class frmMIS
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "IT Account"
         '
-        'ListView1
+        'lvImportResult
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(433, 44)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(547, 207)
-        Me.ListView1.TabIndex = 2
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.lvImportResult.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lvImportResult.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvImportResult.FullRowSelect = True
+        Me.lvImportResult.GridLines = True
+        Me.lvImportResult.Location = New System.Drawing.Point(433, 44)
+        Me.lvImportResult.Name = "lvImportResult"
+        Me.lvImportResult.Size = New System.Drawing.Size(547, 207)
+        Me.lvImportResult.TabIndex = 2
+        Me.lvImportResult.UseCompatibleStateImageBehavior = False
+        Me.lvImportResult.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader1
         '
@@ -260,33 +260,33 @@ Partial Class frmMIS
         Me.Label5.TabIndex = 3
         Me.Label5.Text = "Browse"
         '
-        'TextBox5
+        'txtImportPath
         '
-        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(492, 9)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(328, 22)
-        Me.TextBox5.TabIndex = 4
-        Me.TextBox5.Text = "C:\Windows"
+        Me.txtImportPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtImportPath.Location = New System.Drawing.Point(492, 9)
+        Me.txtImportPath.Name = "txtImportPath"
+        Me.txtImportPath.Size = New System.Drawing.Size(328, 22)
+        Me.txtImportPath.TabIndex = 4
+        Me.txtImportPath.Text = "C:\Windows"
         '
-        'Button8
+        'btnImport
         '
-        Me.Button8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button8.Location = New System.Drawing.Point(905, 6)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(75, 29)
-        Me.Button8.TabIndex = 5
-        Me.Button8.Text = "Import"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.btnImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImport.Location = New System.Drawing.Point(905, 6)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(75, 29)
+        Me.btnImport.TabIndex = 5
+        Me.btnImport.Text = "Import"
+        Me.btnImport.UseVisualStyleBackColor = True
         '
-        'Button9
+        'btnImportBrowse
         '
-        Me.Button9.Location = New System.Drawing.Point(826, 9)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(73, 22)
-        Me.Button9.TabIndex = 6
-        Me.Button9.Text = "Browse"
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.btnImportBrowse.Location = New System.Drawing.Point(826, 9)
+        Me.btnImportBrowse.Name = "btnImportBrowse"
+        Me.btnImportBrowse.Size = New System.Drawing.Size(73, 22)
+        Me.btnImportBrowse.TabIndex = 6
+        Me.btnImportBrowse.Text = "Browse"
+        Me.btnImportBrowse.UseVisualStyleBackColor = True
         '
         'ofdImport
         '
@@ -299,11 +299,11 @@ Partial Class frmMIS
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(992, 264)
-        Me.Controls.Add(Me.Button9)
-        Me.Controls.Add(Me.Button8)
-        Me.Controls.Add(Me.TextBox5)
+        Me.Controls.Add(Me.btnImportBrowse)
+        Me.Controls.Add(Me.btnImport)
+        Me.Controls.Add(Me.txtImportPath)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.lvImportResult)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -335,12 +335,12 @@ Partial Class frmMIS
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents ListView1 As System.Windows.Forms.ListView
+    Friend WithEvents lvImportResult As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
-    Friend WithEvents Button8 As System.Windows.Forms.Button
-    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents txtImportPath As System.Windows.Forms.TextBox
+    Friend WithEvents btnImport As System.Windows.Forms.Button
+    Friend WithEvents btnImportBrowse As System.Windows.Forms.Button
     Friend WithEvents ofdImport As System.Windows.Forms.OpenFileDialog
 End Class
