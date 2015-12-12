@@ -82,6 +82,7 @@ Module migrate
             End With
 
             Dim fname As String, lname As String, pt As String
+            frmMIS.fileLoading(MaxEntries)
             For ent As Integer = 2 To MaxEntries - 1
                 pt = "Line Num: " & ent - 1
                 Dim colIdx As Integer = 0 : colIdx += 1
@@ -114,6 +115,7 @@ Module migrate
                         Else
                             .ModifyClient()
                         End If
+                        .LoadLastEntry()
                     End With
 
 
@@ -161,7 +163,7 @@ Module migrate
                             Dim oldPT As String = oSheet.Cells(ent, 28).value : colIdx += 1
                             If oldPT = "null" Then oldPT = ""
                             If IsNumeric(oldPT) Then .OldTicket = oldPT
-                            .Status = oSheet.Cells(ent, 29).value : colIdx += 1
+                            .Status = "L"
 
                             .SaveTicket()
                         End With
@@ -177,6 +179,7 @@ Module migrate
                     GoTo nextLoop
                 End Try
 nextLoop:
+                frmMIS.AddProgress()
             Next
 
             oWB.Close()
@@ -188,6 +191,8 @@ nextLoop:
             oXL.Quit()
             oXL = Nothing
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
+
+            frmMIS.fileLoading(0)
             Exit Sub
         End Try
         
@@ -199,6 +204,7 @@ nextLoop:
         oXL = Nothing
 
         MsgBox("Data imported " & importCnt, MsgBoxStyle.Information, "Done")
+        frmMIS.fileLoading(0)
     End Sub
 
     Private Sub LogReport(ByVal ln As Integer, ByVal desc As String)
