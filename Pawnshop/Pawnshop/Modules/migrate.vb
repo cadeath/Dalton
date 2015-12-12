@@ -166,6 +166,7 @@ Module migrate
                             .SaveTicket()
                         End With
                         Console.WriteLine("PT# " & pt & " saved.")
+                        importCnt += 1
                     End If
                 Catch ex As Exception
                     Console.WriteLine("Error in PT# " & pt)
@@ -175,7 +176,6 @@ Module migrate
                     LogReport(ent, "Please check column number " & colIdx + 1)
                     GoTo nextLoop
                 End Try
-                importCnt += 1
 nextLoop:
             Next
 

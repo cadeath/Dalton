@@ -363,6 +363,7 @@ Public Class ComputerUser
                 Next
             Next
         Else
+            PriviledgeChecking()
             UpdatePrivilege()
         End If
     End Sub
@@ -391,6 +392,47 @@ Public Class ComputerUser
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds, True)
+    End Sub
+
+    ''' <summary>
+    ''' For Adding Priviledge
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub PriviledgeChecking()
+        Dim privList() As Boolean = {}
+        Dim privChunk As String = _privilege
+        Dim finalChunk As String = ""
+        Dim y As Integer = 0
+
+        For cnt As Integer = 0 To 3
+            Select Case cnt
+                Case 0
+                    privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+                    finalChunk &= privChunk.Split("|")(cnt)
+                    For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
+                        finalChunk &= "0"
+                    Next
+                    finalChunk &= "|"
+                Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                    finalChunk &= privChunk.Split("|")(cnt)
+                    For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
+                        finalChunk &= "0"
+                    Next
+                    finalChunk &= "|"
+                Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
+                    finalChunk &= privChunk.Split("|")(cnt)
+                    For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
+                        finalChunk &= "0"
+                    Next
+                    finalChunk &= "|"
+                Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
+                    finalChunk &= privChunk.Split("|")(cnt)
+                    For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
+                        finalChunk &= "0"
+                    Next
+            End Select
+        Next
+        _privilege = finalChunk
     End Sub
 
     Public Sub LoadUserByRow(ByVal dr As DataRow)
