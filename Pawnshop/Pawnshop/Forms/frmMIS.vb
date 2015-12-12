@@ -4,6 +4,11 @@
 
     End Sub
 
+    Friend Sub AddReport(ByVal ln As Integer, ByVal desc As String)
+        Dim lv As ListViewItem = lvImportResult.Items.Add(ln)
+        lv.SubItems.Add(desc)
+    End Sub
+
     Private Sub ofdImport_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofdImport.FileOk
         txtImportPath.Text = ofdImport.FileName
     End Sub
@@ -15,4 +20,5 @@
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
         ImportTemplate(txtImportPath.Text)
     End Sub
+
 End Class

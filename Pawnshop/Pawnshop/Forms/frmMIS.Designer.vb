@@ -262,12 +262,14 @@ Partial Class frmMIS
         '
         'txtImportPath
         '
+        Me.txtImportPath.BackColor = System.Drawing.SystemColors.Window
         Me.txtImportPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtImportPath.Location = New System.Drawing.Point(492, 9)
         Me.txtImportPath.Name = "txtImportPath"
+        Me.txtImportPath.ReadOnly = True
         Me.txtImportPath.Size = New System.Drawing.Size(328, 22)
         Me.txtImportPath.TabIndex = 4
-        Me.txtImportPath.Text = "C:\Windows"
+        Me.txtImportPath.Text = "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Import Template.xlsx"
         '
         'btnImport
         '

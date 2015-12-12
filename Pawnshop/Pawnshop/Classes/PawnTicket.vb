@@ -29,7 +29,7 @@
     Private _orDate As Date
     Private _lessPrincipal As Double
     Private _daysOverDue As Double
-    Private _delayInt As Double
+    'Private _delayInt As Double
     Private _penalty As Double
     Private _serviceCharge As Double
     Private _renewDue As Double
@@ -255,14 +255,14 @@
         End Get
     End Property
 
-    Public Property DelayInterest As Double
-        Set(ByVal value As Double)
-            _delayInt = value
-        End Set
-        Get
-            Return _delayInt
-        End Get
-    End Property
+    'Public Property DelayInterest As Double
+    '    Set(ByVal value As Double)
+    '        _delayInt = value
+    '    End Set
+    '    Get
+    '        Return _delayInt
+    '    End Get
+    'End Property
 
     Public Property Penalty As Double
         Set(ByVal value As Double)
@@ -353,7 +353,7 @@
                 .Item("ORDate") = _orDate
                 .Item("LessPrincipal") = _lessPrincipal
                 .Item("DaysOverDue") = _daysOverDue
-                .Item("DelayInt") = _delayInt
+                '.Item("DelayInt") = _delayInt
                 .Item("Penalty") = _penalty
                 .Item("ServiceCharge") = _serviceCharge
                 .Item("RenewDue") = _renewDue
@@ -388,7 +388,7 @@
                 .Item("ORDate") = _orDate
                 .Item("LessPrincipal") = _lessPrincipal
                 .Item("DaysOverDue") = _daysOverDue
-                .Item("DelayInt") = _delayInt
+                '.Item("DelayInt") = _delayInt
                 .Item("Penalty") = _penalty
                 .Item("ServiceCharge") = _serviceCharge
                 .Item("RenewDue") = _renewDue
@@ -433,7 +433,7 @@
             _orDate = .Item("ORDate")
             _lessPrincipal = .Item("LessPrincipal")
             _daysOverDue = .Item("DaysOverDue")
-            _delayInt = .Item("DelayInt")
+            '_delayInt = .Item("DelayInt")
             _penalty = .Item("Penalty")
             _serviceCharge = .Item("ServiceCharge")
             _renewDue = .Item("RenewDue")
@@ -471,7 +471,7 @@
             _orDate = .Item("ORDate")
             _lessPrincipal = .Item("LessPrincipal")
             _daysOverDue = .Item("DaysOverDue")
-            _delayInt = .Item("DelayInt")
+            '_delayInt = .Item("DelayInt")
             _penalty = .Item("Penalty")
             _serviceCharge = .Item("ServiceCharge")
             _renewDue = .Item("RenewDue")
