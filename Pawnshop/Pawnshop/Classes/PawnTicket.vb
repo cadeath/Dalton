@@ -522,7 +522,6 @@
             With ds.Tables(fillData).Rows(0)
                 .Item("OrNum") = 0
                 .Item("OrDate") = New Date
-                .Item("Principal") = 0
                 .Item("DAYSOVERDUE") = 0
                 .Item("DelayINT") = 0
                 .Item("Penalty") = 0
