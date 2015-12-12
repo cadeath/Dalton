@@ -5,14 +5,16 @@
 ' v1.1
 '  - SaveEntry added empty dataset binding
 
-Module database
+Friend Module database
     Public con As OdbcConnection
     Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
+    'Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
+    Private DBversion As String = "a1.0.4"
     Private language() As String = _
         {"Connection error failed."}
 
@@ -83,37 +85,19 @@ Module database
 
         dbClose()
         Return True
+    End Function
 
-        'Try
-        '    Dim da As OdbcDataAdapter
-        '    Dim ds As New DataSet, mySql As String, fillData As String
-        '    ds = dsEntry
+    Friend Function DBCompatibilityCheck() As Boolean
+        Console.WriteLine("Checking database compatibility...")
+        Dim strDB As String = GetOption("DBVersion")
 
-        '    'Save all tables in the dataset
-        '    For Each dsTable As DataTable In dsEntry.Tables
-        '        fillData = dsTable.TableName
-        '        mySql = "SELECT * FROM " & fillData
-        '        If Not isNew Then
-        '            Dim colName As String = dsTable.Columns(0).ColumnName
-        '            Dim idx As Integer = dsTable.Rows(0).Item(0)
-        '            mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
-
-        '            Console.WriteLine("ModifySQL: " & mySql)
-        '        End If
-
-        '        da = New OdbcDataAdapter(mySql, con)
-        '        Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
-        '        da.Update(ds, fillData)
-        '    Next
-
-        '    dbClose()
-
-        '    Return True
-        'Catch ex As Exception
-        '    MsgBox("[Module 001 - SaveEntry]" & vbCr & ex.Message.ToString, MsgBoxStyle.Critical, "Saving Failed")
-        '    dbClose()
-        '    Return False
-        'End Try
+        If DBversion = strDB Then
+            Console.WriteLine("Success!")
+            Return True
+        Else
+            Console.WriteLine("Database Version didn't match... " & strDB)
+            Return False
+        End If
     End Function
 
     ' Module 002
@@ -146,10 +130,22 @@ Module database
 
     Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)
         Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
-        Dim ds As DataSet = LoadSQL(mySql, "tblMaintenance")
+        Dim fillData As String = "tblMaintenance"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
 
-        ds.Tables(0).Rows(0).Item("opt_values") = value
-        SaveEntry(ds, False)
+        If ds.Tables(fillData).Rows.Count = 0 Then
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(fillData).NewRow
+            With dsNewRow
+                .Item("opt_keys") = key
+                .Item("opt_values") = value
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+            SaveEntry(ds)
+        Else
+            ds.Tables(0).Rows(0).Item("opt_values") = value
+            SaveEntry(ds, False)
+        End If
         Console.WriteLine("Option updated. " & key)
     End Sub
 End Module

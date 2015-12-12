@@ -180,6 +180,7 @@ Partial Class frmBorrowing
         Me.Controls.Add(Me.cboBranch)
         Me.Controls.Add(Me.Label3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmBorrowing"
         Me.Text = "Money Borrowings"

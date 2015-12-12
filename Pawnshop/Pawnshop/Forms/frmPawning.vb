@@ -1,4 +1,6 @@
 ﻿Public Class frmPawning
+    'Version 1.1
+    ' - Don't display item not equal or less than the current date
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -23,17 +25,29 @@
     Private Sub frmPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadActive()
-        'frmOpenStore.Show()
-        'frmOpenStore.Focus()
     End Sub
 
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
-        frmNewloan.NewLoan()
-        frmNewloan.Show()
+        frmPawnItem.NewLoan()
+        frmPawnItem.Show()
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE Status = 'L' OR Status = 'R' OR Status = 'S' ORDER BY LoanDate ASC, PAWNID ASC"
+        Dim st As String = "1"
+
+        st &= IIf(chkRenew.Checked, "1", "0")
+        st &= IIf(chkRedeem.Checked, "1", "0")
+
+        Dim mySql As String = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        If st = "100" Then
+            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S') ORDER BY LoanDate ASC, PAWNID ASC"
+        Else
+            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S' "
+            If st.Substring(1, 1) = "1" Then mySql &= "OR Status = '0' "
+            If st.Substring(2, 1) = "1" Then mySql &= "OR Status = 'X' "
+
+            mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+        End If
         Dim ds As DataSet = LoadSQL(mySql)
 
         lvPawners.Items.Clear()
@@ -63,6 +77,7 @@
         Select Case tk.Status
             Case "0" : lv.BackColor = Color.LightGray
             Case "X" : lv.BackColor = Color.Red
+            Case "S" : lv.BackColor = Color.Yellow
             Case "W" : lv.BackColor = Color.Red
             Case "V" : lv.BackColor = Color.Gray
         End Select
@@ -127,8 +142,13 @@
             Next
         End If
 
-        lvPawners.Focus()
         MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
+        'Auto Select
+        If lvPawners.Items.Count > 0 Then
+            lvPawners.Focus()
+            lvPawners.Items(0).Selected = True
+            lvPawners.Items(0).EnsureVisible()
+        End If
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
@@ -143,8 +163,8 @@
         Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
         Dim tmpTicket As New PawnTicket
         tmpTicket.LoadTicket(idx)
-        frmNewloan.LoadPawnTicket(tmpTicket, "D")
-        frmNewloan.Show()
+        frmPawnItem.Show()
+        frmPawnItem.LoadPawnTicket(tmpTicket, "D")
     End Sub
 
     Private Sub lvPawners_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPawners.DoubleClick
@@ -160,14 +180,23 @@
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
-            frmNewloan.SwitchTransaction("RENEW")
+            frmPawnItem.btnRenew.PerformClick()
         End If
     End Sub
 
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
-            frmNewloan.SwitchTransaction("REDEEM")
+            frmPawnItem.btnRedeem.PerformClick()
         End If
     End Sub
+
+    Private Sub chkRenew_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRenew.CheckedChanged
+        LoadActive()
+    End Sub
+
+    Private Sub chkRedeem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRedeem.CheckedChanged
+        LoadActive()
+    End Sub
+
 End Class

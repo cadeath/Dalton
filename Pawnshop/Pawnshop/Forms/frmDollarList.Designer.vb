@@ -74,6 +74,7 @@ Partial Class frmDollarList
         'ColumnHeader6
         '
         Me.ColumnHeader6.Text = "Date"
+        Me.ColumnHeader6.Width = 113
         '
         'ColumnHeader2
         '

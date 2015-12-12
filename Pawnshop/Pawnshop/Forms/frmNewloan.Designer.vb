@@ -22,6 +22,7 @@ Partial Class frmNewloan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNewloan))
         Me.grpPawner = New System.Windows.Forms.GroupBox()
         Me.lblAge = New System.Windows.Forms.Label()
         Me.txtPhone = New System.Windows.Forms.TextBox()
@@ -85,7 +86,7 @@ Partial Class frmNewloan
         Me.txtSrvChrg = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.txtDelayInt = New System.Windows.Forms.TextBox()
-        Me.Label25 = New System.Windows.Forms.Label()
+        Me.lblInt = New System.Windows.Forms.Label()
         Me.txtOverDue = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
@@ -622,7 +623,7 @@ Partial Class frmNewloan
         Me.grpReceipt.Controls.Add(Me.txtSrvChrg)
         Me.grpReceipt.Controls.Add(Me.Label24)
         Me.grpReceipt.Controls.Add(Me.txtDelayInt)
-        Me.grpReceipt.Controls.Add(Me.Label25)
+        Me.grpReceipt.Controls.Add(Me.lblInt)
         Me.grpReceipt.Controls.Add(Me.txtOverDue)
         Me.grpReceipt.Controls.Add(Me.Label26)
         Me.grpReceipt.Controls.Add(Me.Label28)
@@ -775,15 +776,15 @@ Partial Class frmNewloan
         Me.txtDelayInt.Size = New System.Drawing.Size(113, 22)
         Me.txtDelayInt.TabIndex = 25
         '
-        'Label25
+        'lblInt
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(6, 165)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(126, 16)
-        Me.Label25.TabIndex = 36
-        Me.Label25.Text = "Delayed Interest:"
+        Me.lblInt.AutoSize = True
+        Me.lblInt.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInt.Location = New System.Drawing.Point(6, 165)
+        Me.lblInt.Name = "lblInt"
+        Me.lblInt.Size = New System.Drawing.Size(126, 16)
+        Me.lblInt.TabIndex = 36
+        Me.lblInt.Text = "Delayed Interest:"
         '
         'txtOverDue
         '
@@ -894,6 +895,7 @@ Partial Class frmNewloan
         Me.Controls.Add(Me.grpItem)
         Me.Controls.Add(Me.grpPawner)
         Me.Controls.Add(Me.lblVOID)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "frmNewloan"
@@ -969,7 +971,7 @@ Partial Class frmNewloan
     Friend WithEvents txtSrvChrg As System.Windows.Forms.TextBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents txtDelayInt As System.Windows.Forms.TextBox
-    Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents lblInt As System.Windows.Forms.Label
     Friend WithEvents txtOverDue As System.Windows.Forms.TextBox
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents Label28 As System.Windows.Forms.Label

@@ -22,7 +22,9 @@ Partial Class frmClientInformation
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmClientInformation))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cboProv = New System.Windows.Forms.ComboBox()
         Me.cboCity = New System.Windows.Forms.ComboBox()
         Me.lblAge = New System.Windows.Forms.Label()
         Me.dtpBday = New System.Windows.Forms.DateTimePicker()
@@ -73,7 +75,6 @@ Partial Class frmClientInformation
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
-        Me.cboProv = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpID.SuspendLayout()
@@ -112,6 +113,16 @@ Partial Class frmClientInformation
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Basic Information"
+        '
+        'cboProv
+        '
+        Me.cboProv.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboProv.FormattingEnabled = True
+        Me.cboProv.Location = New System.Drawing.Point(364, 126)
+        Me.cboProv.Name = "cboProv"
+        Me.cboProv.Size = New System.Drawing.Size(165, 24)
+        Me.cboProv.TabIndex = 7
+        Me.cboProv.Text = "South Cotabato"
         '
         'cboCity
         '
@@ -431,18 +442,18 @@ Partial Class frmClientInformation
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(877, 361)
+        Me.btnCancel.Location = New System.Drawing.Point(868, 344)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(84, 40)
         Me.btnCancel.TabIndex = 24
         Me.btnCancel.Text = "&Close"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(796, 361)
+        Me.btnSave.Location = New System.Drawing.Point(778, 344)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(84, 40)
         Me.btnSave.TabIndex = 22
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -582,23 +593,13 @@ Partial Class frmClientInformation
         '
         'btnSelect
         '
-        Me.btnSelect.Location = New System.Drawing.Point(715, 361)
+        Me.btnSelect.Location = New System.Drawing.Point(688, 344)
         Me.btnSelect.Name = "btnSelect"
-        Me.btnSelect.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelect.Size = New System.Drawing.Size(84, 40)
         Me.btnSelect.TabIndex = 21
         Me.btnSelect.Text = "Sele&ct"
         Me.btnSelect.UseVisualStyleBackColor = True
         Me.btnSelect.Visible = False
-        '
-        'cboProv
-        '
-        Me.cboProv.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboProv.FormattingEnabled = True
-        Me.cboProv.Location = New System.Drawing.Point(364, 126)
-        Me.cboProv.Name = "cboProv"
-        Me.cboProv.Size = New System.Drawing.Size(165, 24)
-        Me.cboProv.TabIndex = 7
-        Me.cboProv.Text = "South Cotabato"
         '
         'frmClientInformation
         '
@@ -613,6 +614,7 @@ Partial Class frmClientInformation
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmClientInformation"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

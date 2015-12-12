@@ -74,10 +74,12 @@
         ' Success!
         POSuser = loginUser
         POSuser.UpdateLogin()
+        UserID = POSuser.UserID
         MsgBox("Welcome " & POSuser.FullName)
 
         frmMain.Show()
         frmMain.NotYetLogin(False)
+        frmMain.CheckStoreStatus()
         Me.Close()
     End Sub
 End Class
