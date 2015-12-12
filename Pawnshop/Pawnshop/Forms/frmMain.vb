@@ -282,7 +282,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsoleToolStripMenuItem.Click
-        If Not POSuser.isSuperUser Then
+        If Not POSuser.isSuperUser Or POSuser.canMigrate Then
             MsgBoxAuthoriation("You don't have access to the Console")
             Exit Sub
         End If

@@ -99,6 +99,7 @@ Public Class ComputerUser
     Private _pawn As Boolean
     Public ReadOnly Property canPawn() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _pawn
         End Get
     End Property
@@ -106,6 +107,7 @@ Public Class ComputerUser
     Private _clientList As Boolean
     Public ReadOnly Property canClientManage() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _clientList
         End Get
     End Property
@@ -113,6 +115,7 @@ Public Class ComputerUser
     Private _moneyTransfer As Boolean
     Public ReadOnly Property canMoneyTransfer() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _moneyTransfer
         End Get
     End Property
@@ -120,6 +123,7 @@ Public Class ComputerUser
     Private _insurance As Boolean
     Public ReadOnly Property canInsurance() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _insurance
         End Get
     End Property
@@ -127,6 +131,7 @@ Public Class ComputerUser
     Private _layAway As Boolean
     Public ReadOnly Property canLayAway() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _layAway
         End Get
     End Property
@@ -134,6 +139,7 @@ Public Class ComputerUser
     Private _dollarBuying As Boolean
     Public ReadOnly Property canDollarBuying() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _dollarBuying
         End Get
     End Property
@@ -141,6 +147,7 @@ Public Class ComputerUser
     Private _pos As Boolean
     Public ReadOnly Property canPOS() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _pos
         End Get
     End Property
@@ -148,6 +155,7 @@ Public Class ComputerUser
     Private _cio As Boolean
     Public ReadOnly Property canCashInOut() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _cio
         End Get
     End Property
@@ -156,6 +164,7 @@ Public Class ComputerUser
     Private _expiryList As Boolean
     Public ReadOnly Property canExpiryListGenerate() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _expiryList
         End Get
     End Property
@@ -253,6 +262,21 @@ Public Class ComputerUser
         End Get
     End Property
 
+    Private _pullOut As Boolean
+    Public ReadOnly Property canPullOut() As Boolean
+        Get
+            Return _pullOut
+        End Get
+    End Property
+
+    Private _migrate As Boolean
+    Public ReadOnly Property canMigrate() As Boolean
+        Get
+            Return _migrate
+        End Get
+    End Property
+
+    'Super User
     Private _superUser As Boolean
     Public ReadOnly Property isSuperUser() As Boolean
         Get
@@ -265,6 +289,7 @@ Public Class ComputerUser
         Dim y As Integer
         'Encoder
         y = 0
+        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
         _pawn = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _clientList = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _moneyTransfer = IIf(parts(y).Substring(2, 1) = "1", True, False)
@@ -273,7 +298,6 @@ Public Class ComputerUser
         _dollarBuying = IIf(parts(y).Substring(5, 1) = "1", True, False)
         _pos = IIf(parts(y).Substring(6, 1) = "1", True, False)
         _cio = IIf(parts(y).Substring(7, 1) = "1", True, False)
-        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
         For Each var As Boolean In privList
             If var Then _level = "Encoder"
         Next
@@ -310,7 +334,9 @@ Public Class ComputerUser
         _cashInBank = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _cashOutBank = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _void = IIf(parts(y).Substring(2, 1) = "1", True, False)
-        privList = {_cashInBank, _cashOutBank, _void}
+        _pullOut = IIf(parts(y).Substring(3, 1) = "1", True, False)
+        _migrate = IIf(parts(y).Substring(4, 1) = "1", True, False)
+        privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
 
         Console.WriteLine("Level is " & _level)
     End Sub
@@ -329,7 +355,7 @@ Public Class ComputerUser
                     Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
                     Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
                     Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
-                    Case 3 : privList = {_cashInBank, _cashOutBank, _void}
+                    Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
                 End Select
 
                 For Each e In privList

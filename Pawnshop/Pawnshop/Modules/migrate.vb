@@ -55,6 +55,17 @@ Module migrate
         Return True
     End Function
 
+    Private Function ifStatus(ByVal str As String) As Boolean
+        On Error Resume Next
+
+        Select Case str.ToUpper
+            Case "A" : Return True
+            Case "T" : Return True
+        End Select
+
+        Return False
+    End Function
+
     Friend Sub ImportTemplate(ByVal url As String)
         Dim fillData As String = "tblPawn", importCnt As Int64 = 0
         Dim oXL As New Excel.Application
@@ -150,6 +161,7 @@ Module migrate
                             Dim oldPT As String = oSheet.Cells(ent, 28).value : colIdx += 1
                             If oldPT = "null" Then oldPT = ""
                             If IsNumeric(oldPT) Then .OldTicket = oldPT
+                            .Status = oSheet.Cells(ent, 29).value : colIdx += 1
 
                             .SaveTicket()
                         End With
