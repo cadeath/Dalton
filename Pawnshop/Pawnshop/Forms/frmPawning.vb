@@ -60,6 +60,8 @@
         End If
         Dim ds As DataSet = LoadSQL(mySql)
 
+        If ds.Tables(0).Rows.Count = lvPawners.Items.Count Then Exit Sub
+
         lvPawners.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpPawn As New PawnTicket

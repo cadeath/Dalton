@@ -336,26 +336,46 @@
         AdvanceInterest = ItemPrincipal * GetInt(30)
         DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
         If DelayInt > 0 Then DelayInt -= AdvanceInterest
-        ServiceCharge = GetServiceCharge(ItemPrincipal)
+        If transactionType = "X" Then
+            ServiceCharge = 0
+        Else
+            ServiceCharge = GetServiceCharge(ItemPrincipal)
+        End If
+
         Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
 
-        Dim OldPTCharges As Double = 0
+        'Migration Addition
+        Dim OldPTCharges As Double = 0, OldSrvCharges As Double = 0
         If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
-            OldPTCharges = AdvanceInterest
+            If transactionType = "R" Then
+                OldPTCharges = AdvanceInterest
+                OldSrvCharges = ServiceCharge
+            End If
         End If
 
         txtAdv.Text = AdvanceInterest
-        txtNet.Text = ItemPrincipal - AdvanceInterest - ServiceCharge
+        If transactionType = "X" Then
+            txtNet.Text = 0
+        Else
+            txtNet.Text = ItemPrincipal - AdvanceInterest - ServiceCharge
+        End If
+
 
         txtOver.Text = daysDue
         DelayInt += OldPTCharges 'For OLD PT without Advance INT
         txtInt.Text = DelayInt
         txtPenalty.Text = Penalty
+        ServiceCharge += OldSrvCharges
         txtService.Text = ServiceCharge
         txtEvat.Text = 0
 
-        txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
-        txtRedeem.Text = CDbl(txtPrincipal.Text) + DelayInt + Penalty
+        If transactionType = "R" Then
+            txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
+            txtRedeem.Text = 0
+        ElseIf transactionType = "X" Then
+            txtRenew.Text = 0
+            txtRedeem.Text = CDbl(txtPrincipal.Text) + DelayInt + Penalty + ServiceCharge
+        End If
 
         Exit Sub
     End Sub
@@ -756,7 +776,7 @@
             Select Case days
                 Case min To max
                     TypeInt = dr.Item(tbl)
-                    Console.WriteLine("Interest is now " & TypeInt)
+                    Console.WriteLine(tbl & " is now " & TypeInt & " for " & cboType.Text)
                     Return TypeInt
             End Select
         Next
@@ -810,6 +830,14 @@
             .MaturityDate = txtMatu.Text
             .ExpiryDate = txtExpiry.Text
             .AuctionDate = txtAuction.Text
+
+            .DaysOverDue = 0
+            .Interest = 0
+            .Penalty = 0
+            .ServiceCharge = 0
+            .EVAT = 0
+            .RenewDue = 0
+            .RedeemDue = 0
 
             .Principal = txtPrincipal.Text
             .AdvanceInterest = AdvanceInterest
