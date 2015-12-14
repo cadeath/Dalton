@@ -26,7 +26,6 @@ Partial Class qryLoan
         Me.monCal = New System.Windows.Forms.MonthCalendar()
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.chkMonthly = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'chbType
@@ -67,22 +66,11 @@ Partial Class qryLoan
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'chkMonthly
-        '
-        Me.chkMonthly.AutoSize = True
-        Me.chkMonthly.Location = New System.Drawing.Point(12, 90)
-        Me.chkMonthly.Name = "chkMonthly"
-        Me.chkMonthly.Size = New System.Drawing.Size(69, 17)
-        Me.chkMonthly.TabIndex = 4
-        Me.chkMonthly.Text = "Monthly?"
-        Me.chkMonthly.UseVisualStyleBackColor = True
-        '
         'qryLoan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(498, 185)
-        Me.Controls.Add(Me.chkMonthly)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
@@ -91,12 +79,10 @@ Partial Class qryLoan
         Me.Name = "qryLoan"
         Me.Text = "Loan Register"
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents chbType As System.Windows.Forms.CheckedListBox
     Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
     Friend WithEvents btnGenerate As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents chkMonthly As System.Windows.Forms.CheckBox
 End Class
