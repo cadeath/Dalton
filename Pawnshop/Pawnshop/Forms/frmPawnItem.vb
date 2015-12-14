@@ -499,7 +499,7 @@
         txtService.Text = pt.ServiceCharge
         txtEvat.Text = pt.EVAT
 
-        txtRenew.Text = pt.RedeemDue
+        txtRenew.Text = pt.RenewDue
         txtRedeem.Text = pt.RedeemDue
 
         cboAppraiser.Text = GetAppraiserByID(pt.AppraiserID)
@@ -736,14 +736,12 @@
     Private Sub LoanAdvanceInterest()
         TypeInt = GetInt(30)
 
-        If txtPrincipal.Text <> "" Then
-            txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
-            If transactionType = "L" Then
-                txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
-                txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
-                txtService.Text = GetServiceCharge(txtPrincipal.Text)
-            End If
+        If transactionType = "L" Then
+            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
+            txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
+            txtService.Text = GetServiceCharge(txtPrincipal.Text)
         End If
+        txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt) - CDbl(txtService.Text)
 
     End Sub
 
