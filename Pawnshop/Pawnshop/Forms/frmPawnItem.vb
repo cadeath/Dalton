@@ -336,27 +336,23 @@
         AdvanceInterest = ItemPrincipal * GetInt(30)
         DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
         If DelayInt > 0 Then DelayInt -= AdvanceInterest
-        If transactionType = "X" Then
-            ServiceCharge = 0
-        Else
-            ServiceCharge = GetServiceCharge(ItemPrincipal)
-        End If
-
+        ServiceCharge = GetServiceCharge(ItemPrincipal)
         Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
 
         'Migration Addition
         Dim OldPTCharges As Double = 0, OldSrvCharges As Double = 0
         If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
+            OldPTCharges = AdvanceInterest
             If transactionType = "R" Then
-                OldPTCharges = AdvanceInterest
                 OldSrvCharges = ServiceCharge
             End If
         End If
 
-        txtAdv.Text = AdvanceInterest
         If transactionType = "X" Then
+            txtAdv.Text = 0
             txtNet.Text = 0
         Else
+            txtAdv.Text = AdvanceInterest
             txtNet.Text = ItemPrincipal - AdvanceInterest - ServiceCharge
         End If
 
