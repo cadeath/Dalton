@@ -162,7 +162,7 @@
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not CheckAuth() Then Exit Sub
 
-        If Not isReady() Then
+        If Not isReady() And transactionType = "L" Then
             MsgBox("I think you are missing something", MsgBoxStyle.Critical)
             Exit Sub
         End If
@@ -339,10 +339,16 @@
         ServiceCharge = GetServiceCharge(ItemPrincipal)
         Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
 
+        Dim OldPTCharges As Double = 0
+        If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
+            OldPTCharges = AdvanceInterest
+        End If
+
         txtAdv.Text = AdvanceInterest
         txtNet.Text = ItemPrincipal - AdvanceInterest - ServiceCharge
 
         txtOver.Text = daysDue
+        DelayInt += OldPTCharges 'For OLD PT without Advance INT
         txtInt.Text = DelayInt
         txtPenalty.Text = Penalty
         txtService.Text = ServiceCharge
@@ -385,6 +391,8 @@
     End Sub
 
     Private Function CheckAuth() As Boolean
+        If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
+
         If Not mod_system.isAuthorized And cboAppraiser.Text <> "" Then
             diagAuthorization.Show()
             diagAuthorization.TopMost = True
@@ -425,11 +433,9 @@
         If transactionType = "X" Then
             txtRedeem.BackColor = Drawing.SystemColors.Window
             txtRedeem.Focus()
-            'txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + IIf(daysDue > 3, CDbl(txtInt.Text) + CDbl(txtService.Text), 0)
         Else
             If transactionType = "R" Then
                 txtRenew.Focus()
-                'txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
                 txtRenew.BackColor = Drawing.SystemColors.Window
             End If
         End If
