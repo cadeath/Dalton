@@ -65,6 +65,7 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
+        Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -190,6 +191,7 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoanRegisterToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -388,6 +390,12 @@ Partial Class frmMain
         '
         Me.tmrCurrent.Enabled = True
         '
+        'LoanRegisterToolStripMenuItem
+        '
+        Me.LoanRegisterToolStripMenuItem.Name = "LoanRegisterToolStripMenuItem"
+        Me.LoanRegisterToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LoanRegisterToolStripMenuItem.Text = "&Loan Register"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -458,5 +466,6 @@ Partial Class frmMain
     Friend WithEvents ConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ClosingStoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ItemPulloutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LoanRegisterToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

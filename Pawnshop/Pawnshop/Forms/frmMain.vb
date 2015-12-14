@@ -303,4 +303,8 @@ Public Class frmMain
     Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
         frmPullOut.Show()
     End Sub
+
+    Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
+        qryLoan.Show()
+    End Sub
 End Class

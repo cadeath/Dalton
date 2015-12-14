@@ -382,6 +382,11 @@
     <Compile Include="POS\frmPOS.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\dsReports.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReports.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\frmReport.Designer.vb">
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
@@ -514,8 +519,12 @@
     <EmbeddedResource Include="Reports\qryLoan.resx">
       <DependentUpon>qryLoan.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_LoanRegister.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="dsReports.datasource" />
     <None Include="Import Template.xlsx" />
     <None Include="My Project\app.manifest">
       <SubType>Designer</SubType>
@@ -528,6 +537,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reports\dsReports.xsc">
+      <DependentUpon>dsReports.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsReports.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReports.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reports\dsReports.xss">
+      <DependentUpon>dsReports.xsd</DependentUpon>
     </None>
     <None Include="W3W1LH4CKU.FDB">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
