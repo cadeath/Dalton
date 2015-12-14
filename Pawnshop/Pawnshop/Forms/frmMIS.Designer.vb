@@ -47,6 +47,7 @@ Partial Class frmMIS
         Me.btnImport = New System.Windows.Forms.Button()
         Me.btnImportBrowse = New System.Windows.Forms.Button()
         Me.ofdImport = New System.Windows.Forms.OpenFileDialog()
+        Me.pbData = New System.Windows.Forms.ProgressBar()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -262,12 +263,14 @@ Partial Class frmMIS
         '
         'txtImportPath
         '
+        Me.txtImportPath.BackColor = System.Drawing.SystemColors.Window
         Me.txtImportPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtImportPath.Location = New System.Drawing.Point(492, 9)
         Me.txtImportPath.Name = "txtImportPath"
+        Me.txtImportPath.ReadOnly = True
         Me.txtImportPath.Size = New System.Drawing.Size(328, 22)
         Me.txtImportPath.TabIndex = 4
-        Me.txtImportPath.Text = "C:\Windows"
+        Me.txtImportPath.Text = "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Import Template.xlsx"
         '
         'btnImport
         '
@@ -294,11 +297,20 @@ Partial Class frmMIS
         Me.ofdImport.FileName = "Excel File"
         Me.ofdImport.Filter = "Excel 2003|*.xls|Excel 2007|*.xlsx"
         '
+        'pbData
+        '
+        Me.pbData.Location = New System.Drawing.Point(4, 121)
+        Me.pbData.Name = "pbData"
+        Me.pbData.Size = New System.Drawing.Size(985, 23)
+        Me.pbData.TabIndex = 8
+        Me.pbData.Visible = False
+        '
         'frmMIS
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(992, 264)
+        Me.Controls.Add(Me.pbData)
         Me.Controls.Add(Me.btnImportBrowse)
         Me.Controls.Add(Me.btnImport)
         Me.Controls.Add(Me.txtImportPath)
@@ -343,4 +355,5 @@ Partial Class frmMIS
     Friend WithEvents btnImport As System.Windows.Forms.Button
     Friend WithEvents btnImportBrowse As System.Windows.Forms.Button
     Friend WithEvents ofdImport As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents pbData As System.Windows.Forms.ProgressBar
 End Class

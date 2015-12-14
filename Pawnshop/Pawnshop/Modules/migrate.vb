@@ -3,7 +3,7 @@
 Module migrate
     Private mySql As String = String.Empty
 
-    Friend Function ifSex(ByVal str As String) As Boolean
+    Private Function ifSex(ByVal str As String) As Boolean
         If Not IsNumeric(str) Then str = str.ToLower
         Select Case str
             Case 0 : Return True
@@ -15,7 +15,7 @@ Module migrate
         Return False
     End Function
 
-    Friend Function dbSex(ByVal str As String) As Integer
+    Private Function dbSex(ByVal str As String) As Integer
         If IsNumeric(str) Then Return str
         Select Case str
             Case "f" : Return 0
@@ -25,13 +25,7 @@ Module migrate
         Return 0
     End Function
 
-    Friend Function dbZip(ByVal str As String) As Integer
-        If Not IsNumeric(str) Then Return Nothing
-        If str = "" Then Return Nothing
-        Return str
-    End Function
-
-    Friend Function ifPhone(ByVal str As String) As Boolean
+    Private Function ifPhone(ByVal str As String) As Boolean
         If Not IsNumeric(str) Then Return False
 
         '09257977559
@@ -44,15 +38,36 @@ Module migrate
         Return False
     End Function
 
-    Friend Function ifItemType(ByVal str As String) As Boolean
+    Private Function ifItemType(ByVal str As String) As Boolean
         mySql = "SELECT * FROM tblClass WHERE Type = '" & str & "'"
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Return False
         Return True
     End Function
 
+    Private _catID As Integer
+    Private Function isClass(ByVal desc As String) As Boolean
+        mySql = "SELECT * FROM tblClass WHERE Category = '" & desc & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 0 Then Return False
+
+        _catID = ds.Tables(0).Rows(0).Item("ClassID")
+        Return True
+    End Function
+
+    Private Function ifStatus(ByVal str As String) As Boolean
+        On Error Resume Next
+
+        Select Case str.ToUpper
+            Case "A" : Return True
+            Case "T" : Return True
+        End Select
+
+        Return False
+    End Function
+
     Friend Sub ImportTemplate(ByVal url As String)
-        Dim fillData As String = "tblPawn"
+        Dim fillData As String = "tblPawn", importCnt As Int64 = 0
         Dim oXL As New Excel.Application
         If oXL Is Nothing Then MessageBox.Show("Excel is not properly installed!!") : Exit Sub
 
@@ -66,31 +81,119 @@ Module migrate
                 MaxEntries = oSheet.Cells(.Rows.Count, 1).End(Excel.XlDirection.xlUp).row
             End With
 
-            Dim fname As String, lname As String
-            For ent As Integer = 1 To MaxEntries - 1
-                fname = oSheet.Cells(ent, 1).value
-                lname = oSheet.Cells(ent, 2).value
-                'Client
-                Dim ds As DataSet = SearchClient(fname, lname)
-                If ds.Tables("tblClient").Rows.Count = 0 Then
-                    Dim migratePawner As New Client
+            Dim fname As String, lname As String, pt As String
+            frmMIS.fileLoading(MaxEntries)
+            For ent As Integer = 2 To MaxEntries - 1
+                pt = "Line Num: " & ent - 1
+                Dim colIdx As Integer = 0 : colIdx += 1
+                Try
+                    'Create Client
+                    fname = oSheet.Cells(ent, 1).value : colIdx += 1
+                    lname = oSheet.Cells(ent, 2).value : colIdx += 1
+                    Dim ds As DataSet = SearchClient(fname, lname)
+                    Dim migratePawner As New Client, isNew As Boolean = True
+                    If ds.Tables(0).Rows.Count > 0 Then
+                        migratePawner.LoadClientByRow(ds.Tables(0).Rows(0))
+                        isNew = False
+                    End If
                     With migratePawner
                         .FirstName = fname
                         .LastName = lname
-                        .Suffix = oSheet.Cells(ent, 3).value
-                        .AddressSt = oSheet.Cells(ent, 4).value
-                        .AddressBrgy = oSheet.Cells(ent, 5).value
-                        .AddressCity = oSheet.Cells(ent, 6).value
-                        .AddressProvince = oSheet.Cells(ent, 7).value
-                        .ZipCode = oSheet.Cells(ent, 8).value
+                        .Suffix = oSheet.Cells(ent, 3).value : colIdx += 1
+                        .AddressSt = IIf(oSheet.Cells(ent, 4).value = "", "", oSheet.Cells(ent, 4).value) : colIdx += 1
+                        .AddressBrgy = IIf(oSheet.Cells(ent, 5).value = "", "", oSheet.Cells(ent, 5).value) : colIdx += 1
+                        .AddressCity = IIf(oSheet.Cells(ent, 6).value = "", "", oSheet.Cells(ent, 6).value) : colIdx += 1
+                        .AddressProvince = IIf(oSheet.Cells(ent, 7).value = "", "", oSheet.Cells(ent, 7).value) : colIdx += 1
+                        .ZipCode = IIf(oSheet.Cells(ent, 8).value = "", "", oSheet.Cells(ent, 8).value) : colIdx += 1
+                        If ifSex(oSheet.Cells(ent, 9).value) Then .Sex = dbSex(oSheet.Cells(ent, 9).value) : colIdx += 1
+                        If IsDate(oSheet.Cells(ent, 10).value) Then .Birthday = oSheet.Cells(ent, 10).value : colIdx += 1
+                        If ifPhone(oSheet.Cells(ent, 11).value) Then .Cellphone1 = oSheet.Cells(ent, 11).value : colIdx += 1
+                        If ifPhone(oSheet.Cells(ent, 12).value) Then .Cellphone1 = oSheet.Cells(ent, 12).value : colIdx += 1
+
+                        If isNew Then
+                            .SaveClient()
+                        Else
+                            .ModifyClient()
+                        End If
+                        .LoadLastEntry()
                     End With
-                End If
+
+
+                    'Add PawnItem
+                    If Not isDuplication(oSheet.Cells(ent, 13).value) Then
+                        Dim migratePT As New PawnTicket
+                        With migratePT
+                            migratePT.Pawner = migratePawner
+                            pt = oSheet.Cells(ent, 13).value : colIdx += 1
+                            If IsNumeric(pt) Then
+                                .PawnTicket = pt
+                            Else
+                                GoTo nextLoop
+                            End If
+                            If ifItemType(oSheet.Cells(ent, 14).value) Then
+                                .ItemType = oSheet.Cells(ent, 14).value : colIdx += 1
+                            Else
+                                GoTo nextLoop
+                            End If
+                            If isClass(oSheet.Cells(ent, 15).value) Then
+                                .CategoryID = _catID : colIdx += 1
+                            Else
+                                GoTo nextLoop
+                            End If
+                            If IsNumeric(oSheet.Cells(ent, 16).value) Then
+                                .Grams = oSheet.Cells(ent, 16).value : colIdx += 1
+                            Else
+                                GoTo nextLoop
+                            End If
+                            If IsNumeric(oSheet.Cells(ent, 17).value) Then
+                                .Karat = oSheet.Cells(ent, 17).value : colIdx += 1
+                            Else
+                                GoTo nextLoop
+                            End If
+                            .Description = oSheet.Cells(ent, 18).value : colIdx += 1
+                            .LoanDate = oSheet.Cells(ent, 19).value : colIdx += 1
+                            .MaturityDate = oSheet.Cells(ent, 20).value : colIdx += 1
+                            .ExpiryDate = oSheet.Cells(ent, 21).value : colIdx += 1
+                            .AuctionDate = oSheet.Cells(ent, 22).value : colIdx += 1
+                            .Appraisal = oSheet.Cells(ent, 23).value : colIdx += 1
+                            .Principal = oSheet.Cells(ent, 24).value : colIdx += 1
+                            .Interest = oSheet.Cells(ent, 25).value : colIdx += 1
+                            .ServiceCharge = oSheet.Cells(ent, 26).value : colIdx += 1
+                            .NetAmount = oSheet.Cells(ent, 27).value : colIdx += 1
+                            Dim oldPT As String = oSheet.Cells(ent, 28).value : colIdx += 1
+                            If oldPT = "null" Then oldPT = ""
+                            If IsNumeric(oldPT) Then .OldTicket = oldPT
+                            .Status = "L"
+
+                            .SaveTicket()
+                        End With
+                        Console.WriteLine("PT# " & pt & " saved.")
+                        importCnt += 1
+                    End If
+                Catch ex As Exception
+                    Console.WriteLine("Error in PT# " & pt)
+                    Console.WriteLine("Line Number : " & ent)
+                    Console.WriteLine("Column Number : " & colIdx + 1)
+                    Console.WriteLine(ex.ToString)
+                    LogReport(ent, "Please check column number " & colIdx + 1)
+                    GoTo nextLoop
+                End Try
+nextLoop:
+                frmMIS.AddProgress()
             Next
 
             oWB.Close()
             Console.WriteLine("Excel Closed")
         Catch ex As Exception
+            'Quit
+            oSheet = Nothing
+            oWB = Nothing
+            oXL.Quit()
+            oXL = Nothing
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
+
+            frmMIS.fileLoading(0)
+            Exit Sub
         End Try
         
 
@@ -100,13 +203,28 @@ Module migrate
         oXL.Quit()
         oXL = Nothing
 
+        MsgBox("Data imported " & importCnt, MsgBoxStyle.Information, "Done")
+        frmMIS.fileLoading(0)
+    End Sub
+
+    Private Sub LogReport(ByVal ln As Integer, ByVal desc As String)
+        frmMIS.AddReport(ln, desc)
     End Sub
 
     Private Function SearchClient(ByVal fname As String, ByVal lname As String) As DataSet
         mySql = "SELECT * FROM tblClient "
-        mySql &= String.Format("WHERE fname LIKE '%{0}%' AND lname LIKE '%{1}%'", fname, lname)
+        mySql &= String.Format("WHERE FirstName LIKE '%{0}%' AND LastName LIKE '%{1}%'", fname, lname)
 
         Dim ds As DataSet = LoadSQL(mySql, "tblClient")
         Return ds
+    End Function
+
+    Private Function isDuplication(ByVal pt As Int64) As Boolean
+        mySql = "SELECT * FROM tblPawn "
+        mySql &= "WHERE PawnTicket = " & pt
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 0 Then Return False
+
+        Return True
     End Function
 End Module

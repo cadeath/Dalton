@@ -318,7 +318,7 @@
             .OfficialReceiptDate = CurrentDate
 
             .DaysOverDue = txtOver.Text
-            .DelayInterest = txtInt.Text
+            .Interest = txtInt.Text
             .Penalty = txtPenalty.Text
             .ServiceCharge = txtService.Text
             .EVAT = txtEvat.Text
@@ -786,7 +786,7 @@
             .OfficialReceiptDate = CurrentDate
 
             .DaysOverDue = txtOver.Text
-            .DelayInterest = txtInt.Text
+            .Interest = txtInt.Text
             .Penalty = txtPenalty.Text
             .ServiceCharge = txtService.Text
             .EVAT = txtEvat.Text
