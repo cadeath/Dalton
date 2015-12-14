@@ -37,14 +37,16 @@
 
         st &= IIf(chkRenew.Checked, "1", "0")
         st &= IIf(chkRedeem.Checked, "1", "0")
+        st &= IIf(chkSeg.Checked, "1", "0")
 
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        Dim mySql As String = "SELECT FIRST 50 * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
         If st = "100" Then
             mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S') ORDER BY LoanDate ASC, PAWNID ASC"
         Else
-            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S' "
+            mySql &= "' AND (Status = 'L' OR Status = 'R' "
             If st.Substring(1, 1) = "1" Then mySql &= "OR Status = '0' "
             If st.Substring(2, 1) = "1" Then mySql &= "OR Status = 'X' "
+            If st.Substring(3, 1) = "1" Then mySql &= "OR Status = 'S' "
 
             mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
         End If
@@ -199,4 +201,7 @@
         LoadActive()
     End Sub
 
+    Private Sub chkSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSeg.CheckedChanged
+        LoadActive()
+    End Sub
 End Class
