@@ -5,6 +5,10 @@
     ' - Fixing Auth
     ' - Fixing GUI
 
+    ' Functions
+    ' LoadPawnTicket(PawnTicket,Status)
+    ' Status = Transaction Type
+
     Friend transactionType As String = "L"
     Friend PawnItem As PawnTicket
     Friend PawnCustomer As Client
@@ -17,9 +21,9 @@
 
     Private appraiser As Hashtable
 
-    'Advance Interest
-    Private DelayInt As Double, ServiceCharge As Double
-    Private ItemPrincipal As Double, AdvanceInt As Double
+
+    Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
+    Private ItemPrincipal As Double, Penalty As Double
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -245,7 +249,7 @@
     Private Sub txtPrincipal_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
         On Error Resume Next
 
-        ComputeAdvanceInterest()
+        LoanAdvanceInterest()
         txtPrincipal2.Text = txtPrincipal.Text
     End Sub
 
@@ -314,7 +318,7 @@
             .OfficialReceiptDate = CurrentDate
 
             .DaysOverDue = txtOver.Text
-            .DelayInterest = txtInt.Text
+            .Interest = txtInt.Text
             .Penalty = txtPenalty.Text
             .ServiceCharge = txtService.Text
             .EVAT = txtEvat.Text
@@ -325,33 +329,29 @@
         End With
     End Sub
 
-    Private Sub ComputeAdvanceInterest()
+    Private Sub ComputeInterests()
         If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
-
         ItemPrincipal = CDbl(txtPrincipal.Text)
-        'Dim loanInt As Double, redeemInt As Double
-        'loanInt = ItemPrincipal * GetInt(30 + IIf(daysDue > 3, daysDue, 0))
-        'redeemInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
 
-        If transactionType <> "X" Then
-            DelayInt = ItemPrincipal * GetInt(30 + IIf(daysDue > 3, daysDue, 0))
-        Else
-            DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
-        End If
-
+        AdvanceInterest = ItemPrincipal * GetInt(30)
+        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
+        If DelayInt > 0 Then DelayInt -= AdvanceInterest
         ServiceCharge = GetServiceCharge(ItemPrincipal)
-        AdvanceInt = DelayInt + ServiceCharge
+        Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
 
-        If daysDue > 3 Then
-            txtInt.Text = DelayInt
-            txtService.Text = ServiceCharge
-        End If
-        If transactionType = "L" Or transactionType = "R" Then
-            txtInt.Text = DelayInt
-            txtService.Text = ServiceCharge
-            txtAdv.Text = AdvanceInt
-        End If
-        If transactionType = "L" Then txtNet.Text = ItemPrincipal - AdvanceInt
+        txtAdv.Text = AdvanceInterest
+        txtNet.Text = ItemPrincipal - AdvanceInterest - ServiceCharge
+
+        txtOver.Text = daysDue
+        txtInt.Text = DelayInt
+        txtPenalty.Text = Penalty
+        txtService.Text = ServiceCharge
+        txtEvat.Text = 0
+
+        txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
+        txtRedeem.Text = CDbl(txtPrincipal.Text) + DelayInt + Penalty
+
+        Exit Sub
     End Sub
 
     Private Sub SaveNewLoan()
@@ -372,6 +372,10 @@
             .Principal = txtPrincipal.Text
             .AdvanceInterest = txtAdv.Text
             .NetAmount = txtNet.Text
+
+            If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text
+            If IsNumeric(txtService.Text) Then .ServiceCharge = txtService.Text
+            If IsNumeric(txtEvat.Text) Then .EVAT = txtEvat.Text
 
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
             .Status = transactionType
@@ -412,24 +416,20 @@
         Dim dayDiffNew As Integer = dayDiff.Days + 1
         Dim overDays = CurrentDate - PawnItem.MaturityDate
         daysDue = IIf(overDays.Days > 0, overDays.Days, 0)
-        ComputeAdvanceInterest()
+        ComputeInterests()
 
         If typ = "R" Then
             GeneratePT()
         End If
 
-        txtOver.Text = daysDue
-        txtPenalty.Text = GetInt(dayDiffNew, "Penalty") * PawnItem.Principal
-        txtEvat.Text = PawnItem.EVAT
-
         If transactionType = "X" Then
             txtRedeem.BackColor = Drawing.SystemColors.Window
             txtRedeem.Focus()
-            txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + IIf(daysDue > 3, CDbl(txtInt.Text) + CDbl(txtService.Text), 0)
+            'txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + IIf(daysDue > 3, CDbl(txtInt.Text) + CDbl(txtService.Text), 0)
         Else
             If transactionType = "R" Then
                 txtRenew.Focus()
-                txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
+                'txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
                 txtRenew.BackColor = Drawing.SystemColors.Window
             End If
         End If
@@ -509,22 +509,34 @@
         End If
 
         ChangeForm()
-        If PawnItem.Status = "R" Then Me.Text &= " [RENEWED]"
-        If PawnItem.Status = "0" Then Me.Text &= " [INACTIVE]"
+        If PawnItem.Status = "R" Then Me.Text &= " [RENEW]"
+        If PawnItem.Status = "0" Then Me.Text &= " [INACTIVE/RENEWED]"
         If PawnItem.Status = "X" Then Me.Text &= " [REDEEMED]"
         If PawnItem.Status = "S" Then Me.Text &= " [SEGREGATED]"
-        If PawnItem.Status = "W" Then Me.Text &= " [WITHDRAW]"
+        If PawnItem.Status = "W" Then Me.Text &= " [WITHDRAW] - Pull Out: " & PawnItem.PullOutDate.ToShortDateString
+        If PawnItem.Status = "V" Then Me.Text &= " [VOIDED]"
 
         Select Case PawnItem.Status
-            Case "0", "X", "S", "W"
+            Case "0", "S", "W", "V"
                 LockFields(1)
+            Case "X"
+                LockFields(1)
+                btnVoid.Enabled = True
         End Select
+
+        'Get New Number
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count <> 0 Then
+            lblNPT.Visible = True
+            lblNPT.Text &= CurrentPTNumber(ds.Tables(0).Rows(0).Item("PawnTicket"))
+        End If
     End Sub
 
     Private Sub ChangeForm()
         Select Case transactionType
             Case "D"
-                lblTransaction.Text = "Display Ticket Information"
+                lblTransaction.Text = "Ticket Information"
             Case "L"
                 lblTransaction.Text = "New Loan"
             Case "R"
@@ -615,7 +627,7 @@
         btnRedeem.Enabled = False
         btnVoid.Enabled = False
 
-        AdvanceInterest()
+        'AdvanceInterest()
     End Sub
 
     Friend Sub LoadClient(ByVal cl As Client)
@@ -638,7 +650,7 @@
                 txtExpiry.Text = CurrentDate.AddDays(119).ToShortDateString
                 txtAuction.Text = CurrentDate.AddDays(152).ToShortDateString
         End Select
-        AdvanceInterest()
+        ComputeInterests()
     End Sub
 
     Private Function CurrentPTNumber(Optional ByVal num As Integer = 0) As String
@@ -715,13 +727,15 @@
         Next
     End Sub
 
-    Private Sub AdvanceInterest()
+    Private Sub LoanAdvanceInterest()
         TypeInt = GetInt(30)
 
         If txtPrincipal.Text <> "" Then
             txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
             If transactionType = "L" Then
                 txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
+                txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
+                txtService.Text = GetServiceCharge(txtPrincipal.Text)
             End If
         End If
 
@@ -772,7 +786,7 @@
             .OfficialReceiptDate = CurrentDate
 
             .DaysOverDue = txtOver.Text
-            .DelayInterest = txtInt.Text
+            .Interest = txtInt.Text
             .Penalty = txtPenalty.Text
             .ServiceCharge = txtService.Text
             .EVAT = txtEvat.Text
@@ -794,8 +808,8 @@
             .AuctionDate = txtAuction.Text
 
             .Principal = txtPrincipal.Text
-            .AdvanceInterest = AdvanceInt
-            .NetAmount = .Principal - AdvanceInt
+            .AdvanceInterest = AdvanceInterest
+            .NetAmount = .Principal - AdvanceInterest
             .Status = "R"
 
             .SaveTicket()
@@ -807,6 +821,27 @@
 #End Region
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-        MsgBox("Missing", MsgBoxStyle.Information, "Under Construction")
+        Dim transDate As Date
+        If PawnItem.Status = "X" Then
+            transDate = PawnItem.OfficialReceiptDate
+        Else
+            transDate = PawnItem.LoanDate
+        End If
+
+        If CurrentDate.Date <> transDate Then
+            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
+
+        PawnItem.VoidCancelTicket()
+        MsgBox("Transaction Voided", MsgBoxStyle.Information)
+        frmPawning.LoadActive()
+        Me.Close()
+    End Sub
+
+    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+
     End Sub
 End Class

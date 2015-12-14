@@ -37,16 +37,26 @@
 
         st &= IIf(chkRenew.Checked, "1", "0")
         st &= IIf(chkRedeem.Checked, "1", "0")
+        st &= IIf(chkSeg.Checked, "1", "0")
 
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
-        If st = "100" Then
-            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S') ORDER BY LoanDate ASC, PAWNID ASC"
+        Dim mySql As String = "SELECT FIRST 100 * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        If st = "1000" Then
+            mySql &= "' AND (Status = 'L' OR Status = 'R') ORDER BY LoanDate ASC, PAWNID ASC"
         Else
-            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S' "
-            If st.Substring(1, 1) = "1" Then mySql &= "OR Status = '0' "
-            If st.Substring(2, 1) = "1" Then mySql &= "OR Status = 'X' "
+            'mySql &= "' AND (Status = 'L' OR Status = 'R' "
+            mySql &= "' AND ("
+            If st.Substring(1, 1) = "1" Then mySql &= "Status = '0' "
+            If st.Substring(2, 1) = "1" Then
+                If st.Substring(1, 1) = "1" Then mySql &= " OR "
+                mySql &= "Status = 'X' "
+            End If
+            If st.Substring(3, 1) = "1" Then
+                If st.Substring(2, 1) = "1" Then mySql &= " OR "
+                mySql &= "Status = 'S' "
+            End If
 
-            mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+        mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+
         End If
         Dim ds As DataSet = LoadSQL(mySql)
 
@@ -77,7 +87,7 @@
         Select Case tk.Status
             Case "0" : lv.BackColor = Color.LightGray
             Case "X" : lv.BackColor = Color.Red
-            Case "S" : lv.BackColor = Color.LightYellow
+            Case "S" : lv.BackColor = Color.Yellow
             Case "W" : lv.BackColor = Color.Red
             Case "V" : lv.BackColor = Color.Gray
         End Select
@@ -196,6 +206,10 @@
     End Sub
 
     Private Sub chkRedeem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRedeem.CheckedChanged
+        LoadActive()
+    End Sub
+
+    Private Sub chkSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSeg.CheckedChanged
         LoadActive()
     End Sub
 End Class

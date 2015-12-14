@@ -255,9 +255,9 @@ Partial Class frmPawnItem
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(6, 263)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(82, 16)
+        Me.Label14.Size = New System.Drawing.Size(78, 16)
         Me.Label14.TabIndex = 19
-        Me.Label14.Text = "Interest + SC"
+        Me.Label14.Text = "Adv Interest"
         '
         'txtAuction
         '
@@ -786,7 +786,7 @@ Partial Class frmPawnItem
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(88, 33)
         Me.btnCancel.TabIndex = 8
-        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.Text = "&Close"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnSave

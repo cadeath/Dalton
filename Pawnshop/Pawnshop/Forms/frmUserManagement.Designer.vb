@@ -66,10 +66,12 @@ Partial Class frmUserManagement
         Me.chkUR = New System.Windows.Forms.CheckBox()
         Me.chkUM = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
+        Me.chkPullOut = New System.Windows.Forms.CheckBox()
         Me.chkVoid = New System.Windows.Forms.CheckBox()
         Me.chkSpAll = New System.Windows.Forms.CheckBox()
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
+        Me.chkMigrate = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -513,6 +515,8 @@ Partial Class frmUserManagement
         '
         'tbSpecial
         '
+        Me.tbSpecial.Controls.Add(Me.chkMigrate)
+        Me.tbSpecial.Controls.Add(Me.chkPullOut)
         Me.tbSpecial.Controls.Add(Me.chkVoid)
         Me.tbSpecial.Controls.Add(Me.chkSpAll)
         Me.tbSpecial.Controls.Add(Me.chkCashOutBank)
@@ -524,6 +528,16 @@ Partial Class frmUserManagement
         Me.tbSpecial.TabIndex = 3
         Me.tbSpecial.Text = "Special"
         Me.tbSpecial.UseVisualStyleBackColor = True
+        '
+        'chkPullOut
+        '
+        Me.chkPullOut.AutoSize = True
+        Me.chkPullOut.Location = New System.Drawing.Point(13, 81)
+        Me.chkPullOut.Name = "chkPullOut"
+        Me.chkPullOut.Size = New System.Drawing.Size(63, 17)
+        Me.chkPullOut.TabIndex = 13
+        Me.chkPullOut.Text = "Pull Out"
+        Me.chkPullOut.UseVisualStyleBackColor = True
         '
         'chkVoid
         '
@@ -564,6 +578,16 @@ Partial Class frmUserManagement
         Me.chkCashInBank.TabIndex = 3
         Me.chkCashInBank.Text = "Cash In (Bank)"
         Me.chkCashInBank.UseVisualStyleBackColor = True
+        '
+        'chkMigrate
+        '
+        Me.chkMigrate.AutoSize = True
+        Me.chkMigrate.Location = New System.Drawing.Point(13, 104)
+        Me.chkMigrate.Name = "chkMigrate"
+        Me.chkMigrate.Size = New System.Drawing.Size(61, 17)
+        Me.chkMigrate.TabIndex = 14
+        Me.chkMigrate.Text = "Migrate"
+        Me.chkMigrate.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '
@@ -646,4 +670,6 @@ Partial Class frmUserManagement
     Friend WithEvents chkSpAll As System.Windows.Forms.CheckBox
     Friend WithEvents chkVoid As System.Windows.Forms.CheckBox
     Friend WithEvents chkBorrowings As System.Windows.Forms.CheckBox
+    Friend WithEvents chkPullOut As System.Windows.Forms.CheckBox
+    Friend WithEvents chkMigrate As System.Windows.Forms.CheckBox
 End Class
