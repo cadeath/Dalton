@@ -39,8 +39,30 @@
     End Sub
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
-        ImportTemplate(txtImportPath.Text)
+        Dim th As System.Threading.Thread
+        th = New Threading.Thread(AddressOf doImport)
+        th.Start()
+
         CreateLOG()
+    End Sub
+
+    Private Sub doImport()
+        ImportTemplate(txtImportPath.Text)
+    End Sub
+
+    Friend Sub AddProgress()
+        pbData.Value += 1
+    End Sub
+
+    Friend Sub fileLoading(ByVal max As Integer)
+        If max = 0 Then
+            pbData.Visible = False
+            Me.Enabled = True
+        Else
+            pbData.Maximum = max
+            pbData.Visible = True
+            Me.Enabled = False
+        End If
     End Sub
 
 End Class

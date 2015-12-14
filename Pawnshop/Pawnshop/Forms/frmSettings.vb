@@ -1,17 +1,30 @@
 ﻿Public Class frmSettings
 
+    Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", 1, 0)
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
     End Sub
 
     Private Sub ClearFields()
+        'First
         txtCode.Text = GetOption("BranchCode")
         txtName.Text = GetOption("BranchName")
         txtArea.Text = GetOption("BranchArea")
         txtBal.Text = GetOption("MaitainingBalance")
+
+        If locked Then
+            txtCode.Enabled = False
+            txtName.Enabled = False
+            txtArea.Enabled = False
+        End If
+
+        'Second
+        txtPawnTicket.Text = GetOption("PawnLastNum")
         txtOR.Text = GetOption("ORLastNum")
         txtBorrow.Text = GetOption("BorrowingLastNum")
         txtInsurance.Text = GetOption("InsuranceLastNum")
+        txtMENum.Text = GetOption("MEnumLast")
+        txtMRNum.Text = GetOption("MRNumLast")
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -19,16 +32,25 @@
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+        'First
         UpdateOptions("BranchCode", txtCode.Text)
         UpdateOptions("BranchName", txtName.Text)
         UpdateOptions("BranchArea", txtArea.Text)
         UpdateOptions("MaintainingBalance", txtBal.Text)
-        UpdateOptions("CurrentBalance", txtBal.Text)
+
+        'Second
+        UpdateOptions("PawnLastNum", txtPawnTicket.Text)
         UpdateOptions("ORLastNum", txtOR.Text)
         UpdateOptions("BorrowingLastNum", txtBorrow.Text)
         UpdateOptions("InsuranceLastNum", txtInsurance.Text)
+        UpdateOptions("MEnumLast", txtMENum.Text)
+        UpdateOptions("MRNumLast", txtMRNum.Text)
 
-        MsgBox("New Branch has been setup", MsgBoxStyle.Information)
+        If Not locked Then
+            MsgBox("New Branch has been setup", MsgBoxStyle.Information)
+        Else
+            MsgBox("Setup updated", MsgBoxStyle.Information)
+        End If
         Me.Close()
     End Sub
 
@@ -36,15 +58,15 @@
         DigitOnly(e)
     End Sub
 
-    Private Sub txtOR_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOR.KeyPress
+    Private Sub txtOR_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
 
-    Private Sub txtBorrow_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBorrow.KeyPress
+    Private Sub txtBorrow_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
 
-    Private Sub txtInsurance_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInsurance.KeyPress
+    Private Sub txtInsurance_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
 End Class
