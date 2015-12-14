@@ -12,11 +12,8 @@
   <xs:element name="dsReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReport" msprop:Generator_UserDSName="dsReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Loan" msprop:Generator_TableClassName="LoanDataTable" msprop:Generator_TableVarName="tableLoan" msprop:Generator_TablePropName="Loan" msprop:Generator_RowDeletingName="LoanRowDeleting" msprop:Generator_RowChangingName="LoanRowChanging" msprop:Generator_RowEvHandlerName="LoanRowChangeEventHandler" msprop:Generator_RowDeletedName="LoanRowDeleted" msprop:Generator_UserTableName="Loan" msprop:Generator_RowChangedName="LoanRowChanged" msprop:Generator_RowEvArgName="LoanRowChangeEvent" msprop:Generator_RowClassName="LoanRow">
+        <xs:element name="rptLoanRegister" msprop:Generator_TableClassName="rptLoanRegisterDataTable" msprop:Generator_TableVarName="tablerptLoanRegister" msprop:Generator_TablePropName="rptLoanRegister" msprop:Generator_RowDeletingName="rptLoanRegisterRowDeleting" msprop:Generator_RowChangingName="rptLoanRegisterRowChanging" msprop:Generator_RowEvHandlerName="rptLoanRegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="rptLoanRegisterRowDeleted" msprop:Generator_UserTableName="rptLoanRegister" msprop:Generator_RowChangedName="rptLoanRegisterRowChanged" msprop:Generator_RowEvArgName="rptLoanRegisterRowChangeEvent" msprop:Generator_RowClassName="rptLoanRegisterRow">
           <xs:complexType>
-            <xs:sequence>
-              <xs:element name="PawnTicket" msprop:Generator_ColumnVarNameInTable="columnPawnTicket" msprop:Generator_ColumnPropNameInRow="PawnTicket" msprop:Generator_ColumnPropNameInTable="PawnTicketColumn" msprop:Generator_UserColumnName="PawnTicket" type="xs:string" minOccurs="0" />
-            </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>

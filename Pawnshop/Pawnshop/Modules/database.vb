@@ -8,11 +8,7 @@
 Friend Module database
     Public con As OdbcConnection
     Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
-<<<<<<< HEAD
-    'Friend dbName As String = "W3W1LH4CKU.FDB" 'ForDeployment
-=======
     'Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
->>>>>>> refs/remotes/origin/Import
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet

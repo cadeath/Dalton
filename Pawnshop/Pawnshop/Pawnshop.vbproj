@@ -534,9 +534,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-<<<<<<< HEAD
-    <None Include="Pawnshop.My.MyApplication.datasource" />
-    <None Include="Pawnshop.My.MySettings.datasource" />
     <None Include="Reports\dsReport.xsc">
       <DependentUpon>dsReport.xsd</DependentUpon>
     </None>
@@ -548,8 +545,6 @@
     <None Include="Reports\dsReport.xss">
       <DependentUpon>dsReport.xsd</DependentUpon>
     </None>
-=======
->>>>>>> refs/remotes/origin/Import
     <None Include="W3W1LH4CKU.FDB">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
