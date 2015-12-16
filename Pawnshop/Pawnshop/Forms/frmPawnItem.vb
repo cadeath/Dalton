@@ -344,7 +344,13 @@
             If transactionType = "X" Then AdvanceInterest = 0
         Else
             'New Transactions
-            If transactionType = "X" Then ServiceCharge = 0
+            If transactionType = "X" Then
+                ServiceCharge = 0
+            End If
+
+            If daysDue > 3 Then
+                DelayInt -= AdvanceInterest
+            End If
         End If
 
         txtAdv.Text = AdvanceInterest
