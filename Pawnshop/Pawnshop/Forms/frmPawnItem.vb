@@ -334,18 +334,49 @@
         ItemPrincipal = CDbl(txtPrincipal.Text)
 
         AdvanceInterest = ItemPrincipal * GetInt(30)
+        ServiceCharge = GetServiceCharge(ItemPrincipal)
+        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
+        Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
+
+        If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
+            'OLD Migrate
+            If daysDue <= 3 Then DelayInt += AdvanceInterest
+            If transactionType = "X" Then AdvanceInterest = 0
+        Else
+            'New Transactions
+            If transactionType = "X" Then ServiceCharge = 0
+        End If
+
+        txtAdv.Text = AdvanceInterest
+        txtOver.Text = daysDue
+        txtInt.Text = DelayInt
+        txtPenalty.Text = Penalty
+        txtService.Text = ServiceCharge
+        txtEvat.Text = 0
+
+        If transactionType = "R" Then
+            txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
+            txtRedeem.Text = 0
+        ElseIf transactionType = "X" Then
+            txtRenew.Text = 0
+            txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
+        End If
+
+        Exit Sub
+
+        AdvanceInterest = ItemPrincipal * GetInt(30)
         DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
         If DelayInt > 0 Then DelayInt -= AdvanceInterest
-        ServiceCharge = GetServiceCharge(ItemPrincipal)
+        If transactionType <> "X" Then ServiceCharge = GetServiceCharge(ItemPrincipal)
         Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
 
         'Migration Addition
         Dim OldPTCharges As Double = 0, OldSrvCharges As Double = 0
         If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
             OldPTCharges = AdvanceInterest
-            If transactionType = "R" Then
-                OldSrvCharges = ServiceCharge
-            End If
+            OldSrvCharges = ServiceCharge
+        Else
+
         End If
 
         If transactionType = "X" Then
@@ -353,7 +384,7 @@
             txtNet.Text = 0
         Else
             txtAdv.Text = AdvanceInterest
-            txtNet.Text = ItemPrincipal - AdvanceInterest - ServiceCharge
+            txtNet.Text = ItemPrincipal - AdvanceInterest ' - ServiceCharge 'No more service charge
         End If
 
 
@@ -545,6 +576,8 @@
                 LockFields(1)
                 btnVoid.Enabled = True
         End Select
+
+        If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
 
         'Get New Number
         Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
