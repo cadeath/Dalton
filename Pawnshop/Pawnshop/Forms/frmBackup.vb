@@ -59,7 +59,7 @@ Public Class frmBackup
         Next
     End Sub
 
-    Private Sub startBackup()
+    Friend Sub startBackup()
         'First
         doBackup(txtPath1.Text)
         Dim forRedundancy As String = BranchCode & CurrentDate.ToString("yyyyMMMdd") & ".noEXT"

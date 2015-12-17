@@ -243,6 +243,7 @@ nextLoop:
         dt = txtGenPass.Text.Split("\")(slashCnt - 1).Substring(3).Split(".")(0)
         'txtGenPass.Text.Substring(3)
         Console.WriteLine(dt.ToShortDateString)
+        txtShowPass.Text = BackupPassword(dt)
     End Sub
 
     Private Sub ofdBackup_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofdBackup.FileOk
