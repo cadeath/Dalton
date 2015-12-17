@@ -162,7 +162,7 @@
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not CheckAuth() Then Exit Sub
 
-        If Not isReady() Then
+        If Not isReady() And transactionType = "L" Then
             MsgBox("I think you are missing something", MsgBoxStyle.Critical)
             Exit Sub
         End If
@@ -334,22 +334,81 @@
         ItemPrincipal = CDbl(txtPrincipal.Text)
 
         AdvanceInterest = ItemPrincipal * GetInt(30)
-        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
-        If DelayInt > 0 Then DelayInt -= AdvanceInterest
         ServiceCharge = GetServiceCharge(ItemPrincipal)
+        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
         Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
 
-        txtAdv.Text = AdvanceInterest
-        txtNet.Text = ItemPrincipal - AdvanceInterest - ServiceCharge
+        If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
+            'OLD Migrate
+            If daysDue <= 3 Then DelayInt += AdvanceInterest
+            If transactionType = "X" Then AdvanceInterest = 0
+        Else
+            'New Transactions
+            If transactionType = "X" Then
+                ServiceCharge = 0
+            End If
 
+            If daysDue > 3 Then
+                DelayInt -= AdvanceInterest
+            End If
+        End If
+
+        txtAdv.Text = AdvanceInterest
         txtOver.Text = daysDue
         txtInt.Text = DelayInt
         txtPenalty.Text = Penalty
         txtService.Text = ServiceCharge
         txtEvat.Text = 0
 
-        txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
-        txtRedeem.Text = CDbl(txtPrincipal.Text) + DelayInt + Penalty
+        If transactionType = "R" Then
+            txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
+            txtRedeem.Text = 0
+        ElseIf transactionType = "X" Then
+            txtRenew.Text = 0
+            txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
+        End If
+
+        Exit Sub
+
+        AdvanceInterest = ItemPrincipal * GetInt(30)
+        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
+        If DelayInt > 0 Then DelayInt -= AdvanceInterest
+        If transactionType <> "X" Then ServiceCharge = GetServiceCharge(ItemPrincipal)
+        Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
+
+        'Migration Addition
+        Dim OldPTCharges As Double = 0, OldSrvCharges As Double = 0
+        If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
+            OldPTCharges = AdvanceInterest
+            OldSrvCharges = ServiceCharge
+        Else
+
+        End If
+
+        If transactionType = "X" Then
+            txtAdv.Text = 0
+            txtNet.Text = 0
+        Else
+            txtAdv.Text = AdvanceInterest
+            txtNet.Text = ItemPrincipal - AdvanceInterest ' - ServiceCharge 'No more service charge
+        End If
+
+
+        txtOver.Text = daysDue
+        DelayInt += OldPTCharges 'For OLD PT without Advance INT
+        txtInt.Text = DelayInt
+        txtPenalty.Text = Penalty
+        ServiceCharge += OldSrvCharges
+        txtService.Text = ServiceCharge
+        txtEvat.Text = 0
+
+        If transactionType = "R" Then
+            txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
+            txtRedeem.Text = 0
+        ElseIf transactionType = "X" Then
+            txtRenew.Text = 0
+            txtRedeem.Text = CDbl(txtPrincipal.Text) + DelayInt + Penalty + ServiceCharge
+        End If
 
         Exit Sub
     End Sub
@@ -385,6 +444,8 @@
     End Sub
 
     Private Function CheckAuth() As Boolean
+        If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
+
         If Not mod_system.isAuthorized And cboAppraiser.Text <> "" Then
             diagAuthorization.Show()
             diagAuthorization.TopMost = True
@@ -425,11 +486,9 @@
         If transactionType = "X" Then
             txtRedeem.BackColor = Drawing.SystemColors.Window
             txtRedeem.Focus()
-            'txtRedeem.Text = PawnItem.Principal + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text) + IIf(daysDue > 3, CDbl(txtInt.Text) + CDbl(txtService.Text), 0)
         Else
             If transactionType = "R" Then
                 txtRenew.Focus()
-                'txtRenew.Text = AdvanceInt + CDbl(txtEvat.Text) + CDbl(txtPenalty.Text)
                 txtRenew.BackColor = Drawing.SystemColors.Window
             End If
         End If
@@ -493,7 +552,7 @@
         txtService.Text = pt.ServiceCharge
         txtEvat.Text = pt.EVAT
 
-        txtRenew.Text = pt.RedeemDue
+        txtRenew.Text = pt.RenewDue
         txtRedeem.Text = pt.RedeemDue
 
         cboAppraiser.Text = GetAppraiserByID(pt.AppraiserID)
@@ -523,6 +582,8 @@
                 LockFields(1)
                 btnVoid.Enabled = True
         End Select
+
+        If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
 
         'Get New Number
         Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
@@ -730,14 +791,12 @@
     Private Sub LoanAdvanceInterest()
         TypeInt = GetInt(30)
 
-        If txtPrincipal.Text <> "" Then
-            txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt)
-            If transactionType = "L" Then
-                txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
-                txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
-                txtService.Text = GetServiceCharge(txtPrincipal.Text)
-            End If
+        If transactionType = "L" Then
+            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
+            txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
+            txtService.Text = GetServiceCharge(txtPrincipal.Text)
         End If
+        txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt) - CDbl(txtService.Text)
 
     End Sub
 
@@ -752,7 +811,7 @@
             Select Case days
                 Case min To max
                     TypeInt = dr.Item(tbl)
-                    Console.WriteLine("Interest is now " & TypeInt)
+                    Console.WriteLine(tbl & " is now " & TypeInt & " for " & cboType.Text)
                     Return TypeInt
             End Select
         Next
@@ -806,6 +865,14 @@
             .MaturityDate = txtMatu.Text
             .ExpiryDate = txtExpiry.Text
             .AuctionDate = txtAuction.Text
+
+            .DaysOverDue = 0
+            .Interest = 0
+            .Penalty = 0
+            .ServiceCharge = 0
+            .EVAT = 0
+            .RenewDue = 0
+            .RedeemDue = 0
 
             .Principal = txtPrincipal.Text
             .AdvanceInterest = AdvanceInterest

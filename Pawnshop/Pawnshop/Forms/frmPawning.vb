@@ -39,18 +39,28 @@
         st &= IIf(chkRedeem.Checked, "1", "0")
         st &= IIf(chkSeg.Checked, "1", "0")
 
-        Dim mySql As String = "SELECT FIRST 50 * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
-        If st = "100" Then
-            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S') ORDER BY LoanDate ASC, PAWNID ASC"
+        Dim mySql As String = "SELECT FIRST 100 * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        If st = "1000" Then
+            mySql &= "' AND (Status = 'L' OR Status = 'R') ORDER BY LoanDate ASC, PAWNID ASC"
         Else
-            mySql &= "' AND (Status = 'L' OR Status = 'R' "
-            If st.Substring(1, 1) = "1" Then mySql &= "OR Status = '0' "
-            If st.Substring(2, 1) = "1" Then mySql &= "OR Status = 'X' "
-            If st.Substring(3, 1) = "1" Then mySql &= "OR Status = 'S' "
+            'mySql &= "' AND (Status = 'L' OR Status = 'R' "
+            mySql &= "' AND ("
+            If st.Substring(1, 1) = "1" Then mySql &= "Status = '0' "
+            If st.Substring(2, 1) = "1" Then
+                If st.Substring(1, 1) = "1" Then mySql &= " OR "
+                mySql &= "Status = 'X' "
+            End If
+            If st.Substring(3, 1) = "1" Then
+                If st.Substring(2, 1) = "1" Then mySql &= " OR "
+                mySql &= "Status = 'S' "
+            End If
 
-            mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+        mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+
         End If
         Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = lvPawners.Items.Count Then Exit Sub
 
         lvPawners.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
