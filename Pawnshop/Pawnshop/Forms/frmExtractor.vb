@@ -37,4 +37,11 @@
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
 
     End Sub
+
+    Private Sub ExtractExpiry()
+        Dim fillData As String = "tblPawn"
+        Dim mySql As String = "SELECT * FROM " & fillData
+        mySql &= ""
+    End Sub
+
 End Class

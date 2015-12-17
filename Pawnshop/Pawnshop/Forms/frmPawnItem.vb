@@ -342,6 +342,7 @@
             'OLD Migrate
             If daysDue <= 3 Then DelayInt += AdvanceInterest
             If transactionType = "X" Then AdvanceInterest = 0
+            If transactionType = "R" Then ServiceCharge += ServiceCharge
         Else
             'New Transactions
             If transactionType = "X" Then
