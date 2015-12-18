@@ -38,7 +38,10 @@ Public Class frmExtractor
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
-        ExtractExpiry()
+
+        If FormType = ExtractType.Expiry Then
+            ExtractExpiry()
+        End If
     End Sub
 
     Private Sub ExtractExpiry()
