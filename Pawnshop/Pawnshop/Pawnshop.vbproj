@@ -161,6 +161,7 @@
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
+    <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
@@ -530,6 +531,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="doc\ExpiryFormat.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="dsReports.datasource" />
     <None Include="Import Template.xlsx" />
     <None Include="My Project\app.manifest">
