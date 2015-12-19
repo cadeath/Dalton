@@ -34,24 +34,28 @@ Partial Class frmSettings
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtMRNum = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtMENum = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtOR = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.txtInsurance = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtBorrow = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtPawnTicket = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtOR = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtMRNum = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtMENum = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtRevolving = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtRevolving)
+        Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.txtArea)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.txtName)
@@ -148,7 +152,7 @@ Partial Class frmSettings
         Me.btnClose.Location = New System.Drawing.Point(438, 211)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(85, 37)
-        Me.btnClose.TabIndex = 8
+        Me.btnClose.TabIndex = 3
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -157,7 +161,7 @@ Partial Class frmSettings
         Me.btnUpdate.Location = New System.Drawing.Point(351, 211)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(81, 37)
-        Me.btnUpdate.TabIndex = 7
+        Me.btnUpdate.TabIndex = 2
         Me.btnUpdate.Text = "&Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -178,85 +182,9 @@ Partial Class frmSettings
         Me.GroupBox1.Location = New System.Drawing.Point(293, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(230, 193)
-        Me.GroupBox1.TabIndex = 9
+        Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Next Control Number"
-        '
-        'txtInsurance
-        '
-        Me.txtInsurance.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInsurance.Location = New System.Drawing.Point(110, 103)
-        Me.txtInsurance.Name = "txtInsurance"
-        Me.txtInsurance.Size = New System.Drawing.Size(100, 22)
-        Me.txtInsurance.TabIndex = 15
-        Me.txtInsurance.Text = "35"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(17, 107)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(66, 16)
-        Me.Label12.TabIndex = 18
-        Me.Label12.Text = "Insurance"
-        '
-        'txtBorrow
-        '
-        Me.txtBorrow.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBorrow.Location = New System.Drawing.Point(110, 75)
-        Me.txtBorrow.Name = "txtBorrow"
-        Me.txtBorrow.Size = New System.Drawing.Size(100, 22)
-        Me.txtBorrow.TabIndex = 14
-        Me.txtBorrow.Text = "20"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(17, 79)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(75, 16)
-        Me.Label11.TabIndex = 17
-        Me.Label11.Text = "Borrowings"
-        '
-        'txtPawnTicket
-        '
-        Me.txtPawnTicket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPawnTicket.Location = New System.Drawing.Point(110, 19)
-        Me.txtPawnTicket.Name = "txtPawnTicket"
-        Me.txtPawnTicket.Size = New System.Drawing.Size(100, 22)
-        Me.txtPawnTicket.TabIndex = 13
-        Me.txtPawnTicket.Text = "133"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(17, 23)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(81, 16)
-        Me.Label10.TabIndex = 16
-        Me.Label10.Text = "Pawn Ticket"
-        '
-        'txtOR
-        '
-        Me.txtOR.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOR.Location = New System.Drawing.Point(110, 47)
-        Me.txtOR.Name = "txtOR"
-        Me.txtOR.Size = New System.Drawing.Size(100, 22)
-        Me.txtOR.TabIndex = 19
-        Me.txtOR.Text = "133"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(17, 51)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(79, 16)
-        Me.Label3.TabIndex = 20
-        Me.Label3.Text = "OR Number"
         '
         'txtMRNum
         '
@@ -264,7 +192,7 @@ Partial Class frmSettings
         Me.txtMRNum.Location = New System.Drawing.Point(110, 159)
         Me.txtMRNum.Name = "txtMRNum"
         Me.txtMRNum.Size = New System.Drawing.Size(100, 22)
-        Me.txtMRNum.TabIndex = 22
+        Me.txtMRNum.TabIndex = 5
         Me.txtMRNum.Text = "35"
         '
         'Label4
@@ -283,7 +211,7 @@ Partial Class frmSettings
         Me.txtMENum.Location = New System.Drawing.Point(110, 131)
         Me.txtMENum.Name = "txtMENum"
         Me.txtMENum.Size = New System.Drawing.Size(100, 22)
-        Me.txtMENum.TabIndex = 21
+        Me.txtMENum.TabIndex = 4
         Me.txtMENum.Text = "20"
         '
         'Label5
@@ -295,6 +223,101 @@ Partial Class frmSettings
         Me.Label5.Size = New System.Drawing.Size(59, 16)
         Me.Label5.TabIndex = 23
         Me.Label5.Text = "ME Num"
+        '
+        'txtOR
+        '
+        Me.txtOR.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOR.Location = New System.Drawing.Point(110, 47)
+        Me.txtOR.Name = "txtOR"
+        Me.txtOR.Size = New System.Drawing.Size(100, 22)
+        Me.txtOR.TabIndex = 1
+        Me.txtOR.Text = "133"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(17, 51)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(79, 16)
+        Me.Label3.TabIndex = 20
+        Me.Label3.Text = "OR Number"
+        '
+        'txtInsurance
+        '
+        Me.txtInsurance.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtInsurance.Location = New System.Drawing.Point(110, 103)
+        Me.txtInsurance.Name = "txtInsurance"
+        Me.txtInsurance.Size = New System.Drawing.Size(100, 22)
+        Me.txtInsurance.TabIndex = 3
+        Me.txtInsurance.Text = "35"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(17, 107)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(66, 16)
+        Me.Label12.TabIndex = 18
+        Me.Label12.Text = "Insurance"
+        '
+        'txtBorrow
+        '
+        Me.txtBorrow.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBorrow.Location = New System.Drawing.Point(110, 75)
+        Me.txtBorrow.Name = "txtBorrow"
+        Me.txtBorrow.Size = New System.Drawing.Size(100, 22)
+        Me.txtBorrow.TabIndex = 2
+        Me.txtBorrow.Text = "20"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(17, 79)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(75, 16)
+        Me.Label11.TabIndex = 17
+        Me.Label11.Text = "Borrowings"
+        '
+        'txtPawnTicket
+        '
+        Me.txtPawnTicket.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPawnTicket.Location = New System.Drawing.Point(110, 19)
+        Me.txtPawnTicket.Name = "txtPawnTicket"
+        Me.txtPawnTicket.Size = New System.Drawing.Size(100, 22)
+        Me.txtPawnTicket.TabIndex = 0
+        Me.txtPawnTicket.Text = "133"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(17, 23)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(81, 16)
+        Me.Label10.TabIndex = 16
+        Me.Label10.Text = "Pawn Ticket"
+        '
+        'txtRevolving
+        '
+        Me.txtRevolving.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRevolving.Location = New System.Drawing.Point(6, 151)
+        Me.txtRevolving.Name = "txtRevolving"
+        Me.txtRevolving.Size = New System.Drawing.Size(252, 22)
+        Me.txtRevolving.TabIndex = 4
+        Me.txtRevolving.Text = "10000"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(6, 132)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(102, 16)
+        Me.Label6.TabIndex = 18
+        Me.Label6.Text = "Revolving Fund"
         '
         'frmSettings
         '
@@ -340,4 +363,6 @@ Partial Class frmSettings
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtPawnTicket As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtRevolving As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
 End Class

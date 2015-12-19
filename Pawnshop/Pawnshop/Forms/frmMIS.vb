@@ -8,7 +8,7 @@ Public Class frmMIS
     End Sub
 
     Private Sub ClearFields()
-        txtImportPath.Text = "D:\cadeath\Documents\RPS\sampleImport.xlsx"
+        txtImportPath.Text = "" 'D:\cadeath\Documents\RPS\sampleImport.xlsx
     End Sub
 
     Private Sub CreateLOG()
@@ -37,11 +37,11 @@ Public Class frmMIS
         txtImportPath.Text = ofdImport.FileName
     End Sub
 
-    Private Sub btnImportBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportBrowse.Click
+    Private Sub btnImportBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ofdImport.ShowDialog()
     End Sub
 
-    Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+    Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         ImportTemplate(txtImportPath.Text)
         CreateLOG()
     End Sub
@@ -224,4 +224,33 @@ nextLoop:
     End Sub
 #End Region
 
+    Private Sub btnReset_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReset.Click
+        Dim mySql As String = "SELECT * FROM tbl_gamit WHERE USERNAME = 'POSadmin'"
+        Dim ds As DataSet = LoadSQL(mySql, "tbl_gamit")
+        ds.Tables("tbl_gamit").Rows(0).Item("USERPASS") = "zSq2h1t4LiejUCkuGZ35rg=="
+
+        database.SaveEntry(ds, False)
+        MsgBox("POSadmin Account password reset" + vbCr + "misAdmin2015", vbInformation)
+    End Sub
+
+    Private Sub btnPassGetPass_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPassGetPass.Click
+        Dim dt As Date
+
+        'Get Date
+        Dim slashCnt As Integer = txtGenPass.Text.Split("\").Count
+        Dim strDate As String = txtGenPass.Text.Split("\")(slashCnt - 1).Substring(3).Split(".")(0)
+        If Not IsDate(strDate) Then MsgBox("Invalid file", MsgBoxStyle.Critical) : Exit Sub
+        dt = txtGenPass.Text.Split("\")(slashCnt - 1).Substring(3).Split(".")(0)
+        'txtGenPass.Text.Substring(3)
+        Console.WriteLine(dt.ToShortDateString)
+        txtShowPass.Text = BackupPassword(dt)
+    End Sub
+
+    Private Sub ofdBackup_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofdBackup.FileOk
+        txtGenPass.Text = ofdBackup.FileName
+    End Sub
+
+    Private Sub btnPassBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPassBrowse.Click
+        ofdBackup.ShowDialog()
+    End Sub
 End Class

@@ -131,7 +131,6 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to Money Transfer")
             Exit Sub
         End If
-        'frmMTlist.Show()
         frmMoneyTransfer.Show()
     End Sub
 

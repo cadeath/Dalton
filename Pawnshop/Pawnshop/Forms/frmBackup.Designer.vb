@@ -233,6 +233,10 @@ Partial Class frmBackup
         Me.btnSave.Text = "&Save Settings"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'fbdBackup
+        '
+        Me.fbdBackup.SelectedPath = "C:\"
+        '
         'frmBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
