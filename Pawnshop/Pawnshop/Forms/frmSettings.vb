@@ -1,21 +1,24 @@
 ﻿Public Class frmSettings
 
-    Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", 1, 0)
+    Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
     End Sub
 
     Private Sub ClearFields()
+        locked = IIf(GetOption("LOCKED") = "YES", True, False)
         'First
         txtCode.Text = GetOption("BranchCode")
         txtName.Text = GetOption("BranchName")
         txtArea.Text = GetOption("BranchArea")
         txtBal.Text = GetOption("MaitainingBalance")
+        txtRevolving.Text = GetOption("RevolvingFund")
 
         If locked Then
             txtCode.Enabled = False
             txtName.Enabled = False
             txtArea.Enabled = False
+            txtRevolving.Enabled = False
         End If
 
         'Second
@@ -33,9 +36,13 @@
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         'First
-        UpdateOptions("BranchCode", txtCode.Text)
-        UpdateOptions("BranchName", txtName.Text)
-        UpdateOptions("BranchArea", txtArea.Text)
+        If Not locked Then
+            UpdateOptions("BranchCode", txtCode.Text)
+            UpdateOptions("BranchName", txtName.Text)
+            UpdateOptions("BranchArea", txtArea.Text)
+            UpdateOptions("RevolvingFund", txtRevolving.Text)
+            UpdateOptions("LOCKED", "YES")
+        End If
         UpdateOptions("MaintainingBalance", txtBal.Text)
 
         'Second
