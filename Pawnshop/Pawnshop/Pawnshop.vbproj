@@ -358,6 +358,7 @@
     <Compile Include="Modules\dailyGospel.vb" />
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
+    <Compile Include="Modules\JournalEntries.vb" />
     <Compile Include="Modules\migrate.vb" />
     <Compile Include="Modules\mod_system.vb" />
     <Compile Include="Modules\newSetup.vb" />
