@@ -793,7 +793,7 @@
         TypeInt = GetInt(30)
 
         If transactionType = "L" Then
-            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
+            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
             txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
             txtService.Text = GetServiceCharge(txtPrincipal.Text)
         End If
