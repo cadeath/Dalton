@@ -526,7 +526,7 @@
     <None Include="doc\ExpiryFormat.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="doc\JournalEntries.xlsx" />
+    <None Include="doc\JournalEntries.xls" />
     <None Include="dsReports.datasource" />
     <None Include="Import Template.xlsx" />
     <None Include="My Project\app.manifest">
