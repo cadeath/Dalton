@@ -327,16 +327,11 @@
 
             .SaveTicket(False)
 
-            'Revolving FUND
+
             AddJournal(.RedeemDue, "Debit", "Revolving Fund")
-            'Inventory
             AddJournal(.RedeemDue, "Credit", "Inventory Merchandise - Loan")
-            If .DaysOverDue > 3 Then
-                'Interest
-                AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
-                'ServiceCharge
-                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
-            End If
+            AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
+            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
         End With
     End Sub
 
@@ -375,6 +370,7 @@
         If transactionType = "R" Then
             txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
             txtRedeem.Text = 0
+            txtNet.Text = PawnItem.Principal - AdvanceInterest - (ServiceCharge / 2)
         ElseIf transactionType = "X" Then
             txtRenew.Text = 0
             txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
@@ -409,14 +405,11 @@
 
             .SaveTicket()
 
-            '110601003-DALT-000 - Inventory Merchandise - Loan (Dalt, 000)
-            AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan")
-            '110103036-DALT-000 - Revolving Fund - Roxas (Dalt, 000)
-            AddJournal(.NetAmount, "Credit", "Revolving Fund")
-            '410101003-DALT-000 - Interest on Loans (Dalt, 000)
-            AddJournal(.AdvanceInterest, "Credit", "Interest on Loans")
-            '410102001-DALT-000 - Loans Service Charge (Dalt, 000)
-            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
+            Dim tmpRemarks As String = "PT# " & currentPawnTicket
+            AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks)
+            AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
+            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
         End With
     End Sub
 
