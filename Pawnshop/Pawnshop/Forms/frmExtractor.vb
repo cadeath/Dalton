@@ -41,6 +41,8 @@ Public Class frmExtractor
 
         If FormType = ExtractType.Expiry Then
             ExtractExpiry()
+        Else
+            ExtractJournalEntry()
         End If
     End Sub
 
@@ -48,7 +50,17 @@ Public Class frmExtractor
         Dim sd As Date = MonCalendar.SelectionStart
         Dim ed As Date = MonCalendar.SelectionEnd
 
-        Dim mySql As String = "SELECT * FROM "
+        Dim mySql As String = "SELECT TRANSNAME, SUM(DEBIT), SUM(CREDIT) " & _
+        "FROM JOURNAL_ENTRIES " & _
+        String.Format("WHERE TRANSDATE BETWEEN '{0}' AND '{1}' ", sd.ToShortDateString, ed.ToShortDateString) & _
+        "GROUP BY TRANSNAME"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Console.WriteLine("Executing SQL:")
+        Console.WriteLine(mySql)
+        Console.WriteLine("Entries: " & ds.Tables(0).Rows.Count)
+
+
     End Sub
 
     Private Sub ExtractExpiry()

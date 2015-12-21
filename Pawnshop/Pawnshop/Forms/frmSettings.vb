@@ -34,6 +34,16 @@
         Me.Close()
     End Sub
 
+    Private Sub InsertSAPCount(ByVal SAPCode As String)
+        Dim mySql As String = "SELECT * FROM tblCash WHERE TRANSNAME = 'Revolving Fund'"
+        Dim fillData As String = "tblCash"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds.Tables(0).Rows(0).Item("SAPACCOUNT") = SAPCode
+        database.SaveEntry(ds, False)
+
+        Console.WriteLine("Revolving Fund Added")
+    End Sub
+
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         'First
         If Not locked Then
@@ -42,6 +52,7 @@
             UpdateOptions("BranchArea", txtArea.Text)
             UpdateOptions("RevolvingFund", txtRevolving.Text)
             UpdateOptions("LOCKED", "YES")
+            InsertSAPCount(txtRevolving.Text)
         End If
         UpdateOptions("MaintainingBalance", txtBal.Text)
 
