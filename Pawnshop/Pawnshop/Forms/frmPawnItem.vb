@@ -326,6 +326,12 @@
             .Status = transactionType
 
             .SaveTicket(False)
+
+
+            AddJournal(.RedeemDue, "Debit", "Revolving Fund")
+            AddJournal(.RedeemDue, "Credit", "Inventory Merchandise - Loan")
+            AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
+            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
         End With
     End Sub
 
@@ -364,54 +370,11 @@
         If transactionType = "R" Then
             txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
             txtRedeem.Text = 0
+            txtNet.Text = PawnItem.Principal - AdvanceInterest - (ServiceCharge / 2)
         ElseIf transactionType = "X" Then
             txtRenew.Text = 0
             txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
         End If
-
-        Exit Sub
-
-        AdvanceInterest = ItemPrincipal * GetInt(30)
-        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
-        If DelayInt > 0 Then DelayInt -= AdvanceInterest
-        If transactionType <> "X" Then ServiceCharge = GetServiceCharge(ItemPrincipal)
-        Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
-
-        'Migration Addition
-        Dim OldPTCharges As Double = 0, OldSrvCharges As Double = 0
-        If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
-            OldPTCharges = AdvanceInterest
-            OldSrvCharges = ServiceCharge
-        Else
-
-        End If
-
-        If transactionType = "X" Then
-            txtAdv.Text = 0
-            txtNet.Text = 0
-        Else
-            txtAdv.Text = AdvanceInterest
-            txtNet.Text = ItemPrincipal - AdvanceInterest ' - ServiceCharge 'No more service charge
-        End If
-
-
-        txtOver.Text = daysDue
-        DelayInt += OldPTCharges 'For OLD PT without Advance INT
-        txtInt.Text = DelayInt
-        txtPenalty.Text = Penalty
-        ServiceCharge += OldSrvCharges
-        txtService.Text = ServiceCharge
-        txtEvat.Text = 0
-
-        If transactionType = "R" Then
-            txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
-            txtRedeem.Text = 0
-        ElseIf transactionType = "X" Then
-            txtRenew.Text = 0
-            txtRedeem.Text = CDbl(txtPrincipal.Text) + DelayInt + Penalty + ServiceCharge
-        End If
-
-        Exit Sub
     End Sub
 
     Private Sub SaveNewLoan()
@@ -441,6 +404,12 @@
             .Status = transactionType
 
             .SaveTicket()
+
+            Dim tmpRemarks As String = "PT# " & currentPawnTicket
+            AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks)
+            AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
+            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
         End With
     End Sub
 
@@ -881,6 +850,19 @@
             .Status = "R"
 
             .SaveTicket()
+
+            'Revolving FUND
+            AddJournal(.Principal, "Debit", "Revolving Fund")
+            'Inventory
+            AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan")
+            If .DaysOverDue > 3 Then
+                'Interest
+                AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
+                'ServiceCharge
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
+            End If
+
+
         End With
 
         AddPTNum()

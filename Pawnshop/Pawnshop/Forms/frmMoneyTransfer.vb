@@ -24,6 +24,7 @@
             .Code = "0002"
             .ServiceName = "Western Union"
             .isGenerated = False
+            .AccountName = "Due to / From Western Union"
         End With
         daltonService(1) = tmp
 
@@ -32,6 +33,7 @@
             .Code = "0003"
             .ServiceName = "Cebuana Llhuiller"
             .isGenerated = False
+            .AccountName = "Due to/from Cebuana Llhuiller"
         End With
         daltonService(2) = tmp
 
@@ -109,6 +111,8 @@
         lblWhere.Text = "Send To"
         'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
+
+        Console.WriteLine("Form LOADED successfully")
     End Sub
 
     Private Sub LoadServices()
@@ -220,6 +224,35 @@
             .Status = "A" 'Active
             .EncoderID = UserID
 
+            Select Case cboType.Text
+                Case "Pera Padala"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME)
+                        AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
+                        AddJournal(.ServiceCharge, "Debit", "Pera Padala Service Charge", "ME# " & idME)
+                    Else
+                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "ME# " & idME)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "ME# " & idME)
+                    End If
+                Case "Western Union"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "Ref# " & .ReferenceNumber)
+                    Else
+                        AddJournal(.NetAmount, "Debit", "Due to / From Western Union", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber)
+                    End If
+                Case "Cebuana Llhuiller"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Due to/from Cebuana Llhuiller", "Ref# " & .ReferenceNumber)
+                    Else
+                        AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber)
+
+                    End If
+            End Select
+
             .Save()
         End With
 
@@ -279,14 +312,16 @@
         End If
     End Sub
 
-    Private Function GetCharge(ByVal amt As Double) As Double
+    Private Function GetCharge(ByVal amt As Double, Optional ByVal type As String = "perapadala") As Double
         If rbReceive.Checked Then Return 0
 
-        Dim type As String = "perapadala", fillData As String = "tblCharge"
+        Dim fillData As String = "tblCharge"
         Dim ds As DataSet, mySql As String
-        mySql = "SELECT * FROM " & fillData
+        mySql = "SELECT * FROM " & fillData & String.Format(" WHERE type = '{0}'", type)
         ds = LoadSQL(mySql)
 
+        Console.WriteLine(mySql)
+        Console.WriteLine("Entries" & ds.Tables(0).Rows.Count)
         For Each dr As DataRow In ds.Tables(0).Rows
             If amt <= CDbl(dr.Item("AMOUNT")) Then
                 Console.WriteLine("Max: " & dr.Item("AMOUNT") & "| Charge: " & dr.Item("Charge"))
@@ -299,7 +334,21 @@
     End Function
 
     Private Sub txtAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAmount.LostFocus
-        txtCharge.Text = GetCharge(CDbl(txtAmount.Text))
+        ComputeCharges()
+    End Sub
+
+    Private Sub ComputeCharges()
+        If Not IsNumeric(txtAmount.Text) Then Exit Sub
+        Dim basicCharges As Double
+        Select Case cboType.Text
+            Case "Pera Padala"
+                basicCharges = GetCharge(CDbl(txtAmount.Text))
+            Case "Western Union"
+                basicCharges = GetCharge(CDbl(txtAmount.Text))
+            Case "Cebuana Llhuiller"
+                basicCharges = GetCharge(CDbl(txtAmount.Text), "cebuana")
+        End Select
+        txtCharge.Text = basicCharges
         ComputeNet()
     End Sub
 
@@ -344,6 +393,7 @@
         End If
 
         txtRefNum.ReadOnly = Not st
+        ComputeCharges()
     End Sub
 
     Private Sub rbSend_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbSend.CheckedChanged
@@ -371,5 +421,9 @@
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
+    End Sub
+
+    Private Sub txtAmount_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAmount.TextChanged
+
     End Sub
 End Class

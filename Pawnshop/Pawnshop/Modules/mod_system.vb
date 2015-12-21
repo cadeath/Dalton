@@ -14,6 +14,7 @@ Module mod_system
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
     Public BranchCode As String = "ROX"
+    Public REVOLVING_FUND As String = GetOption("RevolvingFund")
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
