@@ -40,23 +40,26 @@ Public Class frmExtractor
         If txtPath.Text = "" Then Exit Sub
 
         If FormType = ExtractType.Expiry Then
+            btnExtract.Enabled = False
             ExtractExpiry()
         Else
             Dim ans As MsgBoxResult = _
                 MsgBox("We will only use the Starting Date." & vbCrLf & "Do you want to continue?", _
                        vbYesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-            If ans = MsgBoxResult.No Then Exit Sub
+            btnExtract.Enabled = False
+            If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
             ExtractJournalEntry()
         End If
+        btnExtract.Enabled = True
     End Sub
 
     Private Sub ExtractJournalEntry()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT TRANSNAME, SUM(DEBIT), SUM(CREDIT) " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, SUM(DEBIT) as DEBIT, SUM(CREDIT) as CREDIT " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
         String.Format("WHERE TRANSDATE = '{0}' ", sd.ToShortDateString) & vbCrLf & _
-        "GROUP BY TRANSNAME"
+        "GROUP BY SAPACCOUNT"
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
         Console.WriteLine("Executing SQL:")
@@ -68,7 +71,7 @@ Public Class frmExtractor
         Dim oWB As Excel.Workbook
         Dim oSheet As Excel.Worksheet
 
-        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/JournalEntries.xlsx")
+        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/JournalEntries.xls")
         oSheet = oWB.Worksheets(1)
 
         oSheet.Cells(3, 1).value = "1"
@@ -79,11 +82,13 @@ Public Class frmExtractor
         oSheet.Cells(3, 14).value = "tNO"
 
         oSheet = oWB.Worksheets(2)
-        While lineNum <= MaxEntries
+        pbLoading.Maximum = MaxEntries
+        pbLoading.Value = 0
+        While lineNum < MaxEntries
             With ds.Tables(0).Rows(lineNum)
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
-                oSheet.Cells(lineNum + 3, 4) = .Item("SAPAccount").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
                 oSheet.Cells(lineNum + 3, 5) = .Item("Debit") 'Debit
                 oSheet.Cells(lineNum + 3, 6) = .Item("Credit") 'Credit
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
@@ -114,6 +119,8 @@ Public Class frmExtractor
         oWB = Nothing
         oXL.Quit()
         oXL = Nothing
+
+        MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
 
     Private Sub ExtractExpiry()
