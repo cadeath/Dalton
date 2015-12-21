@@ -44,6 +44,13 @@ Public Class frmExtractor
         End If
     End Sub
 
+    Private Sub ExtractJournalEntry()
+        Dim sd As Date = MonCalendar.SelectionStart
+        Dim ed As Date = MonCalendar.SelectionEnd
+
+        Dim mySql As String = "SELECT * FROM "
+    End Sub
+
     Private Sub ExtractExpiry()
         Dim sd As Date = MonCalendar.SelectionStart
         Dim ed As Date = MonCalendar.SelectionEnd
