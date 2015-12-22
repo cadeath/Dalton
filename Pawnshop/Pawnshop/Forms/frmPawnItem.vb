@@ -327,7 +327,6 @@
 
             .SaveTicket(False)
 
-
             AddJournal(.RedeemDue, "Debit", "Revolving Fund")
             AddJournal(.RedeemDue, "Credit", "Inventory Merchandise - Loan")
             AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
@@ -814,13 +813,13 @@
             .OfficialReceiptNumber = currentORNumber
             .OfficialReceiptDate = CurrentDate
 
-            .DaysOverDue = txtOver.Text
-            .Interest = txtInt.Text
-            .Penalty = txtPenalty.Text
-            .ServiceCharge = txtService.Text
-            .EVAT = txtEvat.Text
-            .RenewDue = txtRenew.Text
-            .RedeemDue = txtRedeem.Text
+            '.DaysOverDue = txtOver.Text
+            '.Interest = txtInt.Text
+            '.Penalty = txtPenalty.Text
+            '.ServiceCharge = txtService.Text
+            '.EVAT = txtEvat.Text
+            '.RenewDue = txtRenew.Text
+            '.RedeemDue = txtRedeem.Text
             .Status = "0"
 
             .SaveTicket(False)
@@ -835,6 +834,9 @@
             .MaturityDate = txtMatu.Text
             .ExpiryDate = txtExpiry.Text
             .AuctionDate = txtAuction.Text
+
+            .OfficialReceiptNumber = 0
+            .OfficialReceiptDate = Nothing
 
             .DaysOverDue = 0
             .Interest = 0
