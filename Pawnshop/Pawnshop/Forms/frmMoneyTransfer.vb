@@ -330,7 +330,7 @@
         Next
 
         Console.WriteLine(String.Format("LIMIT! for  {0} with 1.5% of {1}", amt, amt * 0.015))
-        Return amt + (amt * 0.015)
+        Return amt * 0.015
     End Function
 
     Private Sub txtAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAmount.LostFocus
@@ -344,7 +344,7 @@
             Case "Pera Padala"
                 basicCharges = GetCharge(CDbl(txtAmount.Text))
             Case "Western Union"
-                basicCharges = GetCharge(CDbl(txtAmount.Text))
+                basicCharges = GetCharge(CDbl(txtAmount.Text), "western")
             Case "Cebuana Llhuiller"
                 basicCharges = GetCharge(CDbl(txtAmount.Text), "cebuana")
         End Select
