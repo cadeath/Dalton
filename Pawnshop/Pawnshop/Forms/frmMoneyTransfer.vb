@@ -229,7 +229,7 @@
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME)
                         AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
-                        AddJournal(.ServiceCharge, "Debit", "Pera Padala Service Charge", "ME# " & idME)
+                        AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "ME# " & idME)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "ME# " & idME)

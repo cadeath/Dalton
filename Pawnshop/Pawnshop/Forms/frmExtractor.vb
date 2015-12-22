@@ -56,10 +56,9 @@ Public Class frmExtractor
 
     Private Sub ExtractJournalEntry()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SAPACCOUNT, SUM(DEBIT) as DEBIT, SUM(CREDIT) as CREDIT " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' ", sd.ToShortDateString) & vbCrLf & _
-        "GROUP BY SAPACCOUNT"
+        String.Format("WHERE TRANSDATE = '{0}' ", sd.ToShortDateString)
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
         Console.WriteLine("Executing SQL:")
