@@ -253,4 +253,12 @@ nextLoop:
     Private Sub btnPassBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPassBrowse.Click
         ofdBackup.ShowDialog()
     End Sub
+
+    Private Sub btnImportBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportBrowse.Click
+        ofdImport.ShowDialog()
+    End Sub
+
+    Private Sub btnImport_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+        ImportTemplate(txtImportPath.Text)
+    End Sub
 End Class
