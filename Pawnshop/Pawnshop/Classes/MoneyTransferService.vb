@@ -57,6 +57,16 @@
         End Set
     End Property
 
+    Private _accntCode As String
+    Public Property AccountName() As String
+        Get
+            Return _accntCode
+        End Get
+        Set(ByVal value As String)
+            _accntCode = value
+        End Set
+    End Property
+
 #End Region
 
     Public Function GetSendLast() As String

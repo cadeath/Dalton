@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' V1.0.5
+'  - VIEW EXPIRY_LIST ADDED
 ' v1.2
 '  - ModifyEntry added
 ' v1.1
@@ -14,7 +16,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "a1.0.4"
+    Private DBversion As String = "a1.0.6"
     Private language() As String = _
         {"Connection error failed."}
 
@@ -113,6 +115,17 @@ Friend Module database
         dbClose()
 
         Return ds
+    End Function
+
+    Friend Function LoadSQL_byDataReader(ByVal mySql As String) As OdbcDataReader
+        dbOpen()
+
+        Dim com As OdbcCommand = New OdbcCommand(mySql, con)
+        Dim reader As OdbcDataReader = com.ExecuteReader
+
+        dbClose()
+
+        Return reader
     End Function
 
     Friend Function GetOption(ByVal keys As String) As String

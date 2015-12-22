@@ -94,8 +94,12 @@
     <Reference Include="DeathCodez">
       <HintPath>.\DeathCodez.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -111,7 +115,9 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms">
       <Private>True</Private>
     </Reference>
@@ -155,6 +161,7 @@
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
+    <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
@@ -243,12 +250,6 @@
       <DependentUpon>frmCashCount.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCashCount.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmCashInOut.Designer.vb">
-      <DependentUpon>frmCashInOut.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmCashInOut.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmClient.Designer.vb">
@@ -351,6 +352,7 @@
     <Compile Include="Modules\dailyGospel.vb" />
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
+    <Compile Include="Modules\JournalEntries.vb" />
     <Compile Include="Modules\migrate.vb" />
     <Compile Include="Modules\mod_system.vb" />
     <Compile Include="Modules\newSetup.vb" />
@@ -447,9 +449,6 @@
     <EmbeddedResource Include="Forms\frmCashCount.resx">
       <DependentUpon>frmCashCount.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmCashInOut.resx">
-      <DependentUpon>frmCashInOut.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClient.resx">
       <DependentUpon>frmClient.vb</DependentUpon>
     </EmbeddedResource>
@@ -524,6 +523,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="doc\ExpiryFormat.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="doc\JournalEntries.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="dsReports.datasource" />
     <None Include="Import Template.xlsx" />
     <None Include="My Project\app.manifest">

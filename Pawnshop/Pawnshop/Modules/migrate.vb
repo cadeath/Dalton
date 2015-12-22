@@ -75,6 +75,7 @@ Module migrate
     End Function
 
     Friend Function isDuplication(ByVal pt As Int64) As Boolean
+        Console.WriteLine("Checking PT " & pt)
         mySql = "SELECT * FROM tblPawn "
         mySql &= "WHERE PawnTicket = " & pt
         Dim ds As DataSet = LoadSQL(mySql)

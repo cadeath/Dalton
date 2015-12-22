@@ -326,6 +326,12 @@
             .Status = transactionType
 
             .SaveTicket(False)
+
+
+            AddJournal(.RedeemDue, "Debit", "Revolving Fund")
+            AddJournal(.RedeemDue, "Credit", "Inventory Merchandise - Loan")
+            AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
+            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
         End With
     End Sub
 
@@ -334,30 +340,41 @@
         ItemPrincipal = CDbl(txtPrincipal.Text)
 
         AdvanceInterest = ItemPrincipal * GetInt(30)
-        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
-        If DelayInt > 0 Then DelayInt -= AdvanceInterest
         ServiceCharge = GetServiceCharge(ItemPrincipal)
+        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
         Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
 
-        Dim OldPTCharges As Double = 0
         If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
-            OldPTCharges = AdvanceInterest
+            'OLD Migrate
+            If daysDue <= 3 Then DelayInt += AdvanceInterest
+            If transactionType = "X" Then AdvanceInterest = 0
+            If transactionType = "R" Then ServiceCharge += ServiceCharge
+        Else
+            'New Transactions
+            If transactionType = "X" Then
+                ServiceCharge = 0
+            End If
+
+            If daysDue > 3 Then
+                DelayInt -= AdvanceInterest
+            End If
         End If
 
         txtAdv.Text = AdvanceInterest
-        txtNet.Text = ItemPrincipal - AdvanceInterest - ServiceCharge
-
         txtOver.Text = daysDue
-        DelayInt += OldPTCharges 'For OLD PT without Advance INT
         txtInt.Text = DelayInt
         txtPenalty.Text = Penalty
         txtService.Text = ServiceCharge
         txtEvat.Text = 0
 
-        txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
-        txtRedeem.Text = CDbl(txtPrincipal.Text) + DelayInt + Penalty
-
-        Exit Sub
+        If transactionType = "R" Then
+            txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
+            txtRedeem.Text = 0
+            txtNet.Text = PawnItem.Principal - AdvanceInterest - (ServiceCharge / 2)
+        ElseIf transactionType = "X" Then
+            txtRenew.Text = 0
+            txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
+        End If
     End Sub
 
     Private Sub SaveNewLoan()
@@ -387,6 +404,12 @@
             .Status = transactionType
 
             .SaveTicket()
+
+            Dim tmpRemarks As String = "PT# " & currentPawnTicket
+            AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks)
+            AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
+            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
         End With
     End Sub
 
@@ -529,6 +552,8 @@
                 LockFields(1)
                 btnVoid.Enabled = True
         End Select
+
+        If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
 
         'Get New Number
         Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
@@ -737,7 +762,7 @@
         TypeInt = GetInt(30)
 
         If transactionType = "L" Then
-            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt) + CDbl(GetServiceCharge(txtPrincipal.Text))
+            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
             txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
             txtService.Text = GetServiceCharge(txtPrincipal.Text)
         End If
@@ -756,7 +781,7 @@
             Select Case days
                 Case min To max
                     TypeInt = dr.Item(tbl)
-                    Console.WriteLine("Interest is now " & TypeInt)
+                    Console.WriteLine(tbl & " is now " & TypeInt & " for " & cboType.Text)
                     Return TypeInt
             End Select
         Next
@@ -811,12 +836,33 @@
             .ExpiryDate = txtExpiry.Text
             .AuctionDate = txtAuction.Text
 
+            .DaysOverDue = 0
+            .Interest = 0
+            .Penalty = 0
+            .ServiceCharge = 0
+            .EVAT = 0
+            .RenewDue = 0
+            .RedeemDue = 0
+
             .Principal = txtPrincipal.Text
             .AdvanceInterest = AdvanceInterest
             .NetAmount = .Principal - AdvanceInterest
             .Status = "R"
 
             .SaveTicket()
+
+            'Revolving FUND
+            AddJournal(.Principal, "Debit", "Revolving Fund")
+            'Inventory
+            AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan")
+            If .DaysOverDue > 3 Then
+                'Interest
+                AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
+                'ServiceCharge
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
+            End If
+
+
         End With
 
         AddPTNum()

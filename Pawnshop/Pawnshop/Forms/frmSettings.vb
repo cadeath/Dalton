@@ -1,21 +1,24 @@
 ﻿Public Class frmSettings
 
-    Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", 1, 0)
+    Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
     End Sub
 
     Private Sub ClearFields()
+        locked = IIf(GetOption("LOCKED") = "YES", True, False)
         'First
         txtCode.Text = GetOption("BranchCode")
         txtName.Text = GetOption("BranchName")
         txtArea.Text = GetOption("BranchArea")
         txtBal.Text = GetOption("MaitainingBalance")
+        txtRevolving.Text = GetOption("RevolvingFund")
 
         If locked Then
             txtCode.Enabled = False
             txtName.Enabled = False
             txtArea.Enabled = False
+            txtRevolving.Enabled = False
         End If
 
         'Second
@@ -31,11 +34,26 @@
         Me.Close()
     End Sub
 
+    Private Sub InsertSAPCount(ByVal SAPCode As String)
+        Dim mySql As String = "SELECT * FROM tblCash WHERE TRANSNAME = 'Revolving Fund'"
+        Dim fillData As String = "tblCash"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds.Tables(0).Rows(0).Item("SAPACCOUNT") = SAPCode
+        database.SaveEntry(ds, False)
+
+        Console.WriteLine("Revolving Fund Added")
+    End Sub
+
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         'First
-        UpdateOptions("BranchCode", txtCode.Text)
-        UpdateOptions("BranchName", txtName.Text)
-        UpdateOptions("BranchArea", txtArea.Text)
+        If Not locked Then
+            UpdateOptions("BranchCode", txtCode.Text)
+            UpdateOptions("BranchName", txtName.Text)
+            UpdateOptions("BranchArea", txtArea.Text)
+            UpdateOptions("RevolvingFund", txtRevolving.Text)
+            UpdateOptions("LOCKED", "YES")
+            InsertSAPCount(txtRevolving.Text)
+        End If
         UpdateOptions("MaintainingBalance", txtBal.Text)
 
         'Second

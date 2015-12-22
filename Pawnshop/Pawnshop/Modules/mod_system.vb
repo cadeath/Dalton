@@ -13,7 +13,9 @@ Module mod_system
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
-    Public BranchCode As String = "ROX"
+    Public BranchCode As String = GetOption("BranchCode")
+    Public AREACODE As String = GetOption("BranchArea")
+    Public REVOLVING_FUND As String = GetOption("RevolvingFund")
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
