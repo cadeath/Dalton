@@ -20,8 +20,7 @@
     Private daysDue As Integer
 
     Private appraiser As Hashtable
-
-
+    Private isOldItem As Boolean = False
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
     Private ItemPrincipal As Double, Penalty As Double
 
@@ -327,10 +326,20 @@
 
             .SaveTicket(False)
 
-            AddJournal(.RedeemDue, "Debit", "Revolving Fund")
-            AddJournal(.RedeemDue, "Credit", "Inventory Merchandise - Loan")
-            AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
-            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
+            If isOldItem Then
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "PT# " & .PawnTicket)
+            Else
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+                If daysDue > 3 Then
+                    AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                    AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                End If
+            End If
         End With
     End Sub
 
@@ -348,7 +357,10 @@
             If daysDue <= 3 Then DelayInt += AdvanceInterest
             If transactionType = "X" Then AdvanceInterest = 0
             If transactionType = "R" Then ServiceCharge += ServiceCharge
+
+            isOldItem = True
         Else
+            isOldItem = False
             'New Transactions
             If transactionType = "X" Then
                 ServiceCharge = 0
@@ -823,6 +835,7 @@
             .Status = "0"
 
             .SaveTicket(False)
+
         End With
         AddORNum()
         GeneratePT()
@@ -853,17 +866,26 @@
 
             .SaveTicket()
 
-            'Revolving FUND
-            AddJournal(.Principal, "Debit", "Revolving Fund")
-            'Inventory
-            AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan")
-            If .DaysOverDue > 3 Then
-                'Interest
-                AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
-                'ServiceCharge
-                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
-            End If
+            If isOldItem Then
+                AddJournal(.Principal, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
 
+                AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+                AddJournal(.NetAmount, "Credit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "PT# " & .PawnTicket)
+            Else
+                AddJournal(.Principal, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+
+                AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+                AddJournal(.NetAmount, "Credit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+            End If
 
         End With
 
