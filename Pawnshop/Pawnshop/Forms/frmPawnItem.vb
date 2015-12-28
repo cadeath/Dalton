@@ -381,7 +381,7 @@
         If transactionType = "R" Then
             txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
             txtRedeem.Text = 0
-            txtNet.Text = PawnItem.Principal - AdvanceInterest - (ServiceCharge / 2)
+            txtNet.Text = PawnItem.Principal - AdvanceInterest - ServiceCharge
         ElseIf transactionType = "X" Then
             txtRenew.Text = 0
             txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
@@ -819,22 +819,34 @@
 
     Private Sub SaveRenew()
         Dim oldPT As Integer = PawnItem.PawnTicket
+        Dim principal As Double, netAmt As Double
+        Dim interest As Double, advInt As Double
+        Dim servChar As Double,  penalty As Double
+        Dim redeemDue As Double
 
         'Redeem
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
             .OfficialReceiptDate = CurrentDate
 
-            '.DaysOverDue = txtOver.Text
-            '.Interest = txtInt.Text
-            '.Penalty = txtPenalty.Text
-            '.ServiceCharge = txtService.Text
-            '.EVAT = txtEvat.Text
-            '.RenewDue = txtRenew.Text
-            '.RedeemDue = txtRedeem.Text
+            .DaysOverDue = txtOver.Text
+            .Interest = txtInt.Text
+            .Penalty = txtPenalty.Text
+            .ServiceCharge = txtService.Text
+            .EVAT = txtEvat.Text
+            .RenewDue = txtRenew.Text
+            .RedeemDue = txtRedeem.Text
             .Status = "0"
 
             .SaveTicket(False)
+
+            principal = CDbl(txtPrincipal.Text)
+            netAmt = CDbl(txtNet.Text)
+            interest = CDbl(txtInt.Text)
+            advInt = CDbl(txtAdv.Text)
+            servChar = CDbl(txtService.Text)
+            penalty = CDbl(txtPenalty.Text)
+            redeemDue = CDbl(txtRedeem.Text)
 
         End With
         AddORNum()
@@ -866,27 +878,9 @@
 
             .SaveTicket()
 
-            If isOldItem Then
-                AddJournal(.Principal, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
-                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
-                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
-
-                AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
-                AddJournal(.NetAmount, "Credit", "Revolving Fund", "PT# " & .PawnTicket)
-                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
-                AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
-
-                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "PT# " & .PawnTicket)
-            Else
-                AddJournal(.Principal, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
-                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
-
-                AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
-                AddJournal(.NetAmount, "Credit", "Revolving Fund", "PT# " & .PawnTicket)
-                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
-                AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
-            End If
-
+            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT)
+            AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
+            AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With
 
         AddPTNum()
