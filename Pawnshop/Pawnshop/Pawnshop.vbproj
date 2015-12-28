@@ -521,6 +521,7 @@
     <EmbeddedResource Include="Reports\rpt_LoanRegister.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="doc\ExpiryFormat.xls">
