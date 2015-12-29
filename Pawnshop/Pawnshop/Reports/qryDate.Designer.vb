@@ -24,6 +24,7 @@ Partial Class qryDate
     Private Sub InitializeComponent()
         Me.monCal = New System.Windows.Forms.MonthCalendar()
         Me.btnGenerate = New System.Windows.Forms.Button()
+        Me.cboReports = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'monCal
@@ -35,18 +36,29 @@ Partial Class qryDate
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(83, 175)
+        Me.btnGenerate.Location = New System.Drawing.Point(80, 209)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(80, 31)
         Me.btnGenerate.TabIndex = 1
         Me.btnGenerate.Text = "&Generate"
         Me.btnGenerate.UseVisualStyleBackColor = True
         '
+        'cboReports
+        '
+        Me.cboReports.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboReports.FormattingEnabled = True
+        Me.cboReports.Items.AddRange(New Object() {"Schedule of Redeem and Renewal", "Schedule of Loan and Renewal"})
+        Me.cboReports.Location = New System.Drawing.Point(12, 182)
+        Me.cboReports.Name = "cboReports"
+        Me.cboReports.Size = New System.Drawing.Size(225, 21)
+        Me.cboReports.TabIndex = 2
+        '
         'qryDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(245, 214)
+        Me.ClientSize = New System.Drawing.Size(245, 247)
+        Me.Controls.Add(Me.cboReports)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
         Me.MaximizeBox = False
@@ -57,4 +69,5 @@ Partial Class qryDate
     End Sub
     Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
     Friend WithEvents btnGenerate As System.Windows.Forms.Button
+    Friend WithEvents cboReports As System.Windows.Forms.ComboBox
 End Class

@@ -1,15 +1,30 @@
 ﻿Public Class qryDate
 
+    Enum ReportType As Integer
+        RedeemRenew = 0
+        LoanRenew = 1
+    End Enum
+    Friend FormType As ReportType = ReportType.RedeemRenew
+
     Private branchName As String = GetOption("BranchName")
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
+        If cboReports.Text = "" Then Exit Sub
+
+        Select Case cboReports.Text
+            Case "Schedule of Redeem and Renewal"
+                FormType = ReportType.RedeemRenew
+            Case "Schedule of Loan and Renewal"
+                FormType = ReportType.LoanRenew
+        End Select
+
         Generate()
     End Sub
 
-    Private Sub Generate()
+    Private Sub RedeemRenew()
         Dim selectedDate As Date = GetFirstDate(monCal.SelectionStart)
-        Dim fillData As String = "dsRedeemRenew"
-        Console.WriteLine("Selected First: " & selectedDate.ToShortDateString)
+        Dim fillData As String
+        fillData = "dsRedeemRenew"
 
         Dim mySql As String = "SELECT ORDATE,"
         mySql &= vbCrLf & "SUM(CASE WHEN STATUS = 'X' THEN 1 ELSE 0 END) AS COUNT_REDEEM,"
@@ -34,9 +49,33 @@
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & selectedDate.ToString("MMMM").ToUpper & " " & selectedDate.Year)
         rptPara.Add("branchName", branchName)
 
-        Console.WriteLine(mySql)
         frmReport.ReportInit(mySql, fillData, "Reports\rpt_RedeemRenew.rdlc", rptPara)
         frmReport.Show()
+    End Sub
+
+    Private Sub LoanRenew()
+        Dim stDay = GetFirstDate(monCal.SelectionStart)
+        Dim laDay = GetLastDate(monCal.SelectionEnd)
+        Dim fillData As String = "MONTHLY_LOANRENEW"
+        Dim mySql As String = "SELECT * FROM " & fillData
+        mySql &= String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= " ORDER BY LOANDATE ASC"
+
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\prt_LoanRenew.rdlc", rptPara)
+        frmReport.Show()
+    End Sub
+
+    Private Sub Generate()
+        Select Case FormType
+            Case ReportType.RedeemRenew
+                RedeemRenew()
+            Case ReportType.LoanRenew
+                LoanRenew()
+        End Select
     End Sub
 
     Private Function GetFirstDate(ByVal curDate As Date) As Date
@@ -50,4 +89,8 @@
 
         Return lastOfMonth
     End Function
+
+    Private Sub qryDate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
