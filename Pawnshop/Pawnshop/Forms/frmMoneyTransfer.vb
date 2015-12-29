@@ -2,8 +2,45 @@
 
     Dim senderClient As Client
     Dim receiverClient As Client
-    Dim transID As Integer = GetOption("MoneyTransNum")
     Friend displayOnly As Boolean = False
+
+    Dim idME As Integer, idMR As Integer
+
+    Private daltonService(2) As MoneyTransferService
+
+    Private Sub Main()
+        Dim tmp As New MoneyTransferService
+        With tmp
+            .Code = "0001"
+            .ServiceName = "Pera Padala"
+            .isGenerated = True
+            .KeySend = "MEnumLast"
+            .KeyReceived = "MRNumLast"
+        End With
+        daltonService(0) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0002"
+            .ServiceName = "Western Union"
+            .isGenerated = False
+            .AccountName = "Due to / From Western Union"
+        End With
+        daltonService(1) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0003"
+            .ServiceName = "Cebuana Llhuiller"
+            .isGenerated = False
+            .AccountName = "Due to/from Cebuana Llhuiller"
+        End With
+        daltonService(2) = tmp
+
+        'Pera Padala
+        idME = daltonService(0).GetSendLast
+        idMR = daltonService(1).GetReceivedLast
+    End Sub
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click
         If rbReceive.Checked Then
@@ -18,6 +55,11 @@
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub DisplayNumber(Optional ByVal num As Integer = 0)
+        If num = 0 Then txtTransNum.Text = ""
+        txtTransNum.Text = String.Format("{0:000000}", num)
     End Sub
 
     Private Sub txtSender_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSender.KeyPress
@@ -62,12 +104,23 @@
     End Sub
 
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Main()
         ClearField()
         LockFields(True)
+        LoadServices()
         lblWhere.Text = "Send To"
-        GetTransNumber()
         'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
+
+        Console.WriteLine("Form LOADED successfully")
+    End Sub
+
+    Private Sub LoadServices()
+        cboType.Items.Clear()
+        For Each el As MoneyTransferService In daltonService
+            cboType.Items.Add(el.ServiceName)
+        Next
+        If cboType.Items.Count > 0 Then cboType.SelectedIndex = 0
     End Sub
 
     Private Function GetLocations() As String()
@@ -83,10 +136,6 @@
 
         Return tmpStr
     End Function
-
-    Private Sub GetTransNumber()
-        txtTransNum.Text = String.Format("{0:000000}", transID)
-    End Sub
 
     Private Sub ClearField()
         rbSend.Checked = True
@@ -121,9 +170,10 @@
     End Sub
 
     Private Function isValid() As Boolean
+        Dim idx As Integer = cboType.SelectedIndex
         If cboType.Text = "" Then cboType.Focus() : Return False
 
-        If cboType.Text = "Western Union" And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
+        If Not daltonService(idx).isGenerated And txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         If rbSend.Checked Then
             If senderClient Is Nothing Then txtSender.Focus() : MsgBox("Please select Sender", MsgBoxStyle.Critical) : Return False
             If txtSenderIDNum.Text = "" Then txtSenderIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
@@ -144,6 +194,20 @@
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
 
+        Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim transID As Integer = 0
+        Dim idx As Integer = cboType.SelectedIndex
+        If daltonService(idx).isGenerated Then
+            If rbSend.Checked Then
+                transID = idME
+            Else
+                transID = idMR
+            End If
+        End If
+
+
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             .TransactionType = IIf(rbReceive.Checked, 1, 0)
@@ -160,18 +224,49 @@
             .Status = "A" 'Active
             .EncoderID = UserID
 
+            Select Case cboType.Text
+                Case "Pera Padala"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME)
+                        AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
+                        AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
+                    Else
+                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "ME# " & idME)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "ME# " & idME)
+                    End If
+                Case "Western Union"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "Ref# " & .ReferenceNumber)
+                    Else
+                        AddJournal(.NetAmount, "Debit", "Due to / From Western Union", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber)
+                    End If
+                Case "Cebuana Llhuiller"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Due to/from Cebuana Llhuiller", "Ref# " & .ReferenceNumber)
+                    Else
+                        AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber)
+
+                    End If
+            End Select
+
             .Save()
         End With
 
-        AddTransID()
+        If daltonService(idx).isGenerated Then
+            If rbSend.Checked Then
+                idME += 1 : daltonService(idx).SetSendLast(idME)
+            Else
+                idMR += 1 : daltonService(idx).SetReceivedLast(idMR)
+            End If
+        End If
+
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         frmMTlist.LoadActive()
         Me.Close()
-    End Sub
-
-    Private Sub AddTransID()
-        transID += 1
-        UpdateOptions("TRANSID", transID)
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
@@ -217,14 +312,16 @@
         End If
     End Sub
 
-    Private Function GetCharge(ByVal amt As Double) As Double
+    Private Function GetCharge(ByVal amt As Double, Optional ByVal type As String = "perapadala") As Double
         If rbReceive.Checked Then Return 0
 
-        Dim type As String = "perapadala", fillData As String = "tblCharge"
+        Dim fillData As String = "tblCharge"
         Dim ds As DataSet, mySql As String
-        mySql = "SELECT * FROM " & fillData
+        mySql = "SELECT * FROM " & fillData & String.Format(" WHERE type = '{0}'", type)
         ds = LoadSQL(mySql)
 
+        Console.WriteLine(mySql)
+        Console.WriteLine("Entries" & ds.Tables(0).Rows.Count)
         For Each dr As DataRow In ds.Tables(0).Rows
             If amt <= CDbl(dr.Item("AMOUNT")) Then
                 Console.WriteLine("Max: " & dr.Item("AMOUNT") & "| Charge: " & dr.Item("Charge"))
@@ -233,11 +330,25 @@
         Next
 
         Console.WriteLine(String.Format("LIMIT! for  {0} with 1.5% of {1}", amt, amt * 0.015))
-        Return amt + (amt * 0.015)
+        Return amt * 0.015
     End Function
 
     Private Sub txtAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAmount.LostFocus
-        txtCharge.Text = GetCharge(CDbl(txtAmount.Text))
+        ComputeCharges()
+    End Sub
+
+    Private Sub ComputeCharges()
+        If Not IsNumeric(txtAmount.Text) Then Exit Sub
+        Dim basicCharges As Double
+        Select Case cboType.Text
+            Case "Pera Padala"
+                basicCharges = GetCharge(CDbl(txtAmount.Text))
+            Case "Western Union"
+                basicCharges = GetCharge(CDbl(txtAmount.Text), "western")
+            Case "Cebuana Llhuiller"
+                basicCharges = GetCharge(CDbl(txtAmount.Text), "cebuana")
+        End Select
+        txtCharge.Text = basicCharges
         ComputeNet()
     End Sub
 
@@ -263,22 +374,26 @@
     End Sub
 
     Private Sub CheckTracking()
+        Dim idx As Integer = cboType.SelectedIndex
         Dim st As Boolean = False
+        If cboType.Items.Count <= 0 Then Exit Sub
         If displayOnly Then Exit Sub
 
-        If rbSend.Checked Then
-            If cboType.Text = "Western Union" Then
-                st = True
-            Else
+        If daltonService(idx).isGenerated Then
+            If rbSend.Checked Then
+                DisplayNumber(idME)
                 st = False
+            Else
+                DisplayNumber(idMR)
+                st = True
             End If
-        End If
-
-        If rbReceive.Checked Then
+        Else
+            txtTransNum.Text = ""
             st = True
         End If
 
         txtRefNum.ReadOnly = Not st
+        ComputeCharges()
     End Sub
 
     Private Sub rbSend_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbSend.CheckedChanged
@@ -306,5 +421,9 @@
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
+    End Sub
+
+    Private Sub txtAmount_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAmount.TextChanged
+
     End Sub
 End Class

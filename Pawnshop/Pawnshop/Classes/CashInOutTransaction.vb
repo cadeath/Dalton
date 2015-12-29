@@ -146,5 +146,14 @@
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
+
+        Select Case _type
+            Case "Receipt"
+                AddJournal(_amount, "Debit", "Revolving Fund")
+                AddJournal(_amount, "Credit", _transName)
+            Case "Disbursement"
+                AddJournal(_amount, "Credit", "Revolving Fund")
+                AddJournal(_amount, "Debit", _transName)
+        End Select
     End Sub
 End Class

@@ -13,7 +13,9 @@ Module mod_system
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
-    Public BranchCode As String = "ROX"
+    Public BranchCode As String = GetOption("BranchCode")
+    Public AREACODE As String = GetOption("BranchArea")
+    Public REVOLVING_FUND As String = GetOption("RevolvingFund")
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
@@ -87,6 +89,26 @@ Module mod_system
         End If
     End Sub
 
+    Friend Function AutoSegregate() As Boolean
+        Console.WriteLine("Entering segregation module")
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
+        Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
+
+        If ds.Tables(0).Rows.Count = 0 Then Return True
+
+        Console.WriteLine("Segregating...")
+        For Each dr As DataRow In ds.Tables("tblPawn").Rows
+            Dim tmpPawnItem As New PawnTicket
+            tmpPawnItem.LoadTicketInRow(dr)
+            tmpPawnItem.Status = "S"
+            tmpPawnItem.SaveTicket(False)
+            Console.WriteLine("PT: " & tmpPawnItem.PawnTicket)
+        Next
+
+        Console.WriteLine("Segregation complete")
+        Return True
+    End Function
+
     Friend Sub CloseStore(ByVal cc As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
@@ -96,6 +118,7 @@ Module mod_system
             With ds.Tables(storeDB).Rows(0)
                 .Item("CashCount") = cc
                 .Item("Status") = 0
+                .Item("Closer") = POSuser.UserID
             End With
 
             database.SaveEntry(ds, False)

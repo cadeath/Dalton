@@ -27,6 +27,7 @@ Partial Class frmMain
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseOpenStore = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClosingStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.UserManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -38,10 +39,13 @@ Partial Class frmMain
         Me.ExpiryGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.JournalEntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutUsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -63,7 +67,8 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
-        Me.ClosingStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -76,7 +81,7 @@ Partial Class frmMain
         Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.ReportToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.msMenu.Location = New System.Drawing.Point(0, 0)
         Me.msMenu.Name = "msMenu"
-        Me.msMenu.Size = New System.Drawing.Size(936, 24)
+        Me.msMenu.Size = New System.Drawing.Size(1058, 24)
         Me.msMenu.TabIndex = 0
         Me.msMenu.Text = "msMenu"
         '
@@ -93,6 +98,12 @@ Partial Class frmMain
         Me.CloseOpenStore.Size = New System.Drawing.Size(171, 22)
         Me.CloseOpenStore.Text = "&Open Store"
         '
+        'ClosingStoreToolStripMenuItem
+        '
+        Me.ClosingStoreToolStripMenuItem.Name = "ClosingStoreToolStripMenuItem"
+        Me.ClosingStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ClosingStoreToolStripMenuItem.Text = "&Closing Store"
+        '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
@@ -108,7 +119,7 @@ Partial Class frmMain
         '
         Me.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
         Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.UpdateToolStripMenuItem.Text = "&Update Rate"
+        Me.UpdateToolStripMenuItem.Text = "&Maintenance"
         '
         'SettingsToolStripMenuItem
         '
@@ -135,7 +146,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -158,6 +169,12 @@ Partial Class frmMain
         Me.CashCountToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.CashCountToolStripMenuItem.Text = "&Cash Count"
         '
+        'ItemPulloutToolStripMenuItem
+        '
+        Me.ItemPulloutToolStripMenuItem.Name = "ItemPulloutToolStripMenuItem"
+        Me.ItemPulloutToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ItemPulloutToolStripMenuItem.Text = "&Item Pullout"
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
@@ -177,9 +194,22 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.LoanRegisterToolStripMenuItem, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(165, 22)
+        Me.ToolStripMenuItem2.Text = "&Monthly Reports"
+        '
+        'LoanRegisterToolStripMenuItem
+        '
+        Me.LoanRegisterToolStripMenuItem.Name = "LoanRegisterToolStripMenuItem"
+        Me.LoanRegisterToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.LoanRegisterToolStripMenuItem.Text = "&Loan Register"
         '
         'AboutToolStripMenuItem
         '
@@ -206,7 +236,7 @@ Partial Class frmMain
         Me.pbLogo.Image = CType(resources.GetObject("pbLogo.Image"), System.Drawing.Image)
         Me.pbLogo.Location = New System.Drawing.Point(0, 24)
         Me.pbLogo.Name = "pbLogo"
-        Me.pbLogo.Size = New System.Drawing.Size(936, 120)
+        Me.pbLogo.Size = New System.Drawing.Size(1058, 120)
         Me.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pbLogo.TabIndex = 1
         Me.pbLogo.TabStop = False
@@ -255,7 +285,7 @@ Partial Class frmMain
         Me.pButton.Controls.Add(Me.btnMoneyTransfer)
         Me.pButton.Controls.Add(Me.btnClient)
         Me.pButton.Controls.Add(Me.btnPawning)
-        Me.pButton.Location = New System.Drawing.Point(393, 160)
+        Me.pButton.Location = New System.Drawing.Point(543, 161)
         Me.pButton.Name = "pButton"
         Me.pButton.Size = New System.Drawing.Size(503, 334)
         Me.pButton.TabIndex = 0
@@ -354,7 +384,7 @@ Partial Class frmMain
         Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser})
         Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
-        Me.statusStrip.Size = New System.Drawing.Size(936, 22)
+        Me.statusStrip.Size = New System.Drawing.Size(1058, 22)
         Me.statusStrip.TabIndex = 6
         Me.statusStrip.Text = "ss"
         '
@@ -375,18 +405,23 @@ Partial Class frmMain
         '
         Me.tmrCurrent.Enabled = True
         '
-        'ClosingStoreToolStripMenuItem
+        'DailyCashCountToolStripMenuItem
         '
-        Me.ClosingStoreToolStripMenuItem.Name = "ClosingStoreToolStripMenuItem"
-        Me.ClosingStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.ClosingStoreToolStripMenuItem.Text = "&Closing Store"
+        Me.DailyCashCountToolStripMenuItem.Name = "DailyCashCountToolStripMenuItem"
+        Me.DailyCashCountToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.DailyCashCountToolStripMenuItem.Text = "&Daily Cash Count"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(162, 6)
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(185, Byte), Integer), CType(CType(249, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(936, 603)
+        Me.ClientSize = New System.Drawing.Size(1058, 603)
         Me.Controls.Add(Me.statusStrip)
         Me.Controls.Add(Me.pButton)
         Me.Controls.Add(Me.pbLogo)
@@ -450,5 +485,10 @@ Partial Class frmMain
     Friend WithEvents tsUser As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ClosingStoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ItemPulloutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LoanRegisterToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents DailyCashCountToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -1,5 +1,7 @@
 ﻿Public Class frmOpenStore
 
+    Dim isDisable As Boolean = 0
+
     Private Sub frmOpenStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadMoney()
     End Sub
@@ -20,17 +22,20 @@
     End Sub
 
     Private Sub btnSetup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetup.Click
-        If frmMain.dateSet Then MsgBox("Please execute closing", MsgBoxStyle.Critical) : Exit Sub
-        Dim ans As DialogResult = MsgBox("TODAY IS: " & vbCrLf & dtpCurrentDate.Value.ToString("MMM d, yyyy"), MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Please CHECK")
+        If Not isDisable Then If frmMain.dateSet Then MsgBox("Please execute closing", MsgBoxStyle.Critical) : Exit Sub
+        Dim ans As DialogResult = _
+            MsgBox("TODAY IS: " & vbCrLf & dtpCurrentDate.Value.ToString("MMM d, yyyy"), MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Please CHECK")
         If Not ans = Windows.Forms.DialogResult.Yes Then
             Exit Sub
         End If
 
         CurrentDate = dtpCurrentDate.Value
-        'Remove, for testing only
-        'frmMain.dateSet = True
-        'Me.Close()
-        'Exit Sub 'Remove, for testing only
+        If isDisable Then
+            frmMain.dateSet = True
+            Me.Close()
+            Exit Sub
+        End If
+        
         If mod_system.OpenStore() Then
             frmMain.dateSet = True
             dailyID = LoadLastOpening.Tables(0).Rows(0).Item("ID")

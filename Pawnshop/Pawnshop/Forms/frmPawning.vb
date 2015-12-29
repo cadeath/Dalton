@@ -1,4 +1,6 @@
 ﻿Public Class frmPawning
+    'Version 1.1
+    ' - Don't display item not equal or less than the current date
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -31,8 +33,34 @@
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE Status = 'L' OR Status = 'R' OR Status = 'S' ORDER BY LoanDate ASC, PAWNID ASC"
+        Dim st As String = "1"
+
+        st &= IIf(chkRenew.Checked, "1", "0")
+        st &= IIf(chkRedeem.Checked, "1", "0")
+        st &= IIf(chkSeg.Checked, "1", "0")
+
+        Dim mySql As String = "SELECT FIRST 100 * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        If st = "1000" Then
+            mySql &= "' AND (Status = 'L' OR Status = 'R') ORDER BY LoanDate ASC, PAWNID ASC"
+        Else
+            'mySql &= "' AND (Status = 'L' OR Status = 'R' "
+            mySql &= "' AND ("
+            If st.Substring(1, 1) = "1" Then mySql &= "Status = '0' "
+            If st.Substring(2, 1) = "1" Then
+                If st.Substring(1, 1) = "1" Then mySql &= " OR "
+                mySql &= "Status = 'X' "
+            End If
+            If st.Substring(3, 1) = "1" Then
+                If st.Substring(2, 1) = "1" Then mySql &= " OR "
+                mySql &= "Status = 'S' "
+            End If
+
+        mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+
+        End If
         Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = lvPawners.Items.Count Then Exit Sub
 
         lvPawners.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
@@ -61,6 +89,7 @@
         Select Case tk.Status
             Case "0" : lv.BackColor = Color.LightGray
             Case "X" : lv.BackColor = Color.Red
+            Case "S" : lv.BackColor = Color.Yellow
             Case "W" : lv.BackColor = Color.Red
             Case "V" : lv.BackColor = Color.Gray
         End Select
@@ -125,8 +154,13 @@
             Next
         End If
 
-        lvPawners.Focus()
         MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
+        'Auto Select
+        If lvPawners.Items.Count > 0 Then
+            lvPawners.Focus()
+            lvPawners.Items(0).Selected = True
+            lvPawners.Items(0).EnsureVisible()
+        End If
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
@@ -158,8 +192,6 @@
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
-            'frmNewloan.SwitchTransaction("RENEW")
-            'frmPawnItem.Redeem("R")
             frmPawnItem.btnRenew.PerformClick()
         End If
     End Sub
@@ -167,9 +199,19 @@
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
-            'frmNewloan.SwitchTransaction("REDEEM")
-            'frmPawnItem.Redeem()
             frmPawnItem.btnRedeem.PerformClick()
         End If
+    End Sub
+
+    Private Sub chkRenew_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRenew.CheckedChanged
+        LoadActive()
+    End Sub
+
+    Private Sub chkRedeem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRedeem.CheckedChanged
+        LoadActive()
+    End Sub
+
+    Private Sub chkSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSeg.CheckedChanged
+        LoadActive()
     End Sub
 End Class

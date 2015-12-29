@@ -702,9 +702,9 @@ Partial Class frmPawnItem
         Me.lblInterest.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInterest.Location = New System.Drawing.Point(16, 170)
         Me.lblInterest.Name = "lblInterest"
-        Me.lblInterest.Size = New System.Drawing.Size(106, 16)
+        Me.lblInterest.Size = New System.Drawing.Size(51, 16)
         Me.lblInterest.TabIndex = 11
-        Me.lblInterest.Text = "Delayed Interest"
+        Me.lblInterest.Text = "Interest"
         '
         'txtOver
         '
@@ -786,7 +786,7 @@ Partial Class frmPawnItem
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(88, 33)
         Me.btnCancel.TabIndex = 8
-        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.Text = "&Close"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnSave

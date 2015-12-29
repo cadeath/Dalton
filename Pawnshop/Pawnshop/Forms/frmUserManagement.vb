@@ -100,7 +100,7 @@
         priv &= "|"
 
         'Special
-        listChk = {chkCashInBank, chkCashOutBank, chkVoid}
+        listChk = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
         Next
@@ -133,7 +133,7 @@
                         chkList = {chkUM, chkUR, chkUS, chkBorrowings}
                         Console.WriteLine("Manager Length: " & privParts(y).Length)
                     Case 3 'Special
-                        chkList = {chkCashInBank, chkCashOutBank, chkVoid}
+                        chkList = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate}
                         Console.WriteLine("Special Length: " & privParts(y).Length)
                 End Select
 
@@ -183,6 +183,8 @@
                 chkCashInBank.Checked = tabStat
                 chkCashOutBank.Checked = tabStat
                 chkVoid.Checked = tabStat
+                chkPullOut.Checked = tabStat
+                chkMigrate.Checked = tabStat
         End Select
     End Sub
 

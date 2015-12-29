@@ -114,7 +114,7 @@ Partial Class frmCashCount
         Me.txtCurDate.Name = "txtCurDate"
         Me.txtCurDate.ReadOnly = True
         Me.txtCurDate.Size = New System.Drawing.Size(253, 24)
-        Me.txtCurDate.TabIndex = 11
+        Me.txtCurDate.TabIndex = 3
         Me.txtCurDate.Text = "Jan. 7, 2015 5:30 PM"
         '
         'btnClose
@@ -122,7 +122,7 @@ Partial Class frmCashCount
         Me.btnClose.Location = New System.Drawing.Point(536, 319)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 56)
-        Me.btnClose.TabIndex = 13
+        Me.btnClose.TabIndex = 2
         Me.btnClose.Text = "&Cancel"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -132,7 +132,7 @@ Partial Class frmCashCount
         Me.btnPost.Location = New System.Drawing.Point(455, 319)
         Me.btnPost.Name = "btnPost"
         Me.btnPost.Size = New System.Drawing.Size(75, 56)
-        Me.btnPost.TabIndex = 13
+        Me.btnPost.TabIndex = 1
         Me.btnPost.Text = "&Post"
         Me.btnPost.UseVisualStyleBackColor = True
         '

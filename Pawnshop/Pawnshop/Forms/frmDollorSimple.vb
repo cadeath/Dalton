@@ -2,7 +2,7 @@
 
     Private dollarClient As Client
     Private dollarEntry As DollarTransaction
-    Private strRate As String = "Php " & DollarRate
+    Private strRate As String = DollarRate
     Private fillData As String = "tblDollar"
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -17,10 +17,12 @@
     End Sub
 
     Private Function isValid() As Boolean
+        If Not IsNumeric(txtRate.Text) Then txtRate.Focus() : Return False
         If cboDenomination.Text = "" Then cboDenomination.DroppedDown = True : Return False
         If txtTotal.Text = "" Then txtTotal.Focus() : Return False
         If txtSerial.Text = "" Then txtSerial.Focus() : Return False
-        If dollarClient Is Nothing Or Not txtName.Text.Contains(dollarClient.FirstName) Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : txtName.Focus() : Return False
+        'If dollarClient Is Nothing Or Not txtName.Text.Contains(dollarClient.FirstName) Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : txtName.Focus() : Return False
+        If dollarClient Is Nothing Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : txtName.Focus() : Return False
 
         Return True
     End Function
@@ -34,8 +36,14 @@
     Private Sub cboDenomination_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboDenomination.SelectedIndexChanged
         If cboDenomination.Text = "" Or txtRate.Text = "" Then Exit Sub
 
+        ComputeTotal()
+    End Sub
+
+    Private Sub ComputeTotal()
+        If Not IsNumeric(txtRate.Text) Then Exit Sub
+
         Dim getAmount As Integer = cboDenomination.Text.Substring(1)
-        Dim getRate As Double = CDbl(txtRate.Text.Substring(4))
+        Dim getRate As Double = CDbl(txtRate.Text)
         Console.WriteLine("Rate: " & getRate)
         Console.WriteLine("Amount: " & getAmount)
 
@@ -82,7 +90,7 @@
 
         dollarEntry = New DollarTransaction
         With dollarEntry
-            .CurrentRate = DollarRate
+            .CurrentRate = CDbl(txtRate.Text)
             .TransactionDate = CurrentDate
             .Customer = dollarClient
             .Denomination = cboDenomination.Text
@@ -91,6 +99,9 @@
             .NetAmount = txtTotal.Text.Substring(4)
 
             .SaveDollar()
+
+            AddJournal(.NetAmount, "Debit", "Cash Offsetting Account")
+            AddJournal(.NetAmount, "Credit", "Revolving Fund")
         End With
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
@@ -116,5 +127,13 @@
         If isEnter(e) Then
             txtName.Focus()
         End If
+    End Sub
+
+    Private Sub txtRate_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtRate_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRate.KeyUp
+        ComputeTotal()
     End Sub
 End Class
