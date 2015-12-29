@@ -126,7 +126,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
+                <Value>=First(Fields!Denomination.Value, "dsCashCount")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1816,7 +1816,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>7.02083in</Width>
+  <Width>7.11458in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
