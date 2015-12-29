@@ -5,7 +5,8 @@ Public Class frmReport
 
     End Sub
 
-    Friend Sub ReportInit(ByVal mySql As String, ByVal dsName As String, ByVal rptUrl As String, ByVal addPara As Dictionary(Of String, String))
+    Friend Sub ReportInit(ByVal mySql As String, ByVal dsName As String, ByVal rptUrl As String, _
+                          Optional ByVal addPara As Dictionary(Of String, String) = Nothing, Optional ByVal hasUser As Boolean = True)
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
         Console.WriteLine("SQL: " & mySql)
@@ -17,11 +18,14 @@ Public Class frmReport
             .LocalReport.DataSources.Clear()
 
             .LocalReport.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
-            Dim myPara As New ReportParameter
-            myPara.Name = "txtUsername"
-            If POSuser.UserName Is Nothing Then POSuser.UserName = "Sample Eskie"
-            myPara.Values.Add(POSuser.UserName)
-            rv_display.LocalReport.SetParameters(New ReportParameter() {myPara})
+            If hasUser Then
+                Dim myPara As New ReportParameter
+                myPara.Name = "txtUsername"
+                If POSuser.UserName Is Nothing Then POSuser.UserName = "Sample Eskie"
+                myPara.Values.Add(POSuser.UserName)
+                rv_display.LocalReport.SetParameters(New ReportParameter() {myPara})
+            End If
+            
             If Not addPara Is Nothing Then
                 For Each nPara In addPara
                     Dim tmpPara As New ReportParameter

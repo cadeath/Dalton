@@ -11,7 +11,7 @@
         txtCode.Text = GetOption("BranchCode")
         txtName.Text = GetOption("BranchName")
         txtArea.Text = GetOption("BranchArea")
-        txtBal.Text = GetOption("MaitainingBalance")
+        txtBal.Text = GetOption("MaintainingBalance")
         txtRevolving.Text = GetOption("RevolvingFund")
 
         If locked Then

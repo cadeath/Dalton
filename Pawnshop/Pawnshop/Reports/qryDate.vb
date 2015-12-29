@@ -3,20 +3,23 @@
     Enum ReportType As Integer
         RedeemRenew = 0
         LoanRenew = 1
+        DailyCashCount = 2
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
     Private branchName As String = GetOption("BranchName")
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
-        If cboReports.Text = "" Then Exit Sub
+        If cboReports.Text = "" And cboReports.Visible Then Exit Sub
 
-        Select Case cboReports.Text
-            Case "Schedule of Redeem and Renewal"
-                FormType = ReportType.RedeemRenew
-            Case "Schedule of Loan and Renewal"
-                FormType = ReportType.LoanRenew
-        End Select
+        If cboReports.Visible Then
+            Select Case cboReports.Text
+                Case "Schedule of Redeem and Renewal"
+                    FormType = ReportType.RedeemRenew
+                Case "Schedule of Loan and Renewal"
+                    FormType = ReportType.LoanRenew
+            End Select
+        End If
 
         Generate()
     End Sub
@@ -75,7 +78,19 @@
                 RedeemRenew()
             Case ReportType.LoanRenew
                 LoanRenew()
+            Case ReportType.DailyCashCount
+                DailyCashCount()
         End Select
+    End Sub
+
+    Private Sub DailyCashCount()
+        Dim fillData As String = "dsCashCount"
+        Dim mySql As String = "SELECT * FROM CASH_COUNT WHERE "
+        mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+
+        Dim rptPara As New Dictionary(Of String, String)
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_CashCount.rdlc", Nothing, False)
+        frmReport.Show()
     End Sub
 
     Private Function GetFirstDate(ByVal curDate As Date) As Date
@@ -91,6 +106,10 @@
     End Function
 
     Private Sub qryDate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        If FormType = ReportType.DailyCashCount Then
+            cboReports.Visible = False
+        Else
+            cboReports.Visible = True
+        End If
     End Sub
 End Class

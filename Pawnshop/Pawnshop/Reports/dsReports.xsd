@@ -12,7 +12,7 @@
   <xs:element name="dsReports" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsReports" msprop:Generator_UserDSName="dsReports">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="dsLoanReg" msprop:Generator_TableClassName="dsLoanRegDataTable" msprop:Generator_TableVarName="tabledsLoanReg" msprop:Generator_RowChangedName="dsLoanRegRowChanged" msprop:Generator_TablePropName="dsLoanReg" msprop:Generator_RowDeletingName="dsLoanRegRowDeleting" msprop:Generator_RowChangingName="dsLoanRegRowChanging" msprop:Generator_RowEvHandlerName="dsLoanRegRowChangeEventHandler" msprop:Generator_RowDeletedName="dsLoanRegRowDeleted" msprop:Generator_RowClassName="dsLoanRegRow" msprop:Generator_UserTableName="dsLoanReg" msprop:Generator_RowEvArgName="dsLoanRegRowChangeEvent">
+        <xs:element name="dsLoanReg" msprop:Generator_TableClassName="dsLoanRegDataTable" msprop:Generator_TableVarName="tabledsLoanReg" msprop:Generator_TablePropName="dsLoanReg" msprop:Generator_RowDeletingName="dsLoanRegRowDeleting" msprop:Generator_RowChangingName="dsLoanRegRowChanging" msprop:Generator_RowEvHandlerName="dsLoanRegRowChangeEventHandler" msprop:Generator_RowDeletedName="dsLoanRegRowDeleted" msprop:Generator_UserTableName="dsLoanReg" msprop:Generator_RowChangedName="dsLoanRegRowChanged" msprop:Generator_RowEvArgName="dsLoanRegRowChangeEvent" msprop:Generator_RowClassName="dsLoanRegRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PawnTicket" msprop:Generator_ColumnVarNameInTable="columnPawnTicket" msprop:Generator_ColumnPropNameInRow="PawnTicket" msprop:Generator_ColumnPropNameInTable="PawnTicketColumn" msprop:Generator_UserColumnName="PawnTicket" type="xs:string" minOccurs="0" />
@@ -31,7 +31,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="dsRedeemRenew" msprop:Generator_TableClassName="dsRedeemRenewDataTable" msprop:Generator_TableVarName="tabledsRedeemRenew" msprop:Generator_RowChangedName="dsRedeemRenewRowChanged" msprop:Generator_TablePropName="dsRedeemRenew" msprop:Generator_RowDeletingName="dsRedeemRenewRowDeleting" msprop:Generator_RowChangingName="dsRedeemRenewRowChanging" msprop:Generator_RowEvHandlerName="dsRedeemRenewRowChangeEventHandler" msprop:Generator_RowDeletedName="dsRedeemRenewRowDeleted" msprop:Generator_RowClassName="dsRedeemRenewRow" msprop:Generator_UserTableName="dsRedeemRenew" msprop:Generator_RowEvArgName="dsRedeemRenewRowChangeEvent">
+        <xs:element name="dsRedeemRenew" msprop:Generator_TableClassName="dsRedeemRenewDataTable" msprop:Generator_TableVarName="tabledsRedeemRenew" msprop:Generator_TablePropName="dsRedeemRenew" msprop:Generator_RowDeletingName="dsRedeemRenewRowDeleting" msprop:Generator_RowChangingName="dsRedeemRenewRowChanging" msprop:Generator_RowEvHandlerName="dsRedeemRenewRowChangeEventHandler" msprop:Generator_RowDeletedName="dsRedeemRenewRowDeleted" msprop:Generator_UserTableName="dsRedeemRenew" msprop:Generator_RowChangedName="dsRedeemRenewRowChanged" msprop:Generator_RowEvArgName="dsRedeemRenewRowChangeEvent" msprop:Generator_RowClassName="dsRedeemRenewRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ORDate" msprop:Generator_ColumnVarNameInTable="columnORDate" msprop:Generator_ColumnPropNameInRow="ORDate" msprop:Generator_ColumnPropNameInTable="ORDateColumn" msprop:Generator_UserColumnName="ORDate" type="xs:string" minOccurs="0" />
@@ -48,7 +48,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MONTHLY_LOANRENEW" msprop:Generator_TableClassName="MONTHLY_LOANRENEWDataTable" msprop:Generator_TableVarName="tableMONTHLY_LOANRENEW" msprop:Generator_RowChangedName="MONTHLY_LOANRENEWRowChanged" msprop:Generator_TablePropName="MONTHLY_LOANRENEW" msprop:Generator_RowDeletingName="MONTHLY_LOANRENEWRowDeleting" msprop:Generator_RowChangingName="MONTHLY_LOANRENEWRowChanging" msprop:Generator_RowEvHandlerName="MONTHLY_LOANRENEWRowChangeEventHandler" msprop:Generator_RowDeletedName="MONTHLY_LOANRENEWRowDeleted" msprop:Generator_RowClassName="MONTHLY_LOANRENEWRow" msprop:Generator_UserTableName="MONTHLY_LOANRENEW" msprop:Generator_RowEvArgName="MONTHLY_LOANRENEWRowChangeEvent">
+        <xs:element name="MONTHLY_LOANRENEW" msprop:Generator_TableClassName="MONTHLY_LOANRENEWDataTable" msprop:Generator_TableVarName="tableMONTHLY_LOANRENEW" msprop:Generator_TablePropName="MONTHLY_LOANRENEW" msprop:Generator_RowDeletingName="MONTHLY_LOANRENEWRowDeleting" msprop:Generator_RowChangingName="MONTHLY_LOANRENEWRowChanging" msprop:Generator_RowEvHandlerName="MONTHLY_LOANRENEWRowChangeEventHandler" msprop:Generator_RowDeletedName="MONTHLY_LOANRENEWRowDeleted" msprop:Generator_UserTableName="MONTHLY_LOANRENEW" msprop:Generator_RowChangedName="MONTHLY_LOANRENEWRowChanged" msprop:Generator_RowEvArgName="MONTHLY_LOANRENEWRowChangeEvent" msprop:Generator_RowClassName="MONTHLY_LOANRENEWRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="LoanDate" msprop:Generator_ColumnVarNameInTable="columnLoanDate" msprop:Generator_ColumnPropNameInRow="LoanDate" msprop:Generator_ColumnPropNameInTable="LoanDateColumn" msprop:Generator_UserColumnName="LoanDate" type="xs:string" minOccurs="0" />
@@ -62,6 +62,19 @@
               <xs:element name="LOAN_PRINCIPAL" msprop:Generator_ColumnVarNameInTable="columnLOAN_PRINCIPAL" msprop:Generator_ColumnPropNameInRow="LOAN_PRINCIPAL" msprop:Generator_ColumnPropNameInTable="LOAN_PRINCIPALColumn" msprop:Generator_UserColumnName="LOAN_PRINCIPAL" type="xs:string" minOccurs="0" />
               <xs:element name="RENEW_COUNT" msprop:Generator_ColumnVarNameInTable="columnRENEW_COUNT" msprop:Generator_ColumnPropNameInRow="RENEW_COUNT" msprop:Generator_ColumnPropNameInTable="RENEW_COUNTColumn" msprop:Generator_UserColumnName="RENEW_COUNT" type="xs:string" minOccurs="0" />
               <xs:element name="RENEW_PRINCIPAL" msprop:Generator_ColumnVarNameInTable="columnRENEW_PRINCIPAL" msprop:Generator_ColumnPropNameInRow="RENEW_PRINCIPAL" msprop:Generator_ColumnPropNameInTable="RENEW_PRINCIPALColumn" msprop:Generator_UserColumnName="RENEW_PRINCIPAL" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dsCashCount" msprop:Generator_TableClassName="dsCashCountDataTable" msprop:Generator_TableVarName="tabledsCashCount" msprop:Generator_TablePropName="dsCashCount" msprop:Generator_RowDeletingName="dsCashCountRowDeleting" msprop:Generator_RowChangingName="dsCashCountRowChanging" msprop:Generator_RowEvHandlerName="dsCashCountRowChangeEventHandler" msprop:Generator_RowDeletedName="dsCashCountRowDeleted" msprop:Generator_UserTableName="dsCashCount" msprop:Generator_RowChangedName="dsCashCountRowChanged" msprop:Generator_RowEvArgName="dsCashCountRowChangeEvent" msprop:Generator_RowClassName="dsCashCountRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CurrentDate" msprop:Generator_ColumnVarNameInTable="columnCurrentDate" msprop:Generator_ColumnPropNameInRow="CurrentDate" msprop:Generator_ColumnPropNameInTable="CurrentDateColumn" msprop:Generator_UserColumnName="CurrentDate" type="xs:string" minOccurs="0" />
+              <xs:element name="MaintainBal" msprop:Generator_ColumnVarNameInTable="columnMaintainBal" msprop:Generator_ColumnPropNameInRow="MaintainBal" msprop:Generator_ColumnPropNameInTable="MaintainBalColumn" msprop:Generator_UserColumnName="MaintainBal" type="xs:string" minOccurs="0" />
+              <xs:element name="InitialBal" msprop:Generator_ColumnVarNameInTable="columnInitialBal" msprop:Generator_ColumnPropNameInRow="InitialBal" msprop:Generator_ColumnPropNameInTable="InitialBalColumn" msprop:Generator_UserColumnName="InitialBal" type="xs:string" minOccurs="0" />
+              <xs:element name="Denomination" msprop:Generator_ColumnVarNameInTable="columnDenomination" msprop:Generator_ColumnPropNameInRow="Denomination" msprop:Generator_ColumnPropNameInTable="DenominationColumn" msprop:Generator_UserColumnName="Denomination" type="xs:string" minOccurs="0" />
+              <xs:element name="Cnt" msprop:Generator_ColumnVarNameInTable="columnCnt" msprop:Generator_ColumnPropNameInRow="Cnt" msprop:Generator_ColumnPropNameInTable="CntColumn" msprop:Generator_UserColumnName="Cnt" type="xs:string" minOccurs="0" />
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:string" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

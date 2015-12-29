@@ -118,6 +118,7 @@ Module mod_system
             With ds.Tables(storeDB).Rows(0)
                 .Item("CashCount") = cc
                 .Item("Status") = 0
+                .Item("Closer") = POSuser.UserID
             End With
 
             database.SaveEntry(ds, False)
