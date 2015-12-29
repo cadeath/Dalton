@@ -306,4 +306,8 @@ Public Class frmMain
     Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
         qryLoan.Show()
     End Sub
+
+    Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+        qryDate.Show()
+    End Sub
 End Class

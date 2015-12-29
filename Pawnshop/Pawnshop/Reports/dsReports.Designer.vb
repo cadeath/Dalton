@@ -27,6 +27,10 @@ Partial Public Class dsReports
     
     Private tabledsLoanReg As dsLoanRegDataTable
     
+    Private tabledsRedeemRenew As dsRedeemRenewDataTable
+    
+    Private tableMONTHLY_LOANRENEW As MONTHLY_LOANRENEWDataTable
+    
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -59,6 +63,12 @@ Partial Public Class dsReports
             If (Not (ds.Tables("dsLoanReg")) Is Nothing) Then
                 MyBase.Tables.Add(New dsLoanRegDataTable(ds.Tables("dsLoanReg")))
             End If
+            If (Not (ds.Tables("dsRedeemRenew")) Is Nothing) Then
+                MyBase.Tables.Add(New dsRedeemRenewDataTable(ds.Tables("dsRedeemRenew")))
+            End If
+            If (Not (ds.Tables("MONTHLY_LOANRENEW")) Is Nothing) Then
+                MyBase.Tables.Add(New MONTHLY_LOANRENEWDataTable(ds.Tables("MONTHLY_LOANRENEW")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -83,6 +93,26 @@ Partial Public Class dsReports
     Public ReadOnly Property dsLoanReg() As dsLoanRegDataTable
         Get
             Return Me.tabledsLoanReg
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property dsRedeemRenew() As dsRedeemRenewDataTable
+        Get
+            Return Me.tabledsRedeemRenew
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property MONTHLY_LOANRENEW() As MONTHLY_LOANRENEWDataTable
+        Get
+            Return Me.tableMONTHLY_LOANRENEW
         End Get
     End Property
     
@@ -156,6 +186,12 @@ Partial Public Class dsReports
             If (Not (ds.Tables("dsLoanReg")) Is Nothing) Then
                 MyBase.Tables.Add(New dsLoanRegDataTable(ds.Tables("dsLoanReg")))
             End If
+            If (Not (ds.Tables("dsRedeemRenew")) Is Nothing) Then
+                MyBase.Tables.Add(New dsRedeemRenewDataTable(ds.Tables("dsRedeemRenew")))
+            End If
+            If (Not (ds.Tables("MONTHLY_LOANRENEW")) Is Nothing) Then
+                MyBase.Tables.Add(New MONTHLY_LOANRENEWDataTable(ds.Tables("MONTHLY_LOANRENEW")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -194,6 +230,18 @@ Partial Public Class dsReports
                 Me.tabledsLoanReg.InitVars
             End If
         End If
+        Me.tabledsRedeemRenew = CType(MyBase.Tables("dsRedeemRenew"),dsRedeemRenewDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tabledsRedeemRenew) Is Nothing) Then
+                Me.tabledsRedeemRenew.InitVars
+            End If
+        End If
+        Me.tableMONTHLY_LOANRENEW = CType(MyBase.Tables("MONTHLY_LOANRENEW"),MONTHLY_LOANRENEWDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableMONTHLY_LOANRENEW) Is Nothing) Then
+                Me.tableMONTHLY_LOANRENEW.InitVars
+            End If
+        End If
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -206,11 +254,27 @@ Partial Public Class dsReports
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
         Me.tabledsLoanReg = New dsLoanRegDataTable()
         MyBase.Tables.Add(Me.tabledsLoanReg)
+        Me.tabledsRedeemRenew = New dsRedeemRenewDataTable()
+        MyBase.Tables.Add(Me.tabledsRedeemRenew)
+        Me.tableMONTHLY_LOANRENEW = New MONTHLY_LOANRENEWDataTable()
+        MyBase.Tables.Add(Me.tableMONTHLY_LOANRENEW)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Function ShouldSerializedsLoanReg() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Private Function ShouldSerializedsRedeemRenew() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Private Function ShouldSerializeMONTHLY_LOANRENEW() As Boolean
         Return false
     End Function
     
@@ -274,6 +338,12 @@ Partial Public Class dsReports
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Delegate Sub dsLoanRegRowChangeEventHandler(ByVal sender As Object, ByVal e As dsLoanRegRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Delegate Sub dsRedeemRenewRowChangeEventHandler(ByVal sender As Object, ByVal e As dsRedeemRenewRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Delegate Sub MONTHLY_LOANRENEWRowChangeEventHandler(ByVal sender As Object, ByVal e As MONTHLY_LOANRENEWRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -640,6 +710,770 @@ Partial Public Class dsReports
             Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
             attribute2.Name = "tableTypeName"
             attribute2.FixedValue = "dsLoanRegDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class dsRedeemRenewDataTable
+        Inherits Global.System.Data.TypedTableBase(Of dsRedeemRenewRow)
+        
+        Private columnORDate As Global.System.Data.DataColumn
+        
+        Private columnCOUNT_REDEEM As Global.System.Data.DataColumn
+        
+        Private columnPRINCIPAL_REDEEM As Global.System.Data.DataColumn
+        
+        Private columnINTEREST_REDEEM As Global.System.Data.DataColumn
+        
+        Private columnSC_REDEEM As Global.System.Data.DataColumn
+        
+        Private columnTOTAL_REDEEM As Global.System.Data.DataColumn
+        
+        Private columnCOUNT_RENEW As Global.System.Data.DataColumn
+        
+        Private columnPRINCIPAL_RENEW As Global.System.Data.DataColumn
+        
+        Private columnINTEREST_RENEW As Global.System.Data.DataColumn
+        
+        Private columnSC_RENEW As Global.System.Data.DataColumn
+        
+        Private columnTOTAL_RENEW As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "dsRedeemRenew"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ORDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnORDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property COUNT_REDEEMColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCOUNT_REDEEM
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PRINCIPAL_REDEEMColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPRINCIPAL_REDEEM
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property INTEREST_REDEEMColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnINTEREST_REDEEM
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SC_REDEEMColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSC_REDEEM
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TOTAL_REDEEMColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTOTAL_REDEEM
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property COUNT_RENEWColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCOUNT_RENEW
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PRINCIPAL_RENEWColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPRINCIPAL_RENEW
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property INTEREST_RENEWColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnINTEREST_RENEW
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SC_RENEWColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSC_RENEW
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TOTAL_RENEWColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTOTAL_RENEW
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As dsRedeemRenewRow
+            Get
+                Return CType(Me.Rows(index),dsRedeemRenewRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event dsRedeemRenewRowChanging As dsRedeemRenewRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event dsRedeemRenewRowChanged As dsRedeemRenewRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event dsRedeemRenewRowDeleting As dsRedeemRenewRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event dsRedeemRenewRowDeleted As dsRedeemRenewRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AdddsRedeemRenewRow(ByVal row As dsRedeemRenewRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AdddsRedeemRenewRow(ByVal ORDate As String, ByVal COUNT_REDEEM As String, ByVal PRINCIPAL_REDEEM As String, ByVal INTEREST_REDEEM As String, ByVal SC_REDEEM As String, ByVal TOTAL_REDEEM As String, ByVal COUNT_RENEW As String, ByVal PRINCIPAL_RENEW As String, ByVal INTEREST_RENEW As String, ByVal SC_RENEW As String, ByVal TOTAL_RENEW As String) As dsRedeemRenewRow
+            Dim rowdsRedeemRenewRow As dsRedeemRenewRow = CType(Me.NewRow,dsRedeemRenewRow)
+            Dim columnValuesArray() As Object = New Object() {ORDate, COUNT_REDEEM, PRINCIPAL_REDEEM, INTEREST_REDEEM, SC_REDEEM, TOTAL_REDEEM, COUNT_RENEW, PRINCIPAL_RENEW, INTEREST_RENEW, SC_RENEW, TOTAL_RENEW}
+            rowdsRedeemRenewRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowdsRedeemRenewRow)
+            Return rowdsRedeemRenewRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As dsRedeemRenewDataTable = CType(MyBase.Clone,dsRedeemRenewDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New dsRedeemRenewDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnORDate = MyBase.Columns("ORDate")
+            Me.columnCOUNT_REDEEM = MyBase.Columns("COUNT_REDEEM")
+            Me.columnPRINCIPAL_REDEEM = MyBase.Columns("PRINCIPAL_REDEEM")
+            Me.columnINTEREST_REDEEM = MyBase.Columns("INTEREST_REDEEM")
+            Me.columnSC_REDEEM = MyBase.Columns("SC_REDEEM")
+            Me.columnTOTAL_REDEEM = MyBase.Columns("TOTAL_REDEEM")
+            Me.columnCOUNT_RENEW = MyBase.Columns("COUNT_RENEW")
+            Me.columnPRINCIPAL_RENEW = MyBase.Columns("PRINCIPAL_RENEW")
+            Me.columnINTEREST_RENEW = MyBase.Columns("INTEREST_RENEW")
+            Me.columnSC_RENEW = MyBase.Columns("SC_RENEW")
+            Me.columnTOTAL_RENEW = MyBase.Columns("TOTAL_RENEW")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnORDate = New Global.System.Data.DataColumn("ORDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnORDate)
+            Me.columnCOUNT_REDEEM = New Global.System.Data.DataColumn("COUNT_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCOUNT_REDEEM)
+            Me.columnPRINCIPAL_REDEEM = New Global.System.Data.DataColumn("PRINCIPAL_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPRINCIPAL_REDEEM)
+            Me.columnINTEREST_REDEEM = New Global.System.Data.DataColumn("INTEREST_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnINTEREST_REDEEM)
+            Me.columnSC_REDEEM = New Global.System.Data.DataColumn("SC_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSC_REDEEM)
+            Me.columnTOTAL_REDEEM = New Global.System.Data.DataColumn("TOTAL_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTOTAL_REDEEM)
+            Me.columnCOUNT_RENEW = New Global.System.Data.DataColumn("COUNT_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCOUNT_RENEW)
+            Me.columnPRINCIPAL_RENEW = New Global.System.Data.DataColumn("PRINCIPAL_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPRINCIPAL_RENEW)
+            Me.columnINTEREST_RENEW = New Global.System.Data.DataColumn("INTEREST_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnINTEREST_RENEW)
+            Me.columnSC_RENEW = New Global.System.Data.DataColumn("SC_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSC_RENEW)
+            Me.columnTOTAL_RENEW = New Global.System.Data.DataColumn("TOTAL_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTOTAL_RENEW)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewdsRedeemRenewRow() As dsRedeemRenewRow
+            Return CType(Me.NewRow,dsRedeemRenewRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New dsRedeemRenewRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(dsRedeemRenewRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.dsRedeemRenewRowChangedEvent) Is Nothing) Then
+                RaiseEvent dsRedeemRenewRowChanged(Me, New dsRedeemRenewRowChangeEvent(CType(e.Row,dsRedeemRenewRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.dsRedeemRenewRowChangingEvent) Is Nothing) Then
+                RaiseEvent dsRedeemRenewRowChanging(Me, New dsRedeemRenewRowChangeEvent(CType(e.Row,dsRedeemRenewRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.dsRedeemRenewRowDeletedEvent) Is Nothing) Then
+                RaiseEvent dsRedeemRenewRowDeleted(Me, New dsRedeemRenewRowChangeEvent(CType(e.Row,dsRedeemRenewRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.dsRedeemRenewRowDeletingEvent) Is Nothing) Then
+                RaiseEvent dsRedeemRenewRowDeleting(Me, New dsRedeemRenewRowChangeEvent(CType(e.Row,dsRedeemRenewRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemovedsRedeemRenewRow(ByVal row As dsRedeemRenewRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As dsReports = New dsReports()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "dsRedeemRenewDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class MONTHLY_LOANRENEWDataTable
+        Inherits Global.System.Data.TypedTableBase(Of MONTHLY_LOANRENEWRow)
+        
+        Private columnLoanDate As Global.System.Data.DataColumn
+        
+        Private columnCEL_COUNT As Global.System.Data.DataColumn
+        
+        Private columnCEL_PRINCIPAL As Global.System.Data.DataColumn
+        
+        Private columnJWL_COUNT As Global.System.Data.DataColumn
+        
+        Private columnJWL_PRINCIPAL As Global.System.Data.DataColumn
+        
+        Private columnAPP_COUNT As Global.System.Data.DataColumn
+        
+        Private columnAPP_PRINCIPAL As Global.System.Data.DataColumn
+        
+        Private columnLOAN_COUNT As Global.System.Data.DataColumn
+        
+        Private columnLOAN_PRINCIPAL As Global.System.Data.DataColumn
+        
+        Private columnRENEW_COUNT As Global.System.Data.DataColumn
+        
+        Private columnRENEW_PRINCIPAL As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "MONTHLY_LOANRENEW"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LoanDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLoanDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CEL_COUNTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCEL_COUNT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CEL_PRINCIPALColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCEL_PRINCIPAL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property JWL_COUNTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnJWL_COUNT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property JWL_PRINCIPALColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnJWL_PRINCIPAL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property APP_COUNTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAPP_COUNT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property APP_PRINCIPALColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAPP_PRINCIPAL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LOAN_COUNTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLOAN_COUNT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LOAN_PRINCIPALColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLOAN_PRINCIPAL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property RENEW_COUNTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRENEW_COUNT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property RENEW_PRINCIPALColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRENEW_PRINCIPAL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As MONTHLY_LOANRENEWRow
+            Get
+                Return CType(Me.Rows(index),MONTHLY_LOANRENEWRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event MONTHLY_LOANRENEWRowChanging As MONTHLY_LOANRENEWRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event MONTHLY_LOANRENEWRowChanged As MONTHLY_LOANRENEWRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event MONTHLY_LOANRENEWRowDeleting As MONTHLY_LOANRENEWRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event MONTHLY_LOANRENEWRowDeleted As MONTHLY_LOANRENEWRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddMONTHLY_LOANRENEWRow(ByVal row As MONTHLY_LOANRENEWRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddMONTHLY_LOANRENEWRow(ByVal LoanDate As String, ByVal CEL_COUNT As String, ByVal CEL_PRINCIPAL As String, ByVal JWL_COUNT As String, ByVal JWL_PRINCIPAL As String, ByVal APP_COUNT As String, ByVal APP_PRINCIPAL As String, ByVal LOAN_COUNT As String, ByVal LOAN_PRINCIPAL As String, ByVal RENEW_COUNT As String, ByVal RENEW_PRINCIPAL As String) As MONTHLY_LOANRENEWRow
+            Dim rowMONTHLY_LOANRENEWRow As MONTHLY_LOANRENEWRow = CType(Me.NewRow,MONTHLY_LOANRENEWRow)
+            Dim columnValuesArray() As Object = New Object() {LoanDate, CEL_COUNT, CEL_PRINCIPAL, JWL_COUNT, JWL_PRINCIPAL, APP_COUNT, APP_PRINCIPAL, LOAN_COUNT, LOAN_PRINCIPAL, RENEW_COUNT, RENEW_PRINCIPAL}
+            rowMONTHLY_LOANRENEWRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowMONTHLY_LOANRENEWRow)
+            Return rowMONTHLY_LOANRENEWRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As MONTHLY_LOANRENEWDataTable = CType(MyBase.Clone,MONTHLY_LOANRENEWDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New MONTHLY_LOANRENEWDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnLoanDate = MyBase.Columns("LoanDate")
+            Me.columnCEL_COUNT = MyBase.Columns("CEL_COUNT")
+            Me.columnCEL_PRINCIPAL = MyBase.Columns("CEL_PRINCIPAL")
+            Me.columnJWL_COUNT = MyBase.Columns("JWL_COUNT")
+            Me.columnJWL_PRINCIPAL = MyBase.Columns("JWL_PRINCIPAL")
+            Me.columnAPP_COUNT = MyBase.Columns("APP_COUNT")
+            Me.columnAPP_PRINCIPAL = MyBase.Columns("APP_PRINCIPAL")
+            Me.columnLOAN_COUNT = MyBase.Columns("LOAN_COUNT")
+            Me.columnLOAN_PRINCIPAL = MyBase.Columns("LOAN_PRINCIPAL")
+            Me.columnRENEW_COUNT = MyBase.Columns("RENEW_COUNT")
+            Me.columnRENEW_PRINCIPAL = MyBase.Columns("RENEW_PRINCIPAL")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnLoanDate = New Global.System.Data.DataColumn("LoanDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLoanDate)
+            Me.columnCEL_COUNT = New Global.System.Data.DataColumn("CEL_COUNT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCEL_COUNT)
+            Me.columnCEL_PRINCIPAL = New Global.System.Data.DataColumn("CEL_PRINCIPAL", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCEL_PRINCIPAL)
+            Me.columnJWL_COUNT = New Global.System.Data.DataColumn("JWL_COUNT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJWL_COUNT)
+            Me.columnJWL_PRINCIPAL = New Global.System.Data.DataColumn("JWL_PRINCIPAL", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJWL_PRINCIPAL)
+            Me.columnAPP_COUNT = New Global.System.Data.DataColumn("APP_COUNT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAPP_COUNT)
+            Me.columnAPP_PRINCIPAL = New Global.System.Data.DataColumn("APP_PRINCIPAL", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAPP_PRINCIPAL)
+            Me.columnLOAN_COUNT = New Global.System.Data.DataColumn("LOAN_COUNT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLOAN_COUNT)
+            Me.columnLOAN_PRINCIPAL = New Global.System.Data.DataColumn("LOAN_PRINCIPAL", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLOAN_PRINCIPAL)
+            Me.columnRENEW_COUNT = New Global.System.Data.DataColumn("RENEW_COUNT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRENEW_COUNT)
+            Me.columnRENEW_PRINCIPAL = New Global.System.Data.DataColumn("RENEW_PRINCIPAL", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRENEW_PRINCIPAL)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewMONTHLY_LOANRENEWRow() As MONTHLY_LOANRENEWRow
+            Return CType(Me.NewRow,MONTHLY_LOANRENEWRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New MONTHLY_LOANRENEWRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(MONTHLY_LOANRENEWRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.MONTHLY_LOANRENEWRowChangedEvent) Is Nothing) Then
+                RaiseEvent MONTHLY_LOANRENEWRowChanged(Me, New MONTHLY_LOANRENEWRowChangeEvent(CType(e.Row,MONTHLY_LOANRENEWRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.MONTHLY_LOANRENEWRowChangingEvent) Is Nothing) Then
+                RaiseEvent MONTHLY_LOANRENEWRowChanging(Me, New MONTHLY_LOANRENEWRowChangeEvent(CType(e.Row,MONTHLY_LOANRENEWRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.MONTHLY_LOANRENEWRowDeletedEvent) Is Nothing) Then
+                RaiseEvent MONTHLY_LOANRENEWRowDeleted(Me, New MONTHLY_LOANRENEWRowChangeEvent(CType(e.Row,MONTHLY_LOANRENEWRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.MONTHLY_LOANRENEWRowDeletingEvent) Is Nothing) Then
+                RaiseEvent MONTHLY_LOANRENEWRowDeleting(Me, New MONTHLY_LOANRENEWRowChangeEvent(CType(e.Row,MONTHLY_LOANRENEWRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveMONTHLY_LOANRENEWRow(ByVal row As MONTHLY_LOANRENEWRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As dsReports = New dsReports()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "MONTHLY_LOANRENEWDataTable"
             type.Attributes.Add(attribute2)
             type.Particle = sequence
             Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
@@ -1051,6 +1885,632 @@ Partial Public Class dsReports
     End Class
     
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class dsRedeemRenewRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tabledsRedeemRenew As dsRedeemRenewDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tabledsRedeemRenew = CType(Me.Table,dsRedeemRenewDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ORDate() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.ORDateColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ORDate' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.ORDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property COUNT_REDEEM() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.COUNT_REDEEMColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'COUNT_REDEEM' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.COUNT_REDEEMColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PRINCIPAL_REDEEM() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.PRINCIPAL_REDEEMColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PRINCIPAL_REDEEM' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.PRINCIPAL_REDEEMColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property INTEREST_REDEEM() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.INTEREST_REDEEMColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'INTEREST_REDEEM' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.INTEREST_REDEEMColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SC_REDEEM() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.SC_REDEEMColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SC_REDEEM' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.SC_REDEEMColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TOTAL_REDEEM() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.TOTAL_REDEEMColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TOTAL_REDEEM' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.TOTAL_REDEEMColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property COUNT_RENEW() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.COUNT_RENEWColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'COUNT_RENEW' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.COUNT_RENEWColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PRINCIPAL_RENEW() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.PRINCIPAL_RENEWColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PRINCIPAL_RENEW' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.PRINCIPAL_RENEWColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property INTEREST_RENEW() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.INTEREST_RENEWColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'INTEREST_RENEW' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.INTEREST_RENEWColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SC_RENEW() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.SC_RENEWColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SC_RENEW' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.SC_RENEWColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TOTAL_RENEW() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.TOTAL_RENEWColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TOTAL_RENEW' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.TOTAL_RENEWColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsORDateNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.ORDateColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetORDateNull()
+            Me(Me.tabledsRedeemRenew.ORDateColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCOUNT_REDEEMNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.COUNT_REDEEMColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCOUNT_REDEEMNull()
+            Me(Me.tabledsRedeemRenew.COUNT_REDEEMColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPRINCIPAL_REDEEMNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.PRINCIPAL_REDEEMColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPRINCIPAL_REDEEMNull()
+            Me(Me.tabledsRedeemRenew.PRINCIPAL_REDEEMColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsINTEREST_REDEEMNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.INTEREST_REDEEMColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetINTEREST_REDEEMNull()
+            Me(Me.tabledsRedeemRenew.INTEREST_REDEEMColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSC_REDEEMNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.SC_REDEEMColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSC_REDEEMNull()
+            Me(Me.tabledsRedeemRenew.SC_REDEEMColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTOTAL_REDEEMNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.TOTAL_REDEEMColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTOTAL_REDEEMNull()
+            Me(Me.tabledsRedeemRenew.TOTAL_REDEEMColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCOUNT_RENEWNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.COUNT_RENEWColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCOUNT_RENEWNull()
+            Me(Me.tabledsRedeemRenew.COUNT_RENEWColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPRINCIPAL_RENEWNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.PRINCIPAL_RENEWColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPRINCIPAL_RENEWNull()
+            Me(Me.tabledsRedeemRenew.PRINCIPAL_RENEWColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsINTEREST_RENEWNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.INTEREST_RENEWColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetINTEREST_RENEWNull()
+            Me(Me.tabledsRedeemRenew.INTEREST_RENEWColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSC_RENEWNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.SC_RENEWColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSC_RENEWNull()
+            Me(Me.tabledsRedeemRenew.SC_RENEWColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTOTAL_RENEWNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.TOTAL_RENEWColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTOTAL_RENEWNull()
+            Me(Me.tabledsRedeemRenew.TOTAL_RENEWColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class MONTHLY_LOANRENEWRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableMONTHLY_LOANRENEW As MONTHLY_LOANRENEWDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableMONTHLY_LOANRENEW = CType(Me.Table,MONTHLY_LOANRENEWDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property LoanDate() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.LoanDateColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LoanDate' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.LoanDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CEL_COUNT() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.CEL_COUNTColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CEL_COUNT' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.CEL_COUNTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CEL_PRINCIPAL() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.CEL_PRINCIPALColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CEL_PRINCIPAL' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.CEL_PRINCIPALColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property JWL_COUNT() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.JWL_COUNTColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'JWL_COUNT' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.JWL_COUNTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property JWL_PRINCIPAL() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.JWL_PRINCIPALColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'JWL_PRINCIPAL' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.JWL_PRINCIPALColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property APP_COUNT() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.APP_COUNTColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'APP_COUNT' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.APP_COUNTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property APP_PRINCIPAL() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.APP_PRINCIPALColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'APP_PRINCIPAL' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.APP_PRINCIPALColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property LOAN_COUNT() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.LOAN_COUNTColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LOAN_COUNT' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.LOAN_COUNTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property LOAN_PRINCIPAL() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.LOAN_PRINCIPALColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LOAN_PRINCIPAL' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.LOAN_PRINCIPALColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property RENEW_COUNT() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.RENEW_COUNTColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RENEW_COUNT' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.RENEW_COUNTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property RENEW_PRINCIPAL() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.RENEW_PRINCIPALColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'RENEW_PRINCIPAL' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.RENEW_PRINCIPALColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLoanDateNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.LoanDateColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLoanDateNull()
+            Me(Me.tableMONTHLY_LOANRENEW.LoanDateColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCEL_COUNTNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.CEL_COUNTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCEL_COUNTNull()
+            Me(Me.tableMONTHLY_LOANRENEW.CEL_COUNTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCEL_PRINCIPALNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.CEL_PRINCIPALColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCEL_PRINCIPALNull()
+            Me(Me.tableMONTHLY_LOANRENEW.CEL_PRINCIPALColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsJWL_COUNTNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.JWL_COUNTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetJWL_COUNTNull()
+            Me(Me.tableMONTHLY_LOANRENEW.JWL_COUNTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsJWL_PRINCIPALNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.JWL_PRINCIPALColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetJWL_PRINCIPALNull()
+            Me(Me.tableMONTHLY_LOANRENEW.JWL_PRINCIPALColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAPP_COUNTNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.APP_COUNTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAPP_COUNTNull()
+            Me(Me.tableMONTHLY_LOANRENEW.APP_COUNTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAPP_PRINCIPALNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.APP_PRINCIPALColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAPP_PRINCIPALNull()
+            Me(Me.tableMONTHLY_LOANRENEW.APP_PRINCIPALColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLOAN_COUNTNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.LOAN_COUNTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLOAN_COUNTNull()
+            Me(Me.tableMONTHLY_LOANRENEW.LOAN_COUNTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLOAN_PRINCIPALNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.LOAN_PRINCIPALColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLOAN_PRINCIPALNull()
+            Me(Me.tableMONTHLY_LOANRENEW.LOAN_PRINCIPALColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsRENEW_COUNTNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.RENEW_COUNTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetRENEW_COUNTNull()
+            Me(Me.tableMONTHLY_LOANRENEW.RENEW_COUNTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsRENEW_PRINCIPALNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.RENEW_PRINCIPALColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetRENEW_PRINCIPALNull()
+            Me(Me.tableMONTHLY_LOANRENEW.RENEW_PRINCIPALColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -1072,6 +2532,78 @@ Partial Public Class dsReports
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property Row() As dsLoanRegRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Class dsRedeemRenewRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As dsRedeemRenewRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New(ByVal row As dsRedeemRenewRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Row() As dsRedeemRenewRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Class MONTHLY_LOANRENEWRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As MONTHLY_LOANRENEWRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New(ByVal row As MONTHLY_LOANRENEWRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Row() As MONTHLY_LOANRENEWRow
             Get
                 Return Me.eventRow
             End Get

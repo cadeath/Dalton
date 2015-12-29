@@ -1,6 +1,7 @@
 ﻿Module JournalEntries
 
     Friend Sub AddJournal(ByVal Amt As Double, ByVal DebitCredit As String, ByVal AccountName As String, Optional ByVal Remarks As String = "")
+        If Amt = 0 Then Exit Sub
         Dim category As String = "", transactionName As String = "", SAPCode As String = "", onHold As Boolean = False
         Dim AccntID As Integer = 0
         Dim mySql As String = "SELECT * FROM tblCash WHERE "

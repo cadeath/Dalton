@@ -389,10 +389,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsReports.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\dsReports.vb">
+      <DependentUpon>dsReports.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\frmReport.Designer.vb">
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\frmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\qryDate.Designer.vb">
+      <DependentUpon>qryDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryDate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\qryLoan.Designer.vb">
@@ -515,10 +524,19 @@
     <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryDate.resx">
+      <DependentUpon>qryDate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryLoan.resx">
       <DependentUpon>qryLoan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRegister.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_LoanRenew.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

@@ -20,8 +20,7 @@
     Private daysDue As Integer
 
     Private appraiser As Hashtable
-
-
+    Private isOldItem As Boolean = False
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
     Private ItemPrincipal As Double, Penalty As Double
 
@@ -327,11 +326,20 @@
 
             .SaveTicket(False)
 
-
-            AddJournal(.RedeemDue, "Debit", "Revolving Fund")
-            AddJournal(.RedeemDue, "Credit", "Inventory Merchandise - Loan")
-            AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
-            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
+            If isOldItem Then
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "PT# " & .PawnTicket)
+            Else
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+                If daysDue > 3 Then
+                    AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                    AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                End If
+            End If
         End With
     End Sub
 
@@ -349,7 +357,10 @@
             If daysDue <= 3 Then DelayInt += AdvanceInterest
             If transactionType = "X" Then AdvanceInterest = 0
             If transactionType = "R" Then ServiceCharge += ServiceCharge
+
+            isOldItem = True
         Else
+            isOldItem = False
             'New Transactions
             If transactionType = "X" Then
                 ServiceCharge = 0
@@ -370,7 +381,7 @@
         If transactionType = "R" Then
             txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
             txtRedeem.Text = 0
-            txtNet.Text = PawnItem.Principal - AdvanceInterest - (ServiceCharge / 2)
+            txtNet.Text = PawnItem.Principal - AdvanceInterest - ServiceCharge
         ElseIf transactionType = "X" Then
             txtRenew.Text = 0
             txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
@@ -808,6 +819,10 @@
 
     Private Sub SaveRenew()
         Dim oldPT As Integer = PawnItem.PawnTicket
+        Dim principal As Double, netAmt As Double
+        Dim interest As Double, advInt As Double
+        Dim servChar As Double,  penalty As Double
+        Dim redeemDue As Double
 
         'Redeem
         With PawnItem
@@ -824,6 +839,15 @@
             .Status = "0"
 
             .SaveTicket(False)
+
+            principal = CDbl(txtPrincipal.Text)
+            netAmt = CDbl(txtNet.Text)
+            interest = CDbl(txtInt.Text)
+            advInt = CDbl(txtAdv.Text)
+            servChar = CDbl(txtService.Text)
+            penalty = CDbl(txtPenalty.Text)
+            redeemDue = CDbl(txtRedeem.Text)
+
         End With
         AddORNum()
         GeneratePT()
@@ -835,6 +859,9 @@
             .MaturityDate = txtMatu.Text
             .ExpiryDate = txtExpiry.Text
             .AuctionDate = txtAuction.Text
+
+            .OfficialReceiptNumber = 0
+            .OfficialReceiptDate = Nothing
 
             .DaysOverDue = 0
             .Interest = 0
@@ -851,18 +878,9 @@
 
             .SaveTicket()
 
-            'Revolving FUND
-            AddJournal(.Principal, "Debit", "Revolving Fund")
-            'Inventory
-            AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan")
-            If .DaysOverDue > 3 Then
-                'Interest
-                AddJournal(.Interest + .Penalty, "Credit", "Interest on Loans")
-                'ServiceCharge
-                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge")
-            End If
-
-
+            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT)
+            AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
+            AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With
 
         AddPTNum()

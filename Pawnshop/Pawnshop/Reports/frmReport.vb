@@ -10,6 +10,7 @@ Public Class frmReport
 
         Console.WriteLine("SQL: " & mySql)
         Console.WriteLine("Max: " & ds.Tables(dsName).Rows.Count)
+        Console.WriteLine("Report is Existing? " & System.IO.File.Exists(Application.StartupPath & "\" & rptUrl))
         With rv_display
             .ProcessingMode = ProcessingMode.Local
             .LocalReport.ReportPath = rptUrl
