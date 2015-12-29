@@ -56,8 +56,8 @@
     Private Sub LoanRenew()
         Dim stDay = GetFirstDate(monCal.SelectionStart)
         Dim laDay = GetLastDate(monCal.SelectionEnd)
-        Dim fillData As String = "MONTHLY_LOANRENEW"
-        Dim mySql As String = "SELECT * FROM " & fillData
+        Dim fillData As String = "dsLoanRenew"
+        Dim mySql As String = "SELECT * FROM MONTHLY_LOANRENEW"
         mySql &= String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= " ORDER BY LOANDATE ASC"
 
@@ -65,7 +65,7 @@
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
         rptPara.Add("branchName", branchName)
 
-        frmReport.ReportInit(mySql, fillData, "Reports\prt_LoanRenew.rdlc", rptPara)
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_LoanRenew.rdlc", rptPara)
         frmReport.Show()
     End Sub
 

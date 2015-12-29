@@ -61,6 +61,7 @@ Partial Class qryDate
         Me.Controls.Add(Me.cboReports)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "qryDate"
         Me.Text = "Date Range"
