@@ -84,13 +84,25 @@
     End Sub
 
     Private Sub DailyCashCount()
-        Dim fillData As String = "dsCashCount"
+        Dim fillData As String = "dsCoin"
+        Dim rpt_Sql As New Dictionary(Of String, String)
         Dim mySql As String = "SELECT * FROM CASH_COUNT WHERE "
         mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND MONEYTYPE = 'COIN'"
+        rpt_Sql.Add(fillData, mySql)
 
-        Dim rptPara As New Dictionary(Of String, String)
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_CashCount.rdlc", Nothing, False)
+        fillData = "dsBill"
+        mySql = "SELECT * FROM CASH_COUNT WHERE "
+        mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND MONEYTYPE = 'BILL'"
+        rpt_Sql.Add(fillData, mySql)
+
+        frmReport.MultiDbSetReport(rpt_Sql, "Reports\rpt_CashCount.rdlc", Nothing, False)
         frmReport.Show()
+
+        'Dim rptPara As New Dictionary(Of String, String)
+        'frmReport.ReportInit(mySql, fillData, "Reports\rpt_CashCount.rdlc", Nothing, False)
+        'frmReport.Show()
     End Sub
 
     Private Function GetFirstDate(ByVal curDate As Date) As Date

@@ -65,7 +65,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="dsCashCount" msprop:Generator_TableClassName="dsCashCountDataTable" msprop:Generator_TableVarName="tabledsCashCount" msprop:Generator_TablePropName="dsCashCount" msprop:Generator_RowDeletingName="dsCashCountRowDeleting" msprop:Generator_RowChangingName="dsCashCountRowChanging" msprop:Generator_RowEvHandlerName="dsCashCountRowChangeEventHandler" msprop:Generator_RowDeletedName="dsCashCountRowDeleted" msprop:Generator_UserTableName="dsCashCount" msprop:Generator_RowChangedName="dsCashCountRowChanged" msprop:Generator_RowEvArgName="dsCashCountRowChangeEvent" msprop:Generator_RowClassName="dsCashCountRow">
+        <xs:element name="dsCCcoins" msprop:Generator_TableClassName="dsCCcoinsDataTable" msprop:Generator_TableVarName="tabledsCCcoins" msprop:Generator_TablePropName="dsCCcoins" msprop:Generator_RowDeletingName="dsCCcoinsRowDeleting" msprop:Generator_RowChangingName="dsCCcoinsRowChanging" msprop:Generator_RowEvHandlerName="dsCCcoinsRowChangeEventHandler" msprop:Generator_RowDeletedName="dsCCcoinsRowDeleted" msprop:Generator_UserTableName="dsCCcoins" msprop:Generator_RowChangedName="dsCCcoinsRowChanged" msprop:Generator_RowEvArgName="dsCCcoinsRowChangeEvent" msprop:Generator_RowClassName="dsCCcoinsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CurrentDate" msprop:Generator_ColumnVarNameInTable="columnCurrentDate" msprop:Generator_ColumnPropNameInRow="CurrentDate" msprop:Generator_ColumnPropNameInTable="CurrentDateColumn" msprop:Generator_UserColumnName="CurrentDate" type="xs:string" minOccurs="0" />
@@ -75,6 +75,21 @@
               <xs:element name="Cnt" msprop:Generator_ColumnVarNameInTable="columnCnt" msprop:Generator_ColumnPropNameInRow="Cnt" msprop:Generator_ColumnPropNameInTable="CntColumn" msprop:Generator_UserColumnName="Cnt" type="xs:string" minOccurs="0" />
               <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:string" minOccurs="0" />
               <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+              <xs:element name="MoneyType" msprop:Generator_ColumnVarNameInTable="columnMoneyType" msprop:Generator_ColumnPropNameInRow="MoneyType" msprop:Generator_ColumnPropNameInTable="MoneyTypeColumn" msprop:Generator_UserColumnName="MoneyType" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dsCCbill" msprop:Generator_TableClassName="dsCCbillDataTable" msprop:Generator_TableVarName="tabledsCCbill" msprop:Generator_RowChangedName="dsCCbillRowChanged" msprop:Generator_TablePropName="dsCCbill" msprop:Generator_RowDeletingName="dsCCbillRowDeleting" msprop:Generator_RowChangingName="dsCCbillRowChanging" msprop:Generator_RowEvHandlerName="dsCCbillRowChangeEventHandler" msprop:Generator_RowDeletedName="dsCCbillRowDeleted" msprop:Generator_RowClassName="dsCCbillRow" msprop:Generator_UserTableName="dsCCbill" msprop:Generator_RowEvArgName="dsCCbillRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CurrentDate" msprop:Generator_ColumnVarNameInTable="columnCurrentDate" msprop:Generator_ColumnPropNameInRow="CurrentDate" msprop:Generator_ColumnPropNameInTable="CurrentDateColumn" msprop:Generator_UserColumnName="CurrentDate" type="xs:string" minOccurs="0" />
+              <xs:element name="MaintainBal" msprop:Generator_ColumnVarNameInTable="columnMaintainBal" msprop:Generator_ColumnPropNameInRow="MaintainBal" msprop:Generator_ColumnPropNameInTable="MaintainBalColumn" msprop:Generator_UserColumnName="MaintainBal" type="xs:string" minOccurs="0" />
+              <xs:element name="InitialBal" msprop:Generator_ColumnVarNameInTable="columnInitialBal" msprop:Generator_ColumnPropNameInRow="InitialBal" msprop:Generator_ColumnPropNameInTable="InitialBalColumn" msprop:Generator_UserColumnName="InitialBal" type="xs:string" minOccurs="0" />
+              <xs:element name="Denomination" msprop:Generator_ColumnVarNameInTable="columnDenomination" msprop:Generator_ColumnPropNameInRow="Denomination" msprop:Generator_ColumnPropNameInTable="DenominationColumn" msprop:Generator_UserColumnName="Denomination" type="xs:string" minOccurs="0" />
+              <xs:element name="Cnt" msprop:Generator_ColumnVarNameInTable="columnCnt" msprop:Generator_ColumnPropNameInRow="Cnt" msprop:Generator_ColumnPropNameInTable="CntColumn" msprop:Generator_UserColumnName="Cnt" type="xs:string" minOccurs="0" />
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:string" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+              <xs:element name="MoneyType" msprop:Generator_ColumnVarNameInTable="columnMoneyType" msprop:Generator_ColumnPropNameInRow="MoneyType" msprop:Generator_ColumnPropNameInTable="MoneyTypeColumn" msprop:Generator_UserColumnName="MoneyType" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
