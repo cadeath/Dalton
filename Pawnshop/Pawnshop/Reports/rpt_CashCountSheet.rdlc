@@ -48,6 +48,40 @@
         <rd:ObjectDataSourceType>Pawnshop.dsReports, Reports.dsReports.Designer.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
+    <DataSet Name="dsDaily">
+      <Fields>
+        <Field Name="CurrentDate">
+          <DataField>CurrentDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MaintainBal">
+          <DataField>MaintainBal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InitialBal">
+          <DataField>InitialBal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CashCount">
+          <DataField>CashCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>Pawnshop</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Pawnshop</rd:DataSetName>
+        <rd:TableName>dsReports</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>Daily</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceType>Pawnshop.dsReports, Reports.dsReports.Designer.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
   </DataSets>
   <Body>
     <ReportItems>
@@ -88,7 +122,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>0</Value>
+                <Value>=Fields!MaintainBal.Value</Value>
                 <Style>
                   <Format>'PHP' #,0.00;('PHP' #,0.00);'-'</Format>
                 </Style>
@@ -184,7 +218,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>P 0</Value>
+                <Value>=First(Fields!InitialBal.Value, "dsDaily")</Value>
                 <Style>
                   <Format>'PHP'#,0.00;('PHP'#,0.00);'-'</Format>
                 </Style>
