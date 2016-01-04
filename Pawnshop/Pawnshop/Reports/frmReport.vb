@@ -5,6 +5,20 @@ Public Class frmReport
 
     End Sub
 
+    Friend Sub withSubReport(ByVal mySql As Dictionary(Of String, String), ByVal rptUrl As String, _
+                                Optional ByVal addPara As Dictionary(Of String, String) = Nothing, Optional ByVal hasUser As Boolean = True)
+        Dim dsName As String
+        Dim ds As New DataSet
+        With rv_display
+            .ProcessingMode = ProcessingMode.Local
+            .LocalReport.ReportPath = rptUrl
+            .LocalReport.DataSources.Clear()
+
+
+
+        End With
+    End Sub
+
     Friend Sub MultiDbSetReport(ByVal mySql As Dictionary(Of String, String), ByVal rptUrl As String, _
                                 Optional ByVal addPara As Dictionary(Of String, String) = Nothing, Optional ByVal hasUser As Boolean = True)
 

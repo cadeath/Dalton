@@ -120,8 +120,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.0375in</Top>
-        <Left>0.0375in</Left>
+        <Top>0.1125in</Top>
+        <Left>0.1375in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <Style>
@@ -149,8 +149,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.0375in</Top>
-        <Left>3.70277in</Left>
+        <Top>0.1125in</Top>
+        <Left>3.80277in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>1</ZIndex>
@@ -374,8 +374,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsCoin</DataSetName>
-        <Top>0.50708in</Top>
-        <Left>0.27792in</Left>
+        <Top>0.58208in</Top>
+        <Left>0.37792in</Left>
         <Height>0.25in</Height>
         <Width>2.83333in</Width>
         <ZIndex>2</ZIndex>
@@ -594,8 +594,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsBill</DataSetName>
-        <Top>0.50708in</Top>
-        <Left>3.80694in</Left>
+        <Top>0.58208in</Top>
+        <Left>3.90694in</Left>
         <Height>0.25in</Height>
         <Width>2.83333in</Width>
         <ZIndex>3</ZIndex>

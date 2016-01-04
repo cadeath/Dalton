@@ -98,6 +98,7 @@
         rpt_Sql.Add(fillData, mySql)
 
         frmReport.MultiDbSetReport(rpt_Sql, "Reports\rpt_CashCount.rdlc", Nothing, False)
+
         frmReport.Show()
 
         'Dim rptPara As New Dictionary(Of String, String)
