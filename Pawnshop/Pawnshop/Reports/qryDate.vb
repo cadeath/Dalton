@@ -108,21 +108,20 @@
 
         rpt_Sql.Add(fillData, mySql)
 
-        Dim rptPara As New Dictionary(Of String, String)
         frmReport.MultiDbSetReport(rpt_Sql, "Reports\rpt_CashCountSheet.rdlc", Nothing, False)
         frmReport.Show()
     End Sub
 
     Private Sub SubReports()
-        Dim fillData As String = "dsCoin", ds As DataSet
+        Dim fillData As String, ds As DataSet
         Dim rpt_Sql As New Dictionary(Of String, String)
-        Dim mySql As String = "SELECT * FROM CASH_COUNT WHERE "
+        Dim mySql As String
+
+        fillData = "dsCoin"
+        mySql = "SELECT * FROM CASH_COUNT WHERE "
         mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
         mySql &= " AND MONEYTYPE = 'COIN'"
         rpt_Sql.Add(fillData, mySql)
-
-        ds = LoadSQL(mySql)
-        Console.WriteLine("Found: " & ds.Tables(0).Rows.Count)
 
         fillData = "dsBill"
         mySql = "SELECT * FROM CASH_COUNT WHERE "

@@ -29,12 +29,22 @@ Public Class frmReport
             .LocalReport.ReportPath = rptUrl
             .LocalReport.DataSources.Clear()
 
+            Dim mySqlCmd As String = ""
             For Each el In mySql
                 ds.Clear()
-                dsName = el.Key
-                ds = LoadSQL(el.Value, el.Key)
-                .LocalReport.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+                dsName = el.Key : mySqlCmd = el.Value
+                ds = LoadSQL(mySqlCmd, dsName)
+                Console.WriteLine(String.Format("{0}:({1})|{2}", mySqlCmd, dsName, ds.Tables(dsName).Rows.Count))
+                Dim Rds As ReportDataSource = New ReportDataSource(dsName, ds.Tables(dsName))
+                .LocalReport.DataSources.Add(Rds)
             Next
+
+            Console.WriteLine("==========================================")
+            Console.WriteLine("Stored: " & .LocalReport.DataSources.Count)
+            Console.WriteLine("Counts: " & .LocalReport.DataSources.Item(0).Value.ToString)
+            Console.WriteLine("Counts: " & .LocalReport.DataSources.Item(1).Value.ToString)
+            Console.WriteLine("==========================================")
+
 
             If hasUser Then
                 Dim myPara As New ReportParameter
