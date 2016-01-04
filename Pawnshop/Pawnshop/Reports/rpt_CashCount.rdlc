@@ -298,7 +298,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>="="</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -518,7 +518,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>="="</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
