@@ -84,12 +84,45 @@
     End Sub
 
     Private Sub DailyCashCount()
-        Dim fillData As String = "dsCoin"
+        SubReports()
+
+        Exit Sub
+        Dim fillData As String = "dsDaily"
+        Dim rpt_Sql As New Dictionary(Of String, String)
+        Dim mySql As String = "SELECT * FROM DAILY WHERE "
+        mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        rpt_Sql.Add(fillData, mySql)
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        Console.WriteLine(ds.Tables(0).Rows.Count & " <----- Found")
+
+        fillData = "dsDebit"
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
+        mySql &= "FROM JOURNAL_ENTRIES WHERE "
+        mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND DEBIT <> 0"
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+
+        ds = LoadSQL(mySql)
+        Console.WriteLine(ds.Tables(0).Rows.Count & " <----- Found")
+
+        rpt_Sql.Add(fillData, mySql)
+
+        Dim rptPara As New Dictionary(Of String, String)
+        frmReport.MultiDbSetReport(rpt_Sql, "Reports\rpt_CashCountSheet.rdlc", Nothing, False)
+        frmReport.Show()
+    End Sub
+
+    Private Sub SubReports()
+        Dim fillData As String = "dsCoin", ds As DataSet
         Dim rpt_Sql As New Dictionary(Of String, String)
         Dim mySql As String = "SELECT * FROM CASH_COUNT WHERE "
         mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
         mySql &= " AND MONEYTYPE = 'COIN'"
         rpt_Sql.Add(fillData, mySql)
+
+        ds = LoadSQL(mySql)
+        Console.WriteLine("Found: " & ds.Tables(0).Rows.Count)
 
         fillData = "dsBill"
         mySql = "SELECT * FROM CASH_COUNT WHERE "
@@ -98,12 +131,7 @@
         rpt_Sql.Add(fillData, mySql)
 
         frmReport.MultiDbSetReport(rpt_Sql, "Reports\rpt_CashCount.rdlc", Nothing, False)
-
         frmReport.Show()
-
-        'Dim rptPara As New Dictionary(Of String, String)
-        'frmReport.ReportInit(mySql, fillData, "Reports\rpt_CashCount.rdlc", Nothing, False)
-        'frmReport.Show()
     End Sub
 
     Private Function GetFirstDate(ByVal curDate As Date) As Date

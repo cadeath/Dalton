@@ -122,7 +122,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!MaintainBal.Value</Value>
+                <Value>=First(Fields!MaintainBal.Value, "dsDaily")</Value>
                 <Style>
                   <Format>'PHP' #,0.00;('PHP' #,0.00);'-'</Format>
                 </Style>
@@ -344,18 +344,9 @@
                         <Border>
                           <Style>None</Style>
                         </Border>
-                        <TopBorder>
-                          <Style>None</Style>
-                        </TopBorder>
                         <BottomBorder>
-                          <Color>Black</Color>
+                          <Style>Solid</Style>
                         </BottomBorder>
-                        <LeftBorder>
-                          <Style>None</Style>
-                        </LeftBorder>
-                        <RightBorder>
-                          <Style>None</Style>
-                        </RightBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -462,24 +453,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Subreport Name="CashCount">
-        <ReportName>rpt_CashCount</ReportName>
-        <Parameters>
-          <Parameter Name="CurrentDate">
-            <Value>=Parameters!currentDate.Value</Value>
-          </Parameter>
-        </Parameters>
-        <Top>2.04875in</Top>
-        <Left>0.39583in</Left>
-        <Height>2.14583in</Height>
-        <Width>4.35417in</Width>
-        <ZIndex>8</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Subreport>
       <Textbox Name="Textbox8">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -499,7 +472,7 @@
         <Left>0.39583in</Left>
         <Height>0.25in</Height>
         <Width>2.14583in</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -511,15 +484,9 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>5.05917in</Height>
+    <Height>2.2675in</Height>
     <Style />
   </Body>
-  <ReportParameters>
-    <ReportParameter Name="currentDate">
-      <DataType>DateTime</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-  </ReportParameters>
   <Width>8.01042in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
