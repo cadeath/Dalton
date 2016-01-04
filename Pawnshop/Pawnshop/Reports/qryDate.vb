@@ -84,17 +84,13 @@
     End Sub
 
     Private Sub DailyCashCount()
-        SubReports()
+        Dim fillData As String, rptSQL As New Dictionary(Of String, String)
+        Dim mySql As String
 
-        Exit Sub
-        Dim fillData As String = "dsDaily"
-        Dim rpt_Sql As New Dictionary(Of String, String)
-        Dim mySql As String = "SELECT * FROM DAILY WHERE "
+        fillData = "dsDaily"
+        mysql = "SELECT * FROM DAILY WHERE "
         mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        rpt_Sql.Add(fillData, mySql)
-
-        Dim ds As DataSet = LoadSQL(mySql)
-        Console.WriteLine(ds.Tables(0).Rows.Count & " <----- Found")
+        rptSQL.Add(fillData, mySql)
 
         fillData = "dsDebit"
         mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
@@ -102,13 +98,9 @@
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
         mySql &= " AND DEBIT <> 0"
         mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+        rptSQL.Add(fillData, mySql)
 
-        ds = LoadSQL(mySql)
-        Console.WriteLine(ds.Tables(0).Rows.Count & " <----- Found")
-
-        rpt_Sql.Add(fillData, mySql)
-
-        frmReport.MultiDbSetReport(rpt_Sql, "Reports\rpt_CashCountSheet.rdlc", Nothing, False)
+        frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", Nothing, False)
         frmReport.Show()
     End Sub
 
