@@ -100,6 +100,14 @@
         mySql &= " GROUP BY TRANSDATE, TRANSNAME"
         rptSQL.Add(fillData, mySql)
 
+        fillData = "dsCredit"
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
+        mySql &= "FROM JOURNAL_ENTRIES WHERE "
+        mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND CREDIT <> 0"
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+        rptSQL.Add(fillData, mySql)
+
         frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", Nothing, False)
         frmReport.Show()
     End Sub

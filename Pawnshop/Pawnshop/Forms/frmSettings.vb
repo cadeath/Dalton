@@ -72,6 +72,15 @@
         Me.Close()
     End Sub
 
+    Private Sub UpdateDaily()
+        Dim fillData As String = "tblDaily"
+        Dim mySql As String = "SELECT * FROM tblDaily WHERE ID = " & dailyID
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+        ds.Tables(fillData).Rows(0).Item("MaintainBal") = txtBal.Text
+        SaveEntry(ds, False)
+    End Sub
+
     Private Sub txtBal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBal.KeyPress
         DigitOnly(e)
     End Sub
