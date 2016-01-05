@@ -141,7 +141,6 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.0375in</Top>
-        <Left>0in</Left>
         <Height>0.25in</Height>
         <Width>2.29167in</Width>
         <Style>
@@ -208,7 +207,6 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.2875in</Top>
-        <Left>0in</Left>
         <Height>0.25in</Height>
         <Width>0.78125in</Width>
         <ZIndex>2</ZIndex>
@@ -451,7 +449,6 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>1.12638in</Top>
-        <Left>0in</Left>
         <Height>0.25in</Height>
         <Width>1.25in</Width>
         <ZIndex>6</ZIndex>
@@ -548,7 +545,6 @@
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>1.78479in</Top>
-        <Left>0in</Left>
         <Height>0.25in</Height>
         <Width>0.78125in</Width>
         <ZIndex>9</ZIndex>
@@ -841,8 +837,21 @@
           <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
+      <Subreport Name="cashCount">
+        <ReportName>rpt_CashCount</ReportName>
+        <Top>3.26403in</Top>
+        <Left>0.39583in</Left>
+        <Height>2.22917in</Height>
+        <Width>6.21354in</Width>
+        <ZIndex>15</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Subreport>
     </ReportItems>
-    <Height>3.44458in</Height>
+    <Height>6.81958in</Height>
     <Style />
   </Body>
   <Width>8.01042in</Width>

@@ -85,7 +85,7 @@
 
     Private Sub DailyCashCount()
         Dim fillData As String, rptSQL As New Dictionary(Of String, String)
-        Dim mySql As String
+        Dim mySql As String, subReportSQL As New Dictionary(Of String, String)
 
         fillData = "dsDaily"
         mysql = "SELECT * FROM DAILY WHERE "
@@ -108,28 +108,20 @@
         mySql &= " GROUP BY TRANSDATE, TRANSNAME"
         rptSQL.Add(fillData, mySql)
 
-        frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", Nothing, False)
-        frmReport.Show()
-    End Sub
-
-    Private Sub SubReports()
-        Dim fillData As String, ds As DataSet
-        Dim rpt_Sql As New Dictionary(Of String, String)
-        Dim mySql As String
-
+        'Sub Report
         fillData = "dsCoin"
         mySql = "SELECT * FROM CASH_COUNT WHERE "
         mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
         mySql &= " AND MONEYTYPE = 'COIN'"
-        rpt_Sql.Add(fillData, mySql)
+        subReportSQL.Add(fillData, mySql)
 
         fillData = "dsBill"
         mySql = "SELECT * FROM CASH_COUNT WHERE "
         mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
         mySql &= " AND MONEYTYPE = 'BILL'"
-        rpt_Sql.Add(fillData, mySql)
+        subReportSQL.Add(fillData, mySql)
 
-        frmReport.MultiDbSetReport(rpt_Sql, "Reports\rpt_CashCount.rdlc", Nothing, False)
+        frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", Nothing, False, subReportSQL)
         frmReport.Show()
     End Sub
 

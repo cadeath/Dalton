@@ -1,27 +1,13 @@
 ﻿Imports Microsoft.Reporting.WinForms
 Public Class frmReport
 
-    Private Sub frmReport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    Friend Sub withSubReport(ByVal mySql As Dictionary(Of String, String), ByVal rptUrl As String, _
-                                Optional ByVal addPara As Dictionary(Of String, String) = Nothing, Optional ByVal hasUser As Boolean = True)
-        Dim dsName As String
-        Dim ds As New DataSet
-        With rv_display
-            .ProcessingMode = ProcessingMode.Local
-            .LocalReport.ReportPath = rptUrl
-            .LocalReport.DataSources.Clear()
-
-
-
-        End With
-    End Sub
+    Dim subReportPassing As Dictionary(Of String, String)
 
     Friend Sub MultiDbSetReport(ByVal mySql As Dictionary(Of String, String), ByVal rptUrl As String, _
-                                Optional ByVal addPara As Dictionary(Of String, String) = Nothing, Optional ByVal hasUser As Boolean = True)
+                                Optional ByVal addPara As Dictionary(Of String, String) = Nothing, Optional ByVal hasUser As Boolean = True, _
+                                Optional ByVal subReport As Dictionary(Of String, String) = Nothing)
         Dim dsName As String, ds As DataSet, cmd As String
+        If Not subReport Is Nothing Then subReportPassing = subReport
 
         With rv_display
             .ProcessingMode = ProcessingMode.Local
@@ -55,8 +41,22 @@ Public Class frmReport
                 Next
             End If
 
+            If Not subReport Is Nothing Then
+                AddHandler .LocalReport.SubreportProcessing, AddressOf SubReportLoader
+            End If
+
             .RefreshReport()
         End With
+    End Sub
+
+    Private Sub SubReportLoader(ByVal sender As Object, ByVal e As SubreportProcessingEventArgs)
+        Dim dsName As String, ds As DataSet
+
+        For Each el In subReportPassing
+            dsName = el.Key
+            ds = LoadSQL(el.Value, dsName)
+            e.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        Next
     End Sub
 
     Friend Sub ReportInit(ByVal mySql As String, ByVal dsName As String, ByVal rptUrl As String, _
