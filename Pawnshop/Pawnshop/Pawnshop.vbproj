@@ -542,6 +542,7 @@
     <EmbeddedResource Include="Reports\rpt_LoanRenew.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_moneyTransfer.rdlc" />
     <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
