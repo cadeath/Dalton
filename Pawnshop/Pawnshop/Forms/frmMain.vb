@@ -315,4 +315,8 @@ Public Class frmMain
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.Show()
     End Sub
+
+    Private Sub MoneyTransferToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
+        qryMoneyTransfer.Show()
+    End Sub
 End Class

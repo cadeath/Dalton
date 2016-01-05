@@ -14,6 +14,7 @@ Module mod_system
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
     Public BranchCode As String = GetOption("BranchCode")
+    Public branchName As String = GetOption("BranchName")
     Public AREACODE As String = GetOption("BranchArea")
     Public REVOLVING_FUND As String = GetOption("RevolvingFund")
 

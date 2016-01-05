@@ -7,8 +7,6 @@
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
-    Private branchName As String = GetOption("BranchName")
-
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If cboReports.Text = "" And cboReports.Visible Then Exit Sub
 
