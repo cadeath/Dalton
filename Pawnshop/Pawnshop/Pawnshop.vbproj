@@ -530,6 +530,12 @@
     <EmbeddedResource Include="Reports\qryLoan.resx">
       <DependentUpon>qryLoan.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_CashCount.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_CashCountSheet.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRegister.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

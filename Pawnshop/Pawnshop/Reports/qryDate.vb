@@ -3,20 +3,23 @@
     Enum ReportType As Integer
         RedeemRenew = 0
         LoanRenew = 1
+        DailyCashCount = 2
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
     Private branchName As String = GetOption("BranchName")
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
-        If cboReports.Text = "" Then Exit Sub
+        If cboReports.Text = "" And cboReports.Visible Then Exit Sub
 
-        Select Case cboReports.Text
-            Case "Schedule of Redeem and Renewal"
-                FormType = ReportType.RedeemRenew
-            Case "Schedule of Loan and Renewal"
-                FormType = ReportType.LoanRenew
-        End Select
+        If cboReports.Visible Then
+            Select Case cboReports.Text
+                Case "Schedule of Redeem and Renewal"
+                    FormType = ReportType.RedeemRenew
+                Case "Schedule of Loan and Renewal"
+                    FormType = ReportType.LoanRenew
+            End Select
+        End If
 
         Generate()
     End Sub
@@ -75,7 +78,56 @@
                 RedeemRenew()
             Case ReportType.LoanRenew
                 LoanRenew()
+            Case ReportType.DailyCashCount
+                DailyCashCount()
         End Select
+    End Sub
+
+    Private Sub DailyCashCount()
+        Dim fillData As String, rptSQL As New Dictionary(Of String, String)
+        Dim mySql As String, subReportSQL As New Dictionary(Of String, String)
+
+        fillData = "dsDaily"
+        mysql = "SELECT * FROM DAILY WHERE "
+        mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        rptSQL.Add(fillData, mySql)
+
+        fillData = "dsDebit"
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
+        mySql &= "FROM JOURNAL_ENTRIES WHERE "
+        mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND DEBIT <> 0"
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+        rptSQL.Add(fillData, mySql)
+
+        fillData = "dsCredit"
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
+        mySql &= "FROM JOURNAL_ENTRIES WHERE "
+        mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND CREDIT <> 0"
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+        rptSQL.Add(fillData, mySql)
+
+        'Sub Report
+        fillData = "dsCoin"
+        mySql = "SELECT * FROM CASH_COUNT WHERE "
+        mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND MONEYTYPE = 'COIN'"
+        subReportSQL.Add(fillData, mySql)
+
+        fillData = "dsBill"
+        mySql = "SELECT * FROM CASH_COUNT WHERE "
+        mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND MONEYTYPE = 'BILL'"
+        subReportSQL.Add(fillData, mySql)
+
+        ' Parameters
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtCurrentDate", CurrentDate)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", rptPara, 1, subReportSQL)
+        frmReport.Show()
     End Sub
 
     Private Function GetFirstDate(ByVal curDate As Date) As Date
@@ -91,6 +143,10 @@
     End Function
 
     Private Sub qryDate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        If FormType = ReportType.DailyCashCount Then
+            cboReports.Visible = False
+        Else
+            cboReports.Visible = True
+        End If
     End Sub
 End Class

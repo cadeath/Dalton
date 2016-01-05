@@ -36,9 +36,9 @@ Partial Class qryDate
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(80, 209)
+        Me.btnGenerate.Location = New System.Drawing.Point(78, 209)
         Me.btnGenerate.Name = "btnGenerate"
-        Me.btnGenerate.Size = New System.Drawing.Size(80, 31)
+        Me.btnGenerate.Size = New System.Drawing.Size(92, 40)
         Me.btnGenerate.TabIndex = 1
         Me.btnGenerate.Text = "&Generate"
         Me.btnGenerate.UseVisualStyleBackColor = True
@@ -57,7 +57,7 @@ Partial Class qryDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(245, 247)
+        Me.ClientSize = New System.Drawing.Size(245, 257)
         Me.Controls.Add(Me.cboReports)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)

@@ -310,4 +310,9 @@ Public Class frmMain
     Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
         qryDate.Show()
     End Sub
+
+    Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.DailyCashCount
+        qryDate.Show()
+    End Sub
 End Class
