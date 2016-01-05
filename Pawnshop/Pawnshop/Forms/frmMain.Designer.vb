@@ -195,13 +195,14 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.LoanRegisterToolStripMenuItem, Me.ToolStripSeparator4, Me.MoneyTransferToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.LoanRegisterToolStripMenuItem, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
         '
         'ToolStripMenuItem2
         '
+        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MoneyTransferToolStripMenuItem})
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
         Me.ToolStripMenuItem2.Size = New System.Drawing.Size(165, 22)
         Me.ToolStripMenuItem2.Text = "&Monthly Reports"
@@ -420,7 +421,7 @@ Partial Class frmMain
         'MoneyTransferToolStripMenuItem
         '
         Me.MoneyTransferToolStripMenuItem.Name = "MoneyTransferToolStripMenuItem"
-        Me.MoneyTransferToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.MoneyTransferToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.MoneyTransferToolStripMenuItem.Text = "&Money Transfer"
         '
         'frmMain

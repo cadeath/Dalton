@@ -52,7 +52,13 @@ Schedule of Loan and Renewal
 ===============================
 MONEY TRANSFER
 SELECT 
-	ServiceType, TransDate, RefNum, 
+	ServiceType, TransDate,
+    CASE
+      WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 0
+      THEN 'ME# ' || LPAD(TransID,5,0)
+	  WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 1
+      THEN 'MR# ' || LPAD(TransID,5,0)
+      ELSE RefNum END as RefNum,
     CASE MoneyTrans
       WHEN 0 THEN NETAMOUNT 
       ELSE 0 END AS PAYOUT,
@@ -63,4 +69,4 @@ SELECT
 FROM
 	TBLMONEYTRANSFER
 WHERE
-	Status = 'A'
+	Status = 'A';

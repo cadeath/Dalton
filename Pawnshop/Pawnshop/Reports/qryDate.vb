@@ -4,8 +4,22 @@
         RedeemRenew = 0
         LoanRenew = 1
         DailyCashCount = 2
+        Insurance = 3
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
+
+    Private Sub Generate()
+        Select Case FormType
+            Case ReportType.RedeemRenew
+                RedeemRenew()
+            Case ReportType.LoanRenew
+                LoanRenew()
+            Case ReportType.DailyCashCount
+                DailyCashCount()
+            Case ReportType.Insurance
+                InsuranceReport()
+        End Select
+    End Sub
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If cboReports.Text = "" And cboReports.Visible Then Exit Sub
@@ -16,10 +30,24 @@
                     FormType = ReportType.RedeemRenew
                 Case "Schedule of Loan and Renewal"
                     FormType = ReportType.LoanRenew
+                Case "Certificate of Insurance"
+                    FormType = ReportType.Insurance
             End Select
         End If
 
         Generate()
+    End Sub
+
+    Private Sub InsuranceReport()
+        Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
+        Dim enDate As Date = GetLastDate(monCal.SelectionRange.End)
+        Dim fillData As String = "dsInsurance", mySql As String
+
+        mySql = "SELECT * FROM tblInsurance "
+        mySql &= String.Format("WHERE transDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Insurance.rdlc", Nothing, 0)
+        frmReport.Show()
     End Sub
 
     Private Sub RedeemRenew()
@@ -70,23 +98,12 @@
         frmReport.Show()
     End Sub
 
-    Private Sub Generate()
-        Select Case FormType
-            Case ReportType.RedeemRenew
-                RedeemRenew()
-            Case ReportType.LoanRenew
-                LoanRenew()
-            Case ReportType.DailyCashCount
-                DailyCashCount()
-        End Select
-    End Sub
-
     Private Sub DailyCashCount()
         Dim fillData As String, rptSQL As New Dictionary(Of String, String)
         Dim mySql As String, subReportSQL As New Dictionary(Of String, String)
 
         fillData = "dsDaily"
-        mysql = "SELECT * FROM DAILY WHERE "
+        mySql = "SELECT * FROM DAILY WHERE "
         mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
         rptSQL.Add(fillData, mySql)
 
