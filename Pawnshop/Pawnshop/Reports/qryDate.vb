@@ -121,7 +121,12 @@
         mySql &= " AND MONEYTYPE = 'BILL'"
         subReportSQL.Add(fillData, mySql)
 
-        frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", Nothing, False, subReportSQL)
+        ' Parameters
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtCurrentDate", CurrentDate)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", rptPara, 1, subReportSQL)
         frmReport.Show()
     End Sub
 
