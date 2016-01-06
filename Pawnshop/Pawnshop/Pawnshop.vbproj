@@ -416,6 +416,12 @@
     <Compile Include="Reports\qryMoneyTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\qrySequence.Designer.vb">
+      <DependentUpon>qrySequence.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qrySequence.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Developer\devClient.resx">
@@ -539,6 +545,9 @@
     <EmbeddedResource Include="Reports\qryMoneyTransfer.resx">
       <DependentUpon>qryMoneyTransfer.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qrySequence.resx">
+      <DependentUpon>qrySequence.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_CashCount.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -555,6 +564,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_moneyTransfer.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_pawning.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc">

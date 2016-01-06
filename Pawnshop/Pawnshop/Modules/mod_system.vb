@@ -263,4 +263,16 @@ Module mod_system
 
         Return isGood
     End Function
+
+    Friend Function GetFirstDate(ByVal curDate As Date) As Date
+        Dim firstDay = DateSerial(curDate.Year, curDate.Month, 1)
+        Return firstDay
+    End Function
+
+    Friend Function GetLastDate(ByVal curDate As Date) As Date
+        Dim original As DateTime = curDate  ' The date you want to get the last day of the month for
+        Dim lastOfMonth As DateTime = original.Date.AddDays(-(original.Day - 1)).AddMonths(1).AddDays(-1)
+
+        Return lastOfMonth
+    End Function
 End Module

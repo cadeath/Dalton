@@ -319,4 +319,8 @@ Public Class frmMain
     Private Sub MoneyTransferToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
         qryMoneyTransfer.Show()
     End Sub
+
+    Private Sub SequenceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SequenceToolStripMenuItem.Click
+        qrySequence.Show()
+    End Sub
 End Class
