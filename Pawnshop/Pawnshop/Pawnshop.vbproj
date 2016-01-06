@@ -572,6 +572,9 @@
     <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="doc\ExpiryFormat.xls">

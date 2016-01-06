@@ -125,6 +125,8 @@
               <xs:element name="PayOut" msprop:Generator_ColumnVarNameInTable="columnPayOut" msprop:Generator_ColumnPropNameInRow="PayOut" msprop:Generator_ColumnPropNameInTable="PayOutColumn" msprop:Generator_UserColumnName="PayOut" type="xs:string" minOccurs="0" />
               <xs:element name="SendOut" msprop:Generator_ColumnVarNameInTable="columnSendOut" msprop:Generator_ColumnPropNameInRow="SendOut" msprop:Generator_ColumnPropNameInTable="SendOutColumn" msprop:Generator_UserColumnName="SendOut" type="xs:string" minOccurs="0" />
               <xs:element name="ServiceCharge" msprop:Generator_ColumnVarNameInTable="columnServiceCharge" msprop:Generator_ColumnPropNameInRow="ServiceCharge" msprop:Generator_ColumnPropNameInTable="ServiceChargeColumn" msprop:Generator_UserColumnName="ServiceCharge" type="xs:string" minOccurs="0" />
+              <xs:element name="MoneyTrans" msprop:Generator_ColumnVarNameInTable="columnMoneyTrans" msprop:Generator_ColumnPropNameInRow="MoneyTrans" msprop:Generator_ColumnPropNameInTable="MoneyTransColumn" msprop:Generator_UserColumnName="MoneyTrans" type="xs:string" minOccurs="0" />
+              <xs:element name="NetAmount" msprop:Generator_ColumnVarNameInTable="columnNetAmount" msprop:Generator_ColumnPropNameInRow="NetAmount" msprop:Generator_ColumnPropNameInTable="NetAmountColumn" msprop:Generator_UserColumnName="NetAmount" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

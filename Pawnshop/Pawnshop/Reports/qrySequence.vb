@@ -1,6 +1,8 @@
 ﻿Public Class qrySequence
 
     Private ReportType As String = ""
+    Private mySql As String
+    Private fillData As String
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If rbBorrowing.Checked Then ReportType = "Borrowings"
@@ -11,14 +13,28 @@
         Select Case ReportType
             Case "Pawning"
                 PawningReport()
+            Case "MoneyTransfer"
+                MoneyTransferReport()
         End Select
     End Sub
 
-    Private Sub PawningReport()
-        Dim mySql As String, fillData As String = "dsPawn"
+    Private Sub MoneyTransferReport()
         Dim stDay = GetFirstDate(monCal.SelectionStart)
         Dim laDay = GetLastDate(monCal.SelectionEnd)
 
+        fillData = "dsMoneyTransfer"
+        mySql = "SELECT * FROM MONEY_TRANSFER "
+        mySql &= String.Format("WHERE TransDate BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\sq_MoneyTransfer.rdlc", Nothing, 0)
+        frmReport.Show()
+    End Sub
+
+    Private Sub PawningReport()
+        Dim stDay = GetFirstDate(monCal.SelectionStart)
+        Dim laDay = GetLastDate(monCal.SelectionEnd)
+
+        fillData = "dsPawn"
         mySql = "SELECT * FROM PAWNING "
         mySql &= String.Format("WHERE LoanDate BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= " ORDER BY LOANDATE ASC"

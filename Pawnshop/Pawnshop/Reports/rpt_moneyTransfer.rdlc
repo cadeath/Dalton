@@ -877,7 +877,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>DAILY CASH COUNT SHEET</Value>
+                  <Value>MONEY TRANSFER</Value>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>
@@ -979,10 +979,10 @@
         </Border>
       </Style>
     </PageFooter>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
     <Style />
   </Page>
   <rd:ReportID>5431b52f-3579-4e4a-a180-3346c21e1e5d</rd:ReportID>
