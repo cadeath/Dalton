@@ -42,7 +42,7 @@
     Private Sub ComputeTotal()
         If Not IsNumeric(txtRate.Text) Then Exit Sub
 
-        Dim getAmount As Integer = cboDenomination.Text.Substring(1)
+        Dim getAmount As Integer = cboDenomination.Text
         Dim getRate As Double = CDbl(txtRate.Text)
         Console.WriteLine("Rate: " & getRate)
         Console.WriteLine("Amount: " & getAmount)
