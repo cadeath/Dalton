@@ -1,4 +1,8 @@
-﻿Public Class frmPawnItem
+﻿Imports Microsoft.Reporting.WinForms
+
+Public Class frmPawnItem
+    'Version 2.3
+    ' - Add Printing
     'Version 2.2
     ' - Remake SAVE
     'Version 2.1
@@ -66,6 +70,27 @@
         txtEvat.Text = ""
         txtRenew.Text = ""
         txtRedeem.Text = ""
+    End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim transDate As Date
+        If PawnItem.Status = "X" Then
+            transDate = PawnItem.OfficialReceiptDate
+        Else
+            transDate = PawnItem.LoanDate
+        End If
+
+        If CurrentDate.Date <> transDate Then
+            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
+
+        PawnItem.VoidCancelTicket()
+        MsgBox("Transaction Voided", MsgBoxStyle.Information)
+        frmPawning.LoadActive()
+        Me.Close()
     End Sub
 
     Private Sub txtAppr_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppr.KeyPress
@@ -170,7 +195,7 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan()
+            Case "L" : SaveNewLoan() : PrintNewLoan()
             Case "X" : SaveRedeem()
             Case "R" : SaveRenew()
         End Select
@@ -311,6 +336,7 @@
 #End Region
 
 #Region "Controller"
+
     Private Sub SaveRedeem()
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
@@ -821,7 +847,7 @@
         Dim oldPT As Integer = PawnItem.PawnTicket
         Dim principal As Double, netAmt As Double
         Dim interest As Double, advInt As Double
-        Dim servChar As Double,  penalty As Double
+        Dim servChar As Double, penalty As Double
         Dim redeemDue As Double
 
         'Redeem
@@ -888,28 +914,47 @@
 
 #End Region
 
-    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-        Dim transDate As Date
-        If PawnItem.Status = "X" Then
-            transDate = PawnItem.OfficialReceiptDate
+#Region "Printing"
+    Private autoPrintPT As Reporting
+    Private Sub PrintNewLoan()
+        PrintPawnTicket()
+    End Sub
+
+    Private Sub PrintPawnTicket()
+        Dim mySql As String = _
+            "SELECT * FROM tblPAWN ORDER BY PawnID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql), dsName As String = "dsPawnTicket"
+        Dim latestPT As Single = ds.Tables(0).Rows(0).Item("PawnID")
+
+        'AutoPrint
+        autoPrintPT = New Reporting
+        Dim report As LocalReport = New LocalReport
+        Dim itemType As String, desc As String
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PawnID = " & latestPT
+        ds.Clear() : ds = LoadSQL(mySql, dsName)
+
+        'Parameters=============
+        Dim addParameters As New Dictionary(Of String, String)
+        'Description
+        If isOldItem Then
+            addParameters.Add("txtDescription", ds.Tables(dsName).Rows(0).Item("DESCRIPTION"))
         Else
-            transDate = PawnItem.LoanDate
+            itemType = ds.Tables(0).Rows(0).Item("ItemType")
+            desc = ds.Tables(dsName).Rows(0).Item("DESCRIPTION")
+            addParameters.Add("txtDescription", pawning.DisplayDescription(itemType, desc))
         End If
 
-        If CurrentDate.Date <> transDate Then
-            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
 
-        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
 
-        PawnItem.VoidCancelTicket()
-        MsgBox("Transaction Voided", MsgBoxStyle.Information)
-        frmPawning.LoadActive()
-        Me.Close()
+        'Report Data
+        report.ReportPath = "Reports\layout01.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print("EPSON LX-300+ /II Parallel")
     End Sub
+#End Region
 
-    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
-
-    End Sub
 End Class

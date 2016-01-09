@@ -152,6 +152,7 @@
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
     <Compile Include="Classes\Client.vb" />
+    <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
@@ -162,6 +163,7 @@
     <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Classes\RandomKeyGenerator.vb" />
+    <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
@@ -356,6 +358,7 @@
     <Compile Include="Modules\migrate.vb" />
     <Compile Include="Modules\mod_system.vb" />
     <Compile Include="Modules\newSetup.vb" />
+    <Compile Include="Modules\pawning.vb" />
     <Compile Include="Modules\security.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -383,6 +386,14 @@
     </Compile>
     <Compile Include="POS\frmPOS.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\dsPrint.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrint.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsPrint.vb">
+      <DependentUpon>dsPrint.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reports\dsReports.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -536,6 +547,9 @@
     <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\layout01.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryDate.resx">
       <DependentUpon>qryDate.vb</DependentUpon>
     </EmbeddedResource>
@@ -583,6 +597,7 @@
     <None Include="doc\JournalEntries.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
     <None Include="Import Template.xlsx" />
     <None Include="My Project\app.manifest">
@@ -596,6 +611,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reports\dsPrint.xsc">
+      <DependentUpon>dsPrint.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsPrint.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrint.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reports\dsPrint.xss">
+      <DependentUpon>dsPrint.xsd</DependentUpon>
     </None>
     <None Include="Reports\dsReports.xsc">
       <DependentUpon>dsReports.xsd</DependentUpon>
