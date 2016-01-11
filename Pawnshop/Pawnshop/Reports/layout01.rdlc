@@ -32,6 +32,10 @@
           <DataField>ExpiryDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="ItemType">
+          <DataField>ItemType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Pawner">
           <DataField>Pawner</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -97,6 +101,7 @@
                 <Value>=Fields!LoanDate.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
+                  <Format>MMM dd, yyyy</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -126,6 +131,7 @@
                 <Value>=Fields!MatuDate.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
+                  <Format>MMM dd, yyyy</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -213,7 +219,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Code.AmountToWord(ReportItems!txtPrincipal)</Value>
+                <Value>=Code.AmountToWord(ReportItems!txtPrincipal.Value)</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -273,7 +279,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Code.AmountToWord(ReportItems!txtPercent)</Value>
+                <Value>=Code.AmountToWord(ReportItems!txtPercent.Value)</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -286,7 +292,7 @@
         <Top>1.24805in</Top>
         <Left>3.94894in</Left>
         <Height>0.25in</Height>
-        <Width>0.35699in</Width>
+        <Width>0.76324in</Width>
         <ZIndex>6</ZIndex>
         <Style>
           <Border />
@@ -303,9 +309,10 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!txtItemInterest.Value</Value>
+                <Value>=First(Fields!Interest.Value, "dsPawnTicket")</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -315,7 +322,7 @@
         <Top>1.24805in</Top>
         <Left>4.82706in</Left>
         <Height>0.25in</Height>
-        <Width>0.35699in</Width>
+        <Width>0.51532in</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border />
@@ -391,7 +398,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Code.AmountToWord(ReportItems!txtAppraisal)</Value>
+                <Value>=Code.AmountToWord(ReportItems!txtAppraisal.Value)</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -481,7 +488,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=ReportItems!txtPrincipal</Value>
+                <Value>=ReportItems!txtPrincipal.value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -634,6 +641,7 @@
                 <Value>=Fields!LoanDate.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
+                  <Format>MMM dd, yyyy</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -664,6 +672,7 @@
                 <Value>=Fields!MatuDate.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
+                  <Format>MMM dd, yyyy</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -694,6 +703,7 @@
                 <Value>=Fields!ExpiryDate.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
+                  <Format>MMM dd, yyyy</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -721,7 +731,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=ReportItems!txtPrincipal</Value>
+                <Value>=ReportItems!txtPrincipal.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
@@ -753,7 +763,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=ReportItems!txtAppraisal</Value>
+                <Value>=ReportItems!txtAppraisal.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00)</Format>
@@ -788,6 +798,7 @@
                 <Value>=Fields!ExpiryDate.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
+                  <Format>MMM dd, yyyy</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1025,7 +1036,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Code.AmountToWord(ReportItems!txtPrincipal)</Value>
+                <Value>=Code.AmountToWord(ReportItems!txtPrincipal.Value)</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1078,65 +1089,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox28">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Code.AmountToWord(ReportItems!txtPercent)</Value>
-                <Style>
-                  <FontSize>9pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>7.12236in</Top>
-        <Left>3.94894in</Left>
-        <Height>0.25in</Height>
-        <Width>0.35699in</Width>
-        <ZIndex>33</ZIndex>
-        <Style>
-          <Border />
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="txtPercent2">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Parameters!txtItemInterest.Value</Value>
-                <Style>
-                  <FontSize>9pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>7.12236in</Top>
-        <Left>4.82706in</Left>
-        <Height>0.25in</Height>
-        <Width>0.35699in</Width>
-        <ZIndex>34</ZIndex>
-        <Style>
-          <Border />
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox29">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -1158,7 +1110,7 @@
         <Left>5.46665in</Left>
         <Height>0.25in</Height>
         <Width>0.35699in</Width>
-        <ZIndex>35</ZIndex>
+        <ZIndex>33</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1187,7 +1139,7 @@
         <Left>2.48995in</Left>
         <Height>0.25in</Height>
         <Width>0.92643in</Width>
-        <ZIndex>36</ZIndex>
+        <ZIndex>34</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1203,7 +1155,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Code.AmountToWord(ReportItems!txtAppraisal)</Value>
+                <Value>=Code.AmountToWord(ReportItems!txtAppraisal.Value)</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1217,7 +1169,7 @@
         <Left>0.03227in</Left>
         <Height>0.25in</Height>
         <Width>2.1799in</Width>
-        <ZIndex>37</ZIndex>
+        <ZIndex>35</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1247,7 +1199,7 @@
         <Left>1.26977in</Left>
         <Height>0.25in</Height>
         <Width>0.91601in</Width>
-        <ZIndex>38</ZIndex>
+        <ZIndex>36</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1277,7 +1229,7 @@
         <Left>0.15727in</Left>
         <Height>0.54167in</Height>
         <Width>4.16949in</Width>
-        <ZIndex>39</ZIndex>
+        <ZIndex>37</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1293,7 +1245,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=ReportItems!txtPrincipal</Value>
+                <Value>=ReportItems!txtPrincipal.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1307,7 +1259,7 @@
         <Left>6.25482in</Left>
         <Height>0.20833in</Height>
         <Width>1.03407in</Width>
-        <ZIndex>40</ZIndex>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1337,7 +1289,7 @@
         <Left>6.25482in</Left>
         <Height>0.2882in</Height>
         <Width>1.03407in</Width>
-        <ZIndex>41</ZIndex>
+        <ZIndex>39</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1367,7 +1319,7 @@
         <Left>0.7567in</Left>
         <Height>0.25in</Height>
         <Width>2.46021in</Width>
-        <ZIndex>42</ZIndex>
+        <ZIndex>40</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1397,7 +1349,7 @@
         <Left>5.60993in</Left>
         <Height>0.25in</Height>
         <Width>1.30396in</Width>
-        <ZIndex>43</ZIndex>
+        <ZIndex>41</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1427,7 +1379,7 @@
         <Left>6.12222in</Left>
         <Height>0.18056in</Height>
         <Width>1.44792in</Width>
-        <ZIndex>44</ZIndex>
+        <ZIndex>42</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1457,7 +1409,7 @@
         <Left>6.25482in</Left>
         <Height>0.20833in</Height>
         <Width>1.03407in</Width>
-        <ZIndex>45</ZIndex>
+        <ZIndex>43</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1487,7 +1439,7 @@
         <Left>6.25482in</Left>
         <Height>0.20833in</Height>
         <Width>1.03407in</Width>
-        <ZIndex>46</ZIndex>
+        <ZIndex>44</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -1517,6 +1469,66 @@
         <Left>5.60993in</Left>
         <Height>0.25in</Height>
         <Width>0.16354in</Width>
+        <ZIndex>45</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox28">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Code.AmountToWord(ReportItems!txtPercent.Value)</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>7.13486in</Top>
+        <Left>3.94894in</Left>
+        <Height>0.25in</Height>
+        <Width>0.76324in</Width>
+        <ZIndex>46</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="txtPercent2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Interest.Value, "dsPawnTicket")</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>7.13486in</Top>
+        <Left>4.78162in</Left>
+        <Height>0.25in</Height>
+        <Width>0.51532in</Width>
         <ZIndex>47</ZIndex>
         <Style>
           <Border />
@@ -1531,10 +1543,6 @@
     <Style />
   </Body>
   <ReportParameters>
-    <ReportParameter Name="txtItemInterest">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
     <ReportParameter Name="txtDescription">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>

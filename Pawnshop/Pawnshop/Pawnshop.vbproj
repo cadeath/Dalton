@@ -164,6 +164,7 @@
     <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
+    <Compile Include="Classes\rptActionReq.vb" />
     <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
@@ -550,6 +551,7 @@
     <EmbeddedResource Include="Reports\layout01.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\layout02.rdlc" />
     <EmbeddedResource Include="Reports\qryDate.resx">
       <DependentUpon>qryDate.vb</DependentUpon>
     </EmbeddedResource>

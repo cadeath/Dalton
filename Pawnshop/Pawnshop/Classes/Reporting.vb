@@ -33,6 +33,7 @@ Public Class Reporting
             New FileStream(tmpPath & tmpFile, FileMode.Create)
         'New FileStream("C:\" + name + "." + fileNameExtension, FileMode.Create)
 
+
         m_streams.Add(stream)
         Return stream
     End Function
@@ -69,6 +70,8 @@ Public Class Reporting
           "  <MarginBottom>0.25in</MarginBottom>" + _
           "</DeviceInfo>"
         End If
+        Console.WriteLine("Device Info:")
+        Console.WriteLine(deviceInfo)
 
         Dim warnings() As Warning = Nothing
         m_streams = New List(Of Stream)()

@@ -35,7 +35,7 @@ Public Class frmPawnItem
         If transactionType = "L" Then NewLoan()
     End Sub
 
-#Region "GUI"
+  #Region "GUI"
     Private Sub ClearFields()
         mod_system.isAuthorized = False
 
@@ -915,45 +915,53 @@ Public Class frmPawnItem
 #End Region
 
 #Region "Printing"
-    Private autoPrintPT As Reporting
+    Public autoPrintPT As Reporting
+
     Private Sub PrintNewLoan()
-        PrintPawnTicket()
+        PrintPawnTicket
     End Sub
 
     Private Sub PrintPawnTicket()
-        Dim mySql As String = _
-            "SELECT * FROM tblPAWN ORDER BY PawnID DESC ROWS 1"
-        Dim ds As DataSet = LoadSQL(mySql), dsName As String = "dsPawnTicket"
-        Dim latestPT As Single = ds.Tables(0).Rows(0).Item("PawnID")
-
-        'AutoPrint
-        autoPrintPT = New Reporting
         Dim report As LocalReport = New LocalReport
-        Dim itemType As String, desc As String
-        mySql = "SELECT * FROM PRINT_PAWNING WHERE PawnID = " & latestPT
-        ds.Clear() : ds = LoadSQL(mySql, dsName)
-
-        'Parameters=============
-        Dim addParameters As New Dictionary(Of String, String)
-        'Description
-        If isOldItem Then
-            addParameters.Add("txtDescription", ds.Tables(dsName).Rows(0).Item("DESCRIPTION"))
-        Else
-            itemType = ds.Tables(0).Rows(0).Item("ItemType")
-            desc = ds.Tables(dsName).Rows(0).Item("DESCRIPTION")
-            addParameters.Add("txtDescription", pawning.DisplayDescription(itemType, desc))
-        End If
+        autoPrintPT = New Reporting
 
 
+        Dim mySql As String, dsName As String = "dsPawnTicket"
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
 
-        'Report Data
         report.ReportPath = "Reports\layout01.rdlc"
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
+        Dim addParameters As New Dictionary(Of String, String)
+        If isOldItem Then
+            addParameters.Add("txtDescription", PawnItem.Description)
+        Else
+            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+        End If
+
+        'addParameters.Add("txtItemInterest", GetInt(30))
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
 
         autoPrintPT.Export(report)
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print("EPSON LX-300+ /II Parallel")
+    End Sub
+
+    Private Sub PrintRedeemOR()
+
+    End Sub
+
+    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        PrintNewLoan()
     End Sub
 #End Region
 

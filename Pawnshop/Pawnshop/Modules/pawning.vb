@@ -1,16 +1,34 @@
 ﻿Module pawning
 
-    Function DisplayDescription(ByVal type As String, ByVal desc As String) As String
+    Function DisplayDescription(ByVal pt As PawnTicket) As String
+        Dim desc As String = ""
 
-        Select Case type
-            Case "JWL"
-
-        End Select
+        If pt.ItemType = "JWL" Then
+            desc = String.Format("1 {0} {1}G APPROX {2}", GetCategoryByID(pt.CategoryID), pt.Grams, CompanyEncrypt(pt.Karat))
+            desc &= vbCrLf & pt.Description
+            desc &= vbCrLf & "Appraised by " & GetUsername(pt.AppraiserID)
+        Else
+            desc = pt.Description
+        End If
 
         Return desc
     End Function
 
-    Private Function Encrypt(ByVal amount As Integer) As String
+    Private Function GetUsername(ByVal id As Integer) As String
+        Dim loadAppraiser As New ComputerUser
+        loadAppraiser.LoadUser(id)
+
+        Return loadAppraiser.UserName
+    End Function
+
+    Private Function GetCategoryByID(ByVal id As Integer) As String
+        Dim mySql As String = "SELECT * FROM tblClass WHERE ClassID = " & id
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("CATEGORY")
+    End Function
+
+    Private Function CompanyEncrypt(ByVal amount As Integer) As String
         Dim intStr As String = amount, newStr As String = ""
 
         For cnt As Integer = 0 To intStr.Length - 1
