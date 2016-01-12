@@ -15,6 +15,8 @@ Public Class Reporting
     Public m_currentPageIndex As Integer
     Public m_streams As IList(Of Stream)
 
+    Private printFilenameCNT As Integer = 0
+
     Public Function CreateStream(ByVal name As String, _
        ByVal fileNameExtension As String, _
        ByVal encoding As Encoding, ByVal mimeType As String, _
@@ -24,16 +26,20 @@ Public Class Reporting
         Dim tmpPath As String = System.IO.Path.GetTempPath()
         Dim tmpFile As String = name + "." + fileNameExtension
 
-        If System.IO.File.Exists(tmpPath & tmpFile) Then System.IO.File.Delete(tmpPath & tmpFile)
+        Dim Fname As String = tmpPath & printFilenameCNT & "_" & tmpFile
+        Console.WriteLine("Generating: " & Fname)
+
+        If System.IO.File.Exists(Fname) Then System.IO.File.Delete(Fname)
         While System.IO.File.Exists(tmpPath & tmpFile)
             System.IO.File.Delete(tmpPath & tmpFile)
             Console.WriteLine("Please wait... Deleting...")
         End While
+
         Dim stream As Stream = _
-            New FileStream(tmpPath & tmpFile, FileMode.Create)
+            New FileStream(Fname, FileMode.Create)
         'New FileStream("C:\" + name + "." + fileNameExtension, FileMode.Create)
 
-
+        printFilenameCNT += 1
         m_streams.Add(stream)
         Return stream
     End Function

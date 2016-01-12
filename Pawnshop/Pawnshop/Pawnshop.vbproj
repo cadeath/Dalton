@@ -551,7 +551,9 @@
     <EmbeddedResource Include="Reports\layout01.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\layout02.rdlc" />
+    <EmbeddedResource Include="Reports\layout02.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryDate.resx">
       <DependentUpon>qryDate.vb</DependentUpon>
     </EmbeddedResource>

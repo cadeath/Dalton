@@ -1,5 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <DataSources>
+    <DataSource Name="Pawnshop">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>2d43dc81-0047-4327-98ff-ee7a82a45263</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dsOR">
+      <Fields>
+        <Field Name="PawnID">
+          <DataField>PawnID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PawnTicket">
+          <DataField>PawnTicket</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LoanDate">
+          <DataField>LoanDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MatuDate">
+          <DataField>MatuDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExpiryDate">
+          <DataField>ExpiryDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ItemType">
+          <DataField>ItemType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Pawner">
+          <DataField>Pawner</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FullAddress">
+          <DataField>FullAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Principal">
+          <DataField>Principal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Appraisal">
+          <DataField>Appraisal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AdvInt">
+          <DataField>AdvInt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Penalty">
+          <DataField>Penalty</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ServiceCharge">
+          <DataField>ServiceCharge</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NetAmount">
+          <DataField>NetAmount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ContactNumber">
+          <DataField>ContactNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ORNum">
+          <DataField>ORNum</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ORDate">
+          <DataField>ORDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RenewDue">
+          <DataField>RenewDue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RedeemDue">
+          <DataField>RedeemDue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>Pawnshop</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Pawnshop</rd:DataSetName>
+        <rd:TableName>dsPrint</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>PawnTicket</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceType>Pawnshop.dsPrint, Reports.dsPrint.Designer.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
   <Body>
     <ReportItems>
       <Textbox Name="Textbox3">
@@ -9,7 +118,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>DANIEL EUPERIUM EZUKHRIZ</Value>
+                <Value>=First(Fields!Pawner.Value, "dsOR")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -38,7 +147,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>APITONG EXT PRK. 7 LAGAO, GENERAL SANTOS CITY</Value>
+                <Value>=First(Fields!FullAddress.Value, "dsOR")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -67,7 +176,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>OR# 88519856</Value>
+                <Value>="OR# " &amp; First(Fields!ORNum.Value, "dsOR")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -97,7 +206,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>ONE MILLION DOLLAR PESOS AMOUNT IN WORDS HERE</Value>
+                <Value>=Parameters!txtPayment.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -107,7 +216,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.31265in</Top>
+        <Top>1.52515in</Top>
         <Left>0.35085in</Left>
         <Height>0.31249in</Height>
         <Width>2.03125in</Width>
@@ -127,18 +236,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>1 APP LAPTOP ACER</Value>
-                <Style>
-                  <FontSize>8pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>SN 48148944187</Value>
+                <Value>=Parameters!txtDescription.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -167,7 +265,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>99,000.00</Value>
+                <Value>=Fields!Principal.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>#,0.00;(#,0.00);'-'</Format>
@@ -179,7 +277,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>0.69459in</Top>
-        <Left>3.95314in</Left>
+        <Left>4.02814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>5</ZIndex>
@@ -198,7 +296,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>56.00</Value>
+                <Value>=Fields!Interest.Value + First(Fields!AdvInt.Value, "dsOR")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>#,0.00;(#,0.00);'-'</Format>
@@ -210,7 +308,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>0.89598in</Top>
-        <Left>3.95314in</Left>
+        <Left>4.02814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>6</ZIndex>
@@ -229,7 +327,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>0.00</Value>
+                <Value />
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>#,0.00;(#,0.00);'-'</Format>
@@ -241,7 +339,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>1.08348in</Top>
-        <Left>3.95314in</Left>
+        <Left>4.02814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>7</ZIndex>
@@ -260,7 +358,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>0.00</Value>
+                <Value>=First(Fields!Penalty.Value, "dsOR")</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>#,0.00;(#,0.00);'-'</Format>
@@ -271,8 +369,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.27098in</Top>
-        <Left>3.95314in</Left>
+        <Top>1.30848in</Top>
+        <Left>4.02814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>8</ZIndex>
@@ -301,7 +399,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.27098in</Top>
+        <Top>1.30848in</Top>
         <Left>2.88716in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
@@ -314,6 +412,38 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox13">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtTotalDue.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>2.07291in</Top>
+        <Left>4.02814in</Left>
+        <Height>0.1875in</Height>
+        <Width>1.05209in</Width>
+        <ZIndex>10</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>2.77083in</Height>
     <Style />
@@ -323,8 +453,16 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="txtPayment">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="txtTotalDue">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
-  <Width>5.07292in</Width>
+  <Width>5.95834in</Width>
   <Page>
     <PageHeight>4.5in</PageHeight>
     <LeftMargin>0.25in</LeftMargin>

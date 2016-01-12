@@ -196,7 +196,7 @@ Public Class frmPawnItem
 
         Select Case transactionType
             Case "L" : SaveNewLoan() : PrintNewLoan()
-            Case "X" : SaveRedeem()
+            Case "X" : SaveRedeem() : PrintRedeemOR()
             Case "R" : SaveRenew()
         End Select
 
@@ -957,7 +957,43 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub PrintRedeemOR()
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
 
+        Dim mySql As String = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        Dim dsName As String = "dsOR"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout02.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim paymentStr As String = _
+            String.Format("PT# {0:000000} with a payment amount of Php {1}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtPayment", paymentStr)
+        addParameters.Add("txtDescription", PawnItem.Description)
+        addParameters.Add("txtTotalDue", PawnItem.RedeemDue)
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 4.5)
+
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
+
+        autoPrintPT.Export(report, paperSize)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print("EPSON LX-300+ /II Parallel")
     End Sub
 
     Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
