@@ -39,7 +39,7 @@
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
-        idMR = daltonService(1).GetReceivedLast
+        idMR = daltonService(0).GetReceivedLast
     End Sub
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click

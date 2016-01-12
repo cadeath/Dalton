@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Dalton Pawnshop")> 
 <Assembly: AssemblyDescription("Dalton Pawnshop and Jewelry")> 
 <Assembly: AssemblyCompany("Perfecto Group of Companies")> 
-<Assembly: AssemblyProduct("pawnshop")> 
+<Assembly: AssemblyProduct("Pawnshop")> 
 <Assembly: AssemblyCopyright("Copyright © CaDeAtH™")> 
 <Assembly: AssemblyTrademark("Aerauxel")> 
 

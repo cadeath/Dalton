@@ -1,4 +1,8 @@
-﻿Public Class frmPawnItem
+﻿Imports Microsoft.Reporting.WinForms
+
+Public Class frmPawnItem
+    'Version 2.3
+    ' - Add Printing
     'Version 2.2
     ' - Remake SAVE
     'Version 2.1
@@ -31,7 +35,7 @@
         If transactionType = "L" Then NewLoan()
     End Sub
 
-#Region "GUI"
+  #Region "GUI"
     Private Sub ClearFields()
         mod_system.isAuthorized = False
 
@@ -66,6 +70,27 @@
         txtEvat.Text = ""
         txtRenew.Text = ""
         txtRedeem.Text = ""
+    End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim transDate As Date
+        If PawnItem.Status = "X" Then
+            transDate = PawnItem.OfficialReceiptDate
+        Else
+            transDate = PawnItem.LoanDate
+        End If
+
+        If CurrentDate.Date <> transDate Then
+            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
+
+        PawnItem.VoidCancelTicket()
+        MsgBox("Transaction Voided", MsgBoxStyle.Information)
+        frmPawning.LoadActive()
+        Me.Close()
     End Sub
 
     Private Sub txtAppr_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppr.KeyPress
@@ -170,8 +195,8 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan()
-            Case "X" : SaveRedeem()
+            Case "L" : SaveNewLoan() : PrintNewLoan()
+            Case "X" : SaveRedeem() : PrintRedeemOR()
             Case "R" : SaveRenew()
         End Select
 
@@ -311,6 +336,7 @@
 #End Region
 
 #Region "Controller"
+
     Private Sub SaveRedeem()
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
@@ -821,7 +847,7 @@
         Dim oldPT As Integer = PawnItem.PawnTicket
         Dim principal As Double, netAmt As Double
         Dim interest As Double, advInt As Double
-        Dim servChar As Double,  penalty As Double
+        Dim servChar As Double, penalty As Double
         Dim redeemDue As Double
 
         'Redeem
@@ -888,28 +914,91 @@
 
 #End Region
 
-    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-        Dim transDate As Date
-        If PawnItem.Status = "X" Then
-            transDate = PawnItem.OfficialReceiptDate
+#Region "Printing"
+    Public autoPrintPT As Reporting
+
+    Private Sub PrintNewLoan()
+        PrintPawnTicket
+    End Sub
+
+    Private Sub PrintPawnTicket()
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+
+        Dim mySql As String, dsName As String = "dsPawnTicket"
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout01.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim addParameters As New Dictionary(Of String, String)
+        If isOldItem Then
+            addParameters.Add("txtDescription", PawnItem.Description)
         Else
-            transDate = PawnItem.LoanDate
+            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         End If
 
-        If CurrentDate.Date <> transDate Then
-            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
-            Exit Sub
+        'addParameters.Add("txtItemInterest", GetInt(30))
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
         End If
 
-        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
-
-        PawnItem.VoidCancelTicket()
-        MsgBox("Transaction Voided", MsgBoxStyle.Information)
-        frmPawning.LoadActive()
-        Me.Close()
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print("EPSON LX-300+ /II Parallel")
     End Sub
 
-    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+    Private Sub PrintRedeemOR()
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
 
+        Dim mySql As String = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        Dim dsName As String = "dsOR"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout02.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim paymentStr As String = _
+            String.Format("PT# {0:000000} with a payment amount of Php {1}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtPayment", paymentStr)
+        addParameters.Add("txtDescription", PawnItem.Description)
+        addParameters.Add("txtTotalDue", PawnItem.RedeemDue)
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 4.5)
+
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
+
+        autoPrintPT.Export(report, paperSize)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print("EPSON LX-300+ /II Parallel")
     End Sub
+
+    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        PrintNewLoan()
+    End Sub
+#End Region
+
 End Class
