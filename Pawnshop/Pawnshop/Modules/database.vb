@@ -9,8 +9,8 @@
 
 Friend Module database
     Public con As OdbcConnection
-    Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
-    'Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
+    'Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
+    Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet

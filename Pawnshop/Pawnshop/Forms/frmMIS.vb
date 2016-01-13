@@ -41,11 +41,6 @@ Public Class frmMIS
         ofdImport.ShowDialog()
     End Sub
 
-    Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        ImportTemplate(txtImportPath.Text)
-        CreateLOG()
-    End Sub
-
     Friend Sub AddProgress()
         Dim th As Threading.Thread
         th = New Threading.Thread(AddressOf doAddProgress)
@@ -93,7 +88,7 @@ Public Class frmMIS
             Dim fname As String, lname As String, pt As String
             fileLoading(MaxEntries)
 
-            For ent As Integer = 2 To MaxEntries - 1
+            For ent As Integer = 2 To MaxEntries
                 pt = "Line Num: " & ent - 1
                 Dim colIdx As Integer = 0 : colIdx += 1
                 Try
@@ -114,11 +109,15 @@ Public Class frmMIS
                         .AddressBrgy = IIf(oSheet.Cells(ent, 5).value = "", "", oSheet.Cells(ent, 5).value) : colIdx += 1
                         .AddressCity = IIf(oSheet.Cells(ent, 6).value = "", "", oSheet.Cells(ent, 6).value) : colIdx += 1
                         .AddressProvince = IIf(oSheet.Cells(ent, 7).value = "", "", oSheet.Cells(ent, 7).value) : colIdx += 1
-                        .ZipCode = IIf(oSheet.Cells(ent, 8).value = "", "", oSheet.Cells(ent, 8).value) : colIdx += 1
-                        If ifSex(oSheet.Cells(ent, 9).value) Then .Sex = dbSex(oSheet.Cells(ent, 9).value) : colIdx += 1
-                        If IsDate(oSheet.Cells(ent, 10).value) Then .Birthday = oSheet.Cells(ent, 10).value : colIdx += 1
-                        If ifPhone(oSheet.Cells(ent, 11).value) Then .Cellphone1 = oSheet.Cells(ent, 11).value : colIdx += 1
-                        If ifPhone(oSheet.Cells(ent, 12).value) Then .Cellphone1 = oSheet.Cells(ent, 12).value : colIdx += 1
+                        .ZipCode = IIf(IsNumeric(oSheet.Cells(ent, 8).value), oSheet.Cells(ent, 8).value, "") : colIdx += 1
+                        If ifSex(oSheet.Cells(ent, 9).value) Then .Sex = dbSex(oSheet.Cells(ent, 9).value)
+                        colIdx += 1
+                        If IsDate(oSheet.Cells(ent, 10).value) Then .Birthday = oSheet.Cells(ent, 10).value
+                        colIdx += 1
+                        If ifPhone(oSheet.Cells(ent, 11).value) Then .Cellphone1 = oSheet.Cells(ent, 11).value
+                        colIdx += 1
+                        If ifPhone(oSheet.Cells(ent, 12).value) Then .Cellphone2 = oSheet.Cells(ent, 12).value
+                        colIdx += 1
 
                         If isNew Then
                             .SaveClient()
@@ -134,31 +133,33 @@ Public Class frmMIS
                         Dim migratePT As New PawnTicket
                         With migratePT
                             migratePT.Pawner = migratePawner
+                            Console.WriteLine("Checking PawnItem of " & migratePawner.FirstName)
+
                             pt = oSheet.Cells(ent, 13).value : colIdx += 1
                             If IsNumeric(pt) Then
                                 .PawnTicket = pt
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             If ifItemType(oSheet.Cells(ent, 14).value) Then
                                 .ItemType = oSheet.Cells(ent, 14).value : colIdx += 1
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             If isClass(oSheet.Cells(ent, 15).value) Then
                                 .CategoryID = _catID : colIdx += 1
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             If IsNumeric(oSheet.Cells(ent, 16).value) Then
                                 .Grams = oSheet.Cells(ent, 16).value : colIdx += 1
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             If IsNumeric(oSheet.Cells(ent, 17).value) Then
                                 .Karat = oSheet.Cells(ent, 17).value : colIdx += 1
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             .Description = oSheet.Cells(ent, 18).value : colIdx += 1
                             .LoanDate = oSheet.Cells(ent, 19).value : colIdx += 1
@@ -190,6 +191,12 @@ Public Class frmMIS
                     LogReport(ent, "Please check column number " & colIdx)
                     GoTo nextLoop
                 End Try
+                GoTo nextLoop
+wrongEntry:
+                Console.WriteLine("Error in PT# " & pt)
+                Console.WriteLine("Line Number : " & ent)
+                Console.WriteLine("Column Number : " & colIdx + 1)
+                LogReport(ent, "Please check column number " & colIdx)
 nextLoop:
                 doAddProgress()
             Next
@@ -258,7 +265,8 @@ nextLoop:
         ofdImport.ShowDialog()
     End Sub
 
-    Private Sub btnImport_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+    Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
         ImportTemplate(txtImportPath.Text)
+        CreateLOG()
     End Sub
 End Class

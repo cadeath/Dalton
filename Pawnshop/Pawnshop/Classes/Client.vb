@@ -146,7 +146,7 @@ Public Class Client
 
     Public Property Birthday As Date
         Set(ByVal value As Date)
-            _bday = value
+            _bday = value.ToShortDateString
         End Set
         Get
             Return _bday
