@@ -98,7 +98,7 @@
 
             .SaveInsurance()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber)
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE")
             AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber)
         End With
 

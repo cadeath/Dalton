@@ -139,6 +139,9 @@
             .EncoderID = UserID
 
             .SaveBorrowings()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & BranchCode, "BORROW IN")
+            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & BranchCode)
         End With
 
         MsgBox("Borrowings Posted", MsgBoxStyle.Information)

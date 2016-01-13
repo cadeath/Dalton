@@ -101,7 +101,7 @@
             .SaveDollar()
 
             AddJournal(.NetAmount, "Debit", "Cash Offsetting Account")
-            AddJournal(.NetAmount, "Credit", "Revolving Fund")
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", , "DOLLAR BUYING")
         End With
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)

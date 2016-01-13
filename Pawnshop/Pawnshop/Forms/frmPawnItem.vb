@@ -28,6 +28,11 @@ Public Class frmPawnItem
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
     Private ItemPrincipal As Double, Penalty As Double
 
+    Const ITEM_REDEEM As String = "REDEEM"
+    Const ITEM_NEWLOAN As String = "NEW LOAN"
+    Const ITEM_RENEW As String = "RENEW"
+
+
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadInformation()
@@ -353,13 +358,13 @@ Public Class frmPawnItem
             .SaveTicket(False)
 
             If isOldItem Then
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket, ITEM_REDEEM)
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
                 AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
                 AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
                 AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "PT# " & .PawnTicket)
             Else
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket, ITEM_REDEEM)
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
                 If daysDue > 3 Then
                     AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
@@ -444,7 +449,7 @@ Public Class frmPawnItem
 
             Dim tmpRemarks As String = "PT# " & currentPawnTicket
             AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
-            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks)
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_REDEEM)
             AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
             AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
         End With
@@ -904,7 +909,7 @@ Public Class frmPawnItem
 
             .SaveTicket()
 
-            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT)
+            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_REDEEM)
             AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With
@@ -922,6 +927,11 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub PrintPawnTicket()
+        On Error Resume Next
+
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
 
@@ -953,10 +963,15 @@ Public Class frmPawnItem
 
         autoPrintPT.Export(report)
         autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print("EPSON LX-300+ /II Parallel")
+        autoPrintPT.Print(printerName)
     End Sub
 
     Private Sub PrintRedeemOR()
+        On Error Resume Next
+
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
 
@@ -993,12 +1008,22 @@ Public Class frmPawnItem
 
         autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print("EPSON LX-300+ /II Parallel")
+        autoPrintPT.Print(printerName)
     End Sub
 
     Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         PrintNewLoan()
     End Sub
+
+    Private Function canPrint(ByVal printerName As String) As Boolean
+        Try
+            Dim printDocument As Drawing.Printing.PrintDocument = New Drawing.Printing.PrintDocument
+            printDocument.PrinterSettings.PrinterName = printerName
+            Return printDocument.PrinterSettings.IsValid
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 #End Region
 
 End Class
