@@ -921,12 +921,8 @@ Public Class frmPawnItem
 
 #Region "Printing"
     Private Sub PrintNewLoan()
-        PrintPawnTicket()
-    End Sub
-
-    Private Sub PrintPawnTicket()
         Dim autoPrintPT As Reporting
-        On Error Resume Next
+        'On Error Resume Next
 
         Dim printerName As String = "EPSON LX-300+ /II Parallel"
         If Not canPrint(printerName) Then Exit Sub
@@ -936,7 +932,8 @@ Public Class frmPawnItem
 
 
         Dim mySql As String, dsName As String = "dsPawnTicket"
-        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        'mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        mySql = "SELECT * FROM tblPawn ORDER BY PAWNID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
         report.ReportPath = "Reports\layout01.rdlc"
@@ -963,6 +960,11 @@ Public Class frmPawnItem
         autoPrintPT.Export(report)
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
+
+        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        frmReport.Show()
+
+        Me.Focus()
     End Sub
 
     Private Sub PrintRedeemOR()
@@ -1010,6 +1012,52 @@ Public Class frmPawnItem
         autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
+    End Sub
+
+    Private Sub PrintRenewPT()
+        Dim autoPrintPT As Reporting
+
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+
+        Dim mySql As String, dsName As String = "dsPawnTicket"
+        'mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        mySql = "SELECT * FROM tblPawn ORDER BY PAWNID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout03.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim addParameters As New Dictionary(Of String, String)
+        If isOldItem Then
+            addParameters.Add("txtDescription", PawnItem.Description)
+        Else
+            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+        End If
+
+        'addParameters.Add("txtItemInterest", GetInt(30))
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
+
+        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        frmReport.Show()
+
+        Me.Focus()
     End Sub
 
     Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
