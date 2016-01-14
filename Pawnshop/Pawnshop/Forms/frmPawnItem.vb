@@ -975,7 +975,8 @@ Public Class frmPawnItem
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
 
-        Dim mySql As String = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        Dim mySql As String
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
         Dim dsName As String = "dsOR"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
