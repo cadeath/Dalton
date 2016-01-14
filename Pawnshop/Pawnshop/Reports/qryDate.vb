@@ -108,19 +108,19 @@
         rptSQL.Add(fillData, mySql)
 
         fillData = "dsDebit"
-        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
         mySql &= "FROM JOURNAL_ENTRIES WHERE "
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mySql &= " AND DEBIT <> 0"
-        mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+        mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
         rptSQL.Add(fillData, mySql)
 
         fillData = "dsCredit"
-        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
         mySql &= "FROM JOURNAL_ENTRIES WHERE "
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mySql &= " AND CREDIT <> 0"
-        mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+        mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
         rptSQL.Add(fillData, mySql)
 
         'Sub Report

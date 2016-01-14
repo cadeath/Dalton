@@ -129,7 +129,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>0.58348in</Top>
-        <Left>0.40294in</Left>
+        <Left>0.50294in</Left>
         <Height>0.1875in</Height>
         <Width>2.35417in</Width>
         <Style>
@@ -158,6 +158,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>0.77098in</Top>
+        <Left>0.1in</Left>
         <Height>0.1875in</Height>
         <Width>2.7571in</Width>
         <ZIndex>1</ZIndex>
@@ -216,7 +217,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.52515in</Top>
+        <Top>1.61265in</Top>
         <Left>0.35085in</Left>
         <Height>0.31249in</Height>
         <Width>2.03125in</Width>
@@ -272,12 +273,14 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>0.69459in</Top>
-        <Left>4.02814in</Left>
+        <Left>4.12814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>5</ZIndex>
@@ -303,12 +306,14 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>0.89598in</Top>
-        <Left>4.02814in</Left>
+        <Left>4.12814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>6</ZIndex>
@@ -334,12 +339,14 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>1.08348in</Top>
-        <Left>4.02814in</Left>
+        <Left>4.12814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>7</ZIndex>
@@ -365,12 +372,14 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.30848in</Top>
-        <Left>4.02814in</Left>
+        <Top>1.34598in</Top>
+        <Left>4.12814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>8</ZIndex>
@@ -399,7 +408,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.30848in</Top>
+        <Top>1.34598in</Top>
         <Left>2.88716in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
@@ -419,19 +428,21 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Parameters!txtTotalDue.Value</Value>
+                <Value>=CDbl(Parameters!txtTotalDue.Value)</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>2.07291in</Top>
-        <Left>4.02814in</Left>
+        <Left>4.12814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>10</ZIndex>

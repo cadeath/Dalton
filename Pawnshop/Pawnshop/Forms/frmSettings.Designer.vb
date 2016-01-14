@@ -23,6 +23,8 @@ Partial Class frmSettings
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtRevolving = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.txtArea = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
@@ -46,10 +48,14 @@ Partial Class frmSettings
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtPawnTicket = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtRevolving = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.printerPT = New System.Windows.Forms.ComboBox()
+        Me.printerOR = New System.Windows.Forms.ComboBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
@@ -70,6 +76,25 @@ Partial Class frmSettings
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Branch"
+        '
+        'txtRevolving
+        '
+        Me.txtRevolving.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRevolving.Location = New System.Drawing.Point(6, 151)
+        Me.txtRevolving.Name = "txtRevolving"
+        Me.txtRevolving.Size = New System.Drawing.Size(252, 22)
+        Me.txtRevolving.TabIndex = 4
+        Me.txtRevolving.Text = "10000"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(6, 132)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(102, 16)
+        Me.Label6.TabIndex = 18
+        Me.Label6.Text = "Revolving Fund"
         '
         'txtArea
         '
@@ -149,7 +174,7 @@ Partial Class frmSettings
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(438, 211)
+        Me.btnClose.Location = New System.Drawing.Point(723, 211)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(85, 37)
         Me.btnClose.TabIndex = 3
@@ -158,7 +183,7 @@ Partial Class frmSettings
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(351, 211)
+        Me.btnUpdate.Location = New System.Drawing.Point(636, 211)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(81, 37)
         Me.btnUpdate.TabIndex = 2
@@ -300,30 +325,63 @@ Partial Class frmSettings
         Me.Label10.TabIndex = 16
         Me.Label10.Text = "Pawn Ticket"
         '
-        'txtRevolving
+        'GroupBox3
         '
-        Me.txtRevolving.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRevolving.Location = New System.Drawing.Point(6, 151)
-        Me.txtRevolving.Name = "txtRevolving"
-        Me.txtRevolving.Size = New System.Drawing.Size(252, 22)
-        Me.txtRevolving.TabIndex = 4
-        Me.txtRevolving.Text = "10000"
+        Me.GroupBox3.Controls.Add(Me.printerOR)
+        Me.GroupBox3.Controls.Add(Me.printerPT)
+        Me.GroupBox3.Controls.Add(Me.Label13)
+        Me.GroupBox3.Controls.Add(Me.Label7)
+        Me.GroupBox3.Location = New System.Drawing.Point(529, 12)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(279, 193)
+        Me.GroupBox3.TabIndex = 4
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Printer Settings"
         '
-        'Label6
+        'Label7
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(6, 132)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(102, 16)
-        Me.Label6.TabIndex = 18
-        Me.Label6.Text = "Revolving Fund"
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(17, 23)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(81, 16)
+        Me.Label7.TabIndex = 17
+        Me.Label7.Text = "Pawn Ticket"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(17, 72)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(98, 16)
+        Me.Label13.TabIndex = 18
+        Me.Label13.Text = "Official Receipt"
+        '
+        'printerPT
+        '
+        Me.printerPT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.printerPT.FormattingEnabled = True
+        Me.printerPT.Location = New System.Drawing.Point(20, 44)
+        Me.printerPT.Name = "printerPT"
+        Me.printerPT.Size = New System.Drawing.Size(234, 21)
+        Me.printerPT.TabIndex = 19
+        '
+        'printerOR
+        '
+        Me.printerOR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.printerOR.FormattingEnabled = True
+        Me.printerOR.Location = New System.Drawing.Point(20, 98)
+        Me.printerOR.Name = "printerOR"
+        Me.printerOR.Size = New System.Drawing.Size(234, 21)
+        Me.printerOR.TabIndex = 20
         '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(540, 260)
+        Me.ClientSize = New System.Drawing.Size(822, 260)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnClose)
@@ -336,6 +394,8 @@ Partial Class frmSettings
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -365,4 +425,9 @@ Partial Class frmSettings
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents txtRevolving As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents printerOR As System.Windows.Forms.ComboBox
+    Friend WithEvents printerPT As System.Windows.Forms.ComboBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
 End Class
