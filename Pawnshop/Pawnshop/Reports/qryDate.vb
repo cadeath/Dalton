@@ -56,7 +56,11 @@
         mySql = "SELECT * FROM tblInsurance "
         mySql &= String.Format("WHERE transDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
 
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Insurance.rdlc", Nothing, 0)
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Insurance.rdlc", rptPara)
         frmReport.Show()
     End Sub
 
