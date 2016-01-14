@@ -1,5 +1,6 @@
 ﻿' Eskie Cirrus James Maquilang
 ' revised
+' - add random filename
 Imports System.IO
 Imports System.Data
 Imports System.Text
@@ -15,18 +16,16 @@ Public Class Reporting
     Public m_currentPageIndex As Integer
     Public m_streams As IList(Of Stream)
 
-    Private printFilenameCNT As Integer = 0
-
     Public Function CreateStream(ByVal name As String, _
        ByVal fileNameExtension As String, _
        ByVal encoding As Encoding, ByVal mimeType As String, _
        ByVal willSeek As Boolean) As Stream
-        On Error Resume Next
 
         Dim tmpPath As String = System.IO.Path.GetTempPath()
-        Dim tmpFile As String = name + "." + fileNameExtension
+        'Dim tmpFile As String = name + "." + fileNameExtension
+        Dim tmpFile As String = GetRandomString(5) + "." + fileNameExtension
 
-        Dim Fname As String = tmpPath & printFilenameCNT & "_" & tmpFile
+        Dim Fname As String = tmpPath & tmpFile
         Console.WriteLine("Generating: " & Fname)
 
         If System.IO.File.Exists(Fname) Then System.IO.File.Delete(Fname)
@@ -39,7 +38,6 @@ Public Class Reporting
             New FileStream(Fname, FileMode.Create)
         'New FileStream("C:\" + name + "." + fileNameExtension, FileMode.Create)
 
-        printFilenameCNT += 1
         m_streams.Add(stream)
         Return stream
     End Function
@@ -138,5 +136,17 @@ Public Class Reporting
         End If
 
     End Sub
+
+    Private Function GetRandomString(ByVal max As Integer) As String
+        Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        Dim r As New Random
+        Dim sb As New StringBuilder
+        For i As Integer = 1 To 8
+            Dim idx As Integer = r.Next(0, 35)
+            sb.Append(s.Substring(idx, 1))
+        Next
+
+        Return sb.ToString
+    End Function
 
 End Class

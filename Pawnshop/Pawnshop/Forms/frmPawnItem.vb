@@ -920,13 +920,12 @@ Public Class frmPawnItem
 #End Region
 
 #Region "Printing"
-    Public autoPrintPT As Reporting
-
     Private Sub PrintNewLoan()
-        PrintPawnTicket
+        PrintPawnTicket()
     End Sub
 
     Private Sub PrintPawnTicket()
+        Dim autoPrintPT As Reporting
         On Error Resume Next
 
         Dim printerName As String = "EPSON LX-300+ /II Parallel"
@@ -967,6 +966,7 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub PrintRedeemOR()
+        Dim autoPrintPT As Reporting
         On Error Resume Next
 
         Dim printerName As String = "EPSON LX-300+ /II Parallel"
@@ -987,7 +987,7 @@ Public Class frmPawnItem
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("txtDescription", PawnItem.Description)
-        addParameters.Add("txtTotalDue", PawnItem.RedeemDue)
+        addParameters.Add("txtTotalDue", CDbl(PawnItem.RedeemDue))
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
