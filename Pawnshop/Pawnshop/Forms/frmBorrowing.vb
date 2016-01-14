@@ -89,7 +89,7 @@
         CreateEsk(fileSave, brwFile)
 
         MsgBox("Saved!", MsgBoxStyle.Information)
-        ClearFields()
+        Me.Close()
     End Sub
 
     Private Function isValid() As Boolean

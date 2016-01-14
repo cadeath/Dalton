@@ -119,7 +119,7 @@ Partial Class qryMoneyTransfer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 251)
+        Me.ClientSize = New System.Drawing.Size(425, 250)
         Me.Controls.Add(Me.monCal)
         Me.Controls.Add(Me.chkSend)
         Me.Controls.Add(Me.chkPay)
