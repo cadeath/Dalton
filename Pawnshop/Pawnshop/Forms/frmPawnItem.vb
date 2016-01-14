@@ -1,4 +1,8 @@
-﻿Public Class frmPawnItem
+﻿Imports Microsoft.Reporting.WinForms
+
+Public Class frmPawnItem
+    'Version 2.3
+    ' - Add Printing
     'Version 2.2
     ' - Remake SAVE
     'Version 2.1
@@ -24,6 +28,11 @@
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
     Private ItemPrincipal As Double, Penalty As Double
 
+    Const ITEM_REDEEM As String = "REDEEM"
+    Const ITEM_NEWLOAN As String = "NEW LOAN"
+    Const ITEM_RENEW As String = "RENEW"
+
+
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadInformation()
@@ -31,7 +40,7 @@
         If transactionType = "L" Then NewLoan()
     End Sub
 
-#Region "GUI"
+  #Region "GUI"
     Private Sub ClearFields()
         mod_system.isAuthorized = False
 
@@ -66,6 +75,27 @@
         txtEvat.Text = ""
         txtRenew.Text = ""
         txtRedeem.Text = ""
+    End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim transDate As Date
+        If PawnItem.Status = "X" Then
+            transDate = PawnItem.OfficialReceiptDate
+        Else
+            transDate = PawnItem.LoanDate
+        End If
+
+        If CurrentDate.Date <> transDate Then
+            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
+
+        PawnItem.VoidCancelTicket()
+        MsgBox("Transaction Voided", MsgBoxStyle.Information)
+        frmPawning.LoadActive()
+        Me.Close()
     End Sub
 
     Private Sub txtAppr_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppr.KeyPress
@@ -170,8 +200,8 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan()
-            Case "X" : SaveRedeem()
+            Case "L" : SaveNewLoan() : PrintNewLoan()
+            Case "X" : SaveRedeem() : PrintRedeemOR()
             Case "R" : SaveRenew()
         End Select
 
@@ -311,6 +341,7 @@
 #End Region
 
 #Region "Controller"
+
     Private Sub SaveRedeem()
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
@@ -327,13 +358,13 @@
             .SaveTicket(False)
 
             If isOldItem Then
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket, ITEM_REDEEM)
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
                 AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
                 AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
                 AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "PT# " & .PawnTicket)
             Else
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket, ITEM_REDEEM)
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
                 If daysDue > 3 Then
                     AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
@@ -418,7 +449,7 @@
 
             Dim tmpRemarks As String = "PT# " & currentPawnTicket
             AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
-            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks)
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_REDEEM)
             AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
             AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
         End With
@@ -821,7 +852,7 @@
         Dim oldPT As Integer = PawnItem.PawnTicket
         Dim principal As Double, netAmt As Double
         Dim interest As Double, advInt As Double
-        Dim servChar As Double,  penalty As Double
+        Dim servChar As Double, penalty As Double
         Dim redeemDue As Double
 
         'Redeem
@@ -878,7 +909,7 @@
 
             .SaveTicket()
 
-            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT)
+            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_REDEEM)
             AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With
@@ -888,28 +919,112 @@
 
 #End Region
 
-    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-        Dim transDate As Date
-        If PawnItem.Status = "X" Then
-            transDate = PawnItem.OfficialReceiptDate
+#Region "Printing"
+    Private Sub PrintNewLoan()
+        PrintPawnTicket()
+    End Sub
+
+    Private Sub PrintPawnTicket()
+        Dim autoPrintPT As Reporting
+        On Error Resume Next
+
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+
+        Dim mySql As String, dsName As String = "dsPawnTicket"
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout01.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim addParameters As New Dictionary(Of String, String)
+        If isOldItem Then
+            addParameters.Add("txtDescription", PawnItem.Description)
         Else
-            transDate = PawnItem.LoanDate
+            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         End If
 
-        If CurrentDate.Date <> transDate Then
-            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
-            Exit Sub
+        'addParameters.Add("txtItemInterest", GetInt(30))
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
         End If
 
-        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
-
-        PawnItem.VoidCancelTicket()
-        MsgBox("Transaction Voided", MsgBoxStyle.Information)
-        frmPawning.LoadActive()
-        Me.Close()
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
     End Sub
 
-    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+    Private Sub PrintRedeemOR()
+        Dim autoPrintPT As Reporting
+        On Error Resume Next
 
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+        Dim mySql As String
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        Dim dsName As String = "dsOR"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout02.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim paymentStr As String = _
+            String.Format("PT# {0:000000} with a payment amount of Php {1}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtPayment", paymentStr)
+        addParameters.Add("txtDescription", PawnItem.Description)
+        addParameters.Add("txtTotalDue", CDbl(PawnItem.RedeemDue))
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 4.5)
+
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
+
+        autoPrintPT.Export(report, paperSize)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
     End Sub
+
+    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        PrintNewLoan()
+    End Sub
+
+    Private Function canPrint(ByVal printerName As String) As Boolean
+        Try
+            Dim printDocument As Drawing.Printing.PrintDocument = New Drawing.Printing.PrintDocument
+            printDocument.PrinterSettings.PrinterName = printerName
+            Return printDocument.PrinterSettings.IsValid
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+#End Region
+
 End Class

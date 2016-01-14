@@ -28,6 +28,8 @@ Partial Class devClient
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.txtAmount = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -79,12 +81,30 @@ Partial Class devClient
         Me.txtSearch.Size = New System.Drawing.Size(270, 20)
         Me.txtSearch.TabIndex = 0
         '
+        'txtAmount
+        '
+        Me.txtAmount.Location = New System.Drawing.Point(12, 117)
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.Size = New System.Drawing.Size(271, 20)
+        Me.txtAmount.TabIndex = 4
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(12, 143)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'devClient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnBrowse
-        Me.ClientSize = New System.Drawing.Size(335, 96)
+        Me.ClientSize = New System.Drawing.Size(335, 205)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.txtAmount)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.txtName)
@@ -104,4 +124,6 @@ Partial Class devClient
     Friend WithEvents txtName As System.Windows.Forms.TextBox
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
+    Friend WithEvents txtAmount As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

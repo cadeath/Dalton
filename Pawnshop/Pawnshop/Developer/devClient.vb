@@ -15,4 +15,12 @@
         txtID.Text = cl.ID
         txtName.Text = cl.FirstName & " " & cl.LastName
     End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        If Not IsNumeric(txtAmount.Text) Then Exit Sub
+
+        Dim conv As New clsConversion
+        Dim amt As Double = txtAmount.Text
+        txtAmount.Text = conv.ConvertNumberToWords(amt)
+    End Sub
 End Class

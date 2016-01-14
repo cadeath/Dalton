@@ -77,7 +77,7 @@ Public Class frmReport
                 myPara.Name = "txtUsername"
                 If POSuser.UserName Is Nothing Then POSuser.UserName = "Sample Eskie"
                 myPara.Values.Add(POSuser.UserName)
-                rv_display.LocalReport.SetParameters(New ReportParameter() {myPara})
+                .LocalReport.SetParameters(New ReportParameter() {myPara})
             End If
 
             If Not addPara Is Nothing Then

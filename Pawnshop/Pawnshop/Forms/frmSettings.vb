@@ -3,6 +3,21 @@
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
+        PrinterSettings()
+    End Sub
+
+    Private Sub PrinterSettings()
+        printerPT.Items.Clear()
+        printerOR.Items.Clear()
+
+        Dim tmpPrinterName As String
+        For Each tmpPrinterName In Printing.PrinterSettings.InstalledPrinters
+            printerOR.Items.Add(tmpPrinterName)
+            printerPT.Items.Add(tmpPrinterName)
+        Next
+
+        printerPT.Text = GetOption("PrinterPT")
+        printerOR.Text = GetOption("PrinterOR")
     End Sub
 
     Private Sub ClearFields()
@@ -63,6 +78,10 @@
         UpdateOptions("InsuranceLastNum", txtInsurance.Text)
         UpdateOptions("MEnumLast", txtMENum.Text)
         UpdateOptions("MRNumLast", txtMRNum.Text)
+
+        'Third
+        UpdateOptions("PrinterPT", printerPT.Text)
+        UpdateOptions("PrinterOR", printerOR.Text)
 
         If Not locked Then
             MsgBox("New Branch has been setup", MsgBoxStyle.Information)

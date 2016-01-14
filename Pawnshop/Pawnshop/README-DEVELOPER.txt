@@ -1,3 +1,8 @@
+SETUP BEFORE DEPLOYMENT
+Reports
+ - Required Login
+ - Required Priviledge
+============================================================================================================================
 frmClient TUTORIAL
 Phase 1 - Setting up Reload Information
 At your original form, create a procedure(SUB) with FRIEND or PUBLIC identifier that will load your form. Include a parameter CLIENT class as your searched client information.
