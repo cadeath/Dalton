@@ -932,8 +932,8 @@ Public Class frmPawnItem
 
 
         Dim mySql As String, dsName As String = "dsPawnTicket"
-        'mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
-        mySql = "SELECT * FROM tblPawn ORDER BY PAWNID DESC ROWS 1"
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        If PawnItem.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
         report.ReportPath = "Reports\layout01.rdlc"
@@ -946,7 +946,7 @@ Public Class frmPawnItem
             addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         End If
 
-        'addParameters.Add("txtItemInterest", GetInt(30))
+        addParameters.Add("txtItemInterest", GetInt(30) * 100)
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
                 Dim tmpPara As New ReportParameter
@@ -961,15 +961,15 @@ Public Class frmPawnItem
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
 
-        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        frmReport.Show()
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
 
         Me.Focus()
     End Sub
 
     Private Sub PrintRedeemOR()
         Dim autoPrintPT As Reporting
-        On Error Resume Next
+        'On Error Resume Next
 
         Dim printerName As String = "EPSON LX-300+ /II Parallel"
         If Not canPrint(printerName) Then Exit Sub
@@ -982,15 +982,25 @@ Public Class frmPawnItem
         Dim dsName As String = "dsOR"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
-        report.ReportPath = "Reports\layout02.rdlc"
-        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        report.ReportPath = "Reports\layout04.rdlc"
+        'report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
         Dim paymentStr As String = _
             String.Format("PT# {0:000000} with a payment amount of Php {1}", PawnItem.PawnTicket, PawnItem.RedeemDue)
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("txtDescription", PawnItem.Description)
-        addParameters.Add("txtTotalDue", CDbl(PawnItem.RedeemDue))
+        addParameters.Add("txtTotalDue", PawnItem.RedeemDue)
+
+        With ds.Tables(dsName).Rows(0)
+            addParameters.Add("txtPawner", .Item("Pawner"))
+            addParameters.Add("txtFullAddress", .Item("FullAddress"))
+            addParameters.Add("txtOR", String.Format("{0:000000}", .Item("ORNum")))
+            addParameters.Add("txtPrincipal", .Item("Principal"))
+            addParameters.Add("txtInterest", .Item("Interest"))
+            addParameters.Add("txtServiceCharge", .Item("ServiceCharge"))
+            addParameters.Add("txtPenalty", .Item("Penalty"))
+        End With
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
