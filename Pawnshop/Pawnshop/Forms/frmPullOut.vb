@@ -54,6 +54,8 @@
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        If txtSearch.Text = "" Then Exit Sub
+
         mySql = "SELECT * FROM " & fillData
         mySql &= " WHERE PawnTicket = " & txtSearch.Text
         Dim ds As DataSet = LoadSQL(mySql)
