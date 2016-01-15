@@ -59,7 +59,7 @@ Public Class frmClientInformation
         txtZip.Text = cl.ZipCode
 
         cboGender.Text = IIf(cl.Sex = Client.Gender.Male, "Male", "Female")
-        dtpBday.Value = cl.Birthday
+        dtpBday.Value = IIf(cl.Birthday.Date > dtpBday.MinDate, cl.Birthday.Date, dtpBday.MinDate)
 
         txtCP1.Text = cl.Cellphone1
         txtCP2.Text = cl.Cellphone2
@@ -71,10 +71,6 @@ Public Class frmClientInformation
         LoadID(cl)
         ComputeBirthday()
         LockFields(True)
-    End Sub
-
-    Private Sub ReturnToOriginForm()
-        FormOrigin.Show()
     End Sub
 
     Friend Sub ComputeBirthday()
@@ -226,10 +222,19 @@ Public Class frmClientInformation
     Private Function isValid() As Boolean
         If txtFirstName.Text = "" Then txtFirstName.Focus() : Return False
         If txtLastName.Text = "" Then txtLastName.Focus() : Return False
-        If cboCity.Text = "" Then cboCity.Focus() : Return False
-        If cboGender.Text = "" Then cboGender.Focus() : Return False
-        If dtpBday.Value >= Now.Date Then dtpBday.Focus() : Return False
 
+        If RequirementLevel = 2 Then
+            If cboCity.Text = "" Then cboCity.Focus() : Return False
+            If cboGender.Text = "" Then cboGender.Focus() : Return False
+            If dtpBday.Value >= Now.Date Then dtpBday.Focus() : Return False
+        End If
+
+        If RequirementLevel >= 3 Then
+            If lvID.Items.Count < 1 Then
+                MsgBox("Must have atleast ONE Valid ID", MsgBoxStyle.Critical)
+                Return False
+            End If
+        End If
 
         Return True
     End Function
@@ -243,7 +248,6 @@ Public Class frmClientInformation
         End If
 
         If Not isValid() Then Exit Sub
-
 
         Dim tmpClient As New Client
         If Not isNew Then tmpClient = SelectedClient
@@ -270,7 +274,7 @@ Public Class frmClientInformation
 
             If isNew Then
                 .SaveClient()
-
+                tmpClient.LoadLastEntry()
             Else
                 .ModifyClient()
             End If
@@ -284,8 +288,9 @@ Public Class frmClientInformation
             MsgBox("Entry Updated", MsgBoxStyle.Information)
         End If
 
-
-        frmClient.btnSearch.PerformClick()
+        'frmClient.btnSearch.PerformClick()
+        tmpClient.LoadClient(tmpClient.ID)
+        frmClient.AutoSelect(tmpClient)
         Me.Close()
     End Sub
 
@@ -328,7 +333,9 @@ Public Class frmClientInformation
             lv.BackColor = Color.ForestGreen
         End If
 
-        cID.ClientID = SelectedClient.ID
+        If Not SelectedClient Is Nothing Then
+            cID.ClientID = SelectedClient.ID
+        End If
         ClientIDs.Add(cID)
     End Sub
 

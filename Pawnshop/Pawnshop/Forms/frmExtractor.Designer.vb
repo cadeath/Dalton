@@ -35,7 +35,7 @@ Partial Class frmExtractor
         'MonCalendar
         '
         Me.MonCalendar.Location = New System.Drawing.Point(18, 18)
-        Me.MonCalendar.MaxSelectionCount = 1
+        Me.MonCalendar.MaxSelectionCount = 365
         Me.MonCalendar.Name = "MonCalendar"
         Me.MonCalendar.TabIndex = 0
         '

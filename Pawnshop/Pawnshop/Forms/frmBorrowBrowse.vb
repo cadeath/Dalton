@@ -1,4 +1,6 @@
 ﻿Public Class frmBorrowBrowse
+    ' Version 1.1
+    ' - Check branchCode
 
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -112,8 +114,10 @@
         If ht Is Nothing Then Exit Sub
 
         If Not GetIntegrity(ht) Then MsgBox("Invalid for file." & vbCr & "Please generate another key.", MsgBoxStyle.Critical) : Exit Sub
-        Dim refNum As String, TransDate As Date, branchCode As String, Amount As Double, Remarks As String
-        refNum = ht(0) : TransDate = ht(1) : branchCode = ht(2) : Amount = ht(3) : Remarks = ht(4)
+        Dim refNum As String, TransDate As Date, eskBrancCode As String, Amount As Double, Remarks As String
+        refNum = ht(0) : TransDate = ht(1) : eskBrancCode = ht(2) : Amount = ht(3) : Remarks = ht(4)
+
+        If eskBrancCode <> BranchCode Then MsgBox("This file is not for this branch", MsgBoxStyle.Critical) : Exit Sub
 
         'Check Ref Duplication
         Dim mySql As String = "SELECT * FROM tblBorrow WHERE RefNum = '" & refNum & "'"
@@ -127,7 +131,7 @@
         With tmpBB
             .ReferenceNumber = refNum
             .TransactionDate = TransDate
-            .BranchCode = branchCode
+            .BranchCode = eskBrancCode
             .BranchName = GetBranchName(branchCode)
             .Amount = Amount
             .Remarks = Remarks
@@ -135,6 +139,9 @@
             .EncoderID = UserID
 
             .SaveBorrowings()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & BranchCode, "BORROW IN")
+            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & BranchCode)
         End With
 
         MsgBox("Borrowings Posted", MsgBoxStyle.Information)

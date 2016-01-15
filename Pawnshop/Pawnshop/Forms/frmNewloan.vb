@@ -6,20 +6,8 @@
     Dim currentOR As Integer = GetORNum()
     Dim transactionType As String, appraiser As Hashtable
 
-    Private Function GetORNum() As Integer
-        Return GetOption("ORLastNum")
-    End Function
-
-    Private Function GetLastNum() As Integer
-        Return GetOption("PawnLastNum")
-    End Function
-
-    Private Sub LoadItemType()
-        Dim itmType As String() = {"JWL", "APP", "BIG", "CEL"}
-        cboItemtype.Items.Clear()
-        cboItemtype.Items.AddRange(itmType)
-    End Sub
-
+    
+#Region "Graphical User Interface Functions"
     Private Sub ItemType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboItemtype.SelectedIndexChanged
         ComputeNetAmount()
 
@@ -91,11 +79,6 @@
         Next
     End Sub
 
-    Private Sub AddPTNumber()
-        currentPawnTicket += 1
-        database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
-    End Sub
-
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmClient.SearchSelect(txtPawner.Text, FormName.frmPawning)
         frmClient.Show()
@@ -149,10 +132,12 @@
         End Select
     End Sub
 
-    Private Sub frmNewloan_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
-
-    End Sub
-
+    ''' <summary>
+    ''' START
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmNewloan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If IsNothing(Pawner) Then
             ClearFields()
@@ -161,6 +146,218 @@
         End If
     End Sub
 
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub cboKarat_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboKarat.KeyPress
+        If isEnter(e) Then
+            txtAppraisal.Focus()
+        End If
+    End Sub
+
+    Private Sub cboKarat_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboKarat.LostFocus
+        txtAppraisal.Focus()
+    End Sub
+
+    Private Sub txtPrincipal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPrincipal.KeyPress
+        DigitOnly(e)
+        If isEnter(e) Then
+            txtTotal.Focus()
+        End If
+    End Sub
+
+    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+        ComputeNetAmount()
+    End Sub
+
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not mod_system.isAuthorized Then OpenAuthorization() : Exit Sub
+        If Not CompleteFields() Then Exit Sub
+
+        If Not checkPayments() Then
+            MsgBox("Check payment", MsgBoxStyle.Critical, "Payment Problem")
+            Exit Sub
+        End If
+
+        Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
+        If ans = Windows.Forms.DialogResult.No Then
+            Exit Sub
+        End If
+
+
+        Select Case transactionType
+            Case "R"
+                PawnItem.RenewTicket()
+                currentOR += 1
+                database.UpdateOptions("ORLastNum", CInt(currentOR))
+            Case "X"
+                PawnItem.RenewTicket()
+                currentOR += 1
+                database.UpdateOptions("ORLastNum", CInt(currentOR))
+        End Select
+
+        Dim newPawnItem As New PawnTicket
+        With newPawnItem
+            .PawnTicket = txtTicket.Text
+            .LoanDate = LoanDate.Value
+            .Pawner = Pawner
+            .MaturityDate = Maturity.Value
+            .ExpiryDate = Expiry.Value
+            .AuctionDate = Auction.Value
+            .ItemType = cboItemtype.Text
+            .CategoryID = GetCategoryID(cboCategory.Text)
+            .Description = txtDesc.Text
+            If cboItemtype.Text = "JWL" Then
+                .Karat = cboKarat.Text
+                .Grams = txtGrams.Text
+            End If
+            .Appraisal = txtAppraisal.Text
+            If transactionType = "R" Then
+                If CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text) < 0 Then
+                    Dim lessPrin As Double
+                    lessPrin = Math.Abs(CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text))
+                    .Principal = CDbl(txtPrincipal.Text) - lessPrin
+                Else
+                    .Principal = txtPrincipal.Text
+                End If
+            ElseIf transactionType = "L" Then
+                .Principal = txtPrincipal.Text
+            End If
+            .NetAmount = txtTotal.Text
+            '.AppraiserID = appraisal(cboAppraiser.Text)
+            .Status = transactionType
+            '.AdvanceInterestPerDays = advanceInterestDays
+            If transactionType <> "L" Then
+                .Interest = txtDelayInt.Text
+                .OldTicket = txtNticket.Text
+                .OfficialReceiptNumber = txtRefNo.Text
+                .OfficialReceiptDate = dtpDate.Value
+                .EVAT = txtEvat.Text
+                .DaysOverDue = txtOverDue.Text
+                .DelayInterest = txtDelayInt.Text
+                .Penalty = txtPenalty.Text
+                .ServiceCharge = txtSrvChrg.Text
+                .RenewDue = txtRenewDue.Text
+                .RedeemDue = txtRedeemDue.Text
+            End If
+
+            .SaveTicket()
+            If transactionType <> "X" Then
+                AddPTNumber()
+            End If
+        End With
+
+        If transactionType <> "L" Then
+            MsgBox("Transaction Successful", MsgBoxStyle.Information)
+            frmPawning.LoadActive()
+            Me.Close()
+
+            Exit Sub
+        End If
+
+        ans = MsgBox("Do you want to enter more?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then
+            frmPawning.LoadActive()
+            Me.Close()
+        Else
+            ClearFields()
+            NewLoan()
+            txtPawner.Focus()
+        End If
+    End Sub
+
+    Private Sub cboCategory_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboCategory.KeyPress
+        If isEnter(e) Then
+            txtDesc.Focus()
+        End If
+    End Sub
+
+    Private Sub cboAppraiser_DropDownClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboAppraiser.DropDownClosed
+        OpenAuthorization()
+    End Sub
+
+    Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
+        If isEnter(e) And cboAppraiser.Text <> "" Then
+            AddAuthentication()
+        End If
+    End Sub
+
+    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        If btnRenew.Text <> "&Renew" Then
+            btnRenew.Text = "&Renew"
+            CancelTrans()
+            transactionType = "D"
+            Exit Sub
+        End If
+        If transactionType = "D" Then
+            SwitchTransaction("RENEW")
+        Else
+            MsgBox("Please cancel current transaction mode", MsgBoxStyle.Information)
+        End If
+    End Sub
+
+    Private Sub txtTotal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTotal.KeyPress
+        DigitOnly(e)
+        If (transactionType = "R" Or transactionType = "X") And isEnter(e) Then
+            btnSave.PerformClick()
+        End If
+        If transactionType = "L" Then
+            cboAppraiser.Focus()
+        End If
+    End Sub
+
+    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+        If btnRedeem.Text <> "R&edeem" Then
+            btnRedeem.Text = "R&edeem"
+            CancelTrans()
+            transactionType = "D"
+            Exit Sub
+        End If
+        If transactionType = "D" Then
+            SwitchTransaction("REDEEM")
+        Else
+            MsgBox("Please cancel current transaction mode", MsgBoxStyle.Information)
+        End If
+    End Sub
+
+    Private Sub txtDesc_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDesc.LostFocus
+        If cboItemtype.Text = "JWL" Then
+            txtGrams.Focus()
+        Else
+            txtAppraisal.Focus()
+        End If
+    End Sub
+
+    Private Sub cboAppraiser_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboAppraiser.SelectedIndexChanged
+        If POSuser.UserName = cboAppraiser.Text Then
+            mod_system.isAuthorized = True
+        Else
+            mod_system.isAuthorized = False
+        End If
+    End Sub
+
+    Private Function GetOldPT() As Integer
+        'On Error Resume Next
+
+        Dim pt As Integer = PawnItem.PawnTicket
+        Dim ds As DataSet, mySql As String = _
+            "SELECT * FROM tblPawn WHERE OldTicket = " & pt
+        ds = LoadSQL(mySql)
+
+        Dim newPT As Integer
+        newPT = ds.Tables(0).Rows(0).Item("PawnTicket")
+
+        Return newPT
+    End Function
+#End Region
+
+#Region "Controllers"
+
+    ''' <summary>
+    ''' Setup New Loan
+    ''' </summary>
+    ''' <remarks></remarks>
     Friend Sub NewLoan()
         transactionType = "L"
         Me.Text = "New Loan"
@@ -209,11 +406,42 @@
         cboAppraiser.Text = ""
         cboAppraiser.Enabled = True
 
-        LoadCurrentPawnTicket()
+        LoadCurrentPawnTicket() 'Load currentPawnTicket in a customize format
 
         btnRedeem.Enabled = False
         btnRenew.Enabled = False
+
+        lblInt.Text = "Advance Interest:"
     End Sub
+
+    ''' <summary>
+    ''' Setup Redeem
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub Redeem()
+
+    End Sub
+
+    Private Sub LoadItemType()
+        Dim itmType As String() = {"JWL", "APP", "BIG", "CEL"}
+        cboItemtype.Items.Clear()
+        cboItemtype.Items.AddRange(itmType)
+    End Sub
+
+    Private Function GetLastNum() As Integer
+        Return GetOption("PawnLastNum")
+    End Function
+
+    Private Function GetORNum() As Integer
+        Return GetOption("ORLastNum")
+    End Function
+
+    Private Sub AddPTNumber()
+        currentPawnTicket += 1
+        database.UpdateOptions("PawnLastNum", CInt(currentPawnTicket))
+    End Sub
+
+    
 
     Friend Sub LoadPawnTicket(ByVal tk As PawnTicket, ByVal tt As String)
         transactionType = tt
@@ -255,8 +483,9 @@
         txtRenewDue.Text = tk.RenewDue
         txtRedeemDue.Text = tk.RedeemDue
 
-        LoadAppraisers()
-        cboAppraiser.Text = GetAppraiserById(tk.AppraiserID)
+        Dim appraiser As New ComputerUser
+        appraiser.LoadUser(tk.AppraiserID)
+        cboAppraiser.Text = appraiser.UserName
 
         PawnItem = tk
 
@@ -392,39 +621,16 @@
         LoadCurrentPawnTicket()
     End Sub
 
-    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-        'frmPawning.LoadActive()
-        Me.Close()
-    End Sub
-
-    Private Sub cboKarat_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboKarat.KeyPress
-        If isEnter(e) Then
-            txtAppraisal.Focus()
-        End If
-    End Sub
-
-    Private Sub cboKarat_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboKarat.LostFocus
-        txtAppraisal.Focus()
-    End Sub
-
-    Private Sub txtPrincipal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPrincipal.KeyPress
-        DigitOnly(e)
-        If isEnter(e) Then
-            txtTotal.Focus()
-        End If
-    End Sub
-
-    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
-        ComputeNetAmount()
-    End Sub
-
     Private Sub ComputeNetAmount()
         If txtPrincipal.Text = "" Then Exit Sub
 
-        If advanceInterestNumberofMonth > 0 Then
+        If advanceInterestDays > 0 Then
             Dim int = GetPawnshop(30, cboItemtype.Text)
 
             txtTotal.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * int)
+            If transactionType = "L" Then
+                txtDelayInt.Text = (CDbl(txtPrincipal.Text) * int)
+            End If
         Else
             txtTotal.Text = txtPrincipal.Text
         End If
@@ -465,102 +671,6 @@
 
         Return ret
     End Function
-
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If Not mod_system.isAuthorized Then OpenAuthorization() : Exit Sub
-        If Not CompleteFields() Then Exit Sub
-
-        If Not checkPayments() Then
-            MsgBox("Check payment", MsgBoxStyle.Critical, "Payment Problem")
-            Exit Sub
-        End If
-
-        Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
-        If ans = Windows.Forms.DialogResult.No Then
-            Exit Sub
-        End If
-
-
-        Select Case transactionType
-            Case "R"
-                PawnItem.RenewTicket()
-                currentOR += 1
-                database.UpdateOptions("ORLastNum", CInt(currentOR))
-            Case "X"
-                PawnItem.RenewTicket()
-                currentOR += 1
-                database.UpdateOptions("ORLastNum", CInt(currentOR))
-        End Select
-
-        Dim newPawnItem As New PawnTicket
-        With newPawnItem
-            .PawnTicket = txtTicket.Text
-            .Pawner = Pawner
-            .LoanDate = LoanDate.Value
-            .MaturityDate = Maturity.Value
-            .ExpiryDate = Expiry.Value
-            .AuctionDate = Auction.Value
-            .ItemType = cboItemtype.Text
-            .CategoryID = GetCategoryID(cboCategory.Text)
-            .Description = txtDesc.Text
-            If cboItemtype.Text = "JWL" Then
-                .Karat = cboKarat.Text
-                .Grams = txtGrams.Text
-            End If
-            .Appraisal = txtAppraisal.Text
-            If transactionType = "R" Then
-                If CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text) < 0 Then
-                    Dim lessPrin As Double
-                    lessPrin = Math.Abs(CDbl(txtRenewDue.Text) - CDbl(txtTotal.Text))
-                    .Principal = CDbl(txtPrincipal.Text) - lessPrin
-                Else
-                    .Principal = txtPrincipal.Text
-                End If
-            ElseIf transactionType = "L" Then
-                .Principal = txtPrincipal.Text
-            End If
-            .NetAmount = txtTotal.Text
-            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
-            .Status = transactionType
-            .AdvanceInterestPerDays = advanceInterestNumberofMonth
-            If transactionType <> "L" Then
-                .Interest = txtDelayInt.Text
-                .OldTicket = txtNticket.Text
-                .OfficialReceiptNumber = txtRefNo.Text
-                .OfficialReceiptDate = dtpDate.Value
-                .EVAT = txtEvat.Text
-                .DaysOverDue = txtOverDue.Text
-                .DelayInterest = txtDelayInt.Text
-                .Penalty = txtPenalty.Text
-                .ServiceCharge = txtSrvChrg.Text
-                .RenewDue = txtRenewDue.Text
-                .RedeemDue = txtRedeemDue.Text
-            End If
-
-            .SaveTicket()
-            If transactionType <> "X" Then
-                AddPTNumber()
-            End If
-        End With
-
-        If transactionType <> "L" Then
-            MsgBox("Transaction Successful", MsgBoxStyle.Information)
-            frmPawning.LoadActive()
-            Me.Close()
-
-            Exit Sub
-        End If
-
-        ans = MsgBox("Do you want to enter more?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then
-            frmPawning.LoadActive()
-            Me.Close()
-        Else
-            ClearFields()
-            NewLoan()
-            txtPawner.Focus()
-        End If
-    End Sub
 
     Private Sub RedeemPawnTicket()
         Dim mySql As String = "SELECT * FROM TBLPAWN WHERE pawnID = " & PawnItem.PawnID
@@ -636,16 +746,6 @@
         Return 999999
     End Function
 
-    Private Sub cboCategory_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboCategory.KeyPress
-        If isEnter(e) Then
-            txtDesc.Focus()
-        End If
-    End Sub
-
-    Private Sub cboAppraiser_DropDownClosed(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboAppraiser.DropDownClosed
-        OpenAuthorization()
-    End Sub
-
     Private Sub OpenAuthorization()
         If POSuser.UserName = cboAppraiser.Text Then
             mod_system.isAuthorized = True
@@ -658,28 +758,8 @@
         diagAuthorization.LoadUser(tmpUser)
     End Sub
 
-    Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
-        If isEnter(e) And cboAppraiser.Text <> "" Then
-            AddAuthentication()
-        End If
-    End Sub
-
     Private Sub AddAuthentication()
         btnSave.PerformClick()
-    End Sub
-
-    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
-        If btnRenew.Text <> "&Renew" Then
-            btnRenew.Text = "&Renew"
-            CancelTrans()
-            transactionType = "D"
-            Exit Sub
-        End If
-        If transactionType = "D" Then
-            SwitchTransaction("RENEW")
-        Else
-            MsgBox("Please cancel current transaction mode", MsgBoxStyle.Information)
-        End If
     End Sub
 
     Private Sub CancelTrans()
@@ -708,68 +788,39 @@
         Return rate * principal
     End Function
 
-    Private Function GetInterest(ByVal principal As Double) As Double
-        Dim int As Double
-        Dim diff = CurrentDate - PawnItem.LoanDate
-        If PawnItem.OldTicket = 0 Then
-            If PawnItem.AdvanceInterestPerDays > diff.Days Then
-                int = 0
-            Else
-                If diff.Days - PawnItem.AdvanceInterestPerDays >= 9 Then
-                    int = GetPawnshop(diff.Days - PawnItem.AdvanceInterestPerDays, PawnItem.ItemType)
-                Else
-                    int = GetPawnshop(9, PawnItem.ItemType)
-                End If
-            End If
-        Else
-            int = GetPawnshop(diff.Days, PawnItem.ItemType)
-        End If
+    'Private Function GetInterest(ByVal principal As Double) As Double
+    '    Dim int As Double
+    '    Dim diff = CurrentDate - PawnItem.LoanDate
+    '    If PawnItem.OldTicket = 0 Then
+    '        If PawnItem.AdvanceInterestPerDays > diff.Days Then
+    '            int = 0
+    '        Else
+    '            If diff.Days - PawnItem.AdvanceInterestPerDays >= 9 Then
+    '                int = GetPawnshop(diff.Days - PawnItem.AdvanceInterestPerDays, PawnItem.ItemType)
+    '            Else
+    '                int = GetPawnshop(9, PawnItem.ItemType)
+    '            End If
+    '        End If
+    '    Else
+    '        int = GetPawnshop(diff.Days, PawnItem.ItemType)
+    '    End If
 
-        Console.WriteLine("GetInterest")
-        Console.WriteLine("Loan: " & PawnItem.LoanDate)
-        Console.WriteLine("Matu: " & PawnItem.MaturityDate)
-        Console.WriteLine("Date: " & CurrentDate)
-        Console.WriteLine("Day: " & diff.Days + 1)
-        Console.WriteLine("Int: " & int)
-        Console.WriteLine("Prin: " & principal)
-        Console.WriteLine("NetDue: " & int * principal)
-        If advanceInterestNumberofMonth > 0 Then
-            Console.WriteLine("with One Month Advance Interest")
-        End If
+    '    Console.WriteLine("GetInterest")
+    '    Console.WriteLine("Loan: " & PawnItem.LoanDate)
+    '    Console.WriteLine("Matu: " & PawnItem.MaturityDate)
+    '    Console.WriteLine("Date: " & CurrentDate)
+    '    Console.WriteLine("Day: " & diff.Days + 1)
+    '    Console.WriteLine("Int: " & int)
+    '    Console.WriteLine("Prin: " & principal)
+    '    Console.WriteLine("NetDue: " & int * principal)
+    '    If advanceInterestDays > 0 Then
+    '        Console.WriteLine("with One Month Advance Interest")
+    '    End If
 
-        Return principal * int
-    End Function
-
-    Private Sub txtTotal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTotal.KeyPress
-        DigitOnly(e)
-        If (transactionType = "R" Or transactionType = "X") And isEnter(e) Then
-            btnSave.PerformClick()
-        End If
-        If transactionType = "L" Then
-            cboAppraiser.Focus()
-        End If
-    End Sub
-
-    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
-        If btnRedeem.Text <> "R&edeem" Then
-            btnRedeem.Text = "R&edeem"
-            CancelTrans()
-            transactionType = "D"
-            Exit Sub
-        End If
-        If transactionType = "D" Then
-            SwitchTransaction("REDEEM")
-        Else
-            MsgBox("Please cancel current transaction mode", MsgBoxStyle.Information)
-        End If
-    End Sub
+    '    Return principal * int
+    'End Function
 
     Friend Sub SwitchTransaction(ByVal typ As String)
-        Try
-
-        Catch ex As Exception
-
-        End Try
         If transactionType = "L" Then Exit Sub
 
         'Buttons
@@ -799,7 +850,7 @@
         Else
             txtOverDue.Text = 0
         End If
-        txtDelayInt.Text = GetInterest(PawnItem.Principal)
+        'txtDelayInt.Text = GetInterest(PawnItem.Principal)
         txtPenalty.Text = GetPenalty(PawnItem.Principal)
         txtSrvChrg.Text = GetServiceCharge(PawnItem.Principal)
         txtEvat.Text = GetOption("Evat") ' No EVAT implemented
@@ -852,6 +903,7 @@
         txtTotal.Focus()
         txtTotal.SelectAll()
     End Sub
+#End Region
 
 #Region "Pawnshop Information"
     Friend Function GetPawnshop(ByVal day As Integer, ByVal pawnItemType As String, Optional ByVal mainType As String = "Interest") As Double
@@ -907,36 +959,6 @@
 
         frmPawning.LoadActive()
         Me.Close()
-    End Sub
-
-    Private Function GetOldPT() As Integer
-        'On Error Resume Next
-
-        Dim pt As Integer = PawnItem.PawnTicket
-        Dim ds As DataSet, mySql As String = _
-            "SELECT * FROM tblPawn WHERE OldTicket = " & pt
-        ds = LoadSQL(mySql)
-
-        Dim newPT As Integer
-        newPT = ds.Tables(0).Rows(0).Item("PawnTicket")
-
-        Return newPT
-    End Function
-
-    Private Sub txtDesc_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDesc.LostFocus
-        If cboItemtype.Text = "JWL" Then
-            txtGrams.Focus()
-        Else
-            txtAppraisal.Focus()
-        End If
-    End Sub
-
-    Private Sub cboAppraiser_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboAppraiser.SelectedIndexChanged
-        If POSuser.UserName = cboAppraiser.Text Then
-            mod_system.isAuthorized = True
-        Else
-            mod_system.isAuthorized = False
-        End If
     End Sub
 
 End Class

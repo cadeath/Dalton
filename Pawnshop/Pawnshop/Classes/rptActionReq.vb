@@ -1,0 +1,3 @@
+﻿Class rptActionReq
+
+End Class
