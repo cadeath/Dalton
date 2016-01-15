@@ -969,7 +969,6 @@ Public Class frmPawnItem
 
     Private Sub PrintRedeemOR()
         Dim autoPrintPT As Reporting
-        'On Error Resume Next
 
         Dim printerName As String = "EPSON LX-300+ /II Parallel"
         If Not canPrint(printerName) Then Exit Sub
@@ -986,7 +985,7 @@ Public Class frmPawnItem
         'report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
         Dim paymentStr As String = _
-            String.Format("PT# {0:000000} with a payment amount of Php {1}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+            String.Format("PT# {0:000000} with a payment amount of Php {1:000000}", PawnItem.PawnTicket, PawnItem.RedeemDue)
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("txtDescription", PawnItem.Description)
@@ -1022,6 +1021,8 @@ Public Class frmPawnItem
         autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
+
+        Me.Focus()
     End Sub
 
     Private Sub PrintRenewPT()
