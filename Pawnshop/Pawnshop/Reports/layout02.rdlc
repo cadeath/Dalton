@@ -266,7 +266,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Principal.Value</Value>
+                <Value />
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>#,0.00;(#,0.00);'-'</Format>
@@ -299,7 +299,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Interest.Value + First(Fields!AdvInt.Value, "dsOR")</Value>
+                <Value>=Parameters!dblInterest.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>#,0.00;(#,0.00);'-'</Format>
@@ -332,7 +332,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
+                <Value>=Parameters!dblServiceCharge.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>#,0.00;(#,0.00);'-'</Format>
@@ -345,7 +345,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.08348in</Top>
+        <Top>1.15848in</Top>
         <Left>4.12814in</Left>
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
@@ -365,7 +365,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Penalty.Value, "dsOR")</Value>
+                <Value>=Parameters!dblPenalty.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>#,0.00;(#,0.00);'-'</Format>
@@ -428,7 +428,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=CDbl(Parameters!txtTotalDue.Value)</Value>
+                <Value>=Parameters!dblTotalDue.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
@@ -455,6 +455,40 @@
           <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox14">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!dblTotalDue.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>2.38542in</Top>
+        <Left>4.12814in</Left>
+        <Height>0.1875in</Height>
+        <Width>1.05209in</Width>
+        <ZIndex>11</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>2.77083in</Height>
     <Style />
@@ -468,8 +502,20 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="txtTotalDue">
-      <DataType>String</DataType>
+    <ReportParameter Name="dblTotalDue">
+      <DataType>Float</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="dblInterest">
+      <DataType>Float</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="dblServiceCharge">
+      <DataType>Float</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="dblPenalty">
+      <DataType>Float</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

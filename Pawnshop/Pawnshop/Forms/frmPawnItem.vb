@@ -202,7 +202,7 @@ Public Class frmPawnItem
         Select Case transactionType
             Case "L" : SaveNewLoan() : PrintNewLoan()
             Case "X" : SaveRedeem() : PrintRedeemOR()
-            Case "R" : SaveRenew()
+            Case "R" : SaveRenew() : PrintRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
@@ -930,7 +930,6 @@ Public Class frmPawnItem
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
 
-
         Dim mySql As String, dsName As String = "dsPawnTicket"
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
         If PawnItem.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
@@ -985,7 +984,7 @@ Public Class frmPawnItem
         'report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
         Dim paymentStr As String = _
-            String.Format("PT# {0:000000} with a payment amount of Php {1:000000}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+            String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("txtDescription", PawnItem.Description)
@@ -1025,6 +1024,10 @@ Public Class frmPawnItem
         Me.Focus()
     End Sub
 
+    Private Sub PrintRenew()
+        PrintRenewPT()
+    End Sub
+
     Private Sub PrintRenewPT()
         Dim autoPrintPT As Reporting
 
@@ -1035,9 +1038,9 @@ Public Class frmPawnItem
         autoPrintPT = New Reporting
 
 
-        Dim mySql As String, dsName As String = "dsPawnTicket"
+        Dim mySql As String, dsName As String = "dsRenewPT"
         'mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
-        mySql = "SELECT * FROM tblPawn ORDER BY PAWNID DESC ROWS 1"
+        mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
         report.ReportPath = "Reports\layout03.rdlc"
@@ -1050,7 +1053,9 @@ Public Class frmPawnItem
             addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         End If
 
-        'addParameters.Add("txtItemInterest", GetInt(30))
+        addParameters.Add("txtInterest", PawnItem.AdvanceInterest)
+        addParameters.Add("txtServiceCharge", PawnItem.ServiceCharge / 2)
+        addParameters.Add("txtItemInterest", GetInt(30) * 100)
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
                 Dim tmpPara As New ReportParameter
@@ -1065,8 +1070,59 @@ Public Class frmPawnItem
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
 
-        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        frmReport.Show()
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
+
+        Me.Focus()
+    End Sub
+
+    Private Sub PrintRenewOR()
+        Dim autoPrintPT As Reporting
+
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+        Dim mySql As String
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        Dim dsName As String = "dsOR"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout02.rdlc"
+        'report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim paymentStr As String = _
+            String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtPayment", paymentStr)
+        addParameters.Add("txtDescription", PawnItem.Description)
+        addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
+        addParameters.Add("dblInterest", PawnItem.Interest + PawnItem.AdvanceInterest)
+        addParameters.Add("dblServiceCharge", PawnItem.ServiceCharge)
+        addParameters.Add("dblPenalty", PawnItem.Penalty)
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 4.5)
+
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
+
+        autoPrintPT.Export(report, paperSize)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
 
         Me.Focus()
     End Sub
