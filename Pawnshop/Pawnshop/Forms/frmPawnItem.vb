@@ -1026,6 +1026,7 @@ Public Class frmPawnItem
 
     Private Sub PrintRenew()
         PrintRenewPT()
+        PrintRenewOR()
     End Sub
 
     Private Sub PrintRenewPT()
@@ -1080,6 +1081,7 @@ Public Class frmPawnItem
         Dim autoPrintPT As Reporting
 
         Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        printerName = "EPSON LX-300+ /II USB"
         If Not canPrint(printerName) Then Exit Sub
 
         Dim report As LocalReport = New LocalReport
@@ -1087,19 +1089,21 @@ Public Class frmPawnItem
 
         Dim mySql As String
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        'mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
         Dim dsName As String = "dsOR"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
         report.ReportPath = "Reports\layout02.rdlc"
-        'report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        PawnItem.LoadTicket(PawnItem.PawnID)
 
         Dim paymentStr As String = _
-            String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+            String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("txtDescription", PawnItem.Description)
-        addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
-        addParameters.Add("dblInterest", PawnItem.Interest + PawnItem.AdvanceInterest)
+        addParameters.Add("dblTotalDue", PawnItem.RenewDue)
+        addParameters.Add("dblInterest", PawnItem.Interest + CDbl(txtAdv.Text))
         addParameters.Add("dblServiceCharge", PawnItem.ServiceCharge)
         addParameters.Add("dblPenalty", PawnItem.Penalty)
 

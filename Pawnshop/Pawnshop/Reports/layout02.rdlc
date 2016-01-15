@@ -118,7 +118,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!Pawner.Value, "dsOR")</Value>
+                <Value>=Fields!Pawner.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -147,7 +147,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!FullAddress.Value, "dsOR")</Value>
+                <Value>=Fields!FullAddress.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
