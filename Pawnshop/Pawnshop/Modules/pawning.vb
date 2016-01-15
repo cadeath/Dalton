@@ -9,6 +9,7 @@
             desc &= vbCrLf & "Appraised by " & GetUsername(pt.AppraiserID)
         Else
             desc = pt.Description
+            If desc = "" Then desc = "N/A"
         End If
 
         Return desc
