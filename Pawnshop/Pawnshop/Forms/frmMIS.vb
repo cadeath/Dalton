@@ -254,7 +254,8 @@ nextLoop:
     End Sub
 
     Private Sub ofdBackup_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofdBackup.FileOk
-        txtGenPass.Text = ofdBackup.FileName
+        'txtGenPass.Text = ofdBackup.FileName
+        txtRestore.Text = ofdBackup.FileName
     End Sub
 
     Private Sub btnPassBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPassBrowse.Click
@@ -269,4 +270,29 @@ nextLoop:
         ImportTemplate(txtImportPath.Text)
         CreateLOG()
     End Sub
+
+    Private Sub btnRestoreBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRestoreBrowse.Click
+        ofdBackup.ShowDialog()
+    End Sub
+
+    Private Sub btnRestoreLoad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRestoreLoad.Click
+        Dim filePath As String = txtRestore.Text
+        If Not System.IO.File.Exists(filePath) Then MsgBox("You choose an Invalid File", MsgBoxStyle.Critical) : Exit Sub
+
+        'Just to notify
+        If Not System.IO.File.Exists("W3W1LH4CKU.FDB") Then MsgBox("Database is missing!" + vbCr + "Contact your System Administrator", MsgBoxStyle.Critical)
+
+        Dim unformatted_date As String = System.IO.Path.GetFileNameWithoutExtension(filePath).Substring(3)
+        Dim backupDate As Date = GetDate(unformatted_date)
+        Dim dbPassword As String = BackupPassword(backupDate)
+
+
+    End Sub
+
+    Private Function GetDate(ByVal yyyyMMMdd As String) As Date
+        Console.WriteLine("Parsing " & yyyyMMMdd & " to date: " & yyyyMMMdd.Length)
+        If yyyyMMMdd.Length <> 9 Then Return Nothing
+
+        Return CDate(yyyyMMMdd)
+    End Function
 End Class
