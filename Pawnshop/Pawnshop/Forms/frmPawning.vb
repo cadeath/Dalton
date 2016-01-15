@@ -45,14 +45,15 @@
         Else
             'mySql &= "' AND (Status = 'L' OR Status = 'R' "
             mySql &= "' AND ("
-            If st.Substring(1, 1) = "1" Then mySql &= "Status = '0' "
+            If st.Substring(1, 1) = "1" Then mySql &= "Status = '0' " 'Renew
             If st.Substring(2, 1) = "1" Then
                 If st.Substring(1, 1) = "1" Then mySql &= " OR "
-                mySql &= "Status = 'X' "
+                mySql &= "Status = 'X' " 'Redeem
             End If
             If st.Substring(3, 1) = "1" Then
                 If st.Substring(2, 1) = "1" Then mySql &= " OR "
-                mySql &= "Status = 'S' "
+                If st.Substring(1, 1) = "1" And st.Substring(2, 1) = "0" Then mySql &= " OR "
+                mySql &= "Status = 'S' " 'Segregate
             End If
 
         mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"

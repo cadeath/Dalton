@@ -25,6 +25,7 @@ Partial Class frmMIS
         Me.ofdImport = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txtShowPass = New System.Windows.Forms.TextBox()
         Me.btnReset = New System.Windows.Forms.Button()
         Me.btnPassGetPass = New System.Windows.Forms.Button()
         Me.btnPassBrowse = New System.Windows.Forms.Button()
@@ -43,7 +44,6 @@ Partial Class frmMIS
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.pbData = New System.Windows.Forms.ProgressBar()
-        Me.txtShowPass = New System.Windows.Forms.TextBox()
         Me.ofdBackup = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -85,6 +85,13 @@ Partial Class frmMIS
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Database"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'txtShowPass
+        '
+        Me.txtShowPass.Location = New System.Drawing.Point(16, 98)
+        Me.txtShowPass.Name = "txtShowPass"
+        Me.txtShowPass.Size = New System.Drawing.Size(235, 20)
+        Me.txtShowPass.TabIndex = 21
         '
         'btnReset
         '
@@ -257,13 +264,6 @@ Partial Class frmMIS
         Me.pbData.Size = New System.Drawing.Size(547, 23)
         Me.pbData.TabIndex = 9
         Me.pbData.Visible = False
-        '
-        'txtShowPass
-        '
-        Me.txtShowPass.Location = New System.Drawing.Point(16, 98)
-        Me.txtShowPass.Name = "txtShowPass"
-        Me.txtShowPass.Size = New System.Drawing.Size(235, 20)
-        Me.txtShowPass.TabIndex = 21
         '
         'ofdBackup
         '

@@ -40,8 +40,86 @@ Public Class frmExtractor
         If txtPath.Text = "" Then Exit Sub
 
         If FormType = ExtractType.Expiry Then
+            btnExtract.Enabled = False
             ExtractExpiry()
+        Else
+            Dim ans As MsgBoxResult = _
+                MsgBox("We will only use the Starting Date." & vbCrLf & "Do you want to continue?", _
+                       vbYesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+            btnExtract.Enabled = False
+            If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
+
+            ExtractJournalEntry()
         End If
+        btnExtract.Enabled = True
+    End Sub
+
+    Private Sub ExtractJournalEntry()
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT " & _
+        "FROM JOURNAL_ENTRIES " & vbCrLf & _
+        String.Format("WHERE TRANSDATE = '{0}' ", sd.ToShortDateString)
+        Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
+        MaxEntries = ds.Tables(0).Rows.Count
+        Console.WriteLine("Executing SQL:")
+        Console.WriteLine(mySql)
+        Console.WriteLine("Entries: " & MaxEntries)
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/JournalEntries.xls")
+        oSheet = oWB.Worksheets(1)
+
+        oSheet.Cells(3, 1).value = "1"
+        oSheet.Cells(3, 2).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 8).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 10).value = "tNO"
+        oSheet.Cells(3, 12).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 14).value = "tNO"
+
+        oSheet = oWB.Worksheets(2)
+        pbLoading.Maximum = MaxEntries
+        pbLoading.Value = 0
+        While lineNum < MaxEntries
+            With ds.Tables(0).Rows(lineNum)
+                oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
+                oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 5) = .Item("Debit") 'Debit
+                oSheet.Cells(lineNum + 3, 6) = .Item("Credit") 'Credit
+                oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
+                oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
+                oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
+            End With
+
+            lineNum += 1
+            AddProgress()
+            Application.DoEvents()
+        End While
+
+        Dim verified_url As String
+        Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
 
     Private Sub ExtractExpiry()

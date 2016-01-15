@@ -132,7 +132,7 @@ Partial Class frmPawning
         '
         'ColumnHeader6
         '
-        Me.ColumnHeader6.Text = "Matu"
+        Me.ColumnHeader6.Text = "Maturity"
         Me.ColumnHeader6.Width = 71
         '
         'ColumnHeader7

@@ -306,4 +306,21 @@ Public Class frmMain
     Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
         qryLoan.Show()
     End Sub
+
+    Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+        qryDate.Show()
+    End Sub
+
+    Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.DailyCashCount
+        qryDate.Show()
+    End Sub
+
+    Private Sub MoneyTransferToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
+        qryMoneyTransfer.Show()
+    End Sub
+
+    Private Sub SequenceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SequenceToolStripMenuItem.Click
+        qrySequence.Show()
+    End Sub
 End Class

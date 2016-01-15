@@ -13,7 +13,10 @@ Module mod_system
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
-    Public BranchCode As String = "ROX"
+    Public BranchCode As String = GetOption("BranchCode")
+    Public branchName As String = GetOption("BranchName")
+    Public AREACODE As String = GetOption("BranchArea")
+    Public REVOLVING_FUND As String = GetOption("RevolvingFund")
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
@@ -116,6 +119,7 @@ Module mod_system
             With ds.Tables(storeDB).Rows(0)
                 .Item("CashCount") = cc
                 .Item("Status") = 0
+                .Item("Closer") = POSuser.UserID
             End With
 
             database.SaveEntry(ds, False)
@@ -258,5 +262,17 @@ Module mod_system
         End If
 
         Return isGood
+    End Function
+
+    Friend Function GetFirstDate(ByVal curDate As Date) As Date
+        Dim firstDay = DateSerial(curDate.Year, curDate.Month, 1)
+        Return firstDay
+    End Function
+
+    Friend Function GetLastDate(ByVal curDate As Date) As Date
+        Dim original As DateTime = curDate  ' The date you want to get the last day of the month for
+        Dim lastOfMonth As DateTime = original.Date.AddDays(-(original.Day - 1)).AddMonths(1).AddDays(-1)
+
+        Return lastOfMonth
     End Function
 End Module

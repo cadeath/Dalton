@@ -97,11 +97,15 @@
             .EncoderID = POSuser.UserID
 
             .SaveInsurance()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE")
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber)
         End With
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
-        btnNew.PerformClick()
         MsgBox("Entry Saved", MsgBoxStyle.Information)
+        btnNew.PerformClick()
+
         Me.Close()
     End Sub
 
