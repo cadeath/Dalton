@@ -385,9 +385,17 @@ Public Class frmPawnItem
 
         If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
             'OLD Migrate
-            If daysDue <= 3 Then DelayInt += AdvanceInterest
-            If transactionType = "X" Then AdvanceInterest = 0
-            If transactionType = "R" Then ServiceCharge += ServiceCharge
+
+            ' UPDATE001
+            ' ReProgram that OLD ITEMS will not be charge for ADVANCE INTEREST
+            ' Removed due to NO ADVANCE INTEREST FOR OLD PAWN ITEMS
+            'If daysDue <= 3 Then DelayInt += AdvanceInterest 
+            'If transactionType = "X" Then AdvanceInterest = 0
+            'If transactionType = "R" Then ServiceCharge += ServiceCharge
+
+            'Added
+            DelayInt = AdvanceInterest
+            AdvanceInterest = 0 'Advance Interest Removed
 
             isOldItem = True
         Else
@@ -1067,12 +1075,12 @@ Public Class frmPawnItem
             Next
         End If
 
-        autoPrintPT.Export(report)
-        autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print(printerName)
+        'autoPrintPT.Export(report)
+        'autoPrintPT.m_currentPageIndex = 0
+        'autoPrintPT.Print(printerName)
 
-        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        'frmReport.Show()
+        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        frmReport.Show()
 
         Me.Focus()
     End Sub
@@ -1121,12 +1129,12 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5)
 
-        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        'frmReport.Show()
+        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        frmReport.Show()
 
-        autoPrintPT.Export(report, paperSize)
-        autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print(printerName)
+        'autoPrintPT.Export(report, paperSize)
+        'autoPrintPT.m_currentPageIndex = 0
+        'autoPrintPT.Print(printerName)
 
         Me.Focus()
     End Sub

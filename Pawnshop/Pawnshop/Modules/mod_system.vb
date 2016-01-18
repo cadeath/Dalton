@@ -10,6 +10,8 @@
 Module mod_system
 
 #Region "Global Variables"
+    Public DEV_MODE As Boolean = True
+
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
