@@ -89,7 +89,6 @@ Public Class frmReport
                 Next
             End If
 
-
             .RefreshReport()
         End With
     End Sub

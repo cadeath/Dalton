@@ -394,6 +394,7 @@ Public Class frmPawnItem
             'If transactionType = "R" Then ServiceCharge += ServiceCharge
 
             'Added
+            DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 30))
             DelayInt = AdvanceInterest
             AdvanceInterest = 0 'Advance Interest Removed
 
@@ -1033,8 +1034,8 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub PrintRenew()
-        PrintRenewPT()
-        PrintRenewOR()
+        'PrintRenewPT()
+        'PrintRenewOR()
     End Sub
 
     Private Sub PrintRenewPT()
