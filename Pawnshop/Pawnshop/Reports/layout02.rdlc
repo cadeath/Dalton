@@ -177,7 +177,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="OR# " &amp; First(Fields!ORNum.Value, "dsOR")</Value>
+                <Value>="OR# " &amp; Fields!ORNum.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>

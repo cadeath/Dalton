@@ -389,13 +389,11 @@ Public Class frmPawnItem
             ' UPDATE001
             ' ReProgram that OLD ITEMS will not be charge for ADVANCE INTEREST
             ' Removed due to NO ADVANCE INTEREST FOR OLD PAWN ITEMS
-            'If daysDue <= 3 Then DelayInt += AdvanceInterest 
+            'If daysDue <= 3 Then DelayInt += AdvanceInterest
             'If transactionType = "X" Then AdvanceInterest = 0
             'If transactionType = "R" Then ServiceCharge += ServiceCharge
 
             'Added
-            DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 30))
-            DelayInt = AdvanceInterest
             AdvanceInterest = 0 'Advance Interest Removed
 
             isOldItem = True
@@ -1088,54 +1086,52 @@ Public Class frmPawnItem
 
     Private Sub PrintRenewOR()
         Dim autoPrintPT As Reporting
-
         Dim printerName As String = "EPSON LX-300+ /II Parallel"
-        printerName = "EPSON LX-300+ /II USB"
         If Not canPrint(printerName) Then Exit Sub
-
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
 
-        Dim mySql As String
-        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
-        'mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+
+
+        Dim mySql As String, ptIDx As Single = PawnItem.PawnID
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
         Dim dsName As String = "dsOR"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
-
-        report.ReportPath = "Reports\layout02.rdlc"
-        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
-        PawnItem.LoadTicket(PawnItem.PawnID)
-
-        Dim paymentStr As String = _
-            String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
+        Dim paymentStr As String
+        Dim rptPath As String = "Reports\layout05.rdlc"
         Dim addParameters As New Dictionary(Of String, String)
-        addParameters.Add("txtPayment", paymentStr)
-        addParameters.Add("txtDescription", PawnItem.Description)
-        addParameters.Add("dblTotalDue", PawnItem.RenewDue)
-        addParameters.Add("dblInterest", PawnItem.Interest + CDbl(txtAdv.Text))
+
+        report.ReportPath = rptPath
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        PawnItem.LoadTicket(ptIDx)
+
+        paymentStr = _
+        String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
+        addParameters.Add("secPayments", paymentStr)
+        addParameters.Add("secDescription", PawnItem.Description)
+        addParameters.Add("dblTotalDue", IIf(PawnItem.RenewDue = 0, PawnItem.RedeemDue, PawnItem.RenewDue))
+        addParameters.Add("dblInterest", PawnItem.Interest)
         addParameters.Add("dblServiceCharge", PawnItem.ServiceCharge)
         addParameters.Add("dblPenalty", PawnItem.Penalty)
+        addParameters.Add("secORnumber", String.Format("OR# {0:00000}", PawnItem.OfficialReceiptNumber))
+        addParameters.Add("dblPrincipal", 0)
+
+        'frmReport.ReportInit(mySql, dsName, rptPath, addParameters, False)
+        'frmReport.Show()
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
                 Dim tmpPara As New ReportParameter
                 tmpPara.Name = nPara.Key
                 tmpPara.Values.Add(nPara.Value)
-                report.SetParameters(New ReportParameter() {tmpPara})
+                Report.SetParameters(New ReportParameter() {tmpPara})
                 Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
             Next
         End If
 
-        Dim paperSize As New Dictionary(Of String, Double)
-        paperSize.Add("width", 8.5)
-        paperSize.Add("height", 4.5)
-
-        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        frmReport.Show()
-
-        'autoPrintPT.Export(report, paperSize)
-        'autoPrintPT.m_currentPageIndex = 0
-        'autoPrintPT.Print(printerName)
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
 
         Me.Focus()
     End Sub
@@ -1155,4 +1151,7 @@ Public Class frmPawnItem
     End Function
 #End Region
 
+    Private Sub GroupBox5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox5.Click
+        dev_ORview.Show()
+    End Sub
 End Class

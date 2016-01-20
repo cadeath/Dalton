@@ -72,6 +72,7 @@ Public Class frmReport
             .LocalReport.DataSources.Clear()
 
             .LocalReport.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
             If hasUser Then
                 Dim myPara As New ReportParameter
                 myPara.Name = "txtUsername"
