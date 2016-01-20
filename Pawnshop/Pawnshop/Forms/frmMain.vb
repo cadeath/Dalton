@@ -323,4 +323,8 @@ Public Class frmMain
     Private Sub SequenceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SequenceToolStripMenuItem.Click
         qrySequence.Show()
     End Sub
+
+    Private Sub ORViewerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ORViewerToolStripMenuItem.Click
+        dev_ORview.Show()
+    End Sub
 End Class

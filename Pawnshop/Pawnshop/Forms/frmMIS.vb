@@ -267,6 +267,7 @@ nextLoop:
     End Sub
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+        If Not System.IO.File.Exists(txtImportPath.Text) Then Exit Sub
         ImportTemplate(txtImportPath.Text)
         CreateLOG()
     End Sub

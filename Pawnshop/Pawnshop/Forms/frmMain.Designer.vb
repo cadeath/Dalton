@@ -47,6 +47,7 @@ Partial Class frmMain
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MoneyTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SequenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -70,7 +71,8 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
-        Me.SequenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ORViewerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -148,7 +150,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem, Me.ToolStripSeparator5, Me.ORViewerToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -219,6 +221,12 @@ Partial Class frmMain
         Me.LoanRegisterToolStripMenuItem.Name = "LoanRegisterToolStripMenuItem"
         Me.LoanRegisterToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.LoanRegisterToolStripMenuItem.Text = "&Loan Register"
+        '
+        'SequenceToolStripMenuItem
+        '
+        Me.SequenceToolStripMenuItem.Name = "SequenceToolStripMenuItem"
+        Me.SequenceToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.SequenceToolStripMenuItem.Text = "&Sequence"
         '
         'ToolStripSeparator4
         '
@@ -425,11 +433,16 @@ Partial Class frmMain
         '
         Me.tmrCurrent.Enabled = True
         '
-        'SequenceToolStripMenuItem
+        'ToolStripSeparator5
         '
-        Me.SequenceToolStripMenuItem.Name = "SequenceToolStripMenuItem"
-        Me.SequenceToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.SequenceToolStripMenuItem.Text = "&Sequence"
+        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(157, 6)
+        '
+        'ORViewerToolStripMenuItem
+        '
+        Me.ORViewerToolStripMenuItem.Name = "ORViewerToolStripMenuItem"
+        Me.ORViewerToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ORViewerToolStripMenuItem.Text = "OR Viewer"
         '
         'frmMain
         '
@@ -507,5 +520,7 @@ Partial Class frmMain
     Friend WithEvents DailyCashCountToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MoneyTransferToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SequenceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ORViewerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

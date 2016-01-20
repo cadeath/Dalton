@@ -402,7 +402,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="txtTotalDue">
-      <DataType>String</DataType>
+      <DataType>Float</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="txtPawner">
