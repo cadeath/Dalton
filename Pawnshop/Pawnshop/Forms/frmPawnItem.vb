@@ -395,6 +395,7 @@ Public Class frmPawnItem
 
             'Added
             AdvanceInterest = 0 'Advance Interest Removed
+            If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 Then DelayInt = ItemPrincipal * GetInt(30)
 
             isOldItem = True
         Else
