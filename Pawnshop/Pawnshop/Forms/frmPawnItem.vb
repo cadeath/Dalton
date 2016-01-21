@@ -419,7 +419,7 @@ Public Class frmPawnItem
         If transactionType = "R" Then
             txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
             txtRedeem.Text = 0
-            txtNet.Text = PawnItem.Principal - AdvanceInterest - ServiceCharge
+            txtNet.Text = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
         ElseIf transactionType = "X" Then
             txtRenew.Text = 0
             txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
@@ -456,7 +456,7 @@ Public Class frmPawnItem
 
             Dim tmpRemarks As String = "PT# " & currentPawnTicket
             AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
-            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_REDEEM)
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_NEWLOAN)
             AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
             AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
         End With
@@ -916,7 +916,7 @@ Public Class frmPawnItem
 
             .SaveTicket()
 
-            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_REDEEM)
+            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
             AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With
