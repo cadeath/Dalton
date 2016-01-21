@@ -1,6 +1,6 @@
 ﻿Public Class frmOpenStore
 
-    Dim isDisable As Boolean = 0
+    Dim isDisable As Boolean = DEV_MODE
 
     Private Sub frmOpenStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadMoney()
