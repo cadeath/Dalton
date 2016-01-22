@@ -83,7 +83,6 @@ Partial Class frmPawning
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(761, 22)
         Me.txtSearch.TabIndex = 0
-        Me.txtSearch.Text = "Kiko Mizuhara"
         '
         'Label1
         '
