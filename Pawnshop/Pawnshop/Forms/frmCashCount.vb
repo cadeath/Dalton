@@ -12,6 +12,25 @@
         ClearFields()
     End Sub
 
+    Private Sub ComputeTotal()
+        Dim tot As Double = 0
+        tot += CDbl(lbl1c.Text.Substring(1))
+        tot += CDbl(lbl5c.Text.Substring(1))
+        tot += CDbl(lbl10c.Text.Substring(1))
+        tot += CDbl(lbl25c.Text.Substring(1))
+        tot += CDbl(lbl1.Text.Substring(1))
+        tot += CDbl(lbl5.Text.Substring(1))
+        tot += CDbl(lbl10.Text.Substring(1))
+        tot += CDbl(lbl20.Text.Substring(1))
+        tot += CDbl(lbl50.Text.Substring(1))
+        tot += CDbl(lbl100.Text.Substring(1))
+        tot += CDbl(lbl200.Text.Substring(1))
+        tot += CDbl(lbl500.Text.Substring(1))
+        tot += CDbl(lbl1000.Text.Substring(1))
+
+        txtTotal.Text = String.Format("Php {0:#,###.00}", tot)
+    End Sub
+
     Private Sub ClearFields()
         txt1c.Text = "" : lbl1c.Text = "P 0.00"
         txt5c.Text = "" : lbl5c.Text = "P 0.00"
@@ -55,6 +74,8 @@
         End Select
 
         lbl.Text = "P " & CDbl(txt.Text) * amt
+
+        ComputeTotal()
     End Sub
 
 #Region "KeyPress"
