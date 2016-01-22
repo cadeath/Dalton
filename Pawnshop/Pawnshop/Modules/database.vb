@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' V1.0.5
+'  - VIEW EXPIRY_LIST ADDED
 ' v1.2
 '  - ModifyEntry added
 ' v1.1
@@ -7,14 +9,14 @@
 
 Friend Module database
     Public con As OdbcConnection
-    Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
-    'Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
+    'Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
+    Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "a1.0.1"
+    Private DBversion As String = "a1.0.13"
     Private language() As String = _
         {"Connection error failed."}
 
@@ -85,37 +87,6 @@ Friend Module database
 
         dbClose()
         Return True
-
-        'Try
-        '    Dim da As OdbcDataAdapter
-        '    Dim ds As New DataSet, mySql As String, fillData As String
-        '    ds = dsEntry
-
-        '    'Save all tables in the dataset
-        '    For Each dsTable As DataTable In dsEntry.Tables
-        '        fillData = dsTable.TableName
-        '        mySql = "SELECT * FROM " & fillData
-        '        If Not isNew Then
-        '            Dim colName As String = dsTable.Columns(0).ColumnName
-        '            Dim idx As Integer = dsTable.Rows(0).Item(0)
-        '            mySql &= String.Format(" WHERE {0} = {1}", colName, idx)
-
-        '            Console.WriteLine("ModifySQL: " & mySql)
-        '        End If
-
-        '        da = New OdbcDataAdapter(mySql, con)
-        '        Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
-        '        da.Update(ds, fillData)
-        '    Next
-
-        '    dbClose()
-
-        '    Return True
-        'Catch ex As Exception
-        '    MsgBox("[Module 001 - SaveEntry]" & vbCr & ex.Message.ToString, MsgBoxStyle.Critical, "Saving Failed")
-        '    dbClose()
-        '    Return False
-        'End Try
     End Function
 
     Friend Function DBCompatibilityCheck() As Boolean
@@ -144,6 +115,17 @@ Friend Module database
         dbClose()
 
         Return ds
+    End Function
+
+    Friend Function LoadSQL_byDataReader(ByVal mySql As String) As OdbcDataReader
+        dbOpen()
+
+        Dim com As OdbcCommand = New OdbcCommand(mySql, con)
+        Dim reader As OdbcDataReader = com.ExecuteReader
+
+        dbClose()
+
+        Return reader
     End Function
 
     Friend Function GetOption(ByVal keys As String) As String

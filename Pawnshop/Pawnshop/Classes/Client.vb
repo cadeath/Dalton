@@ -146,7 +146,7 @@ Public Class Client
 
     Public Property Birthday As Date
         Set(ByVal value As Date)
-            _bday = value
+            _bday = value.ToShortDateString
         End Set
         Get
             Return _bday
@@ -364,7 +364,28 @@ Public Class Client
     End Sub
 
     Public Sub LoadClientByRow(ByVal dr As DataRow)
-        loadClientInfoByRow(dr)
+        With dr
+            _id = .Item("ClientID")
+            _firstName = .Item("FirstName")
+            _middleName = .Item("MiddleName")
+            _lastName = .Item("LastName")
+            _suffixName = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
+
+            _addrSt = .Item("Addr_Street")
+            _addrBrgy = .Item("Addr_Brgy")
+            _addrCity = .Item("Addr_City")
+            _addrProvince = .Item("Addr_Province")
+            _addrZip = .Item("Addr_Zip")
+
+            _gender = IIf(.Item("Sex") = "M", 1, 0)
+            _bday = .Item("Birthday")
+
+            _cp1 = .Item("Phone1").ToString
+            _cp2 = .Item("Phone2").ToString
+            _phone = .Item("Phone3").ToString
+            _otherNum = .Item("Phone_Others").ToString
+
+        End With
         Console.WriteLine("[LoadClientByRow] Client information Loaded.")
     End Sub
 

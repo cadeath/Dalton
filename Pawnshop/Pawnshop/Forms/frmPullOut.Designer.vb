@@ -22,8 +22,8 @@ Partial Class frmPullOut
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00135", "Ilidan Stormrage", "JWL"}, -1)
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00135", "Ilidan Stormrage", "JWL"}, -1)
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00135", "Ilidan Stormrage", "JWL"}, -1)
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00135", "Ilidan Stormrage", "JWL"}, -1)
         Me.lvSeg = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -55,7 +55,7 @@ Partial Class frmPullOut
         Me.lvSeg.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSeg.FullRowSelect = True
         Me.lvSeg.GridLines = True
-        Me.lvSeg.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.lvSeg.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5})
         Me.lvSeg.Location = New System.Drawing.Point(12, 41)
         Me.lvSeg.MultiSelect = False
         Me.lvSeg.Name = "lvSeg"
@@ -94,7 +94,7 @@ Partial Class frmPullOut
         Me.lvPullOut.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvPullOut.FullRowSelect = True
         Me.lvPullOut.GridLines = True
-        Me.lvPullOut.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvPullOut.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem6})
         Me.lvPullOut.Location = New System.Drawing.Point(553, 41)
         Me.lvPullOut.MultiSelect = False
         Me.lvPullOut.Name = "lvPullOut"
@@ -193,6 +193,7 @@ Partial Class frmPullOut
         '
         'btnClose
         '
+        Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.Location = New System.Drawing.Point(945, 331)
         Me.btnClose.Name = "btnClose"
@@ -215,7 +216,7 @@ Partial Class frmPullOut
         '
         Me.lblCurrentDate.AutoSize = True
         Me.lblCurrentDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrentDate.Location = New System.Drawing.Point(93, 338)
+        Me.lblCurrentDate.Location = New System.Drawing.Point(12, 338)
         Me.lblCurrentDate.Name = "lblCurrentDate"
         Me.lblCurrentDate.Size = New System.Drawing.Size(75, 20)
         Me.lblCurrentDate.TabIndex = 11
@@ -224,17 +225,19 @@ Partial Class frmPullOut
         'btnBrowse
         '
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(12, 331)
+        Me.btnBrowse.Location = New System.Drawing.Point(404, 331)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(75, 37)
         Me.btnBrowse.TabIndex = 12
         Me.btnBrowse.Text = "&Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
+        Me.btnBrowse.Visible = False
         '
         'frmPullOut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(1032, 379)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblCurrentDate)
