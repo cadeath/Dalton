@@ -89,7 +89,7 @@
         Dim newInsurance As New Insurance
         With newInsurance
             .COInumber = txtCoi.Text
-            .TicketNum = txtPT.Text
+            If IsNumeric(txtPT.Text) Then .TicketNum = txtPT.Text
             .TransactionDate = dtpDate.Value
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
@@ -97,11 +97,15 @@
             .EncoderID = POSuser.UserID
 
             .SaveInsurance()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE")
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber)
         End With
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
-        btnNew.PerformClick()
         MsgBox("Entry Saved", MsgBoxStyle.Information)
+        btnNew.PerformClick()
+
         Me.Close()
     End Sub
 
@@ -128,4 +132,5 @@
             btnSave.PerformClick()
         End If
     End Sub
+
 End Class

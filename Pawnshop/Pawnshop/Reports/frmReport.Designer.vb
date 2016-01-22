@@ -22,27 +22,27 @@ Partial Class frmReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
+        Me.rv_display = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.SuspendLayout()
         '
-        'ReportViewer1
+        'rv_display
         '
-        Me.ReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ReportViewer1.Location = New System.Drawing.Point(0, 0)
-        Me.ReportViewer1.Name = "ReportViewer1"
-        Me.ReportViewer1.Size = New System.Drawing.Size(835, 369)
-        Me.ReportViewer1.TabIndex = 0
+        Me.rv_display.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.rv_display.Location = New System.Drawing.Point(0, 0)
+        Me.rv_display.Name = "rv_display"
+        Me.rv_display.Size = New System.Drawing.Size(534, 307)
+        Me.rv_display.TabIndex = 0
         '
         'frmReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(835, 369)
-        Me.Controls.Add(Me.ReportViewer1)
+        Me.ClientSize = New System.Drawing.Size(534, 307)
+        Me.Controls.Add(Me.rv_display)
         Me.Name = "frmReport"
-        Me.Text = "Report"
+        Me.Text = "Report Viewer"
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
+    Friend WithEvents rv_display As Microsoft.Reporting.WinForms.ReportViewer
 End Class

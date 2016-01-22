@@ -43,6 +43,7 @@ Partial Class frmPawning
         Me.btnView = New System.Windows.Forms.Button()
         Me.chkRedeem = New System.Windows.Forms.CheckBox()
         Me.chkRenew = New System.Windows.Forms.CheckBox()
+        Me.chkSeg = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -131,7 +132,7 @@ Partial Class frmPawning
         '
         'ColumnHeader6
         '
-        Me.ColumnHeader6.Text = "Matu"
+        Me.ColumnHeader6.Text = "Maturity"
         Me.ColumnHeader6.Width = 71
         '
         'ColumnHeader7
@@ -202,7 +203,7 @@ Partial Class frmPawning
         '
         Me.chkRedeem.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkRedeem.AutoSize = True
-        Me.chkRedeem.Location = New System.Drawing.Point(799, 56)
+        Me.chkRedeem.Location = New System.Drawing.Point(778, 35)
         Me.chkRedeem.Name = "chkRedeem"
         Me.chkRedeem.Size = New System.Drawing.Size(66, 17)
         Me.chkRedeem.TabIndex = 7
@@ -213,12 +214,23 @@ Partial Class frmPawning
         '
         Me.chkRenew.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkRenew.AutoSize = True
-        Me.chkRenew.Location = New System.Drawing.Point(799, 33)
+        Me.chkRenew.Location = New System.Drawing.Point(778, 12)
         Me.chkRenew.Name = "chkRenew"
         Me.chkRenew.Size = New System.Drawing.Size(60, 17)
         Me.chkRenew.TabIndex = 8
         Me.chkRenew.Text = "Renew"
         Me.chkRenew.UseVisualStyleBackColor = True
+        '
+        'chkSeg
+        '
+        Me.chkSeg.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkSeg.AutoSize = True
+        Me.chkSeg.Location = New System.Drawing.Point(778, 58)
+        Me.chkSeg.Name = "chkSeg"
+        Me.chkSeg.Size = New System.Drawing.Size(81, 17)
+        Me.chkSeg.TabIndex = 9
+        Me.chkSeg.Text = "Segregated"
+        Me.chkSeg.UseVisualStyleBackColor = True
         '
         'frmPawning
         '
@@ -226,6 +238,7 @@ Partial Class frmPawning
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(878, 418)
+        Me.Controls.Add(Me.chkSeg)
         Me.Controls.Add(Me.chkRenew)
         Me.Controls.Add(Me.chkRedeem)
         Me.Controls.Add(Me.btnView)
@@ -265,4 +278,5 @@ Partial Class frmPawning
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents chkRedeem As System.Windows.Forms.CheckBox
     Friend WithEvents chkRenew As System.Windows.Forms.CheckBox
+    Friend WithEvents chkSeg As System.Windows.Forms.CheckBox
 End Class
