@@ -1,6 +1,9 @@
 ﻿Imports Microsoft.Reporting.WinForms
 
 Public Class frmPawnItem
+    'Version 2.4
+    ' - UPDATE002
+    '   Add Database Class Table 'RENEWALBLE'
     'Version 2.3
     ' - Add Printing
     'Version 2.2
@@ -40,7 +43,7 @@ Public Class frmPawnItem
         If transactionType = "L" Then NewLoan()
     End Sub
 
-  #Region "GUI"
+#Region "GUI"
     Private Sub ClearFields()
         mod_system.isAuthorized = False
 
@@ -603,7 +606,8 @@ Public Class frmPawnItem
                 btnVoid.Enabled = True
         End Select
 
-        If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
+        'If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
+        RenewDisabled(PawnItem.ItemType) ' UPDATE002
 
         'Get New Number
         Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
@@ -612,6 +616,14 @@ Public Class frmPawnItem
             lblNPT.Visible = True
             lblNPT.Text &= CurrentPTNumber(ds.Tables(0).Rows(0).Item("PawnTicket"))
         End If
+    End Sub
+
+    Private Sub RenewDisabled(itemType As String)
+        Dim mySql As String = "SELECT * FROM tblClass WHERE "
+        mySql &= String.Format("CATEGORY = '{0}'", itemType)
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        btnRenew.Enabled = IIf(ds.Tables(0).Rows(0).Item("RENEWABLE"), True, False)
     End Sub
 
     Private Sub ChangeForm()
@@ -1125,7 +1137,7 @@ Public Class frmPawnItem
                 Dim tmpPara As New ReportParameter
                 tmpPara.Name = nPara.Key
                 tmpPara.Values.Add(nPara.Value)
-                Report.SetParameters(New ReportParameter() {tmpPara})
+                report.SetParameters(New ReportParameter() {tmpPara})
                 Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
             Next
         End If
