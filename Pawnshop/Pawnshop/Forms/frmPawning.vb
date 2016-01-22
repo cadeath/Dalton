@@ -1,4 +1,6 @@
 ﻿Public Class frmPawning
+    'Version 1.2
+    ' - Legend Added
     'Version 1.1
     ' - Don't display item not equal or less than the current date
 
@@ -56,7 +58,7 @@
                 mySql &= "Status = 'S' " 'Segregate
             End If
 
-        mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+            mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
 
         End If
         Dim ds As DataSet = LoadSQL(mySql)
