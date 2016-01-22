@@ -71,6 +71,7 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
+        Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -196,7 +197,7 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.LoanRegisterToolStripMenuItem, Me.SequenceToolStripMenuItem, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.LoanRegisterToolStripMenuItem, Me.SequenceToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -431,6 +432,12 @@ Partial Class frmMain
         '
         Me.tmrCurrent.Enabled = True
         '
+        'SegregatedListToolStripMenuItem
+        '
+        Me.SegregatedListToolStripMenuItem.Name = "SegregatedListToolStripMenuItem"
+        Me.SegregatedListToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.SegregatedListToolStripMenuItem.Text = "Segregated List"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -507,5 +514,6 @@ Partial Class frmMain
     Friend WithEvents DailyCashCountToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MoneyTransferToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SequenceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SegregatedListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

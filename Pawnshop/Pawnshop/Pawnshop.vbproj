@@ -415,6 +415,12 @@
     <Compile Include="Reports\frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\frmSegreList.Designer.vb">
+      <DependentUpon>frmSegreList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmSegreList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qryDate.Designer.vb">
       <DependentUpon>qryDate.vb</DependentUpon>
     </Compile>
@@ -553,6 +559,9 @@
     <EmbeddedResource Include="POS\frmPOS.resx">
       <DependentUpon>frmPOS.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSegreList.resx">
+      <DependentUpon>frmSegreList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout04.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -611,6 +620,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Segregated.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">

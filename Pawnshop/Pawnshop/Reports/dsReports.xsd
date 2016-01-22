@@ -153,6 +153,8 @@
             <xs:sequence>
               <xs:element name="PawnTicket" msprop:Generator_ColumnVarNameInTable="columnPawnTicket" msprop:Generator_ColumnPropNameInRow="PawnTicket" msprop:Generator_ColumnPropNameInTable="PawnTicketColumn" msprop:Generator_UserColumnName="PawnTicket" type="xs:string" minOccurs="0" />
               <xs:element name="LoanDate" msprop:Generator_ColumnVarNameInTable="columnLoanDate" msprop:Generator_ColumnPropNameInRow="LoanDate" msprop:Generator_ColumnPropNameInTable="LoanDateColumn" msprop:Generator_UserColumnName="LoanDate" type="xs:string" minOccurs="0" />
+              <xs:element name="MatuDate" msprop:Generator_ColumnVarNameInTable="columnMatuDate" msprop:Generator_ColumnPropNameInRow="MatuDate" msprop:Generator_ColumnPropNameInTable="MatuDateColumn" msprop:Generator_UserColumnName="MatuDate" type="xs:string" minOccurs="0" />
+              <xs:element name="ExpiryDate" msprop:Generator_ColumnVarNameInTable="columnExpiryDate" msprop:Generator_ColumnPropNameInRow="ExpiryDate" msprop:Generator_ColumnPropNameInTable="ExpiryDateColumn" msprop:Generator_UserColumnName="ExpiryDate" type="xs:string" minOccurs="0" />
               <xs:element name="Client" msprop:Generator_ColumnVarNameInTable="columnClient" msprop:Generator_ColumnPropNameInRow="Client" msprop:Generator_ColumnPropNameInTable="ClientColumn" msprop:Generator_UserColumnName="Client" type="xs:string" minOccurs="0" />
               <xs:element name="ORNum" msprop:Generator_ColumnVarNameInTable="columnORNum" msprop:Generator_ColumnPropNameInRow="ORNum" msprop:Generator_ColumnPropNameInTable="ORNumColumn" msprop:Generator_UserColumnName="ORNum" type="xs:string" minOccurs="0" />
               <xs:element name="ORDate" msprop:Generator_ColumnVarNameInTable="columnORDate" msprop:Generator_ColumnPropNameInRow="ORDate" msprop:Generator_ColumnPropNameInTable="ORDateColumn" msprop:Generator_UserColumnName="ORDate" type="xs:string" minOccurs="0" />
@@ -160,6 +162,8 @@
               <xs:element name="RenewDue" msprop:Generator_ColumnVarNameInTable="columnRenewDue" msprop:Generator_ColumnPropNameInRow="RenewDue" msprop:Generator_ColumnPropNameInTable="RenewDueColumn" msprop:Generator_UserColumnName="RenewDue" type="xs:string" minOccurs="0" />
               <xs:element name="RedeemDue" msprop:Generator_ColumnVarNameInTable="columnRedeemDue" msprop:Generator_ColumnPropNameInRow="RedeemDue" msprop:Generator_ColumnPropNameInTable="RedeemDueColumn" msprop:Generator_UserColumnName="RedeemDue" type="xs:string" minOccurs="0" />
               <xs:element name="Status" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+              <xs:element name="Appraisal" msprop:Generator_ColumnVarNameInTable="columnAppraisal" msprop:Generator_ColumnPropNameInRow="Appraisal" msprop:Generator_ColumnPropNameInTable="AppraisalColumn" msprop:Generator_UserColumnName="Appraisal" type="xs:string" minOccurs="0" />
+              <xs:element name="Principal" msprop:Generator_ColumnVarNameInTable="columnPrincipal" msprop:Generator_ColumnPropNameInRow="Principal" msprop:Generator_ColumnPropNameInTable="PrincipalColumn" msprop:Generator_UserColumnName="Principal" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
