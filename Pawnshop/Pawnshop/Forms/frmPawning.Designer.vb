@@ -236,11 +236,12 @@ Partial Class frmPawning
         '
         'Label2
         '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Black
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.LightGray
-        Me.Label2.Location = New System.Drawing.Point(12, 387)
+        Me.Label2.Location = New System.Drawing.Point(12, 396)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(187, 13)
         Me.Label2.TabIndex = 10
@@ -248,11 +249,12 @@ Partial Class frmPawning
         '
         'Label3
         '
+        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Black
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Yellow
-        Me.Label3.Location = New System.Drawing.Point(207, 387)
+        Me.Label3.Location = New System.Drawing.Point(207, 396)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(102, 13)
         Me.Label3.TabIndex = 11
@@ -260,11 +262,12 @@ Partial Class frmPawning
         '
         'Label4
         '
+        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Black
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.Red
-        Me.Label4.Location = New System.Drawing.Point(315, 387)
+        Me.Label4.Location = New System.Drawing.Point(315, 396)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(167, 13)
         Me.Label4.TabIndex = 12
