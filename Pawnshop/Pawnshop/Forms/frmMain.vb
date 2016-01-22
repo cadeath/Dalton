@@ -300,6 +300,8 @@ Public Class frmMain
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
         frmPullOut.Show()
     End Sub
 
@@ -324,7 +326,7 @@ Public Class frmMain
         qrySequence.Show()
     End Sub
 
-    Private Sub ORViewerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ORViewerToolStripMenuItem.Click
+    Private Sub ORViewerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         dev_ORview.Show()
     End Sub
 End Class
