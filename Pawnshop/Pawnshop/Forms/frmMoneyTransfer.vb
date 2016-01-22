@@ -6,7 +6,7 @@
 
     Dim idME As Integer, idMR As Integer
 
-    Private daltonService(2) As MoneyTransferService
+    Private daltonService(3) As MoneyTransferService
 
     Private Sub Main()
         Dim tmp As New MoneyTransferService
@@ -16,6 +16,7 @@
             .isGenerated = True
             .KeySend = "MEnumLast"
             .KeyReceived = "MRNumLast"
+            .ChargeCode = "perapadala"
         End With
         daltonService(0) = tmp
 
@@ -25,6 +26,7 @@
             .ServiceName = "Western Union"
             .isGenerated = False
             .AccountName = "Due to / From Western Union"
+            .ChargeCode = "western"
         End With
         daltonService(1) = tmp
 
@@ -34,8 +36,19 @@
             .ServiceName = "Cebuana Llhuiller"
             .isGenerated = False
             .AccountName = "Due to/from Cebuana Llhuiller"
+            .ChargeCode = "cebuana"
         End With
         daltonService(2) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0004"
+            .ServiceName = "Money Gram"
+            .isGenerated = False
+            .AccountName = "Due to/from Money Gram"
+            .ChargeCode = "moneygram"
+        End With
+        daltonService(3) = tmp
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
@@ -329,6 +342,11 @@
             End If
         Next
 
+        If ds.Tables(0).Rows.Count = 0 Then
+            Console.WriteLine("No charges!!! Charge Code not found.")
+            Return 0
+        End If
+
         Console.WriteLine(String.Format("LIMIT! for  {0} with 1.5% of {1}", amt, amt * 0.015))
         Return amt * 0.015
     End Function
@@ -340,17 +358,26 @@
     Private Sub ComputeCharges()
         If Not IsNumeric(txtAmount.Text) Then Exit Sub
         Dim basicCharges As Double
-        Select Case cboType.Text
-            Case "Pera Padala"
-                basicCharges = GetCharge(CDbl(txtAmount.Text))
-            Case "Western Union"
-                basicCharges = GetCharge(CDbl(txtAmount.Text), "western")
-            Case "Cebuana Llhuiller"
-                basicCharges = GetCharge(CDbl(txtAmount.Text), "cebuana")
-        End Select
+        'Select Case cboType.Text
+        '    Case "Pera Padala"
+        '        basicCharges = GetCharge(CDbl(txtAmount.Text))
+        '    Case "Western Union"
+        '        basicCharges = GetCharge(CDbl(txtAmount.Text), "western")
+        '    Case "Cebuana Llhuiller"
+        '        basicCharges = GetCharge(CDbl(txtAmount.Text), "cebuana")
+        'End Select
+        basicCharges = GetCharge(CDbl(txtAmount.Text), FindServices(cboType.Text).ChargeCode)
         txtCharge.Text = basicCharges
         ComputeNet()
     End Sub
+
+    Private Function FindServices(str As String) As MoneyTransferService
+        For Each daltonSrv In daltonService
+            If daltonSrv.ServiceName = str Then Return daltonSrv
+        Next
+
+        Return Nothing
+    End Function
 
     Private Sub ComputeNet()
         If txtCharge.Text = "" Then Exit Sub
