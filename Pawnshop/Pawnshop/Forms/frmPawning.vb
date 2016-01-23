@@ -105,11 +105,13 @@
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM tblpawn WHERE "
-        If IsNumeric(txtSearch.Text) Then mySql &= vbCr & "PAWNTICKET = " & CInt(txtSearch.Text) & " OR "
-        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & txtSearch.Text & "%')"
-        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & txtSearch.Text & "%')"
+        If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET = " & CInt(secured_str) & " OR "
+        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
+        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & secured_str & "%')"
 
         Console.WriteLine(mySql)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -120,9 +122,9 @@
         If MaxRow = 0 Then
 
             mySql = "SELECT * FROM tblClient WHERE "
-            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
-            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
-            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & txtSearch.Text & "%')"
+            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%')"
 
             ds.Clear()
             ds = LoadSQL(mySql)

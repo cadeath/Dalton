@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Pawnshop"
-#define MyAppVersion "a1.0.13.3"
+#define MyAppVersion "a1.0.14"
 #define MyAppPublisher "Perfecto Group of Companies"
 #define MyAppExeName "pawnshop.exe"
 
@@ -18,7 +18,7 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\cdt-S0ft\Pawnshop
 DefaultGroupName=cdt-S0ft\Pawnshop
 OutputDir=D:\cadeath\Documents\DevInstaller\Pawnshop
-OutputBaseFilename=pawn-a1.0.13.3
+OutputBaseFilename=pawn-a1.0.14
 SetupIconFile=D:\cadeath\Documents\GitHub\Dalton\RAW\pawnshop-installer.ico
 Compression=lzma
 SolidCompression=yes

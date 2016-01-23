@@ -7,7 +7,11 @@
         mySql &= String.Format("EXPIRYDATE <= '{0}'", monCalendar.SelectionStart.ToShortDateString)
         Dim ds As DataSet = LoadSQL(mySql)
 
-        frmReport.ReportInit(mySql, dsName, "Reports\rpt_Segregated.rdlc", , False)
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "AS OF " & monCalendar.SelectionStart.ToString("MMMM dd, yyyy"))
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rpt_Segregated.rdlc", rptPara)
         frmReport.Show()
     End Sub
 End Class

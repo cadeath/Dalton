@@ -326,11 +326,11 @@ Public Class frmMain
         qrySequence.Show()
     End Sub
 
-    Private Sub ORViewerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        dev_ORview.Show()
-    End Sub
-
     Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
         frmSegreList.Show()
+    End Sub
+
+    Private Sub CashInOutSummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
+        qryCashInOut.Show()
     End Sub
 End Class
