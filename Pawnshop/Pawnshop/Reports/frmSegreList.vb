@@ -5,7 +5,7 @@
         Dim mySql As String = _
             "SELECT * FROM PAWNING WHERE Status = 'SEGRE' AND "
         mySql &= String.Format("EXPIRYDATE <= '{0}'", monCalendar.SelectionStart.ToShortDateString)
-        Console.WriteLine(mySql)
+        Dim ds As DataSet = LoadSQL(mySql)
 
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_Segregated.rdlc", , False)
         frmReport.Show()

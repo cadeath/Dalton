@@ -57,7 +57,7 @@
     Private Sub btnLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogin.Click
         Static wrongLogin As Integer
 
-        Dim user As String = txtUser.Text
+        Dim user As String = DreadKnight(txtUser.Text)
         Dim pass As String = txtPassword.Text
 
         Dim loginUser As New ComputerUser

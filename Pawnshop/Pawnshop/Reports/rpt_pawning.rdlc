@@ -1607,7 +1607,6 @@
         </Textbox>
         <Line Name="Line1">
           <Top>0.51389in</Top>
-          <Left>0in</Left>
           <Height>0in</Height>
           <Width>9.80208in</Width>
           <ZIndex>1</ZIndex>

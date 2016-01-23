@@ -222,8 +222,8 @@ Module mod_system
     End Function
 
     Friend Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
-        str = str.Replace("'", "\'")
-        str = str.Replace("""", "\""")
+        str = str.Replace("'", "''")
+        str = str.Replace("""", """""")
 
         If special <> Nothing Then
             str = str.Replace(special, "")
