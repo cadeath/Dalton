@@ -787,7 +787,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>DEPOSIT/FUNDING</Value>
+                <Value>FOR FUNDING(FOR DEPOSIT)</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -992,7 +992,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=ReportItems!txtTotal.Value - ReportItems!txtCashOnHand.Value</Value>
+                <Value>=ReportItems!txtCashOnHand.Value - ReportItems!txtBalance.Value</Value>
                 <Style>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
