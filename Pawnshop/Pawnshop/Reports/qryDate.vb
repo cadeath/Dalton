@@ -120,7 +120,11 @@
             "SELECT * FROM PAWNING WHERE (Status = 'NEW' OR Status = 'RENEW' OR Status = 'SEGRE')"
         mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
 
-        frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", , False)
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtMonthOf", "AS OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
         frmReport.Show()
     End Sub
 
