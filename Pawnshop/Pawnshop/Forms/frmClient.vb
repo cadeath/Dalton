@@ -103,7 +103,7 @@ Public Class frmClient
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-        If lvClient.Items.Count = 0 Then Exit Sub
+        If lvClient.SelectedItems.Count <= 0 Then Exit Sub
 
         Dim clientID As Integer
         clientID = lvClient.FocusedItem.Text

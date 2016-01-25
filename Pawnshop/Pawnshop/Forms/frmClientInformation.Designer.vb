@@ -217,7 +217,7 @@ Partial Class frmClientInformation
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(276, 13)
         Me.Label9.TabIndex = 15
-        Me.Label9.Text = "City/Munical City"
+        Me.Label9.Text = "City/Municipal City"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label8

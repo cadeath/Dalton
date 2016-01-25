@@ -52,6 +52,7 @@ Partial Class qryCashInOut
         'monCal
         '
         Me.monCal.Location = New System.Drawing.Point(12, 88)
+        Me.monCal.MaxSelectionCount = 1
         Me.monCal.Name = "monCal"
         Me.monCal.TabIndex = 2
         '
