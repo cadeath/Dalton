@@ -54,7 +54,7 @@
     ''' <param name="amt"></param>
     ''' <remarks></remarks>
     Private Sub ComputeMe(ByVal txt As TextBox, ByVal amt As Double)
-        If txt.Text = "" Then Exit Sub
+        If txt.Text = "" Then txt.Text = "0"
         Dim lbl As Label
         Select Case amt
             Case 0.01 : lbl = lbl1c
