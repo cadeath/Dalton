@@ -607,7 +607,7 @@ Public Class frmPawnItem
         End Select
 
         'If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
-        RenewDisabled(PawnItem.ItemType) ' UPDATE002
+        RenewDisabled(PawnItem.CategoryID) ' UPDATE002
 
         'Get New Number
         Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
@@ -618,9 +618,10 @@ Public Class frmPawnItem
         End If
     End Sub
 
-    Private Sub RenewDisabled(itemType As String)
+    Private Sub RenewDisabled(catID As String)
+        'If transactionType = "D" Then Exit Sub
         Dim mySql As String = "SELECT * FROM tblClass WHERE "
-        mySql &= String.Format("CATEGORY = '{0}'", itemType)
+        mySql &= String.Format("CLASSID = {0}", catID)
         Dim ds As DataSet = LoadSQL(mySql)
 
         btnRenew.Enabled = IIf(ds.Tables(0).Rows(0).Item("RENEWABLE"), True, False)
@@ -661,6 +662,11 @@ Public Class frmPawnItem
 
     Private Function GetCatName(ByVal id As Integer) As String
         Dim idx As Integer = cboType.SelectedIndex
+        If idx = -1 Then
+            Dim mySql As String = "SELECT * FROM tblClass WHERE ClassID = " & id
+            Dim ds As DataSet = LoadSQL(mySql)
+            Return ds.Tables(0).Rows(0).Item("Category")
+        End If
 
         For Each el As DictionaryEntry In PawnInfo(idx)
             If el.Key = id Then

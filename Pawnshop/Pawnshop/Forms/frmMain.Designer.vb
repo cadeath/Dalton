@@ -48,7 +48,9 @@ Partial Class frmMain
         Me.SequenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CashInOutSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.OutstandingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MoneyTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -73,8 +75,6 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
-        Me.MoneyTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OutstandingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -228,11 +228,23 @@ Partial Class frmMain
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         Me.ToolStripSeparator5.Size = New System.Drawing.Size(189, 6)
         '
+        'OutstandingToolStripMenuItem
+        '
+        Me.OutstandingToolStripMenuItem.Name = "OutstandingToolStripMenuItem"
+        Me.OutstandingToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.OutstandingToolStripMenuItem.Text = "&Outstanding"
+        '
         'LoanRegisterToolStripMenuItem
         '
         Me.LoanRegisterToolStripMenuItem.Name = "LoanRegisterToolStripMenuItem"
         Me.LoanRegisterToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.LoanRegisterToolStripMenuItem.Text = "&Loan Register"
+        '
+        'MoneyTransferToolStripMenuItem
+        '
+        Me.MoneyTransferToolStripMenuItem.Name = "MoneyTransferToolStripMenuItem"
+        Me.MoneyTransferToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.MoneyTransferToolStripMenuItem.Text = "Money Transfer"
         '
         'SegregatedListToolStripMenuItem
         '
@@ -444,18 +456,6 @@ Partial Class frmMain
         'tmrCurrent
         '
         Me.tmrCurrent.Enabled = True
-        '
-        'MoneyTransferToolStripMenuItem
-        '
-        Me.MoneyTransferToolStripMenuItem.Name = "MoneyTransferToolStripMenuItem"
-        Me.MoneyTransferToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.MoneyTransferToolStripMenuItem.Text = "Money Transfer"
-        '
-        'OutstandingToolStripMenuItem
-        '
-        Me.OutstandingToolStripMenuItem.Name = "OutstandingToolStripMenuItem"
-        Me.OutstandingToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.OutstandingToolStripMenuItem.Text = "&Outstanding"
         '
         'frmMain
         '

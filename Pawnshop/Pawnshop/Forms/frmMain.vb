@@ -343,4 +343,9 @@ Public Class frmMain
             pButton.Left = 543
         End If
     End Sub
+
+    Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.OutStanding
+        qryDate.Show()
+    End Sub
 End Class

@@ -22,8 +22,8 @@ Partial Class frmPullOut
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00135", "Ilidan Stormrage", "JWL"}, -1)
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00135", "Ilidan Stormrage", "JWL"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00135", "Ilidan Stormrage", "JWL"}, -1)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00135", "Ilidan Stormrage", "JWL"}, -1)
         Me.lvSeg = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -55,7 +55,7 @@ Partial Class frmPullOut
         Me.lvSeg.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSeg.FullRowSelect = True
         Me.lvSeg.GridLines = True
-        Me.lvSeg.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5})
+        Me.lvSeg.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvSeg.Location = New System.Drawing.Point(12, 41)
         Me.lvSeg.MultiSelect = False
         Me.lvSeg.Name = "lvSeg"
@@ -94,7 +94,7 @@ Partial Class frmPullOut
         Me.lvPullOut.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvPullOut.FullRowSelect = True
         Me.lvPullOut.GridLines = True
-        Me.lvPullOut.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem6})
+        Me.lvPullOut.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.lvPullOut.Location = New System.Drawing.Point(553, 41)
         Me.lvPullOut.MultiSelect = False
         Me.lvPullOut.Name = "lvPullOut"
