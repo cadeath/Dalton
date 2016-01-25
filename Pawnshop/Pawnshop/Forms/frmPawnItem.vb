@@ -1,4 +1,11 @@
-﻿Public Class frmPawnItem
+﻿Imports Microsoft.Reporting.WinForms
+
+Public Class frmPawnItem
+    'Version 2.4
+    ' - UPDATE002
+    '   Add Database Class Table 'RENEWALBLE'
+    'Version 2.3
+    ' - Add Printing
     'Version 2.2
     ' - Remake SAVE
     'Version 2.1
@@ -23,6 +30,11 @@
     Private isOldItem As Boolean = False
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
     Private ItemPrincipal As Double, Penalty As Double
+
+    Const ITEM_REDEEM As String = "REDEEM"
+    Const ITEM_NEWLOAN As String = "NEW LOAN"
+    Const ITEM_RENEW As String = "RENEW"
+
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -66,6 +78,27 @@
         txtEvat.Text = ""
         txtRenew.Text = ""
         txtRedeem.Text = ""
+    End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim transDate As Date
+        If PawnItem.Status = "X" Then
+            transDate = PawnItem.OfficialReceiptDate
+        Else
+            transDate = PawnItem.LoanDate
+        End If
+
+        If CurrentDate.Date <> transDate Then
+            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
+
+        PawnItem.VoidCancelTicket()
+        MsgBox("Transaction Voided", MsgBoxStyle.Information)
+        frmPawning.LoadActive()
+        Me.Close()
     End Sub
 
     Private Sub txtAppr_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppr.KeyPress
@@ -170,9 +203,9 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan()
-            Case "X" : SaveRedeem()
-            Case "R" : SaveRenew()
+            Case "L" : SaveNewLoan() : PrintNewLoan()
+            Case "X" : SaveRedeem() : PrintRedeemOR()
+            Case "R" : SaveRenew() : PrintRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
@@ -311,6 +344,7 @@
 #End Region
 
 #Region "Controller"
+
     Private Sub SaveRedeem()
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
@@ -327,13 +361,13 @@
             .SaveTicket(False)
 
             If isOldItem Then
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket, ITEM_REDEEM)
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
                 AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
                 AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
                 AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "PT# " & .PawnTicket)
             Else
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket, ITEM_REDEEM)
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
                 If daysDue > 3 Then
                     AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
@@ -354,9 +388,17 @@
 
         If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
             'OLD Migrate
-            If daysDue <= 3 Then DelayInt += AdvanceInterest
-            If transactionType = "X" Then AdvanceInterest = 0
-            If transactionType = "R" Then ServiceCharge += ServiceCharge
+
+            ' UPDATE001
+            ' ReProgram that OLD ITEMS will not be charge for ADVANCE INTEREST
+            ' Removed due to NO ADVANCE INTEREST FOR OLD PAWN ITEMS
+            'If daysDue <= 3 Then DelayInt += AdvanceInterest
+            'If transactionType = "X" Then AdvanceInterest = 0
+            'If transactionType = "R" Then ServiceCharge += ServiceCharge
+
+            'Added
+            AdvanceInterest = 0 'Advance Interest Removed
+            If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 Then DelayInt = ItemPrincipal * GetInt(30)
 
             isOldItem = True
         Else
@@ -381,7 +423,7 @@
         If transactionType = "R" Then
             txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
             txtRedeem.Text = 0
-            txtNet.Text = PawnItem.Principal - AdvanceInterest - ServiceCharge
+            txtNet.Text = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
         ElseIf transactionType = "X" Then
             txtRenew.Text = 0
             txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
@@ -418,7 +460,7 @@
 
             Dim tmpRemarks As String = "PT# " & currentPawnTicket
             AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
-            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks)
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_NEWLOAN)
             AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
             AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
         End With
@@ -564,7 +606,8 @@
                 btnVoid.Enabled = True
         End Select
 
-        If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
+        'If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
+        RenewDisabled(PawnItem.ItemType) ' UPDATE002
 
         'Get New Number
         Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
@@ -573,6 +616,14 @@
             lblNPT.Visible = True
             lblNPT.Text &= CurrentPTNumber(ds.Tables(0).Rows(0).Item("PawnTicket"))
         End If
+    End Sub
+
+    Private Sub RenewDisabled(itemType As String)
+        Dim mySql As String = "SELECT * FROM tblClass WHERE "
+        mySql &= String.Format("CATEGORY = '{0}'", itemType)
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        btnRenew.Enabled = IIf(ds.Tables(0).Rows(0).Item("RENEWABLE"), True, False)
     End Sub
 
     Private Sub ChangeForm()
@@ -821,7 +872,7 @@
         Dim oldPT As Integer = PawnItem.PawnTicket
         Dim principal As Double, netAmt As Double
         Dim interest As Double, advInt As Double
-        Dim servChar As Double,  penalty As Double
+        Dim servChar As Double, penalty As Double
         Dim redeemDue As Double
 
         'Redeem
@@ -878,7 +929,7 @@
 
             .SaveTicket()
 
-            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT)
+            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
             AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With
@@ -888,28 +939,232 @@
 
 #End Region
 
-    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-        Dim transDate As Date
-        If PawnItem.Status = "X" Then
-            transDate = PawnItem.OfficialReceiptDate
+#Region "Printing"
+    Private Sub PrintNewLoan()
+        Dim autoPrintPT As Reporting
+        'On Error Resume Next
+
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+        Dim mySql As String, dsName As String = "dsPawnTicket"
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        If PawnItem.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout01.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim addParameters As New Dictionary(Of String, String)
+        If isOldItem Then
+            addParameters.Add("txtDescription", PawnItem.Description)
         Else
-            transDate = PawnItem.LoanDate
+            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         End If
 
-        If CurrentDate.Date <> transDate Then
-            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
-            Exit Sub
+        addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
         End If
 
-        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
 
-        PawnItem.VoidCancelTicket()
-        MsgBox("Transaction Voided", MsgBoxStyle.Information)
-        frmPawning.LoadActive()
-        Me.Close()
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
+
+        Me.Focus()
     End Sub
 
-    Private Sub txtPrincipal_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.TextChanged
+    Private Sub PrintRedeemOR()
+        Dim autoPrintPT As Reporting
 
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+        Dim mySql As String
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        Dim dsName As String = "dsOR"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout04.rdlc"
+        'report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim paymentStr As String = _
+            String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtPayment", paymentStr)
+        addParameters.Add("txtDescription", PawnItem.Description)
+        addParameters.Add("txtTotalDue", PawnItem.RedeemDue)
+
+        With ds.Tables(dsName).Rows(0)
+            addParameters.Add("txtPawner", .Item("Pawner"))
+            addParameters.Add("txtFullAddress", .Item("FullAddress"))
+            addParameters.Add("txtOR", String.Format("{0:000000}", .Item("ORNum")))
+            addParameters.Add("txtPrincipal", .Item("Principal"))
+            addParameters.Add("txtInterest", .Item("Interest"))
+            addParameters.Add("txtServiceCharge", .Item("ServiceCharge"))
+            addParameters.Add("txtPenalty", .Item("Penalty"))
+        End With
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 4.5)
+
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
+
+        autoPrintPT.Export(report, paperSize)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
+
+        Me.Focus()
+    End Sub
+
+    Private Sub PrintRenew()
+        'PrintRenewPT()
+        'PrintRenewOR()
+    End Sub
+
+    Private Sub PrintRenewPT()
+        Dim autoPrintPT As Reporting
+
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+
+        Dim mySql As String, dsName As String = "dsRenewPT"
+        'mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout03.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim addParameters As New Dictionary(Of String, String)
+        If isOldItem Then
+            addParameters.Add("txtDescription", PawnItem.Description)
+        Else
+            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+        End If
+
+        addParameters.Add("txtInterest", PawnItem.AdvanceInterest)
+        addParameters.Add("txtServiceCharge", PawnItem.ServiceCharge / 2)
+        addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        'autoPrintPT.Export(report)
+        'autoPrintPT.m_currentPageIndex = 0
+        'autoPrintPT.Print(printerName)
+
+        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        frmReport.Show()
+
+        Me.Focus()
+    End Sub
+
+    Private Sub PrintRenewOR()
+        Dim autoPrintPT As Reporting
+        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        If Not canPrint(printerName) Then Exit Sub
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+
+
+        Dim mySql As String, ptIDx As Single = PawnItem.PawnID
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
+        Dim dsName As String = "dsOR"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+        Dim paymentStr As String
+        Dim rptPath As String = "Reports\layout05.rdlc"
+        Dim addParameters As New Dictionary(Of String, String)
+
+        report.ReportPath = rptPath
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        PawnItem.LoadTicket(ptIDx)
+
+        paymentStr = _
+        String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
+        addParameters.Add("secPayments", paymentStr)
+        addParameters.Add("secDescription", PawnItem.Description)
+        addParameters.Add("dblTotalDue", IIf(PawnItem.RenewDue = 0, PawnItem.RedeemDue, PawnItem.RenewDue))
+        addParameters.Add("dblInterest", PawnItem.Interest)
+        addParameters.Add("dblServiceCharge", PawnItem.ServiceCharge)
+        addParameters.Add("dblPenalty", PawnItem.Penalty)
+        addParameters.Add("secORnumber", String.Format("OR# {0:00000}", PawnItem.OfficialReceiptNumber))
+        addParameters.Add("dblPrincipal", 0)
+
+        'frmReport.ReportInit(mySql, dsName, rptPath, addParameters, False)
+        'frmReport.Show()
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
+
+        Me.Focus()
+    End Sub
+
+    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        PrintNewLoan()
+    End Sub
+
+    Private Function canPrint(ByVal printerName As String) As Boolean
+        Try
+            Dim printDocument As Drawing.Printing.PrintDocument = New Drawing.Printing.PrintDocument
+            printDocument.PrinterSettings.PrinterName = printerName
+            Return printDocument.PrinterSettings.IsValid
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+#End Region
+
+    Private Sub GroupBox5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox5.Click
+        dev_ORview.Show()
     End Sub
 End Class

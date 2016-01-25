@@ -1,6 +1,7 @@
 ﻿Module JournalEntries
 
-    Friend Sub AddJournal(ByVal Amt As Double, ByVal DebitCredit As String, ByVal AccountName As String, Optional ByVal Remarks As String = "")
+    Friend Sub AddJournal(ByVal Amt As Double, ByVal DebitCredit As String, ByVal AccountName As String, _
+                          Optional ByVal Remarks As String = "", Optional ByVal cashCountName As String = "")
         If Amt = 0 Then Exit Sub
         Dim category As String = "", transactionName As String = "", SAPCode As String = "", onHold As Boolean = False
         Dim AccntID As Integer = 0
@@ -9,6 +10,10 @@
         Dim ds As DataSet = LoadSQL(mySql), isRevolvingFund As Boolean = False
 
         If ds.Tables(0).Rows.Count > 1 Then Console.WriteLine("Multiple Account Code : " & AccountName)
+        If AccountName = "Revolving Fund" Then
+            AccntID = 0
+            isRevolvingFund = True
+        End If
         If ds.Tables(0).Rows.Count = 0 Then
             Console.WriteLine(AccountName & " cannot be found. Must be a REVOLVING FUND")
             If AccountName = "Revolving Fund" Then
@@ -48,7 +53,11 @@
                 Case Else
                     .Item("Remarks") = DebitCredit & " NOT FOUND."
             End Select
-            If isRevolvingFund Then .Item("Remarks") = "Revolving Fund: " & REVOLVING_FUND
+            If isRevolvingFund Then
+                If cashCountName = "" And isRevolvingFund Then MsgBox("No Cash Count Name for " & Remarks, MsgBoxStyle.Critical, "Developer WARNING")
+                .Item("Remarks") = "Revolving Fund: " & REVOLVING_FUND
+                .Item("CCName") = cashCountName
+            End If
             If Remarks <> "" Then .Item("Remarks") &= "| "
             .Item("Remarks") &= Remarks
         End With

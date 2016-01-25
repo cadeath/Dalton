@@ -72,12 +72,13 @@ Public Class frmReport
             .LocalReport.DataSources.Clear()
 
             .LocalReport.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
             If hasUser Then
                 Dim myPara As New ReportParameter
                 myPara.Name = "txtUsername"
                 If POSuser.UserName Is Nothing Then POSuser.UserName = "Sample Eskie"
                 myPara.Values.Add(POSuser.UserName)
-                rv_display.LocalReport.SetParameters(New ReportParameter() {myPara})
+                .LocalReport.SetParameters(New ReportParameter() {myPara})
             End If
 
             If Not addPara Is Nothing Then
@@ -88,7 +89,6 @@ Public Class frmReport
                     .LocalReport.SetParameters(New ReportParameter() {tmpPara})
                 Next
             End If
-
 
             .RefreshReport()
         End With

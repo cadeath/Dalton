@@ -67,6 +67,17 @@
         End Set
     End Property
 
+    Private _chargeCode As String
+    Public Property ChargeCode() As String
+        Get
+            Return _chargeCode
+        End Get
+        Set(ByVal value As String)
+            _chargeCode = value
+        End Set
+    End Property
+
+
 #End Region
 
     Public Function GetSendLast() As String

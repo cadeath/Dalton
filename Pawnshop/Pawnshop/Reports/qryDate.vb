@@ -4,10 +4,28 @@
         RedeemRenew = 0
         LoanRenew = 1
         DailyCashCount = 2
+        Insurance = 3
+        DollarBuying = 4
+        BranchBorrowings = 5
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
-    Private branchName As String = GetOption("BranchName")
+    Private Sub Generate()
+        Select Case FormType
+            Case ReportType.RedeemRenew
+                RedeemRenew()
+            Case ReportType.LoanRenew
+                LoanRenew()
+            Case ReportType.DailyCashCount
+                DailyCashCount()
+            Case ReportType.Insurance
+                InsuranceReport()
+            Case ReportType.DollarBuying
+                DollarBuying()
+            Case ReportType.BranchBorrowings
+                Borrowings()
+        End Select
+    End Sub
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If cboReports.Text = "" And cboReports.Visible Then Exit Sub
@@ -18,10 +36,32 @@
                     FormType = ReportType.RedeemRenew
                 Case "Schedule of Loan and Renewal"
                     FormType = ReportType.LoanRenew
+                Case "Certificate of Insurance"
+                    FormType = ReportType.Insurance
+                Case "Dollar Buying"
+                    FormType = ReportType.DollarBuying
+                Case "Branch Borrowings"
+                    FormType = ReportType.BranchBorrowings
             End Select
         End If
 
         Generate()
+    End Sub
+
+    Private Sub InsuranceReport()
+        Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
+        Dim enDate As Date = GetLastDate(monCal.SelectionRange.End)
+        Dim fillData As String = "dsInsurance", mySql As String
+
+        mySql = "SELECT * FROM tblInsurance "
+        mySql &= String.Format("WHERE transDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Insurance.rdlc", rptPara)
+        frmReport.Show()
     End Sub
 
     Private Sub RedeemRenew()
@@ -72,40 +112,29 @@
         frmReport.Show()
     End Sub
 
-    Private Sub Generate()
-        Select Case FormType
-            Case ReportType.RedeemRenew
-                RedeemRenew()
-            Case ReportType.LoanRenew
-                LoanRenew()
-            Case ReportType.DailyCashCount
-                DailyCashCount()
-        End Select
-    End Sub
-
     Private Sub DailyCashCount()
         Dim fillData As String, rptSQL As New Dictionary(Of String, String)
         Dim mySql As String, subReportSQL As New Dictionary(Of String, String)
 
         fillData = "dsDaily"
-        mysql = "SELECT * FROM DAILY WHERE "
+        mySql = "SELECT * FROM DAILY WHERE "
         mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
         rptSQL.Add(fillData, mySql)
 
         fillData = "dsDebit"
-        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
         mySql &= "FROM JOURNAL_ENTRIES WHERE "
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mySql &= " AND DEBIT <> 0"
-        mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+        mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
         rptSQL.Add(fillData, mySql)
 
         fillData = "dsCredit"
-        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT "
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
         mySql &= "FROM JOURNAL_ENTRIES WHERE "
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mySql &= " AND CREDIT <> 0"
-        mySql &= " GROUP BY TRANSDATE, TRANSNAME"
+        mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
         rptSQL.Add(fillData, mySql)
 
         'Sub Report
@@ -130,17 +159,37 @@
         frmReport.Show()
     End Sub
 
-    Private Function GetFirstDate(ByVal curDate As Date) As Date
-        Dim firstDay = DateSerial(curDate.Year, curDate.Month, 1)
-        Return firstDay
-    End Function
+    Private Sub DollarBuying()
+        Dim stDay = GetFirstDate(monCal.SelectionStart)
+        Dim laDay = GetLastDate(monCal.SelectionEnd)
+        Dim fillData As String = "dsDollar"
+        Dim mySql As String = "SELECT * FROM tblDollar"
+        mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= " ORDER BY TRANSDATE ASC"
 
-    Private Function GetLastDate(ByVal curDate As Date) As Date
-        Dim original As DateTime = curDate  ' The date you want to get the last day of the month for
-        Dim lastOfMonth As DateTime = original.Date.AddDays(-(original.Day - 1)).AddMonths(1).AddDays(-1)
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
+        rptPara.Add("branchName", branchName)
 
-        Return lastOfMonth
-    End Function
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Dollar.rdlc", rptPara)
+        frmReport.Show()
+    End Sub
+
+    Private Sub Borrowings()
+        Dim stDay = GetFirstDate(monCal.SelectionStart)
+        Dim laDay = GetLastDate(monCal.SelectionEnd)
+        Dim fillData As String = "dsBorrowings"
+        Dim mySql As String = "SELECT * FROM BORROWINGS"
+        mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= " ORDER BY TRANSDATE ASC, STATUS ASC"
+
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Borrowings.rdlc", rptPara)
+        frmReport.Show()
+    End Sub
 
     Private Sub qryDate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If FormType = ReportType.DailyCashCount Then
@@ -149,4 +198,5 @@
             cboReports.Visible = True
         End If
     End Sub
+
 End Class

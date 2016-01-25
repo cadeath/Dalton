@@ -1,4 +1,6 @@
 ﻿Public Class frmPawning
+    'Version 1.2
+    ' - Legend Added
     'Version 1.1
     ' - Don't display item not equal or less than the current date
 
@@ -45,17 +47,18 @@
         Else
             'mySql &= "' AND (Status = 'L' OR Status = 'R' "
             mySql &= "' AND ("
-            If st.Substring(1, 1) = "1" Then mySql &= "Status = '0' "
+            If st.Substring(1, 1) = "1" Then mySql &= "Status = '0' " 'Renew
             If st.Substring(2, 1) = "1" Then
                 If st.Substring(1, 1) = "1" Then mySql &= " OR "
-                mySql &= "Status = 'X' "
+                mySql &= "Status = 'X' " 'Redeem
             End If
             If st.Substring(3, 1) = "1" Then
                 If st.Substring(2, 1) = "1" Then mySql &= " OR "
-                mySql &= "Status = 'S' "
+                If st.Substring(1, 1) = "1" And st.Substring(2, 1) = "0" Then mySql &= " OR "
+                mySql &= "Status = 'S' " 'Segregate
             End If
 
-        mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+            mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
 
         End If
         Dim ds As DataSet = LoadSQL(mySql)
@@ -102,11 +105,13 @@
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM tblpawn WHERE "
-        If IsNumeric(txtSearch.Text) Then mySql &= vbCr & "PAWNTICKET = " & CInt(txtSearch.Text) & " OR "
-        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & txtSearch.Text & "%')"
-        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & txtSearch.Text & "%')"
+        If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET = " & CInt(secured_str) & " OR "
+        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
+        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & secured_str & "%')"
 
         Console.WriteLine(mySql)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -117,9 +122,9 @@
         If MaxRow = 0 Then
 
             mySql = "SELECT * FROM tblClient WHERE "
-            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
-            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
-            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & txtSearch.Text & "%')"
+            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%')"
 
             ds.Clear()
             ds = LoadSQL(mySql)

@@ -30,7 +30,7 @@
     End Sub
 
     Private Sub AddItem(ByVal mt As MoneyTransfer)
-        Dim TransNum As String
+        Dim TransNum As String = ""
         If mt.ServiceType = "Pera Padala" Then
             If mt.TransactionType = 0 Then
                 TransNum = "ME #" & mt.TransactionID
@@ -39,7 +39,7 @@
             End If
         End If
 
-        Dim lv As ListViewItem = lvMoneyTransfer.Items.Add(IIf(mt.TransactionID = 0, "", mt.TransactionID))
+        Dim lv As ListViewItem = lvMoneyTransfer.Items.Add(IIf(mt.TransactionID = 0, "", TransNum))
         lv.SubItems.Add(mt.ReferenceNumber)
         lv.SubItems.Add(mt.TransactionDate)
         lv.SubItems.Add(IIf(mt.TransactionType = 1, "Receive", "Send"))

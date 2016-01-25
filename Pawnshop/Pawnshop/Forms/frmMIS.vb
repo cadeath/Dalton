@@ -41,11 +41,6 @@ Public Class frmMIS
         ofdImport.ShowDialog()
     End Sub
 
-    Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        ImportTemplate(txtImportPath.Text)
-        CreateLOG()
-    End Sub
-
     Friend Sub AddProgress()
         Dim th As Threading.Thread
         th = New Threading.Thread(AddressOf doAddProgress)
@@ -93,7 +88,7 @@ Public Class frmMIS
             Dim fname As String, lname As String, pt As String
             fileLoading(MaxEntries)
 
-            For ent As Integer = 2 To MaxEntries - 1
+            For ent As Integer = 2 To MaxEntries
                 pt = "Line Num: " & ent - 1
                 Dim colIdx As Integer = 0 : colIdx += 1
                 Try
@@ -114,11 +109,15 @@ Public Class frmMIS
                         .AddressBrgy = IIf(oSheet.Cells(ent, 5).value = "", "", oSheet.Cells(ent, 5).value) : colIdx += 1
                         .AddressCity = IIf(oSheet.Cells(ent, 6).value = "", "", oSheet.Cells(ent, 6).value) : colIdx += 1
                         .AddressProvince = IIf(oSheet.Cells(ent, 7).value = "", "", oSheet.Cells(ent, 7).value) : colIdx += 1
-                        .ZipCode = IIf(oSheet.Cells(ent, 8).value = "", "", oSheet.Cells(ent, 8).value) : colIdx += 1
-                        If ifSex(oSheet.Cells(ent, 9).value) Then .Sex = dbSex(oSheet.Cells(ent, 9).value) : colIdx += 1
-                        If IsDate(oSheet.Cells(ent, 10).value) Then .Birthday = oSheet.Cells(ent, 10).value : colIdx += 1
-                        If ifPhone(oSheet.Cells(ent, 11).value) Then .Cellphone1 = oSheet.Cells(ent, 11).value : colIdx += 1
-                        If ifPhone(oSheet.Cells(ent, 12).value) Then .Cellphone1 = oSheet.Cells(ent, 12).value : colIdx += 1
+                        .ZipCode = IIf(IsNumeric(oSheet.Cells(ent, 8).value), oSheet.Cells(ent, 8).value, "") : colIdx += 1
+                        If ifSex(oSheet.Cells(ent, 9).value) Then .Sex = dbSex(oSheet.Cells(ent, 9).value)
+                        colIdx += 1
+                        If IsDate(oSheet.Cells(ent, 10).value) Then .Birthday = oSheet.Cells(ent, 10).value
+                        colIdx += 1
+                        If ifPhone(oSheet.Cells(ent, 11).value) Then .Cellphone1 = oSheet.Cells(ent, 11).value
+                        colIdx += 1
+                        If ifPhone(oSheet.Cells(ent, 12).value) Then .Cellphone2 = oSheet.Cells(ent, 12).value
+                        colIdx += 1
 
                         If isNew Then
                             .SaveClient()
@@ -134,31 +133,33 @@ Public Class frmMIS
                         Dim migratePT As New PawnTicket
                         With migratePT
                             migratePT.Pawner = migratePawner
+                            Console.WriteLine("Checking PawnItem of " & migratePawner.FirstName)
+
                             pt = oSheet.Cells(ent, 13).value : colIdx += 1
                             If IsNumeric(pt) Then
                                 .PawnTicket = pt
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             If ifItemType(oSheet.Cells(ent, 14).value) Then
                                 .ItemType = oSheet.Cells(ent, 14).value : colIdx += 1
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             If isClass(oSheet.Cells(ent, 15).value) Then
                                 .CategoryID = _catID : colIdx += 1
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             If IsNumeric(oSheet.Cells(ent, 16).value) Then
                                 .Grams = oSheet.Cells(ent, 16).value : colIdx += 1
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             If IsNumeric(oSheet.Cells(ent, 17).value) Then
                                 .Karat = oSheet.Cells(ent, 17).value : colIdx += 1
                             Else
-                                GoTo nextLoop
+                                GoTo wrongEntry
                             End If
                             .Description = oSheet.Cells(ent, 18).value : colIdx += 1
                             .LoanDate = oSheet.Cells(ent, 19).value : colIdx += 1
@@ -190,6 +191,12 @@ Public Class frmMIS
                     LogReport(ent, "Please check column number " & colIdx)
                     GoTo nextLoop
                 End Try
+                GoTo nextLoop
+wrongEntry:
+                Console.WriteLine("Error in PT# " & pt)
+                Console.WriteLine("Line Number : " & ent)
+                Console.WriteLine("Column Number : " & colIdx + 1)
+                LogReport(ent, "Please check column number " & colIdx)
 nextLoop:
                 doAddProgress()
             Next
@@ -247,7 +254,8 @@ nextLoop:
     End Sub
 
     Private Sub ofdBackup_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofdBackup.FileOk
-        txtGenPass.Text = ofdBackup.FileName
+        'txtGenPass.Text = ofdBackup.FileName
+        txtRestore.Text = ofdBackup.FileName
     End Sub
 
     Private Sub btnPassBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPassBrowse.Click
@@ -258,7 +266,34 @@ nextLoop:
         ofdImport.ShowDialog()
     End Sub
 
-    Private Sub btnImport_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+    Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+        If Not System.IO.File.Exists(txtImportPath.Text) Then Exit Sub
         ImportTemplate(txtImportPath.Text)
+        CreateLOG()
     End Sub
+
+    Private Sub btnRestoreBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRestoreBrowse.Click
+        ofdBackup.ShowDialog()
+    End Sub
+
+    Private Sub btnRestoreLoad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRestoreLoad.Click
+        Dim filePath As String = txtRestore.Text
+        If Not System.IO.File.Exists(filePath) Then MsgBox("You choose an Invalid File", MsgBoxStyle.Critical) : Exit Sub
+
+        'Just to notify
+        If Not System.IO.File.Exists("W3W1LH4CKU.FDB") Then MsgBox("Database is missing!" + vbCr + "Contact your System Administrator", MsgBoxStyle.Critical)
+
+        Dim unformatted_date As String = System.IO.Path.GetFileNameWithoutExtension(filePath).Substring(3)
+        Dim backupDate As Date = GetDate(unformatted_date)
+        Dim dbPassword As String = BackupPassword(backupDate)
+
+
+    End Sub
+
+    Private Function GetDate(ByVal yyyyMMMdd As String) As Date
+        Console.WriteLine("Parsing " & yyyyMMMdd & " to date: " & yyyyMMMdd.Length)
+        If yyyyMMMdd.Length <> 9 Then Return Nothing
+
+        Return CDate(yyyyMMMdd)
+    End Function
 End Class

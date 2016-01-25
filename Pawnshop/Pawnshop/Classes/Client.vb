@@ -146,7 +146,7 @@ Public Class Client
 
     Public Property Birthday As Date
         Set(ByVal value As Date)
-            _bday = value
+            _bday = value.ToShortDateString
         End Set
         Get
             Return _bday
@@ -401,8 +401,8 @@ Public Class Client
     End Function
 
     Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
-        str = str.Replace("'", "\'")
-        str = str.Replace("""", "\""")
+        str = str.Replace("'", "''")
+        str = str.Replace("""", """""")
 
         If special <> Nothing Then
             str = str.Replace(special, "")

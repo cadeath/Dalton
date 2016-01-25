@@ -10,10 +10,13 @@
 Module mod_system
 
 #Region "Global Variables"
+    Public DEV_MODE As Boolean = False
+
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
     Public BranchCode As String = GetOption("BranchCode")
+    Public branchName As String = GetOption("BranchName")
     Public AREACODE As String = GetOption("BranchArea")
     Public REVOLVING_FUND As String = GetOption("RevolvingFund")
 
@@ -219,8 +222,8 @@ Module mod_system
     End Function
 
     Friend Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
-        str = str.Replace("'", "\'")
-        str = str.Replace("""", "\""")
+        str = str.Replace("'", "''")
+        str = str.Replace("""", """""")
 
         If special <> Nothing Then
             str = str.Replace(special, "")
@@ -261,5 +264,17 @@ Module mod_system
         End If
 
         Return isGood
+    End Function
+
+    Friend Function GetFirstDate(ByVal curDate As Date) As Date
+        Dim firstDay = DateSerial(curDate.Year, curDate.Month, 1)
+        Return firstDay
+    End Function
+
+    Friend Function GetLastDate(ByVal curDate As Date) As Date
+        Dim original As DateTime = curDate  ' The date you want to get the last day of the month for
+        Dim lastOfMonth As DateTime = original.Date.AddDays(-(original.Day - 1)).AddMonths(1).AddDays(-1)
+
+        Return lastOfMonth
     End Function
 End Module
