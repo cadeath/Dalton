@@ -318,10 +318,6 @@ Public Class frmMain
         qryDate.Show()
     End Sub
 
-    Private Sub MoneyTransferToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
-        qryMoneyTransfer.Show()
-    End Sub
-
     Private Sub SequenceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SequenceToolStripMenuItem.Click
         qrySequence.Show()
     End Sub
@@ -332,5 +328,19 @@ Public Class frmMain
 
     Private Sub CashInOutSummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
         qryCashInOut.Show()
+    End Sub
+
+    Private Sub MoneyTransferToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
+        qryMoneyTransfer.Show()
+    End Sub
+
+    Private Sub frmMain_SizeChanged(sender As Object, e As System.EventArgs) Handles Me.SizeChanged
+        Console.WriteLine(pButton.Left)
+        If Me.Width < 1080 Then
+            pButton.Anchor = AnchorStyles.Right
+        Else
+            pButton.Anchor = AnchorStyles.None
+            pButton.Left = 543
+        End If
     End Sub
 End Class
