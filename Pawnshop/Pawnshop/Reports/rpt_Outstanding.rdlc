@@ -536,7 +536,6 @@ Expiry</Value>
                         <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -811,7 +810,10 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Description.Value</Value>
+                              <Value>=Switch(Fields!ItemType.Value = "JWL",
+Fields!Category.Value &amp; " " &amp; Fields!Grams.Value &amp; "G " &amp; " APPROX " &amp; Code.EncryptKarat(Fields!Karat.Value),
+Fields!ItemType.Value &lt;&gt; "JWL",
+Fields!Description.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -834,6 +836,7 @@ Expiry</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -998,7 +1001,28 @@ Expiry</Value>
     <Height>1.26042in</Height>
     <Style />
   </Body>
-  <Width>7in</Width>
+  <Code>Function EncryptKarat(ByVal str As String) As String
+
+        Dim tmpENC As String = "", subStr As String = ""
+        For cnt As Integer = 0 To str.Length - 1
+            Select Case str.Substring(cnt, 1)
+                Case "1" : subStr = "F"
+                Case "2" : subStr = "U"
+                Case "3" : subStr = "J"
+                Case "4" : subStr = "I"
+                Case "5" : subStr = "D"
+                Case "6" : subStr = "A"
+                Case "7" : subStr = "L"
+                Case "8" : subStr = "T"
+                Case "9" : subStr = "O"
+                Case "10" : subStr = "N"
+            End Select
+            tmpENC &amp;= subStr
+        Next
+
+        Return tmpENC
+    End Function</Code>
+  <Width>7.01042in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>
