@@ -182,6 +182,12 @@
     <Compile Include="Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\dev_report.Designer.vb">
+      <DependentUpon>dev_report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_report.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\diagAuthorization.Designer.vb">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
     </Compile>
@@ -415,6 +421,18 @@
     <Compile Include="Reports\frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\frmSegreList.Designer.vb">
+      <DependentUpon>frmSegreList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmSegreList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\qryCashInOut.Designer.vb">
+      <DependentUpon>qryCashInOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryCashInOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qryDate.Designer.vb">
       <DependentUpon>qryDate.vb</DependentUpon>
     </Compile>
@@ -451,6 +469,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_report.resx">
+      <DependentUpon>dev_report.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagAuthorization.resx">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
@@ -553,6 +574,9 @@
     <EmbeddedResource Include="POS\frmPOS.resx">
       <DependentUpon>frmPOS.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSegreList.resx">
+      <DependentUpon>frmSegreList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout04.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -570,6 +594,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout05.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryCashInOut.resx">
+      <DependentUpon>qryCashInOut.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryDate.resx">
       <DependentUpon>qryDate.vb</DependentUpon>
@@ -592,6 +619,9 @@
     <EmbeddedResource Include="Reports\rpt_CashCountSheet.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_CashInOutSummary.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_Dollar.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -611,6 +641,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Segregated.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">

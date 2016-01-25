@@ -37,6 +37,13 @@ Module mod_system
     Private storeDB As String = "tblDaily"
 
     Friend Function OpenStore() As Boolean
+        If MaintainBal = 0 Then
+            Dim ans As MsgBoxResult = _
+                MsgBox("Maintaining Balance is Zero(0)" + vbCrLf + "Are you sure you want to open the store?", _
+                       MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2)
+            If ans = MsgBoxResult.No Then Return False
+        End If
+
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
@@ -56,7 +63,7 @@ Module mod_system
         With dsNewRow
             .Item("CurrentDate") = CurrentDate
             .Item("MaintainBal") = MaintainBal
-            .Item("InitialBal") = InitialBal 
+            .Item("InitialBal") = InitialBal
             .Item("RepDep") = RepDep
             '.Item("CashCount")'No CashCount on OPENING
             .Item("Status") = 1
@@ -222,8 +229,8 @@ Module mod_system
     End Function
 
     Friend Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
-        str = str.Replace("'", "\'")
-        str = str.Replace("""", "\""")
+        str = str.Replace("'", "''")
+        str = str.Replace("""", """""")
 
         If special <> Nothing Then
             str = str.Replace(special, "")
