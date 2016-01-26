@@ -126,6 +126,7 @@ Partial Class frmMain
         Me.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
         Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.UpdateToolStripMenuItem.Text = "&Maintenance"
+        Me.UpdateToolStripMenuItem.Visible = False
         '
         'SettingsToolStripMenuItem
         '

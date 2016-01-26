@@ -48,7 +48,7 @@
             .AccountName = "Due to/from Money Gram"
             .ChargeCode = "moneygram"
         End With
-        daltonService(3) = tmp
+        'daltonService(3) = tmp
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
