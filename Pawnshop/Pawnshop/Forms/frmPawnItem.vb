@@ -203,9 +203,9 @@ Public Class frmPawnItem
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan() : PrintNewLoan()
-            Case "X" : SaveRedeem() : PrintRedeemOR()
-            Case "R" : SaveRenew() : PrintRenew()
+            Case "L" : SaveNewLoan() 'PrintNewLoan()
+            Case "X" : SaveRedeem() 'PrintRedeemOR()
+            Case "R" : SaveRenew() 'PrintRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
@@ -620,7 +620,8 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub RenewDisabled(catID As String)
-        'If transactionType = "D" Then Exit Sub
+        If Not (PawnItem.Status = "L" Or PawnItem.Status = "R") Then Exit Sub
+
         Dim mySql As String = "SELECT * FROM tblClass WHERE "
         mySql &= String.Format("CLASSID = {0}", catID)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -1156,10 +1157,6 @@ Public Class frmPawnItem
         Me.Focus()
     End Sub
 
-    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
-        PrintNewLoan()
-    End Sub
-
     Private Function canPrint(ByVal printerName As String) As Boolean
         Try
             Dim printDocument As Drawing.Printing.PrintDocument = New Drawing.Printing.PrintDocument
@@ -1171,7 +1168,4 @@ Public Class frmPawnItem
     End Function
 #End Region
 
-    Private Sub GroupBox5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox5.Click
-        dev_ORview.Show()
-    End Sub
 End Class
