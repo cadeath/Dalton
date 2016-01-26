@@ -1,7 +1,7 @@
 ﻿
 Public Class frmMain
 
-    'NOTE
+    ' NOTE
     ' NotYetLogin sub don't have REPORTS DISABLE YET
     ' Please add reports and add it also at NotYetLogin
     ' sub.
@@ -47,6 +47,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = My.Application.Info.Title & " | " & BETA_VERSION
         ConfiguringDB()
         If Not DBCompatibilityCheck() Then MsgBox("Please update the database version", MsgBoxStyle.Critical) : End
 
@@ -335,13 +336,18 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_SizeChanged(sender As Object, e As System.EventArgs) Handles Me.SizeChanged
-        Console.WriteLine(pButton.Left)
-        If Me.Width < 1080 Then
+        Console.WriteLine(Me.Width)
+        pButton.Top = 161
+        If Me.WindowState = FormWindowState.Maximized Then
+            pButton.Left = 543
+        End If
+        If Me.Width < 1080 And Not Me.WindowState = FormWindowState.Maximized Then
             pButton.Anchor = AnchorStyles.Right
         Else
             pButton.Anchor = AnchorStyles.None
             pButton.Left = 543
         End If
+        
     End Sub
 
     Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click

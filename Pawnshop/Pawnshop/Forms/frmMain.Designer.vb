@@ -303,6 +303,7 @@ Partial Class frmMain
         Me.pInfo.Name = "pInfo"
         Me.pInfo.Size = New System.Drawing.Size(365, 417)
         Me.pInfo.TabIndex = 5
+        Me.pInfo.Visible = False
         '
         'lblMessage
         '
