@@ -7,6 +7,7 @@
         Insurance = 3
         DollarBuying = 4
         BranchBorrowings = 5
+        OutStanding = 7
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -24,6 +25,8 @@
                 DollarBuying()
             Case ReportType.BranchBorrowings
                 Borrowings()
+            Case ReportType.OutStanding
+                Outstanding_Loans()
         End Select
     End Sub
 
@@ -112,6 +115,19 @@
         frmReport.Show()
     End Sub
 
+    Private Sub Outstanding_Loans()
+        Dim dsName As String = "dsOutstanding", mySql As String = _
+            "SELECT * FROM PAWNING WHERE (Status = 'NEW' OR Status = 'RENEW' OR Status = 'SEGRE')"
+        mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
+
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtMonthOf", "AS OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
+
     Private Sub DailyCashCount()
         Dim fillData As String, rptSQL As New Dictionary(Of String, String)
         Dim mySql As String, subReportSQL As New Dictionary(Of String, String)
@@ -191,8 +207,19 @@
         frmReport.Show()
     End Sub
 
+    Private Function NoFilter() As Boolean
+        Select Case FormType
+            Case ReportType.DailyCashCount
+                Return True
+            Case ReportType.OutStanding
+                Return True
+        End Select
+
+        Return False
+    End Function
+
     Private Sub qryDate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If FormType = ReportType.DailyCashCount Then
+        If NoFilter() Then
             cboReports.Visible = False
         Else
             cboReports.Visible = True
