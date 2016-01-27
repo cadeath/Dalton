@@ -8,6 +8,7 @@
         DollarBuying = 4
         BranchBorrowings = 5
         OutStanding = 7
+        ItemPullOut = 8
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -27,6 +28,8 @@
                 Borrowings()
             Case ReportType.OutStanding
                 Outstanding_Loans()
+            Case ReportType.ItemPullOut
+                Item_PullOut()
         End Select
     End Sub
 
@@ -128,6 +131,19 @@
         frmReport.Show()
     End Sub
 
+    Private Sub Item_PullOut()
+        Dim stDay = GetFirstDate(monCal.SelectionStart)
+        Dim laDay = GetLastDate(monCal.SelectionEnd)
+
+        Dim dsName As String = "dsPullOut", mySql As String = _
+        "SELECT * FROM PAWNING WHERE STATUS = 'WITHDRAW' AND "
+        mySql &= String.Format("PULLOUT BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        Console.WriteLine(mySql)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", , False)
+        frmReport.Show()
+    End Sub
+
     Private Sub DailyCashCount()
         Dim fillData As String, rptSQL As New Dictionary(Of String, String)
         Dim mySql As String, subReportSQL As New Dictionary(Of String, String)
@@ -212,6 +228,8 @@
             Case ReportType.DailyCashCount
                 Return True
             Case ReportType.OutStanding
+                Return True
+            Case ReportType.ItemPullOut
                 Return True
         End Select
 

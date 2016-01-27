@@ -75,6 +75,7 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
+        Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -201,7 +202,7 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -459,6 +460,12 @@ Partial Class frmMain
         '
         Me.tmrCurrent.Enabled = True
         '
+        'ItemPulloutToolStripMenuItem1
+        '
+        Me.ItemPulloutToolStripMenuItem1.Name = "ItemPulloutToolStripMenuItem1"
+        Me.ItemPulloutToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
+        Me.ItemPulloutToolStripMenuItem1.Text = "Item &Pullout"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -539,5 +546,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents MoneyTransferToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OutstandingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ItemPulloutToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

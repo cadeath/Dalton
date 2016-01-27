@@ -354,4 +354,9 @@ Public Class frmMain
         qryDate.FormType = qryDate.ReportType.OutStanding
         qryDate.Show()
     End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+        qryDate.FormType = qryDate.ReportType.ItemPullOut
+        qryDate.Show()
+    End Sub
 End Class

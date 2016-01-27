@@ -6,7 +6,7 @@
 
     Dim idME As Integer, idMR As Integer
 
-    Private daltonService(3) As MoneyTransferService
+    Private daltonService(2) As MoneyTransferService
 
     Private Sub Main()
         Dim tmp As New MoneyTransferService
@@ -448,9 +448,5 @@
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
-    End Sub
-
-    Private Sub txtAmount_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAmount.TextChanged
-
     End Sub
 End Class

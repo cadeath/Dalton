@@ -375,7 +375,7 @@ Public Class ComputerUser
         Dim user As String, fullname As String, ds As DataSet
         user = "POSadmin" : fullname = "IT Department"
 
-        mySql &= String.Format(" WHERE Username = '{0}' AND UserPass = '{1}'", user, EncryptString(pass))
+        mySql &= String.Format(" WHERE Username = '{0}'", user, EncryptString(pass))
 
         Console.WriteLine("Create SQL: " & mySql)
 
