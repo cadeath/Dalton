@@ -134,6 +134,21 @@ Module mod_system
 
             database.SaveEntry(ds, False)
 
+            mySql = "SELECT * FROM tblJournal WHERE JRL_TRANSDATE = '" & CurrentDate.ToShortDateString & "'"
+
+            If MaintainBal <> cc Then
+                Dim tmpOverShort As Double = MaintainBal - cc
+                If MaintainBal < cc Then
+                    'Over
+                    AddJournal(tmpOverShort, "Debit", "Revolving Fund")
+                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)")
+                Else
+                    'Shortage
+                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)")
+                    AddJournal(tmpOverShort, "Credit", "Revolving Fund")
+                End If
+            End If
+
             UpdateOptions("CurrentBalance", cc)
             MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
         Else

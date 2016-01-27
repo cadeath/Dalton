@@ -52,6 +52,7 @@ Partial Class frmMain
         Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MoneyTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -75,7 +76,6 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
-        Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -109,7 +109,7 @@ Partial Class frmMain
         '
         Me.ClosingStoreToolStripMenuItem.Name = "ClosingStoreToolStripMenuItem"
         Me.ClosingStoreToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.ClosingStoreToolStripMenuItem.Text = "&Closing Store"
+        Me.ClosingStoreToolStripMenuItem.Text = "&Close Store"
         '
         'ToolStripSeparator3
         '
@@ -253,6 +253,12 @@ Partial Class frmMain
         Me.SegregatedListToolStripMenuItem.Name = "SegregatedListToolStripMenuItem"
         Me.SegregatedListToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.SegregatedListToolStripMenuItem.Text = "Segregated List"
+        '
+        'ItemPulloutToolStripMenuItem1
+        '
+        Me.ItemPulloutToolStripMenuItem1.Name = "ItemPulloutToolStripMenuItem1"
+        Me.ItemPulloutToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
+        Me.ItemPulloutToolStripMenuItem1.Text = "Item &Pullout"
         '
         'ToolStripSeparator4
         '
@@ -459,12 +465,6 @@ Partial Class frmMain
         'tmrCurrent
         '
         Me.tmrCurrent.Enabled = True
-        '
-        'ItemPulloutToolStripMenuItem1
-        '
-        Me.ItemPulloutToolStripMenuItem1.Name = "ItemPulloutToolStripMenuItem1"
-        Me.ItemPulloutToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
-        Me.ItemPulloutToolStripMenuItem1.Text = "Item &Pullout"
         '
         'frmMain
         '
