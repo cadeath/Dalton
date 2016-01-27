@@ -1168,4 +1168,7 @@ Public Class frmPawnItem
     End Function
 #End Region
 
+    Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
+        MsgBox("NOT YET IMPLEMENTED", MsgBoxStyle.Critical)
+    End Sub
 End Class
