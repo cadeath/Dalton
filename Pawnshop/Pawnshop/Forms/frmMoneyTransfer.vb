@@ -262,7 +262,6 @@
                     Else
                         AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber, "CEBUANA OUT")
-
                     End If
             End Select
 
@@ -358,14 +357,7 @@
     Private Sub ComputeCharges()
         If Not IsNumeric(txtAmount.Text) Then Exit Sub
         Dim basicCharges As Double
-        'Select Case cboType.Text
-        '    Case "Pera Padala"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text))
-        '    Case "Western Union"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text), "western")
-        '    Case "Cebuana Llhuiller"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text), "cebuana")
-        'End Select
+
         basicCharges = GetCharge(CDbl(txtAmount.Text), FindServices(cboType.Text).ChargeCode)
         txtCharge.Text = basicCharges
         ComputeNet()

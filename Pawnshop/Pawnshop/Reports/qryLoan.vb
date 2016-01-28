@@ -20,19 +20,11 @@
         Dim fillData As String = "LOAN_REGISTER"
         Dim mySql As String = "SELECT * FROM " & fillData
         mySql &= String.Format(" WHERE LoanDate BETWEEN '{0}' AND '{1}'", monCal.SelectionStart.ToShortDateString, monCal.SelectionEnd.ToShortDateString)
-        mySql &= " AND ("
+        mySql &= " AND "
 
-        Dim joinStr As New List(Of String)
+        mySql &= StatusParser()
 
-        If chbType.GetItemChecked(1) Then joinStr.Add("Status = 'L'")
-        If chbType.GetItemChecked(2) Then joinStr.Add("Status = 'R'")
-        If chbType.GetItemChecked(3) Then joinStr.Add("Status = 'X'")
-
-        mySql &= String.Join(" OR ", joinStr)
-
-        mySql &= ")"
-
-        Dim title As String = String.Format("{0} {1} {2}", IIf(chbType.GetItemChecked(1), "LOAN", ""), IIf(chbType.GetItemChecked(2), "RENEW", ""), IIf(chbType.GetItemChecked(3), "REDEEM", ""))
+        Dim title As String = String.Format("{0} {1} {2}", IIf(chbType.GetItemChecked(0), "LOAN", ""), IIf(chbType.GetItemChecked(1), "RENEW", ""), IIf(chbType.GetItemChecked(2), "REDEEM", ""))
         Dim loanPeriod As String = String.Format("{0} TO {1}", monCal.SelectionStart.ToShortDateString, monCal.SelectionEnd.ToShortDateString)
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("Title", title)
@@ -48,15 +40,24 @@
         Me.Close()
     End Sub
 
-    Private Sub chbType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chbType.SelectedIndexChanged
-        For cnt As Integer = 0 To chbType.Items.Count - 1
-            If chbType.SelectedIndex = 0 Then
-                chbType.SetItemChecked(cnt, chbType.GetItemChecked(0))
-            End If
-        Next
-    End Sub
+    Private Function StatusParser() As String
+        Dim newLoan As Boolean, renew As Boolean, redeem As Boolean
+        newLoan = chbType.GetItemChecked(0)
+        renew = chbType.GetItemChecked(1)
+        redeem = chbType.GetItemChecked(2)
 
-    Private Sub qryLoan_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        chbType.SetItemChecked(1, 1)
-    End Sub
+        Dim tmpStr As String, tmpList As New List(Of String)
+        tmpStr = "("
+
+
+        If newLoan Then tmpList.Add("STATUS = 'L'")
+        If renew Then tmpList.Add("STATUS = 'R'")
+        If redeem Then tmpList.Add("STATUS = 'X'")
+
+        tmpStr &= String.Join(" AND ", tmpList)
+
+        tmpStr &= ")"
+
+        Return tmpStr
+    End Function
 End Class
