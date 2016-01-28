@@ -162,13 +162,14 @@ Module mod_system
 
             If AsPerComputation <> cc Then
                 Dim tmpOverShort As Double = Math.Abs(AsPerComputation) - cc
+                tmpOverShort = Math.Abs(tmpOverShort)
                 If AsPerComputation < cc Then
-                    'Shortage
-                    tmpOverShort = Math.Abs(tmpOverShort)
+                    'Overage
                     AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False)
                     AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False)
                 Else
-                    'Overage
+                    'Shortage
+                    tmpOverShort = Math.Abs(tmpOverShort)
                     AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False)
                     AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False)
                 End If

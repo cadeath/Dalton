@@ -7,7 +7,7 @@
         Dim category As String = "", transactionName As String = "", SAPCode As String = "", onHold As Boolean = False
         Dim AccntID As Integer = 0
         Dim mySql As String = "SELECT * FROM tblCash WHERE "
-        mySql &= String.Format("TRANSNAME = '{0}'", AccountName)
+        mySql &= String.Format("TRANSNAME = '{0}'", DreadKnight(AccountName))
         Dim ds As DataSet = LoadSQL(mySql), isRevolvingFund As Boolean = False
 
         If ds.Tables(0).Rows.Count > 1 Then Console.WriteLine("Multiple Account Code : " & AccountName)
