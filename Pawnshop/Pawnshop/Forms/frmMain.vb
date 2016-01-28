@@ -112,6 +112,7 @@ Public Class frmMain
             Exit Sub
         End If
 
+        If dateSet Then MsgBox("Cannot generate Journal Entries until Store is closed", MsgBoxStyle.Critical) : Exit Sub
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
     End Sub

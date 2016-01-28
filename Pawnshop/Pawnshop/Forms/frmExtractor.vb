@@ -251,5 +251,4 @@ Public Class frmExtractor
 
         Return KeyGen.Generate()
     End Function
-
 End Class

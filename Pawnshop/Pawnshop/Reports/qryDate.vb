@@ -157,7 +157,7 @@
         mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
         mySql &= "FROM JOURNAL_ENTRIES WHERE "
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+        mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' AND TODISPLAY = 1 "
         mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
         rptSQL.Add(fillData, mySql)
 
@@ -165,7 +165,7 @@
         mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
         mySql &= "FROM JOURNAL_ENTRIES WHERE "
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+        mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' AND TODISPLAY = 1 "
         mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
         rptSQL.Add(fillData, mySql)
 

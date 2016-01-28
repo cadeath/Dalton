@@ -134,18 +134,43 @@ Module mod_system
 
             database.SaveEntry(ds, False)
 
-            mySql = "SELECT * FROM tblJournal WHERE JRL_TRANSDATE = '" & CurrentDate.ToShortDateString & "'"
+            'Get the "Balance(as per computation)"
+            Dim AsPerComputation As Double = 0
+            Dim tmpDS As New DataSet
+            mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
+            mySql &= "FROM JOURNAL_ENTRIES WHERE "
+            mySql &= String.Format("TRANSDATE = '{0}'", CurrentDate.ToShortDateString)
+            mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+            mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
+            tmpDS = LoadSQL(mySql)
+            For Each dr As DataRow In tmpDS.Tables(0).Rows
+                AsPerComputation += dr.Item("DEBIT")
+            Next
 
-            If MaintainBal <> cc Then
-                Dim tmpOverShort As Double = MaintainBal - cc
-                If MaintainBal < cc Then
-                    'Over
-                    AddJournal(tmpOverShort, "Debit", "Revolving Fund")
-                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)")
-                Else
+            tmpDS = New DataSet
+            mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
+            mySql &= "FROM JOURNAL_ENTRIES WHERE "
+            mySql &= String.Format("TRANSDATE = '{0}'", CurrentDate.ToShortDateString)
+            mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+            mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
+            tmpDS = LoadSQL(mySql)
+            For Each dr As DataRow In tmpDS.Tables(0).Rows
+                AsPerComputation -= dr.Item("CREDIT")
+            Next
+
+            Console.WriteLine(">>>>>>> Computation: " & AsPerComputation.ToString("Php #,#00.00"))
+
+            If AsPerComputation <> cc Then
+                Dim tmpOverShort As Double = Math.Abs(AsPerComputation) - cc
+                If AsPerComputation < cc Then
                     'Shortage
-                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)")
-                    AddJournal(tmpOverShort, "Credit", "Revolving Fund")
+                    tmpOverShort = Math.Abs(tmpOverShort)
+                    AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False)
+                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False)
+                Else
+                    'Overage
+                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False)
+                    AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False)
                 End If
             End If
 
