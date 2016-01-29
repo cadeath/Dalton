@@ -139,7 +139,7 @@ Partial Class frmMoneyTransfer
         Me.GroupBox2.Controls.Add(Me.cboType)
         Me.GroupBox2.Location = New System.Drawing.Point(189, 12)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(244, 84)
+        Me.GroupBox2.Size = New System.Drawing.Size(285, 84)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Service Type"
@@ -150,9 +150,9 @@ Partial Class frmMoneyTransfer
         Me.cboType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboType.FormattingEnabled = True
         Me.cboType.Items.AddRange(New Object() {"Pera Padala", "Western Union", "Cebuana Llhuiller"})
-        Me.cboType.Location = New System.Drawing.Point(13, 45)
+        Me.cboType.Location = New System.Drawing.Point(6, 45)
         Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(208, 24)
+        Me.cboType.Size = New System.Drawing.Size(273, 24)
         Me.cboType.TabIndex = 2
         '
         'GroupBox3
