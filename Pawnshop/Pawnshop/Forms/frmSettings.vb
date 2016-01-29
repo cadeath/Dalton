@@ -68,8 +68,12 @@
             UpdateOptions("RevolvingFund", txtRevolving.Text)
             UpdateOptions("LOCKED", "YES")
             InsertSAPCount(txtRevolving.Text)
+
+            BranchCode = txtCode.Text
+            branchName = txtName.Text
         End If
         UpdateOptions("MaintainingBalance", txtBal.Text)
+        MaintainBal = txtBal.Text
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text)

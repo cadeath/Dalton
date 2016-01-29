@@ -6,7 +6,7 @@
 
     Dim idME As Integer, idMR As Integer
 
-    Private daltonService(3) As MoneyTransferService
+    Private daltonService(2) As MoneyTransferService
 
     Private Sub Main()
         Dim tmp As New MoneyTransferService
@@ -48,7 +48,7 @@
             .AccountName = "Due to/from Money Gram"
             .ChargeCode = "moneygram"
         End With
-        daltonService(3) = tmp
+        'daltonService(3) = tmp
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
@@ -262,7 +262,6 @@
                     Else
                         AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber, "CEBUANA OUT")
-
                     End If
             End Select
 
@@ -358,14 +357,7 @@
     Private Sub ComputeCharges()
         If Not IsNumeric(txtAmount.Text) Then Exit Sub
         Dim basicCharges As Double
-        'Select Case cboType.Text
-        '    Case "Pera Padala"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text))
-        '    Case "Western Union"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text), "western")
-        '    Case "Cebuana Llhuiller"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text), "cebuana")
-        'End Select
+
         basicCharges = GetCharge(CDbl(txtAmount.Text), FindServices(cboType.Text).ChargeCode)
         txtCharge.Text = basicCharges
         ComputeNet()
@@ -448,9 +440,5 @@
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
-    End Sub
-
-    Private Sub txtAmount_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAmount.TextChanged
-
     End Sub
 End Class

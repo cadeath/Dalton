@@ -1,7 +1,7 @@
 ﻿
 Public Class frmMain
 
-    'NOTE
+    ' NOTE
     ' NotYetLogin sub don't have REPORTS DISABLE YET
     ' Please add reports and add it also at NotYetLogin
     ' sub.
@@ -47,6 +47,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = My.Application.Info.Title & " | " & BETA_VERSION
         ConfiguringDB()
         If Not DBCompatibilityCheck() Then MsgBox("Please update the database version", MsgBoxStyle.Critical) : End
 
@@ -111,6 +112,7 @@ Public Class frmMain
             Exit Sub
         End If
 
+        If dateSet Then MsgBox("Cannot generate Journal Entries until Store is closed", MsgBoxStyle.Critical) : Exit Sub
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
     End Sub
@@ -318,15 +320,44 @@ Public Class frmMain
         qryDate.Show()
     End Sub
 
-    Private Sub MoneyTransferToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
-        qryMoneyTransfer.Show()
-    End Sub
-
     Private Sub SequenceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SequenceToolStripMenuItem.Click
         qrySequence.Show()
     End Sub
 
-    Private Sub ORViewerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        dev_ORview.Show()
+    Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
+        frmSegreList.Show()
+    End Sub
+
+    Private Sub CashInOutSummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
+        qryCashInOut.Show()
+    End Sub
+
+    Private Sub MoneyTransferToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
+        qryMoneyTransfer.Show()
+    End Sub
+
+    Private Sub frmMain_SizeChanged(sender As Object, e As System.EventArgs) Handles Me.SizeChanged
+        Console.WriteLine(Me.Width)
+        pButton.Top = 161
+        If Me.WindowState = FormWindowState.Maximized Then
+            pButton.Left = 543
+        End If
+        If Me.Width < 1080 And Not Me.WindowState = FormWindowState.Maximized Then
+            pButton.Anchor = AnchorStyles.Right
+        Else
+            pButton.Anchor = AnchorStyles.None
+            pButton.Left = 543
+        End If
+        
+    End Sub
+
+    Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.OutStanding
+        qryDate.Show()
+    End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+        qryDate.FormType = qryDate.ReportType.ItemPullOut
+        qryDate.Show()
     End Sub
 End Class

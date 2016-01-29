@@ -7,6 +7,8 @@
         Insurance = 3
         DollarBuying = 4
         BranchBorrowings = 5
+        OutStanding = 7
+        ItemPullOut = 8
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -24,6 +26,10 @@
                 DollarBuying()
             Case ReportType.BranchBorrowings
                 Borrowings()
+            Case ReportType.OutStanding
+                Outstanding_Loans()
+            Case ReportType.ItemPullOut
+                Item_PullOut()
         End Select
     End Sub
 
@@ -112,6 +118,32 @@
         frmReport.Show()
     End Sub
 
+    Private Sub Outstanding_Loans()
+        Dim dsName As String = "dsOutstanding", mySql As String = _
+            "SELECT * FROM PAWNING WHERE (Status = 'NEW' OR Status = 'RENEW' OR Status = 'SEGRE')"
+        mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
+
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtMonthOf", "AS OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
+
+    Private Sub Item_PullOut()
+        Dim stDay = GetFirstDate(monCal.SelectionStart)
+        Dim laDay = GetLastDate(monCal.SelectionEnd)
+
+        Dim dsName As String = "dsPullOut", mySql As String = _
+        "SELECT * FROM PAWNING WHERE STATUS = 'WITHDRAW' AND "
+        mySql &= String.Format("PULLOUT BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        Console.WriteLine(mySql)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", , False)
+        frmReport.Show()
+    End Sub
+
     Private Sub DailyCashCount()
         Dim fillData As String, rptSQL As New Dictionary(Of String, String)
         Dim mySql As String, subReportSQL As New Dictionary(Of String, String)
@@ -125,7 +157,7 @@
         mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
         mySql &= "FROM JOURNAL_ENTRIES WHERE "
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+        mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' AND TODISPLAY = 1 "
         mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
         rptSQL.Add(fillData, mySql)
 
@@ -133,7 +165,7 @@
         mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
         mySql &= "FROM JOURNAL_ENTRIES WHERE "
         mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+        mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' AND TODISPLAY = 1 "
         mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
         rptSQL.Add(fillData, mySql)
 
@@ -191,8 +223,21 @@
         frmReport.Show()
     End Sub
 
+    Private Function NoFilter() As Boolean
+        Select Case FormType
+            Case ReportType.DailyCashCount
+                Return True
+            Case ReportType.OutStanding
+                Return True
+            Case ReportType.ItemPullOut
+                Return True
+        End Select
+
+        Return False
+    End Function
+
     Private Sub qryDate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If FormType = ReportType.DailyCashCount Then
+        If NoFilter() Then
             cboReports.Visible = False
         Else
             cboReports.Visible = True

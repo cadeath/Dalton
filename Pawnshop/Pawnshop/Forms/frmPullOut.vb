@@ -149,7 +149,7 @@
         frmPawnItem.LoadPawnTicket(pt, pt.Status)
     End Sub
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+    Private Sub lvSeg_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvSeg.SelectedIndexChanged
 
     End Sub
 End Class

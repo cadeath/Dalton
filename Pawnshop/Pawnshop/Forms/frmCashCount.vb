@@ -54,7 +54,15 @@
     ''' <param name="amt"></param>
     ''' <remarks></remarks>
     Private Sub ComputeMe(ByVal txt As TextBox, ByVal amt As Double)
-        If txt.Text = "" Then Exit Sub
+        If txt.Text = "" Then txt.Text = ""
+
+        Dim tmp As Double = 0
+        If IsNumeric(txt.Text) Then
+            tmp = CDbl(txt.Text)
+        Else
+            Exit Sub
+        End If
+
         Dim lbl As Label
         Select Case amt
             Case 0.01 : lbl = lbl1c
@@ -73,7 +81,7 @@
             Case Else : lbl = Nothing
         End Select
 
-        lbl.Text = "P " & CDbl(txt.Text) * amt
+        lbl.Text = "P " & tmp * amt
 
         ComputeTotal()
     End Sub

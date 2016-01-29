@@ -203,9 +203,9 @@ Public Class frmPawnItem
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan() : PrintNewLoan()
-            Case "X" : SaveRedeem() : PrintRedeemOR()
-            Case "R" : SaveRenew() : PrintRenew()
+            Case "L" : SaveNewLoan() 'PrintNewLoan()
+            Case "X" : SaveRedeem() 'PrintRedeemOR()
+            Case "R" : SaveRenew() 'PrintRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
@@ -398,7 +398,8 @@ Public Class frmPawnItem
 
             'Added
             AdvanceInterest = 0 'Advance Interest Removed
-            If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 Then DelayInt = ItemPrincipal * GetInt(30)
+            If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 _
+                Then DelayInt = ItemPrincipal * GetInt(30)
 
             isOldItem = True
         Else
@@ -607,7 +608,7 @@ Public Class frmPawnItem
         End Select
 
         'If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
-        RenewDisabled(PawnItem.ItemType) ' UPDATE002
+        RenewDisabled(PawnItem.CategoryID) ' UPDATE002
 
         'Get New Number
         Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
@@ -618,9 +619,11 @@ Public Class frmPawnItem
         End If
     End Sub
 
-    Private Sub RenewDisabled(itemType As String)
+    Private Sub RenewDisabled(catID As String)
+        If Not (PawnItem.Status = "L" Or PawnItem.Status = "R") Then Exit Sub
+
         Dim mySql As String = "SELECT * FROM tblClass WHERE "
-        mySql &= String.Format("CATEGORY = '{0}'", itemType)
+        mySql &= String.Format("CLASSID = {0}", catID)
         Dim ds As DataSet = LoadSQL(mySql)
 
         btnRenew.Enabled = IIf(ds.Tables(0).Rows(0).Item("RENEWABLE"), True, False)
@@ -661,6 +664,11 @@ Public Class frmPawnItem
 
     Private Function GetCatName(ByVal id As Integer) As String
         Dim idx As Integer = cboType.SelectedIndex
+        If idx = -1 Then
+            Dim mySql As String = "SELECT * FROM tblClass WHERE ClassID = " & id
+            Dim ds As DataSet = LoadSQL(mySql)
+            Return ds.Tables(0).Rows(0).Item("Category")
+        End If
 
         For Each el As DictionaryEntry In PawnInfo(idx)
             If el.Key = id Then
@@ -1149,10 +1157,6 @@ Public Class frmPawnItem
         Me.Focus()
     End Sub
 
-    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
-        PrintNewLoan()
-    End Sub
-
     Private Function canPrint(ByVal printerName As String) As Boolean
         Try
             Dim printDocument As Drawing.Printing.PrintDocument = New Drawing.Printing.PrintDocument
@@ -1164,7 +1168,7 @@ Public Class frmPawnItem
     End Function
 #End Region
 
-    Private Sub GroupBox5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox5.Click
-        dev_ORview.Show()
+    Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
+        MsgBox("NOT YET IMPLEMENTED", MsgBoxStyle.Critical)
     End Sub
 End Class

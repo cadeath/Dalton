@@ -154,7 +154,7 @@ Partial Class frmCashCount
         Me.txt1c.Location = New System.Drawing.Point(418, 199)
         Me.txt1c.Name = "txt1c"
         Me.txt1c.Size = New System.Drawing.Size(65, 24)
-        Me.txt1c.TabIndex = 3
+        Me.txt1c.TabIndex = 12
         Me.txt1c.Text = "5"
         '
         'Label2
@@ -193,7 +193,7 @@ Partial Class frmCashCount
         Me.txt5c.Location = New System.Drawing.Point(418, 169)
         Me.txt5c.Name = "txt5c"
         Me.txt5c.Size = New System.Drawing.Size(65, 24)
-        Me.txt5c.TabIndex = 2
+        Me.txt5c.TabIndex = 11
         Me.txt5c.Text = "5"
         '
         'Label5
@@ -232,7 +232,7 @@ Partial Class frmCashCount
         Me.txt1.Location = New System.Drawing.Point(418, 79)
         Me.txt1.Name = "txt1"
         Me.txt1.Size = New System.Drawing.Size(65, 24)
-        Me.txt1.TabIndex = 12
+        Me.txt1.TabIndex = 8
         Me.txt1.Text = "5"
         '
         'Label8
@@ -271,7 +271,7 @@ Partial Class frmCashCount
         Me.txt5.Location = New System.Drawing.Point(418, 49)
         Me.txt5.Name = "txt5"
         Me.txt5.Size = New System.Drawing.Size(65, 24)
-        Me.txt5.TabIndex = 11
+        Me.txt5.TabIndex = 7
         Me.txt5.Text = "5"
         '
         'Label11
@@ -310,7 +310,7 @@ Partial Class frmCashCount
         Me.txt10.Location = New System.Drawing.Point(418, 19)
         Me.txt10.Name = "txt10"
         Me.txt10.Size = New System.Drawing.Size(65, 24)
-        Me.txt10.TabIndex = 10
+        Me.txt10.TabIndex = 6
         Me.txt10.Text = "5"
         '
         'Label14
@@ -349,7 +349,7 @@ Partial Class frmCashCount
         Me.txt20.Location = New System.Drawing.Point(100, 169)
         Me.txt20.Name = "txt20"
         Me.txt20.Size = New System.Drawing.Size(65, 24)
-        Me.txt20.TabIndex = 9
+        Me.txt20.TabIndex = 5
         Me.txt20.Text = "5"
         '
         'Label17
@@ -448,7 +448,7 @@ Partial Class frmCashCount
         Me.txt50.Location = New System.Drawing.Point(100, 139)
         Me.txt50.Name = "txt50"
         Me.txt50.Size = New System.Drawing.Size(65, 24)
-        Me.txt50.TabIndex = 8
+        Me.txt50.TabIndex = 4
         Me.txt50.Text = "5"
         '
         'Label43
@@ -487,7 +487,7 @@ Partial Class frmCashCount
         Me.txt100.Location = New System.Drawing.Point(100, 109)
         Me.txt100.Name = "txt100"
         Me.txt100.Size = New System.Drawing.Size(65, 24)
-        Me.txt100.TabIndex = 7
+        Me.txt100.TabIndex = 3
         Me.txt100.Text = "5"
         '
         'Label40
@@ -526,7 +526,7 @@ Partial Class frmCashCount
         Me.txt200.Location = New System.Drawing.Point(100, 79)
         Me.txt200.Name = "txt200"
         Me.txt200.Size = New System.Drawing.Size(65, 24)
-        Me.txt200.TabIndex = 6
+        Me.txt200.TabIndex = 2
         Me.txt200.Text = "5"
         '
         'Label37
@@ -565,7 +565,7 @@ Partial Class frmCashCount
         Me.txt500.Location = New System.Drawing.Point(100, 49)
         Me.txt500.Name = "txt500"
         Me.txt500.Size = New System.Drawing.Size(65, 24)
-        Me.txt500.TabIndex = 5
+        Me.txt500.TabIndex = 1
         Me.txt500.Text = "5"
         '
         'Label34
@@ -604,7 +604,7 @@ Partial Class frmCashCount
         Me.txt1000.Location = New System.Drawing.Point(100, 19)
         Me.txt1000.Name = "txt1000"
         Me.txt1000.Size = New System.Drawing.Size(65, 24)
-        Me.txt1000.TabIndex = 4
+        Me.txt1000.TabIndex = 0
         Me.txt1000.Text = "5"
         '
         'Label31
@@ -797,7 +797,7 @@ Partial Class frmCashCount
         Me.txt25c.Location = New System.Drawing.Point(418, 109)
         Me.txt25c.Name = "txt25c"
         Me.txt25c.Size = New System.Drawing.Size(65, 24)
-        Me.txt25c.TabIndex = 0
+        Me.txt25c.TabIndex = 9
         Me.txt25c.Text = "5"
         '
         'Label13
@@ -836,7 +836,7 @@ Partial Class frmCashCount
         Me.txt10c.Location = New System.Drawing.Point(418, 139)
         Me.txt10c.Name = "txt10c"
         Me.txt10c.Size = New System.Drawing.Size(65, 24)
-        Me.txt10c.TabIndex = 1
+        Me.txt10c.TabIndex = 10
         Me.txt10c.Text = "5"
         '
         'Label33
@@ -858,7 +858,7 @@ Partial Class frmCashCount
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(150, 24)
         Me.txtTotal.TabIndex = 4
-        Me.txtTotal.Text = "500"
+        Me.txtTotal.Text = "0"
         '
         'Label7
         '
