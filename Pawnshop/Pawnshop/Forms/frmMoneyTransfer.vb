@@ -53,6 +53,7 @@
             .ServiceName = "GPRS - GPRS to GPRS"
             .isGenerated = False
             .ChargeCode = "gprs to gprs"
+            .hasPayoutCommission = True
         End With
         daltonService(3) = tmp
 
@@ -62,6 +63,7 @@
             .ServiceName = "GPRS - GPRS to Smart Money"
             .isGenerated = False
             .ChargeCode = "gprs to smartmoney"
+            .hasPayoutCommission = True
         End With
         daltonService(4) = tmp
 
@@ -356,11 +358,16 @@
         'Version 2
         ' - Include Commission and complicated computations
 
-        If rbReceive.Checked Then Return 0
+        Dim idx As Integer = cboType.SelectedIndex
+        If rbReceive.Checked And Not daltonService(idx).hasPayoutCommission Then Return 0
 
         Dim fillData As String = "tblCharge"
         Dim ds As DataSet, mySql As String
         mySql = "SELECT * FROM " & fillData & String.Format(" WHERE type = '{0}'", type)
+        If daltonService(idx).hasPayoutCommission Then
+            mySql &= " AND Remarks LIKE '"
+            mySql &= IIf(rbSend.Checked, "Send In%'", "Pay Out%'")
+        End If
         ds = LoadSQL(mySql)
 
         Console.WriteLine(mySql)
@@ -378,10 +385,12 @@
                 remarks = dr.Item("Remarks")
 
                 If remarks.Split("|").Count > 1 Then
+                    Dim tmpSrvAmt As Double = 0
                     'ServiceCharge
                     Select Case remarks.Split("|")(1)
                         Case "Percent"
-                            ServChrge = ServChrge / 100
+                            tmpSrvAmt = ServChrge / 100
+                            ServChrge = amt * tmpSrvAmt
                         Case Else
                             MsgBox("Remarks INVALID!" + vbCrLf + "No SERVICE CHARGE", vbCritical, "DEVELOPER Warning")
                             ServChrge = 0
@@ -413,7 +422,7 @@
         If Not IsNumeric(txtAmount.Text) Then Exit Sub
 
         basicCharges = GetCharge(CDbl(txtAmount.Text), FindServices(cboType.Text).ChargeCode)
-        txtCharge.Text = basicCharges
+        txtCharge.Text = IIf(rbSend.Checked, basicCharges, 0)
         ComputeNet()
     End Sub
 
