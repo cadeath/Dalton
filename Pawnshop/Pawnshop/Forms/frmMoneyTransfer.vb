@@ -9,7 +9,7 @@
 
     ' NOTE - ADDING SERVICE
     ' STEP 3 - Add array count
-    Private daltonService(4) As MoneyTransferService
+    Private daltonService(8) As MoneyTransferService
 
     Private Sub Main()
         ' NOTE - ADDING SERVICE
@@ -105,7 +105,7 @@
             .ChargeCode = "gprs to bank-bdochina"
             .hasPayoutCommission = True
         End With
-        daltonService(7) = tmp
+        daltonService(8) = tmp
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
@@ -331,13 +331,30 @@
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
                     End If
-                Case "GPRS - GPRS to Smart Money"
+                Case "GPRS - GPRS to Smart Money", "GPRS - Smartmoney To GPRS", "GPRS - Smartmoney To GPRS", _
+                    "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", "GPRS - GPRS to BANK (DBP)"
+
+                    Dim CashCount_Name As String = ""
+
+                    Select Case cboType.Text
+                        Case "GPRS - GPRS to Smart Money"
+                            CashCount_Name = "GPRS-SmartMoney"
+                        Case "GPRS - Smartmoney To GPRS"
+                            CashCount_Name = "SmartMoney-GPRS"
+                        Case "GPRS - GPRS to BANK (UCPB/PNB)"
+                            CashCount_Name = "GPRS-(UCPB/PNB)"
+                        Case "GPRS - GPRS to BANK (BDO/Chinabank)"
+                            CashCount_Name = "GPRS-(BDO/Chinabank)"
+                        Case "GPRS - GPRS to BANK (DBP)"
+                            CashCount_Name = "GPRS-DBP"
+                    End Select
+
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber, "GPRS-GPRS")
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber, CashCount_Name)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
                     Else
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber, "GPRS-GPRS")
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber, CashCount_Name)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
                     End If
