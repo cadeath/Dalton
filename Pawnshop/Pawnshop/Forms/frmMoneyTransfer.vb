@@ -67,6 +67,46 @@
         End With
         daltonService(4) = tmp
 
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0006"
+            .ServiceName = "GPRS - Smartmoney To GPRS"
+            .isGenerated = False
+            .ChargeCode = "smartmoney to gprs"
+            .hasPayoutCommission = True
+        End With
+        daltonService(5) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0007"
+            .ServiceName = "GPRS - GPRS to BANK (UCPB/PNB)"
+            .isGenerated = False
+            .ChargeCode = "gprs to bank-ucpbpnb"
+            .hasPayoutCommission = True
+        End With
+        daltonService(6) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0008"
+            .ServiceName = "GPRS - GPRS to BANK (BDO/Chinabank)"
+            .isGenerated = False
+            .ChargeCode = "gprs to bank-bdochina"
+            .hasPayoutCommission = True
+        End With
+        daltonService(7) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0009"
+            .ServiceName = "GPRS - GPRS to BANK (DBP)"
+            .isGenerated = False
+            .ChargeCode = "gprs to bank-bdochina"
+            .hasPayoutCommission = True
+        End With
+        daltonService(7) = tmp
+
         'Pera Padala
         idME = daltonService(0).GetSendLast
         idMR = daltonService(0).GetReceivedLast
