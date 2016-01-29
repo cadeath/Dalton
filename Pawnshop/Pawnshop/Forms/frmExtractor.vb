@@ -27,11 +27,11 @@ Public Class frmExtractor
         Select Case FormType
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("ROX{0}.xls", Now.ToString("MMddyyyy"))  'BranchCode + Date
+                sfdPath.FileName = String.Format("{1}{0}.xls", Now.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Expiry"
             Case ExtractType.JournalEntry
                 Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}ROX.xls", Now.ToString("yyyyMMdd")) 'JRNL + Date + BranchCode
+                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", Now.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
                 Me.Text &= " - Journal Entry"
         End Select
     End Sub
@@ -251,5 +251,4 @@ Public Class frmExtractor
 
         Return KeyGen.Generate()
     End Function
-
 End Class

@@ -41,7 +41,7 @@ Partial Class frmExtractor
         '
         'btnExtract
         '
-        Me.btnExtract.Location = New System.Drawing.Point(12, 242)
+        Me.btnExtract.Location = New System.Drawing.Point(18, 242)
         Me.btnExtract.Name = "btnExtract"
         Me.btnExtract.Size = New System.Drawing.Size(75, 41)
         Me.btnExtract.TabIndex = 1

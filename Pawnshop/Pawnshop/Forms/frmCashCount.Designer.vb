@@ -858,7 +858,7 @@ Partial Class frmCashCount
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(150, 24)
         Me.txtTotal.TabIndex = 4
-        Me.txtTotal.Text = "500"
+        Me.txtTotal.Text = "0"
         '
         'Label7
         '

@@ -267,6 +267,8 @@ nextLoop:
     End Sub
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+        If Not canMigrate() Then Exit Sub
+
         If Not System.IO.File.Exists(txtImportPath.Text) Then Exit Sub
         ImportTemplate(txtImportPath.Text)
         CreateLOG()
@@ -296,4 +298,18 @@ nextLoop:
 
         Return CDate(yyyyMMMdd)
     End Function
+
+#Region "Migration"
+    Private Function canMigrate() As Boolean
+        Return Not frmMain.dateSet
+    End Function
+
+    Private Sub tbMIS_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles tbMIS.SelectedIndexChanged
+        If tbMIS.SelectedTab.Name = "Migration" Then
+            If Not canMigrate() Then MsgBox("WE CANNOT MIGRATE WHEN DATE IS SET.", MsgBoxStyle.Critical)
+        End If
+    End Sub
+#End Region
+
+    
 End Class

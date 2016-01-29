@@ -77,6 +77,16 @@
         End Set
     End Property
 
+    Private _hasPayoutCommission As Boolean = False
+    Public Property hasPayoutCommission() As Boolean
+        Get
+            Return _hasPayoutCommission
+        End Get
+        Set(ByVal value As Boolean)
+            _hasPayoutCommission = value
+        End Set
+    End Property
+
 
 #End Region
 

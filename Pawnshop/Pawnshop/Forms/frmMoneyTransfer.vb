@@ -5,10 +5,15 @@
     Friend displayOnly As Boolean = False
 
     Dim idME As Integer, idMR As Integer
+    Dim basicCharges As Double, commission As Double
 
-    Private daltonService(3) As MoneyTransferService
+    ' NOTE - ADDING SERVICE
+    ' STEP 3 - Add array count
+    Private daltonService(4) As MoneyTransferService
 
     Private Sub Main()
+        ' NOTE - ADDING SERVICE
+        ' STEP 1 - Create an Object
         Dim tmp As New MoneyTransferService
         With tmp
             .Code = "0001"
@@ -18,6 +23,8 @@
             .KeyReceived = "MRNumLast"
             .ChargeCode = "perapadala"
         End With
+        ' NOTE - ADDING SERVICE
+        ' STEP 2 - Add it at daltonService
         daltonService(0) = tmp
 
         tmp = New MoneyTransferService
@@ -43,12 +50,62 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0004"
-            .ServiceName = "Money Gram"
+            .ServiceName = "GPRS - GPRS to GPRS"
             .isGenerated = False
-            .AccountName = "Due to/from Money Gram"
-            .ChargeCode = "moneygram"
+            .ChargeCode = "gprs to gprs"
+            .hasPayoutCommission = True
         End With
         daltonService(3) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0005"
+            .ServiceName = "GPRS - GPRS to Smart Money"
+            .isGenerated = False
+            .ChargeCode = "gprs to smartmoney"
+            .hasPayoutCommission = True
+        End With
+        daltonService(4) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0006"
+            .ServiceName = "GPRS - Smartmoney To GPRS"
+            .isGenerated = False
+            .ChargeCode = "smartmoney to gprs"
+            .hasPayoutCommission = True
+        End With
+        daltonService(5) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0007"
+            .ServiceName = "GPRS - GPRS to BANK (UCPB/PNB)"
+            .isGenerated = False
+            .ChargeCode = "gprs to bank-ucpbpnb"
+            .hasPayoutCommission = True
+        End With
+        daltonService(6) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0008"
+            .ServiceName = "GPRS - GPRS to BANK (BDO/Chinabank)"
+            .isGenerated = False
+            .ChargeCode = "gprs to bank-bdochina"
+            .hasPayoutCommission = True
+        End With
+        daltonService(7) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0009"
+            .ServiceName = "GPRS - GPRS to BANK (DBP)"
+            .isGenerated = False
+            .ChargeCode = "gprs to bank-bdochina"
+            .hasPayoutCommission = True
+        End With
+        daltonService(7) = tmp
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
@@ -262,7 +319,27 @@
                     Else
                         AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber, "CEBUANA OUT")
-
+                    End If
+                Case "GPRS - GPRS to GPRS"
+                    'GPRS ----------------------------------
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber, "GPRS-GPRS")
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
+                    Else
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber, "GPRS-GPRS")
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
+                    End If
+                Case "GPRS - GPRS to Smart Money"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber, "GPRS-GPRS")
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
+                    Else
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber, "GPRS-GPRS")
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
                     End If
             End Select
 
@@ -326,26 +403,60 @@
     End Sub
 
     Private Function GetCharge(ByVal amt As Double, Optional ByVal type As String = "perapadala") As Double
-        If rbReceive.Checked Then Return 0
+        'Version 2
+        ' - Include Commission and complicated computations
+
+        Dim idx As Integer = cboType.SelectedIndex
+        If rbReceive.Checked And Not daltonService(idx).hasPayoutCommission Then Return 0
 
         Dim fillData As String = "tblCharge"
         Dim ds As DataSet, mySql As String
         mySql = "SELECT * FROM " & fillData & String.Format(" WHERE type = '{0}'", type)
+        If daltonService(idx).hasPayoutCommission Then
+            mySql &= " AND Remarks LIKE '"
+            mySql &= IIf(rbSend.Checked, "Send In%'", "Pay Out%'")
+        End If
         ds = LoadSQL(mySql)
 
         Console.WriteLine(mySql)
         Console.WriteLine("Entries" & ds.Tables(0).Rows.Count)
+        If ds.Tables(0).Rows.Count = 0 Then Console.WriteLine("No charges!!! Charge Code not found.") : Return 0
+
         For Each dr As DataRow In ds.Tables(0).Rows
             If amt <= CDbl(dr.Item("AMOUNT")) Then
+                'Including Commission and complicated computations
                 Console.WriteLine("Max: " & dr.Item("AMOUNT") & "| Charge: " & dr.Item("Charge"))
-                Return CDbl(dr.Item("Charge"))
+
+                Dim ServChrge As Double = 0, remarks As String = ""
+                ServChrge = dr.Item("Charge")
+                commission = dr.Item("Commission")
+                remarks = dr.Item("Remarks")
+
+                If remarks.Split("|").Count > 1 Then
+                    Dim tmpSrvAmt As Double = 0
+                    'ServiceCharge
+                    Select Case remarks.Split("|")(1)
+                        Case "Percent"
+                            tmpSrvAmt = ServChrge / 100
+                            ServChrge = amt * tmpSrvAmt
+                        Case Else
+                            MsgBox("Remarks INVALID!" + vbCrLf + "No SERVICE CHARGE", vbCritical, "DEVELOPER Warning")
+                            ServChrge = 0
+                    End Select
+
+                    'Commission
+                    Select Case remarks.Split("|")(2)
+                        Case "SLC" 'ServiceCharge Less Charge
+                            commission = ServChrge - commission
+                        Case Else
+                            MsgBox("Remarks INVALID!" + vbCrLf + "No COMMISSION", vbCritical, "DEVELOPER Warning")
+                            commission = 0
+                    End Select
+                End If
+
+                Return ServChrge
             End If
         Next
-
-        If ds.Tables(0).Rows.Count = 0 Then
-            Console.WriteLine("No charges!!! Charge Code not found.")
-            Return 0
-        End If
 
         Console.WriteLine(String.Format("LIMIT! for  {0} with 1.5% of {1}", amt, amt * 0.015))
         Return amt * 0.015
@@ -357,17 +468,9 @@
 
     Private Sub ComputeCharges()
         If Not IsNumeric(txtAmount.Text) Then Exit Sub
-        Dim basicCharges As Double
-        'Select Case cboType.Text
-        '    Case "Pera Padala"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text))
-        '    Case "Western Union"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text), "western")
-        '    Case "Cebuana Llhuiller"
-        '        basicCharges = GetCharge(CDbl(txtAmount.Text), "cebuana")
-        'End Select
+
         basicCharges = GetCharge(CDbl(txtAmount.Text), FindServices(cboType.Text).ChargeCode)
-        txtCharge.Text = basicCharges
+        txtCharge.Text = IIf(rbSend.Checked, basicCharges, 0)
         ComputeNet()
     End Sub
 
@@ -448,9 +551,5 @@
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
-    End Sub
-
-    Private Sub txtAmount_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAmount.TextChanged
-
     End Sub
 End Class

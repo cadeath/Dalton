@@ -23,7 +23,7 @@ Partial Class frmMIS
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ofdImport = New System.Windows.Forms.OpenFileDialog()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tbMIS = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.txtShowPass = New System.Windows.Forms.TextBox()
         Me.btnReset = New System.Windows.Forms.Button()
@@ -45,7 +45,7 @@ Partial Class frmMIS
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.pbData = New System.Windows.Forms.ProgressBar()
         Me.ofdBackup = New System.Windows.Forms.OpenFileDialog()
-        Me.TabControl1.SuspendLayout()
+        Me.tbMIS.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
@@ -56,15 +56,15 @@ Partial Class frmMIS
         Me.ofdImport.FileName = "Excel File"
         Me.ofdImport.Filter = "Excel 2003|*.xls|Excel 2007|*.xlsx"
         '
-        'TabControl1
+        'tbMIS
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(9, 12)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(571, 312)
-        Me.TabControl1.TabIndex = 9
+        Me.tbMIS.Controls.Add(Me.TabPage1)
+        Me.tbMIS.Controls.Add(Me.TabPage2)
+        Me.tbMIS.Location = New System.Drawing.Point(9, 12)
+        Me.tbMIS.Name = "tbMIS"
+        Me.tbMIS.SelectedIndex = 0
+        Me.tbMIS.Size = New System.Drawing.Size(571, 312)
+        Me.tbMIS.TabIndex = 9
         '
         'TabPage1
         '
@@ -276,12 +276,12 @@ Partial Class frmMIS
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(592, 333)
-        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.tbMIS)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmMIS"
         Me.Text = "MIS CONTROL PANEL"
-        Me.TabControl1.ResumeLayout(False)
+        Me.tbMIS.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
@@ -290,7 +290,7 @@ Partial Class frmMIS
 
     End Sub
     Friend WithEvents ofdImport As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents tbMIS As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents btnReset As System.Windows.Forms.Button
