@@ -292,7 +292,15 @@
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
                     End If
                 Case "GPRS - GPRS to Smart Money"
-
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "Ref# " & .ReferenceNumber, "GPRS-GPRS")
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
+                    Else
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .ReferenceNumber, "GPRS-GPRS")
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "Ref# " & .ReferenceNumber)
+                    End If
             End Select
 
             .Save()
