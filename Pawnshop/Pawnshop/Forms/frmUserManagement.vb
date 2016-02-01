@@ -22,6 +22,13 @@
 
         ClearFields()
         LoadActive()
+        CheckAuthorization()
+    End Sub
+
+    Private Sub CheckAuthorization()
+        With POSuser
+            btnAdd.Enabled = .canUserManage
+        End With
     End Sub
 
     Private Sub LoadUser()

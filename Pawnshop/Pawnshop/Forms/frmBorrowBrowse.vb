@@ -5,6 +5,11 @@
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadBorrowings()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub ClearFields()

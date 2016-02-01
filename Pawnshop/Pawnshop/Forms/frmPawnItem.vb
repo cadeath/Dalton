@@ -764,6 +764,11 @@ Public Class frmPawnItem
 
     Private Sub LoadInformation()
         LoadPawnInfo()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub LoadPawnInfo()
