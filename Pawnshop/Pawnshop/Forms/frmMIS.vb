@@ -301,6 +301,8 @@ nextLoop:
 
 #Region "Migration"
     Private Function canMigrate() As Boolean
+        If frmMain.dateSet Then MsgBox("Please do Close Store before migrating", vbCritical)
+
         Return Not frmMain.dateSet
     End Function
 
