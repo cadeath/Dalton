@@ -7,6 +7,7 @@
         If rbCebuana.Checked Then reportType = "Cebuana Llhuiller"
         If rbPeraPadala.Checked Then reportType = "Pera Padala"
         If rbWestern.Checked Then reportType = "Western Union"
+        If rbGPRS.Checked Then reportType = "GPRS"
 
         Dim fillData As String, mySql As String
         fillData = "MONEY_TRANSFER"
@@ -14,7 +15,11 @@
         mySql &= String.Format(" WHERE TransDate BETWEEN '{0}' AND '{1}' ", _
                                GetFirstDate(monCal.SelectionRange.Start).ToShortDateString, _
                                GetLastDate(monCal.SelectionRange.End).ToShortDateString)
-        mySql &= String.Format("AND ServiceType = '{0}' ", reportType)
+        If Not rbGPRS.Checked And Not rbALL.Checked Then
+            mySql &= String.Format("AND ServiceType = '{0}' ", reportType)
+        Else
+            mySql &= String.Format("AND ServiceType LIKE '{0}%' ", reportType)
+        End If
 
         Console.WriteLine(mySql)
 
@@ -51,4 +56,5 @@
     Private Sub chkSend_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSend.CheckedChanged
         CheckNoUncheck()
     End Sub
+
 End Class

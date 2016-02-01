@@ -446,8 +446,8 @@
 
                 Dim ServChrge As Double = 0, remarks As String = ""
                 ServChrge = dr.Item("Charge")
-                commission = dr.Item("Commission")
-                remarks = dr.Item("Remarks")
+                commission = IIf(IsDBNull(dr.Item("Commission")), 0, dr.Item("Commission"))
+                remarks = IIf(IsDBNull(dr.Item("Remarks")), "", dr.Item("Remarks"))
 
                 If remarks.Split("|").Count > 1 Then
                     Dim tmpSrvAmt As Double = 0
