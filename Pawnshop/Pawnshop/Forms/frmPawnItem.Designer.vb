@@ -97,6 +97,7 @@ Partial Class frmPawnItem
         Me.lblNPT = New System.Windows.Forms.Label()
         Me.tmrVerifier = New System.Windows.Forms.Timer(Me.components)
         Me.lblTransaction = New System.Windows.Forms.Label()
+        Me.btnPrint = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -857,12 +858,23 @@ Partial Class frmPawnItem
         Me.lblTransaction.TabIndex = 13
         Me.lblTransaction.Text = "New Loan"
         '
+        'btnPrint
+        '
+        Me.btnPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPrint.Location = New System.Drawing.Point(647, 464)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(88, 33)
+        Me.btnPrint.TabIndex = 14
+        Me.btnPrint.Text = "&Print"
+        Me.btnPrint.UseVisualStyleBackColor = True
+        '
         'frmPawnItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(935, 505)
+        Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.lblTransaction)
         Me.Controls.Add(Me.lblNPT)
         Me.Controls.Add(Me.btnRedeem)
@@ -968,4 +980,5 @@ Partial Class frmPawnItem
     Friend WithEvents lblNPT As System.Windows.Forms.Label
     Friend WithEvents tmrVerifier As System.Windows.Forms.Timer
     Friend WithEvents lblTransaction As System.Windows.Forms.Label
+    Friend WithEvents btnPrint As System.Windows.Forms.Button
 End Class

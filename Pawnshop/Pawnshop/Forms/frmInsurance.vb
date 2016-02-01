@@ -97,11 +97,15 @@
             .EncoderID = POSuser.UserID
 
             .SaveInsurance()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE")
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber)
         End With
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
-        btnNew.PerformClick()
         MsgBox("Entry Saved", MsgBoxStyle.Information)
+        btnNew.PerformClick()
+
         Me.Close()
     End Sub
 
@@ -123,10 +127,13 @@
     End Sub
 
     Private Sub txtPT_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress
-        DigitOnly(e)
+        'DigitOnly(e)
         If isEnter(e) Then
             btnSave.PerformClick()
         End If
     End Sub
 
+    Private Sub txtPT_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPT.TextChanged
+
+    End Sub
 End Class

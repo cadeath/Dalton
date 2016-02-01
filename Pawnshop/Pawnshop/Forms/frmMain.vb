@@ -1,7 +1,7 @@
 ﻿
 Public Class frmMain
 
-    'NOTE
+    ' NOTE
     ' NotYetLogin sub don't have REPORTS DISABLE YET
     ' Please add reports and add it also at NotYetLogin
     ' sub.
@@ -47,6 +47,8 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = My.Application.Info.Title & " | " & BETA_VERSION
+        ConfiguringDB()
         If Not DBCompatibilityCheck() Then MsgBox("Please update the database version", MsgBoxStyle.Critical) : End
 
         If POSuser.UserName = "" Then
@@ -119,6 +121,7 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to Journal Entry Generator")
             Exit Sub
         End If
+
         frmExtractor.FormType = frmExtractor.ExtractType.JournalEntry
         frmExtractor.Show()
     End Sub
@@ -130,7 +133,6 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to Money Transfer")
             Exit Sub
         End If
-        'frmMTlist.Show()
         frmMoneyTransfer.Show()
     End Sub
 
@@ -300,6 +302,62 @@ Public Class frmMain
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
         frmPullOut.Show()
+    End Sub
+
+    Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
+        qryLoan.Show()
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+        qryDate.Show()
+    End Sub
+
+    Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.DailyCashCount
+        qryDate.Show()
+    End Sub
+
+    Private Sub SequenceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SequenceToolStripMenuItem.Click
+        qrySequence.Show()
+    End Sub
+
+    Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
+        frmSegreList.Show()
+    End Sub
+
+    Private Sub CashInOutSummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
+        qryCashInOut.Show()
+    End Sub
+
+    Private Sub MoneyTransferToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
+        qryMoneyTransfer.Show()
+    End Sub
+
+    Private Sub frmMain_SizeChanged(sender As Object, e As System.EventArgs) Handles Me.SizeChanged
+        Console.WriteLine(Me.Width)
+        pButton.Top = 161
+        If Me.WindowState = FormWindowState.Maximized Then
+            pButton.Left = 543
+        End If
+        If Me.Width < 1080 And Not Me.WindowState = FormWindowState.Maximized Then
+            pButton.Anchor = AnchorStyles.Right
+        Else
+            pButton.Anchor = AnchorStyles.None
+            pButton.Left = 543
+        End If
+        
+    End Sub
+
+    Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.OutStanding
+        qryDate.Show()
+    End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+        qryDate.FormType = qryDate.ReportType.ItemPullOut
+        qryDate.Show()
     End Sub
 End Class
