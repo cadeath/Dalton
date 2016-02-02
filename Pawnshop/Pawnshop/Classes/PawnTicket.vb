@@ -500,11 +500,13 @@
 
         If _status = "L" Then
             ChangeStatus("V")
+            RemoveJournal("PT# " & _pawnTicket)
             Exit Sub
         End If
 
         If _status <> "X" Then
             ChangeStatus("V")
+            RemoveJournal("PT# " & _pawnTicket)
         End If
 
         If _oldTicket <> 0 Then
@@ -531,8 +533,10 @@
                 .Item("AdvInt") = 0
             End With
             database.SaveEntry(ds, False)
+            RemoveJournal("PT# " & _pawnTicket)
         Else
             ChangeStatus("L")
+            RemoveJournal("PT# " & _pawnTicket)
         End If
     End Sub
 
