@@ -32,7 +32,7 @@ Partial Class qryLoan
         '
         Me.chbType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbType.FormattingEnabled = True
-        Me.chbType.Items.AddRange(New Object() {"All", "New Loan", "Renewal", "Redemption"})
+        Me.chbType.Items.AddRange(New Object() {"New Loan", "Renewal", "Redemption"})
         Me.chbType.Location = New System.Drawing.Point(12, 12)
         Me.chbType.Name = "chbType"
         Me.chbType.Size = New System.Drawing.Size(120, 72)

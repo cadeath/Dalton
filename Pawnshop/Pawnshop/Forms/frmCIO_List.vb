@@ -4,6 +4,11 @@
     Private Sub frmCIO_List_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         LoadActive()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click

@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Dalton Pawnshop")> 
+<Assembly: AssemblyTitle("Dalton - Pawnshop System")> 
 <Assembly: AssemblyDescription("Dalton Pawnshop and Jewelry")> 
 <Assembly: AssemblyCompany("Perfecto Group of Companies")> 
 <Assembly: AssemblyProduct("Pawnshop")> 

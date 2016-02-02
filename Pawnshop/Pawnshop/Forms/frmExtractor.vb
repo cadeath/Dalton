@@ -27,11 +27,11 @@ Public Class frmExtractor
         Select Case FormType
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("ROX{0}.xls", Now.ToString("MMddyyyy"))  'BranchCode + Date
+                sfdPath.FileName = String.Format("{1}{0}.xls", Now.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Expiry"
             Case ExtractType.JournalEntry
                 Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}ROX.xls", Now.ToString("yyyyMMdd")) 'JRNL + Date + BranchCode
+                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", Now.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
                 Me.Text &= " - Journal Entry"
         End Select
     End Sub
@@ -56,9 +56,9 @@ Public Class frmExtractor
 
     Private Sub ExtractJournalEntry()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' ", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
         Console.WriteLine("Executing SQL:")
@@ -83,8 +83,11 @@ Public Class frmExtractor
         oSheet = oWB.Worksheets(2)
         pbLoading.Maximum = MaxEntries
         pbLoading.Value = 0
-        While lineNum < MaxEntries
-            With ds.Tables(0).Rows(lineNum)
+
+        Dim recCnt As Single = 0
+        While recCnt < MaxEntries
+            With ds.Tables(0).Rows(recCnt)
+
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
                 oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
@@ -93,9 +96,15 @@ Public Class frmExtractor
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
+                If IsDBNull(.Item("CCNAME")) Then
+                    lineNum += 1
+                Else
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                End If
+
+                recCnt += 1
             End With
 
-            lineNum += 1
             AddProgress()
             Application.DoEvents()
         End While
@@ -242,5 +251,4 @@ Public Class frmExtractor
 
         Return KeyGen.Generate()
     End Function
-
 End Class

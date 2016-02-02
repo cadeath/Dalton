@@ -4,6 +4,11 @@
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub txtHolder_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHolder.KeyPress
@@ -127,10 +132,13 @@
     End Sub
 
     Private Sub txtPT_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress
-        DigitOnly(e)
+        'DigitOnly(e)
         If isEnter(e) Then
             btnSave.PerformClick()
         End If
     End Sub
 
+    Private Sub txtPT_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPT.TextChanged
+
+    End Sub
 End Class

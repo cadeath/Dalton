@@ -370,12 +370,12 @@ Public Class ComputerUser
 #End Region
 
 #Region "Procedures and Functions"
-    Public Sub CreateAdministrator(Optional ByVal pass As String = "misAdmin2015")
+    Public Sub CreateAdministrator(Optional ByVal pass As String = "misAdmin2016")
         mySql = "SELECT * FROM " & fillData
         Dim user As String, fullname As String, ds As DataSet
         user = "POSadmin" : fullname = "IT Department"
 
-        mySql &= String.Format(" WHERE Username = '{0}' AND UserPass = '{1}'", user, EncryptString(pass))
+        mySql &= String.Format(" WHERE Username = '{0}'", user, EncryptString(pass))
 
         Console.WriteLine("Create SQL: " & mySql)
 
@@ -444,7 +444,7 @@ Public Class ComputerUser
             _password = .Item("UserPass")
             _fullName = .Item("FullName")
             _privilege = .Item("Privilege")
-            _lastLogin = .Item("LastLogin")
+            If Not IsDBNull(.Item("LastLogin")) Then _lastLogin = .Item("LastLogin")
         End With
 
         getPrivilege()

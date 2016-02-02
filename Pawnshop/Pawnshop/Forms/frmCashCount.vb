@@ -12,6 +12,25 @@
         ClearFields()
     End Sub
 
+    Private Sub ComputeTotal()
+        Dim tot As Double = 0
+        tot += CDbl(lbl1c.Text.Substring(1))
+        tot += CDbl(lbl5c.Text.Substring(1))
+        tot += CDbl(lbl10c.Text.Substring(1))
+        tot += CDbl(lbl25c.Text.Substring(1))
+        tot += CDbl(lbl1.Text.Substring(1))
+        tot += CDbl(lbl5.Text.Substring(1))
+        tot += CDbl(lbl10.Text.Substring(1))
+        tot += CDbl(lbl20.Text.Substring(1))
+        tot += CDbl(lbl50.Text.Substring(1))
+        tot += CDbl(lbl100.Text.Substring(1))
+        tot += CDbl(lbl200.Text.Substring(1))
+        tot += CDbl(lbl500.Text.Substring(1))
+        tot += CDbl(lbl1000.Text.Substring(1))
+
+        txtTotal.Text = String.Format("Php {0:#,###.00}", tot)
+    End Sub
+
     Private Sub ClearFields()
         txt1c.Text = "" : lbl1c.Text = "P 0.00"
         txt5c.Text = "" : lbl5c.Text = "P 0.00"
@@ -35,7 +54,15 @@
     ''' <param name="amt"></param>
     ''' <remarks></remarks>
     Private Sub ComputeMe(ByVal txt As TextBox, ByVal amt As Double)
-        If txt.Text = "" Then Exit Sub
+        If txt.Text = "" Then txt.Text = ""
+
+        Dim tmp As Double = 0
+        If IsNumeric(txt.Text) Then
+            tmp = CDbl(txt.Text)
+        Else
+            Exit Sub
+        End If
+
         Dim lbl As Label
         Select Case amt
             Case 0.01 : lbl = lbl1c
@@ -54,7 +81,9 @@
             Case Else : lbl = Nothing
         End Select
 
-        lbl.Text = "P " & CDbl(txt.Text) * amt
+        lbl.Text = "P " & tmp * amt
+
+        ComputeTotal()
     End Sub
 
 #Region "KeyPress"

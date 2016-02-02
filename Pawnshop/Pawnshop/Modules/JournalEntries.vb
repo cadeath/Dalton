@@ -1,12 +1,13 @@
 ﻿Module JournalEntries
 
     Friend Sub AddJournal(ByVal Amt As Double, ByVal DebitCredit As String, ByVal AccountName As String, _
-                          Optional ByVal Remarks As String = "", Optional ByVal cashCountName As String = "")
+                          Optional ByVal Remarks As String = "", Optional ByVal cashCountName As String = "", _
+                          Optional ToDisplay As Boolean = True)
         If Amt = 0 Then Exit Sub
         Dim category As String = "", transactionName As String = "", SAPCode As String = "", onHold As Boolean = False
         Dim AccntID As Integer = 0
         Dim mySql As String = "SELECT * FROM tblCash WHERE "
-        mySql &= String.Format("TRANSNAME = '{0}'", AccountName)
+        mySql &= String.Format("TRANSNAME = '{0}'", DreadKnight(AccountName))
         Dim ds As DataSet = LoadSQL(mySql), isRevolvingFund As Boolean = False
 
         If ds.Tables(0).Rows.Count > 1 Then Console.WriteLine("Multiple Account Code : " & AccountName)
@@ -58,6 +59,7 @@
                 .Item("Remarks") = "Revolving Fund: " & REVOLVING_FUND
                 .Item("CCName") = cashCountName
             End If
+            If Not ToDisplay Then .Item("ToDisplay") = 0
             If Remarks <> "" Then .Item("Remarks") &= "| "
             .Item("Remarks") &= Remarks
         End With

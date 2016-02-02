@@ -1,6 +1,9 @@
 ﻿Imports Microsoft.Reporting.WinForms
 
 Public Class frmPawnItem
+    'Version 2.4
+    ' - UPDATE002
+    '   Add Database Class Table 'RENEWALBLE'
     'Version 2.3
     ' - Add Printing
     'Version 2.2
@@ -40,7 +43,7 @@ Public Class frmPawnItem
         If transactionType = "L" Then NewLoan()
     End Sub
 
-  #Region "GUI"
+#Region "GUI"
     Private Sub ClearFields()
         mod_system.isAuthorized = False
 
@@ -200,9 +203,9 @@ Public Class frmPawnItem
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan() : PrintNewLoan()
-            Case "X" : SaveRedeem() : PrintRedeemOR()
-            Case "R" : SaveRenew() : PrintRenew()
+            Case "L" : SaveNewLoan() 'PrintNewLoan()
+            Case "X" : SaveRedeem() 'PrintRedeemOR()
+            Case "R" : SaveRenew() 'PrintRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
@@ -395,6 +398,8 @@ Public Class frmPawnItem
 
             'Added
             AdvanceInterest = 0 'Advance Interest Removed
+            If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 _
+                Then DelayInt = ItemPrincipal * GetInt(30)
 
             isOldItem = True
         Else
@@ -602,7 +607,8 @@ Public Class frmPawnItem
                 btnVoid.Enabled = True
         End Select
 
-        If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
+        'If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
+        RenewDisabled(PawnItem.CategoryID) ' UPDATE002
 
         'Get New Number
         Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
@@ -611,6 +617,16 @@ Public Class frmPawnItem
             lblNPT.Visible = True
             lblNPT.Text &= CurrentPTNumber(ds.Tables(0).Rows(0).Item("PawnTicket"))
         End If
+    End Sub
+
+    Private Sub RenewDisabled(catID As String)
+        If Not (PawnItem.Status = "L" Or PawnItem.Status = "R") Then Exit Sub
+
+        Dim mySql As String = "SELECT * FROM tblClass WHERE "
+        mySql &= String.Format("CLASSID = {0}", catID)
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        btnRenew.Enabled = IIf(ds.Tables(0).Rows(0).Item("RENEWABLE"), True, False)
     End Sub
 
     Private Sub ChangeForm()
@@ -648,6 +664,11 @@ Public Class frmPawnItem
 
     Private Function GetCatName(ByVal id As Integer) As String
         Dim idx As Integer = cboType.SelectedIndex
+        If idx = -1 Then
+            Dim mySql As String = "SELECT * FROM tblClass WHERE ClassID = " & id
+            Dim ds As DataSet = LoadSQL(mySql)
+            Return ds.Tables(0).Rows(0).Item("Category")
+        End If
 
         For Each el As DictionaryEntry In PawnInfo(idx)
             If el.Key = id Then
@@ -743,6 +764,11 @@ Public Class frmPawnItem
 
     Private Sub LoadInformation()
         LoadPawnInfo()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub LoadPawnInfo()
@@ -1124,7 +1150,7 @@ Public Class frmPawnItem
                 Dim tmpPara As New ReportParameter
                 tmpPara.Name = nPara.Key
                 tmpPara.Values.Add(nPara.Value)
-                Report.SetParameters(New ReportParameter() {tmpPara})
+                report.SetParameters(New ReportParameter() {tmpPara})
                 Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
             Next
         End If
@@ -1134,10 +1160,6 @@ Public Class frmPawnItem
         autoPrintPT.Print(printerName)
 
         Me.Focus()
-    End Sub
-
-    Private Sub frmPawnItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
-        PrintNewLoan()
     End Sub
 
     Private Function canPrint(ByVal printerName As String) As Boolean
@@ -1151,7 +1173,7 @@ Public Class frmPawnItem
     End Function
 #End Region
 
-    Private Sub GroupBox5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox5.Click
-        dev_ORview.Show()
+    Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
+        MsgBox("NOT YET IMPLEMENTED", MsgBoxStyle.Critical)
     End Sub
 End Class

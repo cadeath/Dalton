@@ -60,15 +60,12 @@
         mySql &= " WHERE PawnTicket = " & txtSearch.Text
         Dim ds As DataSet = LoadSQL(mySql)
 
+        lvSeg.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpDr As New PawnTicket
             tmpDr.LoadTicketInRow(dr)
             AddItemSeg(tmpDr)
         Next
-    End Sub
-
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-        DigitOnly(e)
     End Sub
 
     Private Sub btnOnePull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOnePull.Click
@@ -152,7 +149,7 @@
         frmPawnItem.LoadPawnTicket(pt, pt.Status)
     End Sub
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+    Private Sub lvSeg_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvSeg.SelectedIndexChanged
 
     End Sub
 End Class
