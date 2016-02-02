@@ -184,12 +184,18 @@
 
     Private Sub SendReceiveStatusCheck()
         Dim idx As Integer = cboType.SelectedIndex
+        If Not daltonService(idx).SendOnly And Not daltonService(idx).ReceiveOnly Then
+            rbSend.Enabled = True
+            rbReceive.Enabled = True
+        End If
+
         If daltonService(idx).SendOnly Or daltonService(idx).ReceiveOnly Then
             rbSend.Enabled = Not daltonService(idx).ReceiveOnly
             rbReceive.Enabled = Not daltonService(idx).SendOnly
             rbSend.Checked = daltonService(idx).SendOnly
             rbReceive.Checked = daltonService(idx).ReceiveOnly
         End If
+
     End Sub
 
     Private Sub btnSearchSender_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchSender.Click

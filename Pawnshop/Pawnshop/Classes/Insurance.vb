@@ -164,8 +164,8 @@ Public Class Insurance
         ds.Tables(fillData).Rows(0).Item("Status") = _status
 
         database.SaveEntry(ds, False)
+        RemoveJournal("COI# " & Me.COInumber)
     End Sub
-
 #End Region
 
 End Class

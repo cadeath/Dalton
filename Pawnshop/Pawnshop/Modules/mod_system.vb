@@ -161,7 +161,7 @@ Module mod_system
             Console.WriteLine(">>>>>>> Computation: " & AsPerComputation.ToString("Php #,#00.00"))
 
             If AsPerComputation <> cc Then
-                Dim tmpOverShort As Double = Math.Abs(AsPerComputation) - cc
+                Dim tmpOverShort As Double = Math.Abs(AsPerComputation) - Math.Abs(cc)
                 tmpOverShort = Math.Abs(tmpOverShort)
                 If AsPerComputation < cc Then
                     'Overage
