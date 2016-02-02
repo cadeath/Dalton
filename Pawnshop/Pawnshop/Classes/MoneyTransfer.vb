@@ -226,18 +226,28 @@
         Me.LoadById(_id)
         Dim SrvTyp As String = Me.ServiceType
         Dim SrcStr As String = ""
-        If SrvTyp = "Pera Padala" Then
-            If TransactionType = 0 Then
-                'Send
-                SrcStr = "ME# " & _transID
-            Else
-                SrcStr = "MR# " & _transID
-            End If
-        Else
-            SrcStr = "Ref# " & _ref
-        End If
-        RemoveJournal(SrcStr)
+        Select Case SrvTyp
+            Case "Pera Padala"
+                If TransactionType = 0 Then
+                    'Send
+                    SrcStr = "ME# " & _transID
+                Else
+                    SrcStr = "MR# " & _transID
+                End If
+            Case "Western Union"
+                SrcStr = "WE|Ref# " & _ref
+            Case "Cebuana Llhuiller"
+                SrcStr = "CL|Ref# " & _ref
+            Case "GPRS - GPRS to GPRS"
+                SrcStr = "G2G|Ref# " & _ref
+            Case "GPRS - GPRS to Smart Money", "GPRS - Smartmoney To GPRS", "GPRS - Smartmoney To GPRS", _
+                    "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", "GPRS - GPRS to BANK (DBP)", _
+                    "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
+                     "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram", "GPRS - Moneygram to GPRS"
+                SrcStr = "GPRS|Ref# " & _ref
+        End Select
 
+        RemoveJournal(SrcStr)
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 
