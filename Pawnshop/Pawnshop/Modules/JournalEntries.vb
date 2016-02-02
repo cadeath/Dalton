@@ -82,6 +82,7 @@
         mySql &= String.Format("REMARKS LIKE '%{0}%'", srcStr)
 
         Dim ds As DataSet = LoadSQL(mySql, fillData)
+        If ds.Tables(fillData).Rows.Count = 0 Then MsgBox("JOURNAL ENTRIES NOT FOUND", MsgBoxStyle.Critical, "DEVELOPER WARNING") : Exit Sub
 
         For Each dr As DataRow In ds.Tables(fillData).Rows
             dr.Item("STATUS") = 0

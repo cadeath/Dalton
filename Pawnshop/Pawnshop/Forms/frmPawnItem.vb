@@ -81,6 +81,10 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to VOID this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical + vbDefaultButton2, "W A R N I N G")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
         Dim transDate As Date
         If PawnItem.Status = "X" Then
             transDate = PawnItem.OfficialReceiptDate
@@ -612,7 +616,7 @@ Public Class frmPawnItem
         RenewDisabled(PawnItem.CategoryID) ' UPDATE002
 
         'Get New Number
-        Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE STATUS <> 'V' AND OldTicket = " & PawnItem.PawnTicket
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count <> 0 Then
             lblNPT.Visible = True
