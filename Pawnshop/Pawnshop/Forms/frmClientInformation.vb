@@ -59,7 +59,7 @@ Public Class frmClientInformation
         txtZip.Text = cl.ZipCode
 
         cboGender.Text = IIf(cl.Sex = Client.Gender.Male, "Male", "Female")
-        dtpBday.Value = cl.Birthday
+        dtpBday.Value = IIf(cl.Birthday.Date > dtpBday.MinDate, cl.Birthday.Date, dtpBday.MinDate)
 
         txtCP1.Text = cl.Cellphone1
         txtCP2.Text = cl.Cellphone2

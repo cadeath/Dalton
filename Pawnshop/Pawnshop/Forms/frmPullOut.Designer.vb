@@ -216,7 +216,7 @@ Partial Class frmPullOut
         '
         Me.lblCurrentDate.AutoSize = True
         Me.lblCurrentDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrentDate.Location = New System.Drawing.Point(93, 338)
+        Me.lblCurrentDate.Location = New System.Drawing.Point(12, 338)
         Me.lblCurrentDate.Name = "lblCurrentDate"
         Me.lblCurrentDate.Size = New System.Drawing.Size(75, 20)
         Me.lblCurrentDate.TabIndex = 11
@@ -225,12 +225,13 @@ Partial Class frmPullOut
         'btnBrowse
         '
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(12, 331)
+        Me.btnBrowse.Location = New System.Drawing.Point(404, 331)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(75, 37)
         Me.btnBrowse.TabIndex = 12
         Me.btnBrowse.Text = "&Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
+        Me.btnBrowse.Visible = False
         '
         'frmPullOut
         '

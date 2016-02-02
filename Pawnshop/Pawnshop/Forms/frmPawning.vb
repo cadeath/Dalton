@@ -1,4 +1,6 @@
 ﻿Public Class frmPawning
+    'Version 1.2
+    ' - Legend Added
     'Version 1.1
     ' - Don't display item not equal or less than the current date
 
@@ -37,18 +39,35 @@
 
         st &= IIf(chkRenew.Checked, "1", "0")
         st &= IIf(chkRedeem.Checked, "1", "0")
+        st &= IIf(chkSeg.Checked, "1", "0")
 
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
-        If st = "100" Then
-            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S') ORDER BY LoanDate ASC, PAWNID ASC"
+        Dim mySql As String = "SELECT FIRST 100 * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        If st = "1000" Then
+            mySql &= "' AND (Status = 'L' OR Status = 'R') ORDER BY LoanDate ASC, PAWNID ASC"
         Else
-            mySql &= "' AND (Status = 'L' OR Status = 'R' OR Status = 'S' "
-            If st.Substring(1, 1) = "1" Then mySql &= "OR Status = '0' "
-            If st.Substring(2, 1) = "1" Then mySql &= "OR Status = 'X' "
+            'mySql &= "' AND (Status = 'L' OR Status = 'R' "
+            mySql &= "' AND ("
+            If st.Substring(1, 1) = "1" Then mySql &= "Status = '0' " 'Renew
+            If st.Substring(2, 1) = "1" Then
+                If st.Substring(1, 1) = "1" Then mySql &= " OR "
+                mySql &= "Status = 'X' " 'Redeem
+            End If
+            If st.Substring(3, 1) = "1" Then
+                If st.Substring(2, 1) = "1" Then mySql &= " OR "
+                If st.Substring(1, 1) = "1" And st.Substring(2, 1) = "0" Then mySql &= " OR "
+                mySql &= "Status = 'S' " 'Segregate
+            End If
 
             mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+
         End If
         Dim ds As DataSet = LoadSQL(mySql)
+
+        'HACK
+        'Add proper PAWNING REFRESHER if display is not the same with the query
+        If ds.Tables(0).Rows.Count = lvPawners.Items.Count And lvPawners.Items.Count > 10 Then
+            Exit Sub
+        End If
 
         lvPawners.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
@@ -77,7 +96,7 @@
         Select Case tk.Status
             Case "0" : lv.BackColor = Color.LightGray
             Case "X" : lv.BackColor = Color.Red
-            Case "S" : lv.BackColor = Color.LightYellow
+            Case "S" : lv.BackColor = Color.Yellow
             Case "W" : lv.BackColor = Color.Red
             Case "V" : lv.BackColor = Color.Gray
         End Select
@@ -90,11 +109,13 @@
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM tblpawn WHERE "
-        If IsNumeric(txtSearch.Text) Then mySql &= vbCr & "PAWNTICKET = " & CInt(txtSearch.Text) & " OR "
-        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & txtSearch.Text & "%')"
-        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & txtSearch.Text & "%')"
+        If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET = " & CInt(secured_str) & " OR "
+        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
+        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & secured_str & "%')"
 
         Console.WriteLine(mySql)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -105,9 +126,9 @@
         If MaxRow = 0 Then
 
             mySql = "SELECT * FROM tblClient WHERE "
-            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
-            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & txtSearch.Text & "%') OR "
-            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & txtSearch.Text & "%')"
+            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%')"
 
             ds.Clear()
             ds = LoadSQL(mySql)
@@ -199,4 +220,7 @@
         LoadActive()
     End Sub
 
+    Private Sub chkSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSeg.CheckedChanged
+        LoadActive()
+    End Sub
 End Class

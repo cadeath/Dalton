@@ -8,6 +8,11 @@
         ClearFields()
         LoadActive()
         txtSearch.Focus()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub ClearFields()
@@ -60,6 +65,11 @@
         If CurrentDate.Date <> tmpLoad.TransactionDate Then MsgBox("You cannot void transactions in a DIFFERENT date", MsgBoxStyle.Critical) : Exit Sub
 
         tmpLoad.VoidTransaction(ans)
+
+        Dim amt As Double = tmpLoad.NetAmount
+        'TODO:  For Voiding Transaction, JournalEntries must be void too.
+        '       Use field STATUS with a value 0 to make it INACTIVE.
+
         MsgBox("Transaction #" & tmpLoad.DollarID & " void.", MsgBoxStyle.Information)
         LoadActive()
     End Sub

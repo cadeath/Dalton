@@ -12,6 +12,25 @@
         ClearFields()
     End Sub
 
+    Private Sub ComputeTotal()
+        Dim tot As Double = 0
+        tot += CDbl(lbl1c.Text.Substring(1))
+        tot += CDbl(lbl5c.Text.Substring(1))
+        tot += CDbl(lbl10c.Text.Substring(1))
+        tot += CDbl(lbl25c.Text.Substring(1))
+        tot += CDbl(lbl1.Text.Substring(1))
+        tot += CDbl(lbl5.Text.Substring(1))
+        tot += CDbl(lbl10.Text.Substring(1))
+        tot += CDbl(lbl20.Text.Substring(1))
+        tot += CDbl(lbl50.Text.Substring(1))
+        tot += CDbl(lbl100.Text.Substring(1))
+        tot += CDbl(lbl200.Text.Substring(1))
+        tot += CDbl(lbl500.Text.Substring(1))
+        tot += CDbl(lbl1000.Text.Substring(1))
+
+        txtTotal.Text = String.Format("Php {0:#,###.00}", tot)
+    End Sub
+
     Private Sub ClearFields()
         txt1c.Text = "" : lbl1c.Text = "P 0.00"
         txt5c.Text = "" : lbl5c.Text = "P 0.00"
@@ -35,7 +54,15 @@
     ''' <param name="amt"></param>
     ''' <remarks></remarks>
     Private Sub ComputeMe(ByVal txt As TextBox, ByVal amt As Double)
-        If txt.Text = "" Then Exit Sub
+        If txt.Text = "" Then txt.Text = ""
+
+        Dim tmp As Double = 0
+        If IsNumeric(txt.Text) Then
+            tmp = CDbl(txt.Text)
+        Else
+            Exit Sub
+        End If
+
         Dim lbl As Label
         Select Case amt
             Case 0.01 : lbl = lbl1c
@@ -54,7 +81,9 @@
             Case Else : lbl = Nothing
         End Select
 
-        lbl.Text = "P " & CDbl(txt.Text) * amt
+        lbl.Text = "P " & tmp * amt
+
+        ComputeTotal()
     End Sub
 
 #Region "KeyPress"
@@ -202,6 +231,7 @@
         mySql &= String.Format(" WHERE DailyID = {0} AND Status = 1", dailyID)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim denoCnt As Integer = 0, denoValue As Double = 0, deno As String = ""
+        Dim denoType As String = ""
 
         For Each dr As DataRow In ds.Tables(fillData).Rows
             dr.Item("Status") = 0
@@ -211,19 +241,19 @@
         For cnt As Integer = 0 To 12 '13 Denominations
             denoCnt = 0 : denoValue = 0
             Select Case cnt
-                Case 0 : deno = "1c" : denoCnt = CInt(txt1c.Text) : denoValue = CDbl(lbl1c.Text.Substring(2))
-                Case 1 : deno = "5c" : denoCnt = CInt(txt5c.Text) : denoValue = CDbl(lbl5c.Text.Substring(2))
-                Case 2 : deno = "10c" : denoCnt = CInt(txt10c.Text) : denoValue = CDbl(lbl10c.Text.Substring(2))
-                Case 3 : deno = "25c" : denoCnt = CInt(txt25c.Text) : denoValue = CDbl(lbl25c.Text.Substring(2))
-                Case 4 : deno = "P1" : denoCnt = CInt(txt1.Text) : denoValue = CDbl(lbl1.Text.Substring(2))
-                Case 5 : deno = "P5" : denoCnt = CInt(txt5.Text) : denoValue = CDbl(lbl5.Text.Substring(2))
-                Case 6 : deno = "P10" : denoCnt = CInt(txt10.Text) : denoValue = CDbl(lbl10.Text.Substring(2))
-                Case 7 : deno = "P20" : denoCnt = CInt(txt20.Text) : denoValue = CDbl(lbl20.Text.Substring(2))
-                Case 8 : deno = "P50" : denoCnt = CInt(txt50.Text) : denoValue = CDbl(lbl50.Text.Substring(2))
-                Case 9 : deno = "P100" : denoCnt = CInt(txt100.Text) : denoValue = CDbl(lbl100.Text.Substring(2))
-                Case 10 : deno = "P200" : denoCnt = CInt(txt200.Text) : denoValue = CDbl(lbl200.Text.Substring(2))
-                Case 11 : deno = "P500" : denoCnt = CInt(txt500.Text) : denoValue = CDbl(lbl500.Text.Substring(2))
-                Case 12 : deno = "P1000" : denoCnt = CInt(txt1000.Text) : denoValue = CDbl(lbl1000.Text.Substring(2))
+                Case 0 : deno = "1c" : denoCnt = CInt(txt1c.Text) : denoValue = CDbl(lbl1c.Text.Substring(2)) : denoType = "COIN"
+                Case 1 : deno = "5c" : denoCnt = CInt(txt5c.Text) : denoValue = CDbl(lbl5c.Text.Substring(2)) : denoType = "COIN"
+                Case 2 : deno = "10c" : denoCnt = CInt(txt10c.Text) : denoValue = CDbl(lbl10c.Text.Substring(2)) : denoType = "COIN"
+                Case 3 : deno = "25c" : denoCnt = CInt(txt25c.Text) : denoValue = CDbl(lbl25c.Text.Substring(2)) : denoType = "COIN"
+                Case 4 : deno = "P1" : denoCnt = CInt(txt1.Text) : denoValue = CDbl(lbl1.Text.Substring(2)) : denoType = "COIN"
+                Case 5 : deno = "P5" : denoCnt = CInt(txt5.Text) : denoValue = CDbl(lbl5.Text.Substring(2)) : denoType = "COIN"
+                Case 6 : deno = "P10" : denoCnt = CInt(txt10.Text) : denoValue = CDbl(lbl10.Text.Substring(2)) : denoType = "COIN"
+                Case 7 : deno = "P20" : denoCnt = CInt(txt20.Text) : denoValue = CDbl(lbl20.Text.Substring(2)) : denoType = "BILL"
+                Case 8 : deno = "P50" : denoCnt = CInt(txt50.Text) : denoValue = CDbl(lbl50.Text.Substring(2)) : denoType = "BILL"
+                Case 9 : deno = "P100" : denoCnt = CInt(txt100.Text) : denoValue = CDbl(lbl100.Text.Substring(2)) : denoType = "BILL"
+                Case 10 : deno = "P200" : denoCnt = CInt(txt200.Text) : denoValue = CDbl(lbl200.Text.Substring(2)) : denoType = "BILL"
+                Case 11 : deno = "P500" : denoCnt = CInt(txt500.Text) : denoValue = CDbl(lbl500.Text.Substring(2)) : denoType = "BILL"
+                Case 12 : deno = "P1000" : denoCnt = CInt(txt1000.Text) : denoValue = CDbl(lbl1000.Text.Substring(2)) : denoType = "BILL"
             End Select
 
             If Not denoCnt = 0 Then
@@ -237,15 +267,12 @@
                     .Item("EncoderID") = UserID
                     .Item("SystemTime") = Now
                     .Item("Status") = 1
+                    .Item("MoneyType") = denoType
                 End With
                 ds.Tables(fillData).Rows.Add(dsNewRow)
                 database.SaveEntry(ds)
             End If
         Next
-
-    End Sub
-
-    Private Sub txt10_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt10.TextChanged
 
     End Sub
 End Class

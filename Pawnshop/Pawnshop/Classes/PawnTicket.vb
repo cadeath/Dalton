@@ -29,7 +29,7 @@
     Private _orDate As Date
     Private _lessPrincipal As Double
     Private _daysOverDue As Double
-    Private _delayInt As Double
+    'Private _delayInt As Double
     Private _penalty As Double
     Private _serviceCharge As Double
     Private _renewDue As Double
@@ -255,14 +255,14 @@
         End Get
     End Property
 
-    Public Property DelayInterest As Double
-        Set(ByVal value As Double)
-            _delayInt = value
-        End Set
-        Get
-            Return _delayInt
-        End Get
-    End Property
+    'Public Property DelayInterest As Double
+    '    Set(ByVal value As Double)
+    '        _delayInt = value
+    '    End Set
+    '    Get
+    '        Return _delayInt
+    '    End Get
+    'End Property
 
     Public Property Penalty As Double
         Set(ByVal value As Double)
@@ -310,6 +310,14 @@
         End Set
     End Property
 
+    Private _pullOut As Date
+    Public ReadOnly Property PullOutDate() As Date
+        Get
+            Return _pullOut
+        End Get
+    End Property
+
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -345,7 +353,7 @@
                 .Item("ORDate") = _orDate
                 .Item("LessPrincipal") = _lessPrincipal
                 .Item("DaysOverDue") = _daysOverDue
-                .Item("DelayInt") = _delayInt
+                '.Item("DelayInt") = _delayInt
                 .Item("Penalty") = _penalty
                 .Item("ServiceCharge") = _serviceCharge
                 .Item("RenewDue") = _renewDue
@@ -380,7 +388,7 @@
                 .Item("ORDate") = _orDate
                 .Item("LessPrincipal") = _lessPrincipal
                 .Item("DaysOverDue") = _daysOverDue
-                .Item("DelayInt") = _delayInt
+                '.Item("DelayInt") = _delayInt
                 .Item("Penalty") = _penalty
                 .Item("ServiceCharge") = _serviceCharge
                 .Item("RenewDue") = _renewDue
@@ -425,13 +433,14 @@
             _orDate = .Item("ORDate")
             _lessPrincipal = .Item("LessPrincipal")
             _daysOverDue = .Item("DaysOverDue")
-            _delayInt = .Item("DelayInt")
+            '_delayInt = .Item("DelayInt")
             _penalty = .Item("Penalty")
             _serviceCharge = .Item("ServiceCharge")
             _renewDue = .Item("RenewDue")
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
             _advanceInterest = .Item("AdvInt")
+            If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
         End With
     End Sub
 
@@ -462,13 +471,14 @@
             _orDate = .Item("ORDate")
             _lessPrincipal = .Item("LessPrincipal")
             _daysOverDue = .Item("DaysOverDue")
-            _delayInt = .Item("DelayInt")
+            '_delayInt = .Item("DelayInt")
             _penalty = .Item("Penalty")
             _serviceCharge = .Item("ServiceCharge")
             _renewDue = .Item("RenewDue")
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
             _advanceInterest = .Item("AdvInt")
+            If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
         End With
     End Sub
 
@@ -490,6 +500,7 @@
 
         If _status = "L" Then
             ChangeStatus("V")
+            RemoveJournal("PT# " & _pawnTicket)
             Exit Sub
         End If
 
@@ -498,6 +509,7 @@
         End If
 
         If _oldTicket <> 0 Then
+            'Has Old PawnTicket
             mySql = "SELECT * FROM " & fillData & " WHERE PawnTicket = " & _oldTicket
             ds = New DataSet
             ds = LoadSQL(mySql, fillData)
@@ -512,7 +524,6 @@
             With ds.Tables(fillData).Rows(0)
                 .Item("OrNum") = 0
                 .Item("OrDate") = New Date
-                .Item("Principal") = 0
                 .Item("DAYSOVERDUE") = 0
                 .Item("DelayINT") = 0
                 .Item("Penalty") = 0
@@ -522,8 +533,10 @@
                 .Item("AdvInt") = 0
             End With
             database.SaveEntry(ds, False)
+            RemoveJournal("PT# " & _oldTicket)
         Else
             ChangeStatus("L")
+            RemoveJournal("PT# " & _pawnTicket)
         End If
     End Sub
 
@@ -544,5 +557,6 @@
         ds.Tables(fillData).Rows(0).Item("PullOut") = dt
         database.SaveEntry(ds, False)
     End Sub
+
 #End Region
 End Class

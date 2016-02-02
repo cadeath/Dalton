@@ -5,6 +5,11 @@
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadBorrowings()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub ClearFields()
@@ -139,6 +144,9 @@
             .EncoderID = UserID
 
             .SaveBorrowings()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & BranchCode, "BORROW IN")
+            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & BranchCode)
         End With
 
         MsgBox("Borrowings Posted", MsgBoxStyle.Information)

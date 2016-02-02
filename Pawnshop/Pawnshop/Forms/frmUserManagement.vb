@@ -22,6 +22,13 @@
 
         ClearFields()
         LoadActive()
+        CheckAuthorization()
+    End Sub
+
+    Private Sub CheckAuthorization()
+        With POSuser
+            btnAdd.Enabled = .canUserManage
+        End With
     End Sub
 
     Private Sub LoadUser()
@@ -100,7 +107,7 @@
         priv &= "|"
 
         'Special
-        listChk = {chkCashInBank, chkCashOutBank, chkVoid}
+        listChk = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
         Next
@@ -133,7 +140,7 @@
                         chkList = {chkUM, chkUR, chkUS, chkBorrowings}
                         Console.WriteLine("Manager Length: " & privParts(y).Length)
                     Case 3 'Special
-                        chkList = {chkCashInBank, chkCashOutBank, chkVoid}
+                        chkList = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate}
                         Console.WriteLine("Special Length: " & privParts(y).Length)
                 End Select
 
@@ -183,6 +190,8 @@
                 chkCashInBank.Checked = tabStat
                 chkCashOutBank.Checked = tabStat
                 chkVoid.Checked = tabStat
+                chkPullOut.Checked = tabStat
+                chkMigrate.Checked = tabStat
         End Select
     End Sub
 

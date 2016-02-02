@@ -277,9 +277,9 @@ Partial Class frmInsurance
         Me.Label8.ForeColor = System.Drawing.SystemColors.Desktop
         Me.Label8.Location = New System.Drawing.Point(48, 93)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(48, 17)
+        Me.Label8.Size = New System.Drawing.Size(52, 17)
         Me.Label8.TabIndex = 28
-        Me.Label8.Text = "PT No:"
+        Me.Label8.Text = "Ref No:"
         '
         'dtpExpiry
         '

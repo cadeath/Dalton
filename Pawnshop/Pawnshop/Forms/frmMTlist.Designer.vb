@@ -59,11 +59,13 @@ Partial Class frmMTlist
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "ID"
+        Me.ColumnHeader1.Text = "#"
+        Me.ColumnHeader1.Width = 51
         '
         'ColumnHeader8
         '
         Me.ColumnHeader8.Text = "Ref#"
+        Me.ColumnHeader8.Width = 90
         '
         'ColumnHeader2
         '

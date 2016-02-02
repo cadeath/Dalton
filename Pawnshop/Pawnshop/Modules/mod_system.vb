@@ -10,10 +10,16 @@
 Module mod_system
 
 #Region "Global Variables"
+    Public DEV_MODE As Boolean = False
+    Public BETA_VERSION As String = "BETA 1.3"
+
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
     Public UserID As Integer = POSuser.UserID
-    Public BranchCode As String = "ROX"
+    Public BranchCode As String = GetOption("BranchCode")
+    Public branchName As String = GetOption("BranchName")
+    Public AREACODE As String = GetOption("BranchArea")
+    Public REVOLVING_FUND As String = GetOption("RevolvingFund")
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
@@ -32,6 +38,13 @@ Module mod_system
     Private storeDB As String = "tblDaily"
 
     Friend Function OpenStore() As Boolean
+        If MaintainBal = 0 Then
+            Dim ans As MsgBoxResult = _
+                MsgBox("Maintaining Balance is Zero(0)" + vbCrLf + "Are you sure you want to open the store?", _
+                       MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2)
+            If ans = MsgBoxResult.No Then Return False
+        End If
+
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
@@ -51,7 +64,7 @@ Module mod_system
         With dsNewRow
             .Item("CurrentDate") = CurrentDate
             .Item("MaintainBal") = MaintainBal
-            .Item("InitialBal") = InitialBal 
+            .Item("InitialBal") = InitialBal
             .Item("RepDep") = RepDep
             '.Item("CashCount")'No CashCount on OPENING
             .Item("Status") = 1
@@ -116,9 +129,51 @@ Module mod_system
             With ds.Tables(storeDB).Rows(0)
                 .Item("CashCount") = cc
                 .Item("Status") = 0
+                .Item("Closer") = POSuser.UserID
             End With
 
             database.SaveEntry(ds, False)
+
+            'Get the "Balance(as per computation)"
+            Dim AsPerComputation As Double = 0
+            Dim tmpDS As New DataSet
+            mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
+            mySql &= "FROM JOURNAL_ENTRIES WHERE "
+            mySql &= String.Format("TRANSDATE = '{0}'", CurrentDate.ToShortDateString)
+            mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+            mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
+            tmpDS = LoadSQL(mySql)
+            For Each dr As DataRow In tmpDS.Tables(0).Rows
+                AsPerComputation += dr.Item("DEBIT")
+            Next
+
+            tmpDS = New DataSet
+            mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
+            mySql &= "FROM JOURNAL_ENTRIES WHERE "
+            mySql &= String.Format("TRANSDATE = '{0}'", CurrentDate.ToShortDateString)
+            mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' "
+            mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
+            tmpDS = LoadSQL(mySql)
+            For Each dr As DataRow In tmpDS.Tables(0).Rows
+                AsPerComputation -= dr.Item("CREDIT")
+            Next
+
+            Console.WriteLine(">>>>>>> Computation: " & AsPerComputation.ToString("Php #,#00.00"))
+
+            If AsPerComputation <> cc Then
+                Dim tmpOverShort As Double = Math.Abs(AsPerComputation) - Math.Abs(cc)
+                tmpOverShort = Math.Abs(tmpOverShort)
+                If AsPerComputation < cc Then
+                    'Overage
+                    AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False)
+                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False)
+                Else
+                    'Shortage
+                    tmpOverShort = Math.Abs(tmpOverShort)
+                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False)
+                    AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False)
+                End If
+            End If
 
             UpdateOptions("CurrentBalance", cc)
             MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
@@ -216,8 +271,8 @@ Module mod_system
     End Function
 
     Friend Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
-        str = str.Replace("'", "\'")
-        str = str.Replace("""", "\""")
+        str = str.Replace("'", "''")
+        str = str.Replace("""", """""")
 
         If special <> Nothing Then
             str = str.Replace(special, "")
@@ -258,5 +313,17 @@ Module mod_system
         End If
 
         Return isGood
+    End Function
+
+    Friend Function GetFirstDate(ByVal curDate As Date) As Date
+        Dim firstDay = DateSerial(curDate.Year, curDate.Month, 1)
+        Return firstDay
+    End Function
+
+    Friend Function GetLastDate(ByVal curDate As Date) As Date
+        Dim original As DateTime = curDate  ' The date you want to get the last day of the month for
+        Dim lastOfMonth As DateTime = original.Date.AddDays(-(original.Day - 1)).AddMonths(1).AddDays(-1)
+
+        Return lastOfMonth
     End Function
 End Module

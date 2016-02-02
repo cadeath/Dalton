@@ -1,6 +1,8 @@
 ﻿Public Class CashInOutTransaction
 
     Private fillData As String = "tblCashTrans"
+    Private AUCTION_REDEEM As String = "AUCTION REDEEM"
+    'Private NO_ENTRIES As String = "Fund from Head Office"
 
 #Region "Variables and Procedures"
     Private _transID As Integer
@@ -146,5 +148,18 @@
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
+
+        Dim CashCount_Reflect As String
+        CashCount_Reflect = _category
+        If _category = AUCTION_REDEEM Then CashCount_Reflect = _transName
+        'If _transName = NO_ENTRIES Then Exit Sub 'Replenishment No Entries
+        Select Case _type
+            Case "Receipt"
+                AddJournal(_amount, "Debit", "Revolving Fund", , CashCount_Reflect)
+                AddJournal(_amount, "Credit", _transName)
+            Case "Disbursement"
+                AddJournal(_amount, "Credit", "Revolving Fund", , CashCount_Reflect)
+                AddJournal(_amount, "Debit", _transName)
+        End Select
     End Sub
 End Class

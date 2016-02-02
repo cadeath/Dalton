@@ -42,7 +42,7 @@
     Private Sub ComputeTotal()
         If Not IsNumeric(txtRate.Text) Then Exit Sub
 
-        Dim getAmount As Integer = cboDenomination.Text.Substring(1)
+        Dim getAmount As Integer = cboDenomination.Text
         Dim getRate As Double = CDbl(txtRate.Text)
         Console.WriteLine("Rate: " & getRate)
         Console.WriteLine("Amount: " & getAmount)
@@ -99,6 +99,9 @@
             .NetAmount = txtTotal.Text.Substring(4)
 
             .SaveDollar()
+
+            AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar")
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", , "DOLLAR BUYING")
         End With
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)

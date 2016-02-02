@@ -94,8 +94,12 @@
     <Reference Include="DeathCodez">
       <HintPath>.\DeathCodez.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -111,7 +115,9 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms">
       <Private>True</Private>
     </Reference>
@@ -141,11 +147,11 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
     <Compile Include="Classes\Client.vb" />
+    <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
@@ -155,6 +161,9 @@
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
+    <Compile Include="Classes\RandomKeyGenerator.vb" />
+    <Compile Include="Classes\Reporting.vb" />
+    <Compile Include="Classes\rptActionReq.vb" />
     <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
@@ -165,6 +174,24 @@
       <DependentUpon>devVerifyESK.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\devVerifyESK.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_encrypt.Designer.vb">
+      <DependentUpon>dev_encrypt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_encrypt.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_ORview.Designer.vb">
+      <DependentUpon>dev_ORview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_ORview.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_report.Designer.vb">
+      <DependentUpon>dev_report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_report.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\diagAuthorization.Designer.vb">
@@ -243,12 +270,6 @@
       <DependentUpon>frmCashCount.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCashCount.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmCashInOut.Designer.vb">
-      <DependentUpon>frmCashInOut.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmCashInOut.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmClient.Designer.vb">
@@ -351,8 +372,11 @@
     <Compile Include="Modules\dailyGospel.vb" />
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
+    <Compile Include="Modules\JournalEntries.vb" />
+    <Compile Include="Modules\migrate.vb" />
     <Compile Include="Modules\mod_system.vb" />
     <Compile Include="Modules\newSetup.vb" />
+    <Compile Include="Modules\pawning.vb" />
     <Compile Include="Modules\security.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -381,10 +405,62 @@
     <Compile Include="POS\frmPOS.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\dsPrint.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrint.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsPrint.vb">
+      <DependentUpon>dsPrint.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsReports.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReports.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsReports.vb">
+      <DependentUpon>dsReports.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\frmReport.Designer.vb">
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\frmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\frmSegreList.Designer.vb">
+      <DependentUpon>frmSegreList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmSegreList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\qryCashInOut.Designer.vb">
+      <DependentUpon>qryCashInOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryCashInOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\qryDate.Designer.vb">
+      <DependentUpon>qryDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\qryLoan.Designer.vb">
+      <DependentUpon>qryLoan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryLoan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\qryMoneyTransfer.Designer.vb">
+      <DependentUpon>qryMoneyTransfer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryMoneyTransfer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\qrySequence.Designer.vb">
+      <DependentUpon>qrySequence.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qrySequence.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -396,6 +472,15 @@
     <EmbeddedResource Include="Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_encrypt.resx">
+      <DependentUpon>dev_encrypt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_ORview.resx">
+      <DependentUpon>dev_ORview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_report.resx">
+      <DependentUpon>dev_report.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagAuthorization.resx">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
@@ -434,9 +519,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashCount.resx">
       <DependentUpon>frmCashCount.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmCashInOut.resx">
-      <DependentUpon>frmCashInOut.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClient.resx">
       <DependentUpon>frmClient.vb</DependentUpon>
@@ -501,11 +583,100 @@
     <EmbeddedResource Include="POS\frmPOS.resx">
       <DependentUpon>frmPOS.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSegreList.resx">
+      <DependentUpon>frmSegreList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\layout04.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\layout03.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\layout01.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\layout02.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\layout05.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryCashInOut.resx">
+      <DependentUpon>qryCashInOut.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryDate.resx">
+      <DependentUpon>qryDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryLoan.resx">
+      <DependentUpon>qryLoan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryMoneyTransfer.resx">
+      <DependentUpon>qryMoneyTransfer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qrySequence.resx">
+      <DependentUpon>qrySequence.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Borrowings.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_CashCount.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_CashCountSheet.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_CashInOutSummary.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Dollar.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Insurance.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_ItemPullout.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_LoanRegister.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_LoanRenew.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_moneyTransfer.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Outstanding.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_pawning.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Segregated.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="doc\ExpiryFormat.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="doc\JournalEntries.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="dsPrint.datasource" />
+    <None Include="dsReports.datasource" />
+    <None Include="Template\Import Template.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\app.manifest">
       <SubType>Designer</SubType>
     </None>
@@ -517,6 +688,28 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reports\dsPrint.xsc">
+      <DependentUpon>dsPrint.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsPrint.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrint.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reports\dsPrint.xss">
+      <DependentUpon>dsPrint.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsReports.xsc">
+      <DependentUpon>dsReports.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsReports.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReports.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Reports\dsReports.xss">
+      <DependentUpon>dsReports.xsd</DependentUpon>
     </None>
     <None Include="W3W1LH4CKU.FDB">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -550,6 +743,35 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="README-DEVELOPER.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
