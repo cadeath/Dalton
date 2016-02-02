@@ -67,13 +67,29 @@
         database.SaveEntry(ds)
     End Sub
 
-    Friend Sub RemoveJournal(ByVal DebitCredit As String, ByVal Amt As Double, ByVal AccountName As String)
-        Dim mySql As String, tblName As String = "tblJournal", TransID As Integer = GetTransID(AccountName)
-        mySql = "SELECT * FROM " & tblName & " WHERE JRL_" & DebitCredit & " = " & Amt & " AND JRL_TransID = " & TransID
-        Dim ds As DataSet = LoadSQL(mySql, tblName)
+    'Friend Sub RemoveJournal(ByVal DebitCredit As String, ByVal Amt As Double, ByVal AccountName As String)
+    '    Dim mySql As String, tblName As String = "tblJournal", TransID As Integer = GetTransID(AccountName)
+    '    mySql = "SELECT * FROM " & tblName & " WHERE JRL_" & DebitCredit & " = " & Amt & " AND JRL_TransID = " & TransID
+    '    Dim ds As DataSet = LoadSQL(mySql, tblName)
 
-        ds.Tables(tblName).Rows(0).Item("STATUS") = 0
+    '    ds.Tables(tblName).Rows(0).Item("STATUS") = 0
+    '    database.SaveEntry(ds, False)
+    'End Sub
+
+    Friend Sub RemoveJournal(srcStr As String)
+        Dim fillData As String = "tblJournal"
+        Dim mySql As String = "SELECT * FROM tblJournal WHERE "
+        mySql &= String.Format("REMARKS LIKE '%{0}%'", srcStr)
+
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        If ds.Tables(fillData).Rows.Count = 0 Then MsgBox("JOURNAL ENTRIES NOT FOUND", MsgBoxStyle.Critical, "DEVELOPER WARNING") : Exit Sub
+
+        For Each dr As DataRow In ds.Tables(fillData).Rows
+            dr.Item("STATUS") = 0
+        Next
+
         database.SaveEntry(ds, False)
+        Console.WriteLine(srcStr & " REMOVED FROM JOURNAL ENTRIES...")
     End Sub
 
     Private Function GetTransID(ByVal AccountName As String) As Integer

@@ -140,7 +140,11 @@
         mySql &= String.Format("PULLOUT BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         Console.WriteLine(mySql)
 
-        frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", , False)
+        Dim addParameters As New Dictionary(Of String, String)
+        addParameters.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMM yyyy").ToUpper)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", addParameters)
         frmReport.Show()
     End Sub
 

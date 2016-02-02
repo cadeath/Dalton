@@ -8,6 +8,11 @@
         ClearFields()
         LoadActive()
         txtSearch.Focus()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub ClearFields()
