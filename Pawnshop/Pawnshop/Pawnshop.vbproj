@@ -212,12 +212,6 @@
     <Compile Include="Forms\frmCashInOut2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmCashInOutBrowse.Designer.vb">
-      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmCashInOutBrowse.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmCIO_List.Designer.vb">
       <DependentUpon>frmCIO_List.vb</DependentUpon>
     </Compile>
@@ -492,9 +486,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashInOut2.resx">
       <DependentUpon>frmCashInOut2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmCashInOutBrowse.resx">
-      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCIO_List.resx">
       <DependentUpon>frmCIO_List.vb</DependentUpon>
