@@ -500,6 +500,7 @@
 
         If _status = "L" Then
             ChangeStatus("V")
+            RemoveJournal("PT# " & _pawnTicket)
             Exit Sub
         End If
 
@@ -508,6 +509,7 @@
         End If
 
         If _oldTicket <> 0 Then
+            'Has Old PawnTicket
             mySql = "SELECT * FROM " & fillData & " WHERE PawnTicket = " & _oldTicket
             ds = New DataSet
             ds = LoadSQL(mySql, fillData)
@@ -531,8 +533,10 @@
                 .Item("AdvInt") = 0
             End With
             database.SaveEntry(ds, False)
+            RemoveJournal("PT# " & _oldTicket)
         Else
             ChangeStatus("L")
+            RemoveJournal("PT# " & _pawnTicket)
         End If
     End Sub
 

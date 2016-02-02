@@ -11,7 +11,7 @@ Module mod_system
 
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
-    Public BETA_VERSION As String = "BETA 1.2.1"
+    Public BETA_VERSION As String = "BETA 1.3"
 
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
@@ -161,7 +161,7 @@ Module mod_system
             Console.WriteLine(">>>>>>> Computation: " & AsPerComputation.ToString("Php #,#00.00"))
 
             If AsPerComputation <> cc Then
-                Dim tmpOverShort As Double = Math.Abs(AsPerComputation) - cc
+                Dim tmpOverShort As Double = Math.Abs(AsPerComputation) - Math.Abs(cc)
                 tmpOverShort = Math.Abs(tmpOverShort)
                 If AsPerComputation < cc Then
                     'Overage

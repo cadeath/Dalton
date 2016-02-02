@@ -81,6 +81,10 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to VOID this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical + vbDefaultButton2, "W A R N I N G")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
         Dim transDate As Date
         If PawnItem.Status = "X" Then
             transDate = PawnItem.OfficialReceiptDate
@@ -96,6 +100,7 @@ Public Class frmPawnItem
         If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
 
         PawnItem.VoidCancelTicket()
+
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
         frmPawning.LoadActive()
         Me.Close()
@@ -361,17 +366,17 @@ Public Class frmPawnItem
             .SaveTicket(False)
 
             If isOldItem Then
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket, ITEM_REDEEM)
-                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
-                AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
-                AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
-                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "PT# " & .PawnTicket)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket)
+                AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
+                AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket)
             Else
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "PT# " & .PawnTicket, ITEM_REDEEM)
-                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "PT# " & .PawnTicket)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket)
                 If daysDue > 3 Then
-                    AddJournal(.Interest, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
-                    AddJournal(.Penalty, "Credit", "Interest on Loans", "PT# " & .PawnTicket)
+                    AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
+                    AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 End If
             End If
         End With
@@ -611,7 +616,7 @@ Public Class frmPawnItem
         RenewDisabled(PawnItem.CategoryID) ' UPDATE002
 
         'Get New Number
-        Dim mySql As String = "SELECT * FROM tblPawn WHERE OldTicket = " & PawnItem.PawnTicket
+        Dim mySql As String = "SELECT * FROM tblPawn WHERE STATUS <> 'V' AND OldTicket = " & PawnItem.PawnTicket
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count <> 0 Then
             lblNPT.Visible = True

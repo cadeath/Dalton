@@ -188,8 +188,19 @@
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
 
+        RemoveJournal("Ref# " & _dollarID)
         Console.WriteLine("Transaction #" & _dollarID & " void")
     End Sub
+
+    Public Function LastIDNumber() As Single
+        Dim mySql As String = "SELECT * FROM tblDollar ORDER BY DOLLARID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("DollarID")
+    End Function
 #End Region
 
 End Class

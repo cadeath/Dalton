@@ -1,6 +1,7 @@
 ﻿Public Class frmCashInOutBrowse
 
     Private fillData As String = "tblCashTrans"
+    Private coiH As New Hashtable
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -21,10 +22,12 @@
         mySql = "SELECT * FROM " & fillData & " ORDER BY TransDate DESC"
         Dim ds As DataSet = LoadSQL(mySql)
 
+        coiH.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpCIO As New CashInOutTransaction
             tmpCIO.LoadCashIObyRow(dr)
             AddItem(tmpCIO)
+            coiH.Add(tmpCIO.TransactionID, tmpCIO.Transaction)
         Next
     End Sub
 
@@ -56,4 +59,20 @@
             AddItem(tmpCIO)
         Next
     End Sub
+
+    Private Sub btnVoid_Click(sender As System.Object, e As System.EventArgs) Handles btnVoid.Click
+        Dim idx As Integer
+        idx = lvList.FocusedItem.Index
+        MsgBox("TransID: " & GetKeyByIndex(coiH, idx))
+    End Sub
+
+    Private Function GetKeyByIndex(ht As Hashtable, idx As Integer) As String
+        Dim i As Integer
+        For Each el As DictionaryEntry In ht
+            If i = idx Then Return el.Key
+            i += 1
+        Next
+
+        Return "Out of Range"
+    End Function
 End Class
