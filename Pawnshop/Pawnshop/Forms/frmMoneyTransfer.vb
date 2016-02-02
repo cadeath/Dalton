@@ -301,8 +301,8 @@
                         AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
                     Else
-                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "ME# " & idME)
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "ME# " & idME, "PADALA OUT")
+                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
                     End If
                 Case "Western Union"
                     If rbSend.Checked Then
