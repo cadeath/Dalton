@@ -141,6 +141,7 @@
             .isGenerated = False
             .ChargeCode = "iremit to gprs"
             .hasPayoutCommission = True
+            .ReceiveOnly = True
         End With
         daltonService(11) = tmp
 
@@ -536,7 +537,7 @@
         ds = LoadSQL(mySql)
 
         Console.WriteLine(mySql)
-        Console.WriteLine("Entries" & ds.Tables(0).Rows.Count)
+        Console.WriteLine("Entries >> " & ds.Tables(0).Rows.Count)
         If ds.Tables(0).Rows.Count = 0 Then Console.WriteLine("No charges!!! Charge Code not found.") : Return 0
 
         For Each dr As DataRow In ds.Tables(0).Rows
@@ -570,9 +571,9 @@
                             commission = 0
                     End Select
 
-                    If Not (remarks = "Payout" And rbReceive.Checked) Then
-                        ServChrge = 0
-                    End If
+                    'If Not (remarks = "Payout" And rbReceive.Checked) Then
+                    '    ServChrge = 0
+                    'End If
                 End If
 
                 Return ServChrge
