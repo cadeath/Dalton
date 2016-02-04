@@ -62,7 +62,10 @@
         Dim ans = InputBox("What is your reason for VOIDING", "Voiding transactions")
         If ans.Length <= 10 Then MsgBox("Please input valid reason", MsgBoxStyle.Critical) : Exit Sub
 
-        If CurrentDate.Date <> tmpLoad.TransactionDate Then MsgBox("You cannot void transactions in a DIFFERENT date", MsgBoxStyle.Critical) : Exit Sub
+        If CurrentDate.Date <> tmpLoad.TransactionDate Then
+            MsgBox("You cannot void transactions in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         tmpLoad.VoidTransaction(ans)
 

@@ -41,6 +41,14 @@ Public Class frmPawnItem
         LoadInformation()
         LoadAppraisers()
         If transactionType = "L" Then NewLoan()
+
+    End Sub
+
+    Private Sub Authorization()
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
 #Region "GUI"
@@ -295,7 +303,7 @@ Public Class frmPawnItem
             btnRedeem.Text = "&Redeem"
             txtRedeem.BackColor = Drawing.SystemColors.Control
             transactionType = "D"
-            btnVoid.Enabled = True
+            Authorization()
             btnSave.Enabled = False
 
             LoadPawnTicket(PawnItem, "D")
@@ -309,7 +317,7 @@ Public Class frmPawnItem
         Redeem()
         btnSave.Enabled = True
         btnRedeem.Text = "&Cancel"
-        btnVoid.Enabled = False
+        Authorization()
     End Sub
 
     Private Sub txtRedeem_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRedeem.KeyPress
@@ -323,7 +331,7 @@ Public Class frmPawnItem
             btnRenew.Text = "Rene&w"
             txtRenew.BackColor = Drawing.SystemColors.Control
             transactionType = "D"
-            btnVoid.Enabled = True
+            Authorization()
             btnSave.Enabled = False
 
             LoadPawnTicket(PawnItem, "D")
@@ -337,7 +345,7 @@ Public Class frmPawnItem
         Redeem("R")
         btnSave.Enabled = True
         btnRenew.Text = "&Cancel"
-        btnVoid.Enabled = False
+        Authorization()
     End Sub
 
     Private Sub txtRenew_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRenew.KeyPress
@@ -593,7 +601,7 @@ Public Class frmPawnItem
         If transactionType = "D" Then
             LockFields(True)
             btnSave.Enabled = False : btnRenew.Enabled = True
-            btnRedeem.Enabled = True : btnVoid.Enabled = True
+            btnRedeem.Enabled = True : Authorization()
         End If
 
         ChangeForm()
@@ -609,7 +617,7 @@ Public Class frmPawnItem
                 LockFields(1)
             Case "X"
                 LockFields(1)
-                btnVoid.Enabled = True
+                Authorization()
         End Select
 
         'If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
@@ -769,11 +777,6 @@ Public Class frmPawnItem
 
     Private Sub LoadInformation()
         LoadPawnInfo()
-
-        'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
     End Sub
 
     Private Sub LoadPawnInfo()
@@ -882,7 +885,7 @@ Public Class frmPawnItem
         cboAppraiser.Enabled = Not st
         btnRenew.Enabled = Not st
         btnRedeem.Enabled = Not st
-        btnVoid.Enabled = Not st
+        If POSuser.canVoid Then btnVoid.Enabled = Not st
         btnSave.Enabled = Not st
     End Sub
 

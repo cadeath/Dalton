@@ -331,6 +331,7 @@ Public Class ComputerUser
 
         'Special
         y = 3
+        Console.WriteLine(parts(y))
         _cashInBank = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _cashOutBank = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _void = IIf(parts(y).Substring(2, 1) = "1", True, False)
@@ -463,9 +464,9 @@ Public Class ComputerUser
                 .Item("UserPass") = Encrypt(_password)
                 .Item("FullName") = _fullName
                 .Item("Privilege") = _privilege
-                .Item("LastLogin") = _lastLogin
+                '.Item("LastLogin") = _lastLogin 'First Login no Last Login
                 .Item("EncoderID") = _encoderID
-                .Item("SystemInfo") = Now
+                .Item("SystemInfo") = Now.Date
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
