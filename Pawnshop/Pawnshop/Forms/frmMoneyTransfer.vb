@@ -353,6 +353,7 @@
 
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        Dim CashCount_Name As String = ""
 
         Dim transID As Integer = 0
         Dim idx As Integer = cboType.SelectedIndex
@@ -376,6 +377,7 @@
             .ReferenceNumber = txtRefNum.Text
             .TransferAmount = txtAmount.Text
             .ServiceCharge = txtCharge.Text
+            .Commission = commission
             .NetAmount = txtNetAmount.Text
             .Location = cboLocation.Text
             .Status = "A" 'Active
@@ -418,18 +420,14 @@
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber)
                     End If
-                Case "GPRS - GPRS to Smart Money", "GPRS - Smartmoney To GPRS", "GPRS - Smartmoney To GPRS", _
-                    "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", "GPRS - GPRS to BANK (DBP)", _
-                    "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", _
-                    "GPRS - GPRS to Moneygram", "GPRS - Moneygram to GPRS"
-
-                    Dim CashCount_Name As String = ""
+                Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
+                    "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
+                    "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram", "GPRS - Moneygram to GPRS"
 
                     Select Case cboType.Text
                         Case "GPRS - GPRS to Smart Money"
                             CashCount_Name = "GPRS-SmartMoney"
-                        Case "GPRS - Smartmoney To GPRS"
-                            CashCount_Name = "SmartMoney-GPRS"
+
                         Case "GPRS - GPRS to BANK (UCPB/PNB)"
                             CashCount_Name = "GPRS-(UCPB/PNB)"
                         Case "GPRS - GPRS to BANK (BDO/Chinabank)"
@@ -458,9 +456,19 @@
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
-                
-                        ' 3995 gprsRemitFund debit = 3980 rf credit + 15 income credit
+
+
                     End If
+                    ' ISSUE: 0001
+                    ' GPRS - Smartmoney To GPRS, wrong Journal Entries
+                Case "GPRS - Smartmoney To GPRS"
+                    ' Amt 4000 | 3995 gprsRemitFund debit = 3980 rf credit + 15 income credit
+                    CashCount_Name = "SmartMoney-GPRS"
+
+                    AddJournal(.NetAmount - (basicCharges - commission), "Debit" _
+                               , "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
+                    AddJournal(.NetAmount - basicCharges, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
+                    AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
             End Select
 
             .Save()
@@ -596,6 +604,9 @@
         basicCharges = GetCharge(CDbl(txtAmount.Text), FindServices(cboType.Text).ChargeCode)
         txtCharge.Text = basicCharges
         ComputeNet()
+
+        Console.WriteLine(String.Format("Amount: {0} | ServiceCharge: {1} | Commission: {2}", _
+                                        txtAmount.Text, basicCharges, commission))
     End Sub
 
     Private Function FindServices(str As String) As MoneyTransferService
@@ -611,7 +622,11 @@
         If txtAmount.Text = "" Then Exit Sub
 
         Dim net As Double = CDbl(txtCharge.Text) + CDbl(txtAmount.Text)
-
+        ' ISSUE: 0001 02/04/2016
+        ' Payout Service Charge, auto deduct
+        If daltonService(cboType.SelectedIndex).ReceiveOnly Then
+            net = CDbl(txtAmount.Text) - CDbl(txtCharge.Text)
+        End If
         txtNetAmount.Text = net
     End Sub
 
