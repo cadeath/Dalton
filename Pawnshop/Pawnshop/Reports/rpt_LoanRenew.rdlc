@@ -1458,7 +1458,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1992,10 +1991,10 @@
     </PageFooter>
     <PageHeight>8.5in</PageHeight>
     <PageWidth>11in</PageWidth>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
     <Style />
   </Page>
   <rd:ReportID>18966ebf-622f-434b-b114-a12187d85e30</rd:ReportID>

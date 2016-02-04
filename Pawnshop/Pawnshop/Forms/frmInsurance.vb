@@ -126,6 +126,13 @@
         Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        ' ISSUE: 0001
+        ' Locking Insurance voiding exclusive for the same DATE
+        If curInsurance.TransactionDate.Date <> CurrentDate.Date Then
+            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
         curInsurance.VoidTransaction()
         MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
         Me.Close()

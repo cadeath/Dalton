@@ -24,10 +24,11 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtUrl = New System.Windows.Forms.TextBox()
-        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.lblStatus = New System.Windows.Forms.Label()
+        Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -43,22 +44,13 @@ Partial Class frmMain
         '
         Me.txtUrl.Location = New System.Drawing.Point(12, 25)
         Me.txtUrl.Name = "txtUrl"
-        Me.txtUrl.Size = New System.Drawing.Size(332, 20)
+        Me.txtUrl.Size = New System.Drawing.Size(199, 20)
         Me.txtUrl.TabIndex = 1
         Me.txtUrl.Text = "D:\cadeath\Documents\RPS\AIS_JUL2010a.FDB"
         '
-        'btnBrowse
-        '
-        Me.btnBrowse.Location = New System.Drawing.Point(350, 23)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(39, 23)
-        Me.btnBrowse.TabIndex = 2
-        Me.btnBrowse.Text = "..."
-        Me.btnBrowse.UseVisualStyleBackColor = True
-        '
         'btnExtract
         '
-        Me.btnExtract.Location = New System.Drawing.Point(12, 51)
+        Me.btnExtract.Location = New System.Drawing.Point(15, 262)
         Me.btnExtract.Name = "btnExtract"
         Me.btnExtract.Size = New System.Drawing.Size(88, 34)
         Me.btnExtract.TabIndex = 3
@@ -67,35 +59,53 @@ Partial Class frmMain
         '
         'pbLoading
         '
-        Me.pbLoading.Location = New System.Drawing.Point(0, 37)
+        Me.pbLoading.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pbLoading.Location = New System.Drawing.Point(0, 304)
         Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(398, 16)
+        Me.pbLoading.Size = New System.Drawing.Size(227, 16)
         Me.pbLoading.TabIndex = 4
         Me.pbLoading.Visible = False
         '
         'lblStatus
         '
         Me.lblStatus.AutoSize = True
-        Me.lblStatus.Location = New System.Drawing.Point(12, 91)
+        Me.lblStatus.Location = New System.Drawing.Point(109, 283)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(24, 13)
         Me.lblStatus.TabIndex = 5
         Me.lblStatus.Text = "Idle"
         '
+        'MonthCalendar1
+        '
+        Me.MonthCalendar1.Location = New System.Drawing.Point(12, 87)
+        Me.MonthCalendar1.Name = "MonthCalendar1"
+        Me.MonthCalendar1.TabIndex = 6
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(9, 65)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(88, 13)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "Last Pullout Date"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(398, 113)
+        Me.ClientSize = New System.Drawing.Size(227, 320)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.MonthCalendar1)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.pbLoading)
         Me.Controls.Add(Me.btnExtract)
-        Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.txtUrl)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Database Extractor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -103,9 +113,10 @@ Partial Class frmMain
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtUrl As System.Windows.Forms.TextBox
-    Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents btnExtract As System.Windows.Forms.Button
     Friend WithEvents pbLoading As System.Windows.Forms.ProgressBar
     Friend WithEvents lblStatus As System.Windows.Forms.Label
+    Friend WithEvents MonthCalendar1 As System.Windows.Forms.MonthCalendar
+    Friend WithEvents Label2 As System.Windows.Forms.Label
 
 End Class

@@ -73,6 +73,11 @@ Public Class frmMain
             Application.DoEvents()
         Next
 
+        'Extracting Segregated List
+        'DeveloperConsole("Extracting EXPIRY LIST")
+        'mySql = "SELECT * FROM " & LOANTABLE
+        'mySql &= "STATUS = 'T' AND AUCT_DATE"
+
         'Save Excel
         oWB.SaveAs(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\EXTRACTEDDATA.xlsx")
         oSheet = Nothing

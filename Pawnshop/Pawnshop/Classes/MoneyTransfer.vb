@@ -137,6 +137,17 @@
         End Get
     End Property
 
+    Private _commission As Double
+    Public Property Commission() As Double
+        Get
+            Return _commission
+        End Get
+        Set(ByVal value As Double)
+            _commission = value
+        End Set
+    End Property
+
+
     Public Property EncoderID As Integer
         Set(ByVal value As Integer)
             _encoderID = value
@@ -203,6 +214,7 @@
             .Item("Amount") = _amount
             .Item("Location") = _location
             .Item("ServiceCharge") = _service
+            .Item("Commission") = _commission
             .Item("NetAmount") = _netAmount
             .Item("Status") = _status
             .Item("EncoderID") = _encoderID
