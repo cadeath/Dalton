@@ -144,10 +144,21 @@
     Public Sub VoidBorrowings()
         mySql = "SELECT * FROM " & fillData & " WHERE brwID = " & _borrowID
         Dim ds As DataSet = LoadSQL(mySql, fillData)
-        Dim cur As String = ds.Tables(0).Rows(0).Item("Status")
         ds.Tables(0).Rows(0).Item("Status") = "V" & ds.Tables(0).Rows(0).Item("Status")
+        database.SaveEntry(ds, False)
 
+        RemoveJournal("Ref# " & _borrowID)
         Console.WriteLine(String.Format("Transaction {0} void.", _borrowID))
     End Sub
+
+    Public Function LastIDNumber() As Single
+        Dim mySql As String = "SELECT * FROM tblBorrow ORDER BY BrwID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("BrwID")
+    End Function
 #End Region
 End Class

@@ -63,7 +63,11 @@
         End If
         Dim ds As DataSet = LoadSQL(mySql)
 
-        If ds.Tables(0).Rows.Count = lvPawners.Items.Count Then Exit Sub
+        'HACK
+        'Add proper PAWNING REFRESHER if display is not the same with the query
+        If ds.Tables(0).Rows.Count = lvPawners.Items.Count And lvPawners.Items.Count > 10 Then
+            Exit Sub
+        End If
 
         lvPawners.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows

@@ -24,14 +24,16 @@ Public Class frmExtractor
     End Sub
 
     Private Sub FormInit()
+        Dim selectedDate As Date = MonCalendar.SelectionStart
+
         Select Case FormType
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", Now.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Expiry"
             Case ExtractType.JournalEntry
                 Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", Now.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
                 Me.Text &= " - Journal Entry"
         End Select
     End Sub
@@ -110,6 +112,18 @@ Public Class frmExtractor
         End While
 
         Dim verified_url As String
+
+        Select Case FormType
+            Case ExtractType.Expiry
+                Console.WriteLine("Expiry Type Activated")
+                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                Me.Text &= " - Expiry"
+            Case ExtractType.JournalEntry
+                Console.WriteLine("Journal Entry Type Activated")
+                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+                Me.Text &= " - Journal Entry"
+        End Select
+
         Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then

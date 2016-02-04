@@ -8,6 +8,11 @@
         ClearField()
         LoadActive()
         txtSearch.Focus()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub ClearField()
@@ -111,7 +116,9 @@
         End If
 
         tmpMT.VoidTransaction(ans)
-        MsgBox(String.Format("Transaction #{0} is now void.", tmpMT.ReferenceNumber), MsgBoxStyle.Information, "Transaction Void")
+        MsgBox(String.Format("Transaction #{0} is now void.", _
+                             IIf(tmpMT.ServiceType = "Pera Padala", tmpMT.TransactionID, tmpMT.ReferenceNumber), _
+                             MsgBoxStyle.Information, "Transaction Void"))
         LoadActive()
     End Sub
 

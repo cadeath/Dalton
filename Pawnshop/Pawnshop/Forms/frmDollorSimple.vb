@@ -100,8 +100,8 @@
 
             .SaveDollar()
 
-            AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar")
-            AddJournal(.NetAmount, "Credit", "Revolving Fund", , "DOLLAR BUYING")
+            AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber)
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING")
         End With
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)

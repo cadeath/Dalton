@@ -992,7 +992,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=ReportItems!txtCashOnHand.Value - ABS(ReportItems!txtBalance.Value)</Value>
+                <Value>=ReportItems!txtCashOnHand.Value - ReportItems!txtBalance.Value</Value>
                 <Style>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>

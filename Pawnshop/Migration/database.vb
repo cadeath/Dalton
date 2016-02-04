@@ -9,14 +9,12 @@
 
 Friend Module database
     Public con As OdbcConnection
-    'Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
     Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "a1.0.16"
     Private language() As String = _
         {"Connection error failed."}
 
@@ -87,19 +85,6 @@ Friend Module database
 
         dbClose()
         Return True
-    End Function
-
-    Friend Function DBCompatibilityCheck() As Boolean
-        Console.WriteLine("Checking database compatibility...")
-        Dim strDB As String = GetOption("DBVersion")
-
-        If DBversion = strDB Then
-            Console.WriteLine("Success!")
-            Return True
-        Else
-            Console.WriteLine("Database Version didn't match... " & strDB)
-            Return False
-        End If
     End Function
 
     ' Module 002

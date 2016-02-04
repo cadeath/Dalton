@@ -87,6 +87,26 @@
         End Set
     End Property
 
+    Private _sendOnly As Boolean = False
+    Public Property SendOnly() As Boolean
+        Get
+            Return _sendOnly
+        End Get
+        Set(ByVal value As Boolean)
+            _sendOnly = value
+        End Set
+    End Property
+
+    Private _receiveOnly As Boolean = False
+    Public Property ReceiveOnly() As Boolean
+        Get
+            Return _receiveOnly
+        End Get
+        Set(ByVal value As Boolean)
+            _receiveOnly = value
+        End Set
+    End Property
+
 
 #End Region
 
