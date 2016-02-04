@@ -1633,10 +1633,10 @@
         </Border>
       </Style>
     </PageFooter>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.2in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>5in</BottomMargin>
     <Style />
   </Page>
   <rd:ReportID>ef1a856c-bc21-4e85-9169-58bb42b4fa94</rd:ReportID>

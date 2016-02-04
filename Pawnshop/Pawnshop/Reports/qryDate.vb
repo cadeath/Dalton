@@ -188,7 +188,7 @@
 
         ' Parameters
         Dim rptPara As New Dictionary(Of String, String)
-        rptPara.Add("txtCurrentDate", CurrentDate)
+        rptPara.Add("txtCurrentDate", monCal.SelectionRange.Start.ToShortDateString)
         rptPara.Add("branchName", branchName)
 
         frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", rptPara, 1, subReportSQL)
