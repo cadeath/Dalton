@@ -31,6 +31,9 @@ Public Class frmPawnItem
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
     Private ItemPrincipal As Double, Penalty As Double
 
+    Private PRINTER_PT As String = GetOption("PrinterPT")
+    Private PRINTER_OR As String = GetOption("PrinterOR")
+
     Const ITEM_REDEEM As String = "REDEEM"
     Const ITEM_NEWLOAN As String = "NEW LOAN"
     Const ITEM_RENEW As String = "RENEW"
@@ -216,9 +219,9 @@ Public Class frmPawnItem
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan() 'PrintNewLoan()
-            Case "X" : SaveRedeem() 'PrintRedeemOR()
-            Case "R" : SaveRenew() 'PrintRenew()
+            Case "L" : SaveNewLoan() : PrintNewLoan()
+            Case "X" : SaveRedeem() : PrintRedeemOR()
+            Case "R" : SaveRenew() : PrintRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
@@ -357,6 +360,15 @@ Public Class frmPawnItem
 #End Region
 
 #Region "Controller"
+
+    Private Sub PrintRenew()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        PrintRenewPT()
+        PrintRenewOR()
+    End Sub
 
     Private Sub SaveRedeem()
         With PawnItem
@@ -962,10 +974,15 @@ Public Class frmPawnItem
 
 #Region "Printing"
     Private Sub PrintNewLoan()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+
         Dim autoPrintPT As Reporting
         'On Error Resume Next
 
-        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        Dim printerName As String = PRINTER_PT
         If Not canPrint(printerName) Then Exit Sub
 
         Dim report As LocalReport = New LocalReport
@@ -1008,9 +1025,13 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub PrintRedeemOR()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
         Dim autoPrintPT As Reporting
 
-        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        Dim printerName As String = PRINTER_OR
         If Not canPrint(printerName) Then Exit Sub
 
         Dim report As LocalReport = New LocalReport
@@ -1055,9 +1076,6 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5)
 
-        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        'frmReport.Show()
-
         autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
@@ -1065,15 +1083,10 @@ Public Class frmPawnItem
         Me.Focus()
     End Sub
 
-    Private Sub PrintRenew()
-        'PrintRenewPT()
-        'PrintRenewOR()
-    End Sub
-
     Private Sub PrintRenewPT()
         Dim autoPrintPT As Reporting
 
-        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        Dim printerName As String = PRINTER_PT
         If Not canPrint(printerName) Then Exit Sub
 
         Dim report As LocalReport = New LocalReport
@@ -1108,19 +1121,19 @@ Public Class frmPawnItem
             Next
         End If
 
-        'autoPrintPT.Export(report)
-        'autoPrintPT.m_currentPageIndex = 0
-        'autoPrintPT.Print(printerName)
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
 
-        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        frmReport.Show()
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
 
         Me.Focus()
     End Sub
 
     Private Sub PrintRenewOR()
         Dim autoPrintPT As Reporting
-        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        Dim printerName As String = PRINTER_OR
         If Not canPrint(printerName) Then Exit Sub
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
@@ -1182,6 +1195,7 @@ Public Class frmPawnItem
 #End Region
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
-        MsgBox("NOT YET IMPLEMENTED", MsgBoxStyle.Critical)
+        'MsgBox("NOT YET IMPLEMENTED", MsgBoxStyle.Critical)
+        PrintNewLoan()
     End Sub
 End Class
