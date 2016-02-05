@@ -26,6 +26,7 @@ Public Class frmMain
 
         database.dbName = txtUrl.Text
         Dim ds As DataSet, mySql As String
+        Dim total_extracted As Integer = 0
 
         mySql = "SELECT * FROM " & LOANTABLE
         mySql &= " WHERE STATUS = 'A'"
@@ -47,36 +48,58 @@ Public Class frmMain
         DeveloperConsole("Creating Excel File")
 
         'Adding Header
-        Dim i As Integer = 0
+        Dim sheetRow As Integer = 0
         For Each hd In EXCEL_HEADERS
-            oSheet.Cells(1, i + 1).value = hd
-            i += 1
+            oSheet.Cells(1, sheetRow + 1).value = hd
+            sheetRow += 1
         Next
 
         'Max Entries
         Dim st As String
         pbLoading.Maximum = ds.Tables(0).Rows.Count
+        total_extracted += pbLoading.Maximum
         st = "ENTRIES: " & pbLoading.Maximum
         Status(st)
+        Application.DoEvents()
 
         'Adding Data
-        i = 2 : Dim tmpStr As String
+        sheetRow = 2 : Dim tmpStr As String
         For Each dr As DataRow In ds.Tables(0).Rows
             For cnt As Integer = 1 To EXCEL_HEADERS.Count
                 tmpStr = IIf(IsDBNull(dr.Item(cnt - 1)), "", dr.Item(cnt - 1))
-                oSheet.Cells(i, cnt).value = tmpStr
+                oSheet.Cells(sheetRow, cnt).value = tmpStr
             Next
-            i += 1
+            sheetRow += 1
 
             AddProgress()
-            Status(String.Format("ENTRIES >>> {0}/{1} PT# {2}", i, pbLoading.Maximum, dr.Item("TICKET_NO")))
+            Status(String.Format("ENTRIES >>> {0}/{1} PT# {2}", sheetRow, pbLoading.Maximum, dr.Item("TICKET_NO")))
             Application.DoEvents()
         Next
 
         'Extracting Segregated List
-        'DeveloperConsole("Extracting EXPIRY LIST")
-        'mySql = "SELECT * FROM " & LOANTABLE
-        'mySql &= "STATUS = 'T' AND AUCT_DATE"
+        Status("Extracting EXPIRY LIST")
+        Application.DoEvents()
+        mySql = "SELECT * FROM " & LOANTABLE
+        mySql &= String.Format(" WHERE STATUS = 'T' AND AUCT_DATE > '{0}'", pullDate.SelectionStart.ToString("MM/dd/yyyy"))
+        ds = LoadSQL(mySql)
+        pbLoading.Maximum = ds.Tables(0).Rows.Count
+        total_extracted += pbLoading.Maximum
+        Status("ENTRIES: " & pbLoading.Maximum)
+        Application.DoEvents()
+
+        'Adding Data
+        tmpStr = ""
+        For Each dr As DataRow In ds.Tables(0).Rows
+            For cnt As Integer = 1 To EXCEL_HEADERS.Count
+                tmpStr = IIf(IsDBNull(dr.Item(cnt - 1)), "", dr.Item(cnt - 1))
+                oSheet.Cells(sheetRow, cnt).value = tmpStr
+            Next
+            sheetRow += 1
+
+            AddProgress()
+            Status(String.Format("ENTRIES >>> {0}/{1} PT# {2}", sheetRow, pbLoading.Maximum, dr.Item("TICKET_NO")))
+            Application.DoEvents()
+        Next
 
         'Save Excel
         oWB.SaveAs(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\EXTRACTEDDATA.xlsx")
@@ -88,7 +111,7 @@ Public Class frmMain
 
         Me.Enabled = True
         pbLoading.Visible = False
-        Status(pbLoading.Maximum & " EXTRACTED.")
+        Status(total_extracted & " EXTRACTED.")
     End Sub
 
     Private Sub DeveloperConsole(str As String)

@@ -27,7 +27,7 @@ Partial Class frmMain
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.lblStatus = New System.Windows.Forms.Label()
-        Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
+        Me.pullDate = New System.Windows.Forms.MonthCalendar()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -44,7 +44,7 @@ Partial Class frmMain
         '
         Me.txtUrl.Location = New System.Drawing.Point(12, 25)
         Me.txtUrl.Name = "txtUrl"
-        Me.txtUrl.Size = New System.Drawing.Size(199, 20)
+        Me.txtUrl.Size = New System.Drawing.Size(224, 20)
         Me.txtUrl.TabIndex = 1
         Me.txtUrl.Text = "D:\cadeath\Documents\RPS\AIS_JUL2010a.FDB"
         '
@@ -60,26 +60,26 @@ Partial Class frmMain
         'pbLoading
         '
         Me.pbLoading.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pbLoading.Location = New System.Drawing.Point(0, 304)
+        Me.pbLoading.Location = New System.Drawing.Point(0, 320)
         Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(227, 16)
+        Me.pbLoading.Size = New System.Drawing.Size(248, 16)
         Me.pbLoading.TabIndex = 4
         Me.pbLoading.Visible = False
         '
         'lblStatus
         '
         Me.lblStatus.AutoSize = True
-        Me.lblStatus.Location = New System.Drawing.Point(109, 283)
+        Me.lblStatus.Location = New System.Drawing.Point(9, 304)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(24, 13)
         Me.lblStatus.TabIndex = 5
         Me.lblStatus.Text = "Idle"
         '
-        'MonthCalendar1
+        'pullDate
         '
-        Me.MonthCalendar1.Location = New System.Drawing.Point(12, 87)
-        Me.MonthCalendar1.Name = "MonthCalendar1"
-        Me.MonthCalendar1.TabIndex = 6
+        Me.pullDate.Location = New System.Drawing.Point(12, 87)
+        Me.pullDate.Name = "pullDate"
+        Me.pullDate.TabIndex = 6
         '
         'Label2
         '
@@ -94,9 +94,9 @@ Partial Class frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(227, 320)
+        Me.ClientSize = New System.Drawing.Size(248, 336)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.MonthCalendar1)
+        Me.Controls.Add(Me.pullDate)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.pbLoading)
         Me.Controls.Add(Me.btnExtract)
@@ -116,7 +116,7 @@ Partial Class frmMain
     Friend WithEvents btnExtract As System.Windows.Forms.Button
     Friend WithEvents pbLoading As System.Windows.Forms.ProgressBar
     Friend WithEvents lblStatus As System.Windows.Forms.Label
-    Friend WithEvents MonthCalendar1 As System.Windows.Forms.MonthCalendar
+    Friend WithEvents pullDate As System.Windows.Forms.MonthCalendar
     Friend WithEvents Label2 As System.Windows.Forms.Label
 
 End Class
