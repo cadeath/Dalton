@@ -107,7 +107,10 @@
 
         Console.WriteLine("Today is " & CurrentDate)
         Console.WriteLine("Trans: " & tmpMT.TransactionDate.Date)
-        If CurrentDate.Date <> tmpMT.TransactionDate Then MsgBox("You cannot void a transaction in a DIFFERENT date", MsgBoxStyle.Critical) : Exit Sub
+        If CurrentDate.Date <> tmpMT.TransactionDate Then
+            MsgBox("You cannot void a transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         Dim ans = InputBox("Please indicate reason", "Voiding #" & tmpMT.ReferenceNumber)
         If ans.Length <= 5 Or ans = "" Then

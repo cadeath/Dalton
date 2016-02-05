@@ -469,9 +469,9 @@
                     End Select
 
                     AddJournal(.NetAmount + commission, "Debit" _
-                               , "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
-                    AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
-                    AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
+                               , "GPRS Remittance/ Bills Payment Fund", "GPRS_R|Ref# " & .ReferenceNumber)
+                    AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS_R|Ref# " & .ReferenceNumber, CashCount_Name)
+                    AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS_R|Ref# " & .ReferenceNumber)
             End Select
 
             .Save()

@@ -252,11 +252,12 @@
                 SrcStr = "CL|Ref# " & _ref
             Case "GPRS - GPRS to GPRS"
                 SrcStr = "G2G|Ref# " & _ref
-            Case "GPRS - GPRS to Smart Money", "GPRS - Smartmoney To GPRS", "GPRS - Smartmoney To GPRS", _
-                    "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", "GPRS - GPRS to BANK (DBP)", _
-                    "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
-                     "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram", "GPRS - Moneygram to GPRS"
+            Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
+                "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
+                     "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
                 SrcStr = "GPRS|Ref# " & _ref
+            Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
+                SrcStr = "GPRS_R|Ref# " & _ref
         End Select
 
         RemoveJournal(SrcStr)
