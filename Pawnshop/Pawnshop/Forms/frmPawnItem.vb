@@ -975,7 +975,7 @@ Public Class frmPawnItem
 #Region "Printing"
     Private Sub PrintNewLoan()
         Dim ans As DialogResult = _
-            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
 
