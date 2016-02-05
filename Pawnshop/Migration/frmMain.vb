@@ -30,6 +30,7 @@ Public Class frmMain
 
         mySql = "SELECT * FROM " & LOANTABLE
         mySql &= " WHERE STATUS = 'A'"
+        'mySql &= " ROWS 50" 'Remove on FINAL
 
         ds = LoadSQL(mySql)
         DeveloperConsole("Entries >> " & ds.Tables(0).Rows.Count)
@@ -78,16 +79,19 @@ Public Class frmMain
 
         'Extracting Segregated List
         Status("Extracting EXPIRY LIST")
+        DeveloperConsole("Generating Segregated List")
         Application.DoEvents()
         mySql = "SELECT * FROM " & LOANTABLE
         mySql &= String.Format(" WHERE STATUS = 'T' AND AUCT_DATE > '{0}'", pullDate.SelectionStart.ToString("MM/dd/yyyy"))
         ds = LoadSQL(mySql)
+        pbLoading.Value = 0
         pbLoading.Maximum = ds.Tables(0).Rows.Count
         total_extracted += pbLoading.Maximum
         Status("ENTRIES: " & pbLoading.Maximum)
         Application.DoEvents()
 
-        'Adding Data
+        'EXTRACED - Adding Data
+        DeveloperConsole("Extracted - Adding Data")
         tmpStr = ""
         For Each dr As DataRow In ds.Tables(0).Rows
             For cnt As Integer = 1 To EXCEL_HEADERS.Count

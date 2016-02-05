@@ -1,5 +1,7 @@
 ﻿' Eskie Cirrus James Maquilang
-' revised
+' revised 2
+' - add delay in generating name
+' revised 1
 ' - add random filename
 Imports System.IO
 Imports System.Data
@@ -15,6 +17,7 @@ Public Class Reporting
 
     Public m_currentPageIndex As Integer
     Public m_streams As IList(Of Stream)
+    Private Fname As String
 
     Public Function CreateStream(ByVal name As String, _
        ByVal fileNameExtension As String, _
@@ -25,14 +28,8 @@ Public Class Reporting
         'Dim tmpFile As String = name + "." + fileNameExtension
         Dim tmpFile As String = GetRandomString(5) + "." + fileNameExtension
 
-        Dim Fname As String = tmpPath & tmpFile
+        Fname = tmpPath & tmpFile
         Console.WriteLine("Generating: " & Fname)
-
-        If System.IO.File.Exists(Fname) Then System.IO.File.Delete(Fname)
-        While System.IO.File.Exists(tmpPath & tmpFile)
-            System.IO.File.Delete(tmpPath & tmpFile)
-            Console.WriteLine("Please wait... Deleting...")
-        End While
 
         Dim stream As Stream = _
             New FileStream(Fname, FileMode.Create)
@@ -59,9 +56,6 @@ Public Class Reporting
 
             Dim paperWidth_in As String = size("width").ToString("0.00")
             Dim paperHeight_in As String = size("height").ToString("0.00")
-
-            Console.WriteLine("Width: " & paperWidth_in)
-            Console.WriteLine("Height: " & paperHeight_in)
 
             deviceInfo = _
           "<DeviceInfo>" + _
@@ -101,9 +95,6 @@ Public Class Reporting
     End Sub
 
     Public Sub Print(Optional ByVal printerName As String = Nothing)
-
-        'Const printerName As String = "Microsoft Office Document Image Writer"
-
         If m_streams Is Nothing OrElse m_streams.Count = 0 Then
             Return
         End If
@@ -146,6 +137,8 @@ Public Class Reporting
             sb.Append(s.Substring(idx, 1))
         Next
 
+        'Delay for next random value
+        Threading.Thread.Sleep(100)
         Return sb.ToString
     End Function
 

@@ -422,12 +422,11 @@
                     End If
                 Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
                     "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
-                    "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram", "GPRS - Moneygram to GPRS"
+                    "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
 
                     Select Case cboType.Text
                         Case "GPRS - GPRS to Smart Money"
                             CashCount_Name = "GPRS-SmartMoney"
-
                         Case "GPRS - GPRS to BANK (UCPB/PNB)"
                             CashCount_Name = "GPRS-(UCPB/PNB)"
                         Case "GPRS - GPRS to BANK (BDO/Chinabank)"
@@ -444,8 +443,7 @@
                             CashCount_Name = "NYBP/Transfast"
                         Case "GPRS - GPRS to Moneygram"
                             CashCount_Name = "GPRS-Moneygram"
-                        Case "GPRS - Moneygram to GPRS"
-                            CashCount_Name = "Moneygram-GPRS"
+                        
                     End Select
 
                     If rbSend.Checked Then
@@ -461,13 +459,18 @@
                     End If
                     ' ISSUE: 0001
                     ' GPRS - Smartmoney To GPRS, wrong Journal Entries
-                Case "GPRS - Smartmoney To GPRS"
+                Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
                     ' Amt 4000 | 3995 gprsRemitFund debit = 3980 rf credit + 15 income credit
-                    CashCount_Name = "SmartMoney-GPRS"
+                    Select Case cboType.Text
+                        Case "GPRS - Smartmoney To GPRS"
+                            CashCount_Name = "SmartMoney-GPRS"
+                        Case "GPRS - Moneygram to GPRS"
+                            CashCount_Name = "Moneygram-GPRS"
+                    End Select
 
-                    AddJournal(.NetAmount - (basicCharges - commission), "Debit" _
+                    AddJournal(.NetAmount + commission, "Debit" _
                                , "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
-                    AddJournal(.NetAmount - basicCharges, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
+                    AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
                     AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
             End Select
 

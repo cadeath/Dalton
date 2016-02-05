@@ -46,7 +46,7 @@ Partial Class frmMain
         Me.txtUrl.Name = "txtUrl"
         Me.txtUrl.Size = New System.Drawing.Size(224, 20)
         Me.txtUrl.TabIndex = 1
-        Me.txtUrl.Text = "D:\cadeath\Documents\RPS\AIS_JUL2010a.FDB"
+        Me.txtUrl.Text = "D:\cadeath\Documents\RPS\Database\Dalton Cagampang.FDB"
         '
         'btnExtract
         '
