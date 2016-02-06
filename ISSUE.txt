@@ -8,6 +8,7 @@ ISSUE: 0002 02/06/2016
 [-] Printing - Redeem printing, print PT printer with OR layout
 [-] Pawning - TAB and Enter should be consistent
 [-] Pawning - if not Appraiser, do not display
+[-] Money Transfer - Enable multiple encoding
 
 
 ISSUE: 0001 02/04/2016
