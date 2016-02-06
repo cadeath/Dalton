@@ -1198,4 +1198,14 @@ Public Class frmPawnItem
         'MsgBox("NOT YET IMPLEMENTED", MsgBoxStyle.Critical)
         PrintNewLoan()
     End Sub
+
+    Private Sub cboKarat_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboKarat.KeyPress
+        If isEnter(e) Then
+            txtAppr.Focus()
+        End If
+    End Sub
+
+    Private Sub txtPrincipal_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPrincipal.LostFocus
+        cboAppraiser.Focus()
+    End Sub
 End Class
