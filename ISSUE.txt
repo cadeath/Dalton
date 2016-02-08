@@ -12,7 +12,7 @@ ISSUE: 0002 02/06/2016
 [-] Printing - Redeem printing, print PT printer with OR layout
 [-] Pawning - TAB and Enter should be consistent
 [-] Pawning - if not Appraiser, do not display
-[-] Money Transfer - Enable multiple encoding
+[+] Money Transfer - Enable multiple encoding
 
 
 ISSUE: 0001 02/04/2016
@@ -23,5 +23,5 @@ ISSUE: 0001 02/04/2016
 [+] Payout Service Charge, auto deduct
 [+] Database MT structure changed.
 [+] REPORT LAYOUT LESS FROM 1" TO 0.2 OR 0.5"
-[-] DOLLAR, VOID DISPLAY BROWSE
-[-] MONEYGRAM TO GPRS <--- was correct?
+[+] DOLLAR, VOID DISPLAY BROWSE
+[+] MONEYGRAM TO GPRS <--- was correct?

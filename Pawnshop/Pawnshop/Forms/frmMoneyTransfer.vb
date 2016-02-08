@@ -486,6 +486,16 @@
         End If
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
+
+        'ISSUE: 0002 02/06/2016
+        'Money Transfer - Enable multiple encoding
+        Dim xans As DialogResult = _
+            MsgBox("Do you want to enter another one?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
+        If xans = Windows.Forms.DialogResult.Yes Then
+            frmMoneyTransfer_Load(sender, e)
+            Exit Sub
+        End If
+
         frmMTlist.LoadActive()
         Me.Close()
     End Sub
@@ -599,6 +609,7 @@
 
     Private Sub txtAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAmount.LostFocus
         ComputeCharges()
+        cboLocation.Focus()
     End Sub
 
     Private Sub ComputeCharges()

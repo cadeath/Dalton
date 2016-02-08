@@ -1,0 +1,7 @@
+CHANGELOG
+
+Version 1.0.1.0
+ - Change OR layout from 4.5 to 9" height
+ - OR includes the duplicate
+ - Loan, Money Transfer and Client TAB fix
+ - Money Transfer - Enable multiple encoding
