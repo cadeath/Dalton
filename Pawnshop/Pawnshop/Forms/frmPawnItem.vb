@@ -1072,9 +1072,11 @@ Public Class frmPawnItem
             Next
         End If
 
+        'ISSUE: 0003 02/08/2016
+        'Redeem - OR no duplicate
         Dim paperSize As New Dictionary(Of String, Double)
         paperSize.Add("width", 8.5)
-        paperSize.Add("height", 4.5)
+        paperSize.Add("height", 9) 'Changed 4.5 to 9
 
         autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
@@ -1125,9 +1127,6 @@ Public Class frmPawnItem
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
 
-        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        'frmReport.Show()
-
         Me.Focus()
     End Sub
 
@@ -1137,8 +1136,6 @@ Public Class frmPawnItem
         If Not canPrint(printerName) Then Exit Sub
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
-
-
 
         Dim mySql As String, ptIDx As Single = PawnItem.PawnID
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
@@ -1176,7 +1173,14 @@ Public Class frmPawnItem
             Next
         End If
 
-        autoPrintPT.Export(report)
+        'ISSUE: 0003 02/08/2016
+        'Renewal - OR is too small
+        'Renewal - OR no duplicate
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 9) 'Include the duplicate; changed 4.5 to 9
+
+        autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
 
@@ -1195,7 +1199,6 @@ Public Class frmPawnItem
 #End Region
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
-        'MsgBox("NOT YET IMPLEMENTED", MsgBoxStyle.Critical)
         PrintNewLoan()
     End Sub
 

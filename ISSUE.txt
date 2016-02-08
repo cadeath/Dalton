@@ -1,3 +1,7 @@
+ISSUE: 0003 02/08/2016
+[+] Renewal - OR is too small
+[+] Renewal/Redeem - OR no duplicate
+
 ISSUE: 0002 02/06/2016
 [-] Sequence Report - Categories
 [-] Sequence Report - Remove Borrowings and Insurance for redundancy

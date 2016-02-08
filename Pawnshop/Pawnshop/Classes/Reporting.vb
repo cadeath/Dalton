@@ -138,7 +138,7 @@ Public Class Reporting
         Next
 
         'Delay for next random value
-        Threading.Thread.Sleep(100)
+        Threading.Thread.Sleep(1000)
         Return sb.ToString
     End Function
 
