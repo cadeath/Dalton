@@ -47,7 +47,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = My.Application.Info.Title & " | " & BETA_VERSION
+        Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString
         ConfiguringDB()
         If Not DBCompatibilityCheck() Then MsgBox("Please update the database version", MsgBoxStyle.Critical) : End
 
