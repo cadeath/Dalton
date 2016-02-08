@@ -3,7 +3,7 @@ ISSUE: 0003 02/08/2016
 [+] Renewal/Redeem - OR no duplicate
 
 ISSUE: 0002 02/06/2016
-[-] Sequence Report - Categories
+[+] Sequence Report - Categories
 [+] Sequence Report - Remove Borrowings and Insurance for redundancy
 [-] Loan Register Report - Remove PHP sign to increase space
 [-] Loan Register Report - Redemption not working

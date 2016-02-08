@@ -17,9 +17,16 @@
     End Sub
 
     Private Sub GenReport()
-        Dim fillData As String = "LOAN_REGISTER"
+        If monCal.SelectionStart = monCal.SelectionEnd Then
+            Dim ans As DialogResult = _
+                MsgBox("Please select a RANGE of DATE." + vbCr + "Do you want to continue?", MsgBoxStyle.YesNo + MsgBoxStyle.Information)
+            If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        End If
+
+        Dim fillData As String = "LOAN_REGISTER", columnFilter As String = "LoanDate"
         Dim mySql As String = "SELECT * FROM " & fillData
-        mySql &= String.Format(" WHERE LoanDate BETWEEN '{0}' AND '{1}'", monCal.SelectionStart.ToShortDateString, monCal.SelectionEnd.ToShortDateString)
+        If chbType.GetItemChecked(2) Then columnFilter = "ORDate"
+        mySql &= String.Format(" WHERE {2} BETWEEN '{0}' AND '{1}'", monCal.SelectionStart.ToShortDateString, monCal.SelectionEnd.ToShortDateString, columnFilter)
         mySql &= " AND "
 
         mySql &= StatusParser()

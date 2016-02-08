@@ -7,3 +7,5 @@ Version 1.0.1
  - Money Transfer - Enable multiple encoding
  - Money Transfer - swap label for Pay-Out and Send In
  - Sequence Report - Remove Borrowings and Insurance for redundancy
+ - Sequence Report - Categories (Pera Padala ONLY)
+ - Loan Register Report - Remove PHP sign to increase space

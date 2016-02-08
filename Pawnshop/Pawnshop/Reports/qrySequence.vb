@@ -25,8 +25,13 @@
         fillData = "dsMoneyTransfer"
         mySql = "SELECT * FROM MONEY_TRANSFER "
         mySql &= String.Format("WHERE TransDate BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= " AND ServiceType = 'Pera Padala'"
 
-        frmReport.ReportInit(mySql, fillData, "Reports\sq_MoneyTransfer.rdlc", Nothing, 0)
+        Dim rptDic As New Dictionary(Of String, String)
+        rptDic.Add("branchName", branchName)
+        rptDic.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year.ToString)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\sq_MoneyTransfer.rdlc", rptDic)
         frmReport.Show()
     End Sub
 
@@ -41,7 +46,7 @@
 
         Dim rptDic As New Dictionary(Of String, String)
         rptDic.Add("branchName", branchName)
-        rptDic.Add("txtMonth", "FOR THE MONTH OF " & stDay.Month.ToString("MMMM").ToUpper & " " & stDay.Year.ToString)
+        rptDic.Add("txtMonth", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year.ToString)
 
         frmReport.ReportInit(mySql, fillData, "Reports\rpt_pawning.rdlc", rptDic)
         frmReport.Show()

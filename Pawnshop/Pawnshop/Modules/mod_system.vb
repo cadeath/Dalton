@@ -11,7 +11,6 @@ Module mod_system
 
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
-    Public BETA_VERSION As String = "v1.0.0"
 
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
