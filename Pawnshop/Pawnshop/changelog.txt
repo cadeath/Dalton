@@ -1,5 +1,8 @@
 CHANGELOG
 
+Version 1.1
+ - Enhancing PAWNING MODULE
+
 Version 1.0.1
  - Change OR layout from 4.5 to 9" height
  - OR includes the duplicate
