@@ -178,6 +178,9 @@ Public Class frmPawnItem
         End If
 
         dateChange(cboType.Text)
+
+        LoanAdvanceInterest()
+        txtPrincipal2.Text = txtPrincipal.Text
     End Sub
 
     Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
@@ -475,7 +478,7 @@ Public Class frmPawnItem
             .AdvanceInterest = txtAdv.Text
             .NetAmount = txtNet.Text
 
-            If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text
+            'If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text
             If IsNumeric(txtService.Text) Then .ServiceCharge = txtService.Text
             If IsNumeric(txtEvat.Text) Then .EVAT = txtEvat.Text
 
@@ -1210,5 +1213,9 @@ Public Class frmPawnItem
 
     Private Sub txtPrincipal_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPrincipal.LostFocus
         cboAppraiser.Focus()
+    End Sub
+
+    Private Sub txtPrincipal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPrincipal.TextChanged
+
     End Sub
 End Class
