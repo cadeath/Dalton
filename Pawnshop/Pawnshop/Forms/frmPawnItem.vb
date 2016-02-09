@@ -1,21 +1,6 @@
 ﻿Imports Microsoft.Reporting.WinForms
 
 Public Class frmPawnItem
-    'Version 2.4
-    ' - UPDATE002
-    '   Add Database Class Table 'RENEWALBLE'
-    'Version 2.3
-    ' - Add Printing
-    'Version 2.2
-    ' - Remake SAVE
-    'Version 2.1
-    ' - Fixing Auth
-    ' - Fixing GUI
-
-    ' Functions
-    ' LoadPawnTicket(PawnTicket,Status)
-    ' Status = Transaction Type
-
     Friend transactionType As String = "L"
     Friend PawnItem As PawnTicket
     Friend PawnCustomer As Client
@@ -179,8 +164,10 @@ Public Class frmPawnItem
 
         dateChange(cboType.Text)
 
-        LoanAdvanceInterest()
-        txtPrincipal2.Text = txtPrincipal.Text
+        If PawnInfo.Count > 0 Then
+            LoanAdvanceInterest()
+            txtPrincipal2.Text = txtPrincipal.Text
+        End If
     End Sub
 
     Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
@@ -413,7 +400,7 @@ Public Class frmPawnItem
         ServiceCharge = GetServiceCharge(ItemPrincipal)
         DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
         Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
-
+        
         If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
             'OLD Migrate
 
@@ -444,7 +431,7 @@ Public Class frmPawnItem
 
         txtAdv.Text = AdvanceInterest
         txtOver.Text = daysDue
-        txtInt.Text = DelayInt
+        If transactionType <> "L" Then txtInt.Text = DelayInt
         txtPenalty.Text = Penalty
         txtService.Text = ServiceCharge
         txtEvat.Text = 0
@@ -478,7 +465,7 @@ Public Class frmPawnItem
             .AdvanceInterest = txtAdv.Text
             .NetAmount = txtNet.Text
 
-            'If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text
+            'If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text 'Remove INT for new loan
             If IsNumeric(txtService.Text) Then .ServiceCharge = txtService.Text
             If IsNumeric(txtEvat.Text) Then .EVAT = txtEvat.Text
 
