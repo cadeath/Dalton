@@ -14,7 +14,8 @@ Public Class frmPawnItem
     Private appraiser As Hashtable
     Private isOldItem As Boolean = False
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
-    Private ItemPrincipal As Double, Penalty As Double, netAmount As Double
+    Private ItemPrincipal As Double, Penalty As Double, Net_Amount As Double
+    Private Renew_Due As Double, Redeem_Due As Double
 
     Private PRINTER_PT As String = GetOption("PrinterPT")
     Private PRINTER_OR As String = GetOption("PrinterOR")
@@ -359,7 +360,7 @@ Public Class frmPawnItem
             .Penalty = txtPenalty.Text
             .ServiceCharge = txtService.Text
             .EVAT = txtEvat.Text
-            .RedeemDue = txtRedeem.Text
+            .RedeemDue = Redeem_Due
             .Status = transactionType
 
             .SaveTicket(False)
@@ -396,7 +397,12 @@ Public Class frmPawnItem
         ServiceCharge = GetServiceCharge(itemPrincipal)
         DelayInt = itemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
         Penalty = itemPrincipal * GetInt(daysDue + 30, "Penalty")
+        If HAS_ADVINT And transactionType <> "X" Then
+            'Load Advance Interest
+            AdvanceInterest = GetInt(30) * itemPrincipal
+        End If
 
+        isOldItem = False
         If Not PawnItem Is Nothing Then
             'Not New Entry
             If PawnItem.AdvanceInterest = 0 Then
@@ -407,36 +413,36 @@ Public Class frmPawnItem
             End If
         Else
             If transactionType = "X" Then ServiceCharge = 0
-            isOldItem = False
+        End If
+        If Not isOldItem Then
+            If daysDue > 3 Then DelayInt -= AdvanceInterest
         End If
 
-        'Load Advance Interest
-        If HAS_ADVINT And Not isOldItem And transactionType <> "X" Then
-            AdvanceInterest = GetInt(30) * itemPrincipal
-        End If
-
-        netAmount = itemPrincipal - AdvanceInterest - ServiceCharge
+        Net_Amount = itemPrincipal - AdvanceInterest - ServiceCharge
         'Display
+        If transactionType = "R" Then
+            Renew_Due = AdvanceInterest + ServiceCharge + DelayInt + Penalty
+            Redeem_Due = 0
+            Net_Amount = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
+        ElseIf transactionType = "X" Then
+            AdvanceInterest = 0
+            Net_Amount = PawnItem.Principal
+            Renew_Due = 0
+            Redeem_Due = PawnItem.Principal + DelayInt + Penalty
+        Else
+            Renew_Due = 0
+            Redeem_Due = 0
+        End If
+
         txtOver.Text = daysDue
         txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
         txtInt.Text = DelayInt.ToString("#,##0.00")
         txtPenalty.Text = Penalty.ToString("#,##0.00")
         txtService.Text = ServiceCharge.ToString("#,##0.00")
-        txtNet.Text = netAmount.ToString("Php #,##0.00")
+        txtNet.Text = Net_Amount.ToString("Php #,##0.00")
 
-        If transactionType = "R" Then
-            txtRenew.Text = (AdvanceInterest + ServiceCharge + DelayInt + Penalty).ToString("Php #,##0.00")
-            txtRedeem.Text = "Php 0.00"
-            netAmount = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
-            txtNet.Text = netAmount.ToString("Php #,##0.00")
-        ElseIf transactionType = "X" Then
-            txtRenew.Text = "Php 0.00"
-            txtRedeem.Text = (PawnItem.Principal + DelayInt + Penalty + ServiceCharge).ToString("Php #,##0.00")
-            txtNet.Text = netAmount.ToString("Php #,##0.00")
-        Else
-            txtRenew.Text = "Php 0.00"
-            txtRedeem.Text = "Php 0.00"
-        End If
+        txtRenew.Text = Renew_Due.ToString("Php #,##0.00")
+        txtRedeem.Text = Redeem_Due.ToString("Php #,##0.00")
     End Sub
 
     'Private Sub ComputeInterests()
@@ -510,8 +516,8 @@ Public Class frmPawnItem
             .Appraisal = txtAppr.Text
             .Principal = txtPrincipal.Text
             .AdvanceInterest = txtAdv.Text
-            .NetAmount = netAmount
-            Console.WriteLine("Net Amount >> " & netAmount.ToString("Php #,##0.00"))
+            .NetAmount = Net_Amount
+            Console.WriteLine("Net Amount >> " & Net_Amount.ToString("Php #,##0.00"))
 
             'If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text 'Remove INT for new loan
             If IsNumeric(txtService.Text) Then .ServiceCharge = txtService.Text
@@ -944,7 +950,6 @@ Public Class frmPawnItem
         Dim principal As Double, netAmt As Double
         Dim interest As Double, advInt As Double
         Dim servChar As Double, penalty As Double
-        Dim redeemDue As Double
 
         'Redeem
         With PawnItem
@@ -956,19 +961,18 @@ Public Class frmPawnItem
             .Penalty = txtPenalty.Text
             .ServiceCharge = txtService.Text
             .EVAT = txtEvat.Text
-            .RenewDue = txtRenew.Text
-            .RedeemDue = txtRedeem.Text
+            .RenewDue = Renew_Due
+            .RedeemDue = Redeem_Due
             .Status = "0"
 
             .SaveTicket(False)
 
             principal = CDbl(txtPrincipal.Text)
-            netAmt = CDbl(txtNet.Text)
+            netAmt = Net_Amount
             interest = CDbl(txtInt.Text)
-            advInt = CDbl(txtAdv.Text)
+            advInt = AdvanceInterest
             servChar = CDbl(txtService.Text)
             penalty = CDbl(txtPenalty.Text)
-            redeemDue = CDbl(txtRedeem.Text)
 
         End With
         AddORNum()
@@ -995,12 +999,13 @@ Public Class frmPawnItem
 
             .Principal = txtPrincipal.Text
             .AdvanceInterest = AdvanceInterest
-            .NetAmount = .Principal - AdvanceInterest
+            '.NetAmount = .Principal - AdvanceInterest
+            .NetAmount = Net_Amount
             .Status = "R"
 
             .SaveTicket()
 
-            AddJournal(CDbl(txtRenew.Text), "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
+            AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
             AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With

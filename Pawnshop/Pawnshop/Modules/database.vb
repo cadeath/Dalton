@@ -1,13 +1,13 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
 ' V1.0.1
-'  - Added ORDATE at Loan Register VIEW
+'  - Added ORDATE, RENEWDUE and REDEEMDUE at Loan Register VIEW
 
 Friend Module database
     Public con As OdbcConnection
     'Friend dbName As String = "..\..\sample.FDB"
-    Friend dbName As String = "sample.FDB"
-    'Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
+    'Friend dbName As String = "sample.FDB"
+    Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
