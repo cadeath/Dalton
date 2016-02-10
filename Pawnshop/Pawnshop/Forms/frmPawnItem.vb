@@ -404,16 +404,15 @@ Public Class frmPawnItem
                 'Do not add Advance Interest
                 AdvanceInterest = 0
                 isOldItem = True
-
             End If
         Else
-            'Load Advance Interest
-            If HAS_ADVINT Then
-                AdvanceInterest = GetInt(30) * itemPrincipal
-            End If
-
             If transactionType = "X" Then ServiceCharge = 0
             isOldItem = False
+        End If
+
+        'Load Advance Interest
+        If HAS_ADVINT And Not isOldItem And transactionType <> "X" Then
+            AdvanceInterest = GetInt(30) * itemPrincipal
         End If
 
         netAmount = itemPrincipal - AdvanceInterest - ServiceCharge
@@ -429,10 +428,11 @@ Public Class frmPawnItem
             txtRenew.Text = (AdvanceInterest + ServiceCharge + DelayInt + Penalty).ToString("Php #,##0.00")
             txtRedeem.Text = "Php 0.00"
             netAmount = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
-            txtNet.Text = netAmount
+            txtNet.Text = netAmount.ToString("Php #,##0.00")
         ElseIf transactionType = "X" Then
             txtRenew.Text = "Php 0.00"
             txtRedeem.Text = (PawnItem.Principal + DelayInt + Penalty + ServiceCharge).ToString("Php #,##0.00")
+            txtNet.Text = netAmount.ToString("Php #,##0.00")
         Else
             txtRenew.Text = "Php 0.00"
             txtRedeem.Text = "Php 0.00"
@@ -510,7 +510,8 @@ Public Class frmPawnItem
             .Appraisal = txtAppr.Text
             .Principal = txtPrincipal.Text
             .AdvanceInterest = txtAdv.Text
-            .NetAmount = txtNet.Text
+            .NetAmount = netAmount
+            Console.WriteLine("Net Amount >> " & netAmount.ToString("Php #,##0.00"))
 
             'If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text 'Remove INT for new loan
             If IsNumeric(txtService.Text) Then .ServiceCharge = txtService.Text
