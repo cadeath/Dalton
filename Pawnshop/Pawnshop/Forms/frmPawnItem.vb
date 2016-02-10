@@ -14,7 +14,7 @@ Public Class frmPawnItem
     Private appraiser As Hashtable
     Private isOldItem As Boolean = False
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
-    Private ItemPrincipal As Double, Penalty As Double
+    Private ItemPrincipal As Double, Penalty As Double, netAmount As Double
 
     Private PRINTER_PT As String = GetOption("PrinterPT")
     Private PRINTER_OR As String = GetOption("PrinterOR")
@@ -382,9 +382,9 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub ComputeInterests()
-        Dim itemPrincipal As Double, netAmount As Double
+        Dim itemPrincipal As Double
 
-        If Not PawnInfo.Count > 0 Then Exit Sub
+        If PawnInfo Is Nothing Then Exit Sub
         If transactionType = "D" Then Exit Sub 'No Compute if Information Display
         If Not cboType.Items.Count > 0 Then Exit Sub
         If IsNumeric(txtPrincipal.Text) Then
@@ -394,13 +394,17 @@ Public Class frmPawnItem
         End If
 
         ServiceCharge = GetServiceCharge(itemPrincipal)
-        Dim d As Integer = IIf(daysDue > 3, daysDue + 30, 0)
+        DelayInt = itemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
+        Penalty = itemPrincipal * GetInt(daysDue + 30, "Penalty")
+
         If Not PawnItem Is Nothing Then
+            'Not New Entry
             If PawnItem.AdvanceInterest = 0 Then
                 'OLD Migrate
                 'Do not add Advance Interest
                 AdvanceInterest = 0
                 isOldItem = True
+
             End If
         Else
             'Load Advance Interest
@@ -408,18 +412,31 @@ Public Class frmPawnItem
                 AdvanceInterest = GetInt(30) * itemPrincipal
             End If
 
+            If transactionType = "X" Then ServiceCharge = 0
             isOldItem = False
         End If
-        DelayInt = itemPrincipal * IIf(daysDue > 3, daysDue + 30, 0)
-        Penalty = itemPrincipal * GetInt(daysDue + 30, "Penalty")
-        netAmount = itemPrincipal - AdvanceInterest
 
+        netAmount = itemPrincipal - AdvanceInterest - ServiceCharge
         'Display
-        txtAdv.Text = AdvanceInterest.ToString("Php #,##0.00")
-        txtInt.Text = DelayInt.ToString("Php #,##0.00")
-        txtPenalty.Text = Penalty.ToString("Php #,##0.00")
-        txtService.Text = ServiceCharge.ToString("Php #,##0.00")
+        txtOver.Text = daysDue
+        txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
+        txtInt.Text = DelayInt.ToString("#,##0.00")
+        txtPenalty.Text = Penalty.ToString("#,##0.00")
+        txtService.Text = ServiceCharge.ToString("#,##0.00")
         txtNet.Text = netAmount.ToString("Php #,##0.00")
+
+        If transactionType = "R" Then
+            txtRenew.Text = (AdvanceInterest + ServiceCharge + DelayInt + Penalty).ToString("Php #,##0.00")
+            txtRedeem.Text = "Php 0.00"
+            netAmount = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
+            txtNet.Text = netAmount
+        ElseIf transactionType = "X" Then
+            txtRenew.Text = "Php 0.00"
+            txtRedeem.Text = (PawnItem.Principal + DelayInt + Penalty + ServiceCharge).ToString("Php #,##0.00")
+        Else
+            txtRenew.Text = "Php 0.00"
+            txtRedeem.Text = "Php 0.00"
+        End If
     End Sub
 
     'Private Sub ComputeInterests()

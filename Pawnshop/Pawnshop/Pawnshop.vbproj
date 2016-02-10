@@ -665,6 +665,9 @@
     </None>
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
+    <None Include="sample.FDB">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Template\Import Template.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
