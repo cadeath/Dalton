@@ -414,21 +414,20 @@ Public Class frmPawnItem
         Else
             If transactionType = "X" Then ServiceCharge = 0
         End If
-        If Not isOldItem Then
-            If daysDue > 3 Then DelayInt -= AdvanceInterest
-        End If
+        If daysDue > 3 Then DelayInt -= AdvanceInterest
 
         Net_Amount = itemPrincipal - AdvanceInterest - ServiceCharge
         'Display
         If transactionType = "R" Then
             Renew_Due = AdvanceInterest + ServiceCharge + DelayInt + Penalty
             Redeem_Due = 0
-            Net_Amount = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
+            ServiceCharge = IIf(isOldItem, 0, ServiceCharge)
+            Net_Amount = PawnItem.Principal - AdvanceInterest - ServiceCharge
         ElseIf transactionType = "X" Then
             AdvanceInterest = 0
-            Net_Amount = PawnItem.Principal
+            Net_Amount = 0
             Renew_Due = 0
-            Redeem_Due = PawnItem.Principal + DelayInt + Penalty
+            Redeem_Due = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
         Else
             Renew_Due = 0
             Redeem_Due = 0
