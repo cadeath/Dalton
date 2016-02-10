@@ -137,6 +137,17 @@
         End Get
     End Property
 
+    Private _commission As Double
+    Public Property Commission() As Double
+        Get
+            Return _commission
+        End Get
+        Set(ByVal value As Double)
+            _commission = value
+        End Set
+    End Property
+
+
     Public Property EncoderID As Integer
         Set(ByVal value As Integer)
             _encoderID = value
@@ -203,6 +214,7 @@
             .Item("Amount") = _amount
             .Item("Location") = _location
             .Item("ServiceCharge") = _service
+            .Item("Commission") = _commission
             .Item("NetAmount") = _netAmount
             .Item("Status") = _status
             .Item("EncoderID") = _encoderID
@@ -222,7 +234,45 @@
         ds.Tables(0).Rows(0).Item("Status") = "V"
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
+
+        Me.LoadById(_id)
+        Dim SrvTyp As String = Me.ServiceType
+        Dim SrcStr As String = ""
+        Select Case SrvTyp
+            Case "Pera Padala"
+                If TransactionType = 0 Then
+                    'Send
+                    SrcStr = "ME# " & _transID
+                Else
+                    SrcStr = "MR# " & _transID
+                End If
+            Case "Western Union"
+                SrcStr = "WE|Ref# " & _ref
+            Case "Cebuana Llhuiller"
+                SrcStr = "CL|Ref# " & _ref
+            Case "GPRS - GPRS to GPRS"
+                SrcStr = "G2G|Ref# " & _ref
+            Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
+                "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
+                     "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
+                SrcStr = "GPRS|Ref# " & _ref
+            Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
+                SrcStr = "GPRS_R|Ref# " & _ref
+        End Select
+
+        RemoveJournal(SrcStr)
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
+    End Sub
+
+    Public Sub LoadById(id As Integer)
+        Dim mySql As String = "SELECT * FROM " & fillData
+        mySql &= " WHERE ID = " & id
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 0 Then _
+            MsgBox("TRANSACTION NOT FOUND", MsgBoxStyle.Critical, "DEVELOPER WARNING") : Exit Sub
+
+        Me.loadByRow(ds.Tables(0).Rows(0))
     End Sub
 #End Region
 End Class

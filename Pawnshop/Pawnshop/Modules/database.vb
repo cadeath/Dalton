@@ -1,22 +1,19 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
-' V1.0.5
-'  - VIEW EXPIRY_LIST ADDED
-' v1.2
-'  - ModifyEntry added
-' v1.1
-'  - SaveEntry added empty dataset binding
+' V1.0.1
+'  - Added ORDATE at Loan Register VIEW
 
 Friend Module database
     Public con As OdbcConnection
-    'Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
-    Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
+    'Friend dbName As String = "..\..\sample.FDB"
+    Friend dbName As String = "sample.FDB"
+    'Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "a1.0.15"
+    Private DBversion As String = "1.0.1"
     Private language() As String = _
         {"Connection error failed."}
 

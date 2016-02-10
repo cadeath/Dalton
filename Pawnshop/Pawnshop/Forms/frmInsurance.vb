@@ -76,7 +76,7 @@
 
         curInsurance = getInsurance
         btnVoid.Enabled = True
-        txtPT.Focus()
+        txtPT.Enabled = False
     End Sub
 
     Private Function isValid() As Boolean
@@ -126,9 +126,16 @@
         Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        ' ISSUE: 0001
+        ' Locking Insurance voiding exclusive for the same DATE
+        If curInsurance.TransactionDate.Date <> CurrentDate.Date Then
+            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
         curInsurance.VoidTransaction()
         MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
-        Exit Sub
+        Me.Close()
     End Sub
 
     Private Sub txtPT_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress

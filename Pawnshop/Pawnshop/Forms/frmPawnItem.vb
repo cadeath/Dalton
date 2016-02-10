@@ -1,21 +1,6 @@
 ﻿Imports Microsoft.Reporting.WinForms
 
 Public Class frmPawnItem
-    'Version 2.4
-    ' - UPDATE002
-    '   Add Database Class Table 'RENEWALBLE'
-    'Version 2.3
-    ' - Add Printing
-    'Version 2.2
-    ' - Remake SAVE
-    'Version 2.1
-    ' - Fixing Auth
-    ' - Fixing GUI
-
-    ' Functions
-    ' LoadPawnTicket(PawnTicket,Status)
-    ' Status = Transaction Type
-
     Friend transactionType As String = "L"
     Friend PawnItem As PawnTicket
     Friend PawnCustomer As Client
@@ -29,11 +14,15 @@ Public Class frmPawnItem
     Private appraiser As Hashtable
     Private isOldItem As Boolean = False
     Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
-    Private ItemPrincipal As Double, Penalty As Double
+    Private ItemPrincipal As Double, Penalty As Double, netAmount As Double
+
+    Private PRINTER_PT As String = GetOption("PrinterPT")
+    Private PRINTER_OR As String = GetOption("PrinterOR")
 
     Const ITEM_REDEEM As String = "REDEEM"
     Const ITEM_NEWLOAN As String = "NEW LOAN"
     Const ITEM_RENEW As String = "RENEW"
+    Const HAS_ADVINT As Boolean = True
 
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -41,6 +30,14 @@ Public Class frmPawnItem
         LoadInformation()
         LoadAppraisers()
         If transactionType = "L" Then NewLoan()
+
+    End Sub
+
+    Private Sub Authorization()
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
 #Region "GUI"
@@ -208,9 +205,9 @@ Public Class frmPawnItem
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Select Case transactionType
-            Case "L" : SaveNewLoan() 'PrintNewLoan()
-            Case "X" : SaveRedeem() 'PrintRedeemOR()
-            Case "R" : SaveRenew() 'PrintRenew()
+            Case "L" : SaveNewLoan() : PrintNewLoan()
+            Case "X" : SaveRedeem() : PrintRedeemOR()
+            Case "R" : SaveRenew() : PrintRenew()
         End Select
 
         MsgBox("Item Posted!", MsgBoxStyle.Information)
@@ -283,19 +280,12 @@ Public Class frmPawnItem
         End If
     End Sub
 
-    Private Sub txtPrincipal_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        On Error Resume Next
-
-        LoanAdvanceInterest()
-        txtPrincipal2.Text = txtPrincipal.Text
-    End Sub
-
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If transactionType = "X" Then
             btnRedeem.Text = "&Redeem"
             txtRedeem.BackColor = Drawing.SystemColors.Control
             transactionType = "D"
-            btnVoid.Enabled = True
+            Authorization()
             btnSave.Enabled = False
 
             LoadPawnTicket(PawnItem, "D")
@@ -309,7 +299,7 @@ Public Class frmPawnItem
         Redeem()
         btnSave.Enabled = True
         btnRedeem.Text = "&Cancel"
-        btnVoid.Enabled = False
+        Authorization()
     End Sub
 
     Private Sub txtRedeem_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRedeem.KeyPress
@@ -323,7 +313,7 @@ Public Class frmPawnItem
             btnRenew.Text = "Rene&w"
             txtRenew.BackColor = Drawing.SystemColors.Control
             transactionType = "D"
-            btnVoid.Enabled = True
+            Authorization()
             btnSave.Enabled = False
 
             LoadPawnTicket(PawnItem, "D")
@@ -337,7 +327,7 @@ Public Class frmPawnItem
         Redeem("R")
         btnSave.Enabled = True
         btnRenew.Text = "&Cancel"
-        btnVoid.Enabled = False
+        Authorization()
     End Sub
 
     Private Sub txtRenew_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRenew.KeyPress
@@ -349,6 +339,15 @@ Public Class frmPawnItem
 #End Region
 
 #Region "Controller"
+
+    Private Sub PrintRenew()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        PrintRenewPT()
+        PrintRenewOR()
+    End Sub
 
     Private Sub SaveRedeem()
         With PawnItem
@@ -383,58 +382,116 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub ComputeInterests()
-        If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
-        ItemPrincipal = CDbl(txtPrincipal.Text)
+        Dim itemPrincipal As Double
 
-        AdvanceInterest = ItemPrincipal * GetInt(30)
-        ServiceCharge = GetServiceCharge(ItemPrincipal)
-        DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
-        Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
-
-        If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
-            'OLD Migrate
-
-            ' UPDATE001
-            ' ReProgram that OLD ITEMS will not be charge for ADVANCE INTEREST
-            ' Removed due to NO ADVANCE INTEREST FOR OLD PAWN ITEMS
-            'If daysDue <= 3 Then DelayInt += AdvanceInterest
-            'If transactionType = "X" Then AdvanceInterest = 0
-            'If transactionType = "R" Then ServiceCharge += ServiceCharge
-
-            'Added
-            AdvanceInterest = 0 'Advance Interest Removed
-            If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 _
-                Then DelayInt = ItemPrincipal * GetInt(30)
-
-            isOldItem = True
+        If PawnInfo Is Nothing Then Exit Sub
+        If transactionType = "D" Then Exit Sub 'No Compute if Information Display
+        If Not cboType.Items.Count > 0 Then Exit Sub
+        If IsNumeric(txtPrincipal.Text) Then
+            itemPrincipal = CDbl(txtPrincipal.Text)
         Else
-            isOldItem = False
-            'New Transactions
-            If transactionType = "X" Then
-                ServiceCharge = 0
-            End If
-
-            If daysDue > 3 Then
-                DelayInt -= AdvanceInterest
-            End If
+            itemPrincipal = 0
         End If
 
-        txtAdv.Text = AdvanceInterest
+        ServiceCharge = GetServiceCharge(itemPrincipal)
+        DelayInt = itemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
+        Penalty = itemPrincipal * GetInt(daysDue + 30, "Penalty")
+
+        If Not PawnItem Is Nothing Then
+            'Not New Entry
+            If PawnItem.AdvanceInterest = 0 Then
+                'OLD Migrate
+                'Do not add Advance Interest
+                AdvanceInterest = 0
+                isOldItem = True
+
+            End If
+        Else
+            'Load Advance Interest
+            If HAS_ADVINT Then
+                AdvanceInterest = GetInt(30) * itemPrincipal
+            End If
+
+            If transactionType = "X" Then ServiceCharge = 0
+            isOldItem = False
+        End If
+
+        netAmount = itemPrincipal - AdvanceInterest - ServiceCharge
+        'Display
         txtOver.Text = daysDue
-        txtInt.Text = DelayInt
-        txtPenalty.Text = Penalty
-        txtService.Text = ServiceCharge
-        txtEvat.Text = 0
+        txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
+        txtInt.Text = DelayInt.ToString("#,##0.00")
+        txtPenalty.Text = Penalty.ToString("#,##0.00")
+        txtService.Text = ServiceCharge.ToString("#,##0.00")
+        txtNet.Text = netAmount.ToString("Php #,##0.00")
 
         If transactionType = "R" Then
-            txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
-            txtRedeem.Text = 0
-            txtNet.Text = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
+            txtRenew.Text = (AdvanceInterest + ServiceCharge + DelayInt + Penalty).ToString("Php #,##0.00")
+            txtRedeem.Text = "Php 0.00"
+            netAmount = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
+            txtNet.Text = netAmount
         ElseIf transactionType = "X" Then
-            txtRenew.Text = 0
-            txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
+            txtRenew.Text = "Php 0.00"
+            txtRedeem.Text = (PawnItem.Principal + DelayInt + Penalty + ServiceCharge).ToString("Php #,##0.00")
+        Else
+            txtRenew.Text = "Php 0.00"
+            txtRedeem.Text = "Php 0.00"
         End If
     End Sub
+
+    'Private Sub ComputeInterests()
+    '    If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
+    '    ItemPrincipal = CDbl(txtPrincipal.Text)
+
+    '    AdvanceInterest = ItemPrincipal * GetInt(30)
+    '    ServiceCharge = GetServiceCharge(ItemPrincipal)
+    '    DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
+    '    Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
+
+    '    If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
+    '        'OLD Migrate
+
+    '        ' UPDATE001
+    '        ' ReProgram that OLD ITEMS will not be charge for ADVANCE INTEREST
+    '        ' Removed due to NO ADVANCE INTEREST FOR OLD PAWN ITEMS
+    '        'If daysDue <= 3 Then DelayInt += AdvanceInterest
+    '        'If transactionType = "X" Then AdvanceInterest = 0
+    '        'If transactionType = "R" Then ServiceCharge += ServiceCharge
+
+    '        'Added
+    '        AdvanceInterest = 0 'Advance Interest Removed
+    '        If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 _
+    '            Then DelayInt = ItemPrincipal * GetInt(30)
+
+    '        isOldItem = True
+    '    Else
+    '        isOldItem = False
+    '        'New Transactions
+    '        If transactionType = "X" Then
+    '            ServiceCharge = 0
+    '        End If
+
+    '        If daysDue > 3 Then
+    '            DelayInt -= AdvanceInterest
+    '        End If
+    '    End If
+
+    '    txtAdv.Text = AdvanceInterest
+    '    txtOver.Text = daysDue
+    '    If transactionType <> "L" Then txtInt.Text = DelayInt
+    '    txtPenalty.Text = Penalty
+    '    txtService.Text = ServiceCharge
+    '    txtEvat.Text = 0
+
+    '    If transactionType = "R" Then
+    '        txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
+    '        txtRedeem.Text = 0
+    '        txtNet.Text = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
+    '    ElseIf transactionType = "X" Then
+    '        txtRenew.Text = 0
+    '        txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
+    '    End If
+    'End Sub
 
     Private Sub SaveNewLoan()
         PawnItem = New PawnTicket
@@ -455,7 +512,7 @@ Public Class frmPawnItem
             .AdvanceInterest = txtAdv.Text
             .NetAmount = txtNet.Text
 
-            If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text
+            'If IsNumeric(txtInt.Text) Then .Interest = txtInt.Text 'Remove INT for new loan
             If IsNumeric(txtService.Text) Then .ServiceCharge = txtService.Text
             If IsNumeric(txtEvat.Text) Then .EVAT = txtEvat.Text
 
@@ -593,7 +650,7 @@ Public Class frmPawnItem
         If transactionType = "D" Then
             LockFields(True)
             btnSave.Enabled = False : btnRenew.Enabled = True
-            btnRedeem.Enabled = True : btnVoid.Enabled = True
+            btnRedeem.Enabled = True : Authorization()
         End If
 
         ChangeForm()
@@ -609,7 +666,7 @@ Public Class frmPawnItem
                 LockFields(1)
             Case "X"
                 LockFields(1)
-                btnVoid.Enabled = True
+                Authorization()
         End Select
 
         'If PawnItem.ItemType = "CEL" Then btnRenew.Enabled = False 'Disable Renewal for Cellphone
@@ -769,11 +826,6 @@ Public Class frmPawnItem
 
     Private Sub LoadInformation()
         LoadPawnInfo()
-
-        'Authorization
-        With POSuser
-            btnVoid.Enabled = .canVoid
-        End With
     End Sub
 
     Private Sub LoadPawnInfo()
@@ -838,17 +890,17 @@ Public Class frmPawnItem
         Next
     End Sub
 
-    Private Sub LoanAdvanceInterest()
-        TypeInt = GetInt(30)
+    'Private Sub LoanAdvanceInterest()
+    '    TypeInt = GetInt(30)
 
-        If transactionType = "L" Then
-            txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
-            txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
-            txtService.Text = GetServiceCharge(txtPrincipal.Text)
-        End If
-        txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt) - CDbl(txtService.Text)
+    '    If transactionType = "L" Then
+    '        txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
+    '        txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
+    '        txtService.Text = GetServiceCharge(txtPrincipal.Text)
+    '    End If
+    '    txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt) - CDbl(txtService.Text)
 
-    End Sub
+    'End Sub
 
     Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
         Dim mySql As String = "SELECT * FROM tblInt WHERE ItemType = '" & cboType.Text & "' AND STATUS = 0"
@@ -882,7 +934,7 @@ Public Class frmPawnItem
         cboAppraiser.Enabled = Not st
         btnRenew.Enabled = Not st
         btnRedeem.Enabled = Not st
-        btnVoid.Enabled = Not st
+        If POSuser.canVoid Then btnVoid.Enabled = Not st
         btnSave.Enabled = Not st
     End Sub
 
@@ -959,10 +1011,15 @@ Public Class frmPawnItem
 
 #Region "Printing"
     Private Sub PrintNewLoan()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+
         Dim autoPrintPT As Reporting
         'On Error Resume Next
 
-        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        Dim printerName As String = PRINTER_PT
         If Not canPrint(printerName) Then Exit Sub
 
         Dim report As LocalReport = New LocalReport
@@ -1005,9 +1062,13 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub PrintRedeemOR()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
         Dim autoPrintPT As Reporting
 
-        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        Dim printerName As String = PRINTER_OR
         If Not canPrint(printerName) Then Exit Sub
 
         Dim report As LocalReport = New LocalReport
@@ -1048,12 +1109,11 @@ Public Class frmPawnItem
             Next
         End If
 
+        'ISSUE: 0003 02/08/2016
+        'Redeem - OR no duplicate
         Dim paperSize As New Dictionary(Of String, Double)
         paperSize.Add("width", 8.5)
-        paperSize.Add("height", 4.5)
-
-        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        'frmReport.Show()
+        paperSize.Add("height", 9) 'Changed 4.5 to 9
 
         autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
@@ -1062,15 +1122,10 @@ Public Class frmPawnItem
         Me.Focus()
     End Sub
 
-    Private Sub PrintRenew()
-        'PrintRenewPT()
-        'PrintRenewOR()
-    End Sub
-
     Private Sub PrintRenewPT()
         Dim autoPrintPT As Reporting
 
-        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        Dim printerName As String = PRINTER_PT
         If Not canPrint(printerName) Then Exit Sub
 
         Dim report As LocalReport = New LocalReport
@@ -1105,24 +1160,19 @@ Public Class frmPawnItem
             Next
         End If
 
-        'autoPrintPT.Export(report)
-        'autoPrintPT.m_currentPageIndex = 0
-        'autoPrintPT.Print(printerName)
-
-        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        frmReport.Show()
+        autoPrintPT.Export(report)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
 
         Me.Focus()
     End Sub
 
     Private Sub PrintRenewOR()
         Dim autoPrintPT As Reporting
-        Dim printerName As String = "EPSON LX-300+ /II Parallel"
+        Dim printerName As String = PRINTER_OR
         If Not canPrint(printerName) Then Exit Sub
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
-
-
 
         Dim mySql As String, ptIDx As Single = PawnItem.PawnID
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
@@ -1160,7 +1210,14 @@ Public Class frmPawnItem
             Next
         End If
 
-        autoPrintPT.Export(report)
+        'ISSUE: 0003 02/08/2016
+        'Renewal - OR is too small
+        'Renewal - OR no duplicate
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 9) 'Include the duplicate; changed 4.5 to 9
+
+        autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
         autoPrintPT.Print(printerName)
 
@@ -1179,6 +1236,20 @@ Public Class frmPawnItem
 #End Region
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
-        MsgBox("NOT YET IMPLEMENTED", MsgBoxStyle.Critical)
+        PrintNewLoan()
+    End Sub
+
+    Private Sub cboKarat_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboKarat.KeyPress
+        If isEnter(e) Then
+            txtAppr.Focus()
+        End If
+    End Sub
+
+    Private Sub txtPrincipal_KeyUp(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
+        ComputeInterests()
+    End Sub
+
+    Private Sub txtPrincipal_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPrincipal.LostFocus
+        cboAppraiser.Focus()
     End Sub
 End Class

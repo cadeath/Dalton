@@ -212,12 +212,6 @@
     <Compile Include="Forms\frmCashInOut2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmCashInOutBrowse.Designer.vb">
-      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmCashInOutBrowse.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmCIO_List.Designer.vb">
       <DependentUpon>frmCIO_List.vb</DependentUpon>
     </Compile>
@@ -493,9 +487,6 @@
     <EmbeddedResource Include="Forms\frmCashInOut2.resx">
       <DependentUpon>frmCashInOut2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmCashInOutBrowse.resx">
-      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCIO_List.resx">
       <DependentUpon>frmCIO_List.vb</DependentUpon>
     </EmbeddedResource>
@@ -674,6 +665,9 @@
     </None>
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
+    <None Include="sample.FDB">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Template\Import Template.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -739,6 +733,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Antialiasfactory-Jewelry-Stone-Ring.ico" />
+    <Content Include="changelog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Rar.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

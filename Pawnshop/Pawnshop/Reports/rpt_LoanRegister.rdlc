@@ -1537,6 +1537,7 @@
                               <Value>=Fields!ExpiryDate.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
+                                <Format>MM/dd/yyyy</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2095,7 +2096,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=COUNT(Fields!PawnTicket.Value)</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -2166,7 +2169,8 @@
                             <TextRun>
                               <Value>=Sum(Fields!Appraisal.Value)</Value>
                               <Style>
-                                <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                                <FontSize>9pt</FontSize>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2186,7 +2190,6 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2202,7 +2205,8 @@
                             <TextRun>
                               <Value>=Sum(Fields!Principal.Value)</Value>
                               <Style>
-                                <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                                <FontSize>9pt</FontSize>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2222,7 +2226,6 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2238,7 +2241,8 @@
                             <TextRun>
                               <Value>=Sum(Fields!Interest.Value)</Value>
                               <Style>
-                                <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                                <FontSize>9pt</FontSize>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2258,7 +2262,6 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2274,7 +2277,8 @@
                             <TextRun>
                               <Value>=Sum(Fields!ServiceCharge.Value)</Value>
                               <Style>
-                                <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                                <FontSize>9pt</FontSize>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2294,7 +2298,6 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -2310,7 +2313,8 @@
                             <TextRun>
                               <Value>=Sum(Fields!NetAmount.Value)</Value>
                               <Style>
-                                <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
+                                <FontSize>9pt</FontSize>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2330,7 +2334,6 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
