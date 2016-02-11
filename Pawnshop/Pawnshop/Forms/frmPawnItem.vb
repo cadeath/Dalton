@@ -457,7 +457,7 @@ Public Class frmPawnItem
 
         txtOver.Text = daysDue
         txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
-        If isEarlyRedeem And Not isOldItem Then
+        If isEarlyRedeem Then
             txtInt.Text = Math.Abs(DelayInt).ToString("#,##0.00")
             lblInterest.Text = "REFUND"
             lblRedeemDue.ForeColor = Color.Red
