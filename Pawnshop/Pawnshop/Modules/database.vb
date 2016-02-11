@@ -1,6 +1,8 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
-' V1.0.1
+' v1.1.0
+'  - Add Column in tblPawn EARLYREDEEM
+' v1.0.1
 '  - Added ORDATE, RENEWDUE and REDEEMDUE at Loan Register VIEW
 
 Friend Module database

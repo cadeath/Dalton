@@ -70,7 +70,7 @@ Partial Class frmPawnItem
         Me.cboAppraiser = New System.Windows.Forms.ComboBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.txtRedeem = New System.Windows.Forms.TextBox()
-        Me.Label30 = New System.Windows.Forms.Label()
+        Me.lblRedeemDue = New System.Windows.Forms.Label()
         Me.txtRenew = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtEvat = New System.Windows.Forms.TextBox()
@@ -573,7 +573,7 @@ Partial Class frmPawnItem
         'GroupBox5
         '
         Me.GroupBox5.Controls.Add(Me.txtRedeem)
-        Me.GroupBox5.Controls.Add(Me.Label30)
+        Me.GroupBox5.Controls.Add(Me.lblRedeemDue)
         Me.GroupBox5.Controls.Add(Me.txtRenew)
         Me.GroupBox5.Controls.Add(Me.Label29)
         Me.GroupBox5.Controls.Add(Me.txtEvat)
@@ -607,15 +607,15 @@ Partial Class frmPawnItem
         Me.txtRedeem.Size = New System.Drawing.Size(100, 20)
         Me.txtRedeem.TabIndex = 9
         '
-        'Label30
+        'lblRedeemDue
         '
-        Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(16, 325)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(89, 16)
-        Me.Label30.TabIndex = 21
-        Me.Label30.Text = "Redeem Due"
+        Me.lblRedeemDue.AutoSize = True
+        Me.lblRedeemDue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRedeemDue.Location = New System.Drawing.Point(16, 325)
+        Me.lblRedeemDue.Name = "lblRedeemDue"
+        Me.lblRedeemDue.Size = New System.Drawing.Size(89, 16)
+        Me.lblRedeemDue.TabIndex = 21
+        Me.lblRedeemDue.Text = "Redeem Due"
         '
         'txtRenew
         '
@@ -953,7 +953,7 @@ Partial Class frmPawnItem
     Friend WithEvents lblAuth As System.Windows.Forms.Label
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents txtRedeem As System.Windows.Forms.TextBox
-    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents lblRedeemDue As System.Windows.Forms.Label
     Friend WithEvents txtRenew As System.Windows.Forms.TextBox
     Friend WithEvents Label29 As System.Windows.Forms.Label
     Friend WithEvents txtEvat As System.Windows.Forms.TextBox

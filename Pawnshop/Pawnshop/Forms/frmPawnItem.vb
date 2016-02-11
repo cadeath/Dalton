@@ -25,6 +25,9 @@ Public Class frmPawnItem
     Const ITEM_RENEW As String = "RENEW"
     Const HAS_ADVINT As Boolean = True
 
+    Private isEarlyRedeem As Boolean = False
+    Private earlyDays As Integer = 0
+
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -226,7 +229,6 @@ Public Class frmPawnItem
             Exit Sub
         End If
 
-
         ans = MsgBox("Do you want to enter another one?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
         If ans = Windows.Forms.DialogResult.No Then
             frmPawning.LoadActive()
@@ -356,7 +358,12 @@ Public Class frmPawnItem
             .OfficialReceiptDate = CurrentDate
 
             .DaysOverDue = txtOver.Text
-            .Interest = txtInt.Text
+            If isEarlyRedeem Then
+                .Interest = 0
+                .EarlyRedeem = txtInt.Text
+            Else
+                .Interest = txtInt.Text
+            End If
             .Penalty = txtPenalty.Text
             .ServiceCharge = txtService.Text
             .EVAT = txtEvat.Text
@@ -373,12 +380,15 @@ Public Class frmPawnItem
                 AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket)
             Else
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
+                If isEarlyRedeem Then
+                    AddJournal(.EarlyRedeem, "Debit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
+                End If
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket)
                 If daysDue > 3 Then
                     AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                     AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 End If
-            End If
+                End If
         End With
     End Sub
 
@@ -410,22 +420,34 @@ Public Class frmPawnItem
                 'Do not add Advance Interest
                 AdvanceInterest = 0
                 isOldItem = True
+
+                If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 _
+                    Then DelayInt = itemPrincipal * GetInt(30)
+            Else
+                'New Items
+                If transactionType = "X" Then ServiceCharge = 0
             End If
         Else
-            If transactionType = "X" Then ServiceCharge = 0
+            'New Loan
         End If
         If daysDue > 3 Then DelayInt -= AdvanceInterest
-
         Net_Amount = itemPrincipal - AdvanceInterest - ServiceCharge
+        If isEarlyRedeem Then
+            If itemPrincipal * GetInt(earlyDays) <> PawnItem.AdvanceInterest And HAS_ADVINT Then
+                DelayInt = -(itemPrincipal * GetInt(earlyDays))
+            Else
+                isEarlyRedeem = False
+            End If
+        End If
+
         'Display
         If transactionType = "R" Then
             Renew_Due = AdvanceInterest + ServiceCharge + DelayInt + Penalty
             Redeem_Due = 0
-            ServiceCharge = IIf(isOldItem, 0, ServiceCharge)
-            Net_Amount = PawnItem.Principal - AdvanceInterest - ServiceCharge
+            Net_Amount = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
         ElseIf transactionType = "X" Then
             AdvanceInterest = 0
-            Net_Amount = 0
+            'Net_Amount = 0
             Renew_Due = 0
             Redeem_Due = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
         Else
@@ -435,7 +457,17 @@ Public Class frmPawnItem
 
         txtOver.Text = daysDue
         txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
-        txtInt.Text = DelayInt.ToString("#,##0.00")
+        If isEarlyRedeem And Not isOldItem Then
+            txtInt.Text = Math.Abs(DelayInt).ToString("#,##0.00")
+            lblInterest.Text = "REFUND"
+            lblRedeemDue.ForeColor = Color.Red
+            lblRedeemDue.Font = New Font(lblRedeemDue.Font, FontStyle.Bold)
+        Else
+            lblInterest.Text = "Interest"
+            txtInt.Text = DelayInt.ToString("#,##0.00")
+            lblRedeemDue.ForeColor = Color.Black
+            lblRedeemDue.Font = New Font(lblRedeemDue.Font, FontStyle.Regular)
+        End If
         txtPenalty.Text = Penalty.ToString("#,##0.00")
         txtService.Text = ServiceCharge.ToString("#,##0.00")
         txtNet.Text = Net_Amount.ToString("Php #,##0.00")
@@ -565,9 +597,11 @@ Public Class frmPawnItem
         transactionType = typ
         GenerateReceipt()
 
-        Dim dayDiff = CurrentDate - PawnItem.LoanDate
-        Dim dayDiffNew As Integer = dayDiff.Days + 1
         Dim overDays = CurrentDate - PawnItem.MaturityDate
+        If overDays.Days < 0 And transactionType = "X" Then
+            isEarlyRedeem = True
+            earlyDays = overDays.Days + 30
+        End If
         daysDue = IIf(overDays.Days > 0, overDays.Days, 0)
         ComputeInterests()
 
