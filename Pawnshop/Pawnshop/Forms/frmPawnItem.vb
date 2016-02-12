@@ -434,7 +434,7 @@ Public Class frmPawnItem
         Net_Amount = itemPrincipal - AdvanceInterest - ServiceCharge
         If isEarlyRedeem Then
             If itemPrincipal * GetInt(earlyDays) <> PawnItem.AdvanceInterest And HAS_ADVINT Then
-                DelayInt = -(itemPrincipal * GetInt(earlyDays))
+                DelayInt = -(PawnItem.AdvanceInterest - itemPrincipal * GetInt(earlyDays))
             Else
                 isEarlyRedeem = False
             End If
