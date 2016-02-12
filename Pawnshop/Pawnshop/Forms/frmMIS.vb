@@ -94,7 +94,13 @@ Public Class frmMIS
                 Try
                     'Create Client
                     fname = oSheet.Cells(ent, 1).value : colIdx += 1
+                    If fname = "" Then
+                        GoTo wrongEntry
+                    End If
                     lname = oSheet.Cells(ent, 2).value : colIdx += 1
+                    If lname = "" Then
+                        GoTo wrongEntry
+                    End If
                     Dim ds As DataSet = SearchClient(fname, lname)
                     Dim migratePawner As New Client, isNew As Boolean = True
                     If ds.Tables(0).Rows.Count > 0 Then

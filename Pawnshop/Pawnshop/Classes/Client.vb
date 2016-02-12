@@ -337,9 +337,9 @@ Public Class Client
     Private Sub loadClientInfoByRow(ByVal dr As DataRow)
         With dr
             _id = .Item("ClientID")
-            _firstName = .Item("FirstName")
-            _middleName = .Item("MiddleName")
-            _lastName = .Item("LastName")
+            _firstName = IIf(IsDBNull(.Item("FirstName")), "", .Item("FirstName"))
+            _middleName = IIf(IsDBNull(.Item("MiddleName")), "", .Item("MiddleName"))
+            _lastName = IIf(IsDBNull(.Item("LastName")), "", .Item("LastName"))
             _suffixName = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
 
             _addrSt = .Item("Addr_Street")
