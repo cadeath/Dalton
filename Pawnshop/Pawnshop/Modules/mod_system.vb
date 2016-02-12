@@ -10,7 +10,7 @@
 Module mod_system
 
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = False
+    Public DEV_MODE As Boolean = 0
 
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser

@@ -255,14 +255,16 @@
         End Get
     End Property
 
-    'Public Property DelayInterest As Double
-    '    Set(ByVal value As Double)
-    '        _delayInt = value
-    '    End Set
-    '    Get
-    '        Return _delayInt
-    '    End Get
-    'End Property
+    Private _earlyRedeem As Double
+    Public Property EarlyRedeem() As Double
+        Get
+            Return _earlyRedeem
+        End Get
+        Set(ByVal value As Double)
+            _earlyRedeem = value
+        End Set
+    End Property
+
 
     Public Property Penalty As Double
         Set(ByVal value As Double)
@@ -362,6 +364,7 @@
                 .Item("SystemInfo") = Now
                 .Item("EncoderID") = UserID
                 .Item("AdvInt") = _advanceInterest
+                .Item("EarlyRedeem") = _earlyRedeem
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
@@ -440,6 +443,7 @@
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
             _advanceInterest = .Item("AdvInt")
+            _earlyRedeem = .Item("EarlyRedeem")
             If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
         End With
     End Sub
@@ -478,6 +482,7 @@
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
             _advanceInterest = .Item("AdvInt")
+            _earlyRedeem = .Item("EarlyRedeem")
             If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
         End With
     End Sub

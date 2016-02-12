@@ -1,13 +1,23 @@
+ISSUE: 0005 02/12/2016
+[+] Client Module load too long
+[+] Import client should have FIRST and LASTNAME
+
+ISSUE: 0004 02/10/2016
+[o] A Redeemed PawnTicket will just changed the Status from L or R into X. What will be the net amount?
+    - Already talk with Sir Dennis
+
+
 ISSUE: 0003 02/08/2016
 [+] Renewal - OR is too small
 [+] Renewal/Redeem - OR no duplicate
-[-] Wrong Cash Count
+[o] Wrong Cash Count
+    - No problem with CC
 
 
 ISSUE: 0002 02/06/2016
 [+] Sequence Report - Categories
 [+] Sequence Report - Remove Borrowings and Insurance for redundancy
-[+] Loan Register Report - Remove PHP sign to increase space
+[-] Loan Register Report - Remove PHP sign to increase space
 [-] Loan Register Report - Redemption not working
 [-] Outstanding Report - Per Category
 [+] Money Transfer - swap label for Pay-Out and Send In
@@ -25,4 +35,5 @@ ISSUE: 0001 02/04/2016
 [+] Database MT structure changed.
 [+] REPORT LAYOUT LESS FROM 1" TO 0.2 OR 0.5"
 [+] DOLLAR, VOID DISPLAY BROWSE
-[+] MONEYGRAM TO GPRS <--- was correct?
+[o] MONEYGRAM TO GPRS <--- was correct?
+    - Already fixed and checked

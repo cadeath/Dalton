@@ -29,6 +29,8 @@
         mySql &= "  INTEREST," & vbCrLf
         mySql &= "  SERVICECHARGE," & vbCrLf
         mySql &= "  NETAMOUNT," & vbCrLf
+        mySql &= "  RENEWDUE," & vbCrLf
+        mySql &= "  REDEEMDUE," & vbCrLf
         mySql &= "  ORDATE," & vbCrLf
         mySql &= "  USERNAME," & vbCrLf
         mySql &= "  STATUS)" & vbCrLf
@@ -44,6 +46,8 @@
         mySql &= "       P.INTEREST + P.ADVINT as INTEREST," & vbCrLf
         mySql &= "       P.SERVICECHARGE," & vbCrLf
         mySql &= "       P.NETAMOUNT," & vbCrLf
+        mySql &= "       P.RENEWDUE," & vbCrLf 'RENEWDUE and REDEEMDUE 
+        mySql &= "       P.REDEEMDUE," & vbCrLf
         mySql &= "       P.ORDATE," & vbCrLf
         mySql &= "       U.USERNAME," & vbCrLf
         mySql &= "       P.STATUS " & vbCrLf

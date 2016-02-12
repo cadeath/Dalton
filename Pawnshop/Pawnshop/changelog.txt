@@ -2,6 +2,8 @@ CHANGELOG
 
 Version 1.1
  - Enhancing PAWNING MODULE
+ - Revise Early Redeem
+ - Limit First 100 Clients to be display
 
 Version 1.0.1
  - Change OR layout from 4.5 to 9" height
