@@ -2,6 +2,7 @@ ISSUE: 0005 02/12/2016
 [+] Client Module load too long
 [+] Import client should have FIRST and LASTNAME
 
+
 ISSUE: 0004 02/10/2016
 [o] A Redeemed PawnTicket will just changed the Status from L or R into X. What will be the net amount?
     - Already talk with Sir Dennis
