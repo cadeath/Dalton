@@ -11,9 +11,18 @@
             End If
         Next
 
-        If Not isValid Then Exit Sub
+        'If Not isValid Then Exit Sub
 
-        GenReport()
+        GenReport2()
+    End Sub
+
+    Private Sub GenReport2()
+        Dim fillData As String = "dsNewLoan", mySql As String
+        mySql = "SELECT * FROM LOAN_REGISTER WHERE "
+        mySql &= String.Format("LoanDate = '{0}'", monCal.SelectionStart.ToString("MM/dd/yyyy"))
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_RegisterNewLoan.rdlc", , 0)
+        frmReport.Show()
     End Sub
 
     Private Sub GenReport()

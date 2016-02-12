@@ -2,6 +2,7 @@
 ' Changelog
 ' v1.1.0
 '  - Add Column in tblPawn EARLYREDEEM
+'  - Add Column in LOAN REGISTER VIEW for ADVANCE INTEREST
 ' v1.0.1
 '  - Added ORDATE, RENEWDUE and REDEEMDUE at Loan Register VIEW
 
