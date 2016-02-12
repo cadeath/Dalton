@@ -597,7 +597,7 @@ Public Class frmPawnItem
         transactionType = typ
         GenerateReceipt()
 
-        Dim overDays = CurrentDate - PawnItem.MaturityDate
+        Dim overDays = CurrentDate.Date - PawnItem.MaturityDate.Date
         If overDays.Days < 0 And transactionType = "X" Then
             isEarlyRedeem = True
             earlyDays = overDays.Days + 30
