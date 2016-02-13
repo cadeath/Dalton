@@ -19,7 +19,7 @@ DefaultDirName={pf}\cdt-S0ft\Dalton Pawnshop
 DefaultGroupName=cdt-S0ft\Dalton Pawnshop
 OutputDir=D:\cadeath\Documents\DevInstaller\Pawnshop
 OutputBaseFilename=daltonps-110
-SetupIconFile=D:\cadeath\Pictures\Graphics\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
+SetupIconFile=..\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
 Compression=lzma
 SolidCompression=yes
 

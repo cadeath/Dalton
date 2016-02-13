@@ -1,7 +1,7 @@
 ﻿Public Class frmMain
 
     Private DB_PATH As String
-    Friend LATEST_DBVERSION As String = "1.0.1"
+    Friend LATEST_DBVERSION As String = "1.0.2"
 
     Private Sub btnUpdate_Click(sender As System.Object, e As System.EventArgs) Handles btnUpdate.Click
         DB_PATH = txtURL.Text
@@ -12,11 +12,16 @@
 
         database.dbName = DB_PATH
         If isUpdated() Then MsgBox("Database already been patched up", MsgBoxStyle.Information)
+        Try
+            _101sql.Main()
+            _110.Main()
+            Database_Update(LATEST_DBVERSION)
+            Developers_Note("Database Updated!")
 
-        _101sql.Main()
-        Database_Update(LATEST_DBVERSION)
-        Developers_Note("Database Updated!")
-
-        MsgBox("Database has been PATCHED UP!", MsgBoxStyle.Information)
+            MsgBox("Database has been PATCHED UP!", MsgBoxStyle.Information)
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical)
+        End Try
+        
     End Sub
 End Class

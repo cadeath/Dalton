@@ -14,7 +14,7 @@
 
     Function isUpdated() As Boolean
         Dim ds As DataSet, mySql As String
-        mySql = "SELECT * FROM tblMaintenance WHERE OPT-KEYS = 'DBVersion'"
+        mySql = "SELECT * FROM tblMaintenance WHERE OPT_KEYS = 'DBVersion'"
         ds = LoadSQL(mySql)
 
         If ds.Tables(0).Rows(0).Item("OPT_VALUES") = frmMain.LATEST_DBVERSION Then

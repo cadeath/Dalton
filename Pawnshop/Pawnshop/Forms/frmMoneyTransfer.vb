@@ -137,7 +137,7 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0012"
-            .ServiceName = "GPRS - iREMIT"
+            .ServiceName = "GPRS - iREMIT to GPRS"
             .isGenerated = False
             .ChargeCode = "iremit to gprs"
             .hasPayoutCommission = True
