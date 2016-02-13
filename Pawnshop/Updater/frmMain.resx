@@ -120,6 +120,7 @@
   <data name="RichTextBox1.Text" xml:space="preserve">
     <value>Patcher for 1.1.0
  - update PAWNING view
+ - alter tblPawn
 
 Patcher for 1.0.1
  - update loan register

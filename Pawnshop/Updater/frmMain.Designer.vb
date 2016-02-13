@@ -31,6 +31,7 @@ Partial Class frmMain
         '
         'RichTextBox1
         '
+        Me.RichTextBox1.BackColor = System.Drawing.Color.White
         Me.RichTextBox1.Location = New System.Drawing.Point(12, 51)
         Me.RichTextBox1.Name = "RichTextBox1"
         Me.RichTextBox1.ReadOnly = True

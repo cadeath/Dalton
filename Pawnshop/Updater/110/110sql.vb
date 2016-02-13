@@ -1,7 +1,17 @@
 ﻿Module _110
 
     Sub Main()
+        Alter_tblPawn()
         New_Pawning()
+    End Sub
+
+    'ALTER TABLE TBLPAWN ADD EARLYREDEEM NUMERIC(12, 2);
+
+    Private Sub Alter_tblPawn()
+        Dim mySql As String = _
+            "ALTER TABLE TBLPAWN ADD EARLYREDEEM NUMERIC(12, 2) DEFAULT '0.0' NOT NULL;"
+        RunCommand(mySql)
+        Developers_Note("Add column successful")
     End Sub
 
     Private Sub New_Pawning()
