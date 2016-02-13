@@ -136,13 +136,13 @@
               <Width>2.28125in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.0625in</Width>
+              <Width>0.99521in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.30395in</Width>
+              <Width>1.18375in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.12501in</Width>
+              <Width>1.3125in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -275,15 +275,14 @@ Description</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox17">
+                    <Textbox Name="Textbox8">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Maturity/
-Expiry Date</Value>
+                              <Value>Loan Date</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -292,7 +291,7 @@ Expiry Date</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox17</rd:DefaultName>
+                      <rd:DefaultName>Textbox8</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -317,15 +316,25 @@ Expiry Date</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox22">
+                    <Textbox Name="Textbox13">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Appraisal/
-Appraiser</Value>
+                              <Value>Interest/</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Penalty</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -334,7 +343,7 @@ Appraiser</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox22</rd:DefaultName>
+                      <rd:DefaultName>Textbox13</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -359,15 +368,25 @@ Appraiser</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox25">
+                    <Textbox Name="Textbox20">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Principal/
-Adv Int</Value>
+                              <Value>Principal/</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Redeem</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -376,7 +395,7 @@ Adv Int</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox25</rd:DefaultName>
+                      <rd:DefaultName>Textbox20</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -495,14 +514,14 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="MatuDate1">
+                    <Textbox Name="LoanDate">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!MatuDate.Value</Value>
+                              <Value>=Fields!LoanDate.Value</Value>
                               <Style>
                                 <Format>dd-MMM-yy</Format>
                               </Style>
@@ -511,7 +530,7 @@ Adv Int</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>MatuDate1</rd:DefaultName>
+                      <rd:DefaultName>LoanDate</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -526,14 +545,14 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Appraisal1">
+                    <Textbox Name="Interest">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Appraisal.Value</Value>
+                              <Value>=Fields!Interest.Value</Value>
                               <Style>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
@@ -542,7 +561,7 @@ Adv Int</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Appraisal1</rd:DefaultName>
+                      <rd:DefaultName>Interest</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -557,7 +576,7 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Principal1">
+                    <Textbox Name="Principal">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -573,7 +592,7 @@ Adv Int</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Principal1</rd:DefaultName>
+                      <rd:DefaultName>Principal</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -680,23 +699,21 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ExpiryDate1">
+                    <Textbox Name="Textbox10">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ExpiryDate.Value</Value>
-                              <Style>
-                                <Format>dd-MMM-yy</Format>
-                              </Style>
+                              <Value />
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ExpiryDate1</rd:DefaultName>
+                      <rd:DefaultName>Textbox10</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -711,47 +728,14 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Appraiser">
+                    <Textbox Name="Penalty">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>="BY: " + Fields!Appraiser.Value</Value>
-                              <Style>
-                                <FontStyle>Italic</FontStyle>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Appraiser</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="AdvInt2">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!AdvInt.Value</Value>
+                              <Value>=Fields!Penalty.Value</Value>
                               <Style>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
@@ -760,41 +744,7 @@ Adv Int</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>AdvInt2</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.25in</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox5">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <rd:DefaultName>Penalty</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -809,52 +759,23 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox6">
+                    <Textbox Name="RedeemDue">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox6</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Status">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!Status.Value</Value>
+                              <Value>=Fields!RedeemDue.Value</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Status</rd:DefaultName>
+                      <rd:DefaultName>RedeemDue</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -863,99 +784,6 @@ Adv Int</Value>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox8">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox8</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox9">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style />
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox9</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Amount">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Fields!NetAmount.Value</Value>
-                              <Style>
-                                <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
-                        <TopBorder>
-                          <Style>Solid</Style>
-                          <Width>1.5pt</Width>
-                        </TopBorder>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1063,7 +891,7 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox131">
+                    <Textbox Name="Textbox12">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -1072,14 +900,14 @@ Adv Int</Value>
                             <TextRun>
                               <Value />
                               <Style>
-                                <FontWeight>Bold</FontWeight>
+                                <FontStyle>Italic</FontStyle>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox131</rd:DefaultName>
+                      <rd:DefaultName>Textbox12</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -1094,14 +922,14 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox13">
+                    <Textbox Name="Textbox18">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>GRAND TOTAL:</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -1110,7 +938,7 @@ Adv Int</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox13</rd:DefaultName>
+                      <rd:DefaultName>Textbox18</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -1125,15 +953,16 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="NetAmount">
+                    <Textbox Name="RedeemDue1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!NetAmount.Value)</Value>
+                              <Value>=Fields!RedeemDue.Value</Value>
                               <Style>
+                                <FontWeight>Bold</FontWeight>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                               </Style>
                             </TextRun>
@@ -1141,12 +970,13 @@ Adv Int</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>NetAmount</rd:DefaultName>
+                      <rd:DefaultName>RedeemDue1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
                         </Border>
                         <TopBorder>
+                          <Color>Black</Color>
                           <Style>Solid</Style>
                           <Width>1.5pt</Width>
                         </TopBorder>
@@ -1183,7 +1013,6 @@ Adv Int</Value>
               <TablixMembers>
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixMember>
             <TablixMember>
@@ -1192,7 +1021,7 @@ Adv Int</Value>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsPawning</DataSetName>
-        <Height>1.38542in</Height>
+        <Height>1.13542in</Height>
         <Width>6.83521in</Width>
         <Style>
           <Border>
@@ -1232,7 +1061,7 @@ Adv Int</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>LOAN REGISTER - NEW LOAN &amp; RENEWAL</Value>
+                  <Value>LOAN REGISTER - REDEMPTION</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                   </Style>
@@ -1370,7 +1199,7 @@ Adv Int</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>LOAN REGISTER - NEW LOAN &amp; RENEWAL</Value>
+                  <Value>LOAN REGISTER - REDEMPTION</Value>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>

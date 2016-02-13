@@ -574,6 +574,9 @@
     <EmbeddedResource Include="POS\frmPOS.resx">
       <DependentUpon>frmPOS.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_RegisterRedeem.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmSegreList.resx">
       <DependentUpon>frmSegreList.vb</DependentUpon>
     </EmbeddedResource>
