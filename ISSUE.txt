@@ -1,3 +1,14 @@
+ISSUE: 0006 02/15/2016
+[+] PAWNING Print Button only works when DISPLAYING
+[o] GPRS to GPRS - Received Money, without Service Charge
+	- Previously, it was given to me with charges. Update Database
+[+] iREMIT change into GPRS - iRemit to GPRS
+[-] Cash In/Out report
+	- Working but not fully functional
+[-] Add Smart Money from Perfecom, Cash In/Out
+[-] Income from EC Pay, account should be change
+[-] Cash Offsetting Lay-Away, account should be change
+
 ISSUE: 0005 02/12/2016
 [+] Client Module load too long
 [+] Import client should have FIRST and LASTNAME
@@ -18,8 +29,9 @@ ISSUE: 0003 02/08/2016
 ISSUE: 0002 02/06/2016
 [+] Sequence Report - Categories
 [+] Sequence Report - Remove Borrowings and Insurance for redundancy
-[-] Loan Register Report - Remove PHP sign to increase space
-[-] Loan Register Report - Redemption not working
+[o] Loan Register Report - Remove PHP sign to increase space
+[o] Loan Register Report - Redemption not working
+	- Revised report
 [-] Outstanding Report - Per Category
 [+] Money Transfer - swap label for Pay-Out and Send In
 [+] Pawning - TAB and Enter should be consistent

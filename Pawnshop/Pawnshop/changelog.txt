@@ -1,4 +1,6 @@
 CHANGELOG
+Version 1.1.0.1
+ - Fixing Pawning Print Button
 
 Version 1.1
  - Enhancing PAWNING MODULE

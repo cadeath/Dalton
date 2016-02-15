@@ -34,7 +34,11 @@ Public Class frmPawnItem
         LoadInformation()
         LoadAppraisers()
         If transactionType = "L" Then NewLoan()
+        PrintButton(False)
+    End Sub
 
+    Private Sub PrintButton(st As Boolean)
+        btnPrint.Enabled = st
     End Sub
 
     Private Sub Authorization()
@@ -292,6 +296,7 @@ Public Class frmPawnItem
             btnSave.Enabled = False
 
             LoadPawnTicket(PawnItem, "D")
+            PrintButton(1)
             Exit Sub
         End If
         If transactionType <> "D" Then
@@ -301,6 +306,7 @@ Public Class frmPawnItem
 
         Redeem()
         btnSave.Enabled = True
+        PrintButton(0)
         btnRedeem.Text = "&Cancel"
         Authorization()
     End Sub
@@ -320,6 +326,7 @@ Public Class frmPawnItem
             btnSave.Enabled = False
 
             LoadPawnTicket(PawnItem, "D")
+            PrintButton(1)
             Exit Sub
         End If
         If transactionType <> "D" Then
@@ -328,6 +335,7 @@ Public Class frmPawnItem
         End If
 
         Redeem("R")
+        PrintButton(0)
         btnSave.Enabled = True
         btnRenew.Text = "&Cancel"
         Authorization()
@@ -719,6 +727,8 @@ Public Class frmPawnItem
             lblNPT.Visible = True
             lblNPT.Text &= CurrentPTNumber(ds.Tables(0).Rows(0).Item("PawnTicket"))
         End If
+
+        PrintButton(True)
     End Sub
 
     Private Sub RenewDisabled(catID As String)
@@ -829,8 +839,6 @@ Public Class frmPawnItem
         btnRenew.Enabled = False
         btnRedeem.Enabled = False
         btnVoid.Enabled = False
-
-        'AdvanceInterest()
     End Sub
 
     Friend Sub LoadClient(ByVal cl As Client)

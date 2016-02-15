@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' v1.1.0.1
+'  - Update Charges and cash Tables
 ' v1.1.0
 '  - Add Column in tblPawn EARLYREDEEM
 '  - Add Column in LOAN REGISTER VIEW for ADVANCE INTEREST
