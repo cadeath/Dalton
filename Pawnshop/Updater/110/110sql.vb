@@ -37,6 +37,8 @@
         "  PRINCIPAL," & vbCrLf &
         "  INTEREST," & vbCrLf &
         "  ADVINT," & vbCrLf &
+        "  SERVICECHARGE," & vbCrLf &
+        "  PENALTY," & vbCrLf &
         "  ITEMTYPE," & vbCrLf &
         "  CATEGORY," & vbCrLf &
         "  GRAMS," & vbCrLf &
@@ -55,7 +57,7 @@
         "        ELSE P.DESCRIPTION" & vbCrLf &
         "    END AS Description, " & vbCrLf &
         "    P.ORNUM, P.ORDATE, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL, P.PRINCIPAL, " & vbCrLf &
-        "    P.INTEREST, P.ADVINT,P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT," & vbCrLf &
+        "    P.INTEREST, P.ADVINT, P.SERVICECHARGE, P.PENALTY, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT," & vbCrLf &
         "    CASE P.STATUS" & vbCrLf &
         "	    WHEN '0' THEN 'RENEWED'" & vbCrLf &
         "        WHEN 'R' THEN 'RENEW'" & vbCrLf &

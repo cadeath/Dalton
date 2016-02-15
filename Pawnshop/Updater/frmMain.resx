@@ -118,11 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="RichTextBox1.Text" xml:space="preserve">
-    <value>Patcher for 1.1.0
+    <value>Patcher DB Version 1.0.3
  - update PAWNING view
  - alter tblPawn
+ - Add ServiceCharge and Penalty
 
-Patcher for 1.0.1
+Patcher DB Version 1.0.1
  - update loan register
  - remove interest for New Loan
 version 1.0.1

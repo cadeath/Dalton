@@ -1,8 +1,9 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
-' v1.1.0.1
+' v1.0.3
 '  - Update Charges and cash Tables
-' v1.1.0
+'  - Add ServiceCharge on PAWNING VIEW
+' v1.0.2
 '  - Add Column in tblPawn EARLYREDEEM
 '  - Add Column in LOAN REGISTER VIEW for ADVANCE INTEREST
 '  - Add Column INTEREST and ADVINT in PAWNING
@@ -19,7 +20,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.0.2"
+    Private DBversion As String = "1.0.3"
     Private language() As String = _
         {"Connection error failed."}
 

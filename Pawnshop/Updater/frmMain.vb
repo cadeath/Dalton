@@ -1,7 +1,7 @@
 ﻿Public Class frmMain
 
     Private DB_PATH As String
-    Friend LATEST_DBVERSION As String = "1.0.2"
+    Friend LATEST_DBVERSION As String = "1.0.3"
 
     Private Sub btnUpdate_Click(sender As System.Object, e As System.EventArgs) Handles btnUpdate.Click
         DB_PATH = txtURL.Text

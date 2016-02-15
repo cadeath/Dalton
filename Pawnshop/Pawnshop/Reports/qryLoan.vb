@@ -23,7 +23,7 @@
     Private Sub Generate_NewLoanRenewal()
         Dim fillData As String = "dsPawning", mySql As String
         mySql = "SELECT * FROM PAWNING WHERE "
-        mySql &= String.Format("LoanDate = '{0}' AND (STATUS = 'NEW' OR STATUS = 'RENEW')", monCal.SelectionStart.ToString("MM/dd/yyyy"))
+        mySql &= String.Format("(LoanDate = '{0}' AND STATUS = 'NEW') OR (ORDATE = '{0}' AND STATUS = 'RENEWED')", monCal.SelectionStart.ToString("MM/dd/yyyy"))
 
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
