@@ -422,7 +422,7 @@
                     End If
                 Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
                     "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
-                    "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
+                    "GPRS - iREMIT to GPRS", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
 
                     Select Case cboType.Text
                         Case "GPRS - GPRS to Smart Money"
@@ -437,13 +437,13 @@
                             CashCount_Name = "GPRS-MetroBank"
                         Case "GPRS - GPRS to BANK (Maybank/LandBank)"
                             CashCount_Name = "GPRS-(Maybank/LandBank)"
-                        Case "GPRS - iREMIT"
+                        Case "GPRS - iREMIT to GPRS"
                             CashCount_Name = "iREMIT"
                         Case "GPRS - NYBP/Transfast to GPRS"
                             CashCount_Name = "NYBP/Transfast"
                         Case "GPRS - GPRS to Moneygram"
                             CashCount_Name = "GPRS-Moneygram"
-                        
+
                     End Select
 
                     If rbSend.Checked Then

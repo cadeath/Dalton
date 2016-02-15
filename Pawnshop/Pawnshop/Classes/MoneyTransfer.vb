@@ -28,12 +28,12 @@
         End Get
     End Property
 
-    Private _transID As Integer
-    Public Property TransactionID() As Integer
+    Private _transID As Single
+    Public Property TransactionID() As Single
         Get
             Return _transID
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Single)
             _transID = value
         End Set
     End Property
