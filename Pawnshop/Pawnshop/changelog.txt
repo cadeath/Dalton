@@ -1,6 +1,8 @@
 CHANGELOG
 Version 1.1.0.1
  - Fixing Pawning Print Button
+ - Add Smart Money from Perfecom, Cash In/Out
+ - iREMIT change into GPRS - iRemit to GPRS
 
 Version 1.1
  - Enhancing PAWNING MODULE

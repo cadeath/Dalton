@@ -5,9 +5,10 @@ ISSUE: 0006 02/15/2016
 [+] iREMIT change into GPRS - iRemit to GPRS
 [-] Cash In/Out report
 	- Working but not fully functional
-[-] Add Smart Money from Perfecom, Cash In/Out
-[-] Income from EC Pay, account should be change
-[-] Cash Offsetting Lay-Away, account should be change
+[+] Add Smart Money from Perfecom, Cash In/Out
+[+] Income from EC Pay, account should be change
+[o] Cash Offsetting Lay-Away, account should be change
+	- It was correct already, _SYS00000001057
 
 ISSUE: 0005 02/12/2016
 [+] Client Module load too long
