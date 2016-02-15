@@ -9,6 +9,7 @@ ISSUE: 0006 02/15/2016
 [+] Income from EC Pay, account should be change
 [o] Cash Offsetting Lay-Away, account should be change
 	- It was correct already, _SYS00000001057
+[-] Branch to Branch, Mlang is not included.
 
 ISSUE: 0005 02/12/2016
 [+] Client Module load too long
