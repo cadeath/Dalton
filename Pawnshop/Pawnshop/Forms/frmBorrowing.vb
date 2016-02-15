@@ -71,6 +71,9 @@
 
             .SaveBorrowings()
             AddRefNum()
+
+            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & BranchCode, "BORROW OUT")
+            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & BranchCode)
         End With
 
         Dim brwFile As New Hashtable
@@ -86,7 +89,7 @@
         CreateEsk(fileSave, brwFile)
 
         MsgBox("Saved!", MsgBoxStyle.Information)
-        ClearFields()
+        Me.Close()
     End Sub
 
     Private Function isValid() As Boolean

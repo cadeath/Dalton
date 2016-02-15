@@ -22,7 +22,7 @@ Partial Class frmCashInOut2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "TICKETING", "Ticketing Fund Account", "1000"}, -1)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "TICKETING", "Ticketing Fund Account", "1000"}, -1)
         Me.btnCashIn = New System.Windows.Forms.Button()
         Me.btnCashOut = New System.Windows.Forms.Button()
         Me.btnBrowse = New System.Windows.Forms.Button()
@@ -46,6 +46,7 @@ Partial Class frmCashInOut2
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
+        Me.btnInvIn = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -55,7 +56,7 @@ Partial Class frmCashInOut2
         Me.btnCashIn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCashIn.Location = New System.Drawing.Point(12, 12)
         Me.btnCashIn.Name = "btnCashIn"
-        Me.btnCashIn.Size = New System.Drawing.Size(84, 37)
+        Me.btnCashIn.Size = New System.Drawing.Size(84, 60)
         Me.btnCashIn.TabIndex = 0
         Me.btnCashIn.Text = "Cash In"
         Me.btnCashIn.UseVisualStyleBackColor = True
@@ -63,9 +64,9 @@ Partial Class frmCashInOut2
         'btnCashOut
         '
         Me.btnCashOut.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCashOut.Location = New System.Drawing.Point(12, 55)
+        Me.btnCashOut.Location = New System.Drawing.Point(12, 83)
         Me.btnCashOut.Name = "btnCashOut"
-        Me.btnCashOut.Size = New System.Drawing.Size(84, 37)
+        Me.btnCashOut.Size = New System.Drawing.Size(84, 60)
         Me.btnCashOut.TabIndex = 1
         Me.btnCashOut.Text = "Cash Out"
         Me.btnCashOut.UseVisualStyleBackColor = True
@@ -73,7 +74,7 @@ Partial Class frmCashInOut2
         'btnBrowse
         '
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(12, 98)
+        Me.btnBrowse.Location = New System.Drawing.Point(12, 481)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(84, 37)
         Me.btnBrowse.TabIndex = 2
@@ -213,7 +214,7 @@ Partial Class frmCashInOut2
         Me.lvDetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvDetails.FullRowSelect = True
         Me.lvDetails.GridLines = True
-        Me.lvDetails.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.lvDetails.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.lvDetails.Location = New System.Drawing.Point(102, 221)
         Me.lvDetails.MultiSelect = False
         Me.lvDetails.Name = "lvDetails"
@@ -267,11 +268,22 @@ Partial Class frmCashInOut2
         Me.btnPost.Text = "&Post"
         Me.btnPost.UseVisualStyleBackColor = True
         '
+        'btnInvIn
+        '
+        Me.btnInvIn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnInvIn.Location = New System.Drawing.Point(12, 155)
+        Me.btnInvIn.Name = "btnInvIn"
+        Me.btnInvIn.Size = New System.Drawing.Size(84, 60)
+        Me.btnInvIn.TabIndex = 5
+        Me.btnInvIn.Text = "Smart Money Inventory In"
+        Me.btnInvIn.UseVisualStyleBackColor = True
+        '
         'frmCashInOut2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(860, 530)
+        Me.Controls.Add(Me.btnInvIn)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lvDetails)
@@ -280,6 +292,7 @@ Partial Class frmCashInOut2
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.btnCashOut)
         Me.Controls.Add(Me.btnCashIn)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmCashInOut2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -314,4 +327,5 @@ Partial Class frmCashInOut2
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnPost As System.Windows.Forms.Button
+    Friend WithEvents btnInvIn As System.Windows.Forms.Button
 End Class

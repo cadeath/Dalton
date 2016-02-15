@@ -5,6 +5,11 @@
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadBorrowings()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub ClearFields()
@@ -78,6 +83,7 @@
 
         tmpBB.VoidBorrowings()
         MsgBox("Transaction #" & tmpBB.ReferenceNumber & " Void.")
+        LoadBorrowings()
     End Sub
 
     Private Sub lvBorrowings_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvBorrowings.DoubleClick
@@ -139,6 +145,9 @@
             .EncoderID = UserID
 
             .SaveBorrowings()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & BranchCode, "BORROW IN")
+            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & BranchCode)
         End With
 
         MsgBox("Borrowings Posted", MsgBoxStyle.Information)

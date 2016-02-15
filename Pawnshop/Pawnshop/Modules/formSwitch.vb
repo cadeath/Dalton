@@ -17,14 +17,10 @@
                 devClient.LoadClientInfo(cl)
             Case FormName.frmMTSend
                 frmMoneyTransfer.LoadSenderInfo(cl)
-                'Case FormName.frmPawning
-                '    frmNewloan.LoadPawnerInfo(cl)
             Case FormName.frmInsurance
                 frmInsurance.LoadHolder(cl)
             Case FormName.frmMTReceive
                 frmMoneyTransfer.LoadReceiverInfo(cl)
-            Case FormName.frmDollar
-                frmDollar.LoadCustomer(cl)
             Case FormName.frmPawnItem
                 frmPawnItem.LoadClient(cl)
             Case FormName.frmDollarSimple

@@ -127,4 +127,12 @@ Public Class devVerifyESK
         esk.Serialize(fsEsk, data)
         fsEsk.Close()
     End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        If exportFile.ImportConfig(txtURL.Text, "CashInOut") Is Nothing Then
+            MsgBox("FAILED", MsgBoxStyle.Critical)
+        Else
+            MsgBox("Success", MsgBoxStyle.Information)
+        End If
+    End Sub
 End Class

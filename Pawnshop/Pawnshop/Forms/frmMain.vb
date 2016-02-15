@@ -1,11 +1,13 @@
-﻿Public Class frmMain
+﻿
+Public Class frmMain
 
-    'NOTE
+    ' NOTE
     ' NotYetLogin sub don't have REPORTS DISABLE YET
     ' Please add reports and add it also at NotYetLogin
     ' sub.
 
     Friend dateSet As Boolean = False
+    Friend doSegregate As Boolean = False
 
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
@@ -25,7 +27,10 @@
         ExpiryGeneratorToolStripMenuItem.Enabled = Not st
         JournalEntriesToolStripMenuItem.Enabled = Not st
         CashCountToolStripMenuItem.Enabled = Not st
+        ItemPulloutToolStripMenuItem.Enabled = Not st
+        '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
+        ConsoleToolStripMenuItem.Enabled = Not st
 
         If st Then
             tsUser.Text = "No User yet"
@@ -37,7 +42,15 @@
 
     End Sub
 
+    Private Sub ExecuteSegregate()
+        doSegregate = AutoSegregate()
+    End Sub
+
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString
+        ConfiguringDB()
+        If Not DBCompatibilityCheck() Then MsgBox("Please update the database version", MsgBoxStyle.Critical) : End
+
         If POSuser.UserName = "" Then
             Console.WriteLine("Not Yet Login")
             NotYetLogin()
@@ -76,7 +89,7 @@
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SettingsToolStripMenuItem.Click
-        If Not POSuser.canSettings Then
+        If Not (POSuser.isSuperUser Or POSuser.canSettings) Then
             MsgBoxAuthoriation("You don't have access to Settings")
             Exit Sub
         End If
@@ -85,7 +98,7 @@
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
-        If Not POSuser.canUserManage Then
+        If Not (POSuser.isSuperUser Or POSuser.canUserManage) Then
             MsgBoxAuthoriation("You don't have access to User Management")
             Exit Sub
         End If
@@ -98,6 +111,7 @@
             MsgBoxAuthoriation("You don't have access to Expiry Generator")
             Exit Sub
         End If
+
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
     End Sub
@@ -107,6 +121,7 @@
             MsgBoxAuthoriation("You don't have access to Journal Entry Generator")
             Exit Sub
         End If
+
         frmExtractor.FormType = frmExtractor.ExtractType.JournalEntry
         frmExtractor.Show()
     End Sub
@@ -114,18 +129,17 @@
     Private Sub btnMoneyTransfer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMoneyTransfer.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canMoneyTransfer Then
+        If Not (POSuser.isSuperUser Or POSuser.canMoneyTransfer) Then
             MsgBoxAuthoriation("You don't have access to Money Transfer")
             Exit Sub
         End If
-        'frmMTlist.Show()
         frmMoneyTransfer.Show()
     End Sub
 
     Private Sub btnDollarBuying_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDollarBuying.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canDollarBuying Then
+        If Not (POSuser.isSuperUser Or POSuser.canDollarBuying) Then
             MsgBoxAuthoriation("You don't have access to Dollar Buying")
             Exit Sub
         End If
@@ -135,16 +149,16 @@
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canCashInOut Then
+        If Not (POSuser.isSuperUser Or POSuser.canCashInOut) Then
             MsgBoxAuthoriation("You don't have access to Cash In/Out")
             Exit Sub
         End If
-        'frmCashInOut.Show()
+
         frmCashInOut2.Show()
     End Sub
 
     Private Sub CloseOpenStore_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseOpenStore.Click
-        If Not POSuser.canOpenStore Then
+        If Not (POSuser.isSuperUser Or POSuser.canOpenStore) Then
             MsgBoxAuthoriation("You cannot Open a Store.")
             Exit Sub
         End If
@@ -154,7 +168,7 @@
     Private Sub btnClient_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClient.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canClientManage Then
+        If Not (POSuser.isSuperUser Or POSuser.canClientManage) Then
             MsgBoxAuthoriation("You don't have access to Client Management")
             Exit Sub
         End If
@@ -168,7 +182,7 @@
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canPawn Then
+        If Not (POSuser.isSuperUser Or POSuser.canPawn) Then
             MsgBoxAuthoriation("You don't have access to pawning")
             Exit Sub
         End If
@@ -176,8 +190,10 @@
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
+        ClosingStoreToolStripMenuItem.Enabled = dateSet
         If dateSet Then
             tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+            If Not doSegregate Then ExecuteSegregate()
         Else
             tsCurrentDate.Text = "Date not set"
         End If
@@ -186,7 +202,7 @@
     Private Sub btnBranch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBranch.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canBorrow Then
+        If Not (POSuser.isSuperUser Or POSuser.canBorrow) Then
             MsgBoxAuthoriation("You don't have access to Borrowings")
             Exit Sub
         End If
@@ -215,7 +231,7 @@
     Private Sub btnInsurance_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInsurance.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canInsurance Then
+        If Not (POSuser.isSuperUser Or POSuser.canInsurance) Then
             MsgBoxAuthoriation("You don't have access to insurance.")
             Exit Sub
         End If
@@ -226,7 +242,7 @@
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canLayAway Then
+        If (POSuser.isSuperUser Or Not POSuser.canLayAway) Then
             MsgBoxAuthoriation("You don't have access to Lay away.")
             Exit Sub
         End If
@@ -235,7 +251,7 @@
     Private Sub btnPOS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPOS.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canPOS Then
+        If Not (POSuser.isSuperUser Or POSuser.canPOS) Then
             MsgBoxAuthoriation("You don't have access to POS")
             Exit Sub
         End If
@@ -244,7 +260,7 @@
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If Not POSuser.canCashCount Then
+        If Not (POSuser.isSuperUser Or POSuser.canCashCount) Then
             MsgBoxAuthoriation("You don't have access to Cash Count")
             Exit Sub
         End If
@@ -253,7 +269,7 @@
     End Sub
 
     Private Sub BackupToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupToolStripMenuItem.Click
-        If Not POSuser.canBackup Then
+        If Not (POSuser.isSuperUser Or POSuser.canBackup) Then
             MsgBoxAuthoriation("You don't have access to Backup")
             Exit Sub
         End If
@@ -268,11 +284,80 @@
     End Sub
 
     Private Sub ConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConsoleToolStripMenuItem.Click
-        If Not POSuser.isSuperUser Then
+        If Not (POSuser.isSuperUser Or POSuser.canMigrate) Then
             MsgBoxAuthoriation("You don't have access to the Console")
             Exit Sub
         End If
 
         frmMIS.Show()
+    End Sub
+
+    Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
+        If Not POSuser.canOpenStore Then
+            MsgBoxAuthoriation("You cannot Close a Store.")
+            Exit Sub
+        End If
+        frmCashCount.Show()
+        frmCashCount.isClosing = True
+    End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
+        frmPullOut.Show()
+    End Sub
+
+    Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
+        qryLoan.Show()
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+        qryDate.Show()
+    End Sub
+
+    Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.DailyCashCount
+        qryDate.Show()
+    End Sub
+
+    Private Sub SequenceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SequenceToolStripMenuItem.Click
+        qrySequence.Show()
+    End Sub
+
+    Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
+        frmSegreList.Show()
+    End Sub
+
+    Private Sub CashInOutSummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
+        qryCashInOut.Show()
+    End Sub
+
+    Private Sub MoneyTransferToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
+        qryMoneyTransfer.Show()
+    End Sub
+
+    Private Sub frmMain_SizeChanged(sender As Object, e As System.EventArgs) Handles Me.SizeChanged
+        Console.WriteLine(Me.Width)
+        pButton.Top = 161
+        If Me.WindowState = FormWindowState.Maximized Then
+            pButton.Left = 543
+        End If
+        If Me.Width < 1080 And Not Me.WindowState = FormWindowState.Maximized Then
+            pButton.Anchor = AnchorStyles.Right
+        Else
+            pButton.Anchor = AnchorStyles.None
+            pButton.Left = 543
+        End If
+        
+    End Sub
+
+    Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.OutStanding
+        qryDate.Show()
+    End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+        qryDate.FormType = qryDate.ReportType.ItemPullOut
+        qryDate.Show()
     End Sub
 End Class

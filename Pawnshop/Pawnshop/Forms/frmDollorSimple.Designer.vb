@@ -134,10 +134,9 @@ Partial Class frmDollorSimple
         Me.txtRate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRate.Location = New System.Drawing.Point(324, 47)
         Me.txtRate.Name = "txtRate"
-        Me.txtRate.ReadOnly = True
         Me.txtRate.Size = New System.Drawing.Size(74, 22)
         Me.txtRate.TabIndex = 10
-        Me.txtRate.Text = "Php 48.00"
+        Me.txtRate.Text = "48"
         '
         'Label4
         '

@@ -4,6 +4,11 @@
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub txtHolder_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHolder.KeyPress
@@ -49,7 +54,7 @@
         txtBirthdate.Text = cl.Birthday
         Holder = cl
 
-        txtAmount.Focus()
+        txtPT.Focus()
     End Sub
 
     Private Sub txtAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmount.KeyPress
@@ -71,10 +76,13 @@
 
         curInsurance = getInsurance
         btnVoid.Enabled = True
+        txtPT.Enabled = False
     End Sub
 
     Private Function isValid() As Boolean
         If Holder Is Nothing Then txtHolder.Focus() : Return False
+        'If Not IsNumeric(txtPT.Text) Then txtPT.Focus() : Return False
+
         Return True
     End Function
 
@@ -86,6 +94,7 @@
         Dim newInsurance As New Insurance
         With newInsurance
             .COInumber = txtCoi.Text
+            If IsNumeric(txtPT.Text) Then .TicketNum = txtPT.Text
             .TransactionDate = dtpDate.Value
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
@@ -93,11 +102,15 @@
             .EncoderID = POSuser.UserID
 
             .SaveInsurance()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE")
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber)
         End With
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
-        btnNew.PerformClick()
         MsgBox("Entry Saved", MsgBoxStyle.Information)
+        btnNew.PerformClick()
+
         Me.Close()
     End Sub
 
@@ -110,6 +123,29 @@
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        ' ISSUE: 0001
+        ' Locking Insurance voiding exclusive for the same DATE
+        If curInsurance.TransactionDate.Date <> CurrentDate.Date Then
+            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        curInsurance.VoidTransaction()
+        MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
+        Me.Close()
+    End Sub
+
+    Private Sub txtPT_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress
+        'DigitOnly(e)
+        If isEnter(e) Then
+            btnSave.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtPT_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPT.TextChanged
 
     End Sub
 End Class

@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("Admin")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Microsoft")> 
-<Assembly: AssemblyProduct("Admin")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2015")> 
+<Assembly: AssemblyCompany("Stealth Assassin")> 
+<Assembly: AssemblyProduct("Admin Panel")> 
+<Assembly: AssemblyCopyright("CaDeatH ™")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

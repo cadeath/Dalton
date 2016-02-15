@@ -29,7 +29,7 @@
     Private _orDate As Date
     Private _lessPrincipal As Double
     Private _daysOverDue As Double
-    Private _delayInt As Double
+    'Private _delayInt As Double
     Private _penalty As Double
     Private _serviceCharge As Double
     Private _renewDue As Double
@@ -255,14 +255,16 @@
         End Get
     End Property
 
-    Public Property DelayInterest As Double
-        Set(ByVal value As Double)
-            _delayInt = value
-        End Set
+    Private _earlyRedeem As Double
+    Public Property EarlyRedeem() As Double
         Get
-            Return _delayInt
+            Return _earlyRedeem
         End Get
+        Set(ByVal value As Double)
+            _earlyRedeem = value
+        End Set
     End Property
+
 
     Public Property Penalty As Double
         Set(ByVal value As Double)
@@ -310,6 +312,14 @@
         End Set
     End Property
 
+    Private _pullOut As Date
+    Public ReadOnly Property PullOutDate() As Date
+        Get
+            Return _pullOut
+        End Get
+    End Property
+
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -345,7 +355,7 @@
                 .Item("ORDate") = _orDate
                 .Item("LessPrincipal") = _lessPrincipal
                 .Item("DaysOverDue") = _daysOverDue
-                .Item("DelayInt") = _delayInt
+                '.Item("DelayInt") = _delayInt
                 .Item("Penalty") = _penalty
                 .Item("ServiceCharge") = _serviceCharge
                 .Item("RenewDue") = _renewDue
@@ -354,6 +364,7 @@
                 .Item("SystemInfo") = Now
                 .Item("EncoderID") = UserID
                 .Item("AdvInt") = _advanceInterest
+                .Item("EarlyRedeem") = _earlyRedeem
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
@@ -380,7 +391,7 @@
                 .Item("ORDate") = _orDate
                 .Item("LessPrincipal") = _lessPrincipal
                 .Item("DaysOverDue") = _daysOverDue
-                .Item("DelayInt") = _delayInt
+                '.Item("DelayInt") = _delayInt
                 .Item("Penalty") = _penalty
                 .Item("ServiceCharge") = _serviceCharge
                 .Item("RenewDue") = _renewDue
@@ -425,13 +436,15 @@
             _orDate = .Item("ORDate")
             _lessPrincipal = .Item("LessPrincipal")
             _daysOverDue = .Item("DaysOverDue")
-            _delayInt = .Item("DelayInt")
+            '_delayInt = .Item("DelayInt")
             _penalty = .Item("Penalty")
             _serviceCharge = .Item("ServiceCharge")
             _renewDue = .Item("RenewDue")
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
             _advanceInterest = .Item("AdvInt")
+            _earlyRedeem = .Item("EarlyRedeem")
+            If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
         End With
     End Sub
 
@@ -448,7 +461,7 @@
             _auctionDate = .Item("AuctionDate")
             _itemType = .Item("ItemType")
             _catID = .Item("CatID")
-            _description = .Item("Description")
+            If Not IsDBNull(.Item("Description")) Then _description = .Item("Description")
             _karat = .Item("Karat")
             _grams = .Item("Grams")
             _appraisal = .Item("Appraisal")
@@ -462,13 +475,15 @@
             _orDate = .Item("ORDate")
             _lessPrincipal = .Item("LessPrincipal")
             _daysOverDue = .Item("DaysOverDue")
-            _delayInt = .Item("DelayInt")
+            '_delayInt = .Item("DelayInt")
             _penalty = .Item("Penalty")
             _serviceCharge = .Item("ServiceCharge")
             _renewDue = .Item("RenewDue")
             _redeemDue = .Item("RedeemDue")
             _status = .Item("Status")
             _advanceInterest = .Item("AdvInt")
+            _earlyRedeem = .Item("EarlyRedeem")
+            If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
         End With
     End Sub
 
@@ -486,7 +501,58 @@
     End Sub
 
     Public Sub VoidCancelTicket()
-        ChangeStatus("V")
+        Try
+            Dim curStatus As String = _status
+
+            If _status = "L" Then
+                ChangeStatus("V")
+                RemoveJournal("PT# " & _pawnTicket)
+                Exit Sub
+            End If
+
+            If _status <> "X" Then
+                ChangeStatus("V")
+            End If
+
+            If _oldTicket <> 0 Then
+                'Has Old PawnTicket
+                mySql = "SELECT * FROM " & fillData & " WHERE PawnTicket = " & _oldTicket
+                ds = New DataSet
+                ds = LoadSQL(mySql, fillData)
+                Dim st As String
+                If ds.Tables(fillData).Rows.Count = 0 Then
+                    ChangeStatus("L")
+                    RemoveJournal("PT# " & _pawnTicket)
+                    Exit Sub
+                Else
+                    If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
+                        st = "L"
+                    Else
+                        st = "R"
+                    End If
+                End If
+
+                ds.Tables(fillData).Rows(0).Item("Status") = st
+                With ds.Tables(fillData).Rows(0)
+                    .Item("OrNum") = 0
+                    .Item("OrDate") = New Date
+                    .Item("DAYSOVERDUE") = 0
+                    .Item("DelayINT") = 0
+                    .Item("Penalty") = 0
+                    .Item("ServiceCharge") = 0
+                    .Item("RenewDue") = 0
+                    .Item("RedeemDue") = 0
+                    .Item("AdvInt") = 0
+                End With
+                database.SaveEntry(ds, False)
+                RemoveJournal("PT# " & _oldTicket)
+            Else
+                ChangeStatus("L")
+                RemoveJournal("PT# " & _pawnTicket)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
+        End Try
     End Sub
 
     Public Sub RedeemTicket()
@@ -496,5 +562,16 @@
     Public Sub RenewTicket()
         ChangeStatus(0) 'Inactive
     End Sub
+
+    Public Sub PullOut(ByVal dt As Date)
+        ChangeStatus("W")
+
+        mySql = "SELECT * FROM " & fillData & _
+            " WHERE PawnID = " & _pawnid
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds.Tables(fillData).Rows(0).Item("PullOut") = dt
+        database.SaveEntry(ds, False)
+    End Sub
+
 #End Region
 End Class

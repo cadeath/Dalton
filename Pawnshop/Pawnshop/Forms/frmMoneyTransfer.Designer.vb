@@ -139,7 +139,7 @@ Partial Class frmMoneyTransfer
         Me.GroupBox2.Controls.Add(Me.cboType)
         Me.GroupBox2.Location = New System.Drawing.Point(189, 12)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(244, 84)
+        Me.GroupBox2.Size = New System.Drawing.Size(285, 84)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Service Type"
@@ -149,10 +149,10 @@ Partial Class frmMoneyTransfer
         Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboType.FormattingEnabled = True
-        Me.cboType.Items.AddRange(New Object() {"Pera Padala", "Western Union"})
-        Me.cboType.Location = New System.Drawing.Point(13, 45)
+        Me.cboType.Items.AddRange(New Object() {"Pera Padala", "Western Union", "Cebuana Llhuiller"})
+        Me.cboType.Location = New System.Drawing.Point(6, 45)
         Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(208, 24)
+        Me.cboType.Size = New System.Drawing.Size(273, 24)
         Me.cboType.TabIndex = 2
         '
         'GroupBox3
@@ -178,7 +178,7 @@ Partial Class frmMoneyTransfer
         Me.txtSenderID.Location = New System.Drawing.Point(111, 116)
         Me.txtSenderID.Name = "txtSenderID"
         Me.txtSenderID.Size = New System.Drawing.Size(129, 22)
-        Me.txtSenderID.TabIndex = 4
+        Me.txtSenderID.TabIndex = 6
         Me.txtSenderID.Text = "Driver's License"
         '
         'txtSenderIDNum
@@ -187,7 +187,7 @@ Partial Class frmMoneyTransfer
         Me.txtSenderIDNum.Location = New System.Drawing.Point(111, 144)
         Me.txtSenderIDNum.Name = "txtSenderIDNum"
         Me.txtSenderIDNum.Size = New System.Drawing.Size(296, 22)
-        Me.txtSenderIDNum.TabIndex = 5
+        Me.txtSenderIDNum.TabIndex = 7
         Me.txtSenderIDNum.Text = "MMMMMMMMMMMMMMMMMMM"
         '
         'Label4
@@ -270,7 +270,7 @@ Partial Class frmMoneyTransfer
         Me.txtReceiverID.Location = New System.Drawing.Point(111, 116)
         Me.txtReceiverID.Name = "txtReceiverID"
         Me.txtReceiverID.Size = New System.Drawing.Size(129, 22)
-        Me.txtReceiverID.TabIndex = 4
+        Me.txtReceiverID.TabIndex = 3
         Me.txtReceiverID.Text = "Driver's License"
         '
         'txtReceiverIDNum
@@ -279,7 +279,7 @@ Partial Class frmMoneyTransfer
         Me.txtReceiverIDNum.Location = New System.Drawing.Point(111, 144)
         Me.txtReceiverIDNum.Name = "txtReceiverIDNum"
         Me.txtReceiverIDNum.Size = New System.Drawing.Size(296, 22)
-        Me.txtReceiverIDNum.TabIndex = 5
+        Me.txtReceiverIDNum.TabIndex = 4
         Me.txtReceiverIDNum.Text = "MMMMMMMMMMMMMMMMMMM"
         '
         'Label1
@@ -299,7 +299,7 @@ Partial Class frmMoneyTransfer
         Me.txtReceiverAddr.Multiline = True
         Me.txtReceiverAddr.Name = "txtReceiverAddr"
         Me.txtReceiverAddr.Size = New System.Drawing.Size(331, 67)
-        Me.txtReceiverAddr.TabIndex = 3
+        Me.txtReceiverAddr.TabIndex = 2
         Me.txtReceiverAddr.Text = "Eskie Cirrus James Maquilang"
         '
         'Label5
@@ -317,7 +317,7 @@ Partial Class frmMoneyTransfer
         Me.btnSearchReceiver.Location = New System.Drawing.Point(367, 13)
         Me.btnSearchReceiver.Name = "btnSearchReceiver"
         Me.btnSearchReceiver.Size = New System.Drawing.Size(75, 23)
-        Me.btnSearchReceiver.TabIndex = 7
+        Me.btnSearchReceiver.TabIndex = 1
         Me.btnSearchReceiver.Text = "Search"
         Me.btnSearchReceiver.UseVisualStyleBackColor = True
         '
@@ -327,7 +327,7 @@ Partial Class frmMoneyTransfer
         Me.txtReceiver.Location = New System.Drawing.Point(65, 13)
         Me.txtReceiver.Name = "txtReceiver"
         Me.txtReceiver.Size = New System.Drawing.Size(296, 22)
-        Me.txtReceiver.TabIndex = 6
+        Me.txtReceiver.TabIndex = 0
         Me.txtReceiver.Text = "Eskie Cirrus James Maquilang"
         '
         'Label6
@@ -368,7 +368,7 @@ Partial Class frmMoneyTransfer
         Me.cboLocation.Location = New System.Drawing.Point(9, 250)
         Me.cboLocation.Name = "cboLocation"
         Me.cboLocation.Size = New System.Drawing.Size(250, 24)
-        Me.cboLocation.TabIndex = 17
+        Me.cboLocation.TabIndex = 5
         '
         'txtTransNum
         '
@@ -377,7 +377,7 @@ Partial Class frmMoneyTransfer
         Me.txtTransNum.Name = "txtTransNum"
         Me.txtTransNum.ReadOnly = True
         Me.txtTransNum.Size = New System.Drawing.Size(253, 22)
-        Me.txtTransNum.TabIndex = 8
+        Me.txtTransNum.TabIndex = 0
         Me.txtTransNum.Text = "Eskie Cirrus James Maquilang"
         '
         'Label13
@@ -396,7 +396,7 @@ Partial Class frmMoneyTransfer
         Me.txtNetAmount.Location = New System.Drawing.Point(6, 206)
         Me.txtNetAmount.Name = "txtNetAmount"
         Me.txtNetAmount.Size = New System.Drawing.Size(253, 22)
-        Me.txtNetAmount.TabIndex = 12
+        Me.txtNetAmount.TabIndex = 4
         Me.txtNetAmount.Text = "0"
         '
         'Label12
@@ -415,7 +415,7 @@ Partial Class frmMoneyTransfer
         Me.txtCharge.Location = New System.Drawing.Point(6, 162)
         Me.txtCharge.Name = "txtCharge"
         Me.txtCharge.Size = New System.Drawing.Size(253, 22)
-        Me.txtCharge.TabIndex = 11
+        Me.txtCharge.TabIndex = 3
         Me.txtCharge.Text = "0"
         '
         'Label10
@@ -444,7 +444,7 @@ Partial Class frmMoneyTransfer
         Me.txtAmount.Location = New System.Drawing.Point(6, 119)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(253, 22)
-        Me.txtAmount.TabIndex = 10
+        Me.txtAmount.TabIndex = 2
         Me.txtAmount.Text = "Eskie Cirrus James Maquilang"
         '
         'Label8
@@ -464,7 +464,7 @@ Partial Class frmMoneyTransfer
         Me.txtRefNum.Name = "txtRefNum"
         Me.txtRefNum.ReadOnly = True
         Me.txtRefNum.Size = New System.Drawing.Size(253, 22)
-        Me.txtRefNum.TabIndex = 9
+        Me.txtRefNum.TabIndex = 1
         Me.txtRefNum.Text = "Eskie Cirrus James Maquilang"
         '
         'Label7

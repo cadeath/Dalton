@@ -32,6 +32,7 @@ Partial Class frmInsuranceList
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
@@ -80,7 +81,7 @@ Partial Class frmInsuranceList
         '
         'lvInsurance
         '
-        Me.lvInsurance.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
+        Me.lvInsurance.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.lvInsurance.FullRowSelect = True
         Me.lvInsurance.GridLines = True
         Me.lvInsurance.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
@@ -93,7 +94,7 @@ Partial Class frmInsuranceList
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "COI No"
+        Me.ColumnHeader1.Text = "Ref#"
         Me.ColumnHeader1.Width = 58
         '
         'ColumnHeader2
@@ -110,6 +111,10 @@ Partial Class frmInsuranceList
         '
         Me.ColumnHeader4.Text = "Valid Until"
         Me.ColumnHeader4.Width = 111
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "PT#"
         '
         'btnCancel
         '
@@ -159,4 +164,5 @@ Partial Class frmInsuranceList
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
 End Class

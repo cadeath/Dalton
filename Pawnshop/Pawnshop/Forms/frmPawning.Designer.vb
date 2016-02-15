@@ -41,19 +41,25 @@ Partial Class frmPawning
         Me.btnRedeem = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.chkRedeem = New System.Windows.Forms.CheckBox()
+        Me.chkRenew = New System.Windows.Forms.CheckBox()
+        Me.chkSeg = New System.Windows.Forms.CheckBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 74)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(775, 70)
+        Me.GroupBox1.Size = New System.Drawing.Size(853, 70)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search Item"
@@ -61,7 +67,7 @@ Partial Class frmPawning
         'btnSearch
         '
         Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.Location = New System.Drawing.Point(695, 38)
+        Me.btnSearch.Location = New System.Drawing.Point(773, 38)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(74, 23)
         Me.btnSearch.TabIndex = 6
@@ -71,13 +77,12 @@ Partial Class frmPawning
         'txtSearch
         '
         Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(6, 38)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(683, 22)
+        Me.txtSearch.Size = New System.Drawing.Size(761, 22)
         Me.txtSearch.TabIndex = 0
-        Me.txtSearch.Text = "Kiko Mizuhara"
         '
         'Label1
         '
@@ -91,15 +96,15 @@ Partial Class frmPawning
         'lvPawners
         '
         Me.lvPawners.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvPawners.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9})
         Me.lvPawners.FullRowSelect = True
         Me.lvPawners.GridLines = True
         Me.lvPawners.Location = New System.Drawing.Point(12, 150)
         Me.lvPawners.MultiSelect = False
         Me.lvPawners.Name = "lvPawners"
-        Me.lvPawners.Size = New System.Drawing.Size(776, 226)
+        Me.lvPawners.Size = New System.Drawing.Size(854, 226)
         Me.lvPawners.TabIndex = 1
         Me.lvPawners.UseCompatibleStateImageBehavior = False
         Me.lvPawners.View = System.Windows.Forms.View.Details
@@ -129,7 +134,7 @@ Partial Class frmPawning
         '
         'ColumnHeader6
         '
-        Me.ColumnHeader6.Text = "Matu"
+        Me.ColumnHeader6.Text = "Maturity"
         Me.ColumnHeader6.Width = 71
         '
         'ColumnHeader7
@@ -178,7 +183,7 @@ Partial Class frmPawning
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Location = New System.Drawing.Point(713, 383)
+        Me.btnClose.Location = New System.Drawing.Point(791, 383)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 2
@@ -189,19 +194,97 @@ Partial Class frmPawning
         '
         Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnView.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnView.Location = New System.Drawing.Point(626, 382)
+        Me.btnView.Location = New System.Drawing.Point(704, 382)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 6
         Me.btnView.Text = "&View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+        'chkRedeem
+        '
+        Me.chkRedeem.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkRedeem.AutoSize = True
+        Me.chkRedeem.Location = New System.Drawing.Point(778, 35)
+        Me.chkRedeem.Name = "chkRedeem"
+        Me.chkRedeem.Size = New System.Drawing.Size(66, 17)
+        Me.chkRedeem.TabIndex = 7
+        Me.chkRedeem.Text = "Redeem"
+        Me.chkRedeem.UseVisualStyleBackColor = True
+        '
+        'chkRenew
+        '
+        Me.chkRenew.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkRenew.AutoSize = True
+        Me.chkRenew.Location = New System.Drawing.Point(778, 12)
+        Me.chkRenew.Name = "chkRenew"
+        Me.chkRenew.Size = New System.Drawing.Size(60, 17)
+        Me.chkRenew.TabIndex = 8
+        Me.chkRenew.Text = "Renew"
+        Me.chkRenew.UseVisualStyleBackColor = True
+        '
+        'chkSeg
+        '
+        Me.chkSeg.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chkSeg.AutoSize = True
+        Me.chkSeg.Location = New System.Drawing.Point(778, 58)
+        Me.chkSeg.Name = "chkSeg"
+        Me.chkSeg.Size = New System.Drawing.Size(81, 17)
+        Me.chkSeg.TabIndex = 9
+        Me.chkSeg.Text = "Segregated"
+        Me.chkSeg.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Black
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.LightGray
+        Me.Label2.Location = New System.Drawing.Point(12, 396)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(187, 13)
+        Me.Label2.TabIndex = 10
+        Me.Label2.Text = "* Light Gray - Inactive[Renewed/Void]"
+        '
+        'Label3
+        '
+        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Black
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.Yellow
+        Me.Label3.Location = New System.Drawing.Point(207, 396)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(102, 13)
+        Me.Label3.TabIndex = 11
+        Me.Label3.Text = "Yellow - Segregated"
+        '
+        'Label4
+        '
+        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.Black
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.Red
+        Me.Label4.Location = New System.Drawing.Point(315, 396)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(167, 13)
+        Me.Label4.TabIndex = 12
+        Me.Label4.Text = "Red - Withdraw [Redeem/Pullout]"
+        '
         'frmPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(800, 418)
+        Me.ClientSize = New System.Drawing.Size(878, 418)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.chkSeg)
+        Me.Controls.Add(Me.chkRenew)
+        Me.Controls.Add(Me.chkRedeem)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnRedeem)
@@ -215,6 +298,7 @@ Partial Class frmPawning
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -236,4 +320,10 @@ Partial Class frmPawning
     Friend WithEvents btnRedeem As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents chkRedeem As System.Windows.Forms.CheckBox
+    Friend WithEvents chkRenew As System.Windows.Forms.CheckBox
+    Friend WithEvents chkSeg As System.Windows.Forms.CheckBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 End Class

@@ -26,6 +26,16 @@ Public Class Insurance
         End Set
     End Property
 
+    Private _ptNum As Integer
+    Public Property TicketNum() As Integer
+        Get
+            Return _ptNum
+        End Get
+        Set(ByVal value As Integer)
+            _ptNum = value
+        End Set
+    End Property
+
     Private _client As Client
     Public Property Client() As Client
         Get
@@ -46,7 +56,6 @@ Public Class Insurance
             _fullName = value
         End Set
     End Property
-
 
     Private _transDate As Date
     Public Property TransactionDate() As Date
@@ -109,6 +118,7 @@ Public Class Insurance
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
             .Item("CoiNo") = _coiNo
+            .Item("PawnTicket") = _ptNum
             .Item("ClientID") = _client.ID
             .Item("ClientName") = _fullName
             .Item("TransDate") = _transDate
@@ -134,6 +144,7 @@ Public Class Insurance
         With dr
             _id = .Item("InsuranceID")
             _coiNo = .Item("CoiNo")
+            _ptNum = .Item("PawnTicket")
             Dim tmpC As New Client
             tmpC.LoadClient(.Item("ClientID"))
             _client = tmpC
@@ -153,8 +164,8 @@ Public Class Insurance
         ds.Tables(fillData).Rows(0).Item("Status") = _status
 
         database.SaveEntry(ds, False)
+        RemoveJournal("COI# " & Me.COInumber)
     End Sub
-
 #End Region
 
 End Class
