@@ -160,6 +160,11 @@
             Case "Disbursement"
                 AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
                 AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber)
+            Case "INVENTORY IN"
+                AddJournal(_amount, "Credit", "Smart Money Inventory Offsetting Account", "Ref# " & Me.LastIDNumber)
+                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect)
+            Case Else
+                MsgBox(_type & " not found", MsgBoxStyle.Critical, "Developer WARNING")
         End Select
     End Sub
 

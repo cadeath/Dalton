@@ -69,6 +69,7 @@
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
         End If
         isCustomInOut = False
+        gpTrans.Enabled = True
 
         cboCat.Items.Clear()
         UpdateCategory(cashInCat)
@@ -199,6 +200,7 @@
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
         End If
         isCustomInOut = False
+        gpTrans.Enabled = True
 
         cboCat.Items.Clear()
         UpdateCategory(cashOutCat)
@@ -228,6 +230,7 @@
         Dim tmpCio As New CashInOutTransaction
         Dim selectHT As New Hashtable
         Dim idx As Integer = cboCat.SelectedIndex
+        Dim category As String, transName As String
 
         If Not isCustomInOut Then
             Select Case selectedType
@@ -243,16 +246,20 @@
         With tmpCio
             If Not isCustomInOut Then
                 .CashID = GetKey(selectHT, cboTrans.Text)
+                category = cboCat.Text
+                transName = cboTrans.Text
             Else
                 ' If 54 is missing, update your database
                 .CashID = 54 'Inventory IN - Smart Money
                 selectedType = "INVENTORY IN"
+                category = selectedType
+                transName = "Smart Money Payable - Perfecom"
             End If
 
             .TransactionDate = CurrentDate
             .Type = selectedType
-            .Category = cboCat.Text
-            .Transaction = cboTrans.Text
+            .Category = category
+            .Transaction = transName
             .Amount = txtAmt.Text
             .Particulars = txtParticulars.Text
             .EncoderID = UserID
@@ -291,8 +298,7 @@
     Private Sub btnInvIn_Click(sender As System.Object, e As System.EventArgs) Handles btnInvIn.Click
         isCustomInOut = True
 
-        cboCat.Text = "INVENTORY IN"
-        cboTrans.Text = "Smart Money Inventory In"
+        gpTrans.Enabled = False
         txtAmt.Focus()
 
     End Sub
