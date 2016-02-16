@@ -156,13 +156,13 @@
         Select Case _type
             Case "Receipt"
                 AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
-                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber)
+                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category)
             Case "Disbursement"
                 AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
-                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber)
+                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, , , _category)
             Case "INVENTORY IN"
-                AddJournal(_amount, "Credit", "Smart Money Inventory Offsetting Account", "Ref# " & Me.LastIDNumber)
-                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect)
+                AddJournal(_amount, "Debit", "Smart Money Inventory Offsetting Account", "Ref# " & Me.LastIDNumber)
+                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect, , _category)
             Case Else
                 MsgBox(_type & " not found", MsgBoxStyle.Critical, "Developer WARNING")
         End Select

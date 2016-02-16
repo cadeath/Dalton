@@ -7,9 +7,9 @@ ISSUE: 0006 02/15/2016
 	- Working but not fully functional
 [+] Add Smart Money from Perfecom, Cash In/Out
 [+] Income from EC Pay, account should be change
-[o] Cash Offsetting Lay-Away, account should be change
-	- It was correct already, _SYS00000001057
-[-] Branch to Branch, Mlang is not included.
+[+] Cash Offsetting Lay-Away, account should be change
+[+] Branch to Branch, Mlang is not included.
+[+] Transactional tables in the database should have bigger primary key
 
 ISSUE: 0005 02/12/2016
 [+] Client Module load too long
