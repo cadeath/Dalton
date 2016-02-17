@@ -1,3 +1,7 @@
+ISSUE: 0007 02/16/2016
+[-] ERROR IN MIGRATION, Database File not found.
+	- WIN XP evaluation
+
 ISSUE: 0006 02/15/2016
 [+] PAWNING Print Button only works when DISPLAYING
 [o] GPRS to GPRS - Received Money, without Service Charge
@@ -10,6 +14,8 @@ ISSUE: 0006 02/15/2016
 [+] Cash Offsetting Lay-Away, account should be change
 [+] Branch to Branch, Mlang is not included.
 [+] Transactional tables in the database should have bigger primary key
+[-] JOURNAL ENTRIES should be ONE ACCOUNT CODE, summarize all debit and credit
+
 
 ISSUE: 0005 02/12/2016
 [+] Client Module load too long

@@ -422,7 +422,7 @@
             _auctionDate = .Item("AuctionDate")
             _itemType = .Item("ItemType")
             _catID = .Item("CatID")
-            _description = .Item("Description")
+            _description = IIf(IsDBNull(.Item("Description")), "", .Item("Description"))
             _karat = .Item("Karat")
             _grams = .Item("Grams")
             _appraisal = .Item("Appraisal")
