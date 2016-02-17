@@ -1,4 +1,6 @@
 ﻿' Changelog
+' v1.4 2/17/16
+'  - Log Module
 ' v1.3 11/19/15
 '  - CommandPrompt Added
 ' v1.2 11/6/15
@@ -30,7 +32,6 @@ Module mod_system
     Friend DollarRate As Double = 48
     Friend RequirementLevel As Integer = 1
     Friend dailyID As Integer = 1
-
 #End Region
 
 #Region "Store"
@@ -326,4 +327,25 @@ Module mod_system
 
         Return lastOfMonth
     End Function
+
+#Region "Log Module"
+    Const LOG_FILE As String = "-log.txt"
+    Private Sub CreateLog()
+        Dim fsEsk As New System.IO.FileStream(Now.ToString("MMddyyyy") & LOG_FILE, IO.FileMode.CreateNew)
+    End Sub
+
+    Friend Sub Log_Report(ByVal str As String)
+        If Not System.IO.File.Exists(Now.ToString("MMddyyyy") & LOG_FILE) Then CreateLog()
+
+        Dim recorded_log As String = _
+            String.Format("[{0}] " & str, Now.ToString("MM/dd/yyyy HH:mm:ss"))
+
+        Dim fs As New System.IO.FileStream(Now.ToString("MMddyyyy") & LOG_FILE, IO.FileMode.Append, IO.FileAccess.Write)
+        Dim fw As New System.IO.StreamWriter(fs)
+        fw.WriteLine(recorded_log)
+        fw.Close()
+        fs.Close()
+        Console.WriteLine("Recored")
+    End Sub
+#End Region
 End Module

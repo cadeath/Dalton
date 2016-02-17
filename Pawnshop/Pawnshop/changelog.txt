@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.1.0.3
+ - Item Pullout problem
+
 Version 1.1.0.1
  - Fixing Pawning Print Button
  - Add Smart Money from Perfecom, Cash In/Out
