@@ -127,10 +127,10 @@ Public Class frmMIS
 
                         If isNew Then
                             .SaveClient()
+                            .LoadLastEntry()
                         Else
                             .ModifyClient()
                         End If
-                        .LoadLastEntry()
                     End With
 
 

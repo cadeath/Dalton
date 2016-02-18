@@ -29,7 +29,6 @@ Friend Module database
         con = New OdbcConnection(conStr)
         Try
             con.Open()
-            Log_Report("Database opened!")
         Catch ex As Exception
             con.Dispose()
             MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Connecting Error")

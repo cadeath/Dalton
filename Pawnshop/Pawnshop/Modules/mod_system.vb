@@ -332,6 +332,7 @@ Module mod_system
     Const LOG_FILE As String = "-log.txt"
     Private Sub CreateLog()
         Dim fsEsk As New System.IO.FileStream(Now.ToString("MMddyyyy") & LOG_FILE, IO.FileMode.CreateNew)
+        fsEsk.Close()
     End Sub
 
     Friend Sub Log_Report(ByVal str As String)
