@@ -1173,12 +1173,12 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 9) 'Changed 4.5 to 9
 
-        'autoPrintPT.Export(report, paperSize)
-        'autoPrintPT.m_currentPageIndex = 0
-        'autoPrintPT.Print(printerName)
+        autoPrintPT.Export(report, paperSize)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
 
-        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        frmReport.Show()
+        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        'frmReport.Show()
 
         Me.Focus()
     End Sub
@@ -1257,7 +1257,18 @@ Public Class frmPawnItem
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
         addParameters.Add("secPayments", paymentStr)
-        addParameters.Add("secDescription", PawnItem.Description)
+        Dim desc As String
+        If PawnItem.ItemType = "JWL" Then
+            With PawnItem
+                desc = String.Format("{0} {1}G {2}K", GetCategoryByID(.CategoryID), .Grams, .Karat)
+                If .Description <> "" Then
+                    desc &= vbCrLf & .Description
+                End If
+            End With
+        Else
+            desc = PawnItem.Description
+        End If
+        addParameters.Add("secDescription", desc)
         addParameters.Add("dblTotalDue", IIf(PawnItem.RenewDue = 0, PawnItem.RedeemDue, PawnItem.RenewDue))
         addParameters.Add("dblInterest", PawnItem.Interest)
         addParameters.Add("dblServiceCharge", PawnItem.ServiceCharge)

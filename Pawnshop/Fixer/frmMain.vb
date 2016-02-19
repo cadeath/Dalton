@@ -2,8 +2,6 @@
 
 Public Class frmMain
 
-    Const PAWNTICKET As Integer = 13
-
     Private Sub ofdTemplate_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofdTemplate.FileOk
         txtImport.Text = ofdTemplate.FileName
     End Sub
@@ -20,6 +18,15 @@ Public Class frmMain
         If Not System.IO.File.Exists(txtDB.Text) Then Exit Sub
         If Not System.IO.File.Exists(txtImport.Text) Then Exit Sub
 
+        'MigrateIssue()
+        btnFix.Enabled = False
+
+        No_Description()
+
+        btnFix.Enabled = True
+    End Sub
+
+    Private Sub MigrateIssue()
         Dim oXL As New Excel.Application
         If oXL Is Nothing Then MessageBox.Show("Excel is not properly installed!!") : Exit Sub
         SetupDatabase()
@@ -72,11 +79,6 @@ Public Class frmMain
 
         MsgBox(FixClient & " Client fixed.", MsgBoxStyle.Information)
         btnFix.Enabled = True
-    End Sub
-
-    Private Sub Status_Display(ByVal stat As String)
-        lblRef.Text = stat
-        Application.DoEvents()
     End Sub
 
     Private Sub txtImport_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtImport.DoubleClick
