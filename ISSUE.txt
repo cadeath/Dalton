@@ -1,3 +1,7 @@
+ISSUE: 0009 02/19/2016
+[-] Report Page Layout should be 0.5 margin
+
+
 ISSUE: 0008 02/18/2016
 [+] Migration some names are not correct
 [-] OR Printing won't print
