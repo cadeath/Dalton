@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' v1.0.4
+'  - Add OldTicket ON PAWNING VIEW
 ' v1.0.3
 '  - Update Charges and cash Tables
 '  - Add ServiceCharge on PAWNING VIEW
@@ -19,7 +21,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.0.3"
+    Private DBversion As String = "1.0.4"
     Private language() As String = _
         {"Connection error failed."}
 

@@ -1,6 +1,11 @@
 CHANGELOG
 Version 1.1.0.3
  - Item Pullout problem
+ - Migration double name can causes wrong name
+ - POSAdmin can void
+ - CashCount bottom margin fixed
+ - Report Outstanding loans has specific date
+ - Report Schedule of Loan and Renewal - Correct Grand Total
 
 Version 1.1.0.1
  - Fixing Pawning Print Button

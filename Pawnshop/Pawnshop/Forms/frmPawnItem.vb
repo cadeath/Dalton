@@ -1133,7 +1133,18 @@ Public Class frmPawnItem
             String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtPayment", paymentStr)
-        addParameters.Add("txtDescription", PawnItem.Description)
+        Dim desc As String
+        If PawnItem.ItemType = "JWL" Then
+            With PawnItem
+                desc = String.Format("{0} {1}G {2}K", GetCategoryByID(.CategoryID), .Grams, .Karat)
+                If .Description <> "" Then
+                    desc &= vbCrLf & .Description
+                End If
+            End With
+        Else
+            desc = PawnItem.Description
+        End If
+        addParameters.Add("txtDescription", desc)
         addParameters.Add("txtTotalDue", PawnItem.RedeemDue)
 
         With ds.Tables(dsName).Rows(0)
@@ -1162,12 +1173,22 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 9) 'Changed 4.5 to 9
 
-        autoPrintPT.Export(report, paperSize)
-        autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print(printerName)
+        'autoPrintPT.Export(report, paperSize)
+        'autoPrintPT.m_currentPageIndex = 0
+        'autoPrintPT.Print(printerName)
+
+        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+        frmReport.Show()
 
         Me.Focus()
     End Sub
+
+    Private Function GetCategoryByID(ByVal id As Integer) As String
+        Dim mySql As String = "SELECT * FROM tblClass WHERE ClassID = " & id
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("CATEGORY")
+    End Function
 
     Private Sub PrintRenewPT()
         Dim autoPrintPT As Reporting

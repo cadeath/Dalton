@@ -44,6 +44,10 @@
           <DataField>ORDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="OldTicket">
+          <DataField>OldTicket</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="NetAmount">
           <DataField>NetAmount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -199,7 +203,18 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Ticket</Value>
+                              <Value>Ticket/</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Old</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -622,21 +637,23 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox19">
+                    <Textbox Name="OldTicket">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
-                              <Style />
+                              <Value>=Fields!OldTicket.Value</Value>
+                              <Style>
+                                <Format>0;(0);''</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox19</rd:DefaultName>
+                      <rd:DefaultName>OldTicket</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -647,6 +664,7 @@ Adv Int</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1134,6 +1152,7 @@ Adv Int</Value>
                             <TextRun>
                               <Value>=Sum(Fields!NetAmount.Value)</Value>
                               <Style>
+                                <FontWeight>Bold</FontWeight>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                               </Style>
                             </TextRun>
@@ -1974,7 +1993,7 @@ Adv Int</Value>
         <DataSetName>dsPawning</DataSetName>
         <Top>1.71542in</Top>
         <Height>0.5in</Height>
-        <Width>6.83521in</Width>
+        <Width>6.83519in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
