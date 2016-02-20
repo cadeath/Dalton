@@ -4,10 +4,10 @@
         Dim stDate As Date = GetFirstDate(Now)
         Dim enDate As Date = GetLastDate(Now)
 
-        Dim mySql As String, ds As New DataSet, dsName As String, rptPath As String = "Reports\rpt_CashInOutSummary.rdlc"
-        dsName = "dsCIO"
-        mySql = "SELECT * FROM TBLCASHTRANS"
-        mySql &= String.Format(" WHERE TransDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+        Dim mySql As String, ds As New DataSet, dsName As String, rptPath As String = "Reports\d_Remittance.rdlc"
+        dsName = "dsRemit"
+        mySql = "SELECT * FROM MONEY_TRANSFER"
+        'mySql &= String.Format(" WHERE TransDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
 
         frmReport.ReportInit(mySql, dsName, rptPath, , False)
         frmReport.Show()

@@ -482,6 +482,10 @@
     <EmbeddedResource Include="Developer\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\d_insurance.rdlc" />
+    <EmbeddedResource Include="Reports\d_Loan.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab.resx">
       <DependentUpon>ab.vb</DependentUpon>
     </EmbeddedResource>
@@ -582,6 +586,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\frmPOS.resx">
       <DependentUpon>frmPOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\d_Remittance.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_RegisterRedeem.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

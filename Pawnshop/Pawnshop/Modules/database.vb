@@ -2,6 +2,7 @@
 ' Changelog
 ' v1.0.4
 '  - Add OldTicket ON PAWNING VIEW
+'  - Add Commission ON MONEY_TRANSFER view
 ' v1.0.3
 '  - Update Charges and cash Tables
 '  - Add ServiceCharge on PAWNING VIEW
