@@ -1,5 +1,8 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' v1.0.5
+'  - Add GPRS Ticketing
+'  - Changed TICKETING into TICKETING - WU
 ' v1.0.4
 '  - Add OldTicket ON PAWNING VIEW
 '  - Add Commission ON MONEY_TRANSFER view
@@ -22,7 +25,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.0.4"
+    Private DBversion As String = "1.0.5"
     Private language() As String = _
         {"Connection error failed."}
 
