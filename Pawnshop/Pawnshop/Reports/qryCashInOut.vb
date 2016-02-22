@@ -5,6 +5,10 @@
         Disable_Functions()
     End Sub
 
+    Private Function InOut_Filter() As String
+
+    End Function
+
     Private Sub Disable_Functions()
         chkIN.Enabled = False
         chkOUT.Enabled = False

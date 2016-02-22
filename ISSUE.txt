@@ -1,5 +1,9 @@
+ISSUE: 0010 02/20/2016
+[+] Add GPRS Ticketing
+
+
 ISSUE: 0009 02/19/2016
-[-] Report Page Layout should be 0.5 margin
+[+] Report Page Layout should be 0.5 margin
 
 
 ISSUE: 0008 02/18/2016

@@ -4,6 +4,14 @@
     Friend ALLOW_DBVERSION As String = "a1.0.18"
     Friend LATEST_DBVERSION As String = "1.0.3"
 
+    Private Sub Special_Update()
+        DB_PATH = txtURL.Text
+        database.dbName = DB_PATH
+        db_104to105.Main()
+
+        MsgBox("Updated!")
+    End Sub
+
     Private Sub btnUpdate_Click(sender As System.Object, e As System.EventArgs) Handles btnUpdate.Click
         DB_PATH = txtURL.Text
         If Not System.IO.File.Exists(DB_PATH) Then
@@ -52,4 +60,10 @@
     Private Sub ofdPatch_DB_FileOk(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ofdPatch_DB.FileOk
         txtURL.Text = ofdPatch_DB.FileName
     End Sub
+
+    Private Sub frmMain_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        Special_Update()
+        frmSrvUpdate.Show()
+    End Sub
+
 End Class
