@@ -23,6 +23,7 @@ Partial Class qryMoneyTransfer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbALL = New System.Windows.Forms.RadioButton()
         Me.rbGPRS = New System.Windows.Forms.RadioButton()
         Me.rbCebuana = New System.Windows.Forms.RadioButton()
         Me.rbWestern = New System.Windows.Forms.RadioButton()
@@ -31,7 +32,6 @@ Partial Class qryMoneyTransfer
         Me.chkPay = New System.Windows.Forms.CheckBox()
         Me.chkSend = New System.Windows.Forms.CheckBox()
         Me.monCal = New System.Windows.Forms.MonthCalendar()
-        Me.rbALL = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -48,6 +48,16 @@ Partial Class qryMoneyTransfer
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Service Names"
+        '
+        'rbALL
+        '
+        Me.rbALL.AutoSize = True
+        Me.rbALL.Location = New System.Drawing.Point(6, 141)
+        Me.rbALL.Name = "rbALL"
+        Me.rbALL.Size = New System.Drawing.Size(44, 17)
+        Me.rbALL.TabIndex = 4
+        Me.rbALL.Text = "ALL"
+        Me.rbALL.UseVisualStyleBackColor = True
         '
         'rbGPRS
         '
@@ -103,7 +113,8 @@ Partial Class qryMoneyTransfer
         'chkPay
         '
         Me.chkPay.AutoSize = True
-        Me.chkPay.Enabled = False
+        Me.chkPay.Checked = True
+        Me.chkPay.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkPay.Location = New System.Drawing.Point(18, 182)
         Me.chkPay.Name = "chkPay"
         Me.chkPay.Size = New System.Drawing.Size(64, 17)
@@ -114,7 +125,8 @@ Partial Class qryMoneyTransfer
         'chkSend
         '
         Me.chkSend.AutoSize = True
-        Me.chkSend.Enabled = False
+        Me.chkSend.Checked = True
+        Me.chkSend.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkSend.Location = New System.Drawing.Point(18, 205)
         Me.chkSend.Name = "chkSend"
         Me.chkSend.Size = New System.Drawing.Size(71, 17)
@@ -129,16 +141,6 @@ Partial Class qryMoneyTransfer
         Me.monCal.Name = "monCal"
         Me.monCal.TabIndex = 5
         '
-        'rbALL
-        '
-        Me.rbALL.AutoSize = True
-        Me.rbALL.Location = New System.Drawing.Point(6, 141)
-        Me.rbALL.Name = "rbALL"
-        Me.rbALL.Size = New System.Drawing.Size(44, 17)
-        Me.rbALL.TabIndex = 4
-        Me.rbALL.Text = "ALL"
-        Me.rbALL.UseVisualStyleBackColor = True
-        '
         'qryMoneyTransfer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -152,7 +154,7 @@ Partial Class qryMoneyTransfer
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "qryMoneyTransfer"
-        Me.Text = "Monthly - Money Transfer"
+        Me.Text = "Money Transfer"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)

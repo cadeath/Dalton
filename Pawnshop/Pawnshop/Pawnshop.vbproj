@@ -526,6 +526,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClient.resx">
       <DependentUpon>frmClient.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClientInformation.resx">
       <DependentUpon>frmClientInformation.vb</DependentUpon>
