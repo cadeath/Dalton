@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.1.0.4
+ - Add Entries for Segregation
+
 Version 1.1.0.3
  - Item Pullout problem
  - Migration double name can causes wrong name

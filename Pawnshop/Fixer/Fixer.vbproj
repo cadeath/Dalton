@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="database.vb" />
+    <Compile Include="Fixing_Mlang.vb" />
     <Compile Include="fix_mechanism.vb" />
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>

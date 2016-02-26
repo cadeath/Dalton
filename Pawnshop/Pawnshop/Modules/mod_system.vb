@@ -113,6 +113,10 @@ Module mod_system
             tmpPawnItem.LoadTicketInRow(dr)
             tmpPawnItem.Status = "S"
             tmpPawnItem.SaveTicket(False)
+
+            AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
+            AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
+
             Console.WriteLine("PT: " & tmpPawnItem.PawnTicket)
         Next
 
