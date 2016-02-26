@@ -16,7 +16,7 @@
         '                       GetFirstDate(monCal.SelectionRange.Start).ToShortDateString, _
         '                       GetLastDate(monCal.SelectionRange.End).ToShortDateString)
         mySql &= String.Format(" WHERE TransDate = '{0}'", monCal.SelectionStart.ToShortDateString)
-        If Not rbGPRS.Checked And Not rbALL.Checked Then
+        If (Not rbGPRS.Checked Or Not rbWestern.Checked) And Not rbALL.Checked Then
             mySql &= String.Format("AND ServiceType = '{0}' ", reportType)
         Else
             mySql &= String.Format("AND ServiceType LIKE '{0}%' ", reportType)
