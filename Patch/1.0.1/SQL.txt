@@ -1,0 +1,50 @@
+================
+Added ORDATE at Loan Register VIEW
+
+DROP VIEW LOAN_REGISTER;
+
+CREATE VIEW LOAN_REGISTER(
+  PAWNTICKET,
+  PAWNER,
+  ITEMTYPE,
+  LOANDATE,
+  MATUDATE,
+  EXPIRYDATE,
+  APPRAISAL,
+  PRINCIPAL,
+  INTEREST,
+  SERVICECHARGE,
+  NETAMOUNT,
+  ORDATE,
+  USERNAME,
+  STATUS)
+AS
+SELECT P.PawnTicket,
+       C.FIRSTNAME || ' ' || C.LASTNAME AS PAWNER,
+       P.ITEMTYPE,
+       P.LOANDATE,
+       P.MATUDATE,
+       P.EXPIRYDATE,
+       P.APPRAISAL,
+       P.PRINCIPAL,
+       P.INTEREST + P.ADVINT as INTEREST,
+       P.SERVICECHARGE,
+       P.NETAMOUNT,
+       P.ORDATE,
+       U.USERNAME,
+       P.STATUS
+FROM tblPAWN P
+     INNER JOIN tblClient C on C.ClientID = P.ClientID
+     INNER JOIN tbl_Gamit U ON U.UserID = P.EncoderID;
+=================
+remove INTEREST for new loan
+
+UPDATE tblPawn
+SET INTEREST = 0
+WHERE STATUS = 'L'
+==================
+update database version
+
+UPDATE tblMaintenance
+SET OPT_VALUES = '1.0.1'
+WHERE OPT_KEYS = 'DBVersion'

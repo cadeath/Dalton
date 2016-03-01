@@ -1,0 +1,86 @@
+ISSUE: 0011 02/23/2016
+[-] Add Segregation Entry
+
+
+ISSUE: 0010 02/20/2016
+[+] Add GPRS Ticketing
+
+
+ISSUE: 0009 02/19/2016
+[+] Report Page Layout should be 0.5 margin
+
+
+ISSUE: 0008 02/18/2016
+[+] Migration some names are not correct
+[-] OR Printing won't print
+[+] POSAdmin account can't void!
+[+] CashCount Sheet Bottom Margin changed
+[+] REPORT OUTSTANDING LOANS - Date is not specified
+[-] REPORT OUTSTANDING LOANS - Per Category
+[+] REPORT Schedule of Loan & Renewal - Representation of the Grand Total
+[-] REPORT Cash In/Out - Range
+[-] GPRS Remittance, with Commission and Gross
+[-] REPORT Loan Register - Redemption Summary
+
+
+ISSUE: 0007 02/16/2016
+[o] ERROR IN MIGRATION, Database File not found.
+	- WIN XP for evaluation
+
+
+ISSUE: 0006 02/15/2016
+[+] PAWNING Print Button only works when DISPLAYING
+[o] GPRS to GPRS - Received Money, without Service Charge
+	- Previously, it was given to me with charges. Update Database
+[+] iREMIT change into GPRS - iRemit to GPRS
+[-] Cash In/Out report
+	- Working but not fully functional
+[+] Add Smart Money from Perfecom, Cash In/Out
+[+] Income from EC Pay, account should be change
+[+] Cash Offsetting Lay-Away, account should be change
+[+] Branch to Branch, Mlang is not included.
+[+] Transactional tables in the database should have bigger primary key
+[-] JOURNAL ENTRIES should be ONE ACCOUNT CODE, summarize all debit and credit
+
+
+ISSUE: 0005 02/12/2016
+[+] Client Module load too long
+[+] Import client should have FIRST and LASTNAME
+
+
+ISSUE: 0004 02/10/2016
+[o] A Redeemed PawnTicket will just changed the Status from L or R into X. What will be the net amount?
+    - Already talk with Sir Dennis
+
+
+ISSUE: 0003 02/08/2016
+[+] Renewal - OR is too small
+[+] Renewal/Redeem - OR no duplicate
+[o] Wrong Cash Count
+    - No problem with CC
+
+
+ISSUE: 0002 02/06/2016
+[+] Sequence Report - Categories
+[+] Sequence Report - Remove Borrowings and Insurance for redundancy
+[o] Loan Register Report - Remove PHP sign to increase space
+[o] Loan Register Report - Redemption not working
+	- Revised report
+[-] Outstanding Report - Per Category
+[+] Money Transfer - swap label for Pay-Out and Send In
+[+] Pawning - TAB and Enter should be consistent
+[-] Pawning - if not Appraiser, do not display
+[+] Money Transfer - Enable multiple encoding
+
+
+ISSUE: 0001 02/04/2016
+[+] INSURANCE PWDE MAVOID INCLUDED OTHER DAYS
+[+] INSURANCE AMOUNT CHANGED FROM 20 TO 25 'db only
+[+] CASH IN /OUT OTHER DAYS VOIDING
+[+] SMARTMONEY TO GPRS JOURNAL ENTRY
+[+] Payout Service Charge, auto deduct
+[+] Database MT structure changed.
+[+] REPORT LAYOUT LESS FROM 1" TO 0.2 OR 0.5"
+[+] DOLLAR, VOID DISPLAY BROWSE
+[o] MONEYGRAM TO GPRS <--- was correct?
+    - Already fixed and checked

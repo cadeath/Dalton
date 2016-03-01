@@ -99,6 +99,7 @@ Public Class ComputerUser
     Private _pawn As Boolean
     Public ReadOnly Property canPawn() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _pawn
         End Get
     End Property
@@ -106,6 +107,7 @@ Public Class ComputerUser
     Private _clientList As Boolean
     Public ReadOnly Property canClientManage() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _clientList
         End Get
     End Property
@@ -113,6 +115,7 @@ Public Class ComputerUser
     Private _moneyTransfer As Boolean
     Public ReadOnly Property canMoneyTransfer() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _moneyTransfer
         End Get
     End Property
@@ -120,6 +123,7 @@ Public Class ComputerUser
     Private _insurance As Boolean
     Public ReadOnly Property canInsurance() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _insurance
         End Get
     End Property
@@ -127,6 +131,7 @@ Public Class ComputerUser
     Private _layAway As Boolean
     Public ReadOnly Property canLayAway() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _layAway
         End Get
     End Property
@@ -134,6 +139,7 @@ Public Class ComputerUser
     Private _dollarBuying As Boolean
     Public ReadOnly Property canDollarBuying() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _dollarBuying
         End Get
     End Property
@@ -141,6 +147,7 @@ Public Class ComputerUser
     Private _pos As Boolean
     Public ReadOnly Property canPOS() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _pos
         End Get
     End Property
@@ -148,6 +155,7 @@ Public Class ComputerUser
     Private _cio As Boolean
     Public ReadOnly Property canCashInOut() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _cio
         End Get
     End Property
@@ -156,6 +164,7 @@ Public Class ComputerUser
     Private _expiryList As Boolean
     Public ReadOnly Property canExpiryListGenerate() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _expiryList
         End Get
     End Property
@@ -163,6 +172,7 @@ Public Class ComputerUser
     Private _journalEntries As Boolean
     Public ReadOnly Property canJournalEntryGenerate() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _journalEntries
         End Get
     End Property
@@ -170,6 +180,7 @@ Public Class ComputerUser
     Private _cashCount As Boolean
     Public ReadOnly Property canCashCount() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _cashCount
         End Get
     End Property
@@ -177,6 +188,7 @@ Public Class ComputerUser
     Private _backUp As Boolean
     Public ReadOnly Property canBackup() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _backUp
         End Get
     End Property
@@ -184,6 +196,7 @@ Public Class ComputerUser
     Private _viewUserManagement As Boolean
     Public ReadOnly Property canViewUserManage() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _viewUserManagement
         End Get
     End Property
@@ -191,6 +204,7 @@ Public Class ComputerUser
     Private _viewRates As Boolean
     Public ReadOnly Property canViewRates() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _viewRates
         End Get
     End Property
@@ -198,6 +212,7 @@ Public Class ComputerUser
     Private _openStore As Boolean
     Public ReadOnly Property canOpenStore() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _openStore
         End Get
     End Property
@@ -206,6 +221,7 @@ Public Class ComputerUser
     Private _userManagement As Boolean
     Public ReadOnly Property canUserManage() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _userManagement
         End Get
     End Property
@@ -213,6 +229,7 @@ Public Class ComputerUser
     Private _updateRates As Boolean
     Public ReadOnly Property canUpdateRates() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _updateRates
         End Get
     End Property
@@ -220,6 +237,7 @@ Public Class ComputerUser
     Private _settings As Boolean
     Public ReadOnly Property canSettings() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _settings
         End Get
     End Property
@@ -227,6 +245,7 @@ Public Class ComputerUser
     Private _borrow As Boolean
     Public ReadOnly Property canBorrow() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _borrow
         End Get
     End Property
@@ -235,6 +254,7 @@ Public Class ComputerUser
     Private _cashInBank As Boolean
     Public ReadOnly Property canCashInBank() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _cashInBank
         End Get
     End Property
@@ -242,6 +262,7 @@ Public Class ComputerUser
     Private _cashOutBank As Boolean
     Public ReadOnly Property canCashOutBank() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _cashOutBank
         End Get
     End Property
@@ -249,10 +270,28 @@ Public Class ComputerUser
     Private _void As Boolean
     Public ReadOnly Property canVoid() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _void
         End Get
     End Property
 
+    Private _pullOut As Boolean
+    Public ReadOnly Property canPullOut() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _pullOut
+        End Get
+    End Property
+
+    Private _migrate As Boolean
+    Public ReadOnly Property canMigrate() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _migrate
+        End Get
+    End Property
+
+    'Super User
     Private _superUser As Boolean
     Public ReadOnly Property isSuperUser() As Boolean
         Get
@@ -265,6 +304,7 @@ Public Class ComputerUser
         Dim y As Integer
         'Encoder
         y = 0
+        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
         _pawn = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _clientList = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _moneyTransfer = IIf(parts(y).Substring(2, 1) = "1", True, False)
@@ -273,7 +313,6 @@ Public Class ComputerUser
         _dollarBuying = IIf(parts(y).Substring(5, 1) = "1", True, False)
         _pos = IIf(parts(y).Substring(6, 1) = "1", True, False)
         _cio = IIf(parts(y).Substring(7, 1) = "1", True, False)
-        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
         For Each var As Boolean In privList
             If var Then _level = "Encoder"
         Next
@@ -307,10 +346,13 @@ Public Class ComputerUser
 
         'Special
         y = 3
+        Console.WriteLine(parts(y))
         _cashInBank = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _cashOutBank = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _void = IIf(parts(y).Substring(2, 1) = "1", True, False)
-        privList = {_cashInBank, _cashOutBank, _void}
+        _pullOut = IIf(parts(y).Substring(3, 1) = "1", True, False)
+        _migrate = IIf(parts(y).Substring(4, 1) = "1", True, False)
+        privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
 
         Console.WriteLine("Level is " & _level)
     End Sub
@@ -329,7 +371,7 @@ Public Class ComputerUser
                     Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
                     Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
                     Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
-                    Case 3 : privList = {_cashInBank, _cashOutBank, _void}
+                    Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
                 End Select
 
                 For Each e In privList
@@ -337,18 +379,19 @@ Public Class ComputerUser
                 Next
             Next
         Else
+            PriviledgeChecking()
             UpdatePrivilege()
         End If
     End Sub
 #End Region
 
 #Region "Procedures and Functions"
-    Public Sub CreateAdministrator(Optional ByVal pass As String = "misAdmin2015")
+    Public Sub CreateAdministrator(Optional ByVal pass As String = "misAdmin2016")
         mySql = "SELECT * FROM " & fillData
         Dim user As String, fullname As String, ds As DataSet
         user = "POSadmin" : fullname = "IT Department"
 
-        mySql &= String.Format(" WHERE Username = '{0}' AND UserPass = '{1}'", user, EncryptString(pass))
+        mySql &= String.Format(" WHERE Username = '{0}'", user, EncryptString(pass))
 
         Console.WriteLine("Create SQL: " & mySql)
 
@@ -367,6 +410,47 @@ Public Class ComputerUser
         database.SaveEntry(ds, True)
     End Sub
 
+    ''' <summary>
+    ''' For Adding Priviledge
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub PriviledgeChecking()
+        Dim privList() As Boolean = {}
+        Dim privChunk As String = _privilege
+        Dim finalChunk As String = ""
+        Dim y As Integer = 0
+
+        For cnt As Integer = 0 To 3
+            Select Case cnt
+                Case 0
+                    privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+                    finalChunk &= privChunk.Split("|")(cnt)
+                    For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
+                        finalChunk &= "0"
+                    Next
+                    finalChunk &= "|"
+                Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                    finalChunk &= privChunk.Split("|")(cnt)
+                    For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
+                        finalChunk &= "0"
+                    Next
+                    finalChunk &= "|"
+                Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
+                    finalChunk &= privChunk.Split("|")(cnt)
+                    For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
+                        finalChunk &= "0"
+                    Next
+                    finalChunk &= "|"
+                Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
+                    finalChunk &= privChunk.Split("|")(cnt)
+                    For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
+                        finalChunk &= "0"
+                    Next
+            End Select
+        Next
+        _privilege = finalChunk
+    End Sub
+
     Public Sub LoadUserByRow(ByVal dr As DataRow)
         'On Error Resume Next
 
@@ -376,7 +460,7 @@ Public Class ComputerUser
             _password = .Item("UserPass")
             _fullName = .Item("FullName")
             _privilege = .Item("Privilege")
-            _lastLogin = .Item("LastLogin")
+            If Not IsDBNull(.Item("LastLogin")) Then _lastLogin = .Item("LastLogin")
         End With
 
         getPrivilege()
@@ -395,9 +479,9 @@ Public Class ComputerUser
                 .Item("UserPass") = Encrypt(_password)
                 .Item("FullName") = _fullName
                 .Item("Privilege") = _privilege
-                .Item("LastLogin") = _lastLogin
+                '.Item("LastLogin") = _lastLogin 'First Login no Last Login
                 .Item("EncoderID") = _encoderID
-                .Item("SystemInfo") = Now
+                .Item("SystemInfo") = Now.Date
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else

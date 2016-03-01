@@ -4,6 +4,11 @@
     Private Sub frmCIO_List_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         LoadActive()
+
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -58,8 +63,19 @@
     Private Sub VoidID(ByVal id As Integer)
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE TransID = {1}", fillData, id)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Dim getID As Single = ds.Tables(0).Rows(0).Item("TransID")
+        Dim transDate As Date = ds.Tables(0).Rows(0).Item("TRANSDATE")
         ds.Tables(fillData).Rows(0).Item("Status") = 0
+
+        ' ISSUE: 0001
+        ' Cash InOut exclusive only for the same date.
+        If transDate.Date <> CurrentDate.Date Then
+            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
         database.SaveEntry(ds, False)
+
+        RemoveJournal("Ref# " & getID)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
 

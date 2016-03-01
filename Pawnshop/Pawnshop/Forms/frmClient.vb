@@ -71,7 +71,7 @@ Public Class frmClient
             Me.Enabled = False
 
             Dim tbl As String = "TBLCLIENT"
-            Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
+            Dim mySql As String = String.Format("SELECT FIRST 100 * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
             Dim ds As DataSet = LoadSQL(mySql, tbl)
 
             lvClient.Items.Clear()
@@ -103,6 +103,8 @@ Public Class frmClient
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+        If lvClient.SelectedItems.Count <= 0 Then Exit Sub
+
         Dim clientID As Integer
         clientID = lvClient.FocusedItem.Text
         Console.WriteLine("ClientID : " & clientID)
@@ -166,6 +168,8 @@ Public Class frmClient
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+        If lvClient.Items.Count = 0 Then Exit Sub
+
         If lvClient.SelectedItems.Count = 0 Then
             lvClient.Items(0).Focused = True
         End If
