@@ -305,7 +305,7 @@ Public Class frmMain
     Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        frmPullOut.Show()
+        qryPullOut.Show()
     End Sub
 
     Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
@@ -358,8 +358,10 @@ Public Class frmMain
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
-        qryDate.FormType = qryDate.ReportType.ItemPullOut
-        qryDate.Show()
+        'qryDate.FormType = qryDate.ReportType.ItemPullOut
+        'qryDate.Show()
+
+        qryPullOut_List.Show()
     End Sub
 
     Private Sub RateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RateToolStripMenuItem.Click

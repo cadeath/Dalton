@@ -1,7 +1,9 @@
 CHANGELOG
 Version 1.1.0.5
- - Revise Segregation List
+ - Revise Segregation List Report
+ - Item Pullout per Category Report
  - Add change rate module
+ - Include BATCH FILE for backup
 
 Version 1.1.0.4
  - Add Entries for Segregation

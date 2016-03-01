@@ -1,4 +1,4 @@
-﻿Public Class frmPullOut
+﻿Public Class qryPullOut
 
     Private fillData As String = "tblPawn"
     Private mySql As String = ""

@@ -13,10 +13,10 @@
     End Sub
 
     Private Sub btnUpdate_Click(sender As System.Object, e As System.EventArgs) Handles btnUpdate.Click
+        If Not System.IO.File.Exists(txtConfig.Text) Then Exit Sub
+
         Disable(1)
-
         updateRate.do_RateUpdate(txtConfig.Text)
-
         Disable(0)
         MsgBox("System Updated", MsgBoxStyle.Information)
         Me.Close()

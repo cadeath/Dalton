@@ -464,6 +464,12 @@
     <Compile Include="Reports\qryMoneyTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\qryPullOut_List.Designer.vb">
+      <DependentUpon>qryPullOut_List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryPullOut_List.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qrySequence.Designer.vb">
       <DependentUpon>qrySequence.vb</DependentUpon>
     </Compile>
@@ -604,6 +610,9 @@
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryPullOut_List.resx">
+      <DependentUpon>qryPullOut_List.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_RegisterRedeem.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -693,6 +702,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="backup.bat" />
     <None Include="doc\ExpiryFormat.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
