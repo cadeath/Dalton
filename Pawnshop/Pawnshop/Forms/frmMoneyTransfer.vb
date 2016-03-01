@@ -597,6 +597,7 @@
                     End Select
 
                     'Commission
+                    If remarks.Split("|").Count <= 2 Then Exit For
                     Select Case remarks.Split("|")(2)
                         Case "SLC" 'ServiceCharge Less Charge
                             commission = ServChrge - commission

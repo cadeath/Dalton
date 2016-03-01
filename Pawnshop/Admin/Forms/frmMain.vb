@@ -46,4 +46,13 @@
         MsgBox("Entry Saved", MsgBoxStyle.Information)
         dgvPawnshop.DataSource = Nothing
     End Sub
+
+    Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
+        OpenFileDialog1.ShowDialog()
+    End Sub
+
+    Private Sub OpenFileDialog1_FileOk(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
+        Dim fn As String = OpenFileDialog1.FileName
+        do_RateUpdate(fn, "")
+    End Sub
 End Class

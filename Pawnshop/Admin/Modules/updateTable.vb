@@ -1,7 +1,6 @@
 ﻿Module updateTable
 
     Sub ExportConfig(url As String, serialDS As DataSet)
-        'perapadala-0301-16
         If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
 
         Dim fsEsk As New System.IO.FileStream(url, IO.FileMode.CreateNew)

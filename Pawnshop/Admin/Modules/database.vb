@@ -81,19 +81,6 @@ Friend Module database
         Return True
     End Function
 
-    Friend Function DBCompatibilityCheck() As Boolean
-        Console.WriteLine("Checking database compatibility...")
-        Dim strDB As String = GetOption("DBVersion")
-
-        If DBversion = strDB Then
-            Console.WriteLine("Success!")
-            Return True
-        Else
-            Console.WriteLine("Database Version didn't match... " & strDB)
-            Return False
-        End If
-    End Function
-
     ' Module 002
     Friend Function LoadSQL(ByVal mySql As String, Optional ByVal tblName As String = "QuickSQL") As DataSet
         dbOpen()
@@ -118,6 +105,30 @@ Friend Module database
         dbClose()
 
         Return reader
+    End Function
+
+    Friend Function UpdateEntry(dsEntry As DataSet) As Boolean
+        dbOpen()
+
+        Dim da As OdbcDataAdapter
+        Dim dsUpdate As New DataSet, mySql As String, fillData As String
+        dsUpdate = dsEntry
+
+        'Save all tables in the dataset
+        For Each dsTable As DataTable In dsEntry.Tables
+            fillData = dsTable.TableName
+            mySql = "SELECT * FROM " & fillData
+
+            da = New OdbcDataAdapter(mySql, con)
+            Dim cb As New OdbcCommandBuilder(da) 'Required in Saving/Update to Database
+            cb.GetInsertCommand()
+            da.UpdateCommand = cb.GetUpdateCommand
+            da.Update(dsUpdate, fillData)
+            dsUpdate.AcceptChanges()
+        Next
+
+        dbClose()
+        Return True
     End Function
 
     Friend Function GetOption(ByVal keys As String) As String

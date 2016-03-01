@@ -17,6 +17,7 @@ Public Class frmMain
         UserManagementToolStripMenuItem.Enabled = Not st
         UpdateToolStripMenuItem.Enabled = Not st
         SettingsToolStripMenuItem.Enabled = Not st
+        RateToolStripMenuItem.Enabled = Not st
         If Not st Then
             LogOutToolStripMenuItem.Text = "&Log Out"
         Else
@@ -359,5 +360,14 @@ Public Class frmMain
     Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
         qryDate.FormType = qryDate.ReportType.ItemPullOut
         qryDate.Show()
+    End Sub
+
+    Private Sub RateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RateToolStripMenuItem.Click
+        If Not POSuser.canUpdateRates Then
+            MsgBoxAuthoriation("You cannot update rates.")
+            Exit Sub
+        End If
+
+        frmRate2.Show()
     End Sub
 End Class

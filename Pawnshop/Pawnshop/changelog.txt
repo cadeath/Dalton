@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.1.0.5
+ - Revise Segregation List
+ - Add change rate module
+
 Version 1.1.0.4
  - Add Entries for Segregation
 

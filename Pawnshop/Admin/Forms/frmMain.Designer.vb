@@ -30,9 +30,11 @@ Partial Class frmMain
         Me.tsbtnExport = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbtnConfig = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.btnBranch = New System.Windows.Forms.Button()
         Me.sfdConfig = New System.Windows.Forms.SaveFileDialog()
         Me.ofdConfig = New System.Windows.Forms.OpenFileDialog()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tsMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -59,7 +61,7 @@ Partial Class frmMain
         '
         'tsMenu
         '
-        Me.tsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnSave, Me.tsbtnExport, Me.ToolStripSeparator1, Me.tsbtnConfig})
+        Me.tsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnSave, Me.tsbtnExport, Me.ToolStripSeparator1, Me.tsbtnConfig, Me.ToolStripButton1})
         Me.tsMenu.Location = New System.Drawing.Point(0, 0)
         Me.tsMenu.Name = "tsMenu"
         Me.tsMenu.Size = New System.Drawing.Size(819, 25)
@@ -95,6 +97,15 @@ Partial Class frmMain
         Me.tsbtnConfig.Size = New System.Drawing.Size(109, 22)
         Me.tsbtnConfig.Text = "Config Checker"
         '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton1.Text = "ToolStripButton1"
+        '
         'btnBranch
         '
         Me.btnBranch.Location = New System.Drawing.Point(12, 85)
@@ -112,6 +123,11 @@ Partial Class frmMain
         '
         Me.ofdConfig.FileName = "sytem"
         Me.ofdConfig.Filter = "System Update|*.cir"
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "sytem"
+        Me.OpenFileDialog1.Filter = "System Update|*.cir"
         '
         'frmMain
         '
@@ -142,5 +158,7 @@ Partial Class frmMain
     Friend WithEvents ofdConfig As System.Windows.Forms.OpenFileDialog
     Friend WithEvents tsbtnSave As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 
 End Class

@@ -83,6 +83,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\database.vb" />
+    <Compile Include="Modules\updateRate.vb" />
     <Compile Include="Modules\updateTable.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

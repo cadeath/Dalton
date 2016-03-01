@@ -31,6 +31,7 @@ Partial Class frmMain
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.UserManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -94,7 +95,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ClosingStoreToolStripMenuItem, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ClosingStoreToolStripMenuItem, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.RateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -128,6 +129,12 @@ Partial Class frmMain
         Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.UpdateToolStripMenuItem.Text = "&Maintenance"
         Me.UpdateToolStripMenuItem.Visible = False
+        '
+        'RateToolStripMenuItem
+        '
+        Me.RateToolStripMenuItem.Name = "RateToolStripMenuItem"
+        Me.RateToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.RateToolStripMenuItem.Text = "&Rate"
         '
         'SettingsToolStripMenuItem
         '
@@ -547,5 +554,6 @@ Partial Class frmMain
     Friend WithEvents MoneyTransferToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OutstandingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ItemPulloutToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
