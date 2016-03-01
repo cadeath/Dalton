@@ -23,80 +23,124 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.tsbtnCashInOut = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.dgvPawnshop = New System.Windows.Forms.DataGridView()
+        Me.btnCharges = New System.Windows.Forms.Button()
+        Me.tsMenu = New System.Windows.Forms.ToolStrip()
+        Me.tsbtnSave = New System.Windows.Forms.ToolStripButton()
         Me.tsbtnExport = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.tsbtnExit = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStrip1.SuspendLayout()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbtnConfig = New System.Windows.Forms.ToolStripButton()
+        Me.btnBranch = New System.Windows.Forms.Button()
+        Me.sfdConfig = New System.Windows.Forms.SaveFileDialog()
+        Me.ofdConfig = New System.Windows.Forms.OpenFileDialog()
+        CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tsMenu.SuspendLayout()
         Me.SuspendLayout()
         '
-        'tsbtnCashInOut
+        'dgvPawnshop
         '
-        Me.tsbtnCashInOut.Image = CType(resources.GetObject("tsbtnCashInOut.Image"), System.Drawing.Image)
-        Me.tsbtnCashInOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsbtnCashInOut.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnCashInOut.Name = "tsbtnCashInOut"
-        Me.tsbtnCashInOut.Size = New System.Drawing.Size(72, 83)
-        Me.tsbtnCashInOut.Text = "CashIn/Out"
-        Me.tsbtnCashInOut.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.dgvPawnshop.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvPawnshop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvPawnshop.Location = New System.Drawing.Point(128, 28)
+        Me.dgvPawnshop.Name = "dgvPawnshop"
+        Me.dgvPawnshop.Size = New System.Drawing.Size(679, 377)
+        Me.dgvPawnshop.TabIndex = 0
         '
-        'ToolStripSeparator1
+        'btnCharges
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 86)
+        Me.btnCharges.Location = New System.Drawing.Point(12, 28)
+        Me.btnCharges.Name = "btnCharges"
+        Me.btnCharges.Size = New System.Drawing.Size(110, 51)
+        Me.btnCharges.TabIndex = 1
+        Me.btnCharges.Text = "Money Transfer"
+        Me.btnCharges.UseVisualStyleBackColor = True
+        '
+        'tsMenu
+        '
+        Me.tsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnSave, Me.tsbtnExport, Me.ToolStripSeparator1, Me.tsbtnConfig})
+        Me.tsMenu.Location = New System.Drawing.Point(0, 0)
+        Me.tsMenu.Name = "tsMenu"
+        Me.tsMenu.Size = New System.Drawing.Size(819, 25)
+        Me.tsMenu.TabIndex = 2
+        Me.tsMenu.Text = "ToolStrip1"
+        '
+        'tsbtnSave
+        '
+        Me.tsbtnSave.Image = CType(resources.GetObject("tsbtnSave.Image"), System.Drawing.Image)
+        Me.tsbtnSave.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnSave.Name = "tsbtnSave"
+        Me.tsbtnSave.Size = New System.Drawing.Size(51, 22)
+        Me.tsbtnSave.Text = "&Save"
         '
         'tsbtnExport
         '
         Me.tsbtnExport.Image = CType(resources.GetObject("tsbtnExport.Image"), System.Drawing.Image)
-        Me.tsbtnExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.tsbtnExport.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnExport.Name = "tsbtnExport"
-        Me.tsbtnExport.Size = New System.Drawing.Size(83, 83)
-        Me.tsbtnExport.Text = "Export Config"
-        Me.tsbtnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbtnExport.Size = New System.Drawing.Size(60, 22)
+        Me.tsbtnExport.Text = "&Export"
         '
-        'ToolStrip1
+        'ToolStripSeparator1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnCashInOut, Me.ToolStripSeparator1, Me.tsbtnExport, Me.tsbtnExit})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(675, 86)
-        Me.ToolStrip1.TabIndex = 2
-        Me.ToolStrip1.Text = "ToolStrip1"
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
         '
-        'tsbtnExit
+        'tsbtnConfig
         '
-        Me.tsbtnExit.Image = CType(resources.GetObject("tsbtnExit.Image"), System.Drawing.Image)
-        Me.tsbtnExit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.tsbtnExit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnExit.Name = "tsbtnExit"
-        Me.tsbtnExit.Size = New System.Drawing.Size(68, 83)
-        Me.tsbtnExit.Text = "E&xit"
-        Me.tsbtnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbtnConfig.Image = CType(resources.GetObject("tsbtnConfig.Image"), System.Drawing.Image)
+        Me.tsbtnConfig.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnConfig.Name = "tsbtnConfig"
+        Me.tsbtnConfig.Size = New System.Drawing.Size(109, 22)
+        Me.tsbtnConfig.Text = "Config Checker"
+        '
+        'btnBranch
+        '
+        Me.btnBranch.Location = New System.Drawing.Point(12, 85)
+        Me.btnBranch.Name = "btnBranch"
+        Me.btnBranch.Size = New System.Drawing.Size(110, 51)
+        Me.btnBranch.TabIndex = 3
+        Me.btnBranch.Text = "Branch"
+        Me.btnBranch.UseVisualStyleBackColor = True
+        '
+        'sfdConfig
+        '
+        Me.sfdConfig.Filter = "System Update|*.cir"
+        '
+        'ofdConfig
+        '
+        Me.ofdConfig.FileName = "sytem"
+        Me.ofdConfig.Filter = "System Update|*.cir"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(675, 372)
-        Me.Controls.Add(Me.ToolStrip1)
+        Me.ClientSize = New System.Drawing.Size(819, 417)
+        Me.Controls.Add(Me.btnBranch)
+        Me.Controls.Add(Me.tsMenu)
+        Me.Controls.Add(Me.btnCharges)
+        Me.Controls.Add(Me.dgvPawnshop)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.IsMdiContainer = True
         Me.Name = "frmMain"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Main"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
+        CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tsMenu.ResumeLayout(False)
+        Me.tsMenu.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents tsbtnCashInOut As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents dgvPawnshop As System.Windows.Forms.DataGridView
+    Friend WithEvents btnCharges As System.Windows.Forms.Button
+    Friend WithEvents tsMenu As System.Windows.Forms.ToolStrip
     Friend WithEvents tsbtnExport As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Friend WithEvents tsbtnExit As System.Windows.Forms.ToolStripButton
+    Friend WithEvents btnBranch As System.Windows.Forms.Button
+    Friend WithEvents sfdConfig As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents tsbtnConfig As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ofdConfig As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents tsbtnSave As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
 
 End Class

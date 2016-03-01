@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Admin")> 
+<Assembly: AssemblyTitle("Administrator")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Stealth Assassin")> 
-<Assembly: AssemblyProduct("Admin Panel")> 
-<Assembly: AssemblyCopyright("CaDeatH ™")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("")> 
+<Assembly: AssemblyCopyright("Copyright ©  2016")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("26888a6f-5a11-461e-a747-57a9006528bf")> 
+<Assembly: Guid("8efe054b-6e5d-4635-83e5-9b237afe81ff")> 
 
 ' Version information for an assembly consists of the following four values:
 '

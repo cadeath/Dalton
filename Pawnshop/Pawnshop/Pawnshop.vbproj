@@ -475,12 +475,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_insurance.rdlc" />
     <EmbeddedResource Include="Reports\d_Loan.rdlc">
