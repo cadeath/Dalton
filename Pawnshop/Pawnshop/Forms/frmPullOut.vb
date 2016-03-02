@@ -55,17 +55,33 @@
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        If Not IsNumeric(txtSearch.Text) Then Exit Sub
 
-        mySql = "SELECT * FROM " & fillData
-        mySql &= " WHERE PawnTicket = " & txtSearch.Text
-        Dim ds As DataSet = LoadSQL(mySql)
 
-        lvSeg.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpDr As New PawnTicket
-            tmpDr.LoadTicketInRow(dr)
-            AddItemSeg(tmpDr)
+        SelectPT(txtSearch.Text)
+
+        'mySql = "SELECT * FROM " & fillData
+        'mySql &= " WHERE PawnTicket LIKE '%" & txtSearch.Text & "%' AND STATUS = 'S'"
+        'Dim ds As DataSet = LoadSQL(mySql)
+
+        'lvSeg.Items.Clear()
+        'For Each dr As DataRow In ds.Tables(0).Rows
+        '    Dim tmpDr As New PawnTicket
+        '    tmpDr.LoadTicketInRow(dr)
+        '    AddItemSeg(tmpDr)
+        'Next
+    End Sub
+
+    Private Sub SelectPT(ByVal pt As String)
+
+        For Each itm As ListViewItem In lvSeg.Items
+            If itm.Text.Contains(pt) Then
+                itm.Selected = True
+                Exit For
+            End If
         Next
+        lvSeg.Select()
+        lvSeg.SelectedItems.Item(0).EnsureVisible()
     End Sub
 
     Private Sub btnOnePull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOnePull.Click
@@ -149,7 +165,13 @@
         frmPawnItem.LoadPawnTicket(pt, pt.Status)
     End Sub
 
-    Private Sub lvSeg_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvSeg.SelectedIndexChanged
+    Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
 
     End Sub
 End Class

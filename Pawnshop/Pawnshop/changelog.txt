@@ -4,6 +4,8 @@ Version 1.1.0.5
  - Item Pullout per Category Report
  - Add change rate module
  - Include BATCH FILE for backup
+ - Fix ITEM PULLOUT
+ - include BACKUP.BAT
 
 Version 1.1.0.4
  - Add Entries for Segregation
