@@ -21,7 +21,8 @@ Public Class frmMain
         'MigrateIssue()
         btnFix.Enabled = False
 
-        No_Description()
+        'No_Description()
+        pg_incomplete_desc.do_fix(txtImport.Text, txtDB.Text)
 
         btnFix.Enabled = True
     End Sub
