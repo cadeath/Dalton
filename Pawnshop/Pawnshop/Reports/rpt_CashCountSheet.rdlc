@@ -140,6 +140,7 @@
               <TextRun>
                 <Value>MAINTAINING BALANCE</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -150,7 +151,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.0375in</Top>
         <Left>0.00173in</Left>
-        <Height>0.25in</Height>
+        <Height>0.18056in</Height>
         <Width>2.29167in</Width>
         <Style>
           <Border>
@@ -171,6 +172,7 @@
               <TextRun>
                 <Value>=First(Fields!MaintainBal.Value, "dsDaily")</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -182,7 +184,7 @@
         </Paragraphs>
         <Top>0.02778in</Top>
         <Left>6.28124in</Left>
-        <Height>0.25in</Height>
+        <Height>0.19028in</Height>
         <Width>1.23958in</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -207,7 +209,9 @@
             <TextRuns>
               <TextRun>
                 <Value>ADD:</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -216,7 +220,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.2875in</Top>
         <Left>0.00173in</Left>
-        <Height>0.25in</Height>
+        <Height>0.16667in</Height>
         <Width>0.78125in</Width>
         <ZIndex>2</ZIndex>
         <Style>
@@ -237,14 +241,16 @@
             <TextRuns>
               <TextRun>
                 <Value>BEGINNING</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.60694in</Top>
+        <Top>0.52361in</Top>
         <Left>0.39756in</Left>
         <Height>0.25in</Height>
         <Width>1.89583in</Width>
@@ -268,6 +274,7 @@
               <TextRun>
                 <Value>=First(Fields!InitialBal.Value, "dsDaily")</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -278,7 +285,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.60694in</Top>
+        <Top>0.52361in</Top>
         <Left>3.78818in</Left>
         <Height>0.25in</Height>
         <Width>1.22396in</Width>
@@ -301,10 +308,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.89583in</Width>
+              <Width>3.11446in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.49479in</Width>
+              <Width>0.27616in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.22396in</Width>
@@ -312,7 +319,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.17708in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -324,7 +331,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!CCName.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -383,6 +392,7 @@
                             <TextRun>
                               <Value>=Fields!Debit.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                               </Style>
                             </TextRun>
@@ -431,9 +441,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsDebit</DataSetName>
-        <Top>0.85694in</Top>
+        <Top>0.77361in</Top>
         <Left>0.39756in</Left>
-        <Height>0.25in</Height>
+        <Height>0.17708in</Height>
         <Width>4.61458in</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -450,16 +460,17 @@
             <TextRuns>
               <TextRun>
                 <Value>Sub-Total:</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.12638in</Top>
-        <Left>0.00173in</Left>
-        <Height>0.25in</Height>
+        <Top>1.00625in</Top>
+        <Height>0.21397in</Height>
         <Width>1.25in</Width>
         <ZIndex>6</ZIndex>
         <Style>
@@ -481,6 +492,7 @@
               <TextRun>
                 <Value>=SUM(Fields!Debit.Value, "dsDebit")+First(Fields!InitialBal.Value, "dsDaily")</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -490,9 +502,9 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>1.12638in</Top>
+        <Top>1.04305in</Top>
         <Left>5.00681in</Left>
-        <Height>0.25in</Height>
+        <Height>0.21397in</Height>
         <Width>1.23958in</Width>
         <ZIndex>7</ZIndex>
         <Style>
@@ -517,16 +529,18 @@
             <TextRuns>
               <TextRun>
                 <Value>CASH DENOMINATIONS</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>3.20007in</Top>
-        <Left>0.10504in</Left>
-        <Height>0.25in</Height>
+        <Top>2.38063in</Top>
+        <Left>0.10083in</Left>
+        <Height>0.17708in</Height>
         <Width>2.14583in</Width>
         <ZIndex>8</ZIndex>
         <Style>
@@ -547,16 +561,18 @@
             <TextRuns>
               <TextRun>
                 <Value>LESS:</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.78479in</Top>
+        <Top>1.28966in</Top>
         <Left>0.00173in</Left>
-        <Height>0.25in</Height>
+        <Height>0.16667in</Height>
         <Width>0.78125in</Width>
         <ZIndex>9</ZIndex>
         <Style>
@@ -573,10 +589,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.89583in</Width>
+              <Width>3.11446in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.49479in</Width>
+              <Width>0.27616in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.22396in</Width>
@@ -584,7 +600,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.1875in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -596,7 +612,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!CCName.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -655,6 +673,7 @@
                             <TextRun>
                               <Value>=Fields!Credit.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                               </Style>
                             </TextRun>
@@ -703,9 +722,9 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsCredit</DataSetName>
-        <Top>2.10424in</Top>
+        <Top>1.52577in</Top>
         <Left>0.39756in</Left>
-        <Height>0.25in</Height>
+        <Height>0.1875in</Height>
         <Width>4.61458in</Width>
         <ZIndex>10</ZIndex>
         <Style>
@@ -722,15 +741,17 @@
             <TextRuns>
               <TextRun>
                 <Value>Balance (as per computation)</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>2.61674in</Top>
-        <Height>0.25in</Height>
+        <Top>1.96397in</Top>
+        <Height>0.18056in</Height>
         <Width>2.29166in</Width>
         <ZIndex>11</ZIndex>
         <Style>
@@ -752,6 +773,7 @@
               <TextRun>
                 <Value>=ReportItems!txtAddTotal.Value - ReportItems!txtLessTotal.Value</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -761,9 +783,9 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>2.6098in</Top>
+        <Top>1.95703in</Top>
         <Left>5.04166in</Left>
-        <Height>0.25in</Height>
+        <Height>0.18056in</Height>
         <Width>1.23958in</Width>
         <ZIndex>12</ZIndex>
         <Style>
@@ -788,16 +810,18 @@
             <TextRuns>
               <TextRun>
                 <Value>FOR FUNDING(FOR DEPOSIT)</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>2.86674in</Top>
+        <Top>2.14452in</Top>
         <Left>0.00001in</Left>
-        <Height>0.25in</Height>
+        <Height>0.16667in</Height>
         <Width>2.29166in</Width>
         <ZIndex>13</ZIndex>
         <Style>
@@ -819,6 +843,7 @@
               <TextRun>
                 <Value>=ReportItems!txtMaintain.Value - ReportItems!txtBalance.Value</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -828,9 +853,9 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>2.86674in</Top>
+        <Top>2.13758in</Top>
         <Left>6.28124in</Left>
-        <Height>0.25in</Height>
+        <Height>0.16667in</Height>
         <Width>1.23958in</Width>
         <ZIndex>14</ZIndex>
         <Style>
@@ -849,8 +874,8 @@
       </Textbox>
       <Subreport Name="cashCount">
         <ReportName>rpt_CashCount</ReportName>
-        <Top>3.47785in</Top>
-        <Left>0.10504in</Left>
+        <Top>2.62716in</Top>
+        <Left>0.09662in</Left>
         <Height>1.875in</Height>
         <Width>6.21354in</Width>
         <ZIndex>15</ZIndex>
@@ -868,16 +893,18 @@
             <TextRuns>
               <TextRun>
                 <Value>TOTAL CASH ON HAND</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.40841in</Top>
-        <Left>0.38021in</Left>
-        <Height>0.25in</Height>
+        <Top>4.5855in</Top>
+        <Left>0.37848in</Left>
+        <Height>0.19444in</Height>
         <Width>2.14583in</Width>
         <ZIndex>16</ZIndex>
         <Style>
@@ -898,16 +925,18 @@
             <TextRuns>
               <TextRun>
                 <Value>Overage (Shortage)</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.65841in</Top>
-        <Left>0.38021in</Left>
-        <Height>0.25in</Height>
+        <Top>4.77994in</Top>
+        <Left>0.37848in</Left>
+        <Height>0.18056in</Height>
         <Width>2.14583in</Width>
         <ZIndex>17</ZIndex>
         <Style>
@@ -928,16 +957,18 @@
             <TextRuns>
               <TextRun>
                 <Value>BALANCE (to be forwarded)</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.90841in</Top>
-        <Left>0.38021in</Left>
-        <Height>0.25in</Height>
+        <Top>4.9605in</Top>
+        <Left>0.37848in</Left>
+        <Height>0.19792in</Height>
         <Width>2.14583in</Width>
         <ZIndex>18</ZIndex>
         <Style>
@@ -959,6 +990,7 @@
               <TextRun>
                 <Value>=First(Fields!CashCount.Value, "dsDaily")</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -966,9 +998,9 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <Top>5.39452in</Top>
-        <Left>5.00681in</Left>
-        <Height>0.25in</Height>
+        <Top>4.57161in</Top>
+        <Left>5.04512in</Left>
+        <Height>0.19444in</Height>
         <Width>1.22396in</Width>
         <ZIndex>19</ZIndex>
         <Style>
@@ -994,6 +1026,7 @@
               <TextRun>
                 <Value>=ReportItems!txtCashOnHand.Value - ReportItems!txtBalance.Value</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -1002,9 +1035,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.64452in</Top>
-        <Left>6.24466in</Left>
-        <Height>0.25in</Height>
+        <Top>4.77994in</Top>
+        <Left>6.28297in</Left>
+        <Height>0.18056in</Height>
         <Width>1.22396in</Width>
         <ZIndex>20</ZIndex>
         <Style>
@@ -1030,6 +1063,7 @@
               <TextRun>
                 <Value>=ReportItems!txtCashOnHand.Value</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -1038,9 +1072,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>5.89452in</Top>
-        <Left>6.24639in</Left>
-        <Height>0.25in</Height>
+        <Top>4.9605in</Top>
+        <Left>6.28297in</Left>
+        <Height>0.19792in</Height>
         <Width>1.22396in</Width>
         <ZIndex>21</ZIndex>
         <Style>
@@ -1065,16 +1099,18 @@
             <TextRuns>
               <TextRun>
                 <Value>Sub-Total:</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>2.36674in</Top>
+        <Top>1.78341in</Top>
         <Left>0.00174in</Left>
-        <Height>0.25in</Height>
+        <Height>0.18056in</Height>
         <Width>2.29166in</Width>
         <ZIndex>22</ZIndex>
         <Style>
@@ -1096,6 +1132,7 @@
               <TextRun>
                 <Value>=SUM(Fields!Credit.Value, "dsCredit")</Value>
                 <Style>
+                  <FontSize>8pt</FontSize>
                   <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                 </Style>
               </TextRun>
@@ -1105,9 +1142,9 @@
             </Style>
           </Paragraph>
         </Paragraphs>
-        <Top>2.3598in</Top>
+        <Top>1.77647in</Top>
         <Left>5.03733in</Left>
-        <Height>0.25in</Height>
+        <Height>0.18056in</Height>
         <Width>1.23958in</Width>
         <ZIndex>23</ZIndex>
         <Style>
@@ -1125,7 +1162,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>6.24666in</Height>
+    <Height>5.37166in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -1145,12 +1182,12 @@
   <Width>7.52083in</Width>
   <Page>
     <PageHeader>
-      <Height>0.78833in</Height>
+      <Height>0.64417in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
         <Line Name="Line2">
-          <Top>0.76917in</Top>
+          <Top>0.64417in</Top>
           <Left>0.10504in</Left>
           <Height>0in</Height>
           <Width>7.41579in</Width>
@@ -1169,6 +1206,7 @@
                 <TextRun>
                   <Value>DAILY CASH COUNT SHEET</Value>
                   <Style>
+                    <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -1177,7 +1215,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.17194in</Top>
+          <Top>0.04694in</Top>
           <Left>0.10504in</Left>
           <Height>0.25in</Height>
           <Width>2.29167in</Width>
@@ -1200,14 +1238,16 @@
               <TextRuns>
                 <TextRun>
                   <Value>DATE:</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.44972in</Top>
+          <Top>0.32472in</Top>
           <Left>0.10504in</Left>
           <Height>0.25in</Height>
           <Width>0.78125in</Width>
@@ -1231,6 +1271,7 @@
                 <TextRun>
                   <Value>=Parameters!txtCurrentDate.Value</Value>
                   <Style>
+                    <FontSize>8pt</FontSize>
                     <Format>MMMM dd, yyyy</Format>
                   </Style>
                 </TextRun>
@@ -1241,7 +1282,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.44972in</Top>
+          <Top>0.32472in</Top>
           <Left>0.95573in</Left>
           <Height>0.25in</Height>
           <Width>1.44098in</Width>
@@ -1264,7 +1305,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>=Parameters!branchName.Value</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -1273,7 +1316,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox1</rd:DefaultName>
-          <Top>0.44972in</Top>
+          <Top>0.32472in</Top>
           <Left>6.28124in</Left>
           <Height>0.25in</Height>
           <Width>1.22569in</Width>
@@ -1296,7 +1339,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.04167in</Height>
+      <Height>1.77778in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1308,14 +1351,16 @@
               <TextRuns>
                 <TextRun>
                   <Value>Cash Counted by</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>0.33334in</Top>
+          <Top>0.08334in</Top>
           <Left>0.25173in</Left>
           <Height>0.25in</Height>
           <Width>2.41667in</Width>
@@ -1337,14 +1382,16 @@
               <TextRuns>
                 <TextRun>
                   <Value>Checked by:</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>0.33334in</Top>
+          <Top>0.08334in</Top>
           <Left>3.86024in</Left>
           <Height>0.25in</Height>
           <Width>2.41667in</Width>
@@ -1374,7 +1421,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>0.91146in</Top>
+          <Top>0.66146in</Top>
           <Left>0.25173in</Left>
           <Height>0.25in</Height>
           <Width>2.41667in</Width>
@@ -1407,7 +1454,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>0.91146in</Top>
+          <Top>0.66146in</Top>
           <Left>3.86024in</Left>
           <Height>0.25in</Height>
           <Width>2.41667in</Width>
@@ -1433,7 +1480,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>Signature Over Printed Name</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -1442,7 +1491,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>1.16146in</Top>
+          <Top>0.91146in</Top>
           <Left>0.25173in</Left>
           <Height>0.25in</Height>
           <Width>2.41667in</Width>
@@ -1465,7 +1514,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>Signature Over Printed Name</Value>
-                  <Style />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -1474,7 +1525,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox22</rd:DefaultName>
-          <Top>1.16146in</Top>
+          <Top>0.91146in</Top>
           <Left>3.86024in</Left>
           <Height>0.25in</Height>
           <Width>2.41667in</Width>
@@ -1490,7 +1541,7 @@
           </Style>
         </Textbox>
         <Line Name="Line1">
-          <Top>1.5in</Top>
+          <Top>1.25in</Top>
           <Left>0.10083in</Left>
           <Height>0in</Height>
           <Width>7.41999in</Width>
@@ -1521,7 +1572,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox56</rd:DefaultName>
-          <Top>1.52778in</Top>
+          <Top>1.27778in</Top>
           <Left>0.10083in</Left>
           <Height>0.25in</Height>
           <Width>2.56757in</Width>
@@ -1551,7 +1602,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox56</rd:DefaultName>
-          <Top>1.52778in</Top>
+          <Top>1.27778in</Top>
           <Left>3.07646in</Left>
           <Height>0.25in</Height>
           <Width>2.56757in</Width>
@@ -1583,7 +1634,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox56</rd:DefaultName>
-          <Top>1.52778in</Top>
+          <Top>1.27778in</Top>
           <Left>6.08145in</Left>
           <Height>0.25in</Height>
           <Width>1.43938in</Width>
@@ -1613,7 +1664,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox56</rd:DefaultName>
-          <Top>1.77778in</Top>
+          <Top>1.52778in</Top>
           <Left>0.10083in</Left>
           <Height>0.25in</Height>
           <Width>2.56757in</Width>

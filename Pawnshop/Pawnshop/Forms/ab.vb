@@ -4,7 +4,7 @@
 
     Private Sub FullCredits()
         CREDITS = _
-            "BRANCHES: " & vbCrLf & _
+            vbCrLf & "BRANCHES: " & vbCrLf & _
 "ROXAS - FROILYN" & vbCrLf & _
 "JCAT - JEN" & vbCrLf & _
 "PENDATUM - CAROL" & vbCrLf & _
@@ -14,7 +14,7 @@
             "JAYR, MAY2, FRANCES" & vbCrLf & _
             "==================" & vbCrLf & _
             "SPECIAL THANKS TO" & vbCrLf & _
-            "SIR DENNIS LARIBA"
+            "SIR DENNIS LARIBA, CPA"
     End Sub
 
 

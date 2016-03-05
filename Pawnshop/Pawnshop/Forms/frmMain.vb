@@ -40,7 +40,16 @@ Public Class frmMain
         End If
 
         'Reports
-
+        ToolStripMenuItem2.Enabled = Not st 'Monthly Report
+        SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
+        CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
+        OutstandingToolStripMenuItem.Enabled = Not st
+        LoanRegisterToolStripMenuItem.Enabled = Not st
+        MoneyTransferToolStripMenuItem.Enabled = Not st
+        InsuranceToolStripMenuItem.Enabled = Not st
+        SegregatedListToolStripMenuItem.Enabled = Not st
+        ItemPulloutToolStripMenuItem1.Enabled = Not st
+        DailyCashCountToolStripMenuItem.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()
@@ -302,12 +311,6 @@ Public Class frmMain
         frmCashCount.isClosing = True
     End Sub
 
-    Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
-        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
-
-        qryPullOut.Show()
-    End Sub
-
     Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
         qryLoan.Show()
     End Sub
@@ -317,6 +320,10 @@ Public Class frmMain
     End Sub
 
     Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
+        If dateSet Then
+            MsgBoxAuthoriation("You must CLOSE the store before viewing the Cash Count Sheet")
+            Exit Sub
+        End If
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.Show()
     End Sub
@@ -357,13 +364,6 @@ Public Class frmMain
         qryDate.Show()
     End Sub
 
-    Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
-        'qryDate.FormType = qryDate.ReportType.ItemPullOut
-        'qryDate.Show()
-
-        qryPullOut_List.Show()
-    End Sub
-
     Private Sub RateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RateToolStripMenuItem.Click
         If Not POSuser.canUpdateRates Then
             MsgBoxAuthoriation("You cannot update rates.")
@@ -371,5 +371,20 @@ Public Class frmMain
         End If
 
         frmRate2.Show()
+    End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
+        qryPullOut.Show()
+    End Sub
+
+    Private Sub InsuranceToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles InsuranceToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.Insurance
+        qryDate.Show()
+    End Sub
+
+    Private Sub AboutUsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
+        ab.Show()
     End Sub
 End Class
