@@ -266,6 +266,7 @@ Partial Class frmInsurance
         '
         Me.txtPT.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPT.Location = New System.Drawing.Point(121, 88)
+        Me.txtPT.MaxLength = 30
         Me.txtPT.Name = "txtPT"
         Me.txtPT.Size = New System.Drawing.Size(108, 25)
         Me.txtPT.TabIndex = 5

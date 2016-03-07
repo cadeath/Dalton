@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' v1.0.7
+'  - Fixing Insurance
 ' v1.0.6
 '  - Add WU - Intl
 ' v1.0.5

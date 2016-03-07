@@ -1,3 +1,7 @@
+ISSUE: 0013 03/06/2016
+[+] Cannot Save Insurance having long length Character
+	 - Class and Database Problem. Database must change type from Integer to String
+
 ISSUE: 0012 03/04/2016
 [+] Disable Cash Count Sheet Report when Cash Count is not yet Executed
 		- PTU
