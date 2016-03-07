@@ -307,8 +307,9 @@ Public Class frmMain
             MsgBoxAuthoriation("You cannot Close a Store.")
             Exit Sub
         End If
-        frmCashCount.Show()
-        frmCashCount.isClosing = True
+        frmCashCountV2.Show()
+        'frmCashCount.Show()
+        'frmCashCount.isClosing = True
     End Sub
 
     Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
