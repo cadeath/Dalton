@@ -351,6 +351,12 @@
     <Compile Include="Forms\frmPawnItem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmPrintManager.Designer.vb">
+      <DependentUpon>frmPrintManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPrintManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmPullOut.Designer.vb">
       <DependentUpon>frmPullOut.vb</DependentUpon>
     </Compile>
@@ -506,6 +512,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashCountV2.resx">
       <DependentUpon>frmCashCountV2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPrintManager.resx">
+      <DependentUpon>frmPrintManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate2.resx">
       <DependentUpon>frmRate2.vb</DependentUpon>
