@@ -258,10 +258,15 @@ Module mod_system
     ''' </summary>
     ''' <param name="e">Keypress Event</param>
     ''' <remarks>Use the Keypress Event when calling this function</remarks>
-    Friend Function DigitOnly(ByVal e As System.Windows.Forms.KeyPressEventArgs)
+    Friend Function DigitOnly(ByVal e As System.Windows.Forms.KeyPressEventArgs, Optional isWhole As Boolean = False)
         Console.WriteLine("char: " & e.KeyChar & " -" & Char.IsDigit(e.KeyChar))
         If e.KeyChar <> ControlChars.Back Then
-            e.Handled = Not (Char.IsDigit(e.KeyChar) Or e.KeyChar = ".")
+            If isWhole Then
+                e.Handled = Not (Char.IsDigit(e.KeyChar))
+            Else
+                e.Handled = Not (Char.IsDigit(e.KeyChar) Or e.KeyChar = ".")
+            End If
+
         End If
 
         Return Not (Char.IsDigit(e.KeyChar))

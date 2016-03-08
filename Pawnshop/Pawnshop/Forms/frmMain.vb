@@ -308,6 +308,7 @@ Public Class frmMain
             Exit Sub
         End If
         frmCashCountV2.Show()
+        frmCashCountV2.isClosing = True
         'frmCashCount.Show()
         'frmCashCount.isClosing = True
     End Sub

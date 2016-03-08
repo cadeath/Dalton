@@ -42,6 +42,7 @@ Partial Class frmCashCountV2
         Me.lvCashCount.GridLines = True
         Me.lvCashCount.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvCashCount.Location = New System.Drawing.Point(12, 28)
+        Me.lvCashCount.MultiSelect = False
         Me.lvCashCount.Name = "lvCashCount"
         Me.lvCashCount.Size = New System.Drawing.Size(270, 299)
         Me.lvCashCount.TabIndex = 0
@@ -62,6 +63,7 @@ Partial Class frmCashCountV2
         '
         Me.txtCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCount.Location = New System.Drawing.Point(115, 336)
+        Me.txtCount.MaxLength = 6
         Me.txtCount.Name = "txtCount"
         Me.txtCount.Size = New System.Drawing.Size(87, 26)
         Me.txtCount.TabIndex = 1
