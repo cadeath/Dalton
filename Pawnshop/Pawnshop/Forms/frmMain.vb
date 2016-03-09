@@ -29,6 +29,7 @@ Public Class frmMain
         JournalEntriesToolStripMenuItem.Enabled = Not st
         CashCountToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem.Enabled = Not st
+        ORManagerToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         ConsoleToolStripMenuItem.Enabled = Not st

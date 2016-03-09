@@ -215,7 +215,7 @@ Public Class frmPawnItem
 
         Select Case transactionType
             Case "L" : SaveNewLoan() : PrintNewLoan()
-            Case "X" : SaveRedeem() 'PrintRedeemOR()
+            Case "X" : SaveRedeem() : If Not PAUSE_OR Then PrintRedeemOR()
             Case "R" : SaveRenew() : PrintRenew()
         End Select
 
@@ -360,7 +360,7 @@ Public Class frmPawnItem
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         PrintRenewPT()
-        'PrintRenewOR()
+        If Not PAUSE_OR Then PrintRenewOR()
     End Sub
 
     Private Sub SaveRedeem()
