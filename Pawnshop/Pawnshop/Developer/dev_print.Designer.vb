@@ -29,6 +29,7 @@ Partial Class dev_print
         '
         'cboPrinter
         '
+        Me.cboPrinter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboPrinter.FormattingEnabled = True
         Me.cboPrinter.Location = New System.Drawing.Point(12, 12)
         Me.cboPrinter.Name = "cboPrinter"

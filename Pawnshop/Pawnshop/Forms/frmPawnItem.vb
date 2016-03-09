@@ -24,6 +24,7 @@ Public Class frmPawnItem
     Const ITEM_NEWLOAN As String = "NEW LOAN"
     Const ITEM_RENEW As String = "RENEW"
     Const HAS_ADVINT As Boolean = True
+    Const PAUSE_OR As Boolean = True
 
     Private isEarlyRedeem As Boolean = False
     Private earlyDays As Integer = 0
@@ -253,8 +254,10 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub AddORNum()
-        currentORNumber += 1
-        UpdateOptions("ORLastNum", currentORNumber)
+        If Not PAUSE_OR Then
+            currentORNumber += 1
+            UpdateOptions("ORLastNum", currentORNumber)
+        End If
     End Sub
 
     Private Sub tmrVerifier_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrVerifier.Tick

@@ -389,4 +389,8 @@ Public Class frmMain
     Private Sub AboutUsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
         ab.Show()
     End Sub
+
+    Private Sub ORManagerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ORManagerToolStripMenuItem.Click
+        frmPrintManager.Show()
+    End Sub
 End Class

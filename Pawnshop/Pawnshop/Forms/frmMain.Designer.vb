@@ -41,6 +41,7 @@ Partial Class frmMain
         Me.JournalEntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ORManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -78,7 +79,6 @@ Partial Class frmMain
         Me.tsCurrentDate = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tsUser = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
-        Me.ORManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -192,6 +192,12 @@ Partial Class frmMain
         Me.ItemPulloutToolStripMenuItem.Name = "ItemPulloutToolStripMenuItem"
         Me.ItemPulloutToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.ItemPulloutToolStripMenuItem.Text = "&Item Pullout"
+        '
+        'ORManagerToolStripMenuItem
+        '
+        Me.ORManagerToolStripMenuItem.Name = "ORManagerToolStripMenuItem"
+        Me.ORManagerToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ORManagerToolStripMenuItem.Text = "&Print Manager"
         '
         'ToolStripSeparator2
         '
@@ -481,12 +487,6 @@ Partial Class frmMain
         'tmrCurrent
         '
         Me.tmrCurrent.Enabled = True
-        '
-        'ORManagerToolStripMenuItem
-        '
-        Me.ORManagerToolStripMenuItem.Name = "ORManagerToolStripMenuItem"
-        Me.ORManagerToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
-        Me.ORManagerToolStripMenuItem.Text = "&Print Manager"
         '
         'frmMain
         '
