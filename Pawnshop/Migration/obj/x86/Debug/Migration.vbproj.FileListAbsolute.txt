@@ -1,0 +1,10 @@
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\bin\Debug\Migration.exe
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\bin\Debug\Migration.pdb
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\bin\Debug\Migration.xml
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Debug\Migration.vbprojResolveAssemblyReference.cache
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Debug\Migration.frmMain.resources
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Debug\Migration.Resources.resources
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Debug\Migration.vbproj.GenerateResource.Cache
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Debug\Migration.exe
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Debug\Migration.xml
+D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Debug\Migration.pdb

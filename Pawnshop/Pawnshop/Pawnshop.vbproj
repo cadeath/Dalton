@@ -188,6 +188,12 @@
     <Compile Include="Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\dev_print.Designer.vb">
+      <DependentUpon>dev_print.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_print.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_report.Designer.vb">
       <DependentUpon>dev_report.vb</DependentUpon>
     </Compile>
@@ -506,6 +512,9 @@
       <DependentUpon>dev_ORview.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_print.resx">
+      <DependentUpon>dev_print.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -718,6 +727,7 @@
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\_layout03.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="backup.bat">
