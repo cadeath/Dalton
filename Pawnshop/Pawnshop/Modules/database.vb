@@ -22,6 +22,7 @@
 
 Friend Module database
     Public con As OdbcConnection
+    Public ReaderCon As OdbcConnection
     'Friend dbName As String = "..\..\sample.FDB"
     Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
@@ -134,15 +135,29 @@ Friend Module database
     End Function
 
     Friend Function LoadSQL_byDataReader(ByVal mySql As String) As OdbcDataReader
-        dbOpen()
-
-        Dim com As OdbcCommand = New OdbcCommand(mySql, con)
-        Dim reader As OdbcDataReader = com.ExecuteReader
-
-        dbClose()
+        Dim myCom As OdbcCommand = New OdbcCommand(mySql, ReaderCon)
+        Dim reader As OdbcDataReader = myCom.ExecuteReader()
 
         Return reader
     End Function
+
+    Public Sub dbReaderOpen()
+        conStr = "DRIVER=Firebird/InterBase(r) driver;User=" & fbUser & ";Password=" & fbPass & ";Database=" & dbName & ";"
+
+        ReaderCon = New OdbcConnection(conStr)
+        Try
+            ReaderCon.Open()
+        Catch ex As Exception
+            ReaderCon.Dispose()
+            MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Connecting Error")
+            Log_Report(ex.Message.ToString)
+            Exit Sub
+        End Try
+    End Sub
+
+    Public Sub dbReaderClose()
+        ReaderCon.Close()
+    End Sub
 
     Friend Function GetOption(ByVal keys As String) As String
         Dim mySql As String = "SELECT * FROM tblmaintenance WHERE opt_keys = '" & keys & "'"
