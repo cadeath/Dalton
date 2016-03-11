@@ -25,6 +25,7 @@
         mySql = "SELECT P.*, X.PAWNTICKET as NEWPT FROM PAWNING P LEFT JOIN PAWNING X ON X.OLDTICKET = P.PAWNTICKET WHERE "
         mySql &= String.Format("(P.LoanDate = '{0}' AND P.STATUS = 'NEW') OR (P.ORDATE = '{0}' AND P.STATUS = 'RENEWED')", monCal.SelectionStart.ToString("MM/dd/yyyy"))
 
+        Console.WriteLine(">>> " & mySql)
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
         addParameter.Add("branchName", branchName)
