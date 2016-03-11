@@ -1,0 +1,18 @@
+[03/11/2016 17:54:35] ERROR [08004] [ODBC Firebird Driver]unavailable database
+[03/11/2016 17:54:35] User: SYSDBA
+[03/11/2016 17:54:35] Database: W3W1LH4CKU.FDB
+[03/11/2016 17:54:36] ERROR [08004] [ODBC Firebird Driver]unavailable database
+[03/11/2016 17:54:36] User: SYSDBA
+[03/11/2016 17:54:36] Database: W3W1LH4CKU.FDB
+[03/11/2016 17:54:36] ERROR [08004] [ODBC Firebird Driver]unavailable database
+[03/11/2016 17:54:36] User: SYSDBA
+[03/11/2016 17:54:36] Database: W3W1LH4CKU.FDB
+[03/11/2016 17:54:37] ERROR [08004] [ODBC Firebird Driver]unavailable database
+[03/11/2016 17:54:37] User: SYSDBA
+[03/11/2016 17:54:37] Database: W3W1LH4CKU.FDB
+[03/11/2016 17:54:37] ERROR [08004] [ODBC Firebird Driver]unavailable database
+[03/11/2016 17:54:37] User: SYSDBA
+[03/11/2016 17:54:37] Database: W3W1LH4CKU.FDB
+[03/11/2016 17:54:38] ERROR [08004] [ODBC Firebird Driver]unavailable database
+[03/11/2016 17:54:38] User: SYSDBA
+[03/11/2016 17:54:38] Database: W3W1LH4CKU.FDB

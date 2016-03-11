@@ -71,6 +71,8 @@ Public Class frmMain
             frmSettings.Focus()
             frmSettings.TopMost = True
         End If
+
+        Ads_Initialization()
     End Sub
 
     Friend Sub CheckStoreStatus()
@@ -325,6 +327,14 @@ Public Class frmMain
         qrySequence.Show()
     End Sub
 
+    Private Sub Ads_Initialization()
+        Dim adsPath As String = "file:///" & Application.StartupPath() & "\ads.html"
+        webAds.Visible = False
+        webAds.Navigate(adsPath)
+
+        Console.WriteLine(adsPath)
+    End Sub
+
     Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
         frmSegreList.Show()
     End Sub
@@ -371,5 +381,9 @@ Public Class frmMain
         End If
 
         frmRate2.Show()
+    End Sub
+
+    Private Sub webAds_DocumentCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles webAds.DocumentCompleted
+        webAds.Visible = True
     End Sub
 End Class

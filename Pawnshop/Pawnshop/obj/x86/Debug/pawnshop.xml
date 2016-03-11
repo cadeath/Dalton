@@ -1,0 +1,301 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+pawnshop
+</name>
+</assembly>
+<members>
+<member name="M:Pawnshop.JournalEntries.AddJournal(System.Double,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+	<summary>
+ This Procedure add Journal Entries
+ </summary>
+	<param name="Amt">Amount</param>
+	<param name="DebitCredit">Debit/Credit</param>
+	<param name="AccountName">TransName</param>
+	<param name="Remarks">Remarks</param>
+	<param name="cashCountName">Display on CashCount</param>
+	<param name="ToDisplay">ToDisplay on CashCount</param>
+	<param name="Category">Category</param>
+	<remarks>This Procedure add Journal Entries</remarks>
+</member><member name="M:Pawnshop.mod_system.DigitOnly(System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ Function use to input only numbers
+ </summary>
+	<param name="e">Keypress Event</param>
+	<remarks>Use the Keypress Event when calling this function</remarks>
+</member><member name="M:Pawnshop.mod_system.isEnter(System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ Identify if the KeyPress is enter
+ </summary>
+	<param name="e">KeyPressEventArgs</param>
+	<returns>Boolean</returns>
+</member><member name="M:Pawnshop.mod_system.isMoney(System.Windows.Forms.TextBox)">
+	<summary>
+ Use to verify entry
+ </summary>
+	<param name="txtBox">TextBox of the Money</param>
+	<returns>Boolean</returns>
+</member><member name="M:Pawnshop.Client.LoadClient(System.Int32)">
+	<summary>
+ This is use to load Client information
+ </summary>
+	<param name="id">ClientID</param>
+	<remarks>to be added by ID List</remarks>
+</member><member name="M:Pawnshop.ComputerUser.PriviledgeChecking">
+	<summary>
+ For Adding Priviledge
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Pawnshop.ComputerUser">
+	<summary>
+ NOTE: Privilege PDuNxp8S9q0= means SUPER USER
+ </summary>
+	<remarks>NOTE: Privilege PDuNxp8S9q0= means SUPER USER</remarks>
+</member><member name="T:Pawnshop.dsPrint.PawnTicketDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.PawnTicketRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.PawnTicketRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsPrint">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsLoanRegDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsRedeemRenewDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.MONTHLY_LOANRENEWDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCcoinsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCbillDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.JournalEntriesDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.DailyDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.MoneyTransferDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.InsuranceDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.PawningDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.DollarDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.BorrowingsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.CIO_TransDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsLoanRegRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsRedeemRenewRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.MONTHLY_LOANRENEWRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCcoinsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCbillRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.JournalEntriesRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.DailyRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.MoneyTransferRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.InsuranceRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.PawningRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.DollarRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.BorrowingsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.CIO_TransRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsLoanRegRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsRedeemRenewRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.MONTHLY_LOANRENEWRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCcoinsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCbillRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.JournalEntriesRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.DailyRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.MoneyTransferRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.InsuranceRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.PawningRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.DollarRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.BorrowingsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.CIO_TransRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="M:Pawnshop.frmCashCount.ComputeMe(System.Windows.Forms.TextBox,System.Double)">
+	<summary>
+ Insert this to the KeyUp event
+ </summary>
+	<param name="txt"></param>
+	<param name="amt"></param>
+	<remarks></remarks>
+</member><member name="P:Pawnshop.RandomKeyGenerator.KeyLetters">
+	<date>27072005</date><time>071924</time>
+	<type>property</type>
+	<summary>
+ WRITE ONLY PROPERTY. HAS TO BE SET BEFORE CALLING GENERATE()
+ </summary>
+</member><member name="P:Pawnshop.RandomKeyGenerator.KeyNumbers">
+	<date>27072005</date><time>071924</time>
+	<type>property</type>
+	<summary>
+ WRITE ONLY PROPERTY. HAS TO BE SET BEFORE CALLING GENERATE()
+ </summary>
+</member><member name="P:Pawnshop.RandomKeyGenerator.KeyChars">
+	<date>27072005</date><time>071924</time>
+	<type>property</type>
+	<summary>
+ WRITE ONLY PROPERTY. HAS TO BE SET BEFORE CALLING GENERATE()
+ </summary>
+</member><member name="M:Pawnshop.RandomKeyGenerator.Generate">
+	<date>27072005</date><time>072344</time>
+	<type>function</type>
+	<summary>
+ GENERATES A RANDOM STRING OF LETTERS AND NUMBERS.
+ LETTERS CAN BE RANDOMLY CAPITAL OR SMALL.
+ </summary>
+	<returns type="String">RETURNS THE
+         RANDOMLY GENERATED KEY</returns>
+</member><member name="T:Pawnshop.RandomKeyGenerator">
+	<date>27072005</date><time>070339</time>
+	<type>class</type>
+	<summary>
+ REQUIRES PROPERTIES: KeyLetters, KeyNumbers, MaxChars
+ </summary>
+</member><member name="P:Pawnshop.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Pawnshop.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Pawnshop.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="P:Pawnshop.MoneyTransferService.isGenerated">
+	<summary>
+ isSystem Generated
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.SaveEntry(System.Data.DataSet,System.Boolean)">
+	<summary>
+ Module 001
+ Save the Dataset to the database
+ </summary>
+	<param name="dsEntry">Database with Table Name as Database Table Name</param>
+	<returns>Boolean: Success Result</returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>
