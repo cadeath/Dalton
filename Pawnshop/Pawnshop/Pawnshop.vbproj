@@ -534,6 +534,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab.resx">
       <DependentUpon>ab.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagAuthorization.resx">
       <DependentUpon>diagAuthorization.vb</DependentUpon>

@@ -190,6 +190,15 @@ Friend Module database
             ds.Tables(0).Rows(0).Item("opt_values") = value
             SaveEntry(ds, False)
         End If
+
+        If key = "RevolvingFund" Then
+            mySql = "SELECT * FROM TBLCASH WHERE TRANSNAME = 'Revolving Fund'"
+            fillData = "tblCash"
+
+            ds = LoadSQL(mySql, fillData)
+            ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = value
+            SaveEntry(ds, False)
+        End If
         Console.WriteLine("Option updated. " & key)
     End Sub
 End Module

@@ -1,3 +1,6 @@
+ISSUE: 0013 03/11/2016
+[+] Revolving Fund not changing to Roxas
+
 ISSUE: 0013 03/06/2016
 [+] NO COI (Insurance) Report 
 [-] Renew transaction - Di maEdit ang Pawner's Name
