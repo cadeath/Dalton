@@ -86,7 +86,7 @@ Partial Class frmMain
         'lblRef
         '
         Me.lblRef.AutoSize = True
-        Me.lblRef.Location = New System.Drawing.Point(12, 118)
+        Me.lblRef.Location = New System.Drawing.Point(12, 136)
         Me.lblRef.Name = "lblRef"
         Me.lblRef.Size = New System.Drawing.Size(24, 13)
         Me.lblRef.TabIndex = 5
@@ -96,7 +96,7 @@ Partial Class frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(219, 145)
+        Me.ClientSize = New System.Drawing.Size(219, 158)
         Me.Controls.Add(Me.lblRef)
         Me.Controls.Add(Me.btnFix)
         Me.Controls.Add(Me.txtDB)

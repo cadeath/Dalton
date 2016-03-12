@@ -1,5 +1,31 @@
+ISSUE: 0013 03/11/2016
+[+] Revolving Fund not changing to Roxas
+
+ISSUE: 0013 03/06/2016
+[+] NO COI (Insurance) Report 
+[-] Renew transaction - Di maEdit ang Pawner's Name
+[-] Font Size sa Pawnticket if i-Print Gamay
+[-] Error adding NO CLIENT at pawning
+
+
+ISSUE: 0013 03/06/2016
+[+] Cannot Save Insurance having long length Character
+	 - Class and Database Problem. Database must change type from Integer to String
+
+
+ISSUE: 0012 03/04/2016
+[+] Disable Cash Count Sheet Report when Cash Count is not yet Executed
+		- PTU
+[-]	Pawnticket and OR number should appear in the print layout
+[-]	Old Pawnticket number should appear in the print layout of PT
+[-]	Include Pawner's Name at the claim stub
+[-]	Report small font
+	 - Cash Cash Sheet [Done]
+[-]	Unable to reprint OR
+
+
 ISSUE: 0011 02/23/2016
-[-] Add Segregation Entry
+[+] Add Segregation Entry
 
 
 ISSUE: 0010 02/20/2016

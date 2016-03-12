@@ -24,6 +24,7 @@ Public Class frmPawnItem
     Const ITEM_NEWLOAN As String = "NEW LOAN"
     Const ITEM_RENEW As String = "RENEW"
     Const HAS_ADVINT As Boolean = True
+    Const PAUSE_OR As Boolean = True
 
     Private isEarlyRedeem As Boolean = False
     Private earlyDays As Integer = 0
@@ -214,7 +215,7 @@ Public Class frmPawnItem
 
         Select Case transactionType
             Case "L" : SaveNewLoan() : PrintNewLoan()
-            Case "X" : SaveRedeem() : PrintRedeemOR()
+            Case "X" : SaveRedeem() : If Not PAUSE_OR Then PrintRedeemOR()
             Case "R" : SaveRenew() : PrintRenew()
         End Select
 
@@ -253,8 +254,10 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub AddORNum()
-        currentORNumber += 1
-        UpdateOptions("ORLastNum", currentORNumber)
+        If Not PAUSE_OR Then
+            currentORNumber += 1
+            UpdateOptions("ORLastNum", currentORNumber)
+        End If
     End Sub
 
     Private Sub tmrVerifier_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrVerifier.Tick
@@ -357,7 +360,7 @@ Public Class frmPawnItem
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         PrintRenewPT()
-        PrintRenewOR()
+        If Not PAUSE_OR Then PrintRenewOR()
     End Sub
 
     Private Sub SaveRedeem()

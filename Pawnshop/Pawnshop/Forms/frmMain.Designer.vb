@@ -41,6 +41,7 @@ Partial Class frmMain
         Me.JournalEntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ORManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -52,6 +53,7 @@ Partial Class frmMain
         Me.OutstandingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MoneyTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InsuranceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
@@ -164,7 +166,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -186,12 +188,19 @@ Partial Class frmMain
         Me.CashCountToolStripMenuItem.Name = "CashCountToolStripMenuItem"
         Me.CashCountToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.CashCountToolStripMenuItem.Text = "&Cash Count"
+        Me.CashCountToolStripMenuItem.Visible = False
         '
         'ItemPulloutToolStripMenuItem
         '
         Me.ItemPulloutToolStripMenuItem.Name = "ItemPulloutToolStripMenuItem"
         Me.ItemPulloutToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.ItemPulloutToolStripMenuItem.Text = "&Item Pullout"
+        '
+        'ORManagerToolStripMenuItem
+        '
+        Me.ORManagerToolStripMenuItem.Name = "ORManagerToolStripMenuItem"
+        Me.ORManagerToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ORManagerToolStripMenuItem.Text = "&Print Manager"
         '
         'ToolStripSeparator2
         '
@@ -212,7 +221,7 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -257,6 +266,12 @@ Partial Class frmMain
         Me.MoneyTransferToolStripMenuItem.Name = "MoneyTransferToolStripMenuItem"
         Me.MoneyTransferToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.MoneyTransferToolStripMenuItem.Text = "Money Transfer"
+        '
+        'InsuranceToolStripMenuItem
+        '
+        Me.InsuranceToolStripMenuItem.Name = "InsuranceToolStripMenuItem"
+        Me.InsuranceToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.InsuranceToolStripMenuItem.Text = "&Insurance"
         '
         'SegregatedListToolStripMenuItem
         '
@@ -583,7 +598,12 @@ Partial Class frmMain
     Friend WithEvents OutstandingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ItemPulloutToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+<<<<<<< HEAD
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
     Friend WithEvents bannerSize As System.Windows.Forms.PictureBox
+=======
+    Friend WithEvents InsuranceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ORManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+>>>>>>> origin/master
 
 End Class

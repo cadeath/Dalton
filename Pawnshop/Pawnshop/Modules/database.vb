@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' v1.0.7
+'  - Fixing Insurance
 ' v1.0.6
 '  - Add WU - Intl
 ' v1.0.5
@@ -20,6 +22,7 @@
 
 Friend Module database
     Public con As OdbcConnection
+    Public ReaderCon As OdbcConnection
     'Friend dbName As String = "..\..\sample.FDB"
     Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
@@ -27,7 +30,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.0.6"
+    Private DBversion As String = "1.0.7"
     Private language() As String = _
         {"Connection error failed."}
 
@@ -132,15 +135,29 @@ Friend Module database
     End Function
 
     Friend Function LoadSQL_byDataReader(ByVal mySql As String) As OdbcDataReader
-        dbOpen()
-
-        Dim com As OdbcCommand = New OdbcCommand(mySql, con)
-        Dim reader As OdbcDataReader = com.ExecuteReader
-
-        dbClose()
+        Dim myCom As OdbcCommand = New OdbcCommand(mySql, ReaderCon)
+        Dim reader As OdbcDataReader = myCom.ExecuteReader()
 
         Return reader
     End Function
+
+    Public Sub dbReaderOpen()
+        conStr = "DRIVER=Firebird/InterBase(r) driver;User=" & fbUser & ";Password=" & fbPass & ";Database=" & dbName & ";"
+
+        ReaderCon = New OdbcConnection(conStr)
+        Try
+            ReaderCon.Open()
+        Catch ex As Exception
+            ReaderCon.Dispose()
+            MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Connecting Error")
+            Log_Report(ex.Message.ToString)
+            Exit Sub
+        End Try
+    End Sub
+
+    Public Sub dbReaderClose()
+        ReaderCon.Close()
+    End Sub
 
     Friend Function GetOption(ByVal keys As String) As String
         Dim mySql As String = "SELECT * FROM tblmaintenance WHERE opt_keys = '" & keys & "'"
@@ -171,6 +188,15 @@ Friend Module database
             SaveEntry(ds)
         Else
             ds.Tables(0).Rows(0).Item("opt_values") = value
+            SaveEntry(ds, False)
+        End If
+
+        If key = "RevolvingFund" Then
+            mySql = "SELECT * FROM TBLCASH WHERE TRANSNAME = 'Revolving Fund'"
+            fillData = "tblCash"
+
+            ds = LoadSQL(mySql, fillData)
+            ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = value
             SaveEntry(ds, False)
         End If
         Console.WriteLine("Option updated. " & key)

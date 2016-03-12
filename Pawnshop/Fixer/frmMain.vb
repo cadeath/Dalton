@@ -16,12 +16,14 @@ Public Class frmMain
 
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
         If Not System.IO.File.Exists(txtDB.Text) Then Exit Sub
-        If Not System.IO.File.Exists(txtImport.Text) Then Exit Sub
+        'If Not System.IO.File.Exists(txtImport.Text) Then Exit Sub
 
         'MigrateIssue()
         btnFix.Enabled = False
 
-        No_Description()
+        'No_Description()
+        'pg_incomplete_desc.do_fix(txtImport.Text, txtDB.Text)
+        revolving_fund.do_RevolvingFix(txtDB.Text)
 
         btnFix.Enabled = True
     End Sub

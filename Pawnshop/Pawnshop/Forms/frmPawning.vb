@@ -70,13 +70,18 @@
         End If
 
         lvPawners.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpPawn As New PawnTicket
-            tmpPawn.LoadTicketInRow(dr)
+        dbReaderOpen()
 
-            AddItem(tmpPawn)
-            Console.WriteLine("Pawn: " & tmpPawn.PawnID)
-        Next
+        Dim PawnReader = LoadSQL_byDataReader(mySql)
+        While PawnReader.Read
+
+            Dim readerPT As New PawnTicket
+            readerPT.LoadTicketInReader(PawnReader)
+            AddItem(readerPT)
+
+        End While
+
+        dbReaderClose()
     End Sub
 
     Private Sub AddItem(ByVal tk As PawnTicket)
