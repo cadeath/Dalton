@@ -461,7 +461,7 @@ Adv Int</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIF(Fields!Status.Value = "NEW",Fields!PawnTicket.Value,Fields!NewPT.Value)</Value>
+                              <Value>=IIF(Fields!Status.Value.ToString.trim = "NEW",Fields!PawnTicket.Value,Fields!NewPT.Value)</Value>
                               <Style>
                                 <Format>000000</Format>
                               </Style>
@@ -648,7 +648,7 @@ Adv Int</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIF(Fields!Status.Value = "NEW","",Fields!NewPT.Value)</Value>
+                              <Value>=IIF(Fields!Status.Value.ToString.trim = "NEW","",Fields!PawnTicket.Value)</Value>
                               <Style>
                                 <Format>0;(0);''</Format>
                               </Style>
@@ -837,7 +837,7 @@ Adv Int</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Status.Value.tostring.length &amp; "|" &amp; Fields!Status.Value</Value>
+                              <Value />
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -855,7 +855,6 @@ Adv Int</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

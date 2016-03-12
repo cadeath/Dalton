@@ -366,7 +366,7 @@ Public Class frmPawnItem
 
     Private Sub do_RenewOR()
         For i As Integer = 1 To OR_COPIES
-            PrintRenewOR()
+            PrintRenewOR2()
             System.Threading.Thread.Sleep(1000)
         Next
     End Sub
@@ -397,6 +397,9 @@ Public Class frmPawnItem
                 AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket)
+                If isEarlyRedeem Then
+                    AddJournal(.EarlyRedeem, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
+                End If
             Else
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
                 If isEarlyRedeem Then
@@ -407,7 +410,7 @@ Public Class frmPawnItem
                     AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                     AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 End If
-                End If
+            End If
         End With
     End Sub
 
@@ -1192,6 +1195,50 @@ Public Class frmPawnItem
         Me.Focus()
     End Sub
 
+    Private Sub PrintRenewOR2()
+        Dim autoPrintPT As Reporting
+        Dim printerName As String = PRINTER_OR
+        If Not canPrint(printerName) Then Exit Sub
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+        Dim mySql As String, ptIDx As Single = PawnItem.PawnID
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
+        Dim dsName As String = "dsPawn"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+        Dim paymentStr As String
+        Dim rptPath As String
+        rptPath = "Reports\_layout03.rdlc"
+        Dim addParameters As New Dictionary(Of String, String)
+
+        report.ReportPath = rptPath
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        PawnItem.LoadTicket(ptIDx)
+
+        paymentStr = _
+        String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
+        addParameters.Add("txtPayment", paymentStr)
+        addParameters.Add("dblTotalDue", PawnItem.RenewDue)
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 4.5) 'Reprint only
+
+        autoPrintPT.Export(report, paperSize)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
+    End Sub
+
     Private Sub PrintRenewOR()
         Dim autoPrintPT As Reporting
         Dim printerName As String = PRINTER_OR
@@ -1201,11 +1248,10 @@ Public Class frmPawnItem
 
         Dim mySql As String, ptIDx As Single = PawnItem.PawnID
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
-        Dim dsName As String = "dsOR"
+        Dim dsName As String = "dsPawn"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
         Dim paymentStr As String
         Dim rptPath As String = "Reports\layout05.rdlc"
-        rptPath = "Reports\_layout03.rdlc"
         Dim addParameters As New Dictionary(Of String, String)
 
         report.ReportPath = rptPath
@@ -1252,8 +1298,7 @@ Public Class frmPawnItem
         'Renewal - OR no duplicate
         Dim paperSize As New Dictionary(Of String, Double)
         paperSize.Add("width", 8.5)
-        'paperSize.Add("height", 9) 'Include the duplicate; changed 4.5 to 9
-        paperSize.Add("height", 4.5) 'Reprint only
+        paperSize.Add("height", 9) 'Include the duplicate; changed 4.5 to 9
 
         autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0

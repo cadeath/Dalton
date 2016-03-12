@@ -1,5 +1,11 @@
+ISSUE: 0014 03/12/2016
+[-] Early Redemption no JE on INTEREST
+[+] Report Display on LOAN REGISTER. Pawnticket and Old Pawnticket
+
+
 ISSUE: 0013 03/11/2016
 [+] Revolving Fund not changing to Roxas
+
 
 ISSUE: 0013 03/06/2016
 [+] NO COI (Insurance) Report 
