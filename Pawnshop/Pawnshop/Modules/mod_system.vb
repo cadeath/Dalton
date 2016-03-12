@@ -12,7 +12,7 @@
 Module mod_system
 
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = 0
+    Public DEV_MODE As Boolean = 1
     Public ADS_ESKIE As Boolean = True
 
     Public CurrentDate As Date = Now
@@ -95,6 +95,7 @@ Module mod_system
         If ds.Tables(0).Rows.Count = 1 Then
             CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
             dailyID = ds.Tables(0).Rows(0).Item("ID")
+            InitialBal = ds.Tables(0).Rows(0).Item("INITIALBAL")
             frmMain.dateSet = True
         Else
             frmMain.dateSet = False

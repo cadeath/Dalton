@@ -3,6 +3,7 @@ Version 1.1.1.0
  - Add Insurance Report
  - Cash Count Sheet disable when store is open
  - Insurance Ref# length increase
+ - RF SAP Code Update
 
 Version 1.1.0.5
  - Revise Segregation List Report

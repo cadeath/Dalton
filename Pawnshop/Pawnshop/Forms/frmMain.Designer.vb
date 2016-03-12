@@ -199,7 +199,7 @@ Partial Class frmMain
         'ORManagerToolStripMenuItem
         '
         Me.ORManagerToolStripMenuItem.Name = "ORManagerToolStripMenuItem"
-        Me.ORManagerToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ORManagerToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
         Me.ORManagerToolStripMenuItem.Text = "&Print Manager"
         '
         'ToolStripSeparator2
@@ -270,7 +270,7 @@ Partial Class frmMain
         'InsuranceToolStripMenuItem
         '
         Me.InsuranceToolStripMenuItem.Name = "InsuranceToolStripMenuItem"
-        Me.InsuranceToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.InsuranceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.InsuranceToolStripMenuItem.Text = "&Insurance"
         '
         'SegregatedListToolStripMenuItem
@@ -500,6 +500,7 @@ Partial Class frmMain
         Me.webAds.ScrollBarsEnabled = False
         Me.webAds.Size = New System.Drawing.Size(322, 56)
         Me.webAds.TabIndex = 7
+        Me.webAds.Visible = False
         '
         'bannerSize
         '
@@ -598,12 +599,9 @@ Partial Class frmMain
     Friend WithEvents OutstandingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ItemPulloutToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RateToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-<<<<<<< HEAD
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
     Friend WithEvents bannerSize As System.Windows.Forms.PictureBox
-=======
     Friend WithEvents InsuranceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ORManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
->>>>>>> origin/master
 
 End Class

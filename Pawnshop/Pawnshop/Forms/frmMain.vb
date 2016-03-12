@@ -58,7 +58,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString
+        Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, "<<DEVELOPER MODE>>", "")
         ConfiguringDB()
         If Not DBCompatibilityCheck() Then MsgBox("Please update the database version", MsgBoxStyle.Critical) : End
 
@@ -82,7 +82,8 @@ Public Class frmMain
             frmSettings.TopMost = True
         End If
 
-        Ads_Initialization()
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
     End Sub
 
     Friend Sub CheckStoreStatus()
@@ -325,9 +326,11 @@ Public Class frmMain
     End Sub
 
     Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
-        If dateSet Then
-            MsgBoxAuthoriation("You must CLOSE the store before viewing the Cash Count Sheet")
-            Exit Sub
+        If Not mod_system.DEV_MODE Then
+            If dateSet Then
+                MsgBoxAuthoriation("You must CLOSE the store before viewing the Cash Count Sheet")
+                Exit Sub
+            End If
         End If
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.Show()
@@ -335,14 +338,6 @@ Public Class frmMain
 
     Private Sub SequenceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SequenceToolStripMenuItem.Click
         qrySequence.Show()
-    End Sub
-
-    Private Sub Ads_Initialization()
-        Dim adsPath As String = "file:///" & Application.StartupPath() & "\ads.html"
-        webAds.Visible = False
-        webAds.Navigate(adsPath)
-
-        Console.WriteLine(adsPath)
     End Sub
 
     Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
@@ -386,11 +381,7 @@ Public Class frmMain
         frmRate2.Show()
     End Sub
 
-<<<<<<< HEAD
-    Private Sub webAds_DocumentCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles webAds.DocumentCompleted
-        webAds.Visible = True
-=======
-    Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+    Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         qryPullOut.Show()
@@ -407,6 +398,5 @@ Public Class frmMain
 
     Private Sub ORManagerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ORManagerToolStripMenuItem.Click
         frmPrintManager.Show()
->>>>>>> origin/master
     End Sub
 End Class

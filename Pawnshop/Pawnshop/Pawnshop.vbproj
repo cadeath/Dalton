@@ -403,6 +403,7 @@
     <Compile Include="Modules\pawning.vb" />
     <Compile Include="Modules\security.vb" />
     <Compile Include="Modules\updateRate.vb" />
+    <Compile Include="Modules\web_ads.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
