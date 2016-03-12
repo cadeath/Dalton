@@ -12,7 +12,7 @@
 Module mod_system
 
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = 1
+    Public DEV_MODE As Boolean = False
     Public ADS_ESKIE As Boolean = True
 
     Public CurrentDate As Date = Now
@@ -28,7 +28,7 @@ Module mod_system
 
     Friend advanceInterestDays As Integer = 30
     Friend MaintainBal As Double = GetOption("MaintainingBalance")
-    Friend InitialBal As Double = 0
+    Friend InitialBal As Double = GetOption("CurrentBalance")
     Friend RepDep As Double = 0
     Friend DollarRate As Double = 48
     Friend RequirementLevel As Integer = 1
@@ -95,7 +95,7 @@ Module mod_system
         If ds.Tables(0).Rows.Count = 1 Then
             CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
             dailyID = ds.Tables(0).Rows(0).Item("ID")
-            InitialBal = ds.Tables(0).Rows(0).Item("INITIALBAL")
+            'InitialBal = ds.Tables(0).Rows(0).Item("INITIALBAL")
             frmMain.dateSet = True
         Else
             frmMain.dateSet = False

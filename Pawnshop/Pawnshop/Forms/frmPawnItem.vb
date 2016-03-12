@@ -24,7 +24,8 @@ Public Class frmPawnItem
     Const ITEM_NEWLOAN As String = "NEW LOAN"
     Const ITEM_RENEW As String = "RENEW"
     Const HAS_ADVINT As Boolean = True
-    Const PAUSE_OR As Boolean = True
+    Const PAUSE_OR As Boolean = False
+    Const OR_COPIES As Integer = 2
 
     Private isEarlyRedeem As Boolean = False
     Private earlyDays As Integer = 0
@@ -360,7 +361,14 @@ Public Class frmPawnItem
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         PrintRenewPT()
-        If Not PAUSE_OR Then PrintRenewOR()
+        If Not PAUSE_OR Then do_RenewOR()
+    End Sub
+
+    Private Sub do_RenewOR()
+        For i As Integer = 1 To OR_COPIES
+            PrintRenewOR()
+            System.Threading.Thread.Sleep(1000)
+        Next
     End Sub
 
     Private Sub SaveRedeem()
@@ -486,60 +494,6 @@ Public Class frmPawnItem
         txtRenew.Text = Renew_Due.ToString("Php #,##0.00")
         txtRedeem.Text = Redeem_Due.ToString("Php #,##0.00")
     End Sub
-
-    'Private Sub ComputeInterests()
-    '    If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
-    '    ItemPrincipal = CDbl(txtPrincipal.Text)
-
-    '    AdvanceInterest = ItemPrincipal * GetInt(30)
-    '    ServiceCharge = GetServiceCharge(ItemPrincipal)
-    '    DelayInt = ItemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
-    '    Penalty = ItemPrincipal * GetInt(daysDue + 30, "Penalty")
-
-    '    If Not PawnItem Is Nothing And PawnItem.AdvanceInterest = 0 Then
-    '        'OLD Migrate
-
-    '        ' UPDATE001
-    '        ' ReProgram that OLD ITEMS will not be charge for ADVANCE INTEREST
-    '        ' Removed due to NO ADVANCE INTEREST FOR OLD PAWN ITEMS
-    '        'If daysDue <= 3 Then DelayInt += AdvanceInterest
-    '        'If transactionType = "X" Then AdvanceInterest = 0
-    '        'If transactionType = "R" Then ServiceCharge += ServiceCharge
-
-    '        'Added
-    '        AdvanceInterest = 0 'Advance Interest Removed
-    '        If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 _
-    '            Then DelayInt = ItemPrincipal * GetInt(30)
-
-    '        isOldItem = True
-    '    Else
-    '        isOldItem = False
-    '        'New Transactions
-    '        If transactionType = "X" Then
-    '            ServiceCharge = 0
-    '        End If
-
-    '        If daysDue > 3 Then
-    '            DelayInt -= AdvanceInterest
-    '        End If
-    '    End If
-
-    '    txtAdv.Text = AdvanceInterest
-    '    txtOver.Text = daysDue
-    '    If transactionType <> "L" Then txtInt.Text = DelayInt
-    '    txtPenalty.Text = Penalty
-    '    txtService.Text = ServiceCharge
-    '    txtEvat.Text = 0
-
-    '    If transactionType = "R" Then
-    '        txtRenew.Text = AdvanceInterest + ServiceCharge + DelayInt + Penalty
-    '        txtRedeem.Text = 0
-    '        txtNet.Text = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
-    '    ElseIf transactionType = "X" Then
-    '        txtRenew.Text = 0
-    '        txtRedeem.Text = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
-    '    End If
-    'End Sub
 
     Private Sub SaveNewLoan()
         PawnItem = New PawnTicket
@@ -1251,6 +1205,7 @@ Public Class frmPawnItem
         Dim ds As DataSet = LoadSQL(mySql, dsName)
         Dim paymentStr As String
         Dim rptPath As String = "Reports\layout05.rdlc"
+        rptPath = "Reports\_layout03.rdlc"
         Dim addParameters As New Dictionary(Of String, String)
 
         report.ReportPath = rptPath
@@ -1297,7 +1252,8 @@ Public Class frmPawnItem
         'Renewal - OR no duplicate
         Dim paperSize As New Dictionary(Of String, Double)
         paperSize.Add("width", 8.5)
-        paperSize.Add("height", 9) 'Include the duplicate; changed 4.5 to 9
+        'paperSize.Add("height", 9) 'Include the duplicate; changed 4.5 to 9
+        paperSize.Add("height", 4.5) 'Reprint only
 
         autoPrintPT.Export(report, paperSize)
         autoPrintPT.m_currentPageIndex = 0
@@ -1318,7 +1274,18 @@ Public Class frmPawnItem
 #End Region
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
-        PrintNewLoan()
+        If PawnItem.Status = "L" Then
+            PrintNewLoan()
+        End If
+
+        If PawnItem.Status = "R" Or PawnItem.Status = "0" Then
+            PrintNewLoan()
+            PrintRenewOR()
+        End If
+
+        If PawnItem.Status = "X" Then
+            PrintRedeemOR()
+        End If
     End Sub
 
     Private Sub cboKarat_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboKarat.KeyPress
