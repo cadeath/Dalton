@@ -235,6 +235,8 @@
                 Return True
             Case ReportType.ItemPullOut
                 Return True
+            Case ReportType.Insurance
+                Return True
         End Select
 
         Return False

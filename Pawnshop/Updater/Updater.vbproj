@@ -78,7 +78,8 @@
     <Compile Include="101\101sql.vb" />
     <Compile Include="110\110sql.vb" />
     <Compile Include="database.vb" />
-    <Compile Include="db_104to105.vb" />
+    <Compile Include="Database\db_104to105.vb" />
+    <Compile Include="Database\db_106to107.vb" />
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>

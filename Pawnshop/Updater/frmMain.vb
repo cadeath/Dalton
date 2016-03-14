@@ -1,8 +1,8 @@
 ﻿Public Class frmMain
 
     Private DB_PATH As String
-    Friend ALLOW_DBVERSION As String = "a1.0.18"
-    Friend LATEST_DBVERSION As String = "1.0.3"
+    Friend ALLOW_DBVERSION As String = "1.0.6"
+    Friend LATEST_DBVERSION As String = "1.0.7"
 
     Private Sub Special_Update()
         DB_PATH = txtURL.Text
@@ -19,19 +19,16 @@
             Exit Sub
         End If
 
+        database.dbName = DB_PATH
         If Not isPatchable() Then
-            MsgBox("Database Version didn't match", MsgBoxStyle.Critical)
+            MsgBox("Database Version didn't match" & vbCrLf & "Looking for v" & ALLOW_DBVERSION, MsgBoxStyle.Critical)
             Exit Sub
         End If
 
-        database.dbName = DB_PATH
         If isUpdated() Then MsgBox("Database already been patched up", MsgBoxStyle.Information)
         Try
-            _101sql.Main()
-            _110.Main()
+            db_106to107.do_fixing()
             Database_Update(LATEST_DBVERSION)
-            Developers_Note("Database Updated!")
-
             MsgBox("Database has been PATCHED UP!", MsgBoxStyle.Information)
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
@@ -45,12 +42,18 @@
         mySql &= "OPT_KEYS = 'DBVersion'"
         ds = LoadSQL(mySql)
 
-        If ds.Tables(0).Rows(0).Item("DBVersion") = ALLOW_DBVERSION Then
-            Return True
-        Else
-            Developers_Note("Database Version is " & ds.Tables(0).Rows(0).Item("DBVersion"))
-            Return False
-        End If
+        Try
+            If ds.Tables(0).Rows(0).Item("OPT_VALUES") = ALLOW_DBVERSION Then
+                Return True
+            Else
+                Developers_Note("Database Version is " & ds.Tables(0).Rows(0).Item("OPT_VALUES"))
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "ERROR PATCHING")
+        End Try
+
+        Return False
     End Function
 
     Private Sub txtURL_DoubleClick(sender As Object, e As System.EventArgs) Handles txtURL.DoubleClick

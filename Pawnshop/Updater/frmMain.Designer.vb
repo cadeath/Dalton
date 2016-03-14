@@ -46,7 +46,7 @@ Partial Class frmMain
         Me.txtURL.Name = "txtURL"
         Me.txtURL.Size = New System.Drawing.Size(242, 20)
         Me.txtURL.TabIndex = 0
-        Me.txtURL.Text = "D:\CaDeAtH\Desktop\RPS\dalton Roxas.FDB"
+        Me.txtURL.Text = "Eskie Gwapo"
         '
         'Label1
         '
