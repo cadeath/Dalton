@@ -1,22 +1,36 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
-' V1.0.5
-'  - VIEW EXPIRY_LIST ADDED
-' v1.2
-'  - ModifyEntry added
-' v1.1
-'  - SaveEntry added empty dataset binding
+' v1.0.7
+'  - Fixing Insurance
+' v1.0.6
+'  - Add WU - Intl
+' v1.0.5
+'  - Add GPRS Ticketing
+'  - Changed TICKETING into TICKETING - WU
+' v1.0.4
+'  - Add OldTicket ON PAWNING VIEW
+'  - Add Commission ON MONEY_TRANSFER view
+' v1.0.3
+'  - Update Charges and cash Tables
+'  - Add ServiceCharge on PAWNING VIEW
+' v1.0.2
+'  - Add Column in tblPawn EARLYREDEEM
+'  - Add Column in LOAN REGISTER VIEW for ADVANCE INTEREST
+'  - Add Column INTEREST and ADVINT in PAWNING
+' v1.0.1
+'  - Added ORDATE, RENEWDUE and REDEEMDUE at Loan Register VIEW
 
 Friend Module database
     Public con As OdbcConnection
-    'Friend dbName As String = "..\..\W3W1LH4CKU.FDB"
+    Public ReaderCon As OdbcConnection
+    'Friend dbName As String = "..\..\sample.FDB"
     Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "a1.0.16"
+    Private DBversion As String = "1.0.7"
     Private language() As String = _
         {"Connection error failed."}
 
@@ -28,7 +42,10 @@ Friend Module database
             con.Open()
         Catch ex As Exception
             con.Dispose()
-            MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Error")
+            MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Connecting Error")
+            Log_Report(ex.Message.ToString)
+            Log_Report(String.Format("User: {0}", fbUser))
+            Log_Report(String.Format("Database: {0}", dbName))
             Exit Sub
         End Try
     End Sub
@@ -118,15 +135,29 @@ Friend Module database
     End Function
 
     Friend Function LoadSQL_byDataReader(ByVal mySql As String) As OdbcDataReader
-        dbOpen()
-
-        Dim com As OdbcCommand = New OdbcCommand(mySql, con)
-        Dim reader As OdbcDataReader = com.ExecuteReader
-
-        dbClose()
+        Dim myCom As OdbcCommand = New OdbcCommand(mySql, ReaderCon)
+        Dim reader As OdbcDataReader = myCom.ExecuteReader()
 
         Return reader
     End Function
+
+    Public Sub dbReaderOpen()
+        conStr = "DRIVER=Firebird/InterBase(r) driver;User=" & fbUser & ";Password=" & fbPass & ";Database=" & dbName & ";"
+
+        ReaderCon = New OdbcConnection(conStr)
+        Try
+            ReaderCon.Open()
+        Catch ex As Exception
+            ReaderCon.Dispose()
+            MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Connecting Error")
+            Log_Report(ex.Message.ToString)
+            Exit Sub
+        End Try
+    End Sub
+
+    Public Sub dbReaderClose()
+        ReaderCon.Close()
+    End Sub
 
     Friend Function GetOption(ByVal keys As String) As String
         Dim mySql As String = "SELECT * FROM tblmaintenance WHERE opt_keys = '" & keys & "'"
@@ -157,6 +188,15 @@ Friend Module database
             SaveEntry(ds)
         Else
             ds.Tables(0).Rows(0).Item("opt_values") = value
+            SaveEntry(ds, False)
+        End If
+
+        If key = "RevolvingFund" Then
+            mySql = "SELECT * FROM TBLCASH WHERE TRANSNAME = 'Revolving Fund'"
+            fillData = "tblCash"
+
+            ds = LoadSQL(mySql, fillData)
+            ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = value
             SaveEntry(ds, False)
         End If
         Console.WriteLine("Option updated. " & key)

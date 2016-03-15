@@ -28,12 +28,12 @@
         End Get
     End Property
 
-    Private _transID As Integer
-    Public Property TransactionID() As Integer
+    Private _transID As Single
+    Public Property TransactionID() As Single
         Get
             Return _transID
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Single)
             _transID = value
         End Set
     End Property
@@ -137,6 +137,17 @@
         End Get
     End Property
 
+    Private _commission As Double
+    Public Property Commission() As Double
+        Get
+            Return _commission
+        End Get
+        Set(ByVal value As Double)
+            _commission = value
+        End Set
+    End Property
+
+
     Public Property EncoderID As Integer
         Set(ByVal value As Integer)
             _encoderID = value
@@ -203,6 +214,7 @@
             .Item("Amount") = _amount
             .Item("Location") = _location
             .Item("ServiceCharge") = _service
+            .Item("Commission") = _commission
             .Item("NetAmount") = _netAmount
             .Item("Status") = _status
             .Item("EncoderID") = _encoderID
@@ -240,11 +252,12 @@
                 SrcStr = "CL|Ref# " & _ref
             Case "GPRS - GPRS to GPRS"
                 SrcStr = "G2G|Ref# " & _ref
-            Case "GPRS - GPRS to Smart Money", "GPRS - Smartmoney To GPRS", "GPRS - Smartmoney To GPRS", _
-                    "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", "GPRS - GPRS to BANK (DBP)", _
-                    "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
-                     "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram", "GPRS - Moneygram to GPRS"
+            Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
+                "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
+                     "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
                 SrcStr = "GPRS|Ref# " & _ref
+            Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
+                SrcStr = "GPRS_R|Ref# " & _ref
         End Select
 
         RemoveJournal(SrcStr)

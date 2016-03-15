@@ -188,10 +188,22 @@
     <Compile Include="Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\dev_print.Designer.vb">
+      <DependentUpon>dev_print.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_print.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_report.Designer.vb">
       <DependentUpon>dev_report.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ab.Designer.vb">
+      <DependentUpon>ab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ab.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\diagAuthorization.Designer.vb">
@@ -206,16 +218,16 @@
     <Compile Include="Forms\frmBackup.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmCashCountV2.Designer.vb">
+      <DependentUpon>frmCashCountV2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCashCountV2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmCashInOut2.Designer.vb">
       <DependentUpon>frmCashInOut2.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCashInOut2.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmCashInOutBrowse.Designer.vb">
-      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmCashInOutBrowse.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmCIO_List.Designer.vb">
@@ -345,6 +357,12 @@
     <Compile Include="Forms\frmPawnItem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmPrintManager.Designer.vb">
+      <DependentUpon>frmPrintManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPrintManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmPullOut.Designer.vb">
       <DependentUpon>frmPullOut.vb</DependentUpon>
     </Compile>
@@ -355,6 +373,12 @@
       <DependentUpon>frmRate.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRate2.Designer.vb">
+      <DependentUpon>frmRate2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRate2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmSettings.Designer.vb">
@@ -378,6 +402,8 @@
     <Compile Include="Modules\newSetup.vb" />
     <Compile Include="Modules\pawning.vb" />
     <Compile Include="Modules\security.vb" />
+    <Compile Include="Modules\updateRate.vb" />
+    <Compile Include="Modules\web_ads.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -457,6 +483,12 @@
     <Compile Include="Reports\qryMoneyTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\qryPullOut_List.Designer.vb">
+      <DependentUpon>qryPullOut_List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryPullOut_List.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qrySequence.Designer.vb">
       <DependentUpon>qrySequence.vb</DependentUpon>
     </Compile>
@@ -475,12 +507,35 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_print.resx">
+      <DependentUpon>dev_print.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCashCountV2.resx">
+      <DependentUpon>frmCashCountV2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPrintManager.resx">
+      <DependentUpon>frmPrintManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRate2.resx">
+      <DependentUpon>frmRate2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\d_insurance.rdlc" />
+    <EmbeddedResource Include="Reports\d_Loan.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ab.resx">
+      <DependentUpon>ab.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagAuthorization.resx">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
@@ -492,9 +547,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashInOut2.resx">
       <DependentUpon>frmCashInOut2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmCashInOutBrowse.resx">
-      <DependentUpon>frmCashInOutBrowse.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCIO_List.resx">
       <DependentUpon>frmCIO_List.vb</DependentUpon>
@@ -522,6 +574,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClient.resx">
       <DependentUpon>frmClient.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClientInformation.resx">
       <DependentUpon>frmClientInformation.vb</DependentUpon>
@@ -540,6 +593,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMIS.resx">
       <DependentUpon>frmMIS.vb</DependentUpon>
@@ -582,6 +636,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\frmPOS.resx">
       <DependentUpon>frmPOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\d_Remittance.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryPullOut_List.resx">
+      <DependentUpon>qryPullOut_List.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_RegisterRedeem.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmSegreList.resx">
       <DependentUpon>frmSegreList.vb</DependentUpon>
@@ -658,14 +721,23 @@
     <EmbeddedResource Include="Reports\rpt_RedeemRenew.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_RegisterNewLoan.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_Segregated.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\_layout03.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="backup.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="doc\ExpiryFormat.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -738,7 +810,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ads.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Antialiasfactory-Jewelry-Stone-Ring.ico" />
+    <Content Include="changelog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Rar.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

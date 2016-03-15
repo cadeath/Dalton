@@ -242,7 +242,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TransName.Value</Value>
+                              <Value>=Fields!TransName.Value &amp; " - " &amp; Fields!Remarks.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -947,8 +947,8 @@
       </Style>
     </PageFooter>
     <LeftMargin>0.5in</LeftMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <TopMargin>0.5in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
     <Style />
   </Page>
   <rd:ReportID>ee20be12-a170-418e-800f-e7d4f55d724f</rd:ReportID>

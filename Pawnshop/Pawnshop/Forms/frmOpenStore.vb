@@ -4,6 +4,9 @@
 
     Private Sub frmOpenStore_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadMoney()
+
+        Console.WriteLine("Initial: " & InitialBal)
+        Console.WriteLine("Maintain: " & MaintainBal)
     End Sub
 
     Private Sub LoadMoney()

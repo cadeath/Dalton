@@ -71,7 +71,7 @@ Public Class frmClient
             Me.Enabled = False
 
             Dim tbl As String = "TBLCLIENT"
-            Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
+            Dim mySql As String = String.Format("SELECT FIRST 100 * FROM {0} ORDER BY LastName ASC, FirstName ASC", tbl)
             Dim ds As DataSet = LoadSQL(mySql, tbl)
 
             lvClient.Items.Clear()

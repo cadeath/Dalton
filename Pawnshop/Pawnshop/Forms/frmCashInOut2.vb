@@ -4,6 +4,7 @@
     Dim cashOutCat As Hashtable, coTrans() As Hashtable
     Dim selectedType As String = "Receipt"
     Dim LineNum As Integer = 1, CIOtransactions As New CollectionCIO
+    Dim isCustomInOut As Boolean = False
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -67,6 +68,8 @@
             ans = MsgBox("Unsave data will be clear." + vbCr + "Do you want to continue?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
         End If
+        isCustomInOut = False
+        gpTrans.Enabled = True
 
         cboCat.Items.Clear()
         UpdateCategory(cashInCat)
@@ -196,6 +199,8 @@
             ans = MsgBox("Unsave data will be clear." + vbCr + "Do you want to continue?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
         End If
+        isCustomInOut = False
+        gpTrans.Enabled = True
 
         cboCat.Items.Clear()
         UpdateCategory(cashOutCat)
@@ -225,20 +230,36 @@
         Dim tmpCio As New CashInOutTransaction
         Dim selectHT As New Hashtable
         Dim idx As Integer = cboCat.SelectedIndex
+        Dim category As String, transName As String
 
-        Select Case selectedType
-            Case "Receipt"
-                selectHT = ciTrans(idx)
-            Case "Disbursement"
-                selectHT = coTrans(idx)
-        End Select
+        If Not isCustomInOut Then
+            Select Case selectedType
+                Case "Receipt"
+                    selectHT = ciTrans(idx)
+                Case "Disbursement"
+                    selectHT = coTrans(idx)
+            End Select
+        Else
+
+        End If
 
         With tmpCio
-            .CashID = GetKey(selectHT, cboTrans.Text)
+            If Not isCustomInOut Then
+                .CashID = GetKey(selectHT, cboTrans.Text)
+                category = cboCat.Text
+                transName = cboTrans.Text
+            Else
+                ' If 54 is missing, update your database
+                .CashID = 54 'Inventory IN - Smart Money
+                selectedType = "INVENTORY IN"
+                category = selectedType
+                transName = "Smart Money Payable - Perfecom"
+            End If
+
             .TransactionDate = CurrentDate
             .Type = selectedType
-            .Category = cboCat.Text
-            .Transaction = cboTrans.Text
+            .Category = category
+            .Transaction = transName
             .Amount = txtAmt.Text
             .Particulars = txtParticulars.Text
             .EncoderID = UserID
@@ -272,5 +293,13 @@
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmCIO_List.Show()
+    End Sub
+
+    Private Sub btnInvIn_Click(sender As System.Object, e As System.EventArgs) Handles btnInvIn.Click
+        isCustomInOut = True
+
+        gpTrans.Enabled = False
+        txtAmt.Focus()
+
     End Sub
 End Class

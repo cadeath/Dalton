@@ -26,7 +26,7 @@ Partial Class frmCashInOut2
         Me.btnCashIn = New System.Windows.Forms.Button()
         Me.btnCashOut = New System.Windows.Forms.Button()
         Me.btnBrowse = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gpTrans = New System.Windows.Forms.GroupBox()
         Me.cboTrans = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cboCat = New System.Windows.Forms.ComboBox()
@@ -46,7 +46,8 @@ Partial Class frmCashInOut2
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
-        Me.GroupBox1.SuspendLayout()
+        Me.btnInvIn = New System.Windows.Forms.Button()
+        Me.gpTrans.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -80,18 +81,18 @@ Partial Class frmCashInOut2
         Me.btnBrowse.Text = "Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'gpTrans
         '
-        Me.GroupBox1.Controls.Add(Me.cboTrans)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.cboCat)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(102, 12)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(746, 91)
-        Me.GroupBox1.TabIndex = 3
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Transaction"
+        Me.gpTrans.Controls.Add(Me.cboTrans)
+        Me.gpTrans.Controls.Add(Me.Label2)
+        Me.gpTrans.Controls.Add(Me.cboCat)
+        Me.gpTrans.Controls.Add(Me.Label1)
+        Me.gpTrans.Location = New System.Drawing.Point(102, 12)
+        Me.gpTrans.Name = "gpTrans"
+        Me.gpTrans.Size = New System.Drawing.Size(746, 91)
+        Me.gpTrans.TabIndex = 3
+        Me.gpTrans.TabStop = False
+        Me.gpTrans.Text = "Transaction"
         '
         'cboTrans
         '
@@ -267,25 +268,37 @@ Partial Class frmCashInOut2
         Me.btnPost.Text = "&Post"
         Me.btnPost.UseVisualStyleBackColor = True
         '
+        'btnInvIn
+        '
+        Me.btnInvIn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnInvIn.Location = New System.Drawing.Point(12, 155)
+        Me.btnInvIn.Name = "btnInvIn"
+        Me.btnInvIn.Size = New System.Drawing.Size(84, 60)
+        Me.btnInvIn.TabIndex = 5
+        Me.btnInvIn.Text = "Smart Money Inventory In"
+        Me.btnInvIn.UseVisualStyleBackColor = True
+        '
         'frmCashInOut2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(860, 530)
+        Me.Controls.Add(Me.btnInvIn)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lvDetails)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.gpTrans)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.btnCashOut)
         Me.Controls.Add(Me.btnCashIn)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmCashInOut2"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cash In"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.gpTrans.ResumeLayout(False)
+        Me.gpTrans.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
@@ -294,7 +307,7 @@ Partial Class frmCashInOut2
     Friend WithEvents btnCashIn As System.Windows.Forms.Button
     Friend WithEvents btnCashOut As System.Windows.Forms.Button
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents gpTrans As System.Windows.Forms.GroupBox
     Friend WithEvents cboTrans As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cboCat As System.Windows.Forms.ComboBox
@@ -314,4 +327,5 @@ Partial Class frmCashInOut2
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnPost As System.Windows.Forms.Button
+    Friend WithEvents btnInvIn As System.Windows.Forms.Button
 End Class

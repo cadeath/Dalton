@@ -114,7 +114,8 @@ Partial Class frmInsuranceList
         '
         'ColumnHeader5
         '
-        Me.ColumnHeader5.Text = "PT#"
+        Me.ColumnHeader5.Text = "Ref#"
+        Me.ColumnHeader5.Width = 68
         '
         'btnCancel
         '

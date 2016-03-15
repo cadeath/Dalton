@@ -23,10 +23,10 @@ Partial Class qrySequence
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.rbPawning = New System.Windows.Forms.RadioButton()
-        Me.rbMT = New System.Windows.Forms.RadioButton()
-        Me.rbBorrowing = New System.Windows.Forms.RadioButton()
         Me.rbInsurance = New System.Windows.Forms.RadioButton()
+        Me.rbBorrowing = New System.Windows.Forms.RadioButton()
+        Me.rbMT = New System.Windows.Forms.RadioButton()
+        Me.rbPawning = New System.Windows.Forms.RadioButton()
         Me.monCal = New System.Windows.Forms.MonthCalendar()
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
@@ -45,17 +45,27 @@ Partial Class qrySequence
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Module"
         '
-        'rbPawning
+        'rbInsurance
         '
-        Me.rbPawning.AutoSize = True
-        Me.rbPawning.Checked = True
-        Me.rbPawning.Location = New System.Drawing.Point(17, 19)
-        Me.rbPawning.Name = "rbPawning"
-        Me.rbPawning.Size = New System.Drawing.Size(66, 17)
-        Me.rbPawning.TabIndex = 2
-        Me.rbPawning.TabStop = True
-        Me.rbPawning.Text = "Pawning"
-        Me.rbPawning.UseVisualStyleBackColor = True
+        Me.rbInsurance.AutoSize = True
+        Me.rbInsurance.Location = New System.Drawing.Point(17, 88)
+        Me.rbInsurance.Name = "rbInsurance"
+        Me.rbInsurance.Size = New System.Drawing.Size(72, 17)
+        Me.rbInsurance.TabIndex = 5
+        Me.rbInsurance.Text = "Insurance"
+        Me.rbInsurance.UseVisualStyleBackColor = True
+        Me.rbInsurance.Visible = False
+        '
+        'rbBorrowing
+        '
+        Me.rbBorrowing.AutoSize = True
+        Me.rbBorrowing.Location = New System.Drawing.Point(17, 65)
+        Me.rbBorrowing.Name = "rbBorrowing"
+        Me.rbBorrowing.Size = New System.Drawing.Size(77, 17)
+        Me.rbBorrowing.TabIndex = 4
+        Me.rbBorrowing.Text = "Borrowings"
+        Me.rbBorrowing.UseVisualStyleBackColor = True
+        Me.rbBorrowing.Visible = False
         '
         'rbMT
         '
@@ -67,25 +77,17 @@ Partial Class qrySequence
         Me.rbMT.Text = "Money Transfer"
         Me.rbMT.UseVisualStyleBackColor = True
         '
-        'rbBorrowing
+        'rbPawning
         '
-        Me.rbBorrowing.AutoSize = True
-        Me.rbBorrowing.Location = New System.Drawing.Point(17, 65)
-        Me.rbBorrowing.Name = "rbBorrowing"
-        Me.rbBorrowing.Size = New System.Drawing.Size(77, 17)
-        Me.rbBorrowing.TabIndex = 4
-        Me.rbBorrowing.Text = "Borrowings"
-        Me.rbBorrowing.UseVisualStyleBackColor = True
-        '
-        'rbInsurance
-        '
-        Me.rbInsurance.AutoSize = True
-        Me.rbInsurance.Location = New System.Drawing.Point(17, 88)
-        Me.rbInsurance.Name = "rbInsurance"
-        Me.rbInsurance.Size = New System.Drawing.Size(72, 17)
-        Me.rbInsurance.TabIndex = 5
-        Me.rbInsurance.Text = "Insurance"
-        Me.rbInsurance.UseVisualStyleBackColor = True
+        Me.rbPawning.AutoSize = True
+        Me.rbPawning.Checked = True
+        Me.rbPawning.Location = New System.Drawing.Point(17, 19)
+        Me.rbPawning.Name = "rbPawning"
+        Me.rbPawning.Size = New System.Drawing.Size(66, 17)
+        Me.rbPawning.TabIndex = 2
+        Me.rbPawning.TabStop = True
+        Me.rbPawning.Text = "Pawning"
+        Me.rbPawning.UseVisualStyleBackColor = True
         '
         'monCal
         '

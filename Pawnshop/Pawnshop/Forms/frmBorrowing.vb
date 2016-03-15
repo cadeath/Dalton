@@ -72,8 +72,8 @@
             .SaveBorrowings()
             AddRefNum()
 
-            AddJournal(.Amount, "Credit", "Revolving Fund", "To " & BranchCode, "BORROW OUT")
-            AddJournal(.Amount, "Debit", "Due to/from Branches", "To " & BranchCode)
+            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & BranchCode, "BORROW OUT")
+            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & BranchCode)
         End With
 
         Dim brwFile As New Hashtable
@@ -103,4 +103,5 @@
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmBorrowBrowse.Show()
     End Sub
+
 End Class

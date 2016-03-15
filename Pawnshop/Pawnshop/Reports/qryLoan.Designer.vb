@@ -22,34 +22,24 @@ Partial Class qryLoan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.chbType = New System.Windows.Forms.CheckedListBox()
         Me.monCal = New System.Windows.Forms.MonthCalendar()
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.lstRegister = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
-        '
-        'chbType
-        '
-        Me.chbType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbType.FormattingEnabled = True
-        Me.chbType.Items.AddRange(New Object() {"New Loan", "Renewal", "Redemption"})
-        Me.chbType.Location = New System.Drawing.Point(12, 12)
-        Me.chbType.Name = "chbType"
-        Me.chbType.Size = New System.Drawing.Size(120, 72)
-        Me.chbType.TabIndex = 0
         '
         'monCal
         '
-        Me.monCal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.monCal.Location = New System.Drawing.Point(144, 12)
-        Me.monCal.MaxSelectionCount = 365
+        Me.monCal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.monCal.Location = New System.Drawing.Point(18, 64)
+        Me.monCal.MaxSelectionCount = 1
         Me.monCal.Name = "monCal"
         Me.monCal.TabIndex = 1
         '
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(383, 12)
+        Me.btnGenerate.Location = New System.Drawing.Point(19, 255)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(103, 46)
         Me.btnGenerate.TabIndex = 2
@@ -58,31 +48,43 @@ Partial Class qryLoan
         '
         'btnCancel
         '
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(383, 64)
+        Me.btnCancel.Location = New System.Drawing.Point(128, 255)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(103, 46)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'lstRegister
+        '
+        Me.lstRegister.FormattingEnabled = True
+        Me.lstRegister.Items.AddRange(New Object() {"Loan Register - New Loan/Renew", "Loan Register - Redemption"})
+        Me.lstRegister.Location = New System.Drawing.Point(18, 12)
+        Me.lstRegister.Name = "lstRegister"
+        Me.lstRegister.Size = New System.Drawing.Size(213, 43)
+        Me.lstRegister.TabIndex = 4
+        '
         'qryLoan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(498, 185)
+        Me.CancelButton = Me.btnCancel
+        Me.ClientSize = New System.Drawing.Size(248, 318)
+        Me.Controls.Add(Me.lstRegister)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
-        Me.Controls.Add(Me.chbType)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "qryLoan"
         Me.Text = "Loan Register"
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents chbType As System.Windows.Forms.CheckedListBox
     Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
     Friend WithEvents btnGenerate As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents lstRegister As System.Windows.Forms.ListBox
 End Class

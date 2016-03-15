@@ -124,7 +124,7 @@
         mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
 
         Dim addParameters As New Dictionary(Of String, String)
-        addParameters.Add("txtMonthOf", "AS OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
+        addParameters.Add("txtMonthOf", "DATE: " & monCal.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
         addParameters.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
@@ -188,7 +188,7 @@
 
         ' Parameters
         Dim rptPara As New Dictionary(Of String, String)
-        rptPara.Add("txtCurrentDate", CurrentDate)
+        rptPara.Add("txtCurrentDate", monCal.SelectionRange.Start.ToShortDateString)
         rptPara.Add("branchName", branchName)
 
         frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", rptPara, 1, subReportSQL)
@@ -234,6 +234,8 @@
             Case ReportType.OutStanding
                 Return True
             Case ReportType.ItemPullOut
+                Return True
+            Case ReportType.Insurance
                 Return True
         End Select
 

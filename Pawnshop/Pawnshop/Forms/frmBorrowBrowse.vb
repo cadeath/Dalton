@@ -83,6 +83,7 @@
 
         tmpBB.VoidBorrowings()
         MsgBox("Transaction #" & tmpBB.ReferenceNumber & " Void.")
+        LoadBorrowings()
     End Sub
 
     Private Sub lvBorrowings_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvBorrowings.DoubleClick

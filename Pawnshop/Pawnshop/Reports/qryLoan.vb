@@ -2,62 +2,52 @@
 
     Private branchName As String = GetOption("BranchName")
 
+    Private Function isValid() As Boolean
+        If lstRegister.SelectedItems.Count <= 0 Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
-        Dim isValid As Boolean = False
-        For cnt = 0 To chbType.Items.Count - 1
-            If chbType.GetItemChecked(cnt) Then
-                isValid = True
-                Exit For
-            End If
-        Next
+        If Not isValid() Then Exit Sub
 
-        If Not isValid Then Exit Sub
-
-        GenReport()
+        If lstRegister.SelectedIndex = 0 Then
+            Generate_NewLoanRenewal()
+        Else
+            Generate_Redemption()
+        End If
     End Sub
 
-    Private Sub GenReport()
-        Dim fillData As String = "LOAN_REGISTER"
-        Dim mySql As String = "SELECT * FROM " & fillData
-        mySql &= String.Format(" WHERE LoanDate BETWEEN '{0}' AND '{1}'", monCal.SelectionStart.ToShortDateString, monCal.SelectionEnd.ToShortDateString)
-        mySql &= " AND "
+    Private Sub Generate_NewLoanRenewal()
+        Dim fillData As String = "dsPawning", mySql As String
+        mySql = "SELECT P.*, X.PAWNTICKET as NEWPT FROM PAWNING P LEFT JOIN PAWNING X ON X.OLDTICKET = P.PAWNTICKET WHERE "
+        mySql &= String.Format("(P.LoanDate = '{0}' AND P.STATUS = 'NEW') OR (P.ORDATE = '{0}' AND P.STATUS = 'RENEWED')", monCal.SelectionStart.ToString("MM/dd/yyyy"))
 
-        mySql &= StatusParser()
+        Console.WriteLine(">>> " & mySql)
+        Dim addParameter As New Dictionary(Of String, String)
+        addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
+        addParameter.Add("branchName", branchName)
 
-        Dim title As String = String.Format("{0} {1} {2}", IIf(chbType.GetItemChecked(0), "LOAN", ""), IIf(chbType.GetItemChecked(1), "RENEW", ""), IIf(chbType.GetItemChecked(2), "REDEEM", ""))
-        Dim loanPeriod As String = String.Format("{0} TO {1}", monCal.SelectionStart.ToShortDateString, monCal.SelectionEnd.ToShortDateString)
-        Dim rptPara As New Dictionary(Of String, String)
-        rptPara.Add("Title", title)
-        rptPara.Add("loanPeriod", loanPeriod)
-        rptPara.Add("BranchName", branchName)
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_RegisterNewLoan.rdlc", addParameter)
+        frmReport.Show()
+    End Sub
 
-        Console.WriteLine(mySql)
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_LoanRegister.rdlc", rptPara)
+    Private Sub Generate_Redemption()
+        Dim fillData As String = "dsPawning", mySql As String
+        mySql = "SELECT * FROM PAWNING WHERE "
+        mySql &= String.Format("ORDate = '{0}' AND STATUS = 'REDEEM'", monCal.SelectionStart.ToString("MM/dd/yyyy"))
+
+        Dim addParameter As New Dictionary(Of String, String)
+        addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
+        addParameter.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_RegisterRedeem.rdlc", addParameter)
         frmReport.Show()
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
-
-    Private Function StatusParser() As String
-        Dim newLoan As Boolean, renew As Boolean, redeem As Boolean
-        newLoan = chbType.GetItemChecked(0)
-        renew = chbType.GetItemChecked(1)
-        redeem = chbType.GetItemChecked(2)
-
-        Dim tmpStr As String, tmpList As New List(Of String)
-        tmpStr = "("
-
-
-        If newLoan Then tmpList.Add("STATUS = 'L'")
-        If renew Then tmpList.Add("STATUS = 'R'")
-        If redeem Then tmpList.Add("STATUS = 'X'")
-
-        tmpStr &= String.Join(" AND ", tmpList)
-
-        tmpStr &= ")"
-
-        Return tmpStr
-    End Function
 End Class

@@ -9,7 +9,7 @@
 
     ' NOTE - ADDING SERVICE
     ' STEP 3 - Add array count
-    Private daltonService(14) As MoneyTransferService
+    Private daltonService(15) As MoneyTransferService
 
     Private Sub Main()
         ' NOTE - ADDING SERVICE
@@ -30,7 +30,7 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0002"
-            .ServiceName = "Western Union"
+            .ServiceName = "Western Union - Local"
             .isGenerated = False
             .AccountName = "Due to / From Western Union"
             .ChargeCode = "western"
@@ -40,62 +40,61 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0003"
-            .ServiceName = "Cebuana Llhuiller"
+            .ServiceName = "Western Union - Intl"
             .isGenerated = False
-            .AccountName = "Due to/from Cebuana Llhuiller"
-            .ChargeCode = "cebuana"
+            .AccountName = "Due to / From Western Union"
+            .ChargeCode = "western - intl"
         End With
         daltonService(2) = tmp
 
         tmp = New MoneyTransferService
         With tmp
             .Code = "0004"
-            .ServiceName = "GPRS - GPRS to GPRS"
+            .ServiceName = "Cebuana Llhuiller"
             .isGenerated = False
-            .ChargeCode = "gprs to gprs"
-            .hasPayoutCommission = True
+            .AccountName = "Due to/from Cebuana Llhuiller"
+            .ChargeCode = "cebuana"
         End With
         daltonService(3) = tmp
 
         tmp = New MoneyTransferService
         With tmp
             .Code = "0005"
-            .ServiceName = "GPRS - GPRS to Smart Money"
+            .ServiceName = "GPRS - GPRS to GPRS"
             .isGenerated = False
-            .ChargeCode = "gprs to smartmoney"
+            .ChargeCode = "gprs to gprs"
             .hasPayoutCommission = True
-            .SendOnly = True
         End With
         daltonService(4) = tmp
 
         tmp = New MoneyTransferService
         With tmp
             .Code = "0006"
-            .ServiceName = "GPRS - Smartmoney To GPRS"
+            .ServiceName = "GPRS - GPRS to Smart Money"
             .isGenerated = False
-            .ChargeCode = "smartmoney to gprs"
+            .ChargeCode = "gprs to smartmoney"
             .hasPayoutCommission = True
-            .ReceiveOnly = True
+            .SendOnly = True
         End With
         daltonService(5) = tmp
 
         tmp = New MoneyTransferService
         With tmp
             .Code = "0007"
-            .ServiceName = "GPRS - GPRS to BANK (UCPB/PNB)"
+            .ServiceName = "GPRS - Smartmoney To GPRS"
             .isGenerated = False
-            .ChargeCode = "gprs to bank-ucpbpnb"
+            .ChargeCode = "smartmoney to gprs"
             .hasPayoutCommission = True
-            .SendOnly = True
+            .ReceiveOnly = True
         End With
         daltonService(6) = tmp
 
         tmp = New MoneyTransferService
         With tmp
             .Code = "0008"
-            .ServiceName = "GPRS - GPRS to BANK (BDO/Chinabank)"
+            .ServiceName = "GPRS - GPRS to BANK (UCPB/PNB)"
             .isGenerated = False
-            .ChargeCode = "gprs to bank-bdochina"
+            .ChargeCode = "gprs to bank-ucpbpnb"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
@@ -104,9 +103,9 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0009"
-            .ServiceName = "GPRS - GPRS to BANK (DBP)"
+            .ServiceName = "GPRS - GPRS to BANK (BDO/Chinabank)"
             .isGenerated = False
-            .ChargeCode = "gprs to dbp"
+            .ChargeCode = "gprs to bank-bdochina"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
@@ -115,9 +114,9 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0010"
-            .ServiceName = "GPRS - GPRS to BANK (MetroBank)"
+            .ServiceName = "GPRS - GPRS to BANK (DBP)"
             .isGenerated = False
-            .ChargeCode = "gprs to metrobank"
+            .ChargeCode = "gprs to dbp"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
@@ -126,9 +125,9 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0011"
-            .ServiceName = "GPRS - GPRS to BANK (Maybank/LandBank)"
+            .ServiceName = "GPRS - GPRS to BANK (MetroBank)"
             .isGenerated = False
-            .ChargeCode = "gprs to maylandbank"
+            .ChargeCode = "gprs to metrobank"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
@@ -137,19 +136,20 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0012"
-            .ServiceName = "GPRS - iREMIT"
+            .ServiceName = "GPRS - GPRS to BANK (Maybank/LandBank)"
             .isGenerated = False
-            .ChargeCode = "iremit to gprs"
+            .ChargeCode = "gprs to maylandbank"
             .hasPayoutCommission = True
+            .SendOnly = True
         End With
         daltonService(11) = tmp
 
         tmp = New MoneyTransferService
         With tmp
             .Code = "0013"
-            .ServiceName = "GPRS - NYBP/Transfast to GPRS"
+            .ServiceName = "GPRS - iREMIT to GPRS"
             .isGenerated = False
-            .ChargeCode = "nybptransfast to gprs"
+            .ChargeCode = "iremit to gprs"
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
@@ -158,24 +158,35 @@
         tmp = New MoneyTransferService
         With tmp
             .Code = "0014"
-            .ServiceName = "GPRS - GPRS to Moneygram"
+            .ServiceName = "GPRS - NYBP/Transfast to GPRS"
             .isGenerated = False
-            .ChargeCode = "gprs to moneygram"
+            .ChargeCode = "nybptransfast to gprs"
             .hasPayoutCommission = True
-            .SendOnly = True
+            .ReceiveOnly = True
         End With
         daltonService(13) = tmp
 
         tmp = New MoneyTransferService
         With tmp
             .Code = "0015"
+            .ServiceName = "GPRS - GPRS to Moneygram"
+            .isGenerated = False
+            .ChargeCode = "gprs to moneygram"
+            .hasPayoutCommission = True
+            .SendOnly = True
+        End With
+        daltonService(14) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0016"
             .ServiceName = "GPRS - Moneygram to GPRS"
             .isGenerated = False
             .ChargeCode = "moneygram to gprs"
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
-        daltonService(14) = tmp
+        daltonService(15) = tmp
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
@@ -352,6 +363,7 @@
 
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        Dim CashCount_Name As String = ""
 
         Dim transID As Integer = 0
         Dim idx As Integer = cboType.SelectedIndex
@@ -375,6 +387,7 @@
             .ReferenceNumber = txtRefNum.Text
             .TransferAmount = txtAmount.Text
             .ServiceCharge = txtCharge.Text
+            .Commission = commission
             .NetAmount = txtNetAmount.Text
             .Location = cboLocation.Text
             .Status = "A" 'Active
@@ -390,7 +403,7 @@
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
                     End If
-                Case "Western Union"
+                Case "Western Union - Local", "Western Union - Intl"
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN IN")
                         AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber)
@@ -417,18 +430,13 @@
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber)
                     End If
-                Case "GPRS - GPRS to Smart Money", "GPRS - Smartmoney To GPRS", "GPRS - Smartmoney To GPRS", _
-                    "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", "GPRS - GPRS to BANK (DBP)", _
-                    "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", _
-                    "GPRS - GPRS to Moneygram", "GPRS - Moneygram to GPRS"
-
-                    Dim CashCount_Name As String = ""
+                Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
+                    "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
+                    "GPRS - iREMIT to GPRS", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
 
                     Select Case cboType.Text
                         Case "GPRS - GPRS to Smart Money"
                             CashCount_Name = "GPRS-SmartMoney"
-                        Case "GPRS - Smartmoney To GPRS"
-                            CashCount_Name = "SmartMoney-GPRS"
                         Case "GPRS - GPRS to BANK (UCPB/PNB)"
                             CashCount_Name = "GPRS-(UCPB/PNB)"
                         Case "GPRS - GPRS to BANK (BDO/Chinabank)"
@@ -439,14 +447,13 @@
                             CashCount_Name = "GPRS-MetroBank"
                         Case "GPRS - GPRS to BANK (Maybank/LandBank)"
                             CashCount_Name = "GPRS-(Maybank/LandBank)"
-                        Case "GPRS - iREMIT"
+                        Case "GPRS - iREMIT to GPRS"
                             CashCount_Name = "iREMIT"
                         Case "GPRS - NYBP/Transfast to GPRS"
                             CashCount_Name = "NYBP/Transfast"
                         Case "GPRS - GPRS to Moneygram"
                             CashCount_Name = "GPRS-Moneygram"
-                        Case "GPRS - Moneygram to GPRS"
-                            CashCount_Name = "Moneygram-GPRS"
+
                     End Select
 
                     If rbSend.Checked Then
@@ -457,7 +464,24 @@
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
+
+
                     End If
+                    ' ISSUE: 0001
+                    ' GPRS - Smartmoney To GPRS, wrong Journal Entries
+                Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
+                    ' Amt 4000 | 3995 gprsRemitFund debit = 3980 rf credit + 15 income credit
+                    Select Case cboType.Text
+                        Case "GPRS - Smartmoney To GPRS"
+                            CashCount_Name = "SmartMoney-GPRS"
+                        Case "GPRS - Moneygram to GPRS"
+                            CashCount_Name = "Moneygram-GPRS"
+                    End Select
+
+                    AddJournal(.NetAmount + commission, "Debit" _
+                               , "GPRS Remittance/ Bills Payment Fund", "GPRS_R|Ref# " & .ReferenceNumber)
+                    AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS_R|Ref# " & .ReferenceNumber, CashCount_Name)
+                    AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS_R|Ref# " & .ReferenceNumber)
             End Select
 
             .Save()
@@ -472,6 +496,16 @@
         End If
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
+
+        'ISSUE: 0002 02/06/2016
+        'Money Transfer - Enable multiple encoding
+        Dim xans As DialogResult = _
+            MsgBox("Do you want to enter another one?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2)
+        If xans = Windows.Forms.DialogResult.Yes Then
+            frmMoneyTransfer_Load(sender, e)
+            Exit Sub
+        End If
+
         frmMTlist.LoadActive()
         Me.Close()
     End Sub
@@ -533,10 +567,11 @@
             mySql &= " AND Remarks LIKE '"
             mySql &= IIf(rbSend.Checked, "Send In%'", "Pay Out%'")
         End If
+        mySql &= " ORDER BY AMOUNT ASC"
         ds = LoadSQL(mySql)
 
         Console.WriteLine(mySql)
-        Console.WriteLine("Entries" & ds.Tables(0).Rows.Count)
+        Console.WriteLine("Entries >> " & ds.Tables(0).Rows.Count)
         If ds.Tables(0).Rows.Count = 0 Then Console.WriteLine("No charges!!! Charge Code not found.") : Return 0
 
         For Each dr As DataRow In ds.Tables(0).Rows
@@ -562,6 +597,7 @@
                     End Select
 
                     'Commission
+                    If remarks.Split("|").Count <= 2 Then Exit For
                     Select Case remarks.Split("|")(2)
                         Case "SLC" 'ServiceCharge Less Charge
                             commission = ServChrge - commission
@@ -570,9 +606,9 @@
                             commission = 0
                     End Select
 
-                    If Not (remarks = "Payout" And rbReceive.Checked) Then
-                        ServChrge = 0
-                    End If
+                    'If Not (remarks = "Payout" And rbReceive.Checked) Then
+                    '    ServChrge = 0
+                    'End If
                 End If
 
                 Return ServChrge
@@ -585,6 +621,7 @@
 
     Private Sub txtAmount_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtAmount.LostFocus
         ComputeCharges()
+        cboLocation.Focus()
     End Sub
 
     Private Sub ComputeCharges()
@@ -593,6 +630,9 @@
         basicCharges = GetCharge(CDbl(txtAmount.Text), FindServices(cboType.Text).ChargeCode)
         txtCharge.Text = basicCharges
         ComputeNet()
+
+        Console.WriteLine(String.Format("Amount: {0} | ServiceCharge: {1} | Commission: {2}", _
+                                        txtAmount.Text, basicCharges, commission))
     End Sub
 
     Private Function FindServices(str As String) As MoneyTransferService
@@ -608,7 +648,11 @@
         If txtAmount.Text = "" Then Exit Sub
 
         Dim net As Double = CDbl(txtCharge.Text) + CDbl(txtAmount.Text)
-
+        ' ISSUE: 0001 02/04/2016
+        ' Payout Service Charge, auto deduct
+        If daltonService(cboType.SelectedIndex).ReceiveOnly Then
+            net = CDbl(txtAmount.Text) - CDbl(txtCharge.Text)
+        End If
         txtNetAmount.Text = net
     End Sub
 

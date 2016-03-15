@@ -94,7 +94,7 @@
         Dim newInsurance As New Insurance
         With newInsurance
             .COInumber = txtCoi.Text
-            If IsNumeric(txtPT.Text) Then .TicketNum = txtPT.Text
+            .TicketNum = txtPT.Text
             .TransactionDate = dtpDate.Value
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text
@@ -125,6 +125,13 @@
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        ' ISSUE: 0001
+        ' Locking Insurance voiding exclusive for the same DATE
+        If curInsurance.TransactionDate.Date <> CurrentDate.Date Then
+            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         curInsurance.VoidTransaction()
         MsgBox("Transaction VOIDED", MsgBoxStyle.Information)

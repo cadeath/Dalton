@@ -94,7 +94,13 @@ Public Class frmMIS
                 Try
                     'Create Client
                     fname = oSheet.Cells(ent, 1).value : colIdx += 1
+                    If fname = "" Then
+                        GoTo wrongEntry
+                    End If
                     lname = oSheet.Cells(ent, 2).value : colIdx += 1
+                    If lname = "" Then
+                        GoTo wrongEntry
+                    End If
                     Dim ds As DataSet = SearchClient(fname, lname)
                     Dim migratePawner As New Client, isNew As Boolean = True
                     If ds.Tables(0).Rows.Count > 0 Then
@@ -121,10 +127,10 @@ Public Class frmMIS
 
                         If isNew Then
                             .SaveClient()
+                            .LoadLastEntry()
                         Else
                             .ModifyClient()
                         End If
-                        .LoadLastEntry()
                     End With
 
 
@@ -161,11 +167,32 @@ Public Class frmMIS
                             Else
                                 GoTo wrongEntry
                             End If
-                            .Description = oSheet.Cells(ent, 18).value : colIdx += 1
-                            .LoanDate = oSheet.Cells(ent, 19).value : colIdx += 1
-                            .MaturityDate = oSheet.Cells(ent, 20).value : colIdx += 1
-                            .ExpiryDate = oSheet.Cells(ent, 21).value : colIdx += 1
-                            .AuctionDate = oSheet.Cells(ent, 22).value : colIdx += 1
+                            If oSheet.Cells(ent, 18).value <> "" Then
+                                .Description = oSheet.Cells(ent, 18).value : colIdx += 1
+                            Else
+                                GoTo wrongEntry
+                            End If
+                            If IsDate(oSheet.Cells(ent, 19).value) Then
+                                .LoanDate = oSheet.Cells(ent, 19).value : colIdx += 1
+                            Else
+                                GoTo wrongEntry
+                            End If
+                            If IsDate(oSheet.Cells(ent, 20).value) Then
+                                .MaturityDate = oSheet.Cells(ent, 20).value : colIdx += 1
+                            Else
+                                GoTo wrongEntry
+                            End If
+                            If IsDate(oSheet.Cells(ent, 21).value) Then
+                                .ExpiryDate = oSheet.Cells(ent, 21).value : colIdx += 1
+                            Else
+                                GoTo wrongEntry
+                            End If
+                            If IsDate(oSheet.Cells(ent, 22).value) Then
+                                .AuctionDate = oSheet.Cells(ent, 22).value : colIdx += 1
+                            Else
+                                GoTo wrongEntry
+                            End If
+
                             .Appraisal = oSheet.Cells(ent, 23).value : colIdx += 1
                             .Principal = oSheet.Cells(ent, 24).value : colIdx += 1
                             .Interest = oSheet.Cells(ent, 25).value : colIdx += 1

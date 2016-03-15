@@ -172,6 +172,7 @@ Public Class ComputerUser
     Private _journalEntries As Boolean
     Public ReadOnly Property canJournalEntryGenerate() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _journalEntries
         End Get
     End Property
@@ -179,6 +180,7 @@ Public Class ComputerUser
     Private _cashCount As Boolean
     Public ReadOnly Property canCashCount() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _cashCount
         End Get
     End Property
@@ -186,6 +188,7 @@ Public Class ComputerUser
     Private _backUp As Boolean
     Public ReadOnly Property canBackup() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _backUp
         End Get
     End Property
@@ -193,6 +196,7 @@ Public Class ComputerUser
     Private _viewUserManagement As Boolean
     Public ReadOnly Property canViewUserManage() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _viewUserManagement
         End Get
     End Property
@@ -200,6 +204,7 @@ Public Class ComputerUser
     Private _viewRates As Boolean
     Public ReadOnly Property canViewRates() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _viewRates
         End Get
     End Property
@@ -207,6 +212,7 @@ Public Class ComputerUser
     Private _openStore As Boolean
     Public ReadOnly Property canOpenStore() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _openStore
         End Get
     End Property
@@ -215,6 +221,7 @@ Public Class ComputerUser
     Private _userManagement As Boolean
     Public ReadOnly Property canUserManage() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _userManagement
         End Get
     End Property
@@ -222,6 +229,7 @@ Public Class ComputerUser
     Private _updateRates As Boolean
     Public ReadOnly Property canUpdateRates() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _updateRates
         End Get
     End Property
@@ -229,6 +237,7 @@ Public Class ComputerUser
     Private _settings As Boolean
     Public ReadOnly Property canSettings() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _settings
         End Get
     End Property
@@ -236,6 +245,7 @@ Public Class ComputerUser
     Private _borrow As Boolean
     Public ReadOnly Property canBorrow() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _borrow
         End Get
     End Property
@@ -244,6 +254,7 @@ Public Class ComputerUser
     Private _cashInBank As Boolean
     Public ReadOnly Property canCashInBank() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _cashInBank
         End Get
     End Property
@@ -251,6 +262,7 @@ Public Class ComputerUser
     Private _cashOutBank As Boolean
     Public ReadOnly Property canCashOutBank() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _cashOutBank
         End Get
     End Property
@@ -258,6 +270,7 @@ Public Class ComputerUser
     Private _void As Boolean
     Public ReadOnly Property canVoid() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _void
         End Get
     End Property
@@ -265,6 +278,7 @@ Public Class ComputerUser
     Private _pullOut As Boolean
     Public ReadOnly Property canPullOut() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _pullOut
         End Get
     End Property
@@ -272,6 +286,7 @@ Public Class ComputerUser
     Private _migrate As Boolean
     Public ReadOnly Property canMigrate() As Boolean
         Get
+            If isSuperUser Then Return isSuperUser
             Return _migrate
         End Get
     End Property
@@ -331,6 +346,7 @@ Public Class ComputerUser
 
         'Special
         y = 3
+        Console.WriteLine(parts(y))
         _cashInBank = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _cashOutBank = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _void = IIf(parts(y).Substring(2, 1) = "1", True, False)
@@ -463,9 +479,9 @@ Public Class ComputerUser
                 .Item("UserPass") = Encrypt(_password)
                 .Item("FullName") = _fullName
                 .Item("Privilege") = _privilege
-                .Item("LastLogin") = _lastLogin
+                '.Item("LastLogin") = _lastLogin 'First Login no Last Login
                 .Item("EncoderID") = _encoderID
-                .Item("SystemInfo") = Now
+                .Item("SystemInfo") = Now.Date
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else

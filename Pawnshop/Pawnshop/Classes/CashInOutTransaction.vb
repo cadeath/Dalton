@@ -155,11 +155,27 @@
         'If _transName = NO_ENTRIES Then Exit Sub 'Replenishment No Entries
         Select Case _type
             Case "Receipt"
-                AddJournal(_amount, "Debit", "Revolving Fund", , CashCount_Reflect)
-                AddJournal(_amount, "Credit", _transName)
+                AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
+                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category)
             Case "Disbursement"
-                AddJournal(_amount, "Credit", "Revolving Fund", , CashCount_Reflect)
-                AddJournal(_amount, "Debit", _transName)
+                AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
+                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, , , _category)
+            Case "INVENTORY IN"
+                AddJournal(_amount, "Debit", "Smart Money Inventory Offsetting Account", "Ref# " & Me.LastIDNumber)
+                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect, , _category)
+            Case Else
+                MsgBox(_type & " not found", MsgBoxStyle.Critical, "Developer WARNING")
         End Select
     End Sub
+
+    Public Function LastIDNumber() As Single
+        Dim mySql As String = "SELECT * FROM " & fillData & " ORDER BY TransID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("TransID")
+    End Function
+
 End Class
