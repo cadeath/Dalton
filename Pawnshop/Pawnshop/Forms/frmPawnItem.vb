@@ -206,6 +206,7 @@ Public Class frmPawnItem
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not CheckAuth() Then Exit Sub
 
+        ComputeInterests()
         If Not isReady() And transactionType = "L" Then
             MsgBox("I think you are missing something", MsgBoxStyle.Critical)
             Exit Sub
@@ -1344,6 +1345,7 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub txtPrincipal_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPrincipal.LostFocus
+        ComputeInterests()
         cboAppraiser.Focus()
     End Sub
 End Class
