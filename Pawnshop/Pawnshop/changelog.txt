@@ -2,6 +2,7 @@ CHANGELOG
 Version 1.1.1.0b
  - BUG on PAWNING not AUTOCOMPUTE
  - Monthly Report for Money Transfer Done
+ - Add another services in Pera Padala
 
 Version 1.1.1.0
  - Add Insurance Report
