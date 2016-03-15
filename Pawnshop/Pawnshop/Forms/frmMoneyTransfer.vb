@@ -9,8 +9,12 @@
 
     ' NOTE - ADDING SERVICE
     ' STEP 3 - Add array count
-    Private daltonService(15) As MoneyTransferService
+    Private daltonService(16) As MoneyTransferService
 
+    ''' <summary>
+    ''' Initializing Money Transfer Services
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub Main()
         ' NOTE - ADDING SERVICE
         ' STEP 1 - Create an Object
@@ -23,9 +27,21 @@
             .KeyReceived = "MRNumLast"
             .ChargeCode = "perapadala"
         End With
+
         ' NOTE - ADDING SERVICE
         ' STEP 2 - Add it at daltonService
         daltonService(0) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0017"
+            .ServiceName = "Pera Padala - PMFTC"
+            .isGenerated = True
+            .ChargeCode = "perapadalapmftc"
+            .KeySend = "MEnumLast"
+            .KeyReceived = "MRNumLast"
+        End With
+        daltonService(1) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -35,7 +51,7 @@
             .AccountName = "Due to / From Western Union"
             .ChargeCode = "western"
         End With
-        daltonService(1) = tmp
+        daltonService(2) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -45,7 +61,7 @@
             .AccountName = "Due to / From Western Union"
             .ChargeCode = "western - intl"
         End With
-        daltonService(2) = tmp
+        daltonService(3) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -55,7 +71,7 @@
             .AccountName = "Due to/from Cebuana Llhuiller"
             .ChargeCode = "cebuana"
         End With
-        daltonService(3) = tmp
+        daltonService(4) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -65,7 +81,7 @@
             .ChargeCode = "gprs to gprs"
             .hasPayoutCommission = True
         End With
-        daltonService(4) = tmp
+        daltonService(5) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -76,7 +92,7 @@
             .hasPayoutCommission = True
             .SendOnly = True
         End With
-        daltonService(5) = tmp
+        daltonService(6) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -87,7 +103,7 @@
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
-        daltonService(6) = tmp
+        daltonService(7) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -98,7 +114,7 @@
             .hasPayoutCommission = True
             .SendOnly = True
         End With
-        daltonService(7) = tmp
+        daltonService(8) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -109,7 +125,7 @@
             .hasPayoutCommission = True
             .SendOnly = True
         End With
-        daltonService(8) = tmp
+        daltonService(9) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -120,7 +136,7 @@
             .hasPayoutCommission = True
             .SendOnly = True
         End With
-        daltonService(9) = tmp
+        daltonService(10) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -131,7 +147,7 @@
             .hasPayoutCommission = True
             .SendOnly = True
         End With
-        daltonService(10) = tmp
+        daltonService(11) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -142,7 +158,7 @@
             .hasPayoutCommission = True
             .SendOnly = True
         End With
-        daltonService(11) = tmp
+        daltonService(12) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -153,7 +169,7 @@
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
-        daltonService(12) = tmp
+        daltonService(13) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -164,7 +180,7 @@
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
-        daltonService(13) = tmp
+        daltonService(14) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -175,7 +191,7 @@
             .hasPayoutCommission = True
             .SendOnly = True
         End With
-        daltonService(14) = tmp
+        daltonService(15) = tmp
 
         tmp = New MoneyTransferService
         With tmp
@@ -186,11 +202,15 @@
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
-        daltonService(15) = tmp
+        daltonService(16) = tmp
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
         idMR = daltonService(0).GetReceivedLast
+
+        'Pera Padala - PMFTC
+        idME = daltonService(1).GetSendLast
+        idMR = daltonService(1).GetReceivedLast
     End Sub
 
     Private Sub SendReceiveStatusCheck()
@@ -262,7 +282,6 @@
 
         Me.Text &= "| Date: " & mt.TransactionDate
 
-
         cboType.Enabled = False
         btnSearchSender.Enabled = False
         btnSearchReceiver.Enabled = False
@@ -276,7 +295,6 @@
         LockFields(True)
         LoadServices()
         lblWhere.Text = "Send To"
-        'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
 
         Console.WriteLine("Form LOADED successfully")
@@ -395,6 +413,15 @@
 
             Select Case cboType.Text
                 Case "Pera Padala"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN")
+                        AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
+                        AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
+                    Else
+                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
+                    End If
+                Case "Pera Padala - PMFTC"
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN")
                         AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
