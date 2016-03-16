@@ -143,6 +143,7 @@
         Dim dsName As String = "dsOutstanding", mySql As String = _
             "SELECT * FROM PAWNING WHERE (Status = 'NEW' OR Status = 'RENEW' OR Status = 'SEGRE')"
         mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= " ORDER BY PAWNTICKET ASC"
 
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtMonthOf", "DATE: " & monCal.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
