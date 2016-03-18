@@ -1,5 +1,6 @@
 ISSUE: 0015 03/15/2016
 [+] PAWNING MODULE won't compute interest when not KEYPRESS OR KEY_UP like Copy/Paste
+[-] LOAN REGISTER REPORT values are not suited to our requirements.
 
 
 ISSUE: 0014 03/12/2016
@@ -31,7 +32,7 @@ ISSUE: 0012 03/04/2016
 [-]	Include Pawner's Name at the claim stub
 [-]	Report small font
 	 - Cash Cash Sheet [Done]
-[-]	Unable to reprint OR
+[+]	Unable to reprint OR
 
 
 ISSUE: 0011 02/23/2016

@@ -1119,84 +1119,14 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5) 'Reprint only
 
-        autoPrintPT.Export(report, paperSize)
-        autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print(printerName)
-    End Sub
-
-    Private Sub PrintRedeemOR()
-        Dim ans As DialogResult = _
-            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        Dim autoPrintPT As Reporting
-
-        Dim printerName As String = PRINTER_OR
-        If Not canPrint(printerName) Then Exit Sub
-
-        Dim report As LocalReport = New LocalReport
-        autoPrintPT = New Reporting
-
-        Dim mySql As String
-        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
-        Dim dsName As String = "dsOR"
-        Dim ds As DataSet = LoadSQL(mySql, dsName)
-
-        report.ReportPath = "Reports\layout04.rdlc"
-        'report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
-
-        Dim paymentStr As String = _
-            String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
-        Dim addParameters As New Dictionary(Of String, String)
-        addParameters.Add("txtPayment", paymentStr)
-        Dim desc As String
-        If PawnItem.ItemType = "JWL" Then
-            With PawnItem
-                desc = String.Format("{0} {1}G {2}K", GetCategoryByID(.CategoryID), .Grams, .Karat)
-                If .Description <> "" Then
-                    desc &= vbCrLf & .Description
-                End If
-            End With
-        Else
-            desc = PawnItem.Description
-        End If
-        addParameters.Add("txtDescription", desc)
-        addParameters.Add("txtTotalDue", PawnItem.RedeemDue)
-
-        With ds.Tables(dsName).Rows(0)
-            addParameters.Add("txtPawner", .Item("Pawner"))
-            addParameters.Add("txtFullAddress", .Item("FullAddress"))
-            addParameters.Add("txtOR", String.Format("{0:000000}", .Item("ORNum")))
-            addParameters.Add("txtPrincipal", .Item("Principal"))
-            addParameters.Add("txtInterest", .Item("Interest"))
-            addParameters.Add("txtServiceCharge", .Item("ServiceCharge"))
-            addParameters.Add("txtPenalty", .Item("Penalty"))
-        End With
-
-        If Not addParameters Is Nothing Then
-            For Each nPara In addParameters
-                Dim tmpPara As New ReportParameter
-                tmpPara.Name = nPara.Key
-                tmpPara.Values.Add(nPara.Value)
-                report.SetParameters(New ReportParameter() {tmpPara})
-                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
-            Next
-        End If
-
-        'ISSUE: 0003 02/08/2016
-        'Redeem - OR no duplicate
-        Dim paperSize As New Dictionary(Of String, Double)
-        paperSize.Add("width", 8.5)
-        paperSize.Add("height", 9) 'Changed 4.5 to 9
-
-        autoPrintPT.Export(report, paperSize)
-        autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print(printerName)
-
-        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        'frmReport.Show()
-
-        Me.Focus()
+        Try
+            autoPrintPT.Export(report, paperSize)
+            autoPrintPT.m_currentPageIndex = 0
+            autoPrintPT.Print(printerName)
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "PRINT FAILED")
+            Log_Report("PRINT FAILED: " & ex.ToString)
+        End Try
     End Sub
 
     Private Function GetCategoryByID(ByVal id As Integer) As String
@@ -1244,9 +1174,14 @@ Public Class frmPawnItem
             Next
         End If
 
-        autoPrintPT.Export(report)
-        autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print(printerName)
+        Try
+            autoPrintPT.Export(report)
+            autoPrintPT.m_currentPageIndex = 0
+            autoPrintPT.Print(printerName)
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "PRINT FAILED")
+            Log_Report("PRINT FAILED: " & ex.ToString)
+        End Try
 
         Me.Focus()
     End Sub
@@ -1290,9 +1225,14 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5) 'Reprint only
 
-        autoPrintPT.Export(report, paperSize)
-        autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print(printerName)
+        Try
+            autoPrintPT.Export(report, paperSize)
+            autoPrintPT.m_currentPageIndex = 0
+            autoPrintPT.Print(printerName)
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "PRINT FAILED")
+            Log_Report("PRINT FAILED: " & ex.ToString)
+        End Try
     End Sub
 
     Private Sub PrintRenewOR()
@@ -1375,17 +1315,17 @@ Public Class frmPawnItem
 #End Region
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
-        If PawnItem.Status = "L" Then
+        If PawnItem.Status = "L" Or PawnItem.Status = "R" Then
             PrintNewLoan()
         End If
 
-        If PawnItem.Status = "R" Or PawnItem.Status = "0" Then
+        If PawnItem.Status = "0" Then
             PrintNewLoan()
-            PrintRenewOR()
+            do_RenewOR()
         End If
 
         If PawnItem.Status = "X" Then
-            PrintRedeemOR()
+            do_RedeemOR()
         End If
     End Sub
 
