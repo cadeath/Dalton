@@ -217,7 +217,7 @@ Public Class frmPawnItem
 
         Select Case transactionType
             Case "L" : SaveNewLoan() : PrintNewLoan()
-            Case "X" : SaveRedeem() : If Not PAUSE_OR Then PrintRedeemOR()
+            Case "X" : SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
             Case "R" : SaveRenew() : PrintRenew()
         End Select
 
@@ -899,18 +899,6 @@ Public Class frmPawnItem
         Next
     End Sub
 
-    'Private Sub LoanAdvanceInterest()
-    '    TypeInt = GetInt(30)
-
-    '    If transactionType = "L" Then
-    '        txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
-    '        txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
-    '        txtService.Text = GetServiceCharge(txtPrincipal.Text)
-    '    End If
-    '    txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt) - CDbl(txtService.Text)
-
-    'End Sub
-
     Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
         Dim mySql As String = "SELECT * FROM tblInt WHERE ItemType = '" & cboType.Text & "' AND STATUS = 0"
         Dim ds As DataSet = LoadSQL(mySql), TypeInt As Double
@@ -1067,6 +1055,61 @@ Public Class frmPawnItem
         'frmReport.Show()
 
         Me.Focus()
+    End Sub
+
+    Private Sub do_RedeemOR()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        For cnt As Integer = 1 To OR_COPIES
+            PrintRedeemOR2()
+            System.Threading.Thread.Sleep(1000)
+        Next
+    End Sub
+
+    Private Sub PrintRedeemOR2()
+        Dim autoPrintPT As Reporting
+        Dim printerName As String = PRINTER_OR
+        If Not canPrint(printerName) Then Exit Sub
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+        Dim mySql As String, ptIDx As Single = PawnItem.PawnID
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
+        Dim dsName As String = "dsPawn"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+        Dim paymentStr As String
+        Dim rptPath As String
+        rptPath = "Reports\_layout03.rdlc"
+        Dim addParameters As New Dictionary(Of String, String)
+
+        report.ReportPath = rptPath
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        PawnItem.LoadTicket(ptIDx)
+
+        paymentStr = _
+        String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+        addParameters.Add("txtPayment", paymentStr)
+        addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Dim paperSize As New Dictionary(Of String, Double)
+        paperSize.Add("width", 8.5)
+        paperSize.Add("height", 4.5)
+
+        autoPrintPT.Export(report, paperSize)
+        autoPrintPT.m_currentPageIndex = 0
+        autoPrintPT.Print(printerName)
     End Sub
 
     Private Sub PrintRedeemOR()
@@ -1320,17 +1363,17 @@ Public Class frmPawnItem
 #End Region
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
-        If PawnItem.Status = "L" Then
+        If PawnItem.Status = "L" Or PawnItem.Status = "R" Then
             PrintNewLoan()
         End If
 
-        If PawnItem.Status = "R" Or PawnItem.Status = "0" Then
+        If PawnItem.Status = "0" Then
             PrintNewLoan()
-            PrintRenewOR()
+            do_RenewOR()
         End If
 
         If PawnItem.Status = "X" Then
-            PrintRedeemOR()
+            do_RedeemOR()
         End If
     End Sub
 
