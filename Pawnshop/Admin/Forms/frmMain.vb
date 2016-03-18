@@ -55,4 +55,14 @@
         Dim fn As String = OpenFileDialog1.FileName
         do_RateUpdate(fn, "")
     End Sub
+
+    Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
+        fillData = "tblCash"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " WHERE CashID <> 0"
+        mySql &= " ORDER BY CashID ASC"
+
+        ds = LoadSQL(mySql, fillData)
+        dgvPawnshop.DataSource = ds.Tables(fillData)
+    End Sub
 End Class

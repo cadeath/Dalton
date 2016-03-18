@@ -1,6 +1,7 @@
 ﻿Module Fixing_Mlang
 
     Private _tblAffected(11) As Dictionary(Of String, Dictionary(Of String, String))
+    Private mySql As String, fillData As String
 
     Private Sub MLang_Initialization()
         Dim fieldNames As New Dictionary(Of String, String)
@@ -65,5 +66,24 @@
 
         Next
     End Sub
+
+#Region "Advance Interest"
+    Sub Fixing_AdvanceInterest()
+        mySql = "SELECT * FROM TBLPAWN WHERE STATUS = 'L'"
+        fillData = "TBLPAWN"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+        Dim AdvInt As Double, Interest As Double
+        For Each dr As DataRow In ds.Tables(fillData).Rows
+            AdvInt = dr("ADVINT")
+            Interest = dr("INTEREST")
+
+            dr("INTEREST") = AdvInt - Interest
+            Console.WriteLine("Fixed!...")
+        Next
+
+        database.SaveEntry(ds, False)
+    End Sub
+#End Region
 
 End Module

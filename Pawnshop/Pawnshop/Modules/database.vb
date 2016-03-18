@@ -1,7 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
 ' v1.0.7
-'  - Fixing Insurance
+'  - Changing PAWNTICKET of TBLINSURANCE Data Type from Integer to VARCHAR(30)
 ' v1.0.6
 '  - Add WU - Intl
 ' v1.0.5
@@ -18,7 +18,7 @@
 '  - Add Column in LOAN REGISTER VIEW for ADVANCE INTEREST
 '  - Add Column INTEREST and ADVINT in PAWNING
 ' v1.0.1
-'  - Added ORDATE, RENEWDUE and REDEEMDUE at Loan Register VIEW
+'  - Added ORDATE, RENEWDUE and REDEEMDUE at Loan_Register VIEW
 
 Friend Module database
     Public con As OdbcConnection

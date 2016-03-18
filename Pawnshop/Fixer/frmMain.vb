@@ -20,10 +20,13 @@ Public Class frmMain
 
         'MigrateIssue()
         btnFix.Enabled = False
+        SetupDatabase()
+
+        Fixing_AdvanceInterest()
 
         'No_Description()
         'pg_incomplete_desc.do_fix(txtImport.Text, txtDB.Text)
-        revolving_fund.do_RevolvingFix(txtDB.Text)
+        'revolving_fund.do_RevolvingFix(txtDB.Text)
 
         btnFix.Enabled = True
     End Sub
