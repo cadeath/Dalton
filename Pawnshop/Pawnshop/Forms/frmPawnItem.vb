@@ -217,7 +217,7 @@ Public Class frmPawnItem
 
         Select Case transactionType
             Case "L" : SaveNewLoan() : PrintNewLoan()
-            Case "X" : SaveRedeem() : If Not PAUSE_OR Then PrintRedeemOR()
+            Case "X" : SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
             Case "R" : SaveRenew() : PrintRenew()
         End Select
 
@@ -898,18 +898,6 @@ Public Class frmPawnItem
             cboAppraiser.Items.Add(tmpUser.UserName)
         Next
     End Sub
-
-    'Private Sub LoanAdvanceInterest()
-    '    TypeInt = GetInt(30)
-
-    '    If transactionType = "L" Then
-    '        txtAdv.Text = (CDbl(txtPrincipal.Text) * TypeInt)
-    '        txtInt.Text = CDbl(txtPrincipal.Text) * TypeInt
-    '        txtService.Text = GetServiceCharge(txtPrincipal.Text)
-    '    End If
-    '    txtNet.Text = CDbl(txtPrincipal.Text) - (CDbl(txtPrincipal.Text) * TypeInt) - CDbl(txtService.Text)
-
-    'End Sub
 
     Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
         Dim mySql As String = "SELECT * FROM tblInt WHERE ItemType = '" & cboType.Text & "' AND STATUS = 0"
