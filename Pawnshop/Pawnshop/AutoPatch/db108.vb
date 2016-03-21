@@ -6,7 +6,7 @@
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
-        Dim DROP_VIEW As String = "DROP VIEW PAWNING"
+        Dim DROP_VIEW As String = "DROP VIEW MONTHLY_LOANRENEW"
         RunCommand(DROP_VIEW)
 
         Dim mySql As String

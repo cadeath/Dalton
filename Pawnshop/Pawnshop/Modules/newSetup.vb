@@ -12,6 +12,14 @@
             dbName = "W3W1LH4CKU.FDB"
         End If
 
+        Try
+            Dim mySql As String = "SELECT * FROM TBL_GAMIT"
+            Dim ds As DataSet = LoadSQL(mySql)
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "Connection Problem")
+            Return False
+        End Try
+
         Return True
     End Function
 End Module

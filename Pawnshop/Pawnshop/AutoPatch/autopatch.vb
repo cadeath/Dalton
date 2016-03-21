@@ -2,7 +2,7 @@
 
 Module autopatch
 
-    Friend Function isPatchable(ByVal allowVersion As String) As String
+    Friend Function isPatchable(ByVal allowVersion As String) As Boolean
         On Error GoTo err
 
         Dim mySql As String, ds As DataSet
@@ -30,6 +30,8 @@ err:
             cmd.ExecuteNonQuery()
             con.Close()
         Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical)
+            Log_Report(ex.ToString)
             con.Dispose()
             Exit Sub
         End Try
@@ -41,6 +43,10 @@ err:
         mySql &= "WHERE OPT_KEYS = 'DBVersion'"
 
         RunCommand(mySql)
+    End Sub
+
+    Public Sub Patch_if_Patchable()
+        db108.PatchUp()
     End Sub
 
 End Module
