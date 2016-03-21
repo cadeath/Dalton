@@ -14,6 +14,8 @@ income					18
 
 SETUP =============================
 BDO ATM CASHOUT
-TBLCASH, remove the TYPE from Disbursement to (empty)
+TBLCASH, 	remove the TYPE from Disbursement to (empty)
+			add new ENTRY
+				BDO ATM CASHOUT, Income from BDO ATM CashOut, _SYS00000001042
 INCLUDE TBLMAINTENANCE BDOCommissionRate
 

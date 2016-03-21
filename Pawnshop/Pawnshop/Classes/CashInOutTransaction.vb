@@ -164,12 +164,10 @@
                 AddJournal(_amount, "Debit", "Smart Money Inventory Offsetting Account", "Ref# " & Me.LastIDNumber)
                 AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect, , _category)
             Case "BDO ATM CASHOUT"
-                ' TODO
-                ' Ask for JOURNAL ENTRIES from SIR DENNIS
                 Dim ComAmnt As Double = GetOption("BDOCommissionRate")
-                AddJournal(_amount, "Debit", "Due to/from BDO", "Ref# " & Me.LastIDNumber)
+                AddJournal(_amount + ComAmnt, "Debit", "Due to/from BDO", "Ref# " & Me.LastIDNumber)
                 AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
-                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect, , _category) 'INCOME
+                AddJournal(ComAmnt, "Credit", "Income from BDO ATM CashOut", "Ref# " & Me.LastIDNumber, , False, _category)
             Case Else
                 MsgBox(_type & " not found", MsgBoxStyle.Critical, "Developer WARNING")
         End Select
