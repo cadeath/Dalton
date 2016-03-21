@@ -26,14 +26,16 @@
 
         Dim dsName As String = "dsPullOut", mySql As String = _
         "SELECT * FROM PAWNING WHERE STATUS = 'WITHDRAW' AND "
-        mySql &= String.Format("PULLOUT BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= String.Format("PULLOUT = '{0}'", monCalendar.SelectionStart.ToShortDateString)
+
         If cboClass.Text <> "ALL" Then
             mySql &= String.Format(" AND ITEMTYPE = '{0}'", cboClass.Text)
         End If
         Console.WriteLine(mySql)
 
         Dim addParameters As New Dictionary(Of String, String)
-        addParameters.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMM yyyy").ToUpper)
+        
+        addParameters.Add("txtMonthOf", "DATE: " & stDay.ToShortDateString)
         addParameters.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", addParameters)
