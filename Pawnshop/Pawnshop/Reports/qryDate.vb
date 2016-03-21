@@ -53,6 +53,8 @@
                     FormType = ReportType.BranchBorrowings
                 Case "Money Transfer"
                     FormType = ReportType.MoneyTransfer
+                Case "Item Pullout"
+                    FormType = ReportType.ItemPullOut
             End Select
         End If
 
