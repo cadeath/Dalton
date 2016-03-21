@@ -1,0 +1,18 @@
+3500
+3470
+18 ato
+
+cash in bank		3418
+due to/from BDO			3400
+income					18
+
+
+
+DUE TO/FROM BDO		3418
+RF						3400
+income					18
+
+
+BDO ATM CASHOUT
+TBLCASH, remove the TYPE from Disbursement to (empty)
+

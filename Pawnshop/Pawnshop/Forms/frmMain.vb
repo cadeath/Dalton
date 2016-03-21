@@ -313,8 +313,6 @@ Public Class frmMain
         End If
         frmCashCountV2.Show()
         frmCashCountV2.isClosing = True
-        'frmCashCount.Show()
-        'frmCashCount.isClosing = True
     End Sub
 
     Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
@@ -381,12 +379,6 @@ Public Class frmMain
         frmRate2.Show()
     End Sub
 
-    Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
-        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
-
-        qryPullOut.Show()
-    End Sub
-
     Private Sub InsuranceToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles InsuranceToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.Insurance
         qryDate.Show()
@@ -399,4 +391,11 @@ Public Class frmMain
     Private Sub ORManagerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ORManagerToolStripMenuItem.Click
         frmPrintManager.Show()
     End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
+        qryPullOut.Show()
+    End Sub
+
 End Class

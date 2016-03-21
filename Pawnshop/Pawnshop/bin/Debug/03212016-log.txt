@@ -1,0 +1,3 @@
+[03/21/2016 10:51:24] ERROR [08004] [ODBC Firebird Driver]unavailable database
+[03/21/2016 10:51:24] User: SYSDBA
+[03/21/2016 10:51:24] Database: W3W1LH4CKU.FDB
