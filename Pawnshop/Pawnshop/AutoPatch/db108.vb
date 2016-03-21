@@ -45,17 +45,20 @@
         BDO_ATM_CashOut()
 
         Database_Update(LATEST_VERSION)
+        Log_Report("SYSTEM PATCHED UP FROM 1.0.7 TO 1.0.8")
     End Sub
 
     Private Sub BDO_ATM_CashOut()
         Try
+            ' Adding BDOCommissionRate
+            ' ----------------------------------------------------------
             Dim mySql As String, ds As DataSet
             Dim fillData As String = "tblMAINTENANCE"
             mySql = "SELECT * FROM " & fillData
             mySql &= " WHERE OPT_KEYS = 'BDOCommissionRate'"
             ds = LoadSQL(mySql, fillData)
 
-            If ds.Tables(fillData).Rows.Count > 0 Then Exit Sub
+            If ds.Tables(fillData).Rows.Count > 0 Then GoTo NextPhase_AddEntry
 
             Dim dsNewRow As DataRow
             dsNewRow = ds.Tables(fillData).NewRow
@@ -67,6 +70,26 @@
             ds.Tables(fillData).Rows.Add(dsNewRow)
 
             database.SaveEntry(ds)
+
+            ' Adding new Entry
+            ' ----------------------------------------------------------
+NextPhase_AddEntry:
+            mySql = "SELECT * FROM " : fillData = "TBLCASH"
+            mySql &= fillData & String.Format(" WHERE TRANSNAME = 'Income from BDO ATM CashOut'")
+            ds = LoadSQL(mySql, fillData)
+            If ds.Tables(fillData).Rows.Count > 0 Then GoTo LastPhase
+
+            dsNewRow = ds.Tables(fillData).NewRow
+
+            With dsNewRow
+                .Item("TYPE") = ""
+                .Item("Category") = "BDO ATM CASHOUT"
+                .Item("Transname") = "Income from BDO ATM CashOut"
+                .Item("SAPACCOUNT") = "_SYS00000001042"
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+
+LastPhase:
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, "PATCHING DATABASE")
             Log_Report(ex.ToString)
