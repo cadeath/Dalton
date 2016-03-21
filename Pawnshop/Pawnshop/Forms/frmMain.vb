@@ -322,10 +322,6 @@ Public Class frmMain
         qryLoan.Show()
     End Sub
 
-    Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
-        qryDate.Show()
-    End Sub
-
     Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
         If Not mod_system.DEV_MODE Then
             If dateSet Then
@@ -401,4 +397,7 @@ Public Class frmMain
         qryPullOut.Show()
     End Sub
 
+    Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+        qryPullOut_List.Show()
+    End Sub
 End Class
