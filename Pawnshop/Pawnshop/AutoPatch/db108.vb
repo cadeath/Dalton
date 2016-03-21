@@ -41,7 +41,36 @@
         mySql &= vbCrLf & "GROUP BY 1"
 
         RunCommand(mySql)
+
+        BDO_ATM_CashOut()
+
         Database_Update(LATEST_VERSION)
+    End Sub
+
+    Private Sub BDO_ATM_CashOut()
+        Try
+            Dim mySql As String, ds As DataSet
+            Dim fillData As String = "tblMAINTENANCE"
+            mySql = "SELECT * FROM " & fillData
+            mySql &= " WHERE OPT_KEYS = 'BDOCommissionRate'"
+            ds = LoadSQL(mySql, fillData)
+
+            If ds.Tables(fillData).Rows.Count > 0 Then Exit Sub
+
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(fillData).NewRow
+
+            With dsNewRow
+                .Item("OPT_KEYS") = "BDOCommissionRate"
+                .Item("OPT_VALUES") = 18
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+
+            database.SaveEntry(ds)
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "PATCHING DATABASE")
+            Log_Report(ex.ToString)
+        End Try
     End Sub
 
 End Module

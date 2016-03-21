@@ -267,7 +267,9 @@
                     Case "Smart Money Payable - Perfecom"
                         .CashID = getCashID(transName)
                         selectedType = "INVENTORY IN"
-                    Case ""
+                    Case "BDO ATM CASHOUT"
+                        .CashID = getCashID("Due to/from BDO")
+                        selectedType = "BDO ATM CASHOUT"
                 End Select
 
                 category = selectedType
@@ -319,5 +321,13 @@
         gpTrans.Enabled = False
         txtAmt.Focus()
 
+    End Sub
+
+    Private Sub btnBDOCashOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBDOCashOut.Click
+        isCustomInOut = True
+        transName = "BDO ATM CASHOUT"
+
+        gpTrans.Enabled = False
+        txtAmt.Focus()
     End Sub
 End Class

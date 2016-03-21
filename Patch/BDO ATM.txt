@@ -12,7 +12,8 @@ DUE TO/FROM BDO		3418
 RF						3400
 income					18
 
-
+SETUP =============================
 BDO ATM CASHOUT
 TBLCASH, remove the TYPE from Disbursement to (empty)
+INCLUDE TBLMAINTENANCE BDOCommissionRate
 
