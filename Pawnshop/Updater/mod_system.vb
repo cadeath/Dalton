@@ -4,6 +4,18 @@
         Console.WriteLine(String.Format("[{0}] ", Now.ToString("hh:mm:ss")) & str)
     End Sub
 
+    Function isAllowed(ByVal allow As String) As Boolean
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM tblMaintenance WHERE OPT_KEYS = 'DBVersion'"
+        ds = LoadSQL(mySql)
+
+        If allow = ds.Tables(0).Rows(0).Item("OPT_VALUES") Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
     Sub Database_Update(str As String)
         Dim mySql As String = "UPDATE tblMaintenance"
         mySql &= String.Format(" SET OPT_VALUES = '{0}' ", str)

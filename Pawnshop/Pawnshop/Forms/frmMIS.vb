@@ -127,10 +127,10 @@ Public Class frmMIS
 
                         If isNew Then
                             .SaveClient()
+                            .LoadLastEntry()
                         Else
                             .ModifyClient()
                         End If
-                        .LoadLastEntry()
                     End With
 
 
@@ -167,8 +167,11 @@ Public Class frmMIS
                             Else
                                 GoTo wrongEntry
                             End If
-                            .Description = oSheet.Cells(ent, 18).value : colIdx += 1
-
+                            If oSheet.Cells(ent, 18).value <> "" Then
+                                .Description = oSheet.Cells(ent, 18).value : colIdx += 1
+                            Else
+                                GoTo wrongEntry
+                            End If
                             If IsDate(oSheet.Cells(ent, 19).value) Then
                                 .LoanDate = oSheet.Cells(ent, 19).value : colIdx += 1
                             Else

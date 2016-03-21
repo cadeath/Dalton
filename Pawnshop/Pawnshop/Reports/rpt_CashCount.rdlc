@@ -113,7 +113,9 @@
             <TextRuns>
               <TextRun>
                 <Value>COINS</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -122,7 +124,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.1125in</Top>
         <Left>0.1375in</Left>
-        <Height>0.25in</Height>
+        <Height>0.19792in</Height>
         <Width>1in</Width>
         <Style>
           <Border>
@@ -142,7 +144,9 @@
             <TextRuns>
               <TextRun>
                 <Value>BILLS</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -151,7 +155,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>0.1125in</Top>
         <Left>3.80277in</Left>
-        <Height>0.25in</Height>
+        <Height>0.19792in</Height>
         <Width>1in</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -185,7 +189,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.1875in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -197,7 +201,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Cnt.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -239,7 +245,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>x</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -270,7 +278,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Denomination.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -299,7 +309,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>="="</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -329,6 +341,7 @@
                             <TextRun>
                               <Value>=Fields!Total.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
@@ -375,7 +388,7 @@
         <DataSetName>dsCoin</DataSetName>
         <Top>0.58208in</Top>
         <Left>0.37792in</Left>
-        <Height>0.25in</Height>
+        <Height>0.1875in</Height>
         <Width>2.83333in</Width>
         <ZIndex>2</ZIndex>
         <Style>
@@ -405,7 +418,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.25in</Height>
+              <Height>0.1875in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -417,7 +430,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Cnt.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -459,7 +474,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>x</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -490,7 +507,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Denomination.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -519,7 +538,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>="="</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -549,6 +570,7 @@
                             <TextRun>
                               <Value>=Fields!Total.Value</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
@@ -595,7 +617,7 @@
         <DataSetName>dsBill</DataSetName>
         <Top>0.58208in</Top>
         <Left>3.90694in</Left>
-        <Height>0.25in</Height>
+        <Height>0.1875in</Height>
         <Width>2.83333in</Width>
         <ZIndex>3</ZIndex>
         <Style>

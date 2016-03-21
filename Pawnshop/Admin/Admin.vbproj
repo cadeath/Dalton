@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AAD08F59-EFBF-4FF8-949F-DEB016C32FF4}</ProjectGuid>
+    <ProjectGuid>{E6F13DEC-7F0C-4A34-AD0A-7331DF0D1C5D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <StartupObject>Admin.My.MyApplication</StartupObject>
     <RootNamespace>Admin</RootNamespace>
@@ -52,9 +52,6 @@
     <ApplicationIcon>admin[1].ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DeathCodez">
-      <HintPath>..\Pawnshop\DeathCodez.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -78,33 +75,6 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\CashInOut.vb" />
-    <Compile Include="Classes\RandomKeyGenerator.vb" />
-    <Compile Include="Forms\dev_Borrowings.Designer.vb">
-      <DependentUpon>dev_Borrowings.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\dev_Borrowings.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Modules\database.vb" />
-    <Compile Include="Forms\devVerifyESK.Designer.vb">
-      <DependentUpon>devVerifyESK.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\devVerifyESK.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmCashInOut.Designer.vb">
-      <DependentUpon>frmCashInOut.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmCashInOut.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmFileGen.Designer.vb">
-      <DependentUpon>frmFileGen.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmFileGen.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -112,8 +82,9 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\exportFile.vb" />
-    <Compile Include="Modules\mod_setup.vb" />
+    <Compile Include="Modules\database.vb" />
+    <Compile Include="Modules\updateRate.vb" />
+    <Compile Include="Modules\updateTable.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -129,21 +100,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Modules\security.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\devVerifyESK.resx">
-      <DependentUpon>devVerifyESK.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\dev_Borrowings.resx">
-      <DependentUpon>dev_Borrowings.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmCashInOut.resx">
-      <DependentUpon>frmCashInOut.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmFileGen.resx">
-      <DependentUpon>frmFileGen.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -164,16 +122,12 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="W3W1LH4CKU.FDB" />
+    <None Include="W3W1LH4CKU.FDB">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin[1].ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Pawnshop\Pawnshop.vbproj">
-      <Project>{24AC89A7-4FDE-47EF-AC83-32A2499285D9}</Project>
-      <Name>Pawnshop</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

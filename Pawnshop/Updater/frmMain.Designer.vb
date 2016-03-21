@@ -27,6 +27,7 @@ Partial Class frmMain
         Me.txtURL = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.ofdPatch_DB = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
         '
         'RichTextBox1
@@ -45,7 +46,7 @@ Partial Class frmMain
         Me.txtURL.Name = "txtURL"
         Me.txtURL.Size = New System.Drawing.Size(242, 20)
         Me.txtURL.TabIndex = 0
-        Me.txtURL.Text = "D:\CaDeAtH\Desktop\RPS\dalton Roxas.FDB"
+        Me.txtURL.Text = "Eskie Gwapo"
         '
         'Label1
         '
@@ -65,6 +66,11 @@ Partial Class frmMain
         Me.btnUpdate.TabIndex = 1
         Me.btnUpdate.Text = "UPDATE"
         Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'ofdPatch_DB
+        '
+        Me.ofdPatch_DB.FileName = "*.FDB"
+        Me.ofdPatch_DB.Filter = "Firebird Database|*.FDB"
         '
         'frmMain
         '
@@ -89,5 +95,6 @@ Partial Class frmMain
     Friend WithEvents txtURL As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
+    Friend WithEvents ofdPatch_DB As System.Windows.Forms.OpenFileDialog
 
 End Class

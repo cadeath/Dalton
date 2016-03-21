@@ -1,3 +1,70 @@
+ISSUE: 0015 03/15/2016
+[+] PAWNING MODULE won't compute interest when not KEYPRESS OR KEY_UP like Copy/Paste
+[-] LOAN REGISTER REPORT values are not suited to our requirements.
+
+
+ISSUE: 0014 03/12/2016
+[+] Early Redemption no JE on INTEREST
+[+] Report Display on LOAN REGISTER. Pawnticket and Old Pawnticket
+
+
+ISSUE: 0013 03/11/2016
+[+] Revolving Fund not changing to Roxas
+
+
+ISSUE: 0013 03/06/2016
+[+] NO COI (Insurance) Report 
+[-] Renew transaction - Di maEdit ang Pawner's Name
+[-] Font Size sa Pawnticket if i-Print Gamay
+[-] Error adding NO CLIENT at pawning
+
+
+ISSUE: 0013 03/06/2016
+[+] Cannot Save Insurance having long length Character
+	 - Class and Database Problem. Database must change type from Integer to String
+
+
+ISSUE: 0012 03/04/2016
+[+] Disable Cash Count Sheet Report when Cash Count is not yet Executed
+		- PTU
+[-]	Pawnticket and OR number should appear in the print layout
+[-]	Old Pawnticket number should appear in the print layout of PT
+[-]	Include Pawner's Name at the claim stub
+[-]	Report small font
+	 - Cash Cash Sheet [Done]
+[+]	Unable to reprint OR
+
+
+ISSUE: 0011 02/23/2016
+[+] Add Segregation Entry
+
+
+ISSUE: 0010 02/20/2016
+[+] Add GPRS Ticketing
+
+
+ISSUE: 0009 02/19/2016
+[+] Report Page Layout should be 0.5 margin
+
+
+ISSUE: 0008 02/18/2016
+[+] Migration some names are not correct
+[-] OR Printing won't print
+[+] POSAdmin account can't void!
+[+] CashCount Sheet Bottom Margin changed
+[+] REPORT OUTSTANDING LOANS - Date is not specified
+[-] REPORT OUTSTANDING LOANS - Per Category
+[+] REPORT Schedule of Loan & Renewal - Representation of the Grand Total
+[-] REPORT Cash In/Out - Range
+[-] GPRS Remittance, with Commission and Gross
+[-] REPORT Loan Register - Redemption Summary
+
+
+ISSUE: 0007 02/16/2016
+[o] ERROR IN MIGRATION, Database File not found.
+	- WIN XP for evaluation
+
+
 ISSUE: 0006 02/15/2016
 [+] PAWNING Print Button only works when DISPLAYING
 [o] GPRS to GPRS - Received Money, without Service Charge
@@ -7,8 +74,11 @@ ISSUE: 0006 02/15/2016
 	- Working but not fully functional
 [+] Add Smart Money from Perfecom, Cash In/Out
 [+] Income from EC Pay, account should be change
-[o] Cash Offsetting Lay-Away, account should be change
-	- It was correct already, _SYS00000001057
+[+] Cash Offsetting Lay-Away, account should be change
+[+] Branch to Branch, Mlang is not included.
+[+] Transactional tables in the database should have bigger primary key
+[-] JOURNAL ENTRIES should be ONE ACCOUNT CODE, summarize all debit and credit
+
 
 ISSUE: 0005 02/12/2016
 [+] Client Module load too long

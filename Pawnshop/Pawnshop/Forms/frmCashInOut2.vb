@@ -5,6 +5,7 @@
     Dim selectedType As String = "Receipt"
     Dim LineNum As Integer = 1, CIOtransactions As New CollectionCIO
     Dim isCustomInOut As Boolean = False
+    Dim transName As String
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -18,6 +19,7 @@
 
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
+        If MsgBox("Do you want to post the transaction?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then Exit Sub
 
         For Each cio As CashInOutTransaction In CIOtransactions
             cio.Save()
@@ -224,13 +226,25 @@
         Renumber()
     End Sub
 
+    Private Function getCashID(ByVal transname As String) As Integer
+        Dim mySql As String, ID As Integer = 0
+        mySql = "SELECT * FROM tblCash WHERE TRANSNAME = '" & transname & "'"
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 0 Then MsgBox("TRANSNAME not FOUND", MsgBoxStyle.Critical, "CASH") : Return ID
+
+        ID = ds.Tables(0).Rows(0).Item("CASHID")
+
+        Return ID
+    End Function
+
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If Not isValidAdd() Then Exit Sub
 
         Dim tmpCio As New CashInOutTransaction
         Dim selectHT As New Hashtable
         Dim idx As Integer = cboCat.SelectedIndex
-        Dim category As String, transName As String
+        Dim category As String
 
         If Not isCustomInOut Then
             Select Case selectedType
@@ -249,11 +263,14 @@
                 category = cboCat.Text
                 transName = cboTrans.Text
             Else
-                ' If 54 is missing, update your database
-                .CashID = 54 'Inventory IN - Smart Money
-                selectedType = "INVENTORY IN"
+                Select Case transName
+                    Case "Smart Money Payable - Perfecom"
+                        .CashID = getCashID(transName)
+                        selectedType = "INVENTORY IN"
+                    Case ""
+                End Select
+
                 category = selectedType
-                transName = "Smart Money Payable - Perfecom"
             End If
 
             .TransactionDate = CurrentDate
@@ -297,6 +314,7 @@
 
     Private Sub btnInvIn_Click(sender As System.Object, e As System.EventArgs) Handles btnInvIn.Click
         isCustomInOut = True
+        transName = "Smart Money Payable - Perfecom"
 
         gpTrans.Enabled = False
         txtAmt.Focus()

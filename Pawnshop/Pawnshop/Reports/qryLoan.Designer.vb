@@ -30,7 +30,7 @@ Partial Class qryLoan
         '
         'monCal
         '
-        Me.monCal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.monCal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.monCal.Location = New System.Drawing.Point(18, 64)
         Me.monCal.MaxSelectionCount = 1
         Me.monCal.Name = "monCal"
@@ -39,7 +39,7 @@ Partial Class qryLoan
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(18, 238)
+        Me.btnGenerate.Location = New System.Drawing.Point(19, 255)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(103, 46)
         Me.btnGenerate.TabIndex = 2
@@ -50,7 +50,7 @@ Partial Class qryLoan
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(142, 238)
+        Me.btnCancel.Location = New System.Drawing.Point(128, 255)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(103, 46)
         Me.btnCancel.TabIndex = 3
@@ -63,7 +63,7 @@ Partial Class qryLoan
         Me.lstRegister.Items.AddRange(New Object() {"Loan Register - New Loan/Renew", "Loan Register - Redemption"})
         Me.lstRegister.Location = New System.Drawing.Point(18, 12)
         Me.lstRegister.Name = "lstRegister"
-        Me.lstRegister.Size = New System.Drawing.Size(227, 43)
+        Me.lstRegister.Size = New System.Drawing.Size(213, 43)
         Me.lstRegister.TabIndex = 4
         '
         'qryLoan
@@ -71,7 +71,7 @@ Partial Class qryLoan
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(256, 291)
+        Me.ClientSize = New System.Drawing.Size(248, 318)
         Me.Controls.Add(Me.lstRegister)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnGenerate)

@@ -94,7 +94,7 @@
         Dim newInsurance As New Insurance
         With newInsurance
             .COInumber = txtCoi.Text
-            If IsNumeric(txtPT.Text) Then .TicketNum = txtPT.Text
+            .TicketNum = txtPT.Text
             .TransactionDate = dtpDate.Value
             .ValidDate = dtpExpiry.Value
             .Amount = txtAmount.Text

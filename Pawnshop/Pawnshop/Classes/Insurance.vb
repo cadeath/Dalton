@@ -26,13 +26,13 @@ Public Class Insurance
         End Set
     End Property
 
-    Private _ptNum As Integer
-    Public Property TicketNum() As Integer
+    Private _refNum As String
+    Public Property TicketNum() As String
         Get
-            Return _ptNum
+            Return _refNum
         End Get
-        Set(ByVal value As Integer)
-            _ptNum = value
+        Set(ByVal value As String)
+            _refNum = value
         End Set
     End Property
 
@@ -118,7 +118,7 @@ Public Class Insurance
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
             .Item("CoiNo") = _coiNo
-            .Item("PawnTicket") = _ptNum
+            .Item("PawnTicket") = _refNum
             .Item("ClientID") = _client.ID
             .Item("ClientName") = _fullName
             .Item("TransDate") = _transDate
@@ -144,7 +144,7 @@ Public Class Insurance
         With dr
             _id = .Item("InsuranceID")
             _coiNo = .Item("CoiNo")
-            _ptNum = .Item("PawnTicket")
+            _refNum = .Item("PawnTicket")
             Dim tmpC As New Client
             tmpC.LoadClient(.Item("ClientID"))
             _client = tmpC

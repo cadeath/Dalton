@@ -1,13 +1,25 @@
 ﻿Module JournalEntries
 
+    ''' <summary>
+    ''' This Procedure add Journal Entries
+    ''' </summary>
+    ''' <param name="Amt">Amount</param>
+    ''' <param name="DebitCredit">Debit/Credit</param>
+    ''' <param name="AccountName">TransName</param>
+    ''' <param name="Remarks">Remarks</param>
+    ''' <param name="cashCountName">Display on CashCount</param>
+    ''' <param name="ToDisplay">ToDisplay on CashCount</param>
+    ''' <param name="Category">Category</param>
+    ''' <remarks>This Procedure add Journal Entries</remarks>
     Friend Sub AddJournal(ByVal Amt As Double, ByVal DebitCredit As String, ByVal AccountName As String, _
                           Optional ByVal Remarks As String = "", Optional ByVal cashCountName As String = "", _
-                          Optional ToDisplay As Boolean = True)
+                          Optional ToDisplay As Boolean = True, Optional Category As String = "")
         If Amt = 0 Then Exit Sub
-        Dim category As String = "", transactionName As String = "", SAPCode As String = "", onHold As Boolean = False
+        Dim transactionName As String = "", SAPCode As String = "", onHold As Boolean = False
         Dim AccntID As Integer = 0
         Dim mySql As String = "SELECT * FROM tblCash WHERE "
         mySql &= String.Format("TRANSNAME = '{0}'", DreadKnight(AccountName))
+        If Category <> "" Then mySql &= String.Format(" AND CATEGORY = '{0}'", Category)
         Dim ds As DataSet = LoadSQL(mySql), isRevolvingFund As Boolean = False
 
         If ds.Tables(0).Rows.Count > 1 Then Console.WriteLine("Multiple Account Code : " & AccountName)

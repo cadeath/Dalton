@@ -1,6 +1,15 @@
 ﻿Module _101sql
 
+    Private _ALLOWABLE_VERSION As String = "a1.0.8"
+    Private _LASTEST_VERSION As String = "1.0.1"
+
     Sub Main()
+
+        database.dbName = frmMain.txtURL.Text
+        If Not isAllowed(_ALLOWABLE_VERSION) Then
+            MsgBox("")
+        End If
+
         Change_LoanRegister_View()
         Developers_Note("Loan_Register updated.")
 

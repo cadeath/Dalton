@@ -9,6 +9,7 @@
         BranchBorrowings = 5
         OutStanding = 7
         ItemPullOut = 8
+        MoneyTransfer = 9
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -30,6 +31,8 @@
                 Outstanding_Loans()
             Case ReportType.ItemPullOut
                 Item_PullOut()
+            Case ReportType.MoneyTransfer
+                MoneyTransfer()
         End Select
     End Sub
 
@@ -48,10 +51,28 @@
                     FormType = ReportType.DollarBuying
                 Case "Branch Borrowings"
                     FormType = ReportType.BranchBorrowings
+                Case "Money Transfer"
+                    FormType = ReportType.MoneyTransfer
             End Select
         End If
 
         Generate()
+    End Sub
+
+    Private Sub MoneyTransfer()
+        Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
+        Dim enDate As Date = GetLastDate(monCal.SelectionRange.End)
+        Dim fillData As String = "dsMT", mySql As String
+
+        mySql = "SELECT * FROM MONEY_TRANSFER "
+        mySql &= String.Format("WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Monthly_MT.rdlc", rptPara)
+        frmReport.Show()
     End Sub
 
     Private Sub InsuranceReport()
@@ -122,9 +143,10 @@
         Dim dsName As String = "dsOutstanding", mySql As String = _
             "SELECT * FROM PAWNING WHERE (Status = 'NEW' OR Status = 'RENEW' OR Status = 'SEGRE')"
         mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= " ORDER BY PAWNTICKET ASC"
 
         Dim addParameters As New Dictionary(Of String, String)
-        addParameters.Add("txtMonthOf", "AS OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
+        addParameters.Add("txtMonthOf", "DATE: " & monCal.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
         addParameters.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
@@ -234,6 +256,8 @@
             Case ReportType.OutStanding
                 Return True
             Case ReportType.ItemPullOut
+                Return True
+            Case ReportType.Insurance
                 Return True
         End Select
 

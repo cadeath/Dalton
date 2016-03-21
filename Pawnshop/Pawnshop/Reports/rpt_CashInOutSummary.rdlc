@@ -242,7 +242,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!TransName.Value</Value>
+                              <Value>=Fields!TransName.Value &amp; " - " &amp; Fields!Remarks.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>

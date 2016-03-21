@@ -47,6 +47,7 @@ Public Class frmBackup
 
     Private Sub LoadFiles()
         lstFileList.Items.Clear()
+        If txtPath1.Text = "" Then Exit Sub
 
         Dim di As New IO.DirectoryInfo(txtPath1.Text)
         Dim diar1 As IO.FileInfo() = di.GetFiles()

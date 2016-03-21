@@ -9,8 +9,12 @@
 
     ' NOTE - ADDING SERVICE
     ' STEP 3 - Add array count
-    Private daltonService(14) As MoneyTransferService
+    Private daltonService(16) As MoneyTransferService
 
+    ''' <summary>
+    ''' Initializing Money Transfer Services
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub Main()
         ' NOTE - ADDING SERVICE
         ' STEP 1 - Create an Object
@@ -23,68 +27,68 @@
             .KeyReceived = "MRNumLast"
             .ChargeCode = "perapadala"
         End With
+
         ' NOTE - ADDING SERVICE
         ' STEP 2 - Add it at daltonService
         daltonService(0) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0002"
-            .ServiceName = "Western Union"
-            .isGenerated = False
-            .AccountName = "Due to / From Western Union"
-            .ChargeCode = "western"
+            .Code = "0017"
+            .ServiceName = "Pera Padala - PMFTC"
+            .isGenerated = True
+            .ChargeCode = "perapadalapmftc"
+            .KeySend = "MEnumLast"
+            .KeyReceived = "MRNumLast"
         End With
         daltonService(1) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0003"
-            .ServiceName = "Cebuana Llhuiller"
+            .Code = "0002"
+            .ServiceName = "Western Union - Local"
             .isGenerated = False
-            .AccountName = "Due to/from Cebuana Llhuiller"
-            .ChargeCode = "cebuana"
+            .AccountName = "Due to / From Western Union"
+            .ChargeCode = "western"
         End With
         daltonService(2) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0004"
-            .ServiceName = "GPRS - GPRS to GPRS"
+            .Code = "0003"
+            .ServiceName = "Western Union - Intl"
             .isGenerated = False
-            .ChargeCode = "gprs to gprs"
-            .hasPayoutCommission = True
+            .AccountName = "Due to / From Western Union"
+            .ChargeCode = "western - intl"
         End With
         daltonService(3) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0005"
-            .ServiceName = "GPRS - GPRS to Smart Money"
+            .Code = "0004"
+            .ServiceName = "Cebuana Llhuiller"
             .isGenerated = False
-            .ChargeCode = "gprs to smartmoney"
-            .hasPayoutCommission = True
-            .SendOnly = True
+            .AccountName = "Due to/from Cebuana Llhuiller"
+            .ChargeCode = "cebuana"
         End With
         daltonService(4) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0006"
-            .ServiceName = "GPRS - Smartmoney To GPRS"
+            .Code = "0005"
+            .ServiceName = "GPRS - GPRS to GPRS"
             .isGenerated = False
-            .ChargeCode = "smartmoney to gprs"
+            .ChargeCode = "gprs to gprs"
             .hasPayoutCommission = True
-            .ReceiveOnly = True
         End With
         daltonService(5) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0007"
-            .ServiceName = "GPRS - GPRS to BANK (UCPB/PNB)"
+            .Code = "0006"
+            .ServiceName = "GPRS - GPRS to Smart Money"
             .isGenerated = False
-            .ChargeCode = "gprs to bank-ucpbpnb"
+            .ChargeCode = "gprs to smartmoney"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
@@ -92,21 +96,21 @@
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0008"
-            .ServiceName = "GPRS - GPRS to BANK (BDO/Chinabank)"
+            .Code = "0007"
+            .ServiceName = "GPRS - Smartmoney To GPRS"
             .isGenerated = False
-            .ChargeCode = "gprs to bank-bdochina"
+            .ChargeCode = "smartmoney to gprs"
             .hasPayoutCommission = True
-            .SendOnly = True
+            .ReceiveOnly = True
         End With
         daltonService(7) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0009"
-            .ServiceName = "GPRS - GPRS to BANK (DBP)"
+            .Code = "0008"
+            .ServiceName = "GPRS - GPRS to BANK (UCPB/PNB)"
             .isGenerated = False
-            .ChargeCode = "gprs to dbp"
+            .ChargeCode = "gprs to bank-ucpbpnb"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
@@ -114,10 +118,10 @@
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0010"
-            .ServiceName = "GPRS - GPRS to BANK (MetroBank)"
+            .Code = "0009"
+            .ServiceName = "GPRS - GPRS to BANK (BDO/Chinabank)"
             .isGenerated = False
-            .ChargeCode = "gprs to metrobank"
+            .ChargeCode = "gprs to bank-bdochina"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
@@ -125,10 +129,10 @@
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0011"
-            .ServiceName = "GPRS - GPRS to BANK (Maybank/LandBank)"
+            .Code = "0010"
+            .ServiceName = "GPRS - GPRS to BANK (DBP)"
             .isGenerated = False
-            .ChargeCode = "gprs to maylandbank"
+            .ChargeCode = "gprs to dbp"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
@@ -136,51 +140,77 @@
 
         tmp = New MoneyTransferService
         With tmp
+            .Code = "0011"
+            .ServiceName = "GPRS - GPRS to BANK (MetroBank)"
+            .isGenerated = False
+            .ChargeCode = "gprs to metrobank"
+            .hasPayoutCommission = True
+            .SendOnly = True
+        End With
+        daltonService(11) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
             .Code = "0012"
+            .ServiceName = "GPRS - GPRS to BANK (Maybank/LandBank)"
+            .isGenerated = False
+            .ChargeCode = "gprs to maylandbank"
+            .hasPayoutCommission = True
+            .SendOnly = True
+        End With
+        daltonService(12) = tmp
+
+        tmp = New MoneyTransferService
+        With tmp
+            .Code = "0013"
             .ServiceName = "GPRS - iREMIT to GPRS"
             .isGenerated = False
             .ChargeCode = "iremit to gprs"
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
-        daltonService(11) = tmp
+        daltonService(13) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0013"
+            .Code = "0014"
             .ServiceName = "GPRS - NYBP/Transfast to GPRS"
             .isGenerated = False
             .ChargeCode = "nybptransfast to gprs"
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
-        daltonService(12) = tmp
+        daltonService(14) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0014"
+            .Code = "0015"
             .ServiceName = "GPRS - GPRS to Moneygram"
             .isGenerated = False
             .ChargeCode = "gprs to moneygram"
             .hasPayoutCommission = True
             .SendOnly = True
         End With
-        daltonService(13) = tmp
+        daltonService(15) = tmp
 
         tmp = New MoneyTransferService
         With tmp
-            .Code = "0015"
+            .Code = "0016"
             .ServiceName = "GPRS - Moneygram to GPRS"
             .isGenerated = False
             .ChargeCode = "moneygram to gprs"
             .hasPayoutCommission = True
             .ReceiveOnly = True
         End With
-        daltonService(14) = tmp
+        daltonService(16) = tmp
 
         'Pera Padala
         idME = daltonService(0).GetSendLast
         idMR = daltonService(0).GetReceivedLast
+
+        'Pera Padala - PMFTC
+        idME = daltonService(1).GetSendLast
+        idMR = daltonService(1).GetReceivedLast
     End Sub
 
     Private Sub SendReceiveStatusCheck()
@@ -252,7 +282,6 @@
 
         Me.Text &= "| Date: " & mt.TransactionDate
 
-
         cboType.Enabled = False
         btnSearchSender.Enabled = False
         btnSearchReceiver.Enabled = False
@@ -266,7 +295,6 @@
         LockFields(True)
         LoadServices()
         lblWhere.Text = "Send To"
-        'MsgBox("This module is under construction", MsgBoxStyle.Information)
         rbSend.Focus()
 
         Console.WriteLine("Form LOADED successfully")
@@ -393,7 +421,16 @@
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
                     End If
-                Case "Western Union"
+                Case "Pera Padala - PMFTC"
+                    If rbSend.Checked Then
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN")
+                        AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
+                        AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
+                    Else
+                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
+                    End If
+                Case "Western Union - Local", "Western Union - Intl"
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN IN")
                         AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber)
@@ -422,7 +459,7 @@
                     End If
                 Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
                     "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
-                    "GPRS - iREMIT", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
+                    "GPRS - iREMIT to GPRS", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
 
                     Select Case cboType.Text
                         Case "GPRS - GPRS to Smart Money"
@@ -437,13 +474,13 @@
                             CashCount_Name = "GPRS-MetroBank"
                         Case "GPRS - GPRS to BANK (Maybank/LandBank)"
                             CashCount_Name = "GPRS-(Maybank/LandBank)"
-                        Case "GPRS - iREMIT"
+                        Case "GPRS - iREMIT to GPRS"
                             CashCount_Name = "iREMIT"
                         Case "GPRS - NYBP/Transfast to GPRS"
                             CashCount_Name = "NYBP/Transfast"
                         Case "GPRS - GPRS to Moneygram"
                             CashCount_Name = "GPRS-Moneygram"
-                        
+
                     End Select
 
                     If rbSend.Checked Then
@@ -557,6 +594,7 @@
             mySql &= " AND Remarks LIKE '"
             mySql &= IIf(rbSend.Checked, "Send In%'", "Pay Out%'")
         End If
+        mySql &= " ORDER BY AMOUNT ASC"
         ds = LoadSQL(mySql)
 
         Console.WriteLine(mySql)
@@ -586,6 +624,7 @@
                     End Select
 
                     'Commission
+                    If remarks.Split("|").Count <= 2 Then Exit For
                     Select Case remarks.Split("|")(2)
                         Case "SLC" 'ServiceCharge Less Charge
                             commission = ServChrge - commission

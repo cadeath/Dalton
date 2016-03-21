@@ -1,4 +1,6 @@
 ﻿' Changelog
+' v1.4 2/17/16
+'  - Log Module
 ' v1.3 11/19/15
 '  - CommandPrompt Added
 ' v1.2 11/6/15
@@ -10,7 +12,8 @@
 Module mod_system
 
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = 0
+    Public DEV_MODE As Boolean = False
+    Public ADS_ESKIE As Boolean = True
 
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
@@ -25,12 +28,11 @@ Module mod_system
 
     Friend advanceInterestDays As Integer = 30
     Friend MaintainBal As Double = GetOption("MaintainingBalance")
-    Friend InitialBal As Double = 0
+    Friend InitialBal As Double = GetOption("CurrentBalance")
     Friend RepDep As Double = 0
     Friend DollarRate As Double = 48
     Friend RequirementLevel As Integer = 1
     Friend dailyID As Integer = 1
-
 #End Region
 
 #Region "Store"
@@ -93,6 +95,7 @@ Module mod_system
         If ds.Tables(0).Rows.Count = 1 Then
             CurrentDate = ds.Tables(0).Rows(0).Item("CurrentDate")
             dailyID = ds.Tables(0).Rows(0).Item("ID")
+            'InitialBal = ds.Tables(0).Rows(0).Item("INITIALBAL")
             frmMain.dateSet = True
         Else
             frmMain.dateSet = False
@@ -112,6 +115,10 @@ Module mod_system
             tmpPawnItem.LoadTicketInRow(dr)
             tmpPawnItem.Status = "S"
             tmpPawnItem.SaveTicket(False)
+
+            AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
+            AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
+
             Console.WriteLine("PT: " & tmpPawnItem.PawnTicket)
         Next
 
@@ -253,10 +260,15 @@ Module mod_system
     ''' </summary>
     ''' <param name="e">Keypress Event</param>
     ''' <remarks>Use the Keypress Event when calling this function</remarks>
-    Friend Function DigitOnly(ByVal e As System.Windows.Forms.KeyPressEventArgs)
+    Friend Function DigitOnly(ByVal e As System.Windows.Forms.KeyPressEventArgs, Optional isWhole As Boolean = False)
         Console.WriteLine("char: " & e.KeyChar & " -" & Char.IsDigit(e.KeyChar))
         If e.KeyChar <> ControlChars.Back Then
-            e.Handled = Not (Char.IsDigit(e.KeyChar) Or e.KeyChar = ".")
+            If isWhole Then
+                e.Handled = Not (Char.IsDigit(e.KeyChar))
+            Else
+                e.Handled = Not (Char.IsDigit(e.KeyChar) Or e.KeyChar = ".")
+            End If
+
         End If
 
         Return Not (Char.IsDigit(e.KeyChar))
@@ -326,4 +338,26 @@ Module mod_system
 
         Return lastOfMonth
     End Function
+
+#Region "Log Module"
+    Const LOG_FILE As String = "-log.txt"
+    Private Sub CreateLog()
+        Dim fsEsk As New System.IO.FileStream(Now.ToString("MMddyyyy") & LOG_FILE, IO.FileMode.CreateNew)
+        fsEsk.Close()
+    End Sub
+
+    Friend Sub Log_Report(ByVal str As String)
+        If Not System.IO.File.Exists(Now.ToString("MMddyyyy") & LOG_FILE) Then CreateLog()
+
+        Dim recorded_log As String = _
+            String.Format("[{0}] " & str, Now.ToString("MM/dd/yyyy HH:mm:ss"))
+
+        Dim fs As New System.IO.FileStream(Now.ToString("MMddyyyy") & LOG_FILE, IO.FileMode.Append, IO.FileAccess.Write)
+        Dim fw As New System.IO.StreamWriter(fs)
+        fw.WriteLine(recorded_log)
+        fw.Close()
+        fs.Close()
+        Console.WriteLine("Recored")
+    End Sub
+#End Region
 End Module

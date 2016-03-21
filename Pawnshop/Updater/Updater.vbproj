@@ -78,11 +78,19 @@
     <Compile Include="101\101sql.vb" />
     <Compile Include="110\110sql.vb" />
     <Compile Include="database.vb" />
+    <Compile Include="Database\db_104to105.vb" />
+    <Compile Include="Database\db_106to107.vb" />
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSrvUpdate.Designer.vb">
+      <DependentUpon>frmSrvUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSrvUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="mod_system.vb" />
@@ -101,10 +109,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Service.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSrvUpdate.resx">
+      <DependentUpon>frmSrvUpdate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

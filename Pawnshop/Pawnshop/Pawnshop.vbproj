@@ -147,6 +147,8 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoPatch\autopatch.vb" />
+    <Compile Include="AutoPatch\db108.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -188,10 +190,22 @@
     <Compile Include="Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\dev_print.Designer.vb">
+      <DependentUpon>dev_print.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_print.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_report.Designer.vb">
       <DependentUpon>dev_report.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ab.Designer.vb">
+      <DependentUpon>ab.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ab.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\diagAuthorization.Designer.vb">
@@ -204,6 +218,12 @@
       <DependentUpon>frmBackup.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCashCountV2.Designer.vb">
+      <DependentUpon>frmCashCountV2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCashCountV2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmCashInOut2.Designer.vb">
@@ -339,6 +359,12 @@
     <Compile Include="Forms\frmPawnItem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmPrintManager.Designer.vb">
+      <DependentUpon>frmPrintManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPrintManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmPullOut.Designer.vb">
       <DependentUpon>frmPullOut.vb</DependentUpon>
     </Compile>
@@ -349,6 +375,12 @@
       <DependentUpon>frmRate.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRate2.Designer.vb">
+      <DependentUpon>frmRate2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRate2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmSettings.Designer.vb">
@@ -372,6 +404,8 @@
     <Compile Include="Modules\newSetup.vb" />
     <Compile Include="Modules\pawning.vb" />
     <Compile Include="Modules\security.vb" />
+    <Compile Include="Modules\updateRate.vb" />
+    <Compile Include="Modules\web_ads.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -451,6 +485,12 @@
     <Compile Include="Reports\qryMoneyTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\qryPullOut_List.Designer.vb">
+      <DependentUpon>qryPullOut_List.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryPullOut_List.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qrySequence.Designer.vb">
       <DependentUpon>qrySequence.vb</DependentUpon>
     </Compile>
@@ -469,12 +509,35 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_print.resx">
+      <DependentUpon>dev_print.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCashCountV2.resx">
+      <DependentUpon>frmCashCountV2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPrintManager.resx">
+      <DependentUpon>frmPrintManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRate2.resx">
+      <DependentUpon>frmRate2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\d_insurance.rdlc" />
+    <EmbeddedResource Include="Reports\d_Loan.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ab.resx">
+      <DependentUpon>ab.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagAuthorization.resx">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
@@ -513,6 +576,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClient.resx">
       <DependentUpon>frmClient.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClientInformation.resx">
       <DependentUpon>frmClientInformation.vb</DependentUpon>
@@ -531,6 +595,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMIS.resx">
       <DependentUpon>frmMIS.vb</DependentUpon>
@@ -573,6 +638,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\frmPOS.resx">
       <DependentUpon>frmPOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\d_Remittance.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryPullOut_List.resx">
+      <DependentUpon>qryPullOut_List.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Monthly_MT.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_RegisterRedeem.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -661,8 +735,14 @@
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\_layout03.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="backup.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="doc\ExpiryFormat.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -671,7 +751,6 @@
     </None>
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
-    <None Include="sample.FDB" />
     <None Include="Template\Import Template.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -736,6 +815,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ads.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Antialiasfactory-Jewelry-Stone-Ring.ico" />
     <Content Include="changelog.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

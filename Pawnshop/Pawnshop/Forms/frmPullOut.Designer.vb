@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmPullOut
+Partial Class qryPullOut
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -233,7 +233,7 @@ Partial Class frmPullOut
         Me.btnBrowse.UseVisualStyleBackColor = True
         Me.btnBrowse.Visible = False
         '
-        'frmPullOut
+        'qryPullOut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -254,7 +254,7 @@ Partial Class frmPullOut
         Me.Controls.Add(Me.lvSeg)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
-        Me.Name = "frmPullOut"
+        Me.Name = "qryPullOut"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pull Out"
         Me.ResumeLayout(False)

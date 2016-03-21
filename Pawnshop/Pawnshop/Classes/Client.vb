@@ -334,6 +334,35 @@ Public Class Client
         Console.WriteLine("[LoadClient] Client ID " & id & " is loaded.")
     End Sub
 
+    Private Sub loadClientinfoByDataReader(reader As OdbcDataReader)
+        With reader
+            _id = .Item("ClientID")
+            _firstName = IIf(IsDBNull(.Item("FirstName")), "", .Item("FirstName"))
+            _middleName = IIf(IsDBNull(.Item("MiddleName")), "", .Item("MiddleName"))
+            _lastName = IIf(IsDBNull(.Item("LastName")), "", .Item("LastName"))
+            _suffixName = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
+
+            _addrSt = .Item("Addr_Street")
+            _addrBrgy = .Item("Addr_Brgy")
+            _addrCity = .Item("Addr_City")
+            _addrProvince = .Item("Addr_Province")
+            _addrZip = .Item("Addr_Zip")
+
+            _gender = IIf(.Item("Sex") = "M", 1, 0)
+            _bday = .Item("Birthday")
+
+            _cp1 = .Item("Phone1").ToString
+            _cp2 = .Item("Phone2").ToString
+            _phone = .Item("Phone3").ToString
+            _otherNum = .Item("Phone_Others").ToString
+
+            'ID
+            _idType = IIf(IsDBNull(.Item("IDType")), "", .Item("IDType"))
+            _idNum = IIf(IsDBNull(.Item("RefNum")), "", .Item("RefNum"))
+            _remarks = IIf(IsDBNull(.Item("Remarks")), "", .Item("Remarks"))
+        End With
+    End Sub
+
     Private Sub loadClientInfoByRow(ByVal dr As DataRow)
         With dr
             _id = .Item("ClientID")

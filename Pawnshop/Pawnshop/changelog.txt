@@ -1,4 +1,33 @@
 CHANGELOG
+Version 1.1.1.0b
+ - BUG on PAWNING not AUTOCOMPUTE
+ - Monthly Report for Money Transfer Done
+ - Add another services in Pera Padala
+
+Version 1.1.1.0
+ - Add Insurance Report
+ - Cash Count Sheet disable when store is open
+ - Insurance Ref# length increase
+ - RF SAP Code Update
+
+Version 1.1.0.5
+ - Revise Segregation List Report
+ - Item Pullout per Category Report
+ - Add change rate module
+ - Include BATCH FILE for backup
+ - Fix ITEM PULLOUT
+ - include BACKUP.BAT
+
+Version 1.1.0.4
+ - Add Entries for Segregation
+
+Version 1.1.0.3
+ - Item Pullout problem
+ - Migration double name can causes wrong name
+ - No Description will not be imported
+ - POSAdmin can void
+ - Fix Reports
+
 Version 1.1.0.1
  - Fixing Pawning Print Button
  - Add Smart Money from Perfecom, Cash In/Out

@@ -17,6 +17,7 @@ Public Class frmMain
         UserManagementToolStripMenuItem.Enabled = Not st
         UpdateToolStripMenuItem.Enabled = Not st
         SettingsToolStripMenuItem.Enabled = Not st
+        RateToolStripMenuItem.Enabled = Not st
         If Not st Then
             LogOutToolStripMenuItem.Text = "&Log Out"
         Else
@@ -28,6 +29,7 @@ Public Class frmMain
         JournalEntriesToolStripMenuItem.Enabled = Not st
         CashCountToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem.Enabled = Not st
+        ORManagerToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         ConsoleToolStripMenuItem.Enabled = Not st
@@ -39,7 +41,16 @@ Public Class frmMain
         End If
 
         'Reports
-
+        ToolStripMenuItem2.Enabled = Not st 'Monthly Report
+        SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
+        CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
+        OutstandingToolStripMenuItem.Enabled = Not st
+        LoanRegisterToolStripMenuItem.Enabled = Not st
+        MoneyTransferToolStripMenuItem.Enabled = Not st
+        InsuranceToolStripMenuItem.Enabled = Not st
+        SegregatedListToolStripMenuItem.Enabled = Not st
+        ItemPulloutToolStripMenuItem1.Enabled = Not st
+        DailyCashCountToolStripMenuItem.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()
@@ -47,7 +58,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString
+        Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, "<<DEVELOPER MODE>>", "")
         ConfiguringDB()
         If Not DBCompatibilityCheck() Then MsgBox("Please update the database version", MsgBoxStyle.Critical) : End
 
@@ -70,6 +81,9 @@ Public Class frmMain
             frmSettings.Focus()
             frmSettings.TopMost = True
         End If
+
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
     End Sub
 
     Friend Sub CheckStoreStatus()
@@ -297,14 +311,8 @@ Public Class frmMain
             MsgBoxAuthoriation("You cannot Close a Store.")
             Exit Sub
         End If
-        frmCashCount.Show()
-        frmCashCount.isClosing = True
-    End Sub
-
-    Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
-        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
-
-        frmPullOut.Show()
+        frmCashCountV2.Show()
+        frmCashCountV2.isClosing = True
     End Sub
 
     Private Sub LoanRegisterToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoanRegisterToolStripMenuItem.Click
@@ -316,6 +324,12 @@ Public Class frmMain
     End Sub
 
     Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
+        If Not mod_system.DEV_MODE Then
+            If dateSet Then
+                MsgBoxAuthoriation("You must CLOSE the store before viewing the Cash Count Sheet")
+                Exit Sub
+            End If
+        End If
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.Show()
     End Sub
@@ -356,8 +370,32 @@ Public Class frmMain
         qryDate.Show()
     End Sub
 
-    Private Sub ItemPulloutToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
-        qryDate.FormType = qryDate.ReportType.ItemPullOut
+    Private Sub RateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RateToolStripMenuItem.Click
+        If Not POSuser.canUpdateRates Then
+            MsgBoxAuthoriation("You cannot update rates.")
+            Exit Sub
+        End If
+
+        frmRate2.Show()
+    End Sub
+
+    Private Sub InsuranceToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles InsuranceToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.Insurance
         qryDate.Show()
     End Sub
+
+    Private Sub AboutUsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
+        ab.Show()
+    End Sub
+
+    Private Sub ORManagerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ORManagerToolStripMenuItem.Click
+        frmPrintManager.Show()
+    End Sub
+
+    Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
+        qryPullOut.Show()
+    End Sub
+
 End Class
