@@ -33,7 +33,7 @@
         Console.WriteLine(mySql)
 
         Dim addParameters As New Dictionary(Of String, String)
-        addParameters.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMM yyyy").ToUpper)
+        addParameters.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToShortDateString)
         addParameters.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", addParameters)
