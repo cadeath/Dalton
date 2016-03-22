@@ -10,6 +10,7 @@ Public Class frmMain
          "SRV_CHARGE", "VAT_AMOUNT", "DOC_STAMP", "NET_AMOUNT", "USERNAME", "STATUS", "NEW_NO", "OLD_NO", "RCT_NO", _
          "CLOSE_DATE", "TRANSFER_DATE", "DATE_CREATED", "CANCEL_BY", "DATE_CANCEL", "ISBEGBAL", "PHONE_NO", _
          "BIRTH_DATE", "SEX", "KARAT", "KARAT1", "GRAMS1", "APPRAISAL1", "APPRAISEDBY1", "DATE_REAPPRAISAL1", "ITEMDESC"}
+    Dim total_extracted As Integer = 0
 
 
     Private Sub AddProgress()
@@ -25,8 +26,15 @@ Public Class frmMain
         Me.Enabled = False
 
         database.dbName = txtUrl.Text
+        Load_Remantic()
+
+        Me.Enabled = True
+        pbLoading.Visible = False
+        Status(total_extracted & " EXTRACTED.")
+    End Sub
+
+    Private Sub Load_Remantic()
         Dim ds As DataSet, mySql As String
-        Dim total_extracted As Integer = 0
 
         mySql = "SELECT * FROM " & LOANTABLE
         mySql &= " WHERE STATUS = 'A'"
@@ -112,10 +120,15 @@ Public Class frmMain
         oXL.Quit()
         oXL = Nothing
         DeveloperConsole("Excel Saved and Closed")
+    End Sub
 
-        Me.Enabled = True
-        pbLoading.Visible = False
-        Status(total_extracted & " EXTRACTED.")
+    Private Sub Load_Dalton()
+        Dim ds As DataSet, mySql As String
+
+        mySql = "SELECT * FROM PAWNING WHERE STATUS = 'NEW' OR STATUS = 'RENEW' OR STATUS = 'SEGRE'"
+        ds = LoadSQL(mySql)
+
+        DeveloperConsole("Entries >> " & ds.Tables(0).Rows.Count)
     End Sub
 
     Private Sub DeveloperConsole(str As String)
