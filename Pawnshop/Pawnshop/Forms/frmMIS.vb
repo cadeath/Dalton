@@ -163,9 +163,9 @@ Public Class frmMIS
                                 GoTo wrongEntry
                             End If
                             If IsNumeric(oSheet.Cells(ent, 17).value) Then
-                                .Karat = oSheet.Cells(ent, 17).value : colIdx += 1
+                                .Karat = 0
                             Else
-                                GoTo wrongEntry
+                                .Karat = oSheet.Cells(ent, 17).value : colIdx += 1
                             End If
                             If oSheet.Cells(ent, 18).value <> "" Then
                                 .Description = oSheet.Cells(ent, 18).value : colIdx += 1
@@ -202,6 +202,11 @@ Public Class frmMIS
                             If oldPT = "null" Then oldPT = ""
                             If IsNumeric(oldPT) Then .OldTicket = oldPT
                             .Status = "L"
+
+                            Dim AdvInt_Str As String = oSheet.Cells(ent, 29).value
+                            If IsNumeric(AdvInt_Str) Then
+                                .AdvanceInterest = oSheet.Cells(ent, 29).value : colIdx += 1
+                            End If
 
                             .SaveTicket()
                         End With

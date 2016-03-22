@@ -8,13 +8,15 @@
 "ROXAS - FROILYN" & vbCrLf & _
 "JCAT - JEN" & vbCrLf & _
 "PENDATUM - CAROL" & vbCrLf & _
+"RELIEVER - ESTHER SINDOL" & vbCrLf & _
 "***PRK MALAKAS - JOSE COLASTRE***" & vbCrLf
         CREDITS &= "===============" & vbCrLf & _
             "MIS:" & vbCrLf & _
             "JAYR, MAY2, FRANCES" & vbCrLf & _
             "==================" & vbCrLf & _
             "SPECIAL THANKS TO" & vbCrLf & _
-            "SIR DENNIS LARIBA, CPA"
+            "SIR DENNIS LARIBA, CPA" & vbCrLf & _
+            "ALL RIGHTS RESERVED 2016"
     End Sub
 
 
