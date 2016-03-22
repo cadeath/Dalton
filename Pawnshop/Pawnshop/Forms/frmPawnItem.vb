@@ -29,6 +29,7 @@ Public Class frmPawnItem
 
     Private isEarlyRedeem As Boolean = False
     Private earlyDays As Integer = 0
+    Private unableToSave As Boolean = False
 
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -547,10 +548,21 @@ Public Class frmPawnItem
             Return False
         End If
 
+        If unableToSave Then Return False
+
         Return True
     End Function
 
     Private Sub GeneratePT()
+
+        'Check PT if existing
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM tblPAWN "
+        mySql &= "WHERE PAWNTICKET = '" & currentPawnTicket & "'"
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 1 Then _
+            MsgBox("PT# " & currentPawnTicket.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : unableToSave = True : Exit Sub
+
         txtTicket.Text = CurrentPTNumber()
         txtLoan.Text = CurrentDate.ToShortDateString
         txtMatu.Text = CurrentDate.AddDays(29).ToShortDateString
@@ -609,7 +621,16 @@ Public Class frmPawnItem
     End Function
 
     Private Sub GenerateReceipt()
-        txtReceipt.Text = currentORNumber
+        'Check PT if existing
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM tblPAWN "
+        mySql &= "WHERE ORNUM = '" & currentORNumber & "'"
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 1 Then _
+            MsgBox("OR# " & currentORNumber.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : unableToSave = True : Exit Sub
+
+
+        txtReceipt.Text = CurrentOR()
         txtReceiptDate.Text = CurrentDate.ToShortDateString
     End Sub
 

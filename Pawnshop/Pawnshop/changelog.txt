@@ -1,8 +1,10 @@
 CHANGELOG
 Version 1.1.1.0b
  - BUG on PAWNING not AUTOCOMPUTE
- - Monthly Report for Money Transfer Done
+ - Monthly Report for Money Transfer
  - Add another services in Pera Padala
+ - Add CashInOut Button for BDO ATM CashOut
+ - No Redundant PT/OR
 
 Version 1.1.1.0
  - Add Insurance Report

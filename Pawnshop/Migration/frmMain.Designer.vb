@@ -29,6 +29,7 @@ Partial Class frmMain
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.pullDate = New System.Windows.Forms.MonthCalendar()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.ofdFirebird = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
         '
         'Label1
@@ -90,6 +91,12 @@ Partial Class frmMain
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Last Pullout Date"
         '
+        'ofdFirebird
+        '
+        Me.ofdFirebird.FileName = "Database"
+        Me.ofdFirebird.Filter = "Firebird|*.FDB"
+        Me.ofdFirebird.Title = "Migrate"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -118,5 +125,6 @@ Partial Class frmMain
     Friend WithEvents lblStatus As System.Windows.Forms.Label
     Friend WithEvents pullDate As System.Windows.Forms.MonthCalendar
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents ofdFirebird As System.Windows.Forms.OpenFileDialog
 
 End Class
