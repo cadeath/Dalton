@@ -163,7 +163,7 @@ Public Class frmMIS
                                 GoTo wrongEntry
                             End If
                             If IsNumeric(oSheet.Cells(ent, 17).value) Then
-                                .Karat = 0
+                                .Karat = 0 : colIdx += 1
                             Else
                                 .Karat = oSheet.Cells(ent, 17).value : colIdx += 1
                             End If

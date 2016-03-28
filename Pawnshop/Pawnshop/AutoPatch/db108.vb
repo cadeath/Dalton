@@ -48,32 +48,40 @@
         Log_Report("SYSTEM PATCHED UP FROM 1.0.7 TO 1.0.8")
     End Sub
 
+    Private Sub Add_Option(ByVal key As String, ByVal val As String)
+        ' Adding BDOCommissionRate
+        ' ----------------------------------------------------------
+        Dim mySql As String, ds As DataSet
+        Dim fillData As String = "tblMAINTENANCE"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " WHERE OPT_KEYS = '" & key & "'"
+        ds = LoadSQL(mySql, fillData)
+
+        If ds.Tables(fillData).Rows.Count > 0 Then Exit Sub
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+
+        With dsNewRow
+            .Item("OPT_KEYS") = key
+            .Item("OPT_VALUES") = val
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds)
+    End Sub
+
     Private Sub BDO_ATM_CashOut()
         Try
+            Dim mySql As String, ds As DataSet
+            Dim fillData As String, dsNewRow As DataRow
+
             ' Adding BDOCommissionRate
             ' ----------------------------------------------------------
-            Dim mySql As String, ds As DataSet
-            Dim fillData As String = "tblMAINTENANCE"
-            mySql = "SELECT * FROM " & fillData
-            mySql &= " WHERE OPT_KEYS = 'BDOCommissionRate'"
-            ds = LoadSQL(mySql, fillData)
+            Add_Option("BDOCommissionRate", 18)
 
-            If ds.Tables(fillData).Rows.Count > 0 Then GoTo NextPhase_AddEntry
-
-            Dim dsNewRow As DataRow
-            dsNewRow = ds.Tables(fillData).NewRow
-
-            With dsNewRow
-                .Item("OPT_KEYS") = "BDOCommissionRate"
-                .Item("OPT_VALUES") = 18
-            End With
-            ds.Tables(fillData).Rows.Add(dsNewRow)
-
-            database.SaveEntry(ds)
-
-            ' Adding new Entry
+            ' Adding new Entry - Income from BDO ATM CashOut
             ' ----------------------------------------------------------
-NextPhase_AddEntry:
             mySql = "SELECT * FROM " : fillData = "TBLCASH"
             mySql &= fillData & String.Format(" WHERE TRANSNAME = 'Income from BDO ATM CashOut'")
             ds = LoadSQL(mySql, fillData)

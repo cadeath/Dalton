@@ -449,7 +449,7 @@ Public Class frmPawnItem
                     Then DelayInt = itemPrincipal * GetInt(30)
             Else
                 'New Items
-                If transactionType = "X" Then ServiceCharge = 0
+                If transactionType = "X" Then ServiceCharge = 0 : AdvanceInterest = PawnItem.AdvanceInterest
             End If
         Else
             'New Loan
@@ -473,7 +473,7 @@ Public Class frmPawnItem
             AdvanceInterest = 0
             'Net_Amount = 0
             Renew_Due = 0
-            Redeem_Due = PawnItem.Principal + DelayInt + Penalty + ServiceCharge
+            Redeem_Due = PawnItem.Principal + DelayInt + Penalty + ServiceCharge - AdvanceInterest
         Else
             Renew_Due = 0
             Redeem_Due = 0
@@ -861,7 +861,6 @@ Public Class frmPawnItem
     Private Sub LoadPawnInfo()
         cboType.Items.Clear()
         cboCat.Items.Clear()
-        'cboKarat.Items.Clear()
 
         'Type
         Dim mySql As String = "SELECT DISTINCT TYPE FROM tblClass ORDER BY TYPE ASC"
