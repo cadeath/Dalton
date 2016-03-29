@@ -1,6 +1,7 @@
 CHANGELOG
 Version 1.1.1.0b
- - REDEEM ONE(1) MONTH over charge(double interest)
+ - Money Transfer Report
+ - REDEEM MORE THAN ONE(1) MONTH over charge(double interest)
  - BUG on PAWNING not AUTOCOMPUTE
  - Monthly Report for Money Transfer
  - Add another services in Pera Padala
