@@ -144,7 +144,7 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        frmPawning.LoadActive()
+        'frmPawning.LoadActive()
         Me.Close()
     End Sub
 
@@ -481,7 +481,7 @@ Public Class frmPawnItem
 
         txtOver.Text = daysDue
         txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
-        If isEarlyRedeem Then
+        If isEarlyRedeem And Not isOldItem Then
             txtInt.Text = Math.Abs(DelayInt).ToString("#,##0.00")
             lblInterest.Text = "REFUND"
             lblRedeemDue.ForeColor = Color.Red
@@ -1067,12 +1067,14 @@ Public Class frmPawnItem
             Next
         End If
 
-        autoPrintPT.Export(report)
-        autoPrintPT.m_currentPageIndex = 0
-        autoPrintPT.Print(printerName)
-
-        'frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-        'frmReport.Show()
+        If DEV_MODE Then
+            frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+            frmReport.Show()
+        Else
+            autoPrintPT.Export(report)
+            autoPrintPT.m_currentPageIndex = 0
+            autoPrintPT.Print(printerName)
+        End If
 
         Me.Focus()
     End Sub
@@ -1091,7 +1093,7 @@ Public Class frmPawnItem
     Private Sub PrintRedeemOR2()
         Dim autoPrintPT As Reporting
         Dim printerName As String = PRINTER_OR
-        If Not canPrint(printerName) Then Exit Sub
+        If Not DEV_MODE Then If Not canPrint(printerName) Then Exit Sub
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
 
@@ -1109,9 +1111,9 @@ Public Class frmPawnItem
         PawnItem.LoadTicket(ptIDx)
 
         paymentStr = _
-        String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
+        String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
         addParameters.Add("txtPayment", paymentStr)
-        addParameters.Add("dblTotalDue", PawnItem.RenewDue)
+        addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1126,6 +1128,14 @@ Public Class frmPawnItem
         Dim paperSize As New Dictionary(Of String, Double)
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5) 'Reprint only
+
+        If DEV_MODE Then
+
+            frmReport.ReportInit(mySql, dsName, rptPath, addParameters, Nothing)
+            frmReport.Show()
+
+            Exit Sub
+        End If
 
         Try
             autoPrintPT.Export(report, paperSize)
@@ -1197,7 +1207,7 @@ Public Class frmPawnItem
     Private Sub PrintRenewOR2()
         Dim autoPrintPT As Reporting
         Dim printerName As String = PRINTER_OR
-        If Not canPrint(printerName) Then Exit Sub
+        If Not DEV_MODE Then If Not canPrint(printerName) Then Exit Sub
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
 
@@ -1232,6 +1242,13 @@ Public Class frmPawnItem
         Dim paperSize As New Dictionary(Of String, Double)
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5) 'Reprint only
+
+        If DEV_MODE Then
+            frmReport.ReportInit(mySql, dsName, rptPath, addParameters, False)
+            frmReport.Show()
+
+            Exit Sub
+        End If
 
         Try
             autoPrintPT.Export(report, paperSize)
@@ -1351,4 +1368,58 @@ Public Class frmPawnItem
         ComputeInterests()
         cboAppraiser.Focus()
     End Sub
+
+    Private Sub GroupBox4_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox4.DoubleClick
+        If DEV_MODE Then
+            Dim mySql As String, ptIDx As Single = PawnItem.PawnID
+            Dim dsName As String = "dsPawn"
+            Dim paymentStr As String, rptPath As String
+            Dim addParameters As New Dictionary(Of String, String)
+
+            If PawnItem.Status = "X" Then
+                mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
+                Dim ds As DataSet = LoadSQL(mySql, dsName)
+                rptPath = "Reports\_layout03.rdlc"
+                PawnItem.LoadTicket(ptIDx)
+
+                paymentStr = _
+                String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
+                addParameters.Add("txtPayment", paymentStr)
+                addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
+            ElseIf PawnItem.Status = "0" Then
+                mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
+                Dim ds As DataSet = LoadSQL(mySql, dsName)
+                rptPath = "Reports\_layout03.rdlc"
+                PawnItem.LoadTicket(ptIDx)
+
+                paymentStr = _
+                String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
+                addParameters.Add("txtPayment", paymentStr)
+                addParameters.Add("dblTotalDue", PawnItem.RenewDue)
+            ElseIf PawnItem.Status = "L" Then
+                dsName = "dsPawnTicket"
+                mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+                If PawnItem.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+                Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+                rptPath = "Reports\layout01.rdlc"
+
+                If isOldItem Then
+                    addParameters.Add("txtDescription", PawnItem.Description)
+                Else
+                    addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+                End If
+
+                addParameters.Add("txtItemInterest", GetInt(30) * 100)
+            Else
+                MsgBox("Status: " & PawnItem.Status & " not found", MsgBoxStyle.Critical)
+                Exit Sub
+            End If
+
+
+            frmReport.ReportInit(mySql, dsName, rptPath, addParameters, False)
+            frmReport.Show()
+        End If
+    End Sub
+
 End Class

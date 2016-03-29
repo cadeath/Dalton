@@ -42,6 +42,7 @@
         st &= IIf(chkSeg.Checked, "1", "0")
 
         Dim mySql As String = "SELECT FIRST 100 * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        'mySql = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
         If st = "1000" Then
             mySql &= "' AND (Status = 'L' OR Status = 'R') ORDER BY LoanDate ASC, PAWNID ASC"
         Else
@@ -58,7 +59,7 @@
                 mySql &= "Status = 'S' " 'Segregate
             End If
 
-            mySql &= ") ORDER BY LoanDate ASC, PAWNID ASC"
+            mySql &= ") ORDER BY LoanDate DESC, PAWNID DESC"
 
         End If
         Dim ds As DataSet = LoadSQL(mySql)
@@ -66,7 +67,7 @@
         'HACK
         'Add proper PAWNING REFRESHER if display is not the same with the query
         If ds.Tables(0).Rows.Count = lvPawners.Items.Count And lvPawners.Items.Count > 10 Then
-            Exit Sub
+            'Exit Sub
         End If
 
         lvPawners.Items.Clear()
