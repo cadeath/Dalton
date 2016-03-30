@@ -94,14 +94,14 @@ Partial Class dev_Pawning
         '
         'loanDate
         '
-        Me.loanDate.Location = New System.Drawing.Point(229, 105)
+        Me.loanDate.Location = New System.Drawing.Point(257, 105)
         Me.loanDate.Name = "loanDate"
         Me.loanDate.TabIndex = 1
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(226, 83)
+        Me.Label1.Location = New System.Drawing.Point(254, 83)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(57, 13)
         Me.Label1.TabIndex = 2
@@ -110,7 +110,7 @@ Partial Class dev_Pawning
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(436, 15)
+        Me.Label2.Location = New System.Drawing.Point(504, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(70, 13)
         Me.Label2.TabIndex = 3
@@ -118,7 +118,7 @@ Partial Class dev_Pawning
         '
         'txtMatu
         '
-        Me.txtMatu.Location = New System.Drawing.Point(439, 31)
+        Me.txtMatu.Location = New System.Drawing.Point(507, 33)
         Me.txtMatu.Name = "txtMatu"
         Me.txtMatu.ReadOnly = True
         Me.txtMatu.Size = New System.Drawing.Size(162, 20)
@@ -126,7 +126,7 @@ Partial Class dev_Pawning
         '
         'txtExpiry
         '
-        Me.txtExpiry.Location = New System.Drawing.Point(439, 75)
+        Me.txtExpiry.Location = New System.Drawing.Point(507, 77)
         Me.txtExpiry.Name = "txtExpiry"
         Me.txtExpiry.ReadOnly = True
         Me.txtExpiry.Size = New System.Drawing.Size(162, 20)
@@ -135,7 +135,7 @@ Partial Class dev_Pawning
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(436, 59)
+        Me.Label4.Location = New System.Drawing.Point(504, 61)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(61, 13)
         Me.Label4.TabIndex = 7
@@ -143,7 +143,7 @@ Partial Class dev_Pawning
         '
         'txtAuction
         '
-        Me.txtAuction.Location = New System.Drawing.Point(439, 120)
+        Me.txtAuction.Location = New System.Drawing.Point(507, 122)
         Me.txtAuction.Name = "txtAuction"
         Me.txtAuction.ReadOnly = True
         Me.txtAuction.Size = New System.Drawing.Size(162, 20)
@@ -152,7 +152,7 @@ Partial Class dev_Pawning
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(436, 104)
+        Me.Label5.Location = New System.Drawing.Point(504, 106)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(69, 13)
         Me.Label5.TabIndex = 9
@@ -163,7 +163,7 @@ Partial Class dev_Pawning
         Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboType.FormattingEnabled = True
         Me.cboType.Items.AddRange(New Object() {"APP", "JWL", "CEL", "BIG"})
-        Me.cboType.Location = New System.Drawing.Point(439, 166)
+        Me.cboType.Location = New System.Drawing.Point(507, 168)
         Me.cboType.Name = "cboType"
         Me.cboType.Size = New System.Drawing.Size(118, 21)
         Me.cboType.TabIndex = 11
@@ -171,7 +171,7 @@ Partial Class dev_Pawning
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(437, 150)
+        Me.Label3.Location = New System.Drawing.Point(505, 152)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(55, 13)
         Me.Label3.TabIndex = 12
@@ -179,7 +179,7 @@ Partial Class dev_Pawning
         '
         'txtPrincipal
         '
-        Me.txtPrincipal.Location = New System.Drawing.Point(440, 209)
+        Me.txtPrincipal.Location = New System.Drawing.Point(508, 211)
         Me.txtPrincipal.Name = "txtPrincipal"
         Me.txtPrincipal.Size = New System.Drawing.Size(162, 20)
         Me.txtPrincipal.TabIndex = 14
@@ -187,7 +187,7 @@ Partial Class dev_Pawning
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(437, 193)
+        Me.Label6.Location = New System.Drawing.Point(505, 195)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(47, 13)
         Me.Label6.TabIndex = 13
@@ -195,7 +195,7 @@ Partial Class dev_Pawning
         '
         'txtDaysOver
         '
-        Me.txtDaysOver.Location = New System.Drawing.Point(675, 31)
+        Me.txtDaysOver.Location = New System.Drawing.Point(743, 33)
         Me.txtDaysOver.Name = "txtDaysOver"
         Me.txtDaysOver.ReadOnly = True
         Me.txtDaysOver.Size = New System.Drawing.Size(162, 20)
@@ -204,7 +204,7 @@ Partial Class dev_Pawning
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(672, 15)
+        Me.Label7.Location = New System.Drawing.Point(740, 17)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(80, 13)
         Me.Label7.TabIndex = 15
@@ -212,7 +212,7 @@ Partial Class dev_Pawning
         '
         'txtInt
         '
-        Me.txtInt.Location = New System.Drawing.Point(675, 72)
+        Me.txtInt.Location = New System.Drawing.Point(743, 74)
         Me.txtInt.Name = "txtInt"
         Me.txtInt.ReadOnly = True
         Me.txtInt.Size = New System.Drawing.Size(162, 20)
@@ -221,7 +221,7 @@ Partial Class dev_Pawning
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(672, 56)
+        Me.Label8.Location = New System.Drawing.Point(740, 58)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(42, 13)
         Me.Label8.TabIndex = 17
@@ -229,7 +229,7 @@ Partial Class dev_Pawning
         '
         'txtSC
         '
-        Me.txtSC.Location = New System.Drawing.Point(675, 150)
+        Me.txtSC.Location = New System.Drawing.Point(743, 152)
         Me.txtSC.Name = "txtSC"
         Me.txtSC.ReadOnly = True
         Me.txtSC.Size = New System.Drawing.Size(162, 20)
@@ -238,7 +238,7 @@ Partial Class dev_Pawning
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(672, 134)
+        Me.Label9.Location = New System.Drawing.Point(740, 136)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(80, 13)
         Me.Label9.TabIndex = 21
@@ -246,7 +246,7 @@ Partial Class dev_Pawning
         '
         'txtPenalty
         '
-        Me.txtPenalty.Location = New System.Drawing.Point(675, 109)
+        Me.txtPenalty.Location = New System.Drawing.Point(743, 111)
         Me.txtPenalty.Name = "txtPenalty"
         Me.txtPenalty.ReadOnly = True
         Me.txtPenalty.Size = New System.Drawing.Size(162, 20)
@@ -255,7 +255,7 @@ Partial Class dev_Pawning
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(672, 93)
+        Me.Label10.Location = New System.Drawing.Point(740, 95)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(42, 13)
         Me.Label10.TabIndex = 19
@@ -263,7 +263,7 @@ Partial Class dev_Pawning
         '
         'txtRedeemDue
         '
-        Me.txtRedeemDue.Location = New System.Drawing.Point(675, 248)
+        Me.txtRedeemDue.Location = New System.Drawing.Point(743, 250)
         Me.txtRedeemDue.Name = "txtRedeemDue"
         Me.txtRedeemDue.ReadOnly = True
         Me.txtRedeemDue.Size = New System.Drawing.Size(162, 20)
@@ -272,7 +272,7 @@ Partial Class dev_Pawning
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(672, 232)
+        Me.Label11.Location = New System.Drawing.Point(740, 234)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(70, 13)
         Me.Label11.TabIndex = 25
@@ -280,7 +280,7 @@ Partial Class dev_Pawning
         '
         'txtRenewDue
         '
-        Me.txtRenewDue.Location = New System.Drawing.Point(675, 207)
+        Me.txtRenewDue.Location = New System.Drawing.Point(743, 209)
         Me.txtRenewDue.Name = "txtRenewDue"
         Me.txtRenewDue.ReadOnly = True
         Me.txtRenewDue.Size = New System.Drawing.Size(162, 20)
@@ -289,7 +289,7 @@ Partial Class dev_Pawning
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(672, 191)
+        Me.Label12.Location = New System.Drawing.Point(740, 193)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(64, 13)
         Me.Label12.TabIndex = 23
@@ -297,7 +297,7 @@ Partial Class dev_Pawning
         '
         'txtNetAmount
         '
-        Me.txtNetAmount.Location = New System.Drawing.Point(440, 248)
+        Me.txtNetAmount.Location = New System.Drawing.Point(508, 250)
         Me.txtNetAmount.Name = "txtNetAmount"
         Me.txtNetAmount.ReadOnly = True
         Me.txtNetAmount.Size = New System.Drawing.Size(162, 20)
@@ -306,7 +306,7 @@ Partial Class dev_Pawning
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(437, 232)
+        Me.Label13.Location = New System.Drawing.Point(505, 234)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(63, 13)
         Me.Label13.TabIndex = 27
@@ -314,7 +314,7 @@ Partial Class dev_Pawning
         '
         'btnCompute
         '
-        Me.btnCompute.Location = New System.Drawing.Point(853, 10)
+        Me.btnCompute.Location = New System.Drawing.Point(921, 12)
         Me.btnCompute.Name = "btnCompute"
         Me.btnCompute.Size = New System.Drawing.Size(143, 62)
         Me.btnCompute.TabIndex = 29
@@ -338,16 +338,16 @@ Partial Class dev_Pawning
         '
         'txtAdvInt
         '
-        Me.txtAdvInt.Location = New System.Drawing.Point(843, 150)
+        Me.txtAdvInt.Location = New System.Drawing.Point(911, 152)
         Me.txtAdvInt.Name = "txtAdvInt"
         Me.txtAdvInt.ReadOnly = True
-        Me.txtAdvInt.Size = New System.Drawing.Size(162, 20)
+        Me.txtAdvInt.Size = New System.Drawing.Size(85, 20)
         Me.txtAdvInt.TabIndex = 33
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(840, 134)
+        Me.Label15.Location = New System.Drawing.Point(908, 136)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(88, 13)
         Me.Label15.TabIndex = 32
@@ -357,7 +357,7 @@ Partial Class dev_Pawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1009, 283)
+        Me.ClientSize = New System.Drawing.Size(1076, 283)
         Me.Controls.Add(Me.txtAdvInt)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label14)

@@ -30,6 +30,7 @@ Public Class frmPawnItem
     Private isEarlyRedeem As Boolean = False
     Private earlyDays As Integer = 0
     Private unableToSave As Boolean = False
+    Private daltonCompute As PawningDalton
 
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -207,7 +208,7 @@ Public Class frmPawnItem
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not CheckAuth() Then Exit Sub
 
-        ComputeInterests()
+        ReComputeInterest()
         If Not isReady() And transactionType = "L" Then
             MsgBox("I think you are missing something", MsgBoxStyle.Critical)
             Exit Sub
@@ -584,7 +585,7 @@ Public Class frmPawnItem
             earlyDays = overDays.Days + 30
         End If
         daysDue = IIf(overDays.Days > 0, overDays.Days, 0)
-        ComputeInterests()
+        ReComputeInterest()
 
         If typ = "R" Then
             GeneratePT()
@@ -843,7 +844,7 @@ Public Class frmPawnItem
                 txtExpiry.Text = CurrentDate.AddDays(119).ToShortDateString
                 txtAuction.Text = CurrentDate.AddDays(152).ToShortDateString
         End Select
-        ComputeInterests()
+        ReComputeInterest()
     End Sub
 
     Private Function CurrentPTNumber(Optional ByVal num As Integer = 0) As String
@@ -1361,11 +1362,11 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub txtPrincipal_KeyUp(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        ComputeInterests()
+        ReComputeInterest()
     End Sub
 
     Private Sub txtPrincipal_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPrincipal.LostFocus
-        ComputeInterests()
+        ReComputeInterest()
         cboAppraiser.Focus()
     End Sub
 
@@ -1422,4 +1423,46 @@ Public Class frmPawnItem
         End If
     End Sub
 
+    Private Sub ReComputeInterest()
+        Dim itemPrincipal As Double, isDPJ As Boolean = False
+
+        If txtPrincipal.Text = "" Or Not IsNumeric(txtPrincipal.Text) Then
+            itemPrincipal = 0
+        Else
+            itemPrincipal = CDbl(txtPrincipal.Text)
+        End If
+
+        If Not PawnItem Is Nothing Then
+            ' Not for new Loan
+            If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
+        End If
+
+        daltonCompute = New PawningDalton(itemPrincipal, cboType.Text, CurrentDate, CDate(txtMatu.Text), isDPJ)
+
+        With daltonCompute
+            txtNet.Text = .NetAmount.ToString("Php #,##0.00") : Net_Amount = .NetAmount
+            txtAdv.Text = .AdvanceInterest.ToString("#,##0.00")
+            txtService.Text = .ServiceCharge.ToString("#,##0.00")
+
+            'Not New Loan
+            If transactionType <> "L" Then
+                txtOver.Text = .DaysOverDue
+                txtPenalty.Text = .Penalty.ToString("#,##0.00")
+                txtRenew.Text = .RenewDue.ToString("Php #,##0.00")
+                txtRedeem.Text = .RedeemDue.ToString("Php #,##0.00")
+
+                If isEarlyRedeem And isDPJ Then
+                    txtInt.Text = (.AdvanceInterest - .Interest).ToString("#,##0.00")
+                    lblInterest.Text = "REFUND"
+                    lblRedeemDue.ForeColor = Color.Red
+                    lblRedeemDue.Font = New Font(lblRedeemDue.Font, FontStyle.Bold)
+                Else
+                    lblInterest.Text = "Interest"
+                    txtInt.Text = .Interest.ToString("#,##0.00")
+                    lblRedeemDue.ForeColor = Color.Black
+                    lblRedeemDue.Font = New Font(lblRedeemDue.Font, FontStyle.Regular)
+                End If
+            End If
+        End With
+    End Sub
 End Class
