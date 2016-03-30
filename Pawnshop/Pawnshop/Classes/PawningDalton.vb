@@ -180,7 +180,7 @@
                 _redeemDue = _principal - _advInt + item_Interest
                 '_redeemDue = _netAmount + item_Interest
             Else
-                _redeemDue = _principal + item_Interest + item_Penalty
+                _redeemDue = _principal + item_Interest + item_Penalty - _advInt
             End If
         Else
             _renewDue = Delay_Int + _srvChr + item_Penalty
