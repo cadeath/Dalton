@@ -42,10 +42,54 @@
 
         RunCommand(mySql)
 
+        Pawning_View()
         BDO_ATM_CashOut()
 
         Database_Update(LATEST_VERSION)
         Log_Report("SYSTEM PATCHED UP FROM 1.0.7 TO 1.0.8")
+    End Sub
+
+    Private Sub Pawning_View()
+        Dim DROP_VIEW As String = "DROP VIEW PAWNING"
+        RunCommand(DROP_VIEW)
+
+        Dim mySql As String
+        mySql = "CREATE VIEW PAWNING( "
+        mySql &= "  PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, CLIENT, FULLADDRESS, DESCRIPTION, "
+        mySql &= "  ORNUM, ORDATE, OLDTICKET, NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, PRINCIPAL, "
+        mySql &= "  INTEREST, ADVINT, SERVICECHARGE, PENALTY, ITEMTYPE, CATEGORY, GRAMS, KARAT, "
+        mySql &= "  STATUS, PULLOUT, APPRAISER) "
+        mySql &= "AS "
+        mySql &= "SELECT  "
+        mySql &= "	P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE ,  "
+        mySql &= "    C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, "
+        mySql &= "	C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_ZIP as FULLADDRESS, "
+        mySql &= "    CASE  "
+        mySql &= "    	WHEN P.ITEMTYPE = 'JWL' AND (P.DESCRIPTION = Null OR P.DESCRIPTION = '') THEN  "
+        mySql &= "        	CLASS.CATEGORY || ' ' || ROUND(P.GRAMS,2) || 'G ' || P.KARAT || 'K' "
+        mySql &= "        ELSE P.DESCRIPTION "
+        mySql &= "    END AS Description,  "
+        mySql &= "    P.ORNUM, P.ORDATE, P.OLDTICKET, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL, P.PRINCIPAL,  "
+        mySql &= "    P.INTEREST, P.ADVINT, P.SERVICECHARGE,P.PENALTY, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT, "
+        mySql &= "    CASE P.STATUS "
+        mySql &= "	    WHEN '0' THEN 'RENEWED' "
+        mySql &= "        WHEN 'R' THEN 'RENEW' "
+        mySql &= "        WHEN 'L' THEN 'NEW' "
+        mySql &= "        WHEN 'V' THEN 'VOID' "
+        mySql &= "        WHEN 'W' THEN 'WITHDRAW' "
+        mySql &= "        WHEN 'X' THEN 'REDEEM' "
+        mySql &= "        WHEN 'S' THEN 'SEGRE' "
+        mySql &= "        ELSE 'N/A' "
+        mySql &= "    END AS STATUS, P.PULLOUT , USR.USERNAME as APPRAISER  "
+        mySql &= "FROM TBLPAWN P "
+        mySql &= "INNER JOIN TBLCLIENT C  "
+        mySql &= "	ON C.CLIENTID = P.CLIENTID "
+        mySql &= "LEFT JOIN TBLCLASS CLASS "
+        mySql &= "	ON CLASS.CLASSID = P.CATID "
+        mySql &= "LEFT JOIN tbl_Gamit USR "
+        mySql &= "    ON USR.USERID = P.APPRAISERID;"
+
+        RunCommand(mySql)
     End Sub
 
     Private Sub Add_Option(ByVal key As String, ByVal val As String)

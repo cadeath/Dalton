@@ -1,4 +1,8 @@
-﻿Imports Microsoft.Reporting.WinForms
+﻿' Changelog
+' 3/30/2016
+'  - Optimize computation
+
+Imports Microsoft.Reporting.WinForms
 
 Public Class frmPawnItem
     Friend transactionType As String = "L"
@@ -973,7 +977,7 @@ Public Class frmPawnItem
             .ServiceCharge = txtService.Text
             .EVAT = txtEvat.Text
             .RenewDue = Renew_Due
-            .RedeemDue = Redeem_Due
+            .RedeemDue = 0 'Redeem Due is Zero in Renew
             .Status = "0"
 
             .SaveTicket(False)
@@ -1424,6 +1428,8 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub ReComputeInterest()
+        If transactionType = "D" Then Exit Sub 'Display No Recommute
+
         Dim itemPrincipal As Double, isDPJ As Boolean = False
 
         If txtPrincipal.Text = "" Or Not IsNumeric(txtPrincipal.Text) Then
@@ -1432,36 +1438,50 @@ Public Class frmPawnItem
             itemPrincipal = CDbl(txtPrincipal.Text)
         End If
 
+        Dim matuDateTmp
         If Not PawnItem Is Nothing Then
             ' Not for new Loan
             If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
+            matuDateTmp = PawnItem.MaturityDate
+        Else
+            matuDateTmp = CDate(txtMatu.Text)
         End If
 
-        daltonCompute = New PawningDalton(itemPrincipal, cboType.Text, CurrentDate, CDate(txtMatu.Text), isDPJ)
+        daltonCompute = New PawningDalton(itemPrincipal, cboType.Text, CurrentDate, matuDateTmp, isDPJ)
 
         With daltonCompute
             txtNet.Text = .NetAmount.ToString("Php #,##0.00") : Net_Amount = .NetAmount
-            txtAdv.Text = .AdvanceInterest.ToString("#,##0.00")
-            txtService.Text = .ServiceCharge.ToString("#,##0.00")
+            If transactionType = "R" Or transactionType = "L" Then
+                txtAdv.Text = .AdvanceInterest.ToString("#,##0.00") : AdvanceInterest = .AdvanceInterest
+            End If
+
+            If isDPJ Then
+                If transactionType <> "X" Then
+                    txtService.Text = .ServiceCharge.ToString("#,##0.00")
+                Else
+                    txtService.Text = 0
+                End If
+            Else
+                txtService.Text = .ServiceCharge.ToString("#,##0.00")
+            End If
 
             'Not New Loan
             If transactionType <> "L" Then
                 txtOver.Text = .DaysOverDue
                 txtPenalty.Text = .Penalty.ToString("#,##0.00")
-                txtRenew.Text = .RenewDue.ToString("Php #,##0.00")
-                txtRedeem.Text = .RedeemDue.ToString("Php #,##0.00")
-
-                If isEarlyRedeem And isDPJ Then
-                    txtInt.Text = (.AdvanceInterest - .Interest).ToString("#,##0.00")
-                    lblInterest.Text = "REFUND"
-                    lblRedeemDue.ForeColor = Color.Red
-                    lblRedeemDue.Font = New Font(lblRedeemDue.Font, FontStyle.Bold)
-                Else
-                    lblInterest.Text = "Interest"
-                    txtInt.Text = .Interest.ToString("#,##0.00")
-                    lblRedeemDue.ForeColor = Color.Black
-                    lblRedeemDue.Font = New Font(lblRedeemDue.Font, FontStyle.Regular)
+                If transactionType = "X" Then
+                    txtRenew.Text = 0
+                    txtRedeem.Text = .RedeemDue.ToString("Php #,##0.00")
+                    Redeem_Due = .RedeemDue
                 End If
+                If transactionType = "R" Then
+                    txtRenew.Text = .RenewDue.ToString("Php #,##0.00")
+                    txtRedeem.Text = 0
+                    Renew_Due = .RenewDue
+                End If
+
+                txtInt.Text = .Interest.ToString("#,##0.00")
+
             End If
         End With
     End Sub

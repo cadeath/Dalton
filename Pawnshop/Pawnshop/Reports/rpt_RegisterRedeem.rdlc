@@ -203,7 +203,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Ticket/</Value>
+                              <Value>OR Num/</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -214,7 +214,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Old</Value>
+                              <Value>Ticket</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -469,14 +469,14 @@ Description</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="PawnTicket1">
+                    <Textbox Name="ORNum">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PawnTicket.Value</Value>
+                              <Value>=Fields!ORNum.Value</Value>
                               <Style>
                                 <Format>000000</Format>
                               </Style>
@@ -485,7 +485,7 @@ Description</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>PawnTicket1</rd:DefaultName>
+                      <rd:DefaultName>ORNum</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -496,6 +496,7 @@ Description</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -656,14 +657,14 @@ Description</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="OldTicket">
+                    <Textbox Name="PawnTicket2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!OldTicket.Value</Value>
+                              <Value>=Fields!PawnTicket.Value</Value>
                               <Style>
                                 <Format>0;(0);''</Format>
                               </Style>
@@ -672,7 +673,7 @@ Description</Value>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>OldTicket</rd:DefaultName>
+                      <rd:DefaultName>PawnTicket2</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>

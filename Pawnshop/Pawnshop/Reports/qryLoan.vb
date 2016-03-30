@@ -37,7 +37,8 @@
     Private Sub Generate_Redemption()
         Dim fillData As String = "dsPawning", mySql As String
         mySql = "SELECT * FROM PAWNING WHERE "
-        mySql &= String.Format("ORDate = '{0}' AND STATUS = 'REDEEM'", monCal.SelectionStart.ToString("MM/dd/yyyy"))
+        mySql &= String.Format("ORDate = '{0}' AND STATUS = 'REDEEM' ", monCal.SelectionStart.ToString("MM/dd/yyyy"))
+        mySql &= "ORDER BY ORNUM ASC"
 
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))

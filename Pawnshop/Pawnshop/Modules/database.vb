@@ -2,6 +2,7 @@
 ' Changelog
 ' v1.0.8
 '  - FIX MONTHLY_LOANRENEW
+'  - VIEW PAWNING, PENALTY ADDED
 ' v1.0.7
 '  - Changing PAWNTICKET of TBLINSURANCE Data Type from Integer to VARCHAR(30)
 ' v1.0.6
