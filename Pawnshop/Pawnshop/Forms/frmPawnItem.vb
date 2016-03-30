@@ -1021,7 +1021,7 @@ Public Class frmPawnItem
             .SaveTicket()
 
             AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
-            AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
+            AddJournal(interest, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With
 
