@@ -183,6 +183,7 @@
                 _redeemDue = _principal + item_Interest + item_Penalty - _advInt
             End If
         Else
+            _advInt = 0
             _renewDue = Delay_Int + _srvChr + item_Penalty
             _redeemDue = _principal + item_Interest + _srvChr + item_Penalty
         End If

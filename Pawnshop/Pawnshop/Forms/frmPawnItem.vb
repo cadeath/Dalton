@@ -410,7 +410,7 @@ Public Class frmPawnItem
             Else
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
                 If isEarlyRedeem Then
-                    AddJournal(.EarlyRedeem, "Debit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
+                    AddJournal(.AdvanceInterest - .EarlyRedeem, "Debit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 End If
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket)
                 If daysDue > 3 Then
@@ -419,90 +419,6 @@ Public Class frmPawnItem
                 End If
             End If
         End With
-    End Sub
-
-    Private Sub ComputeInterests()
-        Dim itemPrincipal As Double
-
-        If PawnInfo Is Nothing Then Exit Sub
-        If transactionType = "D" Then Exit Sub 'No Compute if Information Display
-        If Not cboType.Items.Count > 0 Then Exit Sub
-        If IsNumeric(txtPrincipal.Text) Then
-            itemPrincipal = CDbl(txtPrincipal.Text)
-        Else
-            itemPrincipal = 0
-        End If
-
-        ServiceCharge = GetServiceCharge(itemPrincipal)
-        DelayInt = itemPrincipal * GetInt(IIf(daysDue > 3, daysDue + 30, 0))
-        Penalty = itemPrincipal * GetInt(daysDue + 30, "Penalty")
-        If HAS_ADVINT And transactionType <> "X" Then
-            'Load Advance Interest
-            AdvanceInterest = GetInt(30) * itemPrincipal
-        End If
-
-        isOldItem = False
-        If Not PawnItem Is Nothing Then
-            'Not New Entry
-            If PawnItem.AdvanceInterest = 0 Then
-                'OLD Migrate
-                'Do not add Advance Interest
-                AdvanceInterest = 0
-                isOldItem = True
-
-                If (transactionType = "R" Or transactionType = "X") And daysDue <= 3 _
-                    Then DelayInt = itemPrincipal * GetInt(30)
-            Else
-                'New Items
-                If transactionType = "X" Then ServiceCharge = 0 : AdvanceInterest = PawnItem.AdvanceInterest
-            End If
-        Else
-            'New Loan
-        End If
-        If daysDue > 3 Then DelayInt -= AdvanceInterest
-        Net_Amount = itemPrincipal - AdvanceInterest - ServiceCharge
-        If isEarlyRedeem Then
-            If itemPrincipal * GetInt(earlyDays) <> PawnItem.AdvanceInterest And HAS_ADVINT Then
-                DelayInt = -(PawnItem.AdvanceInterest - itemPrincipal * GetInt(earlyDays))
-            Else
-                isEarlyRedeem = False
-            End If
-        End If
-
-        'Display
-        If transactionType = "R" Then
-            Renew_Due = AdvanceInterest + ServiceCharge + DelayInt + Penalty
-            Redeem_Due = 0
-            Net_Amount = PawnItem.Principal - AdvanceInterest - IIf(isOldItem, 0, ServiceCharge)
-        ElseIf transactionType = "X" Then
-            AdvanceInterest = 0
-            'Net_Amount = 0
-            Renew_Due = 0
-            Redeem_Due = PawnItem.Principal + DelayInt + Penalty + ServiceCharge - AdvanceInterest
-        Else
-            Renew_Due = 0
-            Redeem_Due = 0
-        End If
-
-        txtOver.Text = daysDue
-        txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
-        If isEarlyRedeem And Not isOldItem Then
-            txtInt.Text = Math.Abs(DelayInt).ToString("#,##0.00")
-            lblInterest.Text = "REFUND"
-            lblRedeemDue.ForeColor = Color.Red
-            lblRedeemDue.Font = New Font(lblRedeemDue.Font, FontStyle.Bold)
-        Else
-            lblInterest.Text = "Interest"
-            txtInt.Text = DelayInt.ToString("#,##0.00")
-            lblRedeemDue.ForeColor = Color.Black
-            lblRedeemDue.Font = New Font(lblRedeemDue.Font, FontStyle.Regular)
-        End If
-        txtPenalty.Text = Penalty.ToString("#,##0.00")
-        txtService.Text = ServiceCharge.ToString("#,##0.00")
-        txtNet.Text = Net_Amount.ToString("Php #,##0.00")
-
-        txtRenew.Text = Renew_Due.ToString("Php #,##0.00")
-        txtRedeem.Text = Redeem_Due.ToString("Php #,##0.00")
     End Sub
 
     Private Sub SaveNewLoan()
@@ -583,12 +499,12 @@ Public Class frmPawnItem
         transactionType = typ
         GenerateReceipt()
 
-        Dim overDays = CurrentDate.Date - PawnItem.MaturityDate.Date
-        If overDays.Days < 0 And transactionType = "X" Then
-            isEarlyRedeem = True
-            earlyDays = overDays.Days + 30
-        End If
-        daysDue = IIf(overDays.Days > 0, overDays.Days, 0)
+        'Dim overDays = CurrentDate.Date - PawnItem.MaturityDate.Date
+        'If overDays.Days < 0 And transactionType = "X" Then
+        '    isEarlyRedeem = True
+        '    earlyDays = overDays.Days + 30
+        'End If
+        'daysDue = IIf(overDays.Days > 0, overDays.Days, 0)
         ReComputeInterest()
 
         If typ = "R" Then
@@ -1020,8 +936,11 @@ Public Class frmPawnItem
 
             .SaveTicket()
 
+            'no early renew
+            Dim finalInt As Double = IIf(interest > advInt, interest, advInt)
+
             AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
-            AddJournal(interest, "Credit", "Interest on Loans", "PT# " & oldPT)
+            AddJournal(finalInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
         End With
 
@@ -1429,6 +1348,7 @@ Public Class frmPawnItem
 
     Private Sub ReComputeInterest()
         If transactionType = "D" Then Exit Sub 'Display No Recommute
+        If txtMatu.Text = "" Then Exit Sub 'No Maturity Date
 
         Dim itemPrincipal As Double, isDPJ As Boolean = False
 
@@ -1444,45 +1364,65 @@ Public Class frmPawnItem
             If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
             matuDateTmp = PawnItem.MaturityDate
         Else
+            'New Loan
+            isDPJ = True
             matuDateTmp = CDate(txtMatu.Text)
         End If
 
         daltonCompute = New PawningDalton(itemPrincipal, cboType.Text, CurrentDate, matuDateTmp, isDPJ)
 
         With daltonCompute
-            txtNet.Text = .NetAmount.ToString("Php #,##0.00") : Net_Amount = .NetAmount
-            If transactionType = "R" Or transactionType = "L" Then
-                txtAdv.Text = .AdvanceInterest.ToString("#,##0.00") : AdvanceInterest = .AdvanceInterest
-            End If
+            daysDue = .DaysOverDue
+            Net_Amount = .NetAmount
+            AdvanceInterest = .AdvanceInterest
+            ServiceCharge = .ServiceCharge
+            DelayInt = .Interest
+            Penalty = .Penalty
+            Renew_Due = .RenewDue
+            Redeem_Due = .RedeemDue
 
-            If isDPJ Then
-                If transactionType <> "X" Then
-                    txtService.Text = .ServiceCharge.ToString("#,##0.00")
-                Else
-                    txtService.Text = 0
-                End If
-            Else
-                txtService.Text = .ServiceCharge.ToString("#,##0.00")
-            End If
+            isOldItem = Not isDPJ
+            isEarlyRedeem = .isEarlyRedeem
 
-            'Not New Loan
-            If transactionType <> "L" Then
-                txtOver.Text = .DaysOverDue
-                txtPenalty.Text = .Penalty.ToString("#,##0.00")
-                If transactionType = "X" Then
-                    txtRenew.Text = 0
-                    txtRedeem.Text = .RedeemDue.ToString("Php #,##0.00")
-                    Redeem_Due = .RedeemDue
-                End If
-                If transactionType = "R" Then
-                    txtRenew.Text = .RenewDue.ToString("Php #,##0.00")
-                    txtRedeem.Text = 0
-                    Renew_Due = .RenewDue
-                End If
-
-                txtInt.Text = .Interest.ToString("#,##0.00")
-
-            End If
         End With
+
+        txtNet.Text = Net_Amount.ToString("Php #,##0.00")
+
+        'Display Advance Interest for Renew and New Loan
+        If HAS_ADVINT And (transactionType = "R" Or transactionType = "L") Then
+            txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
+        End If
+
+        If isDPJ Then
+            'New Items
+            If transactionType = "X" Then
+                ' Redeem
+                txtService.Text = 0
+            Else
+                'Non Redeem
+                txtService.Text = ServiceCharge.ToString("#,##0.00")
+            End If
+        Else
+            'Remantic
+            txtService.Text = ServiceCharge.ToString("#,##0.00")
+        End If
+
+        'Non New Loan
+        If transactionType <> "L" Then
+            txtOver.Text = daysDue
+            txtPenalty.Text = Penalty.ToString("#,##0.00")
+
+            If transactionType = "X" Then
+                txtRenew.Text = 0
+                txtRedeem.Text = Redeem_Due.ToString("Php #,##0.00")
+                If daysDue > 3 Then DelayInt -= AdvanceInterest
+            ElseIf transactionType = "R" Then
+                txtRenew.Text = Renew_Due.ToString("Php #,##0.00")
+                txtRedeem.Text = 0
+                'DelayInt -= AdvanceInterest
+            End If
+
+            txtInt.Text = DelayInt.ToString("#,##0.00")
+        End If
     End Sub
 End Class
