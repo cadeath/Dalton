@@ -1,0 +1,287 @@
+AMOUNT,CHARGE,COMMISSION,REMARKS,TYPE
+200,1,,,cebuana
+300,2,,,cebuana
+500,3,,,cebuana
+600,8,,,cebuana
+700,10,,,cebuana
+900,12,,,cebuana
+1000,15,,,cebuana
+1500,20,,,cebuana
+2000,30,,,cebuana
+2500,40,,,cebuana
+3000,50,,,cebuana
+3500,60,,,cebuana
+4000,70,,,cebuana
+5000,90,,,cebuana
+6000,114,,,cebuana
+7000,118,,,cebuana
+9500,125,,,cebuana
+10000,140,,,cebuana
+14000,260,,,cebuana
+15000,310,,,cebuana
+20000,360,,,cebuana
+30000,410,,,cebuana
+40000,460,,,cebuana
+50000,510,,,cebuana
+2000,120,24,Send In,gprs to bank-bdochina
+4000,150,45,Send In,gprs to bank-bdochina
+6000,180,63,Send In,gprs to bank-bdochina
+10000,200,70,Send In,gprs to bank-bdochina
+50000,240,84,Send In,gprs to bank-bdochina
+2000,120,18,Send In,gprs to bank-ucpbpnb
+4000,150,45,Send In,gprs to bank-ucpbpnb
+6000,180,63,Send In,gprs to bank-ucpbpnb
+10000,200,70,Send In,gprs to bank-ucpbpnb
+50000,240,84,Send In,gprs to bank-ucpbpnb
+2000,120,24,Send In,gprs to dbp
+4000,150,45,Send In,gprs to dbp
+6000,180,63,Send In,gprs to dbp
+10000,200,70,Send In,gprs to dbp
+50000,240,84,Send In,gprs to dbp
+100,0,2,Pay Out,gprs to gprs
+200,0,4,Pay Out,gprs to gprs
+300,0,6,Pay Out,gprs to gprs
+400,0,7.2,Pay Out,gprs to gprs
+500,0,9.2,Pay Out,gprs to gprs
+600,0,11.2,Pay Out,gprs to gprs
+700,0,12.4,Pay Out,gprs to gprs
+800,0,13.6,Pay Out,gprs to gprs
+900,0,14.8,Pay Out,gprs to gprs
+1000,0,16,Pay Out,gprs to gprs
+1500,0,20,Pay Out,gprs to gprs
+2000,0,28,Pay Out,gprs to gprs
+2500,0,34,Pay Out,gprs to gprs
+3000,0,40,Pay Out,gprs to gprs
+3500,0,42,Pay Out,gprs to gprs
+4000,0,52,Pay Out,gprs to gprs
+4500,0,56,Pay Out,gprs to gprs
+5000,0,58,Pay Out,gprs to gprs
+6000,0,62,Pay Out,gprs to gprs
+7000,0,66,Pay Out,gprs to gprs
+8000,0,72,Pay Out,gprs to gprs
+9500,0,80,Pay Out,gprs to gprs
+10000,0,84,Pay Out,gprs to gprs
+14000,0,88,Pay Out,gprs to gprs
+15000,0,92,Pay Out,gprs to gprs
+20000,0,112,Pay Out,gprs to gprs
+30000,0,120,Pay Out,gprs to gprs
+40000,0,136,Pay Out,gprs to gprs
+50000,0,152,Pay Out,gprs to gprs
+100,5,1.5,Send In,gprs to gprs
+200,10,3,Send In,gprs to gprs
+300,15,4.5,Send In,gprs to gprs
+400,18,5.4,Send In,gprs to gprs
+500,23,6.9,Send In,gprs to gprs
+600,28,8.4,Send In,gprs to gprs
+700,31,9.3,Send In,gprs to gprs
+800,34,10.2,Send In,gprs to gprs
+900,37,11.1,Send In,gprs to gprs
+1000,40,12,Send In,gprs to gprs
+1500,50,15,Send In,gprs to gprs
+2000,70,21,Send In,gprs to gprs
+2500,85,25.5,Send In,gprs to gprs
+3000,100,30,Send In,gprs to gprs
+3500,105,31.5,Send In,gprs to gprs
+4000,130,39,Send In,gprs to gprs
+4500,140,42,Send In,gprs to gprs
+5000,145,43.5,Send In,gprs to gprs
+6000,155,46.5,Send In,gprs to gprs
+7000,165,49.5,Send In,gprs to gprs
+8000,180,54,Send In,gprs to gprs
+9500,200,60,Send In,gprs to gprs
+10000,210,63,Send In,gprs to gprs
+14000,220,66,Send In,gprs to gprs
+15000,230,69,Send In,gprs to gprs
+20000,280,84,Send In,gprs to gprs
+30000,300,90,Send In,gprs to gprs
+40000,340,102,Send In,gprs to gprs
+50000,380,114,Send In,gprs to gprs
+2000,120,24,Send In,gprs to maylandbank
+4000,150,45,Send In,gprs to maylandbank
+6000,180,63,Send In,gprs to maylandbank
+10000,200,70,Send In,gprs to maylandbank
+50000,240,84,Send In,gprs to maylandbank
+2000,120,18,Send In,gprs to metrobank
+4000,150,45,Send In,gprs to metrobank
+6000,180,63,Send In,gprs to metrobank
+10000,200,70,Send In,gprs to metrobank
+50000,240,84,Send In,gprs to metrobank
+5000,550,26.25,Send In,gprs to moneygram
+10000,700,36.75,Send In,gprs to moneygram
+25000,1000,52.5,Send In,gprs to moneygram
+50000,1300,68.25,Send In,gprs to moneygram
+70000,1500,78.75,Send In,gprs to moneygram
+500,20,10,Send In,gprs to smartmoney
+1000,25,12.5,Send In,gprs to smartmoney
+1500,3,22.5,Send In|Percent|SLC,gprs to smartmoney
+2000,3,25,Send In|Percent|SLC,gprs to smartmoney
+2500,3,27.5,Send In|Percent|SLC,gprs to smartmoney
+3000,3,30,Send In|Percent|SLC,gprs to smartmoney
+3500,3,32.5,Send In|Percent|SLC,gprs to smartmoney
+4000,3,35,Send In|Percent|SLC,gprs to smartmoney
+4500,3,37.5,Send In|Percent|SLC,gprs to smartmoney
+5000,3,40,Send In|Percent|SLC,gprs to smartmoney
+5500,3,42.5,Send In|Percent|SLC,gprs to smartmoney
+6000,3,45,Send In|Percent|SLC,gprs to smartmoney
+6500,3,47.5,Send In|Percent|SLC,gprs to smartmoney
+7000,3,50,Send In|Percent|SLC,gprs to smartmoney
+7500,3,52.5,Send In|Percent|SLC,gprs to smartmoney
+8000,240,185,Send In,gprs to smartmoney
+8500,240,182.5,Send In,gprs to smartmoney
+9000,240,180,Send In,gprs to smartmoney
+9500,240,177.5,Send In,gprs to smartmoney
+10000,240,175,Send In,gprs to smartmoney
+10500,250,182.5,Send In,gprs to smartmoney
+11000,250,180,Send In,gprs to smartmoney
+11500,250,177.5,Send In,gprs to smartmoney
+12000,250,175,Send In,gprs to smartmoney
+12500,250,172.5,Send In,gprs to smartmoney
+13000,260,180,Send In,gprs to smartmoney
+13500,260,177.5,Send In,gprs to smartmoney
+14000,260,175,Send In,gprs to smartmoney
+14500,260,172.5,Send In,gprs to smartmoney
+15000,260,170,Send In,gprs to smartmoney
+15500,270,177.5,Send In,gprs to smartmoney
+16000,270,175,Send In,gprs to smartmoney
+16500,270,172.5,Send In,gprs to smartmoney
+17000,270,170,Send In,gprs to smartmoney
+17500,270,167.5,Send In,gprs to smartmoney
+18000,280,175,Send In,gprs to smartmoney
+18500,280,172.5,Send In,gprs to smartmoney
+19000,280,170,Send In,gprs to smartmoney
+19500,280,167.5,Send In,gprs to smartmoney
+20000,280,165,Send In,gprs to smartmoney
+20500,290,172.5,Send In,gprs to smartmoney
+21000,290,170,Send In,gprs to smartmoney
+21500,290,167.5,Send In,gprs to smartmoney
+22000,290,165,Send In,gprs to smartmoney
+22500,290,162.5,Send In,gprs to smartmoney
+23000,300,170,Send In,gprs to smartmoney
+23500,300,167.5,Send In,gprs to smartmoney
+24000,300,165,Send In,gprs to smartmoney
+24500,300,162.5,Send In,gprs to smartmoney
+25000,300,160,Send In,gprs to smartmoney
+25500,310,167.5,Send In,gprs to smartmoney
+26000,310,165,Send In,gprs to smartmoney
+26500,310,162.5,Send In,gprs to smartmoney
+27000,310,160,Send In,gprs to smartmoney
+27500,310,157.5,Send In,gprs to smartmoney
+28000,320,165,Send In,gprs to smartmoney
+28500,320,162.5,Send In,gprs to smartmoney
+29000,320,160,Send In,gprs to smartmoney
+29500,320,157.5,Send In,gprs to smartmoney
+30000,320,155,Send In,gprs to smartmoney
+30500,330,162.5,Send In,gprs to smartmoney
+31000,330,160,Send In,gprs to smartmoney
+31500,330,157.5,Send In,gprs to smartmoney
+32000,330,155,Send In,gprs to smartmoney
+32500,330,152.5,Send In,gprs to smartmoney
+33000,340,160,Send In,gprs to smartmoney
+33500,340,157.5,Send In,gprs to smartmoney
+34000,340,155,Send In,gprs to smartmoney
+34500,340,152.5,Send In,gprs to smartmoney
+35000,340,150,Send In,gprs to smartmoney
+35500,350,157.5,Send In,gprs to smartmoney
+36000,350,155,Send In,gprs to smartmoney
+36500,350,152.5,Send In,gprs to smartmoney
+37000,350,150,Send In,gprs to smartmoney
+37500,350,147.5,Send In,gprs to smartmoney
+38000,360,155,Send In,gprs to smartmoney
+38500,360,152.5,Send In,gprs to smartmoney
+39000,360,150,Send In,gprs to smartmoney
+39500,360,147.5,Send In,gprs to smartmoney
+40000,360,145,Send In,gprs to smartmoney
+40500,370,152.5,Send In,gprs to smartmoney
+41000,370,150,Send In,gprs to smartmoney
+41500,370,147.5,Send In,gprs to smartmoney
+42000,370,145,Send In,gprs to smartmoney
+42500,370,142.5,Send In,gprs to smartmoney
+43000,380,150,Send In,gprs to smartmoney
+43500,380,147.5,Send In,gprs to smartmoney
+44000,380,145,Send In,gprs to smartmoney
+44500,380,142.5,Send In,gprs to smartmoney
+45000,380,140,Send In,gprs to smartmoney
+45500,390,147.5,Send In,gprs to smartmoney
+46000,390,145,Send In,gprs to smartmoney
+46500,390,142.5,Send In,gprs to smartmoney
+47000,390,140,Send In,gprs to smartmoney
+47500,390,137.5,Send In,gprs to smartmoney
+48000,400,145,Send In,gprs to smartmoney
+48500,400,142.5,Send In,gprs to smartmoney
+49000,400,140,Send In,gprs to smartmoney
+49500,400,137.5,Send In,gprs to smartmoney
+50000,400,135,Send In,gprs to smartmoney
+9999999,0,50,Pay Out,iremit to gprs
+4999,20,15,Pay Out,moneygram to gprs
+9999,50,37.5,Pay Out,moneygram to gprs
+39999,100,75,Pay Out,moneygram to gprs
+9999999,150,112.5,Pay Out,moneygram to gprs
+9999999,0,50,Pay Out,nybptransfast to gprs
+0,0.02,,Advance Interest,pawning
+100,0,,,perapadala
+200,1,,,perapadala
+300,2,,,perapadala
+500,4,,,perapadala
+700,7,,,perapadala
+1000,9,,,perapadala
+1500,12,,,perapadala
+2000,18,,,perapadala
+2500,24,,,perapadala
+3000,30,,,perapadala
+3500,36,,,perapadala
+4000,42,,,perapadala
+5000,54,,,perapadala
+6500,69,,,perapadala
+7000,72,,,perapadala
+9500,75,,,perapadala
+10000,84,,,perapadala
+14000,125,,,perapadala
+15000,131,,,perapadala
+20000,149,,,perapadala
+30000,173,,,perapadala
+40000,192,,,perapadala
+50000,207,,,perapadala
+9999999,1.5,,Send In|Percent,perapadala
+50000,350,,,perapadalapmftc
+52500,450,,,perapadalapmftc
+75000,550,,,perapadalapmftc
+87500,650,,,perapadalapmftc
+100000,700,,,perapadalapmftc
+112500,800,,,perapadalapmftc
+125000,900,,,perapadalapmftc
+137500,1000,,,perapadalapmftc
+137500,1350,,,perapadalapmftc
+150000,1050,,,perapadalapmftc
+152500,1150,,,perapadalapmftc
+175000,1250,,,perapadalapmftc
+200000,1400,,,perapadalapmftc
+212500,1500,,,perapadalapmftc
+225000,1600,,,perapadalapmftc
+237500,1700,,,perapadalapmftc
+250000,1750,,,perapadalapmftc
+252500,1850,,,perapadalapmftc
+287500,2050,,,perapadalapmftc
+300000,2100,,,perapadalapmftc
+9999999,9999999,,,perapadalapmftc
+700,20,10,Pay Out,smartmoney to gprs
+1000,2.5,10,Pay Out|Percent|SLC,smartmoney to gprs
+6499,3,15,Pay Out|Percent|SLC,smartmoney to gprs
+7000,220,205,Pay Out,smartmoney to gprs
+10000,225,210,Pay Out,smartmoney to gprs
+50000,240,225,Pay Out,smartmoney to gprs
+100,15,,,western
+200,19,,,western
+500,30,,,western
+1500,38,,,western
+2500,68,,,western
+4000,98,,,western
+5000,270,,,western
+6000,320,,,western
+7000,375,,,western
+8000,430,,,western
+10000,485,,,western
+15000,540,,,western
+50000,595,,,western
+10000,500,,,western - intl
+100000,750,,,western - intl
+9999999,1100,,,western - intl

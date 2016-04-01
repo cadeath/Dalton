@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoPatch\autopatch.vb" />
+    <Compile Include="AutoPatch\db106.vb" />
     <Compile Include="AutoPatch\db108.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
