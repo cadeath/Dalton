@@ -46,6 +46,7 @@ err:
     End Sub
 
     Public Sub Patch_if_Patchable()
+        db107.PatchUp()
         db108.PatchUp()
     End Sub
 
