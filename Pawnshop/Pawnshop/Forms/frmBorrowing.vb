@@ -1,5 +1,7 @@
 ﻿Public Class frmBorrowing
 
+    Const MOD_NAME As String = "BORROWINGS"
+
     Private Sub frmBorrowing_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadLastRefNum()
@@ -84,6 +86,8 @@
             .Add(3, saveBorrow.Amount) 'Amount
             .Add(4, saveBorrow.Remarks) 'Remarks
         End With
+
+        AddTimelyLogs(MOD_NAME, String.Format("SENT MONEY TO {0} - Php {1:#,##0.00}", saveBorrow.BranchCode, saveBorrow.Amount))
 
         'Generate File
         CreateEsk(fileSave, brwFile)
