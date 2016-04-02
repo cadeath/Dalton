@@ -143,32 +143,36 @@
 
     Private Sub Outstanding_Loans()
         Dim dsName As String = "dsOutstanding", mySql As String
-        If CurrentDate.Date <= monCal.SelectionStart.ToShortDateString Then
-            mySql = _
-            "SELECT * FROM PAWNING WHERE (Status = 'NEW' OR Status = 'RENEW' OR Status = 'SEGRE')"
-            mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
-            mySql &= " ORDER BY PAWNTICKET ASC"
-        Else
-            mySql = "SELECT * "
-            mySql &= "FROM "
-            mySql &= "( "
-            mySql &= "  SELECT * "
-            mySql &= "  FROM PAWNING "
-            mySql &= "  WHERE (Status = 'NEW') "
-            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
-            mySql &= "  UNION "
-            mySql &= "  SELECT * "
-            mySql &= "  FROM PAWNING "
-            mySql &= "  WHERE (Status = 'RENEWED') "
-            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
-            mySql &= "  UNION "
-            mySql &= "  SELECT * "
-            mySql &= "  FROM PAWNING "
-            mySql &= "  WHERE (Status = 'REDEEM') "
-            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
-            mySql &= ") "
-            mySql &= "ORDER BY PAWNTICKET ASC"
-        End If
+
+        mySql = "SELECT * "
+        mySql &= "FROM "
+        mySql &= "( "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWNING "
+        mySql &= "  WHERE (Status = 'NEW' OR Status = 'RENEW') "
+        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWNING "
+        mySql &= "  WHERE (Status = 'RENEWED') "
+        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWNING "
+        mySql &= "  WHERE (Status = 'REDEEM') "
+        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWNING "
+        mySql &= "  WHERE (Status = 'SEGRE') "
+        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL) "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWNING "
+        mySql &= "  WHERE (Status = 'WITHDRAW') "
+        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' "
+        mySql &= ") "
+        mySql &= "ORDER BY PAWNTICKET ASC"
 
 
         Dim addParameters As New Dictionary(Of String, String)

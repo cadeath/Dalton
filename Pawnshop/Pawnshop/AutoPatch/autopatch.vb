@@ -31,7 +31,7 @@ err:
             con.Close()
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
-            Log_Report(ex.ToString)
+            Log_Report(String.Format("[{0}] - ", sql) & ex.ToString)
             con.Dispose()
             Exit Sub
         End Try
