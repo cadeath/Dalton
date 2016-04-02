@@ -44,6 +44,10 @@
           <DataField>ORDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="OldTicket">
+          <DataField>OldTicket</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="NetAmount">
           <DataField>NetAmount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -54,6 +58,14 @@
         </Field>
         <Field Name="RedeemDue">
           <DataField>RedeemDue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AdvInt">
+          <DataField>AdvInt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Penalty">
+          <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ItemType">
@@ -84,8 +96,24 @@
           <DataField>Principal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="PullOut">
+          <DataField>PullOut</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Appraiser">
           <DataField>Appraiser</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ServiceCharge">
+          <DataField>ServiceCharge</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NewPT">
+          <DataField>NewPT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -587,7 +615,7 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PawnTicket.Value</Value>
+                              <Value>=iif(Fields!Status.Value.ToString.trim = "RENEWED",Fields!OldTicket.Value ,Fields!PawnTicket.Value)</Value>
                               <Style>
                                 <Format>000000</Format>
                               </Style>
@@ -609,6 +637,7 @@ Expiry</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

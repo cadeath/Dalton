@@ -142,10 +142,34 @@
     End Sub
 
     Private Sub Outstanding_Loans()
-        Dim dsName As String = "dsOutstanding", mySql As String = _
+        Dim dsName As String = "dsOutstanding", mySql As String
+        If CurrentDate.Date <= monCal.SelectionStart.ToShortDateString Then
+            mySql = _
             "SELECT * FROM PAWNING WHERE (Status = 'NEW' OR Status = 'RENEW' OR Status = 'SEGRE')"
-        mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
-        mySql &= " ORDER BY PAWNTICKET ASC"
+            mySql &= String.Format(" AND LOANDATE <= '{0}'", monCal.SelectionStart.ToShortDateString)
+            mySql &= " ORDER BY PAWNTICKET ASC"
+        Else
+            mySql = "SELECT * "
+            mySql &= "FROM "
+            mySql &= "( "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'NEW') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= "  UNION "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'RENEWED') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= "  UNION "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'REDEEM') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= ") "
+            mySql &= "ORDER BY PAWNTICKET ASC"
+        End If
+
 
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtMonthOf", "DATE: " & monCal.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
