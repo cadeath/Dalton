@@ -68,11 +68,7 @@
         
 
         Dim mySql As String
-        mySql = "CREATE VIEW PAWNING( "
-        mySql &= vbCrLf & "  PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, "
-        mySql &= vbCrLf & "  ORNUM, ORDATE, OLDTICKET, NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, PRINCIPAL, "
-        mySql &= vbCrLf & "  INTEREST, ADVINT, SERVICECHARGE, PENALTY, ITEMTYPE, CATEGORY, GRAMS, KARAT, "
-        mySql &= vbCrLf & "  STATUS, PULLOUT, APPRAISER) "
+        mySql = "CREATE VIEW PAWNING "
         mySql &= vbCrLf & "AS "
         mySql &= vbCrLf & "SELECT  "
         mySql &= vbCrLf & "	P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE,  "
@@ -84,7 +80,7 @@
         mySql &= vbCrLf & "        ELSE P.DESCRIPTION "
         mySql &= vbCrLf & "    END AS Description,  "
         mySql &= vbCrLf & "    P.ORNUM, P.ORDATE, P.OLDTICKET, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL, P.PRINCIPAL,  "
-        mySql &= vbCrLf & "    P.INTEREST, P.ADVINT, P.SERVICECHARGE, P.PENALTY, P.PULLOUT, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT, "
+        mySql &= vbCrLf & "    P.INTEREST, P.ADVINT, P.SERVICECHARGE,P.PENALTY, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT, "
         mySql &= vbCrLf & "    CASE P.STATUS "
         mySql &= vbCrLf & "	    WHEN '0' THEN 'RENEWED' "
         mySql &= vbCrLf & "        WHEN 'R' THEN 'RENEW' "
@@ -94,14 +90,14 @@
         mySql &= vbCrLf & "        WHEN 'X' THEN 'REDEEM' "
         mySql &= vbCrLf & "        WHEN 'S' THEN 'SEGRE' "
         mySql &= vbCrLf & "        ELSE 'N/A' "
-        mySql &= vbCrLf & "    END AS STATUS, USR.USERNAME as APPRAISER  "
+        mySql &= vbCrLf & "    END AS STATUS, P.PULLOUT , USR.USERNAME as APPRAISER "
         mySql &= vbCrLf & "FROM TBLPAWN P "
         mySql &= vbCrLf & "INNER JOIN TBLCLIENT C  "
         mySql &= vbCrLf & "	ON C.CLIENTID = P.CLIENTID "
         mySql &= vbCrLf & "LEFT JOIN TBLCLASS CLASS "
         mySql &= vbCrLf & "	ON CLASS.CLASSID = P.CATID "
         mySql &= vbCrLf & "LEFT JOIN tbl_Gamit USR "
-        mySql &= vbCrLf & "    ON USR.USERID = P.APPRAISERID;"
+        mySql &= vbCrLf & "    ON USR.USERID = P.APPRAISERID; "
 
         Try
             RunCommand(mySql)

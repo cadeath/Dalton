@@ -174,6 +174,8 @@
         mySql &= ") "
         mySql &= "ORDER BY PAWNTICKET ASC"
 
+        Console.WriteLine(mySql)
+
 
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtMonthOf", "DATE: " & monCal.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
