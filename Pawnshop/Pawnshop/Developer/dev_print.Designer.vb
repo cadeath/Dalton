@@ -57,7 +57,7 @@ Partial Class dev_print
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 157)
+        Me.ClientSize = New System.Drawing.Size(280, 156)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.lstPT)
         Me.Controls.Add(Me.cboPrinter)

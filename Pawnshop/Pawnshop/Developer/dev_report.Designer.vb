@@ -28,7 +28,7 @@ Partial Class dev_report
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 262)
+        Me.ClientSize = New System.Drawing.Size(152, 155)
         Me.Name = "dev_report"
         Me.Text = "dev_report"
         Me.ResumeLayout(False)

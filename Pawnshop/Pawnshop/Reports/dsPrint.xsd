@@ -39,6 +39,25 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Hourly_Records" msprop:Generator_TableClassName="Hourly_RecordsDataTable" msprop:Generator_TableVarName="tableHourly_Records" msprop:Generator_RowChangedName="Hourly_RecordsRowChanged" msprop:Generator_TablePropName="Hourly_Records" msprop:Generator_RowDeletingName="Hourly_RecordsRowDeleting" msprop:Generator_RowChangingName="Hourly_RecordsRowChanging" msprop:Generator_RowEvHandlerName="Hourly_RecordsRowChangeEventHandler" msprop:Generator_RowDeletedName="Hourly_RecordsRowDeleted" msprop:Generator_RowClassName="Hourly_RecordsRow" msprop:Generator_UserTableName="Hourly_Records" msprop:Generator_RowEvArgName="Hourly_RecordsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MOD_NAME" msprop:Generator_ColumnVarNameInTable="columnMOD_NAME" msprop:Generator_ColumnPropNameInRow="MOD_NAME" msprop:Generator_ColumnPropNameInTable="MOD_NAMEColumn" msprop:Generator_UserColumnName="MOD_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="TIMELY" msprop:Generator_ColumnVarNameInTable="columnTIMELY" msprop:Generator_ColumnPropNameInRow="TIMELY" msprop:Generator_ColumnPropNameInTable="TIMELYColumn" msprop:Generator_UserColumnName="TIMELY" type="xs:string" minOccurs="0" />
+              <xs:element name="LOG_REPORT" msprop:Generator_ColumnVarNameInTable="columnLOG_REPORT" msprop:Generator_ColumnPropNameInRow="LOG_REPORT" msprop:Generator_ColumnPropNameInTable="LOG_REPORTColumn" msprop:Generator_UserColumnName="LOG_REPORT" type="xs:string" minOccurs="0" />
+              <xs:element name="REMARKS" msprop:Generator_ColumnVarNameInTable="columnREMARKS" msprop:Generator_ColumnPropNameInRow="REMARKS" msprop:Generator_ColumnPropNameInTable="REMARKSColumn" msprop:Generator_UserColumnName="REMARKS" type="xs:string" minOccurs="0" />
+              <xs:element name="HASCUSTOMER" msprop:Generator_ColumnVarNameInTable="columnHASCUSTOMER" msprop:Generator_ColumnPropNameInRow="HASCUSTOMER" msprop:Generator_ColumnPropNameInTable="HASCUSTOMERColumn" msprop:Generator_UserColumnName="HASCUSTOMER" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DT_HOURLY" msprop:Generator_TableClassName="DT_HOURLYDataTable" msprop:Generator_TableVarName="tableDT_HOURLY" msprop:Generator_TablePropName="DT_HOURLY" msprop:Generator_RowDeletingName="DT_HOURLYRowDeleting" msprop:Generator_RowChangingName="DT_HOURLYRowChanging" msprop:Generator_RowEvHandlerName="DT_HOURLYRowChangeEventHandler" msprop:Generator_RowDeletedName="DT_HOURLYRowDeleted" msprop:Generator_UserTableName="DT_HOURLY" msprop:Generator_RowChangedName="DT_HOURLYRowChanged" msprop:Generator_RowEvArgName="DT_HOURLYRowChangeEvent" msprop:Generator_RowClassName="DT_HOURLYRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DT_HOUR" msprop:Generator_ColumnVarNameInTable="columnDT_HOUR" msprop:Generator_ColumnPropNameInRow="DT_HOUR" msprop:Generator_ColumnPropNameInTable="DT_HOURColumn" msprop:Generator_UserColumnName="DT_HOUR" type="xs:string" minOccurs="0" />
+              <xs:element name="DT_COUNT" msprop:Generator_ColumnVarNameInTable="columnDT_COUNT" msprop:Generator_ColumnPropNameInRow="DT_COUNT" msprop:Generator_ColumnPropNameInTable="DT_COUNTColumn" msprop:Generator_UserColumnName="DT_COUNT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
