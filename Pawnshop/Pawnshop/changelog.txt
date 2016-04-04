@@ -1,5 +1,5 @@
 CHANGELOG
-Version 1.1.1.0b
+Version 1.1.1.0c
  - Enhance pawning computetation codes
  - Money Transfer Report
  - REDEEM MORE THAN ONE(1) MONTH over charge(double interest)
@@ -8,6 +8,7 @@ Version 1.1.1.0b
  - Add another services in Pera Padala
  - Add CashInOut Button for BDO ATM CashOut
  - No Redundant PT/OR
+ - Fix Outstanding Loan
 
 Version 1.1.1.0
  - Add Insurance Report
