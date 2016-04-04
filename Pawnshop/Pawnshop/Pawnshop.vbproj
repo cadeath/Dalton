@@ -150,6 +150,7 @@
     <Compile Include="AutoPatch\autopatch.vb" />
     <Compile Include="AutoPatch\db107.vb" />
     <Compile Include="AutoPatch\db108.vb" />
+    <Compile Include="AutoPatch\db109.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
