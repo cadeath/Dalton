@@ -35,6 +35,8 @@ err:
             con.Dispose()
             Exit Sub
         End Try
+
+        System.Threading.Thread.Sleep(1000)
     End Sub
 
     Friend Sub Database_Update(ByVal str As String)

@@ -48,7 +48,7 @@
         Try
             RunCommand(mySql)
         Catch ex As Exception
-            Log_Report(ex.ToString)
+            Log_Report(ex.ToString & "[1.0.8]")
         End Try
 
         Pawning_View()
