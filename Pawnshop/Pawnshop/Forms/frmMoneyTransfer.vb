@@ -6,6 +6,7 @@
 
     Dim idME As Integer, idMR As Integer
     Dim basicCharges As Double, commission As Double
+    Private MOD_NAME As String = "MONEYTRANSFER"
 
     ' NOTE - ADDING SERVICE
     ' STEP 3 - Add array count
@@ -512,6 +513,7 @@
             End Select
 
             .Save()
+            AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text))
         End With
 
         If daltonService(idx).isGenerated Then

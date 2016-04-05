@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.1.1.1
+ - Pawnticket Renewal, show old PT#
+ 	- FOR FIXING
+
 Version 1.1.1.0c
  - Enhance pawning computetation codes
  - Money Transfer Report
