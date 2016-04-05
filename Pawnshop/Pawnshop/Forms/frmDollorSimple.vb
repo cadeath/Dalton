@@ -5,6 +5,8 @@
     Private strRate As String = DollarRate
     Private fillData As String = "tblDollar"
 
+    Private MODULE_NAME As String = "DOLLAR"
+
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
@@ -102,6 +104,8 @@
 
             AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber)
             AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING")
+
+            AddTimelyLogs(MODULE_NAME, String.Format("{0} for Php {1} @ Php {2}", cboDenomination.Text, .NetAmount, .CurrentRate))
         End With
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)

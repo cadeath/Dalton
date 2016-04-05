@@ -1,3 +1,9 @@
+ISSUE: 0016 04/01/2016
+[-] Add Hourly Report for transactions
+	- PAWNING
+	- BORROWINGS
+
+
 ISSUE: 0015 03/15/2016
 [+] PAWNING MODULE won't compute interest when not KEYPRESS OR KEY_UP like Copy/Paste
 [+] LOAN REGISTER REPORT values are not suited to our requirements.

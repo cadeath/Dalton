@@ -1,4 +1,5 @@
 ﻿Public Class frmCashCountV2
+    Const MOD_NAME As String = "CASHCOUNT"
     Dim fillData As String = "tblCashCount"
 
     Friend isClosing As Boolean = False
@@ -160,6 +161,8 @@
             mod_system.CloseStore(total)
             frmMain.dateSet = False
             frmMain.doSegregate = False
+
+            AddTimelyLogs(MOD_NAME, "AMOUNT TODAY IS Php " & total.ToString("#,##0.00"), False)
         End If
         Me.Close()
     End Sub
@@ -224,7 +227,4 @@
         Console.WriteLine("CashCount data updated")
     End Sub
 
-    Private Sub lvCashCount_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvCashCount.SelectedIndexChanged
-
-    End Sub
 End Class

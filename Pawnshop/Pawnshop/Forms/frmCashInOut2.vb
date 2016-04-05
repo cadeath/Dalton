@@ -6,6 +6,7 @@
     Dim LineNum As Integer = 1, CIOtransactions As New CollectionCIO
     Dim isCustomInOut As Boolean = False
     Dim transName As String
+    Private MOD_NAME As String = "CASH IN/OUT"
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -24,6 +25,8 @@
         For Each cio As CashInOutTransaction In CIOtransactions
             cio.Save()
         Next
+
+        AddTimelyLogs(MOD_NAME, transName)
 
         MsgBox("Information Posted", MsgBoxStyle.Information)
         CIOtransactions = New CollectionCIO

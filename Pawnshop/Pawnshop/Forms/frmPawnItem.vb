@@ -24,6 +24,7 @@ Public Class frmPawnItem
     Private PRINTER_PT As String = GetOption("PrinterPT")
     Private PRINTER_OR As String = GetOption("PrinterOR")
 
+    Const MOD_NAME As String = "PAWNING"
     Const ITEM_REDEEM As String = "REDEEM"
     Const ITEM_NEWLOAN As String = "NEW LOAN"
     Const ITEM_RENEW As String = "RENEW"
@@ -418,6 +419,8 @@ Public Class frmPawnItem
                     AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 End If
             End If
+
+            AddTimelyLogs(MOD_NAME, String.Format("REDEEM - PT#{0}", .PawnTicket.ToString("000000")))
         End With
     End Sub
 
@@ -450,11 +453,13 @@ Public Class frmPawnItem
 
             .SaveTicket()
 
-            Dim tmpRemarks As String = "PT# " & currentPawnTicket
+            Dim tmpRemarks As String = "PT#" & currentPawnTicket.ToString("000000")
             AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
             AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_NEWLOAN)
             AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
             AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
+
+            AddTimelyLogs(MOD_NAME, "NEW LOAN - " & tmpRemarks)
         End With
     End Sub
 
@@ -499,12 +504,6 @@ Public Class frmPawnItem
         transactionType = typ
         GenerateReceipt()
 
-        'Dim overDays = CurrentDate.Date - PawnItem.MaturityDate.Date
-        'If overDays.Days < 0 And transactionType = "X" Then
-        '    isEarlyRedeem = True
-        '    earlyDays = overDays.Days + 30
-        'End If
-        'daysDue = IIf(overDays.Days > 0, overDays.Days, 0)
         ReComputeInterest()
 
         If typ = "R" Then
@@ -942,6 +941,8 @@ Public Class frmPawnItem
             AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
             AddJournal(finalInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
+
+            AddTimelyLogs(MOD_NAME, String.Format("RENEW - PT#{0}", oldPT.ToString("000000")))
         End With
 
         AddPTNum()

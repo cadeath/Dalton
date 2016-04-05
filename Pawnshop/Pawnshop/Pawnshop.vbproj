@@ -150,6 +150,7 @@
     <Compile Include="AutoPatch\autopatch.vb" />
     <Compile Include="AutoPatch\db107.vb" />
     <Compile Include="AutoPatch\db108.vb" />
+    <Compile Include="AutoPatch\db109.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -404,6 +405,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\dailyGospel.vb" />
+    <Compile Include="Modules\DailyTimeLog.vb" />
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
     <Compile Include="Modules\JournalEntries.vb" />
@@ -656,6 +658,9 @@
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptd_graph.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_Monthly_MT.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -866,6 +871,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

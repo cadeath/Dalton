@@ -48,6 +48,21 @@ err:
     Public Sub Patch_if_Patchable()
         db107.PatchUp()
         db108.PatchUp()
+        db109.PatchUp()
     End Sub
+
+    Friend Function ifTblExist(ByVal tblName As String) As Boolean
+        Dim mySql As String
+        mySql = "SELECT * FROM rdb$relations "
+        mySql &= "WHERE "
+        mySql &= String.Format("rdb$relation_name = '{0}'", tblName)
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
 
 End Module

@@ -2,6 +2,8 @@
     Dim Holder As Client
     Dim curInsurance As New Insurance
 
+    Dim MOD_NAME As String = "INSURANCE"
+
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
 
@@ -105,6 +107,8 @@
 
             AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE")
             AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber)
+
+            AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("00000"))
         End With
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
