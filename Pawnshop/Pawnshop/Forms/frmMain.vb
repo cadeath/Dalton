@@ -405,4 +405,9 @@ Public Class frmMain
     Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
         qryDate.Show()
     End Sub
+
+    Private Sub HourlyReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlyReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.Hourly
+        qryDate.Show()
+    End Sub
 End Class

@@ -10,6 +10,7 @@
         OutStanding = 7
         ItemPullOut = 8
         MoneyTransfer = 9
+        Hourly = 10
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -33,7 +34,28 @@
                 Item_PullOut()
             Case ReportType.MoneyTransfer
                 MoneyTransfer()
+            Case ReportType.Hourly
+                Generate_Hourly()
         End Select
+    End Sub
+
+    Private Sub Generate_Hourly()
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsHourly"
+        rptPath = "Reports\rptd_graph.rdlc"
+
+        mySql = "SELECT EXTRACT (HOUR from TIMELY) AS DT_HOUR, COUNT(TIMELY) AS DT_COUNT "
+        mySql &= vbCrLf & "FROM TBL_DAILYTIMELOG "
+        mySql &= vbCrLf & String.Format("WHERE TIMELY BETWEEN '{0} 0:0:0' AND '{0} 23:59:59' ", monCal.SelectionStart.ToShortDateString)
+        mySql &= vbCrLf & "GROUP BY EXTRACT (HOUR from TIMELY)"
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Console.WriteLine(String.Format("Hour: {0} = {1}", dr("DT_HOUR"), dr("DT_COUNT")))
+        Next
+
+        frmReport.ReportInit(mySql, dsName, rptPath, , False)
+        frmReport.Show()
     End Sub
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
@@ -290,6 +312,8 @@
             Case ReportType.ItemPullOut
                 Return True
             Case ReportType.Insurance
+                Return True
+            Case ReportType.Hourly
                 Return True
         End Select
 
