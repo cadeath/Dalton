@@ -1096,11 +1096,14 @@ Public Class frmPawnItem
         report.ReportPath = "Reports\layout03.rdlc"
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
+        Dim showOldPT As String = vbCrLf & _
+            "OLD PT# " & PawnItem.OldTicket.ToString("000000")
+
         Dim addParameters As New Dictionary(Of String, String)
         If isOldItem Then
-            addParameters.Add("txtDescription", PawnItem.Description)
+            addParameters.Add("txtDescription", PawnItem.Description & showOldPT)
         Else
-            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem) & showOldPT)
         End If
 
         addParameters.Add("txtInterest", PawnItem.AdvanceInterest)
@@ -1117,9 +1120,14 @@ Public Class frmPawnItem
         End If
 
         Try
-            autoPrintPT.Export(report)
-            autoPrintPT.m_currentPageIndex = 0
-            autoPrintPT.Print(printerName)
+            If DEV_MODE Then
+                frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+                frmReport.Show()
+            Else
+                autoPrintPT.Export(report)
+                autoPrintPT.m_currentPageIndex = 0
+                autoPrintPT.Print(printerName)
+            End If
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, "PRINT FAILED")
             Log_Report("PRINT FAILED: " & ex.ToString)
@@ -1167,7 +1175,7 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5) 'Reprint only
 
-        If DEV_MODE Then
+        If DEV_MODE And 0 Then
             frmReport.ReportInit(mySql, dsName, rptPath, addParameters, False)
             frmReport.Show()
 
