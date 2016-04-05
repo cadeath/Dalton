@@ -1097,19 +1097,18 @@ Public Class frmPawnItem
         report.ReportPath = "Reports\layout03.rdlc"
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
-        Dim showOldPT As String = vbCrLf & _
-            "OLD PT# " & PawnItem.OldTicket.ToString("000000")
-
         Dim addParameters As New Dictionary(Of String, String)
         If isOldItem Then
-            addParameters.Add("txtDescription", PawnItem.Description & showOldPT)
+            addParameters.Add("txtDescription", PawnItem.Description)
         Else
-            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem) & showOldPT)
+            addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         End If
 
         addParameters.Add("txtInterest", PawnItem.AdvanceInterest)
         addParameters.Add("txtServiceCharge", PawnItem.ServiceCharge / 2)
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        addParameters.Add("txtOLDPT", PawnItem.OldTicket.ToString("000000"))
+
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
                 Dim tmpPara As New ReportParameter
