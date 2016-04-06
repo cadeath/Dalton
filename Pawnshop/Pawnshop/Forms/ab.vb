@@ -7,7 +7,7 @@
             vbCrLf & "BRANCHES: " & vbCrLf & _
 "ROXAS - FROILYN" & vbCrLf & _
 "JCAT - JEN" & vbCrLf & _
-"PENDATUM - CAROL" & vbCrLf & _
+"PENDATUN - CAROL" & vbCrLf & _
 "RELIEVER - ESTHER SINDOL" & vbCrLf & _
 "RELIEVER - ANA LIEZEL VIGAFRIA" & vbCrLf & _
 "***PRK MALAKAS - JOSE COLASTRE***" & vbCrLf

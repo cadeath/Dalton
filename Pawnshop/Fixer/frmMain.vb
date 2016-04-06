@@ -22,7 +22,8 @@ Public Class frmMain
         btnFix.Enabled = False
         SetupDatabase()
 
-        Fixing_AdvanceInterest()
+        'Fixing_AdvanceInterest()
+        fix_redeemIntPenalty.Main()
 
         'No_Description()
         'pg_incomplete_desc.do_fix(txtImport.Text, txtDB.Text)
@@ -93,4 +94,5 @@ Public Class frmMain
     Private Sub txtDB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDB.DoubleClick
         ofdFirebird.ShowDialog()
     End Sub
+
 End Class
