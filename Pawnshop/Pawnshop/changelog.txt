@@ -1,7 +1,7 @@
 CHANGELOG
 Version 1.1.1.1
  - Pawnticket Renewal, show old PT#
- 	- FOR FIXING
+ - Redemption don't SAVE Interest and Penalty.
 
 Version 1.1.1.0c
  - Enhance pawning computetation codes

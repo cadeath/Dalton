@@ -1,7 +1,9 @@
+ISSUE: 0017 04/06/2016
+[-] Redeem save INTEREST for less then one month.
+
+
 ISSUE: 0016 04/01/2016
-[-] Add Hourly Report for transactions
-	- PAWNING
-	- BORROWINGS
+[+] Add Hourly Report for transactions
 
 
 ISSUE: 0015 03/15/2016

@@ -1418,7 +1418,9 @@ Public Class frmPawnItem
         'Non New Loan
         If transactionType <> "L" Then
             txtOver.Text = daysDue
-            txtPenalty.Text = Penalty.ToString("#,##0.00")
+            If daysDue <= 3 Then
+                DelayInt = 0 : Penalty = 0
+            End If
 
             If transactionType = "X" Then
                 txtRenew.Text = 0
@@ -1431,6 +1433,7 @@ Public Class frmPawnItem
             End If
 
             txtInt.Text = DelayInt.ToString("#,##0.00")
+            txtPenalty.Text = Penalty.ToString("#,##0.00")
         End If
     End Sub
 End Class
