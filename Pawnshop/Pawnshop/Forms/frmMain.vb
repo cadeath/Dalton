@@ -407,7 +407,6 @@ Public Class frmMain
     End Sub
 
     Private Sub HourlyReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlyReportToolStripMenuItem.Click
-        qryDate.FormType = qryDate.ReportType.Hourly
-        qryDate.Show()
+        diagTime.Show()
     End Sub
 End Class

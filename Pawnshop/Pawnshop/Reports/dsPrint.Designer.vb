@@ -124,7 +124,7 @@ Partial Public Class dsPrint
         Get
             Return Me._schemaSerializationMode
         End Get
-        Set(ByVal value As Global.System.Data.SchemaSerializationMode)
+        Set(value As Global.System.Data.SchemaSerializationMode)
             Me._schemaSerializationMode = value
         End Set
     End Property
@@ -1472,7 +1472,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'PawnID' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.PawnIDColumn) = value
             End Set
         End Property
@@ -1487,7 +1487,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'PawnTicket' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.PawnTicketColumn) = value
             End Set
         End Property
@@ -1502,7 +1502,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'LoanDate' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.LoanDateColumn) = value
             End Set
         End Property
@@ -1517,7 +1517,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'MatuDate' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.MatuDateColumn) = value
             End Set
         End Property
@@ -1532,7 +1532,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ExpiryDate' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.ExpiryDateColumn) = value
             End Set
         End Property
@@ -1547,7 +1547,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ItemType' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.ItemTypeColumn) = value
             End Set
         End Property
@@ -1562,7 +1562,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Pawner' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.PawnerColumn) = value
             End Set
         End Property
@@ -1577,7 +1577,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'FullAddress' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.FullAddressColumn) = value
             End Set
         End Property
@@ -1592,7 +1592,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Principal' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.PrincipalColumn) = value
             End Set
         End Property
@@ -1607,7 +1607,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Appraisal' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.AppraisalColumn) = value
             End Set
         End Property
@@ -1622,7 +1622,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Interest' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.InterestColumn) = value
             End Set
         End Property
@@ -1637,7 +1637,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'AdvInt' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.AdvIntColumn) = value
             End Set
         End Property
@@ -1652,7 +1652,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Penalty' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.PenaltyColumn) = value
             End Set
         End Property
@@ -1667,7 +1667,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ServiceCharge' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.ServiceChargeColumn) = value
             End Set
         End Property
@@ -1682,7 +1682,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'NetAmount' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.NetAmountColumn) = value
             End Set
         End Property
@@ -1697,7 +1697,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'Description' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.DescriptionColumn) = value
             End Set
         End Property
@@ -1712,7 +1712,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ContactNumber' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.ContactNumberColumn) = value
             End Set
         End Property
@@ -1727,7 +1727,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ORNum' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.ORNumColumn) = value
             End Set
         End Property
@@ -1742,7 +1742,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'ORDate' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.ORDateColumn) = value
             End Set
         End Property
@@ -1757,7 +1757,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'RenewDue' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.RenewDueColumn) = value
             End Set
         End Property
@@ -1772,7 +1772,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'RedeemDue' in table 'PawnTicket' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tablePawnTicket.RedeemDueColumn) = value
             End Set
         End Property
@@ -2055,7 +2055,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'MOD_NAME' in table 'Hourly_Records' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tableHourly_Records.MOD_NAMEColumn) = value
             End Set
         End Property
@@ -2070,7 +2070,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'TIMELY' in table 'Hourly_Records' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tableHourly_Records.TIMELYColumn) = value
             End Set
         End Property
@@ -2085,7 +2085,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'LOG_REPORT' in table 'Hourly_Records' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tableHourly_Records.LOG_REPORTColumn) = value
             End Set
         End Property
@@ -2100,7 +2100,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'REMARKS' in table 'Hourly_Records' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tableHourly_Records.REMARKSColumn) = value
             End Set
         End Property
@@ -2115,7 +2115,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'HASCUSTOMER' in table 'Hourly_Records' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tableHourly_Records.HASCUSTOMERColumn) = value
             End Set
         End Property
@@ -2206,7 +2206,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'DT_HOUR' in table 'DT_HOURLY' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tableDT_HOURLY.DT_HOURColumn) = value
             End Set
         End Property
@@ -2221,7 +2221,7 @@ Partial Public Class dsPrint
                     Throw New Global.System.Data.StrongTypingException("The value for column 'DT_COUNT' in table 'DT_HOURLY' is DBNull.", e)
                 End Try
             End Get
-            Set(ByVal value As String)
+            Set(value As String)
                 Me(Me.tableDT_HOURLY.DT_COUNTColumn) = value
             End Set
         End Property

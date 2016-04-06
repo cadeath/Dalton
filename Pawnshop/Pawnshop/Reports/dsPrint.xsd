@@ -12,7 +12,7 @@
   <xs:element name="dsPrint" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsPrint" msprop:Generator_UserDSName="dsPrint">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PawnTicket" msprop:Generator_TableClassName="PawnTicketDataTable" msprop:Generator_TableVarName="tablePawnTicket" msprop:Generator_TablePropName="PawnTicket" msprop:Generator_RowDeletingName="PawnTicketRowDeleting" msprop:Generator_RowChangingName="PawnTicketRowChanging" msprop:Generator_RowEvHandlerName="PawnTicketRowChangeEventHandler" msprop:Generator_RowDeletedName="PawnTicketRowDeleted" msprop:Generator_UserTableName="PawnTicket" msprop:Generator_RowChangedName="PawnTicketRowChanged" msprop:Generator_RowEvArgName="PawnTicketRowChangeEvent" msprop:Generator_RowClassName="PawnTicketRow">
+        <xs:element name="PawnTicket" msprop:Generator_TableClassName="PawnTicketDataTable" msprop:Generator_TableVarName="tablePawnTicket" msprop:Generator_RowChangedName="PawnTicketRowChanged" msprop:Generator_TablePropName="PawnTicket" msprop:Generator_RowDeletingName="PawnTicketRowDeleting" msprop:Generator_RowChangingName="PawnTicketRowChanging" msprop:Generator_RowEvHandlerName="PawnTicketRowChangeEventHandler" msprop:Generator_RowDeletedName="PawnTicketRowDeleted" msprop:Generator_RowClassName="PawnTicketRow" msprop:Generator_UserTableName="PawnTicket" msprop:Generator_RowEvArgName="PawnTicketRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PawnID" msprop:Generator_ColumnVarNameInTable="columnPawnID" msprop:Generator_ColumnPropNameInRow="PawnID" msprop:Generator_ColumnPropNameInTable="PawnIDColumn" msprop:Generator_UserColumnName="PawnID" type="xs:string" minOccurs="0" />
@@ -39,7 +39,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Hourly_Records" msprop:Generator_TableClassName="Hourly_RecordsDataTable" msprop:Generator_TableVarName="tableHourly_Records" msprop:Generator_RowChangedName="Hourly_RecordsRowChanged" msprop:Generator_TablePropName="Hourly_Records" msprop:Generator_RowDeletingName="Hourly_RecordsRowDeleting" msprop:Generator_RowChangingName="Hourly_RecordsRowChanging" msprop:Generator_RowEvHandlerName="Hourly_RecordsRowChangeEventHandler" msprop:Generator_RowDeletedName="Hourly_RecordsRowDeleted" msprop:Generator_RowClassName="Hourly_RecordsRow" msprop:Generator_UserTableName="Hourly_Records" msprop:Generator_RowEvArgName="Hourly_RecordsRowChangeEvent">
+        <xs:element name="Hourly_Records" msprop:Generator_TableClassName="Hourly_RecordsDataTable" msprop:Generator_TableVarName="tableHourly_Records" msprop:Generator_TablePropName="Hourly_Records" msprop:Generator_RowDeletingName="Hourly_RecordsRowDeleting" msprop:Generator_RowChangingName="Hourly_RecordsRowChanging" msprop:Generator_RowEvHandlerName="Hourly_RecordsRowChangeEventHandler" msprop:Generator_RowDeletedName="Hourly_RecordsRowDeleted" msprop:Generator_UserTableName="Hourly_Records" msprop:Generator_RowChangedName="Hourly_RecordsRowChanged" msprop:Generator_RowEvArgName="Hourly_RecordsRowChangeEvent" msprop:Generator_RowClassName="Hourly_RecordsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MOD_NAME" msprop:Generator_ColumnVarNameInTable="columnMOD_NAME" msprop:Generator_ColumnPropNameInRow="MOD_NAME" msprop:Generator_ColumnPropNameInTable="MOD_NAMEColumn" msprop:Generator_UserColumnName="MOD_NAME" type="xs:string" minOccurs="0" />
@@ -50,7 +50,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DT_HOURLY" msprop:Generator_TableClassName="DT_HOURLYDataTable" msprop:Generator_TableVarName="tableDT_HOURLY" msprop:Generator_TablePropName="DT_HOURLY" msprop:Generator_RowDeletingName="DT_HOURLYRowDeleting" msprop:Generator_RowChangingName="DT_HOURLYRowChanging" msprop:Generator_RowEvHandlerName="DT_HOURLYRowChangeEventHandler" msprop:Generator_RowDeletedName="DT_HOURLYRowDeleted" msprop:Generator_UserTableName="DT_HOURLY" msprop:Generator_RowChangedName="DT_HOURLYRowChanged" msprop:Generator_RowEvArgName="DT_HOURLYRowChangeEvent" msprop:Generator_RowClassName="DT_HOURLYRow">
+        <xs:element name="DT_HOURLY" msprop:Generator_TableClassName="DT_HOURLYDataTable" msprop:Generator_TableVarName="tableDT_HOURLY" msprop:Generator_RowChangedName="DT_HOURLYRowChanged" msprop:Generator_TablePropName="DT_HOURLY" msprop:Generator_RowDeletingName="DT_HOURLYRowDeleting" msprop:Generator_RowChangingName="DT_HOURLYRowChanging" msprop:Generator_RowEvHandlerName="DT_HOURLYRowChangeEventHandler" msprop:Generator_RowDeletedName="DT_HOURLYRowDeleted" msprop:Generator_RowClassName="DT_HOURLYRow" msprop:Generator_UserTableName="DT_HOURLY" msprop:Generator_RowEvArgName="DT_HOURLYRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="DT_HOUR" msprop:Generator_ColumnVarNameInTable="columnDT_HOUR" msprop:Generator_ColumnPropNameInRow="DT_HOUR" msprop:Generator_ColumnPropNameInTable="DT_HOURColumn" msprop:Generator_UserColumnName="DT_HOUR" type="xs:string" minOccurs="0" />
