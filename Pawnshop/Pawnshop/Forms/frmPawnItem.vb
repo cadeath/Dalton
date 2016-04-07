@@ -486,7 +486,7 @@ Public Class frmPawnItem
         mySql = "SELECT * FROM tblPAWN "
         mySql &= "WHERE PAWNTICKET = '" & currentPawnTicket & "'"
         ds = LoadSQL(mySql)
-        If ds.Tables(0).Rows.Count = 1 Then _
+        If ds.Tables(0).Rows.Count >= 1 Then _
             MsgBox("PT# " & currentPawnTicket.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : unableToSave = True : Exit Sub
 
         txtTicket.Text = CurrentPTNumber()
