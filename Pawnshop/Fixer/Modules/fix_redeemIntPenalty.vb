@@ -23,6 +23,7 @@ Module fix_redeemIntPenalty
         Next
 
         database.SaveEntry(ds, False)
+        frmMain.lblRef.Text = ds.Tables(0).Rows.Count & " FIXED."
         MsgBox(ds.Tables(0).Rows.Count & " FIXED.")
     End Sub
 End Module

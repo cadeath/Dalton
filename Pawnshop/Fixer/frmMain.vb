@@ -2,6 +2,8 @@
 
 Public Class frmMain
 
+    Private Const ADD_TITLE As String = "REDEEM REPORT PROBLEM"
+
     Private Sub ofdTemplate_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofdTemplate.FileOk
         txtImport.Text = ofdTemplate.FileName
     End Sub
@@ -95,4 +97,7 @@ Public Class frmMain
         ofdFirebird.ShowDialog()
     End Sub
 
+    Private Sub frmMain_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        Me.Text &= " - " & ADD_TITLE
+    End Sub
 End Class
