@@ -1419,7 +1419,12 @@ Public Class frmPawnItem
         If transactionType <> "L" Then
             txtOver.Text = daysDue
             If daysDue <= 3 Then
-                DelayInt = 0 : Penalty = 0
+                If DelayInt > AdvanceInterest Then
+                    DelayInt -= AdvanceInterest
+                Else
+                    DelayInt = 0
+                End If
+                Penalty = 0
             End If
 
             If transactionType = "X" Then
