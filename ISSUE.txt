@@ -1,3 +1,7 @@
+ISSUE: 0018 04/08/2016
+[-] New Loan morning, Redeem Afternoon, won't display on daily report.
+[+] Insurance and New Loan are in the same customer
+
 ISSUE: 0017 04/06/2016
 [-] Redeem save INTEREST for less then one month.
 
