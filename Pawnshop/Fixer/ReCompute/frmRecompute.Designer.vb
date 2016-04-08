@@ -27,6 +27,7 @@ Partial Class frmRecompute
         Me.btnFix = New System.Windows.Forms.Button()
         Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.ofd_db = New System.Windows.Forms.OpenFileDialog()
+        Me.lblStatus = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -64,20 +65,31 @@ Partial Class frmRecompute
         '
         'ofd_db
         '
-        Me.ofd_db.Filter = "*.fdb|Database"
+        Me.ofd_db.Filter = "Database|*.FDB"
         Me.ofd_db.Title = "Browse"
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Location = New System.Drawing.Point(9, 68)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(31, 13)
+        Me.lblStatus.TabIndex = 4
+        Me.lblStatus.Text = "IDLE"
         '
         'frmRecompute
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 101)
+        Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.pbLoading)
         Me.Controls.Add(Me.btnFix)
         Me.Controls.Add(Me.txtDB)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "frmRecompute"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Recompute"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -88,4 +100,5 @@ Partial Class frmRecompute
     Friend WithEvents btnFix As System.Windows.Forms.Button
     Friend WithEvents pbLoading As System.Windows.Forms.ProgressBar
     Friend WithEvents ofd_db As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents lblStatus As System.Windows.Forms.Label
 End Class
