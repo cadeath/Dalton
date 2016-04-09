@@ -386,8 +386,14 @@ Public Class frmPawnItem
 
             .DaysOverDue = txtOver.Text
             If isEarlyRedeem Then
-                .Interest = 0
-                .EarlyRedeem = txtInt.Text
+                Dim itmPrn As Double = .Principal
+                Dim itmAdv As Double = .AdvanceInterest
+                Dim itmDue As Double = Redeem_Due
+
+                Dim itmEarly As Double = itmAdv - (itmPrn - itmDue)
+
+                .Interest = itmEarly
+                .EarlyRedeem = itmEarly
             Else
                 .Interest = txtInt.Text
             End If

@@ -256,6 +256,12 @@
     End Property
 
     Private _earlyRedeem As Double
+    ''' <summary>
+    ''' Interest from Early Redemption
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Property EarlyRedeem() As Double
         Get
             Return _earlyRedeem
