@@ -406,6 +406,7 @@
                 .Item("SystemInfo") = Now
                 .Item("EncoderID") = UserID
                 .Item("AdvInt") = _advanceInterest
+                .Item("EarlyRedeem") = _earlyRedeem
             End With
         End If
 
