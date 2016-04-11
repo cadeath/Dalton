@@ -1,3 +1,9 @@
+ISSUE: 0019 04/11/2016
+[-] Cash Count Sheet can display PREVIOUS, not current
+[-] Outstanding Report No Renew Items
+[-] Include AUCTION DATE in the Segregated List
+
+
 ISSUE: 0018 04/08/2016
 [-] New Loan morning, Redeem Afternoon, won't display on daily report.
 [+] Insurance and New Loan are in the same customer
