@@ -887,7 +887,7 @@ Public Class frmPawnItem
         Dim interest As Double, advInt As Double
         Dim servChar As Double, penalty As Double
 
-        'Redeem
+        'Inactive
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
             .OfficialReceiptDate = CurrentDate
@@ -1431,6 +1431,9 @@ Public Class frmPawnItem
                     DelayInt = 0
                 End If
                 Penalty = 0
+            Else
+                If DelayInt > AdvanceInterest And transactionType <> "X" Then _
+                    DelayInt -= AdvanceInterest
             End If
 
             If transactionType = "X" Then
