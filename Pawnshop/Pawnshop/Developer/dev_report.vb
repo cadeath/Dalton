@@ -13,7 +13,31 @@
         'frmReport.Show()
         'Me.ReportViewer1.RefreshReport()
 
-        Graph_Report()
+        'Graph_Report()
+        CashInOut_Daily()
+    End Sub
+
+    Private Sub CashInOut_Daily()
+        Dim cur As Date = "4/1/2016"
+
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsReports"
+        rptPath = "Reports\rpt_CashInOut.rdlc"
+
+        mySql = "SELECT EXTRACT (HOUR from TIMELY) AS DT_HOUR, COUNT(TIMELY) AS DT_COUNT "
+        mySql &= vbCrLf & "FROM TBL_DAILYTIMELOG "
+        mySql &= vbCrLf & String.Format("WHERE TIMELY BETWEEN '{0} 0:0:0' AND '{1} 23:59:59' ", cur.ToShortDateString, cur.ToShortDateString)
+        mySql &= vbCrLf & "GROUP BY EXTRACT (HOUR from TIMELY)"
+
+        mySql = "SELECT * FROM TBLCASHTRANS "
+        mySql &= String.Format(" WHERE TRANSDATE = '{0}'", cur.ToShortDateString)
+
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtMonthOf", "AS OF " & cur.ToString("MMMM dd, yyyy"))
+        addPara.Add("branchName", "ROX")
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara, False)
+        frmReport.Show()
     End Sub
 
     Private Sub Graph_Report()

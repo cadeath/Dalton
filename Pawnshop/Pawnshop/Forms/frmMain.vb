@@ -1,11 +1,6 @@
 ﻿
 Public Class frmMain
 
-    ' NOTE
-    ' NotYetLogin sub don't have REPORTS DISABLE YET
-    ' Please add reports and add it also at NotYetLogin
-    ' sub.
-
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
 
@@ -50,6 +45,7 @@ Public Class frmMain
         InsuranceToolStripMenuItem.Enabled = Not st
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
+        HourlyReportToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
     End Sub
 
@@ -324,12 +320,6 @@ Public Class frmMain
     End Sub
 
     Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
-        If Not mod_system.DEV_MODE Then
-            If dateSet Then
-                MsgBoxAuthoriation("You must CLOSE the store before viewing the Cash Count Sheet")
-                Exit Sub
-            End If
-        End If
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.Show()
     End Sub

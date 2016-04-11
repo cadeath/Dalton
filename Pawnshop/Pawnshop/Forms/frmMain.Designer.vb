@@ -58,6 +58,7 @@ Partial Class frmMain
         Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutUsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -81,7 +82,6 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -222,7 +222,7 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.DailyCashCountToolStripMenuItem, Me.HourlyReportToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -296,6 +296,12 @@ Partial Class frmMain
         Me.DailyCashCountToolStripMenuItem.Name = "DailyCashCountToolStripMenuItem"
         Me.DailyCashCountToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.DailyCashCountToolStripMenuItem.Text = "&Daily Cash Count"
+        '
+        'HourlyReportToolStripMenuItem
+        '
+        Me.HourlyReportToolStripMenuItem.Name = "HourlyReportToolStripMenuItem"
+        Me.HourlyReportToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HourlyReportToolStripMenuItem.Text = "&Hourly Report"
         '
         'AboutToolStripMenuItem
         '
@@ -514,12 +520,6 @@ Partial Class frmMain
         Me.bannerSize.TabIndex = 9
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
-        '
-        'HourlyReportToolStripMenuItem
-        '
-        Me.HourlyReportToolStripMenuItem.Name = "HourlyReportToolStripMenuItem"
-        Me.HourlyReportToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.HourlyReportToolStripMenuItem.Text = "&Hourly Report"
         '
         'frmMain
         '
