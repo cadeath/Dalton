@@ -58,15 +58,6 @@
         _tblAffected(11).Add("TBLPAWN", fieldNames)
     End Sub
 
-    Sub Main()
-        For Each tbl In _tblAffected
-
-            Dim mySql As String
-            mySql = ""
-
-        Next
-    End Sub
-
 #Region "Advance Interest"
     Sub Fixing_AdvanceInterest()
         mySql = "SELECT * FROM TBLPAWN WHERE STATUS = 'L'"
