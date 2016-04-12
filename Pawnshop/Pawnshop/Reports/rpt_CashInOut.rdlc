@@ -342,7 +342,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Sum(Fields!Amount.Value)</Value>
-                              <Style />
+                              <Style>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -354,9 +356,7 @@
                           <Style>None</Style>
                         </Border>
                         <BottomBorder>
-                          <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
                         </BottomBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -426,7 +426,6 @@
                           <Style>None</Style>
                         </Border>
                         <BottomBorder>
-                          <Color>Black</Color>
                           <Style>Double</Style>
                           <Width>1.5pt</Width>
                         </BottomBorder>

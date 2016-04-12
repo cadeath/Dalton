@@ -1,4 +1,9 @@
 CHANGELOG
+Version 1.1.1.2
+ - FIX pawning save data.
+ - FIX New Loan/Renew Register
+ - Added Cash InOut Daily Summary
+
 Version 1.1.1.1
  - Pawnticket Renewal, show old PT#
  - Redemption don't SAVE Interest and Penalty.

@@ -22,9 +22,24 @@
 
     Private Sub Generate_NewLoanRenewal()
         Dim fillData As String = "dsPawning", mySql As String
-        mySql = "SELECT P.*, X.PAWNTICKET as NEWPT FROM PAWNING P LEFT JOIN PAWNING X ON X.OLDTICKET = P.PAWNTICKET WHERE "
-        mySql &= String.Format("(P.LoanDate = '{0}' AND P.STATUS = 'NEW') OR (P.ORDATE = '{0}' AND P.STATUS = 'RENEWED')", monCal.SelectionStart.ToString("MM/dd/yyyy"))
-        'mySql &= " ORDER BY X.PAWNTICKET ASC"
+
+        mySql = "SELECT "
+        mySql &= vbCrLf & "    P.PAWNTICKET, P.CLIENT, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, "
+        mySql &= vbCrLf & "    P.DESCRIPTION, P.APPRAISAL, P.PRINCIPAL, P.NETAMOUNT, "
+        mySql &= vbCrLf & "    P.RENEWDUE + P2.RENEWDUE AS RENEWDUE, "
+        mySql &= vbCrLf & "    P.INTEREST + P2.INTEREST AS INTEREST, P.PENALTY + P2.PENALTY AS PENALTY, "
+        mySql &= vbCrLf & "    P.ADVINT, P.SERVICECHARGE, "
+        mySql &= vbCrLf & "    CASE"
+        mySql &= vbCrLf & "    	WHEN (P.RENEWDUE + P2.RENEWDUE) is Null"
+        mySql &= vbCrLf & "        THEN 'NEW'"
+        mySql &= vbCrLf & "        ELSE 'RENEW'"
+        mySql &= vbCrLf & "    END AS STATUS"
+        mySql &= vbCrLf & "    , P2.PAWNTICKET AS NewPT, P.APPRAISER "
+        mySql &= vbCrLf & "FROM "
+        mySql &= vbCrLf & "	PAWNING P LEFT JOIN PAWNING P2 "
+        mySql &= vbCrLf & "    ON P.OLDTICKET = P2.PAWNTICKET "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("	P.LOANDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
 
         Console.WriteLine(">>> " & mySql)
         Dim addParameter As New Dictionary(Of String, String)
