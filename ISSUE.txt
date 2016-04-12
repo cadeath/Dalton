@@ -1,6 +1,6 @@
 ISSUE: 0019 04/11/2016
 [+] Cash Count Sheet can display PREVIOUS, not current
-[-] Outstanding Report No Renew Items
+[+] Outstanding Report No Renew Items
 [-] Include AUCTION DATE in the Segregated List
 [-] Cash In/Out Daily
 
@@ -11,7 +11,7 @@ ISSUE: 0018 04/08/2016
 
 
 ISSUE: 0017 04/06/2016
-[-] Redeem save INTEREST for less then one month.
+[+] Redeem save INTEREST for less then one month.
 
 
 ISSUE: 0016 04/01/2016
