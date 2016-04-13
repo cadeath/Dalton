@@ -51,16 +51,27 @@
     End Sub
 
     Private Sub Generate_Redemption()
-        Dim fillData As String = "dsPawning", mySql As String
-        mySql = "SELECT * FROM PAWNING WHERE "
-        mySql &= String.Format("ORDate = '{0}' AND STATUS = 'REDEEM' ", monCal.SelectionStart.ToString("MM/dd/yyyy"))
-        mySql &= "ORDER BY ORNUM ASC"
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsPawning"
+        rptPath = "Reports\rpt_RegisterRedeem.rdlc"
+
+        mySql = "SELECT "
+        mySql &= vbCrLf & "    P.PAWNTICKET, P.ORNUM, P.ORDATE, P.CLIENT, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, "
+        mySql &= vbCrLf & "    P.DESCRIPTION, P.APPRAISAL, P.PRINCIPAL, "
+        mySql &= vbCrLf & "    P.INTEREST, P.PENALTY, P.REDEEMDUE, "
+        mySql &= vbCrLf & "    P.SERVICECHARGE, 'REDEEM' AS STATUS "
+        mySql &= vbCrLf & "FROM "
+        mySql &= vbCrLf & "	PAWNING P "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("	P.ORDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= vbCrLf & "    AND P.REDEEMDUE <> 0 "
+        mySql &= vbCrLf & "    ORDER BY ORNUM ASC"
 
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
         addParameter.Add("branchName", branchName)
 
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_RegisterRedeem.rdlc", addParameter)
+        frmReport.ReportInit(mySql, dsName, rptPath, addParameter)
         frmReport.Show()
     End Sub
 

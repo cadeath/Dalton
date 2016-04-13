@@ -14,7 +14,34 @@
         'Me.ReportViewer1.RefreshReport()
 
         'Graph_Report()
-        CashInOut_Daily()
+        'CashInOut_Daily()
+        RedeemRegister()
+    End Sub
+
+    Private Sub RedeemRegister()
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsPawning"
+        rptPath = "Reports\rpt_RegisterRedeem.rdlc"
+        Dim cur As Date = "4/1/2016"
+
+        mySql = "SELECT "
+        mySql &= vbCrLf & "     P.PAWNTICKET, P.ORNUM, P.ORDATE, P.CLIENT, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, "
+        mySql &= vbCrLf & "    P.DESCRIPTION, P.APPRAISAL, P.PRINCIPAL, "
+        mySql &= vbCrLf & "    P.INTEREST, P.PENALTY, P.REDEEMDUE, "
+        mySql &= vbCrLf & "    P.SERVICECHARGE, 'REDEEM' AS STATUS "
+        mySql &= vbCrLf & "FROM "
+        mySql &= vbCrLf & "	PAWNING P "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("	P.ORDATE = '{0}'", cur.ToShortDateString)
+        mySql &= vbCrLf & "    AND P.REDEEMDUE <> 0 "
+        mySql &= vbCrLf & "    ORDER BY ORNUM ASC"
+
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtMonthOf", cur.ToLongDateString)
+        addPara.Add("branchName", "Roxas")
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara)
+        frmReport.Show()
     End Sub
 
     Private Sub CashInOut_Daily()
