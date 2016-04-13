@@ -152,23 +152,24 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
         Dim fillData As String = "dsLoanRenew", mySql As String
 
-        mySql = "SELECT LOANDATE, "
-        mySql &= vbCrLf & "        SUM(CASE WHEN ITEMTYPE = 'CEL' AND OLDTICKET = 0 THEN 1 ELSE 0 END) AS CEL_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN ITEMTYPE = 'CEL' AND OLDTICKET = 0 THEN PRINCIPAL ELSE 0 END) AS CEL_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN ITEMTYPE = 'JWL' AND OLDTICKET = 0 THEN 1 ELSE 0 END) AS JWL_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN ITEMTYPE = 'JWL' AND OLDTICKET = 0 THEN PRINCIPAL ELSE 0 END) AS JWL_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN ITEMTYPE = 'APP' AND OLDTICKET = 0 THEN 1 ELSE 0 END) AS APP_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN ITEMTYPE = 'APP' AND OLDTICKET = 0 THEN PRINCIPAL "
-        mySql &= vbCrLf & "    WHEN ITEMTYPE = 'BIG' AND OLDTICKET = 0 THEN PRINCIPAL ELSE 0 END) AS APP_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE OLDTICKET WHEN 0 THEN 1 ELSE 0 END) AS LOAN_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE OLDTICKET WHEN 0 THEN PRINCIPAL ELSE 0 END) AS LOAN_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN RENEWDUE <> 0 THEN 1 ELSE 0 END) AS RENEW_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN RENEWDUE <> 0 THEN PRINCIPAL ELSE 0 END) AS RENEW_PRINCIPAL "
-        mySql &= vbCrLf & "FROM TBLPAWN "
-        mySql &= vbCrLf & "WHERE STATUS <> 'V' AND "
-        mySql &= vbCrLf & String.Format("LOANDATE BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql = "SELECT P.LOANDATE, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'CEL' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS CEL_COUNT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'CEL' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS CEL_PRINCIPAL, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'JWL' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS JWL_COUNT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'JWL' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS JWL_PRINCIPAL, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'APP' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS APP_COUNT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'APP' AND P.OLDTICKET = 0 THEN P.PRINCIPAL "
+        mySql &= vbCrLf & "    WHEN P.ITEMTYPE = 'BIG' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS APP_PRINCIPAL, "
+        mySql &= vbCrLf & "    SUM(CASE P.OLDTICKET WHEN 0 THEN 1 ELSE 0 END) AS LOAN_COUNT, "
+        mySql &= vbCrLf & "    SUM(CASE P.OLDTICKET WHEN 0 THEN P.PRINCIPAL ELSE 0 END) AS LOAN_PRINCIPAL, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P2.RENEWDUE <> 0 THEN 1 ELSE 0 END) AS RENEW_COUNT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P2.RENEWDUE <> 0 THEN P2.PRINCIPAL ELSE 0 END) AS RENEW_PRINCIPAL "
+        mySql &= vbCrLf & "FROM TBLPAWN P "
+        mySql &= vbCrLf & "LEFT JOIN TBLPAWN P2 ON P.OLDTICKET = P2.PAWNTICKET "
+        mySql &= vbCrLf & "WHERE P.STATUS <> 'V' AND "
+        mySql &= vbCrLf & String.Format("P.LOANDATE BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= vbCrLf & "GROUP BY 1 "
-        mySql &= vbCrLf & "ORDER BY LOANDATE ASC "
+        mySql &= vbCrLf & "ORDER BY P.LOANDATE ASC "
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
