@@ -62,6 +62,7 @@ Public Class frmReport
     Friend Sub ReportInit(ByVal mySql As String, ByVal dsName As String, ByVal rptUrl As String, _
                           Optional ByVal addPara As Dictionary(Of String, String) = Nothing, Optional ByVal hasUser As Boolean = True)
         Dim ds As DataSet = LoadSQL(mySql, dsName)
+        If ds Is Nothing Then Exit Sub
 
         Console.WriteLine("SQL: " & mySql)
         Console.WriteLine("Max: " & ds.Tables(dsName).Rows.Count)

@@ -30,7 +30,7 @@
         mySql &= vbCrLf & "    P.INTEREST + P2.INTEREST AS INTEREST, P.PENALTY + P2.PENALTY AS PENALTY, "
         mySql &= vbCrLf & "    P.ADVINT, P.SERVICECHARGE, "
         mySql &= vbCrLf & "    CASE"
-        mySql &= vbCrLf & "    	WHEN (P.RENEWDUE + P2.RENEWDUE) is Null"
+        mySql &= vbCrLf & "    	WHEN P.OLDTICKET = 0"
         mySql &= vbCrLf & "        THEN 'NEW'"
         mySql &= vbCrLf & "        ELSE 'RENEW'"
         mySql &= vbCrLf & "    END AS STATUS"
@@ -40,6 +40,7 @@
         mySql &= vbCrLf & "    ON P.OLDTICKET = P2.PAWNTICKET "
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("	P.LOANDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= vbCrLf & " AND P.STATUS <> 'V'"
 
         Console.WriteLine(">>> " & mySql)
         Dim addParameter As New Dictionary(Of String, String)
@@ -65,6 +66,7 @@
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("	P.ORDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
         mySql &= vbCrLf & "    AND P.REDEEMDUE <> 0 "
+        mySql &= vbCrLf & "    AND P.STATUS <> 'V' "
         mySql &= vbCrLf & "    ORDER BY ORNUM ASC"
 
         Dim addParameter As New Dictionary(Of String, String)

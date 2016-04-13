@@ -130,9 +130,15 @@ Friend Module database
 
         Dim da As OdbcDataAdapter
         Dim ds As New DataSet, fillData As String = tblName
-
-        da = New OdbcDataAdapter(mySql, con)
-        da.Fill(ds, fillData)
+        Try
+            da = New OdbcDataAdapter(mySql, con)
+            da.Fill(ds, fillData)
+        Catch ex As Exception
+            Console.WriteLine(">>>>>" & mySql)
+            MsgBox(ex.ToString)
+            Log_Report("LoadSQL - " & ex.ToString)
+            ds = Nothing
+        End Try
 
         dbClose()
 

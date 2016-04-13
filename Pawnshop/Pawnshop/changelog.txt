@@ -3,6 +3,7 @@ Version 1.1.1.2
  - FIX pawning save data.
  - FIX New Loan/Renew Register
  - FIX Redeem Register
+ - FIX Monthly Loan Reports
  - Added Cash InOut Daily Summary
 
 Version 1.1.1.1
