@@ -47,6 +47,7 @@ Public Class frmMain
         ItemPulloutToolStripMenuItem1.Enabled = Not st
         HourlyReportToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
+        CashInOutToolStripMenuItem.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()
@@ -333,6 +334,7 @@ Public Class frmMain
     End Sub
 
     Private Sub CashInOutSummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
+        qryCashInOut.FormType = qryCashInOut.FormTrans.Monthly
         qryCashInOut.Show()
     End Sub
 
@@ -399,5 +401,10 @@ Public Class frmMain
     Private Sub HourlyReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlyReportToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.Hourly
         qryDate.Show()
+    End Sub
+
+    Private Sub CashInOutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashInOutToolStripMenuItem.Click
+        qryCashInOut.FormType = qryCashInOut.FormTrans.Daily
+        qryCashInOut.Show()
     End Sub
 End Class

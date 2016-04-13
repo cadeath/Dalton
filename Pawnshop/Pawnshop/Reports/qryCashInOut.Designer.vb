@@ -90,6 +90,8 @@ Partial Class qryCashInOut
         'chkOUT
         '
         Me.chkOUT.AutoSize = True
+        Me.chkOUT.Checked = True
+        Me.chkOUT.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkOUT.Location = New System.Drawing.Point(80, 12)
         Me.chkOUT.Name = "chkOUT"
         Me.chkOUT.Size = New System.Drawing.Size(70, 17)
