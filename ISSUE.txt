@@ -1,12 +1,18 @@
+ISSUE: 0020 04/14/2016
+[-] OR add date at the upper right part of te Received from
+[-] PT Claim Stub, include the name in the description
+
+
 ISSUE: 0019 04/11/2016
 [+] Cash Count Sheet can display PREVIOUS, not current
 [+] Outstanding Report No Renew Items
 [-] Include AUCTION DATE in the Segregated List
-[-] Cash In/Out Daily
+[+] Cash In/Out Daily
 
 
 ISSUE: 0018 04/08/2016
-[-] New Loan morning, Redeem Afternoon, won't display on daily report.
+[+] New Loan morning, Redeem Afternoon, won't display on daily report.
+ - Report Problem
 [+] Insurance and New Loan are in the same customer
 
 
@@ -35,7 +41,7 @@ ISSUE: 0013 03/11/2016
 ISSUE: 0013 03/06/2016
 [+] NO COI (Insurance) Report 
 [-] Renew transaction - Di maEdit ang Pawner's Name
-[-] Font Size sa Pawnticket if i-Print Gamay
+[+] Font Size sa Pawnticket if i-Print Gamay
 [-] Error adding NO CLIENT at pawning
 
 
