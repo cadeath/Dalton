@@ -81,7 +81,7 @@ ISSUE: 0009 02/19/2016
 
 ISSUE: 0008 02/18/2016
 [+] Migration some names are not correct
-[-] OR Printing won't print
+[+] OR Printing won't print
 [+] POSAdmin account can't void!
 [+] CashCount Sheet Bottom Margin changed
 [+] REPORT OUTSTANDING LOANS - Date is not specified
