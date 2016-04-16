@@ -1105,6 +1105,7 @@ Public Class frmPawnItem
 
         Dim addParameters As New Dictionary(Of String, String)
         If isOldItem Then
+            If PawnItem.Description = "" Then PawnItem.Description = pawning.DisplayDescription(PawnItem)
             addParameters.Add("txtDescription", PawnItem.Description)
         Else
             addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))

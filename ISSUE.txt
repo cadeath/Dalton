@@ -2,10 +2,11 @@ ISSUE: 0021 04/16/2016
 [-] Problem in OLD ITEMS EARLY REDEMPTION
 	 - Saving Interest
 	 - Generating Journal Entries
+[+] Old Item without Description causes PT Printing error
 
 ISSUE: 0020 04/14/2016
-[-] OR add date at the upper right part of te Received from
-[-] PT Claim Stub, include the name in the description
+[+] OR add date at the upper right part of te Received from
+[+] PT Claim Stub, include the name in the description
 
 
 ISSUE: 0019 04/11/2016

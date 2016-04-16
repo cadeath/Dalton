@@ -643,7 +643,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>5.07235in</Top>
         <Left>0.30286in</Left>
-        <Height>0.6875in</Height>
+        <Height>0.44445in</Height>
         <Width>3.50282in</Width>
         <ZIndex>17</ZIndex>
         <Style>
@@ -1607,6 +1607,36 @@
         <ZIndex>47</ZIndex>
         <Style>
           <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox39">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Fields!Pawner.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox39</rd:DefaultName>
+        <Top>5.5168in</Top>
+        <Left>1.09547in</Left>
+        <Height>0.25in</Height>
+        <Width>2.71021in</Width>
+        <ZIndex>48</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
