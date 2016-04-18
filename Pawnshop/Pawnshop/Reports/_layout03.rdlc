@@ -238,7 +238,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Description.Value</Value>
+                <Value>=Parameters!txtDescription.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -563,6 +563,7 @@
                 <Value>=Fields!ORDate.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
+                  <Format>MMM dd, yyyy</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -596,6 +597,10 @@
     </ReportParameter>
     <ReportParameter Name="dblTotalDue">
       <DataType>Float</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="txtDescription">
+      <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

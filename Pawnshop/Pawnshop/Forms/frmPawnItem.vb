@@ -37,6 +37,9 @@ Public Class frmPawnItem
     Private unableToSave As Boolean = False
     Private daltonCompute As PawningDalton
 
+    Private PRINT_PTOLD As Integer = 0
+    Private PRINT_PTNEW As Integer = 0
+
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -391,6 +394,7 @@ Public Class frmPawnItem
                 Dim itmDue As Double = Redeem_Due
 
                 Dim itmEarly As Double = itmAdv - (itmPrn - itmDue)
+                itmEarly -= CDbl(txtService.Text) 'Lesser Service Charge
 
                 .Interest = itmEarly
                 .EarlyRedeem = itmEarly
@@ -411,9 +415,6 @@ Public Class frmPawnItem
                 AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket)
-                If isEarlyRedeem Then
-                    AddJournal(.EarlyRedeem, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
-                End If
             Else
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
                 If isEarlyRedeem Then
@@ -941,6 +942,9 @@ Public Class frmPawnItem
 
             .SaveTicket()
 
+            PRINT_PTNEW = .PawnTicket
+            PRINT_PTOLD = .OldTicket
+
             'no early renew
             Dim finalInt As Double = IIf(interest > advInt, interest, advInt)
 
@@ -1032,7 +1036,7 @@ Public Class frmPawnItem
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
         Dim dsName As String = "dsPawn"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
-        Dim paymentStr As String
+        Dim paymentStr As String, descStr As String
         Dim rptPath As String
         rptPath = "Reports\_layout03.rdlc"
         Dim addParameters As New Dictionary(Of String, String)
@@ -1041,10 +1045,14 @@ Public Class frmPawnItem
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
         PawnItem.LoadTicket(ptIDx)
 
+        descStr = _
+            String.Format("REDEMPTION OF PT# {0:000000}", PawnItem.PawnTicket)
+
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
+        addParameters.Add("txtDescription", descStr)
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1127,7 +1135,7 @@ Public Class frmPawnItem
         End If
 
         Try
-            If DEV_MODE Then
+            If DEV_MODE And 0 Then
                 frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
                 frmReport.Show()
             Else
@@ -1154,7 +1162,7 @@ Public Class frmPawnItem
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
         Dim dsName As String = "dsPawn"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
-        Dim paymentStr As String
+        Dim paymentStr As String, descStr As String
         Dim rptPath As String
         rptPath = "Reports\_layout03.rdlc"
         Dim addParameters As New Dictionary(Of String, String)
@@ -1163,10 +1171,15 @@ Public Class frmPawnItem
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
         PawnItem.LoadTicket(ptIDx)
 
+        descStr = _
+            String.Format("Renewal of PT# {0:000000}" + vbCrLf + _
+                          "New PT# {1:000000}", PRINT_PTOLD, PRINT_PTNEW)
+
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PawnItem.RenewDue)
+        addParameters.Add("txtDescription", descStr)
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1182,7 +1195,7 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5) 'Reprint only
 
-        If DEV_MODE And 0 Then
+        If DEV_MODE Then
             frmReport.ReportInit(mySql, dsName, rptPath, addParameters, False)
             frmReport.Show()
 
