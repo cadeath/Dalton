@@ -12,7 +12,7 @@ ISSUE: 0020 04/14/2016
 ISSUE: 0019 04/11/2016
 [+] Cash Count Sheet can display PREVIOUS, not current
 [+] Outstanding Report No Renew Items
-[-] Include AUCTION DATE in the Segregated List
+[+] Include AUCTION DATE in the Segregated List
 [+] Cash In/Out Daily
 
 
