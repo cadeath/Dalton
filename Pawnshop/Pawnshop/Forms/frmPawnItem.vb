@@ -1122,7 +1122,7 @@ Public Class frmPawnItem
         addParameters.Add("txtInterest", PawnItem.AdvanceInterest)
         addParameters.Add("txtServiceCharge", PawnItem.ServiceCharge / 2)
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
-        addParameters.Add("txtOLDPT", PawnItem.OldTicket.ToString("000000"))
+        addParameters.Add("txtOLDPT", "PT# " & PawnItem.OldTicket.ToString("000000"))
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1195,7 +1195,7 @@ Public Class frmPawnItem
         paperSize.Add("width", 8.5)
         paperSize.Add("height", 4.5) 'Reprint only
 
-        If DEV_MODE Then
+        If DEV_MODE And 0 Then
             frmReport.ReportInit(mySql, dsName, rptPath, addParameters, False)
             frmReport.Show()
 

@@ -6,6 +6,7 @@ Version 1.1.1.2
  - FIX Monthly Loan Reports
  - Added Cash InOut Daily Summary
  - Add PT Claim Sub, Pawner
+ - Add OLD PT in PT
 
 Version 1.1.1.1
  - Pawnticket Renewal, show old PT#

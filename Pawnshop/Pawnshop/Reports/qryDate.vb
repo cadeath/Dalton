@@ -242,8 +242,10 @@
 
     Private Sub DailyCashCount()
         If monCal.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
-            MsgBox("Unable to Generate Cash Count Sheet yet", MsgBoxStyle.Information)
-            Exit Sub
+            If frmMain.dateSet Then
+                MsgBox("Unable to Generate Cash Count Sheet yet", MsgBoxStyle.Information)
+                Exit Sub
+            End If
         End If
 
         Dim fillData As String, rptSQL As New Dictionary(Of String, String)

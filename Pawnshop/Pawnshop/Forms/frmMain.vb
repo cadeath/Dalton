@@ -303,7 +303,6 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to the Console")
             Exit Sub
         End If
-
         frmMIS.Show()
     End Sub
 

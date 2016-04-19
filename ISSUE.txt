@@ -1,5 +1,5 @@
 ISSUE: 0021 04/16/2016
-[-] Problem in OLD ITEMS EARLY REDEMPTION
+[+] Problem in OLD ITEMS EARLY REDEMPTION
 	 - Saving Interest
 	 - Generating Journal Entries
 [+] Old Item without Description causes PT Printing error
