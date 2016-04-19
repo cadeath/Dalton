@@ -20,6 +20,10 @@
           <DataField>DT_COUNT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="TYPE">
+          <DataField>TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>Pawnshop</DataSourceName>
@@ -51,7 +55,12 @@
         <ChartSeriesHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Label>DT COUNT</Label>
+              <Group Name="Chart3_SeriesGroup1">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!TYPE.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+              <Label>=Fields!TYPE.Value</Label>
             </ChartMember>
           </ChartMembers>
         </ChartSeriesHierarchy>
@@ -238,6 +247,26 @@
             </Style>
           </ChartArea>
         </ChartAreas>
+        <ChartLegends>
+          <ChartLegend Name="ChartLegend1">
+            <Style>
+              <BackgroundGradientType>None</BackgroundGradientType>
+              <FontSize>8pt</FontSize>
+            </Style>
+            <Position>BottomCenter</Position>
+            <DockOutsideChartArea>true</DockOutsideChartArea>
+            <ChartLegendTitle>
+              <Caption />
+              <Style>
+                <FontSize>8pt</FontSize>
+                <FontWeight>Bold</FontWeight>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </ChartLegendTitle>
+            <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+            <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+          </ChartLegend>
+        </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
             <Caption>Customer Hourly Report</Caption>

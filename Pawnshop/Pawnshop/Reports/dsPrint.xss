@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:PawnTicket" ZOrder="3" X="14" Y="9" Height="257" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
     <Shape ID="DesignTable:Hourly_Records" ZOrder="2" X="195" Y="19" Height="113" Width="156" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="109" />
-    <Shape ID="DesignTable:DT_HOURLY" ZOrder="1" X="200" Y="152" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
+    <Shape ID="DesignTable:DT_HOURLY" ZOrder="1" X="200" Y="168" Height="130" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="126" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

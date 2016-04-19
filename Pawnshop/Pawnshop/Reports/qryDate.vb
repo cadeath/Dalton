@@ -44,10 +44,17 @@
         dsName = "dsHourly"
         rptPath = "Reports\rptd_graph.rdlc"
 
-        mySql = "SELECT EXTRACT (HOUR from TIMELY) AS DT_HOUR, COUNT(TIMELY) AS DT_COUNT "
+        mySql = "SELECT EXTRACT (HOUR from TIMELY) AS DT_HOUR, "
+        mySql &= vbCrLf & " CASE"
+        mySql &= vbCrLf & "  WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'NEW' THEN 'NEW LOAN' "
+        mySql &= vbCrLf & "  WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'REN' THEN 'RENEW' "
+        mySql &= vbCrLf & "  WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'RED' THEN 'REDEEM' "
+        mySql &= vbCrLf & "   ELSE MOD_NAME "
+        mySql &= vbCrLf & " END AS TYPE, "
+        mySql &= vbCrLf & "COUNT(TIMELY) AS DT_COUNT "
         mySql &= vbCrLf & "FROM TBL_DAILYTIMELOG "
         mySql &= vbCrLf & String.Format("WHERE TIMELY BETWEEN '{0} 0:0:0' AND '{0} 23:59:59' ", monCal.SelectionStart.ToShortDateString)
-        mySql &= vbCrLf & "GROUP BY EXTRACT (HOUR from TIMELY)"
+        mySql &= vbCrLf & "GROUP BY EXTRACT (HOUR from TIMELY),TYPE"
 
         Dim ds As DataSet = LoadSQL(mySql)
         For Each dr As DataRow In ds.Tables(0).Rows
