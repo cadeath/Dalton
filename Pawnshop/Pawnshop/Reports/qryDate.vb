@@ -44,25 +44,28 @@
 
     Private Sub Generate_Hourly()
         Dim mySql As String, dsName As String, rptPath As String
-        dsName = "dsHourly"
+        dsName = "dsHourly2"
         rptPath = "Reports\rptd_graph.rdlc"
 
-        mySql = "SELECT EXTRACT (HOUR from TIMELY) AS DT_HOUR, "
-        mySql &= vbCrLf & " CASE"
-        mySql &= vbCrLf & "  WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'NEW' THEN 'NEW LOAN' "
-        mySql &= vbCrLf & "  WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'REN' THEN 'RENEW' "
-        mySql &= vbCrLf & "  WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'RED' THEN 'REDEEM' "
-        mySql &= vbCrLf & "   ELSE MOD_NAME "
-        mySql &= vbCrLf & " END AS TYPE, "
-        mySql &= vbCrLf & "COUNT(TIMELY) AS DT_COUNT "
-        mySql &= vbCrLf & "FROM TBL_DAILYTIMELOG "
-        mySql &= vbCrLf & String.Format("WHERE TIMELY BETWEEN '{0} 0:0:0' AND '{0} 23:59:59' ", monCal.SelectionStart.ToShortDateString)
-        mySql &= vbCrLf & "GROUP BY EXTRACT (HOUR from TIMELY),TYPE"
+        mySql = "SELECT "
+        mySql &= vbCrLf & "	EXTRACT(HOUR from TIMELY) AS DT_HOUR, "
+        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'NEWLOAN' THEN 1 END ) AS ""NEWLOAN"", "
+        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'RENEW' THEN 1 END ) AS ""RENEW"", "
+        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'REDEEM' THEN 1 END ) AS ""REDEEM"", "
+        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'MONEYTRANSFER' THEN 1 END ) AS ""MONEYTRANSFER"", "
+        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'DOLLAR' THEN 1 END ) AS ""DOLLAR"" "
+        mySql &= vbCrLf & "FROM HOURLYREPORT "
+        mySql &= vbCrLf & "WHERE HASCUSTOMER = 1 AND "
+        mySql &= vbCrLf & String.Format("	TIMELY BETWEEN '{0} 00:00:00' AND '{0} 23:59:59' ", monCal.SelectionStart.ToShortDateString)
+        mySql &= vbCrLf & "GROUP BY EXTRACT(HOUR from TIMELY)"
+
+        mySql = "SELECT "
+        mySql &= vbCrLf & "	EXTRACT(HOUR from TIMELY) AS DT_HOUR, MOD_TYPE "
+        mySql &= vbCrLf & "FROM HOURLYREPORT "
+        mySql &= vbCrLf & "WHERE HASCUSTOMER = 1 AND MOD_NAME <> 'INSURANCE' AND "
+        mySql &= vbCrLf & "	TIMELY BETWEEN '4/15/2016 00:00:00' AND '4/15/2016 23:59:59' "
 
         Dim ds As DataSet = LoadSQL(mySql)
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Console.WriteLine(String.Format("Hour: {0} = {1}", dr("DT_HOUR"), dr("DT_COUNT")))
-        Next
 
         frmReport.ReportInit(mySql, dsName, rptPath, , False)
         frmReport.Show()

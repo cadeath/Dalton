@@ -10,18 +10,14 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsHourly">
+    <DataSet Name="dsHourly2">
       <Fields>
         <Field Name="DT_HOUR">
           <DataField>DT_HOUR</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DT_COUNT">
-          <DataField>DT_COUNT</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="TYPE">
-          <DataField>TYPE</DataField>
+        <Field Name="MOD_TYPE">
+          <DataField>MOD_TYPE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -30,10 +26,12 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <rd:DataSetInfo>
-        <rd:DataSetName>Pawnshop</rd:DataSetName>
-        <rd:TableName>dsPrint</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>DT_HOURLY</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceType>Pawnshop.dsPrint, Reports.dsPrint.Designer.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>dsPrint</rd:DataSetName>
+        <rd:SchemaPath>D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\dsPrint.xsd</rd:SchemaPath>
+        <rd:TableName>DT_HOURLY2</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -57,20 +55,21 @@
             <ChartMember>
               <Group Name="Chart3_SeriesGroup1">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!TYPE.Value</GroupExpression>
+                  <GroupExpression>=Fields!MOD_TYPE.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
-              <Label>=Fields!TYPE.Value</Label>
+              <Label>=Fields!MOD_TYPE.Value</Label>
             </ChartMember>
           </ChartMembers>
         </ChartSeriesHierarchy>
         <ChartData>
           <ChartSeriesCollection>
-            <ChartSeries Name="COUNT">
+            <ChartSeries Name="MOD_TYPE">
+              <Hidden>=iif(Fields!MOD_TYPE.Value&gt;0,false,true)</Hidden>
               <ChartDataPoints>
                 <ChartDataPoint>
                   <ChartDataPointValues>
-                    <Y>=Fields!DT_COUNT.Value</Y>
+                    <Y>=Count(Fields!MOD_TYPE.Value)</Y>
                   </ChartDataPointValues>
                   <ChartDataLabel>
                     <Style />
@@ -84,6 +83,7 @@
                   <DataElementOutput>Output</DataElementOutput>
                 </ChartDataPoint>
               </ChartDataPoints>
+              <Subtype>Stacked</Subtype>
               <Style />
               <ChartEmptyPoints>
                 <Style />
@@ -253,7 +253,7 @@
               <BackgroundGradientType>None</BackgroundGradientType>
               <FontSize>8pt</FontSize>
             </Style>
-            <Position>BottomCenter</Position>
+            <Position>TopCenter</Position>
             <DockOutsideChartArea>true</DockOutsideChartArea>
             <ChartLegendTitle>
               <Caption />
@@ -294,7 +294,7 @@
             <VerticalAlign>Top</VerticalAlign>
           </Style>
         </ChartNoDataMessage>
-        <DataSetName>dsHourly</DataSetName>
+        <DataSetName>dsHourly2</DataSetName>
         <Top>0.16333in</Top>
         <Left>0.205in</Left>
         <Height>4.88542in</Height>
