@@ -1225,32 +1225,32 @@ Partial Public Class dsPrint
     Partial Public Class DT_HOURLYDataTable
         Inherits Global.System.Data.TypedTableBase(Of DT_HOURLYRow)
         
-        Private columnDT_HOUR As Global.System.Data.DataColumn
+        Private columnLOGS_ID As Global.System.Data.DataColumn
         
-        Private columnNEWLOAN As Global.System.Data.DataColumn
+        Private columnMOD_TYPE As Global.System.Data.DataColumn
         
-        Private columnRENEW As Global.System.Data.DataColumn
-        
-        Private columnREDEEM As Global.System.Data.DataColumn
-        
-        Private columnMONEYTRANSFER As Global.System.Data.DataColumn
-        
-        Private columnDOLLAR As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private columnTIMELY As Global.System.Data.DataColumn
+
+        Private columnLOG_REPORT As Global.System.Data.DataColumn
+
+        Private columnREMARKS As Global.System.Data.DataColumn
+
+        Private columnHASCUSTOMER As Global.System.Data.DataColumn
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
-            MyBase.New
+            MyBase.New()
             Me.TableName = "DT_HOURLY"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
+            Me.BeginInit()
+            Me.InitClass()
+            Me.EndInit()
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Friend Sub New(ByVal table As Global.System.Data.DataTable)
-            MyBase.New
+            MyBase.New()
             Me.TableName = table.TableName
             If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
                 Me.CaseSensitive = table.CaseSensitive
@@ -1264,211 +1264,211 @@ Partial Public Class dsPrint
             Me.Prefix = table.Prefix
             Me.MinimumCapacity = table.MinimumCapacity
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
             MyBase.New(info, context)
-            Me.InitVars
+            Me.InitVars()
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property DT_HOURColumn() As Global.System.Data.DataColumn
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property LOGS_IDColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnDT_HOUR
+                Return Me.columnLOGS_ID
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property NEWLOANColumn() As Global.System.Data.DataColumn
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property MOD_TYPEColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnNEWLOAN
+                Return Me.columnMOD_TYPE
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property RENEWColumn() As Global.System.Data.DataColumn
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property TIMELYColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnRENEW
+                Return Me.columnTIMELY
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property REDEEMColumn() As Global.System.Data.DataColumn
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property LOG_REPORTColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnREDEEM
+                Return Me.columnLOG_REPORT
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property MONEYTRANSFERColumn() As Global.System.Data.DataColumn
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property REMARKSColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnMONEYTRANSFER
+                Return Me.columnREMARKS
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property DOLLARColumn() As Global.System.Data.DataColumn
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public ReadOnly Property HASCUSTOMERColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnDOLLAR
+                Return Me.columnHASCUSTOMER
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Browsable(false)>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Browsable(False)> _
         Public ReadOnly Property Count() As Integer
             Get
                 Return Me.Rows.Count
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As DT_HOURLYRow
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Default Public ReadOnly Property Item(ByVal index As Integer) As DT_HOURLYRow
             Get
-                Return CType(Me.Rows(index),DT_HOURLYRow)
+                Return CType(Me.Rows(index), DT_HOURLYRow)
             End Get
         End Property
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Event DT_HOURLYRowChanging As DT_HOURLYRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Event DT_HOURLYRowChanged As DT_HOURLYRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Event DT_HOURLYRowDeleting As DT_HOURLYRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Event DT_HOURLYRowDeleted As DT_HOURLYRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Overloads Sub AddDT_HOURLYRow(ByVal row As DT_HOURLYRow)
             Me.Rows.Add(row)
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddDT_HOURLYRow(ByVal DT_HOUR As String, ByVal NEWLOAN As String, ByVal RENEW As String, ByVal REDEEM As String, ByVal MONEYTRANSFER As String, ByVal DOLLAR As String) As DT_HOURLYRow
-            Dim rowDT_HOURLYRow As DT_HOURLYRow = CType(Me.NewRow,DT_HOURLYRow)
-            Dim columnValuesArray() As Object = New Object() {DT_HOUR, NEWLOAN, RENEW, REDEEM, MONEYTRANSFER, DOLLAR}
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Overloads Function AddDT_HOURLYRow(ByVal LOGS_ID As String, ByVal MOD_TYPE As String, ByVal TIMELY As String, ByVal LOG_REPORT As String, ByVal REMARKS As String, ByVal HASCUSTOMER As String) As DT_HOURLYRow
+            Dim rowDT_HOURLYRow As DT_HOURLYRow = CType(Me.NewRow, DT_HOURLYRow)
+            Dim columnValuesArray() As Object = New Object() {LOGS_ID, MOD_TYPE, TIMELY, LOG_REPORT, REMARKS, HASCUSTOMER}
             rowDT_HOURLYRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDT_HOURLYRow)
             Return rowDT_HOURLYRow
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As DT_HOURLYDataTable = CType(MyBase.Clone,DT_HOURLYDataTable)
-            cln.InitVars
+            Dim cln As DT_HOURLYDataTable = CType(MyBase.Clone, DT_HOURLYDataTable)
+            cln.InitVars()
             Return cln
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
             Return New DT_HOURLYDataTable()
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Friend Sub InitVars()
-            Me.columnDT_HOUR = MyBase.Columns("DT_HOUR")
-            Me.columnNEWLOAN = MyBase.Columns("NEWLOAN")
-            Me.columnRENEW = MyBase.Columns("RENEW")
-            Me.columnREDEEM = MyBase.Columns("REDEEM")
-            Me.columnMONEYTRANSFER = MyBase.Columns("MONEYTRANSFER")
-            Me.columnDOLLAR = MyBase.Columns("DOLLAR")
+            Me.columnLOGS_ID = MyBase.Columns("LOGS_ID")
+            Me.columnMOD_TYPE = MyBase.Columns("MOD_TYPE")
+            Me.columnTIMELY = MyBase.Columns("TIMELY")
+            Me.columnLOG_REPORT = MyBase.Columns("LOG_REPORT")
+            Me.columnREMARKS = MyBase.Columns("REMARKS")
+            Me.columnHASCUSTOMER = MyBase.Columns("HASCUSTOMER")
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Private Sub InitClass()
-            Me.columnDT_HOUR = New Global.System.Data.DataColumn("DT_HOUR", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDT_HOUR)
-            Me.columnNEWLOAN = New Global.System.Data.DataColumn("NEWLOAN", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnNEWLOAN)
-            Me.columnRENEW = New Global.System.Data.DataColumn("RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnRENEW)
-            Me.columnREDEEM = New Global.System.Data.DataColumn("REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnREDEEM)
-            Me.columnMONEYTRANSFER = New Global.System.Data.DataColumn("MONEYTRANSFER", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnMONEYTRANSFER)
-            Me.columnDOLLAR = New Global.System.Data.DataColumn("DOLLAR", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDOLLAR)
+            Me.columnLOGS_ID = New Global.System.Data.DataColumn("LOGS_ID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLOGS_ID)
+            Me.columnMOD_TYPE = New Global.System.Data.DataColumn("MOD_TYPE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnMOD_TYPE)
+            Me.columnTIMELY = New Global.System.Data.DataColumn("TIMELY", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTIMELY)
+            Me.columnLOG_REPORT = New Global.System.Data.DataColumn("LOG_REPORT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLOG_REPORT)
+            Me.columnREMARKS = New Global.System.Data.DataColumn("REMARKS", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnREMARKS)
+            Me.columnHASCUSTOMER = New Global.System.Data.DataColumn("HASCUSTOMER", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnHASCUSTOMER)
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function NewDT_HOURLYRow() As DT_HOURLYRow
-            Return CType(Me.NewRow,DT_HOURLYRow)
+            Return CType(Me.NewRow, DT_HOURLYRow)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
             Return New DT_HOURLYRow(builder)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Overrides Function GetRowType() As Global.System.Type
             Return GetType(DT_HOURLYRow)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanged(e)
             If (Not (Me.DT_HOURLYRowChangedEvent) Is Nothing) Then
-                RaiseEvent DT_HOURLYRowChanged(Me, New DT_HOURLYRowChangeEvent(CType(e.Row,DT_HOURLYRow), e.Action))
+                RaiseEvent DT_HOURLYRowChanged(Me, New DT_HOURLYRowChangeEvent(CType(e.Row, DT_HOURLYRow), e.Action))
             End If
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowChanging(e)
             If (Not (Me.DT_HOURLYRowChangingEvent) Is Nothing) Then
-                RaiseEvent DT_HOURLYRowChanging(Me, New DT_HOURLYRowChangeEvent(CType(e.Row,DT_HOURLYRow), e.Action))
+                RaiseEvent DT_HOURLYRowChanging(Me, New DT_HOURLYRowChangeEvent(CType(e.Row, DT_HOURLYRow), e.Action))
             End If
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleted(e)
             If (Not (Me.DT_HOURLYRowDeletedEvent) Is Nothing) Then
-                RaiseEvent DT_HOURLYRowDeleted(Me, New DT_HOURLYRowChangeEvent(CType(e.Row,DT_HOURLYRow), e.Action))
+                RaiseEvent DT_HOURLYRowDeleted(Me, New DT_HOURLYRowChangeEvent(CType(e.Row, DT_HOURLYRow), e.Action))
             End If
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
             MyBase.OnRowDeleting(e)
             If (Not (Me.DT_HOURLYRowDeletingEvent) Is Nothing) Then
-                RaiseEvent DT_HOURLYRowDeleting(Me, New DT_HOURLYRowChangeEvent(CType(e.Row,DT_HOURLYRow), e.Action))
+                RaiseEvent DT_HOURLYRowDeleting(Me, New DT_HOURLYRowChangeEvent(CType(e.Row, DT_HOURLYRow), e.Action))
             End If
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub RemoveDT_HOURLYRow(ByVal row As DT_HOURLYRow)
             Me.Rows.Remove(row)
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
             Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
             Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
@@ -1497,35 +1497,35 @@ Partial Public Class dsPrint
             If xs.Contains(dsSchema.TargetNamespace) Then
                 Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
                 Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-                Try 
+                Try
                     Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
                     dsSchema.Write(s1)
                     Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
                     Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
                         s2.SetLength(0)
                         schema.Write(s2)
                         If (s1.Length = s2.Length) Then
                             s1.Position = 0
                             s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
+
+                            Do While ((s1.Position <> s1.Length) _
                                         AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
+
+
                             Loop
                             If (s1.Position = s1.Length) Then
                                 Return type
                             End If
                         End If
-                        
+
                     Loop
                 Finally
                     If (Not (s1) Is Nothing) Then
-                        s1.Close
+                        s1.Close()
                     End If
                     If (Not (s2) Is Nothing) Then
-                        s2.Close
+                        s2.Close()
                     End If
                 End Try
             End If
@@ -1533,19 +1533,19 @@ Partial Public Class dsPrint
             Return type
         End Function
     End Class
-    
+
     '''<summary>
     '''Represents the strongly named DataTable class.
     '''</summary>
-    <Global.System.Serializable(),  _
-     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    <Global.System.Serializable(), _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")> _
     Partial Public Class DT_HOURLY2DataTable
         Inherits Global.System.Data.TypedTableBase(Of DT_HOURLY2Row)
-        
+
         Private columnDT_HOUR As Global.System.Data.DataColumn
-        
+
         Private columnMOD_TYPE As Global.System.Data.DataColumn
-        
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Sub New()
@@ -2550,194 +2550,16 @@ Partial Public Class dsPrint
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property DT_HOUR() As String
+        Public Property LOGS_ID() As String
             Get
                 Try
-                    Return CType(Me(Me.tableDT_HOURLY.DT_HOURColumn), String)
+                    Return CType(Me(Me.tableDT_HOURLY.LOGS_IDColumn), String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'DT_HOUR' in table 'DT_HOURLY' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LOGS_ID' in table 'DT_HOURLY' is DBNull.", e)
                 End Try
             End Get
             Set(value As String)
-                Me(Me.tableDT_HOURLY.DT_HOURColumn) = value
-            End Set
-        End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property NEWLOAN() As String
-            Get
-                Try
-                    Return CType(Me(Me.tableDT_HOURLY.NEWLOANColumn), String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'NEWLOAN' in table 'DT_HOURLY' is DBNull.", e)
-                End Try
-            End Get
-            Set(value As String)
-                Me(Me.tableDT_HOURLY.NEWLOANColumn) = value
-            End Set
-        End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property RENEW() As String
-            Get
-                Try
-                    Return CType(Me(Me.tableDT_HOURLY.RENEWColumn), String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RENEW' in table 'DT_HOURLY' is DBNull.", e)
-                End Try
-            End Get
-            Set(value As String)
-                Me(Me.tableDT_HOURLY.RENEWColumn) = value
-            End Set
-        End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property REDEEM() As String
-            Get
-                Try
-                    Return CType(Me(Me.tableDT_HOURLY.REDEEMColumn), String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'REDEEM' in table 'DT_HOURLY' is DBNull.", e)
-                End Try
-            End Get
-            Set(value As String)
-                Me(Me.tableDT_HOURLY.REDEEMColumn) = value
-            End Set
-        End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property MONEYTRANSFER() As String
-            Get
-                Try
-                    Return CType(Me(Me.tableDT_HOURLY.MONEYTRANSFERColumn), String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'MONEYTRANSFER' in table 'DT_HOURLY' is DBNull.", e)
-                End Try
-            End Get
-            Set(value As String)
-                Me(Me.tableDT_HOURLY.MONEYTRANSFERColumn) = value
-            End Set
-        End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property DOLLAR() As String
-            Get
-                Try
-                    Return CType(Me(Me.tableDT_HOURLY.DOLLARColumn), String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'DOLLAR' in table 'DT_HOURLY' is DBNull.", e)
-                End Try
-            End Get
-            Set(value As String)
-                Me(Me.tableDT_HOURLY.DOLLARColumn) = value
-            End Set
-        End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Function IsDT_HOURNull() As Boolean
-            Return Me.IsNull(Me.tableDT_HOURLY.DT_HOURColumn)
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Sub SetDT_HOURNull()
-            Me(Me.tableDT_HOURLY.DT_HOURColumn) = Global.System.Convert.DBNull
-        End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Function IsNEWLOANNull() As Boolean
-            Return Me.IsNull(Me.tableDT_HOURLY.NEWLOANColumn)
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Sub SetNEWLOANNull()
-            Me(Me.tableDT_HOURLY.NEWLOANColumn) = Global.System.Convert.DBNull
-        End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Function IsRENEWNull() As Boolean
-            Return Me.IsNull(Me.tableDT_HOURLY.RENEWColumn)
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Sub SetRENEWNull()
-            Me(Me.tableDT_HOURLY.RENEWColumn) = Global.System.Convert.DBNull
-        End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Function IsREDEEMNull() As Boolean
-            Return Me.IsNull(Me.tableDT_HOURLY.REDEEMColumn)
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Sub SetREDEEMNull()
-            Me(Me.tableDT_HOURLY.REDEEMColumn) = Global.System.Convert.DBNull
-        End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Function IsMONEYTRANSFERNull() As Boolean
-            Return Me.IsNull(Me.tableDT_HOURLY.MONEYTRANSFERColumn)
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Sub SetMONEYTRANSFERNull()
-            Me(Me.tableDT_HOURLY.MONEYTRANSFERColumn) = Global.System.Convert.DBNull
-        End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Function IsDOLLARNull() As Boolean
-            Return Me.IsNull(Me.tableDT_HOURLY.DOLLARColumn)
-        End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Sub SetDOLLARNull()
-            Me(Me.tableDT_HOURLY.DOLLARColumn) = Global.System.Convert.DBNull
-        End Sub
-    End Class
-
-    '''<summary>
-    '''Represents strongly named DataRow class.
-    '''</summary>
-    Partial Public Class DT_HOURLY2Row
-        Inherits Global.System.Data.DataRow
-
-        Private tableDT_HOURLY2 As DT_HOURLY2DataTable
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-            MyBase.New(rb)
-            Me.tableDT_HOURLY2 = CType(Me.Table, DT_HOURLY2DataTable)
-        End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Property DT_HOUR() As String
-            Get
-                Try
-                    Return CType(Me(Me.tableDT_HOURLY2.DT_HOURColumn), String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'DT_HOUR' in table 'DT_HOURLY2' is DBNull.", e)
-                End Try
-            End Get
-            Set(value As String)
-                Me(Me.tableDT_HOURLY2.DT_HOURColumn) = value
+                Me(Me.tableDT_HOURLY.LOGS_IDColumn) = value
             End Set
         End Property
 
@@ -2746,36 +2568,214 @@ Partial Public Class dsPrint
         Public Property MOD_TYPE() As String
             Get
                 Try
-                    Return CType(Me(Me.tableDT_HOURLY2.MOD_TYPEColumn), String)
+                    Return CType(Me(Me.tableDT_HOURLY.MOD_TYPEColumn), String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'MOD_TYPE' in table 'DT_HOURLY2' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'MOD_TYPE' in table 'DT_HOURLY' is DBNull.", e)
                 End Try
             End Get
             Set(value As String)
-                Me(Me.tableDT_HOURLY2.MOD_TYPEColumn) = value
+                Me(Me.tableDT_HOURLY.MOD_TYPEColumn) = value
             End Set
         End Property
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Function IsDT_HOURNull() As Boolean
-            Return Me.IsNull(Me.tableDT_HOURLY2.DT_HOURColumn)
+        Public Property TIMELY() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableDT_HOURLY.TIMELYColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TIMELY' in table 'DT_HOURLY' is DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableDT_HOURLY.TIMELYColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property LOG_REPORT() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableDT_HOURLY.LOG_REPORTColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LOG_REPORT' in table 'DT_HOURLY' is DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableDT_HOURLY.LOG_REPORTColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property REMARKS() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableDT_HOURLY.REMARKSColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'REMARKS' in table 'DT_HOURLY' is DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableDT_HOURLY.REMARKSColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Property HASCUSTOMER() As String
+            Get
+                Try
+                    Return CType(Me(Me.tableDT_HOURLY.HASCUSTOMERColumn), String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'HASCUSTOMER' in table 'DT_HOURLY' is DBNull.", e)
+                End Try
+            End Get
+            Set(value As String)
+                Me(Me.tableDT_HOURLY.HASCUSTOMERColumn) = value
+            End Set
+        End Property
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsLOGS_IDNull() As Boolean
+            Return Me.IsNull(Me.tableDT_HOURLY.LOGS_IDColumn)
         End Function
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-        Public Sub SetDT_HOURNull()
-            Me(Me.tableDT_HOURLY2.DT_HOURColumn) = Global.System.Convert.DBNull
+        Public Sub SetLOGS_IDNull()
+            Me(Me.tableDT_HOURLY.LOGS_IDColumn) = Global.System.Convert.DBNull
         End Sub
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
         Public Function IsMOD_TYPENull() As Boolean
-            Return Me.IsNull(Me.tableDT_HOURLY2.MOD_TYPEColumn)
+            Return Me.IsNull(Me.tableDT_HOURLY.MOD_TYPEColumn)
         End Function
 
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetMOD_TYPENull()
+            Me(Me.tableDT_HOURLY.MOD_TYPEColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsTIMELYNull() As Boolean
+            Return Me.IsNull(Me.tableDT_HOURLY.TIMELYColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetTIMELYNull()
+            Me(Me.tableDT_HOURLY.TIMELYColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsLOG_REPORTNull() As Boolean
+            Return Me.IsNull(Me.tableDT_HOURLY.LOG_REPORTColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetLOG_REPORTNull()
+            Me(Me.tableDT_HOURLY.LOG_REPORTColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsREMARKSNull() As Boolean
+            Return Me.IsNull(Me.tableDT_HOURLY.REMARKSColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetREMARKSNull()
+            Me(Me.tableDT_HOURLY.REMARKSColumn) = Global.System.Convert.DBNull
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Function IsHASCUSTOMERNull() As Boolean
+            Return Me.IsNull(Me.tableDT_HOURLY.HASCUSTOMERColumn)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Public Sub SetHASCUSTOMERNull()
+            Me(Me.tableDT_HOURLY.HASCUSTOMERColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class DT_HOURLY2Row
+        Inherits Global.System.Data.DataRow
+        
+        Private tableDT_HOURLY2 As DT_HOURLY2DataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableDT_HOURLY2 = CType(Me.Table,DT_HOURLY2DataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property DT_HOUR() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDT_HOURLY2.DT_HOURColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DT_HOUR' in table 'DT_HOURLY2' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDT_HOURLY2.DT_HOURColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property MOD_TYPE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDT_HOURLY2.MOD_TYPEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'MOD_TYPE' in table 'DT_HOURLY2' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDT_HOURLY2.MOD_TYPEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDT_HOURNull() As Boolean
+            Return Me.IsNull(Me.tableDT_HOURLY2.DT_HOURColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDT_HOURNull()
+            Me(Me.tableDT_HOURLY2.DT_HOURColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsMOD_TYPENull() As Boolean
+            Return Me.IsNull(Me.tableDT_HOURLY2.MOD_TYPEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetMOD_TYPENull()
             Me(Me.tableDT_HOURLY2.MOD_TYPEColumn) = Global.System.Convert.DBNull
         End Sub

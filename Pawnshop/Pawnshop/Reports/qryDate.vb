@@ -12,6 +12,7 @@
         MoneyTransfer = 9
         Hourly = 10
         DailyInsurance = 11
+        HourlySummary = 12
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -37,6 +38,8 @@
                 MoneyTransfer()
             Case ReportType.Hourly
                 Generate_Hourly()
+            Case ReportType.HourlySummary
+                Hourly_Summary()
             Case ReportType.DailyInsurance
                 DailyInsurance()
         End Select
@@ -48,26 +51,49 @@
         rptPath = "Reports\rptd_graph.rdlc"
 
         mySql = "SELECT "
-        mySql &= vbCrLf & "	EXTRACT(HOUR from TIMELY) AS DT_HOUR, "
-        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'NEWLOAN' THEN 1 END ) AS ""NEWLOAN"", "
-        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'RENEW' THEN 1 END ) AS ""RENEW"", "
-        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'REDEEM' THEN 1 END ) AS ""REDEEM"", "
-        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'MONEYTRANSFER' THEN 1 END ) AS ""MONEYTRANSFER"", "
-        mySql &= vbCrLf & "    COUNT( CASE MOD_TYPE WHEN 'DOLLAR' THEN 1 END ) AS ""DOLLAR"" "
-        mySql &= vbCrLf & "FROM HOURLYREPORT "
-        mySql &= vbCrLf & "WHERE HASCUSTOMER = 1 AND "
-        mySql &= vbCrLf & String.Format("	TIMELY BETWEEN '{0} 00:00:00' AND '{0} 23:59:59' ", monCal.SelectionStart.ToShortDateString)
-        mySql &= vbCrLf & "GROUP BY EXTRACT(HOUR from TIMELY)"
-
-        mySql = "SELECT "
-        mySql &= vbCrLf & "	EXTRACT(HOUR from TIMELY) AS DT_HOUR, MOD_TYPE "
-        mySql &= vbCrLf & "FROM HOURLYREPORT "
+        mySql &= vbCrLf & "    EXTRACT(HOUR from TIMELY) AS DT_HOUR, "
+        mySql &= vbCrLf & "    CASE "
+        mySql &= vbCrLf & "        WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'NEW' THEN 'NEWLOAN' "
+        mySql &= vbCrLf & "        WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'REN' THEN 'RENEW' "
+        mySql &= vbCrLf & "        WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'RED' THEN 'REDEEM' "
+        mySql &= vbCrLf & "        ELSE "
+        mySql &= vbCrLf & "        MOD_NAME "
+        mySql &= vbCrLf & "END AS ""MOD_TYPE"" "
+        mySql &= vbCrLf & "FROM TBL_DAILYTIMELOG "
         mySql &= vbCrLf & "WHERE HASCUSTOMER = 1 AND MOD_NAME <> 'INSURANCE' AND "
-        mySql &= vbCrLf & "	TIMELY BETWEEN '4/15/2016 00:00:00' AND '4/15/2016 23:59:59' "
+        mySql &= vbCrLf & String.Format("    TIMELY BETWEEN '{0} 00:00:00' AND '{0} 23:59:59'", monCal.SelectionStart.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql)
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtAsOf", "Date: " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
+        addPara.Add("branchName", branchName)
 
-        frmReport.ReportInit(mySql, dsName, rptPath, , False)
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara, False)
+        frmReport.Show()
+    End Sub
+
+    Private Sub Hourly_Summary()
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsHrSummary"
+        rptPath = "Reports\rpt_hourlySummary.rdlc"
+
+        mySql = "SELECT D.*, "
+        mySql &= vbCrLf & "  CASE "
+        mySql &= vbCrLf & "    WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'NEW' THEN 'NEWLOAN' "
+        mySql &= vbCrLf & "    WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'REN' THEN 'RENEW' "
+        mySql &= vbCrLf & "    WHEN MOD_NAME = 'PAWNING' AND LEFT(LOG_REPORT,3) = 'RED' THEN 'REDEEM' "
+        mySql &= vbCrLf & "    ELSE "
+        mySql &= vbCrLf & "    MOD_NAME "
+        mySql &= vbCrLf & "  END AS ""MOD_TYPE"" "
+        mySql &= vbCrLf & "FROM TBL_DAILYTIMELOG D "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("	TIMELY BETWEEN '{0} 00:00:00' AND '{0} 23:59:59'", monCal.SelectionStart.ToShortDateString)
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtSubtitle", String.Format("{0} as of {1}", branchName, monCal.SelectionStart.ToShortDateString))
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara)
         frmReport.Show()
     End Sub
 
@@ -364,6 +390,8 @@
             Case ReportType.Insurance
                 Return True
             Case ReportType.Hourly
+                Return True
+            Case ReportType.HourlySummary
                 Return True
             Case ReportType.DailyInsurance
                 Return True

@@ -406,4 +406,9 @@ Public Class frmMain
         qryCashInOut.FormType = qryCashInOut.FormTrans.Daily
         qryCashInOut.Show()
     End Sub
+
+    Private Sub HourlySummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HourlySummaryToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.HourlySummary
+        qryDate.Show()
+    End Sub
 End Class
