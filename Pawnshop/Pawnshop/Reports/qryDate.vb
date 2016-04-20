@@ -11,6 +11,7 @@
         ItemPullOut = 8
         MoneyTransfer = 9
         Hourly = 10
+        DailyInsurance = 11
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -36,6 +37,8 @@
                 MoneyTransfer()
             Case ReportType.Hourly
                 Generate_Hourly()
+            Case ReportType.DailyInsurance
+                DailyInsurance()
         End Select
     End Sub
 
@@ -116,6 +119,20 @@
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Insurance.rdlc", rptPara)
+        frmReport.Show()
+    End Sub
+
+    Private Sub DailyInsurance()
+        Dim fillData As String = "dsInsurance", mySql As String
+
+        mySql = "SELECT * FROM tblInsurance "
+        mySql &= String.Format("WHERE transDate = '{0}'", monCal.SelectionStart.ToShortDateString)
+
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToString("MMM dd, yyyy"))
         rptPara.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, fillData, "Reports\rpt_Insurance.rdlc", rptPara)
@@ -344,6 +361,8 @@
             Case ReportType.Insurance
                 Return True
             Case ReportType.Hourly
+                Return True
+            Case ReportType.DailyInsurance
                 Return True
         End Select
 

@@ -371,7 +371,7 @@ Public Class frmMain
     End Sub
 
     Private Sub InsuranceToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles InsuranceToolStripMenuItem.Click
-        qryDate.FormType = qryDate.ReportType.Insurance
+        qryDate.FormType = qryDate.ReportType.DailyInsurance
         qryDate.Show()
     End Sub
 
