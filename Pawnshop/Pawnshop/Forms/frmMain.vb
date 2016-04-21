@@ -46,6 +46,7 @@ Public Class frmMain
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
         HourlyReportToolStripMenuItem.Enabled = Not st
+        HourlySummaryToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
         CashInOutToolStripMenuItem.Enabled = Not st
     End Sub

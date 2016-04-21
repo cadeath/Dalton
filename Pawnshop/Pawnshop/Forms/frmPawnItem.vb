@@ -929,7 +929,7 @@ Public Class frmPawnItem
             .DaysOverDue = 0
             .Interest = 0
             .Penalty = 0
-            .ServiceCharge = 0
+            .ServiceCharge = IIf(isOldItem, 0, CInt(txtService.Text))
             .EVAT = 0
             .RenewDue = 0
             .RedeemDue = 0

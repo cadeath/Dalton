@@ -12,7 +12,7 @@
 Module mod_system
 
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = 0
+    Public DEV_MODE As Boolean = True
     Public ADS_ESKIE As Boolean = True
 
     Public CurrentDate As Date = Now
