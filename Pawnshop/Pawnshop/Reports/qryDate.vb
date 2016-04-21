@@ -13,6 +13,7 @@
         Hourly = 10
         DailyInsurance = 11
         HourlySummary = 12
+        LoanRenew2 = 13
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -42,6 +43,8 @@
                 Hourly_Summary()
             Case ReportType.DailyInsurance
                 DailyInsurance()
+            Case ReportType.LoanRenew2
+                LoanRenew2()
         End Select
     End Sub
 
@@ -116,10 +119,46 @@
                     FormType = ReportType.MoneyTransfer
                 Case "Item Pullout"
                     FormType = ReportType.ItemPullOut
+                Case "Loan Register - New Loan and Renewal 2"
+                    FormType = ReportType.LoanRenew2
             End Select
         End If
 
         Generate()
+    End Sub
+
+    Private Sub LoanRenew2()
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionEnd)
+        Dim mySql As String, dsName As String = "dsLoanRenew"
+        Dim rptPath As String = "Reports/rpt_LoanRenew_Monthly2.rdlc"
+
+        mySql = "SELECT "
+        mySql &= vbCrLf & "    P.LOANDATE, SUM(P.PRINCIPAL) AS PRINCIPAL, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET = 0 THEN P.ADVINT ELSE 0 END) AS ADV_INT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET = 0 THEN P.NETAMOUNT ELSE 0 END) AS NET_AMOUNT, "
+        mySql &= vbCrLf & "    SUM(P.SERVICECHARGE) AS SERVICECHARGE, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.INTEREST + P2.INTEREST ELSE 0 END) AS RENEW_INT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.PENALTY + P2.PENALTY ELSE 0 END) AS RENEW_PEN,    "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.RENEWDUE + P2.RENEWDUE ELSE 0 END) AS RENEW_DUE, "
+        mySql &= vbCrLf & "    COUNT(P.PAWNTICKET) AS PT_CNT "
+        mySql &= vbCrLf & "FROM "
+        mySql &= vbCrLf & "    PAWNING P LEFT JOIN PAWNING P2 "
+        mySql &= vbCrLf & "    ON P.OLDTICKET = P2.PAWNTICKET "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("    P.LOANDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
+        mySql &= vbCrLf & "    AND (P.OLDTICKET = 0 OR (P.OLDTICKET > 0 AND P.RENEWDUE + P2.RENEWDUE Is Not Null)) "
+        mySql &= vbCrLf & "     AND P.STATUS <> 'V' "
+        mySql &= vbCrLf & "GROUP BY "
+        mySql &= vbCrLf & "    P.LOANDATE"
+
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("branchName", branchName)
+        addPara.Add("txtMonthOf", "FOR THE MONTH OF " & st.ToString("MMMM yyyy").ToUpper)
+
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara)
+        frmReport.Show()
     End Sub
 
     Private Sub MoneyTransfer()

@@ -1,3 +1,10 @@
+ISSUE: 0022 04/21/2016
+[+] New Loans-reports monthly w/ int & sc.
+[-] Red. & Ren.-Monthly Reports, separate penalties from int.
+[-] Renewed PT- once viewed on preceding days, displayed "000" value.
+[-] Loan register-new loan & renewal-service charge have no amount.(renew)
+
+
 ISSUE: 0021 04/16/2016
 [+] Problem in OLD ITEMS EARLY REDEMPTION
 	 - Saving Interest

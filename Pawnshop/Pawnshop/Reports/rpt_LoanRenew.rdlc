@@ -1865,7 +1865,7 @@ End Function</Code>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1in</Height>
+      <Height>0.65625in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1884,8 +1884,8 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.22424in</Top>
-          <Left>0.12609in</Left>
+          <Top>0.06174in</Top>
+          <Left>0.05in</Left>
           <Height>0.25in</Height>
           <Width>2.01042in</Width>
           <Style>
@@ -1915,7 +1915,7 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.22424in</Top>
+          <Top>0.06174in</Top>
           <Left>2.7237in</Left>
           <Height>0.25in</Height>
           <Width>5.11459in</Width>
@@ -1947,7 +1947,7 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.22424in</Top>
+          <Top>0.06174in</Top>
           <Left>8.31597in</Left>
           <Height>0.25in</Height>
           <Width>2.01042in</Width>
@@ -1979,7 +1979,7 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.51313in</Top>
+          <Top>0.35063in</Top>
           <Left>8.31597in</Left>
           <Height>0.25in</Height>
           <Width>2.01042in</Width>
