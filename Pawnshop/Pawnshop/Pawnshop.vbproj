@@ -544,7 +544,6 @@
     <EmbeddedResource Include="Forms\frmRate2.resx">
       <DependentUpon>frmRate2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\d_insurance.rdlc" />
     <EmbeddedResource Include="Reports\d_Loan.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
