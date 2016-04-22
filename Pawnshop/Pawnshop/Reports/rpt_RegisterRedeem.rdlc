@@ -496,7 +496,6 @@ Description</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -666,7 +665,7 @@ Description</Value>
                             <TextRun>
                               <Value>=Fields!PawnTicket.Value</Value>
                               <Style>
-                                <Format>0;(0);''</Format>
+                                <Format>000000</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -684,6 +683,7 @@ Description</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
