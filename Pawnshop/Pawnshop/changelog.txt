@@ -8,6 +8,8 @@ Version 1.1.1.2
  - Add PT Claim Sub, Pawner
  - Add OLD PT in PT
  - Include Daily Insurance Report
+ - Include Additional Loan Register
+ - Include Penalty on Redeem Renew Monthly
 
 Version 1.1.1.1
  - Pawnticket Renewal, show old PT#

@@ -1,8 +1,8 @@
 ISSUE: 0022 04/21/2016
 [+] New Loans-reports monthly w/ int & sc.
-[-] Red. & Ren.-Monthly Reports, separate penalties from int.
+[+] Red. & Ren.-Monthly Reports, separate penalties from int.
 [-] Renewed PT- once viewed on preceding days, displayed "000" value.
-[-] Loan register-new loan & renewal-service charge have no amount.(renew)
+[+] Loan register-new loan & renewal-service charge have no amount.(renew)
 
 
 ISSUE: 0021 04/16/2016
@@ -10,6 +10,7 @@ ISSUE: 0021 04/16/2016
 	 - Saving Interest
 	 - Generating Journal Entries
 [+] Old Item without Description causes PT Printing error
+
 
 ISSUE: 0020 04/14/2016
 [+] OR add date at the upper right part of te Received from
@@ -66,11 +67,10 @@ ISSUE: 0013 03/06/2016
 ISSUE: 0012 03/04/2016
 [+] Disable Cash Count Sheet Report when Cash Count is not yet Executed
 		- PTU
-[-]	Pawnticket and OR number should appear in the print layout
-[-]	Old Pawnticket number should appear in the print layout of PT
-[-]	Include Pawner's Name at the claim stub
-[-]	Report small font
-	 - Cash Cash Sheet [Done]
+[+]	Pawnticket and OR number should appear in the print layout
+[+]	Old Pawnticket number should appear in the print layout of PT
+[+]	Include Pawner's Name at the claim stub
+[+]	Report small font
 [+]	Unable to reprint OR
 
 
@@ -96,7 +96,7 @@ ISSUE: 0008 02/18/2016
 [+] REPORT Schedule of Loan & Renewal - Representation of the Grand Total
 [-] REPORT Cash In/Out - Range
 [-] GPRS Remittance, with Commission and Gross
-[-] REPORT Loan Register - Redemption Summary
+[+] REPORT Loan Register - Redemption Summary
 
 
 ISSUE: 0007 02/16/2016
@@ -109,7 +109,7 @@ ISSUE: 0006 02/15/2016
 [o] GPRS to GPRS - Received Money, without Service Charge
 	- Previously, it was given to me with charges. Update Database
 [+] iREMIT change into GPRS - iRemit to GPRS
-[-] Cash In/Out report
+[+] Cash In/Out report
 	- Working but not fully functional
 [+] Add Smart Money from Perfecom, Cash In/Out
 [+] Income from EC Pay, account should be change
@@ -147,6 +147,7 @@ ISSUE: 0002 02/06/2016
 [+] Pawning - TAB and Enter should be consistent
 [-] Pawning - if not Appraiser, do not display
 [+] Money Transfer - Enable multiple encoding
+[-] User Management - Priviledges should have SPECIAL rights.
 
 
 ISSUE: 0001 02/04/2016

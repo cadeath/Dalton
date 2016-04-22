@@ -1145,6 +1145,8 @@ Partial Public Class dsReports
         
         Private columnINTEREST_REDEEM As Global.System.Data.DataColumn
         
+        Private columnPENALTY_REDEEM As Global.System.Data.DataColumn
+        
         Private columnSC_REDEEM As Global.System.Data.DataColumn
         
         Private columnTOTAL_REDEEM As Global.System.Data.DataColumn
@@ -1154,6 +1156,8 @@ Partial Public Class dsReports
         Private columnPRINCIPAL_RENEW As Global.System.Data.DataColumn
         
         Private columnINTEREST_RENEW As Global.System.Data.DataColumn
+        
+        Private columnPENALTY_RENEW As Global.System.Data.DataColumn
         
         Private columnSC_RENEW As Global.System.Data.DataColumn
         
@@ -1228,6 +1232,14 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PENALTY_REDEEMColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPENALTY_REDEEM
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property SC_REDEEMColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnSC_REDEEM
@@ -1263,6 +1275,14 @@ Partial Public Class dsReports
         Public ReadOnly Property INTEREST_RENEWColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnINTEREST_RENEW
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PENALTY_RENEWColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPENALTY_RENEW
             End Get
         End Property
         
@@ -1319,9 +1339,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AdddsRedeemRenewRow(ByVal ORDate As String, ByVal COUNT_REDEEM As String, ByVal PRINCIPAL_REDEEM As String, ByVal INTEREST_REDEEM As String, ByVal SC_REDEEM As String, ByVal TOTAL_REDEEM As String, ByVal COUNT_RENEW As String, ByVal PRINCIPAL_RENEW As String, ByVal INTEREST_RENEW As String, ByVal SC_RENEW As String, ByVal TOTAL_RENEW As String) As dsRedeemRenewRow
+        Public Overloads Function AdddsRedeemRenewRow(ByVal ORDate As String, ByVal COUNT_REDEEM As String, ByVal PRINCIPAL_REDEEM As String, ByVal INTEREST_REDEEM As String, ByVal PENALTY_REDEEM As String, ByVal SC_REDEEM As String, ByVal TOTAL_REDEEM As String, ByVal COUNT_RENEW As String, ByVal PRINCIPAL_RENEW As String, ByVal INTEREST_RENEW As String, ByVal PENALTY_RENEW As String, ByVal SC_RENEW As String, ByVal TOTAL_RENEW As String) As dsRedeemRenewRow
             Dim rowdsRedeemRenewRow As dsRedeemRenewRow = CType(Me.NewRow,dsRedeemRenewRow)
-            Dim columnValuesArray() As Object = New Object() {ORDate, COUNT_REDEEM, PRINCIPAL_REDEEM, INTEREST_REDEEM, SC_REDEEM, TOTAL_REDEEM, COUNT_RENEW, PRINCIPAL_RENEW, INTEREST_RENEW, SC_RENEW, TOTAL_RENEW}
+            Dim columnValuesArray() As Object = New Object() {ORDate, COUNT_REDEEM, PRINCIPAL_REDEEM, INTEREST_REDEEM, PENALTY_REDEEM, SC_REDEEM, TOTAL_REDEEM, COUNT_RENEW, PRINCIPAL_RENEW, INTEREST_RENEW, PENALTY_RENEW, SC_RENEW, TOTAL_RENEW}
             rowdsRedeemRenewRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowdsRedeemRenewRow)
             Return rowdsRedeemRenewRow
@@ -1348,11 +1368,13 @@ Partial Public Class dsReports
             Me.columnCOUNT_REDEEM = MyBase.Columns("COUNT_REDEEM")
             Me.columnPRINCIPAL_REDEEM = MyBase.Columns("PRINCIPAL_REDEEM")
             Me.columnINTEREST_REDEEM = MyBase.Columns("INTEREST_REDEEM")
+            Me.columnPENALTY_REDEEM = MyBase.Columns("PENALTY_REDEEM")
             Me.columnSC_REDEEM = MyBase.Columns("SC_REDEEM")
             Me.columnTOTAL_REDEEM = MyBase.Columns("TOTAL_REDEEM")
             Me.columnCOUNT_RENEW = MyBase.Columns("COUNT_RENEW")
             Me.columnPRINCIPAL_RENEW = MyBase.Columns("PRINCIPAL_RENEW")
             Me.columnINTEREST_RENEW = MyBase.Columns("INTEREST_RENEW")
+            Me.columnPENALTY_RENEW = MyBase.Columns("PENALTY_RENEW")
             Me.columnSC_RENEW = MyBase.Columns("SC_RENEW")
             Me.columnTOTAL_RENEW = MyBase.Columns("TOTAL_RENEW")
         End Sub
@@ -1368,6 +1390,8 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnPRINCIPAL_REDEEM)
             Me.columnINTEREST_REDEEM = New Global.System.Data.DataColumn("INTEREST_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnINTEREST_REDEEM)
+            Me.columnPENALTY_REDEEM = New Global.System.Data.DataColumn("PENALTY_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPENALTY_REDEEM)
             Me.columnSC_REDEEM = New Global.System.Data.DataColumn("SC_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSC_REDEEM)
             Me.columnTOTAL_REDEEM = New Global.System.Data.DataColumn("TOTAL_REDEEM", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -1378,6 +1402,8 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnPRINCIPAL_RENEW)
             Me.columnINTEREST_RENEW = New Global.System.Data.DataColumn("INTEREST_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnINTEREST_RENEW)
+            Me.columnPENALTY_RENEW = New Global.System.Data.DataColumn("PENALTY_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPENALTY_RENEW)
             Me.columnSC_RENEW = New Global.System.Data.DataColumn("SC_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSC_RENEW)
             Me.columnTOTAL_RENEW = New Global.System.Data.DataColumn("TOTAL_RENEW", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -6132,6 +6158,21 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PENALTY_REDEEM() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.PENALTY_REDEEMColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PENALTY_REDEEM' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.PENALTY_REDEEMColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property SC_REDEEM() As String
             Get
                 Try 
@@ -6202,6 +6243,21 @@ Partial Public Class dsReports
             End Get
             Set
                 Me(Me.tabledsRedeemRenew.INTEREST_RENEWColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PENALTY_RENEW() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabledsRedeemRenew.PENALTY_RENEWColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PENALTY_RENEW' in table 'dsRedeemRenew' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabledsRedeemRenew.PENALTY_RENEWColumn) = value
             End Set
         End Property
         
@@ -6285,6 +6341,18 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPENALTY_REDEEMNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.PENALTY_REDEEMColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPENALTY_REDEEMNull()
+            Me(Me.tabledsRedeemRenew.PENALTY_REDEEMColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsSC_REDEEMNull() As Boolean
             Return Me.IsNull(Me.tabledsRedeemRenew.SC_REDEEMColumn)
         End Function
@@ -6341,6 +6409,18 @@ Partial Public Class dsReports
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetINTEREST_RENEWNull()
             Me(Me.tabledsRedeemRenew.INTEREST_RENEWColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPENALTY_RENEWNull() As Boolean
+            Return Me.IsNull(Me.tabledsRedeemRenew.PENALTY_RENEWColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPENALTY_RENEWNull()
+            Me(Me.tabledsRedeemRenew.PENALTY_RENEWColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
