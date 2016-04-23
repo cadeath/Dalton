@@ -162,19 +162,24 @@
     End Sub
 
     Private Sub MoneyTransfer()
-        Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
-        Dim enDate As Date = GetLastDate(monCal.SelectionRange.End)
-        Dim fillData As String = "dsMT", mySql As String
+        diagMT.st = GetFirstDate(monCal.SelectionStart)
+        diagMT.en = GetLastDate(monCal.SelectionEnd)
 
-        mySql = "SELECT * FROM MONEY_TRANSFER "
-        mySql &= String.Format("WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+        diagMT.Show()
 
-        Dim rptPara As New Dictionary(Of String, String)
-        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
-        rptPara.Add("branchName", branchName)
+        'Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
+        'Dim enDate As Date = GetLastDate(monCal.SelectionRange.End)
+        'Dim fillData As String = "dsMT", mySql As String
 
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Monthly_MT.rdlc", rptPara)
-        frmReport.Show()
+        'mySql = "SELECT * FROM MONEY_TRANSFER "
+        'mySql &= String.Format("WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+
+        'Dim rptPara As New Dictionary(Of String, String)
+        'rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
+        'rptPara.Add("branchName", branchName)
+
+        'frmReport.ReportInit(mySql, fillData, "Reports\rpt_Monthly_MT.rdlc", rptPara)
+        'frmReport.Show()
     End Sub
 
     Private Sub InsuranceReport()
