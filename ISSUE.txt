@@ -2,6 +2,7 @@ ISSUE: 0023 04/25/2016
 [+] New Item Renew - JE is not balance
 [+] Experience slow saving on MONEY TRANSFER
 	- It loads the first 100 entries after saving even though it didn't require any.
+[-] PT and OR print for address is incomplete.
 
 
 ISSUE: 0022 04/21/2016

@@ -4,12 +4,15 @@ Version 1.1.1.2
  - FIX New Loan/Renew Register
  - FIX Redeem Register
  - FIX Monthly Loan Reports
+ - FIX Renew JE for more than 1Mon
+ - FIX slow Money Transfer saving
  - Added Cash InOut Daily Summary
  - Add PT Claim Sub, Pawner
  - Add OLD PT in PT
  - Include Daily Insurance Report
  - Include Additional Loan Register
  - Include Penalty on Redeem Renew Monthly
+ - Include BRGY in PT Address
 
 Version 1.1.1.1
  - Pawnticket Renewal, show old PT#
