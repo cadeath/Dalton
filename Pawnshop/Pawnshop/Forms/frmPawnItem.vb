@@ -945,11 +945,8 @@ Public Class frmPawnItem
             PRINT_PTNEW = .PawnTicket
             PRINT_PTOLD = .OldTicket
 
-            'no early renew
-            Dim finalInt As Double = IIf(interest > advInt, interest, advInt)
-
             AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
-            AddJournal(finalInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
+            AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
 
             AddTimelyLogs(MOD_NAME, String.Format("RENEW - PT#{0}", oldPT.ToString("000000")))

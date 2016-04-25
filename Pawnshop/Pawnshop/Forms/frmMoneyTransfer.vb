@@ -535,7 +535,7 @@
             Exit Sub
         End If
 
-        frmMTlist.LoadActive()
+        'frmMTlist.LoadActive()
         Me.Close()
     End Sub
 
