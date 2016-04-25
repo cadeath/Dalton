@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 ' Changelog
+' v1.0.10
+'  - Update PRINT_PAWNING
 ' v1.0.9
 '  - Add table TBL_DAILYTIMELOG
 ' v1.0.8
@@ -35,7 +37,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.0.9"
+    Private DBversion As String = "1.0.10"
     Private language() As String = _
         {"Connection error failed."}
 
