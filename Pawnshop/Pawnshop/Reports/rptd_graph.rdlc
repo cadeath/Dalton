@@ -10,14 +10,14 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsHourly">
+    <DataSet Name="dsHourly2">
       <Fields>
         <Field Name="DT_HOUR">
           <DataField>DT_HOUR</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DT_COUNT">
-          <DataField>DT_COUNT</DataField>
+        <Field Name="MOD_TYPE">
+          <DataField>MOD_TYPE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -26,10 +26,12 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <rd:DataSetInfo>
-        <rd:DataSetName>Pawnshop</rd:DataSetName>
-        <rd:TableName>dsPrint</rd:TableName>
-        <rd:ObjectDataSourceSelectMethod>DT_HOURLY</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceType>Pawnshop.dsPrint, Reports.dsPrint.Designer.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:DataSetName>dsPrint</rd:DataSetName>
+        <rd:SchemaPath>D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\dsPrint.xsd</rd:SchemaPath>
+        <rd:TableName>DT_HOURLY2</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -51,21 +53,27 @@
         <ChartSeriesHierarchy>
           <ChartMembers>
             <ChartMember>
-              <Label>DT COUNT</Label>
+              <Group Name="Chart3_SeriesGroup1">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!MOD_TYPE.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+              <Label>=Fields!MOD_TYPE.Value</Label>
             </ChartMember>
           </ChartMembers>
         </ChartSeriesHierarchy>
         <ChartData>
           <ChartSeriesCollection>
-            <ChartSeries Name="COUNT">
+            <ChartSeries Name="MOD_TYPE">
+              <Hidden>=iif(Fields!MOD_TYPE.Value&gt;0,false,true)</Hidden>
               <ChartDataPoints>
                 <ChartDataPoint>
                   <ChartDataPointValues>
-                    <Y>=Fields!DT_COUNT.Value</Y>
+                    <Y>=Count(Fields!MOD_TYPE.Value)</Y>
                   </ChartDataPointValues>
                   <ChartDataLabel>
                     <Style />
-                    <UseValueAsLabel>true</UseValueAsLabel>
+                    <Label>=IIF(COUNT(Fields!MOD_TYPE.Value)&gt;0,COUNT(Fields!MOD_TYPE.Value),"")</Label>
                     <Visible>true</Visible>
                   </ChartDataLabel>
                   <Style />
@@ -75,6 +83,7 @@
                   <DataElementOutput>Output</DataElementOutput>
                 </ChartDataPoint>
               </ChartDataPoints>
+              <Subtype>Stacked</Subtype>
               <Style />
               <ChartEmptyPoints>
                 <Style />
@@ -238,6 +247,26 @@
             </Style>
           </ChartArea>
         </ChartAreas>
+        <ChartLegends>
+          <ChartLegend Name="ChartLegend1">
+            <Style>
+              <BackgroundGradientType>None</BackgroundGradientType>
+              <FontSize>8pt</FontSize>
+            </Style>
+            <Position>TopCenter</Position>
+            <DockOutsideChartArea>true</DockOutsideChartArea>
+            <ChartLegendTitle>
+              <Caption />
+              <Style>
+                <FontSize>8pt</FontSize>
+                <FontWeight>Bold</FontWeight>
+                <TextAlign>Center</TextAlign>
+              </Style>
+            </ChartLegendTitle>
+            <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+            <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+          </ChartLegend>
+        </ChartLegends>
         <ChartTitles>
           <ChartTitle Name="Default">
             <Caption>Customer Hourly Report</Caption>
@@ -265,10 +294,10 @@
             <VerticalAlign>Top</VerticalAlign>
           </Style>
         </ChartNoDataMessage>
-        <DataSetName>dsHourly</DataSetName>
+        <DataSetName>dsHourly2</DataSetName>
         <Top>0.16333in</Top>
         <Left>0.205in</Left>
-        <Height>4.88542in</Height>
+        <Height>4.65625in</Height>
         <Width>9.60417in</Width>
         <Style>
           <Border>
@@ -279,17 +308,76 @@
           <BackgroundGradientType>None</BackgroundGradientType>
         </Style>
       </Chart>
+      <Textbox Name="Textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtAsOf.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>4.87514in</Top>
+        <Left>0.205in</Left>
+        <Height>0.22917in</Height>
+        <Width>2.52083in</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox2">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!branchName.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>4.88902in</Top>
+        <Left>7.28834in</Left>
+        <Height>0.22917in</Height>
+        <Width>2.52083in</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>5.16333in</Height>
+    <Height>5.27792in</Height>
     <Style />
   </Body>
   <ReportParameters>
-    <ReportParameter Name="txtCurDate">
-      <DataType>DateTime</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="txtUsername">
+    <ReportParameter Name="txtAsOf">
       <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="branchName">
@@ -297,7 +385,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>10.03125in</Width>
+  <Width>10.02083in</Width>
   <Page>
     <PageFooter>
       <Height>1.125in</Height>

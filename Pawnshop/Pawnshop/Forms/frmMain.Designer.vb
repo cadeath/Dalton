@@ -54,9 +54,12 @@ Partial Class frmMain
         Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MoneyTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InsuranceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CashInOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -222,7 +225,7 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -274,6 +277,12 @@ Partial Class frmMain
         Me.InsuranceToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.InsuranceToolStripMenuItem.Text = "&Insurance"
         '
+        'CashInOutToolStripMenuItem
+        '
+        Me.CashInOutToolStripMenuItem.Name = "CashInOutToolStripMenuItem"
+        Me.CashInOutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CashInOutToolStripMenuItem.Text = "Cash I&n/Out"
+        '
         'SegregatedListToolStripMenuItem
         '
         Me.SegregatedListToolStripMenuItem.Name = "SegregatedListToolStripMenuItem"
@@ -290,6 +299,18 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(189, 6)
+        '
+        'HourlyReportToolStripMenuItem
+        '
+        Me.HourlyReportToolStripMenuItem.Name = "HourlyReportToolStripMenuItem"
+        Me.HourlyReportToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HourlyReportToolStripMenuItem.Text = "&Hourly Report"
+        '
+        'HourlySummaryToolStripMenuItem
+        '
+        Me.HourlySummaryToolStripMenuItem.Name = "HourlySummaryToolStripMenuItem"
+        Me.HourlySummaryToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HourlySummaryToolStripMenuItem.Text = "H&ourly Summary"
         '
         'DailyCashCountToolStripMenuItem
         '
@@ -611,5 +632,7 @@ Partial Class frmMain
     Friend WithEvents InsuranceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ORManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HourlyReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CashInOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HourlySummaryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

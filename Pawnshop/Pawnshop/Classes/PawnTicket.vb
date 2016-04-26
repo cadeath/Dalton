@@ -256,6 +256,12 @@
     End Property
 
     Private _earlyRedeem As Double
+    ''' <summary>
+    ''' Interest from Early Redemption
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Public Property EarlyRedeem() As Double
         Get
             Return _earlyRedeem
@@ -400,6 +406,7 @@
                 .Item("SystemInfo") = Now
                 .Item("EncoderID") = UserID
                 .Item("AdvInt") = _advanceInterest
+                .Item("EarlyRedeem") = _earlyRedeem
             End With
         End If
 

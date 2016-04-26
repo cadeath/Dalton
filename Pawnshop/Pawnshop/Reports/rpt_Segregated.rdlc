@@ -24,6 +24,10 @@
           <DataField>MatuDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="AuctionDate">
+          <DataField>AuctionDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="ExpiryDate">
           <DataField>ExpiryDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -44,6 +48,10 @@
           <DataField>ORDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="OldTicket">
+          <DataField>OldTicket</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="NetAmount">
           <DataField>NetAmount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -54,6 +62,14 @@
         </Field>
         <Field Name="RedeemDue">
           <DataField>RedeemDue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="AdvInt">
+          <DataField>AdvInt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Penalty">
+          <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ItemType">
@@ -84,8 +100,24 @@
           <DataField>Principal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="PullOut">
+          <DataField>PullOut</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Appraiser">
           <DataField>Appraiser</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ServiceCharge">
+          <DataField>ServiceCharge</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NewPT">
+          <DataField>NewPT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -238,7 +270,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Expiry Date</Value>
+                              <Value>Auction Date</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -689,7 +721,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Format(Fields!LoanDate.Value,"MMM-dd") &amp; vbcrlf &amp; Format(Fields!ExpiryDate.Value,"MMM-dd")</Value>
+                              <Value>=Format(Fields!LoanDate.Value,"MMM-dd") &amp; vbcrlf &amp; Format(Fields!AuctionDate.Value,"MMM-dd")</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                               </Style>
@@ -704,9 +736,7 @@
                           <Style>None</Style>
                         </Border>
                         <TopBorder>
-                          <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
                         </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1298,7 +1328,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>SEGREGATED ITEM LIST</Value>
+                  <Value>SEGREGATED ITEM LIST r2</Value>
                   <Style>
                     <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>

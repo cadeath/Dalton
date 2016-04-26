@@ -2,6 +2,8 @@
 
 Public Class frmMain
 
+    Private Const ADD_TITLE As String = "REDEEM REPORT PROBLEM"
+
     Private Sub ofdTemplate_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles ofdTemplate.FileOk
         txtImport.Text = ofdTemplate.FileName
     End Sub
@@ -22,7 +24,8 @@ Public Class frmMain
         btnFix.Enabled = False
         SetupDatabase()
 
-        Fixing_AdvanceInterest()
+        'Fixing_AdvanceInterest()
+        fix_redeemIntPenalty.Main()
 
         'No_Description()
         'pg_incomplete_desc.do_fix(txtImport.Text, txtDB.Text)
@@ -92,5 +95,9 @@ Public Class frmMain
 
     Private Sub txtDB_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtDB.DoubleClick
         ofdFirebird.ShowDialog()
+    End Sub
+
+    Private Sub frmMain_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        Me.Text &= " - " & ADD_TITLE
     End Sub
 End Class

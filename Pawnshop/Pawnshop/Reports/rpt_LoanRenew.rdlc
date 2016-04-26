@@ -892,7 +892,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!RENEW_COUNT.Value</Value>
-                              <Style />
+                              <Style>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -946,21 +948,20 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox22">
+                    <Textbox Name="TOTAL_CNT">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!LOAN_COUNT.Value + Fields!RENEW_COUNT.Value</Value>
+                              <Value>=Code.SumCnt(Fields!LOAN_COUNT.Value + Fields!RENEW_COUNT.Value)</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox22</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -976,14 +977,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox20">
+                    <Textbox Name="TOTAL_PRIN">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!LOAN_PRINCIPAL.Value + Fields!RENEW_PRINCIPAL.Value</Value>
+                              <Value>=Code.SumPrin(Fields!LOAN_PRINCIPAL.Value + Fields!RENEW_PRINCIPAL.Value)</Value>
                               <Style>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
@@ -992,7 +993,6 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox20</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1330,8 +1330,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=SUM(Fields!RENEW_COUNT.Value)</Value>
-                              <Style />
+                              <Value>=Sum(Fields!RENEW_COUNT.Value)</Value>
+                              <Style>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1345,7 +1347,6 @@
                         </Border>
                         <TopBorder>
                           <Color>Black</Color>
-                          <Style>Solid</Style>
                         </TopBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -1366,7 +1367,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!RENEW_PRINCIPAL.Value)</Value>
                               <Style>
-                                <Format>'$'#,0.00;('$'#,0.00);'-'</Format>
+                                <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1386,7 +1387,6 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
-                        <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1400,7 +1400,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=SUM(Fields!CEL_COUNT.Value+Fields!JWL_COUNT.Value+Fields!APP_COUNT.Value+Fields!LOAN_COUNT.Value+Fields!RENEW_COUNT.Value)</Value>
+                              <Value>=Code.Total_Cnt</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -1434,7 +1434,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=SUM(Fields!CEL_PRINCIPAL.Value+Fields!JWL_PRINCIPAL.Value+Fields!APP_PRINCIPAL.Value+Fields!LOAN_PRINCIPAL.Value+Fields!RENEW_PRINCIPAL.Value)</Value>
+                              <Value>=Code.Total_Prin</Value>
                               <Style>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
@@ -1521,6 +1521,18 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
+  <Code>Public Total_Prin as double = 0
+Public Total_Cnt as double = 0
+
+Public Function SumPrin(ByVal Value as double) as Double
+  Total_Prin = Total_Prin + Value
+  Return Value
+End Function
+
+Public Function SumCnt(ByVal Value as Integer) as Integer
+  Total_Cnt = Total_Cnt + Value
+  Return Value
+End Function</Code>
   <Width>10.37167in</Width>
   <Page>
     <PageHeader>
@@ -1853,7 +1865,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1in</Height>
+      <Height>0.65625in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1872,8 +1884,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.21881in</Top>
-          <Left>0.29276in</Left>
+          <Top>0.06174in</Top>
+          <Left>0.05in</Left>
           <Height>0.25in</Height>
           <Width>2.01042in</Width>
           <Style>
@@ -1903,7 +1915,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.22424in</Top>
+          <Top>0.06174in</Top>
           <Left>2.7237in</Left>
           <Height>0.25in</Height>
           <Width>5.11459in</Width>
@@ -1935,8 +1947,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.24229in</Top>
-          <Left>8.0685in</Left>
+          <Top>0.06174in</Top>
+          <Left>8.31597in</Left>
           <Height>0.25in</Height>
           <Width>2.01042in</Width>
           <ZIndex>2</ZIndex>
@@ -1967,8 +1979,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.53118in</Top>
-          <Left>8.0685in</Left>
+          <Top>0.35063in</Top>
+          <Left>8.31597in</Left>
           <Height>0.25in</Height>
           <Width>2.01042in</Width>
           <ZIndex>3</ZIndex>

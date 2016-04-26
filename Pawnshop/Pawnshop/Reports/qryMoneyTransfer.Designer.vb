@@ -129,9 +129,9 @@ Partial Class qryMoneyTransfer
         Me.chkSend.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkSend.Location = New System.Drawing.Point(18, 205)
         Me.chkSend.Name = "chkSend"
-        Me.chkSend.Size = New System.Drawing.Size(71, 17)
+        Me.chkSend.Size = New System.Drawing.Size(63, 17)
         Me.chkSend.TabIndex = 4
-        Me.chkSend.Text = "Send Out"
+        Me.chkSend.Text = "Send In"
         Me.chkSend.UseVisualStyleBackColor = True
         '
         'monCal

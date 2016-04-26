@@ -461,7 +461,7 @@ Adv Int</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIF(Fields!Status.Value.ToString.trim = "NEW",Fields!PawnTicket.Value,Fields!NewPT.Value)</Value>
+                              <Value>=Fields!PawnTicket.Value</Value>
                               <Style>
                                 <Format>000000</Format>
                               </Style>
@@ -641,23 +641,23 @@ Adv Int</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="OldTicket">
+                    <Textbox Name="NewPT">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIF(Fields!Status.Value.ToString.trim = "NEW","",Fields!PawnTicket.Value)</Value>
+                              <Value>=Fields!NewPT.Value</Value>
                               <Style>
-                                <Format>0;(0);''</Format>
+                                <Format>000000</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>OldTicket</rd:DefaultName>
+                      <rd:DefaultName>NewPT</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -866,7 +866,7 @@ Adv Int</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Status.Value</Value>
+                              <Value />
                               <Style>
                                 <FontStyle>Italic</FontStyle>
                               </Style>

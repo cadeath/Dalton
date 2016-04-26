@@ -22,9 +22,26 @@
 
     Private Sub Generate_NewLoanRenewal()
         Dim fillData As String = "dsPawning", mySql As String
-        mySql = "SELECT P.*, X.PAWNTICKET as NEWPT FROM PAWNING P LEFT JOIN PAWNING X ON X.OLDTICKET = P.PAWNTICKET WHERE "
-        mySql &= String.Format("(P.LoanDate = '{0}' AND P.STATUS = 'NEW') OR (P.ORDATE = '{0}' AND P.STATUS = 'RENEWED')", monCal.SelectionStart.ToString("MM/dd/yyyy"))
-        'mySql &= " ORDER BY X.PAWNTICKET ASC"
+
+        mySql = "SELECT "
+        mySql &= vbCrLf & "    P.PAWNTICKET, P.CLIENT, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, "
+        mySql &= vbCrLf & "    P.DESCRIPTION, P.APPRAISAL, P.PRINCIPAL, P.NETAMOUNT, "
+        mySql &= vbCrLf & "    P.RENEWDUE + P2.RENEWDUE AS RENEWDUE, "
+        mySql &= vbCrLf & "    P.INTEREST + P2.INTEREST AS INTEREST, P.PENALTY + P2.PENALTY AS PENALTY, "
+        mySql &= vbCrLf & "    P.ADVINT, P.SERVICECHARGE, "
+        mySql &= vbCrLf & "    CASE"
+        mySql &= vbCrLf & "    	WHEN P.OLDTICKET = 0"
+        mySql &= vbCrLf & "        THEN 'NEW'"
+        mySql &= vbCrLf & "        ELSE 'RENEW'"
+        mySql &= vbCrLf & "    END AS STATUS"
+        mySql &= vbCrLf & "    , P2.PAWNTICKET AS NewPT, P.APPRAISER "
+        mySql &= vbCrLf & "FROM "
+        mySql &= vbCrLf & "	PAWNING P LEFT JOIN PAWNING P2 "
+        mySql &= vbCrLf & "    ON P.OLDTICKET = P2.PAWNTICKET "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("	P.LOANDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= vbCrLf & "    AND (P.OLDTICKET = 0 OR (P.OLDTICKET > 0 AND P.RENEWDUE + P2.RENEWDUE Is Not Null)) "
+        mySql &= vbCrLf & " AND P.STATUS <> 'V'"
 
         Console.WriteLine(">>> " & mySql)
         Dim addParameter As New Dictionary(Of String, String)
@@ -36,16 +53,28 @@
     End Sub
 
     Private Sub Generate_Redemption()
-        Dim fillData As String = "dsPawning", mySql As String
-        mySql = "SELECT * FROM PAWNING WHERE "
-        mySql &= String.Format("ORDate = '{0}' AND STATUS = 'REDEEM' ", monCal.SelectionStart.ToString("MM/dd/yyyy"))
-        mySql &= "ORDER BY ORNUM ASC"
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsPawning"
+        rptPath = "Reports\rpt_RegisterRedeem.rdlc"
+
+        mySql = "SELECT "
+        mySql &= vbCrLf & "    P.PAWNTICKET, P.ORNUM, P.ORDATE, P.CLIENT, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, "
+        mySql &= vbCrLf & "    P.DESCRIPTION, P.APPRAISAL, P.PRINCIPAL, "
+        mySql &= vbCrLf & "    P.INTEREST, P.PENALTY, P.REDEEMDUE, "
+        mySql &= vbCrLf & "    P.SERVICECHARGE, 'REDEEM' AS STATUS "
+        mySql &= vbCrLf & "FROM "
+        mySql &= vbCrLf & "	PAWNING P "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("	P.ORDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= vbCrLf & "    AND P.REDEEMDUE <> 0 "
+        mySql &= vbCrLf & "    AND P.STATUS <> 'V' "
+        mySql &= vbCrLf & "    ORDER BY ORNUM ASC"
 
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
         addParameter.Add("branchName", branchName)
 
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_RegisterRedeem.rdlc", addParameter)
+        frmReport.ReportInit(mySql, dsName, rptPath, addParameter)
         frmReport.Show()
     End Sub
 

@@ -37,6 +37,9 @@ Public Class frmPawnItem
     Private unableToSave As Boolean = False
     Private daltonCompute As PawningDalton
 
+    Private PRINT_PTOLD As Integer = 0
+    Private PRINT_PTNEW As Integer = 0
+
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -386,8 +389,15 @@ Public Class frmPawnItem
 
             .DaysOverDue = txtOver.Text
             If isEarlyRedeem Then
-                .Interest = 0
-                .EarlyRedeem = txtInt.Text
+                Dim itmPrn As Double = .Principal
+                Dim itmAdv As Double = .AdvanceInterest
+                Dim itmDue As Double = Redeem_Due
+
+                Dim itmEarly As Double = itmAdv - (itmPrn - itmDue)
+                itmEarly -= CDbl(txtService.Text) 'Lesser Service Charge
+
+                .Interest = itmEarly
+                .EarlyRedeem = itmEarly
             Else
                 .Interest = txtInt.Text
             End If
@@ -405,9 +415,6 @@ Public Class frmPawnItem
                 AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket)
-                If isEarlyRedeem Then
-                    AddJournal(.EarlyRedeem, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
-                End If
             Else
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
                 If isEarlyRedeem Then
@@ -486,7 +493,7 @@ Public Class frmPawnItem
         mySql = "SELECT * FROM tblPAWN "
         mySql &= "WHERE PAWNTICKET = '" & currentPawnTicket & "'"
         ds = LoadSQL(mySql)
-        If ds.Tables(0).Rows.Count = 1 Then _
+        If ds.Tables(0).Rows.Count >= 1 Then _
             MsgBox("PT# " & currentPawnTicket.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : unableToSave = True : Exit Sub
 
         txtTicket.Text = CurrentPTNumber()
@@ -881,7 +888,7 @@ Public Class frmPawnItem
         Dim interest As Double, advInt As Double
         Dim servChar As Double, penalty As Double
 
-        'Redeem
+        'Inactive
         With PawnItem
             .OfficialReceiptNumber = currentORNumber
             .OfficialReceiptDate = CurrentDate
@@ -922,7 +929,7 @@ Public Class frmPawnItem
             .DaysOverDue = 0
             .Interest = 0
             .Penalty = 0
-            .ServiceCharge = 0
+            .ServiceCharge = IIf(isOldItem, 0, CInt(txtService.Text))
             .EVAT = 0
             .RenewDue = 0
             .RedeemDue = 0
@@ -935,11 +942,11 @@ Public Class frmPawnItem
 
             .SaveTicket()
 
-            'no early renew
-            Dim finalInt As Double = IIf(interest > advInt, interest, advInt)
+            PRINT_PTNEW = .PawnTicket
+            PRINT_PTOLD = .OldTicket
 
             AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
-            AddJournal(finalInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
+            AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
 
             AddTimelyLogs(MOD_NAME, String.Format("RENEW - PT#{0}", oldPT.ToString("000000")))
@@ -1026,7 +1033,7 @@ Public Class frmPawnItem
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
         Dim dsName As String = "dsPawn"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
-        Dim paymentStr As String
+        Dim paymentStr As String, descStr As String
         Dim rptPath As String
         rptPath = "Reports\_layout03.rdlc"
         Dim addParameters As New Dictionary(Of String, String)
@@ -1035,10 +1042,14 @@ Public Class frmPawnItem
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
         PawnItem.LoadTicket(ptIDx)
 
+        descStr = _
+            String.Format("REDEMPTION OF PT# {0:000000}", PawnItem.PawnTicket)
+
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RedeemDue)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
+        addParameters.Add("txtDescription", descStr)
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1099,6 +1110,7 @@ Public Class frmPawnItem
 
         Dim addParameters As New Dictionary(Of String, String)
         If isOldItem Then
+            If PawnItem.Description = "" Then PawnItem.Description = pawning.DisplayDescription(PawnItem)
             addParameters.Add("txtDescription", PawnItem.Description)
         Else
             addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
@@ -1107,7 +1119,7 @@ Public Class frmPawnItem
         addParameters.Add("txtInterest", PawnItem.AdvanceInterest)
         addParameters.Add("txtServiceCharge", PawnItem.ServiceCharge / 2)
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
-        addParameters.Add("txtOLDPT", PawnItem.OldTicket.ToString("000000"))
+        addParameters.Add("txtOLDPT", "PT# " & PawnItem.OldTicket.ToString("000000"))
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1120,7 +1132,7 @@ Public Class frmPawnItem
         End If
 
         Try
-            If DEV_MODE Then
+            If DEV_MODE And 0 Then
                 frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
                 frmReport.Show()
             Else
@@ -1147,7 +1159,7 @@ Public Class frmPawnItem
         mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
         Dim dsName As String = "dsPawn"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
-        Dim paymentStr As String
+        Dim paymentStr As String, descStr As String
         Dim rptPath As String
         rptPath = "Reports\_layout03.rdlc"
         Dim addParameters As New Dictionary(Of String, String)
@@ -1156,10 +1168,15 @@ Public Class frmPawnItem
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
         PawnItem.LoadTicket(ptIDx)
 
+        descStr = _
+            String.Format("Renewal of PT# {0:000000}" + vbCrLf + _
+                          "New PT# {1:000000}", PRINT_PTOLD, PRINT_PTNEW)
+
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PawnItem.PawnTicket, PawnItem.RenewDue)
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PawnItem.RenewDue)
+        addParameters.Add("txtDescription", descStr)
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1418,7 +1435,17 @@ Public Class frmPawnItem
         'Non New Loan
         If transactionType <> "L" Then
             txtOver.Text = daysDue
-            txtPenalty.Text = Penalty.ToString("#,##0.00")
+            If daysDue <= 3 Then
+                If DelayInt > AdvanceInterest Then
+                    DelayInt -= AdvanceInterest
+                Else
+                    DelayInt = 0
+                End If
+                Penalty = 0
+            Else
+                If DelayInt > AdvanceInterest And transactionType <> "X" Then _
+                    DelayInt -= AdvanceInterest
+            End If
 
             If transactionType = "X" Then
                 txtRenew.Text = 0
@@ -1431,6 +1458,7 @@ Public Class frmPawnItem
             End If
 
             txtInt.Text = DelayInt.ToString("#,##0.00")
+            txtPenalty.Text = Penalty.ToString("#,##0.00")
         End If
     End Sub
 End Class

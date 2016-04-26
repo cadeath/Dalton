@@ -26,7 +26,7 @@
             cio.Save()
         Next
 
-        AddTimelyLogs(MOD_NAME, transName)
+        AddTimelyLogs(MOD_NAME, transName, False)
 
         MsgBox("Information Posted", MsgBoxStyle.Information)
         CIOtransactions = New CollectionCIO

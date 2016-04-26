@@ -82,6 +82,7 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\fix_redeemIntPenalty.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -100,6 +101,14 @@
     <Compile Include="Modules\pg_incomplete_desc.vb" />
     <Compile Include="Modules\revolving_fund.vb" />
     <Compile Include="Modules\update_tblCharges.vb" />
+    <Compile Include="ReCompute\frmRecompute.Designer.vb">
+      <DependentUpon>frmRecompute.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReCompute\frmRecompute.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReCompute\PawningDalton.vb" />
+    <Compile Include="ReCompute\recompute.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmMain.resx">
@@ -110,6 +119,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReCompute\frmRecompute.resx">
+      <DependentUpon>frmRecompute.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

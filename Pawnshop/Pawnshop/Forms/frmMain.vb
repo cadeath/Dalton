@@ -1,11 +1,6 @@
 ﻿
 Public Class frmMain
 
-    ' NOTE
-    ' NotYetLogin sub don't have REPORTS DISABLE YET
-    ' Please add reports and add it also at NotYetLogin
-    ' sub.
-
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
 
@@ -50,7 +45,10 @@ Public Class frmMain
         InsuranceToolStripMenuItem.Enabled = Not st
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
+        HourlyReportToolStripMenuItem.Enabled = Not st
+        HourlySummaryToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
+        CashInOutToolStripMenuItem.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()
@@ -306,7 +304,6 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to the Console")
             Exit Sub
         End If
-
         frmMIS.Show()
     End Sub
 
@@ -324,12 +321,6 @@ Public Class frmMain
     End Sub
 
     Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
-        If Not mod_system.DEV_MODE Then
-            If dateSet Then
-                MsgBoxAuthoriation("You must CLOSE the store before viewing the Cash Count Sheet")
-                Exit Sub
-            End If
-        End If
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.Show()
     End Sub
@@ -343,6 +334,7 @@ Public Class frmMain
     End Sub
 
     Private Sub CashInOutSummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
+        qryCashInOut.FormType = qryCashInOut.FormTrans.Monthly
         qryCashInOut.Show()
     End Sub
 
@@ -380,7 +372,7 @@ Public Class frmMain
     End Sub
 
     Private Sub InsuranceToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles InsuranceToolStripMenuItem.Click
-        qryDate.FormType = qryDate.ReportType.Insurance
+        qryDate.FormType = qryDate.ReportType.DailyInsurance
         qryDate.Show()
     End Sub
 
@@ -408,5 +400,15 @@ Public Class frmMain
 
     Private Sub HourlyReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlyReportToolStripMenuItem.Click
         diagTime.Show()
+    End Sub
+
+    Private Sub CashInOutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashInOutToolStripMenuItem.Click
+        qryCashInOut.FormType = qryCashInOut.FormTrans.Daily
+        qryCashInOut.Show()
+    End Sub
+
+    Private Sub HourlySummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HourlySummaryToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.HourlySummary
+        qryDate.Show()
     End Sub
 End Class

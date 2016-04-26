@@ -1,0 +1,52 @@
+REPORT
+LOAN REGISTER - NEW LOAN AND RENEWAL
+
+APR1 - NEW LOAN
+	PRINCIPAL	ADV		SC	NETAMOUNT
+1.	2500		75		5	2420
+2.	3200		96		5	3099
+3.	1000		30		5	965
+4.	3000		90		5	2905
+5.	7500		3000 	5	7195
+	17200 		591 	25 	16584
+
+Manual Report for New Loan is correct VS the System Generated Report
+
+LOAN REGISTER - REDEMPTION
+APR3 - EARLY REDEEM
+	PRINCIPAL	ADV		INT		DUE
+1.	7500		3200 	75 		7275
+2.	1000		30 		10 		980
+	8500		3230	85 		8255
+
+Manual Report for Redemption (Early Redeem) is correct VS the System Generated Report
+
+APR30 - RENEWAL
+	PRINCIPAL	ADV		INT		SC	DUE
+1.	3200		96 		0		5 	101
+
+Manual Report for Renewal didn't match VS the System Generated Report
+The reason that the New Pawn Ticket for New Item didn't include Service Charge
+in creating new Pawn Ticket.
+Revise done, for checking
+
+MAY7 - RENEWAL
+	PRINCIPAL	ADV		INT		PEN	SC 	DUE
+1.	3200		96 		0		0	5 	101
+2.	2500		75 		75 		50 	5 	205
+	5700		171		75 		50 	10 	306
+
+PROBLEM IN GENERATING REPORT FOR APR30 ON RENEWAL WAS FIXED
+Manuel Report for Renewal VS the System Generated Report is CORRECT
+
+MAY7 - REDEMPTION WITH PENALTY/INTEREST
+	PRINCIPAL	INT 	PEN 	SC 	DUE
+1.	3000		90 		60 		0 	3150
+
+Manual Report for Redemption is correct VS the System Generated Report
+
+
+MONTHLY REPORT
+For checking. Report won't co-inside
+REPORT WAS FIXED BUT NOT THOROUGHLY CHECKED.
+SO FAR IT WAS MATCHED WITH THE MANUAL REPORT.

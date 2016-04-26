@@ -51,6 +51,7 @@ err:
         db107.PatchUp()
         db108.PatchUp()
         db109.PatchUp()
+        db1010.PatchUp()
     End Sub
 
     Friend Function ifTblExist(ByVal tblName As String) As Boolean

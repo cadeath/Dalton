@@ -238,7 +238,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Description.Value</Value>
+                <Value>=Parameters!txtDescription.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
                 </Style>
@@ -553,6 +553,39 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox17">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Fields!ORDate.Value</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                  <Format>MMM dd, yyyy</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>0.39167in</Top>
+        <Left>1.87794in</Left>
+        <Height>0.1875in</Height>
+        <Width>1.20833in</Width>
+        <ZIndex>14</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>3.18312in</Height>
     <Style />
@@ -564,6 +597,10 @@
     </ReportParameter>
     <ReportParameter Name="dblTotalDue">
       <DataType>Float</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="txtDescription">
+      <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

@@ -1,13 +1,15 @@
 ﻿Public Class qryCashInOut
 
+    Friend FormType As FormTrans
+    Enum FormTrans As Integer
+        Daily = 0
+        Monthly = 1
+    End Enum
+
     Private Sub qryCashInOut_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         LoadCategories()
-        Disable_Functions()
+        'Disable_Functions()
     End Sub
-
-    Private Function InOut_Filter() As String
-
-    End Function
 
     Private Sub Disable_Functions()
         chkIN.Enabled = False
@@ -35,6 +37,15 @@
     End Sub
 
     Private Sub btnGenerate_Click(sender As System.Object, e As System.EventArgs) Handles btnGenerate.Click
+        Select Case FormType
+            Case FormTrans.Daily
+                CashInOut_Daily()
+            Case FormTrans.Monthly
+                CashInOut_Monthly()
+        End Select
+    End Sub
+
+    Private Sub CashInOut_Monthly()
         If Not (chkIN.Checked Or chkOUT.Checked) Then Exit Sub
 
         Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
@@ -44,6 +55,10 @@
         dsName = "dsCIO"
         mySql = "SELECT * FROM TBLCASHTRANS"
         mySql &= String.Format(" WHERE TransDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+        If (chkIN.Checked Or chkOUT.Checked) Then
+            mySql &= TypeFilter()
+        End If
+
 
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("branchName", branchName)
@@ -52,4 +67,46 @@
         frmReport.ReportInit(mySql, dsName, rptPath, addParameter)
         frmReport.Show()
     End Sub
+
+    Private Sub CashInOut_Daily()
+        If Not (chkIN.Checked Or chkOUT.Checked) Then Exit Sub
+
+        Dim cur As Date = monCal.SelectionStart
+
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsReports"
+        rptPath = "Reports\rpt_CashInOut.rdlc"
+
+        mySql = "SELECT * FROM TBLCASHTRANS "
+        mySql &= String.Format(" WHERE TRANSDATE = '{0}'", cur.ToShortDateString)
+        If (chkIN.Checked Or chkOUT.Checked) Then
+            mySql &= TypeFilter()
+        End If
+
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtMonthOf", "AS OF " & cur.ToString("MMMM dd, yyyy"))
+        addPara.Add("branchName", "ROX")
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara)
+        frmReport.Show()
+    End Sub
+
+    Private Function TypeFilter() As String
+        Dim receipt As String = "1", disburse As String = "1", tmp As String
+        If chkIN.Checked Then receipt = "TYPE = 'Receipt'"
+        If chkOUT.Checked Then disburse = "TYPE = 'Disbursement'"
+
+        tmp = "("
+        tmp &= IIf(chkIN.Checked, receipt, "")
+        If chkIN.Checked And chkOUT.Checked Then tmp &= " OR "
+        tmp &= IIf(chkOUT.Checked, disburse, "")
+        tmp &= ")"
+
+        'tmp = "(" & String.Join(" OR ", receipt, disburse) & ")"
+        If cboCategory.Text <> "-ALL-" Then
+            tmp &= String.Format(" AND CATEGORY = '{0}'", cboCategory.Text)
+        End If
+
+        Return String.Format(" AND ({0})", tmp)
+    End Function
 End Class
