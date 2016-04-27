@@ -398,10 +398,6 @@ Public Class frmMain
         qryDate.Show()
     End Sub
 
-    Private Sub HourlyReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlyReportToolStripMenuItem.Click
-        diagTime.Show()
-    End Sub
-
     Private Sub CashInOutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashInOutToolStripMenuItem.Click
         qryCashInOut.FormType = qryCashInOut.FormTrans.Daily
         qryCashInOut.Show()
