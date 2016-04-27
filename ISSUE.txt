@@ -106,8 +106,8 @@ ISSUE: 0008 02/18/2016
 [+] REPORT OUTSTANDING LOANS - Date is not specified
 [-] REPORT OUTSTANDING LOANS - Per Category
 [+] REPORT Schedule of Loan & Renewal - Representation of the Grand Total
-[-] REPORT Cash In/Out - Range
-[-] GPRS Remittance, with Commission and Gross
+[+] REPORT Cash In/Out - Range
+[+] GPRS Remittance, with Commission and Gross
 [+] REPORT Loan Register - Redemption Summary
 
 
@@ -154,7 +154,7 @@ ISSUE: 0002 02/06/2016
 [o] Loan Register Report - Remove PHP sign to increase space
 [o] Loan Register Report - Redemption not working
 	- Revised report
-[-] Outstanding Report - Per Category
+[+] Outstanding Report - Per Category
 [+] Money Transfer - swap label for Pay-Out and Send In
 [+] Pawning - TAB and Enter should be consistent
 [-] Pawning - if not Appraiser, do not display

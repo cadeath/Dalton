@@ -482,6 +482,12 @@ Public Class frmPawnItem
         End If
 
         If unableToSave Then Return False
+        If PawnCustomer Is Nothing Then
+            txtCustomer.SelectAll()
+            txtCustomer.Focus()
+
+            Return False
+        End If
 
         Return True
     End Function
