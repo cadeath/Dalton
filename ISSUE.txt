@@ -68,7 +68,7 @@ ISSUE: 0013 03/06/2016
 [+] NO COI (Insurance) Report 
 [-] Renew transaction - Di maEdit ang Pawner's Name
 [+] Font Size sa Pawnticket if i-Print Gamay
-[-] Error adding NO CLIENT at pawning
+[+] Error adding NO CLIENT at pawning
 
 
 ISSUE: 0013 03/06/2016

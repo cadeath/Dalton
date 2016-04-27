@@ -58,7 +58,6 @@ Partial Class frmMain
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
