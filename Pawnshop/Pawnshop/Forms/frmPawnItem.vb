@@ -989,6 +989,8 @@ Public Class frmPawnItem
         End If
 
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        addParameters.Add("txtUsername", POSuser.FullName)
+
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
                 Dim tmpPara As New ReportParameter
@@ -1120,6 +1122,7 @@ Public Class frmPawnItem
         addParameters.Add("txtServiceCharge", PawnItem.ServiceCharge / 2)
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtOLDPT", "PT# " & PawnItem.OldTicket.ToString("000000"))
+        addParameters.Add("txtUsername", POSuser.FullName)
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1132,7 +1135,7 @@ Public Class frmPawnItem
         End If
 
         Try
-            If DEV_MODE And 0 Then
+            If DEV_MODE Then
                 frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
                 frmReport.Show()
             Else
