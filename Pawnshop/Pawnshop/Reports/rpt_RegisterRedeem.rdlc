@@ -683,7 +683,6 @@ Description</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1060,7 +1059,7 @@ Description</Value>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value />
+                            <Value>Item Type</Value>
                             <Style />
                           </TextRun>
                         </TextRuns>
@@ -1123,9 +1122,7 @@ Description</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>=Count(Fields!Status.Value)</Value>
-                              <Style>
-                                <Format>0.00;(0.00)</Format>
-                              </Style>
+                              <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -1148,6 +1145,7 @@ Description</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1616,21 +1614,21 @@ Description</Value>
               <TablixHeader>
                 <Size>0.83482in</Size>
                 <CellContents>
-                  <Textbox Name="Group1">
+                  <Textbox Name="ItemType">
                     <CanShrink>true</CanShrink>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!Status.Value</Value>
+                            <Value>=Fields!ItemType.Value</Value>
                             <Style />
                           </TextRun>
                         </TextRuns>
                         <Style />
                       </Paragraph>
                     </Paragraphs>
-                    <rd:DefaultName>Group1</rd:DefaultName>
+                    <rd:DefaultName>ItemType</rd:DefaultName>
                     <Style>
                       <Border>
                         <Style>None</Style>

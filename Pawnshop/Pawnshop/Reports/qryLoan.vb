@@ -59,7 +59,7 @@
 
         mySql = "SELECT "
         mySql &= vbCrLf & "    P.PAWNTICKET, P.ORNUM, P.ORDATE, P.CLIENT, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, "
-        mySql &= vbCrLf & "    P.DESCRIPTION, P.APPRAISAL, P.PRINCIPAL, "
+        mySql &= vbCrLf & "    P.DESCRIPTION, P.APPRAISAL, P.PRINCIPAL, P.ITEMTYPE, "
         mySql &= vbCrLf & "    P.INTEREST, P.PENALTY, P.REDEEMDUE, "
         mySql &= vbCrLf & "    P.SERVICECHARGE, 'REDEEM' AS STATUS "
         mySql &= vbCrLf & "FROM "

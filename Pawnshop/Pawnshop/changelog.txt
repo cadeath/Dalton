@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.1.2.1
+ - Add Username on PT
+ - Add Item Type on Loan Register - Redeem
+
 Version 1.1.1.2
  - FIX pawning save data.
  - FIX New Loan/Renew Register

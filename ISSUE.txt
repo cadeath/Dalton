@@ -1,3 +1,8 @@
+ISSUE: 0024 04/27/2016
+[+] Include login user fullname in PT
+[+] Loan Register Redeem has ITEM TYPE
+
+
 ISSUE: 0023 04/25/2016
 [+] New Item Renew - JE is not balance
 [+] Experience slow saving on MONEY TRANSFER
