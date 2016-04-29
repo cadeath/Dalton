@@ -36,6 +36,8 @@ Partial Class frmMain
         Me.ofdConfig = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.btnCash = New System.Windows.Forms.Button()
+        Me.btnClass = New System.Windows.Forms.Button()
+        Me.btnRate = New System.Windows.Forms.Button()
         CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tsMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -43,8 +45,8 @@ Partial Class frmMain
         'dgvPawnshop
         '
         Me.dgvPawnshop.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvPawnshop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPawnshop.Location = New System.Drawing.Point(128, 28)
         Me.dgvPawnshop.Name = "dgvPawnshop"
@@ -82,7 +84,7 @@ Partial Class frmMain
         Me.tsbtnExport.Image = CType(resources.GetObject("tsbtnExport.Image"), System.Drawing.Image)
         Me.tsbtnExport.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnExport.Name = "tsbtnExport"
-        Me.tsbtnExport.Size = New System.Drawing.Size(59, 22)
+        Me.tsbtnExport.Size = New System.Drawing.Size(60, 22)
         Me.tsbtnExport.Text = "&Export"
         '
         'ToolStripSeparator1
@@ -95,7 +97,7 @@ Partial Class frmMain
         Me.tsbtnConfig.Image = CType(resources.GetObject("tsbtnConfig.Image"), System.Drawing.Image)
         Me.tsbtnConfig.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnConfig.Name = "tsbtnConfig"
-        Me.tsbtnConfig.Size = New System.Drawing.Size(100, 22)
+        Me.tsbtnConfig.Size = New System.Drawing.Size(109, 22)
         Me.tsbtnConfig.Text = "Config Checker"
         '
         'ToolStripButton1
@@ -139,11 +141,31 @@ Partial Class frmMain
         Me.btnCash.Text = "Cash"
         Me.btnCash.UseVisualStyleBackColor = True
         '
+        'btnClass
+        '
+        Me.btnClass.Location = New System.Drawing.Point(12, 199)
+        Me.btnClass.Name = "btnClass"
+        Me.btnClass.Size = New System.Drawing.Size(110, 51)
+        Me.btnClass.TabIndex = 5
+        Me.btnClass.Text = "Item Class"
+        Me.btnClass.UseVisualStyleBackColor = True
+        '
+        'btnRate
+        '
+        Me.btnRate.Location = New System.Drawing.Point(12, 256)
+        Me.btnRate.Name = "btnRate"
+        Me.btnRate.Size = New System.Drawing.Size(110, 51)
+        Me.btnRate.TabIndex = 6
+        Me.btnRate.Text = "Rate"
+        Me.btnRate.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(819, 417)
+        Me.Controls.Add(Me.btnRate)
+        Me.Controls.Add(Me.btnClass)
         Me.Controls.Add(Me.btnCash)
         Me.Controls.Add(Me.btnBranch)
         Me.Controls.Add(Me.tsMenu)
@@ -172,5 +194,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents btnCash As System.Windows.Forms.Button
+    Friend WithEvents btnClass As System.Windows.Forms.Button
+    Friend WithEvents btnRate As System.Windows.Forms.Button
 
 End Class

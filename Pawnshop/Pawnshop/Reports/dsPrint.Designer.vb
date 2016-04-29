@@ -433,6 +433,8 @@ Partial Public Class dsPrint
         
         Private columnExpiryDate As Global.System.Data.DataColumn
         
+        Private columnAuctionDate As Global.System.Data.DataColumn
+        
         Private columnItemType As Global.System.Data.DataColumn
         
         Private columnPawner As Global.System.Data.DataColumn
@@ -537,6 +539,14 @@ Partial Public Class dsPrint
         Public ReadOnly Property ExpiryDateColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnExpiryDate
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property AuctionDateColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnAuctionDate
             End Get
         End Property
         
@@ -711,6 +721,7 @@ Partial Public Class dsPrint
                     ByVal LoanDate As String,  _
                     ByVal MatuDate As String,  _
                     ByVal ExpiryDate As String,  _
+                    ByVal AuctionDate As String,  _
                     ByVal ItemType As String,  _
                     ByVal Pawner As String,  _
                     ByVal FullAddress As String,  _
@@ -728,7 +739,7 @@ Partial Public Class dsPrint
                     ByVal RenewDue As String,  _
                     ByVal RedeemDue As String) As PawnTicketRow
             Dim rowPawnTicketRow As PawnTicketRow = CType(Me.NewRow,PawnTicketRow)
-            Dim columnValuesArray() As Object = New Object() {PawnID, PawnTicket, LoanDate, MatuDate, ExpiryDate, ItemType, Pawner, FullAddress, Principal, Appraisal, Interest, AdvInt, Penalty, ServiceCharge, NetAmount, Description, ContactNumber, ORNum, ORDate, RenewDue, RedeemDue}
+            Dim columnValuesArray() As Object = New Object() {PawnID, PawnTicket, LoanDate, MatuDate, ExpiryDate, AuctionDate, ItemType, Pawner, FullAddress, Principal, Appraisal, Interest, AdvInt, Penalty, ServiceCharge, NetAmount, Description, ContactNumber, ORNum, ORDate, RenewDue, RedeemDue}
             rowPawnTicketRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPawnTicketRow)
             Return rowPawnTicketRow
@@ -756,6 +767,7 @@ Partial Public Class dsPrint
             Me.columnLoanDate = MyBase.Columns("LoanDate")
             Me.columnMatuDate = MyBase.Columns("MatuDate")
             Me.columnExpiryDate = MyBase.Columns("ExpiryDate")
+            Me.columnAuctionDate = MyBase.Columns("AuctionDate")
             Me.columnItemType = MyBase.Columns("ItemType")
             Me.columnPawner = MyBase.Columns("Pawner")
             Me.columnFullAddress = MyBase.Columns("FullAddress")
@@ -787,6 +799,8 @@ Partial Public Class dsPrint
             MyBase.Columns.Add(Me.columnMatuDate)
             Me.columnExpiryDate = New Global.System.Data.DataColumn("ExpiryDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnExpiryDate)
+            Me.columnAuctionDate = New Global.System.Data.DataColumn("AuctionDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnAuctionDate)
             Me.columnItemType = New Global.System.Data.DataColumn("ItemType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnItemType)
             Me.columnPawner = New Global.System.Data.DataColumn("Pawner", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -2282,6 +2296,21 @@ Partial Public Class dsPrint
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property AuctionDate() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePawnTicket.AuctionDateColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'AuctionDate' in table 'PawnTicket' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePawnTicket.AuctionDateColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property ItemType() As String
             Get
                 Try 
@@ -2578,6 +2607,18 @@ Partial Public Class dsPrint
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetExpiryDateNull()
             Me(Me.tablePawnTicket.ExpiryDateColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsAuctionDateNull() As Boolean
+            Return Me.IsNull(Me.tablePawnTicket.AuctionDateColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetAuctionDateNull()
+            Me(Me.tablePawnTicket.AuctionDateColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

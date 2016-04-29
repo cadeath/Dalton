@@ -14,6 +14,7 @@
         DailyInsurance = 11
         HourlySummary = 12
         LoanRenew2 = 13
+        AuctionMonthly = 14
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -45,7 +46,59 @@
                 DailyInsurance()
             Case ReportType.LoanRenew2
                 LoanRenew2()
+            Case ReportType.AuctionMonthly
+                AuctionMonthly()
         End Select
+    End Sub
+
+    Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
+        If cboReports.Text = "" And cboReports.Visible Then Exit Sub
+
+        If cboReports.Visible Then
+            Select Case cboReports.Text
+                Case "Schedule of Redeem and Renewal"
+                    FormType = ReportType.RedeemRenew
+                Case "Schedule of Loan and Renewal"
+                    FormType = ReportType.LoanRenew
+                Case "Certificate of Insurance"
+                    FormType = ReportType.Insurance
+                Case "Dollar Buying"
+                    FormType = ReportType.DollarBuying
+                Case "Branch Borrowings"
+                    FormType = ReportType.BranchBorrowings
+                Case "Money Transfer"
+                    FormType = ReportType.MoneyTransfer
+                Case "Item Pullout"
+                    FormType = ReportType.ItemPullOut
+                Case "Loan Register - New Loan and Renewal 2"
+                    FormType = ReportType.LoanRenew2
+                Case "Auction Monthly Report"
+                    FormType = ReportType.AuctionMonthly
+            End Select
+        End If
+
+        Generate()
+    End Sub
+
+    Private Sub AuctionMonthly()
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsAuction" : rptPath = "Reports\rpt_AuctionMonthly.rdlc"
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionStart)
+
+        mySql = "SELECT * "
+        mySql &= vbCrLf & "FROM PAWNING "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
+        mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtMonthOf", "FOR THE MONTH OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
+        addPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara)
+        frmReport.Show()
     End Sub
 
     Private Sub Generate_Hourly()
@@ -100,33 +153,6 @@
         frmReport.Show()
     End Sub
 
-    Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
-        If cboReports.Text = "" And cboReports.Visible Then Exit Sub
-
-        If cboReports.Visible Then
-            Select Case cboReports.Text
-                Case "Schedule of Redeem and Renewal"
-                    FormType = ReportType.RedeemRenew
-                Case "Schedule of Loan and Renewal"
-                    FormType = ReportType.LoanRenew
-                Case "Certificate of Insurance"
-                    FormType = ReportType.Insurance
-                Case "Dollar Buying"
-                    FormType = ReportType.DollarBuying
-                Case "Branch Borrowings"
-                    FormType = ReportType.BranchBorrowings
-                Case "Money Transfer"
-                    FormType = ReportType.MoneyTransfer
-                Case "Item Pullout"
-                    FormType = ReportType.ItemPullOut
-                Case "Loan Register - New Loan and Renewal 2"
-                    FormType = ReportType.LoanRenew2
-            End Select
-        End If
-
-        Generate()
-    End Sub
-
     Private Sub LoanRenew2()
         Dim st As Date = GetFirstDate(monCal.SelectionStart)
         Dim en As Date = GetLastDate(monCal.SelectionEnd)
@@ -166,20 +192,6 @@
         diagMT.en = GetLastDate(monCal.SelectionEnd)
 
         diagMT.Show()
-
-        'Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
-        'Dim enDate As Date = GetLastDate(monCal.SelectionRange.End)
-        'Dim fillData As String = "dsMT", mySql As String
-
-        'mySql = "SELECT * FROM MONEY_TRANSFER "
-        'mySql &= String.Format("WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
-
-        'Dim rptPara As New Dictionary(Of String, String)
-        'rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
-        'rptPara.Add("branchName", branchName)
-
-        'frmReport.ReportInit(mySql, fillData, "Reports\rpt_Monthly_MT.rdlc", rptPara)
-        'frmReport.Show()
     End Sub
 
     Private Sub InsuranceReport()

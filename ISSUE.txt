@@ -104,7 +104,7 @@ ISSUE: 0008 02/18/2016
 [+] POSAdmin account can't void!
 [+] CashCount Sheet Bottom Margin changed
 [+] REPORT OUTSTANDING LOANS - Date is not specified
-[-] REPORT OUTSTANDING LOANS - Per Category
+[+] REPORT OUTSTANDING LOANS - Per Category
 [+] REPORT Schedule of Loan & Renewal - Representation of the Grand Total
 [+] REPORT Cash In/Out - Range
 [+] GPRS Remittance, with Commission and Gross

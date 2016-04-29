@@ -2,7 +2,8 @@ CHANGELOG
 Version 1.1.2.1
  - Add Username on PT
  - Add Item Type on Loan Register - Redeem
- - FIX Pawning without CUSTOMER error
+ - Add Auction Monthly Report
+ - FIX Pawning without CUSTOMER error 
 
 Version 1.1.1.2
  - FIX pawning save data.
