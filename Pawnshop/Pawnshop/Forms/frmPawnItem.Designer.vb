@@ -98,6 +98,7 @@ Partial Class frmPawnItem
         Me.tmrVerifier = New System.Windows.Forms.Timer(Me.components)
         Me.lblTransaction = New System.Windows.Forms.Label()
         Me.btnPrint = New System.Windows.Forms.Button()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -868,12 +869,22 @@ Partial Class frmPawnItem
         Me.btnPrint.Text = "&Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(682, 3)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(250, 55)
+        Me.webAds.TabIndex = 15
+        '
         'frmPawnItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(935, 505)
+        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.lblTransaction)
         Me.Controls.Add(Me.lblNPT)
@@ -981,4 +992,5 @@ Partial Class frmPawnItem
     Friend WithEvents tmrVerifier As System.Windows.Forms.Timer
     Friend WithEvents lblTransaction As System.Windows.Forms.Label
     Friend WithEvents btnPrint As System.Windows.Forms.Button
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class

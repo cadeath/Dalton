@@ -24,6 +24,7 @@ Partial Class frmReport
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReport))
         Me.rv_display = New Microsoft.Reporting.WinForms.ReportViewer()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.SuspendLayout()
         '
         'rv_display
@@ -34,11 +35,21 @@ Partial Class frmReport
         Me.rv_display.Size = New System.Drawing.Size(534, 307)
         Me.rv_display.TabIndex = 0
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(0, 25)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(315, 71)
+        Me.webAds.TabIndex = 1
+        '
         'frmReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(534, 307)
+        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.rv_display)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmReport"
@@ -47,4 +58,5 @@ Partial Class frmReport
 
     End Sub
     Friend WithEvents rv_display As Microsoft.Reporting.WinForms.ReportViewer
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class

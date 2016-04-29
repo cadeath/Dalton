@@ -47,6 +47,9 @@ Public Class frmPawnItem
         LoadAppraisers()
         If transactionType = "L" Then NewLoan()
         PrintButton(False)
+
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
     End Sub
 
     Private Sub PrintButton(st As Boolean)

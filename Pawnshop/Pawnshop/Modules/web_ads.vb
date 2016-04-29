@@ -13,12 +13,12 @@
 
     Sub Ads_Initialization()
         Dim adsPath As String = "file:///" & Application.StartupPath() & "\ads.html"
-        _adsDisplay.Visible = False
+        _adsDisplay.Visible = ADS_SHOW
         _adsDisplay.Navigate(adsPath)
     End Sub
 
     Private Sub AdsDisplay_DocumentCompleted(ByVal sender As System.Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles _adsDisplay.DocumentCompleted
-        AdsDisplay.Visible = False
+        AdsDisplay.Visible = ADS_SHOW
     End Sub
 
     Private Sub do_incognito()

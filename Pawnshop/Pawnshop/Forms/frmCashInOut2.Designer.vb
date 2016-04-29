@@ -22,7 +22,7 @@ Partial Class frmCashInOut2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "TICKETING", "Ticketing Fund Account", "1000"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "TICKETING", "Ticketing Fund Account", "1000"}, -1)
         Me.btnCashIn = New System.Windows.Forms.Button()
         Me.btnCashOut = New System.Windows.Forms.Button()
         Me.btnBrowse = New System.Windows.Forms.Button()
@@ -48,6 +48,7 @@ Partial Class frmCashInOut2
         Me.btnPost = New System.Windows.Forms.Button()
         Me.btnInvIn = New System.Windows.Forms.Button()
         Me.btnBDOCashOut = New System.Windows.Forms.Button()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.gpTrans.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -215,7 +216,7 @@ Partial Class frmCashInOut2
         Me.lvDetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvDetails.FullRowSelect = True
         Me.lvDetails.GridLines = True
-        Me.lvDetails.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem3})
+        Me.lvDetails.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvDetails.Location = New System.Drawing.Point(102, 221)
         Me.lvDetails.MultiSelect = False
         Me.lvDetails.Name = "lvDetails"
@@ -289,11 +290,21 @@ Partial Class frmCashInOut2
         Me.btnBDOCashOut.Text = "BDO ATM CashOut"
         Me.btnBDOCashOut.UseVisualStyleBackColor = True
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(12, 287)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(329, 56)
+        Me.webAds.TabIndex = 7
+        '
         'frmCashInOut2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(860, 530)
+        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnBDOCashOut)
         Me.Controls.Add(Me.btnInvIn)
         Me.Controls.Add(Me.btnPost)
@@ -341,4 +352,5 @@ Partial Class frmCashInOut2
     Friend WithEvents btnPost As System.Windows.Forms.Button
     Friend WithEvents btnInvIn As System.Windows.Forms.Button
     Friend WithEvents btnBDOCashOut As System.Windows.Forms.Button
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class

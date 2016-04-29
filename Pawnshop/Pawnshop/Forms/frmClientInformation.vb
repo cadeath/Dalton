@@ -14,6 +14,9 @@ Public Class frmClientInformation
     Private ClientIDs As New CollectionID
 
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
+
         ClearFields()
         txtFirstName.Focus()
 

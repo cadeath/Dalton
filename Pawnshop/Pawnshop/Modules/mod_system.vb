@@ -12,8 +12,9 @@
 Module mod_system
 
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = FALSE
+    Public DEV_MODE As Boolean = True
     Public ADS_ESKIE As Boolean = True
+    Public ADS_SHOW As Boolean = False
 
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
