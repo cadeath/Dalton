@@ -1,3 +1,5 @@
+ISSUES ARE LISTED AT THE SITE
+
 ISSUE: 0024 04/27/2016
 [+] Include login user fullname in PT
 [+] Loan Register Redeem has ITEM TYPE
