@@ -58,9 +58,9 @@ Partial Class frmMain
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutUsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -279,7 +279,7 @@ Partial Class frmMain
         'CashInOutToolStripMenuItem
         '
         Me.CashInOutToolStripMenuItem.Name = "CashInOutToolStripMenuItem"
-        Me.CashInOutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CashInOutToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.CashInOutToolStripMenuItem.Text = "Cash I&n/Out"
         '
         'SegregatedListToolStripMenuItem
@@ -302,13 +302,13 @@ Partial Class frmMain
         'HourlyReportToolStripMenuItem
         '
         Me.HourlyReportToolStripMenuItem.Name = "HourlyReportToolStripMenuItem"
-        Me.HourlyReportToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HourlyReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.HourlyReportToolStripMenuItem.Text = "&Hourly Report"
         '
         'HourlySummaryToolStripMenuItem
         '
         Me.HourlySummaryToolStripMenuItem.Name = "HourlySummaryToolStripMenuItem"
-        Me.HourlySummaryToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HourlySummaryToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.HourlySummaryToolStripMenuItem.Text = "H&ourly Summary"
         '
         'DailyCashCountToolStripMenuItem
@@ -316,12 +316,6 @@ Partial Class frmMain
         Me.DailyCashCountToolStripMenuItem.Name = "DailyCashCountToolStripMenuItem"
         Me.DailyCashCountToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.DailyCashCountToolStripMenuItem.Text = "&Daily Cash Count"
-        '
-        'HourlyReportToolStripMenuItem
-        '
-        Me.HourlyReportToolStripMenuItem.Name = "HourlyReportToolStripMenuItem"
-        Me.HourlyReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.HourlyReportToolStripMenuItem.Text = "&Time Report"
         '
         'AboutToolStripMenuItem
         '
