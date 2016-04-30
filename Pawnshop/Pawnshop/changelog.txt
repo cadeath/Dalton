@@ -4,6 +4,7 @@ Version 1.1.2.1
  - Add Item Type on Loan Register - Redeem
  - Add Auction Monthly Report
  - FIX Pawning without CUSTOMER error 
+ - FIX in JE round off
 
 Version 1.1.1.2
  - FIX pawning save data.

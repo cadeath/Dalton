@@ -421,7 +421,8 @@ Public Class frmPawnItem
             Else
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
                 If isEarlyRedeem Then
-                    AddJournal(.AdvanceInterest - .EarlyRedeem, "Debit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
+                    Dim rndInt As Double = .AdvanceInterest - .EarlyRedeem
+                    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 End If
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket)
                 If daysDue > 3 Then
