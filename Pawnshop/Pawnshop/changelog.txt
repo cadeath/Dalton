@@ -1,14 +1,13 @@
 CHANGELOG
 Version 1.1.2.2
- - Relink Report - Hourly Report
- - Include Segregated layout in the package
-
-Version 1.1.2.1
  - Add Username on PT
  - Add Item Type on Loan Register - Redeem
  - Add Auction Monthly Report
  - FIX Pawning without CUSTOMER error 
  - FIX in JE round off
+ - FIX Report - Hourly Report
+ - Package - Include Segregated layout
+ - Package - Include InstallPath at Register
 
 Version 1.1.1.2
  - FIX pawning save data.

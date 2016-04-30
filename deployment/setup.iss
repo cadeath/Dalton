@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Dalton Pawnshop"
-#define MyAppVersion "1.1.2.1"
+#define MyAppVersion "1.1.2.2"
 #define MyAppPublisher "Perfecto Group of Companies"
 #define MyAppExeName "pawnshop.exe"
 
@@ -18,7 +18,7 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\cdt-S0ft\Dalton Pawnshop
 DefaultGroupName=cdt-S0ft\Dalton Pawnshop
 OutputDir=D:\cadeath\Documents\DevInstaller\Pawnshop
-OutputBaseFilename=daltonps-1121
+OutputBaseFilename=daltonps-1122
 SetupIconFile=..\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
 Compression=lzma
 SolidCompression=yes
@@ -33,6 +33,13 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Release\pawnshop.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+
+[Registry]
+Root: HKCU; Subkey: "Software\cdt-S0ft"; Flags: uninsdeletekeyifempty
+Root: HKCU; Subkey: "Software\cdt-S0ft\Pawnshop"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\cdt-S0ft"; Flags: uninsdeletekeyifempty
+Root: HKLM; Subkey: "Software\cdt-S0ft\Pawnshop"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\cdt-S0ft\Pawnshop"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
