@@ -1,4 +1,6 @@
 ﻿Imports DeathCodez.Security
+Imports System.Security.Cryptography
+Imports System.Text
 
 Module security
 
@@ -24,6 +26,20 @@ Module security
         code = ((strDate + curDay) * 2) - salt
 
         Return code
+    End Function
+
+    Friend Function GetMD5(obj As Object) As String
+        Dim tmpFile As String = System.IO.Path.GetTempPath() & "eskiegwapo"
+        If System.IO.File.Exists(tmpFile) Then System.IO.File.Delete(tmpFile)
+
+        Dim fsEsk As New System.IO.FileStream(tmpFile, IO.FileMode.CreateNew)
+        Dim esk As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
+        esk.Serialize(fsEsk, obj)
+
+        fsEsk.Close()
+
+
+        System.IO.File.Delete(tmpFile)
     End Function
 
 End Module
