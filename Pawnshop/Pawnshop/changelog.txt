@@ -6,6 +6,7 @@ Version 1.1.2.3
  - FIX Pawning without CUSTOMER error 
  - FIX in JE round off
  - FIX Report - Hourly Report
+ - FIX Report Size
  - Package - Include Segregated layout
  - Package - Include InstallPath at Register
 
