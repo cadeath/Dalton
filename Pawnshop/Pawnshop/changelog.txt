@@ -1,8 +1,9 @@
 CHANGELOG
-Version 1.1.2.3
- - Add Username on PT
+Version 1.1.2.4
+  - Add Username on PT
  - Add Item Type on Loan Register - Redeem
  - Add Auction Monthly Report
+ - Add Monthly Money Transfer Report for BSP
  - FIX Pawning without CUSTOMER error 
  - FIX in JE round off
  - FIX Report - Hourly Report

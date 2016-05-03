@@ -3315,6 +3315,12 @@ Partial Public Class dsReports
         
         Private columnNetAmount As Global.System.Data.DataColumn
         
+        Private columnSenderName As Global.System.Data.DataColumn
+        
+        Private columnReceiverName As Global.System.Data.DataColumn
+        
+        Private columnLocation As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -3423,6 +3429,30 @@ Partial Public Class dsReports
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property SenderNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSenderName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ReceiverNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnReceiverName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LocationColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLocation
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3459,9 +3489,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddMoneyTransferRow(ByVal ServiceType As String, ByVal TransDate As String, ByVal RefNum As String, ByVal PayOut As String, ByVal SendOut As String, ByVal ServiceCharge As String, ByVal Commission As String, ByVal MoneyTrans As String, ByVal NetAmount As String) As MoneyTransferRow
+        Public Overloads Function AddMoneyTransferRow(ByVal ServiceType As String, ByVal TransDate As String, ByVal RefNum As String, ByVal PayOut As String, ByVal SendOut As String, ByVal ServiceCharge As String, ByVal Commission As String, ByVal MoneyTrans As String, ByVal NetAmount As String, ByVal SenderName As String, ByVal ReceiverName As String, ByVal Location As String) As MoneyTransferRow
             Dim rowMoneyTransferRow As MoneyTransferRow = CType(Me.NewRow,MoneyTransferRow)
-            Dim columnValuesArray() As Object = New Object() {ServiceType, TransDate, RefNum, PayOut, SendOut, ServiceCharge, Commission, MoneyTrans, NetAmount}
+            Dim columnValuesArray() As Object = New Object() {ServiceType, TransDate, RefNum, PayOut, SendOut, ServiceCharge, Commission, MoneyTrans, NetAmount, SenderName, ReceiverName, Location}
             rowMoneyTransferRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMoneyTransferRow)
             Return rowMoneyTransferRow
@@ -3493,6 +3523,9 @@ Partial Public Class dsReports
             Me.columnCommission = MyBase.Columns("Commission")
             Me.columnMoneyTrans = MyBase.Columns("MoneyTrans")
             Me.columnNetAmount = MyBase.Columns("NetAmount")
+            Me.columnSenderName = MyBase.Columns("SenderName")
+            Me.columnReceiverName = MyBase.Columns("ReceiverName")
+            Me.columnLocation = MyBase.Columns("Location")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3516,6 +3549,12 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnMoneyTrans)
             Me.columnNetAmount = New Global.System.Data.DataColumn("NetAmount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNetAmount)
+            Me.columnSenderName = New Global.System.Data.DataColumn("SenderName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSenderName)
+            Me.columnReceiverName = New Global.System.Data.DataColumn("ReceiverName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnReceiverName)
+            Me.columnLocation = New Global.System.Data.DataColumn("Location", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLocation)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -7787,6 +7826,51 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property SenderName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMoneyTransfer.SenderNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SenderName' in table 'MoneyTransfer' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMoneyTransfer.SenderNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ReceiverName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMoneyTransfer.ReceiverNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ReceiverName' in table 'MoneyTransfer' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMoneyTransfer.ReceiverNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Location() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMoneyTransfer.LocationColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Location' in table 'MoneyTransfer' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMoneyTransfer.LocationColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsServiceTypeNull() As Boolean
             Return Me.IsNull(Me.tableMoneyTransfer.ServiceTypeColumn)
         End Function
@@ -7891,6 +7975,42 @@ Partial Public Class dsReports
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetNetAmountNull()
             Me(Me.tableMoneyTransfer.NetAmountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsSenderNameNull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransfer.SenderNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetSenderNameNull()
+            Me(Me.tableMoneyTransfer.SenderNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsReceiverNameNull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransfer.ReceiverNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetReceiverNameNull()
+            Me(Me.tableMoneyTransfer.ReceiverNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLocationNull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransfer.LocationColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLocationNull()
+            Me(Me.tableMoneyTransfer.LocationColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
