@@ -84,6 +84,7 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
+        Me.BSPReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -169,7 +170,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -327,13 +328,13 @@ Partial Class frmMain
         'TutorialToolStripMenuItem
         '
         Me.TutorialToolStripMenuItem.Name = "TutorialToolStripMenuItem"
-        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.TutorialToolStripMenuItem.Text = "&Tutorial"
         '
         'AboutUsToolStripMenuItem
         '
         Me.AboutUsToolStripMenuItem.Name = "AboutUsToolStripMenuItem"
-        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AboutUsToolStripMenuItem.Text = "&About Us"
         '
         'pbLogo
@@ -535,6 +536,12 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
+        'BSPReportToolStripMenuItem
+        '
+        Me.BSPReportToolStripMenuItem.Name = "BSPReportToolStripMenuItem"
+        Me.BSPReportToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.BSPReportToolStripMenuItem.Text = "&BSP Report"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -627,5 +634,6 @@ Partial Class frmMain
     Friend WithEvents HourlyReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CashInOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HourlySummaryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BSPReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

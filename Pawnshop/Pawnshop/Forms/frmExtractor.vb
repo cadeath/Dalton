@@ -38,7 +38,7 @@ Public Class frmExtractor
                 Me.Text &= " - Journal Entry"
             Case ExtractType.MoneyTransferBSP
                 Console.WriteLine("Money Transfer BSP Activated")
-                sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+                sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
                 Me.Text &= " - BSP Report"
         End Select
     End Sub
@@ -49,6 +49,9 @@ Public Class frmExtractor
         If FormType = ExtractType.Expiry Then
             btnExtract.Enabled = False
             ExtractExpiry()
+        ElseIf FormType = ExtractType.MoneyTransferBSP Then
+            btnExtract.Enabled = False
+            MoneyTransferBSP()
         Else
             Dim ans As MsgBoxResult = _
                 MsgBox("We will only use the Starting Date." & vbCrLf & "Do you want to continue?", _
@@ -155,8 +158,16 @@ Public Class frmExtractor
         Dim en As Date = GetLastDate(MonCalendar.SelectionStart)
         Dim mySql As String
 
-        mySql = "SELECT * FROM MONEY_TRANSFER WHERE TRANSDATE BETWEEN '" + st.ToShortDateString + "' AND '" + en.ToShortDateString + "'"
+        Dim listHeaders() As String = _
+            {"BranchCode", "ServiceType", "TransDate", "MoneyTrans", "RefNum", _
+             "Payout", "SendIn", "ServiceCharge", "Commission", _
+             "NetAmount", "SenderName", "S_Addr", "ReceiverName", "R_Addr", "Location"}
+
+        mySql = "SELECT '" + BranchCode + "' as BranchCode, MT.* FROM MONEY_TRANSFER MT WHERE TRANSDATE BETWEEN '" + st.ToShortDateString + "' AND '" + en.ToShortDateString + "'"
         Dim ds As DataSet = LoadSQL(mySql)
+        Console.WriteLine(ds.Tables(0).Rows.Count & " items found!")
+        pbLoading.Maximum = ds.Tables(0).Rows.Count
+        pbLoading.Value = 0
 
         'Load Excel
         Dim oXL As New Excel.Application
@@ -175,11 +186,28 @@ Public Class frmExtractor
         oSheet = oWB.ActiveSheet
         oSheet.Name = "MONTHLY"
 
+        ' HEADERS
+        Dim cnt As Integer = 0
+        For Each hr In listHeaders
+            cnt += 1 : oSheet.Cells(1, cnt).value = hr
+        Next
 
+        ' EXTRACTING
+        Dim rowCnt As Integer = 2
+        For Each dr As DataRow In ds.Tables(0).Rows
+            For colCnt As Integer = 0 To listHeaders.Count - 1
+                oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt)
+            Next
+            rowCnt += 1
 
+            AddProgress()
+            Application.DoEvents()
+        Next
 
+        ' SAVE
         Dim verified_url As String
-        Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
+
+        sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", MonCalendar.SelectionStart.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
                 verified_url = txtPath.Text
