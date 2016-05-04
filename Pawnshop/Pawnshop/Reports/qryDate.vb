@@ -15,6 +15,7 @@
         HourlySummary = 12
         LoanRenew2 = 13
         AuctionMonthly = 14
+        MoneyTransferBSP = 15
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -48,7 +49,27 @@
                 LoanRenew2()
             Case ReportType.AuctionMonthly
                 AuctionMonthly()
+            Case ReportType.MoneyTransferBSP
+                MoneyTransfer_BSP()
         End Select
+    End Sub
+
+    Private Sub MoneyTransfer_BSP()
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionStart)
+
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsMonthly"
+        rptPath = "Reports\rpt_Monthly_BSP.rdlc"
+
+        mySql = "SELECT * FROM MONEY_TRANSFER WHERE TRANSDATE BETWEEN '" + st.ToShortDateString + "' AND '" + en.ToShortDateString + "'"
+
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
+        addPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara, True)
+        frmReport.Show()
     End Sub
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
@@ -74,6 +95,8 @@
                     FormType = ReportType.LoanRenew2
                 Case "Auction Monthly Report"
                     FormType = ReportType.AuctionMonthly
+                Case "Money Transfer (BSP)"
+                    FormType = ReportType.MoneyTransferBSP
             End Select
         End If
 

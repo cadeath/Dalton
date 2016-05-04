@@ -4,6 +4,7 @@ Public Class frmExtractor
     Enum ExtractType As Integer
         Expiry = 0
         JournalEntry = 1
+        MoneyTransferBSP = 2
     End Enum
     Friend FormType As ExtractType = ExtractType.Expiry
 
@@ -35,6 +36,10 @@ Public Class frmExtractor
                 Console.WriteLine("Journal Entry Type Activated")
                 sfdPath.FileName = String.Format("JRNL{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
                 Me.Text &= " - Journal Entry"
+            Case ExtractType.MoneyTransferBSP
+                Console.WriteLine("Money Transfer BSP Activated")
+                sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+                Me.Text &= " - BSP Report"
         End Select
     End Sub
 
@@ -143,6 +148,57 @@ Public Class frmExtractor
         oXL = Nothing
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub MoneyTransferBSP()
+        Dim st As Date = GetFirstDate(MonCalendar.SelectionStart)
+        Dim en As Date = GetLastDate(MonCalendar.SelectionStart)
+        Dim mySql As String
+
+        mySql = "SELECT * FROM MONEY_TRANSFER WHERE TRANSDATE BETWEEN '" + st.ToShortDateString + "' AND '" + en.ToShortDateString + "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        If oXL Is Nothing Then
+            MessageBox.Show("Excel is not properly installed!!")
+            Return
+        End If
+
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oXL = CreateObject("Excel.Application")
+        oXL.Visible = False
+
+        oWB = oXL.Workbooks.Add
+        oSheet = oWB.ActiveSheet
+        oSheet.Name = "MONTHLY"
+
+
+
+
+        Dim verified_url As String
+        Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Data Saved", MsgBoxStyle.Information)
     End Sub
 
     Private Sub ExtractExpiry()
