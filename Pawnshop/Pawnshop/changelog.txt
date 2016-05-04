@@ -4,10 +4,13 @@ Version 1.1.2.4
  - Add Item Type on Loan Register - Redeem
  - Add Auction Monthly Report
  - Add Monthly Money Transfer Report for BSP
+ - Add BSP Report Extract
+ - Add Dollar Daily Report
  - FIX Pawning without CUSTOMER error 
  - FIX in JE round off
  - FIX Report - Hourly Report
  - FIX Report Size
+ - FIX Money Transfer Report Header
  - Package - Include Segregated layout
  - Package - Include InstallPath at Register
 
