@@ -39,6 +39,7 @@ Partial Class frmMain
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExpiryGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.JournalEntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BSPReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ORManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -84,7 +85,7 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.BSPReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DollarReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -187,6 +188,12 @@ Partial Class frmMain
         Me.JournalEntriesToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.JournalEntriesToolStripMenuItem.Text = "&Journal Entries"
         '
+        'BSPReportToolStripMenuItem
+        '
+        Me.BSPReportToolStripMenuItem.Name = "BSPReportToolStripMenuItem"
+        Me.BSPReportToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.BSPReportToolStripMenuItem.Text = "&BSP Report"
+        '
         'CashCountToolStripMenuItem
         '
         Me.CashCountToolStripMenuItem.Name = "CashCountToolStripMenuItem"
@@ -225,7 +232,7 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.DollarReportToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -328,13 +335,13 @@ Partial Class frmMain
         'TutorialToolStripMenuItem
         '
         Me.TutorialToolStripMenuItem.Name = "TutorialToolStripMenuItem"
-        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
         Me.TutorialToolStripMenuItem.Text = "&Tutorial"
         '
         'AboutUsToolStripMenuItem
         '
         Me.AboutUsToolStripMenuItem.Name = "AboutUsToolStripMenuItem"
-        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
         Me.AboutUsToolStripMenuItem.Text = "&About Us"
         '
         'pbLogo
@@ -536,11 +543,11 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
-        'BSPReportToolStripMenuItem
+        'DollarReportToolStripMenuItem
         '
-        Me.BSPReportToolStripMenuItem.Name = "BSPReportToolStripMenuItem"
-        Me.BSPReportToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
-        Me.BSPReportToolStripMenuItem.Text = "&BSP Report"
+        Me.DollarReportToolStripMenuItem.Name = "DollarReportToolStripMenuItem"
+        Me.DollarReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.DollarReportToolStripMenuItem.Text = "D&ollar Report"
         '
         'frmMain
         '
@@ -635,5 +642,6 @@ Partial Class frmMain
     Friend WithEvents CashInOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HourlySummaryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BSPReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DollarReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

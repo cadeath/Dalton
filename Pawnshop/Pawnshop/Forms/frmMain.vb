@@ -422,4 +422,9 @@ Public Class frmMain
         frmExtractor.FormType = frmExtractor.ExtractType.MoneyTransferBSP
         frmExtractor.Show()
     End Sub
+
+    Private Sub DollarReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DollarReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.DollarDaily
+        qryDate.Show()
+    End Sub
 End Class

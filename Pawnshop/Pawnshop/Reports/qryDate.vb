@@ -16,6 +16,7 @@
         LoanRenew2 = 13
         AuctionMonthly = 14
         MoneyTransferBSP = 15
+        DollarDaily = 16
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -51,6 +52,8 @@
                 AuctionMonthly()
             Case ReportType.MoneyTransferBSP
                 MoneyTransfer_BSP()
+            Case ReportType.DollarDaily
+                DailyDollar()
         End Select
     End Sub
 
@@ -443,6 +446,20 @@
         frmReport.Show()
     End Sub
 
+    Private Sub DailyDollar()
+        Dim fillData As String = "dsDollar"
+        Dim mySql As String = "SELECT * FROM tblDollar"
+        mySql &= String.Format(" WHERE TRANSDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= " ORDER BY TRANSDATE ASC"
+
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToLongDateString)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Dollar.rdlc", rptPara)
+        frmReport.Show()
+    End Sub
+
     Private Sub Borrowings()
         Dim stDay = GetFirstDate(monCal.SelectionStart)
         Dim laDay = GetLastDate(monCal.SelectionEnd)
@@ -474,6 +491,8 @@
             Case ReportType.HourlySummary
                 Return True
             Case ReportType.DailyInsurance
+                Return True
+            Case ReportType.DollarDaily
                 Return True
         End Select
 
