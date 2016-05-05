@@ -209,7 +209,7 @@ Partial Class frmDollorSimple
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(0, 146)
+        Me.webAds.Location = New System.Drawing.Point(15, 125)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -221,7 +221,6 @@ Partial Class frmDollorSimple
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(415, 277)
-        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
@@ -229,6 +228,7 @@ Partial Class frmDollorSimple
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnBrowse)
+        Me.Controls.Add(Me.webAds)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmDollorSimple"

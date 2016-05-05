@@ -1,6 +1,11 @@
 ﻿Imports DeathCodez.Security
-Imports System.Security.Cryptography
+Imports System
+Imports System.IO
+Imports System.Xml
+Imports System.Xml.Linq
 Imports System.Text
+Imports System.Runtime.Serialization
+Imports System.Security.Cryptography
 
 Module security
 
@@ -28,18 +33,18 @@ Module security
         Return code
     End Function
 
-    Friend Function GetMD5(obj As Object) As String
-        Dim tmpFile As String = System.IO.Path.GetTempPath() & "eskiegwapo"
-        If System.IO.File.Exists(tmpFile) Then System.IO.File.Delete(tmpFile)
+    Friend Function GetMD5(ds As DataSet) As String
+        Dim serialize As DataContractSerializer = New DataContractSerializer(GetType(DataSet))
+        Dim MemoryStream As New MemoryStream
+        Dim xmlW As XmlDictionaryWriter
+        xmlW = XmlDictionaryWriter.CreateBinaryWriter(MemoryStream)
+        serialize.WriteObject(MemoryStream, ds)
 
-        Dim fsEsk As New System.IO.FileStream(tmpFile, IO.FileMode.CreateNew)
-        Dim esk As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
-        esk.Serialize(fsEsk, obj)
+        Dim sd As Byte() = MemoryStream.ToArray
+        Dim MD5 As New MD5CryptoServiceProvider
+        Dim md5Byte As Byte() = MD5.ComputeHash(sd)
 
-        fsEsk.Close()
-
-
-        System.IO.File.Delete(tmpFile)
+        Return Convert.ToBase64String(md5Byte)
     End Function
 
 End Module

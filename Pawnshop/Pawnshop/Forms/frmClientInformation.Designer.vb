@@ -604,7 +604,7 @@ Partial Class frmClientInformation
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(572, 295)
+        Me.webAds.Location = New System.Drawing.Point(570, 226)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -617,13 +617,13 @@ Partial Class frmClientInformation
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(964, 396)
-        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.grpID)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.webAds)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False

@@ -41,6 +41,7 @@ Partial Class frmInsurance
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.txtCoi = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.txtPT = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpExpiry = New System.Windows.Forms.DateTimePicker()
@@ -51,7 +52,6 @@ Partial Class frmInsurance
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -244,7 +244,6 @@ Partial Class frmInsurance
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.Control
-        Me.GroupBox2.Controls.Add(Me.webAds)
         Me.GroupBox2.Controls.Add(Me.txtPT)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.dtpExpiry)
@@ -255,6 +254,7 @@ Partial Class frmInsurance
         Me.GroupBox2.Controls.Add(Me.txtAmount)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.webAds)
         Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI Symbol", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Desktop
         Me.GroupBox2.Location = New System.Drawing.Point(1, 299)
@@ -263,6 +263,15 @@ Partial Class frmInsurance
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Insurance Information"
+        '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(251, -53)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(236, 46)
+        Me.webAds.TabIndex = 29
         '
         'txtPT
         '
@@ -396,15 +405,6 @@ Partial Class frmInsurance
         Me.btnSave.TabIndex = 9
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = False
-        '
-        'webAds
-        '
-        Me.webAds.Location = New System.Drawing.Point(257, 93)
-        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.webAds.Name = "webAds"
-        Me.webAds.ScrollBarsEnabled = False
-        Me.webAds.Size = New System.Drawing.Size(236, 46)
-        Me.webAds.TabIndex = 29
         '
         'frmInsurance
         '

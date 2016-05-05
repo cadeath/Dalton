@@ -58,6 +58,7 @@ Partial Class frmPawning
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.webAds)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 74)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(853, 70)
@@ -276,7 +277,7 @@ Partial Class frmPawning
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(456, 9)
+        Me.webAds.Location = New System.Drawing.Point(483, 76)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -289,7 +290,6 @@ Partial Class frmPawning
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(878, 418)
-        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)

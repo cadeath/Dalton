@@ -175,7 +175,7 @@ Partial Class frmClient
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(397, 2)
+        Me.webAds.Location = New System.Drawing.Point(397, 13)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -188,13 +188,13 @@ Partial Class frmClient
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(762, 367)
-        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.lvClient)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.webAds)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmClient"
         Me.Text = "Client Management"

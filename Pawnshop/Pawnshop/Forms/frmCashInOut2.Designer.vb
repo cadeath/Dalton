@@ -292,7 +292,7 @@ Partial Class frmCashInOut2
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(12, 287)
+        Me.webAds.Location = New System.Drawing.Point(103, 417)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -304,7 +304,6 @@ Partial Class frmCashInOut2
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(860, 530)
-        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnBDOCashOut)
         Me.Controls.Add(Me.btnInvIn)
         Me.Controls.Add(Me.btnPost)
@@ -315,6 +314,7 @@ Partial Class frmCashInOut2
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.btnCashOut)
         Me.Controls.Add(Me.btnCashIn)
+        Me.Controls.Add(Me.webAds)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmCashInOut2"
