@@ -39,6 +39,10 @@ Public Class frmPawnItem
 
     Private PRINT_PTOLD As Integer = 0
     Private PRINT_PTNEW As Integer = 0
+    Private TBLINT_HASH As String = ""
+
+    Dim Critical_Language() As String =
+            {"Failed to verify hash value to the "}
 
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -1474,4 +1478,41 @@ Public Class frmPawnItem
             txtPenalty.Text = Penalty.ToString("#,##0.00")
         End If
     End Sub
+
+    Private Function HAS_THESAME_HASH(str As String) As Boolean
+        Dim ds As DataSet, ds1 As DataSet
+        Dim mySql As String = "SELECT * FROM TBLINT"
+
+        If TBLINT_HASH = "" Then
+            ds = LoadSQL(mySql)
+            TBLINT_HASH = GetMD5(ds)
+
+            Dim fillData As String = "tblInt_History"
+            mySql = "SELECT * "
+            mySql &= "FROM TBLINT_HISTORY "
+            mySql &= String.Format("WHERE CHECKSUM = '{0}'", TBLINT_HASH)
+            ds1 = LoadSQL(mySql, fillData)
+
+            If ds1.Tables(0).Rows.Count = 0 Then
+
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    Dim dsNewRow As DataRow
+                    dsNewRow = ds1.Tables(fillData).NewRow
+                    With dsNewRow
+                        .Item("DAYFROM") = dr("DAYFROM")
+                        .Item("DAYTO") = dr("DAYTO")
+                        .Item("ITEMTYPE") = dr("ITEMTYPE")
+                        .Item("INTEREST") = dr("INTEREST")
+                        .Item("PENALTY") = dr("PENALTY")
+                        .Item("REMARKS") = dr("REMARKS")
+                        .Item("CHECKSUM") = TBLINT_HASH
+                    End With
+                    ds1.Tables(fillData).Rows.Add(dsNewRow)
+                Next
+                database.SaveEntry(ds1)
+            End If
+        End If
+
+        Return True
+    End Function
 End Class

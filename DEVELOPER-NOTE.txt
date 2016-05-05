@@ -3,16 +3,16 @@ RECORDING OF INTEREST
 PAWNING MODULE REVISION
 NEW LOAN
 1. Input Pawn Information
-2. if INT_HASH has no value then hash TBLINT
-3. Check if Existing, if not then save the set of TBLINT with Hash to TBLINT_HIST
-4. Use the TBLINT as basis of computation
-5. Save the Pawn Info and the hash value
+2. If INT_HASH has no value then hash TBLINT
+3. If INT_HASH didn't exist at TBLINT_HISTORY, COPY TBLINT to TBLINT_HISTORY with HASH as CHECKSUM
+4. Use TBLINT as basis of computation
+5. Save the pawn info with the hashvalue
 
 RENEWAL
 1. Load PT
 2. if INT_HASH has no value then hash TBLINT
 3. Compare INT_HASH and the Pawn INT Hash
-4. If the same, use TBLINT as basis, if not then search at the TBLINT_HIST, and use it as basis.
+4. If the same, use TBLINT as basis, if not then filter TBLINT for the hash, and use it as basis.
 5. If not found, ERROR and call for technical asssistance
 6. Compute the INT
 7. Save the Pawn Info with the hash value of the previous Pawn INT
@@ -21,7 +21,7 @@ REDEEM
 1. Load PT
 2. if INT_HASH has no value then hash TBLINT
 3. Compare INT_HASH and the Pawn INT Hash
-4. If the same, use TBLINT as basis, if not then search at the TBLINT_HIST, and use it as basis.
+4. If the same, use TBLINT as basis, if not then filter TBLINT for the hash, and use it as basis.
 5. If not found, ERROR and call for technical asssistance
 6. Compute the INT
 7. Save and Redeem the Pawn Info with the hash value of the previous Pawn INT

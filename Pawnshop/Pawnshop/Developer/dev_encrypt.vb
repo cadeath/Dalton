@@ -26,10 +26,11 @@
         Return tmpENC
     End Function
 
+
     Private Sub btnHash_Click(sender As System.Object, e As System.EventArgs) Handles btnHash.Click
-        Dim mySql As String, bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
-        mySql = "SELECT * FROM TBLINT"
-        Dim ds As DataSet = LoadSQL(mySql)
-        lblHash.Text = GetMD5(ds)
+        Dim ds As DataSet
+        ds = LoadSQL(txtSQL.Text)
+
+        txtHash.Text += vbCrLf & GetMD5(ds)
     End Sub
 End Class
