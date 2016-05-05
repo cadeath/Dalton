@@ -412,4 +412,19 @@ Public Class frmMain
         qryDate.FormType = qryDate.ReportType.Hourly
         qryDate.Show()
     End Sub
+
+    Private Sub BSPReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BSPReportToolStripMenuItem.Click
+        If Not POSuser.canJournalEntryGenerate Then
+            MsgBoxAuthoriation("You don't have access to Journal Entry Generator")
+            Exit Sub
+        End If
+
+        frmExtractor.FormType = frmExtractor.ExtractType.MoneyTransferBSP
+        frmExtractor.Show()
+    End Sub
+
+    Private Sub DollarReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DollarReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.DollarDaily
+        qryDate.Show()
+    End Sub
 End Class

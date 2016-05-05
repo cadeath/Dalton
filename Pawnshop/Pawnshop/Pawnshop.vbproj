@@ -149,6 +149,7 @@
   <ItemGroup>
     <Compile Include="AutoPatch\autopatch.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
+    <Compile Include="AutoPatch\db1011.vb" />
     <Compile Include="AutoPatch\db107.vb" />
     <Compile Include="AutoPatch\db108.vb" />
     <Compile Include="AutoPatch\db109.vb" />
@@ -681,6 +682,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRenew_Monthly2.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_Monthly_BSP.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_Monthly_MT.rdlc">

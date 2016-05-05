@@ -1,22 +1,31 @@
 ﻿Public Class dev_report
 
     Private Sub dev_report_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        Patch_if_Patchable()
+
         Dim stDate As Date = GetFirstDate(Now)
         Dim enDate As Date = GetLastDate(Now)
 
         Dim mySql As String, ds As New DataSet, dsName As String, rptPath As String = "Reports\d_Remittance.rdlc"
         dsName = "dsRemit"
         mySql = "SELECT * FROM MONEY_TRANSFER"
-        'mySql &= String.Format(" WHERE TransDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
 
-        'frmReport.ReportInit(mySql, dsName, rptPath, , False)
-        'frmReport.Show()
-        'Me.ReportViewer1.RefreshReport()
+        Monthly_BSP()
+    End Sub
 
-        'Graph_Report()
-        'CashInOut_Daily()
-        'RedeemRegister()
-        Monthly_NewLoanRenew()
+    Private Sub Monthly_BSP()
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsMonthly"
+        rptPath = "Reports\rpt_Monthly_BSP.rdlc"
+
+        mySql = "SELECT * FROM MONEY_TRANSFER WHERE TRANSDATE BETWEEN '3/1/2016' AND '3/31/2016'"
+
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtMonthOf", "FOR THE MONTH OF FEBRUARY 2016")
+        addPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara, True)
+        frmReport.Show()
     End Sub
 
     Private Sub RedeemRegister()

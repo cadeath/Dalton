@@ -61,4 +61,5 @@
     Private Sub chkSend_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSend.CheckedChanged
         CheckNoUncheck()
     End Sub
+
 End Class
