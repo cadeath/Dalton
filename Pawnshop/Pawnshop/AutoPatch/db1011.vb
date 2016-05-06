@@ -8,10 +8,12 @@
         Dim DROP_VIEW As String = "DROP VIEW MONEY_TRANSFER;"
         Dim CREATE_NEW_PRINT_PAWNING As String
         Dim mySql As String
-        mySql = "CREATE VIEW MONEY_TRANSFER("
-        mySql &= vbCrLf & "  SERVICETYPE, TRANSDATE, MONEYTRANS, REFNUM,"
-        mySql &= vbCrLf & "  PAYOUT, SENDOUT, SERVICECHARGE, COMMISSION, NETAMOUNT, "
-        mySql &= vbCrLf & "  SENDERNAME, S_ADDR, RECEIVERNAME, R_ADDR, LOCATION)"
+
+        mySql = "CREATE VIEW MONEY_TRANSFER( "
+        mySql &= vbCrLf & "  SERVICETYPE, TRANSDATE, MONEYTRANS,"
+        mySql &= vbCrLf & "  REFNUM, PAYOUT, SENDOUT, SERVICECHARGE,"
+        mySql &= vbCrLf & "  COMMISSION, NETAMOUNT, SENDERNAME,"
+        mySql &= vbCrLf & "  S_ADDR, RECEIVERNAME, R_ADDR, LOCATION)"
         mySql &= vbCrLf & "AS "
         mySql &= vbCrLf & "SELECT "
         mySql &= vbCrLf & "  MT.ServiceType, MT.TransDate,"
@@ -21,9 +23,9 @@
         mySql &= vbCrLf & "      ELSE 'NA'"
         mySql &= vbCrLf & "    END AS MoneyTrans,"
         mySql &= vbCrLf & "    CASE"
-        mySql &= vbCrLf & "      WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 0"
+        mySql &= vbCrLf & "      WHEN ServiceType LIKE 'Pera Padala%' AND MoneyTrans = 0"
         mySql &= vbCrLf & "      THEN 'ME# ' || LPAD(TransID,5,0)"
-        mySql &= vbCrLf & "    WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 1"
+        mySql &= vbCrLf & "    WHEN ServiceType LIKE 'Pera Padala%' AND MoneyTrans = 1"
         mySql &= vbCrLf & "      THEN 'MR# ' || LPAD(TransID,5,0)"
         mySql &= vbCrLf & "      ELSE RefNum END as RefNum,"
         mySql &= vbCrLf & "    CASE MoneyTrans"
