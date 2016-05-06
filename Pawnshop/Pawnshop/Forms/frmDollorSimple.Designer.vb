@@ -39,6 +39,7 @@ Partial Class frmDollorSimple
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -206,11 +207,21 @@ Partial Class frmDollorSimple
         Me.txtName.Size = New System.Drawing.Size(213, 20)
         Me.txtName.TabIndex = 0
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(0, 146)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(280, 61)
+        Me.webAds.TabIndex = 11
+        '
         'frmDollorSimple
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(415, 277)
+        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
@@ -247,4 +258,5 @@ Partial Class frmDollorSimple
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class

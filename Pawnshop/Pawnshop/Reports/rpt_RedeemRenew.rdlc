@@ -1796,7 +1796,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1836,7 +1835,7 @@
         </TablixRowHierarchy>
         <DataSetName>dsRedeemRenew</DataSetName>
         <Height>0.75in</Height>
-        <Width>10.07345in</Width>
+        <Width>10.07346in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1861,7 +1860,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>10.07345in</Width>
+  <Width>10.07346in</Width>
   <Page>
     <PageHeader>
       <Height>0.79167in</Height>
@@ -1876,7 +1875,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>SCHEDULE OF LOAN REDEMPTION AND RENEWALS</Value>
-                  <Style />
+                  <Style>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />

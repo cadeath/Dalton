@@ -47,6 +47,9 @@ Public Class frmPawnItem
         LoadAppraisers()
         If transactionType = "L" Then NewLoan()
         PrintButton(False)
+
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
     End Sub
 
     Private Sub PrintButton(st As Boolean)
@@ -418,7 +421,8 @@ Public Class frmPawnItem
             Else
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
                 If isEarlyRedeem Then
-                    AddJournal(.AdvanceInterest - .EarlyRedeem, "Debit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
+                    Dim rndInt As Double = .AdvanceInterest - .EarlyRedeem
+                    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
                 End If
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket)
                 If daysDue > 3 Then
@@ -482,6 +486,12 @@ Public Class frmPawnItem
         End If
 
         If unableToSave Then Return False
+        If PawnCustomer Is Nothing Then
+            txtCustomer.SelectAll()
+            txtCustomer.Focus()
+
+            Return False
+        End If
 
         Return True
     End Function
@@ -989,6 +999,8 @@ Public Class frmPawnItem
         End If
 
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        addParameters.Add("txtUsername", POSuser.FullName)
+
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
                 Dim tmpPara As New ReportParameter
@@ -1120,6 +1132,7 @@ Public Class frmPawnItem
         addParameters.Add("txtServiceCharge", PawnItem.ServiceCharge / 2)
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtOLDPT", "PT# " & PawnItem.OldTicket.ToString("000000"))
+        addParameters.Add("txtUsername", POSuser.FullName)
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1132,7 +1145,7 @@ Public Class frmPawnItem
         End If
 
         Try
-            If DEV_MODE And 0 Then
+            If DEV_MODE Then
                 frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
                 frmReport.Show()
             Else

@@ -51,6 +51,7 @@ Partial Class frmInsurance
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -243,6 +244,7 @@ Partial Class frmInsurance
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.Control
+        Me.GroupBox2.Controls.Add(Me.webAds)
         Me.GroupBox2.Controls.Add(Me.txtPT)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.dtpExpiry)
@@ -395,6 +397,15 @@ Partial Class frmInsurance
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = False
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(257, 93)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(236, 46)
+        Me.webAds.TabIndex = 29
+        '
         'frmInsurance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -443,4 +454,5 @@ Partial Class frmInsurance
     Friend WithEvents txtBirthdate As System.Windows.Forms.TextBox
     Friend WithEvents txtPT As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class

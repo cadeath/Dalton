@@ -3,6 +3,11 @@ Public Class frmReport
 
     Dim subReportPassing As Dictionary(Of String, String)
 
+    Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
+    End Sub
+
     Friend Sub MultiDbSetReport(ByVal mySql As Dictionary(Of String, String), ByVal rptUrl As String, _
                                 Optional ByVal addPara As Dictionary(Of String, String) = Nothing, Optional ByVal hasUser As Boolean = True, _
                                 Optional ByVal subReport As Dictionary(Of String, String) = Nothing)

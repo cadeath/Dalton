@@ -4,6 +4,7 @@ Public Class frmExtractor
     Enum ExtractType As Integer
         Expiry = 0
         JournalEntry = 1
+        MoneyTransferBSP = 2
     End Enum
     Friend FormType As ExtractType = ExtractType.Expiry
 
@@ -35,6 +36,10 @@ Public Class frmExtractor
                 Console.WriteLine("Journal Entry Type Activated")
                 sfdPath.FileName = String.Format("JRNL{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
                 Me.Text &= " - Journal Entry"
+            Case ExtractType.MoneyTransferBSP
+                Console.WriteLine("Money Transfer BSP Activated")
+                sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
+                Me.Text &= " - BSP Report"
         End Select
     End Sub
 
@@ -44,6 +49,9 @@ Public Class frmExtractor
         If FormType = ExtractType.Expiry Then
             btnExtract.Enabled = False
             ExtractExpiry()
+        ElseIf FormType = ExtractType.MoneyTransferBSP Then
+            btnExtract.Enabled = False
+            MoneyTransferBSP()
         Else
             Dim ans As MsgBoxResult = _
                 MsgBox("We will only use the Starting Date." & vbCrLf & "Do you want to continue?", _
@@ -143,6 +151,82 @@ Public Class frmExtractor
         oXL = Nothing
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub MoneyTransferBSP()
+        Dim st As Date = GetFirstDate(MonCalendar.SelectionStart)
+        Dim en As Date = GetLastDate(MonCalendar.SelectionStart)
+        Dim mySql As String
+
+        Dim listHeaders() As String = _
+            {"BranchCode", "ServiceType", "TransDate", "MoneyTrans", "RefNum", _
+             "Payout", "SendIn", "ServiceCharge", "Commission", _
+             "NetAmount", "SenderName", "S_Addr", "ReceiverName", "R_Addr", "Location"}
+
+        mySql = "SELECT '" + BranchCode + "' as BranchCode, MT.* FROM MONEY_TRANSFER MT WHERE TRANSDATE BETWEEN '" + st.ToShortDateString + "' AND '" + en.ToShortDateString + "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+        Console.WriteLine(ds.Tables(0).Rows.Count & " items found!")
+        pbLoading.Maximum = ds.Tables(0).Rows.Count
+        pbLoading.Value = 0
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        If oXL Is Nothing Then
+            MessageBox.Show("Excel is not properly installed!!")
+            Return
+        End If
+
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oXL = CreateObject("Excel.Application")
+        oXL.Visible = False
+
+        oWB = oXL.Workbooks.Add
+        oSheet = oWB.ActiveSheet
+        oSheet.Name = "MONTHLY"
+
+        ' HEADERS
+        Dim cnt As Integer = 0
+        For Each hr In listHeaders
+            cnt += 1 : oSheet.Cells(1, cnt).value = hr
+        Next
+
+        ' EXTRACTING
+        Dim rowCnt As Integer = 2
+        For Each dr As DataRow In ds.Tables(0).Rows
+            For colCnt As Integer = 0 To listHeaders.Count - 1
+                oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt)
+            Next
+            rowCnt += 1
+
+            AddProgress()
+            Application.DoEvents()
+        Next
+
+        ' SAVE
+        Dim verified_url As String
+
+        sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", MonCalendar.SelectionStart.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Data Saved", MsgBoxStyle.Information)
     End Sub
 
     Private Sub ExtractExpiry()

@@ -5,6 +5,9 @@
     Dim MOD_NAME As String = "INSURANCE"
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
+
         ClearFields()
 
         'Authorization

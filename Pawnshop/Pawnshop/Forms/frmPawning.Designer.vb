@@ -47,6 +47,7 @@ Partial Class frmPawning
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -273,12 +274,22 @@ Partial Class frmPawning
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Red - Withdraw [Redeem/Pullout]"
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(456, 9)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(303, 59)
+        Me.webAds.TabIndex = 13
+        '
         'frmPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(878, 418)
+        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -326,4 +337,5 @@ Partial Class frmPawning
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class

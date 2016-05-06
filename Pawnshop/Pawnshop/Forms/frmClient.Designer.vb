@@ -38,13 +38,14 @@ Partial Class frmClient
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnSelect = New System.Windows.Forms.Button()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -68,7 +69,7 @@ Partial Class frmClient
         'txtSearch
         '
         Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(9, 32)
         Me.txtSearch.Name = "txtSearch"
@@ -88,8 +89,8 @@ Partial Class frmClient
         'lvClient
         '
         Me.lvClient.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
@@ -172,12 +173,22 @@ Partial Class frmClient
         Me.btnSelect.UseVisualStyleBackColor = True
         Me.btnSelect.Visible = False
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(397, 2)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(289, 64)
+        Me.webAds.TabIndex = 3
+        '
         'frmClient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(762, 367)
+        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnView)
@@ -206,4 +217,5 @@ Partial Class frmClient
     Friend WithEvents btnSelect As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents imgClient As System.Windows.Forms.ImageList
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class

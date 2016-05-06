@@ -1,3 +1,10 @@
+ISSUES ARE LISTED AT THE SITE
+
+ISSUE: 0024 04/27/2016
+[+] Include login user fullname in PT
+[+] Loan Register Redeem has ITEM TYPE
+
+
 ISSUE: 0023 04/25/2016
 [+] New Item Renew - JE is not balance
 [+] Experience slow saving on MONEY TRANSFER
@@ -63,7 +70,7 @@ ISSUE: 0013 03/06/2016
 [+] NO COI (Insurance) Report 
 [-] Renew transaction - Di maEdit ang Pawner's Name
 [+] Font Size sa Pawnticket if i-Print Gamay
-[-] Error adding NO CLIENT at pawning
+[+] Error adding NO CLIENT at pawning
 
 
 ISSUE: 0013 03/06/2016
@@ -99,10 +106,10 @@ ISSUE: 0008 02/18/2016
 [+] POSAdmin account can't void!
 [+] CashCount Sheet Bottom Margin changed
 [+] REPORT OUTSTANDING LOANS - Date is not specified
-[-] REPORT OUTSTANDING LOANS - Per Category
+[+] REPORT OUTSTANDING LOANS - Per Category
 [+] REPORT Schedule of Loan & Renewal - Representation of the Grand Total
-[-] REPORT Cash In/Out - Range
-[-] GPRS Remittance, with Commission and Gross
+[+] REPORT Cash In/Out - Range
+[+] GPRS Remittance, with Commission and Gross
 [+] REPORT Loan Register - Redemption Summary
 
 
@@ -149,7 +156,7 @@ ISSUE: 0002 02/06/2016
 [o] Loan Register Report - Remove PHP sign to increase space
 [o] Loan Register Report - Redemption not working
 	- Revised report
-[-] Outstanding Report - Per Category
+[+] Outstanding Report - Per Category
 [+] Money Transfer - swap label for Pay-Out and Send In
 [+] Pawning - TAB and Enter should be consistent
 [-] Pawning - if not Appraiser, do not display

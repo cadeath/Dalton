@@ -61,6 +61,9 @@
     End Sub
 
     Private Sub frmDollorSimple_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
+
         ClearField()
         txtRate.Text = strRate
         cboDenomination.SelectedItem = 0

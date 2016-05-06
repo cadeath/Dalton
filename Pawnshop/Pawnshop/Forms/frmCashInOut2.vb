@@ -46,6 +46,9 @@
     End Sub
 
     Private Sub frmCashInOut2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
+
         ClearFields()
         LoadTables()
         cashInSetup()

@@ -75,6 +75,7 @@ Partial Class frmClientInformation
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpID.SuspendLayout()
@@ -601,12 +602,22 @@ Partial Class frmClientInformation
         Me.btnSelect.UseVisualStyleBackColor = True
         Me.btnSelect.Visible = False
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(572, 295)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(258, 62)
+        Me.webAds.TabIndex = 25
+        '
         'frmClientInformation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(964, 396)
+        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.grpID)
         Me.Controls.Add(Me.btnSave)
@@ -680,4 +691,5 @@ Partial Class frmClientInformation
     Friend WithEvents btnIDModify As System.Windows.Forms.Button
     Friend WithEvents cboCity As System.Windows.Forms.ComboBox
     Friend WithEvents cboProv As System.Windows.Forms.ComboBox
+    Friend WithEvents webAds As System.Windows.Forms.WebBrowser
 End Class

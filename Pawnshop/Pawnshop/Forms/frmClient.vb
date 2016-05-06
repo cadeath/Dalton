@@ -15,6 +15,9 @@ Public Class frmClient
     Dim frmOrig As formSwitch.FormName
 
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
+
         If Not fromOtherForm Then ClearField()
 
         If txtSearch.Text = "" Then
@@ -201,4 +204,5 @@ Public Class frmClient
             End If
         End If
     End Sub
+
 End Class

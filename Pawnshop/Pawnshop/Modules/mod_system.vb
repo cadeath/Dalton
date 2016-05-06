@@ -14,6 +14,7 @@ Module mod_system
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
     Public ADS_ESKIE As Boolean = True
+    Public ADS_SHOW As Boolean = False
 
     Public CurrentDate As Date = Now
     Public POSuser As New ComputerUser
@@ -340,24 +341,24 @@ Module mod_system
     End Function
 
 #Region "Log Module"
-    Const LOG_FILE As String = "-log.txt"
+    Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
-        Dim fsEsk As New System.IO.FileStream(Now.ToString("MMddyyyy") & LOG_FILE, IO.FileMode.CreateNew)
+        Dim fsEsk As New System.IO.FileStream(LOG_FILE, IO.FileMode.CreateNew)
         fsEsk.Close()
     End Sub
 
     Friend Sub Log_Report(ByVal str As String)
-        If Not System.IO.File.Exists(Now.ToString("MMddyyyy") & LOG_FILE) Then CreateLog()
+        If Not System.IO.File.Exists(LOG_FILE) Then CreateLog()
 
         Dim recorded_log As String = _
             String.Format("[{0}] " & str, Now.ToString("MM/dd/yyyy HH:mm:ss"))
 
-        Dim fs As New System.IO.FileStream(Now.ToString("MMddyyyy") & LOG_FILE, IO.FileMode.Append, IO.FileAccess.Write)
+        Dim fs As New System.IO.FileStream(LOG_FILE, IO.FileMode.Append, IO.FileAccess.Write)
         Dim fw As New System.IO.StreamWriter(fs)
         fw.WriteLine(recorded_log)
         fw.Close()
         fs.Close()
-        Console.WriteLine("Recored")
+        Console.WriteLine("Recorded")
     End Sub
 #End Region
 End Module
