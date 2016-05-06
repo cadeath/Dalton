@@ -1,6 +1,9 @@
 CHANGELOG
+Version 1.1.2.5
+ - Fix Report Activate/Deactivate
+
 Version 1.1.2.4
-  - Add Username on PT
+ - Add Username on PT
  - Add Item Type on Loan Register - Redeem
  - Add Auction Monthly Report
  - Add Monthly Money Transfer Report for BSP
