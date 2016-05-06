@@ -1,4 +1,5 @@
 RECORDING OF INTEREST
+PROGRAM ALGORITHM FOR LOAN
 
 PAWNING MODULE REVISION
 NEW LOAN
@@ -12,16 +13,16 @@ RENEWAL
 1. Load PT
 2. if INT_HASH has no value then hash TBLINT
 3. Compare INT_HASH and the Pawn INT Hash
-4. If the same, use TBLINT as basis, if not then filter TBLINT for the hash, and use it as basis.
-5. If not found, ERROR and call for technical asssistance
-6. Compute the INT
+4. If the same, use TBLINT as basis, if not then filter TBLINT_HISTORY for the hash, and use it as basis.
+5. If not found, ERROR and call for technical asssistance, END.
+6. Compute the INT base where Pawn INT hash matches
 7. Save the Pawn Info with the hash value of the previous Pawn INT
 
 REDEEM
 1. Load PT
 2. if INT_HASH has no value then hash TBLINT
 3. Compare INT_HASH and the Pawn INT Hash
-4. If the same, use TBLINT as basis, if not then filter TBLINT for the hash, and use it as basis.
-5. If not found, ERROR and call for technical asssistance
+4. If the same, use TBLINT as basis, if not then filter TBLINT_HISTORY for the hash, and use it as basis.
+5. If not found, ERROR and call for technical asssistance, END.
 6. Compute the INT
 7. Save and Redeem the Pawn Info with the hash value of the previous Pawn INT
