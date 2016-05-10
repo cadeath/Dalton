@@ -34,6 +34,8 @@ Module mod_system
     Friend DollarRate As Double = 48
     Friend RequirementLevel As Integer = 1
     Friend dailyID As Integer = 1
+
+    Friend TBLINT_HASH As String = ""
 #End Region
 
 #Region "Store"

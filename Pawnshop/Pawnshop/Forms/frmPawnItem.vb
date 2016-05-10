@@ -39,7 +39,6 @@ Public Class frmPawnItem
 
     Private PRINT_PTOLD As Integer = 0
     Private PRINT_PTNEW As Integer = 0
-    Private TBLINT_HASH As String = ""
 
     Dim Critical_Language() As String =
             {"Failed to verify hash value to the "}
@@ -440,6 +439,15 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub SaveNewLoan()
+        Dim Pawn_IntHash As String
+
+        'CHECK SUM
+        Dim ds As DataSet, mySql As String = "SELECT DAYFROM, DAYTO, ITEMTYPE, INTEREST, PENALTY, REMARKS FROM TBLINT"
+        ds = LoadSQL(mySql)
+        Pawn_IntHash = GetMD5(ds)
+
+        Storing_Hash(Pawn_IntHash)
+
         PawnItem = New PawnTicket
         With PawnItem
             .PawnTicket = currentPawnTicket
@@ -465,6 +473,7 @@ Public Class frmPawnItem
 
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
             .Status = transactionType
+            .INT_Checksum = Pawn_IntHash
 
             .SaveTicket()
 
@@ -1479,13 +1488,14 @@ Public Class frmPawnItem
         End If
     End Sub
 
-    Private Function HAS_THESAME_HASH(str As String) As Boolean
+    Private Sub Storing_Hash(str As String)
         Dim ds As DataSet, ds1 As DataSet
-        Dim mySql As String = "SELECT * FROM TBLINT"
+        Dim mySql As String = "SELECT DAYFROM, DAYTO, ITEMTYPE, INTEREST, PENALTY, REMARKS FROM TBLINT"
 
         If TBLINT_HASH = "" Then
             ds = LoadSQL(mySql)
             TBLINT_HASH = GetMD5(ds)
+            Console.WriteLine("Table INT Hash is >>>> " & TBLINT_HASH)
 
             Dim fillData As String = "tblInt_History"
             mySql = "SELECT * "
@@ -1512,7 +1522,5 @@ Public Class frmPawnItem
                 database.SaveEntry(ds1)
             End If
         End If
-
-        Return True
-    End Function
+    End Sub
 End Class
