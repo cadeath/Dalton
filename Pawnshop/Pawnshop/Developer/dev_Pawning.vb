@@ -4,7 +4,7 @@
         If txtMatu.Text = "" Then Exit Sub
 
         Dim daltonPawning As PawningDalton
-        daltonPawning = New PawningDalton(CDbl(txtPrincipal.Text), cboType.Text, current.SelectionStart.Date, txtMatu.Text, rbDPJ.Checked)
+        daltonPawning = New PawningDalton(CDbl(txtPrincipal.Text), cboType.Text, current.SelectionStart.Date, txtMatu.Text, rbDPJ.Checked, "")
 
         'txtPrincipal.Text = daltonPawning.Principal.ToString("Php #,##0.00")
         txtNetAmount.Text = daltonPawning.NetAmount.ToString("Php #,##0.00")

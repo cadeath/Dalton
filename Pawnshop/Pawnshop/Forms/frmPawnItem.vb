@@ -1398,6 +1398,8 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub ReComputeInterest()
+        Dim intHash As String = ""
+
         If transactionType = "D" Then Exit Sub 'Display No Recommute
         If txtMatu.Text = "" Then Exit Sub 'No Maturity Date
 
@@ -1414,13 +1416,15 @@ Public Class frmPawnItem
             ' Not for new Loan
             If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
             matuDateTmp = PawnItem.MaturityDate
+            intHash = PawnItem.INT_Checksum
         Else
             'New Loan
             isDPJ = True
             matuDateTmp = CDate(txtMatu.Text)
+            intHash = TBLINT_HASH
         End If
 
-        daltonCompute = New PawningDalton(itemPrincipal, cboType.Text, CurrentDate, matuDateTmp, isDPJ)
+        daltonCompute = New PawningDalton(itemPrincipal, cboType.Text, CurrentDate, matuDateTmp, isDPJ, intHash)
 
         With daltonCompute
             daysDue = .DaysOverDue

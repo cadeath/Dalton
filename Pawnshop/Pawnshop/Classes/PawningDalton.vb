@@ -147,12 +147,15 @@
     ' END - OUTPUTS
 #End Region
 
-    Public Sub New(ByVal prin As Double, ByVal itmClass As String, ByVal current As Date, ByVal matuDate As Date, ByVal isNew As Boolean)
+    Public Sub New(ByVal prin As Double, ByVal itmClass As String, _
+                   ByVal current As Date, ByVal matuDate As Date, _
+                   ByVal isNew As Boolean, intHash As String)
         _principal = prin
         _class = itmClass
         _currentDate = current
         _matuDate = matuDate
         _isNewItem = isNew
+        _intHash = intHash
 
         Main()
     End Sub
@@ -206,10 +209,11 @@
         mySql &= "FROM TBLINT"
 
         If HAS_THE_SAME_HASH(_intHash) Then
-
+            mySql = "SELECT * FROM tblInt WHERE ItemType = '" & _class & "' AND STATUS = 0"
+        Else
+            mySql = "SELECT * FROM TBLINT_HISTORY WHERE ItemType = '" & _class & String.Format("' AND CHECKSUM = '{0}'", _intHash)
         End If
 
-        mySql = "SELECT * FROM tblInt WHERE ItemType = '" & _class & "' AND STATUS = 0"
         Dim ds As DataSet = LoadSQL(mySql), TypeInt As Double
 
         For Each dr As DataRow In ds.Tables(0).Rows
@@ -241,7 +245,6 @@
 
         Return ret
     End Function
-
 
     Private Function HAS_THE_SAME_HASH(str As String) As Boolean
         Dim ds As DataSet, ds1 As DataSet
@@ -278,8 +281,24 @@
             End If
         End If
 
-        If str = TBLINT_HASH Then
+        Console.WriteLine("Comparing....")
+        Console.WriteLine("STR: " & str)
+        Console.WriteLine("TBLINT: " & TBLINT_HASH)
 
+        If str = "" Then Return True
+        If str <> TBLINT_HASH Then
+
+            mySql = "SELECT * FROM TBLINT_HISTORY WHERE "
+            mySql &= String.Format("CHECKSUM = '{0}'", str)
+
+            ds = LoadSQL(mySql)
+            If ds.Tables(0).Rows.Count = 0 Then
+                Log_Report("Cannot find Hash from TBLINT_History")
+                MsgBox("INTEREST CANNOT BE FOUND" + vbCrLf + "Please contact the IT Department", MsgBoxStyle.Critical, _
+                       "ERROR [COMPUTE]")
+            End If
+
+            Return False
         End If
 
         Return True
