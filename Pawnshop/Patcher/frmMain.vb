@@ -1,4 +1,6 @@
-﻿Public Class frmMain
+﻿Imports System.IO
+
+Public Class frmMain
 
     Dim dbLoc As String = ""
 
@@ -23,5 +25,13 @@
     Friend Sub AddProgress()
         pb_load.Value += 1
         Application.DoEvents()
+    End Sub
+
+    Private Sub Load_ReadMe()
+        rtbNote.Text = File.ReadAllText("README.txt")
+    End Sub
+
+    Private Sub frmMain_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        Load_ReadMe()
     End Sub
 End Class

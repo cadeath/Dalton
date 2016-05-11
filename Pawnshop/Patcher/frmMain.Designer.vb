@@ -32,9 +32,14 @@ Partial Class frmMain
         '
         'rtbNote
         '
+        Me.rtbNote.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rtbNote.BackColor = System.Drawing.Color.White
         Me.rtbNote.Location = New System.Drawing.Point(12, 12)
         Me.rtbNote.Name = "rtbNote"
-        Me.rtbNote.Size = New System.Drawing.Size(332, 284)
+        Me.rtbNote.ReadOnly = True
+        Me.rtbNote.Size = New System.Drawing.Size(249, 284)
         Me.rtbNote.TabIndex = 0
         Me.rtbNote.Text = ""
         '
@@ -43,7 +48,7 @@ Partial Class frmMain
         Me.pb_load.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pb_load.Location = New System.Drawing.Point(0, 361)
         Me.pb_load.Name = "pb_load"
-        Me.pb_load.Size = New System.Drawing.Size(356, 15)
+        Me.pb_load.Size = New System.Drawing.Size(273, 15)
         Me.pb_load.TabIndex = 1
         '
         'btnPatch
@@ -74,7 +79,7 @@ Partial Class frmMain
         Me.AcceptButton = Me.btnPatch
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(356, 376)
+        Me.ClientSize = New System.Drawing.Size(273, 376)
         Me.Controls.Add(Me.lblText)
         Me.Controls.Add(Me.btnPatch)
         Me.Controls.Add(Me.pb_load)
