@@ -1,4 +1,9 @@
 CHANGELOG
+Version 1.1.2.5
+ - Fix Report Activate/Deactivate
+ - Fix Report PERA PADALA to display PMFTC ME#/MR#
+ - Fix Report Termilogy Payout/Send In
+
 Version 1.1.2.4
  - Add Username on PT
  - Add Item Type on Loan Register - Redeem

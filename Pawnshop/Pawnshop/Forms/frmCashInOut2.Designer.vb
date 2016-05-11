@@ -292,7 +292,7 @@ Partial Class frmCashInOut2
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(103, 417)
+        Me.webAds.Location = New System.Drawing.Point(102, 419)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False

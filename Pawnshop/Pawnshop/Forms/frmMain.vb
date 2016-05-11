@@ -23,6 +23,7 @@ Public Class frmMain
         ExpiryGeneratorToolStripMenuItem.Enabled = Not st
         JournalEntriesToolStripMenuItem.Enabled = Not st
         CashCountToolStripMenuItem.Enabled = Not st
+        BSPReportToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
@@ -39,16 +40,19 @@ Public Class frmMain
         ToolStripMenuItem2.Enabled = Not st 'Monthly Report
         SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
         CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
+        '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
         LoanRegisterToolStripMenuItem.Enabled = Not st
         MoneyTransferToolStripMenuItem.Enabled = Not st
         InsuranceToolStripMenuItem.Enabled = Not st
+        DollarReportToolStripMenuItem.Enabled = Not st
+        CashInOutToolStripMenuItem.Enabled = Not st
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
+        '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
-        CashInOutToolStripMenuItem.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()

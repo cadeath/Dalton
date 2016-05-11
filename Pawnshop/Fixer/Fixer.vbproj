@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Modules\fix_redeemIntPenalty.vb" />
     <Compile Include="Modules\update_interest.vb" />
+    <Compile Include="Modules\update_cashinbank.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
