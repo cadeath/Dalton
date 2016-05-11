@@ -150,7 +150,4 @@
         End If
     End Sub
 
-    Private Sub txtPT_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtPT.TextChanged
-
-    End Sub
 End Class
