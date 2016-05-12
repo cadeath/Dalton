@@ -150,6 +150,7 @@
     <Compile Include="AutoPatch\autopatch.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
     <Compile Include="AutoPatch\db1011.vb" />
+    <Compile Include="AutoPatch\db1012.vb" />
     <Compile Include="AutoPatch\db107.vb" />
     <Compile Include="AutoPatch\db108.vb" />
     <Compile Include="AutoPatch\db109.vb" />
