@@ -28,7 +28,7 @@
             With dsNewRow
                 .Item("MOD_NAME") = mod_name
                 .Item("LOG_REPORT") = logs
-                If remarks <> "" Then .Item("REMARKS") = String.Format("[{0}] {1}", VERSION, remarks)
+                .Item("REMARKS") = String.Format("[{0}] {1}", VERSION, remarks)
                 If Not hasCustomer Then .Item("HASCUSTOMER") = 0
                 'Added in db 1.0.12
                 .Item("AMOUNT") = Amount

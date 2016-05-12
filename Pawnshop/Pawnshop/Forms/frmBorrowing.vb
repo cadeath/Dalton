@@ -87,7 +87,7 @@
             .Add(4, saveBorrow.Remarks) 'Remarks
         End With
 
-        AddTimelyLogs(MOD_NAME, String.Format("SENT MONEY TO {0} - Php {1:#,##0.00}", saveBorrow.BranchCode, saveBorrow.Amount), False)
+        AddTimelyLogs(MOD_NAME, String.Format("SENT MONEY TO {0} - Php {1:#,##0.00}", saveBorrow.BranchCode, saveBorrow.Amount), saveBorrow.Amount, False)
 
         'Generate File
         CreateEsk(fileSave, brwFile)

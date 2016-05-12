@@ -27,22 +27,27 @@
             Select Case cio.Category
                 Case "BDO ATM CASHOUT"
                     MOD_NAME = "BDO ATM"
-                Case cio.Category.StartsWith("ECPAY")
-                    MOD_NAME = "ECPAY"
-                Case cio.Category.StartsWith("GPRS"), "TICKETING - GPRS"
-                    MOD_NAME = "GPRS"
                 Case "TICKETING - WU"
                     MOD_NAME = "TICKETING - WU"
                 Case "SALES OF INVENTORIABLES"
-                    MOD_NAME = "SALES OF INVENTORIABLES"
+                    MOD_NAME = "SALES OF INV"
                 Case "SMART MONEY PADALA"
-                    MOD_NAME = "SMART MONEY PADALA IN"
+                    MOD_NAME = "SMART MONEY PADALA"
                 Case "SMART MONEY ENCASHMENT-CASHOUT-Dalton"
                     MOD_NAME = "SMART MONEY PADALA OUT"
+                Case "TICKETING - GPRS"
+                    MOD_NAME = "GPRS"
                 Case Else
-                    AddTimelyLogs(MOD_NAME, transName, False)
+                    Select Case True
+                        Case cio.Category.StartsWith("ECPAY")
+                            MOD_NAME = "ECPAY"
+                        Case cio.Category.StartsWith("GPRS")
+                            MOD_NAME = "GPRS"
+                        Case Else
+                            AddTimelyLogs(MOD_NAME, cio.Transaction, cio.Amount, False)
+                    End Select
             End Select
-            AddTimelyLogs(MOD_NAME, transName, cio.Amount)
+            AddTimelyLogs(MOD_NAME, cio.Transaction, cio.Amount)
         Next
 
         MsgBox("Information Posted", MsgBoxStyle.Information)
