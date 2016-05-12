@@ -48,6 +48,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>infographic-fix.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -73,6 +76,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="database.vb" />
+    <Compile Include="CashInBank\frmMain2.Designer.vb">
+      <DependentUpon>frmMain2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CashInBank\frmMain2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\Fixing_Mlang.vb" />
     <Compile Include="Modules\fix_mechanism.vb" />
     <Compile Include="frmMain.vb">
@@ -83,7 +92,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\fix_redeemIntPenalty.vb" />
-    <Compile Include="Modules\update_cashinbank.vb" />
+    <Compile Include="CashInBank\update_cashinbank.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -114,6 +123,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CashInBank\frmMain2.resx">
+      <DependentUpon>frmMain2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -164,6 +176,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="infographic-fix.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
