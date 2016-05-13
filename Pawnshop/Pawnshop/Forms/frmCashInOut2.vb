@@ -24,9 +24,31 @@
 
         For Each cio As CashInOutTransaction In CIOtransactions
             cio.Save()
+            Select Case cio.Category
+                Case "BDO ATM CASHOUT"
+                    MOD_NAME = "BDO ATM"
+                Case "TICKETING - WU"
+                    MOD_NAME = "TICKETING - WU"
+                Case "SALES OF INVENTORIABLES"
+                    MOD_NAME = "SALES OF INV"
+                Case "SMART MONEY PADALA"
+                    MOD_NAME = "SMARTMONEY IN"
+                Case "SMART MONEY ENCASHMENT-CASHOUT-Dalton"
+                    MOD_NAME = "SMARTMONEY OUT"
+                Case "TICKETING - GPRS"
+                    MOD_NAME = "GPRS"
+                Case Else
+                    Select Case True
+                        Case cio.Category.StartsWith("ECPAY")
+                            MOD_NAME = "ECPAY"
+                        Case cio.Category.StartsWith("GPRS")
+                            MOD_NAME = "GPRS"
+                        Case Else
+                            AddTimelyLogs(MOD_NAME, cio.Transaction, cio.Amount, False)
+                    End Select
+            End Select
+            AddTimelyLogs(MOD_NAME, cio.Transaction, cio.Amount)
         Next
-
-        AddTimelyLogs(MOD_NAME, transName, False)
 
         MsgBox("Information Posted", MsgBoxStyle.Information)
         CIOtransactions = New CollectionCIO

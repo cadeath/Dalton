@@ -397,6 +397,8 @@
 
         Dim mtTrans As New MoneyTransfer
         With mtTrans
+            'Send Money - Branch Received Money (Send In) - 0
+            'Receive Money - Branch Payout (Payout) - 1
             .TransactionType = IIf(rbReceive.Checked, 1, 0)
             .TransactionID = transID
             .ServiceType = cboType.Text
@@ -414,54 +416,69 @@
 
             Select Case cboType.Text
                 Case "Pera Padala"
+                    MOD_NAME = "PERA PADALA "
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN")
                         AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
+                        MOD_NAME &= "OUT"
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
+                        MOD_NAME &= "IN"
                     End If
                 Case "Pera Padala - PMFTC"
+                    MOD_NAME = "PERA PADALA "
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN")
                         AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
+                        MOD_NAME &= "OUT"
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
+                        MOD_NAME &= "IN"
                     End If
                 Case "Western Union - Local", "Western Union - Intl"
+                    MOD_NAME = "WESTERN UNION "
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN IN")
                         AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber)
+                        MOD_NAME &= "OUT"
                     Else
                         AddJournal(.NetAmount, "Debit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN OUT")
+                        MOD_NAME &= "IN"
                     End If
                 Case "Cebuana Llhuiller"
+                    MOD_NAME = "PERA LINK "
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "CL|Ref# " & .ReferenceNumber, "CEBUANA IN")
                         AddJournal(.NetAmount, "Credit", "Due to/from Cebuana Llhuiller", "CL|Ref# " & .ReferenceNumber)
+                        MOD_NAME &= "OUT"
                     Else
                         AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "CL|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "CL|Ref# " & .ReferenceNumber, "CEBUANA OUT")
+                        MOD_NAME &= "IN"
                     End If
                 Case "GPRS - GPRS to GPRS"
                     'GPRS ----------------------------------
+                    MOD_NAME = "GPRS "
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS")
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber)
+                        MOD_NAME &= "OUT"
                     Else
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS")
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber)
+                        MOD_NAME &= "IN"
                     End If
                 Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
                     "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
                     "GPRS - iREMIT to GPRS", "GPRS - NYBP/Transfast to GPRS", "GPRS - GPRS to Moneygram"
-
+                    MOD_NAME = "GPRS "
                     Select Case cboType.Text
                         Case "GPRS - GPRS to Smart Money"
                             CashCount_Name = "GPRS-SmartMoney"
@@ -488,17 +505,18 @@
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
+                        MOD_NAME &= "OUT"
                     Else
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
-
-
+                        MOD_NAME &= "IN"
                     End If
                     ' ISSUE: 0001
                     ' GPRS - Smartmoney To GPRS, wrong Journal Entries
                 Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
                     ' Amt 4000 | 3995 gprsRemitFund debit = 3980 rf credit + 15 income credit
+                    MOD_NAME = "GPRS OUT"
                     Select Case cboType.Text
                         Case "GPRS - Smartmoney To GPRS"
                             CashCount_Name = "SmartMoney-GPRS"
@@ -513,7 +531,7 @@
             End Select
 
             .Save()
-            AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text))
+            AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text), .NetAmount)
         End With
 
         If daltonService(idx).isGenerated Then

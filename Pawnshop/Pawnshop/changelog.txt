@@ -1,12 +1,19 @@
 CHANGELOG
+Version 1.1.2.5
+ - Fix Report Activate/Deactivate
+ - Fix Report PERA PADALA to display PMFTC ME#/MR#
+ - Fix Report Termilogy Payout/Send In
+ - Modify Daily Time Log Reports
+
 Version 1.1.2.4
-  - Add Username on PT
- - Add Item Type on Loan Register - Redeem
+ - Add Username on PT
+ - Add Item Type on Loan Register - Redeem Report
  - Add Auction Monthly Report
  - Add Monthly Money Transfer Report for BSP
  - Add BSP Report Extract
  - Add Dollar Daily Report
  - FIX Pawning without CUSTOMER error 
+ - FIX Triplicate with Pawner name
  - FIX in JE round off
  - FIX Report - Hourly Report
  - FIX Report Size

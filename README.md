@@ -1,5 +1,5 @@
 # Dalton
-## Firebird Database
+## DEPENDENCIES
 
  Install the following dependencies
   - Firebird Server 2.x
