@@ -32,9 +32,9 @@
                 Case "SALES OF INVENTORIABLES"
                     MOD_NAME = "SALES OF INV"
                 Case "SMART MONEY PADALA"
-                    MOD_NAME = "SMART MONEY PADALA"
+                    MOD_NAME = "SMARTMONEY IN"
                 Case "SMART MONEY ENCASHMENT-CASHOUT-Dalton"
-                    MOD_NAME = "SMART MONEY PADALA OUT"
+                    MOD_NAME = "SMARTMONEY OUT"
                 Case "TICKETING - GPRS"
                     MOD_NAME = "GPRS"
                 Case Else

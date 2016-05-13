@@ -397,6 +397,8 @@
 
         Dim mtTrans As New MoneyTransfer
         With mtTrans
+            'Send Money - Branch Received Money (Send In) - 0
+            'Receive Money - Branch Payout (Payout) - 1
             .TransactionType = IIf(rbReceive.Checked, 1, 0)
             .TransactionID = transID
             .ServiceType = cboType.Text
