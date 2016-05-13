@@ -157,6 +157,7 @@
     <Compile Include="AutoPatch\db107.vb" />
     <Compile Include="AutoPatch\db108.vb" />
     <Compile Include="AutoPatch\db109.vb" />
+    <Compile Include="AutoPatch\db12.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -416,10 +417,19 @@
     <Compile Include="Forms\frmUserManagement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HitManagement\dsHit.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsHit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="HitManagement\dsHit.vb">
+      <DependentUpon>dsHit.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Modules\dailyGospel.vb" />
     <Compile Include="Modules\DailyTimeLog.vb" />
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
+    <Compile Include="HitManagement\HitManagement.vb" />
     <Compile Include="Modules\JournalEntries.vb" />
     <Compile Include="Modules\migrate.vb" />
     <Compile Include="Modules\mod_system.vb" />
@@ -781,6 +791,9 @@
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\sub_hit.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\_layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -797,6 +810,17 @@
     </None>
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
+    <None Include="HitManagement\dsHit.xsc">
+      <DependentUpon>dsHit.xsd</DependentUpon>
+    </None>
+    <None Include="HitManagement\dsHit.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsHit.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="HitManagement\dsHit.xss">
+      <DependentUpon>dsHit.xsd</DependentUpon>
+    </None>
     <None Include="Template\Import Template.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
