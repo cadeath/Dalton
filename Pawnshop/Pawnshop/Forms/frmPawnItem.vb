@@ -486,6 +486,8 @@ Public Class frmPawnItem
 
             'AddTimelyLogs(MOD_NAME, "NEW LOAN - " & tmpRemarks)
             AddTimelyLogs("NEW LOANS", tmpRemarks, .NetAmount)
+
+            HitManagement.do_PawningHit(PawnItem.Pawner, PawnItem.PawnTicket)
         End With
     End Sub
 

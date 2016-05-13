@@ -9,6 +9,9 @@ Module autopatch
         db1010.PatchUp()
         db1011.PatchUp()
         db1012.PatchUp()
+
+        ' FOR v1.2
+        db12.PatchUp()
     End Sub
 
     Friend Function isPatchable(ByVal allowVersion As String) As Boolean

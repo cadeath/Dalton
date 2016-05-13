@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsHit" targetNamespace="http://tempuri.org/dsHit.xsd" xmlns:mstns="http://tempuri.org/dsHit.xsd" xmlns="http://tempuri.org/dsHit.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsHit" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsHit" msprop:Generator_UserDSName="dsHit">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="hit_list" msprop:Generator_TableClassName="hit_listDataTable" msprop:Generator_TableVarName="tablehit_list" msprop:Generator_TablePropName="hit_list" msprop:Generator_RowDeletingName="hit_listRowDeleting" msprop:Generator_RowChangingName="hit_listRowChanging" msprop:Generator_RowEvHandlerName="hit_listRowChangeEventHandler" msprop:Generator_RowDeletedName="hit_listRowDeleted" msprop:Generator_UserTableName="hit_list" msprop:Generator_RowChangedName="hit_listRowChanged" msprop:Generator_RowEvArgName="hit_listRowChangeEvent" msprop:Generator_RowClassName="hit_listRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PAWNID" msprop:Generator_ColumnVarNameInTable="columnPAWNID" msprop:Generator_ColumnPropNameInRow="PAWNID" msprop:Generator_ColumnPropNameInTable="PAWNIDColumn" msprop:Generator_UserColumnName="PAWNID" type="xs:string" minOccurs="0" />
+              <xs:element name="PAWNER" msprop:Generator_ColumnVarNameInTable="columnPAWNER" msprop:Generator_ColumnPropNameInRow="PAWNER" msprop:Generator_ColumnPropNameInTable="PAWNERColumn" msprop:Generator_UserColumnName="PAWNER" type="xs:string" minOccurs="0" />
+              <xs:element name="BIRTHDAY" msprop:Generator_ColumnVarNameInTable="columnBIRTHDAY" msprop:Generator_ColumnPropNameInRow="BIRTHDAY" msprop:Generator_ColumnPropNameInTable="BIRTHDAYColumn" msprop:Generator_UserColumnName="BIRTHDAY" type="xs:string" minOccurs="0" />
+              <xs:element name="PHONE1" msprop:Generator_ColumnVarNameInTable="columnPHONE1" msprop:Generator_ColumnPropNameInRow="PHONE1" msprop:Generator_ColumnPropNameInTable="PHONE1Column" msprop:Generator_UserColumnName="PHONE1" type="xs:string" minOccurs="0" />
+              <xs:element name="PHONE2" msprop:Generator_ColumnVarNameInTable="columnPHONE2" msprop:Generator_ColumnPropNameInRow="PHONE2" msprop:Generator_ColumnPropNameInTable="PHONE2Column" msprop:Generator_UserColumnName="PHONE2" type="xs:string" minOccurs="0" />
+              <xs:element name="PAWNTICKET" msprop:Generator_ColumnVarNameInTable="columnPAWNTICKET" msprop:Generator_ColumnPropNameInRow="PAWNTICKET" msprop:Generator_ColumnPropNameInTable="PAWNTICKETColumn" msprop:Generator_UserColumnName="PAWNTICKET" type="xs:string" minOccurs="0" />
+              <xs:element name="PRINCIPAL" msprop:Generator_ColumnVarNameInTable="columnPRINCIPAL" msprop:Generator_ColumnPropNameInRow="PRINCIPAL" msprop:Generator_ColumnPropNameInTable="PRINCIPALColumn" msprop:Generator_UserColumnName="PRINCIPAL" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

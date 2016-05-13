@@ -48,7 +48,24 @@
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
         addParameter.Add("branchName", branchName)
 
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_RegisterNewLoan.rdlc", addParameter)
+        Dim dsHit As DataSet, hitSql As String
+        hitSql = String.Format("SELECT * FROM TBLHIT WHERE HIT_DATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+
+        dsHit = LoadSQL(hitSql)
+        If dsHit.Tables(0).Rows.Count = 0 Then
+            addParameter.Add("withSub", False)
+            frmReport.ReportInit(mySql, fillData, "Reports\rpt_RegisterNewLoan.rdlc", addParameter)
+        Else
+            addParameter.Add("withSub", True)
+
+            Dim MySqlDic As New Dictionary(Of String, String)
+            MySqlDic.Add(fillData, mySql)
+            Dim subSql As New Dictionary(Of String, String)
+            subSql.Add(HitManagement.dsName, HitManagement.Generate_HitReport(monCal.SelectionStart.ToShortDateString))
+
+            frmReport.MultiDbSetReport(MySqlDic, "Reports\rpt_RegisterNewLoan.rdlc", addParameter, True, subSql)
+        End If
+
         frmReport.Show()
     End Sub
 
