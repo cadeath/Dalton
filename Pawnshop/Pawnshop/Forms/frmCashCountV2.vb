@@ -162,7 +162,7 @@
             frmMain.dateSet = False
             frmMain.doSegregate = False
 
-            AddTimelyLogs(MOD_NAME, "AMOUNT TODAY IS Php " & total.ToString("#,##0.00"), False)
+            AddTimelyLogs(MOD_NAME, "AMOUNT TODAY IS Php " & total.ToString("#,##0.00"), total, False)
         End If
         Me.Close()
     End Sub

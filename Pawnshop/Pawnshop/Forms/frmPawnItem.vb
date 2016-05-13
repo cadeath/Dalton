@@ -434,7 +434,8 @@ Public Class frmPawnItem
                 End If
             End If
 
-            AddTimelyLogs(MOD_NAME, String.Format("REDEEM - PT#{0}", .PawnTicket.ToString("000000")))
+            'AddTimelyLogs(MOD_NAME, String.Format("REDEEM - PT#{0}", .PawnTicket.ToString("000000")))
+            AddTimelyLogs("REDEMPTION", String.Format("PT#{0}", .PawnTicket.ToString("000000")), Redeem_Due)
         End With
     End Sub
 
@@ -483,7 +484,8 @@ Public Class frmPawnItem
             AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
             AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
 
-            AddTimelyLogs(MOD_NAME, "NEW LOAN - " & tmpRemarks)
+            'AddTimelyLogs(MOD_NAME, "NEW LOAN - " & tmpRemarks)
+            AddTimelyLogs("NEW LOANS", tmpRemarks, .NetAmount)
         End With
     End Sub
 
@@ -972,7 +974,8 @@ Public Class frmPawnItem
             AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
 
-            AddTimelyLogs(MOD_NAME, String.Format("RENEW - PT#{0}", oldPT.ToString("000000")))
+            'AddTimelyLogs(MOD_NAME, String.Format("RENEW - PT#{0}", oldPT.ToString("000000")))
+            AddTimelyLogs("RENEWALS", String.Format("PT#{0}", oldPT.ToString("000000")), Renew_Due)
         End With
 
         AddPTNum()

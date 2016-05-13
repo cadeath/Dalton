@@ -209,7 +209,7 @@ Partial Class frmDollorSimple
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(15, 125)
+        Me.webAds.Location = New System.Drawing.Point(34, 13)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -227,6 +227,7 @@ Partial Class frmDollorSimple
         Me.Controls.Add(Me.txtRate)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.webAds)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle

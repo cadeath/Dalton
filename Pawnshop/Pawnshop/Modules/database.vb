@@ -1,31 +1,4 @@
 ﻿Imports System.Data.Odbc
-' Changelog
-' v1.0.10
-'  - Update PRINT_PAWNING
-' v1.0.9
-'  - Add table TBL_DAILYTIMELOG
-' v1.0.8
-'  - FIX MONTHLY_LOANRENEW
-'  - VIEW PAWNING, ADDED PENALTY, AUCTIONDATE, PULLOUT
-' v1.0.7
-'  - Changing PAWNTICKET of TBLINSURANCE Data Type from Integer to VARCHAR(30)
-' v1.0.6
-'  - Add WU - Intl
-' v1.0.5
-'  - Add GPRS Ticketing
-'  - Changed TICKETING into TICKETING - WU
-' v1.0.4
-'  - Add OldTicket ON PAWNING VIEW
-'  - Add Commission ON MONEY_TRANSFER view
-' v1.0.3
-'  - Update Charges and cash Tables
-'  - Add ServiceCharge on PAWNING VIEW
-' v1.0.2
-'  - Add Column in tblPawn EARLYREDEEM
-'  - Add Column in LOAN REGISTER VIEW for ADVANCE INTEREST
-'  - Add Column INTEREST and ADVINT in PAWNING
-' v1.0.1
-'  - Added ORDATE, RENEWDUE and REDEEMDUE at Loan_Register VIEW
 
 Friend Module database
     Public con As OdbcConnection
@@ -37,7 +10,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.0.11"
+    Private DBversion As String = "1.0.12"
     Private language() As String = _
         {"Connection error failed."}
 

@@ -108,7 +108,8 @@
             AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber)
             AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING")
 
-            AddTimelyLogs(MODULE_NAME, String.Format("{0} for Php {1} @ Php {2}", cboDenomination.Text, .NetAmount, .CurrentRate))
+            'AddTimelyLogs(MODULE_NAME, String.Format("{0} for Php {1} @ Php {2}", cboDenomination.Text, .NetAmount, .CurrentRate))
+            AddTimelyLogs(MODULE_NAME, String.Format("{0} for Php {1} @ Php {2}", cboDenomination.Text, .NetAmount, .CurrentRate), .NetAmount)
         End With
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
