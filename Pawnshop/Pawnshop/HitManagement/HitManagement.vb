@@ -42,19 +42,19 @@
 
 
     Friend Function Generate_HitReport(dt As Date) As String
-        ' TODO:
-        ' SQL IS NOT RIGHT
         Dim mySql As String
-        mySql = "SELECT H.PAWNID, H.PAWNER, C.BIRTHDAY, "
-        mySql &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE AS FULLADDRESS, "
-        mySql &= vbCrLf & "    C.BIRTHDAY, C.PHONE1, C.PHONE2, P.PAWNTICKET, P.PRINCIPAL"
-        mySql &= vbCrLf & "FROM TBLHIT H "
-        mySql &= vbCrLf & "RIGHT JOIN TBLPAWN P "
-        mySql &= vbCrLf & "ON H.PAWNID = P.CLIENTID "
-        mySql &= vbCrLf & "INNER JOIN TBLCLIENT C "
-        mySql &= vbCrLf & "ON C.CLIENTID = H.PAWNID "
-        mySql &= vbCrLf & String.Format("WHERE HIT_DATE = '{0}' ", dt.ToShortDateString)
-        mySql &= vbCrLf & "ORDER H.PAWNER ASC"
+        mySql = "SELECT "
+        mySql &= vbCrLf & "	H.HIT_DATE, H.PAWNER, C.BIRTHDAY, C.PHONE1, C.PHONE2,"
+        mySql &= vbCrLf & "    C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE AS FULLADDRESS,"
+        mySql &= vbCrLf & "    P.PAWNTICKET, P.PRINCIPAL"
+        mySql &= vbCrLf & "FROM "
+        mySql &= vbCrLf & "	TBLHIT H"
+        mySql &= vbCrLf & "    RIGHT JOIN TBLPAWN P"
+        mySql &= vbCrLf & "    ON P.CLIENTID = H.PAWNID"
+        mySql &= vbCrLf & "    INNER JOIN TBLCLIENT C"
+        mySql &= vbCrLf & "    ON C.CLIENTID = H.PAWNID"
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("	H.HIT_DATE = '{0}'", dt.ToShortDateString)
 
         Return mySql
     End Function

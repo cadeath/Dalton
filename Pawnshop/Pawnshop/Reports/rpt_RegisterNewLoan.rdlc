@@ -2010,9 +2010,6 @@ Adv Int</Value>
         <Height>1.09375in</Height>
         <Width>6.83519in</Width>
         <ZIndex>2</ZIndex>
-        <Visibility>
-          <Hidden>=Parameters!withSub.Value = true</Hidden>
-        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2034,10 +2031,6 @@ Adv Int</Value>
     </ReportParameter>
     <ReportParameter Name="txtUsername">
       <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="withSub">
-      <DataType>Boolean</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
