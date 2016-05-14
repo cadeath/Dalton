@@ -1,4 +1,12 @@
 CHANGELOG
+Version 1.2
+ - Fix Current Rate for Active Loans
+ - Fix Change Rate for New Loans only
+ - Add Monthly Report - Transaction Count
+ - Add Pawner Summary List
+ - Include Changelog on Menu
+ - Patch Up Database
+
 Version 1.1.2.5
  - Fix Report Activate/Deactivate
  - Fix Report PERA PADALA to display PMFTC ME#/MR#

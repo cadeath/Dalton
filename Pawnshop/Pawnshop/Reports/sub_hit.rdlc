@@ -36,6 +36,10 @@
           <DataField>PAWNTICKET</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="FULLADDRESS">
+          <DataField>FULLADDRESS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="PRINCIPAL">
           <DataField>PRINCIPAL</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -154,7 +158,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>PHONE1</Value>
+                            <Value>ADDRESS</Value>
                             <Style>
                               <FontSize>9pt</FontSize>
                               <FontWeight>Bold</FontWeight>
@@ -196,7 +200,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>PHONE2</Value>
+                            <Value>PHONE</Value>
                             <Style>
                               <FontSize>9pt</FontSize>
                               <FontWeight>Bold</FontWeight>
@@ -235,7 +239,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.71875in</Width>
+              <Width>0.51042in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
@@ -336,7 +340,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>PT COUNT</Value>
+                            <Value>PT CNT</Value>
                             <Style>
                               <FontSize>9pt</FontSize>
                               <FontWeight>Bold</FontWeight>
@@ -431,7 +435,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>2.295in</Size>
+                <Size>2.02417in</Size>
                 <CellContents>
                   <Textbox Name="PAWNER">
                     <CanGrow>true</CanGrow>
@@ -470,7 +474,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>1in</Size>
+                    <Size>0.83333in</Size>
                     <CellContents>
                       <Textbox Name="BIRTHDAY">
                         <CanGrow>true</CanGrow>
@@ -508,16 +512,16 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1in</Size>
+                        <Size>1.64583in</Size>
                         <CellContents>
-                          <Textbox Name="PHONE1">
+                          <Textbox Name="FULLADDRESS">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>=Fields!PHONE1.Value</Value>
+                                    <Value>=Fields!FULLADDRESS.Value</Value>
                                     <Style>
                                       <FontSize>9pt</FontSize>
                                     </Style>
@@ -526,7 +530,7 @@
                                 <Style />
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>PHONE1</rd:DefaultName>
+                            <rd:DefaultName>FULLADDRESS</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Style>None</Style>
@@ -549,14 +553,14 @@
                           <TablixHeader>
                             <Size>1in</Size>
                             <CellContents>
-                              <Textbox Name="PHONE2">
+                              <Textbox Name="PHONE1">
                                 <CanGrow>true</CanGrow>
                                 <KeepTogether>true</KeepTogether>
                                 <Paragraphs>
                                   <Paragraph>
                                     <TextRuns>
                                       <TextRun>
-                                        <Value>=Fields!PHONE2.Value</Value>
+                                        <Value>=Fields!PHONE1.Value</Value>
                                         <Style>
                                           <FontSize>9pt</FontSize>
                                         </Style>
@@ -565,7 +569,7 @@
                                     <Style />
                                   </Paragraph>
                                 </Paragraphs>
-                                <rd:DefaultName>PHONE2</rd:DefaultName>
+                                <rd:DefaultName>PHONE1</rd:DefaultName>
                                 <Style>
                                   <Border>
                                     <Style>None</Style>

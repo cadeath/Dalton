@@ -86,6 +86,7 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
+        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -333,7 +334,7 @@ Partial Class frmMain
         '
         'AboutToolStripMenuItem
         '
-        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TutorialToolStripMenuItem, Me.AboutUsToolStripMenuItem})
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TutorialToolStripMenuItem, Me.ChangelogToolStripMenuItem, Me.AboutUsToolStripMenuItem})
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.AboutToolStripMenuItem.Text = "&Help"
@@ -341,13 +342,13 @@ Partial Class frmMain
         'TutorialToolStripMenuItem
         '
         Me.TutorialToolStripMenuItem.Name = "TutorialToolStripMenuItem"
-        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.TutorialToolStripMenuItem.Text = "&Tutorial"
         '
         'AboutUsToolStripMenuItem
         '
         Me.AboutUsToolStripMenuItem.Name = "AboutUsToolStripMenuItem"
-        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AboutUsToolStripMenuItem.Text = "&About Us"
         '
         'pbLogo
@@ -549,6 +550,12 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
+        'ChangelogToolStripMenuItem
+        '
+        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ChangelogToolStripMenuItem.Text = "&Changelog"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -643,5 +650,6 @@ Partial Class frmMain
     Friend WithEvents HourlySummaryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BSPReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DollarReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ChangelogToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -431,4 +431,9 @@ Public Class frmMain
         qryDate.FormType = qryDate.ReportType.DollarDaily
         qryDate.Show()
     End Sub
+
+    Private Sub ChangelogToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ChangelogToolStripMenuItem.Click
+        Dim changeLog As String = "changelog.txt"
+        System.Diagnostics.Process.Start("notepad.exe", changeLog)
+    End Sub
 End Class
