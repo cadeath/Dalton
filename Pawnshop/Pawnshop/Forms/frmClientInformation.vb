@@ -423,4 +423,8 @@ Public Class frmClientInformation
         'lvID.FocusedItem.Selected = True
     End Sub
     'END - ID Group===================
+
+    Private Sub btnHistory_Click(sender As System.Object, e As System.EventArgs) Handles btnHistory.Click
+
+    End Sub
 End Class
