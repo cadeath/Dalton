@@ -620,7 +620,6 @@ Partial Class frmClientInformation
         Me.btnHistory.TabIndex = 26
         Me.btnHistory.Text = "&History"
         Me.btnHistory.UseVisualStyleBackColor = True
-        Me.btnHistory.Visible = False
         '
         'frmClientInformation
         '

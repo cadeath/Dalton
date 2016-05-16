@@ -24,6 +24,8 @@
         frmMain.pb_load.Value = 0
         For Each dr As DataRow In ds.Tables(fillData).Rows
             dr("INT_CHECKSUM") = INT_HASH
+
+            Application.DoEvents()
             frmMain.AddProgress()
         Next
         mod_system.SaveEntry(ds, False)

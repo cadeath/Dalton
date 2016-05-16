@@ -425,6 +425,45 @@ Public Class frmClientInformation
     'END - ID Group===================
 
     Private Sub btnHistory_Click(sender As System.Object, e As System.EventArgs) Handles btnHistory.Click
+        Dim mySql As String
+        mySql = "SELECT "
+        mySql &= vbCrLf & "	C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mySql &= vbCrLf & "    CASE "
+        mySql &= vbCrLf & "    	WHEN C.SUFFIX is Null THEN ''"
+        mySql &= vbCrLf & "        ELSE C.SUFFIX"
+        mySql &= vbCrLf & "    END "
+        mySql &= vbCrLf & "    AS FULLNAME,"
+        mySql &= vbCrLf & "	C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' ||  C.ADDR_PROVINCE AS ADDRESS,"
+        mySql &= vbCrLf & "    C.BIRTHDAY, C.PHONE1, C.PHONE2, P.PAWNTICKET, "
+        mySql &= vbCrLf & "    CASE P.STATUS"
+        mySql &= vbCrLf & "    	WHEN '0' THEN 'RENEWED'"
+        mySql &= vbCrLf & "        WHEN 'R' THEN 'RENEW'"
+        mySql &= vbCrLf & "        WHEN 'L' THEN 'NEW LOAN'"
+        mySql &= vbCrLf & "        WHEN 'V' THEN 'VOID'"
+        mySql &= vbCrLf & "        WHEN 'X' THEN 'REDEEM'"
+        mySql &= vbCrLf & "        WHEN 'S' THEN 'SEGRE'"
+        mySql &= vbCrLf & "        WHEN 'W' THEN 'PULLOUT: ' || CAST(P.PULLOUT AS DATE)"
+        mySql &= vbCrLf & "        ELSE 'STATUS ERROR'"
+        mySql &= vbCrLf & "    END AS STATUS, P.DESCRIPTION, P.ITEMTYPE, CL.CATEGORY,"
+        mySql &= vbCrLf & "    P.LOANDATE, P.PRINCIPAL, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.PENALTY, USR.USERNAME as APPRAISER"
+        mySql &= vbCrLf & "FROM "
+        mySql &= vbCrLf & "  TBLPAWN P"
+        mySql &= vbCrLf & "	LEFT JOIN TBLCLIENT C"
+        mySql &= vbCrLf & "	ON P.CLIENTID = C.CLIENTID"
+        mySql &= vbCrLf & "    INNER JOIN TBLCLASS CL"
+        mySql &= vbCrLf & "    ON CL.CLASSID = P.CATID"
+        mySql &= vbCrLf & "    INNER JOIN TBL_GAMIT USR"
+        mySql &= vbCrLf & "    ON USR.USERID = P.APPRAISERID"
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & " P.STATUS <> 'V'"
 
+        Dim repPara As New Dictionary(Of String, String)
+        repPara.Add("txtFullname", String.Format("{0} {1} {2}", txtFirstName.Text, txtLastName.Text, txtSuffix.Text))
+        repPara.Add("txtBirthday", dtpBday.Text)
+        repPara.Add("txtAddr", String.Format("{0} {1} {2} {3}", txtStreet.Text, txtBrgy.Text, cboCity.Text, cboProv.Text))
+        repPara.Add("txtContact", String.Join(", ", txtCP1.Text, txtCP2.Text))
+
+        frmReport.ReportInit(mySql, "dsHistory", "Reports\rpt_History.rdlc", repPara)
+        frmReport.Show()
     End Sub
 End Class
