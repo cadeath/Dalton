@@ -23,7 +23,10 @@ Public Class frmExtractor
         'Load Path
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
     End Sub
-
+    ''' <summary>
+    ''' this method will select what you want to extract.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub FormInit()
         Dim selectedDate As Date = MonCalendar.SelectionStart
 
@@ -42,7 +45,12 @@ Public Class frmExtractor
                 Me.Text &= " - BSP Report"
         End Select
     End Sub
-
+    ''' <summary>
+    ''' This button will extract the desired extract type.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
 
@@ -63,7 +71,10 @@ Public Class frmExtractor
         End If
         btnExtract.Enabled = True
     End Sub
-
+    ''' <summary>
+    ''' This method will extract journal entry and load the excel.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ExtractJournalEntry()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
@@ -152,6 +163,11 @@ Public Class frmExtractor
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
+    ''' <summary>
+    ''' This method will select between date range.
+    ''' search the items by date.
+    ''' </summary>
+    ''' <remarks></remarks>
 
     Private Sub MoneyTransferBSP()
         Dim st As Date = GetFirstDate(MonCalendar.SelectionStart)
@@ -228,7 +244,10 @@ Public Class frmExtractor
 
         MsgBox("Data Saved", MsgBoxStyle.Information)
     End Sub
-
+    ''' <summary>
+    ''' This method will extract the expiry date and then load the excel
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ExtractExpiry()
         Dim sd As Date = MonCalendar.SelectionStart
         Dim ed As Date = MonCalendar.SelectionEnd
