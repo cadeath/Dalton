@@ -7,7 +7,12 @@
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-
+    ''' <summary>
+    '''This case function allow you use short key.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmPawning_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         Select Case e.KeyCode
             Case Keys.F1
@@ -23,7 +28,12 @@
                 btnRedeem.PerformClick()
         End Select
     End Sub
-
+    ''' <summary>
+    ''' load the clearfields and loadActive method.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadActive()
@@ -31,12 +41,20 @@
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
     End Sub
-
+    ''' <summary>
+    ''' show the form pawn item and add new loan.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
         frmPawnItem.NewLoan()
         frmPawnItem.Show()
     End Sub
-
+    ''' <summary>
+    ''' load the specific client either renew or redeem or segregated.
+    ''' </summary>
+    ''' <remarks></remarks>
     Friend Sub LoadActive()
         Dim st As String = "1"
 
@@ -87,7 +105,11 @@
 
         dbReaderClose()
     End Sub
-
+    ''' <summary>
+    ''' This method will allow you to add new load.
+    ''' </summary>
+    ''' <param name="tk"></param>
+    ''' <remarks></remarks>
     Private Sub AddItem(ByVal tk As PawnTicket)
         Dim ticket As String
         ticket = String.Format("{0:000000}", tk.PawnTicket)
@@ -110,12 +132,20 @@
             Case "V" : lv.BackColor = Color.Gray
         End Select
     End Sub
-
+    ''' <summary>
+    ''' This method will clear the txtsearch and listview items
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ClearFields()
         txtSearch.Text = ""
         lvPawners.Items.Clear()
     End Sub
-
+    ''' <summary>
+    ''' search the client who already has transaction.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
@@ -180,13 +210,23 @@
             lvPawners.Items(0).EnsureVisible()
         End If
     End Sub
-
+    ''' <summary>
+    ''' to perform enter without clicking the search button.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
         End If
     End Sub
-
+    ''' <summary>
+    ''' to view the information of the client.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
         If lvPawners.SelectedItems.Count <= 0 Then Exit Sub
 
@@ -196,39 +236,74 @@
         frmPawnItem.Show()
         frmPawnItem.LoadPawnTicket(tmpTicket, "D")
     End Sub
-
+    ''' <summary>
+    ''' double click the disire client in the listview to view thier information.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub lvPawners_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPawners.DoubleClick
         btnView.PerformClick()
     End Sub
-
+    ''' <summary>
+    ''' perform enter in the desire client in the listview to view thier information.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub lvPawners_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvPawners.KeyPress
         If isEnter(e) Then
             btnView.PerformClick()
         End If
     End Sub
-
+    ''' <summary>
+    ''' click button to renew expiration date of transaction.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
             frmPawnItem.btnRenew.PerformClick()
         End If
     End Sub
-
+    ''' <summary>
+    ''' click button to redeem the item of the client
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If lvPawners.SelectedItems.Count > 0 Then
             btnView.PerformClick()
             frmPawnItem.btnRedeem.PerformClick()
         End If
     End Sub
-
+    ''' <summary>
+    ''' checkbox to load the renew client in listview 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub chkRenew_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRenew.CheckedChanged
         LoadActive()
     End Sub
-
+    ''' <summary>
+    ''' checkbox to load the redeem client in listview
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub chkRedeem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRedeem.CheckedChanged
         LoadActive()
     End Sub
-
+    ''' <summary>
+    ''' checkbox to load the segregated client in listview
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub chkSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSeg.CheckedChanged
         LoadActive()
     End Sub

@@ -6,12 +6,20 @@
     Private Sub diagAuthorization_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
     End Sub
-
+    ''' <summary>
+    ''' to load the username to textbox
+    ''' </summary>
+    ''' <param name="pos"></param>
+    ''' <remarks></remarks>
     Friend Sub LoadUser(ByVal pos As ComputerUser)
         txtUser.Text = pos.UserName
         txtUser.ReadOnly = True
     End Sub
-
+    ''' <summary>
+    ''' to confirm the authorization of the user
+    ''' to check the password if correct
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub verify()
         Static err As Integer
 
@@ -29,7 +37,12 @@
             MsgBox("Invalid username and password", MsgBoxStyle.Critical)
         End If
     End Sub
-
+    ''' <summary>
+    ''' click button to load verify method
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnAuthorize_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAuthorize.Click
         verify()
     End Sub
