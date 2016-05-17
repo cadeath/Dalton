@@ -1,9 +1,0 @@
-[05/10/2016 17:13:02] [ALTER TABLE TBLPAWN ADD INT_CHECKSUM VARCHAR(100);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
-STORE RDB$RELATION_FIELDS failed
-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
-Problematic key value is ("RDB$FIELD_NAME" = 'INT_CHECKSUM', "RDB$RELATION_NAME" = 'TBLPAWN')
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
-   at Patcher.mod_system.RunCommand(String sql) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 61
