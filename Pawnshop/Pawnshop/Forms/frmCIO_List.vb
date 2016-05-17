@@ -112,7 +112,7 @@
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
     ''' <summary>
-    ''' This button
+    ''' This button void the transaction.
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>

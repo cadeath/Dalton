@@ -197,6 +197,7 @@ Partial Class frmClient
         Me.Controls.Add(Me.webAds)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmClient"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Client Management"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

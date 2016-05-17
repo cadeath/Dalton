@@ -12,7 +12,13 @@ Public Class frmClientInformation
     Private isNew As Boolean = True
 
     Private ClientIDs As New CollectionID
-
+    ''' <summary>
+    ''' call the clearfields method.
+    ''' focus the cursor in txtFirstname textbox.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
@@ -28,7 +34,12 @@ Public Class frmClientInformation
         cboProv.Items.AddRange(GetDistinct("Addr_Province"))
         'Populate()
     End Sub
-
+    ''' <summary>
+    ''' This method will select client specifically from the table.
+    ''' </summary>
+    ''' <param name="col"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Function GetDistinct(ByVal col As String) As String()
         Dim mySql As String = "SELECT DISTINCT " & col & " FROM tblClient WHERE " & col & " <> '' ORDER BY " & col & " ASC"
         Dim ds As DataSet = LoadSQL(mySql)
@@ -42,7 +53,11 @@ Public Class frmClientInformation
 
         Return str
     End Function
-
+    ''' <summary>
+    ''' This method will able to load data to the textfields.
+    ''' </summary>
+    ''' <param name="cl"></param>
+    ''' <remarks></remarks>
     Friend Sub LoadClientInForm(ByVal cl As Client)
         If cl.FirstName = "" Then Exit Sub
 
@@ -75,12 +90,19 @@ Public Class frmClientInformation
         ComputeBirthday()
         LockFields(True)
     End Sub
-
+    ''' <summary>
+    ''' This method will computer the birth day of the client.
+    ''' </summary>
+    ''' <remarks></remarks>
     Friend Sub ComputeBirthday()
         lblAge.Text = "N/A"
         lblAge.Text = GetCurrentAge(dtpBday.Value) & " years old"
     End Sub
-
+    ''' <summary>
+    ''' This method will disabled the textfield.
+    ''' </summary>
+    ''' <param name="st"></param>
+    ''' <remarks></remarks>
     Private Sub LockFields(ByVal st As Boolean)
         lockForm = st
 
@@ -137,7 +159,10 @@ Public Class frmClientInformation
 
         txtCP1.Text = "0922-684-7559"
     End Sub
-
+    ''' <summary>
+    ''' This method will able to clear the text fields.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ClearFields()
         txtFirstName.Text = ""
         txtMiddleName.Text = ""
@@ -171,11 +196,22 @@ Public Class frmClientInformation
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
-
+    ''' <summary>
+    ''' This keypress means only digit is allow to enter in this text field.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtZip_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtZip.KeyPress
         DigitOnly(e)
     End Sub
-
+    ''' <summary>
+    ''' This method will separate the phone number.
+    ''' </summary>
+    ''' <param name="PhoneField"></param>
+    ''' <param name="e"></param>
+    ''' <param name="isPhone"></param>
+    ''' <remarks></remarks>
     Private Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
         Dim charPos() As Integer = {}
         If PhoneField.Text = Nothing Then Return
@@ -206,22 +242,41 @@ Public Class frmClientInformation
             End If
         Next
     End Sub
-
+    ''' <summary>
+    ''' This keypress is accept digit only and call the phoneSeparator method.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtCP1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCP1.KeyPress
         DigitOnly(e)
         PhoneSeparator(txtCP1, e)
     End Sub
-
+    ''' <summary>
+    ''' This keypress is accept digit only and call the phoneSeparator method.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtCP2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCP2.KeyPress
         DigitOnly(e)
         PhoneSeparator(txtCP2, e)
     End Sub
-
+    ''' <summary>
+    ''' This keypress is accept digit only and call the phoneSeparator method.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtTele_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTele.KeyPress
         DigitOnly(e)
         PhoneSeparator(txtTele, e, True)
     End Sub
-
+    ''' <summary>
+    ''' This function shows the requirements of the client.
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Function isValid() As Boolean
         If txtFirstName.Text = "" Then txtFirstName.Focus() : Return False
         If txtLastName.Text = "" Then txtLastName.Focus() : Return False
@@ -241,7 +296,12 @@ Public Class frmClientInformation
 
         Return True
     End Function
-
+    ''' <summary>
+    ''' This button will update the client information.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If btnSave.Text = "&Modify" Then
             isNew = False
@@ -296,24 +356,44 @@ Public Class frmClientInformation
         frmClient.AutoSelect(tmpClient)
         Me.Close()
     End Sub
-
+    ''' <summary>
+    ''' This keypress will lock the dtpBday accept digit only.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub dtpBday_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles dtpBday.KeyPress
         If lockForm Then
             e.Handled = True
         End If
     End Sub
-
+    ''' <summary>
+    ''' This value changed call the computeBirthday method.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub dtpBday_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpBday.ValueChanged
         ComputeBirthday()
     End Sub
-
+    ''' <summary>
+    ''' This keypress accept digit only.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub cboGender_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboGender.KeyPress
         If lockForm Then
             e.Handled = True
         End If
     End Sub
 
-    'ID Group===================
+    ''' <summary>
+    ''' ID Group===================
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If cboIDtype.Text = "" Or txtRef.Text = "" Then Exit Sub
 
@@ -326,7 +406,11 @@ Public Class frmClientInformation
         ClearIDFields()
         cboIDtype.Focus()
     End Sub
-
+    ''' <summary>
+    ''' This method allow to add identification card of the client.
+    ''' </summary>
+    ''' <param name="cID"></param>
+    ''' <remarks></remarks>
     Private Sub AddID(ByVal cID As IdentificationCard)
         Dim lv As ListViewItem = lvID.Items.Add(cID.IDType)
         lv.SubItems.Add(cID.ReferenceNumber)
@@ -349,13 +433,20 @@ Public Class frmClientInformation
     Private Sub txtRemarks_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtRemarks.KeyPress
         If isEnter(e) Then btnAdd.PerformClick()
     End Sub
-
+    ''' <summary>
+    ''' This method will clear the text fields and combobox.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ClearIDFields()
         cboIDtype.DroppedDown = True
         txtRef.Text = ""
         txtRemarks.Text = ""
     End Sub
-
+    ''' <summary>
+    ''' This method will load the identification card of a client.
+    ''' </summary>
+    ''' <param name="cl"></param>
+    ''' <remarks></remarks>
     Private Sub LoadID(ByVal cl As Client)
         Dim mySql As String
         mySql = "SELECT * FROM tblIdentification WHERE clientID = " & cl.ID
@@ -368,11 +459,20 @@ Public Class frmClientInformation
             AddID(tmpID)
         Next
     End Sub
-
+    ''' <summary>
+    ''' This method select the id of a client
+    ''' </summary>
+    ''' <param name="SelID"></param>
+    ''' <remarks></remarks>
     Private Sub idSelected(ByVal SelID As IdentificationCard)
         SelID.Selected()
     End Sub
-
+    ''' <summary>
+    ''' This method will modify the Identification card of a client.
+    ''' call the default id method.
+    ''' </summary>
+    ''' <param name="cl"></param>
+    ''' <remarks></remarks>
     Private Sub SaveIDs(Optional ByVal cl As Client = Nothing)
         defaultID()
 
@@ -389,7 +489,10 @@ Public Class frmClientInformation
             xIdx += 1
         Next
     End Sub
-
+    ''' <summary>
+    ''' This method will load the default identification of a client.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub defaultID()
         Dim hasSelected As Boolean = False, cnt As Integer = 0
 
@@ -423,7 +526,12 @@ Public Class frmClientInformation
         'lvID.FocusedItem.Selected = True
     End Sub
     'END - ID Group===================
-
+    ''' <summary>
+    ''' This button will load the history of the client and load to the frmReport.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnHistory_Click(sender As System.Object, e As System.EventArgs) Handles btnHistory.Click
         Dim mySql As String
         mySql = "SELECT "
