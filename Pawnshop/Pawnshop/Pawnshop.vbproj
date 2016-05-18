@@ -438,6 +438,12 @@
     <Compile Include="Modules\security.vb" />
     <Compile Include="Modules\updateRate.vb" />
     <Compile Include="Modules\web_ads.vb" />
+    <Compile Include="moneyexchange.Designer.vb">
+      <DependentUpon>moneyexchange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="moneyexchange.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -568,6 +574,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate2.resx">
       <DependentUpon>frmRate2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="moneyexchange.resx">
+      <DependentUpon>moneyexchange.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Loan.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
