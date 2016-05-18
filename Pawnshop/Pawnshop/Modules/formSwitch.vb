@@ -1,5 +1,8 @@
 ﻿Module formSwitch
-
+    ''' <summary>
+    ''' This module where every form was assign by a digit which underlying the form.
+    ''' </summary>
+    ''' <remarks></remarks>
     Friend Enum FormName As Integer
         devForm = 0
         frmMTSend = 1 'Money Transfer
@@ -10,7 +13,12 @@
         frmPawnItem = 6
         frmDollarSimple = 7
     End Enum
-
+    ''' <summary>
+    ''' This method select what form you want to go.
+    ''' </summary>
+    ''' <param name="gotoForm">gotoform here is a variable that hold all forms.</param>
+    ''' <param name="cl"></param>
+    ''' <remarks></remarks>
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
         Select Case gotoForm
             Case FormName.devForm

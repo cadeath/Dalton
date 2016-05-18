@@ -1,5 +1,9 @@
 ﻿Imports System.Data.Odbc
-
+''' <summary>
+''' This module declare the connection of the database.
+''' 
+''' </summary>
+''' <remarks></remarks>
 Friend Module database
     Public con As OdbcConnection
     Public ReaderCon As OdbcConnection
@@ -10,10 +14,14 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.0.12"
+    Private DBversion As String = "1.0.12" 'Database version.
     Private language() As String = _
-        {"Connection error failed."}
-
+        {"Connection error failed."} 'verification if the database is connected.
+    ''' <summary>
+    ''' This method shows the connection string of a database.
+    ''' Also here we open the database.
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Sub dbOpen()
         conStr = "DRIVER=Firebird/InterBase(r) driver;User=" & fbUser & ";Password=" & fbPass & ";Database=" & dbName & ";"
 
@@ -29,11 +37,18 @@ Friend Module database
             Exit Sub
         End Try
     End Sub
-
+    ''' <summary>
+    ''' This method is for closing after database was open here is the close.
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Sub dbClose()
         con.Close()
     End Sub
-
+    ''' <summary>
+    ''' The database is ready to open.
+    ''' </summary>
+    ''' <returns>return false if the database is not ready.</returns>
+    ''' <remarks></remarks>
     Friend Function isReady() As Boolean
         Dim ready As Boolean = False
         Try
@@ -85,7 +100,11 @@ Friend Module database
         dbClose()
         Return True
     End Function
-
+    ''' <summary>
+    '''This function will check the compatibility of database version if it is match.
+    ''' </summary>
+    ''' <returns>return false if the database version is not match.</returns>
+    ''' <remarks></remarks>
     Friend Function DBCompatibilityCheck() As Boolean
         Console.WriteLine("Checking database compatibility...")
         Dim strDB As String = GetOption("DBVersion")
@@ -99,9 +118,15 @@ Friend Module database
         End If
     End Function
 
-    ' Module 002
+    ''' <summary>
+    '''This function where the table load to dataset.
+    ''' </summary>
+    ''' <param name="mySql">mysql where the data pass by.</param>
+    ''' <param name="tblName">tblName here is a variable that hold the data.</param>
+    ''' <returns>return ds after reading the mysql data.</returns>
+    ''' <remarks></remarks>
     Friend Function LoadSQL(ByVal mySql As String, Optional ByVal tblName As String = "QuickSQL") As DataSet
-        dbOpen()
+        dbOpen() 'open the database.
 
         Dim da As OdbcDataAdapter
         Dim ds As New DataSet, fillData As String = tblName
@@ -119,20 +144,28 @@ Friend Module database
 
         Return ds
     End Function
-
+    ''' <summary>
+    ''' This function is the declaration of odbccommand and odbcdatareader.
+    ''' </summary>
+    ''' <param name="mySql">mysql where the data pass</param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function LoadSQL_byDataReader(ByVal mySql As String) As OdbcDataReader
         Dim myCom As OdbcCommand = New OdbcCommand(mySql, ReaderCon)
         Dim reader As OdbcDataReader = myCom.ExecuteReader()
 
         Return reader
     End Function
-
+    ''' <summary>
+    ''' The conStr here a variable that hold the connectionstring of the database.
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Sub dbReaderOpen()
         conStr = "DRIVER=Firebird/InterBase(r) driver;User=" & fbUser & ";Password=" & fbPass & ";Database=" & dbName & ";"
 
         ReaderCon = New OdbcConnection(conStr)
         Try
-            ReaderCon.Open()
+            ReaderCon.Open() 'open the database.
         Catch ex As Exception
             ReaderCon.Dispose()
             MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Connecting Error")
@@ -140,11 +173,19 @@ Friend Module database
             Exit Sub
         End Try
     End Sub
-
+    ''' <summary>
+    ''' close the database.
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Sub dbReaderClose()
         ReaderCon.Close()
     End Sub
-
+    ''' <summary>
+    ''' This function select all data from tblmaintenance.
+    ''' </summary>
+    ''' <param name="keys">keys is the parameter </param>
+    ''' <returns>return ret after reading the dataset.</returns>
+    ''' <remarks></remarks>
     Friend Function GetOption(ByVal keys As String) As String
         Dim mySql As String = "SELECT * FROM tblmaintenance WHERE opt_keys = '" & keys & "'"
         Dim ret As String
@@ -157,7 +198,12 @@ Friend Module database
 
         Return ret
     End Function
-
+    ''' <summary>
+    ''' This module where select all data from tblmaintenance.
+    ''' </summary>
+    ''' <param name="key">the key is parameter only data will be read if what is the opt_keys shows in key.</param>
+    ''' <param name="value">The value here hold the data from the opt_values.</param>
+    ''' <remarks></remarks>
     Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)
         Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
         Dim fillData As String = "tblMaintenance"

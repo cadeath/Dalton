@@ -87,7 +87,11 @@
     '    ds.Tables(tblName).Rows(0).Item("STATUS") = 0
     '    database.SaveEntry(ds, False)
     'End Sub
-
+    ''' <summary>
+    ''' This method select all data from tblJournal where srcStr is the parameter
+    ''' </summary>
+    ''' <param name="srcStr">srcStr is the bases if what journal to display.</param>
+    ''' <remarks></remarks>
     Friend Sub RemoveJournal(srcStr As String)
         Dim fillData As String = "tblJournal"
         Dim mySql As String = "SELECT * FROM tblJournal WHERE "
@@ -103,7 +107,12 @@
         database.SaveEntry(ds, False)
         Console.WriteLine(srcStr & " REMOVED FROM JOURNAL ENTRIES...")
     End Sub
-
+    ''' <summary>
+    ''' This function create accountName variable which the paremeter of tblcash.
+    ''' </summary>
+    ''' <param name="AccountName"></param>
+    ''' <returns>return ds after reading data.</returns>
+    ''' <remarks></remarks>
     Private Function GetTransID(ByVal AccountName As String) As Integer
         Dim mySql As String, tblName As String = "tblCash"
         mySql = "SELECT * FROM " & tblName & " WHERE TransName = '" & AccountName & "'"
