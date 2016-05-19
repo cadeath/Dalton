@@ -1497,7 +1497,7 @@ Public Class frmPawnItem
         End If
     End Sub
 
-    Private Sub Storing_Hash(str As String)
+    Friend Sub Storing_Hash(str As String)
         Dim ds As DataSet, ds1 As DataSet
         Dim mySql As String = "SELECT DAYFROM, DAYTO, ITEMTYPE, INTEREST, PENALTY, REMARKS FROM TBLINT"
 

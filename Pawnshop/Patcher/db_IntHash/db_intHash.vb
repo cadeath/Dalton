@@ -1,6 +1,6 @@
 ﻿Module db_intHash
 
-    Private VERSION As String = "1.2"
+    Private VERSION As String = "1.0.13"
 
     Sub do_update()
         ' Add INT_CHECK at TBLPAWN
@@ -35,7 +35,8 @@
         Do_HitManagement() 'Update Database - HIT MANAGEMENT
 
         Database_Update(VERSION)
-        SystemUpdate("DATABASE UPDATED - V1.2")
+        SystemUpdate("DATABASE UPDATED - V1.0.13")
+        MsgBox("Database Patched")
     End Sub
 
     Private Sub Do_IntHistory()

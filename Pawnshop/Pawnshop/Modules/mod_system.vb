@@ -15,7 +15,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = True
+    Public DEV_MODE As Boolean = 0
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
 
