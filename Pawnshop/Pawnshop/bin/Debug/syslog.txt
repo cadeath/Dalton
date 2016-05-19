@@ -10,3 +10,14 @@
    at Pawnshop.frmPawnItem.Storing_Hash(String str) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1531
    at Pawnshop.db12.PatchUp() in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db12.vb:line 13
 [05/19/2016 15:33:17] SYSTEM PATCHED UP TO 1.2
+[05/19/2016 16:08:00] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
+[05/19/2016 16:11:01] System.Data.Odbc.OdbcException (0x80131937): ERROR [23000] [ODBC Firebird Driver][Firebird]validation error for column INTID, value "*** null ***"
+   at System.Data.Common.DbDataAdapter.UpdatedRowStatusErrors(RowUpdatedEventArgs rowUpdatedEvent, BatchCommandInfo[] batchCommands, Int32 commandCount)
+   at System.Data.Common.DbDataAdapter.UpdatedRowStatus(RowUpdatedEventArgs rowUpdatedEvent, BatchCommandInfo[] batchCommands, Int32 commandCount)
+   at System.Data.Common.DbDataAdapter.Update(DataRow[] dataRows, DataTableMapping tableMapping)
+   at System.Data.Common.DbDataAdapter.UpdateFromDataTable(DataTable dataTable, DataTableMapping tableMapping)
+   at System.Data.Common.DbDataAdapter.Update(DataSet dataSet, String srcTable)
+   at Pawnshop.database.SaveEntry(DataSet dsEntry, Boolean isNew) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 97
+   at Pawnshop.frmPawnItem.Storing_Hash(String str) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1531
+   at Pawnshop.db12.PatchUp() in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db12.vb:line 13
+[05/19/2016 16:11:26] SYSTEM PATCHED UP TO 1.2
