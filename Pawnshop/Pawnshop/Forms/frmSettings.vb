@@ -119,4 +119,6 @@
     Private Sub txtInsurance_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
+
+   
 End Class

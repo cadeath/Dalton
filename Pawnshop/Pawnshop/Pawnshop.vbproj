@@ -166,6 +166,7 @@
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
+    <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
@@ -258,6 +259,12 @@
       <DependentUpon>frmCIO_List.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCIO_List.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCurrencyList.Designer.vb">
+      <DependentUpon>frmCurrencyList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCurrencyList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
@@ -438,10 +445,10 @@
     <Compile Include="Modules\security.vb" />
     <Compile Include="Modules\updateRate.vb" />
     <Compile Include="Modules\web_ads.vb" />
-    <Compile Include="moneyexchange.Designer.vb">
-      <DependentUpon>moneyexchange.vb</DependentUpon>
+    <Compile Include="Forms\frmMoneyExchange.Designer.vb">
+      <DependentUpon>frmMoneyExchange.vb</DependentUpon>
     </Compile>
-    <Compile Include="moneyexchange.vb">
+    <Compile Include="Forms\frmMoneyExchange.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -569,14 +576,17 @@
     <EmbeddedResource Include="Forms\frmCashCountV2.resx">
       <DependentUpon>frmCashCountV2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCurrencyList.resx">
+      <DependentUpon>frmCurrencyList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
       <DependentUpon>frmPrintManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate2.resx">
       <DependentUpon>frmRate2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="moneyexchange.resx">
-      <DependentUpon>moneyexchange.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmMoneyExchange.resx">
+      <DependentUpon>frmMoneyExchange.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Loan.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

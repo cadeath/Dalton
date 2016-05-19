@@ -12,6 +12,7 @@
         frmDollar = 5
         frmPawnItem = 6
         frmDollarSimple = 7
+        frmMoneyExchange = 8
     End Enum
     ''' <summary>
     ''' This method select what form you want to go.
@@ -33,6 +34,8 @@
                 frmPawnItem.LoadClient(cl)
             Case FormName.frmDollarSimple
                 frmDollorSimple.LoadClient(cl)
+            Case FormName.frmMoneyExchange
+                frmmoneyexchange.LoadClient(cl)
         End Select
     End Sub
 
