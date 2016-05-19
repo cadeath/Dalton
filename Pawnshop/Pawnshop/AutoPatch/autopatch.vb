@@ -23,6 +23,7 @@ Module autopatch
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("PATCH PROBLEM", MsgBoxStyle.Critical) : Return False
 
+        Console.WriteLine(ds.Tables(0).Rows(0).Item("OPT_VALUES"))
         Return IIf(ds.Tables(0).Rows(0).Item("OPT_VALUES") = allowVersion, True, False)
 
 err:
