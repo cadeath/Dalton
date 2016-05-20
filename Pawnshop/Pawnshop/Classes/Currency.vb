@@ -1,11 +1,10 @@
-﻿Imports System.Data.Odbc
+﻿
 Public Class Currency
     Private fillData As String = "TBLCURRENCY"
-    Private mySql As String = "SELECT * FROM "
-    Private _Curreny2 As String = String.Empty
+    Private mySql As String, ds As DataSet
 #Region "Properties and Variables"
     Private _id As Integer
-    Public Property ID() As Integer
+    Public Property CURRENCYID As Integer
         Get
             Return _id
         End Get
@@ -13,35 +12,26 @@ Public Class Currency
             _id = value
         End Set
     End Property
-    Private _CURRENCY As Integer
-    Public Property Currency() As Integer
+    Private _CURRENCY As String
+    Public Property CURRENCY As String
+        Set(ByVal value As String)
+            _CURRENCY = value
+        End Set
         Get
             Return _CURRENCY
         End Get
-        Set(ByVal value As Integer)
-            _CURRENCY = value
-        End Set
     End Property
-
-    Public Property Currency1 As String
-        Set(ByVal value As String)
-            _Curreny2 = value
-        End Set
-        Get
-            Return _Curreny2
-        End Get
-    End Property
-    Private _SYMBOL As String
-    Public Property Symbol() As String
-        Get
-            Return _SYMBOL
-        End Get
+    Private _SYMBOL As String = String.Empty
+    Public Property SYMBOL As String
         Set(ByVal value As String)
             _SYMBOL = value
         End Set
+        Get
+            Return _SYMBOL
+        End Get
     End Property
-    Private _DENOMINATION As String
-    Public Property Denomination() As String
+    Private _DENOMINATION As String = String.Empty
+    Public Property DENOMINATION As String
         Get
             Return _DENOMINATION
         End Get
@@ -49,8 +39,8 @@ Public Class Currency
             _DENOMINATION = value
         End Set
     End Property
-    Private _RATE As String
-    Public Property Rate() As String
+    Private _RATE As String = String.Empty
+    Public Property RATE As String
         Get
             Return _RATE
         End Get
@@ -58,21 +48,78 @@ Public Class Currency
             _RATE = value
         End Set
     End Property
+    Private _FULLNAME As String = String.Empty
+    Public Property CustomersName() As String
+        Get
+            Return _FULLNAME
+        End Get
+        Set(ByVal value As String)
+            _FULLNAME = value
+        End Set
+    End Property
+    Private _CUSTOMTER As Client
+    Public Property Customer() As Client
+        Get
+            Return _CUSTOMTER
+        End Get
+        Set(ByVal value As Client)
+            _CUSTOMTER = value
+        End Set
+    End Property
+    Private _STATUS As String = "A"
+    Public Property Status() As String
+        Get
+            Return _STATUS
+        End Get
+        Set(ByVal value As String)
+            _STATUS = value
+        End Set
+    End Property
 #End Region
-    Public Sub LoadCurrency(ByVal id As String)
+#Region "LOADCURRENCY AND ENTRY"
+    Public Sub LoadCurrencydata(ByVal id As Integer)
         mySql = "SELECT * FROM " & fillData & " WHERE CURRENCYID = " & id
-        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds = LoadSQL(mySql)
 
-        LoadByRow(ds.Tables(fillData).Rows(0))
+        For Each dr As DataRow In ds.Tables(0).Rows
+            ByRow(dr)
+        Next
     End Sub
-    Public Sub LoadByRow(ByVal dr As DataRow)
+
+    Private Sub ByRow(ByVal dr As DataRow)
         With dr
             _id = .Item("CURRENCYID")
             _CURRENCY = .Item("CURRENCY")
             _SYMBOL = .Item("SYMBOL")
             _DENOMINATION = .Item("DENOMINATION")
-            _RATE = .Item("DENOMINATION")
-
+            _RATE = .Item("RATE")
         End With
     End Sub
+
+    Public Sub LoadCurrencyByRow(ByVal dr As DataRow)
+        ByRow(dr)
+    End Sub
+
+    Public Function LastIDNumber() As Single
+        Dim mySql As String = "SELECT * FROM TBLCURRENCY"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("CURRENCYID")
+    End Function
+
+    Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
+        str = str.Replace("'", "''")
+        str = str.Replace("""", """""")
+
+        If special <> Nothing Then
+            str = str.Replace(special, "")
+        End If
+
+        Return str
+    End Function
+#End Region
+
 End Class

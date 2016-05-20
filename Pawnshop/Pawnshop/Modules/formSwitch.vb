@@ -34,8 +34,9 @@
                 frmPawnItem.LoadClient(cl)
             Case FormName.frmDollarSimple
                 frmDollorSimple.LoadClient(cl)
+
             Case FormName.frmMoneyExchange
-                frmmoneyexchange.LoadClient(cl)
+                frmmoneyexchange.LoadCurrencyall(cl)
         End Select
     End Sub
 

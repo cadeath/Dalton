@@ -24,6 +24,8 @@ Partial Class frmmoneyexchange
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.buttonSearch = New System.Windows.Forms.Button()
+        Me.txtCurrency = New System.Windows.Forms.TextBox()
         Me.txtDenomination = New System.Windows.Forms.TextBox()
         Me.symbol = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -34,7 +36,9 @@ Partial Class frmmoneyexchange
         Me.txtTotalAmount = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.btnsearch = New System.Windows.Forms.Button()
+        Me.txtSerial = New System.Windows.Forms.TextBox()
         Me.TxtName = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ListView1 = New System.Windows.Forms.ListView()
@@ -48,11 +52,22 @@ Partial Class frmmoneyexchange
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnsave = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.txtCurrency = New System.Windows.Forms.TextBox()
-        Me.buttonSearch = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtSymbol1 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtTotal = New System.Windows.Forms.TextBox()
+        Me.txtDenomination1 = New System.Windows.Forms.TextBox()
+        Me.txtRate = New System.Windows.Forms.TextBox()
+        Me.txtCurrency1 = New System.Windows.Forms.TextBox()
+        Me.btnSearch1 = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -81,16 +96,34 @@ Partial Class frmmoneyexchange
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.GroupBox1.Location = New System.Drawing.Point(18, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(395, 223)
+        Me.GroupBox1.Size = New System.Drawing.Size(300, 0)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
+        '
+        'buttonSearch
+        '
+        Me.buttonSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.buttonSearch.Location = New System.Drawing.Point(308, 15)
+        Me.buttonSearch.Name = "buttonSearch"
+        Me.buttonSearch.Size = New System.Drawing.Size(75, 30)
+        Me.buttonSearch.TabIndex = 16
+        Me.buttonSearch.Text = "Search"
+        Me.buttonSearch.UseVisualStyleBackColor = True
+        '
+        'txtCurrency
+        '
+        Me.txtCurrency.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCurrency.Location = New System.Drawing.Point(81, 16)
+        Me.txtCurrency.Name = "txtCurrency"
+        Me.txtCurrency.Size = New System.Drawing.Size(221, 26)
+        Me.txtCurrency.TabIndex = 15
         '
         'txtDenomination
         '
         Me.txtDenomination.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDenomination.Location = New System.Drawing.Point(147, 151)
+        Me.txtDenomination.Location = New System.Drawing.Point(163, 151)
         Me.txtDenomination.Name = "txtDenomination"
         Me.txtDenomination.Size = New System.Drawing.Size(120, 26)
         Me.txtDenomination.TabIndex = 14
@@ -108,26 +141,26 @@ Partial Class frmmoneyexchange
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(143, 128)
+        Me.Label5.Location = New System.Drawing.Point(159, 128)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(48, 20)
+        Me.Label5.Size = New System.Drawing.Size(108, 20)
         Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Label"
+        Me.Label5.Text = "Denomination"
         '
         'txtSymbol
         '
         Me.txtSymbol.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSymbol.Location = New System.Drawing.Point(87, 91)
+        Me.txtSymbol.Location = New System.Drawing.Point(81, 48)
         Me.txtSymbol.Name = "txtSymbol"
         Me.txtSymbol.ReadOnly = True
-        Me.txtSymbol.Size = New System.Drawing.Size(144, 26)
+        Me.txtSymbol.Size = New System.Drawing.Size(221, 26)
         Me.txtSymbol.TabIndex = 10
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(20, 94)
+        Me.Label4.Location = New System.Drawing.Point(14, 51)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(61, 20)
         Me.Label4.TabIndex = 9
@@ -138,14 +171,14 @@ Partial Class frmmoneyexchange
         Me.txRate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txRate.Location = New System.Drawing.Point(41, 151)
         Me.txRate.Name = "txRate"
-        Me.txRate.Size = New System.Drawing.Size(80, 26)
+        Me.txRate.Size = New System.Drawing.Size(116, 26)
         Me.txRate.TabIndex = 6
         '
         'label
         '
         Me.label.AutoSize = True
         Me.label.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.label.Location = New System.Drawing.Point(17, 128)
+        Me.label.Location = New System.Drawing.Point(39, 128)
         Me.label.Name = "label"
         Me.label.Size = New System.Drawing.Size(44, 20)
         Me.label.TabIndex = 5
@@ -155,7 +188,7 @@ Partial Class frmmoneyexchange
         '
         Me.txtTotalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTotalAmount.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
-        Me.txtTotalAmount.Location = New System.Drawing.Point(163, 194)
+        Me.txtTotalAmount.Location = New System.Drawing.Point(163, 190)
         Me.txtTotalAmount.Name = "txtTotalAmount"
         Me.txtTotalAmount.ReadOnly = True
         Me.txtTotalAmount.Size = New System.Drawing.Size(134, 26)
@@ -165,7 +198,7 @@ Partial Class frmmoneyexchange
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(17, 198)
+        Me.Label3.Location = New System.Drawing.Point(17, 194)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(140, 20)
         Me.Label3.TabIndex = 2
@@ -174,16 +207,27 @@ Partial Class frmmoneyexchange
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.GroupBox2.Controls.Add(Me.Label11)
         Me.GroupBox2.Controls.Add(Me.btnsearch)
+        Me.GroupBox2.Controls.Add(Me.txtSerial)
         Me.GroupBox2.Controls.Add(Me.TxtName)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(413, 10)
+        Me.GroupBox2.Location = New System.Drawing.Point(420, 10)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(395, 71)
+        Me.GroupBox2.Size = New System.Drawing.Size(395, 101)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Customer "
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(18, 69)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(49, 20)
+        Me.Label11.TabIndex = 12
+        Me.Label11.Text = "Serial"
         '
         'btnsearch
         '
@@ -194,6 +238,13 @@ Partial Class frmmoneyexchange
         Me.btnsearch.TabIndex = 2
         Me.btnsearch.Text = "Search"
         Me.btnsearch.UseVisualStyleBackColor = True
+        '
+        'txtSerial
+        '
+        Me.txtSerial.Location = New System.Drawing.Point(73, 66)
+        Me.txtSerial.Name = "txtSerial"
+        Me.txtSerial.Size = New System.Drawing.Size(185, 26)
+        Me.txtSerial.TabIndex = 11
         '
         'TxtName
         '
@@ -219,7 +270,7 @@ Partial Class frmmoneyexchange
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.HideSelection = False
-        Me.ListView1.Location = New System.Drawing.Point(12, 241)
+        Me.ListView1.Location = New System.Drawing.Point(19, 238)
         Me.ListView1.MultiSelect = False
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(796, 90)
@@ -262,7 +313,7 @@ Partial Class frmmoneyexchange
         Me.GroupBox3.Controls.Add(Me.btnCancel)
         Me.GroupBox3.Controls.Add(Me.btnsave)
         Me.GroupBox3.Controls.Add(Me.Button1)
-        Me.GroupBox3.Location = New System.Drawing.Point(413, 88)
+        Me.GroupBox3.Location = New System.Drawing.Point(420, 170)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(395, 62)
         Me.GroupBox3.TabIndex = 5
@@ -298,37 +349,134 @@ Partial Class frmmoneyexchange
         Me.Button1.Text = "Browse"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'txtCurrency
+        'GroupBox4
         '
-        Me.txtCurrency.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCurrency.Location = New System.Drawing.Point(81, 16)
-        Me.txtCurrency.Name = "txtCurrency"
-        Me.txtCurrency.Size = New System.Drawing.Size(221, 26)
-        Me.txtCurrency.TabIndex = 15
+        Me.GroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.GroupBox4.Controls.Add(Me.Label10)
+        Me.GroupBox4.Controls.Add(Me.txtSymbol1)
+        Me.GroupBox4.Controls.Add(Me.Label9)
+        Me.GroupBox4.Controls.Add(Me.Label8)
+        Me.GroupBox4.Controls.Add(Me.Label7)
+        Me.GroupBox4.Controls.Add(Me.txtTotal)
+        Me.GroupBox4.Controls.Add(Me.txtDenomination1)
+        Me.GroupBox4.Controls.Add(Me.txtRate)
+        Me.GroupBox4.Controls.Add(Me.txtCurrency1)
+        Me.GroupBox4.Controls.Add(Me.btnSearch1)
+        Me.GroupBox4.Controls.Add(Me.Label6)
+        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox4.Location = New System.Drawing.Point(7, 10)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(407, 220)
+        Me.GroupBox4.TabIndex = 6
+        Me.GroupBox4.TabStop = False
         '
-        'buttonSearch
+        'Label10
         '
-        Me.buttonSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.buttonSearch.Location = New System.Drawing.Point(308, 15)
-        Me.buttonSearch.Name = "buttonSearch"
-        Me.buttonSearch.Size = New System.Drawing.Size(75, 30)
-        Me.buttonSearch.TabIndex = 16
-        Me.buttonSearch.Text = "Search"
-        Me.buttonSearch.UseVisualStyleBackColor = True
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(19, 51)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(61, 20)
+        Me.Label10.TabIndex = 10
+        Me.Label10.Text = "Symbol"
+        '
+        'txtSymbol1
+        '
+        Me.txtSymbol1.Location = New System.Drawing.Point(89, 48)
+        Me.txtSymbol1.Name = "txtSymbol1"
+        Me.txtSymbol1.ReadOnly = True
+        Me.txtSymbol1.Size = New System.Drawing.Size(230, 26)
+        Me.txtSymbol1.TabIndex = 9
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(219, 130)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(108, 20)
+        Me.Label9.TabIndex = 8
+        Me.Label9.Text = "Denomination"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(11, 130)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(44, 20)
+        Me.Label8.TabIndex = 7
+        Me.Label8.Text = "Rate"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(20, 189)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(108, 20)
+        Me.Label7.TabIndex = 6
+        Me.Label7.Text = "Total Amount:"
+        '
+        'txtTotal
+        '
+        Me.txtTotal.Location = New System.Drawing.Point(130, 185)
+        Me.txtTotal.Name = "txtTotal"
+        Me.txtTotal.ReadOnly = True
+        Me.txtTotal.Size = New System.Drawing.Size(142, 26)
+        Me.txtTotal.TabIndex = 5
+        '
+        'txtDenomination1
+        '
+        Me.txtDenomination1.Location = New System.Drawing.Point(223, 153)
+        Me.txtDenomination1.Name = "txtDenomination1"
+        Me.txtDenomination1.Size = New System.Drawing.Size(176, 26)
+        Me.txtDenomination1.TabIndex = 4
+        '
+        'txtRate
+        '
+        Me.txtRate.Location = New System.Drawing.Point(14, 153)
+        Me.txtRate.Name = "txtRate"
+        Me.txtRate.Size = New System.Drawing.Size(179, 26)
+        Me.txtRate.TabIndex = 3
+        Me.txtRate.Text = "48"
+        '
+        'txtCurrency1
+        '
+        Me.txtCurrency1.Location = New System.Drawing.Point(88, 19)
+        Me.txtCurrency1.Name = "txtCurrency1"
+        Me.txtCurrency1.Size = New System.Drawing.Size(231, 26)
+        Me.txtCurrency1.TabIndex = 2
+        '
+        'btnSearch1
+        '
+        Me.btnSearch1.Location = New System.Drawing.Point(325, 20)
+        Me.btnSearch1.Name = "btnSearch1"
+        Me.btnSearch1.Size = New System.Drawing.Size(75, 27)
+        Me.btnSearch1.TabIndex = 1
+        Me.btnSearch1.Text = "Search"
+        Me.btnSearch1.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(12, 21)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(72, 20)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Currency"
         '
         'frmmoneyexchange
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(813, 336)
+        Me.ClientSize = New System.Drawing.Size(840, 336)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(823, 368)
-        Me.MinimumSize = New System.Drawing.Size(823, 368)
+        Me.MaximumSize = New System.Drawing.Size(850, 368)
+        Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(850, 32)
         Me.Name = "frmmoneyexchange"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = " Money Exchange"
@@ -337,6 +485,8 @@ Partial Class frmmoneyexchange
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -368,4 +518,18 @@ Partial Class frmmoneyexchange
     Friend WithEvents txtDenomination As System.Windows.Forms.TextBox
     Friend WithEvents txtCurrency As System.Windows.Forms.TextBox
     Friend WithEvents buttonSearch As System.Windows.Forms.Button
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents txtTotal As System.Windows.Forms.TextBox
+    Friend WithEvents txtDenomination1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtRate As System.Windows.Forms.TextBox
+    Friend WithEvents txtCurrency1 As System.Windows.Forms.TextBox
+    Friend WithEvents btnSearch1 As System.Windows.Forms.Button
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtSymbol1 As System.Windows.Forms.TextBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents txtSerial As System.Windows.Forms.TextBox
 End Class

@@ -22,7 +22,7 @@
         End With
     End Sub
     ''' <summary>
-    ''' clear the text field and combobox.
+    ''' clear the text field and listview
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub ClearFields()
@@ -30,7 +30,7 @@
         lvDollar.Items.Clear()
     End Sub
     ''' <summary>
-    ''' Load the dollar value to combobox.
+    ''' Load the dollar value to listview.
     ''' </summary>
     ''' <param name="mySql"></param>
     ''' <remarks></remarks>
@@ -153,7 +153,4 @@
         frmDollorSimple.LoadDollar(tmpLoad)
     End Sub
 
-    Private Sub lvDollar_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvDollar.SelectedIndexChanged
-
-    End Sub
 End Class
