@@ -281,9 +281,11 @@
             End If
         End If
 
-        Console.WriteLine("Comparing....")
-        Console.WriteLine("STR: " & str)
-        Console.WriteLine("TBLINT: " & TBLINT_HASH)
+        Console.WriteLine(str)
+        Console.WriteLine(TBLINT_HASH)
+        Console.WriteLine("Answer: " & str <> TBLINT_HASH)
+
+        If str.Length <= 5 Then Log_Report("[LENGTH 5 AND BELOW] HASH is " & str)
 
         If str = "" Then Return True
         If str <> TBLINT_HASH Then

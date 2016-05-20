@@ -31,6 +31,7 @@ Public Class frmPawnItem
     Const HAS_ADVINT As Boolean = True
     Const PAUSE_OR As Boolean = False
     Const OR_COPIES As Integer = 2
+    Const MONTH_COMPUTE As Integer = 4
 
     Private isEarlyRedeem As Boolean = False
     Private earlyDays As Integer = 0
@@ -1019,6 +1020,17 @@ Public Class frmPawnItem
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
 
+        ' Add Monthly Computation
+        Dim strCompute As String
+        Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
+        PawnItem.LoadTicket(pt)
+        strCompute = "Renew: " & DisplayComputation(PawnItem, "Renew")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRenewCompute", strCompute)
+        strCompute = "Redeem: " & DisplayComputation(PawnItem, "Redeem")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRedeemCompute", strCompute)
+
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
                 Dim tmpPara As New ReportParameter
@@ -1151,6 +1163,15 @@ Public Class frmPawnItem
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtOLDPT", "PT# " & PawnItem.OldTicket.ToString("000000"))
         addParameters.Add("txtUsername", POSuser.FullName)
+
+        ' Add Monthly Computation
+        Dim strCompute As String
+        strCompute = "Renew: " & DisplayComputation(PawnItem, "Renew")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRenewCompute", strCompute)
+        strCompute = "Redeem: " & DisplayComputation(PawnItem, "Redeem")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRedeemCompute", strCompute)
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1532,4 +1553,25 @@ Public Class frmPawnItem
             End If
         End If
     End Sub
+
+    Private Function DisplayComputation(ByVal PTInfo As PawnTicket, ByVal type As String) As String
+        Dim disp As String
+
+        disp = ""
+        Dim dc As PawningDalton, monthCnt As Integer = 30
+        For x As Integer = 0 To MONTH_COMPUTE - 1
+            dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, CurrentDate.AddDays(monthCnt), PTInfo.MaturityDate, 1, PTInfo.INT_Checksum)
+            Select Case type
+                Case "Renew"
+                    disp &= String.Format("{0:#,##0.00} / ", dc.RenewDue)
+                Case "Redeem"
+                    disp &= String.Format("{0:#,##0.00} / ", dc.RedeemDue)
+                Case Else
+                    Return "INVALID TYPE"
+            End Select
+            monthCnt += 30
+        Next
+
+        Return disp
+    End Function
 End Class
