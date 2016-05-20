@@ -293,7 +293,7 @@
 
             ds = LoadSQL(mySql)
             If ds.Tables(0).Rows.Count = 0 Then
-                Log_Report("Cannot find Hash from TBLINT_History")
+                Log_Report("Cannot find Hash from TBLINT_History HASH: " & str)
                 MsgBox("INTEREST CANNOT BE FOUND" + vbCrLf + "Please contact the IT Department", MsgBoxStyle.Critical, _
                        "ERROR [COMPUTE]")
             End If
