@@ -4,6 +4,7 @@ Version 1.2
  - Fix Change Rate for New Loans only
  - Add Monthly Report - Transaction Count
  - Add Pawner Summary List
+ - Add Monthly Computation
  - Include Changelog on Menu
  - Patch Up Database
 
