@@ -285,9 +285,8 @@
         Console.WriteLine(TBLINT_HASH)
         Console.WriteLine("Answer: " & str <> TBLINT_HASH)
 
-        If str.Length <= 5 Then Log_Report("[LENGTH 5 AND BELOW] HASH is " & str)
-
         If str = "" Then Return True
+        If str.Length <= 5 Then Log_Report("[LENGTH 5 AND BELOW] HASH is " & str)
         If str <> TBLINT_HASH Then
 
             mySql = "SELECT * FROM TBLINT_HISTORY WHERE "

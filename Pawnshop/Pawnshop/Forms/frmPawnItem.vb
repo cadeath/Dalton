@@ -1546,6 +1546,7 @@ Public Class frmPawnItem
                         .Item("PENALTY") = dr("PENALTY")
                         .Item("REMARKS") = dr("REMARKS")
                         .Item("CHECKSUM") = TBLINT_HASH
+                        .Item("UPDATE_DATE") = Now
                     End With
                     ds1.Tables(fillData).Rows.Add(dsNewRow)
                 Next
