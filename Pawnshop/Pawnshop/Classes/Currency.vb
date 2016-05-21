@@ -1,7 +1,8 @@
-﻿
+﻿Imports System.Data.Odbc
 Public Class Currency
     Private fillData As String = "TBLCURRENCY"
     Private mySql As String, ds As DataSet
+
 #Region "Properties and Variables"
     Private _id As Integer
     Public Property CURRENCYID As Integer
@@ -30,7 +31,7 @@ Public Class Currency
             Return _SYMBOL
         End Get
     End Property
-    Private _DENOMINATION As String = String.Empty
+    Private _DENOMINATION As String
     Public Property DENOMINATION As String
         Get
             Return _DENOMINATION

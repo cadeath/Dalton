@@ -41,13 +41,6 @@ Partial Class frmmoneyexchange
         Me.txtSerial = New System.Windows.Forms.TextBox()
         Me.TxtName = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnsave = New System.Windows.Forms.Button()
@@ -64,6 +57,7 @@ Partial Class frmmoneyexchange
         Me.txtCurrency1 = New System.Windows.Forms.TextBox()
         Me.btnSearch1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnCalculate = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -264,49 +258,6 @@ Partial Class frmmoneyexchange
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Name:"
         '
-        'ListView1
-        '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.HideSelection = False
-        Me.ListView1.Location = New System.Drawing.Point(19, 238)
-        Me.ListView1.MultiSelect = False
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(796, 90)
-        Me.ListView1.TabIndex = 4
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Text = "Name"
-        Me.ColumnHeader1.Width = 200
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Text = "Currency"
-        Me.ColumnHeader2.Width = 200
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Text = "Symbol"
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Rate"
-        Me.ColumnHeader4.Width = 76
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Amount"
-        Me.ColumnHeader5.Width = 102
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Total Amount"
-        Me.ColumnHeader6.Width = 157
-        '
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -352,6 +303,7 @@ Partial Class frmmoneyexchange
         'GroupBox4
         '
         Me.GroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.GroupBox4.Controls.Add(Me.btnCalculate)
         Me.GroupBox4.Controls.Add(Me.Label10)
         Me.GroupBox4.Controls.Add(Me.txtSymbol1)
         Me.GroupBox4.Controls.Add(Me.Label9)
@@ -435,7 +387,6 @@ Partial Class frmmoneyexchange
         Me.txtRate.Name = "txtRate"
         Me.txtRate.Size = New System.Drawing.Size(179, 26)
         Me.txtRate.TabIndex = 3
-        Me.txtRate.Text = "48"
         '
         'txtCurrency1
         '
@@ -462,14 +413,22 @@ Partial Class frmmoneyexchange
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Currency"
         '
+        'btnCalculate
+        '
+        Me.btnCalculate.Location = New System.Drawing.Point(278, 183)
+        Me.btnCalculate.Name = "btnCalculate"
+        Me.btnCalculate.Size = New System.Drawing.Size(110, 27)
+        Me.btnCalculate.TabIndex = 11
+        Me.btnCalculate.Text = "Calculate"
+        Me.btnCalculate.UseVisualStyleBackColor = True
+        '
         'frmmoneyexchange
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(840, 336)
+        Me.ClientSize = New System.Drawing.Size(840, 240)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
@@ -500,7 +459,6 @@ Partial Class frmmoneyexchange
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txRate As System.Windows.Forms.TextBox
     Friend WithEvents label As System.Windows.Forms.Label
-    Friend WithEvents ListView1 As System.Windows.Forms.ListView
     Friend WithEvents txtSymbol As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -508,12 +466,6 @@ Partial Class frmmoneyexchange
     Friend WithEvents btnsave As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents symbol As System.Windows.Forms.Label
     Friend WithEvents txtDenomination As System.Windows.Forms.TextBox
     Friend WithEvents txtCurrency As System.Windows.Forms.TextBox
@@ -532,4 +484,5 @@ Partial Class frmmoneyexchange
     Friend WithEvents txtSymbol1 As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtSerial As System.Windows.Forms.TextBox
+    Friend WithEvents btnCalculate As System.Windows.Forms.Button
 End Class

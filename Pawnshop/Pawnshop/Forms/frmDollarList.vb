@@ -151,6 +151,7 @@
 
         frmDollorSimple.Show()
         frmDollorSimple.LoadDollar(tmpLoad)
+       
     End Sub
 
 End Class

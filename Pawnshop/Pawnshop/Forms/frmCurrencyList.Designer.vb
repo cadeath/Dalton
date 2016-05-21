@@ -27,14 +27,13 @@ Partial Class frmCurrencyList
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lvCurrency = New System.Windows.Forms.ListView()
-        Me.btnSelect = New System.Windows.Forms.Button()
-        Me.btnView = New System.Windows.Forms.Button()
-        Me.btnClose = New System.Windows.Forms.Button()
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnSelect = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -61,6 +60,8 @@ Partial Class frmCurrencyList
         '
         'txtSearch
         '
+        Me.txtSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.txtSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         Me.txtSearch.Location = New System.Drawing.Point(77, 18)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(395, 26)
@@ -88,11 +89,35 @@ Partial Class frmCurrencyList
         Me.lvCurrency.UseCompatibleStateImageBehavior = False
         Me.lvCurrency.View = System.Windows.Forms.View.Details
         '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "CURRENCYID"
+        Me.ColumnHeader1.Width = 93
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "CURRENCY"
+        Me.ColumnHeader2.Width = 272
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "SYMBOL"
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "DENOMINATION"
+        Me.ColumnHeader4.Width = 94
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "RATE"
+        Me.ColumnHeader5.Width = 325
+        '
         'btnSelect
         '
         Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelect.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSelect.Location = New System.Drawing.Point(346, 258)
+        Me.btnSelect.Location = New System.Drawing.Point(433, 264)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(75, 31)
         Me.btnSelect.TabIndex = 9
@@ -100,64 +125,34 @@ Partial Class frmCurrencyList
         Me.btnSelect.UseVisualStyleBackColor = True
         Me.btnSelect.Visible = False
         '
-        'btnView
-        '
-        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnView.Location = New System.Drawing.Point(427, 258)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 31)
-        Me.btnView.TabIndex = 8
-        Me.btnView.Text = "&View"
-        Me.btnView.UseVisualStyleBackColor = True
-        '
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.Location = New System.Drawing.Point(508, 258)
+        Me.btnClose.Location = New System.Drawing.Point(514, 264)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 31)
         Me.btnClose.TabIndex = 7
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "RATE"
-        Me.ColumnHeader5.Width = 325
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "DENOMINATION"
-        Me.ColumnHeader4.Width = 94
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Text = "SYMBOL"
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Text = "CURRENCY"
-        Me.ColumnHeader2.Width = 272
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Text = "CURRENCYID"
-        Me.ColumnHeader1.Width = 93
-        '
         'frmCurrencyList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(583, 293)
+        Me.ClientSize = New System.Drawing.Size(589, 299)
         Me.Controls.Add(Me.btnSelect)
-        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.lvCurrency)
         Me.Controls.Add(Me.GroupBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(599, 331)
+        Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(599, 331)
         Me.Name = "frmCurrencyList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmCurrencyList"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -170,7 +165,6 @@ Partial Class frmCurrencyList
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lvCurrency As System.Windows.Forms.ListView
     Friend WithEvents btnSelect As System.Windows.Forms.Button
-    Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
