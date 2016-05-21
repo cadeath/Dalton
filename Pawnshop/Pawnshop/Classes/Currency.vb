@@ -100,15 +100,72 @@ Public Class Currency
     Public Sub LoadCurrencyByRow(ByVal dr As DataRow)
         ByRow(dr)
     End Sub
+    Public Sub SaveCurrency()
+        database.SaveEntry(CreateDataSetCurrency)
+    End Sub
+    Public Sub ModifyCurrency()
+        Dim mySql As String = "SELECT RATE FROM TBLCURRENCY WHERE CURRENCYID = " & _id
+        Dim ds As DataSet = LoadSQL(mySql, "TBLCURRENCY")
 
-    Public Function LastIDNumber() As Single
+        With ds.Tables(0).Rows(0)
+            .Item("CURRENCY") = _CURRENCY
+            .Item("SYMBOL") = _SYMBOL
+            .Item("DENOMINATION") = _DENOMINATION
+            .Item("RATE") = _RATE
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
+    Private Sub PureModify()
+        dbOpen()
+
+        Dim da As OdbcDataAdapter
+        Dim ds As New DataSet, mySql As String, fillData As String = "Modify"
+
+        mySql = "SELECT * FROM TBLCURRENCY WHERE CURRENCYID = " & _id
+        ds.Clear()
+
+        da = New OdbcDataAdapter(mySql, con)
+        da.Fill(ds, fillData)
+
+        Console.WriteLine("Result: " & ds.Tables(fillData).Rows.Count)
+
+        With ds.Tables(fillData).Rows(0)
+            .Item("CURRENCY") = _CURRENCY
+            .Item("SYMBOL") = _SYMBOL
+            .Item("DENOMINATION") = _DENOMINATION
+            .Item("RATE") = _RATE
+        End With
+        da.Update(ds, fillData)
+
+        dbClose()
+    End Sub
+    Private Function CreateDataSetCurrency() As DataSet
+        Dim ds As DataSet
+
         Dim mySql As String = "SELECT * FROM TBLCURRENCY"
-        Dim ds As DataSet = LoadSQL(mySql)
+        ds = LoadSQL(mySql, fillData)
 
-        If ds.Tables(0).Rows.Count = 0 Then
-            Return 0
-        End If
-        Return ds.Tables(0).Rows(0).Item("CURRENCYID")
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("CURRENCY") = _CURRENCY
+            .Item("SYMBOL") = _SYMBOL
+            .Item("DENOMINATION") = _DENOMINATION
+            .Item("RATE") = _RATE
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        Return ds
+    End Function
+    Public Function LoadLastEntrycurrency() As Currency
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM " & fillData & " ORDER BY CURRENCYID ASC"
+        ds = LoadSQL(mySql)
+
+        Dim LastRow As Integer = ds.Tables(0).Rows.Count
+        LoadCurrencydata(ds.Tables(0).Rows(LastRow - 1).Item("CURRENCYID"))
+
+        Return Me
     End Function
 
     Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String

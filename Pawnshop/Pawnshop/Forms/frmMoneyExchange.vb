@@ -1,20 +1,25 @@
 ﻿Imports System.Data.Odbc
 
 Public Class frmmoneyexchange
+    Friend SelectedCurrency As Currency 'Holds Currency
+    Private isNew As Boolean = True
     Dim total As Integer
     Private MoneyExchange As Currency
+
+    Dim fromOtherForm As Boolean = False
+    Dim frmOrig As formSwitch.FormName
 
     Private dollarClient As Client
     Private dollarEntry As DollarTransaction
 
-    Private strRate As String = DollarRate
+    Private strRate As String = DollarAllRate
     Private MODULE_NAME As String = "DOLLAR"
     Private fillData As String = "TBLCURRENCY"
     Private Sub btnsearch_Click(sender As System.Object, e As System.EventArgs) Handles btnsearch.Click
         frmClient.SearchSelect(TxtName.Text, FormName.frmMoneyExchange)
         frmClient.Show()
     End Sub
-  
+
     Private Sub ClearField()
         TxtName.Text = ""
         txtTotal.Text = ""
@@ -53,12 +58,13 @@ Public Class frmmoneyexchange
     Private Sub moneyexchange_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         ClearField()
         txtCurrency.Focus()
+        txtRate.Text = strRate
     End Sub
     Private Function isValid() As Boolean
         If Not IsNumeric(txtRate.Text) Then txtRate.Focus() : Return False
         If txtTotal.Text = "" Then txtTotal.Focus() : Return False
         If txtSerial.Text = "" Then txtSerial.Focus() : Return False
-        If dollarClient Is Nothing Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : txtName.Focus() : Return False
+        If dollarClient Is Nothing Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : TxtName.Focus() : Return False
         Return True
     End Function
     Private Sub cboCurrency_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCurrency.KeyDown
@@ -72,6 +78,7 @@ Public Class frmmoneyexchange
     End Sub
 
     Private Sub btnsave_Click(sender As System.Object, e As System.EventArgs) Handles btnsave.Click
+        If Not isValid() Then Exit Sub
         If txtCurrency1.Text = "" Then Exit Sub
         If txtRate.Text = "" Then Exit Sub
         If TxtName.Text = "" Then
@@ -103,8 +110,27 @@ Public Class frmmoneyexchange
             MsgBox("Transaction Saved", MsgBoxStyle.Information)
             ClearField()
         End If
+
+        '-------------------------------------------------------------------------------------
+        If btnsave.Text = "&Save" Then
+            Dim tmpCurrency As New Currency
+            With tmpCurrency
+                '.CURRENCY = txtCurrency1.Text
+                '.SYMBOL = txtSymbol1.Text
+                '.DENOMINATION = txtDenomination1.Text
+                .RATE = CDbl(strRate)
+                If isNew Then
+                    .ModifyCurrency()
+                    tmpCurrency.LoadLastEntrycurrency()
+                Else
+                    Exit Sub
+                End If
+            End With
+            Exit Sub
+        End If
     End Sub
-  
+   
+
     Private Sub TxtName_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TxtName.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz.-1234567890 "
@@ -193,9 +219,37 @@ Public Class frmmoneyexchange
         ComputeTotalAmount()
     End Sub
     Friend Sub LoadClient(ByVal cl As Client)
-        txtName.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", ", " & cl.Suffix, ""), cl.FirstName, cl.LastName)
+        TxtName.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", ", " & cl.Suffix, ""), cl.FirstName, cl.LastName)
 
         dollarClient = cl
-        btnSave.Focus()
+        btnsave.Focus()
+    End Sub
+
+    Private Sub txtCurrency1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtCurrency1.TextChanged
+        con.Open()
+        Dim dt As New DataTable
+        Dim ds As New DataSet
+        ds.Tables.Add(dt)
+        Dim da As New OdbcDataAdapter("SELECT CURRENCY FROM TBLCURRENCY", con)
+        da.Fill(dt)
+        Dim r As DataRow
+        txtCurrency1.AutoCompleteCustomSource.Clear()
+        For Each r In dt.Rows
+            txtCurrency1.AutoCompleteCustomSource.Add(r.Item(0).ToString)
+        Next
+        con.Close()
+    End Sub
+
+
+    Private Sub txtCurrency1_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCurrency1.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch1.PerformClick()
+        End If
+    End Sub
+
+    Private Sub TxtName_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles TxtName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnsearch.PerformClick()
+        End If
     End Sub
 End Class

@@ -46,6 +46,7 @@ Partial Class frmmoneyexchange
         Me.btnsave = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnCalculate = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtSymbol1 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -57,7 +58,6 @@ Partial Class frmmoneyexchange
         Me.txtCurrency1 = New System.Windows.Forms.TextBox()
         Me.btnSearch1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnCalculate = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -287,7 +287,7 @@ Partial Class frmmoneyexchange
         Me.btnsave.Name = "btnsave"
         Me.btnsave.Size = New System.Drawing.Size(113, 36)
         Me.btnsave.TabIndex = 1
-        Me.btnsave.Text = "Save"
+        Me.btnsave.Text = "&Save"
         Me.btnsave.UseVisualStyleBackColor = True
         '
         'Button1
@@ -321,6 +321,15 @@ Partial Class frmmoneyexchange
         Me.GroupBox4.Size = New System.Drawing.Size(407, 220)
         Me.GroupBox4.TabIndex = 6
         Me.GroupBox4.TabStop = False
+        '
+        'btnCalculate
+        '
+        Me.btnCalculate.Location = New System.Drawing.Point(278, 183)
+        Me.btnCalculate.Name = "btnCalculate"
+        Me.btnCalculate.Size = New System.Drawing.Size(110, 27)
+        Me.btnCalculate.TabIndex = 11
+        Me.btnCalculate.Text = "Calculate"
+        Me.btnCalculate.UseVisualStyleBackColor = True
         '
         'Label10
         '
@@ -412,15 +421,6 @@ Partial Class frmmoneyexchange
         Me.Label6.Size = New System.Drawing.Size(72, 20)
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Currency"
-        '
-        'btnCalculate
-        '
-        Me.btnCalculate.Location = New System.Drawing.Point(278, 183)
-        Me.btnCalculate.Name = "btnCalculate"
-        Me.btnCalculate.Size = New System.Drawing.Size(110, 27)
-        Me.btnCalculate.TabIndex = 11
-        Me.btnCalculate.Text = "Calculate"
-        Me.btnCalculate.UseVisualStyleBackColor = True
         '
         'frmmoneyexchange
         '

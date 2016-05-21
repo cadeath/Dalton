@@ -46,9 +46,19 @@ Public Class frmCurrencyList
         Dim mySql As String = "SELECT * FROM TBLCURRENCY WHERE "
         If IsNumeric(txtSearch.Text) Then
             mySql &= "CURRENCYID = " & txtSearch.Text
-        Else : mySql &= String.Format("CURRENCY LIKE('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("SYMBOL LIKE ('%{0}%') OR ", txtSearch.Text)
+
+        Else : mySql &= String.Format("UPPER (CURRENCY) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
+            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", txtSearch.Text)
         End If
+        Console.WriteLine("SQL: " & mySql)
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        If MaxRow <= 0 Then
+            MsgBox("No result found", MsgBoxStyle.Critical)
+            txtSearch.SelectAll()
+            Exit Sub
+        End If
+        MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Currency")
         LoadActivecurrency(mySql)
     End Sub
 
@@ -95,5 +105,11 @@ Public Class frmCurrencyList
 
         formSwitch.ReloadFormFromSearch1(frmOrig, cl)
         Me.Close()
+    End Sub
+
+    Private Sub txtSearch_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 End Class

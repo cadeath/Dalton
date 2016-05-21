@@ -35,6 +35,7 @@ Module mod_system
     Friend InitialBal As Double = GetOption("CurrentBalance")
     Friend RepDep As Double = 0
     Friend DollarRate As Double = 48
+    Friend DollarAllRate As Double
     Friend RequirementLevel As Integer = 1
     Friend dailyID As Integer = 1
 
