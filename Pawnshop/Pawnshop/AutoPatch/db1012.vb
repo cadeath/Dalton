@@ -51,8 +51,8 @@
         ADD_VIEW &= vbCrLf & "  Status = 'A';"
 
         Try
-            RunCommand(ADD_AMOUNT)
-            RunCommand(ADD_USERID)
+            'RunCommand(ADD_AMOUNT)
+            'RunCommand(ADD_USERID)
 
             RunCommand(REMOVE_VIEW)
             RunCommand(ADD_VIEW)

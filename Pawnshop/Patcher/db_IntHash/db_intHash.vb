@@ -7,8 +7,12 @@
         Dim INT_CHECK As String = _
             "ALTER TABLE TBLPAWN ADD INT_CHECKSUM VARCHAR(100);"
 
-        RunCommand(INT_CHECK)
-        SystemUpdate("INT_CHECKSUM INCLUDED")
+        Try
+            RunCommand(INT_CHECK)
+            SystemUpdate("INT_CHECKSUM INCLUDED")
+        Catch ex As Exception
+            SystemUpdate("INT_CHECKSUM DONE")
+        End Try
 
         ' HASH table TBLINT
         Dim INT_HASH As String, ds As DataSet
@@ -24,15 +28,21 @@
 
         frmMain.pb_load.Maximum = ds.Tables(0).Rows.Count
         frmMain.pb_load.Value = 0
-        For Each dr As DataRow In ds.Tables(fillData).Rows
-            dr("INT_CHECKSUM") = INT_HASH
+        If ds.Tables(0).Rows.Count > 0 Then
+            For Each dr As DataRow In ds.Tables(fillData).Rows
+                dr("INT_CHECKSUM") = INT_HASH
 
-            frmMain.AddProgress()
-        Next
-        mod_system.SaveEntry(ds, False)
+                frmMain.AddProgress()
+            Next
+            mod_system.SaveEntry(ds, False)
+        End If
 
-        Do_IntHistory() 'Update Database - INTEREST HISTORY
-        Do_HitManagement() 'Update Database - HIT MANAGEMENT
+        Try
+            Do_IntHistory() 'Update Database - INTEREST HISTORY
+            Do_HitManagement() 'Update Database - HIT MANAGEMENT
+        Catch ex As Exception
+            SystemUpdate("DONE INT_HISTORY AND HIT")
+        End Try
 
         Database_Update(VERSION)
         SystemUpdate("DATABASE UPDATED - V1.0.13")

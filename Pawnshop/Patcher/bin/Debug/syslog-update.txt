@@ -22,3 +22,75 @@ At line 1, column 15
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Patcher.mod_system.LoadSQL(String mySql, String tblName) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 102
+[05/21/2016 10:43:12] [ALTER TABLE TBLPAWN ADD INT_CHECKSUM VARCHAR(100);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_FIELDS failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+Problematic key value is ("RDB$FIELD_NAME" = 'INT_CHECKSUM', "RDB$RELATION_NAME" = 'TBLPAWN')
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Patcher.mod_system.RunCommand(String sql) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 61
+[05/21/2016 10:43:29] [ALTER TABLE TBLPAWN ADD INT_CHECKSUM VARCHAR(100);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_FIELDS failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+Problematic key value is ("RDB$FIELD_NAME" = 'INT_CHECKSUM', "RDB$RELATION_NAME" = 'TBLPAWN')
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Patcher.mod_system.RunCommand(String sql) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 61
+[05/21/2016 10:46:54] [ALTER TABLE TBLPAWN ADD INT_CHECKSUM VARCHAR(100);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_FIELDS failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+Problematic key value is ("RDB$FIELD_NAME" = 'INT_CHECKSUM', "RDB$RELATION_NAME" = 'TBLPAWN')
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Patcher.mod_system.RunCommand(String sql) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 61
+[05/21/2016 10:46:55] [CREATE TABLE TBLINT_HISTORY ( 
+  INTID BIGINT NOT NULL,
+  DAYFROM INTEGER DEFAULT '0' NOT NULL,
+  DAYTO SMALLINT DEFAULT '0' NOT NULL,
+  ITEMTYPE VARCHAR(3) DEFAULT '' NOT NULL,
+  INTEREST DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,
+  PENALTY DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,
+  REMARKS VARCHAR(100),
+  CHECKSUM VARCHAR(50) DEFAULT '' NOT NULL);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+Table TBLINT_HISTORY already exists
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Patcher.mod_system.RunCommand(String sql) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 61
+[05/21/2016 10:46:57] [ALTER TABLE TBLINT_HISTORY ADD PRIMARY KEY (INTID);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_CONSTRAINTS failed
+action cancelled by trigger (3) to preserve data integrity
+Attempt to define a second PRIMARY KEY for the same table
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Patcher.mod_system.RunCommand(String sql) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 61
+[05/21/2016 10:46:57] [CREATE TABLE TBLHIT ( 
+  HITID BIGINT NOT NULL,
+  HIT_DATE DATE NOT NULL,
+  PAWNID BIGINT NOT NULL,
+  PAWNER VARCHAR(255) NOT NULL,
+  PT BIGINT NOT NULL);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+Table TBLHIT already exists
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Patcher.mod_system.RunCommand(String sql) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 61
+[05/21/2016 10:46:58] [ALTER TABLE TBLHIT ADD PRIMARY KEY (HITID);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_CONSTRAINTS failed
+action cancelled by trigger (3) to preserve data integrity
+Attempt to define a second PRIMARY KEY for the same table
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Patcher.mod_system.RunCommand(String sql) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Patcher\mod_system.vb:line 61
