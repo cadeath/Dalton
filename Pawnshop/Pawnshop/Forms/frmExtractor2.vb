@@ -1,56 +1,15 @@
 ﻿Imports Microsoft.Office.Interop
-
-Public Class frmExtractor
+Public Class frmExtractor2
     Enum ExtractType As Integer
         Expiry = 0
         JournalEntry = 1
         MoneyTransferBSP = 2
     End Enum
     Friend FormType As ExtractType = ExtractType.Expiry
+    Private Sub frmExtractor2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-    Private Sub txtPath_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPath.DoubleClick
-        sfdPath.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        Dim result As DialogResult = sfdPath.ShowDialog
-
-        If Not result = Windows.Forms.DialogResult.OK Then
-            Return
-        End If
-        txtPath.Text = sfdPath.FileName
     End Sub
 
-    Private Sub frmExtractor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        FormInit()
-        'Load Path
-        txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-    End Sub
-    ''' <summary>
-    ''' this method will select what you want to extract.
-    ''' </summary>
-    ''' <remarks></remarks>
-    Private Sub FormInit()
-        Dim selectedDate As Date = MonCalendar.SelectionStart
-
-        Select Case FormType
-            Case ExtractType.Expiry
-                Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Expiry"
-            Case ExtractType.JournalEntry
-                Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
-                Me.Text &= " - Journal Entry"
-            Case ExtractType.MoneyTransferBSP
-                Console.WriteLine("Money Transfer BSP Activated")
-                sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
-                Me.Text &= " - BSP Report"
-        End Select
-    End Sub
-    ''' <summary>
-    ''' This button will extract the desired extract type.
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
 
@@ -68,20 +27,14 @@ Public Class frmExtractor
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
             ExtractJournalEntry()
-            extractj
-
         End If
         btnExtract.Enabled = True
     End Sub
-    ''' <summary>
-    ''' This method will extract journal entry and load the excel.
-    ''' </summary>
-    ''' <remarks></remarks>
     Private Sub ExtractJournalEntry()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SUM(DEBIT) AS Debit, SUM(CREDIT) AS Credit " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE = 'Record New Loans'", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
@@ -111,25 +64,23 @@ Public Class frmExtractor
         Dim recCnt As Single = 0
         While recCnt < MaxEntries
             With ds.Tables(0).Rows(recCnt)
+
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
-                'oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
-                'oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
-                'oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 5) = .Item("Debit") 'Debit
+                oSheet.Cells(lineNum + 3, 6) = .Item("Credit") 'Credit
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
-                oSheet.Cells(lineNum + 3, 4) = "_SYS00000000088"
-                oSheet.Cells(lineNum + 3, 5) = .Item("Debit")
-                oSheet.Cells(lineNum + 4, 4) = "_SYS00000001039"
-                oSheet.Cells(lineNum + 4, 6) = .Item("Credit")
 
 
-                'If IsDBNull(.Item("CCNAME")) Then
-                '    lineNum += 1
-                'Else
-                '    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
-                'End If
+                If IsDBNull(.Item("CCNAME")) Then
+                    lineNum += 1
+                Else
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                End If
+
                 recCnt += 1
             End With
 
@@ -170,97 +121,6 @@ Public Class frmExtractor
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
-    Private Sub ExtractJournalEntry2()
-        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SUM(DEBIT) AS Debit, SUM(CREDIT) AS Credit " & _
-        "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE = 'Renew'", sd.ToShortDateString)
-
-        Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
-        MaxEntries = ds.Tables(0).Rows.Count
-        Console.WriteLine("Executing SQL:")
-        Console.WriteLine(mySql)
-        Console.WriteLine("Entries: " & MaxEntries)
-
-        'Load Excel
-        Dim oXL As New Excel.Application
-        Dim oWB As Excel.Workbook
-        Dim oSheet As Excel.Worksheet
-
-        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/JournalEntries.xls")
-        oSheet = oWB.Worksheets(2)
-        pbLoading.Maximum = MaxEntries
-        pbLoading.Value = 0
-
-        Dim recCnt As Single = 0
-        While recCnt < MaxEntries
-            With ds.Tables(0).Rows(recCnt)
-                oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
-                oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
-                'oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
-                'oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
-                'oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
-                oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
-                oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
-                oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
-                oSheet.Cells(lineNum + 5, 4) = "_SYS00000000088"
-                oSheet.Cells(lineNum + 5, 5) = .Item("Debit")
-                oSheet.Cells(lineNum + 6, 4) = "_SYS00000001039"
-                oSheet.Cells(lineNum + 6, 6) = .Item("Credit")
-
-
-                'If IsDBNull(.Item("CCNAME")) Then
-                '    lineNum += 1
-                'Else
-                '    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
-                'End If
-                recCnt += 1
-            End With
-
-            AddProgress()
-            Application.DoEvents()
-        End While
-
-        ' Dim verified_url As String
-
-        Select Case FormType
-            Case ExtractType.Expiry
-                Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Expiry"
-            Case ExtractType.JournalEntry
-                Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
-                Me.Text &= " - Journal Entry"
-        End Select
-
-        'Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
-        'If txtPath.Text.Split(".").Count > 1 Then
-        '    If txtPath.Text.Split(".")(1).Length = 3 Then
-        '        verified_url = txtPath.Text
-        '    Else
-        '        verified_url = txtPath.Text & "/" & sfdPath.FileName
-        '    End If
-        'Else
-        '    verified_url = txtPath.Text & "/" & sfdPath.FileName
-        'End If
-        oWB.Close(SaveChanges:=True)
-
-        ' oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        'oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
-    End Sub
-   
-    ''' <summary>
-    ''' This method will select between date range.
-    ''' search the items by date.
-    ''' </summary>
-    ''' <remarks></remarks>
-
     Private Sub MoneyTransferBSP()
         Dim st As Date = GetFirstDate(MonCalendar.SelectionStart)
         Dim en As Date = GetLastDate(MonCalendar.SelectionStart)
@@ -336,10 +196,6 @@ Public Class frmExtractor
 
         MsgBox("Data Saved", MsgBoxStyle.Information)
     End Sub
-    ''' <summary>
-    ''' This method will extract the expiry date and then load the excel
-    ''' </summary>
-    ''' <remarks></remarks>
     Private Sub ExtractExpiry()
         Dim sd As Date = MonCalendar.SelectionStart
         Dim ed As Date = MonCalendar.SelectionEnd
@@ -435,7 +291,7 @@ Public Class frmExtractor
             verified_url = txtPath.Text & "/" & sfdPath.FileName
         End If
 
-        
+
         oWB.SaveAs(verified_url)
         oSheet = Nothing
         oWB.Close(False)
@@ -460,4 +316,14 @@ Public Class frmExtractor
 
         Return KeyGen.Generate()
     End Function
+
+    Private Sub txtPath_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPath.DoubleClick
+        sfdPath.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim result As DialogResult = sfdPath.ShowDialog
+
+        If Not result = Windows.Forms.DialogResult.OK Then
+            Return
+        End If
+        txtPath.Text = sfdPath.FileName
+    End Sub
 End Class
