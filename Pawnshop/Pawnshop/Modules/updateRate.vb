@@ -3,6 +3,9 @@
     Private isFailed As Boolean = False
     Private fillData As String, mySql As String
 
+    ' TODO: ELLIE
+    ' from the RATE file, the affected table will be 'DELETE ALL ROW'
+    ' and the RATE file will be save in the affected table.
     Sub do_RateUpdate(url As String, Optional dbSrc As String = "")
         Dim fs As New System.IO.FileStream(url, IO.FileMode.Open)
         Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
