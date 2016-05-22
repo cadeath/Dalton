@@ -668,6 +668,14 @@ Public Class frmPawnItem
         PrintButton(True)
     End Sub
 
+    Private Function isRenewable(ByVal pt As PawnTicket) As Boolean
+        Dim mySql As String = "SELECT * FROM tblClass WHERE "
+        mySql &= String.Format("CLASSID = {0}", pt.CategoryID)
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return IIf(ds.Tables(0).Rows(0).Item("RENEWABLE"), True, False)
+    End Function
+
     Private Sub RenewDisabled(catID As String)
         If Not (PawnItem.Status = "L" Or PawnItem.Status = "R") Then Exit Sub
 
@@ -1560,13 +1568,31 @@ Public Class frmPawnItem
 
         disp = ""
         Dim dc As PawningDalton, monthCnt As Integer = 30
+
+        If Not isRenewable(PTInfo) And type = "Renew" Then Return "NON RENEWABLE"
+
         For x As Integer = 0 To MONTH_COMPUTE - 1
             dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, CurrentDate.AddDays(monthCnt), PTInfo.MaturityDate, 1, PTInfo.INT_Checksum)
+
+            Dim prefix As String = ""
+            Select Case x
+                Case 0
+                    prefix = "AdvInt "
+                Case 1
+                    prefix = "2ndMon "
+                Case 2
+                    prefix = "3rdMon "
+                Case 3
+                    prefix = "4thMon "
+                Case 4
+                    prefix = "5thMon "
+            End Select
+
             Select Case type
                 Case "Renew"
-                    disp &= String.Format("{0:#,##0.00} / ", dc.RenewDue)
+                    disp &= String.Format("{1}{0:#,##0.00} / ", dc.RenewDue, prefix)
                 Case "Redeem"
-                    disp &= String.Format("{0:#,##0.00} / ", dc.RedeemDue)
+                    disp &= String.Format("{1}{0:#,##0.00} / ", dc.RedeemDue, prefix)
                 Case Else
                     Return "INVALID TYPE"
             End Select
