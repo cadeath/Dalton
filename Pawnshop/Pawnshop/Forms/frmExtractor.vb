@@ -67,7 +67,7 @@ Public Class frmExtractor
             btnExtract.Enabled = False
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
-            ExtractJournalEntry()
+            'ExtractJournalEntry()
             ExtractJournalEntry2()
 
         End If
@@ -79,9 +79,9 @@ Public Class frmExtractor
     ''' <remarks></remarks>
     Private Sub ExtractJournalEntry()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SUM(DEBIT) AS Debit, SUM(CREDIT) AS Credit " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE = 'NEW LOANS'", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
@@ -111,25 +111,23 @@ Public Class frmExtractor
         Dim recCnt As Single = 0
         While recCnt < MaxEntries
             With ds.Tables(0).Rows(recCnt)
+
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
-                'oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
-                'oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
-                'oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 5) = .Item("Debit") 'Debit
+                oSheet.Cells(lineNum + 3, 6) = .Item("Credit") 'Credit
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
-                oSheet.Cells(lineNum + 3, 4) = "_SYS00000000088"
-                oSheet.Cells(lineNum + 3, 5) = .Item("Debit")
-                oSheet.Cells(lineNum + 4, 4) = "_SYS00000001039"
-                oSheet.Cells(lineNum + 4, 6) = .Item("Credit")
 
 
-                'If IsDBNull(.Item("CCNAME")) Then
-                '    lineNum += 1
-                'Else
-                '    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
-                'End If
+                If IsDBNull(.Item("CCNAME")) Then
+                    lineNum += 1
+                Else
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                End If
+
                 recCnt += 1
             End With
 
@@ -172,9 +170,9 @@ Public Class frmExtractor
     End Sub
     Private Sub ExtractJournalEntry2()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SUM(DEBIT) AS Debit, SUM(CREDIT) AS Credit " & _
+        Dim mySql As String = "SELECT DISTINCT(TRANSTYPE), SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE = 'Renew'", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
@@ -204,31 +202,62 @@ Public Class frmExtractor
         Dim recCnt As Single = 0
         While recCnt < MaxEntries
             With ds.Tables(0).Rows(recCnt)
+
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
-                'oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
-                'oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
-                'oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 5) = .Item("Debit") 'Debit
+                oSheet.Cells(lineNum + 3, 6) = .Item("Credit") 'Credit
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
-                oSheet.Cells(lineNum + 5, 4) = "_SYS00000000088 - "
-                oSheet.Cells(lineNum + 5, 5) = .Item("Debit")
-                oSheet.Cells(lineNum + 6, 4) = "_SYS00000001039 -"
-                oSheet.Cells(lineNum + 6, 6) = .Item("Credit")
+                oSheet.Cells(lineNum + 3, 7) = .Item("TRANSTYPE")
 
+                If IsDBNull(.Item("CCNAME")) Then
+                    lineNum += 1
+                Else
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                End If
 
-                'If IsDBNull(.Item("CCNAME")) Then
-                '    lineNum += 1
-                'Else
-                '    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
-                'End If
                 recCnt += 1
             End With
 
             AddProgress()
             Application.DoEvents()
         End While
+
+        Dim verified_url As String
+
+        Select Case FormType
+            Case ExtractType.Expiry
+                Console.WriteLine("Expiry Type Activated")
+                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                Me.Text &= " - Expiry"
+            Case ExtractType.JournalEntry
+                Console.WriteLine("Journal Entry Type Activated")
+                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+                Me.Text &= " - Journal Entry"
+        End Select
+
+        Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
     ''' <summary>
     ''' This method will select between date range.
