@@ -39,7 +39,7 @@ Public Class PawnTicket
     Private _renewDue As Double
     Private _redeemDue As Double
     Private _status As String
-
+    Private _TransType As String
 #End Region
 
 #Region "Properties"
@@ -293,7 +293,6 @@ Public Class PawnTicket
             Return _serviceCharge
         End Get
     End Property
-
     Public Property RenewDue As Double
         Set(ByVal value As Double)
             _renewDue = value
@@ -338,7 +337,14 @@ Public Class PawnTicket
             _intHash = value
         End Set
     End Property
-
+    Public Property TransTypeS As String
+        Set(ByVal value As String)
+            _TransType = value
+        End Set
+        Get
+            Return _TransType
+        End Get
+    End Property
 #End Region
 
 #Region "Procedures and Functions"

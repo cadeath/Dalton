@@ -68,7 +68,7 @@ Public Class frmExtractor
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
             ExtractJournalEntry()
-            extractj
+            ExtractJournalEntry2()
 
         End If
         btnExtract.Enabled = True
@@ -81,7 +81,7 @@ Public Class frmExtractor
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim mySql As String = "SELECT SUM(DEBIT) AS Debit, SUM(CREDIT) AS Credit " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE = 'Record New Loans'", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE = 'NEW LOANS'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
@@ -188,6 +188,15 @@ Public Class frmExtractor
         Dim oSheet As Excel.Worksheet
 
         oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/JournalEntries.xls")
+        oSheet = oWB.Worksheets(1)
+
+        oSheet.Cells(3, 1).value = "1"
+        oSheet.Cells(3, 2).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 8).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 10).value = "tNO"
+        oSheet.Cells(3, 12).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 14).value = "tNO"
+
         oSheet = oWB.Worksheets(2)
         pbLoading.Maximum = MaxEntries
         pbLoading.Value = 0
@@ -203,9 +212,9 @@ Public Class frmExtractor
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
-                oSheet.Cells(lineNum + 5, 4) = "_SYS00000000088"
+                oSheet.Cells(lineNum + 5, 4) = "_SYS00000000088 - "
                 oSheet.Cells(lineNum + 5, 5) = .Item("Debit")
-                oSheet.Cells(lineNum + 6, 4) = "_SYS00000001039"
+                oSheet.Cells(lineNum + 6, 4) = "_SYS00000001039 -"
                 oSheet.Cells(lineNum + 6, 6) = .Item("Credit")
 
 
@@ -220,41 +229,7 @@ Public Class frmExtractor
             AddProgress()
             Application.DoEvents()
         End While
-
-        ' Dim verified_url As String
-
-        Select Case FormType
-            Case ExtractType.Expiry
-                Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Expiry"
-            Case ExtractType.JournalEntry
-                Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
-                Me.Text &= " - Journal Entry"
-        End Select
-
-        'Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
-        'If txtPath.Text.Split(".").Count > 1 Then
-        '    If txtPath.Text.Split(".")(1).Length = 3 Then
-        '        verified_url = txtPath.Text
-        '    Else
-        '        verified_url = txtPath.Text & "/" & sfdPath.FileName
-        '    End If
-        'Else
-        '    verified_url = txtPath.Text & "/" & sfdPath.FileName
-        'End If
-        oWB.Close(SaveChanges:=True)
-
-        ' oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        'oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
     End Sub
-   
     ''' <summary>
     ''' This method will select between date range.
     ''' search the items by date.

@@ -111,3 +111,36 @@ At line 2, column 7
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
+[05/23/2016 08:16:38] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
+[05/23/2016 08:35:10] SYSTEM PATCHED UP TO 1.2
+[05/23/2016 08:38:00] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 08:40:39] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 10:05:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 10:12:27] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 10:19:21] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 10:36:46] FAILED TO LOAD PAWN INFORMATION [DATAROW]
+System.InvalidCastException: Conversion from type 'DBNull' to type 'String' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToString(Object Value)
+   at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 575
+[05/23/2016 10:39:08] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 10:44:37] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 11:07:19] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 11:17:09] FAILED TO LOAD PAWN INFORMATION [DATAROW]
+System.InvalidCastException: Conversion from type 'DBNull' to type 'String' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToString(Object Value)
+   at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 575
+[05/23/2016 11:39:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 11:41:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 11:49:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 11:56:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 12:00:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 12:03:12] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:03:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:07:32] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:09:55] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:13:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:16:00] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:31:16] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:33:09] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:33:52] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/23/2016 13:51:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
