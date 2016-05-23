@@ -30,10 +30,11 @@ Partial Class frmCurrencyList
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -45,7 +46,7 @@ Partial Class frmCurrencyList
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(12, -4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(566, 54)
+        Me.GroupBox1.Size = New System.Drawing.Size(577, 54)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
@@ -78,13 +79,13 @@ Partial Class frmCurrencyList
         '
         'lvCurrency
         '
-        Me.lvCurrency.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvCurrency.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader5, Me.ColumnHeader4})
         Me.lvCurrency.FullRowSelect = True
         Me.lvCurrency.GridLines = True
         Me.lvCurrency.Location = New System.Drawing.Point(12, 56)
         Me.lvCurrency.MultiSelect = False
         Me.lvCurrency.Name = "lvCurrency"
-        Me.lvCurrency.Size = New System.Drawing.Size(566, 201)
+        Me.lvCurrency.Size = New System.Drawing.Size(577, 201)
         Me.lvCurrency.TabIndex = 1
         Me.lvCurrency.UseCompatibleStateImageBehavior = False
         Me.lvCurrency.View = System.Windows.Forms.View.Details
@@ -103,15 +104,14 @@ Partial Class frmCurrencyList
         '
         Me.ColumnHeader3.Text = "SYMBOL"
         '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "DENOMINATION"
-        Me.ColumnHeader4.Width = 94
-        '
         'ColumnHeader5
         '
         Me.ColumnHeader5.Text = "RATE"
         Me.ColumnHeader5.Width = 325
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "CASHID"
         '
         'btnSelect
         '
@@ -137,11 +137,22 @@ Partial Class frmCurrencyList
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'btnView
+        '
+        Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnView.Location = New System.Drawing.Point(359, 264)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(68, 31)
+        Me.btnView.TabIndex = 10
+        Me.btnView.Text = "&View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
         'frmCurrencyList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(589, 299)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.lvCurrency)
@@ -169,6 +180,7 @@ Partial Class frmCurrencyList
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnView As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
 End Class

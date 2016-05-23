@@ -40,8 +40,7 @@
     End Sub
     Friend Sub ReloadFormFromSearch1(ByVal gotoForm As FormName, ByVal cl As Currency)
         Select Case gotoForm
-            Case FormName.frmMoneyExchange
-                frmmoneyexchange.LoadCurrencyall(cl)
+
         End Select
     End Sub
 End Module

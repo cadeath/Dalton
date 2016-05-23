@@ -306,7 +306,6 @@ Public Class frmClientInformation
         If btnSave.Text = "&Modify" Then
             isNew = False
             LockFields(False)
-
             Exit Sub
         End If
 

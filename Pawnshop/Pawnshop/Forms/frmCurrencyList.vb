@@ -1,7 +1,8 @@
 ﻿Imports System.Data.Odbc
 Imports System.Threading
 Public Class frmCurrencyList
-   Dim mOtherForm As Boolean = False
+    Dim mOtherForm As Boolean = False
+
     Dim frmOrig As formSwitch.FormName
     Dim ds As New DataSet
     Dim fillData As String = "TBLCURRENCY"
@@ -13,7 +14,7 @@ Public Class frmCurrencyList
         frmOrig = formOrigin
     End Sub
     
-    Friend Sub LoadActivecurrency(Optional ByVal mySql As String = "SELECT * FROM TBLCURRENCY WHERE DENOMINATION ='1' ORDER BY CURRENCYID")
+    Friend Sub LoadActivecurrency(Optional ByVal mySql As String = "SELECT * FROM TBLCURRENCY ORDER BY CURRENCYID")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
         lvCurrency.Items.Clear()
@@ -25,7 +26,7 @@ Public Class frmCurrencyList
     End Sub
     Private Sub frmCurrencyList_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         ClearField()
-
+        btnSelect.Visible = False
         LoadActivecurrency()
         txtSearch.Focus()
 
@@ -38,11 +39,11 @@ Public Class frmCurrencyList
         Dim lv As ListViewItem = lvCurrency.Items.Add(dl.CURRENCYID)
         lv.SubItems.Add(dl.CURRENCY)
         lv.SubItems.Add(dl.SYMBOL)
-        lv.SubItems.Add(dl.DENOMINATION)
         lv.SubItems.Add(dl.RATE)
+        lv.SubItems.Add(dl.CASHID)
     End Sub
     Private Sub btnSearch_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch.Click
-        If txtSearch.Text = "" Then Exit Sub
+
         Dim mySql As String = "SELECT * FROM TBLCURRENCY WHERE "
         If IsNumeric(txtSearch.Text) Then
             mySql &= "CURRENCYID = " & txtSearch.Text
@@ -56,6 +57,7 @@ Public Class frmCurrencyList
         If MaxRow <= 0 Then
             MsgBox("No result found", MsgBoxStyle.Critical)
             txtSearch.SelectAll()
+            lvCurrency.Items.Clear()
             Exit Sub
         End If
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Currency")
@@ -76,9 +78,11 @@ Public Class frmCurrencyList
 
     Private Sub lvCurrency_DoubleClick(sender As System.Object, e As System.EventArgs) Handles lvCurrency.DoubleClick
         If Not mOtherForm Then
-            btnSelect.PerformClick()
+            btnView.PerformClick()
+            Me.Hide()
         Else
-            btnSelect.PerformClick()
+            btnView.PerformClick()
+            Me.Hide()
         End If
     End Sub
     Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs)
@@ -97,19 +101,43 @@ Public Class frmCurrencyList
         formSwitch.ReloadFormFromSearch1(frmOrig, GetCurrency)
         Me.Close()
     End Sub
-    Friend Sub AutoSelect(ByVal cl As Currency)
-        If Not mOtherForm Then
-            txtSearch.Text = cl.CURRENCY
-            Exit Sub
-        End If
-
-        formSwitch.ReloadFormFromSearch1(frmOrig, cl)
-        Me.Close()
-    End Sub
+    
 
     Private Sub txtSearch_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
+        End If
+    End Sub
+    Friend Sub AutoSelect1(ByVal cl As Currency)
+        If Not mOtherForm Then
+            txtSearch.Text = cl.currency
+            Exit Sub
+        End If
+        formSwitch.ReloadFormFromSearch1(frmOrig, cl)
+        Me.Close()
+    End Sub
+
+    Private Sub btnView_Click(sender As System.Object, e As System.EventArgs) Handles btnView.Click
+        If lvCurrency.SelectedItems.Count <= 0 Then Exit Sub
+        Dim CurrencyID As Integer
+        CurrencyID = lvCurrency.FocusedItem.Text
+        Console.WriteLine("CURRENCYID : " & CurrencyID)
+
+        Dim tmpcurrency As New Currency
+        tmpcurrency.LoadCurrencydata(CurrencyID)
+        Me.Hide()
+        frmmoneyexchange.Show()
+        frmmoneyexchange.LoadCurrencyList(tmpcurrency)
+
+    End Sub
+
+    Private Sub lvCurrency_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles lvCurrency.KeyPress
+        If isEnter(e) Then
+            If mOtherForm Then
+                btnSelect.PerformClick()
+            Else
+                btnView.PerformClick()
+            End If
         End If
     End Sub
 End Class

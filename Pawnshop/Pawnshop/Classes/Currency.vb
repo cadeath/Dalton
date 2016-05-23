@@ -13,6 +13,15 @@ Public Class Currency
             _id = value
         End Set
     End Property
+    Private _CASHID As Integer
+    Public Property CASHID As Integer
+        Get
+            Return _CASHID
+        End Get
+        Set(ByVal value As Integer)
+            _CASHID = value
+        End Set
+    End Property
     Private _CURRENCY As String
     Public Property CURRENCY As String
         Set(ByVal value As String)
@@ -31,15 +40,7 @@ Public Class Currency
             Return _SYMBOL
         End Get
     End Property
-    Private _DENOMINATION As String
-    Public Property DENOMINATION As String
-        Get
-            Return _DENOMINATION
-        End Get
-        Set(ByVal value As String)
-            _DENOMINATION = value
-        End Set
-    End Property
+  
     Private _RATE As String = String.Empty
     Public Property RATE As String
         Get
@@ -92,8 +93,8 @@ Public Class Currency
             _id = .Item("CURRENCYID")
             _CURRENCY = .Item("CURRENCY")
             _SYMBOL = .Item("SYMBOL")
-            _DENOMINATION = .Item("DENOMINATION")
             _RATE = .Item("RATE")
+            _CASHID = .Item("CASHID")
         End With
     End Sub
 
@@ -104,14 +105,14 @@ Public Class Currency
         database.SaveEntry(CreateDataSetCurrency)
     End Sub
     Public Sub ModifyCurrency()
-        Dim mySql As String = "SELECT RATE FROM TBLCURRENCY WHERE CURRENCYID = " & _id
+        Dim mySql As String = "SELECT * FROM TBLCURRENCY WHERE CURRENCYID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, "TBLCURRENCY")
 
         With ds.Tables(0).Rows(0)
             .Item("CURRENCY") = _CURRENCY
             .Item("SYMBOL") = _SYMBOL
-            .Item("DENOMINATION") = _DENOMINATION
             .Item("RATE") = _RATE
+            .Item("CASHID") = _CASHID
         End With
         database.SaveEntry(ds, False)
     End Sub
@@ -132,8 +133,8 @@ Public Class Currency
         With ds.Tables(fillData).Rows(0)
             .Item("CURRENCY") = _CURRENCY
             .Item("SYMBOL") = _SYMBOL
-            .Item("DENOMINATION") = _DENOMINATION
             .Item("RATE") = _RATE
+            .Item("CASHID") = _CASHID
         End With
         da.Update(ds, fillData)
 
@@ -150,8 +151,8 @@ Public Class Currency
         With dsNewRow
             .Item("CURRENCY") = _CURRENCY
             .Item("SYMBOL") = _SYMBOL
-            .Item("DENOMINATION") = _DENOMINATION
             .Item("RATE") = _RATE
+            .Item("CASHID") = _CASHID
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
