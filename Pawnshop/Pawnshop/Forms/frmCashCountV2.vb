@@ -150,7 +150,9 @@
         Return Total_CashCount
     End Function
 
-    Private Sub btnPost_Click(sender As System.Object, e As System.EventArgs) Handles btnPost.Click
+    Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
+        If txtCount.Text = "" Then txtCount.Focus() : Exit Sub
+
         Dim ans As DialogResult = MsgBox("Do you want to POST this cash count?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 

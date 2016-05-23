@@ -5,6 +5,7 @@ Version 1.2
  - Add Monthly Report - Transaction Count
  - Add Pawner Summary List
  - Add Monthly Computation
+ - Add Cash Count Prevention
  - Include Changelog on Menu
  - Patch Up Database
 

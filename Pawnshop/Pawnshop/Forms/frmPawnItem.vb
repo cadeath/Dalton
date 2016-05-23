@@ -1571,7 +1571,13 @@ Public Class frmPawnItem
 
         If Not isRenewable(PTInfo) And type = "Renew" Then Return "NON RENEWABLE"
 
-        For x As Integer = 0 To MONTH_COMPUTE - 1
+        Dim diff = PTInfo.AuctionDate - PTInfo.LoanDate
+        Dim lessNum As Integer = DateDiff(DateInterval.Month, PTInfo.LoanDate, PTInfo.AuctionDate)
+        If Not lessNum < MONTH_COMPUTE Then
+            lessNum = MONTH_COMPUTE
+        End If
+
+        For x As Integer = 0 To lessNum - 1
             dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, CurrentDate.AddDays(monthCnt), PTInfo.MaturityDate, 1, PTInfo.INT_Checksum)
 
             Dim prefix As String = ""
