@@ -442,6 +442,7 @@
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
         rptPara.Add("branchName", branchName)
 
+        'frmReport.ReportInit(mySql, fillData, "Reports\rpt_Dollar.rdlc", rptPara)
         frmReport.ReportInit(mySql, fillData, "Reports\rpt_Dollar.rdlc", rptPara)
         frmReport.Show()
     End Sub
@@ -507,4 +508,5 @@
         End If
     End Sub
 
+   
 End Class

@@ -25,6 +25,7 @@ Public Class frmCurrencyList
         Next
     End Sub
     Private Sub frmCurrencyList_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
         ClearField()
         btnSelect.Visible = False
         LoadActivecurrency()
@@ -43,17 +44,20 @@ Public Class frmCurrencyList
         lv.SubItems.Add(dl.CASHID)
     End Sub
     Private Sub btnSearch_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch.Click
-
+        searchbutton()
+    End Sub
+    Private Sub searchbutton()
         Dim mySql As String = "SELECT * FROM TBLCURRENCY WHERE "
         If IsNumeric(txtSearch.Text) Then
             mySql &= "CURRENCYID = " & txtSearch.Text
 
         Else : mySql &= String.Format("UPPER (CURRENCY) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", txtSearch.Text)
+            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", txtSearch.Text, txtSearch.Text)
         End If
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        lvCurrency.Items.Clear()
         If MaxRow <= 0 Then
             MsgBox("No result found", MsgBoxStyle.Critical)
             txtSearch.SelectAll()
@@ -63,7 +67,6 @@ Public Class frmCurrencyList
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Currency")
         LoadActivecurrency(mySql)
     End Sub
-
     Private Sub ClearField()
         txtSearch.Text = ""
         lvCurrency.Items.Clear()

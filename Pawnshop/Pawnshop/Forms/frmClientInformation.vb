@@ -573,4 +573,5 @@ Public Class frmClientInformation
         frmReport.ReportInit(mySql, "dsHistory", "Reports\rpt_History.rdlc", repPara)
         frmReport.Show()
     End Sub
+
 End Class

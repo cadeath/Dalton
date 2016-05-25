@@ -399,6 +399,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+
         qryDate.Show()
     End Sub
 
@@ -435,5 +436,10 @@ Public Class frmMain
     Private Sub ChangelogToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ChangelogToolStripMenuItem.Click
         Dim changeLog As String = "changelog.txt"
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
+    End Sub
+
+   
+    Private Sub DollarTransactionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DollarTransactionToolStripMenuItem.Click
+        frmExtractDollarMonthlyDaily.Show()
     End Sub
 End Class

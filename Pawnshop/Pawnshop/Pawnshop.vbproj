@@ -280,6 +280,12 @@
     <Compile Include="Forms\frmDollorSimple.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmExtractDollarMonthlyDaily.Designer.vb">
+      <DependentUpon>frmExtractDollarMonthlyDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmExtractDollarMonthlyDaily.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmInsuranceList.Designer.vb">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </Compile>
@@ -479,6 +485,12 @@
     <Compile Include="POS\frmPOS.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\DollarTransaction.Designer.vb">
+      <DependentUpon>DollarTransaction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DollarTransaction.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\dsPrint.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -580,6 +592,9 @@
     <EmbeddedResource Include="Forms\frmCurrencyList.resx">
       <DependentUpon>frmCurrencyList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmExtractDollarMonthlyDaily.resx">
+      <DependentUpon>frmExtractDollarMonthlyDaily.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
       <DependentUpon>frmPrintManager.vb</DependentUpon>
     </EmbeddedResource>
@@ -588,6 +603,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMoneyExchange.resx">
       <DependentUpon>frmMoneyExchange.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DollarTransaction.resx">
+      <DependentUpon>DollarTransaction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Loan.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -702,6 +720,7 @@
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptDollarTransaction.rdlc" />
     <EmbeddedResource Include="Reports\rptd_graph.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

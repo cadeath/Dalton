@@ -1101,9 +1101,7 @@
                                 </CellContents>
                               </TablixHeader>
                               <TablixMembers>
-                                <TablixMember>
-                                  <KeepWithGroup>Before</KeepWithGroup>
-                                </TablixMember>
+                                <TablixMember />
                               </TablixMembers>
                             </TablixMember>
                           </TablixMembers>
@@ -1167,7 +1165,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.0625in</Height>
+    <Height>1.07292in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -1184,7 +1182,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>7.1875in</Width>
+  <Width>7.21875in</Width>
   <Page>
     <PageHeader>
       <Height>0.5625in</Height>
@@ -1456,7 +1454,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox184</rd:DefaultName>
-          <Top>1.10431in</Top>
+          <Top>1.1182in</Top>
           <Height>0.25in</Height>
           <Width>1.875in</Width>
           <ZIndex>5</ZIndex>
@@ -1525,7 +1523,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox184</rd:DefaultName>
-          <Top>1.10431in</Top>
+          <Top>1.1182in</Top>
           <Left>5.3125in</Left>
           <Height>0.25in</Height>
           <Width>1.875in</Width>

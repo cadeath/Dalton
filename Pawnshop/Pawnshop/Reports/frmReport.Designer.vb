@@ -32,12 +32,12 @@ Partial Class frmReport
         Me.rv_display.Dock = System.Windows.Forms.DockStyle.Fill
         Me.rv_display.Location = New System.Drawing.Point(0, 0)
         Me.rv_display.Name = "rv_display"
-        Me.rv_display.Size = New System.Drawing.Size(534, 307)
+        Me.rv_display.Size = New System.Drawing.Size(560, 307)
         Me.rv_display.TabIndex = 0
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(0, 25)
+        Me.webAds.Location = New System.Drawing.Point(0, 27)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -48,7 +48,7 @@ Partial Class frmReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(534, 307)
+        Me.ClientSize = New System.Drawing.Size(560, 307)
         Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.rv_display)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

@@ -4750,6 +4750,8 @@ Partial Public Class dsReports
         
         Private columnRemarks As Global.System.Data.DataColumn
         
+        Private columnCURRENCY As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -4882,6 +4884,14 @@ Partial Public Class dsReports
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CURRENCYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCURRENCY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -4918,9 +4928,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddDollarRow(ByVal DollarID As String, ByVal TransDate As String, ByVal PesoRate As String, ByVal ClientID As String, ByVal Fullname As String, ByVal Denomination As String, ByVal Serial As String, ByVal NetAmount As String, ByVal UserID As String, ByVal SystemInfo As String, ByVal Status As String, ByVal Remarks As String) As DollarRow
+        Public Overloads Function AddDollarRow(ByVal DollarID As String, ByVal TransDate As String, ByVal PesoRate As String, ByVal ClientID As String, ByVal Fullname As String, ByVal Denomination As String, ByVal Serial As String, ByVal NetAmount As String, ByVal UserID As String, ByVal SystemInfo As String, ByVal Status As String, ByVal Remarks As String, ByVal CURRENCY As String) As DollarRow
             Dim rowDollarRow As DollarRow = CType(Me.NewRow,DollarRow)
-            Dim columnValuesArray() As Object = New Object() {DollarID, TransDate, PesoRate, ClientID, Fullname, Denomination, Serial, NetAmount, UserID, SystemInfo, Status, Remarks}
+            Dim columnValuesArray() As Object = New Object() {DollarID, TransDate, PesoRate, ClientID, Fullname, Denomination, Serial, NetAmount, UserID, SystemInfo, Status, Remarks, CURRENCY}
             rowDollarRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDollarRow)
             Return rowDollarRow
@@ -4955,6 +4965,7 @@ Partial Public Class dsReports
             Me.columnSystemInfo = MyBase.Columns("SystemInfo")
             Me.columnStatus = MyBase.Columns("Status")
             Me.columnRemarks = MyBase.Columns("Remarks")
+            Me.columnCURRENCY = MyBase.Columns("CURRENCY")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4984,6 +4995,8 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnStatus)
             Me.columnRemarks = New Global.System.Data.DataColumn("Remarks", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnRemarks)
+            Me.columnCURRENCY = New Global.System.Data.DataColumn("CURRENCY", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCURRENCY)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9795,6 +9808,21 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CURRENCY() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableDollar.CURRENCYColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CURRENCY' in table 'Dollar' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableDollar.CURRENCYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsDollarIDNull() As Boolean
             Return Me.IsNull(Me.tableDollar.DollarIDColumn)
         End Function
@@ -9935,6 +9963,18 @@ Partial Public Class dsReports
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetRemarksNull()
             Me(Me.tableDollar.RemarksColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCURRENCYNull() As Boolean
+            Return Me.IsNull(Me.tableDollar.CURRENCYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCURRENCYNull()
+            Me(Me.tableDollar.CURRENCYColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

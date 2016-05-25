@@ -59,8 +59,9 @@
         lv.SubItems.Add(dl.NetAmount)
         If Not dl.Customer Is Nothing Then
             lv.SubItems.Add(dl.CustomersName)
+            lv.SubItems.Add(dl.CURRENCY)
         End If
-
+        lv.SubItems.Add(dl.CURRENCY)
         lv.Tag = dl.DollarID
         If dl.Status <> "A" Then lv.BackColor = Color.LightGray
         Console.WriteLine(lv.Tag & ": " & dl.CustomersName)
@@ -120,6 +121,7 @@
             mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
             mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
             mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%')", txtSearch.Text)
+            mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", txtSearch.Text)
         End If
 
         LoadActive(mySql)
@@ -149,8 +151,8 @@
         Dim tmpLoad As New DollarTransaction
         tmpLoad.LoadDollar(id)
 
-        frmDollorSimple.Show()
-        frmDollorSimple.LoadDollar(tmpLoad)
+        frmmoneyexchange.Show()
+        frmmoneyexchange.LoadTransDollar(tmpLoad)
        
     End Sub
 

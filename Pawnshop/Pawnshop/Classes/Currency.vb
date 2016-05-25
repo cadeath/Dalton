@@ -2,9 +2,9 @@
 Public Class Currency
     Private fillData As String = "TBLCURRENCY"
     Private mySql As String, ds As DataSet
-
+    Private _id As Integer = 0
 #Region "Properties and Variables"
-    Private _id As Integer
+
     Public Property CURRENCYID As Integer
         Get
             Return _id
@@ -137,7 +137,6 @@ Public Class Currency
             .Item("CASHID") = _CASHID
         End With
         da.Update(ds, fillData)
-
         dbClose()
     End Sub
     Private Function CreateDataSetCurrency() As DataSet
@@ -168,7 +167,7 @@ Public Class Currency
 
         Return Me
     End Function
-
+    ''' <remarks>to be added by ID List</remarks>
     Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
         str = str.Replace("'", "''")
         str = str.Replace("""", """""")
