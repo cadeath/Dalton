@@ -40,6 +40,14 @@ Public Class frmPawnItem
 
     Private PRINT_PTOLD As Integer = 0
     Private PRINT_PTNEW As Integer = 0
+    Private SAP_ACCOUNTCODE() As String = _
+        {"_SYS00000000143",
+        "_SYS00000001056",
+        "_SYS00000000300",
+        "_SYS00000000298",
+        "_SYS00000001072",
+        "_SYS00000001071",
+        "_SYS00000000297"}
 
     Dim Critical_Language() As String =
             {"Failed to verify hash value to the "}
@@ -54,6 +62,15 @@ Public Class frmPawnItem
 
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
+
+        If Not PAWN_JE Then PAWN_JE = hasJE(SAP_ACCOUNTCODE)
+        If Not PAWN_JE Then
+            MsgBox("WITH UPDATE YOUR JOURNAL ENTRIES CODE" + vbCrLf + _
+                   "Please contact your System Administrator", _
+                   MsgBoxStyle.Critical, "UPDATE JOURNAL ENTRIES")
+
+            Me.Close()
+        End If
     End Sub
 
     Private Sub PrintButton(st As Boolean)

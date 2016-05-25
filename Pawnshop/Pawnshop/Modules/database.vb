@@ -37,6 +37,7 @@ Friend Module database
             Exit Sub
         End Try
     End Sub
+
     ''' <summary>
     ''' This method is for closing after database was open here is the close.
     ''' </summary>

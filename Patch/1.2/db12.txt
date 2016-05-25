@@ -6,6 +6,7 @@ UPDATING DATABASE VERSION 1.2
 4. FOLLOW STEP 2 - MAKE INTID AUTO INCREMENT - TBLINT_HISTORY
 5. FOLLOW STEP 4 - MAKE HITID AUTO INCREMENT - TBLHIT
 6. RUN THE SYSTEM
+7. UPDATE TBLCASH WITH tblCash-052516-loan-enhanced.cir
 
 #========================================================================
 #ESKIE ONLY
