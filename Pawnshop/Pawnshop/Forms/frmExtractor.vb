@@ -170,7 +170,7 @@ Public Class frmExtractor
     End Sub
     Private Sub ExtractJournalEntry2()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT DISTINCT(TRANSTYPE), SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, TRANSDATE, TRANSTYPE " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
         String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
 
@@ -186,14 +186,6 @@ Public Class frmExtractor
         Dim oSheet As Excel.Worksheet
 
         oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/JournalEntries.xls")
-        oSheet = oWB.Worksheets(1)
-
-        oSheet.Cells(3, 1).value = "1"
-        oSheet.Cells(3, 2).value = sd.ToString("yyyyMMdd")
-        oSheet.Cells(3, 8).value = sd.ToString("yyyyMMdd")
-        oSheet.Cells(3, 10).value = "tNO"
-        oSheet.Cells(3, 12).value = sd.ToString("yyyyMMdd")
-        oSheet.Cells(3, 14).value = "tNO"
 
         oSheet = oWB.Worksheets(2)
         pbLoading.Maximum = MaxEntries
@@ -206,17 +198,18 @@ Public Class frmExtractor
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
                 oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
-                oSheet.Cells(lineNum + 3, 5) = .Item("Debit") 'Debit
-                oSheet.Cells(lineNum + 3, 6) = .Item("Credit") 'Credit
+                oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
+                oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
+                oSheet.Cells(lineNum + 3, 11) = .Item("TRANSTYPE")
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
-                oSheet.Cells(lineNum + 3, 7) = .Item("TRANSTYPE")
 
-                If IsDBNull(.Item("CCNAME")) Then
+
+                If IsDBNull(.Item("SAPACCOUNT")) Then
                     lineNum += 1
                 Else
-                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                    If (Not .Item("SAPACCOUNT") = "FUND REPLENISHMENT") Then lineNum += 1
                 End If
 
                 recCnt += 1
@@ -261,10 +254,9 @@ Public Class frmExtractor
     End Sub
     ''' <summary>
     ''' This method will select between date range.
-    ''' search the items by date.
+    ''' search the items by date
     ''' </summary>
     ''' <remarks></remarks>
-
     Private Sub MoneyTransferBSP()
         Dim st As Date = GetFirstDate(MonCalendar.SelectionStart)
         Dim en As Date = GetLastDate(MonCalendar.SelectionStart)
