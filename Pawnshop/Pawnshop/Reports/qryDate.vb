@@ -7,16 +7,16 @@
         Insurance = 3
         DollarBuying = 4
         BranchBorrowings = 5
-        OutStanding = 7
-        ItemPullOut = 8
-        MoneyTransfer = 9
-        Hourly = 10
+        OutStanding = 6
+        ItemPullOut = 7
+        MoneyTransfer = 8
+        Hourly = 9
+        HourlySummary = 10
         DailyInsurance = 11
-        HourlySummary = 12
-        LoanRenew2 = 13
-        AuctionMonthly = 14
-        MoneyTransferBSP = 15
-        DollarDaily = 16
+        LoanRenew2 = 12
+        AuctionMonthly = 13
+        MoneyTransferBSP = 14
+        DollarDaily = 15
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -509,4 +509,7 @@
     End Sub
 
    
+    Private Sub cboReports_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboReports.SelectedIndexChanged
+
+    End Sub
 End Class

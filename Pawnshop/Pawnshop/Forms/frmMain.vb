@@ -438,8 +438,7 @@ Public Class frmMain
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
-   
-    Private Sub DollarTransactionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DollarTransactionToolStripMenuItem.Click
-        frmExtractDollarMonthlyDaily.Show()
+    Private Sub DollarMonthlyDailyToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DollarMonthlyDailyToolStripMenuItem.Click
+        DollarTransction.Show()
     End Sub
 End Class

@@ -280,10 +280,10 @@
     <Compile Include="Forms\frmDollorSimple.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmExtractDollarMonthlyDaily.Designer.vb">
+    <Compile Include="practice\frmExtractDollarMonthlyDaily.Designer.vb">
       <DependentUpon>frmExtractDollarMonthlyDaily.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmExtractDollarMonthlyDaily.vb">
+    <Compile Include="practice\frmExtractDollarMonthlyDaily.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmInsuranceList.Designer.vb">
@@ -485,10 +485,24 @@
     <Compile Include="POS\frmPOS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\DollarTransaction.Designer.vb">
-      <DependentUpon>DollarTransaction.vb</DependentUpon>
+    <Compile Include="practice\dsDollar.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsDollar.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reports\DollarTransaction.vb">
+    <Compile Include="practice\dsDollar.vb">
+      <DependentUpon>dsDollar.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="practice\SampleReport.Designer.vb">
+      <DependentUpon>SampleReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="practice\SampleReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDollarTransaction.Designer.vb">
+      <DependentUpon>frmDollarTransaction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDollarTransaction.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\dsPrint.Designer.vb">
@@ -592,7 +606,10 @@
     <EmbeddedResource Include="Forms\frmCurrencyList.resx">
       <DependentUpon>frmCurrencyList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmExtractDollarMonthlyDaily.resx">
+    <EmbeddedResource Include="Reports\rptDollarTransactionAllCurrency.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="practice\frmExtractDollarMonthlyDaily.resx">
       <DependentUpon>frmExtractDollarMonthlyDaily.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
@@ -604,8 +621,12 @@
     <EmbeddedResource Include="Forms\frmMoneyExchange.resx">
       <DependentUpon>frmMoneyExchange.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\DollarTransaction.resx">
-      <DependentUpon>DollarTransaction.vb</DependentUpon>
+    <EmbeddedResource Include="practice\Report1.rdlc" />
+    <EmbeddedResource Include="practice\SampleReport.resx">
+      <DependentUpon>SampleReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDollarTransaction.resx">
+      <DependentUpon>frmDollarTransaction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Loan.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -720,7 +741,9 @@
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rptDollarTransaction.rdlc" />
+    <EmbeddedResource Include="Reports\rptDollarTransaction.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptd_graph.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -862,6 +885,17 @@
     </None>
     <None Include="HitManagement\dsHit.xss">
       <DependentUpon>dsHit.xsd</DependentUpon>
+    </None>
+    <None Include="practice\dsDollar.xsc">
+      <DependentUpon>dsDollar.xsd</DependentUpon>
+    </None>
+    <None Include="practice\dsDollar.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDollar.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="practice\dsDollar.xss">
+      <DependentUpon>dsDollar.xsd</DependentUpon>
     </None>
     <None Include="Template\Import Template.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

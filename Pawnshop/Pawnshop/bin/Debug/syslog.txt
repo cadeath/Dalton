@@ -2176,3 +2176,143 @@ At line 2, column 1
    at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
    at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
    at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 89
+[05/26/2016 08:24:31] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rptDollarTransaction.rdlc' has not been specified ---> System.IO.FileNotFoundException: Could not find file 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rptDollarTransaction.rdlc'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.CompileReport(CatalogItemContextBase itemContext, Boolean rebuild)
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 89
+[05/26/2016 10:04:28] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rptDollarTransaction.rdlc' has not been specified ---> System.IO.FileNotFoundException: Could not find file 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rptDollarTransaction.rdlc'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.CompileReport(CatalogItemContextBase itemContext, Boolean rebuild)
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 89
+[05/26/2016 10:06:02] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rptDollarTransaction.dlc' has not been specified ---> System.IO.FileNotFoundException: Could not find file 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rptDollarTransaction.dlc'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.CompileReport(CatalogItemContextBase itemContext, Boolean rebuild)
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 89
+[05/26/2016 10:11:00] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rptDollarTransaction.dlc' has not been specified ---> System.IO.FileNotFoundException: Could not find file 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rptDollarTransaction.dlc'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.CompileReport(CatalogItemContextBase itemContext, Boolean rebuild)
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 97
+[05/26/2016 10:14:27] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.ReportingServices.Diagnostics.Utilities.UnknownReportParameterException: An attempt was made to set a report parameter 'txtMonthOf' that is not defined in this report.
+   at Microsoft.ReportingServices.ReportProcessing.ParameterInfoCollection.Combine(ParameterInfoCollection oldParameters, ParameterInfoCollection newParameters, Boolean checkReadOnly, Boolean ignoreNewQueryParams, Boolean isParameterDefinitionUpdate, CultureInfo culture)
+   at Microsoft.Reporting.LocalService.GetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup, CreateAndRegisterStream createStreamCallback)
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 97
+[05/26/2016 10:17:02] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.ReportingServices.Diagnostics.Utilities.UnknownReportParameterException: An attempt was made to set a report parameter 'branchName' that is not defined in this report.
+   at Microsoft.ReportingServices.ReportProcessing.ParameterInfoCollection.Combine(ParameterInfoCollection oldParameters, ParameterInfoCollection newParameters, Boolean checkReadOnly, Boolean ignoreNewQueryParams, Boolean isParameterDefinitionUpdate, CultureInfo culture)
+   at Microsoft.Reporting.LocalService.GetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup, CreateAndRegisterStream createStreamCallback)
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 97
+[05/26/2016 10:42:20] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.ReportingServices.Diagnostics.Utilities.UnknownReportParameterException: An attempt was made to set a report parameter 'BranchName' that is not defined in this report.
+   at Microsoft.ReportingServices.ReportProcessing.ParameterInfoCollection.Combine(ParameterInfoCollection oldParameters, ParameterInfoCollection newParameters, Boolean checkReadOnly, Boolean ignoreNewQueryParams, Boolean isParameterDefinitionUpdate, CultureInfo culture)
+   at Microsoft.Reporting.LocalService.GetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup, CreateAndRegisterStream createStreamCallback)
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 97
+[05/26/2016 14:28:10] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rrptDollarTransactionAllCurrency.rdlc' has not been specified ---> System.IO.FileNotFoundException: Could not find file 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rrptDollarTransactionAllCurrency.rdlc'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.CompileReport(CatalogItemContextBase itemContext, Boolean rebuild)
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 89
+[05/26/2016 14:28:18] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> System.ApplicationException: The report definition for report 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rrptDollarTransactionAllCurrency.rdlc' has not been specified ---> System.IO.FileNotFoundException: Could not find file 'C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\Reports\rrptDollarTransactionAllCurrency.rdlc'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at System.IO.File.OpenRead(String path)
+   at Microsoft.ReportingServices.StandalonePreviewStore.GetReportDefinition(ReportID reportId)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, Byte[]& reportDefinition, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.PreviewStore.GetCompiledReport(CatalogItemContextBase context, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.GetCompiledReport(CatalogItemContextBase itemContext, Boolean rebuild, ControlSnapshot& snapshot)
+   at Microsoft.Reporting.LocalService.CompileReport(CatalogItemContextBase itemContext, Boolean rebuild)
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.EnsureExecutionSession()
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 89
+[05/26/2016 14:29:50] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.ReportingServices.Diagnostics.Utilities.UnknownReportParameterException: An attempt was made to set a report parameter 'BranchName' that is not defined in this report.
+   at Microsoft.ReportingServices.ReportProcessing.ParameterInfoCollection.Combine(ParameterInfoCollection oldParameters, ParameterInfoCollection newParameters, Boolean checkReadOnly, Boolean ignoreNewQueryParams, Boolean isParameterDefinitionUpdate, CultureInfo culture)
+   at Microsoft.Reporting.LocalService.GetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup, CreateAndRegisterStream createStreamCallback)
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 97

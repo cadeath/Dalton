@@ -37,7 +37,9 @@ Partial Class DollarTransction
         '
         'cbmCurrency
         '
-        Me.cbmCurrency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbmCurrency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.cbmCurrency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbmCurrency.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbmCurrency.FormattingEnabled = True
         Me.cbmCurrency.Location = New System.Drawing.Point(12, 182)
         Me.cbmCurrency.Name = "cbmCurrency"
@@ -57,6 +59,7 @@ Partial Class DollarTransction
         'cboMonthlyDaily
         '
         Me.cboMonthlyDaily.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboMonthlyDaily.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMonthlyDaily.FormattingEnabled = True
         Me.cboMonthlyDaily.Items.AddRange(New Object() {"Monthly", "Daily"})
         Me.cboMonthlyDaily.Location = New System.Drawing.Point(12, 208)
@@ -85,7 +88,8 @@ Partial Class DollarTransction
         Me.Controls.Add(Me.cbmCurrency)
         Me.Controls.Add(Me.monCal)
         Me.Name = "DollarTransction"
-        Me.Text = "Dollar Transction"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Dollar Transction Report"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

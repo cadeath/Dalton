@@ -232,7 +232,8 @@ Public Class frmmoneyexchange
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
-        Application.Exit()
+        Me.Hide()
+        frmMain.Show()
     End Sub
     Private Sub txtRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
         DigitOnly(e)
