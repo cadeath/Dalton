@@ -533,3 +533,19 @@ At line 1, column 151
 [05/26/2016 09:25:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [05/26/2016 10:23:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [05/26/2016 10:27:31] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 10:48:08] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 10:50:52] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 13:59:27] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 13:59:53] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:00:34] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:00:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:01:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:01:41] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:02:14] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:02:38] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:03:01] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:03:28] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:09:51] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:56:15] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 14:56:41] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 15:14:30] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12

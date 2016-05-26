@@ -1,40 +1,126 @@
 ﻿Imports Microsoft.Office.Interop
 Public Class frmExtractor2
-    Enum ExtractType As Integer
-        Expiry = 0
-        JournalEntry = 1
-        MoneyTransferBSP = 2
-    End Enum
-    Friend FormType As ExtractType = ExtractType.Expiry
     Private Sub frmExtractor2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        FormInit()
+        'Load Path
+        txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        transtype()
+    End Sub
+    Private Sub FormInit()
+        Dim selectedDate As Date = MonCalendar.SelectionStart
 
+        'If cboExtractType.Text = "" Then
+        '    Console.WriteLine("Journal Entry Type Activated")
+        '    sfdPath.FileName = String.Format("JRNLSUM{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+        '    Me.Text &= " - Journal Insurance"
+        If cboExtractType.Text = "INSURANCE" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLINSUR{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal Insurance"
+        ElseIf cboExtractType.Text = "NEW LOANS" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLNEWLOAN{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal NEW LOANS"
+        ElseIf cboExtractType.Text = "RENEWALS" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLRENEW{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal RENEW"
+        ElseIf cboExtractType.Text = "REDEMPTION" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLREDEMP{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal REDEMPTION"
+        ElseIf cboExtractType.Text = "BORROWINGS" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLBORROW{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal BORROWINGS"
+        ElseIf cboExtractType.Text = "PERA PADALA PMFTC- OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPADALAPMFTCOUT{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA PADALA PMFTC - OUT"
+        ElseIf cboExtractType.Text = "PERA PADALA PMFTC- IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPADALAPMFTCIN{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA PADALA PMFTC - IN"
+        ElseIf cboExtractType.Text = "PERA PADALA - OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPADALAOUT{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA PADALA - OUT"
+        ElseIf cboExtractType.Text = "PERA PADALA - IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPADALAIN{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA PADALA - IN"
+        ElseIf cboExtractType.Text = "GPRS - OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLGPRSOUT{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal GPRS - OUT"
+        ElseIf cboExtractType.Text = "GPRS - IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLGPRSIN{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal GPRS - IN"
+        ElseIf cboExtractType.Text = "PERA LINK- OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPERALINKOUT{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA LINK - OUT"
+        ElseIf cboExtractType.Text = "PERA LINK- IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPERALINKIN{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA LINK - IN"
+        ElseIf cboExtractType.Text = "WESTERN UNION - OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLWESTERNOUT{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal WESTERN UNION - OUT"
+        ElseIf cboExtractType.Text = "WESTERN UNION - IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLWESTERNIN{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal WESTERN UNION - IN"
+        ElseIf cboExtractType.Text = "DOLLAR" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLDOLLAR{0}{1}.xls", selectedDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal DOLLAR"
+        End If
+    End Sub
+    Public Sub transtype()
+        Dim mysql As String = "SELECT DISTINCT TRANSTYPE FROM tblJournal WHERE Status = 1 AND TRANSTYPE <> 'null'"
+        Dim filldata As String = "tblJournal"
+
+        Dim ds As DataSet = LoadSQL(mysql)
+        cboExtractType.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            cboExtractType.Items.Add(dr.Item("TRANSTYPE"))
+        Next
     End Sub
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
-        If txtPath.Text = "" Then Exit Sub
+        If txtPath.Text = "" And cboExtractType.Text = "" Then Exit Sub
 
-        If FormType = ExtractType.Expiry Then
-            btnExtract.Enabled = False
-            ExtractExpiry()
-        ElseIf FormType = ExtractType.MoneyTransferBSP Then
-            btnExtract.Enabled = False
-            MoneyTransferBSP()
-        Else
-            Dim ans As MsgBoxResult = _
-                MsgBox("We will only use the Starting Date." & vbCrLf & "Do you want to continue?", _
-                       vbYesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-            btnExtract.Enabled = False
-            If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
+        'If FormType = ExtractType.Expiry Then
+        '    btnExtract.Enabled = False
+        '    ExtractExpiry()
+        'ElseIf FormType = ExtractType.MoneyTransferBSP Then
+        '    btnExtract.Enabled = False
+        '    MoneyTransferBSP()
+        'Else
+        '    Dim ans As MsgBoxResult = _
+        '        MsgBox("We will only use the Starting Date." & vbCrLf & "Do you want to continue?", _
+        '               vbYesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        '    btnExtract.Enabled = False
+        '    If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
-            ExtractJournalEntry()
-        End If
-        btnExtract.Enabled = True
+        '    ExtractJournalEntry()
+        'End If
+        'btnExtract.Enabled = True
+        'If cboExtractType.Text = "INSURANCE" Then
+        '    INSURANCE()
+        'ElseIf cboExtractType.Text = "NEW LOANS" Then
+        '    NEWLOANS()
+        INSURANCE()
+
     End Sub
-    Private Sub ExtractJournalEntry()
+    Private Sub INSURANCE()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
-        "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+        Dim mysql As String = "SELECT  CATEGORY, JRL_TRANSDATE as TRANSDATE, TRANSNAME, SAPACCOUNT, JRL_DEBIT AS DEBIT," & _
+        "JRL_CREDIT AS CREDIT, CCNAME, TODISPLAY, STATUS FROM tblJournal INNER JOIN tblCash  on CashID = JRL_TRANSID" & vbCrLf & _
+        String.Format("WHERE Status = 1 AND TRANSTYPE ='" & cboExtractType.Text & "'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
@@ -89,17 +175,75 @@ Public Class frmExtractor2
         End While
 
         Dim verified_url As String
-
-        Select Case FormType
-            Case ExtractType.Expiry
-                Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Expiry"
-            Case ExtractType.JournalEntry
-                Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
-                Me.Text &= " - Journal Entry"
-        End Select
+        'If cboExtractType.Text = "" Then
+        '    Console.WriteLine("Journal Entry Type Activated")
+        '    sfdPath.FileName = String.Format("JRNLSUM{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+        '    Me.Text &= " - Journal Insurance"
+        If cboExtractType.Text = "INSURANCE" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLINSUR{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal Insurance"
+        ElseIf cboExtractType.Text = "NEW LOANS" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLNEWLOAN{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal NEW LOANS"
+        ElseIf cboExtractType.Text = "RENEWALS" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLRENEW{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal RENEW"
+        ElseIf cboExtractType.Text = "REDEMPTION" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLREDEMP{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal REDEMPTION"
+        ElseIf cboExtractType.Text = "BORROWINGS" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLBORROW{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal BORROWINGS"
+        ElseIf cboExtractType.Text = "PERA PADALA PMFTC- OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPADALAPMFTCOUT{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA PADALA PMFTC - OUT"
+        ElseIf cboExtractType.Text = "PERA PADALA PMFTC- IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPADALAPMFTCIN{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA PADALA PMFTC - IN"
+        ElseIf cboExtractType.Text = "PERA PADALA - OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPADALAOUT{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA PADALA - OUT"
+        ElseIf cboExtractType.Text = "PERA PADALA - IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPADALAIN{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA PADALA - IN"
+        ElseIf cboExtractType.Text = "GPRS - OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLGPRSOUT{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal GPRS - OUT"
+        ElseIf cboExtractType.Text = "GPRS - IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLGPRSIN{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal GPRS - IN"
+        ElseIf cboExtractType.Text = "PERA LINK- OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPERALINKOUT{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA LINK - OUT"
+        ElseIf cboExtractType.Text = "PERA LINK- IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLPERALINKIN{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal PERA LINK - IN"
+        ElseIf cboExtractType.Text = "WESTERN UNION - OUT" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLWESTERNOUT{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal WESTERN UNION - OUT"
+        ElseIf cboExtractType.Text = "WESTERN UNION - IN" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLWESTERNIN{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal WESTERN UNION - IN"
+        ElseIf cboExtractType.Text = "DOLLAR" Then
+            Console.WriteLine("Journal Entry Type Activated")
+            sfdPath.FileName = String.Format("JRNLDOLLAR{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+            Me.Text &= " - Journal DOLLAR"
+        End If
 
         Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
         If txtPath.Text.Split(".").Count > 1 Then
@@ -119,188 +263,7 @@ Public Class frmExtractor2
         oXL.Quit()
         oXL = Nothing
 
-        MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
-    End Sub
-    Private Sub MoneyTransferBSP()
-        Dim st As Date = GetFirstDate(MonCalendar.SelectionStart)
-        Dim en As Date = GetLastDate(MonCalendar.SelectionStart)
-        Dim mySql As String
-
-        Dim listHeaders() As String = _
-            {"BranchCode", "ServiceType", "TransDate", "MoneyTrans", "RefNum", _
-             "Payout", "SendIn", "ServiceCharge", "Commission", _
-             "NetAmount", "SenderName", "S_Addr", "ReceiverName", "R_Addr", "Location"}
-
-        mySql = "SELECT '" + BranchCode + "' as BranchCode, MT.* FROM MONEY_TRANSFER MT WHERE TRANSDATE BETWEEN '" + st.ToShortDateString + "' AND '" + en.ToShortDateString + "'"
-        Dim ds As DataSet = LoadSQL(mySql)
-        Console.WriteLine(ds.Tables(0).Rows.Count & " items found!")
-        pbLoading.Maximum = ds.Tables(0).Rows.Count
-        pbLoading.Value = 0
-
-        'Load Excel
-        Dim oXL As New Excel.Application
-        If oXL Is Nothing Then
-            MessageBox.Show("Excel is not properly installed!!")
-            Return
-        End If
-
-        Dim oWB As Excel.Workbook
-        Dim oSheet As Excel.Worksheet
-
-        oXL = CreateObject("Excel.Application")
-        oXL.Visible = False
-
-        oWB = oXL.Workbooks.Add
-        oSheet = oWB.ActiveSheet
-        oSheet.Name = "MONTHLY"
-
-        ' HEADERS
-        Dim cnt As Integer = 0
-        For Each hr In listHeaders
-            cnt += 1 : oSheet.Cells(1, cnt).value = hr
-        Next
-
-        ' EXTRACTING
-        Dim rowCnt As Integer = 2
-        For Each dr As DataRow In ds.Tables(0).Rows
-            For colCnt As Integer = 0 To listHeaders.Count - 1
-                oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt)
-            Next
-            rowCnt += 1
-
-            AddProgress()
-            Application.DoEvents()
-        Next
-
-        ' SAVE
-        Dim verified_url As String
-
-        sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", MonCalendar.SelectionStart.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
-        If txtPath.Text.Split(".").Count > 1 Then
-            If txtPath.Text.Split(".")(1).Length = 3 Then
-                verified_url = txtPath.Text
-            Else
-                verified_url = txtPath.Text & "/" & sfdPath.FileName
-            End If
-        Else
-            verified_url = txtPath.Text & "/" & sfdPath.FileName
-        End If
-
-
-        oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
-        MsgBox("Data Saved", MsgBoxStyle.Information)
-    End Sub
-    Private Sub ExtractExpiry()
-        Dim sd As Date = MonCalendar.SelectionStart
-        Dim ed As Date = MonCalendar.SelectionEnd
-
-        Dim mySql As String = "SELECT * FROM EXPIRY_LIST"
-        mySql &= vbCr & " WHERE "
-        mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", sd.ToShortDateString, ed.ToShortDateString)
-
-        Dim ds_expiry As DataSet = LoadSQL(mySql)
-
-        'Load Excel
-        Dim oXL As New Excel.Application
-        Dim oWB As Excel.Workbook
-        Dim oSheet As Excel.Worksheet
-
-        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/ExpiryFormat.xls")
-        oSheet = oWB.Worksheets(1)
-
-        Console.WriteLine("Entry found " & ds_expiry.Tables(0).Rows.Count)
-        Dim rid As Integer = 2
-
-        pbLoading.Maximum = ds_expiry.Tables(0).Rows.Count
-        pbLoading.Value = 0
-        While rid < ds_expiry.Tables(0).Rows.Count
-            With ds_expiry.Tables(0).Rows(rid)
-                oSheet.Cells(rid, 1).value = .Item("PawnID").ToString
-                oSheet.Cells(rid, 2).value = .Item("PawnTicket").ToString
-                oSheet.Cells(rid, 3).value = .Item("LoanDate").ToString 'TransDate
-                oSheet.Cells(rid, 4).value = .Item("FirstName").ToString & _
-                    " " & .Item("LastName").ToString 'Pawner
-                oSheet.Cells(rid, 5).value = ds_expiry.Tables(0).Rows(rid).Item("Addr_Street").ToString & _
-                    " " & ds_expiry.Tables(0).Rows(rid).Item("Addr_Brgy").ToString 'Addr1
-                oSheet.Cells(rid, 6).value = .Item("Addr_City").ToString 'Addr2
-                oSheet.Cells(rid, 7).value = .Item("Addr_Province").ToString 'Addr3
-                oSheet.Cells(rid, 8).value = .Item("Addr_Zip").ToString 'Zip
-                oSheet.Cells(rid, 9).value = .Item("ItemType").ToString 'ItemType
-                oSheet.Cells(rid, 10).value = .Item("Grams").ToString 'Grams
-                oSheet.Cells(rid, 11).value = "1" 'NoPCS
-                oSheet.Cells(rid, 12).value = .Item("Description").ToString 'DESC1
-                'oSheet.Cells(rid, 13).value = .Item("PawnTicket").ToString 'DESC2
-                'oSheet.Cells(rid, 14).value = .Item("PawnTicket").ToString 'DESC3
-                'oSheet.Cells(rid, 15).value = .Item("PawnTicket").ToString 'DESC4
-                oSheet.Cells(rid, 16).value = "0" 'NOMONTH
-                oSheet.Cells(rid, 17).value = .Item("MATUDATE").ToString 'MATUDATE
-                oSheet.Cells(rid, 18).value = .Item("EXPIRYDATE").ToString 'EXPIDATE
-                oSheet.Cells(rid, 19).value = .Item("AUCTIONDATE").ToString 'AUCTDATE
-                'oSheet.Cells(rid, 20).value = .Item("Interest").ToString 'INT_RATE
-                oSheet.Cells(rid, 21).value = .Item("Appraisal").ToString 'APPRAISAL
-                oSheet.Cells(rid, 22).value = .Item("Principal").ToString 'PRINCIPAL
-                oSheet.Cells(rid, 23).value = .Item("Interest").ToString 'INT_AMOUNT
-                oSheet.Cells(rid, 24).value = .Item("ServiceCharge").ToString 'SRV_CHARGE
-                oSheet.Cells(rid, 25).value = .Item("Evat").ToString 'VAT
-                'oSheet.Cells(rid, 26).value = .Item("PawnTicket").ToString 'DOC_STAMP
-                oSheet.Cells(rid, 27).value = .Item("NetAmount").ToString 'NET_AMOUNT
-                oSheet.Cells(rid, 28).value = .Item("Username").ToString 'USER
-                oSheet.Cells(rid, 29).value = .Item("Status").ToString 'STATUS
-                'oSheet.Cells(rid, 30).value = .Item("PawnTicket").ToString 'NEW NUM
-                oSheet.Cells(rid, 31).value = .Item("OLDTICKET").ToString 'OLD NUM
-                oSheet.Cells(rid, 32).value = .Item("ORNUM").ToString 'RCT NO
-                'oSheet.Cells(rid, 33).value = .Item("PawnTicket").ToString 'CLOSE DATE
-                'oSheet.Cells(rid, 34).value = .Item("PawnTicket").ToString 'TRANSFER_DATE
-                'oSheet.Cells(rid, 35).value = .Item("PawnTicket").ToString 'DATE_CREATED
-                'oSheet.Cells(rid, 36).value = .Item("PawnTicket").ToString 'CANCEL
-                'oSheet.Cells(rid, 37).value = .Item("PawnTicket").ToString 'DATE CANCEL
-                'oSheet.Cells(rid, 38).value = .Item("PawnTicket").ToString 'ISBEGBAL
-                oSheet.Cells(rid, 39).value = "'" & .Item("PHONE1").ToString 'PHONE_NO
-                oSheet.Cells(rid, 40).value = .Item("BIRTHDAY").ToString 'BIRTHDAY
-                oSheet.Cells(rid, 41).value = .Item("SEX").ToString 'SEX
-                oSheet.Cells(rid, 42).value = .Item("KARAT").ToString 'KARAT
-                oSheet.Cells(rid, 43).value = .Item("KARAT").ToString 'KARAT1
-                oSheet.Cells(rid, 44).value = .Item("GRAMS").ToString 'GRAMS1
-                oSheet.Cells(rid, 45).value = .Item("APPRAISAL").ToString 'APPRAISAL1
-                'oSheet.Cells(rid, 46).value = .Item("PawnTicket").ToString 'APPRAISEDBY1
-                'oSheet.Cells(rid, 47).value = .Item("PawnTicket").ToString 'DATE_REAPPRAISAL1
-                oSheet.Cells(rid, 48).value = .Item("Category").ToString 'ITEMDESC
-                'oSheet.Cells(rid, 49).value = .Item("PawnTicket").ToString 'ESKIE
-            End With
-
-            rid += 1
-            AddProgress()
-            Application.DoEvents()
-        End While
-
-        Dim verified_url As String
-        Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
-        If txtPath.Text.Split(".").Count > 1 Then
-            If txtPath.Text.Split(".")(1).Length = 3 Then
-                verified_url = txtPath.Text
-            Else
-                verified_url = txtPath.Text & "/" & sfdPath.FileName
-            End If
-        Else
-            verified_url = txtPath.Text & "/" & sfdPath.FileName
-        End If
-
-
-        oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
-        MsgBox("Data Saved", MsgBoxStyle.Information)
-        Me.Close()
+        MsgBox("Journal Entries for Insurance Extracted", MsgBoxStyle.Information)
     End Sub
 
     Private Sub AddProgress()

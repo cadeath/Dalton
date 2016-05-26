@@ -30,6 +30,7 @@ Public Class frmExtractor
     Private Sub FormInit()
         Dim selectedDate As Date = MonCalendar.SelectionStart
 
+
         Select Case FormType
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
@@ -67,8 +68,8 @@ Public Class frmExtractor
             btnExtract.Enabled = False
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
-            'ExtractJournalEntry()
-            ExtractJournalEntry2()
+            ExtractJournalEntry()
+            'ExtractJournalEntry2()
 
         End If
         btnExtract.Enabled = True
@@ -170,9 +171,14 @@ Public Class frmExtractor
     End Sub
     Private Sub ExtractJournalEntry2()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, TRANSDATE, TRANSTYPE, CCNAME " & _
-        "FROM JOURNAL_SUMMARY " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+
+        'Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, TRANSDATE, TRANSTYPE, CCNAME " & _
+        '"FROM JOURNAL_SUMMARY " & vbCrLf & _
+        'String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+
+        Dim mysql As String = "SELECT SAPACCOUNT,SUM (JRL_DEBIT) AS DEBIT, SUM (JRL_CREDIT) AS CREDIT, TRANSTYPE, " & _
+        "JRL_TRANSDATE AS TRANSDATE, CCNAME FROM tblJournal INNER JOIN tblCash on CashID = JRL_TRANSID " & vbCrLf & _
+        String.Format("WHERE Status = 1 AND TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME ORDER BY TRANSTYPE", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
