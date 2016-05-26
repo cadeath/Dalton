@@ -8,6 +8,7 @@
         Dim ADD_AMOUNT As String, ADD_USERID As String, REMOVE_VIEW As String, ADD_VIEW As String
         ADD_AMOUNT = "ALTER TABLE TBL_DAILYTIMELOG ADD AMOUNT DECIMAL(12, 2) DEFAULT '0.0' NOT NULL;"
         ADD_USERID = "ALTER TABLE TBL_DAILYTIMELOG ADD USERID SMALLINT NOT NULL;"
+
         REMOVE_VIEW = "DROP VIEW MONEY_TRANSFER;"
         ADD_VIEW = "CREATE VIEW MONEY_TRANSFER("
         ADD_VIEW &= vbCrLf & "  SERVICETYPE,  TRANSDATE,  MONEYTRANS,"
@@ -51,8 +52,8 @@
         ADD_VIEW &= vbCrLf & "  Status = 'A';"
 
         Try
-            'RunCommand(ADD_AMOUNT)
-            'RunCommand(ADD_USERID)
+            RunCommand(ADD_AMOUNT)
+            RunCommand(ADD_USERID)
 
             RunCommand(REMOVE_VIEW)
             RunCommand(ADD_VIEW)
