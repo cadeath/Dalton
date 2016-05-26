@@ -468,3 +468,68 @@ At line 1, column 151
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
 [05/25/2016 10:24:26] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [05/25/2016 10:25:02] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 10:55:37] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
+[05/25/2016 11:13:55] SYSTEM PATCHED UP TO 1.2
+[05/25/2016 11:32:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:35:29] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:36:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:36:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:37:03] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:43:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:43:47] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:44:16] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:44:31] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 11:46:20] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+TRANSNAME
+At line 1, column 151
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
+[05/25/2016 11:52:22] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+TRANSNAME
+At line 1, column 151
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
+[05/25/2016 12:54:49] SYSTEM PATCHED UP TO 1.2
+[05/25/2016 12:55:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 12:56:39] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 12:57:16] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 12:57:29] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:05:38] SYSTEM PATCHED UP TO 1.2
+[05/25/2016 13:08:36] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:10:14] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:11:04] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:11:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:14:38] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:15:01] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:16:24] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:21:36] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:21:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:23:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:30:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:32:20] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/25/2016 13:48:38] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 09:11:31] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 09:21:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 09:25:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 10:23:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 10:27:31] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
