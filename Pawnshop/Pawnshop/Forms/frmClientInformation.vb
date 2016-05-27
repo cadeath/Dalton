@@ -531,7 +531,9 @@ Public Class frmClientInformation
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub btnHistory_Click(sender As System.Object, e As System.EventArgs) Handles btnHistory.Click
+    Private Sub btnHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistory.Click
+        If Not txtFirstName.Enabled Then Exit Sub
+
         Dim mySql As String
         mySql = "SELECT "
         mySql &= vbCrLf & "	C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
@@ -559,10 +561,12 @@ Public Class frmClientInformation
         mySql &= vbCrLf & "	ON P.CLIENTID = C.CLIENTID"
         mySql &= vbCrLf & "    INNER JOIN TBLCLASS CL"
         mySql &= vbCrLf & "    ON CL.CLASSID = P.CATID"
-        mySql &= vbCrLf & "    INNER JOIN TBL_GAMIT USR"
+        mySql &= vbCrLf & "    LEFT JOIN TBL_GAMIT USR"
         mySql &= vbCrLf & "    ON USR.USERID = P.APPRAISERID"
         mySql &= vbCrLf & "WHERE "
-        mySql &= vbCrLf & " P.STATUS <> 'V'"
+        mySql &= vbCrLf & " P.STATUS <> 'V' AND P.CLIENTID = " & SelectedClient.ID
+
+        Console.WriteLine(mySql)
 
         Dim repPara As New Dictionary(Of String, String)
         repPara.Add("txtFullname", String.Format("{0} {1} {2}", txtFirstName.Text, txtLastName.Text, txtSuffix.Text))

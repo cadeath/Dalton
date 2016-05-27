@@ -15,7 +15,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = True
+    Public DEV_MODE As Boolean = False
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
 
@@ -40,6 +40,7 @@ Module mod_system
     Friend dailyID As Integer = 1
 
     Friend TBLINT_HASH As String = ""
+    Friend PAWN_JE As Boolean = False
 #End Region
 
 #Region "Store"
@@ -150,6 +151,28 @@ Module mod_system
         Console.WriteLine("Segregation complete")
         Return True
     End Function
+
+    ''' <summary>
+    ''' Check if ALL Journal Entry Account on the MODULE 
+    ''' is updated in the database
+    ''' </summary>
+    ''' <param name="sapAccnt">Array of Entries in String</param>
+    ''' <returns>Boolean</returns>
+    ''' <remarks></remarks>
+    Friend Function hasJE(ByVal sapAccnt() As String) As Boolean
+        Dim fillData As String = "tblCash"
+        Dim mySql As String = "SELECT * FROM " & fillData
+
+        For Each sap In sapAccnt
+            Dim final As String = mySql & String.Format(" WHERE SAPACCOUNT = '{0}'", sap)
+
+            Dim ds As DataSet = LoadSQL(final)
+            If ds.Tables(0).Rows.Count = 0 Then Return False
+        Next
+
+        Return True
+    End Function
+
     ''' <summary>
     ''' This method will select all data from storeDB.
     ''' </summary>

@@ -2,8 +2,11 @@ CHANGELOG
 Version 1.2
  - Fix Current Rate for Active Loans
  - Fix Change Rate for New Loans only
+ - Fix non didn't appear in PT for non-jewel
  - Add Monthly Report - Transaction Count
  - Add Pawner Summary List
+ - Add Monthly Computation
+ - Add Cash Count Prevention
  - Include Changelog on Menu
  - Patch Up Database
 

@@ -281,11 +281,12 @@
             End If
         End If
 
-        Console.WriteLine("Comparing....")
-        Console.WriteLine("STR: " & str)
-        Console.WriteLine("TBLINT: " & TBLINT_HASH)
+        Console.WriteLine(str)
+        Console.WriteLine(TBLINT_HASH)
+        Console.WriteLine("Answer: " & str <> TBLINT_HASH)
 
         If str = "" Then Return True
+        If str.Length <= 5 Then Log_Report("[LENGTH 5 AND BELOW] HASH is " & str)
         If str <> TBLINT_HASH Then
 
             mySql = "SELECT * FROM TBLINT_HISTORY WHERE "
@@ -293,7 +294,7 @@
 
             ds = LoadSQL(mySql)
             If ds.Tables(0).Rows.Count = 0 Then
-                Log_Report("Cannot find Hash from TBLINT_History")
+                Log_Report("Cannot find Hash from TBLINT_History HASH: " & str)
                 MsgBox("INTEREST CANNOT BE FOUND" + vbCrLf + "Please contact the IT Department", MsgBoxStyle.Critical, _
                        "ERROR [COMPUTE]")
             End If
