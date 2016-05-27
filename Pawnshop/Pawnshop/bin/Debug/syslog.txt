@@ -2431,3 +2431,15 @@ At line 1, column 31
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
+[05/27/2016 12:08:27] System.ArgumentException: Column 'UPDATE_DATE' does not belong to table tblInt_History.
+   at System.Data.DataRow.set_Item(String columnName, Object value)
+   at Pawnshop.frmPawnItem.Storing_Hash(String str) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1591
+   at Pawnshop.db12.PatchUp() in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db12.vb:line 13
+[05/27/2016 13:31:49] System.ArgumentException: Column 'UPDATE_DATE' does not belong to table tblInt_History.
+   at System.Data.DataRow.set_Item(String columnName, Object value)
+   at Pawnshop.frmPawnItem.Storing_Hash(String str) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1591
+   at Pawnshop.db12.PatchUp() in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db12.vb:line 13
+[05/27/2016 13:34:16] System.ArgumentException: Column 'UPDATE_DATE' does not belong to table tblInt_History.
+   at System.Data.DataRow.set_Item(String columnName, Object value)
+   at Pawnshop.frmPawnItem.Storing_Hash(String str) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1591
+   at Pawnshop.db12.PatchUp() in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db12.vb:line 13
