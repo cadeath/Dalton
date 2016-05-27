@@ -440,13 +440,13 @@
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
-        rptPara.Add("branchName", branchName)
+        rptPara.Add("BranchName", "Bula-Road")
+        rptPara.Add("txtUsername", "Blade")
 
-        'frmReport.ReportInit(mySql, fillData, "Reports\rpt_Dollar.rdlc", rptPara)
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Dollar.rdlc", rptPara)
+        frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransaction.rdlc", rptPara)
         frmReport.Show()
     End Sub
-
+   
     Private Sub DailyDollar()
         Dim fillData As String = "dsDollar"
         Dim mySql As String = "SELECT * FROM tblDollar"
@@ -455,9 +455,10 @@
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToLongDateString)
-        rptPara.Add("branchName", branchName)
+        rptPara.Add("BranchName", "Bula-Road")
+        rptPara.Add("txtUsername", "Blade")
 
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_Dollar.rdlc", rptPara)
+        frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransaction.rdlc", rptPara)
         frmReport.Show()
     End Sub
 
@@ -509,7 +510,5 @@
     End Sub
 
    
-    Private Sub cboReports_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboReports.SelectedIndexChanged
-
-    End Sub
+    
 End Class

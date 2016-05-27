@@ -26,6 +26,26 @@
     End Sub
     Private Sub DollarTransction_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         cbmCurrency.Focus()
+        LoadCurrency()
+
+        cboMonthlyDaily.Items.Add("Monthly")
+        cboMonthlyDaily.Items.Add("Daily")
+    End Sub
+
+    Private Sub btnGenerate_Click(sender As System.Object, e As System.EventArgs) Handles btnGenerate.Click
+        If cbmCurrency.Text = "" And cbmCurrency.SelectedIndex Then Exit Sub
+        If cboMonthlyDaily.Text = "" And cboMonthlyDaily.SelectedIndex Then Exit Sub
+        If cbmCurrency.Text = cbmCurrency.Text And cboMonthlyDaily.Text = "Monthly" Then
+            DollarBuying()
+        ElseIf cbmCurrency.Text = cbmCurrency.Text And cboMonthlyDaily.Text = "Daily" Then
+            DailyDollar()
+        End If
+
+        If cbmCurrency.Text = "ALL" And cboMonthlyDaily.Text = "Monthly" Then
+            DollarMonthlyAllTransaction()
+        End If
+    End Sub
+    Private Sub LoadCurrency()
         mySql = "SELECT DISTINCT CURRENCY FROM TBLDOLLAR"
         fillData = "TBLDOLLAR"
 
@@ -38,17 +58,6 @@
         Next
     End Sub
 
-    Private Sub btnGenerate_Click(sender As System.Object, e As System.EventArgs) Handles btnGenerate.Click
-        If cbmCurrency.Text = cbmCurrency.Text And cboMonthlyDaily.Text = "Monthly" Then
-            DollarBuying()
-        ElseIf cbmCurrency.Text = cbmCurrency.Text And cboMonthlyDaily.Text = "Daily" Then
-            DailyDollar()
-        ElseIf cbmCurrency.Text = "ALL" Then
-            DollarMonthlyAllTransaction()
-        Else
-            DollarDailyAllTransaction()
-        End If
-    End Sub
     Private Sub DollarBuying()
 
         Dim stDay = GetFirstDate(monCal.SelectionStart)
@@ -100,7 +109,7 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
         Dim fillData As String = "dsDollartransAllCurrency"
         Dim mySql As String = "SELECT * FROM tblDollar"
-        mySql &= String.Format(" WHERE TRANSDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= String.Format(" WHERE STATUS ='A' AND TRANSDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
         mySql &= " ORDER BY TRANSDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
@@ -116,12 +125,17 @@
         End If
     End Sub
 
-
     Private Sub cbmCurrency_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbmCurrency.SelectedIndexChanged
-        'If cbmCurrency.Text = "ALL" Then
-        '    DollarMonthlyAllTransaction()
-        'Else
-        '    DollarDailyAllTransaction()
-        'End If
+      
+    End Sub
+
+    Private Sub cboMonthlyDaily_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboMonthlyDaily.SelectedIndexChanged
+            If cbmCurrency.Text = "ALL" And cboMonthlyDaily.Text = "Monthly" Then
+                DollarMonthlyAllTransaction()
+            ElseIf cbmCurrency.Text = "ALL" And cboMonthlyDaily.Text = "Daily" Then
+                DollarDailyAllTransaction()
+            Else
+                Exit Sub
+            End If
     End Sub
 End Class

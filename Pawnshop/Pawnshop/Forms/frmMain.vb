@@ -53,6 +53,7 @@ Public Class frmMain
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
+
     End Sub
 
     Private Sub ExecuteSegregate()
@@ -438,7 +439,5 @@ Public Class frmMain
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
-    Private Sub DollarMonthlyDailyToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DollarMonthlyDailyToolStripMenuItem.Click
-        DollarTransction.Show()
-    End Sub
+   
 End Class

@@ -16,7 +16,7 @@
     <Shape ID="DesignTable:MoneyTransfer" ZOrder="9" X="327" Y="195" Height="277" Width="154" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="273" />
     <Shape ID="DesignTable:Insurance" ZOrder="8" X="651" Y="5" Height="238" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="234" />
     <Shape ID="DesignTable:Pawning" ZOrder="7" X="490" Y="192" Height="317" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="313" />
-    <Shape ID="DesignTable:Dollar" ZOrder="6" X="810" Y="4" Height="257" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
+    <Shape ID="DesignTable:Dollar" ZOrder="6" X="810" Y="4" Height="257" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="24" SplitterPosition="253" />
     <Shape ID="DesignTable:Borrowings" ZOrder="5" X="652" Y="385" Height="124" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="120" />
     <Shape ID="DesignTable:CIO_Trans" ZOrder="4" X="-4" Y="394" Height="130" Width="155" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="126" />
     <Shape ID="DesignTable:ClientHistory" ZOrder="1" X="809" Y="272" Height="257" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
