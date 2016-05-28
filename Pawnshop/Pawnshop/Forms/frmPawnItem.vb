@@ -670,7 +670,7 @@ Public Class frmPawnItem
         PrintButton(True)
     End Sub
 
-    Private Sub RenewDisabled(catID As String)
+    Private Sub RenewDisabled(ByVal catID As String)
         If Not (PawnItem.Status = "L" Or PawnItem.Status = "R") Then Exit Sub
 
         Dim mySql As String = "SELECT * FROM tblClass WHERE "

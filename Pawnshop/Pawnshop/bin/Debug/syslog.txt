@@ -549,3 +549,151 @@ At line 1, column 151
 [05/26/2016 14:56:15] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [05/26/2016 14:56:41] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [05/26/2016 15:14:30] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
+[05/26/2016 15:47:19] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 15:47:52] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 15:48:37] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:01:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:01:25] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:04:12] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:05:06] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:18:03] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:19:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:20:21] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:20:59] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:32:05] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:32:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:33:42] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:34:06] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/26/2016 16:34:15] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:20:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:23:26] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:24:03] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:24:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:28:53] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:29:27] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:30:17] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:30:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:31:06] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:31:30] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:31:53] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:32:17] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 08:45:17] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+TRANSDATE
+At line 2, column 22
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
+[05/27/2016 09:05:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:05:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:06:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:06:28] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:06:53] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:07:11] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:07:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:08:13] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:08:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:09:14] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:21:42] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:21:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:22:05] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:22:12] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 09:22:28] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:25:48] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:49:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:49:46] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:50:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:55:15] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:56:48] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:58:11] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:59:27] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 10:59:34] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:02:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:03:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:04:36] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:04:59] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:05:21] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:05:46] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:06:14] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:06:28] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:06:51] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:08:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:08:32] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:09:17] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:16:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:25:20] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:25:55] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:27:20] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:27:41] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:28:19] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:28:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:29:28] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:29:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:30:17] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:30:37] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:31:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:31:15] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:31:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:31:32] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:52:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:53:22] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:53:48] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:54:09] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:54:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:54:52] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:54:58] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:55:09] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:55:19] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:55:27] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:55:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:55:50] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:56:33] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/27/2016 11:56:58] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 09:26:58] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 09:27:03] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 09:27:55] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:22:58] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:23:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:23:34] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:23:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:24:05] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:27:59] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+TRANSNAME
+At line 1, column 8
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
+[05/28/2016 10:40:14] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:40:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:40:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:41:15] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:49:14] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:52:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:53:11] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:53:33] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:55:08] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:55:28] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:56:02] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:56:22] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:56:28] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:56:43] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 10:57:10] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 11:05:43] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/28/2016 11:05:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
