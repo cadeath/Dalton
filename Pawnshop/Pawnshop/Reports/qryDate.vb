@@ -440,8 +440,8 @@
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
-        rptPara.Add("BranchName", "Bula-Road")
-        rptPara.Add("txtUsername", "Blade")
+        rptPara.Add("BranchName", branchName)
+        'rptPara.Add("txtUsername", "Blade")
 
         frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransaction.rdlc", rptPara)
         frmReport.Show()

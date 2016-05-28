@@ -1599,7 +1599,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Globals.TotalPages</Value>
+                  <Value>="Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
                   <Style>
                     <FontSize>8pt</FontSize>
                   </Style>

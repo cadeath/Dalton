@@ -441,11 +441,14 @@ Partial Class frmmoneyexchange
         '
         'txtTotal
         '
+        Me.txtTotal.BackColor = System.Drawing.Color.LightGray
+        Me.txtTotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.txtTotal.Location = New System.Drawing.Point(111, 20)
         Me.txtTotal.Name = "txtTotal"
         Me.txtTotal.ReadOnly = True
         Me.txtTotal.Size = New System.Drawing.Size(172, 22)
         Me.txtTotal.TabIndex = 5
+        Me.txtTotal.Text = "0.00"
         '
         'GroupBox5
         '
