@@ -30,7 +30,6 @@ Partial Class frmExtractor
         Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.chkOld = New System.Windows.Forms.CheckBox()
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
-        Me.cboType = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'MonCalendar
@@ -42,7 +41,7 @@ Partial Class frmExtractor
         '
         'btnExtract
         '
-        Me.btnExtract.Location = New System.Drawing.Point(18, 285)
+        Me.btnExtract.Location = New System.Drawing.Point(18, 239)
         Me.btnExtract.Name = "btnExtract"
         Me.btnExtract.Size = New System.Drawing.Size(75, 41)
         Me.btnExtract.TabIndex = 1
@@ -70,7 +69,7 @@ Partial Class frmExtractor
         'pbLoading
         '
         Me.pbLoading.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pbLoading.Location = New System.Drawing.Point(0, 335)
+        Me.pbLoading.Location = New System.Drawing.Point(0, 289)
         Me.pbLoading.Name = "pbLoading"
         Me.pbLoading.Size = New System.Drawing.Size(271, 15)
         Me.pbLoading.TabIndex = 4
@@ -81,7 +80,7 @@ Partial Class frmExtractor
         Me.chkOld.Checked = True
         Me.chkOld.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkOld.Enabled = False
-        Me.chkOld.Location = New System.Drawing.Point(187, 309)
+        Me.chkOld.Location = New System.Drawing.Point(187, 263)
         Me.chkOld.Name = "chkOld"
         Me.chkOld.Size = New System.Drawing.Size(61, 17)
         Me.chkOld.TabIndex = 5
@@ -93,22 +92,11 @@ Partial Class frmExtractor
         Me.sfdPath.DefaultExt = "xls"
         Me.sfdPath.Filter = "Excel File 2003|*.xls"
         '
-        'cboType
-        '
-        Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboType.FormattingEnabled = True
-        Me.cboType.Items.AddRange(New Object() {"Previous Data", "Latest Data", "All Data"})
-        Me.cboType.Location = New System.Drawing.Point(21, 242)
-        Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(224, 21)
-        Me.cboType.TabIndex = 6
-        '
         'frmExtractor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(271, 350)
-        Me.Controls.Add(Me.cboType)
+        Me.ClientSize = New System.Drawing.Size(271, 304)
         Me.Controls.Add(Me.chkOld)
         Me.Controls.Add(Me.pbLoading)
         Me.Controls.Add(Me.Label1)
@@ -132,5 +120,4 @@ Partial Class frmExtractor
     Friend WithEvents pbLoading As System.Windows.Forms.ProgressBar
     Friend WithEvents chkOld As System.Windows.Forms.CheckBox
     Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents cboType As System.Windows.Forms.ComboBox
 End Class

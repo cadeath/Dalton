@@ -29,8 +29,6 @@ Public Class frmExtractor
     ''' <remarks></remarks>
     Private Sub FormInit()
         Dim selectedDate As Date = MonCalendar.SelectionStart
-
-
         Select Case FormType
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
@@ -68,60 +66,10 @@ Public Class frmExtractor
             btnExtract.Enabled = False
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
-            TranstypeButton()
-            'NullTransType()
-
+            ExtractJournalEntry3()
         End If
         btnExtract.Enabled = True
     End Sub
-    Private Sub TranstypeButton()
-        If cboType.Text = "" Then Exit Sub
-
-        If cboType.Text = "Previous Data" Then
-            ExtractJournalEntry()
-        ElseIf cboType.Text = "Latest Data" Then
-            ExtractJournalEntry2()
-        ElseIf cboType.Text = "All Data" Then
-            ExtractJournalEntry3()
-        End If
-    End Sub
-
-    Private Sub NullTransType()
-        Dim dbName As String = "W3W1LH4CKU.FDB" 'Final
-        Dim fbUser As String = "SYSDBA"
-        Dim fbPass As String = "masterkey"
-        conStr = "DRIVER=Firebird/InterBase(r) driver;User=" & fbUser & ";Password=" & fbPass & ";Database=" & dbName & ";"
-        con = New OdbcConnection(conStr)
-        Dim dr As OdbcDataReader
-        Dim cmd As OdbcCommand
-        Try
-        con.Open()
-        Dim query As String
-            query = "SELECT * FROM TBLJOURNAL WHERE Status = 1"
-            cmd = New OdbcCommand(query, con)
-        dr = cmd.ExecuteReader
-        While dr.Read
-
-                cboType.Text = dr.Item("TRANSTYPE")
-                If IsDBNull(cboType.Text) Then
-                    cboType.Text = "Previous Data"
-                    Exit Sub
-                Else
-
-                    cboType.Text = "Latest Data"
-                    Exit Sub
-
-                End If
-        End While
-        con.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        Finally
-            con.Dispose()
-        End Try
-
-    End Sub
-   
     ''' <summary>
     ''' This method will extract journal entry and load the excel.
     ''' </summary>
@@ -341,6 +289,35 @@ Public Class frmExtractor
         oSheet.Cells(3, 14).value = "tNO"
 
         oSheet = oWB.Worksheets(2)
+        pbLoading.Maximum = MaxEntries2
+        pbLoading.Value = 0
+
+        Dim recCnt2 As Single = 0
+        While recCnt2 < MaxEntries2
+            With ds2.Tables(0).Rows(recCnt2)
+
+                oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
+                oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
+                oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
+                'oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME")
+                oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
+                oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
+                oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
+
+                If IsDBNull(.Item("TRANSNAME")) Then
+                    lineNum += 1
+                Else
+                    If (Not .Item("TRANSNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                End If
+                recCnt2 += 1
+            End With
+            AddProgress()
+            Application.DoEvents()
+        End While
+
+        oSheet = oWB.Worksheets(2)
         pbLoading.Maximum = MaxEntries
         pbLoading.Value = 0
 
@@ -368,35 +345,7 @@ Public Class frmExtractor
             AddProgress()
             Application.DoEvents()
         End While
-        oSheet = oWB.Worksheets(2)
-        pbLoading.Maximum = MaxEntries2
-        pbLoading.Value = 0
-
-        Dim recCnt2 As Single = 0
-        While recCnt2 < MaxEntries2
-            With ds2.Tables(0).Rows(recCnt2)
-
-                oSheet.Cells(lineNum + 5, 1) = 1 'ParentKey
-                oSheet.Cells(lineNum + 5, 2) = lineNum 'LineNum
-                'oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME").ToString 'AccountCode
-                oSheet.Cells(lineNum + 5, 5) = .Item("DEBIT") 'Debit
-                oSheet.Cells(lineNum + 5, 6) = .Item("CREDIT") 'Credit
-                oSheet.Cells(lineNum + 5, 4) = .Item("TRANSNAME")
-                oSheet.Cells(lineNum + 5, 19) = AREACODE  'ProfitCode
-                oSheet.Cells(lineNum + 5, 32) = BranchCode  'OcrCode2
-                oSheet.Cells(lineNum + 5, 33) = "OPE" 'OcrCode3
-
-
-                If IsDBNull(.Item("TRANSNAME")) Then
-                    lineNum += 1
-                Else
-                    If (Not .Item("TRANSNAME") = "FUND REPLENISHMENT") Then lineNum += 1
-                End If
-                recCnt2 += 1
-            End With
-            AddProgress()
-            Application.DoEvents()
-        End While
+       
         Dim verified_url As String
 
         Select Case FormType

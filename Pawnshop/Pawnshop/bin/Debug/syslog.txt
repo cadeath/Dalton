@@ -700,3 +700,14 @@ At line 1, column 8
 [05/30/2016 16:54:55] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [05/30/2016 16:55:19] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [05/30/2016 16:55:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:38:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:39:04] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:39:33] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:40:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:46:51] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:47:06] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:48:02] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:49:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:50:34] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:50:46] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[05/31/2016 09:57:09] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
