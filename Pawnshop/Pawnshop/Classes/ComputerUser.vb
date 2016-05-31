@@ -159,6 +159,13 @@ Public Class ComputerUser
             Return _cio
         End Get
     End Property
+    Private _appraiser As Boolean
+    Public ReadOnly Property canAppraise() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _appraiser
+        End Get
+    End Property
 
     'Supervisor
     Private _expiryList As Boolean
