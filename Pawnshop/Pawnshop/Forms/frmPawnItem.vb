@@ -52,6 +52,7 @@ Public Class frmPawnItem
         If transactionType = "L" Then NewLoan()
         PrintButton(False)
 
+            cboAppraiser.Items.Add(POSuser.FullName)
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
     End Sub
@@ -861,19 +862,18 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub LoadAppraisers()
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE like '%1|00000000000|0000|00000%'"
-        Dim ds As DataSet = LoadSQL(mySql)
+        'Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE like '%________1|___________|____|_____%'"
+        'Dim ds As DataSet = LoadSQL(mySql)
+        'appraiser = New Hashtable
+        'cboAppraiser.Items.Clear()
+        'For Each dr As DataRow In ds.Tables(0).Rows
+        '    Dim tmpUser As New ComputerUser
+        '    tmpUser.LoadUserByRow(dr)
+        '    Console.WriteLine(tmpUser.FullName & " loaded.")
+        'appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+        'cboAppraiser.Items.Add(tmpUser.UserName)
+        'Next
 
-        appraiser = New Hashtable
-        cboAppraiser.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpUser As New ComputerUser
-            tmpUser.LoadUserByRow(dr)
-            Console.WriteLine(tmpUser.FullName & " loaded.")
-
-            appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-            cboAppraiser.Items.Add(tmpUser.UserName)
-        Next
     End Sub
 
     Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double

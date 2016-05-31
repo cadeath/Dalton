@@ -114,6 +114,7 @@
         Next
 
         Return priv
+
     End Function
 
     Private Sub LoadPrivilege()
