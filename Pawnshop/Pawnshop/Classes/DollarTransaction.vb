@@ -177,7 +177,7 @@
             .Item("NetAmount") = _netAmount
             .Item("UserID") = _encoderID
             .Item("SystemInfo") = Now
-            .Item("CURRENCY") = _CURRENCY
+            '.Item("CURRENCY") = _CURRENCY
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
