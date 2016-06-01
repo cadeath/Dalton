@@ -121,7 +121,7 @@
             mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
             mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
             mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%')", txtSearch.Text)
-            mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", txtSearch.Text)
+            'mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", txtSearch.Text)
         End If
 
         LoadActive(mySql)
@@ -151,9 +151,10 @@
         Dim tmpLoad As New DollarTransaction
         tmpLoad.LoadDollar(id)
 
-        frmmoneyexchange.Show()
-        frmmoneyexchange.LoadTransDollar(tmpLoad)
-       
+        frmDollorSimple.Show()
+        frmDollorSimple.LoadDollar(tmpLoad)
+        'frmmoneyexchange.Show()
+        'frmmoneyexchange.LoadTransDollar(tmpLoad)       
     End Sub
 
 End Class

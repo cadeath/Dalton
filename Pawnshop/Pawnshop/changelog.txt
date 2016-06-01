@@ -1,7 +1,7 @@
 CHANGELOG
-Version 1.2.1
+Version 1.2.0.1
  - Fix monthly computation for Cellphone
- - Add Multiple Currency
+ - Add Pawnticket and OR Number every print
 
 Version 1.2
  - Fix Current Rate for Active Loans
@@ -56,7 +56,7 @@ Version 1.1.1.1
  - Redemption don't SAVE Interest and Penalty.
 
 Version 1.1.1.0c
- - Enhance pawning computetation codes
+ - Enhance pawning computation codes
  - Money Transfer Report
  - REDEEM MORE THAN ONE(1) MONTH over charge(double interest)
  - BUG on PAWNING not AUTOCOMPUTE
