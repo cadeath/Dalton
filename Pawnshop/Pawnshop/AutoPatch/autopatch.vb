@@ -69,4 +69,21 @@ err:
             Return True
         End If
     End Function
+
+    Friend Sub AutoIncrement_ID(tbl As String, id As String)
+        Dim GENERATOR As String
+        GENERATOR = String.Format("CREATE GENERATOR {0}_{1}_GEN; ", tbl, id)
+        RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("SET GENERATOR ""{0}_{1}_GEN"" TO 0;", tbl, id)
+        RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("CREATE TRIGGER ""{0}_{1}_TRG"" FOR ""{0}""", tbl, id)
+        GENERATOR &= vbCrLf & "ACTIVE BEFORE INSERT POSITION 0 AS"
+        GENERATOR &= vbCrLf & "BEGIN"
+        GENERATOR &= vbCrLf & String.Format("IF (NEW.""{1}"" IS NULL) THEN NEW.""{1}"" = GEN_ID(""{0}_{1}_GEN"", 1);", tbl, id)
+        GENERATOR &= vbCrLf & "END;"
+        RunCommand(GENERATOR)
+
+    End Sub
 End Module

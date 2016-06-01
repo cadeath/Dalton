@@ -89,6 +89,7 @@
         frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransaction.rdlc", rptPara)
         frmReport.Show()
     End Sub
+
     Private Sub DollarMonthlyAllTransaction()
         Dim stDay = GetFirstDate(monCal.SelectionStart)
         Dim laDay = GetLastDate(monCal.SelectionEnd)
@@ -104,6 +105,7 @@
         frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransactionAllCurrency.rdlc", rptPara)
         frmReport.Show()
     End Sub
+
     Private Sub DollarDailyAllTransaction()
         Dim stDay = GetFirstDate(monCal.SelectionStart)
         Dim laDay = GetLastDate(monCal.SelectionEnd)
@@ -119,6 +121,7 @@
         frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransactionAllCurrency.rdlc", rptPara)
         frmReport.Show()
     End Sub
+
     Private Sub cbmCurrency_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles cbmCurrency.KeyDown
         If e.KeyCode = Keys.Enter Then
             cboMonthlyDaily.Focus()
