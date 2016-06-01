@@ -151,6 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoPatch\autopatch.vb" />
+    <Compile Include="AutoPatch\db1013.vb" />
+    <Compile Include="AutoPatch\db121.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
     <Compile Include="AutoPatch\db1011.vb" />
     <Compile Include="AutoPatch\db1012.vb" />
@@ -166,6 +168,8 @@
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
+    <Compile Include="Classes\Currency.vb" />
+    <Compile Include="Classes\DollarEntry.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
@@ -218,6 +222,12 @@
     <Compile Include="Developer\dev_report.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\dev_runCmd.Designer.vb">
+      <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_runCmd.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\ab.Designer.vb">
       <DependentUpon>ab.vb</DependentUpon>
     </Compile>
@@ -260,6 +270,12 @@
     <Compile Include="Forms\frmCIO_List.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmCurrencyList.Designer.vb">
+      <DependentUpon>frmCurrencyList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCurrencyList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
       <DependentUpon>frmDollarList.vb</DependentUpon>
     </Compile>
@@ -270,6 +286,12 @@
       <DependentUpon>frmDollorSimple.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmDollorSimple.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="practice\frmExtractDollarMonthlyDaily.Designer.vb">
+      <DependentUpon>frmExtractDollarMonthlyDaily.vb</DependentUpon>
+    </Compile>
+    <Compile Include="practice\frmExtractDollarMonthlyDaily.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmInsuranceList.Designer.vb">
@@ -438,6 +460,12 @@
     <Compile Include="Modules\security.vb" />
     <Compile Include="Modules\updateRate.vb" />
     <Compile Include="Modules\web_ads.vb" />
+    <Compile Include="Forms\frmMoneyExchange.Designer.vb">
+      <DependentUpon>frmMoneyExchange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMoneyExchange.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -463,6 +491,26 @@
       <DependentUpon>frmPOS.vb</DependentUpon>
     </Compile>
     <Compile Include="POS\frmPOS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="practice\dsDollar.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsDollar.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="practice\dsDollar.vb">
+      <DependentUpon>dsDollar.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="practice\SampleReport.Designer.vb">
+      <DependentUpon>SampleReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="practice\SampleReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="practice\frmDollarTransaction.Designer.vb">
+      <DependentUpon>frmDollarTransaction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="practice\frmDollarTransaction.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\dsPrint.Designer.vb">
@@ -557,17 +605,36 @@
       <DependentUpon>dev_report.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_runCmd.resx">
+      <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashCountV2.resx">
       <DependentUpon>frmCashCountV2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCurrencyList.resx">
+      <DependentUpon>frmCurrencyList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="practice\frmExtractDollarMonthlyDaily.resx">
+      <DependentUpon>frmExtractDollarMonthlyDaily.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
       <DependentUpon>frmPrintManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate2.resx">
       <DependentUpon>frmRate2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMoneyExchange.resx">
+      <DependentUpon>frmMoneyExchange.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="practice\Report1.rdlc" />
+    <EmbeddedResource Include="practice\SampleReport.resx">
+      <DependentUpon>SampleReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="practice\frmDollarTransaction.resx">
+      <DependentUpon>frmDollarTransaction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Loan.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -681,6 +748,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptDollarTransaction.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptd_graph.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -823,6 +893,17 @@
     </None>
     <None Include="HitManagement\dsHit.xss">
       <DependentUpon>dsHit.xsd</DependentUpon>
+    </None>
+    <None Include="practice\dsDollar.xsc">
+      <DependentUpon>dsDollar.xsd</DependentUpon>
+    </None>
+    <None Include="practice\dsDollar.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsDollar.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="practice\dsDollar.xss">
+      <DependentUpon>dsDollar.xsd</DependentUpon>
     </None>
     <None Include="Template\Import Template.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

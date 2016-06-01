@@ -227,7 +227,6 @@ Partial Class frmDollorSimple
         Me.Controls.Add(Me.txtRate)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.webAds)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle

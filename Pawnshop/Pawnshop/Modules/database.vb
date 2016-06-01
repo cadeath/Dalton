@@ -14,7 +14,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.2" 'Database version.
+    Private DBversion As String = "1.2.1" 'Database version.
     Private language() As String = _
         {"Connection error failed."} 'verification if the database is connected.
     ''' <summary>
@@ -257,4 +257,9 @@ Friend Module database
         End If
         Console.WriteLine("Option updated. " & key)
     End Sub
+
+
+
+
+
 End Module

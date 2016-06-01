@@ -306,7 +306,6 @@ Public Class frmClientInformation
         If btnSave.Text = "&Modify" Then
             isNew = False
             LockFields(False)
-
             Exit Sub
         End If
 
@@ -578,4 +577,5 @@ Public Class frmClientInformation
         frmReport.ReportInit(mySql, "dsHistory", "Reports\rpt_History.rdlc", repPara)
         frmReport.Show()
     End Sub
+
 End Class

@@ -163,6 +163,7 @@ Public Class frmExtractor
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
+
     ''' <summary>
     ''' This method will select between date range.
     ''' search the items by date.

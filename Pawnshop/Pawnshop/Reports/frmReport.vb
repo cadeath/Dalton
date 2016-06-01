@@ -4,6 +4,7 @@ Public Class frmReport
     Dim subReportPassing As Dictionary(Of String, String)
 
     Private Sub Form_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
     End Sub

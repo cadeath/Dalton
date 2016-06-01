@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.2.1
+ - Fix monthly computation for Cellphone
+ - Add Multiple Currency
+
 Version 1.2
  - Fix Current Rate for Active Loans
  - Fix Change Rate for New Loans only

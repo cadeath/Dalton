@@ -15,7 +15,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = False
+    Public DEV_MODE As Boolean = 1
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
 
@@ -35,6 +35,7 @@ Module mod_system
     Friend InitialBal As Double = GetOption("CurrentBalance")
     Friend RepDep As Double = 0
     Friend DollarRate As Double = 48
+    Friend DollarAllRate As Double
     Friend RequirementLevel As Integer = 1
     Friend dailyID As Integer = 1
 

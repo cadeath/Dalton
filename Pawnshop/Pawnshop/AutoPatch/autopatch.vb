@@ -1,22 +1,19 @@
 ﻿Imports System.Data.Odbc
 
 Module autopatch
-
     Public Sub Patch_if_Patchable()
-        db107.PatchUp()
-        db108.PatchUp()
-        db109.PatchUp()
-        db1010.PatchUp()
-        db1011.PatchUp()
-        db1012.PatchUp()
+        db107.PatchUp() : db108.PatchUp()
+        db109.PatchUp() : db1010.PatchUp()
+        db1011.PatchUp() : db1012.PatchUp()
+        db1013.PatchUp()
 
         ' FOR v1.2
         db12.PatchUp()
+        db121.PatchUp()
     End Sub
 
     Friend Function isPatchable(ByVal allowVersion As String) As Boolean
         On Error GoTo err
-
         Dim mySql As String, ds As DataSet
 
         mySql = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS = 'DBVersion'"
@@ -74,4 +71,20 @@ err:
         End If
     End Function
 
+    Friend Sub AutoIncrement_ID(tbl As String, id As String)
+        Dim GENERATOR As String
+        GENERATOR = String.Format("CREATE GENERATOR {0}_{1}_GEN; ", tbl, id)
+        RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("SET GENERATOR ""{0}_{1}_GEN"" TO 0;", tbl, id)
+        RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("CREATE TRIGGER ""{0}_{1}_TRG"" FOR ""{0}""", tbl, id)
+        GENERATOR &= vbCrLf & "ACTIVE BEFORE INSERT POSITION 0 AS"
+        GENERATOR &= vbCrLf & "BEGIN"
+        GENERATOR &= vbCrLf & String.Format("IF (NEW.""{1}"" IS NULL) THEN NEW.""{1}"" = GEN_ID(""{0}_{1}_GEN"", 1);", tbl, id)
+        GENERATOR &= vbCrLf & "END;"
+        RunCommand(GENERATOR)
+
+    End Sub
 End Module
