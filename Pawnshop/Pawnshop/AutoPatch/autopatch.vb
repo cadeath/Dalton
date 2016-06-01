@@ -5,6 +5,7 @@ Module autopatch
         db107.PatchUp() : db108.PatchUp()
         db109.PatchUp() : db1010.PatchUp()
         db1011.PatchUp() : db1012.PatchUp()
+        db1013.PatchUp()
 
         ' FOR v1.2
         db12.PatchUp()

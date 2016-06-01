@@ -15,6 +15,7 @@
 
         Try
             RunCommand(TBL_CURRENCY)
+            RunCommand("ALTER TABLE TBLCURRENCY ADD PRIMARY KEY (CURRENCYID);")
 
             AutoIncrement_ID("TBLCURRENCY", "CURRENCYID")
 
