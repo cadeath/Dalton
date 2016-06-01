@@ -85,6 +85,5 @@ err:
         GENERATOR &= vbCrLf & String.Format("IF (NEW.""{1}"" IS NULL) THEN NEW.""{1}"" = GEN_ID(""{0}_{1}_GEN"", 1);", tbl, id)
         GENERATOR &= vbCrLf & "END;"
         RunCommand(GENERATOR)
-
     End Sub
 End Module

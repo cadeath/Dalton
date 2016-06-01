@@ -23,7 +23,6 @@
 
             Database_Update(LATEST_VERSION)
             Log_Report("SYSTEM PATCHED UP FROM 1.2 TO 1.2.1")
-            MsgBox("SUCCESS!!!", MsgBoxStyle.Information)
         Catch ex As Exception
             Log_Report(ex.ToString & "[1.2.1]")
         End Try
