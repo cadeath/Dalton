@@ -2443,3 +2443,165 @@ At line 1, column 31
    at System.Data.DataRow.set_Item(String columnName, Object value)
    at Pawnshop.frmPawnItem.Storing_Hash(String str) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1591
    at Pawnshop.db12.PatchUp() in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db12.vb:line 13
+[05/31/2016 17:06:13] HIT FOUND
+[05/31/2016 17:09:03] HIT FOUND
+[05/31/2016 17:14:06] HIT FOUND
+[05/31/2016 17:15:30] HIT FOUND
+[05/31/2016 17:31:27] [CREATE TABLE TBLCURRENCY (
+  CURRENCYID INTEGER NOT NULL,
+  CURRENCY VARCHAR(30) NOT NULL,
+  SYMBOL VARCHAR(20) NOT NULL,
+  RATE NUMERIC(12, 2) NOT NULL,
+  CASHID INTEGER NOT NULL);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+Table TBLCURRENCY already exists
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:31:28] [SET TERM ^ ;
+
+CREATE TRIGGER BI_TBLCURRENCY_CURRENCYID FOR TBLCURRENCY 
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+  IF (NEW.CURRENCYID IS NULL) THEN
+      NEW.CURRENCYID = GEN_ID(TBLCURRENCY_CURRENCYID_GEN, 1);
+END^
+
+SET TERM ; ^] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 5
+TERM
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:31:29] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[05/31/2016 17:32:38] [SET TERM ^ ;
+
+CREATE TRIGGER BI_TBLCURRENCY_CURRENCYID FOR TBLCURRENCY 
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+  IF (NEW.CURRENCYID IS NULL) THEN
+      NEW.CURRENCYID = GEN_ID(TBLCURRENCY_CURRENCYID_GEN, 1);
+END^
+
+SET TERM ; ^] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 5
+TERM
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:32:39] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[05/31/2016 17:36:08] [SET TERM ^ ;
+
+CREATE TRIGGER BI_TBLCURRENCY_CURRENCYID FOR TBLCURRENCY 
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+  IF (NEW.CURRENCYID IS NULL) THEN
+      NEW.CURRENCYID = GEN_ID(TBLCURRENCY_CURRENCYID_GEN, 1);
+END^
+
+SET TERM ; ^] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 5
+TERM
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:41:23] [
+CREATE TRIGGER BI_TBLCURRENCY_CURRENCYID FOR TBLCURRENCY 
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+  IF (NEW.CURRENCYID IS NULL) THEN
+      NEW.CURRENCYID = GEN_ID(TBLCURRENCY_CURRENCYID_GEN, 1);
+END^
+] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 9, column 4
+^
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:42:37] [
+CREATE TRIGGER BI_TBLCURRENCY_CURRENCYID FOR TBLCURRENCY 
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+  IF (NEW.CURRENCYID IS NULL) THEN
+      NEW.CURRENCYID = GEN_ID(TBLCURRENCY_CURRENCYID_GEN, 1);
+END
+] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 49
+generator TBLCURRENCY_CURRENCYID_GEN is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:42:38] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[05/31/2016 17:44:05] [
+CREATE TRIGGER BI_TBLCURRENCY_CURRENCYID FOR TBLCURRENCY 
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+  IF (NEW.CURRENCYID IS NULL) THEN
+      NEW.CURRENCYID = GEN_ID(TBLCURRENCY_CURRENCYID_GEN, 1);
+END
+] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 49
+generator TBLCURRENCY_CURRENCYID_GEN is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:49:39] [CREATE GENERATOR GEN_TBLCURRENCYS_CURRENCYID;
+ 
+CREATE TRIGGER BI_TBLCURRENCY_CURRENCYID FOR TBLCURRENCY 
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+  IF (NEW.CURRENCYID IS NULL) THEN
+      NEW.CURRENCYID = GEN_ID(TBLCURRENCY_CURRENCYID_GEN, 1);
+END] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 3, column 1
+CREATE
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:51:12] [CREATE TRIGGER BI_TBLCURRENCY_CURRENCYID FOR TBLCURRENCY 
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+  IF (NEW.CURRENCYID IS NULL) THEN
+      NEW.CURRENCYID = GEN_ID(TBLCURRENCY_CURRENCYID_GEN, 1);
+END ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 49
+generator TBLCURRENCY_CURRENCYID_GEN is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 39
+[05/31/2016 17:51:13] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1

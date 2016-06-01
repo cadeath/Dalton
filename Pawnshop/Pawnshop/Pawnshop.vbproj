@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoPatch\autopatch.vb" />
+    <Compile Include="AutoPatch\db121.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
     <Compile Include="AutoPatch\db1011.vb" />
     <Compile Include="AutoPatch\db1012.vb" />

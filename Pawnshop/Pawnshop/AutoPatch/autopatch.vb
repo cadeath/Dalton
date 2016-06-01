@@ -1,22 +1,18 @@
 ﻿Imports System.Data.Odbc
 
 Module autopatch
-
     Public Sub Patch_if_Patchable()
-        db107.PatchUp()
-        db108.PatchUp()
-        db109.PatchUp()
-        db1010.PatchUp()
-        db1011.PatchUp()
-        db1012.PatchUp()
+        db107.PatchUp() : db108.PatchUp()
+        db109.PatchUp() : db1010.PatchUp()
+        db1011.PatchUp() : db1012.PatchUp()
 
         ' FOR v1.2
         db12.PatchUp()
+        db121.PatchUp()
     End Sub
 
     Friend Function isPatchable(ByVal allowVersion As String) As Boolean
         On Error GoTo err
-
         Dim mySql As String, ds As DataSet
 
         mySql = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS = 'DBVersion'"
@@ -73,5 +69,4 @@ err:
             Return True
         End If
     End Function
-
 End Module
