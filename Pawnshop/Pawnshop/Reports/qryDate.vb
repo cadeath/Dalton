@@ -435,7 +435,7 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
         Dim fillData As String = "dsDollar"
         Dim mySql As String = "SELECT * FROM tblDollar"
-        mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}' AND STATUS = 'A'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= " ORDER BY TRANSDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
@@ -450,13 +450,13 @@
     Private Sub DailyDollar()
         Dim fillData As String = "dsDollar"
         Dim mySql As String = "SELECT * FROM tblDollar"
-        mySql &= String.Format(" WHERE TRANSDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= String.Format(" WHERE TRANSDATE = '{0}' AND STATUS ='A'", monCal.SelectionStart.ToShortDateString)
         mySql &= " ORDER BY TRANSDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToLongDateString)
         rptPara.Add("BranchName", "Bula-Road")
-        rptPara.Add("txtUsername", "Blade")
+        ' rptPara.Add("txtUsername", "Blade")
 
         frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransaction.rdlc", rptPara)
         frmReport.Show()

@@ -117,10 +117,9 @@
         Dim mySql As String = "SELECT * FROM tblDollar WHERE "
         If IsNumeric(txtSearch.Text) Then
             mySql &= "DollarID = " & txtSearch.Text
-        Else
-            mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
+        Else : mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
             mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%')", txtSearch.Text)
+            mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%') OR", txtSearch.Text)
             mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", txtSearch.Text)
         End If
 

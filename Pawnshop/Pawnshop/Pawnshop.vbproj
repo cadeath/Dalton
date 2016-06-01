@@ -158,6 +158,7 @@
     <Compile Include="AutoPatch\db108.vb" />
     <Compile Include="AutoPatch\db109.vb" />
     <Compile Include="AutoPatch\db12.vb" />
+    <Compile Include="practice\db13.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -606,7 +607,7 @@
     <EmbeddedResource Include="Forms\frmCurrencyList.resx">
       <DependentUpon>frmCurrencyList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rptDollarTransactionAllCurrency.rdlc">
+    <EmbeddedResource Include="practice\rptDollarTransactionAllCurrency.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="practice\frmExtractDollarMonthlyDaily.resx">

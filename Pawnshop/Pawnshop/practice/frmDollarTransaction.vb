@@ -1,6 +1,16 @@
-﻿Public Class DollarTransction
+﻿Imports System.Data.Odbc
+Public Class DollarTransction
     Private mySql As String, fillData As String
     Private Daily As String = "Daily"
+
+    Dim connString As String =  "DRIVER=Firebird/InterBase(r) driver;User=" & fbUser & ";Password=" & fbPass & ";Database=" & dbName & ";"
+    Dim MyConn As OdbcConnection
+    Dim da As OdbcDataAdapter
+    Dim ds As DataSet
+    Dim tables As DataTableCollection
+    Dim source1 As New BindingSource
+
+
     Enum ReportType As Integer
         DollarBuying = 0
         DailyDollar = 1
@@ -21,10 +31,11 @@
                 DollarDailyAllTransaction()
             Case ReportType.DollarBuying
                 DollarBuying()
-         
+
         End Select
     End Sub
     Private Sub DollarTransction_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        LOAD_TBLDOLLAR()
         cbmCurrency.Focus()
         LoadCurrency()
 
@@ -126,16 +137,49 @@
     End Sub
 
     Private Sub cbmCurrency_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbmCurrency.SelectedIndexChanged
-      
+
     End Sub
 
     Private Sub cboMonthlyDaily_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboMonthlyDaily.SelectedIndexChanged
-            If cbmCurrency.Text = "ALL" And cboMonthlyDaily.Text = "Monthly" Then
-                DollarMonthlyAllTransaction()
-            ElseIf cbmCurrency.Text = "ALL" And cboMonthlyDaily.Text = "Daily" Then
-                DollarDailyAllTransaction()
-            Else
-                Exit Sub
+        If cbmCurrency.Text = "ALL" And cboMonthlyDaily.Text = "Monthly" Then
+            DollarMonthlyAllTransaction()
+        ElseIf cbmCurrency.Text = "ALL" And cboMonthlyDaily.Text = "Daily" Then
+            DollarDailyAllTransaction()
+        Else
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub LOAD_TBLDOLLAR()
+        MyConn = New OdbcConnection
+        MyConn.ConnectionString = connString
+        ds = New DataSet
+        tables = ds.Tables
+        da = New OdbcDataAdapter("Select TRANSDATE,PESORATE,FULLNAME,DENOMINATION,SERIAL,NETAMOUNT,SYSTEMINFO,STATUS,CURRENCY from TBLDOLLAR", MyConn) 'Change items to your database name
+        da.Fill(ds, "items") 'Change items to your database name
+        Dim view As New DataView(tables(0))
+        source1.DataSource = view
+        DataGridView1.DataSource = view
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        Try
+            If e.RowIndex >= 0 Then
+                Dim row As DataGridViewRow
+                row = Me.DataGridView1.Rows(e.RowIndex)
+                TextBox1.Text = row.Cells("TRANSDATE").Value.ToString
+                TextBox2.Text = row.Cells("PESORATE").Value.ToString
+                TextBox3.Text = row.Cells("FULLNAME").Value.ToString
+                TextBox4.Text = row.Cells("DENOMINATION").Value.ToString
+                TextBox5.Text = row.Cells("SERIAL").Value.ToString
+                TextBox6.Text = row.Cells("NETAMOUNT").Value.ToString
+                TextBox7.Text = row.Cells("SYSTEMINFO").Value.ToString
+                TextBox8.Text = row.Cells("STATUS").Value.ToString
+                TextBox9.Text = row.Cells("CURRENCY").Value.ToString
             End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 End Class

@@ -90,14 +90,14 @@ Partial Class frmLayAwayLookUp
         'lvClient
         '
         Me.lvClient.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
         Me.lvClient.Location = New System.Drawing.Point(12, 92)
         Me.lvClient.Name = "lvClient"
-        Me.lvClient.Size = New System.Drawing.Size(760, 272)
+        Me.lvClient.Size = New System.Drawing.Size(760, 267)
         Me.lvClient.TabIndex = 9
         Me.lvClient.UseCompatibleStateImageBehavior = False
         Me.lvClient.View = System.Windows.Forms.View.Details
@@ -130,7 +130,7 @@ Partial Class frmLayAwayLookUp
         'btnSave
         '
         Me.btnSave.Enabled = False
-        Me.btnSave.Location = New System.Drawing.Point(618, 386)
+        Me.btnSave.Location = New System.Drawing.Point(620, 368)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(74, 35)
         Me.btnSave.TabIndex = 12
@@ -140,7 +140,7 @@ Partial Class frmLayAwayLookUp
         'Button1
         '
         Me.Button1.Enabled = False
-        Me.Button1.Location = New System.Drawing.Point(698, 386)
+        Me.Button1.Location = New System.Drawing.Point(700, 368)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(74, 35)
         Me.Button1.TabIndex = 13
@@ -151,7 +151,7 @@ Partial Class frmLayAwayLookUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(786, 433)
+        Me.ClientSize = New System.Drawing.Size(786, 412)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.lvClient)

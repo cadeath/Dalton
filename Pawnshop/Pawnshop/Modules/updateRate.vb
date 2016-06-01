@@ -1,4 +1,8 @@
-﻿Module updateRate
+﻿Imports System.IO
+Imports System.Collections
+Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Runtime.Serialization
+Module updateRate
     Private dsRate As DataSet
     Private isFailed As Boolean = False
     Private fillData As String, mySql As String
@@ -49,7 +53,7 @@
         Console.WriteLine("Checking excessive entries")
         ds = LoadSQL(mySql, fillData)
 
-        If MaxDS > MaxRate Then
+   If MaxDS > MaxRate Then
             For i = MaxDS To MaxRate Step -1
                 ds.Tables(fillData).Rows(i - 1).Delete()
                 database.SaveEntry(ds, False)

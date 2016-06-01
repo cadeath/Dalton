@@ -67,12 +67,14 @@
     End Sub
 
     Private Sub btnRate_Click(sender As System.Object, e As System.EventArgs) Handles btnRate.Click
-        fillData = "tblInt"
+        fillData = "TBLINT"
         mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY IntID ASC"
 
         ds = LoadSQL(mySql, fillData)
         dgvPawnshop.DataSource = ds.Tables(fillData)
+
+        
     End Sub
 
     Private Sub btnClass_Click(sender As System.Object, e As System.EventArgs) Handles btnClass.Click
