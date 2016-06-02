@@ -38,10 +38,14 @@
     End Sub
 
     Private Sub tsbtnConfig_Click(sender As System.Object, e As System.EventArgs) Handles tsbtnConfig.Click
-        ofdConfig.ShowDialog()
+        If dgvPawnshop.DataSource Is Nothing Then
+            ofdConfig.ShowDialog()
+        Else
+        End If
     End Sub
 
     Private Sub tsbtnSave_Click(sender As System.Object, e As System.EventArgs) Handles tsbtnSave.Click
+        If dgvPawnshop.DataSource Is Nothing Then Exit Sub
         database.SaveEntry(ds)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
         dgvPawnshop.DataSource = Nothing
@@ -85,4 +89,5 @@
         ds = LoadSQL(mySql, fillData)
         dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
+
 End Class

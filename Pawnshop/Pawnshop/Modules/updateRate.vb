@@ -2,8 +2,10 @@
 Imports System.Collections
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
+Imports System.Data.Odbc
 Module updateRate
-    Private dsRate As DataSet
+    Private DSALL As DataSet
+    Private ds As String = database.dbName
     Private isFailed As Boolean = False
     Private fillData As String, mySql As String
 
@@ -15,7 +17,7 @@ Module updateRate
         Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
 
         Try
-            dsRate = bf.Deserialize(fs)
+            DSALL = bf.Deserialize(fs)
         Catch ex As Exception
             MsgBox("It seems the file is being tampered.", MsgBoxStyle.Critical)
             fs.Close()
@@ -24,7 +26,7 @@ Module updateRate
         fs.Close()
 
         If isFailed Then Exit Sub
-        fillData = dsRate.Tables(0).TableName
+        fillData = DSALL.Tables(0).TableName
         mySql = "SELECT * FROM " & fillData
         If dbSrc <> "" Then database.dbName = dbSrc
         Dim ds As DataSet, MaxDS As Integer, MaxRate As Integer
@@ -34,7 +36,7 @@ Module updateRate
             ds = LoadSQL(mySql, fillData)
 
             MaxDS = ds.Tables(fillData).Rows.Count
-            MaxRate = dsRate.Tables(fillData).Rows.Count
+            MaxRate = DSALL.Tables(fillData).Rows.Count
             Console.WriteLine("Table " & fillData & " found.")
         Catch ex As Exception
             Select Case ErrCheck(ex.ToString)
@@ -47,13 +49,13 @@ Module updateRate
         End Try
 
         Dim i As Integer = 0
-        Dim ID As String = dsRate.Tables(fillData).Columns.Item(0).ColumnName
+        Dim ID As String = DSALL.Tables(fillData).Columns.Item(0).ColumnName
 
         'Remove Excessive entries
         Console.WriteLine("Checking excessive entries")
         ds = LoadSQL(mySql, fillData)
 
-   If MaxDS > MaxRate Then
+        If MaxDS > MaxRate Then
             For i = MaxDS To MaxRate Step -1
                 ds.Tables(fillData).Rows(i - 1).Delete()
                 database.SaveEntry(ds, False)
@@ -61,7 +63,7 @@ Module updateRate
         End If
 
         Console.WriteLine("Updating table") : i = 0
-        For Each dr As DataRow In dsRate.Tables(fillData).Rows
+        For Each dr As DataRow In DSALL.Tables(fillData).Rows
             mySql = "SELECT * FROM " & fillData
             mySql &= " WHERE " & ID & " = " & dr.Item(0)
 
@@ -69,9 +71,9 @@ Module updateRate
             ds = LoadSQL(mySql, fillData)
             If ds.Tables(fillData).Rows.Count = 1 Then
 
-                For setColumn As Integer = 1 To dsRate.Tables(fillData).Columns.Count - 1
+                For setColumn As Integer = 1 To DSALL.Tables(fillData).Columns.Count - 1
                     ds.Tables(fillData).Rows(0).Item(setColumn) = _
-                        dsRate.Tables(fillData).Rows(i).Item(setColumn)
+                        DSALL.Tables(fillData).Rows(i).Item(setColumn)
                 Next
 
                 database.SaveEntry(ds, False)
@@ -79,10 +81,10 @@ Module updateRate
                 Dim dsNewRow As DataRow
                 dsNewRow = ds.Tables(fillData).NewRow
 
-                For setColumn As Integer = 0 To dsRate.Tables(fillData).Columns.Count - 1
+                For setColumn As Integer = 0 To DSALL.Tables(fillData).Columns.Count - 1
                     With dsNewRow
                         .Item(setColumn) = _
-                        dsRate.Tables(fillData).Rows(i).Item(setColumn)
+                        DSALL.Tables(fillData).Rows(i).Item(setColumn)
                     End With
                 Next
                 ds.Tables(fillData).Rows.Add(dsNewRow)
