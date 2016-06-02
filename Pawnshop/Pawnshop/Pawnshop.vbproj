@@ -160,6 +160,7 @@
     <Compile Include="AutoPatch\db108.vb" />
     <Compile Include="AutoPatch\db109.vb" />
     <Compile Include="AutoPatch\db12.vb" />
+    <Compile Include="AutoPatch\db122.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -614,7 +615,7 @@
     <EmbeddedResource Include="Forms\frmCashCountV2.resx">
       <DependentUpon>frmCashCountV2.vb</DependentUpon>
     </EmbeddedResource>
-      <EmbeddedResource Include="Forms\frmExtractor2.resx">
+    <EmbeddedResource Include="Forms\frmExtractor2.resx">
       <DependentUpon>frmExtractor2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
