@@ -3,6 +3,7 @@ Public Class Currency
     Private fillData As String = "TBLCURRENCY"
     Private mySql As String, ds As DataSet
     Private _id As Integer = 0
+
 #Region "Properties and Variables"
 
     Public Property CURRENCYID As Integer
@@ -78,6 +79,7 @@ Public Class Currency
         End Set
     End Property
 #End Region
+
 #Region "LOADCURRENCY AND ENTRY"
     Public Sub LoadCurrencydata(ByVal id As Integer)
         mySql = "SELECT * FROM " & fillData & " WHERE CURRENCYID = " & id
@@ -167,6 +169,7 @@ Public Class Currency
 
         Return Me
     End Function
+
     ''' <remarks>to be added by ID List</remarks>
     Private Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
         str = str.Replace("'", "''")

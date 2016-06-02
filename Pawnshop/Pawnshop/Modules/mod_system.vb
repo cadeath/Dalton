@@ -41,6 +41,7 @@ Module mod_system
 
     Friend TBLINT_HASH As String = ""
     Friend PAWN_JE As Boolean = False
+    Friend DBVERSION As String = ""
 #End Region
 
 #Region "Store"

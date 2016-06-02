@@ -161,7 +161,8 @@
             MsgBoxAuthoriation("You don't have access to Dollar Buying")
             Exit Sub
         End If
-        frmDollorSimple.Show()
+        'frmDollorSimple.Show()
+        frmmoneyexchange.Show()
     End Sub
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click

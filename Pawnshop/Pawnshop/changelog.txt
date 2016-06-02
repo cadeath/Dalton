@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.2.1
+ - Add Database
+ - Add Foreign Currency
+
 Version 1.2.0.1
  - Fix monthly computation for Cellphone
  - Include Auto Patch up to db1.2 v1.2
