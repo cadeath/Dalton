@@ -3,6 +3,9 @@
     Const LATEST_VERSION As String = "1.0.13"
 
     Sub PatchUp()
+        Dim RowNum As Integer = 0
+        Dim SetNum As Integer = 0
+
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
         Try
@@ -18,19 +21,39 @@
             ds = LoadSQL(mySql)
             INT_HASH = GetMD5(ds)
 
-            mySql = "SELECT * FROM TBLPAWN WHERE STATUS <> 'V'"
+            mySql = "SELECT * FROM TBLPAWN WHERE STATUS <> 'V' AND INT_CHECKSUM is Null ROWS 100"
             Dim fillData As String = "TBLPAWN"
-            ds = LoadSQL(mySql, fillData)
 
-            If ds.Tables(0).Rows.Count > 0 Then
-                For Each dr As DataRow In ds.Tables(fillData).Rows
-                    dr("INT_CHECKSUM") = INT_HASH
+            Dim UPDATE_PAWN As String
+            UPDATE_PAWN = "UPDATE TBLPAWN "
+            UPDATE_PAWN &= vbCrLf & String.Format("SET INT_CHECKSUM = '{0}' ", INT_HASH)
+            UPDATE_PAWN &= vbCrLf & "WHERE INT_CHECKSUM is Null"
+            RunCommand(UPDATE_PAWN)
 
-                Next
-                database.SaveEntry(ds, False)
-            End If
+            'ds.Clear()
+            'ds = LoadSQL(mySql, fillData)
+
+            'While ds.Tables(fillData).Rows.Count <> 0
+            '    If ds.Tables(fillData).Rows.Count > 0 Then
+            '        For Each dr As DataRow In ds.Tables(fillData).Rows
+            '            dr("INT_CHECKSUM") = INT_HASH
+            '            RowNum += 1
+            '        Next
+            '        database.SaveEntry(ds, False)
+            '    End If
+
+            '    If SetNum Mod 3 = 0 Then
+            '        System.Threading.Thread.Sleep(1000)
+            '    End If
+
+            '    ds.Clear()
+            '    ds = LoadSQL(mySql, fillData)
+            '    SetNum += 1
+            'End While
         Catch ex As Exception
-            Log_Report("[HASHING] " & ex.ToString)
+            Log_Report(String.Format("[HASHING] {0},{1}", SetNum, RowNum) & " - " & ex.ToString)
+            MsgBox("PATCH FAILED PLEASE CONTACT YOUR ADMINISTRATOR", MsgBoxStyle.Critical, "HASHING")
+            Exit Sub
         End Try
 
         Do_IntHistory() 'Update Database - INTEREST HISTORY
