@@ -7,8 +7,12 @@
         Dim INT_CHECK As String = _
             "ALTER TABLE TBLPAWN ADD INT_CHECKSUM VARCHAR(100);"
 
-        RunCommand(INT_CHECK)
-        SystemUpdate("INT_CHECKSUM INCLUDED")
+        Try
+            RunCommand(INT_CHECK)
+            SystemUpdate("INT_CHECKSUM INCLUDED")
+        Catch ex As Exception
+            SystemUpdate("INT_CHECKSUM DONE")
+        End Try
 
         ' HASH table TBLINT
         Dim INT_HASH As String, ds As DataSet
@@ -24,15 +28,21 @@
 
         frmMain.pb_load.Maximum = ds.Tables(0).Rows.Count
         frmMain.pb_load.Value = 0
-        For Each dr As DataRow In ds.Tables(fillData).Rows
-            dr("INT_CHECKSUM") = INT_HASH
+        If ds.Tables(0).Rows.Count > 0 Then
+            For Each dr As DataRow In ds.Tables(fillData).Rows
+                dr("INT_CHECKSUM") = INT_HASH
 
-            frmMain.AddProgress()
-        Next
-        mod_system.SaveEntry(ds, False)
+                frmMain.AddProgress()
+            Next
+            mod_system.SaveEntry(ds, False)
+        End If
 
-        Do_IntHistory() 'Update Database - INTEREST HISTORY
-        Do_HitManagement() 'Update Database - HIT MANAGEMENT
+        Try
+            Do_IntHistory() 'Update Database - INTEREST HISTORY
+            Do_HitManagement() 'Update Database - HIT MANAGEMENT
+        Catch ex As Exception
+            SystemUpdate("DONE INT_HISTORY AND HIT")
+        End Try
 
         Database_Update(VERSION)
         SystemUpdate("DATABASE UPDATED - V1.0.13")
@@ -41,7 +51,7 @@
 
     Private Sub Do_IntHistory()
         Dim ADD_INTHIST As String
-        ADD_INTHIST = "CREATE TABLE TBLINT_HISTORY ( "
+        ADD_INTHIST = "CREATE TABLE TBLINT_HISTORY ("
         ADD_INTHIST &= vbCrLf & "  INTID BIGINT NOT NULL,"
         ADD_INTHIST &= vbCrLf & "  DAYFROM INTEGER DEFAULT '0' NOT NULL,"
         ADD_INTHIST &= vbCrLf & "  DAYTO SMALLINT DEFAULT '0' NOT NULL,"
@@ -49,10 +59,13 @@
         ADD_INTHIST &= vbCrLf & "  INTEREST DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
         ADD_INTHIST &= vbCrLf & "  PENALTY DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
         ADD_INTHIST &= vbCrLf & "  REMARKS VARCHAR(100),"
-        ADD_INTHIST &= vbCrLf & "  CHECKSUM VARCHAR(50) DEFAULT '' NOT NULL);"
+        ADD_INTHIST &= vbCrLf & "  CHECKSUM VARCHAR(50) DEFAULT '' NOT NULL,"
+        ADD_INTHIST &= vbCrLf & "  UPDATE_DATE DATE);"
 
         RunCommand(ADD_INTHIST)
         RunCommand("ALTER TABLE TBLINT_HISTORY ADD PRIMARY KEY (INTID);")
+
+        AutoIncrement_ID("TBLINT_HISTORY", "INTID")
     End Sub
 
     Private Sub Do_HitManagement()
@@ -66,6 +79,8 @@
 
         RunCommand(ADD_HIT)
         RunCommand("ALTER TABLE TBLHIT ADD PRIMARY KEY (HITID);")
+
+        AutoIncrement_ID("TBLHIT", "HITID")
     End Sub
 
     Friend Sub Database_Update(ByVal str As String)

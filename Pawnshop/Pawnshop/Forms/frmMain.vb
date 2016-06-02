@@ -1,5 +1,4 @@
-﻿
-Public Class frmMain
+﻿Public Class frmMain
 
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
@@ -358,7 +357,7 @@ Public Class frmMain
             pButton.Anchor = AnchorStyles.None
             pButton.Left = 543
         End If
-        
+
     End Sub
 
     Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click

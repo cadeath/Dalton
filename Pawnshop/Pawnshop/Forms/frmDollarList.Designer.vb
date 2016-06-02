@@ -35,6 +35,7 @@ Partial Class frmDollarList
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'Label1
@@ -57,12 +58,12 @@ Partial Class frmDollarList
         '
         'lvDollar
         '
-        Me.lvDollar.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader6, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvDollar.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader6, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader7})
         Me.lvDollar.FullRowSelect = True
         Me.lvDollar.GridLines = True
         Me.lvDollar.Location = New System.Drawing.Point(12, 55)
         Me.lvDollar.Name = "lvDollar"
-        Me.lvDollar.Size = New System.Drawing.Size(611, 206)
+        Me.lvDollar.Size = New System.Drawing.Size(761, 206)
         Me.lvDollar.TabIndex = 2
         Me.lvDollar.UseCompatibleStateImageBehavior = False
         Me.lvDollar.View = System.Windows.Forms.View.Details
@@ -131,11 +132,16 @@ Partial Class frmDollarList
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Currency"
+        Me.ColumnHeader7.Width = 150
+        '
         'frmDollarList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(635, 296)
+        Me.ClientSize = New System.Drawing.Size(785, 296)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnView)
@@ -146,7 +152,7 @@ Partial Class frmDollarList
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmDollarList"
-        Me.Text = "Dollar Transaction List"
+        Me.Text = "Dollar List Transaction"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -164,4 +170,5 @@ Partial Class frmDollarList
     Friend WithEvents btnVoid As System.Windows.Forms.Button
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
 End Class

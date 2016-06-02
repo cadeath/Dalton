@@ -57,7 +57,7 @@ Partial Class qryDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(245, 257)
+        Me.ClientSize = New System.Drawing.Size(245, 254)
         Me.Controls.Add(Me.cboReports)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)

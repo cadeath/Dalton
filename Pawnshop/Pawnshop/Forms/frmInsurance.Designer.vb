@@ -41,11 +41,11 @@ Partial Class frmInsurance
         Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.txtCoi = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.txtPT = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpExpiry = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
@@ -264,15 +264,6 @@ Partial Class frmInsurance
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Insurance Information"
         '
-        'webAds
-        '
-        Me.webAds.Location = New System.Drawing.Point(251, -53)
-        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.webAds.Name = "webAds"
-        Me.webAds.ScrollBarsEnabled = False
-        Me.webAds.Size = New System.Drawing.Size(236, 46)
-        Me.webAds.TabIndex = 29
-        '
         'txtPT
         '
         Me.txtPT.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -313,6 +304,15 @@ Partial Class frmInsurance
         Me.Label6.Size = New System.Drawing.Size(76, 17)
         Me.Label6.TabIndex = 27
         Me.Label6.Text = "Valid Until: "
+        '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(251, -53)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(236, 46)
+        Me.webAds.TabIndex = 29
         '
         'GroupBox3
         '

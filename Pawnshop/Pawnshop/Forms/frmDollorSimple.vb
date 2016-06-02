@@ -207,4 +207,7 @@
     Private Sub txtRate_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRate.KeyUp
         ComputeTotal()
     End Sub
+
+   
+   
 End Class

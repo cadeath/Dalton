@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsDollar" targetNamespace="http://tempuri.org/dsDollar.xsd" xmlns:mstns="http://tempuri.org/dsDollar.xsd" xmlns="http://tempuri.org/dsDollar.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsDollar" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsDollar" msprop:Generator_UserDSName="dsDollar">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DollarTrans" msprop:Generator_TableClassName="DollarTransDataTable" msprop:Generator_TableVarName="tableDollarTrans" msprop:Generator_TablePropName="DollarTrans" msprop:Generator_RowDeletingName="DollarTransRowDeleting" msprop:Generator_RowChangingName="DollarTransRowChanging" msprop:Generator_RowEvHandlerName="DollarTransRowChangeEventHandler" msprop:Generator_RowDeletedName="DollarTransRowDeleted" msprop:Generator_UserTableName="DollarTrans" msprop:Generator_RowChangedName="DollarTransRowChanged" msprop:Generator_RowEvArgName="DollarTransRowChangeEvent" msprop:Generator_RowClassName="DollarTransRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TRANSDATE" msprop:Generator_ColumnVarNameInTable="columnTRANSDATE" msprop:Generator_ColumnPropNameInRow="TRANSDATE" msprop:Generator_ColumnPropNameInTable="TRANSDATEColumn" msprop:Generator_UserColumnName="TRANSDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="DENOMINATION" msprop:Generator_ColumnVarNameInTable="columnDENOMINATION" msprop:Generator_ColumnPropNameInRow="DENOMINATION" msprop:Generator_ColumnPropNameInTable="DENOMINATIONColumn" msprop:Generator_UserColumnName="DENOMINATION" type="xs:string" minOccurs="0" />
+              <xs:element name="PESORATE" msprop:Generator_ColumnVarNameInTable="columnPESORATE" msprop:Generator_ColumnPropNameInRow="PESORATE" msprop:Generator_ColumnPropNameInTable="PESORATEColumn" msprop:Generator_UserColumnName="PESORATE" type="xs:string" minOccurs="0" />
+              <xs:element name="NETAMOUNT" msprop:Generator_ColumnVarNameInTable="columnNETAMOUNT" msprop:Generator_ColumnPropNameInRow="NETAMOUNT" msprop:Generator_ColumnPropNameInTable="NETAMOUNTColumn" msprop:Generator_UserColumnName="NETAMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="SERIAL" msprop:Generator_ColumnVarNameInTable="columnSERIAL" msprop:Generator_ColumnPropNameInRow="SERIAL" msprop:Generator_ColumnPropNameInTable="SERIALColumn" msprop:Generator_UserColumnName="SERIAL" type="xs:string" minOccurs="0" />
+              <xs:element name="CURRENCY" msprop:Generator_ColumnVarNameInTable="columnCURRENCY" msprop:Generator_ColumnPropNameInRow="CURRENCY" msprop:Generator_ColumnPropNameInTable="CURRENCYColumn" msprop:Generator_UserColumnName="CURRENCY" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

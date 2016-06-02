@@ -113,7 +113,15 @@
             _netAmount = value
         End Set
     End Property
-
+    Private _CURRENCY As String
+    Public Property CURRENCY As String
+        Set(ByVal value As String)
+            _CURRENCY = value
+        End Set
+        Get
+            Return _CURRENCY
+        End Get
+    End Property
 #End Region
 
 #Region "Procedures and Functions"
@@ -142,6 +150,7 @@
             _status = .Item("Status")
             _serial = .Item("Serial")
             _remarks = IIf(IsDBNull(.Item("Remarks")), "", .Item("Remarks"))
+            _CURRENCY = .Item("CURRENCY")
         End With
     End Sub
 
@@ -168,6 +177,7 @@
             .Item("NetAmount") = _netAmount
             .Item("UserID") = _encoderID
             .Item("SystemInfo") = Now
+            '.Item("CURRENCY") = _CURRENCY
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
