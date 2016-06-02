@@ -35,6 +35,7 @@ Public Class DollarTransction
         End Select
     End Sub
     Private Sub DollarTransction_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
         LOAD_TBLDOLLAR()
         cbmCurrency.Focus()
         LoadCurrency()
@@ -181,5 +182,27 @@ Public Class DollarTransction
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+        'Dim startNumber As Integer
+
+        ' For startNumber = 1 To 10
+
+        '     MessageBox.Show("Start Number = " & startNumber)
+
+        ' Next startNumber
+
+        Dim number As Integer
+
+        number = 1
+
+        Do While number < 5
+
+            MessageBox.Show(number)
+
+            number = number + 1
+
+        Loop
     End Sub
 End Class
