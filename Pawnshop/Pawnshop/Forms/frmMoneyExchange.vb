@@ -156,7 +156,7 @@ Public Class frmmoneyexchange
                 .Customer = dollarClient
                 .Denomination = txtDenomination1.Text
                 .Serial = txtSerial.Text
-                .EncoderID = POSuser.EncoderID
+                .EncoderID = POSuser.UserID
                 .NetAmount = txtTotal.Text.Substring(4)
                 .CURRENCY = txtCurrency1.Text
                 .SaveDollar()
@@ -263,8 +263,6 @@ Public Class frmmoneyexchange
             Exit Sub
         End If
     End Sub
-
-
 
     Private Sub btnSearch1_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
         frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)
