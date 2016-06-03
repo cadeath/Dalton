@@ -60,7 +60,6 @@ Public Class frmPawnItem
         If transactionType = "L" Then NewLoan()
         PrintButton(False)
 
-            cboAppraiser.Items.Add(POSuser.FullName)
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
