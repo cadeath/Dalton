@@ -11,3 +11,4 @@ D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug
 D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmClientInformation.resources
 D:\cadeath\Documents\Visual Studio 2010\Projects\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.frmMoneyTransfer.resources
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\W3W1LH4CKU.FDB
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\obj\x86\Debug\Pawnshop.vbproj.ResolveComReference.cache

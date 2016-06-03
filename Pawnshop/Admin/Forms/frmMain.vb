@@ -25,6 +25,7 @@
     Private Sub tsbtnExport_Click(sender As System.Object, e As System.EventArgs) Handles tsbtnExport.Click
         If dgvPawnshop.DataSource Is Nothing Then Exit Sub
         sfdConfig.ShowDialog()
+        MsgBox("Data Exported", MsgBoxStyle.Information)
     End Sub
 
     Private Sub sfdConfig_FileOk(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles sfdConfig.FileOk
@@ -48,7 +49,8 @@
         If dgvPawnshop.DataSource Is Nothing Then Exit Sub
         database.SaveEntry(ds)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
-        dgvPawnshop.DataSource = Nothing
+        dgvPawnshop.RefreshEdit()
+        ' dgvPawnshop.DataSource = Nothing
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
@@ -77,7 +79,7 @@
 
         ds = LoadSQL(mySql, fillData)
         dgvPawnshop.DataSource = ds.Tables(fillData)
-
+        '  dgvPawnshop.AllowUserToDeleteRows = False
         
     End Sub
 
