@@ -66,12 +66,13 @@ Partial Class frmUserManagement
         Me.chkUR = New System.Windows.Forms.CheckBox()
         Me.chkUM = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
+        Me.chkMigrate = New System.Windows.Forms.CheckBox()
         Me.chkPullOut = New System.Windows.Forms.CheckBox()
         Me.chkVoid = New System.Windows.Forms.CheckBox()
         Me.chkSpAll = New System.Windows.Forms.CheckBox()
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
-        Me.chkMigrate = New System.Windows.Forms.CheckBox()
+        Me.chkAppraiser = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -199,6 +200,7 @@ Partial Class frmUserManagement
         '
         'tbEncoder
         '
+        Me.tbEncoder.Controls.Add(Me.chkAppraiser)
         Me.tbEncoder.Controls.Add(Me.chkEnAll)
         Me.tbEncoder.Controls.Add(Me.chkCIO)
         Me.tbEncoder.Controls.Add(Me.chkPOS)
@@ -529,6 +531,16 @@ Partial Class frmUserManagement
         Me.tbSpecial.Text = "Special"
         Me.tbSpecial.UseVisualStyleBackColor = True
         '
+        'chkMigrate
+        '
+        Me.chkMigrate.AutoSize = True
+        Me.chkMigrate.Location = New System.Drawing.Point(13, 104)
+        Me.chkMigrate.Name = "chkMigrate"
+        Me.chkMigrate.Size = New System.Drawing.Size(61, 17)
+        Me.chkMigrate.TabIndex = 14
+        Me.chkMigrate.Text = "Migrate"
+        Me.chkMigrate.UseVisualStyleBackColor = True
+        '
         'chkPullOut
         '
         Me.chkPullOut.AutoSize = True
@@ -579,15 +591,15 @@ Partial Class frmUserManagement
         Me.chkCashInBank.Text = "Cash In (Bank)"
         Me.chkCashInBank.UseVisualStyleBackColor = True
         '
-        'chkMigrate
+        'chkAppraiser
         '
-        Me.chkMigrate.AutoSize = True
-        Me.chkMigrate.Location = New System.Drawing.Point(13, 104)
-        Me.chkMigrate.Name = "chkMigrate"
-        Me.chkMigrate.Size = New System.Drawing.Size(61, 17)
-        Me.chkMigrate.TabIndex = 14
-        Me.chkMigrate.Text = "Migrate"
-        Me.chkMigrate.UseVisualStyleBackColor = True
+        Me.chkAppraiser.AutoSize = True
+        Me.chkAppraiser.Location = New System.Drawing.Point(186, 81)
+        Me.chkAppraiser.Name = "chkAppraiser"
+        Me.chkAppraiser.Size = New System.Drawing.Size(70, 17)
+        Me.chkAppraiser.TabIndex = 9
+        Me.chkAppraiser.Text = "Appraiser"
+        Me.chkAppraiser.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '
@@ -672,4 +684,5 @@ Partial Class frmUserManagement
     Friend WithEvents chkBorrowings As System.Windows.Forms.CheckBox
     Friend WithEvents chkPullOut As System.Windows.Forms.CheckBox
     Friend WithEvents chkMigrate As System.Windows.Forms.CheckBox
+    Friend WithEvents chkAppraiser As System.Windows.Forms.CheckBox
 End Class
