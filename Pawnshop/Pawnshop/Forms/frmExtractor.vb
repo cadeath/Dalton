@@ -255,9 +255,9 @@ Public Class frmExtractor
     End Sub
     Private Sub ExtractJournalEntry3()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME, TRANSTYPE " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
 
         Dim mySql2 As String = "SELECT SAPACCOUNT,TRANSNAME, DEBIT, CREDIT " & _
        "FROM JOURNAL_SUMMARY " & vbCrLf & _
