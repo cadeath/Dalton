@@ -1,0 +1,3 @@
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Debug\Admin.frmMain.resources
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Debug\Admin.Resources.resources
+C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Debug\Admin.vbproj.GenerateResource.Cache
