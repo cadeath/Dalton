@@ -180,52 +180,52 @@
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Classes\rptActionReq.vb" />
-    <Compile Include="Developer\devClient.Designer.vb">
+    <Compile Include="doc\Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\devClient.vb">
+    <Compile Include="doc\Developer\devClient.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\devVerifyESK.Designer.vb">
+    <Compile Include="doc\Developer\devVerifyESK.Designer.vb">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\devVerifyESK.vb">
+    <Compile Include="doc\Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_encrypt.Designer.vb">
+    <Compile Include="doc\Developer\dev_encrypt.Designer.vb">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_encrypt.vb">
+    <Compile Include="doc\Developer\dev_encrypt.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_ORview.Designer.vb">
+    <Compile Include="doc\Developer\dev_ORview.Designer.vb">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_ORview.vb">
+    <Compile Include="doc\Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_Pawning.Designer.vb">
+    <Compile Include="doc\Developer\dev_Pawning.Designer.vb">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_Pawning.vb">
+    <Compile Include="doc\Developer\dev_Pawning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_print.Designer.vb">
+    <Compile Include="doc\Developer\dev_print.Designer.vb">
       <DependentUpon>dev_print.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_print.vb">
+    <Compile Include="doc\Developer\dev_print.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_report.Designer.vb">
+    <Compile Include="doc\Developer\dev_report.Designer.vb">
       <DependentUpon>dev_report.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_report.vb">
+    <Compile Include="doc\Developer\dev_report.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_runCmd.Designer.vb">
+    <Compile Include="doc\Developer\dev_runCmd.Designer.vb">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_runCmd.vb">
+    <Compile Include="doc\Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ab.Designer.vb">
@@ -553,33 +553,33 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Developer\devClient.resx">
+    <EmbeddedResource Include="doc\Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\devVerifyESK.resx">
+    <EmbeddedResource Include="doc\Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_encrypt.resx">
+    <EmbeddedResource Include="doc\Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_ORview.resx">
+    <EmbeddedResource Include="doc\Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_Pawning.resx">
+    <EmbeddedResource Include="doc\Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_print.resx">
+    <EmbeddedResource Include="doc\Developer\dev_print.resx">
       <DependentUpon>dev_print.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_report.resx">
+    <EmbeddedResource Include="doc\Developer\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_runCmd.resx">
+    <EmbeddedResource Include="doc\Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagMT.resx">
