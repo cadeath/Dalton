@@ -119,7 +119,7 @@ Public Class frmmoneyexchange
         GroupBox1.Enabled = False
         TxtName.Enabled = False
         txtCurrency1.Enabled = False
-        GroupBox5.Enabled = False
+
         txtSerial.Enabled = False
         txtDenomination1.Enabled = False
         btnModify.Enabled = False
@@ -168,6 +168,8 @@ Public Class frmmoneyexchange
             End With
             MsgBox("Transaction Saved", MsgBoxStyle.Information)
             ClearField()
+            txtCurrency1.Focus()
+            txtTotal.Text = "Php 0"
         End If
 
     End Sub
@@ -197,9 +199,7 @@ Public Class frmmoneyexchange
     '    btnsave.Focus()
     'End Sub
 
-    Private Sub txtDenomination1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDenomination1.TextChanged
-        ComputeTotalAmount()
-    End Sub
+  
 
     Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
         If IsNumeric(txtTotalAmount.Text) Then
@@ -223,7 +223,7 @@ Public Class frmmoneyexchange
         Me.Hide()
         frmMain.Show()
     End Sub
-    Private Sub txtRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
+    Private Sub txtRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
     Private Sub TxtName_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TxtName.KeyPress
@@ -238,34 +238,22 @@ Public Class frmmoneyexchange
             btnsearch.PerformClick()
         End If
     End Sub
-    Private Sub txtDenomination1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtDenomination1.KeyPress
-        DigitOnly(e)
-
-    End Sub
+    
 
     Private Sub txtSerial_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSerial.KeyPress
         If isEnter(e) Then
             btnsave.Focus()
         End If
     End Sub
-    Private Sub txtCurrency1_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCurrency1.KeyDown
+    Private Sub txtCurrency1_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             btnSearch1.PerformClick()
         End If
-    End Sub
-
-    Private Sub txRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txRate.KeyPress
-        DigitOnly(e)
     End Sub
     Private Sub TxtName_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles TxtName.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnsearch.PerformClick()
         End If
-    End Sub
-
-
-    Private Sub txtRate_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtRate.TextChanged
-        ComputeTotalAmount()
     End Sub
 
     Private Sub btnModify_Click(sender As System.Object, e As System.EventArgs) Handles btnModify.Click
@@ -276,6 +264,8 @@ Public Class frmmoneyexchange
         End If
     End Sub
 
+
+
     Private Sub btnSearch1_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
         frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)
         frmCurrencyList.Show()
@@ -283,4 +273,25 @@ Public Class frmmoneyexchange
         frmCurrencyList.btnSearch.PerformClick()
     End Sub
 
+    Private Sub txtDenomination1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtDenomination1.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtRate_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtRate.TextChanged
+        ComputeTotalAmount()
+    End Sub
+
+    Private Sub txtRate_KeyPress_1(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtDenomination1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDenomination1.TextChanged
+        ComputeTotalAmount()
+    End Sub
+
+    Private Sub txtCurrency1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtCurrency1.KeyPress
+        If isEnter(e) Then
+            btnSearch1.PerformClick()
+        End If
+    End Sub
 End Class
