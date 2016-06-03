@@ -1,5 +1,5 @@
 ﻿Imports Microsoft.Office.Interop
-
+Imports System.Data.Odbc
 Public Class frmExtractor
     Enum ExtractType As Integer
         Expiry = 0
@@ -29,8 +29,6 @@ Public Class frmExtractor
     ''' <remarks></remarks>
     Private Sub FormInit()
         Dim selectedDate As Date = MonCalendar.SelectionStart
-
-
         Select Case FormType
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
@@ -68,9 +66,7 @@ Public Class frmExtractor
             btnExtract.Enabled = False
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
-            ExtractJournalEntry()
-            'ExtractJournalEntry2()
-
+            ExtractJournalEntry3()
         End If
         btnExtract.Enabled = True
     End Sub
@@ -171,14 +167,13 @@ Public Class frmExtractor
     End Sub
     Private Sub ExtractJournalEntry2()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+        'Dim mysql As String = "SELECT SAPACCOUNT,SUM (JRL_DEBIT) AS DEBIT, SUM (JRL_CREDIT) AS CREDIT, TRANSTYPE, " & _
+        '"JRL_TRANSDATE AS TRANSDATE, CCNAME FROM tblJournal INNER JOIN tblCash on CashID = JRL_TRANSID " & vbCrLf & _
+        'String.Format("WHERE Status = 1 AND TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME ORDER BY TRANSTYPE", sd.ToShortDateString)
 
-        'Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, TRANSDATE, TRANSTYPE, CCNAME " & _
-        '"FROM JOURNAL_SUMMARY " & vbCrLf & _
-        'String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
-
-        Dim mysql As String = "SELECT SAPACCOUNT,SUM (JRL_DEBIT) AS DEBIT, SUM (JRL_CREDIT) AS CREDIT, TRANSTYPE, " & _
-        "JRL_TRANSDATE AS TRANSDATE, CCNAME FROM tblJournal INNER JOIN tblCash on CashID = JRL_TRANSID " & vbCrLf & _
-        String.Format("WHERE Status = 1 AND TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME ORDER BY TRANSTYPE", sd.ToShortDateString)
+        Dim mySql As String = "SELECT SAPACCOUNT,TRANSNAME, DEBIT, CREDIT " & _
+        "FROM JOURNAL_SUMMARY " & vbCrLf & _
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
@@ -203,19 +198,19 @@ Public Class frmExtractor
 
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
-                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
+                'oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME").ToString 'AccountCode
                 oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
                 oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
-                'oSheet.Cells(lineNum + 3, 11) = .Item("TRANSTYPE")
+                oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME")
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
 
 
-                If IsDBNull(.Item("CCNAME")) Then
+                If IsDBNull(.Item("TRANSNAME")) Then
                     lineNum += 1
                 Else
-                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                    If (Not .Item("TRANSNAME") = "FUND REPLENISHMENT") Then lineNum += 1
                 End If
 
                 recCnt += 1
@@ -225,6 +220,132 @@ Public Class frmExtractor
             Application.DoEvents()
         End While
 
+        Dim verified_url As String
+
+        Select Case FormType
+            Case ExtractType.Expiry
+                Console.WriteLine("Expiry Type Activated")
+                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                Me.Text &= " - Expiry"
+            Case ExtractType.JournalEntry
+                Console.WriteLine("Journal Entry Type Activated")
+                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+                Me.Text &= " - Journal Entry"
+        End Select
+
+        Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
+    End Sub
+    Private Sub ExtractJournalEntry3()
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
+        "FROM JOURNAL_ENTRIES " & vbCrLf & _
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+
+        Dim mySql2 As String = "SELECT SAPACCOUNT,TRANSNAME, DEBIT, CREDIT " & _
+       "FROM JOURNAL_SUMMARY " & vbCrLf & _
+       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim ds2 As DataSet = LoadSQL(mySql2)
+        Dim MaxEntries As Integer = 0
+        Dim MaxEntries2 As Integer = 0
+        MaxEntries = ds.Tables(0).Rows.Count
+        MaxEntries2 = ds2.Tables(0).Rows.Count
+        Console.WriteLine("Executing SQL:")
+        Console.WriteLine(mySql2)
+        Console.WriteLine("Entries: " & MaxEntries)
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/JournalEntries.xls")
+        oSheet = oWB.Worksheets(1)
+
+        oSheet.Cells(3, 1).value = "1"
+        oSheet.Cells(3, 2).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 8).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 10).value = "tNO"
+        oSheet.Cells(3, 12).value = sd.ToString("yyyyMMdd")
+        oSheet.Cells(3, 14).value = "tNO"
+
+        oSheet = oWB.Worksheets(2)
+        pbLoading.Maximum = MaxEntries2
+        pbLoading.Value = 0
+
+        Dim recCnt2 As Single = 0
+        While recCnt2 < MaxEntries2
+            With ds2.Tables(0).Rows(recCnt2)
+
+                oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
+                oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
+                oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
+                'oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME")
+                oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
+                oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
+                oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
+
+                If IsDBNull(.Item("TRANSNAME")) Then
+                    lineNum += 1
+                Else
+                    If (Not .Item("TRANSNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                End If
+                recCnt2 += 1
+            End With
+            AddProgress()
+            Application.DoEvents()
+        End While
+
+        oSheet = oWB.Worksheets(2)
+        pbLoading.Maximum = MaxEntries
+        pbLoading.Value = 0
+
+        Dim recCnt As Single = 0
+        While recCnt < MaxEntries
+            With ds.Tables(0).Rows(recCnt)
+
+                oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
+                oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 5) = .Item("Debit") 'Debit
+                oSheet.Cells(lineNum + 3, 6) = .Item("Credit") 'Credit
+                oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
+                oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
+                oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
+
+                If IsDBNull(.Item("CCNAME")) Then
+                    lineNum += 1
+                Else
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                End If
+
+                recCnt += 1
+            End With
+            AddProgress()
+            Application.DoEvents()
+        End While
+       
         Dim verified_url As String
 
         Select Case FormType
@@ -438,7 +559,7 @@ Public Class frmExtractor
             verified_url = txtPath.Text & "/" & sfdPath.FileName
         End If
 
-        
+
         oWB.SaveAs(verified_url)
         oSheet = Nothing
         oWB.Close(False)

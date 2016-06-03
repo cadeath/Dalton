@@ -60,6 +60,7 @@ Public Class frmPawnItem
         If transactionType = "L" Then NewLoan()
         PrintButton(False)
 
+            cboAppraiser.Items.Add(POSuser.FullName)
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
@@ -698,7 +699,7 @@ Public Class frmPawnItem
         Return IIf(ds.Tables(0).Rows(0).Item("RENEWABLE"), True, False)
     End Function
 
-    Private Sub RenewDisabled(catID As String)
+    Private Sub RenewDisabled(ByVal catID As String)
         If Not (PawnItem.Status = "L" Or PawnItem.Status = "R") Then Exit Sub
 
         Dim mySql As String = "SELECT * FROM tblClass WHERE "
@@ -898,7 +899,6 @@ Public Class frmPawnItem
             Dim tmpUser As New ComputerUser
             tmpUser.LoadUserByRow(dr)
             Console.WriteLine(tmpUser.FullName & " loaded.")
-
             appraiser.Add(tmpUser.UserID, tmpUser.UserName)
             cboAppraiser.Items.Add(tmpUser.UserName)
         Next
