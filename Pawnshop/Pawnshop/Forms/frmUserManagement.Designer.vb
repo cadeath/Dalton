@@ -157,6 +157,7 @@ Partial Class frmUserManagement
         '
         'txtPass1
         '
+        Me.txtPass1.Enabled = False
         Me.txtPass1.Location = New System.Drawing.Point(392, 63)
         Me.txtPass1.Name = "txtPass1"
         Me.txtPass1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -165,6 +166,7 @@ Partial Class frmUserManagement
         '
         'txtPass2
         '
+        Me.txtPass2.Enabled = False
         Me.txtPass2.Location = New System.Drawing.Point(576, 63)
         Me.txtPass2.Name = "txtPass2"
         Me.txtPass2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)

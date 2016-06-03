@@ -60,7 +60,6 @@ Public Class frmPawnItem
         If transactionType = "L" Then NewLoan()
         PrintButton(False)
 
-            cboAppraiser.Items.Add(POSuser.FullName)
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
@@ -898,9 +897,12 @@ Public Class frmPawnItem
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpUser As New ComputerUser
             tmpUser.LoadUserByRow(dr)
-            Console.WriteLine(tmpUser.FullName & " loaded.")
-            appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-            cboAppraiser.Items.Add(tmpUser.UserName)
+            If tmpUser.canAppraise Then
+                Console.WriteLine(tmpUser.FullName & " loaded.")
+                appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+                cboAppraiser.Items.Add(tmpUser.UserName)
+            End If
+           
         Next
     End Sub
 
