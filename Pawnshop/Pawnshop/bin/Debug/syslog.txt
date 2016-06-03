@@ -589,3 +589,164 @@ Table JOURNAL_SUMMARY already exists
 [06/03/2016 11:32:33] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [06/03/2016 11:32:44] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [06/03/2016 11:32:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[06/03/2016 15:40:27] [CREATE TABLE TBLCURRENCY (
+  CURRENCYID INTEGER NOT NULL,
+  CURRENCY VARCHAR(30) NOT NULL,
+  SYMBOL VARCHAR(20) NOT NULL,
+  RATE NUMERIC(12, 2) NOT NULL,
+  CASHID INTEGER NOT NULL);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+Table TBLCURRENCY already exists
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:28] [ALTER TABLE TBLCURRENCY ADD PRIMARY KEY (CURRENCYID);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_CONSTRAINTS failed
+action cancelled by trigger (3) to preserve data integrity
+Attempt to define a second PRIMARY KEY for the same table
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:29] [CREATE GENERATOR TBLCURRENCY_CURRENCYID_GEN; ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+DEFINE GENERATOR failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_11"
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:39] [CREATE TABLE TBLCURRENCY (
+  CURRENCYID INTEGER NOT NULL,
+  CURRENCY VARCHAR(30) NOT NULL,
+  SYMBOL VARCHAR(20) NOT NULL,
+  RATE NUMERIC(12, 2) NOT NULL,
+  CASHID INTEGER NOT NULL);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+Table TBLCURRENCY already exists
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:40] [ALTER TABLE TBLCURRENCY ADD PRIMARY KEY (CURRENCYID);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_CONSTRAINTS failed
+action cancelled by trigger (3) to preserve data integrity
+Attempt to define a second PRIMARY KEY for the same table
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:41] [CREATE GENERATOR TBLCURRENCY_CURRENCYID_GEN; ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+DEFINE GENERATOR failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_11"
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:43] [CREATE TRIGGER "TBLCURRENCY_CURRENCYID_TRG" FOR "TBLCURRENCY"
+ACTIVE BEFORE INSERT POSITION 0 AS
+BEGIN
+IF (NEW."CURRENCYID" IS NULL) THEN NEW."CURRENCYID" = GEN_ID("TBLCURRENCY_CURRENCYID_GEN", 1);
+END;] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+DEFINE TRIGGER failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_8"
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:45] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[06/03/2016 15:40:46] [ALTER TABLE TBLJOURNAL ADD TRANSTYPE VARCHAR(50);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_FIELDS failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:46] [CREATE VIEW JOURNAL_SUMMARY(
+  SAPACCOUNT,
+  DEBIT,
+  CREDIT,
+  TRANSTYPE,
+  TRANSDATE,
+  CCNAME)
+AS 
+SELECT SAPACCOUNT,SUM (JRL_DEBIT) AS DEBIT, 
+SUM (JRL_CREDIT) AS CREDIT, TRANSTYPE, 
+JRL_TRANSDATE AS TRANSDATE, CCNAME 
+FROM tblJournal INNER JOIN tblCash on CashID = JRL_TRANSID 
+WHERE Status = 1 
+GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME 
+ORDER BY TRANSTYPE;] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+Table JOURNAL_SUMMARY already exists
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
+[06/03/2016 15:40:47] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/03/2016 15:43:02] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+TRANSTYPE
+At line 2, column 59
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/03/2016 15:43:03] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+TRANSNAME
+At line 1, column 19
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/03/2016 15:45:59] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+TRANSNAME
+At line 1, column 19
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/03/2016 15:47:34] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+TRANSNAME
+At line 1, column 19
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158

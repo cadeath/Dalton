@@ -66,9 +66,24 @@ Public Class frmExtractor
             btnExtract.Enabled = False
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
 
-            ExtractJournalEntry3()
+            ' ExtractJournalEntry3()
         End If
         btnExtract.Enabled = True
+    End Sub
+    Private Sub CheckTranstypeifNull()
+        dbOpen()
+        Dim mysql As String = "SELECT * FROM TBLJOURNAL WHERE TRANSTYPE <> 'null'"
+        Dim cmd As OdbcCommand = New OdbcCommand(mysql, con)
+        'con.Open()
+        Using reader As OdbcDataReader = cmd.ExecuteReader()
+            If reader.HasRows Then
+                ' User already exists
+                MessageBox.Show("Record Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+               
+                con.Close()
+                dbClose()
+            End If
+        End Using
     End Sub
     ''' <summary>
     ''' This method will extract journal entry and load the excel.
@@ -171,9 +186,9 @@ Public Class frmExtractor
         '"JRL_TRANSDATE AS TRANSDATE, CCNAME FROM tblJournal INNER JOIN tblCash on CashID = JRL_TRANSID " & vbCrLf & _
         'String.Format("WHERE Status = 1 AND TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME ORDER BY TRANSTYPE", sd.ToShortDateString)
 
-        Dim mySql As String = "SELECT SAPACCOUNT,TRANSNAME, DEBIT, CREDIT " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, TRANSNAME, DEBIT, CREDIT, CCNAME " & _
         "FROM JOURNAL_SUMMARY " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
@@ -198,19 +213,19 @@ Public Class frmExtractor
 
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
-                'oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
                 oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
                 oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
-                oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME")
+                'oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME")
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
 
 
-                If IsDBNull(.Item("TRANSNAME")) Then
+                If IsDBNull(.Item("CCNAME")) Then
                     lineNum += 1
                 Else
-                    If (Not .Item("TRANSNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
                 End If
 
                 recCnt += 1
@@ -255,13 +270,13 @@ Public Class frmExtractor
     End Sub
     Private Sub ExtractJournalEntry3()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME, TRANSTYPE " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
         "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
 
-        Dim mySql2 As String = "SELECT SAPACCOUNT,TRANSNAME, DEBIT, CREDIT " & _
+        Dim mySql2 As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
        "FROM JOURNAL_SUMMARY " & vbCrLf & _
-       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim ds2 As DataSet = LoadSQL(mySql2)
@@ -306,10 +321,10 @@ Public Class frmExtractor
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
 
-                If IsDBNull(.Item("TRANSNAME")) Then
+                If IsDBNull(.Item("CCNAME")) Then
                     lineNum += 1
                 Else
-                    If (Not .Item("TRANSNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
                 End If
                 recCnt2 += 1
             End With
@@ -345,7 +360,7 @@ Public Class frmExtractor
             AddProgress()
             Application.DoEvents()
         End While
-       
+
         Dim verified_url As String
 
         Select Case FormType
