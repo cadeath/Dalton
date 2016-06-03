@@ -589,3 +589,10 @@ Table JOURNAL_SUMMARY already exists
 [06/03/2016 11:32:33] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [06/03/2016 11:32:44] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
 [06/03/2016 11:32:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[06/03/2016 13:59:43] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[06/03/2016 14:05:06] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[06/03/2016 14:06:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[06/03/2016 14:08:10] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[06/03/2016 14:10:19] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
+[06/03/2016 14:15:28] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[06/03/2016 14:15:31] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
