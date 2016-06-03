@@ -100,5 +100,4 @@
         ds = LoadSQL(mySql, fillData)
         dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
->>>>>>> refs/remotes/origin/money-exchange
 End Class

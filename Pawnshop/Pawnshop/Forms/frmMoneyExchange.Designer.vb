@@ -50,11 +50,6 @@ Partial Class frmmoneyexchange
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-<<<<<<< HEAD
-        Me.txtDenomination1 = New System.Windows.Forms.TextBox()
-        Me.txtRate = New System.Windows.Forms.TextBox()
-        Me.txtCurrency1 = New System.Windows.Forms.TextBox()
-
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtRate = New System.Windows.Forms.TextBox()
         Me.txtCashID = New System.Windows.Forms.TextBox()
@@ -66,7 +61,6 @@ Partial Class frmmoneyexchange
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape3 = New Microsoft.VisualBasic.PowerPacks.LineShape()
->>>>>>> refs/remotes/origin/money-exchange
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -229,11 +223,7 @@ Partial Class frmmoneyexchange
         Me.txtSerial.Location = New System.Drawing.Point(467, 18)
         Me.txtSerial.Name = "txtSerial"
         Me.txtSerial.Size = New System.Drawing.Size(185, 22)
-<<<<<<< HEAD
-        Me.txtSerial.TabIndex = 0
-=======
         Me.txtSerial.TabIndex = 4
->>>>>>> refs/remotes/origin/money-exchange
         Me.txtSerial.Text = "ANOISIMEILLE"
         '
         'TxtName
@@ -242,11 +232,7 @@ Partial Class frmmoneyexchange
         Me.TxtName.Location = New System.Drawing.Point(466, 50)
         Me.TxtName.Name = "TxtName"
         Me.TxtName.Size = New System.Drawing.Size(230, 22)
-<<<<<<< HEAD
-        Me.TxtName.TabIndex = 1
-=======
         Me.TxtName.TabIndex = 5
->>>>>>> refs/remotes/origin/money-exchange
         Me.TxtName.Text = "ELLIE MISIONA"
         '
         'Label2
@@ -264,13 +250,8 @@ Partial Class frmmoneyexchange
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Location = New System.Drawing.Point(638, 106)
         Me.btnCancel.Name = "btnCancel"
-<<<<<<< HEAD
-        Me.btnCancel.Size = New System.Drawing.Size(107, 25)
-        Me.btnCancel.TabIndex = 1
-=======
         Me.btnCancel.Size = New System.Drawing.Size(82, 26)
         Me.btnCancel.TabIndex = 7
->>>>>>> refs/remotes/origin/money-exchange
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -279,13 +260,8 @@ Partial Class frmmoneyexchange
         Me.btnsave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnsave.Location = New System.Drawing.Point(552, 106)
         Me.btnsave.Name = "btnsave"
-<<<<<<< HEAD
-        Me.btnsave.Size = New System.Drawing.Size(119, 25)
-        Me.btnsave.TabIndex = 0
-=======
         Me.btnsave.Size = New System.Drawing.Size(82, 26)
         Me.btnsave.TabIndex = 6
->>>>>>> refs/remotes/origin/money-exchange
         Me.btnsave.Text = "&Save"
         Me.btnsave.UseVisualStyleBackColor = True
         '
@@ -294,42 +270,6 @@ Partial Class frmmoneyexchange
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBrowse.Location = New System.Drawing.Point(466, 106)
         Me.btnBrowse.Name = "btnBrowse"
-<<<<<<< HEAD
-        Me.btnBrowse.Size = New System.Drawing.Size(112, 26)
-        Me.btnBrowse.TabIndex = 2
-        Me.btnBrowse.Text = "Browse"
-        Me.btnBrowse.UseVisualStyleBackColor = True
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.GroupBox4.Controls.Add(Me.btnModify)
-        Me.GroupBox4.Controls.Add(Me.btnSearch1)
-        Me.GroupBox4.Controls.Add(Me.txtCashID)
-        Me.GroupBox4.Controls.Add(Me.Label10)
-        Me.GroupBox4.Controls.Add(Me.txtSymbol1)
-        Me.GroupBox4.Controls.Add(Me.Label9)
-        Me.GroupBox4.Controls.Add(Me.Label8)
-        Me.GroupBox4.Controls.Add(Me.txtDenomination1)
-        Me.GroupBox4.Controls.Add(Me.txtRate)
-        Me.GroupBox4.Controls.Add(Me.txtCurrency1)
-        Me.GroupBox4.Controls.Add(Me.Label6)
-        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox4.Location = New System.Drawing.Point(7, 10)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(407, 150)
-        Me.GroupBox4.TabIndex = 6
-        Me.GroupBox4.TabStop = False
-        '
-        'txtCashID
-        '
-        Me.txtCashID.Location = New System.Drawing.Point(273, 78)
-        Me.txtCashID.Name = "txtCashID"
-        Me.txtCashID.ReadOnly = True
-        Me.txtCashID.Size = New System.Drawing.Size(16, 22)
-        Me.txtCashID.TabIndex = 12
-        Me.txtCashID.Visible = False
-=======
         Me.btnBrowse.Size = New System.Drawing.Size(82, 26)
         Me.btnBrowse.TabIndex = 8
         Me.btnBrowse.Text = "Browse"
@@ -352,33 +292,16 @@ Partial Class frmmoneyexchange
         Me.btnSearch1.TabIndex = 13
         Me.btnSearch1.Text = "Search"
         Me.btnSearch1.UseVisualStyleBackColor = True
->>>>>>> refs/remotes/origin/money-exchange
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-<<<<<<< HEAD
-        Me.Label10.Location = New System.Drawing.Point(38, 51)
-=======
         Me.Label10.Location = New System.Drawing.Point(38, 45)
->>>>>>> refs/remotes/origin/money-exchange
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(54, 16)
         Me.Label10.TabIndex = 10
         Me.Label10.Text = "Symbol"
         '
-<<<<<<< HEAD
-        'txtSymbol1
-        '
-        Me.txtSymbol1.Location = New System.Drawing.Point(92, 48)
-        Me.txtSymbol1.Name = "txtSymbol1"
-        Me.txtSymbol1.ReadOnly = True
-        Me.txtSymbol1.Size = New System.Drawing.Size(230, 22)
-        Me.txtSymbol1.TabIndex = 11
-        Me.txtSymbol1.Text = "USD"
-        '
-=======
->>>>>>> refs/remotes/origin/money-exchange
         'Label9
         '
         Me.Label9.AutoSize = True
@@ -391,51 +314,16 @@ Partial Class frmmoneyexchange
         'Label8
         '
         Me.Label8.AutoSize = True
-<<<<<<< HEAD
-        Me.Label8.Location = New System.Drawing.Point(55, 112)
-=======
         Me.Label8.Location = New System.Drawing.Point(55, 106)
->>>>>>> refs/remotes/origin/money-exchange
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(37, 16)
         Me.Label8.TabIndex = 7
         Me.Label8.Text = "Rate"
         '
-<<<<<<< HEAD
-        'txtDenomination1
-        '
-        Me.txtDenomination1.Location = New System.Drawing.Point(93, 78)
-        Me.txtDenomination1.Name = "txtDenomination1"
-        Me.txtDenomination1.Size = New System.Drawing.Size(176, 22)
-        Me.txtDenomination1.TabIndex = 1
-        Me.txtDenomination1.Text = "1"
-        '
-        'txtRate
-        '
-        Me.txtRate.Location = New System.Drawing.Point(92, 110)
-        Me.txtRate.Name = "txtRate"
-        Me.txtRate.Size = New System.Drawing.Size(94, 22)
-        Me.txtRate.TabIndex = 2
-        Me.txtRate.Text = "46.51"
-        '
-        'txtCurrency1
-        '
-        Me.txtCurrency1.Location = New System.Drawing.Point(91, 19)
-        Me.txtCurrency1.Name = "txtCurrency1"
-        Me.txtCurrency1.Size = New System.Drawing.Size(231, 22)
-        Me.txtCurrency1.TabIndex = 0
-        Me.txtCurrency1.Text = "US DOLLAR"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(30, 21)
-=======
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(30, 15)
->>>>>>> refs/remotes/origin/money-exchange
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(61, 16)
         Me.Label6.TabIndex = 0
@@ -443,17 +331,10 @@ Partial Class frmmoneyexchange
         '
         'btnCalculate
         '
-<<<<<<< HEAD
-        Me.btnCalculate.Location = New System.Drawing.Point(287, 19)
-        Me.btnCalculate.Name = "btnCalculate"
-        Me.btnCalculate.Size = New System.Drawing.Size(92, 25)
-        Me.btnCalculate.TabIndex = 0
-=======
         Me.btnCalculate.Location = New System.Drawing.Point(279, 179)
         Me.btnCalculate.Name = "btnCalculate"
         Me.btnCalculate.Size = New System.Drawing.Size(77, 25)
         Me.btnCalculate.TabIndex = 3
->>>>>>> refs/remotes/origin/money-exchange
         Me.btnCalculate.Text = "Calculate"
         Me.btnCalculate.UseVisualStyleBackColor = True
         '
@@ -626,15 +507,7 @@ Partial Class frmmoneyexchange
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-<<<<<<< HEAD
-        Me.ClientSize = New System.Drawing.Size(794, 233)
-        Me.Controls.Add(Me.Label12)
-        Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox3)
-=======
         Me.ClientSize = New System.Drawing.Size(794, 248)
->>>>>>> refs/remotes/origin/money-exchange
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -676,24 +549,11 @@ Partial Class frmmoneyexchange
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtTotal As System.Windows.Forms.TextBox
-<<<<<<< HEAD
-    Friend WithEvents txtDenomination1 As System.Windows.Forms.TextBox
-    Friend WithEvents txtRate As System.Windows.Forms.TextBox
-    Friend WithEvents txtCurrency1 As System.Windows.Forms.TextBox
-=======
->>>>>>> refs/remotes/origin/money-exchange
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtSerial As System.Windows.Forms.TextBox
     Friend WithEvents btnCalculate As System.Windows.Forms.Button
-<<<<<<< HEAD
-    Friend WithEvents txtCashID As System.Windows.Forms.TextBox
-    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents btnModify As System.Windows.Forms.Button
-    Friend WithEvents btnSearch1 As System.Windows.Forms.Button
-=======
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents btnModify As System.Windows.Forms.Button
     Friend WithEvents btnSearch1 As System.Windows.Forms.Button
@@ -707,5 +567,4 @@ Partial Class frmmoneyexchange
     Friend WithEvents LineShape3 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
->>>>>>> refs/remotes/origin/money-exchange
 End Class
