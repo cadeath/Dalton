@@ -225,7 +225,9 @@
     <Compile Include="Developer\dev_runCmd.Designer.vb">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_runCmd.vb" />
+    <Compile Include="Developer\dev_runCmd.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\ab.Designer.vb">
       <DependentUpon>ab.vb</DependentUpon>
     </Compile>
@@ -588,6 +590,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCurrencyList.resx">
       <DependentUpon>frmCurrencyList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="practice\frmExtractDollarMonthlyDaily.resx">
+      <DependentUpon>frmExtractDollarMonthlyDaily.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
       <DependentUpon>frmPrintManager.vb</DependentUpon>

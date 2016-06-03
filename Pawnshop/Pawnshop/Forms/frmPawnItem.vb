@@ -1606,7 +1606,8 @@ Public Class frmPawnItem
         If Not isRenewable(PTInfo) And type = "Renew" Then Return "NON RENEWABLE"
 
         Dim diff = PTInfo.AuctionDate - PTInfo.LoanDate
-        Dim lessNum As Integer = DateDiff(DateInterval.Month, PTInfo.LoanDate, PTInfo.AuctionDate)
+        Dim lessNum As Integer = DateDiff(DateInterval.Day, PTInfo.LoanDate, PTInfo.AuctionDate)
+        lessNum = lessNum / 30
         If Not lessNum < MONTH_COMPUTE Then
             lessNum = MONTH_COMPUTE
         End If

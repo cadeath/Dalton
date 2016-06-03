@@ -64,6 +64,8 @@
 
         RunCommand(ADD_INTHIST)
         RunCommand("ALTER TABLE TBLINT_HISTORY ADD PRIMARY KEY (INTID);")
+
+        AutoIncrement_ID("TBLINT_HISTORY", "INTID")
     End Sub
 
     Private Sub Do_HitManagement()
@@ -77,6 +79,8 @@
 
         RunCommand(ADD_HIT)
         RunCommand("ALTER TABLE TBLHIT ADD PRIMARY KEY (HITID);")
+
+        AutoIncrement_ID("TBLHIT", "HITID")
     End Sub
 
     Friend Sub Database_Update(ByVal str As String)

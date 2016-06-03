@@ -1,5 +1,4 @@
-﻿
-Public Class frmMain
+﻿Public Class frmMain
 
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
@@ -53,7 +52,6 @@ Public Class frmMain
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
-
     End Sub
 
     Private Sub ExecuteSegregate()
@@ -163,7 +161,7 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to Dollar Buying")
             Exit Sub
         End If
-        frmmoneyexchange.Show()
+        frmDollorSimple.Show()
     End Sub
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
@@ -359,7 +357,7 @@ Public Class frmMain
             pButton.Anchor = AnchorStyles.None
             pButton.Left = 543
         End If
-        
+
     End Sub
 
     Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
@@ -400,7 +398,6 @@ Public Class frmMain
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
-
         qryDate.Show()
     End Sub
 
@@ -439,6 +436,4 @@ Public Class frmMain
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
-   
-   
 End Class
