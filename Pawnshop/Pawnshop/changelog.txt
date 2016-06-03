@@ -1,12 +1,9 @@
 CHANGELOG
 Version 1.2.1
- - Add Database
- - Add Foreign Currency
-
-Version 1.2.0.1
  - Fix monthly computation for Cellphone
+ - Add Foreign Currency
+ - Add Pawnticket and OR Number every print 
  - Include Auto Patch up to db1.2 v1.2
- - Add Pawnticket and OR Number every print
 
 Version 1.2
  - Fix Current Rate for Active Loans
