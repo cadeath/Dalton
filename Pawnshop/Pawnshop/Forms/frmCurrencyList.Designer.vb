@@ -33,7 +33,6 @@ Partial Class frmCurrencyList
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.btnView = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -135,23 +134,11 @@ Partial Class frmCurrencyList
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'btnView
-        '
-        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnView.Location = New System.Drawing.Point(360, 263)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(68, 31)
-        Me.btnView.TabIndex = 10
-        Me.btnView.Text = "&View"
-        Me.btnView.UseVisualStyleBackColor = True
-        '
         'frmCurrencyList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(602, 300)
-        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.lvCurrency)
@@ -178,5 +165,4 @@ Partial Class frmCurrencyList
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents btnView As System.Windows.Forms.Button
 End Class

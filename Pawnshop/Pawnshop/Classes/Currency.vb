@@ -106,6 +106,7 @@ Public Class Currency
     Public Sub SaveCurrency()
         database.SaveEntry(CreateDataSetCurrency)
     End Sub
+
     Public Sub ModifyCurrency()
         Dim mySql As String = "SELECT * FROM TBLCURRENCY WHERE CURRENCYID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, "TBLCURRENCY")

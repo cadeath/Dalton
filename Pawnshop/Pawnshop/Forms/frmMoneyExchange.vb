@@ -113,7 +113,7 @@ Public Class frmmoneyexchange
         GroupBox1.Enabled = False
         TxtName.Enabled = False
         txtCurrency1.Enabled = False
-        GroupBox5.Enabled = False
+        GroupBox6.Enabled = False
         txtSerial.Enabled = False
         txtDenomination1.Enabled = False
         btnModify.Enabled = False
@@ -134,22 +134,6 @@ Public Class frmmoneyexchange
    
     Private Sub btnsave_Click(sender As System.Object, e As System.EventArgs) Handles btnsave.Click
         If Not isValid() Then Exit Sub
-      
-        'Dim tmpCurrency As New Currency
-        'If Not isNew Then tmpCurrency = SelectedCurrency
-
-        'With tmpCurrency
-        '    .CURRENCY = txtCurrency1.Text
-        '    .SYMBOL = txtSymbol1.Text
-        '    .RATE = CDbl(txtRate.Text)
-        '    .CASHID = txtCashID.Text
-        '    If isNew Then
-        '        .SaveCurrency()
-        '        tmpCurrency.LoadLastEntrycurrency()
-        '    Else
-        '        .ModifyCurrency()
-        '    End If
-        'End With
 
         If txtSerial.Text = "" Then
             MsgBox("Please fill the Serial", MsgBoxStyle.Information, "Dollar")
@@ -192,6 +176,7 @@ Public Class frmmoneyexchange
         GroupBox1.Enabled = False
         TxtName.Enabled = False
     End Sub
+
     Friend Sub LoadCurrencyall(ByVal cl As Currency)
         txtCurrency1.Text = String.Format(cl.CURRENCY)
         txtSymbol1.Text = String.Format(cl.SYMBOL)
@@ -199,22 +184,17 @@ Public Class frmmoneyexchange
         MoneyExchange = cl
         btnsave.Focus()
     End Sub
+
     Friend Sub Loadcurrencyall1(ByVal cl As Currency)
         TxtName.Text = String.Format(cl.CURRENCY)
         MoneyExchange = cl
         btnsave.Focus()
     End Sub
 
-    Private Sub txtDenomination1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDenomination1.TextChanged
+    Private Sub txtDenomination1_TextChanged(sender As System.Object, e As System.EventArgs)
         ComputeTotalAmount()
     End Sub
-    Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
-        If IsNumeric(txtTotalAmount.Text) Then
-            Dim temp As Double = txtTotalAmount.Text
-            txtTotalAmount.Text = Format(temp, "N")
-            txtTotalAmount.SelectionStart = txtTotalAmount.TextLength - 3
-        End If
-    End Sub
+  
     Friend Sub LoadClient(ByVal cl As Client)
         TxtName.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", ", " & cl.Suffix, ""), cl.FirstName, cl.LastName)
 
@@ -225,20 +205,18 @@ Public Class frmmoneyexchange
     Private Sub btnBrowse_Click(sender As System.Object, e As System.EventArgs) Handles btnBrowse.Click
         frmDollarList.Show()
     End Sub
-    Private Sub cboCurrency_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCurrency.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            txtDenomination.Focus()
-        End If
-    End Sub
-
+   
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         Me.Hide()
         frmMain.Show()
     End Sub
-    Private Sub txtRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
+    Private Sub txtRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
     Private Sub TxtName_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TxtName.KeyPress
+        If isEnter(e) Then
+            btnsearch.PerformClick()
+        End If
         If Not (Asc(e.KeyChar) = 8) Then
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz.-1234567890 "
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
@@ -246,48 +224,75 @@ Public Class frmmoneyexchange
                 e.Handled = True
             End If
         End If
-        If isEnter(e) Then
-            btnsearch.PerformClick()
+       
+    End Sub
+  
+   
+    Private Sub txtCurrency1_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
+            btnSearch1.PerformClick()
+        End If
+        If e.KeyCode = Keys.Tab Then
+            txtDenomination1.Focus()
         End If
     End Sub
-    Private Sub txtDenomination1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtDenomination1.KeyPress
-        DigitOnly(e)
 
-  End Sub
-    Private Sub btnSearch1_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
-        frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)
-        frmCurrencyList.Show()
-        frmCurrencyList.txtSearch.Text = Me.txtCurrency1.Text.ToString
-        frmCurrencyList.btnSearch.PerformClick()
-    End Sub
-    Private Sub txtSerial_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSerial.KeyPress
-        If isEnter(e) Then
-            btnsave.Focus()
-        End If
-    End Sub
-    Private Sub txtCurrency1_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCurrency1.KeyDown
+   
+   
+
+    Private Sub txtCurrency1_KeyDown_1(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCurrency1.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnSearch1.PerformClick()
         End If
     End Sub
 
-    Private Sub txRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txRate.KeyPress
-        DigitOnly(e)
-    End Sub
-    Private Sub TxtName_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles TxtName.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnsearch.PerformClick()
-        End If
+    Private Sub txtDenomination1_TextChanged_1(sender As System.Object, e As System.EventArgs) Handles txtDenomination1.TextChanged
+        ComputeTotalAmount()
     End Sub
 
-    Private Sub btnModify_Click(sender As System.Object, e As System.EventArgs) Handles btnModify.Click
+    Private Sub txtDenomination1_KeyPress_1(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtDenomination1.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub btnSearch1_Click_1(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
+        frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)
+        frmCurrencyList.Show()
+        frmCurrencyList.txtSearch.Text = Me.txtCurrency1.Text.ToString
+        frmCurrencyList.btnSearch.PerformClick()
+    End Sub
+
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles btnModify.Click
         If btnModify.Text = "&Edit" Then
             isNew = False
             LockFields(False)
             Exit Sub
         End If
     End Sub
-    Private Sub txtRate_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtRate.TextChanged
+    Private Sub txtRate_TextChanged_1(sender As System.Object, e As System.EventArgs) Handles txtRate.TextChanged
         ComputeTotalAmount()
     End Sub
+
+    Private Sub txtRate_KeyPress_1(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
+        If IsNumeric(txtTotalAmount.Text) Then
+            Dim temp As Double = txtTotalAmount.Text
+            txtTotalAmount.Text = Format(temp, "N")
+            txtTotalAmount.SelectionStart = txtTotalAmount.TextLength - 3
+        End If
+    End Sub
+
+   Private Sub btnCalculate_Click(sender As System.Object, e As System.EventArgs) Handles btnCalculate.Click
+        ComputeTotalAmount()
+    End Sub
+
+    Private Sub btnCalculate_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles btnCalculate.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            ComputeTotalAmount()
+        End If
+    End Sub
+
+   
 End Class

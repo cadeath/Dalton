@@ -28,7 +28,6 @@ Public Class frmCurrencyList
     Private Sub frmCurrencyList_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
         ClearField()
-        btnSelect.Visible = False
         LoadActivecurrency()
         txtSearch.Focus()
 
@@ -82,10 +81,10 @@ Public Class frmCurrencyList
 
     Private Sub lvCurrency_DoubleClick(sender As System.Object, e As System.EventArgs) Handles lvCurrency.DoubleClick
         If Not mOtherForm Then
-            btnView.PerformClick()
+            btnSelect.PerformClick()
             Me.Hide()
         Else
-            btnView.PerformClick()
+            btnSelect.PerformClick()
             Me.Hide()
         End If
     End Sub
@@ -94,16 +93,26 @@ Public Class frmCurrencyList
     End Sub
 
     Private Sub btnSelect_Click(sender As System.Object, e As System.EventArgs) Handles btnSelect.Click
-        If lvCurrency.Items.Count = 0 Then Exit Sub
+        'If lvCurrency.Items.Count = 0 Then Exit Sub
 
-        If lvCurrency.SelectedItems.Count = 0 Then
-            lvCurrency.Items(0).Focused = True
-        End If
-        Dim idx As Integer = CInt(lvCurrency.FocusedItem.Text)
-        GetCurrency = New Currency
-        GetCurrency.LoadCurrencydata(idx)
-        formSwitch.ReloadFormFromSearch1(frmOrig, GetCurrency)
-        Me.Close()
+        'If lvCurrency.SelectedItems.Count = 0 Then
+        '    lvCurrency.Items(0).Focused = True
+        'End If
+        'Dim idx As Integer = CInt(lvCurrency.FocusedItem.Text)
+        'GetCurrency = New Currency
+        'GetCurrency.LoadCurrencydata(idx)
+        'formSwitch.ReloadFormFromSearch1(frmOrig, GetCurrency)
+        'Me.Close()
+        If lvCurrency.SelectedItems.Count <= 0 Then Exit Sub
+        Dim CurrencyID As Integer
+        CurrencyID = lvCurrency.FocusedItem.Text
+        Console.WriteLine("CURRENCYID : " & CurrencyID)
+
+        Dim tmpcurrency As New Currency
+        tmpcurrency.LoadCurrencydata(CurrencyID)
+        Me.Hide()
+        frmmoneyexchange.Show()
+        frmmoneyexchange.LoadCurrencyList(tmpcurrency)
     End Sub
     
 
@@ -121,26 +130,13 @@ Public Class frmCurrencyList
         Me.Close()
     End Sub
 
-    Private Sub btnView_Click(sender As System.Object, e As System.EventArgs) Handles btnView.Click
-        If lvCurrency.SelectedItems.Count <= 0 Then Exit Sub
-        Dim CurrencyID As Integer
-        CurrencyID = lvCurrency.FocusedItem.Text
-        Console.WriteLine("CURRENCYID : " & CurrencyID)
-
-        Dim tmpcurrency As New Currency
-        tmpcurrency.LoadCurrencydata(CurrencyID)
-        Me.Hide()
-        frmmoneyexchange.Show()
-        frmmoneyexchange.LoadCurrencyList(tmpcurrency)
-
-    End Sub
 
     Private Sub lvCurrency_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles lvCurrency.KeyPress
         If isEnter(e) Then
             If mOtherForm Then
                 btnSelect.PerformClick()
             Else
-                btnView.PerformClick()
+                btnSelect.PerformClick()
             End If
         End If
     End Sub
