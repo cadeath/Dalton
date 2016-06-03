@@ -1,4 +1,5 @@
-﻿Module updateRate
+﻿
+Module updateRate
     Private dsRate As DataSet
     ' Private ds As String = database.dbName
     Private isFailed As Boolean = False
@@ -53,6 +54,12 @@
         If MaxDS > MaxRate Then
             For i = MaxDS To MaxRate Step -1
                 ds.Tables(fillData).Rows(i - 1).Delete()
+                'ds.Tables(fillData).Rows(i - 1).Delete()
+                mySql = "SELECT * FROM " & fillData
+                mySql &= " WHERE " & ID & " > "(0)
+
+
+                ds = LoadSQL(mySql, fillData)
                 database.SaveEntry(ds, False)
             Next
         End If

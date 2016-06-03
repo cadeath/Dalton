@@ -31,7 +31,6 @@ Partial Class frmCurrencyList
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
@@ -79,11 +78,11 @@ Partial Class frmCurrencyList
         '
         'lvCurrency
         '
-        Me.lvCurrency.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader5, Me.ColumnHeader4})
+        Me.lvCurrency.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader5})
         Me.lvCurrency.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvCurrency.FullRowSelect = True
         Me.lvCurrency.GridLines = True
-        Me.lvCurrency.Location = New System.Drawing.Point(12, 56)
+        Me.lvCurrency.Location = New System.Drawing.Point(11, 57)
         Me.lvCurrency.MultiSelect = False
         Me.lvCurrency.Name = "lvCurrency"
         Me.lvCurrency.Size = New System.Drawing.Size(577, 201)
@@ -110,28 +109,23 @@ Partial Class frmCurrencyList
         Me.ColumnHeader5.Text = "RATE"
         Me.ColumnHeader5.Width = 325
         '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "CASHID"
-        '
         'btnSelect
         '
         Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelect.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSelect.Location = New System.Drawing.Point(433, 264)
+        Me.btnSelect.Location = New System.Drawing.Point(432, 264)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(75, 31)
         Me.btnSelect.TabIndex = 9
         Me.btnSelect.Text = "&Select"
         Me.btnSelect.UseVisualStyleBackColor = True
-        Me.btnSelect.Visible = False
         '
         'btnClose
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.Location = New System.Drawing.Point(514, 264)
+        Me.btnClose.Location = New System.Drawing.Point(513, 264)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 31)
         Me.btnClose.TabIndex = 7
@@ -141,18 +135,19 @@ Partial Class frmCurrencyList
         'btnView
         '
         Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnView.Location = New System.Drawing.Point(359, 264)
+        Me.btnView.Location = New System.Drawing.Point(346, 264)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(68, 31)
         Me.btnView.TabIndex = 10
         Me.btnView.Text = "&View"
         Me.btnView.UseVisualStyleBackColor = True
+        Me.btnView.Visible = False
         '
         'frmCurrencyList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(589, 299)
+        Me.ClientSize = New System.Drawing.Size(601, 299)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnClose)
@@ -160,9 +155,9 @@ Partial Class frmCurrencyList
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(599, 331)
+        Me.MaximumSize = New System.Drawing.Size(620, 331)
         Me.MinimizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(599, 331)
+        Me.MinimumSize = New System.Drawing.Size(600, 331)
         Me.Name = "frmCurrencyList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Currency List"
@@ -183,5 +178,4 @@ Partial Class frmCurrencyList
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnView As System.Windows.Forms.Button
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
 End Class

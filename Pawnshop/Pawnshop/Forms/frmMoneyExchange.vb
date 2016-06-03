@@ -17,6 +17,7 @@ Public Class frmmoneyexchange
     Private strRate As String = DollarAllRate
     Private fillData As String = "TBLCURRENCY"
     Private MODULE_NAME As String = "DOLLAR"
+
     Private Sub btnsearch_Click(sender As System.Object, e As System.EventArgs) Handles btnsearch.Click
         frmClient.SearchSelect(TxtName.Text, FormName.frmMoneyExchange)
         frmClient.Show()
@@ -31,6 +32,7 @@ Public Class frmmoneyexchange
         txtDenomination1.Text = ""
         txtSerial.Text = ""
     End Sub
+
 
     Friend Sub Loadcurrencyy(ByVal tmpcurrency As Currency)
         With tmpcurrency
@@ -57,16 +59,19 @@ Public Class frmmoneyexchange
         Console.WriteLine("Amount: " & getAmount)
         txtTotal.Text = "Php " & getRate * getAmount
     End Sub
+
     Private Sub moneyexchange_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        ClearField()
         txtCurrency1.Focus()
-        txtRate.Text = strRate
-        If isReady() Then
-            Console.WriteLine("Database connected")
-        End If
-        txtTotal.Text = "Php 0"
-        txtDenomination1.Text = "0"
+
+            ClearField()
+            txtRate.Text = strRate
+            If isReady() Then
+                Console.WriteLine("Database connected")
+            End If
+            txtTotal.Text = "Php 0"
+            txtDenomination1.Text = "0"
     End Sub
+
     Private Sub LockFields(ByVal st As Boolean)
         lockForm = st
         txtRate.ReadOnly = st
@@ -97,6 +102,7 @@ Public Class frmmoneyexchange
     ''' </summary>
     ''' <param name="tmpDollar"></param>
     ''' <remarks></remarks>
+    ''' 
     Friend Sub LoadTransDollar(ByVal tmpDollar As DollarTransaction)
         With tmpDollar
 
@@ -121,6 +127,7 @@ Public Class frmmoneyexchange
             Me.Text = "[VOID] " & Me.Text
         End If
     End Sub
+
     Private Function isValid() As Boolean
         If Not IsNumeric(txtRate.Text) Then txtRate.Focus() : Return False
         If txtDenomination1.Text = "" Then txtDenomination1.Focus() : Return False
@@ -134,24 +141,7 @@ Public Class frmmoneyexchange
    
     Private Sub btnsave_Click(sender As System.Object, e As System.EventArgs) Handles btnsave.Click
         If Not isValid() Then Exit Sub
-      
-        'Dim tmpCurrency As New Currency
-        'If Not isNew Then tmpCurrency = SelectedCurrency
-
-        'With tmpCurrency
-        '    .CURRENCY = txtCurrency1.Text
-        '    .SYMBOL = txtSymbol1.Text
-        '    .RATE = CDbl(txtRate.Text)
-        '    .CASHID = txtCashID.Text
-        '    If isNew Then
-        '        .SaveCurrency()
-        '        tmpCurrency.LoadLastEntrycurrency()
-        '    Else
-        '        .ModifyCurrency()
-        '    End If
-        'End With
-
-        If txtSerial.Text = "" Then
+      If txtSerial.Text = "" Then
             MsgBox("Please fill the Serial", MsgBoxStyle.Information, "Dollar")
             txtSerial.Focus()
         Else
@@ -192,22 +182,25 @@ Public Class frmmoneyexchange
         GroupBox1.Enabled = False
         TxtName.Enabled = False
     End Sub
+
     Friend Sub LoadCurrencyall(ByVal cl As Currency)
         txtCurrency1.Text = String.Format(cl.CURRENCY)
         txtSymbol1.Text = String.Format(cl.SYMBOL)
         txtRate.Text = String.Format(cl.RATE)
         MoneyExchange = cl
-        btnsave.Focus()
+        'btnsave.Focus()
     End Sub
-    Friend Sub Loadcurrencyall1(ByVal cl As Currency)
-        TxtName.Text = String.Format(cl.CURRENCY)
-        MoneyExchange = cl
-        btnsave.Focus()
-    End Sub
+
+    'Friend Sub Loadcurrencyall1(ByVal cl As Currency)
+    '    TxtName.Text = String.Format(cl.CURRENCY)
+    '    MoneyExchange = cl
+    '    btnsave.Focus()
+    'End Sub
 
     Private Sub txtDenomination1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDenomination1.TextChanged
         ComputeTotalAmount()
     End Sub
+
     Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
         If IsNumeric(txtTotalAmount.Text) Then
             Dim temp As Double = txtTotalAmount.Text
@@ -215,6 +208,7 @@ Public Class frmmoneyexchange
             txtTotalAmount.SelectionStart = txtTotalAmount.TextLength - 3
         End If
     End Sub
+
     Friend Sub LoadClient(ByVal cl As Client)
         TxtName.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", ", " & cl.Suffix, ""), cl.FirstName, cl.LastName)
 
@@ -225,13 +219,7 @@ Public Class frmmoneyexchange
     Private Sub btnBrowse_Click(sender As System.Object, e As System.EventArgs) Handles btnBrowse.Click
         frmDollarList.Show()
     End Sub
-    Private Sub cboCurrency_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCurrency.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            txtDenomination.Focus()
-        End If
-    End Sub
-
-    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
+   Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         Me.Hide()
         frmMain.Show()
     End Sub
@@ -254,12 +242,7 @@ Public Class frmmoneyexchange
         DigitOnly(e)
 
   End Sub
-    Private Sub btnSearch1_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
-        frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)
-        frmCurrencyList.Show()
-        frmCurrencyList.txtSearch.Text = Me.txtCurrency1.Text.ToString
-        frmCurrencyList.btnSearch.PerformClick()
-    End Sub
+  
     Private Sub txtSerial_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSerial.KeyPress
         If isEnter(e) Then
             btnsave.Focus()
@@ -280,6 +263,11 @@ Public Class frmmoneyexchange
         End If
     End Sub
 
+   
+    Private Sub txtRate_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtRate.TextChanged
+        ComputeTotalAmount()
+    End Sub
+
     Private Sub btnModify_Click(sender As System.Object, e As System.EventArgs) Handles btnModify.Click
         If btnModify.Text = "&Edit" Then
             isNew = False
@@ -287,7 +275,11 @@ Public Class frmmoneyexchange
             Exit Sub
         End If
     End Sub
-    Private Sub txtRate_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtRate.TextChanged
-        ComputeTotalAmount()
+
+    Private Sub btnSearch1_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
+        frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)
+        frmCurrencyList.Show()
+        frmCurrencyList.txtSearch.Text = Me.txtCurrency1.Text.ToString
+        frmCurrencyList.btnSearch.PerformClick()
     End Sub
 End Class
