@@ -63,6 +63,7 @@ Public Class frmmoneyexchange
     Private Sub moneyexchange_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         txtCurrency1.Focus()
 
+<<<<<<< HEAD
             ClearField()
             txtRate.Text = strRate
             If isReady() Then
@@ -70,12 +71,21 @@ Public Class frmmoneyexchange
             End If
             txtTotal.Text = "Php 0"
             txtDenomination1.Text = "0"
+=======
+        ClearField()
+        txtRate.Text = strRate
+        If isReady() Then
+            Console.WriteLine("Database connected")
+        End If
+        txtTotal.Text = "Php 0"
+        txtDenomination1.Text = "0"
+>>>>>>> refs/remotes/origin/money-exchange
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
         lockForm = st
         txtRate.ReadOnly = st
-     If st Then
+        If st Then
             btnModify.Text = "&Edit"
         Else
             btnModify.Text = "&Modify"
@@ -119,7 +129,7 @@ Public Class frmmoneyexchange
         GroupBox1.Enabled = False
         TxtName.Enabled = False
         txtCurrency1.Enabled = False
-        GroupBox5.Enabled = False
+
         txtSerial.Enabled = False
         txtDenomination1.Enabled = False
         btnModify.Enabled = False
@@ -135,13 +145,17 @@ Public Class frmmoneyexchange
         If TxtName.Text = "" Then TxtName.Focus() : Return False
         'If txtSerial.Text = "" Then txtSerial.Focus() : Return False
         If txtTotal.Text = "Php 0" Then txtTotal.Focus() : Return False
-            If dollarClient Is Nothing Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : TxtName.Focus() : Return False
-            Return True
+        If dollarClient Is Nothing Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : TxtName.Focus() : Return False
+        Return True
     End Function
-   
+
     Private Sub btnsave_Click(sender As System.Object, e As System.EventArgs) Handles btnsave.Click
         If Not isValid() Then Exit Sub
+<<<<<<< HEAD
       If txtSerial.Text = "" Then
+=======
+        If txtSerial.Text = "" Then
+>>>>>>> refs/remotes/origin/money-exchange
             MsgBox("Please fill the Serial", MsgBoxStyle.Information, "Dollar")
             txtSerial.Focus()
         Else
@@ -156,7 +170,7 @@ Public Class frmmoneyexchange
                 .Customer = dollarClient
                 .Denomination = txtDenomination1.Text
                 .Serial = txtSerial.Text
-                .EncoderID = POSuser.EncoderID
+                .EncoderID = POSuser.UserID
                 .NetAmount = txtTotal.Text.Substring(4)
                 .CURRENCY = txtCurrency1.Text
                 .SaveDollar()
@@ -168,6 +182,8 @@ Public Class frmmoneyexchange
             End With
             MsgBox("Transaction Saved", MsgBoxStyle.Information)
             ClearField()
+            txtCurrency1.Focus()
+            txtTotal.Text = "Php 0"
         End If
 
     End Sub
@@ -197,9 +213,13 @@ Public Class frmmoneyexchange
     '    btnsave.Focus()
     'End Sub
 
+<<<<<<< HEAD
     Private Sub txtDenomination1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDenomination1.TextChanged
         ComputeTotalAmount()
     End Sub
+=======
+  
+>>>>>>> refs/remotes/origin/money-exchange
 
     Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
         If IsNumeric(txtTotalAmount.Text) Then
@@ -219,11 +239,15 @@ Public Class frmmoneyexchange
     Private Sub btnBrowse_Click(sender As System.Object, e As System.EventArgs) Handles btnBrowse.Click
         frmDollarList.Show()
     End Sub
+<<<<<<< HEAD
    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
+=======
+    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
+>>>>>>> refs/remotes/origin/money-exchange
         Me.Hide()
         frmMain.Show()
     End Sub
-    Private Sub txtRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
+    Private Sub txtRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
     Private Sub TxtName_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TxtName.KeyPress
@@ -238,24 +262,22 @@ Public Class frmmoneyexchange
             btnsearch.PerformClick()
         End If
     End Sub
-    Private Sub txtDenomination1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtDenomination1.KeyPress
-        DigitOnly(e)
+    
 
+<<<<<<< HEAD
   End Sub
   
+=======
+>>>>>>> refs/remotes/origin/money-exchange
     Private Sub txtSerial_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSerial.KeyPress
         If isEnter(e) Then
             btnsave.Focus()
         End If
     End Sub
-    Private Sub txtCurrency1_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCurrency1.KeyDown
+    Private Sub txtCurrency1_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             btnSearch1.PerformClick()
         End If
-    End Sub
-
-    Private Sub txRate_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txRate.KeyPress
-        DigitOnly(e)
     End Sub
     Private Sub TxtName_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles TxtName.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -281,5 +303,30 @@ Public Class frmmoneyexchange
         frmCurrencyList.Show()
         frmCurrencyList.txtSearch.Text = Me.txtCurrency1.Text.ToString
         frmCurrencyList.btnSearch.PerformClick()
+<<<<<<< HEAD
+=======
+    End Sub
+
+    Private Sub txtDenomination1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtDenomination1.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtRate_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtRate.TextChanged
+        ComputeTotalAmount()
+>>>>>>> refs/remotes/origin/money-exchange
+    End Sub
+
+    Private Sub txtRate_KeyPress_1(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtRate.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtDenomination1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtDenomination1.TextChanged
+        ComputeTotalAmount()
+    End Sub
+
+    Private Sub txtCurrency1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtCurrency1.KeyPress
+        If isEnter(e) Then
+            btnSearch1.PerformClick()
+        End If
     End Sub
 End Class

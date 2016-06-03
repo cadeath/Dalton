@@ -9,7 +9,9 @@ Module autopatch
 
         ' FOR v1.2
         db12.PatchUp()
-        'db121.PatchUp()
+        db121.PatchUp()
+
+        DBVERSION = GetOption("DBVersion")
     End Sub
 
     Friend Function isPatchable(ByVal allowVersion As String) As Boolean

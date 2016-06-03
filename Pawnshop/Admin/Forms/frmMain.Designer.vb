@@ -38,6 +38,7 @@ Partial Class frmMain
         Me.btnCash = New System.Windows.Forms.Button()
         Me.btnClass = New System.Windows.Forms.Button()
         Me.btnRate = New System.Windows.Forms.Button()
+        Me.btnCurrency = New System.Windows.Forms.Button()
         CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tsMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -159,11 +160,21 @@ Partial Class frmMain
         Me.btnRate.Text = "Rate"
         Me.btnRate.UseVisualStyleBackColor = True
         '
+        'btnCurrency
+        '
+        Me.btnCurrency.Location = New System.Drawing.Point(12, 313)
+        Me.btnCurrency.Name = "btnCurrency"
+        Me.btnCurrency.Size = New System.Drawing.Size(110, 51)
+        Me.btnCurrency.TabIndex = 7
+        Me.btnCurrency.Text = "Currency"
+        Me.btnCurrency.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(819, 417)
+        Me.Controls.Add(Me.btnCurrency)
         Me.Controls.Add(Me.btnRate)
         Me.Controls.Add(Me.btnClass)
         Me.Controls.Add(Me.btnCash)
@@ -197,5 +208,6 @@ Partial Class frmMain
     Friend WithEvents btnCash As System.Windows.Forms.Button
     Friend WithEvents btnClass As System.Windows.Forms.Button
     Friend WithEvents btnRate As System.Windows.Forms.Button
+    Friend WithEvents btnCurrency As System.Windows.Forms.Button
 
 End Class

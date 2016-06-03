@@ -591,9 +591,6 @@
     <EmbeddedResource Include="Forms\frmCurrencyList.resx">
       <DependentUpon>frmCurrencyList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="practice\frmExtractDollarMonthlyDaily.resx">
-      <DependentUpon>frmExtractDollarMonthlyDaily.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
       <DependentUpon>frmPrintManager.vb</DependentUpon>
     </EmbeddedResource>

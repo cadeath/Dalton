@@ -7,6 +7,7 @@ Public Class frmCurrencyList
     Dim ds As New DataSet
     Dim fillData As String = "TBLCURRENCY"
     Friend GetCurrency As Currency
+
     Friend Sub SearchSelect(ByVal src As String, ByVal formOrigin As formSwitch.FormName)
         mOtherForm = True
         btnSelect.Visible = True
@@ -27,7 +28,6 @@ Public Class frmCurrencyList
     Private Sub frmCurrencyList_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
         ClearField()
-        ' btnSelect.Visible = False
         LoadActivecurrency()
         txtSearch.Focus()
 
@@ -131,14 +131,15 @@ Public Class frmCurrencyList
         Me.Close()
     End Sub
 
-  
-
     Private Sub lvCurrency_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles lvCurrency.KeyPress
         If isEnter(e) Then
             If mOtherForm Then
                 btnSelect.PerformClick()
-            Else
             End If
         End If
+    End Sub
+
+    Private Sub btnClose_Click_1(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
     End Sub
 End Class
