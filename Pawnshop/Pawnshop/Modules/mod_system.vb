@@ -16,6 +16,7 @@ Module mod_system
     ''' <remarks></remarks>
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
+    Public PROTOTYPE As Boolean = True
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
 
@@ -41,6 +42,7 @@ Module mod_system
 
     Friend TBLINT_HASH As String = ""
     Friend PAWN_JE As Boolean = False
+    Friend DBVERSION As String = ""
 #End Region
 
 #Region "Store"

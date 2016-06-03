@@ -1400,7 +1400,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Code.Total_Cnt</Value>
+                              <Value>=Code.TOTAL_CNT</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
