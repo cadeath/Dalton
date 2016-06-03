@@ -133,7 +133,6 @@ Public Class frmmoneyexchange
         If txtDenomination1.Text = "" Then txtDenomination1.Focus() : Return False
         If txtCurrency1.Text = "" Then txtCurrency1.Focus() : Return False
         If TxtName.Text = "" Then TxtName.Focus() : Return False
-        'If txtSerial.Text = "" Then txtSerial.Focus() : Return False
         If txtTotal.Text = "Php 0" Then txtTotal.Focus() : Return False
         If dollarClient Is Nothing Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : TxtName.Focus() : Return False
         Return True
@@ -145,7 +144,7 @@ Public Class frmmoneyexchange
             MsgBox("Please fill the Serial", MsgBoxStyle.Information, "Dollar")
             txtSerial.Focus()
         Else
-            '===============================================================================================================================
+
             Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -190,14 +189,10 @@ Public Class frmmoneyexchange
         txtSymbol1.Text = String.Format(cl.SYMBOL)
         txtRate.Text = String.Format(cl.RATE)
         MoneyExchange = cl
-        'btnsave.Focus()
+
     End Sub
 
-    'Friend Sub Loadcurrencyall1(ByVal cl As Currency)
-    '    TxtName.Text = String.Format(cl.CURRENCY)
-    '    MoneyExchange = cl
-    '    btnsave.Focus()
-    'End Sub
+    
 
   
 
@@ -294,4 +289,5 @@ Public Class frmmoneyexchange
             btnSearch1.PerformClick()
         End If
     End Sub
+
 End Class

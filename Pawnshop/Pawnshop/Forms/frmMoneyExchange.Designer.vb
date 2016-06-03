@@ -61,9 +61,9 @@ Partial Class frmmoneyexchange
         Me.txtCurrency1 = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
-        Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape3 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -399,6 +399,7 @@ Partial Class frmmoneyexchange
         '
         Me.txtSymbol1.Location = New System.Drawing.Point(94, 47)
         Me.txtSymbol1.Name = "txtSymbol1"
+        Me.txtSymbol1.ReadOnly = True
         Me.txtSymbol1.Size = New System.Drawing.Size(120, 22)
         Me.txtSymbol1.TabIndex = 11
         Me.txtSymbol1.Text = "USD"
@@ -454,13 +455,13 @@ Partial Class frmmoneyexchange
         Me.ShapeContainer1.TabIndex = 16
         Me.ShapeContainer1.TabStop = False
         '
-        'LineShape1
+        'LineShape3
         '
-        Me.LineShape1.Name = "LineShape1"
-        Me.LineShape1.X1 = 402
-        Me.LineShape1.X2 = 402
-        Me.LineShape1.Y1 = -10
-        Me.LineShape1.Y2 = 199
+        Me.LineShape3.Name = "LineShape3"
+        Me.LineShape3.X1 = 403
+        Me.LineShape3.X2 = 775
+        Me.LineShape3.Y1 = 70
+        Me.LineShape3.Y2 = 69
         '
         'LineShape2
         '
@@ -470,13 +471,13 @@ Partial Class frmmoneyexchange
         Me.LineShape2.Y1 = 137
         Me.LineShape2.Y2 = 137
         '
-        'LineShape3
+        'LineShape1
         '
-        Me.LineShape3.Name = "LineShape3"
-        Me.LineShape3.X1 = 403
-        Me.LineShape3.X2 = 775
-        Me.LineShape3.Y1 = 70
-        Me.LineShape3.Y2 = 69
+        Me.LineShape1.Name = "LineShape1"
+        Me.LineShape1.X1 = 402
+        Me.LineShape1.X2 = 402
+        Me.LineShape1.Y1 = -10
+        Me.LineShape1.Y2 = 199
         '
         'frmmoneyexchange
         '
