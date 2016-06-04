@@ -155,7 +155,7 @@ Public Class frmmoneyexchange
                 .Customer = dollarClient
                 .Denomination = txtDenomination1.Text
                 .Serial = txtSerial.Text
-                .EncoderID = POSuser.EncoderID
+                .EncoderID = POSuser.UserID
                 .NetAmount = txtTotal.Text.Substring(4)
                 .CURRENCY = txtCurrency1.Text
                 .SaveDollar()
@@ -163,7 +163,7 @@ Public Class frmmoneyexchange
                 AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber)
                 AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING")
 
-                AddTimelyLogs(MODULE_NAME, String.Format("{0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate), .NetAmount)
+                AddTimelyLogs(MODULE_NAME, String.Format("{3} - {0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate, .CURRENCY), .NetAmount)
             End With
             MsgBox("Transaction Saved", MsgBoxStyle.Information)
             ClearField()
@@ -258,8 +258,6 @@ Public Class frmmoneyexchange
             Exit Sub
         End If
     End Sub
-
-
 
     Private Sub btnSearch1_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
         frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)

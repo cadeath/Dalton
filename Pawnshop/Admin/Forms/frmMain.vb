@@ -83,4 +83,13 @@
         ds = LoadSQL(mySql, fillData)
         dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
+
+    Private Sub btnCurrency_Click(sender As System.Object, e As System.EventArgs) Handles btnCurrency.Click
+        fillData = "tblCurrency"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " ORDER BY CurrencyID ASC"
+
+        ds = LoadSQL(mySql, fillData)
+        dgvPawnshop.DataSource = ds.Tables(fillData)
+    End Sub
 End Class
