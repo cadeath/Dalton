@@ -236,6 +236,12 @@
     <Compile Include="Forms\ab.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\ab2.Designer.vb">
+      <DependentUpon>ab2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ab2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\diagAuthorization.Designer.vb">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
     </Compile>
@@ -583,6 +589,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ab2.resx">
+      <DependentUpon>ab2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>

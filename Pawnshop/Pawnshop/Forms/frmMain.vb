@@ -382,7 +382,8 @@
     End Sub
 
     Private Sub AboutUsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
-        ab.Show()
+        'ab.Show()
+        ab2.Show()
     End Sub
 
     Private Sub ORManagerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ORManagerToolStripMenuItem.Click
