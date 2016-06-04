@@ -455,7 +455,7 @@ Partial Class frmMain
         Me.btnDollarBuying.Name = "btnDollarBuying"
         Me.btnDollarBuying.Size = New System.Drawing.Size(137, 90)
         Me.btnDollarBuying.TabIndex = 23
-        Me.btnDollarBuying.Text = "Dollar Buying"
+        Me.btnDollarBuying.Text = "Foreign Exchange"
         Me.btnDollarBuying.UseVisualStyleBackColor = True
         '
         'btnLayAway
