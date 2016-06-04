@@ -150,11 +150,8 @@
         Console.WriteLine("ID: " & id)
         Dim tmpLoad As New DollarTransaction
         tmpLoad.LoadDollar(id)
-
-        frmDollorSimple.Show()
-        frmDollorSimple.LoadDollar(tmpLoad)
-        'frmmoneyexchange.Show()
-        'frmmoneyexchange.LoadTransDollar(tmpLoad)       
+        frmmoneyexchange.Show()
+        frmmoneyexchange.LoadTransDollar(tmpLoad)
     End Sub
 
 End Class
