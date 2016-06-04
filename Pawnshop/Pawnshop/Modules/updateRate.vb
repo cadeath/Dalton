@@ -54,9 +54,6 @@ Module updateRate
         If MaxDS > MaxRate Then
             For i = MaxDS To MaxRate Step -1
                 ds.Tables(fillData).Rows(i - 1).Delete()
-
-
-                'ds = LoadSQL(mySql, fillData)
                 database.SaveEntry(ds, False)
             Next
         End If

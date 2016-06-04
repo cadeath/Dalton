@@ -1,0 +1,1667 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+pawnshop
+</name>
+</assembly>
+<members>
+<member name="P:Pawnshop.PawnTicket.EarlyRedeem">
+	<summary>
+ Interest from Early Redemption
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.diagAuthorization.LoadUser(Pawnshop.ComputerUser)">
+	<summary>
+ to load the username to textbox
+ </summary>
+	<param name="pos"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.diagAuthorization.verify">
+	<summary>
+ to confirm the authorization of the user
+ to check the password if correct
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.diagAuthorization.btnAuthorize_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to load verify method
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.dbOpen">
+	<summary>
+ This method shows the connection string of a database.
+ Also here we open the database.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.dbClose">
+	<summary>
+ This method is for closing after database was open here is the close.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.isReady">
+	<summary>
+ The database is ready to open.
+ </summary>
+	<returns>return false if the database is not ready.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.SaveEntry(System.Data.DataSet,System.Boolean)">
+	<summary>
+ Module 001
+ Save the Dataset to the database
+ </summary>
+	<param name="dsEntry">Database with Table Name as Database Table Name</param>
+	<returns>Boolean: Success Result</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.DBCompatibilityCheck">
+	<summary>
+This function will check the compatibility of database version if it is match.
+ </summary>
+	<returns>return false if the database version is not match.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.LoadSQL(System.String,System.String)">
+	<summary>
+This function where the table load to dataset.
+ </summary>
+	<param name="mySql">mysql where the data pass by.</param>
+	<param name="tblName">tblName here is a variable that hold the data.</param>
+	<returns>return ds after reading the mysql data.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.LoadSQL_byDataReader(System.String)">
+	<summary>
+ This function is the declaration of odbccommand and odbcdatareader.
+ </summary>
+	<param name="mySql">mysql where the data pass</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.dbReaderOpen">
+	<summary>
+ The conStr here a variable that hold the connectionstring of the database.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.dbReaderClose">
+	<summary>
+ close the database.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.GetOption(System.String)">
+	<summary>
+ This function select all data from tblmaintenance.
+ </summary>
+	<param name="keys">keys is the parameter </param>
+	<returns>return ret after reading the dataset.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.database.UpdateOptions(System.String,System.String)">
+	<summary>
+ This module where select all data from tblmaintenance.
+ </summary>
+	<param name="key">the key is parameter only data will be read if what is the opt_keys shows in key.</param>
+	<param name="value">The value here hold the data from the opt_values.</param>
+	<remarks></remarks>
+</member><member name="T:Pawnshop.database">
+	<summary>
+ This module declare the connection of the database.
+ 
+ </summary>
+	<remarks></remarks>
+</member><member name="P:Pawnshop.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Pawnshop.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Pawnshop.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="P:Pawnshop.RandomKeyGenerator.KeyLetters">
+	<date>27072005</date><time>071924</time>
+	<type>property</type>
+	<summary>
+ WRITE ONLY PROPERTY. HAS TO BE SET BEFORE CALLING GENERATE()
+ </summary>
+</member><member name="P:Pawnshop.RandomKeyGenerator.KeyNumbers">
+	<date>27072005</date><time>071924</time>
+	<type>property</type>
+	<summary>
+ WRITE ONLY PROPERTY. HAS TO BE SET BEFORE CALLING GENERATE()
+ </summary>
+</member><member name="P:Pawnshop.RandomKeyGenerator.KeyChars">
+	<date>27072005</date><time>071924</time>
+	<type>property</type>
+	<summary>
+ WRITE ONLY PROPERTY. HAS TO BE SET BEFORE CALLING GENERATE()
+ </summary>
+</member><member name="M:Pawnshop.RandomKeyGenerator.Generate">
+	<date>27072005</date><time>072344</time>
+	<type>function</type>
+	<summary>
+ GENERATES A RANDOM STRING OF LETTERS AND NUMBERS.
+ LETTERS CAN BE RANDOMLY CAPITAL OR SMALL.
+ </summary>
+	<returns type="String">RETURNS THE
+         RANDOMLY GENERATED KEY</returns>
+</member><member name="T:Pawnshop.RandomKeyGenerator">
+	<date>27072005</date><time>070339</time>
+	<type>class</type>
+	<summary>
+ REQUIRES PROPERTIES: KeyLetters, KeyNumbers, MaxChars
+ </summary>
+</member><member name="M:Pawnshop.JournalEntries.AddJournal(System.Double,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+	<summary>
+ This Procedure add Journal Entries
+ </summary>
+	<param name="Amt">Amount</param>
+	<param name="DebitCredit">Debit/Credit</param>
+	<param name="AccountName">TransName</param>
+	<param name="Remarks">Remarks</param>
+	<param name="cashCountName">Display on CashCount</param>
+	<param name="ToDisplay">ToDisplay on CashCount</param>
+	<param name="Category">Category</param>
+	<remarks>This Procedure add Journal Entries</remarks>
+</member><member name="M:Pawnshop.JournalEntries.RemoveJournal(System.String)">
+	<summary>
+ This method select all data from tblJournal where srcStr is the parameter
+ </summary>
+	<param name="srcStr">srcStr is the bases if what journal to display.</param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.JournalEntries.GetTransID(System.String)">
+	<summary>
+ This function create accountName variable which the paremeter of tblcash.
+ </summary>
+	<param name="AccountName"></param>
+	<returns>return ds after reading data.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.LoadClient(Pawnshop.Client)">
+	<summary>
+ This method will load the client firstname and lastname into single textbox.
+ </summary>
+	<param name="cl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.isValid">
+	<summary>
+ This method will verify if the required information is gevin.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.cboDenomination_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ if you press the enter it will go the client form.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.cboDenomination_SelectedIndexChanged(System.Object,System.EventArgs)">
+	<summary>
+ call the computetotal method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.ComputeTotal">
+	<summary>
+ This method will compute the total amount of peso from the dollar.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.ClearField">
+	<summary>
+ This method will clear all textboxes and combobox.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.frmDollorSimple_Load(System.Object,System.EventArgs)">
+	<summary>
+ clear the textfield and load the rate into txtrate.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.LoadDollar(Pawnshop.DollarTransaction)">
+	<summary>
+ load the dollar value to combobox.
+ </summary>
+	<param name="tmpDollar"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.btnSave_Click(System.Object,System.EventArgs)">
+	<summary>
+ Save the transaction into database.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.btnSearch_Click(System.Object,System.EventArgs)">
+	<summary>
+This button will show the client management form.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.btnBrowse_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will show dollar transaction list form.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.txtSerial_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ if you press enter the cursor will focus to the txtName field.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.txtRate_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress accept digit only.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollorSimple.txtRate_KeyUp(System.Object,System.Windows.Forms.KeyEventArgs)">
+	<summary>
+ This keyup call the computeTotal method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashCount.ComputeMe(System.Windows.Forms.TextBox,System.Double)">
+	<summary>
+ Insert this to the KeyUp event
+ </summary>
+	<param name="txt"></param>
+	<param name="amt"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.frmClientInformation_Load(System.Object,System.EventArgs)">
+	<summary>
+ call the clearfields method.
+ focus the cursor in txtFirstname textbox.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.GetDistinct(System.String)">
+	<summary>
+ This method will select client specifically from the table.
+ </summary>
+	<param name="col"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.LoadClientInForm(Pawnshop.Client)">
+	<summary>
+ This method will able to load data to the textfields.
+ </summary>
+	<param name="cl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.ComputeBirthday">
+	<summary>
+ This method will computer the birth day of the client.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.LockFields(System.Boolean)">
+	<summary>
+ This method will disabled the textfield.
+ </summary>
+	<param name="st"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.ClearFields">
+	<summary>
+ This method will able to clear the text fields.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.txtZip_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress means only digit is allow to enter in this text field.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.PhoneSeparator(System.Windows.Forms.TextBox,System.Windows.Forms.KeyPressEventArgs,System.Boolean)">
+	<summary>
+ This method will separate the phone number.
+ </summary>
+	<param name="PhoneField"></param>
+	<param name="e"></param>
+	<param name="isPhone"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.txtCP1_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress is accept digit only and call the phoneSeparator method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.txtCP2_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress is accept digit only and call the phoneSeparator method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.txtTele_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress is accept digit only and call the phoneSeparator method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.isValid">
+	<summary>
+ This function shows the requirements of the client.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.btnSave_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will update the client information.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.dtpBday_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress will lock the dtpBday accept digit only.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.dtpBday_ValueChanged(System.Object,System.EventArgs)">
+	<summary>
+ This value changed call the computeBirthday method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.cboGender_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress accept digit only.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.btnAdd_Click(System.Object,System.EventArgs)">
+	<summary>
+ ID Group===================
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.AddID(Pawnshop.IdentificationCard)">
+	<summary>
+ This method allow to add identification card of the client.
+ </summary>
+	<param name="cID"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.ClearIDFields">
+	<summary>
+ This method will clear the text fields and combobox.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.LoadID(Pawnshop.Client)">
+	<summary>
+ This method will load the identification card of a client.
+ </summary>
+	<param name="cl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.idSelected(Pawnshop.IdentificationCard)">
+	<summary>
+ This method select the id of a client
+ </summary>
+	<param name="SelID"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.SaveIDs(Pawnshop.Client)">
+	<summary>
+ This method will modify the Identification card of a client.
+ call the default id method.
+ </summary>
+	<param name="cl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.defaultID">
+	<summary>
+ This method will load the default identification of a client.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClientInformation.btnHistory_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will load the history of the client and load to the frmReport.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="P:Pawnshop.MoneyTransferService.isGenerated">
+	<summary>
+ isSystem Generated
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.frmBorrowBrowse_Load(System.Object,System.EventArgs)">
+	<summary>
+ load the clearfields and loadborrowing method
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.ClearFields">
+	<summary>
+ clear the text fields of the textbox and listview
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.LoadBorrowings(System.String)">
+	<summary>
+ load all client who borrow and what item they borrow
+ </summary>
+	<param name="mySql"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.AddItem(Pawnshop.Borrowings)">
+	<summary>
+ this method will add item and get the referencenumber, transactiondate,BranchCode from the borrowing class.
+ </summary>
+	<param name="br"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.btnClose_Click(System.Object,System.EventArgs)">
+	<summary>
+ close button
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.btnView_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to view branch name, transaction date, item out and remarks to listview
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.btnVoid_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to not valid the transaction or to cancel
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.lvBorrowings_DoubleClick(System.Object,System.EventArgs)">
+	<summary>
+ double click transaction to view the item
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.btnUpload_Click(System.Object,System.EventArgs)">
+	<summary>
+ button that upload the file to desire url
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowBrowse.btnBrowse_Click(System.Object,System.EventArgs)">
+	<summary>
+ browse button that open the file location
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowing.frmBorrowing_Load(System.Object,System.EventArgs)">
+	<summary>
+ load the clearfields, loadlastrefnum and loadbranches method
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowing.LoadLastRefNum">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBorrowing.btnBrowse_Click(System.Object,System.EventArgs)">
+	<summary>
+ show form frmborrowbrowse
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="T:Pawnshop.dsHit.hit_listDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsHit.hit_listRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsHit.hit_listRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsHit">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="M:Pawnshop.Currency.DreadKnight(System.String,System.String)">
+	<remarks>to be added by ID List</remarks>
+</member><member name="M:Pawnshop.frmDollarList.frmDollarList_Load(System.Object,System.EventArgs)">
+	<summary>
+ call the clearfields method.
+ call the loadActive method.
+ authorization.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollarList.ClearFields">
+	<summary>
+ clear the text field and listview
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollarList.LoadActive(System.String)">
+	<summary>
+ Load the dollar value to listview.
+ </summary>
+	<param name="mySql"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollarList.AddItem(Pawnshop.DollarTransaction)">
+	<summary>
+ Add item into listview.
+ </summary>
+	<param name="dl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollarList.lvDollar_DoubleClick(System.Object,System.EventArgs)">
+	<summary>
+ doubleclick data in listview to view the information.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollarList.btnVoid_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will allow to void transaction.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollarList.btnSearch_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will search the information of a client.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollarList.txtSearch_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress will go to search client information form.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmDollarList.btnView_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will load the dollar value.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmMoneyTransfer.Main">
+	<summary>
+ Initializing Money Transfer Services
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCIO_List.frmCIO_List_Load(System.Object,System.EventArgs)">
+	<summary>
+ load the clearfield and loadactive method
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCIO_List.ClearField">
+	<summary>
+ clear the textbox and listview data field
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCIO_List.LoadActive">
+	<summary>
+ load all transaction in cash in / out
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCIO_List.AddItem(System.Data.DataRow)">
+	<summary>
+ load the date to the listview.
+ </summary>
+	<param name="cio"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCIO_List.btnSearch_Click(System.Object,System.EventArgs)">
+	<summary>
+ search all data from filldata 
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCIO_List.VoidID(System.Int32)">
+	<summary>
+	</summary>
+	<param name="id"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCIO_List.txtSearch_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This button perform search the desired data.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCIO_List.btnVoid_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button void the transaction.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmLogin.pbHeader_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ This mouseDown will make the mouse cursor to fit in the textfield.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmLogin.pbHeader_MouseMove(System.Object,System.Windows.Forms.MouseEventArgs)">
+	<summary>
+ ' This mouseDown will make the mouse cursor to fit in the textfield.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmLogin.btnExit_Click(System.Object,System.EventArgs)">
+	<summary>
+ Exit the applicatio.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmLogin.frmLogin_Load(System.Object,System.EventArgs)">
+	<summary>
+ call the checkUsers method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmLogin.CheckUsers">
+	<summary>
+ This method call the createadministrator method from the class.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmLogin.UserFieldSelected">
+	<summary>
+ This method will set the font size into regular in the userfield.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmLogin.PasswordFieldSelected">
+	<summary>
+  This method will set the font size into regular in the passwordfield.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmLogin.btnLogin_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will perform login the account user.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.Client.LoadClient(System.Int32)">
+	<summary>
+ This is use to load Client information
+ </summary>
+	<param name="id">ClientID</param>
+	<remarks>to be added by ID List</remarks>
+</member><member name="M:Pawnshop.frmPawning.frmPawning_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+	<summary>
+This case function allow you use short key.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.frmPawning_Load(System.Object,System.EventArgs)">
+	<summary>
+ load the clearfields and loadActive method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.btnLoan_Click(System.Object,System.EventArgs)">
+	<summary>
+ show the form pawn item and add new loan.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.LoadActive">
+	<summary>
+ load the specific client either renew or redeem or segregated.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.AddItem(Pawnshop.PawnTicket)">
+	<summary>
+ This method will allow you to add new load.
+ </summary>
+	<param name="tk"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.ClearFields">
+	<summary>
+ This method will clear the txtsearch and listview items
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.btnSearch_Click(System.Object,System.EventArgs)">
+	<summary>
+ search the client who already has transaction.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.txtSearch_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ to perform enter without clicking the search button.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.btnView_Click(System.Object,System.EventArgs)">
+	<summary>
+ to view the information of the client.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.lvPawners_DoubleClick(System.Object,System.EventArgs)">
+	<summary>
+ double click the disire client in the listview to view thier information.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.lvPawners_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ perform enter in the desire client in the listview to view thier information.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.btnRenew_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to renew expiration date of transaction.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.btnRedeem_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to redeem the item of the client
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.chkRenew_CheckedChanged(System.Object,System.EventArgs)">
+	<summary>
+ checkbox to load the renew client in listview 
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.chkRedeem_CheckedChanged(System.Object,System.EventArgs)">
+	<summary>
+ checkbox to load the redeem client in listview
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmPawning.chkSeg_CheckedChanged(System.Object,System.EventArgs)">
+	<summary>
+ checkbox to load the segregated client in listview
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsuranceList.LoadInsurance">
+	<summary>
+ this method load the information of a client
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsuranceList.AddItem(Pawnshop.Insurance)">
+	<summary>
+ This method will add item to listview.
+ </summary>
+	<param name="ins"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsuranceList.ClearFields">
+	<summary>
+ This method will clear the textfield and listview.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsuranceList.btnView_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will view the client information from client management form to certificate of insurance form.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsuranceList.btnSearch_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button allow to search the client information.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.dailyGospel.Scrape">
+	<summary>
+ This module is the declaration of the URL.
+ The sr here was declare as streamreader which means to read a text file.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmmoneyexchange.LoadCurrencyList(Pawnshop.Currency)">
+	<summary>
+ Load currency to textbox
+ </summary>
+	<param name="cl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmmoneyexchange.LoadTransDollar(Pawnshop.DollarTransaction)">
+	<summary>
+ Load Dollar transaction to textbox
+ </summary>
+	<param name="tmpDollar"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.DailyTimeLog.AddTimelyLogs(System.String,System.String,System.Double,System.Boolean,System.String)">
+	<summary>
+ This records every transactions in the system
+ </summary>
+	<param name="mod_name">Type: String
+ Act as Category of the report</param>
+	<param name="logs">Type: String
+ Logs the details of the report</param>
+	<param name="Amount">Type: Double [Optional = 0.00]
+ If any amount involve, write it here</param>
+	<param name="hasCustomer">Type: Boolean [Optional = True]
+ Identify if the reports has customer involved</param>
+	<param name="remarks">Type: String [Optional]
+ For any technical remarks only. Won't display on the reports.
+ </param>
+	<remarks></remarks>
+</member><member name="T:Pawnshop.formSwitch.FormName">
+	<summary>
+ This module where every form was assign by a digit which underlying the form.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.formSwitch.ReloadFormFromSearch(Pawnshop.formSwitch.FormName,Pawnshop.Client)">
+	<summary>
+ This method select what form you want to go.
+ </summary>
+	<param name="gotoForm">gotoform here is a variable that hold all forms.</param>
+	<param name="cl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.formSwitch.ReloadFormFromSearch1(Pawnshop.formSwitch.FormName,Pawnshop.Currency)">
+	<remarks></remarks>
+</member><member name="M:Pawnshop.ComputerUser.PriviledgeChecking">
+	<summary>
+ For Adding Priviledge
+ </summary>
+	<remarks></remarks>
+</member><member name="T:Pawnshop.ComputerUser">
+	<summary>
+ NOTE: Privilege PDuNxp8S9q0= means SUPER USER
+ </summary>
+	<remarks>NOTE: Privilege PDuNxp8S9q0= means SUPER USER</remarks>
+</member><member name="M:Pawnshop.frmBackup.btnClose_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to close application.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.frmBackup_Load(System.Object,System.EventArgs)">
+	<summary>
+ load the loadbackupSetup and loadfiles method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.isReady">
+	<summary>
+ This function able to select either what path you want to use.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.LoadBackupSetup">
+	<summary>
+ create backup of files to selected path
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.LoadFiles">
+	<summary>
+ load the file to listbox
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.startBackup">
+	<summary>
+ start backuping selected files to desire path
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.StartupExecute">
+	<summary>
+ this method create and copy backup files
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.btnExecute_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button perform backup
+ if the back up is not ready message will appear "failed to execute backup"
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.doBackup(System.String)">
+	<summary>
+ this mehtod will save the backup file to the desire path.
+ </summary>
+	<param name="path"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.btnSave_Click(System.Object,System.EventArgs)">
+	<summary>
+ this button call the dosavesettings method.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.doSaveSettings">
+	<summary>
+ this method perform saving of settings
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.btnBrowseFile_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to browse desire file to backup 
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.chkOn2_CheckedChanged(System.Object,System.EventArgs)">
+	<summary>
+ checkbox that enable the second txtpath, copy/paste checkbox and browse button
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.chkOn3_CheckedChanged(System.Object,System.EventArgs)">
+	<summary>
+ checkbox that enable the thrid txtpath, copy/paste checkbox and browse button
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.btnBrowse1_Click(System.Object,System.EventArgs)">
+	<summary>
+ browse button of 1st backup file that open the file location
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.btnBrowse2_Click(System.Object,System.EventArgs)">
+	<summary>
+browse button of second backup file that open the file location
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmBackup.btnBrowse3_Click(System.Object,System.EventArgs)">
+	<summary>
+ browse button of 3rd backup file that open the file location
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.migrate.ifSex(System.String)">
+	<summary>
+ This function declare str to hold the case information.
+ </summary>
+	<param name="str"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.migrate.dbSex(System.String)">
+	<summary>
+ This function has case if user choose "f" it return to 0.
+ and if user choose "m" it return 1.
+ </summary>
+	<param name="str">str here hold the case data.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.migrate.ifPhone(System.String)">
+	<summary>
+ This function shows the selection of phone number choices.
+ </summary>
+	<param name="str"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.migrate.ifItemType(System.String)">
+	<summary>
+ This function will select all data from tblclass where the str is the parameter
+ only data shows if what str value.
+ </summary>
+	<param name="str">str is the parameter.</param>
+	<returns>it return true if dataset if not zero.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.migrate.isClass(System.String)">
+	<summary>
+ This function select all from tblclass.
+ Only data will shows if what value in a desc.
+ </summary>
+	<param name="desc">desc is the parameter.</param>
+	<returns>return true if the dataset if not zero.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.migrate.ifStatus(System.String)">
+	<summary>
+ This function select the case.
+ </summary>
+	<param name="str">This str here is the parameter where hold the nonmodifiable value.</param>
+	<returns>return true if user select "A" and "T". And return false if these two are not choose.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.migrate.SearchClient(System.String,System.String)">
+	<summary>
+ This function select all data from tblClient.
+ only data will show if name are to be called.
+ </summary>
+	<param name="fname">fname is the parameter of a name.</param>
+	<param name="lname">lname also paremeter of a name.</param>
+	<returns>return ds after reading every transaction.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.migrate.isDuplication(System.Int64)">
+	<summary>
+ This function shows if the ID of the client if already exists.
+ </summary>
+	<param name="pt">pt here is the paremeter it hold the id.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.btnPost_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to Post the transaction that already add in listview
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.AddItem(Pawnshop.CashInOutTransaction)">
+	<summary>
+ add data to listview
+ </summary>
+	<param name="cio"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.frmCashInOut2_Load(System.Object,System.EventArgs)">
+	<summary>
+ load the clearfields, loadtables, cashinsetup method
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.UpdateCategory(System.Collections.Hashtable)">
+	<summary>
+ if category change automatically transaction name change
+ </summary>
+	<param name="ht"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.UpdateTransaction(System.Collections.Hashtable)">
+	<summary>
+ if transaction detect the category change automacally transaction change
+ </summary>
+	<param name="ht"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.cashInSetup">
+	<summary>
+ click button to begin cash in transaction
+ if other transaction not post data will be clear
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.ClearFields">
+	<summary>
+ This method wil clear the textbox, combobox and listview in this form.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.cboCat_SelectedIndexChanged(System.Object,System.EventArgs)">
+	<summary>
+ This combobox display the category and automatically display the transaction in the cboTrans
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.Renumber">
+	<summary>
+ This method will automatically increment after every transaction.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.btnCashOut_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button perform the cashout of data.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.btnRemove_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button remove the item in the listview details.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.getCashID(System.String)">
+	<summary>
+ This function will create getcashID and select data from tblcash.
+ </summary>
+	<param name="transname"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.btnAdd_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to add the cash in to listview
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.isValidAdd">
+	<summary>
+ function that return the focus to txtamt.text if detect no value
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.btnBrowse_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to view the list of all cash in receipt
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.btnInvIn_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to change the transaction name to Smart Money Payable - Perfecom
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmCashInOut2.btnBDOCashOut_Click(System.Object,System.EventArgs)">
+	<summary>
+ click button to change the transaction name to BDO ATM Cashout
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmExtractor.FormInit">
+	<summary>
+ this method will select what you want to extract.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmExtractor.btnExtract_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will extract the desired extract type.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmExtractor.ExtractJournalEntry">
+	<summary>
+ This method will extract journal entry and load the excel.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmExtractor.MoneyTransferBSP">
+	<summary>
+ This method will select between date range.
+ search the items by date.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmExtractor.ExtractExpiry">
+	<summary>
+ This method will extract the expiry date and then load the excel
+ </summary>
+	<remarks></remarks>
+</member><member name="F:Pawnshop.mod_system.DEV_MODE">
+	<summary>
+ This region declare the neccessary variable in this system.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.OpenStore">
+	<summary>
+ This function will open the store.
+ if the store is open then this function select all data from storeDB. 
+ </summary>
+	<returns>return false if the store is not able to open.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.LoadLastOpening">
+	<summary>
+ This function select all data from tblDaily table.
+ </summary>
+	<returns>return ds after reading every transaction.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.LoadCurrentDate">
+	<summary>
+ This method will load all data from storeDB.
+ all data will be show where status is = 1.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.AutoSegregate">
+	<summary>
+ This function will segregate all data from tblPawn
+ where AuctionDate is = to the CurrentDate.
+ </summary>
+	<returns>return true if all data are shown.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.hasJE(System.String[])">
+	<summary>
+ Check if ALL Journal Entry Account on the MODULE 
+ is updated in the database
+ </summary>
+	<param name="sapAccnt">Array of Entries in String</param>
+	<returns>Boolean</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.CloseStore(System.Double)">
+	<summary>
+ This method will select all data from storeDB.
+ </summary>
+	<param name="cc">cc is the parameter that hold nonmodifiable value.</param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.CommandPrompt(System.String,System.String)">
+	<summary>
+ This function has two arguments.
+ declaraton UseShellExecute as boolean and RedirectStandardOutput as boolean.
+ </summary>
+	<param name="app">app is the parameter that hold nonmodifiable value.</param>
+	<param name="args">args is the parameter that hold nonmodifiable value.</param>
+	<returns>return soutput after reading every transaction.</returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.DigitOnly(System.Windows.Forms.KeyPressEventArgs,System.Boolean)">
+	<summary>
+ Function use to input only numbers
+ </summary>
+	<param name="e">Keypress Event</param>
+	<remarks>Use the Keypress Event when calling this function</remarks>
+</member><member name="M:Pawnshop.mod_system.checkNumeric(System.Windows.Forms.TextBox)">
+	<summary>
+ this function check if the input is numeric or character.
+ </summary>
+	<param name="txt">txt here hold the numeric value.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.mod_system.isEnter(System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ Identify if the KeyPress is enter
+ </summary>
+	<param name="e">KeyPressEventArgs</param>
+	<returns>Boolean</returns>
+</member><member name="M:Pawnshop.mod_system.isMoney(System.Windows.Forms.TextBox)">
+	<summary>
+ Use to verify entry
+ </summary>
+	<param name="txtBox">TextBox of the Money</param>
+	<returns>Boolean</returns>
+</member><member name="T:Pawnshop.dsReports.dsLoanRegDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsRedeemRenewDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.MONTHLY_LOANRENEWDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCcoinsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCbillDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.JournalEntriesDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.DailyDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.MoneyTransferDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.InsuranceDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.PawningDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.DollarDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.BorrowingsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.CIO_TransDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.ClientHistoryDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsLoanRegRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsRedeemRenewRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.MONTHLY_LOANRENEWRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCcoinsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCbillRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.JournalEntriesRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.DailyRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.MoneyTransferRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.InsuranceRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.PawningRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.DollarRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.BorrowingsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.CIO_TransRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.ClientHistoryRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsLoanRegRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsRedeemRenewRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.MONTHLY_LOANRENEWRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCcoinsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.dsCCbillRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.JournalEntriesRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.DailyRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.MoneyTransferRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.InsuranceRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.PawningRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.DollarRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.BorrowingsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.CIO_TransRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports.ClientHistoryRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsReports">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="M:Pawnshop.frmInsurance.txtHolder_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ if you press enter it will go client information form.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.ClearFields">
+	<summary>
+ This method will clear all text fields.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.btnNew_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will enable some textfield that need to input data.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.btnSearch_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will show the client information form. 
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.LoadHolder(Pawnshop.Client)">
+	<summary>
+ This method will send client information to text fields.
+ </summary>
+	<param name="cl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.txtAmount_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress will allow digit only
+ iy you press enter it will save automatically.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.LoadInsurance(System.Int32)">
+	<summary>
+ This method will load data into text fields.
+ </summary>
+	<param name="id"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.isValid">
+	<summary>
+ This method will verify if txtholder has data.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.btnSave_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will perform save the client information.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmInsurance.btnVoid_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will perform to void the transaction.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="T:Pawnshop.dsPrint.PawnTicketDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.Hourly_RecordsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.DT_HOURLYDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.DT_HOURLY2DataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.NEWLOAN_RENEWDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.PawnTicketRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.Hourly_RecordsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.DT_HOURLYRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.DT_HOURLY2Row">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.NEWLOAN_RENEWRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Pawnshop.dsPrint.PawnTicketRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsPrint.Hourly_RecordsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsPrint.DT_HOURLYRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsPrint.DT_HOURLY2RowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsPrint.NEWLOAN_RENEWRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Pawnshop.dsPrint">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="M:Pawnshop.frmClient.frmClient_Load(System.Object,System.EventArgs)">
+	<summary>
+ load client information to the listview.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClient.AddItem(Pawnshop.Client)">
+	<summary>
+ this method will set listview columns
+ </summary>
+	<param name="cl"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClient.ClearField">
+	<summary>
+ this method will clear the textbox and the listview items.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClient.SearchSelect(System.String,Pawnshop.formSwitch.FormName)">
+	<summary>
+ This method set frmotherForm to true.
+ </summary>
+	<param name="src"></param>
+	<param name="frmOrigin"></param>
+	<remarks></remarks>
+</member><member name="T:Pawnshop.frmClient.LoadClient_delegate">
+	<summary>
+ This method load all client information and show to the listview.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClient.txtSearch_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+	<summary>
+ This keypress perform search when you press enter.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClient.btnView_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will show client information in the client form.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClient.lvClient_DoubleClick(System.Object,System.EventArgs)">
+	<summary>
+ doubleclick specific data in the listview and show thier information in the client form.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClient.btnAdd_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will show the frmclientinformation.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:Pawnshop.frmClient.btnSearch_Click(System.Object,System.EventArgs)">
+	<summary>
+ This button will search the specific client information.
+ Load the information to the listview.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

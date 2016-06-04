@@ -44,12 +44,15 @@ Partial Class frmmoneyexchange
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnsave = New System.Windows.Forms.Button()
         Me.btnBrowse = New System.Windows.Forms.Button()
-
         Me.btnModify = New System.Windows.Forms.Button()
         Me.btnSearch1 = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnCalculate = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtRate = New System.Windows.Forms.TextBox()
         Me.txtCashID = New System.Windows.Forms.TextBox()
@@ -475,34 +478,6 @@ Partial Class frmmoneyexchange
         Me.LineShape3.Y1 = 70
         Me.LineShape3.Y2 = 69
         '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(539, 180)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(153, 25)
-        Me.Label12.TabIndex = 13
-        Me.Label12.Text = "Dollar Buying"
-        '
-        'btnSearch1
-        '
-        Me.btnSearch1.Location = New System.Drawing.Point(326, 18)
-        Me.btnSearch1.Name = "btnSearch1"
-        Me.btnSearch1.Size = New System.Drawing.Size(75, 23)
-        Me.btnSearch1.TabIndex = 13
-        Me.btnSearch1.Text = "Search"
-        Me.btnSearch1.UseVisualStyleBackColor = True
-        '
-        'btnModify
-        '
-        Me.btnModify.Location = New System.Drawing.Point(192, 110)
-        Me.btnModify.Name = "btnModify"
-        Me.btnModify.Size = New System.Drawing.Size(75, 23)
-        Me.btnModify.TabIndex = 14
-        Me.btnModify.Text = "&Modify"
-        Me.btnModify.UseVisualStyleBackColor = True
-        '
         'frmmoneyexchange
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -523,7 +498,6 @@ Partial Class frmmoneyexchange
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
