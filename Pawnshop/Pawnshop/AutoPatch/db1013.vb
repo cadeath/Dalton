@@ -30,26 +30,6 @@
             UPDATE_PAWN &= vbCrLf & "WHERE INT_CHECKSUM is Null"
             RunCommand(UPDATE_PAWN)
 
-            'ds.Clear()
-            'ds = LoadSQL(mySql, fillData)
-
-            'While ds.Tables(fillData).Rows.Count <> 0
-            '    If ds.Tables(fillData).Rows.Count > 0 Then
-            '        For Each dr As DataRow In ds.Tables(fillData).Rows
-            '            dr("INT_CHECKSUM") = INT_HASH
-            '            RowNum += 1
-            '        Next
-            '        database.SaveEntry(ds, False)
-            '    End If
-
-            '    If SetNum Mod 3 = 0 Then
-            '        System.Threading.Thread.Sleep(1000)
-            '    End If
-
-            '    ds.Clear()
-            '    ds = LoadSQL(mySql, fillData)
-            '    SetNum += 1
-            'End While
         Catch ex As Exception
             Log_Report(String.Format("[HASHING] {0},{1}", SetNum, RowNum) & " - " & ex.ToString)
             MsgBox("PATCH FAILED PLEASE CONTACT YOUR ADMINISTRATOR", MsgBoxStyle.Critical, "HASHING")
@@ -61,7 +41,6 @@
 
         Database_Update(LATEST_VERSION)
         Log_Report("DATABASE UPDATED - V1.0.13")
-        MsgBox("Database Patched")
     End Sub
 
     Private Sub Do_IntHistory()
