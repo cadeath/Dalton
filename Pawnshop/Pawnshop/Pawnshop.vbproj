@@ -590,13 +590,8 @@
     <EmbeddedResource Include="Forms\frmCashCountV2.resx">
       <DependentUpon>frmCashCountV2.vb</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
-    <EmbeddedResource Include="Forms\frmExtractor2.resx">
-      <DependentUpon>frmExtractor2.vb</DependentUpon>
-=======
     <EmbeddedResource Include="Forms\frmCurrencyList.resx">
       <DependentUpon>frmCurrencyList.vb</DependentUpon>
->>>>>>> refs/remotes/origin/money-exchange
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
       <DependentUpon>frmPrintManager.vb</DependentUpon>
