@@ -1,6 +1,4 @@
-﻿Imports System.Data.Odbc
-
-Public Class frmmoneyexchange
+﻿Public Class frmmoneyexchange
     Friend SelectedCurrency As Currency 'Holds Currency
     Private isNew As Boolean = True
     Dim total As Integer
@@ -57,7 +55,8 @@ Public Class frmmoneyexchange
         Dim getRate As Double = CDbl(txtRate.Text)
         Console.WriteLine("Rate: " & getRate)
         Console.WriteLine("Amount: " & getAmount)
-        txtTotal.Text = "Php " & getRate * getAmount
+        Dim amt As Double = getRate * getAmount
+        txtTotal.Text = "Php " & amt
     End Sub
 
     Private Sub moneyexchange_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -192,9 +191,9 @@ Public Class frmmoneyexchange
 
     End Sub
 
-    
 
-  
+
+
 
     Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
         If IsNumeric(txtTotalAmount.Text) Then
@@ -233,7 +232,7 @@ Public Class frmmoneyexchange
             btnsearch.PerformClick()
         End If
     End Sub
-    
+
 
     Private Sub txtSerial_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSerial.KeyPress
         If isEnter(e) Then
