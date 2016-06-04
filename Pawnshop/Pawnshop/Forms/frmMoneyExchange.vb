@@ -56,7 +56,7 @@
         Console.WriteLine("Rate: " & getRate)
         Console.WriteLine("Amount: " & getAmount)
         Dim amt As Double = getRate * getAmount
-        txtTotal.Text = "Php " & amt
+        txtTotal.Text = "Php " & String.Format("{0:#,##0.00}", amt)
     End Sub
 
     Private Sub moneyexchange_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load

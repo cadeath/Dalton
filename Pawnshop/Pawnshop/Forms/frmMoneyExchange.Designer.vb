@@ -365,11 +365,11 @@ Partial Class frmmoneyexchange
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(523, 159)
+        Me.Label12.Location = New System.Drawing.Point(493, 155)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(153, 25)
+        Me.Label12.Size = New System.Drawing.Size(203, 25)
         Me.Label12.TabIndex = 13
-        Me.Label12.Text = "Dollar Buying"
+        Me.Label12.Text = "Foreign Exchange"
         '
         'txtRate
         '
