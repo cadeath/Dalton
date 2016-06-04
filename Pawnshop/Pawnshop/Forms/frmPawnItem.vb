@@ -434,36 +434,29 @@ Public Class frmPawnItem
             .SaveTicket(False)
 
             If isOldItem Then
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
-                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket)
-
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, TransType:="REDEMPTION")
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, TransType:="REDEMPTION")
+                
                 'Changed in V1.2
-                'AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
-                'AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
-                AddJournal(.Interest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket)
-                AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket)
-
-                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket)
+                AddJournal(.Interest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, TransType:="REDEMPTION")
+                AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, TransType:="REDEMPTION")
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket, TransType:="REDEMPTION")
             Else
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, TransType:="REDEMPTION")
                 If isEarlyRedeem Then
                     Dim rndInt As Double = .AdvanceInterest - .EarlyRedeem
+
                     'Changed in V1.2
-                    'AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
-                    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket)
+                    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, TransType:="REDEMPTION")
                 End If
-                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, TransType:="REDEMPTION")
                 If daysDue > 3 Then
                     'Changed in V1.2
-                    'AddJournal(.Interest, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
-                    'AddJournal(.Penalty, "Credit", "Interest on Loans", "REDEEM PT# " & .PawnTicket)
-
-                    AddJournal(.Interest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket)
-                    AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket)
+                    AddJournal(.Interest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, TransType:="REDEMPTION")
+                    AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, TransType:="REDEMPTION")
                 End If
             End If
 
-            'AddTimelyLogs(MOD_NAME, String.Format("REDEEM - PT#{0}", .PawnTicket.ToString("000000")))
             AddTimelyLogs("REDEMPTION", String.Format("PT#{0}", .PawnTicket.ToString("000000")), Redeem_Due)
         End With
     End Sub
@@ -508,10 +501,11 @@ Public Class frmPawnItem
             .SaveTicket()
 
             Dim tmpRemarks As String = "PT#" & currentPawnTicket.ToString("000000")
-            AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks)
-            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_NEWLOAN)
-            AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks)
-            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks)
+            AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks, TransType:="NEW LOANS")
+            AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_NEWLOAN, TransType:="NEW LOANS")
+            AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks, TransType:="NEW LOANS")
+            AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", tmpRemarks, TransType:="NEW LOANS")
+
 
             'AddTimelyLogs(MOD_NAME, "NEW LOAN - " & tmpRemarks)
             AddTimelyLogs("NEW LOANS", tmpRemarks, .NetAmount)
@@ -704,7 +698,7 @@ Public Class frmPawnItem
         Return IIf(ds.Tables(0).Rows(0).Item("RENEWABLE"), True, False)
     End Function
 
-    Private Sub RenewDisabled(catID As String)
+    Private Sub RenewDisabled(ByVal catID As String)
         If Not (PawnItem.Status = "L" Or PawnItem.Status = "R") Then Exit Sub
 
         Dim mySql As String = "SELECT * FROM tblClass WHERE "
@@ -904,7 +898,6 @@ Public Class frmPawnItem
             Dim tmpUser As New ComputerUser
             tmpUser.LoadUserByRow(dr)
             Console.WriteLine(tmpUser.FullName & " loaded.")
-
             appraiser.Add(tmpUser.UserID, tmpUser.UserName)
             cboAppraiser.Items.Add(tmpUser.UserName)
         Next
@@ -1009,17 +1002,12 @@ Public Class frmPawnItem
             PRINT_PTNEW = .PawnTicket
             PRINT_PTOLD = .OldTicket
 
-            'AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
-            'AddJournal(interest + advInt + penalty, "Credit", "Interest on Loans", "PT# " & oldPT)
-            'AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
+            'Version 1.2
+            AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW, TransType:="RENEWALS")
+            AddJournal(interest + advInt, "Credit", "Interest on Renewal", "PT# " & oldPT, TransType:="RENEWALS")
+            AddJournal(penalty, "Credit", "Income from Penalty on Renewal", "PT# " & oldPT, TransType:="RENEWALS")
+            AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT, TransType:="RENEWALS")
 
-            ' Version 1.2
-            AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW)
-            AddJournal(interest + advInt, "Credit", "Interest on Renewal", "PT# " & oldPT)
-            AddJournal(penalty, "Credit", "Income from Penalty on Renewal", "PT# " & oldPT)
-            AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT)
-
-            'AddTimelyLogs(MOD_NAME, String.Format("RENEW - PT#{0}", oldPT.ToString("000000")))
             AddTimelyLogs("RENEWALS", String.Format("PT#{0}", oldPT.ToString("000000")), Renew_Due)
         End With
 
