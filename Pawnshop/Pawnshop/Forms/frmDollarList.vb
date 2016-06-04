@@ -53,10 +53,10 @@
     ''' <remarks></remarks>
     Private Sub AddItem(ByVal dl As DollarTransaction)
         Dim lv As ListViewItem = lvDollar.Items.Add(dl.DollarID)
-        lv.SubItems.Add(dl.TransactionDate)
+        lv.SubItems.Add(dl.TransactionDate.ToString("MMM dd, yyyy"))
         lv.SubItems.Add(dl.Denomination)
-        lv.SubItems.Add(dl.CurrentRate)
-        lv.SubItems.Add(dl.NetAmount)
+        lv.SubItems.Add(String.Format("{0:#,##0.00}", dl.CurrentRate))
+        lv.SubItems.Add(String.Format("{0:#,##0.00}", dl.NetAmount))
         lv.SubItems.Add(dl.CustomersName)
         lv.SubItems.Add(dl.CURRENCY)
         lv.Tag = dl.DollarID
