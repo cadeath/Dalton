@@ -66,12 +66,15 @@ Partial Class frmUserManagement
         Me.chkUR = New System.Windows.Forms.CheckBox()
         Me.chkUM = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
+        Me.chkMigrate = New System.Windows.Forms.CheckBox()
         Me.chkPullOut = New System.Windows.Forms.CheckBox()
         Me.chkVoid = New System.Windows.Forms.CheckBox()
         Me.chkSpAll = New System.Windows.Forms.CheckBox()
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
-        Me.chkMigrate = New System.Windows.Forms.CheckBox()
+        Me.chkAppraiser = New System.Windows.Forms.CheckBox()
+        Me.chkResetPassword = New System.Windows.Forms.CheckBox()
+        Me.ChkPrivilege = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -153,6 +156,7 @@ Partial Class frmUserManagement
         '
         'txtPass1
         '
+        Me.txtPass1.Enabled = False
         Me.txtPass1.Location = New System.Drawing.Point(392, 63)
         Me.txtPass1.Name = "txtPass1"
         Me.txtPass1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -161,6 +165,7 @@ Partial Class frmUserManagement
         '
         'txtPass2
         '
+        Me.txtPass2.Enabled = False
         Me.txtPass2.Location = New System.Drawing.Point(576, 63)
         Me.txtPass2.Name = "txtPass2"
         Me.txtPass2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -199,6 +204,7 @@ Partial Class frmUserManagement
         '
         'tbEncoder
         '
+        Me.tbEncoder.Controls.Add(Me.chkAppraiser)
         Me.tbEncoder.Controls.Add(Me.chkEnAll)
         Me.tbEncoder.Controls.Add(Me.chkCIO)
         Me.tbEncoder.Controls.Add(Me.chkPOS)
@@ -219,6 +225,7 @@ Partial Class frmUserManagement
         'chkEnAll
         '
         Me.chkEnAll.AutoSize = True
+        Me.chkEnAll.Enabled = False
         Me.chkEnAll.Location = New System.Drawing.Point(374, 114)
         Me.chkEnAll.Name = "chkEnAll"
         Me.chkEnAll.Size = New System.Drawing.Size(70, 17)
@@ -229,6 +236,7 @@ Partial Class frmUserManagement
         'chkCIO
         '
         Me.chkCIO.AutoSize = True
+        Me.chkCIO.Enabled = False
         Me.chkCIO.Location = New System.Drawing.Point(187, 58)
         Me.chkCIO.Name = "chkCIO"
         Me.chkCIO.Size = New System.Drawing.Size(84, 17)
@@ -239,6 +247,7 @@ Partial Class frmUserManagement
         'chkPOS
         '
         Me.chkPOS.AutoSize = True
+        Me.chkPOS.Enabled = False
         Me.chkPOS.Location = New System.Drawing.Point(187, 35)
         Me.chkPOS.Name = "chkPOS"
         Me.chkPOS.Size = New System.Drawing.Size(48, 17)
@@ -249,6 +258,7 @@ Partial Class frmUserManagement
         'chkDB
         '
         Me.chkDB.AutoSize = True
+        Me.chkDB.Enabled = False
         Me.chkDB.Location = New System.Drawing.Point(187, 12)
         Me.chkDB.Name = "chkDB"
         Me.chkDB.Size = New System.Drawing.Size(88, 17)
@@ -259,6 +269,7 @@ Partial Class frmUserManagement
         'chkLay
         '
         Me.chkLay.AutoSize = True
+        Me.chkLay.Enabled = False
         Me.chkLay.Location = New System.Drawing.Point(13, 104)
         Me.chkLay.Name = "chkLay"
         Me.chkLay.Size = New System.Drawing.Size(62, 17)
@@ -269,6 +280,7 @@ Partial Class frmUserManagement
         'chkIns
         '
         Me.chkIns.AutoSize = True
+        Me.chkIns.Enabled = False
         Me.chkIns.Location = New System.Drawing.Point(13, 81)
         Me.chkIns.Name = "chkIns"
         Me.chkIns.Size = New System.Drawing.Size(73, 17)
@@ -279,6 +291,7 @@ Partial Class frmUserManagement
         'chkMT
         '
         Me.chkMT.AutoSize = True
+        Me.chkMT.Enabled = False
         Me.chkMT.Location = New System.Drawing.Point(13, 58)
         Me.chkMT.Name = "chkMT"
         Me.chkMT.Size = New System.Drawing.Size(100, 17)
@@ -289,6 +302,7 @@ Partial Class frmUserManagement
         'chkCM
         '
         Me.chkCM.AutoSize = True
+        Me.chkCM.Enabled = False
         Me.chkCM.Location = New System.Drawing.Point(13, 35)
         Me.chkCM.Name = "chkCM"
         Me.chkCM.Size = New System.Drawing.Size(117, 17)
@@ -299,6 +313,7 @@ Partial Class frmUserManagement
         'chkPawn
         '
         Me.chkPawn.AutoSize = True
+        Me.chkPawn.Enabled = False
         Me.chkPawn.Location = New System.Drawing.Point(13, 12)
         Me.chkPawn.Name = "chkPawn"
         Me.chkPawn.Size = New System.Drawing.Size(67, 17)
@@ -331,6 +346,7 @@ Partial Class frmUserManagement
         'chkOS
         '
         Me.chkOS.AutoSize = True
+        Me.chkOS.Enabled = False
         Me.chkOS.Location = New System.Drawing.Point(237, 58)
         Me.chkOS.Name = "chkOS"
         Me.chkOS.Size = New System.Drawing.Size(80, 17)
@@ -341,6 +357,7 @@ Partial Class frmUserManagement
         'chkVR
         '
         Me.chkVR.AutoSize = True
+        Me.chkVR.Enabled = False
         Me.chkVR.Location = New System.Drawing.Point(237, 35)
         Me.chkVR.Name = "chkVR"
         Me.chkVR.Size = New System.Drawing.Size(80, 17)
@@ -351,6 +368,7 @@ Partial Class frmUserManagement
         'chkVUM
         '
         Me.chkVUM.AutoSize = True
+        Me.chkVUM.Enabled = False
         Me.chkVUM.Location = New System.Drawing.Point(237, 12)
         Me.chkVUM.Name = "chkVUM"
         Me.chkVUM.Size = New System.Drawing.Size(139, 17)
@@ -361,6 +379,7 @@ Partial Class frmUserManagement
         'chkSuAll
         '
         Me.chkSuAll.AutoSize = True
+        Me.chkSuAll.Enabled = False
         Me.chkSuAll.Location = New System.Drawing.Point(374, 114)
         Me.chkSuAll.Name = "chkSuAll"
         Me.chkSuAll.Size = New System.Drawing.Size(70, 17)
@@ -371,6 +390,7 @@ Partial Class frmUserManagement
         'chkR4
         '
         Me.chkR4.AutoSize = True
+        Me.chkR4.Enabled = False
         Me.chkR4.Location = New System.Drawing.Point(145, 81)
         Me.chkR4.Name = "chkR4"
         Me.chkR4.Size = New System.Drawing.Size(63, 17)
@@ -381,6 +401,7 @@ Partial Class frmUserManagement
         'chkR3
         '
         Me.chkR3.AutoSize = True
+        Me.chkR3.Enabled = False
         Me.chkR3.Location = New System.Drawing.Point(145, 58)
         Me.chkR3.Name = "chkR3"
         Me.chkR3.Size = New System.Drawing.Size(63, 17)
@@ -391,6 +412,7 @@ Partial Class frmUserManagement
         'chkR2
         '
         Me.chkR2.AutoSize = True
+        Me.chkR2.Enabled = False
         Me.chkR2.Location = New System.Drawing.Point(145, 35)
         Me.chkR2.Name = "chkR2"
         Me.chkR2.Size = New System.Drawing.Size(63, 17)
@@ -401,6 +423,7 @@ Partial Class frmUserManagement
         'chkR1
         '
         Me.chkR1.AutoSize = True
+        Me.chkR1.Enabled = False
         Me.chkR1.Location = New System.Drawing.Point(145, 12)
         Me.chkR1.Name = "chkR1"
         Me.chkR1.Size = New System.Drawing.Size(63, 17)
@@ -411,6 +434,7 @@ Partial Class frmUserManagement
         'chkBU
         '
         Me.chkBU.AutoSize = True
+        Me.chkBU.Enabled = False
         Me.chkBU.Location = New System.Drawing.Point(13, 81)
         Me.chkBU.Name = "chkBU"
         Me.chkBU.Size = New System.Drawing.Size(63, 17)
@@ -421,6 +445,7 @@ Partial Class frmUserManagement
         'chkCC
         '
         Me.chkCC.AutoSize = True
+        Me.chkCC.Enabled = False
         Me.chkCC.Location = New System.Drawing.Point(13, 58)
         Me.chkCC.Name = "chkCC"
         Me.chkCC.Size = New System.Drawing.Size(81, 17)
@@ -431,6 +456,7 @@ Partial Class frmUserManagement
         'chkJE
         '
         Me.chkJE.AutoSize = True
+        Me.chkJE.Enabled = False
         Me.chkJE.Location = New System.Drawing.Point(13, 35)
         Me.chkJE.Name = "chkJE"
         Me.chkJE.Size = New System.Drawing.Size(95, 17)
@@ -441,6 +467,7 @@ Partial Class frmUserManagement
         'chkEL
         '
         Me.chkEL.AutoSize = True
+        Me.chkEL.Enabled = False
         Me.chkEL.Location = New System.Drawing.Point(13, 12)
         Me.chkEL.Name = "chkEL"
         Me.chkEL.Size = New System.Drawing.Size(73, 17)
@@ -450,6 +477,7 @@ Partial Class frmUserManagement
         '
         'tbManager
         '
+        Me.tbManager.Controls.Add(Me.chkResetPassword)
         Me.tbManager.Controls.Add(Me.chkBorrowings)
         Me.tbManager.Controls.Add(Me.chkMaAll)
         Me.tbManager.Controls.Add(Me.chkUS)
@@ -466,6 +494,7 @@ Partial Class frmUserManagement
         'chkBorrowings
         '
         Me.chkBorrowings.AutoSize = True
+        Me.chkBorrowings.Enabled = False
         Me.chkBorrowings.Location = New System.Drawing.Point(13, 81)
         Me.chkBorrowings.Name = "chkBorrowings"
         Me.chkBorrowings.Size = New System.Drawing.Size(78, 17)
@@ -486,6 +515,7 @@ Partial Class frmUserManagement
         'chkUS
         '
         Me.chkUS.AutoSize = True
+        Me.chkUS.Enabled = False
         Me.chkUS.Location = New System.Drawing.Point(13, 58)
         Me.chkUS.Name = "chkUS"
         Me.chkUS.Size = New System.Drawing.Size(64, 17)
@@ -496,6 +526,7 @@ Partial Class frmUserManagement
         'chkUR
         '
         Me.chkUR.AutoSize = True
+        Me.chkUR.Enabled = False
         Me.chkUR.Location = New System.Drawing.Point(13, 35)
         Me.chkUR.Name = "chkUR"
         Me.chkUR.Size = New System.Drawing.Size(92, 17)
@@ -506,6 +537,7 @@ Partial Class frmUserManagement
         'chkUM
         '
         Me.chkUM.AutoSize = True
+        Me.chkUM.Enabled = False
         Me.chkUM.Location = New System.Drawing.Point(13, 12)
         Me.chkUM.Name = "chkUM"
         Me.chkUM.Size = New System.Drawing.Size(113, 17)
@@ -515,6 +547,7 @@ Partial Class frmUserManagement
         '
         'tbSpecial
         '
+        Me.tbSpecial.Controls.Add(Me.ChkPrivilege)
         Me.tbSpecial.Controls.Add(Me.chkMigrate)
         Me.tbSpecial.Controls.Add(Me.chkPullOut)
         Me.tbSpecial.Controls.Add(Me.chkVoid)
@@ -529,9 +562,21 @@ Partial Class frmUserManagement
         Me.tbSpecial.Text = "Special"
         Me.tbSpecial.UseVisualStyleBackColor = True
         '
+        'chkMigrate
+        '
+        Me.chkMigrate.AutoSize = True
+        Me.chkMigrate.Enabled = False
+        Me.chkMigrate.Location = New System.Drawing.Point(13, 104)
+        Me.chkMigrate.Name = "chkMigrate"
+        Me.chkMigrate.Size = New System.Drawing.Size(61, 17)
+        Me.chkMigrate.TabIndex = 14
+        Me.chkMigrate.Text = "Migrate"
+        Me.chkMigrate.UseVisualStyleBackColor = True
+        '
         'chkPullOut
         '
         Me.chkPullOut.AutoSize = True
+        Me.chkPullOut.Enabled = False
         Me.chkPullOut.Location = New System.Drawing.Point(13, 81)
         Me.chkPullOut.Name = "chkPullOut"
         Me.chkPullOut.Size = New System.Drawing.Size(63, 17)
@@ -542,6 +587,7 @@ Partial Class frmUserManagement
         'chkVoid
         '
         Me.chkVoid.AutoSize = True
+        Me.chkVoid.Enabled = False
         Me.chkVoid.Location = New System.Drawing.Point(13, 58)
         Me.chkVoid.Name = "chkVoid"
         Me.chkVoid.Size = New System.Drawing.Size(111, 17)
@@ -562,6 +608,7 @@ Partial Class frmUserManagement
         'chkCashOutBank
         '
         Me.chkCashOutBank.AutoSize = True
+        Me.chkCashOutBank.Enabled = False
         Me.chkCashOutBank.Location = New System.Drawing.Point(13, 35)
         Me.chkCashOutBank.Name = "chkCashOutBank"
         Me.chkCashOutBank.Size = New System.Drawing.Size(104, 17)
@@ -572,6 +619,7 @@ Partial Class frmUserManagement
         'chkCashInBank
         '
         Me.chkCashInBank.AutoSize = True
+        Me.chkCashInBank.Enabled = False
         Me.chkCashInBank.Location = New System.Drawing.Point(13, 12)
         Me.chkCashInBank.Name = "chkCashInBank"
         Me.chkCashInBank.Size = New System.Drawing.Size(96, 17)
@@ -579,15 +627,38 @@ Partial Class frmUserManagement
         Me.chkCashInBank.Text = "Cash In (Bank)"
         Me.chkCashInBank.UseVisualStyleBackColor = True
         '
-        'chkMigrate
+        'chkAppraiser
         '
-        Me.chkMigrate.AutoSize = True
-        Me.chkMigrate.Location = New System.Drawing.Point(13, 104)
-        Me.chkMigrate.Name = "chkMigrate"
-        Me.chkMigrate.Size = New System.Drawing.Size(61, 17)
-        Me.chkMigrate.TabIndex = 14
-        Me.chkMigrate.Text = "Migrate"
-        Me.chkMigrate.UseVisualStyleBackColor = True
+        Me.chkAppraiser.AutoSize = True
+        Me.chkAppraiser.Enabled = False
+        Me.chkAppraiser.Location = New System.Drawing.Point(186, 81)
+        Me.chkAppraiser.Name = "chkAppraiser"
+        Me.chkAppraiser.Size = New System.Drawing.Size(70, 17)
+        Me.chkAppraiser.TabIndex = 9
+        Me.chkAppraiser.Text = "Appraiser"
+        Me.chkAppraiser.UseVisualStyleBackColor = True
+        '
+        'chkResetPassword
+        '
+        Me.chkResetPassword.AutoSize = True
+        Me.chkResetPassword.Enabled = False
+        Me.chkResetPassword.Location = New System.Drawing.Point(13, 104)
+        Me.chkResetPassword.Name = "chkResetPassword"
+        Me.chkResetPassword.Size = New System.Drawing.Size(103, 17)
+        Me.chkResetPassword.TabIndex = 12
+        Me.chkResetPassword.Text = "Reset Password"
+        Me.chkResetPassword.UseVisualStyleBackColor = True
+        '
+        'ChkPrivilege
+        '
+        Me.ChkPrivilege.AutoSize = True
+        Me.ChkPrivilege.Enabled = False
+        Me.ChkPrivilege.Location = New System.Drawing.Point(160, 12)
+        Me.ChkPrivilege.Name = "ChkPrivilege"
+        Me.ChkPrivilege.Size = New System.Drawing.Size(66, 17)
+        Me.ChkPrivilege.TabIndex = 15
+        Me.ChkPrivilege.Text = "Privilege"
+        Me.ChkPrivilege.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '
@@ -672,4 +743,7 @@ Partial Class frmUserManagement
     Friend WithEvents chkBorrowings As System.Windows.Forms.CheckBox
     Friend WithEvents chkPullOut As System.Windows.Forms.CheckBox
     Friend WithEvents chkMigrate As System.Windows.Forms.CheckBox
+    Friend WithEvents chkAppraiser As System.Windows.Forms.CheckBox
+    Friend WithEvents chkResetPassword As System.Windows.Forms.CheckBox
+    Friend WithEvents ChkPrivilege As System.Windows.Forms.CheckBox
 End Class

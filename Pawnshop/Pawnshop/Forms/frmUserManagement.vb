@@ -28,6 +28,49 @@
     Private Sub CheckAuthorization()
         With POSuser
             btnAdd.Enabled = .canUserManage
+            If POSuser.canAddprivilege Then
+                chkPawn.Enabled = True
+                chkCM.Enabled = True
+                chkMT.Enabled = True
+                chkIns.Enabled = True
+                chkLay.Enabled = True
+                chkDB.Enabled = True
+                chkPOS.Enabled = True
+                chkCIO.Enabled = True
+                chkAppraiser.Enabled = True
+                chkEnAll.Enabled = True
+                chkEL.Enabled = True
+                chkJE.Enabled = True
+                chkCC.Enabled = True
+                chkBU.Enabled = True
+                chkR1.Enabled = True
+                chkR2.Enabled = True
+                chkR3.Enabled = True
+                chkR4.Enabled = True
+                chkVUM.Enabled = True
+                chkVR.Enabled = True
+                chkOS.Enabled = True
+                chkSuAll.Enabled = True
+                chkUM.Enabled = True
+                chkUR.Enabled = True
+                chkUS.Enabled = True
+                chkBorrowings.Enabled = True
+                chkResetPassword.Enabled = True
+                chkMaAll.Enabled = True
+                chkCashInBank.Enabled = True
+                chkCashOutBank.Enabled = True
+                chkVoid.Enabled = True
+                chkPullOut.Enabled = True
+                chkMigrate.Enabled = True
+                ChkPrivilege.Enabled = True
+                chkSuAll.Enabled = True
+            End If
+            If POSuser.canResetPassword Then
+                txtPass1.Enabled = True
+                txtPass2.Enabled = True
+
+            End If
+
         End With
     End Sub
 
@@ -68,13 +111,41 @@
         txtFullname.Text = ""
         txtPass1.Text = ""
         txtPass2.Text = ""
-
-        lvUsers.Items.Clear()
-
         chkEnAll.Checked = False
         chkSuAll.Checked = False
         chkMaAll.Checked = False
         chkSpAll.Checked = False
+        chkPawn.Checked = False
+        chkCM.Checked = False
+        chkMT.Checked = False
+        chkIns.Checked = False
+        chkLay.Checked = False
+        chkDB.Checked = False
+        chkPOS.Checked = False
+        chkCIO.Checked = False
+        chkAppraiser.Checked = False
+        chkEL.Checked = False
+        chkJE.Checked = False
+        chkCC.Checked = False
+        chkBU.Checked = False
+        chkR1.Checked = False
+        chkR2.Checked = False
+        chkR3.Checked = False
+        chkR4.Checked = False
+        chkVUM.Checked = False
+        chkVR.Checked = False
+        chkOS.Checked = False
+        chkUM.Checked = False
+        chkUR.Checked = False
+        chkUS.Checked = False
+        chkBorrowings.Checked = False
+        chkResetPassword.Checked = False
+        chkCashInBank.Checked = False
+        chkCashOutBank.Checked = False
+        chkVoid.Checked = False
+        chkPullOut.Checked = False
+        chkMigrate.Checked = False
+        ChkPrivilege.Checked = False
 
         btnAdd.Text = "&Add"
     End Sub
@@ -90,6 +161,7 @@
         priv &= IIf(chkDB.Checked, 1, 0)
         priv &= IIf(chkPOS.Checked, 1, 0)
         priv &= IIf(chkCIO.Checked, 1, 0)
+        priv &= IIf(chkAppraiser.Checked, 1, 0)
         priv &= "|"
 
         'Supervisor
@@ -100,14 +172,14 @@
         priv &= "|"
 
         'Manager
-        listChk = {chkUM, chkUR, chkUS, chkBorrowings}
+        listChk = {chkUM, chkUR, chkUS, chkBorrowings, chkResetPassword}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
         Next
         priv &= "|"
 
         'Special
-        listChk = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate}
+        listChk = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate, ChkPrivilege}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
         Next
@@ -131,16 +203,16 @@
                 Dim chkList() As CheckBox = {}
                 Select Case y
                     Case 0 'Encoder
-                        chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO}
+                        chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO, chkAppraiser}
                         Console.WriteLine("Encoder Length: " & privParts(y).Length)
                     Case 1 'Supervisor
                         chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
                         Console.WriteLine("Supervisor Length: " & privParts(y).Length)
                     Case 2 'Manager
-                        chkList = {chkUM, chkUR, chkUS, chkBorrowings}
+                        chkList = {chkUM, chkUR, chkUS, chkBorrowings, chkResetPassword}
                         Console.WriteLine("Manager Length: " & privParts(y).Length)
                     Case 3 'Special
-                        chkList = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate}
+                        chkList = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate, ChkPrivilege}
                         Console.WriteLine("Special Length: " & privParts(y).Length)
                 End Select
 
@@ -166,6 +238,7 @@
                 chkDB.Checked = tabStat
                 chkPOS.Checked = tabStat
                 chkCIO.Checked = tabStat
+                chkAppraiser.Checked = tabStat
             Case "Supervisor"
                 tabStat = chkSuAll.Checked
                 chkEL.Checked = tabStat
@@ -185,6 +258,7 @@
                 chkUR.Checked = tabStat
                 chkUS.Checked = tabStat
                 chkBorrowings.Checked = tabStat
+                chkResetPassword.Checked = tabStat
             Case "Special"
                 tabStat = chkSpAll.Checked
                 chkCashInBank.Checked = tabStat
@@ -192,6 +266,8 @@
                 chkVoid.Checked = tabStat
                 chkPullOut.Checked = tabStat
                 chkMigrate.Checked = tabStat
+                ChkPrivilege.Checked = tabStat
+
         End Select
     End Sub
 
@@ -276,5 +352,4 @@
 
         txtPass1.Focus()
     End Sub
-
 End Class
