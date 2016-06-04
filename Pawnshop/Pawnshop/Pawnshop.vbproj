@@ -242,10 +242,10 @@
     <Compile Include="Forms\diagAuthorization.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\diagMT.Designer.vb">
+    <Compile Include="Reports\diagMT.Designer.vb">
       <DependentUpon>diagMT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\diagMT.vb">
+    <Compile Include="Reports\diagMT.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBackup.Designer.vb">
@@ -584,7 +584,7 @@
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\diagMT.resx">
+    <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashCountV2.resx">
