@@ -83,7 +83,7 @@ Partial Class frmCurrencyList
         Me.lvCurrency.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvCurrency.FullRowSelect = True
         Me.lvCurrency.GridLines = True
-        Me.lvCurrency.Location = New System.Drawing.Point(12, 56)
+        Me.lvCurrency.Location = New System.Drawing.Point(11, 57)
         Me.lvCurrency.MultiSelect = False
         Me.lvCurrency.Name = "lvCurrency"
         Me.lvCurrency.Size = New System.Drawing.Size(578, 201)
@@ -120,7 +120,6 @@ Partial Class frmCurrencyList
         Me.btnSelect.TabIndex = 9
         Me.btnSelect.Text = "&Select"
         Me.btnSelect.UseVisualStyleBackColor = True
-        Me.btnSelect.Visible = False
         '
         'btnClose
         '

@@ -26,6 +26,7 @@ Partial Class frmPawning
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.lvPawners = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -47,7 +48,6 @@ Partial Class frmPawning
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,6 +94,15 @@ Partial Class frmPawning
         Me.Label1.Size = New System.Drawing.Size(82, 13)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Item Information"
+        '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(483, 76)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(303, 59)
+        Me.webAds.TabIndex = 13
         '
         'lvPawners
         '
@@ -196,7 +205,7 @@ Partial Class frmPawning
         '
         Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnView.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnView.Location = New System.Drawing.Point(704, 382)
+        Me.btnView.Location = New System.Drawing.Point(708, 383)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 6
@@ -274,15 +283,6 @@ Partial Class frmPawning
         Me.Label4.Size = New System.Drawing.Size(167, 13)
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Red - Withdraw [Redeem/Pullout]"
-        '
-        'webAds
-        '
-        Me.webAds.Location = New System.Drawing.Point(483, 76)
-        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.webAds.Name = "webAds"
-        Me.webAds.ScrollBarsEnabled = False
-        Me.webAds.Size = New System.Drawing.Size(303, 59)
-        Me.webAds.TabIndex = 13
         '
         'frmPawning
         '
