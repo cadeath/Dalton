@@ -3,6 +3,9 @@
     Const LATEST_VERSION As String = "1.2.1"
 
     Sub PatchUp()
+        If ifTblExist("TBLCURRENCY") Then
+            Populate_CurrencyDB()
+        End If
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
         Dim TBL_CURRENCY As String
@@ -27,7 +30,7 @@
             RunCommand(INSERT_USD)
 
             Populate_DollarDB()
-            
+
             MoneyTransfer_View()
 
             Database_Update(LATEST_VERSION)
@@ -37,6 +40,17 @@
         End Try
     End Sub
 
+    Private Sub Populate_CurrencyDB()
+        Dim mySql As String = "SELECT * FROM TBLCURRENCY"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Dim INSERT_USD As String
+            INSERT_USD = "INSERT INTO TBLCURRENCY (CURRENCY,SYMBOL,RATE,CASHID) VALUES ('US DOLLAR','USD',46,45);"
+
+            RunCommand(INSERT_USD)
+        End If
+    End Sub
 
     Private Sub Populate_DollarDB()
         Dim POPDB As String
