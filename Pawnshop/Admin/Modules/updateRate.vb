@@ -48,12 +48,7 @@ Module updateRate
         'Remove Excessive entries
         Console.WriteLine("Checking excessive entries")
         ds = LoadSQL(mySql, fillData)
-        If MaxDS >= ID Then
-            For i = MaxDS To MaxRate Step -1
-                dsRate.Tables(fillData).Rows(i - 1).Delete()
-                database.SaveEntry(ds, False)
-            Next
-        ElseIf MaxDS <= ID Then
+        If MaxDS > MaxRate Then
             For i = MaxDS To MaxRate Step -1
                 dsRate.Tables(fillData).Rows(i - 1).Delete()
                 database.SaveEntry(ds, False)

@@ -44,8 +44,10 @@ Module updateRate
             Exit Sub
         End Try
 
+
         Dim i As Integer = 0
         Dim ID As String = dsRate.Tables(fillData).Columns.Item(0).ColumnName
+
 
         'Remove Excessive entries
         Console.WriteLine("Checking excessive entries")
@@ -55,11 +57,8 @@ Module updateRate
             For i = MaxDS To MaxRate Step -1
                 ds.Tables(fillData).Rows(i - 1).Delete()
                 database.SaveEntry(ds, False)
-                mySql = "SELECT * FROM " & fillData
-                ds = LoadSQL(mySql, fillData)
             Next
         End If
-
 
 
         Console.WriteLine("Updating table") : i = 0
