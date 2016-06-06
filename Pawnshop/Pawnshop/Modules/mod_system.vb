@@ -406,6 +406,28 @@ Module mod_system
         Return lastOfMonth
     End Function
 
+    Friend Function GetSAPAccount(TransName As String) As String
+        Dim mySql As String, ds As DataSet
+        mySql = String.Format("SELECT * FROM TBLCASH WHERE TransName = '{0}'", TransName)
+
+        ds = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("SAPACCOUNT")
+    End Function
+
+    Friend Sub UpdateSAPAccount(TRANS As String, VALUE As String)
+        Dim mySql As String, fillData As String = "TBLCASH"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " WHERE TRANSNAME = '{0}'"
+
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds = LoadSQL(mySql, fillData)
+
+        ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = VALUE
+        database.SaveEntry(ds, False)
+        Console.WriteLine("SAP Account Changed")
+    End Sub
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()

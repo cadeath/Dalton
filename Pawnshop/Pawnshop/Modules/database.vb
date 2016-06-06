@@ -205,6 +205,7 @@ Friend Module database
     Public Sub dbReaderClose()
         ReaderCon.Close()
     End Sub
+
     ''' <summary>
     ''' This function select all data from tblmaintenance.
     ''' </summary>
@@ -223,6 +224,7 @@ Friend Module database
 
         Return ret
     End Function
+
     ''' <summary>
     ''' This module where select all data from tblmaintenance.
     ''' </summary>
