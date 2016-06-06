@@ -1,6 +1,4 @@
-﻿Imports System.Data.Odbc
-
-Public Class frmmoneyexchange
+﻿Public Class frmmoneyexchange
     Friend SelectedCurrency As Currency 'Holds Currency
     Private isNew As Boolean = True
     Dim total As Integer
@@ -57,7 +55,8 @@ Public Class frmmoneyexchange
         Dim getRate As Double = CDbl(txtRate.Text)
         Console.WriteLine("Rate: " & getRate)
         Console.WriteLine("Amount: " & getAmount)
-        txtTotal.Text = "Php " & getRate * getAmount
+        Dim amt As Double = getRate * getAmount
+        txtTotal.Text = "Php " & String.Format("{0:#,##0.00}", amt)
     End Sub
 
     Private Sub moneyexchange_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -133,7 +132,6 @@ Public Class frmmoneyexchange
         If txtDenomination1.Text = "" Then txtDenomination1.Focus() : Return False
         If txtCurrency1.Text = "" Then txtCurrency1.Focus() : Return False
         If TxtName.Text = "" Then TxtName.Focus() : Return False
-        'If txtSerial.Text = "" Then txtSerial.Focus() : Return False
         If txtTotal.Text = "Php 0" Then txtTotal.Focus() : Return False
         If dollarClient Is Nothing Then MsgBox("Please select your client at the Client Management", MsgBoxStyle.Information) : TxtName.Focus() : Return False
         Return True
@@ -145,7 +143,7 @@ Public Class frmmoneyexchange
             MsgBox("Please fill the Serial", MsgBoxStyle.Information, "Dollar")
             txtSerial.Focus()
         Else
-            '===============================================================================================================================
+
             Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -161,10 +159,10 @@ Public Class frmmoneyexchange
                 .CURRENCY = txtCurrency1.Text
                 .SaveDollar()
 
-                AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber)
-                AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING")
+                AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber, TransType:="DOLLAR BUYING")
+                AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING", TransType:="DOLLAR BUYING")
 
-                AddTimelyLogs(MODULE_NAME, String.Format("{0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate), .NetAmount)
+                AddTimelyLogs(MODULE_NAME, String.Format("{3} - {0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate, .CURRENCY), .NetAmount)
             End With
             MsgBox("Transaction Saved", MsgBoxStyle.Information)
             ClearField()
@@ -190,16 +188,12 @@ Public Class frmmoneyexchange
         txtSymbol1.Text = String.Format(cl.SYMBOL)
         txtRate.Text = String.Format(cl.RATE)
         MoneyExchange = cl
-        'btnsave.Focus()
+
     End Sub
 
-    'Friend Sub Loadcurrencyall1(ByVal cl As Currency)
-    '    TxtName.Text = String.Format(cl.CURRENCY)
-    '    MoneyExchange = cl
-    '    btnsave.Focus()
-    'End Sub
 
-  
+
+
 
     Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
         If IsNumeric(txtTotalAmount.Text) Then
@@ -238,7 +232,7 @@ Public Class frmmoneyexchange
             btnsearch.PerformClick()
         End If
     End Sub
-    
+
 
     Private Sub txtSerial_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSerial.KeyPress
         If isEnter(e) Then
@@ -294,4 +288,5 @@ Public Class frmmoneyexchange
             btnSearch1.PerformClick()
         End If
     End Sub
+
 End Class

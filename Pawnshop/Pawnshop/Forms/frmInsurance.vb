@@ -151,8 +151,8 @@
 
             .SaveInsurance()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE")
-            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber)
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", TransType:="INSURANCE")
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, TransType:="INSURANCE")
 
             AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount)
         End With

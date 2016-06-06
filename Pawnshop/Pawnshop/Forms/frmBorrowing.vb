@@ -82,8 +82,8 @@
             .SaveBorrowings()
             AddRefNum()
 
-            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & BranchCode, "BORROW OUT")
-            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & BranchCode)
+            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & BranchCode, "BORROW OUT", TransType:="BORROWINGS")
+            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & BranchCode, TransType:="BORROWINGS")
         End With
 
         Dim brwFile As New Hashtable

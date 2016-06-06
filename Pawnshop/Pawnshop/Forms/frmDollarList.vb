@@ -53,14 +53,11 @@
     ''' <remarks></remarks>
     Private Sub AddItem(ByVal dl As DollarTransaction)
         Dim lv As ListViewItem = lvDollar.Items.Add(dl.DollarID)
-        lv.SubItems.Add(dl.TransactionDate)
+        lv.SubItems.Add(dl.TransactionDate.ToString("MMM dd, yyyy"))
         lv.SubItems.Add(dl.Denomination)
-        lv.SubItems.Add(dl.CurrentRate)
-        lv.SubItems.Add(dl.NetAmount)
-        If Not dl.Customer Is Nothing Then
-            lv.SubItems.Add(dl.CustomersName)
-            lv.SubItems.Add(dl.CURRENCY)
-        End If
+        lv.SubItems.Add(String.Format("{0:#,##0.00}", dl.CurrentRate))
+        lv.SubItems.Add(String.Format("{0:#,##0.00}", dl.NetAmount))
+        lv.SubItems.Add(dl.CustomersName)
         lv.SubItems.Add(dl.CURRENCY)
         lv.Tag = dl.DollarID
         If dl.Status <> "A" Then lv.BackColor = Color.LightGray
@@ -149,11 +146,8 @@
         Console.WriteLine("ID: " & id)
         Dim tmpLoad As New DollarTransaction
         tmpLoad.LoadDollar(id)
-
-        frmDollorSimple.Show()
-        frmDollorSimple.LoadDollar(tmpLoad)
-        'frmmoneyexchange.Show()
-        'frmmoneyexchange.LoadTransDollar(tmpLoad)       
+        frmmoneyexchange.Show()
+        frmmoneyexchange.LoadTransDollar(tmpLoad)
     End Sub
 
 End Class

@@ -41,7 +41,6 @@
 
         Database_Update(LATEST_VERSION)
         Log_Report("DATABASE UPDATED - V1.0.13")
-        MsgBox("Database Patched")
     End Sub
 
     Private Sub Do_IntHistory()
