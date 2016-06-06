@@ -3,7 +3,7 @@ Version 1.2.2
  - Fix monthly computation for Cellphone
  - Fix Journal Entry Summary
  - Fix Money Transfer Send In/Payout Name
- - Fix Minor Exchange Problem
+ - Fix Minor Change Rate Problem
  - Add Foreign Currency
  - Add Pawnticket and OR Number every print 
  - Add New Design for About Us
