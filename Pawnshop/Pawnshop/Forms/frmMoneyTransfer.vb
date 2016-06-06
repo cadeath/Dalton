@@ -1,9 +1,9 @@
-﻿Public Class frmMoneyTransfer
+﻿Imports System.Data.Odbc
+Public Class frmMoneyTransfer
 
     Dim senderClient As Client
     Dim receiverClient As Client
     Friend displayOnly As Boolean = False
-
     Dim idME As Integer, idMR As Integer
     Dim basicCharges As Double, commission As Double
     Private MOD_NAME As String = "MONEYTRANSFER"
@@ -291,15 +291,39 @@
     End Sub
 
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Main()
-        ClearField()
-        LockFields(True)
-        LoadServices()
-        lblWhere.Text = "Send To"
-        rbSend.Focus()
+      
+            Main()
+            ClearField()
+            LockFields(True)
+            LoadServices()
+            lblWhere.Text = "Send To"
+            rbSend.Focus()
 
-        Console.WriteLine("Form LOADED successfully")
+            Console.WriteLine("Form LOADED successfully")
+
     End Sub
+
+    Private Function existMeNum() As Boolean
+        Dim cmd1 As OdbcCommand = New OdbcCommand("Select DISTINCT TRANSID from TBLMONEYTRANSFER", con)
+        Dim transid As String
+        transid = "TRANSID"
+
+        con.Open()
+        Dim theQuery As String = "SELECT DISTINCT TRANSID FROM TBLMONEYTRANSFER WHERE TRANSID=@transid AND MONEYTRANS = '0'  "
+        Dim cmd As OdbcCommand = New OdbcCommand(theQuery, con)
+        cmd1.Parameters.AddWithValue("@transid", txtTransNum.Text)
+
+        Using reader As OdbcDataReader = cmd1.ExecuteReader()
+            If reader.HasRows Then
+                ' User already exists
+                MsgBox("Transaction Number has been Used Or Void", MsgBoxStyle.Exclamation)
+            Else
+
+            End If
+        End Using
+        con.Close()
+        Return True
+    End Function
 
     Private Sub LoadServices()
         cboType.Items.Clear()
@@ -379,6 +403,7 @@
 
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
+        If existMeNum() = True Then Exit Sub
 
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -765,4 +790,6 @@
             btnPost.PerformClick()
         End If
     End Sub
+
+
 End Class

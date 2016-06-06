@@ -157,6 +157,7 @@ Friend Module database
 
         Return ret
     End Function
+   
 
     Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)
         Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
