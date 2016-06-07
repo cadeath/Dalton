@@ -8,4 +8,3 @@ C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Debug\Admin.vbproj.G
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Debug\Admin.exe
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Debug\Admin.xml
 C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Debug\Admin.pdb
-D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Admin\bin\Debug\W3W1LH4CKU.FDB
