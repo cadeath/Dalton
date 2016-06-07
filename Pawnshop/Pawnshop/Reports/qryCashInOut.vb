@@ -8,6 +8,7 @@
 
     Private Sub qryCashInOut_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         LoadCategories()
+       
         'Disable_Functions()
     End Sub
 
@@ -15,11 +16,12 @@
         chkIN.Enabled = False
         chkOUT.Enabled = False
         cboCategory.Enabled = False
+     
     End Sub
 
     Private Sub LoadCategories()
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT DISTINCT Category FROM tblCash WHERE TYPE <> '' ORDER BY Category ASC"
+        mySql = "SELECT DISTINCT CATEGORY FROM tblCash WHERE TYPE <> 'null' ORDER BY CATEGORY ASC"
         ds = LoadSQL(mySql)
         Console.WriteLine(mySql)
 
@@ -46,7 +48,7 @@
     End Sub
 
     Private Sub CashInOut_Monthly()
-        If Not (chkIN.Checked Or chkOUT.Checked) Then Exit Sub
+        If Not (chkIN.Checked Or chkOUT.Checked Or chkOther.Checked) Then Exit Sub
 
         Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
         Dim enDate As Date = GetLastDate(monCal.SelectionRange.End)
@@ -55,10 +57,9 @@
         dsName = "dsCIO"
         mySql = "SELECT * FROM TBLCASHTRANS"
         mySql &= String.Format(" WHERE TransDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
-        If (chkIN.Checked Or chkOUT.Checked) Then
+        If (chkIN.Checked Or chkOUT.Checked Or chkOther.Checked) Then
             mySql &= TypeFilter()
         End If
-
 
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("branchName", branchName)
@@ -69,7 +70,7 @@
     End Sub
 
     Private Sub CashInOut_Daily()
-        If Not (chkIN.Checked Or chkOUT.Checked) Then Exit Sub
+        If Not (chkIN.Checked Or chkOUT.Checked Or chkOther.Checked) Then Exit Sub
 
         Dim cur As Date = monCal.SelectionStart
 
@@ -79,8 +80,8 @@
 
         mySql = "SELECT * FROM TBLCASHTRANS "
         mySql &= String.Format(" WHERE TRANSDATE = '{0}'", cur.ToShortDateString)
-        If (chkIN.Checked Or chkOUT.Checked) Then
-            mySql &= TypeFilter()
+        If (chkIN.Checked Or chkOUT.Checked Or chkOther.Checked) Then
+            mySql &= TypeFilter2()
         End If
 
         Dim addPara As New Dictionary(Of String, String)
@@ -109,4 +110,50 @@
 
         Return String.Format(" AND ({0})", tmp)
     End Function
+    Private Function TypeFilter2() As String
+        Dim receipt As String = "1", disburse As String = "1", tmp As String, Other As String = "1"
+        If chkIN.Checked Then receipt = "TYPE = 'Receipt'"
+        If chkOUT.Checked Then disburse = "TYPE = 'Disbursement'"
+        If chkOther.Checked Then Other = "TYPE <> 'Receipt' AND TYPE <> 'Disbursement'"
+
+        tmp = "("
+        tmp &= IIf(chkIN.Checked, receipt, "")
+        If chkIN.Checked And chkOUT.Checked Then tmp &= " OR "
+        tmp &= IIf(chkOUT.Checked, disburse, "")
+        If chkOUT.Checked And chkOther.Checked Then tmp &= " OR "
+        tmp &= IIf(chkOther.Checked, Other, "")
+        tmp &= ")"
+
+        'tmp = "(" & String.Join(" OR ", receipt, disburse, Other) & ")"
+        If cboCategory.Text <> "-ALL-" Then
+            tmp &= String.Format(" AND CATEGORY = '{0}'", cboCategory.Text)
+        End If
+
+        Return String.Format(" AND ({0})", tmp)
+    End Function
+
+    Private Sub chkOther_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOther.Click
+        If chkOther.Checked Then
+            chkIN.Enabled = False
+            chkOUT.Enabled = False
+        Else
+            chkIN.Enabled = True
+            chkOUT.Enabled = True
+        End If
+    End Sub
+
+    Private Sub chkOUT_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOUT.Click
+        checkInOut()
+    End Sub
+
+    Private Sub chkIN_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkIN.Click
+        checkInOut()
+    End Sub
+    Private Sub checkInOut()
+        If chkIN.Checked Or chkOUT.Checked Then
+            chkOther.Enabled = False
+        Else
+            chkOther.Enabled = True
+        End If
+    End Sub
 End Class
