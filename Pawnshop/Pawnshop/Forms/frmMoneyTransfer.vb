@@ -3,6 +3,9 @@ Public Class frmMoneyTransfer
 
     Dim senderClient As Client
     Dim receiverClient As Client
+    Private currentMe As Integer = GetOption("MEnumLast")
+    Private currentMr As Integer = GetOption("MRNumLast")
+    Private unableToSave As Boolean 
     Friend displayOnly As Boolean = False
     Dim idME As Integer, idMR As Integer
     Dim basicCharges As Double, commission As Double
@@ -291,39 +294,15 @@ Public Class frmMoneyTransfer
     End Sub
 
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-      
-            Main()
-            ClearField()
-            LockFields(True)
-            LoadServices()
-            lblWhere.Text = "Send To"
-            rbSend.Focus()
-
-            Console.WriteLine("Form LOADED successfully")
-
+        Main()
+        ClearField()
+        LockFields(True)
+        LoadServices()
+        lblWhere.Text = "Send To"
+        rbSend.Focus()
+        Console.WriteLine("Form LOADED successfully")
     End Sub
 
-    Private Function existMeNum() As Boolean
-        Dim cmd1 As OdbcCommand = New OdbcCommand("Select DISTINCT TRANSID from TBLMONEYTRANSFER", con)
-        Dim transid As String
-        transid = "TRANSID"
-
-        con.Open()
-        Dim theQuery As String = "SELECT DISTINCT TRANSID FROM TBLMONEYTRANSFER WHERE TRANSID=@transid AND MONEYTRANS = '0'  "
-        Dim cmd As OdbcCommand = New OdbcCommand(theQuery, con)
-        cmd1.Parameters.AddWithValue("@transid", txtTransNum.Text)
-
-        Using reader As OdbcDataReader = cmd1.ExecuteReader()
-            If reader.HasRows Then
-                ' User already exists
-                MsgBox("Transaction Number has been Used Or Void", MsgBoxStyle.Exclamation)
-            Else
-
-            End If
-        End Using
-        con.Close()
-        Return True
-    End Function
 
     Private Sub LoadServices()
         cboType.Items.Clear()
@@ -332,6 +311,38 @@ Public Class frmMoneyTransfer
         Next
         If cboType.Items.Count > 0 Then cboType.SelectedIndex = 0
     End Sub
+    Private Sub GenerateMrNum()
+        'Check Mr if existing
+        Dim mySql As String, ds As DataSet
+        If txtTransNum.Text <> "" And rbSend.Checked = False Then
+
+            mySql = "SELECT DISTINCT TRANSID,MONEYTRANS,SERVICETYPE FROM TBLMONEYTRANSFER "
+            mySql &= "WHERE TRANSID = '" & currentMr & "' AND MONEYTRANS='1' AND SERVICETYPE = 'Pera Padala'"
+            ds = LoadSQL(mySql)
+            If ds.Tables(0).Rows.Count >= 1 Then
+                MsgBox("Mr# " & currentMr.ToString("000000") & " already existed.", MsgBoxStyle.Critical)
+            End If
+        End If
+        Exit Sub
+    End Sub
+    Private Sub GenerateMeNum()
+        'Check ME if existing
+        If txtTransNum.Text <> "" Then
+            Dim mySql As String, ds As DataSet
+            mySql = "SELECT DISTINCT TRANSID,MONEYTRANS,SERVICETYPE FROM TBLMONEYTRANSFER "
+            mySql &= "WHERE TRANSID = '" & currentMe & "' AND MONEYTRANS='0'"
+            ds = LoadSQL(mySql)
+            If ds.Tables(0).Rows.Count >= 1 Then
+                MsgBox("ME# " & currentMe.ToString("000000") & " already existed.", MsgBoxStyle.Critical)
+            End If
+        End If
+        Exit Sub
+    End Sub
+
+   
+    Private Function CurrentMRNumber(Optional ByVal num1 As Integer = 0) As String
+        Return String.Format("{000000}", If(num1 = 0, currentMr, num1))
+    End Function
 
     Private Function GetLocations() As String()
         Dim mySql As String = "SELECT DISTINCT Location FROM tblMoneyTransfer ORDER BY Location ASC"
@@ -394,21 +405,23 @@ Public Class frmMoneyTransfer
             If txtReceiverIDNum.Text = "" Then txtReceiverIDNum.Focus() : MsgBox("Please input ID Number", MsgBoxStyle.Critical) : Return False
             If txtRefNum.Text = "" Then txtRefNum.Focus() : Return False
         End If
-
+      
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
         If cboLocation.Text = "" Then cboLocation.Focus() : Return False
-
         Return True
     End Function
 
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
-        If existMeNum() = True Then Exit Sub
+        If rbSend.Checked Then
+            GenerateMeNum()
+        ElseIf rbReceive.Checked Then
 
+            GenerateMrNum()
+        End If
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
         Dim CashCount_Name As String = ""
-
         Dim transID As Integer = 0
         Dim idx As Integer = cboType.SelectedIndex
         If daltonService(idx).isGenerated Then
@@ -418,8 +431,6 @@ Public Class frmMoneyTransfer
                 transID = idMR
             End If
         End If
-
-
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             'Send Money - Branch Received Money (Send In) - 0
@@ -580,6 +591,7 @@ Public Class frmMoneyTransfer
 
         'frmMTlist.LoadActive()
         Me.Close()
+
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
@@ -772,6 +784,7 @@ Public Class frmMoneyTransfer
         If rbReceive.Checked Then
             ComputeNet()
             lblWhere.Text = "Send From"
+
         End If
         CheckTracking()
     End Sub
@@ -790,6 +803,4 @@ Public Class frmMoneyTransfer
             btnPost.PerformClick()
         End If
     End Sub
-
-
 End Class
