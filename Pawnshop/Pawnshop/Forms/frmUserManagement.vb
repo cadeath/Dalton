@@ -226,21 +226,6 @@
         Me.Close()
     End Sub
 
-    Private Sub CheckUsername()
-        dbOpen()
-        Dim mysql As String = "SELECT * FROM TBL_GAMIT WHERE USERNAME = '" & txtUser.Text & "'"
-        Dim cmd As OdbcCommand = New OdbcCommand(mysql, con)
-        Using reader As OdbcDataReader = cmd.ExecuteReader()
-            If reader.HasRows Then
-                ' User already exists
-                Dim result As DialogResult
-                result = MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                If result = DialogResult.OK Then
-                    txtUser.Focus()
-                End If
-                dbClose()
-            End If
-
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If Not PasswordPolicy() Then Exit Sub
 
