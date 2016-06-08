@@ -1,5 +1,5 @@
 ﻿Imports DeathCodez.Security
-
+Imports System.Data.Odbc
 ''' <summary>
 ''' NOTE: Privilege PDuNxp8S9q0= means SUPER USER
 ''' </summary>
@@ -341,9 +341,9 @@ Public Class ComputerUser
         _journalEntries = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _cashCount = IIf(parts(y).Substring(2, 1) = "1", True, False)
         _backUp = IIf(parts(y).Substring(3, 1) = "1", True, False)
-        _viewUserManagement = IIf(parts(y).Substring(8, 1) = "1", True, False)
-        _viewRates = IIf(parts(y).Substring(9, 1) = "1", True, False)
-        _openStore = IIf(parts(y).Substring(10, 1) = "1", True, False)
+        _viewUserManagement = IIf(parts(y).Substring(4, 1) = "1", True, False)
+        _viewRates = IIf(parts(y).Substring(5, 1) = "1", True, False)
+        _openStore = IIf(parts(y).Substring(6, 1) = "1", True, False)
 
         privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _
                     _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}

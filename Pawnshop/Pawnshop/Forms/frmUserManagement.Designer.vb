@@ -37,6 +37,7 @@ Partial Class frmUserManagement
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.tbPrivileges = New System.Windows.Forms.TabControl()
         Me.tbEncoder = New System.Windows.Forms.TabPage()
+        Me.chkAppraiser = New System.Windows.Forms.CheckBox()
         Me.chkEnAll = New System.Windows.Forms.CheckBox()
         Me.chkCIO = New System.Windows.Forms.CheckBox()
         Me.chkPOS = New System.Windows.Forms.CheckBox()
@@ -60,18 +61,21 @@ Partial Class frmUserManagement
         Me.chkJE = New System.Windows.Forms.CheckBox()
         Me.chkEL = New System.Windows.Forms.CheckBox()
         Me.tbManager = New System.Windows.Forms.TabPage()
+        Me.chkResetPassword = New System.Windows.Forms.CheckBox()
         Me.chkBorrowings = New System.Windows.Forms.CheckBox()
         Me.chkMaAll = New System.Windows.Forms.CheckBox()
         Me.chkUS = New System.Windows.Forms.CheckBox()
         Me.chkUR = New System.Windows.Forms.CheckBox()
         Me.chkUM = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
+        Me.chkPrivilege = New System.Windows.Forms.CheckBox()
         Me.chkMigrate = New System.Windows.Forms.CheckBox()
         Me.chkPullOut = New System.Windows.Forms.CheckBox()
         Me.chkVoid = New System.Windows.Forms.CheckBox()
         Me.chkSpAll = New System.Windows.Forms.CheckBox()
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -153,7 +157,6 @@ Partial Class frmUserManagement
         '
         'txtPass1
         '
-        Me.txtPass1.Enabled = False
         Me.txtPass1.Location = New System.Drawing.Point(392, 63)
         Me.txtPass1.Name = "txtPass1"
         Me.txtPass1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -162,7 +165,6 @@ Partial Class frmUserManagement
         '
         'txtPass2
         '
-        Me.txtPass2.Enabled = False
         Me.txtPass2.Location = New System.Drawing.Point(576, 63)
         Me.txtPass2.Name = "txtPass2"
         Me.txtPass2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -180,7 +182,7 @@ Partial Class frmUserManagement
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(598, 258)
+        Me.btnAdd.Location = New System.Drawing.Point(517, 258)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 9
@@ -201,6 +203,7 @@ Partial Class frmUserManagement
         '
         'tbEncoder
         '
+        Me.tbEncoder.Controls.Add(Me.chkAppraiser)
         Me.tbEncoder.Controls.Add(Me.chkEnAll)
         Me.tbEncoder.Controls.Add(Me.chkCIO)
         Me.tbEncoder.Controls.Add(Me.chkPOS)
@@ -217,6 +220,16 @@ Partial Class frmUserManagement
         Me.tbEncoder.TabIndex = 0
         Me.tbEncoder.Text = "Encoder"
         Me.tbEncoder.UseVisualStyleBackColor = True
+        '
+        'chkAppraiser
+        '
+        Me.chkAppraiser.AutoSize = True
+        Me.chkAppraiser.Location = New System.Drawing.Point(186, 81)
+        Me.chkAppraiser.Name = "chkAppraiser"
+        Me.chkAppraiser.Size = New System.Drawing.Size(70, 17)
+        Me.chkAppraiser.TabIndex = 9
+        Me.chkAppraiser.Text = "Appraiser"
+        Me.chkAppraiser.UseVisualStyleBackColor = True
         '
         'chkEnAll
         '
@@ -452,6 +465,7 @@ Partial Class frmUserManagement
         '
         'tbManager
         '
+        Me.tbManager.Controls.Add(Me.chkResetPassword)
         Me.tbManager.Controls.Add(Me.chkBorrowings)
         Me.tbManager.Controls.Add(Me.chkMaAll)
         Me.tbManager.Controls.Add(Me.chkUS)
@@ -464,6 +478,16 @@ Partial Class frmUserManagement
         Me.tbManager.TabIndex = 2
         Me.tbManager.Text = "Manager"
         Me.tbManager.UseVisualStyleBackColor = True
+        '
+        'chkResetPassword
+        '
+        Me.chkResetPassword.AutoSize = True
+        Me.chkResetPassword.Location = New System.Drawing.Point(13, 104)
+        Me.chkResetPassword.Name = "chkResetPassword"
+        Me.chkResetPassword.Size = New System.Drawing.Size(103, 17)
+        Me.chkResetPassword.TabIndex = 12
+        Me.chkResetPassword.Text = "Reset Password"
+        Me.chkResetPassword.UseVisualStyleBackColor = True
         '
         'chkBorrowings
         '
@@ -517,6 +541,7 @@ Partial Class frmUserManagement
         '
         'tbSpecial
         '
+        Me.tbSpecial.Controls.Add(Me.chkPrivilege)
         Me.tbSpecial.Controls.Add(Me.chkMigrate)
         Me.tbSpecial.Controls.Add(Me.chkPullOut)
         Me.tbSpecial.Controls.Add(Me.chkVoid)
@@ -530,6 +555,16 @@ Partial Class frmUserManagement
         Me.tbSpecial.TabIndex = 3
         Me.tbSpecial.Text = "Special"
         Me.tbSpecial.UseVisualStyleBackColor = True
+        '
+        'chkPrivilege
+        '
+        Me.chkPrivilege.AutoSize = True
+        Me.chkPrivilege.Location = New System.Drawing.Point(155, 12)
+        Me.chkPrivilege.Name = "chkPrivilege"
+        Me.chkPrivilege.Size = New System.Drawing.Size(66, 17)
+        Me.chkPrivilege.TabIndex = 15
+        Me.chkPrivilege.Text = "Privilege"
+        Me.chkPrivilege.UseVisualStyleBackColor = True
         '
         'chkMigrate
         '
@@ -591,11 +626,21 @@ Partial Class frmUserManagement
         Me.chkCashInBank.Text = "Cash In (Bank)"
         Me.chkCashInBank.UseVisualStyleBackColor = True
         '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(599, 258)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear.TabIndex = 11
+        Me.btnClear.Text = "Clea&r"
+        Me.btnClear.UseVisualStyleBackColor = True
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(767, 289)
+        Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.tbPrivileges)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnClose)
@@ -674,4 +719,8 @@ Partial Class frmUserManagement
     Friend WithEvents chkBorrowings As System.Windows.Forms.CheckBox
     Friend WithEvents chkPullOut As System.Windows.Forms.CheckBox
     Friend WithEvents chkMigrate As System.Windows.Forms.CheckBox
+    Friend WithEvents chkAppraiser As System.Windows.Forms.CheckBox
+    Friend WithEvents chkResetPassword As System.Windows.Forms.CheckBox
+    Friend WithEvents chkPrivilege As System.Windows.Forms.CheckBox
+    Friend WithEvents btnClear As System.Windows.Forms.Button
 End Class
