@@ -1,13 +1,17 @@
-﻿Public Class frmBorrowing
+﻿Imports System.Data.Odbc
+Public Class frmBorrowing
 
     Const MOD_NAME As String = "BORROWINGS"
-    Private currentBornum As Integer = GetOption("BorrowingLastNum")
+  
+
     Private Sub frmBorrowing_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadLastRefNum()
         LoadBranches()
     End Sub
-
+    Private Sub CurrenctBorrowNumBranchCode()
+        
+    End Sub
     Private Sub LoadLastRefNum()
         Dim num As Integer = GetOption("BorrowingLastNum")
         txtRef.Text = String.Format("{1}{0:000000}", num, BranchCode)
@@ -57,9 +61,7 @@
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
 
-        'If Not BorrowingNum Then : Exit Sub
-        'End If
-
+      
         If Not sfdMoneyFile.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
 
         Dim fileSave As String = sfdMoneyFile.FileName
@@ -99,24 +101,11 @@
         MsgBox("Saved!", MsgBoxStyle.Information)
         Me.Close()
     End Sub
-    'Private Function BorrowingNum() As Boolean
-    '    Dim mySql As String, ds As DataSet
-    '    mySql = "SELECT DISTINCT REFNUM FROM TBLBORROW"
-    '    mySql &= "WHERE REFNUM = '" & txtRef.Text & "'"
-    '    ds = LoadSQL(mySql)
-    '    If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("Borrowing# " & currentBornum.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : Return False
-    '    End If
-    '    Return True
-    'End Function
-
-    Private Function CurrentBOrrowNum(Optional ByVal num1 As Integer = 0) As String
-        Return String.Format("{1}{000000}", If(num1 = 0, currentBornum, num1))
-    End Function
+  
     Private Function isValid() As Boolean
         If cboBranch.Text = "" Then cboBranch.Focus() : Return False
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
         If txtParticulars.Text = "" Then txtParticulars.Focus() : Return False
-
         Return True
     End Function
 
