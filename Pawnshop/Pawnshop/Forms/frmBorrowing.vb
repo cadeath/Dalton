@@ -2,7 +2,11 @@
 Public Class frmBorrowing
 
     Const MOD_NAME As String = "BORROWINGS"
-  
+    Dim currentBornum As Integer = GetOption("BorrowingLastNum")
+    Dim branchcode As String = GetOption("BranchCode")
+    Dim newborrow = String.Format("{1}{0:000000}", currentBornum, BranchCode)
+
+
 
     Private Sub frmBorrowing_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
@@ -57,9 +61,23 @@ Public Class frmBorrowing
 
         Return ds.Tables(0).Rows(0).Item("SapCode")
     End Function
+    Private Function BorrowingNum() As Boolean
+
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT DISTINCT REFNUM FROM tblBORROW "
+        mySql &= "WHERE REFNUM = '" & newborrow & "'"
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("Borrowing# " & newborrow & " already existed.", MsgBoxStyle.Critical) : Return False
+        End If
+        Return True
+    End Function
+
 
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
+
+        If Not BorrowingNum() Then : Exit Sub
+        End If
 
       
         If Not sfdMoneyFile.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
