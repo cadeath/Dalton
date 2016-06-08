@@ -283,6 +283,7 @@ Public Class frmUserManagement
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If Not PasswordPolicy() Then Exit Sub
         If Not CheckAuth() Then Exit Sub
+        If txtUser.Text = "" And txtFullname.Text = "" Then Exit Sub
 
         If btnAdd.Text = "&Add" Then
             Console.WriteLine("Priv is " & Privileger())
