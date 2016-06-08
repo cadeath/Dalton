@@ -144,8 +144,8 @@ Module mod_system
             tmpPawnItem.Status = "S"
             tmpPawnItem.SaveTicket(False)
 
-            AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
-            AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
+            AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , TransType:="Segregate")
+            AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , TransType:="Segregate")
 
             Console.WriteLine("PT: " & tmpPawnItem.PawnTicket)
         Next
@@ -227,13 +227,13 @@ Module mod_system
                 'tmpOverShort = Math.Abs(tmpOverShort)
                 If AsPerComputation < cc Then
                     'Overage
-                    AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False)
-                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False)
+                    AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False, , TransType:="Close Store")
+                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False, , TransType:="Close Store")
                 Else
                     'Shortage
                     tmpOverShort = Math.Abs(tmpOverShort)
-                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False)
-                    AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False)
+                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False, , TransType:="Close Store")
+                    AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False, , TransType:="Close Store")
                 End If
             End If
 
