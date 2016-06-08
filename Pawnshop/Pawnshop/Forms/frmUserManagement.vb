@@ -15,11 +15,9 @@ Public Class frmUserManagement
     Private Sub frmUserManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim tmp As New ComputerUser
         tmp.CreateAdministrator()
-
         ClearFields()
         LoadActive()
         CheckAuthorization()
-
         txtUser.Focus()
     End Sub
 
@@ -72,7 +70,6 @@ Public Class frmUserManagement
         End With
     End Sub
     Private Function CheckAuth() As Boolean
-        'If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
         If txtPass1.Text = "" Then mod_system.isAuthorized = True
         If Not mod_system.isAuthorized And txtPass1.Text <> "" Then
             diagAuthorization.Show()
@@ -304,7 +301,6 @@ Public Class frmUserManagement
         dbOpen()
         Dim mysql As String = "SELECT * FROM TBL_GAMIT WHERE USERNAME = '" & txtUser.Text & "'"
         Dim cmd As OdbcCommand = New OdbcCommand(mysql, con)
-        'con.Open()
         Using reader As OdbcDataReader = cmd.ExecuteReader()
             If reader.HasRows Then
                 ' User already exists
@@ -313,7 +309,6 @@ Public Class frmUserManagement
                 If result = DialogResult.OK Then
                     txtUser.Focus()
                 End If
-                'con.Close()
                 dbClose()
             End If
 
