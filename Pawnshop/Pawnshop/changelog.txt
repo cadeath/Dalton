@@ -7,6 +7,7 @@ Version 1.2.2
  - Add Foreign Currency
  - Add Pawnticket and OR Number every print 
  - Add New Design for About Us
+ - Add Cash In Bank SAP Account in Settings
  - Include Auto Patch up to db1.2 v1.2
 
 Version 1.2
