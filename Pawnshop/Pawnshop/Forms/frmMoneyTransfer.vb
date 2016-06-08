@@ -5,7 +5,7 @@ Public Class frmMoneyTransfer
     Dim receiverClient As Client
     Private currentMe As Integer = GetOption("MEnumLast")
     Private currentMr As Integer = GetOption("MRNumLast")
-    Private unableToSave As Boolean 
+
     Friend displayOnly As Boolean = False
     Dim idME As Integer, idMR As Integer
     Dim basicCharges As Double, commission As Double
@@ -311,7 +311,7 @@ Public Class frmMoneyTransfer
         Next
         If cboType.Items.Count > 0 Then cboType.SelectedIndex = 0
     End Sub
-    Private Sub GenerateMrNum()
+    Private Function GenerateMrNum() As Boolean
         'Check Mr if existing
         Dim mySql As String, ds As DataSet
         If txtTransNum.Text <> "" And rbSend.Checked = False Then
@@ -319,25 +319,21 @@ Public Class frmMoneyTransfer
             mySql = "SELECT DISTINCT TRANSID,MONEYTRANS,SERVICETYPE FROM TBLMONEYTRANSFER "
             mySql &= "WHERE TRANSID = '" & currentMr & "' AND MONEYTRANS='1' AND SERVICETYPE = 'Pera Padala'"
             ds = LoadSQL(mySql)
-            If ds.Tables(0).Rows.Count >= 1 Then
-                MsgBox("Mr# " & currentMr.ToString("000000") & " already existed.", MsgBoxStyle.Critical)
+            If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("Mr# " & currentMr.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : Return False
             End If
         End If
-        Exit Sub
-    End Sub
-    Private Sub GenerateMeNum()
+        Return True
+    End Function
+    Private Function GenerateMeNum() As Boolean
         'Check ME if existing
-        If txtTransNum.Text <> "" Then
-            Dim mySql As String, ds As DataSet
-            mySql = "SELECT DISTINCT TRANSID,MONEYTRANS,SERVICETYPE FROM TBLMONEYTRANSFER "
-            mySql &= "WHERE TRANSID = '" & currentMe & "' AND MONEYTRANS='0'"
-            ds = LoadSQL(mySql)
-            If ds.Tables(0).Rows.Count >= 1 Then
-                MsgBox("ME# " & currentMe.ToString("000000") & " already existed.", MsgBoxStyle.Critical)
-            End If
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT DISTINCT TRANSID,MONEYTRANS,SERVICETYPE FROM TBLMONEYTRANSFER "
+        mySql &= "WHERE TRANSID = '" & currentMe & "' AND MONEYTRANS='0' AND SERVICETYPE= 'Pera Padala'"
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("ME# " & currentMe.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : Return False
         End If
-        Exit Sub
-    End Sub
+        Return True
+    End Function
 
    
     Private Function CurrentMRNumber(Optional ByVal num1 As Integer = 0) As String
@@ -413,12 +409,11 @@ Public Class frmMoneyTransfer
 
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
-        If rbSend.Checked Then
-            GenerateMeNum()
-        ElseIf rbReceive.Checked Then
-
-            GenerateMrNum()
+        If Not GenerateMeNum() Then : Exit Sub
         End If
+        If Not GenerateMrNum() Then : Exit Sub
+        End If
+
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
         Dim CashCount_Name As String = ""
