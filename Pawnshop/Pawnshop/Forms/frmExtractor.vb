@@ -65,7 +65,6 @@ Public Class frmExtractor
                        vbYesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             btnExtract.Enabled = False
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
-
             ExtractJournalEntry3()
         End If
         btnExtract.Enabled = True
@@ -171,9 +170,9 @@ Public Class frmExtractor
         '"JRL_TRANSDATE AS TRANSDATE, CCNAME FROM tblJournal INNER JOIN tblCash on CashID = JRL_TRANSID " & vbCrLf & _
         'String.Format("WHERE Status = 1 AND TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME ORDER BY TRANSTYPE", sd.ToShortDateString)
 
-        Dim mySql As String = "SELECT SAPACCOUNT,TRANSNAME, DEBIT, CREDIT " & _
+        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
         "FROM JOURNAL_SUMMARY " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql), MaxEntries As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
@@ -198,19 +197,19 @@ Public Class frmExtractor
 
                 oSheet.Cells(lineNum + 3, 1) = 1 'ParentKey
                 oSheet.Cells(lineNum + 3, 2) = lineNum 'LineNum
-                'oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME").ToString 'AccountCode
+                oSheet.Cells(lineNum + 3, 4) = .Item("SAPACCOUNT").ToString 'AccountCode
                 oSheet.Cells(lineNum + 3, 5) = .Item("DEBIT") 'Debit
                 oSheet.Cells(lineNum + 3, 6) = .Item("CREDIT") 'Credit
-                oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME")
+                'oSheet.Cells(lineNum + 3, 4) = .Item("TRANSNAME")
                 oSheet.Cells(lineNum + 3, 19) = AREACODE  'ProfitCode
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
 
 
-                If IsDBNull(.Item("TRANSNAME")) Then
+                If IsDBNull(.Item("CCNAME")) Then
                     lineNum += 1
                 Else
-                    If (Not .Item("TRANSNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
                 End If
 
                 recCnt += 1
@@ -255,13 +254,14 @@ Public Class frmExtractor
     End Sub
     Private Sub ExtractJournalEntry3()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim mySql As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME, TRANSTYPE " & _
-        "FROM JOURNAL_ENTRIES " & vbCrLf & _
-        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
 
-        Dim mySql2 As String = "SELECT SAPACCOUNT,TRANSNAME, DEBIT, CREDIT " & _
+        Dim mySql As String = "SELECT J.JRL_TRANSDATE as TRANSDATE, C.TRANSNAME, C.SAPACCOUNT, J.JRL_DEBIT AS DEBIT, J.JRL_CREDIT AS CREDIT, J.CCNAME, J.STATUS, J.TRANSTYPE " & _
+        "FROM tblJournal AS J INNER JOIN tblCash AS C on C.CashID = J.JRL_TRANSID " & vbCrLf & _
+        String.Format("WHERE J.JRL_TRANSDATE = '{0}' AND J.Status = 1 AND C.SAPACCOUNT <> 'null' AND J.TRANSTYPE is null", sd.ToShortDateString)
+
+        Dim mySql2 As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
        "FROM JOURNAL_SUMMARY " & vbCrLf & _
-       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null'", sd.ToShortDateString)
+       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim ds2 As DataSet = LoadSQL(mySql2)
@@ -270,7 +270,7 @@ Public Class frmExtractor
         MaxEntries = ds.Tables(0).Rows.Count
         MaxEntries2 = ds2.Tables(0).Rows.Count
         Console.WriteLine("Executing SQL:")
-        Console.WriteLine(mySql2)
+        Console.WriteLine(mySql2, mySql)
         Console.WriteLine("Entries: " & MaxEntries)
 
         'Load Excel
@@ -306,10 +306,10 @@ Public Class frmExtractor
                 oSheet.Cells(lineNum + 3, 32) = BranchCode  'OcrCode2
                 oSheet.Cells(lineNum + 3, 33) = "OPE" 'OcrCode3
 
-                If IsDBNull(.Item("TRANSNAME")) Then
+                If IsDBNull(.Item("CCNAME")) Then
                     lineNum += 1
                 Else
-                    If (Not .Item("TRANSNAME") = "FUND REPLENISHMENT") Then lineNum += 1
+                    If (Not .Item("CCNAME") = "FUND REPLENISHMENT") Then lineNum += 1
                 End If
                 recCnt2 += 1
             End With
@@ -345,7 +345,7 @@ Public Class frmExtractor
             AddProgress()
             Application.DoEvents()
         End While
-       
+
         Dim verified_url As String
 
         Select Case FormType
@@ -379,7 +379,6 @@ Public Class frmExtractor
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
-
     ''' <summary>
     ''' This method will select between date range.
     ''' search the items by date

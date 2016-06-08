@@ -16,6 +16,7 @@ Module mod_system
     ''' <remarks></remarks>
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
+    Public PROTOTYPE As Boolean = True
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
 
@@ -41,6 +42,7 @@ Module mod_system
 
     Friend TBLINT_HASH As String = ""
     Friend PAWN_JE As Boolean = False
+    Friend DBVERSION As String = ""
 #End Region
 
 #Region "Store"
@@ -403,6 +405,28 @@ Module mod_system
 
         Return lastOfMonth
     End Function
+
+    Friend Function GetSAPAccount(TransName As String) As String
+        Dim mySql As String, ds As DataSet
+        mySql = String.Format("SELECT * FROM TBLCASH WHERE TransName = '{0}'", TransName)
+
+        ds = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("SAPACCOUNT")
+    End Function
+
+    Friend Sub UpdateSAPAccount(TRANS As String, VALUE As String)
+        Dim mySql As String, fillData As String = "TBLCASH"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " WHERE TRANSNAME = '{0}'"
+
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds = LoadSQL(mySql, fillData)
+
+        ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = VALUE
+        database.SaveEntry(ds, False)
+        Console.WriteLine("SAP Account Changed")
+    End Sub
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

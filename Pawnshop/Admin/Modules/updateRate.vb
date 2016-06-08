@@ -1,4 +1,5 @@
-﻿Module updateRate
+﻿Imports System.Data.Odbc
+Module updateRate
     Private dsRate As DataSet
     Private isFailed As Boolean = False
     Private fillData As String, mySql As String
@@ -16,6 +17,7 @@
         End Try
         fs.Close()
 
+
         If isFailed Then Exit Sub
         fillData = dsRate.Tables(0).TableName
         mySql = "SELECT * FROM " & fillData
@@ -23,7 +25,6 @@
         Dim ds As DataSet, MaxDS As Integer, MaxRate As Integer
 
         Try
-
             ds = LoadSQL(mySql, fillData)
 
             MaxDS = ds.Tables(fillData).Rows.Count
@@ -39,19 +40,22 @@
             Exit Sub
         End Try
 
+
+
         Dim i As Integer = 0
         Dim ID As String = dsRate.Tables(fillData).Columns.Item(0).ColumnName
 
         'Remove Excessive entries
         Console.WriteLine("Checking excessive entries")
         ds = LoadSQL(mySql, fillData)
-
         If MaxDS > MaxRate Then
             For i = MaxDS To MaxRate Step -1
-                ds.Tables(fillData).Rows(i - 1).Delete()
+                dsRate.Tables(fillData).Rows(i - 1).Delete()
                 database.SaveEntry(ds, False)
             Next
         End If
+
+
 
         Console.WriteLine("Updating table") : i = 0
         For Each dr As DataRow In dsRate.Tables(fillData).Rows
@@ -62,7 +66,7 @@
             ds = LoadSQL(mySql, fillData)
             If ds.Tables(fillData).Rows.Count = 1 Then
 
-                For setColumn As Integer = 1 To dsRate.Tables(fillData).Columns.Count - 1
+                For setColumn As Integer = 1 To dsRate.Tables(fillData).Columns.Count + 1
                     ds.Tables(fillData).Rows(0).Item(setColumn) = _
                         dsRate.Tables(fillData).Rows(i).Item(setColumn)
                 Next
@@ -72,7 +76,7 @@
                 Dim dsNewRow As DataRow
                 dsNewRow = ds.Tables(fillData).NewRow
 
-                For setColumn As Integer = 0 To dsRate.Tables(fillData).Columns.Count - 1
+                For setColumn As Integer = 0 To dsRate.Tables(fillData).Columns.Count + 1
                     With dsNewRow
                         .Item(setColumn) = _
                         dsRate.Tables(fillData).Rows(i).Item(setColumn)

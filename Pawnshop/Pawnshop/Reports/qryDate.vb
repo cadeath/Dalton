@@ -293,8 +293,8 @@
         mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'CEL' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS CEL_PRINCIPAL, "
         mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'JWL' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS JWL_COUNT, "
         mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'JWL' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS JWL_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'APP' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS APP_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'APP' AND P.OLDTICKET = 0 THEN P.PRINCIPAL "
+        mySql &= vbCrLf & "    SUM(CASE WHEN (P.ITEMTYPE = 'APP' OR P.ITEMTYPE = 'BIG') AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS APP_COUNT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN (P.ITEMTYPE = 'APP' OR P.ITEMTYPE = 'BIG') AND P.OLDTICKET = 0 THEN P.PRINCIPAL "
         mySql &= vbCrLf & "    WHEN P.ITEMTYPE = 'BIG' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS APP_PRINCIPAL, "
         mySql &= vbCrLf & "    SUM(CASE P.OLDTICKET WHEN 0 THEN 1 ELSE 0 END) AS LOAN_COUNT, "
         mySql &= vbCrLf & "    SUM(CASE P.OLDTICKET WHEN 0 THEN P.PRINCIPAL ELSE 0 END) AS LOAN_PRINCIPAL, "
@@ -435,7 +435,7 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
         Dim fillData As String = "dsDollar"
         Dim mySql As String = "SELECT * FROM tblDollar"
-        mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}' AND STATUS = 'A'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= " ORDER BY TRANSDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
@@ -450,13 +450,13 @@
     Private Sub DailyDollar()
         Dim fillData As String = "dsDollar"
         Dim mySql As String = "SELECT * FROM tblDollar"
-        mySql &= String.Format(" WHERE TRANSDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= String.Format(" WHERE TRANSDATE = '{0}' AND STATUS ='A'", monCal.SelectionStart.ToShortDateString)
         mySql &= " ORDER BY TRANSDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToLongDateString)
         rptPara.Add("BranchName", "Bula-Road")
-        rptPara.Add("txtUsername", "Blade")
+        ' rptPara.Add("txtUsername", "Blade")
 
         frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransaction.rdlc", rptPara)
         frmReport.Show()

@@ -7,6 +7,7 @@ Public Class frmCurrencyList
     Dim ds As New DataSet
     Dim fillData As String = "TBLCURRENCY"
     Friend GetCurrency As Currency
+
     Friend Sub SearchSelect(ByVal src As String, ByVal formOrigin As formSwitch.FormName)
         mOtherForm = True
         btnSelect.Visible = True
@@ -14,7 +15,7 @@ Public Class frmCurrencyList
         frmOrig = formOrigin
     End Sub
     
-    Friend Sub LoadActivecurrency(Optional ByVal mySql As String = "SELECT * FROM TBLCURRENCY ORDER BY CURRENCYID")
+    Friend Sub LoadActivecurrency(Optional ByVal mySql As String = "SELECT * FROM TBLCURRENCY ORDER BY CURRENCYID ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
         lvCurrency.Items.Clear()
@@ -27,7 +28,6 @@ Public Class frmCurrencyList
     Private Sub frmCurrencyList_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
         ClearField()
-        btnSelect.Visible = False
         LoadActivecurrency()
         txtSearch.Focus()
 
@@ -47,12 +47,13 @@ Public Class frmCurrencyList
         searchbutton()
     End Sub
     Private Sub searchbutton()
+
         Dim mySql As String = "SELECT * FROM TBLCURRENCY WHERE "
         If IsNumeric(txtSearch.Text) Then
             mySql &= "CURRENCYID = " & txtSearch.Text
 
         Else : mySql &= String.Format("UPPER (CURRENCY) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", txtSearch.Text, txtSearch.Text)
+            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", txtSearch.Text)
         End If
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -81,10 +82,10 @@ Public Class frmCurrencyList
 
     Private Sub lvCurrency_DoubleClick(sender As System.Object, e As System.EventArgs) Handles lvCurrency.DoubleClick
         If Not mOtherForm Then
-            btnView.PerformClick()
+            btnSelect.PerformClick()
             Me.Hide()
         Else
-            btnView.PerformClick()
+            btnSelect.PerformClick()
             Me.Hide()
         End If
     End Sub
@@ -93,16 +94,26 @@ Public Class frmCurrencyList
     End Sub
 
     Private Sub btnSelect_Click(sender As System.Object, e As System.EventArgs) Handles btnSelect.Click
-        If lvCurrency.Items.Count = 0 Then Exit Sub
+        'If lvCurrency.Items.Count = 0 Then Exit Sub
 
-        If lvCurrency.SelectedItems.Count = 0 Then
-            lvCurrency.Items(0).Focused = True
-        End If
-        Dim idx As Integer = CInt(lvCurrency.FocusedItem.Text)
-        GetCurrency = New Currency
-        GetCurrency.LoadCurrencydata(idx)
-        formSwitch.ReloadFormFromSearch1(frmOrig, GetCurrency)
-        Me.Close()
+        'If lvCurrency.SelectedItems.Count = 0 Then
+        '    lvCurrency.Items(0).Focused = True
+        'End If
+        'Dim idx As Integer = CInt(lvCurrency.FocusedItem.Text)
+        'GetCurrency = New Currency
+        'GetCurrency.LoadCurrencydata(idx)
+        'formSwitch.ReloadFormFromSearch1(frmOrig, GetCurrency)
+        'Me.Close()
+        If lvCurrency.SelectedItems.Count <= 0 Then Exit Sub
+        Dim CurrencyID As Integer
+        CurrencyID = lvCurrency.FocusedItem.Text
+        Console.WriteLine("CURRENCYID : " & CurrencyID)
+
+        Dim tmpcurrency As New Currency
+        tmpcurrency.LoadCurrencydata(CurrencyID)
+        Me.Hide()
+        frmmoneyexchange.Show()
+        frmmoneyexchange.LoadCurrencyList(tmpcurrency)
     End Sub
     
 
@@ -120,27 +131,15 @@ Public Class frmCurrencyList
         Me.Close()
     End Sub
 
-    Private Sub btnView_Click(sender As System.Object, e As System.EventArgs) Handles btnView.Click
-        If lvCurrency.SelectedItems.Count <= 0 Then Exit Sub
-        Dim CurrencyID As Integer
-        CurrencyID = lvCurrency.FocusedItem.Text
-        Console.WriteLine("CURRENCYID : " & CurrencyID)
-
-        Dim tmpcurrency As New Currency
-        tmpcurrency.LoadCurrencydata(CurrencyID)
-        Me.Hide()
-        frmmoneyexchange.Show()
-        frmmoneyexchange.LoadCurrencyList(tmpcurrency)
-
-    End Sub
-
     Private Sub lvCurrency_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles lvCurrency.KeyPress
         If isEnter(e) Then
             If mOtherForm Then
                 btnSelect.PerformClick()
-            Else
-                btnView.PerformClick()
             End If
         End If
+    End Sub
+
+    Private Sub btnClose_Click_1(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
     End Sub
 End Class

@@ -1,4 +1,5 @@
-﻿Public Class frmRate2
+﻿
+Public Class frmRate2
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -6,6 +7,7 @@
 
     Private Sub btnBrowse_Click(sender As System.Object, e As System.EventArgs) Handles btnBrowse.Click
         ofdUpdate.ShowDialog()
+
     End Sub
 
     Private Sub ofdUpdate_FileOk(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ofdUpdate.FileOk
