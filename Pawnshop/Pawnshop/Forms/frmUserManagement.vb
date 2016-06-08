@@ -298,7 +298,7 @@ Public Class frmUserManagement
 
             tmpUser.SaveUser()
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
-            AddTimelyLogs(MOD_NAME, "Add User", )
+            AddTimelyLogs(MOD_NAME, "New User " & tmpUser.UserName & " Added", , , "By: " & POSuser.UserName)
         Else
             If EncryptString(txtPass1.Text) <> selectedUser.Password And txtPass2.Text = "" Then
                 MsgBox("Please input the password before changing", MsgBoxStyle.Critical, moduleName)
@@ -316,9 +316,8 @@ Public Class frmUserManagement
                 .UpdatePrivilege()
                 .SaveUser(False)
             End With
-
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
-            'AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount)
+            AddTimelyLogs(MOD_NAME, "User " & selectedUser.UserName & " Updated", , , "By: " & POSuser.UserName)
         End If
 
         ClearFields()
@@ -340,8 +339,8 @@ Public Class frmUserManagement
     Private Sub EditMode()
         btnAdd.Text = "&Update"
         txtUser.ReadOnly = True
-            txtPass1.Text = ""
-            txtPass2.Text = ""
+        txtPass1.Text = ""
+        txtPass2.Text = ""
         txtPass1.Focus()
     End Sub
     Private Sub ResetPassword()
