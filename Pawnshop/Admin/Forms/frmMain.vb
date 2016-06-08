@@ -25,6 +25,7 @@
     Private Sub tsbtnExport_Click(sender As System.Object, e As System.EventArgs) Handles tsbtnExport.Click
         If dgvPawnshop.DataSource Is Nothing Then Exit Sub
         sfdConfig.ShowDialog()
+        MsgBox("Data Exported", MsgBoxStyle.Information)
     End Sub
 
     Private Sub sfdConfig_FileOk(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles sfdConfig.FileOk
@@ -38,13 +39,18 @@
     End Sub
 
     Private Sub tsbtnConfig_Click(sender As System.Object, e As System.EventArgs) Handles tsbtnConfig.Click
-        ofdConfig.ShowDialog()
+        If dgvPawnshop.DataSource Is Nothing Then
+            ofdConfig.ShowDialog()
+        Else
+        End If
     End Sub
 
     Private Sub tsbtnSave_Click(sender As System.Object, e As System.EventArgs) Handles tsbtnSave.Click
+        If dgvPawnshop.DataSource Is Nothing Then Exit Sub
         database.SaveEntry(ds)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
-        dgvPawnshop.DataSource = Nothing
+        dgvPawnshop.RefreshEdit()
+        ' dgvPawnshop.DataSource = Nothing
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton1.Click
@@ -67,18 +73,29 @@
     End Sub
 
     Private Sub btnRate_Click(sender As System.Object, e As System.EventArgs) Handles btnRate.Click
-        fillData = "tblInt"
+        fillData = "TBLINT"
         mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY IntID ASC"
 
         ds = LoadSQL(mySql, fillData)
         dgvPawnshop.DataSource = ds.Tables(fillData)
+        '  dgvPawnshop.AllowUserToDeleteRows = False
+        
     End Sub
 
     Private Sub btnClass_Click(sender As System.Object, e As System.EventArgs) Handles btnClass.Click
         fillData = "tblClass"
         mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY ClassID ASC"
+
+        ds = LoadSQL(mySql, fillData)
+        dgvPawnshop.DataSource = ds.Tables(fillData)
+    End Sub
+
+    Private Sub btnCurrency_Click(sender As System.Object, e As System.EventArgs) Handles btnCurrency.Click
+        fillData = "tblCurrency"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " ORDER BY CurrencyID ASC"
 
         ds = LoadSQL(mySql, fillData)
         dgvPawnshop.DataSource = ds.Tables(fillData)

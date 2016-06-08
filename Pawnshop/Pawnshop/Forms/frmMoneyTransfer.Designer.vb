@@ -83,7 +83,7 @@ Partial Class frmMoneyTransfer
         'btnClose
         '
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Location = New System.Drawing.Point(672, 434)
+        Me.btnClose.Location = New System.Drawing.Point(673, 430)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(81, 38)
         Me.btnClose.TabIndex = 14
@@ -92,7 +92,7 @@ Partial Class frmMoneyTransfer
         '
         'btnPost
         '
-        Me.btnPost.Location = New System.Drawing.Point(587, 434)
+        Me.btnPost.Location = New System.Drawing.Point(587, 430)
         Me.btnPost.Name = "btnPost"
         Me.btnPost.Size = New System.Drawing.Size(79, 38)
         Me.btnPost.TabIndex = 13
@@ -188,7 +188,7 @@ Partial Class frmMoneyTransfer
         Me.txtSenderIDNum.Name = "txtSenderIDNum"
         Me.txtSenderIDNum.Size = New System.Drawing.Size(296, 22)
         Me.txtSenderIDNum.TabIndex = 7
-        Me.txtSenderIDNum.Text = "MMMMMMMMMMMMMMMMMMM"
+        Me.txtSenderIDNum.Text = "ID NUMBER"
         '
         'Label4
         '
@@ -280,7 +280,7 @@ Partial Class frmMoneyTransfer
         Me.txtReceiverIDNum.Name = "txtReceiverIDNum"
         Me.txtReceiverIDNum.Size = New System.Drawing.Size(296, 22)
         Me.txtReceiverIDNum.TabIndex = 4
-        Me.txtReceiverIDNum.Text = "MMMMMMMMMMMMMMMMMMM"
+        Me.txtReceiverIDNum.Text = "ID NUMBER"
         '
         'Label1
         '
@@ -479,7 +479,7 @@ Partial Class frmMoneyTransfer
         '
         'btnBrowse
         '
-        Me.btnBrowse.Location = New System.Drawing.Point(502, 434)
+        Me.btnBrowse.Location = New System.Drawing.Point(501, 430)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(79, 38)
         Me.btnBrowse.TabIndex = 15
@@ -491,7 +491,7 @@ Partial Class frmMoneyTransfer
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(765, 480)
+        Me.ClientSize = New System.Drawing.Size(763, 480)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)

@@ -183,7 +183,6 @@
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
         Next
-
         Return priv
     End Function
 
@@ -191,7 +190,6 @@
         If selectedUser.Privilege = "PDuNxp8S9q0=" Then
             chkEnAll.Checked = True : chkSuAll.Checked = True
             chkMaAll.Checked = True : chkSpAll.Checked = True
-
             tbPrivileges.Enabled = False
             Exit Sub
         End If

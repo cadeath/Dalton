@@ -13,11 +13,16 @@
 "***PRK MALAKAS - JOSE COLASTRE***" & vbCrLf
         CREDITS &= "===============" & vbCrLf & _
             "MIS:" & vbCrLf & _
-            "JAYR, MAY2, FRANCES" & vbCrLf & _
+            "JAYR, MAY2, FRANCES, JANDY, EMELEY" & vbCrLf & _
             "==================" & vbCrLf & _
             "SPECIAL THANKS TO" & vbCrLf & _
             "SIR DENNIS LARIBA, CPA" & vbCrLf & _
             "ALL RIGHTS RESERVED 2016"
+        CREDITS &= vbCrLf & "=================="
+        CREDITS &= vbCrLf & "DEVELOPER:"
+        CREDITS &= vbCrLf & "JUNMAR, ELLIE"
+        CREDITS &= vbCrLf & ""
+        CREDITS &= vbCrLf & "DATABASE VERSION: " & DBVERSION
     End Sub
 
 
