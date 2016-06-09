@@ -894,3 +894,4 @@ Token unknown - line 1, column 51
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 110
+[06/09/2016 10:51:51] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2

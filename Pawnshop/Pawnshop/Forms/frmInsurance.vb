@@ -47,6 +47,8 @@
     ''' <remarks></remarks>
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
         ClearFields()
+        If Not GenerateInsuranceNum() Then : Exit Sub
+        End If
 
         txtHolder.ReadOnly = False
         btnNew.Enabled = False
@@ -136,9 +138,7 @@
     ''' <remarks></remarks>
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
-        If Not GenerateInsuranceNum() Then : Exit Sub
-        End If
-
+       
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Posting")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
