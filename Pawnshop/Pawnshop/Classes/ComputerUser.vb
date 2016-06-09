@@ -510,6 +510,7 @@ Public Class ComputerUser
                 .Item("FullName") = _fullName
                 .Item("Privilege") = _privilege
             End With
+
         End If
 
         database.SaveEntry(ds, isNew)
