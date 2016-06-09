@@ -418,7 +418,7 @@ Module mod_system
     Friend Sub UpdateSAPAccount(TRANS As String, VALUE As String)
         Dim mySql As String, fillData As String = "TBLCASH"
         mySql = "SELECT * FROM " & fillData
-        mySql &= " WHERE TRANSNAME = '{0}'"
+        mySql &= String.Format(" WHERE TRANSNAME = '{0}'", TRANS)
 
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         ds = LoadSQL(mySql, fillData)
