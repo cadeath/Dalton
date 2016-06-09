@@ -1,7 +1,5 @@
 ﻿Public Class frmBorrowBrowse
-    ' Version 1.1
-    ' - Check branchCode
-
+  
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadBorrowings()
@@ -11,7 +9,7 @@
             btnVoid.Enabled = .canVoid
         End With
     End Sub
-
+   
     Private Sub ClearFields()
         txtBranch.Text = ""
         txtOut.Text = ""
@@ -21,7 +19,6 @@
 
         lvBorrowings.Items.Clear()
     End Sub
-
     Private Sub LoadBorrowings(Optional ByVal mySql As String = "SELECT * FROM tblBorrow WHERE Status = 'C' or Status = 'D' ORDER BY TransDate DESC")
         Dim ds As DataSet = LoadSQL(mySql)
 
@@ -138,7 +135,7 @@
             .ReferenceNumber = refNum
             .TransactionDate = TransDate
             .BranchCode = eskBrancCode
-            .BranchName = GetBranchName(branchCode)
+            .BranchName = GetBranchName(BranchCode)
             .Amount = Amount
             .Remarks = Remarks
             .Status = "D"
@@ -160,7 +157,6 @@
         If ofdEskFile.FileName = Nothing Then Exit Sub
         txtUrl.Text = ofdEskFile.FileName
     End Sub
-
     Private Sub GroupBox1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox1.DoubleClick
         devVerifyESK.Show()
     End Sub

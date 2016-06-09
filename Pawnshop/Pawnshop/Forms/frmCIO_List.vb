@@ -1,6 +1,11 @@
 ﻿Public Class frmCIO_List
     Dim fillData As String = "tblCashTrans"
-
+    ''' <summary>
+    ''' load the clearfield and loadactive method
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmCIO_List_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         LoadActive()
@@ -14,12 +19,18 @@
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
-
+    ''' <summary>
+    ''' clear the textbox and listview data field
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ClearField()
         txtSearch.Text = ""
         lvCIO.Items.Clear()
     End Sub
-
+    ''' <summary>
+    ''' load all transaction in cash in / out
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub LoadActive()
         Dim mySql As String = "SELECT * FROM " & fillData
         mySql &= " WHERE Status = 1 ORDER BY TransID DESC"
@@ -29,7 +40,11 @@
             AddItem(cio)
         Next
     End Sub
-
+    ''' <summary>
+    ''' load the date to the listview.
+    ''' </summary>
+    ''' <param name="cio"></param>
+    ''' <remarks></remarks>
     Private Sub AddItem(ByVal cio As DataRow)
         Dim tmpCIO As New CashInOutTransaction
         tmpCIO.LoadCashIObyRow(cio)
@@ -46,7 +61,12 @@
 
         Console.WriteLine(String.Format("{0}. {1} - {2} {3}", lv.Tag, tmpCIO.TransactionID, tmpCIO.Transaction, tmpCIO.Amount))
     End Sub
-
+    ''' <summary>
+    ''' search all data from filldata 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim mySql As String = "SELECT * FROM " & fillData
         mySql &= String.Format(" WHERE Category LIKE '%{0}%' OR TransName LIKE '%{0}%' OR Remarks LIKE '%{0}%'", txtSearch.Text)
@@ -59,7 +79,11 @@
             AddItem(dr)
         Next
     End Sub
-
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <param name="id"></param>
+    ''' <remarks></remarks>
     Private Sub VoidID(ByVal id As Integer)
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE TransID = {1}", fillData, id)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
@@ -78,11 +102,21 @@
         RemoveJournal("Ref# " & getID)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
-
+    ''' <summary>
+    ''' This button perform search the desired data.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
-
+    ''' <summary>
+    ''' This button void the transaction.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
         Dim idx As Integer = lvCIO.FocusedItem.Tag

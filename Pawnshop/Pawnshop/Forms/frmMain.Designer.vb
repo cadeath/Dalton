@@ -55,6 +55,7 @@ Partial Class frmMain
         Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MoneyTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InsuranceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DollarReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CashInOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -64,6 +65,7 @@ Partial Class frmMain
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutUsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pbLogo = New System.Windows.Forms.PictureBox()
         Me.pInfo = New System.Windows.Forms.Panel()
@@ -85,7 +87,6 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.DollarReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -284,6 +285,12 @@ Partial Class frmMain
         Me.InsuranceToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.InsuranceToolStripMenuItem.Text = "&Insurance"
         '
+        'DollarReportToolStripMenuItem
+        '
+        Me.DollarReportToolStripMenuItem.Name = "DollarReportToolStripMenuItem"
+        Me.DollarReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.DollarReportToolStripMenuItem.Text = "D&ollar Report"
+        '
         'CashInOutToolStripMenuItem
         '
         Me.CashInOutToolStripMenuItem.Name = "CashInOutToolStripMenuItem"
@@ -327,7 +334,7 @@ Partial Class frmMain
         '
         'AboutToolStripMenuItem
         '
-        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TutorialToolStripMenuItem, Me.AboutUsToolStripMenuItem})
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TutorialToolStripMenuItem, Me.ChangelogToolStripMenuItem, Me.AboutUsToolStripMenuItem})
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.AboutToolStripMenuItem.Text = "&Help"
@@ -335,13 +342,19 @@ Partial Class frmMain
         'TutorialToolStripMenuItem
         '
         Me.TutorialToolStripMenuItem.Name = "TutorialToolStripMenuItem"
-        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.TutorialToolStripMenuItem.Text = "&Tutorial"
+        '
+        'ChangelogToolStripMenuItem
+        '
+        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.ChangelogToolStripMenuItem.Text = "&Changelog"
         '
         'AboutUsToolStripMenuItem
         '
         Me.AboutUsToolStripMenuItem.Name = "AboutUsToolStripMenuItem"
-        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
+        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
         Me.AboutUsToolStripMenuItem.Text = "&About Us"
         '
         'pbLogo
@@ -358,7 +371,7 @@ Partial Class frmMain
         'pInfo
         '
         Me.pInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pInfo.Controls.Add(Me.lblMessage)
         Me.pInfo.Controls.Add(Me.lblTitle)
         Me.pInfo.Location = New System.Drawing.Point(12, 161)
@@ -370,7 +383,7 @@ Partial Class frmMain
         'lblMessage
         '
         Me.lblMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblMessage.Location = New System.Drawing.Point(15, 41)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(310, 366)
@@ -442,7 +455,7 @@ Partial Class frmMain
         Me.btnDollarBuying.Name = "btnDollarBuying"
         Me.btnDollarBuying.Size = New System.Drawing.Size(137, 90)
         Me.btnDollarBuying.TabIndex = 23
-        Me.btnDollarBuying.Text = "Dollar Buying"
+        Me.btnDollarBuying.Text = "Foreign Exchange"
         Me.btnDollarBuying.UseVisualStyleBackColor = True
         '
         'btnLayAway
@@ -523,7 +536,7 @@ Partial Class frmMain
         'webAds
         '
         Me.webAds.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.webAds.Location = New System.Drawing.Point(0, 522)
+        Me.webAds.Location = New System.Drawing.Point(15, 520)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -543,12 +556,6 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
-        'DollarReportToolStripMenuItem
-        '
-        Me.DollarReportToolStripMenuItem.Name = "DollarReportToolStripMenuItem"
-        Me.DollarReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.DollarReportToolStripMenuItem.Text = "D&ollar Report"
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -556,12 +563,12 @@ Partial Class frmMain
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(106, Byte), Integer), CType(CType(185, Byte), Integer), CType(CType(249, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1063, 603)
         Me.Controls.Add(Me.bannerSize)
-        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.statusStrip)
         Me.Controls.Add(Me.pButton)
         Me.Controls.Add(Me.pbLogo)
         Me.Controls.Add(Me.msMenu)
         Me.Controls.Add(Me.pInfo)
+        Me.Controls.Add(Me.webAds)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.msMenu
         Me.Name = "frmMain"
@@ -643,5 +650,6 @@ Partial Class frmMain
     Friend WithEvents HourlySummaryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BSPReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DollarReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ChangelogToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

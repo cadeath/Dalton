@@ -1,4 +1,26 @@
 CHANGELOG
+Version 1.2.2
+ - Fix monthly computation for Cellphone
+ - Fix Journal Entry Summary
+ - Fix Money Transfer Send In/Payout Name
+ - Fix Minor Change Rate Problem
+ - Add Foreign Currency
+ - Add Pawnticket and OR Number every print 
+ - Add New Design for About Us
+ - Add Cash In Bank SAP Account in Settings
+ - Include Auto Patch up to db1.2 v1.2
+
+Version 1.2
+ - Fix Current Rate for Active Loans
+ - Fix Change Rate for New Loans only
+ - Fix non didn't appear in PT for non-jewel
+ - Add Monthly Report - Transaction Count
+ - Add Pawner Summary List
+ - Add Monthly Computation
+ - Add Cash Count Prevention
+ - Include Changelog on Menu
+ - Patch Up Database
+
 Version 1.1.2.5
  - Fix Report Activate/Deactivate
  - Fix Report PERA PADALA to display PMFTC ME#/MR#
@@ -41,7 +63,7 @@ Version 1.1.1.1
  - Redemption don't SAVE Interest and Penalty.
 
 Version 1.1.1.0c
- - Enhance pawning computetation codes
+ - Enhance pawning computation codes
  - Money Transfer Report
  - REDEEM MORE THAN ONE(1) MONTH over charge(double interest)
  - BUG on PAWNING not AUTOCOMPUTE

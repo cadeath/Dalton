@@ -15,11 +15,19 @@
             btnVoid.Enabled = .canVoid
         End With
     End Sub
-
+    ''' <summary>
+    ''' if you press enter it will go client information form.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtHolder_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHolder.KeyPress
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
-
+    ''' <summary>
+    ''' This method will clear all text fields.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ClearFields()
         txtHolder.Text = ""
         txtSenderAddr.Text = ""
@@ -31,7 +39,12 @@
         dtpExpiry.Enabled = False
         dtpExpiry.Value = dtpDate.Value.AddDays(120)
     End Sub
-
+    ''' <summary>
+    ''' This button will enable some textfield that need to input data.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
         ClearFields()
 
@@ -45,10 +58,21 @@
         txtCoi.Text = GetOption("InsuranceLastNum")
         txtAmount.Text = GetOption("InsuranceAmount")
     End Sub
+    ''' <summary>
+    ''' This button will show the client information form. 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmClient.SearchSelect(txtHolder.Text, FormName.frmInsurance)
         frmClient.Show()
     End Sub
+    ''' <summary>
+    ''' This method will send client information to text fields.
+    ''' </summary>
+    ''' <param name="cl"></param>
+    ''' <remarks></remarks>
     Friend Sub LoadHolder(ByVal cl As Client)
         txtHolder.Text = String.Format("{0} {1} {2}", cl.FirstName, cl.LastName, cl.Suffix)
         txtSenderAddr.Text = String.Format("{0} {1} {2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
@@ -61,14 +85,24 @@
 
         txtPT.Focus()
     End Sub
-
+    ''' <summary>
+    ''' This keypress will allow digit only
+    ''' iy you press enter it will save automatically.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub txtAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmount.KeyPress
         DigitOnly(e)
         If isEnter(e) Then
             btnSave.PerformClick()
         End If
     End Sub
-
+    ''' <summary>
+    ''' This method will load data into text fields.
+    ''' </summary>
+    ''' <param name="id"></param>
+    ''' <remarks></remarks>
     Friend Sub LoadInsurance(ByVal id As Integer)
         Dim getInsurance As New Insurance
         getInsurance.LoadInsurance(id)
@@ -83,14 +117,23 @@
         btnVoid.Enabled = True
         txtPT.Enabled = False
     End Sub
-
+    ''' <summary>
+    ''' This method will verify if txtholder has data.
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Function isValid() As Boolean
         If Holder Is Nothing Then txtHolder.Focus() : Return False
         'If Not IsNumeric(txtPT.Text) Then txtPT.Focus() : Return False
 
         Return True
     End Function
-
+    ''' <summary>
+    ''' This button will perform save the client information.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
         If Not GenerateInsuranceNum() Then : Exit Sub
@@ -111,8 +154,8 @@
 
             .SaveInsurance()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE")
-            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber)
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", TransType:="INSURANCE")
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, TransType:="INSURANCE")
 
             AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount)
         End With
@@ -123,8 +166,9 @@
 
         Me.Close()
     End Sub
+
     Private Function GenerateInsuranceNum() As Boolean
-        'Check ME if existing
+        'Check InsuranceNum if existing
         Dim mySql As String, ds As DataSet
         mySql = "SELECT DISTINCT COINO FROM TBLINSURANCE "
         mySql &= "WHERE COINO = '" & currentInsuranceNum & "' "
@@ -141,7 +185,12 @@
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmInsuranceList.Show()
     End Sub
-
+    ''' <summary>
+    ''' This button will perform to void the transaction.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub

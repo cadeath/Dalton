@@ -17,7 +17,12 @@
 
         Return True
     End Function
-
+    ''' <summary>
+    ''' click button to Post the transaction that already add in listview
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
         If MsgBox("Do you want to post the transaction?", MsgBoxStyle.YesNo) = MsgBoxResult.No Then Exit Sub
@@ -55,7 +60,11 @@
         btnCashIn.PerformClick()
         LineNum = 1
     End Sub
-
+    ''' <summary>
+    ''' add data to listview
+    ''' </summary>
+    ''' <param name="cio"></param>
+    ''' <remarks></remarks>
     Private Sub AddItem(ByVal cio As CashInOutTransaction)
         Dim lv As ListViewItem = lvDetails.Items.Add(LineNum)
         lv.SubItems.Add(cio.Category)
@@ -66,7 +75,12 @@
         CIOtransactions.Add(cio)
         LineNum += 1
     End Sub
-
+    ''' <summary>
+    ''' load the clearfields, loadtables, cashinsetup method
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmCashInOut2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
@@ -75,21 +89,33 @@
         LoadTables()
         cashInSetup()
     End Sub
-
+    ''' <summary>
+    ''' if category change automatically transaction name change
+    ''' </summary>
+    ''' <param name="ht"></param>
+    ''' <remarks></remarks>
     Private Sub UpdateCategory(ByVal ht As Hashtable)
         cboCat.Items.Clear()
         For Each el As DictionaryEntry In ht
             cboCat.Items.Add(el.Value)
         Next
     End Sub
-
+    ''' <summary>
+    ''' if transaction detect the category change automacally transaction change
+    ''' </summary>
+    ''' <param name="ht"></param>
+    ''' <remarks></remarks>
     Private Sub UpdateTransaction(ByVal ht As Hashtable)
         cboTrans.Items.Clear()
         For Each el As DictionaryEntry In ht
             cboTrans.Items.Add(el.Value)
         Next
     End Sub
-
+    ''' <summary>
+    ''' click button to begin cash in transaction
+    ''' if other transaction not post data will be clear
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub cashInSetup() Handles btnCashIn.Click
         On Error Resume Next
 
@@ -114,7 +140,10 @@
         selectedType = "Receipt"
         Me.Text = "Cash In [Receipt]"
     End Sub
-
+    ''' <summary>
+    ''' This method wil clear the textbox, combobox and listview in this form.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ClearFields()
         cboCat.Items.Clear()
         cboTrans.Items.Clear()
@@ -199,7 +228,12 @@
             cnt += 1
         Next
     End Sub
-
+    ''' <summary>
+    ''' This combobox display the category and automatically display the transaction in the cboTrans
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub cboCat_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboCat.SelectedIndexChanged
         Dim idx As Integer = cboCat.SelectedIndex
         Dim selectHT As New Hashtable
@@ -214,13 +248,21 @@
         UpdateTransaction(selectHT)
         cboTrans.SelectedIndex = 0
     End Sub
-
+    ''' <summary>
+    ''' This method will automatically increment after every transaction.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub Renumber()
         For cnt As Integer = 0 To lvDetails.Items.Count - 1
             lvDetails.Items(cnt).Text = cnt + 1
         Next
     End Sub
-
+    ''' <summary>
+    ''' This button perform the cashout of data.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnCashOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCashOut.Click
         On Error Resume Next
 
@@ -245,7 +287,12 @@
         selectedType = "Disbursement"
         Me.Text = "Cash Out [Disbursement]"
     End Sub
-
+    ''' <summary>
+    ''' This button remove the item in the listview details.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
         If lvDetails.SelectedItems.Count <= 0 Then Exit Sub
         Dim idx As Integer = lvDetails.FocusedItem.Index
@@ -253,7 +300,12 @@
         CIOtransactions.Remove(idx)
         Renumber()
     End Sub
-
+    ''' <summary>
+    ''' This function will create getcashID and select data from tblcash.
+    ''' </summary>
+    ''' <param name="transname"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Function getCashID(ByVal transname As String) As Integer
         Dim mySql As String, ID As Integer = 0
         mySql = "SELECT * FROM tblCash WHERE TRANSNAME = '" & transname & "'"
@@ -265,7 +317,12 @@
 
         Return ID
     End Function
-
+    ''' <summary>
+    ''' click button to add the cash in to listview
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If Not isValidAdd() Then Exit Sub
 
@@ -327,7 +384,11 @@
         End If
         Return "N/A"
     End Function
-
+    ''' <summary>
+    ''' function that return the focus to txtamt.text if detect no value
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Private Function isValidAdd() As Boolean
         If txtAmt.Text = "" Then txtAmt.Focus() : Return False
 
@@ -337,11 +398,21 @@
     Private Sub txtAmt_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmt.KeyPress
         DigitOnly(e)
     End Sub
-
+    ''' <summary>
+    ''' click button to view the list of all cash in receipt
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmCIO_List.Show()
     End Sub
-
+    ''' <summary>
+    ''' click button to change the transaction name to Smart Money Payable - Perfecom
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnInvIn_Click(sender As System.Object, e As System.EventArgs) Handles btnInvIn.Click
         isCustomInOut = True
         transName = "Smart Money Payable - Perfecom"
@@ -350,7 +421,12 @@
         txtAmt.Focus()
 
     End Sub
-
+    ''' <summary>
+    ''' click button to change the transaction name to BDO ATM Cashout
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnBDOCashOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBDOCashOut.Click
         isCustomInOut = True
         transName = "BDO ATM CASHOUT"

@@ -871,7 +871,7 @@ Partial Class frmPawnItem
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(682, 3)
+        Me.webAds.Location = New System.Drawing.Point(669, 45)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -884,7 +884,6 @@ Partial Class frmPawnItem
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(935, 505)
-        Me.Controls.Add(Me.webAds)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.lblTransaction)
         Me.Controls.Add(Me.lblNPT)
@@ -898,6 +897,7 @@ Partial Class frmPawnItem
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.webAds)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmPawnItem"

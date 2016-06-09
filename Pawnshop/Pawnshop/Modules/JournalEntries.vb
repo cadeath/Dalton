@@ -1,5 +1,4 @@
 ﻿Module JournalEntries
-
     ''' <summary>
     ''' This Procedure add Journal Entries
     ''' </summary>
@@ -13,7 +12,7 @@
     ''' <remarks>This Procedure add Journal Entries</remarks>
     Friend Sub AddJournal(ByVal Amt As Double, ByVal DebitCredit As String, ByVal AccountName As String, _
                           Optional ByVal Remarks As String = "", Optional ByVal cashCountName As String = "", _
-                          Optional ToDisplay As Boolean = True, Optional Category As String = "")
+                          Optional ByVal ToDisplay As Boolean = True, Optional ByVal Category As String = "", Optional ByVal TransType As String = "")
         If Amt = 0 Then Exit Sub
         Dim transactionName As String = "", SAPCode As String = "", onHold As Boolean = False
         Dim AccntID As Integer = 0
@@ -39,10 +38,11 @@
         Else
             With ds.Tables(0)
                 AccntID = ds.Tables(0).Rows(0).Item("CashID")
-                category = IIf(IsDBNull(.Rows(0).Item("Category")), "", .Rows(0).Item("Category"))
+                Category = IIf(IsDBNull(.Rows(0).Item("Category")), "", .Rows(0).Item("Category"))
                 transactionName = IIf(IsDBNull(.Rows(0).Item("TransName")), "", .Rows(0).Item("TransName"))
                 SAPCode = IIf(IsDBNull(.Rows(0).Item("SAPAccount")), "", .Rows(0).Item("SAPAccount"))
                 onHold = IIf(.Rows(0).Item("onHold") = 1, True, False)
+                'TransType = IIf(IsDBNull(.Rows(0).Item("TRANSTYPE")), "", .Rows(0).Item("TRANSTYPE"))
             End With
             If onHold Then MsgBox("AccountCode " & transactionName & " is ON HOLD" & vbCrLf & "Contact your IT DEPARTMENT", MsgBoxStyle.Information)
         End If
@@ -58,6 +58,7 @@
             .Item("JRL_TRANSDATE") = CurrentDate
             .Item("JRL_TIME") = Now.TimeOfDay
             .Item("JRL_TRANSID") = AccntID
+            .Item("TRANSTYPE") = TransType
             Select Case DebitCredit
                 Case "Debit"
                     .Item("JRL_Debit") = Amt
@@ -70,6 +71,7 @@
                 If cashCountName = "" And isRevolvingFund Then MsgBox("No Cash Count Name for " & Remarks, MsgBoxStyle.Critical, "Developer WARNING")
                 .Item("Remarks") = "Revolving Fund: " & REVOLVING_FUND
                 .Item("CCName") = cashCountName
+                '.Item("TRANSTYPE") = TransType
             End If
             If Not ToDisplay Then .Item("ToDisplay") = 0
             If Remarks <> "" Then .Item("Remarks") &= "| "
@@ -87,7 +89,11 @@
     '    ds.Tables(tblName).Rows(0).Item("STATUS") = 0
     '    database.SaveEntry(ds, False)
     'End Sub
-
+    ''' <summary>
+    ''' This method select all data from tblJournal where srcStr is the parameter
+    ''' </summary>
+    ''' <param name="srcStr">srcStr is the bases if what journal to display.</param>
+    ''' <remarks></remarks>
     Friend Sub RemoveJournal(srcStr As String)
         Dim fillData As String = "tblJournal"
         Dim mySql As String = "SELECT * FROM tblJournal WHERE "
@@ -103,7 +109,12 @@
         database.SaveEntry(ds, False)
         Console.WriteLine(srcStr & " REMOVED FROM JOURNAL ENTRIES...")
     End Sub
-
+    ''' <summary>
+    ''' This function create accountName variable which the paremeter of tblcash.
+    ''' </summary>
+    ''' <param name="AccountName"></param>
+    ''' <returns>return ds after reading data.</returns>
+    ''' <remarks></remarks>
     Private Function GetTransID(ByVal AccountName As String) As Integer
         Dim mySql As String, tblName As String = "tblCash"
         mySql = "SELECT * FROM " & tblName & " WHERE TransName = '" & AccountName & "'"

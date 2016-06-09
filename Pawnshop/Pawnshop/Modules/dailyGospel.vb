@@ -4,7 +4,11 @@ Imports System.IO
 Imports System.Text.RegularExpressions
 
 Module dailyGospel
-
+    ''' <summary>
+    ''' This module is the declaration of the URL.
+    ''' The sr here was declare as streamreader which means to read a text file.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub Scrape()
         Try
             Dim url As String = "http://dailygospel.org/M/AM/"

@@ -1,24 +1,19 @@
-﻿Imports System.Data.Odbc
-Public Class frmBorrowing
+﻿Public Class frmBorrowing
 
     Const MOD_NAME As String = "BORROWINGS"
     Dim currentBornum As Integer = GetOption("BorrowingLastNum")
     Dim branchcode As String = GetOption("BranchCode")
     Dim newborrow = String.Format("{1}{0:000000}", currentBornum, BranchCode)
 
-
-
     Private Sub frmBorrowing_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadLastRefNum()
         LoadBranches()
     End Sub
-    Private Sub CurrenctBorrowNumBranchCode()
-        
-    End Sub
+
     Private Sub LoadLastRefNum()
         Dim num As Integer = GetOption("BorrowingLastNum")
-        txtRef.Text = String.Format("{1}{0:000000}", num, BranchCode)
+        txtRef.Text = String.Format("{1}{0:000000}", num, branchcode)
     End Sub
 
     Private Sub AddRefNum()
@@ -43,7 +38,6 @@ Public Class frmBorrowing
         For cnt As Integer = 0 To MaxCount - 1
             str(cnt) = ds.Tables(0).Rows(cnt).Item("BranchName")
         Next
-
         cboBranch.Items.AddRange(str)
     End Sub
 
@@ -58,11 +52,10 @@ Public Class frmBorrowing
     Private Function GetBranchCode(ByVal branchName As String) As String
         Dim mySql As String = "SELECT * FROM tblBranches WHERE BranchName = '" & branchName & "'"
         Dim ds As DataSet = LoadSQL(mySql)
-
         Return ds.Tables(0).Rows(0).Item("SapCode")
     End Function
-    Private Function BorrowingNum() As Boolean
 
+    Private Function BorrowingNum() As Boolean
         Dim mySql As String, ds As DataSet
         mySql = "SELECT DISTINCT REFNUM FROM tblBORROW "
         mySql &= "WHERE REFNUM = '" & newborrow & "'"
@@ -72,18 +65,14 @@ Public Class frmBorrowing
         Return True
     End Function
 
-
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
 
         If Not BorrowingNum() Then : Exit Sub
         End If
 
-      
         If Not sfdMoneyFile.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
-
         Dim fileSave As String = sfdMoneyFile.FileName
-
         Dim saveBorrow As New Borrowings
         With saveBorrow
             .ReferenceNumber = txtRef.Text
@@ -98,8 +87,8 @@ Public Class frmBorrowing
             .SaveBorrowings()
             AddRefNum()
 
-            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & BranchCode, "BORROW OUT")
-            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & BranchCode)
+            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & branchcode, "BORROW OUT", TransType:="BORROWINGS")
+            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & branchcode, TransType:="BORROWINGS")
         End With
 
         Dim brwFile As New Hashtable
@@ -115,19 +104,17 @@ Public Class frmBorrowing
 
         'Generate File
         CreateEsk(fileSave, brwFile)
-
         MsgBox("Saved!", MsgBoxStyle.Information)
         Me.Close()
     End Sub
-  
-    Private Function isValid() As Boolean
+
+  Private Function isValid() As Boolean
         If cboBranch.Text = "" Then cboBranch.Focus() : Return False
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
         If txtParticulars.Text = "" Then txtParticulars.Focus() : Return False
         Return True
     End Function
-
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+   Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmBorrowBrowse.Show()
     End Sub
 

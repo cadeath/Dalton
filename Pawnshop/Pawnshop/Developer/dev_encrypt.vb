@@ -25,4 +25,12 @@
 
         Return tmpENC
     End Function
+
+
+    Private Sub btnHash_Click(sender As System.Object, e As System.EventArgs) Handles btnHash.Click
+        Dim ds As DataSet
+        ds = LoadSQL(txtSQL.Text)
+
+        txtHash.Text += vbCrLf & GetMD5(ds)
+    End Sub
 End Class

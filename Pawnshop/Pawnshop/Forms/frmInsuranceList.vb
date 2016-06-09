@@ -4,7 +4,10 @@
         ClearFields()
         LoadInsurance()
     End Sub
-
+    ''' <summary>
+    ''' this method load the information of a client
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub LoadInsurance()
         Dim mySql As String = "SELECT * FROM tblInsurance WHERE Status LIKE 'A' ORDER BY TRANSDATE DESC"
         Dim ds As DataSet = LoadSQL(mySql)
@@ -15,7 +18,11 @@
             AddItem(loadInsu)
         Next
     End Sub
-
+    ''' <summary>
+    ''' This method will add item to listview.
+    ''' </summary>
+    ''' <param name="ins"></param>
+    ''' <remarks></remarks>
     Private Sub AddItem(ByVal ins As Insurance)
         Dim lv As ListViewItem = lvInsurance.Items.Add(ins.COInumber)
         lv.SubItems.Add(ins.TransactionDate)
@@ -25,7 +32,10 @@
         lv.Tag = ins.ID
         If ins.Status = "V" Then lv.BackColor = Color.LightGray
     End Sub
-
+    ''' <summary>
+    ''' This method will clear the textfield and listview.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ClearFields()
         txtSearch.Text = ""
         lvInsurance.Items.Clear()
@@ -34,7 +44,12 @@
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
-
+    ''' <summary>
+    ''' This button will view the client information from client management form to certificate of insurance form.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
         If Not lvInsurance.SelectedItems.Count > 0 Then Exit Sub
 
@@ -43,7 +58,12 @@
 
         Me.Close()
     End Sub
-
+    ''' <summary>
+    ''' This button allow to search the client information.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
 

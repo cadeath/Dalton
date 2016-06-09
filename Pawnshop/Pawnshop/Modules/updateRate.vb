@@ -1,8 +1,13 @@
-﻿Module updateRate
+﻿
+Module updateRate
     Private dsRate As DataSet
+    ' Private ds As String = database.dbName
     Private isFailed As Boolean = False
     Private fillData As String, mySql As String
 
+    ' TODO: ELLIE
+    ' from the RATE file, the affected table will be 'DELETE ALL ROW'
+    ' and the RATE file will be save in the affected table.
     Sub do_RateUpdate(url As String, Optional dbSrc As String = "")
         Dim fs As New System.IO.FileStream(url, IO.FileMode.Open)
         Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
@@ -39,8 +44,10 @@
             Exit Sub
         End Try
 
+
         Dim i As Integer = 0
         Dim ID As String = dsRate.Tables(fillData).Columns.Item(0).ColumnName
+
 
         'Remove Excessive entries
         Console.WriteLine("Checking excessive entries")
@@ -52,6 +59,7 @@
                 database.SaveEntry(ds, False)
             Next
         End If
+
 
         Console.WriteLine("Updating table") : i = 0
         For Each dr As DataRow In dsRate.Tables(fillData).Rows
@@ -66,7 +74,6 @@
                     ds.Tables(fillData).Rows(0).Item(setColumn) = _
                         dsRate.Tables(fillData).Rows(i).Item(setColumn)
                 Next
-
                 database.SaveEntry(ds, False)
             Else
                 Dim dsNewRow As DataRow

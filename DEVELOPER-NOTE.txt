@@ -1,0 +1,35 @@
+RECORDING OF INTEREST
+PROGRAM ALGORITHM FOR LOAN
+
+PAWNING MODULE REVISION
+NEW LOAN
+1. Input Pawn Information
+2. If INT_HASH has no value then hash TBLINT
+3. If INT_HASH didn't exist at TBLINT_HISTORY, COPY TBLINT to TBLINT_HISTORY with HASH as CHECKSUM
+4. Use TBLINT as basis of computation
+5. Save the pawn info with the hashvalue
+
+RENEWAL
+1. Load PT
+2. if INT_HASH has no value then hash TBLINT
+3. Compare INT_HASH and the Pawn INT Hash
+4. If the same, use TBLINT as basis, if not then filter TBLINT_HISTORY for the hash, and use it as basis.
+5. If not found, ERROR and call for technical asssistance, END.
+6. Compute the INT base where Pawn INT hash matches
+7. Save the Pawn Info with the hash value of the previous Pawn INT
+
+REDEEM
+1. Load PT
+2. if INT_HASH has no value then hash TBLINT
+3. Compare INT_HASH and the Pawn INT Hash
+4. If the same, use TBLINT as basis, if not then filter TBLINT_HISTORY for the hash, and use it as basis.
+5. If not found, ERROR and call for technical asssistance, END.
+6. Compute the INT
+7. Save and Redeem the Pawn Info with the hash value of the previous Pawn INT
+
+# CHECKING HASH
+NEW LOAN
+1. GENERATE INT_HASH FROM FIELDS DAYFROM, DAYTO, ITEMTYPE, INTEREST, PENALTY, REMARKS
+2. CHECK IF INT_HASH IS LISTED ON TBLINT_HISTORY
+3. IF NOT, ADD TBLINT IN TBLINT_HISTORY
+4. INCLUDE INT_HASH IN SAVING PAWN INFO, INT_CHECKSUM

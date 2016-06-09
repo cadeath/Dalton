@@ -34,14 +34,14 @@ Partial Class frmExtractor
         '
         'MonCalendar
         '
-        Me.MonCalendar.Location = New System.Drawing.Point(18, 18)
+        Me.MonCalendar.Location = New System.Drawing.Point(21, 18)
         Me.MonCalendar.MaxSelectionCount = 365
         Me.MonCalendar.Name = "MonCalendar"
         Me.MonCalendar.TabIndex = 0
         '
         'btnExtract
         '
-        Me.btnExtract.Location = New System.Drawing.Point(18, 242)
+        Me.btnExtract.Location = New System.Drawing.Point(18, 239)
         Me.btnExtract.Name = "btnExtract"
         Me.btnExtract.Size = New System.Drawing.Size(75, 41)
         Me.btnExtract.TabIndex = 1
@@ -51,10 +51,10 @@ Partial Class frmExtractor
         'txtPath
         '
         Me.txtPath.BackColor = System.Drawing.Color.White
-        Me.txtPath.Location = New System.Drawing.Point(18, 192)
+        Me.txtPath.Location = New System.Drawing.Point(21, 192)
         Me.txtPath.Name = "txtPath"
         Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(227, 20)
+        Me.txtPath.Size = New System.Drawing.Size(224, 20)
         Me.txtPath.TabIndex = 2
         '
         'Label1
@@ -71,7 +71,7 @@ Partial Class frmExtractor
         Me.pbLoading.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pbLoading.Location = New System.Drawing.Point(0, 289)
         Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(260, 15)
+        Me.pbLoading.Size = New System.Drawing.Size(271, 15)
         Me.pbLoading.TabIndex = 4
         '
         'chkOld
@@ -80,7 +80,7 @@ Partial Class frmExtractor
         Me.chkOld.Checked = True
         Me.chkOld.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkOld.Enabled = False
-        Me.chkOld.Location = New System.Drawing.Point(187, 266)
+        Me.chkOld.Location = New System.Drawing.Point(187, 263)
         Me.chkOld.Name = "chkOld"
         Me.chkOld.Size = New System.Drawing.Size(61, 17)
         Me.chkOld.TabIndex = 5
@@ -96,7 +96,7 @@ Partial Class frmExtractor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(260, 304)
+        Me.ClientSize = New System.Drawing.Size(271, 304)
         Me.Controls.Add(Me.chkOld)
         Me.Controls.Add(Me.pbLoading)
         Me.Controls.Add(Me.Label1)

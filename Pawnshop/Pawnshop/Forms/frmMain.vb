@@ -1,5 +1,4 @@
-﻿
-Public Class frmMain
+﻿Public Class frmMain
 
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
@@ -60,7 +59,8 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, "<<DEVELOPER MODE>>", "")
+        Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, " <<DEVELOPER MODE>>", "")
+        Me.Text &= IIf(mod_system.PROTOTYPE, " !!PROTOTYPE!!", "")
         If Not ConfiguringDB() Then MsgBox("DATABASE CONNECTION PROBLEM", MsgBoxStyle.Critical) : Exit Sub
 
         Patch_if_Patchable()
@@ -162,7 +162,8 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to Dollar Buying")
             Exit Sub
         End If
-        frmDollorSimple.Show()
+        'frmDollorSimple.Show()
+        frmmoneyexchange.Show()
     End Sub
 
     Private Sub btnCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCash.Click
@@ -358,7 +359,7 @@ Public Class frmMain
             pButton.Anchor = AnchorStyles.None
             pButton.Left = 543
         End If
-        
+
     End Sub
 
     Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
@@ -381,7 +382,8 @@ Public Class frmMain
     End Sub
 
     Private Sub AboutUsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
-        ab.Show()
+        'ab.Show()
+        ab2.Show()
     End Sub
 
     Private Sub ORManagerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ORManagerToolStripMenuItem.Click
@@ -431,4 +433,10 @@ Public Class frmMain
         qryDate.FormType = qryDate.ReportType.DollarDaily
         qryDate.Show()
     End Sub
+
+    Private Sub ChangelogToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ChangelogToolStripMenuItem.Click
+        Dim changeLog As String = "changelog.txt"
+        System.Diagnostics.Process.Start("notepad.exe", changeLog)
+    End Sub
+
 End Class
