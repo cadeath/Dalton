@@ -113,6 +113,13 @@
     <Compile Include="Modules\pg_incomplete_desc.vb" />
     <Compile Include="Modules\revolving_fund.vb" />
     <Compile Include="Modules\update_tblCharges.vb" />
+    <Compile Include="RateFixer\EmptyRate.vb" />
+    <Compile Include="RateFixer\frmRateEmpty.Designer.vb">
+      <DependentUpon>frmRateEmpty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RateFixer\frmRateEmpty.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ReCompute\frmRecompute.Designer.vb">
       <DependentUpon>frmRecompute.vb</DependentUpon>
     </Compile>
@@ -134,6 +141,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RateFixer\frmRateEmpty.resx">
+      <DependentUpon>frmRateEmpty.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReCompute\frmRecompute.resx">
       <DependentUpon>frmRecompute.vb</DependentUpon>
