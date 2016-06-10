@@ -159,13 +159,16 @@ Public Class Insurance
 
     Public Sub VoidTransaction()
         _status = "V"
+        ' Dim COINum As String = String.Format("{000000}", Me.COInumber)
         mySql = "SELECT * FROM " & fillData & " WHERE InsuranceID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         ds.Tables(fillData).Rows(0).Item("Status") = _status
 
         database.SaveEntry(ds, False)
         RemoveJournal("COI# " & Me.COInumber)
+        RemoveDailyTimeLog("COI# " & COInumber.ToString("0000000"))
     End Sub
+
 #End Region
 
 End Class

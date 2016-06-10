@@ -128,6 +128,8 @@ Public Class frmPawnItem
         Dim transDate As Date
         If PawnItem.Status = "X" Then
             transDate = PawnItem.OfficialReceiptDate
+        ElseIf PawnItem.Status = "L" Then
+            transDate = PawnItem.LoanDate
         Else
             transDate = PawnItem.LoanDate
         End If
@@ -140,7 +142,6 @@ Public Class frmPawnItem
         If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
 
         PawnItem.VoidCancelTicket()
-
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
         frmPawning.LoadActive()
         Me.Close()
@@ -499,7 +500,7 @@ Public Class frmPawnItem
 
             .SaveTicket()
 
-            Dim tmpRemarks As String = "PT#" & currentPawnTicket.ToString("000000")
+            Dim tmpRemarks As String = "PT# " & currentPawnTicket.ToString("000000")
             AddJournal(.Principal, "Debit", "Inventory Merchandise - Loan", tmpRemarks, TransType:="NEW LOANS")
             AddJournal(.NetAmount, "Credit", "Revolving Fund", tmpRemarks, ITEM_NEWLOAN, TransType:="NEW LOANS")
             AddJournal(.AdvanceInterest, "Credit", "Interest on Loans", tmpRemarks, TransType:="NEW LOANS")

@@ -600,10 +600,12 @@ Public Class PawnTicket
     Public Sub VoidCancelTicket()
         Try
             Dim curStatus As String = _status
+            Dim PTNum As String = String.Format("{0:000000}", Me._pawnTicket)
 
             If _status = "L" Then
                 ChangeStatus("V")
-                RemoveJournal("PT# " & _pawnTicket)
+                RemoveJournal("PT# " & PTNum)
+                RemoveDailyTimeLog("PT# " & PTNum)
                 Exit Sub
             End If
 
@@ -619,7 +621,8 @@ Public Class PawnTicket
                 Dim st As String
                 If ds.Tables(fillData).Rows.Count = 0 Then
                     ChangeStatus("L")
-                    RemoveJournal("PT# " & _pawnTicket)
+                    RemoveJournal("PT# " & PTNum)
+                    RemoveDailyTimeLog("PT# " & PTNum)
                     Exit Sub
                 Else
                     If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
@@ -642,10 +645,11 @@ Public Class PawnTicket
                     .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
-                RemoveJournal("PT# " & _oldTicket)
+                RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket))
             Else
                 ChangeStatus("L")
-                RemoveJournal("PT# " & _pawnTicket)
+                RemoveJournal("PT# " & PTNum)
+                RemoveDailyTimeLog("PT# " & PTNum)
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")

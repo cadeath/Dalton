@@ -1,8 +1,9 @@
 ﻿Module DailyTimeLog
 
-    Const VERSION As String = "v1"
+    Const VERSION As String = "v1.1"
     Const TBL As String = "TBL_DAILYTIMELOG"
-
+   
+   
     ''' <summary>
     ''' This records every transactions in the system
     ''' </summary>
@@ -41,6 +42,24 @@
         Catch ex As Exception
             Log_Report(ex.Message.ToString)
         End Try
+
     End Sub
 
+    Friend Sub RemoveDailyTimeLog(srcStr As String)
+        'Void transaction in Daily Time Log = remarks
+        Dim void As String = String.Format("VOID")
+
+        Dim TBL As String = "TBL_DAILYTIMELOG"
+        Dim mySql As String = "SELECT * FROM TBL_DAILYTIMELOG WHERE "
+        mySql &= String.Format("LOG_REPORT LIKE '%{0}%'", srcStr)
+
+        Dim ds As DataSet = LoadSQL(mySql, TBL)
+        If ds.Tables(TBL).Rows.Count = 0 Then MsgBox("Daily Time Log ENTRIES NOT FOUND", MsgBoxStyle.Critical, "DEVELOPER WARNING") : Exit Sub
+        For Each dr As DataRow In ds.Tables(TBL).Rows
+            dr.Item("REMARKS") = String.Format("[{0}] {1}", VERSION, void)
+        Next
+
+        database.SaveEntry(ds, False)
+        Console.WriteLine(srcStr & " REMOVED FROM Daily Time Log ENTRIES...")
+    End Sub
 End Module

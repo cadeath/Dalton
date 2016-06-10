@@ -562,7 +562,7 @@ Public Class frmMoneyTransfer
             End Select
 
             .Save()
-            AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text), .NetAmount)
+            AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}|", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount))
         End With
 
         If daltonService(idx).isGenerated Then
