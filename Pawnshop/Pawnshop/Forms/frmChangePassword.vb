@@ -23,11 +23,8 @@ Public Class frmChangePassword
             txtNewPassword.Focus()
             Exit Sub
         End If
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & POSuser.UserID
-        Dim ds As DataSet = LoadSQL(mySql, fillData)
-
-        ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(txtNewPassword.Text)
-        SaveEntry(ds, False)
+        selectedUser.Password = txtNewPassword.Text
+        selectedUser.ChangePassword()
         MsgBox(POSuser.UserName & " updated", MsgBoxStyle.Information)
         AddTimelyLogs(moduleName, "User " & POSuser.UserName & " Change Password", , , "By: " & POSuser.UserName)
         clearfields()
@@ -41,5 +38,9 @@ Public Class frmChangePassword
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         clearfields()
+    End Sub
+
+    Private Sub frmChangePassword_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
