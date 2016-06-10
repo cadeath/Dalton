@@ -40,9 +40,25 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
 
         fillData = "dsPawn"
-        mySql = "SELECT * FROM PAWNING "
-        mySql &= String.Format("WHERE LoanDate BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
-        mySql &= " ORDER BY LOANDATE ASC"
+        mySql = "SELECT "
+        mySql &= vbCrLf & "	P.LOANDATE, P.PAWNTICKET, P2.ORNUM, P2.ORDATE, P.NETAMOUNT, P2.RENEWDUE, P.REDEEMDUE, "
+        mySql &= vbCrLf & "    CASE P.STATUS"
+        mySql &= vbCrLf & "    	WHEN '0' THEN 'RENEW' "
+        mySql &= vbCrLf & "        WHEN 'R' THEN 'RENEWED' "
+        mySql &= vbCrLf & "        WHEN 'L' THEN 'NEW' "
+        mySql &= vbCrLf & "        WHEN 'V' THEN 'VOID' "
+        mySql &= vbCrLf & "        WHEN 'W' THEN 'WITHDRAW' "
+        mySql &= vbCrLf & "        WHEN 'X' THEN 'REDEEM' "
+        mySql &= vbCrLf & "        WHEN 'S' THEN 'SEGRE' "
+        mySql &= vbCrLf & "        ELSE 'N/A' "
+        mySql &= vbCrLf & "    END AS STATUS, "
+        mySql &= vbCrLf & " C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT "
+        mySql &= vbCrLf & "FROM TBLPAWN P "
+        mySql &= vbCrLf & "	LEFT JOIN TBLPAWN P2"
+        mySql &= vbCrLf & "    ON P2.PAWNTICKET = P.OLDTICKET "
+        mySql &= vbCrLf & " INNER JOIN TBLCLIENT C ON C.CLIENTID = P.CLIENTID "
+        mySql &= String.Format("WHERE P.LoanDate BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= " ORDER BY P.LOANDATE ASC"
 
         Dim rptDic As New Dictionary(Of String, String)
         rptDic.Add("branchName", branchName)
