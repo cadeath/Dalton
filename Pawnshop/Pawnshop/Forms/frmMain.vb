@@ -439,4 +439,7 @@
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
+    Private Sub MonthlyTransactionCountSummaryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyTransactionCountSummaryToolStripMenuItem.Click
+        frmMonthlyTransactionCount.Show()
+    End Sub
 End Class

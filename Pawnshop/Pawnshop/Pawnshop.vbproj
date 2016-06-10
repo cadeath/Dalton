@@ -511,6 +511,12 @@
     <Compile Include="Reports\dsReports.vb">
       <DependentUpon>dsReports.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\frmMonthlyTransactionCount.Designer.vb">
+      <DependentUpon>frmMonthlyTransactionCount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmMonthlyTransactionCount.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\frmReport.Designer.vb">
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
@@ -722,6 +728,9 @@
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmMonthlyTransactionCount.resx">
+      <DependentUpon>frmMonthlyTransactionCount.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>
@@ -747,6 +756,7 @@
     <EmbeddedResource Include="Reports\rpt_LoanRenew_Monthly2.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlyTransactionCount.rdlc" />
     <EmbeddedResource Include="Reports\rpt_Monthly_BSP.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
