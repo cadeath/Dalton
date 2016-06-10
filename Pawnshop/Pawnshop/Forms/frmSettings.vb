@@ -28,6 +28,7 @@
         txtArea.Text = GetOption("BranchArea")
         txtBal.Text = GetOption("MaintainingBalance")
         txtRevolving.Text = GetOption("RevolvingFund")
+        txtCashInBank.Text = GetSAPAccount("Cash in Bank")
 
         If locked Then
             txtCode.Enabled = False
@@ -74,6 +75,7 @@
         End If
         UpdateOptions("MaintainingBalance", txtBal.Text)
         MaintainBal = txtBal.Text
+        UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text)
