@@ -8,7 +8,7 @@
     ''' <param name="Remarks">Remarks</param>
     ''' <param name="cashCountName">Display on CashCount</param>
     ''' <param name="ToDisplay">ToDisplay on CashCount</param>
-    ''' <param name="Category">Category</param>
+    ''' <param name="Category">Category</param>xgl
     ''' <remarks>This Procedure add Journal Entries</remarks>
     Friend Sub AddJournal(ByVal Amt As Double, ByVal DebitCredit As String, ByVal AccountName As String, _
                           Optional ByVal Remarks As String = "", Optional ByVal cashCountName As String = "", _

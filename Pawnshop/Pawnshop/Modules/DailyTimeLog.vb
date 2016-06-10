@@ -20,10 +20,11 @@
     ''' </param>
     ''' <remarks></remarks>
     Friend Sub AddTimelyLogs(mod_name As String, logs As String, Optional Amount As Double = 0, Optional hasCustomer As Boolean = True, Optional remarks As String = "")
+
         Try
             Dim mySql As String = "SELECT * FROM " & TBL
             Dim ds As DataSet = LoadSQL(mySql, TBL)
-
+            ds.Clear()
             Dim dsNewRow As DataRow
             dsNewRow = ds.Tables(TBL).NewRow
             With dsNewRow

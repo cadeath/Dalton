@@ -89,6 +89,7 @@
 
             AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & branchcode, "BORROW OUT", TransType:="BORROWINGS")
             AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & branchcode, TransType:="BORROWINGS")
+           
         End With
 
         Dim brwFile As New Hashtable

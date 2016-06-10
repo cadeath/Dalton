@@ -227,7 +227,7 @@
 
     Public Sub VoidTransaction(ByVal reason As String)
         If reason = "" Then Exit Sub
-        Dim MENum As String = String.Format("Transfer a total amount of Php{0} to {1}", NetAmount.ToString("#,##0.00"))
+
         Dim mySql As String = "SELECT * FROM " & fillData & " WHERE ID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, fillData)
 
@@ -262,7 +262,7 @@
 
         RemoveJournal(SrcStr)
 
-        RemoveDailyTimeLog(MENum)
+        RemoveDailyTimeLog(SrcStr)
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 

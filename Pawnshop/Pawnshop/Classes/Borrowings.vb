@@ -142,12 +142,14 @@
     End Sub
 
     Public Sub VoidBorrowings()
+
         mySql = "SELECT * FROM " & fillData & " WHERE brwID = " & _borrowID
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         ds.Tables(0).Rows(0).Item("Status") = "V" & ds.Tables(0).Rows(0).Item("Status")
         database.SaveEntry(ds, False)
 
         RemoveJournal("Ref# " & _borrowID)
+        RemoveDailyTimeLog("Ref# " & _borrowID)
         Console.WriteLine(String.Format("Transaction {0} void.", _borrowID))
     End Sub
 
