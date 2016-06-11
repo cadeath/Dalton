@@ -2004,8 +2004,20 @@ Adv Int</Value>
           </Border>
         </Style>
       </Tablix>
+      <Subreport Name="hit_report">
+        <ReportName>sub_hit</ReportName>
+        <Top>2.36125in</Top>
+        <Height>1.09375in</Height>
+        <Width>6.83519in</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Subreport>
     </ReportItems>
-    <Height>2.44792in</Height>
+    <Height>3.49667in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -2022,7 +2034,7 @@ Adv Int</Value>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>6.83521in</Width>
+  <Width>6.85604in</Width>
   <Page>
     <PageHeader>
       <Height>0.55208in</Height>

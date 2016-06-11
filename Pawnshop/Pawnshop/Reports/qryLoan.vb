@@ -42,13 +42,20 @@
         mySql &= vbCrLf & String.Format("	P.LOANDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
         mySql &= vbCrLf & "    AND (P.OLDTICKET = 0 OR (P.OLDTICKET > 0 AND P.RENEWDUE + P2.RENEWDUE Is Not Null)) "
         mySql &= vbCrLf & " AND P.STATUS <> 'V'"
+        mySql &= vbCrLf & " ORDER BY PAWNTICKET ASC"
 
         Console.WriteLine(">>> " & mySql)
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
         addParameter.Add("branchName", branchName)
 
-        frmReport.ReportInit(mySql, fillData, "Reports\rpt_RegisterNewLoan.rdlc", addParameter)
+        Dim MySqlDic As New Dictionary(Of String, String)
+        MySqlDic.Add(fillData, mySql)
+        Dim subSql As New Dictionary(Of String, String)
+        subSql.Add("dsHit", HitManagement.Generate_HitReport(monCal.SelectionStart.ToShortDateString))
+
+        frmReport.MultiDbSetReport(MySqlDic, "Reports\rpt_RegisterNewLoan.rdlc", addParameter, True, subSql)
+
         frmReport.Show()
     End Sub
 

@@ -1,13 +1,21 @@
 ﻿Public Class frmBorrowing
 
     Const MOD_NAME As String = "BORROWINGS"
-
+    ''' <summary>
+    ''' load the clearfields, loadlastrefnum and loadbranches method
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmBorrowing_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadLastRefNum()
         LoadBranches()
     End Sub
-
+    ''' <summary>
+    ''' 
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub LoadLastRefNum()
         Dim num As Integer = GetOption("BorrowingLastNum")
         txtRef.Text = String.Format("{1}{0:000000}", num, BranchCode)
@@ -74,8 +82,8 @@
             .SaveBorrowings()
             AddRefNum()
 
-            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & BranchCode, "BORROW OUT")
-            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & BranchCode)
+            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & BranchCode, "BORROW OUT", TransType:="BORROWINGS")
+            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & BranchCode, TransType:="BORROWINGS")
         End With
 
         Dim brwFile As New Hashtable
@@ -103,7 +111,12 @@
 
         Return True
     End Function
-
+    ''' <summary>
+    ''' show form frmborrowbrowse
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmBorrowBrowse.Show()
     End Sub

@@ -1,7 +1,12 @@
 ﻿Public Class frmBorrowBrowse
     ' Version 1.1
     ' - Check branchCode
-
+    ''' <summary>
+    ''' load the clearfields and loadborrowing method
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadBorrowings()
@@ -11,7 +16,10 @@
             btnVoid.Enabled = .canVoid
         End With
     End Sub
-
+    ''' <summary>
+    ''' clear the text fields of the textbox and listview
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub ClearFields()
         txtBranch.Text = ""
         txtOut.Text = ""
@@ -21,7 +29,11 @@
 
         lvBorrowings.Items.Clear()
     End Sub
-
+    ''' <summary>
+    ''' load all client who borrow and what item they borrow
+    ''' </summary>
+    ''' <param name="mySql"></param>
+    ''' <remarks></remarks>
     Private Sub LoadBorrowings(Optional ByVal mySql As String = "SELECT * FROM tblBorrow WHERE Status = 'C' or Status = 'D' ORDER BY TransDate DESC")
         Dim ds As DataSet = LoadSQL(mySql)
 
@@ -32,7 +44,11 @@
             AddItem(tmpBB)
         Next
     End Sub
-
+    ''' <summary>
+    ''' this method will add item and get the referencenumber, transactiondate,BranchCode from the borrowing class.
+    ''' </summary>
+    ''' <param name="br"></param>
+    ''' <remarks></remarks>
     Private Sub AddItem(ByVal br As Borrowings)
         Dim lv As ListViewItem = lvBorrowings.Items.Add(br.ReferenceNumber)
         lv.SubItems.Add(br.TransactionDate)
@@ -48,11 +64,21 @@
         lv.Tag = br.BorrowID
         If br.Status.Contains("V") Then lv.BackColor = Color.LightGray
     End Sub
-
+    ''' <summary>
+    ''' close button
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-
+    ''' <summary>
+    ''' click button to view branch name, transaction date, item out and remarks to listview
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
 
@@ -65,7 +91,12 @@
         txtOut.Text = lvBorrowings.SelectedItems(0).SubItems(3).Text
         txtParticular.Text = tmpBB.Remarks
     End Sub
-
+    ''' <summary>
+    ''' click button to not valid the transaction or to cancel
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         If MsgBox("Do you want to void this transaction?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "V O I D") _
@@ -85,11 +116,16 @@
         MsgBox("Transaction #" & tmpBB.ReferenceNumber & " Void.")
         LoadBorrowings()
     End Sub
-
+    ''' <summary>
+    ''' double click transaction to view the item
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub lvBorrowings_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvBorrowings.DoubleClick
         btnView.PerformClick()
     End Sub
-
+    
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
 
@@ -113,7 +149,12 @@
 
         MsgBox("Key Generated", MsgBoxStyle.Information)
     End Sub
-
+    ''' <summary>
+    ''' button that upload the file to desire url
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnUpload_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpload.Click
         Dim ht As New Hashtable
         ht = GetBorrowing(txtUrl.Text)
@@ -154,17 +195,21 @@
         ClearFields()
         LoadBorrowings()
     End Sub
-
+    ''' <summary>
+    ''' browse button that open the file location
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         ofdEskFile.ShowDialog()
         If ofdEskFile.FileName = Nothing Then Exit Sub
         txtUrl.Text = ofdEskFile.FileName
     End Sub
-
     Private Sub GroupBox1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox1.DoubleClick
         devVerifyESK.Show()
     End Sub
-
+  
     Private Function GetBorrowing(ByVal url As String) As Hashtable
         If System.IO.File.Exists(txtUrl.Text) = False Then Return Nothing
 

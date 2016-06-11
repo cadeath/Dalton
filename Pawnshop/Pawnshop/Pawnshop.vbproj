@@ -115,6 +115,9 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Services">
       <Private>True</Private>
     </Reference>
@@ -147,13 +150,18 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="AutoPatch\autopatch.vb" />
+    <Compile Include="AutoPatch\db1013.vb" />
+    <Compile Include="AutoPatch\db121.vb" />
     <Compile Include="AutoPatch\db1010.vb" />
     <Compile Include="AutoPatch\db1011.vb" />
     <Compile Include="AutoPatch\db1012.vb" />
     <Compile Include="AutoPatch\db107.vb" />
     <Compile Include="AutoPatch\db108.vb" />
     <Compile Include="AutoPatch\db109.vb" />
+    <Compile Include="AutoPatch\db12.vb" />
+    <Compile Include="AutoPatch\db122.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -162,6 +170,8 @@
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
+    <Compile Include="Classes\Currency.vb" />
+    <Compile Include="Classes\DollarEntry.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
@@ -172,46 +182,52 @@
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Classes\rptActionReq.vb" />
-    <Compile Include="Developer\devClient.Designer.vb">
+    <Compile Include="doc\Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\devClient.vb">
+    <Compile Include="doc\Developer\devClient.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\devVerifyESK.Designer.vb">
+    <Compile Include="doc\Developer\devVerifyESK.Designer.vb">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\devVerifyESK.vb">
+    <Compile Include="doc\Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_encrypt.Designer.vb">
+    <Compile Include="doc\Developer\dev_encrypt.Designer.vb">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_encrypt.vb">
+    <Compile Include="doc\Developer\dev_encrypt.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_ORview.Designer.vb">
+    <Compile Include="doc\Developer\dev_ORview.Designer.vb">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_ORview.vb">
+    <Compile Include="doc\Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_Pawning.Designer.vb">
+    <Compile Include="doc\Developer\dev_Pawning.Designer.vb">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_Pawning.vb">
+    <Compile Include="doc\Developer\dev_Pawning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_print.Designer.vb">
+    <Compile Include="doc\Developer\dev_print.Designer.vb">
       <DependentUpon>dev_print.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_print.vb">
+    <Compile Include="doc\Developer\dev_print.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_report.Designer.vb">
+    <Compile Include="doc\Developer\dev_report.Designer.vb">
       <DependentUpon>dev_report.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\dev_report.vb">
+    <Compile Include="doc\Developer\dev_report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="doc\Developer\dev_runCmd.Designer.vb">
+      <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="doc\Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ab.Designer.vb">
@@ -220,16 +236,22 @@
     <Compile Include="Forms\ab.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\ab2.Designer.vb">
+      <DependentUpon>ab2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ab2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\diagAuthorization.Designer.vb">
       <DependentUpon>diagAuthorization.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\diagAuthorization.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\diagMT.Designer.vb">
+    <Compile Include="Reports\diagMT.Designer.vb">
       <DependentUpon>diagMT.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\diagMT.vb">
+    <Compile Include="Reports\diagMT.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBackup.Designer.vb">
@@ -254,6 +276,12 @@
       <DependentUpon>frmCIO_List.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCIO_List.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCurrencyList.Designer.vb">
+      <DependentUpon>frmCurrencyList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCurrencyList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmDollarList.Designer.vb">
@@ -413,10 +441,19 @@
     <Compile Include="Forms\frmUserManagement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HitManagement\dsHit.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsHit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="HitManagement\dsHit.vb">
+      <DependentUpon>dsHit.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Modules\dailyGospel.vb" />
     <Compile Include="Modules\DailyTimeLog.vb" />
     <Compile Include="Modules\database.vb" />
     <Compile Include="Modules\formSwitch.vb" />
+    <Compile Include="HitManagement\HitManagement.vb" />
     <Compile Include="Modules\JournalEntries.vb" />
     <Compile Include="Modules\migrate.vb" />
     <Compile Include="Modules\mod_system.vb" />
@@ -425,6 +462,12 @@
     <Compile Include="Modules\security.vb" />
     <Compile Include="Modules\updateRate.vb" />
     <Compile Include="Modules\web_ads.vb" />
+    <Compile Include="Forms\frmMoneyExchange.Designer.vb">
+      <DependentUpon>frmMoneyExchange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMoneyExchange.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -518,43 +561,56 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Developer\devClient.resx">
+    <EmbeddedResource Include="doc\Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\devVerifyESK.resx">
+    <EmbeddedResource Include="doc\Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_encrypt.resx">
+    <EmbeddedResource Include="doc\Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_ORview.resx">
+    <EmbeddedResource Include="doc\Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_Pawning.resx">
+    <EmbeddedResource Include="doc\Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_print.resx">
+    <EmbeddedResource Include="doc\Developer\dev_print.resx">
       <DependentUpon>dev_print.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_report.resx">
+    <EmbeddedResource Include="doc\Developer\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\diagMT.resx">
+    <EmbeddedResource Include="doc\Developer\dev_runCmd.resx">
+      <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ab2.resx">
+      <DependentUpon>ab2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCashCountV2.resx">
       <DependentUpon>frmCashCountV2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCurrencyList.resx">
+      <DependentUpon>frmCurrencyList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrintManager.resx">
       <DependentUpon>frmPrintManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRate2.resx">
       <DependentUpon>frmRate2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMoneyExchange.resx">
+      <DependentUpon>frmMoneyExchange.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Loan.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -669,6 +725,9 @@
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptDollarTransaction.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptd_graph.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -677,6 +736,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_CashInOut.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_History.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_hourlySummary.rdlc">
@@ -778,6 +840,9 @@
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\sub_hit.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\_layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -794,6 +859,17 @@
     </None>
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
+    <None Include="HitManagement\dsHit.xsc">
+      <DependentUpon>dsHit.xsd</DependentUpon>
+    </None>
+    <None Include="HitManagement\dsHit.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsHit.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="HitManagement\dsHit.xss">
+      <DependentUpon>dsHit.xsd</DependentUpon>
+    </None>
     <None Include="Template\Import Template.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -873,7 +949,7 @@
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
-      <VersionMinor>5</VersionMinor>
+      <VersionMinor>4</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
@@ -882,7 +958,7 @@
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>1</VersionMajor>
-      <VersionMinor>7</VersionMinor>
+      <VersionMinor>6</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>

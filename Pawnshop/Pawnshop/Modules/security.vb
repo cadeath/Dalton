@@ -1,4 +1,11 @@
 ﻿Imports DeathCodez.Security
+Imports System
+Imports System.IO
+Imports System.Xml
+Imports System.Xml.Linq
+Imports System.Text
+Imports System.Runtime.Serialization
+Imports System.Security.Cryptography
 
 Module security
 
@@ -24,6 +31,20 @@ Module security
         code = ((strDate + curDay) * 2) - salt
 
         Return code
+    End Function
+
+    Friend Function GetMD5(ds As DataSet) As String
+        Dim serialize As DataContractSerializer = New DataContractSerializer(GetType(DataSet))
+        Dim MemoryStream As New MemoryStream
+        Dim xmlW As XmlDictionaryWriter
+        xmlW = XmlDictionaryWriter.CreateBinaryWriter(MemoryStream)
+        serialize.WriteObject(MemoryStream, ds)
+
+        Dim sd As Byte() = MemoryStream.ToArray
+        Dim MD5 As New MD5CryptoServiceProvider
+        Dim md5Byte As Byte() = MD5.ComputeHash(sd)
+
+        Return Convert.ToBase64String(md5Byte)
     End Function
 
 End Module

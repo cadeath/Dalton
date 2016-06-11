@@ -10,9 +10,13 @@
 '  - Added isMoney
 
 Module mod_system
-
+    ''' <summary>
+    ''' This region declare the neccessary variable in this system.
+    ''' </summary>
+    ''' <remarks></remarks>
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
+    Public PROTOTYPE As Boolean = True
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
 
@@ -32,13 +36,24 @@ Module mod_system
     Friend InitialBal As Double = GetOption("CurrentBalance")
     Friend RepDep As Double = 0
     Friend DollarRate As Double = 48
+    Friend DollarAllRate As Double
     Friend RequirementLevel As Integer = 1
     Friend dailyID As Integer = 1
+
+    Friend TBLINT_HASH As String = ""
+    Friend PAWN_JE As Boolean = False
+    Friend DBVERSION As String = ""
 #End Region
 
 #Region "Store"
     Private storeDB As String = "tblDaily"
 
+    ''' <summary>
+    ''' This function will open the store.
+    ''' if the store is open then this function select all data from storeDB. 
+    ''' </summary>
+    ''' <returns>return false if the store is not able to open.</returns>
+    ''' <remarks></remarks>
     Friend Function OpenStore() As Boolean
         If MaintainBal = 0 Then
             Dim ans As MsgBoxResult = _
@@ -80,14 +95,22 @@ Module mod_system
 
         Return True
     End Function
-
+    ''' <summary>
+    ''' This function select all data from tblDaily table.
+    ''' </summary>
+    ''' <returns>return ds after reading every transaction.</returns>
+    ''' <remarks></remarks>
     Friend Function LoadLastOpening() As DataSet
         Dim mySql As String = "SELECT * FROM tblDaily ORDER BY ID DESC"
         Dim ds As DataSet = LoadSQL(mySql)
 
         Return ds
     End Function
-
+    ''' <summary>
+    ''' This method will load all data from storeDB.
+    ''' all data will be show where status is = 1.
+    ''' </summary>
+    ''' <remarks></remarks>
     Friend Sub LoadCurrentDate()
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE Status = 1")
@@ -102,7 +125,12 @@ Module mod_system
             frmMain.dateSet = False
         End If
     End Sub
-
+    ''' <summary>
+    ''' This function will segregate all data from tblPawn
+    ''' where AuctionDate is = to the CurrentDate.
+    ''' </summary>
+    ''' <returns>return true if all data are shown.</returns>
+    ''' <remarks></remarks>
     Friend Function AutoSegregate() As Boolean
         Console.WriteLine("Entering segregation module")
         Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
@@ -127,11 +155,39 @@ Module mod_system
         Return True
     End Function
 
+    ''' <summary>
+    ''' Check if ALL Journal Entry Account on the MODULE 
+    ''' is updated in the database
+    ''' </summary>
+    ''' <param name="sapAccnt">Array of Entries in String</param>
+    ''' <returns>Boolean</returns>
+    ''' <remarks></remarks>
+    Friend Function hasJE(ByVal sapAccnt() As String) As Boolean
+        Dim fillData As String = "tblCash"
+        Dim mySql As String = "SELECT * FROM " & fillData
+
+        For Each sap In sapAccnt
+            Dim final As String = mySql & String.Format(" WHERE SAPACCOUNT = '{0}'", sap)
+
+            Dim ds As DataSet = LoadSQL(final)
+            If ds.Tables(0).Rows.Count = 0 Then Return False
+        Next
+
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' This method will select all data from storeDB.
+    ''' </summary>
+    ''' <param name="cc">cc is the parameter that hold nonmodifiable value.</param>
+    ''' <remarks></remarks>
     Friend Sub CloseStore(ByVal cc As Double)
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
 
+        'if dataset read data then then cc will hold cashcount in the currentdate
+        'the user information will be save.
         If ds.Tables(storeDB).Rows.Count = 1 Then
             With ds.Tables(storeDB).Rows(0)
                 .Item("CashCount") = cc
@@ -186,11 +242,19 @@ Module mod_system
             UpdateOptions("CurrentBalance", cc)
             MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
         Else
+            Log_Report("[CashCount] " & mySql)
             MsgBox("Error in closing store" + vbCr + "Contact your IT Department", MsgBoxStyle.Critical)
         End If
     End Sub
 #End Region
-
+    ''' <summary>
+    ''' This function has two arguments.
+    ''' declaraton UseShellExecute as boolean and RedirectStandardOutput as boolean.
+    ''' </summary>
+    ''' <param name="app">app is the parameter that hold nonmodifiable value.</param>
+    ''' <param name="args">args is the parameter that hold nonmodifiable value.</param>
+    ''' <returns>return soutput after reading every transaction.</returns>
+    ''' <remarks></remarks>
     Public Function CommandPrompt(ByVal app As String, ByVal args As String) As String
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo(app, args)
@@ -274,7 +338,12 @@ Module mod_system
 
         Return Not (Char.IsDigit(e.KeyChar))
     End Function
-
+    ''' <summary>
+    ''' this function check if the input is numeric or character.
+    ''' </summary>
+    ''' <param name="txt">txt here hold the numeric value.</param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
     Friend Function checkNumeric(ByVal txt As TextBox) As Boolean
         If IsNumeric(txt.Text) Then
             Return True
@@ -339,6 +408,28 @@ Module mod_system
 
         Return lastOfMonth
     End Function
+
+    Friend Function GetSAPAccount(TransName As String) As String
+        Dim mySql As String, ds As DataSet
+        mySql = String.Format("SELECT * FROM TBLCASH WHERE TransName = '{0}'", TransName)
+
+        ds = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("SAPACCOUNT")
+    End Function
+
+    Friend Sub UpdateSAPAccount(TRANS As String, VALUE As String)
+        Dim mySql As String, fillData As String = "TBLCASH"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= String.Format(" WHERE TRANSNAME = '{0}'", TRANS)
+
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds = LoadSQL(mySql, fillData)
+
+        ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = VALUE
+        database.SaveEntry(ds, False)
+        Console.WriteLine("SAP Account Changed")
+    End Sub
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

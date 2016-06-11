@@ -45,13 +45,13 @@ Partial Class frmInsurance
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpExpiry = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -73,7 +73,7 @@ Partial Class frmInsurance
         Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI Symbol", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(1, 94)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(499, 193)
+        Me.GroupBox1.Size = New System.Drawing.Size(487, 193)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Policy Holder"
@@ -152,7 +152,7 @@ Partial Class frmInsurance
         '
         Me.btnSearch.Enabled = False
         Me.btnSearch.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.btnSearch.Location = New System.Drawing.Point(438, 13)
+        Me.btnSearch.Location = New System.Drawing.Point(423, 12)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(55, 23)
         Me.btnSearch.TabIndex = 2
@@ -244,7 +244,6 @@ Partial Class frmInsurance
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.SystemColors.Control
-        Me.GroupBox2.Controls.Add(Me.webAds)
         Me.GroupBox2.Controls.Add(Me.txtPT)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.dtpExpiry)
@@ -255,11 +254,12 @@ Partial Class frmInsurance
         Me.GroupBox2.Controls.Add(Me.txtAmount)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.webAds)
         Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI Symbol", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.Desktop
         Me.GroupBox2.Location = New System.Drawing.Point(1, 299)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(499, 149)
+        Me.GroupBox2.Size = New System.Drawing.Size(487, 149)
         Me.GroupBox2.TabIndex = 5
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Insurance Information"
@@ -305,6 +305,15 @@ Partial Class frmInsurance
         Me.Label6.TabIndex = 27
         Me.Label6.Text = "Valid Until: "
         '
+        'webAds
+        '
+        Me.webAds.Location = New System.Drawing.Point(251, -53)
+        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.webAds.Name = "webAds"
+        Me.webAds.ScrollBarsEnabled = False
+        Me.webAds.Size = New System.Drawing.Size(236, 46)
+        Me.webAds.TabIndex = 29
+        '
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.SystemColors.Control
@@ -316,7 +325,7 @@ Partial Class frmInsurance
         Me.GroupBox3.Font = New System.Drawing.Font("Segoe UI Symbol", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.Location = New System.Drawing.Point(1, -1)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(499, 83)
+        Me.GroupBox3.Size = New System.Drawing.Size(487, 83)
         Me.GroupBox3.TabIndex = 28
         Me.GroupBox3.TabStop = False
         '
@@ -328,9 +337,9 @@ Partial Class frmInsurance
         Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnBrowse.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBrowse.ForeColor = System.Drawing.Color.Black
-        Me.btnBrowse.Location = New System.Drawing.Point(180, 21)
+        Me.btnBrowse.Location = New System.Drawing.Point(196, 19)
         Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(78, 55)
+        Me.btnBrowse.Size = New System.Drawing.Size(87, 55)
         Me.btnBrowse.TabIndex = 42
         Me.btnBrowse.Text = "&Browse"
         Me.btnBrowse.UseVisualStyleBackColor = False
@@ -343,9 +352,9 @@ Partial Class frmInsurance
         Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnNew.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNew.ForeColor = System.Drawing.Color.Black
-        Me.btnNew.Location = New System.Drawing.Point(24, 21)
+        Me.btnNew.Location = New System.Drawing.Point(12, 19)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(78, 55)
+        Me.btnNew.Size = New System.Drawing.Size(87, 55)
         Me.btnNew.TabIndex = 41
         Me.btnNew.Text = "&New"
         Me.btnNew.UseVisualStyleBackColor = False
@@ -359,9 +368,9 @@ Partial Class frmInsurance
         Me.btnVoid.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnVoid.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnVoid.ForeColor = System.Drawing.Color.Black
-        Me.btnVoid.Location = New System.Drawing.Point(102, 21)
+        Me.btnVoid.Location = New System.Drawing.Point(103, 19)
         Me.btnVoid.Name = "btnVoid"
-        Me.btnVoid.Size = New System.Drawing.Size(78, 55)
+        Me.btnVoid.Size = New System.Drawing.Size(87, 55)
         Me.btnVoid.TabIndex = 40
         Me.btnVoid.Text = "&Void"
         Me.btnVoid.UseVisualStyleBackColor = False
@@ -374,9 +383,9 @@ Partial Class frmInsurance
         Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnClose.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.ForeColor = System.Drawing.Color.Black
-        Me.btnClose.Location = New System.Drawing.Point(338, 21)
+        Me.btnClose.Location = New System.Drawing.Point(380, 19)
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(79, 55)
+        Me.btnClose.Size = New System.Drawing.Size(87, 55)
         Me.btnClose.TabIndex = 10
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = False
@@ -390,28 +399,19 @@ Partial Class frmInsurance
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.Black
-        Me.btnSave.Location = New System.Drawing.Point(257, 21)
+        Me.btnSave.Location = New System.Drawing.Point(289, 19)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(82, 55)
+        Me.btnSave.Size = New System.Drawing.Size(87, 55)
         Me.btnSave.TabIndex = 9
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = False
-        '
-        'webAds
-        '
-        Me.webAds.Location = New System.Drawing.Point(257, 93)
-        Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.webAds.Name = "webAds"
-        Me.webAds.ScrollBarsEnabled = False
-        Me.webAds.Size = New System.Drawing.Size(236, 46)
-        Me.webAds.TabIndex = 29
         '
         'frmInsurance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(500, 451)
+        Me.ClientSize = New System.Drawing.Size(490, 451)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
