@@ -75,7 +75,7 @@
         End If
         UpdateOptions("MaintainingBalance", txtBal.Text)
         MaintainBal = txtBal.Text
-        UpdateSAPAccount("CashInBank", txtCashInBank.Text)
+        UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text)
