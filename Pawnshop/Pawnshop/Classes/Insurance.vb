@@ -4,6 +4,7 @@ Public Class Insurance
 
     Private fillData As String = "tblInsurance"
     Private mySql As String = "SELECT * FROM "
+    Const TBL As String = "TBL_DAILYTIMELOG"
 
 #Region "Properties and Variables"
     Private _id As Integer
@@ -106,6 +107,15 @@ Public Class Insurance
             _encoderID = value
         End Set
     End Property
+    Private _modname As String
+    Public Property Modname() As Integer
+        Get
+            Return _modname
+        End Get
+        Set(ByVal value As Integer)
+            _modname = value
+        End Set
+    End Property
 
 #End Region
 
@@ -166,8 +176,19 @@ Public Class Insurance
 
         database.SaveEntry(ds, False)
         RemoveJournal("COI# " & Me.COInumber)
-        RemoveDailyTimeLog("COI# " & COInumber.ToString("0000000"))
+        RemoveDailyTimeLog(_id, _modname)
     End Sub
+
+    Public Function LoadLastIDNumberInsurance() As Single
+        Dim mySql As String = "SELECT * FROM TBLINSURANCE ORDER BY INSURANCEID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("INSURANCEID")
+    End Function
+
 
 #End Region
 

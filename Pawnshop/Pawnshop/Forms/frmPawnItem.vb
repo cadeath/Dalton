@@ -457,7 +457,7 @@ Public Class frmPawnItem
                 End If
             End If
 
-            AddTimelyLogs("REDEMPTION", String.Format("PT#{0}", .PawnTicket.ToString("000000")), Redeem_Due)
+            AddTimelyLogs("REDEMPTION", String.Format("PT# {0} ", .PawnTicket.ToString("000000")), Redeem_Due, , , .LoadLastIDNumberPawn)
         End With
     End Sub
 
@@ -508,7 +508,7 @@ Public Class frmPawnItem
 
 
             'AddTimelyLogs(MOD_NAME, "NEW LOAN - " & tmpRemarks)
-            AddTimelyLogs("NEW LOANS", tmpRemarks, .NetAmount)
+            AddTimelyLogs("NEW LOANS", tmpRemarks, .NetAmount, , , .LoadLastIDNumberPawn)
 
             HitManagement.do_PawningHit(PawnItem.Pawner, PawnItem.PawnTicket)
         End With
@@ -1011,7 +1011,7 @@ Public Class frmPawnItem
             AddJournal(penalty, "Credit", "Income from Penalty on Renewal", "PT# " & oldPT, TransType:="RENEWALS")
             AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT, TransType:="RENEWALS")
 
-            AddTimelyLogs("RENEWALS", String.Format("PT#{0}", oldPT.ToString("000000")), Renew_Due)
+            AddTimelyLogs("RENEWALS", String.Format("PT#{0}", oldPT.ToString("000000")), Renew_Due, , , String.Format("PT#{0}", oldPT.ToString("000000")))
         End With
 
         AddPTNum()

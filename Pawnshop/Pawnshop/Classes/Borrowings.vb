@@ -142,14 +142,13 @@
     End Sub
 
     Public Sub VoidBorrowings()
-
         mySql = "SELECT * FROM " & fillData & " WHERE brwID = " & _borrowID
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         ds.Tables(0).Rows(0).Item("Status") = "V" & ds.Tables(0).Rows(0).Item("Status")
         database.SaveEntry(ds, False)
 
         RemoveJournal("Ref# " & _borrowID)
-        RemoveDailyTimeLog("Ref# " & _borrowID)
+        RemoveDailyTimeLog(LastIDNumber, ModNameBorrowing)
         Console.WriteLine(String.Format("Transaction {0} void.", _borrowID))
     End Sub
 
@@ -161,6 +160,16 @@
             Return 0
         End If
         Return ds.Tables(0).Rows(0).Item("BrwID")
+    End Function
+
+    Public Function ModNameBorrowing() As Single
+        Dim mySql As String = "SELECT * FROM TBL_DAILYTIMELOG WHERE MOD_NAME = BORROWINGS "
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("MOD_NAME")
     End Function
 #End Region
 End Class

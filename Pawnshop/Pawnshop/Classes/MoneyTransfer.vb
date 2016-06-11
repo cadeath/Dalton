@@ -262,7 +262,7 @@
 
         RemoveJournal(SrcStr)
 
-        RemoveDailyTimeLog(SrcStr)
+        RemoveDailyTimeLog(LoadLastIDNumberMoneyTransfer)
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 
@@ -276,5 +276,15 @@
 
         Me.loadByRow(ds.Tables(0).Rows(0))
     End Sub
+
+    Public Function LoadLastIDNumberMoneyTransfer() As Single
+        Dim mySql As String = "SELECT * FROM TBLMONEYTRANSFER ORDER BY ID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("ID")
+    End Function
 #End Region
 End Class

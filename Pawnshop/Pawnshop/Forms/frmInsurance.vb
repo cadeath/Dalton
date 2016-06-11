@@ -157,7 +157,7 @@
             AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", TransType:="INSURANCE")
             AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, TransType:="INSURANCE")
 
-            AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount, )
+            AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount, , , .LoadLastIDNumberInsurance)
         End With
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)

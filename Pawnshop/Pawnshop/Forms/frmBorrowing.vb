@@ -87,9 +87,10 @@
             .SaveBorrowings()
             AddRefNum()
 
-            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & branchcode, "BORROW OUT", TransType:="BORROWINGS")
-            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & branchcode, TransType:="BORROWINGS")
-           
+            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & " To " & branchcode, "BORROW OUT", TransType:="BORROWINGS")
+            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & " To " & branchcode, TransType:="BORROWINGS")
+            AddTimelyLogs(MOD_NAME, String.Format("SENT MONEY TO {0} - Php {1:#,##0.00}", saveBorrow.BranchCode, saveBorrow.Amount), saveBorrow.Amount, False, , .LastIDNumber)
+
         End With
 
         Dim brwFile As New Hashtable
@@ -99,10 +100,10 @@
             .Add(2, saveBorrow.BranchCode) 'BranchCode
             .Add(3, saveBorrow.Amount) 'Amount
             .Add(4, saveBorrow.Remarks) 'Remarks
+
         End With
 
-        AddTimelyLogs(MOD_NAME, String.Format("SENT MONEY TO {0} - Php {1:#,##0.00}", saveBorrow.BranchCode, saveBorrow.Amount), saveBorrow.Amount, False)
-
+       
         'Generate File
         CreateEsk(fileSave, brwFile)
         MsgBox("Saved!", MsgBoxStyle.Information)

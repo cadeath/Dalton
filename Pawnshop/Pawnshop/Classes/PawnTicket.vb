@@ -605,7 +605,7 @@ Public Class PawnTicket
             If _status = "L" Then
                 ChangeStatus("V")
                 RemoveJournal("PT# " & PTNum)
-                RemoveDailyTimeLog("PT# " & PTNum)
+                RemoveDailyTimeLog(LoadLastIDNumberPawn, ModNamePAWN)
                 Exit Sub
             End If
 
@@ -622,7 +622,7 @@ Public Class PawnTicket
                 If ds.Tables(fillData).Rows.Count = 0 Then
                     ChangeStatus("L")
                     RemoveJournal("PT# " & PTNum)
-                    RemoveDailyTimeLog("PT# " & PTNum)
+                    RemoveDailyTimeLog(LoadLastIDNumberPawn, ModNamePAWN)
                     Exit Sub
                 Else
                     If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
@@ -649,7 +649,7 @@ Public Class PawnTicket
             Else
                 ChangeStatus("L")
                 RemoveJournal("PT# " & PTNum)
-                RemoveDailyTimeLog("PT# " & PTNum)
+                RemoveDailyTimeLog(LoadLastIDNumberPawn, ModNamePAWN)
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
@@ -673,6 +673,27 @@ Public Class PawnTicket
         ds.Tables(fillData).Rows(0).Item("PullOut") = dt
         database.SaveEntry(ds, False)
     End Sub
+
+
+    Public Function LoadLastIDNumberPawn() As Single
+        Dim mySql As String = "SELECT * FROM TBLPAWN ORDER BY PAWNID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("PAWNID")
+    End Function
+
+    Public Function ModNamePAWN() As Single
+        Dim mySql As String = "SELECT * FROM TBL_DAILYTIMELOG WHERE MOD_NAME = NEW LOANS "
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("MOD_NAME")
+    End Function
 
 #End Region
 End Class

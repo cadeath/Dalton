@@ -19,7 +19,9 @@
     ''' For any technical remarks only. Won't display on the reports.
     ''' </param>
     ''' <remarks></remarks>
-    Friend Sub AddTimelyLogs(mod_name As String, logs As String, Optional Amount As Double = 0, Optional hasCustomer As Boolean = True, Optional remarks As String = "")
+
+
+    Friend Sub AddTimelyLogs(mod_name As String, logs As String, Optional Amount As Double = 0, Optional hasCustomer As Boolean = True, Optional remarks As String = "", Optional ByVal transid As String = "")
 
         Try
             Dim mySql As String = "SELECT * FROM " & TBL
@@ -35,32 +37,38 @@
                 'Added in db 1.0.12
                 .Item("AMOUNT") = Amount
                 .Item("USERID") = POSuser.UserID
+                .Item("TRANSID") = transid
             End With
             ds.Tables(TBL).Rows.Add(dsNewRow)
             database.SaveEntry(ds)
 
             Console.WriteLine(String.Format("{0} - {1} - {2}", mod_name, logs, Now()))
+
         Catch ex As Exception
             Log_Report(ex.Message.ToString)
         End Try
 
     End Sub
 
-    Friend Sub RemoveDailyTimeLog(srcStr As String)
+    Friend Sub RemoveDailyTimeLog(srcStr As Integer, ModName As String)
         'Void transaction in Daily Time Log = remarks
         Dim void As String = String.Format("VOID")
 
         Dim TBL As String = "TBL_DAILYTIMELOG"
         Dim mySql As String = "SELECT * FROM TBL_DAILYTIMELOG WHERE "
-        mySql &= String.Format("LOG_REPORT LIKE '%{0}%'", srcStr)
+        mySql &= String.Format("TRANSID LIKE '%{0}%' AND MOD_NAME = '{1}'", srcStr, ModName)
 
         Dim ds As DataSet = LoadSQL(mySql, TBL)
-        If ds.Tables(TBL).Rows.Count = 0 Then MsgBox("Daily Time Log ENTRIES NOT FOUND", MsgBoxStyle.Critical, "DEVELOPER WARNING") : Exit Sub
+        If ds.Tables(TBL).Rows.Count = 0 Then
+            Log_Report("[RemoveLog] " & String.Format("{0} with ID {1} cannot be found in tbl_dailytimelog", ModName, srcStr))
+            MsgBox("Daily Time Log ENTRIES NOT FOUND", MsgBoxStyle.Critical, "DEVELOPER WARNING") : Exit Sub
+        End If
+
         For Each dr As DataRow In ds.Tables(TBL).Rows
             dr.Item("REMARKS") = String.Format("[{0}] {1}", VERSION, void)
         Next
 
         database.SaveEntry(ds, False)
-        Console.WriteLine(srcStr & " REMOVED FROM Daily Time Log ENTRIES...")
+        Console.WriteLine(srcStr & ModName & " REMOVED FROM Daily Time Log ENTRIES...")
     End Sub
 End Module
