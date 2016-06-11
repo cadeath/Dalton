@@ -270,3 +270,5 @@ Invalid expression in the select list (not contained in either an aggregate func
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
 [06/10/2016 16:53:13] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/11/2016 08:06:10] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/11/2016 08:07:31] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
