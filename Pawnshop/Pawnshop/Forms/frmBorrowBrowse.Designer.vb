@@ -52,11 +52,13 @@ Partial Class frmBorrowBrowse
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.sfdMoneyFile = New System.Windows.Forms.SaveFileDialog()
+        Me.LBLBORROWINGID = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.LBLBORROWINGID)
         Me.GroupBox1.Controls.Add(Me.btnVoid)
         Me.GroupBox1.Controls.Add(Me.txtDate)
         Me.GroupBox1.Controls.Add(Me.Label4)
@@ -314,6 +316,15 @@ Partial Class frmBorrowBrowse
         Me.sfdMoneyFile.DefaultExt = "esk|Borrowing File"
         Me.sfdMoneyFile.Filter = "Borrowing Files|*.esk"
         '
+        'LBLBORROWINGID
+        '
+        Me.LBLBORROWINGID.AutoSize = True
+        Me.LBLBORROWINGID.Location = New System.Drawing.Point(12, 209)
+        Me.LBLBORROWINGID.Name = "LBLBORROWINGID"
+        Me.LBLBORROWINGID.Size = New System.Drawing.Size(87, 13)
+        Me.LBLBORROWINGID.TabIndex = 14
+        Me.LBLBORROWINGID.Text = "BORROWINGID"
+        '
         'frmBorrowBrowse
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -364,4 +375,5 @@ Partial Class frmBorrowBrowse
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents sfdMoneyFile As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents LBLBORROWINGID As System.Windows.Forms.Label
 End Class

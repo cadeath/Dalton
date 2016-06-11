@@ -953,3 +953,8 @@ WHERE
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
+[06/11/2016 16:23:52] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/11/2016 16:24:01] Input string was not in a correct format.Couldn't store <> in TRANSID Column.  Expected type is Int64.
+[06/11/2016 16:28:57] [RemoveLog]  with ID 1 cannot be found in tbl_dailytimelog
+[06/11/2016 16:32:40] [RemoveLog]  with ID 2 cannot be found in tbl_dailytimelog
+[06/11/2016 16:33:26] [RemoveLog]  with ID 3 cannot be found in tbl_dailytimelog

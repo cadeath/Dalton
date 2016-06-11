@@ -56,13 +56,20 @@
         Dim idx As Integer = lvBorrowings.FocusedItem.Tag
         Dim tmpBB As New Borrowings
         tmpBB.LoadBorrow(idx)
-
+        LBLBORROWINGID.Text = idx
         txtBranch.Text = tmpBB.BranchName
         txtDate.Text = tmpBB.TransactionDate
         txtOut.Text = lvBorrowings.SelectedItems(0).SubItems(3).Text
         txtParticular.Text = tmpBB.Remarks
     End Sub
-
+    Public Sub GetBorrowingID()
+        If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
+        Dim ID As Integer
+        Dim idx As Integer = lvBorrowings.FocusedItem.Tag
+        Dim tmpBB As New Borrowings
+        tmpBB.LoadBorrow(idx)
+        ID = idx
+    End Sub
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         If MsgBox("Do you want to void this transaction?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "V O I D") _

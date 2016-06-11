@@ -172,11 +172,14 @@ Public Class Insurance
         ' Dim COINum As String = String.Format("{000000}", Me.COInumber)
         mySql = "SELECT * FROM " & fillData & " WHERE InsuranceID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Dim InsuranceID As Integer
+        Dim TransactionName As String = "INSURANCE"
+        InsuranceID = frmInsurance.txtCoi.Text
         ds.Tables(fillData).Rows(0).Item("Status") = _status
 
         database.SaveEntry(ds, False)
         RemoveJournal("COI# " & Me.COInumber)
-        RemoveDailyTimeLog(_id, _modname)
+        RemoveDailyTimeLog(InsuranceID, TransactionName)
     End Sub
 
     Public Function LoadLastIDNumberInsurance() As Single

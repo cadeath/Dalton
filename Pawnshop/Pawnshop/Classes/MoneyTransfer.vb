@@ -262,7 +262,7 @@
 
         RemoveJournal(SrcStr)
 
-        RemoveDailyTimeLog(LoadLastIDNumberMoneyTransfer)
+        '  RemoveDailyTimeLog(LoadLastIDNumberMoneyTransfer)
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 
