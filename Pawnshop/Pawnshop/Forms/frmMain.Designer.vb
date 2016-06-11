@@ -63,6 +63,7 @@ Partial Class frmMain
         Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyTransactionCountSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,7 +88,6 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.MonthlyTransactionCountSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -333,6 +333,12 @@ Partial Class frmMain
         Me.DailyCashCountToolStripMenuItem.Size = New System.Drawing.Size(274, 22)
         Me.DailyCashCountToolStripMenuItem.Text = "&Daily Cash Count"
         '
+        'MonthlyTransactionCountSummaryToolStripMenuItem
+        '
+        Me.MonthlyTransactionCountSummaryToolStripMenuItem.Name = "MonthlyTransactionCountSummaryToolStripMenuItem"
+        Me.MonthlyTransactionCountSummaryToolStripMenuItem.Size = New System.Drawing.Size(274, 22)
+        Me.MonthlyTransactionCountSummaryToolStripMenuItem.Text = "Monthly &Transaction Count Summary"
+        '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TutorialToolStripMenuItem, Me.ChangelogToolStripMenuItem, Me.AboutUsToolStripMenuItem})
@@ -556,12 +562,6 @@ Partial Class frmMain
         Me.bannerSize.TabIndex = 9
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
-        '
-        'MonthlyTransactionCountSummaryToolStripMenuItem
-        '
-        Me.MonthlyTransactionCountSummaryToolStripMenuItem.Name = "MonthlyTransactionCountSummaryToolStripMenuItem"
-        Me.MonthlyTransactionCountSummaryToolStripMenuItem.Size = New System.Drawing.Size(274, 22)
-        Me.MonthlyTransactionCountSummaryToolStripMenuItem.Text = "Monthly Transaction Count Summary"
         '
         'frmMain
         '

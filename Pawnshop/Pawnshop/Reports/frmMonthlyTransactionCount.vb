@@ -11,7 +11,7 @@
         mySql = "SELECT COUNT(*) AS LOGS_ID, MOD_NAME FROM TBL_DAILYTIMELOG "
         mySql &= "WHERE HASCUSTOMER = '1' AND "
         mySql &= String.Format(" TIMELY BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
-        mySql &= "GROUP BY MOD_NAME"
+        mySql &= "GROUP BY MOD_NAME ORDER BY MOD_NAME"
 
         Console.WriteLine(mySql)
 

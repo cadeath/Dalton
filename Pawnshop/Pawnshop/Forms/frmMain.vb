@@ -52,6 +52,7 @@
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
+        MonthlyTransactionCountSummaryToolStripMenuItem.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()
