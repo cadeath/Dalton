@@ -4,6 +4,7 @@ Version 1.2.2
  - Fix Journal Entry Summary
  - Fix Money Transfer Send In/Payout Name
  - Fix Minor Change Rate Problem
+ - Fix Loan Register Report Unsort PT
  - Add Foreign Currency
  - Add Pawnticket and OR Number every print 
  - Add New Design for About Us
