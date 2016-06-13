@@ -29,6 +29,7 @@ Partial Class qryCashInOut
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.chkIN = New System.Windows.Forms.CheckBox()
         Me.chkOUT = New System.Windows.Forms.CheckBox()
+        Me.chkOther = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'cboCategory
@@ -78,8 +79,6 @@ Partial Class qryCashInOut
         'chkIN
         '
         Me.chkIN.AutoSize = True
-        Me.chkIN.Checked = True
-        Me.chkIN.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkIN.Location = New System.Drawing.Point(12, 12)
         Me.chkIN.Name = "chkIN"
         Me.chkIN.Size = New System.Drawing.Size(62, 17)
@@ -90,8 +89,6 @@ Partial Class qryCashInOut
         'chkOUT
         '
         Me.chkOUT.AutoSize = True
-        Me.chkOUT.Checked = True
-        Me.chkOUT.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkOUT.Location = New System.Drawing.Point(80, 12)
         Me.chkOUT.Name = "chkOUT"
         Me.chkOUT.Size = New System.Drawing.Size(70, 17)
@@ -99,11 +96,22 @@ Partial Class qryCashInOut
         Me.chkOUT.Text = "Cash Out"
         Me.chkOUT.UseVisualStyleBackColor = True
         '
+        'chkOther
+        '
+        Me.chkOther.AutoSize = True
+        Me.chkOther.Location = New System.Drawing.Point(156, 12)
+        Me.chkOther.Name = "chkOther"
+        Me.chkOther.Size = New System.Drawing.Size(52, 17)
+        Me.chkOther.TabIndex = 7
+        Me.chkOther.Text = "Other"
+        Me.chkOther.UseVisualStyleBackColor = True
+        '
         'qryCashInOut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(251, 307)
+        Me.ClientSize = New System.Drawing.Size(248, 307)
+        Me.Controls.Add(Me.chkOther)
         Me.Controls.Add(Me.chkOUT)
         Me.Controls.Add(Me.chkIN)
         Me.Controls.Add(Me.btnCancel)
@@ -126,4 +134,5 @@ Partial Class qryCashInOut
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents chkIN As System.Windows.Forms.CheckBox
     Friend WithEvents chkOUT As System.Windows.Forms.CheckBox
+    Friend WithEvents chkOther As System.Windows.Forms.CheckBox
 End Class
