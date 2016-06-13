@@ -111,22 +111,21 @@
         Return String.Format(" AND ({0})", tmp)
     End Function
     Private Function TypeFilter2() As String
-        Dim receipt As String = "1", disburse As String = "1", tmp As String, Other As String = "1"
+        Dim receipt As String, disburse As String, Other As String, tmp As String
         If chkIN.Checked Then receipt = "TYPE = 'Receipt'"
         If chkOUT.Checked Then disburse = "TYPE = 'Disbursement'"
-        If chkOther.Checked Then Other = "TYPE <> 'Receipt' AND TYPE <> 'Disbursement'"
+        If chkOther.Checked Then Other = "(TYPE <> 'Receipt' AND TYPE <> 'Disbursement')"
 
         Dim filterSQL(2) As String
         filterSQL(0) = receipt
         filterSQL(1) = disburse
         filterSQL(2) = Other
 
+        Dim strFilter As String
+        strFilter = String.Join(" OR ", filterSQL.Where(Function(s) Not String.IsNullOrEmpty(s)))
+
         tmp = "("
-        tmp &= IIf(chkIN.Checked, receipt, "")
-        If chkIN.Checked And chkOUT.Checked Then tmp &= " OR "
-        tmp &= IIf(chkOUT.Checked, disburse, "")
-        If chkOUT.Checked And chkOther.Checked Then tmp &= " OR "
-        tmp &= IIf(chkOther.Checked, Other, "")
+        tmp &= strFilter
         tmp &= ")"
 
         'tmp = "(" & String.Join(" OR ", receipt, disburse, Other) & ")"
@@ -136,20 +135,5 @@
 
         Return String.Format(" AND ({0})", tmp)
     End Function
-
-    Private Sub chkOUT_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOUT.Click
-        checkInOut()
-    End Sub
-
-    Private Sub chkIN_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkIN.Click
-        checkInOut()
-    End Sub
-    Private Sub checkInOut()
-        If chkIN.Checked Or chkOUT.Checked Then
-            chkOther.Enabled = False
-        Else
-            chkOther.Enabled = True
-        End If
-    End Sub
 
 End Class
