@@ -307,4 +307,11 @@
     Private Sub chkSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSeg.CheckedChanged
         LoadActive()
     End Sub
+
+    Private Sub lvPawners_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
+        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
+        Dim tpmstatus As New PawnTicket
+        Dim tmpTicket As New PawnTicket
+        Label5.Text = idx
+    End Sub
 End Class

@@ -453,12 +453,10 @@ Public Class frmMoneyTransfer
                         AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
                         MOD_NAME &= "OUT"
-                        '  AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "ME# " & idME)
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
                         MOD_NAME &= "IN"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "MR# " & idMR)
                     End If
                 Case "Pera Padala - PMFTC"
                     MOD_NAME = "PERA PADALA "
@@ -467,12 +465,10 @@ Public Class frmMoneyTransfer
                         AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
                         MOD_NAME &= "OUT"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "ME# " & idME)
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
                         MOD_NAME &= "IN"
-                        '    AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "MR# " & idMR)
                     End If
                 Case "Western Union - Local", "Western Union - Intl"
                     MOD_NAME = "WESTERN UNION "
@@ -480,12 +476,10 @@ Public Class frmMoneyTransfer
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN IN")
                         AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber)
                         MOD_NAME &= "OUT"
-                        '  AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "WE|Ref# " & .ReferenceNumber)
                     Else
                         AddJournal(.NetAmount, "Debit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN OUT")
                         MOD_NAME &= "IN"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "WE|Ref# " & .ReferenceNumber)
                     End If
                 Case "Cebuana Llhuiller"
                     MOD_NAME = "PERA LINK "
@@ -493,12 +487,10 @@ Public Class frmMoneyTransfer
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "CL|Ref# " & .ReferenceNumber, "CEBUANA IN")
                         AddJournal(.NetAmount, "Credit", "Due to/from Cebuana Llhuiller", "CL|Ref# " & .ReferenceNumber)
                         MOD_NAME &= "OUT"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "CL|Ref# " & .ReferenceNumber)
                     Else
                         AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "CL|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "CL|Ref# " & .ReferenceNumber, "CEBUANA OUT")
                         MOD_NAME &= "IN"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "CL|Ref# " & .ReferenceNumber)
                     End If
                 Case "GPRS - GPRS to GPRS"
                     'GPRS ----------------------------------
@@ -508,13 +500,11 @@ Public Class frmMoneyTransfer
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber)
                         MOD_NAME &= "OUT"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "G2G|Ref# " & .ReferenceNumber)
                     Else
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS")
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber)
                         MOD_NAME &= "IN"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "G2G|Ref# " & .ReferenceNumber)
                     End If
                 Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
                     "GPRS - GPRS to BANK (DBP)", "GPRS - GPRS to BANK (MetroBank)", "GPRS - GPRS to BANK (Maybank/LandBank)", _
@@ -546,13 +536,11 @@ Public Class frmMoneyTransfer
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
                         MOD_NAME &= "OUT"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "GPRS|Ref# " & .ReferenceNumber)
                     Else
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
                         AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
                         MOD_NAME &= "IN"
-                        '   AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , "GPRS|Ref# " & .ReferenceNumber)
                     End If
                     ' ISSUE: 0001
                     ' GPRS - Smartmoney To GPRS, wrong Journal Entries

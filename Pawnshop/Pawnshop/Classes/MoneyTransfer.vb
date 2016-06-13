@@ -1,7 +1,7 @@
 ﻿Public Class MoneyTransfer
 
     Private fillData As String = "tblMoneyTransfer"
-
+    Private fillData1 As String = "tbl_DailyTimeLog"
 #Region "Variables"
     Private _id As Integer
     Private _ref As String
@@ -230,11 +230,12 @@
 
         Dim mySql As String = "SELECT * FROM " & fillData & " WHERE ID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, fillData)
-
         ds.Tables(0).Rows(0).Item("Status") = "V"
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
 
+    
+        Dim MoneyTransID As Integer = frmMTlist.lvMoneyTransfer.FocusedItem.Tag
         Me.LoadById(_id)
         Dim SrvTyp As String = Me.ServiceType
         Dim SrcStr As String = ""
@@ -262,7 +263,7 @@
 
         RemoveJournal(SrcStr)
 
-        '  RemoveDailyTimeLog(LoadLastIDNumberMoneyTransfer)
+        RemoveDailyTimeLog(MoneyTransID, LoadModName)
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 
@@ -285,6 +286,15 @@
             Return 0
         End If
         Return ds.Tables(0).Rows(0).Item("ID")
+    End Function
+
+    Public Function LoadModName() As String
+        Dim mysql1 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID = " & frmMTlist.lvMoneyTransfer.FocusedItem.Tag
+        Dim ds1 As DataSet = LoadSQL(mysql1, fillData1)
+        If ds1.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds1.Tables(0).Rows(0).Item("MOD_NAME")
     End Function
 #End Region
 End Class

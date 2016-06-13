@@ -56,7 +56,7 @@
 
         Dim TBL As String = "TBL_DAILYTIMELOG"
         Dim mySql As String = "SELECT * FROM TBL_DAILYTIMELOG WHERE "
-        mySql &= String.Format("TRANSID LIKE '%{0}%' AND MOD_NAME = '{1}'", srcStr, ModName)
+        mySql &= String.Format("TRANSID LIKE '%{0}%' AND MOD_NAME LIKE '%{1}%'", srcStr, ModName)
 
         Dim ds As DataSet = LoadSQL(mySql, TBL)
         If ds.Tables(TBL).Rows.Count = 0 Then

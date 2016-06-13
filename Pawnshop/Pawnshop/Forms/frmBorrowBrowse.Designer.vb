@@ -25,6 +25,7 @@ Partial Class frmBorrowBrowse
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"ROX00001", "11/01/2015", "PEN", "(1000)", "wala kwarta"}, -1)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBorrowBrowse))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LBLBORROWINGID = New System.Windows.Forms.Label()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.txtDate = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -52,7 +53,6 @@ Partial Class frmBorrowBrowse
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.sfdMoneyFile = New System.Windows.Forms.SaveFileDialog()
-        Me.LBLBORROWINGID = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -79,6 +79,16 @@ Partial Class frmBorrowBrowse
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Burrowings"
+        '
+        'LBLBORROWINGID
+        '
+        Me.LBLBORROWINGID.AutoSize = True
+        Me.LBLBORROWINGID.Location = New System.Drawing.Point(9, 209)
+        Me.LBLBORROWINGID.Name = "LBLBORROWINGID"
+        Me.LBLBORROWINGID.Size = New System.Drawing.Size(87, 13)
+        Me.LBLBORROWINGID.TabIndex = 14
+        Me.LBLBORROWINGID.Text = "BORROWINGID"
+        Me.LBLBORROWINGID.Visible = False
         '
         'btnVoid
         '
@@ -315,15 +325,6 @@ Partial Class frmBorrowBrowse
         '
         Me.sfdMoneyFile.DefaultExt = "esk|Borrowing File"
         Me.sfdMoneyFile.Filter = "Borrowing Files|*.esk"
-        '
-        'LBLBORROWINGID
-        '
-        Me.LBLBORROWINGID.AutoSize = True
-        Me.LBLBORROWINGID.Location = New System.Drawing.Point(12, 209)
-        Me.LBLBORROWINGID.Name = "LBLBORROWINGID"
-        Me.LBLBORROWINGID.Size = New System.Drawing.Size(87, 13)
-        Me.LBLBORROWINGID.TabIndex = 14
-        Me.LBLBORROWINGID.Text = "BORROWINGID"
         '
         'frmBorrowBrowse
         '

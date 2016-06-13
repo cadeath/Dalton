@@ -5,6 +5,7 @@
 Public Class PawnTicket
 
     Dim fillData As String = "tblPawn"
+    Dim fillData1 As String = "tbl_DailyTimeLog"
     Dim mySql As String = ""
     Dim ds As DataSet
 
@@ -601,15 +602,15 @@ Public Class PawnTicket
         Try
             Dim curStatus As String = _status
             Dim PTNum As String = String.Format("{0:000000}", Me._pawnTicket)
-
-            If _status = "L" Then
+            Dim PTtransid As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
+            If curStatus = "L" Then
                 ChangeStatus("V")
                 RemoveJournal("PT# " & PTNum)
-                RemoveDailyTimeLog(LoadLastIDNumberPawn, ModNamePAWN)
+                RemoveDailyTimeLog(PTtransid, LoadModName)
                 Exit Sub
             End If
 
-            If _status <> "X" Then
+            If curStatus <> "X" Then
                 ChangeStatus("V")
             End If
 
@@ -622,7 +623,6 @@ Public Class PawnTicket
                 If ds.Tables(fillData).Rows.Count = 0 Then
                     ChangeStatus("L")
                     RemoveJournal("PT# " & PTNum)
-                    RemoveDailyTimeLog(LoadLastIDNumberPawn, ModNamePAWN)
                     Exit Sub
                 Else
                     If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
@@ -646,10 +646,11 @@ Public Class PawnTicket
                 End With
                 database.SaveEntry(ds, False)
                 RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket))
+                RemoveDailyTimeLog(PTtransid, LoadModName)
             Else
                 ChangeStatus("L")
                 RemoveJournal("PT# " & PTNum)
-                RemoveDailyTimeLog(LoadLastIDNumberPawn, ModNamePAWN)
+                RemoveDailyTimeLog(PTtransid, LoadModName)
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
@@ -685,15 +686,13 @@ Public Class PawnTicket
         Return ds.Tables(0).Rows(0).Item("PAWNID")
     End Function
 
-    Public Function ModNamePAWN() As Single
-        Dim mySql As String = "SELECT * FROM TBL_DAILYTIMELOG WHERE MOD_NAME = NEW LOANS "
-        Dim ds As DataSet = LoadSQL(mySql)
-
-        If ds.Tables(0).Rows.Count = 0 Then
+    Public Function LoadModName() As String
+        Dim mysql1 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID = " & CInt(frmPawning.lvPawners.FocusedItem.Tag)
+        Dim ds1 As DataSet = LoadSQL(mysql1, fillData1)
+        If ds1.Tables(0).Rows.Count = 0 Then
             Return 0
         End If
-        Return ds.Tables(0).Rows(0).Item("MOD_NAME")
+        Return ds1.Tables(0).Rows(0).Item("MOD_NAME")
     End Function
-
 #End Region
 End Class

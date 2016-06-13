@@ -48,6 +48,8 @@ Partial Class frmPawning
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -284,12 +286,33 @@ Partial Class frmPawning
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Red - Withdraw [Redeem/Pullout]"
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(492, 396)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(59, 13)
+        Me.Label5.TabIndex = 13
+        Me.Label5.Text = "PawningID"
+        Me.Label5.Visible = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(566, 396)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(37, 13)
+        Me.Label6.TabIndex = 14
+        Me.Label6.Text = "Status"
+        '
         'frmPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(878, 418)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -338,4 +361,6 @@ Partial Class frmPawning
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
 End Class
