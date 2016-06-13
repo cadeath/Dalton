@@ -116,6 +116,11 @@
         If chkOUT.Checked Then disburse = "TYPE = 'Disbursement'"
         If chkOther.Checked Then Other = "TYPE <> 'Receipt' AND TYPE <> 'Disbursement'"
 
+        Dim filterSQL(2) As String
+        filterSQL(0) = receipt
+        filterSQL(1) = disburse
+        filterSQL(2) = Other
+
         tmp = "("
         tmp &= IIf(chkIN.Checked, receipt, "")
         If chkIN.Checked And chkOUT.Checked Then tmp &= " OR "
@@ -132,16 +137,6 @@
         Return String.Format(" AND ({0})", tmp)
     End Function
 
-    Private Sub chkOther_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOther.Click
-        If chkOther.Checked Then
-            chkIN.Enabled = False
-            chkOUT.Enabled = False
-        Else
-            chkIN.Enabled = True
-            chkOUT.Enabled = True
-        End If
-    End Sub
-
     Private Sub chkOUT_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOUT.Click
         checkInOut()
     End Sub
@@ -156,4 +151,5 @@
             chkOther.Enabled = True
         End If
     End Sub
+
 End Class
