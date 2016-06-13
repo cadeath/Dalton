@@ -3,7 +3,7 @@
     Const VERSION As String = "v1.1"
     Const TBL As String = "TBL_DAILYTIMELOG"
    
-   
+
     ''' <summary>
     ''' This records every transactions in the system
     ''' </summary>
@@ -71,4 +71,7 @@
         database.SaveEntry(ds, False)
         Console.WriteLine(srcStr & ModName & " REMOVED FROM Daily Time Log ENTRIES...")
     End Sub
+
+
+  
 End Module

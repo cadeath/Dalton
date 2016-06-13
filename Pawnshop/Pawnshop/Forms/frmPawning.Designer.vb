@@ -294,7 +294,6 @@ Partial Class frmPawning
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "PawningID"
-        Me.Label5.Visible = False
         '
         'Label6
         '

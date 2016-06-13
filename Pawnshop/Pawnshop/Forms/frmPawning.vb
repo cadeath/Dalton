@@ -313,5 +313,6 @@
         Dim tpmstatus As New PawnTicket
         Dim tmpTicket As New PawnTicket
         Label5.Text = idx
+        Label6.Text = tpmstatus.LoadStatus
     End Sub
 End Class

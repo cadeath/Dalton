@@ -3,9 +3,8 @@
 '  - Include Interest Hashing
 
 Public Class PawnTicket
-
     Dim fillData As String = "tblPawn"
-    Dim fillData1 As String = "tbl_DailyTimeLog"
+    Dim fillData1 As String = "TBL_DAILYTIMELOG"
     Dim mySql As String = ""
     Dim ds As DataSet
 
@@ -606,7 +605,7 @@ Public Class PawnTicket
             If curStatus = "L" Then
                 ChangeStatus("V")
                 RemoveJournal("PT# " & PTNum)
-                RemoveDailyTimeLog(PTtransid, LoadModName)
+                RemoveDailyTimeLog(PTtransid, MODNAME)
                 Exit Sub
             End If
 
@@ -646,11 +645,11 @@ Public Class PawnTicket
                 End With
                 database.SaveEntry(ds, False)
                 RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket))
-                RemoveDailyTimeLog(PTtransid, LoadModName)
+                RemoveDailyTimeLog(PTtransid, MODNAME)
             Else
                 ChangeStatus("L")
                 RemoveJournal("PT# " & PTNum)
-                RemoveDailyTimeLog(PTtransid, LoadModName)
+                RemoveDailyTimeLog(PTtransid, MODNAME)
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
@@ -686,13 +685,35 @@ Public Class PawnTicket
         Return ds.Tables(0).Rows(0).Item("PAWNID")
     End Function
 
-    Public Function LoadModName() As String
-        Dim mysql1 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID = " & CInt(frmPawning.lvPawners.FocusedItem.Tag)
+
+    Public Function LoadStatus() As String
+        Dim mysql1 As String = "SELECT PAWNID,STATUS FROM " & fillData & " WHERE PAWNID =" & frmPawning.Label5.Text
+
+        Dim ds1 As DataSet = LoadSQL(mysql1, fillData)
+        If ds1.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds1.Tables(0).Rows(0).Item("STATUS")
+    End Function
+
+    Public Function MODNAME()
+        Dim mysql1 As String
+        mysql1 = "SELECT * FROM " & fillData1 & " D INNER JOIN " & fillData & " P ON (P.PAWNID = D.TRANSID)"
+        mysql1 &= "WHERE D.TRANSID =" & frmPawning.Label5.Text And "STATUS = " & frmPawning.Label6.Text
         Dim ds1 As DataSet = LoadSQL(mysql1, fillData1)
+        If frmPawning.Label6.Text = "L" Then
+            Dim MName As String = "NEW LOANS"
+        ElseIf frmPawning.Label6.Text = "X" Then
+            Dim MName As String = "REDEMPTION"
+        End If
+
+
         If ds1.Tables(0).Rows.Count = 0 Then
             Return 0
         End If
         Return ds1.Tables(0).Rows(0).Item("MOD_NAME")
     End Function
+
+
 #End Region
 End Class
