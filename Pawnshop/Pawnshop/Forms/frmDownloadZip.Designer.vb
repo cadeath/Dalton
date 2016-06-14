@@ -23,23 +23,32 @@ Partial Class frmDownloadZip
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.SuspendLayout()
         '
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(45, 163)
+        Me.Button1.Location = New System.Drawing.Point(42, 125)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(184, 69)
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Download"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(-2, 237)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(283, 23)
+        Me.ProgressBar1.TabIndex = 1
+        '
         'frmDownloadZip
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(284, 262)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Button1)
         Me.Name = "frmDownloadZip"
         Me.Text = "Download Zip"
@@ -47,4 +56,5 @@ Partial Class frmDownloadZip
 
     End Sub
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
 End Class
