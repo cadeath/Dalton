@@ -248,6 +248,7 @@
     <Compile Include="Forms\diagAuthorization.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Reports\diagMT.Designer.vb">
       <DependentUpon>diagMT.vb</DependentUpon>
     </Compile>

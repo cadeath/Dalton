@@ -17,6 +17,7 @@
         AuctionMonthly = 13
         MoneyTransferBSP = 14
         DollarDaily = 15
+        AuditPrinLimit = 16
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -54,6 +55,8 @@
                 MoneyTransfer_BSP()
             Case ReportType.DollarDaily
                 DailyDollar()
+            Case ReportType.AuditPrinLimit
+                Audit_PrincipalMin()
         End Select
     End Sub
 
@@ -496,6 +499,8 @@
                 Return True
             Case ReportType.DollarDaily
                 Return True
+            Case ReportType.AuditPrinLimit
+                Return True
         End Select
 
         Return False
@@ -509,6 +514,9 @@
         End If
     End Sub
 
-   
-    
+    Private Sub Audit_PrincipalMin()
+        Dim MINIMUM_PRINCIPAL As Double = 5000
+        AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCal.SelectionStart.ToShortDateString)
+    End Sub
+
 End Class
