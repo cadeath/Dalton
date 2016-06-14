@@ -599,15 +599,28 @@ Public Class PawnTicket
 
     Public Sub VoidCancelTicket()
         Try
+            Dim PtransID As Integer
+            Dim ModNAME As String = ""
+            If frmPawning.Label6.Text = "L" Then
+                ModNAME = "NEW LOANS"
+                PtransID = frmPawning.Label5.Text
+            ElseIf frmPawning.Label6.Text = "X" Then
+                ModNAME = "REDEMPTION"
+                PtransID = frmPawning.Label5.Text
+            End If
+
+            ' Dim tranID As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
+
             Dim curStatus As String = _status
             Dim PTNum As String = String.Format("{0:000000}", Me._pawnTicket)
             Dim PTtransid As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
             If curStatus = "L" Then
                 ChangeStatus("V")
-                RemoveJournal("PT# " & PTNum)
-                RemoveDailyTimeLog(PTtransid, MODNAME)
+                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveDailyTimeLog(PTtransid, ModNAME)
                 Exit Sub
             End If
+
 
             If curStatus <> "X" Then
                 ChangeStatus("V")
@@ -621,7 +634,7 @@ Public Class PawnTicket
                 Dim st As String
                 If ds.Tables(fillData).Rows.Count = 0 Then
                     ChangeStatus("L")
-                    RemoveJournal("PT# " & PTNum)
+                    RemoveJournal(transID:=PtransID, TransType:=ModNAME)
                     Exit Sub
                 Else
                     If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
@@ -644,12 +657,13 @@ Public Class PawnTicket
                     .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
-                RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket))
-                RemoveDailyTimeLog(PTtransid, MODNAME)
+                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                ' RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket), transID:=PtransID)
+                RemoveDailyTimeLog(PTtransid, ModNAME)
             Else
                 ChangeStatus("L")
-                RemoveJournal("PT# " & PTNum)
-                RemoveDailyTimeLog(PTtransid, MODNAME)
+                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveDailyTimeLog(PTtransid, ModNAME)
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
@@ -685,7 +699,6 @@ Public Class PawnTicket
         Return ds.Tables(0).Rows(0).Item("PAWNID")
     End Function
 
-
     Public Function LoadStatus() As String
         Dim mysql1 As String = "SELECT PAWNID,STATUS FROM " & fillData & " WHERE PAWNID =" & frmPawning.Label5.Text
 
@@ -695,25 +708,6 @@ Public Class PawnTicket
         End If
         Return ds1.Tables(0).Rows(0).Item("STATUS")
     End Function
-
-    Public Function MODNAME()
-        Dim mysql1 As String
-        mysql1 = "SELECT * FROM " & fillData1 & " D INNER JOIN " & fillData & " P ON (P.PAWNID = D.TRANSID)"
-        mysql1 &= "WHERE D.TRANSID =" & frmPawning.Label5.Text And "STATUS = " & frmPawning.Label6.Text
-        Dim ds1 As DataSet = LoadSQL(mysql1, fillData1)
-        If frmPawning.Label6.Text = "L" Then
-            Dim MName As String = "NEW LOANS"
-        ElseIf frmPawning.Label6.Text = "X" Then
-            Dim MName As String = "REDEMPTION"
-        End If
-
-
-        If ds1.Tables(0).Rows.Count = 0 Then
-            Return 0
-        End If
-        Return ds1.Tables(0).Rows(0).Item("MOD_NAME")
-    End Function
-
 
 #End Region
 End Class

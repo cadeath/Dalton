@@ -187,7 +187,7 @@
     Public Sub VoidTransaction(ByVal reason As String)
         mySql = "SELECT * FROM " & fillData & " WHERE dollarID = " & _dollarID
         ds.Clear()
-
+        Dim DollarID As Integer = frmDollarList.lblDollarID.Text
         ds = LoadSQL(mySql, fillData)
         If ds.Tables(0).Rows.Count <= 0 Then
             MsgBox("Transaction not found!", MsgBoxStyle.Critical)
@@ -198,7 +198,8 @@
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
 
-        RemoveJournal("Ref# " & _dollarID)
+        RemoveJournal(transID:=DollarID, TransType:="DOLLAR BUYING")
+        RemoveDailyTimeLog(DollarID)
         Console.WriteLine("Transaction #" & _dollarID & " void")
     End Sub
 

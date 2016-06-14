@@ -159,10 +159,10 @@
                 .CURRENCY = txtCurrency1.Text
                 .SaveDollar()
 
-                AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber, TransType:="DOLLAR BUYING")
-                AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING", TransType:="DOLLAR BUYING")
+                AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber, TransType:="DOLLAR BUYING", TransID:=.LastIDNumber)
+                AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING", TransType:="DOLLAR BUYING", TransID:=.LastIDNumber)
 
-                AddTimelyLogs(MODULE_NAME, String.Format("{3} - {0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate, .CURRENCY), .NetAmount, , , "Ref# " & .LastIDNumber)
+                AddTimelyLogs(MODULE_NAME, String.Format("{3} - {0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate, .CURRENCY), .NetAmount, , , .LastIDNumber)
             End With
             MsgBox("Transaction Saved", MsgBoxStyle.Information)
             ClearField()

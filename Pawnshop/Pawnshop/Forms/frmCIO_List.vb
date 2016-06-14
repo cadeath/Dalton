@@ -99,7 +99,7 @@
         End If
         database.SaveEntry(ds, False)
 
-        RemoveJournal("Ref# " & getID)
+        RemoveJournal(transID:=getID, srcStr:="Ref# " & getID)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
     ''' <summary>

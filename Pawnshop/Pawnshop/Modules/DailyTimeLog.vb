@@ -50,7 +50,7 @@
 
     End Sub
 
-    Friend Sub RemoveDailyTimeLog(srcStr As Integer, ModName As String)
+    Friend Sub RemoveDailyTimeLog(srcStr As Integer, optional ModName As String ="")
         'Void transaction in Daily Time Log = remarks
         Dim void As String = String.Format("VOID")
 

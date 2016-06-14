@@ -177,6 +177,7 @@ Partial Class frmMTlist
         Me.Label2.Size = New System.Drawing.Size(89, 13)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "MoneyTransferID"
+        Me.Label2.Visible = False
         '
         'frmMTlist
         '

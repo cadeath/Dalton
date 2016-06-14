@@ -83,6 +83,7 @@ Partial Class frmBorrowBrowse
         'LBLBORROWINGID
         '
         Me.LBLBORROWINGID.AutoSize = True
+        Me.LBLBORROWINGID.ForeColor = System.Drawing.SystemColors.ControlText
         Me.LBLBORROWINGID.Location = New System.Drawing.Point(9, 209)
         Me.LBLBORROWINGID.Name = "LBLBORROWINGID"
         Me.LBLBORROWINGID.Size = New System.Drawing.Size(87, 13)

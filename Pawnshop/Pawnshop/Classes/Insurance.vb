@@ -178,7 +178,7 @@ Public Class Insurance
         ds.Tables(fillData).Rows(0).Item("Status") = _status
 
         database.SaveEntry(ds, False)
-        RemoveJournal("COI# " & Me.COInumber)
+        RemoveJournal(transID:=InsuranceID, srcStr:="COI# " & Me.COInumber)
         RemoveDailyTimeLog(InsuranceID, TransactionName)
     End Sub
 

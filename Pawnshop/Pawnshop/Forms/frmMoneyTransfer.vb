@@ -444,66 +444,66 @@ Public Class frmMoneyTransfer
             .Location = cboLocation.Text
             .Status = "A" 'Active
             .EncoderID = UserID
-
+            .Save()
             Select Case cboType.Text
                 Case "Pera Padala"
                     MOD_NAME = "PERA PADALA "
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN")
-                        AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
-                        AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN", , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME, , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME, , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
                     Else
-                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
+                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT", , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
                     End If
                 Case "Pera Padala - PMFTC"
                     MOD_NAME = "PERA PADALA "
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN")
-                        AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME)
-                        AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN", , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME, , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME, , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
                     Else
-                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR)
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT")
+                        AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR, , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT", , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
                     End If
                 Case "Western Union - Local", "Western Union - Intl"
                     MOD_NAME = "WESTERN UNION "
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN IN")
-                        AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN IN", , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber, , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
                     Else
-                        AddJournal(.NetAmount, "Debit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber)
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN OUT")
+                        AddJournal(.NetAmount, "Debit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber, , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN OUT", , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
                     End If
                 Case "Cebuana Llhuiller"
                     MOD_NAME = "PERA LINK "
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "CL|Ref# " & .ReferenceNumber, "CEBUANA IN")
-                        AddJournal(.NetAmount, "Credit", "Due to/from Cebuana Llhuiller", "CL|Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "CL|Ref# " & .ReferenceNumber, "CEBUANA IN", , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Due to/from Cebuana Llhuiller", "CL|Ref# " & .ReferenceNumber, , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
                     Else
-                        AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "CL|Ref# " & .ReferenceNumber)
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "CL|Ref# " & .ReferenceNumber, "CEBUANA OUT")
+                        AddJournal(.NetAmount, "Debit", "Due to/from Cebuana Llhuiller", "CL|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "CL|Ref# " & .ReferenceNumber, "CEBUANA OUT", , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
                     End If
                 Case "GPRS - GPRS to GPRS"
                     'GPRS ----------------------------------
                     MOD_NAME = "GPRS "
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS")
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber)
-                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
                     Else
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS")
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber)
-                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
                     End If
                 Case "GPRS - GPRS to Smart Money", "GPRS - GPRS to BANK (UCPB/PNB)", "GPRS - GPRS to BANK (BDO/Chinabank)", _
@@ -532,14 +532,14 @@ Public Class frmMoneyTransfer
                     End Select
 
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
-                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name, , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
                     Else
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name)
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber)
-                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name, , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
                     End If
                     ' ISSUE: 0001
@@ -555,11 +555,11 @@ Public Class frmMoneyTransfer
                     End Select
 
                     AddJournal(.NetAmount + commission, "Debit" _
-                               , "GPRS Remittance/ Bills Payment Fund", "GPRS_R|Ref# " & .ReferenceNumber)
-                    AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS_R|Ref# " & .ReferenceNumber, CashCount_Name)
-                    AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS_R|Ref# " & .ReferenceNumber)
+                               , "GPRS Remittance/ Bills Payment Fund", "GPRS_R|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                    AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS_R|Ref# " & .ReferenceNumber, CashCount_Name, , , , TransID:=.LoadLastIDNumberMoneyTransfer)
+                    AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS_R|Ref# " & .ReferenceNumber, , , , , TransID:=.LoadLastIDNumberMoneyTransfer)
             End Select
-            .Save()
+
             AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , .LoadLastIDNumberMoneyTransfer)
 
         End With

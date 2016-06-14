@@ -289,6 +289,8 @@ Partial Class frmPawning
         'Label5
         '
         Me.Label5.AutoSize = True
+        Me.Label5.BackColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label5.Location = New System.Drawing.Point(492, 396)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
@@ -298,6 +300,8 @@ Partial Class frmPawning
         'Label6
         '
         Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.Label6.Location = New System.Drawing.Point(566, 396)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 13)

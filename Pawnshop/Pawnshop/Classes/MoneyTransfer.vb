@@ -261,9 +261,9 @@
                 SrcStr = "GPRS_R|Ref# " & _ref
         End Select
 
-        RemoveJournal(SrcStr)
+        RemoveJournal(transID:=MoneyTransID, srcStr:=SrcStr)
 
-        RemoveDailyTimeLog(MoneyTransID, LoadModName)
+        RemoveDailyTimeLog(MoneyTransID)
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 
@@ -279,7 +279,7 @@
     End Sub
 
     Public Function LoadLastIDNumberMoneyTransfer() As Single
-        Dim mySql As String = "SELECT * FROM TBLMONEYTRANSFER ORDER BY ID DESC"
+        Dim mySql As String = "SELECT * FROM TBLMONEYTRANSFER ORDER by ID DESC"
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then
@@ -288,13 +288,13 @@
         Return ds.Tables(0).Rows(0).Item("ID")
     End Function
 
-    Public Function LoadModName() As String
-        Dim mysql1 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID = " & frmMTlist.lvMoneyTransfer.FocusedItem.Tag
-        Dim ds1 As DataSet = LoadSQL(mysql1, fillData1)
-        If ds1.Tables(0).Rows.Count = 0 Then
-            Return 0
-        End If
-        Return ds1.Tables(0).Rows(0).Item("MOD_NAME")
-    End Function
+    'Public Function LoadModName() As String
+    '    Dim mysql1 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID = " & frmMTlist.lvMoneyTransfer.FocusedItem.Tag
+    '    Dim ds1 As DataSet = LoadSQL(mysql1, fillData1)
+    '    If ds1.Tables(0).Rows.Count = 0 Then
+    '        Return 0
+    '    End If
+    '    Return ds1.Tables(0).Rows(0).Item("MOD_NAME")
+    'End Function
 #End Region
 End Class
