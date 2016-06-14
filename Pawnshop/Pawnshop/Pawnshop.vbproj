@@ -248,6 +248,12 @@
     <Compile Include="Forms\diagAuthorization.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmDownloadZip.Designer.vb">
+      <DependentUpon>frmDownloadZip.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDownloadZip.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Reports\diagMT.Designer.vb">
       <DependentUpon>diagMT.vb</DependentUpon>
@@ -593,6 +599,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDownloadZip.resx">
+      <DependentUpon>frmDownloadZip.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
