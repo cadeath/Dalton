@@ -10,6 +10,7 @@ Version 1.2.2
  - Add New Design for About Us
  - Add Cash In Bank SAP Account in Settings
  - Include Auto Patch up to db1.2 v1.2
+ - Include BDO and Smart Money Report in Cash In/Out
 
 Version 1.2
  - Fix Current Rate for Active Loans
