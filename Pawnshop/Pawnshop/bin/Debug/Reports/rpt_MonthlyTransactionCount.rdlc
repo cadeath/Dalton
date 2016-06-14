@@ -50,8 +50,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>2.55916in</Top>
-        <Left>0.125in</Left>
+        <Top>4.09041in</Top>
+        <Left>0.09042in</Left>
         <Height>0.25in</Height>
         <Width>1.84042in</Width>
         <Style>
@@ -83,7 +83,9 @@
                             </Style>
                           </TextRun>
                         </TextRuns>
-                        <Style />
+                        <Style>
+                          <TextAlign>Center</TextAlign>
+                        </Style>
                       </Paragraph>
                     </Paragraphs>
                     <rd:DefaultName>Textbox261</rd:DefaultName>
@@ -92,6 +94,7 @@
                         <Color>LightGrey</Color>
                         <Style>Solid</Style>
                       </Border>
+                      <VerticalAlign>Middle</VerticalAlign>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
                       <PaddingTop>2pt</PaddingTop>
@@ -106,7 +109,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.49653in</Width>
+              <Width>0.32986in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -163,7 +166,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>0.25in</Size>
+                <Size>1.36458in</Size>
                 <CellContents>
                   <Textbox Name="MOD_NAME">
                     <CanGrow>true</CanGrow>
@@ -189,10 +192,12 @@
                         <Color>LightGrey</Color>
                         <Style>Solid</Style>
                       </Border>
+                      <VerticalAlign>Bottom</VerticalAlign>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
                       <PaddingTop>2pt</PaddingTop>
                       <PaddingBottom>2pt</PaddingBottom>
+                      <WritingMode>Vertical</WritingMode>
                     </Style>
                   </Textbox>
                 </CellContents>
@@ -245,8 +250,8 @@
         <DataSetName>dsTransactionCount</DataSetName>
         <Top>0.90292in</Top>
         <Left>0.125in</Left>
-        <Height>0.5in</Height>
-        <Width>3.33695in</Width>
+        <Height>1.61458in</Height>
+        <Width>2.17028in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -367,8 +372,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox184</rd:DefaultName>
-        <Top>2.23972in</Top>
-        <Left>0.125in</Left>
+        <Top>3.77097in</Top>
+        <Left>0.09042in</Left>
         <Height>0.25in</Height>
         <Width>1.875in</Width>
         <ZIndex>5</ZIndex>
@@ -443,7 +448,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>3in</Height>
+    <Height>4.46875in</Height>
     <Style />
   </Body>
   <ReportParameters>
