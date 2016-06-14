@@ -9,6 +9,13 @@ Public Class ComputerUser
     Private fillData As String = "tbl_Gamit"
     Private mySql As String = String.Empty
 
+    Enum priv_set As Integer
+        Encoder = 0
+        Supervisor = 1
+        Manager = 2
+        Special = 3
+    End Enum
+
 #Region "Properties"
     Private _userID As Integer
     Public Property UserID() As Integer
@@ -394,6 +401,7 @@ Public Class ComputerUser
                     Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate, _checkprivilege}
                 End Select
 
+               
                 For Each e In privList
                     e = True
                 Next
@@ -402,6 +410,7 @@ Public Class ComputerUser
             PriviledgeChecking()
             UpdatePrivilege()
         End If
+        
     End Sub
 #End Region
 
@@ -429,17 +438,15 @@ Public Class ComputerUser
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds, True)
     End Sub
-
     ''' <summary>
     ''' For Adding Priviledge
-    ''' </summary>
+    ''' </summary>Z
     ''' <remarks></remarks>
     Private Sub PriviledgeChecking()
         Dim privList() As Boolean = {}
         Dim privChunk As String = _privilege
         Dim finalChunk As String = ""
         Dim y As Integer = 0
-
         For cnt As Integer = 0 To 3
             Select Case cnt
                 Case 0
@@ -465,9 +472,10 @@ Public Class ComputerUser
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
-                    Next
+                    Next  
             End Select
         Next
+        
         _privilege = finalChunk
     End Sub
 
@@ -552,6 +560,26 @@ Public Class ComputerUser
 
         ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(_password)
         SaveEntry(ds, False)
+    End Sub
+
+    Friend Function AddPriv(ByVal setNum As priv_set, Optional ByVal val As Integer = 1) As String
+        If _privilege Is Nothing Then Return "?"
+
+        Dim PrivList() As String = _privilege.Split("|")
+        PrivList(setNum) &= val
+        Return String.Join("|", PrivList)
+    End Function
+    Friend Sub DefaultAppraiser()
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERNAME <> 'null' AND PRIVILEGE <> 'PDuNxp8S9q0='"
+        Dim filldata As String = "tbl_Gamit"
+        Dim ds As DataSet = LoadSQL(mySql, filldata)
+
+        For Each dsNewRow As DataRow In ds.Tables(filldata).Rows
+            With dsNewRow
+                dsNewRow.Item("PRIVILEGE") = AddPriv(priv_set.Encoder)
+            End With
+            SaveEntry(ds, False)
+        Next
     End Sub
 #End Region
 End Class

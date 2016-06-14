@@ -10,16 +10,17 @@ Public Class frmUserManagement
         MsgBox("Password must be atleast 4 characters but not more than 8 characters", MsgBoxStyle.Critical, moduleName)
         Return False
     End Function
-
+    
     Private Sub frmUserManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim tmp As New ComputerUser
         tmp.CreateAdministrator()
-
+        tmp.DefaultAppraiser()
         ClearFields()
         LoadActive()
         CheckAuthorization()
         txtUser.Focus()
     End Sub
+    
     Private Sub CheckAuthorization()
         With POSuser
             btnAdd.Enabled = .canUserManage
@@ -266,6 +267,7 @@ Public Class frmUserManagement
             End If
         End Using
     End Sub
+   
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If Not PasswordPolicy() Then Exit Sub
         If txtUser.Text = "" And txtFullname.Text = "" Then Exit Sub

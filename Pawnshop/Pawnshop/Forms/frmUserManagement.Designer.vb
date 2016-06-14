@@ -76,6 +76,7 @@ Partial Class frmUserManagement
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
         Me.btnClear = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -635,11 +636,21 @@ Partial Class frmUserManagement
         Me.btnClear.Text = "Clea&r"
         Me.btnClear.UseVisualStyleBackColor = True
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(293, 263)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(39, 13)
+        Me.Label4.TabIndex = 12
+        Me.Label4.Text = "Label4"
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(767, 289)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.tbPrivileges)
         Me.Controls.Add(Me.btnAdd)
@@ -723,4 +734,5 @@ Partial Class frmUserManagement
     Friend WithEvents chkResetPassword As System.Windows.Forms.CheckBox
     Friend WithEvents chkPrivilege As System.Windows.Forms.CheckBox
     Friend WithEvents btnClear As System.Windows.Forms.Button
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 End Class
