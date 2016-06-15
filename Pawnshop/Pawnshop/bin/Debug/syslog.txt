@@ -1115,3 +1115,4 @@ WHERE
 [06/14/2016 15:13:10] Input string was not in a correct format.Couldn't store <Ref# 1> in TRANSID Column.  Expected type is Int64.
 [06/14/2016 15:50:38] [RemoveLog] BORROWINGS with ID 9 cannot be found in tbl_dailytimelog
 [06/14/2016 16:13:54] [RemoveLog] NEW LOANS with ID 31 cannot be found in tbl_dailytimelog
+[06/14/2016 17:13:21] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
