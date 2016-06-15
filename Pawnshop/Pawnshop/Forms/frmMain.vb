@@ -441,6 +441,7 @@
     End Sub
 
     Private Sub MonthlyTransactionCountSummaryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyTransactionCountSummaryToolStripMenuItem.Click
-        frmMonthlyTransactionCount.Show()
+        qryDate.FormType = qryDate.ReportType.MonthlyTransactionCountSummary
+        qryDate.Show()
     End Sub
 End Class

@@ -18,6 +18,7 @@
         MoneyTransferBSP = 14
         DollarDaily = 15
         AuditPrinLimit = 16
+        MonthlyTransactionCountSummary = 17
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -57,6 +58,9 @@
                 DailyDollar()
             Case ReportType.AuditPrinLimit
                 Audit_PrincipalMin()
+            Case ReportType.MonthlyTransactionCountSummary
+                TransactionCount()
+
         End Select
     End Sub
 
@@ -480,6 +484,26 @@
         frmReport.ReportInit(mySql, fillData, "Reports\rpt_Borrowings.rdlc", rptPara)
         frmReport.Show()
     End Sub
+    Private Sub TransactionCount()
+        Dim StartDay = GetFirstDate(MonCal.SelectionStart)
+        Dim EndDay = GetLastDate(MonCal.SelectionEnd)
+        Dim filldata As String = "dsTransactionCount"
+        Dim mySql As String = "SELECT COUNT(*) AS LOGS_ID, MOD_NAME FROM TBL_DAILYTIMELOG "
+        mySql &= "WHERE HASCUSTOMER = '1' AND "
+        mySql &= String.Format(" TIMELY BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
+        mySql &= "GROUP BY MOD_NAME ORDER BY MOD_NAME"
+
+        Console.WriteLine(mySql)
+
+        Dim addParameters As New Dictionary(Of String, String)
+
+        addParameters.Add("txtMonthstart", "DATE: " & StartDay.ToShortDateString)
+        addParameters.Add("txtMonthend", "DATE: " & EndDay.ToShortDateString)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, filldata, "Reports\rpt_MonthlyTransactionCount.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
 
     Private Function NoFilter() As Boolean
         Select Case FormType
@@ -500,6 +524,8 @@
             Case ReportType.DollarDaily
                 Return True
             Case ReportType.AuditPrinLimit
+                Return True
+            Case ReportType.MonthlyTransactionCountSummary
                 Return True
         End Select
 
