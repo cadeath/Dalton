@@ -607,6 +607,9 @@ Public Class PawnTicket
             ElseIf frmPawning.Label6.Text = "X" Then
                 ModNAME = "REDEMPTION"
                 PtransID = frmPawning.Label5.Text
+            ElseIf frmPawning.Label6.Text = "R" Then
+                ModNAME = "RENEWALS"
+                PtransID = frmPawning.Label5.Text
             End If
 
             ' Dim tranID As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
