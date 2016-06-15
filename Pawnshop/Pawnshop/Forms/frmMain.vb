@@ -39,6 +39,7 @@
         ToolStripMenuItem2.Enabled = Not st 'Monthly Report
         SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
         CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
+        AuditReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
         LoanRegisterToolStripMenuItem.Enabled = Not st
@@ -439,4 +440,8 @@
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
+    Private Sub AndAboveToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AndAboveToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.AuditPrinLimit
+        qryDate.Show()
+    End Sub
 End Class
