@@ -52,7 +52,6 @@
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
-        MonthlyTransactionCountSummaryToolStripMenuItem.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()
@@ -438,10 +437,5 @@
     Private Sub ChangelogToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ChangelogToolStripMenuItem.Click
         Dim changeLog As String = "changelog.txt"
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
-    End Sub
-
-    Private Sub MonthlyTransactionCountSummaryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyTransactionCountSummaryToolStripMenuItem.Click
-        qryDate.FormType = qryDate.ReportType.MonthlyTransactionCountSummary
-        qryDate.Show()
     End Sub
 End Class

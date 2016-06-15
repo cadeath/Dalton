@@ -107,6 +107,8 @@
                     FormType = ReportType.AuctionMonthly
                 Case "Money Transfer (BSP)"
                     FormType = ReportType.MoneyTransferBSP
+                Case "Monthly Transaction Count Summary"
+                    FormType = ReportType.MonthlyTransactionCountSummary
             End Select
         End If
 
@@ -486,12 +488,13 @@
     End Sub
     Private Sub TransactionCount()
         Dim StartDay = GetFirstDate(MonCal.SelectionStart)
-        Dim EndDay = GetLastDate(MonCal.SelectionEnd)
+        Dim EndDay = GetLastDate(monCal.SelectionEnd)
+
         Dim filldata As String = "dsTransactionCount"
-        Dim mySql As String = "SELECT COUNT(*) AS LOGS_ID, MOD_NAME FROM TBL_DAILYTIMELOG "
+        Dim mySql As String = "SELECT LOGS_ID, MOD_NAME, CAST(TIMELY AS DATE)AS TIMELY FROM TBL_DAILYTIMELOG "
         mySql &= "WHERE HASCUSTOMER = '1' AND "
         mySql &= String.Format(" TIMELY BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
-        mySql &= "GROUP BY MOD_NAME ORDER BY MOD_NAME"
+        'mySql &= "GROUP BY MOD_NAME ORDER BY MOD_NAME"
 
         Console.WriteLine(mySql)
 
@@ -524,8 +527,6 @@
             Case ReportType.DollarDaily
                 Return True
             Case ReportType.AuditPrinLimit
-                Return True
-            Case ReportType.MonthlyTransactionCountSummary
                 Return True
         End Select
 

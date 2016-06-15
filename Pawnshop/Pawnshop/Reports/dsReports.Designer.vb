@@ -6285,6 +6285,8 @@ Partial Public Class dsReports
         
         Private columnMOD_NAME As Global.System.Data.DataColumn
         
+        Private columnTIMELY As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -6337,6 +6339,14 @@ Partial Public Class dsReports
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TIMELYColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTIMELY
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -6373,9 +6383,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddMonthlyTransactionCountRow(ByVal LOGS_ID As String, ByVal MOD_NAME As String) As MonthlyTransactionCountRow
+        Public Overloads Function AddMonthlyTransactionCountRow(ByVal LOGS_ID As String, ByVal MOD_NAME As String, ByVal TIMELY As String) As MonthlyTransactionCountRow
             Dim rowMonthlyTransactionCountRow As MonthlyTransactionCountRow = CType(Me.NewRow,MonthlyTransactionCountRow)
-            Dim columnValuesArray() As Object = New Object() {LOGS_ID, MOD_NAME}
+            Dim columnValuesArray() As Object = New Object() {LOGS_ID, MOD_NAME, TIMELY}
             rowMonthlyTransactionCountRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMonthlyTransactionCountRow)
             Return rowMonthlyTransactionCountRow
@@ -6400,6 +6410,7 @@ Partial Public Class dsReports
         Friend Sub InitVars()
             Me.columnLOGS_ID = MyBase.Columns("LOGS_ID")
             Me.columnMOD_NAME = MyBase.Columns("MOD_NAME")
+            Me.columnTIMELY = MyBase.Columns("TIMELY")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6409,6 +6420,8 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnLOGS_ID)
             Me.columnMOD_NAME = New Global.System.Data.DataColumn("MOD_NAME", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnMOD_NAME)
+            Me.columnTIMELY = New Global.System.Data.DataColumn("TIMELY", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTIMELY)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11156,6 +11169,21 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TIMELY() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMonthlyTransactionCount.TIMELYColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TIMELY' in table 'MonthlyTransactionCount' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMonthlyTransactionCount.TIMELYColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsLOGS_IDNull() As Boolean
             Return Me.IsNull(Me.tableMonthlyTransactionCount.LOGS_IDColumn)
         End Function
@@ -11176,6 +11204,18 @@ Partial Public Class dsReports
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetMOD_NAMENull()
             Me(Me.tableMonthlyTransactionCount.MOD_NAMEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTIMELYNull() As Boolean
+            Return Me.IsNull(Me.tableMonthlyTransactionCount.TIMELYColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTIMELYNull()
+            Me(Me.tableMonthlyTransactionCount.TIMELYColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
