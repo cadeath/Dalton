@@ -1010,9 +1010,9 @@ Public Class frmPawnItem
             AddJournal(Renew_Due, "Debit", "Revolving Fund", "PT# " & oldPT, ITEM_RENEW, TransType:="RENEWALS", TransID:=.LoadLastIDNumberPawn)
             AddJournal(interest + advInt, "Credit", "Interest on Renewal", "PT# " & oldPT, TransType:="RENEWALS", TransID:=.LoadLastIDNumberPawn)
             AddJournal(penalty, "Credit", "Income from Penalty on Renewal", "PT# " & oldPT, TransType:="RENEWALS", TransID:=.LoadLastIDNumberPawn)
-            AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT, TransType:="RENEWALS")
+            AddJournal(servChar, "Credit", "Loans Service Charge", "PT# " & oldPT, TransType:="RENEWALS", TransID:=.LoadLastIDNumberPawn)
 
-            AddTimelyLogs("RENEWALS", String.Format("PT#{0}", oldPT.ToString("000000")), Renew_Due, , , String.Format("PT#{0}", oldPT.ToString("000000")))
+            AddTimelyLogs("RENEWALS", String.Format("PT#{0}", oldPT.ToString("000000")), Renew_Due, , String.Format("PT#{0}", oldPT.ToString("000000")), .LoadLastIDNumberPawn)
         End With
 
         AddPTNum()

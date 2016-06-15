@@ -169,6 +169,7 @@
         Me.Close()
     End Sub
 
+
     Private Sub SaveCashCount()
         Dim mySql As String = "SELECT * FROM " & fillData
         mySql &= String.Format(" WHERE DailyID = {0} AND Status = 1", dailyID)
