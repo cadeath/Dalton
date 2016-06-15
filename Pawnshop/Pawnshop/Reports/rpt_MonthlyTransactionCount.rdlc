@@ -167,7 +167,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=COUNT(Fields!LOGS_ID.Value)</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
