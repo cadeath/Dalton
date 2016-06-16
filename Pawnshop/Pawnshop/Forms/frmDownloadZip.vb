@@ -36,7 +36,7 @@ Public Class frmDownloadZip
     Private Sub Extractor()
         Dim ZipFile As String = "C:\Users\MIS JunMar\Downloads\try\honor.zip"
         Dim ZipDir As String = "C:\Users\MIS JunMar\Downloads\try\nirc\"
-        Dim Shell As Shell32.IShellDispatch2
+        Dim Shell As Shell32.IShellDispatch
         Dim ShellFolder As Shell32.Folder
 
         If File.Exists(ZipFile) Then
