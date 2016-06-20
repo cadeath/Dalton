@@ -287,14 +287,5 @@
         End If
         Return ds.Tables(0).Rows(0).Item("ID")
     End Function
-
-    'Public Function LoadModName() As String
-    '    Dim mysql1 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID = " & frmMTlist.lvMoneyTransfer.FocusedItem.Tag
-    '    Dim ds1 As DataSet = LoadSQL(mysql1, fillData1)
-    '    If ds1.Tables(0).Rows.Count = 0 Then
-    '        Return 0
-    '    End If
-    '    Return ds1.Tables(0).Rows(0).Item("MOD_NAME")
-    'End Function
 #End Region
 End Class

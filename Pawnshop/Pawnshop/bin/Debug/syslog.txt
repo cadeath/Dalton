@@ -1124,3 +1124,5 @@ System.IndexOutOfRangeException: There is no row at position 0.
    at Pawnshop.PawnTicket.LoadTicket(Int32 id, String col) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 442
 [06/15/2016 09:24:21] [RemoveLog] RENEWALS with ID 6 cannot be found in tbl_dailytimelog
 [06/15/2016 09:33:05] [RemoveLog] RENEWALS with ID 8 cannot be found in tbl_dailytimelog
+[06/20/2016 10:43:50] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/20/2016 10:50:10] Input string was not in a correct format.Couldn't store <> in TRANSID Column.  Expected type is Int64.
