@@ -8,6 +8,7 @@ Module update_cashinbank
 
     Private TBLNAME As String = "TBLCASH"
     Friend MOD_NAME As String = "Cash in Bank"
+    Friend VERSION As String = "v1"
 
     Friend Sub UpdateCashInBank(sys As String, fdb As String)
         Dim mySql As String = _
