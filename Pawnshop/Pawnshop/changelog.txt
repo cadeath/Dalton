@@ -10,6 +10,7 @@ Version 1.2.2
  - Add New Design for About Us
  - Add Cash In Bank SAP Account in Settings
  - Add Audit Report base from the Memo # <missing>
+ - Add Monthly Report Monthly Transaction Count
  - Include Auto Patch up to db1.2 v1.2
  - Include BDO and Smart Money Report in Cash In/Out
 
@@ -17,7 +18,6 @@ Version 1.2
  - Fix Current Rate for Active Loans
  - Fix Change Rate for New Loans only
  - Fix non didn't appear in PT for non-jewel
- - Add Monthly Report - Transaction Count
  - Add Pawner Summary List
  - Add Monthly Computation
  - Add Cash Count Prevention
