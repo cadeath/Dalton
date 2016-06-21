@@ -2,6 +2,7 @@
 
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        lblSAP01.Text = "SAP Code 01"
         ClearFields()
         PrinterSettings()
     End Sub
