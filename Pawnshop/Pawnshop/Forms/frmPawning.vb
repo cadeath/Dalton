@@ -147,12 +147,15 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        PawningSearch()
+    End Sub
+    Private Sub PawningSearch()
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM tblpawn WHERE "
-        If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET = " & CInt(secured_str) & " OR "
+        If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
         mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
         mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & secured_str & "%')"
 
@@ -160,16 +163,18 @@
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Single = ds.Tables(0).Rows.Count
         Dim clientID As Integer = 0
+        Dim tmpMaxRow As Double = 0
 
         lvPawners.Items.Clear()
         If MaxRow = 0 Then
 
             mySql = "SELECT * FROM tblClient WHERE "
-            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%')" & " OR "
+            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & secured_str & "%')" & " OR "
             mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%')"
 
             ds.Clear()
+
             ds = LoadSQL(mySql)
             MaxRow = ds.Tables(0).Rows.Count
             If MaxRow = 0 Then
@@ -178,6 +183,7 @@
                 Exit Sub
             End If
 
+            Console.WriteLine(mySql)
             For Each dr As DataRow In ds.Tables(0).Rows
                 clientID = dr.Item("ClientID")
                 Dim xDs As DataSet
@@ -185,8 +191,9 @@
                 mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
                 xDs = LoadSQL(mySql)
                 MaxRow = xDs.Tables(0).Rows.Count
+                tmpMaxRow += MaxRow
                 If MaxRow > 0 Then
-                    lvPawners.Items.Clear()
+                    'lvPawners.Items.Clear()
                     For Each xdr As DataRow In xDs.Tables(0).Rows
                         Dim tmpTicket As New PawnTicket
                         tmpTicket.LoadTicketInRow(xdr)
@@ -201,8 +208,11 @@
                 AddItem(tmpTicket)
             Next
         End If
-
-        MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
+        If IsNumeric(secured_str) Then
+            MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
+        Else
+            MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
+        End If
         'Auto Select
         If lvPawners.Items.Count > 0 Then
             lvPawners.Focus()
