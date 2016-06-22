@@ -30,8 +30,13 @@ Partial Class frmDownloadZip
         Me.dtpSetDateDownload = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.dtpDateExtract = New System.Windows.Forms.DateTimePicker()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.txtLength = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.lblotp = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
@@ -102,11 +107,51 @@ Partial Class frmDownloadZip
         Me.dtpDateExtract.TabIndex = 8
         Me.dtpDateExtract.Value = New Date(2016, 6, 1, 0, 0, 0, 0)
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.lblotp)
+        Me.GroupBox3.Controls.Add(Me.Button2)
+        Me.GroupBox3.Controls.Add(Me.txtLength)
+        Me.GroupBox3.Location = New System.Drawing.Point(298, 32)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(184, 156)
+        Me.GroupBox3.TabIndex = 9
+        Me.GroupBox3.TabStop = False
+        '
+        'txtLength
+        '
+        Me.txtLength.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLength.Location = New System.Drawing.Point(6, 19)
+        Me.txtLength.Name = "txtLength"
+        Me.txtLength.Size = New System.Drawing.Size(74, 26)
+        Me.txtLength.TabIndex = 0
+        '
+        'Button2
+        '
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(86, 16)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(87, 32)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "Generate"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'lblotp
+        '
+        Me.lblotp.AutoSize = True
+        Me.lblotp.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblotp.Location = New System.Drawing.Point(14, 61)
+        Me.lblotp.Name = "lblotp"
+        Me.lblotp.Size = New System.Drawing.Size(13, 20)
+        Me.lblotp.TabIndex = 7
+        Me.lblotp.Text = "."
+        '
         'frmDownloadZip
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(298, 196)
+        Me.ClientSize = New System.Drawing.Size(490, 196)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.txtTime)
@@ -115,6 +160,8 @@ Partial Class frmDownloadZip
         Me.Text = "Download Zip"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -126,4 +173,8 @@ Partial Class frmDownloadZip
     Friend WithEvents dtpSetDateDownload As System.Windows.Forms.DateTimePicker
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents dtpDateExtract As System.Windows.Forms.DateTimePicker
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents lblotp As System.Windows.Forms.Label
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents txtLength As System.Windows.Forms.TextBox
 End Class

@@ -52,7 +52,8 @@ Public Class frmDownloadZip
     '    End If
     'End Sub
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-        txtTime.Text = Date.Now.ToString("MMMM dd, yyyy hh:mm:ss")   
+        txtTime.Text = Date.Now.ToString("MMMM dd, yyyy hh:mm:ss")
+        GenerateOTP(10)
     End Sub
     Private Sub DownloadSave()
         Dim mysql As String = "SELECT * FROM ", filldata As String = "TBLDOWNLOADZIP"
@@ -68,16 +69,6 @@ Public Class frmDownloadZip
         database.SaveEntry(ds)
         MsgBox("Save")
     End Sub
-    'Private Sub CheckSetDate()
-    '    dbOpen()
-    '    Dim mysql As String = "SELECT * FROM TBLDOWNLOADZIP WHERE TRANSDATE "
-    '    Dim cmd As OdbcCommand = New OdbcCommand(mysql, con)
-    '    Using reader As OdbcDataReader = cmd.ExecuteReader()
-    '        If reader.HasRows Then
-    '        End If
-    '        dbClose()
-    '    End Using
-    'End Sub
     Private Sub txtTime_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTime.TextChanged
         If txtTime.Text = dtpSetDateDownload.Text Then
             MessageBox.Show("Okey")
@@ -88,7 +79,26 @@ Public Class frmDownloadZip
             MsgBox("Okey Pud")
         End If
     End Sub
-
+    Private Sub GenerateOTP(ByVal length As Integer)
+        Try
+            Dim numbers As String = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+            Dim objrandom As New Random()
+            Dim strrandom As String = String.Empty
+            Dim passwordString As String = ""
+            Dim opt As String = ""
+            Dim noofnumbers As Integer = length
+            For i As Integer = 0 To noofnumbers - 1
+                Dim temp As Integer = objrandom.[Next](0, numbers.Length)
+                passwordString = numbers.ToCharArray()(temp).ToString()
+                strrandom += passwordString
+            Next
+            While opt.IndexOf(passwordString) <> -1
+            End While
+            lblotp.Text = strrandom
+            'idotp.Visible = True
+        Catch ex As Exception
+        End Try
+    End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         DOSCommandExtract()
     End Sub
