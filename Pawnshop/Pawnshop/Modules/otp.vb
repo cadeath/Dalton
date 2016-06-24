@@ -8,14 +8,15 @@ Module otp
         Dim isValid As Boolean = tfa.isCorrect(pin)
 
         Dim mySql As String = String.Format("SELECT * FROM TBLOTP WHERE PIN = '{0}'", pin)
-        Dim ds As DataSet = LoadSQL(mySql)
+        Dim ds As DataSet = LoadSQL(mySql), fillData As String = "tblOTP"
 
         If ds.Tables(0).Rows.Count = 0 Then
-
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(fillData).NewRow
 
             Return True
         End If
 
-        Return False
+        Return isValid
     End Function
 End Module
