@@ -110,16 +110,28 @@
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM tblDollar WHERE "
-        If IsNumeric(txtSearch.Text) Then
-            mySql &= "DollarID = " & txtSearch.Text
-        Else : mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%')", txtSearch.Text)
-            'mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", txtSearch.Text)
+        If IsNumeric(secured_str) Then
+            mySql &= "DollarID = " & secured_str
+        Else : mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", secured_str)
+            mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", secured_str)
+            mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%') OR ", secured_str)
+            mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", secured_str)
         End If
-
+        Dim ds As DataSet = LoadSQL(mySql)
+        Console.WriteLine("SQL: " & mySql)
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        'lvCIO.Items.Clear()
+        If MaxRow <= 0 Then
+            MsgBox("Query not found", MsgBoxStyle.Information)
+            txtSearch.SelectAll()
+            lvDollar.Items.Clear()
+            Exit Sub
+        End If
+        MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Currency")
         LoadActive(mySql)
     End Sub
     ''' <summary>
