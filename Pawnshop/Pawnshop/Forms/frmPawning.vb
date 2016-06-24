@@ -148,7 +148,7 @@
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text.Length <= 3 Then
-            MsgBox("3 Letters Below Not Allowed")
+            MsgBox("3 Letters Below Not Allowed.", MsgBoxStyle.Information)
         Else
             PawningSearch2()
         End If
@@ -215,8 +215,8 @@
         If IsNumeric(secured_str) Then
             MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
         Else
-        MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
-        End If
+            MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
+            End If
         'Auto Select
         If lvPawners.Items.Count > 0 Then
             lvPawners.Focus()
@@ -295,14 +295,18 @@
         If IsNumeric(secured_str) Then
             MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
         Else
-            MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
-        End If
-        'Auto Select
-        If lvPawners.Items.Count > 0 Then
-            lvPawners.Focus()
-            lvPawners.Items(0).Selected = True
-            lvPawners.Items(0).EnsureVisible()
-        End If
+            If MaxRow < 1 Then
+                MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
+            Else
+                MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
+            End If
+            End If
+            'Auto Select
+            If lvPawners.Items.Count > 0 Then
+                lvPawners.Focus()
+                lvPawners.Items(0).Selected = True
+                lvPawners.Items(0).EnsureVisible()
+            End If
 
     End Sub
     ''' <summary>
