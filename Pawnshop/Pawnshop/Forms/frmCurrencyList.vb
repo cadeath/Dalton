@@ -51,20 +51,24 @@ Public Class frmCurrencyList
     End Sub
 
     Private Sub searchbutton()
+        If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM TBLCURRENCY WHERE "
         If IsNumeric(txtSearch.Text) Then
             mySql &= "CURRENCYID = " & txtSearch.Text
 
-        Else : mySql &= String.Format("UPPER (CURRENCY) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", txtSearch.Text)
+        Else : mySql &= String.Format("UPPER (CURRENCY) LIKE UPPER('%{0}%') OR ", secured_str)
+            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", secured_str)
         End If
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         lvCurrency.Items.Clear()
         If MaxRow <= 0 Then
-            MsgBox("No result found", MsgBoxStyle.Critical)
+            Console.WriteLine("No Currency List Found")
+            MsgBox("Query not found", MsgBoxStyle.Information)
             txtSearch.SelectAll()
             lvCurrency.Items.Clear()
             Exit Sub

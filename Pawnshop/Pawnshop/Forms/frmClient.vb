@@ -181,8 +181,10 @@ Public Class frmClient
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
-        Dim src As String = txtSearch.Text
+        Dim src As String = secured_str
         Dim mySql As String = "SELECT * FROM VIEW_CLIENT " & vbCrLf
         mySql &= " WHERE "
         mySql &= String.Format("UPPER(FirstName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
