@@ -152,7 +152,6 @@
         Else
             PawningSearch2()
         End If
-        'PawningSearch()
 
     End Sub
     Private Sub PawningSearch()
@@ -163,7 +162,6 @@
         Dim mySql As String = "SELECT * FROM tblpawn WHERE "
         If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
         mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
-        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & secured_str & "%')"
 
         Console.WriteLine(mySql)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -217,7 +215,7 @@
         If IsNumeric(secured_str) Then
             MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
         Else
-            MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
+        MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
         End If
         'Auto Select
         If lvPawners.Items.Count > 0 Then
@@ -234,7 +232,6 @@
         Dim mySql As String = "SELECT * FROM tblpawn WHERE "
         If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
         mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
-        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & secured_str & "%')"
 
         Console.WriteLine(mySql)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -247,12 +244,9 @@
             If txtSearch.Text.IndexOf(" ") > -1 Then
                 Dim txtfirstword As String
                 Dim txtsecondword As String
-                'Dim txtthird As String
                 Dim words = secured_str.Split()
                 txtfirstword = words(0).Trim()
                 txtsecondword = words(1).Trim()
-                'txtthird = words(2).Trim()
-
                 mySql = "SELECT * FROM tblClient WHERE "
                 mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & txtfirstword & "%')" & " OR UPPER(FIRSTNAME) LIKE UPPER('%" & txtsecondword & "%') OR "
                 mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & txtfirstword & "%')" & " OR UPPER(MIDDLENAME) LIKE UPPER('%" & txtsecondword & "%') OR "
@@ -301,7 +295,7 @@
         If IsNumeric(secured_str) Then
             MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
         Else
-            MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
+            MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
         End If
         'Auto Select
         If lvPawners.Items.Count > 0 Then
