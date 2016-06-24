@@ -148,7 +148,7 @@
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text.Length <= 3 Then
-            MsgBox("3 Letters Below Not Allowed.", MsgBoxStyle.Information)
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Information)
         Else
             PawningSearch2()
         End If
@@ -258,7 +258,6 @@
                 mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%')"
             End If
             ds.Clear()
-
             ds = LoadSQL(mySql)
             MaxRow = ds.Tables(0).Rows.Count
             If MaxRow = 0 Then
@@ -266,7 +265,6 @@
                 MsgBox("Query not found", MsgBoxStyle.Information)
                 Exit Sub
             End If
-
             Console.WriteLine(mySql)
             For Each dr As DataRow In ds.Tables(0).Rows
                 clientID = dr.Item("ClientID")
@@ -295,19 +293,18 @@
         If IsNumeric(secured_str) Then
             MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
         Else
-            If MaxRow < 1 Then
-                MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
-            Else
-                MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
-            End If
-            End If
-            'Auto Select
-            If lvPawners.Items.Count > 0 Then
-                lvPawners.Focus()
-                lvPawners.Items(0).Selected = True
-                lvPawners.Items(0).EnsureVisible()
-            End If
-
+            'If MaxRow < 1 Then
+            MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
+            'Else
+            'MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
+            'End If
+        End If
+        'Auto Select
+        If lvPawners.Items.Count > 0 Then
+            lvPawners.Focus()
+            lvPawners.Items(0).Selected = True
+            lvPawners.Items(0).EnsureVisible()
+        End If
     End Sub
     ''' <summary>
     ''' to perform enter without clicking the search button.
