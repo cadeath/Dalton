@@ -9,13 +9,14 @@
         Try
             Dim mySql As String
             mySql = "CREATE TABLE TBLOTP ( "
-            mySql &= vbCrLf & "  OTPID BIGINT NOT NULL,"
+            mySql &= vbCrLf & "  OTPID BIGINT NOT NULL, "
             mySql &= vbCrLf & "  PIN VARCHAR(15),"
             mySql &= vbCrLf & "  MOD_NAME VARCHAR(26) NOT NULL,"
             mySql &= vbCrLf & "  ADD_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0) NOT NULL,"
             mySql &= vbCrLf & "  USERID SMALLINT NOT NULL);"
 
             RunCommand(mySql)
+            AutoIncrement_ID("TBLOTP", "OTPID")
 
             Database_Update(LATEST_VERSION)
             Log_Report("SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1")

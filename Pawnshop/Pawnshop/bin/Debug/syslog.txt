@@ -28,3 +28,86 @@ At line 1, column 22
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 14:00:32] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [42S02] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -204
+Table unknown
+TBLOTP
+At line 1, column 22
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 14:05:47] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 14:05:52] [CREATE TABLE TBLOTP ( 
+  OTPID BIGINT NOT NULL,
+  PIN VARCHAR(15),
+  MOD_NAME VARCHAR(26) NOT NULL,
+  ADD_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0) NOT NULL,
+  USERID SMALLINT NOT NULL);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+Table TBLOTP already exists
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 44
+[06/25/2016 14:05:53] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[06/25/2016 14:07:11] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 14:07:13] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[06/25/2016 16:24:00] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 16:24:03] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[06/25/2016 16:27:50] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 16:28:39] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 16:28:43] [CREATE TABLE TBLOTP ( 
+  OTPID BIGINT NOT NULL AUTO_INCREMENT, 
+  PIN VARCHAR(15),
+  MOD_NAME VARCHAR(26) NOT NULL,
+  ADD_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0) NOT NULL,
+  USERID SMALLINT NOT NULL);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 2, column 25
+AUTO_INCREMENT
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 44
+[06/25/2016 16:28:44] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[06/25/2016 16:29:22] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 16:29:25] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[06/25/2016 16:32:00] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 16:32:03] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[06/25/2016 16:36:35] ERROR [08004] [ODBC Firebird Driver]File Database is not found
+[06/25/2016 16:36:35] User: SYSDBA
+[06/25/2016 16:36:35] Database: W3W1LH4CKU.FDB
+[06/25/2016 16:36:36] LoadSQL - System.InvalidOperationException: The ConnectionString property has not been initialized.
+   at System.Data.Odbc.OdbcConnection.PermissionDemand()
+   at System.Data.Odbc.OdbcConnectionFactory.PermissionDemand(DbConnection outerConnection)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
+   at System.Data.Odbc.OdbcConnection.Open()
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 16:36:55] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 16:37:00] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[06/25/2016 16:58:53] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 42
+tblOtp
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158

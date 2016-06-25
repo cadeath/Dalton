@@ -1,5 +1,4 @@
 ﻿Public Class frmSettings
-
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lblSAP01.Text = "SAP Code 01"
@@ -60,8 +59,14 @@
 
         Console.WriteLine("Revolving Fund Added")
     End Sub
-
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+        If Not CheckOTP() Then Exit Sub
         'First
         If Not locked Then
             UpdateOptions("BranchCode", txtCode.Text)
@@ -106,7 +111,6 @@
         ds.Tables(fillData).Rows(0).Item("MaintainBal") = txtBal.Text
         SaveEntry(ds, False)
     End Sub
-
     Private Sub txtBal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBal.KeyPress
         DigitOnly(e)
     End Sub
@@ -123,5 +127,5 @@
         DigitOnly(e)
     End Sub
 
-   
+
 End Class
