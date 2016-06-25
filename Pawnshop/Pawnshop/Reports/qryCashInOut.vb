@@ -8,7 +8,6 @@
 
     Private Sub qryCashInOut_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         LoadCategories()
-       
         'Disable_Functions()
     End Sub
 

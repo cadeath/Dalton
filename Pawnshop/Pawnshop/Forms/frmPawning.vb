@@ -229,77 +229,30 @@
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
 
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE "
+        Dim mySql As String
+        mySql = "SELECT * "
+        mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
         If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
-        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
+        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
+        mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
+        mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
+        mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') "
 
-        Console.WriteLine(mySql)
+        Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
-        Dim MaxRow As Single = ds.Tables(0).Rows.Count
-        Dim clientID As Integer = 0
-        Dim tmpMaxRow As Double = 0
-
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        If MaxRow <= 0 Then
+            MsgBox("Query not found", MsgBoxStyle.Critical)
+            'txtSearch.SelectAll()
+            Exit Sub
+        End If
         lvPawners.Items.Clear()
-        If MaxRow = 0 Then
-            If txtSearch.Text.IndexOf(" ") > -1 Then
-                Dim txtfirstword As String
-                Dim txtsecondword As String
-                Dim words = secured_str.Split()
-                txtfirstword = words(0).Trim()
-                txtsecondword = words(1).Trim()
-                mySql = "SELECT * FROM tblClient WHERE "
-                mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & txtfirstword & "%')" & " OR UPPER(FIRSTNAME) LIKE UPPER('%" & txtsecondword & "%') OR "
-                mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & txtfirstword & "%')" & " OR UPPER(MIDDLENAME) LIKE UPPER('%" & txtsecondword & "%') OR "
-                mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & txtfirstword & "%')" & "OR UPPER(LASTNAME) LIKE UPPER('%" & txtsecondword & "%')"
-            Else
-                mySql = "SELECT * FROM tblClient WHERE "
-                mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%')" & " OR "
-                mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & secured_str & "%')" & " OR "
-                mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%')"
-            End If
-            ds.Clear()
-            ds = LoadSQL(mySql)
-            MaxRow = ds.Tables(0).Rows.Count
-            If MaxRow = 0 Then
-                Console.WriteLine("No Pawn, No Client, No found")
-                MsgBox("Query not found", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-            Console.WriteLine(mySql)
-            For Each dr As DataRow In ds.Tables(0).Rows
-                clientID = dr.Item("ClientID")
-                Dim xDs As DataSet
-
-                mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
-                xDs = LoadSQL(mySql)
-                MaxRow = xDs.Tables(0).Rows.Count
-                tmpMaxRow += MaxRow
-                If MaxRow > 0 Then
-                    'lvPawners.Items.Clear()
-                    For Each xdr As DataRow In xDs.Tables(0).Rows
-                        Dim tmpTicket As New PawnTicket
-                        tmpTicket.LoadTicketInRow(xdr)
-                        AddItem(tmpTicket)
-                    Next
-                End If
-            Next
-        Else
-            For Each dr As DataRow In ds.Tables(0).Rows
-                Dim tmpTicket As New PawnTicket
-                tmpTicket.LoadTicketInRow(dr)
-                AddItem(tmpTicket)
-            Next
-        End If
-        If IsNumeric(secured_str) Then
-            MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
-        Else
-            'If MaxRow < 1 Then
-            MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
-            'Else
-            'MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
-            'End If
-        End If
-        'Auto Select
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpTicket As New PawnTicket
+            tmpTicket.LoadTicketInRow(dr)
+            AddItem(tmpTicket)
+        Next
+        MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
         If lvPawners.Items.Count > 0 Then
             lvPawners.Focus()
             lvPawners.Items(0).Selected = True
