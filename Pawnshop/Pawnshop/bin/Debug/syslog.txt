@@ -305,3 +305,4 @@ System.ArgumentException: Column 'ClientID' does not belong to table QuickSQL.
    at System.Data.DataRow.get_Item(String columnName)
    at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 544
 [06/25/2016 10:44:03] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 10:45:23] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2

@@ -48,6 +48,10 @@ Partial Class frmPawning
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.rbAll = New System.Windows.Forms.RadioButton()
+        Me.rbPawnTicket = New System.Windows.Forms.RadioButton()
+        Me.rbPawner = New System.Windows.Forms.RadioButton()
+        Me.rbDescription = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,13 +59,17 @@ Partial Class frmPawning
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.rbDescription)
+        Me.GroupBox1.Controls.Add(Me.rbPawner)
+        Me.GroupBox1.Controls.Add(Me.rbPawnTicket)
+        Me.GroupBox1.Controls.Add(Me.rbAll)
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.webAds)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 74)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(853, 69)
+        Me.GroupBox1.Size = New System.Drawing.Size(853, 86)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search Item"
@@ -69,7 +77,7 @@ Partial Class frmPawning
         'btnSearch
         '
         Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.Location = New System.Drawing.Point(773, 32)
+        Me.btnSearch.Location = New System.Drawing.Point(770, 55)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(74, 23)
         Me.btnSearch.TabIndex = 6
@@ -81,7 +89,7 @@ Partial Class frmPawning
         Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearch.Location = New System.Drawing.Point(6, 32)
+        Me.txtSearch.Location = New System.Drawing.Point(3, 55)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(761, 22)
         Me.txtSearch.TabIndex = 0
@@ -113,10 +121,10 @@ Partial Class frmPawning
         Me.lvPawners.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9})
         Me.lvPawners.FullRowSelect = True
         Me.lvPawners.GridLines = True
-        Me.lvPawners.Location = New System.Drawing.Point(12, 150)
+        Me.lvPawners.Location = New System.Drawing.Point(12, 166)
         Me.lvPawners.MultiSelect = False
         Me.lvPawners.Name = "lvPawners"
-        Me.lvPawners.Size = New System.Drawing.Size(854, 303)
+        Me.lvPawners.Size = New System.Drawing.Size(854, 287)
         Me.lvPawners.TabIndex = 1
         Me.lvPawners.UseCompatibleStateImageBehavior = False
         Me.lvPawners.View = System.Windows.Forms.View.Details
@@ -285,6 +293,48 @@ Partial Class frmPawning
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Red - Withdraw [Redeem/Pullout]"
         '
+        'rbAll
+        '
+        Me.rbAll.AutoSize = True
+        Me.rbAll.Checked = True
+        Me.rbAll.Location = New System.Drawing.Point(10, 32)
+        Me.rbAll.Name = "rbAll"
+        Me.rbAll.Size = New System.Drawing.Size(36, 17)
+        Me.rbAll.TabIndex = 14
+        Me.rbAll.TabStop = True
+        Me.rbAll.Text = "All"
+        Me.rbAll.UseVisualStyleBackColor = True
+        '
+        'rbPawnTicket
+        '
+        Me.rbPawnTicket.AutoSize = True
+        Me.rbPawnTicket.Location = New System.Drawing.Point(52, 32)
+        Me.rbPawnTicket.Name = "rbPawnTicket"
+        Me.rbPawnTicket.Size = New System.Drawing.Size(85, 17)
+        Me.rbPawnTicket.TabIndex = 15
+        Me.rbPawnTicket.Text = "Pawn Ticket"
+        Me.rbPawnTicket.UseVisualStyleBackColor = True
+        '
+        'rbPawner
+        '
+        Me.rbPawner.AutoSize = True
+        Me.rbPawner.Location = New System.Drawing.Point(145, 32)
+        Me.rbPawner.Name = "rbPawner"
+        Me.rbPawner.Size = New System.Drawing.Size(61, 17)
+        Me.rbPawner.TabIndex = 16
+        Me.rbPawner.Text = "Pawner"
+        Me.rbPawner.UseVisualStyleBackColor = True
+        '
+        'rbDescription
+        '
+        Me.rbDescription.AutoSize = True
+        Me.rbDescription.Location = New System.Drawing.Point(212, 32)
+        Me.rbDescription.Name = "rbDescription"
+        Me.rbDescription.Size = New System.Drawing.Size(78, 17)
+        Me.rbDescription.TabIndex = 17
+        Me.rbDescription.Text = "Description"
+        Me.rbDescription.UseVisualStyleBackColor = True
+        '
         'frmPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -339,4 +389,8 @@ Partial Class frmPawning
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
+    Friend WithEvents rbDescription As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPawner As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPawnTicket As System.Windows.Forms.RadioButton
+    Friend WithEvents rbAll As System.Windows.Forms.RadioButton
 End Class
