@@ -23,6 +23,8 @@ Partial Class frmSettings
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtCashInBank = New System.Windows.Forms.TextBox()
+        Me.lblSAP01 = New System.Windows.Forms.Label()
         Me.txtRevolving = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtArea = New System.Windows.Forms.TextBox()
@@ -53,8 +55,6 @@ Partial Class frmSettings
         Me.printerPT = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtCashInBank = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -63,7 +63,7 @@ Partial Class frmSettings
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.txtCashInBank)
-        Me.GroupBox2.Controls.Add(Me.Label14)
+        Me.GroupBox2.Controls.Add(Me.lblSAP01)
         Me.GroupBox2.Controls.Add(Me.txtRevolving)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.txtArea)
@@ -80,6 +80,25 @@ Partial Class frmSettings
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Branch"
+        '
+        'txtCashInBank
+        '
+        Me.txtCashInBank.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCashInBank.Location = New System.Drawing.Point(6, 199)
+        Me.txtCashInBank.Name = "txtCashInBank"
+        Me.txtCashInBank.Size = New System.Drawing.Size(252, 22)
+        Me.txtCashInBank.TabIndex = 19
+        Me.txtCashInBank.Text = "10000"
+        '
+        'lblSAP01
+        '
+        Me.lblSAP01.AutoSize = True
+        Me.lblSAP01.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSAP01.Location = New System.Drawing.Point(6, 180)
+        Me.lblSAP01.Name = "lblSAP01"
+        Me.lblSAP01.Size = New System.Drawing.Size(86, 16)
+        Me.lblSAP01.TabIndex = 20
+        Me.lblSAP01.Text = "Cash in Bank"
         '
         'txtRevolving
         '
@@ -380,25 +399,6 @@ Partial Class frmSettings
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Pawn Ticket"
         '
-        'txtCashInBank
-        '
-        Me.txtCashInBank.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCashInBank.Location = New System.Drawing.Point(6, 199)
-        Me.txtCashInBank.Name = "txtCashInBank"
-        Me.txtCashInBank.Size = New System.Drawing.Size(252, 22)
-        Me.txtCashInBank.TabIndex = 19
-        Me.txtCashInBank.Text = "10000"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(6, 180)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(88, 16)
-        Me.Label14.TabIndex = 20
-        Me.Label14.Text = "SAP Code 01"
-        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -454,5 +454,5 @@ Partial Class frmSettings
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtCashInBank As System.Windows.Forms.TextBox
-    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents lblSAP01 As System.Windows.Forms.Label
 End Class
