@@ -67,6 +67,9 @@
     End Function
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not CheckOTP() Then Exit Sub
+       
+    End Sub
+    Friend Sub UpdateSetting()
         'First
         If Not locked Then
             UpdateOptions("BranchCode", txtCode.Text)
@@ -102,7 +105,6 @@
         End If
         Me.Close()
     End Sub
-
     Private Sub UpdateDaily()
         Dim fillData As String = "tblDaily"
         Dim mySql As String = "SELECT * FROM tblDaily WHERE ID = " & dailyID

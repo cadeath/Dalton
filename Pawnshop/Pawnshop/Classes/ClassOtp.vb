@@ -54,18 +54,18 @@
     End Sub
 
 
-    Public Sub SaveOtp()
-        Dim ds As DataSet = LoadSQL(mySql & fillData, fillData)
+    'Public Sub SaveOtp()
+    '    Dim ds As DataSet = LoadSQL(mySql & fillData, fillData)
 
-        Dim dsNewRow As DataRow
-        dsNewRow = ds.Tables(fillData).NewRow
-        With dsNewRow
-            .Item("PIN") = _pin
-            .Item("MOD_NAME") = mod_name
-            '.Item("ADD_TIME") = 
-            .Item("USERID") = POSuser.UserID
-        End With
-        ds.Tables(fillData).Rows.Add(dsNewRow)
-        database.SaveEntry(ds)
-    End Sub
+    '    Dim dsNewRow As DataRow
+    '    dsNewRow = ds.Tables(fillData).NewRow
+    '    With dsNewRow
+    '        .Item("PIN") = _pin
+    '        .Item("MOD_NAME") = mod_name
+    '        '.Item("ADD_TIME") = 
+    '        .Item("USERID") = POSuser.UserID
+    '    End With
+    '    ds.Tables(fillData).Rows.Add(dsNewRow)
+    '    database.SaveEntry(ds)
+    'End Sub
 End Class
