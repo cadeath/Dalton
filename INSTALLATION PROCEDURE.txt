@@ -1,3 +1,6 @@
-INSTALLATION 
-Backup Database
-Run Early Redemption Fixer
+INSTALLATION PROCEDURE FOR V1.2.2
+1. Backup Database
+2. Uninstall old system
+3. Install new version
+4. Run Exe
+5. Run Early Redemption Fixer
