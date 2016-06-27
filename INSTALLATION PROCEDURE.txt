@@ -1,0 +1,3 @@
+INSTALLATION 
+Backup Database
+Run Early Redemption Fixer
