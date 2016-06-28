@@ -176,7 +176,8 @@
         ElseIf rbPawner.Checked Then
             mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
             mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') "
+            mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & secured_str & "%') "
 
         ElseIf rbPawnTicket.Checked Then
             mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'"
@@ -186,7 +187,8 @@
             mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
             mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
             mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') "
+            mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= vbCr & "UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & secured_str & "%') "
 
         End If
         Console.WriteLine("SQL: " & mySql)
