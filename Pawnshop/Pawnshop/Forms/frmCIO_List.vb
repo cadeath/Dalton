@@ -85,6 +85,8 @@
     ''' <param name="id"></param>
     ''' <remarks></remarks>
     Private Sub VoidID(ByVal id As Integer)
+        Dim result As String = MsgBox("Do you to Void this Transaction", MsgBoxStyle.YesNo, "Pawnshop")
+        If result = vbNo Then Exit Sub
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE TransID = {1}", fillData, id)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim getID As Single = ds.Tables(0).Rows(0).Item("TransID")

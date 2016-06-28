@@ -1126,3 +1126,5 @@ System.IndexOutOfRangeException: There is no row at position 0.
 [06/15/2016 09:33:05] [RemoveLog] RENEWALS with ID 8 cannot be found in tbl_dailytimelog
 [06/20/2016 10:43:50] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
 [06/20/2016 10:50:10] Input string was not in a correct format.Couldn't store <> in TRANSID Column.  Expected type is Int64.
+[06/28/2016 13:28:09] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/28/2016 13:29:11] Column 'TRANSID' does not belong to table TBL_DAILYTIMELOG.
