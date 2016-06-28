@@ -5,7 +5,7 @@ Module otp
     Public tfa As New OneTimePassword
 
     Friend Sub Generate_QR()
-        tfa.Setup("MLNzxczxczxc@gmail.com.com")
+        tfa.Setup("marzxxx90@gmail.com")
         Console.WriteLine(tfa.QRCode_URL)
     End Sub
     Friend Function VerifyPIN(ByVal pin As String) As Boolean
