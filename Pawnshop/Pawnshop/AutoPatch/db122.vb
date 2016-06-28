@@ -6,6 +6,9 @@
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
         Dim ALTER_TBLJOURNAL As String = "ALTER TABLE TBLJOURNAL ADD TRANSTYPE VARCHAR(50);"
+
+
+
         Dim JRL_VIEW As String
         JRL_VIEW = "CREATE VIEW JOURNAL_SUMMARY("
         JRL_VIEW &= vbCrLf & "  SAPACCOUNT,"
@@ -23,10 +26,18 @@
         JRL_VIEW &= vbCrLf & "GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME "
         JRL_VIEW &= vbCrLf & "ORDER BY TRANSTYPE;"
 
+        Dim ADDTransID_Journal As String = "ALTER TABLE TBLJOURNAL ADD TRANSID BIGINT;"
+        Dim ADDDailyTimeLog As String = "ALTER TABLE TBL_DAILYTIMELOG ADD TRANSID BIGINT;"
+       
         Try
+
             RunCommand(ALTER_TBLJOURNAL)
 
             RunCommand(JRL_VIEW)
+
+            RunCommand(ADDTransID_Journal)
+
+            RunCommand(ADDDailyTimeLog)
 
             Dim CashInBank As String = GetOption("BranchBank")
             If CashInBank = 0 Then
@@ -43,4 +54,5 @@
             Log_Report(ex.ToString & "[1.2.2]")
         End Try
     End Sub
+
 End Module
