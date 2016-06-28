@@ -150,80 +150,10 @@
         If txtSearch.Text.Length <= 3 Then
             MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Information)
         Else
-            PawningSearch2()
+            PawningSearch()
         End If
     End Sub
     Private Sub PawningSearch()
-        If txtSearch.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
-
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE "
-        If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
-        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
-
-        Console.WriteLine(mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim MaxRow As Single = ds.Tables(0).Rows.Count
-        Dim clientID As Integer = 0
-        Dim tmpMaxRow As Double = 0
-
-        lvPawners.Items.Clear()
-        If MaxRow = 0 Then
-
-            mySql = "SELECT * FROM tblClient WHERE "
-            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%')" & " OR "
-            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & secured_str & "%')" & " OR "
-            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%')"
-
-            ds.Clear()
-
-            ds = LoadSQL(mySql)
-            MaxRow = ds.Tables(0).Rows.Count
-            If MaxRow = 0 Then
-                Console.WriteLine("No Pawn, No Client, No found")
-                MsgBox("Query not found", MsgBoxStyle.Information)
-                Exit Sub
-            End If
-
-            Console.WriteLine(mySql)
-            For Each dr As DataRow In ds.Tables(0).Rows
-                clientID = dr.Item("ClientID")
-                Dim xDs As DataSet
-
-                mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
-                xDs = LoadSQL(mySql)
-                MaxRow = xDs.Tables(0).Rows.Count
-                tmpMaxRow += MaxRow
-                If MaxRow > 0 Then
-                    'lvPawners.Items.Clear()
-                    For Each xdr As DataRow In xDs.Tables(0).Rows
-                        Dim tmpTicket As New PawnTicket
-                        tmpTicket.LoadTicketInRow(xdr)
-                        AddItem(tmpTicket)
-                    Next
-                End If
-            Next
-        Else
-            For Each dr As DataRow In ds.Tables(0).Rows
-                Dim tmpTicket As New PawnTicket
-                tmpTicket.LoadTicketInRow(dr)
-                AddItem(tmpTicket)
-            Next
-        End If
-        If IsNumeric(secured_str) Then
-            MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
-        Else
-            MsgBox(tmpMaxRow & " result found.", MsgBoxStyle.Information)
-            End If
-        'Auto Select
-        If lvPawners.Items.Count > 0 Then
-            lvPawners.Focus()
-            lvPawners.Items(0).Selected = True
-            lvPawners.Items(0).EnsureVisible()
-        End If
-    End Sub
-    Private Sub PawningSearch2()
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
