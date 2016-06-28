@@ -190,11 +190,14 @@ Public Class frmClient
         mySql &= String.Format("UPPER(FirstName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(MiddleName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(LastName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(LastName ||' '|| FirstName ||' '|| MiddleName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(FirstName ||' '|| MiddleName ||' '|| LastName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+        mySql &= String.Format("UPPER(FirstName ||' '|| LastName ||' '|| MiddleName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(Addr_Brgy) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(Addr_City) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-        mySql &= String.Format("UPPER(Phone1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-        mySql &= String.Format("UPPER(Phone2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-        mySql &= String.Format("UPPER(Phone_Others) LIKE UPPER('%{0}%') " & vbCrLf, src)
+        mySql &= String.Format("Phone1 LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Phone2 LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Phone_Others LIKE '%{0}%' " & vbCrLf, src)
         'mySql &= "isSelect = 1 or isSelect is NULL" & vbCrLf
         mySql &= "ORDER BY LastName ASC, FirstName ASC"
 
