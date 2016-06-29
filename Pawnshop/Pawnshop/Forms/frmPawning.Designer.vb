@@ -23,6 +23,10 @@ Partial Class frmPawning
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbDescription = New System.Windows.Forms.RadioButton()
+        Me.rbPawner = New System.Windows.Forms.RadioButton()
+        Me.rbPawnTicket = New System.Windows.Forms.RadioButton()
+        Me.rbAll = New System.Windows.Forms.RadioButton()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -48,10 +52,6 @@ Partial Class frmPawning
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.rbAll = New System.Windows.Forms.RadioButton()
-        Me.rbPawnTicket = New System.Windows.Forms.RadioButton()
-        Me.rbPawner = New System.Windows.Forms.RadioButton()
-        Me.rbDescription = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,6 +74,48 @@ Partial Class frmPawning
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search Item"
         '
+        'rbDescription
+        '
+        Me.rbDescription.AutoSize = True
+        Me.rbDescription.Location = New System.Drawing.Point(212, 32)
+        Me.rbDescription.Name = "rbDescription"
+        Me.rbDescription.Size = New System.Drawing.Size(78, 17)
+        Me.rbDescription.TabIndex = 17
+        Me.rbDescription.Text = "Description"
+        Me.rbDescription.UseVisualStyleBackColor = True
+        '
+        'rbPawner
+        '
+        Me.rbPawner.AutoSize = True
+        Me.rbPawner.Location = New System.Drawing.Point(145, 32)
+        Me.rbPawner.Name = "rbPawner"
+        Me.rbPawner.Size = New System.Drawing.Size(61, 17)
+        Me.rbPawner.TabIndex = 16
+        Me.rbPawner.Text = "Pawner"
+        Me.rbPawner.UseVisualStyleBackColor = True
+        '
+        'rbPawnTicket
+        '
+        Me.rbPawnTicket.AutoSize = True
+        Me.rbPawnTicket.Location = New System.Drawing.Point(52, 32)
+        Me.rbPawnTicket.Name = "rbPawnTicket"
+        Me.rbPawnTicket.Size = New System.Drawing.Size(85, 17)
+        Me.rbPawnTicket.TabIndex = 15
+        Me.rbPawnTicket.Text = "Pawn Ticket"
+        Me.rbPawnTicket.UseVisualStyleBackColor = True
+        '
+        'rbAll
+        '
+        Me.rbAll.AutoSize = True
+        Me.rbAll.Checked = True
+        Me.rbAll.Location = New System.Drawing.Point(10, 32)
+        Me.rbAll.Name = "rbAll"
+        Me.rbAll.Size = New System.Drawing.Size(36, 17)
+        Me.rbAll.TabIndex = 14
+        Me.rbAll.TabStop = True
+        Me.rbAll.Text = "All"
+        Me.rbAll.UseVisualStyleBackColor = True
+        '
         'btnSearch
         '
         Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -81,7 +123,6 @@ Partial Class frmPawning
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(74, 23)
         Me.btnSearch.TabIndex = 6
-        Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
         'txtSearch
@@ -292,48 +333,6 @@ Partial Class frmPawning
         Me.Label4.Size = New System.Drawing.Size(167, 13)
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Red - Withdraw [Redeem/Pullout]"
-        '
-        'rbAll
-        '
-        Me.rbAll.AutoSize = True
-        Me.rbAll.Checked = True
-        Me.rbAll.Location = New System.Drawing.Point(10, 32)
-        Me.rbAll.Name = "rbAll"
-        Me.rbAll.Size = New System.Drawing.Size(36, 17)
-        Me.rbAll.TabIndex = 14
-        Me.rbAll.TabStop = True
-        Me.rbAll.Text = "All"
-        Me.rbAll.UseVisualStyleBackColor = True
-        '
-        'rbPawnTicket
-        '
-        Me.rbPawnTicket.AutoSize = True
-        Me.rbPawnTicket.Location = New System.Drawing.Point(52, 32)
-        Me.rbPawnTicket.Name = "rbPawnTicket"
-        Me.rbPawnTicket.Size = New System.Drawing.Size(85, 17)
-        Me.rbPawnTicket.TabIndex = 15
-        Me.rbPawnTicket.Text = "Pawn Ticket"
-        Me.rbPawnTicket.UseVisualStyleBackColor = True
-        '
-        'rbPawner
-        '
-        Me.rbPawner.AutoSize = True
-        Me.rbPawner.Location = New System.Drawing.Point(145, 32)
-        Me.rbPawner.Name = "rbPawner"
-        Me.rbPawner.Size = New System.Drawing.Size(61, 17)
-        Me.rbPawner.TabIndex = 16
-        Me.rbPawner.Text = "Pawner"
-        Me.rbPawner.UseVisualStyleBackColor = True
-        '
-        'rbDescription
-        '
-        Me.rbDescription.AutoSize = True
-        Me.rbDescription.Location = New System.Drawing.Point(212, 32)
-        Me.rbDescription.Name = "rbDescription"
-        Me.rbDescription.Size = New System.Drawing.Size(78, 17)
-        Me.rbDescription.TabIndex = 17
-        Me.rbDescription.Text = "Description"
-        Me.rbDescription.UseVisualStyleBackColor = True
         '
         'frmPawning
         '

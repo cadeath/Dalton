@@ -148,7 +148,7 @@
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text.Length <= 3 Then
-            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Information)
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation)
         Else
             PawningSearch()
         End If
@@ -157,16 +157,7 @@
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
-
         Dim mySql As String
-
-        'mySql = "SELECT * "
-        'mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
-        'If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
-        'mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
-        'mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-        'mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-        'mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') "
 
         mySql = "SELECT * "
         mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
@@ -189,22 +180,23 @@
             mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
             mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
             mySql &= vbCr & "UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & secured_str & "%') "
-
         End If
+
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         If MaxRow <= 0 Then
             MsgBox("Query not found", MsgBoxStyle.Critical)
-            'txtSearch.SelectAll()
             Exit Sub
         End If
+
         lvPawners.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpTicket As New PawnTicket
             tmpTicket.LoadTicketInRow(dr)
             AddItem(tmpTicket)
         Next
+
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
         If lvPawners.Items.Count > 0 Then
             lvPawners.Focus()
