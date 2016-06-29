@@ -187,6 +187,7 @@
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         If MaxRow <= 0 Then
             MsgBox("Query not found", MsgBoxStyle.Critical)
+
             Exit Sub
         End If
 

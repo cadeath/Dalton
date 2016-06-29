@@ -123,6 +123,7 @@ Partial Class frmPawning
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(74, 23)
         Me.btnSearch.TabIndex = 6
+        Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
         'txtSearch
