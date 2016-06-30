@@ -59,6 +59,7 @@ Partial Class frmMain
         Me.CashInOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AuctionDailyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -233,7 +234,7 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.DollarReportToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.DollarReportToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.AuctionDailyReportToolStripMenuItem, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -308,6 +309,12 @@ Partial Class frmMain
         Me.ItemPulloutToolStripMenuItem1.Name = "ItemPulloutToolStripMenuItem1"
         Me.ItemPulloutToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
         Me.ItemPulloutToolStripMenuItem1.Text = "Item &Pullout"
+        '
+        'AuctionDailyReportToolStripMenuItem
+        '
+        Me.AuctionDailyReportToolStripMenuItem.Name = "AuctionDailyReportToolStripMenuItem"
+        Me.AuctionDailyReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.AuctionDailyReportToolStripMenuItem.Text = "Auction Daily Report"
         '
         'ToolStripSeparator4
         '
@@ -651,5 +658,6 @@ Partial Class frmMain
     Friend WithEvents BSPReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DollarReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChangelogToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AuctionDailyReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

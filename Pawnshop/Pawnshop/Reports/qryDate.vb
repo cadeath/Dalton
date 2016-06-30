@@ -160,16 +160,25 @@
 
     Private Sub AuctionMonthly_CategoryJWL()
         Dim mySql As String, dsName As String, rptPath As String
-        dsName = "dsAuctionJWL" : rptPath = "Reports\prt_AuctionMonthlyJWL.rdlc"
+        dsName = "dsAuctionMonthly" : rptPath = "Reports\AuctionMonlyreport.rdlc"
         Dim st As Date = GetFirstDate(monCal.SelectionStart)
         Dim en As Date = GetLastDate(monCal.SelectionStart)
 
-        mySql = "SELECT * "
-        mySql &= vbCrLf & "FROM PAWNING "
-        mySql &= vbCrLf & "WHERE "
-        mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-        mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
-        mySql &= vbCrLf & "AND ITEMTYPE = 'JWL' "
+        mySql = "select count(category) as CountCategory,loandate, auctiondate, category, itemtype,principal"
+        mySql &= vbCrLf & "from TBLPAWN"
+        mySql &= vbCrLf & "inner join tblclass on TBLPAWN.CATID =  TBLCLASS.CLASSID"
+        mySql &= vbCrLf & " where"
+        mySql &= vbCrLf & String.Format("auctiondate BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
+        mySql &= vbCrLf & "group by category,loandate, auctiondate, itemtype,principal"
+        mySql &= vbCrLf & "order by loandate asc"
+
+        'mySql = " select count(CATEGORY) as CountCategory, AUCTIONDATE, CATEGORY, ITEMTYPE "
+        'mySql &= vbCrLf & " from TBLPAWN inner join tblclass on TBLPAWN.CATID = TBLCLASS.CLASSID "
+        'mySql &= vbCrLf & "WHERE "
+        'mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
+        'mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
+        'mySql &= "group by CATEGORY, AUCTIONDATE, ITEMTYPE"
+        'mySql &= "order by AUCTIONDATE ASC"
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim addPara As New Dictionary(Of String, String)

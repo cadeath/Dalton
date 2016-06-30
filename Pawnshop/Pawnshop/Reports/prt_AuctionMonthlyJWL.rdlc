@@ -741,6 +741,7 @@ Format(Fields!AuctionDate.Value,"MMM-yy")</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
