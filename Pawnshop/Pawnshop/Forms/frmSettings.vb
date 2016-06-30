@@ -68,9 +68,11 @@
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not locked Then
             UpdateSetting()
+        Else
+            diagOTP.FormType = diagOTP.OTPType.Settings
+            If Not CheckOTP() Then Exit Sub
         End If
-        diagOTP.FormType = diagOTP.OTPType.Settings
-        If Not CheckOTP() Then Exit Sub
+        
     End Sub
     Friend Sub UpdateSetting()
         'First
