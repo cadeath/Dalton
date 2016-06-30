@@ -213,10 +213,18 @@
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        diagOTP.FormType = diagOTP.OTPType.UserManagement
+        If Not CheckOTP() Then Exit Sub
+    End Sub
+    Friend Sub AddUserManagement()
         If Not PasswordPolicy() Then Exit Sub
-
         If btnAdd.Text = "&Add" Then
             Console.WriteLine("Priv is " & Privileger())
             Dim tmpUser As New ComputerUser
@@ -255,7 +263,6 @@
         ClearFields()
         LoadActive()
     End Sub
-
     Private Sub lvUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUsers.DoubleClick
         LoadUser()
         EditMode()
