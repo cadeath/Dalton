@@ -1,15 +1,27 @@
 ﻿Imports totp
-
+Enum OTPType As Integer
+    UserManagement = 0
+    Settings = 1
+End Enum
 Public Class diagOTP
-    Private Sub btnSubmit_Click(sender As System.Object, e As System.EventArgs) Handles btnSubmit.Click
+    Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         If otp.VerifyPIN(txtPIN.Text) Then
             Me.Close()
-            frmSettings.UpdateSetting()
+            OTPGenerate()
         Else
             MsgBox("INVALID PIN", MsgBoxStyle.Critical)
         End If
     End Sub
-    Private Sub diagOTP_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Friend FormType As OTPType
+    Private Sub OTPGenerate()
+         Select FormType
+            Case OTPType.UserManagement
+                frmUserManagement.AddUserManagement()
+            Case OTPType.Settings
+                frmSettings.UpdateSetting()
+        End Select
+    End Sub
+    Private Sub diagOTP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPIN.Text = ""
     End Sub
 
