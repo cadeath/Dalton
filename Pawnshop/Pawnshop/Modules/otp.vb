@@ -8,8 +8,8 @@ Module otp
         tfa.Setup("marzxxx90@gmail.com")
         Console.WriteLine(tfa.QRCode_URL)
     End Sub
-    Friend Function VerifyPIN(ByVal pin As String) As Boolean
-        Dim MOD_NAME As String = "Settings"
+    Friend Function VerifyPIN(ByVal pin As String, ByVal mod_name As String) As Boolean
+        'Dim Mod_name As String = "Settings"
         Dim isValid As Boolean = tfa.isCorrect(pin)
         If Not isValid Then Return False
 

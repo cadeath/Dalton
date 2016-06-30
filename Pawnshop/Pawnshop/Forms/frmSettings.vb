@@ -66,7 +66,9 @@
         Return True
     End Function
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+        diagOTP.FormType = diagOTP.OTPType.Settings
         If Not CheckOTP() Then Exit Sub
+
     End Sub
     Friend Sub UpdateSetting()
         'First
