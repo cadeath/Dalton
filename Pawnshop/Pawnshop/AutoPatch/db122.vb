@@ -21,7 +21,6 @@
         JRL_VIEW &= vbCrLf & "FROM tblJournal INNER JOIN tblCash on CashID = JRL_TRANSID "
         JRL_VIEW &= vbCrLf & "WHERE Status = 1 "
         JRL_VIEW &= vbCrLf & "GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME "
-        JRL_VIEW &= vbCrLf & "ORDER BY TRANSTYPE;"
 
         Try
             RunCommand(ALTER_TBLJOURNAL)
