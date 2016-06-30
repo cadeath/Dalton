@@ -723,6 +723,9 @@
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\prt_AuctionMonthlyJWL.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>

@@ -34,6 +34,8 @@
         DollarDaily = 15
         AuditPrinLimit = 16
         MonthlyTransactionCountSummary = 17
+        AuctionMonthlyJWL = 18
+
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -76,6 +78,8 @@
                 Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
+            Case ReportType.AuctionMonthlyJWL
+                AuctionMonthly_CategoryJWL()
         End Select
     End Sub
 
@@ -125,6 +129,8 @@
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
                     FormType = ReportType.MonthlyTransactionCountSummary
+                Case "Auction Monthly Jewelry Report"
+                    FormType = ReportType.AuctionMonthlyJWL
             End Select
         End If
 
@@ -142,6 +148,28 @@
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
         mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtMonthOf", "FOR THE MONTH OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
+        addPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara)
+        frmReport.Show()
+    End Sub
+
+    Private Sub AuctionMonthly_CategoryJWL()
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsAuctionJWL" : rptPath = "Reports\prt_AuctionMonthlyJWL.rdlc"
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionStart)
+
+        mySql = "SELECT * "
+        mySql &= vbCrLf & "FROM PAWNING "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
+        mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
+        mySql &= vbCrLf & "AND ITEMTYPE = 'JWL' "
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim addPara As New Dictionary(Of String, String)
