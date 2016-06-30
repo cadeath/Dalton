@@ -3,7 +3,7 @@
     Dim senderClient As Client
     Dim receiverClient As Client
     Friend displayOnly As Boolean = False
-
+    Friend unableToSave As Boolean = False
     Dim idME As Integer, idMR As Integer
     Dim basicCharges As Double, commission As Double
     Private MOD_NAME As String = "MONEYTRANSFER"
@@ -556,6 +556,12 @@
         'frmMTlist.LoadActive()
         Me.Close()
     End Sub
+
+
+
+ 
+    
+
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
         txtSender.Text = String.Format("{0} {1}", cl.FirstName, cl.LastName)

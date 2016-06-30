@@ -438,4 +438,5 @@
         Dim changeLog As String = "changelog.txt"
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
+
 End Class

@@ -2,6 +2,7 @@
 
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        lblSAP01.Text = "SAP Code 01"
         ClearFields()
         PrinterSettings()
     End Sub
@@ -28,6 +29,7 @@
         txtArea.Text = GetOption("BranchArea")
         txtBal.Text = GetOption("MaintainingBalance")
         txtRevolving.Text = GetOption("RevolvingFund")
+        txtCashInBank.Text = GetSAPAccount("Cash in Bank")
 
         If locked Then
             txtCode.Enabled = False
@@ -74,6 +76,7 @@
         End If
         UpdateOptions("MaintainingBalance", txtBal.Text)
         MaintainBal = txtBal.Text
+        UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text)

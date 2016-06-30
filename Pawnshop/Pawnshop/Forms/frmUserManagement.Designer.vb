@@ -72,7 +72,6 @@ Partial Class frmUserManagement
         Me.chkSpAll = New System.Windows.Forms.CheckBox()
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
-        Me.chkAppraiser = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -200,7 +199,6 @@ Partial Class frmUserManagement
         '
         'tbEncoder
         '
-        Me.tbEncoder.Controls.Add(Me.chkAppraiser)
         Me.tbEncoder.Controls.Add(Me.chkEnAll)
         Me.tbEncoder.Controls.Add(Me.chkCIO)
         Me.tbEncoder.Controls.Add(Me.chkPOS)
@@ -591,16 +589,6 @@ Partial Class frmUserManagement
         Me.chkCashInBank.Text = "Cash In (Bank)"
         Me.chkCashInBank.UseVisualStyleBackColor = True
         '
-        'chkAppraiser
-        '
-        Me.chkAppraiser.AutoSize = True
-        Me.chkAppraiser.Location = New System.Drawing.Point(186, 81)
-        Me.chkAppraiser.Name = "chkAppraiser"
-        Me.chkAppraiser.Size = New System.Drawing.Size(70, 17)
-        Me.chkAppraiser.TabIndex = 9
-        Me.chkAppraiser.Text = "Appraiser"
-        Me.chkAppraiser.UseVisualStyleBackColor = True
-        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -684,5 +672,4 @@ Partial Class frmUserManagement
     Friend WithEvents chkBorrowings As System.Windows.Forms.CheckBox
     Friend WithEvents chkPullOut As System.Windows.Forms.CheckBox
     Friend WithEvents chkMigrate As System.Windows.Forms.CheckBox
-    Friend WithEvents chkAppraiser As System.Windows.Forms.CheckBox
 End Class

@@ -15,7 +15,7 @@ Public Class frmCurrencyList
         frmOrig = formOrigin
     End Sub
     
-    Friend Sub LoadActivecurrency(Optional ByVal mySql As String = "SELECT * FROM TBLCURRENCY ORDER BY CURRENCYID")
+    Friend Sub LoadActivecurrency(Optional ByVal mySql As String = "SELECT * FROM TBLCURRENCY ORDER BY CURRENCYID ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
         lvCurrency.Items.Clear()
@@ -47,12 +47,13 @@ Public Class frmCurrencyList
         searchbutton()
     End Sub
     Private Sub searchbutton()
+
         Dim mySql As String = "SELECT * FROM TBLCURRENCY WHERE "
         If IsNumeric(txtSearch.Text) Then
             mySql &= "CURRENCYID = " & txtSearch.Text
 
         Else : mySql &= String.Format("UPPER (CURRENCY) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", txtSearch.Text, txtSearch.Text)
+            mySql &= String.Format("UPPER (SYMBOL) LIKE UPPER('%{0}%')", txtSearch.Text)
         End If
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -130,12 +131,9 @@ Public Class frmCurrencyList
         Me.Close()
     End Sub
 
-
     Private Sub lvCurrency_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles lvCurrency.KeyPress
         If isEnter(e) Then
             If mOtherForm Then
-                btnSelect.PerformClick()
-            Else
                 btnSelect.PerformClick()
             End If
         End If

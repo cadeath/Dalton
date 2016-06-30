@@ -1,5 +1,7 @@
-﻿Module updateRate
+﻿
+Module updateRate
     Private dsRate As DataSet
+    ' Private ds As String = database.dbName
     Private isFailed As Boolean = False
     Private fillData As String, mySql As String
 
@@ -23,7 +25,7 @@
         fillData = dsRate.Tables(0).TableName
         mySql = "SELECT * FROM " & fillData
         If dbSrc <> "" Then database.dbName = dbSrc
-        Dim ds As DataSet, MaxDS As Integer, MaxRate As Integer
+        Dim ds As DataSet, MaxDS As Integer = 0, MaxRate As Integer = 0
 
         Try
 
@@ -42,20 +44,20 @@
             Exit Sub
         End Try
 
+
         Dim i As Integer = 0
-        Dim ID As String = dsRate.Tables(fillData).Columns.Item(0).ColumnName
+        Dim ID As String = ds.Tables(fillData).Columns.Item(0).ColumnName
+
 
         'Remove Excessive entries
         Console.WriteLine("Checking excessive entries")
         ds = LoadSQL(mySql, fillData)
+        mySql = "DELETE FROM " & fillData
+        mySql &= " WHERE " & ID & " > " & (0)
 
-        If MaxDS > MaxRate Then
-            For i = MaxDS To MaxRate Step -1
-                ds.Tables(fillData).Rows(i - 1).Delete()
-                database.SaveEntry(ds, False)
-            Next
-        End If
-
+        ds.Clear()
+        ds = LoadSQL(mySql, fillData)
+     
         Console.WriteLine("Updating table") : i = 0
         For Each dr As DataRow In dsRate.Tables(fillData).Rows
             mySql = "SELECT * FROM " & fillData
@@ -69,7 +71,6 @@
                     ds.Tables(fillData).Rows(0).Item(setColumn) = _
                         dsRate.Tables(fillData).Rows(i).Item(setColumn)
                 Next
-
                 database.SaveEntry(ds, False)
             Else
                 Dim dsNewRow As DataRow
@@ -88,9 +89,8 @@
             Application.DoEvents()
             i += 1
         Next
-
     End Sub
-
+    
     Private Function ErrCheck(str As String) As String
         If str.Contains("Table unknown") Then
             Return "Table not found"

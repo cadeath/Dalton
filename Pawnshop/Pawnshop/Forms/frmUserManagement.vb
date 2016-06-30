@@ -90,7 +90,6 @@
         priv &= IIf(chkDB.Checked, 1, 0)
         priv &= IIf(chkPOS.Checked, 1, 0)
         priv &= IIf(chkCIO.Checked, 1, 0)
-        priv &= IIf(chkAppraiser.Checked, 1, 0)
         priv &= "|"
 
         'Supervisor
@@ -112,16 +111,13 @@
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
         Next
-
         Return priv
-
     End Function
 
     Private Sub LoadPrivilege()
         If selectedUser.Privilege = "PDuNxp8S9q0=" Then
             chkEnAll.Checked = True : chkSuAll.Checked = True
             chkMaAll.Checked = True : chkSpAll.Checked = True
-
             tbPrivileges.Enabled = False
             Exit Sub
         End If
@@ -133,7 +129,7 @@
                 Dim chkList() As CheckBox = {}
                 Select Case y
                     Case 0 'Encoder
-                        chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO, chkAppraiser}
+                        chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO}
                         Console.WriteLine("Encoder Length: " & privParts(y).Length)
                     Case 1 'Supervisor
                         chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
@@ -168,7 +164,6 @@
                 chkDB.Checked = tabStat
                 chkPOS.Checked = tabStat
                 chkCIO.Checked = tabStat
-                chkAppraiser.Checked = tabStat
             Case "Supervisor"
                 tabStat = chkSuAll.Checked
                 chkEL.Checked = tabStat

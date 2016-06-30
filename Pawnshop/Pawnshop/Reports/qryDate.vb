@@ -1,5 +1,20 @@
 ﻿Public Class qryDate
 
+    ' HOW TO ADD NEW REPORT
+    ' 1. Create your Report Procedure (Sub)
+    ' 2. Add ReportType
+    ' 3. At the Generate Sub, include your 
+    '    ReportType and your Procedure
+    ' 4. If your report don't have DROP DOWN
+    '    LIST, usually for Monthly Report, include
+    '    it on NoFilter function
+    ' 5. For Monthly Report, include in at the Drop
+    '    Down by editing the menu list at the inter-
+    '    face.
+    ' 6. And include it at the Select Case in the
+    '    Click Method.
+
+    ' STEP 2
     Enum ReportType As Integer
         RedeemRenew = 0
         LoanRenew = 1
@@ -17,9 +32,12 @@
         AuctionMonthly = 13
         MoneyTransferBSP = 14
         DollarDaily = 15
+        AuditPrinLimit = 16
+        MonthlyTransactionCountSummary = 17
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
+    ' STEP 3
     Private Sub Generate()
         Select Case FormType
             Case ReportType.RedeemRenew
@@ -54,6 +72,10 @@
                 MoneyTransfer_BSP()
             Case ReportType.DollarDaily
                 DailyDollar()
+            Case ReportType.AuditPrinLimit
+                Audit_PrincipalMin()
+            Case ReportType.MonthlyTransactionCountSummary
+                TransactionCount()
         End Select
     End Sub
 
@@ -78,6 +100,7 @@
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If cboReports.Text = "" And cboReports.Visible Then Exit Sub
 
+        ' STEP 6
         If cboReports.Visible Then
             Select Case cboReports.Text
                 Case "Schedule of Redeem and Renewal"
@@ -100,6 +123,8 @@
                     FormType = ReportType.AuctionMonthly
                 Case "Money Transfer (BSP)"
                     FormType = ReportType.MoneyTransferBSP
+                Case "Monthly Transaction Count Summary"
+                    FormType = ReportType.MonthlyTransactionCountSummary
             End Select
         End If
 
@@ -435,7 +460,7 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
         Dim fillData As String = "dsDollar"
         Dim mySql As String = "SELECT * FROM tblDollar"
-        mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}' AND STATUS = 'A'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= " ORDER BY TRANSDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
@@ -446,17 +471,17 @@
         frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransaction.rdlc", rptPara)
         frmReport.Show()
     End Sub
-   
+
     Private Sub DailyDollar()
         Dim fillData As String = "dsDollar"
         Dim mySql As String = "SELECT * FROM tblDollar"
-        mySql &= String.Format(" WHERE TRANSDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= String.Format(" WHERE TRANSDATE = '{0}' AND STATUS ='A'", monCal.SelectionStart.ToShortDateString)
         mySql &= " ORDER BY TRANSDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToLongDateString)
         rptPara.Add("BranchName", "Bula-Road")
-        rptPara.Add("txtUsername", "Blade")
+        ' rptPara.Add("txtUsername", "Blade")
 
         frmReport.ReportInit(mySql, fillData, "Reports\rptDollarTransaction.rdlc", rptPara)
         frmReport.Show()
@@ -478,6 +503,30 @@
         frmReport.Show()
     End Sub
 
+    Private Sub TransactionCount()
+
+        Dim StartDay = GetFirstDate(MonCal.SelectionStart)
+        Dim EndDay = GetLastDate(monCal.SelectionEnd)
+
+        Dim filldata As String = "dsTransactionCount"
+        Dim mySql As String = "SELECT LOGS_ID, MOD_NAME, CAST(TIMELY AS DATE)AS TIMELY FROM TBL_DAILYTIMELOG "
+        mySql &= "WHERE HASCUSTOMER = '1' AND "
+        mySql &= String.Format(" TIMELY BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
+        'mySql &= "GROUP BY MOD_NAME ORDER BY MOD_NAME"
+
+        Console.WriteLine(mySql)
+
+        Dim addParameters As New Dictionary(Of String, String)
+
+        addParameters.Add("txtMonthstart", "DATE: " & StartDay.ToShortDateString)
+        addParameters.Add("txtMonthend", "DATE: " & EndDay.ToShortDateString)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, filldata, "Reports\rpt_MonthlyTransactionCount.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
+
+    ' STEP 4
     Private Function NoFilter() As Boolean
         Select Case FormType
             Case ReportType.DailyCashCount
@@ -496,6 +545,8 @@
                 Return True
             Case ReportType.DollarDaily
                 Return True
+            Case ReportType.AuditPrinLimit
+                Return True
         End Select
 
         Return False
@@ -509,6 +560,9 @@
         End If
     End Sub
 
-   
-    
+    Private Sub Audit_PrincipalMin()
+        Dim MINIMUM_PRINCIPAL As Double = 5000
+        AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCal.SelectionStart.ToShortDateString)
+    End Sub
+
 End Class

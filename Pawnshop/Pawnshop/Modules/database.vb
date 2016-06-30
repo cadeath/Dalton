@@ -7,15 +7,14 @@
 Friend Module database
     Public con As OdbcConnection
     Public ReaderCon As OdbcConnection
+    'Friend dbName As String = "..\..\sample.FDB"
     Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-
     Private DBversion As String = "1.2.2" 'Database version.
-
     Private language() As String = _
         {"Connection error failed."} 'verification if the database is connected.
     ''' <summary>

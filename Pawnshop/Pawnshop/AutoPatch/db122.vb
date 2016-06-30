@@ -27,6 +27,15 @@
 
             RunCommand(JRL_VIEW)
 
+            Dim CashInBank As String = GetOption("BranchBank")
+            If CashInBank = 0 Then
+                Dim cashinBankSql As String = "SELECT * FROM TBLCASH WHERE TRANSNAME = 'Cash in Bank'"
+                Dim ds As DataSet = LoadSQL(cashinBankSql)
+                CashInBank = ds.Tables(0).Rows(0).Item("SAPACCOUNT")
+                UpdateOptions("BranchBank", CashInBank)
+                Console.WriteLine("Branch Bank Updated")
+            End If
+
             Database_Update(LATEST_VERSION)
             Log_Report("SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2")
         Catch ex As Exception

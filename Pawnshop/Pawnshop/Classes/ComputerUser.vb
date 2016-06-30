@@ -143,6 +143,7 @@ Public Class ComputerUser
             Return _dollarBuying
         End Get
     End Property
+
     Private _pos As Boolean
     Public ReadOnly Property canPOS() As Boolean
         Get
@@ -150,18 +151,12 @@ Public Class ComputerUser
             Return _pos
         End Get
     End Property
+
     Private _cio As Boolean
     Public ReadOnly Property canCashInOut() As Boolean
         Get
             If isSuperUser Then Return isSuperUser
             Return _cio
-        End Get
-    End Property
-    Private _appraiser As Boolean
-    Public ReadOnly Property canAppraise() As Boolean
-        Get
-            If isSuperUser Then Return isSuperUser
-            Return _appraiser
         End Get
     End Property
 
@@ -309,7 +304,7 @@ Public Class ComputerUser
         Dim y As Integer
         'Encoder
         y = 0
-        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
+        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
         _pawn = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _clientList = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _moneyTransfer = IIf(parts(y).Substring(2, 1) = "1", True, False)
@@ -318,10 +313,10 @@ Public Class ComputerUser
         _dollarBuying = IIf(parts(y).Substring(5, 1) = "1", True, False)
         _pos = IIf(parts(y).Substring(6, 1) = "1", True, False)
         _cio = IIf(parts(y).Substring(7, 1) = "1", True, False)
-        _appraiser = IIf(parts(y).Substring(8, 1) = "1", True, False)
         For Each var As Boolean In privList
             If var Then _level = "Encoder"
         Next
+
         'Supervisor
         y = 1
         _expiryList = IIf(parts(y).Substring(0, 1) = "1", True, False)
@@ -373,7 +368,7 @@ Public Class ComputerUser
 
             For cnt As Integer = 0 To TabCnt - 1
                 Select Case cnt
-                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
+                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
                     Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
                     Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
                     Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
@@ -428,7 +423,7 @@ Public Class ComputerUser
         For cnt As Integer = 0 To 3
             Select Case cnt
                 Case 0
-                    privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
+                    privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
@@ -458,6 +453,7 @@ Public Class ComputerUser
 
     Public Sub LoadUserByRow(ByVal dr As DataRow)
         'On Error Resume Next
+
         With dr
             _userID = .Item("UserID")
             _userName = .Item("UserName")
