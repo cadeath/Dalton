@@ -200,7 +200,7 @@
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToLongDateString)
         rptPara.Add("branchName", branchName)
-        ' rptPara.Add("txtUsername", "Blade")
+
 
         frmReport.ReportInit(mysql, fillData, "Reports\AuctionDailyReport.rdlc", rptPara)
         frmReport.Show()
