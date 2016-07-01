@@ -349,19 +349,19 @@ Partial Class frmMain
         'TutorialToolStripMenuItem
         '
         Me.TutorialToolStripMenuItem.Name = "TutorialToolStripMenuItem"
-        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.TutorialToolStripMenuItem.Text = "&Tutorial"
         '
         'ChangelogToolStripMenuItem
         '
         Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ChangelogToolStripMenuItem.Text = "&Changelog"
         '
         'AboutUsToolStripMenuItem
         '
         Me.AboutUsToolStripMenuItem.Name = "AboutUsToolStripMenuItem"
-        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AboutUsToolStripMenuItem.Text = "&About Us"
         '
         'pbLogo

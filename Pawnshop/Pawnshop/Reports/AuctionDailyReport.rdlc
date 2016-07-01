@@ -6,11 +6,11 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>76730f15-a5c5-458e-bc94-1c394c2d98e3</rd:DataSourceID>
+      <rd:DataSourceID>49a9254f-3a58-41a1-8297-4061d57cd33d</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsAuctionMonthly">
+    <DataSet Name="dsAuctionDaily">
       <Fields>
         <Field Name="PawnTicket">
           <DataField>PawnTicket</DataField>
@@ -817,8 +817,8 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>dsAuctionMonthly</DataSetName>
-        <Top>0.38903in</Top>
+        <DataSetName>dsAuctionDaily</DataSetName>
+        <Top>0.11979in</Top>
         <Height>0.76042in</Height>
         <Width>6.57292in</Width>
         <Style>
@@ -828,7 +828,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.95833in</Height>
+    <Height>0.9375in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -848,7 +848,7 @@
   <Width>6.57292in</Width>
   <Page>
     <PageHeader>
-      <Height>0.55556in</Height>
+      <Height>0.77778in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -870,7 +870,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
-          <Left>0.05208in</Left>
+          <Top>0.22222in</Top>
+          <Left>0.02604in</Left>
           <Height>0.25in</Height>
           <Width>2.51375in</Width>
           <Style>
@@ -900,8 +901,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
-          <Top>0.30556in</Top>
-          <Left>0.05208in</Left>
+          <Top>0.52778in</Top>
+          <Left>0.02604in</Left>
           <Height>0.25in</Height>
           <Width>2.51375in</Width>
           <ZIndex>1</ZIndex>
@@ -934,8 +935,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
-          <Top>0.30556in</Top>
-          <Left>4.3925in</Left>
+          <Top>0.52778in</Top>
+          <Left>4.36646in</Left>
           <Height>0.25in</Height>
           <Width>2.18042in</Width>
           <ZIndex>2</ZIndex>
@@ -957,7 +958,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1in</Height>
+      <Height>0.85417in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -982,7 +983,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.21111in</Top>
+          <Top>0.2875in</Top>
           <Height>0.25in</Height>
           <Width>1.33334in</Width>
           <Style>
@@ -1014,7 +1015,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.475in</Top>
+          <Top>0.55139in</Top>
           <Height>0.25in</Height>
           <Width>1.33334in</Width>
           <ZIndex>1</ZIndex>
@@ -1047,7 +1048,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.06944in</Top>
+          <Top>0.14583in</Top>
           <Left>1.65278in</Left>
           <Height>0.25in</Height>
           <Width>2.53126in</Width>
@@ -1081,7 +1082,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.33333in</Top>
+          <Top>0.40972in</Top>
           <Left>4.5625in</Left>
           <Height>0.25in</Height>
           <Width>2.01042in</Width>
@@ -1115,7 +1116,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.52778in</Top>
+          <Top>0.60417in</Top>
           <Left>4.5625in</Left>
           <Height>0.25in</Height>
           <Width>2.01042in</Width>
@@ -1143,6 +1144,6 @@
     <BottomMargin>1in</BottomMargin>
     <Style />
   </Page>
-  <rd:ReportID>faf28c89-ce17-43e5-9f66-9b8bdadf0cc4</rd:ReportID>
+  <rd:ReportID>5bb64578-590e-4bf7-893c-0d833b7ba3fc</rd:ReportID>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
 </Report>
