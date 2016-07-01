@@ -6600,6 +6600,8 @@ Partial Public Class dsReports
         
         Private columnNetamount As Global.System.Data.DataColumn
         
+        Private columnTotalnet As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -6660,6 +6662,14 @@ Partial Public Class dsReports
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TotalnetColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTotalnet
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -6696,9 +6706,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddMoneyTransferBracketingRow(ByVal ID As String, ByVal Transdate As String, ByVal Netamount As String) As MoneyTransferBracketingRow
+        Public Overloads Function AddMoneyTransferBracketingRow(ByVal ID As String, ByVal Transdate As String, ByVal Netamount As String, ByVal Totalnet As String) As MoneyTransferBracketingRow
             Dim rowMoneyTransferBracketingRow As MoneyTransferBracketingRow = CType(Me.NewRow,MoneyTransferBracketingRow)
-            Dim columnValuesArray() As Object = New Object() {ID, Transdate, Netamount}
+            Dim columnValuesArray() As Object = New Object() {ID, Transdate, Netamount, Totalnet}
             rowMoneyTransferBracketingRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMoneyTransferBracketingRow)
             Return rowMoneyTransferBracketingRow
@@ -6724,6 +6734,7 @@ Partial Public Class dsReports
             Me.columnID = MyBase.Columns("ID")
             Me.columnTransdate = MyBase.Columns("Transdate")
             Me.columnNetamount = MyBase.Columns("Netamount")
+            Me.columnTotalnet = MyBase.Columns("TotalNet")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -6735,6 +6746,12 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnTransdate)
             Me.columnNetamount = New Global.System.Data.DataColumn("Netamount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNetamount)
+            Me.columnTotalnet = New Global.System.Data.DataColumn("TotalNet", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnTotalnet.ExtendedProperties.Add("Generator_ColumnPropNameInRow", "Totalnet")
+            Me.columnTotalnet.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "TotalnetColumn")
+            Me.columnTotalnet.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnTotalnet")
+            Me.columnTotalnet.ExtendedProperties.Add("Generator_UserColumnName", "TotalNet")
+            MyBase.Columns.Add(Me.columnTotalnet)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11594,6 +11611,21 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Totalnet() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMoneyTransferBracketing.TotalnetColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TotalNet' in table 'MoneyTransferBracketing' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMoneyTransferBracketing.TotalnetColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsIDNull() As Boolean
             Return Me.IsNull(Me.tableMoneyTransferBracketing.IDColumn)
         End Function
@@ -11626,6 +11658,18 @@ Partial Public Class dsReports
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetNetamountNull()
             Me(Me.tableMoneyTransferBracketing.NetamountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTotalnetNull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransferBracketing.TotalnetColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTotalnetNull()
+            Me(Me.tableMoneyTransferBracketing.TotalnetColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
