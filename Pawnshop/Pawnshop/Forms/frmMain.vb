@@ -39,6 +39,7 @@
         ToolStripMenuItem2.Enabled = Not st 'Monthly Report
         SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
         CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
+        AuctionMonthlyJewelryReportToolStripMenuItem.Enabled = Not st 'Auction MOnthly
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
         LoanRegisterToolStripMenuItem.Enabled = Not st
