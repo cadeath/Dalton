@@ -1,5 +1,5 @@
 CHANGELOG
-Version 1.2.2
+Version 1.2.3
  - Fix monthly computation for Cellphone
  - Fix Journal Entry Summary
  - Fix Money Transfer Send In/Payout Name
@@ -12,6 +12,7 @@ Version 1.2.2
  - Add Cash In Bank SAP Account in Settings
  - Add Audit Report base from the Memo # <missing>
  - Add Monthly Report Monthly Transaction Count
+ - Add One-Time Password
  - Include Auto Patch up to db1.2 v1.2
  - Include BDO and Smart Money Report in Cash In/Out
 
