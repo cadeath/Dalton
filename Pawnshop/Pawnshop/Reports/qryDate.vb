@@ -34,6 +34,7 @@
         DollarDaily = 15
         AuditPrinLimit = 16
         MonthlyTransactionCountSummary = 17
+        MoneyTransferBracketing = 18
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -76,6 +77,8 @@
                 Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
+            Case ReportType.MoneyTransferBracketing
+                MoneyTransferBracketing()
         End Select
     End Sub
 
@@ -125,6 +128,8 @@
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
                     FormType = ReportType.MonthlyTransactionCountSummary
+                Case "MoneyTransfer Bracketing"
+                    FormType = ReportType.MoneyTransferBracketing
             End Select
         End If
 
@@ -523,6 +528,53 @@
         addParameters.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, filldata, "Reports\rpt_MonthlyTransactionCount.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
+    Private Sub MoneyTransferBracketing()
+
+        Dim StartDay = GetFirstDate(monCal.SelectionStart)
+        Dim EndDay = GetLastDate(monCal.SelectionEnd)
+
+        Dim filldata As String = "dsMoneyTransferBracketing"
+        Dim mySql As String = "SELECT id, transdate, "
+        mySql &= "case "
+        mySql &= "WHEN NETAMOUNT between '1' and '100' and servicetype = 'Pera Padala' THEN '1to100' "
+        mySql &= "WHEN NETAMOUNT between '101' and '200' and servicetype = 'Pera Padala' THEN '101to200' "
+        mySql &= "WHEN NETAMOUNT between '201' and '300' and servicetype = 'Pera Padala' THEN '201to300' "
+        mySql &= "WHEN NETAMOUNT between '301' and '500' and servicetype = 'Pera Padala' then '301to500' "
+        mySql &= "WHEN NETAMOUNT between '501' and '700' and servicetype = 'Pera Padala' then '501to700' "
+        mySql &= "WHEN NETAMOUNT between '701' and '1000' and servicetype = 'Pera Padala' then '701to1000' "
+        mySql &= "WHEN NETAMOUNT between '1001' and '1500' and servicetype = 'Pera Padala' then '1001to1500' "
+        mySql &= "when NETAMOUNT between '1501' and '2000' and servicetype = 'Pera Padala' then '1501to2000' "
+        mySql &= "when NETAMOUNT between '2001' and '2500' and servicetype = 'Pera Padala' then '2001to2500' "
+        mySql &= "when NETAMOUNT between '2501' and '3000' and servicetype = 'Pera Padala' then '2501to3000' "
+        mySql &= "when NETAMOUNT between '3001' and '3500' and servicetype = 'Pera Padala' then '3001to3500' "
+        mySql &= "when NETAMOUNT between '3501' and '4000' and servicetype = 'Pera Padala' then '3501to4000' "
+        mySql &= "when NETAMOUNT between '4001' and '5000' and servicetype = 'Pera Padala' then '4001to5000' "
+        mySql &= "when NETAMOUNT between '5001' and '6500' and servicetype = 'Pera Padala' then '5001to6500' "
+        mySql &= "when NETAMOUNT between '6501' and '7000' and servicetype = 'Pera Padala' then '6501to7000' "
+        mySql &= "when NETAMOUNT between '7001' and '9500' and servicetype = 'Pera Padala' then '7001to9500' "
+        mySql &= "when NETAMOUNT between '9501' and '10000' and servicetype = 'Pera Padala' then '9501to10000' "
+        mySql &= "when NETAMOUNT between '10001' and '14000' and servicetype = 'Pera Padala' then '10001to14000' "
+        mySql &= "when NETAMOUNT between '14001' and '15000' and servicetype = 'Pera Padala' then '14001to15000' "
+        mySql &= "when NETAMOUNT between '15001' and '20000' and servicetype = 'Pera Padala' then '15001to20000' "
+        mySql &= "when NETAMOUNT between '20001' and '30000' and servicetype = 'Pera Padala' then '20001to30000' "
+        mySql &= "when NETAMOUNT between '30001' and '40000' and servicetype = 'Pera Padala' then '30001to40000' "
+        mySql &= "when NETAMOUNT between '40001' and '50000' and servicetype = 'Pera Padala' then '40001to50000' "
+        mySql &= "end as netamount "
+        mySql &= "FROM TBLMONEYTRANSFER "
+        mySql &= "where servicetype = 'Pera Padala' and "
+        mySql &= String.Format(" transdate BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
+
+        Console.WriteLine(mySql)
+
+        'Dim addParameters As New Dictionary(Of String, String)
+
+        'addParameters.Add("txtMonthstart", "DATE: " & StartDay.ToShortDateString)
+        'addParameters.Add("txtMonthend", "DATE: " & EndDay.ToShortDateString)
+        'addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, filldata, "Reports\rpt_MoneyTransferBracketing.rdlc")
         frmReport.Show()
     End Sub
 
