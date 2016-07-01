@@ -34,8 +34,7 @@
         DollarDaily = 15
         AuditPrinLimit = 16
         MonthlyTransactionCountSummary = 17
-        AuctionMonthlyJWL = 18
-        AuctionDaily = 19
+
 
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
@@ -79,10 +78,7 @@
                 Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
-            Case ReportType.AuctionMonthlyJWL
-                AuctionMonthly_Category()
-            Case ReportType.AuctionDaily
-                AuctionDaily_Category()
+           
         End Select
     End Sub
 
@@ -132,8 +128,6 @@
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
                     FormType = ReportType.MonthlyTransactionCountSummary
-                Case "Auction Monthly Jewelry Report"
-                    FormType = ReportType.AuctionMonthlyJWL
             End Select
         End If
 
@@ -158,51 +152,6 @@
         addPara.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, dsName, rptPath, addPara)
-        frmReport.Show()
-    End Sub
-
-    Private Sub AuctionMonthly_Category()
-        Dim mySql As String, dsName As String, rptPath As String
-        dsName = "dsAuctionMonthly" : rptPath = "Reports\AuctionMonlyreport.rdlc"
-        Dim st As Date = GetFirstDate(monCal.SelectionStart)
-        Dim en As Date = GetLastDate(monCal.SelectionStart)
-
-        mySql = "select count(category) as CountCategory,loandate, auctiondate, category, itemtype,principal"
-        mySql &= vbCrLf & "from TBLPAWN"
-        mySql &= vbCrLf & "inner join tblclass on TBLPAWN.CATID =  TBLCLASS.CLASSID"
-        mySql &= vbCrLf & " where"
-        mySql &= vbCrLf & String.Format("auctiondate BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-        mySql &= vbCrLf & "group by category,loandate, auctiondate, itemtype,principal"
-        mySql &= vbCrLf & "order by loandate asc"
-
-
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim addPara As New Dictionary(Of String, String)
-        addPara.Add("txtMonthOf", "FOR THE MONTH OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
-        addPara.Add("branchName", branchName)
-
-        frmReport.ReportInit(mySql, dsName, rptPath, addPara)
-        frmReport.Show()
-    End Sub
-
-    Private Sub AuctionDaily_Category()
-        Dim fillData As String = "dsAuctionDaily"
-        Dim mysql As String
-
-        mysql = "select count(category) as CountCategory,loandate, auctiondate, category, itemtype,principal"
-        mysql &= vbCrLf & "from TBLPAWN"
-        mysql &= vbCrLf & "inner join tblclass on TBLPAWN.CATID =  TBLCLASS.CLASSID"
-        mysql &= vbCrLf & " where"
-        mysql &= vbCrLf & String.Format("auctiondate ='{0}'", monCal.SelectionRange.Start.ToShortDateString)
-        mysql &= vbCrLf & "group by category,loandate, auctiondate, itemtype,principal"
-        mysql &= vbCrLf & "order by loandate asc"
-
-        Dim rptPara As New Dictionary(Of String, String)
-        rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToLongDateString)
-        rptPara.Add("branchName", branchName)
-
-
-        frmReport.ReportInit(mysql, fillData, "Reports\AuctionDailyReport.rdlc", rptPara)
         frmReport.Show()
     End Sub
 
@@ -600,8 +549,6 @@
             Case ReportType.DollarDaily
                 Return True
             Case ReportType.AuditPrinLimit
-                Return True
-            Case ReportType.AuctionDaily
                 Return True
         End Select
 

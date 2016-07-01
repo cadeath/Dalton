@@ -439,8 +439,7 @@
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
-    Private Sub AuctionDailyReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuctionDailyReportToolStripMenuItem.Click
-        qryDate.FormType = qryDate.ReportType.AuctionDaily
-        qryDate.Show()
+    Private Sub AuctionMonthlyJewelryReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuctionMonthlyJewelryReportToolStripMenuItem.Click
+        qryAuction.Show()
     End Sub
 End Class
