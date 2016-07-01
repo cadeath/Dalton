@@ -130,6 +130,7 @@
                     FormType = ReportType.MonthlyTransactionCountSummary
                 Case "MoneyTransfer Bracketing"
                     FormType = ReportType.MoneyTransferBracketing
+
             End Select
         End If
 
@@ -566,7 +567,7 @@
         mySql &= "FROM TBLMONEYTRANSFER "
         mySql &= "where servicetype = 'Pera Padala' and "
         mySql &= String.Format(" transdate BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
-        ' mySql &= " GROUP BY transdate, netamount"
+        mySql &= " order BY netamount"
         Console.WriteLine(mySql)
 
         Dim addParameters As New Dictionary(Of String, String)
