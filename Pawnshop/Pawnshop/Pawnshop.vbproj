@@ -37,7 +37,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -94,6 +94,9 @@
     <Reference Include="DeathCodez">
       <HintPath>.\DeathCodez.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Authenticator">
+      <HintPath>.\Google.Authenticator.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
     </Reference>
@@ -136,6 +139,9 @@
     <Reference Include="System.Data.DataSetExtensions">
       <Private>True</Private>
     </Reference>
+    <Reference Include="TOTP">
+      <HintPath>.\TOTP.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -162,9 +168,11 @@
     <Compile Include="AutoPatch\db109.vb" />
     <Compile Include="AutoPatch\db12.vb" />
     <Compile Include="AutoPatch\db122.vb" />
+    <Compile Include="AutoPatch\db1221.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
+    <Compile Include="Classes\ClassOtp.vb" />
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
@@ -182,12 +190,6 @@
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Classes\rptActionReq.vb" />
-    <Compile Include="Dev\dev_priv.Designer.vb">
-      <DependentUpon>dev_priv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dev\dev_priv.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="doc\Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
@@ -254,12 +256,15 @@
     <Compile Include="Forms\diagAuthorization.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmChangePassword.Designer.vb">
-      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    <Compile Include="Forms\diagOTP.Designer.vb">
+      <DependentUpon>diagOTP.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmChangePassword.vb">
+    <Compile Include="Forms\diagOTP.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\AuditReports.vb" />
+    <Compile Include="Modules\OneTimePassword.vb" />
+    <Compile Include="Modules\otp.vb" />
     <Compile Include="Reports\diagMT.Designer.vb">
       <DependentUpon>diagMT.vb</DependentUpon>
     </Compile>
@@ -573,9 +578,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Dev\dev_priv.resx">
-      <DependentUpon>dev_priv.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="doc\Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -608,8 +610,8 @@
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmChangePassword.resx">
-      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\diagOTP.resx">
+      <DependentUpon>diagOTP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
@@ -763,6 +765,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRenew_Monthly2.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlyTransactionCount.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_Monthly_BSP.rdlc">

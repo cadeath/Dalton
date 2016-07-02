@@ -1,5 +1,5 @@
 ﻿Imports DeathCodez.Security
-Imports System.Data.Odbc
+
 ''' <summary>
 ''' NOTE: Privilege PDuNxp8S9q0= means SUPER USER
 ''' </summary>
@@ -8,13 +8,6 @@ Public Class ComputerUser
 
     Private fillData As String = "tbl_Gamit"
     Private mySql As String = String.Empty
-
-    Enum priv_set As Integer
-        Encoder = 0
-        Supervisor = 1
-        Manager = 2
-        Special = 3
-    End Enum
 
 #Region "Properties"
     Private _userID As Integer
@@ -150,6 +143,7 @@ Public Class ComputerUser
             Return _dollarBuying
         End Get
     End Property
+
     Private _pos As Boolean
     Public ReadOnly Property canPOS() As Boolean
         Get
@@ -157,18 +151,12 @@ Public Class ComputerUser
             Return _pos
         End Get
     End Property
+
     Private _cio As Boolean
     Public ReadOnly Property canCashInOut() As Boolean
         Get
             If isSuperUser Then Return isSuperUser
             Return _cio
-        End Get
-    End Property
-    Private _appraiser As Boolean
-    Public ReadOnly Property canAppraise() As Boolean
-        Get
-            If isSuperUser Then Return isSuperUser
-            Return _appraiser
         End Get
     End Property
 
@@ -261,13 +249,6 @@ Public Class ComputerUser
             Return _borrow
         End Get
     End Property
-    Private _resetpassword As Boolean
-    Public ReadOnly Property canResetPassword() As Boolean
-        Get
-            If isSuperUser Then Return isSuperUser
-            Return _resetpassword
-        End Get
-    End Property
 
     'Special
     Private _cashInBank As Boolean
@@ -309,13 +290,7 @@ Public Class ComputerUser
             Return _migrate
         End Get
     End Property
-    Private _checkprivilege As Boolean
-    Public ReadOnly Property canAddPrivilege() As Boolean
-        Get
-            If isSuperUser Then Return isSuperUser
-            Return _checkprivilege
-        End Get
-    End Property
+
     'Super User
     Private _superUser As Boolean
     Public ReadOnly Property isSuperUser() As Boolean
@@ -329,7 +304,7 @@ Public Class ComputerUser
         Dim y As Integer
         'Encoder
         y = 0
-        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
+        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
         _pawn = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _clientList = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _moneyTransfer = IIf(parts(y).Substring(2, 1) = "1", True, False)
@@ -338,19 +313,19 @@ Public Class ComputerUser
         _dollarBuying = IIf(parts(y).Substring(5, 1) = "1", True, False)
         _pos = IIf(parts(y).Substring(6, 1) = "1", True, False)
         _cio = IIf(parts(y).Substring(7, 1) = "1", True, False)
-        _appraiser = IIf(parts(y).Substring(8, 1) = "1", True, False)
         For Each var As Boolean In privList
             If var Then _level = "Encoder"
         Next
+
         'Supervisor
         y = 1
         _expiryList = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _journalEntries = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _cashCount = IIf(parts(y).Substring(2, 1) = "1", True, False)
         _backUp = IIf(parts(y).Substring(3, 1) = "1", True, False)
-        _viewUserManagement = IIf(parts(y).Substring(4, 1) = "1", True, False)
-        _viewRates = IIf(parts(y).Substring(5, 1) = "1", True, False)
-        _openStore = IIf(parts(y).Substring(6, 1) = "1", True, False)
+        _viewUserManagement = IIf(parts(y).Substring(8, 1) = "1", True, False)
+        _viewRates = IIf(parts(y).Substring(9, 1) = "1", True, False)
+        _openStore = IIf(parts(y).Substring(10, 1) = "1", True, False)
 
         privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _
                     _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
@@ -364,8 +339,7 @@ Public Class ComputerUser
         _updateRates = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _settings = IIf(parts(y).Substring(2, 1) = "1", True, False)
         _borrow = IIf(parts(y).Substring(3, 1) = "1", True, False)
-        _resetpassword = IIf(parts(y).Substring(4, 1) = "1", True, False)
-        privList = {_userManagement, _updateRates, _settings, _borrow, _resetpassword}
+        privList = {_userManagement, _updateRates, _settings, _borrow}
         For Each var As Boolean In privList
             If var Then _level = "Manager"
         Next
@@ -378,8 +352,7 @@ Public Class ComputerUser
         _void = IIf(parts(y).Substring(2, 1) = "1", True, False)
         _pullOut = IIf(parts(y).Substring(3, 1) = "1", True, False)
         _migrate = IIf(parts(y).Substring(4, 1) = "1", True, False)
-        _checkprivilege = IIf(parts(y).Substring(5, 1) = "1", True, False)
-        privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate, _checkprivilege}
+        privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
 
         Console.WriteLine("Level is " & _level)
     End Sub
@@ -395,13 +368,12 @@ Public Class ComputerUser
 
             For cnt As Integer = 0 To TabCnt - 1
                 Select Case cnt
-                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
+                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
                     Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
-                    Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow, _resetpassword}
-                    Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate, _checkprivilege}
+                    Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
+                    Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
                 End Select
 
-               
                 For Each e In privList
                     e = True
                 Next
@@ -410,7 +382,6 @@ Public Class ComputerUser
             PriviledgeChecking()
             UpdatePrivilege()
         End If
-        
     End Sub
 #End Region
 
@@ -438,19 +409,21 @@ Public Class ComputerUser
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds, True)
     End Sub
+
     ''' <summary>
     ''' For Adding Priviledge
-    ''' </summary>Z
+    ''' </summary>
     ''' <remarks></remarks>
     Private Sub PriviledgeChecking()
         Dim privList() As Boolean = {}
         Dim privChunk As String = _privilege
         Dim finalChunk As String = ""
         Dim y As Integer = 0
+
         For cnt As Integer = 0 To 3
             Select Case cnt
                 Case 0
-                    privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
+                    privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
@@ -462,25 +435,25 @@ Public Class ComputerUser
                         finalChunk &= "0"
                     Next
                     finalChunk &= "|"
-                Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow, _resetpassword}
+                Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
                     Next
                     finalChunk &= "|"
-                Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate, _checkprivilege}
+                Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
-                    Next  
+                    Next
             End Select
         Next
-        
         _privilege = finalChunk
     End Sub
 
     Public Sub LoadUserByRow(ByVal dr As DataRow)
         'On Error Resume Next
+
         With dr
             _userID = .Item("UserID")
             _userName = .Item("UserName")
@@ -518,7 +491,6 @@ Public Class ComputerUser
                 .Item("FullName") = _fullName
                 .Item("Privilege") = _privilege
             End With
-
         End If
 
         database.SaveEntry(ds, isNew)
@@ -553,33 +525,6 @@ Public Class ComputerUser
         ds.Tables(0).Rows(0).Item("LastLogin") = Now
         database.SaveEntry(ds, False)
         Console.WriteLine("Login Saved")
-    End Sub
-    Public Sub ChangePassword()
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & POSuser.UserID
-        Dim ds As DataSet = LoadSQL(mySql, fillData)
-
-        ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(_password)
-        SaveEntry(ds, False)
-    End Sub
-
-    Friend Function AddPriv(ByVal setNum As priv_set, Optional ByVal val As Integer = 1) As String
-        If _privilege Is Nothing Then Return "?"
-
-        Dim PrivList() As String = _privilege.Split("|")
-        PrivList(setNum) &= val
-        Return String.Join("|", PrivList)
-    End Function
-    Friend Sub DefaultAppraiser()
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERNAME <> 'null' AND PRIVILEGE <> 'PDuNxp8S9q0='"
-        Dim filldata As String = "tbl_Gamit"
-        Dim ds As DataSet = LoadSQL(mySql, filldata)
-
-        For Each dsNewRow As DataRow In ds.Tables(filldata).Rows
-            With dsNewRow
-                dsNewRow.Item("PRIVILEGE") = AddPriv(priv_set.Encoder)
-            End With
-            SaveEntry(ds, False)
-        Next
     End Sub
 #End Region
 End Class

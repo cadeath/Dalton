@@ -1,158 +1,23 @@
-[05/19/2016 15:11:55] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
-[05/19/2016 15:30:36] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
-[05/19/2016 15:32:04] System.Data.Odbc.OdbcException (0x80131937): ERROR [23000] [ODBC Firebird Driver][Firebird]validation error for column INTID, value "*** null ***"
-   at System.Data.Common.DbDataAdapter.UpdatedRowStatusErrors(RowUpdatedEventArgs rowUpdatedEvent, BatchCommandInfo[] batchCommands, Int32 commandCount)
-   at System.Data.Common.DbDataAdapter.UpdatedRowStatus(RowUpdatedEventArgs rowUpdatedEvent, BatchCommandInfo[] batchCommands, Int32 commandCount)
-   at System.Data.Common.DbDataAdapter.Update(DataRow[] dataRows, DataTableMapping tableMapping)
-   at System.Data.Common.DbDataAdapter.UpdateFromDataTable(DataTable dataTable, DataTableMapping tableMapping)
-   at System.Data.Common.DbDataAdapter.Update(DataSet dataSet, String srcTable)
-   at Pawnshop.database.SaveEntry(DataSet dsEntry, Boolean isNew) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 97
-   at Pawnshop.frmPawnItem.Storing_Hash(String str) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1531
-   at Pawnshop.db12.PatchUp() in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db12.vb:line 13
-[05/19/2016 15:33:17] SYSTEM PATCHED UP TO 1.2
-[05/19/2016 16:08:00] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
-[05/19/2016 16:11:01] System.Data.Odbc.OdbcException (0x80131937): ERROR [23000] [ODBC Firebird Driver][Firebird]validation error for column INTID, value "*** null ***"
-   at System.Data.Common.DbDataAdapter.UpdatedRowStatusErrors(RowUpdatedEventArgs rowUpdatedEvent, BatchCommandInfo[] batchCommands, Int32 commandCount)
-   at System.Data.Common.DbDataAdapter.UpdatedRowStatus(RowUpdatedEventArgs rowUpdatedEvent, BatchCommandInfo[] batchCommands, Int32 commandCount)
-   at System.Data.Common.DbDataAdapter.Update(DataRow[] dataRows, DataTableMapping tableMapping)
-   at System.Data.Common.DbDataAdapter.UpdateFromDataTable(DataTable dataTable, DataTableMapping tableMapping)
-   at System.Data.Common.DbDataAdapter.Update(DataSet dataSet, String srcTable)
-   at Pawnshop.database.SaveEntry(DataSet dsEntry, Boolean isNew) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 97
-   at Pawnshop.frmPawnItem.Storing_Hash(String str) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1531
-   at Pawnshop.db12.PatchUp() in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db12.vb:line 13
-[05/19/2016 16:11:26] SYSTEM PATCHED UP TO 1.2
-[05/21/2016 08:48:53] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-SAPAACCOUNT
-At line 2, column 70
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/21/2016 08:49:42] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-SAPAACCOUNT
-At line 2, column 70
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/21/2016 09:37:14] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSTYPE
-At line 2, column 59
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/21/2016 15:55:53] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/21/2016 15:56:46] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/21/2016 16:02:02] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/23/2016 08:16:38] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
-[05/23/2016 08:35:10] SYSTEM PATCHED UP TO 1.2
-[05/23/2016 08:38:00] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 08:40:39] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 10:05:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 10:12:27] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 10:19:21] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 10:36:46] FAILED TO LOAD PAWN INFORMATION [DATAROW]
-System.InvalidCastException: Conversion from type 'DBNull' to type 'String' is not valid.
-   at Microsoft.VisualBasic.CompilerServices.Conversions.ToString(Object Value)
-   at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 575
-[05/23/2016 10:39:08] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 10:44:37] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 11:07:19] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 11:17:09] FAILED TO LOAD PAWN INFORMATION [DATAROW]
-System.InvalidCastException: Conversion from type 'DBNull' to type 'String' is not valid.
-   at Microsoft.VisualBasic.CompilerServices.Conversions.ToString(Object Value)
-   at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 575
-[05/23/2016 11:39:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 11:41:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 11:49:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 11:56:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 12:00:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 12:03:12] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:03:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:07:32] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:09:55] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:13:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:16:00] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:31:16] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:33:09] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:33:52] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 13:51:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 14:59:13] SYSTEM PATCHED UP TO 1.2
-[05/23/2016 14:59:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 15:05:52] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 15:20:32] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 15:20:50] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/23/2016 16:31:15] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+[06/23/2016 14:13:01] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/23/2016 15:41:21] FAILED TO LOAD PAWN INFORMATION [DATAROW]
+System.ArgumentException: Column 'PawnID' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 541
+[06/23/2016 15:42:06] FAILED TO LOAD PAWN INFORMATION [DATAROW]
+System.ArgumentException: Column 'PawnID' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 541
+[06/23/2016 15:42:50] FAILED TO LOAD PAWN INFORMATION [DATAROW]
+System.ArgumentException: Column 'PawnID' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 541
+[06/23/2016 16:07:04] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 1, column 43
-DISTINCT
+Token unknown - line 1, column 109
+UPPER
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -162,12 +27,11 @@ DISTINCT
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 08:42:39] SYSTEM PATCHED UP TO 1.2
-[05/24/2016 08:43:02] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/23/2016 16:08:18] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 2, column 1
-WHERE
+Token unknown - line 1, column 109
+UPPER
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -177,14 +41,11 @@ WHERE
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 08:57:38] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/24/2016 08:59:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/24/2016 08:59:36] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/24/2016 09:00:15] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/23/2016 16:08:58] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 2, column 61
-ORDER
+Token unknown - line 1, column 109
+UPPER
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -194,163 +55,11 @@ ORDER
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 10:33:41] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 10:43:18] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 10:52:08] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/24/2016 10:55:45] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/24/2016 10:58:26] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 11:25:33] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 11:26:20] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 11:39:29] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 11:41:07] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 11:59:33] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 13:07:08] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSDATE
-At line 2, column 7
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 13:13:44] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-J.JRL_TRANSDATE
-At line 2, column 9
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 13:15:10] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/23/2016 16:09:34] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 2, column 12
-<>
+Token unknown - line 1, column 109
+UPPER
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -360,11 +69,12 @@ Token unknown - line 2, column 12
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/24/2016 15:38:18] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/23/2016 16:51:19] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/24/2016 09:12:34] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 2, column 11
-=
+Token unknown - line 1, column 31
+OR
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -374,11 +84,11 @@ Token unknown - line 2, column 11
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 09:13:53] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/24/2016 09:13:27] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 2, column 11
-=
+Token unknown - line 1, column 30
+OR
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -388,11 +98,13 @@ Token unknown - line 2, column 11
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 09:51:32] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/24/2016 09:31:07] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/24/2016 14:38:26] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/24/2016 15:37:26] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/24/2016 15:59:32] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 1, column 125
-J
+Unexpected end of command - line 1, column 23
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -402,11 +114,10 @@ J
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 09:54:13] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/24/2016 16:00:09] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 1, column 117
-tblJournal
+Unexpected end of command - line 1, column 23
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -416,12 +127,81 @@ tblJournal
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 09:56:36] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/24/2016 16:00:49] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Unexpected end of command - line 1, column 57
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 09:44:55] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 169
+P
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 09:47:48] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 169
+P
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 09:50:06] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 170
+P
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 09:53:33] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 170
+as
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 09:56:49] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -206
 Column unknown
-TRANSDATE
-At line 2, column 7
+P.PAWNTICKET
+At line 1, column 30
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -431,12 +211,12 @@ At line 2, column 7
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 10:01:15] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 09:58:42] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -206
 Column unknown
-TRANSDATE
-At line 2, column 7
+P.PAWNTICKET
+At line 1, column 30
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -446,200 +226,11 @@ At line 2, column 7
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 10:06:52] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 10:07:11] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 10:07:44] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 10:17:47] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 10:18:39] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSNAME
-At line 1, column 151
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 10:24:26] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 10:25:02] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 10:55:37] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
-[05/25/2016 11:13:55] SYSTEM PATCHED UP TO 1.2
-[05/25/2016 11:32:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:35:29] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:36:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:36:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:37:03] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:43:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:43:47] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:44:16] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:44:31] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 11:46:20] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSNAME
-At line 1, column 151
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 11:52:22] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
-SQL error code = -206
-Column unknown
-TRANSNAME
-At line 1, column 151
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Fujimura\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 135
-[05/25/2016 12:54:49] SYSTEM PATCHED UP TO 1.2
-[05/25/2016 12:55:07] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 12:56:39] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 12:57:16] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 12:57:29] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:05:38] SYSTEM PATCHED UP TO 1.2
-[05/25/2016 13:08:36] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:10:14] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:11:04] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:11:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:14:38] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:15:01] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:16:24] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:21:36] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:21:57] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:23:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:30:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:32:20] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/25/2016 13:48:38] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 09:11:31] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 09:21:18] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 09:25:35] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 10:23:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 10:27:31] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 10:48:08] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 10:50:52] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 13:59:27] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 13:59:53] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:00:34] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:00:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:01:23] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:01:41] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:02:14] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:02:38] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:03:01] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:03:28] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:09:51] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:56:15] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 14:56:41] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[05/26/2016 15:14:30] SYSTEM PATCHED UP FROM 1.0.11 TO 1.0.12
-[06/02/2016 17:59:37] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
-[06/02/2016 17:59:41] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/03/2016 11:21:18] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
-[06/03/2016 11:21:28] [ALTER TABLE TBLJOURNAL ADD TRANSTYPE VARCHAR(50);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
-STORE RDB$RELATION_FIELDS failed
-attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
-   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
-[06/03/2016 11:21:32] [CREATE VIEW JOURNAL_SUMMARY(
-  SAPACCOUNT,
-  DEBIT,
-  CREDIT,
-  TRANSTYPE,
-  TRANSDATE,
-  CCNAME)
-AS 
-SELECT SAPACCOUNT,SUM (JRL_DEBIT) AS DEBIT, 
-SUM (JRL_CREDIT) AS CREDIT, TRANSTYPE, 
-JRL_TRANSDATE AS TRANSDATE, CCNAME 
-FROM tblJournal INNER JOIN tblCash on CashID = JRL_TRANSID 
-WHERE Status = 1 
-GROUP BY TRANSTYPE, SAPACCOUNT, JRL_TRANSDATE, CCNAME 
-ORDER BY TRANSTYPE;] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
-Table JOURNAL_SUMMARY already exists
-   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
-   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
-   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
-   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 40
-[06/03/2016 11:21:33] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/03/2016 11:30:37] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 11:30:49] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 11:31:00] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 11:32:29] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 11:32:33] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 11:32:44] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 11:32:56] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 13:59:43] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 14:05:06] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 14:06:40] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 14:08:10] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 14:10:19] Column 'AMOUNT' does not belong to table TBL_DAILYTIMELOG.
-[06/03/2016 14:15:28] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
-[06/03/2016 14:15:31] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/08/2016 08:27:09] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
-[06/08/2016 08:27:12] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/08/2016 11:26:51] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/08/2016 14:59:02] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/09/2016 08:50:00] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/09/2016 11:21:01] LoadSQL - System.ArgumentException: Fill: expected a non-empty string for the SourceTable name.
-Parameter name: srcTable
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
-[06/09/2016 11:26:25] LoadSQL - System.ArgumentException: Fill: expected a non-empty string for the SourceTable name.
-Parameter name: srcTable
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
-[06/09/2016 11:26:56] LoadSQL - System.ArgumentException: Fill: expected a non-empty string for the SourceTable name.
-Parameter name: srcTable
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
-[06/09/2016 11:29:07] LoadSQL - System.ArgumentException: Fill: expected a non-empty string for the SourceTable name.
-Parameter name: srcTable
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
-[06/09/2016 11:38:42] LoadSQL - System.ArgumentException: Fill: expected a non-empty string for the SourceTable name.
-Parameter name: srcTable
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
-[06/09/2016 11:40:53] LoadSQL - System.ArgumentException: Fill: expected a non-empty string for the SourceTable name.
-Parameter name: srcTable
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
-[06/09/2016 11:41:32] LoadSQL - System.ArgumentException: Fill: expected a non-empty string for the SourceTable name.
-Parameter name: srcTable
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
-   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
-[06/09/2016 11:47:44] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 10:00:49] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
 SQL error code = -104
-Token unknown - line 1, column 37
-=
+Token unknown - line 1, column 150
+as
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
@@ -649,20 +240,103 @@ Token unknown - line 1, column 37
    at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
-   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 159
-[06/09/2016 14:06:24] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 10:01:00] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 10:03:41] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 13:48:03] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 14:47:29] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 15:52:05] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 15:57:46] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 16:11:04] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 16:13:02] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 16:26:17] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/11/2016 16:29:57] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 08:28:17] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 08:50:10] [ALTER TABLE TBLJOURNAL ADD TRANSTYPE VARCHAR(50);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 10:02:00] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+PAWNER
+At line 1, column 292
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 10:05:27] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 151
+P
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 10:06:15] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 150
+INNER
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 10:06:41] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+PAWNER
+At line 1, column 303
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/25/2016 10:21:38] FAILED TO LOAD PAWN INFORMATION [DATAROW]
+System.ArgumentException: Column 'ClientID' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 544
+[06/25/2016 10:44:03] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/25/2016 10:45:23] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/28/2016 15:45:52] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/28/2016 17:11:36] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/29/2016 09:38:15] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -804
+Function unknown
+RTRIM
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/29/2016 11:41:37] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 222
+)
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
+[06/29/2016 11:55:14] [ALTER TABLE TBLJOURNAL ADD TRANSTYPE VARCHAR(50);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
 STORE RDB$RELATION_FIELDS failed
 attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
    at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
@@ -670,57 +344,6 @@ attempt to store duplicate value (visible to active transactions) in unique inde
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
    at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
    at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MIS JunMar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 45
-[06/13/2016 08:50:12] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 08:50:51] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 09:12:07] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 09:28:47] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 09:31:49] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 10:28:45] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 10:33:56] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 10:36:31] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 10:37:13] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 10:44:12] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 10:55:53] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:06:15] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:08:13] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:14:19] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:17:35] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:19:17] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:20:39] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:27:06] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:32:38] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:39:51] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:42:56] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 11:57:29] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 12:59:15] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 13:03:57] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 13:05:35] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 13:25:22] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 13:26:38] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 13:28:16] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 13:58:35] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 14:05:57] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 14:19:18] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 14:20:13] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 14:29:46] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 14:52:56] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 15:11:40] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 15:32:56] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 15:36:55] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 15:47:50] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 15:52:43] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 15:55:42] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 15:56:34] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 16:20:55] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 16:30:25] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 16:35:15] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/13/2016 16:38:39] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 08:08:33] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 08:29:35] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 08:32:13] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 08:44:49] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 08:52:20] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 09:58:26] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 10:01:16] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 10:34:33] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
-[06/14/2016 10:42:59] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[06/29/2016 11:55:16] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/02/2016 15:37:53] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/02/2016 15:37:59] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1

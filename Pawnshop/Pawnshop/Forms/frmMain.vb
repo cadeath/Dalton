@@ -122,6 +122,7 @@
             MsgBoxAuthoriation("You don't have access to User Management")
             Exit Sub
         End If
+
         frmUserManagement.Show()
     End Sub
 
@@ -439,8 +440,4 @@
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
-    Private Sub ChangePasswordToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangePasswordToolStripMenuItem.Click
-        frmChangePassword.Show()
-
-    End Sub
 End Class
