@@ -2,7 +2,7 @@
 
     Private selectedUser As New ComputerUser
     Private moduleName As String = "User Management"
-    Private OTPSwitchOff As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    Private OTPSwitch As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub frmUserManagement_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         ClearFields()
@@ -221,7 +221,7 @@
         Return True
     End Function
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        If Not OTPSwitchOff Then
+        If Not OTPSwitch Then
             diagOTP.FormType = diagOTP.OTPType.UserManagement
             If Not CheckOTP() Then Exit Sub
         Else
