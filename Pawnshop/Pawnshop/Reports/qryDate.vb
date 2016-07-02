@@ -144,7 +144,7 @@
         mySql &= vbCrLf & "FROM PAWNING "
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-        mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
+        mySql &= vbCrLf & "AND STATUS <> 'RENEWED' AND STATUS <> 'REDEEM' AND STATUS <> 'VOID'"
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim addPara As New Dictionary(Of String, String)

@@ -581,3 +581,5 @@ At line 5, column 16
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 158
 [07/01/2016 13:33:46] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/02/2016 13:35:04] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[07/02/2016 13:35:08] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
