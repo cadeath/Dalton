@@ -552,5 +552,13 @@ Public Class ComputerUser
         database.SaveEntry(ds, False)
         Console.WriteLine("Login Saved")
     End Sub
+
+    Public Sub ChangePassword()
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & POSuser.UserID
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+        ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(_password)
+        SaveEntry(ds, False)
+    End Sub
 #End Region
 End Class

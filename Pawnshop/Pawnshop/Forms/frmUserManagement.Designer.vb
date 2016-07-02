@@ -61,20 +61,20 @@ Partial Class frmUserManagement
         Me.chkJE = New System.Windows.Forms.CheckBox()
         Me.chkEL = New System.Windows.Forms.CheckBox()
         Me.tbManager = New System.Windows.Forms.TabPage()
+        Me.chkResetPassword = New System.Windows.Forms.CheckBox()
         Me.chkBorrowings = New System.Windows.Forms.CheckBox()
         Me.chkMaAll = New System.Windows.Forms.CheckBox()
         Me.chkUS = New System.Windows.Forms.CheckBox()
         Me.chkUR = New System.Windows.Forms.CheckBox()
         Me.chkUM = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
+        Me.chkPrivilege = New System.Windows.Forms.CheckBox()
         Me.chkMigrate = New System.Windows.Forms.CheckBox()
         Me.chkPullOut = New System.Windows.Forms.CheckBox()
         Me.chkVoid = New System.Windows.Forms.CheckBox()
         Me.chkSpAll = New System.Windows.Forms.CheckBox()
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
-        Me.chkResetPassword = New System.Windows.Forms.CheckBox()
-        Me.chkPrivilege = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -478,6 +478,16 @@ Partial Class frmUserManagement
         Me.tbManager.Text = "Manager"
         Me.tbManager.UseVisualStyleBackColor = True
         '
+        'chkResetPassword
+        '
+        Me.chkResetPassword.AutoSize = True
+        Me.chkResetPassword.Location = New System.Drawing.Point(13, 104)
+        Me.chkResetPassword.Name = "chkResetPassword"
+        Me.chkResetPassword.Size = New System.Drawing.Size(103, 17)
+        Me.chkResetPassword.TabIndex = 12
+        Me.chkResetPassword.Text = "Reset Password"
+        Me.chkResetPassword.UseVisualStyleBackColor = True
+        '
         'chkBorrowings
         '
         Me.chkBorrowings.AutoSize = True
@@ -545,6 +555,16 @@ Partial Class frmUserManagement
         Me.tbSpecial.Text = "Special"
         Me.tbSpecial.UseVisualStyleBackColor = True
         '
+        'chkPrivilege
+        '
+        Me.chkPrivilege.AutoSize = True
+        Me.chkPrivilege.Location = New System.Drawing.Point(160, 12)
+        Me.chkPrivilege.Name = "chkPrivilege"
+        Me.chkPrivilege.Size = New System.Drawing.Size(66, 17)
+        Me.chkPrivilege.TabIndex = 15
+        Me.chkPrivilege.Text = "Privilege"
+        Me.chkPrivilege.UseVisualStyleBackColor = True
+        '
         'chkMigrate
         '
         Me.chkMigrate.AutoSize = True
@@ -604,26 +624,6 @@ Partial Class frmUserManagement
         Me.chkCashInBank.TabIndex = 3
         Me.chkCashInBank.Text = "Cash In (Bank)"
         Me.chkCashInBank.UseVisualStyleBackColor = True
-        '
-        'chkResetPassword
-        '
-        Me.chkResetPassword.AutoSize = True
-        Me.chkResetPassword.Location = New System.Drawing.Point(13, 104)
-        Me.chkResetPassword.Name = "chkResetPassword"
-        Me.chkResetPassword.Size = New System.Drawing.Size(103, 17)
-        Me.chkResetPassword.TabIndex = 12
-        Me.chkResetPassword.Text = "Reset Password"
-        Me.chkResetPassword.UseVisualStyleBackColor = True
-        '
-        'chkPrivilege
-        '
-        Me.chkPrivilege.AutoSize = True
-        Me.chkPrivilege.Location = New System.Drawing.Point(160, 12)
-        Me.chkPrivilege.Name = "chkPrivilege"
-        Me.chkPrivilege.Size = New System.Drawing.Size(66, 17)
-        Me.chkPrivilege.TabIndex = 15
-        Me.chkPrivilege.Text = "Privilege"
-        Me.chkPrivilege.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '

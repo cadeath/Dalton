@@ -259,7 +259,7 @@ Public Class frmUserManagement
 
     Private Sub CheckUsername()
         dbOpen()
-        Dim mysql As String = "SELECT * FROM TBL_GAMIT WHERE USERNAME = '" & txtUser.Text & "'"
+        Dim mysql As String = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
         Dim cmd As OdbcCommand = New OdbcCommand(mysql, con)
         Using reader As OdbcDataReader = cmd.ExecuteReader()
             If reader.HasRows Then
@@ -276,8 +276,9 @@ Public Class frmUserManagement
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        diagOTP.FormType = diagOTP.OTPType.UserManagement
-        If Not CheckOTP() Then Exit Sub
+        'diagOTP.FormType = diagOTP.OTPType.UserManagement
+        'If Not CheckOTP() Then Exit Sub
+        AddUserManagement()
     End Sub
     Friend Sub AddUserManagement()
         If Not PasswordPolicy() Then Exit Sub
@@ -429,4 +430,7 @@ Public Class frmUserManagement
         End If
     End Sub
 
+    Private Sub txtFullname_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFullname.KeyPress
+        CheckUsername()
+    End Sub
 End Class
