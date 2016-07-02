@@ -134,7 +134,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!TotalNet.Value)</Value>
+                              <Value>=sum(Fields!TotalNet.Value) or sum(fields!TotalNet.value)</Value>
                               <Style>
                                 <Format>0;(0)</Format>
                               </Style>
