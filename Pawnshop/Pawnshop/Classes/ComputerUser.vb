@@ -160,6 +160,14 @@ Public Class ComputerUser
         End Get
     End Property
 
+    Private _appraiser As Boolean
+    Public ReadOnly Property canAppraise() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _appraiser
+        End Get
+    End Property
+
     'Supervisor
     Private _expiryList As Boolean
     Public ReadOnly Property canExpiryListGenerate() As Boolean
@@ -250,6 +258,13 @@ Public Class ComputerUser
         End Get
     End Property
 
+    Private _resetpassword As Boolean
+    Public ReadOnly Property canResetPassword() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _resetpassword
+        End Get
+    End Property
     'Special
     Private _cashInBank As Boolean
     Public ReadOnly Property canCashInBank() As Boolean
@@ -291,6 +306,14 @@ Public Class ComputerUser
         End Get
     End Property
 
+    Private _addPrivilege As Boolean
+    Public ReadOnly Property canAddPrivilege() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _addPrivilege
+        End Get
+    End Property
+
     'Super User
     Private _superUser As Boolean
     Public ReadOnly Property isSuperUser() As Boolean
@@ -304,7 +327,7 @@ Public Class ComputerUser
         Dim y As Integer
         'Encoder
         y = 0
-        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+        Dim privList() = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
         _pawn = IIf(parts(y).Substring(0, 1) = "1", True, False)
         _clientList = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _moneyTransfer = IIf(parts(y).Substring(2, 1) = "1", True, False)
@@ -313,6 +336,7 @@ Public Class ComputerUser
         _dollarBuying = IIf(parts(y).Substring(5, 1) = "1", True, False)
         _pos = IIf(parts(y).Substring(6, 1) = "1", True, False)
         _cio = IIf(parts(y).Substring(7, 1) = "1", True, False)
+        _appraiser = IIf(parts(y).Substring(8, 1) = "1", True, False)
         For Each var As Boolean In privList
             If var Then _level = "Encoder"
         Next
@@ -339,7 +363,8 @@ Public Class ComputerUser
         _updateRates = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _settings = IIf(parts(y).Substring(2, 1) = "1", True, False)
         _borrow = IIf(parts(y).Substring(3, 1) = "1", True, False)
-        privList = {_userManagement, _updateRates, _settings, _borrow}
+        _resetpassword = IIf(parts(y).Substring(4, 1) = "1", True, False)
+        privList = {_userManagement, _updateRates, _settings, _borrow, _resetpassword}
         For Each var As Boolean In privList
             If var Then _level = "Manager"
         Next
@@ -352,7 +377,8 @@ Public Class ComputerUser
         _void = IIf(parts(y).Substring(2, 1) = "1", True, False)
         _pullOut = IIf(parts(y).Substring(3, 1) = "1", True, False)
         _migrate = IIf(parts(y).Substring(4, 1) = "1", True, False)
-        privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
+        _addPrivilege = IIf(parts(y).Substring(5, 1) = "1", True, False)
+        privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate, _addPrivilege}
 
         Console.WriteLine("Level is " & _level)
     End Sub
@@ -368,10 +394,10 @@ Public Class ComputerUser
 
             For cnt As Integer = 0 To TabCnt - 1
                 Select Case cnt
-                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
                     Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
-                    Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
-                    Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
+                    Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow, _resetpassword}
+                    Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate, _addPrivilege}
                 End Select
 
                 For Each e In privList
@@ -423,7 +449,7 @@ Public Class ComputerUser
         For cnt As Integer = 0 To 3
             Select Case cnt
                 Case 0
-                    privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+                    privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
@@ -435,13 +461,13 @@ Public Class ComputerUser
                         finalChunk &= "0"
                     Next
                     finalChunk &= "|"
-                Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
+                Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow, _resetpassword}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
                     Next
                     finalChunk &= "|"
-                Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
+                Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate, _addPrivilege}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
