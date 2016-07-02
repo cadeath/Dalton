@@ -1,6 +1,6 @@
 ﻿Public Class frmSettings
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
-    Private OTPSwitch As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lblSAP01.Text = "SAP Code 01"
         ClearFields()
@@ -70,7 +70,7 @@
         If Not locked Then
             UpdateSetting()
         Else
-            If Not OTPSwitch Then
+            If Not OTPDisable Then
                 diagOTP.FormType = diagOTP.OTPType.Settings
                 If Not CheckOTP() Then Exit Sub
             Else
