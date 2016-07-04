@@ -557,12 +557,6 @@
         Me.Close()
     End Sub
 
-
-
- 
-    
-
-
     Friend Sub LoadSenderInfo(ByVal cl As Client)
         txtSender.Text = String.Format("{0} {1}", cl.FirstName, cl.LastName)
         txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)

@@ -533,51 +533,10 @@
     End Sub
     Private Sub MoneyTransferBracketing()
 
-        Dim StartDay = GetFirstDate(monCal.SelectionStart)
-        Dim EndDay = GetLastDate(monCal.SelectionEnd)
+        diagMoneyTransferBracketing.st = GetFirstDate(monCal.SelectionStart)
+        diagMoneyTransferBracketing.en = GetLastDate(monCal.SelectionEnd)
 
-        Dim filldata As String = "dsMoneyTransferBracketing"
-        Dim mySql As String = "SELECT id, transdate, "
-        mySql &= "case "
-        mySql &= "WHEN NETAMOUNT between '1' and '100' and servicetype = 'Pera Padala' THEN 'Below 100' "
-        mySql &= "WHEN NETAMOUNT between '101' and '200' and servicetype = 'Pera Padala' THEN '200' "
-        mySql &= "WHEN NETAMOUNT between '201' and '300' and servicetype = 'Pera Padala' THEN '300' "
-        mySql &= "WHEN NETAMOUNT between '301' and '500' and servicetype = 'Pera Padala' then '500' "
-        mySql &= "WHEN NETAMOUNT between '501' and '700' and servicetype = 'Pera Padala' then '700' "
-        mySql &= "WHEN NETAMOUNT between '701' and '1000' and servicetype = 'Pera Padala' then '1000' "
-        mySql &= "WHEN NETAMOUNT between '1001' and '1500' and servicetype = 'Pera Padala' then '1500' "
-        mySql &= "when NETAMOUNT between '1501' and '2000' and servicetype = 'Pera Padala' then '2000' "
-        mySql &= "when NETAMOUNT between '2001' and '2500' and servicetype = 'Pera Padala' then '2500' "
-        mySql &= "when NETAMOUNT between '2501' and '3000' and servicetype = 'Pera Padala' then '3000' "
-        mySql &= "when NETAMOUNT between '3001' and '3500' and servicetype = 'Pera Padala' then '3500' "
-        mySql &= "when NETAMOUNT between '3501' and '4000' and servicetype = 'Pera Padala' then '4000' "
-        mySql &= "when NETAMOUNT between '4001' and '5000' and servicetype = 'Pera Padala' then '5000' "
-        mySql &= "when NETAMOUNT between '5001' and '6500' and servicetype = 'Pera Padala' then '6500' "
-        mySql &= "when NETAMOUNT between '6501' and '7000' and servicetype = 'Pera Padala' then '7000' "
-        mySql &= "when NETAMOUNT between '7001' and '9500' and servicetype = 'Pera Padala' then '9500' "
-        mySql &= "when NETAMOUNT between '9501' and '10000' and servicetype = 'Pera Padala' then '10000' "
-        mySql &= "when NETAMOUNT between '10001' and '14000' and servicetype = 'Pera Padala' then '14000' "
-        mySql &= "when NETAMOUNT between '14001' and '15000' and servicetype = 'Pera Padala' then '15000' "
-        mySql &= "when NETAMOUNT between '15001' and '20000' and servicetype = 'Pera Padala' then '20000' "
-        mySql &= "when NETAMOUNT between '20001' and '30000' and servicetype = 'Pera Padala' then '30000' "
-        mySql &= "when NETAMOUNT between '30001' and '40000' and servicetype = 'Pera Padala' then '40000' "
-        mySql &= "when NETAMOUNT between '40001' and '50000' and servicetype = 'Pera Padala' then '50000' "
-        mySql &= "end as netamount, "
-        mySql &= "netamount as TotalNet "
-        mySql &= "FROM TBLMONEYTRANSFER "
-        mySql &= "where servicetype = 'Pera Padala' and "
-        mySql &= String.Format(" transdate BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
-        mySql &= " order BY netamount"
-        Console.WriteLine(mySql)
-
-        Dim addParameters As New Dictionary(Of String, String)
-
-        addParameters.Add("txtMonthstart", "DATE: " & StartDay.ToShortDateString)
-        addParameters.Add("txtMonthend", "DATE: " & EndDay.ToShortDateString)
-        addParameters.Add("branchName", branchName)
-
-        frmReport.ReportInit(mySql, filldata, "Reports\rpt_MoneyTransferBracketing.rdlc", addParameters)
-        frmReport.Show()
+        diagMoneyTransferBracketing.Show()
     End Sub
 
     ' STEP 4

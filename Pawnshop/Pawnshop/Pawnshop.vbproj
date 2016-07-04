@@ -541,6 +541,12 @@
     <Compile Include="Reports\frmSegreList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
+      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\diagMoneyTransferBracketing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qryCashInOut.Designer.vb">
       <DependentUpon>qryCashInOut.vb</DependentUpon>
     </Compile>
@@ -742,6 +748,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\diagMoneyTransferBracketing.resx">
+      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>

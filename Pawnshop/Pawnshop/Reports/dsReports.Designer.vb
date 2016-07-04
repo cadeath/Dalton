@@ -6594,13 +6594,17 @@ Partial Public Class dsReports
     Partial Public Class MoneyTransferBracketingDataTable
         Inherits Global.System.Data.TypedTableBase(Of MoneyTransferBracketingRow)
         
-        Private columnID As Global.System.Data.DataColumn
+        Private columnTRANSID As Global.System.Data.DataColumn
         
-        Private columnTransdate As Global.System.Data.DataColumn
+        Private columnSERVICETYPE As Global.System.Data.DataColumn
         
-        Private columnNetamount As Global.System.Data.DataColumn
+        Private columnMONEYTRANS As Global.System.Data.DataColumn
         
-        Private columnTotalnet As Global.System.Data.DataColumn
+        Private columnTRANSAMOUNT As Global.System.Data.DataColumn
+        
+        Private columnBRACKET As Global.System.Data.DataColumn
+        
+        Private columnTRANSDATE As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -6639,33 +6643,49 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property IDColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property TRANSIDColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnID
+                Return Me.columnTRANSID
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property TransdateColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property SERVICETYPEColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnTransdate
+                Return Me.columnSERVICETYPE
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property NetamountColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property MONEYTRANSColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnNetamount
+                Return Me.columnMONEYTRANS
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property TotalnetColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property TRANSAMOUNTColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnTotalnet
+                Return Me.columnTRANSAMOUNT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property BRACKETColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBRACKET
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TRANSDATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTRANSDATE
             End Get
         End Property
         
@@ -6706,9 +6726,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddMoneyTransferBracketingRow(ByVal ID As String, ByVal Transdate As String, ByVal Netamount As String, ByVal Totalnet As String) As MoneyTransferBracketingRow
+        Public Overloads Function AddMoneyTransferBracketingRow(ByVal TRANSID As String, ByVal SERVICETYPE As String, ByVal MONEYTRANS As String, ByVal TRANSAMOUNT As String, ByVal BRACKET As String, ByVal TRANSDATE As String) As MoneyTransferBracketingRow
             Dim rowMoneyTransferBracketingRow As MoneyTransferBracketingRow = CType(Me.NewRow,MoneyTransferBracketingRow)
-            Dim columnValuesArray() As Object = New Object() {ID, Transdate, Netamount, Totalnet}
+            Dim columnValuesArray() As Object = New Object() {TRANSID, SERVICETYPE, MONEYTRANS, TRANSAMOUNT, BRACKET, TRANSDATE}
             rowMoneyTransferBracketingRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMoneyTransferBracketingRow)
             Return rowMoneyTransferBracketingRow
@@ -6731,27 +6751,29 @@ Partial Public Class dsReports
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Sub InitVars()
-            Me.columnID = MyBase.Columns("ID")
-            Me.columnTransdate = MyBase.Columns("Transdate")
-            Me.columnNetamount = MyBase.Columns("Netamount")
-            Me.columnTotalnet = MyBase.Columns("TotalNet")
+            Me.columnTRANSID = MyBase.Columns("TRANSID")
+            Me.columnSERVICETYPE = MyBase.Columns("SERVICETYPE")
+            Me.columnMONEYTRANS = MyBase.Columns("MONEYTRANS")
+            Me.columnTRANSAMOUNT = MyBase.Columns("TRANSAMOUNT")
+            Me.columnBRACKET = MyBase.Columns("BRACKET")
+            Me.columnTRANSDATE = MyBase.Columns("TRANSDATE")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnID)
-            Me.columnTransdate = New Global.System.Data.DataColumn("Transdate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTransdate)
-            Me.columnNetamount = New Global.System.Data.DataColumn("Netamount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnNetamount)
-            Me.columnTotalnet = New Global.System.Data.DataColumn("TotalNet", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            Me.columnTotalnet.ExtendedProperties.Add("Generator_ColumnPropNameInRow", "Totalnet")
-            Me.columnTotalnet.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "TotalnetColumn")
-            Me.columnTotalnet.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnTotalnet")
-            Me.columnTotalnet.ExtendedProperties.Add("Generator_UserColumnName", "TotalNet")
-            MyBase.Columns.Add(Me.columnTotalnet)
+            Me.columnTRANSID = New Global.System.Data.DataColumn("TRANSID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTRANSID)
+            Me.columnSERVICETYPE = New Global.System.Data.DataColumn("SERVICETYPE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSERVICETYPE)
+            Me.columnMONEYTRANS = New Global.System.Data.DataColumn("MONEYTRANS", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnMONEYTRANS)
+            Me.columnTRANSAMOUNT = New Global.System.Data.DataColumn("TRANSAMOUNT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTRANSAMOUNT)
+            Me.columnBRACKET = New Global.System.Data.DataColumn("BRACKET", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBRACKET)
+            Me.columnTRANSDATE = New Global.System.Data.DataColumn("TRANSDATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTRANSDATE)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11566,110 +11588,164 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property ID() As String
+        Public Property TRANSID() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMoneyTransferBracketing.IDColumn),String)
+                    Return CType(Me(Me.tableMoneyTransferBracketing.TRANSIDColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ID' in table 'MoneyTransferBracketing' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TRANSID' in table 'MoneyTransferBracketing' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMoneyTransferBracketing.IDColumn) = value
+                Me(Me.tableMoneyTransferBracketing.TRANSIDColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Transdate() As String
+        Public Property SERVICETYPE() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMoneyTransferBracketing.TransdateColumn),String)
+                    Return CType(Me(Me.tableMoneyTransferBracketing.SERVICETYPEColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Transdate' in table 'MoneyTransferBracketing' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SERVICETYPE' in table 'MoneyTransferBracketing' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMoneyTransferBracketing.TransdateColumn) = value
+                Me(Me.tableMoneyTransferBracketing.SERVICETYPEColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Netamount() As String
+        Public Property MONEYTRANS() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMoneyTransferBracketing.NetamountColumn),String)
+                    Return CType(Me(Me.tableMoneyTransferBracketing.MONEYTRANSColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Netamount' in table 'MoneyTransferBracketing' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'MONEYTRANS' in table 'MoneyTransferBracketing' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMoneyTransferBracketing.NetamountColumn) = value
+                Me(Me.tableMoneyTransferBracketing.MONEYTRANSColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Totalnet() As String
+        Public Property TRANSAMOUNT() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMoneyTransferBracketing.TotalnetColumn),String)
+                    Return CType(Me(Me.tableMoneyTransferBracketing.TRANSAMOUNTColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TotalNet' in table 'MoneyTransferBracketing' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TRANSAMOUNT' in table 'MoneyTransferBracketing' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMoneyTransferBracketing.TotalnetColumn) = value
+                Me(Me.tableMoneyTransferBracketing.TRANSAMOUNTColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsIDNull() As Boolean
-            Return Me.IsNull(Me.tableMoneyTransferBracketing.IDColumn)
+        Public Property BRACKET() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMoneyTransferBracketing.BRACKETColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'BRACKET' in table 'MoneyTransferBracketing' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMoneyTransferBracketing.BRACKETColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property TRANSDATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMoneyTransferBracketing.TRANSDATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TRANSDATE' in table 'MoneyTransferBracketing' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMoneyTransferBracketing.TRANSDATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTRANSIDNull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransferBracketing.TRANSIDColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetIDNull()
-            Me(Me.tableMoneyTransferBracketing.IDColumn) = Global.System.Convert.DBNull
+        Public Sub SetTRANSIDNull()
+            Me(Me.tableMoneyTransferBracketing.TRANSIDColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTransdateNull() As Boolean
-            Return Me.IsNull(Me.tableMoneyTransferBracketing.TransdateColumn)
+        Public Function IsSERVICETYPENull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransferBracketing.SERVICETYPEColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTransdateNull()
-            Me(Me.tableMoneyTransferBracketing.TransdateColumn) = Global.System.Convert.DBNull
+        Public Sub SetSERVICETYPENull()
+            Me(Me.tableMoneyTransferBracketing.SERVICETYPEColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsNetamountNull() As Boolean
-            Return Me.IsNull(Me.tableMoneyTransferBracketing.NetamountColumn)
+        Public Function IsMONEYTRANSNull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransferBracketing.MONEYTRANSColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetNetamountNull()
-            Me(Me.tableMoneyTransferBracketing.NetamountColumn) = Global.System.Convert.DBNull
+        Public Sub SetMONEYTRANSNull()
+            Me(Me.tableMoneyTransferBracketing.MONEYTRANSColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTotalnetNull() As Boolean
-            Return Me.IsNull(Me.tableMoneyTransferBracketing.TotalnetColumn)
+        Public Function IsTRANSAMOUNTNull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransferBracketing.TRANSAMOUNTColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTotalnetNull()
-            Me(Me.tableMoneyTransferBracketing.TotalnetColumn) = Global.System.Convert.DBNull
+        Public Sub SetTRANSAMOUNTNull()
+            Me(Me.tableMoneyTransferBracketing.TRANSAMOUNTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsBRACKETNull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransferBracketing.BRACKETColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetBRACKETNull()
+            Me(Me.tableMoneyTransferBracketing.BRACKETColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsTRANSDATENull() As Boolean
+            Return Me.IsNull(Me.tableMoneyTransferBracketing.TRANSDATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetTRANSDATENull()
+            Me(Me.tableMoneyTransferBracketing.TRANSDATEColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
