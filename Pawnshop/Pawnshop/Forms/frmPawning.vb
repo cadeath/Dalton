@@ -168,10 +168,9 @@
 
         ElseIf rbPawner.Checked Then
             For Each name In strWords
-                mySql &= vbCr & " UPPER(FIRSTNAME) LIKE UPPER('%" & name & "%') OR  "
-                mySql &= vbCr & " UPPER(LASTNAME) LIKE UPPER('%" & name & "%') OR "
-                mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') OR "
-
+                'mySql &= vbCr & " UPPER(FIRSTNAME) LIKE UPPER('%" & name & "%') OR  "
+                'mySql &= vbCr & " UPPER(LASTNAME) LIKE UPPER('%" & name & "%') OR "
+                mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
                 If name Is strWords.Last Then
                     mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
                     Exit For
@@ -183,10 +182,15 @@
         ElseIf rbAll.Checked Then
             If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
             mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & secured_str & "%') "
+            For Each name In strWords
+                'mySql &= vbCr & " UPPER(FIRSTNAME) LIKE UPPER('%" & name & "%') OR  "
+                'mySql &= vbCr & " UPPER(LASTNAME) LIKE UPPER('%" & name & "%') OR "
+                mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
+                If name Is strWords.Last Then
+                    mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
+                    Exit For
+                End If
+            Next
         End If
 
         Console.WriteLine("SQL: " & mySql)
