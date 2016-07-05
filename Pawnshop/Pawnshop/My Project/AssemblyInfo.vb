@@ -31,5 +31,10 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
+<<<<<<< HEAD
 <Assembly: AssemblyVersion("1.2.2.4")> 
 <Assembly: AssemblyFileVersion("1.2.2.4")> 
+=======
+<Assembly: AssemblyVersion("1.2.2.3")> 
+<Assembly: AssemblyFileVersion("1.2.2.3")>
+>>>>>>> refs/remotes/origin/master
