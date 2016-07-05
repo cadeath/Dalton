@@ -41,7 +41,7 @@
 
         fillData = "dsPawn"
         mySql = "SELECT "
-        mySql &= vbCrLf & "	P.ORDATE, P.ORNUM, P.PAWNTICKET,"
+        mySql &= vbCrLf & " P.ORDATE, P.ORNUM, P.PAWNTICKET,"
         mySql &= vbCrLf & "    C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,"
         mySql &= vbCrLf & "    P.PRINCIPAL, P.RENEWDUE, P.REDEEMDUE,"
         mySql &= vbCrLf & "    CASE P.STATUS"
@@ -53,7 +53,7 @@
         mySql &= vbCrLf & "     WHEN 'W' THEN 'PULLOUT'"
         mySql &= vbCrLf & "    END AS STATUS"
         mySql &= vbCrLf & "FROM "
-        mySql &= vbCrLf & "	TBLPAWN P "
+        mySql &= vbCrLf & " TBLPAWN P "
         mySql &= vbCrLf & "    LEFT JOIN TBLPAWN P2"
         mySql &= vbCrLf & "    ON P.PAWNTICKET = P2.OLDTICKET"
         mySql &= vbCrLf & "    INNER JOIN TBLCLIENT C"
