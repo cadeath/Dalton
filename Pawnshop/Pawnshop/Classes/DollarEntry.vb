@@ -184,12 +184,12 @@ Public Class DollarEntry
             MsgBox("Transaction not found!", MsgBoxStyle.Critical)
             Exit Sub
         End If
-
+        Dim TransType As String = ""
         ds.Tables(0).Rows(0).Item("Status") = "V"
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
 
-        RemoveJournal("Ref# " & _dollarID)
+        ' RemoveJournal("Ref# " & _dollarID,transID:= )
         Console.WriteLine("Transaction #" & _dollarID & " void")
     End Sub
 
