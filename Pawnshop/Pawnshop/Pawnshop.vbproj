@@ -623,6 +623,9 @@
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\AuctionMonthlyReportJWL.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
     </EmbeddedResource>
@@ -751,6 +754,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryAuction.resx">
+      <DependentUpon>qryAuction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>

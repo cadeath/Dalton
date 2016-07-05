@@ -27,19 +27,20 @@ Partial Class qryAuction
         Me.rbALL = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rbJWL = New System.Windows.Forms.RadioButton()
+        Me.rbMonthly = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'monCal
         '
-        Me.monCal.Location = New System.Drawing.Point(137, 10)
+        Me.monCal.Location = New System.Drawing.Point(167, 6)
         Me.monCal.Name = "monCal"
         Me.monCal.TabIndex = 2
         '
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(137, 178)
+        Me.btnGenerate.Location = New System.Drawing.Point(167, 174)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(227, 28)
         Me.btnGenerate.TabIndex = 3
@@ -60,11 +61,12 @@ Partial Class qryAuction
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.rbMonthly)
         Me.GroupBox1.Controls.Add(Me.rbALL)
         Me.GroupBox1.Controls.Add(Me.rbJWL)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 62)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(115, 73)
+        Me.GroupBox1.Size = New System.Drawing.Size(146, 156)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         '
@@ -78,11 +80,21 @@ Partial Class qryAuction
         Me.rbJWL.Text = "JWL"
         Me.rbJWL.UseVisualStyleBackColor = True
         '
+        'rbMonthly
+        '
+        Me.rbMonthly.AutoSize = True
+        Me.rbMonthly.Location = New System.Drawing.Point(9, 73)
+        Me.rbMonthly.Name = "rbMonthly"
+        Me.rbMonthly.Size = New System.Drawing.Size(130, 17)
+        Me.rbMonthly.TabIndex = 11
+        Me.rbMonthly.Text = "Auction Montly Report"
+        Me.rbMonthly.UseVisualStyleBackColor = True
+        '
         'qryAuction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(372, 218)
+        Me.ClientSize = New System.Drawing.Size(406, 207)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
@@ -98,4 +110,5 @@ Partial Class qryAuction
     Friend WithEvents rbALL As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents rbJWL As System.Windows.Forms.RadioButton
+    Friend WithEvents rbMonthly As System.Windows.Forms.RadioButton
 End Class
