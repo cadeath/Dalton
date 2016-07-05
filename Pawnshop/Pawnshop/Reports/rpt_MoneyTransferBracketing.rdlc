@@ -229,8 +229,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=COUNT(Fields!ID.Value)</Value>
-                              <Style />
+                              <Value>=Count(Fields!ID.Value)</Value>
+                              <Style>
+                                <Format>0;(0);'-'</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -263,7 +265,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!TRANSAMOUNT.Value) or Sum(Fields!TRANSAMOUNT.Value)</Value>
                               <Style>
-                                <Format>0;(0)</Format>
+                                <Format>0;(0);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
