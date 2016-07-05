@@ -257,8 +257,8 @@ Public Class frmExtractor
 
         Dim mySql As String = "SELECT J.JRL_TRANSDATE as TRANSDATE, C.TRANSNAME, C.SAPACCOUNT, J.JRL_DEBIT AS DEBIT, J.JRL_CREDIT AS CREDIT, J.CCNAME, J.STATUS, J.TRANSTYPE " & _
         "FROM tblJournal AS J INNER JOIN tblCash AS C on C.CashID = J.JRL_TRANSID " & vbCrLf & _
-        String.Format("WHERE J.JRL_TRANSDATE = '{0}' AND J.Status = 1 AND C.SAPACCOUNT <> 'null' AND J.TRANSTYPE is null", sd.ToShortDateString)
-
+        String.Format("WHERE J.JRL_TRANSDATE = '{0}' AND J.Status = 1 AND C.SAPACCOUNT <> 'null' AND J.TRANSTYPE is null ", sd.ToShortDateString)
+        'mySql &= "ORDER BY J.TRANSTYPE"
         Dim mySql2 As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
        "FROM JOURNAL_SUMMARY " & vbCrLf & _
        String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
