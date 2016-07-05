@@ -23,18 +23,20 @@ Partial Class diagMoneyTransferBracketing
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbGPRS = New System.Windows.Forms.RadioButton()
         Me.rbPeraPadalapmftc = New System.Windows.Forms.RadioButton()
         Me.rbWesternIntl = New System.Windows.Forms.RadioButton()
         Me.rbCebuana = New System.Windows.Forms.RadioButton()
         Me.rbWestern = New System.Windows.Forms.RadioButton()
         Me.rbPeraPadala = New System.Windows.Forms.RadioButton()
         Me.btnOK = New System.Windows.Forms.Button()
-        Me.rbGPRS = New System.Windows.Forms.RadioButton()
+        Me.cboGrprs = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cboGrprs)
         Me.GroupBox1.Controls.Add(Me.rbGPRS)
         Me.GroupBox1.Controls.Add(Me.rbPeraPadalapmftc)
         Me.GroupBox1.Controls.Add(Me.rbWesternIntl)
@@ -43,10 +45,20 @@ Partial Class diagMoneyTransferBracketing
         Me.GroupBox1.Controls.Add(Me.rbPeraPadala)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(160, 160)
+        Me.GroupBox1.Size = New System.Drawing.Size(160, 192)
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Service Names"
+        '
+        'rbGPRS
+        '
+        Me.rbGPRS.AutoSize = True
+        Me.rbGPRS.Location = New System.Drawing.Point(6, 134)
+        Me.rbGPRS.Name = "rbGPRS"
+        Me.rbGPRS.Size = New System.Drawing.Size(55, 17)
+        Me.rbGPRS.TabIndex = 7
+        Me.rbGPRS.Text = "GPRS"
+        Me.rbGPRS.UseVisualStyleBackColor = True
         '
         'rbPeraPadalapmftc
         '
@@ -103,28 +115,29 @@ Partial Class diagMoneyTransferBracketing
         'btnOK
         '
         Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOK.Location = New System.Drawing.Point(30, 178)
+        Me.btnOK.Location = New System.Drawing.Point(42, 210)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(107, 42)
         Me.btnOK.TabIndex = 9
         Me.btnOK.Text = "&OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
-        'rbGPRS
+        'cboGrprs
         '
-        Me.rbGPRS.AutoSize = True
-        Me.rbGPRS.Location = New System.Drawing.Point(6, 134)
-        Me.rbGPRS.Name = "rbGPRS"
-        Me.rbGPRS.Size = New System.Drawing.Size(55, 17)
-        Me.rbGPRS.TabIndex = 7
-        Me.rbGPRS.Text = "GPRS"
-        Me.rbGPRS.UseVisualStyleBackColor = True
+        Me.cboGrprs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboGrprs.Enabled = False
+        Me.cboGrprs.FormattingEnabled = True
+        Me.cboGrprs.Items.AddRange(New Object() {"GPRS to GPRS", "GPRS to Smart Money,", "GPRS to BANK (UCPB/PNB)", "GPRS to BANK (BDO/Chinabank)", "GPRS to BANK (DBP)", "GPRS to BANK (MetroBank)", "GPRS to BANK (Maybank/LandBank)", "iREMIT to GPRS", "NYBP/Transfast to GPRS", "GPRS to Moneygram"})
+        Me.cboGrprs.Location = New System.Drawing.Point(6, 157)
+        Me.cboGrprs.Name = "cboGrprs"
+        Me.cboGrprs.Size = New System.Drawing.Size(148, 21)
+        Me.cboGrprs.TabIndex = 8
         '
         'diagMoneyTransferBracketing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(183, 225)
+        Me.ClientSize = New System.Drawing.Size(183, 261)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -144,4 +157,5 @@ Partial Class diagMoneyTransferBracketing
     Friend WithEvents rbWesternIntl As System.Windows.Forms.RadioButton
     Friend WithEvents rbPeraPadalapmftc As System.Windows.Forms.RadioButton
     Friend WithEvents rbGPRS As System.Windows.Forms.RadioButton
+    Friend WithEvents cboGrprs As System.Windows.Forms.ComboBox
 End Class
