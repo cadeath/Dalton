@@ -134,6 +134,8 @@
     </Compile>
     <Compile Include="ReCompute\PawningDalton.vb" />
     <Compile Include="ReCompute\recompute.vb" />
+    <Compile Include="Workbook.vb" />
+    <Compile Include="Worksheet.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FixInterestHistory\frmFixIntHistory.resx">

@@ -150,4 +150,10 @@
         frmmoneyexchange.LoadTransDollar(tmpLoad)
     End Sub
 
+    Private Sub lvDollar_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvDollar.MouseClick
+        Dim tmpLoad As New DollarTransaction
+        Dim id As Integer = lvDollar.FocusedItem.Tag
+        tmpLoad.LoadDollar(id)
+        lblDollarID.Text = id
+    End Sub
 End Class

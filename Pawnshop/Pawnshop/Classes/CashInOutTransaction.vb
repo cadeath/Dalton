@@ -155,19 +155,19 @@
         'If _transName = NO_ENTRIES Then Exit Sub 'Replenishment No Entries
         Select Case _type
             Case "Receipt"
-                AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
-                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category)
+                AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , TransType:="Receipt", TransID:=LastIDNumber)
+                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, TransType:="Receipt", TransID:=LastIDNumber)
             Case "Disbursement"
-                AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
-                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, , , _category)
+                AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , TransType:="Disbursement", TransID:=LastIDNumber)
+                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, , , _category, TransType:="Disbursement", TransID:=LastIDNumber)
             Case "INVENTORY IN"
-                AddJournal(_amount, "Debit", "Smart Money Inventory Offsetting Account", "Ref# " & Me.LastIDNumber)
-                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect, , _category)
+                AddJournal(_amount, "Debit", "Smart Money Inventory Offsetting Account", "Ref# " & Me.LastIDNumber, , , , TransType:="INVENTORY IN", TransID:=LastIDNumber)
+                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect, , _category, TransType:="INVENTORY IN", TransID:=LastIDNumber)
             Case "BDO ATM CASHOUT"
                 Dim ComAmnt As Double = GetOption("BDOCommissionRate")
-                AddJournal(_amount + ComAmnt, "Debit", "Due to/from BDO", "Ref# " & Me.LastIDNumber)
-                AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect)
-                AddJournal(ComAmnt, "Credit", "Income from BDO ATM CashOut", "Ref# " & Me.LastIDNumber, , False, _category)
+                AddJournal(_amount + ComAmnt, "Debit", "Due to/from BDO", "Ref# " & Me.LastIDNumber, , , , TransType:="BDO ATM CASHOUT", TransID:=LastIDNumber)
+                AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , TransType:="BDO ATM CASHOUT", TransID:=LastIDNumber)
+                AddJournal(ComAmnt, "Credit", "Income from BDO ATM CashOut", "Ref# " & Me.LastIDNumber, , False, _category, TransType:="BDO ATM CASHOUT", TransID:=LastIDNumber)
             Case Else
                 MsgBox(_type & " not found", MsgBoxStyle.Critical, "Developer WARNING")
         End Select
@@ -181,6 +181,17 @@
             Return 0
         End If
         Return ds.Tables(0).Rows(0).Item("TransID")
+        Return ds.Tables(0).Rows(0).Item("Type")
+    End Function
+
+    Public Function LoadType() As String
+        Dim mysql1 As String = "SELECT * FROM " & fillData & " WHERE TransID =" & frmCIO_List.lblCashID.Text
+
+        Dim ds As DataSet = LoadSQL(mysql1, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("Type")
     End Function
 
 End Class
