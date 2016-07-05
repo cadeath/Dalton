@@ -256,17 +256,10 @@
     <Compile Include="Forms\diagAuthorization.vb">
       <SubType>Form</SubType>
     </Compile>
-<<<<<<< HEAD
-    <Compile Include="Reports\qryAuction.Designer.vb">
-      <DependentUpon>qryAuction.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\qryAuction.vb">
-=======
     <Compile Include="Forms\diagOTP.Designer.vb">
       <DependentUpon>diagOTP.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\diagOTP.vb">
->>>>>>> refs/remotes/origin/master
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\AuditReports.vb" />
@@ -547,6 +540,12 @@
     <Compile Include="Reports\frmSegreList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\qryAuction.Designer.vb">
+      <DependentUpon>qryAuction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryAuction.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qryCashInOut.Designer.vb">
       <DependentUpon>qryCashInOut.vb</DependentUpon>
     </Compile>
@@ -617,16 +616,12 @@
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
-    <EmbeddedResource Include="Reports\qryAuction.resx">
-      <DependentUpon>qryAuction.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-=======
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
->>>>>>> refs/remotes/origin/master
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
+    <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
