@@ -33,14 +33,14 @@ Partial Class qryAuction
         '
         'monCal
         '
-        Me.monCal.Location = New System.Drawing.Point(167, 6)
+        Me.monCal.Location = New System.Drawing.Point(226, 6)
         Me.monCal.Name = "monCal"
         Me.monCal.TabIndex = 2
         '
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(167, 174)
+        Me.btnGenerate.Location = New System.Drawing.Point(226, 176)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(227, 28)
         Me.btnGenerate.TabIndex = 3
@@ -51,7 +51,7 @@ Partial Class qryAuction
         '
         Me.rbALL.AutoSize = True
         Me.rbALL.Checked = True
-        Me.rbALL.Location = New System.Drawing.Point(9, 19)
+        Me.rbALL.Location = New System.Drawing.Point(9, 38)
         Me.rbALL.Name = "rbALL"
         Me.rbALL.Size = New System.Drawing.Size(44, 17)
         Me.rbALL.TabIndex = 10
@@ -64,26 +64,26 @@ Partial Class qryAuction
         Me.GroupBox1.Controls.Add(Me.rbMonthly)
         Me.GroupBox1.Controls.Add(Me.rbALL)
         Me.GroupBox1.Controls.Add(Me.rbJWL)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(146, 156)
+        Me.GroupBox1.Size = New System.Drawing.Size(204, 156)
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         '
         'rbMonthly
         '
         Me.rbMonthly.AutoSize = True
-        Me.rbMonthly.Location = New System.Drawing.Point(9, 73)
+        Me.rbMonthly.Location = New System.Drawing.Point(9, 92)
         Me.rbMonthly.Name = "rbMonthly"
-        Me.rbMonthly.Size = New System.Drawing.Size(138, 17)
+        Me.rbMonthly.Size = New System.Drawing.Size(195, 17)
         Me.rbMonthly.TabIndex = 11
-        Me.rbMonthly.Text = "Detailed Auction Report"
+        Me.rbMonthly.Text = "Auction Monthly Transaction Report"
         Me.rbMonthly.UseVisualStyleBackColor = True
         '
         'rbJWL
         '
         Me.rbJWL.AutoSize = True
-        Me.rbJWL.Location = New System.Drawing.Point(8, 48)
+        Me.rbJWL.Location = New System.Drawing.Point(8, 64)
         Me.rbJWL.Name = "rbJWL"
         Me.rbJWL.Size = New System.Drawing.Size(47, 17)
         Me.rbJWL.TabIndex = 9
@@ -94,7 +94,7 @@ Partial Class qryAuction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(406, 207)
+        Me.ClientSize = New System.Drawing.Size(464, 207)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)

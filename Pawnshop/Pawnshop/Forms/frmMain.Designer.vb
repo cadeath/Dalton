@@ -242,101 +242,101 @@ Partial Class frmMain
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(270, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(192, 22)
         Me.ToolStripMenuItem2.Text = "&Monthly Reports"
         '
         'SequenceToolStripMenuItem
         '
         Me.SequenceToolStripMenuItem.Name = "SequenceToolStripMenuItem"
-        Me.SequenceToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.SequenceToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.SequenceToolStripMenuItem.Text = "&Sequence"
         '
         'CashInOutSummaryToolStripMenuItem
         '
         Me.CashInOutSummaryToolStripMenuItem.Name = "CashInOutSummaryToolStripMenuItem"
-        Me.CashInOutSummaryToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.CashInOutSummaryToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.CashInOutSummaryToolStripMenuItem.Text = "Cash In/Out Summary"
         '
         'AuctionMonthlyJewelryReportToolStripMenuItem
         '
         Me.AuctionMonthlyJewelryReportToolStripMenuItem.Name = "AuctionMonthlyJewelryReportToolStripMenuItem"
-        Me.AuctionMonthlyJewelryReportToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
-        Me.AuctionMonthlyJewelryReportToolStripMenuItem.Text = " Auction Monthly Transaction Report"
+        Me.AuctionMonthlyJewelryReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.AuctionMonthlyJewelryReportToolStripMenuItem.Text = " Auction Monthly"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(267, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(189, 6)
         '
         'OutstandingToolStripMenuItem
         '
         Me.OutstandingToolStripMenuItem.Name = "OutstandingToolStripMenuItem"
-        Me.OutstandingToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.OutstandingToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.OutstandingToolStripMenuItem.Text = "&Outstanding"
         '
         'LoanRegisterToolStripMenuItem
         '
         Me.LoanRegisterToolStripMenuItem.Name = "LoanRegisterToolStripMenuItem"
-        Me.LoanRegisterToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.LoanRegisterToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.LoanRegisterToolStripMenuItem.Text = "&Loan Register"
         '
         'MoneyTransferToolStripMenuItem
         '
         Me.MoneyTransferToolStripMenuItem.Name = "MoneyTransferToolStripMenuItem"
-        Me.MoneyTransferToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.MoneyTransferToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.MoneyTransferToolStripMenuItem.Text = "Money Transfer"
         '
         'InsuranceToolStripMenuItem
         '
         Me.InsuranceToolStripMenuItem.Name = "InsuranceToolStripMenuItem"
-        Me.InsuranceToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.InsuranceToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.InsuranceToolStripMenuItem.Text = "&Insurance"
         '
         'DollarReportToolStripMenuItem
         '
         Me.DollarReportToolStripMenuItem.Name = "DollarReportToolStripMenuItem"
-        Me.DollarReportToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.DollarReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.DollarReportToolStripMenuItem.Text = "D&ollar Report"
         '
         'CashInOutToolStripMenuItem
         '
         Me.CashInOutToolStripMenuItem.Name = "CashInOutToolStripMenuItem"
-        Me.CashInOutToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.CashInOutToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.CashInOutToolStripMenuItem.Text = "Cash I&n/Out"
         '
         'SegregatedListToolStripMenuItem
         '
         Me.SegregatedListToolStripMenuItem.Name = "SegregatedListToolStripMenuItem"
-        Me.SegregatedListToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.SegregatedListToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.SegregatedListToolStripMenuItem.Text = "Segregated List"
         '
         'ItemPulloutToolStripMenuItem1
         '
         Me.ItemPulloutToolStripMenuItem1.Name = "ItemPulloutToolStripMenuItem1"
-        Me.ItemPulloutToolStripMenuItem1.Size = New System.Drawing.Size(270, 22)
+        Me.ItemPulloutToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
         Me.ItemPulloutToolStripMenuItem1.Text = "Item &Pullout"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(267, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(189, 6)
         '
         'HourlyReportToolStripMenuItem
         '
         Me.HourlyReportToolStripMenuItem.Name = "HourlyReportToolStripMenuItem"
-        Me.HourlyReportToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.HourlyReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.HourlyReportToolStripMenuItem.Text = "&Hourly Report"
         '
         'HourlySummaryToolStripMenuItem
         '
         Me.HourlySummaryToolStripMenuItem.Name = "HourlySummaryToolStripMenuItem"
-        Me.HourlySummaryToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.HourlySummaryToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.HourlySummaryToolStripMenuItem.Text = "H&ourly Summary"
         '
         'DailyCashCountToolStripMenuItem
         '
         Me.DailyCashCountToolStripMenuItem.Name = "DailyCashCountToolStripMenuItem"
-        Me.DailyCashCountToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+        Me.DailyCashCountToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.DailyCashCountToolStripMenuItem.Text = "&Daily Cash Count"
         '
         'AboutToolStripMenuItem
