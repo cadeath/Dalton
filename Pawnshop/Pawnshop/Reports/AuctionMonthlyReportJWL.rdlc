@@ -743,7 +743,7 @@
         </TablixRowHierarchy>
         <DataSetName>dsAuctionMonthlyJWL</DataSetName>
         <Top>0.02083in</Top>
-        <Left>0.00521in</Left>
+        <Left>0.01563in</Left>
         <Height>0.85417in</Height>
         <Width>2.19272in</Width>
         <Style>
@@ -755,6 +755,7 @@
       </Tablix>
       <Line Name="Line1">
         <Top>0.91667in</Top>
+        <Left>0.01042in</Left>
         <Height>0in</Height>
         <Width>6.95834in</Width>
         <ZIndex>1</ZIndex>
@@ -786,10 +787,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>6.96355in</Width>
+  <Width>6.97397in</Width>
   <Page>
     <PageHeader>
-      <Height>0.42708in</Height>
+      <Height>0.51389in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -810,7 +811,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
-          <Top>0.13194in</Top>
+          <Top>0.25694in</Top>
+          <Left>0.01042in</Left>
           <Height>0.25in</Height>
           <Width>2.51375in</Width>
           <Style>
@@ -842,6 +844,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
+          <Left>0.01042in</Left>
           <Height>0.25in</Height>
           <Width>2.51375in</Width>
           <ZIndex>1</ZIndex>
@@ -874,8 +877,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
-          <Top>0.13889in</Top>
-          <Left>5.455in</Left>
+          <Top>0.26389in</Top>
+          <Left>5.46542in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>2</ZIndex>
@@ -890,10 +893,9 @@
           </Style>
         </Textbox>
         <Line Name="Line2">
-          <Top>0.38194in</Top>
-          <Left>0.00521in</Left>
+          <Top>0.4861in</Top>
           <Height>0in</Height>
-          <Width>6.95834in</Width>
+          <Width>6.97397in</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -934,6 +936,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
+          <Top>0in</Top>
+          <Left>0.01042in</Left>
           <Height>0.25in</Height>
           <Width>1.33334in</Width>
           <Style>
@@ -968,6 +972,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
           <Top>0.20069in</Top>
+          <Left>0.01042in</Left>
           <Height>0.25in</Height>
           <Width>1.33334in</Width>
           <ZIndex>1</ZIndex>
@@ -1000,7 +1005,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Left>2.77778in</Left>
+          <Top>0in</Top>
+          <Left>2.7882in</Left>
           <Height>0.25in</Height>
           <Width>1.85418in</Width>
           <ZIndex>2</ZIndex>
@@ -1034,7 +1040,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
           <Top>0.23958in</Top>
-          <Left>5.455in</Left>
+          <Left>5.46542in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>3</ZIndex>
@@ -1067,7 +1073,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Left>5.46542in</Left>
+          <Top>0in</Top>
+          <Left>5.47584in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>4</ZIndex>
@@ -1090,8 +1097,8 @@
     </PageFooter>
     <LeftMargin>0.75in</LeftMargin>
     <RightMargin>0.75in</RightMargin>
-    <TopMargin>0.25in</TopMargin>
-    <BottomMargin>0.25in</BottomMargin>
+    <TopMargin>0.75in</TopMargin>
+    <BottomMargin>0.5in</BottomMargin>
     <Style />
   </Page>
   <rd:ReportID>d438e0fa-13e2-41a5-af76-ddd727f386c2</rd:ReportID>
