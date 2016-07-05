@@ -157,19 +157,26 @@
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
+        Dim strWords As String() = secured_str.Split(New Char() {" "c})
         Dim mySql As String
+        Dim name As String
 
-        mySql = "SELECT * "
-        mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
-        If rbDescription.Checked Then
-            mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
+            mySql = "SELECT * "
+            mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
+            If rbDescription.Checked Then
+            mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
 
         ElseIf rbPawner.Checked Then
-            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & secured_str & "%') "
+            For Each name In strWords
+                mySql &= vbCr & " UPPER(FIRSTNAME) LIKE UPPER('%" & name & "%') OR  "
+                mySql &= vbCr & " UPPER(LASTNAME) LIKE UPPER('%" & name & "%') OR "
+                mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') OR "
 
+                If name Is strWords.Last Then
+                    mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
+                    Exit For
+                End If
+            Next
         ElseIf rbPawnTicket.Checked Then
             mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'"
 
@@ -204,6 +211,7 @@
             lvPawners.Items(0).Selected = True
             lvPawners.Items(0).EnsureVisible()
         End If
+
     End Sub
     ''' <summary>
     ''' to perform enter without clicking the search button.
