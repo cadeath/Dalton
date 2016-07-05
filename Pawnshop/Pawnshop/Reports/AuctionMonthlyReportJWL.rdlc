@@ -160,7 +160,7 @@
                     <rd:DefaultName>Textbox211</rd:DefaultName>
                     <Style>
                       <Border>
-                        <Style>Solid</Style>
+                        <Style>None</Style>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
@@ -235,6 +235,7 @@
                         <Style>Solid</Style>
                         <Width>1pt</Width>
                       </RightBorder>
+                      <VerticalAlign>Bottom</VerticalAlign>
                       <PaddingLeft>2pt</PaddingLeft>
                       <PaddingRight>2pt</PaddingRight>
                       <PaddingTop>2pt</PaddingTop>
@@ -252,7 +253,7 @@
               <Width>0.32813in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.76042in</Width>
+              <Width>0.86459in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -519,7 +520,7 @@
                     <rd:DefaultName>Principal2</rd:DefaultName>
                     <Style>
                       <Border>
-                        <Style>Solid</Style>
+                        <Style>None</Style>
                       </Border>
                       <TopBorder>
                         <Color>Black</Color>
@@ -744,31 +745,11 @@
         <Top>0.02083in</Top>
         <Left>0.00521in</Left>
         <Height>0.85417in</Height>
-        <Width>2.08855in</Width>
+        <Width>2.19272in</Width>
         <Style>
           <Border>
-            <Style>Solid</Style>
+            <Style>None</Style>
           </Border>
-          <TopBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </TopBorder>
-          <BottomBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </BottomBorder>
-          <LeftBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </LeftBorder>
-          <RightBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </RightBorder>
           <FontSize>9pt</FontSize>
         </Style>
       </Tablix>

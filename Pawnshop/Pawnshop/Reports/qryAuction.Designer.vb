@@ -26,8 +26,8 @@ Partial Class qryAuction
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.rbALL = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.rbJWL = New System.Windows.Forms.RadioButton()
         Me.rbMonthly = New System.Windows.Forms.RadioButton()
+        Me.rbJWL = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -70,6 +70,16 @@ Partial Class qryAuction
         Me.GroupBox1.TabIndex = 4
         Me.GroupBox1.TabStop = False
         '
+        'rbMonthly
+        '
+        Me.rbMonthly.AutoSize = True
+        Me.rbMonthly.Location = New System.Drawing.Point(9, 73)
+        Me.rbMonthly.Name = "rbMonthly"
+        Me.rbMonthly.Size = New System.Drawing.Size(138, 17)
+        Me.rbMonthly.TabIndex = 11
+        Me.rbMonthly.Text = "Detailed Auction Report"
+        Me.rbMonthly.UseVisualStyleBackColor = True
+        '
         'rbJWL
         '
         Me.rbJWL.AutoSize = True
@@ -79,16 +89,6 @@ Partial Class qryAuction
         Me.rbJWL.TabIndex = 9
         Me.rbJWL.Text = "JWL"
         Me.rbJWL.UseVisualStyleBackColor = True
-        '
-        'rbMonthly
-        '
-        Me.rbMonthly.AutoSize = True
-        Me.rbMonthly.Location = New System.Drawing.Point(9, 73)
-        Me.rbMonthly.Name = "rbMonthly"
-        Me.rbMonthly.Size = New System.Drawing.Size(130, 17)
-        Me.rbMonthly.TabIndex = 11
-        Me.rbMonthly.Text = "Auction Montly Report"
-        Me.rbMonthly.UseVisualStyleBackColor = True
         '
         'qryAuction
         '

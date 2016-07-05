@@ -6,13 +6,13 @@
     Private Sub btnGenerate_Click(sender As System.Object, e As System.EventArgs) Handles btnGenerate.Click
         If rbJWL.Checked Then ReportType = "JEWELRIES"
         If rbALL.Checked Then ReportType = "ALL"
-        If rbMonthly.Checked Then ReportType = "Auction Montly Report"
+        If rbMonthly.Checked Then ReportType = "Detailed Auction Report"
         Select ReportType
             Case "ALL"
                 AuctionMonthly_Category()
             Case "JEWELRIES"
                 AuctionMonthly_CategoryJWLOnly()
-            Case "Auction Montly Report"
+            Case "Detailed Auction Report"
                 AuctionMonthly()
         End Select
     End Sub
