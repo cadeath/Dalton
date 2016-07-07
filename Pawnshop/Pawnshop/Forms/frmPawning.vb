@@ -332,5 +332,14 @@
 
     Private Sub rbDescription_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbDescription.Click
         txtSearch.Clear()
+
+	End Sub
+    Private Sub lvPawners_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
+        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
+        Dim tpmstatus As New PawnTicket
+        Dim tmpTicket As New PawnTicket
+        Label5.Text = idx
+        Label6.Text = tpmstatus.LoadStatus
+
     End Sub
 End Class

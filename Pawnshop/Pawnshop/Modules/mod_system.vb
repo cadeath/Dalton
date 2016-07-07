@@ -16,7 +16,7 @@ Module mod_system
     ''' <remarks></remarks>
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
-    Public PROTOTYPE As Boolean = True
+    Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
 
@@ -46,8 +46,7 @@ Module mod_system
 #End Region
 
 #Region "Store"
-    Private storeDB As String = "tblDaily"
-
+    Private storeDB As String = "tblDaily" 'declare storeDB as string and initialize by tblDaily.
     ''' <summary>
     ''' This function will open the store.
     ''' if the store is open then this function select all data from storeDB. 
@@ -185,7 +184,6 @@ Module mod_system
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
-
         'if dataset read data then then cc will hold cashcount in the currentdate
         'the user information will be save.
         If ds.Tables(storeDB).Rows.Count = 1 Then
@@ -242,7 +240,6 @@ Module mod_system
             UpdateOptions("CurrentBalance", cc)
             MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
         Else
-            Log_Report("[CashCount] " & mySql)
             MsgBox("Error in closing store" + vbCr + "Contact your IT Department", MsgBoxStyle.Critical)
         End If
     End Sub
@@ -422,7 +419,7 @@ Module mod_system
         Dim mySql As String, fillData As String = "TBLCASH"
         mySql = "SELECT * FROM " & fillData
         mySql &= String.Format(" WHERE TRANSNAME = '{0}'", TRANS)
-
+        '"REMARKS LIKE '%{0}%'", srcStr)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         ds = LoadSQL(mySql, fillData)
 

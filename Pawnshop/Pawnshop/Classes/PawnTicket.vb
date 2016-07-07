@@ -3,8 +3,8 @@
 '  - Include Interest Hashing
 
 Public Class PawnTicket
-
     Dim fillData As String = "tblPawn"
+    Dim fillData1 As String = "TBL_DAILYTIMELOG"
     Dim mySql As String = ""
     Dim ds As DataSet
 
@@ -599,15 +599,33 @@ Public Class PawnTicket
 
     Public Sub VoidCancelTicket()
         Try
-            Dim curStatus As String = _status
+            Dim PtransID As Integer
+            Dim ModNAME As String = ""
+            If frmPawning.Label6.Text = "L" Then
+                ModNAME = "NEW LOANS"
+                PtransID = frmPawning.Label5.Text
+            ElseIf frmPawning.Label6.Text = "X" Then
+                ModNAME = "REDEMPTION"
+                PtransID = frmPawning.Label5.Text
+            ElseIf frmPawning.Label6.Text = "R" Then
+                ModNAME = "RENEWALS"
+                PtransID = frmPawning.Label5.Text
+            End If
 
-            If _status = "L" Then
+            ' Dim tranID As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
+
+            Dim curStatus As String = _status
+            Dim PTNum As String = String.Format("{0:000000}", Me._pawnTicket)
+            Dim PTtransid As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
+            If curStatus = "L" Then
                 ChangeStatus("V")
-                RemoveJournal("PT# " & _pawnTicket)
+                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveDailyTimeLog(PTtransid, ModNAME)
                 Exit Sub
             End If
 
-            If _status <> "X" Then
+
+            If curStatus <> "X" Then
                 ChangeStatus("V")
             End If
 
@@ -619,7 +637,7 @@ Public Class PawnTicket
                 Dim st As String
                 If ds.Tables(fillData).Rows.Count = 0 Then
                     ChangeStatus("L")
-                    RemoveJournal("PT# " & _pawnTicket)
+                    RemoveJournal(transID:=PtransID, TransType:=ModNAME)
                     Exit Sub
                 Else
                     If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
@@ -642,10 +660,13 @@ Public Class PawnTicket
                     .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
-                RemoveJournal("PT# " & _oldTicket)
+                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                ' RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket), transID:=PtransID)
+                RemoveDailyTimeLog(PTtransid, ModNAME)
             Else
                 ChangeStatus("L")
-                RemoveJournal("PT# " & _pawnTicket)
+                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveDailyTimeLog(PTtransid, ModNAME)
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
@@ -669,6 +690,27 @@ Public Class PawnTicket
         ds.Tables(fillData).Rows(0).Item("PullOut") = dt
         database.SaveEntry(ds, False)
     End Sub
+
+
+    Public Function LoadLastIDNumberPawn() As Single
+        Dim mySql As String = "SELECT * FROM TBLPAWN ORDER BY PAWNID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("PAWNID")
+    End Function
+
+    Public Function LoadStatus() As String
+        Dim mysql1 As String = "SELECT PAWNID,STATUS FROM " & fillData & " WHERE PAWNID =" & frmPawning.Label5.Text
+
+        Dim ds1 As DataSet = LoadSQL(mysql1, fillData)
+        If ds1.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds1.Tables(0).Rows(0).Item("STATUS")
+    End Function
 
 #End Region
 End Class
