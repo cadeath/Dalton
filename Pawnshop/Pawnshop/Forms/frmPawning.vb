@@ -158,8 +158,7 @@
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
         Dim strWords As String() = secured_str.Split(New Char() {" "c})
-        Dim mySql As String
-        Dim name As String
+        Dim mySql As String, name As String
 
             mySql = "SELECT * "
             mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
@@ -167,30 +166,35 @@
             mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
 
         ElseIf rbPawner.Checked Then
+
             For Each name In strWords
-                'mySql &= vbCr & " UPPER(FIRSTNAME) LIKE UPPER('%" & name & "%') OR  "
-                'mySql &= vbCr & " UPPER(LASTNAME) LIKE UPPER('%" & name & "%') OR "
                 mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
                 If name Is strWords.Last Then
                     mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
                     Exit For
                 End If
             Next
+
         ElseIf rbPawnTicket.Checked Then
+
             mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'"
 
         ElseIf rbAll.Checked Then
+
             If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
+
             mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
+
             For Each name In strWords
-                'mySql &= vbCr & " UPPER(FIRSTNAME) LIKE UPPER('%" & name & "%') OR  "
-                'mySql &= vbCr & " UPPER(LASTNAME) LIKE UPPER('%" & name & "%') OR "
+
                 mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
                 If name Is strWords.Last Then
                     mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
                     Exit For
                 End If
+
             Next
+
         End If
 
         Console.WriteLine("SQL: " & mySql)
@@ -318,22 +322,11 @@
         LoadActive()
     End Sub
 
-    Private Sub rbAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbAll.Click
+    Private Sub rbPawnTicket_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPawnTicket.Click, _
+        rbPawner.Click, rbDescription.Click, rbAll.Click
         txtSearch.Clear()
     End Sub
 
-    Private Sub rbPawnTicket_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPawnTicket.Click
-        txtSearch.Clear()
-    End Sub
-
-    Private Sub rbPawner_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPawner.Click
-        txtSearch.Clear()
-    End Sub
-
-    Private Sub rbDescription_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbDescription.Click
-        txtSearch.Clear()
-
-	End Sub
     Private Sub lvPawners_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
         Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
         Dim tpmstatus As New PawnTicket
