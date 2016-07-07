@@ -869,7 +869,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>AUCTION MONTHLY REPORT</Value>
+                  <Value>AUCTION MONTHLY REPORT - JEWELRIES</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                   </Style>
@@ -883,7 +883,7 @@
           <rd:DefaultName>Textbox25</rd:DefaultName>
           <Left>0.01042in</Left>
           <Height>0.25in</Height>
-          <Width>2.51375in</Width>
+          <Width>3.68042in</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
