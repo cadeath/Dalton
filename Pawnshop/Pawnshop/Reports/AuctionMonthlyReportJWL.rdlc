@@ -207,7 +207,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Count</Value>
-                              <Style />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -223,12 +225,12 @@
                         <TopBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>1.5pt</Width>
                         </TopBorder>
                         <BottomBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>1.5pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Color>Black</Color>
@@ -275,12 +277,12 @@
                         <TopBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>1.5pt</Width>
                         </TopBorder>
                         <BottomBorder>
                           <Color>Black</Color>
                           <Style>Solid</Style>
-                          <Width>1pt</Width>
+                          <Width>1.5pt</Width>
                         </BottomBorder>
                         <LeftBorder>
                           <Color>Black</Color>
@@ -634,6 +636,12 @@
                       <Border>
                         <Style>None</Style>
                       </Border>
+                      <TopBorder>
+                        <Width>1.5pt</Width>
+                      </TopBorder>
+                      <BottomBorder>
+                        <Width>1.5pt</Width>
+                      </BottomBorder>
                       <LeftBorder>
                         <Color>Black</Color>
                         <Style>Solid</Style>
@@ -783,10 +791,10 @@
         </Style>
       </Tablix>
       <Line Name="Line1">
-        <Top>1.04167in</Top>
+        <Top>1.16667in</Top>
         <Left>0.01042in</Left>
         <Height>0in</Height>
-        <Width>6.95834in</Width>
+        <Width>10.07292in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -795,7 +803,7 @@
         </Style>
       </Line>
     </ReportItems>
-    <Height>1.11805in</Height>
+    <Height>1.16667in</Height>
     <Style>
       <Border>
         <Style>None</Style>
@@ -816,7 +824,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>6.97397in</Width>
+  <Width>10.09376in</Width>
   <Page>
     <PageHeader>
       <Height>0.51389in</Height>
@@ -907,7 +915,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
           <Top>0.26389in</Top>
-          <Left>5.46542in</Left>
+          <Left>8.59042in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>2</ZIndex>
@@ -924,7 +932,7 @@
         <Line Name="Line2">
           <Top>0.4861in</Top>
           <Height>0in</Height>
-          <Width>6.97397in</Width>
+          <Width>10.09376in</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -965,7 +973,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0in</Top>
           <Left>0.01042in</Left>
           <Height>0.25in</Height>
           <Width>1.33334in</Width>
@@ -1034,8 +1041,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0in</Top>
-          <Left>2.7882in</Left>
+          <Left>4.2882in</Left>
           <Height>0.25in</Height>
           <Width>1.85418in</Width>
           <ZIndex>2</ZIndex>
@@ -1069,7 +1075,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
           <Top>0.23958in</Top>
-          <Left>5.46542in</Left>
+          <Left>8.59042in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>3</ZIndex>
@@ -1102,8 +1108,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0in</Top>
-          <Left>5.47584in</Left>
+          <Left>8.60084in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>4</ZIndex>
@@ -1124,9 +1129,11 @@
         </Border>
       </Style>
     </PageFooter>
-    <LeftMargin>0.75in</LeftMargin>
-    <RightMargin>0.75in</RightMargin>
-    <TopMargin>0.75in</TopMargin>
+    <PageHeight>8.5in</PageHeight>
+    <PageWidth>11in</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <TopMargin>0.5in</TopMargin>
     <BottomMargin>0.5in</BottomMargin>
     <Style />
   </Page>
