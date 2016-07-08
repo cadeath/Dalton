@@ -1,4 +1,6 @@
 ﻿Module db1222
+    Const ALLOWABLE_VERSION As String = "1.2.2.1"
+    Const LATEST_VERSION As String = "1.2.2.4"
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
@@ -97,9 +99,27 @@
             strGprs2Moneygram &= "WHERE TBLMONEYTRANSFER.SERVICETYPE = 'GPRS - GPRS to Moneygram'"
 
             RunCommand(strBracket)
+            RunCommand(strWestern)
+            RunCommand(strWesternInlt)
+            RunCommand(strPeraPadala)
+            RunCommand(strPeraPadalaPmftc)
+            RunCommand(strCebuana)
+            RunCommand(strGprs2Gprs)
+            RunCommand(strGprs2SmartMoney)
+            RunCommand(strGprs2UCPBPNB)
+            RunCommand(strGprs2BDOChina)
+            RunCommand(strGprs2BankDBP)
+            RunCommand(strGprs2BankMetro)
+            RunCommand(strGprs2MayLandBank)
+            RunCommand(strGprs2iRemit)
+            RunCommand(strGprs2Transfast)
+            RunCommand(strGprs2Moneygram)
 
 
+            Database_Update(LATEST_VERSION)
+            Log_Report("SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.4")
         Catch ex As Exception
+            Log_Report("[1.2.2.4]" & ex.ToString)
         End Try
     End Sub
 End Module
