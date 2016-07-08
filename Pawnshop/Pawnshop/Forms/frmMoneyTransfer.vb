@@ -426,6 +426,51 @@ Public Class frmMoneyTransfer
                 transID = idMR
             End If
         End If
+
+        Dim fillData As String = "tblCharge", strType As String, strBracket As String
+        Dim strAmount As String = txtAmount.Text
+
+        If cboType.Text = "Cebuana Llhuiller" Then
+            strType = "cebuana"
+        ElseIf cboType.Text = "Pera Padala - PMFTC" Then
+            strType = "perapadalapmftc"
+        ElseIf cboType.Text = "Pera Padala" Then
+            strType = "perapadala"
+        ElseIf cboType.Text = "Western Union - Local" Then
+            strType = "western"
+        ElseIf cboType.Text = "Western Union - Intl" Then
+            strType = "western - intl"
+        ElseIf cboType.Text = "GPRS - GPRS to Smart Money" Then
+            strType = "gprs to smartmoney"
+        ElseIf cboType.Text = "GPRS - GPRS to BANK (UCPB/PNB)" Then
+            strType = "gprs to bank-ucpbpnb"
+        ElseIf cboType.Text = "GPRS - GPRS to BANK (BDO/Chinabank)" Then
+            strType = "gprs to bank-bdochina"
+        ElseIf cboType.Text = "GPRS - GPRS to BANK (DBP)" Then
+            strType = "gprs to dbp"
+        ElseIf cboType.Text = "GPRS - GPRS to BANK (MetroBank)" Then
+            strType = "gprs to metrobank"
+        ElseIf cboType.Text = "GPRS - GPRS to BANK (MetroBank)" Then
+            strType = "gprs to metrobank"
+        ElseIf cboType.Text = "GPRS - GPRS to BANK (Maybank/LandBank)" Then
+            strType = "gprs to maylandbank"
+        ElseIf cboType.Text = "GPRS - iREMIT to GPRS" Then
+            strType = "iremit to gprs"
+        ElseIf cboType.Text = "GPRS - NYBP/Transfast to GPRS" Then
+            strType = "nybptransfast to gprs"
+        ElseIf cboType.Text = "GPRS - GPRS to Moneygram" Then
+            strType = "gprs to moneygram"
+        ElseIf cboType.Text = "GPRS - GPRS to GPRS" Then
+            strType = "gprs to gprs"
+        End If
+        
+        Dim ds As DataSet, mySql As String
+        mySql = "SELECT AMOUNT FROM tblcharge C "
+        mySql &= " WHERE type = '" & strType & "' and '" & strAmount & "' <= C.AMOUNT ORDER BY AMOUNT ASC ROWS 1"
+        ds = LoadSQL(mySql, fillData)
+        strBracket = ds.Tables(fillData).Rows(0).Item("AMOUNT")
+
+
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             'Send Money - Branch Received Money (Send In) - 0
@@ -444,6 +489,7 @@ Public Class frmMoneyTransfer
             .Location = cboLocation.Text
             .Status = "A" 'Active
             .EncoderID = UserID
+            .Bracket = strBracket
             .Save()
             Select Case cboType.Text
                 Case "Pera Padala"

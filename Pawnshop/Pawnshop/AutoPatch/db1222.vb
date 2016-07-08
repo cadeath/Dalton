@@ -1,6 +1,6 @@
 ﻿Module db1222
     Const ALLOWABLE_VERSION As String = "1.2.2.1"
-    Const LATEST_VERSION As String = "1.2.2.4"
+    Const LATEST_VERSION As String = "1.2.2.2"
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
@@ -117,9 +117,9 @@
 
 
             Database_Update(LATEST_VERSION)
-            Log_Report("SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.4")
+            Log_Report("SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2")
         Catch ex As Exception
-            Log_Report("[1.2.2.4]" & ex.ToString)
+            Log_Report("[1.2.2.2]" & ex.ToString)
         End Try
     End Sub
 End Module

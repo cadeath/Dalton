@@ -434,3 +434,10 @@ attempt to store duplicate value (visible to active transactions) in unique inde
 [07/08/2016 13:23:29] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
 [07/08/2016 13:23:47] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.4
 [07/08/2016 13:25:45] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.4
+[07/08/2016 14:56:35] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 14:56:53] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.4
+[07/08/2016 15:10:31] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 15:10:49] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/08/2016 15:13:15] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/08/2016 16:13:53] Input string was not in a correct format.Couldn't store <> in TRANSID Column.  Expected type is Int64.
+[07/08/2016 16:14:01] Input string was not in a correct format.Couldn't store <> in TRANSID Column.  Expected type is Int64.

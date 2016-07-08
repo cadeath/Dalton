@@ -16,6 +16,7 @@
     Private _netAmount As Double = 0
     Private _encoderID As Integer
     Private _status As String
+    Private _bracket As String
 #End Region
 
 #Region "Properties"
@@ -156,6 +157,15 @@
             Return _encoderID
         End Get
     End Property
+
+    Public Property Bracket As String
+        Set(ByVal value As String)
+            _bracket = value
+        End Set
+        Get
+            Return _bracket
+        End Get
+    End Property
 #End Region
 
 #Region "Procedures and Functions"
@@ -219,6 +229,7 @@
             .Item("Status") = _status
             .Item("EncoderID") = _encoderID
             .Item("SystemInfo") = Now
+            .Item("Bracket") = _bracket
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
