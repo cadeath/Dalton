@@ -76,7 +76,7 @@
             If Not ToDisplay Then .Item("ToDisplay") = 0
             If Remarks <> "" Then .Item("Remarks") &= "| "
             .Item("Remarks") &= Remarks
-            .Item("TRANSID") = TransID
+            '.Item("TRANSID") = TransID
         End With
         ds.Tables(tblName).Rows.Add(dsNewRow)
         database.SaveEntry(ds)

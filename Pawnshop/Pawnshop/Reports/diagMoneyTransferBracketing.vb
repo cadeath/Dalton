@@ -33,6 +33,7 @@
             reportcharge = "western - intl"
 
         End If
+
         If cboGrprs.Text = "GPRS to Smart Money" Then
             reportType2 = "GPRS - GPRS to Smart Money"
             reportCharge2 = "gprs to smartmoney"

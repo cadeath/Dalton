@@ -18,19 +18,10 @@
             RunCommand(mySql)
             AutoIncrement_ID("TBLOTP", "OTPID")
 
-            Bracket()
-
             Database_Update(LATEST_VERSION)
             Log_Report("SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1")
         Catch ex As Exception
             Log_Report("[1.2.2.1]" & ex.ToString)
         End Try
-    End Sub
-    Private Sub Bracket()
-       
-        Dim strBracket As String
-        strBracket = "ALTER TABLE TBLMONEYTRANSFER ADD AMOUNTBRACKET VARCHAR(20);"
-
-        RunCommand(strBracket)
     End Sub
 End Module

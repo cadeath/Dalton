@@ -398,3 +398,36 @@ Token unknown - line 1, column 417
 [07/07/2016 10:36:07] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
 [07/07/2016 11:14:39] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
 [07/07/2016 14:24:26] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:14:40] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:16:39] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:17:55] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:17:57] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/08/2016 11:18:59] [ALTER TABLE TBLMONEYTRANSFER ADD BRACKET VARCHAR(20);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_FIELDS failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 46
+[07/08/2016 11:19:00] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/08/2016 11:20:08] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:28:05] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:30:34] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:32:43] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:32:44] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/08/2016 11:33:00] [ALTER TABLE TBLMONEYTRANSFER ADD BRACKET VARCHAR(20);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_FIELDS failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_15"
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 46
+[07/08/2016 11:33:01] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/08/2016 11:33:29] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:33:32] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/08/2016 11:34:42] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/08/2016 11:35:00] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.4
+[07/08/2016 11:35:55] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.4
+[07/08/2016 12:00:54] Input string was not in a correct format.Couldn't store <> in TRANSID Column.  Expected type is Int64.
