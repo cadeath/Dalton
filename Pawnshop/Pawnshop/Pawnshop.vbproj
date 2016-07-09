@@ -118,7 +118,6 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization">
       <Private>True</Private>
     </Reference>
@@ -267,6 +266,12 @@
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
+    <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
+      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\diagMoneyTransferBracketing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\diagMT.Designer.vb">
       <DependentUpon>diagMT.vb</DependentUpon>
     </Compile>
@@ -542,17 +547,10 @@
     <Compile Include="Reports\frmSegreList.vb">
       <SubType>Form</SubType>
     </Compile>
-
-    <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
-      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\diagMoneyTransferBracketing.vb">
-
     <Compile Include="Reports\qryAuction.Designer.vb">
       <DependentUpon>qryAuction.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\qryAuction.vb">
-
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\qryCashInOut.Designer.vb">
@@ -634,6 +632,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionMonthlyReportJWL.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\diagMoneyTransferBracketing.resx">
+      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
@@ -764,13 +765,8 @@
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-
-    <EmbeddedResource Include="Reports\diagMoneyTransferBracketing.resx">
-      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
-
     <EmbeddedResource Include="Reports\qryAuction.resx">
       <DependentUpon>qryAuction.vb</DependentUpon>
-
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
@@ -782,9 +778,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptd_timelySummary.rdlc" />
-    <EmbeddedResource Include="Reports\rpt_MoneyTransferBracketing.rdlc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_AuctionMonthly.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
