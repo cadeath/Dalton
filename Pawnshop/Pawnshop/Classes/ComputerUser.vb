@@ -8,7 +8,7 @@ Public Class ComputerUser
 
     Private fillData As String = "tbl_Gamit"
     Private mySql As String = String.Empty
-
+   
 #Region "Properties"
     Private _userID As Integer
     Public Property UserID() As Integer
@@ -560,5 +560,6 @@ Public Class ComputerUser
         ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(_password)
         SaveEntry(ds, False)
     End Sub
+    
 #End Region
 End Class
