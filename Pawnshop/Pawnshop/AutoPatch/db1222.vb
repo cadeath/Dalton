@@ -6,7 +6,7 @@
 
         Try
             Dim strBracket As String
-            strBracket = "ALTER TABLE TBLMONEYTRANSFER ADD BRACKET VARCHAR(20);"
+            strBracket = "ALTER TABLE TBLMONEYTRANSFER ADD BRACKET BIGINT;"
 
             Dim strWestern As String
             strWestern = "update TBLMONEYTRANSFER set bracket = "
