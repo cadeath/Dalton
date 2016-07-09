@@ -14,6 +14,7 @@ Version 1.2.2.4
  - Add Audit Report base from the Memo # <missing>
  - Add Monthly Report Monthly Transaction Count
  - Add One-Time Password
+ - Add Auction Monthly Reports
  - Include Auto Patch up to db1.2 v1.2
  - Include BDO and Smart Money Report in Cash In/Out
  - Remove Journal Entries Sorting

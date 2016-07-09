@@ -35,6 +35,7 @@
         AuditPrinLimit = 16
         MonthlyTransactionCountSummary = 17
         MoneyTransferBracketing = 18
+
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -67,8 +68,6 @@
                 DailyInsurance()
             Case ReportType.LoanRenew2
                 LoanRenew2()
-            Case ReportType.AuctionMonthly
-                AuctionMonthly()
             Case ReportType.MoneyTransferBSP
                 MoneyTransfer_BSP()
             Case ReportType.DollarDaily
@@ -79,6 +78,7 @@
                 TransactionCount()
             Case ReportType.MoneyTransferBracketing
                 MoneyTransferBracketing()
+
         End Select
     End Sub
 
@@ -122,8 +122,8 @@
                     FormType = ReportType.ItemPullOut
                 Case "Loan Register - New Loan and Renewal 2"
                     FormType = ReportType.LoanRenew2
-                Case "Auction Monthly Report"
-                    FormType = ReportType.AuctionMonthly
+                    'Case "Auction Monthly Report"
+                    '    FormType = ReportType.AuctionMonthly
                 Case "Money Transfer (BSP)"
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
@@ -137,26 +137,26 @@
         Generate()
     End Sub
 
-    Private Sub AuctionMonthly()
-        Dim mySql As String, dsName As String, rptPath As String
-        dsName = "dsAuction" : rptPath = "Reports\rpt_AuctionMonthly.rdlc"
-        Dim st As Date = GetFirstDate(monCal.SelectionStart)
-        Dim en As Date = GetLastDate(monCal.SelectionStart)
+    'Private Sub AuctionMonthly()
+    '    Dim mySql As String, dsName As String, rptPath As String
+    '    dsName = "dsAuction" : rptPath = "Reports\rpt_AuctionMonthly.rdlc"
+    '    Dim st As Date = GetFirstDate(monCal.SelectionStart)
+    '    Dim en As Date = GetLastDate(monCal.SelectionStart)
 
-        mySql = "SELECT * "
-        mySql &= vbCrLf & "FROM PAWNING "
-        mySql &= vbCrLf & "WHERE "
-        mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-        mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
+    '    mySql = "SELECT * "
+    '    mySql &= vbCrLf & "FROM PAWNING "
+    '    mySql &= vbCrLf & "WHERE "
+    '    mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
+    '    mySql &= vbCrLf & "AND STATUS <> 'RENEWED' AND STATUS <> 'REDEEM' AND STATUS <> 'VOID'"
 
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim addPara As New Dictionary(Of String, String)
-        addPara.Add("txtMonthOf", "FOR THE MONTH OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
-        addPara.Add("branchName", branchName)
+    '    Dim ds As DataSet = LoadSQL(mySql)
+    '    Dim addPara As New Dictionary(Of String, String)
+    '    addPara.Add("txtMonthOf", "FOR THE MONTH OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
+    '    addPara.Add("branchName", branchName)
 
-        frmReport.ReportInit(mySql, dsName, rptPath, addPara)
-        frmReport.Show()
-    End Sub
+    '    frmReport.ReportInit(mySql, dsName, rptPath, addPara)
+    '    frmReport.Show()
+    'End Sub
 
     Private Sub Generate_Hourly()
         Dim mySql As String, dsName As String, rptPath As String

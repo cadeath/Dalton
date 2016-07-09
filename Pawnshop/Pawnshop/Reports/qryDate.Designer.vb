@@ -47,8 +47,10 @@ Partial Class qryDate
         '
         Me.cboReports.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboReports.FormattingEnabled = True
+
         Me.cboReports.Items.AddRange(New Object() {"Schedule of Redeem and Renewal", "Schedule of Loan and Renewal", "Loan Register - New Loan and Renewal 2", "Money Transfer", "Money Transfer (BSP)", "Certificate of Insurance", "Dollar Buying", "Branch Borrowings", "Item Pullout", "Auction Monthly Report", "Monthly Transaction Count Summary", "MoneyTransfer Bracketing"})
         Me.cboReports.Location = New System.Drawing.Point(10, 185)
+
         Me.cboReports.Name = "cboReports"
         Me.cboReports.Size = New System.Drawing.Size(227, 21)
         Me.cboReports.TabIndex = 2
