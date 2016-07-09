@@ -10,13 +10,13 @@ Public Class frmBackUpData
         database.dbName = firebird
         txtPath.Text = firebird
     End Sub
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseSavePath.Click
         If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
 
         txtPath.Text = fbdBackup.SelectedPath
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseBackup.Click
         If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
 
         txtPath2.Text = fbdBackup.SelectedPath
