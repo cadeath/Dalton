@@ -445,7 +445,8 @@
     Private Sub ChangePasswordToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangePasswordToolStripMenuItem.Click
         frmChangePassword.Show()
 
-    Private Sub AuctionMonthlyJewelryReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuctionMonthlyJewelryReportToolStripMenuItem.Click
+    End Sub
+    Private Sub AuctionMonthlyJewelryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuctionMonthlyJewelryReportToolStripMenuItem.Click
         qryAuction.Show()
 
     End Sub
