@@ -36,6 +36,7 @@ Partial Class frmDollarList
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.lblDollarID = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -137,11 +138,22 @@ Partial Class frmDollarList
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
+        'lblDollarID
+        '
+        Me.lblDollarID.AutoSize = True
+        Me.lblDollarID.Location = New System.Drawing.Point(93, 392)
+        Me.lblDollarID.Name = "lblDollarID"
+        Me.lblDollarID.Size = New System.Drawing.Size(61, 13)
+        Me.lblDollarID.TabIndex = 6
+        Me.lblDollarID.Text = "DOLLARID"
+        Me.lblDollarID.Visible = False
+        '
         'frmDollarList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(785, 422)
+        Me.Controls.Add(Me.lblDollarID)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnView)
@@ -171,4 +183,5 @@ Partial Class frmDollarList
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lblDollarID As System.Windows.Forms.Label
 End Class

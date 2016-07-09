@@ -1,11 +1,12 @@
 CHANGELOG
-Version 1.2.3
+Version 1.2.2.4
  - Fix monthly computation for Cellphone
  - Fix Journal Entry Summary
  - Fix Money Transfer Send In/Payout Name
  - Fix Minor Change Rate Problem
  - Fix Loan Register Report Unsort PT
  - Fix OR Sequence Report
+ - Fix Void Errors
  - Add Foreign Currency
  - Add Pawnticket and OR Number every print 
  - Add New Design for About Us
@@ -13,8 +14,10 @@ Version 1.2.3
  - Add Audit Report base from the Memo # <missing>
  - Add Monthly Report Monthly Transaction Count
  - Add One-Time Password
+ - Add Auction Monthly Reports
  - Include Auto Patch up to db1.2 v1.2
  - Include BDO and Smart Money Report in Cash In/Out
+ - Remove Journal Entries Sorting
 
 Version 1.2
  - Fix Current Rate for Active Loans

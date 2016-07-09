@@ -306,19 +306,11 @@
         LoadActive()
     End Sub
 
-    Private Sub rbAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbAll.Click
-        txtSearch.Clear()
-    End Sub
-
-    Private Sub rbPawnTicket_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPawnTicket.Click
-        txtSearch.Clear()
-    End Sub
-
-    Private Sub rbPawner_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPawner.Click
-        txtSearch.Clear()
-    End Sub
-
-    Private Sub rbDescription_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbDescription.Click
-        txtSearch.Clear()
+    Private Sub lvPawners_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
+        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
+        Dim tpmstatus As New PawnTicket
+        Dim tmpTicket As New PawnTicket
+        Label5.Text = idx
+        Label6.Text = tpmstatus.LoadStatus
     End Sub
 End Class

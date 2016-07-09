@@ -235,7 +235,7 @@ Partial Class frmInsurance
         'txtCoi
         '
         Me.txtCoi.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCoi.Location = New System.Drawing.Point(120, 9)
+        Me.txtCoi.Location = New System.Drawing.Point(122, 9)
         Me.txtCoi.Name = "txtCoi"
         Me.txtCoi.ReadOnly = True
         Me.txtCoi.Size = New System.Drawing.Size(108, 25)

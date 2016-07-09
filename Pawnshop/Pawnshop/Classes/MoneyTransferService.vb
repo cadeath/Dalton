@@ -125,5 +125,4 @@
     Public Sub SetReceivedLast(ByVal num As Integer)
         UpdateOptions(_receivedID, num)
     End Sub
-
 End Class
