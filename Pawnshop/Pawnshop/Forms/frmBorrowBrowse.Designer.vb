@@ -25,6 +25,7 @@ Partial Class frmBorrowBrowse
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"ROX00001", "11/01/2015", "PEN", "(1000)", "wala kwarta"}, -1)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBorrowBrowse))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LBLBORROWINGID = New System.Windows.Forms.Label()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.txtDate = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -57,6 +58,7 @@ Partial Class frmBorrowBrowse
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.LBLBORROWINGID)
         Me.GroupBox1.Controls.Add(Me.btnVoid)
         Me.GroupBox1.Controls.Add(Me.txtDate)
         Me.GroupBox1.Controls.Add(Me.Label4)
@@ -77,6 +79,17 @@ Partial Class frmBorrowBrowse
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Burrowings"
+        '
+        'LBLBORROWINGID
+        '
+        Me.LBLBORROWINGID.AutoSize = True
+        Me.LBLBORROWINGID.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBLBORROWINGID.Location = New System.Drawing.Point(9, 209)
+        Me.LBLBORROWINGID.Name = "LBLBORROWINGID"
+        Me.LBLBORROWINGID.Size = New System.Drawing.Size(87, 13)
+        Me.LBLBORROWINGID.TabIndex = 14
+        Me.LBLBORROWINGID.Text = "BORROWINGID"
+        Me.LBLBORROWINGID.Visible = False
         '
         'btnVoid
         '
@@ -364,4 +377,5 @@ Partial Class frmBorrowBrowse
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents sfdMoneyFile As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents LBLBORROWINGID As System.Windows.Forms.Label
 End Class
