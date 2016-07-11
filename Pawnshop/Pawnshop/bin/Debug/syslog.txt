@@ -33,3 +33,9 @@ attempt to store duplicate value (visible to active transactions) in unique inde
    at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
    at Pawnshop.autopatch.RunCommand(String sql) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\autopatch.vb:line 45
 [07/11/2016 13:30:31] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/11/2016 14:36:04] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/11/2016 14:36:09] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/11/2016 14:53:34] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/11/2016 14:53:39] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/11/2016 15:13:33] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/11/2016 15:13:38] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
