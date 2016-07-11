@@ -1,4 +1,7 @@
 ﻿Imports System.Threading
+Imports System.Net
+Imports System.IO
+
 Public Class frmDownloadZip
     Dim wc As System.Net.WebClient
 
@@ -36,5 +39,46 @@ Public Class frmDownloadZip
         Me.Close()
     End Sub
 
- 
+
+
+    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
+        Dim filename As String = TextBox1.Text
+        Dim dest As String = "C:\Users\MIS\Desktop\New folder (2)\syslog.zip"
+
+        Dim name As String = "https://us-mg6.mail.yahoo.com/neo/launch?.rand=03p45809leaoh/syslog.zip"
+
+        Dim wr As HttpWebRequest = CType(WebRequest.Create(name), HttpWebRequest)
+        Dim ws As HttpWebResponse = CType(wr.GetResponse(), HttpWebResponse)
+        Dim str As Stream = ws.GetResponseStream()
+
+        Dim a As Integer = ws.ContentLength
+
+
+
+        Dim inBuf(a) As Byte
+        Dim bytesToRead As Integer = CInt(inBuf.Length)
+        Dim bytesRead As Integer = 0
+        While bytesToRead > 0
+            Dim n As Integer = str.Read(inBuf, bytesRead, bytesToRead)
+            If n = 0 Then
+                Exit While
+            End If
+            bytesRead += n
+            bytesToRead -= n
+        End While
+
+        Dim fstr As New FileStream(dest, FileMode.OpenOrCreate, FileAccess.Write)
+        fstr.Write(inBuf, 0, bytesRead)
+        str.Close()
+        fstr.Close()
+        MessageBox.Show("Downloaded Successfully")
+    End Sub
+
+    Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
+        Dim webClient As New System.Net.WebClient
+
+        webClient.DownloadFile("https://us-mg6.mail.yahoo.com/neo/launch?.rand=03p45809leaoh", "syslog.zip")
+        webClient.Dispose()
+
+    End Sub
 End Class

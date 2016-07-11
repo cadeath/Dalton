@@ -32,6 +32,9 @@ Partial Class frmDownloadZip
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblDownload
@@ -66,7 +69,7 @@ Partial Class frmDownloadZip
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(294, 174)
+        Me.Label1.Location = New System.Drawing.Point(283, 267)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(31, 13)
         Me.Label1.TabIndex = 3
@@ -75,7 +78,7 @@ Partial Class frmDownloadZip
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(23, 187)
+        Me.Label2.Location = New System.Drawing.Point(12, 280)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(46, 13)
         Me.Label2.TabIndex = 4
@@ -84,7 +87,7 @@ Partial Class frmDownloadZip
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(23, 215)
+        Me.Label3.Location = New System.Drawing.Point(12, 308)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(67, 13)
         Me.Label3.TabIndex = 5
@@ -97,11 +100,39 @@ Partial Class frmDownloadZip
         Me.ProgressBar1.Size = New System.Drawing.Size(314, 23)
         Me.ProgressBar1.TabIndex = 6
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(26, 160)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(165, 20)
+        Me.TextBox1.TabIndex = 7
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(26, 186)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(82, 31)
+        Me.Button3.TabIndex = 8
+        Me.Button3.Text = "Download"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(26, 223)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(82, 23)
+        Me.Button4.TabIndex = 9
+        Me.Button4.Text = "Download1"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'frmDownloadZip
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(352, 248)
+        Me.ClientSize = New System.Drawing.Size(352, 343)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -125,4 +156,7 @@ Partial Class frmDownloadZip
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 End Class
