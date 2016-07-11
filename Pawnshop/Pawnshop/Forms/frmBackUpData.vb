@@ -10,6 +10,7 @@ Public Class frmBackUpData
         database.dbName = firebird
         txtPath.Text = firebird
     End Sub
+
     Private Sub btnBrowseSavePath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseSavePath.Click
         If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
 
@@ -22,8 +23,8 @@ Public Class frmBackUpData
         txtPath2.Text = fbdBackup.SelectedPath
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        Dim path As String = txtPath.text
+    Private Sub btnbackup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBackup.Click
+        Dim path As String = txtPath.Text
 
         Using sw As StreamWriter = File.CreateText(path)
             sw.WriteLine("@echo off")
@@ -46,4 +47,7 @@ Public Class frmBackUpData
         LoadPath()
     End Sub
 
+    Private Sub btnStartBackup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStartBackup.Click
+        Process.Start(txtPath.Text)
+    End Sub
 End Class
