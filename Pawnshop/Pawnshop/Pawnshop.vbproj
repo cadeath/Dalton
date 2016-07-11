@@ -748,6 +748,9 @@
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RenewalBreakDown.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptDollarTransaction.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
