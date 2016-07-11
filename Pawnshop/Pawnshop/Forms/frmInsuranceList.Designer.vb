@@ -146,6 +146,7 @@ Partial Class frmInsuranceList
         Me.lbltransID.Size = New System.Drawing.Size(74, 13)
         Me.lbltransID.TabIndex = 4
         Me.lbltransID.Text = "TransactionID"
+        Me.lbltransID.Visible = False
         '
         'frmInsuranceList
         '
