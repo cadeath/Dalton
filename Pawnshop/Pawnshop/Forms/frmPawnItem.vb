@@ -688,6 +688,10 @@ Public Class frmPawnItem
         End If
 
         PrintButton(True)
+
+        ' CEL New Scheme
+        ' Version 1.2.3
+        PawningScheme.Init_CEL(PawnItem)
     End Sub
 
     Private Function isRenewable(ByVal pt As PawnTicket) As Boolean
