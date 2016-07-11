@@ -39,8 +39,7 @@ Public Class frmBackUpData
             sw.WriteLine("exit")
 
         End Using
-        ' End If
-        MessageBox.Show("Successful", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Successful", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
     Private Sub frmBackUpData_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -48,6 +47,12 @@ Public Class frmBackUpData
     End Sub
 
     Private Sub btnStartBackup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStartBackup.Click
-        Process.Start(txtPath.Text)
+        Dim readValue = My.Computer.Registry.GetValue(
+   "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
+
+        Dim firebird As String = readValue & DBPATH
+        database.dbName = firebird
+        Dim strPath As String = firebird
+        Process.Start(strPath)
     End Sub
 End Class

@@ -125,7 +125,7 @@ Partial Class frmBackUpData
         '
         'btnBackup
         '
-        Me.btnBackup.Location = New System.Drawing.Point(67, 181)
+        Me.btnBackup.Location = New System.Drawing.Point(111, 181)
         Me.btnBackup.Name = "btnBackup"
         Me.btnBackup.Size = New System.Drawing.Size(75, 23)
         Me.btnBackup.TabIndex = 3
@@ -134,12 +134,13 @@ Partial Class frmBackUpData
         '
         'btnStartBackup
         '
-        Me.btnStartBackup.Location = New System.Drawing.Point(165, 181)
+        Me.btnStartBackup.Location = New System.Drawing.Point(192, 181)
         Me.btnStartBackup.Name = "btnStartBackup"
         Me.btnStartBackup.Size = New System.Drawing.Size(122, 23)
         Me.btnStartBackup.TabIndex = 4
         Me.btnStartBackup.Text = "&Start Backup"
         Me.btnStartBackup.UseVisualStyleBackColor = True
+        Me.btnStartBackup.Visible = False
         '
         'frmBackUpData
         '
