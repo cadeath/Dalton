@@ -92,3 +92,8 @@
 [07/12/2016 10:11:25] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
 [07/12/2016 10:23:07] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
 [07/12/2016 10:23:12] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/12/2016 10:29:14] [RemoveLog] Pera Padala with ID 2 cannot be found in tbl_dailytimelog
+[07/12/2016 10:32:01] [RemoveLog] Pera Padala with ID 4 cannot be found in tbl_dailytimelog
+[07/12/2016 10:38:31] [RemoveLog] Pera Padala with ID 5 cannot be found in tbl_dailytimelog
+[07/12/2016 10:59:03] [RemoveLog] PERA PADALA OUT with ID 14 cannot be found in tbl_dailytimelog
+[07/12/2016 11:06:18] [RemoveLog] OPENSTORE with ID 16 cannot be found in tbl_dailytimelog
