@@ -12,7 +12,7 @@ Version 1.2.2.5
  - Add Pawnticket and OR Number every print 
  - Add New Design for About Us
  - Add Cash In Bank SAP Account in Settings
- - Add Audit Report base from the Memo # <missing>
+ - Add Audit Report base from the Memo # 06-16-1099
  - Add One-Time Password
  - Add Auction Monthly Reports
  - Include Auto Patch up to db1.2 v1.2
