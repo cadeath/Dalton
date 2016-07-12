@@ -1,5 +1,6 @@
 ﻿Public Class frmCIO_List
     Dim fillData As String = "tblCashTrans"
+    Dim filldata1 As String = "TBL_DAILYTIMELOG"
     ''' <summary>
     ''' load the clearfield and loadactive method
     ''' </summary>
@@ -91,6 +92,7 @@
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim getID As Single = ds.Tables(0).Rows(0).Item("TransID")
         Dim transDate As Date = ds.Tables(0).Rows(0).Item("TRANSDATE")
+
         ds.Tables(fillData).Rows(0).Item("Status") = 0
         Dim CashID As Integer = lvCIO.FocusedItem.Tag
         Dim Transactiontype As String = ""
@@ -106,6 +108,20 @@
             Transactiontype = lblType.Text
         End If
 
+        Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE TRANSID =" & CashID
+        Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
+        Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
+        Select Case SrvTypDailyTimelog
+            Case "TICKETING - WU"
+            Case "GPRS"
+            Case "SMARTMONEY IN"
+            Case "SALES OF INV"
+            Case "ECPAY"
+            Case "SMARTMONEY OUT"
+            Case "CASH IN/OUT"
+            Case "BDO ATM"
+        End Select
+
         ' ISSUE: 0001
         ' Cash InOut exclusive only for the same date.
         If transDate.Date <> CurrentDate.Date Then
@@ -115,7 +131,7 @@
         database.SaveEntry(ds, False)
 
         RemoveJournal(transID:=CashID, TransType:=Transactiontype)
-        RemoveDailyTimeLog(CashID)
+        RemoveDailyTimeLog(CashID, ModName:=SrvTypDailyTimelog)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
     ''' <summary>
