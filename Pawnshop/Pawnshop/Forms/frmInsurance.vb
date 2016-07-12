@@ -115,6 +115,7 @@
         dtpExpiry.Value = getInsurance.ValidDate
         txtAmount.Text = getInsurance.Amount
 
+        lbltransid.Text = frmInsuranceList.lbltransID.Text
         curInsurance = getInsurance
         btnVoid.Enabled = True
         txtPT.Enabled = False
