@@ -3,6 +3,7 @@
     Dim curInsurance As New Insurance
 
     Dim MOD_NAME As String = "INSURANCE"
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         web_ads.AdsDisplay = webAds
@@ -65,8 +66,8 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        frmClient.SearchSelect(txtHolder.Text, FormName.frmInsurance)
-        frmClient.Show()
+            frmClient.SearchSelect(txtHolder.Text, FormName.frmInsurance)
+            frmClient.Show()
     End Sub
     ''' <summary>
     ''' This method will send client information to text fields.
@@ -171,6 +172,12 @@
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmInsuranceList.Show()
     End Sub
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
     ''' <summary>
     ''' This button will perform to void the transaction.
     ''' </summary>
@@ -178,6 +185,14 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidInsurance
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidInsurance()
+        End If
+    End Sub
+    Friend Sub VoidInsurance()
         Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -192,7 +207,6 @@
         MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
         Me.Close()
     End Sub
-
     Private Sub txtPT_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress
         'DigitOnly(e)
         If isEnter(e) Then

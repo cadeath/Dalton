@@ -51,6 +51,7 @@ Public Class frmPawnItem
 
     Dim Critical_Language() As String =
             {"Failed to verify hash value to the "}
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -120,10 +121,24 @@ Public Class frmPawnItem
         txtRenew.Text = ""
         txtRedeem.Text = ""
     End Sub
-
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidPawning
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidPawning()
+        End If
+    End Sub
+
+    Friend Sub VoidPawning()
         Dim ans As DialogResult = _
-            MsgBox("Do you want to VOID this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical + vbDefaultButton2, "W A R N I N G")
+           MsgBox("Do you want to VOID this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical + vbDefaultButton2, "W A R N I N G")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Dim transDate As Date
@@ -146,7 +161,6 @@ Public Class frmPawnItem
         frmPawning.LoadActive()
         Me.Close()
     End Sub
-
     Private Sub txtAppr_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppr.KeyPress
         DigitOnly(e)
         If isEnter(e) Then

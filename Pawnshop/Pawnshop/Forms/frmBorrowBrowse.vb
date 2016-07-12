@@ -1,4 +1,5 @@
 ﻿Public Class frmBorrowBrowse
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     ' Version 1.1
     ' - Check branchCode
     ''' <summary>
@@ -91,6 +92,12 @@
         txtOut.Text = lvBorrowings.SelectedItems(0).SubItems(3).Text
         txtParticular.Text = tmpBB.Remarks
     End Sub
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
     ''' <summary>
     ''' click button to not valid the transaction or to cancel
     ''' </summary>
@@ -98,6 +105,14 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidBranchToBranch
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidBorrowing()
+        End If
+    End Sub
+    Friend Sub VoidBorrowing()
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         If MsgBox("Do you want to void this transaction?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "V O I D") _
             = MsgBoxResult.No Then
@@ -125,7 +140,7 @@
     Private Sub lvBorrowings_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvBorrowings.DoubleClick
         btnView.PerformClick()
     End Sub
-    
+
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
 
@@ -179,7 +194,7 @@
             .ReferenceNumber = refNum
             .TransactionDate = TransDate
             .BranchCode = eskBrancCode
-            .BranchName = GetBranchName(branchCode)
+            .BranchName = GetBranchName(BranchCode)
             .Amount = Amount
             .Remarks = Remarks
             .Status = "D"
@@ -209,7 +224,7 @@
     Private Sub GroupBox1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox1.DoubleClick
         devVerifyESK.Show()
     End Sub
-  
+
     Private Function GetBorrowing(ByVal url As String) As Hashtable
         If System.IO.File.Exists(txtUrl.Text) = False Then Return Nothing
 
