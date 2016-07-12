@@ -132,3 +132,8 @@ LOANDATE
    at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
    at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
    at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 97
+[07/12/2016 15:49:26] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/12/2016 15:49:32] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/12/2016 15:54:06] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[07/12/2016 15:54:11] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/12/2016 15:54:17] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1

@@ -76,7 +76,6 @@
                 TransactionCount()
             Case ReportType.RenewalBreakDown
                 monthlyRenewalBreakDown()
-
         End Select
     End Sub
 
@@ -536,7 +535,7 @@
 
         mySql = "SELECT  COUNT(*), ITEMTYPE,LOANDATE,PRINCIPAL "
         mySql &= vbCrLf & "    FROM TBLPAWN "
-        mySql &= vbCrLf & " WHERE STATUS = '0' "
+        mySql &= vbCrLf & " WHERE STATUS = '0' OR STATUS = 'R' "
         mySql &= vbCrLf & String.Format("AND LOANDATE BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= vbCrLf & "GROUP BY ITEMTYPE,LOANDATE,PRINCIPAL "
         mySql &= vbCrLf & "ORDER BY LOANDATE ASC "
