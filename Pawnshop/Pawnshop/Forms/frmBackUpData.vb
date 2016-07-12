@@ -55,4 +55,10 @@ Public Class frmBackUpData
         Dim strPath As String = firebird
         Process.Start(strPath)
     End Sub
+
+    Private Sub txtBranchName_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtBranchName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnBackup.PerformClick()
+        End If
+    End Sub
 End Class
