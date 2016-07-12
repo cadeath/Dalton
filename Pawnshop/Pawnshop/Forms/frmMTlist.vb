@@ -153,4 +153,12 @@
             End If
         End If
     End Sub
+
+    Private Sub lvMoneyTransfer_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvMoneyTransfer.MouseClick
+        If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
+        Dim tmpMT As New MoneyTransfer
+        Label2.Text = idx
+    End Sub
 End Class

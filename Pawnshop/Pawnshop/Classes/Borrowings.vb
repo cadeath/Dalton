@@ -145,9 +145,12 @@
         mySql = "SELECT * FROM " & fillData & " WHERE brwID = " & _borrowID
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         ds.Tables(0).Rows(0).Item("Status") = "V" & ds.Tables(0).Rows(0).Item("Status")
+        Dim MoDName As String = "BORROWINGS"
+        Dim BORROWINGID As Integer = frmBorrowBrowse.LBLBORROWINGID.Text
         database.SaveEntry(ds, False)
 
-        RemoveJournal("Ref# " & _borrowID)
+        RemoveJournal(transID:=BORROWINGID, TransType:=MoDName)
+        RemoveDailyTimeLog(BORROWINGID, MoDName)
         Console.WriteLine(String.Format("Transaction {0} void.", _borrowID))
     End Sub
 
@@ -160,5 +163,6 @@
         End If
         Return ds.Tables(0).Rows(0).Item("BrwID")
     End Function
+
 #End Region
 End Class

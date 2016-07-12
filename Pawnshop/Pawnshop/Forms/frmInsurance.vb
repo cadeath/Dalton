@@ -1,7 +1,7 @@
 ﻿Public Class frmInsurance
     Dim Holder As Client
     Dim curInsurance As New Insurance
-
+    Private currentInsuranceNum As Integer = GetOption("InsuranceLastNum")
     Dim MOD_NAME As String = "INSURANCE"
     Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
@@ -48,6 +48,8 @@
     ''' <remarks></remarks>
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
         ClearFields()
+        If Not GenerateInsuranceNum() Then : Exit Sub
+        End If
 
         txtHolder.ReadOnly = False
         btnNew.Enabled = False
@@ -114,6 +116,7 @@
         dtpExpiry.Value = getInsurance.ValidDate
         txtAmount.Text = getInsurance.Amount
 
+        lbltransid.Text = frmInsuranceList.lbltransID.Text
         curInsurance = getInsurance
         btnVoid.Enabled = True
         txtPT.Enabled = False
@@ -137,6 +140,7 @@
     ''' <remarks></remarks>
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
+       
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Posting")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -152,10 +156,10 @@
 
             .SaveInsurance()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", TransType:="INSURANCE")
-            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, TransType:="INSURANCE")
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", TransID:=.LoadLastIDNumberInsurance)
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", TransID:=.LoadLastIDNumberInsurance)
 
-            AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount)
+            AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount, , , .LoadLastIDNumberInsurance)
         End With
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
@@ -164,6 +168,17 @@
 
         Me.Close()
     End Sub
+
+    Private Function GenerateInsuranceNum() As Boolean
+        'Check InsuranceNum if existing
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT DISTINCT COINO FROM TBLINSURANCE "
+        mySql &= "WHERE COINO = '" & currentInsuranceNum & "' "
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("InsuranceNum # " & currentInsuranceNum & " already existed.", MsgBoxStyle.Critical) : Return False
+        End If
+        Return True
+    End Function
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -214,5 +229,4 @@
         End If
     End Sub
 
-  
 End Class

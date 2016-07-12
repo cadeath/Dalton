@@ -190,52 +190,48 @@
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Classes\rptActionReq.vb" />
-    <Compile Include="doc\Developer\devClient.Designer.vb">
-      <DependentUpon>devClient.vb</DependentUpon>
-    </Compile>
-    <Compile Include="doc\Developer\devClient.vb">
+    <Compile Include="AutoPatch\DevForm\devClient.Designer.vb" />
+    <Compile Include="AutoPatch\DevForm\devClient.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="doc\Developer\devVerifyESK.Designer.vb">
-      <DependentUpon>devVerifyESK.vb</DependentUpon>
-    </Compile>
-    <Compile Include="doc\Developer\devVerifyESK.vb">
+    <Compile Include="AutoPatch\DevForm\devVerifyESK.Designer.vb" />
+    <Compile Include="AutoPatch\DevForm\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="doc\Developer\dev_encrypt.Designer.vb">
+    <Compile Include="AutoPatch\DevForm\dev_encrypt.Designer.vb">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </Compile>
-    <Compile Include="doc\Developer\dev_encrypt.vb">
+    <Compile Include="AutoPatch\DevForm\dev_encrypt.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="doc\Developer\dev_ORview.Designer.vb">
+    <Compile Include="AutoPatch\DevForm\dev_ORview.Designer.vb">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
-    <Compile Include="doc\Developer\dev_ORview.vb">
+    <Compile Include="AutoPatch\DevForm\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="doc\Developer\dev_Pawning.Designer.vb">
+    <Compile Include="AutoPatch\DevForm\dev_Pawning.Designer.vb">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </Compile>
-    <Compile Include="doc\Developer\dev_Pawning.vb">
+    <Compile Include="AutoPatch\DevForm\dev_Pawning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="doc\Developer\dev_print.Designer.vb">
+    <Compile Include="AutoPatch\DevForm\dev_print.Designer.vb">
       <DependentUpon>dev_print.vb</DependentUpon>
     </Compile>
-    <Compile Include="doc\Developer\dev_print.vb">
+    <Compile Include="AutoPatch\DevForm\dev_print.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="doc\Developer\dev_report.Designer.vb">
+    <Compile Include="AutoPatch\DevForm\dev_report.Designer.vb">
       <DependentUpon>dev_report.vb</DependentUpon>
     </Compile>
-    <Compile Include="doc\Developer\dev_report.vb">
+    <Compile Include="AutoPatch\DevForm\dev_report.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="doc\Developer\dev_runCmd.Designer.vb">
+    <Compile Include="AutoPatch\DevForm\dev_runCmd.Designer.vb">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </Compile>
-    <Compile Include="doc\Developer\dev_runCmd.vb">
+    <Compile Include="AutoPatch\DevForm\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ab.Designer.vb">
@@ -540,6 +536,12 @@
     <Compile Include="Reports\frmSegreList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\qryAuction.Designer.vb">
+      <DependentUpon>qryAuction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryAuction.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qryCashInOut.Designer.vb">
       <DependentUpon>qryCashInOut.vb</DependentUpon>
     </Compile>
@@ -578,33 +580,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="doc\Developer\devClient.resx">
-      <DependentUpon>devClient.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="doc\Developer\devVerifyESK.resx">
-      <DependentUpon>devVerifyESK.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="doc\Developer\dev_encrypt.resx">
+    <EmbeddedResource Include="AutoPatch\DevForm\devClient.resx" />
+    <EmbeddedResource Include="AutoPatch\DevForm\devVerifyESK.resx" />
+    <EmbeddedResource Include="AutoPatch\DevForm\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="doc\Developer\dev_ORview.resx">
+    <EmbeddedResource Include="AutoPatch\DevForm\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="doc\Developer\dev_Pawning.resx">
+    <EmbeddedResource Include="AutoPatch\DevForm\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="doc\Developer\dev_print.resx">
+    <EmbeddedResource Include="AutoPatch\DevForm\dev_print.resx">
       <DependentUpon>dev_print.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="doc\Developer\dev_report.resx">
+    <EmbeddedResource Include="AutoPatch\DevForm\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="doc\Developer\dev_runCmd.resx">
+    <EmbeddedResource Include="AutoPatch\DevForm\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
@@ -612,6 +605,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
+    <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\AuctionMonthlyReportJWL.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
@@ -741,6 +741,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryAuction.resx">
+      <DependentUpon>qryAuction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
@@ -997,6 +1000,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
