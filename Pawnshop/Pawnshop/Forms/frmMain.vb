@@ -42,6 +42,7 @@
         AuctionMonthlyJewelryReportToolStripMenuItem.Enabled = Not st 'Auction MOnthly
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
+        AuditReportToolStripMenuItem.Enabled = Not st
         LoanRegisterToolStripMenuItem.Enabled = Not st
         MoneyTransferToolStripMenuItem.Enabled = Not st
         InsuranceToolStripMenuItem.Enabled = Not st
@@ -443,5 +444,10 @@
 
     Private Sub AuctionMonthlyJewelryReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuctionMonthlyJewelryReportToolStripMenuItem.Click
         qryAuction.Show()
+    End Sub
+
+    Private Sub AuditReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.AuditPrinLimit
+        qryDate.Show()
     End Sub
 End Class

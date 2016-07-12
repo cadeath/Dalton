@@ -164,7 +164,7 @@
             frmMain.dateSet = False
             frmMain.doSegregate = False
 
-            AddTimelyLogs(MOD_NAME, "AMOUNT TODAY IS Php " & total.ToString("#,##0.00"), total, False)
+            AddTimelyLogs(MOD_NAME, "AMOUNT TODAY IS Php " & total.ToString("#,##0.00"), total, False, , dailyID)
         End If
         Me.Close()
     End Sub

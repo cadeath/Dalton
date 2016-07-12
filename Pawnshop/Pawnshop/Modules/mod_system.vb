@@ -144,8 +144,8 @@ Module mod_system
             tmpPawnItem.Status = "S"
             tmpPawnItem.SaveTicket(False)
 
-            AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
-            AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
+            AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
+            AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
 
             Console.WriteLine("PT: " & tmpPawnItem.PawnTicket)
         Next
@@ -227,13 +227,13 @@ Module mod_system
                 'tmpOverShort = Math.Abs(tmpOverShort)
                 If AsPerComputation < cc Then
                     'Overage
-                    AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False)
-                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False)
+                    AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False, , "CloseStore", dailyID)
+                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False, , "CloseStore", dailyID)
                 Else
                     'Shortage
                     tmpOverShort = Math.Abs(tmpOverShort)
-                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False)
-                    AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False)
+                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False, , "CloseStore", dailyID)
+                    AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False, , "CloseStore", dailyID)
                 End If
             End If
 
@@ -243,6 +243,17 @@ Module mod_system
             MsgBox("Error in closing store" + vbCr + "Contact your IT Department", MsgBoxStyle.Critical)
         End If
     End Sub
+
+
+    Public Function LoadLastIDNumberDaily() As Single
+        Dim mySql As String = "SELECT * FROM TBLDAILY ORDER BY ID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("ID")
+    End Function
 #End Region
     ''' <summary>
     ''' This function has two arguments.

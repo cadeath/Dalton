@@ -35,6 +35,7 @@ Partial Class frmInsuranceList
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
+        Me.lbltransID = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -137,11 +138,22 @@ Partial Class frmInsuranceList
         Me.btnView.Text = "&View"
         Me.btnView.UseVisualStyleBackColor = True
         '
+        'lbltransID
+        '
+        Me.lbltransID.AutoSize = True
+        Me.lbltransID.Location = New System.Drawing.Point(12, 357)
+        Me.lbltransID.Name = "lbltransID"
+        Me.lbltransID.Size = New System.Drawing.Size(74, 13)
+        Me.lbltransID.TabIndex = 4
+        Me.lbltransID.Text = "TransactionID"
+        Me.lbltransID.Visible = False
+        '
         'frmInsuranceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(591, 403)
+        Me.Controls.Add(Me.lbltransID)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lvInsurance)
@@ -152,6 +164,7 @@ Partial Class frmInsuranceList
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -166,4 +179,5 @@ Partial Class frmInsuranceList
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents lbltransID As System.Windows.Forms.Label
 End Class

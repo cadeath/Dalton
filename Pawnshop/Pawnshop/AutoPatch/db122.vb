@@ -7,8 +7,6 @@
 
         Dim ALTER_TBLJOURNAL As String = "ALTER TABLE TBLJOURNAL ADD TRANSTYPE VARCHAR(50);"
 
-
-
         Dim JRL_VIEW As String
         JRL_VIEW = "CREATE VIEW JOURNAL_SUMMARY("
         JRL_VIEW &= vbCrLf & "  SAPACCOUNT,"
@@ -27,15 +25,14 @@
 
         Dim ADDTransID_Journal As String = "ALTER TABLE TBLJOURNAL ADD TRANSID BIGINT;"
         Dim ADDDailyTimeLog As String = "ALTER TABLE TBL_DAILYTIMELOG ADD TRANSID BIGINT;"
-       
+
+
         Try
 
             RunCommand(ALTER_TBLJOURNAL)
 
             RunCommand(JRL_VIEW)
-
             RunCommand(ADDTransID_Journal)
-
             RunCommand(ADDDailyTimeLog)
 
             Dim CashInBank As String = GetOption("BranchBank")
