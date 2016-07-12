@@ -33,9 +33,7 @@
         DollarDaily = 14
         AuditPrinLimit = 15
         MonthlyTransactionCountSummary = 16
-        MonthlyRenewalBreakDown = 17
-
-
+        RenewalBreakDown = 17
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
 
@@ -76,8 +74,8 @@
                 Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
-            Case ReportType.MonthlyRenewalBreakDown
-                MonthlyRenewalBreakDown()
+            Case ReportType.RenewalBreakDown
+                monthlyRenewalBreakDown()
 
         End Select
     End Sub
@@ -128,8 +126,8 @@
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
                     FormType = ReportType.MonthlyTransactionCountSummary
-                Case "Renewal Break Down"
-                    FormType = ReportType.MonthlyRenewalBreakDown
+                Case "Month Renewal Break Down"
+                    FormType = ReportType.RenewalBreakDown
             End Select
         End If
 
@@ -531,26 +529,25 @@
         frmReport.Show()
     End Sub
 
-    Private Sub MonthlyRenewalBreakDown()
+    Private Sub monthlyRenewalBreakDown()
         Dim stDay = GetFirstDate(monCal.SelectionStart)
         Dim laDay = GetLastDate(monCal.SelectionEnd)
-        Dim fillData As String = "dsRenewalBreakDown"
-        Dim mySql As String = "SELECT LOANDATE, ITEMTYPE, STATUS,"
-        mySql &= vbCrLf & "PRINCIPAL,RENEWDUE,INTEREST,SERVICECHARGE,PENALTY"
-        mySql &= vbCrLf & "FROM TBLPAWN"
-        mySql &= vbCrLf & "WHERE STATUS='0' "
-        mySql &= vbCrLf & String.Format("AND LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
-        mySql &= vbCrLf & " ORDER BY LOANDATE  ASC"
+        Dim fillData As String = "dsRenewalBreakDown", mySql As String
+
+        mySql = "SELECT  COUNT(*), ITEMTYPE,LOANDATE,PRINCIPAL "
+        mySql &= vbCrLf & "    FROM TBLPAWN "
+        mySql &= vbCrLf & " WHERE STATUS = '0' "
+        mySql &= vbCrLf & String.Format("AND LOANDATE BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= vbCrLf & "GROUP BY ITEMTYPE,LOANDATE,PRINCIPAL "
+        mySql &= vbCrLf & "ORDER BY LOANDATE ASC "
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
         rptPara.Add("branchName", branchName)
-        'rptPara.Add("txtUsername", "Blade")
 
         frmReport.ReportInit(mySql, fillData, "Reports\RenewalBreakDown.rdlc", rptPara)
         frmReport.Show()
     End Sub
-
     ' STEP 4
     Private Function NoFilter() As Boolean
         Select Case FormType
