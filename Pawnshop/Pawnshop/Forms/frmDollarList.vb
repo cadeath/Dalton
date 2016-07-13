@@ -1,4 +1,5 @@
 ﻿Public Class frmDollarList
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -72,6 +73,14 @@
     Private Sub lvDollar_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvDollar.DoubleClick
         btnView.PerformClick()
     End Sub
+
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
+
     ''' <summary>
     ''' This button will allow to void transaction.
     ''' </summary>
@@ -79,6 +88,14 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidMoneyExchange
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidMoneyExchange()
+        End If
+    End Sub
+    Friend Sub VoidMoneyExchange()
         If lvDollar.SelectedItems.Count = 0 Then Exit Sub
 
         Dim tmpLoad As New DollarTransaction

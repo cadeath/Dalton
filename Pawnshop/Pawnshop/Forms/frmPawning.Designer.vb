@@ -61,10 +61,12 @@ Partial Class frmPawning
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+
         Me.GroupBox1.Controls.Add(Me.rbDescription)
         Me.GroupBox1.Controls.Add(Me.rbPawner)
         Me.GroupBox1.Controls.Add(Me.rbPawnTicket)
         Me.GroupBox1.Controls.Add(Me.rbAll)
+
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.Label1)
