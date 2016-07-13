@@ -72,6 +72,5 @@
         Console.WriteLine(srcStr & ModName & " REMOVED FROM Daily Time Log ENTRIES...")
     End Sub
 
-
   
 End Module
