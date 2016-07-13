@@ -374,6 +374,10 @@ Public Class frmPawnItem
             Exit Sub
         End If
 
+        If PawnItem.RenewalCount <= 0 And Not PawnItem.RenewalCount = Nothing Then
+            Notify_Renewal()
+        End If
+
         Redeem("R")
         PrintButton(0)
         btnSave.Enabled = True
@@ -688,10 +692,6 @@ Public Class frmPawnItem
         End If
 
         PrintButton(True)
-
-        ' CEL New Scheme
-        ' Version 1.2.3
-        PawningScheme.Init_CEL(PawnItem)
     End Sub
 
     Private Function isRenewable(ByVal pt As PawnTicket) As Boolean

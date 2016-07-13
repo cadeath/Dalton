@@ -1,5 +1,5 @@
 CHANGELOG
-Version 1.2.2.5
+Version 1.2.2.6
  - Fix Monthly computation for Cellphone
  - Fix Journal Entry Summary
  - Fix Money Transfer Send In/Payout Name
@@ -15,6 +15,7 @@ Version 1.2.2.5
  - Add Audit Report base from the Memo # <missing>
  - Add One-Time Password
  - Add Auction Monthly Reports
+ - Add Pawning Renewal Notification
  - Include Auto Patch up to db1.2 v1.2
  - Include BDO and Smart Money Report in Cash In/Out
  - Remove Journal Entries Sorting

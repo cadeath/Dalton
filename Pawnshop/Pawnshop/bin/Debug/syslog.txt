@@ -1,0 +1,16 @@
+[07/13/2016 14:24:52] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.InvalidCastException: Conversion from type 'DBNull' to type 'Integer' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(Object Value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 549
+[07/13/2016 14:24:55] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.InvalidCastException: Conversion from type 'DBNull' to type 'Integer' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(Object Value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 549
+[07/13/2016 14:25:33] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.InvalidCastException: Conversion from type 'DBNull' to type 'Integer' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(Object Value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 549
+[07/13/2016 14:25:36] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.InvalidCastException: Conversion from type 'DBNull' to type 'Integer' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToInteger(Object Value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 549
