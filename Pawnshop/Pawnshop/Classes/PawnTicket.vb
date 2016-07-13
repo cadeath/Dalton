@@ -44,6 +44,7 @@ Public Class PawnTicket
     Private _renewalCount As Integer = Nothing
     Public Property RenewalCount() As Integer
         Get
+            If _renewalCount = Nothing Then Return Nothing
             Return _renewalCount
         End Get
         Set(ByVal value As Integer)
@@ -368,7 +369,11 @@ Public Class PawnTicket
         Dim dsQuick As DataSet
         Dim tmpSql As String = "SELECT * FROM TBLCLASS WHERE CLASSID = " & _catID
         dsQuick = LoadSQL(tmpSql)
-        _renewalCount = dsQuick.Tables(0).Rows(0).Item("RENEWLIMIT")
+        If Not IsDBNull(dsQuick.Tables(0).Rows(0).Item("RENEWLIMIT")) Then
+            _renewalCount = dsQuick.Tables(0).Rows(0).Item("RENEWLIMIT")
+        Else
+            _renewalCount = Nothing
+        End If
 
         Dim dsNewRow As DataRow
         If isNew Then

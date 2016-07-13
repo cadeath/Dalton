@@ -11,10 +11,10 @@ Module db1222
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
         Try
-            Dim mySql As String = "ALTER TABLE TBLPAWN ADD RENEWALCNT SMALLINT;"
+            Dim mySql As String = "ALTER TABLE TBLPAWN ADD RENEWALCNT SMALLINT DEFAULT '0' NOT NULL;"
             RunCommand(mySql) 'TBLPAWN RENEWAL COUNT
 
-            mySql = "ALTER TABLE TBLCLASS ADD RENEWLIMIT SMALLINT;"
+            mySql = "ALTER TABLE TBLCLASS ADD RENEWLIMIT SMALLINT DEFAULT '0' NOT NULL;"
             RunCommand(mySql) 'TBLCLASS RENEWAL LIMIT
 
             If DEV_MODE Then

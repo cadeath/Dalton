@@ -374,9 +374,7 @@ Public Class frmPawnItem
             Exit Sub
         End If
 
-        If PawnItem.RenewalCount <= 0 And Not PawnItem.RenewalCount = Nothing Then
-            Notify_Renewal()
-        End If
+        Notify_Renewal(PawnItem)
 
         Redeem("R")
         PrintButton(0)
