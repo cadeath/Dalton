@@ -532,14 +532,14 @@ Public Class frmMoneyTransfer
                     End Select
 
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name, , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber, , , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
-                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name, , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
                     Else
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name, , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber, , , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
-                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name, , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
                     End If
                     ' ISSUE: 0001
@@ -555,9 +555,9 @@ Public Class frmMoneyTransfer
                     End Select
 
                     AddJournal(.NetAmount + commission, "Debit" _
-                               , "GPRS Remittance/ Bills Payment Fund", "GPRS_R|Ref# " & .ReferenceNumber, , , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
-                    AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS_R|Ref# " & .ReferenceNumber, CashCount_Name, , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
-                    AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS_R|Ref# " & .ReferenceNumber, , , , "GPRS", TransID:=.LoadLastIDNumberMoneyTransfer)
+                               , "GPRS Remittance/ Bills Payment Fund", "GPRS_R|Ref# " & .ReferenceNumber, , , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
+                    AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS_R|Ref# " & .ReferenceNumber, CashCount_Name, , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
+                    AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS_R|Ref# " & .ReferenceNumber, , , , CashCount_Name, TransID:=.LoadLastIDNumberMoneyTransfer)
             End Select
 
             AddTimelyLogs(MOD_NAME, String.Format("Transfer a total amount of Php{0} to {1}", .NetAmount.ToString("#,##0.00"), cboLocation.Text, .NetAmount), , , , .LoadLastIDNumberMoneyTransfer)
