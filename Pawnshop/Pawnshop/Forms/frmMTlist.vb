@@ -60,10 +60,13 @@
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
         ' to be added more comprehensive searching
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM tblMoneyTransfer WHERE refNum LIKE '%" & txtSearch.Text & "%' "
+        mySql = "SELECT * FROM tblMoneyTransfer WHERE refNum LIKE '%" & secured_str & "%' OR "
+        mySql &= "UPPER(RECEIVERNAME) LIKE UPPER('%" & secured_str & "%') OR UPPER(SENDERNAME) LIKE UPPER('%" & secured_str & "%')"
         ds = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then
