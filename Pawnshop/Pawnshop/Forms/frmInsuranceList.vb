@@ -9,7 +9,9 @@
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub LoadInsurance()
+
         Dim mySql As String = "SELECT FIRST 50 * FROM tblInsurance WHERE Status LIKE 'A' ORDER BY TRANSDATE DESC"
+
         Dim ds As DataSet = LoadSQL(mySql)
 
         For Each ins In ds.Tables(0).Rows
@@ -55,7 +57,6 @@
 
         Dim idx As Integer = lvInsurance.FocusedItem.Tag
         frmInsurance.LoadInsurance(idx)
-
         Me.Close()
     End Sub
     ''' <summary>
@@ -91,5 +92,13 @@
 
     Private Sub lvInsurance_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvInsurance.DoubleClick
         btnView.PerformClick()
+    End Sub
+
+    Private Sub lvInsurance_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvInsurance.MouseClick
+        If lvInsurance.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer = lvInsurance.FocusedItem.Tag
+        Dim tmpMT As New Insurance
+        lbltransID.Text = idx
     End Sub
 End Class
