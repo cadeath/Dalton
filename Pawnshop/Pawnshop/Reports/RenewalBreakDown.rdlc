@@ -1102,7 +1102,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Count(Fields!ORDate.Value)</Value>
+                            <Value>=CountDistinct(Fields!ORDate.Value)</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
                             </Style>
