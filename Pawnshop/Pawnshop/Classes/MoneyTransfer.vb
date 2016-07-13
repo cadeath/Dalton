@@ -298,6 +298,18 @@
             Case "WESTERN UNION"
             Case "Cebuana Llhuiller"
             Case "GPRS"
+            Case "GPRS-SmartMoney"
+            Case "GPRS-(UCPB/PNB)"
+            Case "GPRS-(BDO/Chinabank)"
+            Case "GPRS-DBP"
+            Case "GPRS-MetroBank"
+            Case "GPRS-(Maybank/LandBank)"
+            Case "iREMIT"
+            Case "NYBP/Transfast"
+            Case "GPRS-Moneygram"
+            Case "SmartMoney-GPRS"
+            Case "Moneygram-GPRS"
+
         End Select
 
         RemoveJournal(transID:=MoneyTransID, TransType:=SrvTypjOURNAL)
