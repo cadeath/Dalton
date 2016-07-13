@@ -1,4 +1,5 @@
 ﻿Public Class frmMTlist
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -101,7 +102,22 @@
         btnView.PerformClick()
     End Sub
 
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
+
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidMoneyTransfer
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidMoneyTransfer()
+        End If
+    End Sub
+    Friend Sub VoidMoneyTransfer()
         If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
 
         Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
@@ -127,7 +143,6 @@
                              MsgBoxStyle.Information, "Transaction Void"))
         LoadActive()
     End Sub
-
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
@@ -140,5 +155,13 @@
                 btnView.PerformClick()
             End If
         End If
+    End Sub
+
+    Private Sub lvMoneyTransfer_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvMoneyTransfer.MouseClick
+        If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
+        Dim tmpMT As New MoneyTransfer
+        Label2.Text = idx
     End Sub
 End Class

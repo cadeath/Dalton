@@ -1,6 +1,8 @@
 ﻿Public Class MoneyTransfer
 
     Private fillData As String = "tblMoneyTransfer"
+    Private fillData1 As String = "tbl_DailyTimeLog"
+    Private filldata2 As String = "tblJournal"
 
 #Region "Variables"
     Private _id As Integer
@@ -230,11 +232,12 @@
 
         Dim mySql As String = "SELECT * FROM " & fillData & " WHERE ID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, fillData)
-
         ds.Tables(0).Rows(0).Item("Status") = "V"
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
 
+    
+        Dim MoneyTransID As Integer = frmMTlist.lvMoneyTransfer.FocusedItem.Tag
         Me.LoadById(_id)
         Dim SrvTyp As String = Me.ServiceType
         Dim SrcStr As String = ""
@@ -260,7 +263,36 @@
                 SrcStr = "GPRS_R|Ref# " & _ref
         End Select
 
-        RemoveJournal(SrcStr)
+
+        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID =" & MoneyTransID
+        Dim ds2 As DataSet = LoadSQL(mySql2, fillData1)
+        Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
+        Select Case SrvTypDailyTimelog
+            Case "PERA PADALA OUT"
+            Case "PERA PADALA IN"
+            Case "WESTERN UNION OUT"
+            Case "WESTERN UNION IN"
+            Case "PERA LINK OUT"
+            Case "PERA LINK IN"
+            Case "GPRS OUT"
+            Case "GPRS IN"
+        End Select
+
+        Dim mySql3 As String = "SELECT * FROM " & filldata2 & " WHERE TRANSID =" & MoneyTransID
+        Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
+        Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
+        Select Case SrvTypjOURNAL
+            Case "PERA PADALA"
+            Case "Pera Padala - PMTC"
+            Case "WESTERN UNION"
+            Case "Cebuana Llhuiller"
+            Case "GPRS"
+        End Select
+
+        RemoveJournal(transID:=MoneyTransID, TransType:=SrvTypjOURNAL)
+
+        RemoveDailyTimeLog(MoneyTransID, ModName:=SrvTypDailyTimelog)
+
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 
@@ -274,5 +306,15 @@
 
         Me.loadByRow(ds.Tables(0).Rows(0))
     End Sub
+
+    Public Function LoadLastIDNumberMoneyTransfer() As Single
+        Dim mySql As String = "SELECT * FROM TBLMONEYTRANSFER ORDER by ID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("ID")
+    End Function
 #End Region
 End Class

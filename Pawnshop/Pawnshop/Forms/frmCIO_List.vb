@@ -1,4 +1,6 @@
 ﻿Public Class frmCIO_List
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+
     Dim fillData As String = "tblCashTrans"
     ''' <summary>
     ''' load the clearfield and loadactive method
@@ -102,11 +104,26 @@
     ''' <param name="id"></param>
     ''' <remarks></remarks>
     Private Sub VoidID(ByVal id As Integer)
+        Dim result As String = MsgBox("Do you to Void this Transaction", MsgBoxStyle.YesNo, "Pawnshop")
+        If result = vbNo Then Exit Sub
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE TransID = {1}", fillData, id)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim getID As Single = ds.Tables(0).Rows(0).Item("TransID")
         Dim transDate As Date = ds.Tables(0).Rows(0).Item("TRANSDATE")
         ds.Tables(fillData).Rows(0).Item("Status") = 0
+        Dim CashID As Integer = lvCIO.FocusedItem.Tag
+        Dim Transactiontype As String = ""
+
+        If lblCashID.Text = CashID Then
+            Transactiontype = lblType.Text
+
+        ElseIf lblCashID.Text = CashID Then
+            Transactiontype = lblType.Text
+        ElseIf lblCashID.Text = CashID Then
+            Transactiontype = lblType.Text
+        ElseIf lblCashID.Text = CashID Then
+            Transactiontype = lblType.Text
+        End If
 
         ' ISSUE: 0001
         ' Cash InOut exclusive only for the same date.
@@ -116,7 +133,8 @@
         End If
         database.SaveEntry(ds, False)
 
-        RemoveJournal("Ref# " & getID)
+        RemoveJournal(transID:=CashID, TransType:=Transactiontype)
+        RemoveDailyTimeLog(CashID)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
     ''' <summary>
@@ -128,6 +146,14 @@
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
+
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
+
     ''' <summary>
     ''' This button void the transaction.
     ''' </summary>
@@ -135,10 +161,28 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidCashInOut
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidCIO()
+        End If
+    End Sub
+
+    Friend Sub VoidCIO()
         If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
         Dim idx As Integer = lvCIO.FocusedItem.Tag
         VoidID(idx)
         lvCIO.Items.Clear()
         LoadActive()
+    End Sub
+
+    Private Sub lvCIO_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvCIO.MouseClick
+        If lvCIO.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer = lvCIO.FocusedItem.Tag
+        Dim tmpCASHTrans As New CashInOutTransaction
+        lblCashID.Text = idx
+        lblType.Text = tmpCASHTrans.LoadType
     End Sub
 End Class

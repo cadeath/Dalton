@@ -39,8 +39,10 @@
         ToolStripMenuItem2.Enabled = Not st 'Monthly Report
         SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
         CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
+        AuctionMonthlyJewelryReportToolStripMenuItem.Enabled = Not st 'Auction MOnthly
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
+        AuditReportToolStripMenuItem.Enabled = Not st
         LoanRegisterToolStripMenuItem.Enabled = Not st
         MoneyTransferToolStripMenuItem.Enabled = Not st
         InsuranceToolStripMenuItem.Enabled = Not st
@@ -59,6 +61,7 @@
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'Generate_QR()
         Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, " <<DEVELOPER MODE>>", "")
         Me.Text &= IIf(mod_system.PROTOTYPE, " !!PROTOTYPE!!", "")
         If Not ConfiguringDB() Then MsgBox("DATABASE CONNECTION PROBLEM", MsgBoxStyle.Critical) : Exit Sub
@@ -439,4 +442,12 @@
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
+    Private Sub AuctionMonthlyJewelryReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuctionMonthlyJewelryReportToolStripMenuItem.Click
+        qryAuction.Show()
+    End Sub
+
+    Private Sub AuditReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.AuditPrinLimit
+        qryDate.Show()
+    End Sub
 End Class

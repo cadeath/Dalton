@@ -52,6 +52,7 @@ Partial Class frmInsurance
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.lbltransid = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -235,7 +236,7 @@ Partial Class frmInsurance
         'txtCoi
         '
         Me.txtCoi.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCoi.Location = New System.Drawing.Point(120, 9)
+        Me.txtCoi.Location = New System.Drawing.Point(122, 9)
         Me.txtCoi.Name = "txtCoi"
         Me.txtCoi.ReadOnly = True
         Me.txtCoi.Size = New System.Drawing.Size(108, 25)
@@ -406,15 +407,25 @@ Partial Class frmInsurance
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = False
         '
+        'lbltransid
+        '
+        Me.lbltransid.AutoSize = True
+        Me.lbltransid.Location = New System.Drawing.Point(0, 451)
+        Me.lbltransid.Name = "lbltransid"
+        Me.lbltransid.Size = New System.Drawing.Size(45, 13)
+        Me.lbltransid.TabIndex = 30
+        Me.lbltransid.Text = "TransID"
+        '
         'frmInsurance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(490, 451)
-        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.lbltransid)
         Me.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Name = "frmInsurance"
         Me.Text = "Certificate of Insurance"
@@ -424,6 +435,7 @@ Partial Class frmInsurance
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -455,4 +467,5 @@ Partial Class frmInsurance
     Friend WithEvents txtPT As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
+    Friend WithEvents lbltransid As System.Windows.Forms.Label
 End Class
