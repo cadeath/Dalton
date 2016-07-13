@@ -266,6 +266,18 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="MoneyTransferBracketing" msprop:Generator_TableClassName="MoneyTransferBracketingDataTable" msprop:Generator_TableVarName="tableMoneyTransferBracketing" msprop:Generator_RowChangedName="MoneyTransferBracketingRowChanged" msprop:Generator_TablePropName="MoneyTransferBracketing" msprop:Generator_RowDeletingName="MoneyTransferBracketingRowDeleting" msprop:Generator_RowChangingName="MoneyTransferBracketingRowChanging" msprop:Generator_RowEvHandlerName="MoneyTransferBracketingRowChangeEventHandler" msprop:Generator_RowDeletedName="MoneyTransferBracketingRowDeleted" msprop:Generator_RowClassName="MoneyTransferBracketingRow" msprop:Generator_UserTableName="MoneyTransferBracketing" msprop:Generator_RowEvArgName="MoneyTransferBracketingRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:string" minOccurs="0" />
+              <xs:element name="SERVICETYPE" msprop:Generator_ColumnVarNameInTable="columnSERVICETYPE" msprop:Generator_ColumnPropNameInRow="SERVICETYPE" msprop:Generator_ColumnPropNameInTable="SERVICETYPEColumn" msprop:Generator_UserColumnName="SERVICETYPE" type="xs:string" minOccurs="0" />
+              <xs:element name="MONEYTRANS" msprop:Generator_ColumnVarNameInTable="columnMONEYTRANS" msprop:Generator_ColumnPropNameInRow="MONEYTRANS" msprop:Generator_ColumnPropNameInTable="MONEYTRANSColumn" msprop:Generator_UserColumnName="MONEYTRANS" type="xs:string" minOccurs="0" />
+              <xs:element name="AMOUNT" msprop:Generator_ColumnVarNameInTable="columnAMOUNT" msprop:Generator_ColumnPropNameInRow="AMOUNT" msprop:Generator_ColumnPropNameInTable="AMOUNTColumn" msprop:Generator_UserColumnName="AMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="BRACKET" msprop:Generator_ColumnVarNameInTable="columnBRACKET" msprop:Generator_ColumnPropNameInRow="BRACKET" msprop:Generator_ColumnPropNameInTable="BRACKETColumn" msprop:Generator_UserColumnName="BRACKET" type="xs:string" minOccurs="0" />
+              <xs:element name="TRANSDATE" msprop:Generator_ColumnVarNameInTable="columnTRANSDATE" msprop:Generator_ColumnPropNameInRow="TRANSDATE" msprop:Generator_ColumnPropNameInTable="TRANSDATEColumn" msprop:Generator_UserColumnName="TRANSDATE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

@@ -29,11 +29,12 @@
         HourlySummary = 10
         DailyInsurance = 11
         LoanRenew2 = 12
-        MoneyTransferBSP = 13
-        DollarDaily = 14
-        AuditPrinLimit = 15
-        MonthlyTransactionCountSummary = 16
-
+        AuctionMonthly = 13
+        MoneyTransferBSP = 14
+        DollarDaily = 15
+        AuditPrinLimit = 16
+        MonthlyTransactionCountSummary = 17
+        MoneyTransferBracketing = 18
 
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
@@ -75,7 +76,9 @@
                 Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
-           
+            Case ReportType.MoneyTransferBracketing
+                MoneyTransferBracketing()
+
         End Select
     End Sub
 
@@ -125,6 +128,9 @@
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
                     FormType = ReportType.MonthlyTransactionCountSummary
+                Case "MoneyTransfer Bracketing"
+                    FormType = ReportType.MoneyTransferBracketing
+
             End Select
         End If
 
@@ -524,6 +530,13 @@
 
         frmReport.ReportInit(mySql, filldata, "Reports\rpt_MonthlyTransactionCount.rdlc", addParameters)
         frmReport.Show()
+    End Sub
+    Private Sub MoneyTransferBracketing()
+
+        diagMoneyTransferBracketing.st = GetFirstDate(monCal.SelectionStart)
+        diagMoneyTransferBracketing.en = GetLastDate(monCal.SelectionEnd)
+
+        diagMoneyTransferBracketing.Show()
     End Sub
 
     ' STEP 4

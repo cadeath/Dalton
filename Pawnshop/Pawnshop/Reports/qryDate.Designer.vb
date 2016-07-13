@@ -36,7 +36,7 @@ Partial Class qryDate
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(78, 209)
+        Me.btnGenerate.Location = New System.Drawing.Point(78, 212)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(92, 40)
         Me.btnGenerate.TabIndex = 1
@@ -47,17 +47,19 @@ Partial Class qryDate
         '
         Me.cboReports.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboReports.FormattingEnabled = True
-        Me.cboReports.Items.AddRange(New Object() {"Schedule of Redeem and Renewal", "Schedule of Loan and Renewal", "Loan Register - New Loan and Renewal 2", "Money Transfer", "Money Transfer (BSP)", "Certificate of Insurance", "Dollar Buying", "Branch Borrowings", "Item Pullout", "Monthly Transaction Count Summary"})
-        Me.cboReports.Location = New System.Drawing.Point(12, 182)
+
+        Me.cboReports.Items.AddRange(New Object() {"Schedule of Redeem and Renewal", "Schedule of Loan and Renewal", "Loan Register - New Loan and Renewal 2", "Money Transfer", "Money Transfer (BSP)", "Certificate of Insurance", "Dollar Buying", "Branch Borrowings", "Item Pullout", "Auction Monthly Report", "Monthly Transaction Count Summary", "MoneyTransfer Bracketing"})
+        Me.cboReports.Location = New System.Drawing.Point(10, 185)
+
         Me.cboReports.Name = "cboReports"
-        Me.cboReports.Size = New System.Drawing.Size(225, 21)
+        Me.cboReports.Size = New System.Drawing.Size(227, 21)
         Me.cboReports.TabIndex = 2
         '
         'qryDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(245, 254)
+        Me.ClientSize = New System.Drawing.Size(246, 264)
         Me.Controls.Add(Me.cboReports)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
