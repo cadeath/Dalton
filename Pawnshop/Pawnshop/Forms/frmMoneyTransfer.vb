@@ -468,9 +468,11 @@ Public Class frmMoneyTransfer
         mySql = "SELECT AMOUNT FROM tblcharge C "
         mySql &= " WHERE type = '" & strType & "' and '" & strAmount & "' <= C.AMOUNT ORDER BY AMOUNT ASC ROWS 1"
         ds = LoadSQL(mySql, fillData)
-        strBracket = ds.Tables(fillData).Rows(0).Item("AMOUNT")
-
-
+        If ds.Tables(fillData).Rows.Count < 1 Then
+            strBracket = "0"
+        Else
+            strBracket = ds.Tables(fillData).Rows(0).Item("AMOUNT")
+        End If
         Dim mtTrans As New MoneyTransfer
         With mtTrans
             'Send Money - Branch Received Money (Send In) - 0
