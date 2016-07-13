@@ -125,7 +125,7 @@
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
                     FormType = ReportType.MonthlyTransactionCountSummary
-                Case "Month Renewal Break Down"
+                Case "Monthly Renewal Break Down"
                     FormType = ReportType.RenewalBreakDown
             End Select
         End If
@@ -533,12 +533,13 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
         Dim fillData As String = "dsRenewalBreakDown", mySql As String
 
-        mySql = "SELECT  COUNT(*), ITEMTYPE,LOANDATE,PRINCIPAL "
-        mySql &= vbCrLf & "    FROM TBLPAWN "
-        mySql &= vbCrLf & " WHERE STATUS = '0' OR STATUS = 'R' "
-        mySql &= vbCrLf & String.Format("AND LOANDATE BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
-        mySql &= vbCrLf & "GROUP BY ITEMTYPE,LOANDATE,PRINCIPAL "
-        mySql &= vbCrLf & "ORDER BY LOANDATE ASC "
+        mySql = "SELECT  COUNT(*), ITEMTYPE,ORDATE,PRINCIPAL "
+        mySql &= vbCrLf & "FROM TBLPAWN "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("ORDate BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= vbCrLf & "AND STATUS = '0'"
+        mySql &= vbCrLf & "GROUP BY ITEMTYPE,ORDATE,PRINCIPAL "
+        mySql &= vbCrLf & "ORDER BY ORDATE ASC "
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
