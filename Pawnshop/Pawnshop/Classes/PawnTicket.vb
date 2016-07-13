@@ -366,15 +366,6 @@ Public Class PawnTicket
         If Not isNew Then mySql &= " WHERE PawnID = " & _pawnid
         ds = LoadSQL(mySql, fillData)
 
-        Dim dsQuick As DataSet
-        Dim tmpSql As String = "SELECT * FROM TBLCLASS WHERE CLASSID = " & _catID
-        dsQuick = LoadSQL(tmpSql)
-        If Not IsDBNull(dsQuick.Tables(0).Rows(0).Item("RENEWLIMIT")) Then
-            _renewalCount = dsQuick.Tables(0).Rows(0).Item("RENEWLIMIT")
-        Else
-            _renewalCount = Nothing
-        End If
-
         Dim dsNewRow As DataRow
         If isNew Then
             dsNewRow = ds.Tables(fillData).NewRow
@@ -451,9 +442,7 @@ Public Class PawnTicket
                 .Item("AdvInt") = _advanceInterest
                 .Item("EarlyRedeem") = _earlyRedeem
                 .Item("INT_CHECKSUM") = _intHash
-                If Not IsDBNull(.Item("RENEWALCNT")) Then
-                    .Item("RENEWALCNT") = IIf(_renewalCount <= 0, _renewalCount, _renewalCount - 1)
-                End If
+                .Item("RENEWALCNT") = _renewalCount
             End With
         End If
 
@@ -501,7 +490,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
-                If Not IsDBNull(.Item("RENEWALCNT")) Then _renewalCount = .Item("RENEWALCNT")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String
@@ -551,7 +540,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
-                If Not IsDBNull(.Item("RENEWALCNT")) Then _renewalCount = .Item("RENEWALCNT")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String
@@ -601,7 +590,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
-                If Not IsDBNull(.Item("RENEWALCNT")) Then _renewalCount = .Item("RENEWALCNT")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String

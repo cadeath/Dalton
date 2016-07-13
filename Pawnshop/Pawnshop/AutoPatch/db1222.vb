@@ -18,7 +18,7 @@ Module db1222
             RunCommand(mySql) 'TBLCLASS RENEWAL LIMIT
 
             If DEV_MODE Then
-                mySql = "UPDATE TBLCLASS SET RENEWLIMIT = 5 WHERE TYPE='CEL'"
+                mySql = "UPDATE TBLCLASS SET RENEWABLE = 1, RENEWLIMIT = 5 WHERE TYPE='CEL'"
                 RunCommand(mySql)
             End If
 

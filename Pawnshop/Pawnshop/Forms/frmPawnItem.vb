@@ -1002,6 +1002,7 @@ Public Class frmPawnItem
             '.NetAmount = .Principal - AdvanceInterest
             .NetAmount = Net_Amount
             .Status = "R"
+            .RenewalCount = .RenewalCount + 1
 
             .SaveTicket()
 
