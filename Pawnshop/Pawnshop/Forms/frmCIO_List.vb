@@ -1,4 +1,6 @@
 ﻿Public Class frmCIO_List
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+
     Dim fillData As String = "tblCashTrans"
     ''' <summary>
     ''' load the clearfield and loadactive method
@@ -127,6 +129,14 @@
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
+
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
+
     ''' <summary>
     ''' This button void the transaction.
     ''' </summary>
@@ -134,6 +144,15 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidCashInOut
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidCIO()
+        End If
+    End Sub
+
+    Friend Sub VoidCIO()
         If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
         Dim idx As Integer = lvCIO.FocusedItem.Tag
         VoidID(idx)
