@@ -150,7 +150,7 @@
         database.SaveEntry(ds, False)
 
         RemoveJournal(BORROWINGID, , MoDName)
-        RemoveDailyTimeLog(BORROWINGID, MoDName)
+        RemoveDailyTimeLog(BORROWINGID, "0", MoDName)
         Console.WriteLine(String.Format("Transaction {0} void.", _borrowID))
     End Sub
 

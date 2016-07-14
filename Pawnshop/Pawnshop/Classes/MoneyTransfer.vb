@@ -314,7 +314,7 @@
 
         RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
 
-        RemoveDailyTimeLog(MoneyTransID, SrvTypDailyTimelog)
+        RemoveDailyTimeLog(MoneyTransID, "1", SrvTypDailyTimelog)
 
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub

@@ -638,7 +638,7 @@ Public Class PawnTicket
             If curStatus = "L" Then
                 ChangeStatus("V")
                 RemoveJournal(PtransID, , ModNAME)
-                RemoveDailyTimeLog(PTtransid, ModNAME)
+                RemoveDailyTimeLog(PTtransid, "1", ModNAME)
                 Exit Sub
             End If
 
@@ -680,11 +680,11 @@ Public Class PawnTicket
                 database.SaveEntry(ds, False)
                 RemoveJournal(PtransID, , ModNAME)
                 ' RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket), transID:=PtransID)
-                RemoveDailyTimeLog(PTtransid, ModNAME)
+                RemoveDailyTimeLog(PTtransid, "1", ModNAME)
             Else
                 ChangeStatus("L")
                 RemoveJournal(PtransID, , ModNAME)
-                RemoveDailyTimeLog(PTtransid, ModNAME)
+                RemoveDailyTimeLog(PTtransid, "1", ModNAME)
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
