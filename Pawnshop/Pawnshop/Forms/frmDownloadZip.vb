@@ -75,11 +75,16 @@ Public Class frmDownloadZip
         End Try
     End Sub
 
-
     '"""""""""""""""""""""""""""""""""""""""""""""
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
         If IsProcessRunning("pawnshop") = True Then
             MsgBox("This Application is Running")
+            : DialogResult = MessageBox.Show("You Should Close Pawnshop application for update?", "Pawnshop?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+            If DialogResult = Windows.Forms.DialogResult.OK Then
+                Process.Start("me.bat")
+            Else
+                Exit Sub
+            End If
         Else
             : DialogResult = MessageBox.Show("Do you want to open Pawnshop Application?", "Open Pawnshop?", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
             If DialogResult = Windows.Forms.DialogResult.Yes Then
@@ -100,7 +105,7 @@ Public Class frmDownloadZip
         Try
             DialogResult = MessageBox.Show("Do you want to execute?", "Pawnshop?", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
             If DialogResult = Windows.Forms.DialogResult.Yes Then
-                Dim path As String = "C:\Users\MIS\Desktop\ExtractHere\me.bat"
+                Dim path As String = "C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\me.bat"
                 Dim a As String = "') DO IF %%x == %EXE% goto FOUND "
                 Using sw As StreamWriter = File.CreateText(path)
                     sw.WriteLine("@echo off")
