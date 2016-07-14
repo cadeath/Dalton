@@ -150,7 +150,7 @@
         database.SaveEntry(ds, False)
 
         RemoveJournal(CashID, , Transactiontype)
-        RemoveDailyTimeLog(CashID, SrvTypDailyTimelog)
+        RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
     ''' <summary>

@@ -200,7 +200,7 @@
         database.SaveEntry(ds, False)
 
         RemoveJournal(DollarID, , "DOLLAR BUYING")
-        RemoveDailyTimeLog(DollarID, Modname)
+        RemoveDailyTimeLog(DollarID, "1", Modname)
         Console.WriteLine("Transaction #" & _dollarID & " void")
     End Sub
 

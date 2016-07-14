@@ -180,7 +180,7 @@ Public Class Insurance
 
         database.SaveEntry(ds, False)
         RemoveJournal(InsuranceID, , TransactionName)
-        RemoveDailyTimeLog(InsuranceID, TransactionName)
+        RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
     End Sub
 
     Public Function LoadLastIDNumberInsurance() As Single
