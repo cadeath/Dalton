@@ -1,10 +1,9 @@
-﻿
-﻿''' <summary>
-''' Modify Table tblPawn to include RENEWAL COUNTER
-''' Modify Table tblClass to include RENEWAL COUNTER
-''' </summary>
-''' <remarks>Database Patch for tblPawn</remarks>
-Module db1222
+﻿Module db1222
+    ''' <summary>
+    ''' Modify Table tblPawn to include RENEWAL COUNTER
+    ''' Modify Table tblClass to include RENEWAL COUNTER
+    ''' </summary>
+    ''' <remarks>Database Patch for tblPawn</remarks>
     Const ALLOWABLE_VERSION As String = "1.2.2.1"
     Const LATEST_VERSION As String = "1.2.2.2"
 
@@ -124,10 +123,10 @@ Module db1222
             RunCommand(strGprs2Moneygram)
 
 
-            Database_Update(LATEST_VERSION)
-            Log_Report("SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2")
-        Catch ex As Exception
-            Log_Report("[1.2.2.2]" & ex.ToString)
+            '    Database_Update(LATEST_VERSION)
+            '    Log_Report("SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2")
+            'Catch ex As Exception
+            '    Log_Report("[1.2.2.2]" & ex.ToString)
 
             Dim mySql As String = "ALTER TABLE TBLPAWN ADD RENEWALCNT SMALLINT DEFAULT '0' NOT NULL;"
             RunCommand(mySql) 'TBLPAWN RENEWAL COUNT
