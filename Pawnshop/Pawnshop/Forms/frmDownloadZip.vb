@@ -118,9 +118,9 @@ Public Class frmDownloadZip
     End Function
     '"""""""""""""""""""""""""""""""""""""""""""""""""""
     Private Sub batchfile()
-        Dim a As String = "') DO IF %%x == %EXE% goto FOUND"
-        RichTextBox1.Text = "echo off" & _
-        "SETLOCAL EnableExtensions" & _
+        Dim a As String = "') DO IF %%x == %EXE% goto FOUND "
+        RichTextBox1.Text = "echo off " & _
+        "SETLOCAL EnableExtensions " & _
         "EXE = Pawnshop.exe" & _
         "FOR /F %%x IN ('tasklist /NH /FI ""IMAGENAME eq %EXE%" & a & _
         " echo Not running " & _
