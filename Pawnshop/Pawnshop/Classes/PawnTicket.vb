@@ -40,6 +40,18 @@ Public Class PawnTicket
     Private _redeemDue As Double
     Private _status As String
     Private _TransType As String
+
+    Private _renewalCount As Integer = Nothing
+    Public Property RenewalCount() As Integer
+        Get
+            If _renewalCount = Nothing Then Return Nothing
+            Return _renewalCount
+        End Get
+        Set(ByVal value As Integer)
+            _renewalCount = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Properties"
@@ -391,6 +403,8 @@ Public Class PawnTicket
                 .Item("AdvInt") = _advanceInterest
                 .Item("EarlyRedeem") = _earlyRedeem
                 .Item("INT_CHECKSUM") = _intHash
+                'DBVersion 1.2.2.2
+                .Item("RENEWALCNT") = _renewalCount
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
@@ -428,6 +442,7 @@ Public Class PawnTicket
                 .Item("AdvInt") = _advanceInterest
                 .Item("EarlyRedeem") = _earlyRedeem
                 .Item("INT_CHECKSUM") = _intHash
+                .Item("RENEWALCNT") = _renewalCount
             End With
         End If
 
@@ -475,6 +490,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String
@@ -524,6 +540,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String
@@ -573,6 +590,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String

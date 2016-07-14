@@ -15,7 +15,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = False
+    Public DEV_MODE As Boolean = True
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
@@ -255,6 +255,7 @@ Module mod_system
         Return ds.Tables(0).Rows(0).Item("ID")
     End Function
 #End Region
+
     ''' <summary>
     ''' This function has two arguments.
     ''' declaraton UseShellExecute as boolean and RedirectStandardOutput as boolean.

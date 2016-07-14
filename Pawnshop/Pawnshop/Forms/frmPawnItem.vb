@@ -388,6 +388,8 @@ Public Class frmPawnItem
             Exit Sub
         End If
 
+        Notify_Renewal(PawnItem)
+
         Redeem("R")
         PrintButton(0)
         btnSave.Enabled = True
@@ -1014,6 +1016,7 @@ Public Class frmPawnItem
             '.NetAmount = .Principal - AdvanceInterest
             .NetAmount = Net_Amount
             .Status = "R"
+            .RenewalCount = .RenewalCount + 1
 
             .SaveTicket()
 
