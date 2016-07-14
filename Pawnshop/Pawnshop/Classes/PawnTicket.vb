@@ -40,6 +40,18 @@ Public Class PawnTicket
     Private _redeemDue As Double
     Private _status As String
     Private _TransType As String
+
+    Private _renewalCount As Integer = Nothing
+    Public Property RenewalCount() As Integer
+        Get
+            If _renewalCount = Nothing Then Return Nothing
+            Return _renewalCount
+        End Get
+        Set(ByVal value As Integer)
+            _renewalCount = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Properties"
@@ -391,6 +403,8 @@ Public Class PawnTicket
                 .Item("AdvInt") = _advanceInterest
                 .Item("EarlyRedeem") = _earlyRedeem
                 .Item("INT_CHECKSUM") = _intHash
+                'DBVersion 1.2.2.2
+                .Item("RENEWALCNT") = _renewalCount
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
@@ -428,6 +442,7 @@ Public Class PawnTicket
                 .Item("AdvInt") = _advanceInterest
                 .Item("EarlyRedeem") = _earlyRedeem
                 .Item("INT_CHECKSUM") = _intHash
+                .Item("RENEWALCNT") = _renewalCount
             End With
         End If
 
@@ -475,6 +490,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String
@@ -524,6 +540,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String
@@ -573,6 +590,7 @@ Public Class PawnTicket
                 _earlyRedeem = .Item("EarlyRedeem")
                 If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
                 _intHash = .Item("INT_CHECKSUM")
+                _renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String
@@ -619,7 +637,7 @@ Public Class PawnTicket
             Dim PTtransid As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
             If curStatus = "L" Then
                 ChangeStatus("V")
-                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveJournal(PtransID, , ModNAME)
                 RemoveDailyTimeLog(PTtransid, ModNAME)
                 Exit Sub
             End If
@@ -637,7 +655,7 @@ Public Class PawnTicket
                 Dim st As String
                 If ds.Tables(fillData).Rows.Count = 0 Then
                     ChangeStatus("L")
-                    RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                    RemoveJournal(PtransID, , ModNAME)
                     Exit Sub
                 Else
                     If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
@@ -660,12 +678,12 @@ Public Class PawnTicket
                     .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
-                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveJournal(PtransID, , ModNAME)
                 ' RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket), transID:=PtransID)
                 RemoveDailyTimeLog(PTtransid, ModNAME)
             Else
                 ChangeStatus("L")
-                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveJournal(PtransID, , ModNAME)
                 RemoveDailyTimeLog(PTtransid, ModNAME)
             End If
         Catch ex As Exception

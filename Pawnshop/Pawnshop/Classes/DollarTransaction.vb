@@ -193,13 +193,14 @@
             MsgBox("Transaction not found!", MsgBoxStyle.Critical)
             Exit Sub
         End If
+        Dim Modname As String = "DOLLAR"
 
         ds.Tables(0).Rows(0).Item("Status") = "V"
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
 
-        RemoveJournal(transID:=DollarID, TransType:="DOLLAR BUYING")
-        RemoveDailyTimeLog(DollarID)
+        RemoveJournal(DollarID, , "DOLLAR BUYING")
+        RemoveDailyTimeLog(DollarID, Modname)
         Console.WriteLine("Transaction #" & _dollarID & " void")
     End Sub
 

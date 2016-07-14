@@ -149,7 +149,7 @@
         Dim BORROWINGID As Integer = frmBorrowBrowse.LBLBORROWINGID.Text
         database.SaveEntry(ds, False)
 
-        RemoveJournal(transID:=BORROWINGID, TransType:=MoDName)
+        RemoveJournal(BORROWINGID, , MoDName)
         RemoveDailyTimeLog(BORROWINGID, MoDName)
         Console.WriteLine(String.Format("Transaction {0} void.", _borrowID))
     End Sub

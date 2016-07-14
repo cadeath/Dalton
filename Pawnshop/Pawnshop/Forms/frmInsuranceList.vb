@@ -9,7 +9,9 @@
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub LoadInsurance()
-        Dim mySql As String = "SELECT FIRST 100 * FROM tblInsurance WHERE Status LIKE 'A' ORDER BY TRANSDATE DESC"
+
+        Dim mySql As String = "SELECT FIRST 50 * FROM tblInsurance WHERE Status LIKE 'A' ORDER BY TRANSDATE DESC"
+
         Dim ds As DataSet = LoadSQL(mySql)
 
         For Each ins In ds.Tables(0).Rows
@@ -65,14 +67,16 @@
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM tblInsurance WHERE "
-        If IsNumeric(txtSearch.Text) Then mySql &= "COINO = " & txtSearch.Text & " OR "
-        mySql &= String.Format("LOWER(CLIENTNAME) LIKE LOWER('%{0}%')", txtSearch.Text)
+        If IsNumeric(txtSearch.Text) Then mySql &= "COINO = " & secured_str & " OR "
+        mySql &= String.Format("LOWER(CLIENTNAME) LIKE LOWER('%{0}%')", secured_str)
 
         Console.WriteLine(mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
         lvInsurance.Items.Clear()
+        Dim ds As DataSet = LoadSQL(mySql)
         For Each ins In ds.Tables(0).Rows
             Dim loadInsu As New Insurance
             loadInsu.LoadByRow(ins)
