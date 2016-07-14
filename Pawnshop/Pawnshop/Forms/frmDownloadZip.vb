@@ -1,53 +1,23 @@
-﻿Imports System.Threading
+﻿Option Strict On
+Imports System.Threading
 Imports System.Net
 Imports System.IO
 Imports System.ComponentModel
+Imports System.diagnosics
 
 Public Class frmDownloadZip
-    Dim wc As System.Net.WebClient
-
-    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-
-        Dim dest As String = "C:\Users\MIS\Desktop\New folder (2)\syslogerror.rar"
-        Dim name As String = "https://us-mg6.mail.yahoo.com/neo/launch?.rand=0b562mq04194i#407331862/syslogerror.rar"
-
-        Dim wr As HttpWebRequest = CType(WebRequest.Create(name), HttpWebRequest)
-        Dim ws As HttpWebResponse = CType(wr.GetResponse(), HttpWebResponse)
-        Dim str As Stream = ws.GetResponseStream()
-
-        Dim a As Integer = ws.ContentLength
-        Dim inBuf(a) As Byte
-        Dim bytesToRead As Integer = CInt(inBuf.Length)
-        Dim bytesRead As Integer = 0
-        While bytesToRead > 0
-            Dim n As Integer = str.Read(inBuf, bytesRead, bytesToRead)
-            If n = 0 Then
-                Exit While
-            End If
-            bytesRead += n
-            bytesToRead -= n
-        End While
-
-        Dim fstr As New FileStream(dest, FileMode.OpenOrCreate, FileAccess.Write)
-        fstr.Write(inBuf, 0, bytesRead)
-        str.Close()
-        fstr.Close()
-        MsgBox("Downloaded Successfully", MsgBoxStyle.Information, "Pawnshop")
-
-
-    End Sub
-
+   
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
 
-        Dim ZipLocation2 As String = " ""C:\Users\MIS\Desktop\TransFerhere\syslogerror.rar"" "
-        Dim ZipExtracted2 As String = " ""C:\Users\MIS\Desktop\ExtractHere"" "
-        Dim Zlocation As String = "C:\Program Files\WinRAR\WinRAR.exe"
+        Dim DownloadedData As String = " ""C:\Users\MIS\Desktop\TransFerhere\syslogerror.rar"" "
+        Dim ExtracedData As String = " ""C:\Users\MIS\Desktop\ExtractHere"" "
+        Dim RarLocation As String = "C:\Program Files\WinRAR\WinRAR.exe"
         Using p1 As New Process
-            p1.StartInfo.FileName = Zlocation
-            p1.StartInfo.Arguments = " x " & ZipLocation2 & " *.* " & ZipExtracted2
+            p1.StartInfo.FileName = RarLocation
+            p1.StartInfo.Arguments = " x " & DownloadedData & " *.* " & ExtracedData
             Try
                 p1.Start()
-                '   MsgBox("Successfully Extracted Data.", MsgBoxStyle.Information, "Pawnshop")
+                MsgBox("Successfully Extracted Data.", MsgBoxStyle.Information, "Pawnshop")
             Catch ex As Exception
                 MsgBox("File Type Cannot be supported", MsgBoxStyle.Exclamation, "Pawnshop")
             End Try
@@ -73,7 +43,7 @@ Public Class frmDownloadZip
 
     Private Sub _DownloadProgressChanged(ByVal sender As Object, ByVal e As System.Net.DownloadProgressChangedEventArgs)
         ' Update progress bar
-        progressBar1.Value = e.ProgressPercentage
+        ProgressBar1.Value = e.ProgressPercentage
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
@@ -82,6 +52,88 @@ Public Class frmDownloadZip
         Dim _WebClient As New System.Net.WebClient()
         AddHandler _WebClient.DownloadFileCompleted, AddressOf _DownloadFileCompleted
         AddHandler _WebClient.DownloadProgressChanged, AddressOf _DownloadProgressChanged
-        _WebClient.DownloadFileAsync(New Uri("http://localhost/syslogerror.zip"), "C:\Users\MIS\Desktop\TransFerhere\syslogerror.zip")
+        _WebClient.DownloadFileAsync(New Uri("http://localhost/syslogerror.rar"), "C:\Users\MIS\Desktop\TransFerhere\syslogerror.rar")
+
+       
+    End Sub
+  
+
+    Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
+        
+        Dim dlg As SaveFileDialog = New SaveFileDialog
+
+        System.IO.File.Delete("C:\Users\MIS\Desktop\ExtractHere\me.bat")
+
+        dlg.Title = "Save"
+        dlg.Filter = "Batch File (*.bat)|*.bat"
+        Try
+            If dlg.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+                RichTextBox1.SaveFile(dlg.FileName, RichTextBoxStreamType.PlainText)
+                MsgBox("Successfully Saved", MsgBoxStyle.Information, "Pawnshop")
+
+            End If
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+   
+
+    Private Sub btnExecuteBatch_Click(sender As System.Object, e As System.EventArgs) Handles btnExecuteBatch.Click
+        Dim proc As Process = Nothing
+        Try
+            Dim batDir As String = String.Format("C:\Users\MIS\Desktop\ExtractHere")
+            proc = New Process()
+            proc.StartInfo.WorkingDirectory = batDir
+            proc.StartInfo.FileName = "me.bat"
+            proc.StartInfo.CreateNoWindow = False
+            proc.Start()
+            proc.WaitForExit()
+            MessageBox.Show("Bat file executed !!")
+        Catch ex As Exception
+            Console.WriteLine(ex.StackTrace.ToString())
+        End Try
+    End Sub
+
+
+    '"""""""""""""""""""""""""""""""""""""""""""""
+    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+        If IsProcessRunning("notepad") = True Then
+            MsgBox("This Application is Running")
+        Else
+            : DialogResult = MessageBox.Show("Do you want to open Notepad?", "Open Notepad?", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
+            If DialogResult = Windows.Forms.DialogResult.Yes Then
+                Process.Start("C:\Windows\Notepad.exe")
+            End If
+        End If
+    End Sub
+    Public Function IsProcessRunning(ByVal name As String) As Boolean
+        For Each clsProcess As Process In Process.GetProcesses()
+            If clsProcess.ProcessName.StartsWith(name) Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+    '"""""""""""""""""""""""""""""""""""""""""""""""""""
+    Private Sub batchfile()
+        Dim a As String = "') DO IF %%x == %EXE% goto FOUND"
+        RichTextBox1.Text = "echo off" & _
+        "SETLOCAL EnableExtensions" & _
+        "EXE = Pawnshop.exe" & _
+        "FOR /F %%x IN ('tasklist /NH /FI ""IMAGENAME eq %EXE%" & a & _
+        " echo Not running " & _
+       " pause " & _
+        "GoTo FIN " & _
+        ": FOUND" & _
+       " echo Running" & _
+        "Taskkill /F /IM pawnshop.exe" & _
+        "pause" & _
+        ": FIN"
+    End Sub
+
+    Private Sub frmDownloadZip_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        batchfile()
     End Sub
 End Class
