@@ -127,7 +127,7 @@
             Transactiontype = lblType.Text
         End If
 
-        Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE TRANSID =" & CashID
+        Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE HASCUSTOMER = '1' AND TRANSID =" & CashID
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
         Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
         Select Case SrvTypDailyTimelog
@@ -149,8 +149,8 @@
         End If
         database.SaveEntry(ds, False)
 
-        RemoveJournal(transID:=CashID, TransType:=Transactiontype)
-        RemoveDailyTimeLog(CashID, ModName:=SrvTypDailyTimelog)
+        RemoveJournal(CashID, , Transactiontype)
+        RemoveDailyTimeLog(CashID, SrvTypDailyTimelog)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
     ''' <summary>

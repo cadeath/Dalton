@@ -262,6 +262,7 @@
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
+    <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
       <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
     </Compile>

@@ -637,7 +637,7 @@ Public Class PawnTicket
             Dim PTtransid As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
             If curStatus = "L" Then
                 ChangeStatus("V")
-                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveJournal(PtransID, , ModNAME)
                 RemoveDailyTimeLog(PTtransid, ModNAME)
                 Exit Sub
             End If
@@ -655,7 +655,7 @@ Public Class PawnTicket
                 Dim st As String
                 If ds.Tables(fillData).Rows.Count = 0 Then
                     ChangeStatus("L")
-                    RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                    RemoveJournal(PtransID, , ModNAME)
                     Exit Sub
                 Else
                     If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
@@ -678,12 +678,12 @@ Public Class PawnTicket
                     .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
-                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveJournal(PtransID, , ModNAME)
                 ' RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket), transID:=PtransID)
                 RemoveDailyTimeLog(PTtransid, ModNAME)
             Else
                 ChangeStatus("L")
-                RemoveJournal(transID:=PtransID, TransType:=ModNAME)
+                RemoveJournal(PtransID, , ModNAME)
                 RemoveDailyTimeLog(PTtransid, ModNAME)
             End If
         Catch ex As Exception

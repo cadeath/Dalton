@@ -312,9 +312,9 @@
 
         End Select
 
-        RemoveJournal(transID:=MoneyTransID, TransType:=SrvTypjOURNAL)
+        RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
 
-        RemoveDailyTimeLog(MoneyTransID, ModName:=SrvTypDailyTimelog)
+        RemoveDailyTimeLog(MoneyTransID, SrvTypDailyTimelog)
 
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
