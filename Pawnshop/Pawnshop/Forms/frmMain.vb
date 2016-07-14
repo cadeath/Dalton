@@ -298,7 +298,8 @@
             Exit Sub
         End If
 
-        frmBackup.Show()
+        'frmBackup.Show()
+        frmBackUpDataSettings.Show()
     End Sub
 
     Private Sub UpdateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdateToolStripMenuItem.Click

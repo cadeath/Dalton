@@ -258,12 +258,6 @@
     <Compile Include="Forms\diagOTP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmBackupData.Designer.vb">
-      <DependentUpon>frmBackupData.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmBackupData.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\frmBackUpDataSettings.Designer.vb">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
     </Compile>
@@ -617,9 +611,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmBackupData.resx">
-      <DependentUpon>frmBackupData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
