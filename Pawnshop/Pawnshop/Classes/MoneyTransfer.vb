@@ -275,7 +275,7 @@
         End Select
 
 
-        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID =" & MoneyTransID
+        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE HASCUSTOMER = '1' AND TRANSID =" & MoneyTransID
         Dim ds2 As DataSet = LoadSQL(mySql2, fillData1)
         Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
         Select Case SrvTypDailyTimelog

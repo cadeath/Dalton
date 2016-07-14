@@ -495,7 +495,7 @@ Public Class frmMoneyTransfer
             .Save()
             Select Case cboType.Text
                 Case "Pera Padala"
-                    MOD_NAME = "PERA PADALA"
+                    MOD_NAME = "PERA PADALA "
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "ME# " & idME, "PADALA IN", , , "PERA PADALA", TransID:=.LoadLastIDNumberMoneyTransfer)
                         AddJournal(.TransferAmount, "Credit", "Pera Padala Fund Payable", "ME# " & idME, , , , "PERA PADALA", TransID:=.LoadLastIDNumberMoneyTransfer)
@@ -519,7 +519,7 @@ Public Class frmMoneyTransfer
                         MOD_NAME &= "IN"
                     End If
                 Case "Western Union - Local", "Western Union - Intl"
-                    MOD_NAME = "WESTERN UNION"
+                    MOD_NAME = "WESTERN UNION "
                     If rbSend.Checked Then
                         AddJournal(.NetAmount, "Debit", "Revolving Fund", "WE|Ref# " & .ReferenceNumber, "WESTERN IN", , , "WESTERN UNION", TransID:=.LoadLastIDNumberMoneyTransfer)
                         AddJournal(.NetAmount, "Credit", "Due to / From Western Union", "WE|Ref# " & .ReferenceNumber, , , , "WESTERN UNION", TransID:=.LoadLastIDNumberMoneyTransfer)
