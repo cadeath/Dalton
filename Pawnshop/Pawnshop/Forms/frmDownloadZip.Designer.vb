@@ -33,7 +33,6 @@ Partial Class frmDownloadZip
         Me.btnExecuteBatch = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -91,7 +90,6 @@ Partial Class frmDownloadZip
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button3)
         Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.Button4)
         Me.GroupBox1.Controls.Add(Me.btnExecuteBatch)
@@ -103,15 +101,6 @@ Partial Class frmDownloadZip
         Me.GroupBox1.Size = New System.Drawing.Size(190, 322)
         Me.GroupBox1.TabIndex = 17
         Me.GroupBox1.TabStop = False
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(44, 184)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 17
-        Me.Button3.Text = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
         '
         'frmDownloadZip
         '
@@ -137,5 +126,4 @@ Partial Class frmDownloadZip
     Friend WithEvents btnExecuteBatch As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class
