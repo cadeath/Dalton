@@ -42,7 +42,6 @@ Public Class frmDownloadZip
     End Sub
 
     Private Sub _DownloadProgressChanged(ByVal sender As Object, ByVal e As System.Net.DownloadProgressChangedEventArgs)
-        ' Update progress bar
         ProgressBar1.Value = e.ProgressPercentage
     End Sub
 
@@ -53,30 +52,10 @@ Public Class frmDownloadZip
         AddHandler _WebClient.DownloadFileCompleted, AddressOf _DownloadFileCompleted
         AddHandler _WebClient.DownloadProgressChanged, AddressOf _DownloadProgressChanged
         _WebClient.DownloadFileAsync(New Uri("http://localhost/syslogerror.rar"), "C:\Users\MIS\Desktop\TransFerhere\syslogerror.rar")
-
-       
     End Sub
-  
 
     Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
-        
-        Dim dlg As SaveFileDialog = New SaveFileDialog
-
-        System.IO.File.Delete("C:\Users\MIS\Desktop\ExtractHere\me.bat")
-
-        dlg.Title = "Save"
-        dlg.Filter = "Batch File (*.bat)|*.bat"
-        Try
-            If dlg.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                RichTextBox1.SaveFile(dlg.FileName, RichTextBoxStreamType.PlainText)
-                MsgBox("Successfully Saved", MsgBoxStyle.Information, "Pawnshop")
-
-            End If
-        Catch ex As Exception
-
-        End Try
-
-
+        batchfile()
     End Sub
    
 
@@ -99,12 +78,12 @@ Public Class frmDownloadZip
 
     '"""""""""""""""""""""""""""""""""""""""""""""
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
-        If IsProcessRunning("notepad") = True Then
+        If IsProcessRunning("pawnshop") = True Then
             MsgBox("This Application is Running")
         Else
-            : DialogResult = MessageBox.Show("Do you want to open Notepad?", "Open Notepad?", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
+            : DialogResult = MessageBox.Show("Do you want to open Pawnshop Application?", "Open Pawnshop?", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
             If DialogResult = Windows.Forms.DialogResult.Yes Then
-                Process.Start("C:\Windows\Notepad.exe")
+                Process.Start("C:\Program Files (x86)\cdt-S0ft\Dalton Pawnshop\pawnshop.exe")
             End If
         End If
     End Sub
@@ -118,22 +97,36 @@ Public Class frmDownloadZip
     End Function
     '"""""""""""""""""""""""""""""""""""""""""""""""""""
     Private Sub batchfile()
-        Dim a As String = "') DO IF %%x == %EXE% goto FOUND "
-        RichTextBox1.Text = "echo off " & _
-        "SETLOCAL EnableExtensions " & _
-        "EXE = Pawnshop.exe" & _
-        "FOR /F %%x IN ('tasklist /NH /FI ""IMAGENAME eq %EXE%" & a & _
-        " echo Not running " & _
-       " pause " & _
-        "GoTo FIN " & _
-        ": FOUND" & _
-       " echo Running" & _
-        "Taskkill /F /IM pawnshop.exe" & _
-        "pause" & _
-        ": FIN"
-    End Sub
+        Try
+            DialogResult = MessageBox.Show("Do you want to execute?", "Pawnshop?", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
+            If DialogResult = Windows.Forms.DialogResult.Yes Then
+                Dim path As String = "C:\Users\MIS\Desktop\ExtractHere\me.bat"
+                Dim a As String = "') DO IF %%x == %EXE% goto FOUND "
+                Using sw As StreamWriter = File.CreateText(path)
+                    sw.WriteLine("@echo off")
+                    sw.WriteLine("SETLOCAL EnableExtensions")
+                    sw.WriteLine("set EXE=pawnshop.exe")
+                    sw.WriteLine("FOR /F %%x IN ('tasklist /NH /FI ""IMAGENAME eq %EXE%""" & a)
+                    sw.WriteLine("echo Not running")
+                    sw.WriteLine("pause")
+                    sw.WriteLine("goto FIN ")
+                    sw.WriteLine(":FOUND")
+                    sw.WriteLine("echo Running")
+                    sw.WriteLine("Taskkill /F /IM pawnshop.exe")
+                    sw.WriteLine("pause")
+                    sw.WriteLine(":FINALIZE")
+                End Using
+                MessageBox.Show("Success", "I N F O R M A T I O N", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MsgBox("Cancelled Process...")
+            End If
 
-    Private Sub frmDownloadZip_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        batchfile()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+     
     End Sub
+    '""""""""""""""""""""""""""""""""""""""""""""""""""""""
+ 
 End Class
