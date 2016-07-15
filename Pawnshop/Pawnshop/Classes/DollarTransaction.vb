@@ -199,8 +199,8 @@
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
 
-        RemoveJournal(transID:=DollarID, TransType:="DOLLAR BUYING")
-        RemoveDailyTimeLog(DollarID, ModName:=Modname)
+        RemoveJournal(DollarID, , "DOLLAR BUYING")
+        RemoveDailyTimeLog(DollarID, "1", Modname)
         Console.WriteLine("Transaction #" & _dollarID & " void")
     End Sub
 

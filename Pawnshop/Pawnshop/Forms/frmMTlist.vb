@@ -1,4 +1,5 @@
 ﻿Public Class frmMTlist
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -21,7 +22,7 @@
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate DESC"
+        Dim mySql As String = "SELECT FIRST 50 * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate DESC"
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
@@ -59,10 +60,13 @@
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
         ' to be added more comprehensive searching
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM tblMoneyTransfer WHERE refNum LIKE '%" & txtSearch.Text & "%' "
+        mySql = "SELECT * FROM tblMoneyTransfer WHERE refNum LIKE '%" & secured_str & "%' OR "
+        mySql &= "UPPER(RECEIVERNAME) LIKE UPPER('%" & secured_str & "%') OR UPPER(SENDERNAME) LIKE UPPER('%" & secured_str & "%')"
         ds = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then
@@ -98,7 +102,22 @@
         btnView.PerformClick()
     End Sub
 
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
+
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidMoneyTransfer
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidMoneyTransfer()
+        End If
+    End Sub
+    Friend Sub VoidMoneyTransfer()
         If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
 
         Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
@@ -124,7 +143,6 @@
                              MsgBoxStyle.Information, "Transaction Void"))
         LoadActive()
     End Sub
-
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()

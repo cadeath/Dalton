@@ -50,13 +50,13 @@
 
     End Sub
 
-    Friend Sub RemoveDailyTimeLog(srcStr As Integer, optional ModName As String ="")
+    Friend Sub RemoveDailyTimeLog(ByVal srcStr As Integer, ByVal Hascutomer As Integer, ByVal ModName As String)
         'Void transaction in Daily Time Log = remarks
         Dim void As String = String.Format("VOID")
 
         Dim TBL As String = "TBL_DAILYTIMELOG"
-        Dim mySql As String = "SELECT * FROM TBL_DAILYTIMELOG WHERE "
-        mySql &= String.Format("TRANSID LIKE '%{0}%' AND MOD_NAME LIKE '%{1}%'", srcStr, ModName)
+        Dim mySql As String = "SELECT * FROM TBL_DAILYTIMELOG WHERE HASCUSTOMER = '" & Hascutomer & "' AND "
+        mySql &= "TRANSID = '" & srcStr & "' AND MOD_NAME = '" & ModName & "'"
 
         Dim ds As DataSet = LoadSQL(mySql, TBL)
         If ds.Tables(TBL).Rows.Count = 0 Then

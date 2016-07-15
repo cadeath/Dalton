@@ -3,6 +3,7 @@
     Private fillData As String = "tblMoneyTransfer"
     Private fillData1 As String = "tbl_DailyTimeLog"
     Private filldata2 As String = "tblJournal"
+
 #Region "Variables"
     Private _id As Integer
     Private _ref As String
@@ -17,6 +18,7 @@
     Private _netAmount As Double = 0
     Private _encoderID As Integer
     Private _status As String
+    Private _bracket As String
 #End Region
 
 #Region "Properties"
@@ -157,6 +159,15 @@
             Return _encoderID
         End Get
     End Property
+
+    Public Property Bracket As String
+        Set(ByVal value As String)
+            _bracket = value
+        End Set
+        Get
+            Return _bracket
+        End Get
+    End Property
 #End Region
 
 #Region "Procedures and Functions"
@@ -220,6 +231,7 @@
             .Item("Status") = _status
             .Item("EncoderID") = _encoderID
             .Item("SystemInfo") = Now
+            .Item("Bracket") = _bracket
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
@@ -263,7 +275,7 @@
         End Select
 
 
-        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE TRANSID =" & MoneyTransID
+        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE HASCUSTOMER = '1' AND TRANSID =" & MoneyTransID
         Dim ds2 As DataSet = LoadSQL(mySql2, fillData1)
         Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
         Select Case SrvTypDailyTimelog
@@ -281,15 +293,59 @@
         Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
         Select Case SrvTypjOURNAL
-            Case "PERA PADALA"
-            Case "Pera Padala - PMTC"
-            Case "WESTERN UNION"
-            Case "Cebuana Llhuiller"
-            Case "GPRS"
-        End Select
-        RemoveJournal(transID:=MoneyTransID, TransType:=SrvTypjOURNAL)
+            Case "PERA PADALA IN"
+            Case "PERA PADALA OUT"
 
-        RemoveDailyTimeLog(MoneyTransID, ModName:=SrvTypDailyTimelog)
+            Case "Pera Padala - PMFTC IN"
+            Case "Pera Padala - PMFTC OUT"
+
+            Case "WESTERN UNION IN"
+            Case "WESTERN UNION OUT"
+
+            Case "Cebuana Llhuiller IN"
+            Case "Cebuana Llhuiller OUT"
+
+            Case "GPRS IN"
+            Case "GPRS OUT"
+
+            Case "GPRS-SmartMoney IN"
+            Case "GPRS-SmartMoney OUT"
+
+            Case "GPRS-(UCPB/PNB) IN"
+            Case "GPRS-(UCPB/PNB) OUT"
+
+            Case "GPRS-(BDO/Chinabank) IN"
+            Case "GPRS-(BDO/Chinabank) OUT"
+
+            Case "GPRS-DBP IN"
+            Case "GPRS-DBP OUT"
+
+            Case "GPRS-MetroBank IN"
+            Case "GPRS-MetroBank OUT"
+
+            Case "GPRS-(Maybank/LandBank) IN"
+            Case "GPRS-(Maybank/LandBank) OUT"
+
+            Case "iREMIT IN"
+            Case "iREMIT OUT"
+
+            Case "NYBP/Transfast IN"
+            Case "NYBP/Transfast OUT"
+
+            Case "GPRS-Moneygram IN"
+            Case "GPRS-Moneygram OUT"
+
+            Case "SmartMoney-GPRS IN"
+            Case "SmartMoney-GPRS OUT"
+
+            Case "Moneygram-GPRS IN"
+            Case "Moneygram-GPRS OUT"
+        End Select
+
+        RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
+
+        RemoveDailyTimeLog(MoneyTransID, "1", SrvTypDailyTimelog)
+
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 
