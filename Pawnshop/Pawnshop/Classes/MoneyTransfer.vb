@@ -294,7 +294,7 @@
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
         Select Case SrvTypjOURNAL
             Case "PERA PADALA"
-            Case "Pera Padala - PMTC"
+            Case "Pera Padala - PMFTC"
             Case "WESTERN UNION"
             Case "Cebuana Llhuiller"
             Case "GPRS"
