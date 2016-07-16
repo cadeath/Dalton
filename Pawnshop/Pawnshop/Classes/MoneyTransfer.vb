@@ -293,23 +293,54 @@
         Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
         Select Case SrvTypjOURNAL
-            Case "PERA PADALA"
-            Case "Pera Padala - PMFTC"
-            Case "WESTERN UNION"
-            Case "Cebuana Llhuiller"
-            Case "GPRS"
-            Case "GPRS-SmartMoney"
-            Case "GPRS-(UCPB/PNB)"
-            Case "GPRS-(BDO/Chinabank)"
-            Case "GPRS-DBP"
-            Case "GPRS-MetroBank"
-            Case "GPRS-(Maybank/LandBank)"
-            Case "iREMIT"
-            Case "NYBP/Transfast"
-            Case "GPRS-Moneygram"
-            Case "SmartMoney-GPRS"
-            Case "Moneygram-GPRS"
 
+            Case "PERA PADALA IN"
+            Case "PERA PADALA OUT"
+
+            Case "Pera Padala - PMFTC IN"
+            Case "Pera Padala - PMFTC OUT"
+
+            Case "WESTERN UNION IN"
+            Case "WESTERN UNION OUT"
+
+            Case "Cebuana Llhuiller IN"
+            Case "Cebuana Llhuiller OUT"
+
+            Case "GPRS IN"
+            Case "GPRS OUT"
+
+            Case "GPRS-SmartMoney IN"
+            Case "GPRS-SmartMoney OUT"
+
+            Case "GPRS-(UCPB/PNB) IN"
+            Case "GPRS-(UCPB/PNB) OUT"
+
+            Case "GPRS-(BDO/Chinabank) IN"
+            Case "GPRS-(BDO/Chinabank) OUT"
+
+            Case "GPRS-DBP IN"
+            Case "GPRS-DBP OUT"
+
+            Case "GPRS-MetroBank IN"
+            Case "GPRS-MetroBank OUT"
+
+            Case "GPRS-(Maybank/LandBank) IN"
+            Case "GPRS-(Maybank/LandBank) OUT"
+
+            Case "iREMIT IN"
+            Case "iREMIT OUT"
+
+            Case "NYBP/Transfast IN"
+            Case "NYBP/Transfast OUT"
+
+            Case "GPRS-Moneygram IN"
+            Case "GPRS-Moneygram OUT"
+
+            Case "SmartMoney-GPRS IN"
+            Case "SmartMoney-GPRS OUT"
+
+            Case "Moneygram-GPRS IN"
+            Case "Moneygram-GPRS OUT"
         End Select
 
         RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
