@@ -79,7 +79,7 @@ Partial Class frmBackUpDataSettings
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnBackup)
         Me.Name = "frmBackUpDataSettings"
-        Me.Text = "BackUp Data Settings"
+        Me.Text = "Create Backup"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
