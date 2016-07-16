@@ -4,8 +4,8 @@ Public Class frmBackUpDataSettings
 
     Private Sub btnBrowseBackup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseBackup.Click
         If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
-
         txtPath2.Text = fbdBackup.SelectedPath
+        txtPath2.Focus()
     End Sub
 
     Private Sub btnbackup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBackup.Click
@@ -32,8 +32,8 @@ Public Class frmBackUpDataSettings
         MessageBox.Show("Successful", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Me.Close()
     End Sub
-    Private Sub txtBranchName_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
-        If e.KeyCode = Keys.Enter Then
+    Private Sub txtPath2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPath2.KeyPress
+        If isEnter(e) Then
             btnBackup.PerformClick()
         End If
     End Sub
