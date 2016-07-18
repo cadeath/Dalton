@@ -147,10 +147,16 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        If txtSearch.Text.Length <= 3 Then
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation)
+        Else
+            PawningSearch()
+        End If
+    End Sub
+    Private Sub PawningSearch()
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
-
         Dim strWords As String() = secured_str.Split(New Char() {" "c})
         Dim mySql As String, name As String
 
@@ -191,41 +197,23 @@
 
         End If
 
-            ds.Clear()
-            ds = LoadSQL(mySql)
-            MaxRow = ds.Tables(0).Rows.Count
-            If MaxRow = 0 Then
-                Console.WriteLine("No Pawn, No Client, No found")
-                MsgBox("Query not found", MsgBoxStyle.Information)
-                Exit Sub
-            End If
+        Console.WriteLine("SQL: " & mySql)
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        If MaxRow <= 0 Then
+            MsgBox("Query not found", MsgBoxStyle.Critical)
 
-            For Each dr As DataRow In ds.Tables(0).Rows
-                clientID = dr.Item("ClientID")
-                Dim xDs As DataSet
-
-                mySql = "SELECT * FROM tblpawn WHERE clientID = " & clientID
-                xDs = LoadSQL(mySql)
-                MaxRow = xDs.Tables(0).Rows.Count
-                If MaxRow > 0 Then
-                    lvPawners.Items.Clear()
-                    For Each xdr As DataRow In xDs.Tables(0).Rows
-                        Dim tmpTicket As New PawnTicket
-                        tmpTicket.LoadTicketInRow(xdr)
-                        AddItem(tmpTicket)
-                    Next
-                End If
-            Next
-        Else
-            For Each dr As DataRow In ds.Tables(0).Rows
-                Dim tmpTicket As New PawnTicket
-                tmpTicket.LoadTicketInRow(dr)
-                AddItem(tmpTicket)
-            Next
+            Exit Sub
         End If
 
-        MsgBox(MaxRow & " result found.", MsgBoxStyle.Information)
-        'Auto Select
+        lvPawners.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpTicket As New PawnTicket
+            tmpTicket.LoadTicketInRow(dr)
+            AddItem(tmpTicket)
+        Next
+
+        MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
         If lvPawners.Items.Count > 0 Then
             lvPawners.Focus()
             lvPawners.Items(0).Selected = True
@@ -242,6 +230,9 @@
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
+        End If
+        If rbPawnTicket.Checked Then
+            DigitOnly(e)
         End If
     End Sub
     ''' <summary>
@@ -330,7 +321,6 @@
     Private Sub chkSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSeg.CheckedChanged
         LoadActive()
     End Sub
-
 
     Private Sub rbPawnTicket_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPawnTicket.Click, _
         rbPawner.Click, rbDescription.Click, rbAll.Click
