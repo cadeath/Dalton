@@ -56,7 +56,17 @@ Partial Class frmPawning
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+
+        Me.GroupBox1.Controls.Add(Me.rbDescription)
+        Me.GroupBox1.Controls.Add(Me.rbPawner)
+        Me.GroupBox1.Controls.Add(Me.rbPawnTicket)
+        Me.GroupBox1.Controls.Add(Me.rbAll)
+
+
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -117,7 +127,9 @@ Partial Class frmPawning
         Me.lvPawners.Location = New System.Drawing.Point(12, 150)
         Me.lvPawners.MultiSelect = False
         Me.lvPawners.Name = "lvPawners"
-        Me.lvPawners.Size = New System.Drawing.Size(854, 226)
+
+        Me.lvPawners.Size = New System.Drawing.Size(847, 313)
+
         Me.lvPawners.TabIndex = 1
         Me.lvPawners.UseCompatibleStateImageBehavior = False
         Me.lvPawners.View = System.Windows.Forms.View.Details
@@ -196,7 +208,9 @@ Partial Class frmPawning
         '
         Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Location = New System.Drawing.Point(791, 383)
+
+        Me.btnClose.Location = New System.Drawing.Point(791, 533)
+
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 23)
         Me.btnClose.TabIndex = 2
@@ -207,7 +221,9 @@ Partial Class frmPawning
         '
         Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnView.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnView.Location = New System.Drawing.Point(708, 383)
+
+        Me.btnView.Location = New System.Drawing.Point(708, 533)
+
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 6
@@ -254,7 +270,9 @@ Partial Class frmPawning
         Me.Label2.BackColor = System.Drawing.Color.Black
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.LightGray
-        Me.Label2.Location = New System.Drawing.Point(12, 396)
+
+        Me.Label2.Location = New System.Drawing.Point(12, 546)
+
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(187, 13)
         Me.Label2.TabIndex = 10
@@ -267,7 +285,9 @@ Partial Class frmPawning
         Me.Label3.BackColor = System.Drawing.Color.Black
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.Yellow
-        Me.Label3.Location = New System.Drawing.Point(207, 396)
+
+        Me.Label3.Location = New System.Drawing.Point(207, 546)
+
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(102, 13)
         Me.Label3.TabIndex = 11
@@ -280,7 +300,9 @@ Partial Class frmPawning
         Me.Label4.BackColor = System.Drawing.Color.Black
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.Red
-        Me.Label4.Location = New System.Drawing.Point(315, 396)
+
+        Me.Label4.Location = New System.Drawing.Point(315, 546)
+
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(167, 13)
         Me.Label4.TabIndex = 12
@@ -291,31 +313,32 @@ Partial Class frmPawning
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(492, 396)
+        Me.Label5.Location = New System.Drawing.Point(674, 396)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "PawningID"
+        Me.Label5.Visible = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label6.Location = New System.Drawing.Point(566, 396)
+        Me.Label6.Location = New System.Drawing.Point(748, 396)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 14
         Me.Label6.Text = "Status"
+        Me.Label6.Visible = False
         '
         'frmPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(878, 418)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
+
+        Me.ClientSize = New System.Drawing.Size(878, 491)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -329,6 +352,8 @@ Partial Class frmPawning
         Me.Controls.Add(Me.btnLoan)
         Me.Controls.Add(Me.lvPawners)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
         Me.KeyPreview = True
         Me.Name = "frmPawning"
         Me.Text = "Pawning"
@@ -364,6 +389,17 @@ Partial Class frmPawning
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents webAds As System.Windows.Forms.WebBrowser
+
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
+
+    Friend WithEvents rbDescription As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPawner As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPawnTicket As System.Windows.Forms.RadioButton
+    Friend WithEvents rbAll As System.Windows.Forms.RadioButton
+
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+
+
 End Class

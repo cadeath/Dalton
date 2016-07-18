@@ -87,8 +87,8 @@
             .SaveBorrowings()
             AddRefNum()
 
-            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & " To " & branchcode, "BORROW OUT", TransType:="BORROWINGS", TransID:=.LastIDNumber)
-            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & " To " & branchcode, TransType:="BORROWINGS", TransID:=.LastIDNumber)
+            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & " To " & branchcode, "BORROW OUT", , , "BORROWINGS", .LastIDNumber)
+            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & " To " & branchcode, , , , "BORROWINGS", .LastIDNumber)
             AddTimelyLogs(MOD_NAME, String.Format("SENT MONEY TO {0} - Php {1:#,##0.00}", saveBorrow.BranchCode, saveBorrow.Amount), saveBorrow.Amount, False, , .LastIDNumber)
 
         End With

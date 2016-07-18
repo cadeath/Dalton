@@ -174,12 +174,13 @@ Public Class Insurance
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim InsuranceID As Integer
         Dim TransactionName As String = "INSURANCE"
-        InsuranceID = frmInsurance.txtCoi.Text
+        InsuranceID = frmInsurance.lbltransid.Text
+
         ds.Tables(fillData).Rows(0).Item("Status") = _status
 
         database.SaveEntry(ds, False)
-        RemoveJournal(transID:=InsuranceID, TransType:=TransactionName)
-        RemoveDailyTimeLog(InsuranceID, TransactionName)
+        RemoveJournal(InsuranceID, , TransactionName)
+        RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
     End Sub
 
     Public Function LoadLastIDNumberInsurance() As Single

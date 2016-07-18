@@ -3,12 +3,14 @@
     Const ALLOWABLE_VERSION As String = "1.2.2"
     Const LATEST_VERSION As String = "1.2.2.1"
     Private selectedUser As New ComputerUser
+
     Enum priv_set As Integer
         Encoder = 0
         Supervisor = 1
         Manager = 2
         Special = 3
     End Enum
+
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
@@ -32,6 +34,7 @@
             Log_Report("[1.2.2.1]" & ex.ToString)
         End Try
     End Sub
+
     Friend Function AddPriv(ByVal setNum As priv_set, Optional ByVal val As Integer = 111111111) As String
 
         If selectedUser.Privilege Is Nothing Then Return "?"
@@ -40,6 +43,7 @@
         PrivList(setNum) = val
         Return String.Join("|", PrivList)
     End Function
+
     Private Sub DefaultAppraiser()
         selectedUser.LoadUser(3)
         Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
@@ -53,4 +57,6 @@
             SaveEntry(ds, False)
         Next
     End Sub
+
+
 End Module

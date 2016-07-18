@@ -151,23 +151,45 @@
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
 
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE "
-        If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET = " & CInt(secured_str) & " OR "
-        mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
-        mySql &= vbCr & " OR UPPER(ITEMTYPE) LIKE UPPER('%" & secured_str & "%')"
+        Dim strWords As String() = secured_str.Split(New Char() {" "c})
+        Dim mySql As String, name As String
 
-        Console.WriteLine(mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim MaxRow As Single = ds.Tables(0).Rows.Count
-        Dim clientID As Integer = 0
+            mySql = "SELECT * "
+            mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
+            If rbDescription.Checked Then
+            mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
 
-        lvPawners.Items.Clear()
-        If MaxRow = 0 Then
+        ElseIf rbPawner.Checked Then
 
-            mySql = "SELECT * FROM tblClient WHERE "
-            mySql &= vbCr & "UPPER(FIRSTNAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(MIDDLENAME) LIKE UPPER('%" & secured_str & "%') OR "
-            mySql &= vbCr & "UPPER(LASTNAME) LIKE UPPER('%" & secured_str & "%')"
+            For Each name In strWords
+                mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
+                If name Is strWords.Last Then
+                    mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
+                    Exit For
+                End If
+            Next
+
+        ElseIf rbPawnTicket.Checked Then
+
+            mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'"
+
+        ElseIf rbAll.Checked Then
+
+            If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
+
+            mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
+
+            For Each name In strWords
+
+                mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
+                If name Is strWords.Last Then
+                    mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
+                    Exit For
+                End If
+
+            Next
+
+        End If
 
             ds.Clear()
             ds = LoadSQL(mySql)
@@ -209,6 +231,7 @@
             lvPawners.Items(0).Selected = True
             lvPawners.Items(0).EnsureVisible()
         End If
+
     End Sub
     ''' <summary>
     ''' to perform enter without clicking the search button.
@@ -308,11 +331,18 @@
         LoadActive()
     End Sub
 
+
+    Private Sub rbPawnTicket_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPawnTicket.Click, _
+        rbPawner.Click, rbDescription.Click, rbAll.Click
+        txtSearch.Clear()
+    End Sub
+
     Private Sub lvPawners_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
         Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
         Dim tpmstatus As New PawnTicket
         Dim tmpTicket As New PawnTicket
         Label5.Text = idx
         Label6.Text = tpmstatus.LoadStatus
+
     End Sub
 End Class

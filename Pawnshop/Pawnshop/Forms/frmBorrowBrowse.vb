@@ -1,5 +1,15 @@
 ﻿Public Class frmBorrowBrowse
-  
+
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    ' Version 1.1
+    ' - Check branchCode
+    ''' <summary>
+    ''' load the clearfields and loadborrowing method
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+
     Private Sub frmBorrowBrowse_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadBorrowings()
@@ -62,6 +72,20 @@
         txtOut.Text = lvBorrowings.SelectedItems(0).SubItems(3).Text
         txtParticular.Text = tmpBB.Remarks
     End Sub
+
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
+    ''' <summary>
+    ''' click button to not valid the transaction or to cancel
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+
     Public Sub GetBorrowingID()
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         Dim ID As Integer
@@ -70,7 +94,16 @@
         tmpBB.LoadBorrow(idx)
         ID = idx
     End Sub
+
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidBranchToBranch
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidBorrowing()
+        End If
+    End Sub
+    Friend Sub VoidBorrowing()
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         If MsgBox("Do you want to void this transaction?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "V O I D") _
             = MsgBoxResult.No Then
@@ -150,8 +183,8 @@
 
             .SaveBorrowings()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & BranchCode, "BORROW IN")
-            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & BranchCode)
+            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & BranchCode, "BORROW IN", , , "BORROW IN")
+            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & BranchCode, , , , "BORROW IN")
         End With
 
         MsgBox("Borrowings Posted", MsgBoxStyle.Information)
@@ -216,9 +249,13 @@
     End Function
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
+
         Dim mySql As String = "SELECT * FROM tblBorrow WHERE "
-        mySql &= String.Format("UPPER(REFNUM) LIKE '%{0}%' ", txtSearch.Text)
-        If IsNumeric(txtSearch.Text) Then mySql &= String.Format("OR AMOUNT = {0} ", txtSearch.Text)
+        mySql &= String.Format("UPPER(REFNUM) LIKE '%{0}%' ", secured_str)
+        If IsNumeric(secured_str) Then mySql &= String.Format("OR AMOUNT = {0} ", secured_str)
         mySql &= "ORDER BY TransDate DESC"
 
         LoadBorrowings(mySql)
