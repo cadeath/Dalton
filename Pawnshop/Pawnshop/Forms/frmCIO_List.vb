@@ -1,5 +1,8 @@
 ﻿Public Class frmCIO_List
+    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+
     Dim fillData As String = "tblCashTrans"
+    Dim filldata1 As String = "TBL_DAILYTIMELOG"
     ''' <summary>
     ''' load the clearfield and loadactive method
     ''' </summary>
@@ -68,9 +71,13 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
+
         Dim mySql As String = "SELECT * FROM " & fillData
-        mySql &= String.Format(" WHERE Category LIKE '%{0}%' OR TransName LIKE '%{0}%' OR Remarks LIKE '%{0}%'", txtSearch.Text)
-        If IsNumeric(txtSearch.Text) Then mySql &= " OR Amount = " & txtSearch.Text
+        mySql &= (" WHERE UPPER(Category) LIKE UPPER('%" & secured_str & "%') OR UPPER(TransName) LIKE UPPER('%" & secured_str & "%') OR UPPER(Remarks) LIKE UPPER('%" & secured_str & "%')")
+        If IsNumeric(secured_str) Then mySql &= " OR Amount = " & secured_str
         mySql &= " ORDER BY TransID DESC"
 
         Dim ds As DataSet = LoadSQL(mySql)
@@ -78,6 +85,19 @@
         For Each dr As DataRow In ds.Tables(0).Rows
             AddItem(dr)
         Next
+
+        Console.WriteLine("SQL: " & mySql)
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        'lvCIO.Items.Clear()
+        If MaxRow <= 0 Then
+            Console.WriteLine("No CashIN/CashOut")
+            MsgBox("Query not found", MsgBoxStyle.Information)
+            txtSearch.SelectAll()
+            lvCIO.Items.Clear()
+            Exit Sub
+        End If
+        MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Currency")
+
     End Sub
     ''' <summary>
     ''' 
@@ -91,6 +111,7 @@
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim getID As Single = ds.Tables(0).Rows(0).Item("TransID")
         Dim transDate As Date = ds.Tables(0).Rows(0).Item("TRANSDATE")
+
         ds.Tables(fillData).Rows(0).Item("Status") = 0
         Dim CashID As Integer = lvCIO.FocusedItem.Tag
         Dim Transactiontype As String = ""
@@ -106,6 +127,20 @@
             Transactiontype = lblType.Text
         End If
 
+        Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE HASCUSTOMER = '1' AND TRANSID =" & CashID
+        Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
+        Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
+        Select Case SrvTypDailyTimelog
+            Case "TICKETING - WU"
+            Case "GPRS"
+            Case "SMARTMONEY IN"
+            Case "SALES OF INV"
+            Case "ECPAY"
+            Case "SMARTMONEY OUT"
+            Case "CASH IN/OUT"
+            Case "BDO ATM"
+        End Select
+
         ' ISSUE: 0001
         ' Cash InOut exclusive only for the same date.
         If transDate.Date <> CurrentDate.Date Then
@@ -114,8 +149,8 @@
         End If
         database.SaveEntry(ds, False)
 
-        RemoveJournal(transID:=CashID, TransType:=Transactiontype)
-        RemoveDailyTimeLog(CashID)
+        RemoveJournal(CashID, , Transactiontype)
+        RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
     ''' <summary>
@@ -127,6 +162,14 @@
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
+
+    Private Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        Return False
+        Return True
+    End Function
+
     ''' <summary>
     ''' This button void the transaction.
     ''' </summary>
@@ -134,6 +177,15 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidCashInOut
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidCIO()
+        End If
+    End Sub
+
+    Friend Sub VoidCIO()
         If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
         Dim idx As Integer = lvCIO.FocusedItem.Tag
         VoidID(idx)

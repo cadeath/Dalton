@@ -169,6 +169,7 @@
     <Compile Include="AutoPatch\db12.vb" />
     <Compile Include="AutoPatch\db122.vb" />
     <Compile Include="AutoPatch\db1221.vb" />
+    <Compile Include="AutoPatch\db1222.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -261,6 +262,13 @@
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
+    <Compile Include="Modules\PawningScheme.vb" />
+    <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
+      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\diagMoneyTransferBracketing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\diagMT.Designer.vb">
       <DependentUpon>diagMT.vb</DependentUpon>
     </Compile>
@@ -613,6 +621,9 @@
     <EmbeddedResource Include="Reports\AuctionMonthlyReportJWL.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\diagMoneyTransferBracketing.resx">
+      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
     </EmbeddedResource>
@@ -748,6 +759,9 @@
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RenewalBreakDown.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptDollarTransaction.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -768,6 +782,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRenew_Monthly2.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MoneyTransferBracketing.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_MonthlyTransactionCount.rdlc">

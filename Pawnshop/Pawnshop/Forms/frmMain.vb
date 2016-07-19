@@ -386,6 +386,7 @@
 
     Private Sub AboutUsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
         'ab.Show()
+        ab2.TopMost = True
         ab2.Show()
     End Sub
 
