@@ -4,11 +4,13 @@ Imports System.Net
 Imports System.IO
 Imports System.ComponentModel
 Imports System.diagnosics
+Imports System.Net.Sockets
+Imports System.Text
 
 Public Class frmDownloadZip
-   
+    Dim clientSocket As New System.Net.Sockets.TcpClient()
+    Dim serverStream As NetworkStream
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
-
         Dim DownloadedData As String = " ""C:\Users\MIS\Desktop\TransFerhere\syslogerror.rar"" "
         Dim ExtracedData As String = " ""C:\Users\MIS\Desktop\ExtractHere"" "
         Dim RarLocation As String = "C:\Program Files\WinRAR\WinRAR.exe"
@@ -40,7 +42,7 @@ Public Class frmDownloadZip
         Button1.Enabled = Enabled
         MessageBox.Show("Download completed")
     End Sub
-
+   
     Private Sub _DownloadProgressChanged(ByVal sender As Object, ByVal e As System.Net.DownloadProgressChangedEventArgs)
         ProgressBar1.Value = e.ProgressPercentage
     End Sub
@@ -52,6 +54,7 @@ Public Class frmDownloadZip
         AddHandler _WebClient.DownloadFileCompleted, AddressOf _DownloadFileCompleted
         AddHandler _WebClient.DownloadProgressChanged, AddressOf _DownloadProgressChanged
         _WebClient.DownloadFileAsync(New Uri("http://localhost/syslogerror.rar"), "C:\Users\MIS\Desktop\TransFerhere\syslogerror.rar")
+
     End Sub
 
     Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
@@ -105,7 +108,7 @@ Public Class frmDownloadZip
         Try
             DialogResult = MessageBox.Show("Do you want to execute?", "Pawnshop?", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
             If DialogResult = Windows.Forms.DialogResult.Yes Then
-                Dim path As String = "C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\me.bat"
+                Dim path As String = "C:\Users\MIS\Desktop\ExtractHere\me.bat"
                 Dim a As String = "') DO IF %%x == %EXE% goto FOUND "
                 Using sw As StreamWriter = File.CreateText(path)
                     sw.WriteLine("@echo off")
@@ -125,12 +128,43 @@ Public Class frmDownloadZip
             Else
                 MsgBox("Cancelled Process...")
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-
-     
     End Sub
     '""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+  
+    Private Sub frmDownloadZip_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        GetSystemInfo()
+        msg("Client Started")
+        clientSocket.Connect("127.0.0.1", 8888)
+        Label4.Text = "Client Socket Program - Server Connected ..."
+    End Sub
+
+    Private Sub GetSystemInfo()
+        Dim hostname As IPHostEntry = Dns.GetHostByName(txtIpAddress.Text)
+        Dim ip As IPAddress() = hostname.AddressList
+        txtIpAddress.Text = ip(0).ToString()
+        txtBrancName.Text = branchName
+        Version.Text = ProductVersion
+    End Sub
+
+    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
+        Dim serverStream As NetworkStream = clientSocket.GetStream()
+        Dim outStream As Byte() = _
+        System.Text.Encoding.ASCII.GetBytes("Message from Client$")
+        serverStream.Write(outStream, 0, outStream.Length)
+        serverStream.Flush()
+
+        Dim inStream(10024) As Byte
+        serverStream.Read(inStream, 0, CInt(clientSocket.ReceiveBufferSize))
+        Dim returndata As String = _
+        System.Text.Encoding.ASCII.GetString(inStream)
+        msg("Data from Server : " + returndata)
+    End Sub
+
+    Sub msg(ByVal mesg As String)
+        TextBox1.Text = TextBox1.Text + Environment.NewLine + " >> " + mesg
+    End Sub
 End Class
