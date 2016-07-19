@@ -259,6 +259,12 @@
     <Compile Include="Forms\diagOTP.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmBackUpDataSettings.Designer.vb">
+      <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBackUpDataSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
@@ -613,6 +619,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
+      <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
