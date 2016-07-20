@@ -259,10 +259,10 @@
     <Compile Include="Forms\diagOTP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Extract_tableTo_excel.Designer.vb">
-      <DependentUpon>Extract_tableTo_excel.vb</DependentUpon>
+    <Compile Include="Forms\ExtractTableFromDatabase.Designer.vb">
+      <DependentUpon>ExtractTableFromDatabase.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Extract_tableTo_excel.vb">
+    <Compile Include="Forms\ExtractTableFromDatabase.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBackUpDataSettings.Designer.vb">
@@ -626,8 +626,8 @@
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Extract_tableTo_excel.resx">
-      <DependentUpon>Extract_tableTo_excel.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\ExtractTableFromDatabase.resx">
+      <DependentUpon>ExtractTableFromDatabase.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>

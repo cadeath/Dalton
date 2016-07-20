@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Pawnshop.Extract_tableTo_excel
+            Me.MainForm = Global.Pawnshop.ExtractTableFromDatabase
         End Sub
     End Class
 End Namespace
