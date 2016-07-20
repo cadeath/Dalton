@@ -155,9 +155,25 @@
         'If _transName = NO_ENTRIES Then Exit Sub 'Replenishment No Entries
         Select Case _type
             Case "Receipt"
-                AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName, LastIDNumber)
-                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName, LastIDNumber)
+                If _category = "LAY-AWAY PAYMENTS" And _transName = "Cash Offsetting Account" Then
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName & " " & _category, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName & " " & _category, LastIDNumber)
 
+                ElseIf _category = "SMART MONEY PADALA" And _transName = "Cash Offsetting Account" Then
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName & " " & _category, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName & " " & _category, LastIDNumber)
+
+                ElseIf _category = "Commission from SMART MONEY Cash Out" And _transName = "Cash Offsetting Account" Then
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName & " " & _category, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName & " " & _category, LastIDNumber)
+
+                ElseIf _category = "SALES OF INVENTORIABLES" And _transName = "Cash Offsetting Account" Then
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName & " " & _category, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName & " " & _category, LastIDNumber)
+                Else
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName, LastIDNumber)
+                End If
             Case "Disbursement"
                 AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Disbursement " & _transName, LastIDNumber)
                 AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Disbursement " & _transName, LastIDNumber)
