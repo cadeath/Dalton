@@ -127,7 +127,7 @@
             Transactiontype = lblType.Text
         End If
 
-        Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE HASCUSTOMER = '1' AND TRANSID =" & CashID
+        Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE HASCUSTOMER = '1' AND MOD_NAME = '" & lblCategory.Text & "' AND TRANSID =" & CashID
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
         Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
         Select Case SrvTypDailyTimelog
@@ -199,6 +199,7 @@
         Dim idx As Integer = lvCIO.FocusedItem.Tag
         Dim tmpCASHTrans As New CashInOutTransaction
         lblCashID.Text = idx
+        lblCategory.Text = tmpCASHTrans.LoadCategory
         lblType.Text = tmpCASHTrans.LoadType + " " + tmpCASHTrans.LoadTransname
     End Sub
 End Class
