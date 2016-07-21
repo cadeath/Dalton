@@ -271,7 +271,7 @@ Public Class ExtractDataFromDatabase
         Dim oWB As Excel.Workbook
         Dim oSheet As Excel.Worksheet
 
-        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/Dollar.xls")
+        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/BROWWINGS.xls")
         oSheet = oWB.Worksheets(1)
 
 
