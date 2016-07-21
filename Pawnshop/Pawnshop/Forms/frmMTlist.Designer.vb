@@ -41,6 +41,7 @@ Partial Class frmMTlist
         Me.btnNew = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblModname = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'lvMoneyTransfer
@@ -173,22 +174,27 @@ Partial Class frmMTlist
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(181, 439)
+        Me.Label2.Location = New System.Drawing.Point(178, 440)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(89, 13)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "MoneyTransferID"
-        Me.Label2.Visible = False
         '
         'lblModname
         '
         Me.lblModname.AutoSize = True
-        Me.lblModname.Location = New System.Drawing.Point(318, 439)
+        Me.lblModname.Location = New System.Drawing.Point(273, 440)
         Me.lblModname.Name = "lblModname"
         Me.lblModname.Size = New System.Drawing.Size(54, 13)
         Me.lblModname.TabIndex = 8
         Me.lblModname.Text = "Modname"
-        Me.lblModname.Visible = False
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(451, 438)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.TabIndex = 9
         '
         'frmMTlist
         '
@@ -196,6 +202,7 @@ Partial Class frmMTlist
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(725, 467)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.lblModname)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnNew)
@@ -231,4 +238,5 @@ Partial Class frmMTlist
     Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents lblModname As System.Windows.Forms.Label
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class
