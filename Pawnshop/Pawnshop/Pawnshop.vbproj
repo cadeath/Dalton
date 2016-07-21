@@ -235,12 +235,6 @@
     <Compile Include="AutoPatch\DevForm\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExtractFromDatabase.Designer.vb">
-      <DependentUpon>ExtractFromDatabase.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ExtractFromDatabase.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\ab.Designer.vb">
       <DependentUpon>ab.vb</DependentUpon>
     </Compile>
@@ -265,10 +259,10 @@
     <Compile Include="Forms\diagOTP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ExtractTableFromDatabase.Designer.vb">
-      <DependentUpon>ExtractTableFromDatabase.vb</DependentUpon>
+    <Compile Include="Forms\ExtractDataFromDatabase.Designer.vb">
+      <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ExtractTableFromDatabase.vb">
+    <Compile Include="Forms\ExtractDataFromDatabase.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBackUpDataSettings.Designer.vb">
@@ -626,17 +620,14 @@
     <EmbeddedResource Include="AutoPatch\DevForm\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExtractFromDatabase.resx">
-      <DependentUpon>ExtractFromDatabase.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ExtractTableFromDatabase.resx">
-      <DependentUpon>ExtractTableFromDatabase.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\ExtractDataFromDatabase.resx">
+      <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>

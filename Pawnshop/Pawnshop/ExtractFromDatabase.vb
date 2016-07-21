@@ -339,4 +339,206 @@ vbCrLf & String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortD
 
         MsgBox("Borrowing Extracted", MsgBoxStyle.Information)
     End Sub
+
+    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
+        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        Dim mySql As String
+        mySql = " SELECT I.AMOUNT, I.CLIENTID,I.CLIENTNAME, I.COINO, G.FULLNAME AS ENCODER, I.INSURANCEID,I.PAWNTICKET, " & _
+            vbCrLf & "Case I.STATUS " & _
+            vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
+            vbCrLf & "I.SYSTEMINFO, I.TRANSDATE, I.VALIDDATE FROM TBLINSURANCE I" & _
+            vbCrLf & "INNER JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
+            vbCrLf & String.Format("WHERE I.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
+            vbCrLf & "ORDER BY TRANSDATE ASC"
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxEntries As Integer = 0
+        MaxEntries = ds.Tables(0).Rows.Count
+
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/INSURANCE.xls")
+        oSheet = oWB.Worksheets(1)
+
+
+        oSheet = oWB.Worksheets(1)
+        pbLoading.Maximum = MaxEntries
+        pbLoading.Value = 0
+
+        Dim recCnt2 As Single = 0
+        While recCnt2 < MaxEntries
+            With ds.Tables(0).Rows(recCnt2)
+
+                oSheet.Cells(lineNum + 2, 1) = .Item("AMOUNT").ToString
+                oSheet.Cells(lineNum + 2, 2) = .Item("CLIENTID")
+                oSheet.Cells(lineNum + 2, 3) = .Item("CLIENTNAME")
+                oSheet.Cells(lineNum + 2, 4) = .Item("COINO")
+                oSheet.Cells(lineNum + 2, 5) = .Item("ENCODER")
+                oSheet.Cells(lineNum + 2, 6) = .Item("INSURANCEID")
+                oSheet.Cells(lineNum + 2, 7) = .Item("PAWNTICKET")
+                oSheet.Cells(lineNum + 2, 8) = .Item("STATUS")
+                oSheet.Cells(lineNum + 2, 9) = .Item("SYSTEMINFO")
+                oSheet.Cells(lineNum + 2, 10) = .Item("TRANSDATE")
+                oSheet.Cells(lineNum + 2, 11) = .Item("VALIDDATE")
+
+                lineNum += 1
+                recCnt2 += 1
+            End With
+            AddProgress()
+            Application.DoEvents()
+        End While
+
+        Dim verified_url As String
+
+        Select Case FormType
+            Case ExtractType.Pawn
+                Console.WriteLine("Insurance Activated")
+                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                Me.Text &= " - Insurance"
+        End Select
+
+
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Insurance Extracted", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub btnRemitanceExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnRemitanceExtract.Click
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
+        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        Dim mySql As String
+        mySql = "SELECT M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER,M.ID, M.LOCATION," & _
+                vbCrLf & "Case M.MONEYTRANS" & _
+      vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
+    vbCrLf & "END AS MONEYTRANS,M.NETAMOUNT,M.RECEIVERID,M.RECEIVERNAME, " & _
+  vbCrLf & "CASE WHEN M.ServiceType = 'Pera Padala' AND M.MoneyTrans = 0" & _
+      vbCrLf & "THEN 'ME# ' || LPAD(M.TransID,5,0)" & _
+    vbCrLf & "WHEN M.SERVICETYPE = 'Pera Padala' AND M.MONEYTRANS = 1" & _
+      vbCrLf & "THEN 'MR# ' || LPAD(M.TRANSID,5,0)" & _
+      vbCrLf & "ELSE RefNum END as RefNum," & _
+     vbCrLf & "M.REMARKS," & _
+   vbCrLf & " M.SENDERID,M.SENDERNAME,M.SERVICECHARGE, " & _
+    vbCrLf & "M.SERVICETYPE, " & _
+            vbCrLf & "Case M.STATUS" & _
+     vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
+      vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
+       vbCrLf & " ELSE 'N/A'" & _
+   vbCrLf & " END AS STATUS, M.SYSTEMINFO, M.TRANSDATE," & _
+       vbCrLf & " M.TRANSID" & _
+ vbCrLf & " FROM TBLMONEYTRANSFER M" & _
+ vbCrLf & " INNER JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
+  vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
+  vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
+vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
+vbCrLf & " ORDER BY M.TRANSDATE;"
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxEntries As Integer = 0
+        MaxEntries = ds.Tables(0).Rows.Count
+
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/REMITTANCE.xls")
+        oSheet = oWB.Worksheets(1)
+
+
+        oSheet = oWB.Worksheets(1)
+        pbLoading.Maximum = MaxEntries
+        pbLoading.Value = 0
+
+        Dim recCnt2 As Single = 0
+        While recCnt2 < MaxEntries
+            With ds.Tables(0).Rows(recCnt2)
+
+                oSheet.Cells(lineNum + 2, 1) = .Item("AMOUNT").ToString
+                oSheet.Cells(lineNum + 2, 2) = .Item("COMMISSION")
+                oSheet.Cells(lineNum + 2, 3) = .Item("ENCODER")
+                oSheet.Cells(lineNum + 2, 4) = .Item("ID")
+                oSheet.Cells(lineNum + 2, 5) = .Item("LOCATION")
+                oSheet.Cells(lineNum + 2, 6) = .Item("MONEYTRANS")
+                oSheet.Cells(lineNum + 2, 7) = .Item("NETAMOUNT")
+                oSheet.Cells(lineNum + 2, 8) = .Item("RECEIVERID")
+                oSheet.Cells(lineNum + 2, 9) = .Item("RECEIVERNAME")
+                oSheet.Cells(lineNum + 2, 10) = .Item("REFNUM")
+                oSheet.Cells(lineNum + 2, 11) = .Item("REMARKS")
+                oSheet.Cells(lineNum + 2, 12) = .Item("SENDERID")
+                oSheet.Cells(lineNum + 2, 13) = .Item("SENDERNAME")
+                oSheet.Cells(lineNum + 2, 14) = .Item("SERVICECHARGE")
+                oSheet.Cells(lineNum + 2, 15) = .Item("SERVICETYPE")
+                oSheet.Cells(lineNum + 2, 16) = .Item("STATUS")
+                oSheet.Cells(lineNum + 2, 17) = .Item("SYSTEMINFO")
+                oSheet.Cells(lineNum + 2, 18) = .Item("TRANSDATE")
+                oSheet.Cells(lineNum + 2, 19) = .Item("TRANSID")
+                lineNum += 1
+                recCnt2 += 1
+            End With
+            AddProgress()
+            Application.DoEvents()
+        End While
+
+        Dim verified_url As String
+
+        Select Case FormType
+            Case ExtractType.Pawn
+                Console.WriteLine("Remitance Activated")
+                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                Me.Text &= " - Remitance"
+        End Select
+
+
+
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Remitance Extracted", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub txtPath_DoubleClick(sender As System.Object, e As System.EventArgs) Handles txtPath.DoubleClick
+        sfdPath.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim result As DialogResult = sfdPath.ShowDialog
+
+        If Not result = Windows.Forms.DialogResult.OK Then
+            Return
+        End If
+        txtPath.Text = sfdPath.FileName
+    End Sub
 End Class

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ExtractFromDatabase
+Partial Class ExtractDataFromDatabase
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -36,7 +36,7 @@ Partial Class ExtractFromDatabase
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(133, 196)
+        Me.Label1.Location = New System.Drawing.Point(134, 200)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(230, 24)
         Me.Label1.TabIndex = 31
@@ -46,7 +46,7 @@ Partial Class ExtractFromDatabase
         'txtPath
         '
         Me.txtPath.BackColor = System.Drawing.Color.White
-        Me.txtPath.Location = New System.Drawing.Point(136, 173)
+        Me.txtPath.Location = New System.Drawing.Point(137, 177)
         Me.txtPath.Name = "txtPath"
         Me.txtPath.ReadOnly = True
         Me.txtPath.Size = New System.Drawing.Size(224, 20)
@@ -55,7 +55,7 @@ Partial Class ExtractFromDatabase
         'btnRemitanceExtract
         '
         Me.btnRemitanceExtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRemitanceExtract.Location = New System.Drawing.Point(11, 173)
+        Me.btnRemitanceExtract.Location = New System.Drawing.Point(12, 177)
         Me.btnRemitanceExtract.Name = "btnRemitanceExtract"
         Me.btnRemitanceExtract.Size = New System.Drawing.Size(110, 40)
         Me.btnRemitanceExtract.TabIndex = 29
@@ -65,7 +65,7 @@ Partial Class ExtractFromDatabase
         'Button2
         '
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(11, 118)
+        Me.Button2.Location = New System.Drawing.Point(12, 122)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(110, 52)
         Me.Button2.TabIndex = 28
@@ -75,7 +75,7 @@ Partial Class ExtractFromDatabase
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(11, 69)
+        Me.Button1.Location = New System.Drawing.Point(12, 73)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(110, 45)
         Me.Button1.TabIndex = 27
@@ -85,7 +85,7 @@ Partial Class ExtractFromDatabase
         'btnDollarExtract
         '
         Me.btnDollarExtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDollarExtract.Location = New System.Drawing.Point(11, 39)
+        Me.btnDollarExtract.Location = New System.Drawing.Point(12, 43)
         Me.btnDollarExtract.Name = "btnDollarExtract"
         Me.btnDollarExtract.Size = New System.Drawing.Size(110, 29)
         Me.btnDollarExtract.TabIndex = 26
@@ -94,7 +94,7 @@ Partial Class ExtractFromDatabase
         '
         'MonCalendar
         '
-        Me.MonCalendar.Location = New System.Drawing.Point(133, 8)
+        Me.MonCalendar.Location = New System.Drawing.Point(134, 12)
         Me.MonCalendar.MaxSelectionCount = 365
         Me.MonCalendar.Name = "MonCalendar"
         Me.MonCalendar.TabIndex = 25
@@ -102,15 +102,15 @@ Partial Class ExtractFromDatabase
         'pbLoading
         '
         Me.pbLoading.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pbLoading.Location = New System.Drawing.Point(0, 233)
+        Me.pbLoading.Location = New System.Drawing.Point(0, 227)
         Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(369, 23)
+        Me.pbLoading.Size = New System.Drawing.Size(372, 23)
         Me.pbLoading.TabIndex = 24
         '
         'btnPawnExtract
         '
         Me.btnPawnExtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPawnExtract.Location = New System.Drawing.Point(11, 8)
+        Me.btnPawnExtract.Location = New System.Drawing.Point(12, 12)
         Me.btnPawnExtract.Name = "btnPawnExtract"
         Me.btnPawnExtract.Size = New System.Drawing.Size(110, 29)
         Me.btnPawnExtract.TabIndex = 23
@@ -122,11 +122,11 @@ Partial Class ExtractFromDatabase
         Me.sfdPath.DefaultExt = "xls"
         Me.sfdPath.Filter = "Excel File 2003|*.xls"
         '
-        'ExtractFromDatabase
+        'ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(369, 256)
+        Me.ClientSize = New System.Drawing.Size(372, 250)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtPath)
         Me.Controls.Add(Me.btnRemitanceExtract)
@@ -136,8 +136,8 @@ Partial Class ExtractFromDatabase
         Me.Controls.Add(Me.MonCalendar)
         Me.Controls.Add(Me.pbLoading)
         Me.Controls.Add(Me.btnPawnExtract)
-        Me.Name = "ExtractFromDatabase"
-        Me.Text = "ExtractFromDatabase"
+        Me.Name = "ExtractDataFromDatabase"
+        Me.Text = "Extract Data From Datbase"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

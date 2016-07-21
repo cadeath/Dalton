@@ -1,56 +1,58 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.Odbc
-Public Class ExtractTableFromDatabase
+Public Class ExtractDataFromDatabase
 
-    Private Sub ExtractTableFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        FormInit()
+    Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'FormInit()
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-
     End Sub
 
     Private Sub AddProgress()
         pbLoading.Value += 1
     End Sub
 
-    Enum ExtractType As Integer
+    Enum Extract As Integer
         Pawn = 0
         Dollar = 1
         Borrowing = 2
         Insurance = 3
         Remitance = 4
     End Enum
-    Friend FormType As ExtractType = ExtractType.Pawn
+    Friend FormType As Extract = Extract.Pawn
 
-    Private Sub FormInit()
-        Dim selectedDate As Date = MonCalendar.SelectionStart
-        Select Case FormType
-            Case ExtractType.Pawn
-                Console.WriteLine("Pawning Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"))  'BranchCode + Date
-                Me.Text &= " - Pawning"
-            Case ExtractType.Dollar
-                Console.WriteLine("Dollar Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Dollar"
-            Case ExtractType.Dollar
-                Console.WriteLine("Borrowing Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Borrowing"
-            Case ExtractType.Dollar
-                Console.WriteLine("Insurance Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Insurance"
-            Case ExtractType.Dollar
-                Console.WriteLine("Remitance Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Remitance"
-        End Select
-    End Sub
+    'Private Sub FormInit()
+    '    Dim selectedDate As Date = MonCalendar.SelectionStart
+    '    Select Case FormType
+    '        Case Extract.Pawn
+    '            Dim Pawning As String = "Pawning"
+    '            Console.WriteLine("Pawning Activated")
+    '            sfdPath.FileName = String.Format("{2}{1}{0}.xls", Pawning, selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+    '            Me.Text &= " - Pawning"
+    '        Case Extract.Dollar
+    '            Console.WriteLine("Dollar Activated")
+    '            sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+    '            Me.Text &= " - Dollar"
+    '        Case Extract.Borrowing
+    '            Console.WriteLine("Borrowing Activated")
+    '            sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+    '            Me.Text &= " - Borrowing"
+    '        Case Extract.Insurance
+    '            Console.WriteLine("Insurance Activated")
+    '            sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+    '            Me.Text &= " - Insurance"
+    '        Case Extract.Remitance
+    '            Console.WriteLine("Remitance Activated")
+    '            sfdPath.FileName = String.Format("{1}{0}.xls", selectedDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+    '            Me.Text &= " - Remitance"
+    '    End Select
+    'End Sub
 
     Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnPawnExtract.Click
+
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
         Dim mySql As String
         mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER," & _
     vbCrLf & "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, " & _
@@ -73,6 +75,7 @@ Public Class ExtractTableFromDatabase
  vbCrLf & "INNER JOIN TBLCLIENT C" & _
   vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
   vbCrLf & String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
+  vbCrLf & "AND ORDATE <> '01/01/0001'" & _
  vbCrLf & "ORDER BY P.LOANDATE ASC;"
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxEntries As Integer = 0
@@ -141,9 +144,9 @@ Public Class ExtractTableFromDatabase
         Dim verified_url As String
 
         Select Case FormType
-            Case ExtractType.Pawn
+            Case Extract.Pawn
                 Console.WriteLine("Pawning Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                sfdPath.FileName = String.Format("{2}{1}{0}.xls", "Pawn", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Pawning"
         End Select
 
@@ -168,99 +171,12 @@ Public Class ExtractTableFromDatabase
         MsgBox("Pawning Extracted", MsgBoxStyle.Information)
     End Sub
 
-
-
-    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
-        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
-        Dim mySql As String
-        mySql = "SELECT B.AMOUNT, B.BRANCHCODE, B.BRANCHNAME, " & _
-         vbCrLf & "B.BRWID,  G.FULLNAME,B.REASON,B.REFNUM, B.REMARKS," & _
-             vbCrLf & " Case B.STATUS" & _
-     vbCrLf & "WHEN 'C' THEN 'CASH-OUT'" & _
-     vbCrLf & "WHEN 'D' THEN 'CASH-IN'" & _
-     vbCrLf & "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO, B.TRANSDATE" & _
-     vbCrLf & "FROM TBLBORROW B" & _
-    vbCrLf & "INNER JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID" & _
-vbCrLf & String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
-        vbCrLf & "ORDER BY TRANSDATE ASC"
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim MaxEntries As Integer = 0
-        MaxEntries = ds.Tables(0).Rows.Count
-
-
-        'Load Excel
-        Dim oXL As New Excel.Application
-        Dim oWB As Excel.Workbook
-        Dim oSheet As Excel.Worksheet
-
-        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/Dollar.xls")
-        oSheet = oWB.Worksheets(1)
-
-
-        oSheet = oWB.Worksheets(1)
-        pbLoading.Maximum = MaxEntries
-        pbLoading.Value = 0
-
-        Dim recCnt2 As Single = 0
-        While recCnt2 < MaxEntries
-            With ds.Tables(0).Rows(recCnt2)
-
-                oSheet.Cells(lineNum + 2, 1) = .Item("AMOUNT").ToString
-                oSheet.Cells(lineNum + 2, 2) = .Item("BRANCHCODE")
-                oSheet.Cells(lineNum + 2, 3) = .Item("BRANCHNAME")
-                oSheet.Cells(lineNum + 2, 4) = .Item("BRWID")
-                oSheet.Cells(lineNum + 2, 5) = .Item("FULLNAME")
-                oSheet.Cells(lineNum + 2, 6) = .Item("REASON")
-                oSheet.Cells(lineNum + 2, 7) = .Item("REFNUM")
-                oSheet.Cells(lineNum + 2, 8) = .Item("REMARKS")
-                oSheet.Cells(lineNum + 2, 9) = .Item("STATUS")
-                oSheet.Cells(lineNum + 2, 10) = .Item("SYSTEMINFO")
-                oSheet.Cells(lineNum + 2, 11) = .Item("TRANSDATE")
-
-                lineNum += 1
-                recCnt2 += 1
-            End With
-            AddProgress()
-            Application.DoEvents()
-        End While
-
-        Dim verified_url As String
-
-        Select Case FormType
-            Case ExtractType.Dollar
-                Console.WriteLine("Borrowing Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Borrowing"
-
-        End Select
-
-
-        If txtPath.Text.Split(".").Count > 1 Then
-            If txtPath.Text.Split(".")(1).Length = 3 Then
-                verified_url = txtPath.Text
-            Else
-                verified_url = txtPath.Text & "/" & sfdPath.FileName
-            End If
-        Else
-            verified_url = txtPath.Text & "/" & sfdPath.FileName
-        End If
-
-        oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
-        MsgBox("Borrowing Extracted", MsgBoxStyle.Information)
-    End Sub
-
     Private Sub btnDollarExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnDollarExtract.Click
+
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
         Dim mySql As String
         mySql = "SELECT D.CLIENTID,D.DENOMINATION,D.DOLLARID,D.FULLNAME," & _
    vbCrLf & "D.NETAMOUNT,D.PESORATE, D.REMARKS,D.SERIAL," & _
@@ -315,12 +231,11 @@ vbCrLf & String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortD
 
         Dim verified_url As String
 
-        Select Case FormType
-            Case ExtractType.Dollar
+         Select Case FormType
+            Case Extract.Dollar
                 Console.WriteLine("Dollar Activated")
                 sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Dollar"
-
         End Select
 
 
@@ -345,10 +260,99 @@ vbCrLf & String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortD
 
     End Sub
 
-    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+        Dim mySql As String
+        mySql = "SELECT B.AMOUNT, B.BRANCHCODE, B.BRANCHNAME, " & _
+         vbCrLf & "B.BRWID,  G.FULLNAME,B.REASON,B.REFNUM, B.REMARKS," & _
+             vbCrLf & " Case B.STATUS" & _
+     vbCrLf & "WHEN 'C' THEN 'CASH-OUT'" & _
+     vbCrLf & "WHEN 'D' THEN 'CASH-IN'" & _
+     vbCrLf & "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO, B.TRANSDATE" & _
+     vbCrLf & "FROM TBLBORROW B" & _
+    vbCrLf & "INNER JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID" & _
+vbCrLf & String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
+        vbCrLf & "ORDER BY TRANSDATE ASC"
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxEntries As Integer = 0
+        MaxEntries = ds.Tables(0).Rows.Count
+
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/Dollar.xls")
+        oSheet = oWB.Worksheets(1)
+
+
+        oSheet = oWB.Worksheets(1)
+        pbLoading.Maximum = MaxEntries
+        pbLoading.Value = 0
+
+        Dim recCnt2 As Single = 0
+        While recCnt2 < MaxEntries
+            With ds.Tables(0).Rows(recCnt2)
+
+                oSheet.Cells(lineNum + 2, 1) = .Item("AMOUNT").ToString
+                oSheet.Cells(lineNum + 2, 2) = .Item("BRANCHCODE")
+                oSheet.Cells(lineNum + 2, 3) = .Item("BRANCHNAME")
+                oSheet.Cells(lineNum + 2, 4) = .Item("BRWID")
+                oSheet.Cells(lineNum + 2, 5) = .Item("FULLNAME")
+                oSheet.Cells(lineNum + 2, 6) = .Item("REASON")
+                oSheet.Cells(lineNum + 2, 7) = .Item("REFNUM")
+                oSheet.Cells(lineNum + 2, 8) = .Item("REMARKS")
+                oSheet.Cells(lineNum + 2, 9) = .Item("STATUS")
+                oSheet.Cells(lineNum + 2, 10) = .Item("SYSTEMINFO")
+                oSheet.Cells(lineNum + 2, 11) = .Item("TRANSDATE")
+
+                lineNum += 1
+                recCnt2 += 1
+            End With
+            AddProgress()
+            Application.DoEvents()
+        End While
+
+        Dim verified_url As String
+ Select Case FormType
+            Case Extract.Borrowing
+                Console.WriteLine("Borrowing Activated")
+                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                Me.Text &= " - Borrowing"
+        End Select
+
+
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Borrowing Extracted", MsgBoxStyle.Information)
+    End Sub
+
+    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
+        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
         Dim mySql As String
         mySql = " SELECT I.AMOUNT, I.CLIENTID,I.CLIENTNAME, I.COINO, G.FULLNAME AS ENCODER, I.INSURANCEID,I.PAWNTICKET, " & _
             vbCrLf & "Case I.STATUS " & _
@@ -401,11 +405,10 @@ vbCrLf & String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortD
         Dim verified_url As String
 
         Select Case FormType
-            Case ExtractType.Insurance
+            Case Extract.Insurance
                 Console.WriteLine("Insurance Activated")
                 sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Insurance"
-
         End Select
 
 
@@ -433,6 +436,7 @@ vbCrLf & String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortD
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
         Dim mySql As String
         mySql = "SELECT M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER,M.ID, M.LOCATION," & _
                 vbCrLf & "Case M.MONEYTRANS" & _
@@ -509,12 +513,11 @@ vbCrLf & " ORDER BY M.TRANSDATE;"
 
         Dim verified_url As String
 
-        Select Case FormType
-            Case ExtractType.Insurance
+          Select Case FormType
+            Case Extract.Remitance
                 Console.WriteLine("Remitance Activated")
                 sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Remitance"
-
         End Select
 
 
@@ -536,15 +539,5 @@ vbCrLf & " ORDER BY M.TRANSDATE;"
         oXL = Nothing
 
         MsgBox("Remitance Extracted", MsgBoxStyle.Information)
-    End Sub
-
-    Private Sub txtPath_DoubleClick(sender As System.Object, e As System.EventArgs) Handles txtPath.DoubleClick
-        sfdPath.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        Dim result As DialogResult = sfdPath.ShowDialog
-
-        If Not result = Windows.Forms.DialogResult.OK Then
-            Return
-        End If
-        txtPath.Text = sfdPath.FileName
     End Sub
 End Class
