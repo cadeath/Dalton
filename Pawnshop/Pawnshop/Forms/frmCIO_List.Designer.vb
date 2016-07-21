@@ -161,7 +161,6 @@ Partial Class frmCIO_List
         Me.lblCashID.Size = New System.Drawing.Size(81, 13)
         Me.lblCashID.TabIndex = 5
         Me.lblCashID.Text = "CashIN/OUTID"
-        Me.lblCashID.Visible = False
         '
         'lblType
         '
@@ -171,7 +170,6 @@ Partial Class frmCIO_List
         Me.lblType.Size = New System.Drawing.Size(58, 13)
         Me.lblType.TabIndex = 6
         Me.lblType.Text = "TransType"
-        Me.lblType.Visible = False
         '
         'frmCIO_List
         '

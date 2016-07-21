@@ -199,6 +199,6 @@
         Dim idx As Integer = lvCIO.FocusedItem.Tag
         Dim tmpCASHTrans As New CashInOutTransaction
         lblCashID.Text = idx
-        lblType.Text = tmpCASHTrans.LoadType
+        lblType.Text = tmpCASHTrans.LoadType + " " + tmpCASHTrans.LoadTransname
     End Sub
 End Class

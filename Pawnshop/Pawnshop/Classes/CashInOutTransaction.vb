@@ -211,4 +211,13 @@
         Return ds.Tables(0).Rows(0).Item("Type")
     End Function
 
+    Public Function LoadTransname() As String
+        Dim mysql1 As String = "SELECT * FROM " & fillData & " WHERE TransID =" & frmCIO_List.lblCashID.Text
+
+        Dim ds As DataSet = LoadSQL(mysql1, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("Transname")
+    End Function
 End Class
