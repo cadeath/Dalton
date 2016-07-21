@@ -273,13 +273,13 @@
             Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
                 SrcStr = "GPRS_R|Ref# " & _ref
         End Select
+        Dim strModname As String = frmMTlist.lblModname.Text
 
-
-        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE HASCUSTOMER = '1' AND UPPER(MOD_NAME) LIKE UPPER('%" & frmMTlist.lblModname.Text & "%') AND TRANSID =" & MoneyTransID
+        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE HASCUSTOMER = '1' AND UPPER(MOD_NAME) LIKE UPPER('%" & strModname & "%') AND TRANSID =" & MoneyTransID
         Dim ds2 As DataSet = LoadSQL(mySql2, fillData1)
         Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
         'Select Case SrvTypDailyTimelog
-        '    Case "PERA PADALA OUT"
+        '    Case "PERA PADALA OUT
         '    Case "PERA PADALA IN"
         '    Case "WESTERN UNION OUT"
         '    Case "WESTERN UNION IN"
@@ -289,7 +289,7 @@
         '    Case "GPRS IN"
         'End Select
 
-        Dim mySql3 As String = "SELECT * FROM " & filldata2 & " WHERE UPPER(TRANSTYPE) LIKE UPPER('%" & frmMTlist.lblModname.Text & "%') AND TRANSID =" & MoneyTransID
+        Dim mySql3 As String = "SELECT * FROM " & filldata2 & " WHERE UPPER(TRANSTYPE) LIKE UPPER('%" & strModname & "%') AND TRANSID =" & MoneyTransID
         Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
        
@@ -332,7 +332,7 @@
     End Function
 
     Public Function LoadMoneyTrans() As String
-        Dim mysql1 As String = "SELECT  CASE MoneyTrans WHEN 0 THEN 'OUT' WHEN 1 THEN 'IN' ELSE 'NA' END AS MoneyTrans "
+        Dim mysql1 As String = "SELECT * "
         mysql1 &= "FROM tblmoneytransfer WHERE ID =" & frmMTlist.Label2.Text
 
         Dim ds As DataSet = LoadSQL(mysql1, fillData)
