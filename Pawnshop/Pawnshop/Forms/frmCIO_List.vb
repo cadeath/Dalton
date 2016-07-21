@@ -130,16 +130,16 @@
         Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE HASCUSTOMER = '1' AND MOD_NAME = '" & lblCategory.Text & "' AND TRANSID =" & CashID
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
         Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
-        Select Case SrvTypDailyTimelog
-            Case "TICKETING - WU"
-            Case "GPRS"
-            Case "SMARTMONEY IN"
-            Case "SALES OF INV"
-            Case "ECPAY"
-            Case "SMARTMONEY OUT"
-            Case "CASH IN/OUT"
-            Case "BDO ATM"
-        End Select
+        'Select Case SrvTypDailyTimelog
+        '    Case "TICKETING - WU"
+        '    Case "GPRS"
+        '    Case "SMARTMONEY IN"
+        '    Case "SALES OF INV"
+        '    Case "ECPAY"
+        '    Case "SMARTMONEY OUT"
+        '    Case "CASH IN/OUT"
+        '    Case "BDO ATM"
+        'End Select
 
         ' ISSUE: 0001
         ' Cash InOut exclusive only for the same date.

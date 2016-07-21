@@ -163,5 +163,6 @@
         Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
         Dim tmpMT As New MoneyTransfer
         Label2.Text = idx
+        lblModname.Text = tmpMT.LoadServiceType + " " + tmpMT.LoadMoneyTrans
     End Sub
 End Class
