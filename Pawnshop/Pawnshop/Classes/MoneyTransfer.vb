@@ -291,7 +291,7 @@
                 "GPRS - GPRS to BANK (DBP) IN", "GPRS - GPRS to BANK (MetroBank)IN", "GPRS - GPRS to BANK (Maybank/LandBank) IN", _
                 "GPRS - iREMIT to GPRS IN", "GPRS - NYBP/Transfast to GPRS IN", "GPRS - GPRS to Moneygram IN"
                 strModname1 = "GPRS IN"
-            Case "GPRS - Smartmoney To GPRS OUT", "GPRS - Moneygram to GPRS OUT"
+            Case "GPRS - Smartmoney To GPRS IN", "GPRS - Moneygram to GPRS IN"
                 strModname1 = "GPRS OUT"
             Case Else
                 strModname1 = frmMTlist.lblModname.Text
