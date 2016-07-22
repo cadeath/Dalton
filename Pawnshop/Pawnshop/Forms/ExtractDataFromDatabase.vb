@@ -1,23 +1,14 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.Odbc
+
+Imports System.IO
+Imports System.IO.Compression
+
 Public Class ExtractDataFromDatabase
 
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
     End Sub
-
-    Private Sub AddProgress()
-        pbLoading.Value += 1
-    End Sub
-
-    Enum Extract As Integer
-        Pawn = 0
-        Dollar = 1
-        Borrowing = 2
-        Insurance = 3
-        Remitance = 4
-    End Enum
-    Friend FormType As Extract = Extract.Pawn
 
 #Region "Extract Database Table"
     Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnPawnExtract.Click
@@ -26,10 +17,8 @@ Public Class ExtractDataFromDatabase
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
-        Dim str As String = "Pawning"
-        sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-
-
+        'Dim str As String = "Pawning"
+        'sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
         Dim mySql As String
         mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER," & _
         vbCrLf & "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, " & _
@@ -120,31 +109,47 @@ Public Class ExtractDataFromDatabase
         End While
 
         Dim verified_url As String
+        Console.WriteLine("Pawning Activated")
+                sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
 
-        Select Case FormType
-            Case Extract.Pawn
-                Console.WriteLine("Pawning Activated")
-                sfdPath.FileName = String.Format("{2}{1}{0}.xls", "Pawn", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-        End Select
+                If txtPath.Text.Split(".").Count > 1 Then
+                    If txtPath.Text.Split(".")(1).Length = 3 Then
+                        verified_url = txtPath.Text
+                    Else
+                        verified_url = txtPath.Text & "/" & sfdPath.FileName
+                    End If
+                Else
+                    verified_url = txtPath.Text & "/" & sfdPath.FileName
 
 
-        If txtPath.Text.Split(".").Count > 1 Then
-            If txtPath.Text.Split(".")(1).Length = 3 Then
-                verified_url = txtPath.Text
-            Else
-                verified_url = txtPath.Text & "/" & sfdPath.FileName
-            End If
-        Else
-            verified_url = txtPath.Text & "/" & sfdPath.FileName
+                    oWB.SaveAs(verified_url)
+                    oSheet = Nothing
+                    oWB.Close(False)
+                    oWB = Nothing
+                    oXL.Quit()
+            oXL = Nothing
+
+                    Dim FileName = verified_url
+                    Try
+                        ' create the zip archive
+                        Dim Z As System.IO.Packaging.ZipPackage
+                        Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
+                        ' read all the bytes of the file
+                        Dim B = System.IO.File.ReadAllBytes(FileName)
+                        ' create a uri for the file
+                        Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
+                        ' create a part
+                        Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
+                        ' write the content into the part
+                        P.GetStream.Write(B, 0, B.Length)
+                        Z.Close()
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                    If System.IO.File.Exists(verified_url) = True Then
+                        System.IO.File.Delete(verified_url)
+                    End If
         End If
-
-        oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
         MsgBox("Pawning Extracted", MsgBoxStyle.Information)
     End Sub
 
@@ -154,8 +159,8 @@ Public Class ExtractDataFromDatabase
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
-        Dim str As String = "Dollar"
-        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
+
+        'sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
         Dim mySql As String
         mySql = "SELECT D.CLIENTID,D.DENOMINATION,D.DOLLARID,D.FULLNAME," & _
@@ -211,11 +216,9 @@ Public Class ExtractDataFromDatabase
 
         Dim verified_url As String
 
-        Select Case FormType
-            Case Extract.Dollar
-                Console.WriteLine("Dollar Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-        End Select
+        Dim str As String = "Dollar"
+        Console.WriteLine("Dollar Activated")
+        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
 
         If txtPath.Text.Split(".").Count > 1 Then
@@ -226,17 +229,37 @@ Public Class ExtractDataFromDatabase
             End If
         Else
             verified_url = txtPath.Text & "/" & sfdPath.FileName
+
+
+            oWB.SaveAs(verified_url)
+            oSheet = Nothing
+            oWB.Close(False)
+            oWB = Nothing
+            oXL.Quit()
+            oXL = Nothing
+
+            Dim FileName = verified_url
+            Try
+                ' create the zip archive
+                Dim Z As System.IO.Packaging.ZipPackage
+                Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
+                ' read all the bytes of the file
+                Dim B = System.IO.File.ReadAllBytes(FileName)
+                ' create a uri for the file
+                Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
+                ' create a part
+                Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
+                ' write the content into the part
+                P.GetStream.Write(B, 0, B.Length)
+                Z.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            If System.IO.File.Exists(verified_url) = True Then
+                System.IO.File.Delete(verified_url)
+            End If
         End If
-
-        oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
         MsgBox("Dollar Extracted", MsgBoxStyle.Information)
-
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
@@ -245,8 +268,7 @@ Public Class ExtractDataFromDatabase
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
-        Dim str As String = "Borrowings"
-        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
+        'sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, Str)  'BranchCode + Date
 
         Dim mySql As String
         mySql = "SELECT B.AMOUNT, B.BRANCHCODE, B.BRANCHNAME, " & _
@@ -301,14 +323,10 @@ Public Class ExtractDataFromDatabase
             Application.DoEvents()
         End While
 
+        Dim str As String = "Borrowings"
         Dim verified_url As String
-        Select Case FormType
-            Case Extract.Borrowing
-                Console.WriteLine("Borrowing Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-                Me.Text &= " - Borrowing"
-        End Select
-
+        Console.WriteLine("Borrowing Activated")
+        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
@@ -318,15 +336,36 @@ Public Class ExtractDataFromDatabase
             End If
         Else
             verified_url = txtPath.Text & "/" & sfdPath.FileName
+
+
+            oWB.SaveAs(verified_url)
+            oSheet = Nothing
+            oWB.Close(False)
+            oWB = Nothing
+            oXL.Quit()
+            oXL = Nothing
+
+            Dim FileName = verified_url
+            Try
+                ' create the zip archive
+                Dim Z As System.IO.Packaging.ZipPackage
+                Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
+                ' read all the bytes of the file
+                Dim B = System.IO.File.ReadAllBytes(FileName)
+                ' create a uri for the file
+                Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
+                ' create a part
+                Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
+                ' write the content into the part
+                P.GetStream.Write(B, 0, B.Length)
+                Z.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            If System.IO.File.Exists(verified_url) = True Then
+                System.IO.File.Delete(verified_url)
+            End If
         End If
-
-        oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
         MsgBox("Borrowing Extracted", MsgBoxStyle.Information)
     End Sub
 
@@ -335,9 +374,8 @@ Public Class ExtractDataFromDatabase
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
-        Dim str As String = "Insurance"
-        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
+        'sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
         Dim mySql As String
         mySql = " SELECT I.AMOUNT, I.CLIENTID,I.CLIENTNAME, I.COINO, G.FULLNAME AS ENCODER, I.INSURANCEID,I.PAWNTICKET, " & _
@@ -392,11 +430,9 @@ Public Class ExtractDataFromDatabase
 
         Dim verified_url As String
 
-        Select Case FormType
-            Case Extract.Insurance
-                Console.WriteLine("Insurance Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-        End Select
+        Dim str As String = "Insurance"
+        Console.WriteLine("Insurance Activated")
+        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
 
         If txtPath.Text.Split(".").Count > 1 Then
@@ -407,15 +443,36 @@ Public Class ExtractDataFromDatabase
             End If
         Else
             verified_url = txtPath.Text & "/" & sfdPath.FileName
+
+
+            oWB.SaveAs(verified_url)
+            oSheet = Nothing
+            oWB.Close(False)
+            oWB = Nothing
+            oXL.Quit()
+            oXL = Nothing
+
+            Dim FileName = verified_url
+            Try
+                ' create the zip archive
+                Dim Z As System.IO.Packaging.ZipPackage
+                Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
+                ' read all the bytes of the file
+                Dim B = System.IO.File.ReadAllBytes(FileName)
+                ' create a uri for the file
+                Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
+                ' create a part
+                Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
+                ' write the content into the part
+                P.GetStream.Write(B, 0, B.Length)
+                Z.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            If System.IO.File.Exists(verified_url) = True Then
+                System.IO.File.Delete(verified_url)
+            End If
         End If
-
-        oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
         MsgBox("Insurance Extracted", MsgBoxStyle.Information)
     End Sub
 
@@ -424,9 +481,7 @@ Public Class ExtractDataFromDatabase
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
-
-        Dim srt As String = " Remitance"
-        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, srt)  'BranchCode + Date
+        ' sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, srt)  'BranchCode + Date
 
 
         Dim mySql As String
@@ -505,11 +560,9 @@ Public Class ExtractDataFromDatabase
 
         Dim verified_url As String
 
-        Select Case FormType
-            Case Extract.Dollar
-                Console.WriteLine("Remitance Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
-        End Select
+        Dim str As String = "Remitance"
+        Console.WriteLine("Remitance Activated")
+        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
 
         If txtPath.Text.Split(".").Count > 1 Then
@@ -520,16 +573,50 @@ Public Class ExtractDataFromDatabase
             End If
         Else
             verified_url = txtPath.Text & "/" & sfdPath.FileName
+
+
+            oWB.SaveAs(verified_url)
+            oSheet = Nothing
+            oWB.Close(False)
+            oWB = Nothing
+            oXL.Quit()
+            oXL = Nothing
+
+            Dim FileName = verified_url
+            Try
+                ' create the zip archive
+                Dim Z As System.IO.Packaging.ZipPackage
+                Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
+                ' read all the bytes of the file
+                Dim B = System.IO.File.ReadAllBytes(FileName)
+                ' create a uri for the file
+                Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
+                ' create a part
+                Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
+                ' write the content into the part
+                P.GetStream.Write(B, 0, B.Length)
+                Z.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            If System.IO.File.Exists(verified_url) = True Then
+                System.IO.File.Delete(verified_url)
+            End If
         End If
-
-        oWB.SaveAs(verified_url)
-        oSheet = Nothing
-        oWB.Close(False)
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
-
         MsgBox("Remitance Extracted", MsgBoxStyle.Information)
     End Sub
 #End Region
+    Private Sub txtPath_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles txtPath.MouseClick
+        sfdPath.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim result As DialogResult = sfdPath.ShowDialog
+
+        If Not result = Windows.Forms.DialogResult.OK Then
+            Return
+        End If
+        txtPath.Text = sfdPath.FileName
+    End Sub
+
+    Private Sub AddProgress()
+        pbLoading.Value += 1
+    End Sub
 End Class

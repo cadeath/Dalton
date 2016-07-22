@@ -25,6 +25,7 @@
         BSPReportToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
+        ExtractToExcelToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         ConsoleToolStripMenuItem.Enabled = Not st
@@ -451,5 +452,9 @@
     Private Sub AuditReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditReportToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.AuditPrinLimit
         qryDate.Show()
+    End Sub
+
+    Private Sub ExtractToExcelToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ExtractToExcelToolStripMenuItem.Click
+        ExtractDataFromDatabase.Show()
     End Sub
 End Class

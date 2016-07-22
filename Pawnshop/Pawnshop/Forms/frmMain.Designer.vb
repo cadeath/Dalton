@@ -53,6 +53,7 @@ Partial Class frmMain
         Me.AuctionMonthlyJewelryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.OutstandingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AuditReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoanRegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MoneyTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InsuranceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -88,7 +89,7 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.AuditReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExtractToExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -174,7 +175,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.ExtractToExcelToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -274,6 +275,12 @@ Partial Class frmMain
         Me.OutstandingToolStripMenuItem.Name = "OutstandingToolStripMenuItem"
         Me.OutstandingToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.OutstandingToolStripMenuItem.Text = "&Outstanding"
+        '
+        'AuditReportToolStripMenuItem
+        '
+        Me.AuditReportToolStripMenuItem.Name = "AuditReportToolStripMenuItem"
+        Me.AuditReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.AuditReportToolStripMenuItem.Text = "A&udit Report"
         '
         'LoanRegisterToolStripMenuItem
         '
@@ -564,11 +571,11 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
-        'AuditReportToolStripMenuItem
+        'ExtractToExcelToolStripMenuItem
         '
-        Me.AuditReportToolStripMenuItem.Name = "AuditReportToolStripMenuItem"
-        Me.AuditReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.AuditReportToolStripMenuItem.Text = "A&udit Report"
+        Me.ExtractToExcelToolStripMenuItem.Name = "ExtractToExcelToolStripMenuItem"
+        Me.ExtractToExcelToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ExtractToExcelToolStripMenuItem.Text = "Extract To Excel"
         '
         'frmMain
         '
@@ -667,5 +674,6 @@ Partial Class frmMain
     Friend WithEvents ChangelogToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AuctionMonthlyJewelryReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AuditReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExtractToExcelToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

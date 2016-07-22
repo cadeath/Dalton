@@ -142,6 +142,7 @@
     <Reference Include="TOTP">
       <HintPath>.\TOTP.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />

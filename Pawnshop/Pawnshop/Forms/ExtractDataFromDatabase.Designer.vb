@@ -40,7 +40,7 @@ Partial Class ExtractDataFromDatabase
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(230, 24)
         Me.Label1.TabIndex = 31
-        Me.Label1.Text = "Path (Double Click to change)"
+        Me.Label1.Text = "Path (Click to change)"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'txtPath
