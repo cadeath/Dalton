@@ -515,7 +515,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
                 verified_url = txtPath.Text & "/" & sfdPath.FileName
             End If
         Else
-            verified_url = txtPath.Text & "/" & sfdPath.FileName & ".zip"
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
 
 
             oWB.SaveAs(verified_url)
@@ -524,7 +524,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oWB = Nothing
             oXL.Quit()
             oXL = Nothing
-            ExtractZipFile(verified_url, "12345", txtPath.Text)
+
             CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
@@ -555,7 +555,6 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             Return ""
             Exit Function
         Else
-
             If IO.Directory.Exists(destination) = False Then
                 Return ""
                 Exit Function
@@ -584,38 +583,4 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         memoryStream.Dispose()
         Return buffer
     End Function
-    Public Sub ExtractZipFile(archiveFilenameIn As String, password As String, outFolder As String)
-        Dim zf As ZipFile = Nothing
-        Try
-            Dim fs As FileStream = File.OpenRead(archiveFilenameIn)
-            zf = New ZipFile(fs)
-            If Not [String].IsNullOrEmpty(password) Then    ' AES encrypted entries are handled automatically
-                zf.Password = password
-            End If
-            For Each zipEntry As ZipEntry In zf
-                If Not zipEntry.IsFile Then     ' Ignore directories
-                    Continue For
-                End If
-                Dim entryFileName As [String] = zipEntry.Name
-                
-                Dim buffer As Byte() = New Byte(4095) {}    ' 4K is optimum
-                Dim zipStream As Stream = zf.GetInputStream(zipEntry)
-                Dim fullZipToPath As [String] = Path.Combine(outFolder, entryFileName)
-                Dim directoryName As String = Path.GetDirectoryName(fullZipToPath)
-                If directoryName.Length > 0 Then
-                    Directory.CreateDirectory(directoryName)
-                End If
-
-                Using streamWriter As FileStream = File.Create(fullZipToPath)
-                    StreamUtils.Copy(zipStream, streamWriter, buffer)
-                End Using
-            Next
-        Finally
-            If zf IsNot Nothing Then
-                zf.IsStreamOwner = True
-                zf.Close()
-            End If
-        End Try
-    End Sub
-
 End Class

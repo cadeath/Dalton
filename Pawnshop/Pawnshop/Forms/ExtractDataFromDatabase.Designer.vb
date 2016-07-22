@@ -102,9 +102,9 @@ Partial Class ExtractDataFromDatabase
         'pbLoading
         '
         Me.pbLoading.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pbLoading.Location = New System.Drawing.Point(0, 227)
+        Me.pbLoading.Location = New System.Drawing.Point(0, 408)
         Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(372, 23)
+        Me.pbLoading.Size = New System.Drawing.Size(568, 23)
         Me.pbLoading.TabIndex = 24
         '
         'btnPawnExtract
@@ -126,7 +126,7 @@ Partial Class ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(372, 250)
+        Me.ClientSize = New System.Drawing.Size(568, 431)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtPath)
         Me.Controls.Add(Me.btnRemitanceExtract)
