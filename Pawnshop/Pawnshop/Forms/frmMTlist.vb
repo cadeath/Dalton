@@ -171,9 +171,4 @@
         End If
         lblModname.Text = tmpMT.LoadServiceType + " " + strMoneyTrans
     End Sub
-
-
-    Private Sub lblModname_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblModname.TextChanged
-        TextBox1.Text = lblModname.Text
-    End Sub
 End Class

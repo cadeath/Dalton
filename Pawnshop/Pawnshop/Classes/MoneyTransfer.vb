@@ -273,23 +273,37 @@
             Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
                 SrcStr = "GPRS_R|Ref# " & _ref
         End Select
-        Dim strModname As String = frmMTlist.lblModname.Text
+        Dim strModname1 As String
+        Select Case frmMTlist.lblModname.Text
+            Case "Cebuana Llhuiller OUT"
+                strModname1 = "PERA LINK OUT"
+            Case "Cebuana Llhuiller IN"
+                strModname1 = "PERA LINK IN"
+            Case "Pera Padala - PMFTC OUT"
+                strModname1 = "Pera Padala OUT"
+            Case "Pera Padala - PMFTC IN"
+                strModname1 = "Pera Padala IN"
+            Case "GPRS - GPRS to Smart Money OUT", "GPRS - GPRS to BANK (UCPB/PNB) OUT", "GPRS - GPRS to BANK (BDO/Chinabank) OUT", _
+                    "GPRS - GPRS to BANK (DBP) OUT", "GPRS - GPRS to BANK (MetroBank)OUT", "GPRS - GPRS to BANK (Maybank/LandBank) OUT", _
+                    "GPRS - iREMIT to GPRS OUT", "GPRS - NYBP/Transfast to GPRS OUT", "GPRS - GPRS to Moneygram OUT"
+                strModname1 = "GPRS OUT"
+            Case "GPRS - GPRS to Smart Money IN", "GPRS - GPRS to BANK (UCPB/PNB) IN", "GPRS - GPRS to BANK (BDO/Chinabank) IN", _
+                "GPRS - GPRS to BANK (DBP) IN", "GPRS - GPRS to BANK (MetroBank)IN", "GPRS - GPRS to BANK (Maybank/LandBank) IN", _
+                "GPRS - iREMIT to GPRS IN", "GPRS - NYBP/Transfast to GPRS IN", "GPRS - GPRS to Moneygram IN"
+                strModname1 = "GPRS IN"
+            Case "GPRS - Smartmoney To GPRS OUT", "GPRS - Moneygram to GPRS OUT"
+                strModname1 = "GPRS OUT"
+            Case Else
+                strModname1 = frmMTlist.lblModname.Text
+        End Select
 
-        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE HASCUSTOMER = '1' AND UPPER(MOD_NAME) LIKE UPPER('%" & strModname & "%') AND TRANSID =" & MoneyTransID
+        Dim strModname2 As String = frmMTlist.lblModname.Text
+
+        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE HASCUSTOMER = '1' AND UPPER(MOD_NAME) LIKE UPPER('%" & strModname1 & "%') AND TRANSID =" & MoneyTransID
         Dim ds2 As DataSet = LoadSQL(mySql2, fillData1)
         Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
-        'Select Case SrvTypDailyTimelog
-        '    Case "PERA PADALA OUT
-        '    Case "PERA PADALA IN"
-        '    Case "WESTERN UNION OUT"
-        '    Case "WESTERN UNION IN"
-        '    Case "PERA LINK OUT"
-        '    Case "PERA LINK IN"
-        '    Case "GPRS OUT"
-        '    Case "GPRS IN"
-        'End Select
-
-        Dim mySql3 As String = "SELECT * FROM " & filldata2 & " WHERE UPPER(TRANSTYPE) LIKE UPPER('%" & strModname & "%') AND TRANSID =" & MoneyTransID
+        
+        Dim mySql3 As String = "SELECT * FROM " & filldata2 & " WHERE UPPER(TRANSTYPE) LIKE UPPER('%" & strModname2 & "%') AND TRANSID =" & MoneyTransID
         Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
        

@@ -41,7 +41,6 @@ Partial Class frmMTlist
         Me.btnNew = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblModname = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'lvMoneyTransfer
@@ -189,20 +188,12 @@ Partial Class frmMTlist
         Me.lblModname.TabIndex = 8
         Me.lblModname.Text = "Modname"
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(451, 438)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 9
-        '
         'frmMTlist
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(725, 467)
-        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.lblModname)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnNew)
@@ -238,5 +229,4 @@ Partial Class frmMTlist
     Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents lblModname As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class
