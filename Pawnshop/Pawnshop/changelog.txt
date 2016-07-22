@@ -15,9 +15,12 @@ Version 1.2.2.6
  - Add Audit Report base from the Memo # 06-16-1099
  - Add One-Time Password
  - Add Auction Monthly Reports
- - Add Pawning Renewal Notification
+ - Add Pawning Renewal Notification (For ITEMTYPE CEL, 5x)
+ - Add Brackting Report
+ - Add Renewal Monthly Break Down
  - Include Auto Patch up to db1.2 v1.2
  - Include BDO and Smart Money Report in Cash In/Out
+ - Enhance Pawning Search
  - Remove Journal Entries Sorting
 
 Version 1.2.0.1
