@@ -552,15 +552,15 @@ Public Class frmMoneyTransfer
                     'GPRS ----------------------------------
                     MOD_NAME = "GPRS "
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , "GPRS OUT", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS OUT", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS OUT", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , "GPRS - GPRS to GPRS OUT", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS - GPRS to GPRS OUT", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS - GPRS to GPRS OUT", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
 
                     Else
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , "GPRS IN", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS IN", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS IN", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , "GPRS - GPRS to GPRS IN", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS - GPRS to GPRS IN", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS - GPRS to GPRS IN", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
 
                     End If

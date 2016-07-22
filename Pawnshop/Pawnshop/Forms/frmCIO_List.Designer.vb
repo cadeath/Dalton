@@ -38,8 +38,8 @@ Partial Class frmCIO_List
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.lblCashID = New System.Windows.Forms.Label()
-        Me.lblType = New System.Windows.Forms.Label()
         Me.lblCategory = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -162,17 +162,6 @@ Partial Class frmCIO_List
         Me.lblCashID.Size = New System.Drawing.Size(81, 13)
         Me.lblCashID.TabIndex = 5
         Me.lblCashID.Text = "CashIN/OUTID"
-        Me.lblCashID.Visible = False
-        '
-        'lblType
-        '
-        Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(318, 436)
-        Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(58, 13)
-        Me.lblType.TabIndex = 6
-        Me.lblType.Text = "TransType"
-        Me.lblType.Visible = False
         '
         'lblCategory
         '
@@ -182,15 +171,21 @@ Partial Class frmCIO_List
         Me.lblCategory.Size = New System.Drawing.Size(49, 13)
         Me.lblCategory.TabIndex = 7
         Me.lblCategory.Text = "Category"
-        Me.lblCategory.Visible = False
+        '
+        'lblType
+        '
+        Me.lblType.Location = New System.Drawing.Point(599, 433)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(372, 20)
+        Me.lblType.TabIndex = 8
         '
         'frmCIO_List
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1094, 469)
-        Me.Controls.Add(Me.lblCategory)
         Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.lblCategory)
         Me.Controls.Add(Me.lblCashID)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnCancel)
@@ -222,6 +217,6 @@ Partial Class frmCIO_List
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnVoid As System.Windows.Forms.Button
     Friend WithEvents lblCashID As System.Windows.Forms.Label
-    Friend WithEvents lblType As System.Windows.Forms.Label
     Friend WithEvents lblCategory As System.Windows.Forms.Label
+    Friend WithEvents lblType As System.Windows.Forms.TextBox
 End Class
