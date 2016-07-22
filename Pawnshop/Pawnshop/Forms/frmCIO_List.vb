@@ -132,6 +132,10 @@
             Transactiontype = "INVENTORY IN"
         ElseIf lblType.Text = "BDO ATM CASHOUT BDO ATM CASHOUT" Then
             Transactiontype = "BDO ATM CASHOUT"
+        ElseIf lblType.Text = "Disbursement Smart Money Inventory Offsetting Account" Then
+            Transactiontype = "Disbursement Smart Money Inventory Offsetting Acco"
+        ElseIf lblType.Text = "Disbursement Repairs & Maintenance-Store & Office Equip." Then
+            Transactiontype = "Disbursement Repairs & Maintenance-Store & Office"
         Else
             Transactiontype = lblType.Text
         End If
@@ -140,16 +144,20 @@
             Select Case lblCategory.Text
                 Case "BDO ATM CASHOUT"
                     strCategory = "BDO ATM"
-            Case "INVENTORY IN", "AUCTION REDEEM", "Commission from SMART MONEY Cash Out", "LAY-AWAY PAYMENTS", "FUND REPLENISHMENT"
+            Case "INVENTORY IN", "AUCTION REDEEM", "Commission from SMART MONEY Cash Out", "FUND REPLENISHMENT", "DEPOSIT OF EXCESS FUND"
                 strCategory = "CASH IN/OUT"
-                Case "TICKETING - GPRS", "GPRS LOADING", "GPRS - BILL PAYMENT"
-                    strCategory = "GPRS"
+            Case "PETTY CASH "
+                strCategory = "CASH IN/OUT"
+            Case "TICKETING - GPRS", "GPRS LOADING", "GPRS - BILL PAYMENT"
+                strCategory = "GPRS"
                 Case "SMART MONEY PADALA"
                     strCategory = "SMARTMONEY IN"
-                Case "SALES OF INVENTORIABLES"
+            Case "SALES OF INVENTORIABLES", "LAY-AWAY PAYMENTS"
                 strCategory = "SALES OF INV"
             Case "ECPAY - LOAD", "ECPAY - Bills Payment"
                 strCategory = "ECPAY"
+            Case "SMART MONEY ENCASHMENT-CASHOUT-Dalton"
+                strCategory = "SMARTMONEY OUT"
             Case Else
                 strCategory = lblCategory.Text
         End Select
@@ -170,8 +178,10 @@
             RemoveJournal(CashID, , Transactiontype)
             RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
             If strCategory = "CASH IN/OUT" Then
-                RemoveDailyTimeLog(CashID, "0", SrvTypDailyTimelog)
-            End If
+            RemoveDailyTimeLog(CashID, "0", SrvTypDailyTimelog)
+        ElseIf strCategory = "SALES OF INV" And lblCategory.Text = "LAY-AWAY PAYMENTS" Then
+            RemoveDailyTimeLog(CashID, "0", SrvTypDailyTimelog)
+        End If
             MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
     ''' <summary>
