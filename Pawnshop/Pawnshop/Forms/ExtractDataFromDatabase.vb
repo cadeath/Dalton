@@ -1,17 +1,20 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.Odbc
-
 Imports System.IO
 Imports System.IO.Compression
+
+Imports ICSharpCode.SharpZipLib.Core
+Imports ICSharpCode.SharpZipLib.Zip
 
 Public Class ExtractDataFromDatabase
 
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+      
     End Sub
 
 #Region "Extract Database Table"
-    Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnPawnExtract.Click
+Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnPawnExtract.Click
 
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -130,25 +133,10 @@ Public Class ExtractDataFromDatabase
             oXL = Nothing
 
                     Dim FileName = verified_url
-                    Try
-                        ' create the zip archive
-                        Dim Z As System.IO.Packaging.ZipPackage
-                        Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
-                        ' read all the bytes of the file
-                        Dim B = System.IO.File.ReadAllBytes(FileName)
-                        ' create a uri for the file
-                        Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
-                        ' create a part
-                        Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
-                        ' write the content into the part
-                        P.GetStream.Write(B, 0, B.Length)
-                        Z.Close()
-                    Catch ex As Exception
-                        MsgBox(ex.Message)
-                    End Try
-                    If System.IO.File.Exists(verified_url) = True Then
-                        System.IO.File.Delete(verified_url)
-                    End If
+            CompressFile(verified_url, txtPath.Text)
+            If System.IO.File.Exists(verified_url) = True Then
+                System.IO.File.Delete(verified_url)
+            End If
         End If
         MsgBox("Pawning Extracted", MsgBoxStyle.Information)
     End Sub
@@ -239,22 +227,7 @@ Public Class ExtractDataFromDatabase
             oXL = Nothing
 
             Dim FileName = verified_url
-            Try
-                ' create the zip archive
-                Dim Z As System.IO.Packaging.ZipPackage
-                Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
-                ' read all the bytes of the file
-                Dim B = System.IO.File.ReadAllBytes(FileName)
-                ' create a uri for the file
-                Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
-                ' create a part
-                Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
-                ' write the content into the part
-                P.GetStream.Write(B, 0, B.Length)
-                Z.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+            CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
             End If
@@ -346,22 +319,7 @@ Public Class ExtractDataFromDatabase
             oXL = Nothing
 
             Dim FileName = verified_url
-            Try
-                ' create the zip archive
-                Dim Z As System.IO.Packaging.ZipPackage
-                Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
-                ' read all the bytes of the file
-                Dim B = System.IO.File.ReadAllBytes(FileName)
-                ' create a uri for the file
-                Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
-                ' create a part
-                Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
-                ' write the content into the part
-                P.GetStream.Write(B, 0, B.Length)
-                Z.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+            CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
             End If
@@ -453,22 +411,7 @@ Public Class ExtractDataFromDatabase
             oXL = Nothing
 
             Dim FileName = verified_url
-            Try
-                ' create the zip archive
-                Dim Z As System.IO.Packaging.ZipPackage
-                Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
-                ' read all the bytes of the file
-                Dim B = System.IO.File.ReadAllBytes(FileName)
-                ' create a uri for the file
-                Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
-                ' create a part
-                Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
-                ' write the content into the part
-                P.GetStream.Write(B, 0, B.Length)
-                Z.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+            CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
             End If
@@ -572,7 +515,7 @@ Public Class ExtractDataFromDatabase
                 verified_url = txtPath.Text & "/" & sfdPath.FileName
             End If
         Else
-            verified_url = txtPath.Text & "/" & sfdPath.FileName
+            verified_url = txtPath.Text & "/" & sfdPath.FileName & ".zip"
 
 
             oWB.SaveAs(verified_url)
@@ -581,32 +524,19 @@ Public Class ExtractDataFromDatabase
             oWB = Nothing
             oXL.Quit()
             oXL = Nothing
-
-            Dim FileName = verified_url
-            Try
-                ' create the zip archive
-                Dim Z As System.IO.Packaging.ZipPackage
-                Z = System.IO.Packaging.Package.Open(FileName & ".zip", IO.FileMode.Create)
-                ' read all the bytes of the file
-                Dim B = System.IO.File.ReadAllBytes(FileName)
-                ' create a uri for the file
-                Dim partUriDocument As Uri = System.IO.Packaging.PackUriHelper.CreatePartUri(New Uri(System.IO.Path.GetFileName(FileName), UriKind.Relative))
-                ' create a part
-                Dim P = Z.CreatePart(partUriDocument, System.Net.Mime.MediaTypeNames.Application.Zip, IO.Packaging.CompressionOption.Maximum)
-                ' write the content into the part
-                P.GetStream.Write(B, 0, B.Length)
-                Z.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+            ExtractZipFile(verified_url, "12345", txtPath.Text)
+            CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
             End If
         End If
+
         MsgBox("Remitance Extracted", MsgBoxStyle.Information)
     End Sub
 #End Region
+
     Private Sub txtPath_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles txtPath.MouseClick
+
         sfdPath.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         Dim result As DialogResult = sfdPath.ShowDialog
 
@@ -619,4 +549,73 @@ Public Class ExtractDataFromDatabase
     Private Sub AddProgress()
         pbLoading.Value += 1
     End Sub
+
+    Public Function CompressFile(ByRef file As String, ByRef destination As String) As String
+        If IO.File.Exists(file) = False Then
+            Return ""
+            Exit Function
+        Else
+
+            If IO.Directory.Exists(destination) = False Then
+                Return ""
+                Exit Function
+            End If
+        End If
+        Try
+            Dim name As String = Path.GetFileName(file)
+            Dim source() As Byte = System.IO.File.ReadAllBytes(file)
+            Dim compressed() As Byte = ConvertToByteArray(source)
+            System.IO.File.WriteAllBytes(destination & "\" & name & ".zip", compressed)
+            Return "Compression Successful!"
+        Catch ex As Exception
+            Return "Compression Error: " & ex.ToString()
+        End Try
+    End Function
+    Public Function ConvertToByteArray(ByVal source() As Byte) As Byte()
+
+        Dim memoryStream As New MemoryStream()
+        Dim gZipStream As New GZipStream(memoryStream, CompressionMode.Compress, True)
+
+        gZipStream.Write(source, 0, source.Length)
+        gZipStream.Dispose()
+        memoryStream.Position = 0
+        Dim buffer(memoryStream.Length) As Byte
+        memoryStream.Read(buffer, 0, buffer.Length)
+        memoryStream.Dispose()
+        Return buffer
+    End Function
+    Public Sub ExtractZipFile(archiveFilenameIn As String, password As String, outFolder As String)
+        Dim zf As ZipFile = Nothing
+        Try
+            Dim fs As FileStream = File.OpenRead(archiveFilenameIn)
+            zf = New ZipFile(fs)
+            If Not [String].IsNullOrEmpty(password) Then    ' AES encrypted entries are handled automatically
+                zf.Password = password
+            End If
+            For Each zipEntry As ZipEntry In zf
+                If Not zipEntry.IsFile Then     ' Ignore directories
+                    Continue For
+                End If
+                Dim entryFileName As [String] = zipEntry.Name
+                
+                Dim buffer As Byte() = New Byte(4095) {}    ' 4K is optimum
+                Dim zipStream As Stream = zf.GetInputStream(zipEntry)
+                Dim fullZipToPath As [String] = Path.Combine(outFolder, entryFileName)
+                Dim directoryName As String = Path.GetDirectoryName(fullZipToPath)
+                If directoryName.Length > 0 Then
+                    Directory.CreateDirectory(directoryName)
+                End If
+
+                Using streamWriter As FileStream = File.Create(fullZipToPath)
+                    StreamUtils.Copy(zipStream, streamWriter, buffer)
+                End Using
+            Next
+        Finally
+            If zf IsNot Nothing Then
+                zf.IsStreamOwner = True
+                zf.Close()
+            End If
+        End Try
+    End Sub
+
 End Class
