@@ -22,7 +22,7 @@ Partial Class frmCIO_List
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "Receipt", "1/1/2015", "ECPAY - LOAD", "Cash In Bank", "350", "Banks"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "Receipt", "1/1/2015", "ECPAY - LOAD", "Cash In Bank", "350", "Banks"}, -1)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -90,7 +90,7 @@ Partial Class frmCIO_List
         Me.lvCIO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvCIO.FullRowSelect = True
         Me.lvCIO.GridLines = True
-        Me.lvCIO.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvCIO.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvCIO.Location = New System.Drawing.Point(12, 80)
         Me.lvCIO.MultiSelect = False
         Me.lvCIO.Name = "lvCIO"
@@ -162,6 +162,7 @@ Partial Class frmCIO_List
         Me.lblCashID.Size = New System.Drawing.Size(81, 13)
         Me.lblCashID.TabIndex = 5
         Me.lblCashID.Text = "CashIN/OUTID"
+        Me.lblCashID.Visible = False
         '
         'lblCategory
         '
@@ -171,6 +172,7 @@ Partial Class frmCIO_List
         Me.lblCategory.Size = New System.Drawing.Size(49, 13)
         Me.lblCategory.TabIndex = 7
         Me.lblCategory.Text = "Category"
+        Me.lblCategory.Visible = False
         '
         'lblType
         '
@@ -178,6 +180,7 @@ Partial Class frmCIO_List
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(372, 20)
         Me.lblType.TabIndex = 8
+        Me.lblType.Visible = False
         '
         'frmCIO_List
         '
