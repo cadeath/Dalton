@@ -10,7 +10,7 @@ Imports ICSharpCode.SharpZipLib.Zip
 Public Class ExtractDataFromDatabase
 
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'txtPath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        txtPath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         txtPath.Text = "D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop"
     End Sub
 
@@ -522,30 +522,27 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL.Quit()
             oXL = Nothing
 
-            'If System.IO.File.Exists(verified_url) = True Then
-            '    System.IO.File.Delete(verified_url)
-            'End If
-        End If
 
+            Using sw As StreamWriter = File.CreateText("Extract.bat")
+                sw.WriteLine("@echo off")
+                sw.WriteLine("title cdt-S0ft - Extract")
+                sw.WriteLine("echo Extracting. . .")
+                sw.WriteLine("pause")
+                sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+                sw.WriteLine("rar a " & txtPath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+                sw.WriteLine("cls ")
+                sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+                sw.WriteLine("pause")
+                sw.WriteLine("exit")
+            End Using
+            MessageBox.Show("Successful", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
         MsgBox("Remitance Extracted", MsgBoxStyle.Information)
 
-
-        'Using sw As StreamWriter = File.CreateText("Extract.bat")
-        '    sw.WriteLine("@echo off")
-        '    sw.WriteLine("title cdt-S0ft - Extract")
-        '    sw.WriteLine("echo Extracting. . .")
-        '    sw.WriteLine("pause")
-        '    sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-        '    sw.WriteLine("rar a " & txtPath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
-        '    sw.WriteLine("cls ")
-        '    sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
-        '    sw.WriteLine("pause")
-        '    sw.WriteLine("exit")
-        'End Using
-
-        'MessageBox.Show("Successful", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        ' Me.Close()
-       
+        'On Error Resume Next
+        'If System.IO.File.Exists(verified_url) = True Then
+        '    System.IO.File.Delete(verified_url)
+        'End If
     End Sub
 #End Region
 
@@ -565,8 +562,8 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
     End Sub
 
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-        If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
-        txtPath1.Text = fbdBackup.SelectedPath
-        txtPath1.Focus()
+        'If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
+        'txtPath1.Text = fbdBackup.SelectedPath
+        'txtPath1.Focus()
     End Sub
 End Class

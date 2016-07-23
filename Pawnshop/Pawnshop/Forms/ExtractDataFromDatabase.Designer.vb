@@ -39,9 +39,9 @@ Partial Class ExtractDataFromDatabase
         '
         'Label1
         '
-        Me.Label1.Location = New System.Drawing.Point(134, 200)
+        Me.Label1.Location = New System.Drawing.Point(459, 97)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(230, 24)
+        Me.Label1.Size = New System.Drawing.Size(137, 24)
         Me.Label1.TabIndex = 31
         Me.Label1.Text = "Path (Click to change)"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -49,10 +49,10 @@ Partial Class ExtractDataFromDatabase
         'txtPath
         '
         Me.txtPath.BackColor = System.Drawing.Color.White
-        Me.txtPath.Location = New System.Drawing.Point(137, 177)
+        Me.txtPath.Location = New System.Drawing.Point(369, 74)
         Me.txtPath.Name = "txtPath"
         Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(224, 20)
+        Me.txtPath.Size = New System.Drawing.Size(227, 20)
         Me.txtPath.TabIndex = 30
         '
         'btnRemitanceExtract
@@ -127,18 +127,18 @@ Partial Class ExtractDataFromDatabase
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(508, 43)
+        Me.Button3.Location = New System.Drawing.Point(500, 41)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(77, 25)
+        Me.Button3.Size = New System.Drawing.Size(95, 25)
         Me.Button3.TabIndex = 32
         Me.Button3.Text = "Browse"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'txtPath1
         '
-        Me.txtPath1.Location = New System.Drawing.Point(372, 17)
+        Me.txtPath1.Location = New System.Drawing.Point(369, 17)
         Me.txtPath1.Name = "txtPath1"
-        Me.txtPath1.Size = New System.Drawing.Size(213, 20)
+        Me.txtPath1.Size = New System.Drawing.Size(227, 20)
         Me.txtPath1.TabIndex = 33
         '
         'fbdBackup
