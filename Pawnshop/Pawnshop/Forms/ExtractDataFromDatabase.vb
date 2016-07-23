@@ -299,6 +299,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         Dim verified_url As String
         Console.WriteLine("Borrowing Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
+        txtPath1.Text = txtPath1.Text
 
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
@@ -317,12 +318,37 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL.Quit()
             oXL = Nothing
 
-            Dim FileName = verified_url
-            If System.IO.File.Exists(verified_url) = True Then
-                System.IO.File.Delete(verified_url)
-            End If
+            Using sw As StreamWriter = File.CreateText("Extract.bat")
+                sw.WriteLine("@echo off")
+                sw.WriteLine("title cdt-S0ft - Extract")
+                sw.WriteLine("echo Extracting. . .")
+                sw.WriteLine("pause")
+                sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+                sw.WriteLine("rar a " & txtPath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+                sw.WriteLine("cls ")
+                sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+                sw.WriteLine("pause")
+                sw.WriteLine("exit")
+            End Using
+
+            Dim proc As Process = Nothing
+            Try
+                Dim batDir As String = String.Format("D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop\")
+                proc = New Process()
+                proc.StartInfo.WorkingDirectory = batDir
+                proc.StartInfo.FileName = "Extract.bat"
+                proc.StartInfo.CreateNoWindow = False
+                proc.Start()
+                proc.WaitForExit()
+            Catch ex As Exception
+                Console.WriteLine(ex.StackTrace.ToString())
+            End Try
+        End If
+        If System.IO.File.Exists(verified_url) = True Then
+            System.IO.File.Delete(verified_url)
         End If
         MsgBox("Borrowing Extracted", MsgBoxStyle.Information)
+        MsgBox("Thank you. . .", MsgBoxStyle.Information)
     End Sub
 
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
@@ -385,11 +411,11 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         End While
 
         Dim verified_url As String
-
         Dim str As String = "Insurance"
+
         Console.WriteLine("Insurance Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-
+        txtPath1.Text = txtPath1.Text
 
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
@@ -408,12 +434,38 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL.Quit()
             oXL = Nothing
 
-            Dim FileName = verified_url
-            If System.IO.File.Exists(verified_url) = True Then
-                System.IO.File.Delete(verified_url)
-            End If
+            Using sw As StreamWriter = File.CreateText("Extract.bat")
+                sw.WriteLine("@echo off")
+                sw.WriteLine("title cdt-S0ft - Extract")
+                sw.WriteLine("echo Extracting. . .")
+                sw.WriteLine("pause")
+                sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+                sw.WriteLine("rar a " & txtPath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+                sw.WriteLine("cls ")
+                sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+                sw.WriteLine("pause")
+                sw.WriteLine("exit")
+            End Using
+
+            Dim proc As Process = Nothing
+            Try
+                Dim batDir As String = String.Format("D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop\")
+                proc = New Process()
+                proc.StartInfo.WorkingDirectory = batDir
+                proc.StartInfo.FileName = "Extract.bat"
+                proc.StartInfo.CreateNoWindow = False
+                proc.Start()
+                proc.WaitForExit()
+            Catch ex As Exception
+                Console.WriteLine(ex.StackTrace.ToString())
+            End Try
         End If
+        If System.IO.File.Exists(verified_url) = True Then
+            System.IO.File.Delete(verified_url)
+        End If
+
         MsgBox("Insurance Extracted", MsgBoxStyle.Information)
+        MsgBox("Thank you. . .", MsgBoxStyle.Information)
     End Sub
 
     Private Sub btnRemitanceExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnRemitanceExtract.Click
@@ -499,11 +551,9 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         End While
 
         Dim verified_url As String
-
         Dim str As String = "Remitance"
-        Console.WriteLine("Remitance Activated")
-        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
+        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
         txtPath1.Text = txtPath1.Text
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
@@ -535,14 +585,27 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
-            MessageBox.Show("Successful", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        End If
-        MsgBox("Remitance Extracted", MsgBoxStyle.Information)
 
-        'On Error Resume Next
-        'If System.IO.File.Exists(verified_url) = True Then
-        '    System.IO.File.Delete(verified_url)
-        'End If
+            Dim proc As Process = Nothing
+            Try
+                Dim batDir As String = String.Format("D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop\")
+                proc = New Process()
+                proc.StartInfo.WorkingDirectory = batDir
+                proc.StartInfo.FileName = "Extract.bat"
+                proc.StartInfo.CreateNoWindow = False
+                proc.Start()
+                proc.WaitForExit()
+            Catch ex As Exception
+                Console.WriteLine(ex.StackTrace.ToString())
+            End Try
+        End If
+
+        If System.IO.File.Exists(verified_url) = True Then
+            System.IO.File.Delete(verified_url)
+        End If
+
+        MsgBox("Remitance Extracted", MsgBoxStyle.Information)
+        MsgBox("Thank you...", MsgBoxStyle.Information)
     End Sub
 #End Region
 
@@ -565,5 +628,10 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         'If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
         'txtPath1.Text = fbdBackup.SelectedPath
         'txtPath1.Focus()
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+       
+
+     
+       
     End Sub
 End Class
