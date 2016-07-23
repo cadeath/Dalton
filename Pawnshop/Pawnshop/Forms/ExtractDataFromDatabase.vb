@@ -9,9 +9,12 @@ Imports ICSharpCode.SharpZipLib.Zip
 
 Public Class ExtractDataFromDatabase
 
+    Dim readValue = My.Computer.Registry.GetValue(
+    "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
+  
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        txtPath.Text = "D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop"
+        txtPath.Text =readValue
     End Sub
 
 #Region "Extract Database Table"
@@ -133,12 +136,39 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
                     oXL.Quit()
             oXL = Nothing
 
-                    Dim FileName = verified_url
-            If System.IO.File.Exists(verified_url) = True Then
-                System.IO.File.Delete(verified_url)
-            End If
+            txtpath1.Text = txtpath1.Text
+            Using sw As StreamWriter = File.CreateText("Extract.bat")
+                sw.WriteLine("@echo off")
+                sw.WriteLine("title cdt-S0ft - Extract")
+                sw.WriteLine("echo Extracting. . .")
+                sw.WriteLine("pause")
+                sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+                sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+                sw.WriteLine("cls ")
+                sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+                sw.WriteLine("pause")
+                sw.WriteLine("exit")
+            End Using
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            Dim proc As Process = Nothing
+            Try
+                Dim batDir As String = String.Format(readValue)
+                proc = New Process()
+                proc.StartInfo.WorkingDirectory = batDir
+                proc.StartInfo.FileName = "Extract.bat"
+                proc.StartInfo.CreateNoWindow = False
+                proc.Start()
+                proc.WaitForExit()
+            Catch ex As Exception
+                Console.WriteLine(ex.StackTrace.ToString())
+            End Try
+        End If
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        If System.IO.File.Exists(verified_url) = True Then
+            System.IO.File.Delete(verified_url)
         End If
         MsgBox("Pawning Extracted", MsgBoxStyle.Information)
+        MsgBox("Thank you. . .", MsgBoxStyle.Information)
     End Sub
 
     Private Sub btnDollarExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnDollarExtract.Click
@@ -226,12 +256,39 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL.Quit()
             oXL = Nothing
 
-            Dim FileName = verified_url
-            If System.IO.File.Exists(verified_url) = True Then
-                System.IO.File.Delete(verified_url)
-            End If
+            txtpath1.Text = txtpath1.Text
+            Using sw As StreamWriter = File.CreateText("Extract.bat")
+                sw.WriteLine("@echo off")
+                sw.WriteLine("title cdt-S0ft - Extract")
+                sw.WriteLine("echo Extracting. . .")
+                sw.WriteLine("pause")
+                sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+                sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+                sw.WriteLine("cls ")
+                sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+                sw.WriteLine("pause")
+                sw.WriteLine("exit")
+            End Using
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            Dim proc As Process = Nothing
+            Try
+                Dim batDir As String = String.Format(readValue)
+                proc = New Process()
+                proc.StartInfo.WorkingDirectory = batDir
+                proc.StartInfo.FileName = "Extract.bat"
+                proc.StartInfo.CreateNoWindow = False
+                proc.Start()
+                proc.WaitForExit()
+            Catch ex As Exception
+                Console.WriteLine(ex.StackTrace.ToString())
+            End Try
+        End If
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        If System.IO.File.Exists(verified_url) = True Then
+            System.IO.File.Delete(verified_url)
         End If
         MsgBox("Dollar Extracted", MsgBoxStyle.Information)
+        MsgBox("Thank you...", MsgBoxStyle.Information)
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
@@ -317,23 +374,23 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oWB = Nothing
             oXL.Quit()
             oXL = Nothing
-
+            txtpath1.Text = txtpath1.Text
             Using sw As StreamWriter = File.CreateText("Extract.bat")
                 sw.WriteLine("@echo off")
                 sw.WriteLine("title cdt-S0ft - Extract")
                 sw.WriteLine("echo Extracting. . .")
                 sw.WriteLine("pause")
                 sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-                sw.WriteLine("rar a " & txtPath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+                sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
                 sw.WriteLine("cls ")
                 sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
-
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             Dim proc As Process = Nothing
             Try
-                Dim batDir As String = String.Format("D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop\")
+                Dim batDir As String = String.Format(readValue)
                 proc = New Process()
                 proc.StartInfo.WorkingDirectory = batDir
                 proc.StartInfo.FileName = "Extract.bat"
@@ -344,6 +401,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
                 Console.WriteLine(ex.StackTrace.ToString())
             End Try
         End If
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         If System.IO.File.Exists(verified_url) = True Then
             System.IO.File.Delete(verified_url)
         End If
@@ -434,22 +492,23 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL.Quit()
             oXL = Nothing
 
+            txtpath1.Text = txtpath1.Text
             Using sw As StreamWriter = File.CreateText("Extract.bat")
                 sw.WriteLine("@echo off")
                 sw.WriteLine("title cdt-S0ft - Extract")
                 sw.WriteLine("echo Extracting. . .")
                 sw.WriteLine("pause")
                 sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-                sw.WriteLine("rar a " & txtPath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+                sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
                 sw.WriteLine("cls ")
                 sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
-
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             Dim proc As Process = Nothing
             Try
-                Dim batDir As String = String.Format("D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop\")
+                Dim batDir As String = String.Format(readValue)
                 proc = New Process()
                 proc.StartInfo.WorkingDirectory = batDir
                 proc.StartInfo.FileName = "Extract.bat"
@@ -460,6 +519,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
                 Console.WriteLine(ex.StackTrace.ToString())
             End Try
         End If
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         If System.IO.File.Exists(verified_url) = True Then
             System.IO.File.Delete(verified_url)
         End If
@@ -554,7 +614,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         Dim str As String = "Remitance"
 
         sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        txtPath1.Text = txtPath1.Text
+
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
                 verified_url = txtPath.Text
@@ -572,23 +632,23 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL.Quit()
             oXL = Nothing
 
-
+            txtpath1.Text = txtpath1.Text
             Using sw As StreamWriter = File.CreateText("Extract.bat")
                 sw.WriteLine("@echo off")
                 sw.WriteLine("title cdt-S0ft - Extract")
                 sw.WriteLine("echo Extracting. . .")
                 sw.WriteLine("pause")
                 sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-                sw.WriteLine("rar a " & txtPath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+                sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
                 sw.WriteLine("cls ")
                 sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
-
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             Dim proc As Process = Nothing
             Try
-                Dim batDir As String = String.Format("D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop\")
+                Dim batDir As String = String.Format(readValue)
                 proc = New Process()
                 proc.StartInfo.WorkingDirectory = batDir
                 proc.StartInfo.FileName = "Extract.bat"
@@ -599,18 +659,21 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
                 Console.WriteLine(ex.StackTrace.ToString())
             End Try
         End If
-
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         If System.IO.File.Exists(verified_url) = True Then
             System.IO.File.Delete(verified_url)
         End If
-
+        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         MsgBox("Remitance Extracted", MsgBoxStyle.Information)
         MsgBox("Thank you...", MsgBoxStyle.Information)
     End Sub
 #End Region
 
-    Private Sub txtPath_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles txtPath.MouseClick
+    Private Sub AddProgress()
+        pbLoading.Value += 1
+    End Sub
 
+    Private Sub txtPath_DoubleClick(sender As System.Object, e As System.EventArgs) Handles txtPath.DoubleClick
         sfdPath.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         Dim result As DialogResult = sfdPath.ShowDialog
 
@@ -618,20 +681,5 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             Return
         End If
         txtPath.Text = sfdPath.FileName
-    End Sub
-
-    Private Sub AddProgress()
-        pbLoading.Value += 1
-    End Sub
-
-    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-        'If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
-        'txtPath1.Text = fbdBackup.SelectedPath
-        'txtPath1.Focus()
-        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-       
-
-     
-       
     End Sub
 End Class
