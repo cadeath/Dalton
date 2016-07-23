@@ -6,11 +6,12 @@ Imports System.IO.Compression
 Imports ICSharpCode.SharpZipLib.Core
 Imports ICSharpCode.SharpZipLib.Zip
 
+
 Public Class ExtractDataFromDatabase
 
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-      
+        'txtPath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        txtPath.Text = "D:\Pawnshop\Backup\Data\Dalton Pawnshop\Dalton Pawnshop"
     End Sub
 
 #Region "Extract Database Table"
@@ -133,7 +134,6 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL = Nothing
 
                     Dim FileName = verified_url
-            CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
             End If
@@ -227,7 +227,6 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL = Nothing
 
             Dim FileName = verified_url
-            CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
             End If
@@ -319,7 +318,6 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL = Nothing
 
             Dim FileName = verified_url
-            CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
             End If
@@ -411,7 +409,6 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL = Nothing
 
             Dim FileName = verified_url
-            CompressFile(verified_url, txtPath.Text)
             If System.IO.File.Exists(verified_url) = True Then
                 System.IO.File.Delete(verified_url)
             End If
@@ -507,7 +504,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         Console.WriteLine("Remitance Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
 
-
+        txtPath1.Text = txtPath1.Text
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
                 verified_url = txtPath.Text
@@ -525,13 +522,30 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             oXL.Quit()
             oXL = Nothing
 
-            CompressFile(verified_url, txtPath.Text)
-            If System.IO.File.Exists(verified_url) = True Then
-                System.IO.File.Delete(verified_url)
-            End If
+            'If System.IO.File.Exists(verified_url) = True Then
+            '    System.IO.File.Delete(verified_url)
+            'End If
         End If
 
         MsgBox("Remitance Extracted", MsgBoxStyle.Information)
+
+
+        'Using sw As StreamWriter = File.CreateText("Extract.bat")
+        '    sw.WriteLine("@echo off")
+        '    sw.WriteLine("title cdt-S0ft - Extract")
+        '    sw.WriteLine("echo Extracting. . .")
+        '    sw.WriteLine("pause")
+        '    sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+        '    sw.WriteLine("rar a " & txtPath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " rar a -ep -hp" & BranchCode & "MIS -m0")
+        '    sw.WriteLine("cls ")
+        '    sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+        '    sw.WriteLine("pause")
+        '    sw.WriteLine("exit")
+        'End Using
+
+        'MessageBox.Show("Successful", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        ' Me.Close()
+       
     End Sub
 #End Region
 
@@ -550,37 +564,9 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         pbLoading.Value += 1
     End Sub
 
-    Public Function CompressFile(ByRef file As String, ByRef destination As String) As String
-        If IO.File.Exists(file) = False Then
-            Return ""
-            Exit Function
-        Else
-            If IO.Directory.Exists(destination) = False Then
-                Return ""
-                Exit Function
-            End If
-        End If
-        Try
-            Dim name As String = Path.GetFileName(file)
-            Dim source() As Byte = System.IO.File.ReadAllBytes(file)
-            Dim compressed() As Byte = ConvertToByteArray(source)
-            System.IO.File.WriteAllBytes(destination & "\" & name & ".zip", compressed)
-            Return "Compression Successful!"
-        Catch ex As Exception
-            Return "Compression Error: " & ex.ToString()
-        End Try
-    End Function
-    Public Function ConvertToByteArray(ByVal source() As Byte) As Byte()
-
-        Dim memoryStream As New MemoryStream()
-        Dim gZipStream As New GZipStream(memoryStream, CompressionMode.Compress, True)
-
-        gZipStream.Write(source, 0, source.Length)
-        gZipStream.Dispose()
-        memoryStream.Position = 0
-        Dim buffer(memoryStream.Length) As Byte
-        memoryStream.Read(buffer, 0, buffer.Length)
-        memoryStream.Dispose()
-        Return buffer
-    End Function
+    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
+        If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
+        txtPath1.Text = fbdBackup.SelectedPath
+        txtPath1.Focus()
+    End Sub
 End Class

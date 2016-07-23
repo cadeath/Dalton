@@ -32,6 +32,9 @@ Partial Class ExtractDataFromDatabase
         Me.pbLoading = New System.Windows.Forms.ProgressBar()
         Me.btnPawnExtract = New System.Windows.Forms.Button()
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.txtPath1 = New System.Windows.Forms.TextBox()
+        Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
         Me.SuspendLayout()
         '
         'Label1
@@ -104,7 +107,7 @@ Partial Class ExtractDataFromDatabase
         Me.pbLoading.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pbLoading.Location = New System.Drawing.Point(0, 408)
         Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(568, 23)
+        Me.pbLoading.Size = New System.Drawing.Size(605, 23)
         Me.pbLoading.TabIndex = 24
         '
         'btnPawnExtract
@@ -122,11 +125,33 @@ Partial Class ExtractDataFromDatabase
         Me.sfdPath.DefaultExt = "xls"
         Me.sfdPath.Filter = "Excel File 2003|*.xls"
         '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(508, 43)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(77, 25)
+        Me.Button3.TabIndex = 32
+        Me.Button3.Text = "Browse"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'txtPath1
+        '
+        Me.txtPath1.Location = New System.Drawing.Point(372, 17)
+        Me.txtPath1.Name = "txtPath1"
+        Me.txtPath1.Size = New System.Drawing.Size(213, 20)
+        Me.txtPath1.TabIndex = 33
+        '
+        'fbdBackup
+        '
+        Me.fbdBackup.SelectedPath = "C:\"
+        '
         'ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(568, 431)
+        Me.ClientSize = New System.Drawing.Size(605, 431)
+        Me.Controls.Add(Me.txtPath1)
+        Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtPath)
         Me.Controls.Add(Me.btnRemitanceExtract)
@@ -152,4 +177,7 @@ Partial Class ExtractDataFromDatabase
     Friend WithEvents pbLoading As System.Windows.Forms.ProgressBar
     Friend WithEvents btnPawnExtract As System.Windows.Forms.Button
     Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents txtPath1 As System.Windows.Forms.TextBox
+    Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
 End Class
