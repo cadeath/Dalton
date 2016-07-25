@@ -183,8 +183,8 @@
 
             .SaveBorrowings()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & BranchCode, "BORROW IN", , , "BORROW IN")
-            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & BranchCode, , , , "BORROW IN")
+            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & BranchCode, "BORROW IN", , , "BORROW IN", .LastIDNumber)
+            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & BranchCode, , , , "BORROW IN", .LastIDNumber)
         End With
 
         MsgBox("Borrowings Posted", MsgBoxStyle.Information)
