@@ -1,6 +1,7 @@
 ﻿Public Class Borrowings
 
     Private fillData As String = "tblBorrow"
+    Private filldata1 As String = "tbljournal"
     Private mySql As String = String.Empty
 
 #Region "Variables"
@@ -149,8 +150,16 @@
         Dim BORROWINGID As Integer = frmBorrowBrowse.LBLBORROWINGID.Text
         database.SaveEntry(ds, False)
 
-        RemoveJournal(BORROWINGID, , MoDName)
-        RemoveDailyTimeLog(BORROWINGID, "0", MoDName)
+        Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE TRANSID =" & BORROWINGID
+        Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
+        Dim SrvTypDJournal As String = ds2.Tables(0).Rows(0).Item("TRANSTYPE")
+
+        If SrvTypDJournal = "BORROW IN" Then
+            RemoveJournal(BORROWINGID, , SrvTypDJournal)
+        Else
+            RemoveJournal(BORROWINGID, , SrvTypDJournal)
+            RemoveDailyTimeLog(BORROWINGID, "0", MoDName)
+        End If
         Console.WriteLine(String.Format("Transaction {0} void.", _borrowID))
     End Sub
 

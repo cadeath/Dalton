@@ -61,12 +61,10 @@ Partial Class frmPawning
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-
         Me.GroupBox1.Controls.Add(Me.rbDescription)
         Me.GroupBox1.Controls.Add(Me.rbPawner)
         Me.GroupBox1.Controls.Add(Me.rbPawnTicket)
         Me.GroupBox1.Controls.Add(Me.rbAll)
-
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -167,7 +165,7 @@ Partial Class frmPawning
         Me.lvPawners.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9})
         Me.lvPawners.FullRowSelect = True
         Me.lvPawners.GridLines = True
-        Me.lvPawners.Location = New System.Drawing.Point(12, 166)
+        Me.lvPawners.Location = New System.Drawing.Point(15, 166)
         Me.lvPawners.MultiSelect = False
         Me.lvPawners.Name = "lvPawners"
         Me.lvPawners.Size = New System.Drawing.Size(847, 313)
@@ -191,7 +189,7 @@ Partial Class frmPawning
         'ColumnHeader4
         '
         Me.ColumnHeader4.Text = "Pawner"
-        Me.ColumnHeader4.Width = 111
+        Me.ColumnHeader4.Width = 110
         '
         'ColumnHeader5
         '
@@ -342,26 +340,24 @@ Partial Class frmPawning
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(674, 396)
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label5.Location = New System.Drawing.Point(661, 13)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(59, 13)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "PawningID"
-        Me.Label5.Visible = False
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label6.Location = New System.Drawing.Point(748, 396)
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label6.Location = New System.Drawing.Point(735, 13)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 14
         Me.Label6.Text = "Status"
-        Me.Label6.Visible = False
         '
         'frmPawning
         '
