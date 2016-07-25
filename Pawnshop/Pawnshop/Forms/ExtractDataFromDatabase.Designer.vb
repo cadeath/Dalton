@@ -34,6 +34,8 @@ Partial Class ExtractDataFromDatabase
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
         Me.txtpath1 = New System.Windows.Forms.TextBox()
+        Me.cboExtract = New System.Windows.Forms.ComboBox()
+        Me.btnExtract = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -104,7 +106,7 @@ Partial Class ExtractDataFromDatabase
         'pbLoading
         '
         Me.pbLoading.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pbLoading.Location = New System.Drawing.Point(0, 273)
+        Me.pbLoading.Location = New System.Drawing.Point(0, 314)
         Me.pbLoading.Name = "pbLoading"
         Me.pbLoading.Size = New System.Drawing.Size(372, 23)
         Me.pbLoading.TabIndex = 24
@@ -137,11 +139,32 @@ Partial Class ExtractDataFromDatabase
         Me.txtpath1.Size = New System.Drawing.Size(227, 20)
         Me.txtpath1.TabIndex = 32
         '
+        'cboExtract
+        '
+        Me.cboExtract.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboExtract.FormattingEnabled = True
+        Me.cboExtract.Items.AddRange(New Object() {"Pawning", "Dollar", "Borrowing", "Insurance", "Remitance"})
+        Me.cboExtract.Location = New System.Drawing.Point(7, 223)
+        Me.cboExtract.Name = "cboExtract"
+        Me.cboExtract.Size = New System.Drawing.Size(121, 21)
+        Me.cboExtract.TabIndex = 33
+        '
+        'btnExtract
+        '
+        Me.btnExtract.Location = New System.Drawing.Point(7, 250)
+        Me.btnExtract.Name = "btnExtract"
+        Me.btnExtract.Size = New System.Drawing.Size(121, 23)
+        Me.btnExtract.TabIndex = 34
+        Me.btnExtract.Text = "Extract"
+        Me.btnExtract.UseVisualStyleBackColor = True
+        '
         'ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(372, 296)
+        Me.ClientSize = New System.Drawing.Size(372, 337)
+        Me.Controls.Add(Me.btnExtract)
+        Me.Controls.Add(Me.cboExtract)
         Me.Controls.Add(Me.txtpath1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtPath)
@@ -170,4 +193,6 @@ Partial Class ExtractDataFromDatabase
     Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
     Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents txtpath1 As System.Windows.Forms.TextBox
+    Friend WithEvents cboExtract As System.Windows.Forms.ComboBox
+    Friend WithEvents btnExtract As System.Windows.Forms.Button
 End Class

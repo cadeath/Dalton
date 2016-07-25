@@ -11,6 +11,15 @@ Public Class ExtractDataFromDatabase
 
     Dim readValue = My.Computer.Registry.GetValue(
     "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
+
+    Enum ReportType As Integer
+        Pawning = 0
+        Moneytransfer = 1
+        Insurance = 2
+        Borrowing = 3
+        DollarBuying = 4
+    End Enum
+    Friend FormType As ReportType = ReportType.Pawning
   
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
@@ -18,8 +27,8 @@ Public Class ExtractDataFromDatabase
     End Sub
 
 #Region "Extract Database Table"
-Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnPawnExtract.Click
 
+    Private Sub PawningExtract()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -117,23 +126,23 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
 
         Dim verified_url As String
         Console.WriteLine("Pawning Activated")
-                sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
+        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
 
-                If txtPath.Text.Split(".").Count > 1 Then
-                    If txtPath.Text.Split(".")(1).Length = 3 Then
-                        verified_url = txtPath.Text
-                    Else
-                        verified_url = txtPath.Text & "/" & sfdPath.FileName
-                    End If
-                Else
-                    verified_url = txtPath.Text & "/" & sfdPath.FileName
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
 
 
-                    oWB.SaveAs(verified_url)
-                    oSheet = Nothing
-                    oWB.Close(False)
-                    oWB = Nothing
-                    oXL.Quit()
+            oWB.SaveAs(verified_url)
+            oSheet = Nothing
+            oWB.Close(False)
+            oWB = Nothing
+            oXL.Quit()
             oXL = Nothing
 
             txtpath1.Text = txtpath1.Text
@@ -171,8 +180,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         MsgBox("Thank you. . .", MsgBoxStyle.Information)
     End Sub
 
-    Private Sub btnDollarExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnDollarExtract.Click
-
+    Private Sub DollarExtract()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -291,8 +299,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         MsgBox("Thank you...", MsgBoxStyle.Information)
     End Sub
 
-    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-
+    Private Sub BorrowingExtract()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -356,7 +363,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         Dim verified_url As String
         Console.WriteLine("Borrowing Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        txtPath1.Text = txtPath1.Text
+        txtpath1.Text = txtpath1.Text
 
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
@@ -409,8 +416,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         MsgBox("Thank you. . .", MsgBoxStyle.Information)
     End Sub
 
-    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
-
+    Private Sub InsuranceExtract()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -473,7 +479,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
 
         Console.WriteLine("Insurance Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        txtPath1.Text = txtPath1.Text
+        txtpath1.Text = txtpath1.Text
 
         If txtPath.Text.Split(".").Count > 1 Then
             If txtPath.Text.Split(".")(1).Length = 3 Then
@@ -528,7 +534,7 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
         MsgBox("Thank you. . .", MsgBoxStyle.Information)
     End Sub
 
-    Private Sub btnRemitanceExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnRemitanceExtract.Click
+    Private Sub RemitanceExtract()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -681,5 +687,45 @@ Private Sub btnPawnExtract_Click(sender As System.Object, e As System.EventArgs)
             Return
         End If
         txtPath.Text = sfdPath.FileName
+    End Sub
+
+    Private Sub btnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnExtract.Click
+        If cboExtract.Text = "" And cboExtract.Visible Then Exit Sub
+
+        If cboExtract.Visible Then
+            Select Case cboExtract.Text
+                Case "Pawning"
+                    FormType = ReportType.Pawning
+                Case "Dollar"
+                    FormType = ReportType.DollarBuying
+                Case "Borrowing"
+                    FormType = ReportType.Insurance
+                Case "Dollar Buying"
+                    FormType = ReportType.DollarBuying
+                Case "Branch Borrowings"
+                    FormType = ReportType.Borrowing
+                Case "Remitance"
+                    FormType = ReportType.Moneytransfer
+            End Select
+        End If
+
+        Generate()
+    End Sub
+
+    Private Sub Generate()
+        Select Case FormType
+            Case ReportType.Pawning
+                PawningExtract()
+            Case ReportType.DollarBuying
+                DollarExtract()
+            Case ReportType.Borrowing
+                BorrowingExtract()
+            Case ReportType.Insurance
+                InsuranceExtract()
+            Case ReportType.DollarBuying
+                DollarExtract()
+            Case ReportType.Moneytransfer
+                RemitanceExtract()
+        End Select
     End Sub
 End Class
