@@ -137,9 +137,6 @@ Public Class frmDownloadZip
   
     Private Sub frmDownloadZip_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         GetSystemInfo()
-        msg("Client Started")
-        clientSocket.Connect("127.0.0.1", 8888)
-        Label4.Text = "Client Socket Program - Server Connected ..."
     End Sub
 
     Private Sub GetSystemInfo()
@@ -150,21 +147,5 @@ Public Class frmDownloadZip
         Version.Text = ProductVersion
     End Sub
 
-    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-        Dim serverStream As NetworkStream = clientSocket.GetStream()
-        Dim outStream As Byte() = _
-        System.Text.Encoding.ASCII.GetBytes("Message from Client$")
-        serverStream.Write(outStream, 0, outStream.Length)
-        serverStream.Flush()
-
-        Dim inStream(10024) As Byte
-        serverStream.Read(inStream, 0, CInt(clientSocket.ReceiveBufferSize))
-        Dim returndata As String = _
-        System.Text.Encoding.ASCII.GetString(inStream)
-        msg("Data from Server : " + returndata)
-    End Sub
-
-    Sub msg(ByVal mesg As String)
-        TextBox1.Text = TextBox1.Text + Environment.NewLine + " >> " + mesg
-    End Sub
+    
 End Class
