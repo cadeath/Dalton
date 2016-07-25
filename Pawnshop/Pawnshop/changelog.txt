@@ -1,5 +1,5 @@
 CHANGELOG
-Version 1.2.2.6
+Version 1.2.2.8
  - Fix Monthly computation for Cellphone
  - Fix Journal Entry Summary
  - Fix Money Transfer Send In/Payout Name
