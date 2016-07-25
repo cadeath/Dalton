@@ -502,11 +502,13 @@ Public Class frmMoneyTransfer
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME, , , , "PERA PADALA OUT", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
 
+                        currentMe += 1
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR, , , , "PERA PADALA IN", .LoadLastIDNumberMoneyTransfer)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT", , , "PERA PADALA IN", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
 
+                        currentMr += 1
                     End If
                 Case "Pera Padala - PMFTC"
                     MOD_NAME = "PERA PADALA "
@@ -516,11 +518,13 @@ Public Class frmMoneyTransfer
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME, , , , "Pera Padala - PMFTC OUT", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
 
+                        currentMe += 1
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR, , , , "Pera Padala - PMFTC IN", .LoadLastIDNumberMoneyTransfer)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT", , , "Pera Padala - PMFTC IN", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
 
+                        currentMr += 1
                     End If
                 Case "Western Union - Local", "Western Union - Intl"
                     MOD_NAME = "WESTERN UNION "
@@ -645,9 +649,7 @@ Public Class frmMoneyTransfer
             Exit Sub
         End If
 
-        'frmMTlist.LoadActive()
         Me.Close()
-
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)
