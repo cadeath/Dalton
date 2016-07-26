@@ -124,8 +124,6 @@
                     FormType = ReportType.ItemPullOut
                 Case "Loan Register - New Loan and Renewal 2"
                     FormType = ReportType.LoanRenew2
-                    'Case "Auction Monthly Report"
-                    '    FormType = ReportType.AuctionMonthly
                 Case "Money Transfer (BSP)"
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
@@ -140,27 +138,6 @@
 
         Generate()
     End Sub
-
-    'Private Sub AuctionMonthly()
-    '    Dim mySql As String, dsName As String, rptPath As String
-    '    dsName = "dsAuction" : rptPath = "Reports\rpt_AuctionMonthly.rdlc"
-    '    Dim st As Date = GetFirstDate(monCal.SelectionStart)
-    '    Dim en As Date = GetLastDate(monCal.SelectionStart)
-
-    '    mySql = "SELECT * "
-    '    mySql &= vbCrLf & "FROM PAWNING "
-    '    mySql &= vbCrLf & "WHERE "
-    '    mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-    '    mySql &= vbCrLf & "AND STATUS <> 'RENEWED' AND STATUS <> 'REDEEM' AND STATUS <> 'VOID'"
-
-    '    Dim ds As DataSet = LoadSQL(mySql)
-    '    Dim addPara As New Dictionary(Of String, String)
-    '    addPara.Add("txtMonthOf", "FOR THE MONTH OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
-    '    addPara.Add("branchName", branchName)
-
-    '    frmReport.ReportInit(mySql, dsName, rptPath, addPara)
-    '    frmReport.Show()
-    'End Sub
 
     Private Sub Generate_Hourly()
         Dim mySql As String, dsName As String, rptPath As String
@@ -353,36 +330,94 @@
     Private Sub Outstanding_Loans()
         Dim dsName As String = "dsOutstanding", mySql As String
 
-        mySql = "SELECT * "
-        mySql &= "FROM "
-        mySql &= "( "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'NEW' OR Status = 'RENEW') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'RENEWED') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'REDEEM') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'SEGRE') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL) "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'WITHDRAW') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= ") "
-        mySql &= "ORDER BY PAWNTICKET ASC"
+        If Not POSuser.canOutstandingReport Then
+            mySql = "SELECT * "
+            mySql &= "FROM "
+            mySql &= "( "
+            mySql &= "  SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
+            mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, INTEREST, ADVINT, SERVICECHARGE, PENALTY, "
+            mySql &= "ITEMTYPE, CATEGORY, GRAMS, KARAT, STATUS, PULLOUT, APPRAISER "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'NEW' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
 
+            mySql &= "  UNION "
+            mySql &= "  SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
+            mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, INTEREST, ADVINT, SERVICECHARGE, PENALTY, "
+            mySql &= "ITEMTYPE, CATEGORY, GRAMS, KARAT, STATUS, PULLOUT, APPRAISER "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'RENEW' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
+
+            mySql &= "  UNION "
+            mySql &= "  SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
+            mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, INTEREST, ADVINT, SERVICECHARGE, PENALTY, "
+            mySql &= "ITEMTYPE, CATEGORY, GRAMS, KARAT, STATUS, PULLOUT, APPRAISER "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'RENEWED' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
+
+            mySql &= "  UNION "
+            mySql &= "  SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
+            mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, INTEREST, ADVINT, SERVICECHARGE, PENALTY, "
+            mySql &= "ITEMTYPE, CATEGORY, GRAMS, KARAT, STATUS, PULLOUT, APPRAISER "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'REDEEM' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
+
+            mySql &= "  UNION "
+            mySql &= "  SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
+            mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, INTEREST, ADVINT, SERVICECHARGE, PENALTY, "
+            mySql &= "ITEMTYPE, CATEGORY, GRAMS, KARAT, STATUS, PULLOUT, APPRAISER "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'SEGRE' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL) "
+
+            mySql &= "  UNION "
+            mySql &= "  SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
+            mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, INTEREST, ADVINT, SERVICECHARGE, PENALTY, "
+            mySql &= "ITEMTYPE, CATEGORY, GRAMS, KARAT, STATUS, PULLOUT, APPRAISER "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'WITHDRAW' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= ") "
+            mySql &= "ORDER BY PAWNTICKET ASC"
+        Else
+            mySql = "SELECT * "
+            mySql &= "FROM "
+            mySql &= "( "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'NEW' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= "  UNION "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'RENEW' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= "  UNION "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'RENEWED' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= "  UNION "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'REDEEM' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= "  UNION "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'SEGRE' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL) "
+            mySql &= "  UNION "
+            mySql &= "  SELECT * "
+            mySql &= "  FROM PAWNING "
+            mySql &= "  WHERE (Status = 'WITHDRAW' AND ITEMTYPE = '" & cboType.Text & "') "
+            mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' "
+            mySql &= ") "
+            mySql &= "ORDER BY PAWNTICKET ASC"
+        End If
         Console.WriteLine(mySql)
 
 
@@ -569,6 +604,8 @@
             Case ReportType.DailyCashCount
                 Return True
             Case ReportType.OutStanding
+                cboType.Visible = True
+                cboType.Location = New Point(12, 182)
                 Return True
             Case ReportType.ItemPullOut
                 Return True

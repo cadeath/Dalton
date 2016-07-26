@@ -210,7 +210,7 @@ Public Class ComputerUser
     End Property
 
     Private _OutstandingReport As Boolean
-    Public ReadOnly Property canSOutstandingReport() As Boolean
+    Public ReadOnly Property canOutstandingReport() As Boolean
         Get
             If isSuperUser Then Return isSuperUser
             Return _OutstandingReport
