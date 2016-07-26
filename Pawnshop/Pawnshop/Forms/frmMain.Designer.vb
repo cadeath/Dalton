@@ -43,6 +43,7 @@ Partial Class frmMain
         Me.CashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ORManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExtractToExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -89,7 +90,6 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.ExtractToExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -183,55 +183,61 @@ Partial Class frmMain
         'ExpiryGeneratorToolStripMenuItem
         '
         Me.ExpiryGeneratorToolStripMenuItem.Name = "ExpiryGeneratorToolStripMenuItem"
-        Me.ExpiryGeneratorToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ExpiryGeneratorToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.ExpiryGeneratorToolStripMenuItem.Text = "&Expiry Generator"
         '
         'JournalEntriesToolStripMenuItem
         '
         Me.JournalEntriesToolStripMenuItem.Name = "JournalEntriesToolStripMenuItem"
-        Me.JournalEntriesToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.JournalEntriesToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.JournalEntriesToolStripMenuItem.Text = "&Journal Entries"
         '
         'BSPReportToolStripMenuItem
         '
         Me.BSPReportToolStripMenuItem.Name = "BSPReportToolStripMenuItem"
-        Me.BSPReportToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.BSPReportToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.BSPReportToolStripMenuItem.Text = "&BSP Report"
         '
         'CashCountToolStripMenuItem
         '
         Me.CashCountToolStripMenuItem.Name = "CashCountToolStripMenuItem"
-        Me.CashCountToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.CashCountToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.CashCountToolStripMenuItem.Text = "&Cash Count"
         Me.CashCountToolStripMenuItem.Visible = False
         '
         'ItemPulloutToolStripMenuItem
         '
         Me.ItemPulloutToolStripMenuItem.Name = "ItemPulloutToolStripMenuItem"
-        Me.ItemPulloutToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ItemPulloutToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.ItemPulloutToolStripMenuItem.Text = "&Item Pullout"
         '
         'ORManagerToolStripMenuItem
         '
         Me.ORManagerToolStripMenuItem.Name = "ORManagerToolStripMenuItem"
-        Me.ORManagerToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ORManagerToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.ORManagerToolStripMenuItem.Text = "&Print Manager"
+        '
+        'ExtractToExcelToolStripMenuItem
+        '
+        Me.ExtractToExcelToolStripMenuItem.Name = "ExtractToExcelToolStripMenuItem"
+        Me.ExtractToExcelToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.ExtractToExcelToolStripMenuItem.Text = "Accoutning Extract"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(157, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(171, 6)
         '
         'BackupToolStripMenuItem
         '
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
-        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.BackupToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.BackupToolStripMenuItem.Text = "&Backup"
         '
         'ConsoleToolStripMenuItem
         '
         Me.ConsoleToolStripMenuItem.Name = "ConsoleToolStripMenuItem"
-        Me.ConsoleToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.ConsoleToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.ConsoleToolStripMenuItem.Text = "&Console"
         '
         'ReportToolStripMenuItem
@@ -570,12 +576,6 @@ Partial Class frmMain
         Me.bannerSize.TabIndex = 9
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
-        '
-        'ExtractToExcelToolStripMenuItem
-        '
-        Me.ExtractToExcelToolStripMenuItem.Name = "ExtractToExcelToolStripMenuItem"
-        Me.ExtractToExcelToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
-        Me.ExtractToExcelToolStripMenuItem.Text = "Extract To Excel"
         '
         'frmMain
         '
