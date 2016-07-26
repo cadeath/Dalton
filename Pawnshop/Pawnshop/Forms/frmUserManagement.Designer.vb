@@ -331,7 +331,7 @@ Partial Class frmUserManagement
         'chkOS
         '
         Me.chkOS.AutoSize = True
-        Me.chkOS.Location = New System.Drawing.Point(237, 58)
+        Me.chkOS.Location = New System.Drawing.Point(298, 58)
         Me.chkOS.Name = "chkOS"
         Me.chkOS.Size = New System.Drawing.Size(80, 17)
         Me.chkOS.TabIndex = 12
@@ -341,7 +341,7 @@ Partial Class frmUserManagement
         'chkVR
         '
         Me.chkVR.AutoSize = True
-        Me.chkVR.Location = New System.Drawing.Point(237, 35)
+        Me.chkVR.Location = New System.Drawing.Point(298, 35)
         Me.chkVR.Name = "chkVR"
         Me.chkVR.Size = New System.Drawing.Size(80, 17)
         Me.chkVR.TabIndex = 11
@@ -351,7 +351,7 @@ Partial Class frmUserManagement
         'chkVUM
         '
         Me.chkVUM.AutoSize = True
-        Me.chkVUM.Location = New System.Drawing.Point(237, 12)
+        Me.chkVUM.Location = New System.Drawing.Point(298, 12)
         Me.chkVUM.Name = "chkVUM"
         Me.chkVUM.Size = New System.Drawing.Size(139, 17)
         Me.chkVUM.TabIndex = 10
@@ -383,9 +383,9 @@ Partial Class frmUserManagement
         Me.chkR3.AutoSize = True
         Me.chkR3.Location = New System.Drawing.Point(145, 58)
         Me.chkR3.Name = "chkR3"
-        Me.chkR3.Size = New System.Drawing.Size(63, 17)
+        Me.chkR3.Size = New System.Drawing.Size(123, 17)
         Me.chkR3.TabIndex = 7
-        Me.chkR3.Text = "Reports"
+        Me.chkR3.Text = "Outstanding Reports"
         Me.chkR3.UseVisualStyleBackColor = True
         '
         'chkR2
@@ -393,9 +393,9 @@ Partial Class frmUserManagement
         Me.chkR2.AutoSize = True
         Me.chkR2.Location = New System.Drawing.Point(145, 35)
         Me.chkR2.Name = "chkR2"
-        Me.chkR2.Size = New System.Drawing.Size(63, 17)
+        Me.chkR2.Size = New System.Drawing.Size(121, 17)
         Me.chkR2.TabIndex = 6
-        Me.chkR2.Text = "Reports"
+        Me.chkR2.Text = "Segregated Reports"
         Me.chkR2.UseVisualStyleBackColor = True
         '
         'chkR1
@@ -403,9 +403,9 @@ Partial Class frmUserManagement
         Me.chkR1.AutoSize = True
         Me.chkR1.Location = New System.Drawing.Point(145, 12)
         Me.chkR1.Name = "chkR1"
-        Me.chkR1.Size = New System.Drawing.Size(63, 17)
+        Me.chkR1.Size = New System.Drawing.Size(121, 17)
         Me.chkR1.TabIndex = 5
-        Me.chkR1.Text = "Reports"
+        Me.chkR1.Text = "Item Pullout Reports"
         Me.chkR1.UseVisualStyleBackColor = True
         '
         'chkBU
