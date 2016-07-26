@@ -979,7 +979,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Principal.Value)</Value>
+                              <Value>=Sum(Fields!Principal.Value) or Sum(Fields!Principal.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
@@ -1178,7 +1178,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Principal.Value)</Value>
+                              <Value>=Sum(Fields!Principal.Value) or Sum(Fields!Principal.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
