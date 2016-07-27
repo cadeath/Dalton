@@ -1,5 +1,5 @@
 CHANGELOG
-Version 1.2.2.6
+Version 1.2.2.9
  - Fix Monthly computation for Cellphone
  - Fix Journal Entry Summary
  - Fix Money Transfer Send In/Payout Name
@@ -20,7 +20,7 @@ Version 1.2.2.6
  - Add Renewal Monthly Break Down
  - Include Auto Patch up to db1.2 v1.2
  - Include BDO and Smart Money Report in Cash In/Out
- - Enhance Pawning Search
+ - Enhance Pawning Search and Interface
  - Remove Journal Entries Sorting
 
 Version 1.2.0.1

@@ -162,6 +162,13 @@
 
         Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
         Dim tmpMT As New MoneyTransfer
+        Dim strMoneyTrans As String
         Label2.Text = idx
+        If tmpMT.LoadMoneyTrans = "0" Then
+            strMoneyTrans = "OUT"
+        ElseIf tmpMT.LoadMoneyTrans = "1" Then
+            strMoneyTrans = "IN"
+        End If
+        lblModname.Text = tmpMT.LoadServiceType + " " + strMoneyTrans
     End Sub
 End Class

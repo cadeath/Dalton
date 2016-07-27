@@ -155,11 +155,28 @@
         'If _transName = NO_ENTRIES Then Exit Sub 'Replenishment No Entries
         Select Case _type
             Case "Receipt"
-                AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt", LastIDNumber)
-                AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt", LastIDNumber)
+                If _category = "LAY-AWAY PAYMENTS" And _transName = "Cash Offsetting Account" Then
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName & " " & _category, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName & " " & _category, LastIDNumber)
+
+                ElseIf _category = "SMART MONEY PADALA" And _transName = "Cash Offsetting Account" Then
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName & " " & _category, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName & " " & _category, LastIDNumber)
+
+                ElseIf _category = "Commission from SMART MONEY Cash Out" And _transName = "Cash Offsetting Account" Then
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName & " " & _category, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName & " " & _category, LastIDNumber)
+
+                ElseIf _category = "SALES OF INVENTORIABLES" And _transName = "Cash Offsetting Account" Then
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName & " " & _category, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName & " " & _category, LastIDNumber)
+                Else
+                    AddJournal(_amount, "Debit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Receipt " & _transName, LastIDNumber)
+                    AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Receipt " & _transName, LastIDNumber)
+                End If
             Case "Disbursement"
-                AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Disbursement", LastIDNumber)
-                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Disbursement", LastIDNumber)
+                AddJournal(_amount, "Credit", "Revolving Fund", "Ref# " & Me.LastIDNumber, CashCount_Reflect, , , "Disbursement " & _transName, LastIDNumber)
+                AddJournal(_amount, "Debit", _transName, "Ref# " & Me.LastIDNumber, , , _category, "Disbursement " & _transName, LastIDNumber)
             Case "INVENTORY IN"
                 AddJournal(_amount, "Debit", "Smart Money Inventory Offsetting Account", "Ref# " & Me.LastIDNumber, , , , "INVENTORY IN", LastIDNumber)
                 AddJournal(_amount, "Credit", _transName, "Ref# " & Me.LastIDNumber, CashCount_Reflect, , _category, "INVENTORY IN", LastIDNumber)
@@ -194,4 +211,23 @@
         Return ds.Tables(0).Rows(0).Item("Type")
     End Function
 
+    Public Function LoadTransname() As String
+        Dim mysql1 As String = "SELECT * FROM " & fillData & " WHERE TransID =" & frmCIO_List.lblCashID.Text
+
+        Dim ds As DataSet = LoadSQL(mysql1, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("Transname")
+    End Function
+
+    Public Function LoadCategory() As String
+        Dim mysql1 As String = "SELECT * FROM " & fillData & " WHERE TransID =" & frmCIO_List.lblCashID.Text
+
+        Dim ds As DataSet = LoadSQL(mysql1, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("Category")
+    End Function
 End Class

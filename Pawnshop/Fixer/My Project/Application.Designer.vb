@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Fixer.frmFixIntHistory
+            Me.MainForm = Global.Fixer.frmFixModname
         End Sub
     End Class
 End Namespace
