@@ -31,6 +31,7 @@ Partial Class ExtractDataFromDatabase
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.rbDaily = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblextracting = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -81,7 +82,7 @@ Partial Class ExtractDataFromDatabase
         'btnExtract
         '
         Me.btnExtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExtract.Location = New System.Drawing.Point(25, 74)
+        Me.btnExtract.Location = New System.Drawing.Point(25, 69)
         Me.btnExtract.Name = "btnExtract"
         Me.btnExtract.Size = New System.Drawing.Size(120, 26)
         Me.btnExtract.TabIndex = 34
@@ -111,11 +112,22 @@ Partial Class ExtractDataFromDatabase
         Me.GroupBox1.TabIndex = 37
         Me.GroupBox1.TabStop = False
         '
+        'lblextracting
+        '
+        Me.lblextracting.AutoSize = True
+        Me.lblextracting.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblextracting.Location = New System.Drawing.Point(246, 198)
+        Me.lblextracting.Name = "lblextracting"
+        Me.lblextracting.Size = New System.Drawing.Size(49, 16)
+        Me.lblextracting.TabIndex = 38
+        Me.lblextracting.Text = "Label1"
+        '
         'ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 249)
+        Me.Controls.Add(Me.lblextracting)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.txtpath1)
         Me.Controls.Add(Me.txtPath)
@@ -137,4 +149,5 @@ Partial Class ExtractDataFromDatabase
     Friend WithEvents btnExtract As System.Windows.Forms.Button
     Friend WithEvents rbDaily As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents lblextracting As System.Windows.Forms.Label
 End Class

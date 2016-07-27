@@ -15,7 +15,8 @@ Public Class ExtractDataFromDatabase
   
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtPath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        txtPath.Text =readValue
+        txtPath.Text = readValue
+        lblextracting.Visible = False
     End Sub
 
 #Region "Extract Database Table Monthly"
@@ -294,7 +295,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "WHEN 'D' THEN 'CASH-IN'" & _
         vbCrLf & "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO, B.TRANSDATE" & _
         vbCrLf & "FROM TBLBORROW B" & _
-        vbCrLf & "INNER JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID" & _
+        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID" & _
         vbCrLf & String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
         vbCrLf & "ORDER BY TRANSDATE ASC"
 
@@ -403,7 +404,7 @@ Public Class ExtractDataFromDatabase
             vbCrLf & "Case I.STATUS " & _
             vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
             vbCrLf & "I.SYSTEMINFO, I.TRANSDATE, I.VALIDDATE FROM TBLINSURANCE I" & _
-            vbCrLf & "INNER JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
+            vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
             vbCrLf & String.Format("WHERE I.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
             vbCrLf & "ORDER BY TRANSDATE ASC"
 
@@ -529,7 +530,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & " END AS STATUS, M.SYSTEMINFO, M.TRANSDATE," & _
         vbCrLf & " M.TRANSID" & _
         vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-        vbCrLf & " INNER JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
+        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
         vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
         vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
         vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
@@ -631,161 +632,13 @@ Public Class ExtractDataFromDatabase
             End Try
         End If
         ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
+        'If System.IO.File.Exists(verified_url) = True Then
+        '    System.IO.File.Delete(verified_url)
+        'End If
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     End Sub
 
-    Private Sub PullOutExtract()
-        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
-        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
-
-        Dim mySql As String
-        mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER," & _
-        vbCrLf & "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, " & _
-        vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,P.ENCODERID, P.EVAT, " & _
-        vbCrLf & "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT," & _
-        vbCrLf & " P.LESSPRINCIPAL, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
-        vbCrLf & " P.OLDTICKET, " & _
-         vbCrLf & "Case" & _
-        vbCrLf & "WHEN P.ORDATE = '01/01/0001' THEN ''" & _
-        vbCrLf & "ELSE P.ORDATE END AS ORDATE," & _
-        vbCrLf & " P.ORNUM, P.PAWNID, P.PAWNTICKET,	" & _
-        vbCrLf & " P.PENALTY, P.PRINCIPAL, P.PULLOUT, P.REDEEMDUE	,P.RENEWDUE," & _
-        vbCrLf & " P.SERVICECHARGE," & _
-        vbCrLf & "Case P.STATUS" & _
-        vbCrLf & " WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' " & _
-        vbCrLf & "WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' WHEN 'W' THEN 'WITHDRAW' " & _
-        vbCrLf & "WHEN 'X' THEN 'REDEEM' WHEN 'S' THEN 'SEGRE' " & _
-        vbCrLf & "ELSE 'N/A' END AS STATUS,P.SYSTEMINFO" & _
-        vbCrLf & "FROM TBLPAWN P" & _
-        vbCrLf & "INNER JOIN TBLCLASS CLASS" & _
-        vbCrLf & "ON CLASS.CLASSID = P.CATID" & _
-        vbCrLf & "INNER JOIN TBL_GAMIT G" & _
-        vbCrLf & "ON G.USERID = P.APPRAISERID" & _
-        vbCrLf & "INNER JOIN TBLCLIENT C" & _
-        vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
-        vbCrLf & String.Format(" WHERE P.PULLOUT BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
-        vbCrLf & "AND STATUS = 'W'" & _
-        vbCrLf & "ORDER BY P.LOANDATE ASC;"
-
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim MaxEntries As Integer = 0
-        MaxEntries = ds.Tables(0).Rows.Count
-
-
-        'Load Excel
-        Dim oXL As New Excel.Application
-        Dim oWB As Excel.Workbook
-        Dim oSheet As Excel.Worksheet
-
-        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/PULLOUT.xls")
-        oSheet = oWB.Worksheets(1)
-
-
-        oSheet = oWB.Worksheets(1)
-
-        Dim recCnt2 As Single = 0
-        While recCnt2 < MaxEntries
-            With ds.Tables(0).Rows(recCnt2)
-
-                oSheet.Cells(lineNum + 2, 1) = .Item("ADVINT").ToString
-                oSheet.Cells(lineNum + 2, 2) = .Item("APPRAISAL")
-                oSheet.Cells(lineNum + 2, 3) = .Item("APPRAISER")
-                oSheet.Cells(lineNum + 2, 4) = .Item("AUCTIONDATE")
-                oSheet.Cells(lineNum + 2, 5) = .Item("CATEGORY")
-                oSheet.Cells(lineNum + 2, 6) = .Item("CLIENT")
-                oSheet.Cells(lineNum + 2, 7) = .Item("DAYSOVERDUE")
-                oSheet.Cells(lineNum + 2, 8) = .Item("DELAYINT")
-                oSheet.Cells(lineNum + 2, 9) = .Item("DESCRIPTION")
-                oSheet.Cells(lineNum + 2, 10) = .Item("EARLYREDEEM")
-                oSheet.Cells(lineNum + 2, 11) = .Item("ENCODERID")
-                oSheet.Cells(lineNum + 2, 12) = .Item("EVAT")
-                oSheet.Cells(lineNum + 2, 13) = .Item("EXPIRYDATE")
-                oSheet.Cells(lineNum + 2, 14) = .Item("GRAMS")
-                oSheet.Cells(lineNum + 2, 15) = .Item("INTEREST")
-                ' oSheet.Cells(lineNum + 2, 16) = .Item("INT_CHECKSUM")
-                oSheet.Cells(lineNum + 2, 16) = .Item("ITEMTYPE")
-                oSheet.Cells(lineNum + 2, 17) = .Item("KARAT")
-                oSheet.Cells(lineNum + 2, 18) = .Item("LESSPRINCIPAL")
-                oSheet.Cells(lineNum + 2, 19) = .Item("LOANDATE")
-                oSheet.Cells(lineNum + 2, 20) = .Item("MATUDATE")
-                oSheet.Cells(lineNum + 2, 21) = .Item("NETAMOUNT")
-                oSheet.Cells(lineNum + 2, 22) = .Item("OLDTICKET")
-                oSheet.Cells(lineNum + 2, 23) = .Item("ORDATE")
-                oSheet.Cells(lineNum + 2, 24) = .Item("ORNUM")
-                oSheet.Cells(lineNum + 2, 25) = .Item("PAWNID")
-                oSheet.Cells(lineNum + 2, 26) = .Item("PAWNTICKET")
-                oSheet.Cells(lineNum + 2, 27) = .Item("PENALTY")
-                oSheet.Cells(lineNum + 2, 28) = .Item("PRINCIPAL")
-                oSheet.Cells(lineNum + 2, 29) = .Item("PULLOUT")
-                oSheet.Cells(lineNum + 2, 30) = .Item("REDEEMDUE")
-                oSheet.Cells(lineNum + 2, 31) = .Item("RENEWDUE")
-                oSheet.Cells(lineNum + 2, 32) = .Item("SERVICECHARGE")
-                oSheet.Cells(lineNum + 2, 33) = .Item("STATUS")
-                'oSheet.Cells(lineNum + 2, 35) = .Item("SYSTEMINFO")
-                lineNum += 1
-                recCnt2 += 1
-            End With
-
-            Application.DoEvents()
-        End While
-
-        Dim verified_url As String
-        Console.WriteLine("Pullout Activated")
-        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, "Pullout")  'BranchCode + Date
-
-        If txtPath.Text.Split(".").Count > 1 Then
-            If txtPath.Text.Split(".")(1).Length = 3 Then
-                verified_url = txtPath.Text
-            Else
-                verified_url = txtPath.Text & "/" & sfdPath.FileName
-            End If
-        Else
-            verified_url = txtPath.Text & "/" & sfdPath.FileName
-
-
-            oWB.SaveAs(verified_url)
-            oSheet = Nothing
-            oWB.Close(False)
-            oWB = Nothing
-            oXL.Quit()
-            oXL = Nothing
-
-            txtpath1.Text = txtpath1.Text
-            Using sw As StreamWriter = File.CreateText("Extract.bat")
-                sw.WriteLine("@echo off")
-                sw.WriteLine("title cdt-S0ft - Extract")
-                sw.WriteLine("echo Extracting. . .")
-                sw.WriteLine("pause")
-                sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-                sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
-                sw.WriteLine("cls ")
-                sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
-                sw.WriteLine("pause")
-                sw.WriteLine("exit")
-            End Using
-            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
-        End If
-        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
-    End Sub
+   
 #End Region
 
 #Region "Extract Database Table Daily"
@@ -1059,7 +912,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "WHEN 'D' THEN 'CASH-IN'" & _
         vbCrLf & "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO, B.TRANSDATE" & _
         vbCrLf & "FROM TBLBORROW B" & _
-        vbCrLf & "INNER JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID" & _
+        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID" & _
         vbCrLf & String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
         vbCrLf & "ORDER BY TRANSDATE ASC"
 
@@ -1167,7 +1020,7 @@ Public Class ExtractDataFromDatabase
             vbCrLf & "Case I.STATUS " & _
             vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
             vbCrLf & "I.SYSTEMINFO, I.TRANSDATE, I.VALIDDATE FROM TBLINSURANCE I" & _
-            vbCrLf & "INNER JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
+            vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
             vbCrLf & String.Format("WHERE I.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
             vbCrLf & "ORDER BY TRANSDATE ASC"
 
@@ -1293,7 +1146,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & " END AS STATUS, M.SYSTEMINFO, M.TRANSDATE," & _
         vbCrLf & " M.TRANSID" & _
         vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-        vbCrLf & " INNER JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
+        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
         vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
         vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
         vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
@@ -1394,158 +1247,10 @@ Public Class ExtractDataFromDatabase
             End Try
         End If
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
+        'If System.IO.File.Exists(verified_url) = True Then
+        '    System.IO.File.Delete(verified_url)
+        'End If
 
-    End Sub
-
-    Private Sub PullOutExtractdaily()
-        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-
-        Dim mySql As String
-        mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER," & _
-        vbCrLf & "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, " & _
-        vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,P.ENCODERID, P.EVAT, " & _
-        vbCrLf & "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT," & _
-        vbCrLf & " P.LESSPRINCIPAL, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
-        vbCrLf & " P.OLDTICKET, " & _
-         vbCrLf & "Case" & _
-        vbCrLf & "WHEN P.ORDATE = '01/01/0001' THEN ''" & _
-        vbCrLf & "ELSE P.ORDATE END AS ORDATE," & _
-        vbCrLf & " P.ORNUM, P.PAWNID, P.PAWNTICKET,	" & _
-        vbCrLf & " P.PENALTY, P.PRINCIPAL, P.PULLOUT, P.REDEEMDUE	,P.RENEWDUE," & _
-        vbCrLf & " P.SERVICECHARGE," & _
-        vbCrLf & "Case P.STATUS" & _
-        vbCrLf & " WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' " & _
-        vbCrLf & "WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' WHEN 'W' THEN 'WITHDRAW' " & _
-        vbCrLf & "WHEN 'X' THEN 'REDEEM' WHEN 'S' THEN 'SEGRE' " & _
-        vbCrLf & "ELSE 'N/A' END AS STATUS,P.SYSTEMINFO" & _
-        vbCrLf & "FROM TBLPAWN P" & _
-        vbCrLf & "INNER JOIN TBLCLASS CLASS" & _
-        vbCrLf & "ON CLASS.CLASSID = P.CATID" & _
-        vbCrLf & "INNER JOIN TBL_GAMIT G" & _
-        vbCrLf & "ON G.USERID = P.APPRAISERID" & _
-        vbCrLf & "INNER JOIN TBLCLIENT C" & _
-        vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
-        vbCrLf & String.Format(" WHERE P.PULLOUT = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & "AND STATUS = 'W'" & _
-        vbCrLf & "ORDER BY P.PULLOUT ASC;"
-
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim MaxEntries As Integer = 0
-        MaxEntries = ds.Tables(0).Rows.Count
-
-
-        'Load Excel
-        Dim oXL As New Excel.Application
-        Dim oWB As Excel.Workbook
-        Dim oSheet As Excel.Worksheet
-
-        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/PULLOUT.xls")
-        oSheet = oWB.Worksheets(1)
-
-
-        oSheet = oWB.Worksheets(1)
-
-        Dim recCnt2 As Single = 0
-        While recCnt2 < MaxEntries
-            With ds.Tables(0).Rows(recCnt2)
-
-                oSheet.Cells(lineNum + 2, 1) = .Item("ADVINT").ToString
-                oSheet.Cells(lineNum + 2, 2) = .Item("APPRAISAL")
-                oSheet.Cells(lineNum + 2, 3) = .Item("APPRAISER")
-                oSheet.Cells(lineNum + 2, 4) = .Item("AUCTIONDATE")
-                oSheet.Cells(lineNum + 2, 5) = .Item("CATEGORY")
-                oSheet.Cells(lineNum + 2, 6) = .Item("CLIENT")
-                oSheet.Cells(lineNum + 2, 7) = .Item("DAYSOVERDUE")
-                oSheet.Cells(lineNum + 2, 8) = .Item("DELAYINT")
-                oSheet.Cells(lineNum + 2, 9) = .Item("DESCRIPTION")
-                oSheet.Cells(lineNum + 2, 10) = .Item("EARLYREDEEM")
-                oSheet.Cells(lineNum + 2, 11) = .Item("ENCODERID")
-                oSheet.Cells(lineNum + 2, 12) = .Item("EVAT")
-                oSheet.Cells(lineNum + 2, 13) = .Item("EXPIRYDATE")
-                oSheet.Cells(lineNum + 2, 14) = .Item("GRAMS")
-                oSheet.Cells(lineNum + 2, 15) = .Item("INTEREST")
-                ' oSheet.Cells(lineNum + 2, 16) = .Item("INT_CHECKSUM")
-                oSheet.Cells(lineNum + 2, 16) = .Item("ITEMTYPE")
-                oSheet.Cells(lineNum + 2, 17) = .Item("KARAT")
-                oSheet.Cells(lineNum + 2, 18) = .Item("LESSPRINCIPAL")
-                oSheet.Cells(lineNum + 2, 19) = .Item("LOANDATE")
-                oSheet.Cells(lineNum + 2, 20) = .Item("MATUDATE")
-                oSheet.Cells(lineNum + 2, 21) = .Item("NETAMOUNT")
-                oSheet.Cells(lineNum + 2, 22) = .Item("OLDTICKET")
-                oSheet.Cells(lineNum + 2, 23) = .Item("ORDATE")
-                oSheet.Cells(lineNum + 2, 24) = .Item("ORNUM")
-                oSheet.Cells(lineNum + 2, 25) = .Item("PAWNID")
-                oSheet.Cells(lineNum + 2, 26) = .Item("PAWNTICKET")
-                oSheet.Cells(lineNum + 2, 27) = .Item("PENALTY")
-                oSheet.Cells(lineNum + 2, 28) = .Item("PRINCIPAL")
-                oSheet.Cells(lineNum + 2, 29) = .Item("PULLOUT")
-                oSheet.Cells(lineNum + 2, 30) = .Item("REDEEMDUE")
-                oSheet.Cells(lineNum + 2, 31) = .Item("RENEWDUE")
-                oSheet.Cells(lineNum + 2, 32) = .Item("SERVICECHARGE")
-                oSheet.Cells(lineNum + 2, 33) = .Item("STATUS")
-                'oSheet.Cells(lineNum + 2, 35) = .Item("SYSTEMINFO")
-                lineNum += 1
-                recCnt2 += 1
-            End With
-
-            Application.DoEvents()
-        End While
-
-        Dim verified_url As String
-        Console.WriteLine("Pullout Activated")
-        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, "Pullout")  'BranchCode + Date
-
-        If txtPath.Text.Split(".").Count > 1 Then
-            If txtPath.Text.Split(".")(1).Length = 3 Then
-                verified_url = txtPath.Text
-            Else
-                verified_url = txtPath.Text & "/" & sfdPath.FileName
-            End If
-        Else
-            verified_url = txtPath.Text & "/" & sfdPath.FileName
-
-
-            oWB.SaveAs(verified_url)
-            oSheet = Nothing
-            oWB.Close(False)
-            oWB = Nothing
-            oXL.Quit()
-            oXL = Nothing
-
-            txtpath1.Text = txtpath1.Text
-            Using sw As StreamWriter = File.CreateText("Extract.bat")
-                sw.WriteLine("@echo off")
-                sw.WriteLine("title cdt-S0ft - Extract")
-                sw.WriteLine("echo Extracting. . .")
-                sw.WriteLine("pause")
-                sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-                sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
-                sw.WriteLine("cls ")
-                sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
-                sw.WriteLine("pause")
-                sw.WriteLine("exit")
-            End Using
-            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
-        End If
-        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
     End Sub
 
 #End Region
@@ -1556,7 +1261,7 @@ Public Class ExtractDataFromDatabase
         RemitanceExtract()
         InsuranceExtract()
         BorrowingExtract()
-        PullOutExtract()
+
     End Sub
 
     Private Sub ExtractAllDaily()
@@ -1565,11 +1270,12 @@ Public Class ExtractDataFromDatabase
         RemitanceExtractDaily()
         InsuranceExtractDaily()
         BorrowingExtractDaily()
-        PullOutExtractdaily()
+
     End Sub
 
     Private Sub btnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnExtract.Click
         btnExtract.Enabled = False
+
         If rbDaily.Checked Then ExtractType = "Daily"
         If rbmonthly.Checked Then ExtractType = "Monthly"
         Select Case ExtractType
