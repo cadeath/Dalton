@@ -59,6 +59,7 @@
         CIOtransactions = New CollectionCIO
         btnCashIn.PerformClick()
         LineNum = 1
+        Me.Close()
     End Sub
     ''' <summary>
     ''' add data to listview
