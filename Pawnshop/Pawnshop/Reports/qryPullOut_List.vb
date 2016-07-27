@@ -62,7 +62,7 @@
         frmReport.Show()
     End Sub
     Private Sub Outstanding_Loans()
-        Dim dsName As String = "dsOutstanding", mySql As String
+        Dim dsName As String = "dsOutstanding"
 
         If Not POSuser.canOutstandingReport Then
             mySql = "SELECT * "
