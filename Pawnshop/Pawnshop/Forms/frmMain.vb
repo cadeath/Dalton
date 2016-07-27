@@ -367,8 +367,8 @@
     End Sub
 
     Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
-        qryDate.FormType = qryDate.ReportType.OutStanding
-        qryDate.Show()
+        qryPullOut_List.FormType = qryPullOut_List.DailyReport.Outstanding
+        qryPullOut_List.Show()
     End Sub
 
     Private Sub RateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RateToolStripMenuItem.Click
@@ -402,6 +402,7 @@
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+        qryPullOut_List.FormType = qryPullOut_List.DailyReport.Pullout
         qryPullOut_List.Show()
     End Sub
 

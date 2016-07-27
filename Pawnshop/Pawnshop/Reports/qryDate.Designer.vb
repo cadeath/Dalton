@@ -25,7 +25,6 @@ Partial Class qryDate
         Me.monCal = New System.Windows.Forms.MonthCalendar()
         Me.btnGenerate = New System.Windows.Forms.Button()
         Me.cboReports = New System.Windows.Forms.ComboBox()
-        Me.cboType = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'monCal
@@ -54,23 +53,11 @@ Partial Class qryDate
         Me.cboReports.Size = New System.Drawing.Size(227, 21)
         Me.cboReports.TabIndex = 2
         '
-        'cboType
-        '
-        Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboType.FormattingEnabled = True
-        Me.cboType.Items.AddRange(New Object() {"APP", "BIG", "CEL", "JWL"})
-        Me.cboType.Location = New System.Drawing.Point(12, 250)
-        Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(227, 21)
-        Me.cboType.TabIndex = 3
-        Me.cboType.Visible = False
-        '
         'qryDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(246, 275)
-        Me.Controls.Add(Me.cboType)
+        Me.ClientSize = New System.Drawing.Size(246, 256)
         Me.Controls.Add(Me.cboReports)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
@@ -84,5 +71,4 @@ Partial Class qryDate
     Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
     Friend WithEvents btnGenerate As System.Windows.Forms.Button
     Friend WithEvents cboReports As System.Windows.Forms.ComboBox
-    Friend WithEvents cboType As System.Windows.Forms.ComboBox
 End Class
