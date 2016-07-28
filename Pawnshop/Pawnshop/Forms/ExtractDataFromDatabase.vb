@@ -640,48 +640,20 @@ Public Class ExtractDataFromDatabase
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
-        Dim mysql As String
-        mysql = "SELECT * "
-        mysql &= "FROM "
-        mysql &= "( "
-        mysql &= "  SELECT * "
-        mysql &= "  FROM OUTSTANDING "
-        mysql &= "  WHERE (STATUS = 'NEW' OR STATUS = 'RENEW') "
-        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' "
-        mysql &= "  UNION "
-        mysql &= "  SELECT * "
-        mysql &= "  FROM OUTSTANDING "
-        mysql &= "  WHERE (STATUS = 'RENEWED') "
-        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
-        mysql &= "  UNION "
-        mysql &= "  SELECT * "
-        mysql &= "  FROM OUTSTANDING "
-        mysql &= "  WHERE (Status = 'REDEEM') "
-        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
-        mysql &= "  UNION "
-        mysql &= "  SELECT * "
-        mysql &= "  FROM OUTSTANDING "
-        mysql &= "  WHERE (STATUS = 'SEGRE') "
-        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL) "
-        mysql &= "  UNION "
-        mysql &= "  SELECT * "
-        mysql &= "  FROM OUTSTANDING "
-        mysql &= "  WHERE (STATUS = 'WITHDRAW') "
-        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
-        mysql &= ") "
-        mysql &= "ORDER BY PAWNTICKET ASC"
+        Dim mySql As String = "SELECT * FROM (   SELECT *   FROM PAWNING   WHERE (Status = 'NEW' OR Status = 'RENEW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'RENEWED')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'REDEEM')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'SEGRE')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL)   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'WITHDRAW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' ) ORDER BY PAWNTICKET ASC"
+
 
         Dim headers() As String = _
-            {"ADVINT", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENT", "DAYSOVERDUE", _
-             "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
-             "KARAT", "LESSPRINCIPAL", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", "PAWNID", _
-             "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS"}
+            {"PAWNTICKET", "LOANDATE", "MATUDATE", "EXPIRYDATE", "AUCTIONDATE", "CLIENT", "FULLADDRESS", _
+             "DESCRIPTION", "ORNUM", "ORDATE", "OLDTICKET", "NETAMOUNT", "RENEWDUE", "REDEEMDUE", "APPRAISAL", "PRINCIPAL", _
+             "INTEREST", "ADVINT", "SERVICECHARGE", "PENALTY", "ITEMTYPE", "CATEGORY", "GRAMS", "KARAT", "STATUS", _
+             "PULLOUT", "APPRAISER"}
 
         Dim verified_url As String
         Dim str As String = "Outstanding"
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
         verified_url = txtPath.Text & "/" & sfdPath.FileName
-        ExtractToExcel(headers, mysql, verified_url)
+        ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -717,11 +689,11 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub ExtractAllDaily()
-        PawningExtractDaily()
-        DollarExtractDaily()
-        InsuranceExtractDaily()
-        BorrowingExtractDaily()
-        RemitanceExtractDaily()
+        'PawningExtractDaily()
+        'DollarExtractDaily()
+        'InsuranceExtractDaily()
+        'BorrowingExtractDaily()
+        'RemitanceExtractDaily()
         OutstandingExtract()
     End Sub
 
@@ -750,11 +722,11 @@ Public Class ExtractDataFromDatabase
 
         End Select
 
-        Dim myFile As String
-        Dim mydir As String = readValue
-        For Each myFile In Directory.GetFiles(mydir, "*.xlsx")
-            File.Delete(myFile)
-        Next
+        'Dim myFile As String
+        'Dim mydir As String = readValue
+        'For Each myFile In Directory.GetFiles(mydir, "*.xlsx")
+        '    File.Delete(myFile)
+        'Next
         lblextracting.Visible = False
         lblTransactioName.Visible = False
     End Sub

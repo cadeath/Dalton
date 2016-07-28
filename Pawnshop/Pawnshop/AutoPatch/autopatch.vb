@@ -13,7 +13,7 @@ Module autopatch
         db122.PatchUp()
         db1221.PatchUp()
         db1222.PatchUp()
-        db1223.patchUp()
+
 
 
         DBVERSION = GetOption("DBVersion")
