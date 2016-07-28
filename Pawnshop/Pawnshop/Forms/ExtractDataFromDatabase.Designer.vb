@@ -24,7 +24,6 @@ Partial Class ExtractDataFromDatabase
     Private Sub InitializeComponent()
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.MonCalendar = New System.Windows.Forms.MonthCalendar()
-        Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
         Me.txtpath1 = New System.Windows.Forms.TextBox()
         Me.rbmonthly = New System.Windows.Forms.RadioButton()
@@ -33,6 +32,7 @@ Partial Class ExtractDataFromDatabase
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblextracting = New System.Windows.Forms.Label()
         Me.lblTransactioName = New System.Windows.Forms.Label()
+        Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,6 +41,7 @@ Partial Class ExtractDataFromDatabase
         Me.txtPath.BackColor = System.Drawing.Color.White
         Me.txtPath.Location = New System.Drawing.Point(136, 38)
         Me.txtPath.Name = "txtPath"
+        Me.txtPath.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPath.ReadOnly = True
         Me.txtPath.Size = New System.Drawing.Size(222, 20)
         Me.txtPath.TabIndex = 30
@@ -51,11 +52,6 @@ Partial Class ExtractDataFromDatabase
         Me.MonCalendar.MaxSelectionCount = 365
         Me.MonCalendar.Name = "MonCalendar"
         Me.MonCalendar.TabIndex = 25
-        '
-        'sfdPath
-        '
-        Me.sfdPath.DefaultExt = "xls"
-        Me.sfdPath.Filter = "Excel File 2003|*.xls"
         '
         'fbdBackup
         '
@@ -116,10 +112,10 @@ Partial Class ExtractDataFromDatabase
         'lblextracting
         '
         Me.lblextracting.AutoSize = True
-        Me.lblextracting.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblextracting.Location = New System.Drawing.Point(6, 212)
+        Me.lblextracting.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblextracting.Location = New System.Drawing.Point(7, 200)
         Me.lblextracting.Name = "lblextracting"
-        Me.lblextracting.Size = New System.Drawing.Size(49, 16)
+        Me.lblextracting.Size = New System.Drawing.Size(55, 16)
         Me.lblextracting.TabIndex = 38
         Me.lblextracting.Text = "Label1"
         '
@@ -127,12 +123,17 @@ Partial Class ExtractDataFromDatabase
         '
         Me.lblTransactioName.AutoSize = True
         Me.lblTransactioName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTransactioName.Location = New System.Drawing.Point(4, 181)
+        Me.lblTransactioName.Location = New System.Drawing.Point(7, 181)
         Me.lblTransactioName.Name = "lblTransactioName"
         Me.lblTransactioName.Size = New System.Drawing.Size(55, 16)
         Me.lblTransactioName.TabIndex = 39
         Me.lblTransactioName.Text = "Label1"
         Me.lblTransactioName.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'sfdPath
+        '
+        Me.sfdPath.FileName = "Excel 2007|*.xlsx"
+        Me.sfdPath.Title = "Extract"
         '
         'ExtractDataFromDatabase
         '
@@ -157,7 +158,6 @@ Partial Class ExtractDataFromDatabase
     End Sub
     Friend WithEvents txtPath As System.Windows.Forms.TextBox
     Friend WithEvents MonCalendar As System.Windows.Forms.MonthCalendar
-    Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
     Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents txtpath1 As System.Windows.Forms.TextBox
     Friend WithEvents rbmonthly As System.Windows.Forms.RadioButton
@@ -166,4 +166,5 @@ Partial Class ExtractDataFromDatabase
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lblextracting As System.Windows.Forms.Label
     Friend WithEvents lblTransactioName As System.Windows.Forms.Label
+    Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
 End Class

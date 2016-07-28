@@ -833,3 +833,83 @@ At line 1, column 26
 [07/28/2016 08:14:57] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
 [07/28/2016 08:15:02] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
 [07/28/2016 08:15:22] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/28/2016 12:03:52] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[07/28/2016 12:03:58] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/28/2016 12:04:03] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/28/2016 12:04:23] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/28/2016 13:16:50] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 323
+.
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
+[07/28/2016 13:23:47] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -104
+Token unknown - line 1, column 324
+.
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
+[07/28/2016 15:07:22] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[07/28/2016 15:07:27] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/28/2016 15:07:33] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/28/2016 15:07:53] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/28/2016 15:38:14] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [42S02] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -204
+Table unknown
+OUTSTANDING
+At line 1, column 49
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
+[07/28/2016 15:40:38] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[07/28/2016 15:40:43] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/28/2016 15:40:49] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/28/2016 15:41:10] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/28/2016 15:41:38] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [42S02] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -204
+Table unknown
+OUTSTANDING
+At line 1, column 49
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MIS\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
+[07/28/2016 15:48:30] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[07/28/2016 15:48:35] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/28/2016 15:48:41] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/28/2016 15:49:02] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/28/2016 16:12:49] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
+[07/28/2016 16:14:45] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[07/28/2016 16:14:50] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[07/28/2016 16:14:55] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[07/28/2016 16:15:15] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[07/28/2016 16:15:17] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
