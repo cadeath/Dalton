@@ -3,9 +3,6 @@ Imports System.Data.Odbc
 Imports System.IO
 Imports System.IO.Compression
 
-Imports ICSharpCode.SharpZipLib.Core
-Imports ICSharpCode.SharpZipLib.Zip
-
 
 Public Class ExtractDataFromDatabase
     Private ExtractType As String = ""
@@ -15,7 +12,6 @@ Public Class ExtractDataFromDatabase
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtpath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         txtPath.Text = readValue
-        lblextracting.Visible = False
         lblTransactioName.Visible = False
     End Sub
 
@@ -23,7 +19,7 @@ Public Class ExtractDataFromDatabase
 
     Private Sub PawningExtract()
 
-        lblTransactioName.Text = "Pawning"
+        lblTransactioName.Text = "Wait While Pawning is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -93,7 +89,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub DollarExtract()
-        lblTransactioName.Text = "Dollar Buying"
+        lblTransactioName.Text = "Wait While Dollar Buying is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -146,7 +142,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub BorrowingExtract()
-        lblTransactioName.Text = "Borrowing"
+        lblTransactioName.Text = "Wait While Borrowing is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -200,7 +196,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub InsuranceExtract()
-        lblTransactioName.Text = "Insurance"
+        lblTransactioName.Text = "Wait While Insurance is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -254,7 +250,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub RemitanceExtract()
-        lblTransactioName.Text = "Remitance"
+        lblTransactioName.Text = "Wait While Remitance is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -340,7 +336,7 @@ Public Class ExtractDataFromDatabase
 #Region "Extract Database Table Daily"
 
     Private Sub PawningExtractDaily()
-        lblTransactioName.Text = "Pawning"
+        lblTransactioName.Text = "Wait While Pawning is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
         Dim mySql As String
@@ -389,7 +385,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.branchName & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -409,7 +405,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub DollarExtractDaily()
-        lblTransactioName.Text = "Dollar Buying"
+        lblTransactioName.Text = "Wait While Dollar Buying is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -442,7 +438,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.branchName & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -462,7 +458,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub BorrowingExtractDaily()
-        lblTransactioName.Text = "Borrowing"
+        lblTransactioName.Text = "Wait While Borrowing is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -498,7 +494,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.branchName & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -515,7 +511,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub InsuranceExtractDaily()
-        lblTransactioName.Text = "Insurance"
+        lblTransactioName.Text = "Wait While Insurance is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -548,7 +544,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.branchName & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -566,7 +562,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub RemitanceExtractDaily()
-        lblTransactioName.Text = "Remitance"
+        lblTransactioName.Text = "Wait While Remitance is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -615,7 +611,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.branchName & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -635,7 +631,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub OutstandingExtract()
-        lblTransactioName.Text = "Outstanding"
+        lblTransactioName.Text = "Wait While Outstanding is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -662,7 +658,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.branchName & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -689,20 +685,17 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub ExtractAllDaily()
-        'PawningExtractDaily()
-        'DollarExtractDaily()
-        'InsuranceExtractDaily()
-        'BorrowingExtractDaily()
-        'RemitanceExtractDaily()
+        PawningExtractDaily()
+        DollarExtractDaily()
+        InsuranceExtractDaily()
+        BorrowingExtractDaily()
+        RemitanceExtractDaily()
         OutstandingExtract()
     End Sub
 
     Private Sub btnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnExtract.Click
         btnExtract.Enabled = False
-        lblextracting.Visible = True
         lblTransactioName.Visible = True
-
-        lblextracting.Text = "Extracting. . ."
         If rbDaily.Checked Then ExtractType = "Daily"
         If rbmonthly.Checked Then ExtractType = "Monthly"
 
@@ -722,12 +715,11 @@ Public Class ExtractDataFromDatabase
 
         End Select
 
-        'Dim myFile As String
-        'Dim mydir As String = readValue
-        'For Each myFile In Directory.GetFiles(mydir, "*.xlsx")
-        '    File.Delete(myFile)
-        'Next
-        lblextracting.Visible = False
+        Dim myFile As String
+        Dim mydir As String = readValue
+        For Each myFile In Directory.GetFiles(mydir, "*.xlsx")
+            File.Delete(myFile)
+        Next
         lblTransactioName.Visible = False
     End Sub
 End Class

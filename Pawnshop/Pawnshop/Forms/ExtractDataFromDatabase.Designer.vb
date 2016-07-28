@@ -30,7 +30,6 @@ Partial Class ExtractDataFromDatabase
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.rbDaily = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblextracting = New System.Windows.Forms.Label()
         Me.lblTransactioName = New System.Windows.Forms.Label()
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox1.SuspendLayout()
@@ -39,16 +38,16 @@ Partial Class ExtractDataFromDatabase
         'txtPath
         '
         Me.txtPath.BackColor = System.Drawing.Color.White
-        Me.txtPath.Location = New System.Drawing.Point(136, 38)
+        Me.txtPath.Location = New System.Drawing.Point(12, 216)
         Me.txtPath.Name = "txtPath"
         Me.txtPath.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(222, 20)
+        Me.txtPath.Size = New System.Drawing.Size(346, 20)
         Me.txtPath.TabIndex = 30
         '
         'MonCalendar
         '
-        Me.MonCalendar.Location = New System.Drawing.Point(131, 67)
+        Me.MonCalendar.Location = New System.Drawing.Point(131, 16)
         Me.MonCalendar.MaxSelectionCount = 365
         Me.MonCalendar.Name = "MonCalendar"
         Me.MonCalendar.TabIndex = 25
@@ -60,10 +59,10 @@ Partial Class ExtractDataFromDatabase
         'txtpath1
         '
         Me.txtpath1.BackColor = System.Drawing.Color.White
-        Me.txtpath1.Location = New System.Drawing.Point(136, 12)
+        Me.txtpath1.Location = New System.Drawing.Point(12, 190)
         Me.txtpath1.Name = "txtpath1"
         Me.txtpath1.ReadOnly = True
-        Me.txtpath1.Size = New System.Drawing.Size(222, 20)
+        Me.txtpath1.Size = New System.Drawing.Size(346, 20)
         Me.txtpath1.TabIndex = 32
         '
         'rbmonthly
@@ -103,29 +102,19 @@ Partial Class ExtractDataFromDatabase
         Me.GroupBox1.Controls.Add(Me.rbDaily)
         Me.GroupBox1.Controls.Add(Me.btnExtract)
         Me.GroupBox1.Controls.Add(Me.rbmonthly)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 62)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 41)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(113, 115)
         Me.GroupBox1.TabIndex = 37
         Me.GroupBox1.TabStop = False
         '
-        'lblextracting
-        '
-        Me.lblextracting.AutoSize = True
-        Me.lblextracting.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblextracting.Location = New System.Drawing.Point(7, 200)
-        Me.lblextracting.Name = "lblextracting"
-        Me.lblextracting.Size = New System.Drawing.Size(55, 16)
-        Me.lblextracting.TabIndex = 38
-        Me.lblextracting.Text = "Label1"
-        '
         'lblTransactioName
         '
         Me.lblTransactioName.AutoSize = True
-        Me.lblTransactioName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTransactioName.Location = New System.Drawing.Point(7, 181)
+        Me.lblTransactioName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTransactioName.Location = New System.Drawing.Point(12, 239)
         Me.lblTransactioName.Name = "lblTransactioName"
-        Me.lblTransactioName.Size = New System.Drawing.Size(55, 16)
+        Me.lblTransactioName.Size = New System.Drawing.Size(49, 16)
         Me.lblTransactioName.TabIndex = 39
         Me.lblTransactioName.Text = "Label1"
         Me.lblTransactioName.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -139,9 +128,8 @@ Partial Class ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(365, 237)
+        Me.ClientSize = New System.Drawing.Size(373, 260)
         Me.Controls.Add(Me.lblTransactioName)
-        Me.Controls.Add(Me.lblextracting)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.txtpath1)
         Me.Controls.Add(Me.txtPath)
@@ -164,7 +152,6 @@ Partial Class ExtractDataFromDatabase
     Friend WithEvents btnExtract As System.Windows.Forms.Button
     Friend WithEvents rbDaily As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents lblextracting As System.Windows.Forms.Label
     Friend WithEvents lblTransactioName As System.Windows.Forms.Label
     Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
 End Class

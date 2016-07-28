@@ -455,7 +455,7 @@
     End Sub
 
     Private Sub ExtractToExcelToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ExtractToExcelToolStripMenuItem.Click
-        ExtractDataFromDatabase.Show()
+        ExtractDataFromDatabase.ShowDialog()
     End Sub
 
 End Class
