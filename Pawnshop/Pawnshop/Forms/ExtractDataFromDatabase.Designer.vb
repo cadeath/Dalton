@@ -32,13 +32,14 @@ Partial Class ExtractDataFromDatabase
         Me.rbDaily = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblextracting = New System.Windows.Forms.Label()
+        Me.lblTransactioName = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtPath
         '
         Me.txtPath.BackColor = System.Drawing.Color.White
-        Me.txtPath.Location = New System.Drawing.Point(12, 38)
+        Me.txtPath.Location = New System.Drawing.Point(136, 38)
         Me.txtPath.Name = "txtPath"
         Me.txtPath.ReadOnly = True
         Me.txtPath.Size = New System.Drawing.Size(222, 20)
@@ -46,7 +47,7 @@ Partial Class ExtractDataFromDatabase
         '
         'MonCalendar
         '
-        Me.MonCalendar.Location = New System.Drawing.Point(7, 67)
+        Me.MonCalendar.Location = New System.Drawing.Point(131, 67)
         Me.MonCalendar.MaxSelectionCount = 365
         Me.MonCalendar.Name = "MonCalendar"
         Me.MonCalendar.TabIndex = 25
@@ -63,7 +64,7 @@ Partial Class ExtractDataFromDatabase
         'txtpath1
         '
         Me.txtpath1.BackColor = System.Drawing.Color.White
-        Me.txtpath1.Location = New System.Drawing.Point(12, 12)
+        Me.txtpath1.Location = New System.Drawing.Point(136, 12)
         Me.txtpath1.Name = "txtpath1"
         Me.txtpath1.ReadOnly = True
         Me.txtpath1.Size = New System.Drawing.Size(222, 20)
@@ -72,7 +73,7 @@ Partial Class ExtractDataFromDatabase
         'rbmonthly
         '
         Me.rbmonthly.AutoSize = True
-        Me.rbmonthly.Location = New System.Drawing.Point(88, 26)
+        Me.rbmonthly.Location = New System.Drawing.Point(21, 49)
         Me.rbmonthly.Name = "rbmonthly"
         Me.rbmonthly.Size = New System.Drawing.Size(62, 17)
         Me.rbmonthly.TabIndex = 36
@@ -82,9 +83,9 @@ Partial Class ExtractDataFromDatabase
         'btnExtract
         '
         Me.btnExtract.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExtract.Location = New System.Drawing.Point(25, 69)
+        Me.btnExtract.Location = New System.Drawing.Point(21, 72)
         Me.btnExtract.Name = "btnExtract"
-        Me.btnExtract.Size = New System.Drawing.Size(120, 26)
+        Me.btnExtract.Size = New System.Drawing.Size(77, 26)
         Me.btnExtract.TabIndex = 34
         Me.btnExtract.Text = "Extract"
         Me.btnExtract.UseVisualStyleBackColor = True
@@ -93,7 +94,7 @@ Partial Class ExtractDataFromDatabase
         '
         Me.rbDaily.AutoSize = True
         Me.rbDaily.Checked = True
-        Me.rbDaily.Location = New System.Drawing.Point(25, 26)
+        Me.rbDaily.Location = New System.Drawing.Point(21, 15)
         Me.rbDaily.Name = "rbDaily"
         Me.rbDaily.Size = New System.Drawing.Size(48, 17)
         Me.rbDaily.TabIndex = 35
@@ -106,9 +107,9 @@ Partial Class ExtractDataFromDatabase
         Me.GroupBox1.Controls.Add(Me.rbDaily)
         Me.GroupBox1.Controls.Add(Me.btnExtract)
         Me.GroupBox1.Controls.Add(Me.rbmonthly)
-        Me.GroupBox1.Location = New System.Drawing.Point(246, 55)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 62)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(160, 119)
+        Me.GroupBox1.Size = New System.Drawing.Size(113, 115)
         Me.GroupBox1.TabIndex = 37
         Me.GroupBox1.TabStop = False
         '
@@ -116,24 +117,38 @@ Partial Class ExtractDataFromDatabase
         '
         Me.lblextracting.AutoSize = True
         Me.lblextracting.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblextracting.Location = New System.Drawing.Point(246, 198)
+        Me.lblextracting.Location = New System.Drawing.Point(6, 212)
         Me.lblextracting.Name = "lblextracting"
         Me.lblextracting.Size = New System.Drawing.Size(49, 16)
         Me.lblextracting.TabIndex = 38
         Me.lblextracting.Text = "Label1"
         '
+        'lblTransactioName
+        '
+        Me.lblTransactioName.AutoSize = True
+        Me.lblTransactioName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTransactioName.Location = New System.Drawing.Point(4, 181)
+        Me.lblTransactioName.Name = "lblTransactioName"
+        Me.lblTransactioName.Size = New System.Drawing.Size(55, 16)
+        Me.lblTransactioName.TabIndex = 39
+        Me.lblTransactioName.Text = "Label1"
+        Me.lblTransactioName.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
         'ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 249)
+        Me.ClientSize = New System.Drawing.Size(365, 237)
+        Me.Controls.Add(Me.lblTransactioName)
         Me.Controls.Add(Me.lblextracting)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.txtpath1)
         Me.Controls.Add(Me.txtPath)
         Me.Controls.Add(Me.MonCalendar)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "ExtractDataFromDatabase"
-        Me.Text = "Extract Data From Datbase"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Accounting Extract"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
@@ -150,4 +165,5 @@ Partial Class ExtractDataFromDatabase
     Friend WithEvents rbDaily As System.Windows.Forms.RadioButton
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lblextracting As System.Windows.Forms.Label
+    Friend WithEvents lblTransactioName As System.Windows.Forms.Label
 End Class

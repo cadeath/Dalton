@@ -8,7 +8,6 @@ Imports ICSharpCode.SharpZipLib.Zip
 
 
 Public Class ExtractDataFromDatabase
-
     Private ExtractType As String = ""
     Dim readValue = My.Computer.Registry.GetValue(
     "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
@@ -17,11 +16,13 @@ Public Class ExtractDataFromDatabase
         txtPath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         txtPath.Text = readValue
         lblextracting.Visible = False
+        lblTransactioName.Visible = False
     End Sub
 
 #Region "Extract Database Table Monthly"
 
     Private Sub PawningExtract()
+        lblTransactioName.Text = "Pawning"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -47,7 +48,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "FROM TBLPAWN P" & _
         vbCrLf & "INNER JOIN TBLCLASS CLASS" & _
         vbCrLf & "ON CLASS.CLASSID = P.CATID" & _
-        vbCrLf & "INNER JOIN TBL_GAMIT G" & _
+        vbCrLf & "LEFT JOIN TBL_GAMIT G" & _
         vbCrLf & "ON G.USERID = P.APPRAISERID" & _
         vbCrLf & "INNER JOIN TBLCLIENT C" & _
         vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
@@ -69,7 +70,7 @@ Public Class ExtractDataFromDatabase
 
 
         oSheet = oWB.Worksheets(1)
-     
+
         Dim recCnt2 As Single = 0
         While recCnt2 < MaxEntries
             With ds.Tables(0).Rows(recCnt2)
@@ -150,27 +151,20 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
-            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
+
         End If
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
     End Sub
 
     Private Sub DollarExtract()
+        lblTransactioName.Text = "Dollar Buying"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -262,27 +256,21 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
-            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
+          
         End If
-        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
+        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     End Sub
 
     Private Sub BorrowingExtract()
+        lblTransactioName.Text = "Borrowing"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -373,27 +361,23 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
+
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
             ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+           
         End If
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
+       
     End Sub
 
     Private Sub InsuranceExtract()
+        lblTransactioName.Text = "Insurance"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -485,27 +469,22 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
+
             ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+           
         End If
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
     End Sub
 
     Private Sub RemitanceExtract()
+        lblTransactioName.Text = "Remitance"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -617,19 +596,27 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
+
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
             ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+            'Dim proc As Process = Nothing
+            'Try
+            '    Dim batDir As String = String.Format(readValue)
+            '    proc = New Process()
+            '    proc.StartInfo.WorkingDirectory = batDir
+            '    proc.StartInfo.FileName = "Extract.bat"
+            '    proc.StartInfo.CreateNoWindow = False
+            '    proc.Start()
+            '    proc.WaitForExit()
+            'Catch ex As Exception
+            '    Console.WriteLine(ex.StackTrace.ToString())
+            'End Try
         End If
         ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         'If System.IO.File.Exists(verified_url) = True Then
@@ -637,13 +624,12 @@ Public Class ExtractDataFromDatabase
         'End If
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     End Sub
-
-   
 #End Region
 
 #Region "Extract Database Table Daily"
 
     Private Sub PawningExtractDaily()
+        lblTransactioName.Text = "Pawning"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
         Dim mySql As String
@@ -667,7 +653,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "FROM TBLPAWN P" & _
         vbCrLf & "INNER JOIN TBLCLASS CLASS" & _
         vbCrLf & "ON CLASS.CLASSID = P.CATID" & _
-        vbCrLf & "INNER JOIN TBL_GAMIT G" & _
+        vbCrLf & "LEFT JOIN TBL_GAMIT G" & _
         vbCrLf & "ON G.USERID = P.APPRAISERID" & _
         vbCrLf & "INNER JOIN TBLCLIENT C" & _
         vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
@@ -769,27 +755,20 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("pause")
                 sw.WriteLine("exit")
             End Using
-            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
         End If
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
     End Sub
 
     Private Sub DollarExtractDaily()
+        lblTransactioName.Text = "Dollar Buying"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -880,26 +859,19 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("exit")
             End Using
             ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
         End If
-        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
+        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     End Sub
 
     Private Sub BorrowingExtractDaily()
+        lblTransactioName.Text = "Borrowing"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -991,26 +963,20 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("exit")
             End Using
             ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
         End If
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
+        
     End Sub
 
     Private Sub InsuranceExtractDaily()
+        lblTransactioName.Text = "Insurance"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -1102,26 +1068,20 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("exit")
             End Using
             ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
         End If
         ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        If System.IO.File.Exists(verified_url) = True Then
-            System.IO.File.Delete(verified_url)
-        End If
+      
     End Sub
 
     Private Sub RemitanceExtractDaily()
+        lblTransactioName.Text = "Remitance"
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -1233,64 +1193,214 @@ Public Class ExtractDataFromDatabase
                 sw.WriteLine("exit")
             End Using
             ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            Dim proc As Process = Nothing
-            Try
-                Dim batDir As String = String.Format(readValue)
-                proc = New Process()
-                proc.StartInfo.WorkingDirectory = batDir
-                proc.StartInfo.FileName = "Extract.bat"
-                proc.StartInfo.CreateNoWindow = False
-                proc.Start()
-                proc.WaitForExit()
-            Catch ex As Exception
-                Console.WriteLine(ex.StackTrace.ToString())
-            End Try
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
         End If
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        'If System.IO.File.Exists(verified_url) = True Then
-        '    System.IO.File.Delete(verified_url)
-        'End If
+       
 
+    End Sub
+
+    Private Sub OutstandingExtract()
+        lblTransactioName.Text = "Outstanding"
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
+        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+
+        Dim mysql As String
+        mysql = "SELECT * "
+        mysql &= "FROM "
+        mysql &= "( "
+        mysql &= "  SELECT * "
+        mysql &= "  FROM OUTSTANDING "
+        mysql &= "  WHERE (STATUS = 'NEW' OR STATUS = 'RENEW') "
+        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mysql &= "  UNION "
+        mysql &= "  SELECT * "
+        mysql &= "  FROM OUTSTANDING "
+        mysql &= "  WHERE (STATUS = 'RENEWED') "
+        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mysql &= "  UNION "
+        mysql &= "  SELECT * "
+        mysql &= "  FROM OUTSTANDING "
+        mysql &= "  WHERE (Status = 'REDEEM') "
+        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mysql &= "  UNION "
+        mysql &= "  SELECT * "
+        mysql &= "  FROM OUTSTANDING "
+        mysql &= "  WHERE (STATUS = 'SEGRE') "
+        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL) "
+        mysql &= "  UNION "
+        mysql &= "  SELECT * "
+        mysql &= "  FROM OUTSTANDING "
+        mysql &= "  WHERE (STATUS = 'WITHDRAW') "
+        mysql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mysql &= ") "
+        mysql &= "ORDER BY PAWNTICKET ASC"
+
+
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxEntries As Integer = 0
+        MaxEntries = ds.Tables(0).Rows.Count
+
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oWB = oXL.Workbooks.Open(Application.StartupPath & "/doc/OUTSTANDING.xls")
+        oSheet = oWB.Worksheets(1)
+
+
+        oSheet = oWB.Worksheets(1)
+
+        Dim recCnt2 As Single = 0
+        While recCnt2 < MaxEntries
+            With ds.Tables(0).Rows(recCnt2)
+                oSheet.Cells(lineNum + 2, 1) = .Item("ADVINT").ToString
+                oSheet.Cells(lineNum + 2, 2) = .Item("APPRAISAL")
+                oSheet.Cells(lineNum + 2, 3) = .Item("APPRAISER")
+                oSheet.Cells(lineNum + 2, 4) = .Item("AUCTIONDATE")
+                oSheet.Cells(lineNum + 2, 5) = .Item("CATEGORY")
+                oSheet.Cells(lineNum + 2, 6) = .Item("CLIENT")
+                oSheet.Cells(lineNum + 2, 7) = .Item("DAYSOVERDUE")
+                oSheet.Cells(lineNum + 2, 8) = .Item("DELAYINT")
+                oSheet.Cells(lineNum + 2, 9) = .Item("DESCRIPTION")
+                oSheet.Cells(lineNum + 2, 10) = .Item("EARLYREDEEM")
+                oSheet.Cells(lineNum + 2, 11) = .Item("ENCODERID")
+                oSheet.Cells(lineNum + 2, 12) = .Item("EVAT")
+                oSheet.Cells(lineNum + 2, 13) = .Item("EXPIRYDATE")
+                oSheet.Cells(lineNum + 2, 14) = .Item("GRAMS")
+                oSheet.Cells(lineNum + 2, 15) = .Item("INTEREST")
+                ' oSheet.Cells(lineNum + 2, 16) = .Item("INT_CHECKSUM")
+                oSheet.Cells(lineNum + 2, 16) = .Item("ITEMTYPE")
+                oSheet.Cells(lineNum + 2, 17) = .Item("KARAT")
+                oSheet.Cells(lineNum + 2, 18) = .Item("LESSPRINCIPAL")
+                oSheet.Cells(lineNum + 2, 19) = .Item("LOANDATE")
+                oSheet.Cells(lineNum + 2, 20) = .Item("MATUDATE")
+                oSheet.Cells(lineNum + 2, 21) = .Item("NETAMOUNT")
+                oSheet.Cells(lineNum + 2, 22) = .Item("OLDTICKET")
+                oSheet.Cells(lineNum + 2, 23) = .Item("ORDATE")
+                oSheet.Cells(lineNum + 2, 24) = .Item("ORNUM")
+                oSheet.Cells(lineNum + 2, 25) = .Item("PAWNID")
+                oSheet.Cells(lineNum + 2, 26) = .Item("PAWNTICKET")
+                oSheet.Cells(lineNum + 2, 27) = .Item("PENALTY")
+                oSheet.Cells(lineNum + 2, 28) = .Item("PRINCIPAL")
+                oSheet.Cells(lineNum + 2, 29) = .Item("PULLOUT")
+                oSheet.Cells(lineNum + 2, 30) = .Item("REDEEMDUE")
+                oSheet.Cells(lineNum + 2, 31) = .Item("RENEWDUE")
+                oSheet.Cells(lineNum + 2, 32) = .Item("SERVICECHARGE")
+                oSheet.Cells(lineNum + 2, 33) = .Item("STATUS")
+                'oSheet.Cells(lineNum + 2, 35) = .Item("SYSTEMINFO"
+                lineNum += 1
+                recCnt2 += 1
+            End With
+
+            Application.DoEvents()
+        End While
+
+        Dim verified_url As String
+        Dim str As String = "Outstanding"
+
+        sfdPath.FileName = String.Format("{2}{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
+
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+
+
+            oWB.SaveAs(verified_url)
+            oSheet = Nothing
+            oWB.Close(False)
+            oWB = Nothing
+            oXL.Quit()
+            oXL = Nothing
+
+            txtpath1.Text = txtpath1.Text
+            Using sw As StreamWriter = File.CreateText("Extract.bat")
+                sw.WriteLine("@echo off")
+                sw.WriteLine("title cdt-S0ft - Extract")
+                sw.WriteLine("echo Extracting. . .")
+                sw.WriteLine("pause")
+                sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+                sw.WriteLine("rar a " & txtpath1.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+                sw.WriteLine("cls ")
+                sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+                sw.WriteLine("pause")
+                sw.WriteLine("exit")
+            End Using
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+            pro.RedirectStandardError = True
+            pro.RedirectStandardOutput = True
+            pro.CreateNoWindow = False
+            pro.WindowStyle = ProcessWindowStyle.Hidden
+            pro.UseShellExecute = False
+            Dim process As Process = process.Start(pro)
+        End If
     End Sub
 
 #End Region
 
     Private Sub ExtractALLMonthly()
-        DollarExtract()
         PawningExtract()
-        RemitanceExtract()
+        DollarExtract()
         InsuranceExtract()
         BorrowingExtract()
-
+        RemitanceExtract()
     End Sub
 
     Private Sub ExtractAllDaily()
         PawningExtractDaily()
         DollarExtractDaily()
-        RemitanceExtractDaily()
         InsuranceExtractDaily()
         BorrowingExtractDaily()
-
+        RemitanceExtractDaily()
+        'OutstandingExtract()
     End Sub
 
     Private Sub btnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnExtract.Click
         btnExtract.Enabled = False
+        lblextracting.Visible = True
+        lblTransactioName.Visible = True
 
+        lblextracting.Text = "Extracting. . ."
         If rbDaily.Checked Then ExtractType = "Daily"
         If rbmonthly.Checked Then ExtractType = "Monthly"
+
         Select Case ExtractType
             Case "Daily"
                 ExtractAllDaily()
+
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+
             Case "Monthly"
                 ExtractALLMonthly()
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
-        End Select
-    End Sub
 
-  
+        End Select
+
+        Dim myFile As String
+        Dim mydir As String = readValue
+        For Each myFile In Directory.GetFiles(mydir, "*.xls")
+            File.Delete(myFile)
+        Next
+        lblextracting.Visible = False
+        lblTransactioName.Visible = False
+    End Sub
 End Class
