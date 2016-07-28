@@ -15,3 +15,11 @@ AND
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
+[07/28/2016 10:36:58] REPORT - Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.ReportingServices.Diagnostics.Utilities.UnknownReportParameterException: An attempt was made to set a report parameter 'txtMonthstart' that is not defined in this report.
+   at Microsoft.ReportingServices.ReportProcessing.ParameterInfoCollection.Combine(ParameterInfoCollection oldParameters, ParameterInfoCollection newParameters, Boolean checkReadOnly, Boolean ignoreNewQueryParams, Boolean isParameterDefinitionUpdate, CultureInfo culture)
+   at Microsoft.Reporting.LocalService.GetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup, CreateAndRegisterStream createStreamCallback)
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.InternalGetReportParameters(CatalogItemContextBase reportContext, NameValueCollection userSpecifiedValues, ParameterInfoCollection baseLineParameters, DatasourceCredentialsCollection credentials, ReportRuntimeSetup reportRuntimeSetup)
+   at Microsoft.Reporting.WinForms.LocalReport.SetParameters(IEnumerable`1 parameters)
+   at Pawnshop.frmReport.ReportInit(String mySql, String dsName, String rptUrl, Dictionary`2 addPara, Boolean hasUser) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\frmReport.vb:line 97

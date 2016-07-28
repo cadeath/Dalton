@@ -5,6 +5,7 @@
 #define MyAppVersion "1.2.2.9"
 #define MyAppPublisher "Perfecto Group of Companies"
 #define MyAppExeName "pawnshop.exe"
+#define SerialNumber "123456"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -21,7 +22,14 @@ OutputDir=D:\cadeath\Documents\DevInstaller\Pawnshop
 OutputBaseFilename=daltonps-1229
 SetupIconFile=..\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
 Compression=lzma
+UserInfoPage=yes
 SolidCompression=yes
+
+[Code]
+function CheckSerial(Serial: String): Boolean;
+begin
+  Result := Serial = '{#SerialNumber}';
+end;
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
