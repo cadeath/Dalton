@@ -33,7 +33,8 @@
         DollarDaily = 14
         AuditPrinLimit = 15
         MonthlyTransactionCountSummary = 16
-
+	MoneyTransferBracketing = 17
+        RenewalBreakDown = 18
 
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
@@ -75,7 +76,11 @@
                 Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
-           
+            Case ReportType.MoneyTransferBracketing
+                MoneyTransferBracketing()
+            Case ReportType.RenewalBreakDown
+                monthlyRenewalBreakDown()
+
         End Select
     End Sub
 
@@ -125,6 +130,11 @@
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
                     FormType = ReportType.MonthlyTransactionCountSummary
+                Case "MoneyTransfer Bracketing"
+                    FormType = ReportType.MoneyTransferBracketing
+                Case "Monthly Renewal Break Down"
+                    FormType = ReportType.RenewalBreakDown
+
             End Select
         End If
 
@@ -525,7 +535,34 @@
         frmReport.ReportInit(mySql, filldata, "Reports\rpt_MonthlyTransactionCount.rdlc", addParameters)
         frmReport.Show()
     End Sub
+    Private Sub MoneyTransferBracketing()
 
+        diagMoneyTransferBracketing.st = GetFirstDate(monCal.SelectionStart)
+        diagMoneyTransferBracketing.en = GetLastDate(monCal.SelectionEnd)
+
+        diagMoneyTransferBracketing.Show()
+    End Sub
+
+    Private Sub monthlyRenewalBreakDown()
+        Dim stDay = GetFirstDate(monCal.SelectionStart)
+        Dim laDay = GetLastDate(monCal.SelectionEnd)
+        Dim fillData As String = "dsRenewalBreakDown", mySql As String
+
+        mySql = "SELECT  COUNT(*), ITEMTYPE,ORDATE,PRINCIPAL "
+        mySql &= vbCrLf & "FROM TBLPAWN "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & String.Format("ORDate BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= vbCrLf & "AND STATUS = '0'"
+        mySql &= vbCrLf & "GROUP BY ITEMTYPE,ORDATE,PRINCIPAL "
+        mySql &= vbCrLf & "ORDER BY ORDATE ASC "
+
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\RenewalBreakDown.rdlc", rptPara)
+        frmReport.Show()
+    End Sub
     ' STEP 4
     Private Function NoFilter() As Boolean
         Select Case FormType

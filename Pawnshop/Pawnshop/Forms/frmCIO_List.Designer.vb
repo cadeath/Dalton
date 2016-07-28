@@ -38,7 +38,8 @@ Partial Class frmCIO_List
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.lblCashID = New System.Windows.Forms.Label()
-        Me.lblType = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.TextBox()
+        Me.lblCategory = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -165,19 +166,26 @@ Partial Class frmCIO_List
         '
         'lblType
         '
-        Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(180, 436)
+        Me.lblType.Location = New System.Drawing.Point(599, 433)
         Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(58, 13)
-        Me.lblType.TabIndex = 6
-        Me.lblType.Text = "TransType"
+        Me.lblType.Size = New System.Drawing.Size(372, 20)
+        Me.lblType.TabIndex = 8
         Me.lblType.Visible = False
+        '
+        'lblCategory
+        '
+        Me.lblCategory.Location = New System.Drawing.Point(248, 433)
+        Me.lblCategory.Name = "lblCategory"
+        Me.lblCategory.Size = New System.Drawing.Size(159, 20)
+        Me.lblCategory.TabIndex = 9
+        Me.lblCategory.Visible = False
         '
         'frmCIO_List
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1094, 469)
+        Me.Controls.Add(Me.lblCategory)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblCashID)
         Me.Controls.Add(Me.btnVoid)
@@ -210,5 +218,6 @@ Partial Class frmCIO_List
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnVoid As System.Windows.Forms.Button
     Friend WithEvents lblCashID As System.Windows.Forms.Label
-    Friend WithEvents lblType As System.Windows.Forms.Label
+    Friend WithEvents lblType As System.Windows.Forms.TextBox
+    Friend WithEvents lblCategory As System.Windows.Forms.TextBox
 End Class

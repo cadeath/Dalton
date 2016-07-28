@@ -9,7 +9,9 @@
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub LoadInsurance()
-        Dim mySql As String = "SELECT FIRST 100 * FROM tblInsurance WHERE Status LIKE 'A' ORDER BY TRANSDATE DESC"
+
+        Dim mySql As String = "SELECT FIRST 50 * FROM tblInsurance WHERE Status LIKE 'A' ORDER BY TRANSDATE DESC"
+
         Dim ds As DataSet = LoadSQL(mySql)
 
         For Each ins In ds.Tables(0).Rows
@@ -73,6 +75,7 @@
         mySql &= String.Format("LOWER(CLIENTNAME) LIKE LOWER('%{0}%')", secured_str)
 
         Console.WriteLine(mySql)
+        lvInsurance.Items.Clear()
         Dim ds As DataSet = LoadSQL(mySql)
         For Each ins In ds.Tables(0).Rows
             Dim loadInsu As New Insurance
