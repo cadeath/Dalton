@@ -19,7 +19,7 @@ Public Class ExtractDataFromDatabase
 
     Private Sub PawningExtract()
 
-        lblTransactioName.Text = "Wait While Pawning is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -89,7 +89,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub DollarExtract()
-        lblTransactioName.Text = "Wait While Dollar Buying is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -142,7 +142,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub BorrowingExtract()
-        lblTransactioName.Text = "Wait While Borrowing is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -196,7 +196,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub InsuranceExtract()
-        lblTransactioName.Text = "Wait While Insurance is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -250,7 +250,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub RemitanceExtract()
-        lblTransactioName.Text = "Wait While Remitance is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -313,30 +313,14 @@ Public Class ExtractDataFromDatabase
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
-        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        'Dim proc As Process = Nothing
-        'Try
-        '    Dim batDir As String = String.Format(readValue)
-        '    proc = New Process()
-        '    proc.StartInfo.WorkingDirectory = batDir
-        '    proc.StartInfo.FileName = "Extract.bat"
-        '    proc.StartInfo.CreateNoWindow = False
-        '    proc.Start()
-        '    proc.WaitForExit()
-        'Catch ex As Exception
-        '    Console.WriteLine(ex.StackTrace.ToString())
-        'End Try
-
-        ' ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-      
-        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        
     End Sub
 #End Region
 
 #Region "Extract Database Table Daily"
 
     Private Sub PawningExtractDaily()
-        lblTransactioName.Text = "Wait While Pawning is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
         Dim mySql As String
@@ -405,7 +389,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub DollarExtractDaily()
-        lblTransactioName.Text = "Wait While Dollar Buying is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -458,7 +442,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub BorrowingExtractDaily()
-        lblTransactioName.Text = "Wait While Borrowing is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -511,7 +495,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub InsuranceExtractDaily()
-        lblTransactioName.Text = "Wait While Insurance is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -562,7 +546,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub RemitanceExtractDaily()
-        lblTransactioName.Text = "Wait While Remitance is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
@@ -631,7 +615,7 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub OutstandingExtract()
-        lblTransactioName.Text = "Wait While Outstanding is Extracting . . ."
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
