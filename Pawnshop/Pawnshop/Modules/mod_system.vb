@@ -1,4 +1,6 @@
 ﻿' Changelog
+' v2 7/28/16
+'  - Added ExtractToExcel
 ' v1.4 2/17/16
 '  - Log Module
 ' v1.3 11/19/15
@@ -9,13 +11,14 @@
 '  - Added decimal . in DigitOnly
 '  - Added isMoney
 
+Imports Microsoft.Office.Interop
 Module mod_system
     ''' <summary>
     ''' This region declare the neccessary variable in this system.
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = False
+    Public DEV_MODE As Boolean = True
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = True
     Public ADS_SHOW As Boolean = False
@@ -438,6 +441,64 @@ Module mod_system
         ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = VALUE
         database.SaveEntry(ds, False)
         Console.WriteLine("SAP Account Changed")
+    End Sub
+
+    ''' <summary>
+    ''' Extract Data from the database
+    ''' </summary>
+    ''' <param name="headers">Array of HEADERS</param>
+    ''' <param name="mySql">SQL Statement</param>
+    ''' <param name="dest">Excel File Destination</param>
+    ''' <remarks></remarks>
+    Friend Sub ExtractToExcel(headers As String(), mySql As String, dest As String)
+        If dest = "" Then Exit Sub
+
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        If oXL Is Nothing Then
+            MessageBox.Show("Excel is not properly installed!!")
+            Return
+        End If
+
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oXL = CreateObject("Excel.Application")
+        oXL.Visible = False
+
+        oWB = oXL.Workbooks.Add
+        oSheet = oWB.ActiveSheet
+        oSheet.Name = "OUTSTANDING"
+
+        ' HEADERS
+        Dim cnt As Integer = 0
+        For Each hr In headers
+            cnt += 1 : oSheet.Cells(1, cnt).value = hr
+        Next
+
+        ' EXTRACTING
+        Console.Write("Extracting")
+        Dim rowCnt As Integer = 2
+        For Each dr As DataRow In ds.Tables(0).Rows
+            For colCnt As Integer = 0 To headers.Count - 1
+                oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt)
+            Next
+            rowCnt += 1
+
+            Console.Write(".")
+            Application.DoEvents()
+        Next
+
+        oWB.SaveAs(dest)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        Console.WriteLine("Data Extracted")
     End Sub
 
 #Region "Log Module"
