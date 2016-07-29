@@ -5,13 +5,14 @@ Imports System.IO.Compression
 
 
 Public Class ExtractDataFromDatabase
-    Private ExtractType As String = ""
-    Dim readValue = My.Computer.Registry.GetValue(
-    "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
+    Dim ExtractType As String
+    Const batch As String = "\Extract.bat"
+    Dim result As String = Path.GetTempPath()
+    Dim appPath As String = Application.StartupPath
+    Dim verified_url As String
 
     Private Sub ExtractDataFromDatabase_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtpath1.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-        txtPath.Text = readValue
         lblTransactioName.Visible = False
     End Sub
 
@@ -57,9 +58,10 @@ Public Class ExtractDataFromDatabase
             "KARAT", "LESSPRINCIPAL", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", "PAWNID", _
             "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS"}
 
-        Dim verified_url As String
+
+
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -75,7 +77,8 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("pause")
             sw.WriteLine("exit")
         End Using
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
@@ -83,9 +86,6 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
 
-       
-        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-      
     End Sub
 
     Private Sub DollarExtract()
@@ -112,7 +112,7 @@ Public Class ExtractDataFromDatabase
         Dim str As String = "Dollar"
         Console.WriteLine("Dollar Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -129,16 +129,16 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
 
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
-      
+
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       
+
     End Sub
 
     Private Sub BorrowingExtract()
@@ -167,7 +167,7 @@ Public Class ExtractDataFromDatabase
         Dim str As String = "Borrowings"
         Console.WriteLine("Borrowing Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -184,7 +184,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
 
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
@@ -219,7 +219,7 @@ Public Class ExtractDataFromDatabase
         Dim str As String = "Insurance"
         Console.WriteLine("Insurance Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -235,7 +235,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("pause")
             sw.WriteLine("exit")
         End Using
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
@@ -243,10 +243,6 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
 
-        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-      
-
-        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
     End Sub
 
     Private Sub RemitanceExtract()
@@ -289,7 +285,7 @@ Public Class ExtractDataFromDatabase
         Dim verified_url As String
         Dim str As String = "Remitance"
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -306,14 +302,14 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
 
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
-        
+
     End Sub
 #End Region
 
@@ -357,9 +353,9 @@ Public Class ExtractDataFromDatabase
             "KARAT", "LESSPRINCIPAL", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", "PAWNID", _
             "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS"}
 
-        Dim verified_url As String
+
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -376,7 +372,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
@@ -385,7 +381,7 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     
+
     End Sub
 
     Private Sub DollarExtractDaily()
@@ -408,11 +404,11 @@ Public Class ExtractDataFromDatabase
        {"CLIENTID", "DENOMINATION", "FULLNAME", " NETAMOUNT", " PESORATE", "CLIENT", "REMARKS", _
         "STATUS", " SYSTEMINFO", "TRANSDATE", "USERID"}
 
-        Dim verified_url As String
+
         Dim str As String = "Dollar"
         Console.WriteLine("Dollar Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -429,7 +425,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
@@ -438,7 +434,7 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-      
+
     End Sub
 
     Private Sub BorrowingExtractDaily()
@@ -467,7 +463,7 @@ Public Class ExtractDataFromDatabase
         Dim str As String = "Borrowings"
         Console.WriteLine("Borrowing Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
 
@@ -485,7 +481,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
@@ -517,7 +513,7 @@ Public Class ExtractDataFromDatabase
         Dim str As String = "Insurance"
         Console.WriteLine("Insurance Activated")
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
 
@@ -535,14 +531,13 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
-
     End Sub
 
     Private Sub RemitanceExtractDaily()
@@ -585,7 +580,7 @@ Public Class ExtractDataFromDatabase
         Dim verified_url As String
         Dim str As String = "Remitance"
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -602,7 +597,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
@@ -632,7 +627,7 @@ Public Class ExtractDataFromDatabase
         Dim verified_url As String
         Dim str As String = "Outstanding"
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
-        verified_url = txtPath.Text & "/" & sfdPath.FileName
+        verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
         txtpath1.Text = txtpath1.Text
@@ -649,7 +644,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("exit")
         End Using
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        Dim pro As New ProcessStartInfo(readValue & "\Extract.bat")
+        Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
@@ -700,10 +695,15 @@ Public Class ExtractDataFromDatabase
         End Select
 
         Dim myFile As String
-        Dim mydir As String = readValue
+        Dim mydir As String = Application.StartupPath
+        'readValue()
         For Each myFile In Directory.GetFiles(mydir, "*.xlsx")
             File.Delete(myFile)
         Next
         lblTransactioName.Visible = False
+    End Sub
+
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs)
+
     End Sub
 End Class

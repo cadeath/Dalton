@@ -22,7 +22,6 @@ Partial Class ExtractDataFromDatabase
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtPath = New System.Windows.Forms.TextBox()
         Me.MonCalendar = New System.Windows.Forms.MonthCalendar()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
         Me.txtpath1 = New System.Windows.Forms.TextBox()
@@ -34,16 +33,6 @@ Partial Class ExtractDataFromDatabase
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txtPath
-        '
-        Me.txtPath.BackColor = System.Drawing.Color.White
-        Me.txtPath.Location = New System.Drawing.Point(12, 216)
-        Me.txtPath.Name = "txtPath"
-        Me.txtPath.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(346, 20)
-        Me.txtPath.TabIndex = 30
         '
         'MonCalendar
         '
@@ -112,7 +101,7 @@ Partial Class ExtractDataFromDatabase
         '
         Me.lblTransactioName.AutoSize = True
         Me.lblTransactioName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTransactioName.Location = New System.Drawing.Point(12, 239)
+        Me.lblTransactioName.Location = New System.Drawing.Point(12, 216)
         Me.lblTransactioName.Name = "lblTransactioName"
         Me.lblTransactioName.Size = New System.Drawing.Size(49, 16)
         Me.lblTransactioName.TabIndex = 39
@@ -128,11 +117,10 @@ Partial Class ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(373, 260)
+        Me.ClientSize = New System.Drawing.Size(373, 237)
         Me.Controls.Add(Me.lblTransactioName)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.txtpath1)
-        Me.Controls.Add(Me.txtPath)
         Me.Controls.Add(Me.MonCalendar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "ExtractDataFromDatabase"
@@ -144,7 +132,6 @@ Partial Class ExtractDataFromDatabase
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txtPath As System.Windows.Forms.TextBox
     Friend WithEvents MonCalendar As System.Windows.Forms.MonthCalendar
     Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents txtpath1 As System.Windows.Forms.TextBox
