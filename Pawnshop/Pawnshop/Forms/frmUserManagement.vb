@@ -271,6 +271,8 @@
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        If Not PasswordPolicy() Then Exit Sub
+        If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
 
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.UserManagement
