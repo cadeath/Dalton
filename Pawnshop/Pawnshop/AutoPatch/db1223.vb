@@ -36,22 +36,24 @@
         Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
 
-        For Each dsNewRow As DataRow In ds2.Tables(filldata).Rows
-            With dsNewRow
-                Dim tmpUserID As String = dsNewRow.Item("USERID")
+        For Each dsNewRow2 As DataRow In ds2.Tables(filldata).Rows
+            With dsNewRow2
+                Dim tmpUserID As String = dsNewRow2.Item("USERID")
                 selectedUser.LoadUser(tmpUserID)
-            End With
-        Next
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
 
-        Dim ds As DataSet = LoadSQL(mySql, filldata)
+                Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
 
-        For Each dsNewRow As DataRow In ds.Tables(filldata).Rows
-            With dsNewRow
-                dsNewRow.Item("PRIVILEGE") = AddPriv(priv_set.Encoder)
+                Dim ds As DataSet = LoadSQL(mySql, filldata)
+
+                For Each dsNewRow As DataRow In ds.Tables(filldata).Rows
+                    With dsNewRow
+                        dsNewRow.Item("PRIVILEGE") = AddPriv(priv_set.Encoder)
+                    End With
+                    SaveEntry(ds, False)
+                Next
             End With
-            SaveEntry(ds, False)
-        Next
+                Next
+
     End Sub
 
 End Module
