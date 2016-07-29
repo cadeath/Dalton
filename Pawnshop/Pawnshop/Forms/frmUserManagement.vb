@@ -1,5 +1,4 @@
-﻿Imports System.Data.Odbc
-Public Class frmUserManagement
+﻿Public Class frmUserManagement
 
     Private selectedUser As New ComputerUser
     Private moduleName As String = "User Management"
@@ -15,6 +14,7 @@ Public Class frmUserManagement
     End Function
 
     Private Sub frmUserManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtUser.Focus()
         Dim tmp As New ComputerUser
         tmp.CreateAdministrator()
 
@@ -259,21 +259,15 @@ Public Class frmUserManagement
     End Function
 
     Private Sub CheckUsername()
-        dbOpen()
-        Dim mysql As String = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
-        Dim cmd As OdbcCommand = New OdbcCommand(mysql, con)
-        Using reader As OdbcDataReader = cmd.ExecuteReader()
-            If reader.HasRows Then
-                ' User already exists
-                Dim result As DialogResult
-                result = MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                If result = DialogResult.OK Then
-                    txtUser.Focus()
-                End If
-                con.Close()
-                dbClose()
-            End If
-        End Using
+
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count >= 1 Then
+            MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtUser.Focus()
+        End If
+
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
@@ -437,6 +431,10 @@ Public Class frmUserManagement
     End Sub
 
     Private Sub txtFullname_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFullname.KeyPress
+        CheckUsername()
+    End Sub
+
+    Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
         CheckUsername()
     End Sub
 End Class
