@@ -59,24 +59,6 @@
    
     Private Sub DefaultResetPassword()
         Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
-        mySql2 &= " AND PRIVILEGE = '111111111|11111111111|11111|111110'"
-        Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
-
-        For Each dsNewRow As DataRow In ds2.Tables(filldata).Rows
-            With dsNewRow
-                Dim tmpUserID As String = dsNewRow.Item("USERID")
-                selectedUser.LoadUser(tmpUserID)
-                Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND USERID = '" & tmpUserID & "'"
-                Dim ds As DataSet = LoadSQL(mySql, filldata)
-
-                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Special, 111111)
-                SaveEntry(ds, False)
-            End With
-                Next
-    End Sub
-
-    Private Sub DefaultPrivilege()
-        Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
         mySql2 &= " AND PRIVILEGE = '111111111|11111111111|11110|111110'"
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
 
@@ -88,6 +70,24 @@
                 Dim ds As DataSet = LoadSQL(mySql, filldata)
 
                 ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Manager, 11111)
+                SaveEntry(ds, False)
+            End With
+                Next
+    End Sub
+
+    Private Sub DefaultPrivilege()
+        Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        mySql2 &= " AND PRIVILEGE = '111111111|11111111111|11111|111110'"
+        Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
+
+        For Each dsNewRow As DataRow In ds2.Tables(filldata).Rows
+            With dsNewRow
+                Dim tmpUserID As String = dsNewRow.Item("USERID")
+                selectedUser.LoadUser(tmpUserID)
+                Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND USERID = '" & tmpUserID & "'"
+                Dim ds As DataSet = LoadSQL(mySql, filldata)
+
+                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Special, 111111)
                 SaveEntry(ds, False)
             End With
         Next
@@ -104,7 +104,7 @@
 
     Private Sub RemoveReports()
         Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
-        mySql2 &= " AND PRIVILEGE = '111111111|11111111111|11111|111111'"
+        mySql2 &= " AND PRIVILEGE <> '111111111|11111111111|11111|111111'"
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
 
         For Each dsNewRow2 As DataRow In ds2.Tables(filldata).Rows
