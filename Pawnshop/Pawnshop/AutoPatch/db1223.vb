@@ -33,6 +33,10 @@
         Return String.Join("|", PrivList)
     End Function
 
+    ''' <summary>
+    ''' By Default, Appraiser sila tanan
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub DefaultAppraiser()
 
         Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
@@ -51,7 +55,8 @@
 
                 Next
     End Sub
-    Friend Function RemovePriv(ByVal setNum As priv_set, Optional ByVal val As String = "11110001111") As String
+
+    Private Function RemovePriv(ByVal setNum As priv_set, Optional ByVal val As String = "11110001111") As String
 
         If selectedUser.Privilege Is Nothing Then Return "?"
 
@@ -59,6 +64,7 @@
         PrivList(setNum) = val
         Return String.Join("|", PrivList)
     End Function
+
 
     Private Sub RemoveReports()
         Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' "
