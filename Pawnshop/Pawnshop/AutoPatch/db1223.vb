@@ -61,30 +61,22 @@
     End Function
 
     Private Sub RemoveReports()
-        Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' "
+        mySql2 &= " AND PRIVILEGE <> '111111111|11111111111|11110|111110'"
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
 
-        For Each dsNewRow2 As DataRow In ds2.Tables(filldata).Rows
-            With dsNewRow2
-                Dim tmpUserID As String = dsNewRow2.Item("USERID")
+        For Each dsNewRow As DataRow In ds2.Tables(filldata).Rows
+            With dsNewRow
+                Dim tmpUserID As String = dsNewRow.Item("USERID")
                 selectedUser.LoadUser(tmpUserID)
-
-                Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
-
+                Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='  AND USERID = '" & tmpUserID & "'"
+                'mySql &= " AND PRIVILEGE <> '111111111|11111111111|11110|111110"
                 Dim ds As DataSet = LoadSQL(mySql, filldata)
 
-                For Each dsNewRow As DataRow In ds.Tables(filldata).Rows
-                    With dsNewRow
-                        dsNewRow.Item("PRIVILEGE") = RemovePriv(priv_set.Supervisor)
-                    End With
-                    SaveEntry(ds, False)
-                Next
+                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = RemovePriv(priv_set.Supervisor)
+                SaveEntry(ds, False)
             End With
-        Next
-
 
         Next
-
     End Sub
-
 End Module
