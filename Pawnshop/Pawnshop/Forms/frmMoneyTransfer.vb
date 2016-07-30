@@ -600,9 +600,9 @@ Public Class frmMoneyTransfer
                         MOD_NAME &= "OUT"
 
                     Else
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name & " IN", .LoadLastIDNumberMoneyTransfer)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name, , , CashCount_Name & " IN", .LoadLastIDNumberMoneyTransfer)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name & " IN", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name & " IN", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
 
                     End If
