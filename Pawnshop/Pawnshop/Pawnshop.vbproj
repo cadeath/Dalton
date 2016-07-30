@@ -192,50 +192,6 @@
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Classes\rptActionReq.vb" />
-    <Compile Include="AutoPatch\DevForm\devClient.Designer.vb" />
-    <Compile Include="AutoPatch\DevForm\devClient.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\devVerifyESK.Designer.vb" />
-    <Compile Include="AutoPatch\DevForm\devVerifyESK.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_encrypt.Designer.vb">
-      <DependentUpon>dev_encrypt.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_encrypt.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_ORview.Designer.vb">
-      <DependentUpon>dev_ORview.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_ORview.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_Pawning.Designer.vb">
-      <DependentUpon>dev_Pawning.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_Pawning.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_print.Designer.vb">
-      <DependentUpon>dev_print.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_print.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_report.Designer.vb">
-      <DependentUpon>dev_report.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_report.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_runCmd.Designer.vb">
-      <DependentUpon>dev_runCmd.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_runCmd.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Developer\dev_ExtractToExcel.Designer.vb">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
     </Compile>
@@ -607,26 +563,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AutoPatch\DevForm\devClient.resx" />
-    <EmbeddedResource Include="AutoPatch\DevForm\devVerifyESK.resx" />
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_encrypt.resx">
-      <DependentUpon>dev_encrypt.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_ORview.resx">
-      <DependentUpon>dev_ORview.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_Pawning.resx">
-      <DependentUpon>dev_Pawning.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_print.resx">
-      <DependentUpon>dev_print.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_report.resx">
-      <DependentUpon>dev_report.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_runCmd.resx">
-      <DependentUpon>dev_runCmd.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ExtractToExcel.resx">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
     </EmbeddedResource>
