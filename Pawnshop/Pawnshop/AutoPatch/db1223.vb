@@ -2,12 +2,15 @@
         Const ALLOWABLE_VERSION As String = "1.2.2.2"
         Const LATEST_VERSION As String = "1.2.2.3"
     Private selectedUser As New ComputerUser
+    Private filldata As String = "tbl_Gamit"
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
 
         Try
 
             DefaultAppraiser()
+            DefaultResetPassword()
+            DefaultPrivilege()
 
             Database_Update(LATEST_VERSION)
             Log_Report("SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3")
@@ -22,8 +25,8 @@
         Special = 3
     End Enum
 
-    Friend Function AddPriv(ByVal setNum As priv_set, Optional ByVal val As Integer = 111111111) As String
-       
+    Private Function AddPriv(ByVal setNum As priv_set, ByVal val As Integer) As String
+
         If selectedUser.Privilege Is Nothing Then Return "?"
 
         Dim PrivList() As String = selectedUser.Privilege.Split("|")
@@ -32,7 +35,6 @@
     End Function
 
     Private Sub DefaultAppraiser()
-        Dim filldata As String = "tbl_Gamit"
         Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
 
@@ -43,10 +45,45 @@
                 Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND USERID = '" & tmpUserID & "'"
                 Dim ds As DataSet = LoadSQL(mySql, filldata)
 
-                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Encoder)
+                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Encoder, 111111111)
+                SaveEntry(ds, False)
+            End With
+        Next
+    End Sub
+   
+    Private Sub DefaultResetPassword()
+        Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        mySql2 &= " AND PRIVILEGE = '111111111|11111111111|11110|111110'"
+        Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
+
+        For Each dsNewRow As DataRow In ds2.Tables(filldata).Rows
+            With dsNewRow
+                Dim tmpUserID As String = dsNewRow.Item("USERID")
+                selectedUser.LoadUser(tmpUserID)
+                Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND USERID = '" & tmpUserID & "'"
+                Dim ds As DataSet = LoadSQL(mySql, filldata)
+
+                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Manager, 11111)
                 SaveEntry(ds, False)
             End With
         Next
     End Sub
 
+    Private Sub DefaultPrivilege()
+        Dim mySql2 As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        mySql2 &= " AND PRIVILEGE = '111111111|11111111111|11111|111110'"
+        Dim ds2 As DataSet = LoadSQL(mySql2, filldata)
+
+        For Each dsNewRow As DataRow In ds2.Tables(filldata).Rows
+            With dsNewRow
+                Dim tmpUserID As String = dsNewRow.Item("USERID")
+                selectedUser.LoadUser(tmpUserID)
+                Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND USERID = '" & tmpUserID & "'"
+                Dim ds As DataSet = LoadSQL(mySql, filldata)
+
+                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Special, 111111)
+                SaveEntry(ds, False)
+            End With
+        Next
+    End Sub
 End Module
