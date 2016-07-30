@@ -5,7 +5,6 @@
 #define MyAppVersion "1.2.2.9"
 #define MyAppPublisher "Perfecto Group of Companies"
 #define MyAppExeName "pawnshop.exe"
-#define SerialNumber "123456"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -22,14 +21,7 @@ OutputDir=D:\cadeath\Documents\DevInstaller\Pawnshop
 OutputBaseFilename=daltonps-1229
 SetupIconFile=..\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
 Compression=lzma
-UserInfoPage=yes
 SolidCompression=yes
-
-[Code]
-function CheckSerial(Serial: String): Boolean;
-begin
-  Result := Serial = '{#SerialNumber}';
-end;
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -38,8 +30,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Release\pawnshop.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
