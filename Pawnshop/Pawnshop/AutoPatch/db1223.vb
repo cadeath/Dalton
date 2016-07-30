@@ -40,12 +40,12 @@
             With dsNewRow
                 Dim tmpUserID As String = dsNewRow.Item("USERID")
                 selectedUser.LoadUser(tmpUserID)
-            End With
-            Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
-            Dim ds As DataSet = LoadSQL(mySql, filldata)
+                Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND USERID = '" & tmpUserID & "'"
+                Dim ds As DataSet = LoadSQL(mySql, filldata)
 
-            ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Encoder)
-            SaveEntry(ds, False)
+                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Encoder)
+                SaveEntry(ds, False)
+            End With
         Next
     End Sub
 
