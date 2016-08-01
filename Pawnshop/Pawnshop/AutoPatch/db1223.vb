@@ -98,16 +98,18 @@
         Next
     End Sub
 
-    Private Function RemovePriv(ByVal setNum As priv_set, ByVal val As String) As String
+    Private Function RemovePriv(ByVal setNum As priv_set) As String
 
         If selectedUser.Privilege Is Nothing Then Return "?"
 
         Dim PrivList() As String = selectedUser.Privilege.Split("|")
-        Dim strRemove As String
-        strRemove = PrivList(setNum).Substring(0, PrivList(setNum).Length - 7)
+        Dim strSubstring As String
+        strSubstring = PrivList(setNum)
+        If strSubstring.Substring(4, 1) = "1" Then Mid(strSubstring, 5, 1) = 0
+        If strSubstring.Substring(5, 1) = "1" Then Mid(strSubstring, 6, 1) = 0
+        If strSubstring.Substring(6, 1) = "1" Then Mid(strSubstring, 7, 1) = 0
 
-        strRemove &= val
-        PrivList(setNum) = strRemove
+        PrivList(setNum) = strSubstring
         Return String.Join("|", PrivList)
     End Function
 
@@ -124,7 +126,7 @@
                 Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND USERID = '" & tmpUserID & "'"
                 Dim ds As DataSet = LoadSQL(mySql, filldata)
 
-                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = RemovePriv(priv_set.Supervisor, "0001111")
+                ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = RemovePriv(priv_set.Supervisor)
                 SaveEntry(ds, False)
             End With
         Next
