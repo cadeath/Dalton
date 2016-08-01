@@ -271,9 +271,10 @@
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        If Not PasswordPolicy() Then Exit Sub
-        If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
-
+        If btnAdd.Text = "&Add" Then
+            If Not PasswordPolicy() Then Exit Sub
+            If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
+        End If
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.UserManagement
             If Not CheckOTP() Then Exit Sub
@@ -283,7 +284,6 @@
 
     End Sub
     Friend Sub AddUserManagement()
-        If Not PasswordPolicy() Then Exit Sub
         If btnAdd.Text = "&Add" Then
             Console.WriteLine("Priv is " & Privileger())
             Dim tmpUser As New ComputerUser
@@ -298,18 +298,30 @@
             tmpUser.SaveUser()
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
         Else
-            If EncryptString(txtPass1.Text) <> selectedUser.Password And txtPass2.Text = "" Then
-                MsgBox("Please input the password before changing", MsgBoxStyle.Critical, moduleName)
-                txtPass1.Focus()
-                Exit Sub
+
+            If Not txtPass1.Text = "" Then
+                If txtPass1.Text <> txtPass2.Text And Not txtPass2.Text = "" Then
+                    MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
+                    Exit Sub
+                ElseIf txtPass2.Text = "" Then
+                    MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
+                    Exit Sub
+                End If
+            ElseIf Not txtPass2.Text = "" Then
+                If txtPass1.Text <> txtPass2.Text And Not txtPass2.Text = "" Then
+                    MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
+                    Exit Sub
+                ElseIf txtPass1.Text = "" Then
+                    MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
+                    Exit Sub
+                End If
             End If
-            If txtPass1.Text <> txtPass2.Text And Not txtPass2.Text = "" Then
-                MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
-                Exit Sub
-            End If
+
             With selectedUser
                 .FullName = txtFullname.Text
-                .Password = txtPass1.Text
+                If Not txtPass1.Text = "" Then
+                    .Password = txtPass1.Text
+                End If
                 .Privilege = Privileger()
                 .UpdatePrivilege()
 
@@ -317,10 +329,10 @@
             End With
 
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
-        End If
+            End If
 
-        ClearFields()
-        LoadActive()
+            ClearFields()
+            LoadActive()
     End Sub
     Private Sub lvUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUsers.DoubleClick
         LoadUser()

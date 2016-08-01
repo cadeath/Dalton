@@ -36,11 +36,13 @@ Public Class frmChangePassword
         txtOldPassword.Clear()
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        clearfields()
+    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
+        Me.Close()
     End Sub
 
-    Private Sub frmChangePassword_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+    Private Sub txtConfirmPassword_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtConfirmPassword.KeyPress
+        If isEnter(e) Then
+            Button1.PerformClick()
+        End If
     End Sub
 End Class

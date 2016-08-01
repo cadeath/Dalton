@@ -201,6 +201,30 @@ Public Class ComputerUser
         End Get
     End Property
 
+    Private _ItemPulloutReport As Boolean
+    Public ReadOnly Property canItemPulloutReport() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _ItemPulloutReport
+        End Get
+    End Property
+
+    Private _SegregatedReport As Boolean
+    Public ReadOnly Property canSegregatedReport() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _SegregatedReport
+        End Get
+    End Property
+
+    Private _OutstandingReport As Boolean
+    Public ReadOnly Property canOutstandingReport() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _OutstandingReport
+        End Get
+    End Property
+
     Private _viewUserManagement As Boolean
     Public ReadOnly Property canViewUserManage() As Boolean
         Get
@@ -347,12 +371,15 @@ Public Class ComputerUser
         _journalEntries = IIf(parts(y).Substring(1, 1) = "1", True, False)
         _cashCount = IIf(parts(y).Substring(2, 1) = "1", True, False)
         _backUp = IIf(parts(y).Substring(3, 1) = "1", True, False)
+        _ItemPulloutReport = IIf(parts(y).Substring(4, 1) = "1", True, False)
+        _SegregatedReport = IIf(parts(y).Substring(5, 1) = "1", True, False)
+        _OutstandingReport = IIf(parts(y).Substring(6, 1) = "1", True, False)
         _viewUserManagement = IIf(parts(y).Substring(8, 1) = "1", True, False)
         _viewRates = IIf(parts(y).Substring(9, 1) = "1", True, False)
         _openStore = IIf(parts(y).Substring(10, 1) = "1", True, False)
 
-        privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _
-                    _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+        privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _
+                    _viewUserManagement, _viewRates, _openStore}
         For Each var As Boolean In privList
             If var Then _level = "Supervisor"
         Next
@@ -394,10 +421,11 @@ Public Class ComputerUser
 
             For cnt As Integer = 0 To TabCnt - 1
                 Select Case cnt
-                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
-                    Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
-                    Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow, _resetpassword}
-                    Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate, _addPrivilege}
+                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
+                    Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                    Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
+                    Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
+
                 End Select
 
                 For Each e In privList
@@ -441,6 +469,11 @@ Public Class ComputerUser
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub PriviledgeChecking()
+        ' TODO: JUNMAR
+        ' BY DEFAULT,
+        ' ADD PRIVILEGE 1 FOR ALL 1 PRIVILEGES OR SUPER USERS
+        ' ADD PRIVILEGE 0 FOR NON-ALL 1 PRIVILEGES AND NON SUPER USERS
+
         Dim privList() As Boolean = {}
         Dim privChunk As String = _privilege
         Dim finalChunk As String = ""
@@ -455,7 +488,7 @@ Public Class ComputerUser
                         finalChunk &= "0"
                     Next
                     finalChunk &= "|"
-                Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
@@ -513,7 +546,9 @@ Public Class ComputerUser
         Else
             With ds.Tables(0).Rows(0)
                 .Item("Username") = _userName
-                .Item("UserPass") = Encrypt(_password)
+                If frmUserManagement.txtPass1.Text <> "" Then
+                    .Item("UserPass") = Encrypt(_password)
+                End If
                 .Item("FullName") = _fullName
                 .Item("Privilege") = _privilege
             End With
