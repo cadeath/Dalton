@@ -319,7 +319,9 @@
 
             With selectedUser
                 .FullName = txtFullname.Text
-                .Password = txtPass1.Text
+                If Not txtPass1.Text = "" Then
+                    .Password = txtPass1.Text
+                End If
                 .Privilege = Privileger()
                 .UpdatePrivilege()
 
