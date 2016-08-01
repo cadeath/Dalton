@@ -469,6 +469,11 @@ Public Class ComputerUser
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub PriviledgeChecking()
+        ' TODO: JUNMAR
+        ' BY DEFAULT,
+        ' ADD PRIVILEGE 1 FOR ALL 1 PRIVILEGES OR SUPER USERS
+        ' ADD PRIVILEGE 0 FOR NON-ALL 1 PRIVILEGES AND NON SUPER USERS
+
         Dim privList() As Boolean = {}
         Dim privChunk As String = _privilege
         Dim finalChunk As String = ""

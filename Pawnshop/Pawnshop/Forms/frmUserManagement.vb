@@ -439,4 +439,5 @@
     Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
         CheckUsername()
     End Sub
+
 End Class

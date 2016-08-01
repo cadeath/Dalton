@@ -7,8 +7,8 @@
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
-            DefaultAppraiser()
-            DefaultResetPassword()
+            DefaultAppraiser() ' Add Appraiser Privilege
+            DefaultResetPassword() ' Add Reset Password
             DefaultPrivilege()
 
             RemoveReports()
@@ -19,6 +19,7 @@
             Log_Report("[1.2.2.3]" & ex.ToString)
         End Try
     End Sub
+
     Enum priv_set As Integer
         Encoder = 0
         Supervisor = 1
@@ -76,7 +77,7 @@
                 ds.Tables(filldata).Rows(0).Item("PRIVILEGE") = AddPriv(priv_set.Manager, 1)
                 SaveEntry(ds, False)
             End With
-                Next
+        Next
     End Sub
 
     Private Sub DefaultPrivilege()
