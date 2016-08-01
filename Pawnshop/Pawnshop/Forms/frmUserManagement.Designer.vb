@@ -385,7 +385,7 @@ Partial Class frmUserManagement
         'chkR4
         '
         Me.chkR4.AutoSize = True
-        Me.chkR4.Location = New System.Drawing.Point(145, 81)
+        Me.chkR4.Location = New System.Drawing.Point(108, 81)
         Me.chkR4.Name = "chkR4"
         Me.chkR4.Size = New System.Drawing.Size(63, 17)
         Me.chkR4.TabIndex = 8
@@ -395,31 +395,31 @@ Partial Class frmUserManagement
         'chkR3
         '
         Me.chkR3.AutoSize = True
-        Me.chkR3.Location = New System.Drawing.Point(145, 58)
+        Me.chkR3.Location = New System.Drawing.Point(108, 58)
         Me.chkR3.Name = "chkR3"
-        Me.chkR3.Size = New System.Drawing.Size(123, 17)
+        Me.chkR3.Size = New System.Drawing.Size(181, 17)
         Me.chkR3.TabIndex = 7
-        Me.chkR3.Text = "Outstanding Reports"
+        Me.chkR3.Text = "Outstanding Reports (Advanced)"
         Me.chkR3.UseVisualStyleBackColor = True
         '
         'chkR2
         '
         Me.chkR2.AutoSize = True
-        Me.chkR2.Location = New System.Drawing.Point(145, 35)
+        Me.chkR2.Location = New System.Drawing.Point(108, 35)
         Me.chkR2.Name = "chkR2"
-        Me.chkR2.Size = New System.Drawing.Size(121, 17)
+        Me.chkR2.Size = New System.Drawing.Size(179, 17)
         Me.chkR2.TabIndex = 6
-        Me.chkR2.Text = "Segregated Reports"
+        Me.chkR2.Text = "Segregated Reports (Advanced)"
         Me.chkR2.UseVisualStyleBackColor = True
         '
         'chkR1
         '
         Me.chkR1.AutoSize = True
-        Me.chkR1.Location = New System.Drawing.Point(145, 12)
+        Me.chkR1.Location = New System.Drawing.Point(108, 12)
         Me.chkR1.Name = "chkR1"
-        Me.chkR1.Size = New System.Drawing.Size(121, 17)
+        Me.chkR1.Size = New System.Drawing.Size(179, 17)
         Me.chkR1.TabIndex = 5
-        Me.chkR1.Text = "Item Pullout Reports"
+        Me.chkR1.Text = "Item Pullout Reports (Advanced)"
         Me.chkR1.UseVisualStyleBackColor = True
         '
         'chkBU
