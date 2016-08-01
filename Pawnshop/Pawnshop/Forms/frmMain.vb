@@ -7,6 +7,7 @@
         pButton.Enabled = Not st
 
         'File
+        ChangePasswordToolStrip.Enabled = Not st
         CloseOpenStore.Enabled = Not st
         UserManagementToolStripMenuItem.Enabled = Not st
         UpdateToolStripMenuItem.Enabled = Not st
@@ -445,18 +446,16 @@
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
-
-    Private Sub ChangePasswordToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangePasswordToolStripMenuItem.Click
-        frmChangePassword.Show()
-
-    End Sub
     Private Sub AuctionMonthlyJewelryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuctionMonthlyJewelryReportToolStripMenuItem.Click
         qryAuction.Show()
-
     End Sub
 
     Private Sub AuditReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditReportToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.AuditPrinLimit
         qryDate.Show()
+    End Sub
+
+    Private Sub ChangePasswordToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ChangePasswordToolStrip.Click
+        frmChangePassword.Show()
     End Sub
 End Class
