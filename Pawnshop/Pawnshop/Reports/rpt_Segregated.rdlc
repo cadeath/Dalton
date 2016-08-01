@@ -854,6 +854,7 @@
                         <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1038,7 +1039,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Principal.Value)</Value>
+                              <Value>=Sum(Fields!Principal.Value) or sum(Fields!Principal.Value)</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
