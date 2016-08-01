@@ -546,7 +546,9 @@ Public Class ComputerUser
         Else
             With ds.Tables(0).Rows(0)
                 .Item("Username") = _userName
-                .Item("UserPass") = Encrypt(_password)
+                If frmUserManagement.txtPass1.Text <> "" Then
+                    .Item("UserPass") = Encrypt(_password)
+                End If
                 .Item("FullName") = _fullName
                 .Item("Privilege") = _privilege
             End With
