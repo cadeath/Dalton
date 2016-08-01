@@ -187,10 +187,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.46355in</Width>
+              <Width>0.4948in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.73959in</Width>
+              <Width>0.69792in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -208,12 +208,13 @@
                             <TextRun>
                               <Value>Count</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -261,6 +262,7 @@
                             <TextRun>
                               <Value>Sum</Value>
                               <Style>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -371,7 +373,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Principal.Value)</Value>
                               <Style>
-                                <FontWeight>Bold</FontWeight>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -483,6 +485,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Principal.Value)</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                                 <TextDecoration>None</TextDecoration>
@@ -612,7 +615,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>0.86458in</Size>
+                <Size>0.9375in</Size>
                 <CellContents>
                   <Textbox Name="Textbox7">
                     <CanGrow>true</CanGrow>
@@ -669,7 +672,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>0.86458in</Size>
+                <Size>0.9375in</Size>
                 <CellContents>
                   <Textbox Name="AuctionDate">
                     <CanGrow>true</CanGrow>
@@ -723,7 +726,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>0.86458in</Size>
+                <Size>0.9375in</Size>
                 <CellContents>
                   <Textbox Name="AuctionDate2">
                     <CanGrow>true</CanGrow>
@@ -782,19 +785,19 @@
         <Top>0.02083in</Top>
         <Left>0.01563in</Left>
         <Height>1in</Height>
-        <Width>2.06772in</Width>
+        <Width>2.13022in</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
-          <FontSize>9pt</FontSize>
+          <FontSize>8.5pt</FontSize>
         </Style>
       </Tablix>
       <Line Name="Line1">
         <Top>1.16667in</Top>
         <Left>0.01042in</Left>
         <Height>0in</Height>
-        <Width>10.07292in</Width>
+        <Width>10.20834in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -824,7 +827,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>10.09376in</Width>
+  <Width>10.21876in</Width>
   <Page>
     <PageHeader>
       <Height>0.51389in</Height>
@@ -849,7 +852,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
           <Top>0.25694in</Top>
-          <Left>0.01042in</Left>
           <Height>0.25in</Height>
           <Width>2.51375in</Width>
           <Style>
@@ -915,7 +917,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox25</rd:DefaultName>
           <Top>0.26389in</Top>
-          <Left>8.59042in</Left>
+          <Left>8.71542in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>2</ZIndex>
@@ -932,7 +934,7 @@
         <Line Name="Line2">
           <Top>0.4861in</Top>
           <Height>0in</Height>
-          <Width>10.09376in</Width>
+          <Width>10.21876in</Width>
           <ZIndex>3</ZIndex>
           <Style>
             <Border>
@@ -1029,8 +1031,9 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>SEGREGATED ITEM LIST</Value>
+                  <Value>AUCTION MONTHLY REPORT - JEWELRIES</Value>
                   <Style>
+                    <FontStyle>Italic</FontStyle>
                     <FontSize>8pt</FontSize>
                   </Style>
                 </TextRun>
@@ -1041,9 +1044,9 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Left>4.2882in</Left>
+          <Left>3.96528in</Left>
           <Height>0.25in</Height>
-          <Width>1.85418in</Width>
+          <Width>2.52085in</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>
@@ -1075,7 +1078,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
           <Top>0.23958in</Top>
-          <Left>8.59042in</Left>
+          <Left>8.71542in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>3</ZIndex>
@@ -1108,7 +1111,8 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Left>8.60084in</Left>
+          <Top>0.01389in</Top>
+          <Left>8.72584in</Left>
           <Height>0.25in</Height>
           <Width>1.49292in</Width>
           <ZIndex>4</ZIndex>
@@ -1131,8 +1135,8 @@
     </PageFooter>
     <PageHeight>8.5in</PageHeight>
     <PageWidth>11in</PageWidth>
-    <LeftMargin>0.5in</LeftMargin>
-    <RightMargin>0.5in</RightMargin>
+    <LeftMargin>0.25in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
     <TopMargin>0.5in</TopMargin>
     <BottomMargin>0.5in</BottomMargin>
     <Style />

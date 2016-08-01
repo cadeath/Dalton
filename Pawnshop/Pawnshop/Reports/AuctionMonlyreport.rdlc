@@ -194,7 +194,7 @@
               <Width>0.26059in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.03441in</Width>
+              <Width>1.00316in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.30208in</Width>
@@ -1171,7 +1171,7 @@
         <Top>0.0418in</Top>
         <Left>0.05208in</Left>
         <Height>0.94792in</Height>
-        <Width>3.3092in</Width>
+        <Width>3.27795in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1409,8 +1409,9 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>SEGREGATED ITEM LIST</Value>
+                  <Value>AUCTION MONTHLY REPORT</Value>
                   <Style>
+                    <FontStyle>Italic</FontStyle>
                     <FontSize>8pt</FontSize>
                   </Style>
                 </TextRun>
@@ -1421,7 +1422,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Top>0.01389in</Top>
+          <Top>0.02778in</Top>
           <Left>2.90278in</Left>
           <Height>0.25in</Height>
           <Width>1.85418in</Width>
