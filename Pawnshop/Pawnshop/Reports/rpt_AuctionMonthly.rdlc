@@ -1749,8 +1749,9 @@ Fields!Appraiser.Value</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>SEGREGATED ITEM LIST</Value>
+                  <Value>AUCTION MONTHLY REPORT</Value>
                   <Style>
+                    <FontStyle>Italic</FontStyle>
                     <FontSize>8pt</FontSize>
                   </Style>
                 </TextRun>
