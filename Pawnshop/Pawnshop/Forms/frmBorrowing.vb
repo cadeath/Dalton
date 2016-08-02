@@ -120,4 +120,91 @@
         frmBorrowBrowse.Show()
     End Sub
 
+    Private Sub btnBrowseOldEsk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseOldEsk.Click
+        ofdEskFile.ShowDialog()
+        If ofdEskFile.FileName = Nothing Then Exit Sub
+        txtUrl.Text = ofdEskFile.FileName
+    End Sub
+    Private Function GetBorrowing(ByVal url As String) As Hashtable
+        If System.IO.File.Exists(txtUrl.Text) = False Then Return Nothing
+
+        Dim fs As New System.IO.FileStream(txtUrl.Text, IO.FileMode.Open)
+        Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
+
+        Dim hashTable As New Hashtable
+        Try
+            hashTable = bf.Deserialize(fs)
+        Catch ex As Exception
+            Console.WriteLine("It seems the file is being tampered.")
+            fs.Close()
+            Return Nothing
+        End Try
+        fs.Close()
+
+        Dim isValid As Boolean = False
+        If hashTable(5) = _
+            security.HashString( _
+                hashTable(0) & hashTable(1) & _
+                hashTable(2) & hashTable(3) & _
+                hashTable(4)) Then
+            isValid = True
+        Else
+            isValid = False
+        End If
+
+        If isValid Then Return hashTable
+        Return Nothing
+    End Function
+    Private Function GetBranchName(ByVal branchCode As String) As String
+        Dim mySql As String = "SELECT * FROM tblBranches WHERE SAPCODE = '" & branchCode & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("branchName")
+    End Function
+    Private Function GetIntegrity(ByVal hx As Hashtable) As Boolean
+        Dim xStr As String = security.HashString(hx(0) & hx(1) & hx(2) & hx(3) & hx(4))
+        If hx(5) = xStr Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    Private Sub btnUpload_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpload.Click
+        Dim ht As New Hashtable
+        ht = GetBorrowing(txtUrl.Text)
+        If ht Is Nothing Then Exit Sub
+
+        If Not GetIntegrity(ht) Then MsgBox("Invalid for file." & vbCr & "Please generate another key.", MsgBoxStyle.Critical) : Exit Sub
+        Dim refNum As String, TransDate As Date, eskBrancCode As String, Amount As Double, Remarks As String
+        refNum = ht(0) : TransDate = ht(1) : eskBrancCode = ht(2) : Amount = ht(3) : Remarks = ht(4)
+
+        If eskBrancCode <> branchcode Then MsgBox("This file is not for this branch", MsgBoxStyle.Critical) : Exit Sub
+
+        'Check Ref Duplication
+        Dim mySql As String = "SELECT * FROM tblBorrow WHERE RefNum = '" & refNum & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count > 0 Then
+            MsgBox("Transaction already uploaded", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Dim tmpBB As New Borrowings
+        With tmpBB
+            .ReferenceNumber = refNum
+            .TransactionDate = TransDate
+            .BranchCode = eskBrancCode
+            .BranchName = GetBranchName(branchcode)
+            .Amount = Amount
+            .Remarks = Remarks
+            .Status = "D"
+            .EncoderID = UserID
+
+            .SaveBorrowings()
+
+            AddJournal(.Amount, "Debit", "Revolving Fund", "To " & branchcode, "BORROW IN", , , "BORROW IN", .LastIDNumber)
+            AddJournal(.Amount, "Credit", "Due to/from Branches", "To " & branchcode, , , , "BORROW IN", .LastIDNumber)
+        End With
+
+        MsgBox("Borrowings Posted", MsgBoxStyle.Information)
+    End Sub
 End Class

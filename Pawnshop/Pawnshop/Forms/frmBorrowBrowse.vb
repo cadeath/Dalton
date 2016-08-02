@@ -270,4 +270,7 @@
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
 
+    Private Sub txtUrl_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtUrl.TextChanged
+
+    End Sub
 End Class

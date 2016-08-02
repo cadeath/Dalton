@@ -152,6 +152,7 @@ Partial Class frmBorrowBrowse
         Me.btnUpload.TabIndex = 5
         Me.btnUpload.Text = "&Upload Key"
         Me.btnUpload.UseVisualStyleBackColor = True
+        Me.btnUpload.Visible = False
         '
         'btnGenerate
         '
@@ -171,6 +172,7 @@ Partial Class frmBorrowBrowse
         Me.btnBrowse.TabIndex = 4
         Me.btnBrowse.Text = "..."
         Me.btnBrowse.UseVisualStyleBackColor = True
+        Me.btnBrowse.Visible = False
         '
         'txtUrl
         '
@@ -182,6 +184,7 @@ Partial Class frmBorrowBrowse
         Me.txtUrl.Size = New System.Drawing.Size(271, 22)
         Me.txtUrl.TabIndex = 6
         Me.txtUrl.Text = "C:\Documents and Settings"
+        Me.txtUrl.Visible = False
         '
         'Label3
         '
