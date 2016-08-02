@@ -525,7 +525,7 @@ Public Class ComputerUser
         getPrivilege()
     End Sub
 
-    Public Sub SaveUser(Optional ByVal isNew As Boolean = True, Optional ByVal NewPassword As Boolean = False)
+    Public Sub SaveUser(Optional ByVal isNew As Boolean = True, Optional ByVal NewPassword As String = "")
         mySql = "SELECT * FROM " & fillData
         If Not isNew Then mySql &= " WHERE UserID = " & _userID
 
@@ -546,7 +546,7 @@ Public Class ComputerUser
         Else
             With ds.Tables(0).Rows(0)
                 .Item("Username") = _userName
-                If NewPassword = True Then
+                If NewPassword <> "" Then
                     .Item("UserPass") = Encrypt(_password)
                 End If
                 .Item("FullName") = _fullName
