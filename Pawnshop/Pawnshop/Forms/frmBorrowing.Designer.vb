@@ -46,6 +46,7 @@ Partial Class frmBorrowing
         Me.txtUrl = New System.Windows.Forms.TextBox()
         Me.ofdEskFile = New System.Windows.Forms.OpenFileDialog()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.btnBrowse2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -231,22 +232,23 @@ Partial Class frmBorrowing
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.btnBrowse2)
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.btnUpload)
         Me.GroupBox2.Controls.Add(Me.btnBrowseOldEsk)
         Me.GroupBox2.Controls.Add(Me.txtUrl)
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 3)
+        Me.GroupBox2.Location = New System.Drawing.Point(7, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(536, 259)
+        Me.GroupBox2.Size = New System.Drawing.Size(534, 255)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         '
         'btnUpload
         '
         Me.btnUpload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpload.Location = New System.Drawing.Point(410, 99)
+        Me.btnUpload.Location = New System.Drawing.Point(167, 99)
         Me.btnUpload.Name = "btnUpload"
-        Me.btnUpload.Size = New System.Drawing.Size(75, 50)
+        Me.btnUpload.Size = New System.Drawing.Size(206, 50)
         Me.btnUpload.TabIndex = 8
         Me.btnUpload.Text = "&Upload Key"
         Me.btnUpload.UseVisualStyleBackColor = True
@@ -279,11 +281,21 @@ Partial Class frmBorrowing
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(401, 16)
+        Me.Label6.Location = New System.Drawing.Point(398, 12)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(129, 25)
         Me.Label6.TabIndex = 30
         Me.Label6.Text = "Borrowings"
+        '
+        'btnBrowse2
+        '
+        Me.btnBrowse2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBrowse2.Location = New System.Drawing.Point(15, 215)
+        Me.btnBrowse2.Name = "btnBrowse2"
+        Me.btnBrowse2.Size = New System.Drawing.Size(88, 29)
+        Me.btnBrowse2.TabIndex = 31
+        Me.btnBrowse2.Text = "&Browse"
+        Me.btnBrowse2.UseVisualStyleBackColor = True
         '
         'frmBorrowing
         '
@@ -329,4 +341,5 @@ Partial Class frmBorrowing
     Friend WithEvents txtUrl As System.Windows.Forms.TextBox
     Friend WithEvents ofdEskFile As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowse2 As System.Windows.Forms.Button
 End Class

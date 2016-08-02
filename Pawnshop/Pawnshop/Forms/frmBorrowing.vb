@@ -207,4 +207,8 @@
 
         MsgBox("Borrowings Posted", MsgBoxStyle.Information)
     End Sub
+
+    Private Sub btnBrowse2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse2.Click
+        frmBorrowBrowse.Show()
+    End Sub
 End Class
