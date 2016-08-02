@@ -175,6 +175,7 @@
     <Compile Include="AutoPatch\db122.vb" />
     <Compile Include="AutoPatch\db1221.vb" />
     <Compile Include="AutoPatch\db1222.vb" />
+    <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -196,54 +197,58 @@
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Classes\rptActionReq.vb" />
-    <Compile Include="AutoPatch\DevForm\devClient.Designer.vb" />
-    <Compile Include="AutoPatch\DevForm\devClient.vb">
+    <Compile Include="Developer\devClient.Designer.vb">
+      <DependentUpon>devClient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\devClient.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\devVerifyESK.Designer.vb" />
-    <Compile Include="AutoPatch\DevForm\devVerifyESK.vb">
+    <Compile Include="Developer\devVerifyESK.Designer.vb">
+      <DependentUpon>devVerifyESK.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_encrypt.Designer.vb">
+    <Compile Include="Developer\dev_encrypt.Designer.vb">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_encrypt.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_ORview.Designer.vb">
-      <DependentUpon>dev_ORview.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_ORview.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_Pawning.Designer.vb">
-      <DependentUpon>dev_Pawning.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_Pawning.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_print.Designer.vb">
-      <DependentUpon>dev_print.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_print.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_report.Designer.vb">
-      <DependentUpon>dev_report.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_report.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_runCmd.Designer.vb">
-      <DependentUpon>dev_runCmd.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_runCmd.vb">
+    <Compile Include="Developer\dev_encrypt.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_ExtractToExcel.Designer.vb">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_ExtractToExcel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_ORview.Designer.vb">
+      <DependentUpon>dev_ORview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_ORview.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_Pawning.Designer.vb">
+      <DependentUpon>dev_Pawning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_Pawning.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_print.Designer.vb">
+      <DependentUpon>dev_print.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_print.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_report.Designer.vb">
+      <DependentUpon>dev_report.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_runCmd.Designer.vb">
+      <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ab.Designer.vb">
@@ -280,6 +285,12 @@
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmBackUpDataSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.Designer.vb">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\AuditReports.vb" />
@@ -611,28 +622,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AutoPatch\DevForm\devClient.resx" />
-    <EmbeddedResource Include="AutoPatch\DevForm\devVerifyESK.resx" />
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_encrypt.resx">
+    <EmbeddedResource Include="Developer\devClient.resx">
+      <DependentUpon>devClient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\devVerifyESK.resx">
+      <DependentUpon>devVerifyESK.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_ORview.resx">
-      <DependentUpon>dev_ORview.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_Pawning.resx">
-      <DependentUpon>dev_Pawning.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_print.resx">
-      <DependentUpon>dev_print.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_report.resx">
-      <DependentUpon>dev_report.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_runCmd.resx">
-      <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ExtractToExcel.resx">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_ORview.resx">
+      <DependentUpon>dev_ORview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_Pawning.resx">
+      <DependentUpon>dev_Pawning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_print.resx">
+      <DependentUpon>dev_print.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_report.resx">
+      <DependentUpon>dev_report.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_runCmd.resx">
+      <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
@@ -645,6 +660,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">

@@ -47,6 +47,7 @@ Partial Class frmBackUpDataSettings
         '
         'txtPath2
         '
+        Me.txtPath2.Enabled = False
         Me.txtPath2.Location = New System.Drawing.Point(6, 19)
         Me.txtPath2.Name = "txtPath2"
         Me.txtPath2.Size = New System.Drawing.Size(206, 20)

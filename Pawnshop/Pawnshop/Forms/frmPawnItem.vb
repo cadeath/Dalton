@@ -913,13 +913,13 @@ Public Class frmPawnItem
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpUser As New ComputerUser
             tmpUser.LoadUserByRow(dr)
-            'If tmpUser.canAppraise Then
-            '    Console.WriteLine(tmpUser.FullName & " loaded.")
-            '    appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-            '    cboAppraiser.Items.Add(tmpUser.UserName)
-            'End If
-            appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-            cboAppraiser.Items.Add(tmpUser.UserName)
+            If tmpUser.canAppraise Then
+                Console.WriteLine(tmpUser.FullName & " loaded.")
+                appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+                cboAppraiser.Items.Add(tmpUser.UserName)
+            End If
+            'appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+            'cboAppraiser.Items.Add(tmpUser.UserName)
         Next
     End Sub
 

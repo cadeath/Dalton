@@ -16,8 +16,8 @@ Public Class frmBackUpDataSettings
             sw.WriteLine("echo PLEASE CLOSE THE PAWNSHOP SYSTEM")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM IS BACKING UP")
-            sw.WriteLine("rar a " & txtPath2.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy W3W1LH4CKU.FDB rar a -ep -hp" _
-                         & BranchCode & "MIS -m0") 'Password = MISJUNMAR(uppercase)
+            sw.WriteLine("rar a " & txtPath2.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy W3W1LH4CKU.FDB -hp" _
+                         & BranchCode & "MIS") 'Password = MISJUNMAR(uppercase)
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")

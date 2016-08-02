@@ -2,7 +2,9 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Dalton Pawnshop"
-#define MyAppVersion "1.2.2.6"
+
+#define MyAppVersion "1.2.2.10"
+
 #define MyAppPublisher "Perfecto Group of Companies"
 #define MyAppExeName "pawnshop.exe"
 
@@ -17,9 +19,9 @@ AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\cdt-S0ft\Dalton Pawnshop
 DefaultGroupName=cdt-S0ft\Dalton Pawnshop
-OutputDir=C:\Users\MIS\Desktop\ExtractHere
-OutputBaseFilename=daltonps-1226
-SetupIconFile=C:\Users\MIS\Documents\GitHub\Dalton\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
+OutputDir=D:\cadeath\Documents\DevInstaller\Pawnshop
+OutputBaseFilename=daltonps-12210
+SetupIconFile=..\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
 Compression=lzma
 SolidCompression=yes
 

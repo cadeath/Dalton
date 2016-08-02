@@ -20,7 +20,7 @@ Module mod_system
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
     Public PROTOTYPE As Boolean = False
-    Public ADS_ESKIE As Boolean = True
+    Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
 
     Public CurrentDate As Date = Now
