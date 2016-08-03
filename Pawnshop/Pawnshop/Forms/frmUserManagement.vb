@@ -38,7 +38,7 @@
             txtUser.Text = .UserName
             txtFullname.Text = .FullName
         End With
-
+        lblUserid.Text = idx
         LoadPrivilege()
     End Sub
 
@@ -449,5 +449,26 @@
 
     Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
         CheckUsername()
+    End Sub
+
+    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.UserManagementDelete
+            If Not CheckOTP() Then Exit Sub
+        End If
+    End Sub
+
+    Friend Sub UserDelete()
+        dbOpen()
+        Dim filldata As String = "TBL_GAMIT"
+        Dim mysql As String = "DELETE FROM " & filldata & " WHERE USERID = '" & lblUserid.Text & "'"
+        Dim Command As New Odbc.OdbcCommand
+        Command.Connection = con
+        Command.CommandText = mysql
+        Command.ExecuteNonQuery()
+
+        MsgBox("User " & txtFullname.Text & " Deleted", MsgBoxStyle.Question, moduleName)
+        LoadActive()
+        dbClose()
     End Sub
 End Class
