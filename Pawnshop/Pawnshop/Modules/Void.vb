@@ -1,6 +1,6 @@
 ﻿Module Void
     Friend Sub TransactionVoidSave(ByVal Mod_name As String, ByVal Encoder As Integer, ByVal Voidby As Integer, Optional ByVal Remarks As String = "")
-        Dim tblName As String = "tblvoid", mysql As String, ds As DataSet
+        Dim tblName As String = "TBLVOID", mysql As String, ds As DataSet
         mysql = "SELECT * FROM " & tblName
 
         ds = LoadSQL(mysql, tblName)
