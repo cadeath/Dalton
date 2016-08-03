@@ -71,7 +71,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -86,6 +86,7 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
 
+      
     End Sub
 
     Private Sub DollarExtract()
@@ -122,7 +123,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -177,7 +178,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -229,7 +230,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -295,7 +296,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -365,7 +366,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -376,7 +377,8 @@ Public Class ExtractDataFromDatabase
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
         pro.CreateNoWindow = False
-        pro.WindowStyle = ProcessWindowStyle.Hidden
+        pro.WindowStyle = ProcessWindowStyle.Normal
+
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
 
@@ -418,7 +420,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -474,7 +476,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -524,7 +526,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -590,7 +592,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -637,7 +639,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("echo Extracting. . .")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
-            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar -agMMddyyyy " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
             sw.WriteLine("cls ")
             sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
             sw.WriteLine("pause")
@@ -673,24 +675,30 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub btnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnExtract.Click
+        Dim sd As Date = MonCalendar.SelectionStart
+        Dim str As String = sd
+        Dim filename As String = str.Replace("/"c, "_"c)
+
         btnExtract.Enabled = False
         lblTransactioName.Visible = True
         If rbDaily.Checked Then ExtractType = "Daily"
         If rbmonthly.Checked Then ExtractType = "Monthly"
 
         Select Case ExtractType
+
             Case "Daily"
                 ExtractAllDaily()
-
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+                My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Daily" & mod_system.BranchCode & ".rar", "Daily" & mod_system.BranchCode & "" & filename & ".rar")
 
             Case "Monthly"
                 ExtractALLMonthly()
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+                My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Monthly" & mod_system.BranchCode & ".rar", "Monthly" & mod_system.BranchCode & "" & filename & ".rar")
 
         End Select
 
@@ -701,9 +709,6 @@ Public Class ExtractDataFromDatabase
             File.Delete(myFile)
         Next
         lblTransactioName.Visible = False
-    End Sub
-
-    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs)
 
     End Sub
 End Class
