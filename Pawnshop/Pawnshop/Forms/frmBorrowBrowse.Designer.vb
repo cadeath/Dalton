@@ -211,7 +211,7 @@ Partial Class frmBorrowBrowse
         'ColumnHeader5
         '
         Me.ColumnHeader5.Text = "Particulars"
-        Me.ColumnHeader5.Width = 94
+        Me.ColumnHeader5.Width = 148
         '
         'btnView
         '

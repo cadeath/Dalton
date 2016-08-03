@@ -122,10 +122,6 @@
         LoadBorrowings()
     End Sub
 
-    Private Sub lvBorrowings_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvBorrowings.DoubleClick
-        btnView.PerformClick()
-    End Sub
-
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
 
@@ -187,7 +183,7 @@
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
 
-    Private Sub txtUrl_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
+    Private Sub lvBorrowings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvBorrowings.Click
+        btnView.PerformClick()
     End Sub
 End Class
