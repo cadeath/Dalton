@@ -108,7 +108,7 @@
             MsgBox("You cannot void transactions in a DIFFERENT date", MsgBoxStyle.Critical)
             Exit Sub
         End If
-
+        'TransactionVoidSave("DOLLAR", )
         tmpLoad.VoidTransaction(ans)
 
         Dim amt As Double = tmpLoad.NetAmount
