@@ -318,19 +318,22 @@
             End If
 
             With selectedUser
-                .FullName = txtFullname.Text
                 If Not txtPass1.Text = "" Then
+                    .FullName = txtFullname.Text
                     .Password = txtPass1.Text
+                    .Privilege = Privileger()
+                    .UpdatePrivilege()
+                    .SaveUser(False, txtPass1.Text)
+                Else
+                    .FullName = txtFullname.Text
+                    .Privilege = Privileger()
+                    .UpdatePrivilege()
+                    .SaveUser(False)
                 End If
-                .Privilege = Privileger()
-                .UpdatePrivilege()
-
-                .SaveUser(False)
             End With
 
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
             End If
-
             ClearFields()
             LoadActive()
     End Sub
