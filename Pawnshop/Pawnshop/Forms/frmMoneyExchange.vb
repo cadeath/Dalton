@@ -141,6 +141,7 @@
 
     Private Sub btnsave_Click(sender As System.Object, e As System.EventArgs) Handles btnsave.Click
         If Not isValid() Then Exit Sub
+        If txtDenomination1.Text = 0 Or txtDenomination1.Text = Nothing Then Exit Sub
         If txtSerial.Text = "" Then
             MsgBox("Please fill the Serial", MsgBoxStyle.Information, "Dollar")
             txtSerial.Focus()

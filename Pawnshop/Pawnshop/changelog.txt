@@ -4,6 +4,7 @@ Version 1.2.2.10
  - Add New Privileges
  - Include Appraiser
  - Include Reset Password
+ - Include Advance Report
 
 Version 1.2.2.9
  - Fix Monthly computation for Cellphone

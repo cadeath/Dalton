@@ -236,7 +236,7 @@
 
         mySql = "SELECT * FROM tblInsurance "
         mySql &= String.Format("WHERE transDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
-
+        mySql &= " AND STATUS <> 'V'"
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
         rptPara.Add("branchName", branchName)
@@ -250,6 +250,7 @@
 
         mySql = "SELECT * FROM tblInsurance "
         mySql &= String.Format("WHERE transDate = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= " AND STATUS <> 'V'"
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToString("MMM dd, yyyy"))
@@ -452,7 +453,7 @@
         Dim mySql As String = "SELECT LOGS_ID, MOD_NAME, CAST(TIMELY AS DATE)AS TIMELY FROM TBL_DAILYTIMELOG "
         mySql &= "WHERE HASCUSTOMER = '1' AND "
         mySql &= String.Format(" TIMELY BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
-        'mySql &= "GROUP BY MOD_NAME ORDER BY MOD_NAME"
+        mySql &= " AND REMARKS NOT LIKE '%VOID%'"
 
         Console.WriteLine(mySql)
 
