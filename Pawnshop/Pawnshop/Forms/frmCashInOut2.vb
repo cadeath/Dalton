@@ -49,16 +49,17 @@
                         Case cio.Category.StartsWith("GPRS")
                             MOD_NAME = "GPRS"
                         Case Else
-                            AddTimelyLogs(MOD_NAME, cio.Transaction, cio.Amount, False)
+                            AddTimelyLogs(MOD_NAME, cio.Transaction, cio.Amount, False, , cio.LastIDNumber)
                     End Select
             End Select
-            AddTimelyLogs(MOD_NAME, cio.Transaction, cio.Amount)
+            AddTimelyLogs(MOD_NAME, cio.Transaction, cio.Amount, , , cio.LastIDNumber)
         Next
 
         MsgBox("Information Posted", MsgBoxStyle.Information)
         CIOtransactions = New CollectionCIO
         btnCashIn.PerformClick()
         LineNum = 1
+        Me.Close()
     End Sub
     ''' <summary>
     ''' add data to listview

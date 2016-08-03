@@ -7,6 +7,7 @@
         pButton.Enabled = Not st
 
         'File
+        ChangePasswordToolStrip.Enabled = Not st
         CloseOpenStore.Enabled = Not st
         UserManagementToolStripMenuItem.Enabled = Not st
         UpdateToolStripMenuItem.Enabled = Not st
@@ -39,9 +40,10 @@
         ToolStripMenuItem2.Enabled = Not st 'Monthly Report
         SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
         CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
-        AuditReportToolStripMenuItem.Enabled = Not st
+        AuctionMonthlyJewelryReportToolStripMenuItem.Enabled = Not st 'Auction MOnthly
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
+        AuditReportToolStripMenuItem.Enabled = Not st
         LoanRegisterToolStripMenuItem.Enabled = Not st
         MoneyTransferToolStripMenuItem.Enabled = Not st
         InsuranceToolStripMenuItem.Enabled = Not st
@@ -60,6 +62,7 @@
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'Generate_QR()
         Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, " <<DEVELOPER MODE>>", "")
         Me.Text &= IIf(mod_system.PROTOTYPE, " !!PROTOTYPE!!", "")
         If Not ConfiguringDB() Then MsgBox("DATABASE CONNECTION PROBLEM", MsgBoxStyle.Critical) : Exit Sub
@@ -296,7 +299,8 @@
             Exit Sub
         End If
 
-        frmBackup.Show()
+        'frmBackup.Show()
+        frmBackUpDataSettings.Show()
     End Sub
 
     Private Sub UpdateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UpdateToolStripMenuItem.Click
@@ -364,8 +368,8 @@
     End Sub
 
     Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
-        qryDate.FormType = qryDate.ReportType.OutStanding
-        qryDate.Show()
+        qryPullOut_List.FormType = qryPullOut_List.DailyReport.Outstanding
+        qryPullOut_List.Show()
     End Sub
 
     Private Sub RateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RateToolStripMenuItem.Click
@@ -384,6 +388,7 @@
 
     Private Sub AboutUsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
         'ab.Show()
+        ab2.TopMost = True
         ab2.Show()
     End Sub
 
@@ -398,6 +403,7 @@
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
+        qryPullOut_List.FormType = qryPullOut_List.DailyReport.Pullout
         qryPullOut_List.Show()
     End Sub
 
@@ -440,8 +446,16 @@
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
 
-    Private Sub AndAboveToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AndAboveToolStripMenuItem.Click
+    Private Sub AuctionMonthlyJewelryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuctionMonthlyJewelryReportToolStripMenuItem.Click
+        qryAuction.Show()
+    End Sub
+
+    Private Sub AuditReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditReportToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.AuditPrinLimit
         qryDate.Show()
+    End Sub
+
+    Private Sub ChangePasswordToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ChangePasswordToolStrip.Click
+        frmChangePassword.Show()
     End Sub
 End Class

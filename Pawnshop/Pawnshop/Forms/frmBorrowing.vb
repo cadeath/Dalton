@@ -1,24 +1,19 @@
 ﻿Public Class frmBorrowing
 
     Const MOD_NAME As String = "BORROWINGS"
-    ''' <summary>
-    ''' load the clearfields, loadlastrefnum and loadbranches method
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
+    Dim currentBornum As Integer = GetOption("BorrowingLastNum")
+    Dim branchcode As String = GetOption("BranchCode")
+    Dim newborrow = String.Format("{1}{0:000000}", currentBornum, BranchCode)
+
     Private Sub frmBorrowing_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadLastRefNum()
         LoadBranches()
     End Sub
-    ''' <summary>
-    ''' 
-    ''' </summary>
-    ''' <remarks></remarks>
+
     Private Sub LoadLastRefNum()
         Dim num As Integer = GetOption("BorrowingLastNum")
-        txtRef.Text = String.Format("{1}{0:000000}", num, BranchCode)
+        txtRef.Text = String.Format("{1}{0:000000}", num, branchcode)
     End Sub
 
     Private Sub AddRefNum()
@@ -43,7 +38,6 @@
         For cnt As Integer = 0 To MaxCount - 1
             str(cnt) = ds.Tables(0).Rows(cnt).Item("BranchName")
         Next
-
         cboBranch.Items.AddRange(str)
     End Sub
 
@@ -58,16 +52,27 @@
     Private Function GetBranchCode(ByVal branchName As String) As String
         Dim mySql As String = "SELECT * FROM tblBranches WHERE BranchName = '" & branchName & "'"
         Dim ds As DataSet = LoadSQL(mySql)
-
         Return ds.Tables(0).Rows(0).Item("SapCode")
+    End Function
+
+    Private Function BorrowingNum() As Boolean
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT DISTINCT REFNUM FROM tblBORROW "
+        mySql &= "WHERE REFNUM = '" & newborrow & "'"
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("Borrowing# " & newborrow & " already existed.", MsgBoxStyle.Critical) : Return False
+        End If
+        Return True
     End Function
 
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If Not isValid() Then Exit Sub
+
+        If Not BorrowingNum() Then : Exit Sub
+        End If
+
         If Not sfdMoneyFile.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
-
         Dim fileSave As String = sfdMoneyFile.FileName
-
         Dim saveBorrow As New Borrowings
         With saveBorrow
             .ReferenceNumber = txtRef.Text
@@ -82,8 +87,10 @@
             .SaveBorrowings()
             AddRefNum()
 
-            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & "To " & BranchCode, "BORROW OUT", TransType:="BORROWINGS")
-            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & "To " & BranchCode, TransType:="BORROWINGS")
+            AddJournal(.Amount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber & " To " & branchcode, "BORROW OUT", , , "BORROWINGS", .LastIDNumber)
+            AddJournal(.Amount, "Debit", "Due to/from Branches", "Ref# " & .LastIDNumber & " To " & branchcode, , , , "BORROWINGS", .LastIDNumber)
+            AddTimelyLogs(MOD_NAME, String.Format("SENT MONEY TO {0} - Php {1:#,##0.00}", saveBorrow.BranchCode, saveBorrow.Amount), saveBorrow.Amount, False, , .LastIDNumber)
+
         End With
 
         Dim brwFile As New Hashtable
@@ -93,31 +100,23 @@
             .Add(2, saveBorrow.BranchCode) 'BranchCode
             .Add(3, saveBorrow.Amount) 'Amount
             .Add(4, saveBorrow.Remarks) 'Remarks
+
         End With
 
-        AddTimelyLogs(MOD_NAME, String.Format("SENT MONEY TO {0} - Php {1:#,##0.00}", saveBorrow.BranchCode, saveBorrow.Amount), saveBorrow.Amount, False)
-
+       
         'Generate File
         CreateEsk(fileSave, brwFile)
-
         MsgBox("Saved!", MsgBoxStyle.Information)
         Me.Close()
     End Sub
 
-    Private Function isValid() As Boolean
+  Private Function isValid() As Boolean
         If cboBranch.Text = "" Then cboBranch.Focus() : Return False
         If txtAmount.Text = "" Then txtAmount.Focus() : Return False
         If txtParticulars.Text = "" Then txtParticulars.Focus() : Return False
-
         Return True
     End Function
-    ''' <summary>
-    ''' show form frmborrowbrowse
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+   Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmBorrowBrowse.Show()
     End Sub
 

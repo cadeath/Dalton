@@ -7,14 +7,13 @@
 Friend Module database
     Public con As OdbcConnection
     Public ReaderCon As OdbcConnection
-    'Friend dbName As String = "..\..\sample.FDB"
     Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.2.2" 'Database version.
+    Private DBversion As String = "1.2.2.3" 'Database version.
     Private language() As String = _
         {"Connection error failed."} 'verification if the database is connected.
     ''' <summary>
@@ -204,6 +203,7 @@ Friend Module database
     Public Sub dbReaderClose()
         ReaderCon.Close()
     End Sub
+
     ''' <summary>
     ''' This function select all data from tblmaintenance.
     ''' </summary>
@@ -222,6 +222,8 @@ Friend Module database
 
         Return ret
     End Function
+   
+
     ''' <summary>
     ''' This module where select all data from tblmaintenance.
     ''' </summary>

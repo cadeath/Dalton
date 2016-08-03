@@ -545,7 +545,7 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Principal.Value)</Value>
+                              <Value>=Sum(Fields!Principal.Value) or Sum(Fields!Principal.Value)</Value>
                               <Style>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>
                               </Style>
@@ -637,7 +637,6 @@ Expiry</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1135,7 +1134,7 @@ Fields!Description.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Principal.Value)</Value>
+                              <Value>=Sum(Fields!Principal.Value) or Sum(Fields!Principal.Value)</Value>
                               <Style>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                               </Style>
@@ -1207,7 +1206,7 @@ Fields!Description.Value)</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Sum(Fields!Principal.Value)</Value>
+                              <Value>=Sum(Fields!Principal.Value) or Sum(Fields!Principal.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>'Php' #,0.00;('Php' #,0.00);'-'</Format>

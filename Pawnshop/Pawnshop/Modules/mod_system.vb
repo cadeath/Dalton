@@ -1,4 +1,6 @@
 ﻿' Changelog
+' v2 7/28/16
+'  - Added ExtractToExcel
 ' v1.4 2/17/16
 '  - Log Module
 ' v1.3 11/19/15
@@ -9,6 +11,7 @@
 '  - Added decimal . in DigitOnly
 '  - Added isMoney
 
+Imports Microsoft.Office.Interop
 Module mod_system
     ''' <summary>
     ''' This region declare the neccessary variable in this system.
@@ -16,8 +19,8 @@ Module mod_system
     ''' <remarks></remarks>
 #Region "Global Variables"
     Public DEV_MODE As Boolean = False
-    Public PROTOTYPE As Boolean = True
-    Public ADS_ESKIE As Boolean = True
+    Public PROTOTYPE As Boolean = False
+    Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
 
     Public CurrentDate As Date = Now
@@ -46,8 +49,7 @@ Module mod_system
 #End Region
 
 #Region "Store"
-    Private storeDB As String = "tblDaily"
-
+    Private storeDB As String = "tblDaily" 'declare storeDB as string and initialize by tblDaily.
     ''' <summary>
     ''' This function will open the store.
     ''' if the store is open then this function select all data from storeDB. 
@@ -145,8 +147,8 @@ Module mod_system
             tmpPawnItem.Status = "S"
             tmpPawnItem.SaveTicket(False)
 
-            AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
-            AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False)
+            AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
+            AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
 
             Console.WriteLine("PT: " & tmpPawnItem.PawnTicket)
         Next
@@ -185,7 +187,6 @@ Module mod_system
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
-
         'if dataset read data then then cc will hold cashcount in the currentdate
         'the user information will be save.
         If ds.Tables(storeDB).Rows.Count = 1 Then
@@ -229,24 +230,35 @@ Module mod_system
                 'tmpOverShort = Math.Abs(tmpOverShort)
                 If AsPerComputation < cc Then
                     'Overage
-                    AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False)
-                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False)
+                    AddJournal(tmpOverShort, "Debit", "Revolving Fund", , "CASH COUNT", False, , "CloseStore", dailyID)
+                    AddJournal(tmpOverShort, "Credit", "Cashier's Overage(Shortage)", , , False, , "CloseStore", dailyID)
                 Else
                     'Shortage
                     tmpOverShort = Math.Abs(tmpOverShort)
-                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False)
-                    AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False)
+                    AddJournal(tmpOverShort, "Debit", "Cashier's Overage(Shortage)", , , False, , "CloseStore", dailyID)
+                    AddJournal(tmpOverShort, "Credit", "Revolving Fund", , "CASH COUNT", False, , "CloseStore", dailyID)
                 End If
             End If
 
             UpdateOptions("CurrentBalance", cc)
             MsgBox("Thank you! Take care and God bless", MsgBoxStyle.Information)
         Else
-            Log_Report("[CashCount] " & mySql)
             MsgBox("Error in closing store" + vbCr + "Contact your IT Department", MsgBoxStyle.Critical)
         End If
     End Sub
+
+
+    Public Function LoadLastIDNumberDaily() As Single
+        Dim mySql As String = "SELECT * FROM TBLDAILY ORDER BY ID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("ID")
+    End Function
 #End Region
+
     ''' <summary>
     ''' This function has two arguments.
     ''' declaraton UseShellExecute as boolean and RedirectStandardOutput as boolean.
@@ -422,13 +434,71 @@ Module mod_system
         Dim mySql As String, fillData As String = "TBLCASH"
         mySql = "SELECT * FROM " & fillData
         mySql &= String.Format(" WHERE TRANSNAME = '{0}'", TRANS)
-
+        '"REMARKS LIKE '%{0}%'", srcStr)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         ds = LoadSQL(mySql, fillData)
 
         ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = VALUE
         database.SaveEntry(ds, False)
         Console.WriteLine("SAP Account Changed")
+    End Sub
+
+    ''' <summary>
+    ''' Extract Data from the database
+    ''' </summary>
+    ''' <param name="headers">Array of HEADERS</param>
+    ''' <param name="mySql">SQL Statement</param>
+    ''' <param name="dest">Excel File Destination</param>
+    ''' <remarks></remarks>
+    Friend Sub ExtractToExcel(headers As String(), mySql As String, dest As String)
+        If dest = "" Then Exit Sub
+
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        If oXL Is Nothing Then
+            MessageBox.Show("Excel is not properly installed!!")
+            Return
+        End If
+
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oXL = CreateObject("Excel.Application")
+        oXL.Visible = False
+
+        oWB = oXL.Workbooks.Add
+        oSheet = oWB.ActiveSheet
+        oSheet.Name = "OUTSTANDING"
+
+        ' HEADERS
+        Dim cnt As Integer = 0
+        For Each hr In headers
+            cnt += 1 : oSheet.Cells(1, cnt).value = hr
+        Next
+
+        ' EXTRACTING
+        Console.Write("Extracting")
+        Dim rowCnt As Integer = 2
+        For Each dr As DataRow In ds.Tables(0).Rows
+            For colCnt As Integer = 0 To headers.Count - 1
+                oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt)
+            Next
+            rowCnt += 1
+
+            Console.Write(".")
+            Application.DoEvents()
+        Next
+
+        oWB.SaveAs(dest)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        Console.WriteLine("Data Extracted")
     End Sub
 
 #Region "Log Module"

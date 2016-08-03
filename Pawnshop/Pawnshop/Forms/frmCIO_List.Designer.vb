@@ -37,6 +37,9 @@ Partial Class frmCIO_List
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
+        Me.lblCashID = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.TextBox()
+        Me.lblCategory = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -151,11 +154,40 @@ Partial Class frmCIO_List
         Me.btnVoid.Text = "&Void"
         Me.btnVoid.UseVisualStyleBackColor = True
         '
+        'lblCashID
+        '
+        Me.lblCashID.AutoSize = True
+        Me.lblCashID.Location = New System.Drawing.Point(93, 436)
+        Me.lblCashID.Name = "lblCashID"
+        Me.lblCashID.Size = New System.Drawing.Size(81, 13)
+        Me.lblCashID.TabIndex = 5
+        Me.lblCashID.Text = "CashIN/OUTID"
+        Me.lblCashID.Visible = False
+        '
+        'lblType
+        '
+        Me.lblType.Location = New System.Drawing.Point(599, 433)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(372, 20)
+        Me.lblType.TabIndex = 8
+        Me.lblType.Visible = False
+        '
+        'lblCategory
+        '
+        Me.lblCategory.Location = New System.Drawing.Point(248, 433)
+        Me.lblCategory.Name = "lblCategory"
+        Me.lblCategory.Size = New System.Drawing.Size(159, 20)
+        Me.lblCategory.TabIndex = 9
+        Me.lblCategory.Visible = False
+        '
         'frmCIO_List
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1094, 469)
+        Me.Controls.Add(Me.lblCategory)
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.lblCashID)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lvCIO)
@@ -168,6 +200,7 @@ Partial Class frmCIO_List
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -184,4 +217,7 @@ Partial Class frmCIO_List
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnVoid As System.Windows.Forms.Button
+    Friend WithEvents lblCashID As System.Windows.Forms.Label
+    Friend WithEvents lblType As System.Windows.Forms.TextBox
+    Friend WithEvents lblCategory As System.Windows.Forms.TextBox
 End Class
