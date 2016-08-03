@@ -30,10 +30,10 @@
         LoanRenew2 = 11
         MoneyTransferBSP = 12
         DollarDaily = 13
-        AuditPrinLimit = 14
-        MonthlyTransactionCountSummary = 15
-        MoneyTransferBracketing = 16
-        RenewalBreakDown = 17
+        'AuditPrinLimit = 14
+        MonthlyTransactionCountSummary = 14
+        MoneyTransferBracketing = 15
+        RenewalBreakDown = 16
 
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
@@ -69,8 +69,8 @@
                 MoneyTransfer_BSP()
             Case ReportType.DollarDaily
                 DailyDollar()
-            Case ReportType.AuditPrinLimit
-                Audit_PrincipalMin()
+                'Case ReportType.AuditPrinLimit
+                '    Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
             Case ReportType.MoneyTransferBracketing
@@ -511,8 +511,8 @@
                 Return True
             Case ReportType.DollarDaily
                 Return True
-            Case ReportType.AuditPrinLimit
-                Return True
+                'Case ReportType.AuditPrinLimit
+                '    Return True
         End Select
 
         Return False
@@ -526,9 +526,9 @@
         End If
     End Sub
 
-    Private Sub Audit_PrincipalMin()
-        Dim MINIMUM_PRINCIPAL As Double = 5000
-        AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCal.SelectionStart.ToShortDateString)
-    End Sub
+    'Private Sub Audit_PrincipalMin()
+    '    Dim MINIMUM_PRINCIPAL As Double = 5000
+    '    AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCal.SelectionStart.ToShortDateString)
+    'End Sub
 
 End Class
