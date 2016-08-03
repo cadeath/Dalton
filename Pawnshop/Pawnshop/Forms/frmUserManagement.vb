@@ -258,20 +258,20 @@
         Return True
     End Function
 
-    Private Sub CheckUsername()
-
+   Private Function CheckUsername() As Boolean
         Dim mySql As String, ds As DataSet
         mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtUser.Focus()
+            Return False
         End If
-
-    End Sub
+        Return True
+    End Function
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If btnAdd.Text = "&Add" Then
+            If CheckUsername() = False Then Exit Sub
             If Not PasswordPolicy() Then Exit Sub
             If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
         End If
@@ -445,10 +445,6 @@
             chkPrivilege.Enabled = False
             chkSuAll.Enabled = False
         End If
-    End Sub
-
-    Private Sub txtFullname_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFullname.KeyPress
-        CheckUsername()
     End Sub
 
     Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
