@@ -173,7 +173,9 @@
                 MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
                 Exit Sub
             End If
-            database.SaveEntry(ds, False)
+        database.SaveEntry(ds, False)
+        Dim tmpCIO As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
+        TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID)
 
             RemoveJournal(CashID, , Transactiontype)
             RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
