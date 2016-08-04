@@ -22,19 +22,18 @@
         Insurance = 3
         DollarBuying = 4
         BranchBorrowings = 5
-        OutStanding = 6
-        ItemPullOut = 7
-        MoneyTransfer = 8
-        Hourly = 9
-        HourlySummary = 10
-        DailyInsurance = 11
-        LoanRenew2 = 12
-        MoneyTransferBSP = 13
-        DollarDaily = 14
-        AuditPrinLimit = 15
-        MonthlyTransactionCountSummary = 16
-	MoneyTransferBracketing = 17
-        RenewalBreakDown = 18
+        ItemPullOut = 6
+        MoneyTransfer = 7
+        Hourly = 8
+        HourlySummary = 9
+        DailyInsurance = 10
+        LoanRenew2 = 11
+        MoneyTransferBSP = 12
+        DollarDaily = 13
+        'AuditPrinLimit = 14
+        MonthlyTransactionCountSummary = 14
+        MoneyTransferBracketing = 15
+        RenewalBreakDown = 16
 
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
@@ -54,8 +53,6 @@
                 DollarBuying()
             Case ReportType.BranchBorrowings
                 Borrowings()
-            Case ReportType.OutStanding
-                Outstanding_Loans()
             Case ReportType.ItemPullOut
                 Item_PullOut()
             Case ReportType.MoneyTransfer
@@ -72,8 +69,8 @@
                 MoneyTransfer_BSP()
             Case ReportType.DollarDaily
                 DailyDollar()
-            Case ReportType.AuditPrinLimit
-                Audit_PrincipalMin()
+                'Case ReportType.AuditPrinLimit
+                '    Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
             Case ReportType.MoneyTransferBracketing
@@ -124,8 +121,6 @@
                     FormType = ReportType.ItemPullOut
                 Case "Loan Register - New Loan and Renewal 2"
                     FormType = ReportType.LoanRenew2
-                    'Case "Auction Monthly Report"
-                    '    FormType = ReportType.AuctionMonthly
                 Case "Money Transfer (BSP)"
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
@@ -140,27 +135,6 @@
 
         Generate()
     End Sub
-
-    'Private Sub AuctionMonthly()
-    '    Dim mySql As String, dsName As String, rptPath As String
-    '    dsName = "dsAuction" : rptPath = "Reports\rpt_AuctionMonthly.rdlc"
-    '    Dim st As Date = GetFirstDate(monCal.SelectionStart)
-    '    Dim en As Date = GetLastDate(monCal.SelectionStart)
-
-    '    mySql = "SELECT * "
-    '    mySql &= vbCrLf & "FROM PAWNING "
-    '    mySql &= vbCrLf & "WHERE "
-    '    mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-    '    mySql &= vbCrLf & "AND STATUS <> 'RENEWED' AND STATUS <> 'REDEEM' AND STATUS <> 'VOID'"
-
-    '    Dim ds As DataSet = LoadSQL(mySql)
-    '    Dim addPara As New Dictionary(Of String, String)
-    '    addPara.Add("txtMonthOf", "FOR THE MONTH OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
-    '    addPara.Add("branchName", branchName)
-
-    '    frmReport.ReportInit(mySql, dsName, rptPath, addPara)
-    '    frmReport.Show()
-    'End Sub
 
     Private Sub Generate_Hourly()
         Dim mySql As String, dsName As String, rptPath As String
@@ -262,7 +236,7 @@
 
         mySql = "SELECT * FROM tblInsurance "
         mySql &= String.Format("WHERE transDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
-
+        mySql &= " AND STATUS <> 'V'"
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
         rptPara.Add("branchName", branchName)
@@ -276,6 +250,7 @@
 
         mySql = "SELECT * FROM tblInsurance "
         mySql &= String.Format("WHERE transDate = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= " AND STATUS <> 'V'"
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToString("MMM dd, yyyy"))
@@ -347,50 +322,6 @@
         rptPara.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, fillData, "Reports\rpt_LoanRenew.rdlc", rptPara)
-        frmReport.Show()
-    End Sub
-
-    Private Sub Outstanding_Loans()
-        Dim dsName As String = "dsOutstanding", mySql As String
-
-        mySql = "SELECT * "
-        mySql &= "FROM "
-        mySql &= "( "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'NEW' OR Status = 'RENEW') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'RENEWED') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'REDEEM') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'SEGRE') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL) "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'WITHDRAW') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= ") "
-        mySql &= "ORDER BY PAWNTICKET ASC"
-
-        Console.WriteLine(mySql)
-
-
-        Dim addParameters As New Dictionary(Of String, String)
-        addParameters.Add("txtMonthOf", "DATE: " & monCal.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
-        addParameters.Add("branchName", branchName)
-
-        frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
         frmReport.Show()
     End Sub
 
@@ -522,7 +453,7 @@
         Dim mySql As String = "SELECT LOGS_ID, MOD_NAME, CAST(TIMELY AS DATE)AS TIMELY FROM TBL_DAILYTIMELOG "
         mySql &= "WHERE HASCUSTOMER = '1' AND "
         mySql &= String.Format(" TIMELY BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
-        'mySql &= "GROUP BY MOD_NAME ORDER BY MOD_NAME"
+        mySql &= " AND REMARKS NOT LIKE '%VOID%'"
 
         Console.WriteLine(mySql)
 
@@ -568,8 +499,6 @@
         Select Case FormType
             Case ReportType.DailyCashCount
                 Return True
-            Case ReportType.OutStanding
-                Return True
             Case ReportType.ItemPullOut
                 Return True
             Case ReportType.Insurance
@@ -582,8 +511,8 @@
                 Return True
             Case ReportType.DollarDaily
                 Return True
-            Case ReportType.AuditPrinLimit
-                Return True
+                'Case ReportType.AuditPrinLimit
+                '    Return True
         End Select
 
         Return False
@@ -597,9 +526,9 @@
         End If
     End Sub
 
-    Private Sub Audit_PrincipalMin()
-        Dim MINIMUM_PRINCIPAL As Double = 5000
-        AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCal.SelectionStart.ToShortDateString)
-    End Sub
+    'Private Sub Audit_PrincipalMin()
+    '    Dim MINIMUM_PRINCIPAL As Double = 5000
+    '    AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCal.SelectionStart.ToShortDateString)
+    'End Sub
 
 End Class
