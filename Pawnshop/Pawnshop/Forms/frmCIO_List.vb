@@ -208,6 +208,7 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.VoidCashInOut
             If Not CheckOTP() Then Exit Sub
@@ -217,7 +218,6 @@
     End Sub
 
     Friend Sub VoidCIO()
-        If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
         Dim idx As Integer = lvCIO.FocusedItem.Tag
         VoidID(idx)
         lvCIO.Items.Clear()

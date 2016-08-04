@@ -1,9 +1,13 @@
 CHANGELOG
-Version 1.2.2.10
+Version 1.2.2.12
  - Add Change Password
  - Add New Privileges
  - Include Appraiser
  - Include Reset Password
+ - Include Advance Report
+ - Include Delete User in User Management
+ - Include Item Type Selection on Audit Report
+ - Fix Report Money Transfer, Cash In/Out, Dollar (Void Item Display)
 
 Version 1.2.2.9
  - Fix Monthly computation for Cellphone

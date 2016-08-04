@@ -27,7 +27,6 @@ Partial Class frmMain
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangePasswordToolStrip = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseOpenStore = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClosingStoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -110,7 +109,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChangePasswordToolStrip, Me.ToolStripSeparator6, Me.CloseOpenStore, Me.ClosingStoreToolStripMenuItem, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.UpdateToolStripMenuItem, Me.RateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseOpenStore, Me.ClosingStoreToolStripMenuItem, Me.ToolStripSeparator3, Me.UserManagementToolStripMenuItem, Me.ChangePasswordToolStrip, Me.UpdateToolStripMenuItem, Me.RateToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.ToolStripSeparator1, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
@@ -120,11 +119,6 @@ Partial Class frmMain
         Me.ChangePasswordToolStrip.Name = "ChangePasswordToolStrip"
         Me.ChangePasswordToolStrip.Size = New System.Drawing.Size(171, 22)
         Me.ChangePasswordToolStrip.Text = "&Change Password"
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(168, 6)
         '
         'CloseOpenStore
         '
@@ -398,7 +392,7 @@ Partial Class frmMain
         'pInfo
         '
         Me.pInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pInfo.Controls.Add(Me.lblMessage)
         Me.pInfo.Controls.Add(Me.lblTitle)
         Me.pInfo.Location = New System.Drawing.Point(12, 161)
@@ -410,7 +404,7 @@ Partial Class frmMain
         'lblMessage
         '
         Me.lblMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblMessage.Location = New System.Drawing.Point(15, 41)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(310, 366)
@@ -683,7 +677,6 @@ Partial Class frmMain
     Friend WithEvents AuctionMonthlyJewelryReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AuditReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChangePasswordToolStrip As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
 
 
 End Class

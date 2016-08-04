@@ -96,7 +96,9 @@
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         If Not OTPDisable Then
+            btnView.PerformClick()
             diagOTP.FormType = diagOTP.OTPType.VoidBranchToBranch
             If Not CheckOTP() Then Exit Sub
         Else
@@ -104,7 +106,6 @@
         End If
     End Sub
     Friend Sub VoidBorrowing()
-        If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         If MsgBox("Do you want to void this transaction?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "V O I D") _
             = MsgBoxResult.No Then
             Exit Sub
