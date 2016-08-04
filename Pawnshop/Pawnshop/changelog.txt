@@ -7,7 +7,7 @@ Version 1.2.2.12
  - Include Advance Report
  - Include Delete User in User Management
  - Include Item Type Selection on Audit Report
- - Fix Report Void Display (Money Transfer, Cash In/Out, Dollar) 
+ - Fix Report Money Transfer, Cash In/Out, Dollar (Void Item Display)
 
 Version 1.2.2.9
  - Fix Monthly computation for Cellphone
