@@ -453,6 +453,7 @@
 
     Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
         If Not OTPDisable Then
+            LoadUser()
             diagOTP.FormType = diagOTP.OTPType.UserManagementDelete
             If Not CheckOTP() Then Exit Sub
         End If
@@ -470,5 +471,9 @@
         MsgBox("User " & txtFullname.Text & " Deleted", MsgBoxStyle.Question, moduleName)
         LoadActive()
         dbClose()
+    End Sub
+
+    Private Sub lvUsers_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvUsers.SelectedIndexChanged
+
     End Sub
 End Class
