@@ -63,7 +63,6 @@ Partial Class qryPullOut_List
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "qryPullOut_List"
-        Me.Text = "Item Pullout"
         Me.ResumeLayout(False)
 
     End Sub
