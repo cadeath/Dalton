@@ -60,7 +60,7 @@ Partial Class frmPawning
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.rbDescription)
         Me.GroupBox1.Controls.Add(Me.rbPawner)
         Me.GroupBox1.Controls.Add(Me.rbPawnTicket)
@@ -131,7 +131,7 @@ Partial Class frmPawning
         'txtSearch
         '
         Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(3, 55)
         Me.txtSearch.Name = "txtSearch"
@@ -160,8 +160,8 @@ Partial Class frmPawning
         'lvPawners
         '
         Me.lvPawners.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lvPawners.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9})
         Me.lvPawners.FullRowSelect = True
         Me.lvPawners.GridLines = True
@@ -359,7 +359,6 @@ Partial Class frmPawning
         Me.Label6.Size = New System.Drawing.Size(37, 13)
         Me.Label6.TabIndex = 14
         Me.Label6.Text = "Status"
-        Me.Label6.Visible = False
         '
         'frmPawning
         '
