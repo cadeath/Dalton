@@ -179,9 +179,8 @@ Public Class Insurance
         ds.Tables(fillData).Rows(0).Item("Status") = _status
 
         database.SaveEntry(ds, False)
-        Dim tmpInsurance As New Insurance
 
-        TransactionVoidSave("DOLLAR", tmpInsurance.EncoderID, POSuser.UserID)
+        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID)
 
         RemoveJournal(InsuranceID, , TransactionName)
         RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
