@@ -88,6 +88,7 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If lvDollar.SelectedItems.Count = 0 Then Exit Sub
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.VoidMoneyExchange
             If Not CheckOTP() Then Exit Sub
@@ -96,8 +97,6 @@
         End If
     End Sub
     Friend Sub VoidMoneyExchange()
-        If lvDollar.SelectedItems.Count = 0 Then Exit Sub
-
         Dim tmpLoad As New DollarTransaction
         Dim id As Integer = lvDollar.FocusedItem.Tag
         tmpLoad.LoadDollar(id)

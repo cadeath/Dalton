@@ -319,7 +319,7 @@ Public Class frmMoneyTransfer
             mySql = "SELECT DISTINCT TRANSID,MONEYTRANS,SERVICETYPE FROM TBLMONEYTRANSFER "
             mySql &= "WHERE TRANSID = '" & currentMr & "' AND MONEYTRANS='1' AND SERVICETYPE = 'Pera Padala'"
             ds = LoadSQL(mySql)
-            If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("Mr# " & currentMr.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : Return False
+            If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("ME# " & currentMr.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : Return False
             End If
         End If
         Return True

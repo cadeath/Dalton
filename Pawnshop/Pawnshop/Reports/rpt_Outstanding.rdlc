@@ -1444,6 +1444,10 @@ Fields!Description.Value)</Value>
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="ReportName">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <Code>Function EncryptKarat(ByVal str As String) As String
 
@@ -1480,7 +1484,7 @@ Fields!Description.Value)</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>OUTSTANDING LOANS</Value>
+                  <Value>=Parameters!ReportName.Value</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                   </Style>
@@ -1490,6 +1494,7 @@ Fields!Description.Value)</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox105</rd:DefaultName>
+          <Left>0.00354in</Left>
           <Height>0.25in</Height>
           <Width>3.33667in</Width>
           <Style>
@@ -1615,7 +1620,7 @@ Fields!Description.Value)</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>OUTSTANDING LOANS</Value>
+                  <Value>=Parameters!ReportName.Value</Value>
                   <Style>
                     <FontStyle>Italic</FontStyle>
                     <FontSize>8pt</FontSize>

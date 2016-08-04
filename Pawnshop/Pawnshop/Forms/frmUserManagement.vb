@@ -38,7 +38,7 @@
             txtUser.Text = .UserName
             txtFullname.Text = .FullName
         End With
-
+        lblUserid.Text = idx
         LoadPrivilege()
     End Sub
 
@@ -258,20 +258,20 @@
         Return True
     End Function
 
-    Private Sub CheckUsername()
-
+   Private Function CheckUsername() As Boolean
         Dim mySql As String, ds As DataSet
         mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtUser.Focus()
+            Return False
         End If
-
-    End Sub
+        Return True
+    End Function
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If btnAdd.Text = "&Add" Then
+            If CheckUsername() = False Then Exit Sub
             If Not PasswordPolicy() Then Exit Sub
             If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
         End If
@@ -318,19 +318,22 @@
             End If
 
             With selectedUser
-                .FullName = txtFullname.Text
                 If Not txtPass1.Text = "" Then
+                    .FullName = txtFullname.Text
                     .Password = txtPass1.Text
+                    .Privilege = Privileger()
+                    .UpdatePrivilege()
+                    .SaveUser(False, txtPass1.Text)
+                Else
+                    .FullName = txtFullname.Text
+                    .Privilege = Privileger()
+                    .UpdatePrivilege()
+                    .SaveUser(False)
                 End If
-                .Privilege = Privileger()
-                .UpdatePrivilege()
-
-                .SaveUser(False)
             End With
 
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
             End If
-
             ClearFields()
             LoadActive()
     End Sub
@@ -444,11 +447,33 @@
         End If
     End Sub
 
-    Private Sub txtFullname_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFullname.KeyPress
+    Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
         CheckUsername()
     End Sub
 
-    Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
-        CheckUsername()
+    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+        If Not OTPDisable Then
+            LoadUser()
+            diagOTP.FormType = diagOTP.OTPType.UserManagementDelete
+            If Not CheckOTP() Then Exit Sub
+        End If
+    End Sub
+
+    Friend Sub UserDelete()
+        dbOpen()
+        Dim filldata As String = "TBL_GAMIT"
+        Dim mysql As String = "DELETE FROM " & filldata & " WHERE USERID = '" & lblUserid.Text & "'"
+        Dim Command As New Odbc.OdbcCommand
+        Command.Connection = con
+        Command.CommandText = mysql
+        Command.ExecuteNonQuery()
+
+        MsgBox("User " & txtFullname.Text & " Deleted", MsgBoxStyle.Question, moduleName)
+        LoadActive()
+        dbClose()
+    End Sub
+
+    Private Sub lvUsers_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvUsers.SelectedIndexChanged
+
     End Sub
 End Class

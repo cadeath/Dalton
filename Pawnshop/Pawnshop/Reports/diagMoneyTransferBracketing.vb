@@ -66,13 +66,13 @@
             mySql &= "FROM TBLMONEYTRANSFER "
             mySql &= "WHERE SERVICETYPE = '" & reportType2 & "' AND "
             mySql &= String.Format(" TRANSDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-            mySql &= "ORDER BY BRACKET ASC"
+            mySql &= " AND STATUS <> 'V' ORDER BY BRACKET ASC"
         Else
              mySql = "SELECT ID, SERVICETYPE, MONEYTRANS, AMOUNT, BRACKET, TRANSDATE "
             mySql &= "FROM TBLMONEYTRANSFER "
             mySql &= "WHERE SERVICETYPE = '" & reportType & "' AND "
             mySql &= String.Format(" TRANSDATE BETWEEN '{0}' AND '{1}'", st.ToShortDateString, en.ToShortDateString)
-            mySql &= "ORDER BY BRACKET ASC"
+            mySql &= " AND STATUS <> 'V' ORDER BY BRACKET ASC"
         End If
 
         Dim addParameters As New Dictionary(Of String, String)
