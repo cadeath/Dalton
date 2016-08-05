@@ -458,4 +458,8 @@
     Private Sub ChangePasswordToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ChangePasswordToolStrip.Click
         frmChangePassword.Show()
     End Sub
+
+    Private Sub AuditConsoleToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
+        frmAuditConsole.Show()
+    End Sub
 End Class

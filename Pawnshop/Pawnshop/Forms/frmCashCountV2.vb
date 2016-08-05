@@ -3,6 +3,7 @@
     Dim fillData As String = "tblCashCount"
 
     Friend isClosing As Boolean = False
+    Friend isAuditing As Boolean = False
     Private Currency_Denomination As New Hashtable
     Private Deno_Count As Integer = 0
 
@@ -153,8 +154,26 @@
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If txtCount.Text <> "" Then txtCount.Focus() : Exit Sub
 
+        ' Checking no entries at all
+        ' to Proceed, input atleast one (1) with zero (0) value
+        Dim noEntries As Boolean = True
+        For Each dr As ListViewItem In lvCashCount.Items
+            If dr.SubItems.Count = 2 Then noEntries = False : Exit For
+        Next
+        If noEntries Then Console.WriteLine("No Entries Found") : Exit Sub
+
         Dim ans As DialogResult = MsgBox("Do you want to POST this cash count?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        ' If Executed via Audit Console
+        If isAuditing Then
+            SaveCashCount()
+            If MsgBox("Saved." & vbCrLf & "Do you want to view Cash Count Sheet?", _
+                      MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Audit Cash Count") = MsgBoxResult.Yes Then
+                ' DISPLAY CASH COUNT SHEET
+            End If
+            Exit Sub
+        End If
 
         Dim total As Double = Compute_CashCount()
         SaveCashCount()
@@ -175,6 +194,17 @@
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim denoCnt As Integer = 0, denoValue As Double = 0, deno As String = ""
         Dim denoType As String = ""
+
+        ' Increase Status by one (1) everytime Audit conducted cash count per date
+        Dim CashCountStatus As Integer = 1
+        If isAuditing Then
+            Dim CCsql As String = "SELECT DISTINCT STATUS FROM " & fillData
+            CCsql &= " WHERE DailyID = {0} AND (Status <> 1 OR Status <> 0)"
+            CCsql &= " ORDER BY STATUS DESC"
+            Dim ccDS As DataSet = LoadSQL(mySql)
+
+            CashCountStatus = ds.Tables(0).Rows(0).Item(0) + 1
+        End If
 
         For Each dr As DataRow In ds.Tables(fillData).Rows
             dr.Item("Status") = 0
@@ -210,7 +240,7 @@
                     .Item("Total") = denoValue
                     .Item("EncoderID") = UserID
                     .Item("SystemTime") = Now
-                    .Item("Status") = 1
+                    .Item("Status") = CashCountStatus
                     .Item("MoneyType") = denoType.ToUpper
                 End With
                 ds.Tables(fillData).Rows.Add(dsNewRow)
