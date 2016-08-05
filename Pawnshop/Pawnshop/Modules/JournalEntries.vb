@@ -99,7 +99,7 @@
         Dim i As Integer = 0
         Dim fillData As String = "tblJournal"
         Dim mySql As String = "SELECT * FROM tblJournal WHERE "
-        mySql &= String.Format("TRANSID ='{0}' AND REMARKS LIKE '%{1}%' and TRANSTYPE='{2}'", transID, srcStr, TransType)
+        mySql &= String.Format("TRANSID ='{0}' AND REMARKS LIKE '%{1}%' and TRANSTYPE like '%{2}%'", transID, srcStr, TransType)
 
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         If ds.Tables(fillData).Rows.Count = 0 Then MsgBox("JOURNAL ENTRIES NOT FOUND", MsgBoxStyle.Critical, "DEVELOPER WARNING") : Exit Sub
