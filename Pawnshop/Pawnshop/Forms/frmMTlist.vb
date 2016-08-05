@@ -59,29 +59,32 @@
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        If txtSearch.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
+        If txtSearch.Text.Length <= 3 Then
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Client Search")
+        Else
+            Dim secured_str As String = txtSearch.Text
+            secured_str = DreadKnight(secured_str)
 
-        ' to be added more comprehensive searching
-        Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM tblMoneyTransfer WHERE refNum LIKE '%" & secured_str & "%' OR "
-        mySql &= "UPPER(RECEIVERNAME) LIKE UPPER('%" & secured_str & "%') OR UPPER(SENDERNAME) LIKE UPPER('%" & secured_str & "%')"
-        ds = LoadSQL(mySql)
+            ' to be added more comprehensive searching
+            Dim mySql As String, ds As DataSet
+            mySql = "SELECT * FROM tblMoneyTransfer WHERE refNum LIKE '%" & secured_str & "%' OR "
+            mySql &= "UPPER(RECEIVERNAME) LIKE UPPER('%" & secured_str & "%') OR UPPER(SENDERNAME) LIKE UPPER('%" & secured_str & "%')"
+            ds = LoadSQL(mySql)
 
-        If ds.Tables(0).Rows.Count = 0 Then
-            MsgBox("No result found", MsgBoxStyle.Information)
-            Exit Sub
+            If ds.Tables(0).Rows.Count = 0 Then
+                MsgBox("No result found", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
+            lvMoneyTransfer.Items.Clear()
+            For Each dr As DataRow In ds.Tables(0).Rows
+                Dim tmpMT As New MoneyTransfer
+                tmpMT.LoadTransactionByRow(dr)
+                AddItem(tmpMT)
+            Next
+
+            MsgBox(ds.Tables(0).Rows.Count & " result found.", MsgBoxStyle.Information)
         End If
-
-        lvMoneyTransfer.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpMT As New MoneyTransfer
-            tmpMT.LoadTransactionByRow(dr)
-            AddItem(tmpMT)
-        Next
-
-        MsgBox(ds.Tables(0).Rows.Count & " result found.", MsgBoxStyle.Information)
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click

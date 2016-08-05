@@ -125,30 +125,33 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        If txtSearch.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
+        If txtSearch.Text.Length <= 3 Then
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Client Search")
+        Else
+            Dim secured_str As String = txtSearch.Text
+            secured_str = DreadKnight(secured_str)
 
-        Dim mySql As String = "SELECT * FROM tblDollar WHERE "
-        If IsNumeric(secured_str) Then
-            mySql &= "DollarID = " & secured_str
-        Else : mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", secured_str)
-            mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", secured_str)
-            mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%') OR ", secured_str)
-            mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", secured_str)
+            Dim mySql As String = "SELECT * FROM tblDollar WHERE "
+            If IsNumeric(secured_str) Then
+                mySql &= "DollarID = " & secured_str
+            Else : mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", secured_str)
+                mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", secured_str)
+                mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%') OR ", secured_str)
+                mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", secured_str)
+            End If
+            Dim ds As DataSet = LoadSQL(mySql)
+            Console.WriteLine("SQL: " & mySql)
+            Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+            'lvCIO.Items.Clear()
+            If MaxRow <= 0 Then
+                MsgBox("Query not found", MsgBoxStyle.Information)
+                txtSearch.SelectAll()
+                lvDollar.Items.Clear()
+                Exit Sub
+            End If
+            MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Currency")
+            LoadActive(mySql)
         End If
-        Dim ds As DataSet = LoadSQL(mySql)
-        Console.WriteLine("SQL: " & mySql)
-        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
-        'lvCIO.Items.Clear()
-        If MaxRow <= 0 Then
-            MsgBox("Query not found", MsgBoxStyle.Information)
-            txtSearch.SelectAll()
-            lvDollar.Items.Clear()
-            Exit Sub
-        End If
-        MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Currency")
-        LoadActive(mySql)
     End Sub
     ''' <summary>
     ''' This keypress will go to search client information form.
