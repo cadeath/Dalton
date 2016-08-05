@@ -171,8 +171,10 @@
             If MsgBox("Saved." & vbCrLf & "Do you want to view Cash Count Sheet?", _
                       MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Audit Cash Count") = MsgBoxResult.Yes Then
                 ' DISPLAY CASH COUNT SHEET
+
             End If
-            Exit Sub
+
+            Me.Close()
         End If
 
         Dim total As Double = Compute_CashCount()

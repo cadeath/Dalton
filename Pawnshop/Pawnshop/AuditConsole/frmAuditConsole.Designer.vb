@@ -25,6 +25,7 @@ Partial Class frmAuditConsole
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAuditConsole))
         Me.btnCashCount = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCCSheet = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnCashCount
@@ -40,18 +41,29 @@ Partial Class frmAuditConsole
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(12, 87)
+        Me.Button1.Location = New System.Drawing.Point(12, 162)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(126, 69)
         Me.Button1.TabIndex = 1
         Me.Button1.Text = "VAULT INVENTORY"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'btnCCSheet
+        '
+        Me.btnCCSheet.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCCSheet.Location = New System.Drawing.Point(12, 87)
+        Me.btnCCSheet.Name = "btnCCSheet"
+        Me.btnCCSheet.Size = New System.Drawing.Size(126, 69)
+        Me.btnCCSheet.TabIndex = 2
+        Me.btnCCSheet.Text = "Cash Count Sheet"
+        Me.btnCCSheet.UseVisualStyleBackColor = True
+        '
         'frmAuditConsole
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(893, 385)
+        Me.Controls.Add(Me.btnCCSheet)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnCashCount)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -64,4 +76,5 @@ Partial Class frmAuditConsole
     End Sub
     Friend WithEvents btnCashCount As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnCCSheet As System.Windows.Forms.Button
 End Class

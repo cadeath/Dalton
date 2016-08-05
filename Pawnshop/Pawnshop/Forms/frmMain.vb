@@ -28,6 +28,7 @@
         ORManagerToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
+        AuditConsoleToolStripMenuItem.Enabled = Not st
         ConsoleToolStripMenuItem.Enabled = Not st
 
         If st Then
@@ -460,6 +461,8 @@
     End Sub
 
     Private Sub AuditConsoleToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
+        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+
         frmAuditConsole.Show()
     End Sub
 End Class
