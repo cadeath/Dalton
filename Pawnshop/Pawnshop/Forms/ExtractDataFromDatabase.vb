@@ -26,16 +26,16 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER," & _
-        vbCrLf & "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, " & _
+        mySql = " SELECT P.PAWNID,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,G.FULLNAME AS APPRAISER,P.ADVINT," & _
+        vbCrLf & "P.APPRAISAL,CLASS.CATEGORY, " & _
         vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,E.FULLNAME, P.EVAT, " & _
         vbCrLf & "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT," & _
-        vbCrLf & " P.LESSPRINCIPAL, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
+        vbCrLf & " P.LESSPRINCIPAL,P.AUCTIONDATE, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
         vbCrLf & " P.OLDTICKET," & _
         vbCrLf & "Case" & _
         vbCrLf & "WHEN P.ORDATE = '01/01/0001' THEN ''" & _
         vbCrLf & "ELSE P.ORDATE END AS ORDATE," & _
-        vbCrLf & " P.ORNUM, P.PAWNID, P.PAWNTICKET,	" & _
+        vbCrLf & " P.ORNUM,  P.PAWNTICKET,	" & _
         vbCrLf & " P.PENALTY, P.PRINCIPAL, P.PULLOUT, P.REDEEMDUE	,P.RENEWDUE," & _
         vbCrLf & " P.SERVICECHARGE," & _
         vbCrLf & "Case P.STATUS" & _
@@ -56,9 +56,9 @@ Public Class ExtractDataFromDatabase
        vbCrLf & "ORDER BY P.LOANDATE ASC;"
 
         Dim headers() As String = _
-         {"ADVANCEINTEREST", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENTNAME", "DAYSOVERDUE", _
+         {"PAWNID", "CLIENTNAME", "APPRAISER", "ADVANCEINTEREST", "APPRAISAL", "CATEGORY", "DAYSOVERDUE", _
           "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
-          "KARAT", "LESSPRINCIPAL", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", "PAWNID", _
+          "KARAT", "LESSPRINCIPAL", "AUCTIONDATE", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", _
           "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS", "SYSTEMINFO"}
 
 
@@ -100,18 +100,18 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = "SELECT D.CLIENTID,D.DENOMINATION,D.DOLLARID,D.FULLNAME,"
-        mySql &= "D.NETAMOUNT,D.PESORATE, D.REMARKS,D.SERIAL, "
+        mySql = "SELECT D.DOLLARID, D.CLIENTID,D.FULLNAME,D.DENOMINATION, "
+        mySql &= "D.NETAMOUNT,D.PESORATE, D.TRANSDATE, D.REMARKS,D.SERIAL, "
         mySql &= "Case D.STATUS "
         mySql &= "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  "
-        mySql &= "END AS STATUS, D.SYSTEMINFO, D.TRANSDATE, D.USERID "
+        mySql &= "END AS STATUS, D.SYSTEMINFO, D.USERID "
         mySql &= "FROM TBLDOLLAR D "
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
-       {"CLIENTID", "DENOMINATION", "DOLLARID", "FULLNAME", " NETAMOUNT", " PESORATE", "REMARKS", "SERIAL", _
-        "STATUS", " SYSTEMINFO", "TRANSDATE", "USERID"}
+       {"DOLLARID", "CLIENTID", "FULLNAME", "DENOMINATION", " NETAMOUNT", " PESORATE", "TRANSDATE", "REMARKS", "SERIAL", _
+        "STATUS", " SYSTEMINFO", "USERID"}
 
         Dim verified_url As String
         Dim str As String = "Dollar"
@@ -155,20 +155,20 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = "SELECT B.AMOUNT, B.BRANCHCODE, B.BRANCHNAME, "
-        mySql &= "B.BRWID,  G.FULLNAME,B.REASON,B.REFNUM, B.REMARKS,"
+        mySql = "SELECT B.BRWID,  G.FULLNAME, B.BRANCHCODE, B.BRANCHNAME, B.AMOUNT, B.TRANSDATE, "
+        mySql &= "B.REASON,B.REFNUM, B.REMARKS, "
         mySql &= " Case B.STATUS "
         mySql &= "WHEN 'C' THEN 'CASH-OUT' "
         mySql &= "WHEN 'D' THEN 'CASH-IN' "
-        mySql &= "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO, B.TRANSDATE "
+        mySql &= "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO "
         mySql &= "FROM TBLBORROW B "
         mySql &= "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID"
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
-    {"AMOUNT", "BRANCHCODE", "BRANCHNAME", " BORROWINGID", " ENCODERNAME", "REASON", " REFERENCENUM", _
-     "REMARKS", " STATUS", " SYSTEMINFO", " TRANSDATE"}
+    {" BORROWINGID", " ENCODERNAME", "BRANCHCODE", "BRANCHNAME", "AMOUNT", "TRANSDATE", "REASON", " REFERENCENUM", _
+      "REMARKS", " STATUS", " SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Borrowings"
@@ -213,17 +213,17 @@ Public Class ExtractDataFromDatabase
 
 
         Dim mySql As String
-        mySql = " SELECT I.AMOUNT, I.CLIENTID,I.CLIENTNAME, I.COINO, G.FULLNAME AS ENCODER, I.INSURANCEID,I.PAWNTICKET, " & _
+        mySql = " SELECT  I.INSURANCEID, I.CLIENTID,I.CLIENTNAME,I.AMOUNT, I.COINO,I.TRANSDATE, I.VALIDDATE, G.FULLNAME AS ENCODER,I.PAWNTICKET, " & _
             vbCrLf & "Case I.STATUS " & _
             vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
-            vbCrLf & "I.SYSTEMINFO, I.TRANSDATE, I.VALIDDATE FROM TBLINSURANCE I" & _
+            vbCrLf & "I.SYSTEMINFO FROM TBLINSURANCE I" & _
             vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
             vbCrLf & String.Format("WHERE I.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
             vbCrLf & "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
-  {"AMOUNT", "CLIENTID", " CLIENTNAME", " COINO", "  ENCODER", "INSURANCEID", " PAWNTICKET", _
-   "STATUS", "  SYSTEMINFO", " TRANSDATE", " VALIDDATE"}
+  {"INSURANCEID", "CLIENTID", " CLIENTNAME", "AMOUNT", " COINO", " TRANSDATE", " VALIDDATE", "  ENCODER", " PAWNTICKET", _
+   "STATUS", "  SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Insurance"
@@ -263,24 +263,25 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = "SELECT M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER,M.ID, M.LOCATION," & _
+        mySql = "SELECT M.ID,M.RECEIVERID,M.RECEIVERNAME,M.SENDERID,M.SENDERNAME, M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER, M.LOCATION," & _
        vbCrLf & "Case M.MONEYTRANS" & _
        vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
-       vbCrLf & "END AS MONEYTRANS,M.NETAMOUNT,M.RECEIVERID,M.RECEIVERNAME, " & _
+       vbCrLf & "END AS MONEYTRANS, M.TRANSDATE, " & _
+        vbCrLf & " M.SERVICECHARGE, " & _
+       vbCrLf & "M.SERVICETYPE, " & _
+       vbCrLf & "Case M.STATUS" & _
+         vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
+       vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
+       vbCrLf & " ELSE 'N/A'" & _
+       vbCrLf & " END AS STATUS,M.NETAMOUNT," & _
        vbCrLf & "CASE WHEN M.ServiceType = 'Pera Padala' AND M.MoneyTrans = 0" & _
        vbCrLf & "THEN 'ME# ' || LPAD(M.TransID,5,0)" & _
        vbCrLf & "WHEN M.SERVICETYPE = 'Pera Padala' AND M.MONEYTRANS = 1" & _
        vbCrLf & "THEN 'MR# ' || LPAD(M.TRANSID,5,0)" & _
        vbCrLf & "ELSE RefNum END as RefNum," & _
        vbCrLf & "M.REMARKS," & _
-       vbCrLf & " M.SENDERID,M.SENDERNAME,M.SERVICECHARGE, " & _
-       vbCrLf & "M.SERVICETYPE, " & _
-       vbCrLf & "Case M.STATUS" & _
-       vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
-       vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
-       vbCrLf & " ELSE 'N/A'" & _
-       vbCrLf & " END AS STATUS, M.SYSTEMINFO, M.TRANSDATE," & _
-       vbCrLf & " M.TRANSID" & _
+       vbCrLf & " M.TRANSID," & _
+     vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
@@ -289,9 +290,8 @@ Public Class ExtractDataFromDatabase
         vbCrLf & " ORDER BY M.TRANSDATE;"
 
         Dim headers() As String = _
-  {"AMOUNT", "COMMISSION", " ENCODER", " ID", " LOCATION", " MONEYTRANS", " NETAMOUNT", "RECIEVERID", _
-   "RECEIVERNAME", " REFNUM", " REMARKS", "SENDERID", "SENDERNAME", "SERVICECHARGE", "SERVICETYPE", "STATUS", "SYSTEMINFO", _
-    "TRANSDATE", "TRANSACTIONID"}
+  {" ID", "RECIEVERID", "RECEIVERNAME", "SENDERID", "SENDERNAME", "AMOUNT", "COMMISSION", " ENCODER", " LOCATION", " MONEYTRANS", _
+    "TRANSDATE", "SERVICECHARGE", "SERVICETYPE", "STATUS", " NETAMOUNT", " REFNUM", " REMARKS", "TRANSACTIONID", "SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Remitance"
@@ -333,16 +333,16 @@ Public Class ExtractDataFromDatabase
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
         Dim mySql As String
-        mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER," & _
-        vbCrLf & "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, " & _
+        mySql = " SELECT P.PAWNID,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,G.FULLNAME AS APPRAISER,P.ADVINT," & _
+        vbCrLf & "P.APPRAISAL,CLASS.CATEGORY, " & _
         vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,E.FULLNAME, P.EVAT, " & _
         vbCrLf & "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT," & _
-        vbCrLf & " P.LESSPRINCIPAL, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
+        vbCrLf & " P.LESSPRINCIPAL,P.AUCTIONDATE, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
         vbCrLf & " P.OLDTICKET," & _
         vbCrLf & "Case" & _
         vbCrLf & "WHEN P.ORDATE = '01/01/0001' THEN ''" & _
         vbCrLf & "ELSE P.ORDATE END AS ORDATE," & _
-        vbCrLf & " P.ORNUM, P.PAWNID, P.PAWNTICKET,	" & _
+        vbCrLf & " P.ORNUM,  P.PAWNTICKET,	" & _
         vbCrLf & " P.PENALTY, P.PRINCIPAL, P.PULLOUT, P.REDEEMDUE	,P.RENEWDUE," & _
         vbCrLf & " P.SERVICECHARGE," & _
         vbCrLf & "Case P.STATUS" & _
@@ -363,10 +363,10 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "ORDER BY P.LOANDATE ASC;"
 
         Dim headers() As String = _
-           {"ADVANCEINTEREST", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENTNAME", "DAYSOVERDUE", _
-            "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
-            "KARAT", "LESSPRINCIPAL", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", "PAWNID", _
-            "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS", "SYSTEMINFO"}
+         {"PAWNID", "CLIENTNAME", "APPRAISER", "ADVANCEINTEREST", "APPRAISAL", "CATEGORY", "DAYSOVERDUE", _
+          "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
+          "KARAT", "LESSPRINCIPAL", "AUCTIONDATE", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", _
+          "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS", "SYSTEMINFO"}
 
 
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
@@ -408,19 +408,18 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = "SELECT D.CLIENTID,D.DENOMINATION,D.DOLLARID,D.FULLNAME," & _
-        vbCrLf & "D.NETAMOUNT,D.PESORATE, D.REMARKS,D.SERIAL," & _
-        vbCrLf & "Case D.STATUS" & _
-        vbCrLf & "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  " & _
-        vbCrLf & "END AS STATUS, D.SYSTEMINFO, D.TRANSDATE, D.USERID " & _
-        vbCrLf & "FROM TBLDOLLAR D" & _
-        vbCrLf & String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & "ORDER BY TRANSDATE ASC"
+        mySql = "SELECT D.DOLLARID, D.CLIENTID,D.FULLNAME,D.DENOMINATION, "
+        mySql &= "D.NETAMOUNT,D.PESORATE, D.TRANSDATE, D.REMARKS,D.SERIAL, "
+        mySql &= "Case D.STATUS "
+        mySql &= "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  "
+        mySql &= "END AS STATUS, D.SYSTEMINFO, D.USERID "
+        mySql &= "FROM TBLDOLLAR D "
+        mySql &= String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
+        mySql &= "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
-      {"CLIENTID", "DENOMINATION", "DOLLARID", "FULLNAME", " NETAMOUNT", " PESORATE", "REMARKS", "SERIAL", _
-       "STATUS", " SYSTEMINFO", "TRANSDATE", "USERID"}
-
+              {"DOLLARID", "CLIENTID", "FULLNAME", "DENOMINATION", " NETAMOUNT", " PESORATE", "TRANSDATE", "REMARKS", "SERIAL", _
+               "STATUS", " SYSTEMINFO", "USERID"}
 
         Dim str As String = "Dollar"
         Console.WriteLine("Dollar Activated")
@@ -464,21 +463,21 @@ Public Class ExtractDataFromDatabase
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
-        Dim mySql As String
-        mySql = "SELECT B.AMOUNT, B.BRANCHCODE, B.BRANCHNAME, " & _
-        vbCrLf & "B.BRWID,  G.FULLNAME,B.REASON,B.REFNUM, B.REMARKS," & _
-        vbCrLf & " Case B.STATUS" & _
-        vbCrLf & "WHEN 'C' THEN 'CASH-OUT' " & _
-        vbCrLf & "WHEN 'D' THEN 'CASH-IN' " & _
-        vbCrLf & "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO, B.TRANSDATE" & _
-        vbCrLf & "FROM TBLBORROW B" & _
-        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID" & _
-        vbCrLf & String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & "ORDER BY TRANSDATE ASC"
+      Dim mySql As String
+        mySql = "SELECT B.BRWID,  G.FULLNAME, B.BRANCHCODE, B.BRANCHNAME, B.AMOUNT, B.TRANSDATE, "
+        mySql &= "B.REASON,B.REFNUM, B.REMARKS, "
+        mySql &= " Case B.STATUS "
+        mySql &= "WHEN 'C' THEN 'CASH-OUT' "
+        mySql &= "WHEN 'D' THEN 'CASH-IN' "
+        mySql &= "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO "
+        mySql &= "FROM TBLBORROW B "
+        mySql &= "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID"
+        mySql &= String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
+        mySql &= "ORDER BY TRANSDATE ASC"
 
-        Dim headers() As String = _
-   {"AMOUNT", "BRANCHCODE", "BRANCHNAME", " BORROWINGID", " ENCODERNAME", "REASON", " REFERENCENUM", _
-    "REMARKS", " STATUS", " SYSTEMINFO", " TRANSDATE"}
+  Dim headers() As String = _
+          {" BORROWINGID", " ENCODERNAME", "BRANCHCODE", "BRANCHNAME", "AMOUNT", "TRANSDATE", "REASON", " REFERENCENUM", _
+            "REMARKS", " STATUS", " SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Borrowings"
@@ -523,17 +522,17 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = " SELECT I.AMOUNT, I.CLIENTID,I.CLIENTNAME, I.COINO, G.FULLNAME AS ENCODER, I.INSURANCEID,I.PAWNTICKET, " & _
+        mySql = " SELECT  I.INSURANCEID, I.CLIENTID,I.CLIENTNAME,I.AMOUNT, I.COINO,I.TRANSDATE, I.VALIDDATE, G.FULLNAME AS ENCODER,I.PAWNTICKET, " & _
             vbCrLf & "Case I.STATUS " & _
             vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
-            vbCrLf & "I.SYSTEMINFO, I.TRANSDATE, I.VALIDDATE FROM TBLINSURANCE I" & _
+            vbCrLf & "I.SYSTEMINFO FROM TBLINSURANCE I" & _
             vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
             vbCrLf & String.Format("WHERE I.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-            vbCrLf & "ORDER BY TRANSDATE ASC"
+           vbCrLf & "ORDER BY TRANSDATE ASC"
 
-        Dim headers() As String = _
-  {"AMOUNT", "CLIENTID", " CLIENTNAME", " COINO", "  ENCODER", "INSURANCEID", " PAWNTICKET", _
-   "STATUS", "  SYSTEMINFO", " TRANSDATE", " VALIDDATE"}
+    Dim headers() As String = _
+      {"INSURANCEID", "CLIENTID", " CLIENTNAME", "AMOUNT", " COINO", " TRANSDATE", " VALIDDATE", "  ENCODER", " PAWNTICKET", _
+       "STATUS", "  SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Insurance"
@@ -577,35 +576,35 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = "SELECT M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER,M.ID, M.LOCATION," & _
-        vbCrLf & "Case M.MONEYTRANS" & _
-        vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
-        vbCrLf & "END AS MONEYTRANS,M.NETAMOUNT,M.RECEIVERID,M.RECEIVERNAME, " & _
-        vbCrLf & "CASE WHEN M.ServiceType = 'Pera Padala' AND M.MoneyTrans = 0" & _
-        vbCrLf & "THEN 'ME# ' || LPAD(M.TransID,5,0)" & _
-        vbCrLf & "WHEN M.SERVICETYPE = 'Pera Padala' AND M.MONEYTRANS = 1" & _
-        vbCrLf & "THEN 'MR# ' || LPAD(M.TRANSID,5,0)" & _
-        vbCrLf & "ELSE RefNum END as RefNum," & _
-        vbCrLf & "M.REMARKS," & _
-        vbCrLf & " M.SENDERID,M.SENDERNAME,M.SERVICECHARGE, " & _
-        vbCrLf & "M.SERVICETYPE, " & _
-        vbCrLf & "Case M.STATUS" & _
-        vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
-        vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
-        vbCrLf & " ELSE 'N/A'" & _
-        vbCrLf & " END AS STATUS, M.SYSTEMINFO, M.TRANSDATE," & _
-        vbCrLf & " M.TRANSID" & _
-        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
-        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
-        vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
+        mySql = "SELECT M.ID,M.RECEIVERID,M.RECEIVERNAME,M.SENDERID,M.SENDERNAME, M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER, M.LOCATION," & _
+       vbCrLf & "Case M.MONEYTRANS" & _
+       vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
+       vbCrLf & "END AS MONEYTRANS, M.TRANSDATE, " & _
+        vbCrLf & " M.SERVICECHARGE, " & _
+       vbCrLf & "M.SERVICETYPE, " & _
+       vbCrLf & "Case M.STATUS" & _
+         vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
+       vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
+       vbCrLf & " ELSE 'N/A'" & _
+       vbCrLf & " END AS STATUS,M.NETAMOUNT," & _
+       vbCrLf & "CASE WHEN M.ServiceType = 'Pera Padala' AND M.MoneyTrans = 0" & _
+       vbCrLf & "THEN 'ME# ' || LPAD(M.TransID,5,0)" & _
+       vbCrLf & "WHEN M.SERVICETYPE = 'Pera Padala' AND M.MONEYTRANS = 1" & _
+       vbCrLf & "THEN 'MR# ' || LPAD(M.TRANSID,5,0)" & _
+       vbCrLf & "ELSE RefNum END as RefNum," & _
+       vbCrLf & "M.REMARKS," & _
+       vbCrLf & " M.TRANSID," & _
+     vbCrLf & "M.SYSTEMINFO" & _
+       vbCrLf & " FROM TBLMONEYTRANSFER M" & _
+       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
+       vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
+       vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
         vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
         vbCrLf & " ORDER BY M.TRANSDATE;"
 
-        Dim headers() As String = _
-  {"AMOUNT", "COMMISSION", " ENCODER", " ID", "   LOCATION", " MONEYTRANS", " NETAMOUNT", "RECIEVERID", _
-   "RECEIVERNAME", " REFNUM", " REMARKS", "SENDERID", "SENDERNAME", "SERVICECHARGE", "SERVICETYPE", "STATUS", "SYSTEMINFO", _
-    "TRANSDATE", "TRANSACTIONID"}
+          Dim headers() As String = _
+{" ID", "RECIEVERID", "RECEIVERNAME", "SENDERID", "SENDERNAME", "AMOUNT", "COMMISSION", " ENCODER", " LOCATION", " MONEYTRANS", _
+  "TRANSDATE", "SERVICECHARGE", "SERVICETYPE", "STATUS", " NETAMOUNT", " REFNUM", " REMARKS", "TRANSACTIONID", "SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Remitance"
@@ -613,7 +612,6 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -693,10 +691,10 @@ Public Class ExtractDataFromDatabase
 
     Private Sub ExtractALLMonthly()
         PawningExtract()
-        'DollarExtract()
-        'BorrowingExtract()
-        'InsuranceExtract()
-        'RemitanceExtract()
+        DollarExtract()
+        BorrowingExtract()
+        InsuranceExtract()
+        RemitanceExtract()
     End Sub
 
     Private Sub ExtractAllDaily()
@@ -707,15 +705,7 @@ Public Class ExtractDataFromDatabase
         RemitanceExtractDaily()
         OutstandingExtract()
     End Sub
-    Public Shared Sub ReleaseObject(ByVal obj As Object)
-        Try
-            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
-        Catch ex As Exception
-            obj = Nothing
-        Finally
-            GC.Collect()
-        End Try
-    End Sub
+
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
 
@@ -731,7 +721,7 @@ Public Class ExtractDataFromDatabase
         Select Case ExtractType
 
             Case "Daily"
-                ExtractAllDaily()
+               ExtractAllDaily()
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
