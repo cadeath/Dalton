@@ -26,63 +26,46 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER,"
-        mySql &= "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, "
-        mySql &= " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,P.ENCODERID, P.EVAT, "
-        mySql &= "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT,"
-        mySql &= " P.LESSPRINCIPAL, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT, "
-        mySql &= "Case "
-        mySql &= "WHEN P.ORDATE = '01/01/0001' THEN ''"
-        mySql &= "ELSE P.ORDATE END AS ORDATE,"
-        mySql &= " P.ORNUM, P.PAWNID, P.PAWNTICKET,	"
-        mySql &= " P.PENALTY, P.PRINCIPAL, P.PULLOUT, P.REDEEMDUE	,P.RENEWDUE,"
-        mySql &= " P.SERVICECHARGE,"
-        mySql &= "Case P.STATUS"
-        mySql &= " WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' "
-        mySql &= "WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' WHEN 'W' THEN 'WITHDRAW' "
-        mySql &= "WHEN 'X' THEN 'REDEEM' WHEN 'S' THEN 'SEGRE' "
-        mySql &= "ELSE 'N/A' END AS STATUS,P.SYSTEMINFO "
-        mySql &= "FROM TBLPAWN P "
-        mySql &= "INNER JOIN TBLCLASS CLASS "
-        mySql &= "ON CLASS.CLASSID = P.CATID "
-        mySql &= "LEFT JOIN TBL_GAMIT G "
-        mySql &= "ON G.USERID = P.APPRAISERID "
-        mySql &= "INNER JOIN TBLCLIENT C "
-        mySql &= "ON C.CLIENTID =P.CLIENTID "
-        mySql &= String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
-        mySql &= "ORDER BY P.LOANDATE ASC;"
+        mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER," & _
+        vbCrLf & "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, " & _
+        vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,E.FULLNAME, P.EVAT, " & _
+        vbCrLf & "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT," & _
+        vbCrLf & " P.LESSPRINCIPAL, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
+        vbCrLf & " P.OLDTICKET," & _
+        vbCrLf & "Case" & _
+        vbCrLf & "WHEN P.ORDATE = '01/01/0001' THEN ''" & _
+        vbCrLf & "ELSE P.ORDATE END AS ORDATE," & _
+        vbCrLf & " P.ORNUM, P.PAWNID, P.PAWNTICKET,	" & _
+        vbCrLf & " P.PENALTY, P.PRINCIPAL, P.PULLOUT, P.REDEEMDUE	,P.RENEWDUE," & _
+        vbCrLf & " P.SERVICECHARGE," & _
+        vbCrLf & "Case P.STATUS" & _
+        vbCrLf & " WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' " & _
+        vbCrLf & "WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' WHEN 'W' THEN 'WITHDRAW' " & _
+        vbCrLf & "WHEN 'X' THEN 'REDEEM' WHEN 'S' THEN 'SEGRE' " & _
+        vbCrLf & "ELSE 'N/A' END AS STATUS,P.SYSTEMINFO" & _
+        vbCrLf & "FROM TBLPAWN P" & _
+        vbCrLf & "INNER JOIN TBLCLASS CLASS" & _
+        vbCrLf & "ON CLASS.CLASSID = P.CATID" & _
+        vbCrLf & "LEFT JOIN TBL_GAMIT G" & _
+        vbCrLf & "ON G.USERID = P.APPRAISERID" & _
+         vbCrLf & "LEFT JOIN TBL_GAMIT E" & _
+        vbCrLf & "ON E.ENCODERID = P.ENCODERID" & _
+        vbCrLf & "INNER JOIN TBLCLIENT C" & _
+        vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
+       vbCrLf & String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
+       vbCrLf & "ORDER BY P.LOANDATE ASC;"
 
         Dim headers() As String = _
-           {"ADVINT", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENT", "DAYSOVERDUE", _
-            "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
-            "KARAT", "LESSPRINCIPAL", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", "PAWNID", _
-            "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS"}
+         {"ADVANCEINTEREST", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENTNAME", "DAYSOVERDUE", _
+          "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
+          "KARAT", "LESSPRINCIPAL", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", "PAWNID", _
+          "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS", "SYSTEMINFO"}
 
 
 
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
-
-
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
 
 
         txtpath1.Text = txtpath1.Text
@@ -98,7 +81,7 @@ Public Class ExtractDataFromDatabase
             sw.WriteLine("pause")
             sw.WriteLine("exit")
         End Using
-
+        'CommandPrompt(batch, appPath)
         Dim pro As New ProcessStartInfo(appPath & batch)
         pro.RedirectStandardError = True
         pro.RedirectStandardOutput = True
@@ -127,7 +110,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
-       {"CLIENTID", "DENOMINATION", "FULLNAME", " NETAMOUNT", " PESORATE", "CLIENT", "REMARKS", _
+       {"CLIENTID", "DENOMINATION", "DOLLARID", "FULLNAME", " NETAMOUNT", " PESORATE", "REMARKS", "SERIAL", _
         "STATUS", " SYSTEMINFO", "TRANSDATE", "USERID"}
 
         Dim verified_url As String
@@ -137,24 +120,6 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -202,7 +167,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
-    {"AMOUNT", "BRANCHCODE", "BRANCHNAME", " BRWID", " FULLNAME", "REASON", " REFNUM", _
+    {"AMOUNT", "BRANCHCODE", "BRANCHNAME", " BORROWINGID", " ENCODERNAME", "REASON", " REFERENCENUM", _
      "REMARKS", " STATUS", " SYSTEMINFO", " TRANSDATE"}
 
         Dim verified_url As String
@@ -212,24 +177,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
+        
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -275,7 +223,7 @@ Public Class ExtractDataFromDatabase
 
         Dim headers() As String = _
   {"AMOUNT", "CLIENTID", " CLIENTNAME", " COINO", "  ENCODER", "INSURANCEID", " PAWNTICKET", _
-   "STATUS", "  SYSTEMINFO", " TRANSDATE", " T VALIDDATE"}
+   "STATUS", "  SYSTEMINFO", " TRANSDATE", " VALIDDATE"}
 
         Dim verified_url As String
         Dim str As String = "Insurance"
@@ -283,25 +231,6 @@ Public Class ExtractDataFromDatabase
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
-
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -335,34 +264,34 @@ Public Class ExtractDataFromDatabase
 
         Dim mySql As String
         mySql = "SELECT M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER,M.ID, M.LOCATION," & _
-        vbCrLf & "Case M.MONEYTRANS" & _
-        vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
-        vbCrLf & "END AS MONEYTRANS,M.NETAMOUNT,M.RECEIVERNAME, " & _
-        vbCrLf & "CASE WHEN M.ServiceType = 'Pera Padala' AND M.MoneyTrans = 0" & _
-        vbCrLf & "THEN 'ME# ' || LPAD(M.TransID,5,0)" & _
-        vbCrLf & "WHEN M.SERVICETYPE = 'Pera Padala' AND M.MONEYTRANS = 1" & _
-        vbCrLf & "THEN 'MR# ' || LPAD(M.TRANSID,5,0)" & _
-        vbCrLf & "ELSE RefNum END as RefNum," & _
-        vbCrLf & "M.REMARKS," & _
-        vbCrLf & "M.SENDERNAME,M.SERVICECHARGE, " & _
-        vbCrLf & "M.SERVICETYPE, " & _
-        vbCrLf & "Case M.STATUS" & _
-        vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
-        vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
-        vbCrLf & " ELSE 'N/A'" & _
-        vbCrLf & " END AS STATUS, M.SYSTEMINFO, M.TRANSDATE," & _
-        vbCrLf & " M.TRANSID" & _
-        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
-        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
-        vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
+       vbCrLf & "Case M.MONEYTRANS" & _
+       vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
+       vbCrLf & "END AS MONEYTRANS,M.NETAMOUNT,M.RECEIVERID,M.RECEIVERNAME, " & _
+       vbCrLf & "CASE WHEN M.ServiceType = 'Pera Padala' AND M.MoneyTrans = 0" & _
+       vbCrLf & "THEN 'ME# ' || LPAD(M.TransID,5,0)" & _
+       vbCrLf & "WHEN M.SERVICETYPE = 'Pera Padala' AND M.MONEYTRANS = 1" & _
+       vbCrLf & "THEN 'MR# ' || LPAD(M.TRANSID,5,0)" & _
+       vbCrLf & "ELSE RefNum END as RefNum," & _
+       vbCrLf & "M.REMARKS," & _
+       vbCrLf & " M.SENDERID,M.SENDERNAME,M.SERVICECHARGE, " & _
+       vbCrLf & "M.SERVICETYPE, " & _
+       vbCrLf & "Case M.STATUS" & _
+       vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
+       vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
+       vbCrLf & " ELSE 'N/A'" & _
+       vbCrLf & " END AS STATUS, M.SYSTEMINFO, M.TRANSDATE," & _
+       vbCrLf & " M.TRANSID" & _
+       vbCrLf & " FROM TBLMONEYTRANSFER M" & _
+       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
+       vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
+       vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
         vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
         vbCrLf & " ORDER BY M.TRANSDATE;"
 
         Dim headers() As String = _
-  {"AMOUNT", "COMMISSION", " ENCODER", " ID", "   LOCATION", " MONEYTRANS", " NETAMOUNT", _
-   "RECEIVERNAME", "   REFNUM", " REMARKS", "SENDERNAME", "SERVICECHARGE", "SERVICETYPE", "STATUS", "SYSTEMINFO", _
-    "TRANSDATE", "TRANSID"}
+  {"AMOUNT", "COMMISSION", " ENCODER", " ID", " LOCATION", " MONEYTRANS", " NETAMOUNT", "RECIEVERID", _
+   "RECEIVERNAME", " REFNUM", " REMARKS", "SENDERID", "SENDERNAME", "SERVICECHARGE", "SERVICETYPE", "STATUS", "SYSTEMINFO", _
+    "TRANSDATE", "TRANSACTIONID"}
 
         Dim verified_url As String
         Dim str As String = "Remitance"
@@ -370,24 +299,6 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -424,7 +335,7 @@ Public Class ExtractDataFromDatabase
         Dim mySql As String
         mySql = " SELECT P.ADVINT,P.APPRAISAL,G.FULLNAME AS APPRAISER," & _
         vbCrLf & "P.AUCTIONDATE,CLASS.CATEGORY,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, " & _
-        vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,P.ENCODERID, P.EVAT, " & _
+        vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,E.FULLNAME, P.EVAT, " & _
         vbCrLf & "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT," & _
         vbCrLf & " P.LESSPRINCIPAL, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
         vbCrLf & " P.OLDTICKET," & _
@@ -444,40 +355,23 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "ON CLASS.CLASSID = P.CATID" & _
         vbCrLf & "LEFT JOIN TBL_GAMIT G" & _
         vbCrLf & "ON G.USERID = P.APPRAISERID" & _
+         vbCrLf & "LEFT JOIN TBL_GAMIT E" & _
+        vbCrLf & "ON E.ENCODERID = P.ENCODERID" & _
         vbCrLf & "INNER JOIN TBLCLIENT C" & _
         vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
         vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
         vbCrLf & "ORDER BY P.LOANDATE ASC;"
 
         Dim headers() As String = _
-           {"ADVINT", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENT", "DAYSOVERDUE", _
+           {"ADVANCEINTEREST", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENTNAME", "DAYSOVERDUE", _
             "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
             "KARAT", "LESSPRINCIPAL", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", "PAWNID", _
-            "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS"}
+            "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS", "SYSTEMINFO"}
 
 
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
-
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -524,8 +418,8 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
-       {"CLIENTID", "DENOMINATION", "FULLNAME", " NETAMOUNT", " PESORATE", "CLIENT", "REMARKS", _
-        "STATUS", " SYSTEMINFO", "TRANSDATE", "USERID"}
+      {"CLIENTID", "DENOMINATION", "DOLLARID", "FULLNAME", " NETAMOUNT", " PESORATE", "REMARKS", "SERIAL", _
+       "STATUS", " SYSTEMINFO", "TRANSDATE", "USERID"}
 
 
         Dim str As String = "Dollar"
@@ -534,24 +428,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
+        
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -600,7 +477,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
-   {"AMOUNT", "BRANCHCODE", "BRANCHNAME", " BRWID", " FULLNAME", "REASON", " REFNUM", _
+   {"AMOUNT", "BRANCHCODE", "BRANCHNAME", " BORROWINGID", " ENCODERNAME", "REASON", " REFERENCENUM", _
     "REMARKS", " STATUS", " SYSTEMINFO", " TRANSDATE"}
 
         Dim verified_url As String
@@ -610,24 +487,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
+      
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -673,7 +533,7 @@ Public Class ExtractDataFromDatabase
 
         Dim headers() As String = _
   {"AMOUNT", "CLIENTID", " CLIENTNAME", " COINO", "  ENCODER", "INSURANCEID", " PAWNTICKET", _
-   "STATUS", "  SYSTEMINFO", " TRANSDATE", " T VALIDDATE"}
+   "STATUS", "  SYSTEMINFO", " TRANSDATE", " VALIDDATE"}
 
         Dim verified_url As String
         Dim str As String = "Insurance"
@@ -682,24 +542,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
+       
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -760,9 +603,9 @@ Public Class ExtractDataFromDatabase
         vbCrLf & " ORDER BY M.TRANSDATE;"
 
         Dim headers() As String = _
-  {"AMOUNT", "COMMISSION", " ENCODER", " ID", "   LOCATION", " MONEYTRANS", " NETAMOUNT", _
-   "RECEIVERNAME", "   REFNUM", " REMARKS", "SENDERNAME", "SERVICECHARGE", "SERVICETYPE", "STATUS", "SYSTEMINFO", _
-    "TRANSDATE", "TRANSID"}
+  {"AMOUNT", "COMMISSION", " ENCODER", " ID", "   LOCATION", " MONEYTRANS", " NETAMOUNT", "RECIEVERID", _
+   "RECEIVERNAME", " REFNUM", " REMARKS", "SENDERID", "SENDERNAME", "SERVICECHARGE", "SERVICETYPE", "STATUS", "SYSTEMINFO", _
+    "TRANSDATE", "TRANSACTIONID"}
 
         Dim verified_url As String
         Dim str As String = "Remitance"
@@ -770,24 +613,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
+        
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -826,9 +652,9 @@ Public Class ExtractDataFromDatabase
 
 
         Dim headers() As String = _
-            {"PAWNTICKET", "LOANDATE", "MATUDATE", "EXPIRYDATE", "AUCTIONDATE", "CLIENT", "FULLADDRESS", _
+            {"PAWNTICKET", "LOANDATE", "MATUDATE", "EXPIRYDATE", "AUCTIONDATE", "CLIENTNAME", "FULLADDRESS", _
              "DESCRIPTION", "ORNUM", "ORDATE", "OLDTICKET", "NETAMOUNT", "RENEWDUE", "REDEEMDUE", "APPRAISAL", "PRINCIPAL", _
-             "INTEREST", "ADVINT", "SERVICECHARGE", "PENALTY", "ITEMTYPE", "CATEGORY", "GRAMS", "KARAT", "STATUS", _
+             "INTEREST", "ADVANCEINTEREST", "SERVICECHARGE", "PENALTY", "ITEMTYPE", "CATEGORY", "GRAMS", "KARAT", "STATUS", _
              "PULLOUT", "APPRAISER"}
 
         Dim verified_url As String
@@ -837,24 +663,6 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -885,10 +693,10 @@ Public Class ExtractDataFromDatabase
 
     Private Sub ExtractALLMonthly()
         PawningExtract()
-        DollarExtract()
-        BorrowingExtract()
-        InsuranceExtract()
-        RemitanceExtract()
+        'DollarExtract()
+        'BorrowingExtract()
+        'InsuranceExtract()
+        'RemitanceExtract()
     End Sub
 
     Private Sub ExtractAllDaily()
