@@ -31,6 +31,7 @@ Partial Class ExtractDataFromDatabase
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblTransactioName = New System.Windows.Forms.Label()
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
+        Me.lbltransaction = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -113,11 +114,24 @@ Partial Class ExtractDataFromDatabase
         Me.sfdPath.FileName = "Excel 2007|*.xlsx"
         Me.sfdPath.Title = "Extract"
         '
+        'lbltransaction
+        '
+        Me.lbltransaction.AutoSize = True
+        Me.lbltransaction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltransaction.Location = New System.Drawing.Point(205, 216)
+        Me.lbltransaction.Name = "lbltransaction"
+        Me.lbltransaction.Size = New System.Drawing.Size(116, 16)
+        Me.lbltransaction.TabIndex = 40
+        Me.lbltransaction.Text = "TransactionName"
+        Me.lbltransaction.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lbltransaction.Visible = False
+        '
         'ExtractDataFromDatabase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(373, 245)
+        Me.Controls.Add(Me.lbltransaction)
         Me.Controls.Add(Me.lblTransactioName)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.txtpath1)
@@ -141,4 +155,5 @@ Partial Class ExtractDataFromDatabase
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents lblTransactioName As System.Windows.Forms.Label
     Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents lbltransaction As System.Windows.Forms.Label
 End Class

@@ -470,7 +470,7 @@ Module mod_system
 
         oWB = oXL.Workbooks.Add
         oSheet = oWB.ActiveSheet
-        oSheet.Name = "OUTSTANDING"
+        oSheet.Name = ExtractDataFromDatabase.lbltransaction.Text
 
         ' HEADERS
         Dim cnt As Integer = 0

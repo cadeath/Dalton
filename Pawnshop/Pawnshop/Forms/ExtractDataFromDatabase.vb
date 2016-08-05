@@ -7,7 +7,7 @@ Imports System.IO.Compression
 Public Class ExtractDataFromDatabase
     Dim ExtractType As String
     Const batch As String = "\Extract.bat"
-    Dim result As String = Path.GetTempPath()
+    ' Dim result As String = Path.GetTempPath()
     Dim appPath As String = Application.StartupPath
     Dim verified_url As String
 
@@ -19,7 +19,7 @@ Public Class ExtractDataFromDatabase
 #Region "Extract Database Table Monthly"
 
     Private Sub PawningExtract()
-
+        lbltransaction.Text = "Pawning"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -64,6 +64,27 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
+
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -86,10 +107,10 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
 
-      
     End Sub
 
     Private Sub DollarExtract()
+        lbltransaction.Text = "Dollar"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -116,6 +137,25 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -139,10 +179,11 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
+     
     End Sub
 
     Private Sub BorrowingExtract()
+        lbltransaction.Text = "Borrowing"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -171,6 +212,25 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -193,10 +253,11 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
+        
     End Sub
 
     Private Sub InsuranceExtract()
+        lbltransaction.Text = "Insurance"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -223,6 +284,25 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -243,10 +323,11 @@ Public Class ExtractDataFromDatabase
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
-
+        
     End Sub
 
     Private Sub RemitanceExtract()
+        lbltransaction.Text = "Remitance"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -289,6 +370,25 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -310,13 +410,14 @@ Public Class ExtractDataFromDatabase
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
-
+       
     End Sub
 #End Region
 
 #Region "Extract Database Table Daily"
 
     Private Sub PawningExtractDaily()
+        lbltransaction.Text = "Pawning"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
@@ -359,6 +460,25 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -383,10 +503,11 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
+    
     End Sub
 
     Private Sub DollarExtractDaily()
+        lbltransaction.Text = "Dollar"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -413,6 +534,25 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -436,10 +576,12 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    
 
     End Sub
 
     Private Sub BorrowingExtractDaily()
+        lbltransaction.Text = "Borrowing"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -468,6 +610,24 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -490,9 +650,13 @@ Public Class ExtractDataFromDatabase
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
+
+       
+
     End Sub
 
     Private Sub InsuranceExtractDaily()
+        lbltransaction.Text = "Insurance"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -518,6 +682,24 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -540,9 +722,12 @@ Public Class ExtractDataFromDatabase
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
+
+       
     End Sub
 
     Private Sub RemitanceExtractDaily()
+        lbltransaction.Text = "Remitance"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -585,6 +770,25 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -608,10 +812,11 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
+      
     End Sub
 
     Private Sub OutstandingExtract()
+        lbltransaction.Text = "Outstanding"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
@@ -631,6 +836,25 @@ Public Class ExtractDataFromDatabase
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
+
+        Dim ex As Excel.Application
+        Dim wb As Excel.Workbook
+        Dim sh As Excel.Worksheet
+
+        ex = New Excel.Application
+        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
+        sh = wb.Worksheets(1)
+
+        With sh.UsedRange
+            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
+        End With
+
+        wb.Save()
+        sh = Nothing
+        wb.Close()
+        wb = Nothing
+        ex.Application.Quit()
+        ex = Nothing
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -653,6 +877,8 @@ Public Class ExtractDataFromDatabase
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
+
+      
     End Sub
 
 #End Region
@@ -673,8 +899,18 @@ Public Class ExtractDataFromDatabase
         RemitanceExtractDaily()
         OutstandingExtract()
     End Sub
+    Public Shared Sub ReleaseObject(ByVal obj As Object)
+        Try
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(obj)
+        Catch ex As Exception
+            obj = Nothing
+        Finally
+            GC.Collect()
+        End Try
+    End Sub
 
-    Private Sub btnExtract_Click(sender As System.Object, e As System.EventArgs) Handles btnExtract.Click
+    Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
+
         Dim sd As Date = MonCalendar.SelectionStart
         Dim str As String = sd
         Dim filename As String = str.Replace("/"c, "_"c)
@@ -701,7 +937,6 @@ Public Class ExtractDataFromDatabase
                 My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Monthly" & mod_system.BranchCode & ".rar", "Monthly" & mod_system.BranchCode & "" & filename & ".rar")
 
         End Select
-
         Dim myFile As String
         Dim mydir As String = Application.StartupPath
         'readValue()
