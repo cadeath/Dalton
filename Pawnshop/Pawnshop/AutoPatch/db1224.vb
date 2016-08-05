@@ -6,7 +6,7 @@
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
-            RemoveReports() 'Remove Audit Report
+            RemoveReports() 'Remove Audit Privilege
 
             Database_Update(LATEST_VERSION)
             Log_Report("SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3")
