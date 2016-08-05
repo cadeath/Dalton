@@ -4,6 +4,11 @@ Imports System.IO
 Imports System.IO.Compression
 
 
+' TODO: ELLIE
+' PLEASE ARRANGE EVERYTHING! MAKE IT MORE UNDERSTANDBLE AND EASY TO SORT
+' REMOVE ALL YOUR BRANCHNAME: <BRANCHNAME>, IT IS NO USE!
+' DON'T MIND THE BRANCHCODE, I ALREADY INCLUDED IT WHEN EXTRACTED SO EXCLUDE IT
+
 Public Class ExtractDataFromDatabase
     Dim ExtractType As String
     Const batch As String = "\Extract.bat"
@@ -55,6 +60,9 @@ Public Class ExtractDataFromDatabase
        vbCrLf & String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
        vbCrLf & "ORDER BY P.LOANDATE ASC;"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE THIS HEADERS IN A MANNER THAT THE ACCOUNTING CAN EASILY READ
+        ' IF YOU DONT UNDERSTAND, BETTER USE THE PAWNING VIEW FIELD ARRANGEMENT.
         Dim headers() As String = _
          {"PAWNID", "CLIENTNAME", "APPRAISER", "ADVANCEINTEREST", "APPRAISAL", "CATEGORY", "DAYSOVERDUE", _
           "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
@@ -62,11 +70,9 @@ Public Class ExtractDataFromDatabase
           "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS", "SYSTEMINFO"}
 
 
-
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
-
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -109,6 +115,8 @@ Public Class ExtractDataFromDatabase
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
+        ' TODO: ELLIE
+        ' WHERE IS THE CURRENCY SYMBOL OR THE IDENTIFICATION ON WHAT CURRENCY IS THE TRANSACTION?
         Dim headers() As String = _
        {"DOLLARID", "CLIENTID", "FULLNAME", "DENOMINATION", " NETAMOUNT", " PESORATE", "TRANSDATE", "REMARKS", "SERIAL", _
         "STATUS", " SYSTEMINFO", "USERID"}
@@ -166,6 +174,8 @@ Public Class ExtractDataFromDatabase
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE
         Dim headers() As String = _
     {" BORROWINGID", " ENCODERNAME", "BRANCHCODE", "BRANCHNAME", "AMOUNT", "TRANSDATE", "REASON", " REFERENCENUM", _
       "REMARKS", " STATUS", " SYSTEMINFO"}
@@ -221,6 +231,9 @@ Public Class ExtractDataFromDatabase
             vbCrLf & String.Format("WHERE I.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
             vbCrLf & "ORDER BY TRANSDATE ASC"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE
+        ' WHAT IS "T VALIDDATE"?
         Dim headers() As String = _
   {"INSURANCEID", "CLIENTID", " CLIENTNAME", "AMOUNT", " COINO", " TRANSDATE", " VALIDDATE", "  ENCODER", " PAWNTICKET", _
    "STATUS", "  SYSTEMINFO"}
@@ -289,6 +302,8 @@ Public Class ExtractDataFromDatabase
         vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
         vbCrLf & " ORDER BY M.TRANSDATE;"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE
         Dim headers() As String = _
   {" ID", "RECIEVERID", "RECEIVERNAME", "SENDERID", "SENDERNAME", "AMOUNT", "COMMISSION", " ENCODER", " LOCATION", " MONEYTRANS", _
     "TRANSDATE", "SERVICECHARGE", "SERVICETYPE", "STATUS", " NETAMOUNT", " REFNUM", " REMARKS", "TRANSACTIONID", "SYSTEMINFO"}
@@ -362,6 +377,8 @@ Public Class ExtractDataFromDatabase
         vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
         vbCrLf & "ORDER BY P.LOANDATE ASC;"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE EVERYTHING
         Dim headers() As String = _
          {"PAWNID", "CLIENTNAME", "APPRAISER", "ADVANCEINTEREST", "APPRAISAL", "CATEGORY", "DAYSOVERDUE", _
           "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
