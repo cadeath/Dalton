@@ -4,6 +4,11 @@ Imports System.IO
 Imports System.IO.Compression
 
 
+' TODO: ELLIE
+' PLEASE ARRANGE EVERYTHING! MAKE IT MORE UNDERSTANDBLE AND EASY TO SORT
+' REMOVE ALL YOUR BRANCHNAME: <BRANCHNAME>, IT IS NO USE!
+' DON'T MIND THE BRANCHCODE, I ALREADY INCLUDED IT WHEN EXTRACTED SO EXCLUDE IT
+
 Public Class ExtractDataFromDatabase
     Dim ExtractType As String
     Const batch As String = "\Extract.bat"
@@ -52,6 +57,9 @@ Public Class ExtractDataFromDatabase
         mySql &= String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY P.LOANDATE ASC;"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE THIS HEADERS IN A MANNER THAT THE ACCOUNTING CAN EASILY READ
+        ' IF YOU DONT UNDERSTAND, BETTER USE THE PAWNING VIEW FIELD ARRANGEMENT.
         Dim headers() As String = _
            {"ADVINT", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENT", "DAYSOVERDUE", _
             "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
@@ -59,31 +67,9 @@ Public Class ExtractDataFromDatabase
             "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS"}
 
 
-
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
-
-
-        Dim ex As Excel.Application
-        Dim wb As Excel.Workbook
-        Dim sh As Excel.Worksheet
-
-        ex = New Excel.Application
-        wb = ex.Workbooks.Open(appPath & "\" & sfdPath.FileName)
-        sh = wb.Worksheets(1)
-
-        With sh.UsedRange
-            sh.Cells(.Row, .Column + .Columns.Count) = "BRANCHNAME:" & mod_system.branchName
-        End With
-
-        wb.Save()
-        sh = Nothing
-        wb.Close()
-        wb = Nothing
-        ex.Application.Quit()
-        ex = Nothing
-
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -126,6 +112,8 @@ Public Class ExtractDataFromDatabase
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
+        ' TODO: ELLIE
+        ' WHERE IS THE CURRENCY SYMBOL OR THE IDENTIFICATION ON WHAT CURRENCY IS THE TRANSACTION?
         Dim headers() As String = _
        {"CLIENTID", "DENOMINATION", "FULLNAME", " NETAMOUNT", " PESORATE", "CLIENT", "REMARKS", _
         "STATUS", " SYSTEMINFO", "TRANSDATE", "USERID"}
@@ -201,6 +189,8 @@ Public Class ExtractDataFromDatabase
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE
         Dim headers() As String = _
     {"AMOUNT", "BRANCHCODE", "BRANCHNAME", " BRWID", " FULLNAME", "REASON", " REFNUM", _
      "REMARKS", " STATUS", " SYSTEMINFO", " TRANSDATE"}
@@ -273,6 +263,9 @@ Public Class ExtractDataFromDatabase
             vbCrLf & String.Format("WHERE I.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
             vbCrLf & "ORDER BY TRANSDATE ASC"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE
+        ' WHAT IS "T VALIDDATE"?
         Dim headers() As String = _
   {"AMOUNT", "CLIENTID", " CLIENTNAME", " COINO", "  ENCODER", "INSURANCEID", " PAWNTICKET", _
    "STATUS", "  SYSTEMINFO", " TRANSDATE", " T VALIDDATE"}
@@ -359,6 +352,8 @@ Public Class ExtractDataFromDatabase
         vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
         vbCrLf & " ORDER BY M.TRANSDATE;"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE
         Dim headers() As String = _
   {"AMOUNT", "COMMISSION", " ENCODER", " ID", "   LOCATION", " MONEYTRANS", " NETAMOUNT", _
    "RECEIVERNAME", "   REFNUM", " REMARKS", "SENDERNAME", "SERVICECHARGE", "SERVICETYPE", "STATUS", "SYSTEMINFO", _
@@ -449,6 +444,8 @@ Public Class ExtractDataFromDatabase
         vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
         vbCrLf & "ORDER BY P.LOANDATE ASC;"
 
+        ' TODO: ELLIE
+        ' PLEASE ARRANGE EVERYTHING
         Dim headers() As String = _
            {"ADVINT", "APPRAISAL", "APPRAISER", "AUCTIONDATE", "CATEGORY", "CLIENT", "DAYSOVERDUE", _
             "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
