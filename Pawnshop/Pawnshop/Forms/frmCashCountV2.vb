@@ -199,11 +199,16 @@
         Dim CashCountStatus As Integer = 1
         If isAuditing Then
             Dim CCsql As String = "SELECT DISTINCT STATUS FROM " & fillData
-            CCsql &= " WHERE DailyID = {0} AND (Status <> 1 OR Status <> 0)"
+            CCsql &= String.Format(" WHERE DailyID = {0} AND (Status <> 1 OR Status <> 0)", dailyID)
             CCsql &= " ORDER BY STATUS DESC"
-            Dim ccDS As DataSet = LoadSQL(mySql)
+            Dim ccDS As DataSet = LoadSQL(CCsql)
 
-            CashCountStatus = ds.Tables(0).Rows(0).Item(0) + 1
+            If ccDS.Tables(0).Rows.Count = 0 Then
+                CashCountStatus = 2 ' Audit Cash Count
+            Else
+                ' Audit Another Cash Count
+                CashCountStatus = ccDS.Tables(0).Rows(0).Item(0) + 1
+            End If
         End If
 
         For Each dr As DataRow In ds.Tables(fillData).Rows
