@@ -110,7 +110,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "D.NETAMOUNT,D.PESORATE, D.TRANSDATE, D.REMARKS,D.SERIAL, "
         mySql &= "Case D.STATUS "
         mySql &= "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  "
-        mySql &= "END AS STATUS, D.SYSTEMINFO, D.USERID "
+        mySql &= "END AS STATUS,CURRENCY, D.SYSTEMINFO, D.USERID "
         mySql &= "FROM TBLDOLLAR D "
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
@@ -119,7 +119,7 @@ Public Class ExtractDataFromDatabase
         ' WHERE IS THE CURRENCY SYMBOL OR THE IDENTIFICATION ON WHAT CURRENCY IS THE TRANSACTION?
         Dim headers() As String = _
        {"DOLLARID", "CLIENTID", "FULLNAME", "DENOMINATION", " NETAMOUNT", " PESORATE", "TRANSDATE", "REMARKS", "SERIAL", _
-        "STATUS", " SYSTEMINFO", "USERID"}
+        "STATUS", "CURRENCY", " SYSTEMINFO", "USERID"}
 
         Dim verified_url As String
         Dim str As String = "Dollar"
@@ -152,7 +152,7 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     
+
     End Sub
 
     Private Sub BorrowingExtract()
@@ -187,7 +187,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        
+
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -211,7 +211,7 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        
+
     End Sub
 
     Private Sub InsuranceExtract()
@@ -265,7 +265,7 @@ Public Class ExtractDataFromDatabase
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
-        
+
     End Sub
 
     Private Sub RemitanceExtract()
@@ -336,7 +336,7 @@ Public Class ExtractDataFromDatabase
         pro.WindowStyle = ProcessWindowStyle.Hidden
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
-       
+
     End Sub
 #End Region
 
@@ -414,7 +414,7 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    
+
     End Sub
 
     Private Sub DollarExtractDaily()
@@ -429,14 +429,14 @@ Public Class ExtractDataFromDatabase
         mySql &= "D.NETAMOUNT,D.PESORATE, D.TRANSDATE, D.REMARKS,D.SERIAL, "
         mySql &= "Case D.STATUS "
         mySql &= "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  "
-        mySql &= "END AS STATUS, D.SYSTEMINFO, D.USERID "
+        mySql &= "END AS STATUS,CURRENCY, D.SYSTEMINFO, D.USERID "
         mySql &= "FROM TBLDOLLAR D "
         mySql &= String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
         Dim headers() As String = _
               {"DOLLARID", "CLIENTID", "FULLNAME", "DENOMINATION", " NETAMOUNT", " PESORATE", "TRANSDATE", "REMARKS", "SERIAL", _
-               "STATUS", " SYSTEMINFO", "USERID"}
+               "STATUS", "CURRENCY", " SYSTEMINFO", "USERID"}
 
         Dim str As String = "Dollar"
         Console.WriteLine("Dollar Activated")
@@ -444,7 +444,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-        
+
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -469,7 +469,7 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    
+
 
     End Sub
 
@@ -480,7 +480,7 @@ Public Class ExtractDataFromDatabase
         Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
-      Dim mySql As String
+        Dim mySql As String
         mySql = "SELECT B.BRWID,  G.FULLNAME, B.BRANCHCODE, B.BRANCHNAME, B.AMOUNT, B.TRANSDATE, "
         mySql &= "B.REASON,B.REFNUM, B.REMARKS, "
         mySql &= " Case B.STATUS "
@@ -492,9 +492,9 @@ Public Class ExtractDataFromDatabase
         mySql &= String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
-  Dim headers() As String = _
-          {" BORROWINGID", " ENCODERNAME", "BRANCHCODE", "BRANCHNAME", "AMOUNT", "TRANSDATE", "REASON", " REFERENCENUM", _
-            "REMARKS", " STATUS", " SYSTEMINFO"}
+        Dim headers() As String = _
+                {" BORROWINGID", " ENCODERNAME", "BRANCHCODE", "BRANCHNAME", "AMOUNT", "TRANSDATE", "REASON", " REFERENCENUM", _
+                  "REMARKS", " STATUS", " SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Borrowings"
@@ -503,7 +503,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-      
+
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -527,7 +527,7 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
 
-       
+
 
     End Sub
 
@@ -547,9 +547,9 @@ Public Class ExtractDataFromDatabase
             vbCrLf & String.Format("WHERE I.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
            vbCrLf & "ORDER BY TRANSDATE ASC"
 
-    Dim headers() As String = _
-      {"INSURANCEID", "CLIENTID", " CLIENTNAME", "AMOUNT", " COINO", " TRANSDATE", " VALIDDATE", "  ENCODER", " PAWNTICKET", _
-       "STATUS", "  SYSTEMINFO"}
+        Dim headers() As String = _
+          {"INSURANCEID", "CLIENTID", " CLIENTNAME", "AMOUNT", " COINO", " TRANSDATE", " VALIDDATE", "  ENCODER", " PAWNTICKET", _
+           "STATUS", "  SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Insurance"
@@ -558,7 +558,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
-       
+
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -582,7 +582,7 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
 
-       
+
     End Sub
 
     Private Sub RemitanceExtractDaily()
@@ -619,9 +619,9 @@ Public Class ExtractDataFromDatabase
         vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
         vbCrLf & " ORDER BY M.TRANSDATE;"
 
-          Dim headers() As String = _
+        Dim headers() As String = _
 {" ID", "RECIEVERID", "RECEIVERNAME", "SENDERID", "SENDERNAME", "AMOUNT", "COMMISSION", " ENCODER", " LOCATION", " MONEYTRANS", _
-  "TRANSDATE", "SERVICECHARGE", "SERVICETYPE", "STATUS", " NETAMOUNT", " REFNUM", " REMARKS", "TRANSACTIONID", "SYSTEMINFO"}
+"TRANSDATE", "SERVICECHARGE", "SERVICETYPE", "STATUS", " NETAMOUNT", " REFNUM", " REMARKS", "TRANSACTIONID", "SYSTEMINFO"}
 
         Dim verified_url As String
         Dim str As String = "Remitance"
@@ -653,7 +653,7 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-      
+
     End Sub
 
     Private Sub OutstandingExtract()
@@ -701,7 +701,7 @@ Public Class ExtractDataFromDatabase
         pro.UseShellExecute = False
         Dim process As Process = process.Start(pro)
 
-      
+
     End Sub
 
 #End Region
@@ -738,7 +738,7 @@ Public Class ExtractDataFromDatabase
         Select Case ExtractType
 
             Case "Daily"
-               ExtractAllDaily()
+                ExtractAllDaily()
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True

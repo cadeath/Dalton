@@ -1109,3 +1109,9 @@ CASE
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
 [08/05/2016 14:59:38] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
+[08/05/2016 15:21:11] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
+[08/05/2016 15:22:37] SYSTEM PATCHED UP FROM 1.2 TO 1.2.1
+[08/05/2016 15:22:42] SYSTEM PATCHED UP FROM 1.2.1 TO 1.2.2
+[08/05/2016 15:22:48] SYSTEM PATCHED UP FROM 1.2.2 TO 1.2.2.1
+[08/05/2016 15:23:08] SYSTEM PATCHED UP FROM 1.2.2.1 TO 1.2.2.2
+[08/05/2016 15:23:11] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
