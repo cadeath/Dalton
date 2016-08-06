@@ -452,8 +452,8 @@
     End Sub
 
     Private Sub AuditReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditReportToolStripMenuItem.Click
-        qryDate.FormType = qryDate.ReportType.AuditPrinLimit
-        qryDate.Show()
+        qryPullOut_List.FormType = qryPullOut_List.DailyReport.AuditReport
+        qryPullOut_List.Show()
     End Sub
 
 

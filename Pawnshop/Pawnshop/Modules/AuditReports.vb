@@ -1,6 +1,6 @@
 ﻿Module AuditReports
 
-    Friend Sub Min_Principal(min As Double, dt As Date)
+    Friend Sub Min_Principal(ByVal min As Double, ByVal dt As Date, ByVal type As String)
         Dim mySql As String
         mySql = "SELECT * "
         mySql &= vbCrLf & "FROM ("
@@ -39,11 +39,15 @@
         mySql &= vbCrLf & "		(Status = 'WITHDRAW')   "
         mySql &= vbCrLf & String.Format("		AND LOANDATE <= '{0}' AND PULLOUT > '{0}' AND PRINCIPAL >= {1}", dt.ToShortDateString, min)
         mySql &= vbCrLf & "	)"
+        If type <> "ALL" Then
+            mySql &= " WHERE ITEMTYPE = '" & type & "'"
+        End If
         mySql &= vbCrLf & "ORDER BY PAWNTICKET ASC"
 
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtMonthOf", "DATE: " & dt.ToString("MMMM dd yyyy").ToUpper)
         addParameters.Add("branchName", branchName)
+        addParameters.Add("ReportName", "AUDIT REPORTS")
 
         frmReport.ReportInit(mySql, "dsOutstanding", "Reports\rpt_Outstanding.rdlc", addParameters)
         frmReport.Show()
