@@ -3,6 +3,7 @@
     Enum DailyReport As Integer
         Outstanding = 0
         Pullout = 1
+        AuditReport = 2
     End Enum
     Friend FormType As DailyReport = DailyReport.Outstanding
     Private mySql As String, fillData As String
@@ -13,9 +14,15 @@
                 Outstanding_Loans()
             Case DailyReport.Pullout
                 Item_PullOut()
+            Case DailyReport.AuditReport
+                Audit_PrincipalMin()
         End Select
 
         'Item_PullOut()
+    End Sub
+    Private Sub Audit_PrincipalMin()
+        Dim MINIMUM_PRINCIPAL As Double = 5000
+        AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCalendar.SelectionStart.ToShortDateString, cboClass.Text)
     End Sub
 
     Private Sub qryPullOut_List_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -164,6 +171,7 @@
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtMonthOf", "DATE: " & monCalendar.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
         addParameters.Add("branchName", branchName)
+        addParameters.Add("ReportName", "OUTSTANDING REPORTS")
 
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
         frmReport.Show()

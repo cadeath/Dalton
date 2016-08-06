@@ -98,6 +98,7 @@
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         If Not OTPDisable Then
+            btnView.PerformClick()
             diagOTP.FormType = diagOTP.OTPType.VoidBranchToBranch
             If Not CheckOTP() Then Exit Sub
         Else
