@@ -807,21 +807,21 @@ Public Class ExtractDataFromDatabase
 #End Region
 
     Private Sub ExtractALLMonthly()
-        'PawningExtract()
-        'DollarExtract()
-        'BorrowingExtract()
-        'InsuranceExtract()
-        'RemitanceExtract()
+        PawningExtract()
+        DollarExtract()
+        BorrowingExtract()
+        InsuranceExtract()
+        RemitanceExtract()
         CashInOUtExtract()
     End Sub
 
     Private Sub ExtractAllDaily()
-        'PawningExtractDaily()
-        'DollarExtractDaily()
-        'InsuranceExtractDaily()
-        'BorrowingExtractDaily()
-        'RemitanceExtractDaily()
-        'OutstandingExtract()
+        PawningExtractDaily()
+        DollarExtractDaily()
+        InsuranceExtractDaily()
+        BorrowingExtractDaily()
+        RemitanceExtractDaily()
+        OutstandingExtract()
         CashInOUtExtractDaily()
     End Sub
 
