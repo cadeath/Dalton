@@ -297,7 +297,7 @@ Public Class ExtractDataFromDatabase
        vbCrLf & " M.TRANSID," & _
      vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERDID = M.ENCODERID" & _
+       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
        vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
         vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
