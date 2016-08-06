@@ -827,13 +827,13 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub ExtractAllDaily()
-        'PawningExtractDaily()
-        'DollarExtractDaily()
-        'InsuranceExtractDaily()
-        'BorrowingExtractDaily()
-        'RemitanceExtractDaily()
+        PawningExtractDaily()
+        DollarExtractDaily()
+        InsuranceExtractDaily()
+        BorrowingExtractDaily()
+        RemitanceExtractDaily()
         OutstandingExtract()
-        'CashInOUtExtractDaily()
+        CashInOUtExtractDaily()
     End Sub
 
 
