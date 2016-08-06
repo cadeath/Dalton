@@ -124,7 +124,6 @@ Partial Class ExtractDataFromDatabase
         Me.lbltransaction.TabIndex = 40
         Me.lbltransaction.Text = "TransactionName"
         Me.lbltransaction.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.lbltransaction.Visible = False
         '
         'ExtractDataFromDatabase
         '

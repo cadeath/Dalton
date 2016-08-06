@@ -338,6 +338,61 @@ Public Class ExtractDataFromDatabase
         Dim process As Process = process.Start(pro)
 
     End Sub
+
+    Private Sub CashInOUtExtract()
+        lbltransaction.Text = "CASHINOUT"
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
+        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+
+        Dim mySql As String
+        mySql = "	SELECT T.TRANSID,T.CASHID,G.FULLNAME AS ENCODERNAME,T.CATEGORY,T.TRANSNAME,T.TYPE,	"
+        mySql &= "	T.AMOUNT,T.TRANSDATE,	"
+        mySql &= "	CASE T.STATUS	"
+        mySql &= "	WHEN  '1' THEN 'ACTIVE'	"
+        mySql &= "	WHEN '0' THEN 'VOID'	"
+        mySql &= "	ELSE 'N/A' END AS STATUS,T.REMARKS,T.SYSTEMINFO	"
+        mySql &= "	FROM TBLCASHTRANS T	"
+        mySql &= "	LEFT JOIN TBL_GAMIT G	"
+        mySql &= "	ON G.ENCODERID = T.ENCODERID	"
+        mySql &= String.Format("WHERE T.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= "	ORDER BY TRANSID	"
+
+
+        Dim headers() As String = _
+  {" TRANSACTIONID", "CASHID", "ENCODERNAME", "CATEGORY", "TRANSNAME", "TYPE", "AMOUNT", "TRANSDATE", "STATUS", "REMARKS", "SYSTEMINFO"}
+
+        Dim verified_url As String
+        Dim str As String = "CASHINOUT"
+        sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
+        verified_url = appPath & "\" & sfdPath.FileName
+        ExtractToExcel(headers, mySql, verified_url)
+
+
+        txtpath1.Text = txtpath1.Text
+        Using sw As StreamWriter = File.CreateText("Extract.bat")
+            sw.WriteLine("@echo off")
+            sw.WriteLine("title cdt-S0ft - Extract")
+            sw.WriteLine("echo Extracting. . .")
+            sw.WriteLine("pause")
+            sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Monthly" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("cls ")
+            sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+            sw.WriteLine("pause")
+            sw.WriteLine("exit")
+        End Using
+
+        Dim pro As New ProcessStartInfo(appPath & batch)
+        pro.RedirectStandardError = True
+        pro.RedirectStandardOutput = True
+        pro.CreateNoWindow = False
+        pro.WindowStyle = ProcessWindowStyle.Hidden
+        pro.UseShellExecute = False
+        Dim process As Process = process.Start(pro)
+
+    End Sub
 #End Region
 
 #Region "Extract Database Table Daily"
@@ -421,8 +476,7 @@ Public Class ExtractDataFromDatabase
         lbltransaction.Text = "Dollar"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
-        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+     
 
         Dim mySql As String
         mySql = "SELECT D.DOLLARID, D.CLIENTID,D.FULLNAME,D.DENOMINATION, "
@@ -477,8 +531,7 @@ Public Class ExtractDataFromDatabase
         lbltransaction.Text = "Borrowing"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
-        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        
 
         Dim mySql As String
         mySql = "SELECT B.BRWID,  G.FULLNAME, B.BRANCHCODE, B.BRANCHNAME, B.AMOUNT, B.TRANSDATE, "
@@ -535,8 +588,7 @@ Public Class ExtractDataFromDatabase
         lbltransaction.Text = "Insurance"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
-        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
+        
 
         Dim mySql As String
         mySql = " SELECT  I.INSURANCEID, I.CLIENTID,I.CLIENTNAME,I.AMOUNT, I.COINO,I.TRANSDATE, I.VALIDDATE, G.FULLNAME AS ENCODER,I.PAWNTICKET, " & _
@@ -589,9 +641,7 @@ Public Class ExtractDataFromDatabase
         lbltransaction.Text = "Remitance"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
-        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
-
+      
         Dim mySql As String
         mySql = "SELECT M.ID,M.RECEIVERID,M.RECEIVERNAME,M.SENDERID,M.SENDERNAME, M.AMOUNT, M.COMMISSION,G.FULLNAME AS ENCODER, M.LOCATION," & _
        vbCrLf & "Case M.MONEYTRANS" & _
@@ -660,9 +710,7 @@ Public Class ExtractDataFromDatabase
         lbltransaction.Text = "Outstanding"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-        Dim stDay = GetFirstDate(MonCalendar.SelectionStart)
-        Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
-
+       
         Dim mySql As String = "SELECT * FROM (   SELECT *   FROM PAWNING   WHERE (Status = 'NEW' OR Status = 'RENEW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'RENEWED')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'REDEEM')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'SEGRE')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL)   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'WITHDRAW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' ) ORDER BY PAWNTICKET ASC"
 
 
@@ -704,23 +752,77 @@ Public Class ExtractDataFromDatabase
 
     End Sub
 
+    Private Sub CashInOUtExtractDaily()
+        lbltransaction.Text = "CASHINOUT"
+        lblTransactioName.Text = "Wait While Data is Extracting . . ."
+        Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
+
+        Dim mySql As String
+        mySql = "	SELECT T.TRANSID,T.CASHID,G.FULLNAME AS ENCODERNAME,T.CATEGORY,T.TRANSNAME,T.TYPE,	"
+        mySql &= "	T.AMOUNT,T.TRANSDATE,	"
+        mySql &= "	CASE T.STATUS	"
+        mySql &= "	WHEN  '1' THEN 'ACTIVE'	"
+        mySql &= "	WHEN '0' THEN 'VOID'	"
+        mySql &= "	ELSE 'N/A' END AS STATUS,T.REMARKS,T.SYSTEMINFO	"
+        mySql &= "	FROM TBLCASHTRANS T	"
+        mySql &= "	LEFT JOIN TBL_GAMIT G	"
+        mySql &= "	ON G.ENCODERID = T.ENCODERID	"
+        mySql &= String.Format("WHERE T.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
+        mySql &= "	ORDER BY TRANSID	"
+
+
+        Dim headers() As String = _
+  {" TRANSACTIONID", "CASHID", "ENCODERNAME", "CATEGORY", "TRANSNAME", "TYPE", "AMOUNT", "TRANSDATE", "STATUS", "REMARKS", "SYSTEMINFO"}
+
+        Dim verified_url As String
+        Dim str As String = "CASHINOUT"
+        sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, str)  'BranchCode + Date
+        verified_url = appPath & "\" & sfdPath.FileName
+        ExtractToExcel(headers, mySql, verified_url)
+
+
+        txtpath1.Text = txtpath1.Text
+        Using sw As StreamWriter = File.CreateText("Extract.bat")
+            sw.WriteLine("@echo off")
+            sw.WriteLine("title cdt-S0ft - Extract")
+            sw.WriteLine("echo Extracting. . .")
+            sw.WriteLine("pause")
+            sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM Extracting...")
+            sw.WriteLine("rar a " & txtpath1.Text & "\" & "Daily" & mod_system.BranchCode & ".rar " & sfdPath.FileName & " -hp" & BranchCode & "MIS")
+            sw.WriteLine("cls ")
+            sw.WriteLine("echo DONE!!! THANK YOU FOR WAITING")
+            sw.WriteLine("pause")
+            sw.WriteLine("exit")
+        End Using
+
+        Dim pro As New ProcessStartInfo(appPath & batch)
+        pro.RedirectStandardError = True
+        pro.RedirectStandardOutput = True
+        pro.CreateNoWindow = False
+        pro.WindowStyle = ProcessWindowStyle.Hidden
+        pro.UseShellExecute = False
+        Dim process As Process = process.Start(pro)
+
+    End Sub
 #End Region
 
     Private Sub ExtractALLMonthly()
-        PawningExtract()
-        DollarExtract()
-        BorrowingExtract()
-        InsuranceExtract()
-        RemitanceExtract()
+        'PawningExtract()
+        'DollarExtract()
+        'BorrowingExtract()
+        'InsuranceExtract()
+        'RemitanceExtract()
+        CashInOUtExtract()
     End Sub
 
     Private Sub ExtractAllDaily()
-        PawningExtractDaily()
-        DollarExtractDaily()
-        InsuranceExtractDaily()
-        BorrowingExtractDaily()
-        RemitanceExtractDaily()
-        OutstandingExtract()
+        'PawningExtractDaily()
+        'DollarExtractDaily()
+        'InsuranceExtractDaily()
+        'BorrowingExtractDaily()
+        'RemitanceExtractDaily()
+        'OutstandingExtract()
+        CashInOUtExtractDaily()
     End Sub
 
 
