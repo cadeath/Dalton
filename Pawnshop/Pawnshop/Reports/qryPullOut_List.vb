@@ -37,6 +37,15 @@
             cboClass.Items.Add(dr.Item("Type"))
         Next
         cboClass.SelectedIndex = 0
+
+        Select Case FormType
+            Case DailyReport.Outstanding
+                Me.Text = "Outstanding Loans"
+            Case DailyReport.Pullout
+                Me.Text = "Pullout"
+            Case DailyReport.AuditReport
+                Me.Text = "Audit Report"
+        End Select
     End Sub
 
     Private Sub Item_PullOut()

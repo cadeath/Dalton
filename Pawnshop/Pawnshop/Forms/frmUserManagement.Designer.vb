@@ -389,9 +389,9 @@ Partial Class frmUserManagement
         Me.chkR4.AutoSize = True
         Me.chkR4.Location = New System.Drawing.Point(108, 81)
         Me.chkR4.Name = "chkR4"
-        Me.chkR4.Size = New System.Drawing.Size(63, 17)
+        Me.chkR4.Size = New System.Drawing.Size(148, 17)
         Me.chkR4.TabIndex = 8
-        Me.chkR4.Text = "Reports"
+        Me.chkR4.Text = "Audit Reports (Advanced)"
         Me.chkR4.UseVisualStyleBackColor = True
         '
         'chkR3
