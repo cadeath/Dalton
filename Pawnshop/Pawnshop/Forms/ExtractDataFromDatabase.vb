@@ -713,7 +713,16 @@ Public Class ExtractDataFromDatabase
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
        
-        Dim mySql As String = "SELECT * FROM (   SELECT *   FROM PAWNING   WHERE (Status = 'NEW' OR Status = 'RENEW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'RENEWED')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'REDEEM')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'SEGRE')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL)   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'WITHDRAW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' ) ORDER BY PAWNTICKET ASC"
+        Dim mySql As String
+        mySql = "	SELECT PAWNTICKET,LOANDATE,MATUDATE,EXPIRYDATE,	"
+        mySql &= "	  AUCTIONDATE,CLIENT,FULLADDRESS,	"
+        mySql &= "	  DESCRIPTION,ORNUM,	"
+        mySql &= "	  CASE WHEN ORDATE = '01/01/0001' THEN ''	"
+        mySql &= "	  ELSE ORDATE END AS ORDATE,OLDTICKET,NETAMOUNT,	"
+        mySql &= "	  RENEWDUE,REDEEMDUE,APPRAISAL,PRINCIPAL,INTEREST,ADVINT,SERVICECHARGE,	"
+        mySql &= "	  PENALTY,ITEMTYPE,CATEGORY,	"
+        mySql &= "	  GRAMS, KARAT,STATUS,PULLOUT,APPRAISER	"
+        mySql &= "FROM (   SELECT *   FROM PAWNING   WHERE (Status = 'NEW' OR Status = 'RENEW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'RENEWED')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'REDEEM')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'SEGRE')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL)   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'WITHDRAW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' ) ORDER BY PAWNTICKET ASC"
 
 
         Dim headers() As String = _
@@ -818,13 +827,13 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub ExtractAllDaily()
-        PawningExtractDaily()
-        DollarExtractDaily()
-        InsuranceExtractDaily()
-        BorrowingExtractDaily()
-        RemitanceExtractDaily()
+        'PawningExtractDaily()
+        'DollarExtractDaily()
+        'InsuranceExtractDaily()
+        'BorrowingExtractDaily()
+        'RemitanceExtractDaily()
         OutstandingExtract()
-        CashInOUtExtractDaily()
+        'CashInOUtExtractDaily()
     End Sub
 
 
