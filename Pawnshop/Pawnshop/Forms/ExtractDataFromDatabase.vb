@@ -54,7 +54,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "LEFT JOIN TBL_GAMIT G" & _
         vbCrLf & "ON G.USERID = P.APPRAISERID" & _
          vbCrLf & "LEFT JOIN TBL_GAMIT E" & _
-        vbCrLf & "ON E.ENCODERID = P.ENCODERID" & _
+        vbCrLf & "ON E.USERID = P.ENCODERID" & _
         vbCrLf & "INNER JOIN TBLCLIENT C" & _
         vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
        vbCrLf & String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
@@ -112,6 +112,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  "
         mySql &= "END AS STATUS,CURRENCY, D.SYSTEMINFO, D.USERID "
         mySql &= "FROM TBLDOLLAR D "
+        mySql &= "LEFT JOIN TBL_GAMIT G ON G.USERID = D.USERID "
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
@@ -170,7 +171,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "WHEN 'D' THEN 'CASH-IN' "
         mySql &= "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO "
         mySql &= "FROM TBLBORROW B "
-        mySql &= "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID"
+        mySql &= "LEFT JOIN TBL_GAMIT G ON G.USERID = B.ENCODERID"
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN'{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
@@ -227,7 +228,7 @@ Public Class ExtractDataFromDatabase
             vbCrLf & "Case I.STATUS " & _
             vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
             vbCrLf & "I.SYSTEMINFO FROM TBLINSURANCE I" & _
-            vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
+            vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = I.ENCODERID" & _
             vbCrLf & String.Format("WHERE I.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
             vbCrLf & "ORDER BY TRANSDATE ASC"
 
@@ -296,7 +297,7 @@ Public Class ExtractDataFromDatabase
        vbCrLf & " M.TRANSID," & _
      vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
+       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERDID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
        vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
         vbCrLf & String.Format("WHERE M.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
@@ -426,7 +427,7 @@ Public Class ExtractDataFromDatabase
         vbCrLf & "LEFT JOIN TBL_GAMIT G" & _
         vbCrLf & "ON G.USERID = P.APPRAISERID" & _
          vbCrLf & "LEFT JOIN TBL_GAMIT E" & _
-        vbCrLf & "ON E.ENCODERID = P.ENCODERID" & _
+        vbCrLf & "ON E.USERID = P.ENCODERID" & _
         vbCrLf & "INNER JOIN TBLCLIENT C" & _
         vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
         vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
@@ -485,6 +486,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "WHEN 'A' THEN 'ACTIVE'  WHEN 'V' THEN 'VOID'  ELSE 'N/A'  "
         mySql &= "END AS STATUS,CURRENCY, D.SYSTEMINFO, D.USERID "
         mySql &= "FROM TBLDOLLAR D "
+        mySql &= "LEFT JOIN TBL_GAMIT G ON G.USERID = D.USERID "
         mySql &= String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
@@ -541,7 +543,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "WHEN 'D' THEN 'CASH-IN' "
         mySql &= "ELSE 'N/A' END AS STATUS, B.SYSTEMINFO "
         mySql &= "FROM TBLBORROW B "
-        mySql &= "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = B.ENCODERID"
+        mySql &= "LEFT JOIN TBL_GAMIT G ON G.USERID = B.ENCODERID"
         mySql &= String.Format(" WHERE TRANSDATE ='{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
         mySql &= "ORDER BY TRANSDATE ASC"
 
@@ -595,7 +597,7 @@ Public Class ExtractDataFromDatabase
             vbCrLf & "Case I.STATUS " & _
             vbCrLf & "WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' ELSE 'N/A'  END AS STATUS," & _
             vbCrLf & "I.SYSTEMINFO FROM TBLINSURANCE I" & _
-            vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = I.ENCODERID" & _
+            vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = I.ENCODERID" & _
             vbCrLf & String.Format("WHERE I.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
            vbCrLf & "ORDER BY TRANSDATE ASC"
 
@@ -663,7 +665,7 @@ Public Class ExtractDataFromDatabase
        vbCrLf & " M.TRANSID," & _
      vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
-       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.ENCODERID = M.ENCODERID" & _
+       vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
        vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
         vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
@@ -816,12 +818,12 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub ExtractAllDaily()
-        'PawningExtractDaily()
-        'DollarExtractDaily()
-        'InsuranceExtractDaily()
-        'BorrowingExtractDaily()
-        'RemitanceExtractDaily()
-        'OutstandingExtract()
+        PawningExtractDaily()
+        DollarExtractDaily()
+        InsuranceExtractDaily()
+        BorrowingExtractDaily()
+        RemitanceExtractDaily()
+        OutstandingExtract()
         CashInOUtExtractDaily()
     End Sub
 
