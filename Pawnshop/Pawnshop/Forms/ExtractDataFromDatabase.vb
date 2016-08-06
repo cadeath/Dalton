@@ -355,7 +355,7 @@ Public Class ExtractDataFromDatabase
         mySql &= "	ELSE 'N/A' END AS STATUS,T.REMARKS,T.SYSTEMINFO	"
         mySql &= "	FROM TBLCASHTRANS T	"
         mySql &= "	LEFT JOIN TBL_GAMIT G	"
-        mySql &= "	ON G.ENCODERID = T.ENCODERID	"
+        mySql &= "	ON G.USERID = T.ENCODERID	"
         mySql &= String.Format("WHERE T.TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= "	ORDER BY TRANSID	"
 
@@ -766,13 +766,13 @@ Public Class ExtractDataFromDatabase
         mySql &= "	ELSE 'N/A' END AS STATUS,T.REMARKS,T.SYSTEMINFO	"
         mySql &= "	FROM TBLCASHTRANS T	"
         mySql &= "	LEFT JOIN TBL_GAMIT G	"
-        mySql &= "	ON G.ENCODERID = T.ENCODERID	"
+        mySql &= "	ON G.USERID = T.ENCODERID	"
         mySql &= String.Format("WHERE T.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString)
         mySql &= "	ORDER BY TRANSID	"
 
-
         Dim headers() As String = _
   {" TRANSACTIONID", "CASHID", "ENCODERNAME", "CATEGORY", "TRANSNAME", "TYPE", "AMOUNT", "TRANSDATE", "STATUS", "REMARKS", "SYSTEMINFO"}
+
 
         Dim verified_url As String
         Dim str As String = "CASHINOUT"
@@ -816,12 +816,12 @@ Public Class ExtractDataFromDatabase
     End Sub
 
     Private Sub ExtractAllDaily()
-        PawningExtractDaily()
-        DollarExtractDaily()
-        InsuranceExtractDaily()
-        BorrowingExtractDaily()
-        RemitanceExtractDaily()
-        OutstandingExtract()
+        'PawningExtractDaily()
+        'DollarExtractDaily()
+        'InsuranceExtractDaily()
+        'BorrowingExtractDaily()
+        'RemitanceExtractDaily()
+        'OutstandingExtract()
         CashInOUtExtractDaily()
     End Sub
 
