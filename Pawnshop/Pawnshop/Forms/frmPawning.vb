@@ -148,7 +148,7 @@
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text.Length <= 3 Then
-            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation)
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Client Search")
         Else
             PawningSearch()
         End If
