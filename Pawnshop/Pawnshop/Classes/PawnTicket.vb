@@ -693,13 +693,16 @@ Public Class PawnTicket
                 RemoveDailyTimeLog(PTtransid, "1", ModNAME)
             Else
                 ChangeStatus("L")
+
                 Dim mysql As String = "SELECT * FROM " & fillData & " WHERE PAWNID = '" & PtransID & "'"
                 Dim ds As DataSet = LoadSQL(mysql)
                 Dim tmpEncoderID As Integer
                 tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
                 TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
 
+
                 RemoveJournal(PtransID, , ModNAME)
+
                 RemoveDailyTimeLog(PTtransid, "1", ModNAME)
             End If
         Catch ex As Exception
