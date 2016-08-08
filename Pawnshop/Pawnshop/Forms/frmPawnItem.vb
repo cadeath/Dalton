@@ -248,7 +248,9 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        frmClient.SearchSelect(txtCustomer.Text, FormName.frmPawnItem)
+        Dim secured_str As String = txtCustomer.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.frmPawnItem)
         frmClient.Show()
     End Sub
 
