@@ -50,6 +50,7 @@ Partial Class qryVoid
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
         Me.Name = "qryVoid"
+        Me.Text = "Void Report"
         Me.ResumeLayout(False)
 
     End Sub
