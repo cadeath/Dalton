@@ -25,21 +25,16 @@ Partial Class frmBorrowBrowse
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"ROX00001", "11/01/2015", "PEN", "(1000)", "wala kwarta"}, -1)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBorrowBrowse))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LBLBORROWINGID = New System.Windows.Forms.Label()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.txtDate = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtBranch = New System.Windows.Forms.TextBox()
         Me.txtParticular = New System.Windows.Forms.TextBox()
-        Me.btnUpload = New System.Windows.Forms.Button()
         Me.btnGenerate = New System.Windows.Forms.Button()
-        Me.btnBrowse = New System.Windows.Forms.Button()
-        Me.txtUrl = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.txtOut = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
-        Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.lvBorrowings = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -57,31 +52,38 @@ Partial Class frmBorrowBrowse
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.LBLBORROWINGID)
         Me.GroupBox1.Controls.Add(Me.btnVoid)
         Me.GroupBox1.Controls.Add(Me.txtDate)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.txtBranch)
         Me.GroupBox1.Controls.Add(Me.txtParticular)
-        Me.GroupBox1.Controls.Add(Me.btnUpload)
         Me.GroupBox1.Controls.Add(Me.btnGenerate)
-        Me.GroupBox1.Controls.Add(Me.btnBrowse)
-        Me.GroupBox1.Controls.Add(Me.txtUrl)
-        Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.txtOut)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.ShapeContainer1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(473, 267)
+        Me.GroupBox1.Size = New System.Drawing.Size(473, 243)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Burrowings"
         '
+        'LBLBORROWINGID
+        '
+        Me.LBLBORROWINGID.AutoSize = True
+        Me.LBLBORROWINGID.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LBLBORROWINGID.Location = New System.Drawing.Point(9, 185)
+        Me.LBLBORROWINGID.Name = "LBLBORROWINGID"
+        Me.LBLBORROWINGID.Size = New System.Drawing.Size(87, 13)
+        Me.LBLBORROWINGID.TabIndex = 14
+        Me.LBLBORROWINGID.Text = "BORROWINGID"
+        Me.LBLBORROWINGID.Visible = False
+        '
         'btnVoid
         '
         Me.btnVoid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVoid.Location = New System.Drawing.Point(6, 230)
+        Me.btnVoid.Location = New System.Drawing.Point(6, 206)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(70, 31)
         Me.btnVoid.TabIndex = 6
@@ -127,18 +129,8 @@ Partial Class frmBorrowBrowse
         Me.txtParticular.Multiline = True
         Me.txtParticular.Name = "txtParticular"
         Me.txtParticular.ReadOnly = True
-        Me.txtParticular.Size = New System.Drawing.Size(354, 82)
+        Me.txtParticular.Size = New System.Drawing.Size(380, 117)
         Me.txtParticular.TabIndex = 10
-        '
-        'btnUpload
-        '
-        Me.btnUpload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpload.Location = New System.Drawing.Point(392, 211)
-        Me.btnUpload.Name = "btnUpload"
-        Me.btnUpload.Size = New System.Drawing.Size(75, 50)
-        Me.btnUpload.TabIndex = 5
-        Me.btnUpload.Text = "&Upload Key"
-        Me.btnUpload.UseVisualStyleBackColor = True
         '
         'btnGenerate
         '
@@ -150,36 +142,6 @@ Partial Class frmBorrowBrowse
         Me.btnGenerate.Text = "&Generate Key"
         Me.btnGenerate.UseVisualStyleBackColor = True
         '
-        'btnBrowse
-        '
-        Me.btnBrowse.Location = New System.Drawing.Point(283, 178)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(39, 23)
-        Me.btnBrowse.TabIndex = 4
-        Me.btnBrowse.Text = "..."
-        Me.btnBrowse.UseVisualStyleBackColor = True
-        '
-        'txtUrl
-        '
-        Me.txtUrl.BackColor = System.Drawing.SystemColors.Window
-        Me.txtUrl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUrl.Location = New System.Drawing.Point(6, 179)
-        Me.txtUrl.Name = "txtUrl"
-        Me.txtUrl.ReadOnly = True
-        Me.txtUrl.Size = New System.Drawing.Size(271, 22)
-        Me.txtUrl.TabIndex = 6
-        Me.txtUrl.Text = "C:\Documents and Settings"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(6, 160)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(52, 16)
-        Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Cash In"
-        '
         'txtOut
         '
         Me.txtOut.BackColor = System.Drawing.SystemColors.Window
@@ -187,7 +149,7 @@ Partial Class frmBorrowBrowse
         Me.txtOut.Location = New System.Drawing.Point(260, 35)
         Me.txtOut.Name = "txtOut"
         Me.txtOut.ReadOnly = True
-        Me.txtOut.Size = New System.Drawing.Size(100, 22)
+        Me.txtOut.Size = New System.Drawing.Size(126, 22)
         Me.txtOut.TabIndex = 3
         Me.txtOut.Text = "1000"
         '
@@ -211,24 +173,6 @@ Partial Class frmBorrowBrowse
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Branch"
         '
-        'ShapeContainer1
-        '
-        Me.ShapeContainer1.Location = New System.Drawing.Point(3, 16)
-        Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
-        Me.ShapeContainer1.Name = "ShapeContainer1"
-        Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(467, 248)
-        Me.ShapeContainer1.TabIndex = 4
-        Me.ShapeContainer1.TabStop = False
-        '
-        'LineShape1
-        '
-        Me.LineShape1.Name = "LineShape1"
-        Me.LineShape1.X1 = 6
-        Me.LineShape1.X2 = 454
-        Me.LineShape1.Y1 = 139
-        Me.LineShape1.Y2 = 139
-        '
         'lvBorrowings
         '
         Me.lvBorrowings.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
@@ -239,7 +183,7 @@ Partial Class frmBorrowBrowse
         Me.lvBorrowings.Location = New System.Drawing.Point(491, 47)
         Me.lvBorrowings.MultiSelect = False
         Me.lvBorrowings.Name = "lvBorrowings"
-        Me.lvBorrowings.Size = New System.Drawing.Size(447, 232)
+        Me.lvBorrowings.Size = New System.Drawing.Size(447, 208)
         Me.lvBorrowings.TabIndex = 2
         Me.lvBorrowings.UseCompatibleStateImageBehavior = False
         Me.lvBorrowings.View = System.Windows.Forms.View.Details
@@ -267,7 +211,7 @@ Partial Class frmBorrowBrowse
         'ColumnHeader5
         '
         Me.ColumnHeader5.Text = "Particulars"
-        Me.ColumnHeader5.Width = 94
+        Me.ColumnHeader5.Width = 148
         '
         'btnView
         '
@@ -318,7 +262,7 @@ Partial Class frmBorrowBrowse
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1025, 289)
+        Me.ClientSize = New System.Drawing.Size(1025, 262)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btnClose)
@@ -340,12 +284,6 @@ Partial Class frmBorrowBrowse
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtOut As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
-    Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
-    Friend WithEvents txtUrl As System.Windows.Forms.TextBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents btnBrowse As System.Windows.Forms.Button
-    Friend WithEvents btnUpload As System.Windows.Forms.Button
     Friend WithEvents btnGenerate As System.Windows.Forms.Button
     Friend WithEvents lvBorrowings As System.Windows.Forms.ListView
     Friend WithEvents btnView As System.Windows.Forms.Button
@@ -364,4 +302,5 @@ Partial Class frmBorrowBrowse
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents sfdMoneyFile As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents LBLBORROWINGID As System.Windows.Forms.Label
 End Class

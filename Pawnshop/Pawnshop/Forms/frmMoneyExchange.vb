@@ -139,6 +139,7 @@
 
     Private Sub btnsave_Click(sender As System.Object, e As System.EventArgs) Handles btnsave.Click
         If Not isValid() Then Exit Sub
+        If txtDenomination1.Text = 0 Or txtDenomination1.Text = Nothing Then Exit Sub
         If txtSerial.Text = "" Then
             MsgBox("Please fill the Serial", MsgBoxStyle.Information, "Dollar")
             txtSerial.Focus()
@@ -154,15 +155,15 @@
                 .Customer = dollarClient
                 .Denomination = txtDenomination1.Text
                 .Serial = txtSerial.Text
-                .EncoderID = POSuser.EncoderID
+                .EncoderID = POSuser.UserID
                 .NetAmount = txtTotal.Text.Substring(4)
                 .CURRENCY = txtCurrency1.Text
                 .SaveDollar()
 
-                AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber, TransType:="DOLLAR BUYING")
-                AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING", TransType:="DOLLAR BUYING")
+                AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber, , , , "DOLLAR BUYING", .LastIDNumber)
+                AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING", , , "DOLLAR BUYING", .LastIDNumber)
 
-                AddTimelyLogs(MODULE_NAME, String.Format("{3} - {0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate, .CURRENCY), .NetAmount)
+                AddTimelyLogs(MODULE_NAME, String.Format("{3} - {0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate, .CURRENCY), .NetAmount, , , .LastIDNumber)
             End With
             MsgBox("Transaction Saved", MsgBoxStyle.Information)
             ClearField()

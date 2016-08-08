@@ -4,6 +4,7 @@ Public Class Insurance
 
     Private fillData As String = "tblInsurance"
     Private mySql As String = "SELECT * FROM "
+    Const TBL As String = "TBL_DAILYTIMELOG"
 
 #Region "Properties and Variables"
     Private _id As Integer
@@ -106,6 +107,15 @@ Public Class Insurance
             _encoderID = value
         End Set
     End Property
+    Private _modname As String
+    Public Property Modname() As Integer
+        Get
+            Return _modname
+        End Get
+        Set(ByVal value As Integer)
+            _modname = value
+        End Set
+    End Property
 
 #End Region
 
@@ -159,13 +169,31 @@ Public Class Insurance
 
     Public Sub VoidTransaction()
         _status = "V"
+        ' Dim COINum As String = String.Format("{000000}", Me.COInumber)
         mySql = "SELECT * FROM " & fillData & " WHERE InsuranceID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Dim InsuranceID As Integer
+        Dim TransactionName As String = "INSURANCE"
+        InsuranceID = frmInsurance.lbltransid.Text
+
         ds.Tables(fillData).Rows(0).Item("Status") = _status
 
         database.SaveEntry(ds, False)
-        RemoveJournal("COI# " & Me.COInumber)
+        RemoveJournal(InsuranceID, , TransactionName)
+        RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
     End Sub
+
+    Public Function LoadLastIDNumberInsurance() As Single
+        Dim mySql As String = "SELECT * FROM TBLINSURANCE ORDER BY INSURANCEID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("INSURANCEID")
+    End Function
+
+
 #End Region
 
 End Class

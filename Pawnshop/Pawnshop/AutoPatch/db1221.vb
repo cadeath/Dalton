@@ -24,5 +24,4 @@
             Log_Report("[1.2.2.1]" & ex.ToString)
         End Try
     End Sub
-
 End Module
