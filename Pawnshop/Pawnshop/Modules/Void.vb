@@ -11,6 +11,7 @@
             .Item("REMARKS") = Remarks
             .Item("ENCODER") = Encoder
             .Item("VOIDED_BY") = Voidby
+            .Item("TRANSDATE") = CurrentDate
         End With
         ds.Tables(tblName).Rows.Add(dsNewRow)
         database.SaveEntry(ds)

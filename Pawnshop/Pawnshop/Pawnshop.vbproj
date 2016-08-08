@@ -171,6 +171,7 @@
     <Compile Include="AutoPatch\db1221.vb" />
     <Compile Include="AutoPatch\db1222.vb" />
     <Compile Include="AutoPatch\db1223.vb" />
+    <Compile Include="AutoPatch\db1224.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -610,6 +611,12 @@
     <Compile Include="Reports\qrySequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\qryVoid.Designer.vb">
+      <DependentUpon>qryVoid.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\qryVoid.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Developer\devClient.resx">
@@ -796,6 +803,9 @@
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\qryVoid.resx">
+      <DependentUpon>qryVoid.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\RenewalBreakDown.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -806,6 +816,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptd_timelySummary.rdlc" />
+    <EmbeddedResource Include="Reports\rptVoidReport.rdlc" />
     <EmbeddedResource Include="Reports\rpt_AuctionMonthly.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
