@@ -356,6 +356,7 @@
         mySql &= vbCrLf & " INNER JOIN tblDaily D on D.ID = CC.DailyID"
         ds = LoadSQL(mySql & " ORDER BY CC.STATUS DESC")
 
+        Console.WriteLine("[DEBUG] " & mySql)
         latestCashCount = ds.Tables(0).Rows(0).Item("STATUS")
 
         Dim fillData As String, rptSQL As New Dictionary(Of String, String)
@@ -389,7 +390,7 @@
         mySql &= vbCrLf & " tblCashCount CC"
         mySql &= vbCrLf & " RIGHT JOIN tblMaintenance M on M.OPT_KEYS = CC.DENOMINATION"
         mySql &= vbCrLf & " INNER JOIN tblDaily D on D.ID = CC.DailyID"
-        mySql &= String.Format(" CC.CURRENTDATE = '{0}' AND CC.STATUS = {1}", monCal.SelectionRange.Start.ToShortDateString, latestCashCount)
+        mySql &= String.Format(" WHERE D.CURRENTDATE = '{0}' AND CC.STATUS = {1}", monCal.SelectionRange.Start.ToShortDateString, latestCashCount)
         subReportSQL.Add(fillData, mySql)
 
         fillData = "dsBill"
