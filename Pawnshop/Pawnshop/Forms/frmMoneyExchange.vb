@@ -16,8 +16,10 @@
     Private fillData As String = "TBLCURRENCY"
     Private MODULE_NAME As String = "DOLLAR"
 
-    Private Sub btnsearch_Click(sender As System.Object, e As System.EventArgs) Handles btnsearch.Click
-        frmClient.SearchSelect(TxtName.Text, FormName.frmMoneyExchange)
+    Private Sub btnsearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnsearch.Click
+        Dim secured_str As String = TxtName.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.frmMoneyExchange)
         frmClient.Show()
     End Sub
 
@@ -192,10 +194,6 @@
 
     End Sub
 
-
-
-
-
     Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
         If IsNumeric(txtTotalAmount.Text) Then
             Dim temp As Double = txtTotalAmount.Text
@@ -261,8 +259,10 @@
 
 
 
-    Private Sub btnSearch1_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
-        frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)
+    Private Sub btnSearch1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch1.Click
+        Dim secured_str As String = txtCurrency.Text
+        secured_str = DreadKnight(secured_str)
+        frmCurrencyList.SearchSelect(secured_str, FormName.frmMoneyExchange)
         frmCurrencyList.Show()
         frmCurrencyList.txtSearch.Text = Me.txtCurrency1.Text.ToString
         frmCurrencyList.btnSearch.PerformClick()
@@ -289,5 +289,4 @@
             btnSearch1.PerformClick()
         End If
     End Sub
-
 End Class
