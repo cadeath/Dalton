@@ -165,9 +165,12 @@
         Dim ans As DialogResult = MsgBox("Do you want to POST this cash count?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        Dim total As Double = Compute_CashCount()
+
+        SaveCashCount()
         ' If Executed via Audit Console
         If isAuditing Then
-            SaveCashCount()
+            UpdateCashCount(total)
             If MsgBox("Saved." & vbCrLf & "Do you want to view Cash Count Sheet?", _
                       MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Audit Cash Count") = MsgBoxResult.Yes Then
                 ' DISPLAY CASH COUNT SHEET
@@ -176,9 +179,6 @@
 
             Me.Close()
         End If
-
-        Dim total As Double = Compute_CashCount()
-        SaveCashCount()
 
         If isClosing Then
             mod_system.CloseStore(total)
@@ -191,7 +191,9 @@
     End Sub
 
     Private Sub SaveCashCount()
-        Dim mySql As String = "SELECT * FROM " & fillData
+        Dim mySql As String = ""
+
+        mySql = "SELECT * FROM " & fillData
         mySql &= String.Format(" WHERE DailyID = {0} AND Status = 1", dailyID)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim denoCnt As Integer = 0, denoValue As Double = 0, deno As String = ""
@@ -265,5 +267,4 @@
         database.SaveEntry(ds, False)
         Console.WriteLine("CashCount data updated")
     End Sub
-
 End Class
