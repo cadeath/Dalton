@@ -174,7 +174,7 @@
             If MsgBox("Saved." & vbCrLf & "Do you want to view Cash Count Sheet?", _
                       MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Audit Cash Count") = MsgBoxResult.Yes Then
                 ' DISPLAY CASH COUNT SHEET
-
+                qryDate.AutoDisplay_CashCount(CurrentDate)
             End If
 
             Me.Close()

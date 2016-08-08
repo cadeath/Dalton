@@ -405,6 +405,12 @@
         frmReport.Show()
     End Sub
 
+    Friend Sub AutoDisplay_CashCount(dt As Date)
+        monCal.SetDate(dt)
+
+        DailyCashCount_Audit()
+    End Sub
+
     Private Sub DailyCashCount()
 
         If isAuditing Then
