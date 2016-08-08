@@ -683,7 +683,9 @@ Public Class PawnTicket
                 RemoveDailyTimeLog(PTtransid, "1", ModNAME)
             Else
                 ChangeStatus("L")
+
                 RemoveJournal(PtransID, , ModNAME)
+
                 RemoveDailyTimeLog(PTtransid, "1", ModNAME)
             End If
         Catch ex As Exception
