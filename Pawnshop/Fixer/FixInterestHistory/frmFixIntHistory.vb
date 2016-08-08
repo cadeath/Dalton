@@ -46,8 +46,8 @@ Public Class frmFixIntHistory
         RunCommand(ALTER_TBLINTHISTORY_RENAMECOLUMN)
         RunCommand(ALTER_TBLINTHISTORY_vALUEiNTEREST) '0.25 to 0.025
         RunCommand(Alter_Pisition_column) 'Change Position Column
-        Status_Display("INTEREST CLEANED")
-        MsgBox("IT IS NOW READY TO CHANGE INTEREST")
+        Status_Display("MOD_NAME FIELD TYPE UPDATE")
+        MsgBox("SUCCESSFUL")
     End Sub
 
     Private Sub frmFixIntHistory_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load

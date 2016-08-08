@@ -68,8 +68,10 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-            frmClient.SearchSelect(txtHolder.Text, FormName.frmInsurance)
-            frmClient.Show()
+        Dim secured_str As String = txtHolder.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.frmInsurance)
+        frmClient.Show()
     End Sub
     ''' <summary>
     ''' This method will send client information to text fields.
