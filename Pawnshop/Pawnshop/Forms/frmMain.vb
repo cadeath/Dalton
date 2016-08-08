@@ -458,4 +458,8 @@
     Private Sub ChangePasswordToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ChangePasswordToolStrip.Click
         frmChangePassword.Show()
     End Sub
+
+    Private Sub VoidReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VoidReportToolStripMenuItem.Click
+        qryVoid.Show()
+    End Sub
 End Class

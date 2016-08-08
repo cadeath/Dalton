@@ -816,7 +816,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptd_timelySummary.rdlc" />
-    <EmbeddedResource Include="Reports\rptVoidReport.rdlc" />
+    <EmbeddedResource Include="Reports\rptVoidReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_AuctionMonthly.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
