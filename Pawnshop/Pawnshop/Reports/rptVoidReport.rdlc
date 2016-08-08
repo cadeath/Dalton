@@ -83,7 +83,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>TRANSDATE</Value>
+                              <Value>DATE</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>E2</Format>
@@ -118,7 +118,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>MOD NAME</Value>
+                              <Value>MODULE NAME</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -516,7 +516,7 @@
           <rd:DefaultName>Textbox13</rd:DefaultName>
           <Top>0.31944in</Top>
           <Height>0.25in</Height>
-          <Width>1.4375in</Width>
+          <Width>3.1875in</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
