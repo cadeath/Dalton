@@ -460,12 +460,7 @@
     End Sub
 
     Private Sub VoidReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VoidReportToolStripMenuItem.Click
-        qryVoid.FormType = qryVoid.VoidReport.VoidDaily
-        qryVoid.Show()
-    End Sub
-
-    Private Sub MonthlyVoidReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyVoidReportToolStripMenuItem.Click
-        qryVoid.FormType = qryVoid.VoidReport.VoidMonthly
-        qryVoid.Show()
+        qryDate.FormType = qryDate.ReportType.VoidReportDaily
+        qryDate.Show()
     End Sub
 End Class
