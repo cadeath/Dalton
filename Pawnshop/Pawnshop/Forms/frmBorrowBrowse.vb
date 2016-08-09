@@ -163,20 +163,23 @@
     End Function
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        If txtSearch.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
-
-        Dim mySql As String = "SELECT * FROM tblBorrow WHERE "
-        mySql &= String.Format("UPPER(REFNUM) LIKE '%{0}%' ", secured_str)
-        If IsNumeric(secured_str) Then mySql &= String.Format("OR AMOUNT = {0} ", secured_str)
-        mySql &= "ORDER BY TransDate DESC"
-
-        LoadBorrowings(mySql)
-        If lvBorrowings.Items.Count = 0 Then
-            MsgBox("No result found.", MsgBoxStyle.Critical)
+        If txtSearch.Text.Length <= 3 Then
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Borrowing Search")
         Else
-            MsgBox(String.Format("{0} result found", lvBorrowings.Items.Count))
+            Dim secured_str As String = txtSearch.Text
+            secured_str = DreadKnight(secured_str)
+
+            Dim mySql As String = "SELECT * FROM tblBorrow WHERE "
+            mySql &= String.Format("UPPER(REFNUM) LIKE '%{0}%' ", secured_str)
+            If IsNumeric(secured_str) Then mySql &= String.Format("OR AMOUNT = {0} ", secured_str)
+            mySql &= "ORDER BY TransDate DESC"
+
+            LoadBorrowings(mySql)
+            If lvBorrowings.Items.Count = 0 Then
+                MsgBox("No result found.", MsgBoxStyle.Critical)
+            Else
+                MsgBox(String.Format("{0} result found", lvBorrowings.Items.Count))
+            End If
         End If
     End Sub
 

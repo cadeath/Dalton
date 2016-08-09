@@ -239,8 +239,9 @@ Public Class frmMoneyTransfer
         Else
             RequirementLevel = 3
         End If
-
-        frmClient.SearchSelect(txtSender.Text, FormName.frmMTSend)
+        Dim secured_str As String = txtSender.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.frmMTSend)
         frmClient.Show()
     End Sub
 
@@ -600,9 +601,9 @@ Public Class frmMoneyTransfer
                         MOD_NAME &= "OUT"
 
                     Else
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name & " IN", .LoadLastIDNumberMoneyTransfer)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "GPRS|Ref# " & .ReferenceNumber, CashCount_Name, , , CashCount_Name & " IN", .LoadLastIDNumberMoneyTransfer)
                         AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name & " IN", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "GPRS|Ref# " & .ReferenceNumber, , , , CashCount_Name & " IN", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
 
                     End If
@@ -678,7 +679,9 @@ Public Class frmMoneyTransfer
         Else
             RequirementLevel = 1
         End If
-        frmClient.SearchSelect(txtReceiver.Text, FormName.frmMTReceive)
+        Dim secured_str As String = txtReceiver.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.frmMTReceive)
         frmClient.Show()
     End Sub
 

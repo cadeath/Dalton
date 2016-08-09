@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.2.2.15
+ - Fix Minor Problems on Journal Entries
+ - Sanitize fields
+
 Version 1.2.2.12
  - Add Change Password
  - Add New Privileges
