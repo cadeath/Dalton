@@ -611,12 +611,6 @@
     <Compile Include="Reports\qrySequence.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\qryVoid.Designer.vb">
-      <DependentUpon>qryVoid.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\qryVoid.vb">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Developer\devClient.resx">
@@ -802,9 +796,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\qryVoid.resx">
-      <DependentUpon>qryVoid.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\RenewalBreakDown.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
