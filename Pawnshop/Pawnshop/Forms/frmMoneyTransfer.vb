@@ -319,7 +319,7 @@ Public Class frmMoneyTransfer
             mySql = "SELECT DISTINCT TRANSID,MONEYTRANS,SERVICETYPE FROM TBLMONEYTRANSFER "
             mySql &= "WHERE TRANSID = '" & currentMr & "' AND MONEYTRANS='1' AND SERVICETYPE = 'Pera Padala'"
             ds = LoadSQL(mySql)
-            If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("Mr# " & currentMr.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : Return False
+            If ds.Tables(0).Rows.Count >= 1 Then : MsgBox("ME# " & currentMr.ToString("000000") & " already existed.", MsgBoxStyle.Critical) : Return False
             End If
         End If
         Return True
@@ -502,11 +502,13 @@ Public Class frmMoneyTransfer
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME, , , , "PERA PADALA OUT", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
 
+                        currentMe += 1
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR, , , , "PERA PADALA IN", .LoadLastIDNumberMoneyTransfer)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT", , , "PERA PADALA IN", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
 
+                        currentMr += 1
                     End If
                 Case "Pera Padala - PMFTC"
                     MOD_NAME = "PERA PADALA "
@@ -516,11 +518,13 @@ Public Class frmMoneyTransfer
                         AddJournal(.ServiceCharge, "Credit", "Pera Padala Service Charge", "ME# " & idME, , , , "Pera Padala - PMFTC OUT", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
 
+                        currentMe += 1
                     Else
                         AddJournal(.TransferAmount, "Debit", "Pera Padala Fund Payable", "MR# " & idMR, , , , "Pera Padala - PMFTC IN", .LoadLastIDNumberMoneyTransfer)
                         AddJournal(.NetAmount, "Credit", "Revolving Fund", "MR# " & idMR, "PADALA OUT", , , "Pera Padala - PMFTC IN", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
 
+                        currentMr += 1
                     End If
                 Case "Western Union - Local", "Western Union - Intl"
                     MOD_NAME = "WESTERN UNION "
@@ -552,15 +556,15 @@ Public Class frmMoneyTransfer
                     'GPRS ----------------------------------
                     MOD_NAME = "GPRS "
                     If rbSend.Checked Then
-                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , "GPRS OUT", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS OUT", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS OUT", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Debit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , "GPRS - GPRS to GPRS OUT", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS - GPRS to GPRS OUT", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount - commission, "Credit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS - GPRS to GPRS OUT", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "OUT"
 
                     Else
-                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , "GPRS IN", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS IN", .LoadLastIDNumberMoneyTransfer)
-                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS IN", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount, "Credit", "Revolving Fund", "G2G|Ref# " & .ReferenceNumber, "GPRS-GPRS", , , "GPRS - GPRS to GPRS IN", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(commission, "Credit", "Service Income from GPRS Remittance & Bills Payment", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS - GPRS to GPRS IN", .LoadLastIDNumberMoneyTransfer)
+                        AddJournal(.NetAmount + commission, "Debit", "GPRS Remittance/ Bills Payment Fund", "G2G|Ref# " & .ReferenceNumber, , , , "GPRS - GPRS to GPRS IN", .LoadLastIDNumberMoneyTransfer)
                         MOD_NAME &= "IN"
 
                     End If
@@ -645,9 +649,7 @@ Public Class frmMoneyTransfer
             Exit Sub
         End If
 
-        'frmMTlist.LoadActive()
         Me.Close()
-
     End Sub
 
     Friend Sub LoadSenderInfo(ByVal cl As Client)

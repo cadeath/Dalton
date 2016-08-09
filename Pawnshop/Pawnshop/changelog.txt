@@ -1,5 +1,15 @@
 CHANGELOG
-Version 1.2.2.6
+Version 1.2.2.12
+ - Add Change Password
+ - Add New Privileges
+ - Include Appraiser
+ - Include Reset Password
+ - Include Advance Report
+ - Include Delete User in User Management
+ - Include Item Type Selection on Audit Report
+ - Fix Report Money Transfer, Cash In/Out, Dollar (Void Item Display)
+
+Version 1.2.2.9
  - Fix Monthly computation for Cellphone
  - Fix Journal Entry Summary
  - Fix Money Transfer Send In/Payout Name
@@ -20,7 +30,7 @@ Version 1.2.2.6
  - Add Renewal Monthly Break Down
  - Include Auto Patch up to db1.2 v1.2
  - Include BDO and Smart Money Report in Cash In/Out
- - Enhance Pawning Search
+ - Enhance Pawning Search and Interface
  - Remove Journal Entries Sorting
 
 Version 1.2.0.1

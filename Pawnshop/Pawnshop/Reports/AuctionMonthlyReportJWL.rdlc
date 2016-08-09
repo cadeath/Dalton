@@ -190,7 +190,9 @@
               <Width>0.46355in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.66667in</Width>
+
+              <Width>0.67709in</Width>
+
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -208,7 +210,9 @@
                             <TextRun>
                               <Value>Count</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+
+                                <FontSize>9pt</FontSize>
+
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -262,7 +266,9 @@
                             <TextRun>
                               <Value>Sum</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+
+                                <FontSize>9pt</FontSize>
+
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -320,7 +326,9 @@
                             <TextRun>
                               <Value>=Count(Fields!AuctionDate.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+
+                                <FontSize>9pt</FontSize>
+
                                 <Format>0;(0);'-'</Format>
                               </Style>
                             </TextRun>
@@ -374,7 +382,9 @@
                             <TextRun>
                               <Value>=Sum(Fields!Principal.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+
+                                <FontSize>9pt</FontSize>
+
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -432,7 +442,9 @@
                             <TextRun>
                               <Value>=Count(Fields!AuctionDate.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+
+                                <FontSize>9pt</FontSize>
+
                                 <FontWeight>Bold</FontWeight>
                                 <Format>0;(0);'-'</Format>
                               </Style>
@@ -487,7 +499,9 @@
                             <TextRun>
                               <Value>=Sum(Fields!Principal.Value)</Value>
                               <Style>
-                                <FontSize>8pt</FontSize>
+
+                                <FontSize>9pt</FontSize>
+
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                                 <TextDecoration>None</TextDecoration>
@@ -685,6 +699,7 @@
                           <TextRun>
                             <Value>=Fields!AuctionDate.Value</Value>
                             <Style>
+                              <FontSize>9pt</FontSize>
                               <Format>dd-MMM-yy</Format>
                             </Style>
                           </TextRun>
@@ -739,6 +754,7 @@
                           <TextRun>
                             <Value>=CountDistinct(Fields!AuctionDate.Value)</Value>
                             <Style>
+                              <FontSize>9pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -787,7 +803,9 @@
         <Top>0.02083in</Top>
         <Left>0.01563in</Left>
         <Height>1in</Height>
-        <Width>1.9948in</Width>
+
+        <Width>2.00522in</Width>
+
         <Style>
           <Border>
             <Style>None</Style>
@@ -1047,9 +1065,11 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Left>4.00695in</Left>
+
+          <Left>3.93403in</Left>
           <Height>0.25in</Height>
-          <Width>2.46876in</Width>
+          <Width>2.54168in</Width>
+
           <ZIndex>2</ZIndex>
           <Style>
             <Border>

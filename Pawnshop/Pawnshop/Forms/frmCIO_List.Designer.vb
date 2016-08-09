@@ -22,7 +22,7 @@ Partial Class frmCIO_List
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "Receipt", "1/1/2015", "ECPAY - LOAD", "Cash In Bank", "350", "Banks"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "Receipt", "1/1/2015", "ECPAY - LOAD", "Cash In Bank", "350", "Banks"}, -1)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -38,8 +38,8 @@ Partial Class frmCIO_List
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.lblCashID = New System.Windows.Forms.Label()
-        Me.lblType = New System.Windows.Forms.Label()
-        Me.lblCategory = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.TextBox()
+        Me.lblCategory = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -90,7 +90,7 @@ Partial Class frmCIO_List
         Me.lvCIO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvCIO.FullRowSelect = True
         Me.lvCIO.GridLines = True
-        Me.lvCIO.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvCIO.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvCIO.Location = New System.Drawing.Point(12, 80)
         Me.lvCIO.MultiSelect = False
         Me.lvCIO.Name = "lvCIO"
@@ -166,22 +166,18 @@ Partial Class frmCIO_List
         '
         'lblType
         '
-        Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(318, 436)
+        Me.lblType.Location = New System.Drawing.Point(599, 433)
         Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(58, 13)
-        Me.lblType.TabIndex = 6
-        Me.lblType.Text = "TransType"
+        Me.lblType.Size = New System.Drawing.Size(372, 20)
+        Me.lblType.TabIndex = 8
         Me.lblType.Visible = False
         '
         'lblCategory
         '
-        Me.lblCategory.AutoSize = True
-        Me.lblCategory.Location = New System.Drawing.Point(180, 436)
+        Me.lblCategory.Location = New System.Drawing.Point(248, 433)
         Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(49, 13)
-        Me.lblCategory.TabIndex = 7
-        Me.lblCategory.Text = "Category"
+        Me.lblCategory.Size = New System.Drawing.Size(159, 20)
+        Me.lblCategory.TabIndex = 9
         Me.lblCategory.Visible = False
         '
         'frmCIO_List
@@ -222,6 +218,6 @@ Partial Class frmCIO_List
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnVoid As System.Windows.Forms.Button
     Friend WithEvents lblCashID As System.Windows.Forms.Label
-    Friend WithEvents lblType As System.Windows.Forms.Label
-    Friend WithEvents lblCategory As System.Windows.Forms.Label
+    Friend WithEvents lblType As System.Windows.Forms.TextBox
+    Friend WithEvents lblCategory As System.Windows.Forms.TextBox
 End Class

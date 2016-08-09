@@ -116,42 +116,73 @@
         Dim CashID As Integer = lvCIO.FocusedItem.Tag
         Dim Transactiontype As String = ""
 
-        If lblCashID.Text = CashID Then
-            Transactiontype = lblType.Text
-
-        ElseIf lblCashID.Text = CashID Then
-            Transactiontype = lblType.Text
-        ElseIf lblCashID.Text = CashID Then
-            Transactiontype = lblType.Text
-        ElseIf lblCashID.Text = CashID Then
+        'If lblCashID.Text = CashID Then
+        '    Transactiontype = lblType.Text
+        'End If
+        If lblType.Text = "Receipt Cash Offsetting Account" Then
+            Transactiontype = lblType.Text + " " + lblCategory.Text
+            If Transactiontype = "Receipt Cash Offsetting Account SALES OF INVENTORIABLES" Then
+                Transactiontype = "Receipt Cash Offsetting Account SALES OF INVENTORI"
+            ElseIf Transactiontype = "Receipt Cash Offsetting Account Commission from SMART MONEY Cash Out" Then
+                Transactiontype = "Receipt Cash Offsetting Account Commission from SM"
+            End If
+        ElseIf lblType.Text = "Receipt Service Income from GPRS Remittance & Bills Payment" Then
+            Transactiontype = "Receipt Service Income from GPRS Remittance & Bill"
+        ElseIf lblType.Text = "INVENTORY IN Smart Money Payable - Perfecom" Then
+            Transactiontype = "INVENTORY IN"
+        ElseIf lblType.Text = "BDO ATM CASHOUT BDO ATM CASHOUT" Then
+            Transactiontype = "BDO ATM CASHOUT"
+        ElseIf lblType.Text = "Disbursement Smart Money Inventory Offsetting Account" Then
+            Transactiontype = "Disbursement Smart Money Inventory Offsetting Acco"
+        ElseIf lblType.Text = "Disbursement Repairs & Maintenance-Store & Office Equip." Then
+            Transactiontype = "Disbursement Repairs & Maintenance-Store & Office"
+        Else
             Transactiontype = lblType.Text
         End If
 
-        Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE HASCUSTOMER = '1' AND MOD_NAME = '" & lblCategory.Text & "' AND TRANSID =" & CashID
-        Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
-        Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
-        'Select Case SrvTypDailyTimelog
-        '    Case "TICKETING - WU"
-        '    Case "GPRS"
-        '    Case "SMARTMONEY IN"
-        '    Case "SALES OF INV"
-        '    Case "ECPAY"
-        '    Case "SMARTMONEY OUT"
-        '    Case "CASH IN/OUT"
-        '    Case "BDO ATM"
-        'End Select
+            Dim strCategory As String
+            Select Case lblCategory.Text
+                Case "BDO ATM CASHOUT"
+                    strCategory = "BDO ATM"
+            Case "INVENTORY IN", "AUCTION REDEEM", "Commission from SMART MONEY Cash Out", "FUND REPLENISHMENT", "DEPOSIT OF EXCESS FUND"
+                strCategory = "CASH IN/OUT"
+            Case "PETTY CASH "
+                strCategory = "CASH IN/OUT"
+            Case "TICKETING - GPRS", "GPRS LOADING", "GPRS - BILL PAYMENT"
+                strCategory = "GPRS"
+                Case "SMART MONEY PADALA"
+                    strCategory = "SMARTMONEY IN"
+            Case "SALES OF INVENTORIABLES", "LAY-AWAY PAYMENTS"
+                strCategory = "SALES OF INV"
+            Case "ECPAY - LOAD", "ECPAY - Bills Payment"
+                strCategory = "ECPAY"
+            Case "SMART MONEY ENCASHMENT-CASHOUT-Dalton"
+                strCategory = "SMARTMONEY OUT"
+            Case Else
+                strCategory = lblCategory.Text
+        End Select
 
-        ' ISSUE: 0001
-        ' Cash InOut exclusive only for the same date.
-        If transDate.Date <> CurrentDate.Date Then
-            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
-            Exit Sub
+
+            Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE MOD_NAME = '" & strCategory & "' AND TRANSID =" & CashID
+            Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
+            Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
+
+            ' ISSUE: 0001
+            ' Cash InOut exclusive only for the same date.
+            If transDate.Date <> CurrentDate.Date Then
+                MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+                Exit Sub
+            End If
+            database.SaveEntry(ds, False)
+
+            RemoveJournal(CashID, , Transactiontype)
+            RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
+            If strCategory = "CASH IN/OUT" Then
+            RemoveDailyTimeLog(CashID, "0", SrvTypDailyTimelog)
+        ElseIf strCategory = "SALES OF INV" And lblCategory.Text = "LAY-AWAY PAYMENTS" Then
+            RemoveDailyTimeLog(CashID, "0", SrvTypDailyTimelog)
         End If
-        database.SaveEntry(ds, False)
-
-        RemoveJournal(CashID, , Transactiontype)
-        RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
-        MsgBox("Transaction Voided", MsgBoxStyle.Information)
+            MsgBox("Transaction Voided", MsgBoxStyle.Information)
     End Sub
     ''' <summary>
     ''' This button perform search the desired data.
@@ -177,6 +208,7 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.VoidCashInOut
             If Not CheckOTP() Then Exit Sub
@@ -186,7 +218,6 @@
     End Sub
 
     Friend Sub VoidCIO()
-        If lvCIO.SelectedItems.Count <= 0 Then Exit Sub
         Dim idx As Integer = lvCIO.FocusedItem.Tag
         VoidID(idx)
         lvCIO.Items.Clear()
@@ -200,6 +231,6 @@
         Dim tmpCASHTrans As New CashInOutTransaction
         lblCashID.Text = idx
         lblCategory.Text = tmpCASHTrans.LoadCategory
-        lblType.Text = tmpCASHTrans.LoadType + " " + tmpCASHTrans.LoadTransname
+        lblType.Text = tmpCASHTrans.LoadType+ " " + tmpCASHTrans.LoadTransname
     End Sub
 End Class

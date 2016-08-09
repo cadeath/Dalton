@@ -56,6 +56,7 @@
         dsName = "dsCIO"
         mySql = "SELECT * FROM TBLCASHTRANS"
         mySql &= String.Format(" WHERE TransDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+        mySql &= " AND STATUS <> '0' "
         If (chkIN.Checked Or chkOUT.Checked Or chkOther.Checked) Then
             mySql &= TypeFilter2()
         End If
@@ -79,6 +80,7 @@
 
         mySql = "SELECT * FROM TBLCASHTRANS "
         mySql &= String.Format(" WHERE TRANSDATE = '{0}'", cur.ToShortDateString)
+        mySql &= " AND STATUS <> '0' "
         If (chkIN.Checked Or chkOUT.Checked Or chkOther.Checked) Then
             mySql &= TypeFilter2()
         End If
