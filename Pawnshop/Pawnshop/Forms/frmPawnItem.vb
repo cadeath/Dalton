@@ -52,6 +52,7 @@ Public Class frmPawnItem
     Dim Critical_Language() As String =
             {"Failed to verify hash value to the "}
     Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    Private Reprint As Boolean = False
 
 
     Private Sub frmPawnItem_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -1072,6 +1073,12 @@ Public Class frmPawnItem
 
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
+        If Reprint = True Then
+            addParameters.Add("txtReprint", "Reprint")
+        Else
+            addParameters.Add("txtReprint", " ")
+        End If
+
 
         ' Add Monthly Computation
         Dim strCompute As String
@@ -1282,6 +1289,11 @@ Public Class frmPawnItem
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PawnItem.RenewDue)
         addParameters.Add("txtDescription", descStr)
+        If Reprint = True Then
+            addParameters.Add("txtReprint", "Reprint")
+        Else
+            addParameters.Add("txtReprint", " ")
+        End If
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
@@ -1292,6 +1304,7 @@ Public Class frmPawnItem
                 Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
             Next
         End If
+       
 
         Dim paperSize As New Dictionary(Of String, Double)
         paperSize.Add("width", 8.5)
@@ -1393,7 +1406,8 @@ Public Class frmPawnItem
     End Function
 #End Region
 
-    Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
+    Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
+        Reprint = True
         If PawnItem.Status = "L" Or PawnItem.Status = "R" Then
             PrintNewLoan()
         End If

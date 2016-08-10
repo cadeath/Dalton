@@ -3,3 +3,42 @@
 [08/05/2016 11:35:20] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
 [08/05/2016 11:40:49] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
 [08/05/2016 11:41:21] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
+[08/10/2016 10:23:13] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
+[08/10/2016 10:48:52] PRINT FAILED: Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.ReportingServices.ReportProcessing.ReportProcessingException: One or more parameters required to run the report have not been specified.
+   at Microsoft.ReportingServices.ReportProcessing.ReportProcessing.RenderReport(IRenderingExtension newRenderer, DateTime executionTimeStamp, ProcessingContext pc, RenderingContext rc, IChunkFactory cacheDataChunkFactory, IChunkFactory yukonCompiledDefinition, Boolean& dataCached)
+   at Microsoft.ReportingServices.ReportProcessing.ReportProcessing.RenderReport(IRenderingExtension newRenderer, DateTime executionTimeStamp, ProcessingContext pc, RenderingContext rc, IChunkFactory yukonCompiledDefinition)
+   at Microsoft.Reporting.LocalService.CreateSnapshotAndRender(CatalogItemContextBase itemContext, ReportProcessing repProc, IRenderingExtension renderer, ProcessingContext pc, RenderingContext rc, SubreportCallbackHandler subreportHandler, ParameterInfoCollection parameters, DatasourceCredentialsCollection credentials)
+   at Microsoft.Reporting.LocalService.Render(CatalogItemContextBase itemContext, Boolean allowInternalRenderers, ParameterInfoCollection reportParameters, IEnumerable dataSources, DatasourceCredentialsCollection credentials, CreateAndRegisterStream createStreamCallback, ReportRuntimeSetup runtimeSetup)
+   at Microsoft.Reporting.WinForms.LocalReport.InternalRender(String format, Boolean allowInternalRenderers, String deviceInfo, PageCountMode pageCountMode, CreateAndRegisterStream createStreamCallback, Warning[]& warnings)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.InternalRender(String format, Boolean allowInternalRenderers, String deviceInfo, PageCountMode pageCountMode, CreateAndRegisterStream createStreamCallback, Warning[]& warnings)
+   at Microsoft.Reporting.WinForms.LocalReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, CreateStreamCallback createStream, Warning[]& warnings)
+   at Microsoft.Reporting.WinForms.LocalReport.Render(String format, String deviceInfo, CreateStreamCallback createStream, Warning[]& warnings)
+   at Pawnshop.Reporting.Export(LocalReport report, Dictionary`2 size) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\Reporting.vb:line 76
+   at Pawnshop.frmPawnItem.PrintRenewPT() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1251
+[08/10/2016 10:51:53] PRINT FAILED: Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.ReportingServices.ReportProcessing.ReportProcessingException: One or more parameters required to run the report have not been specified.
+   at Microsoft.ReportingServices.ReportProcessing.ReportProcessing.RenderReport(IRenderingExtension newRenderer, DateTime executionTimeStamp, ProcessingContext pc, RenderingContext rc, IChunkFactory cacheDataChunkFactory, IChunkFactory yukonCompiledDefinition, Boolean& dataCached)
+   at Microsoft.ReportingServices.ReportProcessing.ReportProcessing.RenderReport(IRenderingExtension newRenderer, DateTime executionTimeStamp, ProcessingContext pc, RenderingContext rc, IChunkFactory yukonCompiledDefinition)
+   at Microsoft.Reporting.LocalService.CreateSnapshotAndRender(CatalogItemContextBase itemContext, ReportProcessing repProc, IRenderingExtension renderer, ProcessingContext pc, RenderingContext rc, SubreportCallbackHandler subreportHandler, ParameterInfoCollection parameters, DatasourceCredentialsCollection credentials)
+   at Microsoft.Reporting.LocalService.Render(CatalogItemContextBase itemContext, Boolean allowInternalRenderers, ParameterInfoCollection reportParameters, IEnumerable dataSources, DatasourceCredentialsCollection credentials, CreateAndRegisterStream createStreamCallback, ReportRuntimeSetup runtimeSetup)
+   at Microsoft.Reporting.WinForms.LocalReport.InternalRender(String format, Boolean allowInternalRenderers, String deviceInfo, PageCountMode pageCountMode, CreateAndRegisterStream createStreamCallback, Warning[]& warnings)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.InternalRender(String format, Boolean allowInternalRenderers, String deviceInfo, PageCountMode pageCountMode, CreateAndRegisterStream createStreamCallback, Warning[]& warnings)
+   at Microsoft.Reporting.WinForms.LocalReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, CreateStreamCallback createStream, Warning[]& warnings)
+   at Microsoft.Reporting.WinForms.LocalReport.Render(String format, String deviceInfo, CreateStreamCallback createStream, Warning[]& warnings)
+   at Pawnshop.Reporting.Export(LocalReport report, Dictionary`2 size) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\Reporting.vb:line 76
+   at Pawnshop.frmPawnItem.PrintRenewPT() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1251
+[08/10/2016 11:00:09] PRINT FAILED: Microsoft.Reporting.WinForms.LocalProcessingException: An error occurred during local report processing. ---> Microsoft.ReportingServices.ReportProcessing.ReportProcessingException: One or more parameters required to run the report have not been specified.
+   at Microsoft.ReportingServices.ReportProcessing.ReportProcessing.RenderReport(IRenderingExtension newRenderer, DateTime executionTimeStamp, ProcessingContext pc, RenderingContext rc, IChunkFactory cacheDataChunkFactory, IChunkFactory yukonCompiledDefinition, Boolean& dataCached)
+   at Microsoft.ReportingServices.ReportProcessing.ReportProcessing.RenderReport(IRenderingExtension newRenderer, DateTime executionTimeStamp, ProcessingContext pc, RenderingContext rc, IChunkFactory yukonCompiledDefinition)
+   at Microsoft.Reporting.LocalService.CreateSnapshotAndRender(CatalogItemContextBase itemContext, ReportProcessing repProc, IRenderingExtension renderer, ProcessingContext pc, RenderingContext rc, SubreportCallbackHandler subreportHandler, ParameterInfoCollection parameters, DatasourceCredentialsCollection credentials)
+   at Microsoft.Reporting.LocalService.Render(CatalogItemContextBase itemContext, Boolean allowInternalRenderers, ParameterInfoCollection reportParameters, IEnumerable dataSources, DatasourceCredentialsCollection credentials, CreateAndRegisterStream createStreamCallback, ReportRuntimeSetup runtimeSetup)
+   at Microsoft.Reporting.WinForms.LocalReport.InternalRender(String format, Boolean allowInternalRenderers, String deviceInfo, PageCountMode pageCountMode, CreateAndRegisterStream createStreamCallback, Warning[]& warnings)
+   --- End of inner exception stack trace ---
+   at Microsoft.Reporting.WinForms.LocalReport.InternalRender(String format, Boolean allowInternalRenderers, String deviceInfo, PageCountMode pageCountMode, CreateAndRegisterStream createStreamCallback, Warning[]& warnings)
+   at Microsoft.Reporting.WinForms.LocalReport.Render(String format, String deviceInfo, PageCountMode pageCountMode, CreateStreamCallback createStream, Warning[]& warnings)
+   at Microsoft.Reporting.WinForms.LocalReport.Render(String format, String deviceInfo, CreateStreamCallback createStream, Warning[]& warnings)
+   at Pawnshop.Reporting.Export(LocalReport report, Dictionary`2 size) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\Reporting.vb:line 76
+   at Pawnshop.frmPawnItem.PrintRenewPT() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Forms\frmPawnItem.vb:line 1251
+[08/10/2016 11:08:47] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
+[08/10/2016 11:20:03] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
