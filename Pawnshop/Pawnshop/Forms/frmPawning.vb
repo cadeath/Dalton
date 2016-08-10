@@ -49,14 +49,9 @@
     ''' <remarks></remarks>
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
         If frmPawnItem.Visible = True Then
-
-            Dim ans As DialogResult = MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" & _
-                                             vbCr & "Do You Want To Close This Transaction?", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, _
+            MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
+                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly+ MsgBoxStyle.DefaultButton2, _
                                              "Form Already Open")
-            If ans = Windows.Forms.DialogResult.No Then Exit Sub
-            frmPawnItem.Close()
-            frmPawnItem.NewLoan()
-            frmPawnItem.Show()
         Else
             frmPawnItem.NewLoan()
             frmPawnItem.Show()
@@ -291,14 +286,9 @@
         If lvPawners.SelectedItems.Count > 0 Then
             If frmPawnItem.Visible = True Then
 
-                Dim ans As DialogResult = MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" & _
-                                                 vbCr & "Do You Want To Close This Transaction?", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, _
-                                                 "Form Already Open")
-                If ans = Windows.Forms.DialogResult.No Then Exit Sub
-                frmPawnItem.Close()
-                btnView.PerformClick()
-                frmPawnItem.btnRenew.PerformClick()
-
+                MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
+                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
+                                             "Form Already Open")
             Else
                 btnView.PerformClick()
                 frmPawnItem.btnRenew.PerformClick()
@@ -315,15 +305,9 @@
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If lvPawners.SelectedItems.Count > 0 Then
             If frmPawnItem.Visible = True Then
-
-                Dim ans As DialogResult = MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" & _
-                                                 vbCr & "Do You Want To Close This Transaction?", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, _
-                                                 "Form Already Open")
-                If ans = Windows.Forms.DialogResult.No Then Exit Sub
-                frmPawnItem.Close()
-                btnView.PerformClick()
-                frmPawnItem.btnRedeem.PerformClick()
-
+                MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
+                                                           , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
+                                                            "Form Already Open")
             Else
                 btnView.PerformClick()
                 frmPawnItem.btnRedeem.PerformClick()
