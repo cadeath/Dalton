@@ -4,6 +4,7 @@
 
 Imports Microsoft.Reporting.WinForms
 
+
 Public Class frmPawnItem
     Friend transactionType As String = "L"
     Friend PawnItem As PawnTicket
@@ -1073,6 +1074,7 @@ Public Class frmPawnItem
 
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
+
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
         Else
@@ -1152,6 +1154,7 @@ Public Class frmPawnItem
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
         addParameters.Add("txtDescription", descStr)
+
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
         Else
@@ -1294,6 +1297,7 @@ Public Class frmPawnItem
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PawnItem.RenewDue)
         addParameters.Add("txtDescription", descStr)
+
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
         Else
