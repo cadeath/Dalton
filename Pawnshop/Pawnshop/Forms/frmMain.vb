@@ -466,6 +466,7 @@
         AuditModule_Initialization()
 
         If Not OTPDisable Then
+            diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
             If Not diagOTPv2.isCorrect Then Exit Sub
         End If
