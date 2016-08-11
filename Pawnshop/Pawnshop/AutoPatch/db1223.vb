@@ -1,6 +1,6 @@
 ﻿Module db1223
-        Const ALLOWABLE_VERSION As String = "1.2.2.2"
-        Const LATEST_VERSION As String = "1.2.2.3"
+    Const ALLOWABLE_VERSION As String = "1.2.2.2"
+    Const LATEST_VERSION As String = "1.2.2.3"
     Private selectedUser As New ComputerUser
     Private filldata As String = "tbl_Gamit"
 
