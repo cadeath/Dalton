@@ -18,7 +18,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = False
+    Public DEV_MODE As Boolean = True
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
@@ -30,6 +30,7 @@ Module mod_system
     Public branchName As String = GetOption("BranchName")
     Public AREACODE As String = GetOption("BranchArea")
     Public REVOLVING_FUND As String = GetOption("RevolvingFund")
+    Public OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
@@ -187,6 +188,7 @@ Module mod_system
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
+
         'if dataset read data then then cc will hold cashcount in the currentdate
         'the user information will be save.
         If ds.Tables(storeDB).Rows.Count = 1 Then
