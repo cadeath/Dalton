@@ -25,6 +25,14 @@
     Private Sub frmAuditConsole_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         txtPrincipal.Text = MEMO_MINIMUM.ToString("0.00")
         Load_ItemType()
+
+        OTP_Init()
+    End Sub
+
+    Private Sub OTP_Init()
+        txtEmail.Text = ""
+        txtQRURL.Text = ""
+        txtManual.Text = ""
     End Sub
 
     Private Sub btnCashCount_Click_1(sender As System.Object, e As System.EventArgs) Handles btnCashCount.Click
@@ -36,5 +44,14 @@
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.isAuditing = True
         qryDate.Show()
+    End Sub
+
+    Private Sub btnGenerate_Click(sender As System.Object, e As System.EventArgs) Handles btnGenerate.Click
+        If txtEmail.Text = "" Then Exit Sub
+        If Not (txtEmail.Text.Contains("@") And txtEmail.Text.Contains(".")) Then Exit Sub
+
+        AuditOTP.Setup(txtEmail.Text)
+        txtManual.Text = AuditOTP.ManualCode
+        txtQRURL.Text = AuditOTP.QRCode_URL
     End Sub
 End Class

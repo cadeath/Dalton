@@ -34,8 +34,17 @@ Partial Class frmAuditConsole
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.MonVault = New System.Windows.Forms.MonthCalendar()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.btnGenerate = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtManual = New System.Windows.Forms.TextBox()
+        Me.txtQRURL = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -149,11 +158,97 @@ Partial Class frmAuditConsole
         Me.MonVault.Name = "MonVault"
         Me.MonVault.TabIndex = 6
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.txtQRURL)
+        Me.GroupBox3.Controls.Add(Me.txtManual)
+        Me.GroupBox3.Controls.Add(Me.Label6)
+        Me.GroupBox3.Controls.Add(Me.Label5)
+        Me.GroupBox3.Controls.Add(Me.btnGenerate)
+        Me.GroupBox3.Controls.Add(Me.txtEmail)
+        Me.GroupBox3.Controls.Add(Me.Label4)
+        Me.GroupBox3.Location = New System.Drawing.Point(485, 12)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(300, 191)
+        Me.GroupBox3.TabIndex = 5
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "One-Time Password"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(6, 19)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(73, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "Email Address"
+        '
+        'txtEmail
+        '
+        Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmail.Location = New System.Drawing.Point(9, 35)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(207, 22)
+        Me.txtEmail.TabIndex = 1
+        Me.txtEmail.Text = "eskie@pgc-itdept.org"
+        '
+        'btnGenerate
+        '
+        Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGenerate.Location = New System.Drawing.Point(9, 63)
+        Me.btnGenerate.Name = "btnGenerate"
+        Me.btnGenerate.Size = New System.Drawing.Size(82, 44)
+        Me.btnGenerate.TabIndex = 2
+        Me.btnGenerate.Text = "&Generate"
+        Me.btnGenerate.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(16, 134)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(45, 13)
+        Me.Label5.TabIndex = 3
+        Me.Label5.Text = "Manual:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(16, 159)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(32, 13)
+        Me.Label6.TabIndex = 4
+        Me.Label6.Text = "URL:"
+        '
+        'txtManual
+        '
+        Me.txtManual.BackColor = System.Drawing.Color.White
+        Me.txtManual.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtManual.Location = New System.Drawing.Point(79, 129)
+        Me.txtManual.Name = "txtManual"
+        Me.txtManual.ReadOnly = True
+        Me.txtManual.Size = New System.Drawing.Size(207, 22)
+        Me.txtManual.TabIndex = 5
+        Me.txtManual.Text = "eskie@pgc-itdept.org"
+        '
+        'txtQRURL
+        '
+        Me.txtQRURL.BackColor = System.Drawing.Color.White
+        Me.txtQRURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtQRURL.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.txtQRURL.Location = New System.Drawing.Point(79, 154)
+        Me.txtQRURL.Name = "txtQRURL"
+        Me.txtQRURL.ReadOnly = True
+        Me.txtQRURL.Size = New System.Drawing.Size(207, 22)
+        Me.txtQRURL.TabIndex = 6
+        Me.txtQRURL.Text = "eskie@pgc-itdept.org"
+        '
         'frmAuditConsole
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(490, 352)
+        Me.ClientSize = New System.Drawing.Size(800, 352)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -165,6 +260,8 @@ Partial Class frmAuditConsole
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -179,4 +276,12 @@ Partial Class frmAuditConsole
     Friend WithEvents btnVault As System.Windows.Forms.Button
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtQRURL As System.Windows.Forms.TextBox
+    Friend WithEvents txtManual As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents btnGenerate As System.Windows.Forms.Button
+    Friend WithEvents txtEmail As System.Windows.Forms.TextBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 End Class

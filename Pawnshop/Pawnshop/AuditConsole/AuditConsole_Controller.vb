@@ -9,10 +9,10 @@ Module AuditConsole_Controller
 
         AuditOTP = New OneTimePassword
         AuditOTP.AppName = "Dalton - Audit Console"
-        AuditOTP.Setup("ecjmaquic@gmail.com")
         AuditOTP.SecretCode = "AuditConsole"
 
         If DEV_MODE Then
+            AuditOTP.Setup("eskie@pgc-itdept.org")
             Console.WriteLine("QRCode: " & AuditOTP.ManualCode)
             Console.WriteLine("QRCode URL: " & AuditOTP.QRCode_URL)
         End If
