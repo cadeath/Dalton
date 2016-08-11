@@ -463,6 +463,13 @@
     Private Sub AuditConsoleToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
+        AuditModule_Initialization()
+
+        If Not OTPDisable Then
+            diagOTPv2.ShowDialog()
+            If Not diagOTPv2.isCorrect Then Exit Sub
+        End If
+
         frmAuditConsole.Show()
     End Sub
 End Class

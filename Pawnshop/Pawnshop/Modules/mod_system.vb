@@ -18,7 +18,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = False
+    Public DEV_MODE As Boolean = True
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
@@ -30,6 +30,7 @@ Module mod_system
     Public branchName As String = GetOption("BranchName")
     Public AREACODE As String = GetOption("BranchArea")
     Public REVOLVING_FUND As String = GetOption("RevolvingFund")
+    Public OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."

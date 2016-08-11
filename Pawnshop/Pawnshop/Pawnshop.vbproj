@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="AuditConsole\AuditConsole_Controller.vb" />
     <Compile Include="AuditConsole\db123.vb" />
     <Compile Include="AuditConsole\frmAuditConsole.Designer.vb">
       <DependentUpon>frmAuditConsole.vb</DependentUpon>
@@ -275,6 +276,12 @@
       <DependentUpon>diagOTP.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\diagOTP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\diagOTPv2.Designer.vb">
+      <DependentUpon>diagOTPv2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\diagOTPv2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBackUpDataSettings.Designer.vb">
@@ -653,6 +660,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\diagOTPv2.resx">
+      <DependentUpon>diagOTPv2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
