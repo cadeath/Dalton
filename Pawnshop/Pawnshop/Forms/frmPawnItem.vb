@@ -1152,6 +1152,11 @@ Public Class frmPawnItem
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PawnItem.RedeemDue)
         addParameters.Add("txtDescription", descStr)
+        If Reprint = True Then
+            addParameters.Add("txtReprint", "Reprint")
+        Else
+            addParameters.Add("txtReprint", " ")
+        End If
 
         If Not addParameters Is Nothing Then
             For Each nPara In addParameters
