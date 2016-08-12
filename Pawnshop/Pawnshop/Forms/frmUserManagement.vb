@@ -456,24 +456,16 @@
             LoadUser()
             diagOTP.FormType = diagOTP.OTPType.UserManagementDelete
             If Not CheckOTP() Then Exit Sub
+        Else
+            UserDelete()
         End If
     End Sub
 
     Friend Sub UserDelete()
-        dbOpen()
         Dim filldata As String = "TBL_GAMIT"
-        Dim mysql As String = "DELETE FROM " & filldata & " WHERE USERID = '" & lblUserid.Text & "'"
-        Dim Command As New Odbc.OdbcCommand
-        Command.Connection = con
-        Command.CommandText = mysql
-        Command.ExecuteNonQuery()
-
+        Dim mysql As String = "SELECT * FROM " & filldata & " WHERE USERID = '" & lblUserid.Text & "'"
+       
         MsgBox("User " & txtFullname.Text & " Deleted", MsgBoxStyle.Question, moduleName)
         LoadActive()
-        dbClose()
-    End Sub
-
-    Private Sub lvUsers_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvUsers.SelectedIndexChanged
-
     End Sub
 End Class
