@@ -1623,13 +1623,20 @@ Public Class frmPawnItem
             lessNum = MONTH_COMPUTE
         End If
 
+        Dim isDJ As Boolean = IIf(PTInfo.AdvanceInterest <> 0, True, False)
+
         For x As Integer = 0 To lessNum - 1
-            dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, CurrentDate.AddDays(monthCnt), PTInfo.MaturityDate, 1, PTInfo.INT_Checksum)
+            dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, CurrentDate.AddDays(monthCnt), PTInfo.MaturityDate, _
+                                   isDJ, PTInfo.INT_Checksum)
 
             Dim prefix As String = ""
             Select Case x
                 Case 0
-                    prefix = "AdvInt "
+                    If isDJ Then
+                        prefix = "AdvInt "
+                    Else
+                        prefix = "DelayInt "
+                    End If
                 Case 1
                     prefix = "2ndMon "
                 Case 2
