@@ -42,7 +42,7 @@
         LoadPrivilege()
     End Sub
 
-    Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit ORDER BY Username ASC")
+    Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit WHERE Status <> '0' ORDER BY Username ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
@@ -462,8 +462,8 @@
     End Sub
 
     Friend Sub UserDelete()
-        Dim filldata As String = "TBL_GAMIT"
-        Dim mysql As String = "SELECT * FROM " & filldata & " WHERE USERID = '" & lblUserid.Text & "'"
+        selectedUser.Password = lblUserid.Text
+        selectedUser.DeleteUser()
        
         MsgBox("User " & txtFullname.Text & " Deleted", MsgBoxStyle.Question, moduleName)
         LoadActive()

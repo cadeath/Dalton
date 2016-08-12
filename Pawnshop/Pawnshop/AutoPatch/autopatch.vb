@@ -14,6 +14,7 @@ Module autopatch
         db1221.PatchUp()
         db1222.PatchUp()
         db1223.PatchUp()
+        db1224.PatchUp()
 
 
 

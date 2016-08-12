@@ -541,6 +541,7 @@ Public Class ComputerUser
                 '.Item("LastLogin") = _lastLogin 'First Login no Last Login
                 .Item("EncoderID") = _encoderID
                 .Item("SystemInfo") = Now.Date
+                .Item("STATUS") = 1
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
@@ -595,6 +596,13 @@ Public Class ComputerUser
         ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(_password)
         SaveEntry(ds, False)
     End Sub
-    
+
+    Public Sub DeleteUser()
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & _userID
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+        ds.Tables(fillData).Rows(0).Item("STATUS") = 0
+        SaveEntry(ds, False)
+    End Sub
 #End Region
 End Class
