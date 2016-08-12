@@ -1626,7 +1626,7 @@ Public Class frmPawnItem
         Dim isDJ As Boolean = IIf(PTInfo.AdvanceInterest <> 0, True, False)
 
         For x As Integer = 0 To lessNum - 1
-            dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, CurrentDate.AddDays(monthCnt), PTInfo.MaturityDate, _
+            dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, PTInfo.LoanDate.AddDays(monthCnt), PTInfo.MaturityDate, _
                                    isDJ, PTInfo.INT_Checksum)
 
             Dim prefix As String = ""
