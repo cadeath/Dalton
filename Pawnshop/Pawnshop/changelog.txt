@@ -6,6 +6,7 @@ Version 1.2.3.3
  - Fix on Displaying Computation
  - Fix Redeem Report
  - Fix Minor Journal Entry Problem
+ - Fix Item Pullout Report Date Problem
  - Sanitize fields
 
 Version 1.2.2.12
