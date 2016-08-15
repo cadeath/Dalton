@@ -40,8 +40,7 @@
     End Sub
 
     Private Sub Item_PullOut()
-        Dim stDay = GetFirstDate(monCalendar.SelectionStart)
-        Dim laDay = GetLastDate(monCalendar.SelectionEnd)
+        Dim stDay = monCalendar.SelectionStart.ToShortDateString
 
         Dim dsName As String = "dsPullOut", mySql As String
 
@@ -62,7 +61,7 @@
 
         Dim addParameters As New Dictionary(Of String, String)
         
-        addParameters.Add("txtMonthOf", "DATE: " & stDay.ToShortDateString)
+        addParameters.Add("txtMonthOf", "DATE: " & stDay)
         addParameters.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", addParameters)
