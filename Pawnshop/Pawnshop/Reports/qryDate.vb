@@ -1,5 +1,7 @@
 ﻿Public Class qryDate
 
+    Friend isAuditing As Boolean = False
+
     ' HOW TO ADD NEW REPORT
     ' 1. Create your Report Procedure (Sub)
     ' 2. Add ReportType
@@ -346,7 +348,80 @@
         frmReport.Show()
     End Sub
 
+    Private Sub DailyCashCount_Audit()
+        Dim mySql As String, ds As DataSet
+        Dim latestCashCount As Integer
+
+        ' Get the Latest Cash Count
+        mySql = "SELECT D.CurrentDate, D.MAINTAINBAL, D.INITIALBAL, CC.DENOMINATION, CC.CNT, CC.TOTAL, CC.STATUS, CC.MONEYTYPE"
+        mySql &= vbCrLf & " FROM"
+        mySql &= vbCrLf & " tblCashCount CC"
+        mySql &= vbCrLf & " RIGHT JOIN tblMaintenance M on M.OPT_KEYS = CC.DENOMINATION"
+        mySql &= vbCrLf & " INNER JOIN tblDaily D on D.ID = CC.DailyID"
+        ds = LoadSQL(mySql & " ORDER BY CC.STATUS DESC")
+
+        Console.WriteLine("[DEBUG] " & mySql)
+        latestCashCount = ds.Tables(0).Rows(0).Item("STATUS")
+
+        Dim fillData As String, rptSQL As New Dictionary(Of String, String)
+        Dim subReportSQL As New Dictionary(Of String, String)
+
+        fillData = "dsDaily"
+        mySql = "SELECT * FROM DAILY WHERE "
+        mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        rptSQL.Add(fillData, mySql)
+
+        fillData = "dsDebit"
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
+        mySql &= "FROM JOURNAL_ENTRIES WHERE "
+        mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' AND TODISPLAY = 1 "
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
+        rptSQL.Add(fillData, mySql)
+
+        fillData = "dsCredit"
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
+        mySql &= "FROM JOURNAL_ENTRIES WHERE "
+        mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' AND TODISPLAY = 1 "
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
+        rptSQL.Add(fillData, mySql)
+
+        'Sub Report
+        fillData = "dsCoin"
+        mySql = "SELECT D.CurrentDate, D.MAINTAINBAL, D.INITIALBAL, CC.DENOMINATION, CC.CNT, CC.TOTAL, CC.STATUS, CC.MONEYTYPE"
+        mySql &= vbCrLf & " FROM"
+        mySql &= vbCrLf & " tblCashCount CC"
+        mySql &= vbCrLf & " RIGHT JOIN tblMaintenance M on M.OPT_KEYS = CC.DENOMINATION"
+        mySql &= vbCrLf & " INNER JOIN tblDaily D on D.ID = CC.DailyID"
+        mySql &= String.Format(" WHERE D.CURRENTDATE = '{0}' AND CC.STATUS = {1}", monCal.SelectionRange.Start.ToShortDateString, latestCashCount)
+        subReportSQL.Add(fillData, mySql)
+
+        fillData = "dsBill"
+        subReportSQL.Add(fillData, mySql & " AND MONEYTYPE = 'COIN'")
+
+        ' Parameters
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtCurrentDate", monCal.SelectionRange.Start.ToShortDateString)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", rptPara, 1, subReportSQL)
+        frmReport.Show()
+    End Sub
+
+    Friend Sub AutoDisplay_CashCount(dt As Date)
+        monCal.SetDate(dt)
+
+        DailyCashCount_Audit()
+    End Sub
+
     Private Sub DailyCashCount()
+
+        If isAuditing Then
+            DailyCashCount_Audit()
+            Exit Sub
+        End If
+
         If monCal.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
             If frmMain.dateSet Then
                 MsgBox("Unable to Generate Cash Count Sheet yet", MsgBoxStyle.Information)
@@ -450,7 +525,7 @@
 
     Private Sub TransactionCount()
 
-        Dim StartDay = GetFirstDate(MonCal.SelectionStart)
+        Dim StartDay = GetFirstDate(monCal.SelectionStart)
         Dim EndDay = GetLastDate(monCal.SelectionEnd)
 
         Dim filldata As String = "dsTransactionCount"

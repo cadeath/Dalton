@@ -91,6 +91,7 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
+        Me.AuditConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -182,7 +183,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -399,7 +400,7 @@ Partial Class frmMain
         'pInfo
         '
         Me.pInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pInfo.Controls.Add(Me.lblMessage)
         Me.pInfo.Controls.Add(Me.lblTitle)
         Me.pInfo.Location = New System.Drawing.Point(12, 161)
@@ -411,7 +412,7 @@ Partial Class frmMain
         'lblMessage
         '
         Me.lblMessage.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblMessage.Location = New System.Drawing.Point(15, 41)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(310, 366)
@@ -584,6 +585,12 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
+        'AuditConsoleToolStripMenuItem
+        '
+        Me.AuditConsoleToolStripMenuItem.Name = "AuditConsoleToolStripMenuItem"
+        Me.AuditConsoleToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.AuditConsoleToolStripMenuItem.Text = "&Audit Console"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -684,7 +691,11 @@ Partial Class frmMain
     Friend WithEvents AuctionMonthlyJewelryReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AuditReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ChangePasswordToolStrip As System.Windows.Forms.ToolStripMenuItem
+
     Friend WithEvents VoidReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
+    Friend WithEvents AuditConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
 
 
 End Class
