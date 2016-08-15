@@ -13,7 +13,7 @@
 "***PRK MALAKAS - JOSE COLASTRE***" & vbCrLf
         CREDITS &= "===============" & vbCrLf & _
             "MIS:" & vbCrLf & _
-            "JAYR, MAY2, FRANCES, JANDY, EMELEY" & vbCrLf & _
+            "JAYR, MAY2, FRANCES, JANDY, EMELYE" & vbCrLf & _
             "==================" & vbCrLf & _
             "SPECIAL THANKS TO" & vbCrLf & _
             "SIR DENNIS LARIBA, CPA" & vbCrLf & _
