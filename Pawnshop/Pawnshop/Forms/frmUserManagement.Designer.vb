@@ -68,6 +68,7 @@ Partial Class frmUserManagement
         Me.chkUR = New System.Windows.Forms.CheckBox()
         Me.chkUM = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
+        Me.chkEnableDisable = New System.Windows.Forms.CheckBox()
         Me.chkPrivilege = New System.Windows.Forms.CheckBox()
         Me.chkMigrate = New System.Windows.Forms.CheckBox()
         Me.chkPullOut = New System.Windows.Forms.CheckBox()
@@ -76,7 +77,6 @@ Partial Class frmUserManagement
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
         Me.lblUserid = New System.Windows.Forms.Label()
-        Me.chkEnableDisable = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -558,6 +558,17 @@ Partial Class frmUserManagement
         Me.tbSpecial.Text = "Special"
         Me.tbSpecial.UseVisualStyleBackColor = True
         '
+        'chkEnableDisable
+        '
+        Me.chkEnableDisable.AutoSize = True
+        Me.chkEnableDisable.Enabled = False
+        Me.chkEnableDisable.Location = New System.Drawing.Point(160, 35)
+        Me.chkEnableDisable.Name = "chkEnableDisable"
+        Me.chkEnableDisable.Size = New System.Drawing.Size(130, 17)
+        Me.chkEnableDisable.TabIndex = 16
+        Me.chkEnableDisable.Text = "Enable / Disable User"
+        Me.chkEnableDisable.UseVisualStyleBackColor = True
+        '
         'chkPrivilege
         '
         Me.chkPrivilege.AutoSize = True
@@ -638,16 +649,6 @@ Partial Class frmUserManagement
         Me.lblUserid.TabIndex = 12
         Me.lblUserid.Text = "UserID"
         Me.lblUserid.Visible = False
-        '
-        'chkEnableDisable
-        '
-        Me.chkEnableDisable.AutoSize = True
-        Me.chkEnableDisable.Location = New System.Drawing.Point(160, 35)
-        Me.chkEnableDisable.Name = "chkEnableDisable"
-        Me.chkEnableDisable.Size = New System.Drawing.Size(130, 17)
-        Me.chkEnableDisable.TabIndex = 16
-        Me.chkEnableDisable.Text = "Enable / Disable User"
-        Me.chkEnableDisable.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '

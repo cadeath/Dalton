@@ -40,6 +40,14 @@
         End With
         lblUserid.Text = idx
         LoadPrivilege()
+
+        Dim fillData As String = "TBL_GAMIT", mysql As String = "SELECT * FROM " & fillData & " WHERE UserID = '" & idx & "'"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If ds.Tables(0).Rows(0).Item("Status") = "1" Then
+            chkEnableDisable.Checked = True
+        Else
+            chkEnableDisable.Checked = False
+        End If
     End Sub
 
     Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit ORDER BY Username ASC")
@@ -271,18 +279,17 @@
     End Function
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        If chkEnableDisable.Checked = True Then
-            selectedUser.Password = lblUserid.Text
-            selectedUser.DeleteUser(True)
-        Else
-            selectedUser.Password = lblUserid.Text
-            selectedUser.DeleteUser(False)
-        End If
-        LoadActive()
         If btnAdd.Text = "&Add" Then
             If CheckUsername() = False Then Exit Sub
             If Not PasswordPolicy() Then Exit Sub
             If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
+        Else
+            If chkEnableDisable.Checked = True Then
+                selectedUser.DeleteUser(True)
+            Else
+                selectedUser.DeleteUser(False)
+            End If
+            LoadActive()
         End If
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.UserManagement
@@ -303,6 +310,7 @@
             tmpUser.Privilege = Privileger()
             tmpUser.UpdatePrivilege()
             tmpUser.EncoderID = UserID
+            tmpUser.UserStatus = 1
 
             tmpUser.SaveUser()
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
@@ -359,6 +367,7 @@
     End Sub
 
     Private Sub EditMode()
+        chkEnableDisable.Enabled = True
         btnAdd.Text = "&Update"
         txtUser.ReadOnly = True
         txtPass1.Text = ""
