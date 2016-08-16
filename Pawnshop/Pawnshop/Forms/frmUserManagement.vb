@@ -37,12 +37,14 @@
             .LoadUser(idx)
             txtUser.Text = .UserName
             txtFullname.Text = .FullName
+            chkEnableDisable.Checked = .UserStatus
+
         End With
         lblUserid.Text = idx
         LoadPrivilege()
     End Sub
 
-    Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit WHERE Status <> '0' ORDER BY Username ASC")
+    Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit ORDER BY Username ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
@@ -62,6 +64,7 @@
     End Sub
 
     Private Sub ClearFields()
+        chkEnableDisable.Checked = False
         txtUser.Text = ""
         txtFullname.Text = ""
         txtPass1.Text = ""
@@ -270,6 +273,14 @@
     End Function
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        If chkEnableDisable.Checked = True Then
+            selectedUser.Password = lblUserid.Text
+            selectedUser.DeleteUser(True)
+        Else
+            selectedUser.Password = lblUserid.Text
+            selectedUser.DeleteUser(False)
+        End If
+        LoadActive()
         If btnAdd.Text = "&Add" Then
             If CheckUsername() = False Then Exit Sub
             If Not PasswordPolicy() Then Exit Sub
@@ -449,23 +460,5 @@
 
     Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
         CheckUsername()
-    End Sub
-
-    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
-        If Not OTPDisable Then
-            LoadUser()
-            diagOTP.FormType = diagOTP.OTPType.UserManagementDelete
-            If Not CheckOTP() Then Exit Sub
-        Else
-            UserDelete()
-        End If
-    End Sub
-
-    Friend Sub UserDelete()
-        selectedUser.Password = lblUserid.Text
-        selectedUser.DeleteUser()
-       
-        MsgBox("User " & txtFullname.Text & " Deleted", MsgBoxStyle.Question, moduleName)
-        LoadActive()
     End Sub
 End Class

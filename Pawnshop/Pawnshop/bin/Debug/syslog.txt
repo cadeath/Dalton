@@ -59,3 +59,40 @@ attempt to store duplicate value (visible to active transactions) in unique inde
 [08/12/2016 09:41:36] SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4
 [08/12/2016 10:09:20] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
 [08/12/2016 10:09:23] SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4
+[08/16/2016 08:15:19] [1.2.2.3]System.ArgumentException: Column 'Status' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.ComputerUser.LoadUserByRow(DataRow dr) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 532
+   at Pawnshop.ComputerUser.LoadUser(Int32 id) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 577
+   at Pawnshop.db1223.DefaultAppraiser() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 55
+   at Pawnshop.db1223.PatchUp() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 10
+[08/16/2016 08:16:47] [1.2.2.3]System.ArgumentException: Column 'Status' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.ComputerUser.LoadUserByRow(DataRow dr) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 532
+   at Pawnshop.ComputerUser.LoadUser(Int32 id) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 577
+   at Pawnshop.db1223.DefaultAppraiser() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 55
+   at Pawnshop.db1223.PatchUp() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 10
+[08/16/2016 08:17:53] [1.2.2.3]System.ArgumentException: Column 'Status' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.ComputerUser.LoadUserByRow(DataRow dr) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 532
+   at Pawnshop.ComputerUser.LoadUser(Int32 id) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 577
+   at Pawnshop.db1223.DefaultAppraiser() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 55
+   at Pawnshop.db1223.PatchUp() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 10
+[08/16/2016 08:18:35] [1.2.2.3]System.ArgumentException: Column 'Status' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.ComputerUser.LoadUserByRow(DataRow dr) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 532
+   at Pawnshop.ComputerUser.LoadUser(Int32 id) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 577
+   at Pawnshop.db1223.DefaultAppraiser() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 55
+   at Pawnshop.db1223.PatchUp() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 10
+[08/16/2016 08:20:36] [1.2.2.3]System.ArgumentException: Column 'Status' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.ComputerUser.LoadUserByRow(DataRow dr) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 532
+   at Pawnshop.ComputerUser.LoadUser(Int32 id) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\ComputerUser.vb:line 577
+   at Pawnshop.db1223.DefaultAppraiser() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 55
+   at Pawnshop.db1223.PatchUp() in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\AutoPatch\db1223.vb:line 10
+[08/16/2016 08:20:53] SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4
+[08/16/2016 08:23:51] SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4

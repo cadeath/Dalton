@@ -80,6 +80,15 @@ Public Class ComputerUser
         End Set
     End Property
 
+    Private _UserStatus As Integer
+    Public Property UserStatus() As Integer
+        Get
+            Return _UserStatus
+        End Get
+        Set(ByVal value As Integer)
+            _UserStatus = value
+        End Set
+    End Property
 #End Region
 
 #Region "Privileges"
@@ -520,6 +529,7 @@ Public Class ComputerUser
             _fullName = .Item("FullName")
             _privilege = .Item("Privilege")
             If Not IsDBNull(.Item("LastLogin")) Then _lastLogin = .Item("LastLogin")
+            _UserStatus = .Item("Status")
         End With
 
         getPrivilege()
@@ -597,11 +607,14 @@ Public Class ComputerUser
         SaveEntry(ds, False)
     End Sub
 
-    Public Sub DeleteUser()
+    Public Sub DeleteUser(ByVal Status As Boolean)
         Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & _userID
         Dim ds As DataSet = LoadSQL(mySql, fillData)
-
-        ds.Tables(fillData).Rows(0).Item("STATUS") = 0
+        If Status = True Then
+            ds.Tables(fillData).Rows(0).Item("STATUS") = 1
+        Else
+            ds.Tables(fillData).Rows(0).Item("STATUS") = 0
+        End If
         SaveEntry(ds, False)
     End Sub
 #End Region
