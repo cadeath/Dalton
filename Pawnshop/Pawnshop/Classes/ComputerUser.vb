@@ -609,9 +609,6 @@ Public Class ComputerUser
     Public Sub DeleteUser(ByVal Status As Boolean)
         Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & _userID
         Dim ds As DataSet = LoadSQL(mySql, fillData)
-        'If ds.Tables(0).Rows.Count >= 1 Then
-        '    ds.Tables(fillData).Rows(0).Item("STATUS") = 1
-        '    SaveEntry(ds)
         If Status = True Then
             ds.Tables(fillData).Rows(0).Item("STATUS") = "1"
         Else
