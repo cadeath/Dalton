@@ -909,7 +909,7 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub LoadAppraisers()
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
         Dim ds As DataSet = LoadSQL(mySql)
 
         appraiser = New Hashtable
