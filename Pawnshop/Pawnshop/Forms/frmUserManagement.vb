@@ -37,8 +37,6 @@
             .LoadUser(idx)
             txtUser.Text = .UserName
             txtFullname.Text = .FullName
-            chkEnableDisable.Checked = .UserStatus
-
         End With
         lblUserid.Text = idx
         LoadPrivilege()
