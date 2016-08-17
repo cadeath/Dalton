@@ -174,7 +174,7 @@ Public Class frmExtractor
 
         Dim mySql2 As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
        "FROM JOURNAL_SUMMARY " & vbCrLf & _
-       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
+       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null' AND TRANSTYPE <> 'Receipt Fund from Head Office'", sd.ToShortDateString)
         mySql2 &= " ORDER BY TRANSTYPE, DEBIT DESC "
 
         Dim ds As DataSet = LoadSQL(mySql)
