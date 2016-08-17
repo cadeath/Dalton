@@ -922,8 +922,6 @@ Public Class frmPawnItem
                 appraiser.Add(tmpUser.UserID, tmpUser.UserName)
                 cboAppraiser.Items.Add(tmpUser.UserName)
             End If
-            'appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-            'cboAppraiser.Items.Add(tmpUser.UserName)
         Next
     End Sub
 
