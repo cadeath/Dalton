@@ -1,5 +1,5 @@
 ﻿Public Class frmCIO_List
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Dim fillData As String = "tblCashTrans"
     Dim filldata1 As String = "TBL_DAILYTIMELOG"
