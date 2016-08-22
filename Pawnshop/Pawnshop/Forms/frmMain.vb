@@ -479,5 +479,4 @@
 
         frmAuditConsole.Show()
     End Sub
->>>>>>> refs/remotes/origin/master
 End Class
