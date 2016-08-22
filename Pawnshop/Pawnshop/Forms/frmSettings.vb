@@ -1,6 +1,6 @@
 ﻿Public Class frmSettings
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lblSAP01.Text = "SAP Code 01"
         ClearFields()
@@ -60,12 +60,15 @@
 
         Console.WriteLine("Revolving Fund Added")
     End Sub
+
+    ' Please review this
     Private Function CheckOTP() As Boolean
         diagOTP.Show()
         diagOTP.TopMost = True
-        Return False
-        Return True
+        Return False 'WHAT THE
+        Return True 'WHAT THE
     End Function
+
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not locked Then
             UpdateSetting()
@@ -76,8 +79,7 @@
             Else
                 UpdateSetting()
             End If
-            End If
-        
+        End If
     End Sub
     Friend Sub UpdateSetting()
         'First

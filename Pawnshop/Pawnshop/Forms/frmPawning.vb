@@ -48,8 +48,14 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
-        frmPawnItem.NewLoan()
-        frmPawnItem.Show()
+        If frmPawnItem.Visible = True Then
+            MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
+                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly+ MsgBoxStyle.DefaultButton2, _
+                                             "Form Already Open")
+        Else
+            frmPawnItem.NewLoan()
+            frmPawnItem.Show()
+        End If
     End Sub
     ''' <summary>
     ''' load the specific client either renew or redeem or segregated.
@@ -278,8 +284,16 @@
     ''' <remarks></remarks>
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
         If lvPawners.SelectedItems.Count > 0 Then
-            btnView.PerformClick()
-            frmPawnItem.btnRenew.PerformClick()
+            If frmPawnItem.Visible = True Then
+
+                MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
+                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
+                                             "Form Already Open")
+            Else
+                btnView.PerformClick()
+                frmPawnItem.btnRenew.PerformClick()
+
+            End If
         End If
     End Sub
     ''' <summary>
@@ -290,8 +304,15 @@
     ''' <remarks></remarks>
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If lvPawners.SelectedItems.Count > 0 Then
-            btnView.PerformClick()
-            frmPawnItem.btnRedeem.PerformClick()
+            If frmPawnItem.Visible = True Then
+                MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
+                                                           , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
+                                                            "Form Already Open")
+            Else
+                btnView.PerformClick()
+                frmPawnItem.btnRedeem.PerformClick()
+
+            End If
         End If
     End Sub
     ''' <summary>
