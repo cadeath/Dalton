@@ -52,7 +52,7 @@ Public Class frmPawnItem
 
     Dim Critical_Language() As String =
             {"Failed to verify hash value to the "}
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Reprint As Boolean = False
 
 
