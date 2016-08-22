@@ -1,6 +1,6 @@
 ﻿Public Class frmBorrowBrowse
 
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     ' Version 1.1
     ' - Check branchCode
     ''' <summary>
