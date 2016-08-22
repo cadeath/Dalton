@@ -4,19 +4,22 @@
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
-            Dim mySql As String
-            mySql = "ALTER TABLE TBL_GAMIT ADD STATUS VARCHAR(1);"
-
-            Dim strStatus As String
-            strStatus = "UPDATE TBL_GAMIT SET STATUS = '1'"
-
-            RunCommand(mySql)
-            RunCommand(strStatus)
+            ColumnStatus()
 
             Database_Update(LATEST_VERSION)
             Log_Report("SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4")
         Catch ex As Exception
             Log_Report("[1.2.2.4]" & ex.ToString)
         End Try
+    End Sub
+    Private Sub ColumnStatus()
+        Dim mySql As String
+        mySql = "ALTER TABLE TBL_GAMIT ADD STATUS VARCHAR(1);"
+
+        Dim strStatus As String
+        strStatus = "UPDATE TBL_GAMIT SET STATUS = '1'"
+
+        RunCommand(mySql)
+        RunCommand(strStatus)
     End Sub
 End Module
