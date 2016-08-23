@@ -466,7 +466,12 @@
         frmChangePassword.Show()
     End Sub
 
-    Private Sub AuditConsoleToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
+    Private Sub VoidReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VoidReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.VoidReportDaily
+        qryDate.Show()
+
+    End Sub
+    Private Sub AuditConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         AuditModule_Initialization()
@@ -478,5 +483,6 @@
         Else
             frmAuditConsole.Show()
         End If
+
     End Sub
 End Class

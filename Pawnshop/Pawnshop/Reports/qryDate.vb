@@ -32,10 +32,11 @@
         LoanRenew2 = 11
         MoneyTransferBSP = 12
         DollarDaily = 13
-        'AuditPrinLimit = 14
         MonthlyTransactionCountSummary = 14
         MoneyTransferBracketing = 15
         RenewalBreakDown = 16
+        VoidReportDaily = 17
+        VoidReportMonthly = 18
 
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
@@ -71,15 +72,16 @@
                 MoneyTransfer_BSP()
             Case ReportType.DollarDaily
                 DailyDollar()
-                'Case ReportType.AuditPrinLimit
-                '    Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
             Case ReportType.MoneyTransferBracketing
                 MoneyTransferBracketing()
             Case ReportType.RenewalBreakDown
                 monthlyRenewalBreakDown()
-
+            Case ReportType.VoidReportDaily
+                VoidReportDaily()
+            Case ReportType.VoidReportMonthly
+                VoidReportMonthly()
         End Select
     End Sub
 
@@ -131,6 +133,8 @@
                     FormType = ReportType.MoneyTransferBracketing
                 Case "Monthly Renewal Break Down"
                     FormType = ReportType.RenewalBreakDown
+                Case "Monthly Void Report"
+                    FormType = ReportType.VoidReportMonthly
 
             End Select
         End If
@@ -586,8 +590,10 @@
                 Return True
             Case ReportType.DollarDaily
                 Return True
-                'Case ReportType.AuditPrinLimit
-                '    Return True
+            Case ReportType.VoidReportDaily
+                Return True
+            Case ReportType.VoidReportMonthly
+                Return True
         End Select
 
         Return False
@@ -601,9 +607,45 @@
         End If
     End Sub
 
-    'Private Sub Audit_PrincipalMin()
-    '    Dim MINIMUM_PRINCIPAL As Double = 5000
-    '    AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCal.SelectionStart.ToShortDateString)
-    'End Sub
+    Private Sub VoidReportDaily()
+        Dim cur As Date = monCal.SelectionStart
+
+        Dim mySql As String, dsName As String = "dsVoid"
+
+        mySql = "SELECT V.VOID_ID, V.TRANSDATE, V.MOD_NAME, V.REMARKS, G.FULLNAME AS ENCODER, G2.FULLNAME AS VOIDED_BY "
+        mySql &= "FROM TBLVOID V "
+        mySql &= "INNER JOIN TBL_GAMIT G ON G.USERID = V.ENCODER "
+        mySql &= "INNER JOIN TBL_GAMIT G2 ON G2.USERID=V.VOIDED_BY "
+        mySql &= "WHERE V.TRANSDATE = '" & cur & "'"
+
+        Dim addParameters As New Dictionary(Of String, String)
+
+        addParameters.Add("txtMonthOf", "DATE: " & cur.ToShortDateString)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rptVoidReport.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
+
+    Private Sub VoidReportMonthly()
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionEnd)
+
+        Dim mySql As String, dsName As String = "dsVoid"
+
+        mySql = "SELECT V.VOID_ID, V.TRANSDATE, V.MOD_NAME, V.REMARKS, G.FULLNAME AS ENCODER, G2.FULLNAME AS VOIDED_BY "
+        mySql &= "FROM TBLVOID V "
+        mySql &= "INNER JOIN TBL_GAMIT G ON G.USERID = V.ENCODER "
+        mySql &= "INNER JOIN TBL_GAMIT G2 ON G2.USERID=V.VOIDED_BY "
+        mySql &= "WHERE V.TRANSDATE BETWEEN '" & st & "' AND '" & en & "'"
+
+        Dim addParameters As New Dictionary(Of String, String)
+
+        addParameters.Add("txtMonthOf", "From: " & st.ToShortDateString & " To " & en.ToShortDateString)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rptVoidReport.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
 
 End Class
