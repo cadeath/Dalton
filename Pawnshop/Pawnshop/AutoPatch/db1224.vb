@@ -22,8 +22,10 @@
         mySql = "CREATE TABLE TBLVOID (VOID_ID SMALLINT NOT NULL, "
         mySql &= "TRANSDATE DATE, MOD_NAME VARCHAR(100), REMARKS VARCHAR(255), "
         mySql &= "ENCODER SMALLINT, VOIDED_BY SMALLINT);"
+        Dim VoidKey As String = "ALTER TABLE TBLVOID ADD PRIMARY KEY (VOID_ID);"
 
         RunCommand(mySql)
+        RunCommand(VoidKey)
         AutoIncrement_ID("TBLVOID", "VOID_ID")
     End Sub
     Private Sub ColumnStatus()
