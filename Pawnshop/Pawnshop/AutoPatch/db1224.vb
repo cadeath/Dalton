@@ -1,6 +1,7 @@
 ﻿Module db1224
     Const ALLOWABLE_VERSION As String = "1.2.2.3"
     Const LATEST_VERSION As String = "1.2.2.4"
+
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
@@ -8,7 +9,6 @@
             VoidReport()
 
             ColumnStatus()
-
 
             Database_Update(LATEST_VERSION)
             Log_Report("SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4")
@@ -25,7 +25,7 @@
 
         RunCommand(mySql)
         AutoIncrement_ID("TBLVOID", "VOID_ID")
-end sub
+    End Sub
     Private Sub ColumnStatus()
         Dim mySql As String
         mySql = "ALTER TABLE TBL_GAMIT ADD STATUS VARCHAR(1);"
