@@ -80,6 +80,15 @@ Public Class ComputerUser
         End Set
     End Property
 
+    Private _UserStatus As Integer
+    Public Property UserStatus() As Integer
+        Get
+            Return _UserStatus
+        End Get
+        Set(ByVal value As Integer)
+            _UserStatus = value
+        End Set
+    End Property
 #End Region
 
 #Region "Privileges"
@@ -521,7 +530,6 @@ Public Class ComputerUser
             _privilege = .Item("Privilege")
             If Not IsDBNull(.Item("LastLogin")) Then _lastLogin = .Item("LastLogin")
         End With
-
         getPrivilege()
     End Sub
 
@@ -541,6 +549,7 @@ Public Class ComputerUser
                 '.Item("LastLogin") = _lastLogin 'First Login no Last Login
                 .Item("EncoderID") = _encoderID
                 .Item("SystemInfo") = Now.Date
+                .Item("STATUS") = _UserStatus
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
@@ -562,6 +571,7 @@ Public Class ComputerUser
         mySql = "SELECT * FROM " & fillData & " WHERE UserID = " & id
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
 
         LoadUserByRow(ds.Tables(0).Rows(0))
         Console.WriteLine(String.Format("[ComputerUser] UserID {0} - {1} Loaded", _userID, _userName))
@@ -595,6 +605,18 @@ Public Class ComputerUser
         ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(_password)
         SaveEntry(ds, False)
     End Sub
-    
+
+    Public Sub DeleteUser(ByVal Status As Boolean)
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & _userID
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        If Status = True Then
+            ds.Tables(fillData).Rows(0).Item("STATUS") = "1"
+        Else
+            ds.Tables(fillData).Rows(0).Item("STATUS") = "0"
+        End If
+        SaveEntry(ds, False)
+        ' End If
+    End Sub
+
 #End Region
 End Class

@@ -2,7 +2,7 @@
 
     Private selectedUser As New ComputerUser
     Private moduleName As String = "User Management"
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Function PasswordPolicy() As Boolean
         If txtPass1.Text.Length >= 4 And txtPass1.Text.Length <= 8 Then
@@ -40,6 +40,14 @@
         End With
         lblUserid.Text = idx
         LoadPrivilege()
+
+        Dim fillData As String = "TBL_GAMIT", mysql As String = "SELECT * FROM " & fillData & " WHERE UserID = '" & idx & "'"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If ds.Tables(0).Rows(0).Item("Status") = "1" Then
+            chkEnableDisable.Checked = True
+        Else
+            chkEnableDisable.Checked = False
+        End If
     End Sub
 
     Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit ORDER BY Username ASC")
@@ -62,6 +70,7 @@
     End Sub
 
     Private Sub ClearFields()
+        chkEnableDisable.Checked = False
         txtUser.Text = ""
         txtFullname.Text = ""
         txtPass1.Text = ""
@@ -274,6 +283,13 @@
             If CheckUsername() = False Then Exit Sub
             If Not PasswordPolicy() Then Exit Sub
             If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
+        Else
+            If chkEnableDisable.Checked = True Then
+                selectedUser.DeleteUser(True)
+            Else
+                selectedUser.DeleteUser(False)
+            End If
+            LoadActive()
         End If
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.UserManagement
@@ -294,6 +310,7 @@
             tmpUser.Privilege = Privileger()
             tmpUser.UpdatePrivilege()
             tmpUser.EncoderID = UserID
+            tmpUser.UserStatus = 1
 
             tmpUser.SaveUser()
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
@@ -350,6 +367,7 @@
     End Sub
 
     Private Sub EditMode()
+        chkEnableDisable.Enabled = True
         btnAdd.Text = "&Update"
         txtUser.ReadOnly = True
         txtPass1.Text = ""
@@ -449,31 +467,5 @@
 
     Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
         CheckUsername()
-    End Sub
-
-    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
-        If Not OTPDisable Then
-            LoadUser()
-            diagOTP.FormType = diagOTP.OTPType.UserManagementDelete
-            If Not CheckOTP() Then Exit Sub
-        End If
-    End Sub
-
-    Friend Sub UserDelete()
-        dbOpen()
-        Dim filldata As String = "TBL_GAMIT"
-        Dim mysql As String = "DELETE FROM " & filldata & " WHERE USERID = '" & lblUserid.Text & "'"
-        Dim Command As New Odbc.OdbcCommand
-        Command.Connection = con
-        Command.CommandText = mysql
-        Command.ExecuteNonQuery()
-
-        MsgBox("User " & txtFullname.Text & " Deleted", MsgBoxStyle.Question, moduleName)
-        LoadActive()
-        dbClose()
-    End Sub
-
-    Private Sub lvUsers_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvUsers.SelectedIndexChanged
-
     End Sub
 End Class
