@@ -1,7 +1,8 @@
 CHANGELOG
-Version 1.2.3.5
+Version 1.2.3.6
  - Add Audit Console (Base on Maam Irish Needs)
  - Add RePrint indicator on PT and OR
+ - Add Disable User Account
  - No Posting if No Entries, place atleast zero (0) value
  - Fix Pawning Bug
  - Fix Minor Problems on Journal Entries
@@ -9,6 +10,7 @@ Version 1.2.3.5
  - Fix Redeem Report
  - Fix Minor Journal Entry Problem
  - Fix Item Pullout Report Date Problem
+ - Fix Redemption Report Summary
  - Sanitize fields
 
 Version 1.2.2.12
