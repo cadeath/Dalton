@@ -18,6 +18,7 @@ Module autopatch
 
 
 
+
         DBVERSION = GetOption("DBVersion")
     End Sub
 

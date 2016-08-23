@@ -180,9 +180,11 @@ Public Class frmExtractor
         Dim ds As DataSet = LoadSQL(mySql)
         Dim ds2 As DataSet = LoadSQL(mySql2)
         Dim MaxEntries As Integer = 0
+
         Dim MaxEntries2 As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
         MaxEntries2 = ds2.Tables(0).Rows.Count
+
         Console.WriteLine("Executing SQL:")
         Console.WriteLine(mySql2, mySql)
         Console.WriteLine("Entries: " & MaxEntries)
