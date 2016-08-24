@@ -246,7 +246,7 @@
         ds.Tables(0).Rows(0).Item("Status") = "V"
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
-
+        Dim tmpMoneyTransfer As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
     
         Dim MoneyTransID As Integer = frmMTlist.lvMoneyTransfer.FocusedItem.Tag
         Me.LoadById(_id)
@@ -312,7 +312,9 @@
         Dim mySql3 As String = "SELECT * FROM " & filldata2 & " WHERE UPPER(TRANSTYPE) LIKE UPPER('%" & strModname2 & "%') AND TRANSID =" & MoneyTransID
         Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
-       
+
+        TransactionVoidSave(strModname1, tmpMoneyTransfer, POSuser.UserID, reason)
+
         RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
 
         RemoveDailyTimeLog(MoneyTransID, "1", SrvTypDailyTimelog)

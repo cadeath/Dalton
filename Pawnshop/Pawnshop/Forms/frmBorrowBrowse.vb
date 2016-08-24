@@ -78,13 +78,7 @@
         Return False
         Return True
     End Function
-    ''' <summary>
-    ''' click button to not valid the transaction or to cancel
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-
+   
     Public Sub GetBorrowingID()
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         Dim ID As Integer

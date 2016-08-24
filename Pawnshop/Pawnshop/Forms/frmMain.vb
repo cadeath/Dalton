@@ -26,6 +26,7 @@
         BSPReportToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
+        ExtractToExcelToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -456,11 +457,21 @@
         qryPullOut_List.Show()
     End Sub
 
+
+    Private Sub ExtractToExcelToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ExtractToExcelToolStripMenuItem.Click
+        ExtractDataFromDatabase.ShowDialog()
+    End Sub
+
     Private Sub ChangePasswordToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ChangePasswordToolStrip.Click
         frmChangePassword.Show()
     End Sub
 
-    Private Sub AuditConsoleToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
+    Private Sub VoidReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VoidReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.VoidReportDaily
+        qryDate.Show()
+
+    End Sub
+    Private Sub AuditConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         AuditModule_Initialization()
@@ -469,8 +480,9 @@
             diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
             If Not diagOTPv2.isCorrect Then Exit Sub
+        Else
+            frmAuditConsole.Show()
         End If
 
-        frmAuditConsole.Show()
     End Sub
 End Class
