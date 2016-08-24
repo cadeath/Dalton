@@ -26,7 +26,7 @@
         BSPReportToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
-        ExtractToExcelToolStripMenuItem.Enabled = Not st
+        AccountingExtractToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -457,11 +457,6 @@
         qryPullOut_List.Show()
     End Sub
 
-
-    Private Sub ExtractToExcelToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ExtractToExcelToolStripMenuItem.Click
-        ExtractDataFromDatabase.ShowDialog()
-    End Sub
-
     Private Sub ChangePasswordToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ChangePasswordToolStrip.Click
         frmChangePassword.Show()
     End Sub
@@ -484,5 +479,9 @@
             frmAuditConsole.Show()
         End If
 
+    End Sub
+
+    Private Sub AccountingExtractToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AccountingExtractToolStripMenuItem.Click
+        ExtractDataFromDatabase.ShowDialog()
     End Sub
 End Class
