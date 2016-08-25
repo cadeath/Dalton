@@ -474,9 +474,12 @@
         If Not OTPDisable Then
             diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
-            If Not diagOTPv2.isCorrect Then Exit Sub
-        Else
-            frmAuditConsole.Show()
+            If Not diagOTPv2.isCorrect Then
+                Exit Sub
+            Else
+                frmAuditConsole.Show()
+            End If
+
         End If
 
     End Sub
