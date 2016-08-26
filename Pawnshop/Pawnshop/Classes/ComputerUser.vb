@@ -579,7 +579,7 @@ Public Class ComputerUser
 
     Public Function LoginUser(ByVal user As String, ByVal password As String) As Boolean
         mySql = "SELECT UserID, LOWER(Username) FROM " & fillData
-        mySql &= vbCrLf & String.Format(" WHERE LOWER(Username) = LOWER('{0}') AND UserPass = '{1}'", user, Encrypt(password))
+        mySql &= vbCrLf & String.Format(" WHERE LOWER(Username) = LOWER('{0}') AND UserPass = '{1}' AND STATUS <> '0'", user, Encrypt(password))
         Dim ds As DataSet
 
         ds = LoadSQL(mySql)
