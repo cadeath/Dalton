@@ -513,6 +513,7 @@
         Dim fillData As String = "dsBorrowings"
         Dim mySql As String = "SELECT * FROM BORROWINGS"
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= " AND STATUS <> 'N/A'"
         mySql &= " ORDER BY TRANSDATE ASC, STATUS ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
