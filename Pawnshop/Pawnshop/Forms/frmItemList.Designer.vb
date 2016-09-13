@@ -47,7 +47,7 @@ Partial Class frmItemList
         Me.lvItem.Location = New System.Drawing.Point(7, 68)
         Me.lvItem.Name = "lvItem"
         Me.lvItem.Size = New System.Drawing.Size(904, 270)
-        Me.lvItem.TabIndex = 0
+        Me.lvItem.TabIndex = 1
         Me.lvItem.UseCompatibleStateImageBehavior = False
         Me.lvItem.View = System.Windows.Forms.View.Details
         '
@@ -85,7 +85,7 @@ Partial Class frmItemList
         Me.GroupBox1.Location = New System.Drawing.Point(7, 8)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(904, 54)
-        Me.GroupBox1.TabIndex = 1
+        Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
         'btnSearch
@@ -93,7 +93,7 @@ Partial Class frmItemList
         Me.btnSearch.Location = New System.Drawing.Point(821, 17)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(75, 25)
-        Me.btnSearch.TabIndex = 2
+        Me.btnSearch.TabIndex = 1
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
@@ -104,7 +104,7 @@ Partial Class frmItemList
         Me.txtSearch.Location = New System.Drawing.Point(77, 18)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(738, 22)
-        Me.txtSearch.TabIndex = 1
+        Me.txtSearch.TabIndex = 0
         '
         'Label1
         '
@@ -122,7 +122,7 @@ Partial Class frmItemList
         Me.btnSelect.Location = New System.Drawing.Point(747, 344)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(75, 31)
-        Me.btnSelect.TabIndex = 11
+        Me.btnSelect.TabIndex = 2
         Me.btnSelect.Text = "&Select"
         Me.btnSelect.UseVisualStyleBackColor = True
         '

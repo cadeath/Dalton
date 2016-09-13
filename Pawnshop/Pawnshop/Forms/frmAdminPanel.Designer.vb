@@ -38,7 +38,6 @@ Partial Class frmAdminPanel
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.btnshowSpecification = New System.Windows.Forms.Button()
         Me.dgSpecification = New System.Windows.Forms.DataGridView()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,6 +63,7 @@ Partial Class frmAdminPanel
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.txtReferenceNumber = New System.Windows.Forms.TextBox()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -203,7 +203,7 @@ Partial Class frmAdminPanel
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 33)
         Me.btnSave.TabIndex = 2
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnUpdate
@@ -212,7 +212,7 @@ Partial Class frmAdminPanel
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 33)
         Me.btnUpdate.TabIndex = 11
-        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.Text = "&Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'TabControl1
@@ -229,7 +229,7 @@ Partial Class frmAdminPanel
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
-        Me.TabPage1.Controls.Add(Me.btnshowSpecification)
+        Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.dgSpecification)
         Me.TabPage1.Controls.Add(Me.btnSave)
         Me.TabPage1.Controls.Add(Me.btnUpdate)
@@ -242,17 +242,6 @@ Partial Class frmAdminPanel
         Me.TabPage1.Size = New System.Drawing.Size(1040, 433)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Item"
-        '
-        'btnshowSpecification
-        '
-        Me.btnshowSpecification.BackColor = System.Drawing.Color.Gainsboro
-        Me.btnshowSpecification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnshowSpecification.ForeColor = System.Drawing.Color.Gainsboro
-        Me.btnshowSpecification.Location = New System.Drawing.Point(6, 403)
-        Me.btnshowSpecification.Name = "btnshowSpecification"
-        Me.btnshowSpecification.Size = New System.Drawing.Size(386, 23)
-        Me.btnshowSpecification.TabIndex = 13
-        Me.btnshowSpecification.UseVisualStyleBackColor = False
         '
         'dgSpecification
         '
@@ -463,6 +452,15 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber.TabIndex = 0
         Me.lblReferenceNumber.Text = "Reference No."
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(790, 393)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 33)
+        Me.Button1.TabIndex = 13
+        Me.Button1.Text = "Enable"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -522,10 +520,10 @@ Partial Class frmAdminPanel
     Friend WithEvents dgSpecification As System.Windows.Forms.DataGridView
     Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
-    Friend WithEvents btnshowSpecification As System.Windows.Forms.Button
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

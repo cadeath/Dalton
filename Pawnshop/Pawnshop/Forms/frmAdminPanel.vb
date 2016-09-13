@@ -155,8 +155,10 @@ Public Class frmAdminPanel
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not isValid() Then Exit Sub
-        If btnUpdate.Text = "Update" Then
-            btnUpdate.Text = "&Modify"
+
+        If btnUpdate.Text = "&Modify" Then
+            btnUpdate.Text = "&Save"
+            Exit Sub
         End If
 
         Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
@@ -181,7 +183,6 @@ Public Class frmAdminPanel
         For Each row As DataGridViewRow In dgSpecification.Rows
             SpecSave = New Item
             With SpecSave
-
                 .ShortCode = row.Cells(0).Value
                 .SpecName = row.Cells(1).Value
                 .SpecType = row.Cells(2).Value
@@ -195,8 +196,9 @@ Public Class frmAdminPanel
                     .ModifySpec()
                 End If
             End With
-
         Next
+        MsgBox("Transaction Updated", MsgBoxStyle.Information)
+        clearfields()
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -216,18 +218,29 @@ Public Class frmAdminPanel
         secured_str = DreadKnight(secured_str)
     End Sub
 
-    Private Sub disabled()
+    Private Sub reaDOnlyTrue()
         txtCategory.ReadOnly = True
         txtClassifiction.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
         rdbNo.Enabled = False
         rdbYes.Enabled = False
-
     End Sub
-   
-    Private Sub btnshowSpecification_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnshowSpecification.Click
-        ' dgSpecification.Rows.Clear()
+
+    Private Sub reaDOnlyFalse()
+        txtCategory.ReadOnly = False
+        txtClassifiction.ReadOnly = False
+        txtDescription.ReadOnly = False
+        txtPrintLayout.ReadOnly = False
+        rdbNo.Enabled = False
+        rdbYes.Enabled = False
+        For a As Integer = 0 To dgSpecification.Rows.Count - 1
+            dgSpecification.Rows(a).ReadOnly = False
+        Next
+    End Sub
+
+
+    Friend Sub LoadSpec()
         Dim da As New OdbcDataAdapter
         Dim mySql As String = "SELECT SHORT_CODE,SPECNAME,SPECTYPE,SPECLAYOUT,UOM FROM tbl_SPecification WHERE ItemID = '" & frmItemList.lblItemID.Text & "'"
         Console.WriteLine("SQL: " & mySql)
@@ -241,9 +254,21 @@ Public Class frmAdminPanel
         Next
         Dim i As Integer = (0)
 
-        disabled()
+        reaDOnlyTrue()
         For a As Integer = 0 To dgSpecification.Rows.Count - 1
             dgSpecification.Rows(a).ReadOnly = True
         Next
+        btnUpdate.Text = " &Modify"
+        btnSave.Visible = False
+    End Sub
+
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+            End If
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        reaDOnlyFalse()
     End Sub
 End Class

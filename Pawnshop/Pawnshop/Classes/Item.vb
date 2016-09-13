@@ -201,6 +201,31 @@
         loadByRow(dr)
     End Sub
 
+    Public Sub LoadSpec(ByVal id As Integer)
+        mySql = "SELECT * FROM " & fillData1 & " WHERE SpecID = " & id
+        ds = LoadSQL(mySql)
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            loadByRow(dr)
+        Next
+    End Sub
+
+    Private Sub loadBySpec(ByVal dr As DataRow)
+        With dr
+            _SpecID = .Item("SpecID")
+            _ShortCode = .Item("Short_Code")
+            SpecName = .Item("SpecName")
+
+            _SpecType = .Item("SpecType")
+            _Layout = .Item("SpecLayout")
+            _UnitofMeasure = .Item("OUM")
+        End With
+    End Sub
+
+    Public Sub LoadSpecByRow(ByVal dr As DataRow)
+        loadBySpec(dr)
+    End Sub
+
     Public Sub ModifyItem()
         Dim mySql As String = "SELECT * FROM " & fillData & " WHERE ItemID = " & frmItemList.lblItemID.Text
         Dim ds As DataSet = LoadSQL(mySql, fillData)
@@ -221,14 +246,14 @@
     End Sub
 
     Public Sub ModifySpec()
-        Dim mySql As String = "SELECT * FROM " & fillData1 & " WHERE SpecID = " & _SpecID
-        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Dim mySql As String = "SELECT * FROM " & fillData1 & " WHERE ITEMID = " & frmItemList.lblItemID.Text
+        Dim ds As DataSet = LoadSQL(mySql, fillData1)
 
         With ds.Tables(0).Rows(0)
-            .Item("ItemID") = _Classification
+            '.Item("SPECID") = _SpecID
             .Item("Short_Code") = _ShortCode
-            .Item("SpecName") = _Category
-            .Item("SpecType") = _Description
+            .Item("SpecName") = _SpecName
+            .Item("SpecType") = _SpecType
             .Item("SpecLayout") = _Layout
             .Item("UOM") = _UnitofMeasure
         End With
@@ -288,6 +313,16 @@
             Return 0
         End If
         Return ds.Tables(0).Rows(0).Item("ITEMID")
+    End Function
+
+    Public Function loadSPecId() As Single
+        Dim mySql As String = "SELECT * FROM " & fillData1 & " where ITEMID = " & frmItemList.lblItemID.Text
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("SpecID")
     End Function
 #End Region
 

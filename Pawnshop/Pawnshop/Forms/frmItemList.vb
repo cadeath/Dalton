@@ -62,8 +62,9 @@
         GetItem.LoadItem(idx)
         formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
         lblItemID.Text = idx
-        'frmAdminPanel.Button1.PerformClick()
+        frmAdminPanel.LoadSpec()
         Me.Hide()
+
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
