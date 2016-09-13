@@ -18,7 +18,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = True
+    Public DEV_MODE As Boolean = False
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
@@ -472,7 +472,10 @@ Module mod_system
 
         oWB = oXL.Workbooks.Add
         oSheet = oWB.ActiveSheet
-        oSheet.Name = "OUTSTANDING"
+        oSheet.Name = ExtractDataFromDatabase.lbltransaction.Text
+
+        ' ADD BRANCHCODE
+        InsertArrayElement(headers, 0, "BRANCHCODE")
 
         ' HEADERS
         Dim cnt As Integer = 0
@@ -485,7 +488,11 @@ Module mod_system
         Dim rowCnt As Integer = 2
         For Each dr As DataRow In ds.Tables(0).Rows
             For colCnt As Integer = 0 To headers.Count - 1
-                oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt)
+                If colCnt = 0 Then
+                    oSheet.Cells(rowCnt, colCnt + 1).value = BranchCode
+                Else
+                    oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
+                End If
             Next
             rowCnt += 1
 
@@ -501,6 +508,28 @@ Module mod_system
         oXL = Nothing
 
         Console.WriteLine("Data Extracted")
+    End Sub
+
+    Private Sub InsertArrayElement(Of T)( _
+          ByRef sourceArray() As T, _
+          ByVal insertIndex As Integer, _
+          ByVal newValue As T)
+
+        Dim newPosition As Integer
+        Dim counter As Integer
+
+        newPosition = insertIndex
+        If (newPosition < 0) Then newPosition = 0
+        If (newPosition > sourceArray.Length) Then _
+           newPosition = sourceArray.Length
+
+        Array.Resize(sourceArray, sourceArray.Length + 1)
+
+        For counter = sourceArray.Length - 2 To newPosition Step -1
+            sourceArray(counter + 1) = sourceArray(counter)
+        Next counter
+
+        sourceArray(newPosition) = newValue
     End Sub
 
 #Region "Log Module"

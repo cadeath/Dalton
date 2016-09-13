@@ -174,15 +174,17 @@ Public Class frmExtractor
 
         Dim mySql2 As String = "SELECT SAPACCOUNT, DEBIT, CREDIT, CCNAME " & _
        "FROM JOURNAL_SUMMARY " & vbCrLf & _
-       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null'", sd.ToShortDateString)
+       String.Format("WHERE TRANSDATE = '{0}' AND SAPACCOUNT <> 'null' AND TRANSTYPE <> 'null' AND TRANSTYPE <> 'Receipt Fund from Head Office'", sd.ToShortDateString)
         mySql2 &= " ORDER BY TRANSTYPE, DEBIT DESC "
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim ds2 As DataSet = LoadSQL(mySql2)
         Dim MaxEntries As Integer = 0
+
         Dim MaxEntries2 As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
         MaxEntries2 = ds2.Tables(0).Rows.Count
+
         Console.WriteLine("Executing SQL:")
         Console.WriteLine(mySql2, mySql)
         Console.WriteLine("Entries: " & MaxEntries)

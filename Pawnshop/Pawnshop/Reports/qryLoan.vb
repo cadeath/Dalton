@@ -41,7 +41,7 @@
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("	P.LOANDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
         mySql &= vbCrLf & "    AND (P.OLDTICKET = 0 OR (P.OLDTICKET > 0 AND P.RENEWDUE + P2.RENEWDUE Is Not Null)) "
-        mySql &= vbCrLf & " AND P.STATUS <> 'V'"
+        mySql &= vbCrLf & " AND P.STATUS <> 'VOID'"
         mySql &= vbCrLf & " ORDER BY PAWNTICKET ASC"
 
         Console.WriteLine(">>> " & mySql)
@@ -74,7 +74,7 @@
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("	P.ORDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
         mySql &= vbCrLf & "    AND P.REDEEMDUE <> 0 "
-        mySql &= vbCrLf & "    AND P.STATUS <> 'V' "
+        mySql &= vbCrLf & "    AND P.STATUS <> 'VOID' "
         mySql &= vbCrLf & "    ORDER BY ORNUM ASC"
 
         Dim addParameter As New Dictionary(Of String, String)

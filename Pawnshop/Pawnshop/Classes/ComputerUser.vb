@@ -80,6 +80,15 @@ Public Class ComputerUser
         End Set
     End Property
 
+    Private _UserStatus As Integer
+    Public Property UserStatus() As Integer
+        Get
+            Return _UserStatus
+        End Get
+        Set(ByVal value As Integer)
+            _UserStatus = value
+        End Set
+    End Property
 #End Region
 
 #Region "Privileges"
@@ -521,7 +530,6 @@ Public Class ComputerUser
             _privilege = .Item("Privilege")
             If Not IsDBNull(.Item("LastLogin")) Then _lastLogin = .Item("LastLogin")
         End With
-
         getPrivilege()
     End Sub
 
@@ -541,6 +549,7 @@ Public Class ComputerUser
                 '.Item("LastLogin") = _lastLogin 'First Login no Last Login
                 .Item("EncoderID") = _encoderID
                 .Item("SystemInfo") = Now.Date
+                .Item("STATUS") = _UserStatus
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
@@ -563,13 +572,14 @@ Public Class ComputerUser
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub
 
+
         LoadUserByRow(ds.Tables(0).Rows(0))
         Console.WriteLine(String.Format("[ComputerUser] UserID {0} - {1} Loaded", _userID, _userName))
     End Sub
 
     Public Function LoginUser(ByVal user As String, ByVal password As String) As Boolean
         mySql = "SELECT UserID, LOWER(Username) FROM " & fillData
-        mySql &= vbCrLf & String.Format(" WHERE LOWER(Username) = LOWER('{0}') AND UserPass = '{1}'", user, Encrypt(password))
+        mySql &= vbCrLf & String.Format(" WHERE LOWER(Username) = LOWER('{0}') AND UserPass = '{1}' AND STATUS <> '0'", user, Encrypt(password))
         Dim ds As DataSet
 
         ds = LoadSQL(mySql)
@@ -595,6 +605,18 @@ Public Class ComputerUser
         ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(_password)
         SaveEntry(ds, False)
     End Sub
-    
+
+    Public Sub DeleteUser(ByVal Status As Boolean)
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & _userID
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        If Status = True Then
+            ds.Tables(fillData).Rows(0).Item("STATUS") = "1"
+        Else
+            ds.Tables(fillData).Rows(0).Item("STATUS") = "0"
+        End If
+        SaveEntry(ds, False)
+        ' End If
+    End Sub
+
 #End Region
 End Class

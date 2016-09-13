@@ -97,6 +97,10 @@
     <Reference Include="Google.Authenticator">
       <HintPath>.\Google.Authenticator.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
     </Reference>
@@ -142,6 +146,7 @@
     <Reference Include="TOTP">
       <HintPath>.\TOTP.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -179,6 +184,7 @@
     <Compile Include="AutoPatch\db1221.vb" />
     <Compile Include="AutoPatch\db1222.vb" />
     <Compile Include="AutoPatch\db1223.vb" />
+    <Compile Include="AutoPatch\db1224.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -284,6 +290,12 @@
     <Compile Include="Forms\diagOTPv2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\ExtractDataFromDatabase.Designer.vb">
+      <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ExtractDataFromDatabase.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmBackUpDataSettings.Designer.vb">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
     </Compile>
@@ -300,6 +312,7 @@
     <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
+    <Compile Include="Modules\Void.vb" />
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
       <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
     </Compile>
@@ -664,6 +677,9 @@
     <EmbeddedResource Include="Forms\diagOTPv2.resx">
       <DependentUpon>diagOTPv2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExtractDataFromDatabase.resx">
+      <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
     </EmbeddedResource>
@@ -825,6 +841,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptd_timelySummary.rdlc" />
+    <EmbeddedResource Include="Reports\rptVoidReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_AuctionMonthly.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

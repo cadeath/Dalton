@@ -1,5 +1,5 @@
 ﻿Public Class frmDollarList
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -108,7 +108,12 @@
             MsgBox("You cannot void transactions in a DIFFERENT date", MsgBoxStyle.Critical)
             Exit Sub
         End If
-
+        Dim filldata As String = "TBLDOLLAR"
+        Dim mysql As String = "SELECT * FROM " & filldata & " WHERE DOLLARID = '" & id & "'"
+        Dim ds As DataSet = LoadSQL(mysql)
+        Dim tmpEncoderID As Integer
+        tmpEncoderID = ds.Tables(0).Rows(0).Item("UserId")
+        TransactionVoidSave("DOLLAR BUYING", tmpEncoderID, POSuser.UserID, ans)
         tmpLoad.VoidTransaction(ans)
 
         Dim amt As Double = tmpLoad.NetAmount

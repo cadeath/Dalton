@@ -637,6 +637,11 @@ Public Class PawnTicket
             Dim PTtransid As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
             If curStatus = "L" Then
                 ChangeStatus("V")
+                Dim mysql As String = "SELECT * FROM " & fillData & " WHERE PAWNID = '" & PtransID & "'"
+                Dim ds As DataSet = LoadSQL(mysql)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
                 RemoveJournal(PtransID, , ModNAME)
                 RemoveDailyTimeLog(PTtransid, "1", ModNAME)
                 Exit Sub
@@ -678,11 +683,23 @@ Public Class PawnTicket
                     .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
+                Dim mysql2 As String = "SELECT * FROM " & fillData & " WHERE PAWNID = '" & PtransID & "'"
+                Dim ds2 As DataSet = LoadSQL(mysql2)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds2.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+
                 RemoveJournal(PtransID, , ModNAME)
-                ' RemoveJournal("PT# " & String.Format("{0:000000}", Me._oldTicket), transID:=PtransID)
                 RemoveDailyTimeLog(PTtransid, "1", ModNAME)
             Else
                 ChangeStatus("L")
+
+                Dim mysql As String = "SELECT * FROM " & fillData & " WHERE PAWNID = '" & PtransID & "'"
+                Dim ds As DataSet = LoadSQL(mysql)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+
 
                 RemoveJournal(PtransID, , ModNAME)
 
