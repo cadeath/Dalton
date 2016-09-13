@@ -23,6 +23,8 @@ Partial Class frmAdminPanel
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
+        Me.txtPrintLayout = New System.Windows.Forms.TextBox()
+        Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
         Me.rdbYes = New System.Windows.Forms.RadioButton()
         Me.lblRenewable = New System.Windows.Forms.Label()
@@ -36,6 +38,7 @@ Partial Class frmAdminPanel
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.dgSpecification = New System.Windows.Forms.DataGridView()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -61,8 +64,6 @@ Partial Class frmAdminPanel
         Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtPrintLayout = New System.Windows.Forms.TextBox()
-        Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -94,6 +95,24 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
+        '
+        'txtPrintLayout
+        '
+        Me.txtPrintLayout.Location = New System.Drawing.Point(112, 236)
+        Me.txtPrintLayout.Multiline = True
+        Me.txtPrintLayout.Name = "txtPrintLayout"
+        Me.txtPrintLayout.Size = New System.Drawing.Size(260, 68)
+        Me.txtPrintLayout.TabIndex = 7
+        Me.txtPrintLayout.Text = "Print Layout"
+        '
+        'lblPrintLayout
+        '
+        Me.lblPrintLayout.AutoSize = True
+        Me.lblPrintLayout.Location = New System.Drawing.Point(30, 232)
+        Me.lblPrintLayout.Name = "lblPrintLayout"
+        Me.lblPrintLayout.Size = New System.Drawing.Size(77, 16)
+        Me.lblPrintLayout.TabIndex = 8
+        Me.lblPrintLayout.Text = "Print Layout"
         '
         'rdbNo
         '
@@ -180,7 +199,7 @@ Partial Class frmAdminPanel
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(953, 393)
+        Me.btnSave.Location = New System.Drawing.Point(955, 393)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 33)
         Me.btnSave.TabIndex = 2
@@ -189,7 +208,7 @@ Partial Class frmAdminPanel
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(869, 393)
+        Me.btnUpdate.Location = New System.Drawing.Point(871, 393)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 33)
         Me.btnUpdate.TabIndex = 11
@@ -210,6 +229,7 @@ Partial Class frmAdminPanel
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
+        Me.TabPage1.Controls.Add(Me.Button1)
         Me.TabPage1.Controls.Add(Me.dgSpecification)
         Me.TabPage1.Controls.Add(Me.btnSave)
         Me.TabPage1.Controls.Add(Me.btnUpdate)
@@ -222,6 +242,15 @@ Partial Class frmAdminPanel
         Me.TabPage1.Size = New System.Drawing.Size(1040, 433)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Item"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(428, 398)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 13
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'dgSpecification
         '
@@ -412,7 +441,7 @@ Partial Class frmAdminPanel
         Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
         Me.Column2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Column2.HeaderText = "Specification Tye"
-        Me.Column2.Items.AddRange(New Object() {"String", "Double", "Integer", "Float", "Byte", "Long", "Short", "", "", "", ""})
+        Me.Column2.Items.AddRange(New Object() {"String", "Double", "Integer", "Boolean", "", "", ""})
         Me.Column2.Name = "Column2"
         Me.Column2.Width = 106
         '
@@ -420,7 +449,7 @@ Partial Class frmAdminPanel
         '
         Me.Column4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Column4.HeaderText = "Layout"
-        Me.Column4.Items.AddRange(New Object() {"Textbox", "Multiline", "RadioButton"})
+        Me.Column4.Items.AddRange(New Object() {"Textbox", "Multiline", "Yes", "No"})
         Me.Column4.Name = "Column4"
         Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
@@ -431,24 +460,6 @@ Partial Class frmAdminPanel
         Me.Column5.HeaderText = "Unit of Measure"
         Me.Column5.Name = "Column5"
         Me.Column5.Width = 140
-        '
-        'txtPrintLayout
-        '
-        Me.txtPrintLayout.Location = New System.Drawing.Point(112, 232)
-        Me.txtPrintLayout.Multiline = True
-        Me.txtPrintLayout.Name = "txtPrintLayout"
-        Me.txtPrintLayout.Size = New System.Drawing.Size(260, 68)
-        Me.txtPrintLayout.TabIndex = 7
-        Me.txtPrintLayout.Text = "Print Layout"
-        '
-        'lblPrintLayout
-        '
-        Me.lblPrintLayout.AutoSize = True
-        Me.lblPrintLayout.Location = New System.Drawing.Point(30, 232)
-        Me.lblPrintLayout.Name = "lblPrintLayout"
-        Me.lblPrintLayout.Size = New System.Drawing.Size(77, 16)
-        Me.lblPrintLayout.TabIndex = 8
-        Me.lblPrintLayout.Text = "Print Layout"
         '
         'frmAdminPanel
         '
@@ -509,6 +520,7 @@ Partial Class frmAdminPanel
     Friend WithEvents dgSpecification As System.Windows.Forms.DataGridView
     Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
+    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn

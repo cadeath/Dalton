@@ -169,6 +169,7 @@
 #End Region
 
 #Region "Procedures and Functions"
+
     Public Sub LoadItem(ByVal id As Integer)
         mySql = "SELECT * FROM " & fillData & " WHERE ITEMID = " & id
         ds = LoadSQL(mySql)
@@ -183,23 +184,25 @@
             _itemID = .Item("ItemID")
             _Classification = .Item("ItemClass")
             _Category = .Item("ItemCategory")
-         
+
             _Description = .Item("Description")
             _status = .Item("Status")
             _DateCreated = .Item("Date_CreatedAT")
-            _DateUpdated = .Item("Date_UpdateAt")
-            _Renewable = IIf(IsDBNull(.Item("Renewable")), "", .Item("Renewable"))
-            ' .Item("ConfigID") = _ConfigID
+            ' _DateUpdated = .Item("Date_UpdatedAT")
+            _DateUpdated = IIf(IsDBNull(.Item("Date_UpdatedAT")), CurrentDate.ToString, .Item("Date_UpdatedAT"))
+
+            _Renewable = .Item("IsRenew")
+            .Item("ConfigID") = _ConfigID
             _PrintLayout = .Item("Print_layout")
         End With
     End Sub
 
-    Public Sub LoadDollarByRow(ByVal dr As DataRow)
+    Public Sub LoaditemByRow(ByVal dr As DataRow)
         loadByRow(dr)
     End Sub
 
     Public Sub ModifyItem()
-        Dim mySql As String = "SELECT * FROM " & fillData & " WHERE ItemID = " & _itemID
+        Dim mySql As String = "SELECT * FROM " & fillData & " WHERE ItemID = " & frmItemList.lblItemID.Text
         Dim ds As DataSet = LoadSQL(mySql, fillData)
 
         With ds.Tables(0).Rows(0)
@@ -207,7 +210,7 @@
             .Item("ItemCategory") = _Category
             .Item("Description") = _Description
             .Item("Status") = _status
-            .Item("Date_createdat") = _
+            .Item("Date_createdat") = _DateCreated
             .Item("Date_Updatedat") = _DateUpdated
             .Item("IsRenew") = _Renewable
             ' .Item("ConfigID") = _ConfigID
@@ -226,8 +229,8 @@
             .Item("Short_Code") = _ShortCode
             .Item("SpecName") = _Category
             .Item("SpecType") = _Description
-            .Item("SpecLayout") = _
-            .Item("UOM") = _DateUpdated
+            .Item("SpecLayout") = _Layout
+            .Item("UOM") = _UnitofMeasure
         End With
 
         database.SaveEntry(ds, False)

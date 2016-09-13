@@ -315,6 +315,12 @@
     <Compile Include="Forms\frmChangePassword.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmItemList.Designer.vb">
+      <DependentUpon>frmItemList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmItemList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmPawningNew.Designer.vb">
       <DependentUpon>frmPawningNew.vb</DependentUpon>
     </Compile>
@@ -701,6 +707,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmChangePassword.resx">
       <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmItemList.resx">
+      <DependentUpon>frmItemList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawningNew.resx">
       <DependentUpon>frmPawningNew.vb</DependentUpon>
