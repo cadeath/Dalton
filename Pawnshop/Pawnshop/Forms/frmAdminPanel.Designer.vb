@@ -38,8 +38,13 @@ Partial Class frmAdminPanel
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnshowSpecification = New System.Windows.Forms.Button()
         Me.dgSpecification = New System.Windows.Forms.DataGridView()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -59,11 +64,6 @@ Partial Class frmAdminPanel
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.txtReferenceNumber = New System.Windows.Forms.TextBox()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -229,7 +229,7 @@ Partial Class frmAdminPanel
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
-        Me.TabPage1.Controls.Add(Me.Button1)
+        Me.TabPage1.Controls.Add(Me.btnshowSpecification)
         Me.TabPage1.Controls.Add(Me.dgSpecification)
         Me.TabPage1.Controls.Add(Me.btnSave)
         Me.TabPage1.Controls.Add(Me.btnUpdate)
@@ -243,14 +243,16 @@ Partial Class frmAdminPanel
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Item"
         '
-        'Button1
+        'btnshowSpecification
         '
-        Me.Button1.Location = New System.Drawing.Point(428, 398)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 13
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnshowSpecification.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnshowSpecification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnshowSpecification.ForeColor = System.Drawing.Color.Gainsboro
+        Me.btnshowSpecification.Location = New System.Drawing.Point(6, 403)
+        Me.btnshowSpecification.Name = "btnshowSpecification"
+        Me.btnshowSpecification.Size = New System.Drawing.Size(386, 23)
+        Me.btnshowSpecification.TabIndex = 13
+        Me.btnshowSpecification.UseVisualStyleBackColor = False
         '
         'dgSpecification
         '
@@ -263,6 +265,43 @@ Partial Class frmAdminPanel
         Me.dgSpecification.RowHeadersWidth = 20
         Me.dgSpecification.Size = New System.Drawing.Size(630, 309)
         Me.dgSpecification.TabIndex = 1
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Short Code"
+        Me.Column3.Name = "Column3"
+        Me.Column3.Width = 120
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Specification Name"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 160
+        '
+        'Column2
+        '
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.Column2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Column2.HeaderText = "Specification Tye"
+        Me.Column2.Items.AddRange(New Object() {"String", "Double", "Integer", "Boolean", "", "", ""})
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 106
+        '
+        'Column4
+        '
+        Me.Column4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Column4.HeaderText = "Layout"
+        Me.Column4.Items.AddRange(New Object() {"Textbox", "Multiline", "Yes", "No"})
+        Me.Column4.Name = "Column4"
+        Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column4.Width = 120
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Unit of Measure"
+        Me.Column5.Name = "Column5"
+        Me.Column5.Width = 140
         '
         'grpSearch
         '
@@ -424,43 +463,6 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber.TabIndex = 0
         Me.lblReferenceNumber.Text = "Reference No."
         '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Short Code"
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 120
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Specification Name"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 160
-        '
-        'Column2
-        '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        Me.Column2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Column2.HeaderText = "Specification Tye"
-        Me.Column2.Items.AddRange(New Object() {"String", "Double", "Integer", "Boolean", "", "", ""})
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 106
-        '
-        'Column4
-        '
-        Me.Column4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Column4.HeaderText = "Layout"
-        Me.Column4.Items.AddRange(New Object() {"Textbox", "Multiline", "Yes", "No"})
-        Me.Column4.Name = "Column4"
-        Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column4.Width = 120
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Unit of Measure"
-        Me.Column5.Name = "Column5"
-        Me.Column5.Width = 140
-        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -520,7 +522,7 @@ Partial Class frmAdminPanel
     Friend WithEvents dgSpecification As System.Windows.Forms.DataGridView
     Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnshowSpecification As System.Windows.Forms.Button
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn

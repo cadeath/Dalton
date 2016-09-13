@@ -226,7 +226,7 @@ Public Class frmAdminPanel
 
     End Sub
    
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub btnshowSpecification_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnshowSpecification.Click
         ' dgSpecification.Rows.Clear()
         Dim da As New OdbcDataAdapter
         Dim mySql As String = "SELECT SHORT_CODE,SPECNAME,SPECTYPE,SPECLAYOUT,UOM FROM tbl_SPecification WHERE ItemID = '" & frmItemList.lblItemID.Text & "'"
@@ -235,7 +235,7 @@ Public Class frmAdminPanel
         Dim dt As New DataTable
 
         dt = ds.Tables(0)
-     
+
         For Each dr As DataRow In dt.Rows
             dgSpecification.Rows.Add(dr(0), dr(1), dr(2), dr(3), dr(4))
         Next
