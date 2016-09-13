@@ -13,7 +13,12 @@
         frmPawnItem = 6
         frmDollarSimple = 7
         frmMoneyExchange = 8
-        frmAdminPanel = 9
+frmAdminPanel = 9
+
+        dev_NewPawning = 10
+        dev_PawnCliamer = 11
+
+
     End Enum
     ''' <summary>
     ''' This method select what form you want to go.
@@ -37,7 +42,15 @@
                 frmDollorSimple.LoadClient(cl)
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadClient(cl)
-            Case FormName.frmAdminPanel
+Case FormName.frmAdminPanel
+
+            Case FormName.dev_NewPawning
+                dev_NewPawning.LoadClient(cl)
+            Case FormName.dev_PawnCliamer
+                dev_NewPawning.LoadCliamer(cl)
+
+            
+
 
         End Select
     End Sub
