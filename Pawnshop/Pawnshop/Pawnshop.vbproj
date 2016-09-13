@@ -199,6 +199,7 @@
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
+    <Compile Include="Classes\Item.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawningDalton.vb" />
@@ -309,6 +310,12 @@
     <Compile Include="Forms\ExtractDataFromDatabase.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmAdminPanel.Designer.vb">
+      <DependentUpon>frmAdminPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAdminPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmBackUpDataSettings.Designer.vb">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
     </Compile>
@@ -319,6 +326,18 @@
       <DependentUpon>frmChangePassword.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmItemList.Designer.vb">
+      <DependentUpon>frmItemList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmItemList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPawningNew.Designer.vb">
+      <DependentUpon>frmPawningNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPawningNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\AuditReports.vb" />
@@ -699,11 +718,20 @@
     <EmbeddedResource Include="Forms\ExtractDataFromDatabase.resx">
       <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAdminPanel.resx">
+      <DependentUpon>frmAdminPanel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
       <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmChangePassword.resx">
       <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmItemList.resx">
+      <DependentUpon>frmItemList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPawningNew.resx">
+      <DependentUpon>frmPawningNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">

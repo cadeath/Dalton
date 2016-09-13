@@ -13,9 +13,12 @@
         frmPawnItem = 6
         frmDollarSimple = 7
         frmMoneyExchange = 8
+frmAdminPanel = 9
 
-        dev_NewPawning = 9
-        dev_PawnCliamer = 10
+        dev_NewPawning = 10
+        dev_PawnCliamer = 11
+
+
     End Enum
     ''' <summary>
     ''' This method select what form you want to go.
@@ -39,11 +42,15 @@
                 frmDollorSimple.LoadClient(cl)
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadClient(cl)
-                '>>>>>>>>>>>>>>>>>>>>>>>>>
+Case FormName.frmAdminPanel
+
             Case FormName.dev_NewPawning
                 dev_NewPawning.LoadClient(cl)
             Case FormName.dev_PawnCliamer
                 dev_NewPawning.LoadCliamer(cl)
+
+            
+
 
         End Select
     End Sub
@@ -52,6 +59,13 @@
         Select Case gotoForm
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadCurrencyall(cr)
+        End Select
+    End Sub
+
+    Friend Sub ReloadFormFromSearch2(ByVal gotoForm As FormName, ByVal it As Item)
+        Select Case gotoForm
+            Case FormName.frmAdminPanel
+                frmAdminPanel.LoadItemall(it)
         End Select
     End Sub
 End Module
