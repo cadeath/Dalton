@@ -98,9 +98,9 @@ Partial Class dev_NewPawning
         Me.cboType = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -877,7 +877,6 @@ Partial Class dev_NewPawning
         '
         'GroupBox7
         '
-        Me.GroupBox7.Controls.Add(Me.TextBox2)
         Me.GroupBox7.Controls.Add(Me.Button1)
         Me.GroupBox7.Controls.Add(Me.TextBox1)
         Me.GroupBox7.Location = New System.Drawing.Point(12, 256)
@@ -886,17 +885,6 @@ Partial Class dev_NewPawning
         Me.GroupBox7.TabIndex = 24
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Item Information"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(6, 53)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(309, 57)
-        Me.TextBox2.TabIndex = 4
-        Me.TextBox2.Text = "Jacob Frye"
         '
         'Button1
         '
@@ -915,13 +903,21 @@ Partial Class dev_NewPawning
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(215, 22)
         Me.TextBox1.TabIndex = 2
-        Me.TextBox1.Text = "Jacob Frye"
+        Me.TextBox1.Text = "Search Item Name . . ."
+        '
+        'Panel1
+        '
+        Me.Panel1.Location = New System.Drawing.Point(929, 222)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(321, 239)
+        Me.Panel1.TabIndex = 25
         '
         'dev_NewPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1302, 484)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox6)
@@ -1030,7 +1026,7 @@ Partial Class dev_NewPawning
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class

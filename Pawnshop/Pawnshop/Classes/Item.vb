@@ -166,6 +166,15 @@
         End Set
     End Property
 
+    Private _IsRequired As String
+    Public Property IsRequired() As String
+        Get
+            Return _IsRequired
+        End Get
+        Set(ByVal value As String)
+            _IsRequired = value
+        End Set
+    End Property
 #End Region
 
 #Region "Procedures and Functions"
@@ -255,6 +264,7 @@
             .Item("SpecType") = _SpecType
             .Item("SpecLayout") = _Layout
             .Item("UOM") = _UnitofMeasure
+            .Item("IsRequired") = _IsRequired
         End With
 
         database.SaveEntry(ds, False)
@@ -297,6 +307,7 @@
             .Item("SpecLayout") = _Layout
             .Item("UOM") = _UnitofMeasure
             ' .Item("ConfigID") = _ConfigID
+            .Item("IsRequired") = _IsRequired
         End With
         ds.Tables(fillData1).Rows.Add(dsNewRow)
 

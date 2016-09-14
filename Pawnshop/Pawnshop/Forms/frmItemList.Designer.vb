@@ -35,6 +35,7 @@ Partial Class frmItemList
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblItemID = New System.Windows.Forms.Label()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -148,11 +149,23 @@ Partial Class frmItemList
         Me.lblItemID.TabIndex = 12
         Me.lblItemID.Text = "ItemID"
         '
+        'btnView
+        '
+        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnView.Location = New System.Drawing.Point(666, 344)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 31)
+        Me.btnView.TabIndex = 13
+        Me.btnView.Text = "&View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
         'frmItemList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(915, 383)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.lblItemID)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnClose)
@@ -179,4 +192,5 @@ Partial Class frmItemList
     Friend WithEvents ColumnHeader9 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader10 As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblItemID As System.Windows.Forms.Label
+    Friend WithEvents btnView As System.Windows.Forms.Button
 End Class
