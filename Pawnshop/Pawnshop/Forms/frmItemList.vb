@@ -11,6 +11,7 @@
         If Not mOtherForm Then ClearField()
 
         LoadActiveItem()
+        'LoadSpec()
 
         If Not mOtherForm Then
             txtSearch.Focus()
@@ -23,7 +24,7 @@
     End Sub
 
 
-    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tbl_ITEM where ITEMID > 0 ORDER BY itemid ASC")
+    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tbl_ITEM where ITEMID <> 0 ORDER BY itemid ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
         lvItem.Items.Clear()
@@ -31,6 +32,17 @@
             Dim tmpItem As New Item
             tmpItem.LoaditemByRow(dr)
             AddItem(tmpItem)
+        Next
+    End Sub
+
+    Friend Sub LoadSpec(Optional ByVal mySql As String = "Select * from tbl_specification where specid <> 0 ORDER BY SPECID ASC")
+        Dim ds As DataSet
+        ds = LoadSQL(mySql)
+        lvItem.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpItem As New Item
+            tmpItem.LoadSpecByRow(dr)
+            'AddItem(tmpItem)
         Next
     End Sub
 
@@ -46,6 +58,24 @@
     Private Sub ClearField()
         txtSearch.Text = ""
         lvItem.Items.Clear()
+    End Sub
+
+
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+        If lvItem.Items.Count = 0 Then Exit Sub
+
+        If lvItem.SelectedItems.Count = 0 Then
+            lvItem.Items(0).Focused = True
+        End If
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+        GetItem = New Item
+        GetItem.LoadItem(idx)
+        GetItem.LoadSpec(idx)
+        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
+        lblItemID.Text = idx
+        frmAdminPanel.LoadSpec()
+        Me.Hide()
+
     End Sub
 
 

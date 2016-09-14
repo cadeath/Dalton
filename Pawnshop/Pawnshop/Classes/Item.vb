@@ -196,9 +196,9 @@
 
             _Description = .Item("Description")
             _status = .Item("Status")
-            _DateCreated = .Item("Date_CreatedAT")
+            _DateCreated = .Item("Created_AT")
             ' _DateUpdated = .Item("Date_UpdatedAT")
-            _DateUpdated = IIf(IsDBNull(.Item("Date_UpdatedAT")), CurrentDate.ToString, .Item("Date_UpdatedAT"))
+            _DateUpdated = IIf(IsDBNull(.Item("Updated_AT")), CurrentDate.ToString, .Item("Updated_AT"))
 
             _Renewable = .Item("IsRenew")
             .Item("ConfigID") = _ConfigID
@@ -211,11 +211,11 @@
     End Sub
 
     Public Sub LoadSpec(ByVal id As Integer)
-        mySql = "SELECT * FROM " & fillData1 & " WHERE SpecID = " & id
+        mySql = "SELECT * FROM " & fillData1 & " WHERE itemid = " & id
         ds = LoadSQL(mySql)
 
         For Each dr As DataRow In ds.Tables(0).Rows
-            loadByRow(dr)
+            LoadSpecByRow(dr)
         Next
     End Sub
 
@@ -227,7 +227,7 @@
 
             _SpecType = .Item("SpecType")
             _Layout = .Item("SpecLayout")
-            _UnitofMeasure = .Item("OUM")
+            _UnitofMeasure = .Item("UoM")
         End With
     End Sub
 

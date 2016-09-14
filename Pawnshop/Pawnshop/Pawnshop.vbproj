@@ -250,12 +250,6 @@
     <Compile Include="Developer\dev_Pawning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_pawningItem.Designer.vb">
-      <DependentUpon>dev_pawningItem.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\dev_pawningItem.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Developer\dev_print.Designer.vb">
       <DependentUpon>dev_print.vb</DependentUpon>
     </Compile>
@@ -693,9 +687,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_pawningItem.resx">
-      <DependentUpon>dev_pawningItem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_print.resx">
       <DependentUpon>dev_print.vb</DependentUpon>
