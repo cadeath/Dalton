@@ -44,7 +44,9 @@
                 frmDollorSimple.LoadClient(cl)
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadClient(cl)
+
             Case FormName.frmAdminPanel
+
 
             Case FormName.dev_NewPawning
                 dev_NewPawning.LoadClient(cl)
@@ -62,11 +64,13 @@
     End Sub
 
     Friend Sub ReloadFormFromSearch2(ByVal gotoForm As FormName, ByVal it As Item)
+
         Select Case gotoForm
             Case FormName.frmAdminPanel
                 frmAdminPanel.LoadItemall(it)
             Case FormName.dev_Item
                 dev_NewPawning.LoadItem(it)
         End Select
+
     End Sub
 End Module

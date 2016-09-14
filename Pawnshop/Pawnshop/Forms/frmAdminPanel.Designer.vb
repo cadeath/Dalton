@@ -38,6 +38,7 @@ Partial Class frmAdminPanel
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.dgSpecification = New System.Windows.Forms.DataGridView()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -45,25 +46,21 @@ Partial Class frmAdminPanel
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.lvExport = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.btnSEach1 = New System.Windows.Forms.Button()
-        Me.txtSearch1 = New System.Windows.Forms.TextBox()
-        Me.search = New System.Windows.Forms.Label()
+        Me.lvModule = New System.Windows.Forms.ListView()
         Me.btnExport = New System.Windows.Forms.Button()
         Me.cmbModuleName = New System.Windows.Forms.ComboBox()
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.txtReferenceNumber = New System.Windows.Forms.TextBox()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.SFD = New System.Windows.Forms.SaveFileDialog()
+        Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -91,14 +88,14 @@ Partial Class frmAdminPanel
         Me.grpAddItem.ForeColor = System.Drawing.SystemColors.MenuText
         Me.grpAddItem.Location = New System.Drawing.Point(6, 72)
         Me.grpAddItem.Name = "grpAddItem"
-        Me.grpAddItem.Size = New System.Drawing.Size(369, 316)
+        Me.grpAddItem.Size = New System.Drawing.Size(362, 316)
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
         '
         'txtPrintLayout
         '
-        Me.txtPrintLayout.Location = New System.Drawing.Point(112, 236)
+        Me.txtPrintLayout.Location = New System.Drawing.Point(105, 236)
         Me.txtPrintLayout.Multiline = True
         Me.txtPrintLayout.Name = "txtPrintLayout"
         Me.txtPrintLayout.Size = New System.Drawing.Size(250, 68)
@@ -108,7 +105,7 @@ Partial Class frmAdminPanel
         'lblPrintLayout
         '
         Me.lblPrintLayout.AutoSize = True
-        Me.lblPrintLayout.Location = New System.Drawing.Point(30, 232)
+        Me.lblPrintLayout.Location = New System.Drawing.Point(23, 232)
         Me.lblPrintLayout.Name = "lblPrintLayout"
         Me.lblPrintLayout.Size = New System.Drawing.Size(77, 16)
         Me.lblPrintLayout.TabIndex = 8
@@ -117,7 +114,7 @@ Partial Class frmAdminPanel
         'rdbNo
         '
         Me.rdbNo.AutoSize = True
-        Me.rdbNo.Location = New System.Drawing.Point(166, 195)
+        Me.rdbNo.Location = New System.Drawing.Point(159, 195)
         Me.rdbNo.Name = "rdbNo"
         Me.rdbNo.Size = New System.Drawing.Size(44, 20)
         Me.rdbNo.TabIndex = 4
@@ -128,7 +125,7 @@ Partial Class frmAdminPanel
         '
         Me.rdbYes.AutoSize = True
         Me.rdbYes.Checked = True
-        Me.rdbYes.Location = New System.Drawing.Point(112, 195)
+        Me.rdbYes.Location = New System.Drawing.Point(105, 195)
         Me.rdbYes.Name = "rdbYes"
         Me.rdbYes.Size = New System.Drawing.Size(50, 20)
         Me.rdbYes.TabIndex = 3
@@ -139,7 +136,7 @@ Partial Class frmAdminPanel
         'lblRenewable
         '
         Me.lblRenewable.AutoSize = True
-        Me.lblRenewable.Location = New System.Drawing.Point(19, 196)
+        Me.lblRenewable.Location = New System.Drawing.Point(12, 196)
         Me.lblRenewable.Name = "lblRenewable"
         Me.lblRenewable.Size = New System.Drawing.Size(87, 16)
         Me.lblRenewable.TabIndex = 6
@@ -147,7 +144,7 @@ Partial Class frmAdminPanel
         '
         'txtDescription
         '
-        Me.txtDescription.Location = New System.Drawing.Point(112, 114)
+        Me.txtDescription.Location = New System.Drawing.Point(105, 114)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(250, 71)
@@ -157,7 +154,7 @@ Partial Class frmAdminPanel
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
-        Me.lblDescription.Location = New System.Drawing.Point(30, 114)
+        Me.lblDescription.Location = New System.Drawing.Point(23, 114)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(76, 16)
         Me.lblDescription.TabIndex = 4
@@ -165,7 +162,7 @@ Partial Class frmAdminPanel
         '
         'txtCategory
         '
-        Me.txtCategory.Location = New System.Drawing.Point(112, 71)
+        Me.txtCategory.Location = New System.Drawing.Point(105, 71)
         Me.txtCategory.Name = "txtCategory"
         Me.txtCategory.Size = New System.Drawing.Size(250, 22)
         Me.txtCategory.TabIndex = 1
@@ -174,7 +171,7 @@ Partial Class frmAdminPanel
         'lblCategory
         '
         Me.lblCategory.AutoSize = True
-        Me.lblCategory.Location = New System.Drawing.Point(43, 77)
+        Me.lblCategory.Location = New System.Drawing.Point(36, 77)
         Me.lblCategory.Name = "lblCategory"
         Me.lblCategory.Size = New System.Drawing.Size(63, 16)
         Me.lblCategory.TabIndex = 2
@@ -182,7 +179,7 @@ Partial Class frmAdminPanel
         '
         'txtClassifiction
         '
-        Me.txtClassifiction.Location = New System.Drawing.Point(112, 30)
+        Me.txtClassifiction.Location = New System.Drawing.Point(105, 30)
         Me.txtClassifiction.Name = "txtClassifiction"
         Me.txtClassifiction.Size = New System.Drawing.Size(250, 22)
         Me.txtClassifiction.TabIndex = 0
@@ -191,7 +188,7 @@ Partial Class frmAdminPanel
         'lblClassification
         '
         Me.lblClassification.AutoSize = True
-        Me.lblClassification.Location = New System.Drawing.Point(20, 34)
+        Me.lblClassification.Location = New System.Drawing.Point(13, 34)
         Me.lblClassification.Name = "lblClassification"
         Me.lblClassification.Size = New System.Drawing.Size(87, 16)
         Me.lblClassification.TabIndex = 0
@@ -199,7 +196,7 @@ Partial Class frmAdminPanel
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(799, 393)
+        Me.btnSave.Location = New System.Drawing.Point(901, 394)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 33)
         Me.btnSave.TabIndex = 2
@@ -208,7 +205,7 @@ Partial Class frmAdminPanel
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(880, 393)
+        Me.btnUpdate.Location = New System.Drawing.Point(982, 394)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 33)
         Me.btnUpdate.TabIndex = 3
@@ -220,10 +217,10 @@ Partial Class frmAdminPanel
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabControl1.Location = New System.Drawing.Point(8, 5)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1048, 462)
+        Me.TabControl1.Size = New System.Drawing.Size(1151, 462)
         Me.TabControl1.TabIndex = 12
         '
         'TabPage1
@@ -239,20 +236,29 @@ Partial Class frmAdminPanel
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1040, 433)
+        Me.TabPage1.Size = New System.Drawing.Size(1143, 433)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Item"
+        '
+        'btnClose
+        '
+        Me.btnClose.Location = New System.Drawing.Point(1061, 394)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 33)
+        Me.btnClose.TabIndex = 13
+        Me.btnClose.Text = "&Close"
+        Me.btnClose.UseVisualStyleBackColor = True
         '
         'dgSpecification
         '
         Me.dgSpecification.AllowUserToDeleteRows = False
         Me.dgSpecification.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgSpecification.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column1, Me.Column2, Me.Column4, Me.Column5})
+        Me.dgSpecification.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column1, Me.Column2, Me.Column4, Me.Column5, Me.Column6})
         Me.dgSpecification.Location = New System.Drawing.Point(374, 79)
         Me.dgSpecification.Name = "dgSpecification"
         Me.dgSpecification.RowHeadersVisible = False
         Me.dgSpecification.RowHeadersWidth = 20
-        Me.dgSpecification.Size = New System.Drawing.Size(660, 309)
+        Me.dgSpecification.Size = New System.Drawing.Size(761, 309)
         Me.dgSpecification.TabIndex = 1
         '
         'grpSearch
@@ -263,14 +269,14 @@ Partial Class frmAdminPanel
         Me.grpSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSearch.Location = New System.Drawing.Point(6, 6)
         Me.grpSearch.Name = "grpSearch"
-        Me.grpSearch.Size = New System.Drawing.Size(1028, 60)
+        Me.grpSearch.Size = New System.Drawing.Size(1129, 60)
         Me.grpSearch.TabIndex = 12
         Me.grpSearch.TabStop = False
         Me.grpSearch.Text = "Search"
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(946, 13)
+        Me.btnSearch.Location = New System.Drawing.Point(1048, 18)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(75, 36)
         Me.btnSearch.TabIndex = 1
@@ -281,7 +287,7 @@ Partial Class frmAdminPanel
         '
         Me.txtSearch.Location = New System.Drawing.Point(77, 21)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(858, 22)
+        Me.txtSearch.Size = New System.Drawing.Size(965, 22)
         Me.txtSearch.TabIndex = 0
         Me.txtSearch.Text = "Search. . ."
         '
@@ -301,79 +307,39 @@ Partial Class frmAdminPanel
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1040, 433)
+        Me.TabPage2.Size = New System.Drawing.Size(1143, 433)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Export Config"
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.lvExport)
-        Me.GroupBox2.Controls.Add(Me.btnSEach1)
-        Me.GroupBox2.Controls.Add(Me.txtSearch1)
-        Me.GroupBox2.Controls.Add(Me.search)
+        Me.GroupBox2.Controls.Add(Me.btnBrowse)
+        Me.GroupBox2.Controls.Add(Me.lvModule)
         Me.GroupBox2.Controls.Add(Me.btnExport)
         Me.GroupBox2.Controls.Add(Me.cmbModuleName)
         Me.GroupBox2.Controls.Add(Me.lblModuleName)
         Me.GroupBox2.Controls.Add(Me.txtReferenceNumber)
         Me.GroupBox2.Controls.Add(Me.lblReferenceNumber)
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 6)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 0)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(921, 421)
+        Me.GroupBox2.Size = New System.Drawing.Size(1134, 427)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         '
-        'lvExport
+        'lvModule
         '
-        Me.lvExport.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
-        Me.lvExport.FullRowSelect = True
-        Me.lvExport.GridLines = True
-        Me.lvExport.Location = New System.Drawing.Point(14, 117)
-        Me.lvExport.Name = "lvExport"
-        Me.lvExport.Size = New System.Drawing.Size(901, 269)
-        Me.lvExport.TabIndex = 9
-        Me.lvExport.UseCompatibleStateImageBehavior = False
-        Me.lvExport.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Width = 173
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Width = 87
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Width = 189
-        '
-        'btnSEach1
-        '
-        Me.btnSEach1.Location = New System.Drawing.Point(840, 88)
-        Me.btnSEach1.Name = "btnSEach1"
-        Me.btnSEach1.Size = New System.Drawing.Size(75, 23)
-        Me.btnSEach1.TabIndex = 8
-        Me.btnSEach1.Text = "Search"
-        Me.btnSEach1.UseVisualStyleBackColor = True
-        '
-        'txtSearch1
-        '
-        Me.txtSearch1.Location = New System.Drawing.Point(62, 89)
-        Me.txtSearch1.Name = "txtSearch1"
-        Me.txtSearch1.Size = New System.Drawing.Size(772, 22)
-        Me.txtSearch1.TabIndex = 7
-        '
-        'search
-        '
-        Me.search.AutoSize = True
-        Me.search.Location = New System.Drawing.Point(10, 92)
-        Me.search.Name = "search"
-        Me.search.Size = New System.Drawing.Size(51, 16)
-        Me.search.TabIndex = 6
-        Me.search.Text = "Search"
+        Me.lvModule.FullRowSelect = True
+        Me.lvModule.GridLines = True
+        Me.lvModule.Location = New System.Drawing.Point(10, 82)
+        Me.lvModule.Name = "lvModule"
+        Me.lvModule.Size = New System.Drawing.Size(1118, 314)
+        Me.lvModule.TabIndex = 6
+        Me.lvModule.UseCompatibleStateImageBehavior = False
+        Me.lvModule.View = System.Windows.Forms.View.Details
         '
         'btnExport
         '
-        Me.btnExport.Location = New System.Drawing.Point(840, 392)
+        Me.btnExport.Location = New System.Drawing.Point(1053, 402)
         Me.btnExport.Name = "btnExport"
         Me.btnExport.Size = New System.Drawing.Size(75, 23)
         Me.btnExport.TabIndex = 5
@@ -382,8 +348,11 @@ Partial Class frmAdminPanel
         '
         'cmbModuleName
         '
+        Me.cmbModuleName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbModuleName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbModuleName.FormattingEnabled = True
-        Me.cmbModuleName.Location = New System.Drawing.Point(109, 43)
+        Me.cmbModuleName.Items.AddRange(New Object() {"Money Transfer", "Branch", "Cash", "Item Class", "Rate", "Currency"})
+        Me.cmbModuleName.Location = New System.Drawing.Point(106, 41)
         Me.cmbModuleName.Name = "cmbModuleName"
         Me.cmbModuleName.Size = New System.Drawing.Size(207, 24)
         Me.cmbModuleName.TabIndex = 4
@@ -392,7 +361,7 @@ Partial Class frmAdminPanel
         'lblModuleName
         '
         Me.lblModuleName.AutoSize = True
-        Me.lblModuleName.Location = New System.Drawing.Point(10, 46)
+        Me.lblModuleName.Location = New System.Drawing.Point(7, 44)
         Me.lblModuleName.Name = "lblModuleName"
         Me.lblModuleName.Size = New System.Drawing.Size(93, 16)
         Me.lblModuleName.TabIndex = 3
@@ -400,7 +369,7 @@ Partial Class frmAdminPanel
         '
         'txtReferenceNumber
         '
-        Me.txtReferenceNumber.Location = New System.Drawing.Point(109, 14)
+        Me.txtReferenceNumber.Location = New System.Drawing.Point(106, 12)
         Me.txtReferenceNumber.Name = "txtReferenceNumber"
         Me.txtReferenceNumber.Size = New System.Drawing.Size(207, 22)
         Me.txtReferenceNumber.TabIndex = 1
@@ -409,20 +378,11 @@ Partial Class frmAdminPanel
         'lblReferenceNumber
         '
         Me.lblReferenceNumber.AutoSize = True
-        Me.lblReferenceNumber.Location = New System.Drawing.Point(10, 18)
+        Me.lblReferenceNumber.Location = New System.Drawing.Point(7, 16)
         Me.lblReferenceNumber.Name = "lblReferenceNumber"
         Me.lblReferenceNumber.Size = New System.Drawing.Size(95, 16)
         Me.lblReferenceNumber.TabIndex = 0
         Me.lblReferenceNumber.Text = "Reference No."
-        '
-        'btnClose
-        '
-        Me.btnClose.Location = New System.Drawing.Point(959, 393)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(75, 33)
-        Me.btnClose.TabIndex = 13
-        Me.btnClose.Text = "&Close"
-        Me.btnClose.UseVisualStyleBackColor = True
         '
         'Column3
         '
@@ -461,12 +421,39 @@ Partial Class frmAdminPanel
         Me.Column5.Name = "Column5"
         Me.Column5.Width = 140
         '
+        'Column6
+        '
+        Me.Column6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Column6.HeaderText = "Is Required"
+        Me.Column6.Items.AddRange(New Object() {"Yes", "No"})
+        Me.Column6.Name = "Column6"
+        Me.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'SFD
+        '
+        Me.SFD.Filter = "CIR File |*.cir"
+        '
+        'oFd
+        '
+        Me.oFd.FileName = "OpenFileDialog1"
+        Me.oFd.Filter = "CIR File |*.cir"
+        '
+        'btnBrowse
+        '
+        Me.btnBrowse.Location = New System.Drawing.Point(972, 402)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(75, 23)
+        Me.btnBrowse.TabIndex = 7
+        Me.btnBrowse.Text = "Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1062, 487)
+        Me.ClientSize = New System.Drawing.Size(1166, 487)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "frmAdminPanel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -509,21 +496,18 @@ Partial Class frmAdminPanel
     Friend WithEvents txtReferenceNumber As System.Windows.Forms.TextBox
     Friend WithEvents btnExport As System.Windows.Forms.Button
     Friend WithEvents cmbModuleName As System.Windows.Forms.ComboBox
-    Friend WithEvents btnSEach1 As System.Windows.Forms.Button
-    Friend WithEvents txtSearch1 As System.Windows.Forms.TextBox
-    Friend WithEvents search As System.Windows.Forms.Label
-    Friend WithEvents lvExport As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents dgSpecification As System.Windows.Forms.DataGridView
     Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
     Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents lvModule As System.Windows.Forms.ListView
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents SFD As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
 End Class

@@ -6,19 +6,16 @@
 
     Friend GetItem As Item
 
-
-    Friend Sub SearchSelect(ByVal src As String, ByVal formOrigin As formSwitch.FormName)
-        mOtherForm = True
-        btnSelect.Visible = True
-        txtSearch.Text = src
-        frmOrig = formOrigin
-    End Sub
-
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
+        If Not mOtherForm Then ClearField()
 
         LoadActiveItem()
         'LoadSpec()
+
+        If Not mOtherForm Then
+            txtSearch.Focus()
+        End If
 
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
@@ -63,22 +60,9 @@
         lvItem.Items.Clear()
     End Sub
 
-    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        If lvItem.Items.Count = 0 Then Exit Sub
 
-        If lvItem.SelectedItems.Count = 0 Then
-            lvItem.Items(0).Focused = True
-        End If
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-        GetItem = New Item
-        GetItem.LoadItem(idx)
-        GetItem.LoadSpec(idx)
-        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-        lblItemID.Text = idx
-        frmAdminPanel.LoadSpec()
-        Me.Hide()
+  
 
-    End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         searchItem()
@@ -112,16 +96,20 @@
    
     Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
         If e.KeyCode = Keys.Enter Then
-            If mOtherForm Then
+            If Not mOtherForm Then
+                btnView.PerformClick()
+            Else
                 btnSelect.PerformClick()
             End If
         End If
     End Sub
 
     Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
-        If mOtherForm Then
+
+        If Not mOtherForm Then
+            btnView.PerformClick()
+        Else
             btnSelect.PerformClick()
-            Me.Hide()
         End If
     End Sub
 
@@ -144,5 +132,38 @@
         frmAdminPanel.btnSave.Enabled = True
         frmAdminPanel.clearfields()
         frmAdminPanel.reaDOnlyFalse()
+    End Sub
+   
+    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+        
+        If lvItem.SelectedItems.Count <= 0 Then Exit Sub
+
+        Dim ItemID As Integer
+        ItemID = lvItem.FocusedItem.Text
+        Console.WriteLine("ITEMID : " & ItemID)
+
+        Dim tempITEM As New Item
+        tempITEM.LoadItem(ItemID)
+
+        frmAdminPanel.Show()
+        frmAdminPanel.LoadItemall(tempITEM)
+        frmAdminPanel.LoadSpec()
+        Me.Hide()
+    End Sub
+
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+        If lvItem.Items.Count = 0 Then Exit Sub
+
+        If lvItem.SelectedItems.Count = 0 Then
+            lvItem.Items(0).Focused = True
+        End If
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+        GetItem = New Item
+        GetItem.LoadItem(idx)
+        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
+        lblItemID.Text = idx
+        frmAdminPanel.LoadItemall(GetItem)
+        frmAdminPanel.LoadSpec()
+        Me.Hide()
     End Sub
 End Class

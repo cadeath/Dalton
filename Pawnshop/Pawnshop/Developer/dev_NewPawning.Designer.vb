@@ -102,11 +102,22 @@ Partial Class dev_NewPawning
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cboType = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
+
         Me.pnlMultiline = New System.Windows.Forms.Panel()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.pnlRadio = New System.Windows.Forms.Panel()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+
+
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+
+        Me.txtTmp = New System.Windows.Forms.TextBox()
+
+
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -929,6 +940,7 @@ Partial Class dev_NewPawning
         Me.Label15.TabIndex = 0
         Me.Label15.Text = "Item Type"
         '
+<<<<<<< HEAD
         'pnlMultiline
         '
         Me.pnlMultiline.Controls.Add(Me.TextBox2)
@@ -975,14 +987,71 @@ Partial Class dev_NewPawning
         Me.RadioButton2.TabStop = True
         Me.RadioButton2.Text = "No"
         Me.RadioButton2.UseVisualStyleBackColor = True
+=======
+
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.Button1)
+        Me.GroupBox7.Controls.Add(Me.TextBox1)
+        Me.GroupBox7.Location = New System.Drawing.Point(12, 256)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(328, 205)
+        Me.GroupBox7.TabIndex = 24
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Item Information"
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(227, 20)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(88, 27)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "&Search"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(6, 22)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(215, 22)
+        Me.TextBox1.TabIndex = 2
+        Me.TextBox1.Text = "Search Item Name . . ."
+        '
+        'Panel1
+        '
+        Me.Panel1.Location = New System.Drawing.Point(929, 222)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(321, 239)
+        Me.Panel1.TabIndex = 25
+
+        'txtTmp
+        '
+        Me.txtTmp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTmp.Location = New System.Drawing.Point(9, 56)
+        Me.txtTmp.Name = "txtTmp"
+        Me.txtTmp.Size = New System.Drawing.Size(215, 22)
+        Me.txtTmp.TabIndex = 4
+
+
         '
         'dev_NewPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+
         Me.ClientSize = New System.Drawing.Size(1268, 483)
         Me.Controls.Add(Me.pnlRadio)
         Me.Controls.Add(Me.pnlMultiline)
+
+
+        Me.ClientSize = New System.Drawing.Size(1302, 484)
+        Me.Controls.Add(Me.Panel1)
+
+        Me.ClientSize = New System.Drawing.Size(1262, 484)
+
+
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.pnlTextbox)
         Me.Controls.Add(Me.GroupBox7)
@@ -1102,9 +1171,20 @@ Partial Class dev_NewPawning
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
+
     Friend WithEvents pnlMultiline As System.Windows.Forms.Panel
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents pnlRadio As System.Windows.Forms.Panel
     Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+
+
+
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+
+    Friend WithEvents txtTmp As System.Windows.Forms.TextBox
+
+
 End Class
