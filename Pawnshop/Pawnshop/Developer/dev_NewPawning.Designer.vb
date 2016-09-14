@@ -940,7 +940,7 @@ Partial Class dev_NewPawning
         Me.Label15.TabIndex = 0
         Me.Label15.Text = "Item Type"
         '
-<<<<<<< HEAD
+
         'pnlMultiline
         '
         Me.pnlMultiline.Controls.Add(Me.TextBox2)
@@ -987,7 +987,7 @@ Partial Class dev_NewPawning
         Me.RadioButton2.TabStop = True
         Me.RadioButton2.Text = "No"
         Me.RadioButton2.UseVisualStyleBackColor = True
-=======
+
 
         'GroupBox7
         '
