@@ -64,7 +64,6 @@ Partial Class frmAdminPanel
         Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnClear = New System.Windows.Forms.Button()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -92,7 +91,7 @@ Partial Class frmAdminPanel
         Me.grpAddItem.ForeColor = System.Drawing.SystemColors.MenuText
         Me.grpAddItem.Location = New System.Drawing.Point(6, 72)
         Me.grpAddItem.Name = "grpAddItem"
-        Me.grpAddItem.Size = New System.Drawing.Size(386, 316)
+        Me.grpAddItem.Size = New System.Drawing.Size(369, 316)
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
@@ -102,7 +101,7 @@ Partial Class frmAdminPanel
         Me.txtPrintLayout.Location = New System.Drawing.Point(112, 236)
         Me.txtPrintLayout.Multiline = True
         Me.txtPrintLayout.Name = "txtPrintLayout"
-        Me.txtPrintLayout.Size = New System.Drawing.Size(260, 68)
+        Me.txtPrintLayout.Size = New System.Drawing.Size(250, 68)
         Me.txtPrintLayout.TabIndex = 5
         Me.txtPrintLayout.Text = "Print Layout"
         '
@@ -151,7 +150,7 @@ Partial Class frmAdminPanel
         Me.txtDescription.Location = New System.Drawing.Point(112, 114)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(260, 71)
+        Me.txtDescription.Size = New System.Drawing.Size(250, 71)
         Me.txtDescription.TabIndex = 2
         Me.txtDescription.Text = "Description"
         '
@@ -168,7 +167,7 @@ Partial Class frmAdminPanel
         '
         Me.txtCategory.Location = New System.Drawing.Point(112, 71)
         Me.txtCategory.Name = "txtCategory"
-        Me.txtCategory.Size = New System.Drawing.Size(260, 22)
+        Me.txtCategory.Size = New System.Drawing.Size(250, 22)
         Me.txtCategory.TabIndex = 1
         Me.txtCategory.Text = "Category"
         '
@@ -185,7 +184,7 @@ Partial Class frmAdminPanel
         '
         Me.txtClassifiction.Location = New System.Drawing.Point(112, 30)
         Me.txtClassifiction.Name = "txtClassifiction"
-        Me.txtClassifiction.Size = New System.Drawing.Size(260, 22)
+        Me.txtClassifiction.Size = New System.Drawing.Size(250, 22)
         Me.txtClassifiction.TabIndex = 0
         Me.txtClassifiction.Text = "Classfication"
         '
@@ -200,7 +199,7 @@ Partial Class frmAdminPanel
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(713, 393)
+        Me.btnSave.Location = New System.Drawing.Point(799, 393)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 33)
         Me.btnSave.TabIndex = 2
@@ -209,7 +208,7 @@ Partial Class frmAdminPanel
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(794, 393)
+        Me.btnUpdate.Location = New System.Drawing.Point(880, 393)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 33)
         Me.btnUpdate.TabIndex = 3
@@ -230,7 +229,6 @@ Partial Class frmAdminPanel
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
-        Me.TabPage1.Controls.Add(Me.btnClear)
         Me.TabPage1.Controls.Add(Me.btnClose)
         Me.TabPage1.Controls.Add(Me.dgSpecification)
         Me.TabPage1.Controls.Add(Me.btnSave)
@@ -250,11 +248,11 @@ Partial Class frmAdminPanel
         Me.dgSpecification.AllowUserToDeleteRows = False
         Me.dgSpecification.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgSpecification.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column1, Me.Column2, Me.Column4, Me.Column5})
-        Me.dgSpecification.Location = New System.Drawing.Point(398, 79)
+        Me.dgSpecification.Location = New System.Drawing.Point(374, 79)
         Me.dgSpecification.Name = "dgSpecification"
         Me.dgSpecification.RowHeadersVisible = False
         Me.dgSpecification.RowHeadersWidth = 20
-        Me.dgSpecification.Size = New System.Drawing.Size(630, 309)
+        Me.dgSpecification.Size = New System.Drawing.Size(660, 309)
         Me.dgSpecification.TabIndex = 1
         '
         'grpSearch
@@ -265,14 +263,14 @@ Partial Class frmAdminPanel
         Me.grpSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSearch.Location = New System.Drawing.Point(6, 6)
         Me.grpSearch.Name = "grpSearch"
-        Me.grpSearch.Size = New System.Drawing.Size(1022, 60)
+        Me.grpSearch.Size = New System.Drawing.Size(1028, 60)
         Me.grpSearch.TabIndex = 12
         Me.grpSearch.TabStop = False
         Me.grpSearch.Text = "Search"
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(941, 13)
+        Me.btnSearch.Location = New System.Drawing.Point(946, 13)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(75, 36)
         Me.btnSearch.TabIndex = 1
@@ -419,7 +417,7 @@ Partial Class frmAdminPanel
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(953, 393)
+        Me.btnClose.Location = New System.Drawing.Point(959, 393)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 33)
         Me.btnClose.TabIndex = 13
@@ -462,15 +460,6 @@ Partial Class frmAdminPanel
         Me.Column5.HeaderText = "Unit of Measure"
         Me.Column5.Name = "Column5"
         Me.Column5.Width = 140
-        '
-        'btnClear
-        '
-        Me.btnClear.Location = New System.Drawing.Point(873, 393)
-        Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(75, 33)
-        Me.btnClear.TabIndex = 14
-        Me.btnClear.Text = "&Clear"
-        Me.btnClear.UseVisualStyleBackColor = True
         '
         'frmAdminPanel
         '
@@ -537,5 +526,4 @@ Partial Class frmAdminPanel
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnClear As System.Windows.Forms.Button
 End Class

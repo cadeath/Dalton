@@ -89,8 +89,8 @@ Partial Class frmPawningNew
         Me.txtClaimed = New System.Windows.Forms.TextBox()
         Me.lblNPT = New System.Windows.Forms.Label()
         Me.lblTransaction = New System.Windows.Forms.Label()
-        Me.cmbCategory = New System.Windows.Forms.ComboBox()
-        Me.lblCategory = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -209,8 +209,8 @@ Partial Class frmPawningNew
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.lblCategory)
-        Me.GroupBox3.Controls.Add(Me.cmbCategory)
+        Me.GroupBox3.Controls.Add(Me.Button1)
+        Me.GroupBox3.Controls.Add(Me.TextBox1)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 284)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(324, 257)
@@ -778,25 +778,23 @@ Partial Class frmPawningNew
         Me.lblTransaction.TabIndex = 22
         Me.lblTransaction.Text = "New Loan"
         '
-        'cmbCategory
+        'Button1
         '
-        Me.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbCategory.FormattingEnabled = True
-        Me.cmbCategory.Location = New System.Drawing.Point(78, 31)
-        Me.cmbCategory.Name = "cmbCategory"
-        Me.cmbCategory.Size = New System.Drawing.Size(185, 24)
-        Me.cmbCategory.TabIndex = 1
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(247, 28)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(71, 27)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "&Search"
+        Me.Button1.UseVisualStyleBackColor = True
         '
-        'lblCategory
+        'TextBox1
         '
-        Me.lblCategory.AutoSize = True
-        Me.lblCategory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCategory.Location = New System.Drawing.Point(6, 34)
-        Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(63, 16)
-        Me.lblCategory.TabIndex = 20
-        Me.lblCategory.Text = "Category"
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(9, 30)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(232, 22)
+        Me.TextBox1.TabIndex = 10
         '
         'frmPawningNew
         '
@@ -902,6 +900,6 @@ Partial Class frmPawningNew
     Friend WithEvents txtClaimed As System.Windows.Forms.TextBox
     Friend WithEvents lblNPT As System.Windows.Forms.Label
     Friend WithEvents lblTransaction As System.Windows.Forms.Label
-    Friend WithEvents lblCategory As System.Windows.Forms.Label
-    Friend WithEvents cmbCategory As System.Windows.Forms.ComboBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class

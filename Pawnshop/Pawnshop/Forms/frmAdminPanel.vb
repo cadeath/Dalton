@@ -190,15 +190,19 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
+
         frmItemList.SearchSelect(secured_str, FormName.frmAdminPanel)
         frmItemList.Show()
+
         frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
         frmItemList.btnSearch.PerformClick()
+
         btnUpdate.Text = "&Update".ToString
         btnUpdate.Enabled = True
-     
+        txtSearch.Clear()
     End Sub
 
 
