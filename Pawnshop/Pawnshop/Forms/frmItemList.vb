@@ -121,4 +121,15 @@
     End Sub
 
   
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+        frmAdminPanel.Show()
+    End Sub
+
+    Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+        frmAdminPanel.btnUpdate.Enabled = False
+        frmAdminPanel.btnSave.Enabled = True
+        frmAdminPanel.clearfields()
+        frmAdminPanel.reaDOnlyFalse()
+    End Sub
 End Class

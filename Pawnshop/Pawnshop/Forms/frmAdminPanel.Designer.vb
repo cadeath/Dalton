@@ -39,11 +39,6 @@ Partial Class frmAdminPanel
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.dgSpecification = New System.Windows.Forms.DataGridView()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -63,7 +58,13 @@ Partial Class frmAdminPanel
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.txtReferenceNumber = New System.Windows.Forms.TextBox()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -102,7 +103,7 @@ Partial Class frmAdminPanel
         Me.txtPrintLayout.Multiline = True
         Me.txtPrintLayout.Name = "txtPrintLayout"
         Me.txtPrintLayout.Size = New System.Drawing.Size(260, 68)
-        Me.txtPrintLayout.TabIndex = 7
+        Me.txtPrintLayout.TabIndex = 5
         Me.txtPrintLayout.Text = "Print Layout"
         '
         'lblPrintLayout
@@ -199,7 +200,7 @@ Partial Class frmAdminPanel
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(955, 393)
+        Me.btnSave.Location = New System.Drawing.Point(713, 393)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 33)
         Me.btnSave.TabIndex = 2
@@ -208,10 +209,10 @@ Partial Class frmAdminPanel
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(871, 393)
+        Me.btnUpdate.Location = New System.Drawing.Point(794, 393)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 33)
-        Me.btnUpdate.TabIndex = 11
+        Me.btnUpdate.TabIndex = 3
         Me.btnUpdate.Text = "&Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
@@ -229,7 +230,8 @@ Partial Class frmAdminPanel
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
-        Me.TabPage1.Controls.Add(Me.Button1)
+        Me.TabPage1.Controls.Add(Me.btnClear)
+        Me.TabPage1.Controls.Add(Me.btnClose)
         Me.TabPage1.Controls.Add(Me.dgSpecification)
         Me.TabPage1.Controls.Add(Me.btnSave)
         Me.TabPage1.Controls.Add(Me.btnUpdate)
@@ -255,43 +257,6 @@ Partial Class frmAdminPanel
         Me.dgSpecification.Size = New System.Drawing.Size(630, 309)
         Me.dgSpecification.TabIndex = 1
         '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Short Code"
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 120
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Specification Name"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 160
-        '
-        'Column2
-        '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        Me.Column2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Column2.HeaderText = "Specification Tye"
-        Me.Column2.Items.AddRange(New Object() {"String", "Double", "Integer", "Boolean", "", "", ""})
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 106
-        '
-        'Column4
-        '
-        Me.Column4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Column4.HeaderText = "Layout"
-        Me.Column4.Items.AddRange(New Object() {"Textbox", "Multiline", "Yes", "No"})
-        Me.Column4.Name = "Column4"
-        Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column4.Width = 120
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Unit of Measure"
-        Me.Column5.Name = "Column5"
-        Me.Column5.Width = 140
-        '
         'grpSearch
         '
         Me.grpSearch.Controls.Add(Me.btnSearch)
@@ -310,7 +275,7 @@ Partial Class frmAdminPanel
         Me.btnSearch.Location = New System.Drawing.Point(941, 13)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(75, 36)
-        Me.btnSearch.TabIndex = 13
+        Me.btnSearch.TabIndex = 1
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
@@ -319,7 +284,7 @@ Partial Class frmAdminPanel
         Me.txtSearch.Location = New System.Drawing.Point(77, 21)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(858, 22)
-        Me.txtSearch.TabIndex = 10
+        Me.txtSearch.TabIndex = 0
         Me.txtSearch.Text = "Search. . ."
         '
         'lblSearch
@@ -452,14 +417,60 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber.TabIndex = 0
         Me.lblReferenceNumber.Text = "Reference No."
         '
-        'Button1
+        'btnClose
         '
-        Me.Button1.Location = New System.Drawing.Point(790, 393)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 33)
-        Me.Button1.TabIndex = 13
-        Me.Button1.Text = "Enable"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnClose.Location = New System.Drawing.Point(953, 393)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 33)
+        Me.btnClose.TabIndex = 13
+        Me.btnClose.Text = "&Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Short Code"
+        Me.Column3.Name = "Column3"
+        Me.Column3.Width = 120
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Specification Name"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 160
+        '
+        'Column2
+        '
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.Column2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Column2.HeaderText = "Specification Type"
+        Me.Column2.Items.AddRange(New Object() {"String", "Double", "Integer", "Boolean", "", "", ""})
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 113
+        '
+        'Column4
+        '
+        Me.Column4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Column4.HeaderText = "Layout"
+        Me.Column4.Items.AddRange(New Object() {"Textbox", "Multiline", "Yes/No"})
+        Me.Column4.Name = "Column4"
+        Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.Column4.Width = 120
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Unit of Measure"
+        Me.Column5.Name = "Column5"
+        Me.Column5.Width = 140
+        '
+        'btnClear
+        '
+        Me.btnClear.Location = New System.Drawing.Point(873, 393)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(75, 33)
+        Me.btnClear.TabIndex = 14
+        Me.btnClear.Text = "&Clear"
+        Me.btnClear.UseVisualStyleBackColor = True
         '
         'frmAdminPanel
         '
@@ -520,10 +531,11 @@ Partial Class frmAdminPanel
     Friend WithEvents dgSpecification As System.Windows.Forms.DataGridView
     Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
+    Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnClear As System.Windows.Forms.Button
 End Class

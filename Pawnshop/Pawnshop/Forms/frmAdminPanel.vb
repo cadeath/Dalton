@@ -1,5 +1,7 @@
 ﻿Imports System.Data.Odbc
 Public Class frmAdminPanel
+
+
     Dim rbYes As Integer
     Dim rbNo As Integer
 
@@ -12,7 +14,7 @@ Public Class frmAdminPanel
 
     Friend SelectedItem As Item 'Holds Item
 
-    Private lockForm As Boolean = False
+
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
 
@@ -40,26 +42,6 @@ Public Class frmAdminPanel
     '    LockFields(True)
     'End Sub
 
-    Private Sub LockFields(ByVal st As Boolean)
-        lockForm = st
-        txtCategory.ReadOnly = st
-        txtClassifiction.ReadOnly = st
-        txtDescription.ReadOnly = st
-        txtPrintLayout.ReadOnly = st
-        If rdbYes.Checked = True Then
-            rdbYes.Enabled = st
-        Else
-            rdbNo.Checked = True
-            rdbNo.Enabled = st
-        End If
-
-        If st Then
-            btnUpdate.Text = "&Update"
-        Else
-            btnUpdate.Text = "&Modify"
-        End If
-    End Sub
-
     Friend Sub LoadItemall(ByVal it As Item)
         txtClassifiction.Text = String.Format(it.Classification)
         txtCategory.Text = String.Format(it.Category)
@@ -75,7 +57,7 @@ Public Class frmAdminPanel
         ItemList = it
     End Sub
 
-    Private Sub clearfields()
+    Friend Sub clearfields()
         txtCategory.Text = ""
         txtClassifiction.Text = ""
         txtDescription.Text = ""
@@ -84,6 +66,7 @@ Public Class frmAdminPanel
         txtReferenceNumber.Text = ""
         cmbModuleName.Text = ""
         dgSpecification.Rows.Clear()
+        btnUpdate.Enabled = False
     End Sub
 
 
@@ -151,15 +134,19 @@ Public Class frmAdminPanel
         clearfields()
 
     End Sub
-
+    Private Sub Updates(ByVal a As String)
+        btnUpdate.TextAlign = "&Update"
+    End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not isValid() Then Exit Sub
 
-        If btnUpdate.Text = "&Modify" Then
-            btnUpdate.Text = "&Save"
+        If btnUpdate.Text = "&Update".ToString Then
+            btnUpdate.Text = "&Modify".ToString
+            reaDOnlyFalse()
             Exit Sub
         End If
+
 
         Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -198,6 +185,7 @@ Public Class frmAdminPanel
             End With
         Next
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
+        btnSave.Enabled = True
         clearfields()
     End Sub
 
@@ -208,7 +196,9 @@ Public Class frmAdminPanel
         frmItemList.Show()
         frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
         frmItemList.btnSearch.PerformClick()
-        frmItemList.Show()
+        btnUpdate.Text = "&Update".ToString
+        btnUpdate.Enabled = True
+     
     End Sub
 
 
@@ -227,13 +217,13 @@ Public Class frmAdminPanel
         rdbYes.Enabled = False
     End Sub
 
-    Private Sub reaDOnlyFalse()
+    Friend Sub reaDOnlyFalse()
         txtCategory.ReadOnly = False
         txtClassifiction.ReadOnly = False
         txtDescription.ReadOnly = False
         txtPrintLayout.ReadOnly = False
-        rdbNo.Enabled = False
-        rdbYes.Enabled = False
+        rdbNo.Enabled = True
+        rdbYes.Enabled = True
         For a As Integer = 0 To dgSpecification.Rows.Count - 1
             dgSpecification.Rows(a).ReadOnly = False
         Next
@@ -250,25 +240,26 @@ Public Class frmAdminPanel
         dt = ds.Tables(0)
 
         For Each dr As DataRow In dt.Rows
+            dr.ClearErrors()
             dgSpecification.Rows.Add(dr(0), dr(1), dr(2), dr(3), dr(4))
         Next
+
         Dim i As Integer = (0)
 
         reaDOnlyTrue()
         For a As Integer = 0 To dgSpecification.Rows.Count - 1
             dgSpecification.Rows(a).ReadOnly = True
         Next
-        btnUpdate.Text = " &Modify"
-        btnSave.Visible = False
+        btnSave.Enabled = False
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
-            End If
+        End If
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        reaDOnlyFalse()
+    Private Sub frmAdminPanel_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+
     End Sub
 End Class

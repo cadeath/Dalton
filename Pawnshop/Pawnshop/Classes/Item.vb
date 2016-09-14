@@ -235,7 +235,7 @@
             .Item("ItemCategory") = _Category
             .Item("Description") = _Description
             .Item("Status") = _status
-            .Item("Date_createdat") = _DateCreated
+            ' .Item("Date_createdat") = _DateCreated
             .Item("Date_Updatedat") = _DateUpdated
             .Item("IsRenew") = _Renewable
             ' .Item("ConfigID") = _ConfigID
@@ -250,7 +250,6 @@
         Dim ds As DataSet = LoadSQL(mySql, fillData1)
 
         With ds.Tables(0).Rows(0)
-            '.Item("SPECID") = _SpecID
             .Item("Short_Code") = _ShortCode
             .Item("SpecName") = _SpecName
             .Item("SpecType") = _SpecType
@@ -274,7 +273,6 @@
             .Item("Description") = _Description
             .Item("Status") = _status
             .Item("Date_CreatedAT") = _DateCreated
-            '.Item("Date_Upated") = ""
             .Item("IsRenew") = _Renewable
             ' .Item("ConfigID") = _ConfigID
             .Item("Print_Layout") = _PrintLayout
@@ -315,15 +313,7 @@
         Return ds.Tables(0).Rows(0).Item("ITEMID")
     End Function
 
-    Public Function loadSPecId() As Single
-        Dim mySql As String = "SELECT * FROM " & fillData1 & " where ITEMID = " & frmItemList.lblItemID.Text
-        Dim ds As DataSet = LoadSQL(mySql)
 
-        If ds.Tables(0).Rows.Count = 0 Then
-            Return 0
-        End If
-        Return ds.Tables(0).Rows(0).Item("SpecID")
-    End Function
 #End Region
 
 End Class
