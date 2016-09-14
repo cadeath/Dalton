@@ -1007,12 +1007,7 @@
     <None Include="backup.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="doc\ExpiryFormat.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="doc\JournalEntries.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
     <None Include="HitManagement\dsHit.xsc">
