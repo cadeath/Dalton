@@ -102,7 +102,11 @@ Partial Class dev_NewPawning
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cboType = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.txtTmp = New System.Windows.Forms.TextBox()
+        Me.pnlMultiline = New System.Windows.Forms.Panel()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.pnlRadio = New System.Windows.Forms.Panel()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -111,6 +115,8 @@ Partial Class dev_NewPawning
         Me.GroupBox7.SuspendLayout()
         Me.pnlTextbox.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.pnlMultiline.SuspendLayout()
+        Me.pnlRadio.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -761,12 +767,11 @@ Partial Class dev_NewPawning
         '
         'GroupBox7
         '
-        Me.GroupBox7.Controls.Add(Me.txtTmp)
         Me.GroupBox7.Controls.Add(Me.btnSearchItem)
         Me.GroupBox7.Controls.Add(Me.txtSearchItem)
         Me.GroupBox7.Location = New System.Drawing.Point(12, 256)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(328, 205)
+        Me.GroupBox7.Size = New System.Drawing.Size(328, 61)
         Me.GroupBox7.TabIndex = 24
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Item Information"
@@ -793,14 +798,14 @@ Partial Class dev_NewPawning
         'pnlTextbox
         '
         Me.pnlTextbox.Controls.Add(Me.TextBox1)
-        Me.pnlTextbox.Location = New System.Drawing.Point(926, 22)
+        Me.pnlTextbox.Location = New System.Drawing.Point(929, 22)
         Me.pnlTextbox.Name = "pnlTextbox"
-        Me.pnlTextbox.Size = New System.Drawing.Size(312, 149)
+        Me.pnlTextbox.Size = New System.Drawing.Size(309, 47)
         Me.pnlTextbox.TabIndex = 25
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(15, 6)
+        Me.TextBox1.Location = New System.Drawing.Point(11, 5)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(281, 20)
         Me.TextBox1.TabIndex = 0
@@ -817,9 +822,9 @@ Partial Class dev_NewPawning
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.cboType)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(929, 186)
+        Me.GroupBox3.Location = New System.Drawing.Point(940, 418)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(324, 202)
+        Me.GroupBox3.Size = New System.Drawing.Size(204, 53)
         Me.GroupBox3.TabIndex = 26
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Pawn Item Information"
@@ -924,19 +929,60 @@ Partial Class dev_NewPawning
         Me.Label15.TabIndex = 0
         Me.Label15.Text = "Item Type"
         '
-        'txtTmp
+        'pnlMultiline
         '
-        Me.txtTmp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTmp.Location = New System.Drawing.Point(9, 56)
-        Me.txtTmp.Name = "txtTmp"
-        Me.txtTmp.Size = New System.Drawing.Size(215, 22)
-        Me.txtTmp.TabIndex = 4
+        Me.pnlMultiline.Controls.Add(Me.TextBox2)
+        Me.pnlMultiline.Location = New System.Drawing.Point(929, 80)
+        Me.pnlMultiline.Name = "pnlMultiline"
+        Me.pnlMultiline.Size = New System.Drawing.Size(309, 116)
+        Me.pnlMultiline.TabIndex = 27
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(11, 5)
+        Me.TextBox2.Multiline = True
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(281, 94)
+        Me.TextBox2.TabIndex = 0
+        '
+        'pnlRadio
+        '
+        Me.pnlRadio.Controls.Add(Me.RadioButton2)
+        Me.pnlRadio.Controls.Add(Me.RadioButton1)
+        Me.pnlRadio.Location = New System.Drawing.Point(929, 204)
+        Me.pnlRadio.Name = "pnlRadio"
+        Me.pnlRadio.Size = New System.Drawing.Size(309, 78)
+        Me.pnlRadio.TabIndex = 28
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(51, 10)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(43, 17)
+        Me.RadioButton1.TabIndex = 0
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "Yes"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(181, 11)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(39, 17)
+        Me.RadioButton2.TabIndex = 1
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "No"
+        Me.RadioButton2.UseVisualStyleBackColor = True
         '
         'dev_NewPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1262, 484)
+        Me.ClientSize = New System.Drawing.Size(1268, 483)
+        Me.Controls.Add(Me.pnlRadio)
+        Me.Controls.Add(Me.pnlMultiline)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.pnlTextbox)
         Me.Controls.Add(Me.GroupBox7)
@@ -969,6 +1015,10 @@ Partial Class dev_NewPawning
         Me.pnlTextbox.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.pnlMultiline.ResumeLayout(False)
+        Me.pnlMultiline.PerformLayout()
+        Me.pnlRadio.ResumeLayout(False)
+        Me.pnlRadio.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1052,5 +1102,9 @@ Partial Class dev_NewPawning
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents txtTmp As System.Windows.Forms.TextBox
+    Friend WithEvents pnlMultiline As System.Windows.Forms.Panel
+    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents pnlRadio As System.Windows.Forms.Panel
+    Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
+    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
 End Class

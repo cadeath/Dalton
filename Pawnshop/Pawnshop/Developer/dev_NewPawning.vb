@@ -359,12 +359,15 @@
 
     Friend Sub LoadItem(ByVal Item As Item)
         'txtTmp.Text = (Item.Layout)
-        MsgBox((Item.Layout))
-        'Dim tmpLayout As String = (Item.Layout)
-        'If tmpLayout = "TextBox" Then
-        '    pnlTextbox.Location = New Point(6, 53)
-
-        'End If
+        Dim tmpLocation As Point = New Point(12, 323)
+        Dim tmpLayout As String = (Item.Layout)
+        If tmpLayout = "Textbox" Then
+            pnlTextbox.Location = tmpLocation
+        ElseIf tmpLayout = "Yes/No" Then
+            pnlRadio.Location = tmpLocation
+        ElseIf tmpLayout = "Multiline" Then
+            pnlMultiline.Location = tmpLocation
+        End If
     End Sub
 
     Private Sub ClearFields()
@@ -465,6 +468,8 @@
         Next
     End Sub
     Private Sub dev_NewPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.Size = New Size(948, 514)
+
         ClearFields()
         LoadPawnInfo()
         LoadAppraisers()
