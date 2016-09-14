@@ -22,8 +22,6 @@ Public Class frmAdminPanel
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
-
-
     End Sub
 
     'Friend Sub LoadItemList(ByVal it As Item)
@@ -69,8 +67,6 @@ Public Class frmAdminPanel
         btnUpdate.Enabled = False
     End Sub
 
-
-
     Private Sub rdbYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbYes.CheckedChanged
         rbYes = 1
     End Sub
@@ -83,8 +79,6 @@ Public Class frmAdminPanel
         If txtCategory.Text = "" Then txtCategory.Focus() : Return False
         Return True
     End Function
-
-
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
@@ -261,9 +255,5 @@ Public Class frmAdminPanel
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
         End If
-    End Sub
-
-    Private Sub frmAdminPanel_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-
     End Sub
 End Class

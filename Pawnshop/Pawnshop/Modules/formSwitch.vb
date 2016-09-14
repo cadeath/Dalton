@@ -13,10 +13,11 @@
         frmPawnItem = 6
         frmDollarSimple = 7
         frmMoneyExchange = 8
-frmAdminPanel = 9
+        frmAdminPanel = 9
 
         dev_NewPawning = 10
-        dev_PawnCliamer = 11
+        dev_PawnClaimer = 11
+        dev_Item = 12
 
 
     End Enum
@@ -27,6 +28,7 @@ frmAdminPanel = 9
     ''' <param name="cl"></param>
     ''' <remarks></remarks>
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
+
         Select Case gotoForm
             Case FormName.devForm
                 devClient.LoadClientInfo(cl)
@@ -42,16 +44,13 @@ frmAdminPanel = 9
                 frmDollorSimple.LoadClient(cl)
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadClient(cl)
-Case FormName.frmAdminPanel
+            Case FormName.frmAdminPanel
 
             Case FormName.dev_NewPawning
                 dev_NewPawning.LoadClient(cl)
-            Case FormName.dev_PawnCliamer
+            Case FormName.dev_PawnClaimer
                 dev_NewPawning.LoadCliamer(cl)
-
-            
-
-
+ 
         End Select
     End Sub
     ''' <remarks></remarks>
@@ -66,6 +65,8 @@ Case FormName.frmAdminPanel
         Select Case gotoForm
             Case FormName.frmAdminPanel
                 frmAdminPanel.LoadItemall(it)
+            Case FormName.dev_Item
+                dev_NewPawning.LoadItem(it)
         End Select
     End Sub
 End Module

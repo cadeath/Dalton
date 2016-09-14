@@ -86,6 +86,11 @@ Partial Class dev_NewPawning
         Me.btnSearchClaim = New System.Windows.Forms.Button()
         Me.txtSearchClaim = New System.Windows.Forms.TextBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.btnSearchItem = New System.Windows.Forms.Button()
+        Me.txtSearchItem = New System.Windows.Forms.TextBox()
+        Me.pnlTextbox = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.cboKarat = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -97,17 +102,15 @@ Partial Class dev_NewPawning
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cboType = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtTmp = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
+        Me.pnlTextbox.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -756,6 +759,52 @@ Partial Class dev_NewPawning
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Claim By"
         '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.txtTmp)
+        Me.GroupBox7.Controls.Add(Me.btnSearchItem)
+        Me.GroupBox7.Controls.Add(Me.txtSearchItem)
+        Me.GroupBox7.Location = New System.Drawing.Point(12, 256)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(328, 205)
+        Me.GroupBox7.TabIndex = 24
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Item Information"
+        '
+        'btnSearchItem
+        '
+        Me.btnSearchItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSearchItem.Location = New System.Drawing.Point(227, 20)
+        Me.btnSearchItem.Name = "btnSearchItem"
+        Me.btnSearchItem.Size = New System.Drawing.Size(88, 27)
+        Me.btnSearchItem.TabIndex = 3
+        Me.btnSearchItem.Text = "&Search"
+        Me.btnSearchItem.UseVisualStyleBackColor = True
+        '
+        'txtSearchItem
+        '
+        Me.txtSearchItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearchItem.Location = New System.Drawing.Point(6, 22)
+        Me.txtSearchItem.Name = "txtSearchItem"
+        Me.txtSearchItem.Size = New System.Drawing.Size(215, 22)
+        Me.txtSearchItem.TabIndex = 2
+        Me.txtSearchItem.Text = "Jacob Frye"
+        '
+        'pnlTextbox
+        '
+        Me.pnlTextbox.Controls.Add(Me.TextBox1)
+        Me.pnlTextbox.Location = New System.Drawing.Point(926, 22)
+        Me.pnlTextbox.Name = "pnlTextbox"
+        Me.pnlTextbox.Size = New System.Drawing.Size(312, 149)
+        Me.pnlTextbox.TabIndex = 25
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(15, 6)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(281, 20)
+        Me.TextBox1.TabIndex = 0
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.cboKarat)
@@ -768,10 +817,10 @@ Partial Class dev_NewPawning
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.cboType)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(926, 15)
+        Me.GroupBox3.Location = New System.Drawing.Point(929, 186)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(324, 202)
-        Me.GroupBox3.TabIndex = 23
+        Me.GroupBox3.TabIndex = 26
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Pawn Item Information"
         '
@@ -875,54 +924,21 @@ Partial Class dev_NewPawning
         Me.Label15.TabIndex = 0
         Me.Label15.Text = "Item Type"
         '
-        'GroupBox7
+        'txtTmp
         '
-        Me.GroupBox7.Controls.Add(Me.TextBox2)
-        Me.GroupBox7.Controls.Add(Me.Button1)
-        Me.GroupBox7.Controls.Add(Me.TextBox1)
-        Me.GroupBox7.Location = New System.Drawing.Point(12, 256)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(328, 205)
-        Me.GroupBox7.TabIndex = 24
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Item Information"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(6, 53)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(309, 57)
-        Me.TextBox2.TabIndex = 4
-        Me.TextBox2.Text = "Jacob Frye"
-        '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(227, 20)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(88, 27)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "&Search"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(6, 22)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(215, 22)
-        Me.TextBox1.TabIndex = 2
-        Me.TextBox1.Text = "Jacob Frye"
+        Me.txtTmp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTmp.Location = New System.Drawing.Point(9, 56)
+        Me.txtTmp.Name = "txtTmp"
+        Me.txtTmp.Size = New System.Drawing.Size(215, 22)
+        Me.txtTmp.TabIndex = 4
         '
         'dev_NewPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1302, 484)
+        Me.ClientSize = New System.Drawing.Size(1262, 484)
         Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.pnlTextbox)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.btnPrint)
@@ -947,10 +963,12 @@ Partial Class dev_NewPawning
         Me.GroupBox4.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
+        Me.pnlTextbox.ResumeLayout(False)
+        Me.pnlTextbox.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1018,6 +1036,11 @@ Partial Class dev_NewPawning
     Friend WithEvents btnSearchClaim As System.Windows.Forms.Button
     Friend WithEvents txtSearchClaim As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnSearchItem As System.Windows.Forms.Button
+    Friend WithEvents txtSearchItem As System.Windows.Forms.TextBox
+    Friend WithEvents pnlTextbox As System.Windows.Forms.Panel
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents cboKarat As System.Windows.Forms.ComboBox
     Friend WithEvents Label19 As System.Windows.Forms.Label
@@ -1029,8 +1052,5 @@ Partial Class dev_NewPawning
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtTmp As System.Windows.Forms.TextBox
 End Class

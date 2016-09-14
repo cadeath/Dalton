@@ -18,6 +18,7 @@
         ClearField()
 
         LoadActiveItem()
+        'LoadSpec()
 
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
@@ -26,7 +27,7 @@
     End Sub
 
 
-    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tbl_ITEM where ITEMID > 0 ORDER BY itemid ASC")
+    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tbl_ITEM where ITEMID <> 0 ORDER BY itemid ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
         lvItem.Items.Clear()
@@ -34,6 +35,17 @@
             Dim tmpItem As New Item
             tmpItem.LoaditemByRow(dr)
             AddItem(tmpItem)
+        Next
+    End Sub
+
+    Friend Sub LoadSpec(Optional ByVal mySql As String = "Select * from tbl_specification where specid <> 0 ORDER BY SPECID ASC")
+        Dim ds As DataSet
+        ds = LoadSQL(mySql)
+        lvItem.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpItem As New Item
+            tmpItem.LoadSpecByRow(dr)
+            'AddItem(tmpItem)
         Next
     End Sub
 
@@ -60,6 +72,7 @@
         Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
         GetItem = New Item
         GetItem.LoadItem(idx)
+        GetItem.LoadSpec(idx)
         formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
         lblItemID.Text = idx
         frmAdminPanel.LoadSpec()

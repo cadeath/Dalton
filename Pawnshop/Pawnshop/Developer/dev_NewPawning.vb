@@ -349,13 +349,22 @@
         txtContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
 
         PawnCustomer = cl
-        cboCat.Focus()
         'cboType.DroppedDown = True
     End Sub
 
     Friend Sub LoadCliamer(ByVal cl As Client)
         txtSearchClaim.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
         PawnClaimer = cl
+    End Sub
+
+    Friend Sub LoadItem(ByVal Item As Item)
+        'txtTmp.Text = (Item.Layout)
+        MsgBox((Item.Layout))
+        'Dim tmpLayout As String = (Item.Layout)
+        'If tmpLayout = "TextBox" Then
+        '    pnlTextbox.Location = New Point(6, 53)
+
+        'End If
     End Sub
 
     Private Sub ClearFields()
@@ -365,10 +374,10 @@
         txtAddr.Text = ""
         txtBDay.Text = ""
         txtContact.Text = ""
-        cboType.Text = ""
-        cboCat.Text = ""
-        txtDesc.Text = ""
-        txtGram.Text = ""
+        'cboType.Text = ""
+        'cboCat.Text = ""
+        'txtDesc.Text = ""
+        'txtGram.Text = ""
         'cboKarat.Text = ""
 
         txtTicket.Text = ""
@@ -475,7 +484,7 @@
     Private Sub btnSearchClaim_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaim.Click
         Dim secured_str As String = txtSearchClaim.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.dev_PawnCliamer)
+        frmClient.SearchSelect(secured_str, FormName.dev_PawnClaimer)
         frmClient.Show()
     End Sub
 
@@ -493,5 +502,24 @@
 
             Exit Sub
         End If
+    End Sub
+
+    Private Sub txtCustomer_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCustomer.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtSearchClaim_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchClaim.KeyPress
+        If isEnter(e) Then
+            btnSearchClaim.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnSearchItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchItem.Click
+        Dim secured_str As String = txtSearchItem.Text
+        secured_str = DreadKnight(secured_str)
+        frmItemList.SearchSelect(secured_str, FormName.dev_Item)
+        frmItemList.Show()
     End Sub
 End Class
