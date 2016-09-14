@@ -1104,9 +1104,9 @@ Partial Class dev_NewPawning
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
 
-    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
 
     Friend WithEvents txtTmp As System.Windows.Forms.TextBox

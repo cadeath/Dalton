@@ -61,22 +61,7 @@
     End Sub
 
 
-    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        If lvItem.Items.Count = 0 Then Exit Sub
-
-        If lvItem.SelectedItems.Count = 0 Then
-            lvItem.Items(0).Focused = True
-        End If
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-        GetItem = New Item
-        GetItem.LoadItem(idx)
-        GetItem.LoadSpec(idx)
-        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-        lblItemID.Text = idx
-        frmAdminPanel.LoadSpec()
-        Me.Hide()
-
-    End Sub
+  
 
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click

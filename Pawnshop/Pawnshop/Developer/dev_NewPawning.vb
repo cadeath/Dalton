@@ -519,7 +519,7 @@
     Private Sub btnSearchItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchItem.Click
         Dim secured_str As String = txtSearchItem.Text
         secured_str = DreadKnight(secured_str)
-        frmItemList.SearchSelect(secured_str, FormName.dev_Item)
+
         frmItemList.Show()
     End Sub
 End Class
