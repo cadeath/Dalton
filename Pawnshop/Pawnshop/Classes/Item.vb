@@ -215,7 +215,7 @@
         ds = LoadSQL(mySql)
 
         For Each dr As DataRow In ds.Tables(0).Rows
-            LoadSpecByRow(dr)
+            loadBySpec(dr)
         Next
     End Sub
 

@@ -3,6 +3,7 @@
     Friend PawnItem As devClassPawning
     Friend PawnCustomer As Client
     Friend PawnClaimer As Client
+    Friend tmpItem As Item
     Private PawnInfo() As Hashtable
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
     Private currentORNumber As Integer = GetOption("ORLastNum")
@@ -177,7 +178,7 @@
             .Item("NetAmount") = Net_Amount
             .Item("AppraiserID") = GetAppraiserID(cboAppraiser.Text)
             .Item("EncoderID") = UserID
-            '.Item("pwnItmID") = ""
+            .Item("pwnItmID") = tmpItem.itemID
             .Item("ClientID") = PawnCustomer.ID
             .Item("ClaimBy") = PawnClaimer.ID
             '.Item("ORDate") = _orDate
@@ -197,6 +198,7 @@
 
         database.SaveEntry(ds)
         MsgBox("SAVED")
+
     End Sub
     Private Sub dateChange(ByVal typ As String)
         Select Case typ
@@ -361,13 +363,16 @@
         'txtTmp.Text = (Item.Layout)
         Dim tmpLocation As Point = New Point(12, 323)
         Dim tmpLayout As String = (Item.Layout)
-        If tmpLayout = "Textbox" Then
 
+        If tmpLayout = "Textbox" Then
+            pnlTextbox.Location = tmpLocation
         ElseIf tmpLayout = "Yes/No" Then
             pnlRadio.Location = tmpLocation
         ElseIf tmpLayout = "Multiline" Then
             pnlMultiline.Location = tmpLocation
         End If
+        txtSearchItem.Text = Item.Classification
+        tmpItem = Item
     End Sub
 
     Private Sub ClearFields()
@@ -524,7 +529,7 @@
     Private Sub btnSearchItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchItem.Click
         Dim secured_str As String = txtSearchItem.Text
         secured_str = DreadKnight(secured_str)
-        'frmItemList.SearchSelect(secured_str, FormName.dev_Item)
+        frmItemList.SearchSelect(secured_str, FormName.dev_Item)
         frmItemList.Show()
     End Sub
 End Class
