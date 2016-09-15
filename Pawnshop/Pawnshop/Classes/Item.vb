@@ -108,10 +108,10 @@
     Private _SpecID As Integer
     Public Property SpecID() As Integer
         Get
-            Return _status
+            Return _SpecID
         End Get
         Set(ByVal value As Integer)
-            _status = value
+            _SpecID = value
         End Set
     End Property
 

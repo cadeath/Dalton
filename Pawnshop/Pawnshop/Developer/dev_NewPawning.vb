@@ -1,6 +1,6 @@
 ﻿Public Class dev_NewPawning
     Friend transactionType As String = "L"
-    Friend PawnItem As devClassPawning
+    Friend PawnItem As PawnTicket
     Friend PawnCustomer As Client
     Friend PawnClaimer As Client
     Friend tmpItem As Item
@@ -102,7 +102,7 @@
 
         'Storing_Hash(Pawn_IntHash)
 
-        PawnItem = New devClassPawning
+        PawnItem = New PawnTicket
         With PawnItem
             .PawnTicket = currentPawnTicket
             .Pawner = PawnCustomer
@@ -114,8 +114,8 @@
             .Principal = txtPrincipal.Text
             .NetAmount = Net_Amount
             .AppraiserID = GetAppraiserID(cboAppraiser.Text)
-            .ItemID = ""
-            .ClaimID = ""
+            '.ItemID = ""
+            '.ClaimID = ""
             .Status = transactionType
             .AdvanceInterest = txtAdv.Text
 
@@ -361,18 +361,44 @@
 
     Friend Sub LoadItem(ByVal Item As Item)
         'txtTmp.Text = (Item.Layout)
-        Dim tmpLocation As Point = New Point(12, 323)
-        Dim tmpLayout As String = (Item.Layout)
+        'Dim tmpLocation As Point = New Point(12, 323)
+        'Dim tmpLayout As String = (Item.Layout)
 
-        If tmpLayout = "Textbox" Then
-            pnlTextbox.Location = tmpLocation
-        ElseIf tmpLayout = "Yes/No" Then
-            pnlRadio.Location = tmpLocation
-        ElseIf tmpLayout = "Multiline" Then
-            pnlMultiline.Location = tmpLocation
-        End If
+        'If tmpLayout = "Textbox" Then
+        '    pnlTextbox.Location = tmpLocation
+
+        'ElseIf tmpLayout = "Yes/No" Then
+        '    pnlRadio.Location = tmpLocation
+
+        'ElseIf tmpLayout = "Multiline" Then
+        '    pnlMultiline.Location = tmpLocation
+
+        'End If
+
+        Dim tmpItemID As String = (Item.itemID)
+        Dim mySql As String = "SELECT * FROM tbl_SPecification WHERE ItemID = '" & tmpItemID & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        For Each cio As DataRow In ds.Tables(0).Rows
+            AddItem(cio)
+        Next
+
         txtSearchItem.Text = Item.Classification
         tmpItem = Item
+    End Sub
+
+    Private Sub AddItem(ByVal cio As DataRow)
+        Dim tmpItem As New Item
+        tmpItem.LoadSpecByRow(cio)
+
+        Dim lv As ListViewItem = lvItem.Items.Add(tmpItem.SpecID)
+        lv.SubItems.Add(tmpItem.SpecName)
+        'lv.SubItems.Add(tmpCIO.Category)
+        'lv.SubItems.Add(tmpCIO.Transaction)
+        'lv.SubItems.Add(tmpCIO.Amount)
+        'lv.SubItems.Add(tmpCIO.Particulars)
+        lv.Tag = tmpItem.SpecID
+
     End Sub
 
     Private Sub ClearFields()
