@@ -169,7 +169,9 @@ Public Class frmAdminPanel
 
         For Each row As DataGridViewRow In dgSpecification.Rows
             SpecSave = New Item
+
             With SpecSave
+
                 .ShortCode = row.Cells(0).Value
                 .SpecName = row.Cells(1).Value
                 .SpecType = row.Cells(2).Value
@@ -277,7 +279,7 @@ Public Class frmAdminPanel
 
 
    
-  
+    '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
 
     Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
         If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
@@ -299,6 +301,9 @@ Public Class frmAdminPanel
             End Select
         End If
         GenerateModule()
+        lvModule.View = View.Details
+        lvModule.CheckBoxes = True
+        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
     End Sub
 
     Enum ModuleType As Integer
@@ -358,10 +363,14 @@ Public Class frmAdminPanel
             lvi.SubItems.AddRange(New String() {str2, str3, str4})
             lvModule.Items.Add(lvi)
         Next
+
+
+       
     End Sub
 
     Private Sub Modcash()
 
+       
         fillData = "tblCash"
         mySql = "SELECT * FROM " & fillData
         mySql &= " WHERE CashID <> 0"
@@ -393,6 +402,7 @@ Public Class frmAdminPanel
             lvi.Text = str1
             lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7})
             lvModule.Items.Add(lvi)
+
         Next
     End Sub
 
@@ -530,6 +540,7 @@ Public Class frmAdminPanel
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
 
+        
     End Sub
 
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk

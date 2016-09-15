@@ -243,10 +243,9 @@
             .Item("ItemClass") = _Classification
             .Item("ItemCategory") = _Category
             .Item("Description") = _Description
-            .Item("Status") = _status
-            ' .Item("Date_createdat") = _DateCreated
-            .Item("Date_Updatedat") = _DateUpdated
             .Item("IsRenew") = _Renewable
+            .Item("Status") = _status
+            .Item("UPDATED_AT") = _DateUpdated
             ' .Item("ConfigID") = _ConfigID
             .Item("Print_Layout") = _PrintLayout
         End With
@@ -258,16 +257,16 @@
         Dim mySql As String = "SELECT * FROM " & fillData1 & " WHERE ITEMID = " & frmItemList.lblItemID.Text
         Dim ds As DataSet = LoadSQL(mySql, fillData1)
 
-        With ds.Tables(0).Rows(0)
-            .Item("Short_Code") = _ShortCode
-            .Item("SpecName") = _SpecName
-            .Item("SpecType") = _SpecType
-            .Item("SpecLayout") = _Layout
-            .Item("UOM") = _UnitofMeasure
-            .Item("IsRequired") = _IsRequired
-        End With
+            With ds.Tables(0).Rows(0)
+                .Item("Short_Code") = _ShortCode
+                .Item("SpecName") = _SpecName
+                .Item("SpecType") = _SpecType
+                .Item("SpecLayout") = _Layout
+                .Item("UOM") = _UnitofMeasure
+                .Item("IsRequired") = _IsRequired
+            End With
 
-        database.SaveEntry(ds, False)
+            database.SaveEntry(ds, False)
     End Sub
 
     Public Sub SaveItem()
@@ -281,10 +280,10 @@
             .Item("ItemClass") = _Classification
             .Item("ItemCategory") = _Category
             .Item("Description") = _Description
-            .Item("Status") = _status
-            .Item("Date_CreatedAT") = _DateCreated
             .Item("IsRenew") = _Renewable
+            .Item("Status") = _status
             ' .Item("ConfigID") = _ConfigID
+            .Item("CREATED_AT") = _DateCreated
             .Item("Print_Layout") = _PrintLayout
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
