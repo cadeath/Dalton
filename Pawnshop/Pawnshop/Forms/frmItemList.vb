@@ -6,6 +6,14 @@
 
     Friend GetItem As Item
 
+
+    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+        mOtherForm = True
+        btnSelect.Visible = True
+        txtSearch.Text = src
+        frmOrig = frmOrigin
+    End Sub
+
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         If Not mOtherForm Then ClearField()
@@ -109,13 +117,13 @@
         End If
     End Sub
 
-    Private Sub lvItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.Click
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-        GetItem = New Item
-        GetItem.LoadItem(idx)
-        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-        lblItemID.Text = idx
-    End Sub
+    'Private Sub lvItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.Click
+    '    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+    '    GetItem = New Item
+    '    GetItem.LoadItem(idx)
+    '    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
+    '    lblItemID.Text = idx
+    'End Sub
 
   
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -140,28 +148,16 @@
 
         Dim tempITEM As New Item
         tempITEM.LoadItem(ItemID)
+        lblItemID.Text = ItemID
 
-        frmAdminPanel.Show()
         frmAdminPanel.LoadItemall(tempITEM)
         frmAdminPanel.LoadSpec()
+        frmAdminPanel.Show()
         Me.Hide()
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        'If lvItem.Items.Count = 0 Then Exit Sub
-
-        'If lvItem.SelectedItems.Count = 0 Then
-        '    lvItem.Items(0).Focused = True
-        'End If
-        'Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-        'GetItem = New Item
-        'GetItem.LoadItem(idx)
-        'formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-        'lblItemID.Text = idx
-        'frmAdminPanel.LoadItemall(GetItem)
-        'frmAdminPanel.LoadSpec()
-        'Me.Hide()
-
+      
         If lvItem.Items.Count = 0 Then Exit Sub
 
         If lvItem.SelectedItems.Count = 0 Then
@@ -170,7 +166,8 @@
         Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
         GetItem = New Item
         GetItem.LoadItem(idx)
-
+        GetItem.LoadSpec(idx)
+        lblItemID.Text = (idx)
         formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
 
         Me.Close()

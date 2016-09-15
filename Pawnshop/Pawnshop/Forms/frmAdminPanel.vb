@@ -184,6 +184,7 @@ Public Class frmAdminPanel
                     .IsRequired = 0
                 End If
 
+
                 If .SpecName Is Nothing Or .SpecType Is Nothing _
                     Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
                     Exit For
@@ -304,6 +305,7 @@ Public Class frmAdminPanel
         lvModule.View = View.Details
         lvModule.CheckBoxes = True
         lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
+       
     End Sub
 
     Enum ModuleType As Integer
