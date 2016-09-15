@@ -362,7 +362,7 @@
         Dim tmpLocation As Point = New Point(12, 323)
         Dim tmpLayout As String = (Item.Layout)
         If tmpLayout = "Textbox" Then
-            pnlTextbox.Location = tmpLocation
+
         ElseIf tmpLayout = "Yes/No" Then
             pnlRadio.Location = tmpLocation
         ElseIf tmpLayout = "Multiline" Then
@@ -486,13 +486,6 @@
         End If
     End Sub
 
-    Private Sub btnSearchClaim_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaim.Click
-        Dim secured_str As String = txtSearchClaim.Text
-        secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.dev_PawnClaimer)
-        frmClient.Show()
-    End Sub
-
     Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
         ReComputeInterest()
     End Sub
@@ -521,10 +514,17 @@
         End If
     End Sub
 
+    Private Sub btnSearchClaim_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaim.Click
+        Dim secured_str As String = txtSearchClaim.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.dev_PawnClaimer)
+        frmClient.Show()
+    End Sub
+
     Private Sub btnSearchItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchItem.Click
         Dim secured_str As String = txtSearchItem.Text
         secured_str = DreadKnight(secured_str)
-
+        'frmItemList.SearchSelect(secured_str, FormName.dev_Item)
         frmItemList.Show()
     End Sub
 End Class

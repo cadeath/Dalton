@@ -86,48 +86,36 @@ Partial Class dev_NewPawning
         Me.btnSearchClaim = New System.Windows.Forms.Button()
         Me.txtSearchClaim = New System.Windows.Forms.TextBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.btnSearchItem = New System.Windows.Forms.Button()
-        Me.txtSearchItem = New System.Windows.Forms.TextBox()
-        Me.pnlTextbox = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.cboKarat = New System.Windows.Forms.ComboBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.txtGram = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.txtDesc = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.cboCat = New System.Windows.Forms.ComboBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.cboType = New System.Windows.Forms.ComboBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-
         Me.pnlMultiline = New System.Windows.Forms.Panel()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.pnlRadio = New System.Windows.Forms.Panel()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-
-
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-
         Me.txtTmp = New System.Windows.Forms.TextBox()
-
-
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.btnSearchItem = New System.Windows.Forms.Button()
+        Me.txtSearchItem = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.cboType = New System.Windows.Forms.ComboBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.cboCat = New System.Windows.Forms.ComboBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.txtDesc = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.txtGram = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.cboKarat = New System.Windows.Forms.ComboBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.pnlTextbox.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.pnlMultiline.SuspendLayout()
         Me.pnlRadio.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -776,171 +764,6 @@ Partial Class dev_NewPawning
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Claim By"
         '
-        'GroupBox7
-        '
-        Me.GroupBox7.Controls.Add(Me.btnSearchItem)
-        Me.GroupBox7.Controls.Add(Me.txtSearchItem)
-        Me.GroupBox7.Location = New System.Drawing.Point(12, 256)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(328, 61)
-        Me.GroupBox7.TabIndex = 24
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Item Information"
-        '
-        'btnSearchItem
-        '
-        Me.btnSearchItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSearchItem.Location = New System.Drawing.Point(227, 20)
-        Me.btnSearchItem.Name = "btnSearchItem"
-        Me.btnSearchItem.Size = New System.Drawing.Size(88, 27)
-        Me.btnSearchItem.TabIndex = 3
-        Me.btnSearchItem.Text = "&Search"
-        Me.btnSearchItem.UseVisualStyleBackColor = True
-        '
-        'txtSearchItem
-        '
-        Me.txtSearchItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearchItem.Location = New System.Drawing.Point(6, 22)
-        Me.txtSearchItem.Name = "txtSearchItem"
-        Me.txtSearchItem.Size = New System.Drawing.Size(215, 22)
-        Me.txtSearchItem.TabIndex = 2
-        Me.txtSearchItem.Text = "Jacob Frye"
-        '
-        'pnlTextbox
-        '
-        Me.pnlTextbox.Controls.Add(Me.TextBox1)
-        Me.pnlTextbox.Location = New System.Drawing.Point(929, 22)
-        Me.pnlTextbox.Name = "pnlTextbox"
-        Me.pnlTextbox.Size = New System.Drawing.Size(309, 47)
-        Me.pnlTextbox.TabIndex = 25
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(11, 5)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(281, 20)
-        Me.TextBox1.TabIndex = 0
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.cboKarat)
-        Me.GroupBox3.Controls.Add(Me.Label19)
-        Me.GroupBox3.Controls.Add(Me.txtGram)
-        Me.GroupBox3.Controls.Add(Me.Label18)
-        Me.GroupBox3.Controls.Add(Me.txtDesc)
-        Me.GroupBox3.Controls.Add(Me.Label17)
-        Me.GroupBox3.Controls.Add(Me.cboCat)
-        Me.GroupBox3.Controls.Add(Me.Label16)
-        Me.GroupBox3.Controls.Add(Me.cboType)
-        Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(940, 418)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(204, 53)
-        Me.GroupBox3.TabIndex = 26
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Pawn Item Information"
-        '
-        'cboKarat
-        '
-        Me.cboKarat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboKarat.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboKarat.FormattingEnabled = True
-        Me.cboKarat.Items.AddRange(New Object() {"10", "12", "14", "16", "18", "20", "21", "22", "24"})
-        Me.cboKarat.Location = New System.Drawing.Point(156, 169)
-        Me.cboKarat.Name = "cboKarat"
-        Me.cboKarat.Size = New System.Drawing.Size(121, 24)
-        Me.cboKarat.TabIndex = 4
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(153, 150)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(39, 16)
-        Me.Label19.TabIndex = 9
-        Me.Label19.Text = "Karat"
-        '
-        'txtGram
-        '
-        Me.txtGram.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtGram.Location = New System.Drawing.Point(11, 169)
-        Me.txtGram.Name = "txtGram"
-        Me.txtGram.Size = New System.Drawing.Size(129, 22)
-        Me.txtGram.TabIndex = 3
-        Me.txtGram.Text = "Jacob Frye"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(8, 150)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(48, 16)
-        Me.Label18.TabIndex = 7
-        Me.Label18.Text = "Grams"
-        '
-        'txtDesc
-        '
-        Me.txtDesc.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDesc.Location = New System.Drawing.Point(9, 90)
-        Me.txtDesc.Multiline = True
-        Me.txtDesc.Name = "txtDesc"
-        Me.txtDesc.Size = New System.Drawing.Size(309, 57)
-        Me.txtDesc.TabIndex = 2
-        Me.txtDesc.Text = "Jacob Frye"
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(6, 71)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(76, 16)
-        Me.Label17.TabIndex = 5
-        Me.Label17.Text = "Description"
-        '
-        'cboCat
-        '
-        Me.cboCat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboCat.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboCat.FormattingEnabled = True
-        Me.cboCat.Location = New System.Drawing.Point(89, 47)
-        Me.cboCat.Name = "cboCat"
-        Me.cboCat.Size = New System.Drawing.Size(121, 24)
-        Me.cboCat.TabIndex = 1
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(6, 50)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(63, 16)
-        Me.Label16.TabIndex = 2
-        Me.Label16.Text = "Category"
-        '
-        'cboType
-        '
-        Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboType.FormattingEnabled = True
-        Me.cboType.Location = New System.Drawing.Point(89, 17)
-        Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(121, 24)
-        Me.cboType.TabIndex = 0
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(6, 20)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(68, 16)
-        Me.Label15.TabIndex = 0
-        Me.Label15.Text = "Item Type"
-        '
-
         'pnlMultiline
         '
         Me.pnlMultiline.Controls.Add(Me.TextBox2)
@@ -966,6 +789,17 @@ Partial Class dev_NewPawning
         Me.pnlRadio.Size = New System.Drawing.Size(309, 78)
         Me.pnlRadio.TabIndex = 28
         '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(181, 11)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(39, 17)
+        Me.RadioButton2.TabIndex = 1
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "No"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
@@ -977,28 +811,6 @@ Partial Class dev_NewPawning
         Me.RadioButton1.Text = "Yes"
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(181, 11)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(39, 17)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "No"
-        Me.RadioButton2.UseVisualStyleBackColor = True
-
-        'GroupBox7
-        '
-        Me.GroupBox7.Controls.Add(Me.Button1)
-        Me.GroupBox7.Controls.Add(Me.TextBox1)
-        Me.GroupBox7.Location = New System.Drawing.Point(12, 256)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(328, 205)
-        Me.GroupBox7.TabIndex = 24
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Item Information"
-        '
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1009,22 +821,6 @@ Partial Class dev_NewPawning
         Me.Button1.Text = "&Search"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(6, 22)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(215, 22)
-        Me.TextBox1.TabIndex = 2
-        Me.TextBox1.Text = "Search Item Name . . ."
-        '
-        'Panel1
-        '
-        Me.Panel1.Location = New System.Drawing.Point(929, 222)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(321, 239)
-        Me.Panel1.TabIndex = 25
-
         'txtTmp
         '
         Me.txtTmp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1032,28 +828,165 @@ Partial Class dev_NewPawning
         Me.txtTmp.Name = "txtTmp"
         Me.txtTmp.Size = New System.Drawing.Size(215, 22)
         Me.txtTmp.TabIndex = 4
-
-
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.btnSearchItem)
+        Me.GroupBox7.Controls.Add(Me.txtSearchItem)
+        Me.GroupBox7.Location = New System.Drawing.Point(12, 262)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(324, 72)
+        Me.GroupBox7.TabIndex = 29
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Item Information"
+        '
+        'btnSearchItem
+        '
+        Me.btnSearchItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSearchItem.Location = New System.Drawing.Point(230, 14)
+        Me.btnSearchItem.Name = "btnSearchItem"
+        Me.btnSearchItem.Size = New System.Drawing.Size(88, 27)
+        Me.btnSearchItem.TabIndex = 31
+        Me.btnSearchItem.Text = "&Search"
+        Me.btnSearchItem.UseVisualStyleBackColor = True
+        '
+        'txtSearchItem
+        '
+        Me.txtSearchItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearchItem.Location = New System.Drawing.Point(9, 16)
+        Me.txtSearchItem.Name = "txtSearchItem"
+        Me.txtSearchItem.Size = New System.Drawing.Size(215, 22)
+        Me.txtSearchItem.TabIndex = 30
+        Me.txtSearchItem.Text = "Jacob Frye"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(6, 20)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(68, 16)
+        Me.Label15.TabIndex = 0
+        Me.Label15.Text = "Item Type"
+        '
+        'cboType
+        '
+        Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboType.FormattingEnabled = True
+        Me.cboType.Location = New System.Drawing.Point(89, 17)
+        Me.cboType.Name = "cboType"
+        Me.cboType.Size = New System.Drawing.Size(121, 24)
+        Me.cboType.TabIndex = 0
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(6, 50)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(63, 16)
+        Me.Label16.TabIndex = 2
+        Me.Label16.Text = "Category"
+        '
+        'cboCat
+        '
+        Me.cboCat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCat.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboCat.FormattingEnabled = True
+        Me.cboCat.Location = New System.Drawing.Point(89, 47)
+        Me.cboCat.Name = "cboCat"
+        Me.cboCat.Size = New System.Drawing.Size(121, 24)
+        Me.cboCat.TabIndex = 1
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(6, 71)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(76, 16)
+        Me.Label17.TabIndex = 5
+        Me.Label17.Text = "Description"
+        '
+        'txtDesc
+        '
+        Me.txtDesc.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDesc.Location = New System.Drawing.Point(9, 90)
+        Me.txtDesc.Multiline = True
+        Me.txtDesc.Name = "txtDesc"
+        Me.txtDesc.Size = New System.Drawing.Size(309, 57)
+        Me.txtDesc.TabIndex = 2
+        Me.txtDesc.Text = "Jacob Frye"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(8, 150)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(48, 16)
+        Me.Label18.TabIndex = 7
+        Me.Label18.Text = "Grams"
+        '
+        'txtGram
+        '
+        Me.txtGram.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtGram.Location = New System.Drawing.Point(11, 169)
+        Me.txtGram.Name = "txtGram"
+        Me.txtGram.Size = New System.Drawing.Size(129, 22)
+        Me.txtGram.TabIndex = 3
+        Me.txtGram.Text = "Jacob Frye"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(153, 150)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(39, 16)
+        Me.Label19.TabIndex = 9
+        Me.Label19.Text = "Karat"
+        '
+        'cboKarat
+        '
+        Me.cboKarat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboKarat.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboKarat.FormattingEnabled = True
+        Me.cboKarat.Items.AddRange(New Object() {"10", "12", "14", "16", "18", "20", "21", "22", "24"})
+        Me.cboKarat.Location = New System.Drawing.Point(156, 169)
+        Me.cboKarat.Name = "cboKarat"
+        Me.cboKarat.Size = New System.Drawing.Size(121, 24)
+        Me.cboKarat.TabIndex = 4
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.cboKarat)
+        Me.GroupBox3.Controls.Add(Me.Label19)
+        Me.GroupBox3.Controls.Add(Me.txtGram)
+        Me.GroupBox3.Controls.Add(Me.Label18)
+        Me.GroupBox3.Controls.Add(Me.txtDesc)
+        Me.GroupBox3.Controls.Add(Me.Label17)
+        Me.GroupBox3.Controls.Add(Me.cboCat)
+        Me.GroupBox3.Controls.Add(Me.Label16)
+        Me.GroupBox3.Controls.Add(Me.cboType)
+        Me.GroupBox3.Controls.Add(Me.Label15)
+        Me.GroupBox3.Location = New System.Drawing.Point(940, 418)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(204, 53)
+        Me.GroupBox3.TabIndex = 26
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Pawn Item Information"
         '
         'dev_NewPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-
-        Me.ClientSize = New System.Drawing.Size(1268, 483)
+        Me.ClientSize = New System.Drawing.Size(1262, 484)
+        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.pnlRadio)
         Me.Controls.Add(Me.pnlMultiline)
-
-
-        Me.ClientSize = New System.Drawing.Size(1302, 484)
-        Me.Controls.Add(Me.Panel1)
-
-        Me.ClientSize = New System.Drawing.Size(1262, 484)
-
-
         Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.pnlTextbox)
-        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnRedeem)
@@ -1077,16 +1010,14 @@ Partial Class dev_NewPawning
         Me.GroupBox4.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
-        Me.pnlTextbox.ResumeLayout(False)
-        Me.pnlTextbox.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.pnlMultiline.ResumeLayout(False)
         Me.pnlMultiline.PerformLayout()
         Me.pnlRadio.ResumeLayout(False)
         Me.pnlRadio.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1154,22 +1085,6 @@ Partial Class dev_NewPawning
     Friend WithEvents btnSearchClaim As System.Windows.Forms.Button
     Friend WithEvents txtSearchClaim As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
-    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnSearchItem As System.Windows.Forms.Button
-    Friend WithEvents txtSearchItem As System.Windows.Forms.TextBox
-    Friend WithEvents pnlTextbox As System.Windows.Forms.Panel
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents cboKarat As System.Windows.Forms.ComboBox
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents txtGram As System.Windows.Forms.TextBox
-    Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents txtDesc As System.Windows.Forms.TextBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents cboCat As System.Windows.Forms.ComboBox
-    Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents cboType As System.Windows.Forms.ComboBox
-    Friend WithEvents Label15 As System.Windows.Forms.Label
 
     Friend WithEvents pnlMultiline As System.Windows.Forms.Panel
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
@@ -1181,9 +1096,22 @@ Partial Class dev_NewPawning
 
     Friend WithEvents Button1 As System.Windows.Forms.Button
 
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
 
     Friend WithEvents txtTmp As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnSearchItem As System.Windows.Forms.Button
+    Friend WithEvents txtSearchItem As System.Windows.Forms.TextBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents cboType As System.Windows.Forms.ComboBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents cboCat As System.Windows.Forms.ComboBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents txtDesc As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents txtGram As System.Windows.Forms.TextBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents cboKarat As System.Windows.Forms.ComboBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
 
 
 End Class
