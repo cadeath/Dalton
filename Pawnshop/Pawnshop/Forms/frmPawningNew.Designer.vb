@@ -118,7 +118,6 @@ Partial Class frmPawningNew
         Me.txtKarat = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblSPecification = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
         Me.txtSerial1 = New System.Windows.Forms.TextBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -897,7 +896,7 @@ Partial Class frmPawningNew
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.cboType)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(949, 398)
+        Me.GroupBox3.Location = New System.Drawing.Point(932, 44)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(324, 202)
         Me.GroupBox3.TabIndex = 17
@@ -1052,40 +1051,30 @@ Partial Class frmPawningNew
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.lblSPecification)
-        Me.Panel1.Controls.Add(Me.Label20)
         Me.Panel1.Controls.Add(Me.txtSerial1)
-        Me.Panel1.Location = New System.Drawing.Point(653, 524)
+        Me.Panel1.Location = New System.Drawing.Point(940, 365)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(290, 177)
+        Me.Panel1.Size = New System.Drawing.Size(237, 318)
         Me.Panel1.TabIndex = 33
         '
         'lblSPecification
         '
         Me.lblSPecification.AutoSize = True
         Me.lblSPecification.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSPecification.Location = New System.Drawing.Point(3, 5)
+        Me.lblSPecification.Location = New System.Drawing.Point(11, 5)
         Me.lblSPecification.Name = "lblSPecification"
-        Me.lblSPecification.Size = New System.Drawing.Size(85, 16)
-        Me.lblSPecification.TabIndex = 23
-        Me.lblSPecification.Text = "Specification"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(7, 26)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(43, 16)
-        Me.Label20.TabIndex = 22
-        Me.Label20.Text = "Serial"
+        Me.lblSPecification.Size = New System.Drawing.Size(77, 16)
+        Me.lblSPecification.TabIndex = 22
+        Me.lblSPecification.Text = "SpecName"
         '
         'txtSerial1
         '
         Me.txtSerial1.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSerial1.Location = New System.Drawing.Point(56, 23)
+        Me.txtSerial1.Location = New System.Drawing.Point(13, 24)
         Me.txtSerial1.Name = "txtSerial1"
-        Me.txtSerial1.Size = New System.Drawing.Size(227, 22)
+        Me.txtSerial1.Size = New System.Drawing.Size(210, 22)
         Me.txtSerial1.TabIndex = 21
         '
         'frmPawningNew
@@ -1113,6 +1102,7 @@ Partial Class frmPawningNew
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnPrint)
         Me.Name = "frmPawningNew"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pawning New"
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
@@ -1232,7 +1222,6 @@ Partial Class frmPawningNew
     Friend WithEvents lblKarat As System.Windows.Forms.Label
     Friend WithEvents txtKarat As System.Windows.Forms.TextBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents txtSerial1 As System.Windows.Forms.TextBox
     Friend WithEvents lblSPecification As System.Windows.Forms.Label
+    Friend WithEvents txtSerial1 As System.Windows.Forms.TextBox
 End Class

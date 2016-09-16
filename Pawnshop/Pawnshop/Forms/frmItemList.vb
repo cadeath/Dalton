@@ -7,12 +7,12 @@
     Friend GetItem As Item
 
 
-    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-        mOtherForm = True
-        btnSelect.Visible = True
-        txtSearch.Text = src
-        frmOrig = frmOrigin
-    End Sub
+    'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+    '    mOtherForm = True
+    '    btnSelect.Visible = True
+    '    txtSearch.Text = src
+    '    frmOrig = frmOrigin
+    'End Sub
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()

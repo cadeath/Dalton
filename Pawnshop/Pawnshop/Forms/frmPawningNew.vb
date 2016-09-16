@@ -1719,11 +1719,19 @@ Public Class frmPawningNew
                 Dim spType As String = .SubItems(2).Text
                 Dim SpecLayout As String = .SubItems(3).Text
 
-                If spType = "String" And SpecLayout = "Textbox" Then
+                If spType = "String" And SpecLayout = "Textbox" Or spType = "Double" And SpecLayout = "Textbox" Then
                     Panel1.Visible = True
                     lblSPecification.Text = .Text
-                ElseIf spType = "String" And SpecLayout = "Multiline" Then
-                    GroupBox8.Visible = True
+
+                ElseIf spType = "Integer" And SpecLayout = "Multiline" Then
+                    Panel1.Visible = True
+                    lblSPecification.Text = .Text
+
+                    txtSerial1.Multiline = True
+                    txtSerial1.Height = 100
+                    txtSerial1.Width = 210
+
+
                 End If
             End With
 
@@ -1750,5 +1758,9 @@ Public Class frmPawningNew
    
     Private Sub txtSerial1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSerial1.TextChanged
 
+    End Sub
+
+    Private Sub Panel1_LocationChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Panel1.LocationChanged
+        Panel1.Location = New Point(340, 250)
     End Sub
 End Class
