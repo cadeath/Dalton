@@ -560,10 +560,7 @@
     End Sub
 
     Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
         If lvItem.FocusedItem.SubItems(2).Text = "Textbox" Then
-            'pnlTextbox.Show()
-            'pnlTextbox.Location = New Point(604, 487)
             frm_PanelTextbox.ShowDialog()
 
         ElseIf lvItem.FocusedItem.SubItems(2).Text = "Yes/No" Then
@@ -573,20 +570,5 @@
             frm_PanelMultiline.ShowDialog()
 
         End If
-    End Sub
-
-    Private Sub pnlTextbox_LocationChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pnlTextbox.LocationChanged
-        Dim tmpLocation As Point = New Point(12, 323)
-        pnlTextbox.Location = tmpLocation
-    End Sub
-
-    Private Sub pnlMultiline_LocationChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pnlMultiline.LocationChanged
-        Dim tmpLocation As Point = New Point(12, 323)
-        pnlMultiline.Location = tmpLocation
-    End Sub
-
-    Private Sub pnlRadio_LocationChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pnlRadio.LocationChanged
-        Dim tmpLocation As Point = New Point(12, 323)
-        pnlRadio.Location = tmpLocation
     End Sub
 End Class
