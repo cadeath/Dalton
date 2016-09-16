@@ -199,7 +199,7 @@
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
-    <Compile Include="Classes\Item.vb" />
+    <Compile Include="Classes\ItemClass.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawningDalton.vb" />
@@ -1150,9 +1150,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="doc\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
