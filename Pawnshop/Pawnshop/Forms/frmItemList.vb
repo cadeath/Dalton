@@ -62,7 +62,6 @@
         lv.SubItems.Add(dl.PrintLayout)
     End Sub
 
-
     Private Sub ClearField()
         txtSearch.Text = ""
         lvItem.Items.Clear()
@@ -96,7 +95,6 @@
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Item")
         LoadActiveItem(mySql)
     End Sub
-
    
     Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -109,7 +107,6 @@
     End Sub
 
     Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
-
         If Not mOtherForm Then
             btnView.PerformClick()
         Else
@@ -121,6 +118,9 @@
     '    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
     '    GetItem = New Item
     '    GetItem.LoadItem(idx)
+
+    '    GetItem.LoadSpec(idx)
+
     '    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
     '    lblItemID.Text = idx
     'End Sub
@@ -157,7 +157,7 @@
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-      
+
         If lvItem.Items.Count = 0 Then Exit Sub
 
         If lvItem.SelectedItems.Count = 0 Then
@@ -167,9 +167,22 @@
         GetItem = New Item
         GetItem.LoadItem(idx)
         GetItem.LoadSpec(idx)
-        lblItemID.Text = (idx)
-        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
 
-        Me.Close()
+        lblItemID.Text = (idx)
+
+ 
+        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
+        ' lblItemID.Text = idx
+        ' frmAdminPanel.LoadItemall(GetItem)
+        'frmAdminPanel.LoadSpec()
+        Me.Hide()
+
+    End Sub
+
+    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+        mOtherForm = True
+        btnSelect.Visible = True
+        txtSearch.Text = src
+        frmOrig = frmOrigin
     End Sub
 End Class

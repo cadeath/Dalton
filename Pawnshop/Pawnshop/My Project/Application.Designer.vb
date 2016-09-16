@@ -32,7 +32,11 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
+
             Me.MainForm = Global.Pawnshop.frmPawningNew
+
+            Me.MainForm = Global.Pawnshop.dev_NewPawning
+
         End Sub
     End Class
 End Namespace
