@@ -6,6 +6,14 @@
 
     Friend GetItem As Item
 
+
+    'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+    '    mOtherForm = True
+    '    btnSelect.Visible = True
+    '    txtSearch.Text = src
+    '    frmOrig = frmOrigin
+    'End Sub
+
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         If Not mOtherForm Then ClearField()
@@ -110,7 +118,9 @@
     '    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
     '    GetItem = New Item
     '    GetItem.LoadItem(idx)
+
     '    GetItem.LoadSpec(idx)
+
     '    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
     '    lblItemID.Text = idx
     'End Sub
@@ -147,7 +157,7 @@
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        
+
         If lvItem.Items.Count = 0 Then Exit Sub
 
         If lvItem.SelectedItems.Count = 0 Then
@@ -157,6 +167,9 @@
         GetItem = New Item
         GetItem.LoadItem(idx)
         GetItem.LoadSpec(idx)
+
+        lblItemID.Text = (idx)
+
  
         formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
         ' lblItemID.Text = idx

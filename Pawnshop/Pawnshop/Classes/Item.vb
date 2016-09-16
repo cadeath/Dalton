@@ -211,7 +211,7 @@
     End Sub
 
     Public Sub LoadSpec(ByVal id As Integer)
-        mySql = "SELECT * FROM " & fillData1 & " WHERE itemid = " & id
+        mySql = "SELECT * FROM " & fillData1 & " WHERE ITEMID = " & id
         ds = LoadSQL(mySql)
 
         For Each dr As DataRow In ds.Tables(0).Rows
@@ -221,13 +221,15 @@
 
     Private Sub loadBySpec(ByVal dr As DataRow)
         With dr
-            _SpecID = .Item("SpecID")
+            _SpecID = .Item("SPECID")
+            _itemID = .Item("ITEMID")
             _ShortCode = .Item("Short_Code")
             SpecName = .Item("SpecName")
 
             _SpecType = .Item("SpecType")
             _Layout = .Item("SpecLayout")
             _UnitofMeasure = .Item("UoM")
+            _IsRequired = .Item("IsRequired")
         End With
     End Sub
 

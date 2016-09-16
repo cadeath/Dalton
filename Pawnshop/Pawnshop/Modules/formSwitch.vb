@@ -19,7 +19,9 @@
         dev_PawnClaimer = 11
         dev_Item = 12
 
+        frmPawningNew = 13
 
+        frmitemList = 14
     End Enum
     ''' <summary>
     ''' This method select what form you want to go.
@@ -52,7 +54,9 @@
                 dev_NewPawning.LoadClient(cl)
             Case FormName.dev_PawnClaimer
                 dev_NewPawning.LoadCliamer(cl)
- 
+
+            Case FormName.frmPawningNew
+                frmPawningNew.LoadClient(cl)
         End Select
     End Sub
     ''' <remarks></remarks>
@@ -70,6 +74,10 @@
                 frmAdminPanel.LoadItemall(it)
             Case FormName.dev_Item
                 dev_NewPawning.LoadItem(it)
+
+            Case FormName.frmPawningNew
+                frmPawningNew.LoadItem(it)
+
         End Select
 
     End Sub
