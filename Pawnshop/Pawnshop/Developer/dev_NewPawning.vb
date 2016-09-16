@@ -393,7 +393,7 @@
 
         Dim lv As ListViewItem = lvItem.Items.Add(tmpItem.SpecID)
         lv.SubItems.Add(tmpItem.SpecName)
-        'lv.SubItems.Add(tmpCIO.Category)
+        lv.SubItems.Add(tmpItem.Layout)
         'lv.SubItems.Add(tmpCIO.Transaction)
         'lv.SubItems.Add(tmpCIO.Amount)
         'lv.SubItems.Add(tmpCIO.Particulars)
@@ -557,5 +557,21 @@
         secured_str = DreadKnight(secured_str)
         frmItemList.SearchSelect(secured_str, FormName.dev_Item)
         frmItemList.Show()
+    End Sub
+
+    Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
+        If lvItem.FocusedItem.SubItems(2).Text = "Textbox" Then
+            'pnlTextbox.Show()
+            'pnlTextbox.Location = New Point(604, 487)
+            MsgBox("Yeah Textbox")
+
+        ElseIf lvItem.FocusedItem.SubItems(2).Text = "Yes/No" Then
+            MsgBox("Yeah Yes / No")
+
+        ElseIf lvItem.FocusedItem.SubItems(2).Text = "Multiline" Then
+            MsgBox("Yeah Multiline")
+
+        End If
+
     End Sub
 End Class
