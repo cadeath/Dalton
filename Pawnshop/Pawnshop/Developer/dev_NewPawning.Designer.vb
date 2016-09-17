@@ -22,6 +22,7 @@ Partial Class dev_NewPawning
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dev_NewPawning))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtContact = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -87,10 +88,14 @@ Partial Class dev_NewPawning
         Me.txtSearchClaim = New System.Windows.Forms.TextBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.pnlMultiline = New System.Windows.Forms.Panel()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.pnlRadio = New System.Windows.Forms.Panel()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.txtTmp = New System.Windows.Forms.TextBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
@@ -108,24 +113,27 @@ Partial Class dev_NewPawning
         Me.cboKarat = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.pnlTextbox = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.lvItem = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.pnlMultiline.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
         Me.pnlRadio.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.pnlTextbox.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -686,7 +694,7 @@ Partial Class dev_NewPawning
         'btnPrint
         '
         Me.btnPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint.Location = New System.Drawing.Point(652, 428)
+        Me.btnPrint.Location = New System.Drawing.Point(647, 430)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(88, 33)
         Me.btnPrint.TabIndex = 20
@@ -696,7 +704,7 @@ Partial Class dev_NewPawning
         'btnRedeem
         '
         Me.btnRedeem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRedeem.Location = New System.Drawing.Point(445, 428)
+        Me.btnRedeem.Location = New System.Drawing.Point(440, 430)
         Me.btnRedeem.Name = "btnRedeem"
         Me.btnRedeem.Size = New System.Drawing.Size(88, 33)
         Me.btnRedeem.TabIndex = 17
@@ -706,7 +714,7 @@ Partial Class dev_NewPawning
         'btnVoid
         '
         Me.btnVoid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVoid.Location = New System.Drawing.Point(556, 428)
+        Me.btnVoid.Location = New System.Drawing.Point(551, 430)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(88, 33)
         Me.btnVoid.TabIndex = 19
@@ -716,7 +724,7 @@ Partial Class dev_NewPawning
         'btnRenew
         '
         Me.btnRenew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRenew.Location = New System.Drawing.Point(351, 428)
+        Me.btnRenew.Location = New System.Drawing.Point(346, 430)
         Me.btnRenew.Name = "btnRenew"
         Me.btnRenew.Size = New System.Drawing.Size(88, 33)
         Me.btnRenew.TabIndex = 16
@@ -726,7 +734,7 @@ Partial Class dev_NewPawning
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(746, 428)
+        Me.btnSave.Location = New System.Drawing.Point(741, 430)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(88, 33)
         Me.btnSave.TabIndex = 15
@@ -737,7 +745,7 @@ Partial Class dev_NewPawning
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(840, 428)
+        Me.btnCancel.Location = New System.Drawing.Point(835, 430)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(88, 33)
         Me.btnCancel.TabIndex = 18
@@ -776,16 +784,33 @@ Partial Class dev_NewPawning
         '
         'pnlMultiline
         '
-        Me.pnlMultiline.Controls.Add(Me.TextBox4)
-        Me.pnlMultiline.Controls.Add(Me.TextBox2)
-        Me.pnlMultiline.Location = New System.Drawing.Point(929, 80)
+        Me.pnlMultiline.Controls.Add(Me.GroupBox9)
+        Me.pnlMultiline.Location = New System.Drawing.Point(929, 115)
         Me.pnlMultiline.Name = "pnlMultiline"
-        Me.pnlMultiline.Size = New System.Drawing.Size(309, 152)
+        Me.pnlMultiline.Size = New System.Drawing.Size(318, 166)
         Me.pnlMultiline.TabIndex = 27
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.Controls.Add(Me.TextBox4)
+        Me.GroupBox9.Controls.Add(Me.TextBox2)
+        Me.GroupBox9.Location = New System.Drawing.Point(9, 2)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(299, 150)
+        Me.GroupBox9.TabIndex = 32
+        Me.GroupBox9.TabStop = False
+        Me.GroupBox9.Text = "GroupBox9"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(63, 118)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(170, 20)
+        Me.TextBox4.TabIndex = 3
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(11, 5)
+        Me.TextBox2.Location = New System.Drawing.Point(6, 18)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(281, 94)
@@ -793,35 +818,52 @@ Partial Class dev_NewPawning
         '
         'pnlRadio
         '
-        Me.pnlRadio.Controls.Add(Me.TextBox3)
-        Me.pnlRadio.Controls.Add(Me.RadioButton2)
-        Me.pnlRadio.Controls.Add(Me.RadioButton1)
-        Me.pnlRadio.Location = New System.Drawing.Point(929, 255)
+        Me.pnlRadio.Controls.Add(Me.GroupBox8)
+        Me.pnlRadio.Location = New System.Drawing.Point(930, 293)
         Me.pnlRadio.Name = "pnlRadio"
-        Me.pnlRadio.Size = New System.Drawing.Size(309, 78)
+        Me.pnlRadio.Size = New System.Drawing.Size(309, 85)
         Me.pnlRadio.TabIndex = 28
         '
-        'RadioButton2
+        'GroupBox8
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(181, 11)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(39, 17)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.Text = "No"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.GroupBox8.Controls.Add(Me.TextBox3)
+        Me.GroupBox8.Controls.Add(Me.RadioButton1)
+        Me.GroupBox8.Controls.Add(Me.RadioButton2)
+        Me.GroupBox8.Location = New System.Drawing.Point(9, 3)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(289, 73)
+        Me.GroupBox8.TabIndex = 22
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "GroupBox8"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(18, 42)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(170, 20)
+        Me.TextBox3.TabIndex = 2
         '
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
         Me.RadioButton1.Checked = True
-        Me.RadioButton1.Location = New System.Drawing.Point(51, 10)
+        Me.RadioButton1.Location = New System.Drawing.Point(19, 19)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(43, 17)
         Me.RadioButton1.TabIndex = 0
         Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "Yes"
         Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(149, 20)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(39, 17)
+        Me.RadioButton2.TabIndex = 1
+        Me.RadioButton2.Text = "No"
+        Me.RadioButton2.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -983,7 +1025,7 @@ Partial Class dev_NewPawning
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.cboType)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(940, 418)
+        Me.GroupBox3.Location = New System.Drawing.Point(930, 410)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(310, 53)
         Me.GroupBox3.TabIndex = 26
@@ -992,45 +1034,15 @@ Partial Class dev_NewPawning
         '
         'pnlTextbox
         '
-        Me.pnlTextbox.Controls.Add(Me.TextBox5)
-        Me.pnlTextbox.Controls.Add(Me.TextBox1)
         Me.pnlTextbox.Location = New System.Drawing.Point(929, 1)
         Me.pnlTextbox.Name = "pnlTextbox"
-        Me.pnlTextbox.Size = New System.Drawing.Size(309, 78)
+        Me.pnlTextbox.Size = New System.Drawing.Size(329, 103)
         Me.pnlTextbox.TabIndex = 30
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(11, 11)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(281, 22)
-        Me.TextBox1.TabIndex = 23
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(51, 45)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(170, 20)
-        Me.TextBox3.TabIndex = 2
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(51, 120)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(170, 20)
-        Me.TextBox4.TabIndex = 3
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(51, 48)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(170, 20)
-        Me.TextBox5.TabIndex = 24
         '
         'lvItem
         '
-        Me.lvItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
+        Me.lvItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
+        Me.lvItem.FullRowSelect = True
         Me.lvItem.GridLines = True
         Me.lvItem.Location = New System.Drawing.Point(12, 323)
         Me.lvItem.Name = "lvItem"
@@ -1042,7 +1054,7 @@ Partial Class dev_NewPawning
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "ID"
-        Me.ColumnHeader1.Width = 25
+        Me.ColumnHeader1.Width = 0
         '
         'ColumnHeader2
         '
@@ -1051,14 +1063,56 @@ Partial Class dev_NewPawning
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "Value"
-        Me.ColumnHeader3.Width = 200
+        Me.ColumnHeader3.Text = "Layout"
+        Me.ColumnHeader3.Width = 0
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Value"
+        Me.ColumnHeader4.Width = 200
+        '
+        'GroupBox10
+        '
+        Me.GroupBox10.Controls.Add(Me.Button2)
+        Me.GroupBox10.Controls.Add(Me.TextBox5)
+        Me.GroupBox10.Controls.Add(Me.TextBox1)
+        Me.GroupBox10.Location = New System.Drawing.Point(937, 1)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(311, 89)
+        Me.GroupBox10.TabIndex = 32
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = "Input Fields"
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(230, 19)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 28
+        Me.Button2.Text = "Submit"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(14, 56)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(210, 20)
+        Me.TextBox5.TabIndex = 27
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(14, 19)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(210, 22)
+        Me.TextBox1.TabIndex = 26
         '
         'dev_NewPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1262, 470)
+        Me.ClientSize = New System.Drawing.Size(1261, 480)
+        Me.Controls.Add(Me.GroupBox10)
         Me.Controls.Add(Me.lvItem)
         Me.Controls.Add(Me.pnlTextbox)
         Me.Controls.Add(Me.GroupBox7)
@@ -1077,7 +1131,7 @@ Partial Class dev_NewPawning
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "dev_NewPawning"
-        Me.Text = "dev_NewPawning"
+        Me.Text = resources.GetString("$this.Text")
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -1089,15 +1143,17 @@ Partial Class dev_NewPawning
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.pnlMultiline.ResumeLayout(False)
-        Me.pnlMultiline.PerformLayout()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
         Me.pnlRadio.ResumeLayout(False)
-        Me.pnlRadio.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.pnlTextbox.ResumeLayout(False)
-        Me.pnlTextbox.PerformLayout()
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1193,14 +1249,19 @@ Partial Class dev_NewPawning
     Friend WithEvents cboKarat As System.Windows.Forms.ComboBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents pnlTextbox As System.Windows.Forms.Panel
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
     Friend WithEvents lvItem As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
 
 
 End Class

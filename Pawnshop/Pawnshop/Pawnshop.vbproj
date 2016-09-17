@@ -193,13 +193,15 @@
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Classes\CollectionSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\DollarEntry.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
-    <Compile Include="Classes\Item.vb" />
+    <Compile Include="Classes\ItemClass.vb" />
+    <Compile Include="Classes\ItemSpecs.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawningDalton.vb" />
@@ -207,7 +209,6 @@
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Classes\rptActionReq.vb" />
-    <Compile Include="Developer\devClassPawning.vb" />
     <Compile Include="Developer\devClient.Designer.vb">
       <DependentUpon>devClient.vb</DependentUpon>
     </Compile>
@@ -244,6 +245,18 @@
     <Compile Include="Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\frm_PanelMultiline.Designer.vb">
+      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\frm_PanelMultiline.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\frm_PanelTextbox.Designer.vb">
+      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\frm_PanelTextbox.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_Pawning.Designer.vb">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </Compile>
@@ -266,6 +279,12 @@
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_runCmd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\frm_PanelYesNo.Designer.vb">
+      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\frm_PanelYesNo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ab.Designer.vb">
@@ -685,6 +704,12 @@
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Developer\frm_PanelMultiline.resx">
+      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\frm_PanelTextbox.resx">
+      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </EmbeddedResource>
@@ -696,6 +721,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\frm_PanelYesNo.resx">
+      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
@@ -1124,9 +1152,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="doc\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
