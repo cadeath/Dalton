@@ -193,6 +193,7 @@
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Classes\CollectionSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\DollarEntry.vb" />
@@ -200,6 +201,7 @@
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
     <Compile Include="Classes\ItemClass.vb" />
+    <Compile Include="Classes\ItemSpecs.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
     <Compile Include="Classes\PawningDalton.vb" />
