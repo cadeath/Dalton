@@ -61,6 +61,8 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.txtInterestRate = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -73,6 +75,8 @@ Partial Class frmAdminPanel
         'grpAddItem
         '
         Me.grpAddItem.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpAddItem.Controls.Add(Me.txtInterestRate)
+        Me.grpAddItem.Controls.Add(Me.Label1)
         Me.grpAddItem.Controls.Add(Me.txtPrintLayout)
         Me.grpAddItem.Controls.Add(Me.lblPrintLayout)
         Me.grpAddItem.Controls.Add(Me.rdbNo)
@@ -88,14 +92,14 @@ Partial Class frmAdminPanel
         Me.grpAddItem.ForeColor = System.Drawing.SystemColors.MenuText
         Me.grpAddItem.Location = New System.Drawing.Point(6, 72)
         Me.grpAddItem.Name = "grpAddItem"
-        Me.grpAddItem.Size = New System.Drawing.Size(362, 316)
+        Me.grpAddItem.Size = New System.Drawing.Size(362, 342)
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
         '
         'txtPrintLayout
         '
-        Me.txtPrintLayout.Location = New System.Drawing.Point(105, 236)
+        Me.txtPrintLayout.Location = New System.Drawing.Point(105, 225)
         Me.txtPrintLayout.Multiline = True
         Me.txtPrintLayout.Name = "txtPrintLayout"
         Me.txtPrintLayout.Size = New System.Drawing.Size(250, 68)
@@ -105,7 +109,7 @@ Partial Class frmAdminPanel
         'lblPrintLayout
         '
         Me.lblPrintLayout.AutoSize = True
-        Me.lblPrintLayout.Location = New System.Drawing.Point(23, 232)
+        Me.lblPrintLayout.Location = New System.Drawing.Point(23, 221)
         Me.lblPrintLayout.Name = "lblPrintLayout"
         Me.lblPrintLayout.Size = New System.Drawing.Size(77, 16)
         Me.lblPrintLayout.TabIndex = 8
@@ -114,7 +118,7 @@ Partial Class frmAdminPanel
         'rdbNo
         '
         Me.rdbNo.AutoSize = True
-        Me.rdbNo.Location = New System.Drawing.Point(159, 195)
+        Me.rdbNo.Location = New System.Drawing.Point(159, 184)
         Me.rdbNo.Name = "rdbNo"
         Me.rdbNo.Size = New System.Drawing.Size(44, 20)
         Me.rdbNo.TabIndex = 4
@@ -125,7 +129,7 @@ Partial Class frmAdminPanel
         '
         Me.rdbYes.AutoSize = True
         Me.rdbYes.Checked = True
-        Me.rdbYes.Location = New System.Drawing.Point(105, 195)
+        Me.rdbYes.Location = New System.Drawing.Point(105, 184)
         Me.rdbYes.Name = "rdbYes"
         Me.rdbYes.Size = New System.Drawing.Size(50, 20)
         Me.rdbYes.TabIndex = 3
@@ -136,7 +140,7 @@ Partial Class frmAdminPanel
         'lblRenewable
         '
         Me.lblRenewable.AutoSize = True
-        Me.lblRenewable.Location = New System.Drawing.Point(12, 196)
+        Me.lblRenewable.Location = New System.Drawing.Point(12, 185)
         Me.lblRenewable.Name = "lblRenewable"
         Me.lblRenewable.Size = New System.Drawing.Size(87, 16)
         Me.lblRenewable.TabIndex = 6
@@ -144,7 +148,7 @@ Partial Class frmAdminPanel
         '
         'txtDescription
         '
-        Me.txtDescription.Location = New System.Drawing.Point(105, 114)
+        Me.txtDescription.Location = New System.Drawing.Point(105, 103)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(250, 71)
@@ -154,7 +158,7 @@ Partial Class frmAdminPanel
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
-        Me.lblDescription.Location = New System.Drawing.Point(23, 114)
+        Me.lblDescription.Location = New System.Drawing.Point(23, 103)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(76, 16)
         Me.lblDescription.TabIndex = 4
@@ -162,7 +166,7 @@ Partial Class frmAdminPanel
         '
         'txtCategory
         '
-        Me.txtCategory.Location = New System.Drawing.Point(105, 71)
+        Me.txtCategory.Location = New System.Drawing.Point(105, 60)
         Me.txtCategory.Name = "txtCategory"
         Me.txtCategory.Size = New System.Drawing.Size(250, 22)
         Me.txtCategory.TabIndex = 1
@@ -171,7 +175,7 @@ Partial Class frmAdminPanel
         'lblCategory
         '
         Me.lblCategory.AutoSize = True
-        Me.lblCategory.Location = New System.Drawing.Point(36, 77)
+        Me.lblCategory.Location = New System.Drawing.Point(36, 66)
         Me.lblCategory.Name = "lblCategory"
         Me.lblCategory.Size = New System.Drawing.Size(63, 16)
         Me.lblCategory.TabIndex = 2
@@ -179,7 +183,7 @@ Partial Class frmAdminPanel
         '
         'txtClassifiction
         '
-        Me.txtClassifiction.Location = New System.Drawing.Point(105, 30)
+        Me.txtClassifiction.Location = New System.Drawing.Point(105, 19)
         Me.txtClassifiction.Name = "txtClassifiction"
         Me.txtClassifiction.Size = New System.Drawing.Size(250, 22)
         Me.txtClassifiction.TabIndex = 0
@@ -188,7 +192,7 @@ Partial Class frmAdminPanel
         'lblClassification
         '
         Me.lblClassification.AutoSize = True
-        Me.lblClassification.Location = New System.Drawing.Point(13, 34)
+        Me.lblClassification.Location = New System.Drawing.Point(13, 23)
         Me.lblClassification.Name = "lblClassification"
         Me.lblClassification.Size = New System.Drawing.Size(87, 16)
         Me.lblClassification.TabIndex = 0
@@ -448,6 +452,23 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
+        'txtInterestRate
+        '
+        Me.txtInterestRate.Location = New System.Drawing.Point(105, 301)
+        Me.txtInterestRate.Name = "txtInterestRate"
+        Me.txtInterestRate.Size = New System.Drawing.Size(250, 22)
+        Me.txtInterestRate.TabIndex = 9
+        Me.txtInterestRate.Text = "Interest Rate"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(23, 305)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(83, 16)
+        Me.Label1.TabIndex = 10
+        Me.Label1.Text = "Interest Rate"
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -510,4 +531,6 @@ Partial Class frmAdminPanel
     Friend WithEvents SFD As System.Windows.Forms.SaveFileDialog
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents txtInterestRate As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class

@@ -67,6 +67,7 @@ Public Class frmAdminPanel
         cmbModuleName.Text = ""
         dgSpecification.Rows.Clear()
         btnUpdate.Enabled = False
+        txtInterestRate.Text = ""
     End Sub
 
     Private Sub rdbYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbYes.CheckedChanged
