@@ -379,6 +379,7 @@
         Dim mySql As String = "SELECT * FROM tbl_SPecification WHERE ItemID = '" & tmpItemID & "'"
         Dim ds As DataSet = LoadSQL(mySql)
 
+        lvItem.Items.Clear()
         For Each cio As DataRow In ds.Tables(0).Rows
             AddItem(cio)
         Next
@@ -559,7 +560,19 @@
         frmItemList.Show()
     End Sub
 
+    Private Sub lvItem_ColumnWidthChanging(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ColumnWidthChangingEventArgs) Handles lvItem.ColumnWidthChanging
+        If Me.lvItem.Columns(e.ColumnIndex).Width = 0 Then
+            e.Cancel = True
+            e.NewWidth = Me.lvItem.Columns(e.ColumnIndex).Width
+        End If
+    End Sub
+
+
     Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
+        InputSpec()
+    End Sub
+    Private Sub InputSpec()
+        If lvItem.SelectedItems.Count = 0 Then Exit Sub
         If lvItem.FocusedItem.SubItems(2).Text = "Textbox" Then
             frm_PanelTextbox.ShowDialog()
 
@@ -569,6 +582,12 @@
         ElseIf lvItem.FocusedItem.SubItems(2).Text = "Multiline" Then
             frm_PanelMultiline.ShowDialog()
 
+        End If
+    End Sub
+
+    Private Sub lvItem_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvItem.KeyPress
+        If isEnter(e) Then
+            InputSpec()
         End If
     End Sub
 End Class
