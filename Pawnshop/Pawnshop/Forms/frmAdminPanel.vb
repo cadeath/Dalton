@@ -127,7 +127,7 @@ Public Class frmAdminPanel
                     Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
                     Exit For
                 Else
-                    .SaveSpecs(.LASTITEMID)
+                    ' .SaveSpecs(.LASTITEMID)
                 End If
             End With
 

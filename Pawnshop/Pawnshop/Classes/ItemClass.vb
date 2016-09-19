@@ -103,10 +103,20 @@
         End Set
     End Property
 
+    Private _itemSpecs As CollectionItemSpecs
+    Public Property ItemSpecifications() As CollectionItemSpecs
+        Get
+            Return _itemSpecs
+        End Get
+        Set(ByVal value As CollectionItemSpecs)
+            _itemSpecs = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Functions and Procedures"
-    Public Sub LoadItem(id As Integer)
+    Public Sub LoadItem(ByVal id As Integer)
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", _itemID)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
@@ -147,7 +157,19 @@
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
+
+        mySql = "SELECT * FROM tblItem ORDER BY ItemID DESC ROWS 1"
+        ds = LoadSQL(mySql, MainTable)
+        _itemID = ds.Tables(MainTable).Rows(0).Item("ItemID")
+
+        For Each ItemSpec As ItemSpecs In ItemSpecifications
+            ItemSpec.ItemID = _itemID
+            ItemSpec.SaveSpecs()
+        Next
     End Sub
+
+
+
 #End Region
 
 End Class
