@@ -105,6 +105,9 @@
         BRACELET.ItemSpecifications = BRACELETSPECS
 
         BRACELET.SaveItem()
+
+
+        ItemClass_Seed.Populate()
     End Sub
 
     Private Sub btnLoadClass_Click(sender As System.Object, e As System.EventArgs) Handles btnLoadClass.Click
@@ -138,4 +141,7 @@
         Next
     End Sub
 
+    Private Sub dev_NewItem_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
