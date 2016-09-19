@@ -6,7 +6,8 @@ Public Class frmAdminPanel
     Dim rbYes As Integer
     Dim rbNo As Integer
 
-    Private ItemSave As ItemClass
+
+
     'Private ItemModify As Item
 
     'Private SpecModify As Item
@@ -94,23 +95,23 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        ItemSave = New ItemClass
-        With ItemSave
-            .ItemClass = txtClassifiction.Text
-            .Category = txtCategory.Text
-            .Description = txtDescription.Text
-            .InterestRate = txtInterestRate.Text
+        Dim ItemSave As New ItemClass
+        Dim ColItemsSpecs As New CollectionItemSpecs
 
-            If rdbYes.Checked = True Then
-                .isRenewable = rbYes
-            Else
-                .isRenewable = rbNo
-            End If
+        ItemSave.ItemClass = txtClassifiction.Text
+        ItemSave.Category = txtCategory.Text
+        ItemSave.Description = txtDescription.Text
+        ItemSave.InterestRate = txtInterestRate.Text
 
-            .PrintLayout = txtPrintLayout.Text
-            .created_at = CurrentDate
-            .SaveItem()
-        End With
+        If rdbYes.Checked = True Then
+            ItemSave.isRenewable = rbYes
+        Else
+            ItemSave.isRenewable = rbNo
+        End If
+
+        ItemSave.PrintLayout = txtPrintLayout.Text
+        ItemSave.created_at = CurrentDate
+
 
         For Each row As DataGridViewRow In dgSpecification.Rows
             SpecSave = New ItemSpecs
@@ -126,12 +127,14 @@ Public Class frmAdminPanel
                 If .SpecName Is Nothing Or .SpecType Is Nothing _
                     Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
                     Exit For
-                Else
-                    ' .SaveSpecs(.LASTITEMID)
                 End If
             End With
 
+            ColItemsSpecs.Add(SpecSave)
         Next
+        ItemSave.ItemSpecifications = ColItemsSpecs
+        ItemSave.SaveItem()
+
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()
 
