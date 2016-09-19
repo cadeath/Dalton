@@ -35,7 +35,7 @@
         Laptop.SaveItem()
 
 
-        ' LAPTOP
+        ' CELLPHONE
         Dim Cellphone As New ItemClass
         Dim CellSpecs As New CollectionItemSpecs
 
@@ -69,5 +69,73 @@
         Cellphone.ItemSpecifications = CellSpecs
 
         Cellphone.SaveItem()
+
+
+        ' JEWELRY
+        Dim BRACELET As New ItemClass
+        Dim BRACELETSPECS As New CollectionItemSpecs
+
+        With BRACELET
+            .ItemClass = "Bracelet"
+            .Category = "Jewelry"
+            '.Description = "Cellular Devices"
+            .isRenewable = True
+            .PrintLayout = "1 [ClassName] [G] [K:ENCRYPTED]"
+            .InterestRate = 0.03
+        End With
+
+        shortCodes = {"G", "K", "desc"}
+        specsName = {"Grams", "Karat", "Description"}
+        specsType = {"String", "String", "String"}
+        specsLayout = {"TextBox", "Karat", "MultiLine"}
+        isReq = {True, True, False}
+
+        For i As Integer = 0 To isReq.Length - 1
+            Dim itemSpec As New ItemSpecs
+            With itemSpec
+                .ShortCode = shortCodes(i)
+                .SpecName = specsName(i)
+                .SpecLayout = specsLayout(i)
+                .SpecType = specsType(i)
+                .isRequired = isReq(i)
+            End With
+
+            BRACELETSPECS.Add(itemSpec)
+        Next
+        BRACELET.ItemSpecifications = BRACELETSPECS
+
+        BRACELET.SaveItem()
     End Sub
+
+    Private Sub btnLoadClass_Click(sender As System.Object, e As System.EventArgs) Handles btnLoadClass.Click
+        Dim mySql As String = "SELECT * FROM tblItem"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        lsClass.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+
+            lsClass.Items.Add(dr("ItemID"))
+
+        Next
+    End Sub
+
+    Private Sub lsClass_DoubleClick(sender As Object, e As System.EventArgs) Handles lsClass.DoubleClick
+        Dim idx As Integer = lsClass.SelectedIndex
+        Dim itemID As Integer = lsClass.Items(idx).ToString
+
+
+        Dim selectedItem As New ItemClass
+        selectedItem.LoadItem(itemID)
+
+        lblID.Text = selectedItem.ID
+        lblCLass.Text = selectedItem.ItemClass
+
+        lsSpecs.Items.Clear()
+        For Each spec As ItemSpecs In selectedItem.ItemSpecifications
+
+            lsSpecs.Items.Add(spec.SpecName)
+
+        Next
+    End Sub
+
 End Class

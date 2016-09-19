@@ -117,11 +117,11 @@
 #Region "Functions and Procedures"
     Public Sub LoadItemSpecs_row(dr As DataRow)
         With dr
-            _specID = .Item("SpecID")
+            _specID = .Item("SpecsID")
             _itemID = .Item("ItemID")
             _specName = .Item("SpecsName")
             _specType = .Item("SpecType")
-            _UoM = .Item("UOM")
+            If Not IsDBNull(.Item("UoM")) Then _UoM = .Item("UOM")
             _onHold = If(.Item("OnHold") = 1, True, False)
             _specLayout = .Item("SpecLayout")
             _shortCode = .Item("ShortCode")

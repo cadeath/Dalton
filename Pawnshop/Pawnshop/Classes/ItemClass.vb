@@ -112,15 +112,14 @@
             _itemSpecs = value
         End Set
     End Property
-
 #End Region
 
 #Region "Functions and Procedures"
-    Public Sub LoadItem(ByVal id As Integer)
-        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", _itemID)
+    Public Sub LoadItem(id As Integer)
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", id)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count <> 0 Then
+        If ds.Tables(0).Rows.Count <> 1 Then
             MsgBox("Failed to load Item", MsgBoxStyle.Critical)
             Exit Sub
         End If
@@ -129,7 +128,7 @@
             _itemID = .Item("ItemID")
             _itemClass = .Item("ItemClass")
             _category = .Item("ItemCategory")
-            _desc = .Item("Description")
+            If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _intRate = .Item("Int_Rate")
             _onHold = If(.Item("onHold") = 1, True, False)
@@ -137,6 +136,19 @@
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
         End With
+
+        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        ds.Clear()
+        ds = LoadSQL(mySql, SubTable)
+
+        _itemSpecs = New CollectionItemSpecs
+        For Each dr As DataRow In ds.Tables(SubTable).Rows
+            Console.WriteLine(dr.Item("SpecsName"))
+            Dim tmpSpecs As New ItemSpecs
+            tmpSpecs.LoadItemSpecs_row(dr)
+
+            _itemSpecs.Add(tmpSpecs)
+        Next
     End Sub
 
     Public Sub SaveItem()
