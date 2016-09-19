@@ -43,6 +43,16 @@
         End Set
     End Property
 
+    Private _intRate As Double
+    Public Property InterestRate() As Double
+        Get
+            Return _intRate
+        End Get
+        Set(ByVal value As Double)
+            _intRate = value
+        End Set
+    End Property
+
     Private _isRenew As Boolean
     Public Property isRenewable() As Boolean
         Get

@@ -50,13 +50,13 @@
             Case FormName.frmAdminPanel
 
 
-            Case FormName.dev_NewPawning
-                dev_NewPawning.LoadClient(cl)
-            Case FormName.dev_PawnClaimer
-                dev_NewPawning.LoadCliamer(cl)
+                'Case FormName.dev_NewPawning
+                '    dev_NewPawning.LoadClient(cl)
+                'Case FormName.dev_PawnClaimer
+                '    dev_NewPawning.LoadCliamer(cl)
 
-            Case FormName.frmPawningNew
-                frmPawningNew.LoadClient(cl)
+                'Case FormName.frmPawningNew
+                '    frmPawningNew.LoadClient(cl)
         End Select
     End Sub
     ''' <remarks></remarks>
@@ -67,18 +67,18 @@
         End Select
     End Sub
 
-    Friend Sub ReloadFormFromSearch2(ByVal gotoForm As FormName, ByVal it As Item)
+    'Friend Sub ReloadFormFromSearch2(ByVal gotoForm As FormName, ByVal it As Item)
 
-        Select Case gotoForm
-            Case FormName.frmAdminPanel
-                frmAdminPanel.LoadItemall(it)
-            Case FormName.dev_Item
-                dev_NewPawning.LoadItem(it)
+    '    Select Case gotoForm
+    '        Case FormName.frmAdminPanel
+    '            frmAdminPanel.LoadItemall(it)
+    '        Case FormName.dev_Item
+    '            dev_NewPawning.LoadItem(it)
 
-            Case FormName.frmPawningNew
-                frmPawningNew.LoadItem(it)
+    '        Case FormName.frmPawningNew
+    '            frmPawningNew.LoadItem(it)
 
-        End Select
+    '    End Select
 
-    End Sub
+    'End Sub
 End Module

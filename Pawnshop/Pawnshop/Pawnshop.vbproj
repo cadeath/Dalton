@@ -233,28 +233,10 @@
     <Compile Include="Developer\dev_ExtractToExcel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_NewPawning.Designer.vb">
-      <DependentUpon>dev_NewPawning.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\dev_NewPawning.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Developer\dev_ORview.Designer.vb">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_ORview.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Developer\frm_PanelMultiline.Designer.vb">
-      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\frm_PanelMultiline.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Developer\frm_PanelTextbox.Designer.vb">
-      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\frm_PanelTextbox.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_Pawning.Designer.vb">
@@ -279,12 +261,6 @@
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_runCmd.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Developer\frm_PanelYesNo.Designer.vb">
-      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\frm_PanelYesNo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ab.Designer.vb">
@@ -698,17 +674,8 @@
     <EmbeddedResource Include="Developer\dev_ExtractToExcel.resx">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_NewPawning.resx">
-      <DependentUpon>dev_NewPawning.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Developer\frm_PanelMultiline.resx">
-      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Developer\frm_PanelTextbox.resx">
-      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
@@ -721,9 +688,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Developer\frm_PanelYesNo.resx">
-      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
