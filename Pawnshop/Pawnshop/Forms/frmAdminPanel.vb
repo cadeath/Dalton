@@ -116,7 +116,7 @@ Public Class frmAdminPanel
 
         ItemSave.PrintLayout = txtPrintLayout.Text
         ItemSave.created_at = CurrentDate
-
+        ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
         For Each row As DataGridViewRow In dgSpecification.Rows
             SpecSave = New ItemSpecs
@@ -137,6 +137,7 @@ Public Class frmAdminPanel
 
             ColItemsSpecs.Add(SpecSave)
         Next
+
         ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.SaveItem()
 
