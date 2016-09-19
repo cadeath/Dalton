@@ -128,7 +128,7 @@
             _itemID = .Item("ItemID")
             _itemClass = .Item("ItemClass")
             _category = .Item("ItemCategory")
-            _desc = .Item("Description")
+            If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _intRate = .Item("Int_Rate")
             _onHold = If(.Item("onHold") = 1, True, False)
@@ -141,13 +141,13 @@
         ds.Clear()
         ds = LoadSQL(mySql, SubTable)
 
+        _itemSpecs = New CollectionItemSpecs
         For Each dr As DataRow In ds.Tables(SubTable).Rows
+            Console.WriteLine(dr.Item("SpecsName"))
+            Dim tmpSpecs As New ItemSpecs
+            tmpSpecs.LoadItemSpecs_row(dr)
 
-            Dim itemSpec As New ItemSpecs
-            itemSpec.LoadItemSpecs_row(dr)
-
-            _itemSpecs.Add(itemSpec)
-
+            _itemSpecs.Add(tmpSpecs)
         Next
     End Sub
 
