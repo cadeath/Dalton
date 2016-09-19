@@ -6,7 +6,7 @@ Public Class frmAdminPanel
     Dim rbYes As Integer
     Dim rbNo As Integer
 
-    'Private ItemSave As Item
+    Private ItemSave As ItemClass
     'Private ItemModify As Item
 
     'Private SpecModify As Item
@@ -83,60 +83,61 @@ Public Class frmAdminPanel
         Return True
     End Function
 
-    'Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-    '    If Not isValid() Then Exit Sub
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not isValid() Then Exit Sub
 
-    '    Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-    '    If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-    '    ItemSave = New Item
-    '    With ItemSave
-    '        .Classification = txtClassifiction.Text
-    '        .Category = txtCategory.Text
-    '        .Description = txtDescription.Text
-    '        .DateCreated = CurrentDate
-    '        If rdbYes.Checked = True Then
-    '            .Renewable = rbYes
-    '        Else
-    '            .Renewable = rbNo
-    '        End If
+        ItemSave = New ItemClass
+        With ItemSave
+            .ItemClass = txtClassifiction.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
+            .InterestRate = txtInterestRate.Text
 
-    '        .PrintLayout = txtPrintLayout.Text
+            If rdbYes.Checked = True Then
+                .isRenewable = rbYes
+            Else
+                .isRenewable = rbNo
+            End If
 
-    '        .SaveItem()
-    '    End With
+            .PrintLayout = txtPrintLayout.Text
+            .created_at = CurrentDate
+            .SaveItem()
+        End With
 
 
 
-    '    For Each row As DataGridViewRow In dgSpecification.Rows
-    '        SpecSave = New Item
-    '        With SpecSave
+        'For Each row As DataGridViewRow In dgSpecification.Rows
+        '    SpecSave = New Item
+        '    With SpecSave
 
-    '            .ShortCode = row.Cells(0).Value
-    '            .SpecName = row.Cells(1).Value
-    '            .SpecType = row.Cells(2).Value
-    '            .Layout = row.Cells(3).Value
-    '            .UnitofMeasure = row.Cells(4).Value
-    '            .IsRequired = row.Cells(5).Value
-    '            If .IsRequired = "Yes" Then
-    '                .IsRequired = 1
-    '            Else
-    '                .IsRequired = 0
-    '            End If
+        '        .ShortCode = row.Cells(0).Value
+        '        .SpecName = row.Cells(1).Value
+        '        .SpecType = row.Cells(2).Value
+        '        .Layout = row.Cells(3).Value
+        '        .UnitofMeasure = row.Cells(4).Value
+        '        .IsRequired = row.Cells(5).Value
+        '        If .IsRequired = "Yes" Then
+        '            .IsRequired = 1
+        '        Else
+        '            .IsRequired = 0
+        '        End If
 
-    '            If .SpecName Is Nothing Or .SpecType Is Nothing _
-    '                Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
-    '                Exit For
-    '            Else
-    '                .SaveSpecification()
-    '            End If
-    '        End With
+        '        If .SpecName Is Nothing Or .SpecType Is Nothing _
+        '            Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
+        '            Exit For
+        '        Else
+        '            .SaveSpecification()
+        '        End If
+        '    End With
 
-    '    Next
-    '    MsgBox("Transaction Saved", MsgBoxStyle.Information)
-    '    clearfields()
+        ' Next
+        MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        clearfields()
 
-    'End Sub
+    End Sub
    
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
@@ -609,4 +610,5 @@ Public Class frmAdminPanel
     End Sub
 
 
+   
 End Class

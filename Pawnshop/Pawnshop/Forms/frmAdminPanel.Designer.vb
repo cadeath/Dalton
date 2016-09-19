@@ -23,6 +23,8 @@ Partial Class frmAdminPanel
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
+        Me.txtInterestRate = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.txtPrintLayout = New System.Windows.Forms.TextBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
@@ -61,8 +63,6 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
-        Me.txtInterestRate = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -96,6 +96,23 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
+        '
+        'txtInterestRate
+        '
+        Me.txtInterestRate.Location = New System.Drawing.Point(105, 301)
+        Me.txtInterestRate.Name = "txtInterestRate"
+        Me.txtInterestRate.Size = New System.Drawing.Size(250, 22)
+        Me.txtInterestRate.TabIndex = 9
+        Me.txtInterestRate.Text = "Interest Rate"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(23, 305)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(83, 16)
+        Me.Label1.TabIndex = 10
+        Me.Label1.Text = "Interest Rate"
         '
         'txtPrintLayout
         '
@@ -451,23 +468,6 @@ Partial Class frmAdminPanel
         '
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
-        '
-        'txtInterestRate
-        '
-        Me.txtInterestRate.Location = New System.Drawing.Point(105, 301)
-        Me.txtInterestRate.Name = "txtInterestRate"
-        Me.txtInterestRate.Size = New System.Drawing.Size(250, 22)
-        Me.txtInterestRate.TabIndex = 9
-        Me.txtInterestRate.Text = "Interest Rate"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(23, 305)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(83, 16)
-        Me.Label1.TabIndex = 10
-        Me.Label1.Text = "Interest Rate"
         '
         'frmAdminPanel
         '
