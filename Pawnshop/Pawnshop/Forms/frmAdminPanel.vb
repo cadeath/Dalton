@@ -6,14 +6,15 @@ Public Class frmAdminPanel
     Dim rbYes As Integer
     Dim rbNo As Integer
 
-    'Private ItemSave As Item
+
+
     'Private ItemModify As Item
 
     'Private SpecModify As Item
-    'Private SpecSave As Item
+    Private SpecSave As ItemSpecs
     Dim ds As New DataSet
 
-    'Friend SelectedItem As Item 'Holds Item
+    Friend SelectedItem As ItemClass 'Holds Item
 
 
     Dim fromOtherForm As Boolean = False
@@ -25,21 +26,21 @@ Public Class frmAdminPanel
         clearfields()
     End Sub
 
-    'Friend Sub LoadItemList(ByVal it As Item)
-    '    If it.Classification = "" Then Exit Sub
-    '    ' Display select buttons
-    '    txtClassifiction.Text = it.Classification
-    '    txtCategory.Text = it.Category
-    '    txtDescription.Text = it.Description
-    '    If it.Renewable = "Yes" Then
-    '        rdbYes.Checked = True
-    '    Else
-    '        rdbNo.Checked = True
-    '    End If
+    Friend Sub LoadItemList(ByVal it As ItemClass)
+        If it.ItemClass = "" Then Exit Sub
+        ' Display select buttons
+        txtClassifiction.Text = it.ItemClass
+        txtCategory.Text = it.Category
+        txtDescription.Text = it.Description
+        If it.isRenewable = "Yes" Then
+            rdbYes.Checked = True
+        Else
+            rdbNo.Checked = True
+        End If
 
-    '    SelectedItem = it
-    '    LockFields(True)
-    'End Sub
+        SelectedItem = it
+        'LockFields(True)
+    End Sub
 
     'Friend Sub LoadItemall(ByVal it As Item)
     '    txtClassifiction.Text = String.Format(it.Classification)
@@ -78,65 +79,66 @@ Public Class frmAdminPanel
         rbNo = 0
     End Sub
     Private Function isValid() As Boolean
+
         If txtClassifiction.Text = "" Then txtClassifiction.Focus() : Return False
         If txtCategory.Text = "" Then txtCategory.Focus() : Return False
+        If txtInterestRate.Text = "" Then txtInterestRate.Focus() : Return False
+        If txtDescription.Text = "" Then txtDescription.Focus() : Return False
+        If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
+
         Return True
     End Function
 
-    'Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-    '    If Not isValid() Then Exit Sub
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not isValid() Then Exit Sub
 
-    '    Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-    '    If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-    '    ItemSave = New Item
-    '    With ItemSave
-    '        .Classification = txtClassifiction.Text
-    '        .Category = txtCategory.Text
-    '        .Description = txtDescription.Text
-    '        .DateCreated = CurrentDate
-    '        If rdbYes.Checked = True Then
-    '            .Renewable = rbYes
-    '        Else
-    '            .Renewable = rbNo
-    '        End If
+        Dim ItemSave As New ItemClass
+        Dim ColItemsSpecs As New CollectionItemSpecs
 
-    '        .PrintLayout = txtPrintLayout.Text
+        ItemSave.ItemClass = txtClassifiction.Text
+        ItemSave.Category = txtCategory.Text
+        ItemSave.Description = txtDescription.Text
+        ItemSave.InterestRate = txtInterestRate.Text
 
-    '        .SaveItem()
-    '    End With
+        If rdbYes.Checked = True Then
+            ItemSave.isRenewable = rbYes
+        Else
+            ItemSave.isRenewable = rbNo
+        End If
+
+        ItemSave.PrintLayout = txtPrintLayout.Text
+        ItemSave.created_at = CurrentDate
 
 
+        For Each row As DataGridViewRow In dgSpecification.Rows
+            SpecSave = New ItemSpecs
+            With SpecSave
+                .ShortCode = row.Cells(0).Value
+                .SpecName = row.Cells(1).Value
+                .SpecType = row.Cells(2).Value
+                .SpecLayout = row.Cells(3).Value
+                .UnitOfMeasure = row.Cells(4).Value
+                .isRequired = row.Cells(5).Value
 
-    '    For Each row As DataGridViewRow In dgSpecification.Rows
-    '        SpecSave = New Item
-    '        With SpecSave
 
-    '            .ShortCode = row.Cells(0).Value
-    '            .SpecName = row.Cells(1).Value
-    '            .SpecType = row.Cells(2).Value
-    '            .Layout = row.Cells(3).Value
-    '            .UnitofMeasure = row.Cells(4).Value
-    '            .IsRequired = row.Cells(5).Value
-    '            If .IsRequired = "Yes" Then
-    '                .IsRequired = 1
-    '            Else
-    '                .IsRequired = 0
-    '            End If
+                If .SpecName Is Nothing Or .SpecType Is Nothing _
+                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
+                    Exit For
+                End If
+            End With
 
-    '            If .SpecName Is Nothing Or .SpecType Is Nothing _
-    '                Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
-    '                Exit For
-    '            Else
-    '                .SaveSpecification()
-    '            End If
-    '        End With
+            ColItemsSpecs.Add(SpecSave)
+        Next
+        ItemSave.ItemSpecifications = ColItemsSpecs
+        ItemSave.SaveItem()
 
-    '    Next
-    '    MsgBox("Transaction Saved", MsgBoxStyle.Information)
-    '    clearfields()
+        MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        clearfields()
 
-    'End Sub
+    End Sub
    
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
@@ -246,7 +248,7 @@ Public Class frmAdminPanel
 
     Friend Sub LoadSpec()
         Dim da As New OdbcDataAdapter
-        Dim mySql As String = "SELECT SHORT_CODE,SPECNAME,SPECTYPE,SPECLAYOUT,UOM,ISREQUIRED FROM tbl_SPecification WHERE ItemID = '" & frmItemList.lblItemID.Text & "'"
+        Dim mySql As String = "SELECT SPECSNAME,SPECTYPE,OUM,SPECLAYOUT,SHORTCODE,ISREQUIRED FROM TBLSPECS WHERE ItemID = '" & frmItemList.lblItemID.Text & "'"
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         Dim dt As New DataTable
@@ -256,17 +258,17 @@ Public Class frmAdminPanel
         For Each dr As DataRow In dt.Rows
             dr.ClearErrors()
             If dr(5) = 1 Then
-                dr(5) = "Yes"
+                dr(5) = "True"
             Else
-                dr(5) = "No"
+                dr(5) = "False"
             End If
-
             dgSpecification.Rows.Add(dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))
         Next
 
         Dim i As Integer = (0)
 
         reaDOnlyTrue()
+
         For a As Integer = 0 To dgSpecification.Rows.Count - 1
             dgSpecification.Rows(a).ReadOnly = True
         Next
@@ -609,4 +611,8 @@ Public Class frmAdminPanel
     End Sub
 
 
+   
+    Private Sub txtInterestRate_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInterestRate.KeyPress
+        DigitOnly(e)
+    End Sub
 End Class

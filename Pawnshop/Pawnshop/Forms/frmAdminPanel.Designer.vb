@@ -23,6 +23,8 @@ Partial Class frmAdminPanel
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
+        Me.txtInterestRate = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.txtPrintLayout = New System.Windows.Forms.TextBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
@@ -61,8 +63,6 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
-        Me.txtInterestRate = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -96,6 +96,23 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
+        '
+        'txtInterestRate
+        '
+        Me.txtInterestRate.Location = New System.Drawing.Point(105, 301)
+        Me.txtInterestRate.Name = "txtInterestRate"
+        Me.txtInterestRate.Size = New System.Drawing.Size(250, 22)
+        Me.txtInterestRate.TabIndex = 9
+        Me.txtInterestRate.Text = "Interest Rate"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(23, 305)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(83, 16)
+        Me.Label1.TabIndex = 10
+        Me.Label1.Text = "Interest Rate"
         '
         'txtPrintLayout
         '
@@ -306,7 +323,7 @@ Partial Class frmAdminPanel
         '
         Me.Column6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Column6.HeaderText = "Is Required"
-        Me.Column6.Items.AddRange(New Object() {"Yes", "No"})
+        Me.Column6.Items.AddRange(New Object() {"True", "False"})
         Me.Column6.Name = "Column6"
         Me.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
@@ -452,23 +469,6 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
-        'txtInterestRate
-        '
-        Me.txtInterestRate.Location = New System.Drawing.Point(105, 301)
-        Me.txtInterestRate.Name = "txtInterestRate"
-        Me.txtInterestRate.Size = New System.Drawing.Size(250, 22)
-        Me.txtInterestRate.TabIndex = 9
-        Me.txtInterestRate.Text = "Interest Rate"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(23, 305)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(83, 16)
-        Me.Label1.TabIndex = 10
-        Me.Label1.Text = "Interest Rate"
-        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -522,15 +522,15 @@ Partial Class frmAdminPanel
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents lvModule As System.Windows.Forms.ListView
+    Friend WithEvents SFD As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents txtInterestRate As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents SFD As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents btnBrowse As System.Windows.Forms.Button
-    Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents txtInterestRate As System.Windows.Forms.TextBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class

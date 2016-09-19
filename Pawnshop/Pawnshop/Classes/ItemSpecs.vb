@@ -115,21 +115,28 @@
 #End Region
 
 #Region "Functions and Procedures"
-    Public Sub LoadItemSpecs(id As Integer)
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = " & id
-        Dim ds As DataSet = LoadSQL(mySql, "TBLSPECS")
+
+    'Public Sub LoadItemSpecs(id As Integer)
+        'Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = " & id
+        'Dim ds As DataSet = LoadSQL(mySql, "TBLSPECS")
 
         'If ds.Tables(0).Rows.Count <> 0 Then
         '    MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
         '    Exit Sub
         'End If
 
-        With ds.Tables(0).Rows(0)
+        'With ds.Tables(0).Rows(0)
+
+    Public Sub LoadItemSpecs_row(dr As DataRow)
+        With dr
+
             _specID = .Item("SpecsID")
             _itemID = .Item("ItemID")
             _specName = .Item("SpecsName")
             _specType = .Item("SpecType")
-            '_UoM = .Item("UOM")
+
+            If Not IsDBNull(.Item("UoM")) Then _UoM = .Item("UOM")
+
             _onHold = If(.Item("OnHold") = 1, True, False)
             _specLayout = .Item("SpecLayout")
             _shortCode = .Item("ShortCode")
@@ -139,14 +146,26 @@
         End With
     End Sub
 
-    Public Sub SaveSpecs(ItemID As Integer)
+    Public Sub LoadItemSpecs(id As Integer)
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE SpecsID = " & ItemID
+        Dim ds As DataSet = LoadSQL(mySql, "TBLSPECS")
+
+        If ds.Tables(0).Rows.Count <> 0 Then
+            MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        LoadItemSpecs_row(ds.Tables(0).Rows(0))
+    End Sub
+
+    Public Sub SaveSpecs()
         Dim mySql As String = "SELECT * FROM " & MainTable & " ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(0).NewRow
         With dsNewRow
-            .Item("ItemID") = ItemID
+            .Item("ItemID") = _itemID
             .Item("SpecsName") = _specName
             .Item("SpecType") = _specType
             .Item("UOM") = _UoM
@@ -158,8 +177,8 @@
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
-
     End Sub
+
     Public Sub LoadByRow(ByVal dr As DataRow)
         With dr
             _specID = .Item("specsid")
@@ -175,5 +194,16 @@
     End Sub
 #End Region
 
+
+    Public Function LASTITEMID() As Single
+        Dim mySql As String = "SELECT * FROM TBLITEM ORDER BY ITEMID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("ITEMID")
+    End Function
+#End Region
 
 End Class

@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{24AC89A7-4FDE-47EF-AC83-32A2499285D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Pawnshop.My.MyApplication</StartupObject>
+    <StartupObject>Pawnshop.frmItemList</StartupObject>
     <RootNamespace>Pawnshop</RootNamespace>
     <AssemblyName>pawnshop</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -193,7 +193,7 @@
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
-    <Compile Include="Classes\CollectionSpecs.vb" />
+    <Compile Include="Classes\CollectionItemSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\DollarEntry.vb" />
@@ -233,10 +233,17 @@
     <Compile Include="Developer\dev_ExtractToExcel.vb">
       <SubType>Form</SubType>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Developer\dev_NewPawning.Designer.vb">
       <DependentUpon>dev_NewPawning.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_NewPawning.vb">
+=======
+    <Compile Include="Developer\dev_NewItem.Designer.vb">
+      <DependentUpon>dev_NewItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_NewItem.vb">
+>>>>>>> refs/remotes/origin/adminPanelGUI
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_ORview.Designer.vb">
@@ -704,8 +711,13 @@
     <EmbeddedResource Include="Developer\dev_ExtractToExcel.resx">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Developer\dev_NewPawning.resx">
       <DependentUpon>dev_NewPawning.vb</DependentUpon>
+=======
+    <EmbeddedResource Include="Developer\dev_NewItem.resx">
+      <DependentUpon>dev_NewItem.vb</DependentUpon>
+>>>>>>> refs/remotes/origin/adminPanelGUI
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
