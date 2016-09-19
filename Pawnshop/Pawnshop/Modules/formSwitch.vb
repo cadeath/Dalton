@@ -67,18 +67,16 @@
         End Select
     End Sub
 
-    'Friend Sub ReloadFormFromSearch2(ByVal gotoForm As FormName, ByVal it As Item)
+    Friend Sub ReloadFormFromSearch2(ByVal gotoForm As FormName, ByVal it As ItemClass)
 
-    '    Select Case gotoForm
-    '        Case FormName.frmAdminPanel
-    '            frmAdminPanel.LoadItemall(it)
-    '        Case FormName.dev_Item
-    '            dev_NewPawning.LoadItem(it)
+        Select Case gotoForm
+            Case FormName.frmAdminPanel
+                frmAdminPanel.LoadItemall(it)
+                'Case FormName.dev_Item
+                '    dev_NewPawning.LoadItem(it)
 
-    '        Case FormName.frmPawningNew
-    '            frmPawningNew.LoadItem(it)
 
-    '    End Select
+        End Select
 
-    'End Sub
+    End Sub
 End Module
