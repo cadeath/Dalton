@@ -1,7 +1,7 @@
 ﻿Public Class frmItemList
-    'Dim mOtherForm As Boolean = False
+    Dim mOtherForm As Boolean = False
 
-    'Dim frmOrig As formSwitch.FormName
+    Dim frmOrig As formSwitch.FormName
     'Dim ds As New DataSet
 
     'Friend GetItem As ItemClass
@@ -14,22 +14,22 @@
     '    frmOrig = frmOrigin
     'End Sub
 
-    'Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-    '    ClearField()
-    '    If Not mOtherForm Then ClearField()
-
-    '    LoadActiveItem()
+    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ClearField()
+        If Not mOtherForm Then ClearField()
 
 
-    '    If Not mOtherForm Then
-    '        txtSearch.Focus()
-    '    End If
+        loadItemClass()
 
-    '    txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
-    '    If txtSearch.Text <> "" Then
-    '        btnSearch.PerformClick()
-    '    End If
-    'End Sub
+        If Not mOtherForm Then
+            txtSearch.Focus()
+        End If
+
+        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
 
 
     'Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM TBLITEM where ITEMID <> 0 ORDER BY ITEMID ASC")
@@ -43,59 +43,56 @@
     '        AddItem(tmpItem)
     '    Next
     'End Sub
+    Private Sub loadItemClass()
+        Dim mySql As String = "SELECT * FROM tblItem"
+        Dim ds As DataSet = LoadSQL(mySql)
 
-    ''Friend Sub LoadSpec(Optional ByVal mySql As String = "Select * from tbl_specification where specid <> 0 ORDER BY SPECID ASC")
-    ''    'Dim ds As DataSet
-    ''    'ds = LoadSQL(mySql)
-    ''    'lvItem.Items.Clear()
-    ''    'For Each dr As DataRow In ds.Tables(0).Rows
-    ''    '    'Dim tmpItem As New Item
-    ''    '    tmpItem.LoadSpecByRow(dr)
-    ''    '    'AddItem(tmpItem)
-    ''    'Next
-    ''End Sub
+        lvItem.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
 
-    'Private Sub AddItem(ByVal dl As ItemClass)
-    '    Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
-    '    lv.SubItems.Add(dl.ItemClass)
-    '    lv.SubItems.Add(dl.Category)
-    '    lv.SubItems.Add(dl.Description)
-    '    lv.SubItems.Add(dl.PrintLayout)
-    'End Sub
+            Dim lv As ListViewItem = lvItem.Items.Add(dr("ItemID"))
+            lv.SubItems.Add(dr("ItemClass"))
+            lv.SubItems.Add(dr("ItemCategory"))
+            lv.SubItems.Add(dr("Description"))
+            lv.SubItems.Add(dr("Int_rate"))
+            lv.SubItems.Add(dr("IsRenew"))
+            lv.SubItems.Add(dr("Print_Layout"))
+        Next
+    End Sub
 
-    'Private Sub ClearField()
-    '    txtSearch.Text = ""
-    '    lvItem.Items.Clear()
-    'End Sub
+    Private Sub ClearField()
+        txtSearch.Text = ""
+        lvItem.Items.Clear()
+    End Sub
 
-    ''Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-    ''    searchItem()
-    ''End Sub
-    ''Private Sub searchItem()
-    ''    If txtSearch.Text = "" Then Exit Sub
-    ''    Dim secured_str As String = txtSearch.Text
-    ''    secured_str = DreadKnight(secured_str)
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        searchItem()
+    End Sub
+    Private Sub searchItem()
+        If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
 
-    ''    Dim mySql As String = "SELECT * FROM tbl_ITEM WHERE "
-    ''    mySql &= String.Format("UPPER (ITEMCATEGORY) LIKE UPPER('%{0}%')", secured_str)
+        Dim mySql As String = "SELECT * FROM tblITEM WHERE "
+        mySql &= String.Format("UPPER (ITEMCATEGORY) LIKE UPPER('%{0}%')", secured_str)
 
-    ''    Console.WriteLine("SQL: " & mySql)
-    ''    Dim ds As DataSet = LoadSQL(mySql)
-    ''    Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+        Console.WriteLine("SQL: " & mySql)
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxRow As Integer = ds.Tables(0).Rows.Count
 
-    ''    lvItem.Items.Clear()
+        lvItem.Items.Clear()
 
-    ''    If MaxRow <= 0 Then
-    ''        Console.WriteLine("No Item List Found")
-    ''        MsgBox("Query not found", MsgBoxStyle.Information)
-    ''        txtSearch.SelectAll()
-    ''        lvItem.Items.Clear()
-    ''        Exit Sub
-    ''    End If
+        If MaxRow <= 0 Then
+            Console.WriteLine("No Item List Found")
+            MsgBox("Query not found", MsgBoxStyle.Information)
+            txtSearch.SelectAll()
+            lvItem.Items.Clear()
+            Exit Sub
+        End If
 
-    ''    MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Item")
-    ''    LoadActiveItem(mySql)
-    ''End Sub
+        MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Item")
+        loadItemClass()
+    End Sub
 
     ''Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
     ''    If e.KeyCode = Keys.Enter Then
@@ -188,4 +185,28 @@
     ''End Sub
 
    
+    
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+
+        Dim selectedItem As New ItemClass
+        selectedItem.LoadItem(idx)
+
+        lblItemID.Text = selectedItem.ID
+
+        lvItem.Items.Clear()
+        For Each spec As ItemSpecs In selectedItem.ItemSpecifications
+            lvItem.Items.Add(spec.SpecName)
+        Next
+    End Sub
+
+
+    Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
+        If Not mOtherForm Then
+            btnView.PerformClick()
+        Else
+            btnSelect.PerformClick()
+        End If
+    End Sub
+
 End Class

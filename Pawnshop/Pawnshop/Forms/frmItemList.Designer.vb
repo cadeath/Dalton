@@ -26,6 +26,10 @@ Partial Class frmItemList
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -34,10 +38,6 @@ Partial Class frmItemList
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblItemID = New System.Windows.Forms.Label()
         Me.btnView = New System.Windows.Forms.Button()
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -68,6 +68,26 @@ Partial Class frmItemList
         '
         Me.ColumnHeader5.Text = "Category"
         Me.ColumnHeader5.Width = 122
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Description"
+        Me.ColumnHeader2.Width = 113
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "Interest Rate"
+        Me.ColumnHeader6.Width = 90
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "IsRenewable"
+        Me.ColumnHeader7.Width = 101
+        '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.Text = "Print Layout"
+        Me.ColumnHeader8.Width = 346
         '
         'GroupBox1
         '
@@ -151,26 +171,6 @@ Partial Class frmItemList
         Me.btnView.TabIndex = 13
         Me.btnView.Text = "&View"
         Me.btnView.UseVisualStyleBackColor = True
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Text = "Description"
-        Me.ColumnHeader2.Width = 113
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Interest Rate"
-        Me.ColumnHeader6.Width = 90
-        '
-        'ColumnHeader7
-        '
-        Me.ColumnHeader7.Text = "IsRenewable"
-        Me.ColumnHeader7.Width = 101
-        '
-        'ColumnHeader8
-        '
-        Me.ColumnHeader8.Text = "Print Layout"
-        Me.ColumnHeader8.Width = 346
         '
         'frmItemList
         '
