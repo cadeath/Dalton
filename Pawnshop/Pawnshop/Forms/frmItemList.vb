@@ -5,27 +5,27 @@
 
     Dim ds As New DataSet
 
-    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'If Not mOtherForm Then ClearField()
+    'Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    '    'If Not mOtherForm Then ClearField()
 
-    'Dim ds As New DataSet
+    ''Dim ds As New DataSet
 
-    'Friend GetItem As ItemClass
-
-
-        LoadActiveItem()
+    ''Friend GetItem As ItemClass
 
 
+    '    LoadActiveItem()
 
-        If Not mOtherForm Then
-            txtSearch.Focus()
-        End If
 
-        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
-        If txtSearch.Text <> "" Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
+
+    '    If Not mOtherForm Then
+    '        txtSearch.Focus()
+    '    End If
+
+    '    txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+    '    If txtSearch.Text <> "" Then
+    '        btnSearch.PerformClick()
+    '    End If
+    'End Sub
 
 
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
@@ -38,7 +38,7 @@
             AddItem(tmpItem)
         Next
     End Sub
-=======
+
     'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
     '    mOtherForm = True
     '    btnSelect.Visible = True
@@ -146,7 +146,7 @@
     ''        End If
     ''    End If
     ''End Sub
->>>>>>> refs/remotes/origin/adminPanelGUI
+
 
     ''Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
     ''    If Not mOtherForm Then
@@ -222,31 +222,31 @@
     ''End Sub
 
 
-    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+    'Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
 
-        If lvItem.Items.Count = 0 Then Exit Sub
+    '    If lvItem.Items.Count = 0 Then Exit Sub
 
-        If lvItem.SelectedItems.Count = 0 Then
-            lvItem.Items(0).Focused = True
-        End If
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-        Dim getitem As ItemClass
-        Dim getspec As ItemSpecs = New ItemSpecs
+    '    If lvItem.SelectedItems.Count = 0 Then
+    '        lvItem.Items(0).Focused = True
+    '    End If
+    '    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+    '    Dim getitem As ItemClass
+    '    Dim getspec As ItemSpecs = New ItemSpecs
 
-        getitem = New ItemClass
-        getitem.LoadItem(idx)
+    '    getitem = New ItemClass
+    '    getitem.LoadItem(idx)
 
-        getspec.LoadItemSpecs(idx)
-        lblItemID.Text = (idx)
+    '    getspec.LoadItemSpecs(idx)
+    '    lblItemID.Text = (idx)
 
 
-        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-        ' lblItemID.Text = idx
-        ' frmAdminPanel.LoadItemall(GetItem)
-        'frmAdminPanel.LoadSpec()
-        Me.Hide()
+    '    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
+    '    ' lblItemID.Text = idx
+    '    ' frmAdminPanel.LoadItemall(GetItem)
+    '    'frmAdminPanel.LoadSpec()
+    '    Me.Hide()
 
-    End Sub
+    'End Sub
 
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
         mOtherForm = True

@@ -107,7 +107,7 @@
         BRACELET.SaveItem()
 
 
-        ItemClass_Seed.Populate()
+        'ItemClass_Seed.Populate()
     End Sub
 
     Private Sub btnLoadClass_Click(sender As System.Object, e As System.EventArgs) Handles btnLoadClass.Click
