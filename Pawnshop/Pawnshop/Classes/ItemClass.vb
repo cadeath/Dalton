@@ -121,6 +121,7 @@
             _category = .Item("ItemCategory")
             _desc = .Item("Description")
             _isRenew = If(.Item("isRenew") = 1, True, False)
+            _intRate = .Item("Int_Rate")
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
             _created = .Item("Created_At")
@@ -138,6 +139,7 @@
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
+            .Item("Int_rate") = _intRate
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
