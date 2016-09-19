@@ -117,10 +117,10 @@
 
 #Region "Functions and Procedures"
     Public Sub LoadItem(id As Integer)
-        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", _itemID)
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", id)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count <> 0 Then
+        If ds.Tables(0).Rows.Count <> 1 Then
             MsgBox("Failed to load Item", MsgBoxStyle.Critical)
             Exit Sub
         End If
