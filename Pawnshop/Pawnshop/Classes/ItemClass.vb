@@ -107,29 +107,30 @@
 
 #Region "Functions and Procedures"
     Public Sub LoadItem(id As Integer)
-        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", _itemID)
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", id)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count <> 0 Then
-            MsgBox("Failed to load Item", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
+        'If ds.Tables(0).Rows.Count <> 0 Then
+        '    MsgBox("Failed to load Item", MsgBoxStyle.Critical)
+        '    Exit Sub
+        'End If
 
         With ds.Tables(0).Rows(0)
             _itemID = .Item("ItemID")
             _itemClass = .Item("ItemClass")
             _category = .Item("ItemCategory")
-            _desc = .Item("Description")
+            '_desc = .Item("Description")
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _intRate = .Item("Int_Rate")
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
-            _created = .Item("Created_At")
-            _updated = .Item("Updated_At")
+            '_created = .Item("Created_At")
+            '_updated = .Item("Updated_At")
         End With
     End Sub
 
     Public Sub SaveItem()
+
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
@@ -147,6 +148,19 @@
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
+    End Sub
+
+    Public Sub LoadByRow(ByVal dr As DataRow)
+        With dr
+            _itemID = .Item("itemid")
+            _itemClass = .Item("itemclass")
+            '_desc = .Item("Description")
+            _category = .Item("itemcategory")
+            _isRenew = .Item("isrenew")
+            '_onHold = .Item()
+            _printLayout = .Item("print_layout")
+          
+        End With
     End Sub
 #End Region
 

@@ -4,36 +4,33 @@
     Dim frmOrig As formSwitch.FormName
     Dim ds As New DataSet
 
-    'Friend GetItem As Item
+    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'If Not mOtherForm Then ClearField()
 
-    'Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-    '    ClearField()
-    '    If Not mOtherForm Then ClearField()
-
-    '    LoadActiveItem()
+        LoadActiveItem()
 
 
-    '    If Not mOtherForm Then
-    '        txtSearch.Focus()
-    '    End If
+        If Not mOtherForm Then
+            txtSearch.Focus()
+        End If
 
-    '    txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
-    '    If txtSearch.Text <> "" Then
-    '        btnSearch.PerformClick()
-    '    End If
-    'End Sub
+        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
 
 
-    'Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tbl_ITEM where ITEMID <> 0 ORDER BY itemid ASC")
-    '    'Dim ds As DataSet
-    '    'ds = LoadSQL(mySql)
-    '    'lvItem.Items.Clear()
-    '    'For Each dr As DataRow In ds.Tables(0).Rows
-    '    '    'Dim tmpItem As New Item
-    '    '    tmpItem.LoaditemByRow(dr)
-    '    '    AddItem(tmpItem)
-    '    'Next
-    'End Sub
+    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
+        Dim ds As DataSet
+        ds = LoadSQL(mySql)
+        lvItem.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpItem As New ItemClass
+            tmpItem.LoadByRow(dr)
+            AddItem(tmpItem)
+        Next
+    End Sub
 
     'Friend Sub LoadSpec(Optional ByVal mySql As String = "Select * from tbl_specification where specid <> 0 ORDER BY SPECID ASC")
     '    'Dim ds As DataSet
@@ -46,13 +43,13 @@
     '    'Next
     'End Sub
 
-    ''Private Sub AddItem(ByVal dl As Item)
-    ''    Dim lv As ListViewItem = lvItem.Items.Add(dl.itemID)
-    ''    lv.SubItems.Add(dl.Classification)
-    ''    lv.SubItems.Add(dl.Category)
-    ''    lv.SubItems.Add(dl.Description)
-    ''    lv.SubItems.Add(dl.PrintLayout)
-    ''End Sub
+    Private Sub AddItem(ByVal dl As ItemClass)
+        Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
+        lv.SubItems.Add(dl.ItemClass)
+        lv.SubItems.Add(dl.Category)
+        lv.SubItems.Add(dl.Description)
+        lv.SubItems.Add(dl.PrintLayout)
+    End Sub
 
     'Private Sub ClearField()
     '    txtSearch.Text = ""
@@ -148,28 +145,31 @@
     '    Me.Hide()
     'End Sub
 
-    'Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
 
-    '    If lvItem.Items.Count = 0 Then Exit Sub
+        If lvItem.Items.Count = 0 Then Exit Sub
 
-    '    If lvItem.SelectedItems.Count = 0 Then
-    '        lvItem.Items(0).Focused = True
-    '    End If
-    '    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-    '    GetItem = New Item
-    '    GetItem.LoadItem(idx)
-    '    GetItem.LoadSpec(idx)
+        If lvItem.SelectedItems.Count = 0 Then
+            lvItem.Items(0).Focused = True
+        End If
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+        Dim getitem As ItemClass
+        Dim getspec As ItemSpecs = New ItemSpecs
 
-    '    lblItemID.Text = (idx)
+        getitem = New ItemClass
+        getitem.LoadItem(idx)
+
+        getspec.LoadItemSpecs(idx)
+        lblItemID.Text = (idx)
 
 
-    '    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-    '    ' lblItemID.Text = idx
-    '    ' frmAdminPanel.LoadItemall(GetItem)
-    '    'frmAdminPanel.LoadSpec()
-    '    Me.Hide()
+        formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
+        ' lblItemID.Text = idx
+        ' frmAdminPanel.LoadItemall(GetItem)
+        'frmAdminPanel.LoadSpec()
+        Me.Hide()
 
-    'End Sub
+    End Sub
 
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
         mOtherForm = True
@@ -177,5 +177,4 @@
         txtSearch.Text = src
         frmOrig = frmOrigin
     End Sub
-
 End Class

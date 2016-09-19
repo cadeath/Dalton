@@ -119,6 +119,9 @@ Partial Class frmPawningNew
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblSPecification = New System.Windows.Forms.Label()
         Me.txtSerial1 = New System.Windows.Forms.TextBox()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.btnSearchClaimer = New System.Windows.Forms.Button()
+        Me.txtClaimer = New System.Windows.Forms.TextBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -129,11 +132,12 @@ Partial Class frmPawningNew
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtRedeem
         '
-        Me.txtRedeem.Location = New System.Drawing.Point(133, 323)
+        Me.txtRedeem.Location = New System.Drawing.Point(133, 274)
         Me.txtRedeem.Name = "txtRedeem"
         Me.txtRedeem.ReadOnly = True
         Me.txtRedeem.Size = New System.Drawing.Size(100, 20)
@@ -143,7 +147,7 @@ Partial Class frmPawningNew
         '
         Me.lblRedeemDue.AutoSize = True
         Me.lblRedeemDue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRedeemDue.Location = New System.Drawing.Point(16, 325)
+        Me.lblRedeemDue.Location = New System.Drawing.Point(16, 276)
         Me.lblRedeemDue.Name = "lblRedeemDue"
         Me.lblRedeemDue.Size = New System.Drawing.Size(89, 16)
         Me.lblRedeemDue.TabIndex = 21
@@ -151,7 +155,7 @@ Partial Class frmPawningNew
         '
         'txtRenew
         '
-        Me.txtRenew.Location = New System.Drawing.Point(133, 297)
+        Me.txtRenew.Location = New System.Drawing.Point(133, 248)
         Me.txtRenew.Name = "txtRenew"
         Me.txtRenew.ReadOnly = True
         Me.txtRenew.Size = New System.Drawing.Size(100, 20)
@@ -161,7 +165,7 @@ Partial Class frmPawningNew
         '
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.Location = New System.Drawing.Point(16, 299)
+        Me.Label29.Location = New System.Drawing.Point(16, 250)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(78, 16)
         Me.Label29.TabIndex = 19
@@ -169,7 +173,7 @@ Partial Class frmPawningNew
         '
         'txtEvat
         '
-        Me.txtEvat.Location = New System.Drawing.Point(133, 247)
+        Me.txtEvat.Location = New System.Drawing.Point(133, 211)
         Me.txtEvat.Name = "txtEvat"
         Me.txtEvat.ReadOnly = True
         Me.txtEvat.Size = New System.Drawing.Size(100, 20)
@@ -179,7 +183,7 @@ Partial Class frmPawningNew
         '
         Me.Label28.AutoSize = True
         Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(16, 249)
+        Me.Label28.Location = New System.Drawing.Point(16, 213)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(41, 16)
         Me.Label28.TabIndex = 17
@@ -187,7 +191,7 @@ Partial Class frmPawningNew
         '
         'txtService
         '
-        Me.txtService.Location = New System.Drawing.Point(133, 221)
+        Me.txtService.Location = New System.Drawing.Point(133, 185)
         Me.txtService.Name = "txtService"
         Me.txtService.ReadOnly = True
         Me.txtService.Size = New System.Drawing.Size(100, 20)
@@ -197,7 +201,7 @@ Partial Class frmPawningNew
         '
         Me.Label27.AutoSize = True
         Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(16, 223)
+        Me.Label27.Location = New System.Drawing.Point(16, 187)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(101, 16)
         Me.Label27.TabIndex = 15
@@ -205,7 +209,7 @@ Partial Class frmPawningNew
         '
         'txtPenalty
         '
-        Me.txtPenalty.Location = New System.Drawing.Point(133, 194)
+        Me.txtPenalty.Location = New System.Drawing.Point(133, 158)
         Me.txtPenalty.Name = "txtPenalty"
         Me.txtPenalty.ReadOnly = True
         Me.txtPenalty.Size = New System.Drawing.Size(100, 20)
@@ -215,7 +219,7 @@ Partial Class frmPawningNew
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(16, 196)
+        Me.Label26.Location = New System.Drawing.Point(16, 160)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(53, 16)
         Me.Label26.TabIndex = 13
@@ -303,16 +307,16 @@ Partial Class frmPawningNew
         Me.GroupBox5.Controls.Add(Me.Label22)
         Me.GroupBox5.Controls.Add(Me.txtReceipt)
         Me.GroupBox5.Controls.Add(Me.Label21)
-        Me.GroupBox5.Location = New System.Drawing.Point(607, 60)
+        Me.GroupBox5.Location = New System.Drawing.Point(607, 45)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(319, 352)
+        Me.GroupBox5.Size = New System.Drawing.Size(319, 307)
         Me.GroupBox5.TabIndex = 19
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Receipt Information"
         '
         'txtInt
         '
-        Me.txtInt.Location = New System.Drawing.Point(133, 168)
+        Me.txtInt.Location = New System.Drawing.Point(133, 132)
         Me.txtInt.Name = "txtInt"
         Me.txtInt.ReadOnly = True
         Me.txtInt.Size = New System.Drawing.Size(100, 20)
@@ -322,7 +326,7 @@ Partial Class frmPawningNew
         '
         Me.lblInterest.AutoSize = True
         Me.lblInterest.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblInterest.Location = New System.Drawing.Point(16, 170)
+        Me.lblInterest.Location = New System.Drawing.Point(16, 134)
         Me.lblInterest.Name = "lblInterest"
         Me.lblInterest.Size = New System.Drawing.Size(51, 16)
         Me.lblInterest.TabIndex = 11
@@ -330,7 +334,7 @@ Partial Class frmPawningNew
         '
         'txtOver
         '
-        Me.txtOver.Location = New System.Drawing.Point(133, 142)
+        Me.txtOver.Location = New System.Drawing.Point(133, 106)
         Me.txtOver.Name = "txtOver"
         Me.txtOver.ReadOnly = True
         Me.txtOver.Size = New System.Drawing.Size(100, 20)
@@ -340,7 +344,7 @@ Partial Class frmPawningNew
         '
         Me.Label24.AutoSize = True
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(16, 144)
+        Me.Label24.Location = New System.Drawing.Point(16, 108)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(100, 16)
         Me.Label24.TabIndex = 9
@@ -404,7 +408,7 @@ Partial Class frmPawningNew
         '
         Me.GroupBox4.Controls.Add(Me.lblAuth)
         Me.GroupBox4.Controls.Add(Me.cboAppraiser)
-        Me.GroupBox4.Location = New System.Drawing.Point(352, 388)
+        Me.GroupBox4.Location = New System.Drawing.Point(348, 389)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(249, 69)
         Me.GroupBox4.TabIndex = 20
@@ -416,7 +420,7 @@ Partial Class frmPawningNew
         Me.lblTransaction.AutoSize = True
         Me.lblTransaction.Font = New System.Drawing.Font("Monotype Corsiva", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTransaction.ForeColor = System.Drawing.Color.Red
-        Me.lblTransaction.Location = New System.Drawing.Point(12, 24)
+        Me.lblTransaction.Location = New System.Drawing.Point(12, 9)
         Me.lblTransaction.Name = "lblTransaction"
         Me.lblTransaction.Size = New System.Drawing.Size(125, 33)
         Me.lblTransaction.TabIndex = 27
@@ -426,7 +430,7 @@ Partial Class frmPawningNew
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(841, 479)
+        Me.btnCancel.Location = New System.Drawing.Point(841, 464)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(88, 33)
         Me.btnCancel.TabIndex = 24
@@ -442,7 +446,7 @@ Partial Class frmPawningNew
         '
         Me.lblNPT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNPT.ForeColor = System.Drawing.Color.Red
-        Me.lblNPT.Location = New System.Drawing.Point(764, 415)
+        Me.lblNPT.Location = New System.Drawing.Point(761, 419)
         Me.lblNPT.Name = "lblNPT"
         Me.lblNPT.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.lblNPT.Size = New System.Drawing.Size(162, 32)
@@ -453,7 +457,7 @@ Partial Class frmPawningNew
         'btnRedeem
         '
         Me.btnRedeem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRedeem.Location = New System.Drawing.Point(446, 479)
+        Me.btnRedeem.Location = New System.Drawing.Point(446, 464)
         Me.btnRedeem.Name = "btnRedeem"
         Me.btnRedeem.Size = New System.Drawing.Size(88, 33)
         Me.btnRedeem.TabIndex = 23
@@ -463,7 +467,7 @@ Partial Class frmPawningNew
         'btnVoid
         '
         Me.btnVoid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVoid.Location = New System.Drawing.Point(557, 479)
+        Me.btnVoid.Location = New System.Drawing.Point(557, 464)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(88, 33)
         Me.btnVoid.TabIndex = 25
@@ -473,7 +477,7 @@ Partial Class frmPawningNew
         'btnRenew
         '
         Me.btnRenew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRenew.Location = New System.Drawing.Point(352, 479)
+        Me.btnRenew.Location = New System.Drawing.Point(352, 464)
         Me.btnRenew.Name = "btnRenew"
         Me.btnRenew.Size = New System.Drawing.Size(88, 33)
         Me.btnRenew.TabIndex = 22
@@ -483,7 +487,7 @@ Partial Class frmPawningNew
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(747, 479)
+        Me.btnSave.Location = New System.Drawing.Point(747, 464)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(88, 33)
         Me.btnSave.TabIndex = 21
@@ -502,7 +506,7 @@ Partial Class frmPawningNew
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(675, 60)
+        Me.webAds.Location = New System.Drawing.Point(675, 45)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -604,7 +608,7 @@ Partial Class frmPawningNew
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(6, 263)
+        Me.Label14.Location = New System.Drawing.Point(6, 280)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(78, 16)
         Me.Label14.TabIndex = 19
@@ -630,7 +634,7 @@ Partial Class frmPawningNew
         '
         'txtNet
         '
-        Me.txtNet.Location = New System.Drawing.Point(104, 288)
+        Me.txtNet.Location = New System.Drawing.Point(104, 305)
         Me.txtNet.Name = "txtNet"
         Me.txtNet.ReadOnly = True
         Me.txtNet.Size = New System.Drawing.Size(100, 20)
@@ -667,16 +671,16 @@ Partial Class frmPawningNew
         Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.txtTicket)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Location = New System.Drawing.Point(348, 60)
+        Me.GroupBox2.Location = New System.Drawing.Point(348, 45)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(253, 322)
+        Me.GroupBox2.Size = New System.Drawing.Size(253, 338)
         Me.GroupBox2.TabIndex = 18
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Ticket Information"
         '
         'txtAdv
         '
-        Me.txtAdv.Location = New System.Drawing.Point(104, 262)
+        Me.txtAdv.Location = New System.Drawing.Point(104, 279)
         Me.txtAdv.Name = "txtAdv"
         Me.txtAdv.ReadOnly = True
         Me.txtAdv.Size = New System.Drawing.Size(100, 20)
@@ -686,7 +690,7 @@ Partial Class frmPawningNew
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(6, 289)
+        Me.Label12.Location = New System.Drawing.Point(6, 306)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(77, 16)
         Me.Label12.TabIndex = 15
@@ -694,7 +698,7 @@ Partial Class frmPawningNew
         '
         'txtPrincipal
         '
-        Me.txtPrincipal.Location = New System.Drawing.Point(104, 236)
+        Me.txtPrincipal.Location = New System.Drawing.Point(104, 253)
         Me.txtPrincipal.Name = "txtPrincipal"
         Me.txtPrincipal.Size = New System.Drawing.Size(100, 20)
         Me.txtPrincipal.TabIndex = 1
@@ -703,7 +707,7 @@ Partial Class frmPawningNew
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(6, 237)
+        Me.Label11.Location = New System.Drawing.Point(6, 254)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(60, 16)
         Me.Label11.TabIndex = 13
@@ -711,7 +715,7 @@ Partial Class frmPawningNew
         '
         'txtAppr
         '
-        Me.txtAppr.Location = New System.Drawing.Point(104, 210)
+        Me.txtAppr.Location = New System.Drawing.Point(104, 227)
         Me.txtAppr.Name = "txtAppr"
         Me.txtAppr.Size = New System.Drawing.Size(100, 20)
         Me.txtAppr.TabIndex = 0
@@ -720,7 +724,7 @@ Partial Class frmPawningNew
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(6, 211)
+        Me.Label10.Location = New System.Drawing.Point(6, 228)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(66, 16)
         Me.Label10.TabIndex = 11
@@ -837,7 +841,7 @@ Partial Class frmPawningNew
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtCustomer)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(18, 60)
+        Me.GroupBox1.Location = New System.Drawing.Point(18, 45)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(324, 244)
         Me.GroupBox1.TabIndex = 16
@@ -877,7 +881,7 @@ Partial Class frmPawningNew
         'btnPrint
         '
         Me.btnPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint.Location = New System.Drawing.Point(653, 479)
+        Me.btnPrint.Location = New System.Drawing.Point(653, 464)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(88, 33)
         Me.btnPrint.TabIndex = 28
@@ -896,7 +900,7 @@ Partial Class frmPawningNew
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.cboType)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Location = New System.Drawing.Point(932, 44)
+        Me.GroupBox3.Location = New System.Drawing.Point(943, 4)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(324, 202)
         Me.GroupBox3.TabIndex = 17
@@ -908,9 +912,9 @@ Partial Class frmPawningNew
         Me.GroupBox6.Controls.Add(Me.lvSpec)
         Me.GroupBox6.Controls.Add(Me.btnSearchClassification)
         Me.GroupBox6.Controls.Add(Me.txtClassification)
-        Me.GroupBox6.Location = New System.Drawing.Point(18, 310)
+        Me.GroupBox6.Location = New System.Drawing.Point(18, 295)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(324, 338)
+        Me.GroupBox6.Size = New System.Drawing.Size(324, 202)
         Me.GroupBox6.TabIndex = 18
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Pawn Item Information"
@@ -923,30 +927,30 @@ Partial Class frmPawningNew
         Me.lvSpec.GridLines = True
         Me.lvSpec.Location = New System.Drawing.Point(12, 50)
         Me.lvSpec.Name = "lvSpec"
-        Me.lvSpec.Size = New System.Drawing.Size(306, 282)
+        Me.lvSpec.Size = New System.Drawing.Size(306, 143)
         Me.lvSpec.TabIndex = 30
         Me.lvSpec.UseCompatibleStateImageBehavior = False
         Me.lvSpec.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "Specification Name"
-        Me.ColumnHeader1.Width = 150
+        Me.ColumnHeader1.Text = "ID"
+        Me.ColumnHeader1.Width = 0
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Specification Value"
+        Me.ColumnHeader2.Text = "Spicification Name"
         Me.ColumnHeader2.Width = 150
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "SpecType"
-        Me.ColumnHeader3.Width = 107
+        Me.ColumnHeader3.Text = "Specification Layout"
+        Me.ColumnHeader3.Width = 0
         '
         'ColumnHeader4
         '
-        Me.ColumnHeader4.Text = "SpecLayout"
-        Me.ColumnHeader4.Width = 122
+        Me.ColumnHeader4.Text = "Specification Value"
+        Me.ColumnHeader4.Width = 200
         '
         'btnSearchClassification
         '
@@ -971,7 +975,7 @@ Partial Class frmPawningNew
         '
         Me.GroupBox7.Controls.Add(Me.lblSerial)
         Me.GroupBox7.Controls.Add(Me.txtSerial)
-        Me.GroupBox7.Location = New System.Drawing.Point(357, 518)
+        Me.GroupBox7.Location = New System.Drawing.Point(943, 309)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(288, 58)
         Me.GroupBox7.TabIndex = 30
@@ -998,7 +1002,7 @@ Partial Class frmPawningNew
         '
         Me.GroupBox8.Controls.Add(Me.lblGrams)
         Me.GroupBox8.Controls.Add(Me.txtGrams)
-        Me.GroupBox8.Location = New System.Drawing.Point(357, 582)
+        Me.GroupBox8.Location = New System.Drawing.Point(943, 373)
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.Size = New System.Drawing.Size(288, 58)
         Me.GroupBox8.TabIndex = 31
@@ -1025,7 +1029,7 @@ Partial Class frmPawningNew
         '
         Me.GroupBox9.Controls.Add(Me.lblKarat)
         Me.GroupBox9.Controls.Add(Me.txtKarat)
-        Me.GroupBox9.Location = New System.Drawing.Point(357, 643)
+        Me.GroupBox9.Location = New System.Drawing.Point(943, 434)
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.Size = New System.Drawing.Size(288, 58)
         Me.GroupBox9.TabIndex = 32
@@ -1054,7 +1058,7 @@ Partial Class frmPawningNew
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.lblSPecification)
         Me.Panel1.Controls.Add(Me.txtSerial1)
-        Me.Panel1.Location = New System.Drawing.Point(940, 365)
+        Me.Panel1.Location = New System.Drawing.Point(943, 212)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(237, 92)
         Me.Panel1.TabIndex = 33
@@ -1077,11 +1081,42 @@ Partial Class frmPawningNew
         Me.txtSerial1.Size = New System.Drawing.Size(210, 22)
         Me.txtSerial1.TabIndex = 21
         '
+        'GroupBox10
+        '
+        Me.GroupBox10.Controls.Add(Me.btnSearchClaimer)
+        Me.GroupBox10.Controls.Add(Me.txtClaimer)
+        Me.GroupBox10.Location = New System.Drawing.Point(607, 358)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(318, 58)
+        Me.GroupBox10.TabIndex = 34
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = "Claimer Information"
+        '
+        'btnSearchClaimer
+        '
+        Me.btnSearchClaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSearchClaimer.Location = New System.Drawing.Point(224, 17)
+        Me.btnSearchClaimer.Name = "btnSearchClaimer"
+        Me.btnSearchClaimer.Size = New System.Drawing.Size(88, 27)
+        Me.btnSearchClaimer.TabIndex = 4
+        Me.btnSearchClaimer.Text = "&Search"
+        Me.btnSearchClaimer.UseVisualStyleBackColor = True
+        '
+        'txtClaimer
+        '
+        Me.txtClaimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtClaimer.Location = New System.Drawing.Point(13, 19)
+        Me.txtClaimer.Name = "txtClaimer"
+        Me.txtClaimer.Size = New System.Drawing.Size(205, 22)
+        Me.txtClaimer.TabIndex = 1
+        Me.txtClaimer.Text = "Claimer"
+        '
         'frmPawningNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1189, 731)
+        Me.ClientSize = New System.Drawing.Size(1189, 508)
+        Me.Controls.Add(Me.GroupBox10)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.GroupBox9)
         Me.Controls.Add(Me.GroupBox8)
@@ -1124,6 +1159,8 @@ Partial Class frmPawningNew
         Me.GroupBox9.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1208,11 +1245,7 @@ Partial Class frmPawningNew
     Friend WithEvents btnSearchClassification As System.Windows.Forms.Button
     Friend WithEvents txtClassification As System.Windows.Forms.TextBox
     Friend WithEvents lvSpec As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
-    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblSerial As System.Windows.Forms.Label
     Friend WithEvents txtSerial As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
@@ -1224,4 +1257,11 @@ Partial Class frmPawningNew
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents lblSPecification As System.Windows.Forms.Label
     Friend WithEvents txtSerial1 As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnSearchClaimer As System.Windows.Forms.Button
+    Friend WithEvents txtClaimer As System.Windows.Forms.TextBox
+    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
 End Class

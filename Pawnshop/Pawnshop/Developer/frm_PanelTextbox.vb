@@ -2,7 +2,7 @@
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Dim tmpResult As String = txtSearch.Text
-        With dev_NewPawning.lvItem
+        With frmPawningNew.lvSpec
             .SelectedItems(0).SubItems(3).Text = tmpResult
         End With
         Me.Close()

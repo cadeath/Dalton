@@ -14,7 +14,7 @@
             tmpResult = "No"
         End If
 
-        With dev_NewPawning.lvItem
+        With frmPawningNew.lvSpec
             .SelectedItems(0).SubItems(3).Text = tmpResult
         End With
         Me.Close()

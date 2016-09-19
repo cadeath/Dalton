@@ -1,6 +1,9 @@
 ﻿Imports Microsoft.Reporting.WinForms
 
 Public Class frmPawningNew
+    Friend PawnCustomer As Client
+    Friend PawnClaimer As Client
+    Friend tmpItem As ItemClass
     'Private ItemSpec As Item
 
 
@@ -1768,7 +1771,106 @@ Public Class frmPawningNew
     Private Sub btnSearchClassification_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClassification.Click
         Dim secured_str As String = txtClassification.Text
         secured_str = DreadKnight(secured_str)
-        frmItemList.SearchSelect(secured_str, FormName.dev_Item)
+        frmItemList.SearchSelect(secured_str, FormName.Item)
         frmItemList.Show()
+    End Sub
+
+    Private Sub btnSearchClaimer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaimer.Click
+        Dim secured_str As String = txtClaimer.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.PawnClaimer)
+        frmClient.Show()
+    End Sub
+
+    Friend Sub LoadClient(ByVal cl As Client)
+        txtCustomer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
+        txtAddr.Text = String.Format("{0} {1} " + vbCrLf + "{2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
+        txtBDay.Text = cl.Birthday.ToString("MMM dd, yyyy")
+        txtContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
+
+        PawnCustomer = cl
+        'cboType.DroppedDown = True
+    End Sub
+
+    Friend Sub LoadCliamer(ByVal cl As Client)
+        txtClaimer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
+        PawnClaimer = cl
+    End Sub
+
+    Friend Sub LoadItem(ByVal Item As ItemClass)
+        'txtTmp.Text = (Item.Layout)
+        'Dim tmpLocation As Point = New Point(12, 323)
+        'Dim tmpLayout As String = (Item.Layout)
+
+        'If tmpLayout = "Textbox" Then
+        '    pnlTextbox.Location = tmpLocation
+
+        'ElseIf tmpLayout = "Yes/No" Then
+        '    pnlRadio.Location = tmpLocation
+
+        'ElseIf tmpLayout = "Multiline" Then
+        '    pnlMultiline.Location = tmpLocation
+
+        'End If
+
+        Dim tmpItemID As String = (Item.ID)
+        Dim mySql As String = "SELECT * FROM tblSpecs WHERE ItemID = '" & tmpItemID & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        lvSpec.Items.Clear()
+        For Each cio As DataRow In ds.Tables(0).Rows
+            AddItem(cio)
+        Next
+
+        txtClassification.Text = Item.ItemClass
+        tmpItem = Item
+    End Sub
+
+    Private Sub AddItem(ByVal cio As DataRow)
+        Dim tmpItem As New ItemSpecs
+        tmpItem.LoadByRow(cio)
+
+        Dim lv As ListViewItem = lvSpec.Items.Add(tmpItem.SpecID)
+        lv.SubItems.Add(tmpItem.SpecName)
+        lv.SubItems.Add(tmpItem.SpecLayout)
+        lv.SubItems.Add("")
+        'lv.SubItems.Add(tmpCIO.Amount)
+        'lv.SubItems.Add(tmpCIO.Particulars)
+        lv.Tag = tmpItem.SpecID
+
+    End Sub
+
+    Private Sub lvSpec_ColumnWidthChanging(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ColumnWidthChangingEventArgs) Handles lvSpec.ColumnWidthChanging
+        If Me.lvSpec.Columns(e.ColumnIndex).Width = 0 Then
+            e.Cancel = True
+            e.NewWidth = Me.lvSpec.Columns(e.ColumnIndex).Width
+        End If
+    End Sub
+
+    Private Sub InputSpec()
+        If lvSpec.SelectedItems.Count = 0 Then Exit Sub
+        If lvSpec.FocusedItem.SubItems(2).Text = "Textbox" Or lvSpec.FocusedItem.SubItems(2).Text = "TextBox" Then
+            frm_PanelTextbox.ShowDialog()
+
+        ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Yes/No" Then
+            frm_PanelYesNo.ShowDialog()
+
+        ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Multiline" Or lvSpec.FocusedItem.SubItems(2).Text = "MultiLine" Then
+            frm_PanelMultiline.ShowDialog()
+
+        ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Karat" Then
+            frm_PanelKarat.ShowDialog()
+
+        End If
+    End Sub
+
+    Private Sub lvSpec_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvSpec.KeyPress
+        If isEnter(e) Then
+            InputSpec()
+        End If
+    End Sub
+
+    Private Sub lvSpec_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvSpec.DoubleClick
+        InputSpec()
     End Sub
 End Class

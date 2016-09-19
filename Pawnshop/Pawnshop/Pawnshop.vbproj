@@ -269,6 +269,12 @@
     <Compile Include="Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\frm_PanelKarat.Designer.vb">
+      <DependentUpon>frm_PanelKarat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\frm_PanelKarat.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\frm_PanelMultiline.Designer.vb">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </Compile>
@@ -715,6 +721,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\frm_PanelKarat.resx">
+      <DependentUpon>frm_PanelKarat.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>

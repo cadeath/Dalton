@@ -51,7 +51,7 @@
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtCustomer.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.dev_NewPawning)
+        frmClient.SearchSelect(secured_str, FormName.NewPawning)
         frmClient.Show()
     End Sub
 
@@ -375,30 +375,30 @@
 
         'End If
 
-        'Dim tmpItemID As String = (Item.itemID)
-        'Dim mySql As String = "SELECT * FROM tbl_SPecification WHERE ItemID = '" & tmpItemID & "'"
-        'Dim ds As DataSet = LoadSQL(mySql)
+        Dim tmpItemID As String = (Item.ID)
+        Dim mySql As String = "SELECT * FROM tbl_SPecification WHERE ItemID = '" & tmpItemID & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
 
-        'lvItem.Items.Clear()
-        'For Each cio As DataRow In ds.Tables(0).Rows
-        '    AddItem(cio)
-        'Next
+        lvItem.Items.Clear()
+        For Each cio As DataRow In ds.Tables(0).Rows
+            AddItem(cio)
+        Next
 
-        ''txtSearchItem.Text = Item.Classification
-        'tmpItem = Item
+        txtSearchItem.Text = Item.ItemClass
+        tmpItem = Item
     End Sub
 
     Private Sub AddItem(ByVal cio As DataRow)
-        'Dim tmpItem As New ItemClass
-        'tmpItem.LoadSpecByRow(cio)
+        Dim tmpItem As New ItemSpecs
+        tmpItem.LoadByRow(cio)
 
-        'Dim lv As ListViewItem = lvItem.Items.Add(tmpItem.SpecID)
-        'lv.SubItems.Add(tmpItem.SpecName)
-        'lv.SubItems.Add(tmpItem.Layout)
-        'lv.SubItems.Add("")
-        ''lv.SubItems.Add(tmpCIO.Amount)
-        ''lv.SubItems.Add(tmpCIO.Particulars)
-        'lv.Tag = tmpItem.SpecID
+        Dim lv As ListViewItem = lvItem.Items.Add(tmpItem.SpecID)
+        lv.SubItems.Add(tmpItem.SpecName)
+        lv.SubItems.Add(tmpItem.SpecLayout)
+        lv.SubItems.Add("")
+        'lv.SubItems.Add(tmpCIO.Amount)
+        'lv.SubItems.Add(tmpCIO.Particulars)
+        lv.Tag = tmpItem.SpecID
 
     End Sub
 
@@ -549,14 +549,14 @@
     Private Sub btnSearchClaim_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaim.Click
         Dim secured_str As String = txtSearchClaim.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.dev_PawnClaimer)
+        frmClient.SearchSelect(secured_str, FormName.PawnClaimer)
         frmClient.Show()
     End Sub
 
     Private Sub btnSearchItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchItem.Click
         Dim secured_str As String = txtSearchItem.Text
         secured_str = DreadKnight(secured_str)
-        frmItemList.SearchSelect(secured_str, FormName.dev_Item)
+        frmItemList.SearchSelect(secured_str, FormName.Item)
         frmItemList.Show()
     End Sub
 

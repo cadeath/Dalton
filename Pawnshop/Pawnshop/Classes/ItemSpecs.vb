@@ -116,26 +116,26 @@
 
 #Region "Functions and Procedures"
     Public Sub LoadItemSpecs(id As Integer)
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE SpecsID = " & ItemID
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = " & id
         Dim ds As DataSet = LoadSQL(mySql, "TBLSPECS")
 
-        If ds.Tables(0).Rows.Count <> 0 Then
-            MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
+        'If ds.Tables(0).Rows.Count <> 0 Then
+        '    MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
+        '    Exit Sub
+        'End If
 
         With ds.Tables(0).Rows(0)
-            _specID = .Item("SpecID")
+            _specID = .Item("SpecsID")
             _itemID = .Item("ItemID")
             _specName = .Item("SpecsName")
             _specType = .Item("SpecType")
-            _UoM = .Item("UOM")
+            '_UoM = .Item("UOM")
             _onHold = If(.Item("OnHold") = 1, True, False)
             _specLayout = .Item("SpecLayout")
             _shortCode = .Item("ShortCode")
             _isRequired = If(.Item("isRequired") = 1, True, False)
-            _created = .Item("Created_At")
-            _updated = .Item("Updated_At")
+            '_created = .Item("Created_At")
+            '_updated = .Item("Updated_At")
         End With
     End Sub
 
@@ -159,6 +159,19 @@
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
 
+    End Sub
+    Public Sub LoadByRow(ByVal dr As DataRow)
+        With dr
+            _specID = .Item("specsid")
+            _itemID = .Item("itemid")
+            '_UoM = .Item("uom")
+            _specName = .Item("specsname")
+            _specType = .Item("spectype")
+            _specLayout = .Item("speclayout")
+            _shortCode = .Item("shortcode")
+            _isRequired = .Item("isrequired")
+
+        End With
     End Sub
 #End Region
 
