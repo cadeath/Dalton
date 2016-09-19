@@ -168,19 +168,7 @@
         Next
     End Sub
 
-    Private Sub Load_ItemSpecification()
-        If _itemID = 0 Then Exit Sub
 
-        Dim mySql As String = "SELECT * FROM " & SubTable & " WHERE ItemID = " & _itemID
-        Dim ds As DataSet = LoadSQL(mySql, SubTable)
-
-        For Each dr As DataRow In ds.Tables(SubTable).Rows
-
-            Dim tmp As New ItemSpecs
-            tmp.LoadItemSpecs_row(dr)
-
-        Next
-    End Sub
 
 #End Region
 

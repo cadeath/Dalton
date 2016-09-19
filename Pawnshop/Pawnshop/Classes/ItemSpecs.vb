@@ -163,6 +163,16 @@
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
     End Sub
+
+    Public Function LASTITEMID() As Single
+        Dim mySql As String = "SELECT * FROM TBLITEM ORDER BY ITEMID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("ITEMID")
+    End Function
 #End Region
 
 End Class

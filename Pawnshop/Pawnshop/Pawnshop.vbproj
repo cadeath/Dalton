@@ -194,6 +194,7 @@
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\CollectionItemSpecs.vb" />
+    <Compile Include="Classes\CollectionSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\DollarEntry.vb" />
@@ -231,12 +232,6 @@
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_ExtractToExcel.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Developer\dev_NewItem.Designer.vb">
-      <DependentUpon>dev_NewItem.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\dev_NewItem.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_ORview.Designer.vb">
@@ -679,9 +674,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ExtractToExcel.resx">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_NewItem.resx">
-      <DependentUpon>dev_NewItem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
