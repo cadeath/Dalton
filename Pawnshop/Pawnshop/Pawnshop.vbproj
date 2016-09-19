@@ -193,6 +193,7 @@
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Classes\CollectionItemSpecs.vb" />
     <Compile Include="Classes\CollectionSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\Currency.vb" />
