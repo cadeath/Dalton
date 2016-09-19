@@ -6,20 +6,20 @@ Public Class frmAdminPanel
     Dim rbYes As Integer
     Dim rbNo As Integer
 
-    Private ItemSave As Item
-    Private ItemModify As Item
+    'Private ItemSave As Item
+    'Private ItemModify As Item
 
-    Private SpecModify As Item
-    Private SpecSave As Item
+    'Private SpecModify As Item
+    'Private SpecSave As Item
     Dim ds As New DataSet
 
-    Friend SelectedItem As Item 'Holds Item
+    'Friend SelectedItem As Item 'Holds Item
 
 
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
 
-    Private ItemList As Item
+    'Private ItemList As Item
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
@@ -41,21 +41,21 @@ Public Class frmAdminPanel
     '    LockFields(True)
     'End Sub
 
-    Friend Sub LoadItemall(ByVal it As Item)
-        txtClassifiction.Text = String.Format(it.Classification)
-        txtCategory.Text = String.Format(it.Category)
-        txtDescription.Text = String.Format(it.Description)
+    'Friend Sub LoadItemall(ByVal it As Item)
+    '    txtClassifiction.Text = String.Format(it.Classification)
+    '    txtCategory.Text = String.Format(it.Category)
+    '    txtDescription.Text = String.Format(it.Description)
 
-        If it.Renewable = "1" Then
-            rdbYes.Checked = True
-        Else
-            rdbNo.Checked = True
-        End If
-        txtPrintLayout.Text = String.Format(it.PrintLayout)
+    '    If it.Renewable = "1" Then
+    '        rdbYes.Checked = True
+    '    Else
+    '        rdbNo.Checked = True
+    '    End If
+    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
 
-        ItemList = it
-        'LoadSpec()
-    End Sub
+    '    ItemList = it
+    '    'LoadSpec()
+    'End Sub
 
     Friend Sub clearfields()
         txtCategory.Text = ""
@@ -67,6 +67,7 @@ Public Class frmAdminPanel
         cmbModuleName.Text = ""
         dgSpecification.Rows.Clear()
         btnUpdate.Enabled = False
+        txtInterestRate.Text = ""
     End Sub
 
     Private Sub rdbYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbYes.CheckedChanged
@@ -82,120 +83,120 @@ Public Class frmAdminPanel
         Return True
     End Function
 
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If Not isValid() Then Exit Sub
+    'Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+    '    If Not isValid() Then Exit Sub
 
-        Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+    '    Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+    '    If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        ItemSave = New Item
-        With ItemSave
-            .Classification = txtClassifiction.Text
-            .Category = txtCategory.Text
-            .Description = txtDescription.Text
-            .DateCreated = CurrentDate
-            If rdbYes.Checked = True Then
-                .Renewable = rbYes
-            Else
-                .Renewable = rbNo
-            End If
+    '    ItemSave = New Item
+    '    With ItemSave
+    '        .Classification = txtClassifiction.Text
+    '        .Category = txtCategory.Text
+    '        .Description = txtDescription.Text
+    '        .DateCreated = CurrentDate
+    '        If rdbYes.Checked = True Then
+    '            .Renewable = rbYes
+    '        Else
+    '            .Renewable = rbNo
+    '        End If
 
-            .PrintLayout = txtPrintLayout.Text
+    '        .PrintLayout = txtPrintLayout.Text
 
-            .SaveItem()
-        End With
+    '        .SaveItem()
+    '    End With
 
 
 
-        For Each row As DataGridViewRow In dgSpecification.Rows
-            SpecSave = New Item
-            With SpecSave
+    '    For Each row As DataGridViewRow In dgSpecification.Rows
+    '        SpecSave = New Item
+    '        With SpecSave
 
-                .ShortCode = row.Cells(0).Value
-                .SpecName = row.Cells(1).Value
-                .SpecType = row.Cells(2).Value
-                .Layout = row.Cells(3).Value
-                .UnitofMeasure = row.Cells(4).Value
-                .IsRequired = row.Cells(5).Value
-                If .IsRequired = "Yes" Then
-                    .IsRequired = 1
-                Else
-                    .IsRequired = 0
-                End If
+    '            .ShortCode = row.Cells(0).Value
+    '            .SpecName = row.Cells(1).Value
+    '            .SpecType = row.Cells(2).Value
+    '            .Layout = row.Cells(3).Value
+    '            .UnitofMeasure = row.Cells(4).Value
+    '            .IsRequired = row.Cells(5).Value
+    '            If .IsRequired = "Yes" Then
+    '                .IsRequired = 1
+    '            Else
+    '                .IsRequired = 0
+    '            End If
 
-                If .SpecName Is Nothing Or .SpecType Is Nothing _
-                    Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
-                    Exit For
-                Else
-                    .SaveSpecification()
-                End If
-            End With
+    '            If .SpecName Is Nothing Or .SpecType Is Nothing _
+    '                Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
+    '                Exit For
+    '            Else
+    '                .SaveSpecification()
+    '            End If
+    '        End With
 
-        Next
-        MsgBox("Transaction Saved", MsgBoxStyle.Information)
-        clearfields()
+    '    Next
+    '    MsgBox("Transaction Saved", MsgBoxStyle.Information)
+    '    clearfields()
 
-    End Sub
+    'End Sub
    
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-        If Not isValid() Then Exit Sub
+        'If Not isValid() Then Exit Sub
 
-        If btnUpdate.Text = "&Update".ToString Then
-            btnUpdate.Text = "&Modify".ToString
-            reaDOnlyFalse()
-            Exit Sub
-        End If
-
-
-        Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        ItemModify = New Item
-        With ItemModify
-            .Classification = txtClassifiction.Text
-            .Category = txtCategory.Text
-            .Description = txtDescription.Text
-            .DateUpdated = CurrentDate
-            If rdbYes.Checked = True Then
-                .Renewable = rbYes
-            Else
-                .Renewable = rbNo
-            End If
-
-            .PrintLayout = txtPrintLayout.Text
-            .ModifyItem()
-        End With
-
-        For Each row As DataGridViewRow In dgSpecification.Rows
-            SpecSave = New Item
-
-            With SpecSave
-
-                .ShortCode = row.Cells(0).Value
-                .SpecName = row.Cells(1).Value
-                .SpecType = row.Cells(2).Value
-                .Layout = row.Cells(3).Value
-                .UnitofMeasure = row.Cells(4).Value
-                .IsRequired = row.Cells(5).Value
-                If .IsRequired = "Yes" Then
-                    .IsRequired = 1
-                Else
-                    .IsRequired = 0
-                End If
+        'If btnUpdate.Text = "&Update".ToString Then
+        '    btnUpdate.Text = "&Modify".ToString
+        '    reaDOnlyFalse()
+        '    Exit Sub
+        'End If
 
 
-                If .SpecName Is Nothing Or .SpecType Is Nothing _
-                    Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
-                    Exit For
-                Else
-                    .ModifySpec()
-                End If
-            End With
-        Next
-        MsgBox("Transaction Updated", MsgBoxStyle.Information)
-        btnSave.Enabled = True
-        clearfields()
+        'Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        'If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        'ItemModify = New Item
+        'With ItemModify
+        '    .Classification = txtClassifiction.Text
+        '    .Category = txtCategory.Text
+        '    .Description = txtDescription.Text
+        '    .DateUpdated = CurrentDate
+        '    If rdbYes.Checked = True Then
+        '        .Renewable = rbYes
+        '    Else
+        '        .Renewable = rbNo
+        '    End If
+
+        '    .PrintLayout = txtPrintLayout.Text
+        '    .ModifyItem()
+        'End With
+
+        'For Each row As DataGridViewRow In dgSpecification.Rows
+        '    SpecSave = New Item
+
+        '    With SpecSave
+
+        '        .ShortCode = row.Cells(0).Value
+        '        .SpecName = row.Cells(1).Value
+        '        .SpecType = row.Cells(2).Value
+        '        .Layout = row.Cells(3).Value
+        '        .UnitofMeasure = row.Cells(4).Value
+        '        .IsRequired = row.Cells(5).Value
+        '        If .IsRequired = "Yes" Then
+        '            .IsRequired = 1
+        '        Else
+        '            .IsRequired = 0
+        '        End If
+
+
+        '        If .SpecName Is Nothing Or .SpecType Is Nothing _
+        '            Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
+        '            Exit For
+        '        Else
+        '            .ModifySpec()
+        '        End If
+        '    End With
+        'Next
+        'MsgBox("Transaction Updated", MsgBoxStyle.Information)
+        'btnSave.Enabled = True
+        'clearfields()
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
