@@ -5,6 +5,7 @@
         With dev_NewPawning.lvItem
             .SelectedItems(0).SubItems(3).Text = tmpResult
         End With
+
         Me.Close()
     End Sub
 
@@ -18,4 +19,5 @@
         txtSearch.Clear()
         txtSearch.Focus()
     End Sub
+   
 End Class
