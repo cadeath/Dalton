@@ -112,7 +112,6 @@
             _itemSpecs = value
         End Set
     End Property
-
 #End Region
 
 #Region "Functions and Procedures"
@@ -137,6 +136,19 @@
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
         End With
+
+        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        ds.Clear()
+        ds = LoadSQL(mySql, SubTable)
+
+        For Each dr As DataRow In ds.Tables(SubTable).Rows
+
+            Dim itemSpec As New ItemSpecs
+            itemSpec.LoadItemSpecs_row(dr)
+
+            _itemSpecs.Add(itemSpec)
+
+        Next
     End Sub
 
     Public Sub SaveItem()

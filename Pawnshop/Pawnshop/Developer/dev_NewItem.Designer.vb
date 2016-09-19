@@ -77,7 +77,7 @@ Partial Class dev_NewItem
         'lsSpecs
         '
         Me.lsSpecs.FormattingEnabled = True
-        Me.lsSpecs.Location = New System.Drawing.Point(255, 54)
+        Me.lsSpecs.Location = New System.Drawing.Point(255, 45)
         Me.lsSpecs.Name = "lsSpecs"
         Me.lsSpecs.Size = New System.Drawing.Size(120, 95)
         Me.lsSpecs.TabIndex = 5

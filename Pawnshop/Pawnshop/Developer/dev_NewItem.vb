@@ -94,4 +94,5 @@
         lblID.Text = selectedItem.ID
         lblCLass.Text = selectedItem.ItemClass
     End Sub
+
 End Class
