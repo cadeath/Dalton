@@ -105,8 +105,6 @@
             strGprs2Moneygram &= "C.TYPE = 'gprs to moneygram' ORDER BY C.AMOUNT ASC ROWS 1) "
             strGprs2Moneygram &= "WHERE TBLMONEYTRANSFER.SERVICETYPE = 'GPRS - GPRS to Moneygram'"
 
-            
-
 
             RunCommand(strBracket)
             RunCommand(strWestern)

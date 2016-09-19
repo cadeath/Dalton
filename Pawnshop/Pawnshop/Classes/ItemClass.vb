@@ -83,6 +83,17 @@
         End Set
     End Property
 
+    Private _Count As Integer
+    Public Property RenewalCount() As Integer
+        Get
+            Return _Count
+        End Get
+        Set(ByVal value As Integer)
+            _Count = value
+        End Set
+    End Property
+
+
     Private _created As Date
     Public Property created_at() As Date
         Get
@@ -133,6 +144,7 @@
             _intRate = .Item("Int_Rate")
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
+            _Count = .Item("Cnt")
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
         End With
@@ -165,6 +177,7 @@
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
+            .Item("Cnt") = _Count
             .Item("Created_At") = Now
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
@@ -180,7 +193,33 @@
         Next
     End Sub
 
+    Public Sub Update()
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemClass = {1}", MainTable, _itemID)
+        Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
+        If ds.Tables(0).Rows.Count <> 0 Then
+            MsgBox("Unable to update record", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        With ds.Tables(MainTable).Rows(0)
+            .Item("ItemClass") = _itemClass
+            .Item("ItemCategory") = _category
+            .Item("Description") = _desc
+            .Item("Int_Rate") = _intRate
+            .Item("isRenew") = If(_isRenew, 1, 0)
+            .Item("onHold") = If(_onHold, 1, 0)
+            .Item("Print_Layout") = _printLayout
+            .Item("CNT") = _Count
+            .Item("Updated_At") = Now
+        End With
+
+        For Each itemSpec As ItemSpecs In Me._itemSpecs
+            itemSpec.UpdateSpecs()
+        Next
+
+        database.SaveEntry(ds, False)
+    End Sub
 
 #End Region
 
