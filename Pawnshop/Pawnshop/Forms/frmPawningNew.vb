@@ -1763,4 +1763,12 @@ Public Class frmPawningNew
     '    Private Sub Panel1_LocationChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Panel1.LocationChanged
     '        Panel1.Location = New Point(340, 250)
     '    End Sub
+
+
+    Private Sub btnSearchClassification_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClassification.Click
+        Dim secured_str As String = txtClassification.Text
+        secured_str = DreadKnight(secured_str)
+        frmItemList.SearchSelect(secured_str, FormName.dev_Item)
+        frmItemList.Show()
+    End Sub
 End Class

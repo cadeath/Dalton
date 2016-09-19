@@ -3,7 +3,7 @@
     Friend PawnItem As PawnTicket
     Friend PawnCustomer As Client
     Friend PawnClaimer As Client
-    Friend tmpItem As Item
+    Friend tmpItem As ItemClass
     Private PawnInfo() As Hashtable
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
     Private currentORNumber As Integer = GetOption("ORLastNum")
@@ -178,7 +178,7 @@
             .Item("NetAmount") = Net_Amount
             .Item("AppraiserID") = GetAppraiserID(cboAppraiser.Text)
             .Item("EncoderID") = UserID
-            .Item("pwnItmID") = tmpItem.itemID
+            .Item("pwnItmID") = ""
             .Item("ClientID") = PawnCustomer.ID
             .Item("ClaimBy") = PawnClaimer.ID
             '.Item("ORDate") = _orDate
@@ -359,7 +359,7 @@
         PawnClaimer = cl
     End Sub
 
-    Friend Sub LoadItem(ByVal Item As Item)
+    Friend Sub LoadItem(ByVal Item As ItemClass)
         'txtTmp.Text = (Item.Layout)
         'Dim tmpLocation As Point = New Point(12, 323)
         'Dim tmpLayout As String = (Item.Layout)
@@ -375,30 +375,30 @@
 
         'End If
 
-        Dim tmpItemID As String = (Item.itemID)
-        Dim mySql As String = "SELECT * FROM tbl_SPecification WHERE ItemID = '" & tmpItemID & "'"
-        Dim ds As DataSet = LoadSQL(mySql)
+        'Dim tmpItemID As String = (Item.itemID)
+        'Dim mySql As String = "SELECT * FROM tbl_SPecification WHERE ItemID = '" & tmpItemID & "'"
+        'Dim ds As DataSet = LoadSQL(mySql)
 
-        lvItem.Items.Clear()
-        For Each cio As DataRow In ds.Tables(0).Rows
-            AddItem(cio)
-        Next
+        'lvItem.Items.Clear()
+        'For Each cio As DataRow In ds.Tables(0).Rows
+        '    AddItem(cio)
+        'Next
 
-        txtSearchItem.Text = Item.Classification
-        tmpItem = Item
+        ''txtSearchItem.Text = Item.Classification
+        'tmpItem = Item
     End Sub
 
     Private Sub AddItem(ByVal cio As DataRow)
-        Dim tmpItem As New Item
-        tmpItem.LoadSpecByRow(cio)
+        'Dim tmpItem As New ItemClass
+        'tmpItem.LoadSpecByRow(cio)
 
-        Dim lv As ListViewItem = lvItem.Items.Add(tmpItem.SpecID)
-        lv.SubItems.Add(tmpItem.SpecName)
-        lv.SubItems.Add(tmpItem.Layout)
-        lv.SubItems.Add("")
-        'lv.SubItems.Add(tmpCIO.Amount)
-        'lv.SubItems.Add(tmpCIO.Particulars)
-        lv.Tag = tmpItem.SpecID
+        'Dim lv As ListViewItem = lvItem.Items.Add(tmpItem.SpecID)
+        'lv.SubItems.Add(tmpItem.SpecName)
+        'lv.SubItems.Add(tmpItem.Layout)
+        'lv.SubItems.Add("")
+        ''lv.SubItems.Add(tmpCIO.Amount)
+        ''lv.SubItems.Add(tmpCIO.Particulars)
+        'lv.Tag = tmpItem.SpecID
 
     End Sub
 

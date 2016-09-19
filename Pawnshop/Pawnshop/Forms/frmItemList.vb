@@ -1,18 +1,10 @@
 ﻿Public Class frmItemList
-    'Dim mOtherForm As Boolean = False
+    Dim mOtherForm As Boolean = False
 
-    'Dim frmOrig As formSwitch.FormName
-    'Dim ds As New DataSet
+    Dim frmOrig As formSwitch.FormName
+    Dim ds As New DataSet
 
-    ''Friend GetItem As Item
-
-
-    ''Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-    ''    mOtherForm = True
-    ''    btnSelect.Visible = True
-    ''    txtSearch.Text = src
-    ''    frmOrig = frmOrigin
-    ''End Sub
+    'Friend GetItem As Item
 
     'Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
     '    ClearField()
@@ -179,10 +171,11 @@
 
     'End Sub
 
-    'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-    '    mOtherForm = True
-    '    btnSelect.Visible = True
-    '    txtSearch.Text = src
-    '    frmOrig = frmOrigin
-    'End Sub
+    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+        mOtherForm = True
+        btnSelect.Visible = True
+        txtSearch.Text = src
+        frmOrig = frmOrigin
+    End Sub
+
 End Class

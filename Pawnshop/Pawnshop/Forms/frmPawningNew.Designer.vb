@@ -1056,7 +1056,7 @@ Partial Class frmPawningNew
         Me.Panel1.Controls.Add(Me.txtSerial1)
         Me.Panel1.Location = New System.Drawing.Point(940, 365)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(237, 318)
+        Me.Panel1.Size = New System.Drawing.Size(237, 92)
         Me.Panel1.TabIndex = 33
         '
         'lblSPecification
