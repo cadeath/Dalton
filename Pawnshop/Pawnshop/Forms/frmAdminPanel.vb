@@ -14,8 +14,7 @@ Public Class frmAdminPanel
     Private SpecSave As ItemSpecs
     Dim ds As New DataSet
 
-    Friend SelectedItem As ItemClass 'Holds Item
-
+    Friend SelectedItem As ItemClass
 
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
@@ -28,18 +27,23 @@ Public Class frmAdminPanel
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
         If it.ItemClass = "" Then Exit Sub
-        ' Display select buttons
+
         txtClassifiction.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
-        If it.isRenewable = "Yes" Then
+
+        If it.isRenewable = 1 Then
             rdbYes.Checked = True
         Else
             rdbNo.Checked = True
         End If
 
+        txtPrintLayout.Text = it.PrintLayout
+        txtInterestRate.Text = it.InterestRate
+
         SelectedItem = it
-        'LockFields(True)
+
+        reaDOnlyTrue()
     End Sub
 
     Friend Sub LoadItemall(ByVal it As ItemClass)
@@ -232,6 +236,9 @@ Public Class frmAdminPanel
         txtPrintLayout.ReadOnly = True
         rdbNo.Enabled = False
         rdbYes.Enabled = False
+        For a As Integer = 0 To dgSpecification.Rows.Count - 1
+            dgSpecification.Rows(a).ReadOnly = True
+        Next
     End Sub
 
     Friend Sub reaDOnlyFalse()
@@ -257,13 +264,15 @@ Public Class frmAdminPanel
         dt = ds.Tables(0)
 
         For Each dr As DataRow In dt.Rows
+
             'dr.ClearErrors()
-            'If dr(5) = 1 Then
-            '    dr(5) = "True"
-            'Else
-            '    dr(5) = "False"
+            'If dr(5).ToString = 1 Then
+            '    dr(5) = True
+            'ElseIf dr(5).ToString = 0 Then
+            '    dr(5) = False
             'End If
-            dgSpecification.Rows.Add(dr(5), dr(1), dr(4), dr(3), dr(4), dr(2))
+
+            dgSpecification.Rows.Add(dr(4), dr(0), dr(1), dr(3), dr(2), dr(5))
         Next
 
         Dim i As Integer = (0)

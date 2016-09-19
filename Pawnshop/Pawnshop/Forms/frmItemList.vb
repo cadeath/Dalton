@@ -234,26 +234,26 @@
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-        If lvItem.Items.Count = 0 Then Exit Sub
-
-        If lvItem.SelectedItems.Count = 0 Then
-            lvItem.Items(0).Focused = True
-        End If
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-
+       Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+      
         Dim selectedItem As New ItemClass
         selectedItem.LoadItem(idx)
+
         lblItemID.Text = selectedItem.ID
+        lvItem.Text = selectedItem.ItemClass
 
-        selectedItem.LoadItem(idx)
+        lvItem.Items.Clear()
 
-        lblItemID.Text = (idx)
+        For Each spec As ItemSpecs In selectedItem.ItemSpecifications
+            Dim IsRenew As String
+            IsRenew = spec.isRequired.ToString
 
+            frmAdminPanel.dgSpecification.Rows.Add(spec.ShortCode, spec.SpecName, spec.SpecType, spec.SpecLayout, spec.UnitOfMeasure, IsRenew)
 
-        formSwitch.ReloadFormFromSearch2(frmOrig, selectedItem)
-        frmAdminPanel.LoadItemall(selectedItem)
-        frmAdminPanel.LoadSpec()
+        Next
+
+        frmAdminPanel.LoadItemList(selectedItem)
+        frmAdminPanel.Show()
         Me.Hide()
-
     End Sub
 End Class
