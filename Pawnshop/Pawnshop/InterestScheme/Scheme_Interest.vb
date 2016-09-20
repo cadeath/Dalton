@@ -119,6 +119,25 @@
         database.SaveEntry(ds)
     End Sub
 
+    Public Sub Update()
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE {1} = {2}", MainTable, "IS_ID", _schemeINTid)
+        Dim ds As DataSet = LoadSQL(mySql, MainTable)
+
+        If ds.Tables(MainTable).Rows.Count <> 1 Then
+            MsgBox("Unable to update record", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        With ds.Tables(MainTable).Rows(0)
+            .Item("DAYFROM") = _dayFrom
+            .Item("DAYTO") = _dayTo
+            .Item("INTEREST") = _interest
+            .Item("PENALTY") = _penalty
+            .Item("REMARKS") = _remarks
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
+
 #End Region
 
 End Class

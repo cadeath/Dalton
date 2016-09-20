@@ -1,16 +1,16 @@
 ﻿Public Class IntScheme_Lines
     Inherits System.Collections.CollectionBase
 
-    Public ReadOnly Property Item(ByVal index As Integer) As ItemSpecs
+    Public ReadOnly Property Item(ByVal index As Integer) As Scheme_Interest
         Get
             ' The appropriate item is retrieved from the List object and 
             ' explicitly cast to the Widget type, then returned to the 
             ' caller.
-            Return CType(List.Item(index), ItemSpecs)
+            Return CType(List.Item(index), Scheme_Interest)
         End Get
     End Property
 
-    Public Sub Add(ByVal IDCard As ItemSpecs)
+    Public Sub Add(ByVal IDCard As Scheme_Interest)
         ' Invokes Add method of the List object to add a widget.
         List.Add(IDCard)
     End Sub

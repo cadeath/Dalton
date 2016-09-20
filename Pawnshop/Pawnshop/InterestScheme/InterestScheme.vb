@@ -3,7 +3,6 @@
     Private MainTable As String = ""
     Private SubTable As String = ""
 
-    Private SchemeDetails As IntScheme_Lines
     Private isLoaded As Boolean = False
 
 #Region "Properties"
@@ -36,6 +35,17 @@
             _desc = value
         End Set
     End Property
+
+    Private _SchemeDetails As IntScheme_Lines
+    Public Property SchemeDetails() As IntScheme_Lines
+        Get
+            Return _SchemeDetails
+        End Get
+        Set(ByVal value As IntScheme_Lines)
+            _SchemeDetails = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Functions and Procedures"
@@ -55,6 +65,18 @@
             _schemeName = .Item("SchemeName")
             _desc = .Item("Description")
         End With
+
+        mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SpecsID", SubTable, _schemeID)
+        ds.Clear()
+        ds = LoadSQL(mySql, SubTable)
+
+        _SchemeDetails = New IntScheme_Lines
+        For Each dr As DataRow In ds.Tables(SubTable).Rows
+            Dim tmpDetails As New Scheme_Interest
+            tmpDetails.Load_SchemeDetails_row(dr)
+
+            _SchemeDetails.Add(tmpDetails)
+        Next
 
         isLoaded = True
     End Sub
@@ -81,10 +103,10 @@
         ds = LoadSQL(mySql, MainTable)
         _schemeID = ds.Tables(0).Rows(0).Item("SchemeID")
 
-        'For Each detail As Scheme_Interest In IntScheme_Lines
-
-        'Next
-
+        For Each IntDetails As Scheme_Interest In _SchemeDetails
+            IntDetails.SchemeID = _schemeID
+            IntDetails.Save_Details()
+        Next
     End Sub
 
     Public Sub Update()
@@ -100,6 +122,13 @@
             .Item("SchemeName") = _schemeName
             .Item("Description") = _desc
         End With
+
+        For Each detail As Scheme_Interest In _SchemeDetails
+            detail.Update()
+        Next
+        database.SaveEntry(ds, False)
+
+        Refresh()
     End Sub
 #End Region
 
