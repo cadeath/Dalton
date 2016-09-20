@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{24AC89A7-4FDE-47EF-AC83-32A2499285D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Pawnshop.frmMain</StartupObject>
+    <StartupObject>Pawnshop.My.MyApplication</StartupObject>
     <RootNamespace>Pawnshop</RootNamespace>
     <AssemblyName>pawnshop</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -327,6 +327,12 @@
       <DependentUpon>frmInterestScheme.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmInterestScheme.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmInterestSchemeList.Designer.vb">
+      <DependentUpon>frmInterestSchemeList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInterestSchemeList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmItemList.Designer.vb">
@@ -733,6 +739,9 @@
     <EmbeddedResource Include="Forms\frmInterestScheme.resx">
       <DependentUpon>frmInterestScheme.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInterestSchemeList.resx">
+      <DependentUpon>frmInterestSchemeList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmItemList.resx">
       <DependentUpon>frmItemList.vb</DependentUpon>
     </EmbeddedResource>
@@ -1022,12 +1031,6 @@
     <None Include="backup.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="doc\ExpiryFormat.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="doc\JournalEntries.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
     <None Include="HitManagement\dsHit.xsc">
@@ -1145,7 +1148,9 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Developer\doc\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

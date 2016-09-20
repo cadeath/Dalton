@@ -66,7 +66,7 @@
             _desc = .Item("Description")
         End With
 
-        mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SpecsID", SubTable, _schemeID)
+        mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SchemeID", SubTable, _schemeID)
         ds.Clear()
         ds = LoadSQL(mySql, SubTable)
 
