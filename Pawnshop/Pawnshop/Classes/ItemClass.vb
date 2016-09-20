@@ -43,6 +43,15 @@
         End Set
     End Property
 
+    Private _intRate As Double
+    Public Property InterestRate() As Double
+        Get
+            Return _intRate
+        End Get
+        Set(ByVal value As Double)
+            _intRate = value
+        End Set
+    End Property
 
     Private _isRenew As Boolean
     Public Property isRenewable() As Boolean
@@ -184,11 +193,11 @@
 
     Public Sub Update()
 
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, frmItemList.lblItemID.Text)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemID)
+
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         If ds.Tables(0).Rows.Count <> 1 Then
-
             MsgBox("Unable to update record", MsgBoxStyle.Critical)
             Exit Sub
         End If
