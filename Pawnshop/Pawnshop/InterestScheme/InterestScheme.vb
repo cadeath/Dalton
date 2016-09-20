@@ -1,7 +1,7 @@
 ﻿Public Class InterestScheme
 
-    Private MainTable As String = ""
-    Private SubTable As String = ""
+    Private MainTable As String = "TBLINTSCHEMES"
+    Private SubTable As String = "TBLINTSCHEME_DETAILS"
 
     Private isLoaded As Boolean = False
 
@@ -99,7 +99,7 @@
         ds.Tables(MainTable).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
 
-        mySql = String.Format("SELECT * FROM {0} ORDER BY SCHEMEID DESC ROWS 1")
+        mySql = String.Format("SELECT * FROM {0} ORDER BY SCHEMEID DESC ROWS 1", MainTable)
         ds = LoadSQL(mySql, MainTable)
         _schemeID = ds.Tables(0).Rows(0).Item("SchemeID")
 
