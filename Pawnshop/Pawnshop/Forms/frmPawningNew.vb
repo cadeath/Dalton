@@ -71,44 +71,41 @@ Public Class frmPawningNew
     '    End Sub
 
     '#Region "GUI"
-    '    Private Sub ClearFields()
-    '        mod_system.isAuthorized = False
+    Private Sub ClearFields()
+        mod_system.isAuthorized = False
 
-    '        txtCustomer.Text = ""
-    '        txtAddr.Text = ""
-    '        txtBDay.Text = ""
-    '        txtContact.Text = ""
-    '        cboType.Text = ""
-    '        cboCat.Text = ""
-    '        txtDesc.Text = ""
-    '        txtGram.Text = ""
-    '        'cboKarat.Text = ""
+        txtCustomer.Text = ""
+        txtAddr.Text = ""
+        txtBDay.Text = ""
+        txtContact.Text = ""
+        'cboKarat.Text = ""
 
-    '        txtTicket.Text = ""
-    '        txtOldTicket.Text = ""
-    '        txtLoan.Text = ""
-    '        txtMatu.Text = ""
-    '        txtExpiry.Text = ""
-    '        txtAuction.Text = ""
-    '        txtAppr.Text = ""
-    '        txtPrincipal.Text = ""
-    '        txtAdv.Text = ""
-    '        txtNet.Text = ""
+        txtTicket.Text = ""
+        txtOldTicket.Text = ""
+        txtLoan.Text = ""
+        txtMatu.Text = ""
+        txtExpiry.Text = ""
+        txtAuction.Text = ""
+        txtAppr.Text = ""
+        txtPrincipal.Text = ""
+        txtAdv.Text = ""
+        txtNet.Text = ""
 
-    '        txtReceipt.Text = ""
-    '        txtReceiptDate.Text = ""
-    '        txtPrincipal2.Text = ""
-    '        txtOver.Text = ""
-    '        txtPenalty.Text = ""
-    '        txtService.Text = ""
-    '        txtEvat.Text = ""
-    '        txtRenew.Text = ""
-    '        txtRedeem.Text = ""
+        txtReceipt.Text = ""
+        txtReceiptDate.Text = ""
+        txtPrincipal2.Text = ""
+        txtOver.Text = ""
+        txtPenalty.Text = ""
+        txtService.Text = ""
+        txtEvat.Text = ""
+        txtRenew.Text = ""
+        txtRedeem.Text = ""
 
 
-    '        txtClassification.Text = ""
+        txtClassification.Text = ""
+        txtClaimer.Clear()
 
-    '    End Sub
+    End Sub
     '    Private Function CheckOTP() As Boolean
     '        diagOTP.Show()
     '        diagOTP.TopMost = True
@@ -1873,4 +1870,9 @@ Public Class frmPawningNew
     Private Sub lvSpec_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvSpec.DoubleClick
         InputSpec()
     End Sub
+
+    Private Sub frmPawningNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ClearFields()
+    End Sub
+
 End Class

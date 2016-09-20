@@ -14,6 +14,7 @@
     End Sub
 
     Private Sub txtGram_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtGram.KeyPress, cboKarat.KeyPress
+        DigitOnly(e)
         If isEnter(e) Then
             btnSubmit.PerformClick()
         End If

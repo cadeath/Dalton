@@ -18,6 +18,7 @@
     Private Sub frm_PanelMultiline_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtSearch.Clear()
         txtSearch.Focus()
+        txtSearch.ScrollBars = ScrollBars.Vertical
     End Sub
    
 End Class

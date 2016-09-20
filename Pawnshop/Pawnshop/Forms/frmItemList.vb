@@ -5,29 +5,6 @@
 
     Dim ds As New DataSet
 
-    'Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-    '    'If Not mOtherForm Then ClearField()
-
-    ''Dim ds As New DataSet
-
-    ''Friend GetItem As ItemClass
-
-
-    '    LoadActiveItem()
-
-
-
-    '    If Not mOtherForm Then
-    '        txtSearch.Focus()
-    '    End If
-
-    '    txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
-    '    If txtSearch.Text <> "" Then
-    '        btnSearch.PerformClick()
-    '    End If
-    'End Sub
-
-
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
@@ -39,19 +16,13 @@
         Next
     End Sub
 
-    'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-    '    mOtherForm = True
-    '    btnSelect.Visible = True
-    '    txtSearch.Text = src
-    '    frmOrig = frmOrigin
-    'End Sub
-
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ClearField()
-        If Not mOtherForm Then ClearField()
+        ' ClearField()
+        ' If Not mOtherForm Then ClearField()
 
 
-        loadItemClass()
+        'loadItemClass()
+        LoadActiveItem()
 
         If Not mOtherForm Then
             txtSearch.Focus()
@@ -63,26 +34,13 @@
         End If
     End Sub
 
-
-    'Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM TBLITEM where ITEMID <> 0 ORDER BY ITEMID ASC")
-    '    Dim ds As DataSet
-    '    ds = LoadSQL(mySql)
-    '    lvItem.Items.Clear()
-
-
-    '    For Each dr As DataRow In ds.Tables(0).Rows
-    '        Dim tmpItem As New ItemClass
-    '        '  tmpItem.LoadItem(ID)
-    '        AddItem(tmpItem)
-    '    Next
-    'End Sub
-
-
     Private Sub AddItem(ByVal dl As ItemClass)
         Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
         lv.SubItems.Add(dl.ItemClass)
         lv.SubItems.Add(dl.Category)
         lv.SubItems.Add(dl.Description)
+        lv.SubItems.Add(dl.InterestRate)
+        lv.SubItems.Add(dl.isRenewable)
         lv.SubItems.Add(dl.PrintLayout)
     End Sub
 
@@ -272,20 +230,20 @@
 
         lblItemID.Text = selectedItem.ID
 
-        lvItem.Items.Clear()
-        For Each spec As ItemSpecs In selectedItem.ItemSpecifications
-            lvItem.Items.Add(spec.SpecName)
-        Next
+        'lvItem.Items.Clear()
+        'For Each spec As ItemSpecs In selectedItem.ItemSpecifications
+        '    lvItem.Items.Add(spec.SpecName)
+        'Next
+        formSwitch.ReloadFormFromSearch2(frmOrig, selectedItem)
+        Me.Close()
     End Sub
 
 
     Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
-        If Not mOtherForm Then
-            btnView.PerformClick()
-        Else
-            btnSelect.PerformClick()
-        End If
+        'If Not mOtherForm Then
+        '    btnView.PerformClick()
+        'Else
+        btnSelect.PerformClick()
+        'End If
     End Sub
-
-
 End Class

@@ -185,7 +185,6 @@
         Next
     End Sub
 
-
     Public Sub LoadByRow(ByVal dr As DataRow)
         With dr
             _itemID = .Item("itemid")
@@ -198,9 +197,6 @@
           
         End With
     End Sub
-
-
-
 
 #End Region
 
