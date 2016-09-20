@@ -184,7 +184,7 @@
 
     Public Sub Update()
 
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemID)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, frmItemList.lblItemID.Text)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         If ds.Tables(0).Rows.Count <> 1 Then
@@ -204,9 +204,9 @@
             .Item("Updated_At") = Now
         End With
 
-        'For Each itemSpec As ItemSpecs In Me._itemSpecs
-        '    itemSpec.UpdateSpecs()
-        'Next
+        For Each itemSpec As ItemSpecs In Me._itemSpecs
+            itemSpec.UpdateSpecs()
+        Next
 
         database.SaveEntry(ds, False)
     End Sub

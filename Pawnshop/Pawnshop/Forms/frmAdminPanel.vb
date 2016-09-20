@@ -37,7 +37,7 @@ Public Class frmAdminPanel
 
         txtPrintLayout.Text = it.PrintLayout
 
-
+        Dim id As Integer = it.ID
         SelectedItem = it
 
         reaDOnlyTrue()

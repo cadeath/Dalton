@@ -162,8 +162,9 @@
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-       Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-      
+
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+
         selectedItem = New ItemClass
         selectedItem.LoadItem(idx)
 
@@ -178,7 +179,6 @@
             frmAdminPanel.dgSpecification.Rows.Add(spec.ShortCode, spec.SpecName, spec.SpecType, spec.SpecLayout, spec.UnitOfMeasure, IsRenew)
 
         Next
-
 
         frmAdminPanel.LoadItemList(selectedItem)
         frmAdminPanel.Show()
