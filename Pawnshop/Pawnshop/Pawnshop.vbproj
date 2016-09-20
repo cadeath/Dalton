@@ -9,11 +9,10 @@
     <ProjectGuid>{24AC89A7-4FDE-47EF-AC83-32A2499285D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <StartupObject>Pawnshop.My.MyApplication</StartupObject>
-
     <RootNamespace>Pawnshop</RootNamespace>
     <AssemblyName>pawnshop</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -276,30 +275,6 @@
     <Compile Include="Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Panel\frm_PanelKarat.Designer.vb">
-      <DependentUpon>frm_PanelKarat.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Panel\frm_PanelKarat.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
-      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Panel\frm_PanelMultiline.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Panel\frm_PanelTextbox.Designer.vb">
-      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Panel\frm_PanelTextbox.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Panel\frm_PanelYesNo.Designer.vb">
-      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Panel\frm_PanelYesNo.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\ab.Designer.vb">
       <DependentUpon>ab.vb</DependentUpon>
     </Compile>
@@ -370,12 +345,12 @@
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmPawningItemNew.vb">
-
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
     <Compile Include="InterestScheme\dev_Scheme.vb">
-
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InterestScheme\InterestScheme.vb" />
@@ -387,6 +362,30 @@
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Modules\Void.vb" />
+    <Compile Include="Panel\frm_PanelKarat.Designer.vb">
+      <DependentUpon>frm_PanelKarat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelKarat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
+      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelMultiline.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel\frm_PanelTextbox.Designer.vb">
+      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelTextbox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel\frm_PanelYesNo.Designer.vb">
+      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelYesNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
       <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
     </Compile>
@@ -614,6 +613,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -745,18 +748,6 @@
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Panel\frm_PanelKarat.resx">
-      <DependentUpon>frm_PanelKarat.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
-      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Panel\frm_PanelTextbox.resx">
-      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Panel\frm_PanelYesNo.resx">
-      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
     </EmbeddedResource>
@@ -784,13 +775,23 @@
     <EmbeddedResource Include="Forms\frmItemList.resx">
       <DependentUpon>frmItemList.vb</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
-
+    </EmbeddedResource>
     <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
-
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelKarat.resx">
+      <DependentUpon>frm_PanelKarat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
+      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelTextbox.resx">
+      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelYesNo.resx">
+      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
@@ -1096,6 +1097,7 @@
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
