@@ -184,9 +184,9 @@ Partial Class frmInterestScheme
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 6)
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(366, 133)
+        Me.GroupBox2.Size = New System.Drawing.Size(375, 133)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         '
@@ -242,9 +242,9 @@ Partial Class frmInterestScheme
         Me.GroupBox3.Controls.Add(Me.btnSave)
         Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 326)
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 326)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(918, 73)
+        Me.GroupBox3.Size = New System.Drawing.Size(927, 73)
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
         '
@@ -273,7 +273,7 @@ Partial Class frmInterestScheme
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2, Me.LineShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(939, 402)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(936, 402)
         Me.ShapeContainer1.TabIndex = 13
         Me.ShapeContainer1.TabStop = False
         '
@@ -355,7 +355,7 @@ Partial Class frmInterestScheme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(939, 402)
+        Me.ClientSize = New System.Drawing.Size(936, 402)
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lvIntScheme)

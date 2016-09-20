@@ -103,6 +103,9 @@
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
         btnSave.Enabled = True
         clearfields()
+        lvIntScheme.Items.Clear()
+        txtSchemeName.Text = ""
+        txtDescription.Text = ""
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
