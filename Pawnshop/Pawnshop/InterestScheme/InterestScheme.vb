@@ -110,7 +110,7 @@
     End Sub
 
     Public Sub Update()
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE IS_ID = {1}", MainTable, _schemeID)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE SCHEMEID = {1}", MainTable, _schemeID)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         If ds.Tables(MainTable).Rows.Count <> 1 Then

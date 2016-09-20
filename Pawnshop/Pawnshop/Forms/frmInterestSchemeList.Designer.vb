@@ -41,7 +41,7 @@ Partial Class frmInterestSchemeList
         Me.btnSearch.Location = New System.Drawing.Point(434, 21)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.btnSearch.TabIndex = 0
+        Me.btnSearch.TabIndex = 1
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
@@ -59,7 +59,7 @@ Partial Class frmInterestSchemeList
         Me.txtSearch.Location = New System.Drawing.Point(64, 21)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(364, 22)
-        Me.txtSearch.TabIndex = 2
+        Me.txtSearch.TabIndex = 0
         '
         'lvSchemeList
         '
@@ -69,7 +69,7 @@ Partial Class frmInterestSchemeList
         Me.lvSchemeList.Location = New System.Drawing.Point(7, 60)
         Me.lvSchemeList.Name = "lvSchemeList"
         Me.lvSchemeList.Size = New System.Drawing.Size(503, 263)
-        Me.lvSchemeList.TabIndex = 3
+        Me.lvSchemeList.TabIndex = 2
         Me.lvSchemeList.UseCompatibleStateImageBehavior = False
         Me.lvSchemeList.View = System.Windows.Forms.View.Details
         '
@@ -102,7 +102,7 @@ Partial Class frmInterestSchemeList
         Me.GroupBox1.Location = New System.Drawing.Point(5, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(515, 371)
-        Me.GroupBox1.TabIndex = 4
+        Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
         'lblSchemeID
@@ -119,7 +119,7 @@ Partial Class frmInterestSchemeList
         Me.btnView.Location = New System.Drawing.Point(353, 329)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 32)
-        Me.btnView.TabIndex = 5
+        Me.btnView.TabIndex = 3
         Me.btnView.Text = "View"
         Me.btnView.UseVisualStyleBackColor = True
         '

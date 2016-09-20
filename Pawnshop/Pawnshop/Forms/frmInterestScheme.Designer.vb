@@ -283,16 +283,16 @@ Partial Class frmInterestScheme
         'LineShape2
         '
         Me.LineShape2.Name = "LineShape2"
-        Me.LineShape2.X1 = 2
-        Me.LineShape2.X2 = 384
+        Me.LineShape2.X1 = 10
+        Me.LineShape2.X2 = 374
         Me.LineShape2.Y1 = 246
         Me.LineShape2.Y2 = 246
         '
         'LineShape1
         '
         Me.LineShape1.Name = "LineShape1"
-        Me.LineShape1.X1 = 2
-        Me.LineShape1.X2 = 384
+        Me.LineShape1.X1 = 11
+        Me.LineShape1.X2 = 373
         Me.LineShape1.Y1 = 301
         Me.LineShape1.Y2 = 301
         '
