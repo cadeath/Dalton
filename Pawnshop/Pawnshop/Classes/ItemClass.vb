@@ -144,7 +144,7 @@
             _intRate = .Item("Int_Rate")
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
-            _Count = .Item("Cnt")
+            _Count = .Item("Renewal_Cnt")
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
         End With
@@ -177,7 +177,7 @@
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
-            .Item("Cnt") = _Count
+            .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
@@ -210,7 +210,7 @@
             .Item("isRenew") = If(_isRenew, 1, 0)
             .Item("onHold") = If(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
-            .Item("CNT") = _Count
+            .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
         End With
 
