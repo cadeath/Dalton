@@ -92,7 +92,16 @@
         End If
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Item")
-        loadItemClass()
+        For Each dr As DataRow In ds.Tables(0).Rows
+
+            Dim lv As ListViewItem = lvItem.Items.Add(dr("ItemID"))
+            lv.SubItems.Add(dr("ItemClass"))
+            lv.SubItems.Add(dr("ItemCategory"))
+            lv.SubItems.Add(dr("Description"))
+            lv.SubItems.Add(dr("Int_rate"))
+            lv.SubItems.Add(dr("IsRenew"))
+            lv.SubItems.Add(dr("Print_Layout"))
+        Next
     End Sub
 
     ''Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
@@ -223,19 +232,38 @@
    
     
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
 
-        Dim selectedItem As New ItemClass
-        selectedItem.LoadItem(idx)
+        'If lvClient.Items.Count = 0 Then Exit Sub
 
-        lblItemID.Text = selectedItem.ID
+        'If lvClient.SelectedItems.Count = 0 Then
+        '    lvClient.Items(0).Focused = True
+        'End If
+        'Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
+        'GetClient = New Client
+        'GetClient.LoadClient(idx)
+
+
+        'formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
+
+        'Me.Close()
+        
+
+        'Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+
+        'Dim selectedItem As New ItemClass
+        'selectedItem.LoadItem(idx)
+
+        'lblItemID.Text = selectedItem.ID
+
 
         'lvItem.Items.Clear()
         'For Each spec As ItemSpecs In selectedItem.ItemSpecifications
         '    lvItem.Items.Add(spec.SpecName)
         'Next
+
         formSwitch.ReloadFormFromSearch2(frmOrig, selectedItem)
         Me.Close()
+
     End Sub
 
 
@@ -246,4 +274,29 @@
         btnSelect.PerformClick()
         'End If
     End Sub
+
+    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+       Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+      
+        Dim selectedItem As New ItemClass
+        selectedItem.LoadItem(idx)
+
+        lblItemID.Text = selectedItem.ID
+        lvItem.Text = selectedItem.ItemClass
+
+        lvItem.Items.Clear()
+
+        For Each spec As ItemSpecs In selectedItem.ItemSpecifications
+            Dim IsRenew As String
+            IsRenew = spec.isRequired.ToString
+
+            frmAdminPanel.dgSpecification.Rows.Add(spec.ShortCode, spec.SpecName, spec.SpecType, spec.SpecLayout, spec.UnitOfMeasure, IsRenew)
+
+        Next
+
+        frmAdminPanel.LoadItemList(selectedItem)
+        frmAdminPanel.Show()
+        Me.Hide()
+    End Sub
+
 End Class

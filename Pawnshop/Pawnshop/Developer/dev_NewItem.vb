@@ -30,9 +30,9 @@
 
             LaptopSpecs.Add(itemSpec)
         Next
-        Laptop.ItemSpecifications = LaptopSpecs
+        'Laptop.ItemSpecifications = LaptopSpecs
 
-        Laptop.SaveItem()
+        'Laptop.SaveItem()
 
 
         ' CELLPHONE

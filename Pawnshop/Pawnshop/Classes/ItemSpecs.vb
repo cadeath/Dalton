@@ -179,6 +179,7 @@
         database.SaveEntry(ds)
     End Sub
 
+
     Public Sub LoadByRow(ByVal dr As DataRow)
         With dr
             _specID = .Item("specsid")
@@ -205,5 +206,25 @@
         Return ds.Tables(0).Rows(0).Item("ITEMID")
     End Function
     '#End Region
+
+    Public Sub UpdateSpecs()
+        Dim mySql As String = "SELECT * FROM " & MainTable & " WHERE SpecsID = " & _specID
+        Dim ds As DataSet = LoadSQL(mySql, MainTable)
+
+        With ds.Tables(MainTable).Rows(0)
+            .Item("SpecsName") = _specName
+            .Item("SpecType") = _specType
+            .Item("UoM") = _UoM
+            .Item("onHold") = If(_onHold, 1, 0)
+            .Item("SpecLayout") = _specLayout
+            .Item("isRequired") = If(_isRequired, 1, 0)
+            .Item("Updated_At") = Now
+        End With
+
+        database.SaveEntry(ds, False)
+    End Sub
+
+#End Region
+
 
 End Class

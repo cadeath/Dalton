@@ -14,13 +14,12 @@ Public Class frmAdminPanel
     Private SpecSave As ItemSpecs
     Dim ds As New DataSet
 
-    Friend SelectedItem As ItemClass 'Holds Item
-
+    Friend SelectedItem As ItemClass
 
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
 
-    'Private ItemList As Item
+    Private ItemList As ItemClass
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
@@ -28,35 +27,41 @@ Public Class frmAdminPanel
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
         If it.ItemClass = "" Then Exit Sub
-        ' Display select buttons
+
         txtClassifiction.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
-        If it.isRenewable = "Yes" Then
+
+        If it.isRenewable = 1 Then
             rdbYes.Checked = True
         Else
             rdbNo.Checked = True
         End If
 
+        txtPrintLayout.Text = it.PrintLayout
+        txtInterestRate.Text = it.InterestRate
+
         SelectedItem = it
-        'LockFields(True)
+
+        reaDOnlyTrue()
     End Sub
 
-    'Friend Sub LoadItemall(ByVal it As Item)
-    '    txtClassifiction.Text = String.Format(it.Classification)
-    '    txtCategory.Text = String.Format(it.Category)
-    '    txtDescription.Text = String.Format(it.Description)
+    Friend Sub LoadItemall(ByVal it As ItemClass)
+        txtClassifiction.Text = String.Format(it.ItemClass)
+        txtCategory.Text = String.Format(it.Category)
+        txtDescription.Text = String.Format(it.Description)
 
-    '    If it.Renewable = "1" Then
-    '        rdbYes.Checked = True
-    '    Else
-    '        rdbNo.Checked = True
-    '    End If
-    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
+        If it.isRenewable = "1" Then
+            rdbYes.Checked = True
+        Else
+            rdbNo.Checked = True
+        End If
+        txtPrintLayout.Text = String.Format(it.PrintLayout)
+        txtInterestRate.Text = String.Format(it.InterestRate)
 
-    '    ItemList = it
-    '    'LoadSpec()
-    'End Sub
+        ItemList = it
+        'LoadSpec()
+    End Sub
 
     Friend Sub clearfields()
         txtCategory.Text = ""
@@ -111,7 +116,7 @@ Public Class frmAdminPanel
 
         ItemSave.PrintLayout = txtPrintLayout.Text
         ItemSave.created_at = CurrentDate
-
+        ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
         For Each row As DataGridViewRow In dgSpecification.Rows
             SpecSave = New ItemSpecs
@@ -132,6 +137,7 @@ Public Class frmAdminPanel
 
             ColItemsSpecs.Add(SpecSave)
         Next
+
         ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.SaveItem()
 
@@ -231,6 +237,9 @@ Public Class frmAdminPanel
         txtPrintLayout.ReadOnly = True
         rdbNo.Enabled = False
         rdbYes.Enabled = False
+        For a As Integer = 0 To dgSpecification.Rows.Count - 1
+            dgSpecification.Rows(a).ReadOnly = True
+        Next
     End Sub
 
     Friend Sub reaDOnlyFalse()
@@ -248,7 +257,7 @@ Public Class frmAdminPanel
 
     Friend Sub LoadSpec()
         Dim da As New OdbcDataAdapter
-        Dim mySql As String = "SELECT SPECSNAME,SPECTYPE,OUM,SPECLAYOUT,SHORTCODE,ISREQUIRED FROM TBLSPECS WHERE ItemID = '" & frmItemList.lblItemID.Text & "'"
+        Dim mySql As String = "SELECT SPECSNAME,SPECTYPE,UOM,SPECLAYOUT,SHORTCODE,ISREQUIRED FROM TBLSPECS WHERE ItemID = '" & frmItemList.lblItemID.Text & "'"
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         Dim dt As New DataTable
@@ -256,13 +265,15 @@ Public Class frmAdminPanel
         dt = ds.Tables(0)
 
         For Each dr As DataRow In dt.Rows
-            dr.ClearErrors()
-            If dr(5) = 1 Then
-                dr(5) = "True"
-            Else
-                dr(5) = "False"
-            End If
-            dgSpecification.Rows.Add(dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))
+
+            'dr.ClearErrors()
+            'If dr(5).ToString = 1 Then
+            '    dr(5) = True
+            'ElseIf dr(5).ToString = 0 Then
+            '    dr(5) = False
+            'End If
+
+            dgSpecification.Rows.Add(dr(4), dr(0), dr(1), dr(3), dr(2), dr(5))
         Next
 
         Dim i As Integer = (0)

@@ -8,7 +8,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{24AC89A7-4FDE-47EF-AC83-32A2499285D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
+
     <StartupObject>Pawnshop.My.MyApplication</StartupObject>
+
     <RootNamespace>Pawnshop</RootNamespace>
     <AssemblyName>pawnshop</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -357,12 +359,6 @@
       <DependentUpon>frmItemList.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmItemList.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmPawningNew.Designer.vb">
-      <DependentUpon>frmPawningNew.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmPawningNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\AuditReports.vb" />
@@ -767,9 +763,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmItemList.resx">
       <DependentUpon>frmItemList.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmPawningNew.resx">
-      <DependentUpon>frmPawningNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
