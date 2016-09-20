@@ -23,7 +23,6 @@
                 .Description = Desc(i)
                 .isRenewable = isRenew(i)
                 .PrintLayout = layout(i)
-                .InterestRate = Interest(i)
             End With
 
             Select Case ClassName(i).ToUpper
