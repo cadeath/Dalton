@@ -12,7 +12,7 @@
         Laptop.Description = "With the inches of 14 or more, and has NUMERIC KEYPAD."
         Laptop.isRenewable = True
         Laptop.PrintLayout = "[ClassName] [serial]" & vbCrLf & "[desc]"
-        Laptop.InterestRate = 0.04
+
 
         Dim shortCodes As String() = {"serial", "desc"}
         Dim specsName As String() = {"Serial", "Description"}
@@ -47,7 +47,7 @@
             .Description = "Cellular Devices"
             .isRenewable = True
             .PrintLayout = "[ClassName] [serial]" & vbCrLf & "[desc]"
-            .InterestRate = 0.04
+
         End With
 
         shortCodes = {"serial", "desc"}
@@ -83,7 +83,7 @@
             '.Description = "Cellular Devices"
             .isRenewable = True
             .PrintLayout = "1 [ClassName] [G] [K:ENCRYPTED]"
-            .InterestRate = 0.03
+
         End With
 
         shortCodes = {"G", "K", "desc"}

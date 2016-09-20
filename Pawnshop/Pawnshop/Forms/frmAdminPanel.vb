@@ -39,7 +39,7 @@ Public Class frmAdminPanel
         End If
 
         txtPrintLayout.Text = it.PrintLayout
-        txtInterestRate.Text = it.InterestRate
+
 
         SelectedItem = it
 
@@ -59,7 +59,6 @@ Public Class frmAdminPanel
             rdbNo.Checked = True
         End If
         txtPrintLayout.Text = String.Format(it.PrintLayout)
-        txtInterestRate.Text = String.Format(it.InterestRate)
 
         ItemList = it
 
@@ -75,7 +74,7 @@ Public Class frmAdminPanel
         cmbModuleName.Text = ""
         dgSpecification.Rows.Clear()
         btnUpdate.Enabled = False
-        txtInterestRate.Text = ""
+
     End Sub
 
     Private Sub rdbYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbYes.CheckedChanged
@@ -89,7 +88,7 @@ Public Class frmAdminPanel
 
         If txtClassifiction.Text = "" Then txtClassifiction.Focus() : Return False
         If txtCategory.Text = "" Then txtCategory.Focus() : Return False
-        If txtInterestRate.Text = "" Then txtInterestRate.Focus() : Return False
+
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
 
@@ -117,7 +116,7 @@ Public Class frmAdminPanel
 
         ItemSave.PrintLayout = txtPrintLayout.Text
         ItemSave.created_at = CurrentDate
-        ItemSave.InterestRate = txtInterestRate.Text
+
 
         ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
@@ -178,7 +177,7 @@ Public Class frmAdminPanel
 
         ItemModify.PrintLayout = txtPrintLayout.Text
 
-        ItemModify.InterestRate = txtInterestRate.Text
+
 
         Dim SpecModify As New ItemSpecs
         For Each row As DataGridViewRow In dgSpecification.Rows
@@ -620,7 +619,7 @@ Public Class frmAdminPanel
 
 
    
-    Private Sub txtInterestRate_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInterestRate.KeyPress
+    Private Sub txtInterestRate_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
 End Class
