@@ -141,7 +141,6 @@
             _category = .Item("ItemCategory")
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _isRenew = If(.Item("isRenew") = 1, True, False)
-            _intRate = .Item("Int_Rate")
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
             _Count = .Item("Renewal_Cnt")
@@ -173,7 +172,6 @@
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
-            .Item("Int_rate") = _intRate
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
@@ -206,7 +204,6 @@
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
-            .Item("Int_Rate") = _intRate
             .Item("isRenew") = If(_isRenew, 1, 0)
             .Item("onHold") = If(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout

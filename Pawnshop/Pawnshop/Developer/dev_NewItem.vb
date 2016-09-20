@@ -1,6 +1,7 @@
 ﻿Public Class dev_NewItem
 
     Private sel_Item As ItemClass
+    Private sel_spec As ItemSpecs
 
     Private Sub btnPop_Click(sender As System.Object, e As System.EventArgs) Handles btnPop.Click
 
@@ -146,8 +147,22 @@
 
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+        sel_spec.SpecName = txtSpec.Text
+        sel_spec.ShortCode = txtCode.Text
+        sel_spec.UpdateSpecs()
+
         sel_Item.Category = txtCategory.Text
         sel_Item.PrintLayout = txtPrint.Text
         sel_Item.Update()
+    End Sub
+
+    Private Sub lsSpecs_DoubleClick(sender As Object, e As System.EventArgs) Handles lsSpecs.DoubleClick
+        Dim idx As Integer = lsSpecs.SelectedIndex
+        'Dim specID As Integer = lsSpecs.Items(idx).ToString
+
+        sel_spec = New ItemSpecs
+        sel_spec = sel_Item.ItemSpecifications(idx)
+        txtSpec.Text = sel_spec.SpecName
+        txtCode.Text = sel_spec.ShortCode
     End Sub
 End Class
