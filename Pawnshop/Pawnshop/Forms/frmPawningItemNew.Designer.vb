@@ -378,7 +378,7 @@ Partial Class frmPawningItemNew
         '
         Me.lblNPT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNPT.ForeColor = System.Drawing.Color.Red
-        Me.lblNPT.Location = New System.Drawing.Point(761, 419)
+        Me.lblNPT.Location = New System.Drawing.Point(762, 355)
         Me.lblNPT.Name = "lblNPT"
         Me.lblNPT.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.lblNPT.Size = New System.Drawing.Size(162, 32)
@@ -828,7 +828,7 @@ Partial Class frmPawningItemNew
         '
         Me.GroupBox10.Controls.Add(Me.btnSearchClaimer)
         Me.GroupBox10.Controls.Add(Me.txtClaimer)
-        Me.GroupBox10.Location = New System.Drawing.Point(607, 358)
+        Me.GroupBox10.Location = New System.Drawing.Point(608, 389)
         Me.GroupBox10.Name = "GroupBox10"
         Me.GroupBox10.Size = New System.Drawing.Size(318, 58)
         Me.GroupBox10.TabIndex = 34
@@ -858,7 +858,7 @@ Partial Class frmPawningItemNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(935, 508)
+        Me.ClientSize = New System.Drawing.Size(935, 503)
         Me.Controls.Add(Me.GroupBox10)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)

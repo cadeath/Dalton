@@ -180,14 +180,6 @@ Public Class frmPawningItemNew
     '        Me.Close()
     '    End Sub
 
-    '    Private Sub cboType_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboType.KeyPress
-
-    '    End Sub
-
-    '    Private Sub cboType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboType.SelectedIndexChanged
-
-    '    End Sub
-
     '    Private Sub cboAppraiser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
     '        If isEnter(e) Then
     '            btnSave.PerformClick()
@@ -702,25 +694,25 @@ Public Class frmPawningItemNew
     '        End Select
     '    End Sub
 
-    Private Function GetAppraiserByID(ByVal id As Integer) As String
+    'Private Function GetAppraiserByID(ByVal id As Integer) As String
+    '    For Each el As DictionaryEntry In appraiser
+    '        If el.Key = id Then
+    '            Return el.Value
+    '        End If
+    '    Next
+
+    '    Return "N/A"
+    'End Function
+
+    Private Function GetAppraiserID(ByVal name As String) As Integer
         For Each el As DictionaryEntry In appraiser
-            If el.Key = id Then
-                Return el.Value
+            If el.Value = name Then
+                Return el.Key
             End If
         Next
 
-        Return "N/A"
+        Return 0
     End Function
-
-    '    Private Function GetAppraiserID(ByVal name As String) As Integer
-    '        For Each el As DictionaryEntry In appraiser
-    '            If el.Value = name Then
-    '                Return el.Key
-    '            End If
-    '        Next
-
-    '        Return 0
-    '    End Function
 
     '    Private Function GetCatName(ByVal id As Integer) As String
     '        Dim idx As Integer = cboType.SelectedIndex
@@ -869,22 +861,22 @@ Public Class frmPawningItemNew
 
     '    End Sub
 
-    '    Private Sub LoadAppraisers()
-    '        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
-    '        Dim ds As DataSet = LoadSQL(mySql)
+    Private Sub LoadAppraisers()
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
+        Dim ds As DataSet = LoadSQL(mySql)
 
-    '        appraiser = New Hashtable
-    '        cboAppraiser.Items.Clear()
-    '        For Each dr As DataRow In ds.Tables(0).Rows
-    '            Dim tmpUser As New ComputerUser
-    '            tmpUser.LoadUserByRow(dr)
-    '            If tmpUser.canAppraise Then
-    '                Console.WriteLine(tmpUser.FullName & " loaded.")
-    '                appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-    '                cboAppraiser.Items.Add(tmpUser.UserName)
-    '            End If
-    '        Next
-    '    End Sub
+        appraiser = New Hashtable
+        cboAppraiser.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpUser As New ComputerUser
+            tmpUser.LoadUserByRow(dr)
+            If tmpUser.canAppraise Then
+                Console.WriteLine(tmpUser.FullName & " loaded.")
+                appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+                cboAppraiser.Items.Add(tmpUser.UserName)
+            End If
+        Next
+    End Sub
 
     '    Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
     '        Dim mySql As String = "SELECT * FROM tblInt WHERE ItemType = '" & cboType.Text & "' AND STATUS = 0"
@@ -1871,7 +1863,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        Dim fillData As String = "newpawn"
+        Dim fillData As String = "Devnewpawn"
         Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
 
         ds = LoadSQL(mySql, fillData)
@@ -1888,7 +1880,7 @@ Public Class frmPawningItemNew
             .Item("Appraisal") = txtAppr.Text
             .Item("Principal") = txtPrincipal.Text
             .Item("NetAmount") = "" 'Net_Amount
-            .Item("AppraiserID") = GetAppraiserByID(cboAppraiser.Text)
+            .Item("AppraiserID") = GetAppraiserID(cboAppraiser.Text)
             .Item("EncoderID") = UserID
             .Item("pwnItmID") = ""
             .Item("ClientID") = PawnCustomer.ID
@@ -1914,5 +1906,13 @@ Public Class frmPawningItemNew
 
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
+        LoadAppraisers()
+    End Sub
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        Dim secured_str As String = txtCustomer.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.NewPawning)
+        frmClient.Show()
     End Sub
 End Class

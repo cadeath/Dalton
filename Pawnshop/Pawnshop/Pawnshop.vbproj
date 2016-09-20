@@ -275,28 +275,28 @@
     <Compile Include="Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\frm_PanelKarat.Designer.vb">
+    <Compile Include="Panel\frm_PanelKarat.Designer.vb">
       <DependentUpon>frm_PanelKarat.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\frm_PanelKarat.vb">
+    <Compile Include="Panel\frm_PanelKarat.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\frm_PanelMultiline.Designer.vb">
+    <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\frm_PanelMultiline.vb">
+    <Compile Include="Panel\frm_PanelMultiline.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\frm_PanelTextbox.Designer.vb">
+    <Compile Include="Panel\frm_PanelTextbox.Designer.vb">
       <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\frm_PanelTextbox.vb">
+    <Compile Include="Panel\frm_PanelTextbox.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\frm_PanelYesNo.Designer.vb">
+    <Compile Include="Panel\frm_PanelYesNo.Designer.vb">
       <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
     </Compile>
-    <Compile Include="Developer\frm_PanelYesNo.vb">
+    <Compile Include="Panel\frm_PanelYesNo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ab.Designer.vb">
@@ -359,10 +359,10 @@
     <Compile Include="Forms\frmItemList.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmPawningNew.Designer.vb">
-      <DependentUpon>frmPawningNew.vb</DependentUpon>
+    <Compile Include="Forms\frmPawningItemNew.Designer.vb">
+      <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmPawningNew.vb">
+    <Compile Include="Forms\frmPawningItemNew.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InterestScheme\InterestScheme.vb" />
@@ -735,16 +735,16 @@
     <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\frm_PanelKarat.resx">
+    <EmbeddedResource Include="Panel\frm_PanelKarat.resx">
       <DependentUpon>frm_PanelKarat.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\frm_PanelMultiline.resx">
+    <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\frm_PanelTextbox.resx">
+    <EmbeddedResource Include="Panel\frm_PanelTextbox.resx">
       <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\frm_PanelYesNo.resx">
+    <EmbeddedResource Include="Panel\frm_PanelYesNo.resx">
       <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
@@ -771,8 +771,8 @@
     <EmbeddedResource Include="Forms\frmItemList.resx">
       <DependentUpon>frmItemList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmPawningNew.resx">
-      <DependentUpon>frmPawningNew.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
+      <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
