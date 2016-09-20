@@ -71,7 +71,7 @@ Partial Class frmItemList
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Description"
-        Me.ColumnHeader2.Width = 113
+        Me.ColumnHeader2.Width = 207
         '
         'ColumnHeader7
         '

@@ -243,32 +243,13 @@
     ''    frmOrig = frmOrigin
     ''End Sub
 
-   
-    
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
 
-        'If lvClient.Items.Count = 0 Then Exit Sub
-
-        'If lvClient.SelectedItems.Count = 0 Then
-        '    lvClient.Items(0).Focused = True
-        'End If
-        'Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
-        'GetClient = New Client
-        'GetClient.LoadClient(idx)
-
-
-        'formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
-
-        'Me.Close()
-        
-
+        If lvItem.Items.Count = 0 Then Exit Sub
         Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
 
         Dim selectedItem As New ItemClass
         selectedItem.LoadItem(idx)
-
-        'lblItemID.Text = selectedItem.ID
-
 
         'lvItem.Items.Clear()
         'For Each spec As ItemSpecs In selectedItem.ItemSpecifications

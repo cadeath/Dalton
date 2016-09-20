@@ -450,7 +450,7 @@ Public Class PawnTicket
     End Sub
 
     Public Sub LoadTicket(ByVal id As Integer, Optional ByVal col As String = "PAWNID")
-        Dim mySql As String = "SELECT * FROM tblpawn WHERE " & col & " = " & id
+        Dim mySql As String = "SELECT * FROM devnewpawn WHERE " & col & " = " & id
         Dim ds As DataSet = LoadSQL(mySql)
 
         Try
@@ -511,44 +511,45 @@ Public Class PawnTicket
                 tmpClient.LoadClient(.Item("ClientID"))
                 _client = tmpClient
                 _loanDate = .Item("LoanDate")
-                _matuDate = .Item("MatuDate")
-                _expiryDate = .Item("ExpiryDate")
+                '_matuDate = .Item("MatuDate")
+                '_expiryDate = .Item("ExpiryDate")
                 _auctionDate = .Item("AuctionDate")
-                _itemType = .Item("ItemType")
-                _catID = .Item("CatID")
-                If Not IsDBNull(.Item("Description")) Then _description = .Item("Description")
-                _karat = .Item("Karat")
-                _grams = .Item("Grams")
+                ' _itemType = .Item("ItemType")
+                ' _catID = .Item("CatID")
+                ' If Not IsDBNull(.Item("Description")) Then _description = .Item("Description")
+                ' _karat = .Item("Karat")
+                ' _grams = .Item("Grams")
                 _appraisal = .Item("Appraisal")
                 _principal = .Item("Principal")
-                _interest = .Item("Interest")
+                ' _interest = .Item("Interest")
                 _netAmount = .Item("NetAmount")
-                _evat = .Item("Evat")
+                ' _evat = .Item("Evat")
                 _appraiserID = .Item("AppraiserID")
-                _oldTicket = .Item("OldTicket")
-                _orNum = .Item("ORNum")
-                _orDate = .Item("ORDate")
-                _lessPrincipal = .Item("LessPrincipal")
-                _daysOverDue = .Item("DaysOverDue")
+                '_oldTicket = .Item("OldTicket")
+                ' _orNum = .Item("ORNum")
+                ' _orDate = .Item("ORDate")
+                ' _lessPrincipal = .Item("LessPrincipal")
+                '_daysOverDue = .Item("DaysOverDue")
                 '_delayInt = .Item("DelayInt")
-                _penalty = .Item("Penalty")
+                '_penalty = .Item("Penalty")
                 _serviceCharge = .Item("ServiceCharge")
-                _renewDue = .Item("RenewDue")
-                _redeemDue = .Item("RedeemDue")
+                ' _renewDue = .Item("RenewDue")
+                ' _redeemDue = .Item("RedeemDue")
                 _status = .Item("Status")
-                _advanceInterest = .Item("AdvInt")
-                _earlyRedeem = .Item("EarlyRedeem")
-                If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
-                _intHash = .Item("INT_CHECKSUM")
-                _renewalCount = .Item("RENEWALCNT")
+                '_advanceInterest = .Item("AdvInt")
+                '_earlyRedeem = .Item("EarlyRedeem")
+                ' If Not IsDBNull(.Item("PullOut")) Then _pullOut = .Item("PullOut")
+                ' _intHash = .Item("INT_CHECKSUM")
+                '_renewalCount = .Item("RENEWALCNT")
             End With
         Catch ex As Exception
             Dim str As String
             str = "FAILED TO LOAD PAWN INFORMATION [DATA READER]"
             Log_Report(str + vbCrLf + ex.ToString)
 
-            MsgBox("Error found when loading Pawn Information" + vbCrLf + "Contact the IT Deptartment", _
-                   MsgBoxStyle.Critical, "ERROR [DATA READER]")
+            'MsgBox("Error found when loading Pawn Information" + vbCrLf + "Contact the IT Deptartment", _
+            '       MsgBoxStyle.Critical, "ERROR [DATA READER]")
+            MsgBox(ex.Message)
         End Try
     End Sub
 

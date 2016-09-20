@@ -641,3 +641,87 @@ System.ArgumentException: Column 'MatuDate' does not belong to table QuickSQL.
    at System.Data.DataRow.GetDataColumn(String columnName)
    at System.Data.DataRow.get_Item(String columnName)
    at Pawnshop.PawnTicket.LoadTicketInRow(DataRow dr) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 564
+[09/20/2016 13:47:02] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [42S02] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -204
+Table unknown
+DEVNEWPAWN
+At line 1, column 131
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
+[09/20/2016 13:47:15] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: MatuDate
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 514
+[09/20/2016 13:49:28] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: MatuDate
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 514
+[09/20/2016 13:50:29] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: MatuDate
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 514
+[09/20/2016 13:51:58] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: MatuDate
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 514
+[09/20/2016 13:52:31] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: MatuDate
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 514
+[09/20/2016 13:52:48] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: ExpiryDate
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 515
+[09/20/2016 13:52:58] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: Interest
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 524
+[09/20/2016 13:53:16] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: OldTicket
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 528
+[09/20/2016 13:53:31] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.IndexOutOfRangeException: OldTicket
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.Odbc.OdbcDataReader.GetOrdinal(String value)
+   at System.Data.Odbc.OdbcDataReader.get_Item(String value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 528
+[09/20/2016 13:53:43] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.InvalidCastException: Conversion from type 'DBNull' to type 'Double' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToDouble(Object Value, NumberFormatInfo NumberFormat)
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToDouble(Object Value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 532
+[09/20/2016 13:54:14] FAILED TO LOAD PAWN INFORMATION [DATA READER]
+System.InvalidCastException: Conversion from type 'DBNull' to type 'Double' is not valid.
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToDouble(Object Value, NumberFormatInfo NumberFormat)
+   at Microsoft.VisualBasic.CompilerServices.Conversions.ToDouble(Object Value)
+   at Pawnshop.PawnTicket.LoadTicketInReader(IDataReader reader) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 532
+[09/20/2016 13:55:32] FAILED TO LOAD PAWN INFORMATION [DATASET]
+System.ArgumentException: Column 'MatuDate' does not belong to table QuickSQL.
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at Pawnshop.PawnTicket.LoadTicket(Int32 id, String col) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Classes\PawnTicket.vb:line 464
