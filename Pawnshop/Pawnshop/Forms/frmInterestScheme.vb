@@ -9,22 +9,29 @@
         Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-      
-        'ItemClass = txtSchemeName.Text
-        'Category = txtDescription.Text
 
+        Dim SchemeSave As New InterestScheme
+        Dim IntSchemeLines As New IntScheme_Lines
 
-        'ItemSave.Description = txtDayFrom.Text
-        'ItemSave.PrintLayout = txtDayTo.Text
-        'ItemSave.PrintLayout = txtInterest.Text
-        'ItemSave.created_at = txtPenalty.Text
-        'ItemSave.PrintLayout = txtRemarks.Text
+        With SchemeSave
+            .SchemeName = txtSchemeName.Text
+            .Description = txtDescription.Text
+        End With
 
+        Dim SchemeInterest As New Scheme_Interest
         For Each item As ListViewItem In lvIntScheme.Items
-
-            MsgBox(item.SubItems(0).Text)
-
+            With SchemeInterest
+                .DayFrom = item.SubItems(0).Text
+                .DayTo = item.SubItems(1).Text
+                .Interest = item.SubItems(2).Text
+                .Penalty = item.SubItems(3).Text
+                .Remarks = item.SubItems(4).Text
+            End With
+            IntSchemeLines.Add(SchemeInterest)
         Next
+
+        SchemeSave.SchemeDetails = IntSchemeLines
+        SchemeInterest.Save_Details()
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()

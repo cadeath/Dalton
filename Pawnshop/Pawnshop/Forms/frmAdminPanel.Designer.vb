@@ -254,7 +254,7 @@ Partial Class frmAdminPanel
         Me.dgSpecification.AllowUserToDeleteRows = False
         Me.dgSpecification.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgSpecification.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column1, Me.Column2, Me.Column4, Me.Column5, Me.Column6})
-        Me.dgSpecification.Location = New System.Drawing.Point(374, 79)
+        Me.dgSpecification.Location = New System.Drawing.Point(356, 79)
         Me.dgSpecification.Name = "dgSpecification"
         Me.dgSpecification.RowHeadersVisible = False
         Me.dgSpecification.RowHeadersWidth = 20
