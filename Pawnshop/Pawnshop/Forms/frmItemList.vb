@@ -3,6 +3,7 @@
     Dim frmOrig As formSwitch.FormName
     Dim ds As New DataSet
 
+
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
@@ -13,6 +14,20 @@
             AddItem(tmpItem)
         Next
     End Sub
+
+    Dim selectedItem As ItemClass
+    'Dim ds As New DataSet
+
+    'Friend GetItem As ItemClass
+
+
+    'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+    '    mOtherForm = True
+    '    btnSelect.Visible = True
+    '    txtSearch.Text = src
+    '    frmOrig = frmOrigin
+    'End Sub
+
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ' ClearField()
@@ -96,7 +111,6 @@
             lv.SubItems.Add(dr("ItemClass"))
             lv.SubItems.Add(dr("ItemCategory"))
             lv.SubItems.Add(dr("Description"))
-            lv.SubItems.Add(dr("Int_rate"))
             lv.SubItems.Add(dr("IsRenew"))
             lv.SubItems.Add(dr("Print_Layout"))
         Next
@@ -111,6 +125,7 @@
             End If
         End If
     End Sub
+
 
 
     ''Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
@@ -220,6 +235,7 @@
         frmOrig = frmOrigin
     End Sub
 
+
     ''Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
     ''    mOtherForm = True
     ''    btnSelect.Visible = True
@@ -274,15 +290,15 @@
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-       Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-      
-        Dim selectedItem As New ItemClass
+
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+
+        selectedItem = New ItemClass
         selectedItem.LoadItem(idx)
 
         lblItemID.Text = selectedItem.ID
-        lvItem.Text = selectedItem.ItemClass
 
-        lvItem.Items.Clear()
+        frmAdminPanel.dgSpecification.Rows.Clear()
 
         For Each spec As ItemSpecs In selectedItem.ItemSpecifications
             Dim IsRenew As String
@@ -295,6 +311,7 @@
         frmAdminPanel.LoadItemList(selectedItem)
         frmAdminPanel.Show()
         Me.Hide()
+
     End Sub
 
     Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed

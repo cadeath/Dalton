@@ -8,9 +8,6 @@ Public Class frmAdminPanel
 
 
 
-
-
-    'Private SpecModify As Item
     Private SpecSave As ItemSpecs
     Dim ds As New DataSet
 
@@ -40,7 +37,7 @@ Public Class frmAdminPanel
 
         txtPrintLayout.Text = it.PrintLayout
 
-
+        Dim id As Integer = it.ID
         SelectedItem = it
 
         reaDOnlyTrue()
@@ -177,14 +174,10 @@ Public Class frmAdminPanel
 
         ItemModify.PrintLayout = txtPrintLayout.Text
 
-
-
         Dim SpecModify As New ItemSpecs
         For Each row As DataGridViewRow In dgSpecification.Rows
 
-
             With SpecModify
-
                 .ShortCode = row.Cells(0).Value
                 .SpecName = row.Cells(1).Value
                 .SpecType = row.Cells(2).Value
@@ -617,9 +610,4 @@ Public Class frmAdminPanel
         Next
     End Sub
 
-
-   
-    Private Sub txtInterestRate_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        DigitOnly(e)
-    End Sub
 End Class

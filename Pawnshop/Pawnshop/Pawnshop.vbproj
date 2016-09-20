@@ -353,6 +353,12 @@
     <Compile Include="Forms\frmChangePassword.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmInterestScheme.Designer.vb">
+      <DependentUpon>frmInterestScheme.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInterestScheme.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmItemList.Designer.vb">
       <DependentUpon>frmItemList.vb</DependentUpon>
     </Compile>
@@ -368,6 +374,7 @@
     <Compile Include="InterestScheme\InterestScheme.vb" />
     <Compile Include="InterestScheme\IntScheme_Lines.vb" />
     <Compile Include="InterestScheme\Scheme_Interest.vb" />
+    <Compile Include="InterestScheme\Scheme_Load.vb" />
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
@@ -767,6 +774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmChangePassword.resx">
       <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInterestScheme.resx">
+      <DependentUpon>frmInterestScheme.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmItemList.resx">
       <DependentUpon>frmItemList.vb</DependentUpon>
