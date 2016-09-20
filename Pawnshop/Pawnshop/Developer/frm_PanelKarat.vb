@@ -2,7 +2,7 @@
 
     Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Dim tmpResult As String = txtGram.Text & " Grams / " & cboKarat.Text & " Karat"
-        With frmPawningNew.lvSpec
+        With frmPawningItemNew.lvSpec
             .SelectedItems(0).SubItems(3).Text = tmpResult
         End With
         Me.Close()

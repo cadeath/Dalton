@@ -27,7 +27,6 @@ Partial Class frmItemList
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -43,7 +42,7 @@ Partial Class frmItemList
         '
         'lvItem
         '
-        Me.lvItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader2, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8})
+        Me.lvItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader2, Me.ColumnHeader7, Me.ColumnHeader8})
         Me.lvItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvItem.FullRowSelect = True
         Me.lvItem.GridLines = True
@@ -73,11 +72,6 @@ Partial Class frmItemList
         '
         Me.ColumnHeader2.Text = "Description"
         Me.ColumnHeader2.Width = 113
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Interest Rate"
-        Me.ColumnHeader6.Width = 90
         '
         'ColumnHeader7
         '
@@ -204,7 +198,6 @@ Partial Class frmItemList
     Friend WithEvents lblItemID As System.Windows.Forms.Label
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
 End Class

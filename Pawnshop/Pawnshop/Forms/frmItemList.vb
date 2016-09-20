@@ -1,12 +1,6 @@
 ﻿Public Class frmItemList
     Dim mOtherForm As Boolean = False
-
     Dim frmOrig As formSwitch.FormName
-
-
-    'Dim ds As New DataSet
-
-
     Dim ds As New DataSet
 
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
@@ -43,27 +37,27 @@
         lv.SubItems.Add(dl.ItemClass)
         lv.SubItems.Add(dl.Category)
         lv.SubItems.Add(dl.Description)
-        lv.SubItems.Add(dl.InterestRate)
+        'lv.SubItems.Add(dl.InterestRate)
         lv.SubItems.Add(dl.isRenewable)
         lv.SubItems.Add(dl.PrintLayout)
     End Sub
 
-    Private Sub loadItemClass()
-        Dim mySql As String = "SELECT * FROM tblItem"
-        Dim ds As DataSet = LoadSQL(mySql)
+    'Private Sub loadItemClass()
+    '    Dim mySql As String = "SELECT * FROM tblItem"
+    '    Dim ds As DataSet = LoadSQL(mySql)
 
-        lvItem.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
+    '    lvItem.Items.Clear()
+    '    For Each dr As DataRow In ds.Tables(0).Rows
 
-            Dim lv As ListViewItem = lvItem.Items.Add(dr("ItemID"))
-            lv.SubItems.Add(dr("ItemClass"))
-            lv.SubItems.Add(dr("ItemCategory"))
-            lv.SubItems.Add(dr("Description"))
-            lv.SubItems.Add(dr("Int_rate"))
-            lv.SubItems.Add(dr("IsRenew"))
-            lv.SubItems.Add(dr("Print_Layout"))
-        Next
-    End Sub
+    '        Dim lv As ListViewItem = lvItem.Items.Add(dr("ItemID"))
+    '        lv.SubItems.Add(dr("ItemClass"))
+    '        lv.SubItems.Add(dr("ItemCategory"))
+    '        lv.SubItems.Add(dr("Description"))
+    '        ' lv.SubItems.Add(dr("Int_rate"))
+    '        lv.SubItems.Add(dr("IsRenew"))
+    '        lv.SubItems.Add(dr("Print_Layout"))
+    '    Next
+    'End Sub
 
     Private Sub ClearField()
         txtSearch.Text = ""
@@ -79,7 +73,7 @@
         secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM tblITEM WHERE "
-        mySql &= String.Format("UPPER (ITEMCATEGORY) LIKE UPPER('%{0}%')", secured_str)
+        mySql &= String.Format("UPPER (ITEMCLASS) LIKE UPPER('%{0}%')", secured_str)
 
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
@@ -252,10 +246,10 @@
         'Me.Close()
         
 
-        'Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
 
-        'Dim selectedItem As New ItemClass
-        'selectedItem.LoadItem(idx)
+        Dim selectedItem As New ItemClass
+        selectedItem.LoadItem(idx)
 
         'lblItemID.Text = selectedItem.ID
 
@@ -304,7 +298,7 @@
     End Sub
 
     Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-        loadItemClass()
+        'loadItemClass()
         txtSearch.Text = ""
     End Sub
 

@@ -359,6 +359,12 @@
     <Compile Include="Forms\frmItemList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmPawningNew.Designer.vb">
+      <DependentUpon>frmPawningNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPawningNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InterestScheme\InterestScheme.vb" />
     <Compile Include="InterestScheme\IntScheme_Lines.vb" />
     <Compile Include="InterestScheme\Scheme_Interest.vb" />
@@ -764,6 +770,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmItemList.resx">
       <DependentUpon>frmItemList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPawningNew.resx">
+      <DependentUpon>frmPawningNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">

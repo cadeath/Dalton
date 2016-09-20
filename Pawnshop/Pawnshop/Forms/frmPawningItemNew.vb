@@ -1,13 +1,13 @@
 ﻿Imports Microsoft.Reporting.WinForms
 
-Public Class frmPawningNew
+Public Class frmPawningItemNew
     Friend PawnCustomer As Client
     Friend PawnClaimer As Client
     Friend tmpItem As ItemClass
     'Private ItemSpec As Item
 
 
-    '    Friend transactionType As String = "L"
+    Friend transactionType As String = "L"
     '    Friend PawnItem As PawnTicket
     '    Friend PawnCustomer As Client
 
@@ -17,7 +17,7 @@ Public Class frmPawningNew
     '    Private TypeInt As Double, bug As Boolean = False
     '    Private daysDue As Integer
 
-    '    Private appraiser As Hashtable
+    Private appraiser As Hashtable
     '    Private isOldItem As Boolean = False
     '    Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
     '    Private ItemPrincipal As Double, Penalty As Double, Net_Amount As Double
@@ -100,7 +100,6 @@ Public Class frmPawningNew
         txtEvat.Text = ""
         txtRenew.Text = ""
         txtRedeem.Text = ""
-
 
         txtClassification.Text = ""
         txtClaimer.Clear()
@@ -703,15 +702,15 @@ Public Class frmPawningNew
     '        End Select
     '    End Sub
 
-    '    Private Function GetAppraiserByID(ByVal id As Integer) As String
-    '        For Each el As DictionaryEntry In appraiser
-    '            If el.Key = id Then
-    '                Return el.Value
-    '            End If
-    '        Next
+    Private Function GetAppraiserByID(ByVal id As Integer) As String
+        For Each el As DictionaryEntry In appraiser
+            If el.Key = id Then
+                Return el.Value
+            End If
+        Next
 
-    '        Return "N/A"
-    '    End Function
+        Return "N/A"
+    End Function
 
     '    Private Function GetAppraiserID(ByVal name As String) As Integer
     '        For Each el As DictionaryEntry In appraiser
@@ -1871,8 +1870,49 @@ Public Class frmPawningNew
         InputSpec()
     End Sub
 
-    Private Sub frmPawningNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ClearFields()
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        Dim fillData As String = "newpawn"
+        Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
+
+        ds = LoadSQL(mySql, fillData)
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("PawnTicket") = txtTicket.Text
+            '.Item("OldpawnTicket") = txtOldTicket.Text
+            .Item("LoanDate") = txtLoan.Text
+            .Item("MATURITYDATE") = txtMatu.Text
+            .Item("ExpirationDate") = txtExpiry.Text
+            .Item("AuctionDate") = txtAuction.Text
+            .Item("Appraisal") = txtAppr.Text
+            .Item("Principal") = txtPrincipal.Text
+            .Item("NetAmount") = "" 'Net_Amount
+            .Item("AppraiserID") = GetAppraiserByID(cboAppraiser.Text)
+            .Item("EncoderID") = UserID
+            .Item("pwnItmID") = ""
+            .Item("ClientID") = PawnCustomer.ID
+            .Item("ClaimBy") = PawnClaimer.ID
+            '.Item("ORDate") = _orDate
+            '.Item("ORNum") = _orNum
+            '.Item("Penalty") = txtPenalty.Text
+            .Item("Status") = transactionType
+            '.Item("DaysOverDue") = txtOver.Text
+            '.Item("EarlyRedeem") = txt
+            '.Item("DelayInterest") = txtInt.Text
+            .Item("AdvanceInterest") = txtAdv.Text
+            '.Item("RedeemDue") = _redeemDue
+            '.Item("RenewDue") = _renewDue
+            .Item("ServiceCharge") = txtService.Text
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+
+        database.SaveEntry(ds)
+        MsgBox("SAVED")
     End Sub
 
+    Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ClearFields()
+    End Sub
 End Class

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmPawningNew
+Partial Class frmPawningItemNew
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -854,7 +854,7 @@ Partial Class frmPawningNew
         Me.txtClaimer.TabIndex = 1
         Me.txtClaimer.Text = "Claimer"
         '
-        'frmPawningNew
+        'frmPawningItemNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -874,7 +874,7 @@ Partial Class frmPawningNew
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnPrint)
-        Me.Name = "frmPawningNew"
+        Me.Name = "frmPawningItemNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pawning New"
         Me.GroupBox5.ResumeLayout(False)

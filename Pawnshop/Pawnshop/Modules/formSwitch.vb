@@ -48,9 +48,9 @@
                 frmmoneyexchange.LoadClient(cl)
 
             Case FormName.NewPawning
-                frmPawningNew.LoadClient(cl)
+                frmPawningItemNew.LoadClient(cl)
             Case FormName.PawnClaimer
-                frmPawningNew.LoadCliamer(cl)
+                frmPawningItemNew.LoadCliamer(cl)
         End Select
     End Sub
     ''' <remarks></remarks>
@@ -67,7 +67,7 @@
             Case FormName.frmAdminPanel
                 'frmAdminPanel.LoadItemall(it)
             Case FormName.Item
-                frmPawningNew.LoadItem(it)
+                frmPawningItemNew.LoadItem(it)
 
         End Select
 
