@@ -1,5 +1,7 @@
 ﻿Public Class dev_NewItem
 
+    Private sel_Item As ItemClass
+
     Private Sub btnPop_Click(sender As System.Object, e As System.EventArgs) Handles btnPop.Click
 
         ' LAPTOP
@@ -126,22 +128,26 @@
         Dim idx As Integer = lsClass.SelectedIndex
         Dim itemID As Integer = lsClass.Items(idx).ToString
 
+        sel_Item = New ItemClass
+        sel_Item.LoadItem(itemID)
+        txtCategory.Text = sel_Item.Category
+        txtPrint.Text = sel_Item.PrintLayout
 
-        Dim selectedItem As New ItemClass
-        selectedItem.LoadItem(itemID)
-
-        lblID.Text = selectedItem.ID
-        lblCLass.Text = selectedItem.ItemClass
+        lblID.Text = sel_Item.ID
+        lblCLass.Text = sel_Item.ItemClass
 
         lsSpecs.Items.Clear()
-        For Each spec As ItemSpecs In selectedItem.ItemSpecifications
+        For Each spec As ItemSpecs In sel_Item.ItemSpecifications
 
             lsSpecs.Items.Add(spec.SpecName)
 
         Next
     End Sub
 
-    Private Sub dev_NewItem_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+        sel_Item.Category = txtCategory.Text
+        sel_Item.PrintLayout = txtPrint.Text
+        sel_Item.Update()
     End Sub
 End Class

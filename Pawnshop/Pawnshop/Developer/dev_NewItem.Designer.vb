@@ -28,6 +28,9 @@ Partial Class dev_NewItem
         Me.lblID = New System.Windows.Forms.Label()
         Me.lblCLass = New System.Windows.Forms.Label()
         Me.lsSpecs = New System.Windows.Forms.ListBox()
+        Me.txtCategory = New System.Windows.Forms.TextBox()
+        Me.txtPrint = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnPop
@@ -82,11 +85,37 @@ Partial Class dev_NewItem
         Me.lsSpecs.Size = New System.Drawing.Size(120, 95)
         Me.lsSpecs.TabIndex = 5
         '
+        'txtCategory
+        '
+        Me.txtCategory.Location = New System.Drawing.Point(255, 155)
+        Me.txtCategory.Name = "txtCategory"
+        Me.txtCategory.Size = New System.Drawing.Size(100, 20)
+        Me.txtCategory.TabIndex = 6
+        '
+        'txtPrint
+        '
+        Me.txtPrint.Location = New System.Drawing.Point(255, 181)
+        Me.txtPrint.Name = "txtPrint"
+        Me.txtPrint.Size = New System.Drawing.Size(269, 20)
+        Me.txtPrint.TabIndex = 7
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(255, 207)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 8
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'dev_NewItem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(563, 323)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.txtPrint)
+        Me.Controls.Add(Me.txtCategory)
         Me.Controls.Add(Me.lsSpecs)
         Me.Controls.Add(Me.lblCLass)
         Me.Controls.Add(Me.lblID)
@@ -105,4 +134,7 @@ Partial Class dev_NewItem
     Friend WithEvents lblID As System.Windows.Forms.Label
     Friend WithEvents lblCLass As System.Windows.Forms.Label
     Friend WithEvents lsSpecs As System.Windows.Forms.ListBox
+    Friend WithEvents txtCategory As System.Windows.Forms.TextBox
+    Friend WithEvents txtPrint As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
