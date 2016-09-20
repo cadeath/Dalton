@@ -8,9 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{24AC89A7-4FDE-47EF-AC83-32A2499285D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-
     <StartupObject>Pawnshop.My.MyApplication</StartupObject>
-
     <RootNamespace>Pawnshop</RootNamespace>
     <AssemblyName>pawnshop</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -361,6 +359,9 @@
     <Compile Include="Forms\frmItemList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="InterestScheme\InterestScheme.vb" />
+    <Compile Include="InterestScheme\IntScheme_Lines.vb" />
+    <Compile Include="InterestScheme\Scheme_Interest.vb" />
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />

@@ -208,7 +208,7 @@
     '#End Region
 
     Public Sub UpdateSpecs()
-        Dim mySql As String = "SELECT * FROM " & MainTable & " WHERE SpecsID = " & _specID
+        Dim mySql As String = "SELECT * FROM " & MainTable & " WHERE itemid = " & _itemID
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         With ds.Tables(MainTable).Rows(0)

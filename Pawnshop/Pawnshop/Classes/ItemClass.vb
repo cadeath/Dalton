@@ -43,15 +43,6 @@
         End Set
     End Property
 
-    Private _intRate As Double
-    Public Property InterestRate() As Double
-        Get
-            Return _intRate
-        End Get
-        Set(ByVal value As Double)
-            _intRate = value
-        End Set
-    End Property
 
     Private _isRenew As Boolean
     Public Property isRenewable() As Boolean
@@ -145,11 +136,11 @@
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
 
             _isRenew = If(.Item("isRenew") = 1, True, False)
-            _intRate = .Item("Int_Rate")
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
 
-            _Count = .Item("Cnt")
+            _Count = .Item("Renewal_Cnt")
+
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
 
@@ -180,11 +171,10 @@
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
-            .Item("Int_rate") = _intRate
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
-            .Item("Cnt") = _Count
+            .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
@@ -214,10 +204,12 @@
         'End With
 
     Public Sub Update()
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemClass = {1}", MainTable, _itemID)
+
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemID)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count <> 0 Then
+        If ds.Tables(0).Rows.Count <> 1 Then
+
             MsgBox("Unable to update record", MsgBoxStyle.Critical)
             Exit Sub
         End If
@@ -226,11 +218,10 @@
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
-            .Item("Int_Rate") = _intRate
             .Item("isRenew") = If(_isRenew, 1, 0)
             .Item("onHold") = If(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
-            .Item("CNT") = _Count
+            .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
         End With
 

@@ -3,6 +3,10 @@
 
     Dim frmOrig As formSwitch.FormName
 
+
+    'Dim ds As New DataSet
+
+
     Dim ds As New DataSet
 
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
@@ -104,15 +108,15 @@
         Next
     End Sub
 
-    ''Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
-    ''    If e.KeyCode = Keys.Enter Then
-    ''        If Not mOtherForm Then
-    ''            btnView.PerformClick()
-    ''        Else
-    ''            btnSelect.PerformClick()
-    ''        End If
-    ''    End If
-    ''End Sub
+    Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Not mOtherForm Then
+                btnView.PerformClick()
+            Else
+                btnSelect.PerformClick()
+            End If
+        End If
+    End Sub
 
 
     ''Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
@@ -297,6 +301,11 @@
         frmAdminPanel.LoadItemList(selectedItem)
         frmAdminPanel.Show()
         Me.Hide()
+    End Sub
+
+    Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+        loadItemClass()
+        txtSearch.Text = ""
     End Sub
 
 End Class
