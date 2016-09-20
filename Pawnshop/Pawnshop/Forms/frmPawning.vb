@@ -206,10 +206,10 @@
 
         mySql = "SELECT * "
         mySql &= "FROM DevNewPawn INNER JOIN tblClient on tblClient.ClientID = DevNewPawn.ClientID WHERE "
-        If rbDescription.Checked Then
-            mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
+        'If rbDescription.Checked Then
+        '    mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
 
-        ElseIf rbPawner.Checked Then
+        If rbPawner.Checked Then
 
             For Each name In strWords
                 mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
