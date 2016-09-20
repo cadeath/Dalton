@@ -204,9 +204,9 @@
             .Item("Updated_At") = Now
         End With
 
-        For Each itemSpec As ItemSpecs In Me._itemSpecs
-            itemSpec.UpdateSpecs()
-        Next
+        'For Each itemSpec As ItemSpecs In Me._itemSpecs
+        '    itemSpec.UpdateSpecs()
+        'Next
 
         database.SaveEntry(ds, False)
     End Sub

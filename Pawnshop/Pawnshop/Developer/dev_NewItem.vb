@@ -140,7 +140,6 @@
         For Each spec As ItemSpecs In sel_Item.ItemSpecifications
 
             lsSpecs.Items.Add(spec.SpecName)
-
         Next
     End Sub
 
