@@ -8,7 +8,7 @@ Public Class frmAdminPanel
 
 
 
-    'Private ItemModify As Item
+
 
     'Private SpecModify As Item
     Private SpecSave As ItemSpecs
@@ -44,6 +44,8 @@ Public Class frmAdminPanel
         SelectedItem = it
 
         reaDOnlyTrue()
+        btnSave.Enabled = False
+        btnUpdate.Enabled = True
     End Sub
 
     Friend Sub LoadItemall(ByVal it As ItemClass)
@@ -60,7 +62,7 @@ Public Class frmAdminPanel
         txtInterestRate.Text = String.Format(it.InterestRate)
 
         ItemList = it
-        'LoadSpec()
+
     End Sub
 
     Friend Sub clearfields()
@@ -106,7 +108,6 @@ Public Class frmAdminPanel
         ItemSave.ItemClass = txtClassifiction.Text
         ItemSave.Category = txtCategory.Text
         ItemSave.Description = txtDescription.Text
-        ItemSave.InterestRate = txtInterestRate.Text
 
         If rdbYes.Checked = True Then
             ItemSave.isRenewable = rbYes
@@ -116,7 +117,9 @@ Public Class frmAdminPanel
 
         ItemSave.PrintLayout = txtPrintLayout.Text
         ItemSave.created_at = CurrentDate
-        ItemSave.RenewalCount = ItemSave.RenewalCount + 1
+        ItemSave.InterestRate = txtInterestRate.Text
+
+        ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
         For Each row As DataGridViewRow In dgSpecification.Rows
             SpecSave = New ItemSpecs
@@ -148,63 +151,64 @@ Public Class frmAdminPanel
    
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-        'If Not isValid() Then Exit Sub
+        If Not isValid() Then Exit Sub
 
-        'If btnUpdate.Text = "&Update".ToString Then
-        '    btnUpdate.Text = "&Modify".ToString
-        '    reaDOnlyFalse()
-        '    Exit Sub
-        'End If
-
-
-        'Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        'If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        'ItemModify = New Item
-        'With ItemModify
-        '    .Classification = txtClassifiction.Text
-        '    .Category = txtCategory.Text
-        '    .Description = txtDescription.Text
-        '    .DateUpdated = CurrentDate
-        '    If rdbYes.Checked = True Then
-        '        .Renewable = rbYes
-        '    Else
-        '        .Renewable = rbNo
-        '    End If
-
-        '    .PrintLayout = txtPrintLayout.Text
-        '    .ModifyItem()
-        'End With
-
-        'For Each row As DataGridViewRow In dgSpecification.Rows
-        '    SpecSave = New Item
-
-        '    With SpecSave
-
-        '        .ShortCode = row.Cells(0).Value
-        '        .SpecName = row.Cells(1).Value
-        '        .SpecType = row.Cells(2).Value
-        '        .Layout = row.Cells(3).Value
-        '        .UnitofMeasure = row.Cells(4).Value
-        '        .IsRequired = row.Cells(5).Value
-        '        If .IsRequired = "Yes" Then
-        '            .IsRequired = 1
-        '        Else
-        '            .IsRequired = 0
-        '        End If
+        If btnUpdate.Text = "&Update".ToString Then
+            btnUpdate.Text = "&Modify".ToString
+            reaDOnlyFalse()
+            Exit Sub
+        End If
 
 
-        '        If .SpecName Is Nothing Or .SpecType Is Nothing _
-        '            Or .ShortCode Is Nothing Or .Layout Is Nothing Or .IsRequired = "" Then
-        '            Exit For
-        '        Else
-        '            .ModifySpec()
-        '        End If
-        '    End With
-        'Next
-        'MsgBox("Transaction Updated", MsgBoxStyle.Information)
-        'btnSave.Enabled = True
-        'clearfields()
+        Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim ColItemsSpecs As New CollectionItemSpecs
+        Dim ItemModify As New ItemClass
+
+        ItemModify.ItemClass = txtClassifiction.Text
+        ItemModify.Category = txtCategory.Text
+        ItemModify.Description = txtDescription.Text
+        ItemModify.updated_at = CurrentDate
+        If rdbYes.Checked = True Then
+            ItemModify.isRenewable = rbYes
+        Else
+            ItemModify.isRenewable = rbNo
+        End If
+
+        ItemModify.PrintLayout = txtPrintLayout.Text
+
+        ItemModify.InterestRate = txtInterestRate.Text
+
+        Dim SpecModify As New ItemSpecs
+        For Each row As DataGridViewRow In dgSpecification.Rows
+
+
+            With SpecModify
+
+                .ShortCode = row.Cells(0).Value
+                .SpecName = row.Cells(1).Value
+                .SpecType = row.Cells(2).Value
+                .SpecLayout = row.Cells(3).Value
+                .UnitOfMeasure = row.Cells(4).Value
+                .isRequired = row.Cells(5).Value
+
+
+                If .SpecName Is Nothing Or .SpecType Is Nothing _
+                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
+                    Exit For
+                End If
+            End With
+
+            ColItemsSpecs.Add(SpecModify)
+        Next
+
+        ItemModify.ItemSpecifications = ColItemsSpecs
+        ItemModify.Update()
+
+        MsgBox("Transaction Updated", MsgBoxStyle.Information)
+        btnSave.Enabled = True
+        clearfields()
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -221,6 +225,7 @@ Public Class frmAdminPanel
         btnUpdate.Enabled = True
         txtSearch.Clear()
         dgSpecification.Rows.Clear()
+        clearfields()
     End Sub
 
 
@@ -265,14 +270,6 @@ Public Class frmAdminPanel
         dt = ds.Tables(0)
 
         For Each dr As DataRow In dt.Rows
-
-            'dr.ClearErrors()
-            'If dr(5).ToString = 1 Then
-            '    dr(5) = True
-            'ElseIf dr(5).ToString = 0 Then
-            '    dr(5) = False
-            'End If
-
             dgSpecification.Rows.Add(dr(4), dr(0), dr(1), dr(3), dr(2), dr(5))
         Next
 

@@ -194,10 +194,10 @@
     End Sub
 
     Public Sub Update()
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemClass = {1}", MainTable, _itemID)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemClass = '{1}'", MainTable, _itemClass)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count <> 0 Then
+        If ds.Tables(0).Rows.Count <= 0 Then
             MsgBox("Unable to update record", MsgBoxStyle.Critical)
             Exit Sub
         End If
