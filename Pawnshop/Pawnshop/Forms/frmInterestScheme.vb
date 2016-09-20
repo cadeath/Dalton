@@ -20,6 +20,11 @@
         'ItemSave.created_at = txtPenalty.Text
         'ItemSave.PrintLayout = txtRemarks.Text
 
+        For Each item As ListViewItem In lvIntScheme.Items
+
+            MsgBox(item.SubItems(0).Text)
+
+        Next
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()
@@ -155,4 +160,5 @@
         Next
     End Sub
 
+   
 End Class

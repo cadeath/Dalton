@@ -101,20 +101,21 @@ Public Class frmAdminPanel
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
 
-        ItemSave.ItemClass = txtClassifiction.Text
-        ItemSave.Category = txtCategory.Text
-        ItemSave.Description = txtDescription.Text
+        With ItemSave
+            .ItemClass = txtClassifiction.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
 
-        If rdbYes.Checked = True Then
-            ItemSave.isRenewable = rbYes
-        Else
-            ItemSave.isRenewable = rbNo
-        End If
+            If rdbYes.Checked = True Then
+                .isRenewable = rbYes
+            Else
+                .isRenewable = rbNo
+            End If
 
-        ItemSave.PrintLayout = txtPrintLayout.Text
-        ItemSave.created_at = CurrentDate
+            .PrintLayout = txtPrintLayout.Text
+            .created_at = CurrentDate
 
-
+        End With
         ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
         For Each row As DataGridViewRow In dgSpecification.Rows
@@ -162,19 +163,26 @@ Public Class frmAdminPanel
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
 
-        ItemModify.ItemClass = txtClassifiction.Text
-        ItemModify.Category = txtCategory.Text
-        ItemModify.Description = txtDescription.Text
-        ItemModify.updated_at = CurrentDate
-        If rdbYes.Checked = True Then
-            ItemModify.isRenewable = rbYes
-        Else
-            ItemModify.isRenewable = rbNo
-        End If
+        With ItemModify
+            .ItemClass = txtClassifiction.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
+            .updated_at = CurrentDate
 
-        ItemModify.PrintLayout = txtPrintLayout.Text
+            If rdbYes.Checked = True Then
+                .isRenewable = rbYes
+            Else
+                .isRenewable = rbNo
+            End If
+
+            .PrintLayout = txtPrintLayout.Text
+
+            Dim a As Integer = ItemModify.ID
+            MsgBox(a)
+        End With
 
         Dim SpecModify As New ItemSpecs
+
         For Each row As DataGridViewRow In dgSpecification.Rows
 
             With SpecModify
@@ -184,7 +192,6 @@ Public Class frmAdminPanel
                 .SpecLayout = row.Cells(3).Value
                 .UnitOfMeasure = row.Cells(4).Value
                 .isRequired = row.Cells(5).Value
-
 
                 If .SpecName Is Nothing Or .SpecType Is Nothing _
                     Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
@@ -610,4 +617,7 @@ Public Class frmAdminPanel
         Next
     End Sub
 
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+    End Sub
 End Class
