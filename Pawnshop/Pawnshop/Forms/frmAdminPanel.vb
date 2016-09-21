@@ -120,13 +120,12 @@ Public Class frmAdminPanel
         For Each row As DataGridViewRow In dgSpecs.Rows
             SpecSave = New ItemSpecs
             With SpecSave
-                .ShortCode = row.Cells(0).Value
-                .SpecName = row.Cells(1).Value
-                .SpecType = row.Cells(2).Value
-                .SpecLayout = row.Cells(3).Value
-                .UnitOfMeasure = row.Cells(4).Value
-                .isRequired = row.Cells(5).Value
-
+                .ShortCode = row.Cells(1).Value
+                .SpecName = row.Cells(2).Value
+                .SpecType = row.Cells(3).Value
+                .SpecLayout = row.Cells(4).Value
+                .UnitOfMeasure = row.Cells(5).Value
+                .isRequired = row.Cells(6).Value
 
                 If .SpecName Is Nothing Or .SpecType Is Nothing _
                     Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
@@ -141,10 +140,8 @@ Public Class frmAdminPanel
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()
-
     End Sub
    
-
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not isValid() Then Exit Sub
 
@@ -154,21 +151,18 @@ Public Class frmAdminPanel
             Exit Sub
         End If
 
-
         Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
 
-
         With ItemModify
             .ItemClass = txtClassifiction.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .updated_at = CurrentDate
-	    .ID = txtItemID.Text
-
+            .ID = txtItemID.Text
 
             If rdbYes.Checked = True Then
                 .isRenewable = rbYes
@@ -177,9 +171,8 @@ Public Class frmAdminPanel
             End If
 
             .PrintLayout = txtPrintLayout.Text
-
-            Dim a As Integer = ItemModify.ID
-            MsgBox(a)
+            'Dim a As Integer = ItemModify.ID
+            'MsgBox(a)
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -230,7 +223,6 @@ Public Class frmAdminPanel
         clearfields()
     End Sub
 
-
     Private Sub searchbutton()
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
@@ -261,7 +253,6 @@ Public Class frmAdminPanel
         Next
     End Sub
 
-
     Friend Sub LoadSpec(ByVal ID As Integer)
         Dim da As New OdbcDataAdapter
         Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
@@ -275,7 +266,6 @@ Public Class frmAdminPanel
             ' Dim i As Integer = (0)
 
             reaDOnlyTrue()
-
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = True
         Next
@@ -555,14 +545,12 @@ Public Class frmAdminPanel
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
 
-        
     End Sub
 
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
     End Sub
-
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
@@ -574,7 +562,6 @@ Public Class frmAdminPanel
         ShowDataInLvw(FileChecker(fn), lvModule)
 
     End Sub
-
   
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
         If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
@@ -584,7 +571,6 @@ Public Class frmAdminPanel
         esk.Serialize(fsEsk, serialDS)
         fsEsk.Close()
     End Sub
-
 
     Function FileChecker(ByVal url As String) As DataTable
         Dim fs As New System.IO.FileStream(url, IO.FileMode.Open)

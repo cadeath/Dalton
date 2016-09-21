@@ -335,6 +335,12 @@
     <Compile Include="Forms\frmInterestScheme.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmInterestSchemeList.Designer.vb">
+      <DependentUpon>frmInterestSchemeList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInterestSchemeList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmItemList.Designer.vb">
       <DependentUpon>frmItemList.vb</DependentUpon>
     </Compile>
@@ -771,6 +777,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInterestScheme.resx">
       <DependentUpon>frmInterestScheme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInterestSchemeList.resx">
+      <DependentUpon>frmInterestSchemeList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmItemList.resx">
       <DependentUpon>frmItemList.vb</DependentUpon>

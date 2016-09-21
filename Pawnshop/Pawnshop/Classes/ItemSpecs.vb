@@ -130,8 +130,6 @@
             _specLayout = .Item("SpecLayout")
             _shortCode = .Item("ShortCode")
             _isRequired = If(.Item("isRequired") = 1, True, False)
-            '_created = .Item("Created_At")
-            '_updated = .Item("Updated_At")
         End With
     End Sub
 
@@ -172,7 +170,6 @@
         database.SaveEntry(ds)
     End Sub
 
-
     Public Sub LoadByRow(ByVal dr As DataRow)
         With dr
             _specID = .Item("specsid")
@@ -198,7 +195,6 @@
         End If
         Return ds.Tables(0).Rows(0).Item("SpecsID")
     End Function
-    '#End Region
 
     Public Sub UpdateSpecs()
         Dim mySql As String = "SELECT * FROM " & MainTable & " WHERE SpecsID = " & _specID
