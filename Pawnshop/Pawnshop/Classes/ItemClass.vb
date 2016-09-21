@@ -134,35 +134,27 @@
             MsgBox("Failed to load Item", MsgBoxStyle.Critical)
             Exit Sub
         End If
-
         With ds.Tables(0).Rows(0)
             _itemID = .Item("ItemID")
             _itemClass = .Item("ItemClass")
             _category = .Item("ItemCategory")
+
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
+
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
+
             _Count = .Item("Renewal_Cnt")
+
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
+
         End With
-
-        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
-        ds.Clear()
-        ds = LoadSQL(mySql, SubTable)
-
-        _itemSpecs = New CollectionItemSpecs
-        For Each dr As DataRow In ds.Tables(SubTable).Rows
-            Console.WriteLine(dr.Item("SpecsName"))
-            Dim tmpSpecs As New ItemSpecs
-            tmpSpecs.LoadItemSpecs_row(dr)
-
-            _itemSpecs.Add(tmpSpecs)
-        Next
     End Sub
 
     Public Sub SaveItem()
+
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
@@ -191,6 +183,20 @@
         Next
     End Sub
 
+    'Public Sub LoadByRow(ByVal dr As DataRow)
+    '    With dr
+    '        _itemID = .Item("itemid")
+    '        _itemClass = .Item("itemclass")
+    '        '_desc = .Item("Description")
+    '        If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
+    '        _category = .Item("itemcategory")
+    '        _isRenew = .Item("isrenew")
+    '        '_onHold = .Item()
+    '        _printLayout = .Item("print_layout")
+
+    '    End With
+    'End Sub
+
     Public Sub Update()
 
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemID)
@@ -202,7 +208,7 @@
             Exit Sub
         End If
 
-        With ds.Tables(MainTable).Rows(0)
+        With ds.Tables(0).Rows(0)
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
@@ -212,14 +218,8 @@
             .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
         End With
-
-        For Each itemSpec As ItemSpecs In Me._itemSpecs
-            itemSpec.UpdateSpecs()
-        Next
-
         database.SaveEntry(ds, False)
     End Sub
-
 #End Region
 
 End Class

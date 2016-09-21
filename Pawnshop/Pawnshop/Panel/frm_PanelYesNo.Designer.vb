@@ -23,15 +23,15 @@ Partial Class frm_PanelYesNo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.btnSubmit = New System.Windows.Forms.Button()
         Me.rbYes = New System.Windows.Forms.RadioButton()
         Me.rbNo = New System.Windows.Forms.RadioButton()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox8.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox8
         '
-        Me.GroupBox8.Controls.Add(Me.Button1)
+        Me.GroupBox8.Controls.Add(Me.btnSubmit)
         Me.GroupBox8.Controls.Add(Me.rbYes)
         Me.GroupBox8.Controls.Add(Me.rbNo)
         Me.GroupBox8.Location = New System.Drawing.Point(12, 12)
@@ -40,6 +40,15 @@ Partial Class frm_PanelYesNo
         Me.GroupBox8.TabIndex = 22
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Select Fields"
+        '
+        'btnSubmit
+        '
+        Me.btnSubmit.Location = New System.Drawing.Point(71, 56)
+        Me.btnSubmit.Name = "btnSubmit"
+        Me.btnSubmit.Size = New System.Drawing.Size(75, 23)
+        Me.btnSubmit.TabIndex = 2
+        Me.btnSubmit.Text = "Submit"
+        Me.btnSubmit.UseVisualStyleBackColor = True
         '
         'rbYes
         '
@@ -63,22 +72,14 @@ Partial Class frm_PanelYesNo
         Me.rbNo.Text = "No"
         Me.rbNo.UseVisualStyleBackColor = True
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(71, 56)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Submit"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'frm_PanelYesNo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(168, 103)
+        Me.ClientSize = New System.Drawing.Size(173, 99)
         Me.Controls.Add(Me.GroupBox8)
         Me.Name = "frm_PanelYesNo"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         Me.ResumeLayout(False)
@@ -87,5 +88,5 @@ Partial Class frm_PanelYesNo
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents rbYes As System.Windows.Forms.RadioButton
     Friend WithEvents rbNo As System.Windows.Forms.RadioButton
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnSubmit As System.Windows.Forms.Button
 End Class

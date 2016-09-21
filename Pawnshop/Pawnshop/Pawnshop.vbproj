@@ -239,6 +239,12 @@
     <Compile Include="Developer\dev_NewItem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\dev_NewPawning.Designer.vb">
+      <DependentUpon>dev_NewPawning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_NewPawning.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_ORview.Designer.vb">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
@@ -341,6 +347,12 @@
     <Compile Include="Forms\frmItemList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmPawningItemNew.Designer.vb">
+      <DependentUpon>frmPawningItemNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPawningItemNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
@@ -356,7 +368,30 @@
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Modules\Void.vb" />
-    <Compile Include="PawnModule\PawnTicket2.vb" />
+    <Compile Include="Panel\frm_PanelKarat.Designer.vb">
+      <DependentUpon>frm_PanelKarat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelKarat.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
+      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelMultiline.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel\frm_PanelTextbox.Designer.vb">
+      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelTextbox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel\frm_PanelYesNo.Designer.vb">
+      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelYesNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
       <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
     </Compile>
@@ -701,6 +736,9 @@
     <EmbeddedResource Include="Developer\dev_NewItem.resx">
       <DependentUpon>dev_NewItem.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_NewPawning.resx">
+      <DependentUpon>dev_NewPawning.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </EmbeddedResource>
@@ -746,8 +784,23 @@
     <EmbeddedResource Include="Forms\frmItemList.resx">
       <DependentUpon>frmItemList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
+      <DependentUpon>frmPawningItemNew.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelKarat.resx">
+      <DependentUpon>frm_PanelKarat.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
+      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelTextbox.resx">
+      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelYesNo.resx">
+      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
@@ -1149,9 +1202,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Developer\doc\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

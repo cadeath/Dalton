@@ -258,7 +258,7 @@ Partial Class frmPawning
         '
         Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnView.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnView.Location = New System.Drawing.Point(708, 533)
+        Me.btnView.Location = New System.Drawing.Point(708, 505)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 6

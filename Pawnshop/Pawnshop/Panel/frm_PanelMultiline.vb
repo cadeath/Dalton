@@ -2,9 +2,11 @@
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Dim tmpResult As String = txtSearch.Text
-        With dev_NewPawning.lvItem
+        With frmPawningItemNew.lvSpec
             .SelectedItems(0).SubItems(3).Text = tmpResult
         End With
+
+        Me.Close()
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
@@ -12,4 +14,11 @@
             btnSubmit.PerformClick()
         End If
     End Sub
+
+    Private Sub frm_PanelMultiline_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtSearch.Clear()
+        txtSearch.Focus()
+        txtSearch.ScrollBars = ScrollBars.Vertical
+    End Sub
+   
 End Class

@@ -68,7 +68,7 @@
         st &= IIf(chkRedeem.Checked, "1", "0")
         st &= IIf(chkSeg.Checked, "1", "0")
 
-        Dim mySql As String = "SELECT FIRST 100 * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        Dim mySql As String = "SELECT FIRST 100 * FROM devNewPawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
         'mySql = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
         If st = "1000" Then
             mySql &= "' AND (Status = 'L' OR Status = 'R') ORDER BY LoanDate ASC, PAWNID ASC"
@@ -120,8 +120,9 @@
         Dim ticket As String
         ticket = String.Format("{0:000000}", tk.PawnTicket)
         Dim lv As ListViewItem = lvPawners.Items.Add(ticket)
-        lv.SubItems.Add(tk.ItemType)
-        lv.SubItems.Add(tk.Description)
+        Dim tmpItem As ItemClass = New ItemClass
+        lv.SubItems.Add(tmpItem.Category)
+        lv.SubItems.Add(tmpItem.Description)
         lv.SubItems.Add(String.Format("{0} {1}", tk.Pawner.FirstName, tk.Pawner.LastName))
         lv.SubItems.Add(tk.LoanDate)
         lv.SubItems.Add(tk.MaturityDate)
@@ -166,12 +167,49 @@
         Dim strWords As String() = secured_str.Split(New Char() {" "c})
         Dim mySql As String, name As String
 
-            mySql = "SELECT * "
-            mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
-            If rbDescription.Checked Then
-            mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
+        '    mySql = "SELECT * "
+        '    mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
+        '    If rbDescription.Checked Then
+        '    mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
 
-        ElseIf rbPawner.Checked Then
+        'ElseIf rbPawner.Checked Then
+
+        '    For Each name In strWords
+        '        mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
+        '        If name Is strWords.Last Then
+        '            mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
+        '            Exit For
+        '        End If
+        '    Next
+
+        'ElseIf rbPawnTicket.Checked Then
+
+        '    mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'"
+
+        'ElseIf rbAll.Checked Then
+
+        '    If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
+
+        '    mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
+
+        '    For Each name In strWords
+
+        '        mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
+        '        If name Is strWords.Last Then
+        '            mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
+        '            Exit For
+        '        End If
+
+        '    Next
+
+        'End If
+
+        mySql = "SELECT * "
+        mySql &= "FROM DevNewPawn INNER JOIN tblClient on tblClient.ClientID = DevNewPawn.ClientID WHERE "
+        'If rbDescription.Checked Then
+        '    mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
+
+        If rbPawner.Checked Then
 
             For Each name In strWords
                 mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
@@ -189,7 +227,7 @@
 
             If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
 
-            mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
+            'mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
 
             For Each name In strWords
 
