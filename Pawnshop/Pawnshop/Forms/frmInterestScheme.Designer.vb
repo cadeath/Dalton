@@ -46,17 +46,19 @@ Partial Class frmInterestScheme
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
-        Me.lvIntScheme = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnRemove = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.lvIntscheme = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnUpdateScheme = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -296,48 +298,10 @@ Partial Class frmInterestScheme
         Me.LineShape1.Y1 = 301
         Me.LineShape1.Y2 = 301
         '
-        'lvIntScheme
-        '
-        Me.lvIntScheme.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
-        Me.lvIntScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lvIntScheme.FullRowSelect = True
-        Me.lvIntScheme.GridLines = True
-        Me.lvIntScheme.Location = New System.Drawing.Point(381, 201)
-        Me.lvIntScheme.Name = "lvIntScheme"
-        Me.lvIntScheme.Size = New System.Drawing.Size(549, 159)
-        Me.lvIntScheme.TabIndex = 14
-        Me.lvIntScheme.UseCompatibleStateImageBehavior = False
-        Me.lvIntScheme.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Text = "Day From"
-        Me.ColumnHeader1.Width = 84
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Text = "Day To"
-        Me.ColumnHeader2.Width = 88
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Text = "Interest"
-        Me.ColumnHeader3.Width = 85
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Penalty"
-        Me.ColumnHeader4.Width = 93
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Remarks"
-        Me.ColumnHeader5.Width = 195
-        '
         'btnAdd
         '
         Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(741, 161)
+        Me.btnAdd.Location = New System.Drawing.Point(654, 161)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(88, 34)
         Me.btnAdd.TabIndex = 2
@@ -384,17 +348,70 @@ Partial Class frmInterestScheme
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
+        'lvIntscheme
+        '
+        Me.lvIntscheme.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvIntscheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvIntscheme.FullRowSelect = True
+        Me.lvIntscheme.GridLines = True
+        Me.lvIntscheme.Location = New System.Drawing.Point(384, 198)
+        Me.lvIntscheme.Name = "lvIntscheme"
+        Me.lvIntscheme.Size = New System.Drawing.Size(546, 162)
+        Me.lvIntscheme.TabIndex = 16
+        Me.lvIntscheme.UseCompatibleStateImageBehavior = False
+        Me.lvIntscheme.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "ID"
+        Me.ColumnHeader1.Width = 46
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Day From"
+        Me.ColumnHeader2.Width = 75
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Day To"
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Interest"
+        Me.ColumnHeader4.Width = 73
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Penalty"
+        Me.ColumnHeader5.Width = 69
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "Remarks"
+        Me.ColumnHeader6.Width = 217
+        '
+        'btnUpdateScheme
+        '
+        Me.btnUpdateScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateScheme.Location = New System.Drawing.Point(746, 161)
+        Me.btnUpdateScheme.Name = "btnUpdateScheme"
+        Me.btnUpdateScheme.Size = New System.Drawing.Size(88, 34)
+        Me.btnUpdateScheme.TabIndex = 17
+        Me.btnUpdateScheme.Text = "Update"
+        Me.btnUpdateScheme.UseVisualStyleBackColor = True
+        '
         'frmInterestScheme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(936, 444)
+        Me.Controls.Add(Me.btnUpdateScheme)
+        Me.Controls.Add(Me.lvIntscheme)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
-        Me.Controls.Add(Me.lvIntScheme)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
@@ -436,15 +453,17 @@ Partial Class frmInterestScheme
     Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
-    Friend WithEvents lvIntScheme As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnRemove As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents btnSearch As System.Windows.Forms.Button
+    Friend WithEvents lvIntscheme As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnUpdateScheme As System.Windows.Forms.Button
 End Class

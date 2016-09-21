@@ -6,7 +6,6 @@
     Friend Sub LoadSchemeList(ByVal sc As InterestScheme)
         If sc.SchemeName = "" Then Exit Sub
 
-        ' Dim id As Integer = sc.SchemeID
         txtSchemeName.Text = sc.SchemeName
         txtDescription.Text = sc.Description
 
@@ -39,11 +38,11 @@
         For Each item As ListViewItem In lvIntScheme.Items
             Dim SchemeInterest As New Scheme_Interest
             With SchemeInterest
-                .DayFrom = item.SubItems(0).Text
-                .DayTo = item.SubItems(1).Text
-                .Interest = item.SubItems(2).Text
-                .Penalty = item.SubItems(3).Text
-                .Remarks = item.SubItems(4).Text
+                .DayFrom = item.SubItems(1).Text
+                .DayTo = item.SubItems(2).Text
+                .Interest = item.SubItems(3).Text
+                .Penalty = item.SubItems(4).Text
+                .Remarks = item.SubItems(5).Text
             End With
             IntSchemeLines.Add(SchemeInterest)
         Next
@@ -131,14 +130,16 @@
 
         For Each item As ListViewItem In lvIntScheme.Items
             Dim SchemeInterest As New Scheme_Interest
-            SchemeInterest.schemeInterestID = frmInterestSchemeList.lblSchemeID.Text
 
             With SchemeInterest
-                .DayFrom = item.SubItems(0).Text
-                .DayTo = item.SubItems(1).Text
-                .Interest = item.SubItems(2).Text
-                .Penalty = item.SubItems(3).Text
-                .Remarks = item.SubItems(4).Text
+                SchemeInterest.schemeInterestID = lvIntscheme.Items(0).Text
+
+                .DayFrom = item.SubItems(1).Text
+                .DayTo = item.SubItems(2).Text
+                .Interest = item.SubItems(3).Text
+                .Penalty = item.SubItems(4).Text
+                .Remarks = item.SubItems(5).Text
+
             End With
 
             SchemeInterest.Update()
@@ -200,21 +201,6 @@
    
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
 
-        'Dim secured_str As String = txtSearch.Text
-        'secured_str = DreadKnight(secured_str)
-
-        'frmItemList.Show()
-
-        'frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
-        'frmItemList.btnSearch.PerformClick()
-
-        'btnUpdate.Text = "&Update".ToString
-        'btnUpdate.Enabled = True
-        'txtSearch.Clear()
-        'lvIntScheme.Items.Clear()
-        'txtDescription.Clear()
-        'txtSchemeName.Clear()
-
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
 
@@ -231,19 +217,29 @@
 
     End Sub
 
-    Private Sub lvIntScheme_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvIntScheme.DoubleClick
-        With lvIntScheme
-            txtDayFrom.Text = .SelectedItems(0).Text
-            txtDayTo.Text = .SelectedItems(0).SubItems(1).Text
-            txtInterest.Text = .SelectedItems(0).SubItems(2).Text
-            txtPenalty.Text = .SelectedItems(0).SubItems(3).Text
-            txtRemarks.Text = .SelectedItems(0).SubItems(4).Text
-        End With
-    End Sub
+   
 
     Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
         End If
+    End Sub
+
+    Private Sub lvIntscheme_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvIntscheme.DoubleClick
+        With lvIntscheme
+            txtDayFrom.Text = .SelectedItems(0).SubItems(1).Text
+            txtDayTo.Text = .SelectedItems(0).SubItems(2).Text
+            txtInterest.Text = .SelectedItems(0).SubItems(3).Text
+            txtPenalty.Text = .SelectedItems(0).SubItems(4).Text
+            txtRemarks.Text = .SelectedItems(0).SubItems(5).Text
+        End With
+    End Sub
+
+    Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
+        lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
+        lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
+        lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
+        lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
+        lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
     End Sub
 End Class
