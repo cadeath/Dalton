@@ -6,12 +6,11 @@ Public Class frmAdminPanel
     Dim rbYes As Integer
     Dim rbNo As Integer
 
-
-
     Private SpecSave As ItemSpecs
     Dim ds As New DataSet
 
     Friend SelectedItem As ItemClass
+    Friend SelectedItemSpecs As ItemSpecs
 
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
@@ -69,7 +68,7 @@ Public Class frmAdminPanel
         txtSearch.Text = ""
         txtReferenceNumber.Text = ""
         cmbModuleName.Text = ""
-        dgSpecification.Rows.Clear()
+        dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
 
     End Sub
@@ -117,7 +116,7 @@ Public Class frmAdminPanel
 
         ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
-        For Each row As DataGridViewRow In dgSpecification.Rows
+        For Each row As DataGridViewRow In dgSpecs.Rows
             SpecSave = New ItemSpecs
             With SpecSave
                 .ShortCode = row.Cells(0).Value
@@ -161,7 +160,7 @@ Public Class frmAdminPanel
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
-
+        ItemModify.ID = txtItemID.Text
         ItemModify.ItemClass = txtClassifiction.Text
         ItemModify.Category = txtCategory.Text
         ItemModify.Description = txtDescription.Text
@@ -175,27 +174,28 @@ Public Class frmAdminPanel
         ItemModify.PrintLayout = txtPrintLayout.Text
 
         Dim SpecModify As New ItemSpecs
-        For Each row As DataGridViewRow In dgSpecification.Rows
+        For Each row As DataGridViewRow In dgSpecs.Rows
 
             With SpecModify
-                .ShortCode = row.Cells(0).Value
-                .SpecName = row.Cells(1).Value
-                .SpecType = row.Cells(2).Value
-                .SpecLayout = row.Cells(3).Value
-                .UnitOfMeasure = row.Cells(4).Value
-                .isRequired = row.Cells(5).Value
-
+                .SpecID = row.Cells(0).Value
+                .ShortCode = row.Cells(1).Value
+                .SpecName = row.Cells(2).Value
+                .SpecType = row.Cells(3).Value
+                .SpecLayout = row.Cells(4).Value
+                .UnitOfMeasure = row.Cells(5).Value
+                .isRequired = row.Cells(6).Value
 
                 If .SpecName Is Nothing Or .SpecType Is Nothing _
                     Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
                     Exit For
                 End If
-            End With
 
-            ColItemsSpecs.Add(SpecModify)
+            End With
+            SpecModify.UpdateSpecs()
+            ' ColItemsSpecs.Add(SpecModify)
         Next
 
-        ItemModify.ItemSpecifications = ColItemsSpecs
+        'ItemModify.ItemSpecifications = ColItemsSpecs
         ItemModify.Update()
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
@@ -216,7 +216,7 @@ Public Class frmAdminPanel
         btnUpdate.Text = "&Update".ToString
         btnUpdate.Enabled = True
         txtSearch.Clear()
-        dgSpecification.Rows.Clear()
+        dgSpecs.Rows.Clear()
         clearfields()
     End Sub
 
@@ -234,8 +234,8 @@ Public Class frmAdminPanel
         txtPrintLayout.ReadOnly = True
         rdbNo.Enabled = False
         rdbYes.Enabled = False
-        For a As Integer = 0 To dgSpecification.Rows.Count - 1
-            dgSpecification.Rows(a).ReadOnly = True
+        For a As Integer = 0 To dgSpecs.Rows.Count - 1
+            dgSpecs.Rows(a).ReadOnly = True
         Next
     End Sub
 
@@ -246,33 +246,36 @@ Public Class frmAdminPanel
         txtPrintLayout.ReadOnly = False
         rdbNo.Enabled = True
         rdbYes.Enabled = True
-        For a As Integer = 0 To dgSpecification.Rows.Count - 1
-            dgSpecification.Rows(a).ReadOnly = False
+        For a As Integer = 0 To dgSpecs.Rows.Count - 1
+            dgSpecs.Rows(a).ReadOnly = False
         Next
     End Sub
 
 
-    Friend Sub LoadSpec()
+    Friend Sub LoadSpec(ByVal ID As Integer)
         Dim da As New OdbcDataAdapter
-        Dim mySql As String = "SELECT SPECSNAME,SPECTYPE,UOM,SPECLAYOUT,SHORTCODE,ISREQUIRED FROM TBLSPECS WHERE ItemID = '" & frmItemList.lblItemID.Text & "'"
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
         Console.WriteLine("SQL: " & mySql)
         Dim ds As DataSet = LoadSQL(mySql)
-        Dim dt As New DataTable
+        Dim dr As DataRow
 
-        dt = ds.Tables(0)
-
-        For Each dr As DataRow In dt.Rows
-            dgSpecification.Rows.Add(dr(4), dr(0), dr(1), dr(3), dr(2), dr(5))
+        For Each dr In ds.Tables(0).Rows
+            AddItem(dr)
         Next
+            ' Dim i As Integer = (0)
 
-        Dim i As Integer = (0)
+            reaDOnlyTrue()
 
-        reaDOnlyTrue()
-
-        For a As Integer = 0 To dgSpecification.Rows.Count - 1
-            dgSpecification.Rows(a).ReadOnly = True
+        For a As Integer = 0 To dgSpecs.Rows.Count - 1
+            dgSpecs.Rows(a).ReadOnly = True
         Next
-        btnSave.Enabled = False
+            btnSave.Enabled = False
+    End Sub
+
+    Private Sub AddItem(ByVal cio As DataRow)
+        Dim tmpItem As New ItemSpecs
+        tmpItem.LoadItemSpecs_row(cio)
+        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
@@ -281,10 +284,7 @@ Public Class frmAdminPanel
         End If
     End Sub
 
-
-   
     '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
-
     Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
         If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
 
@@ -609,5 +609,6 @@ Public Class frmAdminPanel
             Next
         Next
     End Sub
+
 
 End Class

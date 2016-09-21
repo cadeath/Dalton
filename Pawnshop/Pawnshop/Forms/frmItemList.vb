@@ -279,16 +279,10 @@
 
         lblItemID.Text = selectedItem.ID
 
-        frmAdminPanel.dgSpecification.Rows.Clear()
+        frmAdminPanel.dgSpecs.Rows.Clear()
 
-        For Each spec As ItemSpecs In selectedItem.ItemSpecifications
-            Dim IsRenew As String
-            IsRenew = spec.isRequired.ToString
-
-            frmAdminPanel.dgSpecification.Rows.Add(spec.ShortCode, spec.SpecName, spec.SpecType, spec.SpecLayout, spec.UnitOfMeasure, IsRenew)
-
-        Next
-
+        frmAdminPanel.LoadSpec(idx)
+        frmAdminPanel.txtItemID.Text = idx
         frmAdminPanel.LoadItemList(selectedItem)
         frmAdminPanel.Show()
         Me.Hide()

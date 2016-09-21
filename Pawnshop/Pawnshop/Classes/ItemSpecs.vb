@@ -116,17 +116,6 @@
 
 #Region "Functions and Procedures"
 
-    'Public Sub LoadItemSpecs(id As Integer)
-        'Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = " & id
-        'Dim ds As DataSet = LoadSQL(mySql, "TBLSPECS")
-
-        'If ds.Tables(0).Rows.Count <> 0 Then
-        '    MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
-        '    Exit Sub
-        'End If
-
-        'With ds.Tables(0).Rows(0)
-
     Public Sub LoadItemSpecs_row(dr As DataRow)
         With dr
 
@@ -146,16 +135,20 @@
         End With
     End Sub
 
-    Public Sub LoadItemSpecs(id As Integer)
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE SpecsID = " & ItemID
-        Dim ds As DataSet = LoadSQL(mySql, "TBLSPECS")
+    Friend Sub LoadItemSpecs(ByVal id As Integer)
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = " & id
+        Dim ds As DataSet
+        ds = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count <> 0 Then
-            MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
+        'If ds.Tables(0).Rows.Count <> 0 Then
+        '    MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
+        '    Exit Sub
+        'End If
 
-        LoadItemSpecs_row(ds.Tables(0).Rows(0))
+        For Each dr As DataRow In ds.Tables(0).Rows
+            LoadItemSpecs_row(dr)
+        Next
+
     End Sub
 
     Public Sub SaveSpecs()
@@ -184,7 +177,7 @@
         With dr
             _specID = .Item("specsid")
             _itemID = .Item("itemid")
-            '_UoM = .Item("uom")
+            _UoM = .Item("uom")
             _specName = .Item("specsname")
             _specType = .Item("spectype")
             _specLayout = .Item("speclayout")
@@ -209,15 +202,16 @@
 
     Public Sub UpdateSpecs()
         Dim mySql As String = "SELECT * FROM " & MainTable & " WHERE SpecsID = " & _specID
-        Dim ds As DataSet = LoadSQL(mySql, MainTable)
+        Dim ds As DataSet
+        ds = LoadSQL(mySql, MainTable)
 
-        With ds.Tables(MainTable).Rows(0)
+        With ds.Tables(0).Rows(0)
             .Item("SpecsName") = _specName
             .Item("SpecType") = _specType
             .Item("UoM") = _UoM
-            .Item("onHold") = If(_onHold, 1, 0)
+            '.Item("onHold") = If(_onHold, 1, 0)
             .Item("SpecLayout") = _specLayout
-            .Item("isRequired") = If(_isRequired, 1, 0)
+            '.Item("isRequired") = If(_isRequired, 1, 0)
             .Item("Updated_At") = Now
         End With
 

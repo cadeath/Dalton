@@ -155,18 +155,18 @@
 
         End With
 
-        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
-        ds.Clear()
-        ds = LoadSQL(mySql, SubTable)
+        'mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        'ds.Clear()
+        'ds = LoadSQL(mySql, SubTable)
 
-        _itemSpecs = New CollectionItemSpecs
-        For Each dr As DataRow In ds.Tables(SubTable).Rows
-            Console.WriteLine(dr.Item("SpecsName"))
-            Dim tmpSpecs As New ItemSpecs
-            tmpSpecs.LoadItemSpecs_row(dr)
+        '_itemSpecs = New CollectionItemSpecs
+        'For Each dr As DataRow In ds.Tables(SubTable).Rows
+        '    Console.WriteLine(dr.Item("SpecsName"))
+        '    Dim tmpSpecs As New ItemSpecs
+        '    tmpSpecs.LoadItemSpecs_row(dr)
 
-            _itemSpecs.Add(tmpSpecs)
-        Next
+        '    _itemSpecs.Add(tmpSpecs)
+        'Next
     End Sub
 
     Public Sub SaveItem()
@@ -225,7 +225,7 @@
             Exit Sub
         End If
 
-        With ds.Tables(MainTable).Rows(0)
+        With ds.Tables(0).Rows(0)
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
@@ -236,9 +236,9 @@
             .Item("Updated_At") = Now
         End With
 
-        For Each itemSpec As ItemSpecs In Me._itemSpecs
-            itemSpec.UpdateSpecs()
-        Next
+        'For Each itemSpec As ItemSpecs In Me._itemSpecs
+        '    itemSpec.UpdateSpecs()
+        'Next
 
         database.SaveEntry(ds, False)
 
