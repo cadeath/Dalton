@@ -1,7 +1,8 @@
 ﻿Public Class frmInterestSchemeList
     Dim filldata As String = "TBLINTSCHEMES"
 
-    Dim selectedScheme As InterestScheme
+    Dim tmpScheme As InterestScheme
+    Dim selectedSchemeDetails As Scheme_Interest
 
     Private Sub frmInterestSchemeList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadScheme()
@@ -31,17 +32,22 @@
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-        Dim idx As Integer = CInt(lvSchemeList.FocusedItem.Text)
 
-        selectedScheme = New InterestScheme
-        selectedScheme.LoadScheme(idx)
+        If lvSchemeList.SelectedItems.Count <= 0 Then Exit Sub
 
-        lblSchemeID.Text = idx
+        Dim Schemeid As Integer
+        Schemeid = lvSchemeList.FocusedItem.Text
+        Console.WriteLine("SchemeID: " & Schemeid)
+
+        tmpScheme = New InterestScheme
+        tmpScheme.LoadScheme(Schemeid)
+
+        lblSchemeID.Text = tmpScheme.SchemeID
 
         frmInterestScheme.lvIntScheme.Items.Clear()
 
-        For Each SchemeDetails As Scheme_Interest In selectedScheme.SchemeDetails
-            With SchemeDetails
+        For Each SchemeDetail As Scheme_Interest In tmpScheme.SchemeDetails
+            With SchemeDetail
 
                 Dim row As ListViewItem
 
@@ -56,7 +62,7 @@
             End With
         Next
 
-        frmInterestScheme.LoadSchemeList(selectedScheme)
+        frmInterestScheme.LoadSchemeList(tmpScheme)
         frmInterestScheme.Show()
         Me.Hide()
 
@@ -114,10 +120,7 @@
 
     Private Sub lvSchemeList_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSchemeList.KeyDown
         If e.KeyCode = Keys.Enter Then
-
             btnView.PerformClick()
-        
-
         End If
     End Sub
 End Class

@@ -117,7 +117,7 @@
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE SCHEMEID = {1}", MainTable, _schemeID)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(MainTable).Rows.Count <> 1 Then
+        If ds.Tables(MainTable).Rows.Count <= 0 Then
             MsgBox("Unable to update record", MsgBoxStyle.Critical)
             Exit Sub
         End If
@@ -127,9 +127,10 @@
             .Item("Description") = _desc
         End With
 
-        For Each detail As Scheme_Interest In _SchemeDetails
-            detail.Update()
-        Next
+        'For Each detail As Scheme_Interest In _SchemeDetails
+        '    detail.Update()
+        'Next
+
         database.SaveEntry(ds, False)
 
         Refresh()

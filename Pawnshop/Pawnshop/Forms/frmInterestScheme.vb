@@ -1,9 +1,12 @@
 ﻿Public Class frmInterestScheme
     Dim SelectedScheme As InterestScheme
 
+    Dim SchemeModify As New InterestScheme
+
     Friend Sub LoadSchemeList(ByVal sc As InterestScheme)
         If sc.SchemeName = "" Then Exit Sub
 
+        ' Dim id As Integer = sc.SchemeID
         txtSchemeName.Text = sc.SchemeName
         txtDescription.Text = sc.Description
 
@@ -12,6 +15,8 @@
         reaDOnlyTrue()
         btnSave.Enabled = False
         btnUpdate.Enabled = True
+        txtSchemeName.Enabled = False
+        txtDescription.Enabled = False
     End Sub
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If txtSchemeName.Text = "" Then txtSchemeName.Focus()
@@ -30,8 +35,9 @@
             .Description = txtDescription.Text
         End With
 
-        Dim SchemeInterest As New Scheme_Interest
+
         For Each item As ListViewItem In lvIntScheme.Items
+            Dim SchemeInterest As New Scheme_Interest
             With SchemeInterest
                 .DayFrom = item.SubItems(0).Text
                 .DayTo = item.SubItems(1).Text
@@ -43,7 +49,7 @@
         Next
 
         SchemeSave.SchemeDetails = IntSchemeLines
-        SchemeInterest.Save_Details()
+        SchemeSave.SaveScheme()
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()
@@ -107,23 +113,36 @@
         If btnUpdate.Text = "&Update".ToString Then
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
+            txtSchemeName.Enabled = True
+            txtDescription.Enabled = True
             Exit Sub
         End If
-
 
         Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-      
-        'ItemClass = txtSchemeName.Text
-        'Category = txtDescription.Text
 
+        Dim IntSchemeLines As New IntScheme_Lines
+        SchemeModify.SchemeID = frmInterestSchemeList.lblSchemeID.Text
 
-        'ItemSave.Description = txtDayFrom.Text
-        'ItemSave.PrintLayout = txtDayTo.Text
-        'ItemSave.PrintLayout = txtInterest.Text
-        'ItemSave.created_at = txtPenalty.Text
-        'ItemSave.PrintLayout = txtRemarks.Text
+        SchemeModify.SchemeName = txtSchemeName.Text
+        SchemeModify.Description = txtDescription.Text
+        SchemeModify.Update()
+
+        For Each item As ListViewItem In lvIntScheme.Items
+            Dim SchemeInterest As New Scheme_Interest
+            SchemeInterest.schemeInterestID = frmInterestSchemeList.lblSchemeID.Text
+
+            With SchemeInterest
+                .DayFrom = item.SubItems(0).Text
+                .DayTo = item.SubItems(1).Text
+                .Interest = item.SubItems(2).Text
+                .Penalty = item.SubItems(3).Text
+                .Remarks = item.SubItems(4).Text
+            End With
+
+            SchemeInterest.Update()
+        Next
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
         btnSave.Enabled = True
@@ -131,6 +150,7 @@
         lvIntScheme.Items.Clear()
         txtSchemeName.Text = ""
         txtDescription.Text = ""
+
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
@@ -142,7 +162,6 @@
         List1.SubItems.Add(Me.txtInterest.Text)
         List1.SubItems.Add(Me.txtPenalty.Text)
         List1.SubItems.Add(Me.txtRemarks.Text)
-
         clearfields()
     End Sub
 
@@ -193,8 +212,10 @@
 
         btnUpdate.Text = "&Update".ToString
         btnUpdate.Enabled = True
+
         txtSearch.Clear()
         clearfields()
+
     End Sub
 
     Private Sub lvIntScheme_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvIntScheme.DoubleClick
@@ -205,5 +226,11 @@
             txtPenalty.Text = .SelectedItems(0).SubItems(3).Text
             txtRemarks.Text = .SelectedItems(0).SubItems(4).Text
         End With
+    End Sub
+
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 End Class

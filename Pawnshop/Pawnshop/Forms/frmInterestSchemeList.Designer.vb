@@ -139,7 +139,7 @@ Partial Class frmInterestSchemeList
         Me.ClientSize = New System.Drawing.Size(521, 386)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "frmInterestSchemeList"
-        Me.Text = "frmInterestSchemeList"
+        Me.Text = "Interest Scheme List"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
