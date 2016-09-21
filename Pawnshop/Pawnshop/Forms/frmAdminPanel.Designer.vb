@@ -63,6 +63,7 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.btnAdd = New System.Windows.Forms.Button()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -228,6 +229,7 @@ Partial Class frmAdminPanel
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
+        Me.TabPage1.Controls.Add(Me.btnAdd)
         Me.TabPage1.Controls.Add(Me.txtItemID)
         Me.TabPage1.Controls.Add(Me.dgSpecs)
         Me.TabPage1.Controls.Add(Me.btnClose)
@@ -463,6 +465,15 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
+        'btnAdd
+        '
+        Me.btnAdd.Location = New System.Drawing.Point(820, 394)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 33)
+        Me.btnAdd.TabIndex = 16
+        Me.btnAdd.Text = "&Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -528,4 +539,5 @@ Partial Class frmAdminPanel
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewComboBoxColumn3 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents txtItemID As System.Windows.Forms.TextBox
+    Friend WithEvents btnAdd As System.Windows.Forms.Button
 End Class

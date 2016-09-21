@@ -243,7 +243,6 @@
         database.SaveEntry(ds, False)
 
     End Sub
-
 #End Region
 
 End Class

@@ -191,6 +191,7 @@ Public Class frmAdminPanel
                 End If
 
             End With
+            SpecModify.ItemID = txtItemID.Text
             SpecModify.UpdateSpecs()
             ' ColItemsSpecs.Add(SpecModify)
         Next
@@ -611,4 +612,11 @@ Public Class frmAdminPanel
     End Sub
 
 
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        Dim tmpItemspec As New ItemSpecs
+        Dim tmpString As String = tmpItemspec.LASTITEMID
+        tmpString += 1
+        dgSpecs.Rows.Add(tmpString)
+
+    End Sub
 End Class

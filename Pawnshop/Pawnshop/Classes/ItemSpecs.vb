@@ -190,13 +190,13 @@
 
 
     Public Function LASTITEMID() As Single
-        Dim mySql As String = "SELECT * FROM TBLITEM ORDER BY ITEMID DESC"
+        Dim mySql As String = "SELECT * FROM TBLSpecs ORDER BY ITEMID DESC"
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then
             Return 0
         End If
-        Return ds.Tables(0).Rows(0).Item("ITEMID")
+        Return ds.Tables(0).Rows(0).Item("SpecsID")
     End Function
     '#End Region
 
@@ -204,18 +204,35 @@
         Dim mySql As String = "SELECT * FROM " & MainTable & " WHERE SpecsID = " & _specID
         Dim ds As DataSet
         ds = LoadSQL(mySql, MainTable)
+        If ds.Tables(0).Rows.Count >= 1 Then
+            With ds.Tables(0).Rows(0)
+                .Item("SpecsName") = _specName
+                .Item("SpecType") = _specType
+                .Item("UoM") = _UoM
+                .Item("onHold") = If(_onHold, 1, 0)
+                .Item("SpecLayout") = _specLayout
+                .Item("isRequired") = If(_isRequired, 1, 0)
+                .Item("Updated_At") = Now
+            End With
+            database.SaveEntry(ds, False)
+        Else
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(0).NewRow
+            With dsNewRow
+                .Item("ItemID") = _itemID
+                .Item("SpecsName") = _specName
+                .Item("SpecType") = _specType
+                .Item("UOM") = _UoM
+                .Item("onHold") = If(_onHold, 1, 0)
+                .Item("SpecLayout") = _specLayout
+                .Item("ShortCode") = _shortCode
+                .Item("isRequired") = If(_isRequired, 1, 0)
+                .Item("Created_At") = Now
+            End With
+            ds.Tables(0).Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+        End If
 
-        With ds.Tables(0).Rows(0)
-            .Item("SpecsName") = _specName
-            .Item("SpecType") = _specType
-            .Item("UoM") = _UoM
-            '.Item("onHold") = If(_onHold, 1, 0)
-            .Item("SpecLayout") = _specLayout
-            '.Item("isRequired") = If(_isRequired, 1, 0)
-            .Item("Updated_At") = Now
-        End With
-
-        database.SaveEntry(ds, False)
     End Sub
 
 End Class
