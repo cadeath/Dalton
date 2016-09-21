@@ -60,11 +60,7 @@
             Exit Sub
         End If
 
-        With ds.Tables(MainTable).Rows(0)
-            _schemeID = .Item("SchemeID")
-            _schemeName = .Item("SchemeName")
-            _desc = .Item("Description")
-        End With
+        LoadScheme_row(ds.Tables(MainTable).Rows(0))
 
         mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SchemeID", SubTable, _schemeID)
         ds.Clear()
@@ -79,6 +75,14 @@
         Next
 
         isLoaded = True
+    End Sub
+
+    Public Sub LoadScheme_row(dr As DataRow)
+        With dr
+            _schemeID = .Item("SchemeID")
+            _schemeName = .Item("SchemeName")
+            _desc = .Item("Description")
+        End With
     End Sub
 
     Private Sub Refresh()
