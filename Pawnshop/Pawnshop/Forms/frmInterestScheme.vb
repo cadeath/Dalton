@@ -1,10 +1,22 @@
 ﻿Public Class frmInterestScheme
+    Dim SelectedScheme As InterestScheme
 
-  
+    Friend Sub LoadSchemeList(ByVal sc As InterestScheme)
+        If sc.SchemeName = "" Then Exit Sub
+
+        txtSchemeName.Text = sc.SchemeName
+        txtDescription.Text = sc.Description
+
+        SelectedScheme = sc
+
+        reaDOnlyTrue()
+        btnSave.Enabled = False
+        btnUpdate.Enabled = True
+    End Sub
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If txtSchemeName.Text = "" Then txtSchemeName.Focus()
-        'If txtDescription.Text = "" Then txtDescription.Focus()
-        'If lvIntScheme.Items.Count <= 0 Then Exit Sub
+        If txtDescription.Text = "" Then txtDescription.Focus()
+        If lvIntScheme.Items.Count <= 0 Then Exit Sub
 
         Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -47,6 +59,7 @@
         txtInterest.Text = ""
         txtPenalty.Text = ""
         txtRemarks.Text = ""
+
     End Sub
 
     Private Sub reaDOnlyTrue()
@@ -168,4 +181,29 @@
     End Sub
 
    
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
+
+        frmInterestSchemeList.Show()
+
+        frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
+        frmItemList.btnSearch.PerformClick()
+
+        btnUpdate.Text = "&Update".ToString
+        btnUpdate.Enabled = True
+        txtSearch.Clear()
+        clearfields()
+    End Sub
+
+    Private Sub lvIntScheme_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvIntScheme.DoubleClick
+        With lvIntScheme
+            txtDayFrom.Text = .SelectedItems(0).Text
+            txtDayTo.Text = .SelectedItems(0).SubItems(1).Text
+            txtInterest.Text = .SelectedItems(0).SubItems(2).Text
+            txtPenalty.Text = .SelectedItems(0).SubItems(3).Text
+            txtRemarks.Text = .SelectedItems(0).SubItems(4).Text
+        End With
+    End Sub
 End Class
