@@ -4,16 +4,16 @@
     Dim ds As New DataSet
 
 
-    'Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
-    '    Dim ds As DataSet
-    '    ds = LoadSQL(mySql)
-    '    lvItem.Items.Clear()
-    '    For Each dr As DataRow In ds.Tables(0).Rows
-    '        Dim tmpItem As New ItemClass
-    '        tmpItem.LoadByRow(dr)
-    '        AddItem(tmpItem)
-    '    Next
-    'End Sub
+    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
+        Dim ds As DataSet
+        ds = LoadSQL(mySql)
+        lvItem.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpItem As New ItemClass
+            tmpItem.LoadByRow(dr)
+            AddItem(tmpItem)
+        Next
+    End Sub
 
     Dim selectedItem As ItemClass
     'Dim ds As New DataSet
@@ -35,7 +35,7 @@
 
 
         'loadItemClass()
-        'LoadActiveItem()
+        LoadActiveItem()
 
         If Not mOtherForm Then
             txtSearch.Focus()

@@ -183,19 +183,19 @@
         Next
     End Sub
 
-    'Public Sub LoadByRow(ByVal dr As DataRow)
-    '    With dr
-    '        _itemID = .Item("itemid")
-    '        _itemClass = .Item("itemclass")
-    '        '_desc = .Item("Description")
-    '        If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
-    '        _category = .Item("itemcategory")
-    '        _isRenew = .Item("isrenew")
-    '        '_onHold = .Item()
-    '        _printLayout = .Item("print_layout")
+    Public Sub LoadByRow(ByVal dr As DataRow)
+        With dr
+            _itemID = .Item("itemid")
+            _itemClass = .Item("itemclass")
+            '_desc = .Item("Description")
+            If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
+            _category = .Item("itemcategory")
+            _isRenew = .Item("isrenew")
+            '_onHold = .Item()
+            _printLayout = .Item("print_layout")
 
-    '    End With
-    'End Sub
+        End With
+    End Sub
 
     Public Sub Update()
 

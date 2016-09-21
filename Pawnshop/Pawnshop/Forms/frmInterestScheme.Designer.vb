@@ -355,9 +355,9 @@ Partial Class frmInterestScheme
         Me.lvIntscheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvIntscheme.FullRowSelect = True
         Me.lvIntscheme.GridLines = True
-        Me.lvIntscheme.Location = New System.Drawing.Point(384, 198)
+        Me.lvIntscheme.Location = New System.Drawing.Point(392, 198)
         Me.lvIntscheme.Name = "lvIntscheme"
-        Me.lvIntscheme.Size = New System.Drawing.Size(546, 162)
+        Me.lvIntscheme.Size = New System.Drawing.Size(538, 162)
         Me.lvIntscheme.TabIndex = 16
         Me.lvIntscheme.UseCompatibleStateImageBehavior = False
         Me.lvIntscheme.View = System.Windows.Forms.View.Details
