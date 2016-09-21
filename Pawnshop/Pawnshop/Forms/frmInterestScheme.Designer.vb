@@ -59,6 +59,7 @@ Partial Class frmInterestScheme
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnUpdateScheme = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -247,9 +248,9 @@ Partial Class frmInterestScheme
         Me.GroupBox3.Controls.Add(Me.btnSave)
         Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(3, 366)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 366)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(927, 73)
+        Me.GroupBox3.Size = New System.Drawing.Size(924, 73)
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
         '
@@ -314,7 +315,7 @@ Partial Class frmInterestScheme
         Me.btnRemove.Location = New System.Drawing.Point(839, 161)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(88, 34)
-        Me.btnRemove.TabIndex = 4
+        Me.btnRemove.TabIndex = 5
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = True
         '
@@ -325,7 +326,7 @@ Partial Class frmInterestScheme
         Me.txtSearch.Location = New System.Drawing.Point(65, 12)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(771, 22)
-        Me.txtSearch.TabIndex = 10
+        Me.txtSearch.TabIndex = 6
         Me.txtSearch.Text = "Search . . ."
         '
         'Label8
@@ -344,7 +345,7 @@ Partial Class frmInterestScheme
         Me.btnSearch.Location = New System.Drawing.Point(842, 6)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(88, 34)
-        Me.btnSearch.TabIndex = 15
+        Me.btnSearch.TabIndex = 7
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
@@ -364,7 +365,7 @@ Partial Class frmInterestScheme
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "ID"
-        Me.ColumnHeader1.Width = 46
+        Me.ColumnHeader1.Width = 0
         '
         'ColumnHeader2
         '
@@ -388,7 +389,7 @@ Partial Class frmInterestScheme
         'ColumnHeader6
         '
         Me.ColumnHeader6.Text = "Remarks"
-        Me.ColumnHeader6.Width = 217
+        Me.ColumnHeader6.Width = 264
         '
         'btnUpdateScheme
         '
@@ -396,9 +397,18 @@ Partial Class frmInterestScheme
         Me.btnUpdateScheme.Location = New System.Drawing.Point(746, 161)
         Me.btnUpdateScheme.Name = "btnUpdateScheme"
         Me.btnUpdateScheme.Size = New System.Drawing.Size(88, 34)
-        Me.btnUpdateScheme.TabIndex = 17
+        Me.btnUpdateScheme.TabIndex = 4
         Me.btnUpdateScheme.Text = "Update"
         Me.btnUpdateScheme.UseVisualStyleBackColor = True
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(3, 422)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(42, 13)
+        Me.Label9.TabIndex = 3
+        Me.Label9.Text = "Update"
         '
         'frmInterestScheme
         '
@@ -416,6 +426,7 @@ Partial Class frmInterestScheme
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.Name = "frmInterestScheme"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -466,4 +477,5 @@ Partial Class frmInterestScheme
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnUpdateScheme As System.Windows.Forms.Button
+    Friend WithEvents Label9 As System.Windows.Forms.Label
 End Class

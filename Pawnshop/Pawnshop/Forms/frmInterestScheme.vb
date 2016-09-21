@@ -132,7 +132,6 @@
             Dim SchemeInterest As New Scheme_Interest
 
             With SchemeInterest
-                'SchemeInterest.schemeInterestID = lvIntscheme.Items(0).Text
                 .schemeInterestID = item.Text
                 .DayFrom = item.SubItems(1).Text
                 .DayTo = item.SubItems(2).Text
@@ -147,12 +146,13 @@
         Next
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
+
         btnSave.Enabled = True
         clearfields()
         lvIntScheme.Items.Clear()
         txtSchemeName.Text = ""
         txtDescription.Text = ""
-
+        btnAdd.Enabled = True
     End Sub
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
@@ -188,8 +188,13 @@
   
     Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
         If e.KeyCode = Keys.Enter Then
-            btnAdd.PerformClick()
+            If Label9.Text = "Update".ToString Then
+                btnAdd.PerformClick()
+            ElseIf Label9.Text = "Modify" Then
+                btnUpdateScheme.PerformClick()
+            End If
         End If
+
     End Sub
 
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
@@ -235,13 +240,17 @@
             txtPenalty.Text = .SelectedItems(0).SubItems(4).Text
             txtRemarks.Text = .SelectedItems(0).SubItems(5).Text
         End With
+        Label9.Text = "Modify"
     End Sub
 
     Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
+        If Not isValid() Then Exit Sub
         lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
         lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
         lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
         lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
         lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+        clearfields()
+        Label9.Text = "Update"
     End Sub
 End Class
