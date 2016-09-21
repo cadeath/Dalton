@@ -230,13 +230,13 @@ Partial Class frmAdminPanel
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
         Me.TabPage1.Controls.Add(Me.btnAdd)
-        Me.TabPage1.Controls.Add(Me.txtItemID)
         Me.TabPage1.Controls.Add(Me.dgSpecs)
         Me.TabPage1.Controls.Add(Me.btnClose)
         Me.TabPage1.Controls.Add(Me.btnSave)
         Me.TabPage1.Controls.Add(Me.btnUpdate)
         Me.TabPage1.Controls.Add(Me.grpSearch)
         Me.TabPage1.Controls.Add(Me.grpAddItem)
+        Me.TabPage1.Controls.Add(Me.txtItemID)
         Me.TabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
@@ -249,8 +249,9 @@ Partial Class frmAdminPanel
         '
         Me.txtItemID.Location = New System.Drawing.Point(376, 394)
         Me.txtItemID.Name = "txtItemID"
-        Me.txtItemID.Size = New System.Drawing.Size(65, 22)
+        Me.txtItemID.Size = New System.Drawing.Size(10, 22)
         Me.txtItemID.TabIndex = 15
+        Me.txtItemID.Visible = False
         '
         'dgSpecs
         '

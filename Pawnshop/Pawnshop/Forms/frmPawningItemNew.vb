@@ -1816,7 +1816,7 @@ Public Class frmPawningItemNew
 
     Private Sub AddItem(ByVal cio As DataRow)
         Dim tmpItem As New ItemSpecs
-        tmpItem.LoadByRow(cio)
+        tmpItem.LoadItemSpecs_row(cio)
 
         Dim lv As ListViewItem = lvSpec.Items.Add(tmpItem.SpecID)
         lv.SubItems.Add(tmpItem.SpecName)

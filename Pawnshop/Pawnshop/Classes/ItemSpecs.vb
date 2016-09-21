@@ -190,7 +190,7 @@
 
 
     Public Function LASTITEMID() As Single
-        Dim mySql As String = "SELECT * FROM TBLSpecs ORDER BY ITEMID DESC"
+        Dim mySql As String = "SELECT * FROM TBLSpecs ORDER BY SpecsID DESC"
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then
