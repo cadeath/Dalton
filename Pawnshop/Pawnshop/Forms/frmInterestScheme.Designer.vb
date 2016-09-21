@@ -356,7 +356,7 @@ Partial Class frmInterestScheme
         '
         'txtSearch
         '
-        Me.txtSearch.BackColor = System.Drawing.Color.FloralWhite
+        Me.txtSearch.BackColor = System.Drawing.Color.White
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(65, 12)
         Me.txtSearch.Name = "txtSearch"

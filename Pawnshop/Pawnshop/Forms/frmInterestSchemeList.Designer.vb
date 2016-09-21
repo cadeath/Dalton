@@ -139,6 +139,7 @@ Partial Class frmInterestSchemeList
         Me.ClientSize = New System.Drawing.Size(521, 386)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "frmInterestSchemeList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Interest Scheme List"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
