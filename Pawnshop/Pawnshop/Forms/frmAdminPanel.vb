@@ -100,20 +100,21 @@ Public Class frmAdminPanel
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
 
-        ItemSave.ItemClass = txtClassifiction.Text
-        ItemSave.Category = txtCategory.Text
-        ItemSave.Description = txtDescription.Text
+        With ItemSave
+            .ItemClass = txtClassifiction.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
 
-        If rdbYes.Checked = True Then
-            ItemSave.isRenewable = rbYes
-        Else
-            ItemSave.isRenewable = rbNo
-        End If
+            If rdbYes.Checked = True Then
+                .isRenewable = rbYes
+            Else
+                .isRenewable = rbNo
+            End If
 
-        ItemSave.PrintLayout = txtPrintLayout.Text
-        ItemSave.created_at = CurrentDate
+            .PrintLayout = txtPrintLayout.Text
+            .created_at = CurrentDate
 
-
+        End With
         ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
         For Each row As DataGridViewRow In dgSpecs.Rows
@@ -132,7 +133,6 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-
             ColItemsSpecs.Add(SpecSave)
         Next
 
@@ -160,18 +160,27 @@ Public Class frmAdminPanel
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
-        ItemModify.ID = txtItemID.Text
-        ItemModify.ItemClass = txtClassifiction.Text
-        ItemModify.Category = txtCategory.Text
-        ItemModify.Description = txtDescription.Text
-        ItemModify.updated_at = CurrentDate
-        If rdbYes.Checked = True Then
-            ItemModify.isRenewable = rbYes
-        Else
-            ItemModify.isRenewable = rbNo
-        End If
 
-        ItemModify.PrintLayout = txtPrintLayout.Text
+
+        With ItemModify
+            .ItemClass = txtClassifiction.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
+            .updated_at = CurrentDate
+	    .ID = txtItemID.Text
+
+
+            If rdbYes.Checked = True Then
+                .isRenewable = rbYes
+            Else
+                .isRenewable = rbNo
+            End If
+
+            .PrintLayout = txtPrintLayout.Text
+
+            Dim a As Integer = ItemModify.ID
+            MsgBox(a)
+        End With
 
         Dim SpecModify As New ItemSpecs
         For Each row As DataGridViewRow In dgSpecs.Rows
@@ -611,7 +620,6 @@ Public Class frmAdminPanel
         Next
     End Sub
 
-
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Dim tmpItemspec As New ItemSpecs
         Dim tmpString As String = tmpItemspec.LASTITEMID
@@ -619,4 +627,5 @@ Public Class frmAdminPanel
         dgSpecs.Rows.Add(tmpString)
 
     End Sub
+
 End Class

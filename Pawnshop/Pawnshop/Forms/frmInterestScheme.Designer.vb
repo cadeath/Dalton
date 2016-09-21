@@ -54,6 +54,9 @@ Partial Class frmInterestScheme
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnRemove = New System.Windows.Forms.Button()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -74,7 +77,7 @@ Partial Class frmInterestScheme
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(384, 6)
+        Me.GroupBox1.Location = New System.Drawing.Point(384, 46)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(546, 111)
         Me.GroupBox1.TabIndex = 1
@@ -184,7 +187,7 @@ Partial Class frmInterestScheme
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 6)
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 46)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(375, 133)
         Me.GroupBox2.TabIndex = 0
@@ -242,7 +245,7 @@ Partial Class frmInterestScheme
         Me.GroupBox3.Controls.Add(Me.btnSave)
         Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(3, 326)
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 366)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(927, 73)
         Me.GroupBox3.TabIndex = 3
@@ -261,7 +264,7 @@ Partial Class frmInterestScheme
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(56, 210)
+        Me.Label7.Location = New System.Drawing.Point(56, 250)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(262, 37)
         Me.Label7.TabIndex = 12
@@ -273,25 +276,25 @@ Partial Class frmInterestScheme
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2, Me.LineShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(936, 402)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(936, 444)
         Me.ShapeContainer1.TabIndex = 13
         Me.ShapeContainer1.TabStop = False
         '
         'LineShape2
         '
         Me.LineShape2.Name = "LineShape2"
-        Me.LineShape2.X1 = 2
-        Me.LineShape2.X2 = 384
-        Me.LineShape2.Y1 = 204
-        Me.LineShape2.Y2 = 204
+        Me.LineShape2.X1 = 10
+        Me.LineShape2.X2 = 374
+        Me.LineShape2.Y1 = 246
+        Me.LineShape2.Y2 = 246
         '
         'LineShape1
         '
         Me.LineShape1.Name = "LineShape1"
-        Me.LineShape1.X1 = 2
-        Me.LineShape1.X2 = 384
-        Me.LineShape1.Y1 = 259
-        Me.LineShape1.Y2 = 259
+        Me.LineShape1.X1 = 11
+        Me.LineShape1.X2 = 373
+        Me.LineShape1.Y1 = 301
+        Me.LineShape1.Y2 = 301
         '
         'lvIntScheme
         '
@@ -299,7 +302,7 @@ Partial Class frmInterestScheme
         Me.lvIntScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvIntScheme.FullRowSelect = True
         Me.lvIntScheme.GridLines = True
-        Me.lvIntScheme.Location = New System.Drawing.Point(381, 161)
+        Me.lvIntScheme.Location = New System.Drawing.Point(381, 201)
         Me.lvIntScheme.Name = "lvIntScheme"
         Me.lvIntScheme.Size = New System.Drawing.Size(549, 159)
         Me.lvIntScheme.TabIndex = 14
@@ -334,7 +337,7 @@ Partial Class frmInterestScheme
         'btnAdd
         '
         Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(741, 121)
+        Me.btnAdd.Location = New System.Drawing.Point(741, 161)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(88, 34)
         Me.btnAdd.TabIndex = 2
@@ -344,18 +347,51 @@ Partial Class frmInterestScheme
         'btnRemove
         '
         Me.btnRemove.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRemove.Location = New System.Drawing.Point(839, 121)
+        Me.btnRemove.Location = New System.Drawing.Point(839, 161)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(88, 34)
         Me.btnRemove.TabIndex = 4
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = True
         '
+        'txtSearch
+        '
+        Me.txtSearch.BackColor = System.Drawing.Color.FloralWhite
+        Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(65, 12)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(771, 22)
+        Me.txtSearch.TabIndex = 10
+        Me.txtSearch.Text = "Search . . ."
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(8, 15)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(51, 16)
+        Me.Label8.TabIndex = 11
+        Me.Label8.Text = "Search"
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSearch.Location = New System.Drawing.Point(842, 6)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(88, 34)
+        Me.btnSearch.TabIndex = 15
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
         'frmInterestScheme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(936, 402)
+        Me.ClientSize = New System.Drawing.Size(936, 444)
+        Me.Controls.Add(Me.btnSearch)
+        Me.Controls.Add(Me.txtSearch)
+        Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lvIntScheme)
@@ -408,4 +444,7 @@ Partial Class frmInterestScheme
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnRemove As System.Windows.Forms.Button
+    Friend WithEvents txtSearch As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents btnSearch As System.Windows.Forms.Button
 End Class

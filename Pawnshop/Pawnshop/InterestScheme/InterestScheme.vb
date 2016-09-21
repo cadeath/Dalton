@@ -60,13 +60,9 @@
             Exit Sub
         End If
 
-        With ds.Tables(MainTable).Rows(0)
-            _schemeID = .Item("SchemeID")
-            _schemeName = .Item("SchemeName")
-            _desc = .Item("Description")
-        End With
+        LoadScheme_row(ds.Tables(MainTable).Rows(0))
 
-        mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SpecsID", SubTable, _schemeID)
+        mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SchemeID", SubTable, _schemeID)
         ds.Clear()
         ds = LoadSQL(mySql, SubTable)
 
@@ -79,6 +75,14 @@
         Next
 
         isLoaded = True
+    End Sub
+
+    Public Sub LoadScheme_row(dr As DataRow)
+        With dr
+            _schemeID = .Item("SchemeID")
+            _schemeName = .Item("SchemeName")
+            _desc = .Item("Description")
+        End With
     End Sub
 
     Private Sub Refresh()
@@ -110,10 +114,10 @@
     End Sub
 
     Public Sub Update()
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE IS_ID = {1}", MainTable, _schemeID)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE SCHEMEID = {1}", MainTable, _schemeID)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(MainTable).Rows.Count <> 1 Then
+        If ds.Tables(MainTable).Rows.Count <= 0 Then
             MsgBox("Unable to update record", MsgBoxStyle.Critical)
             Exit Sub
         End If
@@ -123,9 +127,10 @@
             .Item("Description") = _desc
         End With
 
-        For Each detail As Scheme_Interest In _SchemeDetails
-            detail.Update()
-        Next
+        'For Each detail As Scheme_Interest In _SchemeDetails
+        '    detail.Update()
+        'Next
+
         database.SaveEntry(ds, False)
 
         Refresh()
