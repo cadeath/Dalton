@@ -132,8 +132,8 @@
             Dim SchemeInterest As New Scheme_Interest
 
             With SchemeInterest
-                SchemeInterest.schemeInterestID = lvIntscheme.Items(0).Text
-
+                'SchemeInterest.schemeInterestID = lvIntscheme.Items(0).Text
+                .schemeInterestID = item.Text
                 .DayFrom = item.SubItems(1).Text
                 .DayTo = item.SubItems(2).Text
                 .Interest = item.SubItems(3).Text
@@ -142,6 +142,7 @@
 
             End With
 
+            SchemeInterest.SchemeID = SchemeModify.SchemeID
             SchemeInterest.Update()
         Next
 
@@ -158,7 +159,8 @@
         If Not isValid() Then Exit Sub
 
         Dim List1 As ListViewItem
-        List1 = Me.lvIntScheme.Items.Add(Me.txtDayFrom.Text)
+        List1 = Me.lvIntscheme.Items.Add(0)
+        List1.SubItems.Add(Me.txtDayFrom.Text)
         List1.SubItems.Add(Me.txtDayTo.Text)
         List1.SubItems.Add(Me.txtInterest.Text)
         List1.SubItems.Add(Me.txtPenalty.Text)
