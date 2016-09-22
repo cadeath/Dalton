@@ -165,7 +165,7 @@
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
-            .Item("int_rate") = 1
+            '.Item("int_rate") = 1
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
@@ -175,14 +175,14 @@
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
 
-        'mySql = "SELECT * FROM tblItem ORDER BY ItemID DESC ROWS 1"
-        'ds = LoadSQL(mySql, MainTable)
-        '_itemID = ds.Tables(MainTable).Rows(0).Item("ItemID")
+        mySql = "SELECT * FROM tblItem ORDER BY ItemID DESC ROWS 1"
+        ds = LoadSQL(mySql, MainTable)
+        _itemID = ds.Tables(MainTable).Rows(0).Item("ItemID")
 
-        'For Each ItemSpec As ItemSpecs In ItemSpecifications
-        '    ItemSpec.ItemID = _itemID
-        '    ItemSpec.SaveSpecs()
-        'Next
+        For Each ItemSpec As ItemSpecs In ItemSpecifications
+            ItemSpec.ItemID = _itemID
+            ItemSpec.SaveSpecs()
+        Next
     End Sub
 
     Public Sub LoadByRow(ByVal dr As DataRow)

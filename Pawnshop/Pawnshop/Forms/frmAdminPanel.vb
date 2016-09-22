@@ -132,13 +132,15 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-            Dim tmpItemID As Integer = ItemSave.LASTITEMID
-            tmpItemID += 1
-            SpecSave.ItemID = tmpItemID
-            SpecSave.SaveSpecs()
-            'ColItemsSpecs.Add(SpecSave)
+            'Dim tmpItemID As Integer = ItemSave.LASTITEMID
+            'tmpItemID += 1
+            'SpecSave.ItemID = tmpItemID
+            'SpecSave.SaveSpecs()
+
+            ColItemsSpecs.Add(SpecSave)
         Next
-        'ItemSave.ItemSpecifications = ColItemsSpecs
+
+        ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.SaveItem()
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
@@ -174,8 +176,7 @@ Public Class frmAdminPanel
             End If
 
             .PrintLayout = txtPrintLayout.Text
-            'Dim a As Integer = ItemModify.ID
-            'MsgBox(a)
+           
         End With
 
         Dim SpecModify As New ItemSpecs
