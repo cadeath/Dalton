@@ -57,7 +57,8 @@
         If Not mOtherForm Then
             btnSelect.Visible = False
         End If
-        LoadActiveItem()
+        ' LoadActiveItem()
+        frmItemList_Load(sender, e)
         searchItem()
     End Sub
     Private Sub searchItem()

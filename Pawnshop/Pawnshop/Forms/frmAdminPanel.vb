@@ -116,7 +116,7 @@ Public Class frmAdminPanel
             .created_at = CurrentDate
 
         End With
-        ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
+
 
         For Each row As DataGridViewRow In dgSpecs.Rows
             SpecSave = New ItemSpecs
@@ -133,11 +133,7 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-            'Dim tmpItemID As Integer = ItemSave.LASTITEMID
-            'tmpItemID += 1
-            'SpecSave.ItemID = tmpItemID
-            'SpecSave.SaveSpecs()
-
+          
             ColItemsSpecs.Add(SpecSave)
         Next
 
@@ -200,10 +196,8 @@ Public Class frmAdminPanel
             End With
             SpecModify.ItemID = SelectedItem.ID
             SpecModify.UpdateSpecs()
-            ' ColItemsSpecs.Add(SpecModify)
         Next
 
-        'ItemModify.ItemSpecifications = ColItemsSpecs
         ItemModify.Update()
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
