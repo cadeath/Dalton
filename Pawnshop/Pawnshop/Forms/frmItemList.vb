@@ -282,7 +282,6 @@
         frmAdminPanel.dgSpecs.Rows.Clear()
 
         frmAdminPanel.LoadSpec(idx)
-        frmAdminPanel.txtItemID.Text = idx
         frmAdminPanel.LoadItemList(selectedItem)
         frmAdminPanel.Show()
         Me.Hide()
