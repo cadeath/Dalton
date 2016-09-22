@@ -37,6 +37,7 @@
         RenewalBreakDown = 16
         VoidReportDaily = 17
         VoidReportMonthly = 18
+        MaturityItem = 19
 
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
@@ -82,7 +83,30 @@
                 VoidReportDaily()
             Case ReportType.VoidReportMonthly
                 VoidReportMonthly()
+            Case ReportType.MaturityItem
+                MaturityItem()
         End Select
+    End Sub
+
+    Private Sub MaturityItem()
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionStart)
+
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsMaturityItem"
+        rptPath = "Reports\rpt_MaturityItem.rdlc"
+
+        mySql = "SELECT  P.PAWNTICKET, P.loandate, P.MATUDATE, C.FIRSTNAME || ' ' || C.LASTNAME AS Pawner, "
+        mySql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_ZIP as FULLADDRESS, "
+        mySql &= "C.PHONE1 AS Contact FROM TBLPAWN P INNER JOIN TBLCLIENT C "
+        mySql &= "ON C.CLIENTID = P.CLIENTID WHERE P.MATUDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "'"
+
+        Dim addPara As New Dictionary(Of String, String)
+        addPara.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
+        addPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addPara, True)
+        frmReport.Show()
     End Sub
 
     Private Sub MoneyTransfer_BSP()
@@ -135,6 +159,9 @@
                     FormType = ReportType.RenewalBreakDown
                 Case "Monthly Void Report"
                     FormType = ReportType.VoidReportMonthly
+                Case "Maturity Item"
+                    FormType = ReportType.MaturityItem
+
 
             End Select
         End If
