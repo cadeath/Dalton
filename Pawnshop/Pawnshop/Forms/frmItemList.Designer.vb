@@ -49,7 +49,7 @@ Partial Class frmItemList
         Me.lvItem.Location = New System.Drawing.Point(7, 68)
         Me.lvItem.Name = "lvItem"
         Me.lvItem.Size = New System.Drawing.Size(904, 270)
-        Me.lvItem.TabIndex = 1
+        Me.lvItem.TabIndex = 0
         Me.lvItem.UseCompatibleStateImageBehavior = False
         Me.lvItem.View = System.Windows.Forms.View.Details
         '

@@ -81,7 +81,9 @@
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        LoadScheme()
         searchItem()
+        frmInterestScheme.txtSearch.Text = ""
     End Sub
 
     Private Sub searchItem()

@@ -19,6 +19,7 @@ Public Class frmAdminPanel
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
+        txtClassifiction.Focus()
     End Sub
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
@@ -28,7 +29,7 @@ Public Class frmAdminPanel
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
-        If it.isRenewable = 1 Then
+        If it.isRenewable = "True" Then
             rdbYes.Checked = True
         Else
             rdbNo.Checked = True

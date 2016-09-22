@@ -251,7 +251,7 @@ Partial Class frmInterestScheme
         Me.GroupBox3.Location = New System.Drawing.Point(6, 366)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(924, 73)
-        Me.GroupBox3.TabIndex = 3
+        Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
         '
         'btnUpdate
@@ -305,7 +305,7 @@ Partial Class frmInterestScheme
         Me.btnAdd.Location = New System.Drawing.Point(654, 161)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(88, 34)
-        Me.btnAdd.TabIndex = 2
+        Me.btnAdd.TabIndex = 3
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
