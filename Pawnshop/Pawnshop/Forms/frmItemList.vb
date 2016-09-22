@@ -30,9 +30,12 @@
 
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ' ClearField()
-        ' If Not mOtherForm Then ClearField()
-
+        ClearField()
+        If mOtherForm Then
+            btnView.Visible = False
+        Else
+            btnSearch.Visible = False
+        End If
 
         'loadItemClass()
         LoadActiveItem()
@@ -263,11 +266,11 @@
 
 
     Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
-        'If Not mOtherForm Then
-        '    btnView.PerformClick()
-        'Else
-        btnSelect.PerformClick()
-        'End If
+        If Not mOtherForm Then
+            btnView.PerformClick()
+        Else
+            btnSelect.PerformClick()
+        End If
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
