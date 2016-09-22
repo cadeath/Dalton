@@ -155,7 +155,8 @@
 
     Public Sub SaveItem()
 
-        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
+        Dim mySql As String = "SELECT * FROM tblItem"
+        'String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         Dim dsNewRow As DataRow
@@ -164,6 +165,7 @@
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
+            .Item("int_rate") = 1
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
@@ -173,14 +175,14 @@
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
 
-        mySql = "SELECT * FROM tblItem ORDER BY ItemID DESC ROWS 1"
-        ds = LoadSQL(mySql, MainTable)
-        _itemID = ds.Tables(MainTable).Rows(0).Item("ItemID")
+        'mySql = "SELECT * FROM tblItem ORDER BY ItemID DESC ROWS 1"
+        'ds = LoadSQL(mySql, MainTable)
+        '_itemID = ds.Tables(MainTable).Rows(0).Item("ItemID")
 
-        For Each ItemSpec As ItemSpecs In ItemSpecifications
-            ItemSpec.ItemID = _itemID
-            ItemSpec.SaveSpecs()
-        Next
+        'For Each ItemSpec As ItemSpecs In ItemSpecifications
+        '    ItemSpec.ItemID = _itemID
+        '    ItemSpec.SaveSpecs()
+        'Next
     End Sub
 
     Public Sub LoadByRow(ByVal dr As DataRow)
@@ -220,6 +222,16 @@
         End With
         database.SaveEntry(ds, False)
     End Sub
+
+    Public Function LASTITEMID() As Single
+        Dim mySql As String = "SELECT * FROM TBLItem ORDER BY ItemID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("ItemID")
+    End Function
 #End Region
 
 End Class

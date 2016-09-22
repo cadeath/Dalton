@@ -132,10 +132,13 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-            ColItemsSpecs.Add(SpecSave)
+            Dim tmpItemID As Integer = ItemSave.LASTITEMID
+            tmpItemID += 1
+            SpecSave.ItemID = tmpItemID
+            SpecSave.SaveSpecs()
+            'ColItemsSpecs.Add(SpecSave)
         Next
-
-        ItemSave.ItemSpecifications = ColItemsSpecs
+        'ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.SaveItem()
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
@@ -162,7 +165,7 @@ Public Class frmAdminPanel
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .updated_at = CurrentDate
-            .ID = txtItemID.Text
+            .ID = SelectedItem.ID
 
             If rdbYes.Checked = True Then
                 .isRenewable = rbYes
@@ -193,7 +196,7 @@ Public Class frmAdminPanel
                 End If
 
             End With
-            SpecModify.ItemID = txtItemID.Text
+            SpecModify.ItemID = SelectedItem.ID
             SpecModify.UpdateSpecs()
             ' ColItemsSpecs.Add(SpecModify)
         Next
@@ -605,13 +608,4 @@ Public Class frmAdminPanel
             Next
         Next
     End Sub
-
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        Dim tmpItemspec As New ItemSpecs
-        Dim tmpString As String = tmpItemspec.LASTITEMID
-        tmpString += 1
-        dgSpecs.Rows.Add(tmpString)
-
-    End Sub
-
 End Class

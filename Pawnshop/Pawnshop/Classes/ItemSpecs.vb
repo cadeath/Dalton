@@ -150,7 +150,8 @@
     End Sub
 
     Public Sub SaveSpecs()
-        Dim mySql As String = "SELECT * FROM " & MainTable & " ROWS 1"
+        Dim mySql As String = "SELECT * FROM " & MainTable
+        '& " ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         Dim dsNewRow As DataRow
@@ -186,7 +187,7 @@
 #End Region
 
 
-    Public Function LASTITEMID() As Single
+    Public Function LastSpecsID() As Single
         Dim mySql As String = "SELECT * FROM TBLSpecs ORDER BY SpecsID DESC"
         Dim ds As DataSet = LoadSQL(mySql)
 

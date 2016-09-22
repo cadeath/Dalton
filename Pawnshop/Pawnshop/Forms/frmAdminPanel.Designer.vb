@@ -38,14 +38,12 @@ Partial Class frmAdminPanel
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.btnAdd = New System.Windows.Forms.Button()
         Me.dgSpecs = New System.Windows.Forms.DataGridView()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.lblSearch = New System.Windows.Forms.Label()
-        Me.txtItemID = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
@@ -229,14 +227,12 @@ Partial Class frmAdminPanel
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
-        Me.TabPage1.Controls.Add(Me.btnAdd)
         Me.TabPage1.Controls.Add(Me.dgSpecs)
         Me.TabPage1.Controls.Add(Me.btnClose)
         Me.TabPage1.Controls.Add(Me.btnSave)
         Me.TabPage1.Controls.Add(Me.btnUpdate)
         Me.TabPage1.Controls.Add(Me.grpSearch)
         Me.TabPage1.Controls.Add(Me.grpAddItem)
-        Me.TabPage1.Controls.Add(Me.txtItemID)
         Me.TabPage1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
@@ -244,15 +240,6 @@ Partial Class frmAdminPanel
         Me.TabPage1.Size = New System.Drawing.Size(1143, 433)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Item"
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Location = New System.Drawing.Point(820, 394)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 33)
-        Me.btnAdd.TabIndex = 16
-        Me.btnAdd.Text = "&Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
         '
         'dgSpecs
         '
@@ -313,14 +300,6 @@ Partial Class frmAdminPanel
         Me.lblSearch.Size = New System.Drawing.Size(51, 16)
         Me.lblSearch.TabIndex = 9
         Me.lblSearch.Text = "Search"
-        '
-        'txtItemID
-        '
-        Me.txtItemID.Location = New System.Drawing.Point(376, 394)
-        Me.txtItemID.Name = "txtItemID"
-        Me.txtItemID.Size = New System.Drawing.Size(10, 22)
-        Me.txtItemID.TabIndex = 15
-        Me.txtItemID.Visible = False
         '
         'TabPage2
         '
@@ -490,7 +469,6 @@ Partial Class frmAdminPanel
         Me.grpAddItem.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
         CType(Me.dgSpecs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
@@ -533,8 +511,6 @@ Partial Class frmAdminPanel
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
     Friend WithEvents dgSpecs As System.Windows.Forms.DataGridView
-    Friend WithEvents txtItemID As System.Windows.Forms.TextBox
-    Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
