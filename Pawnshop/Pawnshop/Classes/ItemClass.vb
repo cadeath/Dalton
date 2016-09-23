@@ -165,7 +165,7 @@
             .Item("ItemClass") = _itemClass
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
-            .Item("int_rate") = 1
+            '.Item("int_rate") = 1
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout

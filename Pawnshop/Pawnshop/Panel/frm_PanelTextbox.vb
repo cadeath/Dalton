@@ -1,5 +1,7 @@
 ﻿Public Class frm_PanelTextbox
 
+    Private isNumber As Boolean
+
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Dim tmpResult As String = txtSearch.Text
         With frmPawningItemNew.lvSpec
@@ -9,6 +11,7 @@
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isNumber Then DigitOnly(e)
         If isEnter(e) Then
             btnSubmit.PerformClick()
         End If
@@ -17,5 +20,11 @@
     Private Sub frm_PanelTextbox_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtSearch.Clear()
         txtSearch.Focus()
+        If frmPawningItemNew.lvSpec.FocusedItem.SubItems(3).Text = "Integer" Then
+            isNumber = True
+        Else
+            isNumber = False
+        End If
     End Sub
+
 End Class

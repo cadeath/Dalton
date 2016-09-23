@@ -6,7 +6,6 @@ Public Class frmPawningItemNew
     Friend tmpItem As ItemClass
     'Private ItemSpec As Item
 
-
     Friend transactionType As String = "L"
     '    Friend PawnItem As PawnTicket
     '    Friend PawnCustomer As Client
@@ -55,9 +54,6 @@ Public Class frmPawningItemNew
     '            {"Failed to verify hash value to the "}
     '    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     '    Private Reprint As Boolean = False
-
-
-
 
     '    Private Sub PrintButton(ByVal st As Boolean)
     '        btnPrint.Enabled = st
@@ -1786,20 +1782,6 @@ Public Class frmPawningItemNew
     End Sub
 
     Friend Sub LoadItem(ByVal Item As ItemClass)
-        'txtTmp.Text = (Item.Layout)
-        'Dim tmpLocation As Point = New Point(12, 323)
-        'Dim tmpLayout As String = (Item.Layout)
-
-        'If tmpLayout = "Textbox" Then
-        '    pnlTextbox.Location = tmpLocation
-
-        'ElseIf tmpLayout = "Yes/No" Then
-        '    pnlRadio.Location = tmpLocation
-
-        'ElseIf tmpLayout = "Multiline" Then
-        '    pnlMultiline.Location = tmpLocation
-
-        'End If
 
         Dim tmpItemID As String = (Item.ID)
         Dim mySql As String = "SELECT * FROM tblSpecs WHERE ItemID = '" & tmpItemID & "'"
@@ -1821,6 +1803,7 @@ Public Class frmPawningItemNew
         Dim lv As ListViewItem = lvSpec.Items.Add(tmpItem.SpecID)
         lv.SubItems.Add(tmpItem.SpecName)
         lv.SubItems.Add(tmpItem.SpecLayout)
+        lv.SubItems.Add(tmpItem.SpecType)
         lv.SubItems.Add("")
         'lv.SubItems.Add(tmpCIO.Amount)
         'lv.SubItems.Add(tmpCIO.Particulars)
@@ -1837,18 +1820,17 @@ Public Class frmPawningItemNew
 
     Private Sub InputSpec()
         If lvSpec.SelectedItems.Count = 0 Then Exit Sub
-        If lvSpec.FocusedItem.SubItems(2).Text = "Textbox" Or lvSpec.FocusedItem.SubItems(2).Text = "TextBox" Then
+        If lvSpec.FocusedItem.SubItems(2).Text = "TextBox" Or lvSpec.FocusedItem.SubItems(2).Text = "Karat" Then
             frm_PanelTextbox.ShowDialog()
 
         ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Yes/No" Then
             frm_PanelYesNo.ShowDialog()
 
-        ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Multiline" Or lvSpec.FocusedItem.SubItems(2).Text = "MultiLine" Then
+        ElseIf lvSpec.FocusedItem.SubItems(2).Text = "MultiLine" Then
             frm_PanelMultiline.ShowDialog()
 
-        ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Karat" Then
-            frm_PanelKarat.ShowDialog()
-
+            'ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Karat" Then
+            '    frm_PanelKarat.ShowDialog()
         End If
     End Sub
 
@@ -1899,7 +1881,6 @@ Public Class frmPawningItemNew
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
-
         database.SaveEntry(ds)
         MsgBox("SAVED")
     End Sub
@@ -1914,5 +1895,11 @@ Public Class frmPawningItemNew
         secured_str = DreadKnight(secured_str)
         frmClient.SearchSelect(secured_str, FormName.NewPawning)
         frmClient.Show()
+    End Sub
+
+    Private Sub txtClassification_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtClassification.KeyPress
+        If isEnter(e) Then
+            btnSearchClassification.PerformClick()
+        End If
     End Sub
 End Class
