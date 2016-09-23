@@ -30,9 +30,9 @@ Partial Class dev_NewItem
         Me.lsSpecs = New System.Windows.Forms.ListBox()
         Me.txtCategory = New System.Windows.Forms.TextBox()
         Me.txtPrint = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.txtCode = New System.Windows.Forms.TextBox()
         Me.txtSpec = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnPop
@@ -101,15 +101,6 @@ Partial Class dev_NewItem
         Me.txtPrint.Size = New System.Drawing.Size(269, 20)
         Me.txtPrint.TabIndex = 7
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(255, 261)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 8
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'txtCode
         '
         Me.txtCode.Location = New System.Drawing.Point(255, 235)
@@ -123,6 +114,15 @@ Partial Class dev_NewItem
         Me.txtSpec.Name = "txtSpec"
         Me.txtSpec.Size = New System.Drawing.Size(100, 20)
         Me.txtSpec.TabIndex = 9
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(255, 261)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 8
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'dev_NewItem
         '
@@ -154,7 +154,7 @@ Partial Class dev_NewItem
     Friend WithEvents lsSpecs As System.Windows.Forms.ListBox
     Friend WithEvents txtCategory As System.Windows.Forms.TextBox
     Friend WithEvents txtPrint As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents txtCode As System.Windows.Forms.TextBox
     Friend WithEvents txtSpec As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

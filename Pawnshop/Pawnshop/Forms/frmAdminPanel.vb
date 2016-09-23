@@ -90,7 +90,8 @@ Public Class frmAdminPanel
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
-
+        If dgSpecs.CurrentCell.Value Is Nothing Then dgSpecs.Focus() : Return False
+      
         Return True
     End Function
 
