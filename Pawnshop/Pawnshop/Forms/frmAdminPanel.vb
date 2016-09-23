@@ -17,6 +17,8 @@ Public Class frmAdminPanel
 
     Private ItemList As ItemClass
 
+    Dim isnew As Boolean = False
+
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
         txtClassifiction.Focus()
@@ -202,6 +204,7 @@ Public Class frmAdminPanel
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
         btnSave.Enabled = True
+        btnUpdate.Text = "&Update"
         clearfields()
     End Sub
 
@@ -603,5 +606,19 @@ Public Class frmAdminPanel
                 lst.SubItems.Add(If(row(i) IsNot Nothing, row(i).ToString, ""))
             Next
         Next
+    End Sub
+
+    Private Sub dgSpecs_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dgSpecs.KeyDown
+        If btnUpdate.Text = "&Modify" Then
+            If e.KeyCode = Keys.Enter Then
+                btnUpdate.PerformClick()
+            End If
+        Else
+            btnSave.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
     End Sub
 End Class
