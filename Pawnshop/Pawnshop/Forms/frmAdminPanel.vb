@@ -21,13 +21,13 @@ Public Class frmAdminPanel
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
-        txtClassifiction.Focus()
+        txtClassification.Focus()
     End Sub
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
         If it.ItemClass = "" Then Exit Sub
 
-        txtClassifiction.Text = it.ItemClass
+        txtClassification.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
@@ -48,7 +48,7 @@ Public Class frmAdminPanel
     End Sub
 
     Friend Sub LoadItemall(ByVal it As ItemClass)
-        txtClassifiction.Text = String.Format(it.ItemClass)
+        txtClassification.Text = String.Format(it.ItemClass)
         txtCategory.Text = String.Format(it.Category)
         txtDescription.Text = String.Format(it.Description)
 
@@ -65,7 +65,7 @@ Public Class frmAdminPanel
 
     Friend Sub clearfields()
         txtCategory.Text = ""
-        txtClassifiction.Text = ""
+        txtClassification.Text = ""
         txtDescription.Text = ""
         txtPrintLayout.Text = ""
         txtSearch.Text = ""
@@ -85,7 +85,7 @@ Public Class frmAdminPanel
     End Sub
     Private Function isValid() As Boolean
 
-        If txtClassifiction.Text = "" Then txtClassifiction.Focus() : Return False
+        If txtClassification.Text = "" Then txtClassification.Focus() : Return False
         If txtCategory.Text = "" Then txtCategory.Focus() : Return False
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
@@ -105,7 +105,7 @@ Public Class frmAdminPanel
         Dim ColItemsSpecs As New CollectionItemSpecs
 
         With ItemSave
-            .ItemClass = txtClassifiction.Text
+            .ItemClass = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
@@ -163,7 +163,7 @@ Public Class frmAdminPanel
         Dim ItemModify As New ItemClass
 
         With ItemModify
-            .ItemClass = txtClassifiction.Text
+            .ItemClass = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .updated_at = CurrentDate
@@ -216,7 +216,7 @@ Public Class frmAdminPanel
 
         frmItemList.Show()
 
-        frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
+        frmItemList.txtSearchItmLst.Text = Me.txtSearch.Text.ToString
         frmItemList.btnSearch.PerformClick()
 
         btnUpdate.Text = "&Update".ToString
@@ -234,7 +234,7 @@ Public Class frmAdminPanel
 
     Private Sub reaDOnlyTrue()
         txtCategory.ReadOnly = True
-        txtClassifiction.ReadOnly = True
+        txtClassification.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
         rdbNo.Enabled = False
@@ -246,7 +246,7 @@ Public Class frmAdminPanel
 
     Friend Sub reaDOnlyFalse()
         txtCategory.ReadOnly = False
-        txtClassifiction.ReadOnly = False
+        txtClassification.ReadOnly = False
         txtDescription.ReadOnly = False
         txtPrintLayout.ReadOnly = False
         rdbNo.Enabled = True
@@ -275,17 +275,13 @@ Public Class frmAdminPanel
             btnSave.Enabled = False
     End Sub
 
-    Private Sub AddItem(ByVal cio As DataRow)
+    Private Sub AddItem(ByVal itmspc As DataRow)
         Dim tmpItem As New ItemSpecs
-        tmpItem.LoadItemSpecs_row(cio)
+        tmpItem.LoadItemSpecs_row(itmspc)
         dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
+ 
 
     '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
     Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
@@ -621,5 +617,11 @@ Public Class frmAdminPanel
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 End Class

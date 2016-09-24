@@ -23,16 +23,12 @@ Partial Class frmAdminPanel
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
-        Me.txtPrintLayout = New System.Windows.Forms.TextBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
         Me.rdbYes = New System.Windows.Forms.RadioButton()
         Me.lblRenewable = New System.Windows.Forms.Label()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.lblDescription = New System.Windows.Forms.Label()
-        Me.txtCategory = New System.Windows.Forms.TextBox()
         Me.lblCategory = New System.Windows.Forms.Label()
-        Me.txtClassifiction = New System.Windows.Forms.TextBox()
         Me.lblClassification = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -49,7 +45,6 @@ Partial Class frmAdminPanel
         Me.btnClose = New System.Windows.Forms.Button()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -58,10 +53,15 @@ Partial Class frmAdminPanel
         Me.btnExport = New System.Windows.Forms.Button()
         Me.cmbModuleName = New System.Windows.Forms.ComboBox()
         Me.lblModuleName = New System.Windows.Forms.Label()
-        Me.txtReferenceNumber = New System.Windows.Forms.TextBox()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.txtSearch = New Pawnshop.watermark()
+        Me.txtPrintLayout = New Pawnshop.watermark()
+        Me.txtDescription = New Pawnshop.watermark()
+        Me.txtCategory = New Pawnshop.watermark()
+        Me.txtClassification = New Pawnshop.watermark()
+        Me.txtReferenceNumber = New Pawnshop.watermark()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -75,15 +75,15 @@ Partial Class frmAdminPanel
         '
         Me.grpAddItem.BackColor = System.Drawing.Color.Gainsboro
         Me.grpAddItem.Controls.Add(Me.txtPrintLayout)
+        Me.grpAddItem.Controls.Add(Me.txtDescription)
+        Me.grpAddItem.Controls.Add(Me.txtCategory)
+        Me.grpAddItem.Controls.Add(Me.txtClassification)
         Me.grpAddItem.Controls.Add(Me.lblPrintLayout)
         Me.grpAddItem.Controls.Add(Me.rdbNo)
         Me.grpAddItem.Controls.Add(Me.rdbYes)
         Me.grpAddItem.Controls.Add(Me.lblRenewable)
-        Me.grpAddItem.Controls.Add(Me.txtDescription)
         Me.grpAddItem.Controls.Add(Me.lblDescription)
-        Me.grpAddItem.Controls.Add(Me.txtCategory)
         Me.grpAddItem.Controls.Add(Me.lblCategory)
-        Me.grpAddItem.Controls.Add(Me.txtClassifiction)
         Me.grpAddItem.Controls.Add(Me.lblClassification)
         Me.grpAddItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpAddItem.ForeColor = System.Drawing.SystemColors.MenuText
@@ -93,15 +93,6 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
-        '
-        'txtPrintLayout
-        '
-        Me.txtPrintLayout.Location = New System.Drawing.Point(105, 244)
-        Me.txtPrintLayout.Multiline = True
-        Me.txtPrintLayout.Name = "txtPrintLayout"
-        Me.txtPrintLayout.Size = New System.Drawing.Size(250, 68)
-        Me.txtPrintLayout.TabIndex = 5
-        Me.txtPrintLayout.Text = "Print Layout"
         '
         'lblPrintLayout
         '
@@ -143,15 +134,6 @@ Partial Class frmAdminPanel
         Me.lblRenewable.TabIndex = 6
         Me.lblRenewable.Text = "IsRenewable"
         '
-        'txtDescription
-        '
-        Me.txtDescription.Location = New System.Drawing.Point(105, 122)
-        Me.txtDescription.Multiline = True
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(250, 71)
-        Me.txtDescription.TabIndex = 2
-        Me.txtDescription.Text = "Description"
-        '
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
@@ -161,14 +143,6 @@ Partial Class frmAdminPanel
         Me.lblDescription.TabIndex = 4
         Me.lblDescription.Text = "Description"
         '
-        'txtCategory
-        '
-        Me.txtCategory.Location = New System.Drawing.Point(105, 79)
-        Me.txtCategory.Name = "txtCategory"
-        Me.txtCategory.Size = New System.Drawing.Size(250, 22)
-        Me.txtCategory.TabIndex = 1
-        Me.txtCategory.Text = "Category"
-        '
         'lblCategory
         '
         Me.lblCategory.AutoSize = True
@@ -177,14 +151,6 @@ Partial Class frmAdminPanel
         Me.lblCategory.Size = New System.Drawing.Size(63, 16)
         Me.lblCategory.TabIndex = 2
         Me.lblCategory.Text = "Category"
-        '
-        'txtClassifiction
-        '
-        Me.txtClassifiction.Location = New System.Drawing.Point(105, 38)
-        Me.txtClassifiction.Name = "txtClassifiction"
-        Me.txtClassifiction.Size = New System.Drawing.Size(250, 22)
-        Me.txtClassifiction.TabIndex = 0
-        Me.txtClassifiction.Text = "Classfication"
         '
         'lblClassification
         '
@@ -316,8 +282,8 @@ Partial Class frmAdminPanel
         '
         'grpSearch
         '
-        Me.grpSearch.Controls.Add(Me.btnSearch)
         Me.grpSearch.Controls.Add(Me.txtSearch)
+        Me.grpSearch.Controls.Add(Me.btnSearch)
         Me.grpSearch.Controls.Add(Me.lblSearch)
         Me.grpSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSearch.Location = New System.Drawing.Point(6, 6)
@@ -335,14 +301,6 @@ Partial Class frmAdminPanel
         Me.btnSearch.TabIndex = 1
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(77, 21)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(965, 22)
-        Me.txtSearch.TabIndex = 0
-        Me.txtSearch.Text = "Search. . ."
         '
         'lblSearch
         '
@@ -366,12 +324,12 @@ Partial Class frmAdminPanel
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtReferenceNumber)
         Me.GroupBox2.Controls.Add(Me.btnBrowse)
         Me.GroupBox2.Controls.Add(Me.lvModule)
         Me.GroupBox2.Controls.Add(Me.btnExport)
         Me.GroupBox2.Controls.Add(Me.cmbModuleName)
         Me.GroupBox2.Controls.Add(Me.lblModuleName)
-        Me.GroupBox2.Controls.Add(Me.txtReferenceNumber)
         Me.GroupBox2.Controls.Add(Me.lblReferenceNumber)
         Me.GroupBox2.Location = New System.Drawing.Point(6, 0)
         Me.GroupBox2.Name = "GroupBox2"
@@ -429,14 +387,6 @@ Partial Class frmAdminPanel
         Me.lblModuleName.TabIndex = 3
         Me.lblModuleName.Text = "Module Name"
         '
-        'txtReferenceNumber
-        '
-        Me.txtReferenceNumber.Location = New System.Drawing.Point(106, 12)
-        Me.txtReferenceNumber.Name = "txtReferenceNumber"
-        Me.txtReferenceNumber.Size = New System.Drawing.Size(207, 22)
-        Me.txtReferenceNumber.TabIndex = 1
-        Me.txtReferenceNumber.Text = "Reference No."
-        '
         'lblReferenceNumber
         '
         Me.lblReferenceNumber.AutoSize = True
@@ -455,12 +405,69 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(77, 21)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(965, 22)
+        Me.txtSearch.TabIndex = 10
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
+        'txtPrintLayout
+        '
+        Me.txtPrintLayout.ForeColor = System.Drawing.SystemColors.InfoText
+        Me.txtPrintLayout.Location = New System.Drawing.Point(106, 240)
+        Me.txtPrintLayout.Multiline = True
+        Me.txtPrintLayout.Name = "txtPrintLayout"
+        Me.txtPrintLayout.Size = New System.Drawing.Size(249, 76)
+        Me.txtPrintLayout.TabIndex = 5
+        Me.txtPrintLayout.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPrintLayout.WatermarkText = "PrintLayout"
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(106, 119)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(249, 78)
+        Me.txtDescription.TabIndex = 2
+        Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDescription.WatermarkText = "Description"
+        '
+        'txtCategory
+        '
+        Me.txtCategory.Location = New System.Drawing.Point(106, 85)
+        Me.txtCategory.Name = "txtCategory"
+        Me.txtCategory.Size = New System.Drawing.Size(249, 22)
+        Me.txtCategory.TabIndex = 1
+        Me.txtCategory.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtCategory.WatermarkText = "Category"
+        '
+        'txtClassification
+        '
+        Me.txtClassification.Location = New System.Drawing.Point(106, 38)
+        Me.txtClassification.Name = "txtClassification"
+        Me.txtClassification.Size = New System.Drawing.Size(249, 22)
+        Me.txtClassification.TabIndex = 0
+        Me.txtClassification.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtClassification.WatermarkText = "Classification"
+        '
+        'txtReferenceNumber
+        '
+        Me.txtReferenceNumber.Location = New System.Drawing.Point(106, 13)
+        Me.txtReferenceNumber.Name = "txtReferenceNumber"
+        Me.txtReferenceNumber.Size = New System.Drawing.Size(207, 22)
+        Me.txtReferenceNumber.TabIndex = 2
+        Me.txtReferenceNumber.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtReferenceNumber.WatermarkText = "Reference No."
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1166, 487)
+        Me.ClientSize = New System.Drawing.Size(1166, 535)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "frmAdminPanel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -482,11 +489,8 @@ Partial Class frmAdminPanel
     Friend WithEvents rdbNo As System.Windows.Forms.RadioButton
     Friend WithEvents rdbYes As System.Windows.Forms.RadioButton
     Friend WithEvents lblRenewable As System.Windows.Forms.Label
-    Friend WithEvents txtDescription As System.Windows.Forms.TextBox
     Friend WithEvents lblDescription As System.Windows.Forms.Label
-    Friend WithEvents txtCategory As System.Windows.Forms.TextBox
     Friend WithEvents lblCategory As System.Windows.Forms.Label
-    Friend WithEvents txtClassifiction As System.Windows.Forms.TextBox
     Friend WithEvents lblClassification As System.Windows.Forms.Label
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
@@ -494,16 +498,13 @@ Partial Class frmAdminPanel
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents grpSearch As System.Windows.Forms.GroupBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
-    Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents lblSearch As System.Windows.Forms.Label
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents lblReferenceNumber As System.Windows.Forms.Label
     Friend WithEvents lblModuleName As System.Windows.Forms.Label
-    Friend WithEvents txtReferenceNumber As System.Windows.Forms.TextBox
     Friend WithEvents btnExport As System.Windows.Forms.Button
     Friend WithEvents cmbModuleName As System.Windows.Forms.ComboBox
-    Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents lvModule As System.Windows.Forms.ListView
@@ -518,4 +519,10 @@ Partial Class frmAdminPanel
     Friend WithEvents DataGridViewComboBoxColumn2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewComboBoxColumn3 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents txtClassification As Pawnshop.watermark
+    Friend WithEvents txtPrintLayout As Pawnshop.watermark
+    Friend WithEvents txtDescription As Pawnshop.watermark
+    Friend WithEvents txtCategory As Pawnshop.watermark
+    Friend WithEvents txtSearch As Pawnshop.watermark
+    Friend WithEvents txtReferenceNumber As Pawnshop.watermark
 End Class

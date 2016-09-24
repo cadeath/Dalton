@@ -46,17 +46,6 @@
 
         frmInterestScheme.lvIntScheme.Items.Clear()
 
-        'Dim mySql As String = "SELECT * FROM tblIntScheme_Details"
-        'Dim ds As DataSet = LoadSQL(mySql)
-
-        'frmInterestScheme.lvIntScheme.Items.Clear()
-        'For Each dr As DataRow In ds.Tables(0).Rows
-
-        '    Dim lv As ListViewItem = frmInterestScheme.lvIntScheme.Items.Add(dr("SCHEMEID"))
-        '    lv.SubItems.Add(dr("SCHEMENAME"))
-        '    lv.SubItems.Add(dr("DESCRIPTION"))
-        'Next
-
         For Each SchemeDetail As Scheme_Interest In tmpScheme.SchemeDetails
             With SchemeDetail
 
