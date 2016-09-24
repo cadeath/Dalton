@@ -115,13 +115,13 @@
         txtSearch.Text = ""
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+    Private Sub lvSchemeList_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSchemeList.KeyDown
         If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
+            btnView.PerformClick()
         End If
     End Sub
 
-    Private Sub lvSchemeList_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSchemeList.KeyDown
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnView.PerformClick()
         End If

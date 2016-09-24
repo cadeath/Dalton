@@ -212,7 +212,7 @@ Partial Class frmAdminPanel
         Me.dgSpecs.AllowUserToDeleteRows = False
         Me.dgSpecs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgSpecs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewComboBoxColumn1, Me.DataGridViewComboBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewComboBoxColumn3})
-        Me.dgSpecs.Location = New System.Drawing.Point(376, 72)
+        Me.dgSpecs.Location = New System.Drawing.Point(374, 72)
         Me.dgSpecs.Name = "dgSpecs"
         Me.dgSpecs.RowHeadersVisible = False
         Me.dgSpecs.RowHeadersWidth = 20
@@ -410,7 +410,7 @@ Partial Class frmAdminPanel
         Me.txtSearch.Location = New System.Drawing.Point(77, 21)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(965, 22)
-        Me.txtSearch.TabIndex = 10
+        Me.txtSearch.TabIndex = 0
         Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
         Me.txtSearch.WatermarkText = "Search . . ."
         '
@@ -467,7 +467,7 @@ Partial Class frmAdminPanel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1166, 535)
+        Me.ClientSize = New System.Drawing.Size(1166, 478)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "frmAdminPanel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

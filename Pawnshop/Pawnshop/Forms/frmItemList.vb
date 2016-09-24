@@ -28,11 +28,11 @@
         LoadActiveItem()
 
         If Not mOtherForm Then
-            txtSearchItmLst.Focus()
+            txtSearch.Focus()
         End If
 
-        txtSearchItmLst.Text = IIf(txtSearchItmLst.Text <> "", txtSearchItmLst.Text, "")
-        If txtSearchItmLst.Text <> "" Then
+        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+        If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
         End If
     End Sub
@@ -49,7 +49,7 @@
 
 
     Private Sub ClearField()
-        txtSearchItmLst.Text = ""
+        txtSearch.Text = ""
         lvItem.Items.Clear()
     End Sub
 
@@ -58,12 +58,12 @@
             btnSelect.Visible = False
         End If
         ' LoadActiveItem()
-        frmItemList_Load(sender, e)
+
         searchItem()
     End Sub
     Private Sub searchItem()
-        If txtSearchItmLst.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearchItmLst.Text
+        If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
 
         Dim mySql As String = "SELECT * FROM tblITEM WHERE "
@@ -78,7 +78,7 @@
         If MaxRow <= 0 Then
             Console.WriteLine("No Item List Found")
             MsgBox("Query not found", MsgBoxStyle.Information)
-            txtSearchItmLst.SelectAll()
+            txtSearch.SelectAll()
             lvItem.Items.Clear()
             Exit Sub
         End If
@@ -109,7 +109,7 @@
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
         mOtherForm = True
         btnSelect.Visible = True
-        txtSearchItmLst.Text = src
+        txtSearch.Text = src
         frmOrig = frmOrigin
     End Sub
 
@@ -160,7 +160,7 @@
 
     Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         LoadActiveItem()
-        txtSearchItmLst.Text = ""
+        txtSearch.Text = ""
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -169,9 +169,13 @@
 
 
    
-    Private Sub txtSearchItmLst_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearchItmLst.KeyDown
+    Private Sub txtSearchItmLst_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
         End If
+    End Sub
+
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+
     End Sub
 End Class

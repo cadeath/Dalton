@@ -170,35 +170,6 @@
         clearfields()
     End Sub
 
-
-    Private Sub txtDayFrom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayFrom.KeyPress
-        DigitOnly(e)
-    End Sub
-
-   Private Sub txtDayTo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtInterest_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInterest.KeyPress
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtPenalty_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPenalty.KeyPress
-        DigitOnly(e)
-    End Sub
-
-  
-    Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Label9.Text = "Update".ToString Then
-                btnAdd.PerformClick()
-            ElseIf Label9.Text = "Modify" Then
-                btnUpdateScheme.PerformClick()
-            End If
-        End If
-
-    End Sub
-
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
         If lvIntScheme.SelectedItems.Count <= 0 Then Exit Sub
         lvIntScheme.Items.RemoveAt(lvIntScheme.SelectedIndices(0))
@@ -226,14 +197,6 @@
 
     End Sub
 
-   
-
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
-
     Private Sub lvIntscheme_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvIntscheme.DoubleClick
         With lvIntscheme
             txtDayFrom.Text = .SelectedItems(0).SubItems(1).Text
@@ -257,4 +220,35 @@
     End Sub
 
     
+    Private Sub txtDayFrom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayFrom.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtDayTo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtInterest_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInterest.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtPenalty_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPenalty.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Label9.Text = "Update".ToString Then
+                btnAdd.PerformClick()
+            ElseIf Label9.Text = "Modify" Then
+                btnUpdateScheme.PerformClick()
+            End If
+        End If
+    End Sub
 End Class
