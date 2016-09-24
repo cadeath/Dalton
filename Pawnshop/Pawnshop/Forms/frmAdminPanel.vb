@@ -2,10 +2,6 @@
 Public Class frmAdminPanel
     Private mySql As String
     Private fillData As String
-
-    Dim rbYes As Integer
-    Dim rbNo As Integer
-
     Private SpecSave As ItemSpecs
     Dim ds As New DataSet
 
@@ -28,9 +24,11 @@ Public Class frmAdminPanel
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
-        If it.isRenewable = 1 Then
+        If it.isRenewable = "True" Then
             rdbYes.Checked = True
+            rdbNo.Checked = False
         Else
+            rdbYes.Checked = False
             rdbNo.Checked = True
         End If
 
@@ -44,21 +42,21 @@ Public Class frmAdminPanel
         btnUpdate.Enabled = True
     End Sub
 
-    Friend Sub LoadItemall(ByVal it As ItemClass)
-        txtClassifiction.Text = String.Format(it.ItemClass)
-        txtCategory.Text = String.Format(it.Category)
-        txtDescription.Text = String.Format(it.Description)
+    'Friend Sub LoadItemall(ByVal it As ItemClass)
+    '    txtClassifiction.Text = String.Format(it.ItemClass)
+    '    txtCategory.Text = String.Format(it.Category)
+    '    txtDescription.Text = String.Format(it.Description)
 
-        If it.isRenewable = "1" Then
-            rdbYes.Checked = True
-        Else
-            rdbNo.Checked = True
-        End If
-        txtPrintLayout.Text = String.Format(it.PrintLayout)
+    '    If it.isRenewable = "1" Then
+    '        rdbYes.Checked = True
+    '    Else
+    '        rdbNo.Checked = True
+    '    End If
+    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
 
-        ItemList = it
+    '    ItemList = it
 
-    End Sub
+    'End Sub
 
     Friend Sub clearfields()
         txtCategory.Text = ""
@@ -73,13 +71,6 @@ Public Class frmAdminPanel
 
     End Sub
 
-    Private Sub rdbYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbYes.CheckedChanged
-        rbYes = 1
-    End Sub
-
-    Private Sub rdbNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbNo.CheckedChanged
-        rbNo = 0
-    End Sub
     Private Function isValid() As Boolean
 
         If txtClassifiction.Text = "" Then txtClassifiction.Focus() : Return False
@@ -105,10 +96,10 @@ Public Class frmAdminPanel
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
-            If rdbYes.Checked = True Then
-                .isRenewable = rbYes
+            If rdbYes.Checked Then
+                .isRenewable = 1
             Else
-                .isRenewable = rbNo
+                .isRenewable = 0
             End If
 
             .PrintLayout = txtPrintLayout.Text
@@ -167,10 +158,10 @@ Public Class frmAdminPanel
             .updated_at = CurrentDate
             .ID = SelectedItem.ID
 
-            If rdbYes.Checked = True Then
-                .isRenewable = rbYes
+            If rdbYes.Checked Then
+                .isRenewable = 1
             Else
-                .isRenewable = rbNo
+                .isRenewable = 0
             End If
 
             .PrintLayout = txtPrintLayout.Text
@@ -264,7 +255,7 @@ Public Class frmAdminPanel
         Dim dr As DataRow
 
         For Each dr In ds.Tables(0).Rows
-            AddItem(dr)
+            AddItemSpecs(dr)
         Next
             ' Dim i As Integer = (0)
 
@@ -275,9 +266,9 @@ Public Class frmAdminPanel
             btnSave.Enabled = False
     End Sub
 
-    Private Sub AddItem(ByVal cio As DataRow)
+    Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
         Dim tmpItem As New ItemSpecs
-        tmpItem.LoadItemSpecs_row(cio)
+        tmpItem.LoadItemSpecs_row(ItemSpecs)
         dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 

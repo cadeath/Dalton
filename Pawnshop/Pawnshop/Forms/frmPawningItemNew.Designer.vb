@@ -93,13 +93,13 @@ Partial Class frmPawningItemNew
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearchClassification = New System.Windows.Forms.Button()
         Me.txtClassification = New System.Windows.Forms.TextBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.btnSearchClaimer = New System.Windows.Forms.Button()
         Me.txtClaimer = New System.Windows.Forms.TextBox()
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -801,6 +801,16 @@ Partial Class frmPawningItemNew
         Me.ColumnHeader3.Text = "Specification Layout"
         Me.ColumnHeader3.Width = 0
         '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Specification Type"
+        Me.ColumnHeader4.Width = 0
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Specification Value"
+        Me.ColumnHeader5.Width = 152
+        '
         'btnSearchClassification
         '
         Me.btnSearchClassification.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -849,15 +859,6 @@ Partial Class frmPawningItemNew
         Me.txtClaimer.Size = New System.Drawing.Size(205, 22)
         Me.txtClaimer.TabIndex = 1
         Me.txtClaimer.Text = "Claimer"
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Specification Type"
-        Me.ColumnHeader4.Width = 0
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Specification Value"
         '
         'frmPawningItemNew
         '

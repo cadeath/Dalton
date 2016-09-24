@@ -186,7 +186,6 @@
     End Sub
 #End Region
 
-
     Public Function LastSpecsID() As Single
         Dim mySql As String = "SELECT * FROM TBLSpecs ORDER BY SpecsID DESC"
         Dim ds As DataSet = LoadSQL(mySql)

@@ -2,6 +2,7 @@
     Dim mOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
     Dim ds As New DataSet
+    Dim selectedItem As ItemClass
 
 
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
@@ -14,26 +15,13 @@
             AddItem(tmpItem)
         Next
     End Sub
-
-    Dim selectedItem As ItemClass
-    'Dim ds As New DataSet
-
-    'Friend GetItem As ItemClass
-
-
-    'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-    '    mOtherForm = True
-    '    btnSelect.Visible = True
-    '    txtSearch.Text = src
-    '    frmOrig = frmOrigin
-    'End Sub
-
-
+    
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ClearField()
+        ' If Not mOtherForm Then ClearField()
         If mOtherForm Then
             btnView.Visible = False
         Else
+            ClearField()
             btnSearch.Visible = False
         End If
 
@@ -238,14 +226,6 @@
         frmOrig = frmOrigin
     End Sub
 
-
-    ''Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-    ''    mOtherForm = True
-    ''    btnSelect.Visible = True
-    ''    txtSearch.Text = src
-    ''    frmOrig = frmOrigin
-    ''End Sub
-
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
 
         If lvItem.Items.Count = 0 Then Exit Sub
@@ -263,7 +243,6 @@
         Me.Close()
 
     End Sub
-
 
     Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
         If Not mOtherForm Then
@@ -287,7 +266,7 @@
         frmAdminPanel.LoadSpec(idx)
         frmAdminPanel.LoadItemList(selectedItem)
         frmAdminPanel.Show()
-        Me.Hide()
+        Me.Close()
 
     End Sub
 
@@ -296,4 +275,7 @@
         txtSearch.Text = ""
     End Sub
 
+    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+
+    End Sub
 End Class

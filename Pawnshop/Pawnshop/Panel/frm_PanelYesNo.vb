@@ -15,7 +15,7 @@
         End If
 
         With frmPawningItemNew.lvSpec
-            .SelectedItems(0).SubItems(3).Text = tmpResult
+            .SelectedItems(0).SubItems(4).Text = tmpResult
         End With
         Me.Close()
     End Sub
