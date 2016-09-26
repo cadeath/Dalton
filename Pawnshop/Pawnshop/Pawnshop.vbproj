@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{24AC89A7-4FDE-47EF-AC83-32A2499285D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Pawnshop.frmInterestScheme</StartupObject>
+    <StartupObject>Pawnshop.frmAdminPanel</StartupObject>
     <RootNamespace>Pawnshop</RootNamespace>
     <AssemblyName>pawnshop</AssemblyName>
     <FileAlignment>512</FileAlignment>

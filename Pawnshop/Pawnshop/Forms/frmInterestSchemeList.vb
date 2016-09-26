@@ -11,6 +11,7 @@
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
+            btnSearch.Focus()
         End If
     End Sub
 

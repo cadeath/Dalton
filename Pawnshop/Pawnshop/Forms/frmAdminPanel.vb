@@ -179,7 +179,7 @@ Public Class frmAdminPanel
             End If
 
             .PrintLayout = txtPrintLayout.Text
-           
+            .SchemeName = txtSchemeName.Text
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -626,5 +626,10 @@ Public Class frmAdminPanel
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
         End If
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim SelectedThings As String = dgSpecs.SelectedCells.ToString
+        MsgBox(SelectedThings)
     End Sub
 End Class
