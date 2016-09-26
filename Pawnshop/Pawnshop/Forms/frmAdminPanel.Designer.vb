@@ -105,16 +105,16 @@ Partial Class frmAdminPanel
         Me.txtSchemeName.Size = New System.Drawing.Size(249, 22)
         Me.txtSchemeName.TabIndex = 10
         Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSchemeName.WatermarkText = "Default Watermark"
+        Me.txtSchemeName.WatermarkText = "Scheme Name"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(20, 300)
+        Me.Label1.Location = New System.Drawing.Point(6, 303)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(77, 16)
+        Me.Label1.Size = New System.Drawing.Size(98, 16)
         Me.Label1.TabIndex = 9
-        Me.Label1.Text = "Print Layout"
+        Me.Label1.Text = "Scheme Name"
         '
         'txtPrintLayout
         '

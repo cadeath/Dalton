@@ -82,52 +82,52 @@ Partial Class frmInterestScheme
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(384, 46)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(546, 111)
+        Me.GroupBox1.Size = New System.Drawing.Size(546, 132)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         '
         'txtRemarks
         '
-        Me.txtRemarks.Location = New System.Drawing.Point(270, 53)
+        Me.txtRemarks.Location = New System.Drawing.Point(269, 18)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(258, 50)
+        Me.txtRemarks.Size = New System.Drawing.Size(258, 95)
         Me.txtRemarks.TabIndex = 14
         Me.txtRemarks.WatermarkColor = System.Drawing.Color.Gray
         Me.txtRemarks.WatermarkText = "Remarks"
         '
         'txtPenalty
         '
-        Me.txtPenalty.Location = New System.Drawing.Point(74, 65)
+        Me.txtPenalty.Location = New System.Drawing.Point(74, 94)
         Me.txtPenalty.Name = "txtPenalty"
-        Me.txtPenalty.Size = New System.Drawing.Size(111, 22)
+        Me.txtPenalty.Size = New System.Drawing.Size(122, 22)
         Me.txtPenalty.TabIndex = 13
         Me.txtPenalty.WatermarkColor = System.Drawing.Color.Gray
         Me.txtPenalty.WatermarkText = "Penalty"
         '
         'txtInterest
         '
-        Me.txtInterest.Location = New System.Drawing.Point(446, 19)
+        Me.txtInterest.Location = New System.Drawing.Point(74, 68)
         Me.txtInterest.Name = "txtInterest"
-        Me.txtInterest.Size = New System.Drawing.Size(82, 22)
+        Me.txtInterest.Size = New System.Drawing.Size(122, 22)
         Me.txtInterest.TabIndex = 12
         Me.txtInterest.WatermarkColor = System.Drawing.Color.Gray
         Me.txtInterest.WatermarkText = "Interest"
         '
         'txtDayTo
         '
-        Me.txtDayTo.Location = New System.Drawing.Point(257, 19)
+        Me.txtDayTo.Location = New System.Drawing.Point(74, 44)
         Me.txtDayTo.Name = "txtDayTo"
-        Me.txtDayTo.Size = New System.Drawing.Size(120, 22)
+        Me.txtDayTo.Size = New System.Drawing.Size(122, 22)
         Me.txtDayTo.TabIndex = 11
         Me.txtDayTo.WatermarkColor = System.Drawing.Color.Gray
         Me.txtDayTo.WatermarkText = "DayTo"
         '
         'txtDayFrom
         '
-        Me.txtDayFrom.Location = New System.Drawing.Point(74, 19)
+        Me.txtDayFrom.Location = New System.Drawing.Point(74, 17)
         Me.txtDayFrom.Name = "txtDayFrom"
-        Me.txtDayFrom.Size = New System.Drawing.Size(111, 22)
+        Me.txtDayFrom.Size = New System.Drawing.Size(122, 22)
         Me.txtDayFrom.TabIndex = 10
         Me.txtDayFrom.WatermarkColor = System.Drawing.Color.Gray
         Me.txtDayFrom.WatermarkText = "DayFrom"
@@ -135,7 +135,7 @@ Partial Class frmInterestScheme
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(202, 65)
+        Me.Label5.Location = New System.Drawing.Point(203, 20)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(63, 16)
         Me.Label5.TabIndex = 9
@@ -144,7 +144,7 @@ Partial Class frmInterestScheme
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(15, 69)
+        Me.Label4.Location = New System.Drawing.Point(21, 97)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(53, 16)
         Me.Label4.TabIndex = 7
@@ -153,7 +153,7 @@ Partial Class frmInterestScheme
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(393, 21)
+        Me.Label3.Location = New System.Drawing.Point(21, 70)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(51, 16)
         Me.Label3.TabIndex = 5
@@ -162,7 +162,7 @@ Partial Class frmInterestScheme
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(198, 21)
+        Me.Label2.Location = New System.Drawing.Point(19, 46)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(53, 16)
         Me.Label2.TabIndex = 3
@@ -171,7 +171,7 @@ Partial Class frmInterestScheme
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(5, 20)
+        Me.Label1.Location = New System.Drawing.Point(5, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(67, 16)
         Me.Label1.TabIndex = 0
@@ -179,7 +179,7 @@ Partial Class frmInterestScheme
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(627, 21)
+        Me.btnSave.Location = New System.Drawing.Point(634, 16)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(88, 34)
         Me.btnSave.TabIndex = 0
@@ -240,7 +240,7 @@ Partial Class frmInterestScheme
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(818, 21)
+        Me.btnClose.Location = New System.Drawing.Point(825, 16)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(88, 34)
         Me.btnClose.TabIndex = 2
@@ -255,15 +255,15 @@ Partial Class frmInterestScheme
         Me.GroupBox3.Controls.Add(Me.btnSave)
         Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 366)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 384)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(924, 73)
+        Me.GroupBox3.Size = New System.Drawing.Size(924, 55)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(724, 21)
+        Me.btnUpdate.Location = New System.Drawing.Point(731, 16)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(88, 34)
         Me.btnUpdate.TabIndex = 1
@@ -274,7 +274,7 @@ Partial Class frmInterestScheme
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(56, 250)
+        Me.Label7.Location = New System.Drawing.Point(56, 268)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(262, 37)
         Me.Label7.TabIndex = 12
@@ -295,21 +295,21 @@ Partial Class frmInterestScheme
         Me.LineShape2.Name = "LineShape2"
         Me.LineShape2.X1 = 10
         Me.LineShape2.X2 = 374
-        Me.LineShape2.Y1 = 246
-        Me.LineShape2.Y2 = 246
+        Me.LineShape2.Y1 = 261
+        Me.LineShape2.Y2 = 261
         '
         'LineShape1
         '
         Me.LineShape1.Name = "LineShape1"
         Me.LineShape1.X1 = 11
         Me.LineShape1.X2 = 373
-        Me.LineShape1.Y1 = 301
-        Me.LineShape1.Y2 = 301
+        Me.LineShape1.Y1 = 316
+        Me.LineShape1.Y2 = 316
         '
         'btnAdd
         '
         Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(654, 161)
+        Me.btnAdd.Location = New System.Drawing.Point(654, 184)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(88, 34)
         Me.btnAdd.TabIndex = 3
@@ -319,7 +319,7 @@ Partial Class frmInterestScheme
         'btnRemove
         '
         Me.btnRemove.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRemove.Location = New System.Drawing.Point(839, 161)
+        Me.btnRemove.Location = New System.Drawing.Point(839, 184)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(88, 34)
         Me.btnRemove.TabIndex = 5
@@ -352,9 +352,9 @@ Partial Class frmInterestScheme
         Me.lvIntscheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvIntscheme.FullRowSelect = True
         Me.lvIntscheme.GridLines = True
-        Me.lvIntscheme.Location = New System.Drawing.Point(392, 198)
+        Me.lvIntscheme.Location = New System.Drawing.Point(392, 224)
         Me.lvIntscheme.Name = "lvIntscheme"
-        Me.lvIntscheme.Size = New System.Drawing.Size(538, 162)
+        Me.lvIntscheme.Size = New System.Drawing.Size(538, 154)
         Me.lvIntscheme.TabIndex = 16
         Me.lvIntscheme.UseCompatibleStateImageBehavior = False
         Me.lvIntscheme.View = System.Windows.Forms.View.Details
@@ -391,7 +391,7 @@ Partial Class frmInterestScheme
         'btnUpdateScheme
         '
         Me.btnUpdateScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateScheme.Location = New System.Drawing.Point(746, 161)
+        Me.btnUpdateScheme.Location = New System.Drawing.Point(746, 184)
         Me.btnUpdateScheme.Name = "btnUpdateScheme"
         Me.btnUpdateScheme.Size = New System.Drawing.Size(88, 34)
         Me.btnUpdateScheme.TabIndex = 4
