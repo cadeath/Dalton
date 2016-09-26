@@ -94,6 +94,16 @@
         End Set
     End Property
 
+    Private _netAmount As Double
+    Public Property NetAmount() As Double
+        Get
+            Return _netAmount
+        End Get
+        Set(ByVal value As Double)
+            _netAmount = value
+        End Set
+    End Property
+
     Private _appraiserID As Integer
     Public Property AppraiserID() As Integer
         Get
@@ -111,6 +121,16 @@
         End Get
         Set(ByVal value As Integer)
             _encoderID = value
+        End Set
+    End Property
+
+    Private _clientID As Integer
+    Public Property ClientID() As Integer
+        Get
+            Return _clientID
+        End Get
+        Set(ByVal value As Integer)
+            _clientID = value
         End Set
     End Property
 

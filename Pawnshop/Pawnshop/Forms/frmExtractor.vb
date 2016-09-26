@@ -44,6 +44,7 @@ Public Class frmExtractor
                 Me.Text &= " - BSP Report"
         End Select
     End Sub
+
     ''' <summary>
     ''' This button will extract the desired extract type.
     ''' </summary>
