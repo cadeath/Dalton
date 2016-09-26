@@ -1820,7 +1820,7 @@ Public Class frmPawningItemNew
 
     Private Sub InputSpec()
         If lvSpec.SelectedItems.Count = 0 Then Exit Sub
-        If lvSpec.FocusedItem.SubItems(2).Text = "TextBox" Or lvSpec.FocusedItem.SubItems(2).Text = "Karat" Then
+        If lvSpec.FocusedItem.SubItems(2).Text = "TextBox" Then
             frm_PanelTextbox.ShowDialog()
 
         ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Yes/No" Then
@@ -1829,8 +1829,6 @@ Public Class frmPawningItemNew
         ElseIf lvSpec.FocusedItem.SubItems(2).Text = "MultiLine" Then
             frm_PanelMultiline.ShowDialog()
 
-            'ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Karat" Then
-            '    frm_PanelKarat.ShowDialog()
         End If
     End Sub
 

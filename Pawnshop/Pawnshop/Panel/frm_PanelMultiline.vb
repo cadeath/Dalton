@@ -1,5 +1,6 @@
 ﻿Public Class frm_PanelMultiline
     Private isNumber As Boolean
+
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Dim tmpResult As String = txtSearch.Text
             With frmPawningItemNew.lvSpec
