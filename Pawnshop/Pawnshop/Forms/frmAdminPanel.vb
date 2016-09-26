@@ -19,7 +19,7 @@ Public Class frmAdminPanel
 
     Dim isnew As Boolean = False
 
-    Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
         clearfields()
         txtClassification.Focus()
     End Sub
@@ -71,17 +71,17 @@ Public Class frmAdminPanel
         txtSearch.Text = ""
         txtReferenceNumber.Text = ""
         cmbModuleName.Text = ""
-        txtSchemeName.Text = ""
+        cboSchemeName.SelectedItem = Nothing
         dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
 
     End Sub
 
-    Private Sub rdbYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbYes.CheckedChanged
+    Private Sub rdbYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         rbYes = 1
     End Sub
 
-    Private Sub rdbNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdbNo.CheckedChanged
+    Private Sub rdbNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         rbNo = 0
     End Sub
     Private Function isValid() As Boolean
@@ -91,143 +91,12 @@ Public Class frmAdminPanel
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
-        If txtSchemeName.Text = "" Then txtSchemeName.Focus() : Return False
+        If cboSchemeName.Text = "" Then cboSchemeName.Focus() : Return False
         If dgSpecs.CurrentCell.Value Is Nothing Then dgSpecs.Focus() : Return False
 
         Return True
     End Function
-
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If Not isValid() Then Exit Sub
-
-        Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        Dim ItemSave As New ItemClass
-        Dim ColItemsSpecs As New CollectionItemSpecs
-
-        With ItemSave
-            .ItemClass = txtClassification.Text
-            .Category = txtCategory.Text
-            .Description = txtDescription.Text
-
-            If rdbYes.Checked = True Then
-                .isRenewable = rbYes
-            Else
-                .isRenewable = rbNo
-            End If
-
-            .PrintLayout = txtPrintLayout.Text
-            .created_at = CurrentDate
-            .SchemeName = txtSchemeName.Text
-
-        End With
-
-
-        For Each row As DataGridViewRow In dgSpecs.Rows
-            SpecSave = New ItemSpecs
-            With SpecSave
-                .ShortCode = row.Cells(1).Value
-                .SpecName = row.Cells(2).Value
-                .SpecType = row.Cells(3).Value
-                .SpecLayout = row.Cells(4).Value
-                .UnitOfMeasure = row.Cells(5).Value
-                .isRequired = row.Cells(6).Value
-
-                If .SpecName Is Nothing Or .SpecType Is Nothing _
-                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
-                    Exit For
-                End If
-            End With
-          
-            ColItemsSpecs.Add(SpecSave)
-        Next
-
-        ItemSave.ItemSpecifications = ColItemsSpecs
-        ItemSave.SaveItem()
-
-        MsgBox("Transaction Saved", MsgBoxStyle.Information)
-        clearfields()
-    End Sub
    
-    Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-        If Not isValid() Then Exit Sub
-
-        If btnUpdate.Text = "&Update".ToString Then
-            btnUpdate.Text = "&Modify".ToString
-            reaDOnlyFalse()
-            Exit Sub
-        End If
-
-        Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        Dim ColItemsSpecs As New CollectionItemSpecs
-        Dim ItemModify As New ItemClass
-
-        With ItemModify
-            .ItemClass = txtClassification.Text
-            .Category = txtCategory.Text
-            .Description = txtDescription.Text
-            .updated_at = CurrentDate
-            .ID = SelectedItem.ID
-
-            If rdbYes.Checked = True Then
-                .isRenewable = rbYes
-            Else
-                .isRenewable = rbNo
-            End If
-
-            .PrintLayout = txtPrintLayout.Text
-            .SchemeName = txtSchemeName.Text
-        End With
-
-        Dim SpecModify As New ItemSpecs
-        For Each row As DataGridViewRow In dgSpecs.Rows
-
-            With SpecModify
-                .SpecID = row.Cells(0).Value
-                .ShortCode = row.Cells(1).Value
-                .SpecName = row.Cells(2).Value
-                .SpecType = row.Cells(3).Value
-                .SpecLayout = row.Cells(4).Value
-                .UnitOfMeasure = row.Cells(5).Value
-                .isRequired = row.Cells(6).Value
-
-                If .SpecName Is Nothing Or .SpecType Is Nothing _
-                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
-                    Exit For
-                End If
-
-            End With
-            SpecModify.ItemID = SelectedItem.ID
-            SpecModify.UpdateSpecs()
-        Next
-
-        ItemModify.Update()
-
-        MsgBox("Transaction Updated", MsgBoxStyle.Information)
-        btnSave.Enabled = True
-        btnUpdate.Text = "&Update"
-        clearfields()
-    End Sub
-
-    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
-
-        frmItemList.Show()
-
-        frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
-        frmItemList.btnSearch.PerformClick()
-
-        btnUpdate.Text = "&Update".ToString
-        btnUpdate.Enabled = True
-        txtSearch.Clear()
-        dgSpecs.Rows.Clear()
-        clearfields()
-    End Sub
 
     Private Sub searchbutton()
         If txtSearch.Text = "" Then Exit Sub
@@ -284,34 +153,161 @@ Public Class frmAdminPanel
         dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 
+    Private Sub dgSpecs_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+        If btnUpdate.Text = "&Modify" Then
+            If e.KeyCode = Keys.Enter Then
+                btnUpdate.PerformClick()
+            End If
+        Else
+            btnSave.PerformClick()
+        End If
+    End Sub
+
+
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not isValid() Then Exit Sub
+
+        Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim ItemSave As New ItemClass
+        Dim ColItemsSpecs As New CollectionItemSpecs
+
+        With ItemSave
+            .ItemClass = txtClassification.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
+
+            If rdbYes.Checked = True Then
+                .isRenewable = rbYes
+            Else
+                .isRenewable = rbNo
+            End If
+
+            .PrintLayout = txtPrintLayout.Text
+            .created_at = CurrentDate
+            .SchemeName = cboSchemeName.Text
+
+        End With
+
+
+        For Each row As DataGridViewRow In dgSpecs.Rows
+            SpecSave = New ItemSpecs
+            With SpecSave
+                .ShortCode = row.Cells(1).Value
+                .SpecName = row.Cells(2).Value
+                .SpecType = row.Cells(3).Value
+                .SpecLayout = row.Cells(4).Value
+                .UnitOfMeasure = row.Cells(5).Value
+                .isRequired = row.Cells(6).Value
+
+                If .SpecName Is Nothing Or .SpecType Is Nothing _
+                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
+                    Exit For
+                End If
+            End With
+
+            ColItemsSpecs.Add(SpecSave)
+        Next
+
+        ItemSave.ItemSpecifications = ColItemsSpecs
+        ItemSave.SaveItem()
+
+        MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        clearfields()
+    End Sub
+
+    Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+
+        If Not isValid() Then Exit Sub
+
+        If btnUpdate.Text = "&Update".ToString Then
+            btnUpdate.Text = "&Modify".ToString
+            reaDOnlyFalse()
+            Exit Sub
+        End If
+
+        Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim ColItemsSpecs As New CollectionItemSpecs
+        Dim ItemModify As New ItemClass
+
+        With ItemModify
+            .ItemClass = txtClassification.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
+            .updated_at = CurrentDate
+            .ID = SelectedItem.ID
+
+            If rdbYes.Checked = True Then
+                .isRenewable = rbYes
+            Else
+                .isRenewable = rbNo
+            End If
+
+            .PrintLayout = txtPrintLayout.Text
+            .SchemeName = cboSchemeName.Text
+        End With
+
+        Dim SpecModify As New ItemSpecs
+        For Each row As DataGridViewRow In dgSpecs.Rows
+
+            With SpecModify
+                .SpecID = row.Cells(0).Value
+                .ShortCode = row.Cells(1).Value
+                .SpecName = row.Cells(2).Value
+                .SpecType = row.Cells(3).Value
+                .SpecLayout = row.Cells(4).Value
+                .UnitOfMeasure = row.Cells(5).Value
+                .isRequired = row.Cells(6).Value
+
+                If .SpecName Is Nothing Or .SpecType Is Nothing _
+                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
+                    Exit For
+                End If
+
+            End With
+            SpecModify.ItemID = SelectedItem.ID
+            SpecModify.UpdateSpecs()
+        Next
+
+        ItemModify.Update()
+
+        MsgBox("Transaction Updated", MsgBoxStyle.Information)
+        btnSave.Enabled = True
+        btnUpdate.Text = "&Update"
+        clearfields()
+    End Sub
+
+    Private Sub btnClose_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnSearch_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
+
+        frmItemList.Show()
+
+        frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
+        frmItemList.btnSearch.PerformClick()
+
+        btnUpdate.Text = "&Update".ToString
+        btnUpdate.Enabled = True
+        txtSearch.Clear()
+        dgSpecs.Rows.Clear()
+        clearfields()
+    End Sub
  
 
-    '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
-    Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
-        If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
-
-        If cmbModuleName.Visible Then
-            Select Case cmbModuleName.Text
-                Case "Money Transfer"
-                    ExportModType = ModuleType.MoneyTransfer
-                Case "Branch"
-                    ExportModType = ModuleType.Branch
-                Case "Cash"
-                    ExportModType = ModuleType.Cash
-                Case "Item Class"
-                    ExportModType = ModuleType.ItemClass
-                Case "Rate"
-                    ExportModType = ModuleType.Rate
-                Case "Currency"
-                    ExportModType = ModuleType.Currency
-            End Select
-        End If
-        GenerateModule()
-        lvModule.View = View.Details
-        lvModule.CheckBoxes = True
-        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
-       
-    End Sub
+    '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
 
     Enum ModuleType As Integer
         MoneyTransfer = 0
@@ -535,30 +531,13 @@ Public Class frmAdminPanel
 
 #End Region
 
-    Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
-        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
-        SFD.ShowDialog()
 
-        MsgBox("Data Exported", MsgBoxStyle.Information)
-
-        txtReferenceNumber.Text = ""
-        cmbModuleName.SelectedItem = Nothing
-
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
-
-    End Sub
-
-    Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
+    Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
     End Sub
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
-        oFd.ShowDialog()
-    End Sub
-
-    Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
+    Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
         Dim fn As String = oFd.FileName
 
         ShowDataInLvw(FileChecker(fn), lvModule)
@@ -608,25 +587,47 @@ Public Class frmAdminPanel
         Next
     End Sub
 
-    Private Sub dgSpecs_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dgSpecs.KeyDown
-        If btnUpdate.Text = "&Modify" Then
-            If e.KeyCode = Keys.Enter Then
-                btnUpdate.PerformClick()
-            End If
-        Else
-            btnSave.PerformClick()
+   
+
+    Private Sub cmbModuleName_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
+        If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
+
+        If cmbModuleName.Visible Then
+            Select Case cmbModuleName.Text
+                Case "Money Transfer"
+                    ExportModType = ModuleType.MoneyTransfer
+                Case "Branch"
+                    ExportModType = ModuleType.Branch
+                Case "Cash"
+                    ExportModType = ModuleType.Cash
+                Case "Item Class"
+                    ExportModType = ModuleType.ItemClass
+                Case "Rate"
+                    ExportModType = ModuleType.Rate
+                Case "Currency"
+                    ExportModType = ModuleType.Currency
+            End Select
         End If
+        GenerateModule()
+        lvModule.View = View.Details
+        lvModule.CheckBoxes = True
+        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
     End Sub
 
-    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-        Me.Close()
+    Private Sub btnExport_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
+        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
+        SFD.ShowDialog()
+
+        MsgBox("Data Exported", MsgBoxStyle.Information)
+
+        txtReferenceNumber.Text = ""
+        cmbModuleName.SelectedItem = Nothing
+
+        lvModule.Columns.Clear()
+        lvModule.Items.Clear()
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
+    Private Sub btnBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        oFd.ShowDialog()
     End Sub
-
-  
 End Class
