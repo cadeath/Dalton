@@ -868,3 +868,5 @@ At line 1, column 63
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
 [09/26/2016 09:41:50] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
 [09/26/2016 09:41:58] SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4
+[09/26/2016 09:53:17] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
+[09/26/2016 09:53:25] SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4

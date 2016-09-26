@@ -71,6 +71,7 @@ Public Class frmAdminPanel
         txtSearch.Text = ""
         txtReferenceNumber.Text = ""
         cmbModuleName.Text = ""
+        txtSchemeName.Text = ""
         dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
 
@@ -90,8 +91,9 @@ Public Class frmAdminPanel
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
+        If txtSchemeName.Text = "" Then txtSchemeName.Focus() : Return False
         If dgSpecs.CurrentCell.Value Is Nothing Then dgSpecs.Focus() : Return False
-      
+
         Return True
     End Function
 
@@ -117,6 +119,7 @@ Public Class frmAdminPanel
 
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
+            .SchemeName = txtSchemeName.Text
 
         End With
 

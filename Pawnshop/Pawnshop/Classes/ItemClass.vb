@@ -114,6 +114,16 @@
         End Set
     End Property
 
+    Private _SchemeName As String
+    Public Property SchemeName() As String
+        Get
+            Return _SchemeName
+        End Get
+        Set(ByVal value As String)
+            _SchemeName = value
+        End Set
+    End Property
+
     Private _itemSpecs As CollectionItemSpecs
     Public Property ItemSpecifications() As CollectionItemSpecs
         Get
@@ -149,7 +159,7 @@
 
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
-
+            _schemeName = ItemClass("SchemeName")
         End With
     End Sub
 
@@ -170,6 +180,7 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
+            .Item("SchemeName") = schemename
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -218,6 +229,7 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
+            .Item("SchemeName") = schemename
         End With
         database.SaveEntry(ds, False)
     End Sub

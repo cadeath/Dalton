@@ -88,17 +88,17 @@ Partial Class frmInterestScheme
         '
         'txtRemarks
         '
-        Me.txtRemarks.Location = New System.Drawing.Point(269, 18)
+        Me.txtRemarks.Location = New System.Drawing.Point(270, 52)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(258, 95)
+        Me.txtRemarks.Size = New System.Drawing.Size(258, 58)
         Me.txtRemarks.TabIndex = 14
         Me.txtRemarks.WatermarkColor = System.Drawing.Color.Gray
         Me.txtRemarks.WatermarkText = "Remarks"
         '
         'txtPenalty
         '
-        Me.txtPenalty.Location = New System.Drawing.Point(74, 94)
+        Me.txtPenalty.Location = New System.Drawing.Point(75, 88)
         Me.txtPenalty.Name = "txtPenalty"
         Me.txtPenalty.Size = New System.Drawing.Size(122, 22)
         Me.txtPenalty.TabIndex = 13
@@ -107,7 +107,7 @@ Partial Class frmInterestScheme
         '
         'txtInterest
         '
-        Me.txtInterest.Location = New System.Drawing.Point(74, 68)
+        Me.txtInterest.Location = New System.Drawing.Point(75, 53)
         Me.txtInterest.Name = "txtInterest"
         Me.txtInterest.Size = New System.Drawing.Size(122, 22)
         Me.txtInterest.TabIndex = 12
@@ -116,9 +116,9 @@ Partial Class frmInterestScheme
         '
         'txtDayTo
         '
-        Me.txtDayTo.Location = New System.Drawing.Point(74, 44)
+        Me.txtDayTo.Location = New System.Drawing.Point(269, 16)
         Me.txtDayTo.Name = "txtDayTo"
-        Me.txtDayTo.Size = New System.Drawing.Size(122, 22)
+        Me.txtDayTo.Size = New System.Drawing.Size(258, 22)
         Me.txtDayTo.TabIndex = 11
         Me.txtDayTo.WatermarkColor = System.Drawing.Color.Gray
         Me.txtDayTo.WatermarkText = "DayTo"
@@ -135,7 +135,7 @@ Partial Class frmInterestScheme
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(203, 20)
+        Me.Label5.Location = New System.Drawing.Point(204, 54)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(63, 16)
         Me.Label5.TabIndex = 9
@@ -144,7 +144,7 @@ Partial Class frmInterestScheme
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(21, 97)
+        Me.Label4.Location = New System.Drawing.Point(22, 91)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(53, 16)
         Me.Label4.TabIndex = 7
@@ -153,7 +153,7 @@ Partial Class frmInterestScheme
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(21, 70)
+        Me.Label3.Location = New System.Drawing.Point(22, 55)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(51, 16)
         Me.Label3.TabIndex = 5
@@ -162,7 +162,7 @@ Partial Class frmInterestScheme
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(19, 46)
+        Me.Label2.Location = New System.Drawing.Point(210, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(53, 16)
         Me.Label2.TabIndex = 3
