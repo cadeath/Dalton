@@ -1,0 +1,10 @@
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\bin\Release\W3W1LH4CKU.FDB
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\bin\Release\Admin.exe
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\bin\Release\Admin.pdb
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\bin\Release\Admin.xml
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Release\Admin.frmMain.resources
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Release\Admin.Resources.resources
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Release\Admin.vbproj.GenerateResource.Cache
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Release\Admin.exe
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Release\Admin.xml
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Admin\obj\x86\Release\Admin.pdb

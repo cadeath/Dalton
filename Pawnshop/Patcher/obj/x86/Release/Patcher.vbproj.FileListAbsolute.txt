@@ -1,0 +1,13 @@
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\bin\Release\README.txt
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\bin\Release\bdo
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\bin\Release\Patcher.exe
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\bin\Release\Patcher.pdb
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\bin\Release\Patcher.xml
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\bin\Release\System.Runtime.Serialization.dll
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\obj\x86\Release\Patcher.frmMain.resources
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\obj\x86\Release\Patcher.frmMain2.resources
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\obj\x86\Release\Patcher.Resources.resources
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\obj\x86\Release\Patcher.vbproj.GenerateResource.Cache
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\obj\x86\Release\Patcher.exe
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\obj\x86\Release\Patcher.xml
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Patcher\obj\x86\Release\Patcher.pdb

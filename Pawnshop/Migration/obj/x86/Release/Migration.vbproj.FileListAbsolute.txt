@@ -1,0 +1,9 @@
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\bin\Release\Migration.exe
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\bin\Release\Migration.pdb
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\bin\Release\Migration.xml
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Release\Migration.frmMain.resources
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Release\Migration.Resources.resources
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Release\Migration.vbproj.GenerateResource.Cache
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Release\Migration.exe
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Release\Migration.xml
+C:\Users\Blade\Documents\GitHub\Dalton\Pawnshop\Migration\obj\x86\Release\Migration.pdb

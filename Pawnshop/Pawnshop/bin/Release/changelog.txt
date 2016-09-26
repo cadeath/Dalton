@@ -1,0 +1,164 @@
+CHANGELOG
+Version 1.2.3.7
+ - Add Audit Console (Base on Maam Irish Needs)
+ - Add RePrint indicator on PT and OR
+ - Add Disable User Account
+ - Add Void Report
+ - Add Data Extractor
+ - No Posting if No Entries, place atleast zero (0) value
+ - Fix Pawning Bug
+ - Fix Minor Problems on Journal Entries
+ - Fix on Displaying Computation
+ - Fix Redeem Report
+ - Fix Minor Journal Entry Problem
+ - Fix Item Pullout Report Date Problem
+ - Fix Redemption Report Summary
+ - Fix Load Report Void display
+ - Sanitize fields
+
+Version 1.2.2.12
+ - Add Change Password
+ - Add New Privileges
+ - Include Appraiser
+ - Include Reset Password
+ - Include Advance Report
+ - Include Delete User in User Management
+ - Include Item Type Selection on Audit Report
+ - Fix Report Money Transfer, Cash In/Out, Dollar (Void Item Display)
+
+Version 1.2.2.9
+ - Fix Monthly computation for Cellphone
+ - Fix Journal Entry Summary
+ - Fix Money Transfer Send In/Payout Name
+ - Fix Minor Change Rate Problem
+ - Fix Loan Register Report Unsort PT
+ - Fix OR Sequence Report
+ - Fix Void Errors
+ - Fix Error on TRANSID
+ - Add Foreign Currency
+ - Add Pawnticket and OR Number every print 
+ - Add New Design for About Us
+ - Add Cash In Bank SAP Account in Settings
+ - Add Audit Report base from the Memo # 06-16-1099
+ - Add One-Time Password
+ - Add Auction Monthly Reports
+ - Add Pawning Renewal Notification (For ITEMTYPE CEL, 5x)
+ - Add Brackting Report
+ - Add Renewal Monthly Break Down
+ - Include Auto Patch up to db1.2 v1.2
+ - Include BDO and Smart Money Report in Cash In/Out
+ - Enhance Pawning Search and Interface
+ - Remove Journal Entries Sorting
+
+Version 1.2.0.1
+ - Fix monthly computation for Cellphone
+ - Include Auto Patch up to db1.2 v1.2
+ - Add Pawnticket and OR Number every print
+
+Version 1.2
+ - Fix Current Rate for Active Loans
+ - Fix Change Rate for New Loans only
+ - Fix Appraiser don't appear in PT for non-jewel
+ - Add Monthly Report - Transaction Count
+ - Add Pawner Summary List
+ - Add Monthly Computation
+ - Add Cash Count Prevention
+ - Include Changelog on Menu
+ - Patch Up Database
+
+Version 1.1.2.5
+ - Fix Report Activate/Deactivate
+ - Fix Report PERA PADALA to display PMFTC ME#/MR#
+ - Fix Report Termilogy Payout/Send In
+ - Modify Daily Time Log Reports
+
+Version 1.1.2.4
+ - Add Username on PT
+ - Add Item Type on Loan Register - Redeem Report
+ - Add Auction Monthly Report
+ - Add Monthly Money Transfer Report for BSP
+ - Add BSP Report Extract
+ - Add Dollar Daily Report
+ - FIX Pawning without CUSTOMER error 
+ - FIX Triplicate with Pawner name
+ - FIX in JE round off
+ - FIX Report - Hourly Report
+ - FIX Report Size
+ - FIX Money Transfer Report Header
+ - Package - Include Segregated layout
+ - Package - Include InstallPath at Register
+
+Version 1.1.1.2
+ - FIX pawning save data.
+ - FIX New Loan/Renew Register
+ - FIX Redeem Register
+ - FIX Monthly Loan Reports
+ - FIX Renew JE for more than 1Mon
+ - FIX slow Money Transfer saving
+ - Added Cash InOut Daily Summary
+ - Add PT Claim Sub, Pawner
+ - Add OLD PT in PT
+ - Include Daily Insurance Report
+ - Include Additional Loan Register
+ - Include Penalty on Redeem Renew Monthly
+ - Include BRGY in PT Address
+
+Version 1.1.1.1
+ - Pawnticket Renewal, show old PT#
+ - Redemption don't SAVE Interest and Penalty.
+
+Version 1.1.1.0c
+ - Enhance pawning computation codes
+ - Money Transfer Report
+ - REDEEM MORE THAN ONE(1) MONTH over charge(double interest)
+ - BUG on PAWNING not AUTOCOMPUTE
+ - Monthly Report for Money Transfer
+ - Add another services in Pera Padala
+ - Add CashInOut Button for BDO ATM CashOut
+ - No Redundant PT/OR
+ - Fix Outstanding Loan
+
+Version 1.1.1.0
+ - Add Insurance Report
+ - Cash Count Sheet disable when store is open
+ - Insurance Ref# length increase
+ - RF SAP Code Update
+
+Version 1.1.0.5
+ - Revise Segregation List Report
+ - Item Pullout per Category Report
+ - Add change rate module
+ - Include BATCH FILE for backup
+ - Fix ITEM PULLOUT
+ - include BACKUP.BAT
+
+Version 1.1.0.4
+ - Add Entries for Segregation
+
+Version 1.1.0.3
+ - Item Pullout problem
+ - Migration double name can causes wrong name
+ - No Description will not be imported
+ - POSAdmin can void
+ - Fix Reports
+
+Version 1.1.0.1
+ - Fixing Pawning Print Button
+ - Add Smart Money from Perfecom, Cash In/Out
+ - iREMIT change into GPRS - iRemit to GPRS
+
+Version 1.1
+ - Enhancing PAWNING MODULE
+ - Revise Early Redeem
+ - Limit First 100 Clients to be display
+
+Version 1.0.1
+ - Change OR layout from 4.5 to 9" height
+ - OR includes the duplicate
+ - Loan, Money Transfer and Client TAB fix
+ - Money Transfer - Enable multiple encoding
+ - Money Transfer - swap label for Pay-Out and Send In
+ - Sequence Report - Remove Borrowings and Insurance for redundancy
+ - Sequence Report - Categories (Pera Padala ONLY)
+ - Loan Register Report - Remove PHP sign to increase space
+ - Loan - Recompute when changing TYPE

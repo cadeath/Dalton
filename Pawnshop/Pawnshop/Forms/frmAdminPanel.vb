@@ -628,8 +628,5 @@ Public Class frmAdminPanel
         End If
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim SelectedThings As String = dgSpecs.SelectedCells.ToString
-        MsgBox(SelectedThings)
-    End Sub
+  
 End Class
