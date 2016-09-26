@@ -1,4 +1,5 @@
-﻿Public Class frmInterestScheme
+﻿
+Public Class frmInterestScheme
     Dim SelectedScheme As InterestScheme
 
     Dim SchemeModify As New InterestScheme
@@ -20,7 +21,7 @@
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If txtSchemeName.Text = "" Then txtSchemeName.Focus()
         If txtDescription.Text = "" Then txtDescription.Focus()
-        If lvIntScheme.Items.Count <= 0 Then Exit Sub
+        If lvIntscheme.Items.Count <= 0 Then Exit Sub
 
         Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -35,7 +36,7 @@
         End With
 
 
-        For Each item As ListViewItem In lvIntScheme.Items
+        For Each item As ListViewItem In lvIntscheme.Items
             Dim SchemeInterest As New Scheme_Interest
             With SchemeInterest
                 .DayFrom = item.SubItems(1).Text
@@ -52,7 +53,7 @@
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()
-        lvIntScheme.Items.Clear()
+        lvIntscheme.Items.Clear()
         txtSchemeName.Text = ""
         txtDescription.Text = ""
     End Sub
@@ -109,7 +110,7 @@
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If txtSchemeName.Text = "" Then txtSchemeName.Focus()
         If txtDescription.Text = "" Then txtDescription.Focus()
-        If lvIntScheme.Items.Count <= 0 Then Exit Sub
+        If lvIntscheme.Items.Count <= 0 Then Exit Sub
 
         If btnUpdate.Text = "&Update".ToString Then
             btnUpdate.Text = "&Modify".ToString
@@ -130,7 +131,7 @@
         SchemeModify.Description = txtDescription.Text
         SchemeModify.Update()
 
-        For Each item As ListViewItem In lvIntScheme.Items
+        For Each item As ListViewItem In lvIntscheme.Items
             Dim SchemeInterest As New Scheme_Interest
 
             With SchemeInterest
@@ -151,7 +152,7 @@
 
         btnSave.Enabled = True
         clearfields()
-        lvIntScheme.Items.Clear()
+        lvIntscheme.Items.Clear()
         txtSchemeName.Text = ""
         txtDescription.Text = ""
         btnAdd.Enabled = True
@@ -171,14 +172,14 @@
     End Sub
 
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
-        If lvIntScheme.SelectedItems.Count <= 0 Then Exit Sub
-        lvIntScheme.Items.RemoveAt(lvIntScheme.SelectedIndices(0))
-        For Each item As ListViewItem In lvIntScheme.SelectedItems
+        If lvIntscheme.SelectedItems.Count <= 0 Then Exit Sub
+        lvIntscheme.Items.RemoveAt(lvIntscheme.SelectedIndices(0))
+        For Each item As ListViewItem In lvIntscheme.SelectedItems
             item.Remove()
         Next
     End Sub
 
-   
+
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
 
         Dim secured_str As String = txtSearch.Text
@@ -191,7 +192,7 @@
 
         btnUpdate.Text = "&Update".ToString
         btnUpdate.Enabled = True
-        lvIntScheme.Items.Clear()
+        lvIntscheme.Items.Clear()
         txtDescription.Clear()
         txtSchemeName.Clear()
 
@@ -219,7 +220,7 @@
         Label9.Text = "Update"
     End Sub
 
-    
+
     Private Sub txtDayFrom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayFrom.KeyPress
         DigitOnly(e)
     End Sub
@@ -251,4 +252,6 @@
             End If
         End If
     End Sub
+
+   
 End Class
