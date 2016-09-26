@@ -20,10 +20,10 @@
     Private Sub frm_PanelTextbox_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtSearch.Clear()
         txtSearch.Focus()
-        If frmPawningItemNew.lvSpec.FocusedItem.SubItems(3).Text = "Integer" Then
-            isNumber = True
-        Else
+        If frmPawningItemNew.lvSpec.FocusedItem.SubItems(3).Text = "String" Then
             isNumber = False
+        Else
+            isNumber = True
         End If
     End Sub
 
