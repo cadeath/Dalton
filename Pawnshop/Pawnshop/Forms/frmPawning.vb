@@ -68,7 +68,7 @@
         st &= IIf(chkRedeem.Checked, "1", "0")
         st &= IIf(chkSeg.Checked, "1", "0")
 
-        Dim mySql As String = "SELECT FIRST 100 * FROM devNewPawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
+        Dim mySql As String = "SELECT FIRST 100 * FROM tblPawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
         'mySql = "SELECT * FROM tblpawn WHERE LoanDate <= '" & CurrentDate.ToShortDateString
         If st = "1000" Then
             mySql &= "' AND (Status = 'L' OR Status = 'R') ORDER BY LoanDate ASC, PAWNID ASC"
