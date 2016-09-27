@@ -386,7 +386,7 @@ Public Class frmExtractor
 
         Dim mySql As String = "SELECT * FROM EXPIRY_LIST"
         mySql &= vbCr & " WHERE "
-        mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", sd.ToShortDateString, ed.ToShortDateString)
+        mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", GetFirstDate(sd).ToShortDateString, GetLastDate(ed).ToShortDateString)
 
         Dim ds_expiry As DataSet = LoadSQL(mySql)
 
