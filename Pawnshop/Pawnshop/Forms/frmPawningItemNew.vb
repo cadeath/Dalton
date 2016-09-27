@@ -34,7 +34,7 @@ Public Class frmPawningItemNew
     Private isEarlyRedeem As Boolean = False
     Private earlyDays As Integer = 0
     Private unableToSave As Boolean = False
-    Private daltonCompute As PawningDalton
+    Private daltonCompute As PawnCalculation
 
     Private PRINT_PTOLD As Integer = 0
     Private PRINT_PTNEW As Integer = 0
@@ -300,7 +300,7 @@ Public Class frmPawningItemNew
             intHash = TBLINT_HASH
         End If
 
-        daltonCompute = New PawningDalton(itemPrincipal, txtClassification.Text, CurrentDate, matuDateTmp, isDPJ, intHash)
+        daltonCompute = New PawnCalculation(itemPrincipal, txtClassification.Text, CurrentDate, matuDateTmp, isDPJ, intHash)
 
         With daltonCompute
             daysDue = .DaysOverDue

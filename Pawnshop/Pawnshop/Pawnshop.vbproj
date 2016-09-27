@@ -392,6 +392,8 @@
     <Compile Include="Panel\frm_PanelYesNo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PawnModule\PawnCalculation.vb" />
+    <Compile Include="PawnModule\PawnTicket2.vb" />
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
       <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
     </Compile>
