@@ -143,16 +143,6 @@
         End Set
     End Property
 
-    Private _pawnItemID As Integer
-    Public Property PawnItemID() As Integer
-        Get
-            Return _pawnItemID
-        End Get
-        Set(ByVal value As Integer)
-            _pawnItemID = value
-        End Set
-    End Property
-
     Private _pawnItem As PawnItem
     Public Property PawnItem() As PawnItem
         Get
@@ -243,16 +233,6 @@
         End Set
     End Property
 
-    Private _schemeID As Integer
-    Public Property SchemeID() As Integer
-        Get
-            Return _schemeID
-        End Get
-        Set(ByVal value As Integer)
-            _schemeID = value
-        End Set
-    End Property
-
     Private _renewDue As Double
     Public Property RenewDue() As Double
         Get
@@ -306,8 +286,13 @@
 
 #Region "Procedures and Functions"
     Public Sub Save_PawnTicket()
-        Dim mySql As String = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
-        Dim ds As DataSet = LoadSQL(mySql, MainTable)
+        'Declaration
+        Dim mySql As String
+        Dim ds As DataSet
+
+        'Save PawnTicket
+        mySql = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
+        ds = LoadSQL(mySql, MainTable)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(MainTable).NewRow
@@ -325,7 +310,7 @@
             .Item("ENCODERID") = _encoderID
             .Item("CLAIMERID") = _claimerID
             .Item("CLIENTID") = _clientID
-            .Item("PAWNITEMID") = _pawnItemID
+            .Item("PAWNITEMID") = _pawnItem.ID
             .Item("ORDATE") = _ORDate
             .Item("ORNUM") = _ORNum
             .Item("PENALTY") = _penalty
@@ -334,11 +319,10 @@
             .Item("EARLYREDEEM") = _earlyRedeem
             .Item("DELAYINTEREST") = _delayInt
             .Item("ADVINT") = _advInt
-            .Item("SCHEMEID") = _schemeID
             .Item("RENEWDUE") = _renewDue
             .Item("REDEEMDUE") = _redeemDue
             .Item("SERVICECHARGE") = _serviceCharge
-            .Item("CREATED_AT") = _created_At
+            .Item("CREATED_AT") = Now.ToShortDateString
         End With
         ds.Tables(MainTable).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -379,7 +363,6 @@
             _encoderID = .Item("ENCODERID")
             _claimerID = .Item("CLAIMERID")
             _clientID = .Item("CLIENTID")
-            _pawnItemID = .Item("PAWNITEMID")
             _ORDate = .Item("ORDATE")
             _ORNum = .Item("ORNUM")
             _penalty = .Item("PENALTY")
@@ -394,6 +377,8 @@
             _serviceCharge = .Item("SERVICECHARGE")
             _created_At = .Item("CREATED_AT")
             _updated_At = .Item("UPDATED_AT")
+
+            _pawnItem.Load_PawnItem(.Item("PAWNITEMID"))
         End With
     End Sub
 #End Region

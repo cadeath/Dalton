@@ -1,6 +1,10 @@
 ﻿Public Class dev_PT_test
     Private pawnClient As New Client
+
+    Private PawnClass As New ItemClass
     Private ItemClass_ht As New Hashtable
+
+    Private selID As Integer
 
     Private Sub dev_PT_test_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Load_Client()
@@ -55,16 +59,32 @@
     End Function
 
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
+        Dim pawnSpecs As New CollectionPawnItemSpecs
+        PawnClass.LoadItem(GetItemClassIDByName(cboItem.Text))
+        Dim i As Integer = 0
+        For Each spec As ItemSpecs In PawnClass.ItemSpecifications
+            Dim spc As New PawnItemSpec
+
+            spc.UnitOfMeasure = spec.UnitOfMeasure
+            spc.SpecName = spec.SpecName
+            spc.SpecType = spec.SpecType
+            spc.SpecsValue = lvSpecs.Items(i).SubItems(1).Text
+            spc.isRequired = spec.isRequired
+            pawnSpecs.Add(spc)
+
+            i += 1
+        Next
+
         Dim newItem As New PawnItem
         With newItem
             .ItemID = GetItemClassIDByName(cboItem.Text)
             .ItemClass = cboItem.Text
+            .SchemeID = 1
             .Status = "A"
+            .PawnItemSpecs = pawnSpecs
 
             .Save_PawnItem()
         End With
-
-        Dim lastID As Integer = newItem.Get_LastID
 
         Dim newPT As New PawnTicket2
         With newPT
@@ -81,9 +101,34 @@
             .AppraiserID = 1
             .EncoderID = 1
             .ClaimerID = 0
-            .PawnItemID = lastID
+            .ClientID = pawnClient.ID
+            .PawnItem = newItem
 
             .Save_PawnTicket()
         End With
+    End Sub
+
+    Private Sub lvSpecs_DoubleClick(sender As Object, e As System.EventArgs) Handles lvSpecs.DoubleClick
+        Dim idx As Integer = lvSpecs.FocusedItem.Index
+        Console.WriteLine(idx)
+
+        selID = idx
+        txtValue.Text = ""
+        txtValue.Focus()
+    End Sub
+
+    Private Sub cboItem_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboItem.SelectedIndexChanged
+        PawnClass = New ItemClass
+        PawnClass.LoadItem(GetItemClassIDByName(cboItem.Text))
+
+        lvSpecs.Items.Clear()
+        For Each spec As ItemSpecs In PawnClass.ItemSpecifications
+            Dim lv As ListViewItem = lvSpecs.Items.Add(String.Format("{0}[{1}]", spec.SpecName, spec.UnitOfMeasure))
+            lv.SubItems.Add("")
+        Next
+    End Sub
+
+    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
+        lvSpecs.Items(selID).SubItems(1).Text = txtValue.Text
     End Sub
 End Class

@@ -29,6 +29,11 @@ Partial Class dev_PT_test
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.lvSpecs = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.txtValue = New System.Windows.Forms.TextBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cboClient
@@ -94,11 +99,51 @@ Partial Class dev_PT_test
         Me.Button4.Text = "Save New PT"
         Me.Button4.UseVisualStyleBackColor = True
         '
+        'lvSpecs
+        '
+        Me.lvSpecs.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lvSpecs.FullRowSelect = True
+        Me.lvSpecs.GridLines = True
+        Me.lvSpecs.Location = New System.Drawing.Point(12, 91)
+        Me.lvSpecs.Name = "lvSpecs"
+        Me.lvSpecs.Size = New System.Drawing.Size(232, 144)
+        Me.lvSpecs.TabIndex = 7
+        Me.lvSpecs.UseCompatibleStateImageBehavior = False
+        Me.lvSpecs.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Name"
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Value"
+        Me.ColumnHeader2.Width = 118
+        '
+        'txtValue
+        '
+        Me.txtValue.Location = New System.Drawing.Point(12, 241)
+        Me.txtValue.Name = "txtValue"
+        Me.txtValue.Size = New System.Drawing.Size(151, 20)
+        Me.txtValue.TabIndex = 8
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(169, 239)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(75, 23)
+        Me.Button5.TabIndex = 9
+        Me.Button5.Text = "Update"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
         'dev_PT_test
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(709, 348)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.txtValue)
+        Me.Controls.Add(Me.lvSpecs)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label1)
@@ -119,4 +164,9 @@ Partial Class dev_PT_test
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents lvSpecs As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents txtValue As System.Windows.Forms.TextBox
+    Friend WithEvents Button5 As System.Windows.Forms.Button
 End Class

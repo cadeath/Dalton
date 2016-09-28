@@ -3,13 +3,24 @@
     Private SubTable As String = "tblSpecs"
 
 #Region "Properties"
-    Private _itemID As Double
-    Public Property ID() As Double
+
+    Private _itemID As Integer
+    Public Overridable Property ID() As Integer
         Get
             Return _itemID
         End Get
-        Set(ByVal value As Double)
+        Set(ByVal value As Integer)
             _itemID = value
+        End Set
+    End Property
+
+    Private _itemClassID As Integer
+    Public Property ItemClassID() As Integer
+        Get
+            Return _itemClassID
+        End Get
+        Set(ByVal value As Integer)
+            _itemClassID = value
         End Set
     End Property
 
@@ -114,7 +125,7 @@
     End Property
 
     Private _schemeID As Integer
-    Public Property SchemeID() As Integer
+    Public Overridable Property SchemeID() As Integer
         Get
             Return _schemeID
         End Get
@@ -122,7 +133,6 @@
             _schemeID = value
         End Set
     End Property
-
 
     Private _itemSpecs As CollectionItemSpecs
     Public Property ItemSpecifications() As CollectionItemSpecs
@@ -147,7 +157,7 @@
             Exit Sub
         End If
         With ds.Tables(0).Rows(0)
-            _itemID = .Item("ItemID")
+            _itemClassID = .Item("ItemID")
             _itemClass = .Item("ItemClass")
             _category = .Item("ItemCategory")
 
@@ -164,7 +174,7 @@
             _schemeID = .Item("Scheme_ID")
         End With
 
-        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemClassID)
         ds.Clear()
         ds = LoadSQL(mySql, SubTable)
 
@@ -180,6 +190,11 @@
     Public Sub Save_ItemClass()
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            MsgBox("Class already existed", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(0).NewRow
@@ -200,10 +215,10 @@
 
         mySql = "SELECT * FROM tblItem ORDER BY ItemID DESC ROWS 1"
         ds = LoadSQL(mySql, MainTable)
-        _itemID = ds.Tables(MainTable).Rows(0).Item("ItemID")
+        _itemClassID = ds.Tables(MainTable).Rows(0).Item("ItemID")
 
         For Each ItemSpec As ItemSpecs In ItemSpecifications
-            ItemSpec.ItemID = _itemID
+            ItemSpec.ItemID = _itemClassID
             ItemSpec.SaveSpecs()
         Next
     End Sub
@@ -225,8 +240,7 @@
 
     Public Sub Update()
 
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemID)
-
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemClassID)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         If ds.Tables(0).Rows.Count <> 1 Then

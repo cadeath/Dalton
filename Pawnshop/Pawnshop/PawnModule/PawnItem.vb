@@ -5,9 +5,8 @@
     Private SubTable As String = "PI1"
 
 #Region "Properties"
-
     Private _pawnItemID As Integer = 0
-    Public Property PawnItemID() As Integer
+    Public Overrides Property ID() As Integer
         Get
             Return _pawnItemID
         End Get
@@ -23,6 +22,16 @@
         End Get
         Set(ByVal value As Integer)
             _itemID = value
+        End Set
+    End Property
+
+    Private _schemeID As Integer
+    Public Overrides Property SchemeID() As Integer
+        Get
+            Return _schemeID
+        End Get
+        Set(ByVal value As Integer)
+            _schemeID = value
         End Set
     End Property
 
@@ -76,6 +85,17 @@
         End Set
     End Property
 
+    Private _pawnItemSpecs As CollectionPawnItemSpecs
+    Public Property PawnItemSpecs() As CollectionPawnItemSpecs
+        Get
+            Return _pawnItemSpecs
+        End Get
+        Set(ByVal value As CollectionPawnItemSpecs)
+            _pawnItemSpecs = value
+        End Set
+    End Property
+
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -85,7 +105,7 @@
         Dim ds As DataSet
         Dim isNew As Boolean = False
 
-        Me.LoadItem(_itemID)
+        Me.LoadItem(_itemID) ' Load ItemClass
         ' Saving New PawnItem
         If _pawnItemID = 0 Then
             mySql = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
@@ -108,8 +128,9 @@
             If isNew Then
                 .Item("ITEMID") = _itemID
                 .Item("ITEMCLASS") = Me.ItemClass
+                .Item("SCHEME_ID") = _schemeID
                 .Item("RENEWALCNT") = _renewalCnt
-                .Item("CREATED_AT") = _created_At
+                .Item("CREATED_AT") = Now.ToShortDateString
             Else
                 If Not _withdrawDate = Nothing Then .Item("WITHDRAWDATE") = _withdrawDate
                 .Item("STATUS") = _status
@@ -125,6 +146,16 @@
             Next
         End If
         database.SaveEntry(ds, isNew)
+
+        mySql = String.Format("SELECT * FROM {0} ORDER BY PAWNITEMID DESC ROWS 1", MainTable)
+        ds = LoadSQL(mySql)
+        _pawnItemID = ds.Tables(0).Rows(0).Item("PAWNITEMID")
+
+        For Each itmSpecs As PawnItemSpec In _pawnItemSpecs
+            itmSpecs.PawnItemID = _pawnItemID
+            itmSpecs.Save_PawnItemSpecs()
+        Next
+
     End Sub
 
     Public Sub Load_PawnItem(id As Integer)
@@ -146,7 +177,7 @@
         End With
     End Sub
 
-    Public Function Get_LastID() As Integer
+    Public Function Get_PawnItemLastID() As Integer
         Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY PAWNITEMID DESC ROWS 1", MainTable)
         Dim ds As DataSet = LoadSQL(mySql)
 
