@@ -6,7 +6,7 @@
 
 #Region "Properties"
     Private _pawnItemID As Integer = 0
-    Public Property PawnItemID() As Integer
+    Public Overrides Property ID() As Integer
         Get
             Return _pawnItemID
         End Get
@@ -128,8 +128,9 @@
             If isNew Then
                 .Item("ITEMID") = _itemID
                 .Item("ITEMCLASS") = Me.ItemClass
+                .Item("SCHEME_ID") = _schemeID
                 .Item("RENEWALCNT") = _renewalCnt
-                .Item("CREATED_AT") = _created_At
+                .Item("CREATED_AT") = Now.ToShortDateString
             Else
                 If Not _withdrawDate = Nothing Then .Item("WITHDRAWDATE") = _withdrawDate
                 .Item("STATUS") = _status
