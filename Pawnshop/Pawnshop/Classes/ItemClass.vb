@@ -95,7 +95,7 @@
 
 
     Private _created As Date
-    Public Property created_at() As Date
+    Public Overridable Property created_at() As Date
         Get
             Return _created
         End Get
@@ -105,7 +105,7 @@
     End Property
 
     Private _updated As Date
-    Public Property updated_at() As Date
+    Public Overridable Property updated_at() As Date
         Get
             Return _updated
         End Get

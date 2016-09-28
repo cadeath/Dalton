@@ -1,7 +1,7 @@
 ﻿Public Class PawnTicket2
 
     Private MainTable As String = "OPT"
-    Private SubTable As String = "PI1"
+    Private PawnItem As PawnItem
 
 #Region "Properties"
     Private _PawnID As Integer
