@@ -204,33 +204,39 @@
         End Sub
 
 #Region "System Functions"
-        Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
-        Dim mySql As String = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID"
+    Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
+        Dim mySql As String '= "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID"
 
         'If HAS_THE_SAME_HASH(_intHash) Then
-        '    mySql = "SELECT * FROM tblInt WHERE ItemType = '" & _class & "' AND STATUS = 0"
+        '    Dim tmpSchemeName As String = GetSchemeName(_class)
+        '    mySql = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID WHERE SCHEMENAME = '" & tmpSchemeName & "'"
         'Else
         '    mySql = "SELECT * FROM TBLINT_HISTORY WHERE ItemType = '" & _class & String.Format("' AND CHECKSUM = '{0}'", _intHash)
         'End If
+        If _class = "" Then
+            mySql = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID"
+        Else
+            mySql = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID WHERE SCHEMENAME = '" & GetSchemeName(_class) & "'"
+        End If
 
-            Dim ds As DataSet = LoadSQL(mySql), TypeInt As Double
+        Dim ds As DataSet = LoadSQL(mySql), TypeInt As Double
 
-            For Each dr As DataRow In ds.Tables(0).Rows
-                Dim min As Integer = 0, max As Integer = 0
-                min = dr.Item("DayFrom") : max = dr.Item("DayTo")
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim min As Integer = 0, max As Integer = 0
+            min = dr.Item("DayFrom") : max = dr.Item("DayTo")
 
-                Select Case days
-                    Case min To max
-                        TypeInt = dr.Item(tbl)
-                        If dr.Item("Remarks") = "Early Redemption" Then
-                            _isEarlyRedeem = True
-                        End If
-                        Return TypeInt
-                End Select
-            Next
+            Select Case days
+                Case min To max
+                    TypeInt = dr.Item(tbl)
+                    If dr.Item("Remarks") = "Early Redemption" Then
+                        _isEarlyRedeem = True
+                    End If
+                    Return TypeInt
+            End Select
+        Next
 
-            Return 0
-        End Function
+        Return 0
+    End Function
 
         Private Function GetServiceCharge(ByVal principal As Double) As Double
             Dim srvPrin As Double = principal
@@ -302,7 +308,20 @@
             End If
 
             Return True
-        End Function
+    End Function
+
+    Friend Function GetSchemeName(ByVal Name As String) As String
+        Dim mySql As String = "SELECT *  FROM TblItem WHERE ITEMCLASS = '" & Name & "'"
+        Dim ret As String
+        Try
+            Dim ds As DataSet = LoadSQL(mySql)
+            ret = ds.Tables(0).Rows(0).Item("ITEMCATEGORY")
+        Catch ex As Exception
+            ret = 0
+        End Try
+
+        Return ret
+    End Function
 #End Region
 
     End Class
