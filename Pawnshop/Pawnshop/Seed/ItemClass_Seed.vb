@@ -23,6 +23,7 @@
                 .Description = Desc(i)
                 .isRenewable = isRenew(i)
                 .PrintLayout = layout(i)
+                .SchemeID = 1
             End With
 
             Select Case ClassName(i).ToUpper

@@ -93,7 +93,6 @@
         End Set
     End Property
 
-
     Private _created As Date
     Public Overridable Property created_at() As Date
         Get
@@ -113,6 +112,17 @@
             _updated = value
         End Set
     End Property
+
+    Private _schemeID As Integer
+    Public Property SchemeID() As Integer
+        Get
+            Return _schemeID
+        End Get
+        Set(ByVal value As Integer)
+            _schemeID = value
+        End Set
+    End Property
+
 
     Private _itemSpecs As CollectionItemSpecs
     Public Property ItemSpecifications() As CollectionItemSpecs
@@ -146,6 +156,7 @@
             _Count = .Item("Renewal_Cnt")
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
+            _schemeID = .Item("Scheme_ID")
         End With
 
         mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
@@ -177,6 +188,7 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
+            .Item("Scheme_ID") = _schemeID
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -209,6 +221,7 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
+            .Item("Scheme_ID") = _schemeID
         End With
 
         For Each itemSpec As ItemSpecs In Me._itemSpecs
