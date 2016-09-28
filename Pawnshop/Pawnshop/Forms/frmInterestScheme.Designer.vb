@@ -52,14 +52,14 @@ Partial Class frmInterestScheme
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnUpdateScheme = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtSchemeName = New System.Windows.Forms.TextBox()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
-        Me.txtDayFrom = New System.Windows.Forms.TextBox()
-        Me.txtDayTo = New System.Windows.Forms.TextBox()
-        Me.txtInterest = New System.Windows.Forms.TextBox()
-        Me.txtPenalty = New System.Windows.Forms.TextBox()
-        Me.txtRemarks = New System.Windows.Forms.TextBox()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.txtSearch = New Pawnshop.watermark()
+        Me.txtDescription = New Pawnshop.watermark()
+        Me.txtSchemeName = New Pawnshop.watermark()
+        Me.txtRemarks = New Pawnshop.watermark()
+        Me.txtPenalty = New Pawnshop.watermark()
+        Me.txtInterest = New Pawnshop.watermark()
+        Me.txtDayTo = New Pawnshop.watermark()
+        Me.txtDayFrom = New Pawnshop.watermark()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -222,7 +222,7 @@ Partial Class frmInterestScheme
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2, Me.LineShape1})
         Me.ShapeContainer1.Size = New System.Drawing.Size(936, 444)
-        Me.ShapeContainer1.TabIndex = 13
+        Me.ShapeContainer1.TabIndex = 5
         Me.ShapeContainer1.TabStop = False
         '
         'LineShape2
@@ -247,7 +247,7 @@ Partial Class frmInterestScheme
         Me.btnAdd.Location = New System.Drawing.Point(654, 184)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(88, 34)
-        Me.btnAdd.TabIndex = 3
+        Me.btnAdd.TabIndex = 2
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
@@ -257,7 +257,7 @@ Partial Class frmInterestScheme
         Me.btnRemove.Location = New System.Drawing.Point(839, 184)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(88, 34)
-        Me.btnRemove.TabIndex = 5
+        Me.btnRemove.TabIndex = 4
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = True
         '
@@ -329,7 +329,7 @@ Partial Class frmInterestScheme
         Me.btnUpdateScheme.Location = New System.Drawing.Point(746, 184)
         Me.btnUpdateScheme.Name = "btnUpdateScheme"
         Me.btnUpdateScheme.Size = New System.Drawing.Size(88, 34)
-        Me.btnUpdateScheme.TabIndex = 4
+        Me.btnUpdateScheme.TabIndex = 3
         Me.btnUpdateScheme.Text = "Update"
         Me.btnUpdateScheme.UseVisualStyleBackColor = True
         '
@@ -342,63 +342,80 @@ Partial Class frmInterestScheme
         Me.Label9.TabIndex = 3
         Me.Label9.Text = "Update"
         '
+        'txtSearch
+        '
+        Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(65, 12)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(771, 22)
+        Me.txtSearch.TabIndex = 6
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(109, 55)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(250, 52)
+        Me.txtDescription.TabIndex = 1
+        Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDescription.WatermarkText = "Description"
+        '
         'txtSchemeName
         '
         Me.txtSchemeName.Location = New System.Drawing.Point(109, 18)
         Me.txtSchemeName.Name = "txtSchemeName"
         Me.txtSchemeName.Size = New System.Drawing.Size(250, 22)
-        Me.txtSchemeName.TabIndex = 10
+        Me.txtSchemeName.TabIndex = 0
+        Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSchemeName.WatermarkText = "Scheme Name"
         '
-        'txtDescription
+        'txtRemarks
         '
-        Me.txtDescription.Location = New System.Drawing.Point(109, 52)
-        Me.txtDescription.Multiline = True
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(250, 55)
-        Me.txtDescription.TabIndex = 11
+        Me.txtRemarks.Location = New System.Drawing.Point(270, 50)
+        Me.txtRemarks.Multiline = True
+        Me.txtRemarks.Name = "txtRemarks"
+        Me.txtRemarks.Size = New System.Drawing.Size(249, 60)
+        Me.txtRemarks.TabIndex = 4
+        Me.txtRemarks.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtRemarks.WatermarkText = "Remarks"
+        '
+        'txtPenalty
+        '
+        Me.txtPenalty.Location = New System.Drawing.Point(81, 88)
+        Me.txtPenalty.Name = "txtPenalty"
+        Me.txtPenalty.Size = New System.Drawing.Size(112, 22)
+        Me.txtPenalty.TabIndex = 3
+        Me.txtPenalty.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPenalty.WatermarkText = "Penalty"
+        '
+        'txtInterest
+        '
+        Me.txtInterest.Location = New System.Drawing.Point(78, 51)
+        Me.txtInterest.Name = "txtInterest"
+        Me.txtInterest.Size = New System.Drawing.Size(112, 22)
+        Me.txtInterest.TabIndex = 2
+        Me.txtInterest.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtInterest.WatermarkText = "Day From"
+        '
+        'txtDayTo
+        '
+        Me.txtDayTo.Location = New System.Drawing.Point(270, 16)
+        Me.txtDayTo.Name = "txtDayTo"
+        Me.txtDayTo.Size = New System.Drawing.Size(249, 22)
+        Me.txtDayTo.TabIndex = 1
+        Me.txtDayTo.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDayTo.WatermarkText = "Day To"
         '
         'txtDayFrom
         '
         Me.txtDayFrom.Location = New System.Drawing.Point(78, 16)
         Me.txtDayFrom.Name = "txtDayFrom"
         Me.txtDayFrom.Size = New System.Drawing.Size(112, 22)
-        Me.txtDayFrom.TabIndex = 12
-        '
-        'txtDayTo
-        '
-        Me.txtDayTo.Location = New System.Drawing.Point(269, 15)
-        Me.txtDayTo.Name = "txtDayTo"
-        Me.txtDayTo.Size = New System.Drawing.Size(250, 22)
-        Me.txtDayTo.TabIndex = 13
-        '
-        'txtInterest
-        '
-        Me.txtInterest.Location = New System.Drawing.Point(78, 50)
-        Me.txtInterest.Name = "txtInterest"
-        Me.txtInterest.Size = New System.Drawing.Size(112, 22)
-        Me.txtInterest.TabIndex = 14
-        '
-        'txtPenalty
-        '
-        Me.txtPenalty.Location = New System.Drawing.Point(78, 88)
-        Me.txtPenalty.Name = "txtPenalty"
-        Me.txtPenalty.Size = New System.Drawing.Size(112, 22)
-        Me.txtPenalty.TabIndex = 15
-        '
-        'txtRemarks
-        '
-        Me.txtRemarks.Location = New System.Drawing.Point(269, 50)
-        Me.txtRemarks.Multiline = True
-        Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(250, 60)
-        Me.txtRemarks.TabIndex = 16
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(65, 9)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(771, 20)
-        Me.txtSearch.TabIndex = 17
+        Me.txtDayFrom.TabIndex = 0
+        Me.txtDayFrom.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDayFrom.WatermarkText = "Day From"
         '
         'frmInterestScheme
         '
@@ -460,14 +477,14 @@ Partial Class frmInterestScheme
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnUpdateScheme As System.Windows.Forms.Button
     Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents txtRemarks As System.Windows.Forms.TextBox
-    Friend WithEvents txtPenalty As System.Windows.Forms.TextBox
-    Friend WithEvents txtInterest As System.Windows.Forms.TextBox
-    Friend WithEvents txtDayTo As System.Windows.Forms.TextBox
-    Friend WithEvents txtDayFrom As System.Windows.Forms.TextBox
-    Friend WithEvents txtDescription As System.Windows.Forms.TextBox
-    Friend WithEvents txtSchemeName As System.Windows.Forms.TextBox
-    Friend WithEvents txtSearch As System.Windows.Forms.TextBox
+    Friend WithEvents txtSchemeName As Pawnshop.watermark
+    Friend WithEvents txtDayFrom As Pawnshop.watermark
+    Friend WithEvents txtDescription As Pawnshop.watermark
+    Friend WithEvents txtRemarks As Pawnshop.watermark
+    Friend WithEvents txtPenalty As Pawnshop.watermark
+    Friend WithEvents txtInterest As Pawnshop.watermark
+    Friend WithEvents txtDayTo As Pawnshop.watermark
+    Friend WithEvents txtSearch As Pawnshop.watermark
 
 
 End Class

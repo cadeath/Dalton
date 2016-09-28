@@ -17,12 +17,12 @@
     End Sub
     
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ' If Not mOtherForm Then ClearField()
+        If Not mOtherForm Then ClearField()
         If mOtherForm Then
             btnView.Visible = False
         Else
             ClearField()
-            btnSearch.Visible = False
+            btnSelect.Visible = False
         End If
 
         'loadItemClass()
@@ -66,7 +66,7 @@
     'End Sub
 
     Private Sub ClearField()
-        txtSearch.Text = ""
+        'txtSearch.Text = ""
         lvItem.Items.Clear()
     End Sub
 
@@ -116,108 +116,6 @@
             End If
         End If
     End Sub
-
-
-
-    ''Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
-    ''    If Not mOtherForm Then
-    ''        btnView.PerformClick()
-    ''    Else
-    ''        btnSelect.PerformClick()
-    ''    End If
-    ''End Sub
-
-    ' ''Private Sub lvItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.Click
-    ' ''    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-    ' ''    GetItem = New Item
-    ' ''    GetItem.LoadItem(idx)
-
-    ' ''    GetItem.LoadSpec(idx)
-
-    ' ''    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-    ' ''    lblItemID.Text = idx
-    ' ''End Sub
-
-
-    ''Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-    ''    Me.Close()
-    ''    frmAdminPanel.Show()
-    ''End Sub
-
-    ''Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-    ''    frmAdminPanel.btnUpdate.Enabled = False
-    ''    frmAdminPanel.btnSave.Enabled = True
-    ''    frmAdminPanel.clearfields()
-    ''    frmAdminPanel.reaDOnlyFalse()
-    ''End Sub
-
-    ''Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-
-    ''    If lvItem.SelectedItems.Count <= 0 Then Exit Sub
-
-    ''    Dim ItemID As Integer
-    ''    ItemID = lvItem.FocusedItem.Text
-    ''    Console.WriteLine("ITEMID : " & ItemID)
-
-    ''    Dim tempITEM As New Item
-    ''    tempITEM.LoadItem(ItemID)
-    ''    lblItemID.Text = ItemID
-
-    ''    frmAdminPanel.LoadItemall(tempITEM)
-    ''    frmAdminPanel.LoadSpec()
-    ''    frmAdminPanel.Show()
-    ''    Me.Hide()
-    ''End Sub
-
-    ''Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-
-    ''    If lvItem.Items.Count = 0 Then Exit Sub
-
-    ''    If lvItem.SelectedItems.Count = 0 Then
-    ''        lvItem.Items(0).Focused = True
-    ''    End If
-    ''    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-    ''    GetItem = New Item
-    ''    GetItem.LoadItem(idx)
-    ''    GetItem.LoadSpec(idx)
-
-    ''    lblItemID.Text = (idx)
-
-
-    ''    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-    ''    ' lblItemID.Text = idx
-    ''    ' frmAdminPanel.LoadItemall(GetItem)
-    ''    'frmAdminPanel.LoadSpec()
-    ''    Me.Hide()
-
-    ''End Sub
-
-
-    'Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-
-    '    If lvItem.Items.Count = 0 Then Exit Sub
-
-    '    If lvItem.SelectedItems.Count = 0 Then
-    '        lvItem.Items(0).Focused = True
-    '    End If
-    '    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-    '    Dim getitem As ItemClass
-    '    Dim getspec As ItemSpecs = New ItemSpecs
-
-    '    getitem = New ItemClass
-    '    getitem.LoadItem(idx)
-
-    '    getspec.LoadItemSpecs(idx)
-    '    lblItemID.Text = (idx)
-
-
-    '    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-    '    ' lblItemID.Text = idx
-    '    ' frmAdminPanel.LoadItemall(GetItem)
-    '    'frmAdminPanel.LoadSpec()
-    '    Me.Hide()
-
-    'End Sub
 
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
         mOtherForm = True
@@ -275,4 +173,13 @@
         txtSearch.Text = ""
     End Sub
 
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
 End Class

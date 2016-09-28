@@ -221,13 +221,22 @@ Public Class frmInterestScheme
         Label9.Text = "Update"
     End Sub
 
-
     Private Sub txtDayFrom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayFrom.KeyPress
         DigitOnly(e)
     End Sub
 
-    Private Sub txtDayTo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
+    Private Sub txtDayTo_KeyPress_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
         DigitOnly(e)
+    End Sub
+
+    Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Label9.Text = "Update".ToString Then
+                btnAdd.PerformClick()
+            ElseIf Label9.Text = "Modify" Then
+                btnUpdateScheme.PerformClick()
+            End If
+        End If
     End Sub
 
     Private Sub txtInterest_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInterest.KeyPress
@@ -238,19 +247,9 @@ Public Class frmInterestScheme
         DigitOnly(e)
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+    Private Sub txtSearch_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
-        End If
-    End Sub
-
-    Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Label9.Text = "Update".ToString Then
-                btnAdd.PerformClick()
-            ElseIf Label9.Text = "Modify" Then
-                btnUpdateScheme.PerformClick()
-            End If
         End If
     End Sub
 End Class

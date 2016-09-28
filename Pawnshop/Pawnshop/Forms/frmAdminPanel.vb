@@ -92,7 +92,7 @@ Public Class frmAdminPanel
     End Function
 
     'Friend Sub LoadItemall(ByVal it As ItemClass)
-    '    txtClassifiction.Text = String.Format(it.ItemClass)
+    '    txtClassification.Text = String.Format(it.ItemClass)
     '    txtCategory.Text = String.Format(it.Category)
     '    txtDescription.Text = String.Format(it.Description)
 
@@ -356,11 +356,7 @@ Public Class frmAdminPanel
         dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
+   
 
     '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
     Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
@@ -682,5 +678,11 @@ Public Class frmAdminPanel
                 lst.SubItems.Add(If(row(i) IsNot Nothing, row(i).ToString, ""))
             Next
         Next
+    End Sub
+
+    Private Sub txtSearch_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 End Class
