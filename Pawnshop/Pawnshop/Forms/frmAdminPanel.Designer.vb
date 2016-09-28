@@ -246,7 +246,7 @@ Partial Class frmAdminPanel
         Me.dgSpecs.RowHeadersVisible = False
         Me.dgSpecs.RowHeadersWidth = 20
         Me.dgSpecs.Size = New System.Drawing.Size(761, 316)
-        Me.dgSpecs.TabIndex = 14
+        Me.dgSpecs.TabIndex = 1
         '
         'Column1
         '
@@ -305,7 +305,7 @@ Partial Class frmAdminPanel
         Me.btnClose.Location = New System.Drawing.Point(1061, 394)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 33)
-        Me.btnClose.TabIndex = 13
+        Me.btnClose.TabIndex = 5
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -318,7 +318,7 @@ Partial Class frmAdminPanel
         Me.grpSearch.Location = New System.Drawing.Point(6, 6)
         Me.grpSearch.Name = "grpSearch"
         Me.grpSearch.Size = New System.Drawing.Size(1129, 60)
-        Me.grpSearch.TabIndex = 12
+        Me.grpSearch.TabIndex = 4
         Me.grpSearch.TabStop = False
         Me.grpSearch.Text = "Search"
         '
@@ -474,7 +474,7 @@ Partial Class frmAdminPanel
         Me.cbotxtSchemename.Location = New System.Drawing.Point(104, 303)
         Me.cbotxtSchemename.Name = "cbotxtSchemename"
         Me.cbotxtSchemename.Size = New System.Drawing.Size(250, 24)
-        Me.cbotxtSchemename.TabIndex = 15
+        Me.cbotxtSchemename.TabIndex = 6
         '
         'frmAdminPanel
         '
