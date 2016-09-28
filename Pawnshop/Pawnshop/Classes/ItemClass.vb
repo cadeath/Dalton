@@ -123,6 +123,16 @@
             _itemSpecs = value
         End Set
     End Property
+
+    Private _SchemeID As Integer
+    Public Property SchemeID() As Integer
+        Get
+            Return _SchemeID
+        End Get
+        Set(ByVal value As Integer)
+            _SchemeID = value
+        End Set
+    End Property
 #End Region
 
 #Region "Functions and Procedures"
@@ -149,6 +159,7 @@
 
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
+            _SchemeID = .Item("Scheme_ID")
 
         End With
     End Sub
@@ -171,7 +182,7 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
-            .Item("SCHEME_ID") = 1
+            .Item("SCHEME_ID") = _SchemeID
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -196,6 +207,7 @@
             _isRenew = .Item("isrenew")
             '_onHold = .Item()
             _printLayout = .Item("print_layout")
+            _SchemeID = .Item("Scheme_ID")
 
         End With
     End Sub

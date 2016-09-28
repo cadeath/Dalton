@@ -5,6 +5,7 @@ Public Class frmAdminPanel
     Private SpecSave As ItemSpecs
     Dim ds As New DataSet
 
+    Private Scheme As Hashtable
     Friend SelectedItem As ItemClass
     Friend SelectedItemSpecs As ItemSpecs
 
@@ -15,6 +16,25 @@ Public Class frmAdminPanel
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
+        LoadScheme()
+    End Sub
+
+    Private Sub LoadScheme()
+        Dim mySql As String = "SELECT * FROM TBLINTSCHEMES"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Scheme = New Hashtable
+        cbotxtSchemename.Items.Clear()
+        Dim tmpName As String, tmpID As Integer
+       
+        For Each dr As DataRow In ds.Tables(0).Rows
+            With dr
+                tmpID = .Item("schemeID")
+                tmpName = .Item("SCHEMENAME")
+            End With
+            Scheme.Add(tmpID, tmpName)
+            cbotxtSchemename.Items.Add(tmpName)
+        Next
     End Sub
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
@@ -23,6 +43,7 @@ Public Class frmAdminPanel
         txtClassifiction.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
+        cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
 
         If it.isRenewable = "True" Then
             rdbYes.Checked = True
@@ -41,6 +62,26 @@ Public Class frmAdminPanel
         btnSave.Enabled = False
         btnUpdate.Enabled = True
     End Sub
+
+    Private Function GetSchemeByID(ByVal id As Integer) As String
+        For Each el As DictionaryEntry In Scheme
+            If el.Key = id Then
+                Return el.Value
+            End If
+        Next
+
+        Return "N/A"
+    End Function
+
+    Private Function GetSchemeID(ByVal name As String) As Integer
+        For Each el As DictionaryEntry In Scheme
+            If el.Value = name Then
+                Return el.Key
+            End If
+        Next
+
+        Return 0
+    End Function
 
     'Friend Sub LoadItemall(ByVal it As ItemClass)
     '    txtClassifiction.Text = String.Format(it.ItemClass)
@@ -68,6 +109,7 @@ Public Class frmAdminPanel
         cmbModuleName.Text = ""
         dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
+        cbotxtSchemename.Items.Clear()
 
     End Sub
 
@@ -104,6 +146,7 @@ Public Class frmAdminPanel
 
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
+            .SchemeID = GetSchemeID(cbotxtSchemename.Text)
 
         End With
         ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
