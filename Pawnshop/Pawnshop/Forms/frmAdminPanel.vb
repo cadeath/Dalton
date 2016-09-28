@@ -177,6 +177,7 @@ Public Class frmAdminPanel
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()
+        LoadScheme()
     End Sub
    
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
@@ -241,6 +242,7 @@ Public Class frmAdminPanel
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
         btnSave.Enabled = True
         clearfields()
+        LoadScheme()
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
