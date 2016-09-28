@@ -38,7 +38,7 @@
 #Region "Procedures and Functions"
     Public Sub Save_PawnItemSpecs()
         Dim mySql As String = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
-        Dim ds As DataSet = LoadSQL(mySql)
+        Dim ds As DataSet = LoadSQL(mySql, MainTable)
         Dim isNew As Boolean = False
 
         If _pawnSpecsID = 0 Then

@@ -79,6 +79,7 @@
         With newItem
             .ItemID = GetItemClassIDByName(cboItem.Text)
             .ItemClass = cboItem.Text
+            .SchemeID = 1
             .Status = "A"
             .PawnItemSpecs = pawnSpecs
 
@@ -100,6 +101,7 @@
             .AppraiserID = 1
             .EncoderID = 1
             .ClaimerID = 0
+            .ClientID = pawnClient.ID
             .PawnItem = newItem
 
             .Save_PawnTicket()

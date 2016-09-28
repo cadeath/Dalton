@@ -290,9 +290,6 @@
         Dim mySql As String
         Dim ds As DataSet
 
-        'Save the PawnItem
-        _pawnItem.Save_PawnItem()
-
         'Save PawnTicket
         mySql = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
         ds = LoadSQL(mySql, MainTable)
@@ -325,7 +322,7 @@
             .Item("RENEWDUE") = _renewDue
             .Item("REDEEMDUE") = _redeemDue
             .Item("SERVICECHARGE") = _serviceCharge
-            .Item("CREATED_AT") = _created_At
+            .Item("CREATED_AT") = Now.ToShortDateString
         End With
         ds.Tables(MainTable).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
