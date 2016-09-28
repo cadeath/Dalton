@@ -104,6 +104,8 @@ Public Class frmInterestScheme
         txtSchemeName.Text = ""
         txtDescription.Text = ""
         txtSearch.Text = ""
+
+        lvIntscheme.Columns.Remove(lvIntscheme.Columns(0))
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
