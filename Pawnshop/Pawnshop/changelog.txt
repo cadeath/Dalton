@@ -1,8 +1,5 @@
 CHANGELOG
 Version 1.2.3.7
- - Fix Expiry Generator, get whole month
-
-Version 1.2.3.7
  - Add Audit Console (Base on Maam Irish Needs)
  - Add RePrint indicator on PT and OR
  - Add Disable User Account
