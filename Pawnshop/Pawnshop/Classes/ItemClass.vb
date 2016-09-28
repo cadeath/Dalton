@@ -134,15 +134,7 @@
         End Set
     End Property
 
-    Private _SchemeID As Integer
-    Public Property SchemeID() As Integer
-        Get
-            Return _SchemeID
-        End Get
-        Set(ByVal value As Integer)
-            _SchemeID = value
-        End Set
-    End Property
+
 #End Region
 
 #Region "Functions and Procedures"
@@ -182,8 +174,7 @@
             Dim tmpSpecs As New ItemSpecs
             tmpSpecs.LoadItemSpecs_row(dr)
 
-
-        End With
+        Next
     End Sub
 
     Public Sub Save_ItemClass()
