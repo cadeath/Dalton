@@ -97,22 +97,22 @@ Public Class frmPawningItemNew
         Return 0
     End Function
 
-    'Private Sub LoadAppraisers()
-    '    Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
-    '    Dim ds As DataSet = LoadSQL(mySql)
+    Private Sub LoadAppraisers()
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
+        Dim ds As DataSet = LoadSQL(mySql)
 
-    '    appraiser = New Hashtable
-    '    cboAppraiser.Items.Clear()
-    '    For Each dr As DataRow In ds.Tables(0).Rows
-    '        Dim tmpUser As New ComputerUser
-    '        tmpUser.LoadUserByRow(dr)
-    '        If tmpUser.canAppraise Then
-    '            Console.WriteLine(tmpUser.FullName & " loaded.")
-    '            appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-    '            cboAppraiser.Items.Add(tmpUser.UserName)
-    '        End If
-    '    Next
-    'End Sub
+        appraiser = New Hashtable
+        cboAppraiser.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpUser As New ComputerUser
+            tmpUser.LoadUserByRow(dr)
+            If tmpUser.canAppraise Then
+                Console.WriteLine(tmpUser.FullName & " loaded.")
+                appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+                cboAppraiser.Items.Add(tmpUser.UserName)
+            End If
+        Next
+    End Sub
 
     Private Sub btnSearchClassification_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClassification.Click
         Dim secured_str As String = txtClassification.Text
@@ -205,7 +205,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        Dim fillData As String = "Devnewpawn"
+        Dim fillData As String = "OPT"
         Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
 
         ds = LoadSQL(mySql, fillData)
@@ -216,17 +216,17 @@ Public Class frmPawningItemNew
             .Item("PawnTicket") = txtTicket.Text
             '.Item("OldpawnTicket") = txtOldTicket.Text
             .Item("LoanDate") = txtLoan.Text
-            .Item("MATURITYDATE") = txtMatu.Text
-            .Item("ExpirationDate") = txtExpiry.Text
+            .Item("MATUDATE") = txtMatu.Text
+            .Item("ExpiryDate") = txtExpiry.Text
             .Item("AuctionDate") = txtAuction.Text
             .Item("Appraisal") = txtAppr.Text
             .Item("Principal") = txtPrincipal.Text
-            .Item("NetAmount") = "" 'Net_Amount
+            .Item("NetAmount") = txtNet.Text
             .Item("AppraiserID") = GetAppraiserID(cboAppraiser.Text)
             .Item("EncoderID") = UserID
-            .Item("pwnItmID") = ""
+            .Item("PawnItemID") = tmpItem.ID
             .Item("ClientID") = PawnCustomer.ID
-            .Item("ClaimBy") = PawnClaimer.ID
+            .Item("ClaimerID") = PawnClaimer.ID
             '.Item("ORDate") = _orDate
             '.Item("ORNum") = _orNum
             '.Item("Penalty") = txtPenalty.Text
@@ -234,7 +234,7 @@ Public Class frmPawningItemNew
             '.Item("DaysOverDue") = txtOver.Text
             '.Item("EarlyRedeem") = txt
             '.Item("DelayInterest") = txtInt.Text
-            .Item("AdvanceInterest") = txtAdv.Text
+            .Item("AdvInt") = txtAdv.Text
             '.Item("RedeemDue") = _redeemDue
             '.Item("RenewDue") = _renewDue
             .Item("ServiceCharge") = txtService.Text
@@ -248,7 +248,7 @@ Public Class frmPawningItemNew
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         'LoadPawnInfo()
-        'LoadAppraisers()
+        LoadAppraisers()
         If transactionType = "L" Then NewLoan()
         'PrintButton(False)
 

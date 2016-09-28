@@ -149,7 +149,6 @@ Public Class frmAdminPanel
             .SchemeID = GetSchemeID(cbotxtSchemename.Text)
 
         End With
-        ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
         For Each row As DataGridViewRow In dgSpecs.Rows
             SpecSave = New ItemSpecs
@@ -166,13 +165,12 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-            Dim tmpItemID As Integer = ItemSave.LASTITEMID
-            tmpItemID += 1
-            SpecSave.ItemID = tmpItemID
+            'Dim tmpItemID As Integer = ItemSave.LASTITEMID
+            'tmpItemID += 1
+            'SpecSave.ItemID = tmpItemID
             SpecSave.SaveSpecs()
-            'ColItemsSpecs.Add(SpecSave)
+            ColItemsSpecs.Add(SpecSave)
         Next
-
 
         ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.Save_ItemClass()
@@ -209,10 +207,7 @@ Public Class frmAdminPanel
             Else
                 .isRenewable = 0
             End If
-
             .PrintLayout = txtPrintLayout.Text
-            'Dim a As Integer = ItemModify.ID
-            'MsgBox(a)
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -235,10 +230,10 @@ Public Class frmAdminPanel
             End With
             SpecModify.ItemID = SelectedItem.ID
             SpecModify.UpdateSpecs()
-            ' ColItemsSpecs.Add(SpecModify)
+            'ColItemsSpecs.Add(SpecModify)
         Next
 
-        'ItemModify.ItemSpecifications = ColItemsSpecs
+        ItemModify.ItemSpecifications = ColItemsSpecs
         ItemModify.Update()
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
@@ -304,8 +299,6 @@ Public Class frmAdminPanel
         For Each dr In ds.Tables(0).Rows
             AddItemSpecs(dr)
         Next
-            ' Dim i As Integer = (0)
-
             reaDOnlyTrue()
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = True

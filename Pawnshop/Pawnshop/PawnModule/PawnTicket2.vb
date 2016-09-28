@@ -388,7 +388,7 @@
             _earlyRedeem = .Item("EARLYREDEEM")
             _delayInt = .Item("DELAYINTEREST")
             _advInt = .Item("ADVINT")
-            _schemeID = .Item("SCHEMEID")
+            ' _schemeID = .Item("SCHEMEID")
             _renewDue = .Item("RENEWDUE")
             _redeemDue = .Item("REDEEMDUE")
             _serviceCharge = .Item("SERVICECHARGE")
