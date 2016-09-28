@@ -114,7 +114,7 @@
     End Property
 
     Private _schemeID As Integer
-    Public Property SchemeID() As Integer
+    Public Overridable Property SchemeID() As Integer
         Get
             Return _schemeID
         End Get
@@ -122,7 +122,6 @@
             _schemeID = value
         End Set
     End Property
-
 
     Private _itemSpecs As CollectionItemSpecs
     Public Property ItemSpecifications() As CollectionItemSpecs
@@ -180,6 +179,11 @@
     Public Sub Save_ItemClass()
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            MsgBox("Class already existed", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(0).NewRow
