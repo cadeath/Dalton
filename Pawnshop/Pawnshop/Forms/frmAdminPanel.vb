@@ -68,6 +68,7 @@ Public Class frmAdminPanel
         txtClassification.Text = String.Format(it.ItemClass)
         txtCategory.Text = String.Format(it.Category)
         txtDescription.Text = String.Format(it.Description)
+    End Sub
 
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
@@ -127,7 +128,7 @@ Public Class frmAdminPanel
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
-        If cboSchemeName.Text = "" Then cboSchemeName.Focus() : Return False
+        If cbotxtSchemename.Text = "" Then cbotxtSchemename.Focus() : Return False
         If IsDataGridViewEmpty(dgSpecs) Then dgSpecs.Focus() : Return False
         Return True
     End Function
@@ -155,7 +156,7 @@ Public Class frmAdminPanel
         ItemSave.Description = txtDescription.Text
 
         With ItemSave
-            .ItemClass = txtClassifiction.Text
+            .ItemClass = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
@@ -228,13 +229,13 @@ Public Class frmAdminPanel
         ItemModify.Description = txtDescription.Text
         ItemModify.updated_at = CurrentDate
         If rdbYes.Checked = True Then
-            ItemModify.isRenewable = rbYes
+            ItemModify.isRenewable = 1
         Else
-            ItemModify.isRenewable = rbNo
+            ItemModify.isRenewable = 0
         End If
 
         With ItemModify
-            .ItemClass = txtClassifiction.Text
+            .ItemClass = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .updated_at = CurrentDate
@@ -248,7 +249,7 @@ Public Class frmAdminPanel
 
 
             .PrintLayout = txtPrintLayout.Text
-      
+            .SchemeID = GetSchemeID(cbotxtSchemename.Text)
         End With
 
         Dim SpecModify As New ItemSpecs
