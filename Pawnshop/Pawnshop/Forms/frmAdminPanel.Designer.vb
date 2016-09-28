@@ -25,7 +25,6 @@ Partial Class frmAdminPanel
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
-        Me.cboSchemeName = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtPrintLayout = New Pawnshop.watermark()
         Me.txtDescription = New Pawnshop.watermark()
@@ -114,12 +113,10 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
+
         '
         'cboSchemeName
         '
-
-
-
         Me.txtPrintLayout.Location = New System.Drawing.Point(104, 205)
         Me.txtPrintLayout.Multiline = True
         Me.txtPrintLayout.Name = "txtPrintLayout"
@@ -127,13 +124,6 @@ Partial Class frmAdminPanel
         Me.txtPrintLayout.TabIndex = 5
         Me.txtPrintLayout.Text = "Print Layout"
 
-
-        Me.cboSchemeName.FormattingEnabled = True
-        Me.cboSchemeName.Items.AddRange(New Object() {"Early Redemption", "Penalty"})
-        Me.cboSchemeName.Location = New System.Drawing.Point(107, 295)
-        Me.cboSchemeName.Name = "cboSchemeName"
-        Me.cboSchemeName.Size = New System.Drawing.Size(248, 24)
-        Me.cboSchemeName.TabIndex = 10
         '
         'Label1
         '
@@ -270,14 +260,6 @@ Partial Class frmAdminPanel
         Me.lblCategory.Size = New System.Drawing.Size(63, 16)
         Me.lblCategory.TabIndex = 2
         Me.lblCategory.Text = "Category"
-        '
-        'txtClassifiction
-        '
-        Me.txtClassifiction.Location = New System.Drawing.Point(104, 27)
-        Me.txtClassifiction.Name = "txtClassifiction"
-        Me.txtClassifiction.Size = New System.Drawing.Size(250, 22)
-        Me.txtClassifiction.TabIndex = 0
-        Me.txtClassifiction.Text = "Classfication"
         '
         'lblClassification
         '
