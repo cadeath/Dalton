@@ -2,6 +2,7 @@
     Dim mOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
     Dim ds As New DataSet
+    Dim selectedItem As ItemClass
 
     Dim selectedItem As ItemClass
 
@@ -16,6 +17,7 @@
         Next
     End Sub
 
+
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
 
@@ -23,6 +25,16 @@
             btnView.Visible = False
         Else
             btnSearch.Visible = True
+
+    
+    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ' If Not mOtherForm Then ClearField()
+        If mOtherForm Then
+            btnView.Visible = False
+        Else
+            ClearField()
+            btnSearch.Visible = False
+
         End If
 
         LoadActiveItem()
@@ -131,7 +143,6 @@
 
     End Sub
 
-
     Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
         If Not mOtherForm Then
             btnView.PerformClick()
@@ -154,7 +165,7 @@
         frmAdminPanel.LoadSpec(idx)
         frmAdminPanel.LoadItemList(selectedItem)
         frmAdminPanel.Show()
-        Me.Hide()
+        Me.Close()
 
     End Sub
 

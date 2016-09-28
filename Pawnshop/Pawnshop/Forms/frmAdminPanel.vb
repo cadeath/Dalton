@@ -2,10 +2,6 @@
 Public Class frmAdminPanel
     Private mySql As String
     Private fillData As String
-
-    Dim rbYes As Integer
-    Dim rbNo As Integer
-
     Private SpecSave As ItemSpecs
     Dim ds As New DataSet
 
@@ -33,7 +29,9 @@ Public Class frmAdminPanel
 
         If it.isRenewable = "True" Then
             rdbYes.Checked = True
+            rdbNo.Checked = False
         Else
+            rdbYes.Checked = False
             rdbNo.Checked = True
         End If
 
@@ -52,16 +50,22 @@ Public Class frmAdminPanel
         txtCategory.Text = String.Format(it.Category)
         txtDescription.Text = String.Format(it.Description)
 
-        If it.isRenewable = "1" Then
-            rdbYes.Checked = True
-        Else
-            rdbNo.Checked = True
-        End If
-        txtPrintLayout.Text = String.Format(it.PrintLayout)
+    'Friend Sub LoadItemall(ByVal it As ItemClass)
+    '    txtClassifiction.Text = String.Format(it.ItemClass)
+    '    txtCategory.Text = String.Format(it.Category)
+    '    txtDescription.Text = String.Format(it.Description)
 
-        ItemList = it
 
-    End Sub
+    '    If it.isRenewable = "1" Then
+    '        rdbYes.Checked = True
+    '    Else
+    '        rdbNo.Checked = True
+    '    End If
+    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
+
+    '    ItemList = it
+
+    'End Sub
 
     Friend Sub clearfields()
         txtCategory.Text = ""
@@ -77,13 +81,7 @@ Public Class frmAdminPanel
 
     End Sub
 
-    Private Sub rdbYes_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        rbYes = 1
-    End Sub
 
-    Private Sub rdbNo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        rbNo = 0
-    End Sub
     Private Function isValid() As Boolean
 
         If txtClassification.Text = "" Then txtClassification.Focus() : Return False
@@ -184,10 +182,10 @@ Public Class frmAdminPanel
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
-            If rdbYes.Checked = True Then
-                .isRenewable = rbYes
+            If rdbYes.Checked Then
+                .isRenewable = 1
             Else
-                .isRenewable = rbNo
+                .isRenewable = 0
             End If
 
             .PrintLayout = txtPrintLayout.Text
@@ -246,10 +244,10 @@ Public Class frmAdminPanel
             .updated_at = CurrentDate
             .ID = SelectedItem.ID
 
-            If rdbYes.Checked = True Then
-                .isRenewable = rbYes
+            If rdbYes.Checked Then
+                .isRenewable = 1
             Else
-                .isRenewable = rbNo
+                .isRenewable = 0
             End If
 
             .PrintLayout = txtPrintLayout.Text
@@ -307,7 +305,97 @@ Public Class frmAdminPanel
     End Sub
  
 
+
     '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
+
+    Private Sub searchbutton()
+        If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
+    End Sub
+
+    Private Sub reaDOnlyTrue()
+        txtCategory.ReadOnly = True
+        txtClassifiction.ReadOnly = True
+        txtDescription.ReadOnly = True
+        txtPrintLayout.ReadOnly = True
+        rdbNo.Enabled = False
+        rdbYes.Enabled = False
+        For a As Integer = 0 To dgSpecs.Rows.Count - 1
+            dgSpecs.Rows(a).ReadOnly = True
+        Next
+    End Sub
+
+    Friend Sub reaDOnlyFalse()
+        txtCategory.ReadOnly = False
+        txtClassifiction.ReadOnly = False
+        txtDescription.ReadOnly = False
+        txtPrintLayout.ReadOnly = False
+        rdbNo.Enabled = True
+        rdbYes.Enabled = True
+        For a As Integer = 0 To dgSpecs.Rows.Count - 1
+            dgSpecs.Rows(a).ReadOnly = False
+        Next
+    End Sub
+
+    Friend Sub LoadSpec(ByVal ID As Integer)
+        Dim da As New OdbcDataAdapter
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
+        Console.WriteLine("SQL: " & mySql)
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim dr As DataRow
+
+        For Each dr In ds.Tables(0).Rows
+            AddItemSpecs(dr)
+        Next
+            ' Dim i As Integer = (0)
+
+            reaDOnlyTrue()
+        For a As Integer = 0 To dgSpecs.Rows.Count - 1
+            dgSpecs.Rows(a).ReadOnly = True
+        Next
+            btnSave.Enabled = False
+    End Sub
+
+    Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
+        Dim tmpItem As New ItemSpecs
+        tmpItem.LoadItemSpecs_row(ItemSpecs)
+        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
+    End Sub
+
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
+    Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
+        If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
+
+        If cmbModuleName.Visible Then
+            Select Case cmbModuleName.Text
+                Case "Money Transfer"
+                    ExportModType = ModuleType.MoneyTransfer
+                Case "Branch"
+                    ExportModType = ModuleType.Branch
+                Case "Cash"
+                    ExportModType = ModuleType.Cash
+                Case "Item Class"
+                    ExportModType = ModuleType.ItemClass
+                Case "Rate"
+                    ExportModType = ModuleType.Rate
+                Case "Currency"
+                    ExportModType = ModuleType.Currency
+            End Select
+        End If
+        GenerateModule()
+        lvModule.View = View.Details
+        lvModule.CheckBoxes = True
+        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
+       
+    End Sub
+
 
     Enum ModuleType As Integer
         MoneyTransfer = 0

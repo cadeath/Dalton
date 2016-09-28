@@ -94,6 +94,7 @@ Partial Class frmPawningItemNew
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearchClassification = New System.Windows.Forms.Button()
         Me.txtClassification = New System.Windows.Forms.TextBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
@@ -112,7 +113,7 @@ Partial Class frmPawningItemNew
         Me.txtRedeem.Location = New System.Drawing.Point(133, 274)
         Me.txtRedeem.Name = "txtRedeem"
         Me.txtRedeem.ReadOnly = True
-        Me.txtRedeem.Size = New System.Drawing.Size(100, 20)
+        Me.txtRedeem.Size = New System.Drawing.Size(180, 20)
         Me.txtRedeem.TabIndex = 9
         '
         'lblRedeemDue
@@ -130,7 +131,7 @@ Partial Class frmPawningItemNew
         Me.txtRenew.Location = New System.Drawing.Point(133, 248)
         Me.txtRenew.Name = "txtRenew"
         Me.txtRenew.ReadOnly = True
-        Me.txtRenew.Size = New System.Drawing.Size(100, 20)
+        Me.txtRenew.Size = New System.Drawing.Size(180, 20)
         Me.txtRenew.TabIndex = 8
         '
         'Label29
@@ -148,7 +149,7 @@ Partial Class frmPawningItemNew
         Me.txtEvat.Location = New System.Drawing.Point(133, 211)
         Me.txtEvat.Name = "txtEvat"
         Me.txtEvat.ReadOnly = True
-        Me.txtEvat.Size = New System.Drawing.Size(100, 20)
+        Me.txtEvat.Size = New System.Drawing.Size(180, 20)
         Me.txtEvat.TabIndex = 7
         '
         'Label28
@@ -166,7 +167,7 @@ Partial Class frmPawningItemNew
         Me.txtService.Location = New System.Drawing.Point(133, 185)
         Me.txtService.Name = "txtService"
         Me.txtService.ReadOnly = True
-        Me.txtService.Size = New System.Drawing.Size(100, 20)
+        Me.txtService.Size = New System.Drawing.Size(180, 20)
         Me.txtService.TabIndex = 6
         '
         'Label27
@@ -184,7 +185,7 @@ Partial Class frmPawningItemNew
         Me.txtPenalty.Location = New System.Drawing.Point(133, 158)
         Me.txtPenalty.Name = "txtPenalty"
         Me.txtPenalty.ReadOnly = True
-        Me.txtPenalty.Size = New System.Drawing.Size(100, 20)
+        Me.txtPenalty.Size = New System.Drawing.Size(180, 20)
         Me.txtPenalty.TabIndex = 5
         '
         'Label26
@@ -214,7 +215,7 @@ Partial Class frmPawningItemNew
         Me.cboAppraiser.FormattingEnabled = True
         Me.cboAppraiser.Location = New System.Drawing.Point(22, 19)
         Me.cboAppraiser.Name = "cboAppraiser"
-        Me.cboAppraiser.Size = New System.Drawing.Size(194, 24)
+        Me.cboAppraiser.Size = New System.Drawing.Size(212, 24)
         Me.cboAppraiser.TabIndex = 0
         '
         'GroupBox5
@@ -251,7 +252,7 @@ Partial Class frmPawningItemNew
         Me.txtInt.Location = New System.Drawing.Point(133, 132)
         Me.txtInt.Name = "txtInt"
         Me.txtInt.ReadOnly = True
-        Me.txtInt.Size = New System.Drawing.Size(100, 20)
+        Me.txtInt.Size = New System.Drawing.Size(180, 20)
         Me.txtInt.TabIndex = 4
         '
         'lblInterest
@@ -269,7 +270,7 @@ Partial Class frmPawningItemNew
         Me.txtOver.Location = New System.Drawing.Point(133, 106)
         Me.txtOver.Name = "txtOver"
         Me.txtOver.ReadOnly = True
-        Me.txtOver.Size = New System.Drawing.Size(100, 20)
+        Me.txtOver.Size = New System.Drawing.Size(180, 20)
         Me.txtOver.TabIndex = 3
         '
         'Label24
@@ -287,7 +288,7 @@ Partial Class frmPawningItemNew
         Me.txtPrincipal2.Location = New System.Drawing.Point(133, 71)
         Me.txtPrincipal2.Name = "txtPrincipal2"
         Me.txtPrincipal2.ReadOnly = True
-        Me.txtPrincipal2.Size = New System.Drawing.Size(100, 20)
+        Me.txtPrincipal2.Size = New System.Drawing.Size(180, 20)
         Me.txtPrincipal2.TabIndex = 2
         '
         'Label23
@@ -305,7 +306,7 @@ Partial Class frmPawningItemNew
         Me.txtReceiptDate.Location = New System.Drawing.Point(133, 45)
         Me.txtReceiptDate.Name = "txtReceiptDate"
         Me.txtReceiptDate.ReadOnly = True
-        Me.txtReceiptDate.Size = New System.Drawing.Size(166, 20)
+        Me.txtReceiptDate.Size = New System.Drawing.Size(180, 20)
         Me.txtReceiptDate.TabIndex = 1
         '
         'Label22
@@ -323,7 +324,7 @@ Partial Class frmPawningItemNew
         Me.txtReceipt.Location = New System.Drawing.Point(133, 19)
         Me.txtReceipt.Name = "txtReceipt"
         Me.txtReceipt.ReadOnly = True
-        Me.txtReceipt.Size = New System.Drawing.Size(100, 20)
+        Me.txtReceipt.Size = New System.Drawing.Size(180, 20)
         Me.txtReceipt.TabIndex = 0
         '
         'Label21
@@ -539,7 +540,7 @@ Partial Class frmPawningItemNew
         Me.txtNet.Location = New System.Drawing.Point(104, 305)
         Me.txtNet.Name = "txtNet"
         Me.txtNet.ReadOnly = True
-        Me.txtNet.Size = New System.Drawing.Size(100, 20)
+        Me.txtNet.Size = New System.Drawing.Size(130, 20)
         Me.txtNet.TabIndex = 2
         '
         'txtCustomer
@@ -585,7 +586,7 @@ Partial Class frmPawningItemNew
         Me.txtAdv.Location = New System.Drawing.Point(104, 279)
         Me.txtAdv.Name = "txtAdv"
         Me.txtAdv.ReadOnly = True
-        Me.txtAdv.Size = New System.Drawing.Size(100, 20)
+        Me.txtAdv.Size = New System.Drawing.Size(130, 20)
         Me.txtAdv.TabIndex = 3
         '
         'Label12
@@ -602,7 +603,7 @@ Partial Class frmPawningItemNew
         '
         Me.txtPrincipal.Location = New System.Drawing.Point(104, 253)
         Me.txtPrincipal.Name = "txtPrincipal"
-        Me.txtPrincipal.Size = New System.Drawing.Size(100, 20)
+        Me.txtPrincipal.Size = New System.Drawing.Size(130, 20)
         Me.txtPrincipal.TabIndex = 1
         '
         'Label11
@@ -619,7 +620,7 @@ Partial Class frmPawningItemNew
         '
         Me.txtAppr.Location = New System.Drawing.Point(104, 227)
         Me.txtAppr.Name = "txtAppr"
-        Me.txtAppr.Size = New System.Drawing.Size(100, 20)
+        Me.txtAppr.Size = New System.Drawing.Size(130, 20)
         Me.txtAppr.TabIndex = 0
         '
         'Label10
@@ -691,7 +692,7 @@ Partial Class frmPawningItemNew
         Me.txtOldTicket.Location = New System.Drawing.Point(104, 41)
         Me.txtOldTicket.Name = "txtOldTicket"
         Me.txtOldTicket.ReadOnly = True
-        Me.txtOldTicket.Size = New System.Drawing.Size(100, 20)
+        Me.txtOldTicket.Size = New System.Drawing.Size(130, 20)
         Me.txtOldTicket.TabIndex = 5
         '
         'Label6
@@ -709,7 +710,7 @@ Partial Class frmPawningItemNew
         Me.txtTicket.Location = New System.Drawing.Point(104, 15)
         Me.txtTicket.Name = "txtTicket"
         Me.txtTicket.ReadOnly = True
-        Me.txtTicket.Size = New System.Drawing.Size(100, 20)
+        Me.txtTicket.Size = New System.Drawing.Size(130, 20)
         Me.txtTicket.TabIndex = 4
         '
         'Label5
@@ -774,7 +775,7 @@ Partial Class frmPawningItemNew
         '
         'lvSpec
         '
-        Me.lvSpec.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
+        Me.lvSpec.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
         Me.lvSpec.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSpec.FullRowSelect = True
         Me.lvSpec.GridLines = True
@@ -792,7 +793,7 @@ Partial Class frmPawningItemNew
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Spicification Name"
+        Me.ColumnHeader2.Text = "Specification Name"
         Me.ColumnHeader2.Width = 150
         '
         'ColumnHeader3
@@ -802,8 +803,13 @@ Partial Class frmPawningItemNew
         '
         'ColumnHeader4
         '
-        Me.ColumnHeader4.Text = "Specification Value"
-        Me.ColumnHeader4.Width = 200
+        Me.ColumnHeader4.Text = "Specification Type"
+        Me.ColumnHeader4.Width = 0
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Specification Value"
+        Me.ColumnHeader5.Width = 152
         '
         'btnSearchClassification
         '
@@ -969,4 +975,5 @@ Partial Class frmPawningItemNew
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
 End Class

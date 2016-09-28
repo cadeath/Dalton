@@ -180,7 +180,11 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
+
             .Item("SchemeName") = schemename
+
+            .Item("SCHEME_ID") = 1
+
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)

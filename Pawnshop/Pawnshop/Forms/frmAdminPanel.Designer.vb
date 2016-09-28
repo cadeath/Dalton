@@ -465,6 +465,7 @@ Partial Class frmAdminPanel
         '
         'txtDescription
         '
+
         Me.txtDescription.Location = New System.Drawing.Point(106, 91)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
@@ -472,15 +473,32 @@ Partial Class frmAdminPanel
         Me.txtDescription.TabIndex = 2
         Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
         Me.txtDescription.WatermarkText = "Description"
+
+        Me.DataGridViewComboBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.DataGridViewComboBoxColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DataGridViewComboBoxColumn1.HeaderText = "Specification Type"
+        Me.DataGridViewComboBoxColumn1.Items.AddRange(New Object() {"String", "Numeric", "Integer"})
+        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
+        Me.DataGridViewComboBoxColumn1.Width = 113
+
         '
         'txtCategory
-        '
+	'
         Me.txtCategory.Location = New System.Drawing.Point(106, 57)
         Me.txtCategory.Name = "txtCategory"
         Me.txtCategory.Size = New System.Drawing.Size(189, 22)
         Me.txtCategory.TabIndex = 1
         Me.txtCategory.WatermarkColor = System.Drawing.Color.Gray
         Me.txtCategory.WatermarkText = "Category"
+
+        Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
+        Me.DataGridViewComboBoxColumn2.Items.AddRange(New Object() {"TextBox", "MultiLine", "Yes/No"})
+        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
+        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.DataGridViewComboBoxColumn2.Width = 120
+
         '
         'txtClassification
         '
