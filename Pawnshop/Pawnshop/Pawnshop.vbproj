@@ -395,6 +395,7 @@
     <Compile Include="Panel\frm_PanelYesNo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PawnModule\CollectionPawnItemSpecs.vb" />
     <Compile Include="PawnModule\dev_PT_test.Designer.vb">
       <DependentUpon>dev_PT_test.vb</DependentUpon>
     </Compile>
@@ -403,6 +404,7 @@
     </Compile>
     <Compile Include="PawnModule\PawnCalculation.vb" />
     <Compile Include="PawnModule\PawnItem.vb" />
+    <Compile Include="PawnModule\PawnItemSpec.vb" />
     <Compile Include="PawnModule\PawnTicket2.vb" />
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
       <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>

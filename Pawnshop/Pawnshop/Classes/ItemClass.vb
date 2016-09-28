@@ -242,21 +242,6 @@
     End Sub
 
     Public Sub Update()
-
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemID)
-
-
-        mySql = "SELECT * FROM tblItem ORDER BY ItemID DESC ROWS 1"
-        ds = LoadSQL(mySql, MainTable)
-        _itemClassID = ds.Tables(MainTable).Rows(0).Item("ItemID")
-
-        For Each ItemSpec As ItemSpecs In ItemSpecifications
-            ItemSpec.ItemID = _itemClassID
-            ItemSpec.SaveSpecs()
-        Next
-    End Sub
-
-    Public Sub Update()
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemClassID)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
