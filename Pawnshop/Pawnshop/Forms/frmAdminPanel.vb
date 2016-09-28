@@ -120,7 +120,6 @@ end sub
         txtSearch.Text = ""
         txtReferenceNumber.Text = ""
         cmbModuleName.Text = ""
-        cboSchemeName.SelectedItem = Nothing
         dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
         cbotxtSchemename.Items.Clear()
@@ -135,7 +134,6 @@ end sub
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
-        If cboSchemeName.Text = "" Then cboSchemeName.Focus() : Return False
         If dgSpecs.CurrentCell.Value Is Nothing Then dgSpecs.Focus() : Return False
 
         Return True
