@@ -172,8 +172,10 @@ Public Class frmAdminPanel
             SpecSave.SaveSpecs()
             'ColItemsSpecs.Add(SpecSave)
         Next
-        'ItemSave.ItemSpecifications = ColItemsSpecs
-        ItemSave.SaveItem()
+
+
+        ItemSave.ItemSpecifications = ColItemsSpecs
+        ItemSave.Save_ItemClass()
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()

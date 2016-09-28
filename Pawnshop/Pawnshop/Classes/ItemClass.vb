@@ -93,7 +93,6 @@
         End Set
     End Property
 
-
     Private _created As Date
     Public Overridable Property created_at() As Date
         Get
@@ -113,6 +112,17 @@
             _updated = value
         End Set
     End Property
+
+    Private _schemeID As Integer
+    Public Property SchemeID() As Integer
+        Get
+            Return _schemeID
+        End Get
+        Set(ByVal value As Integer)
+            _schemeID = value
+        End Set
+    End Property
+
 
     Private _itemSpecs As CollectionItemSpecs
     Public Property ItemSpecifications() As CollectionItemSpecs
@@ -159,15 +169,25 @@
 
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
-            _SchemeID = .Item("Scheme_ID")
+            _schemeID = .Item("Scheme_ID")
+        End With
+
+        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        ds.Clear()
+        ds = LoadSQL(mySql, SubTable)
+
+        _itemSpecs = New CollectionItemSpecs
+        For Each dr As DataRow In ds.Tables(SubTable).Rows
+            Console.WriteLine(dr.Item("SpecsName"))
+            Dim tmpSpecs As New ItemSpecs
+            tmpSpecs.LoadItemSpecs_row(dr)
+
 
         End With
     End Sub
 
-    Public Sub SaveItem()
-
-        Dim mySql As String = "SELECT * FROM tblItem"
-        'String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
+    Public Sub Save_ItemClass()
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         Dim dsNewRow As DataRow
@@ -182,7 +202,9 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
-            .Item("SCHEME_ID") = _SchemeID
+
+            .Item("Scheme_ID") = _schemeID
+
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -232,6 +254,7 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
+            .Item("Scheme_ID") = _schemeID
         End With
         database.SaveEntry(ds, False)
     End Sub
