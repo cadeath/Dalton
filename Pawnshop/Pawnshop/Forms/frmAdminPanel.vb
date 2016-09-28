@@ -262,7 +262,7 @@ end sub
         Next
 
         ItemSave.ItemSpecifications = ColItemsSpecs
-        ItemSave.SaveItem()
+        ItemSave.Save_ItemClass()
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()

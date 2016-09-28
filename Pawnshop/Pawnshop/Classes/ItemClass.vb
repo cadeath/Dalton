@@ -93,7 +93,6 @@
         End Set
     End Property
 
-
     Private _created As Date
     Public Overridable Property created_at() As Date
         Get
@@ -114,6 +113,7 @@
         End Set
     End Property
 
+
     Private _SchemeName As String
     Public Property SchemeName() As String
         Get
@@ -123,6 +123,18 @@
             _SchemeName = value
         End Set
     End Property
+
+=======
+    Private _schemeID As Integer
+    Public Property SchemeID() As Integer
+        Get
+            Return _schemeID
+        End Get
+        Set(ByVal value As Integer)
+            _schemeID = value
+        End Set
+    End Property
+
 
     Private _itemSpecs As CollectionItemSpecs
     Public Property ItemSpecifications() As CollectionItemSpecs
@@ -170,15 +182,20 @@
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
 
+
             _SchemeID = .Item("Scheme_ID")
 
 
         End With
     End Sub
 
+
     Public Sub SaveItem()
 
-        Dim mySql As String = "SELECT * FROM tblItem"
+     
+    Public Sub Save_ItemClass()
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
+
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         Dim dsNewRow As DataRow
@@ -195,6 +212,7 @@
             .Item("Created_At") = Now
 
             .Item("SCHEME_ID") = _SchemeID
+
 
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
@@ -245,7 +263,9 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
-            .Item("SchemeName") = schemename
+
+            .Item("Scheme_ID") = _schemeID
+
         End With
         database.SaveEntry(ds, False)
     End Sub

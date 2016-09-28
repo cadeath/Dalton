@@ -80,7 +80,7 @@
 
 #Region "Procedures and Functions"
 
-    Public Sub Save()
+    Public Sub Save_PawnItem()
         Dim mySql As String
         Dim ds As DataSet
         Dim isNew As Boolean = False
@@ -145,6 +145,13 @@
             _update_At = .Item("UPDATED_AT")
         End With
     End Sub
+
+    Public Function Get_LastID() As Integer
+        Dim mySql As String = String.Format("SELECT * FROM {0} ORDER BY PAWNITEMID DESC ROWS 1", MainTable)
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("PAWNITEMID")
+    End Function
 
 #End Region
 
