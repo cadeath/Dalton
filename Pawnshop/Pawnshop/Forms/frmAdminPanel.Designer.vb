@@ -23,16 +23,12 @@ Partial Class frmAdminPanel
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
-        Me.txtPrintLayout = New System.Windows.Forms.TextBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
         Me.rdbYes = New System.Windows.Forms.RadioButton()
         Me.lblRenewable = New System.Windows.Forms.Label()
-        Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.lblDescription = New System.Windows.Forms.Label()
-        Me.txtCategory = New System.Windows.Forms.TextBox()
         Me.lblCategory = New System.Windows.Forms.Label()
-        Me.txtClassifiction = New System.Windows.Forms.TextBox()
         Me.lblClassification = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -61,6 +57,11 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.txtPrintLayout = New System.Windows.Forms.TextBox()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.txtCategory = New System.Windows.Forms.TextBox()
+        Me.txtClassification = New System.Windows.Forms.TextBox()
+        Me.cboSchemeName = New System.Windows.Forms.ComboBox()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -73,6 +74,7 @@ Partial Class frmAdminPanel
         'grpAddItem
         '
         Me.grpAddItem.BackColor = System.Drawing.Color.Gainsboro
+        Me.grpAddItem.Controls.Add(Me.cboSchemeName)
         Me.grpAddItem.Controls.Add(Me.txtPrintLayout)
         Me.grpAddItem.Controls.Add(Me.lblPrintLayout)
         Me.grpAddItem.Controls.Add(Me.rdbNo)
@@ -82,7 +84,7 @@ Partial Class frmAdminPanel
         Me.grpAddItem.Controls.Add(Me.lblDescription)
         Me.grpAddItem.Controls.Add(Me.txtCategory)
         Me.grpAddItem.Controls.Add(Me.lblCategory)
-        Me.grpAddItem.Controls.Add(Me.txtClassifiction)
+        Me.grpAddItem.Controls.Add(Me.txtClassification)
         Me.grpAddItem.Controls.Add(Me.lblClassification)
         Me.grpAddItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpAddItem.ForeColor = System.Drawing.SystemColors.MenuText
@@ -93,19 +95,10 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
         '
-        'txtPrintLayout
-        '
-        Me.txtPrintLayout.Location = New System.Drawing.Point(105, 244)
-        Me.txtPrintLayout.Multiline = True
-        Me.txtPrintLayout.Name = "txtPrintLayout"
-        Me.txtPrintLayout.Size = New System.Drawing.Size(250, 68)
-        Me.txtPrintLayout.TabIndex = 5
-        Me.txtPrintLayout.Text = "Print Layout"
-        '
         'lblPrintLayout
         '
         Me.lblPrintLayout.AutoSize = True
-        Me.lblPrintLayout.Location = New System.Drawing.Point(23, 240)
+        Me.lblPrintLayout.Location = New System.Drawing.Point(23, 225)
         Me.lblPrintLayout.Name = "lblPrintLayout"
         Me.lblPrintLayout.Size = New System.Drawing.Size(77, 16)
         Me.lblPrintLayout.TabIndex = 8
@@ -114,7 +107,7 @@ Partial Class frmAdminPanel
         'rdbNo
         '
         Me.rdbNo.AutoSize = True
-        Me.rdbNo.Location = New System.Drawing.Point(159, 203)
+        Me.rdbNo.Location = New System.Drawing.Point(159, 188)
         Me.rdbNo.Name = "rdbNo"
         Me.rdbNo.Size = New System.Drawing.Size(44, 20)
         Me.rdbNo.TabIndex = 4
@@ -125,7 +118,7 @@ Partial Class frmAdminPanel
         '
         Me.rdbYes.AutoSize = True
         Me.rdbYes.Checked = True
-        Me.rdbYes.Location = New System.Drawing.Point(105, 203)
+        Me.rdbYes.Location = New System.Drawing.Point(105, 188)
         Me.rdbYes.Name = "rdbYes"
         Me.rdbYes.Size = New System.Drawing.Size(50, 20)
         Me.rdbYes.TabIndex = 3
@@ -136,59 +129,34 @@ Partial Class frmAdminPanel
         'lblRenewable
         '
         Me.lblRenewable.AutoSize = True
-        Me.lblRenewable.Location = New System.Drawing.Point(12, 204)
+        Me.lblRenewable.Location = New System.Drawing.Point(12, 189)
         Me.lblRenewable.Name = "lblRenewable"
         Me.lblRenewable.Size = New System.Drawing.Size(87, 16)
         Me.lblRenewable.TabIndex = 6
         Me.lblRenewable.Text = "IsRenewable"
         '
-        'txtDescription
-        '
-        Me.txtDescription.Location = New System.Drawing.Point(105, 122)
-        Me.txtDescription.Multiline = True
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(250, 71)
-        Me.txtDescription.TabIndex = 2
-        Me.txtDescription.Text = "Description"
-        '
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
-        Me.lblDescription.Location = New System.Drawing.Point(23, 122)
+        Me.lblDescription.Location = New System.Drawing.Point(23, 107)
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(76, 16)
         Me.lblDescription.TabIndex = 4
         Me.lblDescription.Text = "Description"
         '
-        'txtCategory
-        '
-        Me.txtCategory.Location = New System.Drawing.Point(105, 79)
-        Me.txtCategory.Name = "txtCategory"
-        Me.txtCategory.Size = New System.Drawing.Size(250, 22)
-        Me.txtCategory.TabIndex = 1
-        Me.txtCategory.Text = "Category"
-        '
         'lblCategory
         '
         Me.lblCategory.AutoSize = True
-        Me.lblCategory.Location = New System.Drawing.Point(36, 85)
+        Me.lblCategory.Location = New System.Drawing.Point(36, 70)
         Me.lblCategory.Name = "lblCategory"
         Me.lblCategory.Size = New System.Drawing.Size(63, 16)
         Me.lblCategory.TabIndex = 2
         Me.lblCategory.Text = "Category"
         '
-        'txtClassifiction
-        '
-        Me.txtClassifiction.Location = New System.Drawing.Point(105, 38)
-        Me.txtClassifiction.Name = "txtClassifiction"
-        Me.txtClassifiction.Size = New System.Drawing.Size(250, 22)
-        Me.txtClassifiction.TabIndex = 0
-        Me.txtClassifiction.Text = "Classfication"
-        '
         'lblClassification
         '
         Me.lblClassification.AutoSize = True
-        Me.lblClassification.Location = New System.Drawing.Point(13, 42)
+        Me.lblClassification.Location = New System.Drawing.Point(13, 27)
         Me.lblClassification.Name = "lblClassification"
         Me.lblClassification.Size = New System.Drawing.Size(87, 16)
         Me.lblClassification.TabIndex = 0
@@ -448,6 +416,48 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
+        'txtPrintLayout
+        '
+        Me.txtPrintLayout.Location = New System.Drawing.Point(105, 229)
+        Me.txtPrintLayout.Multiline = True
+        Me.txtPrintLayout.Name = "txtPrintLayout"
+        Me.txtPrintLayout.Size = New System.Drawing.Size(250, 68)
+        Me.txtPrintLayout.TabIndex = 5
+        Me.txtPrintLayout.Text = "Print Layout"
+        '
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(105, 107)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(250, 71)
+        Me.txtDescription.TabIndex = 2
+        Me.txtDescription.Text = "Description"
+        '
+        'txtCategory
+        '
+        Me.txtCategory.Location = New System.Drawing.Point(105, 64)
+        Me.txtCategory.Name = "txtCategory"
+        Me.txtCategory.Size = New System.Drawing.Size(250, 22)
+        Me.txtCategory.TabIndex = 1
+        Me.txtCategory.Text = "Category"
+        '
+        'txtClassification
+        '
+        Me.txtClassification.Location = New System.Drawing.Point(105, 23)
+        Me.txtClassification.Name = "txtClassification"
+        Me.txtClassification.Size = New System.Drawing.Size(250, 22)
+        Me.txtClassification.TabIndex = 0
+        Me.txtClassification.Text = "Classfication"
+        '
+        'cboSchemeName
+        '
+        Me.cboSchemeName.FormattingEnabled = True
+        Me.cboSchemeName.Location = New System.Drawing.Point(105, 304)
+        Me.cboSchemeName.Name = "cboSchemeName"
+        Me.cboSchemeName.Size = New System.Drawing.Size(250, 24)
+        Me.cboSchemeName.TabIndex = 9
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -475,11 +485,8 @@ Partial Class frmAdminPanel
     Friend WithEvents rdbNo As System.Windows.Forms.RadioButton
     Friend WithEvents rdbYes As System.Windows.Forms.RadioButton
     Friend WithEvents lblRenewable As System.Windows.Forms.Label
-    Friend WithEvents txtDescription As System.Windows.Forms.TextBox
     Friend WithEvents lblDescription As System.Windows.Forms.Label
-    Friend WithEvents txtCategory As System.Windows.Forms.TextBox
     Friend WithEvents lblCategory As System.Windows.Forms.Label
-    Friend WithEvents txtClassifiction As System.Windows.Forms.TextBox
     Friend WithEvents lblClassification As System.Windows.Forms.Label
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
@@ -497,7 +504,6 @@ Partial Class frmAdminPanel
     Friend WithEvents btnExport As System.Windows.Forms.Button
     Friend WithEvents cmbModuleName As System.Windows.Forms.ComboBox
     Friend WithEvents dgSpecification As System.Windows.Forms.DataGridView
-    Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents lvModule As System.Windows.Forms.ListView
@@ -510,4 +516,9 @@ Partial Class frmAdminPanel
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
+    Friend WithEvents txtDescription As System.Windows.Forms.TextBox
+    Friend WithEvents txtCategory As System.Windows.Forms.TextBox
+    Friend WithEvents txtClassification As System.Windows.Forms.TextBox
+    Friend WithEvents cboSchemeName As System.Windows.Forms.ComboBox
 End Class

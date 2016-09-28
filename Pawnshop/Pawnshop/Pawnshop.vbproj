@@ -341,6 +341,9 @@
     <Compile Include="Forms\frmItemList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\watermark.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>

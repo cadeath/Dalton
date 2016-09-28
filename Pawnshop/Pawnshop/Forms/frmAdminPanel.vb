@@ -25,7 +25,7 @@ Public Class frmAdminPanel
     Friend Sub LoadItemList(ByVal it As ItemClass)
         If it.ItemClass = "" Then Exit Sub
 
-        txtClassifiction.Text = it.ItemClass
+        txtClassification.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
@@ -46,7 +46,7 @@ Public Class frmAdminPanel
     End Sub
 
     Friend Sub LoadItemall(ByVal it As ItemClass)
-        txtClassifiction.Text = String.Format(it.ItemClass)
+        txtClassification.Text = String.Format(it.ItemClass)
         txtCategory.Text = String.Format(it.Category)
         txtDescription.Text = String.Format(it.Description)
 
@@ -63,7 +63,7 @@ Public Class frmAdminPanel
 
     Friend Sub clearfields()
         txtCategory.Text = ""
-        txtClassifiction.Text = ""
+        txtClassification.Text = ""
         txtDescription.Text = ""
         txtPrintLayout.Text = ""
         txtSearch.Text = ""
@@ -83,13 +83,22 @@ Public Class frmAdminPanel
     End Sub
     Private Function isValid() As Boolean
 
-        If txtClassifiction.Text = "" Then txtClassifiction.Focus() : Return False
+        If txtClassification.Text = "" Then txtClassification.Focus() : Return False
         If txtCategory.Text = "" Then txtCategory.Focus() : Return False
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
-
+        If cboSchemeName.Text = "" Then cboSchemeName.Focus() : Return False
+        If IsDataGridViewEmpty(dgSpecs) Then dgSpecs.Focus() : Return False
         Return True
+    End Function
+
+    Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
+        Dim isEmpty As Boolean = True
+        For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows Where (From cell As DataGridViewCell In row1.Cells Where Not String.IsNullOrEmpty(cell.Value)).Any(Function(cell) Not String.IsNullOrEmpty(Trim(cell.Value.ToString())))
+            isEmpty = False
+        Next
+        Return isEmpty
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
@@ -101,7 +110,7 @@ Public Class frmAdminPanel
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
 
-        ItemSave.ItemClass = txtClassifiction.Text
+        ItemSave.ItemClass = txtClassification.Text
         ItemSave.Category = txtCategory.Text
         ItemSave.Description = txtDescription.Text
 
@@ -144,7 +153,7 @@ Public Class frmAdminPanel
         clearfields()
 
     End Sub
-   
+
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not isValid() Then Exit Sub
@@ -162,7 +171,7 @@ Public Class frmAdminPanel
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
 
-        ItemModify.ItemClass = txtClassifiction.Text
+        ItemModify.ItemClass = txtClassification.Text
         ItemModify.Category = txtCategory.Text
         ItemModify.Description = txtDescription.Text
         ItemModify.updated_at = CurrentDate
@@ -229,7 +238,7 @@ Public Class frmAdminPanel
 
     Private Sub reaDOnlyTrue()
         txtCategory.ReadOnly = True
-        txtClassifiction.ReadOnly = True
+        txtClassification.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
         rdbNo.Enabled = False
@@ -241,7 +250,7 @@ Public Class frmAdminPanel
 
     Friend Sub reaDOnlyFalse()
         txtCategory.ReadOnly = False
-        txtClassifiction.ReadOnly = False
+        txtClassification.ReadOnly = False
         txtDescription.ReadOnly = False
         txtPrintLayout.ReadOnly = False
         rdbNo.Enabled = True
