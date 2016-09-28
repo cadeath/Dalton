@@ -51,7 +51,8 @@
 
                 Dim row As ListViewItem
 
-                row = New ListViewItem(.DayFrom)
+                row = New ListViewItem(.SchemeID)
+                row.SubItems.Add(.DayFrom)
                 row.SubItems.Add(.DayTo)
                 row.SubItems.Add(.Interest)
                 row.SubItems.Add(.Penalty)

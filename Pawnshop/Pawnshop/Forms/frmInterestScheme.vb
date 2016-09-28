@@ -99,7 +99,6 @@ Public Class frmInterestScheme
     End Sub
 
     Private Sub frmInterestScheme_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Load_Scheme_Data() '''''''Sample Data 
 
         clearfields()
         txtSchemeName.Text = ""
