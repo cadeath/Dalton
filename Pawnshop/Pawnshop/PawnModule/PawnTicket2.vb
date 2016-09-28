@@ -1,7 +1,6 @@
 ﻿Public Class PawnTicket2
 
     Private MainTable As String = "OPT"
-    Private PawnItem As PawnItem
 
 #Region "Properties"
     Private _PawnID As Integer
@@ -151,6 +150,16 @@
         End Get
         Set(ByVal value As Integer)
             _pawnItemID = value
+        End Set
+    End Property
+
+    Private _pawnItem As PawnItem
+    Public Property PawnItem() As PawnItem
+        Get
+            Return _pawnItem
+        End Get
+        Set(ByVal value As PawnItem)
+            _pawnItem = value
         End Set
     End Property
 

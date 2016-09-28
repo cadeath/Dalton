@@ -71,7 +71,7 @@
         Next
         Cellphone.ItemSpecifications = CellSpecs
 
-        Cellphone.SaveItem()
+        Cellphone.Save_ItemClass()
 
 
         ' JEWELRY
@@ -107,7 +107,7 @@
         Next
         BRACELET.ItemSpecifications = BRACELETSPECS
 
-        BRACELET.SaveItem()
+        BRACELET.Save_ItemClass()
 
 
         ItemClass_Seed.Populate()

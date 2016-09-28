@@ -75,7 +75,7 @@
             Next
 
             tmpClass.ItemSpecifications = tmpSpecs
-            tmpClass.SaveItem()
+            tmpClass.Save_ItemClass()
         Next
 
     End Sub

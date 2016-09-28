@@ -28,6 +28,7 @@ Partial Class dev_PT_test
         Me.cboItem = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cboClient
@@ -84,11 +85,21 @@ Partial Class dev_PT_test
         Me.Button3.Text = "ItemClass"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(12, 294)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 42)
+        Me.Button4.TabIndex = 6
+        Me.Button4.Text = "Save New PT"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'dev_PT_test
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(709, 348)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cboItem)
@@ -107,4 +118,5 @@ Partial Class dev_PT_test
     Friend WithEvents cboItem As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 End Class

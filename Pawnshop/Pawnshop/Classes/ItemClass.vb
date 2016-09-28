@@ -173,7 +173,7 @@
         Next
     End Sub
 
-    Public Sub SaveItem()
+    Public Sub Save_ItemClass()
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
