@@ -34,14 +34,15 @@ Partial Class frmAdminPanel
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.btnClose = New System.Windows.Forms.Button()
-        Me.dgSpecification = New System.Windows.Forms.DataGridView()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgSpecs = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -57,15 +58,20 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+
         Me.txtPrintLayout = New System.Windows.Forms.TextBox()
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.txtCategory = New System.Windows.Forms.TextBox()
         Me.txtClassification = New System.Windows.Forms.TextBox()
         Me.cboSchemeName = New System.Windows.Forms.ComboBox()
+
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbotxtSchemename = New System.Windows.Forms.ComboBox()
+
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        CType(Me.dgSpecification, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgSpecs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSearch.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -74,7 +80,12 @@ Partial Class frmAdminPanel
         'grpAddItem
         '
         Me.grpAddItem.BackColor = System.Drawing.Color.Gainsboro
+
         Me.grpAddItem.Controls.Add(Me.cboSchemeName)
+
+        Me.grpAddItem.Controls.Add(Me.cbotxtSchemename)
+        Me.grpAddItem.Controls.Add(Me.Label2)
+
         Me.grpAddItem.Controls.Add(Me.txtPrintLayout)
         Me.grpAddItem.Controls.Add(Me.lblPrintLayout)
         Me.grpAddItem.Controls.Add(Me.rdbNo)
@@ -95,10 +106,26 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
         '
+
         'lblPrintLayout
         '
         Me.lblPrintLayout.AutoSize = True
         Me.lblPrintLayout.Location = New System.Drawing.Point(23, 225)
+
+        'txtPrintLayout
+        '
+        Me.txtPrintLayout.Location = New System.Drawing.Point(104, 205)
+        Me.txtPrintLayout.Multiline = True
+        Me.txtPrintLayout.Name = "txtPrintLayout"
+        Me.txtPrintLayout.Size = New System.Drawing.Size(250, 53)
+        Me.txtPrintLayout.TabIndex = 5
+        Me.txtPrintLayout.Text = "Print Layout"
+        '
+        'lblPrintLayout
+        '
+        Me.lblPrintLayout.AutoSize = True
+        Me.lblPrintLayout.Location = New System.Drawing.Point(22, 208)
+
         Me.lblPrintLayout.Name = "lblPrintLayout"
         Me.lblPrintLayout.Size = New System.Drawing.Size(77, 16)
         Me.lblPrintLayout.TabIndex = 8
@@ -107,7 +134,11 @@ Partial Class frmAdminPanel
         'rdbNo
         '
         Me.rdbNo.AutoSize = True
+
         Me.rdbNo.Location = New System.Drawing.Point(159, 188)
+
+        Me.rdbNo.Location = New System.Drawing.Point(160, 166)
+
         Me.rdbNo.Name = "rdbNo"
         Me.rdbNo.Size = New System.Drawing.Size(44, 20)
         Me.rdbNo.TabIndex = 4
@@ -118,7 +149,11 @@ Partial Class frmAdminPanel
         '
         Me.rdbYes.AutoSize = True
         Me.rdbYes.Checked = True
+
         Me.rdbYes.Location = New System.Drawing.Point(105, 188)
+
+        Me.rdbYes.Location = New System.Drawing.Point(104, 166)
+
         Me.rdbYes.Name = "rdbYes"
         Me.rdbYes.Size = New System.Drawing.Size(50, 20)
         Me.rdbYes.TabIndex = 3
@@ -129,34 +164,84 @@ Partial Class frmAdminPanel
         'lblRenewable
         '
         Me.lblRenewable.AutoSize = True
+
         Me.lblRenewable.Location = New System.Drawing.Point(12, 189)
+
+        Me.lblRenewable.Location = New System.Drawing.Point(11, 168)
+
         Me.lblRenewable.Name = "lblRenewable"
         Me.lblRenewable.Size = New System.Drawing.Size(87, 16)
         Me.lblRenewable.TabIndex = 6
         Me.lblRenewable.Text = "IsRenewable"
         '
+
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
         Me.lblDescription.Location = New System.Drawing.Point(23, 107)
+
+        'txtDescription
+        '
+        Me.txtDescription.Location = New System.Drawing.Point(104, 103)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(250, 53)
+        Me.txtDescription.TabIndex = 2
+        Me.txtDescription.Text = "Description"
+        '
+        'lblDescription
+        '
+        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Location = New System.Drawing.Point(22, 106)
+
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(76, 16)
         Me.lblDescription.TabIndex = 4
         Me.lblDescription.Text = "Description"
         '
+
         'lblCategory
         '
         Me.lblCategory.AutoSize = True
         Me.lblCategory.Location = New System.Drawing.Point(36, 70)
+
+        'txtCategory
+        '
+        Me.txtCategory.Location = New System.Drawing.Point(104, 67)
+        Me.txtCategory.Name = "txtCategory"
+        Me.txtCategory.Size = New System.Drawing.Size(250, 22)
+        Me.txtCategory.TabIndex = 1
+        Me.txtCategory.Text = "Category"
+        '
+        'lblCategory
+        '
+        Me.lblCategory.AutoSize = True
+        Me.lblCategory.Location = New System.Drawing.Point(37, 70)
+
         Me.lblCategory.Name = "lblCategory"
         Me.lblCategory.Size = New System.Drawing.Size(63, 16)
         Me.lblCategory.TabIndex = 2
         Me.lblCategory.Text = "Category"
         '
+
         'lblClassification
         '
         Me.lblClassification.AutoSize = True
         Me.lblClassification.Location = New System.Drawing.Point(13, 27)
+
+        'txtClassifiction
+        '
+        Me.txtClassifiction.Location = New System.Drawing.Point(104, 27)
+        Me.txtClassifiction.Name = "txtClassifiction"
+        Me.txtClassifiction.Size = New System.Drawing.Size(250, 22)
+        Me.txtClassifiction.TabIndex = 0
+        Me.txtClassifiction.Text = "Classfication"
+        '
+        'lblClassification
+        '
+        Me.lblClassification.AutoSize = True
+        Me.lblClassification.Location = New System.Drawing.Point(12, 30)
+
         Me.lblClassification.Name = "lblClassification"
         Me.lblClassification.Size = New System.Drawing.Size(87, 16)
         Me.lblClassification.TabIndex = 0
@@ -194,8 +279,8 @@ Partial Class frmAdminPanel
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.Gainsboro
+        Me.TabPage1.Controls.Add(Me.dgSpecs)
         Me.TabPage1.Controls.Add(Me.btnClose)
-        Me.TabPage1.Controls.Add(Me.dgSpecification)
         Me.TabPage1.Controls.Add(Me.btnSave)
         Me.TabPage1.Controls.Add(Me.btnUpdate)
         Me.TabPage1.Controls.Add(Me.grpSearch)
@@ -208,6 +293,70 @@ Partial Class frmAdminPanel
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Item"
         '
+        'dgSpecs
+        '
+        Me.dgSpecs.AllowUserToDeleteRows = False
+        Me.dgSpecs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgSpecs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewComboBoxColumn1, Me.DataGridViewComboBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewComboBoxColumn3})
+        Me.dgSpecs.Location = New System.Drawing.Point(376, 72)
+        Me.dgSpecs.Name = "dgSpecs"
+        Me.dgSpecs.RowHeadersVisible = False
+        Me.dgSpecs.RowHeadersWidth = 20
+        Me.dgSpecs.Size = New System.Drawing.Size(761, 316)
+        Me.dgSpecs.TabIndex = 14
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "ID"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Visible = False
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.Width = 120
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Specification Name"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.Width = 160
+        '
+        'DataGridViewComboBoxColumn1
+        '
+        Me.DataGridViewComboBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
+        Me.DataGridViewComboBoxColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DataGridViewComboBoxColumn1.HeaderText = "Specification Type"
+        Me.DataGridViewComboBoxColumn1.Items.AddRange(New Object() {"String", "Numeric", "Integer"})
+        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
+        Me.DataGridViewComboBoxColumn1.Width = 113
+        '
+        'DataGridViewComboBoxColumn2
+        '
+        Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
+        Me.DataGridViewComboBoxColumn2.Items.AddRange(New Object() {"TextBox", "MultiLine", "Yes/No"})
+        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
+        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.DataGridViewComboBoxColumn2.Width = 120
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Unit of Measure"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Width = 140
+        '
+        'DataGridViewComboBoxColumn3
+        '
+        Me.DataGridViewComboBoxColumn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.DataGridViewComboBoxColumn3.HeaderText = "Is Required"
+        Me.DataGridViewComboBoxColumn3.Items.AddRange(New Object() {"True", "False"})
+        Me.DataGridViewComboBoxColumn3.Name = "DataGridViewComboBoxColumn3"
+        Me.DataGridViewComboBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewComboBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
         'btnClose
         '
         Me.btnClose.Location = New System.Drawing.Point(1061, 394)
@@ -216,64 +365,6 @@ Partial Class frmAdminPanel
         Me.btnClose.TabIndex = 13
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
-        '
-        'dgSpecification
-        '
-        Me.dgSpecification.AllowUserToDeleteRows = False
-        Me.dgSpecification.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgSpecification.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column1, Me.Column2, Me.Column4, Me.Column5, Me.Column6})
-        Me.dgSpecification.Location = New System.Drawing.Point(374, 79)
-        Me.dgSpecification.Name = "dgSpecification"
-        Me.dgSpecification.RowHeadersVisible = False
-        Me.dgSpecification.RowHeadersWidth = 20
-        Me.dgSpecification.Size = New System.Drawing.Size(761, 309)
-        Me.dgSpecification.TabIndex = 1
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Short Code"
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 120
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Specification Name"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 160
-        '
-        'Column2
-        '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
-        Me.Column2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Column2.HeaderText = "Specification Type"
-        Me.Column2.Items.AddRange(New Object() {"String", "Double", "Integer", "Boolean", "", "", ""})
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 113
-        '
-        'Column4
-        '
-        Me.Column4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Column4.HeaderText = "Layout"
-        Me.Column4.Items.AddRange(New Object() {"Textbox", "Multiline", "Yes/No"})
-        Me.Column4.Name = "Column4"
-        Me.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Column4.Width = 120
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Unit of Measure"
-        Me.Column5.Name = "Column5"
-        Me.Column5.Width = 140
-        '
-        'Column6
-        '
-        Me.Column6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Column6.HeaderText = "Is Required"
-        Me.Column6.Items.AddRange(New Object() {"True", "False"})
-        Me.Column6.Name = "Column6"
-        Me.Column6.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'grpSearch
         '
@@ -457,6 +548,24 @@ Partial Class frmAdminPanel
         Me.cboSchemeName.Name = "cboSchemeName"
         Me.cboSchemeName.Size = New System.Drawing.Size(250, 24)
         Me.cboSchemeName.TabIndex = 9
+
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(23, 283)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(58, 16)
+        Me.Label2.TabIndex = 10
+        Me.Label2.Text = "Scheme"
+        '
+        'cbotxtSchemename
+        '
+        Me.cbotxtSchemename.FormattingEnabled = True
+        Me.cbotxtSchemename.Location = New System.Drawing.Point(104, 280)
+        Me.cbotxtSchemename.Name = "cbotxtSchemename"
+        Me.cbotxtSchemename.Size = New System.Drawing.Size(250, 24)
+        Me.cbotxtSchemename.TabIndex = 15
+
         '
         'frmAdminPanel
         '
@@ -472,7 +581,7 @@ Partial Class frmAdminPanel
         Me.grpAddItem.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        CType(Me.dgSpecification, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgSpecs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
@@ -503,15 +612,20 @@ Partial Class frmAdminPanel
     Friend WithEvents txtReferenceNumber As System.Windows.Forms.TextBox
     Friend WithEvents btnExport As System.Windows.Forms.Button
     Friend WithEvents cmbModuleName As System.Windows.Forms.ComboBox
+
     Friend WithEvents dgSpecification As System.Windows.Forms.DataGridView
+
+    Friend WithEvents txtPrintLayout As System.Windows.Forms.TextBox
+
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents lvModule As System.Windows.Forms.ListView
     Friend WithEvents SFD As System.Windows.Forms.SaveFileDialog
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents dgSpecs As System.Windows.Forms.DataGridView
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -521,4 +635,13 @@ Partial Class frmAdminPanel
     Friend WithEvents txtCategory As System.Windows.Forms.TextBox
     Friend WithEvents txtClassification As System.Windows.Forms.TextBox
     Friend WithEvents cboSchemeName As System.Windows.Forms.ComboBox
+
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn1 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn2 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn3 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents cbotxtSchemename As System.Windows.Forms.ComboBox
 End Class

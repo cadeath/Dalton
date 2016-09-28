@@ -41,10 +41,22 @@ Partial Class frmInterestScheme
         Me.Label10 = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.LineShape2 = New Microsoft.VisualBasic.PowerPacks.LineShape()
         Me.LineShape1 = New Microsoft.VisualBasic.PowerPacks.LineShape()
+        Me.lvIntScheme = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -65,24 +77,25 @@ Partial Class frmInterestScheme
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(384, 6)
+        Me.GroupBox1.Location = New System.Drawing.Point(384, 46)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(301, 267)
+        Me.GroupBox1.Size = New System.Drawing.Size(546, 111)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         '
         'txtRemarks
         '
-        Me.txtRemarks.Location = New System.Drawing.Point(77, 162)
+        Me.txtRemarks.Location = New System.Drawing.Point(265, 59)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(218, 67)
+        Me.txtRemarks.Size = New System.Drawing.Size(218, 44)
         Me.txtRemarks.TabIndex = 4
+        Me.txtRemarks.Text = "Remarks"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(5, 165)
+        Me.Label5.Location = New System.Drawing.Point(198, 69)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(63, 16)
         Me.Label5.TabIndex = 9
@@ -90,15 +103,16 @@ Partial Class frmInterestScheme
         '
         'txtPenalty
         '
-        Me.txtPenalty.Location = New System.Drawing.Point(77, 126)
+        Me.txtPenalty.Location = New System.Drawing.Point(77, 65)
         Me.txtPenalty.Name = "txtPenalty"
-        Me.txtPenalty.Size = New System.Drawing.Size(218, 22)
+        Me.txtPenalty.Size = New System.Drawing.Size(108, 22)
         Me.txtPenalty.TabIndex = 3
+        Me.txtPenalty.Text = "Penalty"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 129)
+        Me.Label4.Location = New System.Drawing.Point(6, 68)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(53, 16)
         Me.Label4.TabIndex = 7
@@ -106,15 +120,16 @@ Partial Class frmInterestScheme
         '
         'txtInterest
         '
-        Me.txtInterest.Location = New System.Drawing.Point(77, 90)
+        Me.txtInterest.Location = New System.Drawing.Point(446, 18)
         Me.txtInterest.Name = "txtInterest"
-        Me.txtInterest.Size = New System.Drawing.Size(218, 22)
+        Me.txtInterest.Size = New System.Drawing.Size(90, 22)
         Me.txtInterest.TabIndex = 2
+        Me.txtInterest.Text = "Interest"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(5, 93)
+        Me.Label3.Location = New System.Drawing.Point(393, 21)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(51, 16)
         Me.Label3.TabIndex = 5
@@ -122,15 +137,16 @@ Partial Class frmInterestScheme
         '
         'txtDayTo
         '
-        Me.txtDayTo.Location = New System.Drawing.Point(77, 54)
+        Me.txtDayTo.Location = New System.Drawing.Point(255, 18)
         Me.txtDayTo.Name = "txtDayTo"
-        Me.txtDayTo.Size = New System.Drawing.Size(218, 22)
+        Me.txtDayTo.Size = New System.Drawing.Size(116, 22)
         Me.txtDayTo.TabIndex = 1
+        Me.txtDayTo.Text = "Day to"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(5, 57)
+        Me.Label2.Location = New System.Drawing.Point(198, 21)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(53, 16)
         Me.Label2.TabIndex = 3
@@ -140,8 +156,9 @@ Partial Class frmInterestScheme
         '
         Me.txtDayFrom.Location = New System.Drawing.Point(77, 19)
         Me.txtDayFrom.Name = "txtDayFrom"
-        Me.txtDayFrom.Size = New System.Drawing.Size(218, 22)
+        Me.txtDayFrom.Size = New System.Drawing.Size(108, 22)
         Me.txtDayFrom.TabIndex = 0
+        Me.txtDayFrom.Text = "Day From"
         '
         'Label1
         '
@@ -154,7 +171,7 @@ Partial Class frmInterestScheme
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(469, 21)
+        Me.btnSave.Location = New System.Drawing.Point(627, 21)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(88, 34)
         Me.btnSave.TabIndex = 0
@@ -170,9 +187,9 @@ Partial Class frmInterestScheme
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 6)
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 46)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(366, 133)
+        Me.GroupBox2.Size = New System.Drawing.Size(375, 133)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         '
@@ -183,6 +200,7 @@ Partial Class frmInterestScheme
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(251, 67)
         Me.txtDescription.TabIndex = 1
+        Me.txtDescription.Text = "Description"
         '
         'Label6
         '
@@ -199,6 +217,7 @@ Partial Class frmInterestScheme
         Me.txtSchemeName.Name = "txtSchemeName"
         Me.txtSchemeName.Size = New System.Drawing.Size(251, 22)
         Me.txtSchemeName.TabIndex = 0
+        Me.txtSchemeName.Text = "Scheme Name"
         '
         'Label10
         '
@@ -211,31 +230,41 @@ Partial Class frmInterestScheme
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(573, 21)
+        Me.btnClose.Location = New System.Drawing.Point(818, 21)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(88, 34)
-        Me.btnClose.TabIndex = 1
+        Me.btnClose.TabIndex = 2
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
         Me.GroupBox3.BackColor = System.Drawing.Color.Gainsboro
+        Me.GroupBox3.Controls.Add(Me.btnUpdate)
         Me.GroupBox3.Controls.Add(Me.btnClose)
         Me.GroupBox3.Controls.Add(Me.btnSave)
         Me.GroupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 288)
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 366)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(673, 73)
-        Me.GroupBox3.TabIndex = 2
+        Me.GroupBox3.Size = New System.Drawing.Size(927, 73)
+        Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(724, 21)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(88, 34)
+        Me.btnUpdate.TabIndex = 1
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(56, 185)
+        Me.Label7.Location = New System.Drawing.Point(56, 250)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(262, 37)
         Me.Label7.TabIndex = 12
@@ -247,37 +276,132 @@ Partial Class frmInterestScheme
         Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
         Me.ShapeContainer1.Name = "ShapeContainer1"
         Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {Me.LineShape2, Me.LineShape1})
-        Me.ShapeContainer1.Size = New System.Drawing.Size(697, 370)
+        Me.ShapeContainer1.Size = New System.Drawing.Size(936, 444)
         Me.ShapeContainer1.TabIndex = 13
         Me.ShapeContainer1.TabStop = False
         '
         'LineShape2
         '
         Me.LineShape2.Name = "LineShape2"
-        Me.LineShape2.X1 = 2
-        Me.LineShape2.X2 = 384
-        Me.LineShape2.Y1 = 179
-        Me.LineShape2.Y2 = 179
+        Me.LineShape2.X1 = 10
+        Me.LineShape2.X2 = 374
+        Me.LineShape2.Y1 = 246
+        Me.LineShape2.Y2 = 246
         '
         'LineShape1
         '
         Me.LineShape1.Name = "LineShape1"
-        Me.LineShape1.X1 = 2
-        Me.LineShape1.X2 = 384
-        Me.LineShape1.Y1 = 234
-        Me.LineShape1.Y2 = 234
+        Me.LineShape1.X1 = 11
+        Me.LineShape1.X2 = 373
+        Me.LineShape1.Y1 = 301
+        Me.LineShape1.Y2 = 301
+        '
+        'lvIntScheme
+        '
+        Me.lvIntScheme.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvIntScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvIntScheme.FullRowSelect = True
+        Me.lvIntScheme.GridLines = True
+        Me.lvIntScheme.Location = New System.Drawing.Point(381, 201)
+        Me.lvIntScheme.Name = "lvIntScheme"
+        Me.lvIntScheme.Size = New System.Drawing.Size(549, 159)
+        Me.lvIntScheme.TabIndex = 14
+        Me.lvIntScheme.UseCompatibleStateImageBehavior = False
+        Me.lvIntScheme.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Day From"
+        Me.ColumnHeader1.Width = 84
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Day To"
+        Me.ColumnHeader2.Width = 88
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Interest"
+        Me.ColumnHeader3.Width = 85
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Penalty"
+        Me.ColumnHeader4.Width = 93
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Remarks"
+        Me.ColumnHeader5.Width = 195
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.Location = New System.Drawing.Point(741, 161)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(88, 34)
+        Me.btnAdd.TabIndex = 2
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'btnRemove
+        '
+        Me.btnRemove.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRemove.Location = New System.Drawing.Point(839, 161)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(88, 34)
+        Me.btnRemove.TabIndex = 4
+        Me.btnRemove.Text = "Remove"
+        Me.btnRemove.UseVisualStyleBackColor = True
+        '
+        'txtSearch
+        '
+        Me.txtSearch.BackColor = System.Drawing.Color.White
+        Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(65, 12)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(771, 22)
+        Me.txtSearch.TabIndex = 10
+        Me.txtSearch.Text = "Search . . ."
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(8, 15)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(51, 16)
+        Me.Label8.TabIndex = 11
+        Me.Label8.Text = "Search"
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSearch.Location = New System.Drawing.Point(842, 6)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(88, 34)
+        Me.btnSearch.TabIndex = 15
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'frmInterestScheme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(697, 370)
+        Me.ClientSize = New System.Drawing.Size(936, 444)
+        Me.Controls.Add(Me.btnSearch)
+        Me.Controls.Add(Me.txtSearch)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.btnRemove)
+        Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.lvIntScheme)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ShapeContainer1)
         Me.Name = "frmInterestScheme"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Interest Scheme"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -311,4 +435,16 @@ Partial Class frmInterestScheme
     Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents LineShape1 As Microsoft.VisualBasic.PowerPacks.LineShape
     Friend WithEvents LineShape2 As Microsoft.VisualBasic.PowerPacks.LineShape
+    Friend WithEvents btnUpdate As System.Windows.Forms.Button
+    Friend WithEvents lvIntScheme As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnAdd As System.Windows.Forms.Button
+    Friend WithEvents btnRemove As System.Windows.Forms.Button
+    Friend WithEvents txtSearch As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents btnSearch As System.Windows.Forms.Button
 End Class

@@ -63,6 +63,7 @@ Partial Class frm_PanelTextbox
         Me.ClientSize = New System.Drawing.Size(331, 101)
         Me.Controls.Add(Me.GroupBox10)
         Me.Name = "frm_PanelTextbox"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
         Me.ResumeLayout(False)

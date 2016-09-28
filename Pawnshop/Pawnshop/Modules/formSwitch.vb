@@ -15,9 +15,9 @@
         frmMoneyExchange = 8
         frmAdminPanel = 9
 
-        dev_NewPawning = 10
-        dev_PawnClaimer = 11
-        dev_Item = 12
+        NewPawning = 10
+        PawnClaimer = 11
+        Item = 12
 
         frmPawningNew = 13
 
@@ -47,16 +47,10 @@
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadClient(cl)
 
-            Case FormName.frmAdminPanel
-
-
-                'Case FormName.dev_NewPawning
-                '    dev_NewPawning.LoadClient(cl)
-                'Case FormName.dev_PawnClaimer
-                '    dev_NewPawning.LoadCliamer(cl)
-
-                'Case FormName.frmPawningNew
-                '    frmPawningNew.LoadClient(cl)
+            Case FormName.NewPawning
+                frmPawningItemNew.LoadClient(cl)
+            Case FormName.PawnClaimer
+                frmPawningItemNew.LoadCliamer(cl)
         End Select
     End Sub
     ''' <remarks></remarks>
@@ -71,10 +65,9 @@
 
         Select Case gotoForm
             Case FormName.frmAdminPanel
-                frmAdminPanel.LoadItemall(it)
-                'Case FormName.dev_Item
-                '    dev_NewPawning.LoadItem(it)
-
+                'frmAdminPanel.LoadItemall(it)
+            Case FormName.Item
+                frmPawningItemNew.LoadItem(it)
 
         End Select
 

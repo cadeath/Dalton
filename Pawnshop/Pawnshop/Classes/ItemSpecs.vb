@@ -115,36 +115,43 @@
 #End Region
 
 #Region "Functions and Procedures"
+
     Public Sub LoadItemSpecs_row(dr As DataRow)
         With dr
+
             _specID = .Item("SpecsID")
             _itemID = .Item("ItemID")
             _specName = .Item("SpecsName")
             _specType = .Item("SpecType")
+
             If Not IsDBNull(.Item("UoM")) Then _UoM = .Item("UOM")
+
             _onHold = If(.Item("OnHold") = 1, True, False)
             _specLayout = .Item("SpecLayout")
             _shortCode = .Item("ShortCode")
             _isRequired = If(.Item("isRequired") = 1, True, False)
-            _created = .Item("Created_At")
-            _updated = .Item("Updated_At")
         End With
     End Sub
 
-    Public Sub LoadItemSpecs(id As Integer)
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE SpecsID = " & ItemID
-        Dim ds As DataSet = LoadSQL(mySql, "TBLSPECS")
+    Friend Sub LoadItemSpecs(ByVal id As Integer)
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = " & id
+        Dim ds As DataSet
+        ds = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count <> 0 Then
-            MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
+        'If ds.Tables(0).Rows.Count <> 0 Then
+        '    MsgBox("Failed to load Item Specification", MsgBoxStyle.Critical)
+        '    Exit Sub
+        'End If
 
-        LoadItemSpecs_row(ds.Tables(0).Rows(0))
+        For Each dr As DataRow In ds.Tables(0).Rows
+            LoadItemSpecs_row(dr)
+        Next
+
     End Sub
 
     Public Sub SaveSpecs()
-        Dim mySql As String = "SELECT * FROM " & MainTable & " ROWS 1"
+        Dim mySql As String = "SELECT * FROM " & MainTable
+        '& " ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         Dim dsNewRow As DataRow
@@ -164,23 +171,64 @@
         database.SaveEntry(ds)
     End Sub
 
+    Public Sub LoadByRow(ByVal dr As DataRow)
+        With dr
+            _specID = .Item("specsid")
+            _itemID = .Item("itemid")
+            _UoM = .Item("uom")
+            _specName = .Item("specsname")
+            _specType = .Item("spectype")
+            _specLayout = .Item("speclayout")
+            _shortCode = .Item("shortcode")
+            _isRequired = .Item("isrequired")
+
+        End With
+    End Sub
+#End Region
+
+    Public Function LastSpecsID() As Single
+        Dim mySql As String = "SELECT * FROM TBLSpecs ORDER BY SpecsID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("SpecsID")
+    End Function
+
     Public Sub UpdateSpecs()
         Dim mySql As String = "SELECT * FROM " & MainTable & " WHERE SpecsID = " & _specID
-        Dim ds As DataSet = LoadSQL(mySql, MainTable)
+        Dim ds As DataSet
+        ds = LoadSQL(mySql, MainTable)
+        If ds.Tables(0).Rows.Count >= 1 Then
+            With ds.Tables(0).Rows(0)
+                .Item("SpecsName") = _specName
+                .Item("SpecType") = _specType
+                .Item("UoM") = _UoM
+                .Item("onHold") = If(_onHold, 1, 0)
+                .Item("SpecLayout") = _specLayout
+                .Item("isRequired") = If(_isRequired, 1, 0)
+                .Item("Updated_At") = Now
+            End With
+            database.SaveEntry(ds, False)
+        Else
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(0).NewRow
+            With dsNewRow
+                .Item("ItemID") = _itemID
+                .Item("SpecsName") = _specName
+                .Item("SpecType") = _specType
+                .Item("UOM") = _UoM
+                .Item("onHold") = If(_onHold, 1, 0)
+                .Item("SpecLayout") = _specLayout
+                .Item("ShortCode") = _shortCode
+                .Item("isRequired") = If(_isRequired, 1, 0)
+                .Item("Created_At") = Now
+            End With
+            ds.Tables(0).Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+        End If
 
-        With ds.Tables(MainTable).Rows(0)
-            .Item("SpecsName") = _specName
-            .Item("SpecType") = _specType
-            .Item("UoM") = _UoM
-            .Item("onHold") = If(_onHold, 1, 0)
-            .Item("SpecLayout") = _specLayout
-            .Item("isRequired") = If(_isRequired, 1, 0)
-            .Item("Updated_At") = Now
-        End With
-
-        database.SaveEntry(ds, False)
     End Sub
-
-#End Region
 
 End Class

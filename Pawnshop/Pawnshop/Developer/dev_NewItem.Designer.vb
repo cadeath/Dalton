@@ -103,7 +103,7 @@ Partial Class dev_NewItem
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(449, 261)
+        Me.Button1.Location = New System.Drawing.Point(255, 261)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 8

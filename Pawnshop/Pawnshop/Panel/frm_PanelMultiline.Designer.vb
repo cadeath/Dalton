@@ -63,6 +63,7 @@ Partial Class frm_PanelMultiline
         Me.ClientSize = New System.Drawing.Size(320, 172)
         Me.Controls.Add(Me.GroupBox9)
         Me.Name = "frm_PanelMultiline"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
         Me.ResumeLayout(False)
