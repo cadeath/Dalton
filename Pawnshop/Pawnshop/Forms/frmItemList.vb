@@ -4,7 +4,7 @@
     Dim ds As New DataSet
     Dim selectedItem As ItemClass
 
-    Dim selectedItem As ItemClass
+
 
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
         Dim ds As DataSet
@@ -18,15 +18,7 @@
     End Sub
 
 
-    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ClearField()
 
-        If mOtherForm Then
-            btnView.Visible = False
-        Else
-            btnSearch.Visible = True
-
-    
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ' If Not mOtherForm Then ClearField()
         If mOtherForm Then
@@ -179,7 +171,7 @@
     End Sub
 
 
-   
+
     Private Sub txtSearchItmLst_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()

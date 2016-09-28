@@ -245,12 +245,6 @@
     <Compile Include="Developer\dev_NewItem.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_NewPawning.Designer.vb">
-      <DependentUpon>dev_NewPawning.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\dev_NewPawning.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Developer\dev_ORview.Designer.vb">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
@@ -377,7 +371,6 @@
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Modules\Void.vb" />
-<<<<<<< HEAD
     <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </Compile>
@@ -396,15 +389,12 @@
     <Compile Include="Panel\frm_PanelYesNo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PawnModule\PawnCalculation.vb" />
-=======
     <Compile Include="PawnModule\dev_PT_test.Designer.vb">
       <DependentUpon>dev_PT_test.vb</DependentUpon>
     </Compile>
     <Compile Include="PawnModule\dev_PT_test.vb">
       <SubType>Form</SubType>
     </Compile>
->>>>>>> refs/remotes/origin/Object
     <Compile Include="PawnModule\PawnItem.vb" />
     <Compile Include="PawnModule\PawnTicket2.vb" />
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
@@ -751,9 +741,6 @@
     <EmbeddedResource Include="Developer\dev_NewItem.resx">
       <DependentUpon>dev_NewItem.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_NewPawning.resx">
-      <DependentUpon>dev_NewPawning.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </EmbeddedResource>
@@ -805,7 +792,6 @@
     <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
     <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </EmbeddedResource>
@@ -814,10 +800,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Panel\frm_PanelYesNo.resx">
       <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
-=======
+    </EmbeddedResource>
     <EmbeddedResource Include="PawnModule\dev_PT_test.resx">
       <DependentUpon>dev_PT_test.vb</DependentUpon>
->>>>>>> refs/remotes/origin/Object
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">

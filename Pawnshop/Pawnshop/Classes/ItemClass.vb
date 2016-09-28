@@ -124,7 +124,7 @@
         End Set
     End Property
 
-=======
+
     Private _schemeID As Integer
     Public Property SchemeID() As Integer
         Get
@@ -146,15 +146,15 @@
         End Set
     End Property
 
-    Private _SchemeID As Integer
-    Public Property SchemeID() As Integer
-        Get
-            Return _SchemeID
-        End Get
-        Set(ByVal value As Integer)
-            _SchemeID = value
-        End Set
-    End Property
+    'Private _SchemeID As Integer
+    'Public Property SchemeID() As Integer
+    '    Get
+    '        Return _SchemeID
+    '    End Get
+    '    Set(ByVal value As Integer)
+    '        _SchemeID = value
+    '    End Set
+    'End Property
 #End Region
 
 #Region "Functions and Procedures"
@@ -190,9 +190,9 @@
     End Sub
 
 
-    Public Sub SaveItem()
 
-     
+
+
     Public Sub Save_ItemClass()
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
 
@@ -211,7 +211,7 @@
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
 
-            .Item("SCHEME_ID") = _SchemeID
+            .Item("SCHEME_ID") = _schemeID
 
 
         End With
@@ -238,7 +238,7 @@
             _isRenew = .Item("isrenew")
             '_onHold = .Item()
             _printLayout = .Item("print_layout")
-            _SchemeID = .Item("Scheme_ID")
+            _schemeID = .Item("Scheme_ID")
 
         End With
     End Sub

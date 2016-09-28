@@ -140,54 +140,10 @@ end sub
     End Function
    
 
-    Private Sub searchbutton()
-        If txtSearch.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
-    End Sub
+   
 
-    Private Sub reaDOnlyTrue()
-        txtCategory.ReadOnly = True
-        txtClassification.ReadOnly = True
-        txtDescription.ReadOnly = True
-        txtPrintLayout.ReadOnly = True
-        rdbNo.Enabled = False
-        rdbYes.Enabled = False
-        For a As Integer = 0 To dgSpecs.Rows.Count - 1
-            dgSpecs.Rows(a).ReadOnly = True
-        Next
-    End Sub
-
-    Friend Sub reaDOnlyFalse()
-        txtCategory.ReadOnly = False
-        txtClassification.ReadOnly = False
-        txtDescription.ReadOnly = False
-        txtPrintLayout.ReadOnly = False
-        rdbNo.Enabled = True
-        rdbYes.Enabled = True
-        For a As Integer = 0 To dgSpecs.Rows.Count - 1
-            dgSpecs.Rows(a).ReadOnly = False
-        Next
-    End Sub
-
-    Friend Sub LoadSpec(ByVal ID As Integer)
-        Dim da As New OdbcDataAdapter
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
-        Console.WriteLine("SQL: " & mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim dr As DataRow
-
-        For Each dr In ds.Tables(0).Rows
-            AddItem(dr)
-        Next
-            ' Dim i As Integer = (0)
-
-            reaDOnlyTrue()
-        For a As Integer = 0 To dgSpecs.Rows.Count - 1
-            dgSpecs.Rows(a).ReadOnly = True
-        Next
-            btnSave.Enabled = False
-    End Sub
+    
+   
 
     Private Sub AddItem(ByVal itmspc As DataRow)
         Dim tmpItem As New ItemSpecs
@@ -206,11 +162,7 @@ end sub
     End Sub
 
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
+
 
     Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
@@ -296,7 +248,7 @@ end sub
             End If
 
             .PrintLayout = txtPrintLayout.Text
-            .SchemeName = cboSchemeName.Text
+            '  .SchemeName = cboSchemeName.Text
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -361,7 +313,7 @@ end sub
 
     Private Sub reaDOnlyTrue()
         txtCategory.ReadOnly = True
-        txtClassifiction.ReadOnly = True
+        ' txtClassifiction.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
         rdbNo.Enabled = False
@@ -373,7 +325,7 @@ end sub
 
     Friend Sub reaDOnlyFalse()
         txtCategory.ReadOnly = False
-        txtClassifiction.ReadOnly = False
+        ' txtClassifiction.ReadOnly = False
         txtDescription.ReadOnly = False
         txtPrintLayout.ReadOnly = False
         rdbNo.Enabled = True
@@ -757,7 +709,7 @@ end sub
         cmbModuleName.SelectedItem = Nothing
 
         lvModule.Columns.Clear()
-        lvModule.Items.Clear()s
+        lvModule.Items.Clear()
     End Sub
 
 

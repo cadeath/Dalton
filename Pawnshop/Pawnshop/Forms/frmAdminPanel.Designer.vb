@@ -55,7 +55,7 @@ Partial Class frmAdminPanel
 
         Me.txtSearch = New Pawnshop.watermark()
 
-        Me.txtSchemeName = New Pawnshop.watermark()
+        ' Me.txtSchemeName = New Pawnshop.watermark()
 
         Me.txtPrintLayout = New Pawnshop.watermark()
         Me.txtDescription = New Pawnshop.watermark()
@@ -550,13 +550,13 @@ Partial Class frmAdminPanel
         Me.txtSearch.WatermarkText = "Search . . ."
         '
         'txtSchemeName
-        '
-        Me.txtSchemeName.Location = New System.Drawing.Point(106, 300)
-        Me.txtSchemeName.Name = "txtSchemeName"
-        Me.txtSchemeName.Size = New System.Drawing.Size(249, 22)
-        Me.txtSchemeName.TabIndex = 10
-        Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSchemeName.WatermarkText = "Scheme Name"
+        ''
+        'Me.txtSchemeName.Location = New System.Drawing.Point(106, 300)
+        'Me.txtSchemeName.Name = "txtSchemeName"
+        'Me.txtSchemeName.Size = New System.Drawing.Size(249, 22)
+        'Me.txtSchemeName.TabIndex = 10
+        'Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
+        'Me.txtSchemeName.WatermarkText = "Scheme Name"
         '
         'txtPrintLayout
         '
@@ -673,8 +673,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        '  DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        ' Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.FillWeight = 71.31783!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -698,8 +698,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewComboBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        ' DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        '  Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewComboBoxColumn2.FillWeight = 72.58589!
         Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
