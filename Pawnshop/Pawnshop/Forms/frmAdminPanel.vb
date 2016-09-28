@@ -757,10 +757,15 @@ end sub
         cmbModuleName.SelectedItem = Nothing
 
         lvModule.Columns.Clear()
-        lvModule.Items.Clear()
+        lvModule.Items.Clear()s
     End Sub
+
 
     Private Sub btnBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
+end sub
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim SelectedThings As String = dgSpecs.SelectedCells.ToString
+        MsgBox(SelectedThings)
     End Sub
 End Class
