@@ -36,7 +36,6 @@ Partial Class frmItemList
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblItemID = New System.Windows.Forms.Label()
         Me.btnView = New System.Windows.Forms.Button()
-        Me.txtSearch = New Pawnshop.watermark()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -85,9 +84,6 @@ Partial Class frmItemList
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.txtSearch)
-        Me.GroupBox1.Controls.Add(Me.btnSearch)
-        Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(7, 8)
         Me.GroupBox1.Name = "GroupBox1"
@@ -120,7 +116,7 @@ Partial Class frmItemList
         Me.btnSelect.Location = New System.Drawing.Point(747, 344)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(75, 31)
-        Me.btnSelect.TabIndex = 2
+        Me.btnSelect.TabIndex = 3
         Me.btnSelect.Text = "&Select"
         Me.btnSelect.UseVisualStyleBackColor = True
         '
@@ -132,7 +128,7 @@ Partial Class frmItemList
         Me.btnClose.Location = New System.Drawing.Point(828, 344)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 31)
-        Me.btnClose.TabIndex = 10
+        Me.btnClose.TabIndex = 4
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
@@ -153,18 +149,9 @@ Partial Class frmItemList
         Me.btnView.Location = New System.Drawing.Point(666, 344)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 31)
-        Me.btnView.TabIndex = 13
+        Me.btnView.TabIndex = 2
         Me.btnView.Text = "&View"
         Me.btnView.UseVisualStyleBackColor = True
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(71, 18)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(744, 22)
-        Me.txtSearch.TabIndex = 2
-        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSearch.WatermarkText = "Search . . ."
         '
         'frmItemList
         '
