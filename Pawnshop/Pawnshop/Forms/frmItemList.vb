@@ -16,27 +16,7 @@
         Next
     End Sub
     
-    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If Not mOtherForm Then ClearField()
-        If mOtherForm Then
-            btnView.Visible = False
-        Else
-            ClearField()
-            btnSelect.Visible = False
-        End If
 
-        'loadItemClass()
-        LoadActiveItem()
-
-        If Not mOtherForm Then
-            txtSearch.Focus()
-        End If
-
-        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
-        If txtSearch.Text <> "" Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
 
     Private Sub AddItem(ByVal dl As ItemClass)
         Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
@@ -70,9 +50,7 @@
         lvItem.Items.Clear()
     End Sub
 
-    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        searchItem()
-    End Sub
+
     Private Sub searchItem()
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
@@ -107,7 +85,7 @@
         Next
     End Sub
 
-    Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
+    Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             If Not mOtherForm Then
                 btnView.PerformClick()
@@ -124,7 +102,7 @@
         frmOrig = frmOrigin
     End Sub
 
-    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         If lvItem.Items.Count = 0 Then Exit Sub
         Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
@@ -142,7 +120,7 @@
 
     End Sub
 
-    Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
+    Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If Not mOtherForm Then
             btnView.PerformClick()
         Else
@@ -150,7 +128,7 @@
         End If
     End Sub
 
-    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
 
@@ -168,7 +146,7 @@
 
     End Sub
 
-    Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+    Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs)
         'loadItemClass()
         txtSearch.Text = ""
     End Sub
@@ -181,5 +159,31 @@
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
+    End Sub
+
+    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If Not mOtherForm Then ClearField()
+        If mOtherForm Then
+            btnView.Visible = False
+        Else
+            ClearField()
+            btnSelect.Visible = False
+        End If
+
+        'loadItemClass()
+        LoadActiveItem()
+
+        If Not mOtherForm Then
+            txtSearch.Focus()
+        End If
+
+        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        searchItem()
     End Sub
 End Class

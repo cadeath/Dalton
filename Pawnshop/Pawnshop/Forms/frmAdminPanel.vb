@@ -292,7 +292,7 @@ Public Class frmAdminPanel
         frmItemList.Show()
 
         frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
-        frmItemList.btnSearch.PerformClick()
+        '  frmItemList.btnSearch.PerformClick()
 
         btnUpdate.Text = "&Update".ToString
         btnUpdate.Enabled = True
