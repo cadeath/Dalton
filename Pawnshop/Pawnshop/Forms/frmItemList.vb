@@ -102,49 +102,6 @@
         frmOrig = frmOrigin
     End Sub
 
-    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        If lvItem.Items.Count = 0 Then Exit Sub
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-
-        Dim selectedItem As New ItemClass
-        selectedItem.LoadItem(idx)
-
-        'lvItem.Items.Clear()
-        'For Each spec As ItemSpecs In selectedItem.ItemSpecifications
-        '    lvItem.Items.Add(spec.SpecName)
-        'Next
-
-        formSwitch.ReloadFormFromSearch2(frmOrig, selectedItem)
-        Me.Close()
-
-    End Sub
-
-    Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If Not mOtherForm Then
-            btnView.PerformClick()
-        Else
-            btnSelect.PerformClick()
-        End If
-    End Sub
-
-    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-
-        selectedItem = New ItemClass
-        selectedItem.LoadItem(idx)
-
-        lblItemID.Text = selectedItem.ID
-
-        frmAdminPanel.dgSpecs.Rows.Clear()
-
-        frmAdminPanel.LoadSpec(idx)
-        frmAdminPanel.LoadItemList(selectedItem)
-        frmAdminPanel.Show()
-        Me.Close()
-
-    End Sub
 
     Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs)
         'loadItemClass()
@@ -185,5 +142,54 @@
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         searchItem()
+    End Sub
+
+    Private Sub btnView_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+
+        selectedItem = New ItemClass
+        selectedItem.LoadItem(idx)
+
+        lblItemID.Text = selectedItem.ID
+
+        frmAdminPanel.dgSpecs.Rows.Clear()
+
+        frmAdminPanel.LoadSpec(idx)
+        frmAdminPanel.LoadItemList(selectedItem)
+        frmAdminPanel.Show()
+        Me.Close()
+    End Sub
+
+    Private Sub btnSelect_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+
+        If lvItem.Items.Count = 0 Then Exit Sub
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+
+        Dim selectedItem As New ItemClass
+        selectedItem.LoadItem(idx)
+
+        'lvItem.Items.Clear()
+        'For Each spec As ItemSpecs In selectedItem.ItemSpecifications
+        '    lvItem.Items.Add(spec.SpecName)
+        'Next
+
+        formSwitch.ReloadFormFromSearch2(frmOrig, selectedItem)
+        Me.Close()
+    End Sub
+
+    Private Sub lvItem_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
+        If Not mOtherForm Then
+            btnView.PerformClick()
+        Else
+            btnSelect.PerformClick()
+        End If
+    End Sub
+
+    Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
+        If Not mOtherForm Then
+            btnView.PerformClick()
+        Else
+            btnSelect.PerformClick()
+        End If
     End Sub
 End Class

@@ -43,7 +43,7 @@ Public Class frmAdminPanel
         txtClassification.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
-        cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
+
 
         If it.isRenewable = "True" Then
             rdbYes.Checked = True
@@ -54,6 +54,7 @@ Public Class frmAdminPanel
         End If
 
         txtPrintLayout.Text = it.PrintLayout
+        cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
 
         Dim id As Integer = it.ID
         SelectedItem = it
@@ -76,7 +77,6 @@ Public Class frmAdminPanel
                 Return el.Value
             End If
         Next
-
 
         Return "N/A"
     End Function
@@ -117,8 +117,7 @@ Public Class frmAdminPanel
         cmbModuleName.Text = ""
         dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
-        cbotxtSchemename.Items.Clear()
-
+        cbotxtSchemename.SelectedValue = Nothing
     End Sub
 
     Private Function isValid() As Boolean
@@ -149,11 +148,6 @@ Public Class frmAdminPanel
 
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
-
-
-        ItemSave.ItemClass = txtClassification.Text
-        ItemSave.Category = txtCategory.Text
-        ItemSave.Description = txtDescription.Text
 
         With ItemSave
             .ItemClass = txtClassification.Text
@@ -201,6 +195,8 @@ Public Class frmAdminPanel
         ItemSave.Save_ItemClass()
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        rdbNo.Checked = False
+        txtClassification.Focus()
         clearfields()
         LoadScheme()
     End Sub
@@ -214,6 +210,7 @@ Public Class frmAdminPanel
         If btnUpdate.Text = "&Update".ToString Then
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
+            txtClassification.Enabled = False
             Exit Sub
         End If
 
@@ -223,23 +220,12 @@ Public Class frmAdminPanel
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
 
-
-        ItemModify.ItemClass = txtClassification.Text
-        ItemModify.Category = txtCategory.Text
-        ItemModify.Description = txtDescription.Text
-        ItemModify.updated_at = CurrentDate
-        If rdbYes.Checked = True Then
-            ItemModify.isRenewable = 1
-        Else
-            ItemModify.isRenewable = 0
-        End If
-
         With ItemModify
             .ItemClass = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .updated_at = CurrentDate
-            .ID = SelectedItem.ID
+            .ItemClassID = SelectedItem.ItemClassID
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -270,7 +256,8 @@ Public Class frmAdminPanel
                 End If
 
             End With
-            SpecModify.ItemID = SelectedItem.ID
+            SpecModify.ItemID = SelectedItem.ItemClassID
+
             SpecModify.UpdateSpecs()
             ' ColItemsSpecs.Add(SpecModify)
         Next
@@ -279,7 +266,11 @@ Public Class frmAdminPanel
         ItemModify.Update()
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
+        txtClassification.Focus()
         btnSave.Enabled = True
+        rdbNo.Checked = False
+        txtClassification.Focus()
+        txtClassification.Enabled = True
         clearfields()
         LoadScheme()
     End Sub
@@ -607,28 +598,13 @@ Public Class frmAdminPanel
 
 #End Region
 
-    Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
-        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
-        SFD.ShowDialog()
-
-        MsgBox("Data Exported", MsgBoxStyle.Information)
-
-        txtReferenceNumber.Text = ""
-        cmbModuleName.SelectedItem = Nothing
-
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
-
-    End Sub
+   
 
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
     End Sub
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
-        oFd.ShowDialog()
-    End Sub
 
     Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
         Dim fn As String = oFd.FileName
@@ -685,4 +661,43 @@ Public Class frmAdminPanel
             btnSearch.PerformClick()
         End If
     End Sub
+
+    Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
+        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
+        SFD.ShowDialog()
+
+        MsgBox("Data Exported", MsgBoxStyle.Information)
+
+        txtReferenceNumber.Text = ""
+        cmbModuleName.SelectedItem = Nothing
+
+        lvModule.Columns.Clear()
+        lvModule.Items.Clear()
+    End Sub
+
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        oFd.ShowDialog()
+    End Sub
+
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub chkSelectAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
+        If chkSelectAll.Checked = True Then
+            For i = 0 To lvModule.Items.Count - 1
+                lvModule.Items(i).Checked = True
+            Next
+        Else
+            For i = 0 To lvModule.Items.Count - 1
+                lvModule.Items(i).Checked = False
+            Next
+        End If
+        lblCount.Text = "Count: " & lvModule.CheckedItems.Count
+    End Sub
+
+    Private Sub lvModule_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvModule.SelectedIndexChanged
+        lblCount.Text = "Count: " & lvModule.CheckedItems.Count
+    End Sub
+
 End Class
