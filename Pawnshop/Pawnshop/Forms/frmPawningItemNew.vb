@@ -51,6 +51,8 @@ Public Class frmPawningItemNew
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Reprint As Boolean = False
 
+    Private selected_ClassSpecs As Hashtable
+
     Private Sub ClearFields()
         mod_system.isAuthorized = False
 
@@ -144,17 +146,13 @@ Public Class frmPawningItemNew
 
     Friend Sub LoadItem(ByVal Item As ItemClass)
 
-        Dim tmpItemID As String = (Item.ItemClassID)
-        Dim mySql As String = "SELECT * FROM tblSpecs WHERE ItemID = '" & tmpItemID & "'"
-        Dim ds As DataSet = LoadSQL(mySql)
-
-        lvSpec.Items.Clear()
-        For Each cio As DataRow In ds.Tables(0).Rows
-            AddItem(cio)
+        selected_ClassSpecs = New Hashtable
+        For Each spec As PawnItemSpec In Item.ItemSpecifications
+            Dim lv As ListViewItem = lvSpec.Items.Add(spec.SpecName)
+            lv.SubItems.Add("")
+            selected_ClassSpecs.Add(spec.SpecID, spec.SpecName)
         Next
 
-        txtClassification.Text = Item.ItemClass
-        tmpItem = Item
     End Sub
 
     Private Sub AddItem(ByVal cio As DataRow)
@@ -226,8 +224,8 @@ Public Class frmPawningItemNew
         Dim newItem As New PawnItem
         With newItem
             .ItemID = tmpItem.ID
-            .ItemClass = txtClassification.Text
-            .SchemeID = tmpItem.SchemeID
+            '.ItemClass = txtClassification.Text
+            '.SchemeID = tmpItem.SchemeID
             .Status = "A"
             .PawnItemSpecs = pawnSpecs
 

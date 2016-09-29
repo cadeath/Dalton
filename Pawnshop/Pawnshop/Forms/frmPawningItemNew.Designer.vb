@@ -210,7 +210,6 @@ Partial Class frmPawningItemNew
         '
         'cboAppraiser
         '
-        Me.cboAppraiser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAppraiser.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboAppraiser.FormattingEnabled = True
         Me.cboAppraiser.Location = New System.Drawing.Point(22, 19)

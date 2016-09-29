@@ -179,6 +179,7 @@
             Dim tmpSpecs As New ItemSpecs
             tmpSpecs.LoadItemSpecs_row(dr)
 
+            _itemSpecs.Add(tmpSpecs)
         Next
     End Sub
 
@@ -222,14 +223,12 @@
     Public Sub LoadByRow(ByVal dr As DataRow)
         With dr
             _itemID = .Item("itemid")
-            _itemClass = .Item("itemclass")
             '_desc = .Item("Description")
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _category = .Item("itemcategory")
             _isRenew = .Item("isrenew")
             '_onHold = .Item()
             _printLayout = .Item("print_layout")
-            _SchemeID = .Item("Scheme_ID")
 
         End With
     End Sub
