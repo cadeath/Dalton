@@ -38,9 +38,9 @@ Public Class frmAdminPanel
     End Sub
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
-        If it.ItemClass = "" Then Exit Sub
+        'If it.ItemClass = "" Then Exit Sub
 
-        txtClassifiction.Text = it.ItemClass
+        'txtClassifiction.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
         cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
@@ -63,17 +63,17 @@ Public Class frmAdminPanel
         btnUpdate.Enabled = True
     End Sub
 
+
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
             If el.Key = id Then
                 Return el.Value
             End If
         Next
-
-        Return "N/A"
+ Return "N/A"
     End Function
 
-    Private Function GetSchemeID(ByVal name As String) As Integer
+Private Function GetSchemeID(ByVal name As String) As Integer
         For Each el As DictionaryEntry In Scheme
             If el.Value = name Then
                 Return el.Key
@@ -82,6 +82,16 @@ Public Class frmAdminPanel
 
         Return 0
     End Function
+
+    Friend Sub LoadItemall(ByVal it As ItemClass)
+        'txtClassifiction.Text = String.Format(it.ItemClass)
+        txtCategory.Text = String.Format(it.Category)
+        txtDescription.Text = String.Format(it.Description)
+	end sub
+
+       
+
+    
 
     'Friend Sub LoadItemall(ByVal it As ItemClass)
     '    txtClassifiction.Text = String.Format(it.ItemClass)
@@ -137,6 +147,7 @@ Public Class frmAdminPanel
             .ItemClass = txtClassifiction.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
+
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -195,6 +206,7 @@ Public Class frmAdminPanel
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
+
 
         With ItemModify
             .ItemClass = txtClassifiction.Text
