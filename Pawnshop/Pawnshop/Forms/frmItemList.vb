@@ -20,7 +20,7 @@
 
     Private Sub AddItem(ByVal dl As ItemClass)
         Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
-        lv.SubItems.Add(dl.ItemClass)
+        lv.SubItems.Add(dl.ClassName)
         lv.SubItems.Add(dl.Category)
         lv.SubItems.Add(dl.Description)
         'lv.SubItems.Add(dl.InterestRate)

@@ -204,6 +204,7 @@
     <Compile Include="Classes\ItemSpecs.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
+    <Compile Include="Classes\PawnCompute.vb" />
     <Compile Include="Classes\PawningDalton.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Classes\RandomKeyGenerator.vb" />

@@ -154,7 +154,7 @@ Public Class frmPawningItemNew
             AddItem(cio)
         Next
 
-        txtClassification.Text = Item.ItemClass
+        txtClassification.Text = Item.ClassName
         tmpItem = Item
     End Sub
 
