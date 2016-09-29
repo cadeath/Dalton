@@ -134,6 +134,17 @@
         End Set
     End Property
 
+    Private _interestScheme As InterestScheme
+    Public Property InterestScheme() As InterestScheme
+        Get
+            Return _interestScheme
+        End Get
+        Set(ByVal value As InterestScheme)
+            _interestScheme = value
+        End Set
+    End Property
+
+
     Private _itemSpecs As CollectionItemSpecs
     Public Property ItemSpecifications() As CollectionItemSpecs
         Get
@@ -172,6 +183,7 @@
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
             _schemeID = .Item("Scheme_ID")
+            _interestScheme.LoadScheme(_schemeID)
         End With
 
         mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemClassID)
