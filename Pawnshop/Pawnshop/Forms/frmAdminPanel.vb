@@ -43,7 +43,7 @@ Public Class frmAdminPanel
         'txtClassifiction.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
-        cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
+        'cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
 
         If it.isRenewable = "True" Then
             rdbYes.Checked = True
@@ -144,7 +144,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Dim ColItemsSpecs As New CollectionItemSpecs
 
         With ItemSave
-            .ItemClass = txtClassifiction.Text
+            .ClassName = txtClassifiction.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
@@ -157,7 +157,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
-            .SchemeID = GetSchemeID(cbotxtSchemename.Text)
+            '.SchemeID = GetSchemeID(cbotxtSchemename.Text)
 
         End With
 
@@ -209,7 +209,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
 
         With ItemModify
-            .ItemClass = txtClassifiction.Text
+            .ClassName = txtClassifiction.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .updated_at = CurrentDate

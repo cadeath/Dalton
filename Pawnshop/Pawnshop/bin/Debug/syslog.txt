@@ -909,3 +909,32 @@ At line 1, column 63
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
 [09/29/2016 14:47:10] SYSTEM PATCHED UP FROM 1.2.2.2 TO 1.2.2.3
 [09/29/2016 14:47:19] SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4
+[09/29/2016 16:18:33] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -206
+Column unknown
+STATUS
+At line 1, column 63
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
+[09/29/2016 16:19:06] LoadSQL - System.Data.Odbc.OdbcException (0x80131937): ERROR [42S02] [ODBC Firebird Driver][Firebird]Dynamic SQL Error
+SQL error code = -204
+Ambiguous field name between table TBLINTSCHEMES and table TBLINTSCHEME_DETAILS 
+SCHEMEID
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Odbc.OdbcCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
+   at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157

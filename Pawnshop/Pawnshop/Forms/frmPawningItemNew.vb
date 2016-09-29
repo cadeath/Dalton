@@ -144,7 +144,7 @@ Public Class frmPawningItemNew
 
     Friend Sub LoadItem(ByVal Item As ItemClass)
 
-        Dim tmpItemID As String = (Item.ItemClassID)
+        Dim tmpItemID As String = (Item.ID)
         Dim mySql As String = "SELECT * FROM tblSpecs WHERE ItemID = '" & tmpItemID & "'"
         Dim ds As DataSet = LoadSQL(mySql)
 
@@ -153,7 +153,7 @@ Public Class frmPawningItemNew
             AddItem(cio)
         Next
 
-        txtClassification.Text = Item.ItemClass
+        txtClassification.Text = Item.ClassName
         tmpItem = Item
     End Sub
 
@@ -226,8 +226,8 @@ Public Class frmPawningItemNew
         Dim newItem As New PawnItem
         With newItem
             .ItemID = tmpItem.ID
-            .ItemClass = txtClassification.Text
-            .SchemeID = tmpItem.SchemeID
+            ' .ItemClass = tmpItem.ClassName
+            ' .SchemeID = tmpItem.SchemeID
             .Status = "A"
             .PawnItemSpecs = pawnSpecs
 
