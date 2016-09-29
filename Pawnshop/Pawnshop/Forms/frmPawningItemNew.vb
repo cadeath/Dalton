@@ -293,7 +293,6 @@ Public Class frmPawningItemNew
             matuDateTmp = CDate(txtMatu.Text)
             intHash = TBLINT_HASH
         End If
-        MsgBox(tmpItem.SchemeID)
         daltonCompute = New PawnCalculation(itemPrincipal, txtClassification.Text, CurrentDate, matuDateTmp, isDPJ, intHash)
 
         With daltonCompute
