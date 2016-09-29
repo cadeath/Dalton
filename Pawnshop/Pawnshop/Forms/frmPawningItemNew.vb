@@ -4,7 +4,6 @@ Public Class frmPawningItemNew
     Friend PawnCustomer As Client
     Friend PawnClaimer As Client
     Friend tmpItem As ItemClass
-
     Friend transactionType As String = "L"
     Private appraiser As Hashtable
 
@@ -217,7 +216,7 @@ Public Class frmPawningItemNew
             spc.UnitOfMeasure = spec.UnitOfMeasure
             spc.SpecName = spec.SpecName
             spc.SpecType = spec.SpecType
-            spc.SpecsValue = lvSpec.Items(i).SubItems(1).Text
+            spc.SpecsValue = lvSpec.Items(i).SubItems(4).Text
             spc.isRequired = spec.isRequired
             pawnSpecs.Add(spc)
 
@@ -228,7 +227,7 @@ Public Class frmPawningItemNew
         With newItem
             .ItemID = tmpItem.ID
             .ItemClass = txtClassification.Text
-            .SchemeID = 1
+            .SchemeID = tmpItem.SchemeID
             .Status = "A"
             .PawnItemSpecs = pawnSpecs
 
@@ -294,7 +293,7 @@ Public Class frmPawningItemNew
             matuDateTmp = CDate(txtMatu.Text)
             intHash = TBLINT_HASH
         End If
-
+        MsgBox(tmpItem.SchemeID)
         daltonCompute = New PawnCalculation(itemPrincipal, txtClassification.Text, CurrentDate, matuDateTmp, isDPJ, intHash)
 
         With daltonCompute

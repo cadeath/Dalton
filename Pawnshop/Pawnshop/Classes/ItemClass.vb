@@ -183,7 +183,7 @@
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
             _schemeID = .Item("Scheme_ID")
-            _interestScheme.LoadScheme(_schemeID)
+            '_interestScheme.LoadScheme(_schemeID)
         End With
 
         mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemClassID)

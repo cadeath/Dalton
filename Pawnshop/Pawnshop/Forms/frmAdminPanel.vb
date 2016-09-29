@@ -186,6 +186,7 @@ Public Class frmAdminPanel
         If btnUpdate.Text = "&Update".ToString Then
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
+            LoadScheme()
             Exit Sub
         End If
 
