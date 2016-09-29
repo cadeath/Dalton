@@ -96,6 +96,17 @@
     End Property
 
 
+    Private _intScheme As InterestScheme
+    Public Property InterestScheme() As InterestScheme
+        Get
+            Return _intScheme
+        End Get
+        Set(ByVal value As InterestScheme)
+            _intScheme = value
+        End Set
+    End Property
+
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -128,7 +139,7 @@
             If isNew Then
                 .Item("ITEMID") = _itemID
                 .Item("ITEMCLASS") = Me.ItemClass
-                .Item("SCHEME_ID") = _schemeID
+                .Item("SCHEME_ID") = _intScheme.SchemeID
                 .Item("RENEWALCNT") = _renewalCnt
                 .Item("CREATED_AT") = Now.ToShortDateString
             Else
