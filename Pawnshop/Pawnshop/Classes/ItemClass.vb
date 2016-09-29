@@ -179,6 +179,10 @@
             Dim tmpSpecs As New ItemSpecs
             tmpSpecs.LoadItemSpecs_row(dr)
 
+
+            'Load Item Specification
+            _itemSpecs.Add(tmpSpecs)
+
         Next
     End Sub
 
