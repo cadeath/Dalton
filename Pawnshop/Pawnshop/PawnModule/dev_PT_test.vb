@@ -45,7 +45,7 @@
     End Sub
 
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-        ItemClass_Seed.Populate()
+        'ItemClass_Seed.Populate()
     End Sub
 
     Private Function GetItemClassIDByName(name As String) As Integer
@@ -78,8 +78,8 @@
         Dim newItem As New PawnItem
         With newItem
             .ItemID = GetItemClassIDByName(cboItem.Text)
-            .ItemClass = cboItem.Text
-            .SchemeID = 1
+            '.ItemClass = cboItem.Text
+            '.SchemeID = 1
             .Status = "A"
             .PawnItemSpecs = pawnSpecs
 

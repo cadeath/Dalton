@@ -23,9 +23,9 @@ Public Class frmAdminPanel
     End Sub
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
-        If it.ItemClass = "" Then Exit Sub
+        'If it.ItemClass = "" Then Exit Sub
 
-        txtClassifiction.Text = it.ItemClass
+        'txtClassifiction.Text = it.ItemClass
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
@@ -46,7 +46,7 @@ Public Class frmAdminPanel
     End Sub
 
     Friend Sub LoadItemall(ByVal it As ItemClass)
-        txtClassifiction.Text = String.Format(it.ItemClass)
+        'txtClassifiction.Text = String.Format(it.ItemClass)
         txtCategory.Text = String.Format(it.Category)
         txtDescription.Text = String.Format(it.Description)
 
@@ -101,7 +101,7 @@ Public Class frmAdminPanel
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
 
-        ItemSave.ItemClass = txtClassifiction.Text
+        'ItemSave.ItemClass = txtClassifiction.Text
         ItemSave.Category = txtCategory.Text
         ItemSave.Description = txtDescription.Text
 
@@ -162,7 +162,7 @@ Public Class frmAdminPanel
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
 
-        ItemModify.ItemClass = txtClassifiction.Text
+        'ItemModify.ItemClass = txtClassifiction.Text
         ItemModify.Category = txtCategory.Text
         ItemModify.Description = txtDescription.Text
         ItemModify.updated_at = CurrentDate

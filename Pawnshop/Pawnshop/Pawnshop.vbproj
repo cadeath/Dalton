@@ -240,16 +240,16 @@
     <Compile Include="Developer\dev_inherit.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_NewItem.Designer.vb">
-      <DependentUpon>dev_NewItem.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\dev_NewItem.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Developer\dev_ORview.Designer.vb">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_ORview.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_Pawning.Designer.vb">
+      <DependentUpon>dev_Pawning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_Pawning.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_Pawning2.Designer.vb">
@@ -687,7 +687,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Client_Seed.vb" />
-    <Compile Include="Seed\ItemClass_Seed.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -708,11 +707,11 @@
     <EmbeddedResource Include="Developer\dev_inherit.resx">
       <DependentUpon>dev_inherit.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_NewItem.resx">
-      <DependentUpon>dev_NewItem.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_Pawning.resx">
+      <DependentUpon>dev_Pawning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_Pawning2.resx">
       <DependentUpon>dev_Pawning2.vb</DependentUpon>
