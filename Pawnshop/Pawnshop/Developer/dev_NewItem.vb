@@ -135,7 +135,7 @@
         txtPrint.Text = sel_Item.PrintLayout
 
         lblID.Text = sel_Item.ID
-        lblCLass.Text = sel_Item.ItemClass
+        'lblCLass.Text = sel_Item.ItemClass
 
         lsSpecs.Items.Clear()
         For Each spec As ItemSpecs In sel_Item.ItemSpecifications

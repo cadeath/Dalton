@@ -38,9 +38,11 @@ Public Class frmAdminPanel
     End Sub
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
-        If it.ItemClass = "" Then Exit Sub
+        'If it.ItemClass = "" Then Exit Sub
+
 
         txtClassification.Text = it.ItemClass
+
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
@@ -66,6 +68,7 @@ Public Class frmAdminPanel
 
 
     Friend Sub LoadItemall(ByVal it As ItemClass)
+
         txtClassification.Text = String.Format(it.ItemClass)
         txtCategory.Text = String.Format(it.Category)
         txtDescription.Text = String.Format(it.Description)
@@ -219,6 +222,7 @@ Public Class frmAdminPanel
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
+
 
         With ItemModify
             .ItemClass = txtClassification.Text

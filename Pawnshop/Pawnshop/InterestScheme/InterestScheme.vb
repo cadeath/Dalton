@@ -62,10 +62,13 @@
 
         LoadScheme_row(ds.Tables(MainTable).Rows(0))
 
+
         mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SchemeID", SubTable, _schemeID)
+
         ds.Clear()
         ds = LoadSQL(mySql, SubTable)
 
+        Console.WriteLine("Loading Scheme Details")
         _SchemeDetails = New IntScheme_Lines
         For Each dr As DataRow In ds.Tables(SubTable).Rows
             Dim tmpDetails As New Scheme_Interest

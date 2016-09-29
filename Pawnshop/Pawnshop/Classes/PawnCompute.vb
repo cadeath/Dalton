@@ -23,6 +23,16 @@
         End Set
     End Property
 
+    Private _isNew As Boolean
+    Public Property isNew() As Boolean
+        Get
+            Return _isNew
+        End Get
+        Set(ByVal value As Boolean)
+            _isNew = value
+        End Set
+    End Property
+
     '====================== END ======================'
 
     '===================== OUTPUT ====================='
@@ -112,16 +122,20 @@
 
 #Region "Procedures and Functions"
 
-    Public Sub New(PT As PawnTicket2, currentDate As Date)
+    Public Sub New(PT As PawnTicket2, currentDate As Date, isNew As Boolean)
         _pawnTicket = PT
         _currentDate = currentDate
+        _isNew = isNew
 
         Calculate()
     End Sub
 
     Private Sub Calculate()
         Dim earlyDays As Integer = 0
-        Dim ItemInterest As Double = 0
+        Dim ItemInterest_percent As Double = 0, ItemPenalty_percent As Double = 0
+        Dim Item_Interest As Double = 0, Item_Penalty As Double = 0, Delay_Interest As Double = 0
+
+        Dim Item_Principal As Double = _pawnTicket.Principal
 
         'Validation
         Dim difDay = _currentDate.Date - _pawnTicket.MaturityDate.Date
@@ -129,18 +143,66 @@
         _daysOver = If(earlyDays - 30 > 0, earlyDays - 30, 0)
 
         'Declaration
-        ItemInterest = Get_ItemInterest(earlyDays)
+        ItemInterest_percent = Get_ItemInterest(earlyDays)
+        ItemPenalty_percent = Get_ItemInterest(earlyDays, percentType.Penalty)
+        _advInterest = Get_ItemInterest(30) * Item_Principal
+        _srvChr = GetServiceCharge(Item_Principal)
+
+        'Compute
+        Delay_Interest = ItemInterest_percent * Item_Principal
+        Item_Interest = ItemInterest_percent * Item_Principal
+        Item_Penalty = ItemPenalty_percent * Item_Principal
+
+        _int = IIf(_isNew, Item_Interest, Delay_Interest) 'What the heck is there for?
+        _penalty = Item_Penalty
+
+        _netAmount = Item_Principal - _advInterest - _srvChr
+        If _isNew Then
+            'Renew
+            _renewDue = IIf(Item_Interest > _advInterest, Item_Interest, _advInterest) + Item_Penalty + _srvChr
+
+            'Redemption
+            _redeemDue = Item_Principal + Item_Interest + Item_Penalty - _advInterest
+        Else
+            _advInterest = 0
+            _renewDue = Delay_Interest + _srvChr + Item_Penalty
+            _redeemDue = Item_Principal + Item_Interest + _srvChr + Item_Penalty
+        End If
     End Sub
 
-    Private Function Get_ItemInterest(days As Integer) As Double
-        Dim IntScheme As InterestScheme
-        IntScheme = _pawnTicket.PawnItem.InterestScheme
+    Enum percentType As Integer
+        Interest = 0
+        Penalty = 1
+    End Enum
 
-        For Each Int As IntScheme_Lines In IntScheme.SchemeDetails
+    Private Function Get_ItemInterest(days As Integer, Optional ret As percentType = 0) As Double
+        Dim IntScheme As New InterestScheme
+        IntScheme = _pawnTicket.PawnItem.ItemClass.InterestScheme
 
+        For Each Int As Scheme_Interest In IntScheme.SchemeDetails
+            Select Case days
+                Case Int.DayFrom To Int.DayTo
+                    If ret = percentType.Interest Then _
+                        Return Int.Interest
+                    If ret = percentType.Penalty Then _
+                        Return Int.Penalty
+            End Select
         Next
 
         Return 0
+    End Function
+
+    Private Function GetServiceCharge(principal As Double) As Double
+        Dim srvPrin As Double = principal
+        Dim ret As Double = 0
+
+        If srvPrin < 500 Then
+            ret = srvPrin * 0.01
+        Else
+            ret = 5
+        End If
+
+        Return ret
     End Function
 
 #End Region
