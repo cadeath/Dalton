@@ -282,6 +282,7 @@
             _updated_At = value
         End Set
     End Property
+
 #End Region
 
 #Region "Procedures and Functions"
