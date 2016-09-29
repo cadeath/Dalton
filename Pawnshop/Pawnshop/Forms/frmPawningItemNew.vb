@@ -145,7 +145,7 @@ Public Class frmPawningItemNew
 
     Friend Sub LoadItem(ByVal Item As ItemClass)
 
-        Dim tmpItemID As String = (Item.ID)
+        Dim tmpItemID As String = (Item.ItemClassID)
         Dim mySql As String = "SELECT * FROM tblSpecs WHERE ItemID = '" & tmpItemID & "'"
         Dim ds As DataSet = LoadSQL(mySql)
 
@@ -205,66 +205,61 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        Dim fillData As String = "OPT"
-        Dim ds As DataSet, mySql As String = "SELECT * FROM " & fillData
+        SaveNewLoan()
+    End Sub
+    Private Sub SaveNewLoan()
+        Dim pawnSpecs As New CollectionPawnItemSpecs
+        tmpItem.LoadItem(tmpItem.ID)
+        Dim i As Integer = 0
+        For Each spec As ItemSpecs In tmpItem.ItemSpecifications
+            Dim spc As New PawnItemSpec
 
-        ds = LoadSQL(mySql, fillData)
+            spc.UnitOfMeasure = spec.UnitOfMeasure
+            spc.SpecName = spec.SpecName
+            spc.SpecType = spec.SpecType
+            spc.SpecsValue = lvSpec.Items(i).SubItems(1).Text
+            spc.isRequired = spec.isRequired
+            pawnSpecs.Add(spc)
 
-        Dim dsNewRow As DataRow
-        dsNewRow = ds.Tables(fillData).NewRow
-        With dsNewRow
-            .Item("PawnTicket") = txtTicket.Text
-            '.Item("OldpawnTicket") = txtOldTicket.Text
-            .Item("LoanDate") = txtLoan.Text
-            .Item("MATUDATE") = txtMatu.Text
-            .Item("ExpiryDate") = txtExpiry.Text
-            .Item("AuctionDate") = txtAuction.Text
-            .Item("Appraisal") = txtAppr.Text
-            .Item("Principal") = txtPrincipal.Text
-            .Item("NetAmount") = txtNet.Text
-            .Item("AppraiserID") = GetAppraiserID(cboAppraiser.Text)
-            .Item("EncoderID") = UserID
-            .Item("PawnItemID") = tmpItem.ID
-            .Item("ClientID") = PawnCustomer.ID
-            .Item("ClaimerID") = PawnClaimer.ID
-            '.Item("ORDate") = _orDate
-            '.Item("ORNum") = _orNum
-            '.Item("Penalty") = txtPenalty.Text
-            .Item("Status") = transactionType
-            '.Item("DaysOverDue") = txtOver.Text
-            '.Item("EarlyRedeem") = txt
-            '.Item("DelayInterest") = txtInt.Text
-            .Item("AdvInt") = txtAdv.Text
-            '.Item("RedeemDue") = _redeemDue
-            '.Item("RenewDue") = _renewDue
-            .Item("ServiceCharge") = txtService.Text
+            i += 1
+        Next
+
+        Dim newItem As New PawnItem
+        With newItem
+            .ItemID = tmpItem.ID
+            .ItemClass = txtClassification.Text
+            .SchemeID = 1
+            .Status = "A"
+            .PawnItemSpecs = pawnSpecs
+
+            .Save_PawnItem()
         End With
-        ds.Tables(fillData).Rows.Add(dsNewRow)
 
-        database.SaveEntry(ds)
-        MsgBox("SAVED")
+        Dim tmpPawnTicket As PawnTicket2 = New PawnTicket2
+        With tmpPawnTicket
+            .PawnTicket = txtTicket.Text
+            .LoanDate = txtLoan.Text
+            .MaturityDate = txtMatu.Text
+            .ExpiryDate = txtExpiry.Text
+            .AuctionDate = txtAuction.Text
+            .Appraisal = txtAppr.Text
+            .Principal = txtPrincipal.Text
+            .NetAmount = txtNet.Text
+            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
+            .EncoderID = POSuser.UserID
+            .ClaimerID = PawnClaimer.ID
+            .ClientID = PawnCustomer.ID
+            .PawnItem = newItem
+
+            .Save_PawnTicket()
+        End With
+
     End Sub
 
-    Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ClearFields()
-        'LoadPawnInfo()
-        LoadAppraisers()
-        If transactionType = "L" Then NewLoan()
-        'PrintButton(False)
-
-        If Not PAWN_JE Then PAWN_JE = hasJE(SAP_ACCOUNTCODE)
-        If Not PAWN_JE Then
-            MsgBox("WITH UPDATE YOUR JOURNAL ENTRIES CODE" + vbCrLf + _
-                   "Please contact your System Administrator", _
-                   MsgBoxStyle.Critical, "UPDATE JOURNAL ENTRIES")
-
-            Me.Close()
-        End If
-    End Sub
 
     Private Sub dateChange(ByVal typ As String)
         Select Case typ
-            Case "CEL"
+            Case "CELLPHONE", "TABLET", "LAPTOP", "NETBOOK", "NOTEBOOK"
                 txtExpiry.Text = txtMatu.Text
                 txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
             Case Else
@@ -468,5 +463,11 @@ Public Class frmPawningItemNew
 
     Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
         ReComputeInterest()
+    End Sub
+
+    Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ClearFields()
+        LoadAppraisers()
+        If transactionType = "L" Then NewLoan()
     End Sub
 End Class

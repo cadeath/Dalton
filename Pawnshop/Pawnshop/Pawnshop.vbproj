@@ -392,8 +392,16 @@
     <Compile Include="Panel\frm_PanelYesNo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PawnModule\CollectionPawnItemSpecs.vb" />
+    <Compile Include="PawnModule\dev_PT_test.Designer.vb">
+      <DependentUpon>dev_PT_test.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PawnModule\dev_PT_test.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PawnModule\PawnCalculation.vb" />
     <Compile Include="PawnModule\PawnItem.vb" />
+    <Compile Include="PawnModule\PawnItemSpec.vb" />
     <Compile Include="PawnModule\PawnTicket2.vb" />
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
       <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
@@ -718,6 +726,7 @@
     <Compile Include="Reports\qrySequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Seed\Client_Seed.vb" />
     <Compile Include="Seed\ItemClass_Seed.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -804,6 +813,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Panel\frm_PanelYesNo.resx">
       <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PawnModule\dev_PT_test.resx">
+      <DependentUpon>dev_PT_test.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
