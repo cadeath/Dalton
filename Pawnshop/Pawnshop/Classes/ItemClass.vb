@@ -228,7 +228,6 @@
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _category = .Item("itemcategory")
             _isRenew = .Item("isrenew")
-            '_onHold = .Item()
             _printLayout = .Item("print_layout")
 
         End With

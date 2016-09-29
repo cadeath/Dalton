@@ -152,7 +152,6 @@ Public Class frmPawningItemNew
             lv.SubItems.Add("")
             selected_ClassSpecs.Add(spec.SpecID, spec.SpecName)
         Next
-
     End Sub
 
     Private Sub AddItem(ByVal cio As DataRow)
