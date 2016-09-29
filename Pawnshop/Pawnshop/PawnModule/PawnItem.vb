@@ -1,12 +1,10 @@
 ﻿Public Class PawnItem
-    Inherits ItemClass
-
     Private MainTable As String = "OPI"
     Private SubTable As String = "PI1"
 
 #Region "Properties"
     Private _pawnItemID As Integer = 0
-    Public Overrides Property ID() As Integer
+    Public Property ID() As Integer
         Get
             Return _pawnItemID
         End Get
@@ -22,16 +20,6 @@
         End Get
         Set(ByVal value As Integer)
             _itemID = value
-        End Set
-    End Property
-
-    Private _schemeID As Integer
-    Public Overrides Property SchemeID() As Integer
-        Get
-            Return _schemeID
-        End Get
-        Set(ByVal value As Integer)
-            _schemeID = value
         End Set
     End Property
 
@@ -66,7 +54,7 @@
     End Property
 
     Private _created_At As Date
-    Public Overrides Property Created_At() As Date
+    Public Property Created_At() As Date
         Get
             Return _created_At
         End Get
@@ -76,7 +64,7 @@
     End Property
 
     Private _update_At As Date
-    Public Overrides Property Updated_At() As Date
+    Public Property Updated_At() As Date
         Get
             Return _update_At
         End Get
@@ -95,17 +83,15 @@
         End Set
     End Property
 
-
-    Private _intScheme As InterestScheme
-    Public Property InterestScheme() As InterestScheme
+    Private _itemClass As ItemClass
+    Public Property ItemClass() As ItemClass
         Get
-            Return _intScheme
+            Return _itemClass
         End Get
-        Set(ByVal value As InterestScheme)
-            _intScheme = value
+        Set(ByVal value As ItemClass)
+            _itemClass = value
         End Set
     End Property
-
 
 #End Region
 
@@ -116,7 +102,11 @@
         Dim ds As DataSet
         Dim isNew As Boolean = False
 
-        Me.LoadItem(_itemID) ' Load ItemClass
+        Dim itemClass As New ItemClass, tmpScheme As InterestScheme
+
+        _itemClass.LoadItem(_itemID) ' Load ItemClass
+        tmpScheme = _itemClass.InterestScheme
+
         ' Saving New PawnItem
         If _pawnItemID = 0 Then
             mySql = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
@@ -138,8 +128,8 @@
         With dr
             If isNew Then
                 .Item("ITEMID") = _itemID
-                .Item("ITEMCLASS") = Me.ItemClass
-                .Item("SCHEME_ID") = _intScheme.SchemeID
+                .Item("ITEMCLASS") = _itemClass.ClassName
+                .Item("SCHEME_ID") = tmpScheme.SchemeID
                 .Item("RENEWALCNT") = _renewalCnt
                 .Item("CREATED_AT") = Now.ToShortDateString
             Else
@@ -179,7 +169,8 @@
         End If
 
         With ds.Tables(0).Rows(0)
-            Me.LoadItem(.Item("ITEMID"))
+            _itemClass.LoadItem(.Item("ITEMID"))
+
             If Not IsDBNull(.Item("WITHDRAWDATE")) Then _withdrawDate = .Item("WITHDRAWDATE")
             _status = .Item("STATUS")
             _renewalCnt = .Item("RENEWALCNT")

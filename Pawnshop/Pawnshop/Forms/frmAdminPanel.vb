@@ -38,7 +38,7 @@ Public Class frmAdminPanel
     End Sub
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
-        If it.ItemClass = "" Then Exit Sub
+        'If it.ItemClass = "" Then Exit Sub
 
         txtClassification.Text = it.ItemClass
         txtCategory.Text = it.Category
@@ -232,7 +232,6 @@ Public Class frmAdminPanel
             Else
                 .isRenewable = 0
             End If
-
 
             .PrintLayout = txtPrintLayout.Text
             .SchemeID = GetSchemeID(cbotxtSchemename.Text)

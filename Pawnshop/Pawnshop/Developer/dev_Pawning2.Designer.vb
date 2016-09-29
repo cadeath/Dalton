@@ -183,6 +183,7 @@ Partial Class dev_Pawning2
         Me.txtPrincipal.Name = "txtPrincipal"
         Me.txtPrincipal.Size = New System.Drawing.Size(162, 20)
         Me.txtPrincipal.TabIndex = 14
+        Me.txtPrincipal.Text = "1000"
         '
         'Label6
         '
