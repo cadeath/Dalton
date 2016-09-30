@@ -62,18 +62,14 @@ Public Class frmClient
         txtSearch.Text = ""
         lvClient.Items.Clear()
     End Sub
-    ''' <summary>
-    ''' This method set frmotherForm to true.
-    ''' </summary>
-    ''' <param name="src"></param>
-    ''' <param name="frmOrigin"></param>
-    ''' <remarks></remarks>
+
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
         fromOtherForm = True
         btnSelect.Visible = True
         txtSearch.Text = src
         frmOrig = frmOrigin
     End Sub
+
     ''' <summary>
     ''' This method load all client information and show to the listview.
     ''' </summary>
@@ -172,6 +168,7 @@ Public Class frmClient
         frmClientInformation.Show()
 
     End Sub
+
     ''' <summary>
     ''' This button will search the specific client information.
     ''' Load the information to the listview.

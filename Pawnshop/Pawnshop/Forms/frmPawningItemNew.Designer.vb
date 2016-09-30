@@ -861,6 +861,7 @@ Partial Class frmPawningItemNew
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnPrint)
+        Me.MaximizeBox = False
         Me.Name = "frmPawningItemNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pawning New"

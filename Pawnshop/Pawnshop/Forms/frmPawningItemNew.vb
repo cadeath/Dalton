@@ -3,11 +3,12 @@
 Public Class frmPawningItemNew
     Friend PawnCustomer As Client
     Friend PawnClaimer As Client
-    Friend tmpItem As ItemClass
+    Friend PawnItem As ItemClass
     Friend transactionType As String = "L"
-    Private appraiser As Hashtable
+    Private PawnCalc As PawnCompute
 
-    Friend PawnItem As PawnTicket
+    Friend PT_Entry As New PawnTicket2
+    Private appraiser As Hashtable
     Private PawnInfo() As Hashtable
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
     Private currentORNumber As Integer = GetOption("ORLastNum")
@@ -137,7 +138,7 @@ Public Class frmPawningItemNew
         txtContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
 
         PawnCustomer = cl
-        'cboType.DroppedDown = True
+        txtClassification.Focus()
     End Sub
 
     Friend Sub LoadCliamer(ByVal cl As Client)
@@ -148,6 +149,7 @@ Public Class frmPawningItemNew
     Friend Sub LoadItem(ByVal Item As ItemClass)
 
         new_PawnItem.ItemClass = Item
+        txtClassification.Text = Item.ClassName
 
         selected_ClassSpecs = New Hashtable
         lvSpec.Items.Clear()
@@ -269,17 +271,24 @@ Public Class frmPawningItemNew
     End Sub
 
 
-    Private Sub dateChange(ByVal typ As String)
-        Select Case typ
-            Case "CELLPHONE", "TABLET", "LAPTOP", "NETBOOK", "NOTEBOOK"
+    Private Sub dateChange(selectedClass As ItemClass)
+        Select Case selectedClass.Category
+            Case "GADGET"
                 txtExpiry.Text = txtMatu.Text
                 txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
             Case Else
                 txtExpiry.Text = CurrentDate.AddDays(119).ToShortDateString
                 txtAuction.Text = CurrentDate.AddDays(152).ToShortDateString
         End Select
+
         ReComputeInterest()
     End Sub
+
+    Private Sub Assembling_Transactions()
+
+    End Sub
+
+
     Private Sub ReComputeInterest()
         Dim intHash As String = ""
 
@@ -295,7 +304,7 @@ Public Class frmPawningItemNew
         End If
 
         Dim matuDateTmp
-        If Not PawnItem Is Nothing Then
+        If Not PT_Entry Is Nothing Then
             ' Not for new Loan
             If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
             matuDateTmp = PawnItem.MaturityDate
@@ -382,8 +391,11 @@ Public Class frmPawningItemNew
         Return String.Format("{0:000000}", currentORNumber)
     End Function
 
+    ''' <summary>
+    ''' This is call when you wanted to generate new PawnTicket Number Sequence
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub GeneratePT()
-
         'Check PT if existing
         Dim mySql As String, ds As DataSet
         mySql = "SELECT * FROM tblPAWN "
@@ -399,65 +411,9 @@ Public Class frmPawningItemNew
 
         If transactionType = "R" Then
             txtTicket.Text = CurrentPTNumber(GetOption("PawnLastNum"))
-            txtOldTicket.Text = CurrentPTNumber(PawnItem.PawnTicket)
+            txtOldTicket.Text = CurrentPTNumber(PT_Entry.PawnTicket)
         End If
     End Sub
-
-    Friend Sub NewLoan()
-        txtCustomer.Focus()
-        transactionType = "L"
-        GeneratePT()
-        dateChange(txtClassification.Text)
-        txtPrincipal2.Text = txtPrincipal.Text
-        btnRenew.Enabled = False
-        btnRedeem.Enabled = False
-        btnVoid.Enabled = False
-    End Sub
-
-    'Private Sub LoadPawnInfo()
-    '    'cboType.Items.Clear()
-    '    'cboCat.Items.Clear()
-
-    '    'Type
-    '    Dim mySql As String = "SELECT DISTINCT TYPE FROM tblClass ORDER BY TYPE ASC"
-    '    Dim ds As DataSet = LoadSQL(mySql)
-    '    Dim classCNT As Integer = ds.Tables(0).Rows.Count
-    '    'For Each dr As DataRow In ds.Tables(0).Rows
-    '    '    cboType.Items.Add(dr.Item("TYPE"))
-    '    'Next
-    '    'cboType.SelectedIndex = 0
-
-    '    'Category
-    '    ReDim PawnInfo(classCNT - 1)
-    '    Dim cnt As Integer = 0 : mySql = "SELECT * FROM tblClass WHERE "
-    '    For cnt = 0 To classCNT - 1
-    '        Dim str As String = mySql & String.Format("TYPE = '{0}'", cboType.Items(cnt)) & " ORDER BY CATEGORY ASC"
-    '        ds.Clear()
-    '        ds = LoadSQL(str)
-    '        Dim x As Integer = 0
-    '        cboCat.Items.Clear()
-
-    '        PawnInfo(cnt) = New Hashtable
-    '        Console.WriteLine("Batch " & cnt + 1 & " ===================")
-    '        For Each dr As DataRow In ds.Tables(0).Rows
-    '            Console.WriteLine(x + 1 & ". " & dr.Item("Category"))
-    '            PawnInfo(cnt).Add(dr.Item("ClassID"), dr.Item("Category"))
-    '            x += 1
-    '        Next
-
-    '        Console.WriteLine("Re-Display ================")
-    '        For Each el As DictionaryEntry In PawnInfo(cnt)
-    '            Console.WriteLine(String.Format("{0}. {1}", el.Key, el.Value))
-    '        Next
-    '        Console.WriteLine("")
-    '    Next
-
-    '    For Each el As DictionaryEntry In PawnInfo(0)
-    '        cboCat.Items.Add(el.Value)
-    '    Next
-    '    cboCat.SelectedIndex = 0
-
-    'End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtCustomer.Text
@@ -482,7 +438,14 @@ Public Class frmPawningItemNew
         If transactionType = "L" Then NewLoan()
     End Sub
 
-    Private Sub lvSpec_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvSpec.SelectedIndexChanged
-
+    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
+        Me.Close()
     End Sub
+
+    Private Sub txtCustomer_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCustomer.KeyDown
+        If e.KeyCode = 13 Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
 End Class

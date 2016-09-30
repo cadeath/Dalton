@@ -5,7 +5,7 @@
     Dim selectedItem As ItemClass
 
 
-    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
+    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 AND ONHOLD = 0 ORDER BY itemid ASC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
         lvItem.Items.Clear()
@@ -48,23 +48,6 @@
         lv.SubItems.Add(dl.PrintLayout)
     End Sub
 
-    'Private Sub loadItemClass()
-    '    Dim mySql As String = "SELECT * FROM tblItem"
-    '    Dim ds As DataSet = LoadSQL(mySql)
-
-    '    lvItem.Items.Clear()
-    '    For Each dr As DataRow In ds.Tables(0).Rows
-
-    '        Dim lv As ListViewItem = lvItem.Items.Add(dr("ItemID"))
-    '        lv.SubItems.Add(dr("ItemClass"))
-    '        lv.SubItems.Add(dr("ItemCategory"))
-    '        lv.SubItems.Add(dr("Description"))
-    '        ' lv.SubItems.Add(dr("Int_rate"))
-    '        lv.SubItems.Add(dr("IsRenew"))
-    '        lv.SubItems.Add(dr("Print_Layout"))
-    '    Next
-    'End Sub
-
     Private Sub ClearField()
         txtSearch.Text = ""
         lvItem.Items.Clear()
@@ -86,7 +69,6 @@
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
 
         lvItem.Items.Clear()
-
         If MaxRow <= 0 Then
             Console.WriteLine("No Item List Found")
             MsgBox("Query not found", MsgBoxStyle.Information)
@@ -160,8 +142,6 @@
         selectedItem = New ItemClass
         selectedItem.LoadItem(idx)
 
-        lblItemID.Text = selectedItem.ID
-
         frmAdminPanel.dgSpecs.Rows.Clear()
 
         frmAdminPanel.LoadSpec(idx)
@@ -174,6 +154,12 @@
     Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
         'loadItemClass()
         txtSearch.Text = ""
+    End Sub
+
+    Private Sub txtSearch_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = 13 Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 
 End Class
