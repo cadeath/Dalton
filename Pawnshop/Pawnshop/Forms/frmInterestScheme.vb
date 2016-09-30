@@ -155,7 +155,7 @@ Public Class frmInterestScheme
             Dim SchemeInterest As New Scheme_Interest
 
             With SchemeInterest
-                .schemeInterestID = item.Text
+                .SchemeID = item.Text
                 .DayFrom = item.SubItems(1).Text
                 .DayTo = item.SubItems(2).Text
                 .Interest = item.SubItems(3).Text
@@ -164,7 +164,7 @@ Public Class frmInterestScheme
 
             End With
 
-            SchemeInterest.SchemeID = SchemeModify.SchemeID
+            SchemeInterest.schemeInterestID = SchemeModify.SchemeID
             SchemeInterest.Update()
         Next
 
@@ -204,6 +204,7 @@ Public Class frmInterestScheme
         lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
         clearfields()
         Label9.Text = "Update"
+        btnAdd.Enabled = True
     End Sub
 
     Private Sub btnRemove_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
@@ -228,18 +229,19 @@ Public Class frmInterestScheme
         lvIntscheme.Items.Clear()
         txtDescription.Clear()
         txtSchemeName.Clear()
-
+        clearfields()
     End Sub
 
     Private Sub lvIntscheme_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvIntscheme.DoubleClick
         With lvIntscheme
-            txtDayFrom.Text = .SelectedItems(0).SubItems(1).Text
-            txtDayTo.Text = .SelectedItems(0).SubItems(2).Text
-            txtInterest.Text = .SelectedItems(0).SubItems(3).Text
-            txtPenalty.Text = .SelectedItems(0).SubItems(4).Text
-            txtRemarks.Text = .SelectedItems(0).SubItems(5).Text
+            txtDayFrom.Text = .SelectedItems(0).SubItems(0).Text
+            txtDayTo.Text = .SelectedItems(0).SubItems(1).Text
+            txtInterest.Text = .SelectedItems(0).SubItems(2).Text
+            txtPenalty.Text = .SelectedItems(0).SubItems(3).Text
+            txtRemarks.Text = .SelectedItems(0).SubItems(4).Text
         End With
         Label9.Text = "Modify"
+        btnAdd.Enabled = False
     End Sub
 
 

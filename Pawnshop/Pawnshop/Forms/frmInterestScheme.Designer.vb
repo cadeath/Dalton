@@ -60,6 +60,7 @@ Partial Class frmInterestScheme
         Me.btnUpdateScheme = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtSearch = New Pawnshop.watermark()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -417,11 +418,21 @@ Partial Class frmInterestScheme
         Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
         Me.txtSearch.WatermarkText = "Search . . ."
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(439, 208)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(157, 13)
+        Me.Label11.TabIndex = 10
+        Me.Label11.Text = "Double Click Scheme to update"
+        '
         'frmInterestScheme
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(936, 444)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.btnUpdateScheme)
         Me.Controls.Add(Me.lvIntscheme)
@@ -485,6 +496,7 @@ Partial Class frmInterestScheme
     Friend WithEvents txtInterest As Pawnshop.watermark
     Friend WithEvents txtDayTo As Pawnshop.watermark
     Friend WithEvents txtSearch As Pawnshop.watermark
+    Friend WithEvents Label11 As System.Windows.Forms.Label
 
 
 End Class
