@@ -22,7 +22,6 @@ Partial Class Extract
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtPath = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnBrowseSave = New System.Windows.Forms.Button()
@@ -39,16 +38,9 @@ Partial Class Extract
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
         Me.btnBrowseData = New System.Windows.Forms.Button()
+        Me.txtPath = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'txtPath
-        '
-        Me.txtPath.Location = New System.Drawing.Point(65, 23)
-        Me.txtPath.Name = "txtPath"
-        Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(277, 20)
-        Me.txtPath.TabIndex = 0
         '
         'Label1
         '
@@ -183,6 +175,14 @@ Partial Class Extract
         Me.btnBrowseData.UseVisualStyleBackColor = True
         Me.btnBrowseData.Visible = False
         '
+        'txtPath
+        '
+        Me.txtPath.Location = New System.Drawing.Point(65, 23)
+        Me.txtPath.Name = "txtPath"
+        Me.txtPath.ReadOnly = True
+        Me.txtPath.Size = New System.Drawing.Size(277, 20)
+        Me.txtPath.TabIndex = 0
+        '
         'Extract
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -198,7 +198,6 @@ Partial Class Extract
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents txtPath As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -215,4 +214,5 @@ Partial Class Extract
     Friend WithEvents btnBrowseSave As System.Windows.Forms.Button
     Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents btnBrowseData As System.Windows.Forms.Button
+    Friend WithEvents txtPath As System.Windows.Forms.TextBox
 End Class
