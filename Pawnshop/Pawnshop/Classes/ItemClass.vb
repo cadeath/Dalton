@@ -225,6 +225,7 @@
     Public Sub LoadByRow(ByVal dr As DataRow)
         With dr
             _itemID = .Item("itemid")
+            _itemClassName = .Item("itemclass")
             '_desc = .Item("Description")
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _category = .Item("itemcategory")

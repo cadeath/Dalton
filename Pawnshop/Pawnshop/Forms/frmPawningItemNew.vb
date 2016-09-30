@@ -223,9 +223,9 @@ Public Class frmPawningItemNew
     End Sub
     Private Sub SaveNewLoan()
         Dim pawnSpecs As New CollectionPawnItemSpecs
-        tmpItem.LoadItem(tmpItem.ID)
+        PawnItem.LoadItem(PawnItem.ID)
         Dim i As Integer = 0
-        For Each spec As ItemSpecs In tmpItem.ItemSpecifications
+        For Each spec As ItemSpecs In PawnItem.ItemSpecifications
             Dim spc As New PawnItemSpec
 
             spc.UnitOfMeasure = spec.UnitOfMeasure
@@ -240,7 +240,7 @@ Public Class frmPawningItemNew
 
         Dim newItem As New PawnItem
         With newItem
-            .ItemID = tmpItem.ID
+            .ItemID = PawnItem.ID
             '.ItemClass = txtClassification.Text
             '.SchemeID = tmpItem.SchemeID
             .Status = "A"
@@ -306,9 +306,9 @@ Public Class frmPawningItemNew
         Dim matuDateTmp
         If Not PT_Entry Is Nothing Then
             ' Not for new Loan
-            If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
-            matuDateTmp = PawnItem.MaturityDate
-            intHash = PawnItem.INT_Checksum
+            'If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
+            'matuDateTmp = PawnItem.MaturityDate
+            'intHash = PawnItem.INT_Checksum
         Else
             'New Loan
             isDPJ = True
@@ -407,7 +407,7 @@ Public Class frmPawningItemNew
         txtTicket.Text = CurrentPTNumber()
         txtLoan.Text = CurrentDate.ToShortDateString
         txtMatu.Text = CurrentDate.AddDays(29).ToShortDateString
-        dateChange(txtClassification.Text)
+        'dateChange(txtClassification.Text)
 
         If transactionType = "R" Then
             txtTicket.Text = CurrentPTNumber(GetOption("PawnLastNum"))
@@ -435,7 +435,7 @@ Public Class frmPawningItemNew
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadAppraisers()
-        If transactionType = "L" Then NewLoan()
+        'If transactionType = "L" Then NewLoan()
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
