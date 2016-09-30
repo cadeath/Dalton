@@ -42,7 +42,7 @@ Public Class frmAdminPanel
         If it.ClassName = "" Then Exit Sub
 
 
-        'txtClassification.Text = it.ClassName
+        txtClassification.Text = it.ClassName
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
@@ -93,22 +93,6 @@ Public Class frmAdminPanel
         Return 0
     End Function
 
-    'Friend Sub LoadItemall(ByVal it As ItemClass)
-    '    txtClassification.Text = String.Format(it.ItemClass)
-    '    txtCategory.Text = String.Format(it.Category)
-    '    txtDescription.Text = String.Format(it.Description)
-
-    '    If it.isRenewable = "1" Then
-    '        rdbYes.Checked = True
-    '    Else
-    '        rdbNo.Checked = True
-    '    End If
-    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
-
-    '    ItemList = it
-
-    'End Sub
-
     Friend Sub clearfields()
         txtCategory.Text = ""
         txtClassification.Text = ""
@@ -145,13 +129,12 @@ Public Class frmAdminPanel
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
 
-        Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Dim SchemeSID As New InterestScheme
         SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
 
-        SchemeSID.SchemeID = SchemeSID.SchemeID
 
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
@@ -161,6 +144,7 @@ Public Class frmAdminPanel
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
+            .InterestScheme = SchemeSID
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -171,10 +155,7 @@ Public Class frmAdminPanel
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
 
-            'SelectedItem.InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
-            .InterestScheme.SchemeID = SchemeSID.SchemeID
         End With
-        ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
         For Each row As DataGridViewRow In dgSpecs.Rows
             SpecSave = New ItemSpecs
@@ -191,9 +172,7 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-            SelectedItem.InterestScheme.SchemeID = SelectedItem.ID
-            SpecSave.SaveSpecs()
-            'ColItemsSpecs.Add(SpecSave)
+            ColItemsSpecs.Add(SpecSave)
         Next
 
 

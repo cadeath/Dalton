@@ -807,7 +807,6 @@
     <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_encrypt.resources" />
     <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_ExtractToExcel.resources" />
     <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_inherit.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_NewItem.resources" />
     <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_ORview.resources" />
     <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_Pawning.resources" />
     <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_print.resources" />
