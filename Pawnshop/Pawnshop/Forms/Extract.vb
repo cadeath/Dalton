@@ -5,26 +5,31 @@ Public Class Extract
     Private path As String
 
     Private Sub LoadQuery()
+        Try
         Dim mysql As String = "" & txtQuery.Text & ""
         Dim ds As DataSet = LoadSQL(mysql)
         Dim tmpTableName As New TextBox, tmp As String
 
-        'For Each obj In lbTableName.Items
-        '    tmpTableName.AppendText(obj.ToString & " ")
-        'Next
-
-        For Each dt In ds.Tables
-            For Each column In dt.Columns
-                tmpTableName.AppendText(column.ColumnName & " ")
-            Next
+        For Each obj In lbTableName.Items
+            tmpTableName.AppendText(obj.ToString & " ")
         Next
+
+        'For Each dt In ds.Tables
+        '    For Each column In dt.Columns
+        '        tmpTableName.AppendText(column.ColumnName & " ")
+        '    Next
+        'Next
         tmp = tmpTableName.Text.TrimEnd
-     
+
         Dim tmpCount() As String = tmp.Split(CChar(" "))
         Dim tmpString() As String = {tmp}
         sfdPath.FileName = String.Format("{0}.xlsx", GetOption("BranchCode"))
-        path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\" & sfdPath.FileName
-        ExtractToExcell(tmpCount, mysql, path)
+        path = txtSavePath.Text & "\" & sfdPath.FileName
+            ExtractToExcell(tmpCount, mysql, path)
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
 
         MsgBox("Successfully Extracted", MsgBoxStyle.Information, "Extract")
     End Sub
@@ -34,7 +39,7 @@ Public Class Extract
     "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
 
         Dim firebird As String = readValue & DBPATH
-        database.dbName = firebird
+        'database.dbName = firebird
         txtPath.Text = firebird
     End Sub
 
@@ -45,10 +50,14 @@ Public Class Extract
     End Sub
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
+        database.dbName = txtPath.Text
         LoadQuery()
     End Sub
 
     Friend Sub ExtractToExcell(ByVal headers As String(), ByVal mySql As String, ByVal dest As String)
+        Try
+
+      
         If dest = "" Then Exit Sub
 
         Dim ds As DataSet = LoadSQL(mySql)
@@ -103,7 +112,10 @@ Public Class Extract
         oXL.Quit()
         oXL = Nothing
 
-        Console.WriteLine("Data Extracted")
+            Console.WriteLine("Data Extracted")
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
     End Sub
 
     Private Function GetOption(ByVal keys As String) As String
@@ -143,7 +155,8 @@ Public Class Extract
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
-
+            lbTableName.Items.Clear()
+            If txtQuery.Text = "" Then Exit Sub
             Dim mysql As String = " " & txtQuery.Text & ""
             Dim ds As DataSet = LoadSQL(mysql)
 
@@ -162,6 +175,32 @@ Public Class Extract
     End Sub
 
     Private Sub lbTableName_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbTableName.DoubleClick
-        lbTableName.Items(lbTableName.SelectedIndex) = txtHeader.Text
+        txtHeader.Text = lbTableName.SelectedItem
+    End Sub
+
+    Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+        Try
+
+            lbTableName.Items(lbTableName.SelectedIndex) = txtHeader.Text
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub txtHeader_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtHeader.KeyPress
+        If e.KeyChar = " " Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub btnBrowseSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseSave.Click
+        If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
+        txtSavePath.Text = fbdBackup.SelectedPath
+    End Sub
+
+    Private Sub btnBrowseData_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseData.Click
+        ofd.ShowDialog()
+        My.Computer.FileSystem.CopyFile(ofd.FileName, Application.StartupPath & DBPATH, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
+        txtPath.Text = ofd.FileName
     End Sub
 End Class

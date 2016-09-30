@@ -25,6 +25,10 @@ Partial Class Extract
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnBrowseSave = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.lbTableName = New System.Windows.Forms.ListBox()
+        Me.txtHeader = New System.Windows.Forms.TextBox()
         Me.txtSavePath = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -32,10 +36,9 @@ Partial Class Extract
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.lbTableName = New System.Windows.Forms.ListBox()
-        Me.txtHeader = New System.Windows.Forms.TextBox()
         Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
+        Me.btnBrowseData = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,7 +47,7 @@ Partial Class Extract
         Me.txtPath.Location = New System.Drawing.Point(65, 23)
         Me.txtPath.Name = "txtPath"
         Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(327, 20)
+        Me.txtPath.Size = New System.Drawing.Size(277, 20)
         Me.txtPath.TabIndex = 0
         '
         'Label1
@@ -58,6 +61,8 @@ Partial Class Extract
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnBrowseData)
+        Me.GroupBox1.Controls.Add(Me.btnBrowseSave)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.lbTableName)
         Me.GroupBox1.Controls.Add(Me.txtHeader)
@@ -74,11 +79,45 @@ Partial Class Extract
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Extract To Excel"
         '
+        'btnBrowseSave
+        '
+        Me.btnBrowseSave.Location = New System.Drawing.Point(348, 54)
+        Me.btnBrowseSave.Name = "btnBrowseSave"
+        Me.btnBrowseSave.Size = New System.Drawing.Size(40, 21)
+        Me.btnBrowseSave.TabIndex = 8
+        Me.btnBrowseSave.Text = "..."
+        Me.btnBrowseSave.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(398, 19)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(131, 24)
+        Me.Button1.TabIndex = 5
+        Me.Button1.Text = "Display Table Names"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'lbTableName
+        '
+        Me.lbTableName.FormattingEnabled = True
+        Me.lbTableName.Location = New System.Drawing.Point(398, 52)
+        Me.lbTableName.Name = "lbTableName"
+        Me.lbTableName.Size = New System.Drawing.Size(237, 121)
+        Me.lbTableName.TabIndex = 6
+        '
+        'txtHeader
+        '
+        Me.txtHeader.Location = New System.Drawing.Point(398, 182)
+        Me.txtHeader.Name = "txtHeader"
+        Me.txtHeader.Size = New System.Drawing.Size(237, 20)
+        Me.txtHeader.TabIndex = 9
+        '
         'txtSavePath
         '
         Me.txtSavePath.Location = New System.Drawing.Point(65, 54)
         Me.txtSavePath.Name = "txtSavePath"
-        Me.txtSavePath.Size = New System.Drawing.Size(323, 20)
+        Me.txtSavePath.ReadOnly = True
+        Me.txtSavePath.Size = New System.Drawing.Size(277, 20)
         Me.txtSavePath.TabIndex = 8
         '
         'Label4
@@ -121,30 +160,6 @@ Partial Class Extract
         Me.ofd.FileName = "OpenFileDialog1"
         Me.ofd.Filter = "Data | *.fdb"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(398, 19)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(131, 24)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Display Table Names"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'lbTableName
-        '
-        Me.lbTableName.FormattingEnabled = True
-        Me.lbTableName.Location = New System.Drawing.Point(398, 52)
-        Me.lbTableName.Name = "lbTableName"
-        Me.lbTableName.Size = New System.Drawing.Size(237, 121)
-        Me.lbTableName.TabIndex = 6
-        '
-        'txtHeader
-        '
-        Me.txtHeader.Location = New System.Drawing.Point(398, 182)
-        Me.txtHeader.Name = "txtHeader"
-        Me.txtHeader.Size = New System.Drawing.Size(240, 20)
-        Me.txtHeader.TabIndex = 9
-        '
         'btnUpdate
         '
         Me.btnUpdate.Location = New System.Drawing.Point(532, 220)
@@ -153,6 +168,20 @@ Partial Class Extract
         Me.btnUpdate.TabIndex = 7
         Me.btnUpdate.Text = "Update Header"
         Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'fbdBackup
+        '
+        Me.fbdBackup.SelectedPath = "C:\"
+        '
+        'btnBrowseData
+        '
+        Me.btnBrowseData.Location = New System.Drawing.Point(348, 22)
+        Me.btnBrowseData.Name = "btnBrowseData"
+        Me.btnBrowseData.Size = New System.Drawing.Size(40, 21)
+        Me.btnBrowseData.TabIndex = 10
+        Me.btnBrowseData.Text = "..."
+        Me.btnBrowseData.UseVisualStyleBackColor = True
+        Me.btnBrowseData.Visible = False
         '
         'Extract
         '
@@ -183,4 +212,7 @@ Partial Class Extract
     Friend WithEvents lbTableName As System.Windows.Forms.ListBox
     Friend WithEvents txtHeader As System.Windows.Forms.TextBox
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
+    Friend WithEvents btnBrowseSave As System.Windows.Forms.Button
+    Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
+    Friend WithEvents btnBrowseData As System.Windows.Forms.Button
 End Class
