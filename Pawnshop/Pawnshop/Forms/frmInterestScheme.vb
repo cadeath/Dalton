@@ -154,6 +154,7 @@ Public Class frmInterestScheme
         For Each item As ListViewItem In lvIntscheme.Items
             Dim SchemeInterest As New Scheme_Interest
 
+
             With SchemeInterest
                 .SchemeID = item.Text
                 .DayFrom = item.SubItems(1).Text
@@ -162,9 +163,9 @@ Public Class frmInterestScheme
                 .Penalty = item.SubItems(4).Text
                 .Remarks = item.SubItems(5).Text
 
+                SchemeInterest.schemeInterestID = .SchemeID
+                SchemeInterest.SchemeID = SchemeModify.SchemeID
             End With
-
-            SchemeInterest.schemeInterestID = SchemeModify.SchemeID
             SchemeInterest.Update()
         Next
 
@@ -234,11 +235,11 @@ Public Class frmInterestScheme
 
     Private Sub lvIntscheme_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvIntscheme.DoubleClick
         With lvIntscheme
-            txtDayFrom.Text = .SelectedItems(0).SubItems(0).Text
-            txtDayTo.Text = .SelectedItems(0).SubItems(1).Text
-            txtInterest.Text = .SelectedItems(0).SubItems(2).Text
-            txtPenalty.Text = .SelectedItems(0).SubItems(3).Text
-            txtRemarks.Text = .SelectedItems(0).SubItems(4).Text
+            txtDayFrom.Text = .SelectedItems(0).SubItems(1).Text
+            txtDayTo.Text = .SelectedItems(0).SubItems(2).Text
+            txtInterest.Text = .SelectedItems(0).SubItems(3).Text
+            txtPenalty.Text = .SelectedItems(0).SubItems(4).Text
+            txtRemarks.Text = .SelectedItems(0).SubItems(5).Text
         End With
         Label9.Text = "Modify"
         btnAdd.Enabled = False
@@ -250,7 +251,10 @@ Public Class frmInterestScheme
         txtSchemeName.Text = ""
         txtDescription.Text = ""
         txtSearch.Text = ""
+        btnUpdate.Enabled = False
 
-        lvIntscheme.Columns.Remove(lvIntscheme.Columns(0))
+
+        'lvIntscheme.Columns.Item(0).Width = 0
+        'lvIntscheme.Columns.Remove(lvIntscheme.Columns(0))
     End Sub
 End Class

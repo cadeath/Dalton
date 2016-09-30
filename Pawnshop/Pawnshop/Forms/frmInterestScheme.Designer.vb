@@ -113,7 +113,7 @@ Partial Class frmInterestScheme
         Me.txtInterest.Size = New System.Drawing.Size(112, 22)
         Me.txtInterest.TabIndex = 2
         Me.txtInterest.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtInterest.WatermarkText = "Day From"
+        Me.txtInterest.WatermarkText = "Interest"
         '
         'txtDayTo
         '

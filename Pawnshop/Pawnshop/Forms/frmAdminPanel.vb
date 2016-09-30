@@ -222,7 +222,7 @@ Public Class frmAdminPanel
 
             .PrintLayout = txtPrintLayout.Text
             .updated_at = CurrentDate
-            '.ID = GetSchemeID(cbotxtSchemename.Text)
+
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -243,6 +243,7 @@ Public Class frmAdminPanel
                 End If
 
             End With
+
             SpecModify.ItemID = SelectedItem.ID
 
             SpecModify.UpdateSpecs()
