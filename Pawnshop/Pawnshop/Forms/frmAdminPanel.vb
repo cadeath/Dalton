@@ -179,7 +179,7 @@ Public Class frmAdminPanel
         ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.Save_ItemClass()
 
-        MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        MsgBox("Item Class Saved", MsgBoxStyle.Information)
         rdbNo.Checked = False
         txtClassification.Focus()
         clearfields()
@@ -197,7 +197,7 @@ Public Class frmAdminPanel
             Exit Sub
         End If
 
-        Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Dim SchemeSID As New InterestScheme
@@ -250,7 +250,7 @@ Public Class frmAdminPanel
 
         ItemModify.Update()
 
-        MsgBox("Transaction Updated", MsgBoxStyle.Information)
+        MsgBox("Item Class Updated", MsgBoxStyle.Information)
         txtClassification.Focus()
         btnSave.Enabled = True
         rdbNo.Checked = False
