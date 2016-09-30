@@ -100,20 +100,20 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub LoadAppraisers()
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
-        Dim ds As DataSet = LoadSQL(mySql)
+        'Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
+        'Dim ds As DataSet = LoadSQL(mySql)
 
-        appraiser = New Hashtable
-        cboAppraiser.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpUser As New ComputerUser
-            tmpUser.LoadUserByRow(dr)
-            If tmpUser.canAppraise Then
-                Console.WriteLine(tmpUser.FullName & " loaded.")
-                appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-                cboAppraiser.Items.Add(tmpUser.UserName)
-            End If
-        Next
+        'appraiser = New Hashtable
+        'cboAppraiser.Items.Clear()
+        'For Each dr As DataRow In ds.Tables(0).Rows
+        '    Dim tmpUser As New ComputerUser
+        '    tmpUser.LoadUserByRow(dr)
+        '    If tmpUser.canAppraise Then
+        '        Console.WriteLine(tmpUser.FullName & " loaded.")
+        '        appraiser.Add(tmpUser.UserID, tmpUser.UserName)
+        '        cboAppraiser.Items.Add(tmpUser.UserName)
+        '    End If
+        'Next
     End Sub
 
     Private Sub btnSearchClassification_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClassification.Click
@@ -150,6 +150,7 @@ Public Class frmPawningItemNew
         new_PawnItem.ItemClass = Item
 
         selected_ClassSpecs = New Hashtable
+        lvSpec.Items.Clear()
         For Each spec As ItemSpecs In Item.ItemSpecifications
             Dim lv As ListViewItem = lvSpec.Items.Add(spec.SpecName)
             lv.SubItems.Add("")

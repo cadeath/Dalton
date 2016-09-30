@@ -90,13 +90,13 @@ Partial Class frmPawningItemNew
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.lvSpec = New System.Windows.Forms.ListView()
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearchClassification = New System.Windows.Forms.Button()
         Me.txtClassification = New System.Windows.Forms.TextBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.btnSearchClaimer = New System.Windows.Forms.Button()
         Me.txtClaimer = New System.Windows.Forms.TextBox()
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -782,6 +782,16 @@ Partial Class frmPawningItemNew
         Me.lvSpec.UseCompatibleStateImageBehavior = False
         Me.lvSpec.View = System.Windows.Forms.View.Details
         '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "Specification"
+        Me.ColumnHeader6.Width = 143
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Value"
+        Me.ColumnHeader7.Width = 158
+        '
         'btnSearchClassification
         '
         Me.btnSearchClassification.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -830,16 +840,6 @@ Partial Class frmPawningItemNew
         Me.txtClaimer.Size = New System.Drawing.Size(205, 22)
         Me.txtClaimer.TabIndex = 1
         Me.txtClaimer.Text = "Claimer"
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Specification"
-        Me.ColumnHeader6.Width = 115
-        '
-        'ColumnHeader7
-        '
-        Me.ColumnHeader7.Text = "Value"
-        Me.ColumnHeader7.Width = 158
         '
         'frmPawningItemNew
         '
