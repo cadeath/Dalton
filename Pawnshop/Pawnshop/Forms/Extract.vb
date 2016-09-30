@@ -5,16 +5,19 @@ Public Class Extract
     Private path As String
 
     Private Sub LoadQuery()
-        Dim mysql As String = "" & txtQuery.Text & ""
+        Dim mysql As String = "select * from tbl_gamit"
         Dim tmpTableName As New TextBox, tmp As String
         For Each obj In lbTableName.Items
-            tmpTableName.AppendText(obj.ToString & " ")
+            tmpTableName.AppendText(obj.ToString & vbCrLf)
         Next
         tmp = tmpTableName.Text
         'Dim split As String() = tmp.Split(New [Char]() {" "})
         'Dim tmpJoin() As String = {String.Join(" ,", split)}
-        tmp = tmp.Replace(" ", """ ,""")
-        Dim tmpString() As String = {(tmp)}
+        'tmp = tmp.Replace(vbCrLf, """ ,""")
+
+        Dim tmpCount() As String = tmp.Split(CChar(vbCrLf))
+        tmp = tmpCount.Length
+        Dim tmpString() As String = {tmp}
         sfdPath.FileName = String.Format("{0}.xlsx", GetOption("BranchCode"))
         path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\" & sfdPath.FileName
         ExtractToExcell(tmpString, mysql, path)
