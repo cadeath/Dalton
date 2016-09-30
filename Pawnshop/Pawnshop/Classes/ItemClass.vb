@@ -203,7 +203,6 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
-
             .Item("Scheme_ID") = _interestScheme.SchemeID
 
         End With

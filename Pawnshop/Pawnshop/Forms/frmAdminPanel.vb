@@ -37,8 +37,9 @@ Public Class frmAdminPanel
         Next
     End Sub
 
+
     Friend Sub LoadItemList(ByVal it As ItemClass)
-        'If it.ItemClass = "" Then Exit Sub
+        If it.ClassName = "" Then Exit Sub
 
 
         txtClassification.Text = it.ClassName
@@ -149,6 +150,11 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        Dim SchemeSID As New InterestScheme
+        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+
+        SchemeSID.SchemeID = SchemeSID.SchemeID
+
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
 
@@ -166,8 +172,9 @@ Public Class frmAdminPanel
 
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
-            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
-            .InterestScheme.SchemeID = SelectedItem.ID
+
+            'SelectedItem.InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
+            .InterestScheme.SchemeID = SchemeSID.SchemeID
         End With
         ' ItemSave.RenewalCount = ItemSave.RenewalCount + 1
 
@@ -700,4 +707,11 @@ Public Class frmAdminPanel
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
     End Sub
 
+
+    Private Sub cbotxtSchemename_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbotxtSchemename.SelectedIndexChanged
+        Dim SchemeSID As New InterestScheme
+        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+
+        SchemeSID.SchemeID = SchemeSID.SchemeID
+    End Sub
 End Class
