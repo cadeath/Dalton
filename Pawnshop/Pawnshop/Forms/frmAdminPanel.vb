@@ -187,8 +187,6 @@ Public Class frmAdminPanel
     End Sub
 
 
-
-
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not isValid() Then Exit Sub
 
@@ -202,6 +200,9 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to Update this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        Dim SchemeSID As New InterestScheme
+        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
 
@@ -209,8 +210,9 @@ Public Class frmAdminPanel
             .ClassName = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
-            .updated_at = CurrentDate
             .ID = SelectedItem.ID
+
+            .InterestScheme = SchemeSID
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -219,7 +221,8 @@ Public Class frmAdminPanel
             End If
 
             .PrintLayout = txtPrintLayout.Text
-            .ID = GetSchemeID(cbotxtSchemename.Text)
+            .updated_at = CurrentDate
+            '.ID = GetSchemeID(cbotxtSchemename.Text)
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -326,10 +329,11 @@ Public Class frmAdminPanel
     Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
         Dim tmpItem As New ItemSpecs
         tmpItem.LoadItemSpecs_row(ItemSpecs)
-        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
+        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, _
+                tmpItem.SpecName, tmpItem.SpecType.ToString, _
+                tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 
-   
 
     '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
     Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
@@ -421,8 +425,6 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub Modcash()
-
-       
         fillData = "tblCash"
         mySql = "SELECT * FROM " & fillData
         mySql &= " WHERE CashID <> 0"
@@ -580,8 +582,6 @@ Public Class frmAdminPanel
 
 #End Region
 
-   
-
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
@@ -680,13 +680,5 @@ Public Class frmAdminPanel
 
     Private Sub lvModule_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvModule.SelectedIndexChanged
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
-    End Sub
-
-
-    Private Sub cbotxtSchemename_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbotxtSchemename.SelectedIndexChanged
-        Dim SchemeSID As New InterestScheme
-        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
-
-        SchemeSID.SchemeID = SchemeSID.SchemeID
     End Sub
 End Class
