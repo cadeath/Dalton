@@ -317,7 +317,6 @@ Public Class frmAdminPanel
         For Each dr In ds.Tables(0).Rows
             AddItemSpecs(dr)
         Next
-            ' Dim i As Integer = (0)
 
             reaDOnlyTrue()
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
