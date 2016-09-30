@@ -40,10 +40,10 @@
 
     Private Sub AddItem(ByVal dl As ItemClass)
         Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
-        lv.SubItems.Add(dl.ClassName)
+        lv.SubItems.Add("Class HERE")
         lv.SubItems.Add(dl.Category)
         lv.SubItems.Add(dl.Description)
-        'lv.SubItems.Add(dl.InterestRate)
+        lv.SubItems.Add(dl.InterestRate)
         lv.SubItems.Add(dl.isRenewable)
         lv.SubItems.Add(dl.PrintLayout)
     End Sub
@@ -118,107 +118,6 @@
     End Sub
 
 
-
-    ''Private Sub lvItem_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
-    ''    If Not mOtherForm Then
-    ''        btnView.PerformClick()
-    ''    Else
-    ''        btnSelect.PerformClick()
-    ''    End If
-    ''End Sub
-
-    ' ''Private Sub lvItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvItem.Click
-    ' ''    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-    ' ''    GetItem = New Item
-    ' ''    GetItem.LoadItem(idx)
-
-    ' ''    GetItem.LoadSpec(idx)
-
-    ' ''    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-    ' ''    lblItemID.Text = idx
-    ' ''End Sub
-
-
-    ''Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-    ''    Me.Close()
-    ''    frmAdminPanel.Show()
-    ''End Sub
-
-    ''Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-    ''    frmAdminPanel.btnUpdate.Enabled = False
-    ''    frmAdminPanel.btnSave.Enabled = True
-    ''    frmAdminPanel.clearfields()
-    ''    frmAdminPanel.reaDOnlyFalse()
-    ''End Sub
-
-    ''Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-
-    ''    If lvItem.SelectedItems.Count <= 0 Then Exit Sub
-
-    ''    Dim ItemID As Integer
-    ''    ItemID = lvItem.FocusedItem.Text
-    ''    Console.WriteLine("ITEMID : " & ItemID)
-
-    ''    Dim tempITEM As New Item
-    ''    tempITEM.LoadItem(ItemID)
-    ''    lblItemID.Text = ItemID
-
-    ''    frmAdminPanel.LoadItemall(tempITEM)
-    ''    frmAdminPanel.LoadSpec()
-    ''    frmAdminPanel.Show()
-    ''    Me.Hide()
-    ''End Sub
-
-    ''Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-
-    ''    If lvItem.Items.Count = 0 Then Exit Sub
-
-    ''    If lvItem.SelectedItems.Count = 0 Then
-    ''        lvItem.Items(0).Focused = True
-    ''    End If
-    ''    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-    ''    GetItem = New Item
-    ''    GetItem.LoadItem(idx)
-    ''    GetItem.LoadSpec(idx)
-
-    ''    lblItemID.Text = (idx)
-
-
-    ''    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-    ''    ' lblItemID.Text = idx
-    ''    ' frmAdminPanel.LoadItemall(GetItem)
-    ''    'frmAdminPanel.LoadSpec()
-    ''    Me.Hide()
-
-    ''End Sub
-
-
-    'Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-
-    '    If lvItem.Items.Count = 0 Then Exit Sub
-
-    '    If lvItem.SelectedItems.Count = 0 Then
-    '        lvItem.Items(0).Focused = True
-    '    End If
-    '    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-    '    Dim getitem As ItemClass
-    '    Dim getspec As ItemSpecs = New ItemSpecs
-
-    '    getitem = New ItemClass
-    '    getitem.LoadItem(idx)
-
-    '    getspec.LoadItemSpecs(idx)
-    '    lblItemID.Text = (idx)
-
-
-    '    formSwitch.ReloadFormFromSearch2(frmOrig, GetItem)
-    '    ' lblItemID.Text = idx
-    '    ' frmAdminPanel.LoadItemall(GetItem)
-    '    'frmAdminPanel.LoadSpec()
-    '    Me.Hide()
-
-    'End Sub
-
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
         mOtherForm = True
         btnSelect.Visible = True
@@ -233,6 +132,8 @@
 
         Dim selectedItem As New ItemClass
         selectedItem.LoadItem(idx)
+
+        Console.WriteLine("Scheme: " & selectedItem.InterestScheme.SchemeName)
 
         'lvItem.Items.Clear()
         'For Each spec As ItemSpecs In selectedItem.ItemSpecifications

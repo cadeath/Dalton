@@ -1,11 +1,11 @@
 ﻿Public Class frm_PanelMultiline
     Private isNumber As Boolean
+    Friend retID As Integer = 0
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Dim tmpResult As String = txtSearch.Text
-            With frmPawningItemNew.lvSpec
-            .SelectedItems(0).SubItems(4).Text = tmpResult
-            End With
+            
+        frmPawningItemNew.DisplayValue(tmpResult, retID)
         Me.Close()
     End Sub
 
@@ -19,11 +19,6 @@
         txtSearch.Clear()
         txtSearch.Focus()
         txtSearch.ScrollBars = ScrollBars.Vertical
-        If frmPawningItemNew.lvSpec.FocusedItem.SubItems(3).Text = "String" Then
-            isNumber = False
-        Else
-            isNumber = True
-        End If
     End Sub
    
 End Class

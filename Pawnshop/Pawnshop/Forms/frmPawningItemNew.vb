@@ -51,6 +51,9 @@ Public Class frmPawningItemNew
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Reprint As Boolean = False
 
+    Private selected_ClassSpecs As Hashtable
+    Private new_PawnItem As New PawnItem
+
     Private Sub ClearFields()
         mod_system.isAuthorized = False
 
@@ -144,17 +147,14 @@ Public Class frmPawningItemNew
 
     Friend Sub LoadItem(ByVal Item As ItemClass)
 
-        Dim tmpItemID As String = (Item.ID)
-        Dim mySql As String = "SELECT * FROM tblSpecs WHERE ItemID = '" & tmpItemID & "'"
-        Dim ds As DataSet = LoadSQL(mySql)
+        new_PawnItem.ItemClass = Item
 
-        lvSpec.Items.Clear()
-        For Each cio As DataRow In ds.Tables(0).Rows
-            AddItem(cio)
+        selected_ClassSpecs = New Hashtable
+        For Each spec As ItemSpecs In Item.ItemSpecifications
+            Dim lv As ListViewItem = lvSpec.Items.Add(spec.SpecName)
+            lv.SubItems.Add("")
+            selected_ClassSpecs.Add(spec.SpecID, spec.SpecName)
         Next
-
-        txtClassification.Text = Item.ClassName
-        tmpItem = Item
     End Sub
 
     Private Sub AddItem(ByVal cio As DataRow)
@@ -179,18 +179,30 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
+    Friend Sub DisplayValue(value As String, id As Integer)
+        lvSpec.Items(id).SubItems(1).Text = value
+    End Sub
+
     Private Sub InputSpec()
         If lvSpec.SelectedItems.Count = 0 Then Exit Sub
-        If lvSpec.FocusedItem.SubItems(2).Text = "TextBox" Then
-            frm_PanelTextbox.ShowDialog()
 
-        ElseIf lvSpec.FocusedItem.SubItems(2).Text = "Yes/No" Then
-            frm_PanelYesNo.ShowDialog()
+        Dim tmpSpec As New ItemSpecs
+        Dim idx As Integer = lvSpec.FocusedItem.Index
+        Dim selectedID As Integer = GetIDbyName(lvSpec.FocusedItem.Text, selected_ClassSpecs)
+        tmpSpec.LoadItemSpecs(selectedID)
 
-        ElseIf lvSpec.FocusedItem.SubItems(2).Text = "MultiLine" Then
-            frm_PanelMultiline.ShowDialog()
-
-        End If
+        Select Case tmpSpec.SpecLayout
+            Case "TextBox"
+                frm_PanelTextbox.retID = idx
+                frm_PanelTextbox.inputType = tmpSpec.SpecType
+                frm_PanelTextbox.ShowDialog()
+            Case "Yes/No"
+                frm_PanelYesNo.retID = idx
+                frm_PanelYesNo.ShowDialog()
+            Case "MultiLine"
+                frm_PanelMultiline.retID = idx
+                frm_PanelMultiline.ShowDialog()
+        End Select
     End Sub
 
     Private Sub lvSpec_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvSpec.KeyPress
@@ -226,8 +238,8 @@ Public Class frmPawningItemNew
         Dim newItem As New PawnItem
         With newItem
             .ItemID = tmpItem.ID
-            ' .ItemClass = tmpItem.ClassName
-            ' .SchemeID = tmpItem.SchemeID
+            '.ItemClass = txtClassification.Text
+            '.SchemeID = tmpItem.SchemeID
             .Status = "A"
             .PawnItemSpecs = pawnSpecs
 
@@ -467,5 +479,9 @@ Public Class frmPawningItemNew
         ClearFields()
         LoadAppraisers()
         If transactionType = "L" Then NewLoan()
+    End Sub
+
+    Private Sub lvSpec_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvSpec.SelectedIndexChanged
+
     End Sub
 End Class

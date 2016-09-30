@@ -144,7 +144,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Dim ColItemsSpecs As New CollectionItemSpecs
 
         With ItemSave
-            .ClassName = txtClassifiction.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
@@ -209,7 +208,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
 
         With ItemModify
-            .ClassName = txtClassifiction.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .updated_at = CurrentDate

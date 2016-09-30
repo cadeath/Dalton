@@ -90,16 +90,13 @@ Partial Class frmPawningItemNew
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.lvSpec = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearchClassification = New System.Windows.Forms.Button()
         Me.txtClassification = New System.Windows.Forms.TextBox()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.btnSearchClaimer = New System.Windows.Forms.Button()
         Me.txtClaimer = New System.Windows.Forms.TextBox()
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -210,7 +207,6 @@ Partial Class frmPawningItemNew
         '
         'cboAppraiser
         '
-        Me.cboAppraiser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboAppraiser.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboAppraiser.FormattingEnabled = True
         Me.cboAppraiser.Location = New System.Drawing.Point(22, 19)
@@ -775,7 +771,7 @@ Partial Class frmPawningItemNew
         '
         'lvSpec
         '
-        Me.lvSpec.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvSpec.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvSpec.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSpec.FullRowSelect = True
         Me.lvSpec.GridLines = True
@@ -785,31 +781,6 @@ Partial Class frmPawningItemNew
         Me.lvSpec.TabIndex = 30
         Me.lvSpec.UseCompatibleStateImageBehavior = False
         Me.lvSpec.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Text = "ID"
-        Me.ColumnHeader1.Width = 0
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Text = "Specification Name"
-        Me.ColumnHeader2.Width = 150
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Text = "Specification Layout"
-        Me.ColumnHeader3.Width = 0
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Specification Type"
-        Me.ColumnHeader4.Width = 0
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Specification Value"
-        Me.ColumnHeader5.Width = 152
         '
         'btnSearchClassification
         '
@@ -859,6 +830,16 @@ Partial Class frmPawningItemNew
         Me.txtClaimer.Size = New System.Drawing.Size(205, 22)
         Me.txtClaimer.TabIndex = 1
         Me.txtClaimer.Text = "Claimer"
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "Specification"
+        Me.ColumnHeader6.Width = 115
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Value"
+        Me.ColumnHeader7.Width = 158
         '
         'frmPawningItemNew
         '
@@ -971,9 +952,6 @@ Partial Class frmPawningItemNew
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
     Friend WithEvents btnSearchClaimer As System.Windows.Forms.Button
     Friend WithEvents txtClaimer As System.Windows.Forms.TextBox
-    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
 End Class
