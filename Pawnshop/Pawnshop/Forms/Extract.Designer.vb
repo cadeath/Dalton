@@ -25,17 +25,17 @@ Partial Class Extract
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtSavePath = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtQuery = New System.Windows.Forms.TextBox()
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.cboTablename = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtSavePath = New System.Windows.Forms.TextBox()
         Me.lbTableName = New System.Windows.Forms.ListBox()
+        Me.txtHeader = New System.Windows.Forms.TextBox()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -58,20 +58,37 @@ Partial Class Extract
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Controls.Add(Me.lbTableName)
+        Me.GroupBox1.Controls.Add(Me.txtHeader)
         Me.GroupBox1.Controls.Add(Me.txtSavePath)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.cboTablename)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.txtQuery)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.txtPath)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(398, 208)
+        Me.GroupBox1.Size = New System.Drawing.Size(641, 208)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Extract To Excel"
+        '
+        'txtSavePath
+        '
+        Me.txtSavePath.Location = New System.Drawing.Point(65, 54)
+        Me.txtSavePath.Name = "txtSavePath"
+        Me.txtSavePath.Size = New System.Drawing.Size(323, 20)
+        Me.txtSavePath.TabIndex = 8
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(6, 54)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(57, 13)
+        Me.Label4.TabIndex = 7
+        Me.Label4.Text = "Save Path"
         '
         'Label2
         '
@@ -87,14 +104,14 @@ Partial Class Extract
         Me.txtQuery.Location = New System.Drawing.Point(65, 81)
         Me.txtQuery.Multiline = True
         Me.txtQuery.Name = "txtQuery"
-        Me.txtQuery.Size = New System.Drawing.Size(327, 88)
+        Me.txtQuery.Size = New System.Drawing.Size(327, 117)
         Me.txtQuery.TabIndex = 3
         '
         'btnExtract
         '
-        Me.btnExtract.Location = New System.Drawing.Point(262, 226)
+        Me.btnExtract.Location = New System.Drawing.Point(319, 220)
         Me.btnExtract.Name = "btnExtract"
-        Me.btnExtract.Size = New System.Drawing.Size(142, 36)
+        Me.btnExtract.Size = New System.Drawing.Size(81, 36)
         Me.btnExtract.TabIndex = 3
         Me.btnExtract.Text = "Extract"
         Me.btnExtract.UseVisualStyleBackColor = True
@@ -106,63 +123,45 @@ Partial Class Extract
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(77, 226)
+        Me.Button1.Location = New System.Drawing.Point(398, 19)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(145, 36)
+        Me.Button1.Size = New System.Drawing.Size(131, 24)
         Me.Button1.TabIndex = 5
         Me.Button1.Text = "Display Table Names"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'cboTablename
-        '
-        Me.cboTablename.FormattingEnabled = True
-        Me.cboTablename.Location = New System.Drawing.Point(65, 175)
-        Me.cboTablename.Name = "cboTablename"
-        Me.cboTablename.Size = New System.Drawing.Size(327, 21)
-        Me.cboTablename.TabIndex = 6
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(6, 178)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(42, 13)
-        Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Header"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 54)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(57, 13)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "Save Path"
-        '
-        'txtSavePath
-        '
-        Me.txtSavePath.Location = New System.Drawing.Point(65, 54)
-        Me.txtSavePath.Name = "txtSavePath"
-        Me.txtSavePath.Size = New System.Drawing.Size(323, 20)
-        Me.txtSavePath.TabIndex = 8
-        '
         'lbTableName
         '
         Me.lbTableName.FormattingEnabled = True
-        Me.lbTableName.Location = New System.Drawing.Point(416, 23)
+        Me.lbTableName.Location = New System.Drawing.Point(398, 52)
         Me.lbTableName.Name = "lbTableName"
-        Me.lbTableName.Size = New System.Drawing.Size(251, 186)
+        Me.lbTableName.Size = New System.Drawing.Size(237, 121)
         Me.lbTableName.TabIndex = 6
+        '
+        'txtHeader
+        '
+        Me.txtHeader.Location = New System.Drawing.Point(398, 182)
+        Me.txtHeader.Name = "txtHeader"
+        Me.txtHeader.Size = New System.Drawing.Size(240, 20)
+        Me.txtHeader.TabIndex = 9
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(532, 220)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(114, 36)
+        Me.btnUpdate.TabIndex = 7
+        Me.btnUpdate.Text = "Update Header"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'Extract
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(748, 268)
-        Me.Controls.Add(Me.lbTableName)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(658, 262)
         Me.Controls.Add(Me.btnExtract)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Name = "Extract"
         Me.Text = "Extractor"
         Me.GroupBox1.ResumeLayout(False)
@@ -179,9 +178,9 @@ Partial Class Extract
     Friend WithEvents ofd As System.Windows.Forms.OpenFileDialog
     Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents cboTablename As System.Windows.Forms.ComboBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtSavePath As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents lbTableName As System.Windows.Forms.ListBox
+    Friend WithEvents txtHeader As System.Windows.Forms.TextBox
+    Friend WithEvents btnUpdate As System.Windows.Forms.Button
 End Class

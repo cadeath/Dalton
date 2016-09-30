@@ -5,22 +5,26 @@ Public Class Extract
     Private path As String
 
     Private Sub LoadQuery()
-        Dim mysql As String = "select * from tbl_gamit"
+        Dim mysql As String = "" & txtQuery.Text & ""
+        Dim ds As DataSet = LoadSQL(mysql)
         Dim tmpTableName As New TextBox, tmp As String
-        For Each obj In lbTableName.Items
-            tmpTableName.AppendText(obj.ToString & vbCrLf)
-        Next
-        tmp = tmpTableName.Text
-        'Dim split As String() = tmp.Split(New [Char]() {" "})
-        'Dim tmpJoin() As String = {String.Join(" ,", split)}
-        'tmp = tmp.Replace(vbCrLf, """ ,""")
 
-        Dim tmpCount() As String = tmp.Split(CChar(vbCrLf))
-        tmp = tmpCount.Length
+        'For Each obj In lbTableName.Items
+        '    tmpTableName.AppendText(obj.ToString & " ")
+        'Next
+
+        For Each dt In ds.Tables
+            For Each column In dt.Columns
+                tmpTableName.AppendText(column.ColumnName & " ")
+            Next
+        Next
+        tmp = tmpTableName.Text.TrimEnd
+     
+        Dim tmpCount() As String = tmp.Split(CChar(" "))
         Dim tmpString() As String = {tmp}
         sfdPath.FileName = String.Format("{0}.xlsx", GetOption("BranchCode"))
         path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\" & sfdPath.FileName
-        ExtractToExcell(tmpString, mysql, path)
+        ExtractToExcell(tmpCount, mysql, path)
 
         MsgBox("Successfully Extracted", MsgBoxStyle.Information, "Extract")
     End Sub
@@ -35,6 +39,7 @@ Public Class Extract
     End Sub
 
     Private Sub Extract_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtQuery.ScrollBars = ScrollBars.Vertical
         LoadPath()
         txtSavePath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
     End Sub
@@ -139,15 +144,13 @@ Public Class Extract
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
 
-        Dim mysql As String = " " & txtQuery.Text & ""
-        Dim ds As DataSet = LoadSQL(mysql)
+            Dim mysql As String = " " & txtQuery.Text & ""
+            Dim ds As DataSet = LoadSQL(mysql)
 
-        For Each dt In ds.Tables
-            For Each column In dt.Columns
-                    'Console.WriteLine(column.ColumnName)
-                    'cboTablename.Items.Add(column.ColumnName)
+            For Each dt In ds.Tables
+                For Each column In dt.Columns
                     lbTableName.Items.Add(column.ColumnName)
-            Next
+                Next
             Next
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
@@ -158,4 +161,7 @@ Public Class Extract
         sfdPath.ShowDialog()
     End Sub
 
+    Private Sub lbTableName_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbTableName.DoubleClick
+        lbTableName.Items(lbTableName.SelectedIndex) = txtHeader.Text
+    End Sub
 End Class
