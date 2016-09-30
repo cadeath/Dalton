@@ -139,7 +139,7 @@
 #End Region
 
 #Region "Functions and Procedures"
-    Public Sub LoadItem(id As Integer)
+    Public Sub LoadItem(ByVal id As Integer)
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", id)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
@@ -147,6 +147,7 @@
             MsgBox("Failed to load Item", MsgBoxStyle.Critical)
             Exit Sub
         End If
+
 
         _interestScheme = New InterestScheme
         With ds.Tables(0).Rows(0)
@@ -202,6 +203,7 @@
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
             .Item("Scheme_ID") = _interestScheme.SchemeID
+
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -220,14 +222,14 @@
     Public Sub LoadByRow(ByVal dr As DataRow)
         With dr
             _itemID = .Item("itemid")
-            _itemClass = .Item("itemclass")
+            _itemClassName = .Item("itemclass")
             '_desc = .Item("Description")
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _category = .Item("itemcategory")
             _isRenew = .Item("isrenew")
             '_onHold = .Item()
             _printLayout = .Item("print_layout")
-            _SchemeID = .Item("Scheme_ID")
+            '_interestScheme.SchemeID = .Item("Scheme_ID")
 
         End With
     End Sub

@@ -18,12 +18,12 @@
 
             Dim tmpClass As New ItemClass
             With tmpClass
-                .ItemClass = ClassName(i)
+                .ClassName = ClassName(i)
                 .Category = Category(i)
                 .Description = Desc(i)
                 .isRenewable = isRenew(i)
                 .PrintLayout = layout(i)
-                .SchemeID = 1
+                .InterestScheme.SchemeID = 1
             End With
 
             Select Case ClassName(i).ToUpper
