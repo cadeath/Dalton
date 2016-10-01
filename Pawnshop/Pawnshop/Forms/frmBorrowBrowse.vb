@@ -71,13 +71,6 @@
         txtOut.Text = lvBorrowings.SelectedItems(0).SubItems(3).Text
         txtParticular.Text = tmpBB.Remarks
     End Sub
-
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
    
     Public Sub GetBorrowingID()
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
