@@ -39,7 +39,7 @@ Public Class Extract
     "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
 
         Dim firebird As String = readValue & DBPATH
-        'database.dbName = firebird
+        database.dbName = firebird
         txtPath.Text = firebird
     End Sub
 
