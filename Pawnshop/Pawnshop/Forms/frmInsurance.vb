@@ -189,12 +189,7 @@
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmInsuranceList.Show()
     End Sub
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
+
     ''' <summary>
     ''' This button will perform to void the transaction.
     ''' </summary>

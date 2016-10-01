@@ -532,6 +532,7 @@ Module mod_system
         sourceArray(newPosition) = newValue
     End Sub
 
+
     ' HASHTABLE FUNCTIONS
     Public Function GetIDbyName(name As String, ht As Hashtable) As Integer
         For Each dt As DictionaryEntry In ht
@@ -553,6 +554,14 @@ Module mod_system
         Return "ES" & "KIE GWA" & "PO"
     End Function
     ' END - HASHTABLE FUNCTIONS
+
+    Public Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        'Return False
+        Return True
+    End Function
+
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

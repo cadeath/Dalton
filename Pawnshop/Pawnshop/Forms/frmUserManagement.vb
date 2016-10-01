@@ -260,13 +260,6 @@
         Me.Close()
     End Sub
 
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
-
    Private Function CheckUsername() As Boolean
         Dim mySql As String, ds As DataSet
         mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"

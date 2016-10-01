@@ -1,5 +1,6 @@
 CHANGELOG
-Version 1.2.3.7
+Version 1.2.3.9
+ - Requires OTP alone in Pullout Module, nullify the privilege 
  - Fix Expiry Generator, get whole month
 
 Version 1.2.3.7
