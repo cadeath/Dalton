@@ -166,7 +166,6 @@ Partial Class Extract
         '
         'ofd
         '
-        Me.ofd.FileName = "OpenFileDialog1"
         Me.ofd.Filter = "Data | *.fdb"
         '
         'btnUpdate
