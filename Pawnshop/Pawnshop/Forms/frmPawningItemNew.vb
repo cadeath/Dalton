@@ -231,7 +231,7 @@ Public Class frmPawningItemNew
             spc.UnitOfMeasure = spec.UnitOfMeasure
             spc.SpecName = spec.SpecName
             spc.SpecType = spec.SpecType
-            spc.SpecsValue = lvSpec.Items(i).SubItems(4).Text
+            spc.SpecsValue = lvSpec.Items(i).SubItems(1).Text
             spc.isRequired = spec.isRequired
             pawnSpecs.Add(spc)
 
