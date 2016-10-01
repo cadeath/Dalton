@@ -74,13 +74,6 @@
         btnView.PerformClick()
     End Sub
 
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
-
     ''' <summary>
     ''' This button will allow to void transaction.
     ''' </summary>
