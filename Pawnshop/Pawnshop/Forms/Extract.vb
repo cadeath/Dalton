@@ -155,6 +155,7 @@ Public Class Extract
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Try
+            database.dbName = txtPath.Text
             lbTableName.Items.Clear()
             If txtQuery.Text = "" Then Exit Sub
             Dim mysql As String = " " & txtQuery.Text & ""
@@ -200,7 +201,7 @@ Public Class Extract
 
     Private Sub btnBrowseData_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseData.Click
         ofd.ShowDialog()
-        My.Computer.FileSystem.CopyFile(ofd.FileName, Application.StartupPath & DBPATH, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
+        'My.Computer.FileSystem.CopyFile(ofd.FileName, Application.StartupPath & DBPATH, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.UICancelOption.DoNothing)
         txtPath.Text = ofd.FileName
     End Sub
 End Class
