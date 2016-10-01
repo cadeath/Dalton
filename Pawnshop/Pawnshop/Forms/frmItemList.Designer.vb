@@ -166,6 +166,7 @@ Partial Class frmItemList
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.lvItem)
         Me.Name = "frmItemList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Item List"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
