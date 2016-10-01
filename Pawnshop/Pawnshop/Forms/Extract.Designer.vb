@@ -24,6 +24,7 @@ Partial Class Extract
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnBrowseData = New System.Windows.Forms.Button()
         Me.btnBrowseSave = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.lbTableName = New System.Windows.Forms.ListBox()
@@ -32,13 +33,12 @@ Partial Class Extract
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtQuery = New System.Windows.Forms.TextBox()
+        Me.txtPath = New System.Windows.Forms.TextBox()
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
-        Me.btnBrowseData = New System.Windows.Forms.Button()
-        Me.txtPath = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -70,6 +70,15 @@ Partial Class Extract
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Extract To Excel"
+        '
+        'btnBrowseData
+        '
+        Me.btnBrowseData.Location = New System.Drawing.Point(348, 22)
+        Me.btnBrowseData.Name = "btnBrowseData"
+        Me.btnBrowseData.Size = New System.Drawing.Size(40, 21)
+        Me.btnBrowseData.TabIndex = 10
+        Me.btnBrowseData.Text = "..."
+        Me.btnBrowseData.UseVisualStyleBackColor = True
         '
         'btnBrowseSave
         '
@@ -138,6 +147,14 @@ Partial Class Extract
         Me.txtQuery.Size = New System.Drawing.Size(327, 117)
         Me.txtQuery.TabIndex = 3
         '
+        'txtPath
+        '
+        Me.txtPath.Location = New System.Drawing.Point(65, 23)
+        Me.txtPath.Name = "txtPath"
+        Me.txtPath.ReadOnly = True
+        Me.txtPath.Size = New System.Drawing.Size(277, 20)
+        Me.txtPath.TabIndex = 0
+        '
         'btnExtract
         '
         Me.btnExtract.Location = New System.Drawing.Point(319, 220)
@@ -164,24 +181,6 @@ Partial Class Extract
         'fbdBackup
         '
         Me.fbdBackup.SelectedPath = "C:\"
-        '
-        'btnBrowseData
-        '
-        Me.btnBrowseData.Location = New System.Drawing.Point(348, 22)
-        Me.btnBrowseData.Name = "btnBrowseData"
-        Me.btnBrowseData.Size = New System.Drawing.Size(40, 21)
-        Me.btnBrowseData.TabIndex = 10
-        Me.btnBrowseData.Text = "..."
-        Me.btnBrowseData.UseVisualStyleBackColor = True
-        Me.btnBrowseData.Visible = False
-        '
-        'txtPath
-        '
-        Me.txtPath.Location = New System.Drawing.Point(65, 23)
-        Me.txtPath.Name = "txtPath"
-        Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(277, 20)
-        Me.txtPath.TabIndex = 0
         '
         'Extract
         '
