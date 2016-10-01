@@ -85,7 +85,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub LoadAppraisers()
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
         Dim ds As DataSet = LoadSQL(mySql)
 
         Appraisers_ht = New Hashtable
@@ -95,10 +95,16 @@ Public Class frmPawningItemNew
             Dim u As New ComputerUser
             u.LoadUserByRow(dr)
 
-            If u.canAppraise Then
-                cboAppraiser.Items.Add(u.UserName)
-                Appraisers_ht.Add(u.UserID, u)
-            End If
+            ' UNCOMMENT ON FINAL
+            'If u.canAppraise Then
+            '    cboAppraiser.Items.Add(u.UserName)
+            '    Appraisers_ht.Add(u.UserID, u)
+            'End If
+
+            ' REMOVE ON FINAL
+            ' Appraiser have canAppraise
+            cboAppraiser.Items.Add(u.UserName)
+            Appraisers_ht.Add(u.UserID, u)
         Next
     End Sub
 
@@ -156,8 +162,6 @@ Public Class frmPawningItemNew
         lv.SubItems.Add(tmpItem.SpecLayout)
         lv.SubItems.Add(tmpItem.SpecType)
         lv.SubItems.Add("")
-        'lv.SubItems.Add(tmpCIO.Amount)
-        'lv.SubItems.Add(tmpCIO.Particulars)
         lv.Tag = tmpItem.SpecID
 
     End Sub
@@ -211,7 +215,13 @@ Public Class frmPawningItemNew
 
     Private Sub SaveNewLoan()
 
+        ' DECLARING INPUT ===============================================
+        Appraisal = CDbl(txtAppr.Text)
+        Principal = CDbl(txtPrincipal.Text)
+        ' END - DECLARING INPUT =========================================
+
         ' SAVING PAWNED ITEM INFORMATION ================================
+
         ' Saving Pawned Item Specification
         Dim i As Integer = 0
         Dim PawnSpecs As New CollectionPawnItemSpecs
@@ -227,7 +237,8 @@ Public Class frmPawningItemNew
             i += 1
         Next
         PawnedItem.PawnItemSpecs = PawnSpecs
-        ' END - SAVING PAWNED ITEM INFORMATION ===========================
+
+        ' END - SAVING PAWNED ITEM INFORMATION ==========================
 
         ' SAVING PAWN TICKET
         With PT_Entry
@@ -235,9 +246,19 @@ Public Class frmPawningItemNew
             .PawnItem = PawnedItem
 
             .PawnTicket = currentPawnTicket
-            .LoanDate = txtLoan.Text
-        End With
+            .LoanDate = LoanDate
+            .MaturityDate = MaturityDate
+            .ExpiryDate = ExpiryDate
+            .AuctionDate = AuctionDate
 
+            .Appraisal = Appraisal
+            .Principal = Principal
+
+            .AdvanceInterest = AdvanceInterest
+            .NetAmount = NetAmount
+
+            .Save_PawnTicket()
+        End With
     End Sub
 
 
@@ -251,7 +272,7 @@ Public Class frmPawningItemNew
                 txtAuction.Text = CurrentDate.AddDays(152).ToShortDateString
         End Select
 
-        ReComputeInterest()
+        'ReComputeInterest()
     End Sub
 
     Private Sub Assembling_Transactions()
@@ -259,99 +280,99 @@ Public Class frmPawningItemNew
     End Sub
 
 
-    Private Sub ReComputeInterest()
-        Dim intHash As String = ""
+    'Private Sub ReComputeInterest()
+    '    Dim intHash As String = ""
 
-        If transactionType = "D" Then Exit Sub 'Display No Recommute
-        If txtMatu.Text = "" Then Exit Sub 'No Maturity Date
+    '    If transactionType = "D" Then Exit Sub 'Display No Recommute
+    '    If txtMatu.Text = "" Then Exit Sub 'No Maturity Date
 
-        Dim itemPrincipal As Double, isDPJ As Boolean = False
+    '    Dim itemPrincipal As Double, isDPJ As Boolean = False
 
-        If txtPrincipal.Text = "" Or Not IsNumeric(txtPrincipal.Text) Then
-            itemPrincipal = 0
-        Else
-            itemPrincipal = CDbl(txtPrincipal.Text)
-        End If
+    '    If txtPrincipal.Text = "" Or Not IsNumeric(txtPrincipal.Text) Then
+    '        itemPrincipal = 0
+    '    Else
+    '        itemPrincipal = CDbl(txtPrincipal.Text)
+    '    End If
 
-        Dim matuDateTmp
-        If Not PT_Entry Is Nothing Then
-            ' Not for new Loan
-            'If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
-            'matuDateTmp = PawnItem.MaturityDate
-            'intHash = PawnItem.INT_Checksum
-        Else
-            'New Loan
-            isDPJ = True
-            matuDateTmp = CDate(txtMatu.Text)
-            intHash = TBLINT_HASH
-        End If
-        daltonCompute = New PawnCalculation(itemPrincipal, txtClassification.Text, CurrentDate, matuDateTmp, isDPJ, intHash)
+    '    Dim matuDateTmp
+    '    If Not PT_Entry Is Nothing Then
+    '        ' Not for new Loan
+    '        'If PawnItem.AdvanceInterest <> 0 Then isDPJ = True
+    '        'matuDateTmp = PawnItem.MaturityDate
+    '        'intHash = PawnItem.INT_Checksum
+    '    Else
+    '        'New Loan
+    '        isDPJ = True
+    '        matuDateTmp = CDate(txtMatu.Text)
+    '        intHash = TBLINT_HASH
+    '    End If
+    '    daltonCompute = New PawnCalculation(itemPrincipal, txtClassification.Text, CurrentDate, matuDateTmp, isDPJ, intHash)
 
-        With daltonCompute
-            daysDue = .DaysOverDue
-            Net_Amount = .NetAmount
-            AdvanceInterest = .AdvanceInterest
-            ServiceCharge = .ServiceCharge
-            DelayInt = .Interest
-            Penalty = .Penalty
-            Renew_Due = .RenewDue
-            Redeem_Due = .RedeemDue
+    '    With daltonCompute
+    '        daysDue = .DaysOverDue
+    '        Net_Amount = .NetAmount
+    '        AdvanceInterest = .AdvanceInterest
+    '        ServiceCharge = .ServiceCharge
+    '        DelayInt = .Interest
+    '        Penalty = .Penalty
+    '        Renew_Due = .RenewDue
+    '        Redeem_Due = .RedeemDue
 
-            isOldItem = Not isDPJ
-            isEarlyRedeem = .isEarlyRedeem
+    '        isOldItem = Not isDPJ
+    '        isEarlyRedeem = .isEarlyRedeem
 
-        End With
+    '    End With
 
-        txtNet.Text = Net_Amount.ToString("Php #,##0.00")
+    '    txtNet.Text = Net_Amount.ToString("Php #,##0.00")
 
-        'Display Advance Interest for Renew and New Loan
-        If HAS_ADVINT And (transactionType = "R" Or transactionType = "L") Then
-            txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
-        End If
+    '    'Display Advance Interest for Renew and New Loan
+    '    If HAS_ADVINT And (transactionType = "R" Or transactionType = "L") Then
+    '        txtAdv.Text = AdvanceInterest.ToString("#,##0.00")
+    '    End If
 
-        If isDPJ Then
-            'New Items
-            If transactionType = "X" Then
-                ' Redeem
-                txtService.Text = 0
-            Else
-                'Non Redeem
-                txtService.Text = ServiceCharge.ToString("#,##0.00")
-            End If
-        Else
-            'Remantic
-            txtService.Text = ServiceCharge.ToString("#,##0.00")
-        End If
+    '    If isDPJ Then
+    '        'New Items
+    '        If transactionType = "X" Then
+    '            ' Redeem
+    '            txtService.Text = 0
+    '        Else
+    '            'Non Redeem
+    '            txtService.Text = ServiceCharge.ToString("#,##0.00")
+    '        End If
+    '    Else
+    '        'Remantic
+    '        txtService.Text = ServiceCharge.ToString("#,##0.00")
+    '    End If
 
-        'Non New Loan
-        If transactionType <> "L" Then
-            txtOver.Text = daysDue
-            If daysDue <= 3 Then
-                If DelayInt > AdvanceInterest Then
-                    DelayInt -= AdvanceInterest
-                Else
-                    DelayInt = 0
-                End If
-                Penalty = 0
-            Else
-                If DelayInt > AdvanceInterest And transactionType <> "X" Then _
-                    DelayInt -= AdvanceInterest
-            End If
+    '    'Non New Loan
+    '    If transactionType <> "L" Then
+    '        txtOver.Text = daysDue
+    '        If daysDue <= 3 Then
+    '            If DelayInt > AdvanceInterest Then
+    '                DelayInt -= AdvanceInterest
+    '            Else
+    '                DelayInt = 0
+    '            End If
+    '            Penalty = 0
+    '        Else
+    '            If DelayInt > AdvanceInterest And transactionType <> "X" Then _
+    '                DelayInt -= AdvanceInterest
+    '        End If
 
-            If transactionType = "X" Then
-                txtRenew.Text = 0
-                txtRedeem.Text = Redeem_Due.ToString("Php #,##0.00")
-                If daysDue > 3 Then DelayInt -= AdvanceInterest
-            ElseIf transactionType = "R" Then
-                txtRenew.Text = Renew_Due.ToString("Php #,##0.00")
-                txtRedeem.Text = 0
-                'DelayInt -= AdvanceInterest
-            End If
+    '        If transactionType = "X" Then
+    '            txtRenew.Text = 0
+    '            txtRedeem.Text = Redeem_Due.ToString("Php #,##0.00")
+    '            If daysDue > 3 Then DelayInt -= AdvanceInterest
+    '        ElseIf transactionType = "R" Then
+    '            txtRenew.Text = Renew_Due.ToString("Php #,##0.00")
+    '            txtRedeem.Text = 0
+    '            'DelayInt -= AdvanceInterest
+    '        End If
 
-            txtInt.Text = DelayInt.ToString("#,##0.00")
-            txtPenalty.Text = Penalty.ToString("#,##0.00")
-        End If
-    End Sub
+    '        txtInt.Text = DelayInt.ToString("#,##0.00")
+    '        txtPenalty.Text = Penalty.ToString("#,##0.00")
+    '    End If
+    'End Sub
 
     Private Function CurrentPTNumber(Optional ByVal num As Integer = 0) As String
         Return String.Format("{0:000000}", If(num = 0, currentPawnTicket, num))
@@ -399,12 +420,14 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        ReComputeInterest()
+        'ReComputeInterest()
     End Sub
 
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadAppraisers()
+
+        POSuser.LoadUser(3)
         'If transactionType = "L" Then NewLoan()
     End Sub
 
@@ -418,7 +441,41 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
-    Private Sub lvSpec_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvSpec.SelectedIndexChanged
-
+    Private Sub cboAppraiser_LostFocus(sender As Object, e As System.EventArgs) Handles cboAppraiser.LostFocus
+        CheckAuth()
     End Sub
+
+    Private Sub cboAppraiser_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboAppraiser.SelectedIndexChanged
+        If POSuser.UserName = cboAppraiser.Text Then
+            lblAuth.Text = "Verified"
+            mod_system.isAuthorized = True
+        Else
+            mod_system.isAuthorized = False
+            lblAuth.Text = "Unverified"
+
+            Exit Sub
+        End If
+    End Sub
+
+    Private Function CheckAuth() As Boolean
+        If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
+
+        If Not mod_system.isAuthorized And cboAppraiser.Text <> "" Then
+            diagAuthorization.Show()
+            diagAuthorization.TopMost = True
+            diagAuthorization.txtUser.Text = cboAppraiser.Text
+            diagAuthorization.fromForm = Me
+            Return False
+        End If
+
+        If unableToSave Then Return False
+        If Pawner Is Nothing Then
+            txtCustomer.SelectAll()
+            txtCustomer.Focus()
+
+            Return False
+        End If
+
+        Return True
+    End Function
 End Class
