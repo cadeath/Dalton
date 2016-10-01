@@ -532,6 +532,13 @@ Module mod_system
         sourceArray(newPosition) = newValue
     End Sub
 
+    Public Function CheckOTP() As Boolean
+        diagOTP.Show()
+        diagOTP.TopMost = True
+        'Return False
+        Return True
+    End Function
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()

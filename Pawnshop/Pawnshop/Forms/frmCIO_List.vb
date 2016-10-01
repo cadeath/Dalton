@@ -198,13 +198,6 @@
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
 
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
-
     ''' <summary>
     ''' This button void the transaction.
     ''' </summary>

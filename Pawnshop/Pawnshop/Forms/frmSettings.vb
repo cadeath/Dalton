@@ -61,14 +61,6 @@
         Console.WriteLine("Revolving Fund Added")
     End Sub
 
-    ' Please review this
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False 'WHAT THE
-        Return True 'WHAT THE
-    End Function
-
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not locked Then
             UpdateSetting()
