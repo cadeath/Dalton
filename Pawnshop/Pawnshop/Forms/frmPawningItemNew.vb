@@ -121,7 +121,7 @@ Public Class frmPawningItemNew
         Dim secured_str As String = txtClassification.Text
         secured_str = DreadKnight(secured_str)
         frmItemList.SearchSelect(secured_str, FormName.Item)
-        frmItemList.Show()
+        frmItemList.ShowDialog()
     End Sub
 
     Private Sub btnSearchClaimer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaimer.Click
