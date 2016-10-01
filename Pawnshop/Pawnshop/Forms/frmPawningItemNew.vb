@@ -1,23 +1,23 @@
 ﻿Imports Microsoft.Reporting.WinForms
 
 Public Class frmPawningItemNew
-    Friend PawnCustomer As Client
-    Friend PawnClaimer As Client
-    Friend PawnItem As ItemClass
     Friend transactionType As String = "L"
-    Private PawnCalc As PawnCompute
+    Friend PT_Entry As New PawnTicket2 'Serve as Pawn Ticket
+    Friend PawnedItem As New PawnItem 'Serve as Pawned Item
+    Friend Pawner As New Client
+    Friend Pawner_OtherClaimer As New Client
 
-    Friend PT_Entry As New PawnTicket2
-    Private appraiser As Hashtable
-    Private PawnInfo() As Hashtable
+    Private ItemClasses_ht As Hashtable
+    Private Appraisers_ht As Hashtable
+
     Private currentPawnTicket As Integer = GetOption("PawnLastNum")
     Private currentORNumber As Integer = GetOption("ORLastNum")
-    Private TypeInt As Double, bug As Boolean = False
-    Private daysDue As Integer
-    Private isOldItem As Boolean = False
-    Private AdvanceInterest As Double, DelayInt As Double, ServiceCharge As Double
-    Private ItemPrincipal As Double, Penalty As Double, Net_Amount As Double
-    Private Renew_Due As Double, Redeem_Due As Double
+
+    Private LoanDate As Date, MaturityDate As Date, ExpiryDate As Date, AuctionDate As Date
+    Private Appraisal As Double, Principal As Double, AdvanceInterest As Double, NetAmount As Double
+    Private ORNum As Integer, ORDate As Date, DaysOverDue As Integer, PawnInterest As Double, PawnPenalty As Double, PawnServiceCharge As Double, eVat As Double = 0
+    Private RenewDue As Double, RedeemDue As Double
+
 
     Private PRINTER_PT As String = GetOption("PrinterPT")
     Private PRINTER_OR As String = GetOption("PrinterOR")
@@ -31,10 +31,7 @@ Public Class frmPawningItemNew
     Const OR_COPIES As Integer = 2
     Const MONTH_COMPUTE As Integer = 4
 
-    Private isEarlyRedeem As Boolean = False
-    Private earlyDays As Integer = 0
     Private unableToSave As Boolean = False
-    Private daltonCompute As PawnCalculation
 
     Private PRINT_PTOLD As Integer = 0
     Private PRINT_PTNEW As Integer = 0
@@ -51,9 +48,6 @@ Public Class frmPawningItemNew
             {"Failed to verify hash value to the "}
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Reprint As Boolean = False
-
-    Private selected_ClassSpecs As Hashtable
-    Private new_PawnItem As New PawnItem
 
     Private Sub ClearFields()
         mod_system.isAuthorized = False
@@ -90,31 +84,22 @@ Public Class frmPawningItemNew
 
     End Sub
 
-    Private Function GetAppraiserID(ByVal name As String) As Integer
-        For Each el As DictionaryEntry In appraiser
-            If el.Value = name Then
-                Return el.Key
+    Private Sub LoadAppraisers()
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Appraisers_ht = New Hashtable
+        cboAppraiser.Items.Clear()
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim u As New ComputerUser
+            u.LoadUserByRow(dr)
+
+            If u.canAppraise Then
+                cboAppraiser.Items.Add(u.UserName)
+                Appraisers_ht.Add(u.UserID, u)
             End If
         Next
-
-        Return 0
-    End Function
-
-    Private Sub LoadAppraisers()
-        'Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
-        'Dim ds As DataSet = LoadSQL(mySql)
-
-        'appraiser = New Hashtable
-        'cboAppraiser.Items.Clear()
-        'For Each dr As DataRow In ds.Tables(0).Rows
-        '    Dim tmpUser As New ComputerUser
-        '    tmpUser.LoadUserByRow(dr)
-        '    If tmpUser.canAppraise Then
-        '        Console.WriteLine(tmpUser.FullName & " loaded.")
-        '        appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-        '        cboAppraiser.Items.Add(tmpUser.UserName)
-        '    End If
-        'Next
     End Sub
 
     Private Sub btnSearchClassification_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClassification.Click
@@ -137,27 +122,29 @@ Public Class frmPawningItemNew
         txtBDay.Text = cl.Birthday.ToString("MMM dd, yyyy")
         txtContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
 
-        PawnCustomer = cl
+        Pawner = cl
         txtClassification.Focus()
     End Sub
 
     Friend Sub LoadCliamer(ByVal cl As Client)
         txtClaimer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
-        PawnClaimer = cl
+        Pawner_OtherClaimer = cl
     End Sub
 
-    Friend Sub LoadItem(ByVal Item As ItemClass)
-
-        new_PawnItem.ItemClass = Item
+    Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
+        PawnedItem.ItemClass = Item
         txtClassification.Text = Item.ClassName
 
-        selected_ClassSpecs = New Hashtable
+        ItemClasses_ht = New Hashtable
         lvSpec.Items.Clear()
-        For Each spec As ItemSpecs In Item.ItemSpecifications
+        For Each spec As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
             Dim lv As ListViewItem = lvSpec.Items.Add(spec.SpecName)
             lv.SubItems.Add("")
-            selected_ClassSpecs.Add(spec.SpecID, spec.SpecName)
+            ItemClasses_ht.Add(spec.SpecID, spec.SpecName)
         Next
+
+        lvSpec.Focus()
+        lvSpec.Items(0).Selected = True
     End Sub
 
     Private Sub AddItem(ByVal cio As DataRow)
@@ -191,7 +178,7 @@ Public Class frmPawningItemNew
 
         Dim tmpSpec As New ItemSpecs
         Dim idx As Integer = lvSpec.FocusedItem.Index
-        Dim selectedID As Integer = GetIDbyName(lvSpec.FocusedItem.Text, selected_ClassSpecs)
+        Dim selectedID As Integer = GetIDbyName(lvSpec.FocusedItem.Text, ItemClasses_ht)
         tmpSpec.LoadItemSpecs(selectedID)
 
         Select Case tmpSpec.SpecLayout
@@ -221,51 +208,34 @@ Public Class frmPawningItemNew
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         SaveNewLoan()
     End Sub
+
     Private Sub SaveNewLoan()
-        Dim pawnSpecs As New CollectionPawnItemSpecs
-        PawnItem.LoadItem(PawnItem.ID)
+
+        ' SAVING PAWNED ITEM INFORMATION ================================
+        ' Saving Pawned Item Specification
         Dim i As Integer = 0
-        For Each spec As ItemSpecs In PawnItem.ItemSpecifications
-            Dim spc As New PawnItemSpec
+        Dim PawnSpecs As New CollectionPawnItemSpecs
+        For Each ItmSpc As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
+            Dim pwnSpec As New PawnItemSpec
+            pwnSpec.UnitOfMeasure = ItmSpc.UnitOfMeasure
+            pwnSpec.SpecName = ItmSpc.SpecName
+            pwnSpec.SpecType = ItmSpc.SpecType
+            pwnSpec.SpecsValue = lvSpec.Items(i).SubItems(1).Text
+            pwnSpec.isRequired = ItmSpc.isRequired
 
-            spc.UnitOfMeasure = spec.UnitOfMeasure
-            spc.SpecName = spec.SpecName
-            spc.SpecType = spec.SpecType
-            spc.SpecsValue = lvSpec.Items(i).SubItems(1).Text
-            spc.isRequired = spec.isRequired
-            pawnSpecs.Add(spc)
-
+            PawnSpecs.Add(pwnSpec)
             i += 1
         Next
+        PawnedItem.PawnItemSpecs = PawnSpecs
+        ' END - SAVING PAWNED ITEM INFORMATION ===========================
 
-        Dim newItem As New PawnItem
-        With newItem
-            .ItemID = PawnItem.ID
-            '.ItemClass = txtClassification.Text
-            '.SchemeID = tmpItem.SchemeID
-            .Status = "A"
-            .PawnItemSpecs = pawnSpecs
+        ' SAVING PAWN TICKET
+        With PT_Entry
+            .Pawner = Pawner
+            .PawnItem = PawnedItem
 
-            .Save_PawnItem()
-        End With
-
-        Dim tmpPawnTicket As PawnTicket2 = New PawnTicket2
-        With tmpPawnTicket
-            .PawnTicket = txtTicket.Text
+            .PawnTicket = currentPawnTicket
             .LoanDate = txtLoan.Text
-            .MaturityDate = txtMatu.Text
-            .ExpiryDate = txtExpiry.Text
-            .AuctionDate = txtAuction.Text
-            .Appraisal = txtAppr.Text
-            .Principal = txtPrincipal.Text
-            .NetAmount = txtNet.Text
-            .AppraiserID = GetAppraiserID(cboAppraiser.Text)
-            .EncoderID = POSuser.UserID
-            .ClaimerID = PawnClaimer.ID
-            .ClientID = PawnCustomer.ID
-            .PawnItem = newItem
-
-            .Save_PawnTicket()
         End With
 
     End Sub
@@ -448,4 +418,7 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
+    Private Sub lvSpec_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvSpec.SelectedIndexChanged
+
+    End Sub
 End Class

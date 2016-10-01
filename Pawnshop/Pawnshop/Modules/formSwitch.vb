@@ -67,8 +67,7 @@
             Case FormName.frmAdminPanel
                 'frmAdminPanel.LoadItemall(it)
             Case FormName.Item
-                frmPawningItemNew.LoadItem(it)
-
+                frmPawningItemNew.Load_ItemSpecification(it)
         End Select
 
     End Sub

@@ -101,7 +101,7 @@
             .AppraiserID = 1
             .EncoderID = 1
             .ClaimerID = 0
-            .ClientID = pawnClient.ID
+            '.ClientID = 
             .PawnItem = newItem
 
             .Save_PawnTicket()
