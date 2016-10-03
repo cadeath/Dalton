@@ -188,13 +188,16 @@ Public Class frmPawningItemNew
 
         Select Case tmpSpec.SpecLayout
             Case "TextBox"
+                frm_PanelTextbox.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelTextbox.retID = idx
                 frm_PanelTextbox.inputType = tmpSpec.SpecType
                 frm_PanelTextbox.ShowDialog()
             Case "Yes/No"
+                frm_PanelYesNo.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelYesNo.retID = idx
                 frm_PanelYesNo.ShowDialog()
             Case "MultiLine"
+                frm_PanelMultiline.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelMultiline.retID = idx
                 frm_PanelMultiline.ShowDialog()
         End Select
@@ -225,6 +228,7 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If unableToSave Then Exit Sub
 
         Select Case transactionType
             Case "L"
@@ -233,13 +237,7 @@ Public Class frmPawningItemNew
 
     End Sub
 
-    Private Sub SaveNewLoan()
-
-        ' DECLARING INPUT ===============================================
-        Appraisal = CDbl(txtAppr.Text)
-        Principal = CDbl(txtPrincipal.Text)
-        ' END - DECLARING INPUT =========================================
-
+    Private Sub AssembleNewLoan()
         ' SAVING PAWNED ITEM INFORMATION ================================
 
         ' Saving Pawned Item Specification
@@ -260,7 +258,6 @@ Public Class frmPawningItemNew
 
         ' END - SAVING PAWNED ITEM INFORMATION ==========================
 
-        ' SAVING PAWN TICKET
         With PT_Entry
             .Pawner = Pawner
             .PawnItem = PawnedItem
@@ -271,18 +268,33 @@ Public Class frmPawningItemNew
             .ExpiryDate = ExpiryDate
             .AuctionDate = AuctionDate
 
-            .Appraisal = Appraisal
-            .Principal = Principal
-
             .AdvanceInterest = AdvanceInterest
             .NetAmount = NetAmount
-
-            .Save_PawnTicket()
         End With
+    End Sub
+
+    Private Sub SaveNewLoan()
+
+        If Not isValid() Then Exit Sub
+
+        ' DECLARING INPUT ===============================================
+        Appraisal = CDbl(txtAppr.Text)
+        Principal = CDbl(txtPrincipal.Text)
+        ' END - DECLARING INPUT =========================================
+
+        PT_Entry.Appraisal = Appraisal
+        PT_Entry.Principal = Principal
+        PT_Entry.Save_PawnTicket()
+
+        AddNumber(DocumentClass.Pawnticket)
+
+        MsgBox("Item Saved", MsgBoxStyle.Information)
     End Sub
 
 
     Private Sub dateChange(selectedClass As ItemClass)
+        If selectedClass Is Nothing Then Exit Sub
+
         Select Case selectedClass.Category
             Case "GADGET"
                 txtExpiry.Text = txtMatu.Text
@@ -295,12 +307,21 @@ Public Class frmPawningItemNew
         ReComputeInterest()
     End Sub
 
-    Private Sub Assembling_Transactions()
-
-    End Sub
-
-
     Private Sub ReComputeInterest()
+        Console.WriteLine("Recomputing...")
+
+        Dim AutoCompute As PawnCompute
+
+
+        If transactionType = "L" Then
+            AssembleNewLoan()
+        End If
+
+        AutoCompute = New PawnCompute(PT_Entry, CurrentDate, True)
+
+        txtAdv.Text = AutoCompute.AdvanceInterest.ToString("#,##0.00")
+        txtNet.Text = AutoCompute.NetAmount.ToString("#,##0.00")
+
         '    Dim intHash As String = ""
 
         '    If transactionType = "D" Then Exit Sub 'Display No Recommute
@@ -394,6 +415,22 @@ Public Class frmPawningItemNew
         '    End If
     End Sub
 
+    Enum DocumentClass As Integer
+        Pawnticket = 0
+        OfficialReceipt = 1
+    End Enum
+
+    Private Sub AddNumber(doc As DocumentClass)
+        Select Case doc
+            Case DocumentClass.Pawnticket
+                currentPawnTicket += 1
+                UpdateOptions("PawnLastNum", currentPawnTicket)
+            Case DocumentClass.OfficialReceipt
+                currentORNumber += 1
+                UpdateOptions("ORLastNum", currentORNumber)
+        End Select
+    End Sub
+
     Private Function CurrentPTNumber(Optional ByVal num As Integer = 0) As String
         Return String.Format("{0:000000}", If(num = 0, currentPawnTicket, num))
     End Function
@@ -402,14 +439,11 @@ Public Class frmPawningItemNew
         Return String.Format("{0:000000}", currentORNumber)
     End Function
 
-    ''' <summary>
-    ''' This is call when you wanted to generate new PawnTicket Number Sequence
-    ''' </summary>
-    ''' <remarks></remarks>
     Private Sub GeneratePT()
         'Check PT if existing
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM tblPAWN "
+        'mySql = "SELECT * FROM tblPAWN " 'OLD TABLE
+        mySql = "SELECT * FROM OPT "
         mySql &= "WHERE PAWNTICKET = '" & currentPawnTicket & "'"
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then _
@@ -418,7 +452,7 @@ Public Class frmPawningItemNew
         txtTicket.Text = CurrentPTNumber()
         txtLoan.Text = CurrentDate.ToShortDateString
         txtMatu.Text = CurrentDate.AddDays(29).ToShortDateString
-        'dateChange(txtClassification.Text)
+        dateChange(PawnedItem.ItemClass)
 
         If transactionType = "R" Then
             txtTicket.Text = CurrentPTNumber(GetOption("PawnLastNum"))
@@ -448,7 +482,7 @@ Public Class frmPawningItemNew
         LoadAppraisers()
 
         POSuser.LoadUser(3)
-        'If transactionType = "L" Then NewLoan()
+        If transactionType = "L" Then NewLoan()
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
@@ -502,4 +536,9 @@ Public Class frmPawningItemNew
 
         Return True
     End Function
+
+    Private Sub NewLoan()
+        GeneratePT
+    End Sub
+
 End Class
