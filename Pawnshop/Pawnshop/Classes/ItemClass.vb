@@ -1,4 +1,5 @@
-﻿OPI.ITEMIDPublic Class ItemClass
+﻿
+Public Class ItemClass
     Private MainTable As String = "tblItem"
     Private SubTable As String = "tblSpecs"
 
