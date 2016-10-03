@@ -94,4 +94,13 @@
         End If
     End Sub
 
+    Private Sub txtSearch_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtSearch.TextChanged
+
+    End Sub
 End Class

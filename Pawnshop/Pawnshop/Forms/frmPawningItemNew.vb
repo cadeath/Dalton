@@ -542,7 +542,7 @@ Public Class frmPawningItemNew
         ClearFields()
         LoadAppraisers()
 
-        POSuser.LoadUser(3)
+        'POSuser.LoadUser(3)
         If transactionType = "L" Then NewLoan()
     End Sub
 
@@ -604,7 +604,7 @@ Public Class frmPawningItemNew
         Return True
     End Function
 
-    Private Sub NewLoan()
+    Friend Sub NewLoan()
         ClearFields()
 
         Pawner = Nothing

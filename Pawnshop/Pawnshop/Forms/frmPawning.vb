@@ -53,8 +53,10 @@
                                             , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly+ MsgBoxStyle.DefaultButton2, _
                                              "Form Already Open")
         Else
-            frmPawnItem.NewLoan()
-            frmPawnItem.Show()
+            'frmPawnItem.NewLoan()
+            'frmPawnItem.Show()
+            frmPawningItemNew.NewLoan()
+            frmPawningItemNew.Show()
         End If
     End Sub
     ''' <summary>
