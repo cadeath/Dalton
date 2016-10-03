@@ -4,7 +4,7 @@ Public Class frmPawningItemNew
     Friend transactionType As String = "L"
     Friend PT_Entry As New PawnTicket2 'Serve as Pawn Ticket
     Friend PawnedItem As New PawnItem 'Serve as Pawned Item
-    Friend Pawner As New Client
+    Friend Pawner As Client
     Friend Pawner_OtherClaimer As New Client
 
     Private ItemClasses_ht As Hashtable
@@ -80,6 +80,7 @@ Public Class frmPawningItemNew
 
         txtClassification.Text = ""
         txtClaimer.Clear()
+        lvSpec.Items.Clear()
     End Sub
 
     Private Sub LoadAppraisers()
@@ -127,6 +128,7 @@ Public Class frmPawningItemNew
         txtBDay.Text = cl.Birthday.ToString("MMM dd, yyyy")
         txtContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
 
+        Pawner = New Client
         Pawner = cl
         txtClassification.Focus()
     End Sub
@@ -214,11 +216,13 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Function isValid() As Boolean
-        If Pawner Is Nothing Then txtCustomer.Focus() : Return False
-        If PawnedItem.ItemClass Is Nothing Then txtClassification.Focus() : Return False
+        If Pawner Is Nothing Then MsgBox("Please select your customer", MsgBoxStyle.Information) : txtCustomer.Focus() : Return False
+        If PawnedItem.ItemClass Is Nothing Then MsgBox("Please select an item", MsgBoxStyle.Information) : txtClassification.Focus() : Return False
         If txtAppr.Text = "" Then txtAppr.Focus() : Return False
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
+        If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         If Not mod_system.isAuthorized Then cboAppraiser.DroppedDown = True : Return False
+
 
         If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
         If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
@@ -257,6 +261,10 @@ Public Class frmPawningItemNew
         ' DECLARING INPUT ===============================================
         Appraisal = CDbl(txtAppr.Text)
         Principal = CDbl(txtPrincipal.Text)
+        LoanDate = DateTime.Parse(txtLoan.Text)
+        MaturityDate = DateTime.Parse(txtMatu.Text)
+        ExpiryDate = DateTime.Parse(txtExpiry.Text)
+        AuctionDate = DateTime.Parse(txtAuction.Text)
         ' END - DECLARING INPUT =========================================
 
         ' SAVING PAWNED ITEM INFORMATION ================================
@@ -293,6 +301,7 @@ Public Class frmPawningItemNew
             .Principal = Principal
 
             .AdvanceInterest = AdvanceInterest
+            .ServiceCharge = PawnServiceCharge
             .NetAmount = NetAmount
             .Save_PawnTicket()
         End With
@@ -300,6 +309,7 @@ Public Class frmPawningItemNew
         AddNumber(DocumentClass.Pawnticket)
 
         MsgBox("Item Saved", MsgBoxStyle.Information)
+        NewLoan()
     End Sub
 
 
@@ -328,6 +338,10 @@ Public Class frmPawningItemNew
         Principal = CDbl(txtPrincipal.Text)
     End Sub
 
+    Private Function MoneyFormat(dbl As Double) As String
+        Return dbl.ToString("#,##0.00")
+    End Function
+
     Private Sub ReComputeInterest()
         Console.WriteLine("Recomputing...")
 
@@ -349,11 +363,17 @@ Public Class frmPawningItemNew
             (Principal, PawnedItem.ItemClass.InterestScheme, CurrentDate, DateTime.Parse(txtMatu.Text), isDPJ)
         Catch ex As Exception
             Console.WriteLine("Incomplete Data")
+            Console.WriteLine(ex.Message)
             Exit Sub
         End Try
 
-        txtAdv.Text = AutoCompute.AdvanceInterest.ToString("#,##0.00")
-        txtNet.Text = AutoCompute.NetAmount.ToString("#,##0.00")
+        PawnServiceCharge = AutoCompute.ServiceCharge
+        AdvanceInterest = AutoCompute.AdvanceInterest
+        NetAmount = AutoCompute.NetAmount
+
+        txtService.Text = MoneyFormat(PawnServiceCharge)
+        txtAdv.Text = MoneyFormat(AdvanceInterest)
+        txtNet.Text = MoneyFormat(NetAmount)
 
         '    Dim intHash As String = ""
 
@@ -506,6 +526,14 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
+    Private Sub txtPrincipal_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtPrincipal.KeyPress
+        DigitOnly(e)
+        If isEnter(e) Then
+            cboAppraiser.Focus()
+            cboAppraiser.DroppedDown = True
+        End If
+    End Sub
+
     Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
         ReComputeInterest()
     End Sub
@@ -525,6 +553,12 @@ Public Class frmPawningItemNew
     Private Sub txtCustomer_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCustomer.KeyDown
         If e.KeyCode = 13 Then
             btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub cboAppraiser_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
+        If lblAuth.Text = "Verified" Then
+            btnSave.PerformClick()
         End If
     End Sub
 
@@ -571,7 +605,35 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub NewLoan()
-        GeneratePT
+        ClearFields()
+
+        Pawner = Nothing
+        PT_Entry = New PawnTicket2
+        PawnedItem = New PawnItem
+
+        cboAppraiser.SelectedIndex = -1
+        GeneratePT()
+
+        'Disable Stuff
+        btnRenew.Enabled = False
+        btnRedeem.Enabled = False
+        btnVoid.Enabled = False
+        btnPrint.Enabled = False
+        grpClaimer.Enabled = False
     End Sub
 
+    Private Sub txtAppr_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppr.KeyPress
+        DigitOnly(e)
+        If isEnter(e) Then
+            txtPrincipal.Focus()
+        End If
+    End Sub
+
+    Private Sub tmrVerifier_Tick(sender As System.Object, e As System.EventArgs) Handles tmrVerifier.Tick
+        If mod_system.isAuthorized Then
+            lblAuth.Text = "Verified"
+        Else
+            lblAuth.Text = "Unverified"
+        End If
+    End Sub
 End Class

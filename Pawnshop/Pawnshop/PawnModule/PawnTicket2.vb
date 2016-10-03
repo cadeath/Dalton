@@ -291,6 +291,9 @@
         Dim mySql As String
         Dim ds As DataSet
 
+        'Save PawnedItem
+        _pawnItem.Save_PawnItem()
+
         'Save PawnTicket
         mySql = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
         ds = LoadSQL(mySql, MainTable)

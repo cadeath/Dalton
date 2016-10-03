@@ -94,7 +94,7 @@ Partial Class frmPawningItemNew
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearchClassification = New System.Windows.Forms.Button()
         Me.txtClassification = New System.Windows.Forms.TextBox()
-        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.grpClaimer = New System.Windows.Forms.GroupBox()
         Me.btnSearchClaimer = New System.Windows.Forms.Button()
         Me.txtClaimer = New System.Windows.Forms.TextBox()
         Me.GroupBox5.SuspendLayout()
@@ -102,7 +102,7 @@ Partial Class frmPawningItemNew
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
-        Me.GroupBox10.SuspendLayout()
+        Me.grpClaimer.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtRedeem
@@ -812,16 +812,16 @@ Partial Class frmPawningItemNew
         Me.txtClassification.TabIndex = 2
         Me.txtClassification.Text = "Classification"
         '
-        'GroupBox10
+        'grpClaimer
         '
-        Me.GroupBox10.Controls.Add(Me.btnSearchClaimer)
-        Me.GroupBox10.Controls.Add(Me.txtClaimer)
-        Me.GroupBox10.Location = New System.Drawing.Point(608, 389)
-        Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(318, 58)
-        Me.GroupBox10.TabIndex = 34
-        Me.GroupBox10.TabStop = False
-        Me.GroupBox10.Text = "Claimer Information"
+        Me.grpClaimer.Controls.Add(Me.btnSearchClaimer)
+        Me.grpClaimer.Controls.Add(Me.txtClaimer)
+        Me.grpClaimer.Location = New System.Drawing.Point(608, 389)
+        Me.grpClaimer.Name = "grpClaimer"
+        Me.grpClaimer.Size = New System.Drawing.Size(318, 58)
+        Me.grpClaimer.TabIndex = 34
+        Me.grpClaimer.TabStop = False
+        Me.grpClaimer.Text = "Claimer Information"
         '
         'btnSearchClaimer
         '
@@ -847,7 +847,7 @@ Partial Class frmPawningItemNew
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(935, 503)
-        Me.Controls.Add(Me.GroupBox10)
+        Me.Controls.Add(Me.grpClaimer)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
@@ -876,8 +876,8 @@ Partial Class frmPawningItemNew
         Me.GroupBox1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
-        Me.GroupBox10.ResumeLayout(False)
-        Me.GroupBox10.PerformLayout()
+        Me.grpClaimer.ResumeLayout(False)
+        Me.grpClaimer.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -951,7 +951,7 @@ Partial Class frmPawningItemNew
     Friend WithEvents btnSearchClassification As System.Windows.Forms.Button
     Friend WithEvents txtClassification As System.Windows.Forms.TextBox
     Friend WithEvents lvSpec As System.Windows.Forms.ListView
-    Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpClaimer As System.Windows.Forms.GroupBox
     Friend WithEvents btnSearchClaimer As System.Windows.Forms.Button
     Friend WithEvents txtClaimer As System.Windows.Forms.TextBox
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
