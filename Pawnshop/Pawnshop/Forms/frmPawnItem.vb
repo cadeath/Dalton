@@ -122,12 +122,7 @@ Public Class frmPawnItem
         txtRenew.Text = ""
         txtRedeem.Text = ""
     End Sub
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
+  
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.VoidPawning
