@@ -2,6 +2,7 @@
     Private isNumber As Boolean
     Friend retID As Integer = 0
 
+
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Dim tmpResult As String = txtSearch.Text
 

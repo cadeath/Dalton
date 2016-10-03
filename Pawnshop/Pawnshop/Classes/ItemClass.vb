@@ -169,6 +169,7 @@
             _interestScheme.LoadScheme(.Item("Scheme_ID"))
         End With
 
+        ' Load Item Specification
         mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
         ds.Clear()
         ds = LoadSQL(mySql, SubTable)
@@ -181,7 +182,6 @@
 
             'Load Item Specification
             _itemSpecs.Add(tmpSpecs)
-
         Next
     End Sub
 
@@ -223,6 +223,8 @@
     End Sub
 
     Public Sub LoadByRow(ByVal dr As DataRow)
+        Dim mySql As String, ds As New DataSet
+
         With dr
             _itemID = .Item("itemid")
             _itemClassName = .Item("itemclass")
@@ -231,8 +233,22 @@
             _category = .Item("itemcategory")
             _isRenew = .Item("isrenew")
             _printLayout = .Item("print_layout")
-
         End With
+
+        ' Load Item Specification
+        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        ds.Clear()
+        ds = LoadSQL(mySql, SubTable)
+
+        _itemSpecs = New CollectionItemSpecs
+        For Each dr In ds.Tables(SubTable).Rows
+            Console.WriteLine(dr.Item("SpecsName"))
+            Dim tmpSpecs As New ItemSpecs
+            tmpSpecs.LoadItemSpecs_row(dr)
+
+            'Load Item Specification
+            _itemSpecs.Add(tmpSpecs)
+        Next
     End Sub
 
     Public Sub Update()

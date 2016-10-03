@@ -37,7 +37,7 @@
         End Select
     End Sub
 
-    Friend Sub ReloadFormFromSpecs(gotoForm As FormName, Selected_Specs As ItemClass)
+    Friend Sub ReloadFormFromItemList(gotoForm As FormName, Selected_Specs As ItemClass)
         Select Case gotoForm
             Case FormName.frmPawningV2_Specs
                 frmPawningItemNew.Load_ItemSpecification(Selected_Specs)

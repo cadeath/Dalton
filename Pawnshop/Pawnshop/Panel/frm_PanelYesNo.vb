@@ -7,6 +7,10 @@
         End If
     End Sub
 
+    Friend Sub DisplaySpecs(str As String)
+        GroupBox8.Text = str
+    End Sub
+
     Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Dim tmpResult As String = ""
         If rbYes.Checked Then

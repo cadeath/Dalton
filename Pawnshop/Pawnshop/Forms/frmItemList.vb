@@ -58,4 +58,26 @@
     Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
+
+    Private Sub btnSelect_Click(sender As System.Object, e As System.EventArgs) Handles btnSelect.Click
+        If lvItem.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer
+        idx = CInt(lvItem.FocusedItem.Text)
+
+        Dim Selected_ItemClass As New ItemClass
+        For Each dt As DictionaryEntry In ItemClasses_ht
+            If dt.Key = idx Then
+
+                Selected_ItemClass = dt.Value
+                formSwitch.ReloadFormFromItemList(frmOrig, Selected_ItemClass)
+                Me.Close()
+                Exit Sub
+            End If
+        Next
+
+        MsgBox("Error loading hash table", MsgBoxStyle.Critical, "CRITICAL")
+    End Sub
+
+
 End Class

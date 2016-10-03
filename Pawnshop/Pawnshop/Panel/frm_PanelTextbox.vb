@@ -11,6 +11,10 @@
         Me.Close()
     End Sub
 
+    Friend Sub DisplaySpecs(str As String)
+        GroupBox10.Text = str
+    End Sub
+
     Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isNumber Then DigitOnly(e)
         If isEnter(e) Then
