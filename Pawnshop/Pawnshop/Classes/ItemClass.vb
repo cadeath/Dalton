@@ -1,4 +1,4 @@
-﻿Public Class ItemClass
+﻿OPI.ITEMIDPublic Class ItemClass
     Private MainTable As String = "tblItem"
     Private SubTable As String = "tblSpecs"
 
@@ -177,7 +177,8 @@
             Console.WriteLine(dr.Item("SpecsName"))
             Dim tmpSpecs As New ItemSpecs
             tmpSpecs.LoadItemSpecs_row(dr)
-
+            'Load Item Specification
+            _itemSpecs.Add(tmpSpecs)
         Next
     End Sub
 
