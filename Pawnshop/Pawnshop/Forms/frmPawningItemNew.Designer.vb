@@ -865,7 +865,7 @@ Partial Class frmPawningItemNew
         Me.MaximizeBox = False
         Me.Name = "frmPawningItemNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Pawning New"
+        Me.Text = "Pawning"
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)

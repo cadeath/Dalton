@@ -51,7 +51,7 @@
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtCustomer.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.NewPawning)
+        'frmClient.SearchSelect(secured_str, FormName.NewPawning)
         frmClient.Show()
     End Sub
 
@@ -549,14 +549,14 @@
     Private Sub btnSearchClaim_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaim.Click
         Dim secured_str As String = txtSearchClaim.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.PawnClaimer)
+        'frmClient.SearchSelect(secured_str, FormName.PawnClaimer)
         frmClient.Show()
     End Sub
 
     Private Sub btnSearchItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchItem.Click
         Dim secured_str As String = txtSearchItem.Text
         secured_str = DreadKnight(secured_str)
-        frmItemList.SearchSelect(secured_str, FormName.Item)
+        'frmItemList.SearchSelect(secured_str, FormName.Item)
         frmItemList.Show()
     End Sub
 

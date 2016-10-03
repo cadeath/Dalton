@@ -125,6 +125,7 @@ Public Class frmClient
             btnSearch.PerformClick()
         End If
     End Sub
+
     ''' <summary>
     ''' This button will show client information in the client form.
     ''' </summary>
