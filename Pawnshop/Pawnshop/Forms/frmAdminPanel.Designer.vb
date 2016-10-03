@@ -384,9 +384,9 @@ Partial Class frmAdminPanel
         '
         'btnBrowse
         '
-        Me.btnBrowse.Location = New System.Drawing.Point(972, 402)
+        Me.btnBrowse.Location = New System.Drawing.Point(972, 391)
         Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(75, 23)
+        Me.btnBrowse.Size = New System.Drawing.Size(75, 34)
         Me.btnBrowse.TabIndex = 7
         Me.btnBrowse.Text = "Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
@@ -397,16 +397,16 @@ Partial Class frmAdminPanel
         Me.lvModule.GridLines = True
         Me.lvModule.Location = New System.Drawing.Point(10, 82)
         Me.lvModule.Name = "lvModule"
-        Me.lvModule.Size = New System.Drawing.Size(1118, 314)
+        Me.lvModule.Size = New System.Drawing.Size(1118, 303)
         Me.lvModule.TabIndex = 6
         Me.lvModule.UseCompatibleStateImageBehavior = False
         Me.lvModule.View = System.Windows.Forms.View.Details
         '
         'btnExport
         '
-        Me.btnExport.Location = New System.Drawing.Point(1053, 402)
+        Me.btnExport.Location = New System.Drawing.Point(1053, 391)
         Me.btnExport.Name = "btnExport"
-        Me.btnExport.Size = New System.Drawing.Size(75, 23)
+        Me.btnExport.Size = New System.Drawing.Size(75, 34)
         Me.btnExport.TabIndex = 5
         Me.btnExport.Text = "Export"
         Me.btnExport.UseVisualStyleBackColor = True

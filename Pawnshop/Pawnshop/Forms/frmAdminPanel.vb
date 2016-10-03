@@ -1,5 +1,9 @@
 ﻿Imports System.Data.Odbc
+Imports System.IO
+Imports System.Text
 Public Class frmAdminPanel
+    Const fn As String = "\Post_Log.dat"
+
     Private mySql As String
     Private fillData As String
     Private SpecSave As ItemSpecs
@@ -26,7 +30,7 @@ Public Class frmAdminPanel
         Scheme = New Hashtable
         cbotxtSchemename.Items.Clear()
         Dim tmpName As String, tmpID As Integer
-       
+
         For Each dr As DataRow In ds.Tables(0).Rows
             With dr
                 tmpID = .Item("schemeID")
@@ -319,11 +323,11 @@ Public Class frmAdminPanel
             AddItemSpecs(dr)
         Next
 
-            reaDOnlyTrue()
+        reaDOnlyTrue()
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = True
         Next
-            btnSave.Enabled = False
+        btnSave.Enabled = False
     End Sub
 
     Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
@@ -359,7 +363,7 @@ Public Class frmAdminPanel
         lvModule.View = View.Details
         lvModule.CheckBoxes = True
         lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
-       
+
     End Sub
 
     Enum ModuleType As Integer
@@ -391,7 +395,7 @@ Public Class frmAdminPanel
     End Sub
 
 #Region "Procedures"
-   
+
     Private Sub ModBranches()
         fillData = "tblBranches"
         mySql = "SELECT * FROM " & fillData
@@ -421,7 +425,7 @@ Public Class frmAdminPanel
         Next
 
 
-       
+
     End Sub
 
     Private Sub Modcash()
@@ -564,7 +568,7 @@ Public Class frmAdminPanel
         Me.lvModule.Columns.Add("Column3", "SYMBOL")
         Me.lvModule.Columns.Add("Column4", "RATE")
         Me.lvModule.Columns.Add("Column4", "CASHID")
-      
+
         For i = 0 To ds.Tables(0).Rows.Count - 1
 
             Dim str1 As String = ds.Tables(0).Rows(i)("CURRENCYID").ToString
@@ -583,8 +587,11 @@ Public Class frmAdminPanel
 #End Region
 
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
+        Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
+        MsgBox("Data Exported", MsgBoxStyle.Information)
     End Sub
 
 
@@ -594,7 +601,7 @@ Public Class frmAdminPanel
         ShowDataInLvw(FileChecker(fn), lvModule)
 
     End Sub
-  
+
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
         If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
 
@@ -646,9 +653,17 @@ Public Class frmAdminPanel
 
     Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
         If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
-        SFD.ShowDialog()
 
-        MsgBox("Data Exported", MsgBoxStyle.Information)
+        Dim path As String = String.Format("{1}{0}.dat", fn, str)
+        If Not File.Exists(path) Then
+            Dim a As FileStream
+            a = File.Create(path)
+            a.Dispose()
+        End If
+
+        SFD.ShowDialog()
+        saveModname()
+
 
         txtReferenceNumber.Text = ""
         cmbModuleName.SelectedItem = Nothing
@@ -657,6 +672,18 @@ Public Class frmAdminPanel
         lvModule.Items.Clear()
     End Sub
 
+    Private str As String = My.Computer.FileSystem.SpecialDirectories.Desktop
+    Private path As String = String.Format("{1}{0}.dat", fn, str)
+    Private Sub saveModname()
+        If txtReferenceNumber.Text = Nothing Then
+            Exit Sub
+        Else
+            File.AppendAllText(path, "Reference No: " & txtReferenceNumber.Text & vbCrLf)
+            File.AppendAllText(path, "Module Name: " & cmbModuleName.Text & vbCrLf)
+            File.AppendAllText(path, "User: " & POSuser.UserName & vbCrLf)
+        End If
+
+    End Sub
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
     End Sub
