@@ -237,11 +237,32 @@ Public Class frmPawningItemNew
 
     End Sub
 
-    Private Sub AssembleNewLoan()
+    Private Sub SaveNewLoan()
+
+        If Not isValid() Then Exit Sub
+
+        ' CHECKING REQUIRED FIELDS
+        Dim i As Integer = 0
+        For Each reqSpec As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
+            If reqSpec.isRequired Then
+                If lvSpec.Items(i).SubItems(1).Text = "" Then
+                    MsgBox("This one requires information", MsgBoxStyle.Critical, reqSpec.SpecName)
+                    Exit Sub
+                End If
+            End If
+
+            i += 1
+        Next
+
+        ' DECLARING INPUT ===============================================
+        Appraisal = CDbl(txtAppr.Text)
+        Principal = CDbl(txtPrincipal.Text)
+        ' END - DECLARING INPUT =========================================
+
         ' SAVING PAWNED ITEM INFORMATION ================================
 
         ' Saving Pawned Item Specification
-        Dim i As Integer = 0
+        i = 0
         Dim PawnSpecs As New CollectionPawnItemSpecs
         For Each ItmSpc As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
             Dim pwnSpec As New PawnItemSpec
@@ -268,23 +289,13 @@ Public Class frmPawningItemNew
             .ExpiryDate = ExpiryDate
             .AuctionDate = AuctionDate
 
+            .Appraisal = Appraisal
+            .Principal = Principal
+
             .AdvanceInterest = AdvanceInterest
             .NetAmount = NetAmount
+            .Save_PawnTicket()
         End With
-    End Sub
-
-    Private Sub SaveNewLoan()
-
-        If Not isValid() Then Exit Sub
-
-        ' DECLARING INPUT ===============================================
-        Appraisal = CDbl(txtAppr.Text)
-        Principal = CDbl(txtPrincipal.Text)
-        ' END - DECLARING INPUT =========================================
-
-        PT_Entry.Appraisal = Appraisal
-        PT_Entry.Principal = Principal
-        PT_Entry.Save_PawnTicket()
 
         AddNumber(DocumentClass.Pawnticket)
 
@@ -307,17 +318,39 @@ Public Class frmPawningItemNew
         ReComputeInterest()
     End Sub
 
+    Private Sub Update_MoneyUserInput()
+        If txtAppr.Text = "" Then Exit Sub
+        If Not IsNumeric(txtAppr.Text) Then Exit Sub
+        If txtPrincipal.Text = "" Then Exit Sub
+        If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
+
+        Appraisal = CDbl(txtAppr.Text)
+        Principal = CDbl(txtPrincipal.Text)
+    End Sub
+
     Private Sub ReComputeInterest()
         Console.WriteLine("Recomputing...")
 
+        Update_MoneyUserInput()
+        If Principal = 0 Then Exit Sub
+
         Dim AutoCompute As PawnCompute
+        Dim isDPJ As Boolean = True
 
-
-        If transactionType = "L" Then
-            AssembleNewLoan()
+        If transactionType <> "L" Then
+            'REMANTIC NO ADVANCE INTEREST
+            If PT_Entry.AdvanceInterest = 0 Then
+                isDPJ = False
+            End If
         End If
 
-        AutoCompute = New PawnCompute(PT_Entry, CurrentDate, True)
+        Try
+            AutoCompute = New PawnCompute _
+            (Principal, PawnedItem.ItemClass.InterestScheme, CurrentDate, DateTime.Parse(txtMatu.Text), isDPJ)
+        Catch ex As Exception
+            Console.WriteLine("Incomplete Data")
+            Exit Sub
+        End Try
 
         txtAdv.Text = AutoCompute.AdvanceInterest.ToString("#,##0.00")
         txtNet.Text = AutoCompute.NetAmount.ToString("#,##0.00")
@@ -474,7 +507,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        'ReComputeInterest()
+        ReComputeInterest()
     End Sub
 
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

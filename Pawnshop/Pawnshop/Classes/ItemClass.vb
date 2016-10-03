@@ -114,7 +114,7 @@
         End Set
     End Property
 
-    Private _interestScheme As InterestScheme
+    Private _interestScheme As New InterestScheme
     Public Property InterestScheme() As InterestScheme
         Get
             Return _interestScheme
@@ -226,13 +226,22 @@
         Dim mySql As String, ds As New DataSet
 
         With dr
-            _itemID = .Item("itemid")
-            _itemClassName = .Item("itemclass")
-            '_desc = .Item("Description")
+            _itemID = .Item("ItemID")
+            _itemClassName = .Item("ItemClass")
+            _category = .Item("ItemCategory")
+
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
-            _category = .Item("itemcategory")
-            _isRenew = .Item("isrenew")
-            _printLayout = .Item("print_layout")
+
+            _isRenew = If(.Item("isRenew") = 1, True, False)
+            _onHold = If(.Item("onHold") = 1, True, False)
+            _printLayout = .Item("Print_Layout")
+
+            _Count = .Item("Renewal_Cnt")
+
+            _created = .Item("Created_At")
+            _updated = .Item("Updated_At")
+
+            _interestScheme.LoadScheme(.Item("Scheme_ID"))
         End With
 
         ' Load Item Specification
