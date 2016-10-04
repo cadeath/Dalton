@@ -213,6 +213,8 @@
         'Else
         '    mySql = "SELECT * FROM TBLINT_HISTORY WHERE ItemType = '" & _class & String.Format("' AND CHECKSUM = '{0}'", _intHash)
         'End If
+
+
         'If _class = "" Then
         mySql = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID"
         'Else

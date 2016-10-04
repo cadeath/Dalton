@@ -240,6 +240,18 @@
     <Compile Include="Developer\dev_inherit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\Dev_Migrate.Designer.vb">
+      <DependentUpon>Dev_Migrate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\Dev_Migrate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_NewItem.Designer.vb">
+      <DependentUpon>dev_NewItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_NewItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_NewPawning.Designer.vb">
       <DependentUpon>dev_NewPawning.vb</DependentUpon>
     </Compile>
@@ -747,6 +759,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_inherit.resx">
       <DependentUpon>dev_inherit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\Dev_Migrate.resx">
+      <DependentUpon>Dev_Migrate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_NewItem.resx">
+      <DependentUpon>dev_NewItem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_NewPawning.resx">
       <DependentUpon>dev_NewPawning.vb</DependentUpon>
