@@ -146,7 +146,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         With ItemSave
             .Category = txtCategory.Text
             .Description = txtDescription.Text
-
+            .ClassName = txtClassifiction.Text
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -156,7 +156,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
-            '.SchemeID = GetSchemeID(cbotxtSchemename.Text)
+            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
 
         End With
 
@@ -241,7 +241,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
             End With
             SpecModify.ItemID = SelectedItem.ID
             SpecModify.UpdateSpecs()
-            'ColItemsSpecs.Add(SpecModify)
+            ColItemsSpecs.Add(SpecModify)
         Next
 
         ItemModify.ItemSpecifications = ColItemsSpecs
@@ -268,6 +268,8 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         txtSearch.Clear()
         dgSpecs.Rows.Clear()
         clearfields()
+        LoadScheme()
+
     End Sub
 
     Private Sub searchbutton()
