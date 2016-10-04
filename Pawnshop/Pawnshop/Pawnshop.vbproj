@@ -8,11 +8,11 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{24AC89A7-4FDE-47EF-AC83-32A2499285D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Pawnshop.dev_PT_test</StartupObject>
+    <StartupObject>Pawnshop.My.MyApplication</StartupObject>
     <RootNamespace>Pawnshop</RootNamespace>
     <AssemblyName>pawnshop</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -204,6 +204,7 @@
     <Compile Include="Classes\ItemSpecs.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
+    <Compile Include="Classes\PawnCompute.vb" />
     <Compile Include="Classes\PawningDalton.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Classes\RandomKeyGenerator.vb" />
@@ -239,10 +240,22 @@
     <Compile Include="Developer\dev_inherit.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\Dev_Migrate.Designer.vb">
+      <DependentUpon>Dev_Migrate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\Dev_Migrate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_NewItem.Designer.vb">
       <DependentUpon>dev_NewItem.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_NewItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_NewPawning.Designer.vb">
+      <DependentUpon>dev_NewPawning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_NewPawning.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_ORview.Designer.vb">
@@ -255,6 +268,12 @@
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_Pawning.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_Pawning2.Designer.vb">
+      <DependentUpon>dev_Pawning2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_Pawning2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_print.Designer.vb">
@@ -353,9 +372,6 @@
     <Compile Include="Forms\frmPawningItemNew.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\watermark.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
@@ -389,13 +405,16 @@
     <Compile Include="Panel\frm_PanelYesNo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PawnModule\CollectionPawnItemSpecs.vb" />
     <Compile Include="PawnModule\dev_PT_test.Designer.vb">
       <DependentUpon>dev_PT_test.vb</DependentUpon>
     </Compile>
     <Compile Include="PawnModule\dev_PT_test.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PawnModule\PawnCalculation.vb" />
     <Compile Include="PawnModule\PawnItem.vb" />
+    <Compile Include="PawnModule\PawnItemSpec.vb" />
     <Compile Include="PawnModule\PawnTicket2.vb" />
     <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
       <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
@@ -624,6 +643,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -717,7 +740,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Client_Seed.vb" />
-    <Compile Include="Seed\ItemClass_Seed.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -738,14 +760,23 @@
     <EmbeddedResource Include="Developer\dev_inherit.resx">
       <DependentUpon>dev_inherit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Developer\Dev_Migrate.resx">
+      <DependentUpon>Dev_Migrate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_NewItem.resx">
       <DependentUpon>dev_NewItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_NewPawning.resx">
+      <DependentUpon>dev_NewPawning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_Pawning2.resx">
+      <DependentUpon>dev_Pawning2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_print.resx">
       <DependentUpon>dev_print.vb</DependentUpon>
@@ -1108,6 +1139,7 @@
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
