@@ -32,7 +32,9 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
+
             Me.MainForm = Global.Pawnshop.Dev_Migrate
+
         End Sub
     End Class
 End Namespace

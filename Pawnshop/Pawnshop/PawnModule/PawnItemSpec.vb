@@ -54,6 +54,7 @@
                 .Item("SPECSTYPE") = Me.SpecType
                 .Item("SPECSVALUE") = _specsValue
                 .Item("PAWNITEMID") = _PawnItemID
+                .Item("ISREQUIRED") = Me.isRequired
             End With
             ds.Tables(MainTable).Rows.Add(dsNewRow)
         End If

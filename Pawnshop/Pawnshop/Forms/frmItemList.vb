@@ -60,7 +60,11 @@
     End Sub
 
     Private Sub btnSelect_Click(sender As System.Object, e As System.EventArgs) Handles btnSelect.Click
-        If lvItem.SelectedItems.Count = 0 Then Exit Sub
+        If lvItem.Items.Count = 0 Then Exit Sub
+
+        If lvItem.SelectedItems.Count = 0 Then
+            lvItem.Items(0).Focused = True
+        End If
 
         Dim idx As Integer
         idx = CInt(lvItem.FocusedItem.Text)
@@ -79,5 +83,24 @@
         MsgBox("Error loading hash table", MsgBoxStyle.Critical, "CRITICAL")
     End Sub
 
+    Private Sub lvItem_DoubleClick(sender As Object, e As System.EventArgs) Handles lvItem.DoubleClick
+        btnSelect.PerformClick()
+    End Sub
 
+    Private Sub lvItem_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles lvItem.KeyPress
+        Console.WriteLine("ENTER!")
+        If isEnter(e) Then
+            btnSelect.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtSearch_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtSearch.TextChanged
+
+    End Sub
 End Class

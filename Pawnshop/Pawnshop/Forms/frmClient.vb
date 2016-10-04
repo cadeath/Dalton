@@ -232,6 +232,7 @@ Public Class frmClient
         If lvClient.SelectedItems.Count = 0 Then
             lvClient.Items(0).Focused = True
         End If
+
         Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
         GetClient = New Client
         GetClient.LoadClient(idx)
@@ -261,4 +262,7 @@ Public Class frmClient
         End If
     End Sub
 
+    Private Sub lvClient_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvClient.SelectedIndexChanged
+
+    End Sub
 End Class

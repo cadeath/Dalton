@@ -63,9 +63,8 @@
         LoadScheme_row(ds.Tables(MainTable).Rows(0))
 
 
-        mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SchemeID", SubTable, _schemeID)
-
-        'mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY IS_ID", SubTable, _schemeID)
+        'mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY SchemeID", SubTable, _schemeID)
+        mySql = String.Format("SELECT * FROM {0} WHERE SchemeID = {1} ORDER BY IS_ID", SubTable, _schemeID)
 
         ds.Clear()
         ds = LoadSQL(mySql, SubTable)

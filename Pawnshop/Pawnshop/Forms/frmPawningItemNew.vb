@@ -4,7 +4,7 @@ Public Class frmPawningItemNew
     Friend transactionType As String = "L"
     Friend PT_Entry As New PawnTicket2 'Serve as Pawn Ticket
     Friend PawnedItem As New PawnItem 'Serve as Pawned Item
-    Friend Pawner As New Client
+    Friend Pawner As Client
     Friend Pawner_OtherClaimer As New Client
 
     Private ItemClasses_ht As Hashtable
@@ -80,6 +80,7 @@ Public Class frmPawningItemNew
 
         txtClassification.Text = ""
         txtClaimer.Clear()
+        lvSpec.Items.Clear()
     End Sub
 
     Private Sub LoadAppraisers()
@@ -127,6 +128,7 @@ Public Class frmPawningItemNew
         txtBDay.Text = cl.Birthday.ToString("MMM dd, yyyy")
         txtContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
 
+        Pawner = New Client
         Pawner = cl
         txtClassification.Focus()
     End Sub
@@ -188,13 +190,16 @@ Public Class frmPawningItemNew
 
         Select Case tmpSpec.SpecLayout
             Case "TextBox"
+                frm_PanelTextbox.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelTextbox.retID = idx
                 frm_PanelTextbox.inputType = tmpSpec.SpecType
                 frm_PanelTextbox.ShowDialog()
             Case "Yes/No"
+                frm_PanelYesNo.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelYesNo.retID = idx
                 frm_PanelYesNo.ShowDialog()
             Case "MultiLine"
+                frm_PanelMultiline.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelMultiline.retID = idx
                 frm_PanelMultiline.ShowDialog()
         End Select
@@ -211,11 +216,13 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Function isValid() As Boolean
-        If Pawner Is Nothing Then txtCustomer.Focus() : Return False
-        If PawnedItem.ItemClass Is Nothing Then txtClassification.Focus() : Return False
+        If Pawner Is Nothing Then MsgBox("Please select your customer", MsgBoxStyle.Information) : txtCustomer.Focus() : Return False
+        If PawnedItem.ItemClass Is Nothing Then MsgBox("Please select an item", MsgBoxStyle.Information) : txtClassification.Focus() : Return False
         If txtAppr.Text = "" Then txtAppr.Focus() : Return False
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
+        If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         If Not mod_system.isAuthorized Then cboAppraiser.DroppedDown = True : Return False
+
 
         If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
         If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
@@ -225,6 +232,7 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If unableToSave Then Exit Sub
 
         Select Case transactionType
             Case "L"
@@ -235,15 +243,34 @@ Public Class frmPawningItemNew
 
     Private Sub SaveNewLoan()
 
+        If Not isValid() Then Exit Sub
+
+        ' CHECKING REQUIRED FIELDS
+        Dim i As Integer = 0
+        For Each reqSpec As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
+            If reqSpec.isRequired Then
+                If lvSpec.Items(i).SubItems(1).Text = "" Then
+                    MsgBox("This one requires information", MsgBoxStyle.Critical, reqSpec.SpecName)
+                    Exit Sub
+                End If
+            End If
+
+            i += 1
+        Next
+
         ' DECLARING INPUT ===============================================
         Appraisal = CDbl(txtAppr.Text)
         Principal = CDbl(txtPrincipal.Text)
+        LoanDate = DateTime.Parse(txtLoan.Text)
+        MaturityDate = DateTime.Parse(txtMatu.Text)
+        ExpiryDate = DateTime.Parse(txtExpiry.Text)
+        AuctionDate = DateTime.Parse(txtAuction.Text)
         ' END - DECLARING INPUT =========================================
 
         ' SAVING PAWNED ITEM INFORMATION ================================
 
         ' Saving Pawned Item Specification
-        Dim i As Integer = 0
+        i = 0
         Dim PawnSpecs As New CollectionPawnItemSpecs
         For Each ItmSpc As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
             Dim pwnSpec As New PawnItemSpec
@@ -260,7 +287,6 @@ Public Class frmPawningItemNew
 
         ' END - SAVING PAWNED ITEM INFORMATION ==========================
 
-        ' SAVING PAWN TICKET
         With PT_Entry
             .Pawner = Pawner
             .PawnItem = PawnedItem
@@ -275,14 +301,21 @@ Public Class frmPawningItemNew
             .Principal = Principal
 
             .AdvanceInterest = AdvanceInterest
+            .ServiceCharge = PawnServiceCharge
             .NetAmount = NetAmount
-
             .Save_PawnTicket()
         End With
+
+        AddNumber(DocumentClass.Pawnticket)
+
+        MsgBox("Item Saved", MsgBoxStyle.Information)
+        NewLoan()
     End Sub
 
 
     Private Sub dateChange(selectedClass As ItemClass)
+        If selectedClass Is Nothing Then Exit Sub
+
         Select Case selectedClass.Category
             Case "GADGET"
                 txtExpiry.Text = txtMatu.Text
@@ -295,12 +328,53 @@ Public Class frmPawningItemNew
         ReComputeInterest()
     End Sub
 
-    Private Sub Assembling_Transactions()
+    Private Sub Update_MoneyUserInput()
+        If txtAppr.Text = "" Then Exit Sub
+        If Not IsNumeric(txtAppr.Text) Then Exit Sub
+        If txtPrincipal.Text = "" Then Exit Sub
+        If Not IsNumeric(txtPrincipal.Text) Then Exit Sub
 
+        Appraisal = CDbl(txtAppr.Text)
+        Principal = CDbl(txtPrincipal.Text)
     End Sub
 
+    Private Function MoneyFormat(dbl As Double) As String
+        Return dbl.ToString("#,##0.00")
+    End Function
 
     Private Sub ReComputeInterest()
+        Console.WriteLine("Recomputing...")
+
+        Update_MoneyUserInput()
+        If Principal = 0 Then Exit Sub
+
+        Dim AutoCompute As PawnCompute
+        Dim isDPJ As Boolean = True
+
+        If transactionType <> "L" Then
+            'REMANTIC NO ADVANCE INTEREST
+            If PT_Entry.AdvanceInterest = 0 Then
+                isDPJ = False
+            End If
+        End If
+
+        Try
+            AutoCompute = New PawnCompute _
+            (Principal, PawnedItem.ItemClass.InterestScheme, CurrentDate, DateTime.Parse(txtMatu.Text), isDPJ)
+        Catch ex As Exception
+            Console.WriteLine("Incomplete Data")
+            Console.WriteLine(ex.Message)
+            Exit Sub
+        End Try
+
+        PawnServiceCharge = AutoCompute.ServiceCharge
+        AdvanceInterest = AutoCompute.AdvanceInterest
+        NetAmount = AutoCompute.NetAmount
+
+        txtService.Text = MoneyFormat(PawnServiceCharge)
+        txtAdv.Text = MoneyFormat(AdvanceInterest)
+        txtNet.Text = MoneyFormat(NetAmount)
+
         '    Dim intHash As String = ""
 
         '    If transactionType = "D" Then Exit Sub 'Display No Recommute
@@ -394,6 +468,22 @@ Public Class frmPawningItemNew
         '    End If
     End Sub
 
+    Enum DocumentClass As Integer
+        Pawnticket = 0
+        OfficialReceipt = 1
+    End Enum
+
+    Private Sub AddNumber(doc As DocumentClass)
+        Select Case doc
+            Case DocumentClass.Pawnticket
+                currentPawnTicket += 1
+                UpdateOptions("PawnLastNum", currentPawnTicket)
+            Case DocumentClass.OfficialReceipt
+                currentORNumber += 1
+                UpdateOptions("ORLastNum", currentORNumber)
+        End Select
+    End Sub
+
     Private Function CurrentPTNumber(Optional ByVal num As Integer = 0) As String
         Return String.Format("{0:000000}", If(num = 0, currentPawnTicket, num))
     End Function
@@ -402,14 +492,11 @@ Public Class frmPawningItemNew
         Return String.Format("{0:000000}", currentORNumber)
     End Function
 
-    ''' <summary>
-    ''' This is call when you wanted to generate new PawnTicket Number Sequence
-    ''' </summary>
-    ''' <remarks></remarks>
     Private Sub GeneratePT()
         'Check PT if existing
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM tblPAWN "
+        'mySql = "SELECT * FROM tblPAWN " 'OLD TABLE
+        mySql = "SELECT * FROM OPT "
         mySql &= "WHERE PAWNTICKET = '" & currentPawnTicket & "'"
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then _
@@ -418,7 +505,7 @@ Public Class frmPawningItemNew
         txtTicket.Text = CurrentPTNumber()
         txtLoan.Text = CurrentDate.ToShortDateString
         txtMatu.Text = CurrentDate.AddDays(29).ToShortDateString
-        'dateChange(txtClassification.Text)
+        dateChange(PawnedItem.ItemClass)
 
         If transactionType = "R" Then
             txtTicket.Text = CurrentPTNumber(GetOption("PawnLastNum"))
@@ -439,16 +526,24 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
+    Private Sub txtPrincipal_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtPrincipal.KeyPress
+        DigitOnly(e)
+        If isEnter(e) Then
+            cboAppraiser.Focus()
+            cboAppraiser.DroppedDown = True
+        End If
+    End Sub
+
     Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        'ReComputeInterest()
+        ReComputeInterest()
     End Sub
 
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadAppraisers()
 
-        POSuser.LoadUser(3)
-        'If transactionType = "L" Then NewLoan()
+        'POSuser.LoadUser(3)
+        If transactionType = "L" Then NewLoan()
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
@@ -458,6 +553,12 @@ Public Class frmPawningItemNew
     Private Sub txtCustomer_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtCustomer.KeyDown
         If e.KeyCode = 13 Then
             btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub cboAppraiser_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
+        If lblAuth.Text = "Verified" Then
+            btnSave.PerformClick()
         End If
     End Sub
 
@@ -502,4 +603,37 @@ Public Class frmPawningItemNew
 
         Return True
     End Function
+
+    Friend Sub NewLoan()
+        ClearFields()
+
+        Pawner = Nothing
+        PT_Entry = New PawnTicket2
+        PawnedItem = New PawnItem
+
+        cboAppraiser.SelectedIndex = -1
+        GeneratePT()
+
+        'Disable Stuff
+        btnRenew.Enabled = False
+        btnRedeem.Enabled = False
+        btnVoid.Enabled = False
+        btnPrint.Enabled = False
+        grpClaimer.Enabled = False
+    End Sub
+
+    Private Sub txtAppr_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtAppr.KeyPress
+        DigitOnly(e)
+        If isEnter(e) Then
+            txtPrincipal.Focus()
+        End If
+    End Sub
+
+    Private Sub tmrVerifier_Tick(sender As System.Object, e As System.EventArgs) Handles tmrVerifier.Tick
+        If mod_system.isAuthorized Then
+            lblAuth.Text = "Verified"
+        Else
+            lblAuth.Text = "Unverified"
+        End If
+    End Sub
 End Class
