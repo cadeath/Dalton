@@ -66,7 +66,6 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -396,7 +395,6 @@ Partial Class frmAdminPanel
         '
         'lblModname
         '
-        Me.lblModname.Controls.Add(Me.Label1)
         Me.lblModname.Controls.Add(Me.lblCount)
         Me.lblModname.Controls.Add(Me.chkSelectAll)
         Me.lblModname.Controls.Add(Me.btnBrowse)
@@ -507,15 +505,6 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(883, 400)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(69, 16)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Modname"
-        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -593,5 +582,4 @@ Partial Class frmAdminPanel
     Friend WithEvents txtSearch As Pawnshop.watermark
     Friend WithEvents chkSelectAll As System.Windows.Forms.CheckBox
     Friend WithEvents lblCount As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class

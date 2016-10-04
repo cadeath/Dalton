@@ -343,8 +343,6 @@ Public Class frmAdminPanel
     '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
     Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
         If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
-
-        Label1.Text = cmbModuleName.Text
         If cmbModuleName.Visible Then
             Select Case cmbModuleName.Text
                 Case "Money Transfer"
