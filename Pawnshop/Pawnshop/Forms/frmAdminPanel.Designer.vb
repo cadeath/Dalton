@@ -107,7 +107,7 @@ Partial Class frmAdminPanel
         Me.txtPrintLayout.Multiline = True
         Me.txtPrintLayout.Name = "txtPrintLayout"
         Me.txtPrintLayout.Size = New System.Drawing.Size(251, 76)
-        Me.txtPrintLayout.TabIndex = 18
+        Me.txtPrintLayout.TabIndex = 5
         Me.txtPrintLayout.WatermarkColor = System.Drawing.Color.Gray
         Me.txtPrintLayout.WatermarkText = "Print Layout"
         '
@@ -117,7 +117,7 @@ Partial Class frmAdminPanel
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(251, 69)
-        Me.txtDescription.TabIndex = 17
+        Me.txtDescription.TabIndex = 2
         Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
         Me.txtDescription.WatermarkText = "Description"
         '
@@ -126,7 +126,7 @@ Partial Class frmAdminPanel
         Me.txtCategory.Location = New System.Drawing.Point(106, 54)
         Me.txtCategory.Name = "txtCategory"
         Me.txtCategory.Size = New System.Drawing.Size(249, 22)
-        Me.txtCategory.TabIndex = 16
+        Me.txtCategory.TabIndex = 1
         Me.txtCategory.WatermarkColor = System.Drawing.Color.Gray
         Me.txtCategory.WatermarkText = "Category"
         '
@@ -137,7 +137,7 @@ Partial Class frmAdminPanel
         Me.cbotxtSchemename.Location = New System.Drawing.Point(105, 287)
         Me.cbotxtSchemename.Name = "cbotxtSchemename"
         Me.cbotxtSchemename.Size = New System.Drawing.Size(250, 24)
-        Me.cbotxtSchemename.TabIndex = 15
+        Me.cbotxtSchemename.TabIndex = 6
         '
         'Label2
         '
