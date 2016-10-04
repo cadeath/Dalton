@@ -34,6 +34,7 @@ Partial Class frmItemList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.txtSearch = New Pawnshop.watermark()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -133,25 +134,14 @@ Partial Class frmItemList
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'btnView
-        '
-        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnView.Location = New System.Drawing.Point(666, 344)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 31)
-        Me.btnView.TabIndex = 13
-        Me.btnView.Text = "&View"
-        Me.btnView.UseVisualStyleBackColor = True
-        '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(71, 17)
+        Me.txtSearch.Location = New System.Drawing.Point(71, 18)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(744, 22)
-        Me.txtSearch.TabIndex = 11
+        Me.txtSearch.TabIndex = 2
         Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSearch.WatermarkText = "Search . . ."
+        Me.txtSearch.WatermarkText = "Search . . . ."
         '
         'frmItemList
         '

@@ -162,9 +162,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         End If
     End Sub
 
-
-
-
     Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
 
@@ -175,12 +172,9 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Dim ColItemsSpecs As New CollectionItemSpecs
 
         With ItemSave
-
-            .ItemClass = txtClassification.Text
-
             .Category = txtCategory.Text
             .Description = txtDescription.Text
-            .ClassName = txtClassifiction.Text
+            .ClassName = txtClassification.Text
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -246,8 +240,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
 
         With ItemModify
-
-            .ItemClass = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .updated_at = CurrentDate
@@ -730,7 +722,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     Private Sub btnBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
 end sub
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim SelectedThings As String = dgSpecs.SelectedCells.ToString
         MsgBox(SelectedThings)
     End Sub

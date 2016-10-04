@@ -247,7 +247,7 @@
             _isRenew = .Item("isrenew")
             '_onHold = .Item()
             _printLayout = .Item("print_layout")
-            _schemeID = .Item("Scheme_ID")
+            '_schemeID = .Item("Scheme_ID")
 
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _onHold = If(.Item("onHold") = 1, True, False)
