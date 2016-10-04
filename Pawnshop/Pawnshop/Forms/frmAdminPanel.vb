@@ -591,13 +591,13 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-
         ds = New DataSet
         ds.Tables.Add(dt)
 
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
         MsgBox("Data Exported", MsgBoxStyle.Information)
+
         dt.Clear()
         ds.Tables.Clear()
     End Sub
@@ -660,7 +660,8 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
-        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
+        If txtReferenceNumber.Text = "" Then txtReferenceNumber.Focus() : Exit Sub
+        If cmbModuleName.Text = "" Then cmbModuleName.Focus() : Exit Sub
 
         For Each item As ListViewItem In Me.lvModule.Items
             If item.Checked = False Then
@@ -671,11 +672,6 @@ Public Class frmAdminPanel
         Console.WriteLine("Item Count: " & lvModule.Items.Count)
 
         FromListView(dt, lvModule)
-
-        'lvModule.Items.Clear()
-        'lvModule.Columns.Clear()
-
-
 
         Dim path As String = String.Format("{1}{0}.dat", fn, str)
         If Not File.Exists(path) Then
@@ -721,9 +717,12 @@ Public Class frmAdminPanel
         If txtReferenceNumber.Text = Nothing Then
             Exit Sub
         Else
-            File.AppendAllText(path, "Reference No: " & txtReferenceNumber.Text & vbCrLf)
-            File.AppendAllText(path, "Module Name: " & cmbModuleName.Text & vbCrLf)
-            File.AppendAllText(path, "User: " & POSuser.UserName & vbCrLf)
+            Dim Post_log As String = _
+          String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
+
+            File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtReferenceNumber.Text & vbCrLf & "Module Name: " & cmbModuleName.Text & vbCrLf & _
+                               "User: " & POSuser.UserName & vbCrLf)
+          
         End If
 
     End Sub
@@ -748,7 +747,7 @@ Public Class frmAdminPanel
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
     End Sub
 
-    Private Sub lvModule_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvModule.SelectedIndexChanged
+    Private Sub lvModule_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lvModule.ItemChecked
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
     End Sub
 End Class
