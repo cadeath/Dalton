@@ -344,6 +344,7 @@ Public Class frmAdminPanel
     Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
         If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
 
+        Label1.Text = cmbModuleName.Text
         If cmbModuleName.Visible Then
             Select Case cmbModuleName.Text
                 Case "Money Transfer"
@@ -425,8 +426,6 @@ Public Class frmAdminPanel
             lvModule.Items.Add(lvi)
         Next
 
-
-
     End Sub
 
     Private Sub Modcash()
@@ -493,6 +492,7 @@ Public Class frmAdminPanel
         Next
 
     End Sub
+
     Private Sub ModClass()
         fillData = "tblClass"
         mySql = "SELECT CLASSID,TYPE,CATEGORY,RENEWABLE FROM " & fillData
@@ -602,12 +602,13 @@ Public Class frmAdminPanel
         ds.Tables.Clear()
     End Sub
 
+  
 
     Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
         Dim fn As String = oFd.FileName
 
         ShowDataInLvw(FileChecker(fn), lvModule)
-
+        MsgBox("Successfully Loaded", MsgBoxStyle.OkOnly, "Load")
     End Sub
 
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
@@ -713,6 +714,7 @@ Public Class frmAdminPanel
 
     Private str As String = My.Computer.FileSystem.SpecialDirectories.Desktop
     Private path As String = String.Format("{1}{0}.dat", fn, str)
+
     Private Sub saveModname()
         If txtReferenceNumber.Text = Nothing Then
             Exit Sub
@@ -720,14 +722,18 @@ Public Class frmAdminPanel
             Dim Post_log As String = _
           String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
 
-            File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtReferenceNumber.Text & vbCrLf & "Module Name: " & cmbModuleName.Text & vbCrLf & _
-                               "User: " & POSuser.UserName & vbCrLf)
-          
+            File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtReferenceNumber.Text & vbCrLf & _
+                               "Module Name: " & cmbModuleName.Text & vbCrLf & "User: " & POSuser.UserName & vbCrLf)
         End If
-
     End Sub
+
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
+
+        lvModule.View = View.Details
+        lvModule.CheckBoxes = True
+        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
+       
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click

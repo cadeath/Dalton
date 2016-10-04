@@ -54,7 +54,7 @@ Partial Class frmAdminPanel
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblModname = New System.Windows.Forms.GroupBox()
         Me.lblCount = New System.Windows.Forms.Label()
         Me.chkSelectAll = New System.Windows.Forms.CheckBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
@@ -66,13 +66,14 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgSpecs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSearch.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.lblModname.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAddItem
@@ -385,7 +386,7 @@ Partial Class frmAdminPanel
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.Gainsboro
-        Me.TabPage2.Controls.Add(Me.GroupBox2)
+        Me.TabPage2.Controls.Add(Me.lblModname)
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -393,22 +394,23 @@ Partial Class frmAdminPanel
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Export Config"
         '
-        'GroupBox2
+        'lblModname
         '
-        Me.GroupBox2.Controls.Add(Me.lblCount)
-        Me.GroupBox2.Controls.Add(Me.chkSelectAll)
-        Me.GroupBox2.Controls.Add(Me.btnBrowse)
-        Me.GroupBox2.Controls.Add(Me.lvModule)
-        Me.GroupBox2.Controls.Add(Me.btnExport)
-        Me.GroupBox2.Controls.Add(Me.cmbModuleName)
-        Me.GroupBox2.Controls.Add(Me.lblModuleName)
-        Me.GroupBox2.Controls.Add(Me.txtReferenceNumber)
-        Me.GroupBox2.Controls.Add(Me.lblReferenceNumber)
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 0)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(1134, 427)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
+        Me.lblModname.Controls.Add(Me.Label1)
+        Me.lblModname.Controls.Add(Me.lblCount)
+        Me.lblModname.Controls.Add(Me.chkSelectAll)
+        Me.lblModname.Controls.Add(Me.btnBrowse)
+        Me.lblModname.Controls.Add(Me.lvModule)
+        Me.lblModname.Controls.Add(Me.btnExport)
+        Me.lblModname.Controls.Add(Me.cmbModuleName)
+        Me.lblModname.Controls.Add(Me.lblModuleName)
+        Me.lblModname.Controls.Add(Me.txtReferenceNumber)
+        Me.lblModname.Controls.Add(Me.lblReferenceNumber)
+        Me.lblModname.Location = New System.Drawing.Point(13, 3)
+        Me.lblModname.Name = "lblModname"
+        Me.lblModname.Size = New System.Drawing.Size(1134, 427)
+        Me.lblModname.TabIndex = 1
+        Me.lblModname.TabStop = False
         '
         'lblCount
         '
@@ -505,6 +507,15 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(883, 400)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(69, 16)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "Modname"
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -523,8 +534,8 @@ Partial Class frmAdminPanel
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.lblModname.ResumeLayout(False)
+        Me.lblModname.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -543,7 +554,7 @@ Partial Class frmAdminPanel
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents lblSearch As System.Windows.Forms.Label
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents lblModname As System.Windows.Forms.GroupBox
     Friend WithEvents lblReferenceNumber As System.Windows.Forms.Label
     Friend WithEvents lblModuleName As System.Windows.Forms.Label
     Friend WithEvents txtReferenceNumber As System.Windows.Forms.TextBox
@@ -582,4 +593,5 @@ Partial Class frmAdminPanel
     Friend WithEvents txtSearch As Pawnshop.watermark
     Friend WithEvents chkSelectAll As System.Windows.Forms.CheckBox
     Friend WithEvents lblCount As System.Windows.Forms.Label
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class
