@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Text
 Public Class frmAdminPanel
     Const fn As String = "\Post_Log.dat"
+    Dim dt As New DataTable
 
     Private mySql As String
     Private fillData As String
@@ -589,6 +590,12 @@ Public Class frmAdminPanel
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
         Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        ds.Tables.Clear()
+        ds = New DataSet
+        dt = New DataTable
+        ds.Tables.Add(dt)
+
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
         MsgBox("Data Exported", MsgBoxStyle.Information)
@@ -654,6 +661,21 @@ Public Class frmAdminPanel
     Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
         If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
 
+        For Each item As ListViewItem In Me.lvModule.Items
+            If item.Checked = False Then
+                item.Remove()
+            End If
+        Next
+
+        Console.WriteLine("Item Count: " & lvModule.Items.Count)
+
+        FromListView(dt, lvModule)
+
+        'lvModule.Items.Clear()
+        'lvModule.Columns.Clear()
+
+
+
         Dim path As String = String.Format("{1}{0}.dat", fn, str)
         If Not File.Exists(path) Then
             Dim a As FileStream
@@ -671,6 +693,26 @@ Public Class frmAdminPanel
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
     End Sub
+
+    Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
+        table.Clear()
+        dt.Columns.Clear()
+        dt.Rows.Clear()
+        Dim columns = lvw.Columns.Count
+
+        For Each column As ColumnHeader In lvw.Columns
+            table.Columns.Add(column.Text)
+        Next
+
+        For Each item As ListViewItem In lvw.Items
+            Dim cells = New Object(columns - 1) {}
+            For i As VariantType = 0 To columns - 1
+                cells(i) = item.SubItems(i).Text
+            Next
+            table.Rows.Add(cells)
+        Next
+    End Sub
+
 
     Private str As String = My.Computer.FileSystem.SpecialDirectories.Desktop
     Private path As String = String.Format("{1}{0}.dat", fn, str)
@@ -707,5 +749,49 @@ Public Class frmAdminPanel
 
     Private Sub lvModule_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvModule.SelectedIndexChanged
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        For Each item As ListViewItem In Me.lvModule.Items
+            If item.Checked = False Then
+                item.Remove()
+            End If
+        Next
+
+        Console.WriteLine("Item Count: " & lvModule.Items.Count)
+
+        FromListView(dt, lvModule)
+
+        lvModule.Items.Clear()
+        lvModule.Columns.Clear()
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        lvModule.Items.Clear()
+        Dim ColCount As Integer = dt.Columns.Count
+        'Add columns
+        For k As Integer = 0 To ColCount - 1
+            lvModule.Columns.Add(dt.Columns(k).ColumnName)
+        Next
+        ' Display items in the ListView control
+        For i As Integer = 0 To dt.Rows.Count - 1
+            Dim drow As DataRow = dt.Rows(i)
+
+            ' Only row that have not been deleted
+            If drow.RowState <> DataRowState.Deleted Then
+                ' Define the list items
+                Dim lvi As New ListViewItem(drow(0).ToString())
+                For j As Integer = 1 To ColCount - 1
+                    lvi.SubItems.Add(drow(j).ToString())
+                Next
+                ' Add the list items to the ListView
+                lvModule.Items.Add(lvi)
+            End If
+        Next
+      
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        ds.Tables.Add(dt)
     End Sub
 End Class
