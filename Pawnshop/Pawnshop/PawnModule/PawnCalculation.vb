@@ -213,11 +213,13 @@
         'Else
         '    mySql = "SELECT * FROM TBLINT_HISTORY WHERE ItemType = '" & _class & String.Format("' AND CHECKSUM = '{0}'", _intHash)
         'End If
-        If _class = "" Then
-            mySql = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID"
-        Else
-            mySql = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID WHERE SCHEMENAME = '" & GetSchemeName(_class) & "'"
-        End If
+
+
+        'If _class = "" Then
+        mySql = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID"
+        'Else
+        ' mySql = "SELECT * FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID WHERE SCHEMEID = '" & _class & "'"
+        'End If
 
         Dim ds As DataSet = LoadSQL(mySql), TypeInt As Double
 

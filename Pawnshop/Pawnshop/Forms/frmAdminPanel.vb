@@ -43,12 +43,13 @@ Public Class frmAdminPanel
     End Sub
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
-        If it.ItemClass = "" Then Exit Sub
+        'If it.ItemClass = "" Then Exit Sub
 
-        txtClassification.Text = it.ItemClass
+        'txtClassifiction.Text = it.ItemClass
+
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
-        cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
+        'cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
 
         If it.isRenewable = "True" Then
             rdbYes.Checked = True
@@ -68,23 +69,16 @@ Public Class frmAdminPanel
         btnUpdate.Enabled = True
     End Sub
 
-
-    Friend Sub LoadItemall(ByVal it As ItemClass)
-        txtClassification.Text = String.Format(it.ItemClass)
-        txtCategory.Text = String.Format(it.Category)
-        txtDescription.Text = String.Format(it.Description)
-end sub
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
             If el.Key = id Then
                 Return el.Value
             End If
         Next
-
-        Return "N/A"
+ Return "N/A"
     End Function
 
-    Private Function GetSchemeID(ByVal name As String) As Integer
+Private Function GetSchemeID(ByVal name As String) As Integer
         For Each el As DictionaryEntry In Scheme
             If el.Value = name Then
                 Return el.Key
@@ -93,6 +87,13 @@ end sub
 
         Return 0
     End Function
+
+
+    Friend Sub LoadItemall(ByVal it As ItemClass)
+        'txtClassifiction.Text = String.Format(it.ItemClass)
+        txtCategory.Text = String.Format(it.Category)
+        txtDescription.Text = String.Format(it.Description)
+	end sub
 
 
     'Friend Sub LoadItemall(ByVal it As ItemClass)
@@ -174,9 +175,12 @@ end sub
         Dim ColItemsSpecs As New CollectionItemSpecs
 
         With ItemSave
+
             .ItemClass = txtClassification.Text
+
             .Category = txtCategory.Text
             .Description = txtDescription.Text
+            .ClassName = txtClassifiction.Text
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -187,7 +191,7 @@ end sub
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
 
-            .SchemeID = GetSchemeID(cbotxtSchemename.Text)
+            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
 
         End With
 
@@ -208,6 +212,10 @@ end sub
                 End If
             End With
 
+            'Dim tmpItemID As Integer = ItemSave.LASTITEMID
+            'tmpItemID += 1
+            'SpecSave.ItemID = tmpItemID
+            SpecSave.SaveSpecs()
             ColItemsSpecs.Add(SpecSave)
         Next
 
@@ -216,6 +224,7 @@ end sub
 
         MsgBox("Transaction Saved", MsgBoxStyle.Information)
         clearfields()
+        LoadScheme()
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
@@ -225,6 +234,7 @@ end sub
         If btnUpdate.Text = "&Update".ToString Then
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
+            LoadScheme()
             Exit Sub
         End If
 
@@ -234,7 +244,9 @@ end sub
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
 
+
         With ItemModify
+
             .ItemClass = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
@@ -246,7 +258,6 @@ end sub
             Else
                 .isRenewable = 0
             End If
-
             .PrintLayout = txtPrintLayout.Text
             '  .SchemeName = cboSchemeName.Text
         End With
@@ -271,14 +282,17 @@ end sub
             End With
             SpecModify.ItemID = SelectedItem.ID
             SpecModify.UpdateSpecs()
+            ColItemsSpecs.Add(SpecModify)
         Next
 
+        ItemModify.ItemSpecifications = ColItemsSpecs
         ItemModify.Update()
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
         btnSave.Enabled = True
         btnUpdate.Text = "&Update"
         clearfields()
+        LoadScheme()
     End Sub
 
     Private Sub btnClose_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -299,6 +313,8 @@ end sub
         txtSearch.Clear()
         dgSpecs.Rows.Clear()
         clearfields()
+        LoadScheme()
+
     End Sub
  
 
@@ -345,8 +361,6 @@ end sub
         For Each dr In ds.Tables(0).Rows
             AddItemSpecs(dr)
         Next
-            ' Dim i As Integer = (0)
-
             reaDOnlyTrue()
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = True

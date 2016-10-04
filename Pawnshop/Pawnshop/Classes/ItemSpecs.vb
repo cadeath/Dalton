@@ -134,7 +134,7 @@
     End Sub
 
     Friend Sub LoadItemSpecs(ByVal id As Integer)
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = " & id
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE SpecsID = " & id
         Dim ds As DataSet
         ds = LoadSQL(mySql, MainTable)
 

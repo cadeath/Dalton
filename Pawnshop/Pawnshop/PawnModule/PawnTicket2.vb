@@ -133,23 +133,13 @@
         End Set
     End Property
 
-    Private _clientID As Integer
-    Public Property ClientID() As Integer
+    Private _pawner As New Client
+    Public Property Pawner() As Client
         Get
-            Return _clientID
+            Return _pawner
         End Get
-        Set(ByVal value As Integer)
-            _clientID = value
-        End Set
-    End Property
-
-    Private _pawnItemID As Integer
-    Public Property PawnItemID() As Integer
-        Get
-            Return _pawnItemID
-        End Get
-        Set(ByVal value As Integer)
-            _pawnItemID = value
+        Set(ByVal value As Client)
+            _pawner = value
         End Set
     End Property
 
@@ -243,16 +233,6 @@
         End Set
     End Property
 
-    Private _schemeID As Integer
-    Public Property SchemeID() As Integer
-        Get
-            Return _schemeID
-        End Get
-        Set(ByVal value As Integer)
-            _schemeID = value
-        End Set
-    End Property
-
     Private _renewDue As Double
     Public Property RenewDue() As Double
         Get
@@ -302,12 +282,21 @@
             _updated_At = value
         End Set
     End Property
+
 #End Region
 
 #Region "Procedures and Functions"
     Public Sub Save_PawnTicket()
-        Dim mySql As String = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
-        Dim ds As DataSet = LoadSQL(mySql, MainTable)
+        'Declaration
+        Dim mySql As String
+        Dim ds As DataSet
+
+        'Save PawnedItem
+        _pawnItem.Save_PawnItem()
+
+        'Save PawnTicket
+        mySql = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
+        ds = LoadSQL(mySql, MainTable)
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(MainTable).NewRow
@@ -324,8 +313,8 @@
             .Item("APPRAISERID") = _appraiserID
             .Item("ENCODERID") = _encoderID
             .Item("CLAIMERID") = _claimerID
-            .Item("CLIENTID") = _clientID
-            .Item("PAWNITEMID") = _pawnItemID
+            .Item("CLIENTID") = _pawner.ID
+            .Item("PAWNITEMID") = _pawnItem.ID
             .Item("ORDATE") = _ORDate
             .Item("ORNUM") = _ORNum
             .Item("PENALTY") = _penalty
@@ -334,11 +323,10 @@
             .Item("EARLYREDEEM") = _earlyRedeem
             .Item("DELAYINTEREST") = _delayInt
             .Item("ADVINT") = _advInt
-            .Item("SCHEMEID") = _schemeID
             .Item("RENEWDUE") = _renewDue
             .Item("REDEEMDUE") = _redeemDue
             .Item("SERVICECHARGE") = _serviceCharge
-            .Item("CREATED_AT") = _created_At
+            .Item("CREATED_AT") = Now.ToShortDateString
         End With
         ds.Tables(MainTable).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -378,8 +366,7 @@
             _appraiserID = .Item("APPRAISERID")
             _encoderID = .Item("ENCODERID")
             _claimerID = .Item("CLAIMERID")
-            _clientID = .Item("CLIENTID")
-            _pawnItemID = .Item("PAWNITEMID")
+            _pawner.LoadClient(.Item("CLIENTID"))
             _ORDate = .Item("ORDATE")
             _ORNum = .Item("ORNUM")
             _penalty = .Item("PENALTY")
@@ -388,12 +375,13 @@
             _earlyRedeem = .Item("EARLYREDEEM")
             _delayInt = .Item("DELAYINTEREST")
             _advInt = .Item("ADVINT")
-            _schemeID = .Item("SCHEMEID")
             _renewDue = .Item("RENEWDUE")
             _redeemDue = .Item("REDEEMDUE")
             _serviceCharge = .Item("SERVICECHARGE")
             _created_At = .Item("CREATED_AT")
             _updated_At = .Item("UPDATED_AT")
+
+            _pawnItem.Load_PawnItem(.Item("PAWNITEMID"))
         End With
     End Sub
 #End Region

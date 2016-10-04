@@ -268,7 +268,7 @@
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If DEV_MODE Then dev_Pawning.Show()
+        If DEV_MODE Then dev_Pawning2.Show()
         If (POSuser.isSuperUser Or Not POSuser.canLayAway) Then
             MsgBoxAuthoriation("You don't have access to Lay away.")
             Exit Sub

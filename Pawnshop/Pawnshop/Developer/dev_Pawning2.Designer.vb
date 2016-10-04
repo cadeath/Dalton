@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dev_Pawning
+Partial Class dev_Pawning2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -65,7 +65,7 @@ Partial Class dev_Pawning
         Me.GroupBox1.Controls.Add(Me.rbRemantic)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(210, 53)
+        Me.GroupBox1.Size = New System.Drawing.Size(227, 53)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Item"
@@ -183,6 +183,7 @@ Partial Class dev_Pawning
         Me.txtPrincipal.Name = "txtPrincipal"
         Me.txtPrincipal.Size = New System.Drawing.Size(162, 20)
         Me.txtPrincipal.TabIndex = 14
+        Me.txtPrincipal.Text = "1000"
         '
         'Label6
         '
@@ -353,7 +354,7 @@ Partial Class dev_Pawning
         Me.Label15.TabIndex = 32
         Me.Label15.Text = "Advance Interest"
         '
-        'dev_Pawning
+        'dev_Pawning2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -392,8 +393,8 @@ Partial Class dev_Pawning
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
-        Me.Name = "dev_Pawning"
-        Me.Text = "OLD"
+        Me.Name = "dev_Pawning2"
+        Me.Text = "dev_Pawning"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)

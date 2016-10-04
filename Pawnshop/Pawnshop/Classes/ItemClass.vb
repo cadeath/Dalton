@@ -3,25 +3,26 @@
     Private SubTable As String = "tblSpecs"
 
 #Region "Properties"
-    Private _itemID As Double
-    Public Property ID() As Double
+    Private _itemID As Integer
+    Public Overridable Property ID() As Integer
         Get
             Return _itemID
         End Get
-        Set(ByVal value As Double)
+        Set(ByVal value As Integer)
             _itemID = value
         End Set
     End Property
 
-    Private _itemClass As String
-    Public Property ItemClass() As String
+    Private _itemClassName As String
+    Public Property ClassName() As String
         Get
-            Return _itemClass
+            Return _itemClassName
         End Get
         Set(ByVal value As String)
-            _itemClass = value
+            _itemClassName = value
         End Set
     End Property
+
 
     Private _category As String
     Public Property Category() As String
@@ -124,14 +125,13 @@
         End Set
     End Property
 
-
-    Private _schemeID As Integer
-    Public Property SchemeID() As Integer
+    Private _interestScheme As New InterestScheme
+    Public Property InterestScheme() As InterestScheme
         Get
-            Return _schemeID
+            Return _interestScheme
         End Get
-        Set(ByVal value As Integer)
-            _schemeID = value
+        Set(ByVal value As InterestScheme)
+            _interestScheme = value
         End Set
     End Property
 
@@ -146,15 +146,6 @@
         End Set
     End Property
 
-    'Private _SchemeID As Integer
-    'Public Property SchemeID() As Integer
-    '    Get
-    '        Return _SchemeID
-    '    End Get
-    '    Set(ByVal value As Integer)
-    '        _SchemeID = value
-    '    End Set
-    'End Property
 #End Region
 
 #Region "Functions and Procedures"
@@ -166,9 +157,12 @@
             MsgBox("Failed to load Item", MsgBoxStyle.Critical)
             Exit Sub
         End If
+
+        _interestScheme = New InterestScheme
+
         With ds.Tables(0).Rows(0)
             _itemID = .Item("ItemID")
-            _itemClass = .Item("ItemClass")
+            _itemClassName = .Item("ItemClass")
             _category = .Item("ItemCategory")
 
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
@@ -182,37 +176,49 @@
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
 
-
-            _SchemeID = .Item("Scheme_ID")
-
-
+            _interestScheme.LoadScheme(.Item("Scheme_ID"))
         End With
+
+        ' Load Item Specification
+        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        ds.Clear()
+        ds = LoadSQL(mySql, SubTable)
+
+        _itemSpecs = New CollectionItemSpecs
+        For Each dr As DataRow In ds.Tables(SubTable).Rows
+            Console.WriteLine(dr.Item("SpecsName"))
+            Dim tmpSpecs As New ItemSpecs
+            tmpSpecs.LoadItemSpecs_row(dr)
+
+
+            'Load Item Specification
+            _itemSpecs.Add(tmpSpecs)
+        Next
     End Sub
 
-
-
-
-
+ 
     Public Sub Save_ItemClass()
-        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClass)
-
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClassName)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            MsgBox("Class already existed", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(0).NewRow
         With dsNewRow
-            .Item("ItemClass") = _itemClass
+            .Item("ItemClass") = _itemClassName
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
-            '.Item("int_rate") = 1
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
 
-            .Item("SCHEME_ID") = _schemeID
-
+            .Item("Scheme_ID") = _interestScheme.SchemeID
 
         End With
         ds.Tables(0).Rows.Add(dsNewRow)
@@ -229,10 +235,13 @@
     End Sub
 
     Public Sub LoadByRow(ByVal dr As DataRow)
+        Dim mySql As String, ds As New DataSet
+
         With dr
-            _itemID = .Item("itemid")
-            _itemClass = .Item("itemclass")
-            '_desc = .Item("Description")
+            _itemID = .Item("ItemID")
+            _itemClassName = .Item("ItemClass")
+            _category = .Item("ItemCategory")
+
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _category = .Item("itemcategory")
             _isRenew = .Item("isrenew")
@@ -240,13 +249,37 @@
             _printLayout = .Item("print_layout")
             _schemeID = .Item("Scheme_ID")
 
+            _isRenew = If(.Item("isRenew") = 1, True, False)
+            _onHold = If(.Item("onHold") = 1, True, False)
+            _printLayout = .Item("Print_Layout")
+
+            _Count = .Item("Renewal_Cnt")
+
+            _created = .Item("Created_At")
+            _updated = .Item("Updated_At")
+
+            _interestScheme.LoadScheme(.Item("Scheme_ID"))
         End With
+
+        ' Load Item Specification
+        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        ds.Clear()
+        ds = LoadSQL(mySql, SubTable)
+
+        _itemSpecs = New CollectionItemSpecs
+        For Each dr In ds.Tables(SubTable).Rows
+            Console.WriteLine(dr.Item("SpecsName"))
+            Dim tmpSpecs As New ItemSpecs
+            tmpSpecs.LoadItemSpecs_row(dr)
+
+            'Load Item Specification
+            _itemSpecs.Add(tmpSpecs)
+        Next
     End Sub
 
     Public Sub Update()
 
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemID)
-
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         If ds.Tables(0).Rows.Count <> 1 Then
@@ -254,8 +287,9 @@
             Exit Sub
         End If
 
-        With ds.Tables(0).Rows(0)
-            .Item("ItemClass") = _itemClass
+
+        With ds.Tables(MainTable).Rows(0)
+            .Item("ItemClass") = _itemClassName
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
             .Item("isRenew") = If(_isRenew, 1, 0)
@@ -264,7 +298,7 @@
             .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
 
-            .Item("Scheme_ID") = _schemeID
+            .Item("Scheme_ID") = _interestScheme.SchemeID
 
         End With
         database.SaveEntry(ds, False)
