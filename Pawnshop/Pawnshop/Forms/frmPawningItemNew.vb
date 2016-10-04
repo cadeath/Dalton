@@ -234,6 +234,10 @@ Public Class frmPawningItemNew
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If unableToSave Then Exit Sub
 
+        If MsgBox("Do you want to save this transaction?", _
+                  MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
+                  "Saving...") = MsgBoxResult.No Then Exit Sub
+
         Select Case transactionType
             Case "L"
                 SaveNewLoan()
@@ -542,7 +546,7 @@ Public Class frmPawningItemNew
         ClearFields()
         LoadAppraisers()
 
-        'POSuser.LoadUser(3)
+        POSuser.LoadUser(3)
         If transactionType = "L" Then NewLoan()
     End Sub
 
@@ -558,7 +562,9 @@ Public Class frmPawningItemNew
 
     Private Sub cboAppraiser_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboAppraiser.KeyPress
         If lblAuth.Text = "Verified" Then
-            btnSave.PerformClick()
+            If Not cboAppraiser.DroppedDown Then
+                btnSave.PerformClick()
+            End If
         End If
     End Sub
 
@@ -573,7 +579,6 @@ Public Class frmPawningItemNew
         Else
             mod_system.isAuthorized = False
             lblAuth.Text = "Unverified"
-
             Exit Sub
         End If
     End Sub
@@ -586,10 +591,10 @@ Public Class frmPawningItemNew
         If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
 
         If Not mod_system.isAuthorized And cboAppraiser.Text <> "" Then
-            diagAuthorization.Show()
-            diagAuthorization.TopMost = True
+            'diagAuthorization.TopMost = True
             diagAuthorization.txtUser.Text = cboAppraiser.Text
             diagAuthorization.fromForm = Me
+            diagAuthorization.ShowDialog()
             Return False
         End If
 
