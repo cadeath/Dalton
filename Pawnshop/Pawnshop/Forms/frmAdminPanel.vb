@@ -16,7 +16,7 @@ Public Class frmAdminPanel
 
     Dim isnew As Boolean = False
 
-    Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
         txtClassification.Focus()
 
@@ -95,24 +95,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         txtDescription.Text = String.Format(it.Description)
 	end sub
 
-
-    'Friend Sub LoadItemall(ByVal it As ItemClass)
-    '    txtClassifiction.Text = String.Format(it.ItemClass)
-    '    txtCategory.Text = String.Format(it.Category)
-    '    txtDescription.Text = String.Format(it.Description)
-
-
-    '    If it.isRenewable = "1" Then
-    '        rdbYes.Checked = True
-    '    Else
-    '        rdbNo.Checked = True
-    '    End If
-    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
-
-    '    ItemList = it
-
-    'End Sub
-
     Friend Sub clearfields()
         txtCategory.Text = ""
         txtClassification.Text = ""
@@ -127,7 +109,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
     End Sub
 
-
     Private Function isValid() As Boolean
 
         If txtClassification.Text = "" Then txtClassification.Focus() : Return False
@@ -140,12 +121,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Return True
     End Function
    
-
-   
-
-    
-   
-
     Private Sub AddItem(ByVal itmspc As DataRow)
         Dim tmpItem As New ItemSpecs
         tmpItem.LoadItemSpecs_row(itmspc)
@@ -205,10 +180,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                     Exit For
                 End If
             End With
-
-            'Dim tmpItemID As Integer = ItemSave.LASTITEMID
-            'tmpItemID += 1
-            'SpecSave.ItemID = tmpItemID
             SpecSave.SaveSpecs()
             ColItemsSpecs.Add(SpecSave)
         Next
@@ -222,7 +193,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-
         If Not isValid() Then Exit Sub
 
         If btnUpdate.Text = "&Update".ToString Then
@@ -308,11 +278,8 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         LoadScheme()
 
     End Sub
- 
-
 
     '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
-
     Private Sub searchbutton()
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
@@ -621,8 +588,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     End Sub
 
 #End Region
-
-
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
@@ -678,8 +643,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Next
     End Sub
 
-   
-
     Private Sub cmbModuleName_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
         If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
 
@@ -726,4 +689,5 @@ end sub
         Dim SelectedThings As String = dgSpecs.SelectedCells.ToString
         MsgBox(SelectedThings)
     End Sub
+
 End Class
