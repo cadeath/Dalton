@@ -104,7 +104,7 @@ Public Class frmPawningItemNew
             ' Appraiser have canAppraise
 
             cboAppraiser.Items.Add(u.UserName)
-            Appraisers_ht.Add(u.UserID, u)
+            Appraisers_ht.Add(u.UserID, u.UserName)
         Next
     End Sub
 
@@ -150,10 +150,9 @@ Public Class frmPawningItemNew
             ItemClasses_ht.Add(spec.SpecID, spec.SpecName)
         Next
 
+        dateChange(PawnedItem.ItemClass)
         lvSpec.Focus()
         lvSpec.Items(0).Selected = True
-
-        dateChange(PawnedItem.ItemClass)
     End Sub
 
     Private Sub AddItem(ByVal cio As DataRow)
@@ -295,6 +294,10 @@ Public Class frmPawningItemNew
             .Pawner = Pawner
             .PawnItem = PawnedItem
 
+            'Personnel
+            .AppraiserID = GetIDbyName(cboAppraiser.Text, Appraisers_ht)
+            .EncoderID = POSuser.UserID
+
             .PawnTicket = currentPawnTicket
             .LoanDate = LoanDate
             .MaturityDate = MaturityDate
@@ -314,6 +317,7 @@ Public Class frmPawningItemNew
 
         MsgBox("Item Saved", MsgBoxStyle.Information)
         NewLoan()
+        txtCustomer.Focus()
     End Sub
 
 
