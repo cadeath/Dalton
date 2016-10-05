@@ -589,6 +589,16 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        ''dt.Columns.Add("NewColumn")
+        ''dt.Columns.Add("ReferenceNumber")
+
+        'For Each row As DataRow In dt.Rows
+        '    'need to set value to NewColumn column
+        '    ' or set it to some other value
+        '    'row("ReferenceNumber") = txtReferenceNumber.Text
+        '    row("NewColumn") = "HI"
+        'Next
+
         ds = New DataSet
         ds.Tables.Add(dt)
 
@@ -598,6 +608,7 @@ Public Class frmAdminPanel
 
         dt.Clear()
         ds.Tables.Clear()
+        chkSelectAll.Checked = False
     End Sub
 
   
@@ -607,6 +618,7 @@ Public Class frmAdminPanel
 
         ShowDataInLvw(FileChecker(fn), lvModule)
         MsgBox("Successfully Loaded", MsgBoxStyle.OkOnly, "Load")
+        chkSelectAll.Checked = False
     End Sub
 
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
@@ -707,6 +719,8 @@ Public Class frmAdminPanel
             Next
             table.Rows.Add(cells)
         Next
+
+
     End Sub
 
 
@@ -739,17 +753,17 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub chkSelectAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
-        If chkSelectAll.Checked = True Then
-            For i = 0 To lvModule.Items.Count - 1
-                lvModule.Items(i).Checked = True
-            Next
-        Else
-            For i = 0 To lvModule.Items.Count - 1
-                lvModule.Items(i).Checked = False
-            Next
-        End If
-        lblCount.Text = "Count: " & lvModule.CheckedItems.Count
-    End Sub
+            If chkSelectAll.Checked = True Then
+                For i = 0 To lvModule.Items.Count - 1
+                    lvModule.Items(i).Checked = True
+                Next
+            Else
+                For i = 0 To lvModule.Items.Count - 1
+                    lvModule.Items(i).Checked = False
+                Next
+            End If
+            lblCount.Text = "count: " & lvModule.CheckedItems.Count
+        End Sub
 
     Private Sub lvModule_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lvModule.ItemChecked
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
