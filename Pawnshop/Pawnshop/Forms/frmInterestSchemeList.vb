@@ -11,6 +11,7 @@
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
+            btnSearch.Focus()
         End If
     End Sub
 
@@ -50,8 +51,9 @@
             With SchemeDetail
 
                 Dim row As ListViewItem
+                row = New ListViewItem(.schemeInterestID)
 
-                row = New ListViewItem(.DayFrom)
+                row.SubItems.Add(.DayFrom)
                 row.SubItems.Add(.DayTo)
                 row.SubItems.Add(.Interest)
                 row.SubItems.Add(.Penalty)
@@ -69,7 +71,9 @@
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        LoadScheme()
         searchItem()
+        frmInterestScheme.txtSearch.Text = ""
     End Sub
 
     Private Sub searchItem()
@@ -112,13 +116,13 @@
         txtSearch.Text = ""
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+    Private Sub lvSchemeList_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSchemeList.KeyDown
         If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
+            btnView.PerformClick()
         End If
     End Sub
 
-    Private Sub lvSchemeList_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSchemeList.KeyDown
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnView.PerformClick()
         End If

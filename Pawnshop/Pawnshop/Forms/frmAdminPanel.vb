@@ -6,17 +6,59 @@ Public Class frmAdminPanel
     Dim ds As New DataSet
 
     Private Scheme As Hashtable
-    Friend SelectedItem As ItemClass
-    Friend SelectedItemSpecs As ItemSpecs
+    Private SelectedItem As ItemClass
 
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
 
-    Private ItemList As ItemClass
-
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
+        txtClassification.Focus()
+
         LoadScheme()
+    End Sub
+
+    Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
+        SelectedItem = Item
+        txtClassification.Text = Item.ClassName
+        txtCategory.Text = Item.Category
+        txtDescription.Text = Item.Description
+        txtPrintLayout.Text = Item.PrintLayout
+        cbotxtSchemename.Text = GetSchemeByID(Item.InterestScheme.SchemeID)
+
+        If Item.isRenewable = "True" Then
+            rdbYes.Checked = True
+            rdbNo.Checked = False
+        Else
+            rdbYes.Checked = False
+            rdbNo.Checked = True
+        End If
+        LoadSpec(Item.ID)
+        btnUpdate.Enabled = True
+    End Sub
+
+    Friend Sub LoadSpec(ByVal ID As Integer)
+        Dim da As New OdbcDataAdapter
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
+        Console.WriteLine("SQL: " & mySql)
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim dr As DataRow
+
+        dgSpecs.Rows.Clear()
+        For Each dr In ds.Tables(0).Rows
+            AddItemSpecs(dr)
+        Next
+        reaDOnlyTrue()
+        For a As Integer = 0 To dgSpecs.Rows.Count - 1
+            dgSpecs.Rows(a).ReadOnly = True
+        Next
+        btnSave.Enabled = False
+    End Sub
+
+    Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
+        Dim tmpItem As New ItemSpecs
+        tmpItem.LoadItemSpecs_row(ItemSpecs)
+        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 
     Private Sub LoadScheme()
@@ -35,34 +77,8 @@ Public Class frmAdminPanel
             Scheme.Add(tmpID, tmpName)
             cbotxtSchemename.Items.Add(tmpName)
         Next
+
     End Sub
-
-    Friend Sub LoadItemList(ByVal it As ItemClass)
-        'If it.ItemClass = "" Then Exit Sub
-
-        'txtClassifiction.Text = it.ItemClass
-        txtCategory.Text = it.Category
-        txtDescription.Text = it.Description
-        'cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
-
-        If it.isRenewable = "True" Then
-            rdbYes.Checked = True
-            rdbNo.Checked = False
-        Else
-            rdbYes.Checked = False
-            rdbNo.Checked = True
-        End If
-
-        txtPrintLayout.Text = it.PrintLayout
-
-        Dim id As Integer = it.ID
-        SelectedItem = it
-
-        reaDOnlyTrue()
-        btnSave.Enabled = False
-        btnUpdate.Enabled = True
-    End Sub
-
 
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
@@ -83,35 +99,9 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Return 0
     End Function
 
-    Friend Sub LoadItemall(ByVal it As ItemClass)
-        'txtClassifiction.Text = String.Format(it.ItemClass)
-        txtCategory.Text = String.Format(it.Category)
-        txtDescription.Text = String.Format(it.Description)
-	end sub
-
-       
-
-    
-
-    'Friend Sub LoadItemall(ByVal it As ItemClass)
-    '    txtClassifiction.Text = String.Format(it.ItemClass)
-    '    txtCategory.Text = String.Format(it.Category)
-    '    txtDescription.Text = String.Format(it.Description)
-
-    '    If it.isRenewable = "1" Then
-    '        rdbYes.Checked = True
-    '    Else
-    '        rdbNo.Checked = True
-    '    End If
-    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
-
-    '    ItemList = it
-
-    'End Sub
-
     Friend Sub clearfields()
         txtCategory.Text = ""
-        txtClassifiction.Text = ""
+        txtClassification.Text = ""
         txtDescription.Text = ""
         txtPrintLayout.Text = ""
         txtSearch.Text = ""
@@ -125,16 +115,27 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
     Private Function isValid() As Boolean
 
-        If txtClassifiction.Text = "" Then txtClassifiction.Focus() : Return False
+        If txtClassification.Text = "" Then txtClassification.Focus() : Return False
         If txtCategory.Text = "" Then txtCategory.Focus() : Return False
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
+        If dgSpecs.CurrentCell.Value Is Nothing Then dgSpecs.Focus() : Return False
 
         Return True
     End Function
 
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+    Private Sub dgSpecs_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+        If btnUpdate.Text = "&Modify" Then
+            If e.KeyCode = Keys.Enter Then
+                btnUpdate.PerformClick()
+            End If
+        Else
+            btnSave.PerformClick()
+        End If
+    End Sub
+
+    Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
 
         Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
@@ -146,7 +147,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         With ItemSave
             .Category = txtCategory.Text
             .Description = txtDescription.Text
-            .ClassName = txtClassifiction.Text
+            .ClassName = txtClassification.Text
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -156,9 +157,11 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
+
             .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
 
         End With
+
 
         For Each row As DataGridViewRow In dgSpecs.Rows
             SpecSave = New ItemSpecs
@@ -175,9 +178,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                     Exit For
                 End If
             End With
-            'Dim tmpItemID As Integer = ItemSave.LASTITEMID
-            'tmpItemID += 1
-            'SpecSave.ItemID = tmpItemID
             SpecSave.SaveSpecs()
             ColItemsSpecs.Add(SpecSave)
         Next
@@ -189,7 +189,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         clearfields()
         LoadScheme()
     End Sub
-   
+
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If Not isValid() Then Exit Sub
 
@@ -219,6 +219,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                 .isRenewable = 0
             End If
             .PrintLayout = txtPrintLayout.Text
+            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -249,40 +250,29 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
         MsgBox("Transaction Updated", MsgBoxStyle.Information)
         btnSave.Enabled = True
+        btnUpdate.Text = "&Update"
         clearfields()
         LoadScheme()
     End Sub
 
-    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+    Private Sub btnClose_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
 
+    Private Sub btnSearch_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
-
+        frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_SpecsValue)
         frmItemList.Show()
-
-        frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
-        frmItemList.btnSearch.PerformClick()
-
-        btnUpdate.Text = "&Update".ToString
-        btnUpdate.Enabled = True
-        txtSearch.Clear()
-        dgSpecs.Rows.Clear()
-        clearfields()
-        LoadScheme()
-
     End Sub
 
-    Private Sub searchbutton()
-        If txtSearch.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
-    End Sub
-
-    Private Sub reaDOnlyTrue()
+    '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
+    Private Sub ReadOnlyTrue()
         txtCategory.ReadOnly = True
-        txtClassifiction.ReadOnly = True
+        txtClassification.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
+        cbotxtSchemename.Enabled = False
         rdbNo.Enabled = False
         rdbYes.Enabled = False
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
@@ -290,39 +280,17 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Next
     End Sub
 
-    Friend Sub reaDOnlyFalse()
+    Friend Sub ReadOnlyFalse()
         txtCategory.ReadOnly = False
-        txtClassifiction.ReadOnly = False
+        ' txtClassifiction.ReadOnly = False
         txtDescription.ReadOnly = False
         txtPrintLayout.ReadOnly = False
+        cbotxtSchemename.Enabled = True
         rdbNo.Enabled = True
         rdbYes.Enabled = True
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = False
         Next
-    End Sub
-
-    Friend Sub LoadSpec(ByVal ID As Integer)
-        Dim da As New OdbcDataAdapter
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
-        Console.WriteLine("SQL: " & mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim dr As DataRow
-
-        For Each dr In ds.Tables(0).Rows
-            AddItemSpecs(dr)
-        Next
-            reaDOnlyTrue()
-        For a As Integer = 0 To dgSpecs.Rows.Count - 1
-            dgSpecs.Rows(a).ReadOnly = True
-        Next
-            btnSave.Enabled = False
-    End Sub
-
-    Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
-        Dim tmpItem As New ItemSpecs
-        tmpItem.LoadItemSpecs_row(ItemSpecs)
-        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
@@ -421,7 +389,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     End Sub
 
     Private Sub Modcash()
-
        
         fillData = "tblCash"
         mySql = "SELECT * FROM " & fillData
@@ -486,6 +453,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Next
 
     End Sub
+
     Private Sub ModClass()
         fillData = "tblClass"
         mySql = "SELECT CLASSID,TYPE,CATEGORY,RENEWABLE FROM " & fillData
@@ -580,30 +548,12 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
 #End Region
 
-    Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
-        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
-        SFD.ShowDialog()
-
-        MsgBox("Data Exported", MsgBoxStyle.Information)
-
-        txtReferenceNumber.Text = ""
-        cmbModuleName.SelectedItem = Nothing
-
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
-
-    End Sub
-
-    Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
+    Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
     End Sub
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
-        oFd.ShowDialog()
-    End Sub
-
-    Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
+    Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
         Dim fn As String = oFd.FileName
 
         ShowDataInLvw(FileChecker(fn), lvModule)
@@ -651,5 +601,51 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                 lst.SubItems.Add(If(row(i) IsNot Nothing, row(i).ToString, ""))
             Next
         Next
+    End Sub
+
+    Private Sub cmbModuleName_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
+        If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
+
+        If cmbModuleName.Visible Then
+            Select Case cmbModuleName.Text
+                Case "Money Transfer"
+                    ExportModType = ModuleType.MoneyTransfer
+                Case "Branch"
+                    ExportModType = ModuleType.Branch
+                Case "Cash"
+                    ExportModType = ModuleType.Cash
+                Case "Item Class"
+                    ExportModType = ModuleType.ItemClass
+                Case "Rate"
+                    ExportModType = ModuleType.Rate
+                Case "Currency"
+                    ExportModType = ModuleType.Currency
+            End Select
+        End If
+        GenerateModule()
+        lvModule.View = View.Details
+        lvModule.CheckBoxes = True
+        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
+    End Sub
+
+    Private Sub btnExport_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
+        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
+        SFD.ShowDialog()
+
+        MsgBox("Data Exported", MsgBoxStyle.Information)
+
+        txtReferenceNumber.Text = ""
+        cmbModuleName.SelectedItem = Nothing
+
+        lvModule.Columns.Clear()
+        lvModule.Items.Clear()
+    End Sub
+
+    Private Sub btnBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        oFd.ShowDialog()
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        frmItemList.Show()
     End Sub
 End Class

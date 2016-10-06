@@ -114,6 +114,17 @@
         End Set
     End Property
 
+
+    Private _SchemeName As String
+    Public Property SchemeName() As String
+        Get
+            Return _SchemeName
+        End Get
+        Set(ByVal value As String)
+            _SchemeName = value
+        End Set
+    End Property
+
     Private _interestScheme As New InterestScheme
     Public Property InterestScheme() As InterestScheme
         Get
@@ -135,7 +146,6 @@
         End Set
     End Property
 
-
 #End Region
 
 #Region "Functions and Procedures"
@@ -147,22 +157,16 @@
             MsgBox("Failed to load Item", MsgBoxStyle.Critical)
             Exit Sub
         End If
-
         _interestScheme = New InterestScheme
-
         With ds.Tables(0).Rows(0)
             _itemID = .Item("ItemID")
             _itemClassName = .Item("ItemClass")
             _category = .Item("ItemCategory")
-
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
-
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
-
             _Count = .Item("Renewal_Cnt")
-
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
 
@@ -179,6 +183,7 @@
             Console.WriteLine(dr.Item("SpecsName"))
             Dim tmpSpecs As New ItemSpecs
             tmpSpecs.LoadItemSpecs_row(dr)
+
 
             'Load Item Specification
             _itemSpecs.Add(tmpSpecs)
@@ -224,26 +229,22 @@
 
     Public Sub LoadByRow(ByVal dr As DataRow)
         Dim mySql As String, ds As New DataSet
-
         With dr
             _itemID = .Item("ItemID")
             _itemClassName = .Item("ItemClass")
             _category = .Item("ItemCategory")
-
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
-
+            _category = .Item("itemcategory")
+            _isRenew = .Item("isrenew")
+            _printLayout = .Item("print_layout")
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
-
             _Count = .Item("Renewal_Cnt")
-
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
-
             _interestScheme.LoadScheme(.Item("Scheme_ID"))
         End With
-
         ' Load Item Specification
         mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
         ds.Clear()
@@ -270,9 +271,8 @@
             Exit Sub
         End If
 
-
         With ds.Tables(MainTable).Rows(0)
-            .Item("ItemClass") = _itemClassName
+            '.Item("ItemClass") = _itemClassName
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
             .Item("isRenew") = If(_isRenew, 1, 0)
@@ -280,7 +280,9 @@
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Updated_At") = Now
+
             .Item("Scheme_ID") = _interestScheme.SchemeID
+
         End With
         database.SaveEntry(ds, False)
     End Sub

@@ -24,7 +24,6 @@ Partial Class frmInterestSchemeList
     Private Sub InitializeComponent()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.lvSchemeList = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -33,6 +32,7 @@ Partial Class frmInterestSchemeList
         Me.lblSchemeID = New System.Windows.Forms.Label()
         Me.btnView = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.txtSearch = New Pawnshop.watermark()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -53,13 +53,6 @@ Partial Class frmInterestSchemeList
         Me.Label1.Size = New System.Drawing.Size(51, 16)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Search"
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(64, 21)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(364, 22)
-        Me.txtSearch.TabIndex = 0
         '
         'lvSchemeList
         '
@@ -91,13 +84,13 @@ Partial Class frmInterestSchemeList
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.Gainsboro
+        Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.lblSchemeID)
         Me.GroupBox1.Controls.Add(Me.btnView)
         Me.GroupBox1.Controls.Add(Me.btnClose)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.lvSchemeList)
         Me.GroupBox1.Controls.Add(Me.btnSearch)
-        Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(5, 12)
         Me.GroupBox1.Name = "GroupBox1"
@@ -132,6 +125,15 @@ Partial Class frmInterestSchemeList
         Me.btnClose.Text = "Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(64, 22)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(364, 22)
+        Me.txtSearch.TabIndex = 7
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
         'frmInterestSchemeList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -148,7 +150,6 @@ Partial Class frmInterestSchemeList
     End Sub
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents lvSchemeList As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
@@ -157,4 +158,5 @@ Partial Class frmInterestSchemeList
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents lblSchemeID As System.Windows.Forms.Label
+    Friend WithEvents txtSearch As Pawnshop.watermark
 End Class
