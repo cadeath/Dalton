@@ -23,6 +23,25 @@ Public Class frmAdminPanel
         LoadScheme()
     End Sub
 
+    Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
+        SelectedItem = Item
+        txtClassification.Text = Item.ClassName
+        txtCategory.Text = Item.Category
+        txtDescription.Text = Item.Description
+        txtPrintLayout.Text = Item.PrintLayout
+        cbotxtSchemename.Text = GetSchemeByID(Item.InterestScheme.SchemeID)
+
+        If Item.isRenewable = "True" Then
+            rdbYes.Checked = True
+            rdbNo.Checked = False
+        Else
+            rdbYes.Checked = False
+            rdbNo.Checked = True
+        End If
+        LoadSpec(Item.ID)
+        btnUpdate.Enabled = True
+    End Sub
+
     Private Sub LoadScheme()
         Dim mySql As String = "SELECT * FROM TBLINTSCHEMES"
         Dim ds As DataSet = LoadSQL(mySql)
@@ -181,7 +200,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                 .isRenewable = 0
             End If
             .PrintLayout = txtPrintLayout.Text
-            '  .SchemeName = cboSchemeName.Text
+            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -222,36 +241,16 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     End Sub
 
     Private Sub btnSearch_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        'Dim secured_str As String = txtSearch.Text
-        'secured_str = DreadKnight(secured_str)
-
-        'frmItemList.Show()
-
-        'frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
-        'frmItemList.btnSearch.PerformClick()
-
-        'btnUpdate.Text = "&Update".ToString
-        'btnUpdate.Enabled = True
-        'txtSearch.Clear()
-        'dgSpecs.Rows.Clear()
-        'clearfields()
-        'LoadScheme()
-        Dim secured_str As String = txtClassification.Text
+        Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
         frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_SpecsValue)
         frmItemList.ShowDialog()
     End Sub
 
     '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
-    Private Sub searchbutton()
-        If txtSearch.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
-    End Sub
-
     Private Sub reaDOnlyTrue()
         txtCategory.ReadOnly = True
-        ' txtClassifiction.ReadOnly = True
+        txtClassification.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
         rdbNo.Enabled = False
@@ -280,6 +279,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Dim ds As DataSet = LoadSQL(mySql)
         Dim dr As DataRow
 
+        dgSpecs.Rows.Clear()
         For Each dr In ds.Tables(0).Rows
             AddItemSpecs(dr)
         Next
@@ -392,7 +392,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     End Sub
 
     Private Sub Modcash()
-
        
         fillData = "tblCash"
         mySql = "SELECT * FROM " & fillData
@@ -457,6 +456,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Next
 
     End Sub
+
     Private Sub ModClass()
         fillData = "tblClass"
         mySql = "SELECT CLASSID,TYPE,CATEGORY,RENEWABLE FROM " & fillData
@@ -550,6 +550,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     End Sub
 
 #End Region
+
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
@@ -650,23 +651,5 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim SelectedThings As String = dgSpecs.SelectedCells.ToString
         MsgBox(SelectedThings)
-    End Sub
-
-    Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
-        SelectedItem = Item
-        txtClassification.Text = Item.ClassName
-        txtCategory.Text = Item.Category
-        txtDescription.Text = Item.Description
-        txtPrintLayout.Text = Item.PrintLayout
-        cbotxtSchemename.Text = GetSchemeByID(Item.InterestScheme.SchemeID)
-
-        If Item.isRenewable = "True" Then
-            rdbYes.Checked = True
-            rdbNo.Checked = False
-        Else
-            rdbYes.Checked = False
-            rdbNo.Checked = True
-        End If
-        LoadSpec(Item.ID)
     End Sub
 End Class

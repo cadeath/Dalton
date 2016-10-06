@@ -61,14 +61,18 @@
     End Sub
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If txtSearch.Text = "" Then Exit Sub
-
-        btnSearch.PerformClick()
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        Else
+            LoadActive_ItemClasses()
+        End If
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
         Dim mySql As String = "SELECT * FROM TBLITEM WHERE "
-        mySql &= String.Format("(UPPER (ITEMCLASS) LIKE UPPER('%{0}%') OR UPPER (ITEMCATEGORY) LIKE UPPER('%{0}%')) AND ONHOLD = 0 ", txtSearch.Text)
+        mySql &= String.Format("(UPPER (ITEMCLASS) LIKE UPPER('%{0}%') OR UPPER (ITEMCATEGORY) LIKE UPPER('%{0}%')) AND ONHOLD = 0 ", secured_str)
         mySql &= "ORDER BY ITEMID ASC"
 
         LoadActive_ItemClasses(mySql)
@@ -110,11 +114,6 @@
         End If
     End Sub
 
-    Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-        LoadActiveItem()
-        txtSearch.Text = ""
-    End Sub
-
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
@@ -129,5 +128,10 @@
         If isEnter(e) Then
             btnSearch.PerformClick()
         End If
+    End Sub
+
+    Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+        txtSearch.Clear()
+        'lvItem.Items.Clear()
     End Sub
 End Class

@@ -12,6 +12,7 @@
 
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpPawnID As String = dr.Item("PawnID")
+            If tmpPawnID >= 1568 Then MsgBox(tmpPawnID)
             Dim tmpItemType As String = dr.Item("ItemType")
             Dim tmpIntcheckSum As String
             If Not IsDBNull(dr.Item("int_checksum")) Then tmpIntcheckSum = dr.Item("int_checksum")
@@ -81,7 +82,7 @@
                 FinalSchemeID = 5
 
             Else
-                FinalSchemeID = 0
+                FinalSchemeID = 99
             End If
             ds2.Tables(filldata2).Rows(0).Item("Scheme_ID") = FinalSchemeID
             database.SaveEntry(ds2, False)

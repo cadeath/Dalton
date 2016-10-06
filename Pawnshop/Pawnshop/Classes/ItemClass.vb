@@ -157,22 +157,16 @@
             MsgBox("Failed to load Item", MsgBoxStyle.Critical)
             Exit Sub
         End If
-
         _interestScheme = New InterestScheme
-
         With ds.Tables(0).Rows(0)
             _itemID = .Item("ItemID")
             _itemClassName = .Item("ItemClass")
             _category = .Item("ItemCategory")
-
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
-
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
-
             _Count = .Item("Renewal_Cnt")
-
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
 
@@ -196,7 +190,6 @@
         Next
     End Sub
 
- 
     Public Sub Save_ItemClass()
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClassName)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
@@ -236,31 +229,22 @@
 
     Public Sub LoadByRow(ByVal dr As DataRow)
         Dim mySql As String, ds As New DataSet
-
         With dr
             _itemID = .Item("ItemID")
             _itemClassName = .Item("ItemClass")
             _category = .Item("ItemCategory")
-
             If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
             _category = .Item("itemcategory")
             _isRenew = .Item("isrenew")
-            '_onHold = .Item()
             _printLayout = .Item("print_layout")
-            '_schemeID = .Item("Scheme_ID")
-
             _isRenew = If(.Item("isRenew") = 1, True, False)
             _onHold = If(.Item("onHold") = 1, True, False)
             _printLayout = .Item("Print_Layout")
-
             _Count = .Item("Renewal_Cnt")
-
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
-
             _interestScheme.LoadScheme(.Item("Scheme_ID"))
         End With
-
         ' Load Item Specification
         mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
         ds.Clear()
@@ -287,9 +271,8 @@
             Exit Sub
         End If
 
-
         With ds.Tables(MainTable).Rows(0)
-            .Item("ItemClass") = _itemClassName
+            '.Item("ItemClass") = _itemClassName
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
             .Item("isRenew") = If(_isRenew, 1, 0)
