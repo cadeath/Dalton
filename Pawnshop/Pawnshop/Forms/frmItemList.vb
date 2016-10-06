@@ -55,7 +55,6 @@
     End Sub
 
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-        txtSearch.Clear()
         fromOtherForm = True
         txtSearch.Text = src
         frmOrig = frmOrigin

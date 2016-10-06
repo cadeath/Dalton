@@ -37,6 +37,30 @@ Public Class frmAdminPanel
         btnUpdate.Enabled = True
     End Sub
 
+    Friend Sub LoadSpec(ByVal ID As Integer)
+        Dim da As New OdbcDataAdapter
+        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
+        Console.WriteLine("SQL: " & mySql)
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim dr As DataRow
+
+        dgSpecs.Rows.Clear()
+        For Each dr In ds.Tables(0).Rows
+            AddItemSpecs(dr)
+        Next
+        reaDOnlyTrue()
+        For a As Integer = 0 To dgSpecs.Rows.Count - 1
+            dgSpecs.Rows(a).ReadOnly = True
+        Next
+        btnSave.Enabled = False
+    End Sub
+
+    Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
+        Dim tmpItem As New ItemSpecs
+        tmpItem.LoadItemSpecs_row(ItemSpecs)
+        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
+    End Sub
+
     Private Sub LoadScheme()
         Dim mySql As String = "SELECT * FROM TBLINTSCHEMES"
         Dim ds As DataSet = LoadSQL(mySql)
@@ -239,7 +263,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
         frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_SpecsValue)
-        frmItemList.ShowDialog()
+        frmItemList.Show()
     End Sub
 
     '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
@@ -265,30 +289,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = False
         Next
-    End Sub
-
-    Friend Sub LoadSpec(ByVal ID As Integer)
-        Dim da As New OdbcDataAdapter
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
-        Console.WriteLine("SQL: " & mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim dr As DataRow
-
-        dgSpecs.Rows.Clear()
-        For Each dr In ds.Tables(0).Rows
-            AddItemSpecs(dr)
-        Next
-            reaDOnlyTrue()
-        For a As Integer = 0 To dgSpecs.Rows.Count - 1
-            dgSpecs.Rows(a).ReadOnly = True
-        Next
-            btnSave.Enabled = False
-    End Sub
-
-    Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
-        Dim tmpItem As New ItemSpecs
-        tmpItem.LoadItemSpecs_row(ItemSpecs)
-        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
