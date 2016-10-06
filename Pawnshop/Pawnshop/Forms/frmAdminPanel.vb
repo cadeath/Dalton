@@ -647,9 +647,4 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     Private Sub btnBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
     End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim SelectedThings As String = dgSpecs.SelectedCells.ToString
-        MsgBox(SelectedThings)
-    End Sub
 End Class

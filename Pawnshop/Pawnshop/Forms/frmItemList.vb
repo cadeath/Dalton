@@ -64,7 +64,7 @@
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
         Else
-            LoadActive_ItemClasses()
+            Exit Sub
         End If
     End Sub
 
@@ -128,10 +128,5 @@
         If isEnter(e) Then
             btnSearch.PerformClick()
         End If
-    End Sub
-
-    Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-        txtSearch.Clear()
-        'lvItem.Items.Clear()
     End Sub
 End Class
