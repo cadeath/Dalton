@@ -12,7 +12,6 @@
 
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpPawnID As String = dr.Item("PawnID")
-            If tmpPawnID >= 1568 Then MsgBox(tmpPawnID)
             Dim tmpItemType As String = dr.Item("ItemType")
             Dim tmpIntcheckSum As String
             If Not IsDBNull(dr.Item("int_checksum")) Then tmpIntcheckSum = dr.Item("int_checksum")
@@ -24,61 +23,61 @@
             Dim FinalSchemeID As Integer = 0
 
             'With Early Redeem
-            If tmpSchemeID = "0.030" And tmpIntcheckSum = "2UeDR8f2bFX1c+rsLG8v7g==" Then
+            If tmpSchemeID = "0.03" And tmpIntcheckSum = "2UeDR8f2bFX1c+rsLG8v7g==" Then
                 FinalSchemeID = 6
 
-            ElseIf tmpSchemeID = "0.040" And tmpIntcheckSum = "2UeDR8f2bFX1c+rsLG8v7g==" Then
+            ElseIf tmpSchemeID = "0.04" And tmpIntcheckSum = "2UeDR8f2bFX1c+rsLG8v7g==" Then
                 FinalSchemeID = 7
 
-            ElseIf tmpSchemeID = "0.050" And tmpIntcheckSum = "2UeDR8f2bFX1c+rsLG8v7g==" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "2UeDR8f2bFX1c+rsLG8v7g==" Then
                 FinalSchemeID = 8
 
-            ElseIf tmpSchemeID = "0.030" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw==" Then
+            ElseIf tmpSchemeID = "0.03" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw==" Then
                 FinalSchemeID = 6
 
-            ElseIf tmpSchemeID = "0.050" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw" Then
                 FinalSchemeID = 8
 
-            ElseIf tmpSchemeID = "0.060" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw" Then
+            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw" Then
                 FinalSchemeID = 9
 
-            ElseIf tmpSchemeID = "0.050" And tmpIntcheckSum = "w4p+Hj+9pc/U1EYpf8ffA==" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "w4p+Hj+9pc/U1EYpf8ffA==" Then
                 FinalSchemeID = 8
 
-            ElseIf tmpSchemeID = "0.060" And tmpIntcheckSum = "w4p+Hj+9pc/U1EYpf8ffA==" Then
+            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "w4p+Hj+9pc/U1EYpf8ffA==" Then
                 FinalSchemeID = 9
                 'Without Early Redeem
-            ElseIf tmpSchemeID = "0.050" And tmpIntcheckSum = "6zixr/PwMkDjdRTSktCeJA==" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "6zixr/PwMkDjdRTSktCeJA==" Then
                 FinalSchemeID = 3
 
-            ElseIf tmpSchemeID = "0.060" And tmpIntcheckSum = "6zixr/PwMkDjdRTSktCeJA==" Then
+            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "6zixr/PwMkDjdRTSktCeJA==" Then
                 FinalSchemeID = 4
 
-            ElseIf tmpSchemeID = "0.070" And tmpIntcheckSum = "6zixr/PwMkDjdRTSktCeJA==" Then
+            ElseIf tmpSchemeID = "0.07" And tmpIntcheckSum = "6zixr/PwMkDjdRTSktCeJA==" Then
                 FinalSchemeID = 5
 
-            ElseIf tmpSchemeID = "0.040" And tmpIntcheckSum = "H8o+NbYmV80tU9Zsk+3Vag==" Then
+            ElseIf tmpSchemeID = "0.04" And tmpIntcheckSum = "H8o+NbYmV80tU9Zsk+3Vag==" Then
                 FinalSchemeID = 2
 
-            ElseIf tmpSchemeID = "0.050" And tmpIntcheckSum = "H8o+NbYmV80tU9Zsk+3Vag==" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "H8o+NbYmV80tU9Zsk+3Vag==" Then
                 FinalSchemeID = 3
 
-            ElseIf tmpSchemeID = "0.060" And tmpIntcheckSum = "H8o+NbYmV80tU9Zsk+3Vag==" Then
+            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "H8o+NbYmV80tU9Zsk+3Vag==" Then
                 FinalSchemeID = 4
 
-            ElseIf tmpSchemeID = "0.070" And tmpIntcheckSum = "H8o+NbYmV80tU9Zsk+3Vag==" Then
+            ElseIf tmpSchemeID = "0.07" And tmpIntcheckSum = "H8o+NbYmV80tU9Zsk+3Vag==" Then
                 FinalSchemeID = 5
 
-            ElseIf tmpSchemeID = "0.030" And tmpIntcheckSum = "THnOlQUa3C8IMnha27YfsQ==" Then
+            ElseIf tmpSchemeID = "0.03" And tmpIntcheckSum = "THnOlQUa3C8IMnha27YfsQ==" Then
                 FinalSchemeID = 1
 
-            ElseIf tmpSchemeID = "0.050" And tmpIntcheckSum = "THnOlQUa3C8IMnha27YfsQ==" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "THnOlQUa3C8IMnha27YfsQ==" Then
                 FinalSchemeID = 3
 
-            ElseIf tmpSchemeID = "0.060" And tmpIntcheckSum = "THnOlQUa3C8IMnha27YfsQ==" Then
+            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "THnOlQUa3C8IMnha27YfsQ==" Then
                 FinalSchemeID = 4
 
-            ElseIf tmpSchemeID = "0.070" And tmpIntcheckSum = "THnOlQUa3C8IMnha27YfsQ==" Then
+            ElseIf tmpSchemeID = "0.07" And tmpIntcheckSum = "THnOlQUa3C8IMnha27YfsQ==" Then
                 FinalSchemeID = 5
 
             Else
@@ -92,13 +91,15 @@
 
     Public Function GetInt(ByVal ItemType As String, ByVal CheckSum As String)
 
-        Dim mySql As String = "Select * from tblint_history where checksum = '" & CheckSum & "' and itemtype = '" & ItemType & "' and dayfrom = '8'"
+        Dim mySql As String = "Select * from tblint_history where checksum = '" & CheckSum & "' and itemtype = '" & ItemType & "' and dayfrom = '34'"
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then
             Return 0
         End If
-        Return ds.Tables(0).Rows(0).Item("Interest")
+        Dim tmpInt As String = ds.Tables(0).Rows(0).Item("Interest")
+        tmpInt = tmpInt / 2
+        Return tmpInt
 
     End Function
 End Class
