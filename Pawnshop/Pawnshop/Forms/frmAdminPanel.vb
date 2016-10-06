@@ -22,6 +22,8 @@ Public Class frmAdminPanel
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
         LoadScheme()
+        lblDateStatus.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+        'String.Format("{0} ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
     End Sub
 
     Private Sub LoadScheme()
@@ -125,7 +127,9 @@ Public Class frmAdminPanel
 
     Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
         Dim isEmpty As Boolean = True
-        For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows Where (From cell As DataGridViewCell In row1.Cells Where Not String.IsNullOrEmpty(cell.Value)).Any(Function(cell) Not String.IsNullOrEmpty(Trim(cell.Value.ToString())))
+        For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows _
+        Where (From cell As DataGridViewCell In row1.Cells Where Not String.IsNullOrEmpty(cell.Value)).Any(Function(cell) _
+        Not String.IsNullOrEmpty(Trim(cell.Value.ToString())))
             isEmpty = False
         Next
         Return isEmpty
@@ -274,7 +278,7 @@ Public Class frmAdminPanel
         frmItemList.Show()
 
         frmItemList.txtSearch.Text = Me.txtSearch.Text.ToString
-        '  frmItemList.btnSearch.PerformClick()
+        frmItemList.btnSearch.PerformClick()
 
         btnUpdate.Text = "&Update".ToString
         btnUpdate.Enabled = True
@@ -588,16 +592,6 @@ Public Class frmAdminPanel
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
         Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        ''dt.Columns.Add("NewColumn")
-        ''dt.Columns.Add("ReferenceNumber")
-
-        'For Each row As DataRow In dt.Rows
-        '    'need to set value to NewColumn column
-        '    ' or set it to some other value
-        '    'row("ReferenceNumber") = txtReferenceNumber.Text
-        '    row("NewColumn") = "HI"
-        'Next
 
         ds = New DataSet
         ds.Tables.Add(dt)

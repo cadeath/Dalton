@@ -66,6 +66,8 @@ Partial Class frmAdminPanel
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
+        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.lblDateStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -73,6 +75,7 @@ Partial Class frmAdminPanel
         Me.grpSearch.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.lblModname.SuspendLayout()
+        Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAddItem
@@ -102,6 +105,7 @@ Partial Class frmAdminPanel
         '
         'txtPrintLayout
         '
+        Me.txtPrintLayout.BackColor = System.Drawing.Color.White
         Me.txtPrintLayout.Location = New System.Drawing.Point(104, 229)
         Me.txtPrintLayout.Multiline = True
         Me.txtPrintLayout.Name = "txtPrintLayout"
@@ -112,6 +116,7 @@ Partial Class frmAdminPanel
         '
         'txtDescription
         '
+        Me.txtDescription.BackColor = System.Drawing.Color.White
         Me.txtDescription.Location = New System.Drawing.Point(104, 106)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
@@ -122,6 +127,7 @@ Partial Class frmAdminPanel
         '
         'txtCategory
         '
+        Me.txtCategory.BackColor = System.Drawing.Color.White
         Me.txtCategory.Location = New System.Drawing.Point(104, 66)
         Me.txtCategory.Name = "txtCategory"
         Me.txtCategory.Size = New System.Drawing.Size(250, 22)
@@ -131,6 +137,7 @@ Partial Class frmAdminPanel
         '
         'txtClassification
         '
+        Me.txtClassification.BackColor = System.Drawing.Color.White
         Me.txtClassification.Location = New System.Drawing.Point(104, 27)
         Me.txtClassification.Name = "txtClassification"
         Me.txtClassification.Size = New System.Drawing.Size(250, 22)
@@ -357,6 +364,7 @@ Partial Class frmAdminPanel
         '
         'txtSearch
         '
+        Me.txtSearch.BackColor = System.Drawing.Color.White
         Me.txtSearch.Location = New System.Drawing.Point(77, 21)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(965, 22)
@@ -442,9 +450,9 @@ Partial Class frmAdminPanel
         '
         Me.lvModule.FullRowSelect = True
         Me.lvModule.GridLines = True
-        Me.lvModule.Location = New System.Drawing.Point(10, 82)
+        Me.lvModule.Location = New System.Drawing.Point(10, 81)
         Me.lvModule.Name = "lvModule"
-        Me.lvModule.Size = New System.Drawing.Size(1118, 303)
+        Me.lvModule.Size = New System.Drawing.Size(1118, 304)
         Me.lvModule.TabIndex = 6
         Me.lvModule.UseCompatibleStateImageBehavior = False
         Me.lvModule.View = System.Windows.Forms.View.Details
@@ -505,12 +513,29 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
+        'StatusStrip
+        '
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblDateStatus})
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 479)
+        Me.StatusStrip.Name = "StatusStrip"
+        Me.StatusStrip.Size = New System.Drawing.Size(1166, 22)
+        Me.StatusStrip.TabIndex = 13
+        Me.StatusStrip.Text = "StatusStrip1"
+        '
+        'lblDateStatus
+        '
+        Me.lblDateStatus.BackColor = System.Drawing.Color.Gray
+        Me.lblDateStatus.Name = "lblDateStatus"
+        Me.lblDateStatus.Size = New System.Drawing.Size(31, 17)
+        Me.lblDateStatus.Text = "Date"
+        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1166, 487)
+        Me.ClientSize = New System.Drawing.Size(1166, 501)
+        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "frmAdminPanel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -525,7 +550,10 @@ Partial Class frmAdminPanel
         Me.TabPage2.ResumeLayout(False)
         Me.lblModname.ResumeLayout(False)
         Me.lblModname.PerformLayout()
+        Me.StatusStrip.ResumeLayout(False)
+        Me.StatusStrip.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents grpAddItem As System.Windows.Forms.GroupBox
@@ -582,4 +610,6 @@ Partial Class frmAdminPanel
     Friend WithEvents txtSearch As Pawnshop.watermark
     Friend WithEvents chkSelectAll As System.Windows.Forms.CheckBox
     Friend WithEvents lblCount As System.Windows.Forms.Label
+    Friend WithEvents StatusStrip As System.Windows.Forms.StatusStrip
+    Friend WithEvents lblDateStatus As System.Windows.Forms.ToolStripStatusLabel
 End Class
