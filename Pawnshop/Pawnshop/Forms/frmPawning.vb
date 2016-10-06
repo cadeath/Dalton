@@ -1,12 +1,9 @@
 ﻿Public Class frmPawning
-    'Version 1.2
-    ' - Legend Added
-    'Version 1.1
-    ' - Don't display item not equal or less than the current date
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
+
     ''' <summary>
     '''This case function allow you use short key.
     ''' </summary>
@@ -28,6 +25,7 @@
                 btnRedeem.PerformClick()
         End Select
     End Sub
+
     ''' <summary>
     ''' load the clearfields and loadActive method.
     ''' </summary>
@@ -36,11 +34,12 @@
     ''' <remarks></remarks>
     Private Sub frmPawning_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
-        LoadActive()
+        LoadActive_v2()
 
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
     End Sub
+
     ''' <summary>
     ''' show the form pawn item and add new loan.
     ''' </summary>
@@ -112,6 +111,34 @@
 
         dbReaderClose()
     End Sub
+
+    Private Sub LoadActive_v2()
+        Dim mySql As String = "SELECT FIRST 100 * FROM PAWN_LIST "
+        mySql &= String.Format("WHERE LOANDATE <= '{0}' ", CurrentDate.ToShortDateString)
+        mySql &= "AND (STATUS = 'L' OR STATUS = 'R') "
+        mySql &= "ORDER BY PAWNTICKET ASC"
+
+        lvPawners.Items.Clear()
+        dbReaderOpen()
+
+        Dim PawnReader = LoadSQL_byDataReader(mySql)
+        While PawnReader.Read
+
+            Dim lv As ListViewItem = lvPawners.Items.Add(DisplayPawnTicket(PawnReader("PAWNTICKET")))
+            lv.SubItems.Add(PawnReader("ITEMCLASS"))
+            lv.SubItems.Add(PawnReader("DESCRIPTION"))
+            lv.SubItems.Add(PawnReader("CLIENT"))
+            lv.SubItems.Add(PawnReader("LOANDATE"))
+            lv.SubItems.Add(PawnReader("MATUDATE"))
+            lv.SubItems.Add(PawnReader("EXPIRYDATE"))
+            lv.SubItems.Add(PawnReader("AUCTIONDATE"))
+            lv.SubItems.Add(PawnReader("PRINCIPAL"))
+
+        End While
+
+        dbReaderClose()
+    End Sub
+
     ''' <summary>
     ''' This method will allow you to add new load.
     ''' </summary>
@@ -140,6 +167,7 @@
             Case "V" : lv.BackColor = Color.Gray
         End Select
     End Sub
+
     ''' <summary>
     ''' This method will clear the txtsearch and listview items
     ''' </summary>
@@ -148,6 +176,7 @@
         txtSearch.Text = ""
         lvPawners.Items.Clear()
     End Sub
+
     ''' <summary>
     ''' search the client who already has transaction.
     ''' </summary>
@@ -161,6 +190,7 @@
             PawningSearch()
         End If
     End Sub
+
     Private Sub PawningSearch()
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
@@ -266,6 +296,7 @@
         End If
 
     End Sub
+
     ''' <summary>
     ''' to perform enter without clicking the search button.
     ''' </summary>
@@ -280,6 +311,7 @@
             DigitOnly(e)
         End If
     End Sub
+
     ''' <summary>
     ''' to view the information of the client.
     ''' </summary>
@@ -295,6 +327,7 @@
         frmPawnItem.Show()
         frmPawnItem.LoadPawnTicket(tmpTicket, "D")
     End Sub
+
     ''' <summary>
     ''' double click the disire client in the listview to view thier information.
     ''' </summary>
@@ -304,6 +337,7 @@
     Private Sub lvPawners_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPawners.DoubleClick
         btnView.PerformClick()
     End Sub
+
     ''' <summary>
     ''' perform enter in the desire client in the listview to view thier information.
     ''' </summary>
@@ -315,6 +349,7 @@
             btnView.PerformClick()
         End If
     End Sub
+
     ''' <summary>
     ''' click button to renew expiration date of transaction.
     ''' </summary>
@@ -335,6 +370,7 @@
             End If
         End If
     End Sub
+
     ''' <summary>
     ''' click button to redeem the item of the client
     ''' </summary>
@@ -354,6 +390,7 @@
             End If
         End If
     End Sub
+
     ''' <summary>
     ''' checkbox to load the renew client in listview 
     ''' </summary>
@@ -363,6 +400,7 @@
     Private Sub chkRenew_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRenew.CheckedChanged
         LoadActive()
     End Sub
+
     ''' <summary>
     ''' checkbox to load the redeem client in listview
     ''' </summary>
@@ -372,6 +410,7 @@
     Private Sub chkRedeem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkRedeem.CheckedChanged
         LoadActive()
     End Sub
+
     ''' <summary>
     ''' checkbox to load the segregated client in listview
     ''' </summary>
@@ -382,12 +421,16 @@
         LoadActive()
     End Sub
 
+    Private Function DisplayPawnTicket(ByVal pt As Integer) As String
+        Return pt.ToString("0000000")
+    End Function
+
     Private Sub rbPawnTicket_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPawnTicket.Click, _
         rbPawner.Click, rbDescription.Click, rbAll.Click
         txtSearch.Clear()
     End Sub
 
-    Private Sub lvPawners_MouseClick(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
+    Private Sub lvPawners_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
         Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
         Dim tpmstatus As New PawnTicket
         Dim tmpTicket As New PawnTicket
