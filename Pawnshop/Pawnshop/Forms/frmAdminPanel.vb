@@ -267,11 +267,12 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     End Sub
 
     '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
-    Private Sub reaDOnlyTrue()
+    Private Sub ReadOnlyTrue()
         txtCategory.ReadOnly = True
         txtClassification.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
+        cbotxtSchemename.Enabled = False
         rdbNo.Enabled = False
         rdbYes.Enabled = False
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
@@ -279,11 +280,12 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Next
     End Sub
 
-    Friend Sub reaDOnlyFalse()
+    Friend Sub ReadOnlyFalse()
         txtCategory.ReadOnly = False
         ' txtClassifiction.ReadOnly = False
         txtDescription.ReadOnly = False
         txtPrintLayout.ReadOnly = False
+        cbotxtSchemename.Enabled = True
         rdbNo.Enabled = True
         rdbYes.Enabled = True
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
