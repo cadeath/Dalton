@@ -6,15 +6,10 @@ Public Class frmAdminPanel
     Dim ds As New DataSet
 
     Private Scheme As Hashtable
-    Friend SelectedItem As ItemClass
-    Friend SelectedItemSpecs As ItemSpecs
+    Private SelectedItem As ItemClass
 
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
-
-    Private ItemList As ItemClass
-
-    Dim isnew As Boolean = False
 
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
@@ -646,5 +641,9 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
     Private Sub btnBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        frmItemList.Show()
     End Sub
 End Class

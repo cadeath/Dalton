@@ -55,16 +55,16 @@
     End Sub
 
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+        txtSearch.Clear()
         fromOtherForm = True
         txtSearch.Text = src
         frmOrig = frmOrigin
     End Sub
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
-        Else
-            Exit Sub
         End If
     End Sub
 
@@ -129,4 +129,5 @@
             btnSearch.PerformClick()
         End If
     End Sub
+
 End Class
