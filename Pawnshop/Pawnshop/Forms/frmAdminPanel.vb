@@ -53,7 +53,7 @@ Public Class frmAdminPanel
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
-        'cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
+        cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
 
 
         If it.isRenewable = "True" Then
@@ -78,7 +78,7 @@ Public Class frmAdminPanel
 
 
     Friend Sub LoadItemall(ByVal it As ItemClass)
-        'txtClassification.Text = String.Format(it.ClassName)
+        txtClassification.Text = String.Format(it.ClassName)
         txtCategory.Text = String.Format(it.Category)
         txtDescription.Text = String.Format(it.Description)
     End Sub
@@ -234,7 +234,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
             txtClassification.Enabled = False
-            LoadScheme()
+            'LoadScheme()
             Exit Sub
         End If
 

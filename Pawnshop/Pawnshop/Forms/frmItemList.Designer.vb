@@ -32,12 +32,11 @@ Partial Class frmItemList
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtSearch = New Pawnshop.watermark()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        'Me.lblItemID = New System.Windows.Forms.Label()
-        'Me.btnView = New System.Windows.Forms.Button()
-        Me.txtSearch = New Pawnshop.watermark()
+        Me.btnView = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -116,6 +115,15 @@ Partial Class frmItemList
         Me.Label8.TabIndex = 13
         Me.Label8.Text = "Search"
         '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(72, 21)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(728, 22)
+        Me.txtSearch.TabIndex = 0
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -148,42 +156,23 @@ Partial Class frmItemList
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-
-        'lblItemID
+        'btnView
         '
-        'Me.lblItemID.AutoSize = True
-        'Me.lblItemID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        'Me.lblItemID.Location = New System.Drawing.Point(12, 353)
-        'Me.lblItemID.Name = "lblItemID"
-        'Me.lblItemID.Size = New System.Drawing.Size(46, 16)
-        'Me.lblItemID.TabIndex = 12
-        'Me.lblItemID.Text = "ItemID"
-        ''
-        ''btnView
-        ''
-        'Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        'Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        'Me.btnView.Location = New System.Drawing.Point(666, 344)
-        'Me.btnView.Name = "btnView"
-        'Me.btnView.Size = New System.Drawing.Size(75, 31)
-        'Me.btnView.TabIndex = 2
-        'Me.btnView.Text = "&View"
-        'Me.btnView.UseVisualStyleBackColor = True
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(72, 21)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(728, 22)
-        Me.txtSearch.TabIndex = 0
-        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSearch.WatermarkText = "Search . . ."
+        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnView.Location = New System.Drawing.Point(666, 344)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(75, 31)
+        Me.btnView.TabIndex = 5
+        Me.btnView.Text = "&View"
+        Me.btnView.UseVisualStyleBackColor = True
         '
         'frmItemList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(915, 383)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.GroupBox1)
@@ -210,4 +199,5 @@ Partial Class frmItemList
     Friend WithEvents txtSearch As Pawnshop.watermark
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents btnView As System.Windows.Forms.Button
 End Class

@@ -135,6 +135,7 @@ Public Class frmInterestScheme
         If btnUpdate.Text = "&Update".ToString Then
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
+
             txtSchemeName.Enabled = True
             txtDescription.Enabled = True
             Exit Sub

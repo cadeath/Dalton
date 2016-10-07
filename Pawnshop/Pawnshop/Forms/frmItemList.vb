@@ -19,8 +19,6 @@
         Next
     End Sub
     
-
-
     Private Sub AddItem(ByVal dl As ItemClass)
         Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
         lv.SubItems.Add(dl.ClassName)
@@ -49,7 +47,7 @@
     'End Sub
 
     Private Sub ClearField()
-        'txtSearch.Text = ""
+        ' txtSearch.Text = ""
         lvItem.Items.Clear()
     End Sub
 
@@ -70,41 +68,19 @@
         lvItem.Items.Clear()
     End Sub
 
-    '    Private Sub LoadActive_ItemClasses(Optional mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
-    'MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Item")
-    '        For Each dr As DataRow In ds.Tables(0).Rows	
-    '        Dim ds As DataSet = LoadSQL(mySql)
+   Private Sub LoadActive_ItemClasses(Optional mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
+        Dim ds As DataSet = LoadSQL(mySql)
 
+        ItemClasses_ht = New Hashtable
+        lvItem.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim itmClass As New ItemClass
+            itmClass.LoadByRow(dr)
+            AddItem(itmClass)
 
-    ' 	Dim lv As ListViewItem = lvItem.Items.Add(dr("ItemID"))
-    '            lv.SubItems.Add(dr("ItemClass"))
-    '            lv.SubItems.Add(dr("ItemCategory"))
-    '            lv.SubItems.Add(dr("Description"))
-    '        ItemClasses_ht = New Hashtable
-    '        lvItem.Items.Clear()
-    '        For Each dr As DataRow In ds.Tables(0).Rows
-    '            Dim itmClass As New ItemClass
-    '            itmClass.LoadByRow(dr)
-    '            AddItem(itmClass)
+            ItemClasses_ht.Add(itmClass.ID, itmClass)
+        Next
 
-    '	dim lv as listViewItem = lvItem.items.add(dr("ItemID"))
-    '		lv.subItems.Add(dr("ItemClass"))
-    '		lv.subItems.add(dr("ItemCategory"))
-    '		lv.SubItems.Add(dr("Description"))
-    '            lv.SubItems.Add(dr("IsRenew"))
-    '            lv.SubItems.Add(dr("Print_Layout"))
-    '            ItemClasses_ht.Add(itmClass.ID, itmClass)
-    '        Next
-    '	end sub
-
-    Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
-        'If e.KeyCode = Keys.Enter Then
-        '    If Not mOtherForm Then
-        '        btnView.PerformClick()
-        '    Else
-        '        btnSelect.PerformClick()
-        '    End If
-        'End If
     End Sub
 
     'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
@@ -152,22 +128,6 @@
     '    searchItem()
     'End Sub
 
-    'Private Sub btnView_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-    '    Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
-
-    '    selectedItem = New ItemClass
-    '    selectedItem.LoadItem(idx)
-
-    '    'lblItemID.Text = selectedItem.ID
-
-    '    frmAdminPanel.dgSpecs.Rows.Clear()
-
-    '    frmAdminPanel.LoadSpec(idx)
-    '    frmAdminPanel.LoadItemList(selectedItem)
-    '    frmAdminPanel.Show()
-    '    Me.Close()
-    'End Sub
-
     Friend Sub SearchSelect(src As String, frmOrigin As formSwitch.FormName)
         fromOtherForm = True
         txtSearch.Text = src
@@ -180,7 +140,7 @@
         mySql &= String.Format("(UPPER (ITEMCLASS) LIKE UPPER('%{0}%') OR UPPER (ITEMCATEGORY) LIKE UPPER('%{0}%')) AND ONHOLD = 0 ", txtSearch.Text)
         mySql &= "ORDER BY ITEMID ASC"
 
-        ' LoadActive_ItemClasses(mySql)
+        LoadActive_ItemClasses(mySql)
         MsgBox(String.Format("{0} item found.", lvItem.Items.Count), MsgBoxStyle.Information)
     End Sub
 
@@ -189,13 +149,15 @@
     End Sub
 
 
-    'Private Sub lvItem_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
-    '    If Not mOtherForm Then
-    '        btnView.PerformClick()
-    '    Else
-    '        btnSelect.PerformClick()
-    '    End If
-    'End Sub
+    Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Not fromOtherForm Then
+                btnView.PerformClick()
+            Else
+                btnSelect.PerformClick()
+            End If
+        End If
+    End Sub
 
     Private Sub btnSelect_Click(sender As System.Object, e As System.EventArgs) Handles btnSelect.Click
         If lvItem.Items.Count = 0 Then Exit Sub
@@ -222,7 +184,13 @@
     End Sub
 
     Private Sub lvItem_DoubleClick(sender As Object, e As System.EventArgs) Handles lvItem.DoubleClick
-        btnSelect.PerformClick()
+
+        If Not fromOtherForm Then
+            btnView.PerformClick()
+        Else
+            btnSelect.PerformClick()
+        End If
+
     End Sub
 
     Private Sub lvItem_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles lvItem.KeyPress
@@ -242,4 +210,19 @@
 
     End Sub
 
+    Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
+        Dim idx As Integer = CInt(lvItem.FocusedItem.Text)
+
+        selectedItem = New ItemClass
+        selectedItem.LoadItem(idx)
+
+        'lblItemID.Text = selectedItem.ID
+
+        frmAdminPanel.dgSpecs.Rows.Clear()
+
+        frmAdminPanel.LoadSpec(idx)
+        frmAdminPanel.LoadItemList(selectedItem)
+        frmAdminPanel.Show()
+        Me.Close()
+    End Sub
 End Class
