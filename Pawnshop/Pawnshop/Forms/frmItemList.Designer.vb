@@ -35,8 +35,8 @@ Partial Class frmItemList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.lblItemID = New System.Windows.Forms.Label()
-        Me.btnView = New System.Windows.Forms.Button()
+        'Me.lblItemID = New System.Windows.Forms.Label()
+        'Me.btnView = New System.Windows.Forms.Button()
         Me.txtSearch = New Pawnshop.watermark()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -151,24 +151,24 @@ Partial Class frmItemList
 
         'lblItemID
         '
-        Me.lblItemID.AutoSize = True
-        Me.lblItemID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblItemID.Location = New System.Drawing.Point(12, 353)
-        Me.lblItemID.Name = "lblItemID"
-        Me.lblItemID.Size = New System.Drawing.Size(46, 16)
-        Me.lblItemID.TabIndex = 12
-        Me.lblItemID.Text = "ItemID"
-        '
-        'btnView
-        '
-        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnView.Location = New System.Drawing.Point(666, 344)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 31)
-        Me.btnView.TabIndex = 2
-        Me.btnView.Text = "&View"
-        Me.btnView.UseVisualStyleBackColor = True
+        'Me.lblItemID.AutoSize = True
+        'Me.lblItemID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        'Me.lblItemID.Location = New System.Drawing.Point(12, 353)
+        'Me.lblItemID.Name = "lblItemID"
+        'Me.lblItemID.Size = New System.Drawing.Size(46, 16)
+        'Me.lblItemID.TabIndex = 12
+        'Me.lblItemID.Text = "ItemID"
+        ''
+        ''btnView
+        ''
+        'Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        'Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        'Me.btnView.Location = New System.Drawing.Point(666, 344)
+        'Me.btnView.Name = "btnView"
+        'Me.btnView.Size = New System.Drawing.Size(75, 31)
+        'Me.btnView.TabIndex = 2
+        'Me.btnView.Text = "&View"
+        'Me.btnView.UseVisualStyleBackColor = True
         '
         'txtSearch
         '

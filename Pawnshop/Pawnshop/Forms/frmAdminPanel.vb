@@ -53,7 +53,7 @@ Public Class frmAdminPanel
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
-        cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
+        'cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
 
 
         If it.isRenewable = "True" Then

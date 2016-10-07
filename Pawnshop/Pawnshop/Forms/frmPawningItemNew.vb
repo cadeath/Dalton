@@ -150,14 +150,14 @@ Public Class frmPawningItemNew
             ItemClasses_ht.Add(spec.SpecID, spec.SpecName)
         Next
 
-<<<<<<< HEAD
+
         txtClassification.Text = Item.ClassName
-        tmpItem = Item
-=======
+        'tmpItem = Item
+
         dateChange(PawnedItem.ItemClass)
         lvSpec.Focus()
         lvSpec.Items(0).Selected = True
->>>>>>> refs/remotes/origin/13
+
     End Sub
 
     Private Sub AddItem(ByVal cio As DataRow)
