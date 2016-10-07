@@ -747,15 +747,16 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub chkSelectAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
-            If chkSelectAll.Checked = True Then
-                For i = 0 To lvModule.Items.Count - 1
-                    lvModule.Items(i).Checked = True
-                Next
-            Else
-                For i = 0 To lvModule.Items.Count - 1
-                    lvModule.Items(i).Checked = False
-                Next
-            End If
+        If lvModule.Items.Count <= 0 Then Exit Sub
+        If chkSelectAll.Checked = True Then
+            For i = 0 To lvModule.Items.Count - 1
+                lvModule.Items(i).Checked = True
+            Next
+        Else
+            For i = 0 To lvModule.Items.Count - 1
+                lvModule.Items(i).Checked = False
+            Next
+        End If
             lblCount.Text = "count: " & lvModule.CheckedItems.Count
         End Sub
 
