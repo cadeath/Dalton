@@ -24,14 +24,14 @@ Public Class frmAdminPanel
         txtCategory.Text = Item.Category
         txtDescription.Text = Item.Description
         txtPrintLayout.Text = Item.PrintLayout
-        cbotxtSchemename.Text = GetSchemeByID(Item.InterestScheme.SchemeID)
+        cboSchemename.Text = GetSchemeByID(Item.InterestScheme.SchemeID)
 
         If Item.isRenewable = "True" Then
-            rdbYes.Checked = True
-            rdbNo.Checked = False
+            rbYes.Checked = True
+            rbNo.Checked = False
         Else
-            rdbYes.Checked = False
-            rdbNo.Checked = True
+            rbYes.Checked = False
+            rbNo.Checked = True
         End If
         LoadSpec(Item.ID)
         btnUpdate.Enabled = True
@@ -66,16 +66,16 @@ Public Class frmAdminPanel
         Dim ds As DataSet = LoadSQL(mySql)
 
         Scheme = New Hashtable
-        cbotxtSchemename.Items.Clear()
+        cboSchemename.Items.Clear()
         Dim tmpName As String, tmpID As Integer
-       
+
         For Each dr As DataRow In ds.Tables(0).Rows
             With dr
                 tmpID = .Item("schemeID")
                 tmpName = .Item("SCHEMENAME")
             End With
             Scheme.Add(tmpID, tmpName)
-            cbotxtSchemename.Items.Add(tmpName)
+            cboSchemename.Items.Add(tmpName)
         Next
 
     End Sub
@@ -86,10 +86,10 @@ Public Class frmAdminPanel
                 Return el.Value
             End If
         Next
- Return "N/A"
+        Return "N/A"
     End Function
 
-Private Function GetSchemeID(ByVal name As String) As Integer
+    Private Function GetSchemeID(ByVal name As String) As Integer
         For Each el As DictionaryEntry In Scheme
             If el.Value = name Then
                 Return el.Key
@@ -109,7 +109,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         cmbModuleName.Text = ""
         dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
-        cbotxtSchemename.Items.Clear()
+        cboSchemename.Items.Clear()
 
     End Sub
 
@@ -149,7 +149,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
             .Description = txtDescription.Text
             .ClassName = txtClassification.Text
 
-            If rdbYes.Checked Then
+            If rbYes.Checked Then
                 .isRenewable = 1
             Else
                 .isRenewable = 0
@@ -158,7 +158,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
 
-            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
+            .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
 
         End With
 
@@ -213,13 +213,13 @@ Private Function GetSchemeID(ByVal name As String) As Integer
             .updated_at = CurrentDate
             .ID = SelectedItem.ID
 
-            If rdbYes.Checked Then
+            If rbYes.Checked Then
                 .isRenewable = 1
             Else
                 .isRenewable = 0
             End If
             .PrintLayout = txtPrintLayout.Text
-            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
+            .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
         End With
 
         Dim SpecModify As New ItemSpecs
@@ -272,9 +272,9 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         txtClassification.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
-        cbotxtSchemename.Enabled = False
-        rdbNo.Enabled = False
-        rdbYes.Enabled = False
+        cboSchemename.Enabled = False
+        rbNo.Enabled = False
+        rbYes.Enabled = False
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = True
         Next
@@ -285,9 +285,9 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         ' txtClassifiction.ReadOnly = False
         txtDescription.ReadOnly = False
         txtPrintLayout.ReadOnly = False
-        cbotxtSchemename.Enabled = True
-        rdbNo.Enabled = True
-        rdbYes.Enabled = True
+        cboSchemename.Enabled = True
+        rbNo.Enabled = True
+        rbYes.Enabled = True
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = False
         Next
