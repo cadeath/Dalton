@@ -124,10 +124,6 @@
     '    End If
     'End Sub
 
-    'Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-    '    searchItem()
-    'End Sub
-
     Friend Sub SearchSelect(src As String, frmOrigin As formSwitch.FormName)
         fromOtherForm = True
         txtSearch.Text = src
@@ -224,5 +220,27 @@
         frmAdminPanel.LoadItemList(selectedItem)
         frmAdminPanel.Show()
         Me.Close()
+    End Sub
+
+    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If Not fromOtherForm Then ClearField()
+        If fromOtherForm Then
+            btnView.Visible = False
+        Else
+            ClearField()
+            btnSelect.Visible = False
+        End If
+
+        'loadItemClass()
+        LoadActiveItem()
+
+        If Not fromOtherForm Then
+            txtSearch.Focus()
+        End If
+
+        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 End Class
