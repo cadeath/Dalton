@@ -60,18 +60,20 @@
                 tmpID = 3
             ElseIf Int = "0.06" Then
                 tmpID = 4
+            ElseIf Int = "0.07" Then
+                tmpID = 5
             End If
         ElseIf isEarlyRedeem = True Then
             If Int = "0.03" Then
-                tmpID = 5
-            ElseIf Int = "0.04" Then
                 tmpID = 6
-            ElseIf Int = "0.05" Then
+            ElseIf Int = "0.04" Then
                 tmpID = 7
-            ElseIf Int = "0.06" Then
+            ElseIf Int = "0.05" Then
                 tmpID = 8
-            ElseIf Int = "0.07" Then
+            ElseIf Int = "0.06" Then
                 tmpID = 9
+            ElseIf Int = "0.07" Then
+                tmpID = 10
             End If
         Else
             tmpID = 99
