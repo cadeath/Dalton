@@ -12,9 +12,11 @@
 
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim tmpPawnID As String = dr.Item("PawnID")
+            If Val(tmpPawnID) >= 1432 Then MsgBox("ok")
             Dim tmpItemType As String = dr.Item("ItemType")
             Dim tmpIntcheckSum As String
             If Not IsDBNull(dr.Item("int_checksum")) Then tmpIntcheckSum = dr.Item("int_checksum")
+            Console.WriteLine("PawnID is : " & tmpPawnID & " ItemType is : " & tmpItemType & " Intchecksum is : " & tmpIntcheckSum)
             Dim tmpSchemeID As String = GetInt(tmpItemType, tmpIntcheckSum)
 
             Dim mysql2 As String = "Select * from OPI where PawnItemID = '" & tmpPawnID & "'"
@@ -35,16 +37,16 @@
             ElseIf tmpSchemeID = "0.03" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw==" Then
                 FinalSchemeID = 6
 
-            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw==" Then
                 FinalSchemeID = 8
 
-            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw" Then
+            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw==" Then
                 FinalSchemeID = 9
 
-            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "w4p+Hj+9pc/U1EYpf8ffA==" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "Vw4p+Hj+9pc/U1EYpf8ffA==" Then
                 FinalSchemeID = 8
 
-            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "w4p+Hj+9pc/U1EYpf8ffA==" Then
+            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "Vw4p+Hj+9pc/U1EYpf8ffA==" Then
                 FinalSchemeID = 9
                 'Without Early Redeem
             ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "6zixr/PwMkDjdRTSktCeJA==" Then

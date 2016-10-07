@@ -3,16 +3,16 @@
     Private fromOtherForm As Boolean = False
     Private frmOrig As formSwitch.FormName
 
-    Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
-        Dim ds As DataSet
-        ds = LoadSQL(mySql)
-        lvItem.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpItem As New ItemClass
-            tmpItem.LoadByRow(dr)
-            AddItem(tmpItem)
-        Next
-    End Sub
+    'Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
+    '    Dim ds As DataSet
+    '    ds = LoadSQL(mySql)
+    '    lvItem.Items.Clear()
+    '    For Each dr As DataRow In ds.Tables(0).Rows
+    '        Dim tmpItem As New ItemClass
+    '        tmpItem.LoadByRow(dr)
+    '        AddItem(tmpItem)
+    '    Next
+    'End Sub
 
     Private Sub ClearFields()
         txtSearch.Text = ""

@@ -633,7 +633,6 @@ Public Class frmAdminPanel
         SFD.ShowDialog()
 
         MsgBox("Data Exported", MsgBoxStyle.Information)
-
         txtReferenceNumber.Text = ""
         cmbModuleName.SelectedItem = Nothing
 
