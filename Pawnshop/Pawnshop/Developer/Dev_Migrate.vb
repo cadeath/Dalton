@@ -41,10 +41,10 @@
             ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "aWFXwwYbqLmins1KPvmmIw" Then
                 FinalSchemeID = 9
 
-            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "w4p+Hj+9pc/U1EYpf8ffA==" Then
+            ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "Vw4p+Hj+9pc/U1EYpf8ffA==" Then
                 FinalSchemeID = 8
 
-            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "w4p+Hj+9pc/U1EYpf8ffA==" Then
+            ElseIf tmpSchemeID = "0.06" And tmpIntcheckSum = "Vw4p+Hj+9pc/U1EYpf8ffA==" Then
                 FinalSchemeID = 9
                 'Without Early Redeem
             ElseIf tmpSchemeID = "0.05" And tmpIntcheckSum = "6zixr/PwMkDjdRTSktCeJA==" Then
@@ -89,7 +89,7 @@
         MsgBox("Success")
     End Sub
 
-    Public Function GetInt(ByVal ItemType As String, ByVal CheckSum As String)
+    Private Function GetInt(ByVal ItemType As String, ByVal CheckSum As String)
 
         Dim mySql As String = "Select * from tblint_history where checksum = '" & CheckSum & "' and itemtype = '" & ItemType & "' and dayfrom = '34'"
         Dim ds As DataSet = LoadSQL(mySql)
