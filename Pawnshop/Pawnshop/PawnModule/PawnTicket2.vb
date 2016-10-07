@@ -133,13 +133,13 @@
         End Set
     End Property
 
-    Private _clientID As Integer
-    Public Property ClientID() As Integer
+    Private _pawner As New Client
+    Public Property Pawner() As Client
         Get
-            Return _clientID
+            Return _pawner
         End Get
-        Set(ByVal value As Integer)
-            _clientID = value
+        Set(ByVal value As Client)
+            _pawner = value
         End Set
     End Property
 
@@ -291,6 +291,9 @@
         Dim mySql As String
         Dim ds As DataSet
 
+        'Save PawnedItem
+        _pawnItem.Save_PawnItem()
+
         'Save PawnTicket
         mySql = String.Format("SELECT * FROM {0} ROWS 1", MainTable)
         ds = LoadSQL(mySql, MainTable)
@@ -310,7 +313,7 @@
             .Item("APPRAISERID") = _appraiserID
             .Item("ENCODERID") = _encoderID
             .Item("CLAIMERID") = _claimerID
-            .Item("CLIENTID") = _clientID
+            .Item("CLIENTID") = _pawner.ID
             .Item("PAWNITEMID") = _pawnItem.ID
             .Item("ORDATE") = _ORDate
             .Item("ORNUM") = _ORNum
@@ -363,7 +366,7 @@
             _appraiserID = .Item("APPRAISERID")
             _encoderID = .Item("ENCODERID")
             _claimerID = .Item("CLAIMERID")
-            _clientID = .Item("CLIENTID")
+            _pawner.LoadClient(.Item("CLIENTID"))
             _ORDate = .Item("ORDATE")
             _ORNum = .Item("ORNUM")
             _penalty = .Item("PENALTY")

@@ -53,6 +53,8 @@ Public Class frmAdminPanel
         txtCategory.Text = it.Category
         txtDescription.Text = it.Description
 
+        cbotxtSchemename.Text = GetSchemeByID(it.SchemeID)
+
 
         If it.isRenewable = "True" Then
             rdbYes.Checked = True
@@ -74,11 +76,13 @@ Public Class frmAdminPanel
     End Sub
 
 
+
     Friend Sub LoadItemall(ByVal it As ItemClass)
         'txtClassification.Text = String.Format(it.ClassName)
         txtCategory.Text = String.Format(it.Category)
         txtDescription.Text = String.Format(it.Description)
     End Sub
+
 
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
@@ -87,10 +91,12 @@ Public Class frmAdminPanel
             End If
         Next
 
+
         Return "N/A"
+
     End Function
 
-    Private Function GetSchemeID(ByVal name As String) As Integer
+Private Function GetSchemeID(ByVal name As String) As Integer
         For Each el As DictionaryEntry In Scheme
             If el.Value = name Then
                 Return el.Key
@@ -99,6 +105,26 @@ Public Class frmAdminPanel
 
         Return 0
     End Function
+       
+
+    
+
+    'Friend Sub LoadItemall(ByVal it As ItemClass)
+    '    txtClassifiction.Text = String.Format(it.ItemClass)
+    '    txtCategory.Text = String.Format(it.Category)
+    '    txtDescription.Text = String.Format(it.Description)
+
+    '    If it.isRenewable = "1" Then
+    '        rdbYes.Checked = True
+    '    Else
+    '        rdbNo.Checked = True
+    '    End If
+    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
+
+    '    ItemList = it
+
+    'End Sub
+
 
     Friend Sub clearfields()
         txtCategory.Text = ""
@@ -149,11 +175,13 @@ Public Class frmAdminPanel
         Dim ColItemsSpecs As New CollectionItemSpecs
 
         With ItemSave
+
             .ClassName = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
             .InterestScheme = SchemeSID
+
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -163,6 +191,8 @@ Public Class frmAdminPanel
 
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
+
+            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
 
         End With
 
@@ -181,9 +211,10 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
+
+  
             ColItemsSpecs.Add(SpecSave)
         Next
-
 
         ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.Save_ItemClass()
@@ -203,6 +234,7 @@ Public Class frmAdminPanel
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
             txtClassification.Enabled = False
+            LoadScheme()
             Exit Sub
         End If
 
@@ -214,6 +246,7 @@ Public Class frmAdminPanel
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
+
 
         With ItemModify
             .ClassName = txtClassification.Text
@@ -256,6 +289,7 @@ Public Class frmAdminPanel
             SpecModify.ItemID = SelectedItem.ID
 
             SpecModify.UpdateSpecs()
+
         Next
 
         ItemModify.Update()
@@ -285,6 +319,8 @@ Public Class frmAdminPanel
         txtSearch.Clear()
         dgSpecs.Rows.Clear()
         clearfields()
+        LoadScheme()
+
     End Sub
 
     Private Sub searchbutton()
@@ -328,7 +364,9 @@ Public Class frmAdminPanel
             AddItemSpecs(dr)
         Next
 
+
         reaDOnlyTrue()
+
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = True
         Next

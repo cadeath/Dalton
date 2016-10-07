@@ -8,7 +8,9 @@
         ' LAPTOP
         Dim Laptop As New ItemClass
         Dim LaptopSpecs As New CollectionItemSpecs
+
         Laptop.ClassName = "Laptop"
+
         Laptop.Category = "Gadget"
         Laptop.Description = "With the inches of 14 or more, and has NUMERIC KEYPAD."
         Laptop.isRenewable = True
@@ -43,7 +45,9 @@
         Dim CellSpecs As New CollectionItemSpecs
 
         With Cellphone
+
             .ClassName = "Cellphone"
+
             .Category = "Gadget"
             .Description = "Cellular Devices"
             .isRenewable = True
@@ -79,7 +83,9 @@
         Dim BRACELETSPECS As New CollectionItemSpecs
 
         With BRACELET
+
             .ClassName = "Bracelet"
+
             .Category = "Jewelry"
             '.Description = "Cellular Devices"
             .isRenewable = True

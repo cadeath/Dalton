@@ -1,40 +1,14 @@
 ﻿Public Class PawnCompute
 
-#Region "Properties"
     '===================== INPUT ====================='
-
-    Private _pawnTicket As PawnTicket2
-    Public Property PawnTicket() As PawnTicket2
-        Get
-            Return _pawnTicket
-        End Get
-        Set(ByVal value As PawnTicket2)
-            _pawnTicket = value
-        End Set
-    End Property
-
+    Private _principal As Double = 0
     Private _currentDate As Date
-    Public Property CurrentDate() As Date
-        Get
-            Return _currentDate
-        End Get
-        Set(ByVal value As Date)
-            _currentDate = value
-        End Set
-    End Property
-
+    Private _MatuDate As Date
     Private _isNew As Boolean
-    Public Property isNew() As Boolean
-        Get
-            Return _isNew
-        End Get
-        Set(ByVal value As Boolean)
-            _isNew = value
-        End Set
-    End Property
-
+    Private _IntRate As New InterestScheme
     '====================== END ======================'
 
+#Region "Properties"
     '===================== OUTPUT ====================='
 
     Private _netAmount As Double
@@ -122,9 +96,12 @@
 
 #Region "Procedures and Functions"
 
-    Public Sub New(PT As PawnTicket2, currentDate As Date, isNew As Boolean)
-        _pawnTicket = PT
-        _currentDate = currentDate
+    Public Sub New(Principal As Double, IntRate As InterestScheme, CurrentDate As Date, MaturityDate As Date, isNew As Boolean)
+        _principal = Principal
+        _IntRate = IntRate
+        _currentDate = CurrentDate
+        _MatuDate = MaturityDate
+
         _isNew = isNew
 
         Calculate()
@@ -135,10 +112,10 @@
         Dim ItemInterest_percent As Double = 0, ItemPenalty_percent As Double = 0
         Dim Item_Interest As Double = 0, Item_Penalty As Double = 0, Delay_Interest As Double = 0
 
-        Dim Item_Principal As Double = _pawnTicket.Principal
+        Dim Item_Principal As Double = _principal
 
         'Validation
-        Dim difDay = _currentDate.Date - _pawnTicket.MaturityDate.Date
+        Dim difDay = _currentDate.Date - _MatuDate.Date
         earlyDays = difDay.Days + 30
         _daysOver = If(earlyDays - 30 > 0, earlyDays - 30, 0)
 
@@ -177,7 +154,7 @@
 
     Private Function Get_ItemInterest(days As Integer, Optional ret As percentType = 0) As Double
         Dim IntScheme As New InterestScheme
-        IntScheme = _pawnTicket.PawnItem.ItemClass.InterestScheme
+        IntScheme = _IntRate
 
         For Each Int As Scheme_Interest In IntScheme.SchemeDetails
             Select Case days

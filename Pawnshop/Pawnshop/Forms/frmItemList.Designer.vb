@@ -148,6 +148,7 @@ Partial Class frmItemList
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+
         'lblItemID
         '
         Me.lblItemID.AutoSize = True
@@ -183,18 +184,16 @@ Partial Class frmItemList
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(915, 383)
-        Me.Controls.Add(Me.btnView)
-        Me.Controls.Add(Me.lblItemID)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.lvItem)
         Me.Name = "frmItemList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Item List"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lvItem As System.Windows.Forms.ListView
@@ -205,8 +204,6 @@ Partial Class frmItemList
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents lblItemID As System.Windows.Forms.Label
-    Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader

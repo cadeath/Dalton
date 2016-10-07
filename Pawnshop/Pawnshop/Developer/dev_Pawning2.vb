@@ -23,19 +23,19 @@
     Private Sub btnCompute_Click(sender As System.Object, e As System.EventArgs) Handles btnCompute.Click
         If DeclareItem() Then Exit Sub
 
-        Dim newCompute As New PawnCompute(newPawnTicket, current.SelectionRange.Start, If(rbDPJ.Checked, True, False))
-        With newCompute
-            txtDaysOver.Text = .DaysOverDue
+        'Dim newCompute As New PawnCompute(newPawnTicket, current.SelectionRange.Start, If(rbDPJ.Checked, True, False))
+        'With newCompute
+        '    txtDaysOver.Text = .DaysOverDue
 
-            txtNetAmount.Text = .NetAmount.ToString("P #,##0.00")
-            txtAdvInt.Text = .AdvanceInterest.ToString("#,##0.00")
-            txtInt.Text = .Interest.ToString("#,##0.00")
-            txtPenalty.Text = .Penalty.ToString("#,##0.00")
-            txtSC.Text = .ServiceCharge.ToString("#,##0.00")
+        '    txtNetAmount.Text = .NetAmount.ToString("P #,##0.00")
+        '    txtAdvInt.Text = .AdvanceInterest.ToString("#,##0.00")
+        '    txtInt.Text = .Interest.ToString("#,##0.00")
+        '    txtPenalty.Text = .Penalty.ToString("#,##0.00")
+        '    txtSC.Text = .ServiceCharge.ToString("#,##0.00")
 
-            txtRenewDue.Text = .RenewDue.ToString("#,##0.00")
-            txtRedeemDue.Text = .RedeemDue.ToString("#,##0.00")
-        End With
+        '    txtRenewDue.Text = .RenewDue.ToString("#,##0.00")
+        '    txtRedeemDue.Text = .RedeemDue.ToString("#,##0.00")
+        'End With
     End Sub
 
     Private Function DeclareItem() As Boolean

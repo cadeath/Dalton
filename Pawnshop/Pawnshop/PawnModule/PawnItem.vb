@@ -102,9 +102,9 @@
         Dim ds As DataSet
         Dim isNew As Boolean = False
 
-        Dim itemClass As New ItemClass, tmpScheme As InterestScheme
+        Dim tmpScheme As InterestScheme
 
-        _itemClass.LoadItem(_itemID) ' Load ItemClass
+        '_itemClass.LoadItem(_itemID) ' Load ItemClass
         tmpScheme = _itemClass.InterestScheme
 
         ' Saving New PawnItem
@@ -127,7 +127,7 @@
 
         With dr
             If isNew Then
-                .Item("ITEMID") = _itemID
+                .Item("ITEMID") = _itemClass.ID
                 .Item("ITEMCLASS") = _itemClass.ClassName
                 .Item("SCHEME_ID") = tmpScheme.SchemeID
                 .Item("RENEWALCNT") = _renewalCnt

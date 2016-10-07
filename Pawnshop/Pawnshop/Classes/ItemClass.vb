@@ -115,7 +115,7 @@ Public Class ItemClass
         End Set
     End Property
 
-    Private _interestScheme As InterestScheme
+    Private _interestScheme As New InterestScheme
     Public Property InterestScheme() As InterestScheme
         Get
             Return _interestScheme
@@ -150,7 +150,11 @@ Public Class ItemClass
         End If
 
 
+
         _interestScheme = New InterestScheme
+
+
+
         With ds.Tables(0).Rows(0)
             _itemID = .Item("ItemID")
             _itemClassName = .Item("ItemClass")
@@ -166,9 +170,11 @@ Public Class ItemClass
 
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
+
             _interestScheme.LoadScheme(.Item("Scheme_ID"))
         End With
 
+        ' Load Item Specification
         mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
         ds.Clear()
         ds = LoadSQL(mySql, SubTable)
@@ -178,7 +184,7 @@ Public Class ItemClass
             Console.WriteLine(dr.Item("SpecsName"))
             Dim tmpSpecs As New ItemSpecs
             tmpSpecs.LoadItemSpecs_row(dr)
-            'Load Item Specification
+
             _itemSpecs.Add(tmpSpecs)
         Next
     End Sub
@@ -198,12 +204,12 @@ Public Class ItemClass
             .Item("ItemClass") = _itemClassName
             .Item("ItemCategory") = _category
             .Item("Description") = _desc
-            '.Item("int_rate") = 1
             .Item("isRenew") = IIf(_isRenew, 1, 0)
             .Item("onHold") = IIf(_onHold, 1, 0)
             .Item("Print_Layout") = _printLayout
             .Item("Renewal_Cnt") = _Count
             .Item("Created_At") = Now
+
             .Item("Scheme_ID") = _interestScheme.SchemeID
 
         End With
@@ -222,18 +228,42 @@ Public Class ItemClass
     End Sub
 
     Public Sub LoadByRow(ByVal dr As DataRow)
-        With dr
-            _itemID = .Item("itemid")
-            _itemClassName = .Item("itemclass")
-            '_desc = .Item("Description")
-            If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
-            _category = .Item("itemcategory")
-            _isRenew = .Item("isrenew")
-            '_onHold = .Item()
-            _printLayout = .Item("print_layout")
-            '_interestScheme.SchemeID = .Item("Scheme_ID")
+        Dim mySql As String, ds As New DataSet
 
+        With dr
+
+            _itemID = .Item("ItemID")
+            _itemClassName = .Item("ItemClass")
+            _category = .Item("ItemCategory")
+
+            If Not IsDBNull(.Item("Description")) Then _desc = .Item("Description")
+
+            _isRenew = If(.Item("isRenew") = 1, True, False)
+            _onHold = If(.Item("onHold") = 1, True, False)
+            _printLayout = .Item("Print_Layout")
+
+            _Count = .Item("Renewal_Cnt")
+
+            _created = .Item("Created_At")
+            _updated = .Item("Updated_At")
+
+            _interestScheme.LoadScheme(.Item("Scheme_ID"))
         End With
+
+        ' Load Item Specification
+        mySql = String.Format("SELECT * FROM {0} WHERE ItemID = {1} ORDER BY SpecsID", SubTable, _itemID)
+        ds.Clear()
+        ds = LoadSQL(mySql, SubTable)
+
+        _itemSpecs = New CollectionItemSpecs
+        For Each dr In ds.Tables(SubTable).Rows
+            Console.WriteLine(dr.Item("SpecsName"))
+            Dim tmpSpecs As New ItemSpecs
+            tmpSpecs.LoadItemSpecs_row(dr)
+
+            'Load Item Specification
+            _itemSpecs.Add(tmpSpecs)
+        Next
     End Sub
 
     Public Sub Update()

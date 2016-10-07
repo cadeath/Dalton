@@ -1,9 +1,14 @@
 ﻿Public Class frm_PanelYesNo
+    Friend retID As Integer = 0
 
     Private Sub rbYes_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles rbYes.KeyPress, rbNo.KeyPress
         If isEnter(e) Then
             btnSubmit.PerformClick()
         End If
+    End Sub
+
+    Friend Sub DisplaySpecs(str As String)
+        GroupBox8.Text = str
     End Sub
 
     Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
@@ -14,9 +19,7 @@
             tmpResult = "No"
         End If
 
-        With frmPawningItemNew.lvSpec
-            .SelectedItems(0).SubItems(4).Text = tmpResult
-        End With
+        frmPawningItemNew.DisplayValue(tmpResult, retID)
         Me.Close()
     End Sub
 End Class
