@@ -73,7 +73,7 @@
         End Set
     End Property
 
-    Private _pawnItemSpecs As CollectionPawnItemSpecs
+    Private _pawnItemSpecs As New CollectionPawnItemSpecs
     Public Property PawnItemSpecs() As CollectionPawnItemSpecs
         Get
             Return _pawnItemSpecs
@@ -83,7 +83,7 @@
         End Set
     End Property
 
-    Private _itemClass As ItemClass
+    Private _itemClass As New ItemClass
     Public Property ItemClass() As ItemClass
         Get
             Return _itemClass
@@ -177,6 +177,16 @@
             _created_At = .Item("CREATED_AT")
             _update_At = .Item("UPDATED_AT")
         End With
+
+        'Loading PawnItemSpecs
+        mySql = String.Format("SELECT * FROM {0} WHERE PAWNITEMID = {1}", SubTable, id)
+        ds = LoadSQL(mySql)
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpItemSpec As New PawnItemSpec
+            tmpItemSpec.Load_PawnItemSpec_row(dr)
+
+            _pawnItemSpecs.Add(tmpItemSpec)
+        Next
     End Sub
 
     Public Function Get_PawnItemLastID() As Integer
