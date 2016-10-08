@@ -47,7 +47,7 @@ Public Class Dev_Migrate
     End Function
 
     Private Function GetScheme(ByVal Int As String, ByVal checksum As String, ByVal ItemType As String)
-        Dim mySql As String = "Select * from tblint_history where checksum = '" & checksum & "' and Itemtype = '" & ItemType & "'"
+        Dim mySql As String = "Select * from tblint_history where checksum = '" & checksum & "' and Itemtype = '" & ItemType & "' and DayFrom = '1'"
         Dim ds As DataSet = LoadSQL(mySql)
         Dim isEarlyRedeem As Boolean = False
         Dim tmpID As String
