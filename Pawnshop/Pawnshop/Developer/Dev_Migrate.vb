@@ -51,12 +51,10 @@ Public Class Dev_Migrate
         Dim ds As DataSet = LoadSQL(mySql)
         Dim isEarlyRedeem As Boolean = False
         Dim tmpID As String
-        If ds.Tables(0).Rows(0).Item("Remarks") = "Early Redemption" Then
-            isEarlyRedeem = True
-        Else
-            isEarlyRedeem = False
-        End If
+
+        If ds.Tables(0).Rows(0).Item("Remarks") = "Early Redemption" Then isEarlyRedeem = True
         If isEarlyRedeem = False Then
+
             If Int = "0.03" Then
                 tmpID = 1
             ElseIf Int = "0.04" Then
@@ -69,6 +67,7 @@ Public Class Dev_Migrate
                 tmpID = 5
             End If
         ElseIf isEarlyRedeem = True Then
+
             If Int = "0.03" Then
                 tmpID = 6
             ElseIf Int = "0.04" Then
@@ -83,6 +82,7 @@ Public Class Dev_Migrate
         Else
             tmpID = 99
         End If
+
         Return tmpID
     End Function
 
