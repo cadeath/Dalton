@@ -1,11 +1,13 @@
-﻿Public Class Dev_Migrate
+﻿Imports Microsoft.VisualStudio.TestTools.UnitTesting
+
+Public Class Dev_Migrate
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         UpdateScheme()
     End Sub
 
     Private Sub UpdateScheme()
-
+        Try
         Dim mysql As String = "Select * from tblPawn"
         Dim filldata As String = "tblPawn"
         Dim ds As DataSet = LoadSQL(mysql, filldata)
@@ -24,7 +26,10 @@
             ds2.Tables(filldata2).Rows(0).Item("Scheme_ID") = tmpSchemeID
             database.SaveEntry(ds2, False)
         Next
-        MsgBox("Success")
+            MsgBox("Success")
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
     End Sub
 
     Private Function GetInt(ByVal ItemType As String, ByVal CheckSum As String)
