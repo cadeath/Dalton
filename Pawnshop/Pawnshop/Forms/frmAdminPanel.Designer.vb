@@ -472,7 +472,7 @@ Partial Class frmAdminPanel
         Me.cmbModuleName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbModuleName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbModuleName.FormattingEnabled = True
-        Me.cmbModuleName.Items.AddRange(New Object() {"Money Transfer", "Branch", "Cash", "Item Class", "Rate", "Currency"})
+        Me.cmbModuleName.Items.AddRange(New Object() {"Money Transfer", "Branch", "Cash", "Item", "Rate", "Currency"})
         Me.cmbModuleName.Location = New System.Drawing.Point(106, 41)
         Me.cmbModuleName.Name = "cmbModuleName"
         Me.cmbModuleName.Size = New System.Drawing.Size(207, 24)

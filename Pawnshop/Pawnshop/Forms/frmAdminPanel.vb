@@ -393,8 +393,8 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                     ExportModType = ModuleType.Branch
                 Case "Cash"
                     ExportModType = ModuleType.Cash
-                Case "Item Class"
-                    ExportModType = ModuleType.ItemClass
+                Case "Item"
+                    ExportModType = ModuleType.ITEM
                 Case "Rate"
                     ExportModType = ModuleType.Rate
                 Case "Currency"
@@ -412,7 +412,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         MoneyTransfer = 0
         Branch = 1
         Cash = 2
-        ItemClass = 3
+        ITEM = 3
         Rate = 4
         Currency = 5
     End Enum
@@ -427,8 +427,8 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                 ModBranches()
             Case ModuleType.Cash
                 Modcash()
-            Case ModuleType.ItemClass
-                ModClass()
+            Case ModuleType.ITEM
+                ModITEM()
             Case ModuleType.Rate
                 ModRate()
             Case ModuleType.Currency
@@ -533,33 +533,34 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
     End Sub
 
-    Private Sub ModClass()
-        fillData = "tblClass"
-        mySql = "SELECT CLASSID,TYPE,CATEGORY,RENEWABLE FROM " & fillData
-        mySql &= " ORDER BY ClassID ASC"
 
-        ds = LoadSQL(mySql, fillData)
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
+    'Private Sub ModClass()
+    '    fillData = "tblClass"
+    '    mySql = "SELECT CLASSID,TYPE,CATEGORY,RENEWABLE FROM " & fillData
+    '    mySql &= " ORDER BY ClassID ASC"
 
-        Me.lvModule.Columns.Add("CLASSID")
-        Me.lvModule.Columns.Add("Column2", "TYPE")
-        Me.lvModule.Columns.Add("Column3", "CATEGORY")
-        Me.lvModule.Columns.Add("Column4", "RENEWABLE")
+    '    ds = LoadSQL(mySql, fillData)
+    '    lvModule.Columns.Clear()
+    '    lvModule.Items.Clear()
 
-        For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str1 As String = ds.Tables(0).Rows(i)("CLASSID").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("TYPE").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("CATEGORY").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("RENEWABLE").ToString
+    '    Me.lvModule.Columns.Add("CLASSID")
+    '    Me.lvModule.Columns.Add("Column2", "TYPE")
+    '    Me.lvModule.Columns.Add("Column3", "CATEGORY")
+    '    Me.lvModule.Columns.Add("Column4", "RENEWABLE")
 
-            Dim lvi As New ListViewItem
-            lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str2, str3, str4})
-            lvModule.Items.Add(lvi)
-        Next
+    '    For i = 0 To ds.Tables(0).Rows.Count - 1
+    '        Dim str1 As String = ds.Tables(0).Rows(i)("CLASSID").ToString
+    '        Dim str2 As String = ds.Tables(0).Rows(i)("TYPE").ToString
+    '        Dim str3 As String = ds.Tables(0).Rows(i)("CATEGORY").ToString
+    '        Dim str4 As String = ds.Tables(0).Rows(i)("RENEWABLE").ToString
 
-    End Sub
+    '        Dim lvi As New ListViewItem
+    '        lvi.Text = str1
+    '        lvi.SubItems.AddRange(New String() {str2, str3, str4})
+    '        lvModule.Items.Add(lvi)
+    '    Next
+
+    'End Sub
 
     Private Sub ModRate()
         fillData = "TBLINT"
@@ -625,6 +626,44 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Next
     End Sub
 
+
+
+    Private Sub ModITEM()
+        fillData = "tblitem"
+        mySql = "SELECT * FROM " & fillData
+        'mySql &= " ORDER BY ClassID ASC"
+
+        ds = LoadSQL(mySql, fillData)
+        lvModule.Columns.Clear()
+        lvModule.Items.Clear()
+
+        Me.lvModule.Columns.Add("ITEMID")
+        Me.lvModule.Columns.Add("Column2", "ITEMCLASS")
+        Me.lvModule.Columns.Add("Column3", "ITEMCATEGORY")
+        Me.lvModule.Columns.Add("Column4", "DESCRIPTION")
+        Me.lvModule.Columns.Add("Column5", "ISRENEW")
+        Me.lvModule.Columns.Add("Column6", "PRINT_LAYOUT")
+        Me.lvModule.Columns.Add("Column7", "CREATED_AT")
+        Me.lvModule.Columns.Add("Column8", "UPDATED_AT")
+
+        For i = 0 To ds.Tables(0).Rows.Count - 1
+            Dim str As String = ds.Tables(0).Rows(i)("ITEMID").ToString
+            Dim str2 As String = ds.Tables(0).Rows(i)("ITEMCLASS").ToString
+            Dim str3 As String = ds.Tables(0).Rows(i)("ITEMCATEGORY").ToString
+            Dim str4 As String = ds.Tables(0).Rows(i)("DESCRIPTION").ToString
+            Dim str5 As String = ds.Tables(0).Rows(i)("ISRENEW").ToString
+            Dim str6 As String = ds.Tables(0).Rows(i)("PRINT_LAYOUT").ToString
+            Dim str7 As String = ds.Tables(0).Rows(i)("CREATED_AT").ToString
+            Dim str8 As String = ds.Tables(0).Rows(i)("UPDATED_AT").ToString
+
+
+            Dim lvi As New ListViewItem
+            lvi.Text = str
+            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7, str8})
+            lvModule.Items.Add(lvi)
+        Next
+
+    End Sub
 #End Region
 
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
