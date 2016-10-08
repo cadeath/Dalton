@@ -1,6 +1,4 @@
-﻿Imports Microsoft.VisualStudio.TestTools.UnitTesting
-
-Public Class Dev_Migrate
+﻿Public Class Dev_Migrate
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         UpdateScheme()
@@ -8,24 +6,24 @@ Public Class Dev_Migrate
 
     Private Sub UpdateScheme()
         Try
-        Dim mysql As String = "Select * from tblPawn"
-        Dim filldata As String = "tblPawn"
-        Dim ds As DataSet = LoadSQL(mysql, filldata)
+            Dim mysql As String = "Select * from tblPawn"
+            Dim filldata As String = "tblPawn"
+            Dim ds As DataSet = LoadSQL(mysql, filldata)
 
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpPawnID As String = dr.Item("PawnID")
-            Dim tmpItemType As String = dr.Item("ItemType")
-            Dim tmpIntcheckSum As String
-            If Not IsDBNull(dr.Item("int_checksum")) Then tmpIntcheckSum = dr.Item("int_checksum")
-            Console.WriteLine("PawnID is : " & tmpPawnID & " ItemType is : " & tmpItemType & " Intchecksum is : " & tmpIntcheckSum)
-            Dim tmpSchemeID As String = GetInt(tmpItemType, tmpIntcheckSum)
+            For Each dr As DataRow In ds.Tables(0).Rows
+                Dim tmpPawnID As String = dr.Item("PawnID")
+                Dim tmpItemType As String = dr.Item("ItemType")
+                Dim tmpIntcheckSum As String
+                If Not IsDBNull(dr.Item("int_checksum")) Then tmpIntcheckSum = dr.Item("int_checksum")
+                Console.WriteLine("PawnID is : " & tmpPawnID & " ItemType is : " & tmpItemType & " Intchecksum is : " & tmpIntcheckSum)
+                Dim tmpSchemeID As String = GetInt(tmpItemType, tmpIntcheckSum)
 
-            Dim mysql2 As String = "Select * from OPI where PawnItemID = '" & tmpPawnID & "'"
-            Dim filldata2 As String = "OPI"
-            Dim ds2 As DataSet = LoadSQL(mysql2, filldata2)
-            ds2.Tables(filldata2).Rows(0).Item("Scheme_ID") = tmpSchemeID
-            database.SaveEntry(ds2, False)
-        Next
+                Dim mysql2 As String = "Select * from OPI where PawnItemID = '" & tmpPawnID & "'"
+                Dim filldata2 As String = "OPI"
+                Dim ds2 As DataSet = LoadSQL(mysql2, filldata2)
+                ds2.Tables(filldata2).Rows(0).Item("Scheme_ID") = tmpSchemeID
+                database.SaveEntry(ds2, False)
+            Next
             MsgBox("Success")
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
