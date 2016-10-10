@@ -31,13 +31,11 @@ Partial Class frmItemList
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
-
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtSearch = New Pawnshop.watermark()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.btnView = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -95,15 +93,6 @@ Partial Class frmItemList
         Me.GroupBox1.Size = New System.Drawing.Size(904, 54)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(71, 18)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(744, 22)
-        Me.txtSearch.TabIndex = 2
-        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSearch.WatermarkText = "Search . . . ."
         '
         'btnSearch
         '
@@ -166,23 +155,11 @@ Partial Class frmItemList
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-        'btnView
-        '
-        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnView.Location = New System.Drawing.Point(666, 344)
-        Me.btnView.Name = "btnView"
-        Me.btnView.Size = New System.Drawing.Size(75, 31)
-        Me.btnView.TabIndex = 5
-        Me.btnView.Text = "&View"
-        Me.btnView.UseVisualStyleBackColor = True
-        '
         'frmItemList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(915, 383)
-        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.GroupBox1)
@@ -211,6 +188,5 @@ Partial Class frmItemList
     Friend WithEvents txtSearch As Pawnshop.watermark
 
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents btnView As System.Windows.Forms.Button
 
 End Class

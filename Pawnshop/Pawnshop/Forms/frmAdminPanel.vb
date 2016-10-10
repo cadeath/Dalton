@@ -87,44 +87,32 @@ Public Class frmAdminPanel
 
     End Sub
 
-    Friend Sub LoadItemList(ByVal it As ItemClass)
-        If it.ClassName = "" Then Exit Sub
+    'Friend Sub LoadItemList(ByVal it As ItemClass)
 
+    '    If it.ClassName = "" Then Exit Sub
+    '    txtClassification.Text = it.ClassName
+    '    txtCategory.Text = it.Category
+    '    txtDescription.Text = it.Description
+    '    cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
 
-        txtClassification.Text = it.ClassName
-        txtCategory.Text = it.Category
-        txtDescription.Text = it.Description
+    '    If it.isRenewable = "True" Then
+    '        rdbYes.Checked = True
+    '        rdbNo.Checked = False
+    '    Else
+    '        rdbYes.Checked = False
+    '        rdbNo.Checked = True
+    '    End If
 
-        cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
+    '    txtPrintLayout.Text = it.PrintLayout
+    '    cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
 
+    '    Dim id As Integer = it.ID
+    '    SelectedItem = it
 
-        If it.isRenewable = "True" Then
-            rdbYes.Checked = True
-            rdbNo.Checked = False
-        Else
-            rdbYes.Checked = False
-            rdbNo.Checked = True
-        End If
-
-        txtPrintLayout.Text = it.PrintLayout
-        cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
-
-        Dim id As Integer = it.ID
-        SelectedItem = it
-
-        reaDOnlyTrue()
-        btnSave.Enabled = False
-        btnUpdate.Enabled = True
-    End Sub
-
-
-
-    Friend Sub LoadItemall(ByVal it As ItemClass)
-        txtClassification.Text = String.Format(it.ClassName)
-        txtCategory.Text = String.Format(it.Category)
-        txtDescription.Text = String.Format(it.Description)
-    End Sub
-
+    '    ReadOnlyTrue()
+    '    btnSave.Enabled = False
+    '    btnUpdate.Enabled = True
+    'End Sub
 
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
@@ -145,23 +133,6 @@ Public Class frmAdminPanel
 
         Return 0
     End Function
-
-    'Friend Sub LoadItemall(ByVal it As ItemClass)
-    '    txtClassifiction.Text = String.Format(it.ItemClass)
-    '    txtCategory.Text = String.Format(it.Category)
-    '    txtDescription.Text = String.Format(it.Description)
-
-    '    If it.isRenewable = "1" Then
-    '        rdbYes.Checked = True
-    '    Else
-    '        rdbNo.Checked = True
-    '    End If
-    '    txtPrintLayout.Text = String.Format(it.PrintLayout)
-
-    '    ItemList = it
-
-    'End Sub
-
 
     Friend Sub clearfields()
         txtCategory.Text = ""
@@ -218,19 +189,14 @@ Public Class frmAdminPanel
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
 
         If Not isValid() Then Exit Sub
-
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Dim SchemeSID As New InterestScheme
         SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
-
-
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
-
         With ItemSave
-
             .ClassName = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
@@ -241,15 +207,10 @@ Public Class frmAdminPanel
             Else
                 .isRenewable = 0
             End If
-
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
-
             .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
-
-
         End With
-
 
         For Each row As DataGridViewRow In dgSpecs.Rows
             SpecSave = New ItemSpecs
@@ -266,11 +227,9 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-
             SpecSave.SaveSpecs()
             ColItemsSpecs.Add(SpecSave)
         Next
-
         ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.Save_ItemClass()
 
@@ -288,20 +247,17 @@ Public Class frmAdminPanel
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
             txtClassification.Enabled = False
-            'LoadScheme()
+            LoadScheme()
             Exit Sub
         End If
-
         Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        Dim SchemeSID As New InterestScheme
-        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+        'Dim SchemeSID As New InterestScheme
+        'SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
-
-
         With ItemModify
             .ClassName = txtClassification.Text
             .Category = txtCategory.Text
@@ -339,17 +295,13 @@ Public Class frmAdminPanel
                 End If
 
             End With
-
             SpecModify.ItemID = SelectedItem.ID
-
             SpecModify.UpdateSpecs()
-
         Next
-
         ItemModify.Update()
 
         MsgBox("Item Class Updated", MsgBoxStyle.Information)
-        txtClassification.Focus()
+
         btnSave.Enabled = True
         btnUpdate.Text = "&Update"
         rdbNo.Checked = False
@@ -370,7 +322,6 @@ Public Class frmAdminPanel
         frmItemList.Show()
     End Sub
 
-    '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
     Private Sub ReadOnlyTrue()
         txtCategory.ReadOnly = True
         txtClassification.ReadOnly = True
@@ -822,6 +773,7 @@ Public Class frmAdminPanel
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmItemList.Show()
     End Sub
+
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
         table.Clear()
         dt.Columns.Clear()
@@ -839,10 +791,7 @@ Public Class frmAdminPanel
             Next
             table.Rows.Add(cells)
         Next
-
-
     End Sub
-
 
     Private str As String = My.Computer.FileSystem.SpecialDirectories.Desktop
     Private path As String = String.Format("{1}{0}.dat", fn, str)
