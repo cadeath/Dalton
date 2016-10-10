@@ -22,15 +22,15 @@
     End Sub
 
     
-    Private Sub AddItem(ByVal dl As ItemClass)
-        Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
-        lv.SubItems.Add(dl.ClassName)
-        lv.SubItems.Add(dl.Category)
-        lv.SubItems.Add(dl.Description)
-        'lv.SubItems.Add(dl.InterestRate)
-        lv.SubItems.Add(dl.isRenewable)
-        lv.SubItems.Add(dl.PrintLayout)
-    End Sub
+    'Private Sub AddItem(ByVal dl As ItemClass)
+    '    Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
+    '    lv.SubItems.Add(dl.ClassName)
+    '    lv.SubItems.Add(dl.Category)
+    '    lv.SubItems.Add(dl.Description)
+    '    'lv.SubItems.Add(dl.InterestRate)
+    '    lv.SubItems.Add(dl.isRenewable)
+    '    lv.SubItems.Add(dl.PrintLayout)
+    'End Sub
 
     'Private Sub loadItemClass()
     '    Dim mySql As String = "SELECT * FROM tblItem"
@@ -149,14 +149,6 @@
     End Sub
 
 
-    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
-        If txtSearch.Text <> "" Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
-
-
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
@@ -166,11 +158,6 @@
 
         LoadActive_ItemClasses(mySql)
         MsgBox(String.Format("{0} item found.", lvItem.Items.Count), MsgBoxStyle.Information)
-    End Sub
-
-
-    Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
-        Me.Close()
     End Sub
 
 
@@ -217,16 +204,16 @@
         Else
             btnSelect.PerformClick()
         End If
-
-
-    Private Sub lvItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
-        btnSelect.PerformClick()
     End Sub
 
     Private Sub lvItem_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvItem.KeyPress
         Console.WriteLine("ENTER!")
         If isEnter(e) Then
-            btnSelect.PerformClick()
+            If Not fromOtherForm Then
+                btnView.PerformClick()
+            Else
+                btnSelect.PerformClick()
+            End If
         End If
     End Sub
 
@@ -234,12 +221,7 @@
         Me.Close()
     End Sub
 
-    Private Sub txtSearchItmLst_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
-
+  
     Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()

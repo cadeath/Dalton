@@ -44,29 +44,29 @@ Public Class frmAdminPanel
         btnUpdate.Enabled = True
     End Sub
 
-    Friend Sub LoadSpec(ByVal ID As Integer)
-        Dim da As New OdbcDataAdapter
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
-        Console.WriteLine("SQL: " & mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim dr As DataRow
+    'Friend Sub LoadSpec(ByVal ID As Integer)
+    '    Dim da As New OdbcDataAdapter
+    '    Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
+    '    Console.WriteLine("SQL: " & mySql)
+    '    Dim ds As DataSet = LoadSQL(mySql)
+    '    Dim dr As DataRow
 
-        dgSpecs.Rows.Clear()
-        For Each dr In ds.Tables(0).Rows
-            AddItemSpecs(dr)
-        Next
-        reaDOnlyTrue()
-        For a As Integer = 0 To dgSpecs.Rows.Count - 1
-            dgSpecs.Rows(a).ReadOnly = True
-        Next
-        btnSave.Enabled = False
-    End Sub
+    '    dgSpecs.Rows.Clear()
+    '    For Each dr In ds.Tables(0).Rows
+    '        AddItemSpecs(dr)
+    '    Next
+    '    reaDOnlyTrue()
+    '    For a As Integer = 0 To dgSpecs.Rows.Count - 1
+    '        dgSpecs.Rows(a).ReadOnly = True
+    '    Next
+    '    btnSave.Enabled = False
+    'End Sub
 
-    Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
-        Dim tmpItem As New ItemSpecs
-        tmpItem.LoadItemSpecs_row(ItemSpecs)
-        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
-    End Sub
+    'Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
+    '    Dim tmpItem As New ItemSpecs
+    '    tmpItem.LoadItemSpecs_row(ItemSpecs)
+    '    dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, tmpItem.SpecName, tmpItem.SpecType.ToString, tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
+    'End Sub
 
     Private Sub LoadScheme()
         Dim mySql As String = "SELECT * FROM TBLINTSCHEMES"
@@ -722,8 +722,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         ds = New DataSet
         ds.Tables.Add(dt)
 
-
-    Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
         MsgBox("Data Exported", MsgBoxStyle.Information)
@@ -733,7 +731,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         chkSelectAll.Checked = False
     End Sub
 
-  
+
 
     Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
 
@@ -814,8 +812,9 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
         SFD.ShowDialog()
         saveModname()
-   
 
+
+    End Sub
     Private Sub btnExport_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
         If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
         SFD.ShowDialog()
@@ -873,7 +872,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         lvModule.View = View.Details
         lvModule.CheckBoxes = True
         lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
-       
+
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -891,12 +890,12 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                 lvModule.Items(i).Checked = False
             Next
         End If
-            lblCount.Text = "count: " & lvModule.CheckedItems.Count
-        End Sub
+        lblCount.Text = "count: " & lvModule.CheckedItems.Count
+    End Sub
 
     Private Sub lvModule_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lvModule.ItemChecked
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
-END SUB
+    End Sub
 
     Private Sub btnBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
