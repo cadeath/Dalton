@@ -846,6 +846,8 @@ Public Class frmAdminPanel
     Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
         If txtReferenceNumber.Text = "" Then txtReferenceNumber.Focus() : Exit Sub
         If cmbModuleName.Text = "" Then cmbModuleName.Focus() : Exit Sub
+        If lvModule.Items.Count <= 0 Then Exit Sub
+        If lblCount.Text = "Count: 0" Then Exit Sub
 
         For Each item As ListViewItem In Me.lvModule.Items
             If item.Checked = False Then
