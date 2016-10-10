@@ -148,8 +148,8 @@
             database.SaveEntry(ds)
         End If
 
-        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE IS_ID= {1} ", MainTable, _schemeINTid)
-        Dim ds As DataSet = LoadSQL(mySql, MainTable)
+        ' Dim mySql As String = String.Format("SELECT * FROM {0} WHERE IS_ID= {1} ", MainTable, _schemeINTid)
+        'Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
         'If ds.Tables(MainTable).Rows.Count > 1 Then
         '    MsgBox("Unable to update record", MsgBoxStyle.Critical)

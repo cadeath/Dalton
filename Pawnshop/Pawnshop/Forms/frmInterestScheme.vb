@@ -94,33 +94,7 @@ Public Class frmInterestScheme
         Return True
     End Function
 
-    Private Sub txtDayFrom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayFrom.KeyPress
-        DigitOnly(e)
-    End Sub
-
-    Private Sub frmInterestScheme_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Load_Scheme_Data() '''''''Sample Data 
-	end sub
-
     Private Sub txtDayTo_KeyPress_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            If Label9.Text = "Update".ToString Then
-                btnAdd.PerformClick()
-            ElseIf Label9.Text = "Modify" Then
-                btnUpdateScheme.PerformClick()
-            End If
-        End If
-    End Sub
-
-    Private Sub txtInterest_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInterest.KeyPress
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtPenalty_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPenalty.KeyPress
         DigitOnly(e)
     End Sub
 
@@ -209,14 +183,6 @@ Public Class frmInterestScheme
             End With
 
             SchemeInterest.SchemeID = SchemeModify.SchemeID
-            SchemeInterest.Update()
-        Next
-
-        MsgBox("Transaction Updated", MsgBoxStyle.Information)
-
-                SchemeInterest.schemeInterestID = .SchemeID
-                SchemeInterest.SchemeID = SchemeModify.SchemeID
-            End With
             SchemeInterest.Update()
         Next
 

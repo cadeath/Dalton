@@ -1,28 +1,9 @@
 ﻿Public Class frmItemList
     Private ItemClasses_ht As Hashtable
-<<<<<<< HEAD
     Private fromOtherForm As Boolean = False
     Private frmOrig As formSwitch.FormName
-
-    'Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
-    '    Dim ds As DataSet
-    '    ds = LoadSQL(mySql)
-    '    lvItem.Items.Clear()
-    '    For Each dr As DataRow In ds.Tables(0).Rows
-    '        Dim tmpItem As New ItemClass
-    '        tmpItem.LoadByRow(dr)
-    '        AddItem(tmpItem)
-    '    Next
-    'End Sub
-
-=======
- Dim ds As New DataSet
+    Dim ds As New DataSet
     Dim selectedItem As ItemClass
-
-
-    'FORMS
-    Private fromOtherForm As Boolean = False
-    Private frmOrig As formSwitch.FormName
 
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
         Dim ds As DataSet
@@ -33,16 +14,6 @@
             tmpItem.LoadByRow(dr)
             AddItem(tmpItem)
         Next
-    End Sub
-    
-    Private Sub AddItem(ByVal dl As ItemClass)
-        Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
-        lv.SubItems.Add(dl.ClassName)
-        lv.SubItems.Add(dl.Category)
-        lv.SubItems.Add(dl.Description)
-        'lv.SubItems.Add(dl.InterestRate)
-        lv.SubItems.Add(dl.isRenewable)
-        lv.SubItems.Add(dl.PrintLayout)
     End Sub
 
     'Private Sub loadItemClass()
@@ -65,19 +36,6 @@
     Private Sub ClearField()
         ' txtSearch.Text = ""
         lvItem.Items.Clear()
-    End Sub
-
-
-    Private Sub searchItem()
-        If txtSearch.Text = "" Then Exit Sub
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
-
-        Dim mySql As String = "SELECT * FROM tblITEM WHERE "
-        mySql &= String.Format("UPPER (ITEMCLASS) LIKE UPPER('%{0}%')", secured_str)
-
-        Console.WriteLine("SQL: " & mySql)
-
     End Sub
 
     Private Sub ClearFields()
@@ -169,14 +127,6 @@
         frmOrig = frmOrigin
     End Sub
 
-
-    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
-        If txtSearch.Text <> "" Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
-
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
@@ -187,11 +137,6 @@
         LoadActive_ItemClasses(mySql)
         MsgBox(String.Format("{0} item found.", lvItem.Items.Count), MsgBoxStyle.Information)
     End Sub
-
-    Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
-        Me.Close()
-    End Sub
-
 
     Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
         If e.KeyCode = Keys.Enter Then

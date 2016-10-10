@@ -84,13 +84,8 @@ Public Class frmAdminPanel
             Scheme.Add(tmpID, tmpName)
             cboSchemename.Items.Add(tmpName)
         Next
-<<<<<<< HEAD
 
     End Sub
-
-=======
-    End Sub
-
 
     Friend Sub LoadItemList(ByVal it As ItemClass)
         If it.ClassName = "" Then Exit Sub
@@ -204,11 +199,11 @@ Public Class frmAdminPanel
         End If
     End Sub
 
-    Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If cbotxtSchemename.Text = "" Then cbotxtSchemename.Focus() : Return False
-        If IsDataGridViewEmpty(dgSpecs) Then dgSpecs.Focus() : Return False
-        Return True
-    End Function
+    'Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+    '    If cbotxtSchemename.Text = "" Then cbotxtSchemename.Focus() : Return False
+    '    If IsDataGridViewEmpty(dgSpecs) Then dgSpecs.Focus() : Return False
+    '    Return True
+    'End Function
 
     Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
         Dim isEmpty As Boolean = True
@@ -315,10 +310,6 @@ Public Class frmAdminPanel
             .Description = txtDescription.Text
             .ID = SelectedItem.ID
 
-            If rbYes.Checked Then
-
-            '.InterestScheme = SchemeSID
-
             If rdbYes.Checked Then
                 .isRenewable = 1
             Else
@@ -413,35 +404,6 @@ Public Class frmAdminPanel
             btnSearch.PerformClick()
         End If
     End Sub
-
-    Friend Sub LoadSpec(ByVal ID As Integer)
-        Dim da As New OdbcDataAdapter
-        Dim mySql As String = "SELECT * FROM TBLSPECS WHERE ItemID = '" & ID & "'"
-        Console.WriteLine("SQL: " & mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
-        Dim dr As DataRow
-
-        For Each dr In ds.Tables(0).Rows
-            AddItemSpecs(dr)
-        Next
-
-
-        reaDOnlyTrue()
-
-        For a As Integer = 0 To dgSpecs.Rows.Count - 1
-            dgSpecs.Rows(a).ReadOnly = True
-        Next
-        btnSave.Enabled = False
-    End Sub
-
-    Private Sub AddItemSpecs(ByVal ItemSpecs As DataRow)
-        Dim tmpItem As New ItemSpecs
-        tmpItem.LoadItemSpecs_row(ItemSpecs)
-        dgSpecs.Rows.Add(tmpItem.SpecID, tmpItem.ShortCode, _
-                tmpItem.SpecName, tmpItem.SpecType.ToString, _
-                tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
-    End Sub
-
 
     '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
     Private Sub cmbModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
@@ -600,35 +562,7 @@ Public Class frmAdminPanel
         mySql = "SELECT CLASSID,TYPE,CATEGORY,RENEWABLE FROM " & fillData
         mySql &= " ORDER BY ClassID ASC"
 
-
-    'Private Sub ModClass()
-    '    fillData = "tblClass"
-    '    mySql = "SELECT CLASSID,TYPE,CATEGORY,RENEWABLE FROM " & fillData
-    '    mySql &= " ORDER BY ClassID ASC"
-
-    '    ds = LoadSQL(mySql, fillData)
-    '    lvModule.Columns.Clear()
-    '    lvModule.Items.Clear()
-
-    '    Me.lvModule.Columns.Add("CLASSID")
-    '    Me.lvModule.Columns.Add("Column2", "TYPE")
-    '    Me.lvModule.Columns.Add("Column3", "CATEGORY")
-    '    Me.lvModule.Columns.Add("Column4", "RENEWABLE")
-
-    '    For i = 0 To ds.Tables(0).Rows.Count - 1
-    '        Dim str1 As String = ds.Tables(0).Rows(i)("CLASSID").ToString
-    '        Dim str2 As String = ds.Tables(0).Rows(i)("TYPE").ToString
-    '        Dim str3 As String = ds.Tables(0).Rows(i)("CATEGORY").ToString
-    '        Dim str4 As String = ds.Tables(0).Rows(i)("RENEWABLE").ToString
-
-    '        Dim lvi As New ListViewItem
-    '        lvi.Text = str1
-    '        lvi.SubItems.AddRange(New String() {str2, str3, str4})
-    '        lvModule.Items.Add(lvi)
-    '    Next
-
-    'End Sub
-
+    End Sub
     Private Sub ModRate()
         fillData = "TBLINT"
         mySql = "SELECT INTID,DAYFROM,DAYTO,ITEMTYPE,INTEREST,PENALTY,REMARKS FROM " & fillData
@@ -695,9 +629,6 @@ Public Class frmAdminPanel
 
 #End Region
 
-    Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
-
-
     Private Sub ModITEM()
         fillData = "tblitem"
         mySql = "SELECT * FROM " & fillData
@@ -734,7 +665,6 @@ Public Class frmAdminPanel
         Next
 
     End Sub
-#End Region
 
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
         Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
@@ -746,20 +676,16 @@ Public Class frmAdminPanel
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
         MsgBox("Data Exported", MsgBoxStyle.Information)
-
-    Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
-
-        dt.Clear()
-        ds.Tables.Clear()
-        chkSelectAll.Checked = False
     End Sub
-
 
     Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
         Dim fn As String = oFd.FileName
 
         ShowDataInLvw(FileChecker(fn), lvModule)
         MsgBox("Successfully Loaded", MsgBoxStyle.OkOnly, "Load")
+        chkSelectAll.Checked = False
+        dt.Clear()
+        ds.Tables.Clear()
         chkSelectAll.Checked = False
     End Sub
 
@@ -818,7 +744,7 @@ Public Class frmAdminPanel
                 Case "Cash"
                     ExportModType = ModuleType.Cash
                 Case "Item Class"
-                    ExportModType = ModuleType.ItemClass
+                    ' ExportModType = ModuleType.ItemClass
                 Case "Rate"
                     ExportModType = ModuleType.Rate
                 Case "Currency"
@@ -837,6 +763,7 @@ Public Class frmAdminPanel
 
         MsgBox("Data Exported", MsgBoxStyle.Information)
 
+    End Sub
     Private Sub txtSearch_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
@@ -883,6 +810,7 @@ Public Class frmAdminPanel
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmItemList.Show()
+    End Sub
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
         table.Clear()
         dt.Columns.Clear()
@@ -926,7 +854,7 @@ Public Class frmAdminPanel
         lvModule.View = View.Details
         lvModule.CheckBoxes = True
         lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
-       
+
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -944,8 +872,8 @@ Public Class frmAdminPanel
                 lvModule.Items(i).Checked = False
             Next
         End If
-            lblCount.Text = "count: " & lvModule.CheckedItems.Count
-        End Sub
+        lblCount.Text = "count: " & lvModule.CheckedItems.Count
+    End Sub
 
     Private Sub lvModule_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lvModule.ItemChecked
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count

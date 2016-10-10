@@ -546,8 +546,6 @@ Partial Class frmAdminPanel
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
-<<<<<<< HEAD
-=======
         'grpSearch
         '
         Me.grpSearch.Controls.Add(Me.txtSearch)
@@ -600,22 +598,6 @@ Partial Class frmAdminPanel
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Export Config"
         '
-<<<<<<< HEAD
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.txtReferenceNumber)
-        Me.GroupBox2.Controls.Add(Me.btnBrowse)
-        Me.GroupBox2.Controls.Add(Me.lvModule)
-        Me.GroupBox2.Controls.Add(Me.btnExport)
-        Me.GroupBox2.Controls.Add(Me.cmbModuleName)
-        Me.GroupBox2.Controls.Add(Me.lblModuleName)
-        Me.GroupBox2.Controls.Add(Me.lblReferenceNumber)
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 0)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(1134, 427)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
-=======
         'lblModname
         '
         Me.lblModname.Controls.Add(Me.lblCount)
@@ -828,7 +810,6 @@ Partial Class frmAdminPanel
     Friend WithEvents DataGridViewComboBoxColumn3 As System.Windows.Forms.DataGridViewComboBoxColumn
 
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
@@ -847,12 +828,6 @@ Partial Class frmAdminPanel
 
 
     Friend WithEvents cbotxtSchemename As System.Windows.Forms.ComboBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents txtPrintLayout As Pawnshop.watermark
-    Friend WithEvents txtDescription As Pawnshop.watermark
-    Friend WithEvents txtCategory As Pawnshop.watermark
-    Friend WithEvents txtClassification As Pawnshop.watermark
-    Friend WithEvents txtSearch As Pawnshop.watermark
     Friend WithEvents chkSelectAll As System.Windows.Forms.CheckBox
     Friend WithEvents lblCount As System.Windows.Forms.Label
     Friend WithEvents StatusStrip As System.Windows.Forms.StatusStrip
