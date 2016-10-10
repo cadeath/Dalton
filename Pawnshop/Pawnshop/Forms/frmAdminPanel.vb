@@ -555,42 +555,38 @@ Public Class frmAdminPanel
 
     End Sub
 
-    Private Sub ModClass()
-        fillData = "tblClass"
-        mySql = "SELECT CLASSID,TYPE,CATEGORY,RENEWABLE FROM " & fillData
-        mySql &= " ORDER BY ClassID ASC"
-
-    End Sub
     Private Sub ModRate()
         fillData = "TBLINT"
-        mySql = "SELECT INTID,DAYFROM,DAYTO,ITEMTYPE,INTEREST,PENALTY,REMARKS FROM " & fillData
-        mySql &= " ORDER BY IntID ASC"
+        mySql = "SELECT  D.IS_ID, I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
+        mySql &= "D.INTEREST, D.PENALTY, D.REMARKS "
+        mySql &= "FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
 
         ds = LoadSQL(mySql, fillData)
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
 
-        Me.lvModule.Columns.Add("INTID")
-        Me.lvModule.Columns.Add("Column2", "DAYFROM")
-        Me.lvModule.Columns.Add("Column3", "DAYTO")
-        Me.lvModule.Columns.Add("Column4", "ITEMTYPE")
-        Me.lvModule.Columns.Add("Column4", "INTEREST")
-        Me.lvModule.Columns.Add("Column4", "PENALTY")
-        Me.lvModule.Columns.Add("Column4", "REMARKS")
+        Me.lvModule.Columns.Add("ID")
+        Me.lvModule.Columns.Add("Column2", "SchemeName")
+        Me.lvModule.Columns.Add("Column3", "Description")
+        Me.lvModule.Columns.Add("Column5", "DayFrom")
+        Me.lvModule.Columns.Add("Column6", "DayTo")
+        Me.lvModule.Columns.Add("Column7", "Interest")
+        Me.lvModule.Columns.Add("Column8", "Penalty")
+        Me.lvModule.Columns.Add("Column9", "Remarks")
 
         For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str1 As String = ds.Tables(0).Rows(i)("INTID").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("DAYFROM").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("DAYTO").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("ITEMTYPE").ToString
-            Dim str5 As String = ds.Tables(0).Rows(i)("INTEREST").ToString
-            Dim str6 As String = ds.Tables(0).Rows(i)("PENALTY").ToString
-            Dim str7 As String = ds.Tables(0).Rows(i)("REMARKS").ToString
-
+            Dim str1 As String = ds.Tables(0).Rows(i)("Is_ID").ToString
+            Dim str2 As String = ds.Tables(0).Rows(i)("SchemeName").ToString
+            Dim str3 As String = ds.Tables(0).Rows(i)("Description").ToString
+            Dim str4 As String = ds.Tables(0).Rows(i)("DayFrom").ToString
+            Dim str5 As String = ds.Tables(0).Rows(i)("DayTo").ToString
+            Dim str6 As String = ds.Tables(0).Rows(i)("Interest").ToString
+            Dim str7 As String = ds.Tables(0).Rows(i)("Penalty").ToString
+            Dim str8 As String = ds.Tables(0).Rows(i)("Remarks").ToString
 
             Dim lvi As New ListViewItem
             lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7})
+            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7, str8})
             lvModule.Items.Add(lvi)
         Next
     End Sub
@@ -624,8 +620,6 @@ Public Class frmAdminPanel
             lvModule.Items.Add(lvi)
         Next
     End Sub
-
-#End Region
 
     Private Sub ModITEM()
         fillData = "tblitem"
@@ -680,6 +674,8 @@ Public Class frmAdminPanel
         Next
 
     End Sub
+
+#End Region
 
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
         Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
