@@ -192,8 +192,9 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        Dim SchemeSID As New InterestScheme
-        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+        'Dim SchemeSID As New InterestScheme
+        'SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
         With ItemSave
