@@ -19,6 +19,47 @@ Public Class frmInterestScheme
         txtDescription.Enabled = False
     End Sub
 
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If txtSchemeName.Text = "" Then txtSchemeName.Focus()
+        If txtDescription.Text = "" Then txtDescription.Focus()
+        If lvIntscheme.Items.Count <= 0 Then Exit Sub
+
+        Dim ans As DialogResult = MsgBox("Do you want to save this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+
+        Dim SchemeSave As New InterestScheme
+        Dim IntSchemeLines As New IntScheme_Lines
+
+        With SchemeSave
+            .SchemeName = txtSchemeName.Text
+            .Description = txtDescription.Text
+        End With
+
+
+        For Each item As ListViewItem In lvIntscheme.Items
+            Dim SchemeInterest As New Scheme_Interest
+            With SchemeInterest
+                .DayFrom = item.SubItems(1).Text
+                .DayTo = item.SubItems(2).Text
+                .Interest = item.SubItems(3).Text
+                .Penalty = item.SubItems(4).Text
+                .Remarks = item.SubItems(5).Text
+            End With
+            IntSchemeLines.Add(SchemeInterest)
+        Next
+
+        SchemeSave.SchemeDetails = IntSchemeLines
+        SchemeSave.SaveScheme()
+
+        MsgBox("Transaction Saved", MsgBoxStyle.Information)
+        clearfields()
+        lvIntscheme.Items.Clear()
+        txtSchemeName.Text = ""
+        txtDescription.Text = ""
+    End Sub
+
+
 
     Friend Sub clearfields()
         txtDayFrom.Text = ""
@@ -58,6 +99,7 @@ Public Class frmInterestScheme
     Private Sub txtDayFrom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayFrom.KeyPress
         DigitOnly(e)
     End Sub
+
 
     Private Sub txtDayTo_KeyPress_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
         DigitOnly(e)
@@ -121,6 +163,9 @@ Public Class frmInterestScheme
         SchemeSave.SaveScheme()
 
         MsgBox("Scheme Saved", MsgBoxStyle.Information)
+
+    Private Sub frmInterestScheme_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+  
         clearfields()
         lvIntscheme.Items.Clear()
         txtSchemeName.Text = ""
@@ -157,12 +202,14 @@ Public Class frmInterestScheme
 
 
             With SchemeInterest
-                .SchemeID = item.Text
+                .schemeInterestID = item.Text
+
                 .DayFrom = item.SubItems(1).Text
                 .DayTo = item.SubItems(2).Text
                 .Interest = item.SubItems(3).Text
                 .Penalty = item.SubItems(4).Text
                 .Remarks = item.SubItems(5).Text
+
 
                 SchemeInterest.schemeInterestID = .SchemeID
                 SchemeInterest.SchemeID = SchemeModify.SchemeID
@@ -172,12 +219,15 @@ Public Class frmInterestScheme
 
         MsgBox("Scheme Updated", MsgBoxStyle.Information)
 
+     
+
         btnSave.Enabled = True
         clearfields()
         lvIntscheme.Items.Clear()
         txtSchemeName.Text = ""
         txtDescription.Text = ""
         btnAdd.Enabled = True
+
     End Sub
 
     Private Sub btnClose_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -197,6 +247,7 @@ Public Class frmInterestScheme
         clearfields()
     End Sub
 
+<
     Private Sub btnUpdateScheme_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
         If Not isValid() Then Exit Sub
         lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
@@ -209,7 +260,8 @@ Public Class frmInterestScheme
         btnAdd.Enabled = True
     End Sub
 
-    Private Sub btnRemove_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
+
+    Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
         If lvIntscheme.SelectedItems.Count <= 0 Then Exit Sub
         lvIntscheme.Items.RemoveAt(lvIntscheme.SelectedIndices(0))
         For Each item As ListViewItem In lvIntscheme.SelectedItems
@@ -217,7 +269,10 @@ Public Class frmInterestScheme
         Next
     End Sub
 
-    Private Sub btnSearch_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
 
@@ -246,6 +301,34 @@ Public Class frmInterestScheme
         btnAdd.Enabled = False
     End Sub
 
+    Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
+        If Not isValid() Then Exit Sub
+        lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
+        lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
+        lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
+        lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
+        lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+        clearfields()
+        Label9.Text = "Update"
+    End Sub
+
+
+    Private Sub txtDayFrom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayFrom.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtDayTo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtInterest_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInterest.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtPenalty_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPenalty.KeyPress
+        DigitOnly(e)
+    End Sub
+
 
     Private Sub frmInterestScheme_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
@@ -258,4 +341,17 @@ Public Class frmInterestScheme
         'lvIntscheme.Columns.Item(0).Width = 0
         'lvIntscheme.Columns.Remove(lvIntscheme.Columns(0))
     End Sub
+
+    Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Label9.Text = "Update".ToString Then
+                btnAdd.PerformClick()
+            ElseIf Label9.Text = "Modify" Then
+                btnUpdateScheme.PerformClick()
+            End If
+        End If
+    End Sub
+
+   
+   
 End Class

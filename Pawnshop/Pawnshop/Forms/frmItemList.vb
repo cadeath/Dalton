@@ -1,10 +1,12 @@
 ﻿Public Class frmItemList
     Private ItemClasses_ht As Hashtable
+
  Dim ds As New DataSet
     Dim selectedItem As ItemClass
 
 
     'FORMS
+
     Private fromOtherForm As Boolean = False
     Private frmOrig As formSwitch.FormName
 
@@ -18,6 +20,7 @@
             AddItem(tmpItem)
         Next
     End Sub
+
     
     Private Sub AddItem(ByVal dl As ItemClass)
         Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
@@ -63,12 +66,16 @@
         Console.WriteLine("SQL: " & mySql)
 
     End Sub
+
     Private Sub ClearFields()
         txtSearch.Text = ""
         lvItem.Items.Clear()
     End Sub
 
-   Private Sub LoadActive_ItemClasses(Optional mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
+
+  
+
+    Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
         Dim ds As DataSet = LoadSQL(mySql)
 
         ItemClasses_ht = New Hashtable
@@ -82,6 +89,7 @@
         Next
 
     End Sub
+
 
     'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
     '    mOtherForm = True
@@ -124,21 +132,42 @@
     '    End If
     'End Sub
 
-    Friend Sub SearchSelect(src As String, frmOrigin As formSwitch.FormName)
+  
+    Private Sub AddItem(ByVal itm As ItemClass)
+        Dim lv As ListViewItem = lvItem.Items.Add(itm.ID)
+        lv.SubItems.Add(itm.ClassName)
+        lv.SubItems.Add(itm.Category)
+        lv.SubItems.Add(itm.Description)
+        lv.SubItems.Add(itm.isRenewable)
+        lv.SubItems.Add(itm.PrintLayout)
+    End Sub
+
+    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
         fromOtherForm = True
         txtSearch.Text = src
         frmOrig = frmOrigin
     End Sub
 
 
-    Private Sub btnSearch_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch.Click
+    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
         Dim mySql As String = "SELECT * FROM TBLITEM WHERE "
-        mySql &= String.Format("(UPPER (ITEMCLASS) LIKE UPPER('%{0}%') OR UPPER (ITEMCATEGORY) LIKE UPPER('%{0}%')) AND ONHOLD = 0 ", txtSearch.Text)
+        mySql &= String.Format("(UPPER (ITEMCLASS) LIKE UPPER('%{0}%') OR UPPER (ITEMCATEGORY) LIKE UPPER('%{0}%')) AND ONHOLD = 0 ", secured_str)
         mySql &= "ORDER BY ITEMID ASC"
 
         LoadActive_ItemClasses(mySql)
         MsgBox(String.Format("{0} item found.", lvItem.Items.Count), MsgBoxStyle.Information)
     End Sub
+
 
     Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
         Me.Close()
@@ -155,7 +184,8 @@
         End If
     End Sub
 
-    Private Sub btnSelect_Click(sender As System.Object, e As System.EventArgs) Handles btnSelect.Click
+
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
         If lvItem.Items.Count = 0 Then Exit Sub
 
         If lvItem.SelectedItems.Count = 0 Then
@@ -179,6 +209,7 @@
         MsgBox("Error loading hash table", MsgBoxStyle.Critical, "CRITICAL")
     End Sub
 
+
     Private Sub lvItem_DoubleClick(sender As Object, e As System.EventArgs) Handles lvItem.DoubleClick
 
         If Not fromOtherForm Then
@@ -187,23 +218,32 @@
             btnSelect.PerformClick()
         End If
 
+
+    Private Sub lvItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
+        btnSelect.PerformClick()
     End Sub
 
-    Private Sub lvItem_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles lvItem.KeyPress
+    Private Sub lvItem_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvItem.KeyPress
         Console.WriteLine("ENTER!")
         If isEnter(e) Then
             btnSelect.PerformClick()
         End If
     End Sub
 
-    Private Sub txtSearch_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
-        If isEnter(e) Then
+    Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    Private Sub txtSearchItmLst_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+        If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
         End If
     End Sub
 
-    Private Sub txtSearch_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtSearch.TextChanged
-
+    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click

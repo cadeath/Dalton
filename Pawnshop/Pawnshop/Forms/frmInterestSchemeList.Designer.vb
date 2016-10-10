@@ -127,7 +127,9 @@ Partial Class frmInterestSchemeList
         '
         'txtSearch
         '
+
         Me.txtSearch.Location = New System.Drawing.Point(64, 20)
+
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(364, 22)
         Me.txtSearch.TabIndex = 7

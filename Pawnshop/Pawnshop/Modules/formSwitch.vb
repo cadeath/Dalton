@@ -14,6 +14,7 @@
 
         frmPawningV2_Client = 10
         frmPawningV2_Specs = 11
+        frmPawningV2_SpecsValue = 12
     End Enum
 
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
@@ -41,6 +42,9 @@
         Select Case gotoForm
             Case FormName.frmPawningV2_Specs
                 frmPawningItemNew.Load_ItemSpecification(Selected_Specs)
+            Case FormName.frmPawningV2_SpecsValue
+                frmAdminPanel.Load_ItemSpecification(Selected_Specs)
+
         End Select
     End Sub
 

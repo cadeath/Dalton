@@ -32,7 +32,7 @@ Partial Class Dev_Migrate
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(691, 196)
+        Me.GroupBox1.Size = New System.Drawing.Size(294, 196)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
@@ -49,7 +49,7 @@ Partial Class Dev_Migrate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(715, 220)
+        Me.ClientSize = New System.Drawing.Size(316, 220)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "Dev_Migrate"
         Me.Text = "Dev_Migrate"

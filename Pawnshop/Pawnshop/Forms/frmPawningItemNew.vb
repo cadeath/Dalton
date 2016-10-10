@@ -112,7 +112,7 @@ Public Class frmPawningItemNew
         Dim secured_str As String = txtClassification.Text
         secured_str = DreadKnight(secured_str)
         frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_Specs)
-        frmItemList.ShowDialog()
+        frmItemList.Show()
     End Sub
 
     Private Sub btnSearchClaimer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaimer.Click
@@ -160,9 +160,9 @@ Public Class frmPawningItemNew
 
     End Sub
 
-    Private Sub AddItem(ByVal cio As DataRow)
+    Private Sub AddItem(ByVal Item As DataRow)
         Dim tmpItem As New ItemSpecs
-        tmpItem.LoadItemSpecs_row(cio)
+        tmpItem.LoadItemSpecs_row(Item)
 
         Dim lv As ListViewItem = lvSpec.Items.Add(tmpItem.SpecID)
         lv.SubItems.Add(tmpItem.SpecName)
