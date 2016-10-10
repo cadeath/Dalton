@@ -150,9 +150,14 @@ Public Class frmPawningItemNew
             ItemClasses_ht.Add(spec.SpecID, spec.SpecName)
         Next
 
+
+        txtClassification.Text = Item.ClassName
+        'tmpItem = Item
+
         dateChange(PawnedItem.ItemClass)
         lvSpec.Focus()
         lvSpec.Items(0).Selected = True
+
     End Sub
 
     Private Sub AddItem(ByVal Item As DataRow)

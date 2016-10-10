@@ -384,7 +384,9 @@
             AddItem(cio)
         Next
 
-        'txtSearchItem.Text = Item.ItemClass
+
+        txtSearchItem.Text = Item.ClassName
+
         tmpItem = Item
     End Sub
 
