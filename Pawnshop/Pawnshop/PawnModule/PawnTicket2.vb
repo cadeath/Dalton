@@ -143,7 +143,7 @@
         End Set
     End Property
 
-    Private _pawnItem As PawnItem
+    Private _pawnItem As New PawnItem
     Public Property PawnItem() As PawnItem
         Get
             Return _pawnItem
@@ -345,13 +345,15 @@
     End Sub
 
     Public Sub Load_PawnTicket(ByVal ptnum As Integer)
-        Dim mySql As String = String.Format("SELECT * {0} WHERE PAWNTICKET = {1}", MainTable, ptnum)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE PAWNTICKET = {1}", MainTable, ptnum)
         Dim ds As DataSet = LoadSQL(mySql)
 
         Load_PT_row(ds.Tables(0).Rows(0))
     End Sub
 
     Private Sub Load_PT_row(ByVal dr As DataRow)
+        'On Error Resume Next
+
         With dr
             _PawnID = .Item("PAWNID")
             _ticket = .Item("PAWNTICKET")
@@ -378,8 +380,9 @@
             _renewDue = .Item("RENEWDUE")
             _redeemDue = .Item("REDEEMDUE")
             _serviceCharge = .Item("SERVICECHARGE")
-            _created_At = .Item("CREATED_AT")
-            _updated_At = .Item("UPDATED_AT")
+
+            If Not IsDBNull(.Item("CREATED_AT")) Then _created_At = .Item("CREATED_AT")
+            If Not IsDBNull(.Item("UPDATED_AT")) Then _updated_At = .Item("UPDATED_AT")
 
             _pawnItem.Load_PawnItem(.Item("PAWNITEMID"))
         End With

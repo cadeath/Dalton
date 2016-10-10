@@ -336,7 +336,7 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub lvPawners_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPawners.DoubleClick
-        btnView.PerformClick()
+        'btnView.PerformClick()
     End Sub
 
     ''' <summary>
@@ -365,8 +365,15 @@
                                             , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
                                              "Form Already Open")
             Else
-                btnView.PerformClick()
-                frmPawnItem.btnRenew.PerformClick()
+                If lvPawners.SelectedItems.Count = 0 Then Exit Sub
+
+                Dim pt_Selected As New PawnTicket2
+                pt_Selected.Load_PawnTicket(CInt(lvPawners.FocusedItem.Text))
+
+                frmPawningItemNew.Show()
+                frmPawningItemNew.Load_PawnTicket(pt_Selected)
+                frmPawningItemNew.transactionType = "R"
+
 
             End If
         End If
@@ -439,4 +446,20 @@
         Label6.Text = tpmstatus.LoadStatus
 
     End Sub
+
+    Private Sub GroupBox1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox1.DoubleClick
+        If mod_system.DEV_MODE Then
+
+            Dim pt As Integer = lvPawners.FocusedItem.Text
+            Dim pawnTicket As New PawnTicket2
+            pawnTicket.Load_PawnTicket(pt)
+
+            Console.WriteLine(pawnTicket.PawnItem.ItemClass.ClassName)
+
+            For Each pawnSpec As PawnItemSpec In pawnTicket.PawnItem.PawnItemSpecs
+                Console.WriteLine(pawnSpec.SpecsValue)
+            Next
+        End If
+    End Sub
+
 End Class
