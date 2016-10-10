@@ -60,7 +60,6 @@ Partial Class frmInterestScheme
         Me.btnUpdateScheme = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtSearch = New Pawnshop.watermark()
-
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -314,7 +313,7 @@ Partial Class frmInterestScheme
         Me.btnAdd.Location = New System.Drawing.Point(654, 184)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(88, 34)
-        Me.btnAdd.TabIndex = 3
+        Me.btnAdd.TabIndex = 2
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
@@ -324,7 +323,7 @@ Partial Class frmInterestScheme
         Me.btnRemove.Location = New System.Drawing.Point(839, 184)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(88, 34)
-        Me.btnRemove.TabIndex = 5
+        Me.btnRemove.TabIndex = 4
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = True
         '
@@ -489,17 +488,15 @@ Partial Class frmInterestScheme
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnUpdateScheme As System.Windows.Forms.Button
     Friend WithEvents Label9 As System.Windows.Forms.Label
-
     Friend WithEvents txtSchemeName As Pawnshop.watermark
     Friend WithEvents txtDayFrom As Pawnshop.watermark
     Friend WithEvents txtDescription As Pawnshop.watermark
-
     Friend WithEvents txtRemarks As Pawnshop.watermark
     Friend WithEvents txtPenalty As Pawnshop.watermark
     Friend WithEvents txtInterest As Pawnshop.watermark
     Friend WithEvents txtDayTo As Pawnshop.watermark
     Friend WithEvents txtSearch As Pawnshop.watermark
-
     Friend WithEvents Label11 As System.Windows.Forms.Label
+
 
 End Class

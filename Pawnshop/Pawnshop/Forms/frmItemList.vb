@@ -80,14 +80,6 @@
         lv.SubItems.Add(itm.PrintLayout)
     End Sub
 
-    'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-    '    mOtherForm = True
-    '    btnSelect.Visible = True
-    '    txtSearch.Text = src
-    '    frmOrig = frmOrigin
-    'End Sub
-
-
     Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs)
         'loadItemClass()
         txtSearch.Text = ""

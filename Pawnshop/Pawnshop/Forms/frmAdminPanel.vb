@@ -168,7 +168,7 @@ Public Class frmAdminPanel
         txtClassification.Text = ""
         txtDescription.Text = ""
         txtPrintLayout.Text = ""
-        txtSearch.Text = ""
+        'txtSearch.Text = ""
         txtReferenceNumber.Text = ""
         cmbModuleName.Text = ""
         dgSpecs.Rows.Clear()
@@ -203,7 +203,7 @@ Public Class frmAdminPanel
     '    If cbotxtSchemename.Text = "" Then cbotxtSchemename.Focus() : Return False
     '    If IsDataGridViewEmpty(dgSpecs) Then dgSpecs.Focus() : Return False
     '    Return True
-    'End Function
+    'End Sub
 
     Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
         Dim isEmpty As Boolean = True
@@ -235,8 +235,6 @@ Public Class frmAdminPanel
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .ClassName = txtClassification.Text
-
-            '.InterestScheme = SchemeSID
 
             If rbYes.Checked Then
                 .isRenewable = 1
@@ -631,36 +629,53 @@ Public Class frmAdminPanel
 
     Private Sub ModITEM()
         fillData = "tblitem"
-        mySql = "SELECT * FROM " & fillData
-        'mySql &= " ORDER BY ClassID ASC"
+        mySql = "SELECT S.SPECSID, I.ITEMCLASS, I.ITEMCATEGORY, I.DESCRIPTION, I.ISRENEW, "
+        mySql &= "I.ONHOLD, I.PRINT_LAYOUT, I.RENEWAL_CNT, I.SCHEME_ID, S.SPECSNAME, "
+        mySql &= "S.SPECTYPE, S.UOM, S.SPECLAYOUT, S.SHORTCODE, S.ISREQUIRED, I.ITEMID "
+        mySql &= "FROM TBLITEM I INNER JOIN TBLSPECS S ON S.ITEMID = I.ITEMID "
 
-        ds = LoadSQL(mySql, fillData)
+        ds = LoadSQL(mySql)
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
 
-        Me.lvModule.Columns.Add("ITEMID")
+        Me.lvModule.Columns.Add("Specsid")
         Me.lvModule.Columns.Add("Column2", "ITEMCLASS")
         Me.lvModule.Columns.Add("Column3", "ITEMCATEGORY")
         Me.lvModule.Columns.Add("Column4", "DESCRIPTION")
         Me.lvModule.Columns.Add("Column5", "ISRENEW")
-        Me.lvModule.Columns.Add("Column6", "PRINT_LAYOUT")
-        Me.lvModule.Columns.Add("Column7", "CREATED_AT")
-        Me.lvModule.Columns.Add("Column8", "UPDATED_AT")
+        Me.lvModule.Columns.Add("Column6", "Onhold")
+        Me.lvModule.Columns.Add("Column7", "Print_layout")
+        Me.lvModule.Columns.Add("Column8", "Renewal_cnt")
+        Me.lvModule.Columns.Add("Column9", "Scheme_ID")
+        Me.lvModule.Columns.Add("Column10", "Specsname")
+        Me.lvModule.Columns.Add("Column11", "Spectype")
+        Me.lvModule.Columns.Add("Column12", "UOM")
+        Me.lvModule.Columns.Add("Column13", "Speclayout")
+        Me.lvModule.Columns.Add("Column14", "Shortcode")
+        Me.lvModule.Columns.Add("Column15", "Isrequired")
+        Me.lvModule.Columns.Add("Column16", "ItemID")
 
         For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str As String = ds.Tables(0).Rows(i)("ITEMID").ToString
+            Dim str As String = ds.Tables(0).Rows(i)("Specsid").ToString
             Dim str2 As String = ds.Tables(0).Rows(i)("ITEMCLASS").ToString
             Dim str3 As String = ds.Tables(0).Rows(i)("ITEMCATEGORY").ToString
             Dim str4 As String = ds.Tables(0).Rows(i)("DESCRIPTION").ToString
             Dim str5 As String = ds.Tables(0).Rows(i)("ISRENEW").ToString
-            Dim str6 As String = ds.Tables(0).Rows(i)("PRINT_LAYOUT").ToString
-            Dim str7 As String = ds.Tables(0).Rows(i)("CREATED_AT").ToString
-            Dim str8 As String = ds.Tables(0).Rows(i)("UPDATED_AT").ToString
-
+            Dim str6 As String = ds.Tables(0).Rows(i)("Onhold").ToString
+            Dim str7 As String = ds.Tables(0).Rows(i)("Print_layout").ToString
+            Dim str8 As String = ds.Tables(0).Rows(i)("Renewal_cnt").ToString
+            Dim str9 As String = ds.Tables(0).Rows(i)("Scheme_ID").ToString
+            Dim str10 As String = ds.Tables(0).Rows(i)("Specsname").ToString
+            Dim str11 As String = ds.Tables(0).Rows(i)("Spectype").ToString
+            Dim str12 As String = ds.Tables(0).Rows(i)("UOM").ToString
+            Dim str13 As String = ds.Tables(0).Rows(i)("Speclayout").ToString
+            Dim str14 As String = ds.Tables(0).Rows(i)("Shortcode").ToString
+            Dim str15 As String = ds.Tables(0).Rows(i)("Isrequired").ToString
+            Dim str16 As String = ds.Tables(0).Rows(i)("ItemID").ToString
 
             Dim lvi As New ListViewItem
             lvi.Text = str
-            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7, str8})
+            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12, str13, str14, str15, str16})
             lvModule.Items.Add(lvi)
         Next
 
@@ -744,7 +759,7 @@ Public Class frmAdminPanel
                 Case "Cash"
                     ExportModType = ModuleType.Cash
                 Case "Item Class"
-                    ' ExportModType = ModuleType.ItemClass
+                    ExportModType = ModuleType.ITEM
                 Case "Rate"
                     ExportModType = ModuleType.Rate
                 Case "Currency"
