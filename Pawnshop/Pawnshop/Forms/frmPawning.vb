@@ -372,7 +372,7 @@
                 frmPawningItemNew.Show()
                 frmPawningItemNew.Load_PawnTicket(pt_Selected)
                 frmPawningItemNew.transactionType = "R"
-
+                frmPawningItemNew.Renew()
 
             End If
         End If
@@ -461,4 +461,7 @@
         End If
     End Sub
 
+    Private Sub lvPawners_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvPawners.SelectedIndexChanged
+
+    End Sub
 End Class

@@ -383,6 +383,23 @@ Public Class frmPawningItemNew
         txtAdv.Text = MoneyFormat(AdvanceInterest)
         txtNet.Text = MoneyFormat(NetAmount)
 
+        If transactionType = "R" Or transactionType = "X" Then
+            GenerateORNum()
+            With AutoCompute
+                txtOver.Text = .DaysOverDue
+                txtInt.Text = .Interest.ToString("#,##0.00")
+                txtPenalty.Text = .Penalty.ToString("#,##0.00")
+                txtService.Text = .ServiceCharge.ToString("#,##0.00")
+                txtEvat.Text = (0).ToString("#,##0.00")
+
+                txtRenew.Text = (0).ToString("#,##0.00")
+                txtRedeem.Text = (0).ToString("#,##0.00")
+
+                If transactionType = "R" Then txtRenew.Text = .RenewDue.ToString("#,##0.00")
+                If transactionType = "X" Then txtRedeem.Text = .RedeemDue.ToString("#,##0.00")
+            End With
+        End If
+
         '    Dim intHash As String = ""
 
         '    If transactionType = "D" Then Exit Sub 'Display No Recommute
@@ -500,6 +517,13 @@ Public Class frmPawningItemNew
         Return String.Format("{0:000000}", currentORNumber)
     End Function
 
+    Private Sub GenerateORNum()
+        txtReceipt.Text = CurrentOR()
+        txtReceiptDate.Text = CurrentDate
+        txtPrincipal2.Text = txtPrincipal.Text
+    End Sub
+
+
     Private Sub GeneratePT()
         'Check PT if existing
         Dim mySql As String, ds As DataSet
@@ -598,12 +622,25 @@ Public Class frmPawningItemNew
             i += 1
         Next
 
+        txtAppr.Text = pt.Appraisal.ToString("#,##0.00")
+        txtPrincipal.Text = pt.Principal.ToString("#,##0.00")
+        txtAdv.Text = pt.AdvanceInterest.ToString("#,##0.00")
+        txtNet.Text = pt.NetAmount.ToString("#,##0.00")
+
+        cboAppraiser.Text = GetNameByID(pt.AppraiserID, Appraisers_ht)
+
         'Disable
         txtCustomer.ReadOnly = True
         btnSearch.Enabled = False
         txtClassification.ReadOnly = True
         btnSearchClassification.Enabled = False
+        txtAppr.Enabled = False
+        txtPrincipal.Enabled = False
+        cboAppraiser.Enabled = False
+
+        PT_Entry = pt
     End Sub
+
 
     Private Function CheckAuth() As Boolean
         If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
@@ -626,6 +663,13 @@ Public Class frmPawningItemNew
 
         Return True
     End Function
+
+    Friend Sub Renew()
+        GeneratePT()
+
+        ReComputeInterest()
+        grpClaimer.Enabled = True
+    End Sub
 
     Friend Sub NewLoan()
         ClearFields()
