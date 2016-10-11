@@ -23,6 +23,9 @@
                 Dim ds2 As DataSet = LoadSQL(mysql2, filldata2)
                 ds2.Tables(filldata2).Rows(0).Item("Scheme_ID") = tmpSchemeID
                 database.SaveEntry(ds2, False)
+
+                pbProgressBar.Value = pbProgressBar.Value + 1
+                Console.WriteLine("ProgressBar Value " & pbProgressBar.Value)
             Next
             MsgBox("Success")
         Catch ex As Exception
@@ -83,4 +86,18 @@
 
         Return tmpID
     End Function
+
+    Private Sub Dev_Migrate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Dim mysql As String = "Select * from tblPawn"
+        Dim filldata As String = "tblPawn"
+        Dim ds As DataSet = LoadSQL(mysql, filldata)
+        If ds.Tables(0).Rows.Count <= 3000 Then
+            pbProgressBar.Minimum = 0
+            pbProgressBar.Maximum = 3000
+        Else
+            pbProgressBar.Minimum = 0
+            pbProgressBar.Maximum = 6000
+        End If
+       
+    End Sub
 End Class

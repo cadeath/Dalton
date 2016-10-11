@@ -23,8 +23,8 @@ Partial Class Dev_Migrate
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.pbProgressBar = New System.Windows.Forms.ProgressBar()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -38,6 +38,14 @@ Partial Class Dev_Migrate
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
+        'pbProgressBar
+        '
+        Me.pbProgressBar.Location = New System.Drawing.Point(6, 167)
+        Me.pbProgressBar.Maximum = 3000
+        Me.pbProgressBar.Name = "pbProgressBar"
+        Me.pbProgressBar.Size = New System.Drawing.Size(282, 23)
+        Me.pbProgressBar.TabIndex = 1
+        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(6, 19)
@@ -46,13 +54,6 @@ Partial Class Dev_Migrate
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'pbProgressBar
-        '
-        Me.pbProgressBar.Location = New System.Drawing.Point(6, 167)
-        Me.pbProgressBar.Name = "pbProgressBar"
-        Me.pbProgressBar.Size = New System.Drawing.Size(282, 23)
-        Me.pbProgressBar.TabIndex = 1
         '
         'Dev_Migrate
         '
