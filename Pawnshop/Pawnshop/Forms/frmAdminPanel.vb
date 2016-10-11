@@ -22,8 +22,6 @@ Public Class frmAdminPanel
 
         LoadScheme()
         lblDateStatus.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
-
-        'String.Format("{0} ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -41,6 +39,7 @@ Public Class frmAdminPanel
             rbYes.Checked = False
             rbNo.Checked = True
         End If
+        'SelectedItem = Item
         LoadSpec(Item.ID)
         btnUpdate.Enabled = True
     End Sub
@@ -88,33 +87,6 @@ Public Class frmAdminPanel
 
     End Sub
 
-    'Friend Sub LoadItemList(ByVal it As ItemClass)
-
-    '    If it.ClassName = "" Then Exit Sub
-    '    txtClassification.Text = it.ClassName
-    '    txtCategory.Text = it.Category
-    '    txtDescription.Text = it.Description
-    '    cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
-
-    '    If it.isRenewable = "True" Then
-    '        rdbYes.Checked = True
-    '        rdbNo.Checked = False
-    '    Else
-    '        rdbYes.Checked = False
-    '        rdbNo.Checked = True
-    '    End If
-
-    '    txtPrintLayout.Text = it.PrintLayout
-    '    cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
-
-    '    Dim id As Integer = it.ID
-    '    SelectedItem = it
-
-    '    ReadOnlyTrue()
-    '    btnSave.Enabled = False
-    '    btnUpdate.Enabled = True
-    'End Sub
-
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
             If el.Key = id Then
@@ -153,11 +125,11 @@ Public Class frmAdminPanel
 
         If txtClassification.Text = "" Then txtClassification.Focus() : Return False
         If txtCategory.Text = "" Then txtCategory.Focus() : Return False
-
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
         If dgSpecs.CurrentCell.Value Is Nothing Then dgSpecs.Focus() : Return False
         If cboSchemename.Text = "" Then cboSchemename.Focus() : Return False
+
         Return True
     End Function
 
@@ -192,9 +164,6 @@ Public Class frmAdminPanel
         If Not isValid() Then Exit Sub
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        'Dim SchemeSID As New InterestScheme
-        'SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
 
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
@@ -255,9 +224,6 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        'Dim SchemeSID As New InterestScheme
-        'SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
-
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
         With ItemModify
@@ -273,10 +239,8 @@ Public Class frmAdminPanel
             End If
 
             .PrintLayout = txtPrintLayout.Text
-
             .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
             .updated_at = CurrentDate
-
         End With
 
         Dim SpecModify As New ItemSpecs
