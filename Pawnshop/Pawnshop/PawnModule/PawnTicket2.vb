@@ -328,8 +328,47 @@
             .Item("SERVICECHARGE") = _serviceCharge
             .Item("CREATED_AT") = Now.ToShortDateString
         End With
+
         ds.Tables(MainTable).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
+    End Sub
+
+    Public Sub Update_PawnTicket()
+        Dim mySql As String, ds As DataSet
+
+        mySql = String.Format("SELECT * FROM {0} WHERE PAWNTICKET = {1}", MainTable, _ticket)
+        ds = LoadSQL(mySql, MainTable)
+
+        With ds.Tables(0).Rows(0)
+            .Item("PAWNTICKET") = _ticket
+            .Item("OLDTICKET") = _oldPT
+            .Item("LOANDATE") = _loanDate
+            .Item("MATUDATE") = _matuDate
+            .Item("EXPIRYDATE") = _expiryDate
+            .Item("AUCTIONDATE") = _auctionDate
+            .Item("APPRAISAL") = _appraisal
+            .Item("PRINCIPAL") = _principal
+            .Item("NETAMOUNT") = _netAmount
+            .Item("APPRAISERID") = _appraiserID
+            .Item("ENCODERID") = _encoderID
+            .Item("CLAIMERID") = _claimerID
+            .Item("CLIENTID") = _pawner.ID
+            .Item("PAWNITEMID") = _pawnItem.ID
+            .Item("ORDATE") = _ORDate
+            .Item("ORNUM") = _ORNum
+            .Item("PENALTY") = _penalty
+            .Item("STATUS") = _status
+            .Item("DAYSOVERDUE") = _daysOverDue
+            .Item("EARLYREDEEM") = _earlyRedeem
+            .Item("DELAYINTEREST") = _delayInt
+            .Item("ADVINT") = _advInt
+            .Item("RENEWDUE") = _renewDue
+            .Item("REDEEMDUE") = _redeemDue
+            .Item("SERVICECHARGE") = _serviceCharge
+            .Item("UPDATED_AT") = Now.ToShortDateString
+        End With
+
+        database.SaveEntry(ds, False)
     End Sub
 
     Public Sub Load_PTid(ByVal id As Integer)

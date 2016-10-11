@@ -264,11 +264,17 @@ Public Class frmPawningItemNew
             .ServiceCharge = PawnServiceCharge
 
             .RenewDue = RenewDue
-            .RedeemDue = RedeemDue
+            .RedeemDue = 0
 
-            .Save_PawnTicket()
+            .Update_PawnTicket()
         End With
 
+        Dim newPT As New PawnTicket2
+        newPT = PT_Entry
+        With newPT
+            .OldTicket = PT_Entry.PawnTicket
+
+        End With
     End Sub
 
     Private Sub SaveNewLoan()
@@ -549,7 +555,7 @@ Public Class frmPawningItemNew
 
     Private Sub GenerateORNum()
         txtReceipt.Text = CurrentOR()
-        txtReceiptDate.Text = CurrentDate
+        txtReceiptDate.Text = CurrentDate.ToString("MM/dd/yyyy")
         txtPrincipal2.Text = txtPrincipal.Text
     End Sub
 
