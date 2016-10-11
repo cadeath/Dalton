@@ -159,9 +159,10 @@ Public Class ItemClass
             Exit Sub
         End If
 
-
-
         _interestScheme = New InterestScheme
+
+
+    
         With ds.Tables(0).Rows(0)
             _itemID = .Item("ItemID")
             _itemClassName = .Item("ItemClass")
@@ -187,6 +188,8 @@ Public Class ItemClass
             Console.WriteLine(dr.Item("SpecsName"))
             Dim tmpSpecs As New ItemSpecs
             tmpSpecs.LoadItemSpecs_row(dr)
+
+            'Load Item Specification
 
             _itemSpecs.Add(tmpSpecs)
         Next

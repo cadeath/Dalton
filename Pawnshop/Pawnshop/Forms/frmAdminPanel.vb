@@ -31,14 +31,14 @@ Public Class frmAdminPanel
         txtCategory.Text = Item.Category
         txtDescription.Text = Item.Description
         txtPrintLayout.Text = Item.PrintLayout
-        cbotxtSchemename.Text = GetSchemeByID(Item.InterestScheme.SchemeID)
+        cboSchemename.Text = GetSchemeByID(Item.InterestScheme.SchemeID)
 
         If Item.isRenewable = "True" Then
-            rdbYes.Checked = True
-            rdbNo.Checked = False
+            rbYes.Checked = True
+            rbNo.Checked = False
         Else
-            rdbYes.Checked = False
-            rdbNo.Checked = True
+            rbYes.Checked = False
+            rbNo.Checked = True
         End If
         LoadSpec(Item.ID)
         btnUpdate.Enabled = True
@@ -73,7 +73,7 @@ Public Class frmAdminPanel
         Dim ds As DataSet = LoadSQL(mySql)
 
         Scheme = New Hashtable
-        cbotxtSchemename.Items.Clear()
+        cboSchemename.Items.Clear()
         Dim tmpName As String, tmpID As Integer
 
         For Each dr As DataRow In ds.Tables(0).Rows
@@ -82,42 +82,46 @@ Public Class frmAdminPanel
                 tmpName = .Item("SCHEMENAME")
             End With
             Scheme.Add(tmpID, tmpName)
-            cbotxtSchemename.Items.Add(tmpName)
+            cboSchemename.Items.Add(tmpName)
         Next
     End Sub
 
 
-    Friend Sub LoadItemList(ByVal it As ItemClass)
-        If it.ClassName = "" Then Exit Sub
+    'Friend Sub LoadItemList(ByVal it As ItemClass)
+      '  If it.ClassName = "" Then Exit Sub
+
+   'End Sub
 
 
-        txtClassification.Text = it.ClassName
-        txtCategory.Text = it.Category
-        txtDescription.Text = it.Description
+        'txtPrintLayout.Text = it.PrintLayout
 
-        cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
+    'Friend Sub LoadItemList(ByVal it As ItemClass)
 
 
-        If it.isRenewable = "True" Then
-            rdbYes.Checked = True
-            rdbNo.Checked = False
-        Else
-            rdbYes.Checked = False
-            rdbNo.Checked = True
-        End If
+    '    If it.ClassName = "" Then Exit Sub
+    '    txtClassification.Text = it.ClassName
+    '    txtCategory.Text = it.Category
+    '    txtDescription.Text = it.Description
+    '    cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
 
-        txtPrintLayout.Text = it.PrintLayout
+    '    If it.isRenewable = "True" Then
+    '        rdbYes.Checked = True
+    '        rdbNo.Checked = False
+    '    Else
+    '        rdbYes.Checked = False
+    '        rdbNo.Checked = True
+    '    End If
 
-    End Sub
+    '    txtPrintLayout.Text = it.PrintLayout
+    '    cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
 
+    '    Dim id As Integer = it.ID
+    '    SelectedItem = it
 
-
-
-    Friend Sub LoadItemall(ByVal it As ItemClass)
-        txtClassification.Text = String.Format(it.ClassName)
-        txtCategory.Text = String.Format(it.Category)
-        txtDescription.Text = String.Format(it.Description)
-    End Sub
+    '    ReadOnlyTrue()
+    '    btnSave.Enabled = False
+    '    btnUpdate.Enabled = True
+    'End Sub
 
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
@@ -126,12 +130,10 @@ Public Class frmAdminPanel
             End If
         Next
 
-
         Return "N/A"
-
     End Function
 
-Private Function GetSchemeID(ByVal name As String) As Integer
+    Private Function GetSchemeID(ByVal name As String) As Integer
         For Each el As DictionaryEntry In Scheme
             If el.Value = name Then
                 Return el.Key
@@ -140,9 +142,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
         Return 0
     End Function
-       
 
-    
 
     'Friend Sub LoadItemall(ByVal it As ItemClass)
     '    txtClassifiction.Text = String.Format(it.ItemClass)
@@ -161,18 +161,18 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     'End Sub
 
 
-
     Friend Sub clearfields()
         txtCategory.Text = ""
         txtClassification.Text = ""
         txtDescription.Text = ""
         txtPrintLayout.Text = ""
-        txtSearch.Text = ""
+        'txtSearch.Text = ""
         txtReferenceNumber.Text = ""
         cmbModuleName.Text = ""
         dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
-        cbotxtSchemename.SelectedValue = Nothing
+        cboSchemename.Items.Clear()
+
     End Sub
 
     Private Function isValid() As Boolean
@@ -182,10 +182,27 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
         If txtDescription.Text = "" Then txtDescription.Focus() : Return False
         If txtPrintLayout.Text = "" Then txtPrintLayout.Focus() : Return False
+
         If cbotxtSchemename.Text = "" Then cbotxtSchemename.Focus() : Return False
         If IsDataGridViewEmpty(dgSpecs) Then dgSpecs.Focus() : Return False
         Return True
     End Function
+
+        If dgSpecs.CurrentCell.Value Is Nothing Then dgSpecs.Focus() : Return False
+        If cboSchemename.Text = "" Then cboSchemename.Focus() : Return False
+        Return True
+    End Function
+
+    Private Sub dgSpecs_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+        If btnUpdate.Text = "&Modify" Then
+            If e.KeyCode = Keys.Enter Then
+                btnUpdate.PerformClick()
+            End If
+        Else
+            btnSave.PerformClick()
+        End If
+    End Sub
+
 
     Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
         Dim isEmpty As Boolean = True
@@ -196,6 +213,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         Next
         Return isEmpty
     End Function
+
 
     Private Sub dgSpecs_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If btnUpdate.Text = "&Modify" Then
@@ -209,38 +227,31 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
     Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
-
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        Dim SchemeSID As New InterestScheme
-        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
-
+        'Dim SchemeSID As New InterestScheme
+        'SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
 
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
-
         With ItemSave
-
             .ClassName = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
 
             .InterestScheme = SchemeSID
 
-            If rdbYes.Checked Then
+
+            If rbYes.Checked Then
                 .isRenewable = 1
             Else
                 .isRenewable = 0
             End If
-
             .PrintLayout = txtPrintLayout.Text
             .created_at = CurrentDate
-
-            .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
-
+            .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
         End With
-
 
         For Each row As DataGridViewRow In dgSpecs.Rows
             SpecSave = New ItemSpecs
@@ -260,7 +271,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
             ColItemsSpecs.Add(SpecSave)
         Next
-
         ItemSave.ItemSpecifications = ColItemsSpecs
         ItemSave.Save_ItemClass()
 
@@ -278,27 +288,22 @@ Private Function GetSchemeID(ByVal name As String) As Integer
             btnUpdate.Text = "&Modify".ToString
             reaDOnlyFalse()
             txtClassification.Enabled = False
-            'LoadScheme()
+            LoadScheme()
             Exit Sub
         End If
-
         Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        Dim SchemeSID As New InterestScheme
-        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+        'Dim SchemeSID As New InterestScheme
+        'SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
-
-
         With ItemModify
             .ClassName = txtClassification.Text
             .Category = txtCategory.Text
             .Description = txtDescription.Text
             .ID = SelectedItem.ID
-
-            .InterestScheme = SchemeSID
 
             If rdbYes.Checked Then
                 .isRenewable = 1
@@ -308,10 +313,10 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
             .PrintLayout = txtPrintLayout.Text
 
-            .updated_at = CurrentDate
-
-
             .InterestScheme.SchemeID = GetSchemeID(cbotxtSchemename.Text)
+
+
+            .updated_at = CurrentDate
 
         End With
 
@@ -333,17 +338,13 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                 End If
 
             End With
-
             SpecModify.ItemID = SelectedItem.ID
-
             SpecModify.UpdateSpecs()
-
         Next
-
         ItemModify.Update()
 
         MsgBox("Item Class Updated", MsgBoxStyle.Information)
-        txtClassification.Focus()
+
         btnSave.Enabled = True
 
         rdbNo.Checked = False
@@ -351,6 +352,10 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         txtClassification.Enabled = True
 
         btnUpdate.Text = "&Update"
+        rdbNo.Checked = False
+        txtClassification.Focus()
+        txtClassification.Enabled = True
+
         clearfields()
         LoadScheme()
     End Sub
@@ -366,15 +371,14 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         frmItemList.Show()
     End Sub
 
-    '"""""""""""""""""""""""""""""export"""""""""""""""""""""""""""""""""""""""
     Private Sub ReadOnlyTrue()
         txtCategory.ReadOnly = True
         txtClassification.ReadOnly = True
         txtDescription.ReadOnly = True
         txtPrintLayout.ReadOnly = True
-        cbotxtSchemename.Enabled = False
-        rdbNo.Enabled = False
-        rdbYes.Enabled = False
+        cboSchemename.Enabled = False
+        rbNo.Enabled = False
+        rbYes.Enabled = False
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = True
         Next
@@ -384,16 +388,16 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         txtCategory.ReadOnly = False
 
         txtClassification.ReadOnly = False
+
         txtDescription.ReadOnly = False
         txtPrintLayout.ReadOnly = False
-        cbotxtSchemename.Enabled = True
-        rdbNo.Enabled = True
-        rdbYes.Enabled = True
+        cboSchemename.Enabled = True
+        rbNo.Enabled = True
+        rbYes.Enabled = True
         For a As Integer = 0 To dgSpecs.Rows.Count - 1
             dgSpecs.Rows(a).ReadOnly = False
         Next
     End Sub
-
 
     Friend Sub LoadSpec(ByVal ID As Integer)
         Dim da As New OdbcDataAdapter
@@ -422,7 +426,6 @@ Private Function GetSchemeID(ByVal name As String) As Integer
                 tmpItem.SpecName, tmpItem.SpecType.ToString, _
                 tmpItem.SpecLayout.ToString, tmpItem.UnitOfMeasure, tmpItem.isRequired.ToString)
     End Sub
-
 
     Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -613,35 +616,37 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     'End Sub
 
     Private Sub ModRate()
-        fillData = "TBLINT"
-        mySql = "SELECT INTID,DAYFROM,DAYTO,ITEMTYPE,INTEREST,PENALTY,REMARKS FROM " & fillData
-        mySql &= " ORDER BY IntID ASC"
 
-        ds = LoadSQL(mySql, fillData)
+        mySql = "SELECT  D.IS_ID, I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
+        mySql &= "D.INTEREST, D.PENALTY, D.REMARKS "
+        mySql &= "FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
+
+        ds = LoadSQL(mySql)
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
 
-        Me.lvModule.Columns.Add("INTID")
-        Me.lvModule.Columns.Add("Column2", "DAYFROM")
-        Me.lvModule.Columns.Add("Column3", "DAYTO")
-        Me.lvModule.Columns.Add("Column4", "ITEMTYPE")
-        Me.lvModule.Columns.Add("Column4", "INTEREST")
-        Me.lvModule.Columns.Add("Column4", "PENALTY")
-        Me.lvModule.Columns.Add("Column4", "REMARKS")
+        Me.lvModule.Columns.Add("ID")
+        Me.lvModule.Columns.Add("Column2", "Remarks")
+        Me.lvModule.Columns.Add("Column3", "SchemeName")
+        Me.lvModule.Columns.Add("Column4", "Description")
+        Me.lvModule.Columns.Add("Column5", "DayFrom")
+        Me.lvModule.Columns.Add("Column6", "DayTo")
+        Me.lvModule.Columns.Add("Column7", "Interest")
+        Me.lvModule.Columns.Add("Column8", "Penalty")
 
         For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str1 As String = ds.Tables(0).Rows(i)("INTID").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("DAYFROM").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("DAYTO").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("ITEMTYPE").ToString
-            Dim str5 As String = ds.Tables(0).Rows(i)("INTEREST").ToString
-            Dim str6 As String = ds.Tables(0).Rows(i)("PENALTY").ToString
-            Dim str7 As String = ds.Tables(0).Rows(i)("REMARKS").ToString
-
+            Dim str1 As String = ds.Tables(0).Rows(i)("Is_ID").ToString
+            Dim str2 As String = ds.Tables(0).Rows(i)("SchemeName").ToString
+            Dim str3 As String = ds.Tables(0).Rows(i)("Description").ToString
+            Dim str4 As String = ds.Tables(0).Rows(i)("DayFrom").ToString
+            Dim str5 As String = ds.Tables(0).Rows(i)("DayTo").ToString
+            Dim str6 As String = ds.Tables(0).Rows(i)("Interest").ToString
+            Dim str7 As String = ds.Tables(0).Rows(i)("Penalty").ToString
+            Dim str8 As String = ds.Tables(0).Rows(i)("Remarks").ToString
 
             Dim lvi As New ListViewItem
             lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7})
+            lvi.SubItems.AddRange(New String() {str8, str2, str3, str4, str5, str6, str7})
             lvModule.Items.Add(lvi)
         Next
     End Sub
@@ -678,41 +683,59 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
 
     Private Sub ModITEM()
-        fillData = "tblitem"
-        mySql = "SELECT * FROM " & fillData
-        'mySql &= " ORDER BY ClassID ASC"
 
-        ds = LoadSQL(mySql, fillData)
+        mySql = "SELECT S.SPECSID, I.ITEMCLASS, I.ITEMCATEGORY, I.DESCRIPTION, I.ISRENEW, "
+        mySql &= "I.ONHOLD, I.PRINT_LAYOUT, I.RENEWAL_CNT, I.SCHEME_ID, S.SPECSNAME, "
+        mySql &= "S.SPECTYPE, S.UOM, S.SPECLAYOUT, S.SHORTCODE, S.ISREQUIRED, I.ITEMID "
+        mySql &= "FROM TBLITEM I INNER JOIN TBLSPECS S ON S.ITEMID = I.ITEMID "
+
+        ds = LoadSQL(mySql)
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
 
-        Me.lvModule.Columns.Add("ITEMID")
-        Me.lvModule.Columns.Add("Column2", "ITEMCLASS")
-        Me.lvModule.Columns.Add("Column3", "ITEMCATEGORY")
-        Me.lvModule.Columns.Add("Column4", "DESCRIPTION")
-        Me.lvModule.Columns.Add("Column5", "ISRENEW")
-        Me.lvModule.Columns.Add("Column6", "PRINT_LAYOUT")
-        Me.lvModule.Columns.Add("Column7", "CREATED_AT")
-        Me.lvModule.Columns.Add("Column8", "UPDATED_AT")
+        Me.lvModule.Columns.Add("Specsid")
+        Me.lvModule.Columns.Add("Column2", "Isrequired")
+        Me.lvModule.Columns.Add("Column3", "ITEMCLASS")
+        Me.lvModule.Columns.Add("Column4", "ItemID")
+        Me.lvModule.Columns.Add("Column5", "ITEMCATEGORY")
+        Me.lvModule.Columns.Add("Column6", "DESCRIPTION")
+        Me.lvModule.Columns.Add("Column7", "ISRENEW")
+        Me.lvModule.Columns.Add("Column8", "Onhold")
+        Me.lvModule.Columns.Add("Column9", "Print_layout")
+        Me.lvModule.Columns.Add("Column10", "Renewal_cnt")
+        Me.lvModule.Columns.Add("Column11", "Scheme_ID")
+        Me.lvModule.Columns.Add("Column12", "Specsname")
+        Me.lvModule.Columns.Add("Column13", "Spectype")
+        Me.lvModule.Columns.Add("Column14", "UOM")
+        Me.lvModule.Columns.Add("Column15", "Speclayout")
+        Me.lvModule.Columns.Add("Column16", "Shortcode")
 
         For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str As String = ds.Tables(0).Rows(i)("ITEMID").ToString
+            Dim str As String = ds.Tables(0).Rows(i)("Specsid").ToString
             Dim str2 As String = ds.Tables(0).Rows(i)("ITEMCLASS").ToString
             Dim str3 As String = ds.Tables(0).Rows(i)("ITEMCATEGORY").ToString
             Dim str4 As String = ds.Tables(0).Rows(i)("DESCRIPTION").ToString
             Dim str5 As String = ds.Tables(0).Rows(i)("ISRENEW").ToString
-            Dim str6 As String = ds.Tables(0).Rows(i)("PRINT_LAYOUT").ToString
-            Dim str7 As String = ds.Tables(0).Rows(i)("CREATED_AT").ToString
-            Dim str8 As String = ds.Tables(0).Rows(i)("UPDATED_AT").ToString
-
+            Dim str6 As String = ds.Tables(0).Rows(i)("Onhold").ToString
+            Dim str7 As String = ds.Tables(0).Rows(i)("Print_layout").ToString
+            Dim str8 As String = ds.Tables(0).Rows(i)("Renewal_cnt").ToString
+            Dim str9 As String = ds.Tables(0).Rows(i)("Scheme_ID").ToString
+            Dim str10 As String = ds.Tables(0).Rows(i)("Specsname").ToString
+            Dim str11 As String = ds.Tables(0).Rows(i)("Spectype").ToString
+            Dim str12 As String = ds.Tables(0).Rows(i)("UOM").ToString
+            Dim str13 As String = ds.Tables(0).Rows(i)("Speclayout").ToString
+            Dim str14 As String = ds.Tables(0).Rows(i)("Shortcode").ToString
+            Dim str15 As String = ds.Tables(0).Rows(i)("Isrequired").ToString
+            Dim str16 As String = ds.Tables(0).Rows(i)("ItemID").ToString
 
             Dim lvi As New ListViewItem
             lvi.Text = str
-            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7, str8})
+            lvi.SubItems.AddRange(New String() {str15, str2, str16, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12, str13, str14})
             lvModule.Items.Add(lvi)
         Next
 
     End Sub
+
 #End Region
 
     Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
@@ -733,12 +756,16 @@ Private Function GetSchemeID(ByVal name As String) As Integer
 
 
 
-    Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
+  
 
+    Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
         Dim fn As String = oFd.FileName
 
         ShowDataInLvw(FileChecker(fn), lvModule)
         MsgBox("Successfully Loaded", MsgBoxStyle.OkOnly, "Load")
+        chkSelectAll.Checked = False
+        dt.Clear()
+        ds.Tables.Clear()
         chkSelectAll.Checked = False
     End Sub
 
@@ -786,6 +813,37 @@ Private Function GetSchemeID(ByVal name As String) As Integer
     End Sub
 
 
+    Private Sub cmbModuleName_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
+        If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
+
+        If cmbModuleName.Visible Then
+            Select Case cmbModuleName.Text
+                Case "Money Transfer"
+                    ExportModType = ModuleType.MoneyTransfer
+                Case "Branch"
+                    ExportModType = ModuleType.Branch
+                Case "Cash"
+                    ExportModType = ModuleType.Cash
+                Case "Item Class"
+                    ExportModType = ModuleType.ITEM
+                Case "Rate"
+                    ExportModType = ModuleType.Rate
+                Case "Currency"
+                    ExportModType = ModuleType.Currency
+            End Select
+        End If
+        GenerateModule()
+        lvModule.View = View.Details
+        lvModule.CheckBoxes = True
+        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
+    End Sub
+
+  
+    Private Sub txtSearch_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
 
     Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
         If txtReferenceNumber.Text = "" Then txtReferenceNumber.Focus() : Exit Sub
@@ -813,22 +871,12 @@ Private Function GetSchemeID(ByVal name As String) As Integer
         SFD.ShowDialog()
         saveModname()
 
-
     End Sub
-    Private Sub btnExport_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
-        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
-        SFD.ShowDialog()
-
-        MsgBox("Data Exported", MsgBoxStyle.Information)
-
-        txtReferenceNumber.Text = ""
-        cmbModuleName.SelectedItem = Nothing
-
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
-    End Sub
+  
 
 
+
+ 
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
         table.Clear()
         dt.Columns.Clear()
@@ -846,10 +894,7 @@ Private Function GetSchemeID(ByVal name As String) As Integer
             Next
             table.Rows.Add(cells)
         Next
-
-
     End Sub
-
 
     Private str As String = My.Computer.FileSystem.SpecialDirectories.Desktop
     Private path As String = String.Format("{1}{0}.dat", fn, str)

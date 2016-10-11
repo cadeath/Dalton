@@ -227,10 +227,8 @@ Public Class frmPawningItemNew
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         If Not mod_system.isAuthorized Then cboAppraiser.DroppedDown = True : Return False
 
-
         If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
         If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
-
 
         Return True
     End Function
@@ -593,7 +591,21 @@ Public Class frmPawningItemNew
     End Sub
 
     Friend Sub Load_PawnTicket(pt As PawnTicket2)
+        LoadClient(pt.Pawner)
 
+        Load_ItemSpecification(pt.PawnItem.ItemClass)
+
+        Dim i As Integer = 0
+        For Each pawnSpec As PawnItemSpec In pt.PawnItem.PawnItemSpecs
+            lvSpec.Items(i).SubItems(1).Text = pawnSpec.SpecsValue
+            i += 1
+        Next
+
+        'Disable
+        txtCustomer.ReadOnly = True
+        btnSearch.Enabled = False
+        txtClassification.ReadOnly = True
+        btnSearchClassification.Enabled = False
     End Sub
 
     Private Function CheckAuth() As Boolean

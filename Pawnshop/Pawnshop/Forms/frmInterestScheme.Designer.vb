@@ -91,33 +91,30 @@ Partial Class frmInterestScheme
         '
         'txtRemarks
         '
-
-
-        Me.txtRemarks.Location = New System.Drawing.Point(270, 52)
+        Me.txtRemarks.Location = New System.Drawing.Point(270, 50)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(258, 58)
-        Me.txtRemarks.TabIndex = 14
+        Me.txtRemarks.Size = New System.Drawing.Size(249, 60)
+        Me.txtRemarks.TabIndex = 4
         Me.txtRemarks.WatermarkColor = System.Drawing.Color.Gray
         Me.txtRemarks.WatermarkText = "Remarks"
         '
         'txtPenalty
         '
 
-
-        Me.txtPenalty.Location = New System.Drawing.Point(75, 88)
+        Me.txtPenalty.Location = New System.Drawing.Point(81, 88)
         Me.txtPenalty.Name = "txtPenalty"
-        Me.txtPenalty.Size = New System.Drawing.Size(122, 22)
-        Me.txtPenalty.TabIndex = 13
+        Me.txtPenalty.Size = New System.Drawing.Size(112, 22)
+        Me.txtPenalty.TabIndex = 3
         Me.txtPenalty.WatermarkColor = System.Drawing.Color.Gray
         Me.txtPenalty.WatermarkText = "Penalty"
         '
         'txtInterest
         '
-        Me.txtInterest.Location = New System.Drawing.Point(75, 53)
+        Me.txtInterest.Location = New System.Drawing.Point(78, 51)
         Me.txtInterest.Name = "txtInterest"
-        Me.txtInterest.Size = New System.Drawing.Size(122, 22)
-        Me.txtInterest.TabIndex = 12
+        Me.txtInterest.Size = New System.Drawing.Size(112, 22)
+        Me.txtInterest.TabIndex = 2
         Me.txtInterest.WatermarkColor = System.Drawing.Color.Gray
         Me.txtInterest.WatermarkText = "Interest"
         '
@@ -138,7 +135,7 @@ Partial Class frmInterestScheme
         Me.txtDayFrom.Size = New System.Drawing.Size(122, 22)
         Me.txtDayFrom.TabIndex = 10
         Me.txtDayFrom.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDayFrom.WatermarkText = "DayFrom"
+        Me.txtDayFrom.WatermarkText = "DayFrom"I
         '
         'Label5
         '
@@ -211,20 +208,21 @@ Partial Class frmInterestScheme
         '
         'txtDescription
         '
-        Me.txtDescription.Location = New System.Drawing.Point(109, 53)
+
+        Me.txtDescription.Location = New System.Drawing.Point(109, 55)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(251, 60)
-        Me.txtDescription.TabIndex = 11
+        Me.txtDescription.Size = New System.Drawing.Size(250, 52)
+        Me.txtDescription.TabIndex = 1
         Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
         Me.txtDescription.WatermarkText = "Description"
         '
         'txtSchemeName
         '
-        Me.txtSchemeName.Location = New System.Drawing.Point(109, 23)
+        Me.txtSchemeName.Location = New System.Drawing.Point(109, 18)
         Me.txtSchemeName.Name = "txtSchemeName"
-        Me.txtSchemeName.Size = New System.Drawing.Size(251, 22)
-        Me.txtSchemeName.TabIndex = 10
+        Me.txtSchemeName.Size = New System.Drawing.Size(250, 22)
+        Me.txtSchemeName.TabIndex = 0
         Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
         Me.txtSchemeName.WatermarkText = "Scheme Name"
         '
@@ -320,7 +318,7 @@ Partial Class frmInterestScheme
         Me.btnAdd.Location = New System.Drawing.Point(654, 184)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(88, 34)
-        Me.btnAdd.TabIndex = 3
+        Me.btnAdd.TabIndex = 2
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = True
         '
@@ -330,7 +328,7 @@ Partial Class frmInterestScheme
         Me.btnRemove.Location = New System.Drawing.Point(839, 184)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(88, 34)
-        Me.btnRemove.TabIndex = 5
+        Me.btnRemove.TabIndex = 4
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = True
         '
@@ -497,11 +495,12 @@ Partial Class frmInterestScheme
     Friend WithEvents btnUpdateScheme As System.Windows.Forms.Button
     Friend WithEvents Label9 As System.Windows.Forms.Label
 
+
     Friend WithEvents txtSchemeName As Pawnshop.watermark
     Friend WithEvents txtDayFrom As Pawnshop.watermark
     Friend WithEvents txtDescription As Pawnshop.watermark
 
- 
+
     Friend WithEvents txtRemarks As Pawnshop.watermark
     Friend WithEvents txtPenalty As Pawnshop.watermark
     Friend WithEvents txtInterest As Pawnshop.watermark

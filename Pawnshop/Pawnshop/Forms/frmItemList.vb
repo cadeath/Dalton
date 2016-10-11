@@ -1,5 +1,6 @@
 ﻿Public Class frmItemList
     Private ItemClasses_ht As Hashtable
+<<<<<<< HEAD
 
  Dim ds As New DataSet
     Dim selectedItem As ItemClass
@@ -7,8 +8,12 @@
 
     'FORMS
 
+
     Private fromOtherForm As Boolean = False
     Private frmOrig As formSwitch.FormName
+    Dim ds As New DataSet
+    Dim selectedItem As ItemClass
+
 
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
         Dim ds As DataSet
@@ -66,13 +71,28 @@
 
     End Sub
 
+
     Private Sub ClearFields()
         txtSearch.Text = ""
         lvItem.Items.Clear()
     End Sub
 
 
+
+   ' Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
+    'Private Sub searchItem()
+    '    If txtSearch.Text = "" Then Exit Sub
+    '    Dim secured_str As String = txtSearch.Text
+    '    secured_str = DreadKnight(secured_str)
+
+    '    Dim mySql As String = "SELECT * FROM tblITEM WHERE "
+    '    mySql &= String.Format("UPPER (ITEMCLASS) LIKE UPPER('%{0}%')", secured_str)
+
+    '    Console.WriteLine("SQL: " & mySql)
+    'End Sub
+
     Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
+
         Dim ds As DataSet = LoadSQL(mySql)
 
         ItemClasses_ht = New Hashtable
@@ -86,7 +106,6 @@
         Next
     End Sub
 
-
     'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
     '    mOtherForm = True
     '    btnSelect.Visible = True
@@ -99,6 +118,17 @@
         'loadItemClass()
         txtSearch.Text = ""
     End Sub
+
+
+    Private Sub AddItem(ByVal itm As ItemClass)
+        Dim lv As ListViewItem = lvItem.Items.Add(itm.ID)
+        lv.SubItems.Add(itm.ClassName)
+        lv.SubItems.Add(itm.Category)
+        lv.SubItems.Add(itm.Description)
+        lv.SubItems.Add(itm.isRenewable)
+        lv.SubItems.Add(itm.PrintLayout)
+    End Sub
+
 
     Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -122,7 +152,6 @@
         frmOrig = frmOrigin
     End Sub
 
-
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
@@ -134,20 +163,17 @@
         MsgBox(String.Format("{0} item found.", lvItem.Items.Count), MsgBoxStyle.Information)
     End Sub
 
-
     Private Sub lvItem_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvItem.KeyDown
         If e.KeyCode = Keys.Enter Then
             If Not fromOtherForm Then
-                btnView.PerformClick()
-            Else
                 btnSelect.PerformClick()
             End If
         End If
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        If lvItem.Items.Count = 0 Then Exit Sub
 
+        If lvItem.Items.Count = 0 Then Exit Sub
         If lvItem.SelectedItems.Count = 0 Then
             lvItem.Items(0).Focused = True
         End If
@@ -177,6 +203,9 @@
         Else
             btnSelect.PerformClick()
         End If
+
+    Private Sub lvItem_DoubleClick(sender As Object, e As System.EventArgs) Handles lvItem.DoubleClick
+        btnSelect.PerformClick()
     End Sub
 
     Private Sub lvItem_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvItem.KeyPress
@@ -231,13 +260,15 @@
         'loadItemClass()
         LoadActiveItem()
 
-        If Not fromOtherForm Then
-            txtSearch.Focus()
-        End If
+    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If Not fromOtherForm Then ClearFields() : txtSearch.Focus()
+
+        LoadActive_ItemClasses()
 
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
         End If
     End Sub
+
 End Class

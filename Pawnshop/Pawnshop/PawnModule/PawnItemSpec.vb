@@ -75,7 +75,9 @@
             Me.UnitOfMeasure = .Item("UOM")
             Me.SpecName = .Item("SPECSNAME")
             Me.SpecType = .Item("SPECSTYPE")
-            Me.SpecLayout = .Item("SPECSLAYOUT")
+            'Me.SpecLayout = .Item("SPECSLAYOUT")
+            Me.SpecsValue = .Item("SPECSVALUE")
+            Me.isRequired = .Item("ISREQUIRED")
             _PawnItemID = .Item("PAWNITEMID")
         End With
     End Sub

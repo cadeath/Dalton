@@ -97,7 +97,6 @@ Public Class frmInterestScheme
     End Function
 
 
-
     Private Sub txtDayTo_KeyPress_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
         DigitOnly(e)
     End Sub
@@ -126,40 +125,7 @@ Public Class frmInterestScheme
         End If
     End Sub
 
-    Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If txtSchemeName.Text = "" Then txtSchemeName.Focus()
-        If txtDescription.Text = "" Then txtDescription.Focus()
-        If lvIntscheme.Items.Count <= 0 Then Exit Sub
-
-        Dim ans As DialogResult = MsgBox("Do you want to save this Scheme?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-
-        Dim SchemeSave As New InterestScheme
-        Dim IntSchemeLines As New IntScheme_Lines
-
-        With SchemeSave
-            .SchemeName = txtSchemeName.Text
-            .Description = txtDescription.Text
-        End With
-
-
-        For Each item As ListViewItem In lvIntscheme.Items
-            Dim SchemeInterest As New Scheme_Interest
-            With SchemeInterest
-                .DayFrom = item.SubItems(1).Text
-                .DayTo = item.SubItems(2).Text
-                .Interest = item.SubItems(3).Text
-                .Penalty = item.SubItems(4).Text
-                .Remarks = item.SubItems(5).Text
-            End With
-            IntSchemeLines.Add(SchemeInterest)
-        Next
-
-        SchemeSave.SchemeDetails = IntSchemeLines
-        SchemeSave.SaveScheme()
-
-        MsgBox("Scheme Saved", MsgBoxStyle.Information)
+    
 
         'Private Sub frmInterestScheme_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -198,10 +164,8 @@ Public Class frmInterestScheme
         For Each item As ListViewItem In lvIntscheme.Items
             Dim SchemeInterest As New Scheme_Interest
 
-
             With SchemeInterest
                 .schemeInterestID = item.Text
-
                 .DayFrom = item.SubItems(1).Text
                 .DayTo = item.SubItems(2).Text
                 .Interest = item.SubItems(3).Text
@@ -216,8 +180,6 @@ Public Class frmInterestScheme
         Next
 
         MsgBox("Scheme Updated", MsgBoxStyle.Information)
-
-
 
         btnSave.Enabled = True
         clearfields()
@@ -246,6 +208,8 @@ Public Class frmInterestScheme
     End Sub
 
 
+
+
     Private Sub btnUpdateScheme_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
         If Not isValid() Then Exit Sub
         lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
@@ -259,6 +223,7 @@ Public Class frmInterestScheme
     End Sub
 
 
+
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
         If lvIntscheme.SelectedItems.Count <= 0 Then Exit Sub
         lvIntscheme.Items.RemoveAt(lvIntscheme.SelectedIndices(0))
@@ -267,10 +232,7 @@ Public Class frmInterestScheme
         Next
     End Sub
 
-
-
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
 
@@ -340,6 +302,7 @@ Public Class frmInterestScheme
         'lvIntscheme.Columns.Remove(lvIntscheme.Columns(0))
     End Sub
 
+
     Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
         If e.KeyCode = Keys.Enter Then
             If Label9.Text = "Update".ToString Then
@@ -349,7 +312,5 @@ Public Class frmInterestScheme
             End If
         End If
     End Sub
-
-
 
 End Class

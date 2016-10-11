@@ -82,6 +82,7 @@ Partial Class frmLogin
         Me.txtUser.TabIndex = 0
         Me.txtUser.WatermarkColor = System.Drawing.Color.Gray
 
+
         Me.txtUser.Location = New System.Drawing.Point(42, 64)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(209, 24)
@@ -93,18 +94,19 @@ Partial Class frmLogin
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 
+
         Me.txtPassword.Location = New System.Drawing.Point(42, 119)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(209, 24)
         Me.txtPassword.TabIndex = 1
         Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
 
+    
         Me.txtPassword.Location = New System.Drawing.Point(42, 117)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(209, 24)
         Me.txtPassword.TabIndex = 1
         Me.txtPassword.WatermarkColor = System.Drawing.Color.Gainsboro
-
         Me.txtPassword.WatermarkText = "Password"
         '
         'frmLogin
