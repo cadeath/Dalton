@@ -508,23 +508,23 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub ModRate()
-        fillData = "TBLINT"
+
         mySql = "SELECT  D.IS_ID, I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
         mySql &= "D.INTEREST, D.PENALTY, D.REMARKS "
         mySql &= "FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
 
-        ds = LoadSQL(mySql, fillData)
+        ds = LoadSQL(mySql)
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
 
         Me.lvModule.Columns.Add("ID")
-        Me.lvModule.Columns.Add("Column2", "SchemeName")
-        Me.lvModule.Columns.Add("Column3", "Description")
+        Me.lvModule.Columns.Add("Column2", "Remarks")
+        Me.lvModule.Columns.Add("Column3", "SchemeName")
+        Me.lvModule.Columns.Add("Column4", "Description")
         Me.lvModule.Columns.Add("Column5", "DayFrom")
         Me.lvModule.Columns.Add("Column6", "DayTo")
         Me.lvModule.Columns.Add("Column7", "Interest")
         Me.lvModule.Columns.Add("Column8", "Penalty")
-        Me.lvModule.Columns.Add("Column9", "Remarks")
 
         For i = 0 To ds.Tables(0).Rows.Count - 1
             Dim str1 As String = ds.Tables(0).Rows(i)("Is_ID").ToString
@@ -538,7 +538,7 @@ Public Class frmAdminPanel
 
             Dim lvi As New ListViewItem
             lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7, str8})
+            lvi.SubItems.AddRange(New String() {str8, str2, str3, str4, str5, str6, str7})
             lvModule.Items.Add(lvi)
         Next
     End Sub
@@ -574,7 +574,7 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub ModITEM()
-        fillData = "tblitem"
+
         mySql = "SELECT S.SPECSID, I.ITEMCLASS, I.ITEMCATEGORY, I.DESCRIPTION, I.ISRENEW, "
         mySql &= "I.ONHOLD, I.PRINT_LAYOUT, I.RENEWAL_CNT, I.SCHEME_ID, S.SPECSNAME, "
         mySql &= "S.SPECTYPE, S.UOM, S.SPECLAYOUT, S.SHORTCODE, S.ISREQUIRED, I.ITEMID "
@@ -585,21 +585,21 @@ Public Class frmAdminPanel
         lvModule.Items.Clear()
 
         Me.lvModule.Columns.Add("Specsid")
-        Me.lvModule.Columns.Add("Column2", "ITEMCLASS")
-        Me.lvModule.Columns.Add("Column3", "ITEMCATEGORY")
-        Me.lvModule.Columns.Add("Column4", "DESCRIPTION")
-        Me.lvModule.Columns.Add("Column5", "ISRENEW")
-        Me.lvModule.Columns.Add("Column6", "Onhold")
-        Me.lvModule.Columns.Add("Column7", "Print_layout")
-        Me.lvModule.Columns.Add("Column8", "Renewal_cnt")
-        Me.lvModule.Columns.Add("Column9", "Scheme_ID")
-        Me.lvModule.Columns.Add("Column10", "Specsname")
-        Me.lvModule.Columns.Add("Column11", "Spectype")
-        Me.lvModule.Columns.Add("Column12", "UOM")
-        Me.lvModule.Columns.Add("Column13", "Speclayout")
-        Me.lvModule.Columns.Add("Column14", "Shortcode")
-        Me.lvModule.Columns.Add("Column15", "Isrequired")
-        Me.lvModule.Columns.Add("Column16", "ItemID")
+        Me.lvModule.Columns.Add("Column2", "Isrequired")
+        Me.lvModule.Columns.Add("Column3", "ITEMCLASS")
+        Me.lvModule.Columns.Add("Column4", "ItemID")
+        Me.lvModule.Columns.Add("Column5", "ITEMCATEGORY")
+        Me.lvModule.Columns.Add("Column6", "DESCRIPTION")
+        Me.lvModule.Columns.Add("Column7", "ISRENEW")
+        Me.lvModule.Columns.Add("Column8", "Onhold")
+        Me.lvModule.Columns.Add("Column9", "Print_layout")
+        Me.lvModule.Columns.Add("Column10", "Renewal_cnt")
+        Me.lvModule.Columns.Add("Column11", "Scheme_ID")
+        Me.lvModule.Columns.Add("Column12", "Specsname")
+        Me.lvModule.Columns.Add("Column13", "Spectype")
+        Me.lvModule.Columns.Add("Column14", "UOM")
+        Me.lvModule.Columns.Add("Column15", "Speclayout")
+        Me.lvModule.Columns.Add("Column16", "Shortcode")
 
         For i = 0 To ds.Tables(0).Rows.Count - 1
             Dim str As String = ds.Tables(0).Rows(i)("Specsid").ToString
@@ -621,7 +621,7 @@ Public Class frmAdminPanel
 
             Dim lvi As New ListViewItem
             lvi.Text = str
-            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12, str13, str14, str15, str16})
+            lvi.SubItems.AddRange(New String() {str15, str2, str16, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12, str13, str14})
             lvModule.Items.Add(lvi)
         Next
 
