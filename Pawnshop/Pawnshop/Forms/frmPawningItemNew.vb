@@ -240,7 +240,34 @@ Public Class frmPawningItemNew
         Select Case transactionType
             Case "L"
                 SaveNewLoan()
+            Case "R"
+                SaveRenew()
         End Select
+
+    End Sub
+
+    Private Sub SaveRenew()
+        Dim oldPawnTicket As Integer = 0
+
+        'Inactive OLD Pawnticket
+        oldPawnTicket = PT_Entry.PawnTicket
+        With PT_Entry
+            .Status = 0 'Inactive
+
+            .AdvanceInterest = AdvanceInterest
+
+            .ORNumber = currentORNumber
+            .ORDate = CurrentDate
+            .DaysOverDue = DaysOverDue
+            .DelayInterest = PawnInterest
+            .Penalty = PawnPenalty
+            .ServiceCharge = PawnServiceCharge
+
+            .RenewDue = RenewDue
+            .RedeemDue = RedeemDue
+
+            .Save_PawnTicket()
+        End With
 
     End Sub
 
@@ -386,14 +413,14 @@ Public Class frmPawningItemNew
         If transactionType = "R" Or transactionType = "X" Then
             GenerateORNum()
             With AutoCompute
-                txtOver.Text = .DaysOverDue
-                txtInt.Text = .Interest.ToString("#,##0.00")
-                txtPenalty.Text = .Penalty.ToString("#,##0.00")
-                txtService.Text = .ServiceCharge.ToString("#,##0.00")
+                txtOver.Text = .DaysOverDue : DaysOverDue = .DaysOverDue
+                txtInt.Text = .Interest.ToString("#,##0.00") : PawnInterest = .Interest
+                txtPenalty.Text = .Penalty.ToString("#,##0.00") : PawnPenalty = .Penalty
+                txtService.Text = .ServiceCharge.ToString("#,##0.00") : PawnServiceCharge = .ServiceCharge
                 txtEvat.Text = (0).ToString("#,##0.00")
 
-                txtRenew.Text = (0).ToString("#,##0.00")
-                txtRedeem.Text = (0).ToString("#,##0.00")
+                txtRenew.Text = (0).ToString("#,##0.00") : RenewDue = .RenewDue
+                txtRedeem.Text = (0).ToString("#,##0.00") : RedeemDue = .RedeemDue
 
                 If transactionType = "R" Then txtRenew.Text = .RenewDue.ToString("#,##0.00")
                 If transactionType = "X" Then txtRedeem.Text = .RedeemDue.ToString("#,##0.00")
