@@ -24,11 +24,13 @@ Partial Class Dev_Migrate
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.pbProgressBar = New System.Windows.Forms.ProgressBar()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.pbProgressBar)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
@@ -45,6 +47,13 @@ Partial Class Dev_Migrate
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'pbProgressBar
+        '
+        Me.pbProgressBar.Location = New System.Drawing.Point(6, 167)
+        Me.pbProgressBar.Name = "pbProgressBar"
+        Me.pbProgressBar.Size = New System.Drawing.Size(282, 23)
+        Me.pbProgressBar.TabIndex = 1
+        '
         'Dev_Migrate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -59,4 +68,5 @@ Partial Class Dev_Migrate
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents pbProgressBar As System.Windows.Forms.ProgressBar
 End Class

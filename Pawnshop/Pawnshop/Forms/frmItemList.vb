@@ -35,12 +35,6 @@
         lv.SubItems.Add(itm.PrintLayout)
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
-
     Friend Sub SearchSelect(src As String, frmOrigin As formSwitch.FormName)
         fromOtherForm = True
         txtSearch.Text = src
@@ -117,9 +111,6 @@
             btnSearch.PerformClick()
         End If
 
-        If Me.Visible = True Then
-            Me.Focus()
-        End If
     End Sub
 
 End Class

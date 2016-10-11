@@ -277,11 +277,7 @@ Public Class frmAdminPanel
         LoadScheme()
     End Sub
 
-    Private Sub btnClose_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
-        Me.Close()
-    End Sub
-
-    Private Sub btnSearch_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
+    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
         frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_SpecsValue)
@@ -804,4 +800,5 @@ Public Class frmAdminPanel
     Private Sub lvModule_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lvModule.ItemChecked
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
     End Sub
+
 End Class
