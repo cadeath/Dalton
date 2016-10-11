@@ -22,6 +22,7 @@ Public Class frmAdminPanel
 
         LoadScheme()
         lblDateStatus.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
+
         'String.Format("{0} ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
     End Sub
 

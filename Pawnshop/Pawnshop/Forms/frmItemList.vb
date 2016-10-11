@@ -10,17 +10,6 @@
         lvItem.Items.Clear()
     End Sub
 
-    'Private Sub searchItem()
-    '    If txtSearch.Text = "" Then Exit Sub
-    '    Dim secured_str As String = txtSearch.Text
-    '    secured_str = DreadKnight(secured_str)
-
-    '    Dim mySql As String = "SELECT * FROM tblITEM WHERE "
-    '    mySql &= String.Format("UPPER (ITEMCLASS) LIKE UPPER('%{0}%')", secured_str)
-
-    '    Console.WriteLine("SQL: " & mySql)
-    'End Sub
-
     Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
 
         Dim ds As DataSet = LoadSQL(mySql)
@@ -115,12 +104,6 @@
         Me.Close()
     End Sub
 
-    Private Sub txtSearchItmLst_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
-
     Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
@@ -128,13 +111,14 @@
     End Sub
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If Not fromOtherForm Then ClearFields() : txtSearch.Focus()
-
-        LoadActive_ItemClasses()
-
+        If Not fromOtherForm Then ClearFields() : txtSearch.Focus() : LoadActive_ItemClasses()
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
+        End If
+
+        If Me.Visible = True Then
+            Me.Focus()
         End If
     End Sub
 
