@@ -1,5 +1,7 @@
 ﻿Public Class frmPawning
 
+    Friend isMoreThan100 As Boolean = False
+
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
@@ -49,7 +51,7 @@
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
         If frmPawnItem.Visible = True Then
             MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
-                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly+ MsgBoxStyle.DefaultButton2, _
+                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
                                              "Form Already Open")
         Else
             frmPawningItemNew.NewLoan()
@@ -112,7 +114,15 @@
         dbReaderClose()
     End Sub
 
+    Friend Sub ReloadForm()
+        ClearFields()
+        LoadActive_v2()
+    End Sub
+
     Private Sub LoadActive_v2()
+        If isMoreThan100 Then Exit Sub
+
+        Dim i As Integer = 0
         Dim mySql As String = "SELECT FIRST 100 * FROM PAWN_LIST "
         mySql &= String.Format("WHERE LOANDATE <= '{0}' ", CurrentDate.ToShortDateString)
         mySql &= "AND (STATUS = 'L' OR STATUS = 'R') "
@@ -133,7 +143,9 @@
             lv.SubItems.Add(PawnReader("EXPIRYDATE"))
             lv.SubItems.Add(PawnReader("AUCTIONDATE"))
             lv.SubItems.Add(PawnReader("PRINCIPAL"))
+            i += 1
 
+            If i >= 100 Then isMoreThan100 = True
         End While
 
         dbReaderClose()

@@ -345,6 +345,9 @@ Public Class frmPawningItemNew
         MsgBox("Item Saved", MsgBoxStyle.Information)
         NewLoan()
         txtCustomer.Focus()
+        If frmPawning.Visible And frmPawning.isMoreThan100 Then
+            frmPawning.ReloadForm()
+        End If
     End Sub
 
 

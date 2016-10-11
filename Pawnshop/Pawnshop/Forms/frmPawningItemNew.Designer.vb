@@ -846,6 +846,7 @@ Partial Class frmPawningItemNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(935, 503)
         Me.Controls.Add(Me.grpClaimer)
         Me.Controls.Add(Me.GroupBox6)
