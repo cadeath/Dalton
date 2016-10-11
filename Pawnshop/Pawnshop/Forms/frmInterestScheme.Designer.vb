@@ -135,7 +135,7 @@ Partial Class frmInterestScheme
         Me.txtDayFrom.Size = New System.Drawing.Size(122, 22)
         Me.txtDayFrom.TabIndex = 10
         Me.txtDayFrom.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDayFrom.WatermarkText = "DayFrom"I
+        Me.txtDayFrom.WatermarkText = "DayFrom"
         '
         'Label5
         '

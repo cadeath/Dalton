@@ -95,33 +95,33 @@ Public Class frmAdminPanel
 
         'txtPrintLayout.Text = it.PrintLayout
 
-    'Friend Sub LoadItemList(ByVal it As ItemClass)
+    Friend Sub LoadItemList(ByVal it As ItemClass)
 
 
-    '    If it.ClassName = "" Then Exit Sub
-    '    txtClassification.Text = it.ClassName
-    '    txtCategory.Text = it.Category
-    '    txtDescription.Text = it.Description
-    '    cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
+        If it.ClassName = "" Then Exit Sub
+        txtClassification.Text = it.ClassName
+        txtCategory.Text = it.Category
+        txtDescription.Text = it.Description
+        cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
 
-    '    If it.isRenewable = "True" Then
-    '        rdbYes.Checked = True
-    '        rdbNo.Checked = False
-    '    Else
-    '        rdbYes.Checked = False
-    '        rdbNo.Checked = True
-    '    End If
+        If it.isRenewable = "True" Then
+            rdbYes.Checked = True
+            rdbNo.Checked = False
+        Else
+            rdbYes.Checked = False
+            rdbNo.Checked = True
+        End If
 
-    '    txtPrintLayout.Text = it.PrintLayout
-    '    cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
+        txtPrintLayout.Text = it.PrintLayout
+        cbotxtSchemename.Text = GetSchemeByID(it.InterestScheme.SchemeID)
 
-    '    Dim id As Integer = it.ID
-    '    SelectedItem = it
+        Dim id As Integer = it.ID
+        SelectedItem = it
 
-    '    ReadOnlyTrue()
-    '    btnSave.Enabled = False
-    '    btnUpdate.Enabled = True
-    'End Sub
+        ReadOnlyTrue()
+        btnSave.Enabled = False
+        btnUpdate.Enabled = True
+    End Sub
 
     Private Function GetSchemeByID(ByVal id As Integer) As String
         For Each el As DictionaryEntry In Scheme
@@ -160,7 +160,6 @@ Public Class frmAdminPanel
 
     'End Sub
 
-
     Friend Sub clearfields()
         txtCategory.Text = ""
         txtClassification.Text = ""
@@ -188,22 +187,6 @@ Public Class frmAdminPanel
         Return True
     End Function
 
-        If dgSpecs.CurrentCell.Value Is Nothing Then dgSpecs.Focus() : Return False
-        If cboSchemename.Text = "" Then cboSchemename.Focus() : Return False
-        Return True
-    End Function
-
-    Private Sub dgSpecs_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
-        If btnUpdate.Text = "&Modify" Then
-            If e.KeyCode = Keys.Enter Then
-                btnUpdate.PerformClick()
-            End If
-        Else
-            btnSave.PerformClick()
-        End If
-    End Sub
-
-
     Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
         Dim isEmpty As Boolean = True
         For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows _
@@ -230,8 +213,8 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        'Dim SchemeSID As New InterestScheme
-        'SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+        Dim SchemeSID As New InterestScheme
+        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
 
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
@@ -294,8 +277,8 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        'Dim SchemeSID As New InterestScheme
-        'SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
+        Dim SchemeSID As New InterestScheme
+        SchemeSID.LoadScheme(GetSchemeID(cbotxtSchemename.Text))
 
         Dim ColItemsSpecs As New CollectionItemSpecs
         Dim ItemModify As New ItemClass
@@ -364,12 +347,6 @@ Public Class frmAdminPanel
         Me.Close()
     End Sub
 
-    Private Sub btnSearch_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        Dim secured_str As String = txtSearch.Text
-        secured_str = DreadKnight(secured_str)
-        frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_SpecsValue)
-        frmItemList.Show()
-    End Sub
 
     Private Sub ReadOnlyTrue()
         txtCategory.ReadOnly = True
@@ -754,10 +731,6 @@ Public Class frmAdminPanel
         chkSelectAll.Checked = False
     End Sub
 
-
-
-  
-
     Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
         Dim fn As String = oFd.FileName
 
@@ -873,10 +846,6 @@ Public Class frmAdminPanel
 
     End Sub
   
-
-
-
- 
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
         table.Clear()
         dt.Columns.Clear()
@@ -946,5 +915,17 @@ Public Class frmAdminPanel
         oFd.ShowDialog()
     End Sub
 
-    
+
+    Private Sub btnSearch1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch1.Click
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
+        frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_SpecsValue)
+        frmItemList.Show()
+    End Sub
+
+    Private Sub txtSearch1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch1.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch1.PerformClick()
+        End If
+    End Sub
 End Class

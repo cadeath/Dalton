@@ -125,7 +125,6 @@ Public Class frmInterestScheme
         End If
     End Sub
 
-    
 
         'Private Sub frmInterestScheme_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -135,7 +134,7 @@ Public Class frmInterestScheme
         '    txtDescription.Text = ""
         'End Sub
 
-    End Sub
+
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If txtSchemeName.Text = "" Then txtSchemeName.Focus()
         If txtDescription.Text = "" Then txtDescription.Focus()
@@ -173,7 +172,7 @@ Public Class frmInterestScheme
                 .Remarks = item.SubItems(5).Text
 
 
-                SchemeInterest.schemeInterestID = .SchemeID
+                ' SchemeInterest.schemeInterestID = 
                 SchemeInterest.SchemeID = SchemeModify.SchemeID
             End With
             SchemeInterest.Update()
@@ -206,9 +205,6 @@ Public Class frmInterestScheme
         List1.SubItems.Add(Me.txtRemarks.Text)
         clearfields()
     End Sub
-
-
-
 
     Private Sub btnUpdateScheme_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
         If Not isValid() Then Exit Sub

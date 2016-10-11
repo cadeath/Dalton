@@ -131,7 +131,7 @@
             .Item("PENALTY") = _penalty
             .Item("REMARKS") = _remarks
         End With
-        database.SaveEntry(ds, False)
+            database.SaveEntry(ds, False)
 
         Else
             Dim dsNewRow As DataRow

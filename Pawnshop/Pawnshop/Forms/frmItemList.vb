@@ -1,18 +1,11 @@
 ﻿Public Class frmItemList
+
     Private ItemClasses_ht As Hashtable
-<<<<<<< HEAD
-
- Dim ds As New DataSet
-    Dim selectedItem As ItemClass
-
-
-    'FORMS
-
-
-    Private fromOtherForm As Boolean = False
-    Private frmOrig As formSwitch.FormName
     Dim ds As New DataSet
     Dim selectedItem As ItemClass
+    'FORMS
+    Private fromOtherForm As Boolean = False
+    Private frmOrig As formSwitch.FormName
 
 
     Friend Sub LoadActiveItem(Optional ByVal mySql As String = "SELECT * FROM tblITEM where ITEMID <> 0 ORDER BY itemid ASC")
@@ -26,15 +19,6 @@
         Next
     End Sub
 
-    'Private Sub AddItem(ByVal dl As ItemClass)
-    '    Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
-    '    lv.SubItems.Add(dl.ClassName)
-    '    lv.SubItems.Add(dl.Category)
-    '    lv.SubItems.Add(dl.Description)
-    '    'lv.SubItems.Add(dl.InterestRate)
-    '    lv.SubItems.Add(dl.isRenewable)
-    '    lv.SubItems.Add(dl.PrintLayout)
-    'End Sub
 
     'Private Sub loadItemClass()
     '    Dim mySql As String = "SELECT * FROM tblItem"
@@ -79,7 +63,7 @@
 
 
 
-   ' Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
+    ' Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
     'Private Sub searchItem()
     '    If txtSearch.Text = "" Then Exit Sub
     '    Dim secured_str As String = txtSearch.Text
@@ -106,13 +90,6 @@
         Next
     End Sub
 
-    'Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
-    '    mOtherForm = True
-    '    btnSelect.Visible = True
-    '    txtSearch.Text = src
-    '    frmOrig = frmOrigin
-    'End Sub
-
 
     Private Sub frmItemList_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs)
         'loadItemClass()
@@ -134,16 +111,6 @@
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
         End If
-    End Sub
-
-  
-    Private Sub AddItem(ByVal itm As ItemClass)
-        Dim lv As ListViewItem = lvItem.Items.Add(itm.ID)
-        lv.SubItems.Add(itm.ClassName)
-        lv.SubItems.Add(itm.Category)
-        lv.SubItems.Add(itm.Description)
-        lv.SubItems.Add(itm.isRenewable)
-        lv.SubItems.Add(itm.PrintLayout)
     End Sub
 
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
@@ -195,27 +162,14 @@
         MsgBox("Error loading hash table", MsgBoxStyle.Critical, "CRITICAL")
     End Sub
 
-
-    Private Sub lvItem_DoubleClick(sender As Object, e As System.EventArgs) Handles lvItem.DoubleClick
-
-        If Not fromOtherForm Then
-            btnView.PerformClick()
-        Else
-            btnSelect.PerformClick()
-        End If
-
-    Private Sub lvItem_DoubleClick(sender As Object, e As System.EventArgs) Handles lvItem.DoubleClick
+    Private Sub lvItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick
         btnSelect.PerformClick()
     End Sub
 
     Private Sub lvItem_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvItem.KeyPress
         Console.WriteLine("ENTER!")
         If isEnter(e) Then
-            If Not fromOtherForm Then
-                btnView.PerformClick()
-            Else
-                btnSelect.PerformClick()
-            End If
+            btnSelect.PerformClick()
         End If
     End Sub
 
@@ -223,7 +177,7 @@
         Me.Close()
     End Sub
 
-  
+
     Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
@@ -246,19 +200,19 @@
         Me.Close()
     End Sub
 
-    Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ClearField()
+    'Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    '    ClearField()
 
-        If fromOtherForm Then
-            'btnView.Visible = False
-            btnSelect.Visible = False
-        Else
-            btnView.Visible = False
-            btnSelect.Visible = True
-        End If
+    '    If fromOtherForm Then
+    '        'btnView.Visible = False
+    '        btnSelect.Visible = False
+    '    Else
+    '        btnView.Visible = False
+    '        btnSelect.Visible = True
+    '    End If
 
-        'loadItemClass()
-        LoadActiveItem()
+    '    'loadItemClass()
+    '    LoadActiveItem()
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If Not fromOtherForm Then ClearFields() : txtSearch.Focus()
