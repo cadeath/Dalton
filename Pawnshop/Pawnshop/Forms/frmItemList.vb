@@ -21,7 +21,6 @@
         Next
     End Sub
 
-    
     'Private Sub AddItem(ByVal dl As ItemClass)
     '    Dim lv As ListViewItem = lvItem.Items.Add(dl.ID)
     '    lv.SubItems.Add(dl.ClassName)
@@ -73,8 +72,6 @@
     End Sub
 
 
-  
-
     Private Sub LoadActive_ItemClasses(Optional ByVal mySql As String = "SELECT * FROM TBLITEM WHERE ONHOLD = 0")
         Dim ds As DataSet = LoadSQL(mySql)
 
@@ -87,7 +84,6 @@
 
             ItemClasses_ht.Add(itmClass.ID, itmClass)
         Next
-
     End Sub
 
 
@@ -109,28 +105,6 @@
             btnSearch.PerformClick()
         End If
     End Sub
-
-    'Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-    '    If Not mOtherForm Then ClearField()
-    '    If mOtherForm Then
-    '        btnView.Visible = False
-    '    Else
-    '        ClearField()
-    '        btnSelect.Visible = False
-    '    End If
-
-    '    'loadItemClass()
-    '    LoadActiveItem()
-
-    '    If Not mOtherForm Then
-    '        txtSearch.Focus()
-    '    End If
-
-    '    txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
-    '    If txtSearch.Text <> "" Then
-    '        btnSearch.PerformClick()
-    '    End If
-    'End Sub
 
   
     Private Sub AddItem(ByVal itm As ItemClass)
@@ -170,7 +144,6 @@
             End If
         End If
     End Sub
-
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
         If lvItem.Items.Count = 0 Then Exit Sub
@@ -245,12 +218,14 @@
     End Sub
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If Not fromOtherForm Then ClearField()
+        ClearField()
+
         If fromOtherForm Then
-            btnView.Visible = False
-        Else
-            ClearField()
+            'btnView.Visible = False
             btnSelect.Visible = False
+        Else
+            btnView.Visible = False
+            btnSelect.Visible = True
         End If
 
         'loadItemClass()

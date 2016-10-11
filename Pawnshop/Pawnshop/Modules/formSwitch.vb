@@ -44,7 +44,6 @@
                 frmPawningItemNew.Load_ItemSpecification(Selected_Specs)
             Case FormName.frmPawningV2_SpecsValue
                 frmAdminPanel.Load_ItemSpecification(Selected_Specs)
-
         End Select
     End Sub
 
