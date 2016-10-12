@@ -249,6 +249,10 @@ Public Class frmPawningItemNew
     Private Sub SaveRenew()
         Dim oldPawnTicket As Integer = 0
 
+        'Renewal Increment
+        PT_Entry.PawnItem.RenewalCnt += 1
+        PT_Entry.PawnItem.Save_PawnItem()
+
         'Inactive OLD Pawnticket
         oldPawnTicket = PT_Entry.PawnTicket
         With PT_Entry
@@ -738,5 +742,22 @@ Public Class frmPawningItemNew
         Else
             lblAuth.Text = "Unverified"
         End If
+    End Sub
+
+    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        If transactionType = "R" Then
+            btnRenew.Text = "Rene&w"
+            txtRenew.BackColor = Drawing.SystemColors.Control
+            transactionType = "D"
+            btnSave.Enabled = False
+
+            Exit Sub
+        End If
+        If transactionType <> "D" Then
+            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+
     End Sub
 End Class

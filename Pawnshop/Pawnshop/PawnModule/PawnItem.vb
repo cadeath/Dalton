@@ -133,6 +133,7 @@
                 .Item("RENEWALCNT") = _renewalCnt
                 .Item("CREATED_AT") = Now.ToShortDateString
             Else
+                .Item("RENEWALCNT") = _renewalCnt
                 If Not _withdrawDate = Nothing Then .Item("WITHDRAWDATE") = _withdrawDate
                 .Item("STATUS") = _status
                 .Item("UPDATED_AT") = Now.ToShortDateString
