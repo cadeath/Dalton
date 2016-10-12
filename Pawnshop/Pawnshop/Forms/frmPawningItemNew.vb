@@ -266,6 +266,7 @@ Public Class frmPawningItemNew
             .DelayInterest = PawnInterest
             .Penalty = PawnPenalty
             .ServiceCharge = PawnServiceCharge
+            .Status = 0
 
             .RenewDue = RenewDue
             .RedeemDue = 0
@@ -277,6 +278,7 @@ Public Class frmPawningItemNew
         Dim newPT As New PawnTicket2
         newPT = PT_Entry
         With newPT
+            .PawnTicket = currentPawnTicket
             .OldTicket = PT_Entry.PawnTicket
             .LoanDate = LoanDate
             .MaturityDate = MaturityDate
@@ -288,11 +290,11 @@ Public Class frmPawningItemNew
             .AdvanceInterest = PT_Entry.AdvanceInterest
             .NetAmount = PT_Entry.NetAmount
 
+            .Status = "R"
             .PawnItem = PT_Entry.PawnItem
             .Pawner = PT_Entry.Pawner
             'INCLUDE THE CLAIMER HERE
             '?????????????????
-
 
             .AdvanceInterest = AdvanceInterest
             .ServiceCharge = PawnServiceCharge
@@ -300,6 +302,9 @@ Public Class frmPawningItemNew
 
             .Save_PawnTicket()
         End With
+
+        MsgBox("Item Renewed", MsgBoxStyle.Information)
+        Me.Close()
     End Sub
 
     Private Sub RefreshInput()
@@ -379,7 +384,7 @@ Public Class frmPawningItemNew
         MsgBox("Item Saved", MsgBoxStyle.Information)
         NewLoan()
         txtCustomer.Focus()
-        If frmPawning.Visible And frmPawning.isMoreThan100 Then
+        If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
             frmPawning.ReloadForm()
         End If
     End Sub
