@@ -144,20 +144,21 @@
             ds.Tables(MainTable).Rows.Add(dr)
         Else
             For cnt As Integer = 0 To ds.Tables(MainTable).Columns.Count - 1
-                ds.Tables(MainTable).Rows(0).Item(cnt) = dr(0)
+                ds.Tables(MainTable).Rows(0).Item(cnt) = dr(cnt)
             Next
         End If
         database.SaveEntry(ds, isNew)
 
-        mySql = String.Format("SELECT * FROM {0} ORDER BY PAWNITEMID DESC ROWS 1", MainTable)
-        ds = LoadSQL(mySql)
-        _pawnItemID = ds.Tables(0).Rows(0).Item("PAWNITEMID")
+        If isNew Then
+            mySql = String.Format("SELECT * FROM {0} ORDER BY PAWNITEMID DESC ROWS 1", MainTable)
+            ds = LoadSQL(mySql)
+            _pawnItemID = ds.Tables(0).Rows(0).Item("PAWNITEMID")
 
-        For Each itmSpecs As PawnItemSpec In _pawnItemSpecs
-            itmSpecs.PawnItemID = _pawnItemID
-            itmSpecs.Save_PawnItemSpecs()
-        Next
-
+            For Each itmSpecs As PawnItemSpec In _pawnItemSpecs
+                itmSpecs.PawnItemID = _pawnItemID
+                itmSpecs.Save_PawnItemSpecs()
+            Next
+        End If
     End Sub
 
     Public Sub Load_PawnItem(id As Integer)
@@ -170,6 +171,7 @@
         End If
 
         With ds.Tables(0).Rows(0)
+            _pawnItemID = id
             _itemClass.LoadItem(.Item("ITEMID"))
 
             If Not IsDBNull(.Item("WITHDRAWDATE")) Then _withdrawDate = .Item("WITHDRAWDATE")

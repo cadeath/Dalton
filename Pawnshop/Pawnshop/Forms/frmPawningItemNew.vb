@@ -273,12 +273,43 @@ Public Class frmPawningItemNew
             .Update_PawnTicket()
         End With
 
+        RefreshInput()
         Dim newPT As New PawnTicket2
         newPT = PT_Entry
         With newPT
             .OldTicket = PT_Entry.PawnTicket
+            .LoanDate = LoanDate
+            .MaturityDate = MaturityDate
+            .ExpiryDate = ExpiryDate
+            .AuctionDate = AuctionDate
 
+            .Appraisal = PT_Entry.Appraisal
+            .Principal = PT_Entry.Principal
+            .AdvanceInterest = PT_Entry.AdvanceInterest
+            .NetAmount = PT_Entry.NetAmount
+
+            .PawnItem = PT_Entry.PawnItem
+            .Pawner = PT_Entry.Pawner
+            'INCLUDE THE CLAIMER HERE
+            '?????????????????
+
+
+            .AdvanceInterest = AdvanceInterest
+            .ServiceCharge = PawnServiceCharge
+            .NetAmount = NetAmount
+
+            .Save_PawnTicket()
         End With
+    End Sub
+
+    Private Sub RefreshInput()
+        ' DECLARING INPUT ===============================================
+        Appraisal = CDbl(txtAppr.Text)
+        Principal = CDbl(txtPrincipal.Text)
+        LoanDate = DateTime.Parse(txtLoan.Text)
+        MaturityDate = DateTime.Parse(txtMatu.Text)
+        ExpiryDate = DateTime.Parse(txtExpiry.Text)
+        AuctionDate = DateTime.Parse(txtAuction.Text)
     End Sub
 
     Private Sub SaveNewLoan()
@@ -298,14 +329,7 @@ Public Class frmPawningItemNew
             i += 1
         Next
 
-        ' DECLARING INPUT ===============================================
-        Appraisal = CDbl(txtAppr.Text)
-        Principal = CDbl(txtPrincipal.Text)
-        LoanDate = DateTime.Parse(txtLoan.Text)
-        MaturityDate = DateTime.Parse(txtMatu.Text)
-        ExpiryDate = DateTime.Parse(txtExpiry.Text)
-        AuctionDate = DateTime.Parse(txtAuction.Text)
-        ' END - DECLARING INPUT =========================================
+        RefreshInput()
 
         ' SAVING PAWNED ITEM INFORMATION ================================
 
