@@ -25,6 +25,8 @@
                 database.SaveEntry(ds2, False)
 
                 pbProgressBar.Value = pbProgressBar.Value + 1
+                Application.DoEvents()
+                lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F3"))
                 Console.WriteLine("ProgressBar Value " & pbProgressBar.Value)
             Next
             MsgBox("Success")
@@ -89,14 +91,16 @@
 
     Private Sub Dev_Migrate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
-        Dim mysql As String = "Select * from tblPawn"
-        Dim filldata As String = "tblPawn"
-        Dim ds As DataSet = LoadSQL(mysql, filldata)
-        Dim tmpMax As Integer = ds.Tables(0).Rows.Count
-        pbProgressBar.Minimum = 0
-        pbProgressBar.Maximum = tmpMax
+            Dim mysql As String = "Select * from tblPawn"
+            Dim filldata As String = "tblPawn"
+            Dim ds As DataSet = LoadSQL(mysql, filldata)
+
+            Dim tmpMax As Integer = ds.Tables(0).Rows.Count
+            pbProgressBar.Minimum = 0
+            pbProgressBar.Maximum = tmpMax
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+
 End Class

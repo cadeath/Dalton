@@ -323,7 +323,6 @@ Public Class frmPawningItemNew
         txtCustomer.Focus()
     End Sub
 
-
     Private Sub dateChange(selectedClass As ItemClass)
         If selectedClass Is Nothing Then Exit Sub
 
