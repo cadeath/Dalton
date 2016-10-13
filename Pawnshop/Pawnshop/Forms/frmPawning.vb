@@ -367,8 +367,18 @@
                                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
                                                             "Form Already Open")
             Else
-                btnView.PerformClick()
-                frmPawnItem.btnRedeem.PerformClick()
+                'btnView.PerformClick()
+                'frmPawnItem.btnRedeem.PerformClick()
+
+                If lvPawners.SelectedItems.Count = 0 Then Exit Sub
+
+                Dim pt_Selected As New PawnTicket2
+                pt_Selected.Load_PawnTicket(CInt(lvPawners.FocusedItem.Text))
+
+                frmPawningItemNew.Show()
+                frmPawningItemNew.Load_PawnTicket(pt_Selected)
+                frmPawningItemNew.transactionType = "X"
+                frmPawningItemNew.Redeem()
 
             End If
         End If

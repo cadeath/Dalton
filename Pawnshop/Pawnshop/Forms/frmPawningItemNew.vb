@@ -242,8 +242,35 @@ Public Class frmPawningItemNew
                 SaveNewLoan()
             Case "R"
                 SaveRenew()
+            Case "X"
+                SaveRedeem()
         End Select
 
+    End Sub
+
+    Private Sub SaveRedeem()
+        With PT_Entry
+            .ORNumber = currentORNumber
+            .ORDate = CurrentDate
+            .DaysOverDue = DaysOverDue
+            .DelayInterest = PawnInterest
+            .Penalty = PawnPenalty
+            .ServiceCharge = PawnServiceCharge
+            .Status = "X"
+
+            .RenewDue = 0
+            .RedeemDue = RedeemDue
+
+            .Update_PawnTicket()
+
+            MsgBox("Item Redeemed", MsgBoxStyle.Information)
+
+            If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
+                frmPawning.ReloadForm()
+            End If
+
+            Me.Close()
+        End With
     End Sub
 
     Private Sub SaveRenew()
@@ -266,7 +293,6 @@ Public Class frmPawningItemNew
             .DelayInterest = PawnInterest
             .Penalty = PawnPenalty
             .ServiceCharge = PawnServiceCharge
-            .Status = 0
 
             .RenewDue = RenewDue
             .RedeemDue = 0
@@ -304,6 +330,11 @@ Public Class frmPawningItemNew
         End With
 
         MsgBox("Item Renewed", MsgBoxStyle.Information)
+
+        If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
+            frmPawning.ReloadForm()
+        End If
+
         Me.Close()
     End Sub
 
@@ -733,11 +764,22 @@ Public Class frmPawningItemNew
         Return True
     End Function
 
+    Friend Sub Redeem()
+        GeneratePT()
+
+        ReComputeInterest()
+        grpClaimer.Enabled = True
+
+        lblTransaction.Text = "Redemption"
+    End Sub
+
     Friend Sub Renew()
         GeneratePT()
 
         ReComputeInterest()
         grpClaimer.Enabled = True
+
+        lblTransaction.Text = "Renewal"
     End Sub
 
     Friend Sub NewLoan()
