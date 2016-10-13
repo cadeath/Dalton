@@ -316,7 +316,8 @@
             MsgBoxAuthoriation("You don't have access to the Console")
             Exit Sub
         End If
-        frmMIS.Show()
+        'frmMIS.Show()
+        frmAdminPanel.Show()
     End Sub
 
     Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
