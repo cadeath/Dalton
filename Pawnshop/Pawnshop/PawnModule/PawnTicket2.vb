@@ -464,6 +464,8 @@
                 Return spec.ShortCode
             End If
         Next
+
+        Return "N/A"
     End Function
 #End Region
 
