@@ -258,9 +258,9 @@ Partial Class frmPawningItemNew
         Me.lblInterest.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInterest.Location = New System.Drawing.Point(16, 134)
         Me.lblInterest.Name = "lblInterest"
-        Me.lblInterest.Size = New System.Drawing.Size(51, 16)
+        Me.lblInterest.Size = New System.Drawing.Size(85, 16)
         Me.lblInterest.TabIndex = 11
-        Me.lblInterest.Text = "Interest"
+        Me.lblInterest.Text = "Total Interest"
         '
         'txtOver
         '
@@ -846,6 +846,7 @@ Partial Class frmPawningItemNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(935, 503)
         Me.Controls.Add(Me.grpClaimer)
         Me.Controls.Add(Me.GroupBox6)
@@ -862,6 +863,7 @@ Partial Class frmPawningItemNew
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnPrint)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmPawningItemNew"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

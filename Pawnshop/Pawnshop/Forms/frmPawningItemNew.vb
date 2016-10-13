@@ -243,8 +243,81 @@ Public Class frmPawningItemNew
         Select Case transactionType
             Case "L"
                 SaveNewLoan()
+            Case "R"
+                SaveRenew()
         End Select
 
+    End Sub
+
+    Private Sub SaveRenew()
+        Dim oldPawnTicket As Integer = 0
+
+        'Renewal Increment
+        PT_Entry.PawnItem.RenewalCnt += 1
+        PT_Entry.PawnItem.Save_PawnItem()
+
+        'Inactive OLD Pawnticket
+        oldPawnTicket = PT_Entry.PawnTicket
+        With PT_Entry
+            .Status = 0 'Inactive
+
+            .AdvanceInterest = AdvanceInterest
+
+            .ORNumber = currentORNumber
+            .ORDate = CurrentDate
+            .DaysOverDue = DaysOverDue
+            .DelayInterest = PawnInterest
+            .Penalty = PawnPenalty
+            .ServiceCharge = PawnServiceCharge
+            .Status = 0
+
+            .RenewDue = RenewDue
+            .RedeemDue = 0
+
+            .Update_PawnTicket()
+        End With
+
+        RefreshInput()
+        Dim newPT As New PawnTicket2
+        newPT = PT_Entry
+        With newPT
+            .PawnTicket = currentPawnTicket
+            .OldTicket = PT_Entry.PawnTicket
+            .LoanDate = LoanDate
+            .MaturityDate = MaturityDate
+            .ExpiryDate = ExpiryDate
+            .AuctionDate = AuctionDate
+
+            .Appraisal = PT_Entry.Appraisal
+            .Principal = PT_Entry.Principal
+            .AdvanceInterest = PT_Entry.AdvanceInterest
+            .NetAmount = PT_Entry.NetAmount
+
+            .Status = "R"
+            .PawnItem = PT_Entry.PawnItem
+            .Pawner = PT_Entry.Pawner
+            'INCLUDE THE CLAIMER HERE
+            '?????????????????
+
+            .AdvanceInterest = AdvanceInterest
+            .ServiceCharge = PawnServiceCharge
+            .NetAmount = NetAmount
+
+            .Save_PawnTicket()
+        End With
+
+        MsgBox("Item Renewed", MsgBoxStyle.Information)
+        Me.Close()
+    End Sub
+
+    Private Sub RefreshInput()
+        ' DECLARING INPUT ===============================================
+        Appraisal = CDbl(txtAppr.Text)
+        Principal = CDbl(txtPrincipal.Text)
+        LoanDate = DateTime.Parse(txtLoan.Text)
+        MaturityDate = DateTime.Parse(txtMatu.Text)
+        ExpiryDate = DateTime.Parse(txtExpiry.Text)
+        AuctionDate = DateTime.Parse(txtAuction.Text)
     End Sub
 
     Private Sub SaveNewLoan()
@@ -264,14 +337,7 @@ Public Class frmPawningItemNew
             i += 1
         Next
 
-        ' DECLARING INPUT ===============================================
-        Appraisal = CDbl(txtAppr.Text)
-        Principal = CDbl(txtPrincipal.Text)
-        LoanDate = DateTime.Parse(txtLoan.Text)
-        MaturityDate = DateTime.Parse(txtMatu.Text)
-        ExpiryDate = DateTime.Parse(txtExpiry.Text)
-        AuctionDate = DateTime.Parse(txtAuction.Text)
-        ' END - DECLARING INPUT =========================================
+        RefreshInput()
 
         ' SAVING PAWNED ITEM INFORMATION ================================
 
@@ -321,6 +387,9 @@ Public Class frmPawningItemNew
         MsgBox("Item Saved", MsgBoxStyle.Information)
         NewLoan()
         txtCustomer.Focus()
+        If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
+            frmPawning.ReloadForm()
+        End If
     End Sub
 
     Private Sub dateChange(selectedClass As ItemClass)
@@ -384,6 +453,23 @@ Public Class frmPawningItemNew
         txtService.Text = MoneyFormat(PawnServiceCharge)
         txtAdv.Text = MoneyFormat(AdvanceInterest)
         txtNet.Text = MoneyFormat(NetAmount)
+
+        If transactionType = "R" Or transactionType = "X" Then
+            GenerateORNum()
+            With AutoCompute
+                txtOver.Text = .DaysOverDue : DaysOverDue = .DaysOverDue
+                txtInt.Text = .Interest.ToString("#,##0.00") : PawnInterest = .Interest
+                txtPenalty.Text = .Penalty.ToString("#,##0.00") : PawnPenalty = .Penalty
+                txtService.Text = .ServiceCharge.ToString("#,##0.00") : PawnServiceCharge = .ServiceCharge
+                txtEvat.Text = (0).ToString("#,##0.00")
+
+                txtRenew.Text = (0).ToString("#,##0.00") : RenewDue = .RenewDue
+                txtRedeem.Text = (0).ToString("#,##0.00") : RedeemDue = .RedeemDue
+
+                If transactionType = "R" Then txtRenew.Text = .RenewDue.ToString("#,##0.00")
+                If transactionType = "X" Then txtRedeem.Text = .RedeemDue.ToString("#,##0.00")
+            End With
+        End If
 
         '    Dim intHash As String = ""
 
@@ -502,6 +588,13 @@ Public Class frmPawningItemNew
         Return String.Format("{0:000000}", currentORNumber)
     End Function
 
+    Private Sub GenerateORNum()
+        txtReceipt.Text = CurrentOR()
+        txtReceiptDate.Text = CurrentDate.ToString("MM/dd/yyyy")
+        txtPrincipal2.Text = txtPrincipal.Text
+    End Sub
+
+
     Private Sub GeneratePT()
         'Check PT if existing
         Dim mySql As String, ds As DataSet
@@ -600,12 +693,25 @@ Public Class frmPawningItemNew
             i += 1
         Next
 
+        txtAppr.Text = pt.Appraisal.ToString("#,##0.00")
+        txtPrincipal.Text = pt.Principal.ToString("#,##0.00")
+        txtAdv.Text = pt.AdvanceInterest.ToString("#,##0.00")
+        txtNet.Text = pt.NetAmount.ToString("#,##0.00")
+
+        cboAppraiser.Text = GetNameByID(pt.AppraiserID, Appraisers_ht)
+
         'Disable
         txtCustomer.ReadOnly = True
         btnSearch.Enabled = False
         txtClassification.ReadOnly = True
         btnSearchClassification.Enabled = False
+        txtAppr.Enabled = False
+        txtPrincipal.Enabled = False
+        cboAppraiser.Enabled = False
+
+        PT_Entry = pt
     End Sub
+
 
     Private Function CheckAuth() As Boolean
         If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
@@ -628,6 +734,13 @@ Public Class frmPawningItemNew
 
         Return True
     End Function
+
+    Friend Sub Renew()
+        GeneratePT()
+
+        ReComputeInterest()
+        grpClaimer.Enabled = True
+    End Sub
 
     Friend Sub NewLoan()
         ClearFields()
@@ -660,5 +773,22 @@ Public Class frmPawningItemNew
         Else
             lblAuth.Text = "Unverified"
         End If
+    End Sub
+
+    Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        If transactionType = "R" Then
+            btnRenew.Text = "Rene&w"
+            txtRenew.BackColor = Drawing.SystemColors.Control
+            transactionType = "D"
+            btnSave.Enabled = False
+
+            Exit Sub
+        End If
+        If transactionType <> "D" Then
+            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+
     End Sub
 End Class
