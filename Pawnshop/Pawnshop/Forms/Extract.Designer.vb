@@ -39,6 +39,7 @@ Partial Class Extract
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
+        Me.pbProgress = New System.Windows.Forms.ProgressBar()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -181,11 +182,19 @@ Partial Class Extract
         '
         Me.fbdBackup.SelectedPath = "C:\"
         '
+        'pbProgress
+        '
+        Me.pbProgress.Location = New System.Drawing.Point(12, 227)
+        Me.pbProgress.Name = "pbProgress"
+        Me.pbProgress.Size = New System.Drawing.Size(301, 23)
+        Me.pbProgress.TabIndex = 8
+        '
         'Extract
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(658, 262)
+        Me.Controls.Add(Me.pbProgress)
         Me.Controls.Add(Me.btnExtract)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnUpdate)
@@ -213,4 +222,5 @@ Partial Class Extract
     Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents btnBrowseData As System.Windows.Forms.Button
     Friend WithEvents txtPath As System.Windows.Forms.TextBox
+    Friend WithEvents pbProgress As System.Windows.Forms.ProgressBar
 End Class

@@ -10,28 +10,36 @@ Public Class Extract
         Dim ds As DataSet = LoadSQL(mysql)
         Dim tmpTableName As New TextBox, tmp As String
 
-        For Each obj In lbTableName.Items
-            tmpTableName.AppendText(obj.ToString & " ")
-        Next
+            If lbTableName.Items.Count < 1 Then
 
-        'For Each dt In ds.Tables
-        '    For Each column In dt.Columns
-        '        tmpTableName.AppendText(column.ColumnName & " ")
-        '    Next
-        'Next
-        tmp = tmpTableName.Text.TrimEnd
+                For Each dt In ds.Tables
+                    For Each column In dt.Columns
+                        tmpTableName.AppendText(column.ColumnName & " ")
+                    Next
+                Next
+            Else
 
-        Dim tmpCount() As String = tmp.Split(CChar(" "))
-        Dim tmpString() As String = {tmp}
-        sfdPath.FileName = String.Format("{0}.xlsx", GetOption("BranchCode"))
-        path = txtSavePath.Text & "\" & sfdPath.FileName
+                For Each obj In lbTableName.Items
+                    tmpTableName.AppendText(obj.ToString & " ")
+                Next
+
+            End If
+            tmp = tmpTableName.Text.TrimEnd
+
+            Dim tmpCount() As String = tmp.Split(CChar(" "))
+            Dim tmpString() As String = {tmp}
+            sfdPath.FileName = String.Format("{0}.xlsx", GetOption("BranchCode"))
+            path = txtSavePath.Text & "\" & sfdPath.FileName
             ExtractToExcell(tmpCount, mysql, path)
 
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
 
-        MsgBox("Successfully Extracted", MsgBoxStyle.Information, "Extract")
+        Dim ans As DialogResult = MsgBox("Successfully Data Converted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2)
+        If ans = Windows.Forms.DialogResult.OK Then
+            pbProgress.Value = pbProgress.Minimum
+        End If
     End Sub
 
     Private Sub LoadPath()
@@ -50,6 +58,8 @@ Public Class Extract
     End Sub
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
+        Dim ds As DataSet = LoadSQL(txtQuery.Text)
+        pbProgress.Maximum = ds.Tables(0).Rows.Count
         database.dbName = txtPath.Text
         LoadQuery()
     End Sub
@@ -85,7 +95,7 @@ Public Class Extract
         ' HEADERS
         Dim cnt As Integer = 0
         For Each hr In headers
-            cnt += 1 : oSheet.Cells(1, cnt).value = hr
+                cnt += 1 : oSheet.Cells(1, cnt).value = hr
         Next
 
         ' EXTRACTING
@@ -97,8 +107,9 @@ Public Class Extract
                     oSheet.Cells(rowCnt, colCnt + 1).value = GetOption("BranchCode")
                 Else
                     oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
-                End If
-            Next
+                    End If
+                Next
+                pbProgress.Value = pbProgress.Value + 1
             rowCnt += 1
 
             Console.Write(".")
@@ -181,7 +192,6 @@ Public Class Extract
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         Try
-
             lbTableName.Items(lbTableName.SelectedIndex) = txtHeader.Text
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
