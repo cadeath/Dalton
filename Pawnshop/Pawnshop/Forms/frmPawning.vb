@@ -210,102 +210,66 @@
         Dim strWords As String() = secured_str.Split(New Char() {" "c})
         Dim mySql As String, name As String
 
-        '    mySql = "SELECT * "
-        '    mySql &= "FROM tblPAWN INNER JOIN tblClient on tblClient.ClientID = tblPAWN.ClientID WHERE "
-        '    If rbDescription.Checked Then
-        '    mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
 
-        'ElseIf rbPawner.Checked Then
-
-        '    For Each name In strWords
-        '        mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
-        '        If name Is strWords.Last Then
-        '            mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
-        '            Exit For
-        '        End If
-        '    Next
-
-        'ElseIf rbPawnTicket.Checked Then
-
-        '    mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'"
-
-        'ElseIf rbAll.Checked Then
-
-        '    If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
-
-        '    mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
-
-        '    For Each name In strWords
-
-        '        mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
-        '        If name Is strWords.Last Then
-        '            mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
-        '            Exit For
-        '        End If
-
-        '    Next
-
-        'End If
-
-        mySql = "SELECT * "
-        mySql &= "FROM DevNewPawn INNER JOIN tblClient on tblClient.ClientID = DevNewPawn.ClientID WHERE "
-        'If rbDescription.Checked Then
-        '    mySql &= vbCr & " UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') "
-
-        If rbPawner.Checked Then
-
-            For Each name In strWords
-                mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
-                If name Is strWords.Last Then
-                    mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
-                    Exit For
-                End If
-            Next
-
-        ElseIf rbPawnTicket.Checked Then
-
-            mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'"
-
-        ElseIf rbAll.Checked Then
-
+        mySql = "Select * from Pawn_List Where "
+        If rbAll.Checked Then
             If IsNumeric(secured_str) Then mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'" & " OR "
-
-            'mySql &= vbCr & "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
-
+            ' mySql &= "UPPER(ITEMCLASS) LIKE UPPER('%" & secured_str & "%') OR "
+            mySql &= "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%') OR "
             For Each name In strWords
 
-                mySql &= vbCr & " UPPER(FIRSTNAME || ' ' || LASTNAME) LIKE UPPER('%" & name & "%') and "
+                mySql &= vbCr & " UPPER(CLIENT) LIKE UPPER('%" & name & "%') and "
                 If name Is strWords.Last Then
-                    mySql &= vbCr & " UPPER(LASTNAME || ' ' || FIRSTNAME) LIKE UPPER('%" & name & "%') "
+                    mySql &= vbCr & " UPPER(CLIENT) LIKE UPPER('%" & name & "%') "
                     Exit For
                 End If
 
             Next
+        ElseIf rbPawnTicket.Checked Then
+            mySql &= vbCr & "PAWNTICKET like " & "'%" & CInt(secured_str) & "%'"
+        ElseIf rbPawner.Checked Then
+            For Each name In strWords
 
+                mySql &= vbCr & " UPPER(CLIENT) LIKE UPPER('%" & name & "%') and "
+                If name Is strWords.Last Then
+                    mySql &= vbCr & " UPPER(CLIENT) LIKE UPPER('%" & name & "%') "
+                    Exit For
+                End If
+            Next
+        ElseIf rbDescription.Checked Then
+            mySql &= "UPPER(DESCRIPTION) LIKE UPPER('%" & secured_str & "%')"
         End If
+        lvPawners.Items.Clear()
+        dbReaderOpen()
+        Dim i As Integer = 0, ds As DataSet = LoadSQL(mySql)
+        Dim PawnReader = LoadSQL_byDataReader(mySql)
+        While PawnReader.Read
 
-        Console.WriteLine("SQL: " & mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
+            Dim lv As ListViewItem = lvPawners.Items.Add(DisplayPawnTicket(PawnReader("PAWNTICKET")))
+            lv.SubItems.Add(PawnReader("ITEMCLASS"))
+            lv.SubItems.Add(PawnReader("DESCRIPTION"))
+            lv.SubItems.Add(PawnReader("CLIENT"))
+            lv.SubItems.Add(PawnReader("LOANDATE"))
+            lv.SubItems.Add(PawnReader("MATUDATE"))
+            lv.SubItems.Add(PawnReader("EXPIRYDATE"))
+            lv.SubItems.Add(PawnReader("AUCTIONDATE"))
+            lv.SubItems.Add(PawnReader("PRINCIPAL"))
+            i += 1
+
+            If i >= 100 Then isMoreThan100 = True
+        End While
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         If MaxRow <= 0 Then
             MsgBox("Query not found", MsgBoxStyle.Critical)
-
             Exit Sub
         End If
-
-        lvPawners.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpTicket As New PawnTicket
-            tmpTicket.LoadTicketInRow(dr)
-            AddItem(tmpTicket)
-        Next
-
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
         If lvPawners.Items.Count > 0 Then
             lvPawners.Focus()
             lvPawners.Items(0).Selected = True
             lvPawners.Items(0).EnsureVisible()
         End If
+        dbReaderClose()
 
     End Sub
 
