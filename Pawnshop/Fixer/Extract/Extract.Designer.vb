@@ -22,6 +22,7 @@ Partial Class Extract
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Extract))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnBrowseData = New System.Windows.Forms.Button()
@@ -70,7 +71,7 @@ Partial Class Extract
         Me.GroupBox1.Size = New System.Drawing.Size(641, 208)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Extract To Excel"
+        Me.GroupBox1.Text = "Information"
         '
         'btnBrowseData
         '
@@ -198,8 +199,9 @@ Partial Class Extract
         Me.Controls.Add(Me.btnExtract)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnUpdate)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Extract"
-        Me.Text = "Extractor"
+        Me.Text = "Extract To Excel File"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
