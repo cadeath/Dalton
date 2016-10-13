@@ -96,7 +96,7 @@ Partial Class Extract
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(131, 24)
         Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Display Table Names"
+        Me.Button1.Text = "Edit Header"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'lbTableName

@@ -290,12 +290,6 @@
     <Compile Include="Forms\diagOTPv2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Extract.Designer.vb">
-      <DependentUpon>Extract.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Extract.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\ExtractDataFromDatabase.Designer.vb">
       <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
     </Compile>
@@ -682,9 +676,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTPv2.resx">
       <DependentUpon>diagOTPv2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Extract.resx">
-      <DependentUpon>Extract.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExtractDataFromDatabase.resx">
       <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
