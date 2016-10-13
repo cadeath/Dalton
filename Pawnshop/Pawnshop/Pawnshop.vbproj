@@ -743,7 +743,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Client_Seed.vb" />
-    <Compile Include="Seed\ItemClass_Seed.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -814,7 +813,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInterestScheme.resx">
       <DependentUpon>frmInterestScheme.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInterestSchemeList.resx">
       <DependentUpon>frmInterestSchemeList.vb</DependentUpon>
@@ -828,77 +826,6 @@
     <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.ab.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.ab2.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.devClient.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.devVerifyESK.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_encrypt.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_ExtractToExcel.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_inherit.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_ORview.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_Pawning.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_print.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_PT_test.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_report.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_runCmd.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.dev_Scheme.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.diagAuthorization.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.diagMoneyTransferBracketing.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.diagMT.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.diagOTP.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.diagOTPv2.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.ExtractDataFromDatabase.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmAdminPanel.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmAuditConsole.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmBackup.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmBackUpDataSettings.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmBorrowBrowse.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmBorrowing.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmCashCount.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmCashCountV2.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmCashInOut2.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmChangePassword.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmCIO_List.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmClient.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmClientInformation.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmCurrencyList.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmDollarBuying.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmDollarList.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmDollorSimple.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmExtractor.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmInsurance.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmInsuranceList.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmInterestScheme.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmItemList.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmItemLookUp.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmLayAway.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmLayAwayLookUp.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmLogin.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmMain.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmMIS.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmmoneyexchange.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmMoneyTransfer.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmMTlist.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmOpenStore.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmPawning.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmPawnItem.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmPOS.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmPrintManager.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmRate.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmRate2.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmReport.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmSegreList.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmSettings.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.frmUserManagement.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.qryAuction.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.qryCashInOut.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.qryDate.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.qryLoan.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.qryMoneyTransfer.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.qryPullOut.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.qryPullOut_List.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.qrySequence.resources" />
-    <EmbeddedResource Include="obj\x86\Debug\Pawnshop.Resources.resources" />
     <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </EmbeddedResource>
@@ -1207,16 +1134,6 @@
     <None Include="HitManagement\dsHit.xss">
       <DependentUpon>dsHit.xsd</DependentUpon>
     </None>
-    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferences.cache" />
-    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="obj\x86\Debug\Pawnshop.vbproj.GenerateResource.Cache" />
-    <None Include="obj\x86\Debug\Pawnshop.vbproj.ResolveComReference.cache" />
-    <None Include="obj\x86\Debug\Pawnshop.vbprojResolveAssemblyReference.cache" />
-    <None Include="obj\x86\Debug\RdlCompile.cache" />
-    <None Include="obj\x86\Debug\RdlCompile.compiled" />
-    <None Include="obj\x86\Release\DesignTimeResolveAssemblyReferences.cache" />
-    <None Include="obj\x86\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="obj\x86\Release\Pawnshop.vbproj.ResolveComReference.cache" />
     <None Include="Template\Import Template.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1288,23 +1205,6 @@
     <Content Include="changelog.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="obj\x86\Debug\Interop.Microsoft.Office.Core.dll" />
-    <Content Include="obj\x86\Debug\Pawnshop.vbproj.FileListAbsolute.txt" />
-    <Content Include="obj\x86\Debug\TempPE\Forms.DataSet1.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\HitManagement.dsHit.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\My Project.Resources.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\Practice.DataSet1.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\practice.dsDollar.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\Practice.dsDollarTrans.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\Reports.DataSet1.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\Reports.dsPrint.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\Reports.dsReport.Designer.vb.dll" />
-    <Content Include="obj\x86\Debug\TempPE\Reports.dsReports.Designer.vb.dll" />
-    <Content Include="obj\x86\Release\TempPE\HitManagement.dsHit.Designer.vb.dll" />
-    <Content Include="obj\x86\Release\TempPE\My Project.Resources.Designer.vb.dll" />
-    <Content Include="obj\x86\Release\TempPE\practice.dsDollar.Designer.vb.dll" />
-    <Content Include="obj\x86\Release\TempPE\Reports.dsPrint.Designer.vb.dll" />
-    <Content Include="obj\x86\Release\TempPE\Reports.dsReports.Designer.vb.dll" />
     <Content Include="Rar.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
