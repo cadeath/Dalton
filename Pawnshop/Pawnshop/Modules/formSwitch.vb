@@ -14,6 +14,7 @@
 
         frmPawningV2_Client = 10
         frmPawningV2_Specs = 11
+        frmPawningV2_Claimer = 12
     End Enum
 
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
@@ -32,8 +33,11 @@
                 frmDollorSimple.LoadClient(cl)
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadClient(cl)
+
             Case FormName.frmPawningV2_Client
                 frmPawningItemNew.LoadClient(cl)
+            Case FormName.frmPawningV2_Claimer
+                frmPawningItemNew.LoadCliamer(cl)
         End Select
     End Sub
 
