@@ -283,6 +283,16 @@
         End Set
     End Property
 
+    Private _description As String
+    Public Property Description() As String
+        Get
+            Return _description
+        End Get
+        Set(ByVal value As String)
+            _description = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -315,6 +325,7 @@
             .Item("CLAIMERID") = _claimerID
             .Item("CLIENTID") = _pawner.ID
             .Item("PAWNITEMID") = _pawnItem.ID
+            .Item("DESCRIPTION") = DescriptionBuilder()
             .Item("ORDATE") = _ORDate
             .Item("ORNUM") = _ORNum
             .Item("PENALTY") = _penalty
@@ -354,6 +365,7 @@
             .Item("CLAIMERID") = _claimerID
             .Item("CLIENTID") = _pawner.ID
             .Item("PAWNITEMID") = _pawnItem.ID
+            .Item("DESCRIPTION") = _description
             .Item("ORDATE") = _ORDate
             .Item("ORNUM") = _ORNum
             .Item("PENALTY") = _penalty
@@ -408,6 +420,7 @@
             _encoderID = .Item("ENCODERID")
             _claimerID = .Item("CLAIMERID")
             _pawner.LoadClient(.Item("CLIENTID"))
+            _description = .Item("DESCRIPTION")
             _ORDate = .Item("ORDATE")
             _ORNum = .Item("ORNUM")
             _penalty = .Item("PENALTY")
@@ -426,6 +439,32 @@
             _pawnItem.Load_PawnItem(.Item("PAWNITEMID"))
         End With
     End Sub
+
+    Private Function DescriptionBuilder() As String
+        Dim Description As String = ""
+        Dim PrintLayout As String = _pawnItem.ItemClass.PrintLayout
+        '[CLASSNAME][GRAMS][KARAT][DESCRIPTION]
+        'FUNCTIONS:
+        'CLASS - Display Item Class
+
+        PrintLayout = PrintLayout.Replace("[CLASS]", _pawnItem.ItemClass.ClassName)
+
+        For Each sc As PawnItemSpec In _pawnItem.PawnItemSpecs
+            PrintLayout = PrintLayout.Replace(String.Format("[{0}]", GetShortCode(sc)), _
+                                              String.Format("{0}{1}", sc.SpecsValue, sc.UnitOfMeasure))
+        Next
+        Description = PrintLayout
+
+        Return Description
+    End Function
+
+    Private Function GetShortCode(ByVal ItemSpec As PawnItemSpec) As String
+        For Each spec As ItemSpecs In _pawnItem.ItemClass.ItemSpecifications
+            If spec.SpecName = ItemSpec.SpecName Then
+                Return spec.ShortCode
+            End If
+        Next
+    End Function
 #End Region
 
 End Class
