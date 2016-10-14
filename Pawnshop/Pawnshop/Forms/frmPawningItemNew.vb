@@ -730,13 +730,13 @@ Public Class frmPawningItemNew
         cboAppraiser.Text = GetNameByID(pt.AppraiserID, Appraisers_ht)
 
         'Disable
-        'txtCustomer.ReadOnly = True
-        'btnSearch.Enabled = False
-        'txtClassification.ReadOnly = True
-        'btnSearchClassification.Enabled = False
-        'txtAppr.Enabled = False
-        'txtPrincipal.Enabled = False
-        'cboAppraiser.Enabled = False
+        txtCustomer.ReadOnly = True
+        btnSearch.Enabled = False
+        txtClassification.ReadOnly = True
+        btnSearchClassification.Enabled = False
+        txtAppr.Enabled = False
+        txtPrincipal.Enabled = False
+        cboAppraiser.Enabled = False
 
         PT_Entry = pt
         transactionType = type
@@ -772,7 +772,7 @@ Public Class frmPawningItemNew
 
     Friend Sub Redeem()
         GeneratePT()
-
+        transactionType = "X"
         ReComputeInterest()
         grpClaimer.Enabled = True
         txtClaimer.ReadOnly = False : txtClaimer.Enabled = True
@@ -782,9 +782,10 @@ Public Class frmPawningItemNew
 
     Friend Sub Renew()
         GeneratePT()
-
+        transactionType = "R"
         ReComputeInterest()
         lblTransaction.Text = "Renewal"
+
     End Sub
 
     Friend Sub NewLoan()
@@ -824,7 +825,7 @@ Public Class frmPawningItemNew
         If transactionType = "R" Then
             btnRenew.Text = "Rene&w"
             txtRenew.BackColor = Drawing.SystemColors.Control
-            transactionType = "D"
+            'transactionType = "D"
             btnSave.Enabled = False
 
             Load_PawnTicket(PT_Entry, "D")
@@ -839,7 +840,11 @@ Public Class frmPawningItemNew
 
         Renew()
         btnSave.Enabled = True
-        btnRenew.Text = "&Cancel"
+        If btnRenew.Text = "&Cancel" Then
+            btnRenew.Text = "Rene&w"
+        Else
+            btnRenew.Text = "&Cancel"
+        End If
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
@@ -873,9 +878,14 @@ Public Class frmPawningItemNew
             MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
             Exit Sub
         End If
-
         Redeem()
         btnSave.Enabled = True
-        btnRedeem.Text = "&Cancel"
+        If btnRedeem.Text = "&Redeem" Then
+            btnRedeem.Text = "&Cancel"
+        Else
+            btnRedeem.Text = "&Redeem"
+            txtClaimer.ReadOnly = True : txtClaimer.Enabled = False
+            btnSearchClaimer.Enabled = False
+        End If
     End Sub
 End Class
