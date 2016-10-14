@@ -711,7 +711,7 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
-    Friend Sub Load_PawnTicket(pt As PawnTicket2)
+    Friend Sub Load_PawnTicket(ByVal pt As PawnTicket2, ByVal type As String)
         LoadClient(pt.Pawner)
 
         Load_ItemSpecification(pt.PawnItem.ItemClass)
@@ -730,15 +730,21 @@ Public Class frmPawningItemNew
         cboAppraiser.Text = GetNameByID(pt.AppraiserID, Appraisers_ht)
 
         'Disable
-        txtCustomer.ReadOnly = True
-        btnSearch.Enabled = False
-        txtClassification.ReadOnly = True
-        btnSearchClassification.Enabled = False
-        txtAppr.Enabled = False
-        txtPrincipal.Enabled = False
-        cboAppraiser.Enabled = False
+        'txtCustomer.ReadOnly = True
+        'btnSearch.Enabled = False
+        'txtClassification.ReadOnly = True
+        'btnSearchClassification.Enabled = False
+        'txtAppr.Enabled = False
+        'txtPrincipal.Enabled = False
+        'cboAppraiser.Enabled = False
 
         PT_Entry = pt
+        transactionType = type
+        If transactionType = "D" Then
+            LockFields(True)
+            btnSave.Enabled = False : btnRenew.Enabled = True
+            btnRedeem.Enabled = True : btnPrint.Enabled = True
+        End If
     End Sub
 
 
@@ -769,7 +775,8 @@ Public Class frmPawningItemNew
 
         ReComputeInterest()
         grpClaimer.Enabled = True
-
+        txtClaimer.ReadOnly = False : txtClaimer.Enabled = True
+        btnSearchClaimer.Enabled = True
         lblTransaction.Text = "Redemption"
     End Sub
 
@@ -777,8 +784,6 @@ Public Class frmPawningItemNew
         GeneratePT()
 
         ReComputeInterest()
-        grpClaimer.Enabled = True
-
         lblTransaction.Text = "Renewal"
     End Sub
 
@@ -822,6 +827,7 @@ Public Class frmPawningItemNew
             transactionType = "D"
             btnSave.Enabled = False
 
+            Load_PawnTicket(PT_Entry, "D")
             Exit Sub
         End If
         If transactionType <> "D" Then
@@ -829,6 +835,47 @@ Public Class frmPawningItemNew
             Exit Sub
         End If
 
+        Notify_Renewal(PT_Entry)
 
+        Renew()
+        btnSave.Enabled = True
+        btnRenew.Text = "&Cancel"
+    End Sub
+
+    Private Sub LockFields(ByVal st As Boolean)
+        txtCustomer.ReadOnly = st
+        btnSearch.Enabled = Not st
+        txtClassification.Enabled = Not st
+        btnSearchClassification.Enabled = Not st
+        txtClaimer.Enabled = Not st
+        btnSearchClaimer.Enabled = Not st
+        txtAppr.Enabled = Not st
+        txtPrincipal.Enabled = Not st
+        cboAppraiser.Enabled = Not st
+        btnRenew.Enabled = Not st
+        btnRedeem.Enabled = Not st
+        If POSuser.canVoid Then btnVoid.Enabled = Not st
+        btnSave.Enabled = Not st
+    End Sub
+
+    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+        If transactionType = "X" Then
+            btnRedeem.Text = "&Redeem"
+            txtRedeem.BackColor = Drawing.SystemColors.Control
+            transactionType = "D"
+
+            btnSave.Enabled = False
+
+            Load_PawnTicket(PT_Entry, "D")
+            Exit Sub
+        End If
+        If transactionType <> "D" Then
+            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Redeem()
+        btnSave.Enabled = True
+        btnRedeem.Text = "&Cancel"
     End Sub
 End Class
