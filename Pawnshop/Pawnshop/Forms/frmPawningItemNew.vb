@@ -32,6 +32,7 @@ Public Class frmPawningItemNew
     Const MONTH_COMPUTE As Integer = 4
 
     Private unableToSave As Boolean = False
+    Private isOldItem As Boolean = False
 
     Private PRINT_PTOLD As Integer = 0
     Private PRINT_PTNEW As Integer = 0
@@ -112,7 +113,7 @@ Public Class frmPawningItemNew
         Dim secured_str As String = txtClassification.Text
         secured_str = DreadKnight(secured_str)
         frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_Specs)
-        frmItemList.ShowDialog()
+        frmItemList.Show()
     End Sub
 
     Private Sub btnSearchClaimer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaimer.Click
@@ -240,6 +241,7 @@ Public Class frmPawningItemNew
         Select Case transactionType
             Case "L"
                 SaveNewLoan()
+                'PrintNewLoan()
             Case "R"
                 SaveRenew()
             Case "X"
@@ -671,6 +673,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         ClearFields()
         LoadAppraisers()
 
@@ -888,4 +891,115 @@ Public Class frmPawningItemNew
             btnSearchClaimer.Enabled = False
         End If
     End Sub
+
+    'Private Sub PrintNewLoan()
+    '    Dim ans As DialogResult = _
+    '        MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
+    '    If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+
+    '    Dim autoPrintPT As Reporting
+    '    'On Error Resume Next
+
+    '    Dim printerName As String = PRINTER_PT
+    '    If Not canPrint(printerName) Then Exit Sub
+
+    '    Dim report As LocalReport = New LocalReport
+    '    autoPrintPT = New Reporting
+
+    '    Dim mySql As String, dsName As String = "dsPawnTicket"
+    '    mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PT_Entry.PawnID
+    '    If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+    '    Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+    '    report.ReportPath = "Reports\layout01.rdlc"
+    '    report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+    '    Dim addParameters As New Dictionary(Of String, String)
+    '    If isOldItem Then
+    '        addParameters.Add("txtDescription", PT_Entry.Description)
+    '    Else
+    '        'addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+    '    End If
+
+    '    addParameters.Add("txtItemInterest", GetInt(30) * 100)
+    '    addParameters.Add("txtUsername", POSuser.FullName)
+
+    '    If Reprint = True Then
+    '        addParameters.Add("txtReprint", "Reprint")
+    '    Else
+    '        addParameters.Add("txtReprint", " ")
+    '    End If
+
+
+    '    ' Add Monthly Computation
+    '    Dim strCompute As String
+    '    Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
+    '    PT_Entry.Load_PawnTicket(pt)
+    '    strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
+    '    Console.WriteLine(strCompute)
+
+    '    addParameters.Add("txtRenewCompute", strCompute)
+    '    strCompute = "Redeem: " & DisplayComputation(PT_Entry, "Redeem")
+    '    Console.WriteLine(strCompute)
+
+    '    addParameters.Add("txtRedeemCompute", strCompute)
+
+    '    If Not addParameters Is Nothing Then
+    '        For Each nPara In addParameters
+    '            Dim tmpPara As New ReportParameter
+    '            tmpPara.Name = nPara.Key
+    '            tmpPara.Values.Add(nPara.Value)
+    '            report.SetParameters(New ReportParameter() {tmpPara})
+    '            Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+    '        Next
+    '    End If
+
+    '    If DEV_MODE Then
+    '        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+    '        frmReport.Show()
+    '    Else
+    '        autoPrintPT.Export(report)
+    '        autoPrintPT.m_currentPageIndex = 0
+    '        autoPrintPT.Print(printerName)
+    '    End If
+
+    '    Me.Focus()
+    'End Sub
+
+    Private Function canPrint(ByVal printerName As String) As Boolean
+        Try
+            Dim printDocument As Drawing.Printing.PrintDocument = New Drawing.Printing.PrintDocument
+            printDocument.PrinterSettings.PrinterName = printerName
+            Return printDocument.PrinterSettings.IsValid
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Private Function GetInt(ByVal days As Integer, Optional ByVal tbl As String = "Interest") As Double
+        Dim mySql As String = "SELECT * FROM tblItem WHERE UPPER(ITEMCLASS) = UPPER('" & txtClassification.Text & "')"
+        Dim ds As DataSet = LoadSQL(mySql), TypeInt As Double
+        Dim tmpSchemeID As String = ds.Tables(0).Rows(0).Item("SCHEME_ID")
+
+        Dim sqlScheme As String = "SELECT  I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
+        sqlScheme &= "D.INTEREST, D.PENALTY, D.REMARKS FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
+        sqlScheme &= "Where I.SCHEMEID ='" & tmpSchemeID & "'"
+
+        Dim SchemeDs As DataSet = LoadSQL(sqlScheme)
+        For Each dr As DataRow In SchemeDs.Tables(0).Rows
+            Dim min As Integer = 0, max As Integer = 0
+            min = dr.Item("DayFrom") : max = dr.Item("DayTo")
+
+            Select Case days
+                Case min To max
+                    TypeInt = dr.Item(tbl)
+                    'Console.WriteLine(tbl & " is now " & TypeInt & " for " & cboType.Text)
+                    Return TypeInt
+            End Select
+        Next
+
+        Return 0
+    End Function
+
 End Class
