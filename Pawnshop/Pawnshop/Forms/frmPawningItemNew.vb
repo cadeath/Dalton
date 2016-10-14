@@ -892,80 +892,80 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
-    'Private Sub PrintNewLoan()
-    '    Dim ans As DialogResult = _
-    '        MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
-    '    If ans = Windows.Forms.DialogResult.No Then Exit Sub
+    Private Sub PrintNewLoan()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
 
-    '    Dim autoPrintPT As Reporting
-    '    'On Error Resume Next
+        Dim autoPrintPT As Reporting
+        'On Error Resume Next
 
-    '    Dim printerName As String = PRINTER_PT
-    '    If Not canPrint(printerName) Then Exit Sub
+        Dim printerName As String = PRINTER_PT
+        If Not canPrint(printerName) Then Exit Sub
 
-    '    Dim report As LocalReport = New LocalReport
-    '    autoPrintPT = New Reporting
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
 
-    '    Dim mySql As String, dsName As String = "dsPawnTicket"
-    '    mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PT_Entry.PawnID
-    '    If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
-    '    Dim ds As DataSet = LoadSQL(mySql, dsName)
+        Dim mySql As String, dsName As String = "dsPawnTicket"
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PT_Entry.PawnID
+        If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
 
-    '    report.ReportPath = "Reports\layout01.rdlc"
-    '    report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+        report.ReportPath = "Reports\layout01.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
-    '    Dim addParameters As New Dictionary(Of String, String)
-    '    If isOldItem Then
-    '        addParameters.Add("txtDescription", PT_Entry.Description)
-    '    Else
-    '        'addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
-    '    End If
+        Dim addParameters As New Dictionary(Of String, String)
+        If isOldItem Then
+            addParameters.Add("txtDescription", PT_Entry.Description)
+        Else
+            'addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+        End If
 
-    '    addParameters.Add("txtItemInterest", GetInt(30) * 100)
-    '    addParameters.Add("txtUsername", POSuser.FullName)
+        addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        addParameters.Add("txtUsername", POSuser.FullName)
 
-    '    If Reprint = True Then
-    '        addParameters.Add("txtReprint", "Reprint")
-    '    Else
-    '        addParameters.Add("txtReprint", " ")
-    '    End If
+        If Reprint = True Then
+            addParameters.Add("txtReprint", "Reprint")
+        Else
+            addParameters.Add("txtReprint", " ")
+        End If
 
 
-    '    ' Add Monthly Computation
-    '    Dim strCompute As String
-    '    Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
-    '    PT_Entry.Load_PawnTicket(pt)
-    '    strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
-    '    Console.WriteLine(strCompute)
+        ' Add Monthly Computation
+        Dim strCompute As String
+        Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
+        PT_Entry.Load_PawnTicket(pt)
+        strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
+        Console.WriteLine(strCompute)
 
-    '    addParameters.Add("txtRenewCompute", strCompute)
-    '    strCompute = "Redeem: " & DisplayComputation(PT_Entry, "Redeem")
-    '    Console.WriteLine(strCompute)
+        addParameters.Add("txtRenewCompute", strCompute)
+        strCompute = "Redeem: " & DisplayComputation(PT_Entry, "Redeem")
+        Console.WriteLine(strCompute)
 
-    '    addParameters.Add("txtRedeemCompute", strCompute)
+        addParameters.Add("txtRedeemCompute", strCompute)
 
-    '    If Not addParameters Is Nothing Then
-    '        For Each nPara In addParameters
-    '            Dim tmpPara As New ReportParameter
-    '            tmpPara.Name = nPara.Key
-    '            tmpPara.Values.Add(nPara.Value)
-    '            report.SetParameters(New ReportParameter() {tmpPara})
-    '            Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
-    '        Next
-    '    End If
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
 
-    '    If DEV_MODE Then
-    '        frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-    '        frmReport.Show()
-    '    Else
-    '        autoPrintPT.Export(report)
-    '        autoPrintPT.m_currentPageIndex = 0
-    '        autoPrintPT.Print(printerName)
-    '    End If
+        If DEV_MODE Then
+            frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+            frmReport.Show()
+        Else
+            autoPrintPT.Export(report)
+            autoPrintPT.m_currentPageIndex = 0
+            autoPrintPT.Print(printerName)
+        End If
 
-    '    Me.Focus()
-    'End Sub
+        Me.Focus()
+    End Sub
 
     Private Function canPrint(ByVal printerName As String) As Boolean
         Try
@@ -1000,6 +1000,77 @@ Public Class frmPawningItemNew
         Next
 
         Return 0
+    End Function
+
+    Private Function DisplayComputation(ByVal PTInfo As PawnTicket2, ByVal type As String) As String
+        Dim disp As String
+
+        disp = ""
+        'Dim dc As PawningDalton
+        Dim monthCnt As Integer = 30
+
+        'If Not isRenewable(PTInfo) And type = "Renew" Then Return "NON RENEWABLE"
+
+        Dim diff = PTInfo.AuctionDate - PTInfo.LoanDate
+        Dim lessNum As Integer = DateDiff(DateInterval.Day, PTInfo.LoanDate, PTInfo.AuctionDate)
+        lessNum = lessNum / 30
+        If Not lessNum < MONTH_COMPUTE Then
+            lessNum = MONTH_COMPUTE
+        End If
+
+        Dim isDJ As Boolean = IIf(PTInfo.AdvanceInterest <> 0, True, False)
+
+        For x As Integer = 0 To lessNum - 1
+            'dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, PTInfo.LoanDate.AddDays(monthCnt), PTInfo.MaturityDate, _
+            '                       isDJ, PTInfo.INT_Checksum)
+
+            Dim Dc As PawnCompute
+            Dim isDPJ As Boolean = True
+
+            If transactionType <> "L" Then
+                'REMANTIC NO ADVANCE INTEREST
+                If PT_Entry.AdvanceInterest = 0 Then
+                    isDPJ = False
+                End If
+            End If
+
+            Try
+                Dc = New PawnCompute _
+                (PTInfo.Principal, PTInfo.PawnItem.ItemClass.InterestScheme, CurrentDate, DateTime.Parse(txtMatu.Text), isDPJ)
+            Catch ex As Exception
+                Console.WriteLine(ex.Message)
+            End Try
+
+            Dim prefix As String = ""
+            Select Case x
+                Case 0
+                    If isDJ Then
+                        prefix = "AdvInt "
+                    Else
+                        prefix = "DelayInt "
+                    End If
+                Case 1
+                    prefix = "2ndMon "
+                Case 2
+                    prefix = "3rdMon "
+                Case 3
+                    prefix = "4thMon "
+                Case 4
+                    prefix = "5thMon "
+            End Select
+
+            Select Case type
+                Case "Renew"
+                    disp &= String.Format("{1}{0:#,##0.00} / ", dc.RenewDue, prefix)
+                Case "Redeem"
+                    disp &= String.Format("{1}{0:#,##0.00} / ", dc.RedeemDue, prefix)
+                Case Else
+                    Return "INVALID TYPE"
+            End Select
+            monthCnt += 30
+        Next
+
+        Return disp
     End Function
 
 End Class
