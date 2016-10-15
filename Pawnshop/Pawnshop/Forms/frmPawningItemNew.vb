@@ -1010,7 +1010,7 @@ Public Class frmPawningItemNew
         'Dim dc As PawningDalton
         Dim monthCnt As Integer = 30
 
-        'If Not isRenewable(PTInfo) And type = "Renew" Then Return "NON RENEWABLE"
+        If Not isRenewable(PTInfo) And type = "Renew" Then Return "NON RENEWABLE"
 
         Dim diff = PTInfo.AuctionDate - PTInfo.LoanDate
         Dim lessNum As Integer = DateDiff(DateInterval.Day, PTInfo.LoanDate, PTInfo.AuctionDate)
@@ -1022,9 +1022,6 @@ Public Class frmPawningItemNew
         Dim isDJ As Boolean = IIf(PTInfo.AdvanceInterest <> 0, True, False)
 
         For x As Integer = 0 To lessNum - 1
-            'dc = New PawningDalton(PTInfo.Principal, PTInfo.ItemType, PTInfo.LoanDate.AddDays(monthCnt), PTInfo.MaturityDate, _
-            '                       isDJ, PTInfo.INT_Checksum)
-
             Dim Dc As PawnCompute
             Dim isDPJ As Boolean = True
 
@@ -1037,7 +1034,7 @@ Public Class frmPawningItemNew
 
             Try
                 Dc = New PawnCompute _
-                (PTInfo.Principal, PTInfo.PawnItem.ItemClass.InterestScheme, CurrentDate, DateTime.Parse(txtMatu.Text), isDPJ)
+                (PTInfo.Principal, PTInfo.PawnItem.ItemClass.InterestScheme, PTInfo.LoanDate.AddDays(monthCnt), PTInfo.MaturityDate, isDPJ)
             Catch ex As Exception
                 Console.WriteLine(ex.Message)
             End Try
@@ -1089,4 +1086,19 @@ Public Class frmPawningItemNew
             ' do_RedeemOR()
         End If
     End Sub
+
+    Private Function isRenewable(ByVal pt As PawnTicket2) As Boolean
+        Dim mySql As String = "SELECT * FROM tblItem WHERE "
+        mySql &= "UPPER(ITEMCLASS) = UPPER('" & pt.PawnItem.ItemClass.ClassName & "')"
+        Dim ds As DataSet = LoadSQL(mySql, "tblItem")
+        Dim tmpIsRenew As Boolean
+        Select Case ds.Tables(0).Rows(0).Item("ISRENEW")
+            Case 1
+                tmpIsRenew = True
+            Case 0
+                tmpIsRenew = False
+        End Select
+
+        Return tmpIsRenew
+    End Function
 End Class

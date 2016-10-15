@@ -1789,7 +1789,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox42</rd:DefaultName>
         <Top>2.79173in</Top>
-        <Left>0.05286in</Left>
+        <Left>0.03677in</Left>
         <Height>0.1875in</Height>
         <Width>4.16949in</Width>
         <ZIndex>53</ZIndex>
@@ -1912,6 +1912,24 @@
         <Height>0.26514in</Height>
         <Width>1.06643in</Width>
         <ZIndex>57</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Parameters!txtReprint.Value.ToString().Contains("Reprint"),false ,true)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="Image6">
+        <Source>Embedded</Source>
+        <Value>Reprint4</Value>
+        <Sizing>Fit</Sizing>
+        <Top>6.05722in</Top>
+        <Left>5.99779in</Left>
+        <Height>0.26514in</Height>
+        <Width>1.06643in</Width>
+        <ZIndex>58</ZIndex>
         <Visibility>
           <Hidden>=IIf(Parameters!txtReprint.Value.ToString().Contains("Reprint"),false ,true)</Hidden>
         </Visibility>
