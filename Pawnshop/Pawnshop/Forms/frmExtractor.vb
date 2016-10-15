@@ -180,9 +180,11 @@ Public Class frmExtractor
         Dim ds As DataSet = LoadSQL(mySql)
         Dim ds2 As DataSet = LoadSQL(mySql2)
         Dim MaxEntries As Integer = 0
+
         Dim MaxEntries2 As Integer = 0
         MaxEntries = ds.Tables(0).Rows.Count
         MaxEntries2 = ds2.Tables(0).Rows.Count
+
         Console.WriteLine("Executing SQL:")
         Console.WriteLine(mySql2, mySql)
         Console.WriteLine("Entries: " & MaxEntries)
@@ -383,7 +385,7 @@ Public Class frmExtractor
 
         Dim mySql As String = "SELECT * FROM EXPIRY_LIST"
         mySql &= vbCr & " WHERE "
-        mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", sd.ToShortDateString, ed.ToShortDateString)
+        mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", GetFirstDate(sd).ToShortDateString, GetLastDate(ed).ToShortDateString)
 
         Dim ds_expiry As DataSet = LoadSQL(mySql)
 

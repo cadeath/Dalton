@@ -26,6 +26,7 @@
         BSPReportToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
+        AccountingExtractToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -398,9 +399,15 @@
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
-        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        'If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        qryPullOut.Show()
+        'qryPullOut.Show()
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.Pullout
+            If Not CheckOTP() Then Exit Sub
+        Else
+            qryPullOut.Show()
+        End If
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
@@ -460,7 +467,12 @@
         frmChangePassword.Show()
     End Sub
 
-    Private Sub AuditConsoleToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
+    Private Sub VoidReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VoidReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.VoidReportDaily
+        qryDate.Show()
+
+    End Sub
+    Private Sub AuditConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         AuditModule_Initialization()
@@ -468,9 +480,17 @@
         If Not OTPDisable Then
             diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
-            If Not diagOTPv2.isCorrect Then Exit Sub
+            If Not diagOTPv2.isCorrect Then
+                Exit Sub
+            Else
+                frmAuditConsole.Show()
+            End If
+
         End If
 
-        frmAuditConsole.Show()
+    End Sub
+
+    Private Sub AccountingExtractToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AccountingExtractToolStripMenuItem.Click
+        ExtractDataFromDatabase.ShowDialog()
     End Sub
 End Class
