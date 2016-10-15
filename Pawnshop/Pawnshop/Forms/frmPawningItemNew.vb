@@ -908,8 +908,8 @@ Public Class frmPawningItemNew
         autoPrintPT = New Reporting
 
         Dim mySql As String, dsName As String = "dsPawnTicket"
-        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PT_Entry.PawnID
-        If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        mySql = "SELECT * FROM NEWPAWNING_PRINT WHERE PAWNID = " & PT_Entry.PawnID
+        If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM NEWPAWNING_PRINT ORDER BY PAWNID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
         report.ReportPath = "Reports\layout01.rdlc"
@@ -919,6 +919,7 @@ Public Class frmPawningItemNew
         If isOldItem Then
             addParameters.Add("txtDescription", PT_Entry.Description)
         Else
+            addParameters.Add("txtDescription", PT_Entry.Description)
             'addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         End If
 
@@ -1073,4 +1074,19 @@ Public Class frmPawningItemNew
         Return disp
     End Function
 
+    Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
+        Reprint = True
+        If PT_Entry.Status = "L" Or PT_Entry.Status = "R" Then
+            PrintNewLoan()
+        End If
+
+        If PT_Entry.Status = "0" Then
+            PrintNewLoan()
+            ' do_RenewOR()
+        End If
+
+        If PT_Entry.Status = "X" Then
+            ' do_RedeemOR()
+        End If
+    End Sub
 End Class
