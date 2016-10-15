@@ -112,7 +112,7 @@ Public Class frmPawningItemNew
         Dim secured_str As String = txtClassification.Text
         secured_str = DreadKnight(secured_str)
         frmItemList.SearchSelect(secured_str, FormName.frmPawningV2_Specs)
-        frmItemList.ShowDialog()
+        frmItemList.Show()
     End Sub
 
     Private Sub btnSearchClaimer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaimer.Click
@@ -765,6 +765,7 @@ Public Class frmPawningItemNew
     End Function
 
     Friend Sub Redeem()
+        transactionType = "X"
         GeneratePT()
 
         ReComputeInterest()
@@ -774,6 +775,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Friend Sub Renew()
+        transactionType = "R"
         GeneratePT()
 
         ReComputeInterest()

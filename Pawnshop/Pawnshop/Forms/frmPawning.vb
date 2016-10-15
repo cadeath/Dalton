@@ -347,7 +347,6 @@
 
                 frmPawningItemNew.Show()
                 frmPawningItemNew.Load_PawnTicket(pt_Selected)
-                frmPawningItemNew.transactionType = "R"
                 frmPawningItemNew.Renew()
 
             End If
@@ -367,8 +366,6 @@
                                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
                                                             "Form Already Open")
             Else
-                'btnView.PerformClick()
-                'frmPawnItem.btnRedeem.PerformClick()
 
                 If lvPawners.SelectedItems.Count = 0 Then Exit Sub
 
@@ -377,7 +374,6 @@
 
                 frmPawningItemNew.Show()
                 frmPawningItemNew.Load_PawnTicket(pt_Selected)
-                frmPawningItemNew.transactionType = "X"
                 frmPawningItemNew.Redeem()
 
             End If
