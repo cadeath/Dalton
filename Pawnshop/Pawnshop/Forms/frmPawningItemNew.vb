@@ -910,8 +910,10 @@ Public Class frmPawningItemNew
         mySql = "SELECT * FROM NEWPAWNING_PRINT WHERE PAWNID = " & PT_Entry.PawnID
         If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM NEWPAWNING_PRINT ORDER BY PAWNID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
+
         Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
         PT_Entry.Load_PawnTicket(pt)
+
         report.ReportPath = "Reports\layout01.rdlc"
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
