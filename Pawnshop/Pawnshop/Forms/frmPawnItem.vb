@@ -359,7 +359,6 @@ Public Class frmPawnItem
         Redeem()
         btnSave.Enabled = True
         PrintButton(0)
-
         btnRedeem.Text = "&Cancel"
         Authorization()
     End Sub
@@ -388,6 +387,7 @@ Public Class frmPawnItem
         End If
 
         Notify_Renewal(PawnItem)
+
         Redeem("R")
         PrintButton(0)
         btnSave.Enabled = True

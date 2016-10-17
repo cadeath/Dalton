@@ -297,11 +297,11 @@
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
         If lvPawners.SelectedItems.Count <= 0 Then Exit Sub
 
-        Dim idx As Integer = CInt(lvPawners.FocusedItem.Text)
-        Dim tmpTicket As New PawnTicket2
-        tmpTicket.Load_PawnTicket(idx)
-        frmPawningItemNew.Show()
-        frmPawningItemNew.Load_PawnTicket(tmpTicket, "D")
+        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
+        Dim tmpTicket As New PawnTicket
+        tmpTicket.LoadTicket(idx)
+        frmPawnItem.Show()
+        frmPawnItem.LoadPawnTicket(tmpTicket, "D")
     End Sub
 
     ''' <summary>
@@ -311,7 +311,7 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub lvPawners_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPawners.DoubleClick
-        btnView.PerformClick()
+        'btnView.PerformClick()
     End Sub
 
     ''' <summary>
@@ -346,8 +346,7 @@
                 pt_Selected.Load_PawnTicket(CInt(lvPawners.FocusedItem.Text))
 
                 frmPawningItemNew.Show()
-                frmPawningItemNew.Load_PawnTicket(pt_Selected, "R")
-                frmPawningItemNew.transactionType = "R"
+                frmPawningItemNew.Load_PawnTicket(pt_Selected)
                 frmPawningItemNew.Renew()
 
             End If
@@ -367,8 +366,6 @@
                                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
                                                             "Form Already Open")
             Else
-                'btnView.PerformClick()
-                'frmPawnItem.btnRedeem.PerformClick()
 
                 If lvPawners.SelectedItems.Count = 0 Then Exit Sub
 
@@ -376,8 +373,7 @@
                 pt_Selected.Load_PawnTicket(CInt(lvPawners.FocusedItem.Text))
 
                 frmPawningItemNew.Show()
-                frmPawningItemNew.Load_PawnTicket(pt_Selected, "X")
-                frmPawningItemNew.transactionType = "X"
+                frmPawningItemNew.Load_PawnTicket(pt_Selected)
                 frmPawningItemNew.Redeem()
 
             End If

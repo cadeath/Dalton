@@ -32,7 +32,6 @@ Public Class frmPawningItemNew
     Const MONTH_COMPUTE As Integer = 4
 
     Private unableToSave As Boolean = False
-    Private isOldItem As Boolean = False
 
     Private PRINT_PTOLD As Integer = 0
     Private PRINT_PTNEW As Integer = 0
@@ -240,7 +239,7 @@ Public Class frmPawningItemNew
 
         Select Case transactionType
             Case "L"
-                SaveNewLoan() : PrintNewLoan()
+                SaveNewLoan()
             Case "R"
                 SaveRenew()
             Case "X"
@@ -672,7 +671,6 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         ClearFields()
         LoadAppraisers()
 
@@ -713,7 +711,7 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
-    Friend Sub Load_PawnTicket(ByVal pt As PawnTicket2, ByVal type As String)
+    Friend Sub Load_PawnTicket(pt As PawnTicket2)
         LoadClient(pt.Pawner)
 
         Load_ItemSpecification(pt.PawnItem.ItemClass)
@@ -741,12 +739,6 @@ Public Class frmPawningItemNew
         cboAppraiser.Enabled = False
 
         PT_Entry = pt
-        transactionType = type
-        If transactionType = "D" Then
-            LockFields(True)
-            btnSave.Enabled = False : btnRenew.Enabled = True
-            btnRedeem.Enabled = True : btnPrint.Enabled = True
-        End If
     End Sub
 
 
@@ -773,21 +765,23 @@ Public Class frmPawningItemNew
     End Function
 
     Friend Sub Redeem()
-        GeneratePT()
         transactionType = "X"
+        GeneratePT()
+
         ReComputeInterest()
         grpClaimer.Enabled = True
-        txtClaimer.ReadOnly = False : txtClaimer.Enabled = True
-        btnSearchClaimer.Enabled = True
+
         lblTransaction.Text = "Redemption"
     End Sub
 
     Friend Sub Renew()
-        GeneratePT()
         transactionType = "R"
-        ReComputeInterest()
-        lblTransaction.Text = "Renewal"
+        GeneratePT()
 
+        ReComputeInterest()
+        grpClaimer.Enabled = True
+
+        lblTransaction.Text = "Renewal"
     End Sub
 
     Friend Sub NewLoan()
@@ -827,81 +821,16 @@ Public Class frmPawningItemNew
         If transactionType = "R" Then
             btnRenew.Text = "Rene&w"
             txtRenew.BackColor = Drawing.SystemColors.Control
-            'transactionType = "D"
-            btnSave.Enabled = False
-
-            Load_PawnTicket(PT_Entry, "D")
-            Exit Sub
-        End If
-        If transactionType <> "D" Then
-            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
-
-        Notify_Renewal(PT_Entry)
-
-        Renew()
-        btnSave.Enabled = True
-        If btnRenew.Text = "&Cancel" Then
-            btnRenew.Text = "Rene&w"
-        Else
-            btnRenew.Text = "&Cancel"
-        End If
-    End Sub
-
-    Private Sub LockFields(ByVal st As Boolean)
-        txtCustomer.ReadOnly = st
-        btnSearch.Enabled = Not st
-        txtClassification.Enabled = Not st
-        btnSearchClassification.Enabled = Not st
-        txtClaimer.Enabled = Not st
-        btnSearchClaimer.Enabled = Not st
-        txtAppr.Enabled = Not st
-        txtPrincipal.Enabled = Not st
-        cboAppraiser.Enabled = Not st
-        btnRenew.Enabled = Not st
-        btnRedeem.Enabled = Not st
-        If POSuser.canVoid Then btnVoid.Enabled = Not st
-        btnSave.Enabled = Not st
-    End Sub
-
-    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
-        If transactionType = "X" Then
-            btnRedeem.Text = "&Redeem"
-            txtRedeem.BackColor = Drawing.SystemColors.Control
             transactionType = "D"
-
             btnSave.Enabled = False
 
-            Load_PawnTicket(PT_Entry, "D")
             Exit Sub
         End If
         If transactionType <> "D" Then
             MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
             Exit Sub
         End If
-        Redeem()
-        btnSave.Enabled = True
-        If btnRedeem.Text = "&Redeem" Then
-            btnRedeem.Text = "&Cancel"
-        Else
-            btnRedeem.Text = "&Redeem"
-            txtClaimer.ReadOnly = True : txtClaimer.Enabled = False
-            btnSearchClaimer.Enabled = False
-        End If
-    End Sub
 
-    Private Sub PrintNewLoan()
-        Dim ans As DialogResult = _
-            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-
-        Dim autoPrintPT As Reporting
-        'On Error Resume Next
-
-        Dim printerName As String = PRINTER_PT
-        If Not canPrint(printerName) Then Exit Sub
 
         Dim report As LocalReport = New LocalReport
         autoPrintPT = New Reporting
@@ -1100,4 +1029,5 @@ Public Class frmPawningItemNew
 
         Return tmpIsRenew
     End Function
+
 End Class
