@@ -726,6 +726,7 @@ Public Class frmPawningItemNew
         txtPrincipal.Text = pt.Principal.ToString("#,##0.00")
         txtAdv.Text = pt.AdvanceInterest.ToString("#,##0.00")
         txtNet.Text = pt.NetAmount.ToString("#,##0.00")
+        txtService.Text = pt.ServiceCharge.ToString("#,##0.00")
 
         cboAppraiser.Text = GetNameByID(pt.AppraiserID, Appraisers_ht)
 
@@ -739,6 +740,12 @@ Public Class frmPawningItemNew
         cboAppraiser.Enabled = False
 
         PT_Entry = pt
+
+        If transactionType = "D" Then
+            LockFields(True)
+            btnSave.Enabled = False : btnRenew.Enabled = True
+            btnRedeem.Enabled = True : btnPrint.Enabled = True
+        End If
     End Sub
 
 
@@ -818,82 +825,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
-        If transactionType = "R" Then
-            btnRenew.Text = "Rene&w"
-            txtRenew.BackColor = Drawing.SystemColors.Control
-            transactionType = "D"
-            btnSave.Enabled = False
 
-            Exit Sub
-        End If
-        If transactionType <> "D" Then
-            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
-
-
-        Dim report As LocalReport = New LocalReport
-        autoPrintPT = New Reporting
-
-        Dim mySql As String, dsName As String = "dsPawnTicket"
-        mySql = "SELECT * FROM NEWPAWNING_PRINT WHERE PAWNID = " & PT_Entry.PawnID
-        If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM NEWPAWNING_PRINT ORDER BY PAWNID DESC ROWS 1"
-        Dim ds As DataSet = LoadSQL(mySql, dsName)
-
-        Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
-        PT_Entry.Load_PawnTicket(pt)
-
-        report.ReportPath = "Reports\layout01.rdlc"
-        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
-
-        Dim addParameters As New Dictionary(Of String, String)
-        'If isOldItem Then
-        '    addParameters.Add("txtDescription", PT_Entry.Description)
-        'Else
-        '    addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
-        'End If
-        addParameters.Add("txtDescription", PT_Entry.Description)
-        addParameters.Add("txtItemInterest", GetInt(30) * 100)
-        addParameters.Add("txtUsername", POSuser.FullName)
-
-        If Reprint = True Then
-            addParameters.Add("txtReprint", "Reprint")
-        Else
-            addParameters.Add("txtReprint", " ")
-        End If
-
-
-        ' Add Monthly Computation
-        Dim strCompute As String
-        strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
-        Console.WriteLine(strCompute)
-
-        addParameters.Add("txtRenewCompute", strCompute)
-        strCompute = "Redeem: " & DisplayComputation(PT_Entry, "Redeem")
-        Console.WriteLine(strCompute)
-
-        addParameters.Add("txtRedeemCompute", strCompute)
-
-        If Not addParameters Is Nothing Then
-            For Each nPara In addParameters
-                Dim tmpPara As New ReportParameter
-                tmpPara.Name = nPara.Key
-                tmpPara.Values.Add(nPara.Value)
-                report.SetParameters(New ReportParameter() {tmpPara})
-                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
-            Next
-        End If
-
-        If DEV_MODE Then
-            frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
-            frmReport.Show()
-        Else
-            autoPrintPT.Export(report)
-            autoPrintPT.m_currentPageIndex = 0
-            autoPrintPT.Print(printerName)
-        End If
-
-        Me.Focus()
     End Sub
 
     Private Function canPrint(ByVal printerName As String) As Boolean
@@ -1000,19 +932,7 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
-        Reprint = True
-        If PT_Entry.Status = "L" Or PT_Entry.Status = "R" Then
-            PrintNewLoan()
-        End If
-
-        If PT_Entry.Status = "0" Then
-            PrintNewLoan()
-            ' do_RenewOR()
-        End If
-
-        If PT_Entry.Status = "X" Then
-            ' do_RedeemOR()
-        End If
+    
     End Sub
 
     Private Function isRenewable(ByVal pt As PawnTicket2) As Boolean
@@ -1030,4 +950,24 @@ Public Class frmPawningItemNew
         Return tmpIsRenew
     End Function
 
+    Private Sub LockFields(ByVal st As Boolean)
+        txtCustomer.ReadOnly = st
+        btnSearch.Enabled = Not st
+        txtAppr.Enabled = Not st
+        txtPrincipal.Enabled = Not st
+        cboAppraiser.Enabled = Not st
+        btnRenew.Enabled = Not st
+        btnRedeem.Enabled = Not st
+        If POSuser.canVoid Then btnVoid.Enabled = Not st
+        btnSave.Enabled = Not st
+        lvSpec.Enabled = Not st
+    End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+
+    End Sub
+
+    Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+
+    End Sub
 End Class
