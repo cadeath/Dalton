@@ -384,7 +384,7 @@
     End Sub
 
     Public Sub Load_PTid(ByVal id As Integer)
-        Dim mySql As String = String.Format("SELECT * {0} WHERE PAWNID = {1}", MainTable, id)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE PAWNID = {1}", MainTable, id)
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count <> 1 Then
