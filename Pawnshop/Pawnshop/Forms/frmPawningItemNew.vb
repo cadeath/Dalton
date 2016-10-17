@@ -932,7 +932,19 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
-    
+        Reprint = True
+        If PT_Entry.Status = "L" Or PT_Entry.Status = "R" Then
+            PrintNewLoan()
+        End If
+
+        If PT_Entry.Status = "0" Then
+            PrintNewLoan()
+            'do_RenewOR()
+        End If
+
+        If PT_Entry.Status = "X" Then
+            'do_RedeemOR()
+        End If
     End Sub
 
     Private Function isRenewable(ByVal pt As PawnTicket2) As Boolean
@@ -961,6 +973,79 @@ Public Class frmPawningItemNew
         If POSuser.canVoid Then btnVoid.Enabled = Not st
         btnSave.Enabled = Not st
         lvSpec.Enabled = Not st
+    End Sub
+
+    Private Sub PrintNewLoan()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+
+        Dim autoPrintPT As Reporting
+        'On Error Resume Next
+
+        Dim printerName As String = PRINTER_PT
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+        Dim mySql As String, dsName As String = "dsPawnTicket"
+        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PT_Entry.PawnID
+        If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout01.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim addParameters As New Dictionary(Of String, String)
+        'If isOldItem Then
+        '    addParameters.Add("txtDescription", PT_Entry.Description)
+        'Else
+        '    addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+        'End If
+        addParameters.Add("txtDescription", PT_Entry.Description)
+        addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        addParameters.Add("txtUsername", POSuser.FullName)
+
+        If Reprint = True Then
+            addParameters.Add("txtReprint", "Reprint")
+        Else
+            addParameters.Add("txtReprint", " ")
+        End If
+
+
+        ' Add Monthly Computation
+        Dim strCompute As String
+        Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
+        PT_Entry.Load_PTid(pt)
+        strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRenewCompute", strCompute)
+        strCompute = "Redeem: " & DisplayComputation(PT_Entry, "Redeem")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRedeemCompute", strCompute)
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        If DEV_MODE Then
+            frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+            frmReport.Show()
+        Else
+            autoPrintPT.Export(report)
+            autoPrintPT.m_currentPageIndex = 0
+            autoPrintPT.Print(printerName)
+        End If
+
+        Me.Focus()
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
