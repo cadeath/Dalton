@@ -118,7 +118,7 @@ Public Class frmPawningItemNew
     Private Sub btnSearchClaimer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchClaimer.Click
         Dim secured_str As String = txtClaimer.Text
         secured_str = DreadKnight(secured_str)
-        'frmClient.SearchSelect(secured_str, FormName.PawnClaimer)
+        frmClient.SearchSelect(secured_str, FormName.frmPawningV2_Claimer)
         frmClient.Show()
     End Sub
 
@@ -260,7 +260,7 @@ Public Class frmPawningItemNew
             .Penalty = PawnPenalty
             .ServiceCharge = PawnServiceCharge
             .Status = "X"
-
+            .ClaimerID = Pawner_OtherClaimer.ID
             .RenewDue = 0
             .RedeemDue = RedeemDue
 
@@ -767,6 +767,7 @@ Public Class frmPawningItemNew
     End Function
 
     Friend Sub Redeem()
+        transactionType = "X"
         GeneratePT()
 
         ReComputeInterest()
@@ -776,6 +777,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Friend Sub Renew()
+        transactionType = "R"
         GeneratePT()
 
         ReComputeInterest()
