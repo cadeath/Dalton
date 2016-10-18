@@ -207,6 +207,7 @@
                 .Item("UoM") = _UoM
                 .Item("onHold") = If(_onHold, 1, 0)
                 .Item("SpecLayout") = _specLayout
+                .Item("ShortCode") = _shortCode
                 .Item("isRequired") = If(_isRequired, 1, 0)
                 .Item("Updated_At") = Now
             End With

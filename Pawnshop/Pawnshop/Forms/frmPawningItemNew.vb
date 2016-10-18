@@ -150,14 +150,19 @@ Public Class frmPawningItemNew
             ItemClasses_ht.Add(spec.SpecID, spec.SpecName)
         Next
 
+
+        txtClassification.Text = Item.ClassName
+        'tmpItem = Item
+
         dateChange(PawnedItem.ItemClass)
         lvSpec.Focus()
         lvSpec.Items(0).Selected = True
+
     End Sub
 
-    Private Sub AddItem(ByVal cio As DataRow)
+    Private Sub AddItem(ByVal Item As DataRow)
         Dim tmpItem As New ItemSpecs
-        tmpItem.LoadItemSpecs_row(cio)
+        tmpItem.LoadItemSpecs_row(Item)
 
         Dim lv As ListViewItem = lvSpec.Items.Add(tmpItem.SpecID)
         lv.SubItems.Add(tmpItem.SpecName)
@@ -222,10 +227,8 @@ Public Class frmPawningItemNew
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         If Not mod_system.isAuthorized Then cboAppraiser.DroppedDown = True : Return False
 
-
         If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
         If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
-
 
         Return True
     End Function
@@ -419,7 +422,6 @@ Public Class frmPawningItemNew
             frmPawning.ReloadForm()
         End If
     End Sub
-
 
     Private Sub dateChange(selectedClass As ItemClass)
         If selectedClass Is Nothing Then Exit Sub

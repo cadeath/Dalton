@@ -25,10 +25,10 @@ Partial Class frmLogin
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.pbClose = New System.Windows.Forms.PictureBox()
         Me.pbHeader = New System.Windows.Forms.PictureBox()
-        Me.txtUser = New System.Windows.Forms.TextBox()
-        Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnLogin = New System.Windows.Forms.Button()
+        Me.txtUser = New Pawnshop.watermark()
+        Me.txtPassword = New Pawnshop.watermark()
         CType(Me.pbClose, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -53,26 +53,6 @@ Partial Class frmLogin
         Me.pbHeader.TabIndex = 1
         Me.pbHeader.TabStop = False
         '
-        'txtUser
-        '
-        Me.txtUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUser.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtUser.Location = New System.Drawing.Point(42, 61)
-        Me.txtUser.Name = "txtUser"
-        Me.txtUser.Size = New System.Drawing.Size(209, 24)
-        Me.txtUser.TabIndex = 1
-        Me.txtUser.Text = "Username"
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.ForeColor = System.Drawing.SystemColors.InactiveCaption
-        Me.txtPassword.Location = New System.Drawing.Point(42, 113)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(209, 24)
-        Me.txtPassword.TabIndex = 2
-        Me.txtPassword.Text = "Password"
-        '
         'btnExit
         '
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
@@ -88,9 +68,29 @@ Partial Class frmLogin
         Me.btnLogin.Location = New System.Drawing.Point(42, 162)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(82, 66)
-        Me.btnLogin.TabIndex = 3
+        Me.btnLogin.TabIndex = 2
         Me.btnLogin.Text = "&LOGIN"
         Me.btnLogin.UseVisualStyleBackColor = True
+        '
+        'txtUser
+        '
+        Me.txtUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUser.Location = New System.Drawing.Point(42, 64)
+        Me.txtUser.Name = "txtUser"
+        Me.txtUser.Size = New System.Drawing.Size(209, 24)
+        Me.txtUser.TabIndex = 0
+        Me.txtUser.WatermarkColor = System.Drawing.Color.LightGray
+        Me.txtUser.WatermarkText = "Username"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Location = New System.Drawing.Point(42, 117)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(209, 24)
+        Me.txtPassword.TabIndex = 1
+        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gainsboro
+        Me.txtPassword.WatermarkText = "Password"
         '
         'frmLogin
         '
@@ -100,10 +100,10 @@ Partial Class frmLogin
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.CancelButton = Me.btnExit
         Me.ClientSize = New System.Drawing.Size(300, 239)
-        Me.Controls.Add(Me.btnLogin)
-        Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUser)
+        Me.Controls.Add(Me.btnLogin)
+        Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.pbHeader)
         Me.Controls.Add(Me.pbClose)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -118,8 +118,8 @@ Partial Class frmLogin
     End Sub
     Friend WithEvents pbClose As System.Windows.Forms.PictureBox
     Friend WithEvents pbHeader As System.Windows.Forms.PictureBox
-    Friend WithEvents txtUser As System.Windows.Forms.TextBox
-    Friend WithEvents txtPassword As System.Windows.Forms.TextBox
     Friend WithEvents btnExit As System.Windows.Forms.Button
     Friend WithEvents btnLogin As System.Windows.Forms.Button
+    Friend WithEvents txtUser As Pawnshop.watermark
+    Friend WithEvents txtPassword As Pawnshop.watermark
 End Class
