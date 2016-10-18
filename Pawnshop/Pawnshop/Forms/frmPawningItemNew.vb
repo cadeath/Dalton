@@ -991,8 +991,8 @@ Public Class frmPawningItemNew
         autoPrintPT = New Reporting
 
         Dim mySql As String, dsName As String = "dsPawnTicket"
-        mySql = "SELECT * FROM NEWPAWNING_PRINT WHERE PAWNID = " & PT_Entry.PawnID
-        If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM NEWPAWNING_PRINT ORDER BY PAWNID DESC ROWS 1"
+        mySql = "SELECT * FROM PAWN_LIST WHERE PAWNID = " & PT_Entry.PawnID
+        If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM PAWN_LIST ORDER BY PAWNID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
         report.ReportPath = "Reports\layout01.rdlc"
