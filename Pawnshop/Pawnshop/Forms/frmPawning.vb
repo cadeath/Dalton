@@ -305,6 +305,7 @@
     End Sub
 
     ''' <summary>
+    ''' 
     ''' double click the disire client in the listview to view thier information.
     ''' </summary>
     ''' <param name="sender"></param>

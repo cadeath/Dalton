@@ -5,6 +5,7 @@
     Dim selectedSchemeDetails As Scheme_Interest
 
     Private Sub frmInterestSchemeList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Load_Scheme_Data() ''''''''''''''sample''''''''''''
         LoadScheme()
 
 
@@ -51,7 +52,8 @@
 
                 Dim row As ListViewItem
 
-                row = New ListViewItem(.DayFrom)
+                row = New ListViewItem(.schemeInterestID)
+                row.SubItems.Add(.DayFrom)
                 row.SubItems.Add(.DayTo)
                 row.SubItems.Add(.Interest)
                 row.SubItems.Add(.Penalty)
@@ -112,15 +114,15 @@
         txtSearch.Text = ""
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
-
     Private Sub lvSchemeList_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSchemeList.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnView.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtSearch_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearch.PerformClick()
         End If
     End Sub
 End Class
