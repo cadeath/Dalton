@@ -16,6 +16,8 @@
         frmPawningV2_Specs = 11
         frmPawningV2_SpecsValue = 12
         frmPawningV2_Claimer = 12
+        frmPawningV2_Claimer = 12
+        frmPawningV2_SpecsValue = 12
     End Enum
 
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
