@@ -252,6 +252,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub SaveRedeem()
+        'If Pawner_OtherClaimer.ID = 0 Then Exit Sub
         With PT_Entry
             .ORNumber = currentORNumber
             .ORDate = CurrentDate
@@ -261,11 +262,12 @@ Public Class frmPawningItemNew
             .ServiceCharge = PawnServiceCharge
             .Status = "X"
             .ClaimerID = Pawner_OtherClaimer.ID
-            .RenewDue = 0
+            .RenewDue = 0S
             .RedeemDue = RedeemDue
 
             .Update_PawnTicket()
 
+            AddNumber(DocumentClass.OfficialReceipt)
             MsgBox("Item Redeemed", MsgBoxStyle.Information)
 
             If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
@@ -322,6 +324,7 @@ Public Class frmPawningItemNew
             .Status = "R"
             .PawnItem = PT_Entry.PawnItem
             .Pawner = PT_Entry.Pawner
+            .ClaimerID = Pawner_OtherClaimer.ID
             'INCLUDE THE CLAIMER HERE
             '?????????????????
 
@@ -331,7 +334,8 @@ Public Class frmPawningItemNew
 
             .Save_PawnTicket()
         End With
-
+        AddNumber(DocumentClass.Pawnticket)
+        AddNumber(DocumentClass.OfficialReceipt)
         MsgBox("Item Renewed", MsgBoxStyle.Information)
 
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
@@ -827,6 +831,23 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
+        If transactionType = "R" Then
+            btnRenew.Text = "Rene&w"
+            txtRenew.BackColor = Drawing.SystemColors.Control
+            transactionType = "D"
+            btnSave.Enabled = False
+
+            Load_PawnTicket(PT_Entry)
+            Exit Sub
+        End If
+        If transactionType <> "D" Then
+            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Renew()
+        btnSave.Enabled = True
+        btnRenew.Text = "&Cancel"
 
     End Sub
 
@@ -1055,6 +1076,22 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
+        If transactionType = "X" Then
+            btnRedeem.Text = "&Redeem"
+            txtRedeem.BackColor = Drawing.SystemColors.Control
+            transactionType = "D"
+            btnSave.Enabled = False
 
+            Load_PawnTicket(PT_Entry)
+            Exit Sub
+        End If
+        If transactionType <> "D" Then
+            MsgBox("Please press cancel to switch transaction mode", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Redeem()
+        btnSave.Enabled = True
+        btnRedeem.Text = "&Cancel"
     End Sub
 End Class
