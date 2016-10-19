@@ -470,7 +470,7 @@ Public Class frmPawningItemNew
 
         Try
             AutoCompute = New PawnCompute _
-            (Principal, PawnedItem.ItemClass.InterestScheme, CurrentDate, DateTime.Parse(txtMatu.Text), isDPJ)
+            (Principal, PawnedItem.ItemClass.InterestScheme, CurrentDate, PT_Entry.MaturityDate, isDPJ)
         Catch ex As Exception
             Console.WriteLine("Incomplete Data")
             Console.WriteLine(ex.Message)
