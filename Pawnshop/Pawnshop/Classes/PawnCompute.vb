@@ -1,4 +1,6 @@
-﻿Public Class PawnCompute
+﻿' NEW DALTON COMPUTATION CLASS
+
+Public Class PawnCompute
 
     '===================== INPUT ====================='
     Private _principal As Double = 0
@@ -96,7 +98,7 @@
 
 #Region "Procedures and Functions"
 
-    Public Sub New(Principal As Double, IntRate As InterestScheme, CurrentDate As Date, MaturityDate As Date, isNew As Boolean)
+    Public Sub New(ByVal Principal As Double, ByVal IntRate As InterestScheme, ByVal CurrentDate As Date, ByVal MaturityDate As Date, ByVal isNew As Boolean)
         _principal = Principal
         _IntRate = IntRate
         _currentDate = CurrentDate
@@ -152,7 +154,7 @@
         Penalty = 1
     End Enum
 
-    Private Function Get_ItemInterest(days As Integer, Optional ret As percentType = 0) As Double
+    Private Function Get_ItemInterest(ByVal days As Integer, Optional ByVal ret As percentType = 0) As Double
         Dim IntScheme As New InterestScheme
         IntScheme = _IntRate
 
@@ -169,7 +171,7 @@
         Return 0
     End Function
 
-    Private Function GetServiceCharge(principal As Double) As Double
+    Private Function GetServiceCharge(ByVal principal As Double) As Double
         Dim srvPrin As Double = principal
         Dim ret As Double = 0
 
