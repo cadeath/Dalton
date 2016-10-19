@@ -422,15 +422,6 @@
         txtSearch.Clear()
     End Sub
 
-    Private Sub lvPawners_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
-        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
-        Dim tpmstatus As New PawnTicket
-        Dim tmpTicket As New PawnTicket
-        Label5.Text = idx
-        Label6.Text = tpmstatus.LoadStatus
-
-    End Sub
-
     Private Sub GroupBox1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox1.DoubleClick
         If mod_system.DEV_MODE Then
 
@@ -444,9 +435,5 @@
                 Console.WriteLine(pawnSpec.SpecsValue)
             Next
         End If
-    End Sub
-
-    Private Sub lvPawners_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvPawners.SelectedIndexChanged
-
     End Sub
 End Class
