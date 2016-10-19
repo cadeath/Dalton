@@ -164,6 +164,7 @@ Public Class frmAdminPanel
             SaveItems()
         Else
             ModifyItems()
+            btnSave.Text = "&Save"
         End If
        
     End Sub
@@ -714,13 +715,10 @@ Public Class frmAdminPanel
     Private Sub ModifyItems()
         If Not isValid() Then Exit Sub
 
-        'If btnUpdate.Text = "&Update".ToString Then
-        '    btnUpdate.Text = "&Modify".ToString
         ReadOnlyFalse()
         txtClassification.Enabled = False
         LoadScheme()
-        '    Exit Sub
-        'End If
+
         Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
