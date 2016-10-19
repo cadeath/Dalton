@@ -1,6 +1,7 @@
 ﻿Public Class PawnTicket2
 
     Private MainTable As String = "OPT"
+    Private ds As DataSet, mysql As String = ""
 
 #Region "Properties"
     Private _PawnID As Integer
@@ -467,6 +468,106 @@
 
         Return "N/A"
     End Function
+
+    Public Sub VoidCancelTicket()
+
+        Try
+            Dim ModNAME As String = ""
+            If Status = "L" Then
+                ModNAME = "NEW LOANS"
+            ElseIf Status = "X" Then
+                ModNAME = "REDEMPTION"
+            ElseIf Status = "R" Then
+                ModNAME = "RENEWALS"
+            End If
+
+            Dim curStatus As String = _status
+            Dim PTNum As String = String.Format("{0:000000}", PawnTicket)
+            If curStatus = "L" Then
+                ChangeStatus("V")
+                Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
+                Dim ds As DataSet = LoadSQL(mysql)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
+                Exit Sub
+            End If
+
+            If curStatus <> "X" Then
+                ChangeStatus("V")
+            End If
+
+            If _oldPT <> 0 Then
+                'Has Old PawnTicket
+                mysql = "SELECT * FROM " & MainTable & " WHERE PawnTicket = " & _oldPT
+                ds = New DataSet
+                ds = LoadSQL(mysql, MainTable)
+                Dim st As String
+                If ds.Tables(MainTable).Rows.Count = 0 Then
+                    ChangeStatus("L")
+                    RemoveJournal(PawnID, , ModNAME)
+                    Exit Sub
+                Else
+                    If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
+                        st = "L"
+                    Else
+                        st = "R"
+                    End If
+                End If
+
+                ds.Tables(MainTable).Rows(0).Item("Status") = st
+                With ds.Tables(MainTable).Rows(0)
+                    .Item("OrNum") = 0
+                    .Item("OrDate") = New Date
+                    .Item("DAYSOVERDUE") = 0
+                    .Item("DelayInterest") = 0
+                    .Item("Penalty") = 0
+                    .Item("ServiceCharge") = 0
+                    .Item("RenewDue") = 0
+                    .Item("RedeemDue") = 0
+                    .Item("AdvInt") = 0
+                End With
+                database.SaveEntry(ds, False)
+                Dim mysql2 As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
+                Dim ds2 As DataSet = LoadSQL(mysql2)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds2.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
+            Else
+                ChangeStatus("L")
+
+                Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
+                Dim ds As DataSet = LoadSQL(mysql)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
+        End Try
+    End Sub
+
+    Public Sub ChangeStatus(ByVal str As String)
+        Dim ds As DataSet, mysql As String
+        mySql = "SELECT * FROM " & MainTable & " WHERE PawnID = " & _PawnID
+        ds = LoadSQL(mySql, MainTable)
+
+        Console.WriteLine("PawnID: " & PawnID)
+        Console.WriteLine("PawnTicket: " & PawnTicket)
+        Console.WriteLine("Client: " & Pawner.FirstName)
+        Console.WriteLine("Status: " & Status)
+
+        ds.Tables(0).Rows(0).Item("status") = str
+        database.SaveEntry(ds, False)
+    End Sub
 #End Region
 
 End Class

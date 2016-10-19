@@ -751,6 +751,7 @@ Public Class frmPawningItemNew
             LockFields(True)
             btnSave.Enabled = False : btnRenew.Enabled = True
             btnRedeem.Enabled = True : btnPrint.Enabled = True
+            btnVoid.Enabled = True
         End If
     End Sub
 
@@ -836,7 +837,7 @@ Public Class frmPawningItemNew
             txtRenew.BackColor = Drawing.SystemColors.Control
             transactionType = "D"
             btnSave.Enabled = False
-
+            btnPrint.Enabled = True
             Load_PawnTicket(PT_Entry)
             Exit Sub
         End If
@@ -846,6 +847,7 @@ Public Class frmPawningItemNew
         End If
 
         Renew()
+        btnPrint.Enabled = False
         btnSave.Enabled = True
         btnRenew.Text = "&Cancel"
 
@@ -1072,7 +1074,39 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidPawning
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidPawning()
+        End If
+    End Sub
 
+    Friend Sub VoidPawning()
+        Dim ans As DialogResult = _
+           MsgBox("Do you want to VOID this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.Critical + vbDefaultButton2, "W A R N I N G")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim transDate As Date
+        If PT_Entry.Status = "X" Then
+            transDate = PT_Entry.ORDate
+        ElseIf PT_Entry.Status = "L" Then
+            transDate = PT_Entry.LoanDate
+        Else
+            transDate = PT_Entry.LoanDate
+        End If
+
+        If CurrentDate.Date <> transDate Then
+            MsgBox("Unable to void transaction NOT on the same date.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
+        PT_Entry.VoidCancelTicket()
+
+        MsgBox("Transaction Voided", MsgBoxStyle.Information)
+        'frmPawning.LoadActive()
+        Me.Close()
     End Sub
 
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
@@ -1081,6 +1115,7 @@ Public Class frmPawningItemNew
             txtRedeem.BackColor = Drawing.SystemColors.Control
             transactionType = "D"
             btnSave.Enabled = False
+            btnPrint.Enabled = True
 
             Load_PawnTicket(PT_Entry)
             Exit Sub
@@ -1091,6 +1126,7 @@ Public Class frmPawningItemNew
         End If
 
         Redeem()
+        btnPrint.Enabled = False
         btnSave.Enabled = True
         btnRedeem.Text = "&Cancel"
     End Sub

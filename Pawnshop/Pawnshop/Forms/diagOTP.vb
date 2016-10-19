@@ -64,7 +64,7 @@ Public Class diagOTP
             Case OTPType.VoidInsurance
                 frmInsurance.VoidInsurance()
             Case OTPType.VoidPawning
-                frmPawnItem.VoidPawning()
+                frmPawningItemNew.VoidPawning()
             Case OTPType.VoidBranchToBranch
                 frmBorrowBrowse.VoidBorrowing()
             Case OTPType.VoidMoneyTransfer
