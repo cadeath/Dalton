@@ -310,7 +310,7 @@ Public Class frmPawningItemNew
         newPT = PT_Entry
         With newPT
             .PawnTicket = currentPawnTicket
-            .OldTicket = PT_Entry.PawnTicket
+            .OldTicket = oldPawnTicket
             .LoanDate = LoanDate
             .MaturityDate = MaturityDate
             .ExpiryDate = ExpiryDate
