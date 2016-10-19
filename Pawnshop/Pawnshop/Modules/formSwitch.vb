@@ -14,8 +14,6 @@
 
         frmPawningV2_Client = 10
         frmPawningV2_Specs = 11
-        frmPawningV2_SpecsValue = 12
-        frmPawningV2_Claimer = 12
         frmPawningV2_Claimer = 12
         frmPawningV2_SpecsValue = 13
     End Enum
