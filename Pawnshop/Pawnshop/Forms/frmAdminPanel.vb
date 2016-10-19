@@ -160,121 +160,31 @@ Public Class frmAdminPanel
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-
-        If Not isValid() Then Exit Sub
-        Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        Dim ItemSave As New ItemClass
-        Dim ColItemsSpecs As New CollectionItemSpecs
-        With ItemSave
-            .ClassName = txtClassification.Text
-            .Category = txtCategory.Text
-            .Description = txtDescription.Text
-            .ClassName = txtClassification.Text
-
-            If rbYes.Checked Then
-                .isRenewable = 1
-            Else
-                .isRenewable = 0
-            End If
-            .PrintLayout = txtPrintLayout.Text
-            .created_at = CurrentDate
-            .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
-        End With
-
-        For Each row As DataGridViewRow In dgSpecs.Rows
-            SpecSave = New ItemSpecs
-            With SpecSave
-                .ShortCode = row.Cells(1).Value
-                .SpecName = row.Cells(2).Value
-                .SpecType = row.Cells(3).Value
-                .SpecLayout = row.Cells(4).Value
-                .UnitOfMeasure = row.Cells(5).Value
-                .isRequired = row.Cells(6).Value
-
-                If .SpecName Is Nothing Or .SpecType Is Nothing _
-                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
-                    Exit For
-                End If
-            End With
-            SpecSave.SaveSpecs()
-            ColItemsSpecs.Add(SpecSave)
-        Next
-        ItemSave.ItemSpecifications = ColItemsSpecs
-        ItemSave.Save_ItemClass()
-
-        MsgBox("Item Class Saved", MsgBoxStyle.Information)
-        rdbNo.Checked = False
-        txtClassification.Focus()
-        clearfields()
-        LoadScheme()
+        If btnSave.Text = "&Save" Then
+            SaveItems()
+        Else
+            ModifyItems()
+            btnSave.Text = "&Save"
+        End If
+       
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-        If Not isValid() Then Exit Sub
+        If btnUpdate.Text = "&Modify" Then
+            btnUpdate.Text = "&Cancel"
+            btnSave.Enabled = True
+            btnSave.Text = "&Update"
 
-        If btnUpdate.Text = "&Update".ToString Then
-            btnUpdate.Text = "&Modify".ToString
-            reaDOnlyFalse()
+            ReadOnlyFalse()
             txtClassification.Enabled = False
             LoadScheme()
-            Exit Sub
+        Else
+            btnUpdate.Text = "&Modify"
+            btnSave.Enabled = False
+            btnSave.Text = "&Save"
+            clearfields()
         End If
-        Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        Dim ColItemsSpecs As New CollectionItemSpecs
-        Dim ItemModify As New ItemClass
-        With ItemModify
-            .ClassName = txtClassification.Text
-            .Category = txtCategory.Text
-            .Description = txtDescription.Text
-            .ID = SelectedItem.ID
-
-            If rdbYes.Checked Then
-                .isRenewable = 1
-            Else
-                .isRenewable = 0
-            End If
-
-            .PrintLayout = txtPrintLayout.Text
-            .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
-            .updated_at = CurrentDate
-        End With
-
-        Dim SpecModify As New ItemSpecs
-        For Each row As DataGridViewRow In dgSpecs.Rows
-
-            With SpecModify
-                .SpecID = row.Cells(0).Value
-                .ShortCode = row.Cells(1).Value
-                .SpecName = row.Cells(2).Value
-                .SpecType = row.Cells(3).Value
-                .SpecLayout = row.Cells(4).Value
-                .UnitOfMeasure = row.Cells(5).Value
-                .isRequired = row.Cells(6).Value
-
-                If .SpecName Is Nothing Or .SpecType Is Nothing _
-                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
-                    Exit For
-                End If
-
-            End With
-            SpecModify.ItemID = SelectedItem.ID
-            SpecModify.UpdateSpecs()
-        Next
-        ItemModify.Update()
-
-        MsgBox("Item Class Updated", MsgBoxStyle.Information)
-
-        btnSave.Enabled = True
-        btnUpdate.Text = "&Update"
-        rdbNo.Checked = False
-        txtClassification.Focus()
-        txtClassification.Enabled = True
-        clearfields()
-        LoadScheme()
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -801,4 +711,118 @@ Public Class frmAdminPanel
         lblCount.Text = "Count: " & lvModule.CheckedItems.Count
     End Sub
 
+
+    Private Sub ModifyItems()
+        If Not isValid() Then Exit Sub
+
+        ReadOnlyFalse()
+        txtClassification.Enabled = False
+        LoadScheme()
+
+        Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim ColItemsSpecs As New CollectionItemSpecs
+        Dim ItemModify As New ItemClass
+        With ItemModify
+            .ClassName = txtClassification.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
+            .ID = SelectedItem.ID
+
+            If rdbYes.Checked Then
+                .isRenewable = 1
+            Else
+                .isRenewable = 0
+            End If
+
+            .PrintLayout = txtPrintLayout.Text
+            .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
+            .updated_at = CurrentDate
+        End With
+
+        Dim SpecModify As New ItemSpecs
+        For Each row As DataGridViewRow In dgSpecs.Rows
+
+            With SpecModify
+                .SpecID = row.Cells(0).Value
+                .ShortCode = row.Cells(1).Value
+                .SpecName = row.Cells(2).Value
+                .SpecType = row.Cells(3).Value
+                .SpecLayout = row.Cells(4).Value
+                .UnitOfMeasure = row.Cells(5).Value
+                .isRequired = row.Cells(6).Value
+
+                If .SpecName Is Nothing Or .SpecType Is Nothing _
+                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
+                    Exit For
+                End If
+
+            End With
+            SpecModify.ItemID = SelectedItem.ID
+            SpecModify.UpdateSpecs()
+        Next
+        ItemModify.Update()
+
+        MsgBox("Item Class Updated", MsgBoxStyle.Information)
+
+        btnSave.Enabled = True
+        btnUpdate.Text = "&Update"
+        rdbNo.Checked = False
+        txtClassification.Focus()
+        txtClassification.Enabled = True
+        clearfields()
+        LoadScheme()
+    End Sub
+
+    Private Sub SaveItems()
+        If Not isValid() Then Exit Sub
+        Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim ItemSave As New ItemClass
+        Dim ColItemsSpecs As New CollectionItemSpecs
+        With ItemSave
+            .ClassName = txtClassification.Text
+            .Category = txtCategory.Text
+            .Description = txtDescription.Text
+            .ClassName = txtClassification.Text
+
+            If rbYes.Checked Then
+                .isRenewable = 1
+            Else
+                .isRenewable = 0
+            End If
+            .PrintLayout = txtPrintLayout.Text
+            .created_at = CurrentDate
+            .InterestScheme.SchemeID = GetSchemeID(cboSchemename.Text)
+        End With
+
+        For Each row As DataGridViewRow In dgSpecs.Rows
+            SpecSave = New ItemSpecs
+            With SpecSave
+                .ShortCode = row.Cells(1).Value
+                .SpecName = row.Cells(2).Value
+                .SpecType = row.Cells(3).Value
+                .SpecLayout = row.Cells(4).Value
+                .UnitOfMeasure = row.Cells(5).Value
+                .isRequired = row.Cells(6).Value
+
+                If .SpecName Is Nothing Or .SpecType Is Nothing _
+                    Or .ShortCode Is Nothing Or .SpecLayout Is Nothing Then
+                    Exit For
+                End If
+            End With
+            SpecSave.SaveSpecs()
+            ColItemsSpecs.Add(SpecSave)
+        Next
+        ItemSave.ItemSpecifications = ColItemsSpecs
+        ItemSave.Save_ItemClass()
+
+        MsgBox("Item Class Saved", MsgBoxStyle.Information)
+        rdbNo.Checked = False
+        txtClassification.Focus()
+        clearfields()
+        LoadScheme()
+    End Sub
 End Class
