@@ -6,6 +6,7 @@ Public Class frmPawningItemNew
     Friend PawnedItem As New PawnItem 'Serve as Pawned Item
     Friend Pawner As Client
     Friend Pawner_OtherClaimer As New Client
+    Private isOldItem As Boolean = False
 
     Private ItemClasses_ht As Hashtable
     Private Appraisers_ht As Hashtable
@@ -267,29 +268,29 @@ Public Class frmPawningItemNew
 
             .Update_PawnTicket()
 
-            'If isOldItem Then
-            '    AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", .LoadLastIDNumberPawn)
-            '    AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+            If isOldItem Then
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", .LoadLastIDNumberPawn)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
 
-            '    'Changed in V1.2
-            '    AddJournal(.DelayInterest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-            '    AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-            '    AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-            'Else
-            '    AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", .LoadLastIDNumberPawn)
-            '    If isEarlyRedeem Then
-            '        Dim rndInt As Double = .AdvanceInterest - .EarlyReddem
+                'Changed in V1.2
+                AddJournal(.DelayInterest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+            Else
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", .LoadLastIDNumberPawn)
+                'If isEarlyRedeem Then
+                '    Dim rndInt As Double = .AdvanceInterest - .EarlyReddem
 
-            '        'Changed in V1.2
-            '        AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION EARLY", .LoadLastIDNumberPawn)
-            '    End If
-            '    AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-            '    If DaysOverDue > 3 Then
-            '        'Changed in V1.2
-            '        AddJournal(.DelayInterest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-            '        AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-            '    End If
-            'End If
+                '    'Changed in V1.2
+                '    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION EARLY", .LoadLastIDNumberPawn)
+                'End If
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                If DaysOverDue > 3 Then
+                    'Changed in V1.2
+                    AddJournal(.DelayInterest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                    AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                End If
+            End If
 
             AddTimelyLogs("REDEMPTION", String.Format("PT# {0} ", .PawnTicket.ToString("000000")), RedeemDue, , , .LoadLastIDNumberPawn)
 
@@ -513,6 +514,7 @@ Public Class frmPawningItemNew
             'REMANTIC NO ADVANCE INTEREST
             If PT_Entry.AdvanceInterest = 0 Then
                 isDPJ = False
+                isOldItem = Not isDPJ
             End If
         End If
 
