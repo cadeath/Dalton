@@ -568,6 +568,16 @@
         ds.Tables(0).Rows(0).Item("status") = str
         database.SaveEntry(ds, False)
     End Sub
+
+    Public Function LoadLastIDNumberPawn() As Single
+        Dim mySql As String = "SELECT * FROM OPT ORDER BY PAWNID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("PAWNID")
+    End Function
 #End Region
 
 End Class
