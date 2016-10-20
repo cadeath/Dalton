@@ -39,7 +39,8 @@ Public Class frmAdminPanel
             rbYes.Checked = False
             rbNo.Checked = True
         End If
-        'SelectedItem = Item
+
+        SelectedItem = Item
         LoadSpec(Item.ID)
         btnUpdate.Enabled = True
     End Sub
@@ -117,7 +118,6 @@ Public Class frmAdminPanel
         cmbModuleName.Text = ""
         dgSpecs.Rows.Clear()
         btnUpdate.Enabled = False
-        cboSchemename.Items.Clear()
 
     End Sub
 
@@ -164,7 +164,6 @@ Public Class frmAdminPanel
             SaveItems()
         Else
             ModifyItems()
-            btnSave.Text = "&Save"
         End If
        
     End Sub
@@ -173,18 +172,18 @@ Public Class frmAdminPanel
         If btnUpdate.Text = "&Modify" Then
             btnUpdate.Text = "&Cancel"
             btnSave.Enabled = True
-            btnSave.Text = "&Update"
+            btnSave.Text = "&Save Change"
 
             ReadOnlyFalse()
             txtClassification.Enabled = False
-            LoadScheme()
         Else
+            Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+            If ans = Windows.Forms.DialogResult.No Then Exit Sub
             btnUpdate.Text = "&Modify"
             btnSave.Enabled = False
             btnSave.Text = "&Save"
             clearfields()
         End If
-
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -717,7 +716,6 @@ Public Class frmAdminPanel
 
         ReadOnlyFalse()
         txtClassification.Enabled = False
-        LoadScheme()
 
         Dim ans As DialogResult = MsgBox("Do you want to Update Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -773,6 +771,7 @@ Public Class frmAdminPanel
         txtClassification.Enabled = True
         clearfields()
         LoadScheme()
+        btnSave.Text = "&Save"
     End Sub
 
     Private Sub SaveItems()

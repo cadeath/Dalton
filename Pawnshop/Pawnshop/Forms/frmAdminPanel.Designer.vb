@@ -22,10 +22,9 @@ Partial Class frmAdminPanel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
-        Me.cbotxtSchemename = New System.Windows.Forms.ComboBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
         Me.rdbYes = New System.Windows.Forms.RadioButton()
@@ -95,7 +94,6 @@ Partial Class frmAdminPanel
         'grpAddItem
         '
         Me.grpAddItem.BackColor = System.Drawing.Color.Gainsboro
-        Me.grpAddItem.Controls.Add(Me.cbotxtSchemename)
         Me.grpAddItem.Controls.Add(Me.lblPrintLayout)
         Me.grpAddItem.Controls.Add(Me.rdbNo)
         Me.grpAddItem.Controls.Add(Me.rdbYes)
@@ -111,15 +109,6 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
-        '
-        'cbotxtSchemename
-        '
-        Me.cbotxtSchemename.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbotxtSchemename.FormattingEnabled = True
-        Me.cbotxtSchemename.Location = New System.Drawing.Point(104, 303)
-        Me.cbotxtSchemename.Name = "cbotxtSchemename"
-        Me.cbotxtSchemename.Size = New System.Drawing.Size(250, 21)
-        Me.cbotxtSchemename.TabIndex = 6
         '
         'lblPrintLayout
         '
@@ -232,9 +221,9 @@ Partial Class frmAdminPanel
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(901, 394)
+        Me.btnSave.Location = New System.Drawing.Point(867, 394)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 33)
+        Me.btnSave.Size = New System.Drawing.Size(109, 33)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -434,8 +423,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn1.FillWeight = 71.31783!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -459,8 +448,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewComboBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewComboBoxColumn2.FillWeight = 72.58589!
         Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
@@ -740,8 +729,6 @@ Partial Class frmAdminPanel
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
 
-
-    Friend WithEvents cbotxtSchemename As System.Windows.Forms.ComboBox
     Friend WithEvents chkSelectAll As System.Windows.Forms.CheckBox
     Friend WithEvents lblCount As System.Windows.Forms.Label
     Friend WithEvents StatusStrip As System.Windows.Forms.StatusStrip
