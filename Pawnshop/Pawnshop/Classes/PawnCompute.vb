@@ -93,6 +93,12 @@ Public Class PawnCompute
         End Set
     End Property
 
+    Private _isEarlyRedeem As Boolean = False
+    Public ReadOnly Property isEarlyRedeem() As Boolean
+        Get
+            Return _isEarlyRedeem
+        End Get
+    End Property
     '====================== END ======================'
 #End Region
 
@@ -166,6 +172,9 @@ Public Class PawnCompute
                     If ret = percentType.Penalty Then _
                         Return Int.Penalty
             End Select
+            If Int.Remarks = "Early Redemption" Then
+                _isEarlyRedeem = True
+            End If
         Next
 
         Return 0

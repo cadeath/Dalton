@@ -7,6 +7,7 @@ Public Class frmPawningItemNew
     Friend Pawner As Client
     Friend Pawner_OtherClaimer As New Client
     Private isOldItem As Boolean = False
+    Private isEarlyRedeem As Boolean = False
 
     Private ItemClasses_ht As Hashtable
     Private Appraisers_ht As Hashtable
@@ -278,12 +279,12 @@ Public Class frmPawningItemNew
                 AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
             Else
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", .LoadLastIDNumberPawn)
-                'If isEarlyRedeem Then
-                '    Dim rndInt As Double = .AdvanceInterest - .EarlyReddem
+                If isEarlyRedeem Then
+                    Dim rndInt As Double = .AdvanceInterest - .EarlyReddem
 
-                '    'Changed in V1.2
-                '    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION EARLY", .LoadLastIDNumberPawn)
-                'End If
+                    'Changed in V1.2
+                    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION EARLY", .LoadLastIDNumberPawn)
+                End If
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
                 If DaysOverDue > 3 Then
                     'Changed in V1.2
@@ -534,6 +535,7 @@ Public Class frmPawningItemNew
         txtService.Text = MoneyFormat(PawnServiceCharge)
         txtAdv.Text = MoneyFormat(AdvanceInterest)
         txtNet.Text = MoneyFormat(NetAmount)
+        isEarlyRedeem = AutoCompute.isEarlyRedeem
 
         If transactionType = "R" Or transactionType = "X" Then
             GenerateORNum()
