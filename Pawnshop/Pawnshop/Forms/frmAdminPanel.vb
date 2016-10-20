@@ -133,16 +133,6 @@ Public Class frmAdminPanel
         Return True
     End Function
 
-    Private Sub dgSpecs_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
-        If btnUpdate.Text = "&Modify" Then
-            If e.KeyCode = Keys.Enter Then
-                btnUpdate.PerformClick()
-            End If
-        Else
-            btnSave.PerformClick()
-        End If
-    End Sub
-
     'Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
     '    If cbotxtSchemename.Text = "" Then cbotxtSchemename.Focus() : Return False
     '    If IsDataGridViewEmpty(dgSpecs) Then dgSpecs.Focus() : Return False
@@ -169,17 +159,17 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
-        If btnUpdate.Text = "&Modify" Then
+        If btnUpdate.Text = "&Edit" Then
             btnUpdate.Text = "&Cancel"
             btnSave.Enabled = True
-            btnSave.Text = "&Save Change"
+            btnSave.Text = "&Update"
 
             ReadOnlyFalse()
             txtClassification.Enabled = False
         Else
             Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
-            btnUpdate.Text = "&Modify"
+            btnUpdate.Text = "&Edit"
             btnSave.Enabled = False
             btnSave.Text = "&Save"
             clearfields()
@@ -765,12 +755,12 @@ Public Class frmAdminPanel
         MsgBox("Item Class Updated", MsgBoxStyle.Information)
 
         btnSave.Enabled = True
-        btnUpdate.Text = "&Update"
         rdbNo.Checked = False
         txtClassification.Focus()
         txtClassification.Enabled = True
         clearfields()
         LoadScheme()
+        btnUpdate.Text = "&Edit"
         btnSave.Text = "&Save"
     End Sub
 
