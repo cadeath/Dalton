@@ -362,12 +362,13 @@ Public Class frmPawningItemNew
             .Save_PawnTicket()
 
             AddJournal(RenewDue, "Debit", "Revolving Fund", "PT# " & oldPawnTicket, ITEM_RENEW, , , "RENEWALS", .LoadLastIDNumberPawn)
-            AddJournal(PawnInterest + AdvanceInterest, "Credit", "Interest on Renewal", "PT# " & oldPawnTicket, , , , "RENEWALS", .LoadLastIDNumberPawn)
+            AddJournal(PawnInterest + .AdvanceInterest, "Credit", "Interest on Renewal", "PT# " & oldPawnTicket, , , , "RENEWALS", .LoadLastIDNumberPawn)
             AddJournal(PawnPenalty, "Credit", "Income from Penalty on Renewal", "PT# " & oldPawnTicket, , , , "RENEWALS", .LoadLastIDNumberPawn)
             AddJournal(PawnServiceCharge, "Credit", "Loans Service Charge", "PT# " & oldPawnTicket, , , , "RENEWALS", .LoadLastIDNumberPawn)
 
             AddTimelyLogs("RENEWALS", String.Format("PT#{0}", oldPawnTicket.ToString("000000")), RenewDue, , String.Format("PT#{0}", oldPawnTicket.ToString("000000")), .LoadLastIDNumberPawn)
         End With
+
         AddNumber(DocumentClass.Pawnticket)
         AddNumber(DocumentClass.OfficialReceipt)
         MsgBox("Item Renewed", MsgBoxStyle.Information)
@@ -470,6 +471,7 @@ Public Class frmPawningItemNew
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
             frmPawning.ReloadForm()
         End If
+        Me.Close()
     End Sub
 
     Private Sub dateChange(selectedClass As ItemClass)
