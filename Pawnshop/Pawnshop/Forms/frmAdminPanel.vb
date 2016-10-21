@@ -133,12 +133,6 @@ Public Class frmAdminPanel
         Return True
     End Function
 
-    'Private Sub btnSave_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-    '    If cbotxtSchemename.Text = "" Then cbotxtSchemename.Focus() : Return False
-    '    If IsDataGridViewEmpty(dgSpecs) Then dgSpecs.Focus() : Return False
-    '    Return True
-    'End Sub
-
     Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
         Dim isEmpty As Boolean = True
         For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows _
@@ -580,13 +574,6 @@ Public Class frmAdminPanel
         lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
     End Sub
 
-    Private Sub btnExport_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
-        If txtReferenceNumber.Text = "" Or cmbModuleName.Text = "" Then Exit Sub
-        SFD.ShowDialog()
-
-        MsgBox("Data Exported", MsgBoxStyle.Information)
-
-    End Sub
     Private Sub txtSearch_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
@@ -625,14 +612,6 @@ Public Class frmAdminPanel
 
         lvModule.Columns.Clear()
         lvModule.Items.Clear()
-    End Sub
-
-    Private Sub btnBrowse_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
-        oFd.ShowDialog()
-    End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        frmItemList.Show()
     End Sub
 
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
