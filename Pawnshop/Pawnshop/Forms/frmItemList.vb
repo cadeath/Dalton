@@ -109,6 +109,8 @@
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
+        Else
+            LoadActive_ItemClasses()
         End If
 
     End Sub

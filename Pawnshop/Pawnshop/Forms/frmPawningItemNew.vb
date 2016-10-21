@@ -154,7 +154,6 @@ Public Class frmPawningItemNew
 
 
         txtClassification.Text = Item.ClassName
-        'tmpItem = Item
 
         dateChange(PawnedItem.ItemClass)
         lvSpec.Focus()
