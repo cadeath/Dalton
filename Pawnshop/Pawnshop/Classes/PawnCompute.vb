@@ -132,7 +132,7 @@ Public Class PawnCompute
         Item_Interest = ItemInterest_percent * Item_Principal
         Item_Penalty = ItemPenalty_percent * Item_Principal
 
-        _int = IIf(_isNew, Item_Interest, Delay_Interest) 'What the heck is there for?
+        _int = IIf(_isNew, Item_Interest - _advInterest, Delay_Interest) 'What the heck is there for?
         _penalty = Item_Penalty
 
         _netAmount = Item_Principal - _advInterest - _srvChr
