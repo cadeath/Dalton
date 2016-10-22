@@ -210,7 +210,7 @@
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.RENEWDUE + P2.RENEWDUE ELSE 0 END) AS RENEW_DUE, "
         mySql &= vbCrLf & "    COUNT(P.PAWNTICKET) AS PT_CNT "
         mySql &= vbCrLf & "FROM "
-        mySql &= vbCrLf & "    PAWNING P LEFT JOIN PAWNING P2 "
+        mySql &= vbCrLf & "    PAWN_LIST P LEFT JOIN PAWN_LIST P2 "
         mySql &= vbCrLf & "    ON P.OLDTICKET = P2.PAWNTICKET "
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("    P.LOANDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
@@ -284,7 +284,7 @@
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN PENALTY WHEN 'R' THEN PENALTY ELSE 0 END) AS PENALTY_RENEW, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN SERVICECHARGE ELSE 0 END) AS SC_RENEW, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN RENEWDUE WHEN 'R' THEN RENEWDUE ELSE 0 END) AS TOTAL_RENEW "
-        mySql &= vbCrLf & "FROM TBLPAWN "
+        mySql &= vbCrLf & "FROM OPT "
         mySql &= vbCrLf & String.Format("WHERE ORDATE BETWEEN '{0}' AND '{1}' ", selectedDate.Date.ToShortDateString, GetLastDate(selectedDate.Date).ToShortDateString)
         mySql &= vbCrLf & "GROUP BY 1"
 
@@ -316,8 +316,8 @@
         mySql &= vbCrLf & "    SUM(CASE P.OLDTICKET WHEN 0 THEN P.PRINCIPAL ELSE 0 END) AS LOAN_PRINCIPAL, "
         mySql &= vbCrLf & "    SUM(CASE WHEN P2.RENEWDUE <> 0 THEN 1 ELSE 0 END) AS RENEW_COUNT, "
         mySql &= vbCrLf & "    SUM(CASE WHEN P2.RENEWDUE <> 0 THEN P2.PRINCIPAL ELSE 0 END) AS RENEW_PRINCIPAL "
-        mySql &= vbCrLf & "FROM TBLPAWN P "
-        mySql &= vbCrLf & "LEFT JOIN TBLPAWN P2 ON P.OLDTICKET = P2.PAWNTICKET "
+        mySql &= vbCrLf & "FROM OPT P "
+        mySql &= vbCrLf & "LEFT JOIN OTP P2 ON P.OLDTICKET = P2.PAWNTICKET "
         mySql &= vbCrLf & "WHERE P.STATUS <> 'V' AND "
         mySql &= vbCrLf & String.Format("P.LOANDATE BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
         mySql &= vbCrLf & "GROUP BY 1 "
