@@ -21,7 +21,6 @@ Public Class frmAdminPanel
         txtClassification.Focus()
 
         LoadScheme()
-        lblDateStatus.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -166,7 +165,7 @@ Public Class frmAdminPanel
             btnUpdate.Text = "&Edit"
             btnSave.Enabled = False
             btnSave.Text = "&Save"
-            clearfields()
+            ReadOnlyTrue()
         End If
     End Sub
 

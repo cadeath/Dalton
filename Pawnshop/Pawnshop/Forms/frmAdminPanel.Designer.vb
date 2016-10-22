@@ -22,8 +22,8 @@ Partial Class frmAdminPanel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
@@ -77,8 +77,6 @@ Partial Class frmAdminPanel
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
-        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
-        Me.lblDateStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -88,7 +86,6 @@ Partial Class frmAdminPanel
         Me.TabPage2.SuspendLayout()
         Me.lblModname.SuspendLayout()
         Me.grpSearch.SuspendLayout()
-        Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAddItem
@@ -423,8 +420,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn1.FillWeight = 71.31783!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -448,8 +445,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewComboBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewComboBoxColumn2.FillWeight = 72.58589!
         Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
@@ -630,30 +627,14 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
-        'StatusStrip
-        '
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblDateStatus})
-        Me.StatusStrip.Location = New System.Drawing.Point(0, 479)
-        Me.StatusStrip.Name = "StatusStrip"
-        Me.StatusStrip.Size = New System.Drawing.Size(1166, 22)
-        Me.StatusStrip.TabIndex = 13
-        Me.StatusStrip.Text = "StatusStrip1"
-        '
-        'lblDateStatus
-        '
-        Me.lblDateStatus.BackColor = System.Drawing.Color.Gray
-        Me.lblDateStatus.Name = "lblDateStatus"
-        Me.lblDateStatus.Size = New System.Drawing.Size(31, 17)
-        Me.lblDateStatus.Text = "Date"
-        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1166, 501)
-        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TabControl1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "frmAdminPanel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Admin Panel"
@@ -671,10 +652,7 @@ Partial Class frmAdminPanel
         Me.lblModname.PerformLayout()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
-        Me.StatusStrip.ResumeLayout(False)
-        Me.StatusStrip.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -731,8 +709,6 @@ Partial Class frmAdminPanel
 
     Friend WithEvents chkSelectAll As System.Windows.Forms.CheckBox
     Friend WithEvents lblCount As System.Windows.Forms.Label
-    Friend WithEvents StatusStrip As System.Windows.Forms.StatusStrip
-    Friend WithEvents lblDateStatus As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents txtPrintLayout As Pawnshop.watermark
     Friend WithEvents txtDescription As Pawnshop.watermark
     Friend WithEvents txtCategory As Pawnshop.watermark
