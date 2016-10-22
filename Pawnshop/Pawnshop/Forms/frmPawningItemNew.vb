@@ -263,7 +263,7 @@ Public Class frmPawningItemNew
             .ServiceCharge = PawnServiceCharge
             .Status = "X"
             .ClaimerID = Pawner_OtherClaimer.ID
-            .RenewDue = 0S
+            .RenewDue = 0
             .RedeemDue = RedeemDue
 
             .Update_PawnTicket()

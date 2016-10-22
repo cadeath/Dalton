@@ -168,13 +168,12 @@ Public Class PawnCompute
             Select Case days
                 Case Int.DayFrom To Int.DayTo
                     If ret = percentType.Interest Then _
-                        Return Int.Interest
+                        If Int.Remarks = "Early Redemption" Then _isEarlyRedeem = True
+                    Return Int.Interest
                     If ret = percentType.Penalty Then _
-                        Return Int.Penalty
+                        If Int.Remarks = "Early Redemption" Then _isEarlyRedeem = True
+                    Return Int.Penalty
             End Select
-            If Int.Remarks = "Early Redemption" Then
-                _isEarlyRedeem = True
-            End If
         Next
 
         Return 0
