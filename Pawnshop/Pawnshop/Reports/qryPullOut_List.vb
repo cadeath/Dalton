@@ -47,10 +47,10 @@
         If Not POSuser.canItemPulloutReport Then
             mySql = "SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, INTEREST, ADVINT, SERVICECHARGE, PENALTY, "
-            mySql &= "ITEMTYPE, CATEGORY, GRAMS, KARAT, STATUS, PULLOUT, APPRAISER FROM PAWNING WHERE STATUS = 'WITHDRAW' AND "
+            mySql &= "ITEMTYPE, CATEGORY, GRAMS, KARAT, STATUS, PULLOUT, APPRAISER FROM PAWN_LIST WHERE STATUS = 'WITHDRAW' AND "
             mySql &= String.Format("PULLOUT = '{0}'", monCalendar.SelectionStart.ToShortDateString)
         Else
-            mySql = "SELECT * FROM PAWNING WHERE STATUS = 'WITHDRAW' AND "
+            mySql = "SELECT * FROM PAWN_LIST WHERE STATUS = 'WITHDRAW' AND "
             mySql &= String.Format("PULLOUT = '{0}'", monCalendar.SelectionStart.ToShortDateString)
         End If
        
