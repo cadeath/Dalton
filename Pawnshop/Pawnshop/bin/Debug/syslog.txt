@@ -128,3 +128,11 @@ At line 1, column 32
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
 [10/19/2016 13:31:54] [RemoveLog] NEW LOANS with ID 1 cannot be found in tbl_dailytimelog
 [10/19/2016 13:34:36] [RemoveLog] NEW LOANS with ID 2 cannot be found in tbl_dailytimelog
+[10/24/2016 15:22:56] HIT FOUND
+[10/24/2016 15:23:24] HIT FOUND
+[10/24/2016 15:23:50] HIT FOUND
+[10/24/2016 15:24:22] HIT FOUND
+[10/24/2016 15:24:46] HIT FOUND
+[10/24/2016 15:25:12] HIT FOUND
+[10/24/2016 15:25:39] HIT FOUND
+[10/24/2016 15:26:12] HIT FOUND

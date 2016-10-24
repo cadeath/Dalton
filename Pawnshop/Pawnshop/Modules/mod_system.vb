@@ -149,15 +149,16 @@ Module mod_system
             'tmpPawnItem.SaveTicket(False)
 
             Dim tmpPawnItem As New PawnTicket2
+            tmpPawnItem.Load_PTid(dr.Item("PawnID"))
             With tmpPawnItem.PawnItem
                 .WithdrawDate = CurrentDate
                 .Status = "S"
                 .Save_PawnItem()
             End With
             With tmpPawnItem
-                .Load_PT_row(dr)
+                '.Load_PT_row(dr)
                 .Status = "S"
-                .Save_PawnTicket()
+                .Update_PawnTicket()
             End With
 
             AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
