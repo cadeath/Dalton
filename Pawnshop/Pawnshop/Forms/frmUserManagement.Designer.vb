@@ -643,7 +643,7 @@ Partial Class frmUserManagement
         '
         Me.lblUserid.AutoSize = True
         Me.lblUserid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserid.Location = New System.Drawing.Point(297, 258)
+        Me.lblUserid.Location = New System.Drawing.Point(293, 258)
         Me.lblUserid.Name = "lblUserid"
         Me.lblUserid.Size = New System.Drawing.Size(56, 16)
         Me.lblUserid.TabIndex = 12

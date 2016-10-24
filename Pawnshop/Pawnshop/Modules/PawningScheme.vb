@@ -13,4 +13,8 @@
         End If
     End Sub
 
+    Friend Sub Notify_Renewal(ByVal pt As PawnTicket2)
+
+    End Sub
+
 End Module

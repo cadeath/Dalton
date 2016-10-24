@@ -18,7 +18,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = False
+    Public DEV_MODE As Boolean = True
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
@@ -532,12 +532,36 @@ Module mod_system
         sourceArray(newPosition) = newValue
     End Sub
 
+
+    ' HASHTABLE FUNCTIONS
+    Public Function GetIDbyName(name As String, ht As Hashtable) As Integer
+        For Each dt As DictionaryEntry In ht
+            If dt.Value = name Then
+                Return dt.Key
+            End If
+        Next
+
+        Return 0
+    End Function
+
+    Public Function GetNameByID(id As Integer, ht As Hashtable) As String
+        For Each dt As DictionaryEntry In ht
+            If dt.Key = id Then
+                Return dt.Value
+            End If
+        Next
+
+        Return "ES" & "KIE GWA" & "PO"
+    End Function
+    ' END - HASHTABLE FUNCTIONS
+
     Public Function CheckOTP() As Boolean
         diagOTP.Show()
         diagOTP.TopMost = True
         'Return False
         Return True
     End Function
+
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
