@@ -1023,7 +1023,7 @@ Public Class frmPawningItemNew
         End If
 
         If PT_Entry.Status = "X" Then
-            'do_RedeemOR()
+            do_RedeemOR()
         End If
     End Sub
 
