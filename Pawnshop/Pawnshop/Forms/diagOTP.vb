@@ -29,6 +29,9 @@ Public Class diagOTP
         ElseIf FormType = OTPType.VoidCashInOut Then
             mod_name = "Void Cash In/Out"
 
+        ElseIf FormType = OTPType.Pullout Then
+            mod_name = "PullOut"
+
         End If
 
         If otp.VerifyPIN(txtPIN.Text, mod_name) Then
@@ -48,6 +51,7 @@ Public Class diagOTP
         VoidMoneyTransfer = 5
         VoidMoneyExchange = 6
         VoidCashInOut = 7
+        Pullout = 8
     End Enum
 
     Friend FormType As OTPType = OTPType.UserManagement
@@ -69,7 +73,8 @@ Public Class diagOTP
                 frmDollarList.VoidMoneyExchange()
             Case OTPType.VoidCashInOut
                 frmCIO_List.VoidCIO()
-
+            Case OTPType.Pullout
+                qryPullOut.Show()
         End Select
     End Sub
 
