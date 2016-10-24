@@ -136,17 +136,29 @@ Module mod_system
     ''' <remarks></remarks>
     Friend Function AutoSegregate() As Boolean
         Console.WriteLine("Entering segregation module")
-        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
-        Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
+        Dim mySql As String = "SELECT * FROM OPT WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
+        Dim ds As DataSet = LoadSQL(mySql, "OPT")
 
         If ds.Tables(0).Rows.Count = 0 Then Return True
 
         Console.WriteLine("Segregating...")
-        For Each dr As DataRow In ds.Tables("tblPawn").Rows
-            Dim tmpPawnItem As New PawnTicket
-            tmpPawnItem.LoadTicketInRow(dr)
-            tmpPawnItem.Status = "S"
-            tmpPawnItem.SaveTicket(False)
+        For Each dr As DataRow In ds.Tables("OPT").Rows
+            'Dim tmpPawnItem As New PawnTicket
+            'tmpPawnItem.LoadTicketInRow(dr)
+            'tmpPawnItem.Status = "S"
+            'tmpPawnItem.SaveTicket(False)
+
+            Dim tmpPawnItem As New PawnTicket2
+            With tmpPawnItem.PawnItem
+                .WithdrawDate = CurrentDate
+                .Status = "S"
+                .Save_PawnItem()
+            End With
+            With tmpPawnItem
+                .Load_PT_row(dr)
+                .Status = "S"
+                .Save_PawnTicket()
+            End With
 
             AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
             AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
