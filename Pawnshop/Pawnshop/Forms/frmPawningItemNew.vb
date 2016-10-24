@@ -254,6 +254,12 @@ Public Class frmPawningItemNew
 
     Private Sub SaveRedeem()
         'If Pawner_OtherClaimer.ID = 0 Then Exit Sub
+        With PT_Entry.PawnItem
+            .WithdrawDate = CurrentDate
+            .Status = "X"
+            .Save_PawnItem()
+        End With
+
         With PT_Entry
             .ORNumber = currentORNumber
             .ORDate = CurrentDate
