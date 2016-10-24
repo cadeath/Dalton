@@ -1,8 +1,5 @@
-﻿Public Class Dev_Migrate
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        UpdateScheme()
-    End Sub
+﻿Public Class frmMigrate
+    Const DBPATH As String = "\W3W1LH4CKU.FDB"
 
     Private Sub UpdateScheme()
         Try
@@ -15,7 +12,7 @@
                 Dim tmpItemType As String = dr.Item("ItemType")
                 Dim tmpIntcheckSum As String
                 If Not IsDBNull(dr.Item("int_checksum")) Then tmpIntcheckSum = dr.Item("int_checksum")
-                Console.WriteLine("PawnID is : " & tmpPawnID & " ItemType is : " & tmpItemType & " Intchecksum is : " & tmpIntcheckSum)
+
                 Dim tmpSchemeID As String = GetInt(tmpItemType, tmpIntcheckSum)
 
                 Dim mysql2 As String = "Select * from OPI where PawnItemID = '" & tmpPawnID & "'"
@@ -26,7 +23,7 @@
 
                 pbProgressBar.Value = pbProgressBar.Value + 1
                 Application.DoEvents()
-                lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F3"))
+                lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F2"))
                 Console.WriteLine("ProgressBar Value " & pbProgressBar.Value)
             Next
             MsgBox("Success")
@@ -89,8 +86,9 @@
         Return tmpID
     End Function
 
-    Private Sub Dev_Migrate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmMigrate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Try
+            LoadPath()
             Dim mysql As String = "Select * from tblPawn"
             Dim filldata As String = "tblPawn"
             Dim ds As DataSet = LoadSQL(mysql, filldata)
@@ -98,9 +96,22 @@
             Dim tmpMax As Integer = ds.Tables(0).Rows.Count
             pbProgressBar.Minimum = 0
             pbProgressBar.Maximum = tmpMax
+            lblPercent.Text = "0.0%"
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
 
+    Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
+        UpdateScheme()
+    End Sub
+
+    Private Sub LoadPath()
+        Dim readValue = My.Computer.Registry.GetValue(
+    "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
+
+        Dim firebird As String = readValue & DBPATH
+        database.dbName = firebird
+        txtData.Text = firebird
+    End Sub
 End Class
