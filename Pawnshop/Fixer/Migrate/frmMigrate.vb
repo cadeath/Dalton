@@ -24,9 +24,10 @@
                 pbProgressBar.Value = pbProgressBar.Value + 1
                 Application.DoEvents()
                 lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F2"))
-                Console.WriteLine("ProgressBar Value " & pbProgressBar.Value)
+
             Next
-            MsgBox("Success")
+            If MsgBox("Successful", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, _
+                 "Migrating...") = MsgBoxResult.Ok Then pbProgressBar.Maximum = 0
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
@@ -96,7 +97,6 @@
             Dim tmpMax As Integer = ds.Tables(0).Rows.Count
             pbProgressBar.Minimum = 0
             pbProgressBar.Maximum = tmpMax
-            lblPercent.Text = "0.0%"
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try

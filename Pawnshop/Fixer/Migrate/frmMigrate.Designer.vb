@@ -24,9 +24,9 @@ Partial Class frmMigrate
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblPercent = New System.Windows.Forms.Label()
+        Me.pbProgressBar = New System.Windows.Forms.ProgressBar()
         Me.btnFix = New System.Windows.Forms.Button()
         Me.txtData = New System.Windows.Forms.TextBox()
-        Me.pbProgressBar = New System.Windows.Forms.ProgressBar()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,9 +50,17 @@ Partial Class frmMigrate
         Me.lblPercent.ForeColor = System.Drawing.Color.Black
         Me.lblPercent.Location = New System.Drawing.Point(99, 72)
         Me.lblPercent.Name = "lblPercent"
-        Me.lblPercent.Size = New System.Drawing.Size(39, 13)
+        Me.lblPercent.Size = New System.Drawing.Size(36, 13)
         Me.lblPercent.TabIndex = 2
-        Me.lblPercent.Text = "Label1"
+        Me.lblPercent.Text = "0.00%"
+        '
+        'pbProgressBar
+        '
+        Me.pbProgressBar.Location = New System.Drawing.Point(9, 46)
+        Me.pbProgressBar.Maximum = 3000
+        Me.pbProgressBar.Name = "pbProgressBar"
+        Me.pbProgressBar.Size = New System.Drawing.Size(198, 23)
+        Me.pbProgressBar.TabIndex = 1
         '
         'btnFix
         '
@@ -70,14 +78,6 @@ Partial Class frmMigrate
         Me.txtData.ReadOnly = True
         Me.txtData.Size = New System.Drawing.Size(279, 20)
         Me.txtData.TabIndex = 1
-        '
-        'pbProgressBar
-        '
-        Me.pbProgressBar.Location = New System.Drawing.Point(9, 46)
-        Me.pbProgressBar.Maximum = 3000
-        Me.pbProgressBar.Name = "pbProgressBar"
-        Me.pbProgressBar.Size = New System.Drawing.Size(198, 23)
-        Me.pbProgressBar.TabIndex = 1
         '
         'frmMigrate
         '
