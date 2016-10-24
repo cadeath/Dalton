@@ -4258,7 +4258,7 @@ Partial Public Class dsReports
         
         Private columnPrincipal As Global.System.Data.DataColumn
         
-        Private columnPullOut As Global.System.Data.DataColumn
+        Private columnWithDrawDate As Global.System.Data.DataColumn
         
         Private columnInterest As Global.System.Data.DataColumn
         
@@ -4481,9 +4481,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property PullOutColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property WithDrawDateColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnPullOut
+                Return Me.columnWithDrawDate
             End Get
         End Property
         
@@ -4579,13 +4579,13 @@ Partial Public Class dsReports
                     ByVal Status As String,  _
                     ByVal Appraisal As String,  _
                     ByVal Principal As String,  _
-                    ByVal PullOut As String,  _
+                    ByVal WithDrawDate As String,  _
                     ByVal Interest As String,  _
                     ByVal Appraiser As String,  _
                     ByVal ServiceCharge As String,  _
                     ByVal NewPT As String) As PawningRow
             Dim rowPawningRow As PawningRow = CType(Me.NewRow,PawningRow)
-            Dim columnValuesArray() As Object = New Object() {PawnTicket, LoanDate, MatuDate, AuctionDate, ExpiryDate, Client, Description, ORNum, ORDate, OldTicket, NetAmount, RenewDue, RedeemDue, AdvInt, Penalty, ItemType, Category, Grams, Karat, Status, Appraisal, Principal, PullOut, Interest, Appraiser, ServiceCharge, NewPT}
+            Dim columnValuesArray() As Object = New Object() {PawnTicket, LoanDate, MatuDate, AuctionDate, ExpiryDate, Client, Description, ORNum, ORDate, OldTicket, NetAmount, RenewDue, RedeemDue, AdvInt, Penalty, ItemType, Category, Grams, Karat, Status, Appraisal, Principal, WithDrawDate, Interest, Appraiser, ServiceCharge, NewPT}
             rowPawningRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPawningRow)
             Return rowPawningRow
@@ -4630,7 +4630,7 @@ Partial Public Class dsReports
             Me.columnStatus = MyBase.Columns("Status")
             Me.columnAppraisal = MyBase.Columns("Appraisal")
             Me.columnPrincipal = MyBase.Columns("Principal")
-            Me.columnPullOut = MyBase.Columns("PullOut")
+            Me.columnWithDrawDate = MyBase.Columns("WithDrawDate")
             Me.columnInterest = MyBase.Columns("Interest")
             Me.columnAppraiser = MyBase.Columns("Appraiser")
             Me.columnServiceCharge = MyBase.Columns("ServiceCharge")
@@ -4684,8 +4684,8 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnAppraisal)
             Me.columnPrincipal = New Global.System.Data.DataColumn("Principal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPrincipal)
-            Me.columnPullOut = New Global.System.Data.DataColumn("PullOut", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnPullOut)
+            Me.columnWithDrawDate = New Global.System.Data.DataColumn("WithDrawDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWithDrawDate)
             Me.columnInterest = New Global.System.Data.DataColumn("Interest", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnInterest)
             Me.columnAppraiser = New Global.System.Data.DataColumn("Appraiser", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -10230,16 +10230,16 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property PullOut() As String
+        Public Property WithDrawDate() As String
             Get
                 Try 
-                    Return CType(Me(Me.tablePawning.PullOutColumn),String)
+                    Return CType(Me(Me.tablePawning.WithDrawDateColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'PullOut' in table 'Pawning' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'WithDrawDate' in table 'Pawning' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tablePawning.PullOutColumn) = value
+                Me(Me.tablePawning.WithDrawDateColumn) = value
             End Set
         End Property
         
@@ -10569,14 +10569,14 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsPullOutNull() As Boolean
-            Return Me.IsNull(Me.tablePawning.PullOutColumn)
+        Public Function IsWithDrawDateNull() As Boolean
+            Return Me.IsNull(Me.tablePawning.WithDrawDateColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetPullOutNull()
-            Me(Me.tablePawning.PullOutColumn) = Global.System.Convert.DBNull
+        Public Sub SetWithDrawDateNull()
+            Me(Me.tablePawning.WithDrawDateColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
