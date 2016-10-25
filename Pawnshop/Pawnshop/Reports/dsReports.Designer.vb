@@ -4244,9 +4244,9 @@ Partial Public Class dsReports
         
         Private columnPenalty As Global.System.Data.DataColumn
         
-        Private columnItemType As Global.System.Data.DataColumn
+        Private columnItemClass As Global.System.Data.DataColumn
         
-        Private columnCategory As Global.System.Data.DataColumn
+        Private columnItemCategory As Global.System.Data.DataColumn
         
         Private columnGrams As Global.System.Data.DataColumn
         
@@ -4260,7 +4260,7 @@ Partial Public Class dsReports
         
         Private columnWithDrawDate As Global.System.Data.DataColumn
         
-        Private columnInterest As Global.System.Data.DataColumn
+        Private columnDelayInterest As Global.System.Data.DataColumn
         
         Private columnAppraiser As Global.System.Data.DataColumn
         
@@ -4425,17 +4425,17 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property ItemTypeColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property ItemClassColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnItemType
+                Return Me.columnItemClass
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property CategoryColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property ItemCategoryColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnCategory
+                Return Me.columnItemCategory
             End Get
         End Property
         
@@ -4489,9 +4489,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property InterestColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property DelayInterestColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnInterest
+                Return Me.columnDelayInterest
             End Get
         End Property
         
@@ -4572,20 +4572,20 @@ Partial Public Class dsReports
                     ByVal RedeemDue As String,  _
                     ByVal AdvInt As String,  _
                     ByVal Penalty As String,  _
-                    ByVal ItemType As String,  _
-                    ByVal Category As String,  _
+                    ByVal ItemClass As String,  _
+                    ByVal ItemCategory As String,  _
                     ByVal Grams As String,  _
                     ByVal Karat As String,  _
                     ByVal Status As String,  _
                     ByVal Appraisal As String,  _
                     ByVal Principal As String,  _
                     ByVal WithDrawDate As String,  _
-                    ByVal Interest As String,  _
+                    ByVal DelayInterest As String,  _
                     ByVal Appraiser As String,  _
                     ByVal ServiceCharge As String,  _
                     ByVal NewPT As String) As PawningRow
             Dim rowPawningRow As PawningRow = CType(Me.NewRow,PawningRow)
-            Dim columnValuesArray() As Object = New Object() {PawnTicket, LoanDate, MatuDate, AuctionDate, ExpiryDate, Client, Description, ORNum, ORDate, OldTicket, NetAmount, RenewDue, RedeemDue, AdvInt, Penalty, ItemType, Category, Grams, Karat, Status, Appraisal, Principal, WithDrawDate, Interest, Appraiser, ServiceCharge, NewPT}
+            Dim columnValuesArray() As Object = New Object() {PawnTicket, LoanDate, MatuDate, AuctionDate, ExpiryDate, Client, Description, ORNum, ORDate, OldTicket, NetAmount, RenewDue, RedeemDue, AdvInt, Penalty, ItemClass, ItemCategory, Grams, Karat, Status, Appraisal, Principal, WithDrawDate, DelayInterest, Appraiser, ServiceCharge, NewPT}
             rowPawningRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPawningRow)
             Return rowPawningRow
@@ -4623,15 +4623,15 @@ Partial Public Class dsReports
             Me.columnRedeemDue = MyBase.Columns("RedeemDue")
             Me.columnAdvInt = MyBase.Columns("AdvInt")
             Me.columnPenalty = MyBase.Columns("Penalty")
-            Me.columnItemType = MyBase.Columns("ItemType")
-            Me.columnCategory = MyBase.Columns("Category")
+            Me.columnItemClass = MyBase.Columns("ItemClass")
+            Me.columnItemCategory = MyBase.Columns("ItemCategory")
             Me.columnGrams = MyBase.Columns("Grams")
             Me.columnKarat = MyBase.Columns("Karat")
             Me.columnStatus = MyBase.Columns("Status")
             Me.columnAppraisal = MyBase.Columns("Appraisal")
             Me.columnPrincipal = MyBase.Columns("Principal")
             Me.columnWithDrawDate = MyBase.Columns("WithDrawDate")
-            Me.columnInterest = MyBase.Columns("Interest")
+            Me.columnDelayInterest = MyBase.Columns("DelayInterest")
             Me.columnAppraiser = MyBase.Columns("Appraiser")
             Me.columnServiceCharge = MyBase.Columns("ServiceCharge")
             Me.columnNewPT = MyBase.Columns("NewPT")
@@ -4670,10 +4670,10 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnAdvInt)
             Me.columnPenalty = New Global.System.Data.DataColumn("Penalty", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPenalty)
-            Me.columnItemType = New Global.System.Data.DataColumn("ItemType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnItemType)
-            Me.columnCategory = New Global.System.Data.DataColumn("Category", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCategory)
+            Me.columnItemClass = New Global.System.Data.DataColumn("ItemClass", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnItemClass)
+            Me.columnItemCategory = New Global.System.Data.DataColumn("ItemCategory", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnItemCategory)
             Me.columnGrams = New Global.System.Data.DataColumn("Grams", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnGrams)
             Me.columnKarat = New Global.System.Data.DataColumn("Karat", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -4686,8 +4686,8 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnPrincipal)
             Me.columnWithDrawDate = New Global.System.Data.DataColumn("WithDrawDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnWithDrawDate)
-            Me.columnInterest = New Global.System.Data.DataColumn("Interest", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnInterest)
+            Me.columnDelayInterest = New Global.System.Data.DataColumn("DelayInterest", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDelayInterest)
             Me.columnAppraiser = New Global.System.Data.DataColumn("Appraiser", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAppraiser)
             Me.columnServiceCharge = New Global.System.Data.DataColumn("ServiceCharge", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -10125,31 +10125,31 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property ItemType() As String
+        Public Property ItemClass() As String
             Get
                 Try 
-                    Return CType(Me(Me.tablePawning.ItemTypeColumn),String)
+                    Return CType(Me(Me.tablePawning.ItemClassColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ItemType' in table 'Pawning' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ItemClass' in table 'Pawning' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tablePawning.ItemTypeColumn) = value
+                Me(Me.tablePawning.ItemClassColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Category() As String
+        Public Property ItemCategory() As String
             Get
                 Try 
-                    Return CType(Me(Me.tablePawning.CategoryColumn),String)
+                    Return CType(Me(Me.tablePawning.ItemCategoryColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Category' in table 'Pawning' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ItemCategory' in table 'Pawning' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tablePawning.CategoryColumn) = value
+                Me(Me.tablePawning.ItemCategoryColumn) = value
             End Set
         End Property
         
@@ -10245,16 +10245,16 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Interest() As String
+        Public Property DelayInterest() As String
             Get
                 Try 
-                    Return CType(Me(Me.tablePawning.InterestColumn),String)
+                    Return CType(Me(Me.tablePawning.DelayInterestColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Interest' in table 'Pawning' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DelayInterest' in table 'Pawning' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tablePawning.InterestColumn) = value
+                Me(Me.tablePawning.DelayInterestColumn) = value
             End Set
         End Property
         
@@ -10485,26 +10485,26 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsItemTypeNull() As Boolean
-            Return Me.IsNull(Me.tablePawning.ItemTypeColumn)
+        Public Function IsItemClassNull() As Boolean
+            Return Me.IsNull(Me.tablePawning.ItemClassColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetItemTypeNull()
-            Me(Me.tablePawning.ItemTypeColumn) = Global.System.Convert.DBNull
+        Public Sub SetItemClassNull()
+            Me(Me.tablePawning.ItemClassColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCategoryNull() As Boolean
-            Return Me.IsNull(Me.tablePawning.CategoryColumn)
+        Public Function IsItemCategoryNull() As Boolean
+            Return Me.IsNull(Me.tablePawning.ItemCategoryColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCategoryNull()
-            Me(Me.tablePawning.CategoryColumn) = Global.System.Convert.DBNull
+        Public Sub SetItemCategoryNull()
+            Me(Me.tablePawning.ItemCategoryColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10581,14 +10581,14 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsInterestNull() As Boolean
-            Return Me.IsNull(Me.tablePawning.InterestColumn)
+        Public Function IsDelayInterestNull() As Boolean
+            Return Me.IsNull(Me.tablePawning.DelayInterestColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetInterestNull()
-            Me(Me.tablePawning.InterestColumn) = Global.System.Convert.DBNull
+        Public Sub SetDelayInterestNull()
+            Me(Me.tablePawning.DelayInterestColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

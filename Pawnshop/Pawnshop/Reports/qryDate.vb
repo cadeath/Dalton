@@ -205,7 +205,7 @@
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET = 0 THEN P.ADVINT ELSE 0 END) AS ADV_INT, "
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET = 0 THEN P.NETAMOUNT ELSE 0 END) AS NET_AMOUNT, "
         mySql &= vbCrLf & "    SUM(P.SERVICECHARGE) AS SERVICECHARGE, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.INTEREST + P2.INTEREST ELSE 0 END) AS RENEW_INT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.DELAYINTEREST + P2.DELAYINTEREST ELSE 0 END) AS RENEW_INT, "
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.PENALTY + P2.PENALTY ELSE 0 END) AS RENEW_PEN,    "
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.RENEWDUE + P2.RENEWDUE ELSE 0 END) AS RENEW_DUE, "
         mySql &= vbCrLf & "    COUNT(P.PAWNTICKET) AS PT_CNT "
@@ -559,13 +559,12 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
         Dim fillData As String = "dsRenewalBreakDown", mySql As String
 
-        mySql = "SELECT  COUNT(*), ITEMTYPE,ORDATE,PRINCIPAL "
-        mySql &= vbCrLf & "FROM TBLPAWN "
-        mySql &= vbCrLf & "WHERE "
-        mySql &= vbCrLf & String.Format("ORDate BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
-        mySql &= vbCrLf & "AND STATUS = '0'"
-        mySql &= vbCrLf & "GROUP BY ITEMTYPE,ORDATE,PRINCIPAL "
-        mySql &= vbCrLf & "ORDER BY ORDATE ASC "
+        mySql = "SELECT  COUNT(*), ITM.ITEMCATEGORY,P.ORDATE,P.PRINCIPAL "
+        mySql &= "FROM OPT P INNER JOIN OPI I ON I.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = I.ITEMID "
+        mySql &= "WHERE ORDate BETWEEN '" & stDay & "' AND '" & laDay & "' "
+        mySql &= "AND P.STATUS = '0' GROUP BY ITM.ITEMCATEGORY,P.ORDATE,P.PRINCIPAL "
+        mySql &= "ORDER BY P.ORDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)

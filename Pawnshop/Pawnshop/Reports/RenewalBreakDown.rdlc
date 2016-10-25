@@ -72,12 +72,12 @@
           <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemType">
-          <DataField>ItemType</DataField>
+        <Field Name="ItemClass">
+          <DataField>ItemClass</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Category">
-          <DataField>Category</DataField>
+        <Field Name="ItemCategory">
+          <DataField>ItemCategory</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Grams">
@@ -100,12 +100,12 @@
           <DataField>Principal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PullOut">
-          <DataField>PullOut</DataField>
+        <Field Name="WithDrawDate">
+          <DataField>WithDrawDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Interest">
-          <DataField>Interest</DataField>
+        <Field Name="DelayInterest">
+          <DataField>DelayInterest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Appraiser">
@@ -412,7 +412,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!ItemType.Value)</Value>
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                               </Style>
@@ -518,7 +518,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!ItemType.Value)</Value>
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -631,7 +631,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!ItemType.Value)</Value>
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -736,7 +736,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!ItemType.Value)</Value>
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
@@ -859,7 +859,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!ItemType.Value</Value>
+                            <Value>=Fields!ItemCategory.Value</Value>
                             <Style>
                               <FontWeight>Bold</FontWeight>
                             </Style>
