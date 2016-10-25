@@ -26,7 +26,7 @@
     End Sub
 
     Private Sub qryPullOut_List_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        mySql = "SELECT DISTINCT ITEMCLASS FROM tblITEM"
+        mySql = "SELECT DISTINCT ITEMCATEGORY FROM tblITEM"
         fillData = "tblITEM"
 
         Dim ds As DataSet = LoadSQL(mySql)
@@ -34,7 +34,7 @@
         cboClass.Items.Clear()
         cboClass.Items.Add("ALL")
         For Each dr As DataRow In ds.Tables(0).Rows
-            cboClass.Items.Add(dr.Item("ITEMCLASS"))
+            cboClass.Items.Add(dr.Item("ITEMCATEGORY"))
         Next
         cboClass.SelectedIndex = 0
     End Sub
@@ -55,7 +55,7 @@
         End If
        
         If cboClass.Text <> "ALL" Then
-            mySql &= String.Format(" AND ITEMCLASS = '{0}'", cboClass.Text)
+            mySql &= String.Format(" AND ITEMCATEGORY = '{0}'", cboClass.Text)
         End If
         Console.WriteLine(mySql)
 
@@ -78,7 +78,7 @@
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'NEW') "
+            mySql &= "  WHERE (Status = 'L') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' "
 
             mySql &= "  UNION "
@@ -86,7 +86,7 @@
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'RENEW') "
+            mySql &= "  WHERE (Status = 'R') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' "
 
             mySql &= "  UNION "
@@ -94,7 +94,7 @@
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'RENEWED') "
+            mySql &= "  WHERE (Status = '0') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
 
             mySql &= "  UNION "
@@ -102,7 +102,7 @@
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'REDEEM') "
+            mySql &= "  WHERE (Status = 'X') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
 
             mySql &= "  UNION "
@@ -110,7 +110,7 @@
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'SEGRE') "
+            mySql &= "  WHERE (Status = 'S') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND (WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' OR WITHDRAWDATE IS NULL) "
 
             mySql &= "  UNION "
@@ -118,11 +118,11 @@
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'WITHDRAW') "
+            mySql &= "  WHERE (Status = 'W') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= ") "
             If cboClass.Text <> "ALL" Then
-                mySql &= " WHERE ITEMCLASS = '" & cboClass.Text & "'"
+                mySql &= " WHERE ITEMCATEGORY = '" & cboClass.Text & "'"
             End If
             mySql &= "ORDER BY PAWNTICKET ASC"
         Else
@@ -131,36 +131,36 @@
             mySql &= "( "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'NEW') "
+            mySql &= "  WHERE (Status = 'L') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= "  UNION "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'RENEW') "
+            mySql &= "  WHERE (Status = 'R') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= "  UNION "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'RENEWED') "
+            mySql &= "  WHERE (Status = '0') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= "  UNION "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'REDEEM') "
+            mySql &= "  WHERE (Status = 'X') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= "  UNION "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'SEGRE') "
+            mySql &= "  WHERE (Status = 'S') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND (WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' OR WITHDRAWDATE IS NULL) "
             mySql &= "  UNION "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'WITHDRAW') "
+            mySql &= "  WHERE (Status = 'W') "
             mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= ") "
             If cboClass.Text <> "ALL" Then
-                mySql &= " WHERE ITEMCLASS = '" & cboClass.Text & "'"
+                mySql &= " WHERE ITEMCATEGORY = '" & cboClass.Text & "'"
             End If
             mySql &= " ORDER BY PAWNTICKET ASC"
         End If
