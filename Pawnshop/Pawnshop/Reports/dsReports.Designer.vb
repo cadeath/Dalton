@@ -1687,19 +1687,25 @@ Partial Public Class dsReports
         
         Private columnLoanDate As Global.System.Data.DataColumn
         
-        Private columnCount As Global.System.Data.DataColumn
+        Private columnCel_Count As Global.System.Data.DataColumn
         
-        Private columnItemCategory As Global.System.Data.DataColumn
+        Private columnCel_Principal As Global.System.Data.DataColumn
         
-        Private columnPrincipal As Global.System.Data.DataColumn
+        Private columnJWL_Count As Global.System.Data.DataColumn
         
-        Private columnLOAN_COUNT As Global.System.Data.DataColumn
+        Private columnJWL_Principal As Global.System.Data.DataColumn
         
-        Private columnLOAN_PRINCIPAL As Global.System.Data.DataColumn
+        Private columnApp_Count As Global.System.Data.DataColumn
         
-        Private columnRENEW_COUNT As Global.System.Data.DataColumn
+        Private columnApp_Principal As Global.System.Data.DataColumn
         
-        Private columnRENEW_PRINCIPAL As Global.System.Data.DataColumn
+        Private columnLoan_Count As Global.System.Data.DataColumn
+        
+        Private columnLoan_Principal As Global.System.Data.DataColumn
+        
+        Private columnRenew_Count As Global.System.Data.DataColumn
+        
+        Private columnRenew_Principal As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -1746,57 +1752,81 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property CountColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property Cel_CountColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnCount
+                Return Me.columnCel_Count
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property ItemCategoryColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property Cel_PrincipalColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnItemCategory
+                Return Me.columnCel_Principal
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property PrincipalColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property JWL_CountColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnPrincipal
+                Return Me.columnJWL_Count
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property LOAN_COUNTColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property JWL_PrincipalColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnLOAN_COUNT
+                Return Me.columnJWL_Principal
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property LOAN_PRINCIPALColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property App_CountColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnLOAN_PRINCIPAL
+                Return Me.columnApp_Count
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property RENEW_COUNTColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property App_PrincipalColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnRENEW_COUNT
+                Return Me.columnApp_Principal
             End Get
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property RENEW_PRINCIPALColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property Loan_CountColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnRENEW_PRINCIPAL
+                Return Me.columnLoan_Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Loan_PrincipalColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLoan_Principal
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Renew_CountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRenew_Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Renew_PrincipalColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnRenew_Principal
             End Get
         End Property
         
@@ -1837,9 +1867,9 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddMONTHLY_LOANRENEWRow(ByVal LoanDate As String, ByVal Count As String, ByVal ItemCategory As String, ByVal Principal As String, ByVal LOAN_COUNT As String, ByVal LOAN_PRINCIPAL As String, ByVal RENEW_COUNT As String, ByVal RENEW_PRINCIPAL As String) As MONTHLY_LOANRENEWRow
+        Public Overloads Function AddMONTHLY_LOANRENEWRow(ByVal LoanDate As String, ByVal Cel_Count As String, ByVal Cel_Principal As String, ByVal JWL_Count As String, ByVal JWL_Principal As String, ByVal App_Count As String, ByVal App_Principal As String, ByVal Loan_Count As String, ByVal Loan_Principal As String, ByVal Renew_Count As String, ByVal Renew_Principal As String) As MONTHLY_LOANRENEWRow
             Dim rowMONTHLY_LOANRENEWRow As MONTHLY_LOANRENEWRow = CType(Me.NewRow,MONTHLY_LOANRENEWRow)
-            Dim columnValuesArray() As Object = New Object() {LoanDate, Count, ItemCategory, Principal, LOAN_COUNT, LOAN_PRINCIPAL, RENEW_COUNT, RENEW_PRINCIPAL}
+            Dim columnValuesArray() As Object = New Object() {LoanDate, Cel_Count, Cel_Principal, JWL_Count, JWL_Principal, App_Count, App_Principal, Loan_Count, Loan_Principal, Renew_Count, Renew_Principal}
             rowMONTHLY_LOANRENEWRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMONTHLY_LOANRENEWRow)
             Return rowMONTHLY_LOANRENEWRow
@@ -1863,13 +1893,16 @@ Partial Public Class dsReports
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Sub InitVars()
             Me.columnLoanDate = MyBase.Columns("LoanDate")
-            Me.columnCount = MyBase.Columns("Count")
-            Me.columnItemCategory = MyBase.Columns("ItemCategory")
-            Me.columnPrincipal = MyBase.Columns("Principal")
-            Me.columnLOAN_COUNT = MyBase.Columns("LOAN_COUNT")
-            Me.columnLOAN_PRINCIPAL = MyBase.Columns("LOAN_PRINCIPAL")
-            Me.columnRENEW_COUNT = MyBase.Columns("RENEW_COUNT")
-            Me.columnRENEW_PRINCIPAL = MyBase.Columns("RENEW_PRINCIPAL")
+            Me.columnCel_Count = MyBase.Columns("Cel_Count")
+            Me.columnCel_Principal = MyBase.Columns("Cel_Principal")
+            Me.columnJWL_Count = MyBase.Columns("JWL_Count")
+            Me.columnJWL_Principal = MyBase.Columns("JWL_Principal")
+            Me.columnApp_Count = MyBase.Columns("App_Count")
+            Me.columnApp_Principal = MyBase.Columns("App_Principal")
+            Me.columnLoan_Count = MyBase.Columns("Loan_Count")
+            Me.columnLoan_Principal = MyBase.Columns("Loan_Principal")
+            Me.columnRenew_Count = MyBase.Columns("Renew_Count")
+            Me.columnRenew_Principal = MyBase.Columns("Renew_Principal")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1877,20 +1910,26 @@ Partial Public Class dsReports
         Private Sub InitClass()
             Me.columnLoanDate = New Global.System.Data.DataColumn("LoanDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnLoanDate)
-            Me.columnCount = New Global.System.Data.DataColumn("Count", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCount)
-            Me.columnItemCategory = New Global.System.Data.DataColumn("ItemCategory", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnItemCategory)
-            Me.columnPrincipal = New Global.System.Data.DataColumn("Principal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnPrincipal)
-            Me.columnLOAN_COUNT = New Global.System.Data.DataColumn("LOAN_COUNT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnLOAN_COUNT)
-            Me.columnLOAN_PRINCIPAL = New Global.System.Data.DataColumn("LOAN_PRINCIPAL", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnLOAN_PRINCIPAL)
-            Me.columnRENEW_COUNT = New Global.System.Data.DataColumn("RENEW_COUNT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnRENEW_COUNT)
-            Me.columnRENEW_PRINCIPAL = New Global.System.Data.DataColumn("RENEW_PRINCIPAL", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnRENEW_PRINCIPAL)
+            Me.columnCel_Count = New Global.System.Data.DataColumn("Cel_Count", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCel_Count)
+            Me.columnCel_Principal = New Global.System.Data.DataColumn("Cel_Principal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCel_Principal)
+            Me.columnJWL_Count = New Global.System.Data.DataColumn("JWL_Count", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJWL_Count)
+            Me.columnJWL_Principal = New Global.System.Data.DataColumn("JWL_Principal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnJWL_Principal)
+            Me.columnApp_Count = New Global.System.Data.DataColumn("App_Count", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnApp_Count)
+            Me.columnApp_Principal = New Global.System.Data.DataColumn("App_Principal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnApp_Principal)
+            Me.columnLoan_Count = New Global.System.Data.DataColumn("Loan_Count", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLoan_Count)
+            Me.columnLoan_Principal = New Global.System.Data.DataColumn("Loan_Principal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLoan_Principal)
+            Me.columnRenew_Count = New Global.System.Data.DataColumn("Renew_Count", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRenew_Count)
+            Me.columnRenew_Principal = New Global.System.Data.DataColumn("Renew_Principal", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnRenew_Principal)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8050,106 +8089,151 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Count() As String
+        Public Property Cel_Count() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.CountColumn),String)
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.Cel_CountColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Count' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Cel_Count' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMONTHLY_LOANRENEW.CountColumn) = value
+                Me(Me.tableMONTHLY_LOANRENEW.Cel_CountColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property ItemCategory() As String
+        Public Property Cel_Principal() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.ItemCategoryColumn),String)
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.Cel_PrincipalColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ItemCategory' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Cel_Principal' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMONTHLY_LOANRENEW.ItemCategoryColumn) = value
+                Me(Me.tableMONTHLY_LOANRENEW.Cel_PrincipalColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Principal() As String
+        Public Property JWL_Count() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.PrincipalColumn),String)
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.JWL_CountColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Principal' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'JWL_Count' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMONTHLY_LOANRENEW.PrincipalColumn) = value
+                Me(Me.tableMONTHLY_LOANRENEW.JWL_CountColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property LOAN_COUNT() As String
+        Public Property JWL_Principal() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.LOAN_COUNTColumn),String)
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.JWL_PrincipalColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'LOAN_COUNT' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'JWL_Principal' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMONTHLY_LOANRENEW.LOAN_COUNTColumn) = value
+                Me(Me.tableMONTHLY_LOANRENEW.JWL_PrincipalColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property LOAN_PRINCIPAL() As String
+        Public Property App_Count() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.LOAN_PRINCIPALColumn),String)
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.App_CountColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'LOAN_PRINCIPAL' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'App_Count' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMONTHLY_LOANRENEW.LOAN_PRINCIPALColumn) = value
+                Me(Me.tableMONTHLY_LOANRENEW.App_CountColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property RENEW_COUNT() As String
+        Public Property App_Principal() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.RENEW_COUNTColumn),String)
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.App_PrincipalColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RENEW_COUNT' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'App_Principal' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMONTHLY_LOANRENEW.RENEW_COUNTColumn) = value
+                Me(Me.tableMONTHLY_LOANRENEW.App_PrincipalColumn) = value
             End Set
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property RENEW_PRINCIPAL() As String
+        Public Property Loan_Count() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.RENEW_PRINCIPALColumn),String)
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.Loan_CountColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RENEW_PRINCIPAL' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Loan_Count' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableMONTHLY_LOANRENEW.RENEW_PRINCIPALColumn) = value
+                Me(Me.tableMONTHLY_LOANRENEW.Loan_CountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Loan_Principal() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.Loan_PrincipalColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Loan_Principal' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.Loan_PrincipalColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Renew_Count() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.Renew_CountColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Renew_Count' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.Renew_CountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Renew_Principal() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMONTHLY_LOANRENEW.Renew_PrincipalColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Renew_Principal' in table 'MONTHLY_LOANRENEW' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMONTHLY_LOANRENEW.Renew_PrincipalColumn) = value
             End Set
         End Property
         
@@ -8167,86 +8251,122 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCountNull() As Boolean
-            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.CountColumn)
+        Public Function IsCel_CountNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.Cel_CountColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCountNull()
-            Me(Me.tableMONTHLY_LOANRENEW.CountColumn) = Global.System.Convert.DBNull
+        Public Sub SetCel_CountNull()
+            Me(Me.tableMONTHLY_LOANRENEW.Cel_CountColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsItemCategoryNull() As Boolean
-            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.ItemCategoryColumn)
+        Public Function IsCel_PrincipalNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.Cel_PrincipalColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetItemCategoryNull()
-            Me(Me.tableMONTHLY_LOANRENEW.ItemCategoryColumn) = Global.System.Convert.DBNull
+        Public Sub SetCel_PrincipalNull()
+            Me(Me.tableMONTHLY_LOANRENEW.Cel_PrincipalColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsPrincipalNull() As Boolean
-            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.PrincipalColumn)
+        Public Function IsJWL_CountNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.JWL_CountColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetPrincipalNull()
-            Me(Me.tableMONTHLY_LOANRENEW.PrincipalColumn) = Global.System.Convert.DBNull
+        Public Sub SetJWL_CountNull()
+            Me(Me.tableMONTHLY_LOANRENEW.JWL_CountColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsLOAN_COUNTNull() As Boolean
-            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.LOAN_COUNTColumn)
+        Public Function IsJWL_PrincipalNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.JWL_PrincipalColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetLOAN_COUNTNull()
-            Me(Me.tableMONTHLY_LOANRENEW.LOAN_COUNTColumn) = Global.System.Convert.DBNull
+        Public Sub SetJWL_PrincipalNull()
+            Me(Me.tableMONTHLY_LOANRENEW.JWL_PrincipalColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsLOAN_PRINCIPALNull() As Boolean
-            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.LOAN_PRINCIPALColumn)
+        Public Function IsApp_CountNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.App_CountColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetLOAN_PRINCIPALNull()
-            Me(Me.tableMONTHLY_LOANRENEW.LOAN_PRINCIPALColumn) = Global.System.Convert.DBNull
+        Public Sub SetApp_CountNull()
+            Me(Me.tableMONTHLY_LOANRENEW.App_CountColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsRENEW_COUNTNull() As Boolean
-            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.RENEW_COUNTColumn)
+        Public Function IsApp_PrincipalNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.App_PrincipalColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetRENEW_COUNTNull()
-            Me(Me.tableMONTHLY_LOANRENEW.RENEW_COUNTColumn) = Global.System.Convert.DBNull
+        Public Sub SetApp_PrincipalNull()
+            Me(Me.tableMONTHLY_LOANRENEW.App_PrincipalColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsRENEW_PRINCIPALNull() As Boolean
-            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.RENEW_PRINCIPALColumn)
+        Public Function IsLoan_CountNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.Loan_CountColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetRENEW_PRINCIPALNull()
-            Me(Me.tableMONTHLY_LOANRENEW.RENEW_PRINCIPALColumn) = Global.System.Convert.DBNull
+        Public Sub SetLoan_CountNull()
+            Me(Me.tableMONTHLY_LOANRENEW.Loan_CountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLoan_PrincipalNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.Loan_PrincipalColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLoan_PrincipalNull()
+            Me(Me.tableMONTHLY_LOANRENEW.Loan_PrincipalColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsRenew_CountNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.Renew_CountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetRenew_CountNull()
+            Me(Me.tableMONTHLY_LOANRENEW.Renew_CountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsRenew_PrincipalNull() As Boolean
+            Return Me.IsNull(Me.tableMONTHLY_LOANRENEW.Renew_PrincipalColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetRenew_PrincipalNull()
+            Me(Me.tableMONTHLY_LOANRENEW.Renew_PrincipalColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
