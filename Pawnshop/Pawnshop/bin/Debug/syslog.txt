@@ -308,3 +308,7 @@ At line 1, column 66
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
+[10/26/2016 11:38:58] HIT FOUND
+[10/26/2016 11:39:25] HIT FOUND
+[10/26/2016 13:44:42] HIT FOUND
+[10/26/2016 15:26:24] HIT FOUND
