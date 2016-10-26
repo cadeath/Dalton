@@ -559,11 +559,11 @@
         Dim laDay = GetLastDate(monCal.SelectionEnd)
         Dim fillData As String = "dsRenewalBreakDown", mySql As String
 
-        mySql = "SELECT  COUNT(*), ITM.ITEMCATEGORY,P.ORDATE,P.PRINCIPAL "
+        mySql = "SELECT ITM.ITEMCATEGORY,P.ORDATE,P.PRINCIPAL "
         mySql &= "FROM OPT P INNER JOIN OPI I ON I.PAWNITEMID = P.PAWNITEMID "
         mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = I.ITEMID "
         mySql &= "WHERE ORDate BETWEEN '" & stDay & "' AND '" & laDay & "' "
-        mySql &= "AND P.STATUS = '0' GROUP BY ITM.ITEMCATEGORY,P.ORDATE,P.PRINCIPAL "
+        mySql &= "AND P.STATUS = '0' "
         mySql &= "ORDER BY P.ORDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)

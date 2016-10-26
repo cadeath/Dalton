@@ -4268,6 +4268,8 @@ Partial Public Class dsReports
         
         Private columnNewPT As Global.System.Data.DataColumn
         
+        Private columnPawnID As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -4520,6 +4522,14 @@ Partial Public Class dsReports
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PawnIDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPawnID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -4583,9 +4593,10 @@ Partial Public Class dsReports
                     ByVal DelayInterest As String,  _
                     ByVal Appraiser As String,  _
                     ByVal ServiceCharge As String,  _
-                    ByVal NewPT As String) As PawningRow
+                    ByVal NewPT As String,  _
+                    ByVal PawnID As String) As PawningRow
             Dim rowPawningRow As PawningRow = CType(Me.NewRow,PawningRow)
-            Dim columnValuesArray() As Object = New Object() {PawnTicket, LoanDate, MatuDate, AuctionDate, ExpiryDate, Client, Description, ORNum, ORDate, OldTicket, NetAmount, RenewDue, RedeemDue, AdvInt, Penalty, ItemClass, ItemCategory, Grams, Karat, Status, Appraisal, Principal, WithDrawDate, DelayInterest, Appraiser, ServiceCharge, NewPT}
+            Dim columnValuesArray() As Object = New Object() {PawnTicket, LoanDate, MatuDate, AuctionDate, ExpiryDate, Client, Description, ORNum, ORDate, OldTicket, NetAmount, RenewDue, RedeemDue, AdvInt, Penalty, ItemClass, ItemCategory, Grams, Karat, Status, Appraisal, Principal, WithDrawDate, DelayInterest, Appraiser, ServiceCharge, NewPT, PawnID}
             rowPawningRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPawningRow)
             Return rowPawningRow
@@ -4635,6 +4646,7 @@ Partial Public Class dsReports
             Me.columnAppraiser = MyBase.Columns("Appraiser")
             Me.columnServiceCharge = MyBase.Columns("ServiceCharge")
             Me.columnNewPT = MyBase.Columns("NewPT")
+            Me.columnPawnID = MyBase.Columns("PawnID")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4694,6 +4706,8 @@ Partial Public Class dsReports
             MyBase.Columns.Add(Me.columnServiceCharge)
             Me.columnNewPT = New Global.System.Data.DataColumn("NewPT", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNewPT)
+            Me.columnPawnID = New Global.System.Data.DataColumn("PawnID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPawnID)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10305,6 +10319,21 @@ Partial Public Class dsReports
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PawnID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePawning.PawnIDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PawnID' in table 'Pawning' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePawning.PawnIDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsPawnTicketNull() As Boolean
             Return Me.IsNull(Me.tablePawning.PawnTicketColumn)
         End Function
@@ -10625,6 +10654,18 @@ Partial Public Class dsReports
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetNewPTNull()
             Me(Me.tablePawning.NewPTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPawnIDNull() As Boolean
+            Return Me.IsNull(Me.tablePawning.PawnIDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPawnIDNull()
+            Me(Me.tablePawning.PawnIDColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

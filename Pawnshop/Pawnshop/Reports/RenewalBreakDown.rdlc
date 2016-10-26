@@ -120,6 +120,10 @@
           <DataField>NewPT</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="PawnID">
+          <DataField>PawnID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>Pawnshop</DataSourceName>
@@ -185,16 +189,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.53458in</Width>
+              <Width>0.51375in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.94792in</Width>
+              <Width>0.88542in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.53125in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.20833in</Width>
+              <Width>1.13541in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -485,7 +489,7 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox11">
+                    <Textbox Name="Textbox10">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -501,7 +505,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox11</rd:DefaultName>
+                      <rd:DefaultName>Textbox10</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -517,15 +521,17 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox12">
+                    <Textbox Name="Textbox9">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
-                              <Style />
+                              <Value>Total</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -533,7 +539,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox12</rd:DefaultName>
+                      <rd:DefaultName>Textbox9</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -556,8 +562,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
-                              <Style />
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>#,0;(#,0);'-'</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -588,8 +597,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
-                              <Style />
+                              <Value>=Sum(Fields!Principal.Value)</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Format>#,0;(#,0);'-'</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -715,7 +727,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>1in</Size>
+                <Size>0.9375in</Size>
                 <CellContents>
                   <Textbox Name="Textbox111">
                     <CanGrow>true</CanGrow>
@@ -763,7 +775,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>1in</Size>
+                <Size>0.9375in</Size>
                 <CellContents>
                   <Textbox Name="ORDate">
                     <CanGrow>true</CanGrow>
@@ -803,7 +815,7 @@
             </TablixMember>
             <TablixMember>
               <TablixHeader>
-                <Size>1in</Size>
+                <Size>0.9375in</Size>
                 <CellContents>
                   <Textbox Name="Textbox1">
                     <CanGrow>true</CanGrow>
@@ -845,7 +857,7 @@
         <Top>0.04167in</Top>
         <Left>0.01042in</Left>
         <Height>1in</Height>
-        <Width>4.22208in</Width>
+        <Width>4.00333in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
