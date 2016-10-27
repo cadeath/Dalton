@@ -32,12 +32,16 @@
           <DataField>ExpiryDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemType">
-          <DataField>ItemType</DataField>
+        <Field Name="AuctionDate">
+          <DataField>AuctionDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Pawner">
-          <DataField>Pawner</DataField>
+        <Field Name="ItemCategory">
+          <DataField>ItemCategory</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Client">
+          <DataField>Client</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="FullAddress">
@@ -52,12 +56,16 @@
           <DataField>Appraisal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Interest">
-          <DataField>Interest</DataField>
+        <Field Name="DelayInterest">
+          <DataField>DelayInterest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="AdvInt">
           <DataField>AdvInt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Penalty">
+          <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ServiceCharge">
@@ -74,6 +82,22 @@
         </Field>
         <Field Name="ContactNumber">
           <DataField>ContactNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ORNum">
+          <DataField>ORNum</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ORDate">
+          <DataField>ORDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RenewDue">
+          <DataField>RenewDue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RedeemDue">
+          <DataField>RedeemDue</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -163,7 +187,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value />
+                <Value>=Fields!Client.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1023,7 +1047,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Pawner.Value</Value>
+                <Value></Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1431,7 +1455,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Pawner.Value</Value>
+                <Value></Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>

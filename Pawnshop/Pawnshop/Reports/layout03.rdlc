@@ -183,7 +183,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Pawner.Value</Value>
+                <Value />
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
