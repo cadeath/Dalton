@@ -1,4 +1,5 @@
-﻿Public Class ItemClass
+﻿
+Public Class ItemClass
     Private MainTable As String = "tblItem"
     Private SubTable As String = "tblSpecs"
 
@@ -149,7 +150,7 @@
 #End Region
 
 #Region "Functions and Procedures"
-    Public Sub LoadItem(id As Integer)
+    Public Sub LoadItem(ByVal id As Integer)
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", id)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
@@ -157,7 +158,9 @@
             MsgBox("Failed to load Item", MsgBoxStyle.Critical)
             Exit Sub
         End If
+
         _interestScheme = New InterestScheme
+
         With ds.Tables(0).Rows(0)
             _itemID = .Item("ItemID")
             _itemClassName = .Item("ItemClass")
@@ -184,8 +187,8 @@
             Dim tmpSpecs As New ItemSpecs
             tmpSpecs.LoadItemSpecs_row(dr)
 
-
             'Load Item Specification
+
             _itemSpecs.Add(tmpSpecs)
         Next
     End Sub
@@ -217,6 +220,7 @@
         ds.Tables(0).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
 
+
         mySql = "SELECT * FROM tblItem ORDER BY ItemID DESC ROWS 1"
         ds = LoadSQL(mySql, MainTable)
         _itemID = ds.Tables(MainTable).Rows(0).Item("ItemID")
@@ -230,6 +234,7 @@
     Public Sub LoadByRow(ByVal dr As DataRow)
         Dim mySql As String, ds As New DataSet
         With dr
+
             _itemID = .Item("ItemID")
             _itemClassName = .Item("ItemClass")
             _category = .Item("ItemCategory")
@@ -262,7 +267,6 @@
     End Sub
 
     Public Sub Update()
-
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE ItemID = {1}", MainTable, _itemID)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 

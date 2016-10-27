@@ -1,4 +1,6 @@
-﻿Public Class PawnCompute
+﻿' NEW DALTON COMPUTATION CLASS
+
+Public Class PawnCompute
 
     '===================== INPUT ====================='
     Private _principal As Double = 0
@@ -91,12 +93,18 @@
         End Set
     End Property
 
+    Private _isEarlyRedeem As Boolean = False
+    Public ReadOnly Property isEarlyRedeem() As Boolean
+        Get
+            Return _isEarlyRedeem
+        End Get
+    End Property
     '====================== END ======================'
 #End Region
 
 #Region "Procedures and Functions"
 
-    Public Sub New(Principal As Double, IntRate As InterestScheme, CurrentDate As Date, MaturityDate As Date, isNew As Boolean)
+    Public Sub New(ByVal Principal As Double, ByVal IntRate As InterestScheme, ByVal CurrentDate As Date, ByVal MaturityDate As Date, ByVal isNew As Boolean)
         _principal = Principal
         _IntRate = IntRate
         _currentDate = CurrentDate
@@ -130,7 +138,7 @@
         Item_Interest = ItemInterest_percent * Item_Principal
         Item_Penalty = ItemPenalty_percent * Item_Principal
 
-        _int = IIf(_isNew, Item_Interest, Delay_Interest) 'What the heck is there for?
+        _int = IIf(_isNew, Item_Interest - _advInterest, Delay_Interest) 'What the heck is there for?
         _penalty = Item_Penalty
 
         _netAmount = Item_Principal - _advInterest - _srvChr
@@ -152,7 +160,7 @@
         Penalty = 1
     End Enum
 
-    Private Function Get_ItemInterest(days As Integer, Optional ret As percentType = 0) As Double
+    Private Function Get_ItemInterest(ByVal days As Integer, Optional ByVal ret As percentType = 0) As Double
         Dim IntScheme As New InterestScheme
         IntScheme = _IntRate
 
@@ -160,16 +168,18 @@
             Select Case days
                 Case Int.DayFrom To Int.DayTo
                     If ret = percentType.Interest Then _
-                        Return Int.Interest
+                        If Int.Remarks = "Early Redemption" Then _isEarlyRedeem = True
+                    Return Int.Interest
                     If ret = percentType.Penalty Then _
-                        Return Int.Penalty
+                        If Int.Remarks = "Early Redemption" Then _isEarlyRedeem = True
+                    Return Int.Penalty
             End Select
         Next
 
         Return 0
     End Function
 
-    Private Function GetServiceCharge(principal As Double) As Double
+    Private Function GetServiceCharge(ByVal principal As Double) As Double
         Dim srvPrin As Double = principal
         Dim ret As Double = 0
 

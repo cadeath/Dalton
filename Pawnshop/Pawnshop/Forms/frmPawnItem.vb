@@ -387,7 +387,6 @@ Public Class frmPawnItem
         End If
 
         Notify_Renewal(PawnItem)
-
         Redeem("R")
         PrintButton(0)
         btnSave.Enabled = True
@@ -1676,6 +1675,4 @@ Public Class frmPawnItem
 
         Return disp
     End Function
-
- 
 End Class

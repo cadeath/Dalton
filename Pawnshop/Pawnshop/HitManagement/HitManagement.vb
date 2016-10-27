@@ -12,7 +12,7 @@
         FULLNAME = String.Format("{0}, {1} {2}", cl.LastName, cl.FirstName, cl.Suffix)
 
         Dim ds As DataSet
-        Dim mySql As String = "SELECT * FROM TBLPAWN "
+        Dim mySql As String = "SELECT * FROM OPT "
         mySql &= "WHERE CLIENTID = " & CLID
         mySql &= " ORDER BY LOANDATE DESC"
 

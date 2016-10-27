@@ -1,6 +1,7 @@
 ﻿Public Class PawnTicket2
 
     Private MainTable As String = "OPT"
+    Private ds As DataSet, mysql As String = ""
 
 #Region "Properties"
     Private _PawnID As Integer
@@ -143,7 +144,7 @@
         End Set
     End Property
 
-    Private _pawnItem As PawnItem
+    Private _pawnItem As New PawnItem
     Public Property PawnItem() As PawnItem
         Get
             Return _pawnItem
@@ -283,6 +284,16 @@
         End Set
     End Property
 
+    Private _description As String
+    Public Property Description() As String
+        Get
+            Return _description
+        End Get
+        Set(ByVal value As String)
+            _description = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -315,6 +326,7 @@
             .Item("CLAIMERID") = _claimerID
             .Item("CLIENTID") = _pawner.ID
             .Item("PAWNITEMID") = _pawnItem.ID
+            .Item("DESCRIPTION") = DescriptionBuilder()
             .Item("ORDATE") = _ORDate
             .Item("ORNUM") = _ORNum
             .Item("PENALTY") = _penalty
@@ -328,12 +340,52 @@
             .Item("SERVICECHARGE") = _serviceCharge
             .Item("CREATED_AT") = Now.ToShortDateString
         End With
+
         ds.Tables(MainTable).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
     End Sub
 
+    Public Sub Update_PawnTicket()
+        Dim mySql As String, ds As DataSet
+
+        mySql = String.Format("SELECT * FROM {0} WHERE PAWNTICKET = {1}", MainTable, _ticket)
+        ds = LoadSQL(mySql, MainTable)
+
+        With ds.Tables(0).Rows(0)
+            .Item("PAWNTICKET") = _ticket
+            .Item("OLDTICKET") = _oldPT
+            .Item("LOANDATE") = _loanDate
+            .Item("MATUDATE") = _matuDate
+            .Item("EXPIRYDATE") = _expiryDate
+            .Item("AUCTIONDATE") = _auctionDate
+            .Item("APPRAISAL") = _appraisal
+            .Item("PRINCIPAL") = _principal
+            .Item("NETAMOUNT") = _netAmount
+            .Item("APPRAISERID") = _appraiserID
+            .Item("ENCODERID") = _encoderID
+            .Item("CLAIMERID") = _claimerID
+            .Item("CLIENTID") = _pawner.ID
+            .Item("PAWNITEMID") = _pawnItem.ID
+            .Item("DESCRIPTION") = _description
+            .Item("ORDATE") = _ORDate
+            .Item("ORNUM") = _ORNum
+            .Item("PENALTY") = _penalty
+            .Item("STATUS") = _status
+            .Item("DAYSOVERDUE") = _daysOverDue
+            .Item("EARLYREDEEM") = _earlyRedeem
+            .Item("DELAYINTEREST") = _delayInt
+            .Item("ADVINT") = _advInt
+            .Item("RENEWDUE") = _renewDue
+            .Item("REDEEMDUE") = _redeemDue
+            .Item("SERVICECHARGE") = _serviceCharge
+            .Item("UPDATED_AT") = Now.ToShortDateString
+        End With
+
+        database.SaveEntry(ds, False)
+    End Sub
+
     Public Sub Load_PTid(ByVal id As Integer)
-        Dim mySql As String = String.Format("SELECT * {0} WHERE PAWNID = {1}", MainTable, id)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE PAWNID = {1}", MainTable, id)
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count <> 1 Then
@@ -345,13 +397,15 @@
     End Sub
 
     Public Sub Load_PawnTicket(ByVal ptnum As Integer)
-        Dim mySql As String = String.Format("SELECT * {0} WHERE PAWNTICKET = {1}", MainTable, ptnum)
+        Dim mySql As String = String.Format("SELECT * FROM {0} WHERE PAWNTICKET = {1}", MainTable, ptnum)
         Dim ds As DataSet = LoadSQL(mySql)
 
         Load_PT_row(ds.Tables(0).Rows(0))
     End Sub
 
     Private Sub Load_PT_row(ByVal dr As DataRow)
+        'On Error Resume Next
+
         With dr
             _PawnID = .Item("PAWNID")
             _ticket = .Item("PAWNTICKET")
@@ -367,6 +421,7 @@
             _encoderID = .Item("ENCODERID")
             _claimerID = .Item("CLAIMERID")
             _pawner.LoadClient(.Item("CLIENTID"))
+            _description = .Item("DESCRIPTION")
             _ORDate = .Item("ORDATE")
             _ORNum = .Item("ORNUM")
             _penalty = .Item("PENALTY")
@@ -378,12 +433,151 @@
             _renewDue = .Item("RENEWDUE")
             _redeemDue = .Item("REDEEMDUE")
             _serviceCharge = .Item("SERVICECHARGE")
-            _created_At = .Item("CREATED_AT")
-            _updated_At = .Item("UPDATED_AT")
+
+            If Not IsDBNull(.Item("CREATED_AT")) Then _created_At = .Item("CREATED_AT")
+            If Not IsDBNull(.Item("UPDATED_AT")) Then _updated_At = .Item("UPDATED_AT")
 
             _pawnItem.Load_PawnItem(.Item("PAWNITEMID"))
         End With
     End Sub
+
+    Private Function DescriptionBuilder() As String
+        Dim Description As String = ""
+        Dim PrintLayout As String = _pawnItem.ItemClass.PrintLayout
+        '[CLASSNAME][GRAMS][KARAT][DESCRIPTION]
+        'FUNCTIONS:
+        'CLASS - Display Item Class
+
+        PrintLayout = PrintLayout.Replace("[CLASS]", _pawnItem.ItemClass.ClassName)
+
+        For Each sc As PawnItemSpec In _pawnItem.PawnItemSpecs
+            PrintLayout = PrintLayout.Replace(String.Format("[{0}]", GetShortCode(sc)), _
+                                              String.Format("{0}{1}", sc.SpecsValue, sc.UnitOfMeasure))
+        Next
+        Description = PrintLayout
+
+        Return Description
+    End Function
+
+    Private Function GetShortCode(ByVal ItemSpec As PawnItemSpec) As String
+        For Each spec As ItemSpecs In _pawnItem.ItemClass.ItemSpecifications
+            If spec.SpecName = ItemSpec.SpecName Then
+                Return spec.ShortCode
+            End If
+        Next
+
+        Return "N/A"
+    End Function
+
+    Public Sub VoidCancelTicket()
+
+        Try
+            Dim ModNAME As String = ""
+            If Status = "L" Then
+                ModNAME = "NEW LOANS"
+            ElseIf Status = "X" Then
+                ModNAME = "REDEMPTION"
+            ElseIf Status = "R" Then
+                ModNAME = "RENEWALS"
+            End If
+
+            Dim curStatus As String = _status
+            Dim PTNum As String = String.Format("{0:000000}", PawnTicket)
+            If curStatus = "L" Then
+                ChangeStatus("V")
+                Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
+                Dim ds As DataSet = LoadSQL(mysql)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
+                Exit Sub
+            End If
+
+            If curStatus <> "X" Then
+                ChangeStatus("V")
+            End If
+
+            If _oldPT <> 0 Then
+                'Has Old PawnTicket
+                mysql = "SELECT * FROM " & MainTable & " WHERE PawnTicket = " & _oldPT
+                ds = New DataSet
+                ds = LoadSQL(mysql, MainTable)
+                Dim st As String
+                If ds.Tables(MainTable).Rows.Count = 0 Then
+                    ChangeStatus("L")
+                    RemoveJournal(PawnID, , ModNAME)
+                    Exit Sub
+                Else
+                    If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
+                        st = "L"
+                    Else
+                        st = "R"
+                    End If
+                End If
+
+                ds.Tables(MainTable).Rows(0).Item("Status") = st
+                With ds.Tables(MainTable).Rows(0)
+                    .Item("OrNum") = 0
+                    .Item("OrDate") = New Date
+                    .Item("DAYSOVERDUE") = 0
+                    .Item("DelayInterest") = 0
+                    .Item("Penalty") = 0
+                    .Item("ServiceCharge") = 0
+                    .Item("RenewDue") = 0
+                    .Item("RedeemDue") = 0
+                    .Item("AdvInt") = 0
+                End With
+                database.SaveEntry(ds, False)
+                Dim mysql2 As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
+                Dim ds2 As DataSet = LoadSQL(mysql2)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds2.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
+            Else
+                ChangeStatus("L")
+
+                Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
+                Dim ds As DataSet = LoadSQL(mysql)
+                Dim tmpEncoderID As Integer
+                tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
+        End Try
+    End Sub
+
+    Public Sub ChangeStatus(ByVal str As String)
+        Dim ds As DataSet, mysql As String
+        mySql = "SELECT * FROM " & MainTable & " WHERE PawnID = " & _PawnID
+        ds = LoadSQL(mySql, MainTable)
+
+        Console.WriteLine("PawnID: " & PawnID)
+        Console.WriteLine("PawnTicket: " & PawnTicket)
+        Console.WriteLine("Client: " & Pawner.FirstName)
+        Console.WriteLine("Status: " & Status)
+
+        ds.Tables(0).Rows(0).Item("status") = str
+        database.SaveEntry(ds, False)
+    End Sub
+
+    Public Function LoadLastIDNumberPawn() As Single
+        Dim mySql As String = "SELECT * FROM OPT ORDER BY PAWNID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("PAWNID")
+    End Function
 #End Region
 
 End Class

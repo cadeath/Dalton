@@ -73,7 +73,7 @@
         End Set
     End Property
 
-    Private _pawnItemSpecs As CollectionPawnItemSpecs
+    Private _pawnItemSpecs As New CollectionPawnItemSpecs
     Public Property PawnItemSpecs() As CollectionPawnItemSpecs
         Get
             Return _pawnItemSpecs
@@ -83,7 +83,7 @@
         End Set
     End Property
 
-    Private _itemClass As ItemClass
+    Private _itemClass As New ItemClass
     Public Property ItemClass() As ItemClass
         Get
             Return _itemClass
@@ -133,6 +133,7 @@
                 .Item("RENEWALCNT") = _renewalCnt
                 .Item("CREATED_AT") = Now.ToShortDateString
             Else
+                .Item("RENEWALCNT") = _renewalCnt
                 If Not _withdrawDate = Nothing Then .Item("WITHDRAWDATE") = _withdrawDate
                 .Item("STATUS") = _status
                 .Item("UPDATED_AT") = Now.ToShortDateString
@@ -143,20 +144,21 @@
             ds.Tables(MainTable).Rows.Add(dr)
         Else
             For cnt As Integer = 0 To ds.Tables(MainTable).Columns.Count - 1
-                ds.Tables(MainTable).Rows(0).Item(cnt) = dr(0)
+                ds.Tables(MainTable).Rows(0).Item(cnt) = dr(cnt)
             Next
         End If
         database.SaveEntry(ds, isNew)
 
-        mySql = String.Format("SELECT * FROM {0} ORDER BY PAWNITEMID DESC ROWS 1", MainTable)
-        ds = LoadSQL(mySql)
-        _pawnItemID = ds.Tables(0).Rows(0).Item("PAWNITEMID")
+        If isNew Then
+            mySql = String.Format("SELECT * FROM {0} ORDER BY PAWNITEMID DESC ROWS 1", MainTable)
+            ds = LoadSQL(mySql)
+            _pawnItemID = ds.Tables(0).Rows(0).Item("PAWNITEMID")
 
-        For Each itmSpecs As PawnItemSpec In _pawnItemSpecs
-            itmSpecs.PawnItemID = _pawnItemID
-            itmSpecs.Save_PawnItemSpecs()
-        Next
-
+            For Each itmSpecs As PawnItemSpec In _pawnItemSpecs
+                itmSpecs.PawnItemID = _pawnItemID
+                itmSpecs.Save_PawnItemSpecs()
+            Next
+        End If
     End Sub
 
     Public Sub Load_PawnItem(id As Integer)
@@ -169,6 +171,7 @@
         End If
 
         With ds.Tables(0).Rows(0)
+            _pawnItemID = id
             _itemClass.LoadItem(.Item("ITEMID"))
 
             If Not IsDBNull(.Item("WITHDRAWDATE")) Then _withdrawDate = .Item("WITHDRAWDATE")
@@ -177,6 +180,16 @@
             _created_At = .Item("CREATED_AT")
             _update_At = .Item("UPDATED_AT")
         End With
+
+        'Loading PawnItemSpecs
+        mySql = String.Format("SELECT * FROM {0} WHERE PAWNITEMID = {1}", SubTable, id)
+        ds = LoadSQL(mySql)
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Dim tmpItemSpec As New PawnItemSpec
+            tmpItemSpec.Load_PawnItemSpec_row(dr)
+
+            _pawnItemSpecs.Add(tmpItemSpec)
+        Next
     End Sub
 
     Public Function Get_PawnItemLastID() As Integer

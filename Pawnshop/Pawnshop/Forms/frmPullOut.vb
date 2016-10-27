@@ -1,6 +1,6 @@
 ﻿Public Class qryPullOut
 
-    Private fillData As String = "tblPawn"
+    Private fillData As String = "OPT"
     Private mySql As String = ""
 
     Private Sub frmPullOut_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

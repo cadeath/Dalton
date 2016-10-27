@@ -3,6 +3,7 @@
     Private ItemClass As Hashtable
     Private newPawnTicket As PawnTicket2
     Private newItem As PawnItem
+    Private AutoCompute As PawnCompute
 
     Private Sub dev_Pawning2_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Load_ItemClass()
@@ -21,58 +22,45 @@
     End Sub
 
     Private Sub btnCompute_Click(sender As System.Object, e As System.EventArgs) Handles btnCompute.Click
-        If DeclareItem() Then Exit Sub
+        If Not DeclareItem() Then Exit Sub
 
-        'Dim newCompute As New PawnCompute(newPawnTicket, current.SelectionRange.Start, If(rbDPJ.Checked, True, False))
-        'With newCompute
-        '    txtDaysOver.Text = .DaysOverDue
+        With AutoCompute
+            txtNetAmount.Text = .NetAmount
+            txtDaysOver.Text = .DaysOverDue
+            txtInt.Text = .Interest
+            txtPenalty.Text = .Penalty
+            txtSC.Text = .ServiceCharge
+            txtAdvInt.Text = .AdvanceInterest
+            txtRenewDue.Text = .RenewDue
+            txtRedeemDue.Text = .RedeemDue
+        End With
 
-        '    txtNetAmount.Text = .NetAmount.ToString("P #,##0.00")
-        '    txtAdvInt.Text = .AdvanceInterest.ToString("#,##0.00")
-        '    txtInt.Text = .Interest.ToString("#,##0.00")
-        '    txtPenalty.Text = .Penalty.ToString("#,##0.00")
-        '    txtSC.Text = .ServiceCharge.ToString("#,##0.00")
-
-        '    txtRenewDue.Text = .RenewDue.ToString("#,##0.00")
-        '    txtRedeemDue.Text = .RedeemDue.ToString("#,##0.00")
-        'End With
     End Sub
 
     Private Function DeclareItem() As Boolean
-        If cboType.Text = "" Then Return True
-        If txtPrincipal.Text = "" Then Return True
+        If cboType.Text = "" Then Return False
+        If txtPrincipal.Text = "" Then Return False
 
-        Dim selClass As New ItemClass
-        selClass.LoadItem(GetIDbyName(cboType.Text, ItemClass))
+        Dim isDPJ As Boolean
+        isDPJ = rbDPJ.Checked
 
+        Dim intS As New InterestScheme
+        intS.LoadScheme(GetIDbyName(cboType.Text, ItemClass))
 
-        newItem = New PawnItem
-        With newItem
-            .ItemClass = selClass
-        End With
+        txtMatu.Text = loanDate.SelectionRange.Start.AddDays(29).ToShortDateString
+        Select Case cboType.Text
+            Case "CELLPHONE"
+                txtExpiry.Text = txtMatu.Text
+                txtAuction.Text = loanDate.SelectionRange.Start.AddDays(62).ToShortDateString
+            Case Else
+                txtExpiry.Text = loanDate.SelectionRange.Start.AddDays(119).ToShortDateString
+                txtAuction.Text = loanDate.SelectionRange.Start.AddDays(152).ToShortDateString
+        End Select
 
-        Dim newPT As New PawnTicket2
-        With newPT
-            .LoanDate = loanDate.SelectionRange.Start
-            .MaturityDate = .LoanDate.AddDays(29)
-            .ExpiryDate = .LoanDate.AddDays(119)
-            .AuctionDate = .LoanDate.AddDays(152)
+        AutoCompute = New PawnCompute _
+            (txtPrincipal.Text, intS, current.SelectionRange.Start, DateTime.Parse(txtMatu.Text), isDPJ)
 
-            .PawnItem = newItem
-            .Principal = CDbl(txtPrincipal.Text)
-        End With
-
-        newPawnTicket = newPT
-
-        Console.WriteLine("Item: " & newPawnTicket.PawnItem.ItemClass.ClassName)
-        Console.WriteLine("Scheme: " & newPawnTicket.PawnItem.ItemClass.InterestScheme.SchemeName)
-
-        Console.WriteLine("Scheme Details===================")
-        For Each Int As Scheme_Interest In newPawnTicket.PawnItem.ItemClass.InterestScheme.SchemeDetails
-            Console.WriteLine(String.Format("{0} - {1} -> {2}", Int.DayFrom, Int.DayTo, Int.Interest * 100))
-        Next
-
-        Return False
+        Return True
     End Function
 
     Private Sub txtMatu_DoubleClick(sender As Object, e As System.EventArgs) Handles txtMatu.DoubleClick
