@@ -32,16 +32,12 @@
           <DataField>ExpiryDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="AuctionDate">
-          <DataField>AuctionDate</DataField>
+        <Field Name="ItemType">
+          <DataField>ItemType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemCategory">
-          <DataField>ItemCategory</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Client">
-          <DataField>Client</DataField>
+        <Field Name="Pawner">
+          <DataField>Pawner</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="FullAddress">
@@ -56,16 +52,12 @@
           <DataField>Appraisal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DelayInterest">
-          <DataField>DelayInterest</DataField>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="AdvInt">
           <DataField>AdvInt</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Penalty">
-          <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ServiceCharge">
@@ -82,22 +74,6 @@
         </Field>
         <Field Name="ContactNumber">
           <DataField>ContactNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ORNum">
-          <DataField>ORNum</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="ORDate">
-          <DataField>ORDate</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RenewDue">
-          <DataField>RenewDue</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RedeemDue">
-          <DataField>RedeemDue</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -187,7 +163,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Client.Value</Value>
+                <Value />
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1813,7 +1789,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox42</rd:DefaultName>
         <Top>2.79173in</Top>
-        <Left>0.03677in</Left>
+        <Left>0.05286in</Left>
         <Height>0.1875in</Height>
         <Width>4.16949in</Width>
         <ZIndex>53</ZIndex>
@@ -1936,24 +1912,6 @@
         <Height>0.26514in</Height>
         <Width>1.06643in</Width>
         <ZIndex>57</ZIndex>
-        <Visibility>
-          <Hidden>=IIf(Parameters!txtReprint.Value.ToString().Contains("Reprint"),false ,true)</Hidden>
-        </Visibility>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
-      <Image Name="Image6">
-        <Source>Embedded</Source>
-        <Value>Reprint4</Value>
-        <Sizing>Fit</Sizing>
-        <Top>6.05722in</Top>
-        <Left>5.99779in</Left>
-        <Height>0.26514in</Height>
-        <Width>1.06643in</Width>
-        <ZIndex>58</ZIndex>
         <Visibility>
           <Hidden>=IIf(Parameters!txtReprint.Value.ToString().Contains("Reprint"),false ,true)</Hidden>
         </Visibility>

@@ -32,16 +32,12 @@
           <DataField>ExpiryDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="AuctionDate">
-          <DataField>AuctionDate</DataField>
+        <Field Name="ItemType">
+          <DataField>ItemType</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemCategory">
-          <DataField>ItemCategory</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="Client">
-          <DataField>Client</DataField>
+        <Field Name="Pawner">
+          <DataField>Pawner</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="FullAddress">
@@ -56,8 +52,8 @@
           <DataField>Appraisal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DelayInterest">
-          <DataField>DelayInterest</DataField>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="AdvInt">
@@ -187,7 +183,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Client.Value</Value>
+                <Value />
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
