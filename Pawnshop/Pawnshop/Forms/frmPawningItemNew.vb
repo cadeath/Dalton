@@ -236,7 +236,6 @@ Public Class frmPawningItemNew
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If unableToSave Then Exit Sub
-
         If MsgBox("Do you want to save this transaction?", _
                   MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
                   "Saving...") = MsgBoxResult.No Then Exit Sub
@@ -249,7 +248,7 @@ Public Class frmPawningItemNew
             Case "X"
                 SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
         End Select
-
+        Me.Close()
     End Sub
 
     Private Sub SaveRedeem()
@@ -308,7 +307,6 @@ Public Class frmPawningItemNew
             End If
 
         End With
-        Me.Close()
     End Sub
 
     Private Sub SaveRenew()
@@ -382,8 +380,6 @@ Public Class frmPawningItemNew
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
             frmPawning.ReloadForm()
         End If
-
-        Me.Close()
     End Sub
 
     Private Sub RefreshInput()
@@ -477,7 +473,6 @@ Public Class frmPawningItemNew
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
             frmPawning.ReloadForm()
         End If
-        Me.Close()
     End Sub
 
     Private Sub dateChange(selectedClass As ItemClass)
@@ -735,7 +730,6 @@ Public Class frmPawningItemNew
         ClearFields()
         LoadAppraisers()
 
-        POSuser.LoadUser(3)
         If transactionType = "L" Then NewLoan()
     End Sub
 
@@ -794,7 +788,7 @@ Public Class frmPawningItemNew
         'Disable
         txtCustomer.ReadOnly = True
         btnSearch.Enabled = False
-        txtClassification.ReadOnly = True
+        txtClassification.Enabled = False
         btnSearchClassification.Enabled = False
         txtAppr.Enabled = False
         txtPrincipal.Enabled = False
@@ -1162,7 +1156,7 @@ Public Class frmPawningItemNew
 
         Dim mySql As String, dsName As String = "dsRenewPT"
         'mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
-        mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        mySql = "SELECT * FROM PAWN_LIST ORDER BY PAWNID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
         report.ReportPath = "Reports\layout03.rdlc"
