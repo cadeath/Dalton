@@ -236,24 +236,29 @@ Public Class frmPawningItemNew
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If unableToSave Then Exit Sub
-
         If MsgBox("Do you want to save this transaction?", _
                   MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
                   "Saving...") = MsgBoxResult.No Then Exit Sub
 
         Select Case transactionType
             Case "L"
-                SaveNewLoan()
+                SaveNewLoan() : PrintNewLoan()
             Case "R"
-                SaveRenew()
+                SaveRenew() : PrintRenew()
             Case "X"
-                SaveRedeem()
+                SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
         End Select
-
+        Me.Close()
     End Sub
 
     Private Sub SaveRedeem()
         'If Pawner_OtherClaimer.ID = 0 Then Exit Sub
+        With PT_Entry.PawnItem
+            .WithdrawDate = CurrentDate
+            .Status = "X"
+            .Save_PawnItem()
+        End With
+
         With PT_Entry
             .ORNumber = currentORNumber
             .ORDate = CurrentDate
@@ -302,7 +307,6 @@ Public Class frmPawningItemNew
             End If
 
         End With
-        Me.Close()
     End Sub
 
     Private Sub SaveRenew()
@@ -376,8 +380,6 @@ Public Class frmPawningItemNew
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
             frmPawning.ReloadForm()
         End If
-
-        Me.Close()
     End Sub
 
     Private Sub RefreshInput()
@@ -471,7 +473,6 @@ Public Class frmPawningItemNew
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
             frmPawning.ReloadForm()
         End If
-        Me.Close()
     End Sub
 
     Private Sub dateChange(selectedClass As ItemClass)
@@ -729,7 +730,6 @@ Public Class frmPawningItemNew
         ClearFields()
         LoadAppraisers()
 
-        POSuser.LoadUser(3)
         If transactionType = "L" Then NewLoan()
     End Sub
 
@@ -788,7 +788,7 @@ Public Class frmPawningItemNew
         'Disable
         txtCustomer.ReadOnly = True
         btnSearch.Enabled = False
-        txtClassification.ReadOnly = True
+        txtClassification.Enabled = False
         btnSearchClassification.Enabled = False
         txtAppr.Enabled = False
         txtPrincipal.Enabled = False
@@ -802,8 +802,21 @@ Public Class frmPawningItemNew
             btnRedeem.Enabled = True : btnPrint.Enabled = True
             btnVoid.Enabled = True
         End If
+        Select Case pt.Status
+            Case "0", "S", "W", "V"
+                LockFields(1)
+            Case "X"
+                LockFields(1)
+                Authorization()
+        End Select
     End Sub
 
+    Private Sub Authorization()
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
+    End Sub
 
     Private Function CheckAuth() As Boolean
         If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
@@ -1017,7 +1030,7 @@ Public Class frmPawningItemNew
         End If
 
         If PT_Entry.Status = "X" Then
-            'do_RedeemOR()
+            do_RedeemOR()
         End If
     End Sub
 
@@ -1118,6 +1131,82 @@ Public Class frmPawningItemNew
             autoPrintPT.m_currentPageIndex = 0
             autoPrintPT.Print(printerName)
         End If
+
+        Me.Focus()
+    End Sub
+
+    Private Sub PrintRenew()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        PrintRenewPT()
+        If Not PAUSE_OR Then do_RenewOR()
+    End Sub
+
+    Private Sub PrintRenewPT()
+        Dim autoPrintPT As Reporting
+
+        Dim printerName As String = PRINTER_PT
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+
+        Dim mySql As String, dsName As String = "dsRenewPT"
+        'mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        mySql = "SELECT * FROM PAWN_LIST ORDER BY PAWNID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout03.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim addParameters As New Dictionary(Of String, String)
+        'If isOldItem Then
+        '    addParameters.Add("txtDescription", PT_Entry.Description)
+        'Else
+        '    addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+        'End If
+        addParameters.Add("txtDescription", PT_Entry.Description)
+        addParameters.Add("txtInterest", PT_Entry.AdvanceInterest)
+        addParameters.Add("txtServiceCharge", PT_Entry.ServiceCharge / 2)
+        addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        addParameters.Add("txtOLDPT", "PT# " & PT_Entry.OldTicket.ToString("000000"))
+        addParameters.Add("txtUsername", POSuser.FullName)
+
+        ' Add Monthly Computation
+        Dim strCompute As String
+        strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRenewCompute", strCompute)
+        strCompute = "Redeem: " & DisplayComputation(PT_Entry, "Redeem")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRedeemCompute", strCompute)
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Try
+            If DEV_MODE Then
+                frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+                frmReport.Show()
+            Else
+                autoPrintPT.Export(report)
+                autoPrintPT.m_currentPageIndex = 0
+                autoPrintPT.Print(printerName)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "PRINT FAILED")
+            Log_Report("PRINT FAILED: " & ex.ToString)
+        End Try
 
         Me.Focus()
     End Sub

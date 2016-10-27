@@ -22,10 +22,9 @@ Partial Class frmAdminPanel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
-        Me.cbotxtSchemename = New System.Windows.Forms.ComboBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
         Me.rdbYes = New System.Windows.Forms.RadioButton()
@@ -42,6 +41,7 @@ Partial Class frmAdminPanel
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cboSchemename = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -51,6 +51,8 @@ Partial Class frmAdminPanel
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.txtSearch = New Pawnshop.watermark()
         Me.dgSpecs = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,11 +77,6 @@ Partial Class frmAdminPanel
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
-        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
-        Me.lblDateStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.txtSearch = New Pawnshop.watermark()
-        Me.btnSearch = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -89,13 +86,11 @@ Partial Class frmAdminPanel
         Me.TabPage2.SuspendLayout()
         Me.lblModname.SuspendLayout()
         Me.grpSearch.SuspendLayout()
-        Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAddItem
         '
         Me.grpAddItem.BackColor = System.Drawing.Color.Gainsboro
-        Me.grpAddItem.Controls.Add(Me.cbotxtSchemename)
         Me.grpAddItem.Controls.Add(Me.lblPrintLayout)
         Me.grpAddItem.Controls.Add(Me.rdbNo)
         Me.grpAddItem.Controls.Add(Me.rdbYes)
@@ -111,15 +106,6 @@ Partial Class frmAdminPanel
         Me.grpAddItem.TabIndex = 0
         Me.grpAddItem.TabStop = False
         Me.grpAddItem.Text = "Item Information"
-        '
-        'cbotxtSchemename
-        '
-        Me.cbotxtSchemename.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbotxtSchemename.FormattingEnabled = True
-        Me.cbotxtSchemename.Location = New System.Drawing.Point(104, 303)
-        Me.cbotxtSchemename.Name = "cbotxtSchemename"
-        Me.cbotxtSchemename.Size = New System.Drawing.Size(250, 24)
-        Me.cbotxtSchemename.TabIndex = 6
         '
         'lblPrintLayout
         '
@@ -232,9 +218,9 @@ Partial Class frmAdminPanel
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(901, 394)
+        Me.btnSave.Location = New System.Drawing.Point(895, 394)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 33)
+        Me.btnSave.Size = New System.Drawing.Size(81, 33)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -245,7 +231,7 @@ Partial Class frmAdminPanel
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 33)
         Me.btnUpdate.TabIndex = 3
-        Me.btnUpdate.Text = "&Update"
+        Me.btnUpdate.Text = "&Edit"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'TabControl1
@@ -297,6 +283,15 @@ Partial Class frmAdminPanel
         Me.GroupBox3.TabIndex = 7
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Item Information"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(6, 54)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(63, 16)
+        Me.Label2.TabIndex = 13
+        Me.Label2.Text = "Category"
         '
         'Label6
         '
@@ -385,6 +380,24 @@ Partial Class frmAdminPanel
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
         '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(1048, 16)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 33)
+        Me.btnSearch.TabIndex = 8
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(9, 21)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(1023, 22)
+        Me.txtSearch.TabIndex = 0
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
         'dgSpecs
         '
         Me.dgSpecs.AllowUserToDeleteRows = False
@@ -407,8 +420,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn1.FillWeight = 71.31783!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -432,8 +445,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewComboBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewComboBoxColumn2.FillWeight = 72.58589!
         Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
@@ -614,57 +627,14 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
-        'StatusStrip
-        '
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblDateStatus})
-        Me.StatusStrip.Location = New System.Drawing.Point(0, 479)
-        Me.StatusStrip.Name = "StatusStrip"
-        Me.StatusStrip.Size = New System.Drawing.Size(1166, 22)
-        Me.StatusStrip.TabIndex = 13
-        Me.StatusStrip.Text = "StatusStrip1"
-        '
-        'lblDateStatus
-        '
-        Me.lblDateStatus.BackColor = System.Drawing.Color.Gray
-        Me.lblDateStatus.Name = "lblDateStatus"
-        Me.lblDateStatus.Size = New System.Drawing.Size(31, 17)
-        Me.lblDateStatus.Text = "Date"
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(9, 21)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(1023, 22)
-        Me.txtSearch.TabIndex = 0
-        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSearch.WatermarkText = "Search . . ."
-        '
-        'btnSearch
-        '
-        Me.btnSearch.Location = New System.Drawing.Point(1048, 16)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(75, 33)
-        Me.btnSearch.TabIndex = 8
-        Me.btnSearch.Text = "Search"
-        Me.btnSearch.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 54)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 16)
-        Me.Label2.TabIndex = 13
-        Me.Label2.Text = "Category"
-        '
         'frmAdminPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1166, 501)
-        Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.TabControl1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "frmAdminPanel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Admin Panel"
@@ -682,10 +652,7 @@ Partial Class frmAdminPanel
         Me.lblModname.PerformLayout()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
-        Me.StatusStrip.ResumeLayout(False)
-        Me.StatusStrip.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -740,12 +707,8 @@ Partial Class frmAdminPanel
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
 
-
-    Friend WithEvents cbotxtSchemename As System.Windows.Forms.ComboBox
     Friend WithEvents chkSelectAll As System.Windows.Forms.CheckBox
     Friend WithEvents lblCount As System.Windows.Forms.Label
-    Friend WithEvents StatusStrip As System.Windows.Forms.StatusStrip
-    Friend WithEvents lblDateStatus As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents txtPrintLayout As Pawnshop.watermark
     Friend WithEvents txtDescription As Pawnshop.watermark
     Friend WithEvents txtCategory As Pawnshop.watermark
