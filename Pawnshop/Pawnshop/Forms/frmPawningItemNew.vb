@@ -243,11 +243,11 @@ Public Class frmPawningItemNew
 
         Select Case transactionType
             Case "L"
-                SaveNewLoan()
+                SaveNewLoan() : PrintNewLoan()
             Case "R"
-                SaveRenew()
+                SaveRenew() : PrintRenew()
             Case "X"
-                SaveRedeem()
+                SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
         End Select
 
     End Sub
@@ -1137,6 +1137,82 @@ Public Class frmPawningItemNew
             autoPrintPT.m_currentPageIndex = 0
             autoPrintPT.Print(printerName)
         End If
+
+        Me.Focus()
+    End Sub
+
+    Private Sub PrintRenew()
+        Dim ans As DialogResult = _
+            MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        PrintRenewPT()
+        If Not PAUSE_OR Then do_RenewOR()
+    End Sub
+
+    Private Sub PrintRenewPT()
+        Dim autoPrintPT As Reporting
+
+        Dim printerName As String = PRINTER_PT
+        If Not canPrint(printerName) Then Exit Sub
+
+        Dim report As LocalReport = New LocalReport
+        autoPrintPT = New Reporting
+
+
+        Dim mySql As String, dsName As String = "dsRenewPT"
+        'mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & PawnItem.PawnID
+        mySql = "SELECT * FROM PRINT_PAWNING ORDER BY PAWNID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+
+        report.ReportPath = "Reports\layout03.rdlc"
+        report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
+
+        Dim addParameters As New Dictionary(Of String, String)
+        'If isOldItem Then
+        '    addParameters.Add("txtDescription", PT_Entry.Description)
+        'Else
+        '    addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
+        'End If
+        addParameters.Add("txtDescription", PT_Entry.Description)
+        addParameters.Add("txtInterest", PT_Entry.AdvanceInterest)
+        addParameters.Add("txtServiceCharge", PT_Entry.ServiceCharge / 2)
+        addParameters.Add("txtItemInterest", GetInt(30) * 100)
+        addParameters.Add("txtOLDPT", "PT# " & PT_Entry.OldTicket.ToString("000000"))
+        addParameters.Add("txtUsername", POSuser.FullName)
+
+        ' Add Monthly Computation
+        Dim strCompute As String
+        strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRenewCompute", strCompute)
+        strCompute = "Redeem: " & DisplayComputation(PT_Entry, "Redeem")
+        Console.WriteLine(strCompute)
+        addParameters.Add("txtRedeemCompute", strCompute)
+
+        If Not addParameters Is Nothing Then
+            For Each nPara In addParameters
+                Dim tmpPara As New ReportParameter
+                tmpPara.Name = nPara.Key
+                tmpPara.Values.Add(nPara.Value)
+                report.SetParameters(New ReportParameter() {tmpPara})
+                Console.WriteLine(String.Format("{0}: {1}", nPara.Key, nPara.Value))
+            Next
+        End If
+
+        Try
+            If DEV_MODE Then
+                frmReport.ReportInit(mySql, dsName, report.ReportPath, addParameters, False)
+                frmReport.Show()
+            Else
+                autoPrintPT.Export(report)
+                autoPrintPT.m_currentPageIndex = 0
+                autoPrintPT.Print(printerName)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "PRINT FAILED")
+            Log_Report("PRINT FAILED: " & ex.ToString)
+        End Try
 
         Me.Focus()
     End Sub
