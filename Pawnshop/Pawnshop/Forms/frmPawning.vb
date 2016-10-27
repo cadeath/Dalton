@@ -147,7 +147,7 @@
 
             If i >= 100 Then isMoreThan100 = True
         End While
-
+        
         dbReaderClose()
     End Sub
 
@@ -257,6 +257,14 @@
             i += 1
 
             If i >= 100 Then isMoreThan100 = True
+
+            Select Case PawnReader("Status")
+                Case "0" : lv.BackColor = Color.LightGray
+                Case "X" : lv.BackColor = Color.Red
+                Case "S" : lv.BackColor = Color.Yellow
+                Case "W" : lv.BackColor = Color.Red
+                Case "V" : lv.BackColor = Color.Gray
+            End Select
         End While
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         If MaxRow <= 0 Then
