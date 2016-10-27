@@ -808,8 +808,21 @@ Public Class frmPawningItemNew
             btnRedeem.Enabled = True : btnPrint.Enabled = True
             btnVoid.Enabled = True
         End If
+        Select Case pt.Status
+            Case "0", "S", "W", "V"
+                LockFields(1)
+            Case "X"
+                LockFields(1)
+                Authorization()
+        End Select
     End Sub
 
+    Private Sub Authorization()
+        'Authorization
+        With POSuser
+            btnVoid.Enabled = .canVoid
+        End With
+    End Sub
 
     Private Function CheckAuth() As Boolean
         If transactionType <> "L" And cboAppraiser.Text = "" Then mod_system.isAuthorized = True
