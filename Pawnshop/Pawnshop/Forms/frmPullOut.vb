@@ -137,8 +137,8 @@
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         For Each itm As ListViewItem In lvPullOut.Items
-            Dim pt As New PawnTicket
-            pt.LoadTicket(itm.Tag)
+            Dim pt As New PawnTicket2
+            pt.Load_PawnTicket(itm.Tag)
             pt.PullOut(CurrentDate)
         Next
 

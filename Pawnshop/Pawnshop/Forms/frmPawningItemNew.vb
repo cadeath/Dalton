@@ -235,7 +235,6 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If Not isValid() Then Exit Sub
         If unableToSave Then Exit Sub
         If MsgBox("Do you want to save this transaction?", _
                   MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
