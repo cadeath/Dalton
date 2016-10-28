@@ -403,7 +403,7 @@
         Load_PT_row(ds.Tables(0).Rows(0))
     End Sub
 
-    Private Sub Load_PT_row(ByVal dr As DataRow)
+    Public Sub Load_PT_row(ByVal dr As DataRow)
         'On Error Resume Next
 
         With dr

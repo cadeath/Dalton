@@ -166,8 +166,6 @@
         End If
         Console.WriteLine(mySql)
 
-        Dim ds As DataSet = LoadSQL(mySql)
-        Console.WriteLine("The Description is : " & ds.Tables(0).Rows(0).Item("Description"))
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtMonthOf", "DATE: " & monCalendar.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
         addParameters.Add("branchName", branchName)
