@@ -147,11 +147,11 @@ Public Class frmPawningItemNew
         ItemClasses_ht = New Hashtable
         lvSpec.Items.Clear()
         For Each spec As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
+            If Not spec.isRequired Then Exit For
             Dim lv As ListViewItem = lvSpec.Items.Add(spec.SpecName)
             lv.SubItems.Add("")
             ItemClasses_ht.Add(spec.SpecID, spec.SpecName)
         Next
-
 
         txtClassification.Text = Item.ClassName
 
