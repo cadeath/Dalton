@@ -1079,6 +1079,9 @@ Public Class frmPawningItemNew
         If PT_Entry.PawnID = 0 Then mySql = "SELECT * FROM PAWN_LIST ORDER BY PAWNID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
+        Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
+        PT_Entry.Load_PTid(pt)
+
         report.ReportPath = "Reports\layout01.rdlc"
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
@@ -1101,8 +1104,7 @@ Public Class frmPawningItemNew
 
         ' Add Monthly Computation
         Dim strCompute As String
-        Dim pt As Integer = ds.Tables(0).Rows(0).Item("PAWNID")
-        PT_Entry.Load_PTid(pt)
+      
         strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
         Console.WriteLine(strCompute)
         addParameters.Add("txtRenewCompute", strCompute)
@@ -1360,7 +1362,7 @@ Public Class frmPawningItemNew
         autoPrintPT = New Reporting
 
         Dim mySql As String, ptIDx As Single = PT_Entry.PawnID
-        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
+        mySql = "SELECT * FROM PAWN_LIST WHERE PAWNID = " & ptIDx
         Dim dsName As String = "dsPawn"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
         Dim paymentStr As String, descStr As String
@@ -1374,7 +1376,6 @@ Public Class frmPawningItemNew
 
         descStr = _
             String.Format("REDEMPTION OF PT# {0:000000}", PT_Entry.PawnTicket)
-
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PT_Entry.PawnTicket, PT_Entry.RedeemDue)
         addParameters.Add("txtPayment", paymentStr)
