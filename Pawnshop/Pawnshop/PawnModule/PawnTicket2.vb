@@ -403,7 +403,7 @@
         Load_PT_row(ds.Tables(0).Rows(0))
     End Sub
 
-    Private Sub Load_PT_row(ByVal dr As DataRow)
+    Public Sub Load_PT_row(ByVal dr As DataRow)
         'On Error Resume Next
 
         With dr
@@ -578,6 +578,20 @@
         End If
         Return ds.Tables(0).Rows(0).Item("PAWNID")
     End Function
+
+    Public Sub PullOut(ByVal dt As Date)
+        'hangeStatus("W")
+
+        mysql = "SELECT P.*,I.WITHDRAWDATE, I.STATUS AS ItemStatus FROM OPT P"
+        mysql &= "INNER JOIN OPI I ON P.PAWNITEMID = I.PAWNITEMID & _"
+        mysql &= " WHERE PawnID = " & _PawnID
+        Dim ds As DataSet = LoadSQL(mysql)
+        With ds.Tables(MainTable).Rows(0)
+            .Item("WithDrawDate") = dt
+            .Item("Status") = "W"
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
 #End Region
 
 End Class

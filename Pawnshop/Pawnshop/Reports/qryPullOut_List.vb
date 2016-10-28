@@ -166,12 +166,11 @@
         End If
         Console.WriteLine(mySql)
 
-
         Dim addParameters As New Dictionary(Of String, String)
         addParameters.Add("txtMonthOf", "DATE: " & monCalendar.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
         addParameters.Add("branchName", branchName)
         addParameters.Add("ReportName", "OUTSTANDING REPORTS")
-
+    
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
         frmReport.Show()
     End Sub
