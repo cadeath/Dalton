@@ -471,7 +471,7 @@
 
             End If
         Next
-
+        Description = PrintLayout
 
         Return Description
     End Function
