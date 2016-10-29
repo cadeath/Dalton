@@ -464,10 +464,16 @@
             If PrintLayout.Contains(":ENC]") Then
                 Dim encPOS As Integer = PrintLayout.IndexOf(":ENC]")
                 Dim getOpenBracket As Integer = InStrRev(PrintLayout, "[", encPOS)
+                Dim inStr As String = PrintLayout.Substring(getOpenBracket, encPOS - getOpenBracket)
 
+                Console.WriteLine("PrintLayout: " & PrintLayout)
                 Console.WriteLine("ENC: " & encPOS)
                 Console.WriteLine("BRA: " & getOpenBracket)
-                Console.WriteLine("INS" & PrintLayout.Substring(getOpenBracket, encPOS))
+                Console.WriteLine("INS: " & inStr)
+
+                If IsNumeric(sc.SpecsValue) Then
+
+                End If
 
             End If
         Next
