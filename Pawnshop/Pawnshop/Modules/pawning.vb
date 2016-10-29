@@ -30,8 +30,8 @@
         Return ds.Tables(0).Rows(0).Item("CATEGORY")
     End Function
 
-    Private Function CompanyEncrypt(ByVal amount As Integer) As String
-        Dim intStr As String = amount, newStr As String = ""
+    Private Function CompanyEncrypt(ByVal karat As Integer) As String
+        Dim intStr As String = karat, newStr As String = ""
 
         For cnt As Integer = 0 To intStr.Length - 1
             Dim subStr As String = intStr.Substring(cnt, 1)
