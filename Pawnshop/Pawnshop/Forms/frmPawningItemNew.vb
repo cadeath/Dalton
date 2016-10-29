@@ -147,7 +147,6 @@ Public Class frmPawningItemNew
         ItemClasses_ht = New Hashtable
         lvSpec.Items.Clear()
         For Each spec As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
-            If Not spec.isRequired Then Exit For
             Dim lv As ListViewItem = lvSpec.Items.Add(spec.SpecName)
             lv.SubItems.Add("")
             ItemClasses_ht.Add(spec.SpecID, spec.SpecName)
@@ -226,7 +225,7 @@ Public Class frmPawningItemNew
         If txtAppr.Text = "" Then txtAppr.Focus() : Return False
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
-        If Not mod_system.isAuthorized Then cboAppraiser.DroppedDown = True : Return False
+        If Not mod_system.isAuthorized Then CheckAuth() : Return False
 
         If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
         If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
@@ -236,6 +235,10 @@ Public Class frmPawningItemNew
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If unableToSave Then Exit Sub
+        If Not isValid() And transactionType = "L" Then
+            MsgBox("I think you are missing something", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
         If MsgBox("Do you want to save this transaction?", _
                   MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
                   "Saving...") = MsgBoxResult.No Then Exit Sub
@@ -1091,7 +1094,11 @@ Public Class frmPawningItemNew
         'Else
         '    addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         'End If
-        addParameters.Add("txtDescription", PT_Entry.Description)
+        If PT_Entry.Description Is Nothing Then
+            addParameters.Add("txtDescription", "N/A")
+        Else
+            addParameters.Add("txtDescription", PT_Entry.Description)
+        End If
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
 
@@ -1167,7 +1174,11 @@ Public Class frmPawningItemNew
         'Else
         '    addParameters.Add("txtDescription", pawning.DisplayDescription(PawnItem))
         'End If
-        addParameters.Add("txtDescription", PT_Entry.Description)
+        If PT_Entry.Description Is Nothing Then
+            addParameters.Add("txtDescription", "N/A")
+        Else
+            addParameters.Add("txtDescription", PT_Entry.Description)
+        End If
         addParameters.Add("txtInterest", PT_Entry.AdvanceInterest)
         addParameters.Add("txtServiceCharge", PT_Entry.ServiceCharge / 2)
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
