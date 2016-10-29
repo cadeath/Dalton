@@ -1419,4 +1419,10 @@ Public Class frmPawningItemNew
             Log_Report("PRINT FAILED: " & ex.ToString)
         End Try
     End Sub
+
+    Private Sub GroupBox6_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox6.DoubleClick
+        If DEV_MODE Then
+            Console.WriteLine(PT_Entry.DescriptionBuilder())
+        End If
+    End Sub
 End Class
