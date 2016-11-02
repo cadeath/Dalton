@@ -72,12 +72,12 @@
           <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemType">
-          <DataField>ItemType</DataField>
+        <Field Name="ItemClass">
+          <DataField>ItemClass</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Category">
-          <DataField>Category</DataField>
+        <Field Name="ItemCategory">
+          <DataField>ItemCategory</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Grams">
@@ -104,8 +104,8 @@
           <DataField>WithDrawDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Interest">
-          <DataField>Interest</DataField>
+        <Field Name="DelayInterest">
+          <DataField>DelayInterest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Appraiser">
@@ -118,6 +118,10 @@
         </Field>
         <Field Name="NewPT">
           <DataField>NewPT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PawnID">
+          <DataField>PawnID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -446,14 +450,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox18">
+                    <Textbox Name="ItemCategory">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ItemType.Value</Value>
+                              <Value>=Fields!ItemCategory.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -465,7 +469,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox18</rd:DefaultName>
+                      <rd:DefaultName>ItemCategory</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -789,7 +793,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIF(Fields!ItemType.Value = "JWL","1 " &amp; Fields!Category.Value &amp; " " &amp; Fields!Grams.Value  &amp; "G APPROX " &amp; Fields!Karat.Value,Fields!Description.Value)</Value>
+                              <Value>=Fields!Description.Value</Value>
                               <Style>
                                 <FontSize>9pt</FontSize>
                               </Style>
@@ -1137,12 +1141,12 @@
                 <TablixMember>
                   <Group Name="Group1">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!ItemType.Value</GroupExpression>
+                      <GroupExpression>=Fields!ItemCategory.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!ItemType.Value</Value>
+                      <Value>=Fields!ItemCategory.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>

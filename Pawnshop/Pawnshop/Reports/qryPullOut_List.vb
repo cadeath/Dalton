@@ -37,6 +37,15 @@
             cboClass.Items.Add(dr.Item("ITEMCATEGORY"))
         Next
         cboClass.SelectedIndex = 0
+
+        Select Case FormType
+            Case DailyReport.Outstanding
+                Me.Text = "Oustanding"
+            Case DailyReport.Pullout
+                Me.Text = "Item PullOut"
+            Case DailyReport.AuditReport
+                Me.Text = "Audit Report"
+        End Select
     End Sub
 
     Private Sub Item_PullOut()
@@ -47,7 +56,7 @@
         If Not POSuser.canItemPulloutReport Then
             mySql = "SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
-            mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, PULLOUT, APPRAISER FROM PAWN_LIST WHERE STATUS = 'W' AND "
+            mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER FROM PAWN_LIST WHERE STATUS = 'W' AND "
             mySql &= String.Format("WITHDRAWDATE = '{0}'", monCalendar.SelectionStart.ToShortDateString)
         Else
             mySql = "SELECT * FROM PAWN_LIST WHERE STATUS = 'W' AND "
