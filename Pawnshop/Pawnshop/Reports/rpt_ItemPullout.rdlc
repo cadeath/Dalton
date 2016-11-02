@@ -24,6 +24,10 @@
           <DataField>MatuDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="AuctionDate">
+          <DataField>AuctionDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="ExpiryDate">
           <DataField>ExpiryDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -44,6 +48,10 @@
           <DataField>ORDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="OldTicket">
+          <DataField>OldTicket</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="NetAmount">
           <DataField>NetAmount</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -56,12 +64,20 @@
           <DataField>RedeemDue</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemType">
-          <DataField>ItemType</DataField>
+        <Field Name="AdvInt">
+          <DataField>AdvInt</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Category">
-          <DataField>Category</DataField>
+        <Field Name="Penalty">
+          <DataField>Penalty</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ItemClass">
+          <DataField>ItemClass</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ItemCategory">
+          <DataField>ItemCategory</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Grams">
@@ -84,12 +100,28 @@
           <DataField>Principal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PullOut">
-          <DataField>PullOut</DataField>
+        <Field Name="WithDrawDate">
+          <DataField>WithDrawDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DelayInterest">
+          <DataField>DelayInterest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Appraiser">
           <DataField>Appraiser</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ServiceCharge">
+          <DataField>ServiceCharge</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NewPT">
+          <DataField>NewPT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PawnID">
+          <DataField>PawnID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -98,12 +130,10 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <rd:DataSetInfo>
-        <rd:DataSetName>dsReports</rd:DataSetName>
-        <rd:SchemaPath>D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Reports\dsReports.xsd</rd:SchemaPath>
-        <rd:TableName>Pawning</rd:TableName>
-        <rd:TableAdapterFillMethod />
-        <rd:TableAdapterGetDataMethod />
-        <rd:TableAdapterName />
+        <rd:DataSetName>Pawnshop</rd:DataSetName>
+        <rd:TableName>dsReports</rd:TableName>
+        <rd:ObjectDataSourceSelectMethod>Pawning</rd:ObjectDataSourceSelectMethod>
+        <rd:ObjectDataSourceType>Pawnshop.dsReports, Reports.dsReports.Designer.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -1005,6 +1035,7 @@
                         <rd:FormatSymbolCulture>en-PH</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1303,25 +1334,25 @@
             <TablixMember>
               <Group Name="Group1">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!PullOut.Value</GroupExpression>
+                  <GroupExpression>=Fields!WithDrawDate.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!PullOut.Value</Value>
+                  <Value>=Fields!WithDrawDate.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
                 <Size>0.86458in</Size>
                 <CellContents>
-                  <Textbox Name="Group1">
+                  <Textbox Name="WithDrawDate">
                     <CanGrow>true</CanGrow>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!PullOut.Value</Value>
+                            <Value>=Fields!WithDrawDate.Value</Value>
                             <Style>
                               <FontSize>8pt</FontSize>
                               <Format>dd MMM yyyy</Format>
@@ -1331,7 +1362,7 @@
                         <Style />
                       </Paragraph>
                     </Paragraphs>
-                    <rd:DefaultName>Group1</rd:DefaultName>
+                    <rd:DefaultName>WithDrawDate</rd:DefaultName>
                     <Style>
                       <Border>
                         <Style>None</Style>

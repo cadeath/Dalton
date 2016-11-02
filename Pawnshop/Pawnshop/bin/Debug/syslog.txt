@@ -391,3 +391,8 @@ Token unknown - line 1, column 110
    at System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, String srcTable)
    at Pawnshop.database.LoadSQL(String mySql, String tblName) in C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\Modules\database.vb:line 157
 [11/02/2016 09:21:52] HIT FOUND
+[11/02/2016 10:43:21] HIT FOUND
+[11/02/2016 11:01:25] HIT FOUND
+[11/02/2016 11:10:21] HIT FOUND
+[11/02/2016 11:17:35] HIT FOUND
+[11/02/2016 11:18:37] HIT FOUND
