@@ -130,6 +130,12 @@
     <Compile Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Migrate\frmMigrate.Designer.vb">
+      <DependentUpon>frmMigrate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrate\frmMigrate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\Fixing_Mlang.vb" />
     <Compile Include="Modules\fix_mechanism.vb" />
     <Compile Include="frmMain.vb">
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CashInBank\frmMain2.resx">
       <DependentUpon>frmMain2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrate\frmMigrate.resx">
+      <DependentUpon>frmMigrate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
