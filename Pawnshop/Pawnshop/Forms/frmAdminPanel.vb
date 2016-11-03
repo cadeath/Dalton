@@ -202,7 +202,7 @@ Public Class frmAdminPanel
         Next
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
         End If
@@ -221,16 +221,21 @@ Public Class frmAdminPanel
                     ExportModType = ModuleType.Cash
                 Case "Item"
                     ExportModType = ModuleType.ITEM
-                Case "Rate"
-                    ExportModType = ModuleType.Rate
+                Case "Item Specs"
+                    ExportModType = ModuleType.ItemSpecs
+                Case "Interest"
+                    ExportModType = ModuleType.Interest
+                Case "Interest Details"
+                    ExportModType = ModuleType.InterestDetail
                 Case "Currency"
                     ExportModType = ModuleType.Currency
+
             End Select
         End If
         GenerateModule()
-        lvModule.View = View.Details
-        lvModule.CheckBoxes = True
-        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
+        'lvModule.View = View.Details
+        'lvModule.CheckBoxes = True
+        'lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
 
     End Sub
 
@@ -239,8 +244,10 @@ Public Class frmAdminPanel
         Branch = 1
         Cash = 2
         ITEM = 3
-        Rate = 4
+        Interest = 4
         Currency = 5
+        ItemSpecs = 6
+        InterestDetail = 7
     End Enum
 
     Friend ExportModType As ModuleType = ModuleType.MoneyTransfer
@@ -255,8 +262,12 @@ Public Class frmAdminPanel
                 Modcash()
             Case ModuleType.ITEM
                 ModITEM()
-            Case ModuleType.Rate
+            Case ModuleType.ItemSpecs
+                modItemSpecs()
+            Case ModuleType.Interest
                 ModRate()
+            Case ModuleType.InterestDetail
+                ModIntDetail()
             Case ModuleType.Currency
                 ModCurrency()
         End Select
@@ -265,219 +276,269 @@ Public Class frmAdminPanel
 #Region "Procedures"
 
     Private Sub ModBranches()
+        'fillData = "tblBranches"
+        'mySql = "SELECT * FROM " & fillData
+        'mySql &= " ORDER BY BranchID ASC"
+
+        'ds = LoadSQL(mySql, fillData)
+
+        'lvModule.Columns.Clear()
+        'lvModule.Items.Clear()
+
+        'Me.lvModule.Columns.Add("BRANCHID")
+        'Me.lvModule.Columns.Add("Column2", "BRANCHNAME")
+        'Me.lvModule.Columns.Add("Column3", "SAPCODE")
+        'Me.lvModule.Columns.Add("Column4", "SAPCODE2")
+
+        'For i = 0 To ds.Tables(0).Rows.Count - 1
+        '    Dim str1 As String = ds.Tables(0).Rows(i)("BRANCHID").ToString
+        '    Dim str2 As String = ds.Tables(0).Rows(i)("BRANCHNAME").ToString
+        '    Dim str3 As String = ds.Tables(0).Rows(i)("SAPCODE").ToString
+        '    Dim str4 As String = ds.Tables(0).Rows(i)("SAPCODE2").ToString
+
+
+        '    Dim lvi As New ListViewItem
+        '    lvi.Text = str1
+        '    lvi.SubItems.AddRange(New String() {str2, str3, str4})
+        '    lvModule.Items.Add(lvi)
+        'Next
         fillData = "tblBranches"
         mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY BranchID ASC"
 
         ds = LoadSQL(mySql, fillData)
-
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
-
-        Me.lvModule.Columns.Add("BRANCHID")
-        Me.lvModule.Columns.Add("Column2", "BRANCHNAME")
-        Me.lvModule.Columns.Add("Column3", "SAPCODE")
-        Me.lvModule.Columns.Add("Column4", "SAPCODE2")
-
-        For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str1 As String = ds.Tables(0).Rows(i)("BRANCHID").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("BRANCHNAME").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("SAPCODE").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("SAPCODE2").ToString
-
-
-            Dim lvi As New ListViewItem
-            lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str2, str3, str4})
-            lvModule.Items.Add(lvi)
-        Next
-
+        dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
     Private Sub Modcash()
 
+        'fillData = "tblCash"
+        'mySql = "SELECT * FROM " & fillData
+        'mySql &= " WHERE CashID <> 0"
+        'mySql &= " ORDER BY CashID ASC"
+
+        'ds = LoadSQL(mySql, fillData)
+
+        'lvModule.Columns.Clear()
+        'lvModule.Items.Clear()
+
+        'Me.lvModule.Columns.Add("CASHID")
+        'Me.lvModule.Columns.Add("Column2", "TYPE")
+        'Me.lvModule.Columns.Add("Column3", "CATEGORY")
+        'Me.lvModule.Columns.Add("Column4", "TRANSNAME")
+        'Me.lvModule.Columns.Add("Column5", "SAPACCOUNT")
+        'Me.lvModule.Columns.Add("Column6", "REMARKS")
+        'Me.lvModule.Columns.Add("Column7", "ONHOLD")
+
+        'For i = 0 To ds.Tables(0).Rows.Count - 1
+        '    Dim str1 As String = ds.Tables(0).Rows(i)("CASHID").ToString
+        '    Dim str2 As String = ds.Tables(0).Rows(i)("TYPE").ToString
+        '    Dim str3 As String = ds.Tables(0).Rows(i)("CATEGORY").ToString
+        '    Dim str4 As String = ds.Tables(0).Rows(i)("TRANSNAME").ToString
+        '    Dim str5 As String = ds.Tables(0).Rows(i)("SAPACCOUNT").ToString
+        '    Dim str6 As String = ds.Tables(0).Rows(i)("REMARKS").ToString
+        '    Dim str7 As String = ds.Tables(0).Rows(i)("ONHOLD").ToString
+
+        '    Dim lvi As New ListViewItem
+        '    lvi.Text = str1
+        '    lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7})
+        '    lvModule.Items.Add(lvi)
         fillData = "tblCash"
         mySql = "SELECT * FROM " & fillData
         mySql &= " WHERE CashID <> 0"
         mySql &= " ORDER BY CashID ASC"
 
         ds = LoadSQL(mySql, fillData)
-
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
-
-        Me.lvModule.Columns.Add("CASHID")
-        Me.lvModule.Columns.Add("Column2", "TYPE")
-        Me.lvModule.Columns.Add("Column3", "CATEGORY")
-        Me.lvModule.Columns.Add("Column4", "TRANSNAME")
-        Me.lvModule.Columns.Add("Column5", "SAPACCOUNT")
-        Me.lvModule.Columns.Add("Column6", "REMARKS")
-        Me.lvModule.Columns.Add("Column7", "ONHOLD")
-
-        For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str1 As String = ds.Tables(0).Rows(i)("CASHID").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("TYPE").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("CATEGORY").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("TRANSNAME").ToString
-            Dim str5 As String = ds.Tables(0).Rows(i)("SAPACCOUNT").ToString
-            Dim str6 As String = ds.Tables(0).Rows(i)("REMARKS").ToString
-            Dim str7 As String = ds.Tables(0).Rows(i)("ONHOLD").ToString
-
-            Dim lvi As New ListViewItem
-            lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5, str6, str7})
-            lvModule.Items.Add(lvi)
-
-        Next
+        dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
     Private Sub ModCharge()
+        'fillData = "tblCharge"
+        'mySql = "SELECT ID,TYPE,AMOUNT,CHARGE FROM " & fillData
+        'mySql &= " ORDER BY ID ASC"
+
+        'ds = LoadSQL(mySql, fillData)
+
+        'lvModule.Columns.Clear()
+        'lvModule.Items.Clear()
+
+        'Me.lvModule.Columns.Add("ID")
+        'Me.lvModule.Columns.Add("Column2", "TYPE")
+        'Me.lvModule.Columns.Add("Column3", "AMOUNT")
+        'Me.lvModule.Columns.Add("Column4", "CHARGE")
+
+        'For i = 0 To ds.Tables(0).Rows.Count - 1
+        '    Dim str1 As String = ds.Tables(0).Rows(i)("ID").ToString
+        '    Dim str2 As String = ds.Tables(0).Rows(i)("TYPE").ToString
+        '    Dim str3 As String = ds.Tables(0).Rows(i)("AMOUNT").ToString
+        '    Dim str4 As String = ds.Tables(0).Rows(i)("CHARGE").ToString
+
+        '    Dim lvi As New ListViewItem
+        '    lvi.Text = str1
+        '    lvi.SubItems.AddRange(New String() {str2, str3, str4})
+        '    lvModule.Items.Add(lvi)
+        'Next
         fillData = "tblCharge"
-        mySql = "SELECT ID,TYPE,AMOUNT,CHARGE FROM " & fillData
+        mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY ID ASC"
 
         ds = LoadSQL(mySql, fillData)
-
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
-
-        Me.lvModule.Columns.Add("ID")
-        Me.lvModule.Columns.Add("Column2", "TYPE")
-        Me.lvModule.Columns.Add("Column3", "AMOUNT")
-        Me.lvModule.Columns.Add("Column4", "CHARGE")
-
-        For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str1 As String = ds.Tables(0).Rows(i)("ID").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("TYPE").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("AMOUNT").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("CHARGE").ToString
-
-            Dim lvi As New ListViewItem
-            lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str2, str3, str4})
-            lvModule.Items.Add(lvi)
-        Next
-
+        dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
     Private Sub ModRate()
 
-        mySql = "SELECT  D.IS_ID, I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
-        mySql &= "D.INTEREST, D.PENALTY, D.REMARKS "
-        mySql &= "FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
+        'mySql = "SELECT  D.IS_ID, I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
+        'mySql &= "D.INTEREST, D.PENALTY, D.REMARKS "
+        'mySql &= "FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
 
-        ds = LoadSQL(mySql)
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
+        'ds = LoadSQL(mySql)
+        'lvModule.Columns.Clear()
+        'lvModule.Items.Clear()
 
-        Me.lvModule.Columns.Add("ID")
-        Me.lvModule.Columns.Add("Column2", "Remarks")
-        Me.lvModule.Columns.Add("Column3", "SchemeName")
-        Me.lvModule.Columns.Add("Column4", "Description")
-        Me.lvModule.Columns.Add("Column5", "DayFrom")
-        Me.lvModule.Columns.Add("Column6", "DayTo")
-        Me.lvModule.Columns.Add("Column7", "Interest")
-        Me.lvModule.Columns.Add("Column8", "Penalty")
+        'Me.lvModule.Columns.Add("ID")
+        'Me.lvModule.Columns.Add("Column2", "Remarks")
+        'Me.lvModule.Columns.Add("Column3", "SchemeName")
+        'Me.lvModule.Columns.Add("Column4", "Description")
+        'Me.lvModule.Columns.Add("Column5", "DayFrom")
+        'Me.lvModule.Columns.Add("Column6", "DayTo")
+        'Me.lvModule.Columns.Add("Column7", "Interest")
+        'Me.lvModule.Columns.Add("Column8", "Penalty")
 
-        For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str1 As String = ds.Tables(0).Rows(i)("Is_ID").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("SchemeName").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("Description").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("DayFrom").ToString
-            Dim str5 As String = ds.Tables(0).Rows(i)("DayTo").ToString
-            Dim str6 As String = ds.Tables(0).Rows(i)("Interest").ToString
-            Dim str7 As String = ds.Tables(0).Rows(i)("Penalty").ToString
-            Dim str8 As String = ds.Tables(0).Rows(i)("Remarks").ToString
+        'For i = 0 To ds.Tables(0).Rows.Count - 1
+        '    Dim str1 As String = ds.Tables(0).Rows(i)("Is_ID").ToString
+        '    Dim str2 As String = ds.Tables(0).Rows(i)("SchemeName").ToString
+        '    Dim str3 As String = ds.Tables(0).Rows(i)("Description").ToString
+        '    Dim str4 As String = ds.Tables(0).Rows(i)("DayFrom").ToString
+        '    Dim str5 As String = ds.Tables(0).Rows(i)("DayTo").ToString
+        '    Dim str6 As String = ds.Tables(0).Rows(i)("Interest").ToString
+        '    Dim str7 As String = ds.Tables(0).Rows(i)("Penalty").ToString
+        '    Dim str8 As String = ds.Tables(0).Rows(i)("Remarks").ToString
 
-            Dim lvi As New ListViewItem
-            lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str8, str2, str3, str4, str5, str6, str7})
-            lvModule.Items.Add(lvi)
-        Next
+        '    Dim lvi As New ListViewItem
+        '    lvi.Text = str1
+        '    lvi.SubItems.AddRange(New String() {str8, str2, str3, str4, str5, str6, str7})
+        '    lvModule.Items.Add(lvi)
+        'Next
+        fillData = "TBLINTSCHEMES"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " ORDER BY SCHEMEID ASC"
+
+        ds = LoadSQL(mySql, fillData)
+        dgvPawnshop.DataSource = ds.Tables(fillData)
+    End Sub
+
+    Private Sub ModIntDetail()
+        fillData = "TBLINTSCHEME_DETAILS"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " ORDER BY IS_ID ASC"
+
+        ds = LoadSQL(mySql, fillData)
+        dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
     Private Sub ModCurrency()
+        'fillData = "tblCurrency"
+        'mySql = "SELECT CURRENCYID,CURRENCY,SYMBOL,RATE,CASHID FROM " & fillData
+        'mySql &= " ORDER BY CurrencyID ASC"
+
+        'ds = LoadSQL(mySql, fillData)
+        'lvModule.Columns.Clear()
+        'lvModule.Items.Clear()
+
+        'Me.lvModule.Columns.Add("CURRENCYID")
+        'Me.lvModule.Columns.Add("Column2", "CURRENCY")
+        'Me.lvModule.Columns.Add("Column3", "SYMBOL")
+        'Me.lvModule.Columns.Add("Column4", "RATE")
+        'Me.lvModule.Columns.Add("Column4", "CASHID")
+
+        'For i = 0 To ds.Tables(0).Rows.Count - 1
+
+        '    Dim str1 As String = ds.Tables(0).Rows(i)("CURRENCYID").ToString
+        '    Dim str2 As String = ds.Tables(0).Rows(i)("CURRENCY").ToString
+        '    Dim str3 As String = ds.Tables(0).Rows(i)("SYMBOL").ToString
+        '    Dim str4 As String = ds.Tables(0).Rows(i)("RATE").ToString
+        '    Dim str5 As String = ds.Tables(0).Rows(i)("CASHID").ToString
+
+        '    Dim lvi As New ListViewItem
+        '    lvi.Text = str1
+        '    lvi.SubItems.AddRange(New String() {str2, str3, str4, str5})
+        '    lvModule.Items.Add(lvi)
+        'Next
         fillData = "tblCurrency"
-        mySql = "SELECT CURRENCYID,CURRENCY,SYMBOL,RATE,CASHID FROM " & fillData
+        mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY CurrencyID ASC"
 
         ds = LoadSQL(mySql, fillData)
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
-
-        Me.lvModule.Columns.Add("CURRENCYID")
-        Me.lvModule.Columns.Add("Column2", "CURRENCY")
-        Me.lvModule.Columns.Add("Column3", "SYMBOL")
-        Me.lvModule.Columns.Add("Column4", "RATE")
-        Me.lvModule.Columns.Add("Column4", "CASHID")
-
-        For i = 0 To ds.Tables(0).Rows.Count - 1
-
-            Dim str1 As String = ds.Tables(0).Rows(i)("CURRENCYID").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("CURRENCY").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("SYMBOL").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("RATE").ToString
-            Dim str5 As String = ds.Tables(0).Rows(i)("CASHID").ToString
-
-            Dim lvi As New ListViewItem
-            lvi.Text = str1
-            lvi.SubItems.AddRange(New String() {str2, str3, str4, str5})
-            lvModule.Items.Add(lvi)
-        Next
+        dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
     Private Sub ModITEM()
 
-        mySql = "SELECT S.SPECSID, I.ITEMCLASS, I.ITEMCATEGORY, I.DESCRIPTION, I.ISRENEW, "
-        mySql &= "I.ONHOLD, I.PRINT_LAYOUT, I.RENEWAL_CNT, I.SCHEME_ID, S.SPECSNAME, "
-        mySql &= "S.SPECTYPE, S.UOM, S.SPECLAYOUT, S.SHORTCODE, S.ISREQUIRED, I.ITEMID "
-        mySql &= "FROM TBLITEM I INNER JOIN TBLSPECS S ON S.ITEMID = I.ITEMID "
+        'mySql = "SELECT S.SPECSID, I.ITEMCLASS, I.ITEMCATEGORY, I.DESCRIPTION, I.ISRENEW, "
+        'mySql &= "I.ONHOLD, I.PRINT_LAYOUT, I.RENEWAL_CNT, I.SCHEME_ID, S.SPECSNAME, "
+        'mySql &= "S.SPECTYPE, S.UOM, S.SPECLAYOUT, S.SHORTCODE, S.ISREQUIRED, I.ITEMID "
+        'mySql &= "FROM TBLITEM I INNER JOIN TBLSPECS S ON S.ITEMID = I.ITEMID "
 
-        ds = LoadSQL(mySql)
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
+        'ds = LoadSQL(mySql)
+        'lvModule.Columns.Clear()
+        'lvModule.Items.Clear()
 
-        Me.lvModule.Columns.Add("Specsid")
-        Me.lvModule.Columns.Add("Column2", "Isrequired")
-        Me.lvModule.Columns.Add("Column3", "ITEMCLASS")
-        Me.lvModule.Columns.Add("Column4", "ItemID")
-        Me.lvModule.Columns.Add("Column5", "ITEMCATEGORY")
-        Me.lvModule.Columns.Add("Column6", "DESCRIPTION")
-        Me.lvModule.Columns.Add("Column7", "ISRENEW")
-        Me.lvModule.Columns.Add("Column8", "Onhold")
-        Me.lvModule.Columns.Add("Column9", "Print_layout")
-        Me.lvModule.Columns.Add("Column10", "Renewal_cnt")
-        Me.lvModule.Columns.Add("Column11", "Scheme_ID")
-        Me.lvModule.Columns.Add("Column12", "Specsname")
-        Me.lvModule.Columns.Add("Column13", "Spectype")
-        Me.lvModule.Columns.Add("Column14", "UOM")
-        Me.lvModule.Columns.Add("Column15", "Speclayout")
-        Me.lvModule.Columns.Add("Column16", "Shortcode")
+        'Me.lvModule.Columns.Add("Specsid")
+        'Me.lvModule.Columns.Add("Column2", "Isrequired")
+        'Me.lvModule.Columns.Add("Column3", "ITEMCLASS")
+        'Me.lvModule.Columns.Add("Column4", "ItemID")
+        'Me.lvModule.Columns.Add("Column5", "ITEMCATEGORY")
+        'Me.lvModule.Columns.Add("Column6", "DESCRIPTION")
+        'Me.lvModule.Columns.Add("Column7", "ISRENEW")
+        'Me.lvModule.Columns.Add("Column8", "Onhold")
+        'Me.lvModule.Columns.Add("Column9", "Print_layout")
+        'Me.lvModule.Columns.Add("Column10", "Renewal_cnt")
+        'Me.lvModule.Columns.Add("Column11", "Scheme_ID")
+        'Me.lvModule.Columns.Add("Column12", "Specsname")
+        'Me.lvModule.Columns.Add("Column13", "Spectype")
+        'Me.lvModule.Columns.Add("Column14", "UOM")
+        'Me.lvModule.Columns.Add("Column15", "Speclayout")
+        'Me.lvModule.Columns.Add("Column16", "Shortcode")
 
-        For i = 0 To ds.Tables(0).Rows.Count - 1
-            Dim str As String = ds.Tables(0).Rows(i)("Specsid").ToString
-            Dim str2 As String = ds.Tables(0).Rows(i)("ITEMCLASS").ToString
-            Dim str3 As String = ds.Tables(0).Rows(i)("ITEMCATEGORY").ToString
-            Dim str4 As String = ds.Tables(0).Rows(i)("DESCRIPTION").ToString
-            Dim str5 As String = ds.Tables(0).Rows(i)("ISRENEW").ToString
-            Dim str6 As String = ds.Tables(0).Rows(i)("Onhold").ToString
-            Dim str7 As String = ds.Tables(0).Rows(i)("Print_layout").ToString
-            Dim str8 As String = ds.Tables(0).Rows(i)("Renewal_cnt").ToString
-            Dim str9 As String = ds.Tables(0).Rows(i)("Scheme_ID").ToString
-            Dim str10 As String = ds.Tables(0).Rows(i)("Specsname").ToString
-            Dim str11 As String = ds.Tables(0).Rows(i)("Spectype").ToString
-            Dim str12 As String = ds.Tables(0).Rows(i)("UOM").ToString
-            Dim str13 As String = ds.Tables(0).Rows(i)("Speclayout").ToString
-            Dim str14 As String = ds.Tables(0).Rows(i)("Shortcode").ToString
-            Dim str15 As String = ds.Tables(0).Rows(i)("Isrequired").ToString
-            Dim str16 As String = ds.Tables(0).Rows(i)("ItemID").ToString
+        'For i = 0 To ds.Tables(0).Rows.Count - 1
+        '    Dim str As String = ds.Tables(0).Rows(i)("Specsid").ToString
+        '    Dim str2 As String = ds.Tables(0).Rows(i)("ITEMCLASS").ToString
+        '    Dim str3 As String = ds.Tables(0).Rows(i)("ITEMCATEGORY").ToString
+        '    Dim str4 As String = ds.Tables(0).Rows(i)("DESCRIPTION").ToString
+        '    Dim str5 As String = ds.Tables(0).Rows(i)("ISRENEW").ToString
+        '    Dim str6 As String = ds.Tables(0).Rows(i)("Onhold").ToString
+        '    Dim str7 As String = ds.Tables(0).Rows(i)("Print_layout").ToString
+        '    Dim str8 As String = ds.Tables(0).Rows(i)("Renewal_cnt").ToString
+        '    Dim str9 As String = ds.Tables(0).Rows(i)("Scheme_ID").ToString
+        '    Dim str10 As String = ds.Tables(0).Rows(i)("Specsname").ToString
+        '    Dim str11 As String = ds.Tables(0).Rows(i)("Spectype").ToString
+        '    Dim str12 As String = ds.Tables(0).Rows(i)("UOM").ToString
+        '    Dim str13 As String = ds.Tables(0).Rows(i)("Speclayout").ToString
+        '    Dim str14 As String = ds.Tables(0).Rows(i)("Shortcode").ToString
+        '    Dim str15 As String = ds.Tables(0).Rows(i)("Isrequired").ToString
+        '    Dim str16 As String = ds.Tables(0).Rows(i)("ItemID").ToString
 
-            Dim lvi As New ListViewItem
-            lvi.Text = str
-            lvi.SubItems.AddRange(New String() {str15, str2, str16, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12, str13, str14})
-            lvModule.Items.Add(lvi)
-        Next
+        '    Dim lvi As New ListViewItem
+        '    lvi.Text = str
+        '    lvi.SubItems.AddRange(New String() {str15, str2, str16, str3, str4, str5, str6, str7, str8, str9, str10, str11, str12, str13, str14})
+        '    lvModule.Items.Add(lvi)
+        'Next
+        fillData = "tblItem"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " ORDER BY ItemID ASC"
 
+        ds = LoadSQL(mySql, fillData)
+        dgvPawnshop.DataSource = ds.Tables(fillData)
+    End Sub
+
+    Private Sub modItemSpecs()
+        fillData = "tblSpecs"
+        mySql = "SELECT * FROM " & fillData
+        mySql &= " ORDER BY SpecsID ASC"
+
+        ds = LoadSQL(mySql, fillData)
+        dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
 #End Region
@@ -489,20 +550,22 @@ Public Class frmAdminPanel
         'ds = New DataSet
         'ds.Tables.Add(dt)
 
-        Dim fnn As String = SFD.FileName
-        ExportConfig(fnn, ds)
+        Dim fn As String = SFD.FileName
+        ExportConfig(fn, ds)
         MsgBox("Data Exported", MsgBoxStyle.Information)
     End Sub
 
     Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
-        Dim fn As String = oFd.FileName
+        'Dim fn As String = oFd.FileName
 
-        ShowDataInLvw(FileChecker(fn), lvModule)
-        MsgBox("Successfully Loaded", MsgBoxStyle.OkOnly, "Load")
-        chkSelectAll.Checked = False
-        dt.Clear()
-        ds.Tables.Clear()
-        chkSelectAll.Checked = False
+        'ShowDataInLvw(FileChecker(fn), lvModule)
+        'MsgBox("Successfully Loaded", MsgBoxStyle.OkOnly, "Load")
+        'chkSelectAll.Checked = False
+        'dt.Clear()
+        'ds.Tables.Clear()
+        'chkSelectAll.Checked = False
+        Dim fn As String = oFd.FileName
+        dgvPawnshop.DataSource = FileChecker(fn)
     End Sub
 
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
@@ -548,30 +611,30 @@ Public Class frmAdminPanel
         Next
     End Sub
 
-    Private Sub cmbModuleName_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
-        If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
+    'Private Sub cmbModuleName_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
+    '    If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
 
-        If cmbModuleName.Visible Then
-            Select Case cmbModuleName.Text
-                Case "Money Transfer"
-                    ExportModType = ModuleType.MoneyTransfer
-                Case "Branch"
-                    ExportModType = ModuleType.Branch
-                Case "Cash"
-                    ExportModType = ModuleType.Cash
-                Case "Item Class"
-                    ExportModType = ModuleType.ITEM
-                Case "Rate"
-                    ExportModType = ModuleType.Rate
-                Case "Currency"
-                    ExportModType = ModuleType.Currency
-            End Select
-        End If
-        GenerateModule()
-        lvModule.View = View.Details
-        lvModule.CheckBoxes = True
-        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
-    End Sub
+    '    If cmbModuleName.Visible Then
+    '        Select Case cmbModuleName.Text
+    '            Case "Money Transfer"
+    '                ExportModType = ModuleType.MoneyTransfer
+    '            Case "Branch"
+    '                ExportModType = ModuleType.Branch
+    '            Case "Cash"
+    '                ExportModType = ModuleType.Cash
+    '            Case "Item Class"
+    '                ExportModType = ModuleType.ITEM
+    '            Case "Rate"
+    '                ExportModType = ModuleType.Interest
+    '            Case "Currency"
+    '                ExportModType = ModuleType.Currency
+    '        End Select
+    '    End If
+    '    GenerateModule()
+    '    'lvModule.View = View.Details
+    '    'lvModule.CheckBoxes = True
+    '    'lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
+    'End Sub
 
     Private Sub txtSearch_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
@@ -611,9 +674,8 @@ Public Class frmAdminPanel
 
         'lvModule.Columns.Clear()
         'lvModule.Items.Clear()
-        If ds Is Nothing Then Exit Sub
+        If dgvPawnshop.DataSource Is Nothing Then Exit Sub
         SFD.ShowDialog()
-        MsgBox("Data Exported", MsgBoxStyle.Information)
     End Sub
 
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
@@ -653,9 +715,9 @@ Public Class frmAdminPanel
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         oFd.ShowDialog()
 
-        lvModule.View = View.Details
-        lvModule.CheckBoxes = True
-        lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
+        'lvModule.View = View.Details
+        'lvModule.CheckBoxes = True
+        'lvModule.Columns(1).DisplayIndex = lvModule.Columns.Count - 1
 
     End Sub
 
@@ -664,21 +726,21 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub chkSelectAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
-        If lvModule.Items.Count <= 0 Then Exit Sub
-        If chkSelectAll.Checked = True Then
-            For i = 0 To lvModule.Items.Count - 1
-                lvModule.Items(i).Checked = True
-            Next
-        Else
-            For i = 0 To lvModule.Items.Count - 1
-                lvModule.Items(i).Checked = False
-            Next
-        End If
-        lblCount.Text = "count: " & lvModule.CheckedItems.Count
+        'If lvModule.Items.Count <= 0 Then Exit Sub
+        'If chkSelectAll.Checked = True Then
+        '    For i = 0 To lvModule.Items.Count - 1
+        '        lvModule.Items(i).Checked = True
+        '    Next
+        'Else
+        '    For i = 0 To lvModule.Items.Count - 1
+        '        lvModule.Items(i).Checked = False
+        '    Next
+        'End If
+        'lblCount.Text = "count: " & lvModule.CheckedItems.Count
     End Sub
 
-    Private Sub lvModule_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles lvModule.ItemChecked
-        lblCount.Text = "Count: " & lvModule.CheckedItems.Count
+    Private Sub lvModule_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs)
+        'lblCount.Text = "Count: " & lvModule.CheckedItems.Count
     End Sub
 
 
@@ -796,7 +858,7 @@ Public Class frmAdminPanel
         LoadScheme()
     End Sub
 
-    Private Sub btnSaveEmport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveEmport.Click
+    Private Sub btnSaveEmport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If ds Is Nothing Then Exit Sub
         database.SaveEntry(ds)
         MsgBox("Entry Saved", MsgBoxStyle.Information)

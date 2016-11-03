@@ -60,6 +60,7 @@ Module updateRate
      
         Console.WriteLine("Updating table") : i = 0
         For Each dr As DataRow In dsRate.Tables(fillData).Rows
+
             mySql = "SELECT * FROM " & fillData
             mySql &= " WHERE " & ID & " = " & dr.Item(0)
 
