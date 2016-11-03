@@ -471,8 +471,8 @@
                 Console.WriteLine("BRA: " & getOpenBracket)
                 Console.WriteLine("INS: " & inStr)
 
-                If IsNumeric(sc.SpecsValue) Then
-
+                If IsNumeric(sc.SpecsValue) And GetShortCode(sc) = inStr Then
+                    PrintLayout = PrintLayout.Replace(String.Format("[{0}:ENC]", inStr), pawning.CompanyEncrypt(sc.SpecsValue))
                 End If
 
             End If

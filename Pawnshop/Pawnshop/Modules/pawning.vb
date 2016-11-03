@@ -30,7 +30,7 @@
         Return ds.Tables(0).Rows(0).Item("CATEGORY")
     End Function
 
-    Private Function CompanyEncrypt(ByVal karat As Integer) As String
+    Friend Function CompanyEncrypt(ByVal karat As Integer) As String
         Dim intStr As String = karat, newStr As String = ""
 
         For cnt As Integer = 0 To intStr.Length - 1
