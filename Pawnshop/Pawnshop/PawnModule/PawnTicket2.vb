@@ -403,7 +403,7 @@
         Load_PT_row(ds.Tables(0).Rows(0))
     End Sub
 
-    Private Sub Load_PT_row(ByVal dr As DataRow)
+    Public Sub Load_PT_row(ByVal dr As DataRow)
         'On Error Resume Next
 
         With dr
@@ -441,7 +441,12 @@
         End With
     End Sub
 
-    Private Function DescriptionBuilder() As String
+    ''' <summary>
+    ''' This function reconstruct the description base on what was the PrintLayout
+    ''' </summary>
+    ''' <returns>String</returns>
+    ''' <remarks>Construct PrintLayout</remarks>
+    Friend Function DescriptionBuilder() As String
         Dim Description As String = ""
         Dim PrintLayout As String = _pawnItem.ItemClass.PrintLayout
         '[CLASSNAME][GRAMS][KARAT][DESCRIPTION]
@@ -453,6 +458,18 @@
         For Each sc As PawnItemSpec In _pawnItem.PawnItemSpecs
             PrintLayout = PrintLayout.Replace(String.Format("[{0}]", GetShortCode(sc)), _
                                               String.Format("{0}{1}", sc.SpecsValue, sc.UnitOfMeasure))
+            ' Include ENCRYPTION
+            ' Syntax with :ENC inside the brackets [], if number, will
+            ' automatically be converted using CompanyEncrypt function
+            If PrintLayout.Contains(":ENC]") Then
+                Dim encPOS As Integer = PrintLayout.IndexOf(":ENC]")
+                Dim getOpenBracket As Integer = InStrRev(PrintLayout, "[", encPOS)
+
+                Console.WriteLine("ENC: " & encPOS)
+                Console.WriteLine("BRA: " & getOpenBracket)
+                Console.WriteLine("INS" & PrintLayout.Substring(getOpenBracket, encPOS))
+
+            End If
         Next
         Description = PrintLayout
 
@@ -578,6 +595,17 @@
         End If
         Return ds.Tables(0).Rows(0).Item("PAWNID")
     End Function
+
+    Public Sub PullOut(ByVal dt As Date)
+        ChangeStatus("W")
+        mysql = "SELECT * FROM OPI Where PAWNITEMID = '" & PawnItem.ID & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "OPI")
+        With ds.Tables(0).Rows(0)
+            .Item("WithDrawDate") = dt
+            .Item("Status") = "W"
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
 #End Region
 
 End Class

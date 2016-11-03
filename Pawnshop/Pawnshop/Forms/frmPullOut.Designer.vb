@@ -76,7 +76,7 @@ Partial Class qryPullOut
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "Type"
+        Me.ColumnHeader3.Text = "Category"
         '
         'ColumnHeader4
         '
@@ -115,7 +115,7 @@ Partial Class qryPullOut
         '
         'ColumnHeader8
         '
-        Me.ColumnHeader8.Text = "Type"
+        Me.ColumnHeader8.Text = "Category"
         '
         'ColumnHeader9
         '
