@@ -486,11 +486,11 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        ds = New DataSet
-        ds.Tables.Add(dt)
+        'ds = New DataSet
+        'ds.Tables.Add(dt)
 
-        Dim fn As String = SFD.FileName
-        ExportConfig(fn, ds)
+        Dim fnn As String = SFD.FileName
+        ExportConfig(fnn, ds)
         MsgBox("Data Exported", MsgBoxStyle.Information)
     End Sub
 
@@ -580,37 +580,40 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
-        If txtReferenceNumber.Text = "" Then txtReferenceNumber.Focus() : Exit Sub
-        If cmbModuleName.Text = "" Then cmbModuleName.Focus() : Exit Sub
-        If lvModule.Items.Count <= 0 Then Exit Sub
-        If lblCount.Text = "Count: 0" Then Exit Sub
+        'If txtReferenceNumber.Text = "" Then txtReferenceNumber.Focus() : Exit Sub
+        'If cmbModuleName.Text = "" Then cmbModuleName.Focus() : Exit Sub
+        'If lvModule.Items.Count <= 0 Then Exit Sub
+        'If lblCount.Text = "Count: 0" Then Exit Sub
 
-        For Each item As ListViewItem In Me.lvModule.Items
-            If item.Checked = False Then
-                item.Remove()
-            End If
-        Next
+        'For Each item As ListViewItem In Me.lvModule.Items
+        '    If item.Checked = False Then
+        '        item.Remove()
+        '    End If
+        'Next
 
-        Console.WriteLine("Item Count: " & lvModule.Items.Count)
+        'Console.WriteLine("Item Count: " & lvModule.Items.Count)
 
-        FromListView(dt, lvModule)
+        'FromListView(dt, lvModule)
 
-        Dim path As String = String.Format("{1}{0}.dat", fn, str)
-        If Not File.Exists(path) Then
-            Dim a As FileStream
-            a = File.Create(path)
-            a.Dispose()
-        End If
+        'Dim path As String = String.Format("{1}{0}.dat", fn, str)
+        'If Not File.Exists(path) Then
+        '    Dim a As FileStream
+        '    a = File.Create(path)
+        '    a.Dispose()
+        'End If
 
+        'SFD.ShowDialog()
+        'saveModname()
+
+
+        'txtReferenceNumber.Text = ""
+        'cmbModuleName.SelectedItem = Nothing
+
+        'lvModule.Columns.Clear()
+        'lvModule.Items.Clear()
+        If ds Is Nothing Then Exit Sub
         SFD.ShowDialog()
-        saveModname()
-
-
-        txtReferenceNumber.Text = ""
-        cmbModuleName.SelectedItem = Nothing
-
-        lvModule.Columns.Clear()
-        lvModule.Items.Clear()
+        MsgBox("Data Exported", MsgBoxStyle.Information)
     End Sub
 
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
@@ -791,5 +794,11 @@ Public Class frmAdminPanel
         txtClassification.Focus()
         clearfields()
         LoadScheme()
+    End Sub
+
+    Private Sub btnSaveEmport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveEmport.Click
+        If ds Is Nothing Then Exit Sub
+        database.SaveEntry(ds)
+        MsgBox("Entry Saved", MsgBoxStyle.Information)
     End Sub
 End Class
