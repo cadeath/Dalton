@@ -22,7 +22,7 @@ Public Class frmAdminPanel
 
         LoadScheme()
         lblDateStatus.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
-        'String.Format("{0} ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
+
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -715,21 +715,7 @@ Public Class frmAdminPanel
 
 #End Region
 
-    Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
-        Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        ds = New DataSet
-        ds.Tables.Add(dt)
-
-        Dim fn As String = SFD.FileName
-        ExportConfig(fn, ds)
-        MsgBox("Data Exported", MsgBoxStyle.Information)
-
-        dt.Clear()
-        ds.Tables.Clear()
-        chkSelectAll.Checked = False
-    End Sub
+  
 
     Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
         Dim fn As String = oFd.FileName
@@ -742,50 +728,7 @@ Public Class frmAdminPanel
         chkSelectAll.Checked = False
     End Sub
 
-    Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
-        If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
-
-        Dim fsEsk As New System.IO.FileStream(url, IO.FileMode.CreateNew)
-        Dim esk As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
-        esk.Serialize(fsEsk, serialDS)
-        fsEsk.Close()
-    End Sub
-
-    Function FileChecker(ByVal url As String) As DataTable
-        Dim fs As New System.IO.FileStream(url, IO.FileMode.Open)
-        Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
-
-        Dim serialDS As DataSet
-        Try
-            serialDS = bf.Deserialize(fs)
-        Catch ex As Exception
-            MsgBox("It seems the file is being tampered.", MsgBoxStyle.Critical)
-            fs.Close()
-            Return Nothing
-        End Try
-        fs.Close()
-
-        Return serialDS.Tables(0)
-    End Function
-
-    Private Sub ShowDataInLvw(ByVal data As DataTable, ByVal lvw As ListView)
-        lvw.View = View.Details
-        lvw.GridLines = True
-        lvw.Columns.Clear()
-        lvw.Items.Clear()
-        For Each col As DataColumn In data.Columns
-            lvw.Columns.Add(col.ToString)
-        Next
-        For Each row As DataRow In data.Rows
-            Dim lst As ListViewItem
-            lst = lvw.Items.Add(If(row(0) IsNot Nothing, row(0).ToString, ""))
-            For i As Integer = 1 To data.Columns.Count - 1
-                lst.SubItems.Add(If(row(i) IsNot Nothing, row(i).ToString, ""))
-            Next
-        Next
-    End Sub
-
-
+ 
     Private Sub cmbModuleName_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbModuleName.SelectedIndexChanged
         If cmbModuleName.Text = "" And cmbModuleName.Visible Then Exit Sub
 
@@ -819,41 +762,43 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
-        If txtReferenceNumber.Text = "" Then txtReferenceNumber.Focus() : Exit Sub
-        If cmbModuleName.Text = "" Then cmbModuleName.Focus() : Exit Sub
-        If lvModule.Items.Count <= 0 Then Exit Sub
-        If lblCount.Text = "Count: 0" Then Exit Sub
+        'If txtReferenceNumber.Text = "" Then txtReferenceNumber.Focus() : Exit Sub
+        'If cmbModuleName.Text = "" Then cmbModuleName.Focus() : Exit Sub
+        'If lvModule.Items.Count <= 0 Then Exit Sub
+        'If lblCount.Text = "Count: 0" Then Exit Sub
 
-        For Each item As ListViewItem In Me.lvModule.Items
-            If item.Checked = False Then
-                item.Remove()
-            End If
-        Next
+        'For Each item As ListViewItem In Me.lvModule.Items
+        '    If item.Checked = False Then
+        '        item.Remove()
+        '    End If
+        'Next
 
-        Console.WriteLine("Item Count: " & lvModule.Items.Count)
+        'Console.WriteLine("Item Count: " & lvModule.Items.Count)
 
-        FromListView(dt, lvModule)
+        'FromListView(ds, lvModule)
 
-        Dim path As String = String.Format("{1}{0}.dat", fn, str)
-        If Not File.Exists(path) Then
-            Dim a As FileStream
-            a = File.Create(path)
-            a.Dispose()
-        End If
+        'Dim path As String = String.Format("{1}{0}.dat", fn, str)
+        'If Not File.Exists(path) Then
+        '    Dim a As FileStream
+        '    a = File.Create(path)
+        '    a.Dispose()
+        'End If
 
         SFD.ShowDialog()
-        saveModname()
+        ' saveModname()
 
     End Sub
   
-    Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
-        table.Clear()
+    Public Sub FromListView(ByVal ds As DataSet, ByVal lvw As ListView)
+        'table.Clear()
         dt.Columns.Clear()
         dt.Rows.Clear()
         Dim columns = lvw.Columns.Count
 
         For Each column As ColumnHeader In lvw.Columns
-            table.Columns.Add(column.Text)
+            ' table.Columns.Add(column.Text)
+            ds.Tables.Add(column.Text)
+
         Next
 
         For Each item As ListViewItem In lvw.Items
@@ -861,7 +806,9 @@ Public Class frmAdminPanel
             For i As VariantType = 0 To columns - 1
                 cells(i) = item.SubItems(i).Text
             Next
-            table.Rows.Add(cells)
+            'ds.rows.Add(cells)
+            ds.Tables(0).Rows.Add(cells)
+            'table.Rows.Add(cells)
         Next
     End Sub
 
@@ -927,5 +874,26 @@ Public Class frmAdminPanel
         If e.KeyCode = Keys.Enter Then
             btnSearch1.PerformClick()
         End If
+    End Sub
+
+    Private Sub lblModname_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblModname.Enter
+
+    End Sub
+
+    Private Sub SFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles SFD.FileOk
+        Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+        Dim ds As New DataSet
+        'ds = New DataSet
+        'ds.Tables.Add(dt)
+
+        Dim fn As String = SFD.FileName
+        ExportConfig(fn, ds)
+        MsgBox("Data Exported", MsgBoxStyle.Information)
+
+        dt.Clear()
+        ds.Tables.Clear()
+        chkSelectAll.Checked = False
     End Sub
 End Class
