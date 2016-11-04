@@ -22,8 +22,8 @@ Partial Class frmAdminPanel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
@@ -59,18 +59,25 @@ Partial Class frmAdminPanel
         Me.btnClose = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.lblModname = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cboModuleName = New System.Windows.Forms.ComboBox()
+        Me.dgvPawnshop = New System.Windows.Forms.DataGridView()
         Me.lblCount = New System.Windows.Forms.Label()
         Me.chkSelectAll = New System.Windows.Forms.CheckBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnExport = New System.Windows.Forms.Button()
-        Me.cmbModuleName = New System.Windows.Forms.ComboBox()
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
         Me.lblSearch = New System.Windows.Forms.Label()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.oFd = New System.Windows.Forms.OpenFileDialog()
-        Me.dgvPawnshop = New System.Windows.Forms.DataGridView()
+        Me.txtPrintLayout = New Pawnshop.watermark()
+        Me.txtDescription = New Pawnshop.watermark()
+        Me.txtCategory = New Pawnshop.watermark()
+        Me.txtClassification = New Pawnshop.watermark()
+        Me.txtSearch = New Pawnshop.watermark()
+        Me.txtRef = New Pawnshop.watermark()
         Me.grpAddItem.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -79,8 +86,9 @@ Partial Class frmAdminPanel
         CType(Me.dgSpecs, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.lblModname.SuspendLayout()
-        Me.grpSearch.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAddItem
@@ -217,6 +225,19 @@ Partial Class frmAdminPanel
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label2)
+        Me.GroupBox3.Controls.Add(Me.Label6)
+        Me.GroupBox3.Controls.Add(Me.cboSchemename)
+        Me.GroupBox3.Controls.Add(Me.Label5)
+        Me.GroupBox3.Controls.Add(Me.txtPrintLayout)
+        Me.GroupBox3.Controls.Add(Me.rbNo)
+        Me.GroupBox3.Controls.Add(Me.rbYes)
+        Me.GroupBox3.Controls.Add(Me.Label4)
+        Me.GroupBox3.Controls.Add(Me.Label3)
+        Me.GroupBox3.Controls.Add(Me.txtDescription)
+        Me.GroupBox3.Controls.Add(Me.txtCategory)
+        Me.GroupBox3.Controls.Add(Me.Label1)
+        Me.GroupBox3.Controls.Add(Me.txtClassification)
         Me.GroupBox3.Location = New System.Drawing.Point(6, 76)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(362, 351)
@@ -311,6 +332,8 @@ Partial Class frmAdminPanel
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnSearch)
+        Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(1129, 64)
@@ -349,8 +372,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.FillWeight = 71.31783!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -374,8 +397,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewComboBoxColumn2
         '
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewComboBoxColumn2.FillWeight = 72.58589!
         Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
@@ -425,11 +448,48 @@ Partial Class frmAdminPanel
         '
         'lblModname
         '
+        Me.lblModname.Controls.Add(Me.GroupBox2)
+        Me.lblModname.Controls.Add(Me.dgvPawnshop)
+        Me.lblModname.Controls.Add(Me.lblCount)
+        Me.lblModname.Controls.Add(Me.chkSelectAll)
+        Me.lblModname.Controls.Add(Me.btnBrowse)
+        Me.lblModname.Controls.Add(Me.btnExport)
         Me.lblModname.Location = New System.Drawing.Point(13, 3)
         Me.lblModname.Name = "lblModname"
         Me.lblModname.Size = New System.Drawing.Size(1134, 427)
         Me.lblModname.TabIndex = 1
         Me.lblModname.TabStop = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.txtRef)
+        Me.GroupBox2.Controls.Add(Me.cboModuleName)
+        Me.GroupBox2.Location = New System.Drawing.Point(17, 17)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(262, 83)
+        Me.GroupBox2.TabIndex = 12
+        Me.GroupBox2.TabStop = False
+        '
+        'cboModuleName
+        '
+        Me.cboModuleName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboModuleName.FormattingEnabled = True
+        Me.cboModuleName.Items.AddRange(New Object() {"Money Transfer", "Branch", "Cash", "Item", "Item Specs", "Interest", "Interest Details", "Currency"})
+        Me.cboModuleName.Location = New System.Drawing.Point(17, 49)
+        Me.cboModuleName.Name = "cboModuleName"
+        Me.cboModuleName.Size = New System.Drawing.Size(228, 24)
+        Me.cboModuleName.TabIndex = 0
+        '
+        'dgvPawnshop
+        '
+        Me.dgvPawnshop.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvPawnshop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvPawnshop.Location = New System.Drawing.Point(17, 106)
+        Me.dgvPawnshop.Name = "dgvPawnshop"
+        Me.dgvPawnshop.Size = New System.Drawing.Size(1107, 279)
+        Me.dgvPawnshop.TabIndex = 11
         '
         'lblCount
         '
@@ -467,18 +527,6 @@ Partial Class frmAdminPanel
         Me.btnExport.TabIndex = 5
         Me.btnExport.Text = "Export"
         Me.btnExport.UseVisualStyleBackColor = True
-        '
-        'cmbModuleName
-        '
-        Me.cmbModuleName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbModuleName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbModuleName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbModuleName.FormattingEnabled = True
-        Me.cmbModuleName.Items.AddRange(New Object() {"Money Transfer", "Branch", "Cash", "Item", "Item Specs", "Interest", "Interest Details", "Currency"})
-        Me.cmbModuleName.Location = New System.Drawing.Point(106, 41)
-        Me.cmbModuleName.Name = "cmbModuleName"
-        Me.cmbModuleName.Size = New System.Drawing.Size(207, 24)
-        Me.cmbModuleName.TabIndex = 4
         '
         'lblModuleName
         '
@@ -527,16 +575,65 @@ Partial Class frmAdminPanel
         Me.oFd.FileName = "OpenFileDialog1"
         Me.oFd.Filter = "CIR File |*.cir"
         '
-        'dgvPawnshop
+        'txtPrintLayout
         '
-        Me.dgvPawnshop.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvPawnshop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPawnshop.Location = New System.Drawing.Point(10, 71)
-        Me.dgvPawnshop.Name = "dgvPawnshop"
-        Me.dgvPawnshop.Size = New System.Drawing.Size(1114, 304)
-        Me.dgvPawnshop.TabIndex = 12
+        Me.txtPrintLayout.BackColor = System.Drawing.Color.White
+        Me.txtPrintLayout.Location = New System.Drawing.Point(113, 204)
+        Me.txtPrintLayout.Multiline = True
+        Me.txtPrintLayout.Name = "txtPrintLayout"
+        Me.txtPrintLayout.Size = New System.Drawing.Size(228, 91)
+        Me.txtPrintLayout.TabIndex = 9
+        Me.txtPrintLayout.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPrintLayout.WatermarkText = "[Classname][Specs]"
+        '
+        'txtDescription
+        '
+        Me.txtDescription.BackColor = System.Drawing.Color.White
+        Me.txtDescription.Location = New System.Drawing.Point(113, 79)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(228, 92)
+        Me.txtDescription.TabIndex = 4
+        Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDescription.WatermarkText = "Description"
+        '
+        'txtCategory
+        '
+        Me.txtCategory.BackColor = System.Drawing.Color.White
+        Me.txtCategory.Location = New System.Drawing.Point(113, 51)
+        Me.txtCategory.Name = "txtCategory"
+        Me.txtCategory.Size = New System.Drawing.Size(228, 22)
+        Me.txtCategory.TabIndex = 3
+        Me.txtCategory.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtCategory.WatermarkText = "Category"
+        '
+        'txtClassification
+        '
+        Me.txtClassification.BackColor = System.Drawing.Color.White
+        Me.txtClassification.Location = New System.Drawing.Point(113, 24)
+        Me.txtClassification.Name = "txtClassification"
+        Me.txtClassification.Size = New System.Drawing.Size(228, 22)
+        Me.txtClassification.TabIndex = 0
+        Me.txtClassification.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtClassification.WatermarkText = "Clasification"
+        '
+        'txtSearch
+        '
+        Me.txtSearch.Location = New System.Drawing.Point(9, 21)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(1023, 22)
+        Me.txtSearch.TabIndex = 0
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
+        'txtRef
+        '
+        Me.txtRef.Location = New System.Drawing.Point(17, 21)
+        Me.txtRef.Name = "txtRef"
+        Me.txtRef.Size = New System.Drawing.Size(228, 22)
+        Me.txtRef.TabIndex = 1
+        Me.txtRef.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtRef.WatermarkText = "Reference Number"
         '
         'frmAdminPanel
         '
@@ -561,9 +658,11 @@ Partial Class frmAdminPanel
         Me.TabPage2.ResumeLayout(False)
         Me.lblModname.ResumeLayout(False)
         Me.lblModname.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
-        CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -594,7 +693,6 @@ Partial Class frmAdminPanel
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
     Friend WithEvents dgSpecs As System.Windows.Forms.DataGridView
-    Friend WithEvents txtReferenceNumber As Pawnshop.watermark
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
@@ -628,5 +726,8 @@ Partial Class frmAdminPanel
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As Pawnshop.watermark
     Friend WithEvents dgvPawnshop As System.Windows.Forms.DataGridView
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents cboModuleName As System.Windows.Forms.ComboBox
+    Friend WithEvents txtRef As Pawnshop.watermark
 
 End Class
