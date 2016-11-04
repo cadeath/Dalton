@@ -221,12 +221,8 @@ Public Class frmAdminPanel
                     ExportModType = ModuleType.Cash
                 Case "Item"
                     ExportModType = ModuleType.ITEM
-                Case "Item Specs"
-                    ExportModType = ModuleType.ItemSpecs
                 Case "Interest"
                     ExportModType = ModuleType.Interest
-                Case "Interest Details"
-                    ExportModType = ModuleType.InterestDetail
                 Case "Currency"
                     ExportModType = ModuleType.Currency
 
@@ -246,8 +242,6 @@ Public Class frmAdminPanel
         ITEM = 3
         Interest = 4
         Currency = 5
-        ItemSpecs = 6
-        InterestDetail = 7
     End Enum
 
     Friend ExportModType As ModuleType = ModuleType.MoneyTransfer
@@ -262,12 +256,8 @@ Public Class frmAdminPanel
                 Modcash()
             Case ModuleType.ITEM
                 ModITEM()
-            Case ModuleType.ItemSpecs
-                modItemSpecs()
             Case ModuleType.Interest
                 ModRate()
-            Case ModuleType.InterestDetail
-                ModIntDetail()
             Case ModuleType.Currency
                 ModCurrency()
         End Select
@@ -281,7 +271,7 @@ Public Class frmAdminPanel
         mySql &= " ORDER BY BranchID ASC"
 
         ds = LoadSQL(mySql, fillData)
-        dgvPawnshop.DataSource = ds.Tables(fillData)
+        'dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
     Private Sub Modcash()
@@ -291,7 +281,7 @@ Public Class frmAdminPanel
         mySql &= " ORDER BY CashID ASC"
 
         ds = LoadSQL(mySql, fillData)
-        dgvPawnshop.DataSource = ds.Tables(fillData)
+        ' dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
     Private Sub ModCharge()
@@ -300,26 +290,18 @@ Public Class frmAdminPanel
         mySql &= " ORDER BY ID ASC"
 
         ds = LoadSQL(mySql, fillData)
-        dgvPawnshop.DataSource = ds.Tables(fillData)
-    End Sub
-
-    Private Sub ModRate()
-
-        fillData = "TBLINTSCHEMES"
-        mySql = "SELECT * FROM " & fillData
-        mySql &= " ORDER BY SCHEMEID ASC"
-
-        ds = LoadSQL(mySql, fillData)
         'dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
-    Private Sub ModIntDetail()
-        fillData = "TBLINTSCHEME_DETAILS"
-        mySql = "SELECT * FROM " & fillData
-        mySql &= " ORDER BY IS_ID ASC"
+    Private Sub ModRate()
+        mySql = "SELECT * FROM TBLINTSCHEMES"
+        ds = LoadSQL(mySql, "TBLINTSCHEMES")
+        mySql = "SELECT * FROM TBLINTSCHEME_DETAILS"
+        Dim tblIntSchDetails As DataSet = LoadSQL(mySql, "TBLINTSCHEME_DETAILS")
 
-        ds = LoadSQL(mySql, fillData)
-        dgvPawnshop.DataSource = ds.Tables(fillData)
+        Dim otherTBL As New DataTable
+        otherTBL = tblIntSchDetails.Tables("TBLINTSCHEME_DETAILS")
+        ds.Tables.Add(otherTBL.Copy)
     End Sub
 
     Private Sub ModCurrency()
@@ -329,25 +311,18 @@ Public Class frmAdminPanel
         mySql &= " ORDER BY CurrencyID ASC"
 
         ds = LoadSQL(mySql, fillData)
-        dgvPawnshop.DataSource = ds.Tables(fillData)
+        'dgvPawnshop.DataSource = ds.Tables(fillData)
     End Sub
 
     Private Sub ModITEM()
-        fillData = "tblItem"
-        mySql = "SELECT * FROM " & fillData
-        mySql &= " ORDER BY ItemID ASC"
+        mySql = "SELECT * FROM tblItem"
+        ds = LoadSQL(mySql, "tblItem")
+        mySql = "SELECT * FROM tblSpecs"
+        Dim tblIntSchDetails As DataSet = LoadSQL(mySql, "tblSpecs")
 
-        ds = LoadSQL(mySql, fillData)
-        dgvPawnshop.DataSource = ds.Tables(fillData)
-    End Sub
-
-    Private Sub modItemSpecs()
-        fillData = "tblSpecs"
-        mySql = "SELECT * FROM " & fillData
-        mySql &= " ORDER BY SpecsID ASC"
-
-        ds = LoadSQL(mySql, fillData)
-        dgvPawnshop.DataSource = ds.Tables(fillData)
+        Dim otherTBL As New DataTable
+        otherTBL = tblIntSchDetails.Tables("tblSpecs")
+        ds.Tables.Add(otherTBL.Copy)
     End Sub
 
 #End Region
@@ -356,25 +331,15 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
-        'ds = New DataSet
-        'ds.Tables.Add(dt)
-
         Dim fn As String = SFD.FileName
         ExportConfig(fn, ds)
         MsgBox("Data Exported", MsgBoxStyle.Information)
     End Sub
 
     Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
-        'Dim fn As String = oFd.FileName
-
-        'ShowDataInLvw(FileChecker(fn), lvModule)
-        'MsgBox("Successfully Loaded", MsgBoxStyle.OkOnly, "Load")
-        'chkSelectAll.Checked = False
-        'dt.Clear()
-        'ds.Tables.Clear()
-        'chkSelectAll.Checked = False
         Dim fn As String = oFd.FileName
-        dgvPawnshop.DataSource = FileChecker(fn)
+        FileChecker(fn)
+        'dgPawnshop2.DataSource = FileChecker(fn)
     End Sub
 
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
@@ -386,7 +351,7 @@ Public Class frmAdminPanel
         fsEsk.Close()
     End Sub
 
-    Function FileChecker(ByVal url As String) As DataTable
+    Sub FileChecker(ByVal url As String)
         Dim fs As New System.IO.FileStream(url, IO.FileMode.Open)
         Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
 
@@ -396,12 +361,12 @@ Public Class frmAdminPanel
         Catch ex As Exception
             MsgBox("It seems the file is being tampered.", MsgBoxStyle.Critical)
             fs.Close()
-            Return Nothing
         End Try
         fs.Close()
-
-        Return serialDS.Tables(0)
-    End Function
+        'Dim ds As DataSet = serialDS
+        'dgvPawnshop.DataSource = ds.Tables(0)
+        'dgPawnshop2.DataSource = ds.Tables(1)
+    End Sub
 
     Private Sub ShowDataInLvw(ByVal data As DataTable, ByVal lvw As ListView)
         lvw.View = View.Details
@@ -450,7 +415,7 @@ Public Class frmAdminPanel
         'End If
 
         'SFD.ShowDialog()
-        'saveModname()
+
 
 
         'txtReferenceNumber.Text = ""
@@ -458,8 +423,9 @@ Public Class frmAdminPanel
 
         'lvModule.Columns.Clear()
         'lvModule.Items.Clear()
-        If dgvPawnshop.DataSource Is Nothing Then Exit Sub
+        If ds.Tables.Count < 1 Then MsgBox("No Module Found!", MsgBoxStyle.Critical) : Exit Sub
         SFD.ShowDialog()
+        saveModname()
     End Sub
 
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
@@ -485,18 +451,18 @@ Public Class frmAdminPanel
     Private path As String = String.Format("{1}{0}.dat", fn, str)
 
     Private Sub saveModname()
-        'If txtReferenceNumber.Text = Nothing Then
-        '    Exit Sub
-        'Else
-        '    Dim Post_log As String = _
-        '  String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
+        If txtRef.Text = Nothing Then
+            Exit Sub
+        Else
+            Dim Post_log As String = _
+          String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
 
-        '    File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtReferenceNumber.Text & vbCrLf & _
-        '                       "Module Name: " & cmbModuleName.Text & vbCrLf & "User: " & POSuser.UserName & vbCrLf)
-        'End If
+            File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtRef.Text & vbCrLf & _
+                               "Module Name: " & cmbModuleName.Text & vbCrLf & "User: " & POSuser.UserName & vbCrLf)
+        End If
     End Sub
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         oFd.ShowDialog()
 
         'lvModule.View = View.Details
@@ -508,25 +474,6 @@ Public Class frmAdminPanel
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-
-    Private Sub chkSelectAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSelectAll.CheckedChanged
-        'If lvModule.Items.Count <= 0 Then Exit Sub
-        'If chkSelectAll.Checked = True Then
-        '    For i = 0 To lvModule.Items.Count - 1
-        '        lvModule.Items(i).Checked = True
-        '    Next
-        'Else
-        '    For i = 0 To lvModule.Items.Count - 1
-        '        lvModule.Items(i).Checked = False
-        '    Next
-        'End If
-        'lblCount.Text = "count: " & lvModule.CheckedItems.Count
-    End Sub
-
-    Private Sub lvModule_ItemChecked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs)
-        'lblCount.Text = "Count: " & lvModule.CheckedItems.Count
-    End Sub
-
 
     Private Sub ModifyItems()
         If Not isValid() Then Exit Sub
@@ -640,11 +587,5 @@ Public Class frmAdminPanel
         txtClassification.Focus()
         clearfields()
         LoadScheme()
-    End Sub
-
-    Private Sub btnSaveEmport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If ds Is Nothing Then Exit Sub
-        database.SaveEntry(ds)
-        MsgBox("Entry Saved", MsgBoxStyle.Information)
     End Sub
 End Class

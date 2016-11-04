@@ -22,8 +22,8 @@ Partial Class frmAdminPanel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grpAddItem = New System.Windows.Forms.GroupBox()
         Me.lblPrintLayout = New System.Windows.Forms.Label()
         Me.rdbNo = New System.Windows.Forms.RadioButton()
@@ -61,10 +61,6 @@ Partial Class frmAdminPanel
         Me.lblModname = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cboModuleName = New System.Windows.Forms.ComboBox()
-        Me.dgvPawnshop = New System.Windows.Forms.DataGridView()
-        Me.lblCount = New System.Windows.Forms.Label()
-        Me.chkSelectAll = New System.Windows.Forms.CheckBox()
-        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnExport = New System.Windows.Forms.Button()
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
@@ -87,7 +83,6 @@ Partial Class frmAdminPanel
         Me.TabPage2.SuspendLayout()
         Me.lblModname.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -372,8 +367,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn1.FillWeight = 71.31783!
         Me.DataGridViewTextBoxColumn1.HeaderText = "Short Code"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -397,8 +392,8 @@ Partial Class frmAdminPanel
         '
         'DataGridViewComboBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewComboBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewComboBoxColumn2.FillWeight = 72.58589!
         Me.DataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.DataGridViewComboBoxColumn2.HeaderText = "Layout"
@@ -449,14 +444,10 @@ Partial Class frmAdminPanel
         'lblModname
         '
         Me.lblModname.Controls.Add(Me.GroupBox2)
-        Me.lblModname.Controls.Add(Me.dgvPawnshop)
-        Me.lblModname.Controls.Add(Me.lblCount)
-        Me.lblModname.Controls.Add(Me.chkSelectAll)
-        Me.lblModname.Controls.Add(Me.btnBrowse)
         Me.lblModname.Controls.Add(Me.btnExport)
         Me.lblModname.Location = New System.Drawing.Point(13, 3)
         Me.lblModname.Name = "lblModname"
-        Me.lblModname.Size = New System.Drawing.Size(1134, 427)
+        Me.lblModname.Size = New System.Drawing.Size(287, 155)
         Me.lblModname.TabIndex = 1
         Me.lblModname.TabStop = False
         '
@@ -464,9 +455,9 @@ Partial Class frmAdminPanel
         '
         Me.GroupBox2.Controls.Add(Me.txtRef)
         Me.GroupBox2.Controls.Add(Me.cboModuleName)
-        Me.GroupBox2.Location = New System.Drawing.Point(17, 17)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 11)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(262, 83)
+        Me.GroupBox2.Size = New System.Drawing.Size(275, 98)
         Me.GroupBox2.TabIndex = 12
         Me.GroupBox2.TabStop = False
         '
@@ -474,54 +465,15 @@ Partial Class frmAdminPanel
         '
         Me.cboModuleName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboModuleName.FormattingEnabled = True
-        Me.cboModuleName.Items.AddRange(New Object() {"Money Transfer", "Branch", "Cash", "Item", "Item Specs", "Interest", "Interest Details", "Currency"})
+        Me.cboModuleName.Items.AddRange(New Object() {"Money Transfer", "Branch", "Cash", "Item", "Interest", "Currency"})
         Me.cboModuleName.Location = New System.Drawing.Point(17, 49)
         Me.cboModuleName.Name = "cboModuleName"
         Me.cboModuleName.Size = New System.Drawing.Size(228, 24)
         Me.cboModuleName.TabIndex = 0
         '
-        'dgvPawnshop
-        '
-        Me.dgvPawnshop.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvPawnshop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvPawnshop.Location = New System.Drawing.Point(17, 106)
-        Me.dgvPawnshop.Name = "dgvPawnshop"
-        Me.dgvPawnshop.Size = New System.Drawing.Size(1107, 279)
-        Me.dgvPawnshop.TabIndex = 11
-        '
-        'lblCount
-        '
-        Me.lblCount.AutoSize = True
-        Me.lblCount.Location = New System.Drawing.Point(117, 402)
-        Me.lblCount.Name = "lblCount"
-        Me.lblCount.Size = New System.Drawing.Size(42, 16)
-        Me.lblCount.TabIndex = 10
-        Me.lblCount.Text = "Count"
-        '
-        'chkSelectAll
-        '
-        Me.chkSelectAll.AutoSize = True
-        Me.chkSelectAll.Location = New System.Drawing.Point(17, 402)
-        Me.chkSelectAll.Name = "chkSelectAll"
-        Me.chkSelectAll.Size = New System.Drawing.Size(83, 20)
-        Me.chkSelectAll.TabIndex = 8
-        Me.chkSelectAll.Text = "Select All"
-        Me.chkSelectAll.UseVisualStyleBackColor = True
-        '
-        'btnBrowse
-        '
-        Me.btnBrowse.Location = New System.Drawing.Point(972, 391)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(75, 34)
-        Me.btnBrowse.TabIndex = 7
-        Me.btnBrowse.Text = "Browse"
-        Me.btnBrowse.UseVisualStyleBackColor = True
-        '
         'btnExport
         '
-        Me.btnExport.Location = New System.Drawing.Point(1053, 391)
+        Me.btnExport.Location = New System.Drawing.Point(206, 115)
         Me.btnExport.Name = "btnExport"
         Me.btnExport.Size = New System.Drawing.Size(75, 34)
         Me.btnExport.TabIndex = 5
@@ -657,10 +609,8 @@ Partial Class frmAdminPanel
         CType(Me.dgSpecs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.lblModname.ResumeLayout(False)
-        Me.lblModname.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        CType(Me.dgvPawnshop, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
         Me.ResumeLayout(False)
@@ -690,7 +640,6 @@ Partial Class frmAdminPanel
     Friend WithEvents lblPrintLayout As System.Windows.Forms.Label
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents SFD As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
     Friend WithEvents dgSpecs As System.Windows.Forms.DataGridView
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -716,8 +665,6 @@ Partial Class frmAdminPanel
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
 
-    Friend WithEvents chkSelectAll As System.Windows.Forms.CheckBox
-    Friend WithEvents lblCount As System.Windows.Forms.Label
     Friend WithEvents txtPrintLayout As Pawnshop.watermark
     Friend WithEvents txtDescription As Pawnshop.watermark
     Friend WithEvents txtCategory As Pawnshop.watermark
@@ -725,7 +672,6 @@ Partial Class frmAdminPanel
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As Pawnshop.watermark
-    Friend WithEvents dgvPawnshop As System.Windows.Forms.DataGridView
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents cboModuleName As System.Windows.Forms.ComboBox
     Friend WithEvents txtRef As Pawnshop.watermark
