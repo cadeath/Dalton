@@ -9,4 +9,5 @@
         ofdCIR.ShowDialog()
         Interest_Config.Load_Config(ofdCIR.FileName)
     End Sub
+
 End Class
