@@ -425,7 +425,6 @@ Public Class frmAdminPanel
         'lvModule.Items.Clear()
         If ds.Tables.Count < 1 Then MsgBox("No Module Found!", MsgBoxStyle.Critical) : Exit Sub
         SFD.ShowDialog()
-        saveModname()
     End Sub
 
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
@@ -451,15 +450,15 @@ Public Class frmAdminPanel
     Private path As String = String.Format("{1}{0}.dat", fn, str)
 
     Private Sub saveModname()
-        If txtRef.Text = Nothing Then
-            Exit Sub
-        Else
-            Dim Post_log As String = _
-          String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
+        'If txtRef.Text = Nothing Then
+        '    Exit Sub
+        'Else
+        '    Dim Post_log As String = _
+        '  String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
 
-            File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtRef.Text & vbCrLf & _
-                               "Module Name: " & cmbModuleName.Text & vbCrLf & "User: " & POSuser.UserName & vbCrLf)
-        End If
+        '    File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtRef.Text & vbCrLf & _
+        '                       "Module Name: " & cmbModuleName.Text & vbCrLf & "User: " & POSuser.UserName & vbCrLf)
+        'End If
     End Sub
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -587,5 +586,9 @@ Public Class frmAdminPanel
         txtClassification.Focus()
         clearfields()
         LoadScheme()
+    End Sub
+
+    Private Sub cboSchemename_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboSchemename.SelectedIndexChanged
+        Console.WriteLine(GetSchemeID(cboSchemename.Text))
     End Sub
 End Class

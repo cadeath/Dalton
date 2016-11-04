@@ -72,7 +72,7 @@
     Public Sub Load_PawnItemSpec_row(dr As DataRow)
         With dr
             _pawnSpecsID = .Item("PAWNSPECSID")
-            Me.UnitOfMeasure = .Item("UOM")
+            'Me.UnitOfMeasure = .Item("UOM")
             Me.SpecName = .Item("SPECSNAME")
             Me.SpecType = .Item("SPECSTYPE")
             'Me.SpecLayout = .Item("SPECSLAYOUT")
