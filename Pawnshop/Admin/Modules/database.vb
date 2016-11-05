@@ -109,7 +109,7 @@ Friend Module database
         Return reader
     End Function
 
-    Friend Function UpdateEntry(dsEntry As DataSet) As Boolean
+    Friend Function UpdateEntry(ByVal dsEntry As DataSet) As Boolean
         dbOpen()
 
         Dim da As OdbcDataAdapter
