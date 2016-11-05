@@ -57,13 +57,13 @@
                 row.SubItems.Add(.Penalty)
                 row.SubItems.Add(.Remarks)
 
-                frmInterestScheme.lvIntScheme.Items.Add(row)
+                frmAdminPanel.lvIntscheme.Items.Add(row)
 
             End With
         Next
 
-        frmInterestScheme.LoadSchemeList(tmpScheme)
-        frmInterestScheme.Show()
+        frmAdminPanel.LoadSchemeList(tmpScheme)
+        frmAdminPanel.Show()
         Me.Hide()
 
     End Sub

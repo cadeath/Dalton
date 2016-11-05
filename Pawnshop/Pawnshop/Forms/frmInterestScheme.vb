@@ -97,6 +97,7 @@ Public Class frmInterestScheme
     End Sub
 
     Private Sub SaveSchemes()
+
         If txtSchemeName.Text = "" Then txtSchemeName.Focus()
         If txtDescription.Text = "" Then txtDescription.Focus()
         If lvIntscheme.Items.Count <= 0 Then Exit Sub
@@ -202,6 +203,8 @@ Public Class frmInterestScheme
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
+
+
         If btnUpdate.Text = "&Edit" Then
             btnUpdate.Text = "&Cancel"
             btnSave.Enabled = True
