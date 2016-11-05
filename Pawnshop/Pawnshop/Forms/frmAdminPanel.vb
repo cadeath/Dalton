@@ -20,7 +20,7 @@ Public Class frmAdminPanel
 
     Dim SchemeModify As New InterestScheme
 
-    Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
         txtClassification.Focus()
 
@@ -624,17 +624,17 @@ Public Class frmAdminPanel
         List1.SubItems.Add(Me.txtInterest.Text)
         List1.SubItems.Add(Me.txtPenalty.Text)
         List1.SubItems.Add(Me.txtRemarks.Text)
-        clearfields()
+        clearfields1()
     End Sub
 
     Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
-        If Not isValid() Then Exit Sub
+        If Not isValidsceheme() Then Exit Sub
         lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
         lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
         lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
         lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
         lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
-        clearfields()
+        clearfields1()
         Label18.Text = "Update"
         btnAdd.Enabled = True
     End Sub
@@ -649,7 +649,7 @@ Public Class frmAdminPanel
 
     Private Sub SaveSchemes()
         If txtSchemeName.Text = "" Then txtSchemeName.Focus()
-        If txtDescription.Text = "" Then txtDescription.Focus()
+        If txtDescription1.Text = "" Then txtDescription1.Focus()
         If lvIntscheme.Items.Count <= 0 Then Exit Sub
 
         Dim ans As DialogResult = MsgBox("Do you want to save this Scheme?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
@@ -661,7 +661,7 @@ Public Class frmAdminPanel
 
         With SchemeSave
             .SchemeName = txtSchemeName.Text
-            .Description = txtDescription.Text
+            .Description = txtDescription1.Text
         End With
 
 
@@ -706,7 +706,7 @@ Public Class frmAdminPanel
         SchemeModify.SchemeID = frmInterestSchemeList.lblSchemeID.Text
 
         SchemeModify.SchemeName = txtSchemeName.Text
-        SchemeModify.Description = txtDescription.Text
+        SchemeModify.Description = txtDescription1.Text
         SchemeModify.Update()
 
         For Each item As ListViewItem In lvIntscheme.Items
@@ -739,7 +739,7 @@ Public Class frmAdminPanel
 
         lvIntscheme.Items.Clear()
         txtSchemeName.Text = "" : txtSchemeName.Enabled = True
-        txtDescription.Text = "" : txtDescription.Enabled = True
+        txtDescription1.Text = "" : txtDescription1.Enabled = True
 
     End Sub
 
@@ -751,7 +751,7 @@ Public Class frmAdminPanel
         If sc.SchemeName = "" Then Exit Sub
 
         txtSchemeName.Text = sc.SchemeName
-        txtDescription.Text = sc.Description
+        txtDescription1.Text = sc.Description
 
         SelectedScheme = sc
 
@@ -759,7 +759,7 @@ Public Class frmAdminPanel
         btnsavescheme.Enabled = False
         btnEdit.Enabled = True
         txtSchemeName.Enabled = False
-        txtDescription.Enabled = False
+        txtDescription1.Enabled = False
     End Sub
 
 
@@ -823,7 +823,7 @@ Public Class frmAdminPanel
 
     Private Sub txtsearchscheme_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtsearchscheme.KeyDown
         If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
+            btnSearchScheme.PerformClick()
         End If
     End Sub
 
@@ -864,4 +864,7 @@ Public Class frmAdminPanel
         Label18.Text = "Modify"
         btnAdd.Enabled = False
     End Sub
+
+   
+   
 End Class

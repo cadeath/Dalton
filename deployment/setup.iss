@@ -17,9 +17,9 @@ AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\cdt-S0ft\Dalton Pawnshop
 DefaultGroupName=cdt-S0ft\Dalton Pawnshop
-OutputDir=D:\cadeath\Documents\DevInstaller\Pawnshop
+OutputDir=C:\Users\Ellie\Desktop\Pawnshop
 OutputBaseFilename=daltonps-1237
-SetupIconFile=..\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
+SetupIconFile=C:\Users\Ellie\Documents\GitHub\Dalton\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -30,8 +30,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Release\pawnshop.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\cadeath\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Ellie\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Ellie\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
