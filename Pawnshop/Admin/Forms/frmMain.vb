@@ -84,12 +84,13 @@
     End Sub
 
     Private Sub btnClass_Click(sender As System.Object, e As System.EventArgs) Handles btnClass.Click
-        fillData = "tblClass"
-        mySql = "SELECT * FROM " & fillData
-        mySql &= " ORDER BY ClassID ASC"
+        'fillData = "TBLINTSCHEMES"
+        mySql = "SELECT  D.IS_ID, I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
+        mySql &= "D.INTEREST, D.PENALTY, D.REMARKS "
+        mySql &= "FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
 
-        ds = LoadSQL(mySql, fillData)
-        dgvPawnshop.DataSource = ds.Tables(fillData)
+        ds = LoadSQL(mySql)
+        dgvPawnshop.DataSource = ds.Tables(0)
     End Sub
 
     Private Sub btnCurrency_Click(sender As System.Object, e As System.EventArgs) Handles btnCurrency.Click
