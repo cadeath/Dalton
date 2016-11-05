@@ -132,15 +132,15 @@ Public Class frmAdminPanel
         Return True
     End Function
 
-    Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
-        Dim isEmpty As Boolean = True
-        For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows _
-        Where (From cell As DataGridViewCell In row1.Cells Where Not String.IsNullOrEmpty(cell.Value)).Any(Function(cell) _
-        Not String.IsNullOrEmpty(Trim(cell.Value.ToString())))
-            isEmpty = False
-        Next
-        Return isEmpty
-    End Function
+    'Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
+    '    Dim isEmpty As Boolean = True
+    '    For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows _
+    '    Where (From cell As DataGridViewCell In row1.Cells Where Not String.IsNullOrEmpty(cell.Value)).Any(Function(cell) _
+    '    Not String.IsNullOrEmpty(Trim(cell.Value.ToString())))
+    '        isEmpty = False
+    '    Next
+    '    Return isEmpty
+    'End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If btnSave.Text = "&Save" Then
@@ -575,7 +575,7 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-            SpecSave.SaveSpecs()
+            'SpecSave.SaveSpecs()
             ColItemsSpecs.Add(SpecSave)
         Next
         ItemSave.ItemSpecifications = ColItemsSpecs
@@ -585,7 +585,6 @@ Public Class frmAdminPanel
         rdbNo.Checked = False
         txtClassification.Focus()
         clearfields()
-        LoadScheme()
     End Sub
 
     Private Sub cboSchemename_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboSchemename.SelectedIndexChanged
