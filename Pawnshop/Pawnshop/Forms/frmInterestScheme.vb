@@ -12,7 +12,7 @@ Public Class frmInterestScheme
 
         SelectedScheme = sc
 
-        ' reaDOnlyTrue()
+        reaDOnlyTrue()
         btnSave.Enabled = False
         btnUpdate.Enabled = True
         txtSchemeName.Enabled = False
@@ -28,21 +28,21 @@ Public Class frmInterestScheme
         txtRemarks.Text = ""
     End Sub
 
-    'Private Sub reaDOnlyTrue()
-    '    txtDayFrom.ReadOnly = True
-    '    txtDayTo.ReadOnly = True
-    '    txtInterest.ReadOnly = True
-    '    txtPenalty.ReadOnly = True
-    '    txtRemarks.ReadOnly = True
-    'End Sub
+    Private Sub reaDOnlyTrue()
+        txtDayFrom.ReadOnly = True
+        txtDayTo.ReadOnly = True
+        txtInterest.ReadOnly = True
+        txtPenalty.ReadOnly = True
+        txtRemarks.ReadOnly = True
+    End Sub
 
-    'Friend Sub reaDOnlyFalse()
-    '    txtDayFrom.ReadOnly = False
-    '    txtDayTo.ReadOnly = False
-    '    txtInterest.ReadOnly = False
-    '    txtPenalty.ReadOnly = False
-    '    txtRemarks.ReadOnly = False
-    'End Sub
+    Friend Sub reaDOnlyFalse()
+        txtDayFrom.ReadOnly = False
+        txtDayTo.ReadOnly = False
+        txtInterest.ReadOnly = False
+        txtPenalty.ReadOnly = False
+        txtRemarks.ReadOnly = False
+    End Sub
 
     Private Function isValid() As Boolean
 
@@ -137,8 +137,8 @@ Public Class frmInterestScheme
         clearfields()
 
         lvIntscheme.Items.Clear()
-        txtSchemeName.Text = "" : txtSchemeName.ReadOnly = False
-        txtDescription.Text = "" : txtDescription.ReadOnly = False
+        txtSchemeName.Text = "" : txtSchemeName.Enabled = True
+        txtDescription.Text = "" : txtDescription.Enabled = True
 
     End Sub
 
@@ -196,9 +196,9 @@ Public Class frmInterestScheme
         clearfields()
 
         lvIntscheme.Items.Clear()
-        txtSchemeName.Text = "" : txtSchemeName.ReadOnly = False
-        txtDescription.Text = "" : txtDescription.ReadOnly = False
-
+        txtSchemeName.Text = "" : txtSchemeName.Enabled = True
+        txtDescription.Text = "" : txtDescription.Enabled = True
+      
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
@@ -206,6 +206,7 @@ Public Class frmInterestScheme
             btnUpdate.Text = "&Cancel"
             btnSave.Enabled = True
             btnSave.Text = "&Update"
+            reaDOnlyFalse()
         Else
             Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -261,7 +262,6 @@ Public Class frmInterestScheme
         frmInterestSchemeList.txtSearch.Text = Me.txtSearch.Text.ToString
         frmInterestSchemeList.btnSearch.PerformClick()
 
-        btnUpdate.Enabled = True
         btnUpdate.Enabled = True
         lvIntscheme.Items.Clear()
         txtDescription.Clear()
