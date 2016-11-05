@@ -184,7 +184,7 @@ Partial Class frmInterestScheme
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(88, 34)
         Me.btnSave.TabIndex = 0
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -268,7 +268,7 @@ Partial Class frmInterestScheme
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(88, 34)
         Me.btnUpdate.TabIndex = 1
-        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.Text = "&Edit"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'Label7

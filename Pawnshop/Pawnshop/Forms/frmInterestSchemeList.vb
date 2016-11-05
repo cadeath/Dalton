@@ -5,10 +5,8 @@
     Dim selectedSchemeDetails As Scheme_Interest
 
     Private Sub frmInterestSchemeList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Load_Scheme_Data() ''''''''''''''sample''''''''''''
+
         LoadScheme()
-
-
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
