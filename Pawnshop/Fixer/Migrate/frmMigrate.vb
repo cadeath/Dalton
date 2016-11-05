@@ -40,18 +40,54 @@
             Dim ds As DataSet = LoadSQL(mysql, filldata)
 
             For Each dr As DataRow In ds.Tables(0).Rows
-                Dim tmpPawnID As String = dr.Item("PawnID")
-                Dim tmpItemType As String = dr.Item("ItemType")
-                Dim tmpIntcheckSum As String
-                If Not IsDBNull(dr.Item("int_checksum")) Then tmpIntcheckSum = dr.Item("int_checksum")
+                Dim MigPt As Integer = dr.Item("PawnTicket")
+                Dim MigItemType As String = dr.Item("ItemType")
 
-                Dim tmpSchemeID As String = GetInt(tmpItemType, tmpIntcheckSum)
 
-                Dim mysql2 As String = "Select * from OPI where PawnItemID = '" & tmpPawnID & "'"
-                Dim filldata2 As String = "OPI"
-                Dim ds2 As DataSet = LoadSQL(mysql2, filldata2)
-                ds2.Tables(filldata2).Rows(0).Item("Scheme_ID") = tmpSchemeID
-                database.SaveEntry(ds2, False)
+                Dim sqlOpt As String = "Select * from OPT where OldTicket = " & MigPt
+                Dim DsOpt As DataSet = LoadSQL(sqlOpt, "OPT")
+                Dim PTNew As Integer = DsOpt.Tables(0).Rows(0).Item("PawnTicket")
+                If DsOpt.Tables(0).Rows.Count = 1 Then
+                    sqlOpt = "Select * from OPT"
+                    DsOpt.Clear()
+                    DsOpt = LoadSQL(sqlOpt, "OPT")
+                    Dim dsNewRow As DataRow
+                    dsNewRow = ds.Tables("OPT").NewRow
+                    With dsNewRow
+                        .Item("PawnTicket") = PTNew
+                        .Item("OldTicket") = MigPt
+
+                    End With
+                    ds.Tables("OPT").Rows.Add(dsNewRow)
+                    database.SaveEntry(ds)
+
+                Else
+
+                    Dim sqlOpi As String = "Select * from OPI"
+                    Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
+
+                    Dim dsNewRow As DataRow
+                    dsNewRow = ds.Tables("OPI").NewRow
+                    With dsNewRow
+                        .Item("ItemClass") = MigItemType
+                    End With
+                    ds.Tables("OPI").Rows.Add(dsNewRow)
+                    database.SaveEntry(ds)
+
+                    sqlOpt = "Select * from OPT"
+                    DsOpt.Clear()
+                    DsOpt = LoadSQL(sqlOpt, "OPT")
+
+                    dsNewRow = ds.Tables("OPT").NewRow
+                    With dsNewRow
+                        .Item("PAWNTICKET") = MigPt
+                        .Item("PawnItemID") = GetLastID()
+                    End With
+                    ds.Tables("OPT").Rows.Add(dsNewRow)
+                    database.SaveEntry(ds)
+                End If
+
+
 
                 pbProgressBar.Value = pbProgressBar.Value + 1
                 Application.DoEvents()
@@ -64,6 +100,16 @@
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
+
+    Public Function GetLastID() As Single
+        Dim mySql As String = "SELECT * FROM OPI ORDER BY PawnItemID DESC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("PawnItemID")
+    End Function
 
     Private Function GetInt(ByVal ItemType As String, ByVal CheckSum As String)
 
