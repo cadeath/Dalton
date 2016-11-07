@@ -32,6 +32,9 @@ Public Class frmAdminPanel
         txtSearch.Text = ""
         btnUpdate.Enabled = False
         clearfields1() ''''''''''scheme
+        btnRemove.Enabled = False
+        btnUpdateScheme.Enabled = False
+        btnEdit.Enabled = False
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -53,6 +56,7 @@ Public Class frmAdminPanel
         SelectedItem = Item
         LoadSpec(Item.ID)
         btnUpdate.Enabled = True
+       
     End Sub
 
     Friend Sub LoadSpec(ByVal ID As Integer)
@@ -599,15 +603,20 @@ Public Class frmAdminPanel
 
    
     Private Sub btnSearchScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchScheme.Click
-        Dim secured_str As String = txtSearch.Text
+
+        Dim secured_str As String = txtsearchscheme.Text
         secured_str = DreadKnight(secured_str)
-
-        frmInterestSchemeList.Show()
-
         frmInterestSchemeList.txtSearch.Text = Me.txtsearchscheme.Text.ToString
         frmInterestSchemeList.btnSearch.PerformClick()
 
+        frmInterestSchemeList.SearchSelect(secured_str, FormName.frmPawningV2_InterestScheme)
+        frmInterestSchemeList.Show()
+
+      
+
         btnUpdate.Enabled = True
+        btnEdit.Text = "&Edit"
+        btnsavescheme.Text = "&Save"
         lvIntscheme.Items.Clear()
         txtDescription1.Text = ""
         txtSchemeName.Text = ""
@@ -625,6 +634,7 @@ Public Class frmAdminPanel
         List1.SubItems.Add(Me.txtPenalty.Text)
         List1.SubItems.Add(Me.txtRemarks.Text)
         clearfields1()
+        btnRemove.Enabled = True
     End Sub
 
     Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
@@ -760,6 +770,8 @@ Public Class frmAdminPanel
         btnEdit.Enabled = True
         txtSchemeName.Enabled = False
         txtDescription1.Enabled = False
+        btnUpdateScheme.Enabled = False
+        btnAdd.Enabled = False
     End Sub
 
 
@@ -803,6 +815,8 @@ Public Class frmAdminPanel
             btnEdit.Text = "&Cancel"
             btnsavescheme.Enabled = True
             btnsavescheme.Text = "&Update"
+            btnAdd.Enabled = True
+            btnUpdateScheme.Enabled = True
             reaDOnlyFalseScheme()
         Else
             Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)

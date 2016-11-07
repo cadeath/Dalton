@@ -3,6 +3,8 @@
 
     Dim tmpScheme As InterestScheme
     Dim selectedSchemeDetails As Scheme_Interest
+    Private fromOtherForm As Boolean = False
+    Private frmOrig As formSwitch.FormName
 
     Private Sub frmInterestSchemeList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -12,6 +14,14 @@
             btnSearch.PerformClick()
         End If
     End Sub
+
+
+    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+        fromOtherForm = True
+        txtSearch.Text = src
+        frmOrig = frmOrigin
+    End Sub
+
 
     Private Sub LoadScheme()
         Dim mySql As String = "SELECT * FROM " & filldata
@@ -43,9 +53,6 @@
 
         lblSchemeID.Text = tmpScheme.SchemeID
 
-        frmAdminPanel.LoadSchemeList(tmpScheme)
-
-
         frmInterestScheme.lvIntscheme.Items.Clear()
         For Each SchemeDetail As Scheme_Interest In tmpScheme.SchemeDetails
             With SchemeDetail
@@ -64,8 +71,9 @@
             End With
         Next
 
+        frmAdminPanel.LoadSchemeList(tmpScheme)
         frmAdminPanel.Show()
-        Me.Close()
+        Me.Hide()
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
