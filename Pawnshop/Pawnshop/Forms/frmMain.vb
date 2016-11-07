@@ -317,7 +317,7 @@
             Exit Sub
         End If
         'frmMIS.Show()
-        frmAdminPanel.Show()
+        frmAdminPanel.ShowDialog()
     End Sub
 
     Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click

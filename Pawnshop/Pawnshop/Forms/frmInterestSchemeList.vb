@@ -43,8 +43,10 @@
 
         lblSchemeID.Text = tmpScheme.SchemeID
 
-        frmInterestScheme.lvIntScheme.Items.Clear()
+        frmAdminPanel.LoadSchemeList(tmpScheme)
 
+
+        frmInterestScheme.lvIntscheme.Items.Clear()
         For Each SchemeDetail As Scheme_Interest In tmpScheme.SchemeDetails
             With SchemeDetail
 
@@ -62,10 +64,8 @@
             End With
         Next
 
-        frmAdminPanel.LoadSchemeList(tmpScheme)
         frmAdminPanel.Show()
         Me.Close()
-
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
