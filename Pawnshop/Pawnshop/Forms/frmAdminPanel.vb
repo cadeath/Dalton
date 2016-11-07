@@ -646,6 +646,7 @@ Public Class frmAdminPanel
         lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
         clearfields1()
         Label18.Text = "Update"
+        btnUpdateScheme.Enabled = False
         btnAdd.Enabled = True
     End Sub
 
@@ -877,6 +878,8 @@ Public Class frmAdminPanel
         End With
         Label18.Text = "Modify"
         btnAdd.Enabled = False
+        btnUpdateScheme.Enabled = True
+
     End Sub
 
    
