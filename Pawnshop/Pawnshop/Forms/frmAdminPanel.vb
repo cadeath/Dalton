@@ -695,6 +695,8 @@ Public Class frmAdminPanel
         btnsavescheme.Text = "&Save"
         btnEdit.Text = "&Edit"
         btnEdit.Enabled = False
+        btnRemove.Enabled = False
+        btnUpdateScheme.Enabled = False
 
         clearfields1()
 
@@ -745,6 +747,8 @@ Public Class frmAdminPanel
         btnsavescheme.Enabled = True
         btnEdit.Enabled = False
         btnAdd.Enabled = True
+        btnRemove.Enabled = False
+        btnUpdateScheme.Enabled = False
 
         clearfields1()
 
@@ -818,6 +822,7 @@ Public Class frmAdminPanel
             btnsavescheme.Text = "&Update"
             btnAdd.Enabled = True
             btnUpdateScheme.Enabled = True
+            btnRemove.Enabled = True
             reaDOnlyFalseScheme()
         Else
             Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
@@ -879,7 +884,7 @@ Public Class frmAdminPanel
         Label18.Text = "Modify"
         btnAdd.Enabled = False
         btnUpdateScheme.Enabled = True
-
+        btnRemove.Enabled = True
     End Sub
 
    
