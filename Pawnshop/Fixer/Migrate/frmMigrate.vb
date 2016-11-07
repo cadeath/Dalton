@@ -51,27 +51,33 @@
             'Migrate
             Dim MigPt As Integer = dr.Item("PawnTicket")
             Dim MigOldPt As Integer = dr.Item("OldTicket")
+            Dim MigLoanDate As Date = dr.Item("LoanDate")
             Dim MigCategory As String = dr.Item("Category")
             Dim MigItemType As String = dr.Item("ItemType")
             Dim MigKarat As String = dr.Item("PAWNKARAT")
             Dim MigGrams As String = dr.Item("PAWNGRAMS")
             Dim MigDiscription As String = dr.Item("Description")
+            Dim MigStatus As String = dr.Item("Status")
             Dim MigCheckSum As String
             If Not IsDBNull(dr.Item("int_checksum")) Then MigCheckSum = dr.Item("int_checksum")
 
             'Search in OPT
-            Dim sqlOpt As String = "Select * from OPT where OldTicket = " & MigPt
+            Dim sqlOpt As String = "Select * from OPT where Pawnticket = " & MigOldPt
             Dim DsOpt As DataSet = LoadSQL(sqlOpt, "OPT")
 
             If DsOpt.Tables(0).Rows.Count > 0 Then
+                Dim PawnItemID As Integer = DsOpt.Tables(0).Rows(0).Item("PawnItemID")
                 sqlOpt = "Select * from OPT"
                 DsOpt.Clear()
                 DsOpt = LoadSQL(sqlOpt, "OPT")
                 Dim dsNewRow As DataRow
                 dsNewRow = DsOpt.Tables("OPT").NewRow
                 With dsNewRow
-                    '.Item("PawnTicket") = PTNew
-                    .Item("OldTicket") = MigPt
+                    .Item("PawnTicket") = MigPt
+                    .Item("OldTicket") = MigOldPt
+                    .Item("LoanDate") = MigLoanDate
+                    .Item("PawnItemID") = PawnItemID
+                    .Item("Status") = MigStatus
                 End With
                 DsOpt.Tables("OPT").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpt)
@@ -86,6 +92,7 @@
                     .Item("ItemID") = GetClass(MigCategory, ItemClass.ID)
                     .Item("ItemClass") = GetClass(MigCategory, ItemClass.Name)
                     .Item("Scheme_ID") = GetInt(MigItemType, MigCheckSum)
+                    .Item("Created_at") = Now
                 End With
                 DsOpi.Tables("OPI").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpi)
@@ -112,21 +119,18 @@
                             DsPi1.Tables("PI1").Rows.Add(dsNewRow)
                         End With
                         database.SaveEntry(DsPi1)
+                        DsPi1.Clear()
                     Next
                 Else
                     With dsNewRow
-                        .Item("SpecsName") = specsName(3)
-                        .Item("SpecsType") = specsType(3)
+                        .Item("SpecsName") = specsName(2)
+                        .Item("SpecsType") = specsType(2)
                         .Item("SpecsValue") = MigDiscription
                         .Item("PawnItemID") = GetLastID()
+                        DsPi1.Tables("PI1").Rows.Add(dsNewRow)
                     End With
-                    DsPi1.Tables("PI1").Rows.Add(dsNewRow)
                     database.SaveEntry(DsPi1)
                 End If
-
-                DsPi1.Tables("PI1").Rows.Add(dsNewRow)
-                database.SaveEntry(DsPi1)
-
 
                 sqlOpt = "Select * from OPT"
                 DsOpt.Clear()
@@ -135,7 +139,10 @@
                 dsNewRow = DsOpt.Tables("OPT").NewRow
                 With dsNewRow
                     .Item("PAWNTICKET") = MigPt
+                    .Item("OldTicket") = MigOldPt
+                    .Item("LoanDate") = MigLoanDate
                     .Item("PawnItemID") = GetLastID()
+                    .Item("Status") = MigStatus
                 End With
                 DsOpt.Tables("OPT").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpt)
