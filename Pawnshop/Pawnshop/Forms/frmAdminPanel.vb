@@ -700,13 +700,13 @@ Public Class frmAdminPanel
 
         lvIntscheme.Items.Clear()
         txtSchemeName.Text = "" : txtSchemeName.Enabled = True
-        txtDescription.Text = "" : txtDescription.Enabled = True
+        txtDescription1.Text = "" : txtDescription1.Enabled = True
 
     End Sub
 
     Private Sub Modifyschemes()
         If txtSchemeName.Text = "" Then txtSchemeName.Focus()
-        If txtDescription.Text = "" Then txtDescription.Focus()
+        If txtDescription1.Text = "" Then txtDescription1.Focus()
         If lvIntscheme.Items.Count <= 0 Then Exit Sub
 
         Dim ans As DialogResult = MsgBox("Do you want to Update this Scheme?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
