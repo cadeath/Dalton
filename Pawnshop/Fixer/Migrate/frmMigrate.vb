@@ -48,10 +48,26 @@
         Dim ds As DataSet = LoadSQL(mysql)
 
         For Each dr As DataRow In ds.Tables(0).Rows
-            'Migrate
+            'Migrate Data
             Dim MigPt As Integer = dr.Item("PawnTicket")
             Dim MigOldPt As Integer = dr.Item("OldTicket")
             Dim MigLoanDate As Date = dr.Item("LoanDate")
+            Dim MigMaturityDate As Date = dr.Item("Matudate")
+            Dim MigExpiryDate As Date = dr.Item("ExpiryDate")
+            Dim MigAuctionDate As Date = dr.Item("AuctionDate")
+            Dim MigClientID As Integer = dr.Item("ClientID")
+            Dim MigOrNum As Integer = dr.Item("OrNum")
+            Dim MigOrDate As Date = dr.Item("ORDate")
+            Dim MigNetAount As Integer = dr.Item("NetAmount")
+            Dim MigRenewDue As Integer = dr.Item("RenewDue")
+            Dim MigRedeemDue As Integer = dr.Item("RedeemDue")
+            Dim MigAppraisal As Integer = dr.Item("Appraisal")
+            Dim MigPrincipal As Integer = dr.Item("Principal")
+            Dim MigInterest As Integer = dr.Item("Interest")
+            Dim MigAdvInt As Integer = dr.Item("AdvInt")
+            Dim MigServiceCharge As Integer = dr.Item("ServiceCharge")
+            Dim MigPenalty As Integer = dr.Item("Penalty")
+            Dim MigPullout As Date = dr.Item("Pullout")
             Dim MigCategory As String = dr.Item("Category")
             Dim MigItemType As String = dr.Item("ItemType")
             Dim MigKarat As String = dr.Item("PAWNKARAT")
@@ -61,7 +77,7 @@
             Dim MigCheckSum As String
             If Not IsDBNull(dr.Item("int_checksum")) Then MigCheckSum = dr.Item("int_checksum")
 
-            'Search in OPT
+            'Search OldTicket in OPT
             Dim sqlOpt As String = "Select * from OPT where Pawnticket = " & MigOldPt
             Dim DsOpt As DataSet = LoadSQL(sqlOpt, "OPT")
 
@@ -110,8 +126,10 @@
                             .Item("SpecsType") = specsType(i)
                             If "GRAMS" = specsName(i) Then
                                 .Item("SpecsValue") = MigGrams
+                                .Item("UOM") = "G"
                             ElseIf "KARAT" = specsName(i) Then
                                 .Item("SpecsValue") = MigKarat
+                                .Item("UOM") = "K"
                             Else
                                 .Item("SpecsValue") = MigDiscription
                             End If
@@ -147,7 +165,6 @@
                 DsOpt.Tables("OPT").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpt)
             End If
-
 
 
             pbProgressBar.Value = pbProgressBar.Value + 1
