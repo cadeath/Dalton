@@ -1,6 +1,7 @@
 ﻿Public Class frmMigrate
     Const DBPATH As String = "\W3W1LH4CKU.FDB"
 
+#Region "Old"
     Private Sub UpdateScheme()
         Try
             Dim mysql As String = "Select * from tblPawn"
@@ -32,76 +33,160 @@
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
+#End Region
 
     Private Sub UpdateScheme2()
-        Try
-            Dim mysql As String = "Select * from tblPawn"
-            Dim filldata As String = "tblPawn"
-            Dim ds As DataSet = LoadSQL(mysql, filldata)
+        'Try
+        Dim mysql As String = "SELECT  P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, P.CLIENTID, "
+        mysql &= "CASE  WHEN P.ITEMTYPE = 'JWL' AND (P.DESCRIPTION = Null OR P.DESCRIPTION = '') THEN  "
+        mysql &= "CLASS.CATEGORY || ' ' || ROUND(P.GRAMS,2) || 'G ' || P.KARAT || 'K' "
+        mysql &= " ELSE P.DESCRIPTION END AS Description,  "
+        mysql &= "P.ORNUM, P.ORDATE, P.OLDTICKET, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL, P.PRINCIPAL,  "
+        mysql &= "P.INTEREST, P.ADVINT, P.SERVICECHARGE,P.PENALTY, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT, "
+        mysql &= "P.STATUS, P.PULLOUT, P.INT_CHECKSUM, P.KARAT AS PAWNKARAT, P.GRAMS AS PAWNGRAMS "
+        mysql &= "FROM TBLPAWN P LEFT JOIN TBLCLASS CLASS ON CLASS.CLASSID = P.CATID "
+        Dim ds As DataSet = LoadSQL(mysql)
 
-            For Each dr As DataRow In ds.Tables(0).Rows
-                Dim MigPt As Integer = dr.Item("PawnTicket")
-                Dim MigItemType As String = dr.Item("ItemType")
+        For Each dr As DataRow In ds.Tables(0).Rows
+            'Migrate
+            Dim MigPt As Integer = dr.Item("PawnTicket")
+            Dim MigOldPt As Integer = dr.Item("OldTicket")
+            Dim MigCategory As String = dr.Item("Category")
+            Dim MigItemType As String = dr.Item("ItemType")
+            Dim MigKarat As String = dr.Item("PAWNKARAT")
+            Dim MigGrams As String = dr.Item("PAWNGRAMS")
+            Dim MigDiscription As String = dr.Item("Description")
+            Dim MigCheckSum As String
+            If Not IsDBNull(dr.Item("int_checksum")) Then MigCheckSum = dr.Item("int_checksum")
 
+            'Search in OPT
+            Dim sqlOpt As String = "Select * from OPT where OldTicket = " & MigPt
+            Dim DsOpt As DataSet = LoadSQL(sqlOpt, "OPT")
 
-                Dim sqlOpt As String = "Select * from OPT where OldTicket = " & MigPt
-                Dim DsOpt As DataSet = LoadSQL(sqlOpt, "OPT")
-                Dim PTNew As Integer = DsOpt.Tables(0).Rows(0).Item("PawnTicket")
-                If DsOpt.Tables(0).Rows.Count = 1 Then
-                    sqlOpt = "Select * from OPT"
-                    DsOpt.Clear()
-                    DsOpt = LoadSQL(sqlOpt, "OPT")
-                    Dim dsNewRow As DataRow
-                    dsNewRow = ds.Tables("OPT").NewRow
-                    With dsNewRow
-                        .Item("PawnTicket") = PTNew
-                        .Item("OldTicket") = MigPt
+            If DsOpt.Tables(0).Rows.Count > 0 Then
+                sqlOpt = "Select * from OPT"
+                DsOpt.Clear()
+                DsOpt = LoadSQL(sqlOpt, "OPT")
+                Dim dsNewRow As DataRow
+                dsNewRow = DsOpt.Tables("OPT").NewRow
+                With dsNewRow
+                    '.Item("PawnTicket") = PTNew
+                    .Item("OldTicket") = MigPt
+                End With
+                DsOpt.Tables("OPT").Rows.Add(dsNewRow)
+                database.SaveEntry(DsOpt)
 
-                    End With
-                    ds.Tables("OPT").Rows.Add(dsNewRow)
-                    database.SaveEntry(ds)
+            Else
+                Dim sqlOpi As String = "Select * from OPI"
+                Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
 
+                Dim dsNewRow As DataRow
+                dsNewRow = DsOpi.Tables("OPI").NewRow
+                With dsNewRow
+                    .Item("ItemID") = GetClass(MigCategory, ItemClass.ID)
+                    .Item("ItemClass") = GetClass(MigCategory, ItemClass.Name)
+                    .Item("Scheme_ID") = GetInt(MigItemType, MigCheckSum)
+                End With
+                DsOpi.Tables("OPI").Rows.Add(dsNewRow)
+                database.SaveEntry(DsOpi)
+
+                Dim sqlPi1 As String = "Select * from PI1"
+                Dim DsPi1 As DataSet = LoadSQL(sqlPi1, "PI1")
+                dsNewRow = DsPi1.Tables("PI1").NewRow
+
+                Dim specsName As String() = {"GRAMS", "KARAT", "DESCRIPTION"}
+                Dim specsType As String() = {"INTEGER", "INTEGER", "STRING"}
+                If MigItemType = "JWL" Then
+                    For i As Integer = 0 To 2
+                        With dsNewRow
+                            .Item("SpecsName") = specsName(i)
+                            .Item("SpecsType") = specsType(i)
+                            If "GRAMS" = specsName(i) Then
+                                .Item("SpecsValue") = MigGrams
+                            ElseIf "KARAT" = specsName(i) Then
+                                .Item("SpecsValue") = MigKarat
+                            Else
+                                .Item("SpecsValue") = MigDiscription
+                            End If
+                            .Item("PawnItemID") = GetLastID()
+                            DsPi1.Tables("PI1").Rows.Add(dsNewRow)
+                        End With
+                        database.SaveEntry(DsPi1)
+                    Next
                 Else
-
-                    Dim sqlOpi As String = "Select * from OPI"
-                    Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
-
-                    Dim dsNewRow As DataRow
-                    dsNewRow = ds.Tables("OPI").NewRow
                     With dsNewRow
-                        .Item("ItemClass") = MigItemType
-                    End With
-                    ds.Tables("OPI").Rows.Add(dsNewRow)
-                    database.SaveEntry(ds)
-
-                    sqlOpt = "Select * from OPT"
-                    DsOpt.Clear()
-                    DsOpt = LoadSQL(sqlOpt, "OPT")
-
-                    dsNewRow = ds.Tables("OPT").NewRow
-                    With dsNewRow
-                        .Item("PAWNTICKET") = MigPt
+                        .Item("SpecsName") = specsName(3)
+                        .Item("SpecsType") = specsType(3)
+                        .Item("SpecsValue") = MigDiscription
                         .Item("PawnItemID") = GetLastID()
                     End With
-                    ds.Tables("OPT").Rows.Add(dsNewRow)
-                    database.SaveEntry(ds)
+                    DsPi1.Tables("PI1").Rows.Add(dsNewRow)
+                    database.SaveEntry(DsPi1)
                 End If
 
+                DsPi1.Tables("PI1").Rows.Add(dsNewRow)
+                database.SaveEntry(DsPi1)
 
 
-                pbProgressBar.Value = pbProgressBar.Value + 1
-                Application.DoEvents()
-                lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F2"))
+                sqlOpt = "Select * from OPT"
+                DsOpt.Clear()
+                DsOpt = LoadSQL(sqlOpt, "OPT")
 
-            Next
-            If MsgBox("Successful", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, _
-                 "Migrating...") = MsgBoxResult.Ok Then pbProgressBar.Maximum = 0
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
-        End Try
+                dsNewRow = DsOpt.Tables("OPT").NewRow
+                With dsNewRow
+                    .Item("PAWNTICKET") = MigPt
+                    .Item("PawnItemID") = GetLastID()
+                End With
+                DsOpt.Tables("OPT").Rows.Add(dsNewRow)
+                database.SaveEntry(DsOpt)
+            End If
+
+
+
+            pbProgressBar.Value = pbProgressBar.Value + 1
+            Application.DoEvents()
+            lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F2"))
+
+        Next
+        If MsgBox("Successful", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, _
+             "Migrating...") = MsgBoxResult.Ok Then pbProgressBar.Maximum = 0
+        'Catch ex As Exception
+        '    MsgBox(ex.Message, MsgBoxStyle.Critical)
+        'End Try
     End Sub
 
-    Public Function GetLastID() As Single
+    Enum ItemClass As Integer
+        ID = 0
+        Name = 1
+    End Enum
+
+    Private Function GetClass(ByVal Item As String, ByVal TYPE As ItemClass)
+        Dim strItem As String, mysql As String, ds As DataSet
+        If Item = "HOME APP-SMALL" Then
+            strItem = "HOME APPLIANCES"
+        ElseIf Item = "MOTORCYCLE" Then
+            strItem = "MOTOR"
+        ElseIf Item = "HOME APP-BIG" Then
+            strItem = "BIG APPLIANCES"
+        ElseIf Item = "CAMERA" Then
+            strItem = "COMPACT CAMERA"
+        Else
+            strItem = Item
+        End If
+        mysql = "Select * from tblItem where ItemCLass = '" & strItem & "'"
+        ds = LoadSQL(mysql, "tblItem")
+        Select Case TYPE
+            Case ItemClass.ID
+                Return ds.Tables(0).Rows(0).Item("ItemID")
+
+            Case ItemClass.Name
+                Return ds.Tables(0).Rows(0).Item("ItemClass")
+
+        End Select
+        Return strItem
+    End Function
+
+    Private Function GetLastID() As Single
         Dim mySql As String = "SELECT * FROM OPI ORDER BY PawnItemID DESC"
         Dim ds As DataSet = LoadSQL(mySql)
 
