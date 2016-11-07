@@ -35,7 +35,7 @@
     End Sub
 #End Region
 
-    Private Sub UpdateScheme2()
+    Private Sub Migrate()
         'Try
         Dim mysql As String = "SELECT  P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, P.CLIENTID, "
         mysql &= "CASE  WHEN P.ITEMTYPE = 'JWL' AND (P.DESCRIPTION = Null OR P.DESCRIPTION = '') THEN  "
@@ -44,7 +44,7 @@
         mysql &= "P.ORNUM, P.ORDATE, P.OLDTICKET, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL, P.PRINCIPAL,  "
         mysql &= "P.INTEREST, P.ADVINT, P.SERVICECHARGE,P.PENALTY, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT, "
         mysql &= "P.STATUS, P.PULLOUT, P.INT_CHECKSUM, P.KARAT AS PAWNKARAT, P.GRAMS AS PAWNGRAMS, P.RENEWALCNT, "
-        mysql &= "P.EARLYREDEEM, "
+        mysql &= "P.EARLYREDEEM "
         mysql &= "FROM TBLPAWN P LEFT JOIN TBLCLASS CLASS ON CLASS.CLASSID = P.CATID "
         Dim ds As DataSet = LoadSQL(mysql)
 
@@ -111,7 +111,7 @@
                     .Item("ClaimerID") = MigClientID
                     .Item("ClientID") = MigClientID
                     .Item("PawnItemID") = PawnItemID
-                    .Item("Decription") = MigDiscription
+                    .Item("Description") = MigDiscription
                     .Item("ORNum") = MigOrNum
                     .Item("ORDate") = MigOrDate
                     .Item("Penalty") = MigPenalty
@@ -139,7 +139,10 @@
                     .Item("ItemClass") = GetClass(MigCategory, ItemClass.Name)
                     .Item("Scheme_ID") = GetInt(MigItemType, MigCheckSum)
                     .Item("WithDrawDate") = MigPullout
-                    .Item("Status") = MigStatus
+                    Select Case MigStatus
+                        Case "L", "0", "R"
+                            .Item("Status") = "A"
+                    End Select
                     .Item("RenewalCnt") = MigRenewCount
                     .Item("Created_at") = Now
                 End With
@@ -203,7 +206,7 @@
                     .Item("ClaimerID") = MigClientID
                     .Item("ClientID") = MigClientID
                     .Item("PawnItemID") = GetLastID()
-                    .Item("Decription") = MigDiscription
+                    .Item("Description") = MigDiscription
                     .Item("ORNum") = MigOrNum
                     .Item("ORDate") = MigOrDate
                     .Item("Penalty") = MigPenalty
@@ -225,7 +228,6 @@
             pbProgressBar.Value = pbProgressBar.Value + 1
             Application.DoEvents()
             lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F2"))
-
         Next
         If MsgBox("Successful", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, _
              "Migrating...") = MsgBoxResult.Ok Then pbProgressBar.Maximum = 0
@@ -345,7 +347,7 @@
     End Sub
 
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
-        UpdateScheme2()
+        Migrate()
     End Sub
 
     Private Sub LoadPath()
