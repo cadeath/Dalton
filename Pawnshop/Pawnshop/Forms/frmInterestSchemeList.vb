@@ -64,7 +64,7 @@
 
         frmAdminPanel.LoadSchemeList(tmpScheme)
         frmAdminPanel.Show()
-        Me.Hide()
+        Me.Close()
 
     End Sub
 

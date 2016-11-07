@@ -609,8 +609,8 @@ Public Class frmAdminPanel
 
         btnUpdate.Enabled = True
         lvIntscheme.Items.Clear()
-        txtDescription.Clear()
-        txtSchemeName.Clear()
+        txtDescription1.Text = ""
+        txtSchemeName.Text = ""
         clearfields1()
     End Sub
 
