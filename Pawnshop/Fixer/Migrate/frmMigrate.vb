@@ -40,10 +40,11 @@
         Dim mysql As String = "SELECT  P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, P.CLIENTID, "
         mysql &= "CASE  WHEN P.ITEMTYPE = 'JWL' AND (P.DESCRIPTION = Null OR P.DESCRIPTION = '') THEN  "
         mysql &= "CLASS.CATEGORY || ' ' || ROUND(P.GRAMS,2) || 'G ' || P.KARAT || 'K' "
-        mysql &= " ELSE P.DESCRIPTION END AS Description,  "
+        mysql &= " ELSE P.DESCRIPTION END AS Description, P.ENCODERID, P.APPRAISERID, P.DAYSOVERDUE, "
         mysql &= "P.ORNUM, P.ORDATE, P.OLDTICKET, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL, P.PRINCIPAL,  "
         mysql &= "P.INTEREST, P.ADVINT, P.SERVICECHARGE,P.PENALTY, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT, "
-        mysql &= "P.STATUS, P.PULLOUT, P.INT_CHECKSUM, P.KARAT AS PAWNKARAT, P.GRAMS AS PAWNGRAMS "
+        mysql &= "P.STATUS, P.PULLOUT, P.INT_CHECKSUM, P.KARAT AS PAWNKARAT, P.GRAMS AS PAWNGRAMS, P.RENEWALCNT, "
+        mysql &= "P.EARLYREDEEM, "
         mysql &= "FROM TBLPAWN P LEFT JOIN TBLCLASS CLASS ON CLASS.CLASSID = P.CATID "
         Dim ds As DataSet = LoadSQL(mysql)
 
@@ -55,6 +56,8 @@
             Dim MigMaturityDate As Date = dr.Item("Matudate")
             Dim MigExpiryDate As Date = dr.Item("ExpiryDate")
             Dim MigAuctionDate As Date = dr.Item("AuctionDate")
+            Dim MigAppraiserID As Integer = dr.Item("AppraiserID")
+            Dim MigEncoderID As Integer = dr.Item("EncoderID")
             Dim MigClientID As Integer = dr.Item("ClientID")
             Dim MigOrNum As Integer = dr.Item("OrNum")
             Dim MigOrDate As Date = dr.Item("ORDate")
@@ -63,17 +66,22 @@
             Dim MigRedeemDue As Integer = dr.Item("RedeemDue")
             Dim MigAppraisal As Integer = dr.Item("Appraisal")
             Dim MigPrincipal As Integer = dr.Item("Principal")
-            Dim MigInterest As Integer = dr.Item("Interest")
+            Dim MigInterest As Integer
+            If Not IsDBNull(dr.Item("Interest")) Then MigInterest = dr.Item("Interest")
             Dim MigAdvInt As Integer = dr.Item("AdvInt")
             Dim MigServiceCharge As Integer = dr.Item("ServiceCharge")
             Dim MigPenalty As Integer = dr.Item("Penalty")
-            Dim MigPullout As Date = dr.Item("Pullout")
+            Dim MigPullout As Date
+            If Not IsDBNull(dr.Item("PullOut")) Then MigPullout = dr.Item("PullOut")
             Dim MigCategory As String = dr.Item("Category")
             Dim MigItemType As String = dr.Item("ItemType")
             Dim MigKarat As String = dr.Item("PAWNKARAT")
             Dim MigGrams As String = dr.Item("PAWNGRAMS")
             Dim MigDiscription As String = dr.Item("Description")
             Dim MigStatus As String = dr.Item("Status")
+            Dim MigEarlyRedeem As Integer = dr.Item("EarlyRedeem")
+            Dim MigDayOverDue As Integer = dr.Item("DaysOverDue")
+            Dim MigRenewCount As Integer = dr.Item("RenewalCnt")
             Dim MigCheckSum As String
             If Not IsDBNull(dr.Item("int_checksum")) Then MigCheckSum = dr.Item("int_checksum")
 
@@ -92,8 +100,30 @@
                     .Item("PawnTicket") = MigPt
                     .Item("OldTicket") = MigOldPt
                     .Item("LoanDate") = MigLoanDate
+                    .Item("Matudate") = MigMaturityDate
+                    .Item("ExpiryDate") = MigExpiryDate
+                    .Item("AuctionDate") = MigAuctionDate
+                    .Item("Appraisal") = MigAppraisal
+                    .Item("Principal") = MigPrincipal
+                    .Item("NetAmount") = MigNetAount
+                    .Item("AppraiserID") = MigAppraiserID
+                    .Item("EncoderID") = MigEncoderID
+                    .Item("ClaimerID") = MigClientID
+                    .Item("ClientID") = MigClientID
                     .Item("PawnItemID") = PawnItemID
+                    .Item("Decription") = MigDiscription
+                    .Item("ORNum") = MigOrNum
+                    .Item("ORDate") = MigOrDate
+                    .Item("Penalty") = MigPenalty
                     .Item("Status") = MigStatus
+                    .Item("DaysOverDue") = MigDayOverDue
+                    .Item("EarlyRedeem") = MigEarlyRedeem
+                    .Item("DelayInterest") = MigInterest
+                    .Item("AdvInt") = MigAdvInt
+                    .Item("RenewDue") = MigRenewDue
+                    .Item("RedeemDue") = MigRedeemDue
+                    .Item("ServiceCharge") = MigServiceCharge
+                    .Item("Created_at") = Now
                 End With
                 DsOpt.Tables("OPT").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpt)
@@ -108,6 +138,9 @@
                     .Item("ItemID") = GetClass(MigCategory, ItemClass.ID)
                     .Item("ItemClass") = GetClass(MigCategory, ItemClass.Name)
                     .Item("Scheme_ID") = GetInt(MigItemType, MigCheckSum)
+                    .Item("WithDrawDate") = MigPullout
+                    .Item("Status") = MigStatus
+                    .Item("RenewalCnt") = MigRenewCount
                     .Item("Created_at") = Now
                 End With
                 DsOpi.Tables("OPI").Rows.Add(dsNewRow)
@@ -159,8 +192,30 @@
                     .Item("PAWNTICKET") = MigPt
                     .Item("OldTicket") = MigOldPt
                     .Item("LoanDate") = MigLoanDate
+                    .Item("Matudate") = MigMaturityDate
+                    .Item("ExpiryDate") = MigExpiryDate
+                    .Item("AuctionDate") = MigAuctionDate
+                    .Item("Appraisal") = MigAppraisal
+                    .Item("Principal") = MigPrincipal
+                    .Item("NetAmount") = MigNetAount
+                    .Item("AppraiserID") = MigAppraiserID
+                    .Item("EncoderID") = MigEncoderID
+                    .Item("ClaimerID") = MigClientID
+                    .Item("ClientID") = MigClientID
                     .Item("PawnItemID") = GetLastID()
+                    .Item("Decription") = MigDiscription
+                    .Item("ORNum") = MigOrNum
+                    .Item("ORDate") = MigOrDate
+                    .Item("Penalty") = MigPenalty
                     .Item("Status") = MigStatus
+                    .Item("DaysOverDue") = MigDayOverDue
+                    .Item("EarlyRedeem") = MigEarlyRedeem
+                    .Item("DelayInterest") = MigInterest
+                    .Item("AdvInt") = MigAdvInt
+                    .Item("RenewDue") = MigRenewDue
+                    .Item("RedeemDue") = MigRedeemDue
+                    .Item("ServiceCharge") = MigServiceCharge
+                    .Item("Created_at") = Now
                 End With
                 DsOpt.Tables("OPT").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpt)
