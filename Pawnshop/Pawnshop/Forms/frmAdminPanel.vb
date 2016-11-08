@@ -224,7 +224,7 @@ Public Class frmAdminPanel
     End Sub
 
     '"""""""""""""""""""""""""""""export""""""""""""""""""""""""""""""""""""""""
-    Private Sub cboModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cboModuleName_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboModuleName.SelectedIndexChanged
         If cboModuleName.Text = "" And cboModuleName.Visible Then Exit Sub
         If cboModuleName.Visible Then
             Select Case cboModuleName.Text
@@ -886,7 +886,4 @@ Public Class frmAdminPanel
         btnUpdateScheme.Enabled = True
         btnRemove.Enabled = True
     End Sub
-
-   
-   
 End Class
