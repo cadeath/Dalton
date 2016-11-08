@@ -140,7 +140,7 @@
                     .Item("Scheme_ID") = GetInt(MigItemType, MigCheckSum)
                     .Item("WithDrawDate") = MigPullout
                     Select Case MigStatus
-                        Case "L", "R"
+                        Case "L", "0", "R"
                             .Item("Status") = "A"
                         Case Else
                             .Item("Status") = MigStatus
@@ -301,45 +301,16 @@
         Dim tmpID As String
 
         If ds.Tables(0).Rows(0).Item("Remarks") = "Early Redemption" Then isEarlyRedeem = True
-        'If isEarlyRedeem = False Then
-
-        '    If Int = "0.03" Then
-        '        tmpID = 1
-        '    ElseIf Int = "0.04" Then
-        '        tmpID = 2
-        '    ElseIf Int = "0.05" Then
-        '        tmpID = 3
-        '    ElseIf Int = "0.06" Then
-        '        tmpID = 4
-        '    ElseIf Int = "0.07" Then
-        '        tmpID = 5
-        '    End If
-        'ElseIf isEarlyRedeem = True Then
-
-        '    If Int = "0.03" Then
-        '        tmpID = 6
-        '    ElseIf Int = "0.04" Then
-        '        tmpID = 7
-        '    ElseIf Int = "0.05" Then
-        '        tmpID = 8
-        '    ElseIf Int = "0.06" Then
-        '        tmpID = 9
-        '    ElseIf Int = "0.07" Then
-        '        tmpID = 10
-        '    End If
-        'Else
-        '    tmpID = 1
-        'End If
         If isEarlyRedeem = True Then
             mySql = "SELECT  I.SCHEMEID, I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
             mySql &= "D.INTEREST, D.PENALTY, D.REMARKS "
             mySql &= "FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
-            mySql &= "Where UPPER(I.DESCRIPTION) LIKE UPPER('%Early Redemption%') AND D.INTEREST = " & Int
+            mySql &= "Where UPPER(I.DESCRIPTION) LIKE UPPER('%Early Redemption%') AND DAYTO = 33 AND D.INTEREST = " & Int
         Else
             mySql = "SELECT  I.SCHEMEID, I.SCHEMENAME, I.DESCRIPTION, D.DAYFROM, D.DAYTO, "
             mySql &= "D.INTEREST, D.PENALTY, D.REMARKS "
             mySql &= "FROM TBLINTSCHEMES I INNER JOIN TBLINTSCHEME_DETAILS D ON I.SCHEMEID = D.SCHEMEID "
-            mySql &= "Where UPPER(I.DESCRIPTION) NOT LIKE UPPER('%Early Redemption%') AND D.INTEREST = " & Int
+            mySql &= "Where UPPER(I.DESCRIPTION) NOT LIKE UPPER('%Early Redemption%') AND DAYTO = 33 AND D.INTEREST = " & Int
         End If
 
         Dim dsScheme As DataSet = LoadSQL(mySql)
