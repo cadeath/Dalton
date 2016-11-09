@@ -1,39 +1,7 @@
-﻿Public Class frmMigrate
+﻿Imports System.Data.Odbc
+
+Public Class frmMigrate
     Const DBPATH As String = "\W3W1LH4CKU.FDB"
-
-#Region "Old"
-    Private Sub UpdateScheme()
-        Try
-            Dim mysql As String = "Select * from tblPawn"
-            Dim filldata As String = "tblPawn"
-            Dim ds As DataSet = LoadSQL(mysql, filldata)
-
-            For Each dr As DataRow In ds.Tables(0).Rows
-                Dim tmpPawnID As String = dr.Item("PawnID")
-                Dim tmpItemType As String = dr.Item("ItemType")
-                Dim tmpIntcheckSum As String
-                If Not IsDBNull(dr.Item("int_checksum")) Then tmpIntcheckSum = dr.Item("int_checksum")
-
-                Dim tmpSchemeID As String = GetInt(tmpItemType, tmpIntcheckSum)
-
-                Dim mysql2 As String = "Select * from OPI where PawnItemID = '" & tmpPawnID & "'"
-                Dim filldata2 As String = "OPI"
-                Dim ds2 As DataSet = LoadSQL(mysql2, filldata2)
-                ds2.Tables(filldata2).Rows(0).Item("Scheme_ID") = tmpSchemeID
-                database.SaveEntry(ds2, False)
-
-                pbProgressBar.Value = pbProgressBar.Value + 1
-                Application.DoEvents()
-                lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F2"))
-
-            Next
-            If MsgBox("Successful", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, _
-                 "Migrating...") = MsgBoxResult.Ok Then pbProgressBar.Maximum = 0
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
-        End Try
-    End Sub
-#End Region
 
     Private Sub Migrate()
         'Try
@@ -237,6 +205,7 @@
         '    MsgBox(ex.Message, MsgBoxStyle.Critical)
         'End Try
     End Sub
+
 
     Enum ItemClass As Integer
         ID = 0

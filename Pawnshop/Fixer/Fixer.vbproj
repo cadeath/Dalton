@@ -136,6 +136,13 @@
     <Compile Include="Migrate\frmMigrate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Migrate\frmUpdate.Designer.vb">
+      <DependentUpon>frmUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrate\frmUpdate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Migrate\updateRate.vb" />
     <Compile Include="Modules\Fixing_Mlang.vb" />
     <Compile Include="Modules\fix_mechanism.vb" />
     <Compile Include="frmMain.vb">
@@ -201,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrate\frmMigrate.resx">
       <DependentUpon>frmMigrate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrate\frmUpdate.resx">
+      <DependentUpon>frmUpdate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
