@@ -30,14 +30,17 @@ Public Class frmUpdate
 
     Private Sub frmUpdate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadPath()
+        Dim path As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+
+        Dim pdffile As String = IO.Path.Combine(path, "Item.cir")
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
             PatchTables()
+          
 
             Database_Update(LATEST_VERSION)
-            Log_Report("SYSTEM PATCHED UP FROM 1.2.2.3 TO 1.2.2.4")
         Catch ex As Exception
-            Log_Report("[1.2.2.4]" & ex.ToString)
+            Log_Report("[1.2.2.5]" & ex.ToString)
         End Try
     End Sub
     Private Sub PatchTables()
