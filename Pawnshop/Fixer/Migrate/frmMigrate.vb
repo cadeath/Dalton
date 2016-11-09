@@ -232,7 +232,7 @@
             lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F2"))
         Next
         If MsgBox("Successful", MsgBoxStyle.OkOnly + MsgBoxStyle.Information, _
-             "Migrating...") = MsgBoxResult.Ok Then pbProgressBar.Maximum = 0
+             "Migrating...") = MsgBoxResult.Ok Then pbProgressBar.Minimum = 0 : pbProgressBar.Value = 0
         'Catch ex As Exception
         '    MsgBox(ex.Message, MsgBoxStyle.Critical)
         'End Try
