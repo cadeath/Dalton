@@ -485,17 +485,19 @@ Public Class frmMigrate
         Catch ex As Exception
             Log_Report("[1.2.2.5]" & ex.ToString)
         End Try
-
+        Try
         updateRate.do_RateUpdate(ItemCir)
         updateRate.do_RateUpdate(SchemeCir)
-
-            Dim mysql As String = "Select * from tblPawn"
-            Dim filldata As String = "tblPawn"
-            Dim ds As DataSet = LoadSQL(mysql, filldata)
-            If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Data Found!", MsgBoxStyle.Critical, "Check Your Database") : Me.Close()
-            Dim tmpMax As Integer = ds.Tables(0).Rows.Count
-            pbProgressBar.Minimum = 0
-            pbProgressBar.Maximum = tmpMax
+        Catch ex As Exception
+            MsgBox("Please Check Cir Path!", MsgBoxStyle.Critical, "Error")
+        End Try
+        Dim mysql As String = "Select * from tblPawn"
+        Dim filldata As String = "tblPawn"
+        Dim ds As DataSet = LoadSQL(mysql, filldata)
+        If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Data Found!", MsgBoxStyle.Critical, "Check Your Database") : Me.Close()
+        Dim tmpMax As Integer = ds.Tables(0).Rows.Count
+        pbProgressBar.Minimum = 0
+        pbProgressBar.Maximum = tmpMax
     End Sub
 
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
