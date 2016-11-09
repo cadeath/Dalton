@@ -481,13 +481,13 @@ Public Class frmMigrate
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
             PatchTables()
-            updateRate.do_RateUpdate(ItemCir)
-            updateRate.do_RateUpdate(SchemeCir)
-
             Database_Update(LATEST_VERSION)
         Catch ex As Exception
             Log_Report("[1.2.2.5]" & ex.ToString)
         End Try
+
+        updateRate.do_RateUpdate(ItemCir)
+        updateRate.do_RateUpdate(SchemeCir)
 
             Dim mysql As String = "Select * from tblPawn"
             Dim filldata As String = "tblPawn"
