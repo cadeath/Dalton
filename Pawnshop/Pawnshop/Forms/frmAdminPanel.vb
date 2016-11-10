@@ -638,12 +638,18 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
-        If Not isValidsceheme() Then Exit Sub
-        lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
-        lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
-        lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
-        lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
-        lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+
+        Try
+            If Not isValidsceheme() Then Exit Sub
+            lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
+            lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
+            lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
+            lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
+            lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+        Catch ex As Exception
+            MsgBox("Data you select has been removed.", MsgBoxStyle.Information)
+        End Try
+      
         clearfields1()
         Label18.Text = "Update"
         btnUpdateScheme.Enabled = False
