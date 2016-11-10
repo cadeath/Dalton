@@ -209,7 +209,10 @@ Public Class frmMigrate
     End Sub
 
     Private Sub PatchTables()
-
+        frmLoading.Process("Creating Scheme Table . . .")
+        frmLoading.Show()
+        frmLoading.pbLoading.Minimum = 0
+        frmLoading.pbLoading.Maximum = 23
         'Scheme
         Dim TableScheme As String = "CREATE TABLE TBLINTSCHEMES ("
         TableScheme &= "SCHEMEID INTEGER NOT NULL, "
@@ -363,33 +366,63 @@ Public Class frmMigrate
         Pawn_List &= vbCrLf & "ON USR.USERID = P.APPRAISERID "
 
         'Create Tables
+
+        frmLoading.pbLoading.Value = 1
         RunCommand(TableScheme)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(TableSchemeDetail)
+        frmLoading.Process("Creating Pawn Table . . .")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(TableOpi)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(TableOpt)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(TablePi1)
+        frmLoading.Process("Creating Item Table . . .")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(TableItem)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(TableSpecs)
+        frmLoading.Process("Creating Pawn_list View . . .")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(Pawn_List)
 
+
         'Add Primary Key to Tables
+        frmLoading.Process("Adding Key to Tables . . .")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(SchemeKey)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(SchemeDetailKey)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(OpiKey)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(OptKey)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(Pi1Key)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(ItemKey)
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(SpecsKey)
 
 
         'Add AutoIncrement to Tables
+        frmLoading.Process("Adding Auto Increment to Tables . . .")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         AutoIncrement_ID("TBLINTSCHEMES", "SCHEMEID")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         AutoIncrement_ID("TBLINTSCHEME_DETAILS", "IS_ID")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         AutoIncrement_ID("OPI", "PAWNITEMID")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         AutoIncrement_ID("OPT", "PAWNID")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         AutoIncrement_ID("PI1", "PAWNSPECSID")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         AutoIncrement_ID("TBLITEM", "ITEMID")
+        frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         AutoIncrement_ID("TBLSPECS", "SPECSID")
+        frmLoading.Process("Finishing . . .")
 
     End Sub
 
@@ -487,6 +520,7 @@ Public Class frmMigrate
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
             PatchTables()
+            frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
             Database_Update(LATEST_VERSION)
         Catch ex As Exception
             Log_Report("[1.2.2.5]" & ex.ToString)
@@ -497,10 +531,17 @@ Public Class frmMigrate
         Catch ex As Exception
             MsgBox("Please Check Cir Path!", MsgBoxStyle.Critical, "Error")
         End Try
+        frmLoading.Close()
     End Sub
 
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
+        Disable(1)
         Migrate()
+        Disable(0)
+    End Sub
+
+    Private Sub Disable(ByVal st As Boolean)
+        btnFix.Enabled = Not st
     End Sub
 
     Private Sub LoadPath()

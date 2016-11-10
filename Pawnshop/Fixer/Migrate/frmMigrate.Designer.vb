@@ -86,6 +86,7 @@ Partial Class frmMigrate
         Me.ClientSize = New System.Drawing.Size(310, 96)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "frmMigrate"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Migration"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
