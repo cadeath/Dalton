@@ -1,4 +1,11 @@
-﻿Public Class ItemData
+﻿Public Class cItemData
+
+#Region "Variables"
+    Private mySql As String
+    Private ds As DataSet
+
+    Const TABLE As String = "ITEMMASTER"
+#End Region
 
 #Region "Properties"
     Private _itemID As Integer
@@ -135,8 +142,10 @@
 
 #Region "Procedures"
     Public Sub Load_Item(Optional ByVal id As Integer = 0)
-        Dim mySql As String = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & If(id = 0, _itemID, id)
-        Dim ds As DataSet = LoadSQL(mySql)
+        mySql = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & If(id = 0, _itemID, id)
+
+        ds = New DataSet
+        ds = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count <> 1 Then
             MsgBox("Failed to load item", MsgBoxStyle.Critical, "ID NOT FOUND")
@@ -162,7 +171,30 @@
     End Sub
 
     Public Sub Save_ItemData()
+        mySql = "SELECT * FROM ITEMMASTER ROWS 1"
 
+        ds = New DataSet
+        ds = LoadSQL(mySql, TABLE)
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(TABLE).NewRow
+        With dsNewRow
+            .Item("ITEMCODE") = _itemCode
+            .Item("DESCRIPTION") = _description
+            .Item("CATEGORIES") = _category
+            .Item("SUBCAT") = _subCat
+            .Item("UOM") = _UoM
+            .Item("UNITPRICE") = _unitPrice
+            .Item("SALEPRICE") = _salePrice
+            .Item("ISSALE") = If(_isSale, 1, 0)
+            .Item("ISINV") = If(_isInv, 1, 0)
+            .Item("ONHOLD") = _onHold
+            .Item("ONHAND") = _onHand
+            .Item("COMMENTS") = _comments
+        End With
+        ds.Tables(TABLE).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds)
     End Sub
 
 #End Region

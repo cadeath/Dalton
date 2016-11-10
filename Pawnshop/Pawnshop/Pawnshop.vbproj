@@ -736,13 +736,19 @@
     <Compile Include="Reports\qrySequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\frmIMD.Designer.vb">
+      <DependentUpon>frmIMD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmIMD.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SalesInventory\frmSales.Designer.vb">
       <DependentUpon>frmSales.vb</DependentUpon>
     </Compile>
     <Compile Include="SalesInventory\frmSales.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SalesInventory\ItemData.vb" />
+    <Compile Include="SalesInventory\cItemData.vb" />
     <Compile Include="Seed\Client_Seed.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -1113,6 +1119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\_layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmIMD.resx">
+      <DependentUpon>frmIMD.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmSales.resx">
       <DependentUpon>frmSales.vb</DependentUpon>

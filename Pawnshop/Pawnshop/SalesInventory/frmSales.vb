@@ -67,7 +67,7 @@ Public Class frmSales
         End If
     End Function
 
-    Friend Sub AddItem(ByVal itm As ItemData, ByVal qty As Double)
+    Friend Sub AddItem(ByVal itm As cItemData, ByVal qty As Double)
         Dim ItemAmount As Double
         Dim hasSelected As Boolean = False
 
@@ -223,7 +223,7 @@ Public Class frmSales
 
             Console.WriteLine("Removing " & lvSale.Items(idx).Text)
 
-            Dim itm As New ItemData
+            Dim itm As New cItemData
             itm.Load_Item(lvSale.Items(idx).Text)
 
             DOC_TOTAL -= itm.SalePrice * CDbl(lvSale.Items(idx).SubItems(2).Text)
@@ -273,7 +273,7 @@ Public Class frmSales
             .Item("VATRATE") = VAT
             .Item("VATTOTAL") = DOC_VATTOTAL
             .Item("DOCTOTAL") = DOC_TOTAL
-            '.Item("USERID") = GetUserID()
+            .Item("USERID") = POSuser.UserID
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
@@ -297,7 +297,7 @@ Public Class frmSales
         ds = LoadSQL(mySql, fillData)
 
         For Each ht As DictionaryEntry In ht_BroughtItems
-            Dim itm As New ItemData
+            Dim itm As New cItemData
             itm.Load_Item(ht.Key)
 
             dsNewRow = ds.Tables(fillData).NewRow
