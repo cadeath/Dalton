@@ -887,8 +887,4 @@ Public Class frmAdminPanel
         btnRemove.Enabled = True
     End Sub
 
-   
-   
-  
-   
 End Class
