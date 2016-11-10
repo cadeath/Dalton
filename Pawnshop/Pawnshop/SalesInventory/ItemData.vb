@@ -1,6 +1,16 @@
 ﻿Public Class ItemData
 
 #Region "Properties"
+    Private _itemID As Integer
+    Public Property ItemID() As Integer
+        Get
+            Return _itemID
+        End Get
+        Set(ByVal value As Integer)
+            _itemID = value
+        End Set
+    End Property
+
     Private _itemCode As String
     Public Property ItemCode() As String
         Get
@@ -101,6 +111,16 @@
         End Set
     End Property
 
+    Private _onHold As Boolean
+    Public Property onHold() As Boolean
+        Get
+            Return _onHold
+        End Get
+        Set(ByVal value As Boolean)
+            _onHold = value
+        End Set
+    End Property
+
     Private _comments As String
     Public Property Comments() As String
         Get
@@ -113,6 +133,37 @@
 
 #End Region
 
+#Region "Procedures"
+    Public Sub Load_Item(Optional ByVal id As Integer = 0)
+        Dim mySql As String = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & If(id = 0, _itemID, id)
+        Dim ds As DataSet = LoadSQL(mySql)
 
+        If ds.Tables(0).Rows.Count <> 1 Then
+            MsgBox("Failed to load item", MsgBoxStyle.Critical, "ID NOT FOUND")
+            Exit Sub
+        End If
 
+        With ds.Tables(0).Rows(0)
+            _itemID = .Item("ITEMID")
+            _itemCode = .Item("ITEMCODE")
+            _description = .Item("DESCRIPTION")
+            _category = .Item("CATEGORIES")
+            _subCat = .Item("SUBCAT")
+            _UoM = .Item("UOM")
+            _unitPrice = .Item("UNITPRICE")
+            _salePrice = .Item("SALEPRICE")
+            _isSale = If(.Item("ISSALE") = 1, True, False)
+            _isInv = If(.Item("ISINV") = 1, True, False)
+            _onHold = If(.Item("ONHOLD") = 1, True, False)
+            _onHand = .Item("ONHAND")
+        End With
+
+        Console.WriteLine(String.Format("{0} loaded.", _itemCode))
+    End Sub
+
+    Public Sub Save_ItemData()
+
+    End Sub
+
+#End Region
 End Class
