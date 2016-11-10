@@ -426,6 +426,23 @@ Public Class frmMigrate
 
     End Sub
 
+    Private Sub DeleteTables()
+        Dim DropExpiry As String = "DROP VIEW EXPIRY_LIST;"
+        Dim DropLoan As String = "DROP VIEW LOAN_REGISTER;"
+        Dim DropLoanRenew As String = "DROP VIEW MONTHLY_LOANRENEW;"
+        Dim DropPawning As String = "DROP VIEW PAWNING;"
+        Dim DropPrint As String = "DROP VIEW PRINT_PAWNING;"
+        Dim DropPawn As String = "DROP TABLE TBLPAWN;"
+
+        RunCommand(DropExpiry)
+        RunCommand(DropLoan)
+        RunCommand(DropLoanRenew)
+        RunCommand(DropPawning)
+        RunCommand(DropPrint)
+        RunCommand(DropPawn)
+
+    End Sub
+
     Enum ItemClass As Integer
         ID = 0
         Name = 1
