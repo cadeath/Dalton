@@ -475,19 +475,19 @@ Public Class frmMigrate
 
     Private Sub frmMigrate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadPath()
+
+        Dim mysql As String = "Select * from tblPawn"
+        Dim filldata As String = "tblPawn"
+        Dim ds As DataSet = LoadSQL(mysql, filldata)
+        If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Data Found!", MsgBoxStyle.Critical, "Check Your Database") : Me.Close()
+        Dim tmpMax As Integer = ds.Tables(0).Rows.Count
+        pbProgressBar.Minimum = 0
+        pbProgressBar.Maximum = tmpMax
+
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
             PatchTables()
             Database_Update(LATEST_VERSION)
-
-            Dim mysql As String = "Select * from tblPawn"
-            Dim filldata As String = "tblPawn"
-            Dim ds As DataSet = LoadSQL(mysql, filldata)
-            If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Data Found!", MsgBoxStyle.Critical, "Check Your Database") : Me.Close()
-            Dim tmpMax As Integer = ds.Tables(0).Rows.Count
-            pbProgressBar.Minimum = 0
-            pbProgressBar.Maximum = tmpMax
-
         Catch ex As Exception
             Log_Report("[1.2.2.5]" & ex.ToString)
         End Try
