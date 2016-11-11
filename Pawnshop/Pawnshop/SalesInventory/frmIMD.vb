@@ -67,7 +67,7 @@
                 .SalePrice = txtSale.Text
                 '.MinimumDeviation = txtDev.Text
                 .isSaleable = chkSales.Checked
-                '.Remarks = txtRemarks.Text
+                .Comments = txtRemarks.Text
 
                 .Save_ItemData()
                 MsgBox(.ItemCode & " is now updated", MsgBoxStyle.Information, "Item Master Data")

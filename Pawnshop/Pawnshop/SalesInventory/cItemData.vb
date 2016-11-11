@@ -197,5 +197,24 @@
         database.SaveEntry(ds)
     End Sub
 
+    Public Sub LoadReader_Item(ByVal rd As IDataReader)
+        On Error Resume Next
+
+        With rd
+            _itemID = .Item("ITEMID")
+            _ItemCode = .Item("ITEMCODE")
+            _Description = .Item("DESCRIPTION")
+            _category = .Item("CATEGORIES")
+            _subCat = .Item("SUBCAT")
+            _uom = .Item("UOM")
+            _unitPrice = .Item("UNITPRICE")
+            _salePrice = .Item("SALEPRICE")
+            _isSale = IIf(.Item("ISSALE") = 1, True, False)
+            _isInv = IIf(.Item("ISINV") = 1, True, False)
+            _onHold = IIf(.Item("ONHOLD") = 1, True, False)
+            _comments = .Item("COMMENTS")
+            _onHand = .Item("ONHAND")
+        End With
+    End Sub
 #End Region
 End Class
