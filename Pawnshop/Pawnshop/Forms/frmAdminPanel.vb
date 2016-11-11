@@ -835,8 +835,15 @@ Public Class frmAdminPanel
             Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
             btnEdit.Text = "&Edit"
+            btnEdit.Enabled = False
             btnsavescheme.Enabled = False
-            btnSave.Text = "&Save"
+            btnsavescheme.Text = "&Save"
+            btnsavescheme.Enabled = True
+            lvIntscheme.Items.Clear()
+            txtDescription1.Text = "" : txtDescription1.Enabled = True
+            txtSchemeName.Text = "" : txtSchemeName.Enabled = True
+            btnUpdateScheme.Enabled = False
+            btnRemove.Enabled = False
         End If
     End Sub
 
