@@ -620,16 +620,16 @@ Public Class PawnTicket
         Try
             Dim PtransID As Integer
             Dim ModNAME As String = ""
-            If frmPawning.Label6.Text = "L" Then
-                ModNAME = "NEW LOANS"
-                PtransID = frmPawning.Label5.Text
-            ElseIf frmPawning.Label6.Text = "X" Then
-                ModNAME = "REDEMPTION"
-                PtransID = frmPawning.Label5.Text
-            ElseIf frmPawning.Label6.Text = "R" Then
-                ModNAME = "RENEWALS"
-                PtransID = frmPawning.Label5.Text
-            End If
+            'If frmPawning.Label6.Text = "L" Then
+            '    ModNAME = "NEW LOANS"
+            '    PtransID = frmPawning.Label5.Text
+            'ElseIf frmPawning.Label6.Text = "X" Then
+            '    ModNAME = "REDEMPTION"
+            '    PtransID = frmPawning.Label5.Text
+            'ElseIf frmPawning.Label6.Text = "R" Then
+            '    ModNAME = "RENEWALS"
+            '    PtransID = frmPawning.Label5.Text
+            'End If
 
             ' Dim tranID As Integer = CInt(frmPawning.lvPawners.FocusedItem.Tag)
 
@@ -740,15 +740,15 @@ Public Class PawnTicket
         Return ds.Tables(0).Rows(0).Item("PAWNID")
     End Function
 
-    Public Function LoadStatus() As String
-        Dim mysql1 As String = "SELECT PAWNID,STATUS FROM " & fillData & " WHERE PAWNID =" & frmPawning.Label5.Text
+    'Public Function LoadStatus() As String
+    '    Dim mysql1 As String = "SELECT PAWNID,STATUS FROM " & fillData & " WHERE PAWNID =" & frmPawning.Label5.Text
 
-        Dim ds1 As DataSet = LoadSQL(mysql1, fillData)
-        If ds1.Tables(0).Rows.Count = 0 Then
-            Return 0
-        End If
-        Return ds1.Tables(0).Rows(0).Item("STATUS")
-    End Function
+    '    Dim ds1 As DataSet = LoadSQL(mysql1, fillData)
+    '    If ds1.Tables(0).Rows.Count = 0 Then
+    '        Return 0
+    '    End If
+    '    Return ds1.Tables(0).Rows(0).Item("STATUS")
+    'End Function
 
 #End Region
 End Class

@@ -93,6 +93,12 @@ Public Class PawnCompute
         End Set
     End Property
 
+    Private _isEarlyRedeem As Boolean = False
+    Public ReadOnly Property isEarlyRedeem() As Boolean
+        Get
+            Return _isEarlyRedeem
+        End Get
+    End Property
     '====================== END ======================'
 #End Region
 
@@ -162,9 +168,11 @@ Public Class PawnCompute
             Select Case days
                 Case Int.DayFrom To Int.DayTo
                     If ret = percentType.Interest Then _
-                        Return Int.Interest
+                        If Int.Remarks = "Early Redemption" Then _isEarlyRedeem = True
+                    Return Int.Interest
                     If ret = percentType.Penalty Then _
-                        Return Int.Penalty
+                        If Int.Remarks = "Early Redemption" Then _isEarlyRedeem = True
+                    Return Int.Penalty
             End Select
         Next
 

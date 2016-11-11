@@ -130,6 +130,25 @@
     <Compile Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Migrate\frmLoading.Designer.vb">
+      <DependentUpon>frmLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrate\frmLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Migrate\frmMigrate.Designer.vb">
+      <DependentUpon>frmMigrate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrate\frmMigrate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Migrate\frmUpdate.Designer.vb">
+      <DependentUpon>frmUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrate\frmUpdate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Migrate\updateRate.vb" />
     <Compile Include="Modules\Fixing_Mlang.vb" />
     <Compile Include="Modules\fix_mechanism.vb" />
     <Compile Include="frmMain.vb">
@@ -193,6 +212,15 @@
     <EmbeddedResource Include="CashInBank\frmMain2.resx">
       <DependentUpon>frmMain2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrate\frmLoading.resx">
+      <DependentUpon>frmLoading.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrate\frmMigrate.resx">
+      <DependentUpon>frmMigrate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrate\frmUpdate.resx">
+      <DependentUpon>frmUpdate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -208,6 +236,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fixer_TemporaryKey.pfx" />
+    <None Include="Migrate\Interest.cir">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrate\Item.cir">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

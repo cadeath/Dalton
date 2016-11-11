@@ -23,11 +23,6 @@ Partial Class frmInterestScheme
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.txtRemarks = New Pawnshop.watermark()
-        Me.txtPenalty = New Pawnshop.watermark()
-        Me.txtInterest = New Pawnshop.watermark()
-        Me.txtDayTo = New Pawnshop.watermark()
-        Me.txtDayFrom = New Pawnshop.watermark()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -35,8 +30,6 @@ Partial Class frmInterestScheme
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtDescription = New Pawnshop.watermark()
-        Me.txtSchemeName = New Pawnshop.watermark()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.btnClose = New System.Windows.Forms.Button()
@@ -59,8 +52,15 @@ Partial Class frmInterestScheme
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnUpdateScheme = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtSearch = New Pawnshop.watermark()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtSearch = New Pawnshop.watermark()
+        Me.txtDescription = New Pawnshop.watermark()
+        Me.txtSchemeName = New Pawnshop.watermark()
+        Me.txtRemarks = New Pawnshop.watermark()
+        Me.txtPenalty = New Pawnshop.watermark()
+        Me.txtInterest = New Pawnshop.watermark()
+        Me.txtDayTo = New Pawnshop.watermark()
+        Me.txtDayFrom = New Pawnshop.watermark()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -86,52 +86,6 @@ Partial Class frmInterestScheme
         Me.GroupBox1.Size = New System.Drawing.Size(546, 132)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
-        '
-        'txtRemarks
-        '
-        Me.txtRemarks.Location = New System.Drawing.Point(270, 50)
-        Me.txtRemarks.Multiline = True
-        Me.txtRemarks.Name = "txtRemarks"
-        Me.txtRemarks.Size = New System.Drawing.Size(249, 60)
-        Me.txtRemarks.TabIndex = 4
-        Me.txtRemarks.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtRemarks.WatermarkText = "Remarks"
-        '
-        'txtPenalty
-        '
-        Me.txtPenalty.Location = New System.Drawing.Point(81, 88)
-        Me.txtPenalty.Name = "txtPenalty"
-        Me.txtPenalty.Size = New System.Drawing.Size(112, 22)
-        Me.txtPenalty.TabIndex = 3
-        Me.txtPenalty.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPenalty.WatermarkText = "Penalty"
-        '
-        'txtInterest
-        '
-        Me.txtInterest.Location = New System.Drawing.Point(78, 51)
-        Me.txtInterest.Name = "txtInterest"
-        Me.txtInterest.Size = New System.Drawing.Size(112, 22)
-        Me.txtInterest.TabIndex = 2
-        Me.txtInterest.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtInterest.WatermarkText = "Interest"
-        '
-        'txtDayTo
-        '
-        Me.txtDayTo.Location = New System.Drawing.Point(270, 16)
-        Me.txtDayTo.Name = "txtDayTo"
-        Me.txtDayTo.Size = New System.Drawing.Size(249, 22)
-        Me.txtDayTo.TabIndex = 1
-        Me.txtDayTo.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDayTo.WatermarkText = "Day To"
-        '
-        'txtDayFrom
-        '
-        Me.txtDayFrom.Location = New System.Drawing.Point(78, 16)
-        Me.txtDayFrom.Name = "txtDayFrom"
-        Me.txtDayFrom.Size = New System.Drawing.Size(112, 22)
-        Me.txtDayFrom.TabIndex = 0
-        Me.txtDayFrom.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDayFrom.WatermarkText = "Day From"
         '
         'Label5
         '
@@ -184,7 +138,7 @@ Partial Class frmInterestScheme
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(88, 34)
         Me.btnSave.TabIndex = 0
-        Me.btnSave.Text = "Save"
+        Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -201,25 +155,6 @@ Partial Class frmInterestScheme
         Me.GroupBox2.Size = New System.Drawing.Size(375, 133)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
-        '
-        'txtDescription
-        '
-        Me.txtDescription.Location = New System.Drawing.Point(109, 55)
-        Me.txtDescription.Multiline = True
-        Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(250, 52)
-        Me.txtDescription.TabIndex = 1
-        Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtDescription.WatermarkText = "Description"
-        '
-        'txtSchemeName
-        '
-        Me.txtSchemeName.Location = New System.Drawing.Point(109, 18)
-        Me.txtSchemeName.Name = "txtSchemeName"
-        Me.txtSchemeName.Size = New System.Drawing.Size(250, 22)
-        Me.txtSchemeName.TabIndex = 0
-        Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSchemeName.WatermarkText = "Scheme Name"
         '
         'Label6
         '
@@ -258,7 +193,7 @@ Partial Class frmInterestScheme
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.Location = New System.Drawing.Point(6, 384)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(924, 55)
+        Me.GroupBox3.Size = New System.Drawing.Size(918, 55)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
         '
@@ -268,7 +203,7 @@ Partial Class frmInterestScheme
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(88, 34)
         Me.btnUpdate.TabIndex = 1
-        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.Text = "&Edit"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'Label7
@@ -408,6 +343,15 @@ Partial Class frmInterestScheme
         Me.Label9.TabIndex = 3
         Me.Label9.Text = "Update"
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(439, 208)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(157, 13)
+        Me.Label11.TabIndex = 10
+        Me.Label11.Text = "Double Click Scheme to update"
+        '
         'txtSearch
         '
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -418,14 +362,70 @@ Partial Class frmInterestScheme
         Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
         Me.txtSearch.WatermarkText = "Search . . ."
         '
-        'Label11
+        'txtDescription
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(439, 208)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(157, 13)
-        Me.Label11.TabIndex = 10
-        Me.Label11.Text = "Double Click Scheme to update"
+        Me.txtDescription.Location = New System.Drawing.Point(109, 55)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(250, 52)
+        Me.txtDescription.TabIndex = 1
+        Me.txtDescription.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDescription.WatermarkText = "Description"
+        '
+        'txtSchemeName
+        '
+        Me.txtSchemeName.Location = New System.Drawing.Point(109, 18)
+        Me.txtSchemeName.Name = "txtSchemeName"
+        Me.txtSchemeName.Size = New System.Drawing.Size(250, 22)
+        Me.txtSchemeName.TabIndex = 0
+        Me.txtSchemeName.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSchemeName.WatermarkText = "Scheme Name"
+        '
+        'txtRemarks
+        '
+        Me.txtRemarks.Location = New System.Drawing.Point(270, 50)
+        Me.txtRemarks.Multiline = True
+        Me.txtRemarks.Name = "txtRemarks"
+        Me.txtRemarks.Size = New System.Drawing.Size(249, 60)
+        Me.txtRemarks.TabIndex = 4
+        Me.txtRemarks.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtRemarks.WatermarkText = "Remarks"
+        '
+        'txtPenalty
+        '
+        Me.txtPenalty.Location = New System.Drawing.Point(81, 88)
+        Me.txtPenalty.Name = "txtPenalty"
+        Me.txtPenalty.Size = New System.Drawing.Size(112, 22)
+        Me.txtPenalty.TabIndex = 3
+        Me.txtPenalty.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPenalty.WatermarkText = "Penalty"
+        '
+        'txtInterest
+        '
+        Me.txtInterest.Location = New System.Drawing.Point(78, 51)
+        Me.txtInterest.Name = "txtInterest"
+        Me.txtInterest.Size = New System.Drawing.Size(112, 22)
+        Me.txtInterest.TabIndex = 2
+        Me.txtInterest.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtInterest.WatermarkText = "Interest"
+        '
+        'txtDayTo
+        '
+        Me.txtDayTo.Location = New System.Drawing.Point(270, 16)
+        Me.txtDayTo.Name = "txtDayTo"
+        Me.txtDayTo.Size = New System.Drawing.Size(249, 22)
+        Me.txtDayTo.TabIndex = 1
+        Me.txtDayTo.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDayTo.WatermarkText = "Day To"
+        '
+        'txtDayFrom
+        '
+        Me.txtDayFrom.Location = New System.Drawing.Point(78, 16)
+        Me.txtDayFrom.Name = "txtDayFrom"
+        Me.txtDayFrom.Size = New System.Drawing.Size(112, 22)
+        Me.txtDayFrom.TabIndex = 0
+        Me.txtDayFrom.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtDayFrom.WatermarkText = "Day From"
         '
         'frmInterestScheme
         '

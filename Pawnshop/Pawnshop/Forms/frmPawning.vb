@@ -147,7 +147,7 @@
 
             If i >= 100 Then isMoreThan100 = True
         End While
-
+        
         dbReaderClose()
     End Sub
 
@@ -257,6 +257,14 @@
             i += 1
 
             If i >= 100 Then isMoreThan100 = True
+
+            Select Case PawnReader("Status")
+                Case "0" : lv.BackColor = Color.LightGray
+                Case "X" : lv.BackColor = Color.Red
+                Case "S" : lv.BackColor = Color.Yellow
+                Case "W" : lv.BackColor = Color.Red
+                Case "V" : lv.BackColor = Color.Gray
+            End Select
         End While
         Dim MaxRow As Integer = ds.Tables(0).Rows.Count
         If MaxRow <= 0 Then
@@ -297,11 +305,13 @@
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
         If lvPawners.SelectedItems.Count <= 0 Then Exit Sub
 
-        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
-        Dim tmpTicket As New PawnTicket
-        tmpTicket.LoadTicket(idx)
-        frmPawnItem.Show()
-        frmPawnItem.LoadPawnTicket(tmpTicket, "D")
+        Dim idx As Integer = CInt(lvPawners.FocusedItem.Text)
+        Dim tmpTicket As New PawnTicket2
+        tmpTicket.Load_PawnTicket(idx)
+        frmPawningItemNew.Show()
+        frmPawningItemNew.transactionType = "D"
+        frmPawningItemNew.Load_PawnTicket(tmpTicket)
+
     End Sub
 
     ''' <summary>
@@ -312,7 +322,7 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub lvPawners_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvPawners.DoubleClick
-        'btnView.PerformClick()
+        btnView.PerformClick()
     End Sub
 
     ''' <summary>
@@ -420,15 +430,6 @@
         txtSearch.Clear()
     End Sub
 
-    Private Sub lvPawners_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvPawners.MouseClick
-        Dim idx As Integer = CInt(lvPawners.FocusedItem.Tag)
-        Dim tpmstatus As New PawnTicket
-        Dim tmpTicket As New PawnTicket
-        Label5.Text = idx
-        Label6.Text = tpmstatus.LoadStatus
-
-    End Sub
-
     Private Sub GroupBox1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles GroupBox1.DoubleClick
         If mod_system.DEV_MODE Then
 
@@ -442,9 +443,5 @@
                 Console.WriteLine(pawnSpec.SpecsValue)
             Next
         End If
-    End Sub
-
-    Private Sub lvPawners_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvPawners.SelectedIndexChanged
-
     End Sub
 End Class

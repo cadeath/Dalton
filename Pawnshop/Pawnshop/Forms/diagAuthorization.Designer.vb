@@ -53,6 +53,7 @@ Partial Class diagAuthorization
         '
         Me.txtUser.Location = New System.Drawing.Point(98, 8)
         Me.txtUser.Name = "txtUser"
+        Me.txtUser.ReadOnly = True
         Me.txtUser.Size = New System.Drawing.Size(184, 20)
         Me.txtUser.TabIndex = 0
         '

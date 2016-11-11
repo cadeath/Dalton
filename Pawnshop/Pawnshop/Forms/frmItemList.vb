@@ -105,10 +105,12 @@
     End Sub
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        If Not fromOtherForm Then ClearFields() : txtSearch.Focus() : LoadActive_ItemClasses()
+        If Not fromOtherForm Then ClearFields() : txtSearch.Focus()
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
             btnSearch.PerformClick()
+        Else
+            LoadActive_ItemClasses()
         End If
 
     End Sub
