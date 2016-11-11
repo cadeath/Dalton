@@ -222,12 +222,6 @@
     <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_Config.Designer.vb">
-      <DependentUpon>dev_Config.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\dev_Config.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Developer\dev_encrypt.Designer.vb">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </Compile>
@@ -376,7 +370,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InterestScheme\InterestScheme.vb" />
-    <Compile Include="InterestScheme\Interest_Config.vb" />
     <Compile Include="InterestScheme\IntScheme_Lines.vb" />
     <Compile Include="InterestScheme\Scheme_Interest.vb" />
     <Compile Include="InterestScheme\Scheme_Load.vb" />
@@ -756,9 +749,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_Config.resx">
-      <DependentUpon>dev_Config.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
