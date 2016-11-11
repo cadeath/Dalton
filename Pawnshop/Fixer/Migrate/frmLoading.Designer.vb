@@ -32,9 +32,9 @@ Partial Class frmLoading
         '
         Me.GroupBox1.Controls.Add(Me.lblProcess)
         Me.GroupBox1.Controls.Add(Me.pbLoading)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 3)
+        Me.GroupBox1.Location = New System.Drawing.Point(2, -2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(316, 57)
+        Me.GroupBox1.Size = New System.Drawing.Size(334, 62)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
@@ -51,7 +51,7 @@ Partial Class frmLoading
         '
         Me.pbLoading.Location = New System.Drawing.Point(6, 29)
         Me.pbLoading.Name = "pbLoading"
-        Me.pbLoading.Size = New System.Drawing.Size(304, 23)
+        Me.pbLoading.Size = New System.Drawing.Size(320, 23)
         Me.pbLoading.TabIndex = 0
         '
         'frmLoading
@@ -60,6 +60,7 @@ Partial Class frmLoading
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(340, 64)
         Me.Controls.Add(Me.GroupBox1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmLoading"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.GroupBox1.ResumeLayout(False)
