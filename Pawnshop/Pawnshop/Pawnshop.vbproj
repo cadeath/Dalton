@@ -222,6 +222,12 @@
     <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\dev_Config.Designer.vb">
+      <DependentUpon>dev_Config.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_Config.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_encrypt.Designer.vb">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </Compile>
@@ -232,12 +238,6 @@
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_ExtractToExcel.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Developer\dev_inherit.Designer.vb">
-      <DependentUpon>dev_inherit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\dev_inherit.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_NewItem.Designer.vb">
@@ -376,6 +376,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InterestScheme\InterestScheme.vb" />
+    <Compile Include="InterestScheme\Interest_Config.vb" />
     <Compile Include="InterestScheme\IntScheme_Lines.vb" />
     <Compile Include="InterestScheme\Scheme_Interest.vb" />
     <Compile Include="InterestScheme\Scheme_Load.vb" />
@@ -756,14 +757,14 @@
     <EmbeddedResource Include="Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_Config.resx">
+      <DependentUpon>dev_Config.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ExtractToExcel.resx">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_inherit.resx">
-      <DependentUpon>dev_inherit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_NewItem.resx">
       <DependentUpon>dev_NewItem.vb</DependentUpon>

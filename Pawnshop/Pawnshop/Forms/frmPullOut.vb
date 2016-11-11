@@ -66,8 +66,8 @@
 
         'lvSeg.Items.Clear()
         'For Each dr As DataRow In ds.Tables(0).Rows
-        '    Dim tmpDr As New PawnTicket
-        '    tmpDr.LoadTicketInRow(dr)
+        '    Dim tmpDr As New PawnTicket2
+        '    tmpDr.Load_PT_row(dr)
         '    AddItemSeg(tmpDr)
         'Next
     End Sub
@@ -85,21 +85,21 @@
     End Sub
 
     Private Sub btnOnePull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOnePull.Click
-        If lvSeg.Items.Count <= 0 Then Exit Sub
+        If lvSeg.SelectedItems.Count <= 0 Then Exit Sub
 
         Dim idx As Integer = lvSeg.FocusedItem.Tag
         Dim pullPT As New PawnTicket2
-        pullPT.Load_PawnTicket(idx)
+        pullPT.Load_PTid(idx)
         AddItemPull(pullPT)
         lvSeg.Items.RemoveAt(lvSeg.FocusedItem.Index)
     End Sub
 
     Private Sub btnGetPull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGetPull.Click
-        If lvPullOut.Items.Count <= 0 Then Exit Sub
+        If lvPullOut.items.Count <= 0 Then Exit Sub
 
         Dim idx As Integer = lvPullOut.FocusedItem.Tag
         Dim segPT As New PawnTicket2
-        segPT.Load_PawnTicket(idx)
+        segPT.Load_PTid(idx)
         AddItemSeg(segPT)
         lvPullOut.Items.RemoveAt(lvPullOut.FocusedItem.Index)
     End Sub
@@ -109,18 +109,18 @@
 
         For Each itm As ListViewItem In lvSeg.Items
             Dim tmp As New PawnTicket2
-            tmp.Load_PawnTicket(itm.Tag)
+            tmp.Load_PTid(itm.Tag)
             AddItemPull(tmp)
         Next
         lvSeg.Items.Clear()
     End Sub
 
     Private Sub btnGetAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGetAll.Click
-        If lvPullOut.Items.Count <= 0 Then Exit Sub
+        If lvPullOut.SelectedItems.Count <= 0 Then Exit Sub
 
         For Each itm As ListViewItem In lvPullOut.Items
             Dim tmp As New PawnTicket2
-            tmp.Load_PawnTicket(itm.Tag)
+            tmp.Load_PTid(itm.Tag)
             AddItemSeg(tmp)
         Next
         lvPullOut.Items.Clear()
@@ -138,7 +138,7 @@
 
         For Each itm As ListViewItem In lvPullOut.Items
             Dim pt As New PawnTicket2
-            pt.Load_PawnTicket(itm.Tag)
+            pt.Load_PTid(itm.Tag)
             pt.PullOut(CurrentDate)
         Next
 

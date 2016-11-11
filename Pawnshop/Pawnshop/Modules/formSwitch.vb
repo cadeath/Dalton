@@ -16,6 +16,7 @@
         frmPawningV2_Specs = 11
         frmPawningV2_Claimer = 12
         frmPawningV2_SpecsValue = 13
+        frmPawningV2_InterestScheme = 14
     End Enum
 
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
@@ -49,6 +50,13 @@
             Case FormName.frmPawningV2_SpecsValue
                 frmAdminPanel.Load_ItemSpecification(Selected_Specs)
 
+        End Select
+    End Sub
+
+    Friend Sub ReloadFormFromInterestList(ByVal gotoForm As FormName, ByVal selected_scheme As InterestScheme)
+        Select Case gotoForm
+            Case FormName.frmPawningV2_Specs
+                frmAdminPanel.LoadSchemeList(selected_scheme)
         End Select
     End Sub
 

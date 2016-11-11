@@ -384,8 +384,14 @@ Public Class frmExtractor
         Dim sd As Date = MonCalendar.SelectionStart
         Dim ed As Date = MonCalendar.SelectionEnd
 
-        Dim mySql As String = "SELECT * FROM EXPIRY_LIST"
-        mySql &= vbCr & " WHERE "
+        Dim mySql As String = "SELECT P.*, ITM.ITEMCATEGORY, PITM.ITEMCLASS, C.*, U.USERNAME FROM OPT P "
+        mySql &= "INNER JOIN tblClient C on P.clientid = C.clientid "
+        mySql &= "INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
+        mySql &= "INNER JOIN OPI PITM ON PITM.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = PITM.ITEMID "
+        mySql &= "WHERE "
+        mySql &= "(P.Status = 'L' or P.Status = 'R') AND "
+        mySql &= "(CHAR_LENGTH(C.Phone1) = 11 OR CHAR_LENGTH(C.Phone2) = 11) AND "
         mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", GetFirstDate(sd).ToShortDateString, GetLastDate(ed).ToShortDateString)
 
         Dim ds_expiry As DataSet = LoadSQL(mySql)
@@ -415,8 +421,8 @@ Public Class frmExtractor
                 oSheet.Cells(rid, 6).value = .Item("Addr_City").ToString 'Addr2
                 oSheet.Cells(rid, 7).value = .Item("Addr_Province").ToString 'Addr3
                 oSheet.Cells(rid, 8).value = .Item("Addr_Zip").ToString 'Zip
-                oSheet.Cells(rid, 9).value = .Item("ItemType").ToString 'ItemType
-                oSheet.Cells(rid, 10).value = .Item("Grams").ToString 'Grams
+                oSheet.Cells(rid, 9).value = .Item("ItemCategory").ToString 'ItemCategory
+                'oSheet.Cells(rid, 10).value = .Item("Grams").ToString 'Grams
                 oSheet.Cells(rid, 11).value = "1" 'NoPCS
                 oSheet.Cells(rid, 12).value = .Item("Description").ToString 'DESC1
                 'oSheet.Cells(rid, 13).value = .Item("PawnTicket").ToString 'DESC2
@@ -429,9 +435,9 @@ Public Class frmExtractor
                 'oSheet.Cells(rid, 20).value = .Item("Interest").ToString 'INT_RATE
                 oSheet.Cells(rid, 21).value = .Item("Appraisal").ToString 'APPRAISAL
                 oSheet.Cells(rid, 22).value = .Item("Principal").ToString 'PRINCIPAL
-                oSheet.Cells(rid, 23).value = .Item("Interest").ToString 'INT_AMOUNT
+                oSheet.Cells(rid, 23).value = .Item("DelayInterest").ToString 'INT_AMOUNT
                 oSheet.Cells(rid, 24).value = .Item("ServiceCharge").ToString 'SRV_CHARGE
-                oSheet.Cells(rid, 25).value = .Item("Evat").ToString 'VAT
+                'oSheet.Cells(rid, 25).value = .Item("Evat").ToString 'VAT
                 'oSheet.Cells(rid, 26).value = .Item("PawnTicket").ToString 'DOC_STAMP
                 oSheet.Cells(rid, 27).value = .Item("NetAmount").ToString 'NET_AMOUNT
                 oSheet.Cells(rid, 28).value = .Item("Username").ToString 'USER
@@ -448,13 +454,13 @@ Public Class frmExtractor
                 oSheet.Cells(rid, 39).value = "'" & .Item("PHONE1").ToString 'PHONE_NO
                 oSheet.Cells(rid, 40).value = .Item("BIRTHDAY").ToString 'BIRTHDAY
                 oSheet.Cells(rid, 41).value = .Item("SEX").ToString 'SEX
-                oSheet.Cells(rid, 42).value = .Item("KARAT").ToString 'KARAT
-                oSheet.Cells(rid, 43).value = .Item("KARAT").ToString 'KARAT1
-                oSheet.Cells(rid, 44).value = .Item("GRAMS").ToString 'GRAMS1
+                'oSheet.Cells(rid, 42).value = .Item("KARAT").ToString 'KARAT
+                'oSheet.Cells(rid, 43).value = .Item("KARAT").ToString 'KARAT1
+                'oSheet.Cells(rid, 44).value = .Item("GRAMS").ToString 'GRAMS1
                 oSheet.Cells(rid, 45).value = .Item("APPRAISAL").ToString 'APPRAISAL1
                 'oSheet.Cells(rid, 46).value = .Item("PawnTicket").ToString 'APPRAISEDBY1
                 'oSheet.Cells(rid, 47).value = .Item("PawnTicket").ToString 'DATE_REAPPRAISAL1
-                oSheet.Cells(rid, 48).value = .Item("Category").ToString 'ITEMDESC
+                oSheet.Cells(rid, 48).value = .Item("ITEMCLASS").ToString 'ITEMDESC
                 'oSheet.Cells(rid, 49).value = .Item("PawnTicket").ToString 'ESKIE
             End With
 
