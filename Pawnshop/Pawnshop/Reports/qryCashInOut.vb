@@ -94,7 +94,7 @@
     End Sub
 
     Private Function TypeFilter() As String
-        Dim receipt As String = "1", disburse As String = "1", Other As String, tmp As String
+        Dim receipt As String = "1", disburse As String = "1", tmp As String
         If chkIN.Checked Then receipt = "TYPE = 'Receipt'"
         If chkOUT.Checked Then disburse = "TYPE = 'Disbursement'"
        
@@ -113,7 +113,7 @@
 
     End Function
     Private Function TypeFilter2() As String
-        Dim receipt As String, disburse As String, Other As String, tmp As String
+        Dim receipt As String = "", disburse As String = "", Other As String = "", tmp As String
         If chkIN.Checked Then receipt = "TYPE = 'Receipt'"
         If chkOUT.Checked Then disburse = "TYPE = 'Disbursement'"
         If chkOther.Checked Then Other = "(TYPE <> 'Receipt' AND TYPE <> 'Disbursement')"
