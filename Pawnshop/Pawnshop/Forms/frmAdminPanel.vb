@@ -654,6 +654,7 @@ Public Class frmAdminPanel
         Label18.Text = "Update"
         btnUpdateScheme.Enabled = False
         btnAdd.Enabled = True
+        btnRemove.Enabled = True
     End Sub
 
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
@@ -890,7 +891,7 @@ Public Class frmAdminPanel
         Label18.Text = "Modify"
         btnAdd.Enabled = False
         btnUpdateScheme.Enabled = True
-        btnRemove.Enabled = True
+        btnRemove.Enabled = False
     End Sub
 
 End Class
