@@ -638,16 +638,23 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
-        If Not isValidsceheme() Then Exit Sub
-        lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
-        lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
-        lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
-        lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
-        lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+
+        Try
+            If Not isValidsceheme() Then Exit Sub
+            lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
+            lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
+            lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
+            lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
+            lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+        Catch ex As Exception
+            MsgBox("Data you select has been removed.", MsgBoxStyle.Information)
+        End Try
+      
         clearfields1()
         Label18.Text = "Update"
         btnUpdateScheme.Enabled = False
         btnAdd.Enabled = True
+        btnRemove.Enabled = True
     End Sub
 
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
@@ -828,8 +835,15 @@ Public Class frmAdminPanel
             Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
             btnEdit.Text = "&Edit"
+            btnEdit.Enabled = False
             btnsavescheme.Enabled = False
-            btnSave.Text = "&Save"
+            btnsavescheme.Text = "&Save"
+            btnsavescheme.Enabled = True
+            lvIntscheme.Items.Clear()
+            txtDescription1.Text = "" : txtDescription1.Enabled = True
+            txtSchemeName.Text = "" : txtSchemeName.Enabled = True
+            btnUpdateScheme.Enabled = False
+            btnRemove.Enabled = False
         End If
     End Sub
 
@@ -884,6 +898,7 @@ Public Class frmAdminPanel
         Label18.Text = "Modify"
         btnAdd.Enabled = False
         btnUpdateScheme.Enabled = True
-        btnRemove.Enabled = True
+        btnRemove.Enabled = False
     End Sub
+
 End Class

@@ -108,12 +108,16 @@ Public Class frmMigrate
                     .Item("ItemID") = GetClass(MigCategory, ItemClass.ID)
                     .Item("ItemClass") = GetClass(MigCategory, ItemClass.Name)
                     .Item("Scheme_ID") = GetInt(MigItemType, MigCheckSum)
-                    .Item("WithDrawDate") = MigPullout
                     Select Case MigStatus
                         Case "L", "0", "R"
                             .Item("Status") = "A"
+                            .Item("WithDrawDate") = MigPullout
+                        Case "X"
+                            .Item("Status") = "X"
+                            .Item("WithDrawDate") = MigOrDate
                         Case Else
                             .Item("Status") = MigStatus
+                            .Item("WithDrawDate") = MigPullout
                     End Select
                     .Item("RenewalCnt") = MigRenewCount
                     .Item("Created_at") = Now
@@ -524,7 +528,10 @@ Public Class frmMigrate
     End Function
 
     Private Sub frmMigrate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        LoadPath()
+        'LoadPath()
+        oFd.ShowDialog()
+        database.dbName = oFd.FileName
+        txtData.Text = oFd.FileName
 
         Dim mysql As String = "Select * from tblPawn"
         Dim filldata As String = "tblPawn"
@@ -629,5 +636,9 @@ err:
         End Try
 
         System.Threading.Thread.Sleep(1000)
+    End Sub
+
+    Private Sub oFd_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles oFd.FileOk
+        database.dbName = oFd.FileName
     End Sub
 End Class
