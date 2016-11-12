@@ -118,6 +118,11 @@ Module updateRate
                 MaxDS = ds.Tables(fillData).Rows.Count
                 MaxRate = dsRate.Tables(fillData).Rows.Count
                 Console.WriteLine("Table " & fillData & " found.")
+
+                If MaxDS > MaxRate Then
+                    MsgBox("Unable to update this module", MsgBoxStyle.Critical)
+                    Exit Sub
+                End If
             Catch ex As Exception
                 Select Case ErrCheck(ex.ToString)
                     Case "Table not found"
@@ -132,12 +137,12 @@ Module updateRate
             Dim i As Integer = 0
             Dim ID As String = ds.Tables(fillData).Columns.Item(0).ColumnName
 
-
+          
             'Remove Excessive entries
-            Console.WriteLine("Checking excessive entries")
-            ds = LoadSQL(mySql, fillData)
-            mySql = "DELETE FROM " & fillData
-            mySql &= " WHERE " & ID & " > " & (0)
+            'Console.WriteLine("Checking excessive entries")
+            'ds = LoadSQL(mySql, fillData)
+            'mySql = "DELETE FROM " & fillData
+            'mySql &= " WHERE " & ID & " > " & (0)
 
             ds.Clear()
             ds = LoadSQL(mySql, fillData)
@@ -177,6 +182,7 @@ Module updateRate
             Dim SetGenerator As String = String.Format("SET GENERATOR {0}_{1}_GEN TO {2}", fillData, ID, dsRate.Tables(fillData).Rows.Count)
             RunCommand(SetGenerator)
         Next
+        MsgBox("System Updated", MsgBoxStyle.Information)
     End Sub
     Private Function ErrCheck(ByVal str As String) As String
         If str.Contains("Table unknown") Then
