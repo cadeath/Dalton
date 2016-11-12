@@ -25,8 +25,6 @@ Public Class frmSales
     Private canTransact As Boolean = True
 
     Private Sub frmSales_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'Seeder.ItemMasterData()
-
         ClearField()
         txtSearch.Select()
 
@@ -415,5 +413,16 @@ Public Class frmSales
 
     Private Sub lvSale_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvSale.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub Label1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label1.DoubleClick
+        If DEV_MODE Then
+            SeedItemData.Populate()
+            Console.WriteLine("ITEM POPULATED")
+        End If
     End Sub
 End Class

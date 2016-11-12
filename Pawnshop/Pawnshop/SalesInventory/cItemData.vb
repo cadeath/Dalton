@@ -182,31 +182,53 @@
     End Sub
 
     Public Sub Save_ItemData()
-        mySql = "SELECT * FROM ITEMMASTER ROWS 1"
+        Dim isNew As Boolean = False
+
+        mySql = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & _itemID
+        If _itemID = 0 Then mySql = "SELECT * FROM ITEMMASTER ROWS 1"
 
         ds = New DataSet
         ds = LoadSQL(mySql, TABLE)
 
-        Dim dsNewRow As DataRow
-        dsNewRow = ds.Tables(TABLE).NewRow
-        With dsNewRow
-            .Item("ITEMCODE") = _itemCode
-            .Item("DESCRIPTION") = _description
-            .Item("BARCODE") = _barCode
-            .Item("CATEGORIES") = _category
-            .Item("SUBCAT") = _subCat
-            .Item("UOM") = _UoM
-            .Item("UNITPRICE") = _unitPrice
-            .Item("SALEPRICE") = _salePrice
-            .Item("ISSALE") = If(_isSale, 1, 0)
-            .Item("ISINV") = If(_isInv, 1, 0)
-            .Item("ONHOLD") = _onHold
-            .Item("ONHAND") = _onHand
-            .Item("COMMENTS") = _comments
-        End With
-        ds.Tables(TABLE).Rows.Add(dsNewRow)
+        If _itemID = 0 Then
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(TABLE).NewRow
+            With dsNewRow
+                .Item("ITEMCODE") = _itemCode
+                .Item("DESCRIPTION") = _description
+                .Item("BARCODE") = _barCode
+                .Item("CATEGORIES") = _category
+                .Item("SUBCAT") = _subCat
+                .Item("UOM") = _UoM
+                .Item("UNITPRICE") = _unitPrice
+                .Item("SALEPRICE") = _salePrice
+                .Item("ISSALE") = If(_isSale, 1, 0)
+                .Item("ISINV") = If(_isInv, 1, 0)
+                .Item("ONHOLD") = _onHold
+                .Item("ONHAND") = _onHand
+                .Item("COMMENTS") = _comments
+            End With
+            ds.Tables(TABLE).Rows.Add(dsNewRow)
+            isNew = True
+        Else
+            With ds.Tables(TABLE).Rows(0)
+                .Item("ITEMCODE") = _itemCode
+                .Item("DESCRIPTION") = _description
+                .Item("BARCODE") = _barCode
+                .Item("CATEGORIES") = _category
+                .Item("SUBCAT") = _subCat
+                .Item("UOM") = _UoM
+                .Item("UNITPRICE") = _unitPrice
+                .Item("SALEPRICE") = _salePrice
+                .Item("ISSALE") = If(_isSale, 1, 0)
+                .Item("ISINV") = If(_isInv, 1, 0)
+                .Item("ONHOLD") = _onHold
+                .Item("ONHAND") = _onHand
+                .Item("COMMENTS") = _comments
+            End With
+        End If
 
-        database.SaveEntry(ds)
+        database.SaveEntry(ds, isNew)
     End Sub
 
     Public Sub LoadReader_Item(ByVal rd As IDataReader)

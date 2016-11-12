@@ -144,7 +144,8 @@
         Dim unsec_src As String = txtCode.Text
 
         Dim mySql As String = "SELECT * FROM ITEMMASTER "
-        mySql &= String.Format("WHERE LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%'", DreadKnight(unsec_src).ToLower)
+        mySql &= String.Format("WHERE (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') ", DreadKnight(unsec_src).ToLower)
+        'mySql &= "AND onHOLD = 0"
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("ITEM NOT FOUND", MsgBoxStyle.Information) : Exit Sub
@@ -178,6 +179,10 @@
 
         Dim selected_Itm As New cItemData
         selected_Itm = queued_IMD.Item(idx)
+        If selected_Itm.onHold Then
+            MsgBox("ITEM IS CURRENTLY ONHOLD", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
 
         If selected_Itm.SalePrice = 0 Then
             Dim customPrice As Double = InputBox("Enter Price", "Custom Price", 0)
@@ -221,9 +226,9 @@
     Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEdit.Click
         If lvItem.SelectedItems.Count = 0 Then Exit Sub
 
-        Dim itmCode As String = lvItem.FocusedItem.Text
+        Dim idx As String = lvItem.FocusedItem.Index
         Dim selectedITM As New cItemData
-        selectedITM.Load_Item(itmCode)
+        selectedITM = queued_IMD.Item(idx)
 
         frmIMD.Show()
         frmIMD.Load_ItemData(selectedITM)

@@ -302,7 +302,7 @@ Partial Class frmSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(798, 372)
+        Me.ClientSize = New System.Drawing.Size(798, 373)
         Me.Controls.Add(Me.lblNoVat)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnCancel)
