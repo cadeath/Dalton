@@ -145,7 +145,6 @@
 
         Dim mySql As String = "SELECT * FROM ITEMMASTER "
         mySql &= String.Format("WHERE (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') ", DreadKnight(unsec_src).ToLower)
-        'mySql &= "AND onHOLD = 0"
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("ITEM NOT FOUND", MsgBoxStyle.Information) : Exit Sub
@@ -198,6 +197,7 @@
             frmSales.AddItem(selected_Itm, qtyItm)
             frmSales.ClearSearch()
         Else
+            ' Inventory IN
             'frmInventoryIn.AddItem(selected_Itm, qtyItm, UnitPrice)
             'frmInventoryIn.ClearSearch()
         End If

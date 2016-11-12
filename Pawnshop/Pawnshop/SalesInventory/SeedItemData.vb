@@ -7,6 +7,8 @@
             .ItemCode = "VID 0001"
             .Description = "NVIDIA GT 750"
             .Barcode = "GCNV31200"
+            .Category = "PERIPHERALS"
+            .SubCategory = "VIDEO CARDS"
             .SalePrice = 6600
             .Save_ItemData()
         End With
@@ -16,6 +18,8 @@
             .ItemCode = "VID 0002"
             .Description = "AMD RADEON HD 150"
             .Barcode = "GCRAD3010"
+            .Category = "PERIPHERALS"
+            .SubCategory = "VIDEO CARDS"
             .SalePrice = 3500
             .Save_ItemData()
         End With
@@ -25,6 +29,8 @@
             .ItemCode = "VID 0003"
             .Description = "NVIDIA GTX 550"
             .Barcode = "GCNV5100"
+            .Category = "PERIPHERALS"
+            .SubCategory = "VIDEO CARDS"
             .SalePrice = 8900
             .onHold = True
             .Save_ItemData()
