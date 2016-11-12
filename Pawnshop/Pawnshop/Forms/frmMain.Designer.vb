@@ -231,7 +231,7 @@ Partial Class frmMain
         '
         Me.AccountingExtractToolStripMenuItem.Name = "AccountingExtractToolStripMenuItem"
         Me.AccountingExtractToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.AccountingExtractToolStripMenuItem.Text = "Accounting Extract"
+        Me.AccountingExtractToolStripMenuItem.Text = "Accounting E&xtract"
         '
         'ToolStripSeparator2
         '

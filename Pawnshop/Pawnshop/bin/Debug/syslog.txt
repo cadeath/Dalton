@@ -1,0 +1,2 @@
+[11/11/2016 16:15:58] [RemoveLog] REDEMPTION with ID 1 cannot be found in tbl_dailytimelog
+[11/11/2016 16:25:12] [RemoveLog] REDEMPTION with ID 1 cannot be found in tbl_dailytimelog
