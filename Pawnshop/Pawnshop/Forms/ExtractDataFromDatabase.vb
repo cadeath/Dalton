@@ -443,8 +443,8 @@ Public Class ExtractDataFromDatabase
           vbCrLf & "	ON E.USERID = O.ENCODERID	" & _
           vbCrLf & "	INNER JOIN OPI I	" & _
           vbCrLf & "	ON I.PAWNITEMID = O.PAWNITEMID	" & _
-         vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & "ORDER BY O.LOANDATE ASC;"
+          vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
+          vbCrLf & "ORDER BY O.LOANDATE ASC;"
 
         ' TODO: ELLIE
         ' PLEASE ARRANGE THIS HEADERS IN A MANNER THAT THE ACCOUNTING CAN EASILY READ
@@ -663,10 +663,10 @@ Public Class ExtractDataFromDatabase
        vbCrLf & "Case M.MONEYTRANS" & _
        vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
        vbCrLf & "END AS MONEYTRANS, M.TRANSDATE, " & _
-        vbCrLf & " M.SERVICECHARGE, " & _
+       vbCrLf & " M.SERVICECHARGE, " & _
        vbCrLf & "M.SERVICETYPE, " & _
        vbCrLf & "Case M.STATUS" & _
-         vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
+       vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
        vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
        vbCrLf & " ELSE 'N/A'" & _
        vbCrLf & " END AS STATUS,M.NETAMOUNT," & _
@@ -677,13 +677,13 @@ Public Class ExtractDataFromDatabase
        vbCrLf & "ELSE RefNum END as RefNum," & _
        vbCrLf & "M.REMARKS," & _
        vbCrLf & " M.TRANSID," & _
-     vbCrLf & "M.SYSTEMINFO" & _
+       vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
        vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
-        vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & " ORDER BY M.TRANSDATE;"
+       vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
+       vbCrLf & " ORDER BY M.TRANSDATE;"
 
         Dim headers() As String = _
 {" ID", "RECIEVERID", "RECEIVERNAME", "SENDERID", "SENDERNAME", "AMOUNT", "COMMISSION", " ENCODER", " LOCATION", " MONEYTRANS", _
