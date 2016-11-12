@@ -358,7 +358,7 @@ Public Class frmAdminPanel
     End Sub
 
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
-        If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
+        'If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
 
         Dim fsEsk As New System.IO.FileStream(url, IO.FileMode.CreateNew)
         Dim esk As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
