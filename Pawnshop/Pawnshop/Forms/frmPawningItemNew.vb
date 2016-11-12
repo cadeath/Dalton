@@ -770,6 +770,7 @@ Public Class frmPawningItemNew
     Friend Sub Load_PawnTicket(pt As PawnTicket2)
         LoadClient(pt.Pawner)
 
+
         Load_ItemSpecification(pt.PawnItem.ItemClass)
 
         Dim i As Integer = 0
