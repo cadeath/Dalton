@@ -136,17 +136,30 @@ Module mod_system
     ''' <remarks></remarks>
     Friend Function AutoSegregate() As Boolean
         Console.WriteLine("Entering segregation module")
-        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
-        Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
+        Dim mySql As String = "SELECT * FROM OPT WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
+        Dim ds As DataSet = LoadSQL(mySql, "OPT")
 
         If ds.Tables(0).Rows.Count = 0 Then Return True
 
         Console.WriteLine("Segregating...")
-        For Each dr As DataRow In ds.Tables("tblPawn").Rows
-            Dim tmpPawnItem As New PawnTicket
-            tmpPawnItem.LoadTicketInRow(dr)
-            tmpPawnItem.Status = "S"
-            tmpPawnItem.SaveTicket(False)
+        For Each dr As DataRow In ds.Tables("OPT").Rows
+            'Dim tmpPawnItem As New PawnTicket
+            'tmpPawnItem.LoadTicketInRow(dr)
+            'tmpPawnItem.Status = "S"
+            'tmpPawnItem.SaveTicket(False)
+
+            Dim tmpPawnItem As New PawnTicket2
+            tmpPawnItem.Load_PTid(dr.Item("PawnID"))
+            With tmpPawnItem.PawnItem
+                .WithdrawDate = CurrentDate
+                .Status = "S"
+                .Save_PawnItem()
+            End With
+            With tmpPawnItem
+                '.Load_PT_row(dr)
+                .Status = "S"
+                .Update_PawnTicket()
+            End With
 
             AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
             AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
@@ -532,12 +545,36 @@ Module mod_system
         sourceArray(newPosition) = newValue
     End Sub
 
+
+    ' HASHTABLE FUNCTIONS
+    Public Function GetIDbyName(name As String, ht As Hashtable) As Integer
+        For Each dt As DictionaryEntry In ht
+            If dt.Value = name Then
+                Return dt.Key
+            End If
+        Next
+
+        Return 0
+    End Function
+
+    Public Function GetNameByID(id As Integer, ht As Hashtable) As String
+        For Each dt As DictionaryEntry In ht
+            If dt.Key = id Then
+                Return dt.Value
+            End If
+        Next
+
+        Return "ES" & "KIE GWA" & "PO"
+    End Function
+    ' END - HASHTABLE FUNCTIONS
+
     Public Function CheckOTP() As Boolean
         diagOTP.Show()
         diagOTP.TopMost = True
         'Return False
         Return True
     End Function
+
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

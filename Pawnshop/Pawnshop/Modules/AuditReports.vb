@@ -5,42 +5,42 @@
         mySql = "SELECT * "
         mySql &= vbCrLf & "FROM ("
         mySql &= vbCrLf & "	SELECT *   "
-        mySql &= vbCrLf & "	FROM PAWNING   "
+        mySql &= vbCrLf & "	FROM PAWN_LIST   "
         mySql &= vbCrLf & "	WHERE "
-        mySql &= vbCrLf & "		(Status = 'NEW' OR Status = 'RENEW') "
+        mySql &= vbCrLf & "		(Status = 'L' OR Status = 'R') "
         mySql &= vbCrLf & String.Format("		AND LOANDATE <= '{0}' AND PRINCIPAL >= {1}", dt.ToShortDateString, min)
         mySql &= vbCrLf & ""
         mySql &= vbCrLf & "	UNION"
         mySql &= vbCrLf & "	SELECT *   "
-        mySql &= vbCrLf & "	FROM PAWNING   "
+        mySql &= vbCrLf & "	FROM PAWN_LIST   "
         mySql &= vbCrLf & "	WHERE "
-        mySql &= vbCrLf & "		(Status = 'RENEWED')   "
+        mySql &= vbCrLf & "		(Status = '0')   "
         mySql &= vbCrLf & String.Format("		AND LOANDATE <= '{0}' AND ORDATE > '{0}' AND PRINCIPAL >= {1}", dt.ToShortDateString, min)
         mySql &= vbCrLf & ""
         mySql &= vbCrLf & "	UNION   "
         mySql &= vbCrLf & "	SELECT *   "
-        mySql &= vbCrLf & "	FROM PAWNING   "
+        mySql &= vbCrLf & "	FROM PAWN_LIST   "
         mySql &= vbCrLf & "	WHERE "
-        mySql &= vbCrLf & "		(Status = 'REDEEM')"
+        mySql &= vbCrLf & "		(Status = 'X')"
         mySql &= vbCrLf & String.Format("		AND LOANDATE <= '{0}' AND ORDATE > '{0}'  AND PRINCIPAL >= {1}", dt.ToShortDateString, min)
         mySql &= vbCrLf & ""
         mySql &= vbCrLf & "	UNION   "
         mySql &= vbCrLf & "	SELECT *   "
-        mySql &= vbCrLf & "	FROM PAWNING  "
+        mySql &= vbCrLf & "	FROM PAWN_LIST  "
         mySql &= vbCrLf & "	WHERE "
-        mySql &= vbCrLf & "		(Status = 'SEGRE')   "
-        mySql &= vbCrLf & String.Format("		AND LOANDATE <= '{0}' AND (PULLOUT > '{0}' OR PULLOUT IS NULL) ", dt.ToShortDateString)
+        mySql &= vbCrLf & "		(Status = 'S')   "
+        mySql &= vbCrLf & String.Format("		AND LOANDATE <= '{0}' AND (WITHDRAWDATE > '{0}' OR WITHDRAWDATE IS NULL) ", dt.ToShortDateString)
         mySql &= vbCrLf & String.Format("		AND PRINCIPAL >= {0}", min)
         mySql &= vbCrLf & ""
         mySql &= vbCrLf & "	UNION   "
         mySql &= vbCrLf & "	SELECT *   "
-        mySql &= vbCrLf & "	FROM PAWNING   "
+        mySql &= vbCrLf & "	FROM PAWN_LIST   "
         mySql &= vbCrLf & "	WHERE "
-        mySql &= vbCrLf & "		(Status = 'WITHDRAW')   "
-        mySql &= vbCrLf & String.Format("		AND LOANDATE <= '{0}' AND PULLOUT > '{0}' AND PRINCIPAL >= {1}", dt.ToShortDateString, min)
+        mySql &= vbCrLf & "		(Status = 'W')   "
+        mySql &= vbCrLf & String.Format("		AND LOANDATE <= '{0}' AND WITHDRAWDATE > '{0}' AND PRINCIPAL >= {1}", dt.ToShortDateString, min)
         mySql &= vbCrLf & "	)"
         If type <> "ALL" Then
-            mySql &= " WHERE ITEMTYPE = '" & type & "'"
+            mySql &= " WHERE ITEMCATEGORY = '" & type & "'"
         End If
         mySql &= vbCrLf & "ORDER BY PAWNTICKET ASC"
 
