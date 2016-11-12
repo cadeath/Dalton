@@ -52,7 +52,7 @@ Public Class frmPawnItem
 
     Dim Critical_Language() As String =
             {"Failed to verify hash value to the "}
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Reprint As Boolean = False
 
 
@@ -122,12 +122,7 @@ Public Class frmPawnItem
         txtRenew.Text = ""
         txtRedeem.Text = ""
     End Sub
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
+  
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.VoidPawning
@@ -157,7 +152,6 @@ Public Class frmPawnItem
         End If
 
         If lblNPT.Visible Then MsgBox("Inactive Transaction", MsgBoxStyle.Critical) : Exit Sub
-
         PawnItem.VoidCancelTicket()
 
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
@@ -909,7 +903,7 @@ Public Class frmPawnItem
     End Sub
 
     Private Sub LoadAppraisers()
-        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0='"
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE PRIVILEGE <> 'PDuNxp8S9q0=' AND STATUS <> 0"
         Dim ds As DataSet = LoadSQL(mySql)
 
         appraiser = New Hashtable
@@ -922,8 +916,6 @@ Public Class frmPawnItem
                 appraiser.Add(tmpUser.UserID, tmpUser.UserName)
                 cboAppraiser.Items.Add(tmpUser.UserName)
             End If
-            'appraiser.Add(tmpUser.UserID, tmpUser.UserName)
-            'cboAppraiser.Items.Add(tmpUser.UserName)
         Next
     End Sub
 

@@ -105,6 +105,9 @@
             strGprs2Moneygram &= "C.TYPE = 'gprs to moneygram' ORDER BY C.AMOUNT ASC ROWS 1) "
             strGprs2Moneygram &= "WHERE TBLMONEYTRANSFER.SERVICETYPE = 'GPRS - GPRS to Moneygram'"
 
+            
+
+
             RunCommand(strBracket)
             RunCommand(strWestern)
             RunCommand(strWesternInlt)
@@ -138,6 +141,8 @@
                 mySql = "UPDATE TBLCLASS SET RENEWABLE = 1, RENEWLIMIT = 5 WHERE TYPE='CEL'"
                 RunCommand(mySql)
             End If
+
+           
 
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
