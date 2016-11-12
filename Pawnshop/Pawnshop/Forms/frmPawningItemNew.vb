@@ -1436,4 +1436,10 @@ Public Class frmPawningItemNew
             Console.WriteLine(PT_Entry.DescriptionBuilder())
         End If
     End Sub
+
+    Private Sub txtClaimer_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtClaimer.KeyPress
+        If isEnter(e) Then
+            btnSearchClaimer.PerformClick()
+        End If
+    End Sub
 End Class
