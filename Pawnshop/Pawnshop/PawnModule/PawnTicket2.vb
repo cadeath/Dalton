@@ -536,16 +536,17 @@
                 If ds.Tables(0).Rows.Count = 1 Then
                     ChangeStatus("R")
                 Else
-                    ds.Clear()
-                    mysql = "Select * from OPI Where PawnItemID = " & PawnItem.ID
-                    ds = LoadSQL(mysql, "OPI")
-                    With ds.Tables(0).Rows(0)
-                        .Item("status") = "A"
-                        .Item("WithDrawDate") = New Date
-                    End With
-                    database.SaveEntry(ds, False)
                     ChangeStatus("L")
                 End If
+
+                ds.Clear()
+                mysql = "Select * from OPI Where PawnItemID = " & PawnItem.ID
+                ds = LoadSQL(mysql, "OPI")
+                With ds.Tables(0).Rows(0)
+                    .Item("status") = "A"
+                    .Item("WithDrawDate") = New Date
+                End With
+                database.SaveEntry(ds, False)
 
             ElseIf curStatus = "R" Then
                 Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PawnTicket = " & _oldPT
