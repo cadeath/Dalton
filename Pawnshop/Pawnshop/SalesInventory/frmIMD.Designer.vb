@@ -48,6 +48,8 @@ Partial Class frmIMD
         Me.Label9 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -101,7 +103,7 @@ Partial Class frmIMD
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.cboCat)
         Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 54)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 84)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(483, 113)
         Me.GroupBox1.TabIndex = 4
@@ -217,7 +219,7 @@ Partial Class frmIMD
         Me.GroupBox2.Controls.Add(Me.chkSales)
         Me.GroupBox2.Controls.Add(Me.txtSale)
         Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 173)
+        Me.GroupBox2.Location = New System.Drawing.Point(13, 203)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(483, 75)
         Me.GroupBox2.TabIndex = 6
@@ -278,7 +280,7 @@ Partial Class frmIMD
         'txtRemarks
         '
         Me.txtRemarks.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRemarks.Location = New System.Drawing.Point(12, 274)
+        Me.txtRemarks.Location = New System.Drawing.Point(13, 304)
         Me.txtRemarks.Multiline = True
         Me.txtRemarks.Name = "txtRemarks"
         Me.txtRemarks.Size = New System.Drawing.Size(239, 70)
@@ -289,7 +291,7 @@ Partial Class frmIMD
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(9, 256)
+        Me.Label9.Location = New System.Drawing.Point(10, 286)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(57, 15)
         Me.Label9.TabIndex = 7
@@ -298,7 +300,7 @@ Partial Class frmIMD
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(410, 267)
+        Me.btnSave.Location = New System.Drawing.Point(421, 297)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 36)
         Me.btnSave.TabIndex = 13
@@ -308,18 +310,39 @@ Partial Class frmIMD
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(410, 309)
+        Me.btnCancel.Location = New System.Drawing.Point(421, 339)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 36)
         Me.btnCancel.TabIndex = 14
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(10, 60)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(53, 15)
+        Me.Label10.TabIndex = 15
+        Me.Label10.Text = "Barcode"
+        '
+        'txtBarcode
+        '
+        Me.txtBarcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBarcode.Location = New System.Drawing.Point(69, 57)
+        Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.Size = New System.Drawing.Size(247, 21)
+        Me.txtBarcode.TabIndex = 2
+        Me.txtBarcode.Text = "BTH0000SPN"
+        '
         'frmIMD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(508, 360)
+        Me.ClientSize = New System.Drawing.Size(508, 385)
+        Me.Controls.Add(Me.txtBarcode)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.txtRemarks)
@@ -369,5 +392,7 @@ Partial Class frmIMD
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtBarcode As System.Windows.Forms.TextBox
 
 End Class

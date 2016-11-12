@@ -9,6 +9,7 @@
     Private Sub ClearFields()
         txtCode.Text = ""
         txtDescription.Text = ""
+        txtBarcode.Text = ""
         chkHold.Checked = False
         cboCat.Text = ""
         cboCat.Items.Clear()
