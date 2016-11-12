@@ -43,9 +43,13 @@
         lv.SubItems(2).Text = loadITEM.Category
         lv.SubItems(3).Text = loadITEM.UnitOfMeasure
         lv.SubItems(4).Text = loadITEM.onHand
-        If fromSales Then lv.SubItems(5).Text = loadITEM.SalePrice
-        If fromInventory Then lv.SubItems(5).Text = loadITEM.UnitPrice
+        If fromSales Then lv.SubItems(5).Text = ToCurrency(loadITEM.SalePrice)
+        If fromInventory Then lv.SubItems(5).Text = ToCurrency(loadITEM.UnitPrice)
     End Sub
+
+    Private Function ToCurrency(ByVal money As Double) As String
+        Return money.ToString("#,##0.00")
+    End Function
 
     Private Sub ClearFields()
         txtCode.Text = ""
@@ -110,11 +114,13 @@
 #Region "GUI"
     Private Sub AddItem(ByVal itm As cItemData)
         Dim lv As ListViewItem = lvItem.Items.Add(itm.ItemCode)
+        If itm.onHold Then lv.BackColor = Color.Red : lv.ForeColor = Color.White : lv.ToolTipText = String.Format("{0} is ON HOLD", itm.ItemCode)
+
         lv.SubItems.Add(itm.Description)
         lv.SubItems.Add(itm.Category)
-        lv.SubItems.Add(itm.UnitOfMeasure)
+        lv.SubItems.Add(itm.UnitofMeasure)
         lv.SubItems.Add(itm.onHand)
-        lv.SubItems.Add(itm.SalePrice)
+        lv.SubItems.Add(ToCurrency(itm.SalePrice))
     End Sub
 
     Private Sub ClearField()
@@ -138,7 +144,7 @@
         Dim unsec_src As String = txtCode.Text
 
         Dim mySql As String = "SELECT * FROM ITEMMASTER "
-        mySql &= String.Format("WHERE LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%'", DreadKnight(unsec_src).ToLower)
+        mySql &= String.Format("WHERE LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%'", DreadKnight(unsec_src).ToLower)
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("ITEM NOT FOUND", MsgBoxStyle.Information) : Exit Sub

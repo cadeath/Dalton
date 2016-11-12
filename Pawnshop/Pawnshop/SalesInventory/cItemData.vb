@@ -38,6 +38,16 @@
         End Set
     End Property
 
+    Private _barCode As String
+    Public Property Barcode() As String
+        Get
+            Return _barCode
+        End Get
+        Set(ByVal value As String)
+            _barCode = value
+        End Set
+    End Property
+
     Private _category As String
     Public Property Category() As String
         Get
@@ -156,6 +166,7 @@
             _itemID = .Item("ITEMID")
             _itemCode = .Item("ITEMCODE")
             _description = .Item("DESCRIPTION")
+            _barCode = .Item("BARCODE")
             _category = .Item("CATEGORIES")
             _subCat = .Item("SUBCAT")
             _UoM = .Item("UOM")
@@ -181,6 +192,7 @@
         With dsNewRow
             .Item("ITEMCODE") = _itemCode
             .Item("DESCRIPTION") = _description
+            .Item("BARCODE") = _barCode
             .Item("CATEGORIES") = _category
             .Item("SUBCAT") = _subCat
             .Item("UOM") = _UoM
@@ -203,7 +215,8 @@
         With rd
             _itemID = .Item("ITEMID")
             _ItemCode = .Item("ITEMCODE")
-            _Description = .Item("DESCRIPTION")
+            _description = .Item("DESCRIPTION")
+            _barCode = .Item("BARCODE")
             _category = .Item("CATEGORIES")
             _subCat = .Item("SUBCAT")
             _uom = .Item("UOM")

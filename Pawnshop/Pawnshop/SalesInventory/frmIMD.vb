@@ -41,6 +41,7 @@
 
         txtCode.Text = itm.ItemCode
         txtDescription.Text = itm.Description
+        txtBarcode.Text = itm.Barcode
         chkHold.Checked = itm.onHold
         cboCat.Text = itm.Category
         cboSubCat.Text = itm.SubCategory
@@ -59,6 +60,7 @@
         If Not Selected_Item Is Nothing Then
             With Selected_Item
                 .Description = txtDescription.Text
+                .Barcode = txtBarcode.Text
                 .onHold = chkHold.Checked
                 .Category = cboCat.Text
                 .SubCategory = cboSubCat.Text
@@ -95,6 +97,7 @@
             With newItem
                 .ItemCode = txtCode.Text
                 .Description = txtDescription.Text
+                .Barcode = txtBarcode.Text
                 .Category = cboCat.Text
                 .SubCategory = cboSubCat.Text
                 .UnitofMeasure = txtUoM.Text
@@ -141,6 +144,9 @@
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        Dim ans = MsgBox("Do you want to save this ITEM?", vbYesNo + MsgBoxStyle.DefaultButton2 + vbInformation, "ITEM MASTER DATA")
+        If ans = vbNo Then Exit Sub
+
         Save_ItemMasterData()
         ClearFields()
         txtCode.Focus()

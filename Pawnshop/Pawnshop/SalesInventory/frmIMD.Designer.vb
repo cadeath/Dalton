@@ -208,7 +208,7 @@ Partial Class frmIMD
         Me.chkHold.Location = New System.Drawing.Point(410, 31)
         Me.chkHold.Name = "chkHold"
         Me.chkHold.Size = New System.Drawing.Size(75, 17)
-        Me.chkHold.TabIndex = 10
+        Me.chkHold.TabIndex = 12
         Me.chkHold.Text = "ON HOLD"
         Me.chkHold.UseVisualStyleBackColor = True
         '
@@ -303,7 +303,7 @@ Partial Class frmIMD
         Me.btnSave.Location = New System.Drawing.Point(421, 297)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 36)
-        Me.btnSave.TabIndex = 13
+        Me.btnSave.TabIndex = 10
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
@@ -313,7 +313,7 @@ Partial Class frmIMD
         Me.btnCancel.Location = New System.Drawing.Point(421, 339)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 36)
-        Me.btnCancel.TabIndex = 14
+        Me.btnCancel.TabIndex = 11
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
