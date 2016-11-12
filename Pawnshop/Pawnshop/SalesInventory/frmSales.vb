@@ -177,12 +177,12 @@ Public Class frmSales
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        'frmPLU.Show()
-        'frmPLU.From_Sales()
+        frmPLU.Show()
+        frmPLU.From_Sales()
 
-        'If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
+        If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
 
-        'frmPLU.Load_PLU()
+        frmPLU.Load_PLU()
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown

@@ -56,7 +56,32 @@
         Selected_Item = itm
     End Sub
 
-    Private Sub Save_ItemMasterData()
+    Private Sub Load_Categories()
+        Dim mySql As String = "SELECT DISTINCT CATEGORIES FROM ITEMMASTER ORDER BY CATEGORIES ASC"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        cboCat.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            cboCat.Items.Add(dr("CATEGORIES"))
+        Next
+
+        mySql = "SELECT DISTINCT SUBCAT FROM ITEMMASTER ORDER BY SUBCAT ASC"
+        ds = LoadSQL(mySql)
+
+        cboSubCat.Items.Clear()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            cboSubCat.Items.Add(dr("SUBCAT"))
+        Next
+    End Sub
+
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        Dim ans = MsgBox("Do you want to save this ITEM?", vbYesNo + MsgBoxStyle.DefaultButton2 + vbInformation, "ITEM MASTER DATA")
+        If ans = vbNo Then Exit Sub
+
         If Not Selected_Item Is Nothing Then
             With Selected_Item
                 .Description = txtDescription.Text
@@ -117,37 +142,9 @@
         Catch ex As Exception
             MsgBox("Failed to SAVE the ITEM", MsgBoxStyle.Critical)
             Log_Report("IMD - " & ex.ToString)
+            Exit Sub
         End Try
 
-    End Sub
-
-    Private Sub Load_Categories()
-        Dim mySql As String = "SELECT DISTINCT CATEGORIES FROM ITEMMASTER ORDER BY CATEGORIES ASC"
-        Dim ds As DataSet = LoadSQL(mySql)
-
-        cboCat.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            cboCat.Items.Add(dr("CATEGORIES"))
-        Next
-
-        mySql = "SELECT DISTINCT SUBCAT FROM ITEMMASTER ORDER BY SUBCAT ASC"
-        ds = LoadSQL(mySql)
-
-        cboSubCat.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            cboSubCat.Items.Add(dr("SUBCAT"))
-        Next
-    End Sub
-
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.Close()
-    End Sub
-
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        Dim ans = MsgBox("Do you want to save this ITEM?", vbYesNo + MsgBoxStyle.DefaultButton2 + vbInformation, "ITEM MASTER DATA")
-        If ans = vbNo Then Exit Sub
-
-        Save_ItemMasterData()
         ClearFields()
         txtCode.Focus()
     End Sub

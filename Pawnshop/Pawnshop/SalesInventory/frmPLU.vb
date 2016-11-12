@@ -160,6 +160,7 @@
 
             Dim tmpItm As New cItemData
             tmpItm.LoadReader_Item(dsR)
+            queued_IMD.Add(tmpItm)
             AddItem(tmpItm)
 
         End While
@@ -174,8 +175,9 @@
         Console.WriteLine(lvItem.SelectedItems(0).Index)
         Dim idx As Integer = lvItem.SelectedItems(0).Index
 
+
         Dim selected_Itm As New cItemData
-        selected_Itm.Load_Item(lvItem.SelectedItems(0).Text)
+        selected_Itm = queued_IMD.Item(idx)
 
         If selected_Itm.SalePrice = 0 Then
             Dim customPrice As Double = InputBox("Enter Price", "Custom Price", 0)
