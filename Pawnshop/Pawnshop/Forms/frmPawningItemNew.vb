@@ -276,6 +276,20 @@ Public Class frmPawningItemNew
 
             .Update_PawnTicket()
 
+            If isEarlyRedeem Then
+                Dim itmPrn As Double = .Principal
+                Dim itmAdv As Double = .AdvanceInterest
+                Dim itmDue As Double = RedeemDue
+
+                Dim itmEarly As Double = itmAdv - (itmPrn - itmDue)
+                'itmEarly -= CDbl(txtService.Text) 'Lesser Service Charge
+
+                .DelayInterest = itmEarly
+                .EarlyReddem = itmEarly
+            Else
+                .DelayInterest = txtInt.Text
+            End If
+
             If isOldItem Then
                 AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", PT_Entry.PawnID)
                 AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", PT_Entry.PawnID)
