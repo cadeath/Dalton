@@ -74,7 +74,7 @@
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("	P.ORDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
         mySql &= vbCrLf & "    AND P.REDEEMDUE <> 0 "
-        mySql &= vbCrLf & "    AND P.STATUS <> 'V' "
+        mySql &= vbCrLf & "    AND P.STATUS = 'X' "
         mySql &= vbCrLf & "    ORDER BY ORNUM ASC"
 
         Dim addParameter As New Dictionary(Of String, String)

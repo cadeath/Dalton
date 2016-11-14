@@ -201,10 +201,6 @@
         frmClient.Show()
     End Sub
 
-    Private Sub pbLogo_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles pbLogo.DoubleClick
-        devClient.Show()
-    End Sub
-
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
