@@ -551,6 +551,14 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '{0}'", txtClassification.Text)
+        Dim ds As DataSet = LoadSQL(mySql, "TBLITEM")
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            MsgBox("Class already existed", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
         With ItemSave
