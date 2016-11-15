@@ -745,7 +745,7 @@ Public Class frmPawningItemNew
         ClearFields()
         LoadAppraisers()
 
-        If transactionType = "L" Then NewLoan()
+        ' If transactionType = "L" Then NewLoan()
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
@@ -881,6 +881,7 @@ Public Class frmPawningItemNew
         Pawner = Nothing
         PT_Entry = New PawnTicket2
         PawnedItem = New PawnItem
+        lvSpec.Enabled = True
 
         cboAppraiser.SelectedIndex = -1
         GeneratePT()
