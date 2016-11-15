@@ -724,6 +724,7 @@
     <Compile Include="Reports\qrySequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\cItem.vb" />
     <Compile Include="SalesInventory\CollectionItemData.vb" />
     <Compile Include="SalesInventory\frmIMD.Designer.vb">
       <DependentUpon>frmIMD.vb</DependentUpon>

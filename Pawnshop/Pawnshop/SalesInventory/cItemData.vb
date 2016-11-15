@@ -151,7 +151,7 @@
 #End Region
 
 #Region "Procedures"
-    Public Sub Load_Item(Optional ByVal id As Integer = 0)
+    Public Overridable Sub Load_Item(Optional ByVal id As Integer = 0)
         mySql = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & If(id = 0, _itemID, id)
 
         ds = New DataSet
@@ -181,7 +181,7 @@
         Console.WriteLine(String.Format("{0} loaded.", _itemCode))
     End Sub
 
-    Public Sub Save_ItemData()
+    Public Overridable Sub Save_ItemData()
         Dim isNew As Boolean = False
 
         mySql = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & _itemID
@@ -231,17 +231,17 @@
         database.SaveEntry(ds, isNew)
     End Sub
 
-    Public Sub LoadReader_Item(ByVal rd As IDataReader)
+    Public Overridable Sub LoadReader_Item(ByVal rd As IDataReader)
         On Error Resume Next
 
         With rd
             _itemID = .Item("ITEMID")
-            _ItemCode = .Item("ITEMCODE")
+            _itemCode = .Item("ITEMCODE")
             _description = .Item("DESCRIPTION")
             _barCode = .Item("BARCODE")
             _category = .Item("CATEGORIES")
             _subCat = .Item("SUBCAT")
-            _uom = .Item("UOM")
+            _UoM = .Item("UOM")
             _unitPrice = .Item("UNITPRICE")
             _salePrice = .Item("SALEPRICE")
             _isSale = IIf(.Item("ISSALE") = 1, True, False)
@@ -250,6 +250,12 @@
             _comments = .Item("COMMENTS")
             _onHand = .Item("ONHAND")
         End With
+    End Sub
+
+    Public Sub Load_ItemCode(ByVal itemCode As String)
+
+
+
     End Sub
 #End Region
 End Class
