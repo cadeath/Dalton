@@ -22,8 +22,8 @@ Partial Class frmInventory
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.lblFilename = New System.Windows.Forms.Label()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.lvInventory = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -37,25 +37,26 @@ Partial Class frmInventory
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.ofdInv = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblFilename
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(54, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "No file yet"
+        Me.lblFilename.AutoSize = True
+        Me.lblFilename.Location = New System.Drawing.Point(12, 9)
+        Me.lblFilename.Name = "lblFilename"
+        Me.lblFilename.Size = New System.Drawing.Size(54, 13)
+        Me.lblFilename.TabIndex = 0
+        Me.lblFilename.Text = "No file yet"
         '
-        'Button1
+        'btnBrowse
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 25)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(68, 32)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Browse"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnBrowse.Location = New System.Drawing.Point(12, 25)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(68, 32)
+        Me.btnBrowse.TabIndex = 1
+        Me.btnBrowse.Text = "Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'lvInventory
         '
@@ -170,6 +171,10 @@ Partial Class frmInventory
         Me.Label5.Text = "November 7, 1986"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'ofdInv
+        '
+        Me.ofdInv.Filter = "PTU File|*.ptu"
+        '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -182,16 +187,16 @@ Partial Class frmInventory
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lvInventory)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.btnBrowse)
+        Me.Controls.Add(Me.lblFilename)
         Me.Name = "frmInventory"
         Me.Text = "Inventory"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents lblFilename As System.Windows.Forms.Label
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents lvInventory As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
@@ -205,4 +210,5 @@ Partial Class frmInventory
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents ofdInv As System.Windows.Forms.OpenFileDialog
 End Class
