@@ -31,12 +31,13 @@ Partial Class frmInventory
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnAccept = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblWHS = New System.Windows.Forms.Label()
+        Me.lblSTODate = New System.Windows.Forms.Label()
         Me.ofdInv = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
         '
@@ -63,13 +64,13 @@ Partial Class frmInventory
         Me.lvInventory.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvInventory.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvInventory.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvInventory.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvInventory.FullRowSelect = True
         Me.lvInventory.GridLines = True
         Me.lvInventory.Location = New System.Drawing.Point(15, 84)
         Me.lvInventory.Name = "lvInventory"
-        Me.lvInventory.Size = New System.Drawing.Size(896, 286)
+        Me.lvInventory.Size = New System.Drawing.Size(1009, 301)
         Me.lvInventory.TabIndex = 2
         Me.lvInventory.UseCompatibleStateImageBehavior = False
         Me.lvInventory.View = System.Windows.Forms.View.Details
@@ -103,10 +104,15 @@ Partial Class frmInventory
         Me.ColumnHeader6.Text = "Price"
         Me.ColumnHeader6.Width = 101
         '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "STO#"
+        Me.ColumnHeader7.Width = 163
+        '
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.Location = New System.Drawing.Point(824, 376)
+        Me.btnCancel.Location = New System.Drawing.Point(937, 391)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(87, 41)
         Me.btnCancel.TabIndex = 3
@@ -116,7 +122,7 @@ Partial Class frmInventory
         'btnAccept
         '
         Me.btnAccept.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAccept.Location = New System.Drawing.Point(731, 376)
+        Me.btnAccept.Location = New System.Drawing.Point(844, 391)
         Me.btnAccept.Name = "btnAccept"
         Me.btnAccept.Size = New System.Drawing.Size(87, 41)
         Me.btnAccept.TabIndex = 4
@@ -128,48 +134,48 @@ Partial Class frmInventory
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(677, 13)
+        Me.Label2.Location = New System.Drawing.Point(790, 13)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(51, 16)
+        Me.Label2.Size = New System.Drawing.Size(47, 16)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "STO#:"
+        Me.Label2.Text = "WHS:"
         '
         'Label3
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(677, 49)
+        Me.Label3.Location = New System.Drawing.Point(790, 49)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(53, 16)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "DATE:"
         '
-        'Label4
+        'lblWHS
         '
-        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label4.BackColor = System.Drawing.Color.White
-        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(741, 9)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(170, 25)
-        Me.Label4.TabIndex = 7
-        Me.Label4.Text = "012120"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblWHS.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblWHS.BackColor = System.Drawing.Color.White
+        Me.lblWHS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblWHS.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWHS.Location = New System.Drawing.Point(854, 9)
+        Me.lblWHS.Name = "lblWHS"
+        Me.lblWHS.Size = New System.Drawing.Size(170, 25)
+        Me.lblWHS.TabIndex = 7
+        Me.lblWHS.Text = "012120"
+        Me.lblWHS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Label5
+        'lblSTODate
         '
-        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label5.BackColor = System.Drawing.Color.White
-        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(741, 45)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(170, 25)
-        Me.Label5.TabIndex = 8
-        Me.Label5.Text = "November 7, 1986"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblSTODate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblSTODate.BackColor = System.Drawing.Color.White
+        Me.lblSTODate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblSTODate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSTODate.Location = New System.Drawing.Point(854, 45)
+        Me.lblSTODate.Name = "lblSTODate"
+        Me.lblSTODate.Size = New System.Drawing.Size(170, 25)
+        Me.lblSTODate.TabIndex = 8
+        Me.lblSTODate.Text = "November 7, 1986"
+        Me.lblSTODate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'ofdInv
         '
@@ -179,9 +185,9 @@ Partial Class frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(920, 428)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
+        Me.ClientSize = New System.Drawing.Size(1033, 443)
+        Me.Controls.Add(Me.lblSTODate)
+        Me.Controls.Add(Me.lblWHS)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnAccept)
@@ -208,7 +214,8 @@ Partial Class frmInventory
     Friend WithEvents btnAccept As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents lblWHS As System.Windows.Forms.Label
+    Friend WithEvents lblSTODate As System.Windows.Forms.Label
     Friend WithEvents ofdInv As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
 End Class

@@ -5,6 +5,7 @@
     Private ds As DataSet
 
     Const TABLE As String = "ITEMMASTER"
+    Friend hasLoaded As Boolean = False
 #End Region
 
 #Region "Properties"
@@ -162,21 +163,22 @@
             Exit Sub
         End If
 
-        With ds.Tables(0).Rows(0)
-            _itemID = .Item("ITEMID")
-            _itemCode = .Item("ITEMCODE")
-            _description = .Item("DESCRIPTION")
-            _barCode = .Item("BARCODE")
-            _category = .Item("CATEGORIES")
-            _subCat = .Item("SUBCAT")
-            _UoM = .Item("UOM")
-            _unitPrice = .Item("UNITPRICE")
-            _salePrice = .Item("SALEPRICE")
-            _isSale = If(.Item("ISSALE") = 1, True, False)
-            _isInv = If(.Item("ISINV") = 1, True, False)
-            _onHold = If(.Item("ONHOLD") = 1, True, False)
-            _onHand = .Item("ONHAND")
-        End With
+        Load_ItemRow(ds.Tables(0).Rows(0))
+        'With ds.Tables(0).Rows(0)
+        '    _itemID = .Item("ITEMID")
+        '    _itemCode = .Item("ITEMCODE")
+        '    _description = .Item("DESCRIPTION")
+        '    _barCode = .Item("BARCODE")
+        '    _category = .Item("CATEGORIES")
+        '    _subCat = .Item("SUBCAT")
+        '    _UoM = .Item("UOM")
+        '    _unitPrice = .Item("UNITPRICE")
+        '    _salePrice = .Item("SALEPRICE")
+        '    _isSale = If(.Item("ISSALE") = 1, True, False)
+        '    _isInv = If(.Item("ISINV") = 1, True, False)
+        '    _onHold = If(.Item("ONHOLD") = 1, True, False)
+        '    _onHand = .Item("ONHAND")
+        'End With
 
         Console.WriteLine(String.Format("{0} loaded.", _itemCode))
     End Sub
@@ -252,10 +254,41 @@
         End With
     End Sub
 
-    Public Sub Load_ItemCode(ByVal itemCode As String)
+    Public Sub Load_ItemCode()
+        mySql = String.Format("SELECT * FROM ITEMMASTER WHERE ITEMCODE = '{0}'", _itemCode)
+        ds = New DataSet
+        ds = LoadSQL(mySql)
 
+        If ds.Tables(0).Rows.Count <> 1 Then
+            'MsgBox("Failed to load ItemCode", MsgBoxStyle.Critical)
+            Console.WriteLine("Failed to load ItemCode " & _itemCode)
+            Exit Sub
+        End If
 
+        Load_ItemRow(ds.Tables(0).Rows(0))
+    End Sub
 
+    Private Sub Load_ItemRow(ByVal dr As DataRow)
+        If hasLoaded Then Exit Sub
+
+        With dr
+            _itemID = .Item("ITEMID")
+            _itemCode = .Item("ITEMCODE")
+            _description = .Item("DESCRIPTION")
+            If Not IsDBNull(.Item("BARCODE")) Then _barCode = .Item("BARCODE")
+            _category = .Item("CATEGORIES")
+            If Not IsDBNull(.Item("SUBCAT")) Then _subCat = .Item("SUBCAT")
+            If Not IsDBNull(.Item("UOM")) Then _UoM = .Item("UOM")
+            _unitPrice = .Item("UNITPRICE")
+            _salePrice = .Item("SALEPRICE")
+            _isSale = If(.Item("ISSALE") = 1, True, False)
+            _isInv = If(.Item("ISINV") = 1, True, False)
+            _onHold = If(.Item("ONHOLD") = 1, True, False)
+            _onHand = .Item("ONHAND")
+
+            hasLoaded = True
+        End With
     End Sub
 #End Region
+
 End Class
