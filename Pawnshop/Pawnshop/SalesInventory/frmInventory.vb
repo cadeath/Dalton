@@ -2,21 +2,59 @@
 
 Public Class frmInventory
     Dim ht_inv As New Hashtable
+    Dim GrandTotal As Double = 0
+    Dim ExistingSTO As Integer = 0
+
+    Dim STONum As Integer = 0
+    Dim WhsCode As String
+    Dim STODate As Date
+    Dim DocID As Integer = 0
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
+
+    Private Sub Create_Document()
+        Dim mySql As String = "SELECT * FROM INV ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, "INV")
+        Dim dsNewRow As DataRow
+
+        dsNewRow = ds.Tables("INV").NewRow
+        With dsNewRow
+            .Item("DOCNUM") = STONum
+            .Item("DOCDATE") = STODate
+            .Item("PARTNER") = "Possible Head Office"
+            .Item("REMARKS") = String.Format("Imported {0}", STODate.ToString("MMM/dd/yyyy"))
+            .Item("REFNUM") = STONum
+        End With
+        ds.Tables("INV").Rows.Add(dsNewRow)
+        database.SaveEntry(ds)
+
+        mySql = "SELECT * FROM INV ORDER BY DOCID DESC ROWS 1"
+        ds = LoadSQL(mySql)
+
+        DocID = ds.Tables("INV").Rows(0).Item("DOCID")
+    End Sub
+
+    Private Function isSTOExisting(ByVal stono As Integer) As Boolean
+        Dim mySql As String = "SELECT * FROM INV WHERE DOCNUM = " & stono
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count >= 1 Then
+            ExistingSTO = stono
+            Return True
+        End If
+
+        Return False
+    End Function
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         Dim ptuFile As String
         Dim vText As String, vstring(-1) As String
         Dim idx As Integer = 1
 
-        Dim WhsCode As String, STODate As Date
-
         ofdInv.ShowDialog()
         ptuFile = ofdInv.FileName
-
 
         ' LOADING PTU FILE
         Using rvsr As New StreamReader(ptuFile)
@@ -69,8 +107,11 @@ Public Class frmInventory
                         lblSTODate.Text = STODate
                     End If
 
-                    AddItem(invItem, vstring(4))
-                    ht_inv.Add(idx, invItem)
+                    If Not isSTOExisting(vstring(4)) Then
+                        STONum = vstring(4)
+                        AddItem(invItem, STONum)
+                        ht_inv.Add(idx, invItem)
+                    End If
                 End If
 
                 idx += 1
@@ -81,6 +122,8 @@ Public Class frmInventory
             Dim tmp As cItem = ht.Value
             Console.WriteLine(String.Format("{0}: {1}", ht.Key, tmp.ItemCode))
         Next
+
+        Create_Document()
 
         Exit Sub
 FAILED_VER:
