@@ -197,10 +197,10 @@ Public Class ItemClass
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '{0}'", _itemClassName)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count = 1 Then
-            MsgBox("Class already existed", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
+        'If ds.Tables(0).Rows.Count = 1 Then
+        '    MsgBox("Class already existed", MsgBoxStyle.Critical)
+        '    Exit Sub
+        'End If
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(0).NewRow

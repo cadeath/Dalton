@@ -1,9 +1,324 @@
 ﻿Imports System.Data.Odbc
+Imports System.Threading
 
 Public Class frmMigrate
     Const ALLOWABLE_VERSION As String = "1.2.2.4"
     Const LATEST_VERSION As String = "1.2.2.5"
     Const DBPATH As String = "\W3W1LH4CKU.FDB"
+    Private th As Thread
+
+#Region "Properties"
+    Private _pawnticket As Integer
+    Public Property PawnTicket() As Integer
+        Get
+            Return _pawnticket
+        End Get
+        Set(ByVal value As Integer)
+            _pawnticket = value
+        End Set
+    End Property
+
+    Private _clientid As Integer
+    Public Property ClientID() As Integer
+        Get
+            Return _clientid
+        End Get
+        Set(ByVal value As Integer)
+            _clientid = value
+        End Set
+    End Property
+
+    Private _loandate As Date
+    Public Property LoanDate() As Date
+        Get
+            Return _loandate
+        End Get
+        Set(ByVal value As Date)
+            _loandate = value
+        End Set
+    End Property
+
+    Private _matudate As Date
+    Public Property MaturityDate() As Date
+        Get
+            Return _matudate
+        End Get
+        Set(ByVal value As Date)
+            _matudate = value
+        End Set
+    End Property
+
+    Private _expirydate As Date
+    Public Property ExpiryDate() As Date
+        Get
+            Return _expirydate
+        End Get
+        Set(ByVal value As Date)
+            _expirydate = value
+        End Set
+    End Property
+
+    Private _auctiondate As Date
+    Public Property AuctionDate() As Date
+        Get
+            Return _auctiondate
+        End Get
+        Set(ByVal value As Date)
+            _auctiondate = value
+        End Set
+    End Property
+
+    Private _itemtype As String
+    Public Property ItemType() As String
+        Get
+            Return _itemtype
+        End Get
+        Set(ByVal value As String)
+            _itemtype = value
+        End Set
+    End Property
+
+    Private _category As String
+    Public Property Category() As String
+        Get
+            Return _category
+        End Get
+        Set(ByVal value As String)
+            _category = value
+        End Set
+    End Property
+
+    Private _description As String
+    Public Property Description() As String
+        Get
+            Return _description
+        End Get
+        Set(ByVal value As String)
+            _description = value
+        End Set
+    End Property
+
+    Private _encoderid As Integer
+    Public Property EncoderID() As Integer
+        Get
+            Return _encoderid
+        End Get
+        Set(ByVal value As Integer)
+            _encoderid = value
+        End Set
+    End Property
+
+    Private _appraiserid As Integer
+    Public Property AppraiserID() As Integer
+        Get
+            Return _appraiserid
+        End Get
+        Set(ByVal value As Integer)
+            _appraiserid = value
+        End Set
+    End Property
+
+    Private _daysoverdue As Integer
+    Public Property DaysOverDue() As Integer
+        Get
+            Return _daysoverdue
+        End Get
+        Set(ByVal value As Integer)
+            _daysoverdue = value
+        End Set
+    End Property
+
+    Private _ornum As Integer
+    Public Property OrNumber() As Integer
+        Get
+            Return _ornum
+        End Get
+        Set(ByVal value As Integer)
+            _ornum = value
+        End Set
+    End Property
+
+    Private _ordate As Date
+    Public Property OrDate() As Date
+        Get
+            Return _ordate
+        End Get
+        Set(ByVal value As Date)
+            _ordate = value
+        End Set
+    End Property
+
+    Private _oldticket As Integer
+    Public Property OldTicket() As Integer
+        Get
+            Return _oldticket
+        End Get
+        Set(ByVal value As Integer)
+            _oldticket = value
+        End Set
+    End Property
+
+    Private _netamount As Integer
+    Public Property NetAmount() As Integer
+        Get
+            Return _netamount
+        End Get
+        Set(ByVal value As Integer)
+            _netamount = value
+        End Set
+    End Property
+
+    Private _renewdue As Integer
+    Public Property RenewDue() As Integer
+        Get
+            Return _renewdue
+        End Get
+        Set(ByVal value As Integer)
+            _renewdue = value
+        End Set
+    End Property
+
+    Private _redeemdue As Integer
+    Public Property RedeemDue() As Integer
+        Get
+            Return _redeemdue
+        End Get
+        Set(ByVal value As Integer)
+            _redeemdue = value
+        End Set
+    End Property
+
+    Private _appraisal As Integer
+    Public Property Appraisal() As Integer
+        Get
+            Return _appraisal
+        End Get
+        Set(ByVal value As Integer)
+            _appraisal = value
+        End Set
+    End Property
+
+    Private _principal As Integer
+    Public Property Principal() As Integer
+        Get
+            Return _principal
+        End Get
+        Set(ByVal value As Integer)
+            _principal = value
+        End Set
+    End Property
+
+    Private _interest As Integer
+    Public Property Interest() As Integer
+        Get
+            Return _interest
+        End Get
+        Set(ByVal value As Integer)
+            _interest = value
+        End Set
+    End Property
+
+    Private _advint As Integer
+    Public Property AdvInt() As Integer
+        Get
+            Return _advint
+        End Get
+        Set(ByVal value As Integer)
+            _advint = value
+        End Set
+    End Property
+
+    Private _servicecharge As Integer
+    Public Property ServiceCharge() As Integer
+        Get
+            Return _servicecharge
+        End Get
+        Set(ByVal value As Integer)
+            _servicecharge = value
+        End Set
+    End Property
+
+    Private _penalty As Integer
+    Public Property Penalty() As Integer
+        Get
+            Return _penalty
+        End Get
+        Set(ByVal value As Integer)
+            _penalty = value
+        End Set
+    End Property
+
+    Private _grams As String
+    Public Property Grams() As String
+        Get
+            Return _grams
+        End Get
+        Set(ByVal value As String)
+            _grams = value
+        End Set
+    End Property
+
+    Private _karat As String
+    Public Property Karat() As String
+        Get
+            Return _karat
+        End Get
+        Set(ByVal value As String)
+            _karat = value
+        End Set
+    End Property
+
+    Private _status As String
+    Public Property Status() As String
+        Get
+            Return _status
+        End Get
+        Set(ByVal value As String)
+            _status = value
+        End Set
+    End Property
+
+    Private _pullout As Date
+    Public Property PulloutDate() As Date
+        Get
+            Return _pullout
+        End Get
+        Set(ByVal value As Date)
+            _pullout = value
+        End Set
+    End Property
+
+    Private _intchecksum As String
+    Public Property IntChecksum() As String
+        Get
+            Return _intchecksum
+        End Get
+        Set(ByVal value As String)
+            _intchecksum = value
+        End Set
+    End Property
+
+    Private _renewalcnt As Integer
+    Public Property RenewalCnt() As Integer
+        Get
+            Return _renewalcnt
+        End Get
+        Set(ByVal value As Integer)
+            _renewalcnt = value
+        End Set
+    End Property
+
+    Private _earlyredeem As Integer
+    Public Property EarlyRedeem() As Integer
+        Get
+            Return _earlyredeem
+        End Get
+        Set(ByVal value As Integer)
+            _earlyredeem = value
+        End Set
+    End Property
+
+#End Region
 
     Private Sub Migrate()
         'Try
@@ -13,7 +328,7 @@ Public Class frmMigrate
         mysql &= " ELSE P.DESCRIPTION END AS Description, P.ENCODERID, P.APPRAISERID, P.DAYSOVERDUE, "
         mysql &= "P.ORNUM, P.ORDATE, P.OLDTICKET, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL, P.PRINCIPAL,  "
         mysql &= "P.INTEREST, P.ADVINT, P.SERVICECHARGE,P.PENALTY, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT, "
-        mysql &= "P.STATUS, P.PULLOUT, P.INT_CHECKSUM, P.KARAT AS PAWNKARAT, P.GRAMS AS PAWNGRAMS, P.RENEWALCNT, "
+        mysql &= "P.STATUS, P.PULLOUT, P.INT_CHECKSUM, P.RENEWALCNT, "
         mysql &= "P.EARLYREDEEM "
         mysql &= "FROM TBLPAWN P LEFT JOIN TBLCLASS CLASS ON CLASS.CLASSID = P.CATID "
         Dim ds As DataSet = LoadSQL(mysql)
@@ -45,8 +360,8 @@ Public Class frmMigrate
             If Not IsDBNull(dr.Item("PullOut")) Then MigPullout = dr.Item("PullOut")
             Dim MigCategory As String = dr.Item("Category")
             Dim MigItemType As String = dr.Item("ItemType")
-            Dim MigKarat As String = dr.Item("PAWNKARAT")
-            Dim MigGrams As String = dr.Item("PAWNGRAMS")
+            Dim MigKarat As String = dr.Item("KARAT")
+            Dim MigGrams As String = dr.Item("GRAMS")
             Dim MigDiscription As String = dr.Item("Description")
             Dim MigStatus As String = dr.Item("Status")
             Dim MigEarlyRedeem As Integer = dr.Item("EarlyRedeem")
@@ -212,6 +527,213 @@ Public Class frmMigrate
         'End Try
     End Sub
 
+    Private Sub Thread()
+        Dim mysql As String = "SELECT  P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, P.CLIENTID, "
+        mysql &= "CASE  WHEN P.ITEMTYPE = 'JWL' AND (P.DESCRIPTION = Null OR P.DESCRIPTION = '') THEN  "
+        mysql &= "CLASS.CATEGORY || ' ' || ROUND(P.GRAMS,2) || 'G ' || P.KARAT || 'K' "
+        mysql &= " ELSE P.DESCRIPTION END AS Description, P.ENCODERID, P.APPRAISERID, P.DAYSOVERDUE, "
+        mysql &= "P.ORNUM, P.ORDATE, P.OLDTICKET, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL, P.PRINCIPAL,  "
+        mysql &= "P.INTEREST, P.ADVINT, P.SERVICECHARGE,P.PENALTY, P.ITEMTYPE, CLASS.CATEGORY, P.GRAMS, P.KARAT, "
+        mysql &= "P.STATUS, P.PULLOUT, P.INT_CHECKSUM, P.RENEWALCNT, "
+        mysql &= "P.EARLYREDEEM "
+        mysql &= "FROM TBLPAWN P LEFT JOIN TBLCLASS CLASS ON CLASS.CLASSID = P.CATID "
+        Dim ds As DataSet = LoadSQL(mysql)
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            'Migrate Data
+            _pawnticket = dr.Item("PawnTicket")
+            _oldticket = dr.Item("OldTicket")
+            _loandate = dr.Item("LoanDate")
+            _matudate = dr.Item("Matudate")
+            _expirydate = dr.Item("ExpiryDate")
+            _auctiondate = dr.Item("AuctionDate")
+            _appraiserid = dr.Item("AppraiserID")
+            _encoderid = dr.Item("EncoderID")
+            _clientid = dr.Item("ClientID")
+            _ornum = dr.Item("OrNum")
+            _ordate = dr.Item("ORDate")
+            _netamount = dr.Item("NetAmount")
+            _renewdue = dr.Item("RenewDue")
+            _redeemdue = dr.Item("RedeemDue")
+            _appraisal = dr.Item("Appraisal")
+            _principal = dr.Item("Principal")
+            If Not IsDBNull(dr.Item("Interest")) Then _interest = dr.Item("Interest")
+            _advint = dr.Item("AdvInt")
+            _servicecharge = dr.Item("ServiceCharge")
+            _penalty = dr.Item("Penalty")
+            If Not IsDBNull(dr.Item("PullOut")) Then _pullout = dr.Item("PullOut")
+            _category = dr.Item("Category")
+            _itemtype = dr.Item("ItemType")
+            _karat = dr.Item("KARAT")
+            _grams = dr.Item("GRAMS")
+            _description = dr.Item("Description")
+            _status = dr.Item("Status")
+            _earlyredeem = dr.Item("EarlyRedeem")
+            _daysoverdue = dr.Item("DaysOverDue")
+            _renewalcnt = dr.Item("RenewalCnt")
+            If Not IsDBNull(dr.Item("int_checksum")) Then _intchecksum = dr.Item("int_checksum")
+
+            Migrate2()
+            Threading.Thread.Sleep(3000)
+        Next
+
+    End Sub
+
+    Private Sub Migrate2()
+
+        'Search OldTicket in OPT
+        Dim sqlOpt As String = "Select * from OPT where Pawnticket = " & OldTicket
+        Dim DsOpt As DataSet = LoadSQL(sqlOpt, "OPT")
+
+        If DsOpt.Tables(0).Rows.Count > 0 Then
+            Dim PawnItemID As Integer = DsOpt.Tables(0).Rows(0).Item("PawnItemID")
+            sqlOpt = "Select * from OPT"
+            DsOpt.Clear()
+            DsOpt = LoadSQL(sqlOpt, "OPT")
+            Dim dsNewRow As DataRow
+            dsNewRow = DsOpt.Tables("OPT").NewRow
+            With dsNewRow
+                .Item("PawnTicket") = PawnTicket
+                .Item("OldTicket") = OldTicket
+                .Item("LoanDate") = LoanDate
+                .Item("Matudate") = MaturityDate
+                .Item("ExpiryDate") = ExpiryDate
+                .Item("AuctionDate") = AuctionDate
+                .Item("Appraisal") = Appraisal
+                .Item("Principal") = Principal
+                .Item("NetAmount") = NetAmount
+                .Item("AppraiserID") = AppraiserID
+                .Item("EncoderID") = EncoderID
+                .Item("ClaimerID") = ClientID
+                .Item("ClientID") = ClientID
+                .Item("PawnItemID") = PawnItemID
+                .Item("Description") = Description
+                .Item("ORNum") = OrNumber
+                .Item("ORDate") = OrDate
+                .Item("Penalty") = Penalty
+                .Item("Status") = Status
+                .Item("DaysOverDue") = DaysOverDue
+                .Item("EarlyRedeem") = EarlyRedeem
+                .Item("DelayInterest") = Interest
+                .Item("AdvInt") = AdvInt
+                .Item("RenewDue") = RenewDue
+                .Item("RedeemDue") = RedeemDue
+                .Item("ServiceCharge") = ServiceCharge
+                .Item("Created_at") = Now
+            End With
+            DsOpt.Tables("OPT").Rows.Add(dsNewRow)
+            database.SaveEntry(DsOpt)
+
+        Else
+            Dim sqlOpi As String = "Select * from OPI"
+            Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
+
+            Dim dsNewRow As DataRow
+            dsNewRow = DsOpi.Tables("OPI").NewRow
+            With dsNewRow
+                .Item("ItemID") = GetClass(Category, ItemClass.ID)
+                .Item("ItemClass") = GetClass(Category, ItemClass.Name)
+                .Item("Scheme_ID") = GetInt(ItemType, IntChecksum)
+                Select Case Status
+                    Case "L", "0", "R"
+                        .Item("Status") = "A"
+                        .Item("WithDrawDate") = PulloutDate
+                    Case "X"
+                        .Item("Status") = "X"
+                        .Item("WithDrawDate") = OrDate
+                    Case Else
+                        .Item("Status") = Status
+                        .Item("WithDrawDate") = PulloutDate
+                End Select
+                .Item("RenewalCnt") = RenewalCnt
+                .Item("Created_at") = Now
+            End With
+            DsOpi.Tables("OPI").Rows.Add(dsNewRow)
+            database.SaveEntry(DsOpi)
+
+            Dim sqlPi1 As String = "Select * from PI1"
+            Dim DsPi1 As DataSet = LoadSQL(sqlPi1, "PI1")
+            dsNewRow = DsPi1.Tables("PI1").NewRow
+
+            Dim specsName As String() = {"GRAMS", "KARAT", "DESCRIPTION"}
+            Dim specsType As String() = {"INTEGER", "INTEGER", "STRING"}
+            If ItemType = "JWL" Then
+                For i As Integer = 0 To 2
+                    With dsNewRow
+                        .Item("SpecsName") = specsName(i)
+                        .Item("SpecsType") = specsType(i)
+                        If "GRAMS" = specsName(i) Then
+                            .Item("SpecsValue") = Grams
+                            .Item("UOM") = "G"
+                        ElseIf "KARAT" = specsName(i) Then
+                            .Item("SpecsValue") = Karat
+                            .Item("UOM") = "K"
+                        Else
+                            .Item("SpecsValue") = Description
+                        End If
+                        .Item("PawnItemID") = GetLastID()
+                        DsPi1.Tables("PI1").Rows.Add(dsNewRow)
+                    End With
+                    database.SaveEntry(DsPi1)
+                    DsPi1.Clear()
+                Next
+            Else
+                With dsNewRow
+                    .Item("SpecsName") = specsName(2)
+                    .Item("SpecsType") = specsType(2)
+                    .Item("SpecsValue") = Description
+                    .Item("PawnItemID") = GetLastID()
+                    DsPi1.Tables("PI1").Rows.Add(dsNewRow)
+                End With
+                database.SaveEntry(DsPi1)
+            End If
+
+            sqlOpt = "Select * from OPT"
+            DsOpt.Clear()
+            DsOpt = LoadSQL(sqlOpt, "OPT")
+
+            dsNewRow = DsOpt.Tables("OPT").NewRow
+            With dsNewRow
+                .Item("PAWNTICKET") = PawnTicket
+                .Item("OldTicket") = OldTicket
+                .Item("LoanDate") = LoanDate
+                .Item("Matudate") = MaturityDate
+                .Item("ExpiryDate") = ExpiryDate
+                .Item("AuctionDate") = AuctionDate
+                .Item("Appraisal") = Appraisal
+                .Item("Principal") = Principal
+                .Item("NetAmount") = NetAmount
+                .Item("AppraiserID") = AppraiserID
+                .Item("EncoderID") = EncoderID
+                .Item("ClaimerID") = ClientID
+                .Item("ClientID") = ClientID
+                .Item("PawnItemID") = GetLastID()
+                .Item("Description") = Description
+                .Item("ORNum") = OrNumber
+                .Item("ORDate") = OrDate
+                .Item("Penalty") = Penalty
+                .Item("Status") = Status
+                .Item("DaysOverDue") = DaysOverDue
+                .Item("EarlyRedeem") = EarlyRedeem
+                .Item("DelayInterest") = Interest
+                .Item("AdvInt") = AdvInt
+                .Item("RenewDue") = RenewDue
+                .Item("RedeemDue") = RedeemDue
+                .Item("ServiceCharge") = ServiceCharge
+                .Item("Created_at") = Now
+            End With
+            DsOpt.Tables("OPT").Rows.Add(dsNewRow)
+            database.SaveEntry(DsOpt)
+        End If
+
+        pbProgressBar.Value = pbProgressBar.Value + 1
+        Application.DoEvents()
+        lblPercent.Text = String.Format("{0}%", ((pbProgressBar.Value / pbProgressBar.Maximum) * 100).ToString("F2"))
+        'Catch ex As Exception
+        '    MsgBox(ex.Message, MsgBoxStyle.Critical)
+        'End Try
+    End Sub
+
     Private Sub PatchTables()
         frmLoading.Process("Creating Scheme Table . . .")
         frmLoading.Show()
@@ -321,6 +843,14 @@ Public Class frmMigrate
         TableSpecs &= " UPDATED_AT DATE DEFAULT CURRENT_TIMESTAMP(0) NOT NULL);"
         Dim SpecsKey As String = "ALTER TABLE TBLSPECS ADD PRIMARY KEY (SPECSID);"
 
+        Dim TableReprint As String = "CREATE TABLE TBLREPRINT ("
+        TableReprint &= "REPRINTID SMALLINT NOT NULL, "
+        TableReprint &= "PAWNTICKET BIGINT NOT NULL, "
+        TableReprint &= "TRANSNAME VARCHAR(50), "
+        TableReprint &= "REPRINT_AT DATE, "
+        TableReprint &= "REPRINT_BY SMALLINT); "
+        Dim Reprintkey As String = "ALTER TABLE TBLREPRINT ADD PRIMARY KEY (REPRINTID);"
+
         Dim Pawn_List As String
         Pawn_List = "CREATE VIEW PAWN_LIST("
         Pawn_List &= vbCrLf & "PAWNID, "
@@ -353,7 +883,8 @@ Public Class frmMigrate
         Pawn_List &= vbCrLf & "AS "
         Pawn_List &= vbCrLf & "SELECT "
         Pawn_List &= vbCrLf & "P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, "
-        Pawn_List &= vbCrLf & "C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT, C.PHONE1 AS CONTACTNUMBER, "
+        Pawn_List &= vbCrLf & "C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        Pawn_List &= vbCrLf & "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT, C.PHONE1 AS CONTACTNUMBER, "
         Pawn_List &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_ZIP as FULLADDRESS, "
         Pawn_List &= vbCrLf & "ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, "
         Pawn_List &= vbCrLf & "P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, "
@@ -387,6 +918,8 @@ Public Class frmMigrate
         RunCommand(TableItem)
         frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(TableSpecs)
+        RunCommand(TableReprint)
+
         frmLoading.Process("Creating Pawn_list View . . .")
         frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(Pawn_List)
@@ -406,6 +939,7 @@ Public Class frmMigrate
         RunCommand(Pi1Key)
         frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(ItemKey)
+        RunCommand(Reprintkey)
         frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         RunCommand(SpecsKey)
 
@@ -426,6 +960,7 @@ Public Class frmMigrate
         AutoIncrement_ID("TBLITEM", "ITEMID")
         frmLoading.pbLoading.Value = frmLoading.pbLoading.Value + 1
         AutoIncrement_ID("TBLSPECS", "SPECSID")
+        AutoIncrement_ID("TBLREPRINT", "REPRINTID")
         frmLoading.Process("Finishing . . .")
 
     End Sub
@@ -562,6 +1097,7 @@ Public Class frmMigrate
         Disable(1)
         Migrate()
         Disable(0)
+
     End Sub
 
     Private Sub Disable(ByVal st As Boolean)

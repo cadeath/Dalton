@@ -180,6 +180,7 @@ Public Class frmAdminPanel
             btnUpdate.Text = "&Edit"
             btnSave.Enabled = False
             btnSave.Text = "&Save"
+            Load_ItemSpecification(SelectedItem)
             ReadOnlyTrue()
         End If
     End Sub
@@ -320,7 +321,7 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub ModCurrency()
-       
+
         fillData = "tblCurrency"
         mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY CurrencyID ASC"
@@ -551,6 +552,14 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '{0}'", txtClassification.Text)
+        Dim ds As DataSet = LoadSQL(mySql, "TBLITEM")
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            MsgBox("Class already existed", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
         With ItemSave
@@ -601,7 +610,7 @@ Public Class frmAdminPanel
     End Sub
     '""""""""""""""""""""""""""""""""""""""""""""""""""scheme''''''''''''''""""""""""""""""""""
 
-   
+
     Private Sub btnSearchScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchScheme.Click
 
         Dim secured_str As String = txtsearchscheme.Text
@@ -612,7 +621,7 @@ Public Class frmAdminPanel
         frmInterestSchemeList.SearchSelect(secured_str, FormName.frmPawningV2_InterestScheme)
         frmInterestSchemeList.Show()
 
-      
+
 
         btnUpdate.Enabled = True
         btnEdit.Text = "&Edit"
@@ -649,7 +658,7 @@ Public Class frmAdminPanel
         Catch ex As Exception
             MsgBox("Data you select has been removed.", MsgBoxStyle.Information)
         End Try
-      
+
         clearfields1()
         Label18.Text = "Update"
         btnUpdateScheme.Enabled = False
