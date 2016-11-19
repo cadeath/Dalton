@@ -1048,6 +1048,31 @@ Public Class frmPawningItemNew
         If PT_Entry.Status = "X" Then
             do_RedeemOR()
         End If
+
+        Dim mysql As String = "SELECT * FROM TBLREPRINT "
+        Dim ds As DataSet = LoadSQL(mysql, "TBLREPRINT")
+        Dim dsNewRow As DataRow, transname As String
+        dsNewRow = ds.Tables("TBLREPRINT").NewRow
+        With dsNewRow
+            .Item("PAWNTICKET") = PT_Entry.PawnTicket
+            Select Case PT_Entry.Status
+                Case "X"
+                    transname = "Redeem"
+                Case "L"
+                    transname = "New Loan"
+                Case "0"
+                    transname = "Renewed"
+                Case "R"
+                    transname = "Renew"
+                Case Else
+                    transname = PT_Entry.Status
+            End Select
+            .Item("TRANSNAME") = transname
+            .Item("Reprint_At") = Now
+            .Item("Reprint_By") = POSuser.UserID
+        End With
+        ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
+        database.SaveEntry(ds)
     End Sub
 
     Private Function isRenewable(ByVal pt As PawnTicket2) As Boolean
