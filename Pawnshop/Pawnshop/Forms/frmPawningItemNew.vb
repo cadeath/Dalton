@@ -1049,30 +1049,6 @@ Public Class frmPawningItemNew
             do_RedeemOR()
         End If
 
-        Dim mysql As String = "SELECT * FROM TBLREPRINT "
-        Dim ds As DataSet = LoadSQL(mysql, "TBLREPRINT")
-        Dim dsNewRow As DataRow, transname As String
-        dsNewRow = ds.Tables("TBLREPRINT").NewRow
-        With dsNewRow
-            .Item("PAWNTICKET") = PT_Entry.PawnTicket
-            Select Case PT_Entry.Status
-                Case "X"
-                    transname = "Redeem"
-                Case "L"
-                    transname = "New Loan"
-                Case "0"
-                    transname = "Renewed"
-                Case "R"
-                    transname = "Renew"
-                Case Else
-                    transname = PT_Entry.Status
-            End Select
-            .Item("TRANSNAME") = transname
-            .Item("Reprint_At") = Now
-            .Item("Reprint_By") = POSuser.UserID
-        End With
-        ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
-        database.SaveEntry(ds)
     End Sub
 
     Private Function isRenewable(ByVal pt As PawnTicket2) As Boolean
@@ -1108,6 +1084,7 @@ Public Class frmPawningItemNew
             MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        SaveReprint()
 
         Dim autoPrintPT As Reporting
         'On Error Resume Next
@@ -1399,7 +1376,7 @@ Public Class frmPawningItemNew
         Dim ans As DialogResult = _
             MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
+        SaveReprint()
         For cnt As Integer = 1 To OR_COPIES
             PrintRedeemOR2()
             System.Threading.Thread.Sleep(1000)
@@ -1482,5 +1459,32 @@ Public Class frmPawningItemNew
         If isEnter(e) Then
             btnSearchClaimer.PerformClick()
         End If
+    End Sub
+
+    Private Sub SaveReprint()
+        Dim mysql As String = "SELECT * FROM TBLREPRINT "
+        Dim ds As DataSet = LoadSQL(mysql, "TBLREPRINT")
+        Dim dsNewRow As DataRow, transname As String
+        dsNewRow = ds.Tables("TBLREPRINT").NewRow
+        With dsNewRow
+            .Item("PAWNTICKET") = PT_Entry.PawnTicket
+            Select Case PT_Entry.Status
+                Case "X"
+                    transname = "Redeem"
+                Case "L"
+                    transname = "New Loan"
+                Case "0"
+                    transname = "Renewed"
+                Case "R"
+                    transname = "Renew"
+                Case Else
+                    transname = PT_Entry.Status
+            End Select
+            .Item("TRANSNAME") = transname
+            .Item("Reprint_At") = Now
+            .Item("Reprint_By") = POSuser.UserID
+        End With
+        ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
+        database.SaveEntry(ds)
     End Sub
 End Class

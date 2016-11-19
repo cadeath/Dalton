@@ -1095,8 +1095,7 @@ Public Class frmMigrate
 
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
         Disable(1)
-            th = New Thread(AddressOf Thread)
-            th.Start()
+        Migrate()
         Disable(0)
 
     End Sub
