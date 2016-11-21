@@ -897,7 +897,7 @@ Public Class frmMigrate
         Pawn_List &= vbCrLf & "ON ITM.PAWNITEMID = P.PAWNITEMID "
         Pawn_List &= vbCrLf & "INNER JOIN TBLITEM CLASS "
         Pawn_List &= vbCrLf & "ON CLASS.ITEMID = ITM.ITEMID "
-        Pawn_List &= vbCrLf & "INNER JOIN TBL_GAMIT USR "
+        Pawn_List &= vbCrLf & "LEFT JOIN TBL_GAMIT USR "
         Pawn_List &= vbCrLf & "ON USR.USERID = P.APPRAISERID "
 
         'Create Tables
