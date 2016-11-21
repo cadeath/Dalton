@@ -806,6 +806,10 @@ Public Class frmPawningItemNew
         txtNet.Text = pt.NetAmount.ToString("#,##0.00")
         txtService.Text = pt.ServiceCharge.ToString("#,##0.00")
 
+        txtReceipt.Text = IIf(pt.ORNumber = 0, "", pt.ORNumber)
+        txtReceiptDate.Text = IIf(pt.ORDate = #12:00:00 AM#, "", pt.ORDate)
+        txtPrincipal2.Text = IIf(pt.Principal = 0, "", pt.Principal)
+
         cboAppraiser.Text = GetNameByID(pt.AppraiserID, Appraisers_ht)
 
         txtOver.Text = pt.DaysOverDue
