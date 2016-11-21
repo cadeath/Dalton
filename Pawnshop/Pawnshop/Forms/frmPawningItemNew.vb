@@ -793,6 +793,13 @@ Public Class frmPawningItemNew
             i += 1
         Next
 
+        txtTicket.Text = CurrentPTNumber(pt.PawnTicket)
+        txtOldTicket.Text = pt.OldTicket
+        txtLoan.Text = pt.LoanDate
+        txtMatu.Text = pt.MaturityDate
+        txtExpiry.Text = pt.ExpiryDate
+        txtAuction.Text = pt.AuctionDate
+
         txtAppr.Text = pt.Appraisal.ToString("#,##0.00")
         txtPrincipal.Text = pt.Principal.ToString("#,##0.00")
         txtAdv.Text = pt.AdvanceInterest.ToString("#,##0.00")
@@ -800,6 +807,14 @@ Public Class frmPawningItemNew
         txtService.Text = pt.ServiceCharge.ToString("#,##0.00")
 
         cboAppraiser.Text = GetNameByID(pt.AppraiserID, Appraisers_ht)
+
+        txtOver.Text = pt.DaysOverDue
+        txtInt.Text = pt.DelayInterest
+        txtPenalty.Text = pt.Penalty
+        txtService.Text = pt.ServiceCharge
+
+        txtRenew.Text = pt.RenewDue
+        txtRedeem.Text = pt.RedeemDue
 
         'Disable
         txtCustomer.ReadOnly = True

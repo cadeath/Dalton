@@ -952,7 +952,13 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Status.Value</Value>
+                              <Value>=switch(Fields!Status.Value = "L", "New Loan",
+Fields!Status.Value = "R","Renew",
+Fields!Status.Value = "0","Renewed",
+Fields!Status.Value = "X","Redeem",
+Fields!Status.Value = "S","Segre",
+Fields!Status.Value = "W","Withdraw",
+Fields!Status.Value = "V","Void")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
