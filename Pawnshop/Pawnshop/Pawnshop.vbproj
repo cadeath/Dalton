@@ -751,6 +751,7 @@
     <Compile Include="SalesInventory\frmInventory.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\InventoryController.vb" />
     <Compile Include="SalesInventory\SeedItemData.vb" />
     <Compile Include="Seed\Client_Seed.vb" />
   </ItemGroup>
