@@ -164,21 +164,6 @@
         End If
 
         Load_ItemRow(ds.Tables(0).Rows(0))
-        'With ds.Tables(0).Rows(0)
-        '    _itemID = .Item("ITEMID")
-        '    _itemCode = .Item("ITEMCODE")
-        '    _description = .Item("DESCRIPTION")
-        '    _barCode = .Item("BARCODE")
-        '    _category = .Item("CATEGORIES")
-        '    _subCat = .Item("SUBCAT")
-        '    _UoM = .Item("UOM")
-        '    _unitPrice = .Item("UNITPRICE")
-        '    _salePrice = .Item("SALEPRICE")
-        '    _isSale = If(.Item("ISSALE") = 1, True, False)
-        '    _isInv = If(.Item("ISINV") = 1, True, False)
-        '    _onHold = If(.Item("ONHOLD") = 1, True, False)
-        '    _onHand = .Item("ONHAND")
-        'End With
 
         Console.WriteLine(String.Format("{0} loaded.", _itemCode))
     End Sub
