@@ -872,7 +872,7 @@ Public Class frmPawningItemNew
 
     Friend Sub Redeem()
         transactionType = "X"
-        GeneratePT()
+        'GeneratePT()
 
         ReComputeInterest()
         grpClaimer.Enabled = True
