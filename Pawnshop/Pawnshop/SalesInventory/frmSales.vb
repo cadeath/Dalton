@@ -36,6 +36,10 @@ Public Class frmSales
         End If
 
         CheckOR()
+
+        If DEV_MODE Then
+            dev_Menu_SalesInventory.Show()
+        End If
     End Sub
 
     Private Sub CheckOR()

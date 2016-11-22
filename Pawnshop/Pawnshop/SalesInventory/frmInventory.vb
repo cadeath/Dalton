@@ -239,6 +239,8 @@ FAILED_VER:
             End With
             ds.Tables("INVLINES").Rows.Add(dsNewRow)
             database.SaveEntry(ds)
+
+            AddInventory(dr("ITEMCODE"), dr("STOCKS"))
         Next
 
         MsgBox("STO File imported", MsgBoxStyle.Information)
