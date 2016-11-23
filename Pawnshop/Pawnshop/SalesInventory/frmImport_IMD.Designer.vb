@@ -23,8 +23,8 @@ Partial Class frmImport_IMD
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.lvIMD = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -35,8 +35,9 @@ Partial Class frmImport_IMD
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.ofdIMD = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
         '
         'Label2
@@ -49,44 +50,51 @@ Partial Class frmImport_IMD
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Filename"
         '
-        'Button1
+        'btnBrowse
         '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(12, 28)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 31)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Browse"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBrowse.Location = New System.Drawing.Point(12, 28)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(75, 31)
+        Me.btnBrowse.TabIndex = 0
+        Me.btnBrowse.Text = "Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
         '
-        'ListView1
+        'lvIMD
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9, Me.ColumnHeader10})
-        Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(12, 74)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(905, 359)
-        Me.ListView1.TabIndex = 3
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.lvIMD.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lvIMD.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9, Me.ColumnHeader10})
+        Me.lvIMD.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvIMD.FullRowSelect = True
+        Me.lvIMD.GridLines = True
+        Me.lvIMD.Location = New System.Drawing.Point(12, 74)
+        Me.lvIMD.Name = "lvIMD"
+        Me.lvIMD.Size = New System.Drawing.Size(905, 359)
+        Me.lvIMD.TabIndex = 1
+        Me.lvIMD.UseCompatibleStateImageBehavior = False
+        Me.lvIMD.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Item Code"
+        Me.ColumnHeader1.Width = 98
         '
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Description"
+        Me.ColumnHeader2.Width = 221
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Barcode"
+        Me.ColumnHeader3.Width = 141
         '
         'ColumnHeader4
         '
         Me.ColumnHeader4.Text = "Category"
+        Me.ColumnHeader4.Width = 109
         '
         'ColumnHeader5
         '
@@ -95,10 +103,12 @@ Partial Class frmImport_IMD
         'ColumnHeader6
         '
         Me.ColumnHeader6.Text = "UnitPrice"
+        Me.ColumnHeader6.Width = 85
         '
         'ColumnHeader7
         '
         Me.ColumnHeader7.Text = "SalePrice"
+        Me.ColumnHeader7.Width = 73
         '
         'ColumnHeader8
         '
@@ -112,35 +122,41 @@ Partial Class frmImport_IMD
         '
         Me.ColumnHeader10.Text = "onHold"
         '
-        'Button2
+        'btnCancel
         '
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(842, 441)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 31)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "&Cancel"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(842, 441)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 31)
+        Me.btnCancel.TabIndex = 3
+        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnImport
         '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(761, 441)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 31)
-        Me.Button3.TabIndex = 5
-        Me.Button3.Text = "&Import"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnImport.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImport.Location = New System.Drawing.Point(761, 441)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(75, 31)
+        Me.btnImport.TabIndex = 2
+        Me.btnImport.Text = "&Import"
+        Me.btnImport.UseVisualStyleBackColor = True
+        '
+        'ofdIMD
+        '
+        Me.ofdIMD.Filter = "Excel 2003|*.xls|Excel 2007|*.xlsx"
         '
         'frmImport_IMD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(929, 484)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.ListView1)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnImport)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.lvIMD)
+        Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.Label2)
         Me.Name = "frmImport_IMD"
         Me.Text = "Import IMD"
@@ -149,8 +165,8 @@ Partial Class frmImport_IMD
 
     End Sub
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents ListView1 As System.Windows.Forms.ListView
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents lvIMD As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
@@ -161,6 +177,7 @@ Partial Class frmImport_IMD
     Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader9 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader10 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnImport As System.Windows.Forms.Button
+    Friend WithEvents ofdIMD As System.Windows.Forms.OpenFileDialog
 End Class
