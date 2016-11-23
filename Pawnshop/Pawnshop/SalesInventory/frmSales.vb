@@ -14,7 +14,7 @@ Public Class frmSales
     Friend TransactionMode As TransType
     Friend ht_BroughtItems As New Hashtable
 
-    Private ORNUM As Double = GetOption("ORNUM")
+    Private ORNUM As Double = GetOption("InvoiceNum")
     Private PRINTER_PT As String = GetOption("PRINTER")
     Private VAT As Double = 0
     Private DOC_TYPE As Integer = 0 '0 - SALES
@@ -320,8 +320,10 @@ Public Class frmSales
 
             database.SaveEntry(ds)
 
-            If itm.isInventoriable Then itm.onHand -= ht.Value
-            itm.Save_ItemData()
+            'If itm.isInventoriable Then itm.onHand -= ht.Value
+            If itm.isInventoriable Then
+                InventoryController.DeductInventory(itm.ItemCode, ht.Value)
+            End If
         Next
         ItemPosted()
 
@@ -346,7 +348,7 @@ Public Class frmSales
 
     Private Sub ItemPosted()
         ORNUM += 1 'INCREMENT ORNUMBER
-        'UpdateOption("ORNUM", ORNUM)
+        UpdateOptions("InvoiceNum", ORNUM)
     End Sub
 
     Private Sub PrintOR(ByVal docID As Integer)

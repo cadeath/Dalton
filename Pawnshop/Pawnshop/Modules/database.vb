@@ -261,8 +261,4 @@ Friend Module database
         Console.WriteLine("Option updated. " & key)
     End Sub
 
-
-
-
-
 End Module

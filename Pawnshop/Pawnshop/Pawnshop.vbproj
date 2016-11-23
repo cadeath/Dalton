@@ -738,6 +738,12 @@
     <Compile Include="SalesInventory\frmIMD.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\frmImport_IMD.Designer.vb">
+      <DependentUpon>frmImport_IMD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmImport_IMD.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SalesInventory\frmPLU.Designer.vb">
       <DependentUpon>frmPLU.vb</DependentUpon>
     </Compile>
@@ -1129,6 +1135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmIMD.resx">
       <DependentUpon>frmIMD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmImport_IMD.resx">
+      <DependentUpon>frmImport_IMD.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmPLU.resx">
       <DependentUpon>frmPLU.vb</DependentUpon>

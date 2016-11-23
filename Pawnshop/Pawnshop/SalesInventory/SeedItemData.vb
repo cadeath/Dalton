@@ -46,6 +46,7 @@
             .Description = "POWER BANK 2600MH - FREEBIES"
             .Category = "FREEBIES"
             .SalePrice = 0
+            .isInventoriable = True
             .Save_ItemData()
         End With
 
@@ -55,6 +56,7 @@
             .Description = "CORD PROTECTOR -  FREEBIES"
             .Category = "FREEBIES"
             .SalePrice = 0
+            .isInventoriable = True
             .Save_ItemData()
         End With
 
@@ -64,6 +66,7 @@
             .Description = "MONOPAD WITH HOLDER - FREEBIES"
             .Category = "FREEBIES"
             .SalePrice = 0
+            .isInventoriable = True
             .Save_ItemData()
         End With
 
@@ -75,6 +78,7 @@
             .Category = "CELLPHONE"
             .SubCategory = "HUAWEI"
             .SalePrice = 29000
+            .isInventoriable = True
             .Save_ItemData()
         End With
 
@@ -84,6 +88,7 @@
             .Description = "LOAD WALLET	50000"
             .Category = "SMARTLOAD"
             .SalePrice = 0.64
+            .isInventoriable = True
             .Save_ItemData()
         End With
 
@@ -93,6 +98,7 @@
             .Description = "SMART MONEY PADALA 4000"
             .Category = "SMARTLOAD"
             .SalePrice = 0.65
+            .isInventoriable = True
             .Save_ItemData()
         End With
 

@@ -26,7 +26,7 @@
         End If
 
         ds.Tables("ITEMMASTER").Rows(0).Item("ONHAND") -= Qty
-        database.SaveEntry(ds)
+        database.SaveEntry(ds, False)
     End Sub
 
 End Module
