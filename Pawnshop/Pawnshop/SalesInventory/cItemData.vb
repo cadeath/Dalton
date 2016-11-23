@@ -153,7 +153,11 @@
 
 #Region "Procedures"
     Public Overridable Sub Load_Item(Optional ByVal id As Integer = 0)
-        mySql = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & If(id = 0, _itemID, id)
+        If id <> 0 Then
+            mySql = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & If(id = 0, _itemID, id)
+        Else
+            mySql = String.Format("SELECT * FROM ITEMMASTER WHERE ItemCode = '{0}'", _itemCode)
+        End If
 
         ds = New DataSet
         ds = LoadSQL(mySql)

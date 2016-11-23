@@ -84,7 +84,8 @@ Public Class frmSales
             With lvSale.FindItemWithText(itm.ItemCode)
                 .SubItems(2).Text += qty
                 ItemAmount = (itm.SalePrice * qty)
-                .SubItems(4).Text += ItemAmount
+                ItemAmount += ItemAmount
+                .SubItems(4).Text = ItemAmount.ToString("#,#00.00")
             End With
         Else
             'If NEW
@@ -226,7 +227,8 @@ Public Class frmSales
             Console.WriteLine("Removing " & lvSale.Items(idx).Text)
 
             Dim itm As New cItemData
-            itm.Load_Item(lvSale.Items(idx).Text)
+            itm.ItemCode = lvSale.Items(idx).Text
+            itm.Load_Item()
 
             DOC_TOTAL -= itm.SalePrice * CDbl(lvSale.Items(idx).SubItems(2).Text)
             ht_BroughtItems.Remove(itm.ItemCode)
@@ -300,7 +302,8 @@ Public Class frmSales
 
         For Each ht As DictionaryEntry In ht_BroughtItems
             Dim itm As New cItemData
-            itm.Load_Item(ht.Key)
+            itm.ItemCode = ht.Key
+            itm.Load_Item()
 
             dsNewRow = ds.Tables(fillData).NewRow
             With dsNewRow
@@ -413,14 +416,6 @@ Public Class frmSales
 
     Private Sub tsbReceipt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbReceipt.Click
         'frmReceipt.Show()
-    End Sub
-
-    Private Sub lvSale_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvSale.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
-
     End Sub
 
     Private Sub Label1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label1.DoubleClick
