@@ -773,6 +773,7 @@ Partial Class frmPawningItemNew
         'lvSpec
         '
         Me.lvSpec.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader6, Me.ColumnHeader7})
+        Me.lvSpec.Enabled = False
         Me.lvSpec.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvSpec.FullRowSelect = True
         Me.lvSpec.GridLines = True
