@@ -1331,7 +1331,7 @@ Public Class frmPawningItemNew
         autoPrintPT = New Reporting
 
         Dim mySql As String, ptIDx As Single = PT_Entry.PawnID
-        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
+        mySql = "SELECT * FROM PAWN_LIST WHERE PAWNID = " & ptIDx
         Dim dsName As String = "dsPawn"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
         Dim paymentStr As String, descStr As String
