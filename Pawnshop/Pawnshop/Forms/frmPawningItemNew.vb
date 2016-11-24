@@ -225,7 +225,7 @@ Public Class frmPawningItemNew
         If txtAppr.Text = "" Then txtAppr.Focus() : Return False
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
-        If Not mod_system.isAuthorized Then CheckAuth() : Return False
+        'If Not mod_system.isAuthorized Then CheckAuth() : Return False
 
         If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
         If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
@@ -235,6 +235,7 @@ Public Class frmPawningItemNew
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If unableToSave Then Exit Sub
+        If Not CheckAuth() Then Exit Sub
         If Not isValid() And transactionType = "L" Then
             MsgBox("I think you are missing something", MsgBoxStyle.Critical)
             Exit Sub
@@ -831,6 +832,7 @@ Public Class frmPawningItemNew
 
         PT_Entry = pt
 
+        mod_system.isAuthorized = True
         If transactionType = "D" Then
             LockFields(True)
             btnSave.Enabled = False : btnRenew.Enabled = True
