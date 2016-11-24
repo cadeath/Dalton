@@ -1,6 +1,7 @@
 CHANGELOG
 Version 1.4
- - Added Tables ITEMMASTER, DOC
+ - Added Tables INV, INVLINES
+ - Added Tables ITEMMASTER, DOC, DOCLINES
  - Add InvoiceNum at TBLMAINTENACE
  - Change DB Version 1.2.3
 
