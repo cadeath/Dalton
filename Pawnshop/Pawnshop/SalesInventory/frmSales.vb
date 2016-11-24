@@ -9,6 +9,7 @@ Public Class frmSales
     Enum TransType As Integer
         Cash = 0
         Check = 1
+        Auction = 2
     End Enum
 
     Friend TransactionMode As TransType
@@ -424,6 +425,19 @@ Public Class frmSales
         If DEV_MODE Then
             SeedItemData.Populate()
             Console.WriteLine("ITEM POPULATED")
+        End If
+    End Sub
+
+    Private Sub tsbtnAuction_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnAuction.Click
+        If TransactionMode <> TransType.Auction Then
+            TransactionMode = TransType.Auction            
+            lblSearch.Text = "TICKET:"
+            lblMode.Text = "REDEEM"
+
+        Else
+            Load_asCash()
+            lblSearch.Text = "ITEM:"
+
         End If
     End Sub
 End Class

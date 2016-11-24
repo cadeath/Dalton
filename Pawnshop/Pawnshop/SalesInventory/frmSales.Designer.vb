@@ -32,7 +32,7 @@ Partial Class frmSales
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblTotal = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblSearch = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.lblMode = New System.Windows.Forms.Label()
@@ -52,6 +52,7 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
+        Me.tsbtnAuction = New System.Windows.Forms.ToolStripButton()
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -67,7 +68,7 @@ Partial Class frmSales
         Me.lvSale.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvSale.Location = New System.Drawing.Point(12, 38)
         Me.lvSale.Name = "lvSale"
-        Me.lvSale.Size = New System.Drawing.Size(482, 286)
+        Me.lvSale.Size = New System.Drawing.Size(574, 341)
         Me.lvSale.TabIndex = 0
         Me.lvSale.UseCompatibleStateImageBehavior = False
         Me.lvSale.View = System.Windows.Forms.View.Details
@@ -102,7 +103,7 @@ Partial Class frmSales
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(500, 237)
+        Me.Label1.Location = New System.Drawing.Point(592, 292)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(44, 16)
         Me.Label1.TabIndex = 1
@@ -112,32 +113,32 @@ Partial Class frmSales
         '
         Me.lblTotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotal.Location = New System.Drawing.Point(500, 262)
+        Me.lblTotal.Location = New System.Drawing.Point(592, 317)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(286, 43)
         Me.lblTotal.TabIndex = 2
         Me.lblTotal.Text = "Php 9,999,999.99"
         Me.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label3
+        'lblSearch
         '
-        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(12, 339)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(48, 16)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "ITEM:"
+        Me.lblSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblSearch.AutoSize = True
+        Me.lblSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSearch.Location = New System.Drawing.Point(12, 394)
+        Me.lblSearch.Name = "lblSearch"
+        Me.lblSearch.Size = New System.Drawing.Size(48, 16)
+        Me.lblSearch.TabIndex = 3
+        Me.lblSearch.Text = "ITEM:"
         '
         'txtSearch
         '
         Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearch.Location = New System.Drawing.Point(66, 333)
+        Me.txtSearch.Location = New System.Drawing.Point(88, 388)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(329, 31)
+        Me.txtSearch.Size = New System.Drawing.Size(399, 31)
         Me.txtSearch.TabIndex = 4
         Me.txtSearch.Text = "DESCRIPTION"
         '
@@ -145,7 +146,7 @@ Partial Class frmSales
         '
         Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSearch.Location = New System.Drawing.Point(401, 333)
+        Me.btnSearch.Location = New System.Drawing.Point(493, 388)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(93, 31)
         Me.btnSearch.TabIndex = 5
@@ -157,7 +158,7 @@ Partial Class frmSales
         Me.lblMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMode.Location = New System.Drawing.Point(500, 38)
+        Me.lblMode.Location = New System.Drawing.Point(592, 38)
         Me.lblMode.Name = "lblMode"
         Me.lblMode.Size = New System.Drawing.Size(286, 43)
         Me.lblMode.TabIndex = 6
@@ -168,7 +169,7 @@ Partial Class frmSales
         '
         Me.lblCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblCustomer.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCustomer.Location = New System.Drawing.Point(500, 98)
+        Me.lblCustomer.Location = New System.Drawing.Point(592, 98)
         Me.lblCustomer.Name = "lblCustomer"
         Me.lblCustomer.Size = New System.Drawing.Size(286, 43)
         Me.lblCustomer.TabIndex = 8
@@ -177,10 +178,10 @@ Partial Class frmSales
         '
         'tsButton
         '
-        Me.tsButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbIMD, Me.tsbPLU, Me.ToolStripSeparator1, Me.tsbCustomer, Me.ToolStripSeparator2, Me.tsbCash, Me.tsbCheck, Me.tsbRefund, Me.tsbSalesReturn, Me.ToolStripSeparator3, Me.tsbReceipt})
+        Me.tsButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbIMD, Me.tsbPLU, Me.tsbtnAuction, Me.ToolStripSeparator1, Me.tsbCustomer, Me.ToolStripSeparator2, Me.tsbCash, Me.tsbCheck, Me.tsbRefund, Me.tsbSalesReturn, Me.ToolStripSeparator3, Me.tsbReceipt})
         Me.tsButton.Location = New System.Drawing.Point(0, 0)
         Me.tsButton.Name = "tsButton"
-        Me.tsButton.Size = New System.Drawing.Size(798, 25)
+        Me.tsButton.Size = New System.Drawing.Size(890, 25)
         Me.tsButton.TabIndex = 9
         Me.tsButton.Text = "tsButton"
         '
@@ -268,7 +269,7 @@ Partial Class frmSales
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(681, 311)
+        Me.btnCancel.Location = New System.Drawing.Point(773, 366)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(105, 50)
         Me.btnCancel.TabIndex = 10
@@ -279,7 +280,7 @@ Partial Class frmSales
         '
         Me.btnPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnPost.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPost.Location = New System.Drawing.Point(570, 311)
+        Me.btnPost.Location = New System.Drawing.Point(662, 366)
         Me.btnPost.Name = "btnPost"
         Me.btnPost.Size = New System.Drawing.Size(105, 50)
         Me.btnPost.TabIndex = 11
@@ -291,18 +292,26 @@ Partial Class frmSales
         Me.lblNoVat.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblNoVat.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNoVat.ForeColor = System.Drawing.Color.Red
-        Me.lblNoVat.Location = New System.Drawing.Point(631, 237)
+        Me.lblNoVat.Location = New System.Drawing.Point(723, 292)
         Me.lblNoVat.Name = "lblNoVat"
         Me.lblNoVat.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.lblNoVat.Size = New System.Drawing.Size(147, 16)
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
         '
+        'tsbtnAuction
+        '
+        Me.tsbtnAuction.Image = CType(resources.GetObject("tsbtnAuction.Image"), System.Drawing.Image)
+        Me.tsbtnAuction.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnAuction.Name = "tsbtnAuction"
+        Me.tsbtnAuction.Size = New System.Drawing.Size(71, 22)
+        Me.tsbtnAuction.Text = "REDEEM"
+        '
         'frmSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(798, 373)
+        Me.ClientSize = New System.Drawing.Size(890, 428)
         Me.Controls.Add(Me.lblNoVat)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnCancel)
@@ -311,7 +320,7 @@ Partial Class frmSales
         Me.Controls.Add(Me.lblMode)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lblSearch)
         Me.Controls.Add(Me.lblTotal)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lvSale)
@@ -334,7 +343,7 @@ Partial Class frmSales
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lblTotal As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblSearch As System.Windows.Forms.Label
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents lblMode As System.Windows.Forms.Label
@@ -354,4 +363,5 @@ Partial Class frmSales
     Friend WithEvents tsbRefund As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbSalesReturn As System.Windows.Forms.ToolStripButton
     Friend WithEvents lblNoVat As System.Windows.Forms.Label
+    Friend WithEvents tsbtnAuction As System.Windows.Forms.ToolStripButton
 End Class
