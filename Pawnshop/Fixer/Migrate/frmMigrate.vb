@@ -356,7 +356,7 @@ Public Class frmMigrate
             Dim MigAdvInt As Integer = dr.Item("AdvInt")
             Dim MigServiceCharge As Integer = dr.Item("ServiceCharge")
             Dim MigPenalty As Integer = dr.Item("Penalty")
-            Dim MigPullout As Date
+            Dim MigPullout As New Date
             If Not IsDBNull(dr.Item("PullOut")) Then MigPullout = dr.Item("PullOut")
             Dim MigCategory As String = dr.Item("Category")
             Dim MigItemType As String = dr.Item("ItemType")
