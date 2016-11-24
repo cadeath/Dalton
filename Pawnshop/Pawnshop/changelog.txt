@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.3.0.3
+ - Removed Checking Authorization in every renew
+ - Fix Wrong Printing OR information
+  
 Version 1.3
  - Added Tables OPI, PI1, OPT, TBLITEM, TBLSPECS, TBLINTSCHEMES, TBLINTSCHEME_DETAILS
  - Added View PAWN_LIST
