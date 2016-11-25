@@ -521,7 +521,7 @@
                 ds.Tables(0).Rows(0).Item("Status") = "V"
                 database.SaveEntry(ds, False)
 
-                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
                 Exit Sub
@@ -529,7 +529,7 @@
                 Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PawnTicket = " & _oldPT
                 Dim ds As DataSet = LoadSQL(mysql)
 
-                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID)
+                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
 
@@ -554,7 +554,7 @@
                 If ds.Tables(0).Rows.Count = 1 Then
                     ChangeStatus("V")
                 End If
-                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID)
+                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
             End If

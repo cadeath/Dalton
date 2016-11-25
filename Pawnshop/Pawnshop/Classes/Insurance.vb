@@ -180,7 +180,7 @@ Public Class Insurance
 
         database.SaveEntry(ds, False)
 
-        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID)
+        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "COI# " & COInumber)
 
         RemoveJournal(InsuranceID, , TransactionName)
         RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
