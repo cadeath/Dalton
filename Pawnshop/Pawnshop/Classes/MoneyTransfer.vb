@@ -313,7 +313,7 @@
         Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
 
-        TransactionVoidSave(strModname1, tmpMoneyTransfer, POSuser.UserID, reason)
+        TransactionVoidSave(strModname1, tmpMoneyTransfer, POSuser.UserID, SrcStr & " " & reason)
 
         RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
 

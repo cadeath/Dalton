@@ -120,7 +120,7 @@
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
             mySql &= "  WHERE (Status = 'S') "
-            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND (WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' OR WITHDRAWDATE IS NULL) "
+            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "'"
 
             mySql &= "  UNION "
             mySql &= "  SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
@@ -128,7 +128,7 @@
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
             mySql &= "  WHERE (Status = 'W') "
-            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
+            mySql &= "  AND WITHDRAWDATE >= '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= ") "
             If cboClass.Text <> "ALL" Then
                 mySql &= " WHERE ITEMCATEGORY = '" & cboClass.Text & "'"
@@ -161,12 +161,12 @@
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
             mySql &= "  WHERE (Status = 'S') "
-            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND (WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' OR WITHDRAWDATE IS NULL) "
+            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "'"
             mySql &= "  UNION "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
             mySql &= "  WHERE (Status = 'W') "
-            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
+            mySql &= "   AND WITHDRAWDATE >= '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= ") "
             If cboClass.Text <> "ALL" Then
                 mySql &= " WHERE ITEMCATEGORY = '" & cboClass.Text & "'"

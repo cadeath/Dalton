@@ -177,7 +177,7 @@
             End If
         database.SaveEntry(ds, False)
         Dim tmpCIO As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
-        TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID)
+        TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID, "CashIn/OutID# " & id)
 
             RemoveJournal(CashID, , Transactiontype)
             RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
