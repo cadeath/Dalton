@@ -601,7 +601,6 @@
                     database.SaveEntry(ds, False)
                     Dim mysql2 As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
                     Dim ds2 As DataSet = LoadSQL(mysql2)
-                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID)
 
                     RemoveJournal(PawnID, , ModNAME)
                     RemoveDailyTimeLog(PawnID, "1", ModNAME)
@@ -618,7 +617,6 @@
                     .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
-                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID)
 
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
