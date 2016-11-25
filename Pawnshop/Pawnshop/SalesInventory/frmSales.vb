@@ -85,8 +85,7 @@ Public Class frmSales
             With lvSale.FindItemWithText(itm.ItemCode)
                 .SubItems(2).Text += qty
                 ItemAmount = (itm.SalePrice * qty)
-                ItemAmount += ItemAmount
-                .SubItems(4).Text = ItemAmount.ToString("#,#00.00")
+                .SubItems(4).Text = (ItemAmount + CDbl(.SubItems(4).Text)).ToString("#,##0.00")
             End With
         Else
             'If NEW
