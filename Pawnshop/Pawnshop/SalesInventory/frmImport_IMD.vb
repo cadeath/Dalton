@@ -5,11 +5,20 @@ Public Class frmImport_IMD
     Dim ht_ImportedItems As New Hashtable
     Dim import_cnt As Integer = 0
 
+    Private Sub ClearFields()
+        ht_ImportedItems.Clear()
+        lvIMD.Items.Clear()
+    End Sub
+
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         ofdIMD.ShowDialog()
 
         Dim fileName As String = ofdIMD.FileName
         Dim isDone As Boolean = False
+
+        If fileName = "" Then Exit Sub
+        lblFilename.Text = fileName
+        ClearFields()
 
         'Load Excel
         Dim oXL As New Excel.Application
@@ -19,10 +28,8 @@ Public Class frmImport_IMD
         oWB = oXL.Workbooks.Open(fileName)
         oSheet = oWB.Worksheets(1)
 
-
         Dim MaxColumn As Integer = oSheet.Cells(1, oSheet.Columns.Count).End(Excel.XlDirection.xlToLeft).column
         Dim MaxEntries As Integer = oSheet.Cells(oSheet.Rows.Count, 1).End(Excel.XlDirection.xlUp).row
-
 
         Dim checkHeaders(MaxColumn) As String
         For cnt As Integer = 0 To MaxColumn - 1
@@ -50,14 +57,16 @@ Public Class frmImport_IMD
                 .UnitofMeasure = oSheet.Cells(cnt, 6).Value
                 .UnitPrice = If(Not IsNumeric(oSheet.Cells(cnt, 7).Value), 0, oSheet.Cells(cnt, 7).Value)
                 .SalePrice = If(Not IsNumeric(oSheet.Cells(cnt, 8).Value), 0, oSheet.Cells(cnt, 8).Value)
-                If isYesNo(oSheet.Cells(cnt, 9).value) Then .isSaleable = IIf(oSheet.Cells(cnt, 9).value = "Y", 1, 0)
-                If isYesNo(oSheet.Cells(cnt, 10).value) Then .isInventoriable = IIf(oSheet.Cells(cnt, 10).value = "Y", 1, 0)
-                If isYesNo(oSheet.Cells(cnt, 11).value) Then .onHold = IIf(oSheet.Cells(cnt, 11).value = "Y", 1, 0)
+                If isYesNo(oSheet.Cells(cnt, 9).value) Then .isSaleable = IIf(YesNo(oSheet.Cells(cnt, 9).value) = "Y", 1, 0)
+                If isYesNo(oSheet.Cells(cnt, 10).value) Then .isInventoriable = IIf(YesNo(oSheet.Cells(cnt, 10).value) = "Y", 1, 0)
+                If isYesNo(oSheet.Cells(cnt, 11).value) Then .onHold = IIf(YesNo(oSheet.Cells(cnt, 11).value) = "Y", 1, 0)
+
             End With
 
             AddItems(ImportedItem)
         Next
         isDone = True
+
 
 unloadObj:
         'Memory Unload
@@ -66,11 +75,17 @@ unloadObj:
         oXL.Quit()
         oXL = Nothing
 
-        If isDone Then MsgBox("SUCCESS", MsgBoxStyle.Information)
+        fileName = ""
+        If isDone Then MsgBox("Item Loaded", MsgBoxStyle.Information)
     End Sub
 
     Private Sub AddItems(ByVal Item As cItemData)
         Dim lv As ListViewItem = lvIMD.Items.Add(Item.ItemCode)
+        If Item.onHold Then
+            lv.ForeColor = Color.White
+            lv.BackColor = Color.Red
+        End If
+
         lv.SubItems.Add(Item.Description)
         lv.SubItems.Add(Item.Barcode)
         lv.SubItems.Add(Item.Category)
@@ -79,6 +94,7 @@ unloadObj:
         lv.SubItems.Add(Item.SalePrice.ToString("#,##0.00"))
         lv.SubItems.Add(If(Item.isSaleable, "Yes", "No"))
         lv.SubItems.Add(If(Item.isInventoriable, "Yes", "No"))
+        lv.SubItems.Add(If(Item.onHold, "Yes", "No"))
 
         ht_ImportedItems.Add(import_cnt, Item)
         import_cnt += 1
@@ -91,6 +107,21 @@ unloadObj:
         Else
             Return False
         End If
+    End Function
+
+    Private Function YesNo(ByVal str As String) As String
+        Dim ret As String
+
+        Select Case str.ToUpper
+            Case "1"
+                ret = "Y"
+            Case "0"
+                ret = "N"
+            Case Else
+                ret = str.ToUpper
+        End Select
+
+        Return ret
     End Function
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click

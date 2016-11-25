@@ -216,6 +216,7 @@
                 .Item("ONHOLD") = _onHold
                 .Item("ONHAND") = _onHand
                 .Item("COMMENTS") = _comments
+                .Item("UPDATE_TIME") = Now()
             End With
         End If
 

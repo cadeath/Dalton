@@ -22,7 +22,7 @@ Partial Class frmImport_IMD
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblFilename = New System.Windows.Forms.Label()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.lvIMD = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -40,15 +40,15 @@ Partial Class frmImport_IMD
         Me.ofdIMD = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
         '
-        'Label2
+        'lblFilename
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 9)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(64, 16)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Filename"
+        Me.lblFilename.AutoSize = True
+        Me.lblFilename.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFilename.Location = New System.Drawing.Point(12, 9)
+        Me.lblFilename.Name = "lblFilename"
+        Me.lblFilename.Size = New System.Drawing.Size(64, 16)
+        Me.lblFilename.TabIndex = 1
+        Me.lblFilename.Text = "Filename"
         '
         'btnBrowse
         '
@@ -157,14 +157,14 @@ Partial Class frmImport_IMD
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lvIMD)
         Me.Controls.Add(Me.btnBrowse)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblFilename)
         Me.Name = "frmImport_IMD"
         Me.Text = "Import IMD"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents lblFilename As System.Windows.Forms.Label
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents lvIMD As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
