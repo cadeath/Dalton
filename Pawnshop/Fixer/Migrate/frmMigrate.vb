@@ -426,13 +426,14 @@ Public Class frmMigrate
                     Select Case MigStatus
                         Case "L", "0", "R"
                             .Item("Status") = "A"
-                            .Item("WithDrawDate") = MigPullout
                         Case "X"
                             .Item("Status") = "X"
                             .Item("WithDrawDate") = MigOrDate
+                        Case "W"
+                            .Item("Status") = "W"
+                            .Item("WithDrawDate") = MigPullout
                         Case Else
                             .Item("Status") = MigStatus
-                            .Item("WithDrawDate") = MigPullout
                     End Select
                     .Item("RenewalCnt") = MigRenewCount
                     .Item("Created_at") = Now

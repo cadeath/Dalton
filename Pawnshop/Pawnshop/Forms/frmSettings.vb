@@ -1,5 +1,6 @@
 ﻿Public Class frmSettings
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
+    Private isOTPEnable As Boolean = False
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lblSAP01.Text = "SAP Code 01"
@@ -67,6 +68,7 @@
         Else
             If Not OTPDisable Then
                 diagOTP.FormType = diagOTP.OTPType.Settings
+                isOTPEnable = True
                 If Not CheckOTP() Then Exit Sub
             Else
                 UpdateSetting()
@@ -76,31 +78,31 @@
     Friend Sub UpdateSetting()
         'First
         If Not locked Then
-            UpdateOptions("BranchCode", txtCode.Text)
-            UpdateOptions("BranchName", txtName.Text)
-            UpdateOptions("BranchArea", txtArea.Text)
-            UpdateOptions("RevolvingFund", txtRevolving.Text)
-            UpdateOptions("LOCKED", "YES")
+            UpdateOptions("BranchCode", txtCode.Text, isOTPEnable)
+            UpdateOptions("BranchName", txtName.Text, isOTPEnable)
+            UpdateOptions("BranchArea", txtArea.Text, isOTPEnable)
+            UpdateOptions("RevolvingFund", txtRevolving.Text, isOTPEnable)
+            UpdateOptions("LOCKED", "YES", isOTPEnable)
             InsertSAPCount(txtRevolving.Text)
 
             BranchCode = txtCode.Text
             branchName = txtName.Text
         End If
-        UpdateOptions("MaintainingBalance", txtBal.Text)
+        UpdateOptions("MaintainingBalance", txtBal.Text, isOTPEnable)
         MaintainBal = txtBal.Text
         UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
 
         'Second
-        UpdateOptions("PawnLastNum", txtPawnTicket.Text)
-        UpdateOptions("ORLastNum", txtOR.Text)
-        UpdateOptions("BorrowingLastNum", txtBorrow.Text)
-        UpdateOptions("InsuranceLastNum", txtInsurance.Text)
-        UpdateOptions("MEnumLast", txtMENum.Text)
-        UpdateOptions("MRNumLast", txtMRNum.Text)
+        UpdateOptions("PawnLastNum", txtPawnTicket.Text, isOTPEnable)
+        UpdateOptions("ORLastNum", txtOR.Text, isOTPEnable)
+        UpdateOptions("BorrowingLastNum", txtBorrow.Text, isOTPEnable)
+        UpdateOptions("InsuranceLastNum", txtInsurance.Text, isOTPEnable)
+        UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
+        UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
 
         'Third
-        UpdateOptions("PrinterPT", printerPT.Text)
-        UpdateOptions("PrinterOR", printerOR.Text)
+        UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)
+        UpdateOptions("PrinterOR", printerOR.Text, isOTPEnable)
 
         If Not locked Then
             MsgBox("New Branch has been setup", MsgBoxStyle.Information)

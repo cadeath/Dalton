@@ -521,6 +521,7 @@
                 ds.Tables(0).Rows(0).Item("Status") = "V"
                 database.SaveEntry(ds, False)
 
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
                 TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
@@ -529,6 +530,7 @@
                 Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PawnTicket = " & _oldPT
                 Dim ds As DataSet = LoadSQL(mysql)
 
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
                 TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
@@ -554,6 +556,7 @@
                 If ds.Tables(0).Rows.Count = 1 Then
                     ChangeStatus("V")
                 End If
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
                 TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
@@ -621,6 +624,7 @@
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
         End Try
