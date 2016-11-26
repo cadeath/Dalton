@@ -380,7 +380,6 @@
     <Compile Include="InterestScheme\Scheme_Interest.vb" />
     <Compile Include="InterestScheme\Scheme_Load.vb" />
     <Compile Include="Modules\AuditReports.vb" />
-    <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Modules\Void.vb" />

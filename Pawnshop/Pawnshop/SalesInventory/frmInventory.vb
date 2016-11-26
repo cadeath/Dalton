@@ -193,6 +193,19 @@ FAILED_VER:
             Exit Sub
         End If
 
+        ' Integrity Check
+        Dim hash = InputBox("HOT CODE", "ENTER HOT CODE")
+        If hash = "" Then Exit Sub
+        If Not hash = security.GetFileMD5(lblFilename.Text) Then
+            ' TODO: JUNMAR
+            ' RECORD HASH VALUE THAT WAS ENCODED IN THE HOT CODE
+            ' SAVE IN AT DAILYTIMELOG
+
+            MsgBox("Invalid HOT CODE", MsgBoxStyle.Critical, "HOT CODE")
+            Exit Sub
+        End If
+
+
         Dim STONum As Integer = 0, DocID As Integer = 0
         Dim mySql As String
         Dim ds As DataSet

@@ -201,8 +201,8 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbPLU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPLU.Click
-        'frmPLU.Show()
-        'frmPLU.Load_PLU()
+        frmPLU.Show()
+        frmPLU.Load_PLU()
     End Sub
 
     Private Sub tsbCustomer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCustomer.Click
