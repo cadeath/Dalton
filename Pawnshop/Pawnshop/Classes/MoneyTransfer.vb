@@ -313,10 +313,10 @@
         Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
         Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
 
+        Dim NewOtp As New ClassOtp("VOID MONEYTRANSFER", diagOTP.txtPIN.Text, SrcStr)
         TransactionVoidSave(strModname1, tmpMoneyTransfer, POSuser.UserID, SrcStr & " " & reason)
 
         RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
-
         RemoveDailyTimeLog(MoneyTransID, "1", SrvTypDailyTimelog)
 
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))

@@ -569,7 +569,7 @@ Module mod_system
     ' END - HASHTABLE FUNCTIONS
 
     Public Function CheckOTP() As Boolean
-        diagOTP.Show()
+        diagOTP.ShowDialog()
         diagOTP.TopMost = True
         'Return False
         Return True

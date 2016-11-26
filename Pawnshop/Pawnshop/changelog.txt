@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.3.0.6
+ - Added Remarks field in table OTP
+
 Version 1.3.0.5
  - Fix double entry in saving void transaction
  - Included Transaction number in remarks in every void transaction
