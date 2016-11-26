@@ -151,7 +151,7 @@ Module mod_system
             Dim tmpPawnItem As New PawnTicket2
             tmpPawnItem.Load_PTid(dr.Item("PawnID"))
             With tmpPawnItem.PawnItem
-                .WithdrawDate = CurrentDate
+                '.WithdrawDate = CurrentDate
                 .Status = "S"
                 .Save_PawnItem()
             End With
