@@ -37,6 +37,20 @@
         End With
     End Sub
 
+    Friend Sub Populate3()
+        Dim RECALL00 As New cItemData
+
+        With RECALL00
+            .ItemCode = "RECALL00"
+            .Load_ItemCode()
+            If .hasLoaded Then Exit Sub
+
+            .isSaleable = True
+            .isInventoriable = False
+            .Save_ItemData()
+        End With
+    End Sub
+
     Friend Sub Populate2()
         If isPopulated() Then Exit Sub
 

@@ -5,6 +5,7 @@
 
     Private fromSales As Boolean = True
     Private fromInventory As Boolean = False
+    Private isRedeem As Boolean = False
 
     Friend Sub From_Sales()
         Me.fromSales = True
@@ -17,6 +18,11 @@
         Me.fromSales = False
         Me.fromInventory = True
 
+        txtCode.Select()
+    End Sub
+
+    Friend Sub isAuctionRedeem()
+        Me.isRedeem = True
         txtCode.Select()
     End Sub
 
@@ -72,9 +78,22 @@
 
     Friend Sub Load_PLU()
         Dim quickLoader As Integer = 0
-        Dim mySql As String = "SELECT * FROM ITEMMASTER WHERE onHold = 0 ORDER BY ITEMCODE ASC"
+        Dim mySql As String
+        Dim ds As DataSet
 
-        Dim ds As DataSet = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0")
+        If isRedeem Then
+            mySql = "SELECT PT.*, ITEM.ITEMCLASS "
+            mySql &= vbCrLf & "FROM OPT PT "
+            mySql &= vbCrLf & "INNER JOIN OPI ITEM "
+            mySql &= vbCrLf & "ON ITEM.PAWNITEMID = PT.PAWNITEMID "
+            mySql &= vbCrLf & "WHERE PT.STATUS = 'S'"
+
+            ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
+        Else
+            mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0 ORDER BY ITEMCODE ASC"
+            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0")
+        End If
+
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
 
         If Not txtCode.Text = "" Then Exit Sub
@@ -84,7 +103,18 @@
         While dsR.Read
 
             Dim itmReader As New cItemData
-            itmReader.LoadReader_Item(dsR)
+            If isRedeem Then
+                With itmReader
+                    .ItemCode = "RECALL00"
+                    .Load_ItemCode()
+
+                    .Description = String.Format("PT#{0:000000} {1}", dsR("PAWNTICKET"), dsR("DESCRIPTION"))
+                    .Category = dsR("ITEMCLASS")
+                    .UnitofMeasure = "PIECE"
+                End With
+            Else
+                itmReader.LoadReader_Item(dsR)
+            End If
             queued_IMD.Add(itmReader)
             AddItem(itmReader)
 
@@ -146,6 +176,15 @@
         Dim mySql As String = "SELECT * FROM ITEMMASTER "
         mySql &= String.Format("WHERE (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') ", DreadKnight(unsec_src).ToLower)
 
+        If isRedeem Then
+            mySql = "SELECT PT.*, ITEM.ITEMCLASS "
+            mySql &= vbCrLf & "FROM OPT PT "
+            mySql &= vbCrLf & "INNER JOIN OPI ITEM "
+            mySql &= vbCrLf & "ON ITEM.PAWNITEMID = PT.PAWNITEMID "
+            mySql &= vbCrLf & "WHERE PT.STATUS = 'S' "
+            mySql &= vbCrLf & String.Format("AND PT.PAWNTICKET = '{0}' OR LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(unsec_src).ToLower)
+        End If
+
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("ITEM NOT FOUND", MsgBoxStyle.Information) : Exit Sub
 
@@ -159,7 +198,20 @@
         While dsR.Read
 
             Dim tmpItm As New cItemData
-            tmpItm.LoadReader_Item(dsR)
+
+            If isRedeem Then
+                With tmpItm
+                    .ItemCode = "RECALL00"
+                    .Load_ItemCode()
+
+                    .Description = String.Format("PT#{0:000000} {1}", dsR("PAWNTICKET"), dsR("DESCRIPTION"))
+                    .Category = dsR("ITEMCLASS")
+                    .UnitofMeasure = "PIECE"
+                End With
+            Else
+                tmpItm.LoadReader_Item(dsR)
+            End If
+
             queued_IMD.Add(tmpItm)
             AddItem(tmpItm)
 
@@ -194,6 +246,8 @@
         End If
 
         If fromSales Then
+            If isRedeem Then qtyItm = 1
+
             frmSales.AddItem(selected_Itm, qtyItm)
             frmSales.ClearSearch()
         Else

@@ -83,9 +83,19 @@ Public Class frmSales
 
         If hasSelected Then
             With lvSale.FindItemWithText(itm.ItemCode)
-                .SubItems(2).Text += qty
+                If TransactionMode = TransType.Auction Then
+                    .SubItems(2).Text = 1
+                Else
+                    .SubItems(2).Text += qty
+                End If
+
                 ItemAmount = (itm.SalePrice * qty)
-                .SubItems(4).Text = (ItemAmount + CDbl(.SubItems(4).Text)).ToString("#,##0.00")
+
+                If TransactionMode = TransType.Auction Then
+                    .SubItems(2).Text = ItemAmount
+                Else
+                    .SubItems(4).Text = (ItemAmount + CDbl(.SubItems(4).Text)).ToString("#,##0.00")
+                End If
             End With
         Else
             'If NEW
@@ -103,7 +113,15 @@ Public Class frmSales
             ht_BroughtItems.Add(itm.ItemCode, qty)
         End If
 
-        DOC_TOTAL += ItemAmount
+        If TransactionMode = TransType.Auction Then
+            DOC_TOTAL = 0
+            For Each lv As ListViewItem In lvSale.Items
+                DOC_TOTAL += CDbl(lv.SubItems(4).Text)
+            Next
+        Else
+            DOC_TOTAL += ItemAmount
+        End If
+
         Display_Total(DOC_TOTAL)
     End Sub
 
@@ -179,9 +197,17 @@ Public Class frmSales
         Me.Close()
     End Sub
 
+    Private Sub IS_AUCTIONREDEEM()
+        If TransactionMode = TransType.Auction Then
+            frmPLU.isAuctionRedeem()
+        End If
+    End Sub
+
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmPLU.Show()
         frmPLU.From_Sales()
+
+        IS_AUCTIONREDEEM()
 
         If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
 
@@ -202,6 +228,8 @@ Public Class frmSales
 
     Private Sub tsbPLU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPLU.Click
         frmPLU.Show()
+
+
         frmPLU.Load_PLU()
     End Sub
 
@@ -433,6 +461,7 @@ Public Class frmSales
             lblSearch.Text = "TICKET:"
             lblMode.Text = "REDEEM"
 
+            IS_AUCTIONREDEEM()
         Else
             Load_asCash()
             lblSearch.Text = "ITEM:"
