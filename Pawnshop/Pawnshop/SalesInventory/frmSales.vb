@@ -363,6 +363,11 @@ Public Class frmSales
         ClearField()
     End Sub
 
+    Private Sub Sales_JournalEntries(ByVal itm As cItemData, ByVal amt As Double)
+        AddJournal(amt, "Debit", "Revolving Fund", "RECALL " & itm.ItemCode, "RECALL")
+        'AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", PT_Entry.PawnID)
+    End Sub
+
     Private Function GetModesOfPayment(ByVal x As TransType)
         Select Case x
             Case TransType.Cash
