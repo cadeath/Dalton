@@ -96,7 +96,7 @@ Public Class frmExtractor
 
         oSheet = oWB.Sheets(2)
         'Sheet 2
-        For cnt As Integer = 0 To ds.Tables(0).Rows.Count - 1
+        For cnt As Integer = 0 To ds.Tables(0).Rows.Count
             If cnt = 0 Then
                 col = 1
                 For Each hd In header2
@@ -104,7 +104,7 @@ Public Class frmExtractor
                     col += 1
                 Next
             Else
-                With ds.Tables(0).Rows(cnt)
+                With ds.Tables(0).Rows(cnt - 1)
                     oSheet.Cells(cnt + 1, 1).value = 1
                     oSheet.Cells(cnt + 1, 2).value = .Item("ITEMCODE")
                     oSheet.Cells(cnt + 1, 3).value = .Item("DESCRIPTION")
