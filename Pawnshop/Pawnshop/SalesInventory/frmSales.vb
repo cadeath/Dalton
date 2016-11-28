@@ -229,7 +229,6 @@ Public Class frmSales
     Private Sub tsbPLU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPLU.Click
         frmPLU.Show()
 
-
         frmPLU.Load_PLU()
     End Sub
 
@@ -285,6 +284,7 @@ Public Class frmSales
         If lvSale.Items.Count = 0 Then Exit Sub
 
         Dim mySql As String, fillData As String
+        Dim getLastID As Integer = 0
 
         'Creating Document
         mySql = "SELECT * FROM DOC ROWS 1"
@@ -352,6 +352,11 @@ Public Class frmSales
             If itm.isInventoriable Then
                 InventoryController.DeductInventory(itm.ItemCode, ht.Value)
             End If
+
+            ' JOURNAL ENTRY
+            getLastID = GetDocLines_LastID()
+            AddJournal(itm.SalePrice * ht.Value, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+            AddJournal(itm.SalePrice * ht.Value, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
         Next
         ItemPosted()
 
@@ -363,10 +368,12 @@ Public Class frmSales
         ClearField()
     End Sub
 
-    Private Sub Sales_JournalEntries(ByVal itm As cItemData, ByVal amt As Double)
-        AddJournal(amt, "Debit", "Revolving Fund", "RECALL " & itm.ItemCode, "RECALL")
-        'AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", PT_Entry.PawnID)
-    End Sub
+    Private Function GetDocLines_LastID() As Integer
+        Dim mySql As String = "SELECT * FROM DOCLINES ORDER BY DLID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("DLID")
+    End Function
 
     Private Function GetModesOfPayment(ByVal x As TransType)
         Select Case x

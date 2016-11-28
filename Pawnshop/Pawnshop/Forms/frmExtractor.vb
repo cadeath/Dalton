@@ -5,7 +5,9 @@ Public Class frmExtractor
         Expiry = 0
         JournalEntry = 1
         MoneyTransferBSP = 2
+        PTUFile = 3
     End Enum
+
     Friend FormType As ExtractType = ExtractType.Expiry
 
     Private Sub txtPath_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPath.DoubleClick
@@ -23,6 +25,7 @@ Public Class frmExtractor
         'Load Path
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
     End Sub
+
     ''' <summary>
     ''' this method will select what you want to extract.
     ''' </summary>
@@ -42,7 +45,108 @@ Public Class frmExtractor
                 Console.WriteLine("Money Transfer BSP Activated")
                 sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
                 Me.Text &= " - BSP Report"
+            Case ExtractType.PTUFile
+                sfdPath.FileName = String.Format("{1}{0}.PTU", selectedDate.ToString("yyyyMMdd"), BranchCode) 'BranchCode + Date
+                Me.Text &= " - PTU File"
         End Select
+    End Sub
+
+    Private Sub PTU_File()
+        If FormType <> ExtractType.PTUFile Then Exit Sub
+
+        Dim mySql As String, ds As DataSet
+        Dim cd As Date = MonCalendar.SelectionRange.Start
+        Dim CustomerCode As String = GetOption("CustomerCode")
+        Dim header1() As String = {"RecordKey", "CardCode", "DocDate"}
+        Dim header2() As String = {"RecordKey", "ItemCode", "ItemName", "Quantity", "Price", "Discount", "WhsCode", _
+                                   "OcrCode", "OcrCode2", "OcrCode3", "OcrCode4", "OcrCode5", "TaxCode"}
+        Dim header3() As String = {"RecordKey", "ItemCode", "Quantity", "WhsCode", "IntrSerial"}
+
+        mySql = "SELECT T0.DOCDATE, T1.* FROM DOC T0 INNER JOIN DOCLINES T1 ON T0.DOCID = T1.DOCID "
+        mySql &= String.Format("WHERE T0.DOCDATE = '{0}' AND T0.STATUS = 1", cd.ToString("MM/dd/yyyy"))
+        ds = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
+        'Sheet 1
+        Dim oXL As New Excel.Application
+        If oXL Is Nothing Then
+            MessageBox.Show("Excel is not properly installed!!")
+            Exit Sub
+        End If
+
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oXL = CreateObject("Excel.Application")
+        oXL.Visible = False
+
+        oWB = oXL.Workbooks.Add
+        oSheet = oWB.ActiveSheet
+        'oSheet.Name = ExtractDataFromDatabase.lbltransaction.Text 'Assuming its name is "Sheet 1"
+
+        Dim col As Integer = 1
+        For Each hd In header1
+            oSheet.Cells(1, col).value = hd
+            col += 1
+        Next
+        oSheet.Cells(2, 1).value = 1
+        oSheet.Cells(2, 2).value = CustomerCode
+        oSheet.Cells(2, 3).value = cd
+
+        oSheet = oWB.Sheets(2)
+        'Sheet 2
+        For cnt As Integer = 0 To ds.Tables(0).Rows.Count - 1
+            If cnt = 0 Then
+                col = 1
+                For Each hd In header2
+                    oSheet.Cells(cnt + 1, col).value = hd
+                    col += 1
+                Next
+            Else
+                With ds.Tables(0).Rows(cnt)
+                    oSheet.Cells(cnt + 1, 1).value = 1
+                    oSheet.Cells(cnt + 1, 2).value = .Item("ITEMCODE")
+                    oSheet.Cells(cnt + 1, 3).value = .Item("DESCRIPTION")
+                    oSheet.Cells(cnt + 1, 4).value = .Item("QTY")
+                    oSheet.Cells(cnt + 1, 5).value = .Item("SALEPRICE")
+                    oSheet.Cells(cnt + 1, 6).value = 0
+                    oSheet.Cells(cnt + 1, 7).value = BranchCode
+                    oSheet.Cells(cnt + 1, 8).value = AREACODE
+                    oSheet.Cells(cnt + 1, 9).value = BranchCode
+                    oSheet.Cells(cnt + 1, 10).value = "OPE"
+                    oSheet.Cells(cnt + 1, 13).value = "OVAT-E"
+                End With
+            End If
+        Next
+
+        oSheet = oWB.Sheets(3)
+        'Sheet 3
+        col = 1
+        For Each hd In header3
+            oSheet.Cells(1, col).value = hd
+            col += 1
+        Next
+
+        Dim verified_url As String
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Sales Extracted", MsgBoxStyle.Information)
     End Sub
 
     ''' <summary>
@@ -54,22 +158,23 @@ Public Class frmExtractor
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
 
+        btnExtract.Enabled = False
         If FormType = ExtractType.Expiry Then
-            btnExtract.Enabled = False
             ExtractExpiry()
         ElseIf FormType = ExtractType.MoneyTransferBSP Then
-            btnExtract.Enabled = False
             MoneyTransferBSP()
+        ElseIf FormType = ExtractType.PTUFile Then
+            PTU_File()
         Else
             Dim ans As MsgBoxResult = _
                 MsgBox("We will only use the Starting Date." & vbCrLf & "Do you want to continue?", _
                        vbYesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-            btnExtract.Enabled = False
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
             ExtractJournalEntry2()
         End If
         btnExtract.Enabled = True
     End Sub
+
     ''' <summary>
     ''' This method will extract journal entry and load the excel.
     ''' </summary>
@@ -143,6 +248,9 @@ Public Class frmExtractor
                 Console.WriteLine("Journal Entry Type Activated")
                 sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
                 Me.Text &= " - Journal Entry"
+            Case ExtractType.PTUFile
+                sfdPath.FileName = String.Format("{0}{1}.PTU", sd.ToString("yyyyMMdd"), BranchCode) 'BranchCode + Date
+                Me.Text &= " - PTU File"
         End Select
 
         Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
@@ -165,6 +273,7 @@ Public Class frmExtractor
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
+
     Private Sub ExtractJournalEntry2()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
@@ -296,6 +405,7 @@ Public Class frmExtractor
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
+
     ''' <summary>
     ''' This method will select between date range.
     ''' search the items by date
@@ -376,6 +486,7 @@ Public Class frmExtractor
 
         MsgBox("Data Saved", MsgBoxStyle.Information)
     End Sub
+
     ''' <summary>
     ''' This method will extract the expiry date and then load the excel
     ''' </summary>

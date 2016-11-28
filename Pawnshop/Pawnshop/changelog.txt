@@ -2,7 +2,7 @@ CHANGELOG
 Version 1.4
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
- - Add InvoiceNum at TBLMAINTENACE
+ - Add InvoiceNum and AreaCode at TBLMAINTENACE
  - Change DB Version 1.2.3.1
 
 Version 1.3
