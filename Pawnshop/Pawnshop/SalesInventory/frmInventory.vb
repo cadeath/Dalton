@@ -60,12 +60,11 @@ Public Class frmInventory
         Dim ptuFile As String
         Dim vText As String, vstring(-1) As String
         Dim idx As Integer = 1, tmpDocID As Integer = 0
+        WhsCode = "" : STODate = Nothing
 
         ofdInv.ShowDialog()
         ptuFile = ofdInv.FileName
-        If ptuFile = "" Then
-            Exit Sub
-        End If
+        If ptuFile = "" Then Exit Sub
 
         ClearFields()
         STOFile_Init()

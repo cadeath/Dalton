@@ -389,6 +389,7 @@ Public Class frmSales
     Private Sub ItemPosted()
         ORNUM += 1 'INCREMENT ORNUMBER
         UpdateOptions("InvoiceNum", ORNUM)
+        ht_BroughtItems.Clear()
     End Sub
 
     Private Sub PrintOR(ByVal docID As Integer)
