@@ -91,10 +91,11 @@
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         Else
             mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0 ORDER BY ITEMCODE ASC"
-            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0")
+            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
         End If
 
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
+        If MaxResult = 0 Then Exit Sub
 
         If Not txtCode.Text = "" Then Exit Sub
         dbReaderOpen()
@@ -111,6 +112,8 @@
                     .Description = String.Format("PT#{0:000000} {1}", dsR("PAWNTICKET"), dsR("DESCRIPTION"))
                     .Category = dsR("ITEMCLASS")
                     .UnitofMeasure = "PIECE"
+                    .SalePrice = dsR("PRINCIPAL")
+                    .Tags = dsR("PAWNTICKET")
                 End With
             Else
                 itmReader.LoadReader_Item(dsR)
@@ -149,7 +152,7 @@
         lv.SubItems.Add(itm.Description)
         lv.SubItems.Add(itm.Category)
         lv.SubItems.Add(itm.UnitofMeasure)
-        lv.SubItems.Add(itm.onHand)
+        lv.SubItems.Add(IIf(isRedeem, 1, itm.onHand))
         lv.SubItems.Add(ToCurrency(itm.SalePrice))
     End Sub
 
@@ -256,8 +259,9 @@
 
         If fromSales Then
             If isRedeem Then qtyItm = 1
+            selected_Itm.Quantity = qtyItm
 
-            frmSales.AddItem(selected_Itm, qtyItm)
+            frmSales.AddItem(selected_Itm)
             frmSales.ClearSearch()
         Else
             ' Inventory IN

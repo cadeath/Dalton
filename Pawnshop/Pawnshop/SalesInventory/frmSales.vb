@@ -71,7 +71,7 @@ Public Class frmSales
         End If
     End Function
 
-    Friend Sub AddItem(ByVal itm As cItemData, ByVal qty As Double)
+    Friend Sub AddItem(ByVal itm As cItemData)
         Dim ItemAmount As Double
         Dim hasSelected As Boolean = False
 
@@ -87,10 +87,10 @@ Public Class frmSales
                 If TransactionMode = TransType.Auction Then
                     .SubItems(2).Text = 1
                 Else
-                    .SubItems(2).Text += qty
+                    .SubItems(2).Text += itm.Quantity
                 End If
 
-                ItemAmount = (itm.SalePrice * qty)
+                ItemAmount = (itm.SalePrice * itm.Quantity)
 
                 If TransactionMode = TransType.Auction Then
                     .SubItems(2).Text = ItemAmount
@@ -102,19 +102,19 @@ Public Class frmSales
             'If NEW
             Dim lv As ListViewItem = lvSale.Items.Add(itm.ItemCode)
             lv.SubItems.Add(itm.Description)
-            lv.SubItems.Add(qty)
-            lv.SubItems.Add(itm.SalePrice.ToString("#,#00.00"))
-            ItemAmount = (itm.SalePrice * qty)
-            lv.SubItems.Add(ItemAmount.ToString("#,#00.00"))
+            lv.SubItems.Add(itm.Quantity)
+            lv.SubItems.Add(itm.SalePrice.ToString("#,##0.00"))
+            ItemAmount = (itm.SalePrice * itm.Quantity)
+            lv.SubItems.Add(ItemAmount.ToString("#,##0.00"))
         End If
 
+        Dim src_idx As String = IIf(TransactionMode = TransType.Auction, itm.Tags, itm.ItemCode)
 
-
-
-        If ht_BroughtItems.ContainsKey(itm.ItemCode) Then
-            ht_BroughtItems.Item(itm.ItemCode) += qty
+        If ht_BroughtItems.ContainsKey(src_idx) Then
+            Dim tmp As cItemData = ht_BroughtItems.Item(src_idx)
+            tmp.Quantity += itm.Quantity
         Else
-            ht_BroughtItems.Add(itm.ItemCode, qty)
+            ht_BroughtItems.Add(src_idx, itm)
         End If
 
         If TransactionMode = TransType.Auction Then
@@ -346,18 +346,20 @@ Public Class frmSales
 
         For Each ht As DictionaryEntry In ht_BroughtItems
             Dim itm As New cItemData
-            itm.ItemCode = ht.Key
-            itm.Load_Item()
+            itm = ht.Key
+
+            'If TransactionMode <> TransType.Auction Then _
+            '    itm.Load_Item()
 
             dsNewRow = ds.Tables(fillData).NewRow
             With dsNewRow
                 .Item("DOCID") = DOCID
                 .Item("ITEMCODE") = itm.ItemCode
                 .Item("DESCRIPTION") = itm.Description
-                .Item("QTY") = ht.Value * IIf(TransactionMode = TransType.Returns, -1, 1)
+                .Item("QTY") = itm.Quantity * IIf(TransactionMode = TransType.Returns, -1, 1)
                 .Item("UNITPRICE") = itm.UnitPrice
                 .Item("SALEPRICE") = itm.SalePrice
-                .Item("ROWTOTAL") = itm.SalePrice * ht.Value
+                .Item("ROWTOTAL") = itm.SalePrice * itm.Quantity
                 .Item("UOM") = itm.UnitofMeasure
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
