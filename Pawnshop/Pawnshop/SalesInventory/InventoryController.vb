@@ -16,6 +16,7 @@ Module InventoryController
         End If
 
         ds.Tables("ITEMMASTER").Rows(0).Item("ONHAND") += Qty
+        ds.Tables("ITEMMASTER").Rows(0).Item("UPDATE_TIME") = Now()
         database.SaveEntry(ds)
     End Sub
 
@@ -30,6 +31,7 @@ Module InventoryController
         End If
 
         ds.Tables("ITEMMASTER").Rows(0).Item("ONHAND") -= Qty
+        ds.Tables("ITEMMASTER").Rows(0).Item("UPDATE_TIME") = Now()
         database.SaveEntry(ds, False)
     End Sub
 

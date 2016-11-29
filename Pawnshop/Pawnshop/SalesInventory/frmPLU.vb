@@ -207,6 +207,7 @@
                     .Description = String.Format("PT#{0:000000} {1}", dsR("PAWNTICKET"), dsR("DESCRIPTION"))
                     .Category = dsR("ITEMCLASS")
                     .UnitofMeasure = "PIECE"
+                    .SalePrice = dsR("PRINCIPAL")
                 End With
             Else
                 tmpItm.LoadReader_Item(dsR)
@@ -222,6 +223,7 @@
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+
         If lvItem.SelectedItems.Count = 0 Then Exit Sub
 
         Console.WriteLine(lvItem.SelectedItems(0).Index)
@@ -235,8 +237,8 @@
             Exit Sub
         End If
 
-        If selected_Itm.SalePrice = 0 Then
-            Dim customPrice As Double = InputBox("Enter Price", "Custom Price", 0)
+        If selected_Itm.SalePrice = 0 Or isRedeem Then
+            Dim customPrice As Double = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
             selected_Itm.SalePrice = customPrice
         End If
 

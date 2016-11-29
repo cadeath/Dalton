@@ -40,6 +40,7 @@ Partial Class frmSales
         Me.tsButton = New System.Windows.Forms.ToolStrip()
         Me.tsbIMD = New System.Windows.Forms.ToolStripButton()
         Me.tsbPLU = New System.Windows.Forms.ToolStripButton()
+        Me.tsbtnAuction = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbCustomer = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -52,7 +53,6 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
-        Me.tsbtnAuction = New System.Windows.Forms.ToolStripButton()
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -201,6 +201,14 @@ Partial Class frmSales
         Me.tsbPLU.Size = New System.Drawing.Size(48, 22)
         Me.tsbPLU.Text = "PLU"
         '
+        'tsbtnAuction
+        '
+        Me.tsbtnAuction.Image = CType(resources.GetObject("tsbtnAuction.Image"), System.Drawing.Image)
+        Me.tsbtnAuction.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnAuction.Name = "tsbtnAuction"
+        Me.tsbtnAuction.Size = New System.Drawing.Size(68, 22)
+        Me.tsbtnAuction.Text = "RECALL"
+        '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
@@ -298,14 +306,6 @@ Partial Class frmSales
         Me.lblNoVat.Size = New System.Drawing.Size(147, 16)
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
-        '
-        'tsbtnAuction
-        '
-        Me.tsbtnAuction.Image = CType(resources.GetObject("tsbtnAuction.Image"), System.Drawing.Image)
-        Me.tsbtnAuction.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnAuction.Name = "tsbtnAuction"
-        Me.tsbtnAuction.Size = New System.Drawing.Size(71, 22)
-        Me.tsbtnAuction.Text = "REDEEM"
         '
         'frmSales
         '
