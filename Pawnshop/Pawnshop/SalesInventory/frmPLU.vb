@@ -208,6 +208,7 @@
                     .Category = dsR("ITEMCLASS")
                     .UnitofMeasure = "PIECE"
                     .SalePrice = dsR("PRINCIPAL")
+                    .Tags = dsR("PAWNTICKET")
                 End With
             Else
                 tmpItm.LoadReader_Item(dsR)
@@ -238,7 +239,13 @@
         End If
 
         If selected_Itm.SalePrice = 0 Or isRedeem Then
-            Dim customPrice As Double = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+            Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+            While Not IsNumeric(tmp)
+                tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                If tmp = "" Then Exit Sub
+            End While
+            
+            Dim customPrice As Double = CDbl(tmp)
             selected_Itm.SalePrice = customPrice
         End If
 

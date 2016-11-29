@@ -108,6 +108,9 @@ Public Class frmSales
             lv.SubItems.Add(ItemAmount.ToString("#,#00.00"))
         End If
 
+
+
+
         If ht_BroughtItems.ContainsKey(itm.ItemCode) Then
             ht_BroughtItems.Item(itm.ItemCode) += qty
         Else

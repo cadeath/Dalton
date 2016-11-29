@@ -149,6 +149,26 @@
         End Set
     End Property
 
+    Private _tags As String
+    Public Property Tags() As String
+        Get
+            Return _tags
+        End Get
+        Set(ByVal value As String)
+            _tags = value
+        End Set
+    End Property
+
+    Private _qty As Double
+    Public Property Quantity() As Double
+        Get
+            Return _qty
+        End Get
+        Set(ByVal value As Double)
+            _qty = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
