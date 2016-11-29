@@ -63,7 +63,7 @@ Public Class frmExtractor
         Dim header3() As String = {"RecordKey", "ItemCode", "Quantity", "WhsCode", "IntrSerial"}
 
         mySql = "SELECT T0.DOCDATE, T1.* FROM DOC T0 INNER JOIN DOCLINES T1 ON T0.DOCID = T1.DOCID "
-        mySql &= String.Format("WHERE T0.DOCDATE = '{0}' AND T0.STATUS = 1", cd.ToString("MM/dd/yyyy"))
+        mySql &= String.Format("WHERE T0.DOCDATE = '{0}' AND T0.STATUS = 1 AND T1.ITEMCODE <> 'RECALL00'", cd.ToString("MM/dd/yyyy"))
         ds = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub

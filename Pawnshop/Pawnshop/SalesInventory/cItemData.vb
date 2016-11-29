@@ -29,7 +29,7 @@
         End Set
     End Property
 
-    Private _description As String
+    Private _description As String = ""
     Public Property Description() As String
         Get
             Return _description
@@ -259,12 +259,14 @@
     End Sub
 
     Private Sub Load_ItemRow(ByVal dr As DataRow)
+        On Error Resume Next
+
         If hasLoaded Then Exit Sub
 
         With dr
             _itemID = .Item("ITEMID")
             _itemCode = .Item("ITEMCODE")
-            If _description = "" Then _description = .Item("DESCRIPTION")
+            If _description <> "" Then _description = .Item("DESCRIPTION")
             If Not IsDBNull(.Item("BARCODE")) Then _barCode = .Item("BARCODE")
             _category = .Item("CATEGORIES")
             If Not IsDBNull(.Item("SUBCAT")) Then _subCat = .Item("SUBCAT")

@@ -208,6 +208,7 @@ Public Class frmSales
     Private Sub IS_AUCTIONREDEEM()
         If TransactionMode = TransType.Auction Then
             frmPLU.isAuctionRedeem()
+            Populate3()
         End If
     End Sub
 
@@ -297,95 +298,91 @@ Public Class frmSales
 
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
 
-        If TransactionMode <> TransType.Auction Then
-            'Creating Document
-            mySql = "SELECT * FROM DOC ROWS 1"
-            fillData = "DOC"
-            Dim unsec_Customer As String = lblCustomer.Text
+        'Creating Document
+        mySql = "SELECT * FROM DOC ROWS 1"
+        fillData = "DOC"
+        Dim unsec_Customer As String = lblCustomer.Text
 
-            Dim ds As DataSet = LoadSQL(mySql, fillData)
-            Dim dsNewRow As DataRow
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+
+        With dsNewRow
+            .Item("DOCTYPE") = DOC_TYPE
+            .Item("CODE") = String.Format("{1}#{0:000000}", ORNUM, IIf(TransactionMode <> TransType.Returns, "INV", "RET"))
+            .Item("MOP") = GetModesOfPayment(TransactionMode)
+            .Item("CUSTOMER") = unsec_Customer
+            .Item("DOCDATE") = CurrentDate
+            .Item("NOVAT") = DOC_NOVAT
+            .Item("VATRATE") = VAT
+            .Item("VATTOTAL") = DOC_VATTOTAL
+            .Item("DOCTOTAL") = DOC_TOTAL
+            .Item("USERID") = POSuser.UserID
+            If Remarks <> "" Then .Item("REMARKS") = Remarks
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds)
+        Dim DOCID As Integer = 0
+
+        mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
+        ds = LoadSQL(mySql, fillData)
+        DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
+
+        Console.Write("Loading")
+        While DOCID = 0
+            Application.DoEvents()
+            Console.Write(".")
+        End While
+        Console.WriteLine()
+
+        'Creating DocumentLines
+        mySql = "SELECT * FROM DOCLINES ROWS 1"
+        fillData = "DOCLINES"
+        ds = LoadSQL(mySql, fillData)
+
+        For Each ht As DictionaryEntry In ht_BroughtItems
+            Dim itm As New cItemData
+            itm.ItemCode = ht.Key
+            itm.Load_Item()
+
             dsNewRow = ds.Tables(fillData).NewRow
-
             With dsNewRow
-                .Item("DOCTYPE") = DOC_TYPE
-                .Item("CODE") = String.Format("{1}#{0:000000}", ORNUM, IIf(TransactionMode <> TransType.Returns, "INV", "RET"))
-                .Item("MOP") = GetModesOfPayment(TransactionMode)
-                .Item("CUSTOMER") = unsec_Customer
-                .Item("DOCDATE") = CurrentDate
-                .Item("NOVAT") = DOC_NOVAT
-                .Item("VATRATE") = VAT
-                .Item("VATTOTAL") = DOC_VATTOTAL
-                .Item("DOCTOTAL") = DOC_TOTAL
-                .Item("USERID") = POSuser.UserID
-                If Remarks <> "" Then .Item("REMARKS") = Remarks
+                .Item("DOCID") = DOCID
+                .Item("ITEMCODE") = itm.ItemCode
+                .Item("DESCRIPTION") = itm.Description
+                .Item("QTY") = ht.Value * IIf(TransactionMode = TransType.Returns, -1, 1)
+                .Item("UNITPRICE") = itm.UnitPrice
+                .Item("SALEPRICE") = itm.SalePrice
+                .Item("ROWTOTAL") = itm.SalePrice * ht.Value
+                .Item("UOM") = itm.UnitofMeasure
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
 
             database.SaveEntry(ds)
-            Dim DOCID As Integer = 0
 
-            mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
-            ds = LoadSQL(mySql, fillData)
-            DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
-
-            Console.Write("Loading")
-            While DOCID = 0
-                Application.DoEvents()
-                Console.Write(".")
-            End While
-            Console.WriteLine()
-
-            'Creating DocumentLines
-            mySql = "SELECT * FROM DOCLINES ROWS 1"
-            fillData = "DOCLINES"
-            ds = LoadSQL(mySql, fillData)
-
-            For Each ht As DictionaryEntry In ht_BroughtItems
-                Dim itm As New cItemData
-                itm.ItemCode = ht.Key
-                itm.Load_Item()
-
-                dsNewRow = ds.Tables(fillData).NewRow
-                With dsNewRow
-                    .Item("DOCID") = DOCID
-                    .Item("ITEMCODE") = itm.ItemCode
-                    .Item("DESCRIPTION") = itm.Description
-                    .Item("QTY") = ht.Value * IIf(TransactionMode = TransType.Returns, -1, 1)
-                    .Item("UNITPRICE") = itm.UnitPrice
-                    .Item("SALEPRICE") = itm.SalePrice
-                    .Item("ROWTOTAL") = itm.SalePrice * ht.Value
-                    .Item("UOM") = itm.UnitofMeasure
-                End With
-                ds.Tables(fillData).Rows.Add(dsNewRow)
-
-                database.SaveEntry(ds)
-
-                If itm.isInventoriable Then
-                    If TransactionMode <> TransType.Returns Then
-                        InventoryController.DeductInventory(itm.ItemCode, ht.Value)
-                    Else
-                        InventoryController.AddInventory(itm.ItemCode, ht.Value)
-                    End If
-                End If
-
-                ' JOURNAL ENTRY
-                getLastID = GetDocLines_LastID()
-                If TransactionMode = TransType.Returns Then
-                    AddJournal(itm.SalePrice * ht.Value, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
-                    AddJournal(itm.SalePrice * ht.Value, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+            If itm.isInventoriable Then
+                If TransactionMode <> TransType.Returns Then
+                    InventoryController.DeductInventory(itm.ItemCode, ht.Value)
                 Else
-                    AddJournal(itm.SalePrice * ht.Value, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
-                    AddJournal(itm.SalePrice * ht.Value, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                    InventoryController.AddInventory(itm.ItemCode, ht.Value)
                 End If
-            Next
-            ItemPosted()
-
-            If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then
-                PrintOR(DOCID)
             End If
-        Else
 
+            ' JOURNAL ENTRY
+            getLastID = GetDocLines_LastID()
+            If TransactionMode = TransType.Returns Then
+                AddJournal(itm.SalePrice * ht.Value, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                AddJournal(itm.SalePrice * ht.Value, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+            Else
+                AddJournal(itm.SalePrice * ht.Value, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                AddJournal(itm.SalePrice * ht.Value, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+            End If
+        Next
+        ItemPosted()
+
+        If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then
+            PrintOR(DOCID)
         End If
         
 
