@@ -1062,6 +1062,7 @@ Public Class frmPawningItemNew
 
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
         Reprint = True
+        SaveReprint()
         If PT_Entry.Status = "L" Or PT_Entry.Status = "R" Then
             PrintNewLoan()
         End If
@@ -1109,8 +1110,6 @@ Public Class frmPawningItemNew
         Dim ans As DialogResult = _
             MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
-        SaveReprint()
 
         Dim autoPrintPT As Reporting
         'On Error Resume Next
@@ -1402,7 +1401,7 @@ Public Class frmPawningItemNew
         Dim ans As DialogResult = _
             MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Print")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
-        SaveReprint()
+
         For cnt As Integer = 1 To OR_COPIES
             PrintRedeemOR2()
             System.Threading.Thread.Sleep(1000)
