@@ -40,7 +40,7 @@
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("	P1.LOANDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
         mySql &= vbCrLf & "    AND (P1.OLDTICKET = 0 OR (P1.OLDTICKET > 0 AND P1.RENEWDUE + P2.RENEWDUE Is Not Null)) "
-        mySql &= vbCrLf & " AND (P1.STATUS = 'L' OR P1.STATUS = '0' OR P1.STATUS = 'R')"
+        mySql &= vbCrLf & " AND (P1.STATUS = 'L' OR P1.STATUS = '0' OR P1.STATUS = 'R' OR P1.STATUS = 'X')"
         mySql &= vbCrLf & " ORDER BY P1.PAWNTICKET ASC"
 
         Console.WriteLine(">>> " & mySql)

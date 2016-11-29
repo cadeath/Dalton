@@ -381,6 +381,9 @@ Public Class frmPawningItemNew
             .ServiceCharge = PawnServiceCharge
             .NetAmount = NetAmount
 
+            PRINT_PTNEW = .PawnTicket
+            PRINT_PTOLD = .OldTicket
+
             .Save_PawnTicket()
 
             AddJournal(RenewDue, "Debit", "Revolving Fund", "PT# " & oldPawnTicket, ITEM_RENEW, , , "RENEWALS", .LoadLastIDNumberPawn)
@@ -831,6 +834,8 @@ Public Class frmPawningItemNew
         cboAppraiser.Enabled = False
 
         PT_Entry = pt
+        PRINT_PTOLD = pt.OldTicket
+        PRINT_PTNEW = pt.PawnTicket
 
         mod_system.isAuthorized = True
         If transactionType = "D" Then
