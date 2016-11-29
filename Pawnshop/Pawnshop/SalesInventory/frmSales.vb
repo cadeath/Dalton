@@ -351,7 +351,7 @@ Public Class frmSales
                     .Item("DOCID") = DOCID
                     .Item("ITEMCODE") = itm.ItemCode
                     .Item("DESCRIPTION") = itm.Description
-                    .Item("QTY") = ht.Value
+                    .Item("QTY") = ht.Value * IIf(TransactionMode = TransType.Returns, -1, 1)
                     .Item("UNITPRICE") = itm.UnitPrice
                     .Item("SALEPRICE") = itm.SalePrice
                     .Item("ROWTOTAL") = itm.SalePrice * ht.Value
@@ -371,8 +371,13 @@ Public Class frmSales
 
                 ' JOURNAL ENTRY
                 getLastID = GetDocLines_LastID()
-                AddJournal(itm.SalePrice * ht.Value, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
-                AddJournal(itm.SalePrice * ht.Value, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                If TransactionMode = TransType.Returns Then
+                    AddJournal(itm.SalePrice * ht.Value, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                    AddJournal(itm.SalePrice * ht.Value, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                Else
+                    AddJournal(itm.SalePrice * ht.Value, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                    AddJournal(itm.SalePrice * ht.Value, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                End If
             Next
             ItemPosted()
 
