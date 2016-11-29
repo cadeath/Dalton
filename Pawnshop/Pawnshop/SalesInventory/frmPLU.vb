@@ -26,12 +26,6 @@
         txtCode.Select()
     End Sub
 
-    Private Sub frmPLU_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
-        For Each itm As cItemData In queued_IMD
-            Console.WriteLine(itm.ItemCode)
-        Next
-    End Sub
-
     Private Sub frmPLU_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
     End Sub

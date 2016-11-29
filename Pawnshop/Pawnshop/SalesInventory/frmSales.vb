@@ -346,10 +346,7 @@ Public Class frmSales
 
         For Each ht As DictionaryEntry In ht_BroughtItems
             Dim itm As New cItemData
-            itm = ht.Key
-
-            'If TransactionMode <> TransType.Auction Then _
-            '    itm.Load_Item()
+            itm = ht.Value
 
             dsNewRow = ds.Tables(fillData).NewRow
             With dsNewRow
@@ -367,21 +364,22 @@ Public Class frmSales
             database.SaveEntry(ds)
 
             If itm.isInventoriable Then
+
                 If TransactionMode <> TransType.Returns Then
-                    InventoryController.DeductInventory(itm.ItemCode, ht.Value)
+                    InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
                 Else
-                    InventoryController.AddInventory(itm.ItemCode, ht.Value)
+                    InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
                 End If
             End If
 
             ' JOURNAL ENTRY
             getLastID = GetDocLines_LastID()
             If TransactionMode = TransType.Returns Then
-                AddJournal(itm.SalePrice * ht.Value, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
-                AddJournal(itm.SalePrice * ht.Value, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
             Else
-                AddJournal(itm.SalePrice * ht.Value, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
-                AddJournal(itm.SalePrice * ht.Value, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
             End If
         Next
         ItemPosted()
@@ -518,4 +516,5 @@ Public Class frmSales
 
         End If
     End Sub
+
 End Class
