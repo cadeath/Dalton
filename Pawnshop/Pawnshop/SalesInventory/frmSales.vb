@@ -392,8 +392,15 @@ Public Class frmSales
                 AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
                 AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
             Else
-                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
-                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                If TransactionMode <> TransType.Auction Then
+                    AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                    AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                Else
+                    ' JE FOR AUCTION REDEEM
+                    ' TODO: UNFINISH
+                    AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
+                    AddJournal(itm.SalePrice, "Credit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
+                End If
             End If
         Next
         ItemPosted()
@@ -544,5 +551,17 @@ Public Class frmSales
             End If
         End If
     End Sub
+
+    Private Function GetTransName(ByVal itm As cItemData) As String
+        Select Case itm.Category
+            Case "JEWELRY" 'JWL
+            Case "GADGET", "CAMERA" 'CEL
+            Case "APPLIANCE", "BIG" 'APP BIG-APP
+            Case Else
+                Return ""
+        End Select
+
+        Return ""
+    End Function
 
 End Class
