@@ -174,14 +174,23 @@
         mySql &= String.Format("WHERE (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') ", DreadKnight(unsec_src).ToLower)
 
         If isRedeem Then
+            Dim src_str As String
+            src_str = DreadKnight(unsec_src)
+
             mySql = "SELECT PT.*, ITEM.ITEMCLASS "
             mySql &= vbCrLf & "FROM OPT PT "
             mySql &= vbCrLf & "INNER JOIN OPI ITEM "
             mySql &= vbCrLf & "ON ITEM.PAWNITEMID = PT.PAWNITEMID "
-            mySql &= vbCrLf & "WHERE PT.STATUS = 'S' "
-            mySql &= vbCrLf & String.Format("AND PT.PAWNTICKET = '{0}' OR LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(unsec_src).ToLower)
+            mySql &= vbCrLf & "WHERE PT.STATUS = 'S' AND ("
+
+            If IsNumeric(src_str) Then
+                mySql &= String.Format("PT.PAWNTICKET = {0} OR ", DreadKnight(unsec_src).ToLower)
+            End If
+            mySql &= String.Format("LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(unsec_src).ToLower)
+            mySql &= ")"
         End If
 
+        Console.WriteLine(mySql)
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then MsgBox("ITEM NOT FOUND", MsgBoxStyle.Information) : Exit Sub
 

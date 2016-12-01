@@ -168,6 +168,7 @@ Public Class frmSales
     Private Sub Load_asReturns()
         lblMode.Text = "RETURNS"
         TransactionMode = TransType.Returns
+        lblSearch.Text = "ITEM:"
 
         ORNUM = GetOption(IIf(TransactionMode = TransType.Returns, "SalesReturnNum", "InvoiceNum"))
     End Sub
@@ -175,11 +176,13 @@ Public Class frmSales
     Private Sub Load_asCash()
         lblMode.Text = "CASH"
         TransactionMode = TransType.Cash
+        lblSearch.Text = "ITEM:"
     End Sub
 
     Private Sub Load_asCheck()
         lblMode.Text = "CHECK"
         TransactionMode = TransType.Check
+        lblSearch.Text = "ITEM:"
     End Sub
 
     Private Function Display_Total(ByVal tot As Double) As Double
@@ -278,11 +281,17 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCheck.Click
-        Load_asCheck()
+        If ShiftMode() Then
+            Load_asCheck()
+        End If
+
     End Sub
 
     Private Sub tsbCash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCash.Click
-        Load_asCash()
+        If ShiftMode() Then
+            Load_asCash()
+        End If
+
     End Sub
 
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
@@ -370,6 +379,11 @@ Public Class frmSales
                 Else
                     InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
                 End If
+            End If
+
+            If TransactionMode = TransType.Auction Then
+                ' PULLOUT IN THE INVENTORY
+                InventoryController.PullOut(itm)
             End If
 
             ' JOURNAL ENTRY
@@ -477,9 +491,10 @@ Public Class frmSales
 
     Private Sub tsbSalesReturn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSalesReturn.Click
         'UNDERCONSTRUCTION()
-        Load_asReturns()
 
-
+        If ShiftMode() Then
+            Load_asReturns()
+        End If
     End Sub
 
     Private Function canPrint(ByVal printerName As String) As Boolean
@@ -503,17 +518,30 @@ Public Class frmSales
         End If
     End Sub
 
+    Private Function ShiftMode() As Boolean
+        If lvSale.Items.Count = 0 Then Return True
+
+        Dim ans = MsgBox("You are about the change MODE. And the List will be clear" + vbCr + "Do you want to continue?", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
+        If ans = MsgBoxResult.Yes Then
+            ClearField()
+            Return True
+        End If
+
+        Return False
+    End Function
+
     Private Sub tsbtnAuction_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnAuction.Click
-        If TransactionMode <> TransType.Auction Then
-            TransactionMode = TransType.Auction            
-            lblSearch.Text = "TICKET:"
-            lblMode.Text = "RECALL"
 
-            IS_AUCTIONREDEEM()
-        Else
-            Load_asCash()
-            lblSearch.Text = "ITEM:"
+        If ShiftMode() Then
+            If TransactionMode <> TransType.Auction Then
+                TransactionMode = TransType.Auction
+                lblSearch.Text = "TICKET:"
+                lblMode.Text = "RECALL"
 
+                IS_AUCTIONREDEEM()
+            Else
+                Load_asCash()
+            End If
         End If
     End Sub
 

@@ -46,7 +46,7 @@ Module InventoryController
 
         ' UPDATING OPT
         ds.Tables("OPT").Rows(0).Item("STATUS") = "W"
-        ds.Tables("OPT").Rows(0).Item("UPDATE_AT") = Now
+        ds.Tables("OPT").Rows(0).Item("UPDATED_AT") = Now
         database.SaveEntry(ds, False)
 
         ds.Clear()
@@ -62,7 +62,7 @@ Module InventoryController
         ' UPDATING OPI
         ds.Tables("OPI").Rows(0).Item("STATUS") = "W"
         ds.Tables("OPI").Rows(0).Item("WITHDRAWDATE") = CurrentDate
-        ds.Tables("OPI").Rows(0).Item("UPDATE_AT") = Now
+        ds.Tables("OPI").Rows(0).Item("UPDATED_AT") = Now
         database.SaveEntry(ds, False)
 
         Console.WriteLine(RecalledItem.Description & " is now pulled out")
