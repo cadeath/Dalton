@@ -84,7 +84,7 @@
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         Else
-            mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0 ORDER BY ITEMCODE ASC"
+            mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' ORDER BY ITEMCODE ASC"
             ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
         End If
 
