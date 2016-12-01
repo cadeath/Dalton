@@ -169,6 +169,26 @@
         End Set
     End Property
 
+    Private _auctionID As Integer
+    Public Property AuctionID() As Integer
+        Get
+            Return _auctionID
+        End Get
+        Set(ByVal value As Integer)
+            _auctionID = value
+        End Set
+    End Property
+
+    Private _costID As Integer
+    Public Property CostID() As Integer
+        Get
+            Return _costID
+        End Get
+        Set(ByVal value As Integer)
+            _costID = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -301,6 +321,22 @@
             hasLoaded = True
         End With
     End Sub
+
+    Public Function Get_AuctionCode() As String
+        mySql = "SELECT * FROM TBLCASH WHERE CATEGORY = 'AUCTION REDEEM' AND SALESID = " & _auctionID
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then Return "CASHID REQUIRED"
+        Return ds.Tables(0).Rows(0).Item("TRANSNAME")
+    End Function
+
+    Public Function Get_CostCode() As String
+        mySql = "SELECT * FROM TBLCASH WHERE CATEGORY = 'AUCTION REDEEM' AND COSTID = " & _costID
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then Return "CASHID REQUIRED"
+        Return ds.Tables(0).Rows(0).Item("TRANSNAME")
+    End Function
 #End Region
 
 End Class

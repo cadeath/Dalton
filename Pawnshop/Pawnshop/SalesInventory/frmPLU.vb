@@ -177,7 +177,7 @@
             Dim src_str As String
             src_str = DreadKnight(unsec_src)
 
-            mySql = "SELECT PT.*, ITEM.ITEMCLASS "
+            mySql = "SELECT PT.*,ITEM.ITEMID, ITEM.ITEMCLASS "
             mySql &= vbCrLf & "FROM OPT PT "
             mySql &= vbCrLf & "INNER JOIN OPI ITEM "
             mySql &= vbCrLf & "ON ITEM.PAWNITEMID = PT.PAWNITEMID "
@@ -213,8 +213,10 @@
                     .Description = String.Format("PT#{0:000000} {1}", dsR("PAWNTICKET"), dsR("DESCRIPTION"))
                     .Category = dsR("ITEMCLASS")
                     .UnitofMeasure = "PIECE"
+                    .UnitPrice = dsR("PRINCIPAL")
                     .SalePrice = dsR("PRINCIPAL")
                     .Tags = dsR("PAWNTICKET")
+                    .AuctionID = dsR("ITEMID")
                 End With
             Else
                 tmpItm.LoadReader_Item(dsR)

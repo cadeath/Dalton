@@ -128,6 +128,7 @@ Module mod_system
             frmMain.dateSet = False
         End If
     End Sub
+
     ''' <summary>
     ''' This function will segregate all data from tblPawn
     ''' where AuctionDate is = to the CurrentDate.
