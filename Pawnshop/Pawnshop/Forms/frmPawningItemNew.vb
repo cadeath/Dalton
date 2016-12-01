@@ -1502,6 +1502,8 @@ Public Class frmPawningItemNew
                     transname = "Renewed"
                 Case "R"
                     transname = "Renew"
+                Case "S"
+                    transname = "Segre"
                 Case Else
                     transname = PT_Entry.Status
             End Select

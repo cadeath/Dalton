@@ -413,6 +413,22 @@ Public Class frmMigrate
                 DsOpt.Tables("OPT").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpt)
 
+                Dim sqlOpi As String = "Select * from OPI where pawnitemid = '" & PawnItemID & "'"
+                Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
+                With DsOpi.Tables("OPI").Rows(0)
+                    Select Case MigStatus
+                        Case "W"
+                            .Item("WithdrawDate") = MigPullout
+                            .Item("Status") = MigStatus
+                        Case "X"
+                            .Item("WithDrawDate") = MigOrDate
+                            .Item("Status") = MigStatus
+                        Case Else
+                            .Item("Status") = "A"
+                    End Select
+                End With
+                SaveEntry(DsOpi, False)
+
             Else
                 Dim sqlOpi As String = "Select * from OPI"
                 Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
