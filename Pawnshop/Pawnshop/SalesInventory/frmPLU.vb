@@ -70,16 +70,18 @@
     End Sub
 #End Region
 
-    Friend Sub Load_PLU()
+    Friend Sub Load_PLU(Optional ByVal src As String = "")
         Dim quickLoader As Integer = 0
         Dim mySql As String
         Dim ds As DataSet
 
         If isRedeem Then
-            mySql = "SELECT PT.*, ITEM.ITEMCLASS "
+            mySql = "SELECT PT.*,ITEM.ITEMCLASS,CL.SALESID,CL.COSTID "
             mySql &= vbCrLf & "FROM OPT PT "
             mySql &= vbCrLf & "INNER JOIN OPI ITEM "
             mySql &= vbCrLf & "ON ITEM.PAWNITEMID = PT.PAWNITEMID "
+            mySql &= vbCrLf & "INNER JOIN TBLITEM CL "
+            mySql &= vbCrLf & "ON CL.ITEMID = ITEM.ITEMID "
             mySql &= vbCrLf & "WHERE PT.STATUS = 'S'"
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
@@ -90,6 +92,8 @@
 
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
         If MaxResult = 0 Then Exit Sub
+
+        If DEV_MODE Then Console.WriteLine("SQL: " & mySql)
 
         If Not txtCode.Text = "" Then Exit Sub
         dbReaderOpen()
@@ -106,8 +110,11 @@
                     .Description = String.Format("PT#{0:000000} {1}", dsR("PAWNTICKET"), dsR("DESCRIPTION"))
                     .Category = dsR("ITEMCLASS")
                     .UnitofMeasure = "PIECE"
+                    .UnitPrice = dsR("PRINCIPAL")
                     .SalePrice = dsR("PRINCIPAL")
                     .Tags = dsR("PAWNTICKET")
+                    .AuctionID = dsR("SALESID")
+                    .CostID = dsR("COSTID")
                 End With
             Else
                 itmReader.LoadReader_Item(dsR)
@@ -170,14 +177,18 @@
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim unsec_src As String = txtCode.Text
 
+        Load_PLU(DreadKnight(unsec_src))
+
+        Exit Sub
+
         Dim mySql As String = "SELECT * FROM ITEMMASTER "
-        mySql &= String.Format("WHERE (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') ", DreadKnight(unsec_src).ToLower)
+        mySql &= String.Format("WHERE (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00' ", DreadKnight(unsec_src).ToLower)
 
         If isRedeem Then
             Dim src_str As String
             src_str = DreadKnight(unsec_src)
 
-            mySql = "SELECT PT.*,ITEM.ITEMID, ITEM.ITEMCLASS "
+            mySql = "SELECT PT.*,ITEM.SALESID,ITEM.COSTID,ITEM.ITEMCLASS "
             mySql &= vbCrLf & "FROM OPT PT "
             mySql &= vbCrLf & "INNER JOIN OPI ITEM "
             mySql &= vbCrLf & "ON ITEM.PAWNITEMID = PT.PAWNITEMID "
@@ -187,7 +198,7 @@
                 mySql &= String.Format("PT.PAWNTICKET = {0} OR ", DreadKnight(unsec_src).ToLower)
             End If
             mySql &= String.Format("LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(unsec_src).ToLower)
-            mySql &= ")"
+            mySql &= ") AND ItemCode <> 'RECALL00'"
         End If
 
         Console.WriteLine(mySql)
@@ -200,6 +211,7 @@
 
         dbReaderOpen()
 
+        If DEV_MODE Then Console.WriteLine(mySql)
         Dim dsR = LoadSQL_byDataReader(mySql)
         While dsR.Read
 
@@ -216,7 +228,8 @@
                     .UnitPrice = dsR("PRINCIPAL")
                     .SalePrice = dsR("PRINCIPAL")
                     .Tags = dsR("PAWNTICKET")
-                    .AuctionID = dsR("ITEMID")
+                    .AuctionID = dsR("SALESID")
+                    .CostID = dsR("COSTID")
                 End With
             Else
                 tmpItm.LoadReader_Item(dsR)

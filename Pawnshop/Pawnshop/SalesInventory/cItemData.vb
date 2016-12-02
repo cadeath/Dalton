@@ -323,7 +323,7 @@
     End Sub
 
     Public Function Get_AuctionCode() As String
-        mySql = "SELECT * FROM TBLCASH WHERE CATEGORY = 'AUCTION REDEEM' AND CASHID = " & _auctionID
+        mySql = "SELECT * FROM TBLCASH WHERE CASHID = " & _auctionID
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then Return "CASHID REQUIRED"
@@ -331,7 +331,7 @@
     End Function
 
     Public Function Get_CostCode() As String
-        mySql = "SELECT * FROM TBLCASH WHERE CATEGORY = 'AUCTION REDEEM' AND CASHID = " & _costID
+        mySql = "SELECT * FROM TBLCASH WHERE CASHID = " & _costID
         Dim ds As DataSet = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then Return "CASHID REQUIRED"
