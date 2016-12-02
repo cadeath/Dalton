@@ -738,6 +738,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Client_Seed.vb" />
+    <Compile Include="Seed\frmSeed.Designer.vb">
+      <DependentUpon>frmSeed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Seed\frmSeed.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Seed\Pawn.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -1107,6 +1114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\_layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Seed\frmSeed.resx">
+      <DependentUpon>frmSeed.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

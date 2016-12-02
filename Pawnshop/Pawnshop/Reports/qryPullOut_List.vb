@@ -127,7 +127,7 @@
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'W') "
+            mySql &= "  WHERE (Status = 'W') AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "'"
             mySql &= "  AND WITHDRAWDATE >= '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= ") "
             If cboClass.Text <> "ALL" Then
@@ -165,7 +165,7 @@
             mySql &= "  UNION "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'W') "
+            mySql &= "  WHERE (Status = 'W') AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "'"
             mySql &= "   AND WITHDRAWDATE >= '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= ") "
             If cboClass.Text <> "ALL" Then
