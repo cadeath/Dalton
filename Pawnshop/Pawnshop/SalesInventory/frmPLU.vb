@@ -75,6 +75,9 @@
         Dim mySql As String
         Dim ds As DataSet
 
+        lvItem.Items.Clear()
+        queued_IMD.Clear()
+
         If isRedeem Then
             mySql = "SELECT PT.*,ITEM.ITEMCLASS,CL.SALESID,CL.COSTID "
             mySql &= vbCrLf & "FROM OPT PT "
@@ -87,6 +90,12 @@
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         Else
             mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' ORDER BY ITEMCODE ASC"
+
+            If src <> "" Then
+                mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"
+                mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00'", src)
+            End If
+
             ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
         End If
 
@@ -95,7 +104,7 @@
 
         If DEV_MODE Then Console.WriteLine("SQL: " & mySql)
 
-        If Not txtCode.Text = "" Then Exit Sub
+        'If Not txtCode.Text = "" Then Exit Sub
         dbReaderOpen()
         Dim dsR = LoadSQL_byDataReader(mySql)
         PG_Init(True, MaxResult)

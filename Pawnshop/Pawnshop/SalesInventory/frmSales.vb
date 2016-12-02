@@ -1,8 +1,4 @@
-﻿' TODO
-' SALES RETURN - INVENTORY IN
-' RECEIPT - CAN DO VOIDING AND REPRINT
-
-Imports Microsoft.Reporting.WinForms
+﻿Imports Microsoft.Reporting.WinForms
 
 Public Class frmSales
 
