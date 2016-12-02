@@ -4,7 +4,8 @@ Version 1.4
  - Added Tables ITEMMASTER, DOC, DOCLINES
  - Add InvoiceNum and SalesReturnNum at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
- - Change DB Version 1.2.3.1 
+ - Update TBLCASH and TBLITEM
+ - Change DB Version 1.2.3.1
  - HOLDS AUCTION REDEEM at TBLCASH
 
 Version 1.3
