@@ -86,6 +86,14 @@
             mySql &= vbCrLf & "INNER JOIN TBLITEM CL "
             mySql &= vbCrLf & "ON CL.ITEMID = ITEM.ITEMID "
             mySql &= vbCrLf & "WHERE PT.STATUS = 'S'"
+            If src <> "" Then
+                mySql &= vbCrLf & " AND ("
+                If IsNumeric(src) Then
+                    mySql &= String.Format("PT.PAWNTICKET = {0} OR ", src)
+                End If
+                mySql &= String.Format("LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(src).ToLower)
+                mySql &= ")"
+            End If
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         Else

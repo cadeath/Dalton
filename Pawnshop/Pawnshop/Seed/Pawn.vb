@@ -10,6 +10,12 @@
     Private Item() As String = {"Ring", "Watch", "Ring", "Watch", "Earring"}
     Private Printlayout() As String = {"Sample", "Sample", "Sample", "Sample", "Sample"}
     Sub Populate()
+        Dim mySql As String = "SELECT * FROM OPT WHERE PAWNTICKET = 1"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count > 0 Then Exit Sub
+
+        Console.WriteLine("Populating...")
         For i As Integer = 0 To 4
             Dim NewPawnTicket As New PawnTicket2
             With NewPawnTicket
