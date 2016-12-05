@@ -22,6 +22,10 @@ Public Class frmSales
 
     Private canTransact As Boolean = True
 
+    Private Sub frmSales_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        If DEV_MODE Then Pawn.Populate()
+    End Sub
+
     Private Sub frmSales_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
         txtSearch.Select()

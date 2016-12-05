@@ -1153,6 +1153,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmInventory.resx">
       <DependentUpon>frmInventory.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Seed\frmSeed.resx">
       <DependentUpon>frmSeed.vb</DependentUpon>
     </EmbeddedResource>
