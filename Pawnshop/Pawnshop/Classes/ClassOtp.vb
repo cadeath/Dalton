@@ -30,26 +30,51 @@
             _MOD_NAME = value
         End Set
     End Property
+
+    Private _remarks As String
+    Public Property Remarks() As String
+        Get
+            Return _remarks
+        End Get
+        Set(ByVal value As String)
+            _remarks = value
+        End Set
+    End Property
+
 #End Region
 
-    Sub New(ByVal ModName As String, ByVal PIN As Integer)
+    Sub New(ByVal ModName As String, ByVal PIN As Integer, Optional ByVal Remarks As String = "", Optional ByVal MultipleOtp As Boolean = False)
 
         mySql = "SELECT * FROM " & fillData
         mySql &= String.Format(" WHERE PIN = '{0}'", PIN)
 
         Dim ds As DataSet = LoadSQL(mySql, fillData)
-        If ds.Tables(0).Rows.Count = 0 Then
+        If MultipleOtp = False Then
+            If ds.Tables(0).Rows.Count = 0 Then
+                Dim dsNewRow As DataRow
+                dsNewRow = ds.Tables(fillData).NewRow
+                With dsNewRow
+                    .Item("PIN") = PIN
+                    .Item("Mod_name") = ModName
+                    .Item("USERID") = POSuser.UserID
+                    .Item("Remarks") = Remarks
+                End With
+                ds.Tables(fillData).Rows.Add(dsNewRow)
+                database.SaveEntry(ds)
+                Console.WriteLine("Entry saved")
+            End If
+        Else
             Dim dsNewRow As DataRow
             dsNewRow = ds.Tables(fillData).NewRow
             With dsNewRow
                 .Item("PIN") = PIN
                 .Item("Mod_name") = ModName
                 .Item("USERID") = POSuser.UserID
+                .Item("Remarks") = Remarks
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
             database.SaveEntry(ds)
-
-            Console.WriteLine("Entry saved")
         End If
     End Sub
+
 End Class

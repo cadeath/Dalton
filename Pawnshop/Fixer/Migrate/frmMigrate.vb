@@ -356,7 +356,7 @@ Public Class frmMigrate
             Dim MigAdvInt As Integer = dr.Item("AdvInt")
             Dim MigServiceCharge As Integer = dr.Item("ServiceCharge")
             Dim MigPenalty As Integer = dr.Item("Penalty")
-            Dim MigPullout As Date
+            Dim MigPullout As New Date
             If Not IsDBNull(dr.Item("PullOut")) Then MigPullout = dr.Item("PullOut")
             Dim MigCategory As String = dr.Item("Category")
             Dim MigItemType As String = dr.Item("ItemType")
@@ -413,6 +413,22 @@ Public Class frmMigrate
                 DsOpt.Tables("OPT").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpt)
 
+                Dim sqlOpi As String = "Select * from OPI where pawnitemid = '" & PawnItemID & "'"
+                Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
+                With DsOpi.Tables("OPI").Rows(0)
+                    Select Case MigStatus
+                        Case "W"
+                            .Item("WithdrawDate") = MigPullout
+                            .Item("Status") = MigStatus
+                        Case "X"
+                            .Item("WithDrawDate") = MigOrDate
+                            .Item("Status") = MigStatus
+                        Case Else
+                            .Item("Status") = "A"
+                    End Select
+                End With
+                SaveEntry(DsOpi, False)
+
             Else
                 Dim sqlOpi As String = "Select * from OPI"
                 Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
@@ -426,13 +442,14 @@ Public Class frmMigrate
                     Select Case MigStatus
                         Case "L", "0", "R"
                             .Item("Status") = "A"
-                            .Item("WithDrawDate") = MigPullout
                         Case "X"
                             .Item("Status") = "X"
                             .Item("WithDrawDate") = MigOrDate
+                        Case "W"
+                            .Item("Status") = "W"
+                            .Item("WithDrawDate") = MigPullout
                         Case Else
                             .Item("Status") = MigStatus
-                            .Item("WithDrawDate") = MigPullout
                     End Select
                     .Item("RenewalCnt") = MigRenewCount
                     .Item("Created_at") = Now

@@ -765,6 +765,13 @@
     <Compile Include="SalesInventory\InventoryController.vb" />
     <Compile Include="SalesInventory\SeedItemData.vb" />
     <Compile Include="Seed\Client_Seed.vb" />
+    <Compile Include="Seed\frmSeed.Designer.vb">
+      <DependentUpon>frmSeed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Seed\frmSeed.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Seed\Pawn.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -1146,6 +1153,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmInventory.resx">
       <DependentUpon>frmInventory.vb</DependentUpon>
+    <EmbeddedResource Include="Seed\frmSeed.resx">
+      <DependentUpon>frmSeed.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

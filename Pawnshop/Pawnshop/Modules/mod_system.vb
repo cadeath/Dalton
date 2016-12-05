@@ -152,7 +152,7 @@ Module mod_system
             Dim tmpPawnItem As New PawnTicket2
             tmpPawnItem.Load_PTid(dr.Item("PawnID"))
             With tmpPawnItem.PawnItem
-                .WithdrawDate = CurrentDate
+                '.WithdrawDate = CurrentDate
                 .Status = "S"
                 .Save_PawnItem()
             End With
@@ -570,7 +570,7 @@ Module mod_system
     ' END - HASHTABLE FUNCTIONS
 
     Public Function CheckOTP() As Boolean
-        diagOTP.Show()
+        diagOTP.ShowDialog()
         diagOTP.TopMost = True
         'Return False
         Return True
