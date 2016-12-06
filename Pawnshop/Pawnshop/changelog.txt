@@ -2,9 +2,10 @@ CHANGELOG
 Version 1.4
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
- - Add InvoiceNum and SalesReturnNum at TBLMAINTENACE
+ - Add InvoiceNum, STONum and SalesReturnNum at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
  - Update TBLCASH and TBLITEM
+ - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here)
  - Change DB Version 1.2.3.1
  - HOLDS AUCTION REDEEM at TBLCASH
 

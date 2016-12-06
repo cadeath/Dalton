@@ -768,6 +768,12 @@
     <Compile Include="SalesInventory\frmSalesOptions.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\frmSalesStockOut.Designer.vb">
+      <DependentUpon>frmSalesStockOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesStockOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SalesInventory\InventoryController.vb" />
     <Compile Include="SalesInventory\SeedItemData.vb" />
     <Compile Include="Seed\Client_Seed.vb" />
@@ -1163,6 +1169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmSalesOptions.resx">
       <DependentUpon>frmSalesOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmSalesStockOut.resx">
+      <DependentUpon>frmSalesStockOut.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Seed\frmSeed.resx">
       <DependentUpon>frmSeed.vb</DependentUpon>

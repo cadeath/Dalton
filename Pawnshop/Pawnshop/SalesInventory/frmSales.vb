@@ -47,12 +47,25 @@ Public Class frmSales
 
     Private Sub CheckOR()
         Dim mySql As String = "SELECT * FROM DOC WHERE CODE = "
-        mySql &= String.Format("'{1}#{0:000000}'", ORNUM, IIf(TransactionMode = TransType.Returns, "RET", "INV"))
+        Dim prefix As String = ""
+        Dim ControlNum As Integer = 0
+
+        ControlNum = ORNUM
+        Select Case TransactionMode
+            Case TransType.Returns
+                prefix = "RET"
+            Case TransType.Cash, TransType.Check, TransType.Auction
+                prefix = "INV"
+            Case TransType.StockOut
+                prefix = "STO"
+        End Select
+
+        mySql &= String.Format("'{1}#{0:000000}'", ControlNum, prefix)
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             canTransact = False
-            MsgBox("INVOICE NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical)
+            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical)
         End If
     End Sub
 
@@ -287,21 +300,47 @@ Public Class frmSales
         Dim mySql As String, fillData As String
         Dim getLastID As Integer = 0
         Dim Remarks As String = ""
+        Dim unsec_Customer As String = lblCustomer.Text
+        Dim prefix As String = ""
 
+        ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
+
+        ' INVENTORY STOCK OUT
+        If TransactionMode = TransType.StockOut Then
+            'Dim res As DialogResult = frmSalesStockOut.ShowDialog
+            'If res <> Windows.Forms.DialogResult.Yes Then
+            '    Exit Sub
+            'End If
+            Dim retVal(1) As String
+            If frmSalesStockOut.ShowDialog(retVal) <> Windows.Forms.DialogResult.OK Then
+                Exit Sub
+            End If
+
+            unsec_Customer = retVal(0) 'Branch
+            Remarks = retVal(1) 'Particulars
+        End If
 
         'Creating Document
         mySql = "SELECT * FROM DOC ROWS 1"
         fillData = "DOC"
-        Dim unsec_Customer As String = lblCustomer.Text
 
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
 
+        Select Case TransactionMode
+            Case TransType.Returns
+                prefix = "RET"
+            Case TransType.Cash, TransType.Check, TransType.Auction
+                prefix = "INV"
+            Case TransType.StockOut
+                prefix = "STO"
+        End Select
+
         With dsNewRow
             .Item("DOCTYPE") = DOC_TYPE
-            .Item("CODE") = String.Format("{1}#{0:000000}", ORNUM, IIf(TransactionMode <> TransType.Returns, "INV", "RET"))
+            .Item("CODE") = String.Format("{1}#{0:000000}", ORNUM, prefix)
             .Item("MOP") = GetModesOfPayment(TransactionMode)
             .Item("CUSTOMER") = unsec_Customer
             .Item("DOCDATE") = CurrentDate
@@ -413,6 +452,8 @@ Public Class frmSales
                 Return "Q"
             Case TransType.Returns
                 Return "R"
+            Case TransType.StockOut
+                Return "S"
         End Select
 
         Return "0"
@@ -420,11 +461,15 @@ Public Class frmSales
 
     Private Sub ItemPosted()
         ORNUM += 1 'INCREMENT ORNUMBER
-        If TransactionMode <> TransType.Returns Then
-            UpdateOptions("InvoiceNum", ORNUM)
-        Else
-            UpdateOptions("SalesReturnNum", ORNUM)
-        End If
+
+        Select Case TransactionMode
+            Case TransType.Returns
+                UpdateOptions("SalesReturnNum", ORNUM)
+            Case TransType.Cash, TransType.Check, TransType.Auction
+                UpdateOptions("InvoiceNum", ORNUM)
+            Case TransType.StockOut
+                UpdateOptions("STONum", ORNUM)
+        End Select
 
         ht_BroughtItems.Clear()
     End Sub
@@ -547,12 +592,23 @@ Public Class frmSales
     End Sub
 
 #Region "Load Transactions Type"
+    Private Sub Load_ORNUM()
+        Select Case TransactionMode
+            Case TransType.Returns
+                ORNUM = GetOption("SalesReturnNum")
+            Case TransType.Cash, TransType.Check, TransType.Auction
+                ORNUM = GetOption("InvoiceNum")
+            Case TransType.StockOut
+                ORNUM = GetOption("STONum")
+        End Select
+    End Sub
+
     Private Sub Load_asReturns()
         lblMode.Text = "RETURNS"
         TransactionMode = TransType.Returns
         lblSearch.Text = "ITEM:"
 
-        ORNUM = GetOption(IIf(TransactionMode = TransType.Returns, "SalesReturnNum", "InvoiceNum"))
+        Load_ORNUM()
         DOC_TYPE = 0
     End Sub
 
@@ -561,6 +617,7 @@ Public Class frmSales
         TransactionMode = TransType.StockOut
         lblSearch.Text = "ITEM:"
 
+        Load_ORNUM()
         DOC_TYPE = 4
     End Sub
 
@@ -569,6 +626,7 @@ Public Class frmSales
         TransactionMode = TransType.Cash
         lblSearch.Text = "ITEM:"
 
+        Load_ORNUM()
         DOC_TYPE = 0
     End Sub
 
@@ -577,6 +635,7 @@ Public Class frmSales
         TransactionMode = TransType.Check
         lblSearch.Text = "ITEM:"
 
+        Load_ORNUM()
         DOC_TYPE = 0
     End Sub
 
