@@ -146,6 +146,8 @@
         dbReaderClose()
 
         PG_Init(False)
+
+        AutoSelect()
     End Sub
 
     Friend Sub SearchSelect(ByVal unsecured_String As String)
@@ -195,70 +197,6 @@
         Dim unsec_src As String = txtCode.Text
 
         Load_PLU(DreadKnight(unsec_src))
-
-        Exit Sub
-
-        Dim mySql As String = "SELECT * FROM ITEMMASTER "
-        mySql &= String.Format("WHERE (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00' ", DreadKnight(unsec_src).ToLower)
-
-        If isRedeem Then
-            Dim src_str As String
-            src_str = DreadKnight(unsec_src)
-
-            mySql = "SELECT PT.*,ITEM.SALESID,ITEM.COSTID,ITEM.ITEMCLASS "
-            mySql &= vbCrLf & "FROM OPT PT "
-            mySql &= vbCrLf & "INNER JOIN OPI ITEM "
-            mySql &= vbCrLf & "ON ITEM.PAWNITEMID = PT.PAWNITEMID "
-            mySql &= vbCrLf & "WHERE PT.STATUS = 'S' AND ("
-
-            If IsNumeric(src_str) Then
-                mySql &= String.Format("PT.PAWNTICKET = {0} OR ", DreadKnight(unsec_src).ToLower)
-            End If
-            mySql &= String.Format("LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(unsec_src).ToLower)
-            mySql &= ") AND ItemCode <> 'RECALL00'"
-        End If
-
-        Console.WriteLine(mySql)
-        Dim ds As DataSet = LoadSQL(mySql)
-        If ds.Tables(0).Rows.Count = 0 Then MsgBox("ITEM NOT FOUND", MsgBoxStyle.Information) : Exit Sub
-
-        ' Clear in Collections
-        lvItem.Items.Clear()
-        queued_IMD.Clear()
-
-        dbReaderOpen()
-
-        If DEV_MODE Then Console.WriteLine(mySql)
-        Dim dsR = LoadSQL_byDataReader(mySql)
-        While dsR.Read
-
-            Dim tmpItm As New cItemData
-
-            If isRedeem Then
-                With tmpItm
-                    .ItemCode = "RECALL00"
-                    .Load_ItemCode()
-
-                    .Description = String.Format("PT#{0:000000} {1}", dsR("PAWNTICKET"), dsR("DESCRIPTION"))
-                    .Category = dsR("ITEMCLASS")
-                    .UnitofMeasure = "PIECE"
-                    .UnitPrice = dsR("PRINCIPAL")
-                    .SalePrice = dsR("PRINCIPAL")
-                    .Tags = dsR("PAWNTICKET")
-                    .AuctionID = dsR("SALESID")
-                    .CostID = dsR("COSTID")
-                End With
-            Else
-                tmpItm.LoadReader_Item(dsR)
-            End If
-
-            queued_IMD.Add(tmpItm)
-            AddItem(tmpItm)
-
-        End While
-
-        dbReaderClose()
-        AutoSelect()
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click

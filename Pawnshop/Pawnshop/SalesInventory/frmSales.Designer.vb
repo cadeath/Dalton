@@ -53,6 +53,9 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
+        Me.tsbtnOption = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbtnOut = New System.Windows.Forms.ToolStripButton()
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -178,7 +181,7 @@ Partial Class frmSales
         '
         'tsButton
         '
-        Me.tsButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbIMD, Me.tsbPLU, Me.tsbtnAuction, Me.ToolStripSeparator1, Me.tsbCustomer, Me.ToolStripSeparator2, Me.tsbCash, Me.tsbCheck, Me.tsbRefund, Me.tsbSalesReturn, Me.ToolStripSeparator3, Me.tsbReceipt})
+        Me.tsButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbIMD, Me.tsbPLU, Me.tsbtnAuction, Me.ToolStripSeparator1, Me.tsbCustomer, Me.ToolStripSeparator2, Me.tsbCash, Me.tsbCheck, Me.tsbRefund, Me.tsbSalesReturn, Me.ToolStripSeparator3, Me.tsbtnOut, Me.tsbReceipt, Me.ToolStripSeparator4, Me.tsbtnOption})
         Me.tsButton.Location = New System.Drawing.Point(0, 0)
         Me.tsButton.Name = "tsButton"
         Me.tsButton.Size = New System.Drawing.Size(890, 25)
@@ -187,6 +190,7 @@ Partial Class frmSales
         '
         'tsbIMD
         '
+        Me.tsbIMD.Enabled = False
         Me.tsbIMD.Image = CType(resources.GetObject("tsbIMD.Image"), System.Drawing.Image)
         Me.tsbIMD.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbIMD.Name = "tsbIMD"
@@ -272,6 +276,7 @@ Partial Class frmSales
         Me.tsbReceipt.Name = "tsbReceipt"
         Me.tsbReceipt.Size = New System.Drawing.Size(77, 22)
         Me.tsbReceipt.Text = "RECEIPTS"
+        Me.tsbReceipt.Visible = False
         '
         'btnCancel
         '
@@ -306,6 +311,27 @@ Partial Class frmSales
         Me.lblNoVat.Size = New System.Drawing.Size(147, 16)
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
+        '
+        'tsbtnOption
+        '
+        Me.tsbtnOption.Image = CType(resources.GetObject("tsbtnOption.Image"), System.Drawing.Image)
+        Me.tsbtnOption.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnOption.Name = "tsbtnOption"
+        Me.tsbtnOption.Size = New System.Drawing.Size(77, 22)
+        Me.tsbtnOption.Text = "OPTIONS"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbtnOut
+        '
+        Me.tsbtnOut.Image = CType(resources.GetObject("tsbtnOut.Image"), System.Drawing.Image)
+        Me.tsbtnOut.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnOut.Name = "tsbtnOut"
+        Me.tsbtnOut.Size = New System.Drawing.Size(88, 22)
+        Me.tsbtnOut.Text = "STOCKOUT"
         '
         'frmSales
         '
@@ -364,4 +390,7 @@ Partial Class frmSales
     Friend WithEvents tsbSalesReturn As System.Windows.Forms.ToolStripButton
     Friend WithEvents lblNoVat As System.Windows.Forms.Label
     Friend WithEvents tsbtnAuction As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents tsbtnOption As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tsbtnOut As System.Windows.Forms.ToolStripButton
 End Class

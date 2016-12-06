@@ -7,6 +7,7 @@ Public Class frmSales
         Check = 1
         Auction = 2
         Returns = 3
+        StockOut = 4
     End Enum
 
     Friend TransactionMode As TransType
@@ -15,7 +16,7 @@ Public Class frmSales
     Private ORNUM As Double = GetOption("InvoiceNum")
     Private PRINTER_PT As String = GetOption("PRINTER")
     Private VAT As Double = 0
-    Private DOC_TYPE As Integer = 0 '0 - SALES
+    Private DOC_TYPE As Integer = 0 '0 - SALES, 4 - StockOut
     Private DOC_NOVAT As Double = 0
     Private DOC_VATTOTAL As Double = 0
     Private DOC_TOTAL As Double = 0
@@ -165,26 +166,6 @@ Public Class frmSales
         Display_Total(0)
     End Sub
 
-    Private Sub Load_asReturns()
-        lblMode.Text = "RETURNS"
-        TransactionMode = TransType.Returns
-        lblSearch.Text = "ITEM:"
-
-        ORNUM = GetOption(IIf(TransactionMode = TransType.Returns, "SalesReturnNum", "InvoiceNum"))
-    End Sub
-
-    Private Sub Load_asCash()
-        lblMode.Text = "CASH"
-        TransactionMode = TransType.Cash
-        lblSearch.Text = "ITEM:"
-    End Sub
-
-    Private Sub Load_asCheck()
-        lblMode.Text = "CHECK"
-        TransactionMode = TransType.Check
-        lblSearch.Text = "ITEM:"
-    End Sub
-
     Private Function Display_Total(ByVal tot As Double) As Double
         Dim final As Double = tot.ToString("##000.00")
 
@@ -259,7 +240,6 @@ Public Class frmSales
         If e.KeyCode = Keys.Delete Then
 
             Dim idx As Integer = lvSale.FocusedItem.Index
-
             If Not IsNumeric(lvSale.Items(idx).SubItems(2).Text) Then
                 Log_Report(String.Format("[SALES DELETE] {0} have an NON-NUMERIC QTY", lvSale.Items(idx).Text))
                 MsgBox(String.Format("{0} has NON-NUMERIC Quantity", lvSale.Items(idx).Text), MsgBoxStyle.Critical, "INVALID ITEMCODE")
@@ -529,18 +509,6 @@ Public Class frmSales
         End If
     End Sub
 
-    Private Function ShiftMode() As Boolean
-        If lvSale.Items.Count = 0 Then Return True
-
-        Dim ans = MsgBox("You are about the change MODE. And the List will be clear" + vbCr + "Do you want to continue?", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
-        If ans = MsgBoxResult.Yes Then
-            ClearField()
-            Return True
-        End If
-
-        Return False
-    End Function
-
     Private Sub tsbtnAuction_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnAuction.Click
 
         If ShiftMode() Then
@@ -568,4 +536,60 @@ Public Class frmSales
         Return ""
     End Function
 
+    Private Sub tsbtnOption_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOption.Click
+        frmSalesOptions.Show()
+    End Sub
+
+    Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
+        If ShiftMode() Then
+            Load_asStockOut()
+        End If
+    End Sub
+
+#Region "Load Transactions Type"
+    Private Sub Load_asReturns()
+        lblMode.Text = "RETURNS"
+        TransactionMode = TransType.Returns
+        lblSearch.Text = "ITEM:"
+
+        ORNUM = GetOption(IIf(TransactionMode = TransType.Returns, "SalesReturnNum", "InvoiceNum"))
+        DOC_TYPE = 0
+    End Sub
+
+    Private Sub Load_asStockOut()
+        lblMode.Text = "STOCKOUT"
+        TransactionMode = TransType.StockOut
+        lblSearch.Text = "ITEM:"
+
+        DOC_TYPE = 4
+    End Sub
+
+    Private Sub Load_asCash()
+        lblMode.Text = "CASH"
+        TransactionMode = TransType.Cash
+        lblSearch.Text = "ITEM:"
+
+        DOC_TYPE = 0
+    End Sub
+
+    Private Sub Load_asCheck()
+        lblMode.Text = "CHECK"
+        TransactionMode = TransType.Check
+        lblSearch.Text = "ITEM:"
+
+        DOC_TYPE = 0
+    End Sub
+
+    Private Function ShiftMode() As Boolean
+        If lvSale.Items.Count = 0 Then Return True
+
+        Dim ans = MsgBox("You are about the change MODE. And the List will be clear" + vbCr + "Do you want to continue?", MsgBoxStyle.Information + MsgBoxStyle.YesNo)
+        If ans = MsgBoxResult.Yes Then
+            ClearField()
+            Return True
+        End If
+
+        Return False
+    End Function
+#End Region
 End Class

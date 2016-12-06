@@ -55,6 +55,8 @@ Partial Class frmSettings
         Me.printerPT = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtCashInvoice = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -215,6 +217,8 @@ Partial Class frmSettings
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtCashInvoice)
+        Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.txtMRNum)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.txtMENum)
@@ -229,7 +233,7 @@ Partial Class frmSettings
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Location = New System.Drawing.Point(293, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(230, 193)
+        Me.GroupBox1.Size = New System.Drawing.Size(230, 221)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Next Control Number"
@@ -399,6 +403,25 @@ Partial Class frmSettings
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Pawn Ticket"
         '
+        'txtCashInvoice
+        '
+        Me.txtCashInvoice.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCashInvoice.Location = New System.Drawing.Point(110, 187)
+        Me.txtCashInvoice.Name = "txtCashInvoice"
+        Me.txtCashInvoice.Size = New System.Drawing.Size(100, 22)
+        Me.txtCashInvoice.TabIndex = 6
+        Me.txtCashInvoice.Text = "35"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(17, 191)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(51, 16)
+        Me.Label14.TabIndex = 26
+        Me.Label14.Text = "Invoice"
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -455,4 +478,6 @@ Partial Class frmSettings
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtCashInBank As System.Windows.Forms.TextBox
     Friend WithEvents lblSAP01 As System.Windows.Forms.Label
+    Friend WithEvents txtCashInvoice As System.Windows.Forms.TextBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
 End Class
