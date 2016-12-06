@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.Odbc
+
 Public Class frmExtractor
     Enum ExtractType As Integer
         Expiry = 0
