@@ -731,6 +731,7 @@
     <Compile Include="SalesInventory\dev_Menu_SalesInventory.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\FileManipulation.vb" />
     <Compile Include="SalesInventory\frmIMD.Designer.vb">
       <DependentUpon>frmIMD.vb</DependentUpon>
     </Compile>
