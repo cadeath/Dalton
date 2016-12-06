@@ -29,6 +29,8 @@ Partial Class frmSalesOptions
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnPTU = New System.Windows.Forms.Button()
         Me.btnRePrint = New System.Windows.Forms.Button()
+        Me.monCal = New System.Windows.Forms.MonthCalendar()
+        Me.btnInventory = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -95,11 +97,29 @@ Partial Class frmSalesOptions
         Me.btnRePrint.Text = "Reprint"
         Me.btnRePrint.UseVisualStyleBackColor = True
         '
+        'monCal
+        '
+        Me.monCal.Location = New System.Drawing.Point(258, 18)
+        Me.monCal.Name = "monCal"
+        Me.monCal.TabIndex = 2
+        '
+        'btnInventory
+        '
+        Me.btnInventory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnInventory.Location = New System.Drawing.Point(402, 192)
+        Me.btnInventory.Name = "btnInventory"
+        Me.btnInventory.Size = New System.Drawing.Size(85, 36)
+        Me.btnInventory.TabIndex = 3
+        Me.btnInventory.Text = "&Inventory"
+        Me.btnInventory.UseVisualStyleBackColor = True
+        '
         'frmSalesOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(262, 250)
+        Me.ClientSize = New System.Drawing.Size(499, 241)
+        Me.Controls.Add(Me.btnInventory)
+        Me.Controls.Add(Me.monCal)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -119,4 +139,6 @@ Partial Class frmSalesOptions
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents btnPTU As System.Windows.Forms.Button
     Friend WithEvents btnRePrint As System.Windows.Forms.Button
+    Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
+    Friend WithEvents btnInventory As System.Windows.Forms.Button
 End Class
