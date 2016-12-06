@@ -100,7 +100,7 @@
         UpdateOptions("InsuranceLastNum", txtInsurance.Text, isOTPEnable)
         UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
         UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
-        UpdateOptions("InvoiceNum", txtMRNum.Text, isOTPEnable)
+        UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)
