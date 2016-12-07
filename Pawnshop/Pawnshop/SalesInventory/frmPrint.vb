@@ -20,7 +20,10 @@ Public Class frmPrint
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        Dim mySql As String = "SELECT * FROM DOC WHERE CODE LIKE '" & txtSearch.Text & "' OR UPPER(CUSTOMER) LIKE UPPER('%" & txtSearch.Text & "%')"
+        If txtSearch.Text = "" Then Exit Sub
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
+        Dim mySql As String = "SELECT * FROM DOC WHERE CODE LIKE '" & secured_str & "' OR UPPER(CUSTOMER) LIKE UPPER('%" & secured_str & "%')"
 
         Dim ds As DataSet = LoadSQL(mySql)
         lvReceipt.Items.Clear()
