@@ -6,6 +6,7 @@ Version 1.4
  - Add field SALESID and COSTID at TBLITEM
  - Update TBLCASH and TBLITEM
  - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here)
+ - Can Generate SAP Template Based STO for STOCK OUT
  - Change DB Version 1.2.3.1
  - HOLDS AUCTION REDEEM at TBLCASH
 
