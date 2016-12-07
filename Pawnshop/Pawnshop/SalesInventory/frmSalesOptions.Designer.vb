@@ -117,7 +117,7 @@ Partial Class frmSalesOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(499, 241)
+        Me.ClientSize = New System.Drawing.Size(500, 241)
         Me.Controls.Add(Me.btnInventory)
         Me.Controls.Add(Me.monCal)
         Me.Controls.Add(Me.GroupBox2)

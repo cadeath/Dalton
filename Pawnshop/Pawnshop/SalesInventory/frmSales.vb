@@ -27,7 +27,14 @@ Public Class frmSales
         If DEV_MODE Then Pawn.Populate()
     End Sub
 
+    Private Sub TestConsole()
+        Console.WriteLine(CurrentDate)
+        Console.WriteLine(CurrentDate.ToString("yyyyMMdd"))
+    End Sub
+
     Private Sub frmSales_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        TestConsole()
+
         ClearField()
         txtSearch.Select()
 
@@ -233,6 +240,7 @@ Public Class frmSales
 
     Private Sub tsbIMD_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbIMD.Click
         'frmIMD.Show()
+        frmImport_IMD.Show()
     End Sub
 
     Private Sub tsbPLU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPLU.Click
@@ -301,17 +309,13 @@ Public Class frmSales
         Dim getLastID As Integer = 0
         Dim Remarks As String = ""
         Dim unsec_Customer As String = lblCustomer.Text
-        Dim prefix As String = ""
+        Dim prefix As String = "", DocCode As String
 
         ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
 
         ' INVENTORY STOCK OUT
         If TransactionMode = TransType.StockOut Then
-            'Dim res As DialogResult = frmSalesStockOut.ShowDialog
-            'If res <> Windows.Forms.DialogResult.Yes Then
-            '    Exit Sub
-            'End If
             Dim retVal(1) As String
             If frmSalesStockOut.ShowDialog(retVal) <> Windows.Forms.DialogResult.OK Then
                 Exit Sub
@@ -339,8 +343,9 @@ Public Class frmSales
         End Select
 
         With dsNewRow
+            DocCode = String.Format("{1}#{0:000000}", ORNUM, prefix)
             .Item("DOCTYPE") = DOC_TYPE
-            .Item("CODE") = String.Format("{1}#{0:000000}", ORNUM, prefix)
+            .Item("CODE") = DocCode
             .Item("MOP") = GetModesOfPayment(TransactionMode)
             .Item("CUSTOMER") = unsec_Customer
             .Item("DOCDATE") = CurrentDate
@@ -428,10 +433,15 @@ Public Class frmSales
         Next
         ItemPosted()
 
+        If TransactionMode = TransType.StockOut Then
+            Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+            DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), ORNUM.ToString("000000"))
+            InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+        End If
+
         If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then
             PrintOR(DOCID)
         End If
-        
 
         MsgBox("ITEM POSTED", MsgBoxStyle.Information)
         ClearField()
@@ -526,8 +536,6 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbSalesReturn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSalesReturn.Click
-        'UNDERCONSTRUCTION()
-
         If ShiftMode() Then
             Load_asReturns()
         End If

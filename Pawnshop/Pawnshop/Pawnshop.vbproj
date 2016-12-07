@@ -794,6 +794,7 @@
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
       <DependentUpon>frmAuditConsole.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
@@ -836,6 +837,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
