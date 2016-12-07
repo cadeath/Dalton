@@ -151,6 +151,7 @@ Partial Class frmPLU
         Me.btnEdit.TabIndex = 8
         Me.btnEdit.Text = "&Edit"
         Me.btnEdit.UseVisualStyleBackColor = True
+        Me.btnEdit.Visible = False
         '
         'pb_itm
         '
