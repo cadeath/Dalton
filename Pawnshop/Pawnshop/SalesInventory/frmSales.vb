@@ -309,7 +309,7 @@ Public Class frmSales
         Dim getLastID As Integer = 0
         Dim Remarks As String = ""
         Dim unsec_Customer As String = lblCustomer.Text
-        Dim prefix As String = ""
+        Dim prefix As String = "", DocCode As String
 
         ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
@@ -343,8 +343,9 @@ Public Class frmSales
         End Select
 
         With dsNewRow
+            DocCode = String.Format("{1}#{0:000000}", ORNUM, prefix)
             .Item("DOCTYPE") = DOC_TYPE
-            .Item("CODE") = String.Format("{1}#{0:000000}", ORNUM, prefix)
+            .Item("CODE") = DocCode
             .Item("MOP") = GetModesOfPayment(TransactionMode)
             .Item("CUSTOMER") = unsec_Customer
             .Item("DOCDATE") = CurrentDate
@@ -434,7 +435,7 @@ Public Class frmSales
 
         If TransactionMode = TransType.StockOut Then
             Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-            DefaultSrc &= "\" & String.Format("STO{0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"))
+            DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), ORNUM.ToString("000000"))
             InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
         End If
 

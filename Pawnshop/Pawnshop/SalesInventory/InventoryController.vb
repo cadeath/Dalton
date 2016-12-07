@@ -133,6 +133,7 @@ Module InventoryController
         End With
 
         'Sheet 2
+        oSheet = oWB.Sheets(2)
         col = 1
         For Each hd In headers2
             oSheet.Cells(1, col).value = hd
