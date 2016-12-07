@@ -49,13 +49,13 @@ Partial Class frmSales
         Me.tsbRefund = New System.Windows.Forms.ToolStripButton()
         Me.tsbSalesReturn = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbtnOut = New System.Windows.Forms.ToolStripButton()
         Me.tsbReceipt = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbtnOption = New System.Windows.Forms.ToolStripButton()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
-        Me.tsbtnOption = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbtnOut = New System.Windows.Forms.ToolStripButton()
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -190,7 +190,6 @@ Partial Class frmSales
         '
         'tsbIMD
         '
-        Me.tsbIMD.Enabled = False
         Me.tsbIMD.Image = CType(resources.GetObject("tsbIMD.Image"), System.Drawing.Image)
         Me.tsbIMD.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbIMD.Name = "tsbIMD"
@@ -269,6 +268,14 @@ Partial Class frmSales
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 25)
         '
+        'tsbtnOut
+        '
+        Me.tsbtnOut.Image = CType(resources.GetObject("tsbtnOut.Image"), System.Drawing.Image)
+        Me.tsbtnOut.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnOut.Name = "tsbtnOut"
+        Me.tsbtnOut.Size = New System.Drawing.Size(88, 22)
+        Me.tsbtnOut.Text = "STOCKOUT"
+        '
         'tsbReceipt
         '
         Me.tsbReceipt.Image = CType(resources.GetObject("tsbReceipt.Image"), System.Drawing.Image)
@@ -277,6 +284,19 @@ Partial Class frmSales
         Me.tsbReceipt.Size = New System.Drawing.Size(77, 22)
         Me.tsbReceipt.Text = "RECEIPTS"
         Me.tsbReceipt.Visible = False
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
+        '
+        'tsbtnOption
+        '
+        Me.tsbtnOption.Image = CType(resources.GetObject("tsbtnOption.Image"), System.Drawing.Image)
+        Me.tsbtnOption.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnOption.Name = "tsbtnOption"
+        Me.tsbtnOption.Size = New System.Drawing.Size(77, 22)
+        Me.tsbtnOption.Text = "OPTIONS"
         '
         'btnCancel
         '
@@ -311,27 +331,6 @@ Partial Class frmSales
         Me.lblNoVat.Size = New System.Drawing.Size(147, 16)
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
-        '
-        'tsbtnOption
-        '
-        Me.tsbtnOption.Image = CType(resources.GetObject("tsbtnOption.Image"), System.Drawing.Image)
-        Me.tsbtnOption.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnOption.Name = "tsbtnOption"
-        Me.tsbtnOption.Size = New System.Drawing.Size(77, 22)
-        Me.tsbtnOption.Text = "OPTIONS"
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 25)
-        '
-        'tsbtnOut
-        '
-        Me.tsbtnOut.Image = CType(resources.GetObject("tsbtnOut.Image"), System.Drawing.Image)
-        Me.tsbtnOut.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnOut.Name = "tsbtnOut"
-        Me.tsbtnOut.Size = New System.Drawing.Size(88, 22)
-        Me.tsbtnOut.Text = "STOCKOUT"
         '
         'frmSales
         '

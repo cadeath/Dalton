@@ -27,7 +27,14 @@ Public Class frmSales
         If DEV_MODE Then Pawn.Populate()
     End Sub
 
+    Private Sub TestConsole()
+        Console.WriteLine(CurrentDate)
+        Console.WriteLine(CurrentDate.ToString("yyyyMMdd"))
+    End Sub
+
     Private Sub frmSales_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        TestConsole()
+
         ClearField()
         txtSearch.Select()
 
@@ -233,6 +240,7 @@ Public Class frmSales
 
     Private Sub tsbIMD_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbIMD.Click
         'frmIMD.Show()
+        frmImport_IMD.Show()
     End Sub
 
     Private Sub tsbPLU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPLU.Click
@@ -308,10 +316,6 @@ Public Class frmSales
 
         ' INVENTORY STOCK OUT
         If TransactionMode = TransType.StockOut Then
-            'Dim res As DialogResult = frmSalesStockOut.ShowDialog
-            'If res <> Windows.Forms.DialogResult.Yes Then
-            '    Exit Sub
-            'End If
             Dim retVal(1) As String
             If frmSalesStockOut.ShowDialog(retVal) <> Windows.Forms.DialogResult.OK Then
                 Exit Sub
@@ -428,10 +432,15 @@ Public Class frmSales
         Next
         ItemPosted()
 
+        If TransactionMode = TransType.StockOut Then
+            Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+            DefaultSrc &= "\" & String.Format("STO{0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"))
+            InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+        End If
+
         If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then
             PrintOR(DOCID)
         End If
-        
 
         MsgBox("ITEM POSTED", MsgBoxStyle.Information)
         ClearField()
@@ -526,8 +535,6 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbSalesReturn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSalesReturn.Click
-        'UNDERCONSTRUCTION()
-
         If ShiftMode() Then
             Load_asReturns()
         End If
