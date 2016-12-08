@@ -4,6 +4,7 @@ Version 1.4
  - Added Tables ITEMMASTER, DOC, DOCLINES
  - Add InvoiceNum, STONum and SalesReturnNum at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
+ - Add view STOCK_CARD
  - Add Reports - Inventory Report
  - Update TBLCASH and TBLITEM
  - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here)

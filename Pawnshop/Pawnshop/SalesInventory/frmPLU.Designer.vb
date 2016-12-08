@@ -37,6 +37,7 @@ Partial Class frmPLU
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.pb_itm = New System.Windows.Forms.ProgressBar()
+        Me.btnStock = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtCode
@@ -162,6 +163,19 @@ Partial Class frmPLU
         Me.pb_itm.TabIndex = 9
         Me.pb_itm.Visible = False
         '
+        'btnStock
+        '
+        Me.btnStock.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnStock.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnStock.Location = New System.Drawing.Point(93, 396)
+        Me.btnStock.Name = "btnStock"
+        Me.btnStock.Size = New System.Drawing.Size(75, 33)
+        Me.btnStock.TabIndex = 10
+        Me.btnStock.Text = "&Stock Card"
+        Me.btnStock.UseVisualStyleBackColor = True
+        Me.btnStock.Visible = False
+        '
         'frmPLU
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -169,6 +183,7 @@ Partial Class frmPLU
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(803, 438)
         Me.Controls.Add(Me.pb_itm)
+        Me.Controls.Add(Me.btnStock)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnCancel)
@@ -197,4 +212,5 @@ Partial Class frmPLU
     Friend WithEvents btnEdit As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents pb_itm As System.Windows.Forms.ProgressBar
+    Friend WithEvents btnStock As System.Windows.Forms.Button
 End Class

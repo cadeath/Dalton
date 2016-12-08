@@ -571,6 +571,8 @@ Public Class frmSales
                 lblMode.Text = "RECALL"
 
                 IS_AUCTIONREDEEM()
+
+                DOC_TYPE = 2
             Else
                 Load_asCash()
             End If
@@ -617,7 +619,7 @@ Public Class frmSales
         lblSearch.Text = "ITEM:"
 
         Load_ORNUM()
-        DOC_TYPE = 0
+        DOC_TYPE = 3
     End Sub
 
     Private Sub Load_asStockOut()
