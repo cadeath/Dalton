@@ -7,7 +7,8 @@ Public Class frmView_Stock
     End Sub
 
     Friend Sub Load_ItemCode(ByVal IMD As String)
-        Dim mySql As String, ds As DataSet
+        Dim mySql As String, ds As DataSet, strDt As Date
+        Dim isSame As Boolean = False, qty As Double = 0
         mySql = String.Format("SELECT * FROM STOCK_CARD WHERE ITEMCODE = '{0}'", IMD)
 
         ds = LoadSQL(mySql)
@@ -19,11 +20,19 @@ Public Class frmView_Stock
         Dim StockCard = LoadSQL_byDataReader(mySql)
         While StockCard.Read
 
-            Dim lv As ListViewItem = lvStock.Items.Add(StockCard("DocDate"))
+            If strDt <> StockCard("DocDate") Then
+                strDt = StockCard("DocDate")
+                isSame = False
+            Else
+                isSame = True
+            End If
+
+            Dim lv As ListViewItem = lvStock.Items.Add(IIf(isSame, "", strDt.ToString("MM/dd/yyyy")))
             lv.SubItems.Add(StockCard("RefNum"))
             lv.SubItems.Add(StockCard("ItemCode"))
             lv.SubItems.Add(StockCard("Description"))
-            lv.SubItems.Add(StockCard("Qty").ToString("#,##0.00"))
+            qty = StockCard("Qty")
+            lv.SubItems.Add(qty.ToString("#,##0.00"))
 
         End While
 

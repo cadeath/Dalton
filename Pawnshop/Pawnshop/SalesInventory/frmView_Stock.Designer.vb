@@ -42,7 +42,7 @@ Partial Class frmView_Stock
         Me.lvStock.GridLines = True
         Me.lvStock.Location = New System.Drawing.Point(12, 46)
         Me.lvStock.Name = "lvStock"
-        Me.lvStock.Size = New System.Drawing.Size(635, 327)
+        Me.lvStock.Size = New System.Drawing.Size(668, 331)
         Me.lvStock.TabIndex = 0
         Me.lvStock.UseCompatibleStateImageBehavior = False
         Me.lvStock.View = System.Windows.Forms.View.Details
@@ -50,6 +50,7 @@ Partial Class frmView_Stock
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Date"
+        Me.ColumnHeader1.Width = 99
         '
         'ColumnHeader2
         '
@@ -80,7 +81,7 @@ Partial Class frmView_Stock
         Me.lblDesc.ForeColor = System.Drawing.Color.White
         Me.lblDesc.Location = New System.Drawing.Point(9, 9)
         Me.lblDesc.Name = "lblDesc"
-        Me.lblDesc.Size = New System.Drawing.Size(638, 28)
+        Me.lblDesc.Size = New System.Drawing.Size(671, 28)
         Me.lblDesc.TabIndex = 1
         Me.lblDesc.Text = "I HAVE LIVED ONCE MORE"
         Me.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -89,7 +90,7 @@ Partial Class frmView_Stock
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(659, 385)
+        Me.ClientSize = New System.Drawing.Size(692, 389)
         Me.Controls.Add(Me.lblDesc)
         Me.Controls.Add(Me.lvStock)
         Me.Name = "frmView_Stock"
