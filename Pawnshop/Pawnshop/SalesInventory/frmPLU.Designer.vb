@@ -22,7 +22,7 @@ Partial Class frmPLU
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"CEL 00003", "SAMSUNG J1", "CELLPHONE", "5"}, -1)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"CEL 00003", "SAMSUNG J1", "CELLPHONE", "5"}, -1)
         Me.txtCode = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lvItem = New System.Windows.Forms.ListView()
@@ -69,7 +69,7 @@ Partial Class frmPLU
         Me.lvItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvItem.FullRowSelect = True
         Me.lvItem.GridLines = True
-        Me.lvItem.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.lvItem.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
         Me.lvItem.Location = New System.Drawing.Point(12, 46)
         Me.lvItem.MultiSelect = False
         Me.lvItem.Name = "lvItem"
@@ -146,7 +146,7 @@ Partial Class frmPLU
         Me.btnEdit.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnEdit.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEdit.Location = New System.Drawing.Point(12, 396)
+        Me.btnEdit.Location = New System.Drawing.Point(185, 396)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(75, 33)
         Me.btnEdit.TabIndex = 8
@@ -168,13 +168,12 @@ Partial Class frmPLU
         Me.btnStock.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnStock.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnStock.Location = New System.Drawing.Point(93, 396)
+        Me.btnStock.Location = New System.Drawing.Point(12, 396)
         Me.btnStock.Name = "btnStock"
-        Me.btnStock.Size = New System.Drawing.Size(75, 33)
+        Me.btnStock.Size = New System.Drawing.Size(86, 33)
         Me.btnStock.TabIndex = 10
         Me.btnStock.Text = "&Stock Card"
         Me.btnStock.UseVisualStyleBackColor = True
-        Me.btnStock.Visible = False
         '
         'frmPLU
         '

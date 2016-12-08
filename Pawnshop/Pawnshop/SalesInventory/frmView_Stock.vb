@@ -7,8 +7,12 @@ Public Class frmView_Stock
     End Sub
 
     Friend Sub Load_ItemCode(ByVal IMD As String)
-        Dim mySql As String, desc As String
+        Dim mySql As String, ds As DataSet
         mySql = String.Format("SELECT * FROM STOCK_CARD WHERE ITEMCODE = '{0}'", IMD)
+
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+        lblDesc.Text = ds.Tables(0).Rows(0).Item("DESCRIPTION")
 
         dbReaderOpen()
         lvStock.Items.Clear()
@@ -19,12 +23,11 @@ Public Class frmView_Stock
             lv.SubItems.Add(StockCard("RefNum"))
             lv.SubItems.Add(StockCard("ItemCode"))
             lv.SubItems.Add(StockCard("Description"))
-            lv.SubItems.Add(StockCard("Qty"))
+            lv.SubItems.Add(StockCard("Qty").ToString("#,##0.00"))
 
-            desc = StockCard("Description")
         End While
 
-        lblDesc.Text = desc
+
         dbReaderClose()
     End Sub
 
