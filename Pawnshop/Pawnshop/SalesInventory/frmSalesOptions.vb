@@ -1,9 +1,5 @@
 ﻿Public Class frmSalesOptions
 
-    Private Sub frmSalesOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-    End Sub
-
     Private Sub btnInventory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnInventory.Click
         Dim mySql As String
         Dim SelectedDate As Date = monCal.SelectionStart.ToShortDateString
@@ -33,7 +29,24 @@
         mySql &= vbCrLf & "GROUP BY "
         mySql &= vbCrLf & "	ITM.ITEMCODE, ITM.DESCRIPTION, ITM.CATEGORIES, ITM.SUBCAT, ITM.ONHAND"
 
-        frmReport.ReportInit(mySql, "dsInventory", "Reports\rpt_InventoryPOS.rdlc", , False)
+        Dim dic As New Dictionary(Of String, String)
+        dic.Add("txtMonthOf", SelectedDate.ToLongDateString)
+        dic.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, "dsInventory", "Reports\rpt_InventoryPOS.rdlc", dic)
         frmReport.Show()
+    End Sub
+
+    Private Sub btnIMD_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIMD.Click
+        frmImport_IMD.Show()
+    End Sub
+
+    Private Sub btnSTO_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSTO.Click
+        frmInventory.Show()
+    End Sub
+
+    Private Sub btnPTU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPTU.Click
+        frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
+        frmExtractor.Show()
     End Sub
 End Class

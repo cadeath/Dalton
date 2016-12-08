@@ -33,7 +33,7 @@ Public Class frmSales
     End Sub
 
     Private Sub frmSales_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        TestConsole()
+        If DEV_MODE Then TestConsole()
 
         ClearField()
         txtSearch.Select()
@@ -47,9 +47,9 @@ Public Class frmSales
 
         CheckOR()
 
-        If DEV_MODE Then
-            dev_Menu_SalesInventory.Show()
-        End If
+        'If DEV_MODE Then
+        '    dev_Menu_SalesInventory.Show()
+        'End If
     End Sub
 
     Private Sub CheckOR()
