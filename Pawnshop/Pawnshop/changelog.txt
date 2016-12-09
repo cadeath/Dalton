@@ -12,13 +12,14 @@ Version 1.4
  - Change DB Version 1.2.3.1
  - HOLDS AUCTION REDEEM at TBLCASH
 
-Version 1.3.0.7
+Version 1.3.1
  - Fix Reprint Save
  - Fix ORNum and ORDate on database
  - Fix Wrong Printing OR information
  - Fix bug in Loan Register
  - Fix not displaying Old and New PT in OR receipt
  - Fix double entry in saving void transaction
+ - Fix New Pawnticket issue on OR Numbers
  - Included Transaction number in remarks in every void transaction
  - Removed Checking Authorization in every renew
  - Added Remarks field in table OTP

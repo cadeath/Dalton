@@ -7,7 +7,6 @@
     "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
 
         Dim firebird As String = readValue & DBPATH
-        database.dbName = firebird
         txtDB.Text = firebird
     End Sub
 
@@ -16,6 +15,7 @@
     End Sub
 
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
+        database.dbName = txtDB.Text
         Fix_ORrenewedItem.Fixing()
     End Sub
 End Class

@@ -365,7 +365,7 @@ Public Class frmPawningItemNew
             .ExpiryDate = ExpiryDate
             .AuctionDate = AuctionDate
 
-            'REMOVE OR INFORMATION
+            'REMOVE OFFICALRECEIPT INFORMATION
             .ORDate = Nothing
             .ORNumber = 0
 
