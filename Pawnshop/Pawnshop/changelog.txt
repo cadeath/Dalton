@@ -4,23 +4,25 @@ Version 1.4
  - Added Tables ITEMMASTER, DOC, DOCLINES
  - Add InvoiceNum, STONum and SalesReturnNum at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
+ - Add view STOCK_CARD
+ - Add Reports - Inventory Report
  - Update TBLCASH and TBLITEM
  - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here)
  - Can Generate SAP Template Based STO for STOCK OUT
  - Change DB Version 1.2.3.1
  - HOLDS AUCTION REDEEM at TBLCASH
 
-Version 1.3.0.7
+Version 1.3.1
  - Fix Reprint Save
- - Added Remarks field in table OTP
+ - Fix ORNum and ORDate on database
+ - Fix Wrong Printing OR information
  - Fix bug in Loan Register
  - Fix not displaying Old and New PT in OR receipt
  - Fix double entry in saving void transaction
+ - Fix New Pawnticket issue on OR Numbers
  - Included Transaction number in remarks in every void transaction
  - Removed Checking Authorization in every renew
- - Fix Wrong Printing OR information
- 
-Version 1.3
+ - Added Remarks field in table OTP
  - Added Tables OPI, PI1, OPT, TBLITEM, TBLSPECS, TBLINTSCHEMES, TBLINTSCHEME_DETAILS
  - Added View PAWN_LIST
 

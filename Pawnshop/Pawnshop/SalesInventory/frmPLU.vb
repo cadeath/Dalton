@@ -101,7 +101,7 @@
 
             If src <> "" Then
                 mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"
-                mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00'", src)
+                mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00'", src.ToLower)
             End If
 
             ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
@@ -272,5 +272,17 @@
 
         frmIMD.Show()
         frmIMD.Load_ItemData(selectedITM)
+    End Sub
+
+    Private Sub btnStock_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStock.Click
+        If lvItem.SelectedItems.Count = 0 Then Exit Sub
+
+        Dim idx As Integer
+        idx = lvItem.FocusedItem.Index
+        Console.WriteLine(lvItem.Items(idx).Text)
+
+        frmView_Stock.Load_ItemCode(lvItem.Items(idx).Text)
+        frmView_Stock.Show()
+
     End Sub
 End Class

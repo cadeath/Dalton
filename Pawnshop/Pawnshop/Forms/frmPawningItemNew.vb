@@ -365,6 +365,10 @@ Public Class frmPawningItemNew
             .ExpiryDate = ExpiryDate
             .AuctionDate = AuctionDate
 
+            'REMOVE OFFICALRECEIPT INFORMATION
+            .ORDate = Nothing
+            .ORNumber = 0
+
             .Appraisal = PT_Entry.Appraisal
             .Principal = PT_Entry.Principal
             .AdvanceInterest = PT_Entry.AdvanceInterest
