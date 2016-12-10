@@ -101,6 +101,10 @@ Public Class frmInventory
                             GoTo FAILED_VER
                         End If
                     End If
+                    If WhsCode <> BranchCode Then
+                        MsgBox("INVALID BRANCH", MsgBoxStyle.Critical)
+                        GoTo FAILED_VER
+                    End If
 
                     If STODate = Nothing Then
                         STODate = DateTime.Parse(vstring(5)).ToString("MM/dd/yyyy")
