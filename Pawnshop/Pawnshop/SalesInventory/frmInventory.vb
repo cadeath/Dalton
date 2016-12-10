@@ -79,12 +79,14 @@ Public Class frmInventory
                 End If
 
                 If idx > 1 Then
+                    Dim itemQty As Double = CDbl(vstring(2).Replace(",", "").Replace("""", ""))
+
                     'EXCLUDE HEADERS
                     Dim invItem As New cItem(cItem.DocumentType.GoodsReceipt)
                     With invItem
                         .ItemCode = vstring(0)
                         .Description = vstring(1)
-                        .Qty = vstring(2)
+                        .Qty = itemQty
                         .Remarks = String.Format("STO# {0:000000}", CInt(vstring(4)))
                         .Load_ItemCode()
                     End With
