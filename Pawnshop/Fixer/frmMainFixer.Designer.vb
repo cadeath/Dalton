@@ -42,6 +42,7 @@ Partial Class frmMainFixer
         '
         Me.txtDB.Location = New System.Drawing.Point(6, 19)
         Me.txtDB.Name = "txtDB"
+        Me.txtDB.ReadOnly = True
         Me.txtDB.Size = New System.Drawing.Size(260, 20)
         Me.txtDB.TabIndex = 16
         '

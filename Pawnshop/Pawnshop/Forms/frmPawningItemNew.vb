@@ -368,10 +368,14 @@ Public Class frmPawningItemNew
             'REMOVE OFFICALRECEIPT INFORMATION
             .ORDate = Nothing
             .ORNumber = 0
+            .DaysOverDue = 0
+            .Penalty = 0
+            .RenewDue = 0
+            .RedeemDue = 0
+            .ServiceCharge = IIf(isOldItem, 0, CInt(PawnServiceCharge))
 
             .Appraisal = PT_Entry.Appraisal
             .Principal = PT_Entry.Principal
-            .AdvanceInterest = PT_Entry.AdvanceInterest
             .NetAmount = PT_Entry.NetAmount
 
             .Status = "R"
@@ -382,8 +386,6 @@ Public Class frmPawningItemNew
             '?????????????????
 
             .AdvanceInterest = AdvanceInterest
-            .ServiceCharge = PawnServiceCharge
-            .NetAmount = NetAmount
 
             PRINT_PTNEW = .PawnTicket
             PRINT_PTOLD = .OldTicket
