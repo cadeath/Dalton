@@ -40,8 +40,8 @@
           <DataField>NoVat</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="VatRate">
-          <DataField>VatRate</DataField>
+        <Field Name="VarRate">
+          <DataField>VarRate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="VatTotal">
@@ -108,10 +108,10 @@
               <Width>1.90292in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.625in</Width>
+              <Width>0.45833in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.55208in</Width>
+              <Width>1.32291in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -217,7 +217,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Quantity</Value>
+                              <Value>Qty</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -374,7 +374,7 @@
                             <TextRun>
                               <Value>=Fields!Qty.Value</Value>
                               <Style>
-                                <Format>#,0.00;(#,0.00);'-'</Format>
+                                <Format>#,0;(#,0);'-'</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -453,7 +453,7 @@
         <DataSetName>dsReceipt</DataSetName>
         <Top>0.60083in</Top>
         <Height>0.5in</Height>
-        <Width>5.79875in</Width>
+        <Width>5.40292in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -477,7 +477,7 @@
         <rd:DefaultName>Textbox19</rd:DefaultName>
         <Top>0.28139in</Top>
         <Height>0.25in</Height>
-        <Width>1.46875in</Width>
+        <Width>1.71875in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -504,10 +504,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox20</rd:DefaultName>
-        <Top>0.06944in</Top>
-        <Left>2.56958in</Left>
+        <Top>0.02778in</Top>
+        <Left>3.02792in</Left>
         <Height>0.25in</Height>
-        <Width>2.3125in</Width>
+        <Width>2.375in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -539,7 +539,7 @@
         <Top>1.23625in</Top>
         <Left>3.62167in</Left>
         <Height>0.25in</Height>
-        <Width>2.17708in</Width>
+        <Width>1.78125in</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -559,16 +559,20 @@
             <TextRuns>
               <TextRun>
                 <Value>=Fields!DocDate.Value</Value>
-                <Style />
+                <Style>
+                  <Format>M/d/yyyy</Format>
+                </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
         <Top>0.02778in</Top>
         <Height>0.25in</Height>
-        <Width>1in</Width>
+        <Width>1.19792in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -611,7 +615,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.65291in</Height>
+    <Height>1.49666in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -624,7 +628,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>5.79875in</Width>
+  <Width>5.40292in</Width>
   <Page>
     <PageHeader>
       <Height>0.35417in</Height>
@@ -643,15 +647,15 @@
                 </TextRun>
               </TextRuns>
               <Style>
-                <TextAlign>Right</TextAlign>
+                <TextAlign>Left</TextAlign>
               </Style>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox105</rd:DefaultName>
           <Top>0.10417in</Top>
-          <Left>3.07667in</Left>
+          <Left>3.7225in</Left>
           <Height>0.25in</Height>
-          <Width>2.07625in</Width>
+          <Width>1.68042in</Width>
           <Style>
             <Border>
               <Style>None</Style>
