@@ -127,11 +127,13 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>#</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox26</rd:DefaultName>
@@ -221,7 +223,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox17</rd:DefaultName>
@@ -286,7 +290,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox27</rd:DefaultName>
@@ -316,7 +322,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ItemCode</rd:DefaultName>
@@ -346,7 +354,9 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Description</rd:DefaultName>
@@ -378,7 +388,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Qty</rd:DefaultName>
@@ -410,7 +422,9 @@
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>SalePrice</rd:DefaultName>
@@ -453,7 +467,7 @@
         <DataSetName>dsReceipt</DataSetName>
         <Top>0.60083in</Top>
         <Height>0.5in</Height>
-        <Width>5.40292in</Width>
+        <Width>5.40291in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -532,14 +546,16 @@
                 </Style>
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox21</rd:DefaultName>
         <Top>1.23625in</Top>
-        <Left>3.62167in</Left>
+        <Left>4.08in</Left>
         <Height>0.25in</Height>
-        <Width>1.78125in</Width>
+        <Width>1.32292in</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -600,9 +616,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox28</rd:DefaultName>
         <Top>1.23625in</Top>
-        <Left>2.58in</Left>
+        <Left>3.25014in</Left>
         <Height>0.25in</Height>
-        <Width>1in</Width>
+        <Width>0.76042in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -615,7 +631,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>1.49666in</Height>
+    <Height>1.59388in</Height>
     <Style />
   </Body>
   <ReportParameters>
