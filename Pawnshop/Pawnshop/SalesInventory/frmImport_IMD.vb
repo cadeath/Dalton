@@ -44,6 +44,7 @@ Public Class frmImport_IMD
             GoTo unloadObj
         End If
 
+        Me.Enabled = False
         For cnt = 2 To MaxEntries
             Dim ImportedItem As New cItemData
             With ImportedItem
@@ -65,6 +66,7 @@ Public Class frmImport_IMD
 
             AddItems(ImportedItem)
         Next
+        Me.Enabled = True
         isDone = True
 
 
@@ -134,10 +136,12 @@ unloadObj:
             Exit Sub
         End If
 
+        Me.Enabled = False
         For Each ht As DictionaryEntry In ht_ImportedItems
             Dim itm As cItemData = ht.Value
             itm.Save_ItemData()
         Next
+        Me.Enabled = True
 
         MsgBox("ItemData imported", MsgBoxStyle.Information)
         lvIMD.Items.Clear()
