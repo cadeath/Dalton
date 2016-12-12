@@ -31,12 +31,14 @@
         txtBal.Text = GetOption("MaintainingBalance")
         txtRevolving.Text = GetOption("RevolvingFund")
         txtCashInBank.Text = GetSAPAccount("Cash in Bank")
+        txtCustomerCode.Text = GetOption("CustomerCode")
 
         If locked Then
             txtCode.Enabled = False
             txtName.Enabled = False
             txtArea.Enabled = False
             txtRevolving.Enabled = False
+            txtCustomerCode.Enabled = False
         End If
 
         'Second
@@ -85,6 +87,7 @@
             UpdateOptions("RevolvingFund", txtRevolving.Text, isOTPEnable)
             UpdateOptions("LOCKED", "YES", isOTPEnable)
             InsertSAPCount(txtRevolving.Text)
+            UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
             BranchCode = txtCode.Text
             branchName = txtName.Text
