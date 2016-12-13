@@ -359,6 +359,7 @@
                 frmPawningItemNew.Show()
                 frmPawningItemNew.Load_PawnTicket(pt_Selected)
                 frmPawningItemNew.Renew()
+                frmPawningItemNew.btnRenew.Text = "&Cancel"
 
             End If
         End If
@@ -386,7 +387,7 @@
                 frmPawningItemNew.Show()
                 frmPawningItemNew.Load_PawnTicket(pt_Selected)
                 frmPawningItemNew.Redeem()
-
+                frmPawningItemNew.btnRedeem.Text = "&Cancel"
             End If
         End If
     End Sub

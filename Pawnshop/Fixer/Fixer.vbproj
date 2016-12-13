@@ -130,6 +130,13 @@
     <Compile Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Fix_ORrenewedItem.vb" />
+    <Compile Include="frmMainFixer.Designer.vb">
+      <DependentUpon>frmMainFixer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainFixer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Migrate\frmLoading.Designer.vb">
       <DependentUpon>frmLoading.vb</DependentUpon>
     </Compile>
@@ -211,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CashInBank\frmMain2.resx">
       <DependentUpon>frmMain2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainFixer.resx">
+      <DependentUpon>frmMainFixer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrate\frmLoading.resx">
       <DependentUpon>frmLoading.vb</DependentUpon>
