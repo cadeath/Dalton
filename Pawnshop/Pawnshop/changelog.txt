@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.3.1.1
+ - Fix Bug in Pawned Item Computation
+
 Version 1.3.1
  - Fix Reprint Save
  - Fix ORNum and ORDate on database
