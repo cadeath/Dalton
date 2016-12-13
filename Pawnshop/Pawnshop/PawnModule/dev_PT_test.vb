@@ -60,7 +60,7 @@
 
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
         Dim pawnSpecs As New CollectionPawnItemSpecs
-        PawnClass.LoadItem(GetItemClassIDByName(cboItem.Text))
+        PawnClass.LoadItem(GetItemClassIDByName(cboItem.Text), 1)
         Dim i As Integer = 0
         For Each spec As ItemSpecs In PawnClass.ItemSpecifications
             Dim spc As New PawnItemSpec
@@ -119,7 +119,7 @@
 
     Private Sub cboItem_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboItem.SelectedIndexChanged
         PawnClass = New ItemClass
-        PawnClass.LoadItem(GetItemClassIDByName(cboItem.Text))
+        PawnClass.LoadItem(GetItemClassIDByName(cboItem.Text), 1)
 
         lvSpecs.Items.Clear()
         For Each spec As ItemSpecs In PawnClass.ItemSpecifications
