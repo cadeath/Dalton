@@ -750,8 +750,6 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
-        frmMain.SettingsToolStripMenuItem.Enabled = False
         ClearFields()
         LoadAppraisers()
 
@@ -1521,9 +1519,5 @@ Public Class frmPawningItemNew
         End With
         ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
         database.SaveEntry(ds)
-    End Sub
-
-    Private Sub frmPawningItemNew_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        frmMain.SettingsToolStripMenuItem.Enabled = True
     End Sub
 End Class

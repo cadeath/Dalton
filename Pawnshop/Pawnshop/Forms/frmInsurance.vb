@@ -6,8 +6,6 @@
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
-        frmMain.SettingsToolStripMenuItem.Enabled = False
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
@@ -228,7 +226,5 @@
         End If
     End Sub
 
-    Private Sub frmInsurance_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        frmMain.SettingsToolStripMenuItem.Enabled = True
-    End Sub
+
 End Class

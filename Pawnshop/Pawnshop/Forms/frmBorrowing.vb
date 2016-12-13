@@ -6,8 +6,6 @@
     Dim newborrow = String.Format("{1}{0:000000}", currentBornum, BranchCode)
 
     Private Sub frmBorrowing_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
-        frmMain.SettingsToolStripMenuItem.Enabled = False
         ClearFields()
         LoadLastRefNum()
         LoadBranches()
@@ -214,7 +212,4 @@
         frmBorrowBrowse.Show()
     End Sub
 
-    Private Sub frmBorrowing_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        frmMain.SettingsToolStripMenuItem.Enabled = True
-    End Sub
 End Class

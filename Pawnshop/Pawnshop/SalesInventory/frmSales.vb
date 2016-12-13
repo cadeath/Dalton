@@ -33,8 +33,6 @@ Public Class frmSales
     End Sub
 
     Private Sub frmSales_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
-        frmMain.SettingsToolStripMenuItem.Enabled = False
         If DEV_MODE Then TestConsole()
 
         ClearField()
@@ -664,7 +662,4 @@ Public Class frmSales
     End Function
 #End Region
 
-    Private Sub frmSales_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
-        frmMain.SettingsToolStripMenuItem.Enabled = True
-    End Sub
 End Class
