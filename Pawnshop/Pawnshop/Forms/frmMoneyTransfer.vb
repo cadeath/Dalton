@@ -295,6 +295,8 @@ Public Class frmMoneyTransfer
     End Sub
 
     Private Sub frmMoneyTransfer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
+        frmMain.SettingsToolStripMenuItem.Enabled = False
         Main()
         ClearField()
         LockFields(True)
@@ -863,5 +865,9 @@ Public Class frmMoneyTransfer
         If isEnter(e) Then
             btnPost.PerformClick()
         End If
+    End Sub
+
+    Private Sub frmMoneyTransfer_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        frmMain.SettingsToolStripMenuItem.Enabled = True
     End Sub
 End Class

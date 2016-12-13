@@ -38,6 +38,8 @@ Partial Class frmSettings
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtCashInvoice = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.txtMRNum = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtMENum = New System.Windows.Forms.TextBox()
@@ -55,8 +57,6 @@ Partial Class frmSettings
         Me.printerPT = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtCashInvoice = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -238,6 +238,25 @@ Partial Class frmSettings
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Next Control Number"
         '
+        'txtCashInvoice
+        '
+        Me.txtCashInvoice.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCashInvoice.Location = New System.Drawing.Point(110, 187)
+        Me.txtCashInvoice.Name = "txtCashInvoice"
+        Me.txtCashInvoice.Size = New System.Drawing.Size(100, 22)
+        Me.txtCashInvoice.TabIndex = 6
+        Me.txtCashInvoice.Text = "35"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(17, 191)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(51, 16)
+        Me.Label14.TabIndex = 26
+        Me.Label14.Text = "Invoice"
+        '
         'txtMRNum
         '
         Me.txtMRNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -402,25 +421,6 @@ Partial Class frmSettings
         Me.Label7.Size = New System.Drawing.Size(81, 16)
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Pawn Ticket"
-        '
-        'txtCashInvoice
-        '
-        Me.txtCashInvoice.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCashInvoice.Location = New System.Drawing.Point(110, 187)
-        Me.txtCashInvoice.Name = "txtCashInvoice"
-        Me.txtCashInvoice.Size = New System.Drawing.Size(100, 22)
-        Me.txtCashInvoice.TabIndex = 6
-        Me.txtCashInvoice.Text = "35"
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(17, 191)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(51, 16)
-        Me.Label14.TabIndex = 26
-        Me.Label14.Text = "Invoice"
         '
         'frmSettings
         '
