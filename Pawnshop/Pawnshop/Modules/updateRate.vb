@@ -20,12 +20,15 @@ Module updateRate
             dsRate = bf.Deserialize(fs)
         Catch ex As Exception
             MsgBox("It seems the file is being tampered.", MsgBoxStyle.Critical)
+            Log_Report(String.Format("[{0}] - ", url) & ex.ToString)
             fs.Close()
             isFailed = True
+            If isFailed Then Exit Sub
         End Try
         fs.Close()
+
         For Each tbl As DataTable In dsRate.Tables
-            If isFailed Then Exit Sub
+
             fillData = tbl.TableName
             mySql = "SELECT * FROM " & fillData
             If dbSrc <> "" Then database.dbName = dbSrc
@@ -101,7 +104,7 @@ Module updateRate
             Next
             Dim SetGenerator As String = String.Format("SET GENERATOR {0}_{1}_GEN TO {2}", fillData, ID, dsRate.Tables(fillData).Rows.Count)
             RunCommand(SetGenerator)
-        Next
+            Next
         MsgBox("System Updated", MsgBoxStyle.Information)
     End Sub
     Private Function ErrCheck(ByVal str As String) As String
