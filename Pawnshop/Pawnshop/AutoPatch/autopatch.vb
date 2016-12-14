@@ -95,5 +95,8 @@ err:
         GENERATOR &= vbCrLf & String.Format("IF (NEW.""{1}"" IS NULL) THEN NEW.""{1}"" = GEN_ID(""{0}_{1}_GEN"", 1);", tbl, id)
         GENERATOR &= vbCrLf & "END;"
         RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("ALTER TABLE {0} ADD PRIMARY KEY ({1});", tbl, id)
+        RunCommand(GENERATOR) 'ADDING PRIMARY KEY
     End Sub
 End Module
