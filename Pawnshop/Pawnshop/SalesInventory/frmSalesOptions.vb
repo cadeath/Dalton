@@ -41,6 +41,12 @@
         frmImport_IMD.Show()
     End Sub
 
+
+    Private Sub btnRePrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRePrint.Click
+        frmPrint.Show()
+    End Sub
+
+
     Private Sub btnSTO_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSTO.Click
         frmInventory.Show()
     End Sub
@@ -49,4 +55,5 @@
         frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
         frmExtractor.Show()
     End Sub
+
 End Class
