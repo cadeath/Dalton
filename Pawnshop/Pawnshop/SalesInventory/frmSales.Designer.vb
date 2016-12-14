@@ -181,7 +181,7 @@ Partial Class frmSales
         '
         'tsButton
         '
-        Me.tsButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbIMD, Me.tsbPLU, Me.tsbtnAuction, Me.ToolStripSeparator1, Me.tsbCustomer, Me.ToolStripSeparator2, Me.tsbCash, Me.tsbCheck, Me.tsbRefund, Me.tsbSalesReturn, Me.ToolStripSeparator3, Me.tsbtnOut, Me.tsbReceipt, Me.ToolStripSeparator4, Me.tsbtnOption})
+        Me.tsButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbIMD, Me.tsbPLU, Me.tsbtnAuction, Me.ToolStripSeparator1, Me.tsbCustomer, Me.ToolStripSeparator2, Me.tsbCash, Me.tsbCheck, Me.tsbRefund, Me.tsbSalesReturn, Me.tsbtnOut, Me.ToolStripSeparator3, Me.tsbReceipt, Me.ToolStripSeparator4, Me.tsbtnOption})
         Me.tsButton.Location = New System.Drawing.Point(0, 0)
         Me.tsButton.Name = "tsButton"
         Me.tsButton.Size = New System.Drawing.Size(890, 25)

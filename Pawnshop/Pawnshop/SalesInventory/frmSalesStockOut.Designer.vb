@@ -25,12 +25,12 @@ Partial Class frmSalesStockOut
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSalesStockOut))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtControl = New System.Windows.Forms.TextBox()
-        Me.txtBranch = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtParticular = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnAccept = New System.Windows.Forms.Button()
+        Me.cboLocation = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'Label1
@@ -50,18 +50,9 @@ Partial Class frmSalesStockOut
         Me.txtControl.Location = New System.Drawing.Point(119, 12)
         Me.txtControl.Name = "txtControl"
         Me.txtControl.ReadOnly = True
-        Me.txtControl.Size = New System.Drawing.Size(155, 22)
+        Me.txtControl.Size = New System.Drawing.Size(199, 22)
         Me.txtControl.TabIndex = 1
         Me.txtControl.Text = "000"
-        '
-        'txtBranch
-        '
-        Me.txtBranch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBranch.Location = New System.Drawing.Point(119, 40)
-        Me.txtBranch.Name = "txtBranch"
-        Me.txtBranch.Size = New System.Drawing.Size(155, 22)
-        Me.txtBranch.TabIndex = 0
-        Me.txtBranch.Text = "000"
         '
         'Label2
         '
@@ -79,7 +70,7 @@ Partial Class frmSalesStockOut
         Me.txtParticular.Location = New System.Drawing.Point(12, 89)
         Me.txtParticular.Multiline = True
         Me.txtParticular.Name = "txtParticular"
-        Me.txtParticular.Size = New System.Drawing.Size(262, 68)
+        Me.txtParticular.Size = New System.Drawing.Size(306, 68)
         Me.txtParticular.TabIndex = 1
         Me.txtParticular.Text = "000"
         '
@@ -95,7 +86,7 @@ Partial Class frmSalesStockOut
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(199, 163)
+        Me.btnCancel.Location = New System.Drawing.Point(243, 163)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 33)
         Me.btnCancel.TabIndex = 3
@@ -104,23 +95,33 @@ Partial Class frmSalesStockOut
         '
         'btnAccept
         '
-        Me.btnAccept.Location = New System.Drawing.Point(118, 163)
+        Me.btnAccept.Location = New System.Drawing.Point(162, 163)
         Me.btnAccept.Name = "btnAccept"
         Me.btnAccept.Size = New System.Drawing.Size(75, 33)
         Me.btnAccept.TabIndex = 2
         Me.btnAccept.Text = "&Accept"
         Me.btnAccept.UseVisualStyleBackColor = True
         '
+        'cboLocation
+        '
+        Me.cboLocation.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.cboLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboLocation.FormattingEnabled = True
+        Me.cboLocation.Location = New System.Drawing.Point(118, 39)
+        Me.cboLocation.Name = "cboLocation"
+        Me.cboLocation.Size = New System.Drawing.Size(200, 21)
+        Me.cboLocation.TabIndex = 5
+        '
         'frmSalesStockOut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(288, 208)
+        Me.ClientSize = New System.Drawing.Size(328, 208)
+        Me.Controls.Add(Me.cboLocation)
         Me.Controls.Add(Me.btnAccept)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.txtParticular)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.txtBranch)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtControl)
         Me.Controls.Add(Me.Label1)
@@ -136,10 +137,10 @@ Partial Class frmSalesStockOut
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtControl As System.Windows.Forms.TextBox
-    Friend WithEvents txtBranch As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtParticular As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnAccept As System.Windows.Forms.Button
+    Friend WithEvents cboLocation As System.Windows.Forms.ComboBox
 End Class
