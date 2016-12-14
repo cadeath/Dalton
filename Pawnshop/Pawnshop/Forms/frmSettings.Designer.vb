@@ -38,6 +38,8 @@ Partial Class frmSettings
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtCashInvoice = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.txtMRNum = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtMENum = New System.Windows.Forms.TextBox()
@@ -55,6 +57,8 @@ Partial Class frmSettings
         Me.printerPT = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtCustomerCode = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -62,6 +66,8 @@ Partial Class frmSettings
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label15)
+        Me.GroupBox2.Controls.Add(Me.txtCustomerCode)
         Me.GroupBox2.Controls.Add(Me.txtCashInBank)
         Me.GroupBox2.Controls.Add(Me.lblSAP01)
         Me.GroupBox2.Controls.Add(Me.txtRevolving)
@@ -76,7 +82,7 @@ Partial Class frmSettings
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(275, 236)
+        Me.GroupBox2.Size = New System.Drawing.Size(275, 286)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Branch"
@@ -197,7 +203,7 @@ Partial Class frmSettings
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(723, 211)
+        Me.btnClose.Location = New System.Drawing.Point(725, 261)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(85, 37)
         Me.btnClose.TabIndex = 3
@@ -206,7 +212,7 @@ Partial Class frmSettings
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(636, 211)
+        Me.btnUpdate.Location = New System.Drawing.Point(638, 261)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(81, 37)
         Me.btnUpdate.TabIndex = 2
@@ -215,6 +221,8 @@ Partial Class frmSettings
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtCashInvoice)
+        Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.txtMRNum)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.txtMENum)
@@ -229,10 +237,29 @@ Partial Class frmSettings
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Location = New System.Drawing.Point(293, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(230, 193)
+        Me.GroupBox1.Size = New System.Drawing.Size(230, 236)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Next Control Number"
+        '
+        'txtCashInvoice
+        '
+        Me.txtCashInvoice.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCashInvoice.Location = New System.Drawing.Point(110, 187)
+        Me.txtCashInvoice.Name = "txtCashInvoice"
+        Me.txtCashInvoice.Size = New System.Drawing.Size(100, 22)
+        Me.txtCashInvoice.TabIndex = 6
+        Me.txtCashInvoice.Text = "35"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(17, 191)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(51, 16)
+        Me.Label14.TabIndex = 26
+        Me.Label14.Text = "Invoice"
         '
         'txtMRNum
         '
@@ -399,11 +426,30 @@ Partial Class frmSettings
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Pawn Ticket"
         '
+        'txtCustomerCode
+        '
+        Me.txtCustomerCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCustomerCode.Location = New System.Drawing.Point(6, 249)
+        Me.txtCustomerCode.Name = "txtCustomerCode"
+        Me.txtCustomerCode.Size = New System.Drawing.Size(249, 22)
+        Me.txtCustomerCode.TabIndex = 21
+        Me.txtCustomerCode.Text = "10000"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(7, 230)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(101, 16)
+        Me.Label15.TabIndex = 22
+        Me.Label15.Text = "Customer Code"
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(822, 260)
+        Me.ClientSize = New System.Drawing.Size(822, 310)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnUpdate)
@@ -455,4 +501,8 @@ Partial Class frmSettings
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtCashInBank As System.Windows.Forms.TextBox
     Friend WithEvents lblSAP01 As System.Windows.Forms.Label
+    Friend WithEvents txtCashInvoice As System.Windows.Forms.TextBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents txtCustomerCode As System.Windows.Forms.TextBox
 End Class

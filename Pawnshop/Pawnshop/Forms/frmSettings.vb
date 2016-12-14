@@ -31,12 +31,14 @@
         txtBal.Text = GetOption("MaintainingBalance")
         txtRevolving.Text = GetOption("RevolvingFund")
         txtCashInBank.Text = GetSAPAccount("Cash in Bank")
+        txtCustomerCode.Text = GetOption("CustomerCode")
 
         If locked Then
             txtCode.Enabled = False
             txtName.Enabled = False
             txtArea.Enabled = False
             txtRevolving.Enabled = False
+            txtCustomerCode.Enabled = False
         End If
 
         'Second
@@ -46,6 +48,7 @@
         txtInsurance.Text = GetOption("InsuranceLastNum")
         txtMENum.Text = GetOption("MEnumLast")
         txtMRNum.Text = GetOption("MRNumLast")
+        txtCashInvoice.Text = GetOption("InvoiceNum")
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -84,6 +87,7 @@
             UpdateOptions("RevolvingFund", txtRevolving.Text, isOTPEnable)
             UpdateOptions("LOCKED", "YES", isOTPEnable)
             InsertSAPCount(txtRevolving.Text)
+            UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
             BranchCode = txtCode.Text
             branchName = txtName.Text
@@ -99,6 +103,7 @@
         UpdateOptions("InsuranceLastNum", txtInsurance.Text, isOTPEnable)
         UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
         UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
+        UpdateOptions("InvoiceNum", txtMRNum.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)

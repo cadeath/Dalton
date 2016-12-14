@@ -128,6 +128,7 @@ Module mod_system
             frmMain.dateSet = False
         End If
     End Sub
+
     ''' <summary>
     ''' This function will segregate all data from tblPawn
     ''' where AuctionDate is = to the CurrentDate.
@@ -365,6 +366,7 @@ Module mod_system
 
         Return Not (Char.IsDigit(e.KeyChar))
     End Function
+
     ''' <summary>
     ''' this function check if the input is numeric or character.
     ''' </summary>
@@ -544,7 +546,6 @@ Module mod_system
 
         sourceArray(newPosition) = newValue
     End Sub
-
 
     ' HASHTABLE FUNCTIONS
     Public Function GetIDbyName(name As String, ht As Hashtable) As Integer

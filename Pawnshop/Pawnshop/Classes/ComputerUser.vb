@@ -258,6 +258,22 @@ Public Class ComputerUser
         End Get
     End Property
 
+    Private _stockout As Boolean
+    Public ReadOnly Property canStockOut() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _stockout
+        End Get
+    End Property
+
+    Private _POSreturn As Boolean
+    Public ReadOnly Property canReturn() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _POSreturn
+        End Get
+    End Property
+
     'Manager
     Private _userManagement As Boolean
     Public ReadOnly Property canUserManage() As Boolean
@@ -386,9 +402,11 @@ Public Class ComputerUser
         _viewUserManagement = IIf(parts(y).Substring(8, 1) = "1", True, False)
         _viewRates = IIf(parts(y).Substring(9, 1) = "1", True, False)
         _openStore = IIf(parts(y).Substring(10, 1) = "1", True, False)
+        _stockout = IIf(parts(y).Substring(11, 1) = "1", True, False)
+        _POSreturn = IIf(parts(y).Substring(12, 1) = "1", True, False)
 
         privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _
-                    _viewUserManagement, _viewRates, _openStore}
+                    _viewUserManagement, _viewRates, _openStore, _stockout, _POSreturn}
         For Each var As Boolean In privList
             If var Then _level = "Supervisor"
         Next
@@ -430,8 +448,8 @@ Public Class ComputerUser
 
             For cnt As Integer = 0 To TabCnt - 1
                 Select Case cnt
-                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
-                    Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
+                    Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore, _stockout, _POSreturn}
                     Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
                     Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
 
@@ -497,7 +515,7 @@ Public Class ComputerUser
                         finalChunk &= "0"
                     Next
                     finalChunk &= "|"
-                Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore, _stockout, _POSreturn}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
