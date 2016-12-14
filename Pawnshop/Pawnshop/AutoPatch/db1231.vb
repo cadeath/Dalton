@@ -7,6 +7,7 @@
         Try
 
             Table_Inventory()
+            Fields_Added()
 
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
@@ -15,10 +16,36 @@
         End Try
     End Sub
 
+    Private Sub Fields_Added()
+        Dim mySql As String
+        Console.WriteLine("Commencing adding fields...")
+
+        'TBLMAINTENANCE
+        UpdateOptions("InvoiceNum", 1)
+        UpdateOptions("STONum", 1)
+        UpdateOptions("SalesReturnNum", 1)
+
+        'TBLITEM
+        RunCommand("ALTER TABLE TBLITEM ADD SALESID SMALLINT DEFAULT '0' NOT NULL;")
+        RunCommand("ALTER TABLE TBLITEM ADD COSTID SMALLINT DEFAULT '0' NOT NULL;")
+
+        mySql = "ALTER TABLE TBLITEM"
+        mySql &= vbCrLf & "ALTER COLUMN SALESID "
+        mySql &= vbCrLf & "POSITION 4;"
+        RunCommand(mySql)
+
+        mySql = "ALTER TABLE TBLITEM"
+        mySql &= vbCrLf & "ALTER COLUMN COSTID "
+        mySql &= vbCrLf & "POSITION 5;"
+        RunCommand(mySql)
+    End Sub
+
     Private Sub Table_Inventory()
         Dim itmMaster As String
         Dim inv As String, invlines As String
         Dim doc As String, docLines As String
+
+        Console.WriteLine("Commencing adding tables...")
 
         itmMaster = "CREATE TABLE ITEMMASTER ("
         itmMaster &= vbCrLf & "  ITEMID BIGINT NOT NULL,"
