@@ -2,18 +2,53 @@
     Const ALLOWABLE_VERSION As String = "1.2.2.5"
     Const LATEST_VERSION As String = "1.2.3.1"
 
+    Private strSql As String
+
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
 
             Table_Inventory()
             Fields_Added()
+            Views_Adding()
 
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
         Catch ex As Exception
             Log_Report(String.Format("[{0}]" & ex.ToString, LATEST_VERSION))
         End Try
+    End Sub
+
+    Private Sub Views_Adding()
+        Console.WriteLine("Commencing adding views...")
+
+        strSql = "CREATE VIEW STOCK_CARD("
+        strSql &= vbCrLf & "  DOCTYPE, DOCDATE, REFNUM, ITEMCODE, DESCRIPTION, QTY)"
+        strSql &= vbCrLf & "AS "
+        strSql &= vbCrLf & "SELECT "
+        strSql &= vbCrLf & " 'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY "
+        strSql &= vbCrLf & "FROM "
+        strSql &= vbCrLf & " INVLINES IL "
+        strSql &= vbCrLf & " INNER JOIN INV I "
+        strSql &= vbCrLf & " ON I.DOCID = IL.DOCID "
+        strSql &= vbCrLf & ""
+        strSql &= vbCrLf & "UNION "
+        strSql &= vbCrLf & "--OUT "
+        strSql &= vbCrLf & "SELECT "
+        strSql &= vbCrLf & " ( "
+        strSql &= vbCrLf & "  CASE D.DOCTYPE  "
+        strSql &= vbCrLf & "      WHEN 0 THEN 'SALES' "
+        strSql &= vbCrLf & "        WHEN 1 THEN 'SALES' "
+        strSql &= vbCrLf & "        WHEN 2 THEN 'RECALL' "
+        strSql &= vbCrLf & "        WHEN 3 THEN 'RETURNS' "
+        strSql &= vbCrLf & "        WHEN 4 THEN 'STOCKOUT' "
+        strSql &= vbCrLf & "    END "
+        strSql &= vbCrLf & " ) , D.DOCDATE, D.CODE AS REFNUM, DL.ITEMCODE, DL.DESCRIPTION, DL.QTY "
+        strSql &= vbCrLf & "FROM "
+        strSql &= vbCrLf & " DOCLINES DL "
+        strSql &= vbCrLf & " INNER JOIN DOC D "
+        strSql &= vbCrLf & " ON D.DOCID = DL.DOCID; "
+        RunCommand(strSql)
     End Sub
 
     Private Sub Fields_Added()
@@ -24,6 +59,7 @@
         UpdateOptions("InvoiceNum", 1)
         UpdateOptions("STONum", 1)
         UpdateOptions("SalesReturnNum", 1)
+        UpdateOptions("CustomerCode", "CTDP 00001")
 
         'TBLITEM
         RunCommand("ALTER TABLE TBLITEM ADD SALESID SMALLINT DEFAULT '0' NOT NULL;")
@@ -38,6 +74,9 @@
         mySql &= vbCrLf & "ALTER COLUMN COSTID "
         mySql &= vbCrLf & "POSITION 5;"
         RunCommand(mySql)
+
+        strSql = "UPDATE TBLCASH SET ONHOLD = 1 WHERE CATEGORY = 'AUCTION REDEEM'"
+        RunCommand(strSql)
     End Sub
 
     Private Sub Table_Inventory()
