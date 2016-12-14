@@ -385,6 +385,19 @@
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Modules\Void.vb" />
+    <Compile Include="OTP\diagGeneralOTP.Designer.vb">
+      <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\diagGeneralOTP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\frmSample.Designer.vb">
+      <DependentUpon>frmSample.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\frmSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\OTPModule.vb" />
     <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </Compile>
@@ -824,6 +837,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
+      <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\frmSample.resx">
+      <DependentUpon>frmSample.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>

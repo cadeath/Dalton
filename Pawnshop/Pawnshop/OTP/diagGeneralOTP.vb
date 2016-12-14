@@ -16,4 +16,15 @@ Public Class diagGeneralOTP
 
         Me.Close()
     End Sub
+
+    Private Sub diagGeneralOTP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtPIN.Clear()
+        txtPIN.Focus()
+    End Sub
+
+    Private Sub txtPIN_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPIN.KeyPress
+        If isEnter(e) Then
+            btnSubmit.PerformClick()
+        End If
+    End Sub
 End Class
