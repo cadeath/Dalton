@@ -423,8 +423,10 @@ Public Class frmMigrate
                         Case "X"
                             .Item("WithDrawDate") = MigOrDate
                             .Item("Status") = MigStatus
-                        Case Else
+                        Case "L", "0", "R"
                             .Item("Status") = "A"
+                        Case Else
+                            .Item("Status") = MigStatus
                     End Select
                 End With
                 SaveEntry(DsOpi, False)
