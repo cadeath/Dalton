@@ -3,7 +3,7 @@ CHANGELOG
 Version 1.4
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
- - Add InvoiceNum, STONum and SalesReturnNum at TBLMAINTENACE
+ - Add InvoiceNum, STONum, SalesReturnNum and CustomerCode at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
  - Add view STOCK_CARD
  - Add Reports - Inventory Report
