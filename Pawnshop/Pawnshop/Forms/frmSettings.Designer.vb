@@ -57,8 +57,10 @@ Partial Class frmSettings
         Me.printerPT = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+
         Me.txtCustomerCode = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
+
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -426,7 +428,6 @@ Partial Class frmSettings
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Pawn Ticket"
         '
-        'txtCustomerCode
         '
         Me.txtCustomerCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCustomerCode.Location = New System.Drawing.Point(6, 249)
@@ -445,7 +446,6 @@ Partial Class frmSettings
         Me.Label15.TabIndex = 22
         Me.Label15.Text = "Customer Code"
         '
-        'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font

@@ -3,6 +3,7 @@
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
 
+
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
 
@@ -119,7 +120,10 @@
             Exit Sub
         End If
 
+        If CheckFormActive() Then Exit Sub
+
         frmSettings.Show()
+
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click

@@ -661,4 +661,5 @@ Public Class frmSales
         Return False
     End Function
 #End Region
+
 End Class
