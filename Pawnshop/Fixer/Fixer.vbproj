@@ -130,12 +130,38 @@
     <Compile Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FixPawnlistView\frmFixView.Designer.vb">
+      <DependentUpon>frmFixView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FixPawnlistView\frmFixView.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fix_ORrenewedItem.vb" />
+    <Compile Include="frmMainFixer.Designer.vb">
+      <DependentUpon>frmMainFixer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainFixer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Migrate\frmLoading.Designer.vb">
+      <DependentUpon>frmLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrate\frmLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Migrate\frmMigrate.Designer.vb">
       <DependentUpon>frmMigrate.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrate\frmMigrate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Migrate\frmUpdate.Designer.vb">
+      <DependentUpon>frmUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrate\frmUpdate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Migrate\updateRate.vb" />
     <Compile Include="Modules\Fixing_Mlang.vb" />
     <Compile Include="Modules\fix_mechanism.vb" />
     <Compile Include="frmMain.vb">
@@ -193,14 +219,26 @@
     <EmbeddedResource Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.resx">
       <DependentUpon>frmFixJournalAndDailyTimeLog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FixPawnlistView\frmFixView.resx">
+      <DependentUpon>frmFixView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CashInBank\frmMain2.resx">
       <DependentUpon>frmMain2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMainFixer.resx">
+      <DependentUpon>frmMainFixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrate\frmLoading.resx">
+      <DependentUpon>frmLoading.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrate\frmMigrate.resx">
       <DependentUpon>frmMigrate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrate\frmUpdate.resx">
+      <DependentUpon>frmUpdate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -217,6 +255,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fixer_TemporaryKey.pfx" />
+    <None Include="Migrate\Interest.cir">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Migrate\Item.cir">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -282,6 +326,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

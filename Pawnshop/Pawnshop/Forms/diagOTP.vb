@@ -3,38 +3,8 @@
 Public Class diagOTP
 
     Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
-        Dim mod_name As String = ""
-
-        If FormType = OTPType.UserManagement Then
-            mod_name = "User Management"
-
-        ElseIf FormType = OTPType.Settings Then
-            mod_name = "Settings"
-
-        ElseIf FormType = OTPType.VoidInsurance Then
-            mod_name = "Void Insurance"
-
-        ElseIf FormType = OTPType.VoidPawning Then
-            mod_name = "Void Pawning"
-
-        ElseIf FormType = OTPType.VoidBranchToBranch Then
-            mod_name = "Void Branch To Branch"
-
-        ElseIf FormType = OTPType.VoidMoneyTransfer Then
-            mod_name = "Void Money Transfer"
-
-        ElseIf FormType = OTPType.VoidMoneyExchange Then
-            mod_name = "Void Money Exchange"
-
-        ElseIf FormType = OTPType.VoidCashInOut Then
-            mod_name = "Void Cash In/Out"
-
-        ElseIf FormType = OTPType.Pullout Then
-            mod_name = "PullOut"
-
-        End If
-
-        If otp.VerifyPIN(txtPIN.Text, mod_name) Then
+       
+        If otp.VerifyPIN(txtPIN.Text) Then
             Me.Close()
             OTPGenerate()
         Else

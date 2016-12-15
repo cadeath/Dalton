@@ -24,25 +24,24 @@
         Dim fillData As String = "dsPawning", mySql As String
 
         mySql = "SELECT "
-        mySql &= vbCrLf & "    P.PAWNTICKET, P.CLIENT, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, "
-        mySql &= vbCrLf & "    P.DESCRIPTION, P.APPRAISAL, P.PRINCIPAL, P.NETAMOUNT, "
-        mySql &= vbCrLf & "    P.RENEWDUE + P2.RENEWDUE AS RENEWDUE, "
-        mySql &= vbCrLf & "    P.DELAYINTEREST + P2.DELAYINTEREST AS INTEREST, P.PENALTY + P2.PENALTY AS PENALTY, "
-        mySql &= vbCrLf & "    P.ADVINT, P.SERVICECHARGE, "
-        mySql &= vbCrLf & "    CASE"
-        mySql &= vbCrLf & "    	WHEN P.OLDTICKET = 0"
-        mySql &= vbCrLf & "        THEN 'NEW'"
-        mySql &= vbCrLf & "        ELSE 'RENEW'"
-        mySql &= vbCrLf & "    END AS STATUS"
-        mySql &= vbCrLf & "    , P2.PAWNTICKET AS NewPT, P.APPRAISER "
-        mySql &= vbCrLf & "FROM "
-        mySql &= vbCrLf & "	PAWN_LIST P LEFT JOIN PAWN_LIST P2 "
-        mySql &= vbCrLf & "    ON P.OLDTICKET = P2.PAWNTICKET "
+        mySql &= vbCrLf & "P1.PAWNTICKET, P1.CLIENT, P1.LOANDATE, P1.MATUDATE, P1.EXPIRYDATE, P1.DESCRIPTION, "
+        mySql &= vbCrLf & "P1.APPRAISAL, P1.PRINCIPAL, P1.NETAMOUNT, "
+        mySql &= vbCrLf & "CASE WHEN P2.RENEWDUE is Null "
+        mySql &= vbCrLf & "THEN 0 ELSE P2.RENEWDUE "
+        mySql &= vbCrLf & "END AS RENEWDUE, "
+        mySql &= vbCrLf & "P2.DELAYINTEREST + P1.DELAYINTEREST AS INTEREST, "
+        mySql &= vbCrLf & "P1.PENALTY + P2.PENALTY AS PENALTY,P1.ADVINT, P1.SERVICECHARGE, "
+        mySql &= vbCrLf & "CASE WHEN P1.OLDTICKET = 0 "
+        mySql &= vbCrLf & "THEN 'NEW' ELSE 'RENEW' "
+        mySql &= vbCrLf & "END AS STATUS, P2.PAWNTICKET AS NewPT, P1.APPRAISER "
+        mySql &= vbCrLf & "FROM PAWN_LIST P1 "
+        mySql &= vbCrLf & "LEFT JOIN OPT P2 "
+        mySql &= vbCrLf & "ON P1.OLDTICKET = P2.PAWNTICKET "
         mySql &= vbCrLf & "WHERE "
-        mySql &= vbCrLf & String.Format("	P.LOANDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
-        mySql &= vbCrLf & "    AND (P.OLDTICKET = 0 OR (P.OLDTICKET > 0 AND P.RENEWDUE + P2.RENEWDUE Is Not Null)) "
-        mySql &= vbCrLf & " AND P.STATUS <> 'V'"
-        mySql &= vbCrLf & " ORDER BY PAWNTICKET ASC"
+        mySql &= vbCrLf & String.Format("	P1.LOANDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= vbCrLf & "    AND (P1.OLDTICKET = 0 OR (P1.OLDTICKET > 0 AND P1.RENEWDUE + P2.RENEWDUE Is Not Null)) "
+        mySql &= vbCrLf & " AND (P1.STATUS = 'L' OR P1.STATUS = '0' OR P1.STATUS = 'R' OR P1.STATUS = 'X')"
+        mySql &= vbCrLf & " ORDER BY P1.PAWNTICKET ASC"
 
         Console.WriteLine(">>> " & mySql)
         Dim addParameter As New Dictionary(Of String, String)
@@ -74,7 +73,7 @@
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("	P.ORDATE = '{0}'", monCal.SelectionStart.ToShortDateString)
         mySql &= vbCrLf & "    AND P.REDEEMDUE <> 0 "
-        mySql &= vbCrLf & "    AND P.STATUS <> 'V' "
+        mySql &= vbCrLf & "    AND P.STATUS = 'X' "
         mySql &= vbCrLf & "    ORDER BY ORNUM ASC"
 
         Dim addParameter As New Dictionary(Of String, String)

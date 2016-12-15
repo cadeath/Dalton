@@ -49,13 +49,13 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnLoan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLoan.Click
-        If frmPawnItem.Visible = True Then
+        If frmPawningItemNew.Visible = True Then
             MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
                                             , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
                                              "Form Already Open")
         Else
-            frmPawningItemNew.NewLoan()
             frmPawningItemNew.Show()
+            frmPawningItemNew.NewLoan()
         End If
     End Sub
 
@@ -345,7 +345,7 @@
     ''' <remarks></remarks>
     Private Sub btnRenew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenew.Click
         If lvPawners.SelectedItems.Count > 0 Then
-            If frmPawnItem.Visible = True Then
+            If frmPawningItemNew.Visible = True Then
 
                 MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
                                             , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
@@ -359,6 +359,7 @@
                 frmPawningItemNew.Show()
                 frmPawningItemNew.Load_PawnTicket(pt_Selected)
                 frmPawningItemNew.Renew()
+                frmPawningItemNew.btnRenew.Text = "&Cancel"
 
             End If
         End If
@@ -372,7 +373,7 @@
     ''' <remarks></remarks>
     Private Sub btnRedeem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRedeem.Click
         If lvPawners.SelectedItems.Count > 0 Then
-            If frmPawnItem.Visible = True Then
+            If frmPawningItemNew.Visible = True Then
                 MsgBox("Close Pawn Item Form Before To Proceed Other Transaction" _
                                                            , MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2, _
                                                             "Form Already Open")
@@ -386,7 +387,7 @@
                 frmPawningItemNew.Show()
                 frmPawningItemNew.Load_PawnTicket(pt_Selected)
                 frmPawningItemNew.Redeem()
-
+                frmPawningItemNew.btnRedeem.Text = "&Cancel"
             End If
         End If
     End Sub

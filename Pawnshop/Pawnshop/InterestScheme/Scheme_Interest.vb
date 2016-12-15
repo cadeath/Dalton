@@ -123,39 +123,6 @@
         Dim mySql As String = String.Format("SELECT * FROM {0} WHERE {1}= {2} ", MainTable, "IS_ID", _schemeINTid)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-     If ds.Tables(0).Rows.Count >= 1 Then
-        With ds.Tables(MainTable).Rows(0)
-            .Item("DAYFROM") = _dayFrom
-            .Item("DAYTO") = _dayTo
-            .Item("INTEREST") = _interest
-            .Item("PENALTY") = _penalty
-            .Item("REMARKS") = _remarks
-        End With
-        database.SaveEntry(ds, False)
-
-        Else
-            Dim dsNewRow As DataRow
-            dsNewRow = ds.Tables(MainTable).NewRow
-            With dsNewRow
-                .Item("SchemeID") = _schemeID
-                .Item("DayFrom") = _dayFrom
-                .Item("DayTo") = _dayTo
-                .Item("Interest") = _interest
-                .Item("Penalty") = _penalty
-                .Item("Remarks") = _remarks
-            End With
-            ds.Tables(MainTable).Rows.Add(dsNewRow)
-            database.SaveEntry(ds)
-        End If
-
-        ' Dim mySql As String = String.Format("SELECT * FROM {0} WHERE IS_ID= {1} ", MainTable, _schemeINTid)
-        'Dim ds As DataSet = LoadSQL(mySql, MainTable)
-
-        'If ds.Tables(MainTable).Rows.Count > 1 Then
-        '    MsgBox("Unable to update record", MsgBoxStyle.Critical)
-        '    Exit Sub
-        'End If
-
         If ds.Tables(0).Rows.Count = 1 Then
             With ds.Tables(MainTable).Rows(0)
                 .Item("DAYFROM") = _dayFrom
@@ -179,8 +146,44 @@
             ds.Tables(0).Rows.Add(dsNewRow)
             database.SaveEntry(ds)
         End If
-
     End Sub
+
+    'If ds.Tables(0).Rows.Count >= 1 Then
+    '   With ds.Tables(MainTable).Rows(0)
+    '       .Item("DAYFROM") = _dayFrom
+    '       .Item("DAYTO") = _dayTo
+    '       .Item("INTEREST") = _interest
+    '       .Item("PENALTY") = _penalty
+    '       .Item("REMARKS") = _remarks
+    '   End With
+    '   database.SaveEntry(ds, False)
+
+    '   Else
+    '       Dim dsNewRow As DataRow
+    '       dsNewRow = ds.Tables(MainTable).NewRow
+    '       With dsNewRow
+    '           .Item("SchemeID") = _schemeID
+    '           .Item("DayFrom") = _dayFrom
+    '           .Item("DayTo") = _dayTo
+    '           .Item("Interest") = _interest
+    '           .Item("Penalty") = _penalty
+    '           .Item("Remarks") = _remarks
+    '       End With
+    '       ds.Tables(MainTable).Rows.Add(dsNewRow)
+    '       database.SaveEntry(ds)
+    '   End If
+
+    ' Dim mySql As String = String.Format("SELECT * FROM {0} WHERE IS_ID= {1} ", MainTable, _schemeINTid)
+    'Dim ds As DataSet = LoadSQL(mySql, MainTable)
+
+    'If ds.Tables(MainTable).Rows.Count > 1 Then
+    '    MsgBox("Unable to update record", MsgBoxStyle.Critical)
+    '    Exit Sub
+    'End If
+
+
+
+
 #End Region
 
 End Class

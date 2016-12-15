@@ -150,7 +150,7 @@ Public Class ItemClass
 #End Region
 
 #Region "Functions and Procedures"
-    Public Sub LoadItem(ByVal id As Integer)
+    Public Sub LoadItem(ByVal id As Integer, ByVal SchemeiD As Integer)
         Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemID = {0}", id)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
@@ -173,7 +173,7 @@ Public Class ItemClass
             _created = .Item("Created_At")
             _updated = .Item("Updated_At")
 
-            _interestScheme.LoadScheme(.Item("Scheme_ID"))
+            _interestScheme.LoadScheme(SchemeiD)
         End With
 
         ' Load Item Specification
@@ -194,13 +194,13 @@ Public Class ItemClass
     End Sub
 
     Public Sub Save_ItemClass()
-        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '%{0}%'", _itemClassName)
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '{0}'", _itemClassName)
         Dim ds As DataSet = LoadSQL(mySql, MainTable)
 
-        If ds.Tables(0).Rows.Count = 1 Then
-            MsgBox("Class already existed", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
+        'If ds.Tables(0).Rows.Count = 1 Then
+        '    MsgBox("Class already existed", MsgBoxStyle.Critical)
+        '    Exit Sub
+        'End If
 
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(0).NewRow

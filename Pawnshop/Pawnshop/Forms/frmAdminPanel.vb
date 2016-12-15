@@ -16,11 +16,25 @@ Public Class frmAdminPanel
     Dim fromOtherForm As Boolean = False
     Dim frmOrig As formSwitch.FormName
 
+    Dim SelectedScheme As InterestScheme
+
+    Dim SchemeModify As New InterestScheme
+
     Private Sub frmAdminPanel_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         clearfields()
         txtClassification.Focus()
 
         LoadScheme()
+
+
+        txtSchemeName.Text = ""
+        txtDescription.Text = ""
+        txtSearch.Text = ""
+        btnUpdate.Enabled = False
+        clearfields1() ''''''''''scheme
+        btnRemove.Enabled = False
+        btnUpdateScheme.Enabled = False
+        btnEdit.Enabled = False
     End Sub
 
     Friend Sub Load_ItemSpecification(ByVal Item As ItemClass)
@@ -42,6 +56,7 @@ Public Class frmAdminPanel
         SelectedItem = Item
         LoadSpec(Item.ID)
         btnUpdate.Enabled = True
+       
     End Sub
 
     Friend Sub LoadSpec(ByVal ID As Integer)
@@ -132,15 +147,15 @@ Public Class frmAdminPanel
         Return True
     End Function
 
-    Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
-        Dim isEmpty As Boolean = True
-        For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows _
-        Where (From cell As DataGridViewCell In row1.Cells Where Not String.IsNullOrEmpty(cell.Value)).Any(Function(cell) _
-        Not String.IsNullOrEmpty(Trim(cell.Value.ToString())))
-            isEmpty = False
-        Next
-        Return isEmpty
-    End Function
+    'Public Function IsDataGridViewEmpty(ByRef dataGridView As DataGridView) As Boolean
+    '    Dim isEmpty As Boolean = True
+    '    For Each row As DataGridViewRow In From row1 As DataGridViewRow In dataGridView.Rows _
+    '    Where (From cell As DataGridViewCell In row1.Cells Where Not String.IsNullOrEmpty(cell.Value)).Any(Function(cell) _
+    '    Not String.IsNullOrEmpty(Trim(cell.Value.ToString())))
+    '        isEmpty = False
+    '    Next
+    '    Return isEmpty
+    'End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If btnSave.Text = "&Save" Then
@@ -148,7 +163,7 @@ Public Class frmAdminPanel
         Else
             ModifyItems()
         End If
-       
+
     End Sub
 
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
@@ -165,6 +180,7 @@ Public Class frmAdminPanel
             btnUpdate.Text = "&Edit"
             btnSave.Enabled = False
             btnSave.Text = "&Save"
+            Load_ItemSpecification(SelectedItem)
             ReadOnlyTrue()
         End If
     End Sub
@@ -202,7 +218,7 @@ Public Class frmAdminPanel
         Next
     End Sub
 
-    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+    Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
         If e.KeyCode = Keys.Enter Then
             btnSearch.PerformClick()
         End If
@@ -305,7 +321,7 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub ModCurrency()
-       
+
         fillData = "tblCurrency"
         mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY CurrencyID ASC"
@@ -343,7 +359,7 @@ Public Class frmAdminPanel
     End Sub
 
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
-        If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
+        'If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
 
         Dim fsEsk As New System.IO.FileStream(url, IO.FileMode.CreateNew)
         Dim esk As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
@@ -385,12 +401,6 @@ Public Class frmAdminPanel
         Next
     End Sub
 
-    Private Sub txtSearch_KeyDown_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            btnSearch.PerformClick()
-        End If
-    End Sub
-
     Private Sub btnExport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExport.Click
         'If txtReferenceNumber.Text = "" Then txtReferenceNumber.Focus() : Exit Sub
         'If cmbModuleName.Text = "" Then cmbModuleName.Focus() : Exit Sub
@@ -425,7 +435,6 @@ Public Class frmAdminPanel
         'lvModule.Items.Clear()
         If ds.Tables.Count < 1 Then MsgBox("No Module Found!", MsgBoxStyle.Critical) : Exit Sub
         SFD.ShowDialog()
-        saveModname()
     End Sub
 
     Public Sub FromListView(ByVal table As DataTable, ByVal lvw As ListView)
@@ -451,15 +460,15 @@ Public Class frmAdminPanel
     Private path As String = String.Format("{1}{0}.dat", fn, str)
 
     Private Sub saveModname()
-        If txtRef.Text = Nothing Then
-            Exit Sub
-        Else
-            Dim Post_log As String = _
-          String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
+        'If txtRef.Text = Nothing Then
+        '    Exit Sub
+        'Else
+        '    Dim Post_log As String = _
+        '  String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss"))
 
-            File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtRef.Text & vbCrLf & _
-                               "Module Name: " & cmbModuleName.Text & vbCrLf & "User: " & POSuser.UserName & vbCrLf)
-        End If
+        '    File.AppendAllText(path, "Date Exported: " & Post_log & vbCrLf & "Reference No: " & txtRef.Text & vbCrLf & _
+        '                       "Module Name: " & cmbModuleName.Text & vbCrLf & "User: " & POSuser.UserName & vbCrLf)
+        'End If
     End Sub
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -543,6 +552,14 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '{0}'", txtClassification.Text)
+        Dim ds As DataSet = LoadSQL(mySql, "TBLITEM")
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            MsgBox("Class already existed", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
         With ItemSave
@@ -576,7 +593,7 @@ Public Class frmAdminPanel
                     Exit For
                 End If
             End With
-            SpecSave.SaveSpecs()
+            'SpecSave.SaveSpecs()
             ColItemsSpecs.Add(SpecSave)
         Next
         ItemSave.ItemSpecifications = ColItemsSpecs
@@ -586,6 +603,311 @@ Public Class frmAdminPanel
         rdbNo.Checked = False
         txtClassification.Focus()
         clearfields()
-        LoadScheme()
     End Sub
+
+    Private Sub cboSchemename_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboSchemename.SelectedIndexChanged
+        Console.WriteLine(GetSchemeID(cboSchemename.Text))
+    End Sub
+    '""""""""""""""""""""""""""""""""""""""""""""""""""scheme''''''''''''''""""""""""""""""""""
+
+
+    Private Sub btnSearchScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchScheme.Click
+
+        Dim secured_str As String = txtsearchscheme.Text
+        secured_str = DreadKnight(secured_str)
+        frmInterestSchemeList.txtSearch.Text = Me.txtsearchscheme.Text.ToString
+        frmInterestSchemeList.btnSearch.PerformClick()
+
+        frmInterestSchemeList.SearchSelect(secured_str, FormName.frmPawningV2_InterestScheme)
+        frmInterestSchemeList.Show()
+
+
+
+        btnUpdate.Enabled = True
+        btnEdit.Text = "&Edit"
+        btnsavescheme.Text = "&Save"
+        lvIntscheme.Items.Clear()
+        txtDescription1.Text = ""
+        txtSchemeName.Text = ""
+        clearfields1()
+    End Sub
+
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        If Not isValidsceheme() Then Exit Sub
+
+        Dim List1 As ListViewItem
+        List1 = Me.lvIntscheme.Items.Add(0)
+        List1.SubItems.Add(Me.txtDayFrom.Text)
+        List1.SubItems.Add(Me.txtDayTo.Text)
+        List1.SubItems.Add(Me.txtInterest.Text)
+        List1.SubItems.Add(Me.txtPenalty.Text)
+        List1.SubItems.Add(Me.txtRemarks.Text)
+        clearfields1()
+        btnRemove.Enabled = True
+    End Sub
+
+    Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
+
+        Try
+            If Not isValidsceheme() Then Exit Sub
+            lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
+            lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
+            lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
+            lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
+            lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+        Catch ex As Exception
+            MsgBox("Data you select has been removed.", MsgBoxStyle.Information)
+        End Try
+
+        clearfields1()
+        Label18.Text = "Update"
+        btnUpdateScheme.Enabled = False
+        btnAdd.Enabled = True
+        btnRemove.Enabled = True
+    End Sub
+
+    Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
+        If lvIntscheme.SelectedItems.Count <= 0 Then Exit Sub
+        lvIntscheme.Items.RemoveAt(lvIntscheme.SelectedIndices(0))
+        For Each item As ListViewItem In lvIntscheme.SelectedItems
+            item.Remove()
+        Next
+    End Sub
+
+    Private Sub SaveSchemes()
+        If txtSchemeName.Text = "" Then txtSchemeName.Focus()
+        If txtDescription1.Text = "" Then txtDescription1.Focus()
+        If lvIntscheme.Items.Count <= 0 Then Exit Sub
+
+        Dim ans As DialogResult = MsgBox("Do you want to save this Scheme?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+
+        Dim SchemeSave As New InterestScheme
+        Dim IntSchemeLines As New IntScheme_Lines
+
+        With SchemeSave
+            .SchemeName = txtSchemeName.Text
+            .Description = txtDescription1.Text
+        End With
+
+
+        For Each item As ListViewItem In lvIntscheme.Items
+            Dim SchemeInterest As New Scheme_Interest
+            With SchemeInterest
+                .DayFrom = item.SubItems(1).Text
+                .DayTo = item.SubItems(2).Text
+                .Interest = item.SubItems(3).Text
+                .Penalty = item.SubItems(4).Text
+                .Remarks = item.SubItems(5).Text
+            End With
+            IntSchemeLines.Add(SchemeInterest)
+        Next
+
+        SchemeSave.SchemeDetails = IntSchemeLines
+        SchemeSave.SaveScheme()
+
+        MsgBox("Scheme Saved", MsgBoxStyle.Information)
+        btnsavescheme.Text = "&Save"
+        btnEdit.Text = "&Edit"
+        btnEdit.Enabled = False
+        btnRemove.Enabled = False
+        btnUpdateScheme.Enabled = False
+
+        clearfields1()
+
+        lvIntscheme.Items.Clear()
+        txtSchemeName.Text = "" : txtSchemeName.Enabled = True
+        txtDescription1.Text = "" : txtDescription1.Enabled = True
+
+    End Sub
+
+    Private Sub Modifyschemes()
+        If txtSchemeName.Text = "" Then txtSchemeName.Focus()
+        If txtDescription1.Text = "" Then txtDescription1.Focus()
+        If lvIntscheme.Items.Count <= 0 Then Exit Sub
+
+        Dim ans As DialogResult = MsgBox("Do you want to Update this Scheme?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
+
+        Dim IntSchemeLines As New IntScheme_Lines
+        SchemeModify.SchemeID = frmInterestSchemeList.lblSchemeID.Text
+
+        SchemeModify.SchemeName = txtSchemeName.Text
+        SchemeModify.Description = txtDescription1.Text
+        SchemeModify.Update()
+
+        For Each item As ListViewItem In lvIntscheme.Items
+            Dim SchemeInterest As New Scheme_Interest
+
+
+            With SchemeInterest
+                .SchemeID = item.Text
+                .DayFrom = item.SubItems(1).Text
+                .DayTo = item.SubItems(2).Text
+                .Interest = item.SubItems(3).Text
+                .Penalty = item.SubItems(4).Text
+                .Remarks = item.SubItems(5).Text
+
+                SchemeInterest.schemeInterestID = .SchemeID
+                SchemeInterest.SchemeID = SchemeModify.SchemeID
+            End With
+            SchemeInterest.Update()
+        Next
+
+        MsgBox("Scheme Updated", MsgBoxStyle.Information)
+
+        btnsavescheme.Text = "&Save"
+        btnEdit.Text = "&Edit"
+        btnsavescheme.Enabled = True
+        btnEdit.Enabled = False
+        btnAdd.Enabled = True
+        btnRemove.Enabled = False
+        btnUpdateScheme.Enabled = False
+
+        clearfields1()
+
+        lvIntscheme.Items.Clear()
+        txtSchemeName.Text = "" : txtSchemeName.Enabled = True
+        txtDescription1.Text = "" : txtDescription1.Enabled = True
+
+    End Sub
+
+    Private Sub btnClosescheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btncLoseScheme.Click
+        Me.Close()
+    End Sub
+
+    Friend Sub LoadSchemeList(ByVal sc As InterestScheme)
+        If sc.SchemeName = "" Then Exit Sub
+
+        txtSchemeName.Text = sc.SchemeName
+        txtDescription1.Text = sc.Description
+
+        SelectedScheme = sc
+
+        reaDOnlyTruescheme()
+        btnsavescheme.Enabled = False
+        btnEdit.Enabled = True
+        txtSchemeName.Enabled = False
+        txtDescription1.Enabled = False
+        btnUpdateScheme.Enabled = False
+        btnAdd.Enabled = False
+    End Sub
+
+
+    Friend Sub clearfields1()
+        txtDayFrom.Text = ""
+        txtDayTo.Text = ""
+        txtInterest.Text = ""
+        txtPenalty.Text = ""
+        txtRemarks.Text = ""
+    End Sub
+
+    Private Sub reaDOnlyTruescheme()
+        txtDayFrom.ReadOnly = True
+        txtDayTo.ReadOnly = True
+        txtInterest.ReadOnly = True
+        txtPenalty.ReadOnly = True
+        txtRemarks.ReadOnly = True
+    End Sub
+
+    Friend Sub reaDOnlyFalseScheme()
+        txtDayFrom.ReadOnly = False
+        txtDayTo.ReadOnly = False
+        txtInterest.ReadOnly = False
+        txtPenalty.ReadOnly = False
+        txtRemarks.ReadOnly = False
+    End Sub
+
+    Private Function isValidsceheme() As Boolean
+
+        If txtDayFrom.Text = "" Then txtDayFrom.Focus() : Return False
+        If txtDayTo.Text = "" Then txtDayTo.Focus() : Return False
+        If txtInterest.Text = "" Then txtInterest.Focus() : Return False
+        If txtPenalty.Text = "" Then txtPenalty.Focus() : Return False
+        If txtRemarks.Text = "" Then txtRemarks.Focus() : Return False
+
+        Return True
+    End Function
+
+    Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEdit.Click
+        If btnEdit.Text = "&Edit" Then
+            btnEdit.Text = "&Cancel"
+            btnsavescheme.Enabled = True
+            btnsavescheme.Text = "&Update"
+            btnAdd.Enabled = True
+            btnUpdateScheme.Enabled = True
+            btnRemove.Enabled = True
+            reaDOnlyFalseScheme()
+        Else
+            Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+            If ans = Windows.Forms.DialogResult.No Then Exit Sub
+            btnEdit.Text = "&Edit"
+            btnEdit.Enabled = False
+            btnsavescheme.Enabled = False
+            btnsavescheme.Text = "&Save"
+            btnsavescheme.Enabled = True
+            lvIntscheme.Items.Clear()
+            txtDescription1.Text = "" : txtDescription1.Enabled = True
+            txtSchemeName.Text = "" : txtSchemeName.Enabled = True
+            btnUpdateScheme.Enabled = False
+            btnRemove.Enabled = False
+        End If
+    End Sub
+
+    Private Sub btnsavescheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnsavescheme.Click
+        If btnsavescheme.Text = "&Save" Then
+            SaveSchemes()
+        Else
+            Modifyschemes()
+        End If
+    End Sub
+
+    Private Sub txtsearchscheme_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtsearchscheme.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnSearchScheme.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtDayFrom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayFrom.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtDayTo_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtDayTo.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtInterest_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInterest.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtPenalty_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPenalty.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtRemarks_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtRemarks.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If Label18.Text = "Update".ToString Then
+                btnAdd.PerformClick()
+            ElseIf Label18.Text = "Modify" Then
+                btnUpdateScheme.PerformClick()
+            End If
+        End If
+    End Sub
+
+    Private Sub lvIntscheme_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvIntscheme.DoubleClick
+        With lvIntscheme
+            txtDayFrom.Text = .SelectedItems(0).SubItems(1).Text
+            txtDayTo.Text = .SelectedItems(0).SubItems(2).Text
+            txtInterest.Text = .SelectedItems(0).SubItems(3).Text
+            txtPenalty.Text = .SelectedItems(0).SubItems(4).Text
+            txtRemarks.Text = .SelectedItems(0).SubItems(5).Text
+        End With
+        Label18.Text = "Modify"
+        btnAdd.Enabled = False
+        btnUpdateScheme.Enabled = True
+        btnRemove.Enabled = False
+    End Sub
+
 End Class

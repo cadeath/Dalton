@@ -180,8 +180,8 @@ Public Class Insurance
 
         database.SaveEntry(ds, False)
 
-        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID)
-
+        Dim NewOtp As New ClassOtp("VOID INSURANCE", diagOTP.txtPIN.Text, "COI# " & COInumber)
+        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "COI# " & COInumber)
         RemoveJournal(InsuranceID, , TransactionName)
         RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
     End Sub

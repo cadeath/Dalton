@@ -225,7 +225,7 @@ Public Class frmPawningItemNew
         If txtAppr.Text = "" Then txtAppr.Focus() : Return False
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
-        If Not mod_system.isAuthorized Then CheckAuth() : Return False
+        'If Not mod_system.isAuthorized Then CheckAuth() : Return False
 
         If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
         If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
@@ -235,6 +235,7 @@ Public Class frmPawningItemNew
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If unableToSave Then Exit Sub
+        If Not CheckAuth() Then Exit Sub
         If Not isValid() And transactionType = "L" Then
             MsgBox("I think you are missing something", MsgBoxStyle.Critical)
             Exit Sub
@@ -276,31 +277,45 @@ Public Class frmPawningItemNew
 
             .Update_PawnTicket()
 
+            If isEarlyRedeem Then
+                Dim itmPrn As Double = .Principal
+                Dim itmAdv As Double = .AdvanceInterest
+                Dim itmDue As Double = RedeemDue
+
+                Dim itmEarly As Double = itmAdv - (itmPrn - itmDue)
+                'itmEarly -= CDbl(txtService.Text) 'Lesser Service Charge
+
+                .DelayInterest = itmEarly
+                .EarlyReddem = itmEarly
+            Else
+                .DelayInterest = txtInt.Text
+            End If
+
             If isOldItem Then
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", .LoadLastIDNumberPawn)
-                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", PT_Entry.PawnID)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", PT_Entry.PawnID)
 
                 'Changed in V1.2
-                AddJournal(.DelayInterest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-                AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                AddJournal(.DelayInterest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", PT_Entry.PawnID)
+                AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", PT_Entry.PawnID)
+                AddJournal(.ServiceCharge, "Credit", "Loans Service Charge", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", PT_Entry.PawnID)
             Else
-                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", .LoadLastIDNumberPawn)
+                AddJournal(.RedeemDue, "Debit", "Revolving Fund", "REDEEM PT# " & .PawnTicket, ITEM_REDEEM, , , "REDEMPTION", PT_Entry.PawnID)
                 If isEarlyRedeem Then
                     Dim rndInt As Double = .AdvanceInterest - .EarlyReddem
 
                     'Changed in V1.2
-                    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION EARLY", .LoadLastIDNumberPawn)
+                    AddJournal(Math.Round(rndInt, 2), "Debit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION EARLY", PT_Entry.PawnID)
                 End If
-                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                AddJournal(.Principal, "Credit", "Inventory Merchandise - Loan", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", PT_Entry.PawnID)
                 If DaysOverDue > 3 Then
                     'Changed in V1.2
-                    AddJournal(.DelayInterest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
-                    AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", .LoadLastIDNumberPawn)
+                    AddJournal(.DelayInterest, "Credit", "Interest on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", PT_Entry.PawnID)
+                    AddJournal(.Penalty, "Credit", "Income from Penalty on Redemption", "REDEEM PT# " & .PawnTicket, , , , "REDEMPTION", PT_Entry.PawnID)
                 End If
             End If
 
-            AddTimelyLogs("REDEMPTION", String.Format("PT# {0} ", .PawnTicket.ToString("000000")), RedeemDue, , , .LoadLastIDNumberPawn)
+            AddTimelyLogs("REDEMPTION", String.Format("PT# {0} ", .PawnTicket.ToString("000000")), RedeemDue, , , PT_Entry.PawnID)
 
             AddNumber(DocumentClass.OfficialReceipt)
             MsgBox("Item Redeemed", MsgBoxStyle.Information)
@@ -350,9 +365,17 @@ Public Class frmPawningItemNew
             .ExpiryDate = ExpiryDate
             .AuctionDate = AuctionDate
 
+            'REMOVE OFFICALRECEIPT INFORMATION
+            .ORDate = Nothing
+            .ORNumber = 0
+            .DaysOverDue = 0
+            .Penalty = 0
+            .RenewDue = 0
+            .RedeemDue = 0
+            .ServiceCharge = IIf(isOldItem, 0, CInt(PawnServiceCharge))
+
             .Appraisal = PT_Entry.Appraisal
             .Principal = PT_Entry.Principal
-            .AdvanceInterest = PT_Entry.AdvanceInterest
             .NetAmount = PT_Entry.NetAmount
 
             .Status = "R"
@@ -363,8 +386,9 @@ Public Class frmPawningItemNew
             '?????????????????
 
             .AdvanceInterest = AdvanceInterest
-            .ServiceCharge = PawnServiceCharge
-            .NetAmount = NetAmount
+
+            PRINT_PTNEW = .PawnTicket
+            PRINT_PTOLD = .OldTicket
 
             .Save_PawnTicket()
 
@@ -373,7 +397,7 @@ Public Class frmPawningItemNew
             AddJournal(PawnPenalty, "Credit", "Income from Penalty on Renewal", "PT# " & oldPawnTicket, , , , "RENEWALS", .LoadLastIDNumberPawn)
             AddJournal(PawnServiceCharge, "Credit", "Loans Service Charge", "PT# " & oldPawnTicket, , , , "RENEWALS", .LoadLastIDNumberPawn)
 
-            AddTimelyLogs("RENEWALS", String.Format("PT#{0}", oldPawnTicket.ToString("000000")), RenewDue, , String.Format("PT#{0}", oldPawnTicket.ToString("000000")), .LoadLastIDNumberPawn)
+            AddTimelyLogs("RENEWALS", String.Format("PT#{0}", PT_Entry.PawnTicket.ToString("000000")), RenewDue, , String.Format("PT#{0}", oldPawnTicket.ToString("000000")), .LoadLastIDNumberPawn)
         End With
 
         AddNumber(DocumentClass.Pawnticket)
@@ -479,8 +503,8 @@ Public Class frmPawningItemNew
     Private Sub dateChange(selectedClass As ItemClass)
         If selectedClass Is Nothing Then Exit Sub
 
-        Select Case selectedClass.Category
-            Case "GADGET"
+        Select Case selectedClass.ClassName
+            Case "CELLPHONE", "TABLET"
                 txtExpiry.Text = txtMatu.Text
                 txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
             Case Else
@@ -731,7 +755,7 @@ Public Class frmPawningItemNew
         ClearFields()
         LoadAppraisers()
 
-        If transactionType = "L" Then NewLoan()
+        ' If transactionType = "L" Then NewLoan()
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
@@ -770,6 +794,7 @@ Public Class frmPawningItemNew
     Friend Sub Load_PawnTicket(pt As PawnTicket2)
         LoadClient(pt.Pawner)
 
+
         Load_ItemSpecification(pt.PawnItem.ItemClass)
 
         Dim i As Integer = 0
@@ -778,13 +803,32 @@ Public Class frmPawningItemNew
             i += 1
         Next
 
+        txtTicket.Text = CurrentPTNumber(pt.PawnTicket)
+        txtOldTicket.Text = pt.OldTicket
+        txtLoan.Text = pt.LoanDate
+        txtMatu.Text = pt.MaturityDate
+        txtExpiry.Text = pt.ExpiryDate
+        txtAuction.Text = pt.AuctionDate
+
         txtAppr.Text = pt.Appraisal.ToString("#,##0.00")
         txtPrincipal.Text = pt.Principal.ToString("#,##0.00")
         txtAdv.Text = pt.AdvanceInterest.ToString("#,##0.00")
         txtNet.Text = pt.NetAmount.ToString("#,##0.00")
         txtService.Text = pt.ServiceCharge.ToString("#,##0.00")
 
+        txtReceipt.Text = IIf(pt.ORNumber = 0, "", pt.ORNumber)
+        txtReceiptDate.Text = IIf(pt.ORDate = #12:00:00 AM#, "", pt.ORDate)
+        txtPrincipal2.Text = IIf(pt.Principal = 0, "", pt.Principal)
+
         cboAppraiser.Text = GetNameByID(pt.AppraiserID, Appraisers_ht)
+
+        txtOver.Text = pt.DaysOverDue
+        txtInt.Text = pt.DelayInterest
+        txtPenalty.Text = pt.Penalty
+        txtService.Text = pt.ServiceCharge
+
+        txtRenew.Text = pt.RenewDue
+        txtRedeem.Text = pt.RedeemDue
 
         'Disable
         txtCustomer.ReadOnly = True
@@ -796,7 +840,10 @@ Public Class frmPawningItemNew
         cboAppraiser.Enabled = False
 
         PT_Entry = pt
+        PRINT_PTOLD = pt.OldTicket
+        PRINT_PTNEW = pt.PawnTicket
 
+        mod_system.isAuthorized = True
         If transactionType = "D" Then
             LockFields(True)
             btnSave.Enabled = False : btnRenew.Enabled = True
@@ -842,7 +889,7 @@ Public Class frmPawningItemNew
 
     Friend Sub Redeem()
         transactionType = "X"
-        GeneratePT()
+        'GeneratePT()
 
         ReComputeInterest()
         grpClaimer.Enabled = True
@@ -866,6 +913,7 @@ Public Class frmPawningItemNew
         Pawner = Nothing
         PT_Entry = New PawnTicket2
         PawnedItem = New PawnItem
+        lvSpec.Enabled = True
 
         cboAppraiser.SelectedIndex = -1
         GeneratePT()
@@ -1020,6 +1068,7 @@ Public Class frmPawningItemNew
 
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
         Reprint = True
+        SaveReprint()
         If PT_Entry.Status = "L" Or PT_Entry.Status = "R" Then
             PrintNewLoan()
         End If
@@ -1032,6 +1081,7 @@ Public Class frmPawningItemNew
         If PT_Entry.Status = "X" Then
             do_RedeemOR()
         End If
+
     End Sub
 
     Private Function isRenewable(ByVal pt As PawnTicket2) As Boolean
@@ -1066,7 +1116,6 @@ Public Class frmPawningItemNew
         Dim ans As DialogResult = _
             MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + MsgBoxStyle.DefaultButton2, "Print")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
-
 
         Dim autoPrintPT As Reporting
         'On Error Resume Next
@@ -1294,7 +1343,7 @@ Public Class frmPawningItemNew
         autoPrintPT = New Reporting
 
         Dim mySql As String, ptIDx As Single = PT_Entry.PawnID
-        mySql = "SELECT * FROM PRINT_PAWNING WHERE PAWNID = " & ptIDx
+        mySql = "SELECT * FROM PAWN_LIST WHERE PAWNID = " & ptIDx
         Dim dsName As String = "dsPawn"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
         Dim paymentStr As String, descStr As String
@@ -1435,5 +1484,40 @@ Public Class frmPawningItemNew
         If DEV_MODE Then
             Console.WriteLine(PT_Entry.DescriptionBuilder())
         End If
+    End Sub
+
+    Private Sub txtClaimer_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtClaimer.KeyPress
+        If isEnter(e) Then
+            btnSearchClaimer.PerformClick()
+        End If
+    End Sub
+
+    Private Sub SaveReprint()
+        Dim mysql As String = "SELECT * FROM TBLREPRINT "
+        Dim ds As DataSet = LoadSQL(mysql, "TBLREPRINT")
+        Dim dsNewRow As DataRow, transname As String
+        dsNewRow = ds.Tables("TBLREPRINT").NewRow
+        With dsNewRow
+            .Item("PAWNTICKET") = PT_Entry.PawnTicket
+            Select Case PT_Entry.Status
+                Case "X"
+                    transname = "Redeem"
+                Case "L"
+                    transname = "New Loan"
+                Case "0"
+                    transname = "Renewed"
+                Case "R"
+                    transname = "Renew"
+                Case "S"
+                    transname = "Segre"
+                Case Else
+                    transname = PT_Entry.Status
+            End Select
+            .Item("TRANSNAME") = transname
+            .Item("Reprint_At") = Now
+            .Item("Reprint_By") = POSuser.UserID
+        End With
+        ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
+        database.SaveEntry(ds)
     End Sub
 End Class
