@@ -59,7 +59,7 @@
     Private Sub btnSaleReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaleReport.Click
         Dim mySql As String, dsName As String, rptPath As String
         dsName = "dsSales"
-        rptPath = "SalesInventory\rpt_SalesReport.rdlc"
+        rptPath = "Reports\rpt_SalesReport.rdlc"
         mySql = "SELECT D.DOCID, "
         mySql &= "CASE D.DOCTYPE "
         mySql &= "WHEN 0 THEN 'SALES' "

@@ -1195,10 +1195,10 @@
     <EmbeddedResource Include="SalesInventory\frmView_Stock.resx">
       <DependentUpon>frmView_Stock.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SalesInventory\rptReceipt.rdlc">
+    <EmbeddedResource Include="Reports\rptReceipt.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="SalesInventory\rpt_SalesReport.rdlc">
+    <EmbeddedResource Include="Reports\rpt_SalesReport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Seed\frmSeed.resx">

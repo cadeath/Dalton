@@ -60,7 +60,7 @@ Public Class frmPrint
         mySql &= "WHERE D.DOCID = '" & idx & "'"
         Dim ds As DataSet = LoadSQL(mySql, dsName)
 
-        report.ReportPath = "SalesInventory\rptReceipt.rdlc"
+        report.ReportPath = "Reports\rptReceipt.rdlc"
         report.DataSources.Add(New ReportDataSource(dsName, ds.Tables(dsName)))
 
         Dim addParameters As New Dictionary(Of String, String)
