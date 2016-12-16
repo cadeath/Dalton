@@ -108,4 +108,23 @@ Public Class frmPrint
     Private Sub lvReceipt_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvReceipt.DoubleClick
         btnReprint.PerformClick()
     End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+
+    End Sub
+    Private Sub Void()
+        Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        Dim idx As String = lvReceipt.FocusedItem.Tag
+        Dim mysql As String = "SELECT * FROM DOC WHERE DOCID = '" & idx & "'"
+        Dim ds As DataSet = LoadSQL(mysql)
+
+        If ds.Tables(0).Rows(0).Item("DOCDATE") <> CurrentDate.Date Then
+            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+        'curInsurance.VoidTransaction()
+        MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
+        Me.Close()
+    End Sub
 End Class
