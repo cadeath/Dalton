@@ -998,11 +998,13 @@ Public Class frmPawningItemNew
         Return 0
     End Function
 
+    ' TODO: JUNMAR
+    ' PLEASE CHECK IF THIS IS STILL WORKING
     Private Function DisplayComputation(ByVal PTInfo As PawnTicket2, ByVal type As String) As String
         Dim disp As String
 
         disp = ""
-        'Dim dc As PawningDalton
+        Dim Dc As PawnCompute
         Dim monthCnt As Integer = 30
 
         If Not isRenewable(PTInfo) And type = "Renew" Then Return "NON RENEWABLE"
@@ -1017,7 +1019,7 @@ Public Class frmPawningItemNew
         Dim isDJ As Boolean = IIf(PTInfo.AdvanceInterest <> 0, True, False)
 
         For x As Integer = 0 To lessNum - 1
-            Dim Dc As PawnCompute
+            'Dim Dc As PawnCompute
             Dim isDPJ As Boolean = True
 
             If transactionType <> "L" Then
@@ -1054,9 +1056,9 @@ Public Class frmPawningItemNew
 
             Select Case type
                 Case "Renew"
-                    disp &= String.Format("{1}{0:#,##0.00} / ", dc.RenewDue, prefix)
+                    disp &= String.Format("{1}{0:#,##0.00} / ", Dc.RenewDue, prefix)
                 Case "Redeem"
-                    disp &= String.Format("{1}{0:#,##0.00} / ", dc.RedeemDue, prefix)
+                    disp &= String.Format("{1}{0:#,##0.00} / ", Dc.RedeemDue, prefix)
                 Case Else
                     Return "INVALID TYPE"
             End Select

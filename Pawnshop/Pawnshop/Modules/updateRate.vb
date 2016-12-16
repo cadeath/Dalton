@@ -1,4 +1,7 @@
-﻿Imports System.Data.Odbc
+﻿' VERSION 1.1
+'  - blah blah
+
+Imports System.Data.Odbc
 
 Module updateRate
     Private dsRate As DataSet

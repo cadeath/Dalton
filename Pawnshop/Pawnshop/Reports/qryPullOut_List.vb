@@ -25,6 +25,15 @@
         AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCalendar.SelectionStart.ToShortDateString, cboClass.Text)
     End Sub
 
+    Private Sub PullOut_dates()
+        Dim mySql As String = "SELECT * FROM OPI WHERE STATUS='W'"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        For Each pullDate As DataRow In ds.Tables(0).Rows
+            MonCalendar.AddMonthlyBoldedDate(pullDate("WITHDRAWDATE"))
+        Next
+    End Sub
+
     Private Sub qryPullOut_List_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         mySql = "SELECT DISTINCT ITEMCATEGORY FROM tblITEM"
         fillData = "tblITEM"
@@ -43,6 +52,7 @@
                 Me.Text = "Oustanding"
             Case DailyReport.Pullout
                 Me.Text = "Item PullOut"
+                PullOut_dates()
             Case DailyReport.AuditReport
                 Me.Text = "Audit Report"
         End Select
