@@ -2070,211 +2070,149 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Code>Function AmountToWord(ByVal MyNumber)
-Dim Temp
-Dim Rupees, Paisa As String
-Dim DecimalPlace, iCount
-Dim Hundreds, Words As String
-Dim place(9) As String
-place(0) = " Thousand "
-place(2) = " Lakh "
-place(4) = " Crore "
-place(6) = " Arab "
-place(8) = " Kharab "
-On Error Resume Next
-' Convert MyNumber to a string, trimming extra spaces.
-MyNumber = Trim(Str(MyNumber))
+  <Code>Public Shared Function AmountToWord(ByVal Input As Long) As String 'Call this function passing the number you desire to be changed
+        Dim output As String = Nothing
+        If Input &lt; 1000 Then
+            output = FindNumber(Input) 'if its less than 1000 then just look it up
+        Else
+            Dim nparts() As String 'used to break the number up into 3 digit parts
+            Dim n As String = Input 'string version of the number
+            Dim i As Long = Input.ToString.Length 'length of the string to help break it up
 
-' Find decimal place.
-DecimalPlace = InStr(MyNumber, ".")
+            Do Until i - 3 &lt;= 0
+                n = n.Insert(i - 3, ",") 'insert commas to use as splitters
+                i = i - 3 'this insures that we get the correct number of parts
+            Loop
+            nparts = n.Split(",") 'split the string into the array
 
-' If we find decimal place...
-If DecimalPlace &gt; 0 Then
-' Convert Paisa
-Temp = Left(Mid(MyNumber, DecimalPlace + 1) &amp; "00", 2)
-'Paisa = " and " &amp; ConvertTens(Temp) &amp; " Paisa"
-Paisa = ""
+            i = Input.ToString.Length 'return i to initial value for reuse
+            Dim p As Integer = 0 'p for parts, used for finding correct suffix
+            For Each s As String In nparts
+                Dim x As Long = CLng(s) 'x is used to compare the part value to other values
+                p = p + 1
+                If p = nparts.Length Then 'if p = number of elements in the array then we need to do something different
+                    If x &lt;&gt; 0 Then
+                        If CLng(s) &lt; 100 Then
+                            output = output &amp; " And " &amp; FindNumber(CLng(s)) ' look up the number, no suffix 
+                        Else                                                ' required as this is the last part
+                            output = output &amp; " " &amp; FindNumber(CLng(s))
+                        End If
+                    End If
+                Else 'if its not the last element in the array
+                    If x &lt;&gt; 0 Then
+                        If output = Nothing Then 'we have to check this so we don't add a leading space
+                            output = output &amp; FindNumber(CLng(s)) &amp; " " &amp; FindSuffix(i, CLng(s)) 'look up the number and suffix
+                        Else 'spaces must go in the right place
+                            output = output &amp; " " &amp; FindNumber(CLng(s)) &amp; " " &amp; FindSuffix(i, CLng(s)) 'look up the snumber and suffix
+                        End If
+                    End If
+                End If
+                i = i - 3 'reduce the suffix counter by 3 to step down to the next suffix
+            Next
+        End If
+        Return output
+    End Function
 
-' Strip off paisa from remainder to convert.
-MyNumber = Trim(Left(MyNumber, DecimalPlace - 1))
-End If
+    Private Shared Function FindNumber(ByVal Number As Long) As String
+        Dim Words As String = Nothing
+        Dim Digits() As String = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", _
+      "Eight", "Nine", "Ten"}
+        Dim Teens() As String = {"", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", _
+       "Eighteen", "Nineteen"}
 
-'===============================================================
-Dim TM As String ' If MyNumber between Rs.1 To 99 Only.
-TM = Right(MyNumber, 2)
+        If Number &lt; 11 Then
+            Words = Digits(Number)
 
-If Len(MyNumber) &gt; 0 And Len(MyNumber) &lt;= 2 Then
-If Len(TM) = 1 Then
-Words = ConvertDigit(TM)
-AmountToWord = Words &amp; Paisa 
+        ElseIf Number &lt; 20 Then
+            Words = Teens(Number - 10)
 
-Exit Function
+        ElseIf Number = 20 Then
+            Words = "Twenty"
 
-Else
-If Len(TM) = 2 Then
-Words = ConvertTens(TM)
-AmountToWord = Words &amp; Paisa 
-Exit Function
+        ElseIf Number &lt; 30 Then
+            Words = "Twenty " &amp; Digits(Number - 20)
 
-End If
-End If
-End If
-'===============================================================
+        ElseIf Number = 30 Then
+            Words = "Thirty"
 
+        ElseIf Number &lt; 40 Then
+            Words = "Thirty " &amp; Digits(Number - 30)
 
-' Convert last 3 digits of MyNumber to ruppees in word.
-Hundreds = ConvertHundreds(Right(MyNumber, 3))
-' Strip off last three digits
-MyNumber = Left(MyNumber, Len(MyNumber) - 3)
+        ElseIf Number = 40 Then
+            Words = "Fourty"
 
-iCount = 0
-Do While MyNumber &lt;&gt; ""
-'Strip last two digits
-Temp = Right(MyNumber, 2)
-If Len(MyNumber) = 1 Then
+        ElseIf Number &lt; 50 Then
+            Words = "Fourty " &amp; Digits(Number - 40)
 
+        ElseIf Number = 50 Then
+            Words = "Fifty"
 
-If Trim(Words) = "Thousand" Or _
-Trim(Words) = "Lakh Thousand" Or _
-Trim(Words) = "Lakh" Or _
-Trim(Words) = "Crore" Or _
-Trim(Words) = "Crore Lakh Thousand" Or _
-Trim(Words) = "Arab Crore Lakh Thousand" Or _
-Trim(Words) = "Arab" Or _
-Trim(Words) = "Kharab Arab Crore Lakh Thousand" Or _
-Trim(Words) = "Kharab" Then
+        ElseIf Number &lt; 60 Then
+            Words = "Fifty " &amp; Digits(Number - 50)
 
-Words = ConvertDigit(Temp) &amp; place(iCount)
-MyNumber = Left(MyNumber, Len(MyNumber) - 1)
+        ElseIf Number = 60 Then
+            Words = "Sixty"
 
-Else
+        ElseIf Number &lt; 70 Then
+            Words = "Sixty " &amp; Digits(Number - 60)
 
-Words = ConvertDigit(Temp) &amp; place(iCount) &amp; Words
-MyNumber = Left(MyNumber, Len(MyNumber) - 1)
+        ElseIf Number = 70 Then
+            Words = "Seventy"
 
-End If
-Else
+        ElseIf Number &lt; 80 Then
+            Words = "Seventy " &amp; Digits(Number - 70)
 
-If Trim(Words) = "Thousand" Or _
-Trim(Words) = "Lakh Thousand" Or _
-Trim(Words) = "Lakh" Or _
-Trim(Words) = "Crore" Or _
-Trim(Words) = "Crore Lakh Thousand" Or _
-Trim(Words) = "Arab Crore Lakh Thousand" Or _
-Trim(Words) = "Arab" Then
+        ElseIf Number = 80 Then
+            Words = "Eighty"
 
+        ElseIf Number &lt; 90 Then
+            Words = "Eighty " &amp; Digits(Number - 80)
 
-Words = ConvertTens(Temp) &amp; place(iCount)
+        ElseIf Number = 90 Then
+            Words = "Ninety"
 
+        ElseIf Number &lt; 100 Then
+            Words = "Ninety " &amp; Digits(Number - 90)
 
-MyNumber = Left(MyNumber, Len(MyNumber) - 2)
-Else
+        ElseIf Number &lt; 1000 Then
+            Words = Number.ToString
+            Words = Words.Insert(1, ",")
+            Dim wparts As String() = Words.Split(",")
+            Words = FindNumber(wparts(0)) &amp; " " &amp; "Hundred"
+            Dim n As String = FindNumber(wparts(1))
+            If CLng(wparts(1)) &lt;&gt; 0 Then
+                Words = Words &amp; " And " &amp; n
+            End If
+        End If
 
-'=================================================================
-' if only Lakh, Crore, Arab, Kharab
+        Return Words
+    End Function
 
-If Trim(ConvertTens(Temp) &amp; place(iCount)) = "Lakh" Or _
-Trim(ConvertTens(Temp) &amp; place(iCount)) = "Crore" Or _
-Trim(ConvertTens(Temp) &amp; place(iCount)) = "Arab" Then
+    Private Shared Function FindSuffix(ByVal Length As Long, ByVal l As Long) As String
+        Dim word As String
 
-Words = Words
-MyNumber = Left(MyNumber, Len(MyNumber) - 2)
-Else
-Words = ConvertTens(Temp) &amp; place(iCount) &amp; Words
-MyNumber = Left(MyNumber, Len(MyNumber) - 2)
-End If
+        If l &lt;&gt; 0 Then
+            If Length &gt; 15 Then
+                word = "Quantillion"
+            ElseIf Length &gt; 12 Then
+                word = "Trillion"
+            ElseIf Length &gt; 9 Then
+                word = "Billion"
+            ElseIf Length &gt; 6 Then
+                word = "Million"
+            ElseIf Length &gt; 3 Then
+                word = "Thousand"
+            ElseIf Length &gt; 2 Then
+                word = "Hundred"
+            Else
+                word = ""
+            End If
+        Else
+            word = ""
+        End If
 
-End If
-End If
-
-iCount = iCount + 2
-Loop
-
-AmountToWord = Words &amp; Hundreds &amp; Paisa 
-End Function
-
-' Conversion for hundreds
-'*****************************************
-Private Function ConvertHundreds(ByVal MyNumber)
-Dim Result As String
-
-' Exit if there is nothing to convert.
-If Val(MyNumber) = 0 Then Exit Function
-
-' Append leading zeros to number.
-MyNumber = Right("000" &amp; MyNumber, 3)
-
-' Do we have a hundreds place digit to convert?
-If Left(MyNumber, 1) &lt;&gt; "0" Then
-Result = ConvertDigit(Left(MyNumber, 1)) &amp; " Hundreds "
-End If
-
-' Do we have a tens place digit to convert?
-If Mid(MyNumber, 2, 1) &lt;&gt; "0" Then
-Result = Result &amp; ConvertTens(Mid(MyNumber, 2))
-Else
-' If not, then convert the ones place digit.
-Result = Result &amp; ConvertDigit(Mid(MyNumber, 3))
-End If
-
-ConvertHundreds = Trim(Result)
-End Function
-
-' Conversion for tens
-'*****************************************
-Private Function ConvertTens(ByVal MyTens)
-Dim Result As String
-
-' Is value between 10 and 19?
-If Val(Left(MyTens, 1)) = 1 Then
-Select Case Val(MyTens)
-Case 10 : Result = "Ten"
-Case 11 : Result = "Eleven"
-Case 12 : Result = "Twelve"
-Case 13 : Result = "Thirteen"
-Case 14 : Result = "Fourteen"
-Case 15 : Result = "Fifteen"
-Case 16 : Result = "Sixteen"
-Case 17 : Result = "Seventeen"
-Case 18 : Result = "Eighteen"
-Case 19 : Result = "Nineteen"
-Case Else
-End Select
-Else
-' .. otherwise it's between 20 and 99.
-Select Case Val(Left(MyTens, 1))
-Case 2 : Result = "Twenty "
-Case 3 : Result = "Thirty "
-Case 4 : Result = "Forty "
-Case 5 : Result = "Fifty "
-Case 6 : Result = "Sixty "
-Case 7 : Result = "Seventy "
-Case 8 : Result = "Eighty "
-Case 9 : Result = "Ninety "
-Case Else
-End Select
-
-' Convert ones place digit.
-Result = Result &amp; ConvertDigit(Right(MyTens, 1))
-End If
-
-ConvertTens = Result
-End Function
-
-Private Function ConvertDigit(ByVal MyDigit)
-Select Case Val(MyDigit)
-Case 1 : ConvertDigit = "One"
-Case 2 : ConvertDigit = "Two"
-Case 3 : ConvertDigit = "Three"
-Case 4 : ConvertDigit = "Four"
-Case 5 : ConvertDigit = "Five"
-Case 6 : ConvertDigit = "Six"
-Case 7 : ConvertDigit = "Seven"
-Case 8 : ConvertDigit = "Eight"
-Case 9 : ConvertDigit = "Nine"
-Case Else : ConvertDigit = ""
-End Select
-End Function</Code>
+        Return word
+    End Function</Code>
   <Width>7.67047in</Width>
   <Page>
     <Style />
