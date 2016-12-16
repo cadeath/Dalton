@@ -130,6 +130,12 @@
     <Compile Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FixPawnlistView\frmFixView.Designer.vb">
+      <DependentUpon>frmFixView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FixPawnlistView\frmFixView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Fix_ORrenewedItem.vb" />
     <Compile Include="frmMainFixer.Designer.vb">
       <DependentUpon>frmMainFixer.vb</DependentUpon>
@@ -212,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.resx">
       <DependentUpon>frmFixJournalAndDailyTimeLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FixPawnlistView\frmFixView.resx">
+      <DependentUpon>frmFixView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
@@ -317,6 +326,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
