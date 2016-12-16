@@ -56,4 +56,32 @@
         frmExtractor.Show()
     End Sub
 
+    Private Sub btnSaleReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaleReport.Click
+        Dim mySql As String, dsName As String, rptPath As String
+        dsName = "dsSales"
+        rptPath = "Reports\rpt_SalesReport.rdlc"
+        mySql = "SELECT D.DOCID, "
+        mySql &= "CASE D.DOCTYPE "
+        mySql &= "WHEN 0 THEN 'SALES' "
+        mySql &= "WHEN 1 THEN 'SALES' "
+        mySql &= "WHEN 2 THEN 'RECALL' "
+        mySql &= "WHEN 3 THEN 'RETURNS' "
+        mySql &= "WHEN 4 THEN 'STOCKOUT' "
+        mySql &= "End AS DOCTYPE, "
+        mySql &= "D.MOP, D.CODE, D.CUSTOMER, D.DOCDATE, D.NOVAT, D.VATRATE, D.VATTOTAL, D.DOCTOTAL, "
+        mySql &= "D.STATUS, D.REMARKS,"
+        mySql &= "DL.ITEMCODE, DL.DESCRIPTION, DL.QTY, DL.UNITPRICE, DL.SALEPRICE, DL.ROWTOTAL "
+        mySql &= "FROM DOC D "
+        mySql &= "INNER JOIN DOCLINES DL ON DL.DOCID = D.DOCID "
+        mySql &= "WHERE D.DOCDATE = '" & monCal.SelectionStart.ToShortDateString & "' AND D.STATUS <> 'V'"
+
+        If DEV_MODE Then Console.WriteLine(mySql)
+        Dim addParameter As New Dictionary(Of String, String)
+        addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
+        addParameter.Add("branchName", branchName)
+        addParameter.Add("txtUsername", POSuser.UserName)
+
+        frmReport.ReportInit(mySql, dsName, rptPath, addParameter)
+        frmReport.Show()
+    End Sub
 End Class
