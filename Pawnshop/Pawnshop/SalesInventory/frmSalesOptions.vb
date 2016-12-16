@@ -70,11 +70,12 @@
         mySql &= "End AS DOCTYPE, "
         mySql &= "D.MOP, D.CODE, D.CUSTOMER, D.DOCDATE, D.NOVAT, D.VATRATE, D.VATTOTAL, D.DOCTOTAL, "
         mySql &= "D.STATUS, D.REMARKS,"
-        mySql &= "DL.ITEMCODE, DL.DESCRIPTION, DL.QTY, DL.UNITPRICE, DL.SALEPRICE "
+        mySql &= "DL.ITEMCODE, DL.DESCRIPTION, DL.QTY, DL.UNITPRICE, DL.SALEPRICE, DL.ROWTOTAL "
         mySql &= "FROM DOC D "
         mySql &= "INNER JOIN DOCLINES DL ON DL.DOCID = D.DOCID "
         mySql &= "WHERE D.DOCDATE = '" & monCal.SelectionStart.ToShortDateString & "' AND D.STATUS <> 'V'"
 
+        If DEV_MODE Then Console.WriteLine(mySql)
         Dim addParameter As New Dictionary(Of String, String)
         addParameter.Add("txtMonthOf", "DATE : " & monCal.SelectionStart.ToString("MMMM dd, yyyy"))
         addParameter.Add("branchName", branchName)

@@ -76,8 +76,12 @@
           <DataField>UnitPrice</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="SalesPrice">
-          <DataField>SalesPrice</DataField>
+        <Field Name="SalePrice">
+          <DataField>SalePrice</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RowTotal">
+          <DataField>RowTotal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -318,7 +322,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Unit Price</Value>
+                              <Value>Price</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -348,7 +352,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Sales Price</Value>
+                              <Value>Total Row</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -560,14 +564,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="UnitPrice">
+                    <Textbox Name="SalePrice">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!UnitPrice.Value</Value>
+                              <Value>=Fields!SalePrice.Value</Value>
                               <Style>
                                 <Format>#,0;(#,0);'-'</Format>
                               </Style>
@@ -576,7 +580,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>UnitPrice</rd:DefaultName>
+                      <rd:DefaultName>SalePrice</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -592,14 +596,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="SalesPrice">
+                    <Textbox Name="RowTotal">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!SalesPrice.Value</Value>
+                              <Value>=Fields!RowTotal.Value</Value>
                               <Style>
                                 <Format>#,0;(#,0);'-'</Format>
                               </Style>
@@ -608,7 +612,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>SalesPrice</rd:DefaultName>
+                      <rd:DefaultName>RowTotal</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
