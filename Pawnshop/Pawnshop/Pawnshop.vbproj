@@ -1039,6 +1039,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout01.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout02.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
