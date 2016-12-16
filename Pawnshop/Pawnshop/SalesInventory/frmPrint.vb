@@ -110,21 +110,42 @@ Public Class frmPrint
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidSales
+            If Not CheckOTP() Then Exit Sub
+        Else
+            Void()
+        End If
     End Sub
-    Private Sub Void()
-        Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+
+    Friend Sub Void()
+        Dim ans As DialogResult = MsgBox("Do you want to void this transaction? Sure Ba", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
         Dim idx As String = lvReceipt.FocusedItem.Tag
         Dim mysql As String = "SELECT * FROM DOC WHERE DOCID = '" & idx & "'"
         Dim ds As DataSet = LoadSQL(mysql)
-
-        If ds.Tables(0).Rows(0).Item("DOCDATE") <> CurrentDate.Date Then
+        Dim DocDate As Date = ds.Tables(0).Rows(0).Item("DOCDATE")
+        If DocDate <> CurrentDate.Date Then
             MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
             Exit Sub
         End If
-        'curInsurance.VoidTransaction()
+
+        Dim strDocID As String = ds.Tables(0).Rows(0).Item("DOCID")
+        Dim InsuranceID As Integer
+        Dim TransactionName As String = "Sales"
+        InsuranceID = frmInsurance.lbltransid.Text
+
+        ds.Tables(0).Rows(0).Item("STATUS") = "V"
+        database.SaveEntry(ds, False)
+
+        Dim NewOtp As New ClassOtp("VOID SALES", diagOTP.txtPIN.Text, strDocID)
+        TransactionVoidSave(TransactionName, ds.Tables(0).Rows(0).Item("USERID"), POSuser.UserID, strDocID)
+        RemoveJournal(strDocID, , TransactionName)
+        RemoveDailyTimeLog(strDocID, "1", TransactionName)
+
         MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
         Me.Close()
     End Sub
+
+
 End Class
