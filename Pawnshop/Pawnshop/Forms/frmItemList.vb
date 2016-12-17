@@ -105,6 +105,8 @@
     End Sub
 
     Private Sub frmItemList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
+
         If Not fromOtherForm Then ClearFields() : txtSearch.Focus()
         txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
         If txtSearch.Text <> "" Then
@@ -114,4 +116,5 @@
         End If
 
     End Sub
+
 End Class

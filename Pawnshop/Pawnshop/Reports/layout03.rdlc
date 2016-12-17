@@ -1678,7 +1678,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value></Value>
+                <Value>=Fields!Client.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
