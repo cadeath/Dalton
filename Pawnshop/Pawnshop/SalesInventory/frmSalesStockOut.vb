@@ -59,7 +59,7 @@
             str(cnt) = ds.Tables(0).Rows(cnt).Item("BranchName")
         Next
         cboLocation.Items.AddRange(str)
-        cboLocation.Items.Add("PTU warehouse")
-        cboLocation.Items.Add("Warehouse")
+        cboLocation.Items.Add("PTU")
+        cboLocation.Items.Add("01")
     End Sub
 End Class
