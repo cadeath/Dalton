@@ -132,7 +132,7 @@ Partial Class frmPrint
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbReceipt)
         Me.Name = "frmPrint"
-        Me.Text = "frmPrint"
+        Me.Text = "Sales List"
         Me.gbReceipt.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()

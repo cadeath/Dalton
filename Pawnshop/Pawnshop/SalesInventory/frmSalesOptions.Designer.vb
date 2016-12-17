@@ -95,7 +95,7 @@ Partial Class frmSalesOptions
         Me.btnRePrint.Name = "btnRePrint"
         Me.btnRePrint.Size = New System.Drawing.Size(85, 57)
         Me.btnRePrint.TabIndex = 0
-        Me.btnRePrint.Text = "Reprint"
+        Me.btnRePrint.Text = "Sales &List"
         Me.btnRePrint.UseVisualStyleBackColor = True
         '
         'monCal
