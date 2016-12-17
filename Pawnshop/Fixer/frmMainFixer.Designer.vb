@@ -31,7 +31,7 @@ Partial Class frmMainFixer
         '
         'btnFix
         '
-        Me.btnFix.Location = New System.Drawing.Point(191, 62)
+        Me.btnFix.Location = New System.Drawing.Point(191, 45)
         Me.btnFix.Name = "btnFix"
         Me.btnFix.Size = New System.Drawing.Size(75, 23)
         Me.btnFix.TabIndex = 20
@@ -42,6 +42,7 @@ Partial Class frmMainFixer
         '
         Me.txtDB.Location = New System.Drawing.Point(6, 19)
         Me.txtDB.Name = "txtDB"
+        Me.txtDB.ReadOnly = True
         Me.txtDB.Size = New System.Drawing.Size(260, 20)
         Me.txtDB.TabIndex = 16
         '
@@ -51,7 +52,7 @@ Partial Class frmMainFixer
         Me.GroupBox1.Controls.Add(Me.txtDB)
         Me.GroupBox1.Location = New System.Drawing.Point(1, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(277, 97)
+        Me.GroupBox1.Size = New System.Drawing.Size(277, 75)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Database"
@@ -60,7 +61,7 @@ Partial Class frmMainFixer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(279, 101)
+        Me.ClientSize = New System.Drawing.Size(279, 83)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

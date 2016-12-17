@@ -3,6 +3,8 @@
     Private isOTPEnable As Boolean = False
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
+        frmMain.Enabled = False
         lblSAP01.Text = "SAP Code 01"
         ClearFields()
         PrinterSettings()
@@ -31,12 +33,14 @@
         txtBal.Text = GetOption("MaintainingBalance")
         txtRevolving.Text = GetOption("RevolvingFund")
         txtCashInBank.Text = GetSAPAccount("Cash in Bank")
+        txtCustomerCode.Text = GetOption("CustomerCode")
 
         If locked Then
             txtCode.Enabled = False
             txtName.Enabled = False
             txtArea.Enabled = False
             txtRevolving.Enabled = False
+            txtCustomerCode.Enabled = False
         End If
 
         'Second
@@ -85,6 +89,7 @@
             UpdateOptions("RevolvingFund", txtRevolving.Text, isOTPEnable)
             UpdateOptions("LOCKED", "YES", isOTPEnable)
             InsertSAPCount(txtRevolving.Text)
+            UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
             BranchCode = txtCode.Text
             branchName = txtName.Text
@@ -100,7 +105,7 @@
         UpdateOptions("InsuranceLastNum", txtInsurance.Text, isOTPEnable)
         UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
         UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
-        UpdateOptions("InvoiceNum", txtMRNum.Text, isOTPEnable)
+        UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)
@@ -138,4 +143,7 @@
     End Sub
 
 
+    Private Sub frmSettings_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        frmMain.Enabled = True
+    End Sub
 End Class

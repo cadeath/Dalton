@@ -23,7 +23,7 @@
     End Function
 
     Private Sub ClearFields()
-        txtBranch.Text = ""
+        cboLocation.Text = ""
         txtControl.Text = ""
         txtParticular.Text = ""
 
@@ -31,13 +31,13 @@
     End Sub
 
     Private Sub Load_ControlNum()
-        txtControl.Text = CURRENT_NUM.ToString("STO#000000")
+        txtControl.Text = CURRENT_NUM.ToString("000000")
     End Sub
 
     Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
         Me.DialogResult = Windows.Forms.DialogResult.OK
 
-        m_Branch = txtBranch.Text
+        m_Branch = cboLocation.Text
         m_Particulars = txtParticular.Text
 
         Me.Close()
@@ -46,5 +46,20 @@
     Private Sub frmSalesStockOut_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         Load_ControlNum()
+        LoadBranches()
+    End Sub
+
+    Private Sub LoadBranches()
+        Dim mySql As String = "SELECT * FROM tblBranches WHERE SAPCode <> '" & BranchCode & "'"
+        Dim ds As DataSet = LoadSQL(mySql)
+        Dim MaxCount As Integer = ds.Tables(0).Rows.Count
+
+        Dim str(MaxCount - 1) As String
+        For cnt As Integer = 0 To MaxCount - 1
+            str(cnt) = ds.Tables(0).Rows(cnt).Item("BranchName")
+        Next
+        cboLocation.Items.AddRange(str)
+        cboLocation.Items.Add("PTU warehouse")
+        cboLocation.Items.Add("Warehouse")
     End Sub
 End Class
