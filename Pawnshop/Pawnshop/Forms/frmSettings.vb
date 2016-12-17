@@ -40,7 +40,6 @@
             txtName.Enabled = False
             txtArea.Enabled = False
             txtRevolving.Enabled = False
-            txtCustomerCode.Enabled = False
         End If
 
         'Second
