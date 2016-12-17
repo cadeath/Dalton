@@ -414,17 +414,17 @@ Public Class frmSales
             getLastID = GetDocLines_LastID()
             If TransactionMode = TransType.Returns Then
                 AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
-                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES RETURN", , , "SALES", getLastID)
             Else
                 If TransactionMode <> TransType.Auction Then
-                    AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                    AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES RETURN", , , "SALES", getLastID)
                     AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
                 Else
                     ' JE FOR AUCTION REDEEM
 
                     ' SELLING PRICE
-                    AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
-                    AddJournal(itm.SalePrice, "Credit", itm.Get_AuctionCode, "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , "AUCTION REDEEM", "RECALL", getLastID)
+                    AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION REDEEM", , , "RECALL", getLastID)
+                    AddJournal(itm.SalePrice, "Credit", itm.Get_AuctionCode, "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION REDEEM", , "AUCTION REDEEM", "RECALL", getLastID)
                     ' PRINCIPAL
                     AddJournal(itm.UnitPrice, "Debit", itm.Get_CostCode, "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
                     AddJournal(itm.UnitPrice, "Credit", "Inventory Merchandise - Segregated", "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
