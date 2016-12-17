@@ -1,7 +1,8 @@
 ﻿Public Class frmFixDoclineDecimal
+    Const DBPATH As String = "\W3W1LH4CKU.FDB"
 
     Private Sub frmFixDoclineDecimal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        LoadPath()
     End Sub
 
     Private Sub LoadPath()
