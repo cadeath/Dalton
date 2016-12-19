@@ -92,14 +92,16 @@ Public Class frmSales
         End If
     End Function
 
-    Friend Sub AddItem(ByVal itm As cItemData)
+    Friend Sub AddItem(ByVal itm As cItemData, Optional ByVal isRedeem As Boolean = False)
         Dim ItemAmount As Double
         Dim hasSelected As Boolean = False
 
         For Each AddedItems As ListViewItem In lvSale.Items
-            If AddedItems.Text = itm.ItemCode Then
-                hasSelected = True
-                Exit For
+            If isRedeem = False Then
+                If AddedItems.Text = itm.ItemCode Then
+                    hasSelected = True
+                    Exit For
+                End If
             End If
         Next
 
