@@ -236,7 +236,11 @@
             If isRedeem Then qtyItm = 1
             selected_Itm.Quantity = qtyItm
 
-            frmSales.AddItem(selected_Itm)
+            If isRedeem = True Then
+                frmSales.AddItem(selected_Itm, True)
+            Else
+                frmSales.AddItem(selected_Itm)
+            End If
             frmSales.ClearSearch()
         Else
             ' Inventory IN
