@@ -597,7 +597,17 @@ Public Class frmSales
 
     Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
         If ShiftMode() Then
-            Load_asStockOut()
+            OTPStockOut_Initialization()
+
+            If Not OTPDisable Then
+                diagGeneralOTP.GeneralOTP = OtpSettings
+                diagGeneralOTP.ShowDialog()
+                If Not diagGeneralOTP.isCorrect Then
+                    Exit Sub
+                Else
+                    Load_asStockOut()
+                End If
+            End If
         End If
     End Sub
 
