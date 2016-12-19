@@ -30,7 +30,7 @@
             Dim ChangeUnit As String = "ALTER TABLE DOCLINES ALTER COLUMN UNITNEW TO UNITPRICE;"
             Dim ChangeSale As String = "ALTER TABLE DOCLINES ALTER COLUMN SALENEW TO SALEPRICE;"
             Dim ChangeQty As String = "ALTER TABLE DOCLINES ALTER COLUMN QTYNEW TO QTY;"
-            Dim ChangeRowTotal As String = "ALTER TABLE DOCLINES ALTER COLUMN QTYNEW TO QTY;"
+            Dim ChangeRowTotal As String = "ALTER TABLE DOCLINES ALTER COLUMN ROWTOTALNEW TO ROWTOTAL;"
 
 
             Dim CreateViewStockCard As String = "CREATE VIEW STOCK_CARD( "
