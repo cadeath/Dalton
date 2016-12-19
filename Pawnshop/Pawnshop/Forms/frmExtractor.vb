@@ -55,6 +55,13 @@ Public Class frmExtractor
     Private Sub PTU_File()
         If FormType <> ExtractType.PTUFile Then Exit Sub
 
+        If MonCalendar.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
+            If frmMain.dateSet Then
+                MsgBox("Unable to Generate PTU File yet", MsgBoxStyle.Information, "System")
+                Exit Sub
+            End If
+        End If
+
         Dim mySql As String, ds As DataSet
         Dim cd As Date = MonCalendar.SelectionRange.Start
         Dim CustomerCode As String = GetOption("CustomerCode")

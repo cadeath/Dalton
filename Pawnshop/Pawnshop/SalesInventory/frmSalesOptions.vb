@@ -51,11 +51,6 @@
         frmInventory.Show()
     End Sub
 
-    Private Sub btnPTU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPTU.Click
-        frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
-        frmExtractor.Show()
-    End Sub
-
     Private Sub btnSaleReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaleReport.Click
         Dim mySql As String, dsName As String, rptPath As String
         dsName = "dsSales"

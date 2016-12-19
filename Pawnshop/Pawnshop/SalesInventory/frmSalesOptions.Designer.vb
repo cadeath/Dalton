@@ -27,7 +27,6 @@ Partial Class frmSalesOptions
         Me.btnSTO = New System.Windows.Forms.Button()
         Me.btnIMD = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btnPTU = New System.Windows.Forms.Button()
         Me.btnRePrint = New System.Windows.Forms.Button()
         Me.monCal = New System.Windows.Forms.MonthCalendar()
         Me.btnInventory = New System.Windows.Forms.Button()
@@ -69,7 +68,6 @@ Partial Class frmSalesOptions
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.btnPTU)
         Me.GroupBox2.Controls.Add(Me.btnRePrint)
         Me.GroupBox2.Location = New System.Drawing.Point(16, 123)
         Me.GroupBox2.Name = "GroupBox2"
@@ -77,16 +75,6 @@ Partial Class frmSalesOptions
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Export"
-        '
-        'btnPTU
-        '
-        Me.btnPTU.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPTU.Location = New System.Drawing.Point(123, 28)
-        Me.btnPTU.Name = "btnPTU"
-        Me.btnPTU.Size = New System.Drawing.Size(85, 57)
-        Me.btnPTU.TabIndex = 1
-        Me.btnPTU.Text = "Sales File"
-        Me.btnPTU.UseVisualStyleBackColor = True
         '
         'btnRePrint
         '
@@ -149,7 +137,6 @@ Partial Class frmSalesOptions
     Friend WithEvents btnSTO As System.Windows.Forms.Button
     Friend WithEvents btnIMD As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnPTU As System.Windows.Forms.Button
     Friend WithEvents btnRePrint As System.Windows.Forms.Button
     Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
     Friend WithEvents btnInventory As System.Windows.Forms.Button

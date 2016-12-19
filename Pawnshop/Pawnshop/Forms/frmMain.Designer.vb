@@ -94,6 +94,7 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
+        Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -185,7 +186,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.AccountingExtractToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.SalesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.AccountingExtractToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -605,6 +606,12 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
+        'SalesToolStripMenuItem
+        '
+        Me.SalesToolStripMenuItem.Name = "SalesToolStripMenuItem"
+        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.SalesToolStripMenuItem.Text = "Sales Extractor"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -712,6 +719,7 @@ Partial Class frmMain
 
     Friend WithEvents AuditConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AccountingExtractToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SalesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 
