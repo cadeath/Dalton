@@ -158,8 +158,8 @@
 
             .SaveInsurance()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", .LoadLastIDNumberInsurance)
-            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", .LoadLastIDNumberInsurance)
+            'AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", .LoadLastIDNumberInsurance)
+            'AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", .LoadLastIDNumberInsurance)
 
             AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount, , , .LoadLastIDNumberInsurance)
         End With
@@ -198,7 +198,7 @@
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidInsurance
+            diagOTP.FormType = diagOTP.OTPType.VoidSales
             If Not CheckOTP() Then Exit Sub
         Else
             VoidInsurance()

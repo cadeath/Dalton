@@ -132,9 +132,11 @@ unloadObj:
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
         If lvIMD.Items.Count = 0 Then Exit Sub
-        If MsgBox("Do you want to imported everything?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information) = vbYesNo Then
-            Exit Sub
-        End If
+
+        ' REMOVED due to redundancy on HOT CODE
+        'If MsgBox("Do you want to imported everything?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information) = vbYesNo Then
+        '    Exit Sub
+        'End If
 
         ' Integrity Check
         Dim hash = InputBox("HOT CODE", "ENTER HOT CODE")

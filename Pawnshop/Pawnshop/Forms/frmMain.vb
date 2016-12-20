@@ -29,6 +29,8 @@
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
+        SalesToolStripMenuItem.Enabled = Not st
+        '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
         ConsoleToolStripMenuItem.Enabled = Not st
@@ -54,6 +56,7 @@
         CashInOutToolStripMenuItem.Enabled = Not st
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
+        VoidReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -495,5 +498,10 @@
 
     Private Sub AccountingExtractToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AccountingExtractToolStripMenuItem.Click
         ExtractDataFromDatabase.ShowDialog()
+    End Sub
+
+    Private Sub SalesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesToolStripMenuItem.Click
+        frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
+        frmExtractor.Show()
     End Sub
 End Class
