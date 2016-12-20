@@ -13,6 +13,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
+
     ' TODO
     ' Until Fixer and Patcher is finish for 1.2.3.2
     ' DBversion will be 1.2.3.1 for the sake of one
