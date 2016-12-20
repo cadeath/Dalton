@@ -7,6 +7,7 @@ Version 1.4.1.1
  - Add field SALESID and COSTID at TBLITEM
  - Add view STOCK_CARD
  - Add Reports - Inventory Report, Sales Report
+ - Add Tools - Sales Extractor
  - Update TBLCASH and TBLITEM
  - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here, use the Pullout Module)
  - Can Generate SAP Template Based STO for STOCK OUT
@@ -19,6 +20,7 @@ Version 1.3.1.1
  - Fix Bug in Pawned Item Computation
  - Fix Pawn_list View Full Address
  - Fix No Display Pawner Name in Triplicate
+ - Fix Amount To Words Indian Language
 
 Version 1.3.1
  - Fix Reprint Save
