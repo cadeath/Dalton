@@ -97,11 +97,13 @@
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         Else
-            mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' ORDER BY ITEMCODE ASC"
+            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND onHand <> 0 ORDER BY ITEMCODE ASC"
 
             If src <> "" Then
                 mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"
                 mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00'", src.ToLower)
+                'mySql &= " AND onHand <> 0"
+                mySql &= " ORDER BY ITEMCODE ASC"
             End If
 
             ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
@@ -234,7 +236,11 @@
             If isRedeem Then qtyItm = 1
             selected_Itm.Quantity = qtyItm
 
-            frmSales.AddItem(selected_Itm)
+            If isRedeem = True Then
+                frmSales.AddItem(selected_Itm, True)
+            Else
+                frmSales.AddItem(selected_Itm)
+            End If
             frmSales.ClearSearch()
         Else
             ' Inventory IN

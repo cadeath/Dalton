@@ -172,7 +172,7 @@
 
         With ds.Tables(0).Rows(0)
             _pawnItemID = id
-            _itemClass.LoadItem(.Item("ITEMID"))
+            _itemClass.LoadItem(.Item("ITEMID"), .Item("Scheme_ID"))
 
             If Not IsDBNull(.Item("WITHDRAWDATE")) Then _withdrawDate = .Item("WITHDRAWDATE")
             _status = .Item("STATUS")

@@ -27,10 +27,10 @@ Partial Class frmSalesOptions
         Me.btnSTO = New System.Windows.Forms.Button()
         Me.btnIMD = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btnPTU = New System.Windows.Forms.Button()
         Me.btnRePrint = New System.Windows.Forms.Button()
         Me.monCal = New System.Windows.Forms.MonthCalendar()
         Me.btnInventory = New System.Windows.Forms.Button()
+        Me.btnSaleReport = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -68,7 +68,6 @@ Partial Class frmSalesOptions
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.btnPTU)
         Me.GroupBox2.Controls.Add(Me.btnRePrint)
         Me.GroupBox2.Location = New System.Drawing.Point(16, 123)
         Me.GroupBox2.Name = "GroupBox2"
@@ -77,16 +76,6 @@ Partial Class frmSalesOptions
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Export"
         '
-        'btnPTU
-        '
-        Me.btnPTU.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPTU.Location = New System.Drawing.Point(123, 28)
-        Me.btnPTU.Name = "btnPTU"
-        Me.btnPTU.Size = New System.Drawing.Size(85, 57)
-        Me.btnPTU.TabIndex = 1
-        Me.btnPTU.Text = "Sales File"
-        Me.btnPTU.UseVisualStyleBackColor = True
-        '
         'btnRePrint
         '
         Me.btnRePrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -94,7 +83,7 @@ Partial Class frmSalesOptions
         Me.btnRePrint.Name = "btnRePrint"
         Me.btnRePrint.Size = New System.Drawing.Size(85, 57)
         Me.btnRePrint.TabIndex = 0
-        Me.btnRePrint.Text = "Reprint"
+        Me.btnRePrint.Text = "Sales &List"
         Me.btnRePrint.UseVisualStyleBackColor = True
         '
         'monCal
@@ -106,18 +95,29 @@ Partial Class frmSalesOptions
         'btnInventory
         '
         Me.btnInventory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInventory.Location = New System.Drawing.Point(402, 192)
+        Me.btnInventory.Location = New System.Drawing.Point(400, 192)
         Me.btnInventory.Name = "btnInventory"
         Me.btnInventory.Size = New System.Drawing.Size(85, 36)
         Me.btnInventory.TabIndex = 3
         Me.btnInventory.Text = "&Inventory"
         Me.btnInventory.UseVisualStyleBackColor = True
         '
+        'btnSaleReport
+        '
+        Me.btnSaleReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaleReport.Location = New System.Drawing.Point(258, 192)
+        Me.btnSaleReport.Name = "btnSaleReport"
+        Me.btnSaleReport.Size = New System.Drawing.Size(109, 36)
+        Me.btnSaleReport.TabIndex = 4
+        Me.btnSaleReport.Text = "&Sales Report"
+        Me.btnSaleReport.UseVisualStyleBackColor = True
+        '
         'frmSalesOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(500, 241)
+        Me.Controls.Add(Me.btnSaleReport)
         Me.Controls.Add(Me.btnInventory)
         Me.Controls.Add(Me.monCal)
         Me.Controls.Add(Me.GroupBox2)
@@ -137,8 +137,8 @@ Partial Class frmSalesOptions
     Friend WithEvents btnSTO As System.Windows.Forms.Button
     Friend WithEvents btnIMD As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnPTU As System.Windows.Forms.Button
     Friend WithEvents btnRePrint As System.Windows.Forms.Button
     Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
     Friend WithEvents btnInventory As System.Windows.Forms.Button
+    Friend WithEvents btnSaleReport As System.Windows.Forms.Button
 End Class
