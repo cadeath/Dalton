@@ -143,7 +143,7 @@ Public Class frmPrint
         ds.Tables(0).Rows(0).Item("STATUS") = "V"
         SaveEntry(ds, False)
         Dim isSales As Boolean = False
-        If ds.Tables(0).Rows(0).Item("Mop") = "0" Or ds.Tables(0).Rows(0).Item("Mop") = "1" Then isSales = True
+        If ds.Tables(0).Rows(0).Item("DOCTYPE") = "0" Or ds.Tables(0).Rows(0).Item("DOCTYPE") = "1" Then isSales = True
 
         Dim EncoderID As String = ds.Tables(0).Rows(0).Item("USERID")
         Dim TransactionName As String = "SALES"
