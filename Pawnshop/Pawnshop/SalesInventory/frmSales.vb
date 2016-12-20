@@ -67,12 +67,14 @@ Public Class frmSales
                 prefix = "STO"
         End Select
 
-        mySql &= String.Format("'{1}#{0:000000}'", ControlNum, prefix)
+        Dim uniq As String = String.Format("'{1}#{0:000000}'", ControlNum, prefix)
+        mySql &= uniq
+
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             canTransact = False
-            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical)
+            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical, uniq)
         End If
     End Sub
 
