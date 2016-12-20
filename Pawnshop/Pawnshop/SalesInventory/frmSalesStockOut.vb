@@ -30,6 +30,11 @@
         Load_ControlNum()
     End Sub
 
+    Friend Sub Add_ControlNum()
+        CURRENT_NUM += 1
+        UpdateOptions("STONum", CURRENT_NUM)
+    End Sub
+
     Private Sub Load_ControlNum()
         txtControl.Text = CURRENT_NUM.ToString("000000")
     End Sub
@@ -52,12 +57,12 @@
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxCount As Integer = ds.Tables(0).Rows.Count
 
+        cboLocation.Items.Add("PTU")
+        cboLocation.Items.Add("01")
         Dim str(MaxCount - 1) As String
         For cnt As Integer = 0 To MaxCount - 1
             str(cnt) = ds.Tables(0).Rows(cnt).Item("BranchName")
         Next
         cboLocation.Items.AddRange(str)
-        cboLocation.Items.Add("PTU")
-        cboLocation.Items.Add("01")
     End Sub
 End Class
