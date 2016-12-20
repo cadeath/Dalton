@@ -58,12 +58,13 @@
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxCount As Integer = ds.Tables(0).Rows.Count
 
-        cboLocation.Items.Add("PTU")
         cboLocation.Items.Add("01")
+        cboLocation.Items.Add("PTU")
         Dim str(MaxCount - 1) As String
         For cnt As Integer = 0 To MaxCount - 1
             str(cnt) = ds.Tables(0).Rows(cnt).Item("BranchName")
         Next
         cboLocation.Items.AddRange(str)
     End Sub
+
 End Class
