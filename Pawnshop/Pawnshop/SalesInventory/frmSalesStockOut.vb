@@ -36,15 +36,14 @@
     End Sub
 
     Private Sub Load_ControlNum()
+        CURRENT_NUM = GetOption("STONum")
         txtControl.Text = CURRENT_NUM.ToString("000000")
     End Sub
 
     Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
         Me.DialogResult = Windows.Forms.DialogResult.OK
-
-        m_Branch = cboLocation.Text
-        m_Particulars = txtParticular.Text
-
+            m_Branch = cboLocation.Text
+            m_Particulars = txtParticular.Text
         Me.Close()
     End Sub
 
@@ -59,12 +58,13 @@
         Dim ds As DataSet = LoadSQL(mySql)
         Dim MaxCount As Integer = ds.Tables(0).Rows.Count
 
-        cboLocation.Items.Add("PTU")
         cboLocation.Items.Add("01")
+        cboLocation.Items.Add("PTU")
         Dim str(MaxCount - 1) As String
         For cnt As Integer = 0 To MaxCount - 1
             str(cnt) = ds.Tables(0).Rows(cnt).Item("BranchName")
         Next
         cboLocation.Items.AddRange(str)
     End Sub
+
 End Class

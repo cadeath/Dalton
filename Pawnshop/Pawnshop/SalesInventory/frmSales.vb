@@ -67,12 +67,14 @@ Public Class frmSales
                 prefix = "STO"
         End Select
 
-        mySql &= String.Format("'{1}#{0:000000}'", ControlNum, prefix)
+        Dim uniq As String = String.Format("'{1}#{0:000000}'", ControlNum, prefix)
+        mySql &= uniq
+
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             canTransact = False
-            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical)
+            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical, uniq)
         End If
     End Sub
 
@@ -323,6 +325,16 @@ Public Class frmSales
                 Exit Sub
             End If
 
+            If Not OTPDisable Then
+                OTPStockOut_Initialization()
+
+                diagGeneralOTP.GeneralOTP = OtpSettings
+                diagGeneralOTP.ShowDialog()
+                If Not diagGeneralOTP.isCorrect Then
+                    Exit Sub
+                End If
+            End If
+
             unsec_Customer = retVal(0) 'Branch
             Remarks = retVal(1) 'Particulars
         End If
@@ -436,9 +448,13 @@ Public Class frmSales
         ItemPosted()
 
         If TransactionMode = TransType.StockOut Then
-            Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-            DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), ORNUM.ToString("000000"))
-            InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+            If MsgBox("Do you want to generate STO File?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "STO") = _
+            MsgBoxResult.Yes Then
+                Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                Dim STONUM As Integer = GetOption("STONum") - 1
+                DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), STONUM.ToString("000"))
+                InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+            End If
         End If
 
         If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then
@@ -599,6 +615,18 @@ Public Class frmSales
 
     Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
         If ShiftMode() Then
+            'OTPStockOut_Initialization()
+
+            'If Not OTPDisable Then
+            '    diagGeneralOTP.GeneralOTP = OtpSettings
+            '    diagGeneralOTP.ShowDialog()
+            '    If Not diagGeneralOTP.isCorrect Then
+            '        Exit Sub
+            '    Else
+            '        Load_asStockOut()
+            '    End If
+            'End If
+
             Load_asStockOut()
         End If
     End Sub
