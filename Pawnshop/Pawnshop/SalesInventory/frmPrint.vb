@@ -4,7 +4,7 @@ Public Class frmPrint
     Private PRINTER_Sales As String = GetOption("PrinterPT")
 
     Private Sub LoadReceipt()
-        Dim mySql As String = "SELECT FIRST 50 * FROM DOC ORDER BY DOCDate DESC"
+        Dim mySql As String = "SELECT FIRST 50 * FROM DOC WHERE STATUS <> 'V' ORDER BY DOCDate DESC"
 
         Dim ds As DataSet = LoadSQL(mySql)
         lvReceipt.Items.Clear()
@@ -23,8 +23,18 @@ Public Class frmPrint
         If txtSearch.Text = "" Then Exit Sub
         Dim secured_str As String = txtSearch.Text
         secured_str = DreadKnight(secured_str)
-        Dim mySql As String = "SELECT * FROM DOC WHERE CODE LIKE '" & secured_str & "' OR UPPER(CUSTOMER) LIKE UPPER('%" & secured_str & "%')"
+        Dim strWords As String() = secured_str.Split(New Char() {" "c})
+        Dim NAME As String
 
+        Dim mySql As String = "SELECT * FROM DOC WHERE STATUS <> 'V' AND CODE LIKE '" & secured_str & "' OR "
+        For Each Name In strWords
+            mySql &= vbCr & " UPPER(CUSTOMER) LIKE UPPER('%" & NAME & "%') and "
+            If Name Is strWords.Last Then
+                mySql &= vbCr & " UPPER(CUSTOMER) LIKE UPPER('%" & NAME & "%') "
+                Exit For
+            End If
+
+        Next
         Dim ds As DataSet = LoadSQL(mySql)
         lvReceipt.Items.Clear()
         For Each dr As DataRow In ds.Tables(0).Rows
@@ -107,5 +117,56 @@ Public Class frmPrint
 
     Private Sub lvReceipt_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvReceipt.DoubleClick
         btnReprint.PerformClick()
+    End Sub
+
+    Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidSales
+            If Not CheckOTP() Then Exit Sub
+        Else
+            Void()
+        End If
+    End Sub
+
+    Friend Sub Void()
+        Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        Dim idx As String = lvReceipt.FocusedItem.Tag
+        Dim mysql As String = "SELECT * FROM DOC WHERE DOCID = '" & idx & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "Doc")
+        Dim DocDate As Date = ds.Tables(0).Rows(0).Item("DOCDATE")
+        If DocDate <> CurrentDate.Date Then
+            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        ds.Tables(0).Rows(0).Item("STATUS") = "V"
+        SaveEntry(ds, False)
+
+        Dim EncoderID As String = ds.Tables(0).Rows(0).Item("USERID")
+        Dim TransactionName As String = "SALES"
+        Dim NewOtp As New ClassOtp("VOID SALES", diagOTP.txtPIN.Text, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
+
+        ds.Clear()
+        mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
+        ds = LoadSQL(mysql, "Doclines")
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            AddItemOnMaster(dr)
+            TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "Doclines ID: " & dr.Item("DLID"))
+            RemoveJournal(dr.Item("DLID"), , TransactionName)
+        Next
+       
+        'MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
+        Me.Close()
+    End Sub
+
+    Private Sub AddItemOnMaster(ByVal dr As DataRow)
+        Dim mysql As String = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & dr.Item("ITEMCODE") & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "ITEMMASTER")
+        With ds.Tables(0).Rows(0)
+            .Item("OnHand") = .Item("Onhand") + dr.Item("Qty")
+        End With
+        database.SaveEntry(ds, False)
     End Sub
 End Class
