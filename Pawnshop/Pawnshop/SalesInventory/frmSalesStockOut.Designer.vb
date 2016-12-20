@@ -51,7 +51,7 @@ Partial Class frmSalesStockOut
         Me.txtControl.Name = "txtControl"
         Me.txtControl.ReadOnly = True
         Me.txtControl.Size = New System.Drawing.Size(199, 22)
-        Me.txtControl.TabIndex = 1
+        Me.txtControl.TabIndex = 0
         Me.txtControl.Text = "000"
         '
         'Label2
@@ -71,7 +71,7 @@ Partial Class frmSalesStockOut
         Me.txtParticular.Multiline = True
         Me.txtParticular.Name = "txtParticular"
         Me.txtParticular.Size = New System.Drawing.Size(306, 68)
-        Me.txtParticular.TabIndex = 1
+        Me.txtParticular.TabIndex = 2
         Me.txtParticular.Text = "000"
         '
         'Label3
@@ -89,7 +89,7 @@ Partial Class frmSalesStockOut
         Me.btnCancel.Location = New System.Drawing.Point(243, 163)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 33)
-        Me.btnCancel.TabIndex = 3
+        Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -98,7 +98,7 @@ Partial Class frmSalesStockOut
         Me.btnAccept.Location = New System.Drawing.Point(162, 163)
         Me.btnAccept.Name = "btnAccept"
         Me.btnAccept.Size = New System.Drawing.Size(75, 33)
-        Me.btnAccept.TabIndex = 2
+        Me.btnAccept.TabIndex = 3
         Me.btnAccept.Text = "&Accept"
         Me.btnAccept.UseVisualStyleBackColor = True
         '
@@ -110,7 +110,7 @@ Partial Class frmSalesStockOut
         Me.cboLocation.Location = New System.Drawing.Point(118, 39)
         Me.cboLocation.Name = "cboLocation"
         Me.cboLocation.Size = New System.Drawing.Size(200, 21)
-        Me.cboLocation.TabIndex = 5
+        Me.cboLocation.TabIndex = 1
         '
         'frmSalesStockOut
         '
