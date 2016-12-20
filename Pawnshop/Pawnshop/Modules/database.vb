@@ -70,6 +70,7 @@ Friend Module database
     ''' <returns>Boolean: Success Result</returns>
     ''' <remarks></remarks>
 
+
     Friend Function SaveEntry(ByVal dsEntry As DataSet, Optional ByVal isNew As Boolean = True) As Boolean
         If dsEntry Is Nothing Then
             Return False

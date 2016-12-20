@@ -129,7 +129,7 @@ Public Class frmPrint
     End Sub
 
     Friend Sub Void()
-        Dim ans As DialogResult = MsgBox("Do you want to void this transaction? Sure Ba", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
         Dim idx As String = lvReceipt.FocusedItem.Tag
         Dim mysql As String = "SELECT * FROM DOC WHERE DOCID = '" & idx & "'"
@@ -152,13 +152,21 @@ Public Class frmPrint
         ds = LoadSQL(mysql, "Doclines")
 
         For Each dr As DataRow In ds.Tables(0).Rows
+            AddItemOnMaster(dr)
             TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "Doclines ID: " & dr.Item("DLID"))
             RemoveJournal(dr.Item("DLID"), , TransactionName)
         Next
        
-        MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
+        'MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
         Me.Close()
     End Sub
 
-
+    Private Sub AddItemOnMaster(ByVal dr As DataRow)
+        Dim mysql As String = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & dr.Item("ITEMCODE") & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "ITEMMASTER")
+        With ds.Tables(0).Rows(0)
+            .Item("OnHand") = .Item("Onhand") + dr.Item("Qty")
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
 End Class
