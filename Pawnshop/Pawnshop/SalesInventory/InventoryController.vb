@@ -65,6 +65,7 @@ Module InventoryController
         ds.Tables("OPI").Rows(0).Item("UPDATED_AT") = Now
         database.SaveEntry(ds, False)
 
+        frmSalesStockOut.Add_ControlNum()
         Console.WriteLine(RecalledItem.Description & " is now pulled out")
     End Sub
 
