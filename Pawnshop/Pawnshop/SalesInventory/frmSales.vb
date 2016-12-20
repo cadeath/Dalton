@@ -323,6 +323,16 @@ Public Class frmSales
                 Exit Sub
             End If
 
+            If Not OTPDisable Then
+                OTPStockOut_Initialization()
+
+                diagGeneralOTP.GeneralOTP = OtpSettings
+                diagGeneralOTP.ShowDialog()
+                If Not diagGeneralOTP.isCorrect Then
+                    Exit Sub
+                End If
+            End If
+
             unsec_Customer = retVal(0) 'Branch
             Remarks = retVal(1) 'Particulars
         End If
@@ -599,17 +609,19 @@ Public Class frmSales
 
     Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
         If ShiftMode() Then
-            OTPStockOut_Initialization()
+            'OTPStockOut_Initialization()
 
-            If Not OTPDisable Then
-                diagGeneralOTP.GeneralOTP = OtpSettings
-                diagGeneralOTP.ShowDialog()
-                If Not diagGeneralOTP.isCorrect Then
-                    Exit Sub
-                Else
-                    Load_asStockOut()
-                End If
-            End If
+            'If Not OTPDisable Then
+            '    diagGeneralOTP.GeneralOTP = OtpSettings
+            '    diagGeneralOTP.ShowDialog()
+            '    If Not diagGeneralOTP.isCorrect Then
+            '        Exit Sub
+            '    Else
+            '        Load_asStockOut()
+            '    End If
+            'End If
+
+            Load_asStockOut()
         End If
     End Sub
 

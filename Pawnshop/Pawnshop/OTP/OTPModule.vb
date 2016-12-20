@@ -151,9 +151,9 @@ Module OTPModule
         If OTPDisable Then Exit Sub
 
         OtpSettings = New OneTimePassword
-        OtpSettings.AppName = "Dalton - OTP Stock Out"
+        OtpSettings.AppName = "Dalton - Stock Out"
         OtpSettings.SecretCode = "OTPStockOut"
-        OtpSettings.Setup("marzxxx90@gmail.com")
+        OtpSettings.Setup("ecjmaquic@gmail.com")
         Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
 
         If DEV_MODE Then
