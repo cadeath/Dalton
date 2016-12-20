@@ -129,8 +129,8 @@ Public Class frmPrint
     End Sub
 
     Friend Sub Void()
-        Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-        If ans = Windows.Forms.DialogResult.No Then Exit Sub
+        'Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        'If ans = Windows.Forms.DialogResult.No Then Exit Sub
         Dim idx As String = lvReceipt.FocusedItem.Tag
         Dim mysql As String = "SELECT * FROM DOC WHERE DOCID = '" & idx & "'"
         Dim ds As DataSet = LoadSQL(mysql, "Doc")
