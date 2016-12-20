@@ -446,9 +446,13 @@ Public Class frmSales
         ItemPosted()
 
         If TransactionMode = TransType.StockOut Then
-            Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-            DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), ORNUM.ToString("000000"))
-            InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+            If MsgBox("Do you want to generate STO File?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "STO") = _
+            MsgBoxResult.Yes Then
+                Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                Dim STONUM As Integer = GetOption("STONum") - 1
+                DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), STONUM.ToString("000"))
+                InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+            End If
         End If
 
         If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then

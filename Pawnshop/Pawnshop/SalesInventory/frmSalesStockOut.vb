@@ -36,6 +36,7 @@
     End Sub
 
     Private Sub Load_ControlNum()
+        CURRENT_NUM = GetOption("STONum")
         txtControl.Text = CURRENT_NUM.ToString("000000")
     End Sub
 
