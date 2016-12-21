@@ -275,7 +275,7 @@ Public Class frmSales
 
             Console.WriteLine("Removing " & lvSale.Items(idx).Text)
 
-            If MsgBox("Do you want remove this item?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "POSTING...") = vbYes Then
+            If MsgBox("Do you want remove this item?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Removing...") = vbYes Then
                 Dim itm As New cItemData
                 itm.ItemCode = lvSale.Items(idx).Text
                 itm.Load_Item()
