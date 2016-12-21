@@ -64,7 +64,7 @@
     Private Sub Invlines()
         Dim NewQty As String = "ALTER TABLE INVLINES ADD NEWQTY DECIMAL(12, 6) NOT NULL;"
         Dim NewUnit As String = "ALTER TABLE INVLINES ADD NEWUNIT DECIMAL(12, 6) NOT NULL;"
-        Dim NewSale As String = "ALTER TABLE INVLINES ADD NEWSALE DECIMAL(12, 6) NOT NULL;"
+        Dim NewSale As String = "ALTER TABLE INVLINES ADD NEWSALE DECIMAL(12, 6);"
         Dim NewRowTotal As String = "ALTER TABLE INVLINES ADD NEWROWTOTAL DECIMAL(12, 6) NOT NULL;"
         Dim UpdateNewInv As String = "Update InvLines set NewUnit = UnitPrice, NewSale = SalePrice, NewQty = Qty, NewRowTotal = RowTotal where InvID <> 0"
         Dim DropQty As String = "ALTER TABLE INVLINES DROP QTY;"
