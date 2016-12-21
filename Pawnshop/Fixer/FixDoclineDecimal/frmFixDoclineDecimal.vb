@@ -14,7 +14,12 @@
         txtData.Text = firebird
     End Sub
 
+    Private Sub Disable(ByVal st As Boolean)
+        btnFix.Enabled = Not st
+    End Sub
+
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
+        Disable(1)
         Try
             Doclines()
 
@@ -24,6 +29,7 @@
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "E R R O R")
         End Try
+        Disable(0)
     End Sub
 
     Private Sub Doclines()
