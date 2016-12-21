@@ -3,6 +3,7 @@
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
 
+
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
 
@@ -27,6 +28,8 @@
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
+        '-------------------------------------------------
+        SalesToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -53,6 +56,7 @@
         CashInOutToolStripMenuItem.Enabled = Not st
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
+        VoidReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -119,7 +123,10 @@
             Exit Sub
         End If
 
+        If CheckFormActive() Then Exit Sub
+
         frmSettings.Show()
+
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
@@ -201,10 +208,6 @@
         frmClient.Show()
     End Sub
 
-    Private Sub pbLogo_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles pbLogo.DoubleClick
-        devClient.Show()
-    End Sub
-
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
@@ -268,7 +271,7 @@
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If DEV_MODE Then dev_Pawning.Show()
+        If DEV_MODE Then dev_Pawning2.Show()
         If (POSuser.isSuperUser Or Not POSuser.canLayAway) Then
             MsgBoxAuthoriation("You don't have access to Lay away.")
             Exit Sub
@@ -282,6 +285,8 @@
             MsgBoxAuthoriation("You don't have access to POS")
             Exit Sub
         End If
+
+        frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
@@ -316,7 +321,8 @@
             MsgBoxAuthoriation("You don't have access to the Console")
             Exit Sub
         End If
-        frmMIS.Show()
+        'frmMIS.Show()
+        frmAdminPanel.Show()
     End Sub
 
     Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
@@ -399,9 +405,15 @@
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
-        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        'If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        qryPullOut.Show()
+        'qryPullOut.Show()
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.Pullout
+            If Not CheckOTP() Then Exit Sub
+        Else
+            qryPullOut.Show()
+        End If
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
@@ -486,5 +498,10 @@
 
     Private Sub AccountingExtractToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AccountingExtractToolStripMenuItem.Click
         ExtractDataFromDatabase.ShowDialog()
+    End Sub
+
+    Private Sub SalesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesToolStripMenuItem.Click
+        frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
+        frmExtractor.Show()
     End Sub
 End Class

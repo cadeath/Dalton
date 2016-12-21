@@ -1,8 +1,5 @@
 ﻿Module formSwitch
-    ''' <summary>
-    ''' This module where every form was assign by a digit which underlying the form.
-    ''' </summary>
-    ''' <remarks></remarks>
+    
     Friend Enum FormName As Integer
         devForm = 0
         frmMTSend = 1 'Money Transfer
@@ -13,13 +10,15 @@
         frmPawnItem = 6
         frmDollarSimple = 7
         frmMoneyExchange = 8
+        frmAdminPanel = 9
+
+        frmPawningV2_Client = 10
+        frmPawningV2_Specs = 11
+        frmPawningV2_Claimer = 12
+        frmPawningV2_SpecsValue = 13
+        frmPawningV2_InterestScheme = 14
     End Enum
-    ''' <summary>
-    ''' This method select what form you want to go.
-    ''' </summary>
-    ''' <param name="gotoForm">gotoform here is a variable that hold all forms.</param>
-    ''' <param name="cl"></param>
-    ''' <remarks></remarks>
+
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
         Select Case gotoForm
             Case FormName.devForm
@@ -36,9 +35,31 @@
                 frmDollorSimple.LoadClient(cl)
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadClient(cl)
+
+            Case FormName.frmPawningV2_Client
+                frmPawningItemNew.LoadClient(cl)
+            Case FormName.frmPawningV2_Claimer
+                frmPawningItemNew.LoadCliamer(cl)
         End Select
     End Sub
-    ''' <remarks></remarks>
+
+    Friend Sub ReloadFormFromItemList(gotoForm As FormName, Selected_Specs As ItemClass)
+        Select Case gotoForm
+            Case FormName.frmPawningV2_Specs
+                frmPawningItemNew.Load_ItemSpecification(Selected_Specs)
+            Case FormName.frmPawningV2_SpecsValue
+                frmAdminPanel.Load_ItemSpecification(Selected_Specs)
+
+        End Select
+    End Sub
+
+    Friend Sub ReloadFormFromInterestList(ByVal gotoForm As FormName, ByVal selected_scheme As InterestScheme)
+        Select Case gotoForm
+            Case FormName.frmPawningV2_Specs
+                frmAdminPanel.LoadSchemeList(selected_scheme)
+        End Select
+    End Sub
+
     Friend Sub ReloadFormFromSearch1(ByVal gotoForm As FormName, ByVal cr As Currency)
         Select Case gotoForm
             Case FormName.frmMoneyExchange

@@ -393,7 +393,7 @@ Partial Class dev_Pawning
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "dev_Pawning"
-        Me.Text = "dev_Pawning"
+        Me.Text = "OLD"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)

@@ -74,13 +74,6 @@
         btnView.PerformClick()
     End Sub
 
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
-
     ''' <summary>
     ''' This button will allow to void transaction.
     ''' </summary>
@@ -113,7 +106,9 @@
         Dim ds As DataSet = LoadSQL(mysql)
         Dim tmpEncoderID As Integer
         tmpEncoderID = ds.Tables(0).Rows(0).Item("UserId")
-        TransactionVoidSave("DOLLAR BUYING", tmpEncoderID, POSuser.UserID, ans)
+
+        Dim NewOtp As New ClassOtp("VOID DOLLAR", diagOTP.txtPIN.Text, "DollarID# " & id)
+        TransactionVoidSave("DOLLAR BUYING", tmpEncoderID, POSuser.UserID, "DollarID# " & id & " " & ans)
         tmpLoad.VoidTransaction(ans)
 
         Dim amt As Double = tmpLoad.NetAmount

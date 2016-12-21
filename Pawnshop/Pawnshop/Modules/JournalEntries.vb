@@ -44,7 +44,9 @@
                 onHold = IIf(.Rows(0).Item("onHold") = 1, True, False)
                 'TransType = IIf(IsDBNull(.Rows(0).Item("TRANSTYPE")), "", .Rows(0).Item("TRANSTYPE"))
             End With
-            If onHold Then MsgBox("AccountCode " & transactionName & " is ON HOLD" & vbCrLf & "Contact your IT DEPARTMENT", MsgBoxStyle.Information)
+            'Removed
+            'No use, only identifying ONHOLD
+            'If onHold Then MsgBox("AccountCode " & transactionName & " is ON HOLD" & vbCrLf & "Contact your IT DEPARTMENT", MsgBoxStyle.Information)
         End If
 
         Dim tblName As String = "tblJournal"

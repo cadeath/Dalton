@@ -177,7 +177,9 @@
             End If
         database.SaveEntry(ds, False)
         Dim tmpCIO As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
-        TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID)
+
+        Dim NewOtp As New ClassOtp("VOID " & lblCategory.Text, diagOTP.txtPIN.Text, "CashIn/OutID# " & id)
+        TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID, "CashIn/OutID# " & id)
 
             RemoveJournal(CashID, , Transactiontype)
             RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
@@ -197,13 +199,6 @@
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
-
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
 
     ''' <summary>
     ''' This button void the transaction.
