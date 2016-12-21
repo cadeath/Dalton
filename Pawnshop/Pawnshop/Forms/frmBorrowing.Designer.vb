@@ -41,12 +41,12 @@ Partial Class frmBorrowing
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnBrowse2 = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.btnBrowseOldEsk = New System.Windows.Forms.Button()
         Me.txtUrl = New System.Windows.Forms.TextBox()
         Me.ofdEskFile = New System.Windows.Forms.OpenFileDialog()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnBrowse2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -243,6 +243,26 @@ Partial Class frmBorrowing
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         '
+        'btnBrowse2
+        '
+        Me.btnBrowse2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBrowse2.Location = New System.Drawing.Point(15, 215)
+        Me.btnBrowse2.Name = "btnBrowse2"
+        Me.btnBrowse2.Size = New System.Drawing.Size(88, 29)
+        Me.btnBrowse2.TabIndex = 31
+        Me.btnBrowse2.Text = "&Browse"
+        Me.btnBrowse2.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(398, 12)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(129, 25)
+        Me.Label6.TabIndex = 30
+        Me.Label6.Text = "Borrowings"
+        '
         'btnUpload
         '
         Me.btnUpload.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -276,26 +296,6 @@ Partial Class frmBorrowing
         'ofdEskFile
         '
         Me.ofdEskFile.Filter = "Borrowing File|*.esk"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(398, 12)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(129, 25)
-        Me.Label6.TabIndex = 30
-        Me.Label6.Text = "Borrowings"
-        '
-        'btnBrowse2
-        '
-        Me.btnBrowse2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse2.Location = New System.Drawing.Point(15, 215)
-        Me.btnBrowse2.Name = "btnBrowse2"
-        Me.btnBrowse2.Size = New System.Drawing.Size(88, 29)
-        Me.btnBrowse2.TabIndex = 31
-        Me.btnBrowse2.Text = "&Browse"
-        Me.btnBrowse2.UseVisualStyleBackColor = True
         '
         'frmBorrowing
         '

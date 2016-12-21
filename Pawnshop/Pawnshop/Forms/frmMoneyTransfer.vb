@@ -864,4 +864,5 @@ Public Class frmMoneyTransfer
             btnPost.PerformClick()
         End If
     End Sub
+
 End Class

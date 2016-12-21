@@ -20,6 +20,8 @@ Public Class frmClientInformation
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
+        frmClient.Enabled = False
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
@@ -566,5 +568,9 @@ Public Class frmClientInformation
 
         frmReport.ReportInit(mySql, "dsHistory", "Reports\rpt_History.rdlc", repPara)
         frmReport.Show()
+    End Sub
+
+    Private Sub frmClientInformation_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        frmClient.Enabled = True
     End Sub
 End Class

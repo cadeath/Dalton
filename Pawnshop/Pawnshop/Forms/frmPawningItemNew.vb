@@ -50,6 +50,7 @@ Public Class frmPawningItemNew
             {"Failed to verify hash value to the "}
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Reprint As Boolean = False
+    Private ReadyToPrint As Boolean = False
 
     Private Sub ClearFields()
         mod_system.isAuthorized = False
@@ -226,11 +227,12 @@ Public Class frmPawningItemNew
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         'If Not mod_system.isAuthorized Then CheckAuth() : Return False
+        If cboAppraiser.Text = "" Then MsgBox("Please select Appraiser", MsgBoxStyle.Critical) : cboAppraiser.Focus() : Return False
 
-        If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
-        If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
+            If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
+            If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
 
-        Return True
+            Return True
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
@@ -246,7 +248,12 @@ Public Class frmPawningItemNew
 
         Select Case transactionType
             Case "L"
-                SaveNewLoan() : PrintNewLoan()
+                SaveNewLoan()
+                If ReadyToPrint = False Then
+                    Exit Sub
+                Else
+                    PrintNewLoan()
+                End If
             Case "R"
                 SaveRenew() : PrintRenew()
             Case "X"
@@ -368,10 +375,14 @@ Public Class frmPawningItemNew
             'REMOVE OFFICALRECEIPT INFORMATION
             .ORDate = Nothing
             .ORNumber = 0
+            .DaysOverDue = 0
+            .Penalty = 0
+            .RenewDue = 0
+            .RedeemDue = 0
+            .ServiceCharge = IIf(isOldItem, 0, CInt(PawnServiceCharge))
 
             .Appraisal = PT_Entry.Appraisal
             .Principal = PT_Entry.Principal
-            .AdvanceInterest = PT_Entry.AdvanceInterest
             .NetAmount = PT_Entry.NetAmount
 
             .Status = "R"
@@ -382,8 +393,6 @@ Public Class frmPawningItemNew
             '?????????????????
 
             .AdvanceInterest = AdvanceInterest
-            .ServiceCharge = PawnServiceCharge
-            .NetAmount = NetAmount
 
             PRINT_PTNEW = .PawnTicket
             PRINT_PTOLD = .OldTicket
@@ -421,18 +430,20 @@ Public Class frmPawningItemNew
         If Not isValid() Then Exit Sub
         ' CHECKING REQUIRED FIELDS
         Dim i As Integer = 0
+        Try
         For Each reqSpec As ItemSpecs In PawnedItem.ItemClass.ItemSpecifications
             If reqSpec.isRequired Then
                 If lvSpec.Items(i).SubItems(1).Text = "" Then
                     MsgBox("This one requires information", MsgBoxStyle.Critical, reqSpec.SpecName)
+                    ReadyToPrint = False
                     Exit Sub
+                Else
+                    ReadyToPrint = True
                 End If
             End If
 
             i += 1
         Next
-
-        RefreshInput()
 
         ' SAVING PAWNED ITEM INFORMATION ================================
 
@@ -451,7 +462,7 @@ Public Class frmPawningItemNew
             i += 1
         Next
         PawnedItem.PawnItemSpecs = PawnSpecs
-
+        RefreshInput()
         ' END - SAVING PAWNED ITEM INFORMATION ==========================
 
         With PT_Entry
@@ -495,7 +506,10 @@ Public Class frmPawningItemNew
         txtCustomer.Focus()
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
             frmPawning.ReloadForm()
-        End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Please Check the fields!")
+        End Try
     End Sub
 
     Private Sub dateChange(selectedClass As ItemClass)
@@ -1160,7 +1174,7 @@ Public Class frmPawningItemNew
 
         ' Add Monthly Computation
         Dim strCompute As String
-      
+
         strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
         Console.WriteLine(strCompute)
         addParameters.Add("txtRenewCompute", strCompute)
