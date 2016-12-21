@@ -64,6 +64,7 @@ Partial Class frmFixDoclineDecimal
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmFixDoclineDecimal"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Fix Decimal"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
