@@ -262,6 +262,8 @@ Public Class frmSales
     End Sub
 
     Private Sub lvSale_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSale.KeyDown
+        If lvSale.SelectedItems.Count = 0 Then Exit Sub
+
         If e.KeyCode = Keys.Delete Then
 
             Dim idx As Integer = lvSale.FocusedItem.Index
@@ -273,14 +275,17 @@ Public Class frmSales
 
             Console.WriteLine("Removing " & lvSale.Items(idx).Text)
 
-            Dim itm As New cItemData
-            itm.ItemCode = lvSale.Items(idx).Text
-            itm.Load_Item()
+            If MsgBox("Do you want remove this item?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "POSTING...") = vbYes Then
+                Dim itm As New cItemData
+                itm.ItemCode = lvSale.Items(idx).Text
+                itm.Load_Item()
 
-            DOC_TOTAL -= itm.SalePrice * CDbl(lvSale.Items(idx).SubItems(2).Text)
-            ht_BroughtItems.Remove(itm.ItemCode)
-            lvSale.Items(idx).Remove()
-
+                DOC_TOTAL -= itm.SalePrice * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                ht_BroughtItems.Remove(itm.ItemCode)
+                lvSale.Items(idx).Remove()
+            Else
+                Exit Sub
+            End If
             Display_Total(DOC_TOTAL)
         End If
     End Sub
