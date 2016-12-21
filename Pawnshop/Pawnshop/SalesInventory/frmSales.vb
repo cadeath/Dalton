@@ -278,13 +278,9 @@ Public Class frmSales
                 itm.ItemCode = lvSale.Items(idx).Text
                 itm.Load_Item()
 
-            Dim itm As New cItemData
-            itm.ItemCode = lvSale.Items(idx).Text
-            itm.Load_Item()
-
-            DOC_TOTAL -= CDbl(lvSale.Items(idx).SubItems(3).Text) * CDbl(lvSale.Items(idx).SubItems(2).Text)
-            ht_BroughtItems.Remove(itm.ItemCode)
-            lvSale.Items(idx).Remove()
+                DOC_TOTAL -= CDbl(lvSale.Items(idx).SubItems(3).Text) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                ht_BroughtItems.Remove(itm.ItemCode)
+                lvSale.Items(idx).Remove()
 
             Else
                 Exit Sub
