@@ -114,7 +114,7 @@
             If Not diagGeneralOTP.isCorrect Then
                 Exit Sub
             Else
-                frmCashCountV2.Show()
+                qryPullOut.Show()
             End If
 
         End If
