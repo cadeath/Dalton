@@ -691,6 +691,12 @@
     <Compile Include="Reports\frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\frmSalesReport.Designer.vb">
+      <DependentUpon>frmSalesReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmSalesReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\frmSegreList.Designer.vb">
       <DependentUpon>frmSegreList.vb</DependentUpon>
     </Compile>
@@ -1044,6 +1050,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSalesReport.resx">
+      <DependentUpon>frmSalesReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryAuction.resx">
       <DependentUpon>qryAuction.vb</DependentUpon>
