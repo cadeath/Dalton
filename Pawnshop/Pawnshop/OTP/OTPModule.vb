@@ -146,4 +146,22 @@ Module OTPModule
             Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
         End If
     End Sub
+
+
+    Friend Sub OTPStockOut_Initialization()
+        If OTPDisable Then Exit Sub
+
+        OtpSettings = New OneTimePassword
+        OtpSettings.AppName = "Dalton - Stock Out"
+        OtpSettings.SecretCode = "OTPStockOut"
+        OtpSettings.Setup("ecjmaquic@gmail.com")
+        Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
+
+        If DEV_MODE Then
+            OtpSettings.Setup("eskie@pgc-itdept.org")
+            Console.WriteLine("QRCode: " & OtpSettings.ManualCode)
+            Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
+        End If
+    End Sub
+
 End Module
