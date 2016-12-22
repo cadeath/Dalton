@@ -236,7 +236,18 @@
                 Dim customPrice As Double = CDbl(tmp)
                 selected_Itm.SalePrice = customPrice
             Else
-                selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                If isRedeem Then
+                    Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                    While Not IsNumeric(tmp)
+                        tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                        If tmp = "" Then Exit Sub
+                    End While
+
+                    Dim customPrice As Double = CDbl(tmp)
+                    selected_Itm.SalePrice = customPrice
+                Else
+                    selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                End If
             End If
         End If
 
