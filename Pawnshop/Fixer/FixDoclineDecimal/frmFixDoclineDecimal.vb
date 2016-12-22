@@ -40,8 +40,8 @@
 
         Dim NewUnitPrice As String = "ALTER TABLE DOCLINES ADD UNITNEW DECIMAL(12, 6) DEFAULT '0.0' NOT NULL;"
         Dim NewSalePrice As String = "ALTER TABLE DOCLINES ADD SALENEW DECIMAL(12, 6) DEFAULT '0.0' NOT NULL;"
-        Dim NewQty As String = "ALTER TABLE DOCLINES ADD QTYNEW DECIMAL(12, 6) NOT NULL;"
-        Dim NewRowTotal As String = "ALTER TABLE DOCLINES ADD ROWTOTALNEW DECIMAL(12, 6) NOT NULL;"
+        Dim NewQty As String = "ALTER TABLE DOCLINES ADD QTYNEW DECIMAL(12, 6) DEFAULT '0.0' NOT NULL;"
+        Dim NewRowTotal As String = "ALTER TABLE DOCLINES ADD ROWTOTALNEW DECIMAL(12, 6) DEFAULT '0.0' NOT NULL;"
         Dim UpdateNew As String = "Update Doclines set UnitNew = UnitPrice, SaleNew = SalePrice, QtyNew = Qty, RowTotalNew = RowTotal where DLID <> 0"
         Dim DropUnit As String = "ALTER TABLE DOCLINES DROP UNITPRICE;"
         Dim DropSale As String = "ALTER TABLE DOCLINES DROP SALEPRICE;"
@@ -51,6 +51,13 @@
         Dim ChangeSale As String = "ALTER TABLE DOCLINES ALTER COLUMN SALENEW TO SALEPRICE;"
         Dim ChangeQty As String = "ALTER TABLE DOCLINES ALTER COLUMN QTYNEW TO QTY;"
         Dim ChangeRowTotal As String = "ALTER TABLE DOCLINES ALTER COLUMN ROWTOTALNEW TO ROWTOTAL;"
+
+        Dim QtyPost As String = "ALTER TABLE DOCLINES ALTER COLUMN QTY POSITION 5;"
+        Dim UnitPost As String = "ALTER TABLE DOCLINES ALTER COLUMN UNITPRICE POSITION 6;"
+        Dim SalePost As String = "ALTER TABLE DOCLINES ALTER COLUMN SALEPRICE POSITION 7;"
+        Dim RowTotal As String = "ALTER TABLE DOCLINES ALTER COLUMN ROWTOTAL POSITION 8;"
+        Dim UomPost As String = "ALTER TABLE DOCLINES ALTER COLUMN UOM POSITION 9;"
+        Dim RemarkPost As String = "ALTER TABLE DOCLINES ALTER COLUMN REMARKS POSITION 10;"
 
         RunCommand(DropViewStockCard)
 
@@ -68,13 +75,20 @@
         RunCommand(ChangeQty)
         RunCommand(ChangeRowTotal)
 
+        RunCommand(QtyPost)
+        RunCommand(UnitPost)
+        RunCommand(SalePost)
+        RunCommand(RowTotal)
+        RunCommand(UomPost)
+        RunCommand(RemarkPost)
+
     End Sub
 
     Private Sub Invlines()
-        Dim NewQty As String = "ALTER TABLE INVLINES ADD NEWQTY DECIMAL(12, 6) NOT NULL;"
-        Dim NewUnit As String = "ALTER TABLE INVLINES ADD NEWUNIT DECIMAL(12, 6) NOT NULL;"
-        Dim NewSale As String = "ALTER TABLE INVLINES ADD NEWSALE DECIMAL(12, 6);"
-        Dim NewRowTotal As String = "ALTER TABLE INVLINES ADD NEWROWTOTAL DECIMAL(12, 6) NOT NULL;"
+        Dim NewQty As String = "ALTER TABLE INVLINES ADD NEWQTY DECIMAL(12, 6) DEFAULT '0.0' NOT NULL;"
+        Dim NewUnit As String = "ALTER TABLE INVLINES ADD NEWUNIT DECIMAL(12, 6) DEFAULT '0.0' NOT NULL;"
+        Dim NewSale As String = "ALTER TABLE INVLINES ADD NEWSALE DECIMAL(12, 6) DEFAULT '0.0';"
+        Dim NewRowTotal As String = "ALTER TABLE INVLINES ADD NEWROWTOTAL DECIMAL(12, 6) DEFAULT '0.0' NOT NULL;"
         Dim UpdateNewInv As String = "Update InvLines set NewUnit = UnitPrice, NewSale = SalePrice, NewQty = Qty, NewRowTotal = RowTotal where InvID <> 0"
         Dim DropQty As String = "ALTER TABLE INVLINES DROP QTY;"
         Dim DropUnit As String = "ALTER TABLE INVLINES DROP UNITPRICE;"
@@ -84,6 +98,13 @@
         Dim ChangeUnit As String = "ALTER TABLE INVLINES ALTER COLUMN NEWUNIT TO UNITPRICE;"
         Dim ChangeSale As String = "ALTER TABLE INVLINES ALTER COLUMN NEWSALE TO SALEPRICE;"
         Dim ChangeRowTotal As String = "ALTER TABLE INVLINES ALTER COLUMN NEWROWTOTAL TO ROWTOTAL;"
+
+        Dim PosQty As String = "ALTER TABLE INVLINES ALTER COLUMN QTY POSITION 5;"
+        Dim PostUnit As String = "ALTER TABLE INVLINES ALTER COLUMN UNITPRICE POSITION 6;"
+        Dim PostSale As String = "ALTER TABLE INVLINES ALTER COLUMN SALEPRICE POSITION 7;"
+        Dim PostRowTotal As String = "ALTER TABLE INVLINES ALTER COLUMN ROWTOTAL POSITION 8;"
+        Dim PostUom As String = "ALTER TABLE INVLINES ALTER COLUMN UOM POSITION 9;"
+        Dim PostRemark As String = "ALTER TABLE INVLINES ALTER COLUMN REMARKS POSITION 10;"
 
 
         Dim CreateViewStockCard As String = "CREATE VIEW STOCK_CARD( "
@@ -124,6 +145,12 @@
         RunCommand(ChangeSale)
         RunCommand(ChangeRowTotal)
 
+        RunCommand(PosQty)
+        RunCommand(PostUnit)
+        RunCommand(PostSale)
+        RunCommand(PostRowTotal)
+        RunCommand(PostUom)
+        RunCommand(PostRemark)
 
         RunCommand(CreateViewStockCard)
     End Sub
