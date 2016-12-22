@@ -283,7 +283,6 @@ Partial Class frmSales
         Me.tsbReceipt.Name = "tsbReceipt"
         Me.tsbReceipt.Size = New System.Drawing.Size(77, 22)
         Me.tsbReceipt.Text = "RECEIPTS"
-        Me.tsbReceipt.Visible = False
         '
         'ToolStripSeparator4
         '

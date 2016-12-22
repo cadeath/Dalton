@@ -372,16 +372,16 @@
     <Compile Include="Forms\watermark.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
+    <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
-    <Compile Include="InterestScheme\dev_Scheme.vb">
+    <Compile Include="Modules\InterestScheme\dev_Scheme.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterestScheme\InterestScheme.vb" />
-    <Compile Include="InterestScheme\IntScheme_Lines.vb" />
-    <Compile Include="InterestScheme\Scheme_Interest.vb" />
-    <Compile Include="InterestScheme\Scheme_Load.vb" />
+    <Compile Include="Modules\InterestScheme\InterestScheme.vb" />
+    <Compile Include="Modules\InterestScheme\IntScheme_Lines.vb" />
+    <Compile Include="Modules\InterestScheme\Scheme_Interest.vb" />
+    <Compile Include="Modules\InterestScheme\Scheme_Load.vb" />
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
@@ -897,7 +897,7 @@
     <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
+    <EmbeddedResource Include="Modules\InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
