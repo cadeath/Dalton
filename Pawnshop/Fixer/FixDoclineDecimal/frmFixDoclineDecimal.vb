@@ -52,6 +52,13 @@
         Dim ChangeQty As String = "ALTER TABLE DOCLINES ALTER COLUMN QTYNEW TO QTY;"
         Dim ChangeRowTotal As String = "ALTER TABLE DOCLINES ALTER COLUMN ROWTOTALNEW TO ROWTOTAL;"
 
+        Dim QtyPost As String = "ALTER TABLE DOCLINES ALTER COLUMN QTY POSITION 5;"
+        Dim UnitPost As String = "ALTER TABLE DOCLINES ALTER COLUMN UNITPRICE POSITION 6;"
+        Dim SalePost As String = "ALTER TABLE DOCLINES ALTER COLUMN SALEPRICE POSITION 7;"
+        Dim RowTotal As String = "ALTER TABLE DOCLINES ALTER COLUMN ROWTOTAL POSITION 8;"
+        Dim UomPost As String = "ALTER TABLE DOCLINES ALTER COLUMN UOM POSITION 9;"
+        Dim RemarkPost As String = "ALTER TABLE DOCLINES ALTER COLUMN REMARKS POSITION 10;"
+
         RunCommand(DropViewStockCard)
 
         RunCommand(NewUnitPrice)
@@ -67,6 +74,13 @@
         RunCommand(ChangeSale)
         RunCommand(ChangeQty)
         RunCommand(ChangeRowTotal)
+
+        RunCommand(QtyPost)
+        RunCommand(UnitPost)
+        RunCommand(SalePost)
+        RunCommand(RowTotal)
+        RunCommand(UomPost)
+        RunCommand(RemarkPost)
 
     End Sub
 
@@ -84,6 +98,13 @@
         Dim ChangeUnit As String = "ALTER TABLE INVLINES ALTER COLUMN NEWUNIT TO UNITPRICE;"
         Dim ChangeSale As String = "ALTER TABLE INVLINES ALTER COLUMN NEWSALE TO SALEPRICE;"
         Dim ChangeRowTotal As String = "ALTER TABLE INVLINES ALTER COLUMN NEWROWTOTAL TO ROWTOTAL;"
+
+        Dim PosQty As String = "ALTER TABLE INVLINES ALTER COLUMN QTY POSITION 5;"
+        Dim PostUnit As String = "ALTER TABLE INVLINES ALTER COLUMN UNITPRICE POSITION 6;"
+        Dim PostSale As String = "ALTER TABLE INVLINES ALTER COLUMN SALEPRICE POSITION 7;"
+        Dim PostRowTotal As String = "ALTER TABLE INVLINES ALTER COLUMN ROWTOTAL POSITION 8;"
+        Dim PostUom As String = "ALTER TABLE INVLINES ALTER COLUMN UOM POSITION 9;"
+        Dim PostRemark As String = "ALTER TABLE INVLINES ALTER COLUMN REMARKS POSITION 10;"
 
 
         Dim CreateViewStockCard As String = "CREATE VIEW STOCK_CARD( "
@@ -124,6 +145,12 @@
         RunCommand(ChangeSale)
         RunCommand(ChangeRowTotal)
 
+        RunCommand(PosQty)
+        RunCommand(PostUnit)
+        RunCommand(PostSale)
+        RunCommand(PostRowTotal)
+        RunCommand(PostUom)
+        RunCommand(PostRemark)
 
         RunCommand(CreateViewStockCard)
     End Sub
