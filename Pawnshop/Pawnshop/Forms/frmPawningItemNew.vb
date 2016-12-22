@@ -1160,7 +1160,7 @@ Public Class frmPawningItemNew
         If PT_Entry.Description Is Nothing Then
             addParameters.Add("txtDescription", "N/A")
         Else
-            addParameters.Add("txtDescription", PT_Entry.Description)
+            addParameters.Add("txtDescription", PT_Entry.DescriptionWithAppraiser)
         End If
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
@@ -1240,7 +1240,7 @@ Public Class frmPawningItemNew
         If PT_Entry.Description Is Nothing Then
             addParameters.Add("txtDescription", "N/A")
         Else
-            addParameters.Add("txtDescription", PT_Entry.Description)
+            addParameters.Add("txtDescription", PT_Entry.DescriptionWithAppraiser)
         End If
         addParameters.Add("txtInterest", PT_Entry.AdvanceInterest)
         addParameters.Add("txtServiceCharge", PT_Entry.ServiceCharge / 2)
