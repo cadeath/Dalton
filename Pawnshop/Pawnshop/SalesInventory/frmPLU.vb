@@ -89,7 +89,7 @@
             If src <> "" Then
                 mySql &= vbCrLf & " AND ("
                 If IsNumeric(src) Then
-                    mySql &= String.Format("PT.PAWNTICKET = {0} OR ", src)
+                    mySql &= String.Format("PT.PAWNTICKET LIKE '%{0}%' OR ", src)
                 End If
                 mySql &= String.Format("LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(src).ToLower)
                 mySql &= ")"
