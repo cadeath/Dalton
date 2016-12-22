@@ -28,6 +28,9 @@
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
+        SalesToolStripMenuItem.Enabled = Not st
+        StockInToolStripMenuItem.Enabled = Not st
+        ItemMasterDataToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         SalesToolStripMenuItem.Enabled = Not st
         StockInToolStripMenuItem.Enabled = Not st
