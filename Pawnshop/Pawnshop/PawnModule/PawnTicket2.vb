@@ -664,6 +664,21 @@
         End With
         database.SaveEntry(ds, False)
     End Sub
+
+    Public Function DescriptionWithAppraiser()
+        Dim desc As String = ""
+        desc = Description
+        If desc = "" Then desc = "N/A"
+        desc &= vbCrLf & "Appraised by " & GetUsername(AppraiserID)
+        Return desc
+    End Function
+
+    Private Function GetUsername(ByVal id As Integer) As String
+        Dim loadAppraiser As New ComputerUser
+        loadAppraiser.LoadUser(id)
+
+        Return loadAppraiser.UserName
+    End Function
 #End Region
 
 End Class

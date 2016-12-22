@@ -25,6 +25,7 @@ Partial Class frmFixDoclineDecimal
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnFix = New System.Windows.Forms.Button()
         Me.txtData = New System.Windows.Forms.TextBox()
+        Me.ofdDB = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,4 +75,5 @@ Partial Class frmFixDoclineDecimal
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnFix As System.Windows.Forms.Button
     Friend WithEvents txtData As System.Windows.Forms.TextBox
+    Friend WithEvents ofdDB As System.Windows.Forms.OpenFileDialog
 End Class

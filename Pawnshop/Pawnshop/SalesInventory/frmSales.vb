@@ -618,20 +618,25 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
-        If ShiftMode() Then
-            'OTPStockOut_Initialization()
+        If Not (POSuser.isSuperUser Or POSuser.canStockOut) Then
+            MsgBox("You don't have access to the StockOut", MsgBoxStyle.Critical, "Authorization Invalid")
+            Exit Sub
 
-            'If Not OTPDisable Then
-            '    diagGeneralOTP.GeneralOTP = OtpSettings
-            '    diagGeneralOTP.ShowDialog()
-            '    If Not diagGeneralOTP.isCorrect Then
-            '        Exit Sub
-            '    Else
-            '        Load_asStockOut()
-            '    End If
-            'End If
+            If ShiftMode() Then
+                'OTPStockOut_Initialization()
 
-            Load_asStockOut()
+                'If Not OTPDisable Then
+                '    diagGeneralOTP.GeneralOTP = OtpSettings
+                '    diagGeneralOTP.ShowDialog()
+                '    If Not diagGeneralOTP.isCorrect Then
+                '        Exit Sub
+                '    Else
+                '        Load_asStockOut()
+                '    End If
+                'End If
+
+                Load_asStockOut()
+            End If
         End If
     End Sub
 
