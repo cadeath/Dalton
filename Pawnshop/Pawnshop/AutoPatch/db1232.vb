@@ -1,6 +1,6 @@
-﻿Module db1231
+﻿Module db1232
     Const ALLOWABLE_VERSION As String = "1.2.2.5"
-    Const LATEST_VERSION As String = "1.2.3.1"
+    Const LATEST_VERSION As String = "1.2.3.2"
 
     Private strSql As String
 
@@ -122,10 +122,10 @@
         invlines &= vbCrLf & "  DOCID BIGINT NOT NULL,"
         invlines &= vbCrLf & "  ITEMCODE VARCHAR(20),"
         invlines &= vbCrLf & "  DESCRIPTION VARCHAR(255),"
-        invlines &= vbCrLf & "  QTY DECIMAL(12, 3) DEFAULT '0.0' NOT NULL,"
-        invlines &= vbCrLf & "  UNITPRICE DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
-        invlines &= vbCrLf & "  SALEPRICE DECIMAL(12, 2) DEFAULT '0.0',"
-        invlines &= vbCrLf & "  ROWTOTAL NUMERIC(12, 2) DEFAULT '0.0' NOT NULL,"
+        invlines &= vbCrLf & "  QTY DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        invlines &= vbCrLf & "  UNITPRICE DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        invlines &= vbCrLf & "  SALEPRICE DECIMAL(12, 6) DEFAULT '0.0',"
+        invlines &= vbCrLf & "  ROWTOTAL NUMERIC(12, 6) DEFAULT '0.0' NOT NULL,"
         invlines &= vbCrLf & "  UOM VARCHAR(20),"
         invlines &= vbCrLf & "  REMARKS VARCHAR(255));"
         RunCommand(invlines)
@@ -152,10 +152,10 @@
         docLines &= vbCrLf & "  DOCID BIGINT DEFAULT '0' NOT NULL,"
         docLines &= vbCrLf & "  ITEMCODE VARCHAR(20) NOT NULL,"
         docLines &= vbCrLf & "  DESCRIPTION VARCHAR(255) NOT NULL,"
-        docLines &= vbCrLf & "  QTY DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
-        docLines &= vbCrLf & "  UNITPRICE DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
-        docLines &= vbCrLf & "  SALEPRICE DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
-        docLines &= vbCrLf & "  ROWTOTAL NUMERIC(12, 2) DEFAULT '0.0' NOT NULL,"
+        docLines &= vbCrLf & "  QTY DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        docLines &= vbCrLf & "  UNITPRICE DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        docLines &= vbCrLf & "  SALEPRICE DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        docLines &= vbCrLf & "  ROWTOTAL NUMERIC(12, 6) DEFAULT '0.0' NOT NULL,"
         docLines &= vbCrLf & "  UOM VARCHAR(20),"
         docLines &= vbCrLf & "  REMARKS VARCHAR(255));"
         RunCommand(docLines)

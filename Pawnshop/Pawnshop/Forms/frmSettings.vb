@@ -6,6 +6,7 @@
         Me.TopMost = True
         frmMain.Enabled = False
         lblSAP01.Text = "SAP Code 01"
+        lblSAP02.Text = "SAP Code 02"
         ClearFields()
         PrinterSettings()
     End Sub
