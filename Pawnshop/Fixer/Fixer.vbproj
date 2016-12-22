@@ -118,6 +118,12 @@
     <Compile Include="FixDailyTimeModname\frmFixModname.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FixDoclineDecimal\frmFixDoclineDecimal.Designer.vb">
+      <DependentUpon>frmFixDoclineDecimal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FixDoclineDecimal\frmFixDoclineDecimal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FixInterestHistory\frmFixIntHistory.Designer.vb">
       <DependentUpon>frmFixIntHistory.vb</DependentUpon>
     </Compile>
@@ -212,6 +218,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FixDailyTimeModname\frmFixModname.resx">
       <DependentUpon>frmFixModname.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FixDoclineDecimal\frmFixDoclineDecimal.resx">
+      <DependentUpon>frmFixDoclineDecimal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixInterestHistory\frmFixIntHistory.resx">
       <DependentUpon>frmFixIntHistory.vb</DependentUpon>

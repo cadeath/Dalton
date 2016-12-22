@@ -153,7 +153,7 @@ Public Class frmPrint
         mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
         ds = LoadSQL(mysql, "Doclines")
 
-        If isSales = False Then
+        If isSales = True Then
             For Each dr As DataRow In ds.Tables(0).Rows
                 AddItemOnMaster(dr)
                 TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "Doclines ID: " & dr.Item("DLID"))
