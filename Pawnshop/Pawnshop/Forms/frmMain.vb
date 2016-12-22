@@ -28,8 +28,13 @@
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
+        SalesToolStripMenuItem.Enabled = Not st
+        StockInToolStripMenuItem.Enabled = Not st
+        ItemMasterDataToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         SalesToolStripMenuItem.Enabled = Not st
+        StockInToolStripMenuItem.Enabled = Not st
+        ItemMasterDataToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -57,6 +62,8 @@
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
         VoidReportToolStripMenuItem.Enabled = Not st
+        SalesReportToolStripMenuItem.Enabled = Not st
+        InventoryReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
