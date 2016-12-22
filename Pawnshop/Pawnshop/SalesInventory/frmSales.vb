@@ -67,12 +67,14 @@ Public Class frmSales
                 prefix = "STO"
         End Select
 
-        mySql &= String.Format("'{1}#{0:000000}'", ControlNum, prefix)
+        Dim uniq As String = String.Format("'{1}#{0:000000}'", ControlNum, prefix)
+        mySql &= uniq
+
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             canTransact = False
-            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical)
+            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical, uniq)
         End If
     End Sub
 
@@ -92,14 +94,16 @@ Public Class frmSales
         End If
     End Function
 
-    Friend Sub AddItem(ByVal itm As cItemData)
+    Friend Sub AddItem(ByVal itm As cItemData, Optional ByVal isRedeem As Boolean = False)
         Dim ItemAmount As Double
         Dim hasSelected As Boolean = False
 
         For Each AddedItems As ListViewItem In lvSale.Items
-            If AddedItems.Text = itm.ItemCode Then
-                hasSelected = True
-                Exit For
+            If isRedeem = False Then
+                If AddedItems.Text = itm.ItemCode Then
+                    hasSelected = True
+                    Exit For
+                End If
             End If
         Next
 
@@ -111,14 +115,17 @@ Public Class frmSales
                     .SubItems(2).Text += itm.Quantity
                 End If
 
-                ItemAmount = (itm.SalePrice * itm.Quantity)
+                'ItemAmount = (itm.SalePrice * itm.Quantity)
+                ItemAmount = (.SubItems(2).Text * .SubItems(3).Text)
 
                 If TransactionMode = TransType.Auction Then
                     .SubItems(2).Text = ItemAmount
                 Else
-                    .SubItems(4).Text = (ItemAmount + CDbl(.SubItems(4).Text)).ToString("#,##0.00")
+                    '.SubItems(4).Text = (ItemAmount + CDbl(.SubItems(4).Text)).ToString("#,##0.00")
+                    .SubItems(4).Text = ItemAmount.ToString("#,##0.00")
                 End If
             End With
+
         Else
             'If NEW
             Dim lv As ListViewItem = lvSale.Items.Add(itm.ItemCode)
@@ -137,15 +144,10 @@ Public Class frmSales
         Else
             ht_BroughtItems.Add(src_idx, itm)
         End If
-
-        If TransactionMode = TransType.Auction Then
             DOC_TOTAL = 0
             For Each lv As ListViewItem In lvSale.Items
                 DOC_TOTAL += CDbl(lv.SubItems(4).Text)
-            Next
-        Else
-            DOC_TOTAL += ItemAmount
-        End If
+        Next
 
         Display_Total(DOC_TOTAL)
     End Sub
@@ -258,6 +260,8 @@ Public Class frmSales
     End Sub
 
     Private Sub lvSale_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSale.KeyDown
+        If lvSale.SelectedItems.Count = 0 Then Exit Sub
+
         If e.KeyCode = Keys.Delete Then
 
             Dim idx As Integer = lvSale.FocusedItem.Index
@@ -269,14 +273,18 @@ Public Class frmSales
 
             Console.WriteLine("Removing " & lvSale.Items(idx).Text)
 
-            Dim itm As New cItemData
-            itm.ItemCode = lvSale.Items(idx).Text
-            itm.Load_Item()
+            If MsgBox("Do you want remove this item?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Removing...") = vbYes Then
+                Dim itm As New cItemData
+                itm.ItemCode = lvSale.Items(idx).Text
+                itm.Load_Item()
 
-            DOC_TOTAL -= itm.SalePrice * CDbl(lvSale.Items(idx).SubItems(2).Text)
-            ht_BroughtItems.Remove(itm.ItemCode)
-            lvSale.Items(idx).Remove()
+                DOC_TOTAL -= CDbl(lvSale.Items(idx).SubItems(3).Text) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                ht_BroughtItems.Remove(itm.ItemCode)
+                lvSale.Items(idx).Remove()
 
+            Else
+                Exit Sub
+            End If
             Display_Total(DOC_TOTAL)
         End If
     End Sub
@@ -319,6 +327,16 @@ Public Class frmSales
             Dim retVal(1) As String
             If frmSalesStockOut.ShowDialog(retVal) <> Windows.Forms.DialogResult.OK Then
                 Exit Sub
+            End If
+
+            If Not OTPDisable Then
+                OTPStockOut_Initialization()
+
+                diagGeneralOTP.GeneralOTP = OtpSettings
+                diagGeneralOTP.ShowDialog()
+                If Not diagGeneralOTP.isCorrect Then
+                    Exit Sub
+                End If
             End If
 
             unsec_Customer = retVal(0) 'Branch
@@ -434,9 +452,13 @@ Public Class frmSales
         ItemPosted()
 
         If TransactionMode = TransType.StockOut Then
-            Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-            DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), ORNUM.ToString("000000"))
-            InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+            If MsgBox("Do you want to generate STO File?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "STO") = _
+            MsgBoxResult.Yes Then
+                Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                Dim STONUM As Integer = GetOption("STONum") - 1
+                DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), STONUM.ToString("000"))
+                InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+            End If
         End If
 
         If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then
@@ -596,8 +618,25 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
-        If ShiftMode() Then
-            Load_asStockOut()
+        If Not (POSuser.isSuperUser Or POSuser.canStockOut) Then
+            MsgBox("You don't have access to the StockOut", MsgBoxStyle.Critical, "Authorization Invalid")
+            Exit Sub
+
+            If ShiftMode() Then
+                'OTPStockOut_Initialization()
+
+                'If Not OTPDisable Then
+                '    diagGeneralOTP.GeneralOTP = OtpSettings
+                '    diagGeneralOTP.ShowDialog()
+                '    If Not diagGeneralOTP.isCorrect Then
+                '        Exit Sub
+                '    Else
+                '        Load_asStockOut()
+                '    End If
+                'End If
+
+                Load_asStockOut()
+            End If
         End If
     End Sub
 
