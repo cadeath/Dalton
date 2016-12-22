@@ -21,9 +21,12 @@
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
         Disable(1)
         Try
+            database.dbName = txtData.Text
             Doclines()
 
             Invlines()
+
+            UpdateOptions("DBVersion", "1.2.3.2")
 
             MsgBox("Succesful Updated", MsgBoxStyle.Information, "System")
         Catch ex As Exception
@@ -123,6 +126,11 @@
 
 
         RunCommand(CreateViewStockCard)
+    End Sub
+
+    Private Sub txtData_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtData.DoubleClick
+        ofdDB.ShowDialog()
+        txtData.Text = ofdDB.FileName
     End Sub
 
 End Class
