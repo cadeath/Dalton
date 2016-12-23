@@ -29,7 +29,6 @@
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
-        SalesToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -286,7 +285,7 @@
             Exit Sub
         End If
 
-        frmSales.Show()
+        '  frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
@@ -500,26 +499,5 @@
         ExtractDataFromDatabase.ShowDialog()
     End Sub
 
-    Private Sub SalesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesToolStripMenuItem.Click
-        frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
-        frmExtractor.Show()
-    End Sub
 
-    Private Sub SalesReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesReportToolStripMenuItem.Click
-        frmSalesReport.FormType = frmSalesReport.SaleReport.Sale
-        frmSalesReport.Show()
-    End Sub
-
-    Private Sub InventoryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InventoryReportToolStripMenuItem.Click
-        frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
-        frmSalesReport.Show()
-    End Sub
-
-    Private Sub StockInToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInToolStripMenuItem.Click
-        frmInventory.Show()
-    End Sub
-
-    Private Sub ItemMasterDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemMasterDataToolStripMenuItem.Click
-        frmImport_IMD.Show()
-    End Sub
 End Class

@@ -227,7 +227,7 @@ Public Class frmPawningItemNew
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         'If Not mod_system.isAuthorized Then CheckAuth() : Return False
-        If cboAppraiser.Text = "" Then MsgBox("Please select Appraiser", MsgBoxStyle.Critical) : cboAppraiser.Focus() : Return False
+        If cboAppraiser.Text = "" Then cboAppraiser.Focus() : Return False
 
             If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
             If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
