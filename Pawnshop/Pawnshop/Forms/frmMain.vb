@@ -1,4 +1,6 @@
-﻿Public Class frmMain
+﻿Imports totp
+
+Public Class frmMain
 
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
@@ -218,11 +220,30 @@
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
+        'If Not (POSuser.isSuperUser Or POSuser.canPawn) Then
+        '    MsgBoxAuthoriation("You don't have access to pawning")
+        '    Exit Sub
+        'End If
+        'frmPawning.Show()
+
         If Not (POSuser.isSuperUser Or POSuser.canPawn) Then
-            MsgBoxAuthoriation("You don't have access to pawning")
-            Exit Sub
+            'MsgBoxAuthoriation("You don't have access to pawning")
+            Dim tmpNewOtp As New OneTimePassword
+            If Not OTPDisable Then
+                diagOTPv2.GeneralOTP = tmpNewOtp
+                diagOTPv2.ShowDialog()
+                If Not diagOTPv2.isCorrect Then
+                    Exit Sub
+                Else
+                    frmPawning.Show()
+                End If
+            Else
+                frmPawning.Show()
+            End If
+        Else
+            frmPawning.Show()
         End If
-        frmPawning.Show()
+
     End Sub
 
     Private Sub tmrCurrent_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrCurrent.Tick
@@ -354,20 +375,20 @@
         qrySequence.Show()
     End Sub
 
-    Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
+    Private Sub SegregatedListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
         frmSegreList.Show()
     End Sub
 
-    Private Sub CashInOutSummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
+    Private Sub CashInOutSummaryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashInOutSummaryToolStripMenuItem.Click
         qryCashInOut.FormType = qryCashInOut.FormTrans.Monthly
         qryCashInOut.Show()
     End Sub
 
-    Private Sub MoneyTransferToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
+    Private Sub MoneyTransferToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MoneyTransferToolStripMenuItem.Click
         qryMoneyTransfer.Show()
     End Sub
 
-    Private Sub frmMain_SizeChanged(sender As Object, e As System.EventArgs) Handles Me.SizeChanged
+    Private Sub frmMain_SizeChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.SizeChanged
         Console.WriteLine(Me.Width)
         pButton.Top = 161
         If Me.WindowState = FormWindowState.Maximized Then
@@ -382,12 +403,12 @@
 
     End Sub
 
-    Private Sub OutstandingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
+    Private Sub OutstandingToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OutstandingToolStripMenuItem.Click
         qryPullOut_List.FormType = qryPullOut_List.DailyReport.Outstanding
         qryPullOut_List.Show()
     End Sub
 
-    Private Sub RateToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RateToolStripMenuItem.Click
+    Private Sub RateToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RateToolStripMenuItem.Click
         If Not POSuser.canUpdateRates Then
             MsgBoxAuthoriation("You cannot update rates.")
             Exit Sub
@@ -396,18 +417,18 @@
         frmRate2.Show()
     End Sub
 
-    Private Sub InsuranceToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles InsuranceToolStripMenuItem.Click
+    Private Sub InsuranceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InsuranceToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.DailyInsurance
         qryDate.Show()
     End Sub
 
-    Private Sub AboutUsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
+    Private Sub AboutUsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutUsToolStripMenuItem.Click
         'ab.Show()
         ab2.TopMost = True
         ab2.Show()
     End Sub
 
-    Private Sub ORManagerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ORManagerToolStripMenuItem.Click
+    Private Sub ORManagerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ORManagerToolStripMenuItem.Click
         frmPrintManager.Show()
     End Sub
 
@@ -437,17 +458,17 @@
         qryCashInOut.Show()
     End Sub
 
-    Private Sub HourlySummaryToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HourlySummaryToolStripMenuItem.Click
+    Private Sub HourlySummaryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlySummaryToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.HourlySummary
         qryDate.Show()
     End Sub
 
-    Private Sub HourlyReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HourlyReportToolStripMenuItem.Click
+    Private Sub HourlyReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlyReportToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.Hourly
         qryDate.Show()
     End Sub
 
-    Private Sub BSPReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BSPReportToolStripMenuItem.Click
+    Private Sub BSPReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSPReportToolStripMenuItem.Click
         If Not POSuser.canJournalEntryGenerate Then
             MsgBoxAuthoriation("You don't have access to Journal Entry Generator")
             Exit Sub
@@ -457,12 +478,12 @@
         frmExtractor.Show()
     End Sub
 
-    Private Sub DollarReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DollarReportToolStripMenuItem.Click
+    Private Sub DollarReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DollarReportToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.DollarDaily
         qryDate.Show()
     End Sub
 
-    Private Sub ChangelogToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ChangelogToolStripMenuItem.Click
+    Private Sub ChangelogToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangelogToolStripMenuItem.Click
         Dim changeLog As String = "changelog.txt"
         System.Diagnostics.Process.Start("notepad.exe", changeLog)
     End Sub
@@ -471,12 +492,12 @@
         qryAuction.Show()
     End Sub
 
-    Private Sub AuditReportToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditReportToolStripMenuItem.Click
+    Private Sub AuditReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuditReportToolStripMenuItem.Click
         qryPullOut_List.FormType = qryPullOut_List.DailyReport.AuditReport
         qryPullOut_List.Show()
     End Sub
 
-    Private Sub ChangePasswordToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ChangePasswordToolStrip.Click
+    Private Sub ChangePasswordToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChangePasswordToolStrip.Click
         frmChangePassword.Show()
     End Sub
 

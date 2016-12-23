@@ -303,6 +303,8 @@
             diagGeneralOTP.ShowDialog()
             If Not diagGeneralOTP.isCorrect Then
                 Exit Sub
+            Else
+                AddUserManagement()
             End If
         Else
             AddUserManagement()
