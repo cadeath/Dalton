@@ -621,7 +621,7 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PawnTicket.Value</Value>
+                              <Value>=IIF(Fields!Status.Value.ToString= "RENEWED",Fields!OldTicket.Value ,Fields!PawnTicket.Value)</Value>
                               <Style>
                                 <Format>000000</Format>
                               </Style>
@@ -643,6 +643,7 @@ Expiry</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
