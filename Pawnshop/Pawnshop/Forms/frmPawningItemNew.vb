@@ -227,7 +227,7 @@ Public Class frmPawningItemNew
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         'If Not mod_system.isAuthorized Then CheckAuth() : Return False
-        If cboAppraiser.Text = "" Then MsgBox("Please select Appraiser", MsgBoxStyle.Critical) : cboAppraiser.Focus() : Return False
+        If cboAppraiser.Text = "" Then cboAppraiser.Focus() : Return False
 
             If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
             If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
@@ -1160,7 +1160,7 @@ Public Class frmPawningItemNew
         If PT_Entry.Description Is Nothing Then
             addParameters.Add("txtDescription", "N/A")
         Else
-            addParameters.Add("txtDescription", PT_Entry.Description)
+            addParameters.Add("txtDescription", PT_Entry.DescriptionWithAppraiser)
         End If
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
@@ -1240,7 +1240,7 @@ Public Class frmPawningItemNew
         If PT_Entry.Description Is Nothing Then
             addParameters.Add("txtDescription", "N/A")
         Else
-            addParameters.Add("txtDescription", PT_Entry.Description)
+            addParameters.Add("txtDescription", PT_Entry.DescriptionWithAppraiser)
         End If
         addParameters.Add("txtInterest", PT_Entry.AdvanceInterest)
         addParameters.Add("txtServiceCharge", PT_Entry.ServiceCharge / 2)

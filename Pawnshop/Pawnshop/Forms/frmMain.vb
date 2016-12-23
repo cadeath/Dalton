@@ -29,7 +29,6 @@
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
-        SalesToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -286,7 +285,7 @@
             Exit Sub
         End If
 
-        frmSales.Show()
+        '  frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
@@ -500,8 +499,5 @@
         ExtractDataFromDatabase.ShowDialog()
     End Sub
 
-    Private Sub SalesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesToolStripMenuItem.Click
-        frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
-        frmExtractor.Show()
-    End Sub
+
 End Class
