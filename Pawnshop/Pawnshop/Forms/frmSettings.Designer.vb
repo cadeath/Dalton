@@ -199,7 +199,7 @@ Partial Class frmSettings
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(725, 245)
+        Me.btnClose.Location = New System.Drawing.Point(723, 211)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(85, 37)
         Me.btnClose.TabIndex = 3
@@ -208,7 +208,7 @@ Partial Class frmSettings
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(638, 245)
+        Me.btnUpdate.Location = New System.Drawing.Point(629, 211)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(81, 37)
         Me.btnUpdate.TabIndex = 2
@@ -426,7 +426,7 @@ Partial Class frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(822, 288)
+        Me.ClientSize = New System.Drawing.Size(813, 257)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnUpdate)
