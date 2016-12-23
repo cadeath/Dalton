@@ -119,4 +119,7 @@
         Me.Close()
     End Sub
 
+    Private Sub btnExit_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
+        End
+    End Sub
 End Class

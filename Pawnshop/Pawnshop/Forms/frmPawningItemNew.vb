@@ -227,11 +227,12 @@ Public Class frmPawningItemNew
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         'If Not mod_system.isAuthorized Then CheckAuth() : Return False
+        If cboAppraiser.Text = "" Then MsgBox("Please select Appraiser", MsgBoxStyle.Critical) : cboAppraiser.Focus() : Return False
 
-        If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
-        If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
+            If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
+            If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
 
-        Return True
+            Return True
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
@@ -1009,11 +1010,13 @@ Public Class frmPawningItemNew
         Return 0
     End Function
 
+    ' TODO: JUNMAR
+    ' PLEASE CHECK IF THIS IS STILL WORKING
     Private Function DisplayComputation(ByVal PTInfo As PawnTicket2, ByVal type As String) As String
         Dim disp As String
 
         disp = ""
-        'Dim dc As PawningDalton
+        Dim Dc As PawnCompute
         Dim monthCnt As Integer = 30
 
         If Not isRenewable(PTInfo) And type = "Renew" Then Return "NON RENEWABLE"
@@ -1028,7 +1031,7 @@ Public Class frmPawningItemNew
         Dim isDJ As Boolean = IIf(PTInfo.AdvanceInterest <> 0, True, False)
 
         For x As Integer = 0 To lessNum - 1
-            Dim Dc As PawnCompute
+            'Dim Dc As PawnCompute
             Dim isDPJ As Boolean = True
 
             If transactionType <> "L" Then
@@ -1065,9 +1068,9 @@ Public Class frmPawningItemNew
 
             Select Case type
                 Case "Renew"
-                    disp &= String.Format("{1}{0:#,##0.00} / ", dc.RenewDue, prefix)
+                    disp &= String.Format("{1}{0:#,##0.00} / ", Dc.RenewDue, prefix)
                 Case "Redeem"
-                    disp &= String.Format("{1}{0:#,##0.00} / ", dc.RedeemDue, prefix)
+                    disp &= String.Format("{1}{0:#,##0.00} / ", Dc.RedeemDue, prefix)
                 Case Else
                     Return "INVALID TYPE"
             End Select
@@ -1157,7 +1160,7 @@ Public Class frmPawningItemNew
         If PT_Entry.Description Is Nothing Then
             addParameters.Add("txtDescription", "N/A")
         Else
-            addParameters.Add("txtDescription", PT_Entry.Description)
+            addParameters.Add("txtDescription", PT_Entry.DescriptionWithAppraiser)
         End If
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
@@ -1237,7 +1240,7 @@ Public Class frmPawningItemNew
         If PT_Entry.Description Is Nothing Then
             addParameters.Add("txtDescription", "N/A")
         Else
-            addParameters.Add("txtDescription", PT_Entry.Description)
+            addParameters.Add("txtDescription", PT_Entry.DescriptionWithAppraiser)
         End If
         addParameters.Add("txtInterest", PT_Entry.AdvanceInterest)
         addParameters.Add("txtServiceCharge", PT_Entry.ServiceCharge / 2)

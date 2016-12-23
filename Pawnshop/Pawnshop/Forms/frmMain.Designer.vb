@@ -46,9 +46,12 @@ Partial Class frmMain
         Me.ORManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountingExtractToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AuditConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StockInToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SequenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -65,6 +68,8 @@ Partial Class frmMain
         Me.SegregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.VoidReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InventoryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -94,6 +99,7 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
+        Me.ItemMasterDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -185,7 +191,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.AccountingExtractToolStripMenuItem, Me.ToolStripSeparator2, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.AccountingExtractToolStripMenuItem, Me.ToolStripSeparator2, Me.SalesToolStripMenuItem, Me.StockInToolStripMenuItem, Me.ItemMasterDataToolStripMenuItem, Me.ToolStripSeparator6, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -238,6 +244,17 @@ Partial Class frmMain
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(171, 6)
         '
+        'SalesToolStripMenuItem
+        '
+        Me.SalesToolStripMenuItem.Name = "SalesToolStripMenuItem"
+        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.SalesToolStripMenuItem.Text = "Sales Extractor"
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(171, 6)
+        '
         'BackupToolStripMenuItem
         '
         Me.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem"
@@ -256,9 +273,15 @@ Partial Class frmMain
         Me.ConsoleToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.ConsoleToolStripMenuItem.Text = "&Console"
         '
+        'StockInToolStripMenuItem
+        '
+        Me.StockInToolStripMenuItem.Name = "StockInToolStripMenuItem"
+        Me.StockInToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.StockInToolStripMenuItem.Text = "Stock Transfer In"
+        '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.AuctionMonthlyJewelryReportToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.AuditReportToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.DollarReportToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.VoidReportToolStripMenuItem, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.AuctionMonthlyJewelryReportToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.AuditReportToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.DollarReportToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.VoidReportToolStripMenuItem, Me.SalesReportToolStripMenuItem, Me.InventoryReportToolStripMenuItem, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -351,6 +374,18 @@ Partial Class frmMain
         Me.VoidReportToolStripMenuItem.Name = "VoidReportToolStripMenuItem"
         Me.VoidReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.VoidReportToolStripMenuItem.Text = "&Void Report"
+        '
+        'SalesReportToolStripMenuItem
+        '
+        Me.SalesReportToolStripMenuItem.Name = "SalesReportToolStripMenuItem"
+        Me.SalesReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.SalesReportToolStripMenuItem.Text = "&Sales Report"
+        '
+        'InventoryReportToolStripMenuItem
+        '
+        Me.InventoryReportToolStripMenuItem.Name = "InventoryReportToolStripMenuItem"
+        Me.InventoryReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.InventoryReportToolStripMenuItem.Text = "Inventor&y Report"
         '
         'ToolStripSeparator4
         '
@@ -605,6 +640,12 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
+        'ItemMasterDataToolStripMenuItem
+        '
+        Me.ItemMasterDataToolStripMenuItem.Name = "ItemMasterDataToolStripMenuItem"
+        Me.ItemMasterDataToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.ItemMasterDataToolStripMenuItem.Text = "Item Master Data"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -712,6 +753,12 @@ Partial Class frmMain
 
     Friend WithEvents AuditConsoleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AccountingExtractToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SalesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents SalesReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents InventoryReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents StockInToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ItemMasterDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 
