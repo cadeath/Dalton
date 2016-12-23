@@ -263,7 +263,7 @@ Public Class frmSales
         If lvSale.SelectedItems.Count = 0 Then Exit Sub
 
         If e.KeyCode = Keys.Delete Then
-
+            If TransactionMode = TransType.Auction Then Exit Sub
             Dim idx As Integer = lvSale.FocusedItem.Index
             If Not IsNumeric(lvSale.Items(idx).SubItems(2).Text) Then
                 Log_Report(String.Format("[SALES DELETE] {0} have an NON-NUMERIC QTY", lvSale.Items(idx).Text))

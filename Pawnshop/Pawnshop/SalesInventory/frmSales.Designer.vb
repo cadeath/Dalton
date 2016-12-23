@@ -296,6 +296,7 @@ Partial Class frmSales
         Me.tsbtnOption.Name = "tsbtnOption"
         Me.tsbtnOption.Size = New System.Drawing.Size(77, 22)
         Me.tsbtnOption.Text = "OPTIONS"
+        Me.tsbtnOption.Visible = False
         '
         'btnCancel
         '
