@@ -187,7 +187,6 @@
     <Compile Include="AutoPatch\db1222.vb" />
     <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="AutoPatch\db1224.vb" />
-    <Compile Include="AutoPatch\db1232.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
