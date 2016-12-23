@@ -38,7 +38,6 @@
             txtUser.Text = .UserName
             txtFullname.Text = .FullName
         End With
-        lblUserid.Text = idx
         LoadPrivilege()
 
         Dim fillData As String = "TBL_GAMIT", mysql As String = "SELECT * FROM " & fillData & " WHERE UserID = '" & idx & "'"
