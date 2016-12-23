@@ -122,4 +122,16 @@
     Private Sub btnExit_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
         End
     End Sub
+
+    Private Sub pbClose_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pbClose.Click
+        End
+    End Sub
+
+    Private Sub UserFieldSelected(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtUser.GotFocus
+
+    End Sub
+
+    Private Sub PasswordFieldSelected(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPassword.GotFocus
+
+    End Sub
 End Class

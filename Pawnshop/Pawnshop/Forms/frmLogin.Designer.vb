@@ -27,8 +27,8 @@ Partial Class frmLogin
         Me.pbHeader = New System.Windows.Forms.PictureBox()
         Me.btnExit = New System.Windows.Forms.Button()
         Me.btnLogin = New System.Windows.Forms.Button()
-        Me.txtUser = New Pawnshop.watermark()
         Me.txtPassword = New Pawnshop.watermark()
+        Me.txtUser = New Pawnshop.watermark()
         CType(Me.pbClose, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -72,16 +72,6 @@ Partial Class frmLogin
         Me.btnLogin.Text = "&LOGIN"
         Me.btnLogin.UseVisualStyleBackColor = True
         '
-        'txtUser
-        '
-        Me.txtUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUser.Location = New System.Drawing.Point(42, 64)
-        Me.txtUser.Name = "txtUser"
-        Me.txtUser.Size = New System.Drawing.Size(209, 24)
-        Me.txtUser.TabIndex = 0
-        Me.txtUser.WatermarkColor = System.Drawing.Color.LightGray
-        Me.txtUser.WatermarkText = "Username"
-        '
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -91,6 +81,16 @@ Partial Class frmLogin
         Me.txtPassword.TabIndex = 1
         Me.txtPassword.WatermarkColor = System.Drawing.Color.Gainsboro
         Me.txtPassword.WatermarkText = "Password"
+        '
+        'txtUser
+        '
+        Me.txtUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUser.Location = New System.Drawing.Point(42, 64)
+        Me.txtUser.Name = "txtUser"
+        Me.txtUser.Size = New System.Drawing.Size(209, 24)
+        Me.txtUser.TabIndex = 0
+        Me.txtUser.WatermarkColor = System.Drawing.Color.LightGray
+        Me.txtUser.WatermarkText = "Username"
         '
         'frmLogin
         '
