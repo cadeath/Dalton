@@ -435,10 +435,27 @@ Public Class frmMain
     Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
         'If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        'qryPullOut.Show()
-        If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.Pullout
-            If Not CheckOTP() Then Exit Sub
+        ''qryPullOut.Show()
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.Pullout
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    qryPullOut.Show()
+        'End If
+
+        If Not (POSuser.isSuperUser Or POSuser.canPullOut) Then
+            Dim tmpNewOtp As New OneTimePassword
+            If Not OTPDisable Then
+                diagOTPv2.GeneralOTP = tmpNewOtp
+                diagOTPv2.ShowDialog()
+                If Not diagOTPv2.isCorrect Then
+                    Exit Sub
+                Else
+                    qryPullOut.Show()
+                End If
+            Else
+                qryPullOut.Show()
+            End If
         Else
             qryPullOut.Show()
         End If
