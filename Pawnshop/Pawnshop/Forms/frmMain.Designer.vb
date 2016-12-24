@@ -46,6 +46,10 @@ Partial Class frmMain
         Me.ORManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountingExtractToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SalesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StockInToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ItemMasterDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AuditConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -237,6 +241,29 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(171, 6)
+        '
+        'SalesToolStripMenuItem
+        '
+        Me.SalesToolStripMenuItem.Name = "SalesToolStripMenuItem"
+        Me.SalesToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.SalesToolStripMenuItem.Text = "Sales Extractor"
+        '
+        'StockInToolStripMenuItem
+        '
+        Me.StockInToolStripMenuItem.Name = "StockInToolStripMenuItem"
+        Me.StockInToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.StockInToolStripMenuItem.Text = "Stock Transfer In"
+        '
+        'ItemMasterDataToolStripMenuItem
+        '
+        Me.ItemMasterDataToolStripMenuItem.Name = "ItemMasterDataToolStripMenuItem"
+        Me.ItemMasterDataToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.ItemMasterDataToolStripMenuItem.Text = "Item Master Data"
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(171, 6)
         '
         'BackupToolStripMenuItem
         '
@@ -484,7 +511,7 @@ Partial Class frmMain
         Me.btnPOS.Name = "btnPOS"
         Me.btnPOS.Size = New System.Drawing.Size(137, 90)
         Me.btnPOS.TabIndex = 25
-        Me.btnPOS.Text = "POS"
+        Me.btnPOS.Text = "Inventory System"
         Me.btnPOS.UseVisualStyleBackColor = True
         '
         'btnBranch
@@ -622,7 +649,7 @@ Partial Class frmMain
         Me.MainMenuStrip = Me.msMenu
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Pawnshop System"
+        Me.Text = "Dalton Integrated System"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.msMenu.ResumeLayout(False)
         Me.msMenu.PerformLayout()

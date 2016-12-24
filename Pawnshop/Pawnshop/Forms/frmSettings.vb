@@ -94,6 +94,7 @@
         UpdateOptions("MaintainingBalance", txtBal.Text, isOTPEnable)
         MaintainBal = txtBal.Text
         UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
+        UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text, isOTPEnable)
