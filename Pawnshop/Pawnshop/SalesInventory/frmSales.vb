@@ -263,7 +263,7 @@ Public Class frmSales
         If lvSale.SelectedItems.Count = 0 Then Exit Sub
 
         If e.KeyCode = Keys.Delete Then
-
+            If TransactionMode = TransType.Auction Then Exit Sub
             Dim idx As Integer = lvSale.FocusedItem.Index
             If Not IsNumeric(lvSale.Items(idx).SubItems(2).Text) Then
                 Log_Report(String.Format("[SALES DELETE] {0} have an NON-NUMERIC QTY", lvSale.Items(idx).Text))
@@ -558,8 +558,13 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbSalesReturn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSalesReturn.Click
-        If ShiftMode() Then
-            Load_asReturns()
+        If Not (POSuser.isSuperUser Or POSuser.canReturn) Then
+            MsgBox("You don't have access to the Return", MsgBoxStyle.Critical, "Authorization Invalid")
+            Exit Sub
+        Else
+            If ShiftMode() Then
+                Load_asReturns()
+            End If
         End If
     End Sub
 
@@ -574,7 +579,7 @@ Public Class frmSales
     End Function
 
     Private Sub tsbReceipt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbReceipt.Click
-        'frmReceipt.Show()
+        frmPrint.Show()
     End Sub
 
     Private Sub Label1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label1.DoubleClick
@@ -621,20 +626,8 @@ Public Class frmSales
         If Not (POSuser.isSuperUser Or POSuser.canStockOut) Then
             MsgBox("You don't have access to the StockOut", MsgBoxStyle.Critical, "Authorization Invalid")
             Exit Sub
-
+        Else
             If ShiftMode() Then
-                'OTPStockOut_Initialization()
-
-                'If Not OTPDisable Then
-                '    diagGeneralOTP.GeneralOTP = OtpSettings
-                '    diagGeneralOTP.ShowDialog()
-                '    If Not diagGeneralOTP.isCorrect Then
-                '        Exit Sub
-                '    Else
-                '        Load_asStockOut()
-                '    End If
-                'End If
-
                 Load_asStockOut()
             End If
         End If

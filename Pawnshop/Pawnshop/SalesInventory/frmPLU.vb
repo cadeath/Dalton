@@ -89,7 +89,7 @@
             If src <> "" Then
                 mySql &= vbCrLf & " AND ("
                 If IsNumeric(src) Then
-                    mySql &= String.Format("PT.PAWNTICKET = {0} OR ", src)
+                    mySql &= String.Format("PT.PAWNTICKET LIKE '%{0}%' OR ", src)
                 End If
                 mySql &= String.Format("LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(src).ToLower)
                 mySql &= ")"
@@ -112,7 +112,7 @@
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
         If MaxResult = 0 Then Exit Sub
 
-        If DEV_MODE Then Console.WriteLine("SQL: " & mySql)
+        Console.WriteLine("SQL: " & mySql)
 
         'If Not txtCode.Text = "" Then Exit Sub
         dbReaderOpen()
@@ -236,7 +236,18 @@
                 Dim customPrice As Double = CDbl(tmp)
                 selected_Itm.SalePrice = customPrice
             Else
-                selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                If isRedeem Then
+                    Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                    While Not IsNumeric(tmp)
+                        tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                        If tmp = "" Then Exit Sub
+                    End While
+
+                    Dim customPrice As Double = CDbl(tmp)
+                    selected_Itm.SalePrice = customPrice
+                Else
+                    selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                End If
             End If
         End If
 
