@@ -1,4 +1,5 @@
-﻿Public Class frmUserManagement
+﻿Imports DeathCodez.Security
+Public Class frmUserManagement
 
     Private selectedUser As New ComputerUser
     Private moduleName As String = "User Management"
@@ -263,7 +264,7 @@
         Me.Close()
     End Sub
 
-   Private Function CheckUsername() As Boolean
+    Private Function CheckUsername() As Boolean
         Dim mySql As String, ds As DataSet
         mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
         ds = LoadSQL(mySql)
@@ -309,6 +310,7 @@
             tmpUser.UserStatus = 1
 
             tmpUser.SaveUser()
+            tmpUser.SaveUserLog(UserID, "New Account", "Username : " & txtUser.Text, tmpUser.LastUserID)
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
         Else
 
@@ -331,6 +333,20 @@
             End If
 
             With selectedUser
+                Dim Trans As String = ""
+                If txtPass1.Text <> "" Then
+                    If .isUpdated(.UserID, Privileger(), ComputerUser.CheckType.Priv) = True Then
+                        Trans = "Privilege "
+                    End If
+                    If .isUpdated(.UserID, Encrypt(txtPass1.Text), ComputerUser.CheckType.Password) = True Then
+                        Trans &= "Password "
+                    End If
+                Else
+                    If .isUpdated(.UserID, Privileger(), ComputerUser.CheckType.Priv) = True Then
+                        Trans = "Privilege "
+                    End If
+                End If
+
                 If Not txtPass1.Text = "" Then
                     .FullName = txtFullname.Text
                     .Password = txtPass1.Text
@@ -343,12 +359,13 @@
                     .UpdatePrivilege()
                     .SaveUser(False)
                 End If
+                .SaveUserLog(UserID, "Account Updated", "Username : " & .UserName & " " & Trans & " Updated", 0)
             End With
 
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
-            End If
-            ClearFields()
-            LoadActive()
+        End If
+        ClearFields()
+        LoadActive()
     End Sub
     Private Sub lvUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUsers.DoubleClick
         LoadUser()
@@ -468,4 +485,5 @@
     Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
         CheckUsername()
     End Sub
+
 End Class

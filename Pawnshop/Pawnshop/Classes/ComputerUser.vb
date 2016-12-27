@@ -636,5 +636,56 @@ Public Class ComputerUser
         ' End If
     End Sub
 
+    Public Sub SaveUserLog(ByVal Encoder As Integer, ByVal Transname As String, ByVal Remarks As String, ByVal UserNew As Integer)
+        Dim mySql As String = "SELECT * FROM USERLOG"
+        Dim ds As DataSet = LoadSQL(mySql, "USERLOG")
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables("UserLog").NewRow
+        With dsNewRow
+            .Item("Encoder") = Encoder
+            .Item("Transname") = Transname
+            .Item("Remarks") = Remarks
+            .Item("UserNew") = UserNew
+        End With
+        ds.Tables("UserLog").Rows.Add(dsNewRow)
+        SaveEntry(ds)
+    End Sub
+
+    Public Function LastUserID()
+        Dim mySql As String = "SELECT * FROM " & fillData & " ORDER BY UserID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("UserID")
+    End Function
+
+    Enum CheckType As Integer
+        Priv = 0
+        Password = 1
+    End Enum
+    Public Function isUpdated(ByVal chkUserID As Integer, ByVal checkData As String, ByVal type As CheckType) As Boolean
+        Select Case type
+            Case CheckType.Priv
+                Dim mySql As String = "SELECT * FROM " & fillData & " WHERE USERID = '" & chkUserID & "' AND Privilege = '" & checkData & "'"
+                Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+                If ds.Tables(0).Rows.Count = 0 Then
+                    Return True
+                End If
+
+            Case CheckType.Password
+                Dim mySql As String = "SELECT * FROM " & fillData & " WHERE UserPass = '" & checkData & "' AND USERID = '" & chkUserID & "'"
+                Dim ds As DataSet = LoadSQL(mySql, fillData)
+
+                If ds.Tables(0).Rows.Count = 0 Then
+                    Return True
+                End If
+        End Select
+
+        Return False
+    End Function
+
 #End Region
 End Class
