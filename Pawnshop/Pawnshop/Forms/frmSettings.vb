@@ -89,7 +89,6 @@
             UpdateOptions("RevolvingFund", txtRevolving.Text, isOTPEnable)
             UpdateOptions("LOCKED", "YES", isOTPEnable)
             InsertSAPCount(txtRevolving.Text)
-            UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
             BranchCode = txtCode.Text
             branchName = txtName.Text
@@ -97,6 +96,7 @@
         UpdateOptions("MaintainingBalance", txtBal.Text, isOTPEnable)
         MaintainBal = txtBal.Text
         UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
+        UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text, isOTPEnable)
