@@ -142,12 +142,6 @@
     <Compile Include="FixPawnlistView\frmFixView.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FixStockCard\frmStockCard.Designer.vb">
-      <DependentUpon>frmStockCard.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FixStockCard\frmStockCard.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Fix_ORrenewedItem.vb" />
     <Compile Include="frmMainFixer.Designer.vb">
       <DependentUpon>frmMainFixer.vb</DependentUpon>
@@ -236,9 +230,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FixPawnlistView\frmFixView.resx">
       <DependentUpon>frmFixView.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FixStockCard\frmStockCard.resx">
-      <DependentUpon>frmStockCard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>

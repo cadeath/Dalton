@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Fixer.exe" size="245248">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Fixer.exe" size="241152">
       <assemblyIdentity name="Fixer" version="2.0.0.1" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>6hwXrzy0aLhDUGUNorE0x88OGy4=</dsig:DigestValue>
+        <dsig:DigestValue>UM0e/8Z4MJ4KrAQuKkdWVbxjvSU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
