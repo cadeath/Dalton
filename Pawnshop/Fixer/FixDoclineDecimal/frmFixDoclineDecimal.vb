@@ -129,7 +129,7 @@
         CreateViewStockCard &= "End "
         CreateViewStockCard &= ") , D.DOCDATE, D.CODE AS REFNUM, DL.ITEMCODE, DL.DESCRIPTION, DL.QTY "
         CreateViewStockCard &= "FROM DOCLINES DL "
-        CreateViewStockCard &= "INNER JOIN DOC D ON D.DOCID = DL.DOCID; "
+        CreateViewStockCard &= "INNER JOIN DOC D ON D.DOCID = DL.DOCID "
 
         RunCommand(NewQty)
         RunCommand(NewUnit)
