@@ -32,7 +32,7 @@
             CreateViewStockCard &= vbCrLf & "QTY, "
             CreateViewStockCard &= vbCrLf & "STATUS )"
             CreateViewStockCard &= vbCrLf & "AS SELECT "
-            CreateViewStockCard &= vbCrLf & "'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY, I.DOCSTATUS "
+            CreateViewStockCard &= vbCrLf & "'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY, I.DOCSTATUS AS STATUS"
             CreateViewStockCard &= vbCrLf & "FROM INVLINES IL "
             CreateViewStockCard &= vbCrLf & "INNER JOIN INV I ON I.DOCID = IL.DOCID "
             CreateViewStockCard &= vbCrLf & "UNION "
