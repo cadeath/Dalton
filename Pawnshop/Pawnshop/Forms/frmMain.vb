@@ -254,6 +254,15 @@
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
             POSuser = Nothing
+            Dim formNames As New List(Of String)
+            For Each Form In My.Application.OpenForms
+                If Form.Name <> "frmMain" Or Not Form.name <> "frmLogin" Then
+                    formNames.Add(Form.Name)
+                End If
+            Next
+            For Each currentFormName As String In formNames
+                Application.OpenForms(currentFormName).Close()
+            Next
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
             frmLogin.Show()

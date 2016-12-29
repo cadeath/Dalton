@@ -112,7 +112,7 @@
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
         If MaxResult = 0 Then Exit Sub
 
-        If DEV_MODE Then Console.WriteLine("SQL: " & mySql)
+        Console.WriteLine("SQL: " & mySql)
 
         'If Not txtCode.Text = "" Then Exit Sub
         dbReaderOpen()
