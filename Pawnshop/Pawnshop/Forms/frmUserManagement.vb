@@ -310,7 +310,7 @@ Public Class frmUserManagement
             tmpUser.UserStatus = 1
 
             tmpUser.SaveUser()
-            tmpUser.SaveUserLog(UserID, "New Account", "Username : " & txtUser.Text, tmpUser.LastUserID)
+            tmpUser.SaveUserLog(UserID, "New Account", "Username : " & txtUser.Text & " ID : " & tmpUser.LastUserID & " Privilege : " & tmpUser.Privilege)
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
         Else
 
@@ -333,33 +333,25 @@ Public Class frmUserManagement
             End If
 
             With selectedUser
-                Dim Trans As String = ""
-                If txtPass1.Text <> "" Then
-                    If .isUpdated(.UserID, Privileger(), ComputerUser.CheckType.Priv) = True Then
-                        Trans = "Privilege "
-                    End If
-                    If .isUpdated(.UserID, Encrypt(txtPass1.Text), ComputerUser.CheckType.Password) = True Then
-                        Trans &= "Password "
-                    End If
-                Else
-                    If .isUpdated(.UserID, Privileger(), ComputerUser.CheckType.Priv) = True Then
-                        Trans = "Privilege "
-                    End If
-                End If
-
                 If Not txtPass1.Text = "" Then
                     .FullName = txtFullname.Text
                     .Password = txtPass1.Text
                     .Privilege = Privileger()
                     .UpdatePrivilege()
+                    If .isUpdated(.UserID, Privileger(), ComputerUser.CheckType.Priv) = True Then
+                        .SaveUserLog(UserID, "Account Update", "Username : " & .UserName & " Privilege :" & Privileger() & " Updated")
+                    End If
+                    If .isUpdated(.UserID, Encrypt(txtPass1.Text), ComputerUser.CheckType.Password) = True Then
+                        .SaveUserLog(UserID, "Account Update", "Username : " & .UserName & " UserPass :" & Encrypt(txtPass1.Text) & " Updated")
+                    End If
                     .SaveUser(False, txtPass1.Text)
                 Else
                     .FullName = txtFullname.Text
                     .Privilege = Privileger()
                     .UpdatePrivilege()
                     .SaveUser(False)
+                    .SaveUserLog(UserID, "Account Update", "Username : " & .UserName & " Privilege :" & Privileger() & " Updated")
                 End If
-                .SaveUserLog(UserID, "Account Updated", "Username : " & .UserName & " " & Trans & " Updated", 0)
             End With
 
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)

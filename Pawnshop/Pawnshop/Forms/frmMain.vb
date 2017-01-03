@@ -253,6 +253,8 @@
             Dim ans As DialogResult = MsgBox("Do you want to LOGOUT?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Logout")
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+            Dim tmpUser As New ComputerUser
+            tmpUser.SaveUserLog(POSuser.UserID, "User Log", "Username :" & POSuser.UserName & " Log Out")
             POSuser = Nothing
             Dim formNames As New List(Of String)
             For Each Form In My.Application.OpenForms

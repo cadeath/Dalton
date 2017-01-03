@@ -604,6 +604,7 @@ Public Class ComputerUser
         If ds.Tables(0).Rows.Count = 0 Then Return False
 
         LoadUser(ds.Tables(0).Rows(0).Item("UserID"))
+        SaveUserLog(UserID, "User Log", "Username: " & UserName & " Login")
 
         Return True
     End Function
@@ -636,16 +637,15 @@ Public Class ComputerUser
         ' End If
     End Sub
 
-    Public Sub SaveUserLog(ByVal Encoder As Integer, ByVal Transname As String, ByVal Remarks As String, ByVal UserNew As Integer)
+    Public Sub SaveUserLog(ByVal Encoder As Integer, ByVal Transname As String, ByVal Remarks As String)
         Dim mySql As String = "SELECT * FROM USERLOG"
         Dim ds As DataSet = LoadSQL(mySql, "USERLOG")
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables("UserLog").NewRow
         With dsNewRow
-            .Item("Encoder") = Encoder
             .Item("Transname") = Transname
+            .Item("Encoder") = Encoder
             .Item("Remarks") = Remarks
-            .Item("UserNew") = UserNew
         End With
         ds.Tables("UserLog").Rows.Add(dsNewRow)
         SaveEntry(ds)
