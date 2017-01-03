@@ -23,10 +23,10 @@
         Console.WriteLine("Commencing adding views...")
 
         strSql = "CREATE VIEW STOCK_CARD("
-        strSql &= vbCrLf & "  DOCTYPE, DOCDATE, REFNUM, ITEMCODE, DESCRIPTION, QTY)"
+        strSql &= vbCrLf & "  DOCTYPE, DOCDATE, REFNUM, ITEMCODE, DESCRIPTION, QTY, STATUS)"
         strSql &= vbCrLf & "AS "
         strSql &= vbCrLf & "SELECT "
-        strSql &= vbCrLf & " 'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY "
+        strSql &= vbCrLf & " 'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY, I.DOCSTATUS AS STATUS"
         strSql &= vbCrLf & "FROM "
         strSql &= vbCrLf & " INVLINES IL "
         strSql &= vbCrLf & " INNER JOIN INV I "
@@ -43,11 +43,12 @@
         strSql &= vbCrLf & "        WHEN 3 THEN 'RETURNS' "
         strSql &= vbCrLf & "        WHEN 4 THEN 'STOCKOUT' "
         strSql &= vbCrLf & "    END "
-        strSql &= vbCrLf & " ) , D.DOCDATE, D.CODE AS REFNUM, DL.ITEMCODE, DL.DESCRIPTION, DL.QTY "
+        strSql &= vbCrLf & " ) , D.DOCDATE, D.CODE AS REFNUM, DL.ITEMCODE, DL.DESCRIPTION, DL.QTY, D.STATUS "
         strSql &= vbCrLf & "FROM "
         strSql &= vbCrLf & " DOCLINES DL "
         strSql &= vbCrLf & " INNER JOIN DOC D "
-        strSql &= vbCrLf & " ON D.DOCID = DL.DOCID; "
+        strSql &= vbCrLf & " ON D.DOCID = DL.DOCID "
+        strSql &= vbCrLf & "WHERE D.STATUS <> 'V'"
         RunCommand(strSql)
     End Sub
 
