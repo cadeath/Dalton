@@ -270,35 +270,34 @@
     End Sub
 
     Private Sub SaveInsuranceInv()
-        Dim mysql As String = "Select * From tblMaintenance Where Opt_Keys = 'INS Count'"
-        Dim ds As DataSet = LoadSQL(mysql, "tblMaintenance")
-        Dim TotalCount As Integer = CInt(ds.Tables(0).Rows(0).Item("Opt_Values"))
-        Dim TotalVal As Integer = TotalCount * 25
-
-        mysql = "SELECT * FROM DOC ROWS 1"
-        Dim dsDoc As DataSet = LoadSQL(mysql, "Doc")
+        Dim TotalCount As Integer = CInt(GetMaintenanceValue("INS Count"))
+        Dim TotalVal As Integer = TotalCount * GetMaintenanceValue("InsuranceAmount")
+        '= 'TotalCount * 
+        Dim mysql As String = "SELECT * FROM DOC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mysql, "Doc")
         Dim dsNewRow As DataRow
-        dsNewRow = dsDoc.Tables("Doc").NewRow
+        dsNewRow = ds.Tables("Doc").NewRow
+        Dim DocCode As String = "COI# " & CurrentDate.ToString("ddMMyyyy")
         With dsNewRow
-            .Item("CODE") = "COI# "
+            .Item("CODE") = DocCode
             .Item("MOP") = "C"
             .Item("Customer") = "One-Time Customer"
             .Item("DOCDATE") = CurrentDate
             .Item("DOCTOTAL") = TotalVal
             .Item("USERID") = POSuser.UserID
         End With
-        dsDoc.Tables("Doc").Rows.Add(dsNewRow)
-        SaveEntry(dsDoc)
+        ds.Tables("Doc").Rows.Add(dsNewRow)
+        SaveEntry(ds)
         Dim DOCID As Integer = 0
 
-        mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
-        ds = LoadSQL(mySql, fillData)
+        mysql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
+        ds = LoadSQL(mysql, fillData)
         DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
 
         'Creating DocumentLines
-        mySql = "SELECT * FROM DOCLINES ROWS 1"
+        mysql = "SELECT * FROM DOCLINES ROWS 1"
         fillData = "DOCLINES"
-        ds = LoadSQL(mySql, fillData)
+        ds = LoadSQL(mysql, fillData)
 
         Dim itm As New cItemData
         dsNewRow = ds.Tables(fillData).NewRow
@@ -307,12 +306,23 @@
             .Item("ITEMCODE") = "IND 00001"
             .Item("DESCRIPTION") = "DALTON INSURANCE 25"
             .Item("QTY") = TotalCount
-            .Item("UNITPRICE") = 25
-            .Item("SALEPRICE") = 25
+            .Item("SALEPRICE") = GetMaintenanceValue("InsuranceAmount")
             .Item("ROWTOTAL") = TotalVal
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
         database.SaveEntry(ds)
     End Sub
+
+    Private Function GetMaintenanceValue(ByVal Key As String)
+        Try
+            Dim mysql As String = "Select * From tblMaintenance Where Opt_Keys = '" & Key & "'"
+            Dim fillData As String = "tblMaintenance"
+            Dim ds As DataSet = LoadSQL(mysql, fillData)
+            Return ds.Tables(0).Rows(0).Item("Opt_Values")
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+        Return Nothing
+    End Function
 End Class
