@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.4.3
+ - Add LayAway Module
+
 Version 1.4.1.10
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
