@@ -177,12 +177,16 @@ Public Class Insurance
         InsuranceID = frmInsurance.lbltransid.Text
 
         ds.Tables(fillData).Rows(0).Item("Status") = _status
+        SaveEntry(ds, False)
 
-        database.SaveEntry(ds, False)
-
+        ds.Clear()
+        mySql = "SELECT * FROM DOC WHERE CODE = '" & "COI# " & _coiNo & "'"
+        ds = LoadSQL(mySql, "Doc")
+        ds.Tables(0).Rows(0).Item("Status") = "V"
+        SaveEntry(ds, False)
+        InventoryController.AddInventory("IND 00001", 1)
         Dim NewOtp As New ClassOtp("VOID INSURANCE", diagOTP.txtPIN.Text, "COI# " & COInumber)
         TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "COI# " & COInumber)
-        RemoveJournal(InsuranceID, , TransactionName)
         RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
     End Sub
 
