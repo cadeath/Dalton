@@ -168,6 +168,7 @@
         Dim total As Double = Compute_CashCount()
 
         SaveCashCount()
+        SaveInsuranceInv()
         ' If Executed via Audit Console
         If isAuditing Then
             UpdateCashCount(total)
@@ -266,5 +267,52 @@
         ds.Tables("tblDaily").Rows(0).Item("CashCount") = total
         database.SaveEntry(ds, False)
         Console.WriteLine("CashCount data updated")
+    End Sub
+
+    Private Sub SaveInsuranceInv()
+        Dim mysql As String = "Select * From tblMaintenance Where Opt_Keys = 'INS Count'"
+        Dim ds As DataSet = LoadSQL(mysql, "tblMaintenance")
+        Dim TotalCount As Integer = CInt(ds.Tables(0).Rows(0).Item("Opt_Values"))
+        Dim TotalVal As Integer = TotalCount * 25
+
+        mysql = "SELECT * FROM DOC ROWS 1"
+        Dim dsDoc As DataSet = LoadSQL(mysql, "Doc")
+        Dim dsNewRow As DataRow
+        dsNewRow = dsDoc.Tables("Doc").NewRow
+        With dsNewRow
+            .Item("CODE") = "COI# "
+            .Item("MOP") = "C"
+            .Item("Customer") = "One-Time Customer"
+            .Item("DOCDATE") = CurrentDate
+            .Item("DOCTOTAL") = TotalVal
+            .Item("USERID") = POSuser.UserID
+        End With
+        dsDoc.Tables("Doc").Rows.Add(dsNewRow)
+        SaveEntry(dsDoc)
+        Dim DOCID As Integer = 0
+
+        mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
+        ds = LoadSQL(mySql, fillData)
+        DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
+
+        'Creating DocumentLines
+        mySql = "SELECT * FROM DOCLINES ROWS 1"
+        fillData = "DOCLINES"
+        ds = LoadSQL(mySql, fillData)
+
+        Dim itm As New cItemData
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("DOCID") = DOCID
+            .Item("ITEMCODE") = "IND 00001"
+            .Item("DESCRIPTION") = "DALTON INSURANCE 25"
+            .Item("QTY") = TotalCount
+            .Item("UNITPRICE") = 25
+            .Item("SALEPRICE") = 25
+            .Item("ROWTOTAL") = TotalVal
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds)
     End Sub
 End Class

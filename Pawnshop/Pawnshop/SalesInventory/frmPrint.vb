@@ -4,7 +4,7 @@ Public Class frmPrint
     Private PRINTER_Sales As String = GetOption("PrinterPT")
 
     Private Sub LoadReceipt()
-        Dim mySql As String = "SELECT FIRST 50 * FROM DOC WHERE STATUS <> 'V' AND CODE NOT LIKE '%COI#%' ORDER BY DOCDate DESC"
+        Dim mySql As String = "SELECT FIRST 50 * FROM DOC WHERE STATUS <> 'V' AND ORDER BY DOCDate DESC"
 
         Dim ds As DataSet = LoadSQL(mySql)
         lvReceipt.Items.Clear()

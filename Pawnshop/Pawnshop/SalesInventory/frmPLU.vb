@@ -106,7 +106,7 @@
                 mySql &= " ORDER BY ITEMCODE ASC"
             End If
 
-            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
+            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001'")
         End If
 
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
