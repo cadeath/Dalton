@@ -187,7 +187,7 @@
     <Compile Include="AutoPatch\db1222.vb" />
     <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="AutoPatch\db1224.vb" />
-    <Compile Include="AutoPatch\db1231.vb" />
+    <Compile Include="AutoPatch\db1232.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -372,20 +372,33 @@
     <Compile Include="Forms\watermark.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
+    <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
-    <Compile Include="InterestScheme\dev_Scheme.vb">
+    <Compile Include="Modules\InterestScheme\dev_Scheme.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterestScheme\InterestScheme.vb" />
-    <Compile Include="InterestScheme\IntScheme_Lines.vb" />
-    <Compile Include="InterestScheme\Scheme_Interest.vb" />
-    <Compile Include="InterestScheme\Scheme_Load.vb" />
+    <Compile Include="Modules\InterestScheme\InterestScheme.vb" />
+    <Compile Include="Modules\InterestScheme\IntScheme_Lines.vb" />
+    <Compile Include="Modules\InterestScheme\Scheme_Interest.vb" />
+    <Compile Include="Modules\InterestScheme\Scheme_Load.vb" />
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Modules\Void.vb" />
+    <Compile Include="OTP\diagGeneralOTP.Designer.vb">
+      <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\diagGeneralOTP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\frmSample.Designer.vb">
+      <DependentUpon>frmSample.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\frmSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\OTPModule.vb" />
     <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </Compile>
@@ -678,6 +691,12 @@
     <Compile Include="Reports\frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\frmSalesReport.Designer.vb">
+      <DependentUpon>frmSalesReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmSalesReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\frmSegreList.Designer.vb">
       <DependentUpon>frmSegreList.vb</DependentUpon>
     </Compile>
@@ -878,8 +897,14 @@
     <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
+    <EmbeddedResource Include="Modules\InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
+      <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\frmSample.resx">
+      <DependentUpon>frmSample.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
@@ -1026,6 +1051,9 @@
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSalesReport.resx">
+      <DependentUpon>frmSalesReport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryAuction.resx">
       <DependentUpon>qryAuction.vb</DependentUpon>
     </EmbeddedResource>
@@ -1057,6 +1085,9 @@
     <EmbeddedResource Include="Reports\rpt_hourlySummary.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_InventoryPOS.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRenew_Monthly2.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -1083,12 +1114,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout01.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout02.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

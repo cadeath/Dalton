@@ -6,6 +6,7 @@
         Me.TopMost = True
         frmMain.Enabled = False
         lblSAP01.Text = "SAP Code 01"
+        lblSAP02.Text = "SAP Code 02"
         ClearFields()
         PrinterSettings()
     End Sub
@@ -40,7 +41,6 @@
             txtName.Enabled = False
             txtArea.Enabled = False
             txtRevolving.Enabled = False
-            txtCustomerCode.Enabled = False
         End If
 
         'Second
@@ -89,7 +89,6 @@
             UpdateOptions("RevolvingFund", txtRevolving.Text, isOTPEnable)
             UpdateOptions("LOCKED", "YES", isOTPEnable)
             InsertSAPCount(txtRevolving.Text)
-            UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
             BranchCode = txtCode.Text
             branchName = txtName.Text
@@ -97,6 +96,7 @@
         UpdateOptions("MaintainingBalance", txtBal.Text, isOTPEnable)
         MaintainBal = txtBal.Text
         UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
+        UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text, isOTPEnable)

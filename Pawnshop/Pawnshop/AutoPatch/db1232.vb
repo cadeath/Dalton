@@ -1,6 +1,6 @@
-﻿Module db1231
+﻿Module db1232
     Const ALLOWABLE_VERSION As String = "1.2.2.5"
-    Const LATEST_VERSION As String = "1.2.3.1"
+    Const LATEST_VERSION As String = "1.2.3.2"
 
     Private strSql As String
 
@@ -23,10 +23,10 @@
         Console.WriteLine("Commencing adding views...")
 
         strSql = "CREATE VIEW STOCK_CARD("
-        strSql &= vbCrLf & "  DOCTYPE, DOCDATE, REFNUM, ITEMCODE, DESCRIPTION, QTY)"
+        strSql &= vbCrLf & "  DOCTYPE, DOCDATE, REFNUM, ITEMCODE, DESCRIPTION, QTY, STATUS)"
         strSql &= vbCrLf & "AS "
         strSql &= vbCrLf & "SELECT "
-        strSql &= vbCrLf & " 'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY "
+        strSql &= vbCrLf & " 'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY, I.DOCSTATUS AS STATUS"
         strSql &= vbCrLf & "FROM "
         strSql &= vbCrLf & " INVLINES IL "
         strSql &= vbCrLf & " INNER JOIN INV I "
@@ -43,11 +43,12 @@
         strSql &= vbCrLf & "        WHEN 3 THEN 'RETURNS' "
         strSql &= vbCrLf & "        WHEN 4 THEN 'STOCKOUT' "
         strSql &= vbCrLf & "    END "
-        strSql &= vbCrLf & " ) , D.DOCDATE, D.CODE AS REFNUM, DL.ITEMCODE, DL.DESCRIPTION, DL.QTY "
+        strSql &= vbCrLf & " ) , D.DOCDATE, D.CODE AS REFNUM, DL.ITEMCODE, DL.DESCRIPTION, DL.QTY, D.STATUS "
         strSql &= vbCrLf & "FROM "
         strSql &= vbCrLf & " DOCLINES DL "
         strSql &= vbCrLf & " INNER JOIN DOC D "
-        strSql &= vbCrLf & " ON D.DOCID = DL.DOCID; "
+        strSql &= vbCrLf & " ON D.DOCID = DL.DOCID "
+        strSql &= vbCrLf & "WHERE D.STATUS <> 'V'"
         RunCommand(strSql)
     End Sub
 
@@ -122,10 +123,10 @@
         invlines &= vbCrLf & "  DOCID BIGINT NOT NULL,"
         invlines &= vbCrLf & "  ITEMCODE VARCHAR(20),"
         invlines &= vbCrLf & "  DESCRIPTION VARCHAR(255),"
-        invlines &= vbCrLf & "  QTY DECIMAL(12, 3) DEFAULT '0.0' NOT NULL,"
-        invlines &= vbCrLf & "  UNITPRICE DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
-        invlines &= vbCrLf & "  SALEPRICE DECIMAL(12, 2) DEFAULT '0.0',"
-        invlines &= vbCrLf & "  ROWTOTAL NUMERIC(12, 2) DEFAULT '0.0' NOT NULL,"
+        invlines &= vbCrLf & "  QTY DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        invlines &= vbCrLf & "  UNITPRICE DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        invlines &= vbCrLf & "  SALEPRICE DECIMAL(12, 6) DEFAULT '0.0',"
+        invlines &= vbCrLf & "  ROWTOTAL NUMERIC(12, 6) DEFAULT '0.0' NOT NULL,"
         invlines &= vbCrLf & "  UOM VARCHAR(20),"
         invlines &= vbCrLf & "  REMARKS VARCHAR(255));"
         RunCommand(invlines)
@@ -152,10 +153,10 @@
         docLines &= vbCrLf & "  DOCID BIGINT DEFAULT '0' NOT NULL,"
         docLines &= vbCrLf & "  ITEMCODE VARCHAR(20) NOT NULL,"
         docLines &= vbCrLf & "  DESCRIPTION VARCHAR(255) NOT NULL,"
-        docLines &= vbCrLf & "  QTY DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
-        docLines &= vbCrLf & "  UNITPRICE DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
-        docLines &= vbCrLf & "  SALEPRICE DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
-        docLines &= vbCrLf & "  ROWTOTAL NUMERIC(12, 2) DEFAULT '0.0' NOT NULL,"
+        docLines &= vbCrLf & "  QTY DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        docLines &= vbCrLf & "  UNITPRICE DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        docLines &= vbCrLf & "  SALEPRICE DECIMAL(12, 6) DEFAULT '0.0' NOT NULL,"
+        docLines &= vbCrLf & "  ROWTOTAL NUMERIC(12, 6) DEFAULT '0.0' NOT NULL,"
         docLines &= vbCrLf & "  UOM VARCHAR(20),"
         docLines &= vbCrLf & "  REMARKS VARCHAR(255));"
         RunCommand(docLines)

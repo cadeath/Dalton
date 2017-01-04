@@ -6,6 +6,7 @@
     "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
 
         Dim firebird As String = readValue & DBPATH
+        database.dbName = firebird
         txtData.Text = firebird
     End Sub
     Private Sub frmFixView_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -13,6 +14,15 @@
     End Sub
 
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
+        Try
+            Pawnlist()
+            MsgBox("Successful")
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "E R R O R")
+        End Try
+
+    End Sub
+    Private Sub Pawnlist()
         Dim DropPawnView As String = "DROP VIEW PAWN_LIST;"
         RunCommand(DropPawnView)
 
@@ -66,5 +76,4 @@
         Pawn_List &= vbCrLf & "ON USR.USERID = P.APPRAISERID "
         RunCommand(Pawn_List)
     End Sub
-
 End Class

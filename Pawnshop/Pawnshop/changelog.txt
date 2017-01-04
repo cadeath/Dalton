@@ -1,24 +1,31 @@
 CHANGELOG
-
-Version 1.4.1.1
+Version 1.4.1.10
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
  - Add InvoiceNum, STONum, SalesReturnNum and CustomerCode at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
  - Add view STOCK_CARD
  - Add Reports - Inventory Report, Sales Report
+ - Add Tools - Sales Extractor
+ - Add new privileges
  - Update TBLCASH and TBLITEM
  - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here, use the Pullout Module)
  - Can Generate SAP Template Based STO for STOCK OUT
- - Change DB Version 1.2.3.1
+ - Can include void in Sales Transaction
+ - Change DB Version 1.2.3.2
+ - Change System name into Dalton - Integrated System
  - HOLDS AUCTION REDEEM at TBLCASH
  - Remove Insurance on JE and CashCount
  - Fix Minor Problems in Company Encryption
+ - Fix Selling Price from 2 decimal places into 6
+ - Fix missing "Appraiser By" in PT
+ - Fix on Re-Transact with 0 selling price having wrong computation
 
 Version 1.3.1.1
  - Fix Bug in Pawned Item Computation
  - Fix Pawn_list View Full Address
  - Fix No Display Pawner Name in Triplicate
+ - Fix Amount To Words Indian Language
 
 Version 1.3.1
  - Fix Reprint Save
