@@ -22,11 +22,11 @@ Partial Class frmLayAwayLookUp
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00001", "Robin Padodot", "ITM0001", "Cellphone / no screen", "15000", "10000"}, -1)
         Me.grpLayAway = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtPawner = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.lvClient = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -35,6 +35,7 @@ Partial Class frmLayAwayLookUp
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSave = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.grpLayAway.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -43,13 +44,12 @@ Partial Class frmLayAwayLookUp
         Me.grpLayAway.Controls.Add(Me.Label1)
         Me.grpLayAway.Controls.Add(Me.btnSearch)
         Me.grpLayAway.Controls.Add(Me.txtPawner)
-        Me.grpLayAway.Controls.Add(Me.Label2)
         Me.grpLayAway.Location = New System.Drawing.Point(12, 12)
         Me.grpLayAway.Name = "grpLayAway"
         Me.grpLayAway.Size = New System.Drawing.Size(479, 62)
         Me.grpLayAway.TabIndex = 5
         Me.grpLayAway.TabStop = False
-        Me.grpLayAway.Text = "Search Lay Away Plan"
+        Me.grpLayAway.Text = "Search Lay Away"
         '
         'Label1
         '
@@ -61,8 +61,7 @@ Partial Class frmLayAwayLookUp
         '
         'btnSearch
         '
-        Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSearch.Location = New System.Drawing.Point(367, 23)
+        Me.btnSearch.Location = New System.Drawing.Point(398, 23)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(75, 23)
         Me.btnSearch.TabIndex = 2
@@ -72,65 +71,56 @@ Partial Class frmLayAwayLookUp
         'txtPawner
         '
         Me.txtPawner.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPawner.Location = New System.Drawing.Point(111, 24)
+        Me.txtPawner.Location = New System.Drawing.Point(6, 24)
         Me.txtPawner.Name = "txtPawner"
-        Me.txtPawner.Size = New System.Drawing.Size(250, 22)
+        Me.txtPawner.Size = New System.Drawing.Size(386, 22)
         Me.txtPawner.TabIndex = 1
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(19, 27)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(64, 16)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "LAP No:"
         '
         'lvClient
         '
         Me.lvClient.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
         Me.lvClient.FullRowSelect = True
         Me.lvClient.GridLines = True
-        Me.lvClient.Location = New System.Drawing.Point(12, 92)
+        Me.lvClient.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvClient.Location = New System.Drawing.Point(12, 80)
         Me.lvClient.Name = "lvClient"
-        Me.lvClient.Size = New System.Drawing.Size(760, 267)
+        Me.lvClient.Size = New System.Drawing.Size(762, 267)
         Me.lvClient.TabIndex = 9
         Me.lvClient.UseCompatibleStateImageBehavior = False
         Me.lvClient.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "LAP No."
-        Me.ColumnHeader1.Width = 90
+        Me.ColumnHeader1.Text = "ID"
+        Me.ColumnHeader1.Width = 72
         '
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Customer's Name"
-        Me.ColumnHeader2.Width = 215
+        Me.ColumnHeader2.Width = 123
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "Item Description"
-        Me.ColumnHeader3.Width = 152
+        Me.ColumnHeader3.Text = "ItemCode"
+        Me.ColumnHeader3.Width = 108
         '
         'ColumnHeader4
         '
-        Me.ColumnHeader4.Text = "Selling Price"
-        Me.ColumnHeader4.Width = 180
+        Me.ColumnHeader4.Text = "Description"
+        Me.ColumnHeader4.Width = 228
         '
         'ColumnHeader5
         '
-        Me.ColumnHeader5.Text = "Balance"
-        Me.ColumnHeader5.Width = 197
+        Me.ColumnHeader5.Text = "Price"
+        Me.ColumnHeader5.Width = 114
         '
         'btnSave
         '
         Me.btnSave.Enabled = False
-        Me.btnSave.Location = New System.Drawing.Point(620, 368)
+        Me.btnSave.Location = New System.Drawing.Point(620, 353)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(74, 35)
         Me.btnSave.TabIndex = 12
@@ -140,22 +130,29 @@ Partial Class frmLayAwayLookUp
         'Button1
         '
         Me.Button1.Enabled = False
-        Me.Button1.Location = New System.Drawing.Point(700, 368)
+        Me.Button1.Location = New System.Drawing.Point(700, 353)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(74, 35)
         Me.Button1.TabIndex = 13
         Me.Button1.Text = "&Close"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "Balance"
+        Me.ColumnHeader6.Width = 112
+        '
         'frmLayAwayLookUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(786, 412)
+        Me.ClientSize = New System.Drawing.Size(786, 395)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.lvClient)
         Me.Controls.Add(Me.grpLayAway)
+        Me.MaximumSize = New System.Drawing.Size(802, 433)
+        Me.MinimumSize = New System.Drawing.Size(802, 433)
         Me.Name = "frmLayAwayLookUp"
         Me.Text = "Search Lay Away Plan Agreement"
         Me.grpLayAway.ResumeLayout(False)
@@ -166,7 +163,6 @@ Partial Class frmLayAwayLookUp
     Friend WithEvents grpLayAway As System.Windows.Forms.GroupBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtPawner As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lvClient As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
@@ -176,4 +172,5 @@ Partial Class frmLayAwayLookUp
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
 End Class
