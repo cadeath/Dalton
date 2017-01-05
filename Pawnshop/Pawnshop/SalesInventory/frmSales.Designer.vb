@@ -47,6 +47,7 @@ Partial Class frmSales
         Me.tsbCash = New System.Windows.Forms.ToolStripButton()
         Me.tsbCheck = New System.Windows.Forms.ToolStripButton()
         Me.tsbRefund = New System.Windows.Forms.ToolStripButton()
+        Me.tsbtnLay = New System.Windows.Forms.ToolStripButton()
         Me.tsbSalesReturn = New System.Windows.Forms.ToolStripButton()
         Me.tsbtnOut = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -56,7 +57,6 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
-        Me.tsbtnLay = New System.Windows.Forms.ToolStripButton()
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -256,6 +256,14 @@ Partial Class frmSales
         Me.tsbRefund.Text = "REFUND"
         Me.tsbRefund.Visible = False
         '
+        'tsbtnLay
+        '
+        Me.tsbtnLay.Image = CType(resources.GetObject("tsbtnLay.Image"), System.Drawing.Image)
+        Me.tsbtnLay.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnLay.Name = "tsbtnLay"
+        Me.tsbtnLay.Size = New System.Drawing.Size(82, 22)
+        Me.tsbtnLay.Text = "LAYAWAY"
+        '
         'tsbSalesReturn
         '
         Me.tsbSalesReturn.Image = CType(resources.GetObject("tsbSalesReturn.Image"), System.Drawing.Image)
@@ -295,7 +303,7 @@ Partial Class frmSales
         Me.tsbtnOption.Image = CType(resources.GetObject("tsbtnOption.Image"), System.Drawing.Image)
         Me.tsbtnOption.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnOption.Name = "tsbtnOption"
-        Me.tsbtnOption.Size = New System.Drawing.Size(77, 22)
+        Me.tsbtnOption.Size = New System.Drawing.Size(77, 20)
         Me.tsbtnOption.Text = "OPTIONS"
         Me.tsbtnOption.Visible = False
         '
@@ -332,14 +340,6 @@ Partial Class frmSales
         Me.lblNoVat.Size = New System.Drawing.Size(147, 16)
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
-        '
-        'tsbtnLay
-        '
-        Me.tsbtnLay.Image = CType(resources.GetObject("tsbtnLay.Image"), System.Drawing.Image)
-        Me.tsbtnLay.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnLay.Name = "tsbtnLay"
-        Me.tsbtnLay.Size = New System.Drawing.Size(82, 22)
-        Me.tsbtnLay.Text = "LAYAWAY"
         '
         'frmSales
         '

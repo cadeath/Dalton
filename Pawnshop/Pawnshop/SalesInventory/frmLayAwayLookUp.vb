@@ -7,4 +7,8 @@
     Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
 
     End Sub
+
+    Private Sub frmLayAwayLookUp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

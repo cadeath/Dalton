@@ -8,6 +8,7 @@ Public Class frmSales
         Auction = 2
         Returns = 3
         StockOut = 4
+        LayAway = 5
     End Enum
 
     Friend TransactionMode As TransType
@@ -358,6 +359,8 @@ Public Class frmSales
                 prefix = "INV"
             Case TransType.StockOut
                 prefix = "STO"
+            Case TransType.LayAway
+                prefix = "LAY"
         End Select
 
         With dsNewRow
@@ -642,6 +645,9 @@ Public Class frmSales
                 ORNUM = GetOption("InvoiceNum")
             Case TransType.StockOut
                 ORNUM = GetOption("STONum")
+            Case TransType.LayAway
+                ORNUM = GetOption("")
+
         End Select
     End Sub
 
@@ -681,6 +687,15 @@ Public Class frmSales
         DOC_TYPE = 0
     End Sub
 
+    Private Sub Load_asLayAway()
+        lblMode.Text = "LAYAWAY"
+        TransactionMode = TransType.LayAway
+        lblSearch.Text = "ITEM:"
+
+        Load_ORNUM()
+        DOC_TYPE = 0
+    End Sub
+
     Private Function ShiftMode() As Boolean
         If lvSale.Items.Count = 0 Then Return True
 
@@ -694,4 +709,9 @@ Public Class frmSales
     End Function
 #End Region
 
+    Private Sub tsbtnLay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnLay.Click
+        If ShiftMode() Then
+            Load_asLayAway()
+        End If
+    End Sub
 End Class
