@@ -378,6 +378,7 @@
     <Compile Include="Layaway\frmLayAway.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Layaway\LayAway.vb" />
     <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
@@ -492,12 +493,6 @@
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmInsuranceList.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmLayAwayLookUp.Designer.vb">
-      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmLayAwayLookUp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBorrowBrowse.Designer.vb">
@@ -765,6 +760,12 @@
     <Compile Include="SalesInventory\frmImport_IMD.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Layaway\frmLayAwayLookUp.Designer.vb">
+      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Layaway\frmLayAwayLookUp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SalesInventory\frmPLU.Designer.vb">
       <DependentUpon>frmPLU.vb</DependentUpon>
     </Compile>
@@ -979,9 +980,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInsuranceList.resx">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLayAwayLookUp.resx">
-      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBorrowBrowse.resx">
       <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
@@ -1206,6 +1204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmImport_IMD.resx">
       <DependentUpon>frmImport_IMD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layaway\frmLayAwayLookUp.resx">
+      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmPLU.resx">
       <DependentUpon>frmPLU.vb</DependentUpon>
