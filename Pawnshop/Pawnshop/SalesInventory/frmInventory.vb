@@ -70,33 +70,41 @@ Public Class frmInventory
         STOFile_Init()
 
         ' LOADING PTU FILE
-        Using rvsr As New StreamReader(ptuFile)
-            While rvsr.Peek <> -1
-                vText = rvsr.ReadLine
-                vstring = vText.Split({vbTab}, StringSplitOptions.RemoveEmptyEntries)
-                If vstring.Count <> 6 Then
-                    GoTo FAILED_VER
+        Dim tfp As New FileIO.TextFieldParser(ptuFile)
+        tfp.TextFieldType = FileIO.FieldType.Delimited
+        Dim Delimiters() As String = {vbTab}
+        Dim Comments() As String = {"'"}
+        tfp.Delimiters = Delimiters
+        tfp.CommentTokens = Comments
+
+        tfp.HasFieldsEnclosedInQuotes = True
+
+        Try
+            While Not tfp.EndOfData
+                Dim FoundField() As String = tfp.ReadFields
+                If FoundField.Count <> 6 Then
+                    Console.WriteLine(FoundField.Count & " Fields: " & tfp.ReadFields(0))
                 End If
 
                 If idx > 1 Then
-                    Dim itemQty As Double = CDbl(vstring(2).Replace(",", "").Replace("""", ""))
+                    Dim itemQty As Double = CDbl(FoundField(2).Replace(",", "").Replace("""", ""))
 
                     'EXCLUDE HEADERS
                     Dim invItem As New cItem(cItem.DocumentType.GoodsReceipt)
                     With invItem
-                        .ItemCode = vstring(0)
-                        .Description = vstring(1)
+                        .ItemCode = FoundField(0)
+                        .Description = FoundField(1)
                         .Qty = itemQty
-                        .Remarks = String.Format("STO# {0:000000}", CInt(vstring(4)))
+                        .Remarks = String.Format("STO# {0:000000}", CInt(FoundField(4)))
                         .Load_ItemCode()
                     End With
 
                     'Document Verification
                     'Only the WhsCode and the Date are being extracted
                     If WhsCode = "" Then
-                        WhsCode = vstring(3)
+                        WhsCode = FoundField(3)
                     Else
-                        If WhsCode <> vstring(3) Then
+                        If WhsCode <> FoundField(3) Then
                             'Possible Tampering
                             GoTo FAILED_VER
                         End If
@@ -107,14 +115,14 @@ Public Class frmInventory
                     End If
 
                     If STODate = Nothing Then
-                        STODate = DateTime.Parse(vstring(5)).ToString("MM/dd/yyyy")
+                        STODate = DateTime.Parse(FoundField(5)).ToString("MM/dd/yyyy")
                     Else
-                        If STODate.ToString("MM/dd/yyyy") <> DateTime.Parse(vstring(5)).ToString("MM/dd/yyyy") Then
+                        If STODate.ToString("MM/dd/yyyy") <> DateTime.Parse(FoundField(5)).ToString("MM/dd/yyyy") Then
                             GoTo FAILED_VER
                         End If
                     End If
 
-                    If Not IsNumeric(vstring(4)) Then
+                    If Not IsNumeric(FoundField(4)) Then
                         GoTo FAILED_VER
                     End If
 
@@ -128,10 +136,10 @@ Public Class frmInventory
                         lblSTODate.Text = STODate
                     End If
 
-                    If Not isSTOExisting(vstring(4)) Then
+                    If Not isSTOExisting(FoundField(4)) Then
                         tmpDocID += 1
 
-                        STONum = vstring(4)
+                        STONum = FoundField(4)
                         invItem.DocID = STONum
                         AddItem(invItem, STONum)
                     End If
@@ -139,7 +147,9 @@ Public Class frmInventory
 
                 idx += 1
             End While
-        End Using
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
 
         ' Displaying Other information
         lblWHS.Text = WhsCode
