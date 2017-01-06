@@ -312,6 +312,7 @@
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
         database.SaveEntry(ds)
+        INSCountZero()
     End Sub
 
     Private Function GetMaintenanceValue(ByVal Key As String)
@@ -325,4 +326,12 @@
         End Try
         Return Nothing
     End Function
+
+    Private Sub INSCountZero()
+        Dim mysql As String = "Select * From tblMaintenance Where Opt_Keys = 'INS Count'"
+        Dim fillData As String = "tblMaintenance"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        ds.Tables(0).Rows(0).Item("Opt_Values") = 0
+        SaveEntry(ds, False)
+    End Sub
 End Class
