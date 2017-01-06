@@ -23,6 +23,7 @@ Version 1.4.1.10
  - Fix Selling Price from 2 decimal places into 6
  - Fix missing "Appraiser By" in PT
  - Fix on Re-Transact with 0 selling price having wrong computation
+ - Fix Import STO Error
 
 Version 1.3.1.1
  - Fix Bug in Pawned Item Computation
