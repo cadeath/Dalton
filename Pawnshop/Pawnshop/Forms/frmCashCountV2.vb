@@ -271,7 +271,8 @@
 
     Private Sub SaveInsuranceInv()
         Dim TotalCount As Integer = CInt(GetMaintenanceValue("INS Count"))
-        Dim TotalVal As Integer = TotalCount * GetMaintenanceValue("InsuranceAmount")
+        Dim InsPrice As Integer = GetMaintenanceValue("InsuranceAmount")
+        Dim TotalVal As Integer = TotalCount * InsPrice
         '= 'TotalCount * 
         Dim mysql As String = "SELECT * FROM DOC ROWS 1"
         Dim ds As DataSet = LoadSQL(mysql, "Doc")
@@ -312,6 +313,9 @@
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
         database.SaveEntry(ds)
+        Dim getLastID As Integer = GetDocLines_LastID()
+        AddJournal(InsPrice * TotalCount, "Debit", "Revolving Fund", "SALES IND 00001", "SALES", , , "SALES", getLastID)
+        AddJournal(InsPrice * TotalCount, "Credit", "Cash Offsetting Account", "SALES IND 00001", , , "SALES OF INVENTORIABLES", "SALES", getLastID)
         INSCountZero()
     End Sub
 
@@ -334,4 +338,11 @@
         ds.Tables(0).Rows(0).Item("Opt_Values") = 0
         SaveEntry(ds, False)
     End Sub
+
+    Private Function GetDocLines_LastID() As Integer
+        Dim mySql As String = "SELECT * FROM DOCLINES ORDER BY DLID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("DLID")
+    End Function
 End Class
