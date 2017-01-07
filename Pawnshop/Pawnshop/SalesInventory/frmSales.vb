@@ -716,6 +716,7 @@ Public Class frmSales
     End Sub
 
     Private Sub LayAwayPost()
+
         Dim lay As New LayAway
         With lay
             .DocDate = CurrentDate
