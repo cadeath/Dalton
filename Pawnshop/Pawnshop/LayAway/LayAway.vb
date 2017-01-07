@@ -74,7 +74,7 @@
 #End Region
 
 #Region "Procedures"
-    Private Sub SaveLayAway()
+    Friend Sub SaveLayAway()
         Dim mysql As String = "Select * from tblLayAway Rows 1"
         Dim fillData As String = "tblLayAway"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
@@ -85,14 +85,13 @@
             .Item("CustomerID") = _customerid
             .Item("ItemCode") = _itemCode
             .Item("Price") = _price
-            .Item("Balance") = _balance
             .Item("Status") = _status
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
     End Sub
 
-    Private Sub LoadByID(ByVal ID As Integer)
+    Friend Sub LoadByID(ByVal ID As Integer)
         Dim mysql As String = "Select * From tblLayAway Where LayID = '" & ID & "'"
         Dim fillData As String = "tblLayAway"
         Dim ds As DataSet = LoadSQL(mysql, fillData)

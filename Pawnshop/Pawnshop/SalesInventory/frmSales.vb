@@ -714,4 +714,16 @@ Public Class frmSales
             Load_asLayAway()
         End If
     End Sub
+
+    Private Sub LayAwayPost()
+        Dim lay As New LayAway
+        With lay
+            .DocDate = CurrentDate
+            .CustomerID = ""
+            .ItemCode = ""
+            .Price = ""
+            .Status = "A"
+            .SaveLayAway()
+        End With
+    End Sub
 End Class
