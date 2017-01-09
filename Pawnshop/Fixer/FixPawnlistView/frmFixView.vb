@@ -6,6 +6,7 @@
     "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
 
         Dim firebird As String = readValue & DBPATH
+        database.dbName = firebird
         txtData.Text = firebird
     End Sub
     Private Sub frmFixView_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
