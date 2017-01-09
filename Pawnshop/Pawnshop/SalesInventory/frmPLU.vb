@@ -6,6 +6,7 @@
     Private fromSales As Boolean = True
     Private fromInventory As Boolean = False
     Private isRedeem As Boolean = False
+    Private isLayAway As Boolean = False
 
     Friend Sub From_Sales()
         Me.fromSales = True
@@ -24,6 +25,10 @@
     Friend Sub isAuctionRedeem()
         Me.isRedeem = True
         txtCode.Select()
+    End Sub
+
+    Friend Sub LayAway()
+        Me.isLayAway = True
     End Sub
 
     Private Sub frmPLU_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -266,10 +271,11 @@
                 frmSales.AddItem(selected_Itm)
             End If
             frmSales.ClearSearch()
-        Else
-            ' Inventory IN
-            'frmInventoryIn.AddItem(selected_Itm, qtyItm, UnitPrice)
-            'frmInventoryIn.ClearSearch()
+        End If
+        If isLayAway = True Then
+            frmLayAway.Show()
+            frmLayAway.LoadItemEncode(selected_Itm)
+
         End If
 
         Me.Close()

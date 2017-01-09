@@ -9,6 +9,10 @@
     End Sub
 
     Private Sub frmLayAwayLookUp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ClearFields()
+    End Sub
 
+    Private Sub ClearFields()
+        lvClient.Items.Clear()
     End Sub
 End Class

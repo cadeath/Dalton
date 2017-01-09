@@ -24,6 +24,7 @@ Partial Class frmLayAway
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLayAway))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.lblDOB = New System.Windows.Forms.Label()
         Me.lblContact = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -33,6 +34,7 @@ Partial Class frmLayAway
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCustomer = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.txtItemCode = New System.Windows.Forms.TextBox()
@@ -45,13 +47,13 @@ Partial Class frmLayAway
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblCost = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnOK = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.lblDOB)
         Me.GroupBox1.Controls.Add(Me.lblContact)
         Me.GroupBox1.Controls.Add(Me.Label12)
@@ -66,6 +68,15 @@ Partial Class frmLayAway
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Client Information"
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(363, 19)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(68, 23)
+        Me.btnSearch.TabIndex = 5
+        Me.btnSearch.Text = "&Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'lblDOB
         '
@@ -143,12 +154,13 @@ Partial Class frmLayAway
         Me.txtCustomer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCustomer.Location = New System.Drawing.Point(120, 19)
         Me.txtCustomer.Name = "txtCustomer"
-        Me.txtCustomer.Size = New System.Drawing.Size(309, 22)
+        Me.txtCustomer.Size = New System.Drawing.Size(237, 22)
         Me.txtCustomer.TabIndex = 3
         Me.txtCustomer.Text = "Eskie Cirrus James Maquilang"
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.btnOK)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.txtDescription)
         Me.GroupBox2.Controls.Add(Me.txtItemCode)
@@ -167,6 +179,15 @@ Partial Class frmLayAway
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Item Information"
+        '
+        'btnOK
+        '
+        Me.btnOK.Location = New System.Drawing.Point(348, 189)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(64, 25)
+        Me.btnOK.TabIndex = 4
+        Me.btnOK.Text = "&OK"
+        Me.btnOK.UseVisualStyleBackColor = True
         '
         'Label10
         '
@@ -194,6 +215,7 @@ Partial Class frmLayAway
         Me.txtItemCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtItemCode.Location = New System.Drawing.Point(78, 17)
         Me.txtItemCode.Name = "txtItemCode"
+        Me.txtItemCode.ReadOnly = True
         Me.txtItemCode.Size = New System.Drawing.Size(179, 22)
         Me.txtItemCode.TabIndex = 14
         Me.txtItemCode.Text = "ITM0001"
@@ -287,21 +309,11 @@ Partial Class frmLayAway
         Me.Label6.TabIndex = 4
         Me.Label6.Text = "Item Price:"
         '
-        'btnOK
-        '
-        Me.btnOK.Location = New System.Drawing.Point(794, 240)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(75, 32)
-        Me.btnOK.TabIndex = 4
-        Me.btnOK.Text = "&OK"
-        Me.btnOK.UseVisualStyleBackColor = True
-        '
         'frmLayAway
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(875, 277)
-        Me.Controls.Add(Me.btnOK)
+        Me.ClientSize = New System.Drawing.Size(875, 238)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -340,4 +352,5 @@ Partial Class frmLayAway
     Friend WithEvents lblContact As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents btnSearch As System.Windows.Forms.Button
 End Class

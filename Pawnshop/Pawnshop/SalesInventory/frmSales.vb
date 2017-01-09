@@ -222,12 +222,15 @@ Public Class frmSales
         End If
     End Sub
 
+
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmPLU.Show()
-        frmPLU.From_Sales()
-
+        If TransactionMode = TransType.LayAway Then
+            frmPLU.LayAway()
+        Else
+            frmPLU.From_Sales()
+        End If
         IS_AUCTIONREDEEM()
-
         If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
 
         frmPLU.Load_PLU()
