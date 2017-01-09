@@ -109,5 +109,23 @@
             _status = .Item("Status")
         End With
     End Sub
+
+    Friend Function LayLastID()
+        Dim mysql As String = "Select * From tblLayAway ORDER BY LayID DESC"
+        Dim filldata As String = "tblLayAway"
+        Dim ds As DataSet = LoadSQL(mysql, filldata)
+        If ds.Tables(0).Rows().Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("LayID")
+    End Function
+
+    Friend Sub ItemOnLayMode(ByVal Code As String)
+        Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & Code & "'"
+        Dim fillData As String = "ItemMaster"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        ds.Tables(0).Rows(0).Item("IsLayAway") = 1
+        SaveEntry(ds, False)
+    End Sub
 #End Region
 End Class

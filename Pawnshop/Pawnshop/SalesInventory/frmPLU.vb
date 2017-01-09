@@ -273,12 +273,15 @@
             frmSales.ClearSearch()
         End If
         If isLayAway = True Then
-            frmLayAway.Show()
-            frmLayAway.LoadItemEncode(selected_Itm)
-
+            If selected_Itm.IsLayAway = 1 Then
+                frmLayAway.Show()
+                frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
+            Else
+                frmLayAway.Show()
+                frmLayAway.LoadItemEncode(selected_Itm)
+            End If
         End If
-
-        Me.Close()
+            Me.Close()
     End Sub
 
     Private Sub lvItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick

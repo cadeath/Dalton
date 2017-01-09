@@ -24,6 +24,12 @@ Public Class frmSales
 
     Private canTransact As Boolean = True
 
+    Friend LayCustomer As Integer
+    Friend LayItemCode As String
+    Friend LayCost As Integer
+    Friend LayBalance As Integer
+    Friend LayAmount As Integer
+
     Private Sub frmSales_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         If DEV_MODE Then Pawn.Populate()
     End Sub
@@ -311,166 +317,168 @@ Public Class frmSales
         If Not MsgBox("Do you want to POST?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "POSTING...") = vbYes Then
             Exit Sub
         End If
+        If TransactionMode = TransType.LayAway Then
+            LayAwayPost()
+        Else
+            CheckOR()
+            If Not canTransact Then Exit Sub
 
-        CheckOR()
-        If Not canTransact Then Exit Sub
+            If lvSale.Items.Count = 0 Then Exit Sub
 
-        If lvSale.Items.Count = 0 Then Exit Sub
+            Dim mySql As String, fillData As String
+            Dim getLastID As Integer = 0
+            Dim Remarks As String = ""
+            Dim unsec_Customer As String = lblCustomer.Text
+            Dim prefix As String = "", DocCode As String
 
-        Dim mySql As String, fillData As String
-        Dim getLastID As Integer = 0
-        Dim Remarks As String = ""
-        Dim unsec_Customer As String = lblCustomer.Text
-        Dim prefix As String = "", DocCode As String
+            ' SALES RETURN
+            If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
 
-        ' SALES RETURN
-        If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
-
-        ' INVENTORY STOCK OUT
-        If TransactionMode = TransType.StockOut Then
-            Dim retVal(1) As String
-            If frmSalesStockOut.ShowDialog(retVal) <> Windows.Forms.DialogResult.OK Then
-                Exit Sub
-            End If
-
-            If Not OTPDisable Then
-                OTPStockOut_Initialization()
-
-                diagGeneralOTP.GeneralOTP = OtpSettings
-                diagGeneralOTP.ShowDialog()
-                If Not diagGeneralOTP.isCorrect Then
+            ' INVENTORY STOCK OUT
+            If TransactionMode = TransType.StockOut Then
+                Dim retVal(1) As String
+                If frmSalesStockOut.ShowDialog(retVal) <> Windows.Forms.DialogResult.OK Then
                     Exit Sub
                 End If
+
+                If Not OTPDisable Then
+                    OTPStockOut_Initialization()
+
+                    diagGeneralOTP.GeneralOTP = OtpSettings
+                    diagGeneralOTP.ShowDialog()
+                    If Not diagGeneralOTP.isCorrect Then
+                        Exit Sub
+                    End If
+                End If
+
+                unsec_Customer = retVal(0) 'Branch
+                Remarks = retVal(1) 'Particulars
             End If
 
-            unsec_Customer = retVal(0) 'Branch
-            Remarks = retVal(1) 'Particulars
-        End If
+            'Creating Document
+            mySql = "SELECT * FROM DOC ROWS 1"
+            fillData = "DOC"
 
-        'Creating Document
-        mySql = "SELECT * FROM DOC ROWS 1"
-        fillData = "DOC"
-
-        Dim ds As DataSet = LoadSQL(mySql, fillData)
-        Dim dsNewRow As DataRow
-        dsNewRow = ds.Tables(fillData).NewRow
-
-        Select Case TransactionMode
-            Case TransType.Returns
-                prefix = "RET"
-            Case TransType.Cash, TransType.Check, TransType.Auction
-                prefix = "INV"
-            Case TransType.StockOut
-                prefix = "STO"
-            Case TransType.LayAway
-                prefix = "LAY"
-        End Select
-
-        With dsNewRow
-            DocCode = String.Format("{1}#{0:000000}", ORNUM, prefix)
-            .Item("DOCTYPE") = DOC_TYPE
-            .Item("CODE") = DocCode
-            .Item("MOP") = GetModesOfPayment(TransactionMode)
-            .Item("CUSTOMER") = unsec_Customer
-            .Item("DOCDATE") = CurrentDate
-            .Item("NOVAT") = DOC_NOVAT
-            .Item("VATRATE") = VAT
-            .Item("VATTOTAL") = DOC_VATTOTAL
-            .Item("DOCTOTAL") = DOC_TOTAL
-            .Item("USERID") = POSuser.UserID
-            If Remarks <> "" Then .Item("REMARKS") = Remarks
-        End With
-        ds.Tables(fillData).Rows.Add(dsNewRow)
-
-        database.SaveEntry(ds)
-        Dim DOCID As Integer = 0
-
-        mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
-        ds = LoadSQL(mySql, fillData)
-        DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
-
-        Console.Write("Loading")
-        While DOCID = 0
-            Application.DoEvents()
-            Console.Write(".")
-        End While
-        Console.WriteLine()
-
-        'Creating DocumentLines
-        mySql = "SELECT * FROM DOCLINES ROWS 1"
-        fillData = "DOCLINES"
-        ds = LoadSQL(mySql, fillData)
-
-        For Each ht As DictionaryEntry In ht_BroughtItems
-            Dim itm As New cItemData
-            itm = ht.Value
-
+            Dim ds As DataSet = LoadSQL(mySql, fillData)
+            Dim dsNewRow As DataRow
             dsNewRow = ds.Tables(fillData).NewRow
+
+            Select Case TransactionMode
+                Case TransType.Returns
+                    prefix = "RET"
+                Case TransType.Cash, TransType.Check, TransType.Auction
+                    prefix = "INV"
+                Case TransType.StockOut
+                    prefix = "STO"
+                Case TransType.LayAway
+                    prefix = "LAY"
+            End Select
+
             With dsNewRow
-                .Item("DOCID") = DOCID
-                .Item("ITEMCODE") = itm.ItemCode
-                .Item("DESCRIPTION") = itm.Description
-                .Item("QTY") = itm.Quantity * IIf(TransactionMode = TransType.Returns, -1, 1)
-                .Item("UNITPRICE") = itm.UnitPrice
-                .Item("SALEPRICE") = itm.SalePrice
-                .Item("ROWTOTAL") = itm.SalePrice * itm.Quantity
-                .Item("UOM") = itm.UnitofMeasure
+                DocCode = String.Format("{1}#{0:000000}", ORNUM, prefix)
+                .Item("DOCTYPE") = DOC_TYPE
+                .Item("CODE") = DocCode
+                .Item("MOP") = GetModesOfPayment(TransactionMode)
+                .Item("CUSTOMER") = unsec_Customer
+                .Item("DOCDATE") = CurrentDate
+                .Item("NOVAT") = DOC_NOVAT
+                .Item("VATRATE") = VAT
+                .Item("VATTOTAL") = DOC_VATTOTAL
+                .Item("DOCTOTAL") = DOC_TOTAL
+                .Item("USERID") = POSuser.UserID
+                If Remarks <> "" Then .Item("REMARKS") = Remarks
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
 
             database.SaveEntry(ds)
+            Dim DOCID As Integer = 0
 
-            If itm.isInventoriable Then
+            mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
+            ds = LoadSQL(mySql, fillData)
+            DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
 
-                If TransactionMode <> TransType.Returns Then
-                    InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
+            Console.Write("Loading")
+            While DOCID = 0
+                Application.DoEvents()
+                Console.Write(".")
+            End While
+            Console.WriteLine()
+
+            'Creating DocumentLines
+            mySql = "SELECT * FROM DOCLINES ROWS 1"
+            fillData = "DOCLINES"
+            ds = LoadSQL(mySql, fillData)
+
+            For Each ht As DictionaryEntry In ht_BroughtItems
+                Dim itm As New cItemData
+                itm = ht.Value
+
+                dsNewRow = ds.Tables(fillData).NewRow
+                With dsNewRow
+                    .Item("DOCID") = DOCID
+                    .Item("ITEMCODE") = itm.ItemCode
+                    .Item("DESCRIPTION") = itm.Description
+                    .Item("QTY") = itm.Quantity * IIf(TransactionMode = TransType.Returns, -1, 1)
+                    .Item("UNITPRICE") = itm.UnitPrice
+                    .Item("SALEPRICE") = itm.SalePrice
+                    .Item("ROWTOTAL") = itm.SalePrice * itm.Quantity
+                    .Item("UOM") = itm.UnitofMeasure
+                End With
+                ds.Tables(fillData).Rows.Add(dsNewRow)
+
+                database.SaveEntry(ds)
+
+                If itm.isInventoriable Then
+
+                    If TransactionMode <> TransType.Returns Then
+                        InventoryController.DeductInventory(itm.ItemCode, itm.Quantity)
+                    Else
+                        InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
+                    End If
+                End If
+
+                If TransactionMode = TransType.Auction Then
+                    ' PULLOUT IN THE INVENTORY
+                    InventoryController.PullOut(itm)
+                End If
+
+                ' JOURNAL ENTRY
+                getLastID = GetDocLines_LastID()
+                If TransactionMode = TransType.Returns Then
+                    AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                    AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
                 Else
-                    InventoryController.AddInventory(itm.ItemCode, itm.Quantity)
+                    If TransactionMode <> TransType.Auction Then
+                        AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                        AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+                    Else
+                        ' JE FOR AUCTION REDEEM
+
+                        ' SELLING PRICE
+                        AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
+                        AddJournal(itm.SalePrice, "Credit", itm.Get_AuctionCode, "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , "AUCTION REDEEM", "RECALL", getLastID)
+                        ' PRINCIPAL
+                        AddJournal(itm.UnitPrice, "Debit", itm.Get_CostCode, "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
+                        AddJournal(itm.UnitPrice, "Credit", "Inventory Merchandise - Segregated", "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
+                    End If
+                End If
+            Next
+            ItemPosted()
+
+            If TransactionMode = TransType.StockOut Then
+                If MsgBox("Do you want to generate STO File?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "STO") = _
+                MsgBoxResult.Yes Then
+                    Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                    Dim STONUM As Integer = GetOption("STONum") - 1
+                    DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), STONUM.ToString("000"))
+                    InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
                 End If
             End If
 
-            If TransactionMode = TransType.Auction Then
-                ' PULLOUT IN THE INVENTORY
-                InventoryController.PullOut(itm)
-            End If
-
-            ' JOURNAL ENTRY
-            getLastID = GetDocLines_LastID()
-            If TransactionMode = TransType.Returns Then
-                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
-                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
-            Else
-                If TransactionMode <> TransType.Auction Then
-                    AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
-                    AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
-                Else
-                    ' JE FOR AUCTION REDEEM
-
-                    ' SELLING PRICE
-                    AddJournal(itm.SalePrice, "Debit", "Revolving Fund", "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , , "RECALL", getLastID)
-                    AddJournal(itm.SalePrice, "Credit", itm.Get_AuctionCode, "RECALL PT#" & CInt(itm.Tags).ToString("000000"), "AUCTION", , "AUCTION REDEEM", "RECALL", getLastID)
-                    ' PRINCIPAL
-                    AddJournal(itm.UnitPrice, "Debit", itm.Get_CostCode, "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
-                    AddJournal(itm.UnitPrice, "Credit", "Inventory Merchandise - Segregated", "COS-RECALL PT#" & CInt(itm.Tags).ToString("000000"), , , , "COSRECALL", getLastID)
-                End If
-            End If
-        Next
-        ItemPosted()
-
-        If TransactionMode = TransType.StockOut Then
-            If MsgBox("Do you want to generate STO File?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "STO") = _
-            MsgBoxResult.Yes Then
-                Dim DefaultSrc As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
-                Dim STONUM As Integer = GetOption("STONum") - 1
-                DefaultSrc &= "\" & String.Format("STO{2} {0}{1}.xlsx", BranchCode, CurrentDate.ToString("yyyyMMdd"), STONUM.ToString("000"))
-                InventoryController.Export_STO(DefaultSrc, DOCID, unsec_Customer)
+            If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then
+                PrintOR(DOCID)
             End If
         End If
-
-        If MsgBox("Do you want to print it?", MsgBoxStyle.Information + MsgBoxStyle.YesNo + vbDefaultButton2, "PRINT") = MsgBoxResult.Yes Then
-            PrintOR(DOCID)
-        End If
-
         MsgBox("ITEM POSTED", MsgBoxStyle.Information)
         ClearField()
     End Sub
@@ -723,11 +731,21 @@ Public Class frmSales
         Dim lay As New LayAway
         With lay
             .DocDate = CurrentDate
-            .CustomerID = ""
-            .ItemCode = ""
-            .Price = ""
+            .CustomerID = LayCustomer
+            .ItemCode = LayItemCode
+            .Price = LayCost
             .Status = "A"
             .SaveLayAway()
         End With
+
+        Dim layLines As New LayAwayLines
+        With layLines
+            .LayID = lay.LayLastID
+            .DocDate = CurrentDate
+            .Amount = LayAmount
+            .Balance = LayBalance
+            .SaveLayAwayLines()
+        End With
+        lay.ItemOnLayMode(LayItemCode)
     End Sub
 End Class

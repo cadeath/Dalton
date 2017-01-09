@@ -1,6 +1,6 @@
 ﻿Public Class LayAwayLines
     Dim mysql As String = String.Empty
-    Dim fillData As String = "tlbLayLines"
+    Dim fillData As String = "tblLayLines"
     Dim ds As DataSet
 #Region "Property"
     Private _layLinesID As Integer
@@ -53,10 +53,20 @@
         End Set
     End Property
 
+    Private _lineStatus As String
+    Public Property LineStatus() As String
+        Get
+            Return _lineStatus
+        End Get
+        Set(ByVal value As String)
+            _lineStatus = value
+        End Set
+    End Property
+
 #End Region
 
-#Region ""
-    Private Sub SaveLayAwayLines()
+#Region "Procedures"
+    Friend Sub SaveLayAwayLines()
         mysql = "Select * From tblLaylines Rows 1"
         ds = LoadSQL(mysql, fillData)
         Dim dsNewRow As DataRow
@@ -84,6 +94,7 @@
             _amount = .Item("Amount")
             _balance = .Item("Balance")
             _docDate = .Item("DocDate")
+            _lineStatus = .Item("Status")
         End With
 
     End Sub

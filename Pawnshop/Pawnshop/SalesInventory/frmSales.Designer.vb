@@ -46,8 +46,8 @@ Partial Class frmSales
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbCash = New System.Windows.Forms.ToolStripButton()
         Me.tsbCheck = New System.Windows.Forms.ToolStripButton()
-        Me.tsbRefund = New System.Windows.Forms.ToolStripButton()
         Me.tsbtnLay = New System.Windows.Forms.ToolStripButton()
+        Me.tsbRefund = New System.Windows.Forms.ToolStripButton()
         Me.tsbSalesReturn = New System.Windows.Forms.ToolStripButton()
         Me.tsbtnOut = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -247,6 +247,14 @@ Partial Class frmSales
         Me.tsbCheck.Size = New System.Drawing.Size(65, 22)
         Me.tsbCheck.Text = "CHECK"
         '
+        'tsbtnLay
+        '
+        Me.tsbtnLay.Image = CType(resources.GetObject("tsbtnLay.Image"), System.Drawing.Image)
+        Me.tsbtnLay.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnLay.Name = "tsbtnLay"
+        Me.tsbtnLay.Size = New System.Drawing.Size(82, 22)
+        Me.tsbtnLay.Text = "LAYAWAY"
+        '
         'tsbRefund
         '
         Me.tsbRefund.Image = CType(resources.GetObject("tsbRefund.Image"), System.Drawing.Image)
@@ -255,14 +263,6 @@ Partial Class frmSales
         Me.tsbRefund.Size = New System.Drawing.Size(71, 22)
         Me.tsbRefund.Text = "REFUND"
         Me.tsbRefund.Visible = False
-        '
-        'tsbtnLay
-        '
-        Me.tsbtnLay.Image = CType(resources.GetObject("tsbtnLay.Image"), System.Drawing.Image)
-        Me.tsbtnLay.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnLay.Name = "tsbtnLay"
-        Me.tsbtnLay.Size = New System.Drawing.Size(82, 22)
-        Me.tsbtnLay.Text = "LAYAWAY"
         '
         'tsbSalesReturn
         '
@@ -303,7 +303,7 @@ Partial Class frmSales
         Me.tsbtnOption.Image = CType(resources.GetObject("tsbtnOption.Image"), System.Drawing.Image)
         Me.tsbtnOption.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnOption.Name = "tsbtnOption"
-        Me.tsbtnOption.Size = New System.Drawing.Size(77, 20)
+        Me.tsbtnOption.Size = New System.Drawing.Size(77, 22)
         Me.tsbtnOption.Text = "OPTIONS"
         Me.tsbtnOption.Visible = False
         '
@@ -322,9 +322,9 @@ Partial Class frmSales
         '
         Me.btnPost.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnPost.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPost.Location = New System.Drawing.Point(662, 366)
+        Me.btnPost.Location = New System.Drawing.Point(665, 366)
         Me.btnPost.Name = "btnPost"
-        Me.btnPost.Size = New System.Drawing.Size(105, 50)
+        Me.btnPost.Size = New System.Drawing.Size(102, 50)
         Me.btnPost.TabIndex = 11
         Me.btnPost.Text = "Post"
         Me.btnPost.UseVisualStyleBackColor = True

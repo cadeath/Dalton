@@ -189,6 +189,16 @@
         End Set
     End Property
 
+    Private _isLayAway As String
+    Public Property IsLayAway() As String
+        Get
+            Return _isLayAway
+        End Get
+        Set(ByVal value As String)
+            _isLayAway = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -281,6 +291,7 @@
             _onHold = IIf(.Item("ONHOLD") = 1, True, False)
             _comments = .Item("COMMENTS")
             _onHand = .Item("ONHAND")
+            _isLayAway = .Item("isLayAway")
         End With
     End Sub
 
@@ -317,6 +328,7 @@
             _isInv = If(.Item("ISINV") = 1, True, False)
             _onHold = If(.Item("ONHOLD") = 1, True, False)
             _onHand = .Item("ONHAND")
+            _isLayAway = .Item("isLayAway")
 
             hasLoaded = True
         End With
