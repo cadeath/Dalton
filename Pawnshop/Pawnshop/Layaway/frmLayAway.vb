@@ -1,23 +1,30 @@
 ﻿Public Class frmLayAway
 
     Friend Customer As Client
+    Friend Item As cItemData
     Dim tmpBalance As Integer = 0
     Dim tmpDate As Date
     Dim tmpLayID As Integer
     Friend isOld As Boolean = False
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
+        Try
         If Not Compute() Then Exit Sub
         If Customer Is Nothing Then MsgBox("No Customer Selected!", MsgBoxStyle.Information, "Error") : Exit Sub
-        If lblPenalty.Text = Nothing Then lblPenalty.Text = 0
-        frmSales.LayCustomer = Customer.ID
-        frmSales.LayItemCode = txtItemCode.Text
-        frmSales.LayCost = CInt(lblCost.Text)
-        frmSales.LayAmount = txtAmount.Text
-        frmSales.LayBalance = CInt(lblBalance.Text)
-        frmSales.LayID = tmpLayID
-        frmSales.LayisOld = isOld
+        'If lblPenalty.Text = Nothing Then lblPenalty.Text = 0
+        'frmSales.LayCustomer = Customer.ID
+        'frmSales.LayItemCode = txtItemCode.Text
+        'frmSales.LayCost = CInt(lblCost.Text)
+        'frmSales.LayAmount = txtAmount.Text
+        'frmSales.LayBalance = CInt(lblBalance.Text)
+        'frmSales.LayID = tmpLayID
+        'frmSales.LayisOld = isOld
+        LayAwaySave()
 
+        MsgBox("Item Posted", MsgBoxStyle.Information, "LayAway")
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
         Me.Close()
     End Sub
 
@@ -36,6 +43,13 @@
         lblCost.Text = ""
         lblPenalty.Text = ""
         lblBalance.Text = ""
+    End Sub
+
+    Private Sub Disable()
+        txtCustomer.Enabled = False
+        txtItemCode.Enabled = False
+        btnSearch.Enabled = False
+        btnSearchItemCode.Enabled = False
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -61,7 +75,7 @@
         txtDescription.Text = Item.Description
         lblCost.Text = Item.SalePrice
         tmpBalance = Item.SalePrice
-
+        lblBalance.Text = Item.SalePrice
     End Sub
 
     Private Sub txtCustomer_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCustomer.KeyPress
@@ -94,7 +108,7 @@
         End If
     End Sub
 
-    Friend Sub LoadExistInfo(ByVal Item As String)
+    Friend Sub LoadExistInfo(ByVal ID As String)
         Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
         mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
         mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
@@ -104,7 +118,7 @@
         mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
         mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-        mysql &= "WHERE LYL.STATUS <> 'V' AND LY.ITEMCODE = '" & Item & "'"
+        mysql &= "WHERE LYL.STATUS <> 'V' AND LY.LAYID = '" & ID & "'"
         Dim ds As DataSet = LoadSQL(mysql)
         With ds.Tables(0).Rows(0)
             Customer = New Client
@@ -125,6 +139,59 @@
                 lblBalance.Text = tmpBalance
             End If
             isOld = True
+            Disable()
         End With
+    End Sub
+
+    Private Sub btnSearchItemCode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchItemCode.Click
+        With frmPLU
+            .Show()
+            .Load_PLU(txtItemCode.Text)
+            .isLayAway = True
+        End With
+    End Sub
+
+    Private Sub LayAwaySave()
+        Dim lay As New LayAway
+        Dim layLines As New LayAwayLines
+        If isOld = True Then
+            With layLines
+                .LayID = tmpLayID
+                .DocDate = CurrentDate
+                .Amount = txtAmount.Text
+                .Balance = lblBalance.Text
+                .SaveLayAwayLines()
+            End With
+            If lblBalance.Text = 0 Then
+                Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & txtItemCode.Text & "'"
+                Dim fillData As String = "ItemMaster"
+                Dim ds As DataSet = LoadSQL(mysql, fillData)
+                InventoryController.DeductInventory(txtItemCode.Text, ds.Tables(0).Rows(0).Item("Onhand"))
+            End If
+        Else
+            With lay
+                .DocDate = CurrentDate
+                .CustomerID = Customer.ID
+                .ItemCode = txtItemCode.Text
+                .Price = lblCost.Text
+                .Status = "A"
+                .SaveLayAway()
+            End With
+
+            With layLines
+                .LayID = lay.LayLastID
+                .DocDate = CurrentDate
+                .Amount = txtAmount.Text
+                .Balance = lblBalance.Text
+                .SaveLayAwayLines()
+            End With
+            lay.ItemOnLayMode(txtItemCode.Text)
+        End If
+    End Sub
+
+    Private Sub txtItemCode_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtItemCode.KeyPress
+        If isEnter(e) Then
+            btnSearchItemCode.PerformClick()
+        End If
     End Sub
 End Class

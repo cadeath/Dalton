@@ -6,7 +6,7 @@
     Private fromSales As Boolean = True
     Private fromInventory As Boolean = False
     Private isRedeem As Boolean = False
-    Private isLayAway As Boolean = False
+    Friend isLayAway As Boolean = False
 
     Friend Sub From_Sales()
         Me.fromSales = True
@@ -25,10 +25,6 @@
     Friend Sub isAuctionRedeem()
         Me.isRedeem = True
         txtCode.Select()
-    End Sub
-
-    Friend Sub LayAway()
-        Me.isLayAway = True
     End Sub
 
     Private Sub frmPLU_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -261,24 +257,20 @@
             UnitPrice = InputBox("Price: ", "Custom Unit Price", selected_Itm.UnitPrice)
         End If
 
-        If fromSales Then
-            If isRedeem Then qtyItm = 1
-            selected_Itm.Quantity = qtyItm
-
-            If isRedeem = True Then
-                frmSales.AddItem(selected_Itm, True)
-            Else
-                frmSales.AddItem(selected_Itm)
-            End If
-            frmSales.ClearSearch()
-        End If
         If isLayAway = True Then
-            If selected_Itm.IsLayAway = 1 Then
-                frmLayAway.Show()
-                frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
-            Else
-                frmLayAway.Show()
-                frmLayAway.LoadItemEncode(selected_Itm)
+            frmLayAway.Show()
+            frmLayAway.LoadItemEncode(selected_Itm)
+        Else
+            If fromSales Then
+                If isRedeem Then qtyItm = 1
+                selected_Itm.Quantity = qtyItm
+
+                If isRedeem = True Then
+                    frmSales.AddItem(selected_Itm, True)
+                Else
+                    frmSales.AddItem(selected_Itm)
+                End If
+                frmSales.ClearSearch()
             End If
         End If
             Me.Close()
