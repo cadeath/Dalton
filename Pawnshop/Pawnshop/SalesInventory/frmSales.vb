@@ -29,6 +29,8 @@ Public Class frmSales
     Friend LayCost As Integer
     Friend LayBalance As Integer
     Friend LayAmount As Integer
+    Friend LayID As Integer
+    Friend LayisOld As Boolean
 
     Private Sub frmSales_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         If DEV_MODE Then Pawn.Populate()
@@ -727,25 +729,42 @@ Public Class frmSales
     End Sub
 
     Private Sub LayAwayPost()
-
         Dim lay As New LayAway
-        With lay
-            .DocDate = CurrentDate
-            .CustomerID = LayCustomer
-            .ItemCode = LayItemCode
-            .Price = LayCost
-            .Status = "A"
-            .SaveLayAway()
-        End With
-
         Dim layLines As New LayAwayLines
-        With layLines
-            .LayID = lay.LayLastID
-            .DocDate = CurrentDate
-            .Amount = LayAmount
-            .Balance = LayBalance
-            .SaveLayAwayLines()
-        End With
-        lay.ItemOnLayMode(LayItemCode)
+        If LayisOld = True Then
+            With layLines
+                .LayID = LayID
+                .DocDate = CurrentDate
+                .Amount = LayAmount
+                .Balance = LayBalance
+                .SaveLayAwayLines()
+            End With
+            If LayBalance = 0 Then
+                Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & LayItemCode & "'"
+                Dim fillData As String = "ItemMaster"
+                Dim ds As DataSet = LoadSQL(mysql, fillData)
+                InventoryController.DeductInventory(LayItemCode, ds.Tables(0).Rows(""))
+            End If
+        Else
+
+            With lay
+                .DocDate = CurrentDate
+                .CustomerID = LayCustomer
+                .ItemCode = LayItemCode
+                .Price = LayCost
+                .Status = "A"
+                .SaveLayAway()
+            End With
+
+
+            With layLines
+                .LayID = lay.LayLastID
+                .DocDate = CurrentDate
+                .Amount = LayAmount
+                .Balance = LayBalance
+                .SaveLayAwayLines()
+            End With
+            lay.ItemOnLayMode(LayItemCode)
+        End If
     End Sub
 End Class

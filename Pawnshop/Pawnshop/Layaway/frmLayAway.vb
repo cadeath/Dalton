@@ -3,6 +3,8 @@
     Friend Customer As Client
     Dim tmpBalance As Integer = 0
     Dim tmpDate As Date
+    Dim tmpLayID As Integer
+    Friend isOld As Boolean = False
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         If Not Compute() Then Exit Sub
@@ -13,6 +15,9 @@
         frmSales.LayCost = CInt(lblCost.Text)
         frmSales.LayAmount = txtAmount.Text
         frmSales.LayBalance = CInt(lblBalance.Text)
+        frmSales.LayID = tmpLayID
+        frmSales.LayisOld = isOld
+
         Me.Close()
     End Sub
 
@@ -75,7 +80,7 @@
     Private Function Compute() As Boolean
         Dim tmpPercent As Integer = CInt(lblCost.Text) * 0.2
         If Not txtAmount.Text >= tmpPercent Then
-            MsgBox("Please Paid at least 20%", MsgBoxStyle.Information, "Not Valid!")
+            MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
             Return False
         End If
         Return True
@@ -90,7 +95,7 @@
     End Sub
 
     Friend Sub LoadExistInfo(ByVal Item As String)
-        Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+        Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
         mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
         mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
         mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.DOCDATE AS DATEPAYMENT, LYL.AMOUNT, "
@@ -102,12 +107,13 @@
         mysql &= "WHERE LYL.STATUS <> 'V' AND LY.ITEMCODE = '" & Item & "'"
         Dim ds As DataSet = LoadSQL(mysql)
         With ds.Tables(0).Rows(0)
-            txtCustomer.Text = .Item("FULLNAME")
-            txtAddress.Text = .Item("FULLADDRESS")
-            lblContact.Text = .Item("CONTACTNUMBER")
-            lblDOB.Text = .Item("BIRTHDAY")
-            lblCost.Text = .Item("Price")
+            Customer = New Client
+            Customer.LoadClient(.Item("CLIENTID"))
+            tmpLayID = .Item("LayID")
+            LoadClient(Customer)
+
             txtItemCode.Text = .Item("ItemCOde")
+            lblCost.Text = .Item("Price")
             txtDescription.Text = .Item("Description")
 
             tmpDate = .Item("DocDate").AddDays(90).ToShortDateString
@@ -118,7 +124,7 @@
                 tmpBalance = .Item("Balance")
                 lblBalance.Text = tmpBalance
             End If
-           
+            isOld = True
         End With
     End Sub
 End Class
