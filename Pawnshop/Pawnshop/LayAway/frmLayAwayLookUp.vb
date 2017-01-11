@@ -14,25 +14,22 @@
             mysql = "Select LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
             mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
             mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
-            mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.DOCDATE AS DATEPAYMENT, LYL.AMOUNT, "
-            mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS, LYL.PENALTY "
+            mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
+            mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
-            mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-            mysql &= "WHERE LYL.STATUS <> 'V' "
-            mysql &= "AND (FULLNAME = '" & Search & "' OR LY.ITEMCODE = '" & Search & "')"
+            mysql &= "WHERE LY.STATUS <> 'V' AND (FULLNAME = '" & Search & "' OR LY.ITEMCODE = '" & Search & "')"
         Else
-            mysql = "Select FIRST 50 LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+           mysql = "Select LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
             mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
             mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
-            mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.DOCDATE AS DATEPAYMENT, LYL.AMOUNT, "
-            mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS, LYL.PENALTY "
+            mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
+            mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
-            mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-            mysql &= "WHERE LYL.STATUS <> 'V' "
+            mysql &= "WHERE LY.STATUS <> 'V' "
         End If
 
         Dim ds As DataSet = LoadSQL(mysql)
@@ -40,7 +37,8 @@
         For Each dr In ds.Tables(0).Rows()
             AddlvItems(dr)
         Next
-
+        Dim rowCount As Integer = ds.Tables(0).Rows.Count
+        MsgBox(rowCount & " Found", MsgBoxStyle.Information, "Lay Away")
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -73,5 +71,9 @@
         frmLayAway.Show()
         frmLayAway.LoadExistInfo(idx)
         Me.Close()
+    End Sub
+
+    Private Sub lvLayAway_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvLayAway.DoubleClick
+        btnSelect.PerformClick()
     End Sub
 End Class

@@ -133,6 +133,13 @@
         Return ds.Tables(0).Rows(0).Item("LayID")
     End Function
 
+    Friend Sub UpdateBalance(ByVal ID As Integer)
+        Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
+        Dim ds As DataSet = LoadSQL(mysql, "tblLayAway")
+        ds.Tables(0).Rows(0).Item("Balance") = _balance
+        SaveEntry(ds, False)
+    End Sub
+
     Friend Sub ItemOnLayMode(ByVal Code As String)
         Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & Code & "'"
         Dim fillData As String = "ItemMaster"
@@ -140,5 +147,6 @@
         ds.Tables(0).Rows(0).Item("IsLayAway") = 1
         SaveEntry(ds, False)
     End Sub
+   
 #End Region
 End Class

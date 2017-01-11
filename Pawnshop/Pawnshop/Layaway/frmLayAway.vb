@@ -11,7 +11,6 @@
         Try
 
             If Not isValid() Then Exit Sub
-            If Not Compute() Then Exit Sub
             'If lblPenalty.Text = Nothing Then lblPenalty.Text = 0
             'frmSales.LayCustomer = Customer.ID
             'frmSales.LayItemCode = txtItemCode.Text
@@ -71,12 +70,14 @@
         txtAmount.Focus()
     End Sub
 
-    Friend Sub LoadItemEncode(ByVal Item As cItemData)
-        txtItemCode.Text = Item.ItemCode
-        txtDescription.Text = Item.Description
-        lblCost.Text = Item.SalePrice
-        tmpBalance = Item.SalePrice
-        lblBalance.Text = Item.SalePrice
+    Friend Sub LoadItemEncode(ByVal tmpItem As cItemData)
+        txtItemCode.Text = tmpItem.ItemCode
+        txtDescription.Text = tmpItem.Description
+        lblCost.Text = tmpItem.SalePrice
+        tmpBalance = tmpItem.SalePrice
+        lblBalance.Text = tmpItem.SalePrice
+        Item = tmpItem
+        Compute()
     End Sub
 
     Private Sub txtCustomer_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCustomer.KeyPress
@@ -92,27 +93,26 @@
         End If
     End Sub
 
-    Private Function Compute() As Boolean
+    Private Function isValid() As Boolean
+        If Item Is Nothing Then MsgBox("No Item Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
+        If Customer Is Nothing Then MsgBox("No Customer Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
         Dim tmpPercent As Integer = CInt(lblCost.Text) * 0.2
-        If Not txtAmount.Text >= tmpPercent Then
+        If txtAmount.Text = "" Then
             MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
             Return False
-        ElseIf txtAmount.Text = "" Then
         ElseIf txtAmount.Text = 0 Then
-        ElseIf "" Then
-
+            MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
+            Return False
+        ElseIf Not txtAmount.Text >= tmpPercent Then
+            MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
+            Return False
         End If
-        If Customer Is Nothing Then Return False
-        If Item Is Nothing Then Return False
+
         Return True
     End Function
 
     Private Sub txtAmount_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAmount.KeyUp
-        If txtAmount.Text <> "" Then
-            lblBalance.Text = tmpBalance - txtAmount.Text
-        Else
-            lblBalance.Text = tmpBalance
-        End If
+        Compute()
     End Sub
 
     Friend Sub LoadExistInfo(ByVal ID As String)
@@ -133,9 +133,16 @@
             tmpLayID = .Item("LayID")
             LoadClient(Customer)
 
+
             txtItemCode.Text = .Item("ItemCOde")
-            lblCost.Text = .Item("Price")
+            Item = New cItemData
+            mysql = "Select * From ItemMaster Where ItemCode = '" & .Item("ItemCode") & "'"
+            Dim ItmDs As DataSet = LoadSQL(mysql, "ItemMaster")
+            Item.Load_Item(ItmDs.Tables(0).Rows(0).Item("ITEMID"))
+
             txtDescription.Text = .Item("Description")
+            lblCost.Text = .Item("Price")
+
 
             If CurrentDate >= .Item("DocDate").AddDays(90).ToShortDateString Then
                 tmpBalance = .Item("Balance") + (.Item("Price") * 0.02)
@@ -170,12 +177,18 @@
                 .Penalty = lblPenalty.Text
                 .SaveLayAwayLines()
             End With
-            'If lblBalance.Text = 0 Then
-            '    Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & txtItemCode.Text & "'"
-            '    Dim fillData As String = "ItemMaster"
-            '    Dim ds As DataSet = LoadSQL(mysql, fillData)
-            '    InventoryController.DeductInventory(txtItemCode.Text, ds.Tables(0).Rows(0).Item("Onhand"))
-            'End If
+            If lblBalance.Text = 0 Then
+                With lay
+                    .Balance = CInt(lblBalance.Text)
+                    .UpdateBalance(tmpLayID)
+                End With
+
+
+                'Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & txtItemCode.Text & "'"
+                'Dim fillData As String = "ItemMaster"
+                'Dim ds As DataSet = LoadSQL(mysql, fillData)
+                'InventoryController.DeductInventory(txtItemCode.Text, ds.Tables(0).Rows(0).Item("Onhand"))
+            End If
         Else
             With lay
                 .DocDate = CurrentDate
@@ -204,8 +217,11 @@
         End If
     End Sub
 
-    Private Function isValid() As Boolean
-      
-        Return True
-    End Function
+    Private Sub Compute()
+        If txtAmount.Text <> "" Then
+            lblBalance.Text = tmpBalance - txtAmount.Text
+        Else
+            lblBalance.Text = tmpBalance
+        End If
+    End Sub
 End Class
