@@ -3,25 +3,26 @@
     Friend Customer As Client
     Friend Item As cItemData
     Dim tmpBalance As Integer = 0
-    Dim tmpDate As Date
     Dim tmpLayID As Integer
     Friend isOld As Boolean = False
+    Private forfeitDate As Date
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         Try
-        If Not Compute() Then Exit Sub
-        If Customer Is Nothing Then MsgBox("No Customer Selected!", MsgBoxStyle.Information, "Error") : Exit Sub
-        'If lblPenalty.Text = Nothing Then lblPenalty.Text = 0
-        'frmSales.LayCustomer = Customer.ID
-        'frmSales.LayItemCode = txtItemCode.Text
-        'frmSales.LayCost = CInt(lblCost.Text)
-        'frmSales.LayAmount = txtAmount.Text
-        'frmSales.LayBalance = CInt(lblBalance.Text)
-        'frmSales.LayID = tmpLayID
-        'frmSales.LayisOld = isOld
-        LayAwaySave()
 
-        MsgBox("Item Posted", MsgBoxStyle.Information, "LayAway")
+            If Not isValid() Then Exit Sub
+            If Not Compute() Then Exit Sub
+            'If lblPenalty.Text = Nothing Then lblPenalty.Text = 0
+            'frmSales.LayCustomer = Customer.ID
+            'frmSales.LayItemCode = txtItemCode.Text
+            'frmSales.LayCost = CInt(lblCost.Text)
+            'frmSales.LayAmount = txtAmount.Text
+            'frmSales.LayBalance = CInt(lblBalance.Text)
+            'frmSales.LayID = tmpLayID
+            'frmSales.LayisOld = isOld
+            LayAwaySave()
+
+            MsgBox("Item Posted", MsgBoxStyle.Information, "LayAway")
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
@@ -96,7 +97,13 @@
         If Not txtAmount.Text >= tmpPercent Then
             MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
             Return False
+        ElseIf txtAmount.Text = "" Then
+        ElseIf txtAmount.Text = 0 Then
+        ElseIf "" Then
+
         End If
+        If Customer Is Nothing Then Return False
+        If Item Is Nothing Then Return False
         Return True
     End Function
 
@@ -113,7 +120,7 @@
         mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
         mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
         mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.DOCDATE AS DATEPAYMENT, LYL.AMOUNT, "
-        mysql &= "LYL.BALANCE, LYL.STATUS AS LINESTATUS "
+        mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS, LYL.PENALTY "
         mysql &= "From TBLLAYAWAY LY "
         mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
         mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
@@ -130,13 +137,14 @@
             lblCost.Text = .Item("Price")
             txtDescription.Text = .Item("Description")
 
-            tmpDate = .Item("DocDate").AddDays(90).ToShortDateString
-            If CurrentDate >= tmpDate Then
+            If CurrentDate >= .Item("DocDate").AddDays(90).ToShortDateString Then
                 tmpBalance = .Item("Balance") + (.Item("Price") * 0.02)
                 lblBalance.Text = tmpBalance
+                lblPenalty.Text = .Item("Price") * 0.02
             Else
                 tmpBalance = .Item("Balance")
                 lblBalance.Text = tmpBalance
+                lblPenalty.Text = .Item("Penalty")
             End If
             isOld = True
             Disable()
@@ -159,21 +167,23 @@
                 .LayID = tmpLayID
                 .DocDate = CurrentDate
                 .Amount = txtAmount.Text
-                .Balance = lblBalance.Text
+                .Penalty = lblPenalty.Text
                 .SaveLayAwayLines()
             End With
-            If lblBalance.Text = 0 Then
-                Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & txtItemCode.Text & "'"
-                Dim fillData As String = "ItemMaster"
-                Dim ds As DataSet = LoadSQL(mysql, fillData)
-                InventoryController.DeductInventory(txtItemCode.Text, ds.Tables(0).Rows(0).Item("Onhand"))
-            End If
+            'If lblBalance.Text = 0 Then
+            '    Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & txtItemCode.Text & "'"
+            '    Dim fillData As String = "ItemMaster"
+            '    Dim ds As DataSet = LoadSQL(mysql, fillData)
+            '    InventoryController.DeductInventory(txtItemCode.Text, ds.Tables(0).Rows(0).Item("Onhand"))
+            'End If
         Else
             With lay
                 .DocDate = CurrentDate
+                .ForfeitDate = CurrentDate.AddDays(90).ToShortDateString
                 .CustomerID = Customer.ID
                 .ItemCode = txtItemCode.Text
                 .Price = lblCost.Text
+                .Balance = lblBalance.Text
                 .Status = "A"
                 .SaveLayAway()
             End With
@@ -182,7 +192,6 @@
                 .LayID = lay.LayLastID
                 .DocDate = CurrentDate
                 .Amount = txtAmount.Text
-                .Balance = lblBalance.Text
                 .SaveLayAwayLines()
             End With
             lay.ItemOnLayMode(txtItemCode.Text)
@@ -194,4 +203,9 @@
             btnSearchItemCode.PerformClick()
         End If
     End Sub
+
+    Private Function isValid() As Boolean
+      
+        Return True
+    End Function
 End Class

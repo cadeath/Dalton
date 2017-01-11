@@ -21,6 +21,16 @@
         End Set
     End Property
 
+    Private _forfeitDate As Date
+    Public Property ForfeitDate() As Date
+        Get
+            Return _forfeitDate
+        End Get
+        Set(ByVal value As Date)
+            _forfeitDate = value
+        End Set
+    End Property
+
     Private _customerid As Integer
     Public Property CustomerID() As Integer
         Get
@@ -83,8 +93,10 @@
         With dsNewRow
             .Item("DocDate") = _docDate
             .Item("CustomerID") = _customerid
+            .Item("ForfeitDate") = _forfeitDate
             .Item("ItemCode") = _itemCode
             .Item("Price") = _price
+            .Item("Balance") = _balance
             .Item("Status") = _status
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
@@ -102,6 +114,7 @@
         With dr
             _id = .Item("LayID")
             _docDate = .Item("DocDate")
+            _forfeitDate = .Item("ForfeitDate")
             _customerid = .Item("CustomerID")
             _itemCode = .Item("ItemCode")
             _price = .Item("Price")

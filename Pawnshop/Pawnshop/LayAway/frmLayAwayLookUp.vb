@@ -15,7 +15,7 @@
             mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
             mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.DOCDATE AS DATEPAYMENT, LYL.AMOUNT, "
-            mysql &= "LYL.BALANCE, LYL.STATUS AS LINESTATUS "
+            mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS, LYL.PENALTY "
             mysql &= "From TBLLAYAWAY LY "
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
             mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
@@ -27,7 +27,7 @@
             mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
             mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.DOCDATE AS DATEPAYMENT, LYL.AMOUNT, "
-            mysql &= "LYL.BALANCE, LYL.STATUS AS LINESTATUS "
+            mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS, LYL.PENALTY "
             mysql &= "From TBLLAYAWAY LY "
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
             mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
@@ -51,7 +51,7 @@
 
     Private Sub AddlvItems(ByVal dr As DataRow)
         With dr
-            Dim lv As ListViewItem = lvLayAway.Items.Add(.Item("LAYID"))
+            Dim lv As ListViewItem = lvLayAway.Items.Add(.Item("DocDate"))
 
             lv.SubItems.Add(.Item("FULLNAME"))
             lv.SubItems.Add(.Item("ITEMCODE"))

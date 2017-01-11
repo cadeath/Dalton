@@ -33,16 +33,6 @@
         End Set
     End Property
 
-    Private _balance As Integer
-    Public Property Balance() As Integer
-        Get
-            Return _balance
-        End Get
-        Set(ByVal value As Integer)
-            _balance = value
-        End Set
-    End Property
-
     Private _docDate As Date
     Public Property DocDate() As Date
         Get
@@ -63,6 +53,16 @@
         End Set
     End Property
 
+    Private _penalty As Integer
+    Public Property Penalty() As Integer
+        Get
+            Return _penalty
+        End Get
+        Set(ByVal value As Integer)
+            _penalty = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -75,7 +75,7 @@
             .Item("DocDate") = _docDate
             .Item("LayID") = _layID
             .Item("Amount") = _amount
-            .Item("Balance") = _balance
+            .Item("Penalty") = _penalty
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -92,7 +92,7 @@
             _layLinesID = .Item("LayLinesID")
             _layID = .Item("LayID")
             _amount = .Item("Amount")
-            _balance = .Item("Balance")
+            _penalty = .Item("Penalty")
             _docDate = .Item("DocDate")
             _lineStatus = .Item("Status")
         End With

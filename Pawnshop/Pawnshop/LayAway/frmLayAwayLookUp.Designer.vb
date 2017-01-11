@@ -22,7 +22,7 @@ Partial Class frmLayAwayLookUp
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"00001", "Robin Padodot", "ITM0001", "Cellphone / no screen", "15000", "10000"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"01/02/2017", "Robin Padodot", "ITM0001", "Cellphone / no screen", "15000", "10000"}, -1)
         Me.lvLayAway = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -46,7 +46,7 @@ Partial Class frmLayAwayLookUp
         Me.lvLayAway.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
         Me.lvLayAway.FullRowSelect = True
         Me.lvLayAway.GridLines = True
-        Me.lvLayAway.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        Me.lvLayAway.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvLayAway.Location = New System.Drawing.Point(12, 46)
         Me.lvLayAway.Name = "lvLayAway"
         Me.lvLayAway.Size = New System.Drawing.Size(778, 344)
@@ -56,7 +56,8 @@ Partial Class frmLayAwayLookUp
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "ID"
+        Me.ColumnHeader1.Text = "Date"
+        Me.ColumnHeader1.Width = 78
         '
         'ColumnHeader2
         '

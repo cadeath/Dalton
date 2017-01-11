@@ -1534,4 +1534,5 @@ Public Class frmPawningItemNew
         ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
         database.SaveEntry(ds)
     End Sub
+
 End Class
