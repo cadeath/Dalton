@@ -759,10 +759,6 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
-    Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        ReComputeInterest()
-    End Sub
-
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadAppraisers()
@@ -1533,5 +1529,9 @@ Public Class frmPawningItemNew
         End With
         ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
         database.SaveEntry(ds)
+    End Sub
+
+    Private Sub txtPrincipal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.Leave
+        ReComputeInterest()
     End Sub
 End Class
