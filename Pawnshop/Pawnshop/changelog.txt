@@ -22,6 +22,8 @@ Version 1.3.1.1
  - Fix No Display Pawner Name in Triplicate
  - Fix Amount To Words Indian Language
  - Fix No Appraiser Display in PT
+ - Fix Display of PT Information in Pawning
+ - Fix Bug in Displaying Pawning History
 
 Version 1.3.1
  - Fix Reprint Save

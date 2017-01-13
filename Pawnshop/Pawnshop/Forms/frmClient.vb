@@ -146,7 +146,6 @@ Public Class frmClient
         frmClientInformation.Show()
         frmClientInformation.LoadClientInForm(tmpCl)
         frmClientInformation.btnSelect.Visible = False
-        Me.Close()
     End Sub
     ''' <summary>
     ''' doubleclick specific data in the listview and show thier information in the client form.
