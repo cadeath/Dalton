@@ -595,6 +595,19 @@ Module mod_system
         Return False
     End Function
 
+    Friend Function DoForfeitingItem() As Boolean
+        Dim mysql As String = "Select * From tblLayAway Where ForfeitDate < '" & CurrentDate.ToShortDateString & "' And Balance <> 0"
+        Dim fillData As String = "tblLayAway"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then Return True
+        For Each dr In ds.Tables(0).Rows()
+            Dim lay As New LayAway
+            lay.LoadByID(dr.item("LayID"))
+            lay.UpdateLaystatus()
+        Next
+        Return True
+    End Function
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()

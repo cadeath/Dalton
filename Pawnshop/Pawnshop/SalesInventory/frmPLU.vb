@@ -97,6 +97,10 @@
             End If
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
+        ElseIf isLayAway Then
+            mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 "
+            If src <> "" Then mySql &= "Upper(ItemCode) = Upper('" & src & "')"
+            ds = LoadSQL("Select Count(*) From ItemMaster Where isLayAway <> 0")
         Else
             mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 ORDER BY ITEMCODE ASC"
 
@@ -260,6 +264,7 @@
         If isLayAway = True Then
             frmLayAway.Show()
             frmLayAway.LoadItemEncode(selected_Itm)
+            frmLayAway.isNewLayAway = True
         Else
             If fromSales Then
                 If isRedeem Then qtyItm = 1
@@ -311,9 +316,12 @@
         Dim idx As Integer
         idx = lvItem.FocusedItem.Index
         Console.WriteLine(lvItem.Items(idx).Text)
-
-        frmView_Stock.Load_ItemCode(lvItem.Items(idx).Text)
-        frmView_Stock.Show()
-
+        If isLayAway = True Then
+            frmLayAwayPaymentList.Show()
+            frmLayAwayPaymentList.LoadListPayment(lvItem.Items(idx).Text)
+        Else
+            frmView_Stock.Load_ItemCode(lvItem.Items(idx).Text)
+            frmView_Stock.Show()
+        End If
     End Sub
 End Class

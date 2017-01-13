@@ -5,20 +5,15 @@
     Dim tmpBalance As Integer = 0
     Dim tmpLayID As Integer
     Friend isOld As Boolean = False
+    Friend isNewLayAway As Boolean = False
     Private forfeitDate As Date
+    Private InvoiceNum As Double = GetOption("InvoiceNum")
+
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         Try
 
             If Not isValid() Then Exit Sub
-            'If lblPenalty.Text = Nothing Then lblPenalty.Text = 0
-            'frmSales.LayCustomer = Customer.ID
-            'frmSales.LayItemCode = txtItemCode.Text
-            'frmSales.LayCost = CInt(lblCost.Text)
-            'frmSales.LayAmount = txtAmount.Text
-            'frmSales.LayBalance = CInt(lblBalance.Text)
-            'frmSales.LayID = tmpLayID
-            'frmSales.LayisOld = isOld
             LayAwaySave()
 
             MsgBox("Item Posted", MsgBoxStyle.Information, "LayAway")
@@ -49,7 +44,6 @@
         txtCustomer.Enabled = False
         txtItemCode.Enabled = False
         btnSearch.Enabled = False
-        btnSearchItemCode.Enabled = False
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
@@ -94,18 +88,24 @@
     End Sub
 
     Private Function isValid() As Boolean
-        If Item Is Nothing Then MsgBox("No Item Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
-        If Customer Is Nothing Then MsgBox("No Customer Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
-        Dim tmpPercent As Integer = CInt(lblCost.Text) * 0.2
-        If txtAmount.Text = "" Then
-            MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
-            Return False
-        ElseIf txtAmount.Text = 0 Then
-            MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
-            Return False
-        ElseIf Not txtAmount.Text >= tmpPercent Then
-            MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
-            Return False
+        If isNewLayAway = True Then
+            If Item Is Nothing Then MsgBox("No Item Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
+            If Customer Is Nothing Then MsgBox("No Customer Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
+            Dim tmpPercent As Integer = CInt(lblCost.Text) * 0.2
+            If txtAmount.Text = "" Then
+                MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
+                Return False
+            ElseIf txtAmount.Text = 0 Then
+                MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
+                Return False
+            ElseIf Not txtAmount.Text >= tmpPercent Then
+                MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
+                Return False
+            End If
+        Else
+            If txtAmount.Text = "" Then MsgBox("Please fill the Amount", MsgBoxStyle.Information, "Not Valid") : Return False
+            If txtAmount.Text = 0 Then MsgBox("Please fill the Amount", MsgBoxStyle.Information, "Not Valid") : Return False
+
         End If
 
         Return True
@@ -116,16 +116,16 @@
     End Sub
 
     Friend Sub LoadExistInfo(ByVal ID As String)
-        Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+        Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
         mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
         mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
-        mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.DOCDATE AS DATEPAYMENT, LYL.AMOUNT, "
+        mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.PAYMENTDATE, LYL.AMOUNT, "
         mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS, LYL.PENALTY "
         mysql &= "From TBLLAYAWAY LY "
         mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
         mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-        mysql &= "WHERE LYL.STATUS <> 'V' AND LY.LAYID = '" & ID & "'"
+        mysql &= "WHERE LY.LAYID = '" & ID & "'"
         Dim ds As DataSet = LoadSQL(mysql)
         With ds.Tables(0).Rows(0)
             Customer = New Client
@@ -153,16 +153,13 @@
                 lblBalance.Text = tmpBalance
                 lblPenalty.Text = .Item("Penalty")
             End If
+
             isOld = True
             Disable()
-        End With
-    End Sub
-
-    Private Sub btnSearchItemCode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchItemCode.Click
-        With frmPLU
-            .Show()
-            .Load_PLU(txtItemCode.Text)
-            .isLayAway = True
+            If .Item("Status") = 0 Then
+                btnOK.Enabled = False
+                txtAmount.Enabled = False
+            End If
         End With
     End Sub
 
@@ -172,49 +169,45 @@
         If isOld = True Then
             With layLines
                 .LayID = tmpLayID
-                .DocDate = CurrentDate
+                .PaymentDate = CurrentDate
+                .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "LAY")
                 .Amount = txtAmount.Text
                 .Penalty = lblPenalty.Text
                 .SaveLayAwayLines()
             End With
-            If lblBalance.Text = 0 Then
-                With lay
-                    .Balance = CInt(lblBalance.Text)
-                    .UpdateBalance(tmpLayID)
-                End With
+            With lay
+                .LoadByID(tmpLayID)
+                .UpdateBalance(CInt(lblBalance.Text))
+            End With
 
 
                 'Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & txtItemCode.Text & "'"
                 'Dim fillData As String = "ItemMaster"
                 'Dim ds As DataSet = LoadSQL(mysql, fillData)
                 'InventoryController.DeductInventory(txtItemCode.Text, ds.Tables(0).Rows(0).Item("Onhand"))
-            End If
         Else
             With lay
                 .DocDate = CurrentDate
-                .ForfeitDate = CurrentDate.AddDays(90).ToShortDateString
+                .ForfeitDate = CurrentDate.AddDays(120).ToShortDateString
                 .CustomerID = Customer.ID
                 .ItemCode = txtItemCode.Text
                 .Price = lblCost.Text
                 .Balance = lblBalance.Text
-                .Status = "A"
+                .Status = 1
                 .SaveLayAway()
             End With
 
             With layLines
                 .LayID = lay.LayLastID
-                .DocDate = CurrentDate
+                .PaymentDate = CurrentDate
+                .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "LAY")
                 .Amount = txtAmount.Text
                 .SaveLayAwayLines()
             End With
             lay.ItemOnLayMode(txtItemCode.Text)
         End If
-    End Sub
-
-    Private Sub txtItemCode_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtItemCode.KeyPress
-        If isEnter(e) Then
-            btnSearchItemCode.PerformClick()
-        End If
+        InvoiceNum += 1
+        UpdateOptions("InvoiceNum", InvoiceNum)
     End Sub
 
     Private Sub Compute()

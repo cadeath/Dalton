@@ -233,8 +233,7 @@ Public Class frmSales
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If TransactionMode = TransType.LayAway Then
-            frmLayAwayLookUp.Show()
-            frmLayAwayLookUp.loadinfo()
+            LayAwaySearch(txtSearch.Text)
         Else
             frmPLU.Show()
             frmPLU.From_Sales()
@@ -656,9 +655,6 @@ Public Class frmSales
                 ORNUM = GetOption("InvoiceNum")
             Case TransType.StockOut
                 ORNUM = GetOption("STONum")
-            Case TransType.LayAway
-                ORNUM = GetOption("")
-
         End Select
     End Sub
 
@@ -702,8 +698,7 @@ Public Class frmSales
         lblMode.Text = "LAYAWAY"
         TransactionMode = TransType.LayAway
         lblSearch.Text = "ITEM:"
-
-        Load_ORNUM()
+        frmPLU.isLayAway = True
         DOC_TYPE = 0
     End Sub
 
@@ -726,41 +721,32 @@ Public Class frmSales
         End If
     End Sub
 
-    'Private Sub LayAwayPost()
-    '    Dim lay As New LayAway
-    '    Dim layLines As New LayAwayLines
-    '    If LayisOld = True Then
-    '        With layLines
-    '            .LayID = LayID
-    '            .DocDate = CurrentDate
-    '            .Amount = LayAmount
-    '            .Balance = LayBalance
-    '            .SaveLayAwayLines()
-    '        End With
-    '        If LayBalance = 0 Then
-    '            Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & LayItemCode & "'"
-    '            Dim fillData As String = "ItemMaster"
-    '            Dim ds As DataSet = LoadSQL(mysql, fillData)
-    '            InventoryController.DeductInventory(LayItemCode, ds.Tables(0).Rows(0).Item("Onhand"))
-    '        End If
-    '    Else
-    '        With lay
-    '            .DocDate = CurrentDate
-    '            .CustomerID = LayCustomer
-    '            .ItemCode = LayItemCode
-    '            .Price = LayCost
-    '            .Status = "A"
-    '            .SaveLayAway()
-    '        End With
+    Private Sub LayAwaySearch(ByVal Search As String)
+        Dim mysql As String
+        mysql = "Select * From tbllayAway Where ItemCode = '" & Search & "'"
+        Dim ds As DataSet = LoadSQL(mysql)
 
-    '        With layLines
-    '            .LayID = lay.LayLastID
-    '            .DocDate = CurrentDate
-    '            .Amount = LayAmount
-    '            .Balance = LayBalance
-    '            .SaveLayAwayLines()
-    '        End With
-    '        lay.ItemOnLayMode(LayItemCode)
-    '    End If
-    'End Sub
+        If ds.Tables(0).Rows.Count = 0 Then
+            mysql = "Select * From ItemMaster Where isLayAway <> '0'"
+            If Search <> "" Then mysql &= " And ItemCode = '" & Search & "'"
+            ds.Clear()
+            ds = LoadSQL(mysql, "ItemMaster")
+            If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Item Found!", MsgBoxStyle.Information, "Lay Away") : Exit Sub
+
+            With frmPLU
+                .Show()
+                .isLayAway = True
+            End With
+
+            If Search <> "" Then
+                frmPLU.Load_PLU(Search)
+            Else
+                frmPLU.Load_PLU()
+            End If
+        Else
+            frmLayAway.Show()
+            frmLayAway.LoadExistInfo(ds.Tables(0).Rows(0).Item("LayID"))
+        End If
+
+    End Sub
 End Class

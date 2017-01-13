@@ -33,13 +33,13 @@
         End Set
     End Property
 
-    Private _docDate As Date
-    Public Property DocDate() As Date
+    Private _paymentDate As Date
+    Public Property PaymentDate() As Date
         Get
-            Return _docDate
+            Return _paymentDate
         End Get
         Set(ByVal value As Date)
-            _docDate = value
+            _paymentDate = value
         End Set
     End Property
 
@@ -63,6 +63,16 @@
         End Set
     End Property
 
+    Private _controlnum As String
+    Public Property ControlNumber() As String
+        Get
+            Return _controlnum
+        End Get
+        Set(ByVal value As String)
+            _controlnum = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -72,8 +82,9 @@
         Dim dsNewRow As DataRow
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
-            .Item("DocDate") = _docDate
+            .Item("PaymentDate") = _paymentDate
             .Item("LayID") = _layID
+            .Item("ControlNum") = _controlnum
             .Item("Amount") = _amount
             .Item("Penalty") = _penalty
         End With
@@ -81,22 +92,37 @@
         database.SaveEntry(ds)
     End Sub
 
-    Private Sub LoadByID(ByVal ID As Integer)
-        Dim mysql As String = "Select * From tblLayLines Where LayLinesID = '" & ID
-        ds = LoadSQL(mysql, fillData)
+    Friend Sub LoadByID(ByVal ID As Integer)
+        Dim mysql As String = "Select * From tblLayLines Where LinesID = " & ID
+        Dim ds As DataSet = LoadSQL(mysql, "tblLayLines")
         LoadRow(ds.Tables(0).Rows(0))
     End Sub
 
     Private Sub LoadRow(ByVal dr As DataRow)
         With dr
-            _layLinesID = .Item("LayLinesID")
+            _layLinesID = .Item("LinesID")
             _layID = .Item("LayID")
+            _controlnum = .Item("ControlNum")
             _amount = .Item("Amount")
             _penalty = .Item("Penalty")
-            _docDate = .Item("DocDate")
+            _paymentDate = .Item("PaymentDate")
             _lineStatus = .Item("Status")
         End With
+    End Sub
 
+    Friend Sub VoidLayPayment()
+        Dim mysql As String = "Select * From tblLayLines Where LinesID =  " & _layLinesID
+        Dim fillData As String = "tblLayLines"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        Dim AddAmt As Integer = ds.Tables(0).Rows(0).Item("Amount")
+        ds.Tables(0).Rows(0).Item("Status") = 0
+        SaveEntry(ds, False)
+
+        Dim layAway As New LayAway
+        With layAway
+            .LoadByID(_layID)
+            .UpdateBalance(layAway.Balance + AddAmt)
+        End With
     End Sub
 #End Region
 End Class

@@ -35,7 +35,7 @@ Partial Class frmLayAwayLookUp
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnVoid = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lvLayAway
@@ -129,21 +129,21 @@ Partial Class frmLayAwayLookUp
         Me.Label1.TabIndex = 16
         Me.Label1.Text = "Search Lay Away"
         '
-        'btnAdd
+        'btnVoid
         '
-        Me.btnAdd.Location = New System.Drawing.Point(12, 396)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(74, 35)
-        Me.btnAdd.TabIndex = 17
-        Me.btnAdd.Text = "&Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
+        Me.btnVoid.Location = New System.Drawing.Point(527, 396)
+        Me.btnVoid.Name = "btnVoid"
+        Me.btnVoid.Size = New System.Drawing.Size(74, 35)
+        Me.btnVoid.TabIndex = 17
+        Me.btnVoid.Text = "&Void"
+        Me.btnVoid.UseVisualStyleBackColor = True
         '
         'frmLayAwayLookUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(803, 438)
-        Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
@@ -171,5 +171,5 @@ Partial Class frmLayAwayLookUp
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents btnAdd As System.Windows.Forms.Button
+    Friend WithEvents btnVoid As System.Windows.Forms.Button
 End Class

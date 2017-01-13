@@ -47,7 +47,6 @@ Partial Class frmLayAway
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblCost = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnSearchItemCode = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -161,7 +160,6 @@ Partial Class frmLayAway
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.btnSearchItemCode)
         Me.GroupBox2.Controls.Add(Me.btnOK)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.txtDescription)
@@ -217,7 +215,8 @@ Partial Class frmLayAway
         Me.txtItemCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtItemCode.Location = New System.Drawing.Point(78, 17)
         Me.txtItemCode.Name = "txtItemCode"
-        Me.txtItemCode.Size = New System.Drawing.Size(251, 22)
+        Me.txtItemCode.ReadOnly = True
+        Me.txtItemCode.Size = New System.Drawing.Size(325, 22)
         Me.txtItemCode.TabIndex = 14
         Me.txtItemCode.Text = "ITM0001"
         '
@@ -310,15 +309,6 @@ Partial Class frmLayAway
         Me.Label6.TabIndex = 4
         Me.Label6.Text = "Item Price:"
         '
-        'btnSearchItemCode
-        '
-        Me.btnSearchItemCode.Location = New System.Drawing.Point(335, 17)
-        Me.btnSearchItemCode.Name = "btnSearchItemCode"
-        Me.btnSearchItemCode.Size = New System.Drawing.Size(68, 23)
-        Me.btnSearchItemCode.TabIndex = 18
-        Me.btnSearchItemCode.Text = "&Search"
-        Me.btnSearchItemCode.UseVisualStyleBackColor = True
-        '
         'frmLayAway
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -363,5 +353,4 @@ Partial Class frmLayAway
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents btnSearch As System.Windows.Forms.Button
-    Friend WithEvents btnSearchItemCode As System.Windows.Forms.Button
 End Class

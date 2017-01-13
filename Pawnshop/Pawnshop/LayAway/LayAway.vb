@@ -133,10 +133,10 @@
         Return ds.Tables(0).Rows(0).Item("LayID")
     End Function
 
-    Friend Sub UpdateBalance(ByVal ID As Integer)
-        Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
+    Friend Sub UpdateBalance(ByVal Balance As Integer)
+        Dim mysql As String = "Select * From tblLayAway Where LayID = " & _id
         Dim ds As DataSet = LoadSQL(mysql, "tblLayAway")
-        ds.Tables(0).Rows(0).Item("Balance") = _balance
+        ds.Tables(0).Rows(0).Item("Balance") = Balance
         SaveEntry(ds, False)
     End Sub
 
@@ -144,9 +144,17 @@
         Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & Code & "'"
         Dim fillData As String = "ItemMaster"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
-        ds.Tables(0).Rows(0).Item("IsLayAway") = 1
+        ds.Tables(0).Rows(0).Item("IsLayAway") = 0
         SaveEntry(ds, False)
     End Sub
-   
+
+    Friend Sub UpdateLaystatus()
+        Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
+        Dim fillData As String = "tblLayAway"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        ds.Tables(0).Rows(0).Item("Status") = 0
+        SaveEntry(ds, False)
+    End Sub
+
 #End Region
 End Class

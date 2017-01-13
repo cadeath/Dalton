@@ -2,6 +2,7 @@
 
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
+    Friend doForfeitItem As Boolean = False
 
 
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
@@ -72,6 +73,10 @@
 
     Private Sub ExecuteSegregate()
         doSegregate = AutoSegregate()
+    End Sub
+
+    Private Sub ExecuteForfeiting()
+        doForfeitItem = DoForfeitingItem()
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -230,6 +235,8 @@
         If dateSet Then
             tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
             If Not doSegregate Then ExecuteSegregate()
+            If Not doForfeitItem Then ExecuteForfeiting()
+
         Else
             tsCurrentDate.Text = "Date not set"
         End If

@@ -378,6 +378,12 @@
     <Compile Include="Layaway\frmLayAway.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Layaway\frmLayAwayPaymentList.Designer.vb">
+      <DependentUpon>frmLayAwayPaymentList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Layaway\frmLayAwayPaymentList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Layaway\LayAway.vb" />
     <Compile Include="Layaway\LayAwayLines.vb" />
     <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
@@ -901,6 +907,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Layaway\frmLayAway.resx">
       <DependentUpon>frmLayAway.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layaway\frmLayAwayPaymentList.resx">
+      <DependentUpon>frmLayAwayPaymentList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
