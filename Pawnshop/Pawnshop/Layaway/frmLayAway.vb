@@ -65,6 +65,10 @@
     End Sub
 
     Friend Sub LoadItemEncode(ByVal tmpItem As cItemData)
+        Dim mysql As String = "Select * From tblLayAway Where Balance <> 0 And ItemCode = '" & tmpItem.ItemCode & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "tblLayAway")
+        If ds.Tables(0).Rows.Count >= 1 Then MsgBox("Item Already in Layaway", MsgBoxStyle.Information, "Not Valid!") : Exit Sub
+
         txtItemCode.Text = tmpItem.ItemCode
         txtDescription.Text = tmpItem.Description
         lblCost.Text = tmpItem.SalePrice
@@ -179,12 +183,9 @@
                 .LoadByID(tmpLayID)
                 .UpdateBalance(CInt(lblBalance.Text))
             End With
-
-
-                'Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & txtItemCode.Text & "'"
-                'Dim fillData As String = "ItemMaster"
-                'Dim ds As DataSet = LoadSQL(mysql, fillData)
-                'InventoryController.DeductInventory(txtItemCode.Text, ds.Tables(0).Rows(0).Item("Onhand"))
+            If lay.Balance = 0 Then
+                InventoryController.DeductInventory(lay.ItemCode, 1)
+            End If
         Else
             With lay
                 .DocDate = CurrentDate
@@ -204,7 +205,7 @@
                 .Amount = txtAmount.Text
                 .SaveLayAwayLines()
             End With
-            lay.ItemOnLayMode(txtItemCode.Text)
+            ' lay.ItemOnLayMode(txtItemCode.Text)
         End If
         InvoiceNum += 1
         UpdateOptions("InvoiceNum", InvoiceNum)

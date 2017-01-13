@@ -723,7 +723,7 @@ Public Class frmSales
 
     Private Sub LayAwaySearch(ByVal Search As String)
         Dim mysql As String
-        mysql = "Select * From tbllayAway Where ItemCode = '" & Search & "'"
+        mysql = "Select * From tbllayAway Where Balance <> 0 And ItemCode = '" & Search & "'"
         Dim ds As DataSet = LoadSQL(mysql)
 
         If ds.Tables(0).Rows.Count = 0 Then
