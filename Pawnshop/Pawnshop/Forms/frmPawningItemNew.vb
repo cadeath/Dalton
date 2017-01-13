@@ -858,6 +858,15 @@ Public Class frmPawningItemNew
             btnRedeem.Enabled = True : btnPrint.Enabled = True
             btnVoid.Enabled = True
         End If
+
+        ChangeForm()
+        If PT_Entry.Status = "R" Then Me.Text &= " [RENEW]"
+        If PT_Entry.Status = "0" Then Me.Text &= " [INACTIVE/RENEWED]"
+        If PT_Entry.Status = "X" Then Me.Text &= " [REDEEMED]"
+        If PT_Entry.Status = "S" Then Me.Text &= " [SEGREGATED]"
+        If PT_Entry.Status = "W" Then Me.Text &= " [WITHDRAW] - Pull Out: " & PT_Entry.PawnItem.WithdrawDate.ToShortDateString
+        If PT_Entry.Status = "V" Then Me.Text &= " [VOIDED]"
+
         Select Case pt.Status
             Case "0", "S", "W", "V"
                 LockFields(1)
@@ -1533,5 +1542,18 @@ Public Class frmPawningItemNew
 
     Private Sub txtPrincipal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.Leave
         ReComputeInterest()
+    End Sub
+
+    Private Sub ChangeForm()
+        Select Case transactionType
+            Case "D"
+                lblTransaction.Text = "Ticket Information"
+            Case "L"
+                lblTransaction.Text = "New Loan"
+            Case "R"
+                lblTransaction.Text = "Renew"
+            Case "X"
+                lblTransaction.Text = "Redeem"
+        End Select
     End Sub
 End Class
