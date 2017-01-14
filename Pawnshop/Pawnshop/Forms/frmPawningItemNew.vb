@@ -227,7 +227,7 @@ Public Class frmPawningItemNew
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         'If Not mod_system.isAuthorized Then CheckAuth() : Return False
-        If cboAppraiser.Text = "" Then MsgBox("Please select Appraiser", MsgBoxStyle.Critical) : cboAppraiser.Focus() : Return False
+        If cboAppraiser.Text = "" Then cboAppraiser.Focus() : Return False
 
             If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
             If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
@@ -759,10 +759,6 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
-    Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        ReComputeInterest()
-    End Sub
-
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadAppraisers()
@@ -862,6 +858,15 @@ Public Class frmPawningItemNew
             btnRedeem.Enabled = True : btnPrint.Enabled = True
             btnVoid.Enabled = True
         End If
+
+        ChangeForm()
+        If PT_Entry.Status = "R" Then Me.Text &= " [RENEW]"
+        If PT_Entry.Status = "0" Then Me.Text &= " [INACTIVE/RENEWED]"
+        If PT_Entry.Status = "X" Then Me.Text &= " [REDEEMED]"
+        If PT_Entry.Status = "S" Then Me.Text &= " [SEGREGATED]"
+        If PT_Entry.Status = "W" Then Me.Text &= " [WITHDRAW] - Pull Out: " & PT_Entry.PawnItem.WithdrawDate.ToShortDateString
+        If PT_Entry.Status = "V" Then Me.Text &= " [VOIDED]"
+
         Select Case pt.Status
             Case "0", "S", "W", "V"
                 LockFields(1)
@@ -1533,6 +1538,24 @@ Public Class frmPawningItemNew
         End With
         ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
         database.SaveEntry(ds)
+    End Sub
+
+
+    Private Sub txtPrincipal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.Leave
+        ReComputeInterest()
+    End Sub
+
+    Private Sub ChangeForm()
+        Select Case transactionType
+            Case "D"
+                lblTransaction.Text = "Ticket Information"
+            Case "L"
+                lblTransaction.Text = "New Loan"
+            Case "R"
+                lblTransaction.Text = "Renew"
+            Case "X"
+                lblTransaction.Text = "Redeem"
+        End Select
     End Sub
 
 End Class
