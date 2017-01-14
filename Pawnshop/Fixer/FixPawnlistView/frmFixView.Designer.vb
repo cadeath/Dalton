@@ -64,6 +64,7 @@ Partial Class frmFixView
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmFixView"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Fix Pawn"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
