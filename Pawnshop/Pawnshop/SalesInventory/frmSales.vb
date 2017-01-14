@@ -258,8 +258,8 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbPLU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPLU.Click
+        If TransactionMode = TransType.LayAway Then frmPLU.isLayAway = True
         frmPLU.Show()
-
         frmPLU.Load_PLU()
     End Sub
 
@@ -592,7 +592,11 @@ Public Class frmSales
     End Function
 
     Private Sub tsbReceipt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbReceipt.Click
-        frmPrint.Show()
+        If TransactionMode = TransType.LayAway Then
+            frmLayAwayLookUp.Show()
+        Else
+            frmPrint.Show()
+        End If
     End Sub
 
     Private Sub Label1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label1.DoubleClick
@@ -698,7 +702,6 @@ Public Class frmSales
         lblMode.Text = "LAYAWAY"
         TransactionMode = TransType.LayAway
         lblSearch.Text = "ITEM:"
-        frmPLU.isLayAway = True
         DOC_TYPE = 0
     End Sub
 
@@ -723,12 +726,12 @@ Public Class frmSales
 
     Private Sub LayAwaySearch(ByVal Search As String)
         Dim mysql As String
-        mysql = "Select * From tbllayAway Where Balance <> 0 And ItemCode = '" & Search & "'"
+        mysql = "Select * From tbllayAway Where Balance <> 0 And UPPER(ItemCode) = UPPER('" & Search & "')"
         Dim ds As DataSet = LoadSQL(mysql)
 
         If ds.Tables(0).Rows.Count = 0 Then
-            mysql = "Select * From ItemMaster Where isLayAway <> '0'"
-            If Search <> "" Then mysql &= " And ItemCode = '" & Search & "'"
+            mysql = "Select * From ItemMaster Where isLayAway <> '0' "
+            If Search <> "" Then mysql &= " And UPPER(ItemCode) = UPPER('" & Search & "')"
             ds.Clear()
             ds = LoadSQL(mysql, "ItemMaster")
             If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Item Found!", MsgBoxStyle.Information, "Lay Away") : Exit Sub

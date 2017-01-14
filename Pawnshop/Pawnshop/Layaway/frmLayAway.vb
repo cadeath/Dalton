@@ -33,11 +33,12 @@
         txtItemCode.Clear()
         txtDescription.Clear()
         txtAmount.Clear()
-        lblContact.Text = ""
-        lblDOB.Text = ""
         lblCost.Text = ""
         lblPenalty.Text = ""
         lblBalance.Text = ""
+        lblLayAwayDate.Text = ""
+        lblForfeitDate.Text = ""
+        lblPercent.Text = ""
     End Sub
 
     Private Sub Disable()
@@ -56,8 +57,6 @@
     Friend Sub LoadClient(ByVal cl As Client)
         txtCustomer.Text = String.Format("{0} {1}" & IIf(cl.Suffix <> "", "," & cl.Suffix, ""), cl.FirstName, cl.LastName)
         txtAddress.Text = String.Format("{0} {1} " + vbCrLf + "{2}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity)
-        lblDOB.Text = cl.Birthday.ToString("MMM dd, yyyy")
-        lblContact.Text = cl.Cellphone1 & IIf(cl.Cellphone2 <> "", ", " & cl.Cellphone2, "")
 
         Customer = New Client
         Customer = cl
@@ -65,15 +64,16 @@
     End Sub
 
     Friend Sub LoadItemEncode(ByVal tmpItem As cItemData)
-        Dim mysql As String = "Select * From tblLayAway Where Balance <> 0 And ItemCode = '" & tmpItem.ItemCode & "'"
-        Dim ds As DataSet = LoadSQL(mysql, "tblLayAway")
-        If ds.Tables(0).Rows.Count >= 1 Then MsgBox("Item Already in Layaway", MsgBoxStyle.Information, "Not Valid!") : Exit Sub
-
+        If tmpItem.SalePrice <= 0 Then MsgBox("Price Error", MsgBoxStyle.Critical, "Not Valid") : Me.Close() : Exit Sub
         txtItemCode.Text = tmpItem.ItemCode
         txtDescription.Text = tmpItem.Description
         lblCost.Text = tmpItem.SalePrice
         tmpBalance = tmpItem.SalePrice
         lblBalance.Text = tmpItem.SalePrice
+        lblLayAwayDate.Text = CurrentDate.ToShortDateString
+        lblForfeitDate.Text = CurrentDate.AddDays(120).ToShortDateString
+        lblPercent.Text = tmpItem.SalePrice * 0.2
+
         Item = tmpItem
         Compute()
     End Sub
@@ -122,14 +122,15 @@
     Friend Sub LoadExistInfo(ByVal ID As String)
         Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
         mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
-        mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
+        mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, LYL.LINESID, LYL.CONTROLNUM,"
         mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.PAYMENTDATE, LYL.AMOUNT, "
-        mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS, LYL.PENALTY "
+        mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS "
         mysql &= "From TBLLAYAWAY LY "
         mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
         mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-        mysql &= "WHERE LY.LAYID = '" & ID & "'"
+        mysql &= "WHERE LY.LAYID = '" & ID & "' "
+        mysql &= "ORDER BY LYL.LINESID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mysql)
         With ds.Tables(0).Rows(0)
             Customer = New Client
@@ -146,24 +147,32 @@
 
             txtDescription.Text = .Item("Description")
             lblCost.Text = .Item("Price")
+            lblLayAwayDate.Text = .Item("DocDate").ToShortDateString
+            lblForfeitDate.Text = .Item("ForfeitDate").ToShortDateString
 
-
-            If CurrentDate >= .Item("DocDate").AddDays(90).ToShortDateString Then
-                tmpBalance = .Item("Balance") + (.Item("Price") * 0.02)
-                lblBalance.Text = tmpBalance
-                lblPenalty.Text = .Item("Price") * 0.02
+            Dim PenaltyDate As Date = .Item("DocDate").AddDays(90).ToShortDateString
+            If CurrentDate >= PenaltyDate Then
+                mysql = "Select * From tblLaylines Where PaymentDate = '" & PenaltyDate & "' And LayID = '" & .Item("LayID") & "'"
+                Dim dsLaylines As DataSet = LoadSQL(mysql, "tblLaylines")
+                If dsLaylines.Tables(0).Rows.Count = 0 Then
+                    tmpBalance = .Item("Balance") + (.Item("Price") * 0.02)
+                    lblBalance.Text = tmpBalance
+                    lblPenalty.Text = .Item("Price") * 0.02
+                Else
+                    tmpBalance = .Item("Balance")
+                    lblBalance.Text = tmpBalance
+                End If
             Else
                 tmpBalance = .Item("Balance")
                 lblBalance.Text = tmpBalance
-                lblPenalty.Text = .Item("Penalty")
             End If
 
-            isOld = True
-            Disable()
-            If .Item("Status") = 0 Then
-                btnOK.Enabled = False
-                txtAmount.Enabled = False
-            End If
+                isOld = True
+                Disable()
+                If .Item("Status") = 0 Then
+                    btnOK.Enabled = False
+                    txtAmount.Enabled = False
+                End If
         End With
     End Sub
 
@@ -174,18 +183,20 @@
             With layLines
                 .LayID = tmpLayID
                 .PaymentDate = CurrentDate
-                .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "LAY")
+                .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = txtAmount.Text
-                .Penalty = lblPenalty.Text
+                If lblPenalty.Text <> "" Then .Penalty = CInt(lblPenalty.Text)
                 .SaveLayAwayLines()
             End With
             With lay
                 .LoadByID(tmpLayID)
                 .UpdateBalance(CInt(lblBalance.Text))
             End With
-            If lay.Balance = 0 Then
+            If lblBalance.Text = 0 Then
+                lay.ItemOnLayMode(txtItemCode.Text, False)
                 InventoryController.DeductInventory(lay.ItemCode, 1)
             End If
+
         Else
             With lay
                 .DocDate = CurrentDate
@@ -205,7 +216,7 @@
                 .Amount = txtAmount.Text
                 .SaveLayAwayLines()
             End With
-            ' lay.ItemOnLayMode(txtItemCode.Text)
+            lay.ItemOnLayMode(txtItemCode.Text)
         End If
         InvoiceNum += 1
         UpdateOptions("InvoiceNum", InvoiceNum)

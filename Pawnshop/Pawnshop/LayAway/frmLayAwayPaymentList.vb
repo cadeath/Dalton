@@ -35,19 +35,19 @@
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvPayment.SelectedItems.Count = 0 Then Exit Sub
         Dim idx As Integer = lvPayment.FocusedItem.Tag
-        Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
+        Dim ans As DialogResult = MsgBox("Do You Want To Void This Transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
         Dim laylines As New LayAwayLines
         laylines.LoadByID(idx)
 
         If laylines.PaymentDate <> CurrentDate.ToShortDateString Then
-            MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
+            MsgBox("You Cannot Void Transaction in a Different Date", MsgBoxStyle.Critical)
             Exit Sub
         End If
 
         laylines.VoidLayPayment()
-        MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
+        MsgBox("Transaction Voided", MsgBoxStyle.Information)
         Me.Close()
     End Sub
 End Class

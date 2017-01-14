@@ -140,15 +140,19 @@
         SaveEntry(ds, False)
     End Sub
 
-    Friend Sub ItemOnLayMode(ByVal Code As String)
+    Friend Sub ItemOnLayMode(ByVal Code As String, Optional ByVal Status As Boolean = True)
         Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & Code & "'"
         Dim fillData As String = "ItemMaster"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
-        ds.Tables(0).Rows(0).Item("IsLayAway") = 0
+        With ds.Tables(0).Rows(0)
+            If Status = True Then .Item("OnLayAway") = 1
+            If Status = False Then .Item("OnLayAway") = 0
+        End With
+
         SaveEntry(ds, False)
     End Sub
 
-    Friend Sub UpdateLaystatus()
+    Friend Sub InActiveStatus()
         Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
         Dim fillData As String = "tblLayAway"
         Dim ds As DataSet = LoadSQL(mysql, fillData)

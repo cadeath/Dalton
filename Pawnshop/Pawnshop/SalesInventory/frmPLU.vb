@@ -29,6 +29,9 @@
 
     Private Sub frmPLU_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
+        If isLayAway = True Then
+            btnStock.Text = "Payments"
+        End If
     End Sub
 
     Friend Sub RefreshList(Optional ByVal ItemCode As String = "")
@@ -99,8 +102,8 @@
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         ElseIf isLayAway Then
             mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 "
-            If src <> "" Then mySql &= "Upper(ItemCode) = Upper('" & src & "')"
-            ds = LoadSQL("Select Count(*) From ItemMaster Where isLayAway <> 0")
+            If src <> "" Then mySql &= "AND Upper(ItemCode) = Upper('" & src & "')"
+            ds = LoadSQL("Select Count(*) From ItemMaster Where isLayAway <> 0 ")
         Else
             mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 ORDER BY ITEMCODE ASC"
 
@@ -262,6 +265,7 @@
         End If
 
         If isLayAway = True Then
+            If selected_Itm.OnLayAway = 1 Then MsgBox("Item Already in LayAway", MsgBoxStyle.Information, "Lay Away") : Exit Sub
             frmLayAway.Show()
             frmLayAway.LoadItemEncode(selected_Itm)
             frmLayAway.isNewLayAway = True
