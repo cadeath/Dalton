@@ -3,7 +3,7 @@
 Module InventoryController
     Dim mySql As String, ds As DataSet
 
-    Const INTEGRITY_CHECK As String = "9nKFB3fmcquj4CNHjDz7atiD7JOv892aQiKESns50sH/rBAxkxEe3by5N607DFRcORSXzwVcEfviYb5TRjoSck/YScmjycq+lOzWi+Gh01S7oF7hsp4EKYw4jXAUeGTe"
+    Const INTEGRITY_CHECK As String = "9nKFB3fmcquj4CNHjDz7atiD7JOv892aQiKESns50sH/rBAxkxEe3by5N607DFRcORSXzwVcEfviYb5TRjoSck/YScmjycq+lOzWi+Gh01RHM36hXULosps49qZE6ZtB11sj+YuMGGXII1YQ+Sl0lQ=="
 
     Friend Sub AddInventory(ByVal itemCode As String, Optional ByVal Qty As Integer = 1)
         mySql = String.Format("SELECT * FROM ITEMMASTER WHERE ITEMCODE = '{0}'", itemCode)
@@ -73,14 +73,7 @@ Module InventoryController
         Dim mergeHeaders As String = ""
         For Each head In headers
             mergeHeaders &= head
-        Next
-
-        'Console.WriteLine(mergeHeaders)
-
-        If HashString(mergeHeaders) = INTEGRITY_CHECK Then
-            Return True
-        End If
-
+        Next : If HashString(mergeHeaders) = INTEGRITY_CHECK Then Return True
         Return False
     End Function
 

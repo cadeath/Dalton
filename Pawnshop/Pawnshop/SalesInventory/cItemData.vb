@@ -189,22 +189,22 @@
         End Set
     End Property
 
-    Private _isLayAway As String
-    Public Property IsLayAway() As String
+    Private _isLayAway As Boolean
+    Public Property IsLayAway() As Boolean
         Get
             Return _isLayAway
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Boolean)
             _isLayAway = value
         End Set
     End Property
 
-    Private _onLayAway As String
-    Public Property OnLayAway() As String
+    Private _onLayAway As Boolean
+    Public Property OnLayAway() As Boolean
         Get
             Return _onLayAway
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Boolean)
             _onLayAway = value
         End Set
     End Property
@@ -301,8 +301,8 @@
             _onHold = IIf(.Item("ONHOLD") = 1, True, False)
             _comments = .Item("COMMENTS")
             _onHand = .Item("ONHAND")
-            _isLayAway = .Item("isLayAway")
-            _onLayAway = .Item("OnLayAway")
+            _isLayAway = IIf(.Item("isLayAway") = 1, True, False)
+            _onLayAway = IIf(.Item("OnLayAway") = 1, True, False)
         End With
     End Sub
 
@@ -339,8 +339,8 @@
             _isInv = If(.Item("ISINV") = 1, True, False)
             _onHold = If(.Item("ONHOLD") = 1, True, False)
             _onHand = .Item("ONHAND")
-            _isLayAway = .Item("isLayAway")
-            _onLayAway = .Item("OnLayAway")
+            _isLayAway = IIf(.Item("isLayAway") = 1, True, False)
+            _onLayAway = IIf(.Item("OnLayAway") = 1, True, False)
             hasLoaded = True
         End With
     End Sub
