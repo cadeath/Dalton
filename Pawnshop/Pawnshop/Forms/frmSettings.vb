@@ -106,6 +106,8 @@
         UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
         UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
         UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
+        UpdateOptions("SalesReturnNum", txtReturnNum.Text, isOTPEnable)
+        UpdateOptions("STONum", txtStockOutNum.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)

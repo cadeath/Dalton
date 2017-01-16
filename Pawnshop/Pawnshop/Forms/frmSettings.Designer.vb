@@ -59,6 +59,10 @@ Partial Class frmSettings
         Me.printerPT = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtReturnNum = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtStockOutNum = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -240,6 +244,10 @@ Partial Class frmSettings
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtStockOutNum)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.txtReturnNum)
+        Me.GroupBox1.Controls.Add(Me.Label15)
         Me.GroupBox1.Controls.Add(Me.txtCashInvoice)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.txtMRNum)
@@ -256,7 +264,7 @@ Partial Class frmSettings
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Location = New System.Drawing.Point(293, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(230, 236)
+        Me.GroupBox1.Size = New System.Drawing.Size(230, 286)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Next Control Number"
@@ -445,6 +453,44 @@ Partial Class frmSettings
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Pawn Ticket"
         '
+        'txtReturnNum
+        '
+        Me.txtReturnNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtReturnNum.Location = New System.Drawing.Point(110, 215)
+        Me.txtReturnNum.Name = "txtReturnNum"
+        Me.txtReturnNum.Size = New System.Drawing.Size(100, 22)
+        Me.txtReturnNum.TabIndex = 27
+        Me.txtReturnNum.Text = "35"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(17, 219)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(78, 16)
+        Me.Label15.TabIndex = 28
+        Me.Label15.Text = "Return Num"
+        '
+        'txtStockOutNum
+        '
+        Me.txtStockOutNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStockOutNum.Location = New System.Drawing.Point(110, 243)
+        Me.txtStockOutNum.Name = "txtStockOutNum"
+        Me.txtStockOutNum.Size = New System.Drawing.Size(100, 22)
+        Me.txtStockOutNum.TabIndex = 29
+        Me.txtStockOutNum.Text = "35"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(17, 247)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(93, 16)
+        Me.Label16.TabIndex = 30
+        Me.Label16.Text = "StockOut Num"
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -505,4 +551,8 @@ Partial Class frmSettings
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents lblSAP02 As System.Windows.Forms.Label
     Friend WithEvents txtCustomerCode As System.Windows.Forms.TextBox
+    Friend WithEvents txtStockOutNum As System.Windows.Forms.TextBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents txtReturnNum As System.Windows.Forms.TextBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
 End Class

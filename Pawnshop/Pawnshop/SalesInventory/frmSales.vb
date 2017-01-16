@@ -14,7 +14,9 @@ Public Class frmSales
     Friend TransactionMode As TransType
     Friend ht_BroughtItems As New Hashtable
 
-    Private ORNUM As Double = GetOption("InvoiceNum")
+    Private InvoiceNum As Double = GetOption("InvoiceNum")
+    Private ReturnNum As Double = GetOption("SalesReturnNum")
+    Private StockOutNum As Double = GetOption("STONum")
     Private PRINTER_PT As String = GetOption("PRINTER")
     Private VAT As Double = 0
     Private DOC_TYPE As Integer = 0 '0 - SALES, 4 - StockOut
@@ -66,14 +68,17 @@ Public Class frmSales
         Dim prefix As String = ""
         Dim ControlNum As Integer = 0
 
-        ControlNum = ORNUM
+
         Select Case TransactionMode
             Case TransType.Returns
                 prefix = "RET"
+                ControlNum = ReturnNum
             Case TransType.Cash, TransType.Check, TransType.Auction
                 prefix = "INV"
+                ControlNum = InvoiceNum
             Case TransType.StockOut
                 prefix = "STO"
+                ControlNum = StockOutNum
         End Select
 
         Dim uniq As String = String.Format("'{1}#{0:000000}'", ControlNum, prefix)
@@ -365,16 +370,16 @@ Public Class frmSales
         Select Case TransactionMode
             Case TransType.Returns
                 prefix = "RET"
+                DocCode = String.Format("{1}#{0:000000}", ReturnNum, prefix)
             Case TransType.Cash, TransType.Check, TransType.Auction
                 prefix = "INV"
+                DocCode = String.Format("{1}#{0:000000}", InvoiceNum, prefix)
             Case TransType.StockOut
                 prefix = "STO"
-            Case TransType.LayAway
-                prefix = "LAY"
+                DocCode = String.Format("{1}#{0:000000}", StockOutNum, prefix)
         End Select
 
         With dsNewRow
-            DocCode = String.Format("{1}#{0:000000}", ORNUM, prefix)
             .Item("DOCTYPE") = DOC_TYPE
             .Item("CODE") = DocCode
             .Item("MOP") = GetModesOfPayment(TransactionMode)
@@ -505,15 +510,18 @@ Public Class frmSales
     End Function
 
     Private Sub ItemPosted()
-        ORNUM += 1 'INCREMENT ORNUMBER
+
 
         Select Case TransactionMode
             Case TransType.Returns
-                UpdateOptions("SalesReturnNum", ORNUM)
+                ReturnNum += 1 'INCREMENT Return Control Number
+                UpdateOptions("SalesReturnNum", ReturnNum)
             Case TransType.Cash, TransType.Check, TransType.Auction
-                UpdateOptions("InvoiceNum", ORNUM)
+                InvoiceNum += 1 'INCREMENT Invoice Control Number
+                UpdateOptions("InvoiceNum", InvoiceNum)
             Case TransType.StockOut
-                UpdateOptions("STONum", ORNUM)
+                StockOutNum += 1 'INCREMENT Stock Out Control Number
+                UpdateOptions("STONum", StockOutNum)
         End Select
 
         ht_BroughtItems.Clear()
@@ -654,11 +662,11 @@ Public Class frmSales
     Private Sub Load_ORNUM()
         Select Case TransactionMode
             Case TransType.Returns
-                ORNUM = GetOption("SalesReturnNum")
+                ReturnNum = GetOption("SalesReturnNum")
             Case TransType.Cash, TransType.Check, TransType.Auction
-                ORNUM = GetOption("InvoiceNum")
+                InvoiceNum = GetOption("InvoiceNum")
             Case TransType.StockOut
-                ORNUM = GetOption("STONum")
+                StockOutNum = GetOption("STONum")
         End Select
     End Sub
 
