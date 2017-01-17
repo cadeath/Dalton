@@ -265,7 +265,7 @@
         End If
 
         If isLayAway = True Then
-            If selected_Itm.OnLayAway = 1 Then MsgBox("Item Already in LayAway", MsgBoxStyle.Information, "Lay Away") : Exit Sub
+            If selected_Itm.OnLayAway = True Then MsgBox("Item Already in LayAway", MsgBoxStyle.Information, "Lay Away") : Exit Sub
             frmLayAway.Show()
             frmLayAway.LoadItemEncode(selected_Itm)
             frmLayAway.isNewLayAway = True

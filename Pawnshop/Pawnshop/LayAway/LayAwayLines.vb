@@ -98,6 +98,12 @@
         LoadRow(ds.Tables(0).Rows(0))
     End Sub
 
+    Friend Sub LoadByLayID(ByVal tmpID As Integer)
+        Dim mysql As String = "Select * From tblLayLines Where LayID = " & tmpID
+        Dim ds As DataSet = LoadSQL(mysql, "tblLayLines")
+        LoadRow(ds.Tables(0).Rows(0))
+    End Sub
+
     Private Sub LoadRow(ByVal dr As DataRow)
         With dr
             _layLinesID = .Item("LinesID")
@@ -124,5 +130,29 @@
             .UpdateBalance(layAway.Balance + AddAmt)
         End With
     End Sub
+
+    Friend Function LayLinesLastID()
+        Dim mysql As String = "Select * From tblLayLines ORDER BY LinesID DESC"
+        Dim filldata As String = "tblLayLines"
+        Dim ds As DataSet = LoadSQL(mysql, filldata)
+        If ds.Tables(0).Rows().Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("LinesID")
+    End Function
+
+    Friend Function GetSumPayments()
+        Dim mysql As String = "Select Sum(amount) as Amount, SUM(PENALTY)AS Penalty "
+        mysql &= "From tblLayLines Where Status <> 0 And LayID = '" & _layID & "'"
+        Dim fillData As String = "tblLayLines"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        Dim Payments As Double = 0
+
+        With ds.Tables(0).Rows(0)
+            Payments = .Item("Amount")
+        End With
+
+        Return Payments
+    End Function
 #End Region
 End Class

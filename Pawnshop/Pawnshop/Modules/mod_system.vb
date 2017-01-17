@@ -19,7 +19,7 @@ Module mod_system
     ''' <remarks></remarks>
 #Region "Global Variables"
     Dim frmCollection As New FormCollection()
-    Public DEV_MODE As Boolean = 0
+    Public DEV_MODE As Boolean = True
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False

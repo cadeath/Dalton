@@ -93,24 +93,33 @@
 
     Private Function isValid() As Boolean
         If isNewLayAway = True Then
+
             If Item Is Nothing Then MsgBox("No Item Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
             If Customer Is Nothing Then MsgBox("No Customer Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
+
             Dim tmpPercent As Integer = CInt(lblCost.Text) * 0.2
             If txtAmount.Text = "" Then
+
                 MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
                 Return False
             ElseIf txtAmount.Text = 0 Then
+
                 MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
                 Return False
             ElseIf Not txtAmount.Text >= tmpPercent Then
+
                 MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
                 Return False
             End If
+
         Else
+
             If txtAmount.Text = "" Then MsgBox("Please fill the Amount", MsgBoxStyle.Information, "Not Valid") : Return False
             If txtAmount.Text = 0 Then MsgBox("Please fill the Amount", MsgBoxStyle.Information, "Not Valid") : Return False
 
         End If
+
+        If CInt(Val(lblBalance.Text)) < 0 Then MsgBox("Invalid Amount", MsgBoxStyle.Information, "Error") : Return False
 
         Return True
     End Function
@@ -155,12 +164,12 @@
                 mysql = "Select * From tblLaylines Where PaymentDate = '" & PenaltyDate & "' And LayID = '" & .Item("LayID") & "'"
                 Dim dsLaylines As DataSet = LoadSQL(mysql, "tblLaylines")
                 If dsLaylines.Tables(0).Rows.Count = 0 Then
-                    tmpBalance = .Item("Balance") + (.Item("Price") * 0.02)
+                    tmpBalance = .Item("Balance") + (.Item("Balance") * 0.02)
                     lblBalance.Text = tmpBalance
-                    lblPenalty.Text = .Item("Price") * 0.02
-                Else
-                    tmpBalance = .Item("Balance")
-                    lblBalance.Text = tmpBalance
+                    lblPenalty.Text = .Item("Balance") * 0.02
+                    'Else
+                    '    tmpBalance = .Item("Balance")
+                    '    lblBalance.Text = tmpBalance
                 End If
             Else
                 tmpBalance = .Item("Balance")
@@ -179,22 +188,48 @@
     Private Sub LayAwaySave()
         Dim lay As New LayAway
         Dim layLines As New LayAwayLines
+
         If isOld = True Then
             With layLines
                 .LayID = tmpLayID
                 .PaymentDate = CurrentDate
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = txtAmount.Text
-                If lblPenalty.Text <> "" Then .Penalty = CInt(lblPenalty.Text)
+                If lblPenalty.Text <> "" Then .Penalty = CInt(Val(lblPenalty.Text))
                 .SaveLayAwayLines()
             End With
+
             With lay
                 .LoadByID(tmpLayID)
                 .UpdateBalance(CInt(lblBalance.Text))
             End With
+
+            layLines.LoadByLayID(tmpLayID)
             If lblBalance.Text = 0 Then
+                Dim AllPayments As Double = layLines.GetSumPayments
+                'If Full Paid Add Journal for Full Paid
+                AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
+                AddJournal(AllPayments - txtAmount.Text, "Debit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+                AddJournal(AllPayments - CInt(Val(lblPenalty.Text)), "Credit", "Cash Offsetting Account", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+
+                'if Transaction have penalty
+                If lblPenalty.Text <> "" Then
+                    AddJournal(CInt(Val(lblPenalty.Text)), "Credit", "Income from Penalty on Layaway", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+                End If
+
                 lay.ItemOnLayMode(txtItemCode.Text, False)
                 InventoryController.DeductInventory(lay.ItemCode, 1)
+            Else
+
+                'Add Journal For Payment
+                AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
+                AddJournal(txtAmount.Text, "Credit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+
+                'if Transaction Have Penalty
+                If lblPenalty.Text <> "" Then
+                    AddJournal(lblPenalty.Text, "Credit", "Income from Penalty", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+                End If
+
             End If
 
         Else
@@ -212,12 +247,18 @@
             With layLines
                 .LayID = lay.LayLastID
                 .PaymentDate = CurrentDate
-                .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "LAY")
+                .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = txtAmount.Text
                 .SaveLayAwayLines()
             End With
+
             lay.ItemOnLayMode(txtItemCode.Text)
+
+            'Add Journal For Payment
+            AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
+            AddJournal(txtAmount.Text, "Credit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
         End If
+
         InvoiceNum += 1
         UpdateOptions("InvoiceNum", InvoiceNum)
     End Sub
