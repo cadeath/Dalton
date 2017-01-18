@@ -45,7 +45,7 @@
         isDPJ = rbDPJ.Checked
 
         Dim intS As New InterestScheme
-        intS.LoadScheme(GetIDbyName(cboType.Text, ItemClass))
+        intS.LoadScheme(GetSchemeID(cboType.Text))
 
         txtMatu.Text = loanDate.SelectionRange.Start.AddDays(29).ToShortDateString
         Select Case cboType.Text
@@ -67,4 +67,13 @@
         dev_Pawning.Show()
     End Sub
 
+    Private Function GetSchemeID(ByVal Item As String)
+        Dim mysql As String = "Select * from tblItem Where ItemClass = '" & Item & "'"
+        Dim fillData As String = "tblItem"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("Scheme_ID")
+    End Function
 End Class
