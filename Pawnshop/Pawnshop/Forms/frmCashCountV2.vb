@@ -300,7 +300,6 @@
         fillData = "DOCLINES"
         ds = LoadSQL(mysql, fillData)
 
-        Dim itm As New cItemData
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
             .Item("DOCID") = DOCID
