@@ -235,13 +235,13 @@
     Public Overridable Sub Save_ItemData()
         Dim isNew As Boolean = False
 
-        mySql = "SELECT * FROM ITEMMASTER WHERE ITEMID = " & _itemID
-        If _itemID = 0 Then mySql = "SELECT * FROM ITEMMASTER ROWS 1"
+        mySql = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & _itemCode & "'"
+        'If _itemID = 0 Then mySql = "SELECT * FROM ITEMMASTER ROWS 1"
 
         ds = New DataSet
         ds = LoadSQL(mySql, TABLE)
 
-        If _itemID = 0 Then
+        If ds.Tables(0).Rows.Count = 0 Then
             Dim dsNewRow As DataRow
             dsNewRow = ds.Tables(TABLE).NewRow
             With dsNewRow

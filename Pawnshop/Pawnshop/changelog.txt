@@ -1,10 +1,12 @@
 CHANGELOG
+
 Version 1.4.3
  - Add LayAway Module
 
-Version 1.4.1.10
+Version 1.4.1.11
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
+ - Added Journal in Insurance Close Store
  - Add InvoiceNum, STONum, SalesReturnNum and CustomerCode at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
  - Add view STOCK_CARD
@@ -24,7 +26,10 @@ Version 1.4.1.10
  - Fix Selling Price from 2 decimal places into 6
  - Fix missing "Appraiser By" in PT
  - Fix on Re-Transact with 0 selling price having wrong computation
- - Fix Import STO Error 
+ - Fix Import STO Error
+ - Fix Import IMD duplication
+
+
 
 Version 1.3.1.1
  - Fix Bug in Pawned Item Computation
