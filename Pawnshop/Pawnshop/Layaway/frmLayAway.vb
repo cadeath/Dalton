@@ -209,7 +209,7 @@
                 Dim AllPayments As Double = layLines.GetSumPayments
                 'If Full Paid Add Journal for Full Paid
                 AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
-                AddJournal(AllPayments - txtAmount.Text, "Debit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+                AddJournal(AllPayments - txtAmount.Text, "Debit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY Advances", layLines.LayLinesLastID)
                 AddJournal(AllPayments - CInt(Val(lblPenalty.Text)), "Credit", "Cash Offsetting Account", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
 
                 'if Transaction have penalty
