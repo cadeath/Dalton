@@ -93,7 +93,7 @@ unloadObj:
         Next
         Me.Enabled = True
 
-        MsgBox("Exited LayAway imported", MsgBoxStyle.Information, "Succesful")
+        MsgBox("Existed LayAway imported", MsgBoxStyle.Information, "Succesful")
         lvLayAway.Items.Clear()
     End Sub
 
