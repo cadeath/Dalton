@@ -71,7 +71,7 @@
         tmpBalance = tmpItem.SalePrice
         lblBalance.Text = tmpItem.SalePrice
         lblLayAwayDate.Text = CurrentDate.ToShortDateString
-        lblForfeitDate.Text = CurrentDate.AddDays(120).ToShortDateString
+        lblForfeitDate.Text = CurrentDate.AddDays(119).ToShortDateString
         lblPercent.Text = tmpItem.SalePrice * 0.2
 
         Item = tmpItem
@@ -114,8 +114,8 @@
 
         Else
 
-            If txtAmount.Text = "" Then MsgBox("Please fill the Amount", MsgBoxStyle.Information, "Not Valid") : Return False
-            If txtAmount.Text = 0 Then MsgBox("Please fill the Amount", MsgBoxStyle.Information, "Not Valid") : Return False
+            If (txtAmount.Text = "" OrElse txtAmount.Text = 0) Then MsgBox("Please fill the Amount", MsgBoxStyle.Information, "Not Valid") : Return False
+            'If txtAmount.Text = 0 Then MsgBox("Please fill the Amount", MsgBoxStyle.Information, "Not Valid") : Return False
 
         End If
 
@@ -129,21 +129,15 @@
     End Sub
 
     Friend Sub LoadExistInfo(ByVal ID As String)
-        Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
-        mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
-        mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, LYL.LINESID, LYL.CONTROLNUM,"
-        mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LYL.PAYMENTDATE, LYL.AMOUNT, "
-        mysql &= "LY.BALANCE, LYL.STATUS AS LINESTATUS "
+        Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, LY.CUSTOMERID, "
+        mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LY.BALANCE "
         mysql &= "From TBLLAYAWAY LY "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
-        mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
         mysql &= "WHERE LY.LAYID = '" & ID & "' "
-        mysql &= "ORDER BY LYL.LINESID DESC ROWS 1"
         Dim ds As DataSet = LoadSQL(mysql)
         With ds.Tables(0).Rows(0)
             Customer = New Client
-            Customer.LoadClient(.Item("CLIENTID"))
+            Customer.LoadClient(.Item("CUSTOMERID"))
             tmpLayID = .Item("LayID")
             LoadClient(Customer)
 
@@ -159,29 +153,22 @@
             lblLayAwayDate.Text = .Item("DocDate").ToShortDateString
             lblForfeitDate.Text = .Item("ForfeitDate").ToShortDateString
 
-            Dim PenaltyDate As Date = .Item("DocDate").AddDays(90).ToShortDateString
+            Dim PenaltyDate As Date = .Item("DocDate").AddDays(89).ToShortDateString
             If CurrentDate >= PenaltyDate Then
-                mysql = "Select * From tblLaylines Where PaymentDate = '" & PenaltyDate & "' And LayID = '" & .Item("LayID") & "'"
-                Dim dsLaylines As DataSet = LoadSQL(mysql, "tblLaylines")
-                If dsLaylines.Tables(0).Rows.Count = 0 Then
-                    tmpBalance = .Item("Balance") + (.Item("Balance") * 0.02)
-                    lblBalance.Text = tmpBalance
-                    lblPenalty.Text = .Item("Balance") * 0.02
-                    'Else
-                    '    tmpBalance = .Item("Balance")
-                    '    lblBalance.Text = tmpBalance
-                End If
-            Else
-                tmpBalance = .Item("Balance")
+                tmpBalance = .Item("Balance") + (.Item("Balance") * 0.02)
                 lblBalance.Text = tmpBalance
+                lblPenalty.Text = .Item("Balance") * 0.02
+            Else
+            tmpBalance = .Item("Balance")
+            lblBalance.Text = tmpBalance
             End If
 
-                isOld = True
-                Disable()
-                If .Item("Status") = 0 Then
-                    btnOK.Enabled = False
-                    txtAmount.Enabled = False
-                End If
+            isOld = True
+            Disable()
+            If .Item("Status") = 0 Then
+                btnOK.Enabled = False
+                txtAmount.Enabled = False
+            End If
         End With
     End Sub
 

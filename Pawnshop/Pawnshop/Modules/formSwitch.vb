@@ -19,6 +19,7 @@
         frmPawningV2_InterestScheme = 14
 
         layAway = 15
+        layAwayExist = 16
     End Enum
 
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
@@ -45,6 +46,8 @@
 
             Case FormName.layAway
                 frmLayAway.LoadClient(cl)
+            Case FormName.layAwayExist
+                frmAddCustomer.LoadClient(cl)
         End Select
     End Sub
 

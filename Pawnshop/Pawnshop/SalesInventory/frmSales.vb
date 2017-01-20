@@ -733,6 +733,7 @@ Public Class frmSales
     End Sub
 
     Private Sub LayAwaySearch(ByVal Search As String)
+        Try
         Dim mysql As String
         mysql = "Select * From tbllayAway Where Balance <> 0 And UPPER(ItemCode) = UPPER('" & Search & "')"
         Dim ds As DataSet = LoadSQL(mysql)
@@ -758,6 +759,12 @@ Public Class frmSales
             frmLayAway.Show()
             frmLayAway.LoadExistInfo(ds.Tables(0).Rows(0).Item("LayID"))
         End If
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
 
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        frmUploadLay.Show()
     End Sub
 End Class
