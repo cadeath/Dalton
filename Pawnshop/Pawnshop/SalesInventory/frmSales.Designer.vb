@@ -57,7 +57,6 @@ Partial Class frmSales
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPost = New System.Windows.Forms.Button()
         Me.lblNoVat = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.tsButton.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -342,21 +341,11 @@ Partial Class frmSales
         Me.lblNoVat.TabIndex = 12
         Me.lblNoVat.Text = "Php 99,99,99.00"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(634, 169)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(133, 55)
-        Me.Button1.TabIndex = 13
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'frmSales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(890, 428)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblNoVat)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.btnCancel)
@@ -413,5 +402,4 @@ Partial Class frmSales
     Friend WithEvents tsbtnOption As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbtnOut As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbtnLay As System.Windows.Forms.ToolStripButton
-    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

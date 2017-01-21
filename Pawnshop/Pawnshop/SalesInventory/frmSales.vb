@@ -763,8 +763,4 @@ Public Class frmSales
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
     End Sub
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        frmUploadLay.Show()
-    End Sub
 End Class

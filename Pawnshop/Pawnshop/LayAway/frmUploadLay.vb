@@ -34,8 +34,8 @@ Public Class frmUploadLay
 
             For Each itm As ListViewItem In lvLayAway.Items
                 If itm.Text.Contains(oSheet.Cells(cnt, 1).Value) Then
-                    'itm.Selected = True
-                    MsgBox("Duplicate " & itm.Text, MsgBoxStyle.Critical, "Warning!")
+                    MsgBox("Duplicate ItemCode: " & itm.Text, MsgBoxStyle.Critical, "Warning!")
+                    itm.BackColor = Color.Red
                     btnImport.Enabled = False
                 End If
             Next
@@ -76,6 +76,7 @@ unloadObj:
                 .Price = lv.SubItems(3).Text
                 .Balance = lv.SubItems(4).Text
                 .CustomerID = lv.SubItems(5).Text
+                .Encoder = UserID
                 .SaveLayAway()
             End With
 
@@ -85,6 +86,7 @@ unloadObj:
                 .PaymentDate = lv.SubItems(0).Text
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = lv.SubItems(3).Text - lv.SubItems(4).Text
+                .PaymentEncoder = UserID
                 .SaveLayAwayLines()
             End With
 
@@ -93,7 +95,7 @@ unloadObj:
         Next
         Me.Enabled = True
 
-        MsgBox("Existed LayAway imported", MsgBoxStyle.Information, "Succesful")
+        MsgBox("LayAway imported", MsgBoxStyle.Information, "Succesful")
         lvLayAway.Items.Clear()
     End Sub
 

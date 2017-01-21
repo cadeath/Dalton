@@ -73,6 +73,16 @@
         End Set
     End Property
 
+    Private _paymentEncoder As Integer
+    Public Property PaymentEncoder() As Integer
+        Get
+            Return _paymentEncoder
+        End Get
+        Set(ByVal value As Integer)
+            _paymentEncoder = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -87,6 +97,7 @@
             .Item("ControlNum") = _controlnum
             .Item("Amount") = _amount
             .Item("Penalty") = _penalty
+            .Item("PaymentEncoder") = _paymentEncoder
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -113,6 +124,7 @@
             _penalty = .Item("Penalty")
             _paymentDate = .Item("PaymentDate")
             _lineStatus = .Item("Status")
+            _paymentEncoder = .Item("PaymentEncoder")
         End With
     End Sub
 

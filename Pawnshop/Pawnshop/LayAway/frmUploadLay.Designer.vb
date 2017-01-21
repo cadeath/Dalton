@@ -24,11 +24,6 @@ Partial Class frmUploadLay
     Private Sub InitializeComponent()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"ITM 00001", "1/2/2017", "4/2/2017", "15000", "6400", "1", "ROBIN PADODOT"}, -1)
         Me.lvLayAway = New System.Windows.Forms.ListView()
-        Me.btnBrowse = New System.Windows.Forms.Button()
-        Me.lblFilename = New System.Windows.Forms.Label()
-        Me.btnImport = New System.Windows.Forms.Button()
-        Me.ofdIMD = New System.Windows.Forms.OpenFileDialog()
-        Me.btnAddCustomer = New System.Windows.Forms.Button()
         Me.ItemCode = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.LayAwayDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ForfeitDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -36,6 +31,11 @@ Partial Class frmUploadLay
         Me.Balance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.CustomerName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.lblFilename = New System.Windows.Forms.Label()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.ofdIMD = New System.Windows.Forms.OpenFileDialog()
+        Me.btnAddCustomer = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lvLayAway
@@ -54,6 +54,41 @@ Partial Class frmUploadLay
         Me.lvLayAway.TabIndex = 2
         Me.lvLayAway.UseCompatibleStateImageBehavior = False
         Me.lvLayAway.View = System.Windows.Forms.View.Details
+        '
+        'ItemCode
+        '
+        Me.ItemCode.Text = "ItemCode"
+        Me.ItemCode.Width = 87
+        '
+        'LayAwayDate
+        '
+        Me.LayAwayDate.Text = "LayAway Date"
+        Me.LayAwayDate.Width = 104
+        '
+        'ForfeitDate
+        '
+        Me.ForfeitDate.Text = "Forfeit Date"
+        Me.ForfeitDate.Width = 96
+        '
+        'Price
+        '
+        Me.Price.Text = "Price"
+        Me.Price.Width = 123
+        '
+        'Balance
+        '
+        Me.Balance.Text = "Balance"
+        Me.Balance.Width = 131
+        '
+        'ID
+        '
+        Me.ID.Text = "ID"
+        Me.ID.Width = 53
+        '
+        'CustomerName
+        '
+        Me.CustomerName.Text = "CustomerName"
+        Me.CustomerName.Width = 195
         '
         'btnBrowse
         '
@@ -100,41 +135,6 @@ Partial Class frmUploadLay
         Me.btnAddCustomer.TabIndex = 6
         Me.btnAddCustomer.Text = "&Add Customer"
         Me.btnAddCustomer.UseVisualStyleBackColor = True
-        '
-        'ItemCode
-        '
-        Me.ItemCode.Text = "ItemCode"
-        Me.ItemCode.Width = 87
-        '
-        'LayAwayDate
-        '
-        Me.LayAwayDate.Text = "LayAway Date"
-        Me.LayAwayDate.Width = 104
-        '
-        'ForfeitDate
-        '
-        Me.ForfeitDate.Text = "Forfeit Date"
-        Me.ForfeitDate.Width = 96
-        '
-        'Price
-        '
-        Me.Price.Text = "Price"
-        Me.Price.Width = 123
-        '
-        'Balance
-        '
-        Me.Balance.Text = "Balance"
-        Me.Balance.Width = 131
-        '
-        'ID
-        '
-        Me.ID.Text = "ID"
-        Me.ID.Width = 53
-        '
-        'CustomerName
-        '
-        Me.CustomerName.Text = "CustomerName"
-        Me.CustomerName.Width = 195
         '
         'frmUploadLay
         '

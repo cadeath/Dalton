@@ -81,6 +81,17 @@
         End Set
     End Property
 
+    Private _encoder As Integer
+    Public Property Encoder() As Integer
+        Get
+            Return _encoder
+        End Get
+        Set(ByVal value As Integer)
+            _encoder = value
+        End Set
+    End Property
+
+
 #End Region
 
 #Region "Procedures"
@@ -98,6 +109,7 @@
             .Item("Price") = _price
             .Item("Balance") = _balance
             .Item("Status") = _status
+            .Item("Encoder") = _encoder
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds)
@@ -120,6 +132,7 @@
             _price = .Item("Price")
             _balance = .Item("Balance")
             _status = .Item("Status")
+            _encoder = .Item("Encoder")
         End With
     End Sub
 

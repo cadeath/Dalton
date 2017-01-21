@@ -93,4 +93,8 @@
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
         Me.Close()
     End Sub
+
+    Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+        frmUploadLay.Show()
+    End Sub
 End Class

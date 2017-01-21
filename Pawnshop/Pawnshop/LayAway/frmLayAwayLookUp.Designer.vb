@@ -36,6 +36,7 @@ Partial Class frmLayAwayLookUp
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnVoid = New System.Windows.Forms.Button()
+        Me.btnImport = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lvLayAway
@@ -138,11 +139,21 @@ Partial Class frmLayAwayLookUp
         Me.btnVoid.Text = "&Void"
         Me.btnVoid.UseVisualStyleBackColor = True
         '
+        'btnImport
+        '
+        Me.btnImport.Location = New System.Drawing.Point(12, 396)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(74, 35)
+        Me.btnImport.TabIndex = 18
+        Me.btnImport.Text = "&Import"
+        Me.btnImport.UseVisualStyleBackColor = True
+        '
         'frmLayAwayLookUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(803, 438)
+        Me.Controls.Add(Me.btnImport)
         Me.Controls.Add(Me.btnVoid)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnSearch)
@@ -172,4 +183,5 @@ Partial Class frmLayAwayLookUp
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnVoid As System.Windows.Forms.Button
+    Friend WithEvents btnImport As System.Windows.Forms.Button
 End Class
