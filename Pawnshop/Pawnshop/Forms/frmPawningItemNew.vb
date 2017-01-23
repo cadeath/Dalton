@@ -554,7 +554,7 @@ Public Class frmPawningItemNew
             'REMANTIC NO ADVANCE INTEREST
             If PT_Entry.AdvanceInterest = 0 Then
                 isDPJ = False
-                isOldItem = Not isDPJ
+                'isOldItem = Not isDPJ
             End If
         End If
 
@@ -575,6 +575,7 @@ Public Class frmPawningItemNew
         txtAdv.Text = MoneyFormat(AdvanceInterest)
         txtNet.Text = MoneyFormat(NetAmount)
         isEarlyRedeem = AutoCompute.isEarlyRedeem
+        isOldItem = Not isDPJ
 
         If transactionType = "R" Or transactionType = "X" Then
             GenerateORNum()
