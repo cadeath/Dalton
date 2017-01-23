@@ -538,4 +538,9 @@
     Private Sub ItemMasterDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemMasterDataToolStripMenuItem.Click
         frmImport_IMD.Show()
     End Sub
+
+    Private Sub StockoutReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockoutReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockOut
+        frmSalesReport.Show()
+    End Sub
 End Class
