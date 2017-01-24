@@ -1171,6 +1171,12 @@ Public Class frmPawningItemNew
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
 
+        Dim total As Double
+        total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
+        total = total * GetInt(30)
+        total = total / PT_Entry.NetAmount
+        addParameters.Add("txtRateInPercent", total)
+
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
         Else
@@ -1253,6 +1259,12 @@ Public Class frmPawningItemNew
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtOLDPT", "PT# " & PT_Entry.OldTicket.ToString("000000"))
         addParameters.Add("txtUsername", POSuser.FullName)
+
+        Dim total As Double
+        total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
+        total = total * GetInt(30)
+        total = total / PT_Entry.NetAmount
+        addParameters.Add("txtRateInPercent", total)
 
         ' Add Monthly Computation
         Dim strCompute As String

@@ -577,7 +577,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>2.60422in</Top>
         <Left>6.40515in</Left>
-        <Height>0.2882in</Height>
+        <Height>0.18751in</Height>
         <Width>1.03407in</Width>
         <ZIndex>14</ZIndex>
         <Style>
@@ -1437,7 +1437,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>8.46533in</Top>
         <Left>6.38432in</Left>
-        <Height>0.2882in</Height>
+        <Height>0.21529in</Height>
         <Width>1.03407in</Width>
         <ZIndex>41</ZIndex>
         <Style>
@@ -1945,6 +1945,72 @@
           </Border>
         </Style>
       </Image>
+      <Textbox Name="Textbox52">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtRateInPercent.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>2.80562in</Top>
+        <Left>6.40515in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.03407in</Width>
+        <ZIndex>58</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox53">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtRateInPercent.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>8.69451in</Top>
+        <Left>6.38432in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.03407in</Width>
+        <ZIndex>59</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>9.80075in</Height>
     <Style />
@@ -1973,6 +2039,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="txtReprint">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="txtRateInPercent">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
