@@ -13,8 +13,6 @@
         Dim mysql As String
         If Search <> "" Then
             mysql = "Select LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
-            mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
-            mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
             mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
@@ -24,8 +22,6 @@
             mysql &= "AND (FULLNAME = '" & Search & "' OR LY.ITEMCODE = '" & Search & "')"
         Else
             mysql = "Select First 50 LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
-            mysql &= "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
-            mysql &= "C.PHONE1 AS CONTACTNUMBER, C.BIRTHDAY, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
             mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
