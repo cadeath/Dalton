@@ -110,12 +110,12 @@
 
             If src <> "" Then
                 mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"
-                mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00'", src.ToLower)
-                'mySql &= " AND onHand <> 0"
+                mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00' ", src.ToLower)
+                mySql &= " AND onLayAway <> 1 "
                 mySql &= " ORDER BY ITEMCODE ASC"
             End If
 
-            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001'")
+            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onLayAway <> 1")
         End If
 
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
