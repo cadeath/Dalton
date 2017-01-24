@@ -10,13 +10,13 @@
     End Sub
 
     Private Sub Load_ItemType()
-        Dim mySql As String = "SELECT DISTINCT TYPE FROM TBLCLASS ORDER BY TYPE ASC"
+        Dim mySql As String = "SELECT DISTINCT ITEMCATEGORY FROM tblItem ORDER BY ITEMCATEGORY ASC"
         Dim ds As DataSet = LoadSQL(mySql)
 
         cboType.Items.Clear()
         cboType.Items.Add("ALL")
         For Each dr As DataRow In ds.Tables(0).Rows
-            cboType.Items.Add(dr("TYPE"))
+            cboType.Items.Add(dr("ITEMCATEGORY"))
         Next
 
         cboType.SelectedIndex = 0
