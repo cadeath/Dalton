@@ -1437,7 +1437,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>8.46533in</Top>
         <Left>6.38432in</Left>
-        <Height>0.2882in</Height>
+        <Height>0.21529in</Height>
         <Width>1.03407in</Width>
         <ZIndex>41</ZIndex>
         <Style>
@@ -1970,6 +1970,39 @@
         <Height>0.20833in</Height>
         <Width>1.03407in</Width>
         <ZIndex>58</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox53">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtRateInPercent.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>8.69451in</Top>
+        <Left>6.38432in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.03407in</Width>
+        <ZIndex>59</ZIndex>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
