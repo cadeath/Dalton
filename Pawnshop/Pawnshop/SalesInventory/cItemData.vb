@@ -258,6 +258,7 @@
                 .Item("ONHOLD") = _onHold
                 .Item("ONHAND") = _onHand
                 .Item("COMMENTS") = _comments
+                .Item("isLayAway") = If(_isLayAway, 1, 0)
             End With
             ds.Tables(TABLE).Rows.Add(dsNewRow)
             isNew = True
@@ -277,6 +278,7 @@
                 .Item("ONHAND") = _onHand
                 .Item("COMMENTS") = _comments
                 .Item("UPDATE_TIME") = Now()
+                .Item("isLayAway") = If(_isLayAway, 1, 0)
             End With
         End If
 
