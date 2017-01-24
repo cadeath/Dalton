@@ -101,8 +101,9 @@
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         ElseIf isLayAway Then
+
             mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 "
-            If src <> "" Then mySql &= "AND Upper(ItemCode) = Upper('" & src & "')"
+            If src <> "" Then mySql &= "AND (Upper(ItemCode) = Upper('" & src & "') OR UPPER(DESCRIPTION) LIKE UPPER('%" & src & "%')) "
             ds = LoadSQL("Select Count(*) From ItemMaster Where isLayAway <> 0 ")
         Else
             mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 ORDER BY ITEMCODE ASC"
@@ -267,6 +268,7 @@
         If isLayAway = True Then
             frmLayAway.Show()
             If selected_Itm.OnLayAway = True Then
+                MsgBox("Item Already in Lay Away", MsgBoxStyle.Information, "Please Be Inform")
                 frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
             Else
                 frmLayAway.LoadItemEncode(selected_Itm)

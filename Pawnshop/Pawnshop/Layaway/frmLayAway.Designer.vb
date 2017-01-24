@@ -30,6 +30,8 @@ Partial Class frmLayAway
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCustomer = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblPercent = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtDescription = New System.Windows.Forms.TextBox()
@@ -47,8 +49,6 @@ Partial Class frmLayAway
         Me.lblLayAwayDate = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.lblPercent = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -141,6 +141,26 @@ Partial Class frmLayAway
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Item Information"
+        '
+        'lblPercent
+        '
+        Me.lblPercent.AutoSize = True
+        Me.lblPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPercent.Location = New System.Drawing.Point(81, 129)
+        Me.lblPercent.Name = "lblPercent"
+        Me.lblPercent.Size = New System.Drawing.Size(56, 16)
+        Me.lblPercent.TabIndex = 18
+        Me.lblPercent.Text = "199999"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(11, 129)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(38, 15)
+        Me.Label11.TabIndex = 16
+        Me.Label11.Text = "20 %:"
         '
         'btnOK
         '
@@ -310,26 +330,6 @@ Partial Class frmLayAway
         Me.Label5.Size = New System.Drawing.Size(83, 15)
         Me.Label5.TabIndex = 20
         Me.Label5.Text = "LayAway Date"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(11, 129)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(38, 15)
-        Me.Label11.TabIndex = 16
-        Me.Label11.Text = "20 %:"
-        '
-        'lblPercent
-        '
-        Me.lblPercent.AutoSize = True
-        Me.lblPercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPercent.Location = New System.Drawing.Point(81, 129)
-        Me.lblPercent.Name = "lblPercent"
-        Me.lblPercent.Size = New System.Drawing.Size(56, 16)
-        Me.lblPercent.TabIndex = 18
-        Me.lblPercent.Text = "199999"
         '
         'frmLayAway
         '
