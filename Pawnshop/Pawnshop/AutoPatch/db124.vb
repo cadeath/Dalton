@@ -26,7 +26,7 @@
         Lay &= "PRICE NUMERIC(12, 3) NOT NULL, "
         Lay &= "BALANCE NUMERIC(12, 3) NOT NULL, "
         Lay &= "STATUS VARCHAR(1) DEFAULT '1' NOT NULL, "
-        Lay &= "ENCODER SMALLINT);"
+        Lay &= "ENCODER SMALLINT DEFAULT '0' NOT NULL); "
 
         RunCommand(Lay)
         AutoIncrement_ID("TBLLAYAWAY", "LAYID")
@@ -41,7 +41,7 @@
         LayLines &= "AMOUNT NUMERIC(12, 3) NOT NULL, "
         LayLines &= "PENALTY NUMERIC(12, 3) DEFAULT '0.0' NOT NULL, "
         LayLines &= "STATUS VARCHAR(1) DEFAULT '1' NOT NULL, "
-        LayLines &= "PAYMENTENCODER SMALLINT);"
+        LayLines &= "PAYMENTENCODER SMALLINT DEFAULT '0' NOT NULL); "
 
         RunCommand(LayLines)
         AutoIncrement_ID("TBLLAYLINES", "LINESID")

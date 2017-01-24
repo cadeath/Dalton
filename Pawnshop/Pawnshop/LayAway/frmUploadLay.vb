@@ -65,8 +65,9 @@ unloadObj:
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
         If lvLayAway.Items.Count = 0 Then Exit Sub
-
+        If Not isValid() Then Exit Sub
         Me.Enabled = False
+
         For Each lv As ListViewItem In lvLayAway.Items
             Dim lay As New LayAway
             With lay
@@ -83,7 +84,7 @@ unloadObj:
             Dim LayLines As New LayAwayLines
             With LayLines
                 .LayID = lay.LayLastID
-                .PaymentDate = lv.SubItems(0).Text
+                .PaymentDate = lv.SubItems(1).Text
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = lv.SubItems(3).Text - lv.SubItems(4).Text
                 .PaymentEncoder = UserID
@@ -113,9 +114,24 @@ unloadObj:
     Friend Sub DisplayValue(ByVal CustomerID As Integer, ByVal CustomerName As String, ByVal id As Integer)
         lvLayAway.Items(id).SubItems(5).Text = CustomerID
         lvLayAway.Items(id).SubItems(6).Text = CustomerName
+        lvLayAway.Items(id).BackColor = Nothing
     End Sub
 
     Private Sub lvLayAway_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvLayAway.DoubleClick
         btnAddCustomer.PerformClick()
     End Sub
+
+    Private Function isValid() As Boolean
+
+        For Each lv As ListViewItem In lvLayAway.Items
+
+            If lv.SubItems(5).Text = "" Then
+                MsgBox("No Customer Selected", MsgBoxStyle.Critical, "Error")
+                lv.BackColor = Color.Yellow
+                Return False
+            End If
+        Next
+
+        Return True
+    End Function
 End Class

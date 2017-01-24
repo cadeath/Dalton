@@ -23,6 +23,7 @@
     End Sub
 
     Private Sub btnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOk.Click
+        If Customer Is Nothing Then Exit Sub
         frmUploadLay.DisplayValue(Customer.ID, txtCustomer.Text, retID)
         Me.Close()
     End Sub
