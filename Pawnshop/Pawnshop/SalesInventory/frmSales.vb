@@ -237,16 +237,15 @@ Public Class frmSales
 
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        If TransactionMode = TransType.LayAway Then
-            LayAwaySearch(txtSearch.Text)
-        Else
-            frmPLU.Show()
-            frmPLU.From_Sales()
-            IS_AUCTIONREDEEM()
-            If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
+        frmPLU.Show()
+        frmPLU.From_Sales()
 
-            frmPLU.Load_PLU()
-        End If
+        IS_AUCTIONREDEEM()
+
+        If TransactionMode = TransType.LayAway Then frmPLU.isLayAway = True
+        If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
+
+        frmPLU.Load_PLU()
     End Sub
 
     Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown
@@ -732,35 +731,35 @@ Public Class frmSales
         End If
     End Sub
 
-    Private Sub LayAwaySearch(ByVal Search As String)
-        Try
-        Dim mysql As String
-        mysql = "Select * From tbllayAway Where Balance <> 0 And UPPER(ItemCode) = UPPER('" & Search & "')"
-        Dim ds As DataSet = LoadSQL(mysql)
+    'Private Sub LayAwaySearch(ByVal Search As String)
+    '    Try
+    '    Dim mysql As String
+    '    mysql = "Select * From tbllayAway Where Balance <> 0 And UPPER(ItemCode) = UPPER('" & Search & "')"
+    '    Dim ds As DataSet = LoadSQL(mysql)
 
-        If ds.Tables(0).Rows.Count = 0 Then
-            mysql = "Select * From ItemMaster Where isLayAway <> '0' "
-            If Search <> "" Then mysql &= " And UPPER(ItemCode) = UPPER('" & Search & "')"
-            ds.Clear()
-            ds = LoadSQL(mysql, "ItemMaster")
-            If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Item Found!", MsgBoxStyle.Information, "Lay Away") : Exit Sub
+    '    If ds.Tables(0).Rows.Count = 0 Then
+    '        mysql = "Select * From ItemMaster Where isLayAway <> '0' "
+    '        If Search <> "" Then mysql &= " And UPPER(ItemCode) = UPPER('" & Search & "')"
+    '        ds.Clear()
+    '        ds = LoadSQL(mysql, "ItemMaster")
+    '        If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Item Found!", MsgBoxStyle.Information, "Lay Away") : Exit Sub
 
-            With frmPLU
-                .Show()
-                .isLayAway = True
-            End With
+    '        With frmPLU
+    '            .Show()
+    '            .isLayAway = True
+    '        End With
 
-            If Search <> "" Then
-                frmPLU.Load_PLU(Search)
-            Else
-                frmPLU.Load_PLU()
-            End If
-        Else
-            frmLayAway.Show()
-            frmLayAway.LoadExistInfo(ds.Tables(0).Rows(0).Item("LayID"))
-        End If
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-        End Try
-    End Sub
+    '        If Search <> "" Then
+    '            frmPLU.Load_PLU(Search)
+    '        Else
+    '            frmPLU.Load_PLU()
+    '        End If
+    '    Else
+    '        frmLayAway.Show()
+    '        frmLayAway.LoadExistInfo(ds.Tables(0).Rows(0).Item("LayID"))
+    '    End If
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+    '    End Try
+    'End Sub
 End Class

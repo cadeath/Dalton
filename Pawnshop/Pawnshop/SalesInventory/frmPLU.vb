@@ -265,10 +265,13 @@
         End If
 
         If isLayAway = True Then
-            If selected_Itm.OnLayAway = True Then MsgBox("Item Already in LayAway", MsgBoxStyle.Information, "Lay Away") : Exit Sub
             frmLayAway.Show()
-            frmLayAway.LoadItemEncode(selected_Itm)
-            frmLayAway.isNewLayAway = True
+            If selected_Itm.OnLayAway = True Then
+                frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
+            Else
+                frmLayAway.LoadItemEncode(selected_Itm)
+                frmLayAway.isNewLayAway = True
+            End If
         Else
             If fromSales Then
                 If isRedeem Then qtyItm = 1
@@ -282,7 +285,7 @@
                 frmSales.ClearSearch()
             End If
         End If
-            Me.Close()
+        Me.Close()
     End Sub
 
     Private Sub lvItem_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvItem.DoubleClick

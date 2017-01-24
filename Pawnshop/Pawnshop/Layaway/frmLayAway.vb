@@ -128,12 +128,12 @@
         Compute()
     End Sub
 
-    Friend Sub LoadExistInfo(ByVal ID As String)
+    Friend Sub LoadExistInfo(ByVal ItemCode As String)
         Dim mysql As String = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, LY.CUSTOMERID, "
         mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LY.BALANCE "
         mysql &= "From TBLLAYAWAY LY "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-        mysql &= "WHERE LY.LAYID = '" & ID & "' "
+        mysql &= "WHERE LY.BALANCE <> 0 AND LY.ITEMCODE = '" & ItemCode & "' "
         Dim ds As DataSet = LoadSQL(mysql)
         With ds.Tables(0).Rows(0)
             Customer = New Client
@@ -159,8 +159,8 @@
                 lblBalance.Text = tmpBalance
                 lblPenalty.Text = .Item("Balance") * 0.02
             Else
-            tmpBalance = .Item("Balance")
-            lblBalance.Text = tmpBalance
+                tmpBalance = .Item("Balance")
+                lblBalance.Text = tmpBalance
             End If
 
             isOld = True
