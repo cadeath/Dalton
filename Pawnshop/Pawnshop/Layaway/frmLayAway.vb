@@ -222,7 +222,7 @@
         Else
             With lay
                 .DocDate = CurrentDate
-                .ForfeitDate = CurrentDate.AddDays(120).ToShortDateString
+                .ForfeitDate = CurrentDate.AddDays(119).ToShortDateString
                 .CustomerID = Customer.ID
                 .ItemCode = txtItemCode.Text
                 .Price = lblCost.Text
