@@ -10,7 +10,7 @@ Version 1.4.1.11
  - Add InvoiceNum, STONum, SalesReturnNum and CustomerCode at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
  - Add view STOCK_CARD
- - Add Reports - Inventory Report, Sales Report
+ - Add Reports - Inventory Report, Sales Report, Stockout Report
  - Add Tools - Sales Extractor
  - Add new privileges
  - Added Journal in Insurance Close Store
