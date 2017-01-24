@@ -1563,4 +1563,8 @@ Public Class frmPawningItemNew
                 lblTransaction.Text = "Redeem"
         End Select
     End Sub
+
+    Private Sub txtAppr_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppr.Leave
+        ReComputeInterest()
+    End Sub
 End Class
