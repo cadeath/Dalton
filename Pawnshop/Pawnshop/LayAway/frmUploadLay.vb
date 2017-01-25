@@ -66,6 +66,7 @@ unloadObj:
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
         If lvLayAway.Items.Count = 0 Then Exit Sub
         If Not isValid() Then Exit Sub
+
         Me.Enabled = False
 
         For Each lv As ListViewItem In lvLayAway.Items
@@ -79,6 +80,7 @@ unloadObj:
                 .CustomerID = lv.SubItems(5).Text
                 .Encoder = UserID
                 .SaveLayAway()
+                .ItemOnLayMode(lv.SubItems(0).Text)
             End With
 
             Dim LayLines As New LayAwayLines
@@ -130,6 +132,12 @@ unloadObj:
                 lv.BackColor = Color.Yellow
                 Return False
             End If
+
+            Dim mysql As String = "Select * From ItemMaster Where OnLayAway <> 1 AND ItemCode = '" & lv.SubItems(0).Text & "'"
+            Dim fillData As String = "ItemMaster"
+            Dim ds As DataSet = LoadSQL(mysql, fillData)
+
+            If ds.Tables(0).Rows.Count = 0 Then MsgBox("No ItemCode " & lv.SubItems(0).Text & " Found!", MsgBoxStyle.Critical, "Error") : Return False
         Next
 
         Return True
