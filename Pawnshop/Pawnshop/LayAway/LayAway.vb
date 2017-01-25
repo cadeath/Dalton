@@ -176,9 +176,10 @@
             mysql = "Select * From tblLayLines Where LayID = " & ID
             fillData = "tblLayLines"
             ds = LoadSQL(mysql, fillData)
-            ds.Tables(0).Rows(0).Item("Status") = 0
-            SaveEntry(ds, False)
-
+            If ds.Tables(0).Rows.Count <> 0 Then
+                ds.Tables(0).Rows(0).Item("Status") = 0
+                SaveEntry(ds, False)
+            End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try

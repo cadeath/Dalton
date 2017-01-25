@@ -140,6 +140,7 @@
 
         ds.Tables(0).Rows(0).Item("Status") = 0
         SaveEntry(ds, False)
+
         mysql = "Select * From tblLayAway Where LayID = " & _layID
         fillData = "tblLayAway"
         ds = LoadSQL(mysql, fillData)

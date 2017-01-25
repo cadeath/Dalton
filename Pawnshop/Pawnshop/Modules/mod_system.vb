@@ -602,8 +602,11 @@ Module mod_system
         If ds.Tables(0).Rows.Count = 0 Then Return True
         For Each dr In ds.Tables(0).Rows()
             Dim lay As New LayAway
-            lay.LoadByID(dr.item("LayID"))
-            lay.InActiveStatus()
+            With lay
+                .LoadByID(dr.item("LayID"))
+                .InActiveStatus()
+                .ItemOnLayMode(dr.item("ItemCode"), False)
+            End With
         Next
         Return True
     End Function
