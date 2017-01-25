@@ -83,15 +83,15 @@ unloadObj:
                 .ItemOnLayMode(lv.SubItems(0).Text)
             End With
 
-            Dim LayLines As New LayAwayLines
-            With LayLines
-                .LayID = lay.LayLastID
-                .PaymentDate = lv.SubItems(1).Text
-                .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
-                .Amount = lv.SubItems(3).Text - lv.SubItems(4).Text
-                .PaymentEncoder = UserID
-                .SaveLayAwayLines()
-            End With
+            'Dim LayLines As New LayAwayLines
+            'With LayLines
+            '    .LayID = lay.LayLastID
+            '    .PaymentDate = lv.SubItems(1).Text
+            '    .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
+            '    .Amount = lv.SubItems(3).Text - lv.SubItems(4).Text
+            '    .PaymentEncoder = UserID
+            '    .SaveLayAwayLines()
+            'End With
 
             InvoiceNum += 1
             UpdateOptions("InvoiceNum", InvoiceNum)
