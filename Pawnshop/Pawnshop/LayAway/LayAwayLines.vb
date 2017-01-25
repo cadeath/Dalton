@@ -132,15 +132,31 @@
         Dim mysql As String = "Select * From tblLayLines Where LinesID =  " & _layLinesID
         Dim fillData As String = "tblLayLines"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
-        Dim AddAmt As Integer = ds.Tables(0).Rows(0).Item("Amount")
+
+        Dim AddAmt As Integer
+        With ds.Tables(0).Rows(0)
+            AddAmt = .Item("Amount")
+        End With
+
         ds.Tables(0).Rows(0).Item("Status") = 0
         SaveEntry(ds, False)
+        mysql = "Select * From tblLayAway Where LayID = " & _layID
+        fillData = "tblLayAway"
+        ds = LoadSQL(mysql, fillData)
+
+        If ds.Tables(0).Rows(0).Item("Balance") = 0 Then
+            Dim itemCode As String = ds.Tables(0).Rows(0).Item("ItemCode")
+            Dim lay As New LayAway
+            lay.ItemOnLayMode(itemCode)
+            InventoryController.AddInventory(itemCode, 1)
+        End If
 
         Dim layAway As New LayAway
         With layAway
             .LoadByID(_layID)
             .UpdateBalance(layAway.Balance + AddAmt)
         End With
+
     End Sub
 
     Friend Function LayLinesLastID()

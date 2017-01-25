@@ -106,7 +106,7 @@
             If src <> "" Then mySql &= "AND (Upper(ItemCode) = Upper('" & src & "') OR UPPER(DESCRIPTION) LIKE UPPER('%" & src & "%')) "
             ds = LoadSQL("Select Count(*) From ItemMaster Where isLayAway <> 0 ")
         Else
-            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 ORDER BY ITEMCODE ASC"
+            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 AND OnLayAway <> 1 ORDER BY ITEMCODE ASC"
 
             If src <> "" Then
                 mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"

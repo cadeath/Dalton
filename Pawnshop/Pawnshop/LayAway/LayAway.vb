@@ -166,11 +166,22 @@
     End Sub
 
     Friend Sub InActiveStatus()
-        Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
-        Dim fillData As String = "tblLayAway"
-        Dim ds As DataSet = LoadSQL(mysql, fillData)
-        ds.Tables(0).Rows(0).Item("Status") = 0
-        SaveEntry(ds, False)
+        Try
+            Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
+            Dim fillData As String = "tblLayAway"
+            Dim ds As DataSet = LoadSQL(mysql, fillData)
+            ds.Tables(0).Rows(0).Item("Status") = 0
+            SaveEntry(ds, False)
+
+            mysql = "Select * From tblLayLines Where LayID = " & ID
+            fillData = "tblLayLines"
+            ds = LoadSQL(mysql, fillData)
+            ds.Tables(0).Rows(0).Item("Status") = 0
+            SaveEntry(ds, False)
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
     End Sub
 
 #End Region

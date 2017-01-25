@@ -2,7 +2,7 @@
 
     Friend Customer As Client
     Friend Item As cItemData
-    Dim tmpBalance As Integer = 0
+    Dim tmpBalance As Double
     Dim tmpLayID As Integer
     Friend isOld As Boolean = False
     Friend isNewLayAway As Boolean = False
