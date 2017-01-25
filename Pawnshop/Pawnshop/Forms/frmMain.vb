@@ -64,6 +64,7 @@
         VoidReportToolStripMenuItem.Enabled = Not st
         SalesReportToolStripMenuItem.Enabled = Not st
         InventoryReportToolStripMenuItem.Enabled = Not st
+        StockoutReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
