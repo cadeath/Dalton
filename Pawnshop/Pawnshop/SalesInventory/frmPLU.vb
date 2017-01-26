@@ -270,7 +270,6 @@
         If isLayAway = True Then
             frmLayAway.Show()
             If selected_Itm.OnLayAway = True Then
-                MsgBox("Item Already in Lay Away", MsgBoxStyle.Information, "Please Be Aware")
                 frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
                 frmLayAway.txtAmount.Text = LayAmount
             Else
