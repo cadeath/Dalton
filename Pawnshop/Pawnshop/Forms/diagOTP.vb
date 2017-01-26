@@ -23,6 +23,8 @@ Public Class diagOTP
         VoidCashInOut = 7
         Pullout = 8
         VoidSales = 9
+        VoidLayAway = 10
+        VoidLayPayment = 11
     End Enum
 
     Friend FormType As OTPType = OTPType.UserManagement
@@ -48,6 +50,11 @@ Public Class diagOTP
                 qryPullOut.Show()
             Case OTPType.VoidSales
                 frmPrint.Void()
+
+            Case OTPType.VoidLayAway
+                frmLayAwayLookUp.VoidLayAway()
+            Case OTPType.VoidLayPayment
+                frmLayAwayPaymentList.VoidLayPayments()
         End Select
     End Sub
 

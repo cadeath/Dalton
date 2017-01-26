@@ -33,7 +33,20 @@
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidLayPayment
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidLayPayments()
+        End If
+
+    End Sub
+
+    Friend Sub VoidLayPayments()
         If lvPayment.SelectedItems.Count = 0 Then Exit Sub
+        If POSuser.canVoid Then
+
+        End If
         Dim idx As Integer = lvPayment.FocusedItem.Tag
         Dim ans As DialogResult = MsgBox("Do You Want To Void This Transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
@@ -47,6 +60,7 @@
         End If
 
         laylines.VoidLayPayment()
+        RemoveJournal(idx, , "LAYAWAY")
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
         Me.Close()
     End Sub

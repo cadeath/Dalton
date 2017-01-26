@@ -604,7 +604,7 @@ Module mod_system
             Dim lay As New LayAway
             With lay
                 .LoadByID(dr.item("LayID"))
-                .InActiveStatus()
+                .ForfeitLayAway()
                 .ItemOnLayMode(dr.item("ItemCode"), False)
             End With
         Next

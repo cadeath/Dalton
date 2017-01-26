@@ -216,6 +216,7 @@
 
         Console.WriteLine(lvItem.SelectedItems(0).Index)
         Dim idx As Integer = lvItem.SelectedItems(0).Index
+        Dim LayAmount As Double = 0
 
         Dim selected_Itm As New cItemData
         selected_Itm = queued_IMD.Item(idx)
@@ -244,6 +245,7 @@
 
                 Dim customPrice As Double = CDbl(tmp)
                 selected_Itm.SalePrice = customPrice
+                LayAmount = customPrice
             Else
                 If isRedeem Then
                     Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
@@ -270,6 +272,7 @@
             If selected_Itm.OnLayAway = True Then
                 MsgBox("Item Already in Lay Away", MsgBoxStyle.Information, "Please Be Aware")
                 frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
+                frmLayAway.txtAmount.Text = LayAmount
             Else
                 frmLayAway.LoadItemEncode(selected_Itm)
                 frmLayAway.isNewLayAway = True

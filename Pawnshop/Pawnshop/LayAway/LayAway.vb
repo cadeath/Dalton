@@ -165,7 +165,29 @@
         SaveEntry(ds, False)
     End Sub
 
-    Friend Sub InActiveStatus()
+    Friend Sub ForfeitLayAway()
+        Try
+            Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
+            Dim fillData As String = "tblLayAway"
+            Dim ds As DataSet = LoadSQL(mysql, fillData)
+            ds.Tables(0).Rows(0).Item("Status") = 0
+            SaveEntry(ds, False)
+
+            'mysql = "Select * From tblLayLines Where LayID = " & ID
+            'fillData = "tblLayLines"
+            'ds = LoadSQL(mysql, fillData)
+
+            'If ds.Tables(0).Rows.Count <> 0 Then
+            '    ds.Tables(0).Rows(0).Item("Status") = 0
+            '    SaveEntry(ds, False)
+            'End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+    End Sub
+
+    Friend Sub VoidLayAway()
         Try
             Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
             Dim fillData As String = "tblLayAway"
@@ -176,10 +198,17 @@
             mysql = "Select * From tblLayLines Where LayID = " & ID
             fillData = "tblLayLines"
             ds = LoadSQL(mysql, fillData)
+
             If ds.Tables(0).Rows.Count <> 0 Then
-                ds.Tables(0).Rows(0).Item("Status") = 0
-                SaveEntry(ds, False)
+
+                For Each dr In ds.Tables(0).Rows()
+                    dr.Item("Status") = 0
+                    SaveEntry(ds, False)
+                    RemoveJournal(dr.Item("LinesID"), , "LAYAWAY")
+                Next
+
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try

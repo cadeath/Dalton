@@ -70,6 +70,18 @@
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidLayAway
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidLayAway()
+        End If
+
+        
+    End Sub
+
+    Friend Sub VoidLayAway()
         If lvLayAway.SelectedItems.Count = 0 Then Exit Sub
         Dim idx As Integer = lvLayAway.FocusedItem.Tag
 
@@ -84,7 +96,7 @@
             Exit Sub
         End If
 
-        layAwy.InActiveStatus()
+        layAwy.VoidLayAway()
         layAwy.ItemOnLayMode(layAwy.ItemCode, False)
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
         Me.Close()
