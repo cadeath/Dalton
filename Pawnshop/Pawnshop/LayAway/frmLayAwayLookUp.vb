@@ -10,7 +10,8 @@
     End Sub
 
     Friend Sub LoadInfo(Optional ByVal Search As String = "")
-        Dim mysql As String
+        Dim mysql As String, Name As String
+        Dim strWords As String() = Search.Split(New Char() {" "c})
         If Search <> "" Then
             mysql = "Select LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
@@ -19,7 +20,17 @@
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
             mysql &= "WHERE LY.STATUS <> '0' "
-            mysql &= "AND (FULLNAME = '" & Search & "' OR LY.ITEMCODE = '" & Search & "')"
+            mysql &= "AND  LY.ITEMCODE = '" & Search & "' OR"
+
+            For Each Name In strWords
+
+                mysql &= vbCr & " UPPER(C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX) LIKE UPPER('%" & Name & "%') and "
+                If Name Is strWords.Last Then
+                    mysql &= vbCr & " UPPER(C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX) LIKE UPPER('%" & Name & "%') "
+                    Exit For
+                End If
+
+            Next
         Else
             mysql = "Select First 50 LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
@@ -30,6 +41,7 @@
             mysql &= "WHERE LY.STATUS <> '0'"
         End If
         Dim ds As DataSet = LoadSQL(mysql)
+        lvLayAway.Items.Clear()
 
         For Each dr In ds.Tables(0).Rows()
             AddlvItems(dr)
@@ -104,5 +116,11 @@
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
         frmUploadLay.Show()
+    End Sub
+
+    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
     End Sub
 End Class
