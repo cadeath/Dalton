@@ -169,19 +169,35 @@
         Try
             Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
             Dim fillData As String = "tblLayAway"
+            Dim ItemCode As String
             Dim ds As DataSet = LoadSQL(mysql, fillData)
+            ItemCode = ds.Tables(0).Rows(0).Item("ItemCode")
             ds.Tables(0).Rows(0).Item("Status") = 0
             SaveEntry(ds, False)
 
-            'mysql = "Select * From tblLayLines Where LayID = " & ID
-            'fillData = "tblLayLines"
-            'ds = LoadSQL(mysql, fillData)
+            Dim CollectAmount As Double
+            mysql = "Select * From tblLayLines Where LayID = " & ID
+            fillData = "tblLayLines"
+            ds = LoadSQL(mysql, fillData)
 
-            'If ds.Tables(0).Rows.Count <> 0 Then
-            '    ds.Tables(0).Rows(0).Item("Status") = 0
-            '    SaveEntry(ds, False)
-            'End If
+            If ds.Tables(0).Rows.Count <> 0 Then
+                Dim LayLines As New LayAwayLines
+                With LayLines
+                    .LoadByLayID(ID)
+                    CollectAmount = .GetSumPayments()
+                End With
+            Else
+                mysql = "Select * From tblLayAway Where LayID = " & ID
+                fillData = "tblLayAway"
+                ds.Clear()
+                ds = LoadSQL(mysql, fillData)
+                With ds.Tables(0).Rows(0)
+                    CollectAmount = .Item("Price") - .Item("Balance")
+                End With
+            End If
 
+            AddJournal(CollectAmount, "Debit", "Advances from customer", "FORFEIT LAYAWAY " & ItemCode, , , "LAY-AWAY PAYMENTS", "FORFEIT LAYAWAY", ID)
+            AddJournal(CollectAmount, "Credit", "Miscellaneous Income", "FORFEIT LAYAWAY " & ItemCode, , , "LAY-AWAY PAYMENTS", "FORFEIT LAYAWAY", ID)
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try

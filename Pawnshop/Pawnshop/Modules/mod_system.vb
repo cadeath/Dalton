@@ -600,6 +600,7 @@ Module mod_system
         Dim fillData As String = "tblLayAway"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
         If ds.Tables(0).Rows.Count = 0 Then Return True
+
         For Each dr In ds.Tables(0).Rows()
             Dim lay As New LayAway
             With lay
@@ -607,7 +608,9 @@ Module mod_system
                 .ForfeitLayAway()
                 .ItemOnLayMode(dr.item("ItemCode"), False)
             End With
+
         Next
+
         Return True
     End Function
 
