@@ -596,7 +596,7 @@ Module mod_system
     End Function
 
     Friend Function DoForfeitingItem() As Boolean
-        Dim mysql As String = "Select * From tblLayAway Where ForfeitDate < '" & CurrentDate.ToShortDateString & "' And Balance !< 0"
+        Dim mysql As String = "Select * From tblLayAway Where Status <> 0 And ForfeitDate < '" & CurrentDate.ToShortDateString & "' And Balance !< 0"
         Dim fillData As String = "tblLayAway"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
         If ds.Tables(0).Rows.Count = 0 Then Return True
