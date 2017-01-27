@@ -51,22 +51,22 @@
         End Set
     End Property
 
-    Private _price As Integer
-    Public Property Price() As Integer
+    Private _price As Double
+    Public Property Price() As Double
         Get
             Return _price
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _price = value
         End Set
     End Property
 
-    Private _balance As Integer
-    Public Property Balance() As Integer
+    Private _balance As Double
+    Public Property Balance() As Double
         Get
             Return _balance
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _balance = value
         End Set
     End Property

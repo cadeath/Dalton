@@ -97,7 +97,7 @@
             If Item Is Nothing Then MsgBox("No Item Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
             If Customer Is Nothing Then MsgBox("No Customer Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
 
-            Dim tmpPercent As Integer = CInt(lblCost.Text) * 0.2
+            Dim tmpPercent As Double = Val(lblCost.Text) * 0.2
             If txtAmount.Text = "" Then
 
                 MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
@@ -182,7 +182,7 @@
                 .PaymentDate = CurrentDate
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = txtAmount.Text
-                If lblPenalty.Text <> "" Then .Penalty = CInt(Val(lblPenalty.Text))
+                If lblPenalty.Text <> "" Then .Penalty = CDbl(Val(lblPenalty.Text))
                 .PaymentEncoder = UserID
                 .SaveLayAwayLines()
             End With
@@ -226,8 +226,8 @@
                 .ForfeitDate = CurrentDate.AddDays(119).ToShortDateString
                 .CustomerID = Customer.ID
                 .ItemCode = txtItemCode.Text
-                .Price = lblCost.Text
-                .Balance = lblBalance.Text
+                .Price = CDbl(lblCost.Text)
+                .Balance = CDbl(lblBalance.Text)
                 .Status = 1
                 .Encoder = UserID
                 .SaveLayAway()
@@ -237,7 +237,7 @@
                 .LayID = lay.LayLastID
                 .PaymentDate = CurrentDate
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
-                .Amount = txtAmount.Text
+                .Amount = CDbl(txtAmount.Text)
                 .PaymentEncoder = UserID
                 .SaveLayAwayLines()
             End With

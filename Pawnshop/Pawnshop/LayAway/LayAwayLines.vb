@@ -23,12 +23,12 @@
         End Set
     End Property
 
-    Private _amount As Integer
-    Public Property Amount() As Integer
+    Private _amount As Double
+    Public Property Amount() As Double
         Get
             Return _amount
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _amount = value
         End Set
     End Property
@@ -53,12 +53,12 @@
         End Set
     End Property
 
-    Private _penalty As Integer
-    Public Property Penalty() As Integer
+    Private _penalty As Double
+    Public Property Penalty() As Double
         Get
             Return _penalty
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Double)
             _penalty = value
         End Set
     End Property
