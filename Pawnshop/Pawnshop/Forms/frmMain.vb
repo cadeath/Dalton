@@ -64,6 +64,7 @@
         VoidReportToolStripMenuItem.Enabled = Not st
         SalesReportToolStripMenuItem.Enabled = Not st
         InventoryReportToolStripMenuItem.Enabled = Not st
+        StockoutReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -539,5 +540,10 @@
 
     Private Sub ItemMasterDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemMasterDataToolStripMenuItem.Click
         frmImport_IMD.Show()
+    End Sub
+
+    Private Sub StockoutReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockoutReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockOut
+        frmSalesReport.Show()
     End Sub
 End Class

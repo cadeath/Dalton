@@ -554,7 +554,7 @@ Public Class frmPawningItemNew
             'REMANTIC NO ADVANCE INTEREST
             If PT_Entry.AdvanceInterest = 0 Then
                 isDPJ = False
-                isOldItem = Not isDPJ
+                'isOldItem = Not isDPJ
             End If
         End If
 
@@ -575,6 +575,7 @@ Public Class frmPawningItemNew
         txtAdv.Text = MoneyFormat(AdvanceInterest)
         txtNet.Text = MoneyFormat(NetAmount)
         isEarlyRedeem = AutoCompute.isEarlyRedeem
+        isOldItem = Not isDPJ
 
         If transactionType = "R" Or transactionType = "X" Then
             GenerateORNum()
@@ -1170,6 +1171,12 @@ Public Class frmPawningItemNew
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
 
+        Dim total As Double
+        total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
+        total = total * GetInt(30)
+        total = total / PT_Entry.NetAmount
+        addParameters.Add("txtRateInPercent", total)
+
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
         Else
@@ -1252,6 +1259,12 @@ Public Class frmPawningItemNew
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtOLDPT", "PT# " & PT_Entry.OldTicket.ToString("000000"))
         addParameters.Add("txtUsername", POSuser.FullName)
+
+        Dim total As Double
+        total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
+        total = total * GetInt(30)
+        total = total / PT_Entry.NetAmount
+        addParameters.Add("txtRateInPercent", total)
 
         ' Add Monthly Computation
         Dim strCompute As String
@@ -1555,5 +1568,9 @@ Public Class frmPawningItemNew
             Case "X"
                 lblTransaction.Text = "Redeem"
         End Select
+    End Sub
+
+    Private Sub txtAppr_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppr.Leave
+        ReComputeInterest()
     End Sub
 End Class
