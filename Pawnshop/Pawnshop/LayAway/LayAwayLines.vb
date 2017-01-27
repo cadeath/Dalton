@@ -157,7 +157,7 @@
             .LoadByID(_layID)
             .UpdateBalance(layAway.Balance + AddAmt)
         End With
-
+        RemoveJournal(_layLinesID, ds.Tables(0).Rows(0).Item("ItemCode"), "LAYAWAY")
     End Sub
 
     Friend Function LayLinesLastID()

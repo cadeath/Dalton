@@ -210,6 +210,7 @@
             Dim ds As DataSet = LoadSQL(mysql, fillData)
             ds.Tables(0).Rows(0).Item("Status") = 0
             SaveEntry(ds, False)
+            Dim ItemCode As String = ds.Tables(0).Rows(0).Item("ItemCode")
 
             mysql = "Select * From tblLayLines Where LayID = " & ID
             fillData = "tblLayLines"
@@ -220,7 +221,7 @@
                 For Each dr In ds.Tables(0).Rows()
                     dr.Item("Status") = 0
                     SaveEntry(ds, False)
-                    RemoveJournal(dr.Item("LinesID"), , "LAYAWAY")
+                    RemoveJournal(dr.Item("LinesID"), ItemCode, "LAYAWAY")
                 Next
 
             End If

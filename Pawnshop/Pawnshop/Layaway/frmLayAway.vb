@@ -183,6 +183,7 @@
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = txtAmount.Text
                 If lblPenalty.Text <> "" Then .Penalty = CInt(Val(lblPenalty.Text))
+                .PaymentEncoder = UserID
                 .SaveLayAwayLines()
             End With
 
@@ -228,6 +229,7 @@
                 .Price = lblCost.Text
                 .Balance = lblBalance.Text
                 .Status = 1
+                .Encoder = UserID
                 .SaveLayAway()
             End With
 
@@ -236,6 +238,7 @@
                 .PaymentDate = CurrentDate
                 .ControlNumber = String.Format("{1}#{0:000000}", InvoiceNum, "CI")
                 .Amount = txtAmount.Text
+                .PaymentEncoder = UserID
                 .SaveLayAwayLines()
             End With
 

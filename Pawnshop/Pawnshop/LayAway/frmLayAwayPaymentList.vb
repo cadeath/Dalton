@@ -60,7 +60,6 @@
         End If
 
         laylines.VoidLayPayment()
-        RemoveJournal(idx, , "LAYAWAY")
         MsgBox("Transaction Voided", MsgBoxStyle.Information)
         Me.Close()
     End Sub
