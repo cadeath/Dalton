@@ -24,6 +24,7 @@ Partial Class frmSalesReport
     Private Sub InitializeComponent()
         Me.monCal = New System.Windows.Forms.MonthCalendar()
         Me.btnGenerate = New System.Windows.Forms.Button()
+        Me.cboReportType = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'monCal
@@ -35,18 +36,29 @@ Partial Class frmSalesReport
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(73, 179)
+        Me.btnGenerate.Location = New System.Drawing.Point(70, 200)
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(88, 49)
         Me.btnGenerate.TabIndex = 8
         Me.btnGenerate.Text = "&Generate"
         Me.btnGenerate.UseVisualStyleBackColor = True
         '
+        'cboReportType
+        '
+        Me.cboReportType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboReportType.FormattingEnabled = True
+        Me.cboReportType.Items.AddRange(New Object() {"Sales Report", "StockOut Report", "LayAway Report"})
+        Me.cboReportType.Location = New System.Drawing.Point(5, 173)
+        Me.cboReportType.Name = "cboReportType"
+        Me.cboReportType.Size = New System.Drawing.Size(227, 21)
+        Me.cboReportType.TabIndex = 9
+        '
         'frmSalesReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(238, 234)
+        Me.ClientSize = New System.Drawing.Size(238, 254)
+        Me.Controls.Add(Me.cboReportType)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
         Me.Name = "frmSalesReport"
@@ -55,4 +67,5 @@ Partial Class frmSalesReport
     End Sub
     Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
     Friend WithEvents btnGenerate As System.Windows.Forms.Button
+    Friend WithEvents cboReportType As System.Windows.Forms.ComboBox
 End Class
