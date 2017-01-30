@@ -299,7 +299,6 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.FormType = diagGeneralOTP.OTPType.UserManagement
             diagGeneralOTP.ShowDialog()
             If Not diagGeneralOTP.isCorrect Then
                 Exit Sub

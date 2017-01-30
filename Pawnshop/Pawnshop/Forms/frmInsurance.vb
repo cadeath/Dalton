@@ -248,9 +248,23 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidInsurance
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidInsurance()
+        'End If
+
+        OTPVoidInsurance_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidInsurance
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isCorrect Then
+                Exit Sub
+            Else
+                VoidInsurance()
+            End If
         Else
             VoidInsurance()
         End If
