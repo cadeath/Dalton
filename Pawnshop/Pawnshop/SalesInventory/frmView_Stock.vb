@@ -9,7 +9,7 @@ Public Class frmView_Stock
     Friend Sub Load_ItemCode(ByVal IMD As String)
         Dim mySql As String, ds As DataSet, strDt As Date
         Dim isSame As Boolean = False, qty As Double = 0
-        mySql = String.Format("SELECT * FROM STOCK_CARD WHERE ITEMCODE = '{0}'", IMD)
+        mySql = String.Format("SELECT * FROM STOCK_CARD WHERE ITEMCODE = '{0}' ORDER BY DOCDATE ASC ", IMD)
 
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub

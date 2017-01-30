@@ -78,8 +78,8 @@
         Dim quickLoader As Integer = 0
         Dim mySql As String
         Dim ds As DataSet
-
         lvItem.Items.Clear()
+
         queued_IMD.Clear()
 
         If isRedeem Then
