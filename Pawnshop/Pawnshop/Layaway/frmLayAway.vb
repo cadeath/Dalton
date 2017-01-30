@@ -14,6 +14,10 @@
         Try
 
             If Not isValid() Then Exit Sub
+
+            Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Posting")
+            If ans = Windows.Forms.DialogResult.No Then Exit Sub
+
             LayAwaySave()
 
             MsgBox("Item Posted", MsgBoxStyle.Information, "LayAway")
