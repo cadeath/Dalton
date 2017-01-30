@@ -189,6 +189,8 @@
         lv.SubItems.Add(itm.UnitofMeasure)
         lv.SubItems.Add(IIf(isRedeem, 1, itm.onHand))
         lv.SubItems.Add(ToCurrency(itm.SalePrice))
+
+        If itm.OnLayAway Then lv.BackColor = Color.Yellow
     End Sub
 
     Private Sub ClearField()
