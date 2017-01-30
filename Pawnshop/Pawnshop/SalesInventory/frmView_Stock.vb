@@ -33,6 +33,7 @@ Public Class frmView_Stock
             lv.SubItems.Add(StockCard("Description"))
             qty = StockCard("Qty")
             lv.SubItems.Add(qty.ToString("#,##0.00"))
+            lv.SubItems.Add(StockCard("DocType"))
 
         End While
 
