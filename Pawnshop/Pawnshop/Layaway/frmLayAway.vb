@@ -153,15 +153,15 @@
             Item.Load_Item(ItmDs.Tables(0).Rows(0).Item("ITEMID"))
 
             txtDescription.Text = .Item("Description")
-            lblCost.Text = .Item("Price")
+            lblCost.Text = Math.Round(.Item("Price"), 2, MidpointRounding.AwayFromZero)
             lblLayAwayDate.Text = .Item("DocDate").ToShortDateString
             lblForfeitDate.Text = .Item("ForfeitDate").ToShortDateString
 
             Dim PenaltyDate As Date = .Item("DocDate").AddDays(89).ToShortDateString
             If CurrentDate >= PenaltyDate Then
-                tmpBalance = .Item("Balance") + (.Item("Balance") * 0.02)
+                tmpBalance = Math.Round(.Item("Balance") + (.Item("Balance") * 0.02), 2, MidpointRounding.AwayFromZero)
                 lblBalance.Text = tmpBalance
-                lblPenalty.Text = .Item("Balance") * 0.02
+                lblPenalty.Text = Math.Round(.Item("Balance") * 0.02, 2, MidpointRounding.AwayFromZero)
             Else
                 tmpBalance = .Item("Balance")
                 lblBalance.Text = tmpBalance

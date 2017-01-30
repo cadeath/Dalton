@@ -326,7 +326,7 @@ Public Class frmSales
         CheckOR()
         If Not canTransact Then Exit Sub
 
-        If lvSale.Items.Count = 0 Then Exit Sub
+        If lvSale.Items.Count = 0 Then MsgBox("Nothing to be Post!", MsgBoxStyle.Critical, "Error") : Exit Sub
 
         Dim mySql As String, fillData As String
         Dim getLastID As Integer = 0
