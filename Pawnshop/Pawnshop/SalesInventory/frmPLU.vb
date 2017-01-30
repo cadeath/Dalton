@@ -103,7 +103,11 @@
         ElseIf isLayAway Then
 
             mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 "
-            If src <> "" Then mySql &= "AND (Upper(ItemCode) = Upper('" & src & "') OR UPPER(DESCRIPTION) LIKE UPPER('%" & src & "%')) "
+            If src <> "" Then
+                mySql = "Select * From ItemMaster Where isLayAway <> 0 "
+                mySql &= "AND (Upper(ItemCode) LIKE Upper('%" & src & "%') OR UPPER(DESCRIPTION) LIKE UPPER('%" & src & "%')) "
+            End If
+
             ds = LoadSQL("Select Count(*) From ItemMaster Where isLayAway <> 0 ")
         Else
             mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 AND OnLayAway <> 1 ORDER BY ITEMCODE ASC"
