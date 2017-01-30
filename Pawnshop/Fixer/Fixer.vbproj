@@ -104,6 +104,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Add INS Count\frmAddItemMasterCOI.Designer.vb">
+      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add INS Count\frmAddItemMasterCOI.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CashInBank\update_cashinbank.vb" />
     <Compile Include="database.vb" />
     <Compile Include="CashInBank\frmMain2.Designer.vb">
@@ -140,12 +146,6 @@
       <DependentUpon>frmFixView.vb</DependentUpon>
     </Compile>
     <Compile Include="FixPawnlistView\frmFixView.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FixStockCard\frmStockCard.Designer.vb">
-      <DependentUpon>frmStockCard.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FixStockCard\frmStockCard.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Fix_ORrenewedItem.vb" />
@@ -222,6 +222,9 @@
     <Compile Include="Worksheet.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Add INS Count\frmAddItemMasterCOI.resx">
+      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FixDailyTimeModname\frmFixModname.resx">
       <DependentUpon>frmFixModname.vb</DependentUpon>
     </EmbeddedResource>
@@ -236,9 +239,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FixPawnlistView\frmFixView.resx">
       <DependentUpon>frmFixView.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FixStockCard\frmStockCard.resx">
-      <DependentUpon>frmStockCard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
