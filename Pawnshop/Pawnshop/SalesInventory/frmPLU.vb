@@ -232,28 +232,19 @@
         End If
         Dim hasSelected As Boolean = False
 
-        If selected_Itm.SalePrice = 0 Or isRedeem Then
+        If selected_Itm.OnLayAway = False Then
 
-            For Each AddedItems As ListViewItem In frmSales.lvSale.Items
+            If selected_Itm.SalePrice = 0 Or isRedeem Then
 
-                If AddedItems.Text = selected_Itm.ItemCode Then
-                    hasSelected = True
-                    Exit For
-                End If
-            Next
+                For Each AddedItems As ListViewItem In frmSales.lvSale.Items
 
-            If hasSelected = False Then
-                Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
-                While Not IsNumeric(tmp)
-                    tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
-                    If tmp = "" Then Exit Sub
-                End While
+                    If AddedItems.Text = selected_Itm.ItemCode Then
+                        hasSelected = True
+                        Exit For
+                    End If
+                Next
 
-                Dim customPrice As Double = CDbl(tmp)
-                selected_Itm.SalePrice = customPrice
-                LayAmount = customPrice
-            Else
-                If isRedeem Then
+                If hasSelected = False Then
                     Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                     While Not IsNumeric(tmp)
                         tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
@@ -262,38 +253,48 @@
 
                     Dim customPrice As Double = CDbl(tmp)
                     selected_Itm.SalePrice = customPrice
+                    LayAmount = customPrice
                 Else
-                    selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                    If isRedeem Then
+                        Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                        While Not IsNumeric(tmp)
+                            tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                            If tmp = "" Then Exit Sub
+                        End While
+
+                        Dim customPrice As Double = CDbl(tmp)
+                        selected_Itm.SalePrice = customPrice
+                    Else
+                        selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                    End If
                 End If
             End If
-        End If
 
-        Dim UnitPrice As Double = 0
-        If fromInventory Then
-            UnitPrice = InputBox("Price: ", "Custom Unit Price", selected_Itm.UnitPrice)
-        End If
+            Dim UnitPrice As Double = 0
+            If fromInventory Then
+                UnitPrice = InputBox("Price: ", "Custom Unit Price", selected_Itm.UnitPrice)
+            End If
 
-        If isLayAway = True Then
-            frmLayAway.Show()
-            If selected_Itm.OnLayAway = True Then
-                frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
-                frmLayAway.txtAmount.Text = LayAmount
-            Else
+            If isLayAway = True Then
+                frmLayAway.Show()
                 frmLayAway.LoadItemEncode(selected_Itm)
                 frmLayAway.isNewLayAway = True
+            Else
+                If fromSales Then
+                    If isRedeem Then qtyItm = 1
+                    selected_Itm.Quantity = qtyItm
+
+                    If isRedeem = True Then
+                        frmSales.AddItem(selected_Itm, True)
+                    Else
+                        frmSales.AddItem(selected_Itm)
+                    End If
+                    frmSales.ClearSearch()
+                End If
             End If
         Else
-            If fromSales Then
-                If isRedeem Then qtyItm = 1
-                selected_Itm.Quantity = qtyItm
-
-                If isRedeem = True Then
-                    frmSales.AddItem(selected_Itm, True)
-                Else
-                    frmSales.AddItem(selected_Itm)
-                End If
-                frmSales.ClearSearch()
-            End If
+            frmLayAway.Show()
+            frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
         End If
         Me.Close()
     End Sub

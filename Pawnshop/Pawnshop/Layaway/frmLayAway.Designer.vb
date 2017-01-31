@@ -72,7 +72,7 @@ Partial Class frmLayAway
         Me.btnSearch.Location = New System.Drawing.Point(363, 19)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(68, 23)
-        Me.btnSearch.TabIndex = 5
+        Me.btnSearch.TabIndex = 1
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
@@ -94,7 +94,7 @@ Partial Class frmLayAway
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.Size = New System.Drawing.Size(309, 118)
-        Me.txtAddress.TabIndex = 12
+        Me.txtAddress.TabIndex = 4
         Me.txtAddress.Text = "153 Acacia St. Balite Lagao, General Santos City"
         '
         'Label1
@@ -113,7 +113,7 @@ Partial Class frmLayAway
         Me.txtCustomer.Location = New System.Drawing.Point(120, 19)
         Me.txtCustomer.Name = "txtCustomer"
         Me.txtCustomer.Size = New System.Drawing.Size(237, 22)
-        Me.txtCustomer.TabIndex = 3
+        Me.txtCustomer.TabIndex = 0
         Me.txtCustomer.Text = "Eskie Cirrus James Maquilang"
         '
         'GroupBox2
@@ -138,7 +138,7 @@ Partial Class frmLayAway
         Me.GroupBox2.MinimumSize = New System.Drawing.Size(414, 277)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(414, 277)
-        Me.GroupBox2.TabIndex = 3
+        Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Item Information"
         '
@@ -167,7 +167,7 @@ Partial Class frmLayAway
         Me.btnOK.Location = New System.Drawing.Point(341, 243)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(64, 25)
-        Me.btnOK.TabIndex = 4
+        Me.btnOK.TabIndex = 1
         Me.btnOK.Text = "&OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
@@ -189,7 +189,7 @@ Partial Class frmLayAway
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.ReadOnly = True
         Me.txtDescription.Size = New System.Drawing.Size(325, 51)
-        Me.txtDescription.TabIndex = 14
+        Me.txtDescription.TabIndex = 2
         Me.txtDescription.Text = "Cellphone No Case, Screen"
         '
         'txtItemCode
@@ -199,7 +199,7 @@ Partial Class frmLayAway
         Me.txtItemCode.Name = "txtItemCode"
         Me.txtItemCode.ReadOnly = True
         Me.txtItemCode.Size = New System.Drawing.Size(325, 22)
-        Me.txtItemCode.TabIndex = 14
+        Me.txtItemCode.TabIndex = 3
         Me.txtItemCode.Text = "ITM0001"
         '
         'Label4
@@ -218,7 +218,7 @@ Partial Class frmLayAway
         Me.txtAmount.Location = New System.Drawing.Point(84, 243)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(251, 22)
-        Me.txtAmount.TabIndex = 4
+        Me.txtAmount.TabIndex = 0
         Me.txtAmount.Text = "1000000"
         '
         'Label8

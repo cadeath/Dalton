@@ -23,7 +23,7 @@
             MsgBox("Item Posted", MsgBoxStyle.Information, "LayAway")
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-        End Try
+             End Try
         Me.Close()
     End Sub
 
@@ -115,6 +115,8 @@
                 MsgBox("Please Paid at least " & tmpPercent, MsgBoxStyle.Information, "Not Valid!")
                 Return False
             End If
+
+            If txtAmount.Text >= Val(lblCost.Text) Then Return False
 
         Else
 

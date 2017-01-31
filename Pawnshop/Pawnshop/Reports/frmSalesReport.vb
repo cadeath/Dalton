@@ -207,13 +207,18 @@
     End Sub
 
     Private Sub LayAwayReport()
-        Dim mysql As String = "SELECT LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, "
+        Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
         mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
-        mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LY.BALANCE "
-        mysql &= "FROM TBLLAYAWAY LY "
-        mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
-        mysql &= "WHERE STATUS <> 0 AND DOCDATE = '" & monCal.SelectionStart.ToShortDateString & "'"
+        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, USR.FULLNAME AS ENCODER, "
+        mysql &= "LY.PAYMENTDATE, LY.CONTROLNUM, LY.AMOUNT, LY.PENALTY, LY.STATUS AS LYSTATUS, "
+        mysql &= "USR2.FULLNAME AS PAYMENTENCODER "
+        mysql &= "FROM TBLLAYAWAY L "
+        mysql &= "INNER JOIN TBLLAYLINES LY ON LY.LAYID = L.LAYID "
+        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
+        mysql &= "INNER JOIN TBL_GAMIT USR ON USR.USERID = L.ENCODER "
+        mysql &= "INNER JOIN TBL_GAMIT USR2 ON USR2.USERID = LY.PAYMENTENCODER "
+        mysql &= "WHERE L.STATUS = 1 AND LY.STATUS = 1 AND PAYMENTDATE = '" & monCal.SelectionStart.ToShortDateString & "'"
 
         Dim dic As New Dictionary(Of String, String)
         dic.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
@@ -226,13 +231,18 @@
     Private Sub LayAwayMonthlyReport()
         Dim st As Date = GetFirstDate(monCal.SelectionStart)
         Dim en As Date = GetLastDate(monCal.SelectionEnd)
-        Dim mysql As String = "SELECT LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, "
+        Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
         mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
-        mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, LY.BALANCE "
-        mysql &= "FROM TBLLAYAWAY LY "
-        mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
-        mysql &= "WHERE STATUS <> 0 AND DOCDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "'"
+        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, USR.FULLNAME AS ENCODER, "
+        mysql &= "LY.PAYMENTDATE, LY.CONTROLNUM, LY.AMOUNT, LY.PENALTY, LY.STATUS AS LYSTATUS, "
+        mysql &= "USR2.FULLNAME AS PAYMENTENCODER "
+        mysql &= "FROM TBLLAYAWAY L "
+        mysql &= "INNER JOIN TBLLAYLINES LY ON LY.LAYID = L.LAYID "
+        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
+        mysql &= "INNER JOIN TBL_GAMIT USR ON USR.USERID = L.ENCODER "
+        mysql &= "INNER JOIN TBL_GAMIT USR2 ON USR2.USERID = LY.PAYMENTENCODER "
+        mysql &= "WHERE L.STATUS = 1 AND LY.STATUS = 1 AND PAYMENTDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "'"
 
         Dim dic As New Dictionary(Of String, String)
         dic.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
