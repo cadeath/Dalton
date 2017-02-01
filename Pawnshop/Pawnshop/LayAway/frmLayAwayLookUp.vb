@@ -20,7 +20,7 @@
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
             mysql &= "WHERE LY.STATUS <> '0' "
-            mysql &= "AND  LY.ITEMCODE = '" & Search & "' OR"
+            mysql &= "AND  UPPER(LY.ITEMCODE) LIKE UPPER('%" & Search & "%') OR"
 
             For Each Name In strWords
 
@@ -66,15 +66,19 @@
             lv.SubItems.Add(.Item("PRICE"))
             lv.SubItems.Add(.Item("BALANCE"))
             lv.Tag = .Item("ITEMCODE")
+
+            If .Item("BALANCE") = 0 Then lv.BackColor = Color.Red
         End With
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
         If lvLayAway.SelectedItems.Count = 0 Then Exit Sub
+        If lvLayAway.FocusedItem.SubItems(6).Text = 0 Then Exit Sub
+
         Dim itmCode As String = lvLayAway.FocusedItem.Tag
-        frmLayAway.Show()
-        frmLayAway.LoadExistInfo(itmCode)
-        Me.Close()
+            frmLayAway.Show()
+            frmLayAway.LoadExistInfo(itmCode)
+            Me.Close()
     End Sub
 
     Private Sub lvLayAway_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvLayAway.DoubleClick
