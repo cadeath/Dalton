@@ -13,7 +13,7 @@
         Dim mysql As String, Name As String
         Dim strWords As String() = Search.Split(New Char() {" "c})
         If Search <> "" Then
-            mysql = "Select LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+            mysql = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
             mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
@@ -32,13 +32,13 @@
 
             Next
         Else
-            mysql = "Select First 50 LY.LAYID, LY.DOCDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+            mysql = "Select First 50 LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
             mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-            mysql &= "WHERE LY.STATUS <> '0'"
+            mysql &= "WHERE LY.STATUS <> '0' AND LY.BALANCE <> 0 "
         End If
         Dim ds As DataSet = LoadSQL(mysql)
         lvLayAway.Items.Clear()
@@ -58,22 +58,22 @@
 
     Private Sub AddlvItems(ByVal dr As DataRow)
         With dr
-            Dim lv As ListViewItem = lvLayAway.Items.Add(.Item("DocDate"))
-
+            Dim lv As ListViewItem = lvLayAway.Items.Add(.Item("DOCDATE"))
+            lv.SubItems.Add(.Item("FORFEITDATE"))
             lv.SubItems.Add(.Item("FULLNAME"))
             lv.SubItems.Add(.Item("ITEMCODE"))
             lv.SubItems.Add(.Item("DESCRIPTION"))
             lv.SubItems.Add(.Item("PRICE"))
             lv.SubItems.Add(.Item("BALANCE"))
-            lv.Tag = .Item("LAYID")
+            lv.Tag = .Item("ITEMCODE")
         End With
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
         If lvLayAway.SelectedItems.Count = 0 Then Exit Sub
-        Dim idx As Integer = lvLayAway.FocusedItem.Tag
+        Dim itmCode As String = lvLayAway.FocusedItem.Tag
         frmLayAway.Show()
-        frmLayAway.LoadExistInfo(idx)
+        frmLayAway.LoadExistInfo(itmCode)
         Me.Close()
     End Sub
 

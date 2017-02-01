@@ -22,7 +22,7 @@ Partial Class frmLayAwayLookUp
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"01/02/2017", "Robin Padodot", "ITM0001", "Cellphone / no screen", "15000", "10000"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"01/02/2017", "5/02/2017", "Robin Padodot", "ITM 00001", "Cell With No Color", "10000", "4500"}, -1)
         Me.lvLayAway = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -37,6 +37,7 @@ Partial Class frmLayAwayLookUp
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnImport = New System.Windows.Forms.Button()
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'lvLayAway
@@ -44,7 +45,7 @@ Partial Class frmLayAwayLookUp
         Me.lvLayAway.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvLayAway.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvLayAway.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
         Me.lvLayAway.FullRowSelect = True
         Me.lvLayAway.GridLines = True
         Me.lvLayAway.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
@@ -58,32 +59,32 @@ Partial Class frmLayAwayLookUp
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Date"
-        Me.ColumnHeader1.Width = 78
+        Me.ColumnHeader1.Width = 72
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Customer's Name"
-        Me.ColumnHeader2.Width = 150
+        Me.ColumnHeader2.Text = "Forfeit Date"
+        Me.ColumnHeader2.Width = 84
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "ItemCode"
-        Me.ColumnHeader3.Width = 80
+        Me.ColumnHeader3.Text = "Customer's Name"
+        Me.ColumnHeader3.Width = 148
         '
         'ColumnHeader4
         '
-        Me.ColumnHeader4.Text = "Description"
-        Me.ColumnHeader4.Width = 280
+        Me.ColumnHeader4.Text = "ItemCode"
+        Me.ColumnHeader4.Width = 81
         '
         'ColumnHeader5
         '
-        Me.ColumnHeader5.Text = "Price"
-        Me.ColumnHeader5.Width = 120
+        Me.ColumnHeader5.Text = "Description"
+        Me.ColumnHeader5.Width = 209
         '
         'ColumnHeader6
         '
-        Me.ColumnHeader6.Text = "Balance"
-        Me.ColumnHeader6.Width = 120
+        Me.ColumnHeader6.Text = "Price"
+        Me.ColumnHeader6.Width = 96
         '
         'btnSelect
         '
@@ -148,6 +149,11 @@ Partial Class frmLayAwayLookUp
         Me.btnImport.Text = "&Import"
         Me.btnImport.UseVisualStyleBackColor = True
         '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Balance"
+        Me.ColumnHeader7.Width = 90
+        '
         'frmLayAwayLookUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -184,4 +190,5 @@ Partial Class frmLayAwayLookUp
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnVoid As System.Windows.Forms.Button
     Friend WithEvents btnImport As System.Windows.Forms.Button
+    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
 End Class
