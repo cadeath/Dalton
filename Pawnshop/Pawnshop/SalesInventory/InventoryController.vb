@@ -83,7 +83,7 @@ Module InventoryController
         ' Excel Headers
         Dim headers1() As String = {"DocEntry", "DocDate", "JournalMemo", "FromWarehouse"}
         Dim headers11() As String = {"DocEntry", "DocDate", "JrnlMemo", "Filler"}
-        Dim headers2() As String = {"ParentKey", "LineNum", "ItemCode", "ItemDescription", "Quantity", "Warehouse"}
+        Dim headers2() As String = {"ParentKey", "LineNum", "ItemCode", "ItemDescription", "Quantity", "WarehouseCode"}
         Dim headers22() As String = {"DocNum", "LineNum", "ItemCode", "Dscription", "Quantity", "WhsCode"}
 
         Dim mySql As String, ds As DataSet
@@ -145,7 +145,7 @@ Module InventoryController
         Dim row As Integer = 3
         For Each dr As DataRow In ds.Tables(0).Rows
             oSheet.Cells(row, 1).value = 1
-            oSheet.Cells(row, 2).value = row - 2
+            oSheet.Cells(row, 2).value = row - 3
             oSheet.Cells(row, 3).value = dr("ItemCode")
             oSheet.Cells(row, 4).value = dr("Description")
             oSheet.Cells(row, 5).value = dr("QTY")
