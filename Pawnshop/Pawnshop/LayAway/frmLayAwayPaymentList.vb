@@ -33,6 +33,7 @@
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If lvPayment.SelectedItems.Count = 0 Then Exit Sub
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.VoidLayPayment
             If Not CheckOTP() Then Exit Sub
@@ -43,7 +44,6 @@
     End Sub
 
     Friend Sub VoidLayPayments()
-        If lvPayment.SelectedItems.Count = 0 Then Exit Sub
         If POSuser.canVoid Then
 
         End If

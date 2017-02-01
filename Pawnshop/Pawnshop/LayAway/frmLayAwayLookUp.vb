@@ -86,7 +86,7 @@
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
-
+        If lvLayAway.SelectedItems.Count = 0 Then Exit Sub
         If Not OTPDisable Then
             diagOTP.FormType = diagOTP.OTPType.VoidLayAway
             If Not CheckOTP() Then Exit Sub
@@ -98,7 +98,6 @@
     End Sub
 
     Friend Sub VoidLayAway()
-        If lvLayAway.SelectedItems.Count = 0 Then Exit Sub
         Dim idx As Integer = lvLayAway.FocusedItem.Tag
 
         Dim layAwy As New LayAway
