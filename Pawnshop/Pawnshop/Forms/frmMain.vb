@@ -107,6 +107,8 @@
 
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
+
+        GhoulConnect()
     End Sub
 
     Friend Sub CheckStoreStatus()
