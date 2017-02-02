@@ -1,5 +1,5 @@
 CHANGELOG
-Version 1.4.1.11
+Version 1.4.1.13
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
  - Added Journal in Insurance Close Store
@@ -24,6 +24,7 @@ Version 1.4.1.11
  - Fix Import STO Error
  - Fix Import IMD duplication
  - Fix Journal Sales Return
+ - Fix Export STO Headers and LineNum
 
 
 Version 1.3.1.1
