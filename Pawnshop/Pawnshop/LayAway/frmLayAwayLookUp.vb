@@ -66,6 +66,7 @@
             lv.SubItems.Add(.Item("PRICE"))
             lv.SubItems.Add(.Item("BALANCE"))
             lv.Tag = .Item("ITEMCODE")
+            lv.Text = .Item("LayID")
 
             If .Item("BALANCE") = 0 Then lv.BackColor = Color.Red
         End With
@@ -98,7 +99,7 @@
     End Sub
 
     Friend Sub VoidLayAway()
-        Dim idx As Integer = lvLayAway.FocusedItem.Tag
+        Dim idx As Integer = lvLayAway.FocusedItem.Text
 
         Dim layAwy As New LayAway
         layAwy.LoadByID(idx)
