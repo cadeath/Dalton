@@ -30,6 +30,7 @@
 
     Private Sub frmLayAwayPaymentList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lvPayment.Items.Clear()
+        lblDesc.Text = ""
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click

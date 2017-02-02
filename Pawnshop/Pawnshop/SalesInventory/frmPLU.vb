@@ -335,6 +335,8 @@
         idx = lvItem.FocusedItem.Index
         Console.WriteLine(lvItem.Items(idx).Text)
         If isLayAway = True Then
+            If lvItem.SelectedItems.Count = 0 Then Exit Sub
+
             frmLayAwayPaymentList.Show()
             frmLayAwayPaymentList.LoadListPayment(lvItem.Items(idx).Text)
         Else
