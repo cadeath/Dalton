@@ -134,7 +134,7 @@ Module Ghoul
         If str.Contains(":") Then
             Select Case str.Split(":")(0).Substring(1)
                 Case "CC" '>CC:1/1/2016
-                    If CurrentCmd = str Then Return "REJECT"
+                    If CurrentCmd = str Then Return "CLOSE"
                     CurrentCmd = str
 
                     Dim answer As String
