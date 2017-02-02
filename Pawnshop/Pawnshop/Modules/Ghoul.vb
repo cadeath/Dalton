@@ -112,6 +112,10 @@ Module Ghoul
                 End Select
 
             Catch ex As Exception
+                If ex.ToString.Contains(DISPOSED_ISSUE) Then
+                    Die()
+                    Exit Sub
+                End If
                 ClientLog(ex.ToString)
             End Try
 
