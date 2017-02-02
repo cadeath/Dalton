@@ -41,6 +41,8 @@ Module Ghoul
                 ClientLog("No object, no dispose")
             Else
                 ClientLog(ex.ToString)
+                Die()
+                Exit Sub
             End If
             Die()
 
