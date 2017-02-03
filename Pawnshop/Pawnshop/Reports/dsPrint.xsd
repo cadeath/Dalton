@@ -140,6 +140,7 @@
               <xs:element name="Penalty" msprop:Generator_ColumnVarNameInTable="columnPenalty" msprop:Generator_ColumnPropNameInRow="Penalty" msprop:Generator_ColumnPropNameInTable="PenaltyColumn" msprop:Generator_UserColumnName="Penalty" type="xs:string" minOccurs="0" />
               <xs:element name="LYStatus" msprop:Generator_ColumnVarNameInTable="columnLYStatus" msprop:Generator_ColumnPropNameInRow="LYStatus" msprop:Generator_ColumnPropNameInTable="LYStatusColumn" msprop:Generator_UserColumnName="LYStatus" type="xs:string" minOccurs="0" />
               <xs:element name="PaymentEncoder" msprop:Generator_ColumnVarNameInTable="columnPaymentEncoder" msprop:Generator_ColumnPropNameInRow="PaymentEncoder" msprop:Generator_ColumnPropNameInTable="PaymentEncoderColumn" msprop:Generator_UserColumnName="PaymentEncoder" type="xs:string" minOccurs="0" />
+              <xs:element name="Balance" msprop:Generator_ColumnVarNameInTable="columnBalance" msprop:Generator_ColumnPropNameInRow="Balance" msprop:Generator_ColumnPropNameInTable="BalanceColumn" msprop:Generator_UserColumnName="Balance" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

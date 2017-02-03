@@ -47,7 +47,7 @@ Partial Class frmSalesReport
         '
         Me.cboReportType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboReportType.FormattingEnabled = True
-        Me.cboReportType.Items.AddRange(New Object() {"Sales Report", "StockOut Report", "LayAway Report"})
+        Me.cboReportType.Items.AddRange(New Object() {"Sales Report", "StockOut Report", "LayAway Report", "Forfeit List"})
         Me.cboReportType.Location = New System.Drawing.Point(5, 173)
         Me.cboReportType.Name = "cboReportType"
         Me.cboReportType.Size = New System.Drawing.Size(227, 21)

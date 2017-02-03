@@ -8,6 +8,8 @@
         SalesMonthly = 4
         StockOutMontly = 5
         LayAwayMontly = 6
+        Forfeit = 7
+        ForfeitMonthly = 8
     End Enum
     Friend FormType As SaleReport = SaleReport.SalesMonthly
 
@@ -22,6 +24,8 @@
                     FormType = SaleReport.StockOutMontly
                 Case "LayAway Report"
                     FormType = SaleReport.LayAwayMontly
+                Case "Forfeit List"
+                    FormType = SaleReport.ForfeitMonthly
             End Select
         End If
        
@@ -40,6 +44,10 @@
                 LayAwayReport()
             Case SaleReport.LayAwayMontly
                 LayAwayMonthlyReport()
+            Case SaleReport.Forfeit
+                ForfeitReport()
+            Case SaleReport.ForfeitMonthly
+                ForfeitMonthly()
         End Select
 
     End Sub
@@ -151,6 +159,8 @@
                 Return True
             Case SaleReport.Inventory
                 Return True
+            Case SaleReport.Forfeit
+                Return True
         End Select
         Return False
     End Function
@@ -172,6 +182,8 @@
                 Me.Text = "StockOut Report"
             Case SaleReport.LayAway, SaleReport.LayAwayMontly
                 Me.Text = "LayAway Report"
+            Case SaleReport.Forfeit, SaleReport.ForfeitMonthly
+                Me.Text = "Forfeit List"
         End Select
     End Sub
 
@@ -251,4 +263,41 @@
         frmReport.ReportInit(mysql, "dsLayAway", "Reports\rpt_layAwayReport.rdlc", dic)
         frmReport.Show()
     End Sub
+
+    Private Sub ForfeitReport()
+        Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
+        mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, L.BALANCE "
+        mysql &= "FROM TBLLAYAWAY L "
+        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
+        mysql &= "WHERE L.STATUS = 0 AND L.FORFEITDATE = '" & monCal.SelectionStart.ToShortDateString & "'"
+
+        Dim dic As New Dictionary(Of String, String)
+        dic.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
+        dic.Add("branchName", branchName)
+
+        frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
+        frmReport.Show()
+    End Sub
+
+    Private Sub ForfeitMonthly()
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionEnd)
+        Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
+        mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, L.BALANCE "
+        mysql &= "FROM TBLLAYAWAY L "
+        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
+        mysql &= "WHERE L.STATUS = 0 AND L.FORFEITDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "'"
+
+        Dim dic As New Dictionary(Of String, String)
+        dic.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
+        dic.Add("branchName", branchName)
+
+        frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
+        frmReport.Show()
+    End Sub
+
 End Class

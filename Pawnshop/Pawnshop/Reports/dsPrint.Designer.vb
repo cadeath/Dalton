@@ -3143,6 +3143,8 @@ Partial Public Class dsPrint
         
         Private columnPaymentEncoder As Global.System.Data.DataColumn
         
+        Private columnBalance As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -3307,6 +3309,14 @@ Partial Public Class dsPrint
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property BalanceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBalance
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3359,9 +3369,10 @@ Partial Public Class dsPrint
                     ByVal Amount As String,  _
                     ByVal Penalty As String,  _
                     ByVal LYStatus As String,  _
-                    ByVal PaymentEncoder As String) As LayAwayRow
+                    ByVal PaymentEncoder As String,  _
+                    ByVal Balance As String) As LayAwayRow
             Dim rowLayAwayRow As LayAwayRow = CType(Me.NewRow,LayAwayRow)
-            Dim columnValuesArray() As Object = New Object() {layID, DocDate, ForfeitDate, ClientID, FullName, ItemCode, Description, Price, Status, Encoder, PaymentDate, ControlNum, Amount, Penalty, LYStatus, PaymentEncoder}
+            Dim columnValuesArray() As Object = New Object() {layID, DocDate, ForfeitDate, ClientID, FullName, ItemCode, Description, Price, Status, Encoder, PaymentDate, ControlNum, Amount, Penalty, LYStatus, PaymentEncoder, Balance}
             rowLayAwayRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowLayAwayRow)
             Return rowLayAwayRow
@@ -3400,6 +3411,7 @@ Partial Public Class dsPrint
             Me.columnPenalty = MyBase.Columns("Penalty")
             Me.columnLYStatus = MyBase.Columns("LYStatus")
             Me.columnPaymentEncoder = MyBase.Columns("PaymentEncoder")
+            Me.columnBalance = MyBase.Columns("Balance")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3437,6 +3449,8 @@ Partial Public Class dsPrint
             MyBase.Columns.Add(Me.columnLYStatus)
             Me.columnPaymentEncoder = New Global.System.Data.DataColumn("PaymentEncoder", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPaymentEncoder)
+            Me.columnBalance = New Global.System.Data.DataColumn("Balance", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBalance)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5744,6 +5758,21 @@ Partial Public Class dsPrint
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Balance() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableLayAway.BalanceColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Balance' in table 'LayAway' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableLayAway.BalanceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IslayIDNull() As Boolean
             Return Me.IsNull(Me.tableLayAway.layIDColumn)
         End Function
@@ -5932,6 +5961,18 @@ Partial Public Class dsPrint
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetPaymentEncoderNull()
             Me(Me.tableLayAway.PaymentEncoderColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsBalanceNull() As Boolean
+            Return Me.IsNull(Me.tableLayAway.BalanceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetBalanceNull()
+            Me(Me.tableLayAway.BalanceColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

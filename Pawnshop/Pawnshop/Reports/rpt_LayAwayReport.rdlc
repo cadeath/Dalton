@@ -76,6 +76,10 @@
           <DataField>PaymentEncoder</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Balance">
+          <DataField>Balance</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>Pawnshop</DataSourceName>
@@ -2134,7 +2138,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Left>0in</Left>
           <Height>0.25in</Height>
           <Width>2.4375in</Width>
           <Style>
@@ -2163,7 +2166,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox19</rd:DefaultName>
           <Top>0.28472in</Top>
-          <Left>0in</Left>
           <Height>0.25in</Height>
           <Width>2.10417in</Width>
           <ZIndex>1</ZIndex>
@@ -2242,7 +2244,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox184</rd:DefaultName>
           <Top>0.04167in</Top>
-          <Left>0in</Left>
           <Height>0.25in</Height>
           <Width>1.875in</Width>
           <Style>
@@ -2276,7 +2277,6 @@
           </Paragraphs>
           <rd:DefaultName>Textbox184</rd:DefaultName>
           <Top>0.29167in</Top>
-          <Left>0in</Left>
           <Height>0.25in</Height>
           <Width>1.875in</Width>
           <ZIndex>1</ZIndex>
