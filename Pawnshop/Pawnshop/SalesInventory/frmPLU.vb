@@ -245,7 +245,8 @@
                 Next
 
                 If hasSelected = False Then
-                    Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                    Dim tmp As String = String.Empty
+                    'InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                     While Not IsNumeric(tmp)
                         tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                         If tmp = "" Then Exit Sub

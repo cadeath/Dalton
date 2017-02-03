@@ -58,7 +58,8 @@
 
     Private Sub AddlvItems(ByVal dr As DataRow)
         With dr
-            Dim lv As ListViewItem = lvLayAway.Items.Add(.Item("DOCDATE"))
+            Dim lv As ListViewItem = lvLayAway.Items.Add(.Item("LayID"))
+            lv.SubItems.Add(.Item("DocDate"))
             lv.SubItems.Add(.Item("FORFEITDATE"))
             lv.SubItems.Add(.Item("FULLNAME"))
             lv.SubItems.Add(.Item("ITEMCODE"))

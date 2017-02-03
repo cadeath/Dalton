@@ -22,7 +22,7 @@ Partial Class frmLayAwayLookUp
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"01/02/2017", "5/02/2017", "Robin Padodot", "ITM 00001", "Cell With No Color", "10000", "4500"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"1", "1/02/2017", "05/02/2017", "Robin Padodot", "ITM 00001", "Cellphone w/out screen", "4500", "500"}, -1)
         Me.lvLayAway = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -30,6 +30,8 @@ Partial Class frmLayAwayLookUp
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSelect = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -37,7 +39,6 @@ Partial Class frmLayAwayLookUp
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnImport = New System.Windows.Forms.Button()
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'lvLayAway
@@ -45,7 +46,7 @@ Partial Class frmLayAwayLookUp
         Me.lvLayAway.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvLayAway.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7})
+        Me.lvLayAway.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8})
         Me.lvLayAway.FullRowSelect = True
         Me.lvLayAway.GridLines = True
         Me.lvLayAway.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
@@ -58,33 +59,43 @@ Partial Class frmLayAwayLookUp
         '
         'ColumnHeader1
         '
-        Me.ColumnHeader1.Text = "Date"
-        Me.ColumnHeader1.Width = 72
+        Me.ColumnHeader1.Text = "#"
+        Me.ColumnHeader1.Width = 0
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Forfeit Date"
+        Me.ColumnHeader2.Text = "Layaway Date"
         Me.ColumnHeader2.Width = 84
         '
         'ColumnHeader3
         '
-        Me.ColumnHeader3.Text = "Customer's Name"
-        Me.ColumnHeader3.Width = 148
+        Me.ColumnHeader3.Text = "Forfeit Date"
+        Me.ColumnHeader3.Width = 79
         '
         'ColumnHeader4
         '
-        Me.ColumnHeader4.Text = "ItemCode"
-        Me.ColumnHeader4.Width = 81
+        Me.ColumnHeader4.Text = "Customer's Name"
+        Me.ColumnHeader4.Width = 176
         '
         'ColumnHeader5
         '
-        Me.ColumnHeader5.Text = "Description"
-        Me.ColumnHeader5.Width = 209
+        Me.ColumnHeader5.Text = "ItemCode"
+        Me.ColumnHeader5.Width = 78
         '
         'ColumnHeader6
         '
-        Me.ColumnHeader6.Text = "Price"
-        Me.ColumnHeader6.Width = 96
+        Me.ColumnHeader6.Text = "Description"
+        Me.ColumnHeader6.Width = 177
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Price"
+        Me.ColumnHeader7.Width = 93
+        '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.Text = "Balance"
+        Me.ColumnHeader8.Width = 86
         '
         'btnSelect
         '
@@ -149,11 +160,6 @@ Partial Class frmLayAwayLookUp
         Me.btnImport.Text = "&Import"
         Me.btnImport.UseVisualStyleBackColor = True
         '
-        'ColumnHeader7
-        '
-        Me.ColumnHeader7.Text = "Balance"
-        Me.ColumnHeader7.Width = 90
-        '
         'frmLayAwayLookUp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -191,4 +197,5 @@ Partial Class frmLayAwayLookUp
     Friend WithEvents btnVoid As System.Windows.Forms.Button
     Friend WithEvents btnImport As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
 End Class
