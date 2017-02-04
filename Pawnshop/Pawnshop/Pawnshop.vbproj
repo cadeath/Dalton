@@ -85,7 +85,7 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Antialiasfactory-Jewelry-Stone-Ring.ico</ApplicationIcon>
+    <ApplicationIcon>Trayse101-Photoshop-Filetypes-Extract.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -381,6 +381,12 @@
     <Compile Include="InterestScheme\IntScheme_Lines.vb" />
     <Compile Include="InterestScheme\Scheme_Interest.vb" />
     <Compile Include="InterestScheme\Scheme_Load.vb" />
+    <Compile Include="MNExtractor\frmMobileNumExtractor.Designer.vb">
+      <DependentUpon>frmMobileNumExtractor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MNExtractor\frmMobileNumExtractor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
@@ -899,6 +905,9 @@
     <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MNExtractor\frmMobileNumExtractor.resx">
+      <DependentUpon>frmMobileNumExtractor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
     </EmbeddedResource>
@@ -1334,6 +1343,7 @@
     <Content Include="Rar.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Trayse101-Photoshop-Filetypes-Extract.ico" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
