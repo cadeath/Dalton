@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Extract
+Partial Class frmExtract2
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,44 +22,45 @@ Partial Class Extract
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Extract))
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
+        Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
+        Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnBrowseData = New System.Windows.Forms.Button()
         Me.btnBrowseSave = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.lbTableName = New System.Windows.Forms.ListBox()
-        Me.txtHeader = New System.Windows.Forms.TextBox()
         Me.txtSavePath = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtQuery = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.btnExtract = New System.Windows.Forms.Button()
-        Me.ofd = New System.Windows.Forms.OpenFileDialog()
-        Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
         Me.pbProgress = New System.Windows.Forms.ProgressBar()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.lbTableName = New System.Windows.Forms.ListBox()
+        Me.txtHeader = New System.Windows.Forms.TextBox()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'fbdBackup
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(6, 26)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(53, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Database"
+        Me.fbdBackup.SelectedPath = "C:\"
+        '
+        'ofd
+        '
+        Me.ofd.Filter = "Data | *.fdb"
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.btnBrowseData)
-        Me.GroupBox1.Controls.Add(Me.btnBrowseSave)
+        Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.lbTableName)
         Me.GroupBox1.Controls.Add(Me.txtHeader)
+        Me.GroupBox1.Controls.Add(Me.btnUpdate)
+        Me.GroupBox1.Controls.Add(Me.btnBrowseData)
+        Me.GroupBox1.Controls.Add(Me.btnBrowseSave)
         Me.GroupBox1.Controls.Add(Me.txtSavePath)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label2)
@@ -68,8 +69,8 @@ Partial Class Extract
         Me.GroupBox1.Controls.Add(Me.txtPath)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(873, 208)
-        Me.GroupBox1.TabIndex = 2
+        Me.GroupBox1.Size = New System.Drawing.Size(642, 257)
+        Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Information"
         '
@@ -90,30 +91,6 @@ Partial Class Extract
         Me.btnBrowseSave.TabIndex = 8
         Me.btnBrowseSave.Text = "..."
         Me.btnBrowseSave.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(398, 19)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(131, 24)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Edit Header"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'lbTableName
-        '
-        Me.lbTableName.FormattingEnabled = True
-        Me.lbTableName.Location = New System.Drawing.Point(398, 52)
-        Me.lbTableName.Name = "lbTableName"
-        Me.lbTableName.Size = New System.Drawing.Size(469, 121)
-        Me.lbTableName.TabIndex = 6
-        '
-        'txtHeader
-        '
-        Me.txtHeader.Location = New System.Drawing.Point(398, 182)
-        Me.txtHeader.Name = "txtHeader"
-        Me.txtHeader.Size = New System.Drawing.Size(237, 20)
-        Me.txtHeader.TabIndex = 9
         '
         'txtSavePath
         '
@@ -149,6 +126,15 @@ Partial Class Extract
         Me.txtQuery.Size = New System.Drawing.Size(327, 117)
         Me.txtQuery.TabIndex = 3
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(6, 26)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(53, 13)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Database"
+        '
         'txtPath
         '
         Me.txtPath.Location = New System.Drawing.Point(65, 23)
@@ -159,70 +145,94 @@ Partial Class Extract
         '
         'btnExtract
         '
-        Me.btnExtract.Location = New System.Drawing.Point(319, 220)
+        Me.btnExtract.Location = New System.Drawing.Point(323, 226)
         Me.btnExtract.Name = "btnExtract"
         Me.btnExtract.Size = New System.Drawing.Size(81, 36)
-        Me.btnExtract.TabIndex = 3
+        Me.btnExtract.TabIndex = 4
         Me.btnExtract.Text = "Extract"
         Me.btnExtract.UseVisualStyleBackColor = True
         '
-        'ofd
+        'pbProgress
         '
-        Me.ofd.Filter = "Data | *.fdb"
+        Me.pbProgress.Location = New System.Drawing.Point(18, 230)
+        Me.pbProgress.Name = "pbProgress"
+        Me.pbProgress.Size = New System.Drawing.Size(295, 23)
+        Me.pbProgress.TabIndex = 9
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(399, 21)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(131, 24)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Edit Header"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'lbTableName
+        '
+        Me.lbTableName.FormattingEnabled = True
+        Me.lbTableName.Location = New System.Drawing.Point(399, 54)
+        Me.lbTableName.Name = "lbTableName"
+        Me.lbTableName.Size = New System.Drawing.Size(237, 121)
+        Me.lbTableName.TabIndex = 12
+        '
+        'txtHeader
+        '
+        Me.txtHeader.Location = New System.Drawing.Point(399, 184)
+        Me.txtHeader.Name = "txtHeader"
+        Me.txtHeader.Size = New System.Drawing.Size(237, 20)
+        Me.txtHeader.TabIndex = 14
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(532, 220)
+        Me.btnUpdate.Location = New System.Drawing.Point(522, 214)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(114, 36)
-        Me.btnUpdate.TabIndex = 7
+        Me.btnUpdate.TabIndex = 13
         Me.btnUpdate.Text = "Update Header"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
-        'fbdBackup
+        'Button2
         '
-        Me.fbdBackup.SelectedPath = "C:\"
+        Me.Button2.Location = New System.Drawing.Point(399, 218)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(40, 21)
+        Me.Button2.TabIndex = 15
+        Me.Button2.Text = "..."
+        Me.Button2.UseVisualStyleBackColor = True
         '
-        'pbProgress
-        '
-        Me.pbProgress.Location = New System.Drawing.Point(12, 227)
-        Me.pbProgress.Name = "pbProgress"
-        Me.pbProgress.Size = New System.Drawing.Size(301, 23)
-        Me.pbProgress.TabIndex = 8
-        '
-        'Extract
+        'frmExtract2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(949, 262)
+        Me.ClientSize = New System.Drawing.Size(658, 273)
         Me.Controls.Add(Me.pbProgress)
         Me.Controls.Add(Me.btnExtract)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.btnUpdate)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "Extract"
-        Me.Text = "Extract To Excel File"
+        Me.Name = "frmExtract2"
+        Me.Text = "Exact"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents txtQuery As System.Windows.Forms.TextBox
-    Friend WithEvents btnExtract As System.Windows.Forms.Button
-    Friend WithEvents ofd As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents sfdPath As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents ofd As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnBrowseData As System.Windows.Forms.Button
+    Friend WithEvents btnBrowseSave As System.Windows.Forms.Button
     Friend WithEvents txtSavePath As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents txtQuery As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents txtPath As System.Windows.Forms.TextBox
+    Friend WithEvents btnExtract As System.Windows.Forms.Button
+    Friend WithEvents pbProgress As System.Windows.Forms.ProgressBar
+    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents lbTableName As System.Windows.Forms.ListBox
     Friend WithEvents txtHeader As System.Windows.Forms.TextBox
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
-    Friend WithEvents btnBrowseSave As System.Windows.Forms.Button
-    Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
-    Friend WithEvents btnBrowseData As System.Windows.Forms.Button
-    Friend WithEvents txtPath As System.Windows.Forms.TextBox
-    Friend WithEvents pbProgress As System.Windows.Forms.ProgressBar
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
