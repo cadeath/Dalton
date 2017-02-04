@@ -12,6 +12,8 @@ Public Class frmMobileNumExtractor
     End Sub
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
+        If txtPath.Text = "" Then Exit Sub
+
         Me.Enabled = False
         Dim mysql As String = "SELECT DISTINCT (FirstName ||' '|| LastName ||' '|| MiddleName) as Fullname,PHONE1,PHONE2,PHONE3," & _
                               "PHONE_OTHERS FROM TBLCLIENT WHERE PHONE1 <>''"
