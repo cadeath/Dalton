@@ -208,7 +208,7 @@
             Dim mysql As String = "Select * From tblLayAway Where LayID = " & ID
             Dim fillData As String = "tblLayAway"
             Dim ds As DataSet = LoadSQL(mysql, fillData)
-            ds.Tables(0).Rows(0).Item("Status") = 0
+            ds.Tables(0).Rows(0).Item("Status") = "V"
             SaveEntry(ds, False)
             Dim ItemCode As String = ds.Tables(0).Rows(0).Item("ItemCode")
 
@@ -219,7 +219,7 @@
             If ds.Tables(0).Rows.Count <> 0 Then
 
                 For Each dr In ds.Tables(0).Rows()
-                    dr.Item("Status") = 0
+                    dr.Item("Status") = "V"
                     SaveEntry(ds, False)
                     RemoveJournal(dr.Item("LinesID"), ItemCode, "LAYAWAY")
                 Next

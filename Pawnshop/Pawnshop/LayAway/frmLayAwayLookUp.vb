@@ -19,7 +19,7 @@
             mysql &= "From TBLLAYAWAY LY "
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-            mysql &= "WHERE LY.STATUS <> '0' "
+            mysql &= "WHERE LY.STATUS = '1' "
             mysql &= "AND  UPPER(LY.ITEMCODE) LIKE UPPER('%" & Search & "%') OR"
 
             For Each Name In strWords
@@ -38,7 +38,7 @@
             mysql &= "From TBLLAYAWAY LY "
             mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
             mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-            mysql &= "WHERE LY.STATUS <> '0' AND LY.BALANCE <> 0 "
+            mysql &= "WHERE LY.STATUS = '1' AND LY.BALANCE <> 0 "
         End If
         Dim ds As DataSet = LoadSQL(mysql)
         lvLayAway.Items.Clear()

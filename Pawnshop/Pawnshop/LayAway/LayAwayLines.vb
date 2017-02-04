@@ -138,7 +138,7 @@
             AddAmt = .Item("Amount")
         End With
 
-        ds.Tables(0).Rows(0).Item("Status") = 0
+        ds.Tables(0).Rows(0).Item("Status") = "V"
         SaveEntry(ds, False)
 
         mysql = "Select * From tblLayAway Where LayID = " & _layID

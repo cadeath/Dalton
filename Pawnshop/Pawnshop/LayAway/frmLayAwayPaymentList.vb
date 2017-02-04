@@ -8,7 +8,7 @@
         mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = LY.CUSTOMERID "
         mysql &= "INNER JOIN TBLLAYLINES LYL ON LYL.LAYID = LY.LAYID "
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
-        mysql &= "WHERE LYL.STATUS <> 0 AND UPPER(LY.ITEMCODE) = UPPER('" & Item & "')"
+        mysql &= "WHERE LYL.STATUS = '1' AND UPPER(LY.ITEMCODE) = UPPER('" & Item & "')"
         Dim ds As DataSet = LoadSQL(mysql)
         For Each dr In ds.Tables(0).Rows
             AddList(dr)
