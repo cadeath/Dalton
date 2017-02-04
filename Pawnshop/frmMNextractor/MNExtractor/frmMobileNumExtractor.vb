@@ -2,7 +2,7 @@
 Public Class frmMobileNumExtractor
     Dim OFD As New OpenFileDialog
     Dim dest As String = My.Computer.FileSystem.SpecialDirectories.Desktop
-
+    Dim BranchCode As String
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         OFDD.ShowDialog()
@@ -16,7 +16,15 @@ Public Class frmMobileNumExtractor
 
         Dim str As String = txtPath.Text
         If str.Contains(".FDB") = True Then
-            If Not ConfiguringDB() Then MsgBox("DATABASE CONNECTION PROBLEM", MsgBoxStyle.Critical) : Exit Sub
+
+            If dbName <> "W3W1LH4CKU.FDB" Then
+                MsgBox("Invalid file name." & vbCrLf & "Please try again", MsgBoxStyle.Critical, "")
+                txtPath.Text = ""
+                database.dbName = ""
+                Exit Sub
+            End If
+
+            BranchCode = GetOption("BranchCode")
 
             Me.Enabled = False
             Dim mysql As String = "SELECT DISTINCT (FirstName ||' '|| LastName ||' '|| MiddleName) as Fullname,PHONE1,PHONE2,PHONE3," & _

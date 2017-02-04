@@ -24,9 +24,6 @@ Module mod_system
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
-
-    Public BranchCode As String = GetOption("BranchCode")
-    Public branchName As String = GetOption("BranchName")
   
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
