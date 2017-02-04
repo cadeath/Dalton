@@ -32,4 +32,9 @@
                 txtAuction.Text = loanDate.SelectionStart.Date.AddDays(152).ToShortDateString
         End Select
     End Sub
+
+    Private Sub txtMatu_DoubleClick(sender As Object, e As System.EventArgs) Handles txtMatu.DoubleClick
+        dev_Pawning2.Show()
+    End Sub
+
 End Class

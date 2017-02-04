@@ -1,4 +1,7 @@
-﻿Imports DeathCodez.Security
+﻿' VERSION 1.1
+'  - Include GetFileMD5 for file integrity check
+
+Imports DeathCodez.Security
 Imports System
 Imports System.IO
 Imports System.Xml
@@ -45,6 +48,16 @@ Module security
         Dim md5Byte As Byte() = MD5.ComputeHash(sd)
 
         Return Convert.ToBase64String(md5Byte)
+    End Function
+
+    Friend Function GetFileMD5(ByVal url As String) As String
+        Dim fileByte() As Byte
+        Dim fs As FileStream = File.OpenRead(url)
+        fs.Position = 0
+
+        fileByte = MD5.Create.ComputeHash(fs)
+
+        Return Convert.ToBase64String(fileByte)
     End Function
 
 End Module

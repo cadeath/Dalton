@@ -44,6 +44,7 @@ Partial Class frmMain
         Me.CashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ItemPulloutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ORManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AccountingExtractToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.BackupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AuditConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -93,7 +94,6 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.AccountingExtractToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -226,6 +226,12 @@ Partial Class frmMain
         Me.ORManagerToolStripMenuItem.Name = "ORManagerToolStripMenuItem"
         Me.ORManagerToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.ORManagerToolStripMenuItem.Text = "&Print Manager"
+        '
+        'AccountingExtractToolStripMenuItem
+        '
+        Me.AccountingExtractToolStripMenuItem.Name = "AccountingExtractToolStripMenuItem"
+        Me.AccountingExtractToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.AccountingExtractToolStripMenuItem.Text = "Accounting E&xtract"
         '
         'ToolStripSeparator2
         '
@@ -598,12 +604,6 @@ Partial Class frmMain
         Me.bannerSize.TabIndex = 9
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
-        '
-        'AccountingExtractToolStripMenuItem
-        '
-        Me.AccountingExtractToolStripMenuItem.Name = "AccountingExtractToolStripMenuItem"
-        Me.AccountingExtractToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
-        Me.AccountingExtractToolStripMenuItem.Text = "Accounting Extract"
         '
         'frmMain
         '

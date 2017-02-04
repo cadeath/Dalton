@@ -77,6 +77,8 @@ Partial Class frmUserManagement
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
         Me.lblUserid = New System.Windows.Forms.Label()
+        Me.chkStockOut = New System.Windows.Forms.CheckBox()
+        Me.chkReturn = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -324,6 +326,8 @@ Partial Class frmUserManagement
         '
         'tbSupervisor
         '
+        Me.tbSupervisor.Controls.Add(Me.chkReturn)
+        Me.tbSupervisor.Controls.Add(Me.chkStockOut)
         Me.tbSupervisor.Controls.Add(Me.chkOS)
         Me.tbSupervisor.Controls.Add(Me.chkVR)
         Me.tbSupervisor.Controls.Add(Me.chkVUM)
@@ -643,12 +647,32 @@ Partial Class frmUserManagement
         '
         Me.lblUserid.AutoSize = True
         Me.lblUserid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserid.Location = New System.Drawing.Point(297, 258)
+        Me.lblUserid.Location = New System.Drawing.Point(293, 258)
         Me.lblUserid.Name = "lblUserid"
         Me.lblUserid.Size = New System.Drawing.Size(56, 16)
         Me.lblUserid.TabIndex = 12
         Me.lblUserid.Text = "UserID"
         Me.lblUserid.Visible = False
+        '
+        'chkStockOut
+        '
+        Me.chkStockOut.AutoSize = True
+        Me.chkStockOut.Location = New System.Drawing.Point(13, 104)
+        Me.chkStockOut.Name = "chkStockOut"
+        Me.chkStockOut.Size = New System.Drawing.Size(71, 17)
+        Me.chkStockOut.TabIndex = 13
+        Me.chkStockOut.Text = "StockOut"
+        Me.chkStockOut.UseVisualStyleBackColor = True
+        '
+        'chkReturn
+        '
+        Me.chkReturn.AutoSize = True
+        Me.chkReturn.Location = New System.Drawing.Point(108, 104)
+        Me.chkReturn.Name = "chkReturn"
+        Me.chkReturn.Size = New System.Drawing.Size(58, 17)
+        Me.chkReturn.TabIndex = 14
+        Me.chkReturn.Text = "Return"
+        Me.chkReturn.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '
@@ -739,4 +763,6 @@ Partial Class frmUserManagement
     Friend WithEvents chkPrivilege As System.Windows.Forms.CheckBox
     Friend WithEvents lblUserid As System.Windows.Forms.Label
     Friend WithEvents chkEnableDisable As System.Windows.Forms.CheckBox
+    Friend WithEvents chkReturn As System.Windows.Forms.CheckBox
+    Friend WithEvents chkStockOut As System.Windows.Forms.CheckBox
 End Class

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Dalton Pawnshop"
-#define MyAppVersion "1.3.0.5"
+#define MyAppVersion "1.4"
 #define MyAppPublisher "Perfecto Group of Companies"
 #define MyAppExeName "pawnshop.exe"
 
@@ -17,8 +17,8 @@ AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\cdt-S0ft\Dalton Pawnshop
 DefaultGroupName=cdt-S0ft\Dalton Pawnshop
-OutputDir=D:\cadeath\Documents\DevInstaller\Pawnshop
-OutputBaseFilename=daltonps-testing
+OutputDir=D:\CaDeAtH\Documents\DevInstaller\Pawnshop
+OutputBaseFilename=daltonps-1.4
 SetupIconFile=..\RAW\Tpdkdesign.net-Refresh-Cl-System-Install-2.ico
 Compression=lzma
 SolidCompression=yes
@@ -30,8 +30,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\pawnshop.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\MISJunmar\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Debug\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Release\pawnshop.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\CaDeAtH\Documents\GitHub\Dalton\Pawnshop\Pawnshop\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
