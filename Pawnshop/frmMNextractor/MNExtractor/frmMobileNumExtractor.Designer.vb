@@ -22,10 +22,12 @@ Partial Class frmMobileNumExtractor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMobileNumExtractor))
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.lblPath = New System.Windows.Forms.Label()
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.btnExtract = New System.Windows.Forms.Button()
+        Me.OFDD = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
         '
         'btnBrowse
@@ -62,6 +64,11 @@ Partial Class frmMobileNumExtractor
         Me.btnExtract.Text = "&Extract"
         Me.btnExtract.UseVisualStyleBackColor = True
         '
+        'OFDD
+        '
+        Me.OFDD.Filter = "Databse|*.FDB*|All Files|*.*"
+        Me.OFDD.InitialDirectory = "C:\"
+        '
         'frmMobileNumExtractor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -74,6 +81,7 @@ Partial Class frmMobileNumExtractor
         Me.Controls.Add(Me.btnBrowse)
         Me.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMobileNumExtractor"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Mobile Number Extractor"
@@ -85,4 +93,5 @@ Partial Class frmMobileNumExtractor
     Friend WithEvents lblPath As System.Windows.Forms.Label
     Friend WithEvents txtPath As System.Windows.Forms.TextBox
     Friend WithEvents btnExtract As System.Windows.Forms.Button
+    Friend WithEvents OFDD As System.Windows.Forms.OpenFileDialog
 End Class

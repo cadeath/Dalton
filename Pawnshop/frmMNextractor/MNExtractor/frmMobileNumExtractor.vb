@@ -5,28 +5,35 @@ Public Class frmMobileNumExtractor
 
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
-        OFD.ShowDialog()
+        OFDD.ShowDialog()
 
-        txtPath.Text = OFD.FileName
+        txtPath.Text = OFDD.FileName
         database.dbName = txtPath.Text
     End Sub
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
 
-        If Not ConfiguringDB() Then MsgBox("DATABASE CONNECTION PROBLEM", MsgBoxStyle.Critical) : Exit Sub
+        Dim str As String = txtPath.Text
+        If str.Contains(".FDB") = True Then
+            If Not ConfiguringDB() Then MsgBox("DATABASE CONNECTION PROBLEM", MsgBoxStyle.Critical) : Exit Sub
 
-        Me.Enabled = False
-        Dim mysql As String = "SELECT DISTINCT (FirstName ||' '|| LastName ||' '|| MiddleName) as Fullname,PHONE1,PHONE2,PHONE3," & _
-                              "PHONE_OTHERS FROM TBLCLIENT WHERE PHONE1 <>''"
-        Dim ds As DataSet = LoadSQL(mysql, "TBLCLIENT")
+            Me.Enabled = False
+            Dim mysql As String = "SELECT DISTINCT (FirstName ||' '|| LastName ||' '|| MiddleName) as Fullname,PHONE1,PHONE2,PHONE3," & _
+                                  "PHONE_OTHERS FROM TBLCLIENT WHERE PHONE1 <>'' AND (CHAR_LENGTH(PHONE1)='11')"
+            Dim ds As DataSet = LoadSQL(mysql, "TBLCLIENT")
 
-        Dim Headers As String() = {"Fullname", "PHONE1", "PHONE2", "PHONE2", "PHONE_OTHERS"}
+            Dim Headers As String() = {"Fullname", "PHONE1", "PHONE2", "PHONE2", "PHONE_OTHERS"}
 
-        dest = dest & "\" & String.Format("{2}{1}{0}.xlsx", Now.ToString("MMddyyyy"), BranchCode, "MNEXTRACT")  'BranchCode + Date
-        MNExtract(Headers, mysql, dest)
+            dest = dest & "\" & String.Format("{2}{1}{0}.xlsx", Now.ToString("MMddyyyy"), BranchCode, "MNEXTRACT")  'BranchCode + Date
+            MNExtract(Headers, mysql, dest)
 
-        MsgBox("Finished", MsgBoxStyle.Information, Me.Text)
+            MsgBox("Finished", MsgBoxStyle.Information, Me.Text)
+        Else
+            MsgBox("Invalid file name." & vbCrLf & "Please try again", MsgBoxStyle.Critical, "")
+        End If
+
+      
         txtPath.Text = ""
         database.dbName = ""
         Me.Enabled = True

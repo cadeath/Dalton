@@ -88,9 +88,11 @@
     <Compile Include="MNExtractor\database.vb" />
     <Compile Include="MNExtractor\frmMobileNumExtractor.Designer.vb">
       <DependentUpon>frmMobileNumExtractor.vb</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="MNExtractor\frmMobileNumExtractor.vb">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="MNExtractor\mod_system.vb" />
     <Compile Include="MNExtractor\newSetup.vb" />
@@ -116,6 +118,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MNExtractor\frmMobileNumExtractor.resx">
       <DependentUpon>frmMobileNumExtractor.vb</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
