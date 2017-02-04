@@ -381,12 +381,6 @@
     <Compile Include="InterestScheme\IntScheme_Lines.vb" />
     <Compile Include="InterestScheme\Scheme_Interest.vb" />
     <Compile Include="InterestScheme\Scheme_Load.vb" />
-    <Compile Include="MNExtractor\frmMobileNumExtractor.Designer.vb">
-      <DependentUpon>frmMobileNumExtractor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="MNExtractor\frmMobileNumExtractor.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
@@ -904,9 +898,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MNExtractor\frmMobileNumExtractor.resx">
-      <DependentUpon>frmMobileNumExtractor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>

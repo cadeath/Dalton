@@ -14,6 +14,8 @@ Public Class frmMobileNumExtractor
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
 
+        If Not ConfiguringDB() Then MsgBox("DATABASE CONNECTION PROBLEM", MsgBoxStyle.Critical) : Exit Sub
+
         Me.Enabled = False
         Dim mysql As String = "SELECT DISTINCT (FirstName ||' '|| LastName ||' '|| MiddleName) as Fullname,PHONE1,PHONE2,PHONE3," & _
                               "PHONE_OTHERS FROM TBLCLIENT WHERE PHONE1 <>''"
@@ -52,7 +54,7 @@ Public Class frmMobileNumExtractor
 
         oWB = oXL.Workbooks.Add
         oSheet = oWB.ActiveSheet
-        oSheet.Name = ExtractDataFromDatabase.lbltransaction.Text
+        oSheet.Name = "Extract"
 
         ' ADD BRANCHCODE
         InsertArrayElement(headers, 0, "BRANCHCODE")
@@ -111,4 +113,6 @@ Public Class frmMobileNumExtractor
 
         sourceArray(newPosition) = newValue
     End Sub
+
+  
 End Class
