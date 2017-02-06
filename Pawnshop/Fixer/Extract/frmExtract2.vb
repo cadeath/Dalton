@@ -6,17 +6,17 @@ Public Class frmExtract2
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
-        Dim ds As DataSet = LoadSQL(txtQuery.Text)
-        pbProgress.Maximum = ds.Tables(0).Rows.Count
-
         Disable(1)
         Dim text As String = ""
         Dim files() As String = IO.Directory.GetFiles(txtPath.Text, "*.FDB")
 
         For Each sFile As String In files
             database.dbName = sFile
-            'lbTableName.Items.Add(sFile)
+            Dim ds As DataSet = LoadSQL(txtQuery.Text)
+
+            pbProgress.Maximum = ds.Tables(0).Rows.Count
             LoadQuery()
+            pbProgress.Value = pbProgress.Minimum
         Next
 
         Dim ans As DialogResult = MsgBox("Successfully Data Converted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2)
@@ -48,8 +48,6 @@ Public Class frmExtract2
 
     Friend Sub ExtractToExcell(ByVal headers As String(), ByVal mySql As String, ByVal dest As String)
         Try
-
-
             If dest = "" Then Exit Sub
 
             Dim ds As DataSet = LoadSQL(mySql)
@@ -190,14 +188,5 @@ Public Class frmExtract2
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
-    End Sub
-
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        Dim text As String = ""
-        Dim files() As String = IO.Directory.GetFiles("C:\Users\MISJunmar\Desktop\Consolidate\", "*.FDB")
-
-        For Each sFile As String In files
-            lbTableName.Items.Add(sFile)
-        Next
     End Sub
 End Class

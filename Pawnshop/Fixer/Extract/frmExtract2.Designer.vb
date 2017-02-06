@@ -26,6 +26,10 @@ Partial Class frmExtract2
         Me.sfdPath = New System.Windows.Forms.SaveFileDialog()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.lbTableName = New System.Windows.Forms.ListBox()
+        Me.txtHeader = New System.Windows.Forms.TextBox()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnBrowseData = New System.Windows.Forms.Button()
         Me.btnBrowseSave = New System.Windows.Forms.Button()
         Me.txtSavePath = New System.Windows.Forms.TextBox()
@@ -36,11 +40,6 @@ Partial Class frmExtract2
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.pbProgress = New System.Windows.Forms.ProgressBar()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.lbTableName = New System.Windows.Forms.ListBox()
-        Me.txtHeader = New System.Windows.Forms.TextBox()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -54,7 +53,6 @@ Partial Class frmExtract2
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.lbTableName)
         Me.GroupBox1.Controls.Add(Me.txtHeader)
@@ -73,6 +71,39 @@ Partial Class frmExtract2
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Information"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(399, 21)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(131, 24)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Edit Header"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'lbTableName
+        '
+        Me.lbTableName.FormattingEnabled = True
+        Me.lbTableName.Location = New System.Drawing.Point(399, 54)
+        Me.lbTableName.Name = "lbTableName"
+        Me.lbTableName.Size = New System.Drawing.Size(237, 121)
+        Me.lbTableName.TabIndex = 12
+        '
+        'txtHeader
+        '
+        Me.txtHeader.Location = New System.Drawing.Point(399, 184)
+        Me.txtHeader.Name = "txtHeader"
+        Me.txtHeader.Size = New System.Drawing.Size(237, 20)
+        Me.txtHeader.TabIndex = 14
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(522, 214)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(114, 36)
+        Me.btnUpdate.TabIndex = 13
+        Me.btnUpdate.Text = "Update Header"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnBrowseData
         '
@@ -159,48 +190,6 @@ Partial Class frmExtract2
         Me.pbProgress.Size = New System.Drawing.Size(295, 23)
         Me.pbProgress.TabIndex = 9
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(399, 21)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(131, 24)
-        Me.Button1.TabIndex = 11
-        Me.Button1.Text = "Edit Header"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'lbTableName
-        '
-        Me.lbTableName.FormattingEnabled = True
-        Me.lbTableName.Location = New System.Drawing.Point(399, 54)
-        Me.lbTableName.Name = "lbTableName"
-        Me.lbTableName.Size = New System.Drawing.Size(237, 121)
-        Me.lbTableName.TabIndex = 12
-        '
-        'txtHeader
-        '
-        Me.txtHeader.Location = New System.Drawing.Point(399, 184)
-        Me.txtHeader.Name = "txtHeader"
-        Me.txtHeader.Size = New System.Drawing.Size(237, 20)
-        Me.txtHeader.TabIndex = 14
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Location = New System.Drawing.Point(522, 214)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(114, 36)
-        Me.btnUpdate.TabIndex = 13
-        Me.btnUpdate.Text = "Update Header"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(399, 218)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(40, 21)
-        Me.Button2.TabIndex = 15
-        Me.Button2.Text = "..."
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'frmExtract2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -234,5 +223,4 @@ Partial Class frmExtract2
     Friend WithEvents lbTableName As System.Windows.Forms.ListBox
     Friend WithEvents txtHeader As System.Windows.Forms.TextBox
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
