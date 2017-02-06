@@ -726,8 +726,13 @@ Public Class frmSales
 #End Region
 
     Private Sub tsbtnLay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnLay.Click
-        If ShiftMode() Then
-            Load_asLayAway()
+        If Not (POSuser.isSuperUser Or POSuser.canLayAway) Then
+            MsgBox("You don't have access to the Layaway", MsgBoxStyle.Critical, "Authorization Invalid")
+            Exit Sub
+        Else
+            If ShiftMode() Then
+                Load_asLayAway()
+            End If
         End If
     End Sub
 
