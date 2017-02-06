@@ -131,7 +131,7 @@ Public Class frmExtract2
         sourceArray(newPosition) = newValue
     End Sub
 
-    Private Sub LoadQuery()
+    Private Sub LoadQuery(Optional ByVal Series As Integer = 0)
         Try
             Dim mysql As String = "" & txtQuery.Text & ""
             Dim ds As DataSet = LoadSQL(mysql)
@@ -155,7 +155,7 @@ Public Class frmExtract2
 
             Dim tmpCount() As String = tmp.Split(CChar(" "))
             Dim tmpString() As String = {tmp}
-            sfdPath.FileName = String.Format("{0}.xlsx", GetOption("BranchCode"))
+            sfdPath.FileName = String.Format("{0}.xlsx", GetOption("BranchCode", Series))
             path = txtSavePath.Text & "\" & sfdPath.FileName
             ExtractToExcell(tmpCount, mysql, path)
 
