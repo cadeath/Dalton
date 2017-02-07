@@ -131,6 +131,8 @@ Partial Class frmPrint
         Me.ClientSize = New System.Drawing.Size(609, 308)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbReceipt)
+        Me.MaximumSize = New System.Drawing.Size(625, 346)
+        Me.MinimumSize = New System.Drawing.Size(625, 346)
         Me.Name = "frmPrint"
         Me.Text = "Sales List"
         Me.gbReceipt.ResumeLayout(False)

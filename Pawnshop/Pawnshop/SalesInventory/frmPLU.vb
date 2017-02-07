@@ -97,7 +97,7 @@
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         Else
-            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND onHand <> 0 ORDER BY ITEMCODE ASC"
+            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 ORDER BY ITEMCODE ASC"
 
             If src <> "" Then
                 mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"
@@ -106,7 +106,7 @@
                 mySql &= " ORDER BY ITEMCODE ASC"
             End If
 
-            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
+            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001'")
         End If
 
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)

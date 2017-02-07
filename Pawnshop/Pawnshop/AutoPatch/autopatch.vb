@@ -17,7 +17,7 @@ Module autopatch
         db1224.PatchUp()
 
         ' FOR v1.3
-        db1232.PatchUp()
+        ' db1232.PatchUp()
 
         DBVERSION = GetOption("DBVersion")
     End Sub
