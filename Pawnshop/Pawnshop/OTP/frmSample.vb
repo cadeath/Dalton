@@ -16,7 +16,7 @@
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        OTPVoidPawning_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
@@ -31,7 +31,7 @@
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        OTPVoidInsurance_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
@@ -46,7 +46,7 @@
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        OTPVoidBranch_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
@@ -61,7 +61,7 @@
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
-        OTPVoidMoneyTransfer_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
@@ -76,7 +76,7 @@
     End Sub
 
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
-        OTPVoidMoneyExchange_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
@@ -91,7 +91,7 @@
     End Sub
 
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
-        OTPVoidCashInOut_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings

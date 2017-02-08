@@ -91,7 +91,7 @@
         '    VoidBorrowing()
         'End If
 
-        OTPVoidBranch_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings

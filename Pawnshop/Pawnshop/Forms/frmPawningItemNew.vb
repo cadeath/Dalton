@@ -1310,7 +1310,7 @@ Public Class frmPawningItemNew
         '    VoidPawning()
         'End If
 
-        OTPVoidPawning_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings

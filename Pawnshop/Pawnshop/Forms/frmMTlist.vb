@@ -114,7 +114,7 @@
         '    VoidMoneyTransfer()
         'End If
 
-        OTPVoidMoneyTransfer_Initialization()
+        OTPVoiding_Initialization()
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings

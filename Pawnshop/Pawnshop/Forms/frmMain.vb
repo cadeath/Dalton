@@ -453,16 +453,29 @@ Public Class frmMain
         '    qryPullOut.Show()
         'End If
 
-        If Not (POSuser.isSuperUser Or POSuser.canPullOut) Then
-            Dim tmpNewOtp As New OneTimePassword
-            If Not OTPDisable Then
-                diagOTPv2.GeneralOTP = tmpNewOtp
-                diagOTPv2.ShowDialog()
-                If Not diagOTPv2.isCorrect Then
-                    Exit Sub
-                Else
-                    qryPullOut.Show()
-                End If
+        'If Not (POSuser.isSuperUser Or POSuser.canPullOut) Then
+        '    Dim tmpNewOtp As New OneTimePassword
+        '    If Not OTPDisable Then
+        '        diagOTPv2.GeneralOTP = tmpNewOtp
+        '        diagOTPv2.ShowDialog()
+        '        If Not diagOTPv2.isCorrect Then
+        '            Exit Sub
+        '        Else
+        '            qryPullOut.Show()
+        '        End If
+        '    Else
+        '        qryPullOut.Show()
+        '    End If
+        'Else
+        '    qryPullOut.Show()
+        'End If
+
+        OTPItemPullout_Initialization()
+        If Not OTPDisable Then
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isCorrect Then
+                Exit Sub
             Else
                 qryPullOut.Show()
             End If
