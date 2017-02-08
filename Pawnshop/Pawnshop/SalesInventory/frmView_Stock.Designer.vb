@@ -29,6 +29,7 @@ Partial Class frmView_Stock
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lblDesc = New System.Windows.Forms.Label()
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'lvStock
@@ -36,7 +37,7 @@ Partial Class frmView_Stock
         Me.lvStock.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvStock.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvStock.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6})
         Me.lvStock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvStock.FullRowSelect = True
         Me.lvStock.GridLines = True
@@ -86,6 +87,11 @@ Partial Class frmView_Stock
         Me.lblDesc.Text = "I HAVE LIVED ONCE MORE"
         Me.lblDesc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "Type"
+        Me.ColumnHeader6.Width = 80
+        '
         'frmView_Stock
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -105,4 +111,5 @@ Partial Class frmView_Stock
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblDesc As System.Windows.Forms.Label
+    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
 End Class
