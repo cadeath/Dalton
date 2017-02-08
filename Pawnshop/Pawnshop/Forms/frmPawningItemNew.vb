@@ -501,7 +501,13 @@ Public Class frmPawningItemNew
 
         AddNumber(DocumentClass.Pawnticket)
 
-        MsgBox("Item Saved", MsgBoxStyle.Information)
+            MsgBox("Item Saved", MsgBoxStyle.Information)
+
+            If MsgBox("Do you want to Add Coi?", _
+                 MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
+                 "Information") = MsgBoxResult.No Then Exit Sub
+            frmAddCoi.Show()
+
         'NewLoan()
         txtCustomer.Focus()
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then

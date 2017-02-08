@@ -1,9 +1,19 @@
 ﻿Public Class frmInsuranceList
+    Private fromOtherForm As Boolean = False
+    Private frmOrig As formSwitch.FormName
+    Private Coi As Insurance
 
     Private Sub frmInsuranceList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadInsurance()
     End Sub
+
+    Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
+        fromOtherForm = True
+        txtSearch.Text = src
+        frmOrig = frmOrigin
+    End Sub
+
     ''' <summary>
     ''' this method load the information of a client
     ''' </summary>
@@ -56,7 +66,11 @@
         If Not lvInsurance.SelectedItems.Count > 0 Then Exit Sub
 
         Dim idx As Integer = lvInsurance.FocusedItem.Tag
-        frmInsurance.LoadInsurance(idx)
+        'frmInsurance.LoadInsurance(idx)
+        'Me.Close()
+        Coi = New Insurance
+        Coi.LoadInsurance(idx)
+        formSwitch.ReloadFormFromInsurance(frmOrig, Coi)
         Me.Close()
     End Sub
     ''' <summary>

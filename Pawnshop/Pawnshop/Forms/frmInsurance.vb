@@ -108,18 +108,18 @@
     ''' </summary>
     ''' <param name="id"></param>
     ''' <remarks></remarks>
-    Friend Sub LoadInsurance(ByVal id As Integer)
-        Dim getInsurance As New Insurance
-        getInsurance.LoadInsurance(id)
+    Friend Sub LoadInsurance(ByVal Ins As Insurance)
+        'Dim getInsurance As New Insurance
+        'getInsurance.LoadInsurance(id)
 
-        LoadHolder(getInsurance.Client)
-        txtCoi.Text = getInsurance.COInumber
-        dtpDate.Value = getInsurance.TransactionDate
-        dtpExpiry.Value = getInsurance.ValidDate
-        txtAmount.Text = getInsurance.Amount
+        LoadHolder(Ins.Client)
+        txtCoi.Text = Ins.COInumber
+        dtpDate.Value = Ins.TransactionDate
+        dtpExpiry.Value = Ins.ValidDate
+        txtAmount.Text = Ins.Amount
 
         lbltransid.Text = frmInsuranceList.lbltransID.Text
-        curInsurance = getInsurance
+        curInsurance = Ins
         btnVoid.Enabled = True
         txtPT.Enabled = False
     End Sub
@@ -238,6 +238,8 @@
     End Sub
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        'frmInsuranceList.Show()
+        frmInsuranceList.SearchSelect("", FormName.frmInsurance)
         frmInsuranceList.Show()
     End Sub
 
