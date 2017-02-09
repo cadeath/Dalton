@@ -1588,6 +1588,7 @@ Public Class frmPawningItemNew
         Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where PAWNTICKET = '" & Ticket & "'"
         Dim fillData As String = "tblInsurance"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If IsDBNull(ds.Tables(0).Rows(0).Item("Amount")) Then Return 0
         Return ds.Tables(0).Rows(0).Item("Amount")
     End Function
 
