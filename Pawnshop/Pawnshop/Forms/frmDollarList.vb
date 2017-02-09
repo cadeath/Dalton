@@ -106,6 +106,8 @@
         Dim ds As DataSet = LoadSQL(mysql)
         Dim tmpEncoderID As Integer
         tmpEncoderID = ds.Tables(0).Rows(0).Item("UserId")
+
+        Dim NewOtp As New ClassOtp("VOID DOLLAR", diagOTP.txtPIN.Text, "DollarID# " & id)
         TransactionVoidSave("DOLLAR BUYING", tmpEncoderID, POSuser.UserID, "DollarID# " & id & " " & ans)
         tmpLoad.VoidTransaction(ans)
 

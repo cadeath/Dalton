@@ -413,6 +413,24 @@ Public Class frmMigrate
                 DsOpt.Tables("OPT").Rows.Add(dsNewRow)
                 database.SaveEntry(DsOpt)
 
+                Dim sqlOpi As String = "Select * from OPI where pawnitemid = '" & PawnItemID & "'"
+                Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
+                With DsOpi.Tables("OPI").Rows(0)
+                    Select Case MigStatus
+                        Case "W"
+                            .Item("WithdrawDate") = MigPullout
+                            .Item("Status") = MigStatus
+                        Case "X"
+                            .Item("WithDrawDate") = MigOrDate
+                            .Item("Status") = MigStatus
+                        Case "L", "0", "R"
+                            .Item("Status") = "A"
+                        Case Else
+                            .Item("Status") = MigStatus
+                    End Select
+                End With
+                SaveEntry(DsOpi, False)
+
             Else
                 Dim sqlOpi As String = "Select * from OPI"
                 Dim DsOpi As DataSet = LoadSQL(sqlOpi, "OPI")
@@ -426,13 +444,14 @@ Public Class frmMigrate
                     Select Case MigStatus
                         Case "L", "0", "R"
                             .Item("Status") = "A"
-                            .Item("WithDrawDate") = MigPullout
                         Case "X"
                             .Item("Status") = "X"
                             .Item("WithDrawDate") = MigOrDate
+                        Case "W"
+                            .Item("Status") = "W"
+                            .Item("WithDrawDate") = MigPullout
                         Case Else
                             .Item("Status") = MigStatus
-                            .Item("WithDrawDate") = MigPullout
                     End Select
                     .Item("RenewalCnt") = MigRenewCount
                     .Item("Created_at") = Now
@@ -885,7 +904,7 @@ Public Class frmMigrate
         Pawn_List &= vbCrLf & "P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, "
         Pawn_List &= vbCrLf & "C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         Pawn_List &= vbCrLf & "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT, C.PHONE1 AS CONTACTNUMBER, "
-        Pawn_List &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_ZIP as FULLADDRESS, "
+        Pawn_List &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
         Pawn_List &= vbCrLf & "ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, "
         Pawn_List &= vbCrLf & "P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, "
         Pawn_List &= vbCrLf & "P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, "

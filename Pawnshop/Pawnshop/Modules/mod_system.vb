@@ -1,4 +1,5 @@
-﻿' Changelog
+﻿
+' Changelog
 ' v2 7/28/16
 '  - Added ExtractToExcel
 ' v1.4 2/17/16
@@ -18,6 +19,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
+    Dim frmCollection As New FormCollection()
     Public DEV_MODE As Boolean = False
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
@@ -128,6 +130,7 @@ Module mod_system
             frmMain.dateSet = False
         End If
     End Sub
+
     ''' <summary>
     ''' This function will segregate all data from tblPawn
     ''' where AuctionDate is = to the CurrentDate.
@@ -151,7 +154,7 @@ Module mod_system
             Dim tmpPawnItem As New PawnTicket2
             tmpPawnItem.Load_PTid(dr.Item("PawnID"))
             With tmpPawnItem.PawnItem
-                .WithdrawDate = CurrentDate
+                '.WithdrawDate = CurrentDate
                 .Status = "S"
                 .Save_PawnItem()
             End With
@@ -365,6 +368,7 @@ Module mod_system
 
         Return Not (Char.IsDigit(e.KeyChar))
     End Function
+
     ''' <summary>
     ''' this function check if the input is numeric or character.
     ''' </summary>
@@ -545,7 +549,6 @@ Module mod_system
         sourceArray(newPosition) = newValue
     End Sub
 
-
     ' HASHTABLE FUNCTIONS
     Public Function GetIDbyName(name As String, ht As Hashtable) As Integer
         For Each dt As DictionaryEntry In ht
@@ -569,12 +572,29 @@ Module mod_system
     ' END - HASHTABLE FUNCTIONS
 
     Public Function CheckOTP() As Boolean
-        diagOTP.Show()
+        diagOTP.ShowDialog()
         diagOTP.TopMost = True
         'Return False
         Return True
     End Function
 
+    Public Function CheckFormActive() As Boolean
+
+        frmCollection = Application.OpenForms()
+        If Application.OpenForms().OfType(Of frmInsurance).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmInsurance").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmPawningItemNew).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmPawningItemNew").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmBorrowing).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmBorrowing").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmMoneyTransfer).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmMoneyTransfer").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmSales).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmSales").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        End If
+
+        Return False
+    End Function
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

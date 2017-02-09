@@ -37,7 +37,7 @@
         mySql &= vbCrLf & "	FROM PAWN_LIST   "
         mySql &= vbCrLf & "	WHERE "
         mySql &= vbCrLf & "		(Status = 'W')   "
-        mySql &= vbCrLf & String.Format("		AND WITHDRAWDATE >= '{0}' AND PRINCIPAL >= {1}", dt.ToShortDateString, min)
+        mySql &= vbCrLf & String.Format("AND LOANDATE <= '{0}' AND WITHDRAWDATE >= '{0}' AND PRINCIPAL >= {1}", dt.ToShortDateString, min)
         mySql &= vbCrLf & "	)"
         If type <> "ALL" Then
             mySql &= " WHERE ITEMCATEGORY = '" & type & "'"

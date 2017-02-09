@@ -3,6 +3,7 @@
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
 
+
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
 
@@ -27,6 +28,7 @@
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
+        '-------------------------------------------------
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -53,6 +55,7 @@
         CashInOutToolStripMenuItem.Enabled = Not st
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
+        VoidReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -119,7 +122,10 @@
             Exit Sub
         End If
 
+        If CheckFormActive() Then Exit Sub
+
         frmSettings.Show()
+
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
@@ -278,6 +284,8 @@
             MsgBoxAuthoriation("You don't have access to POS")
             Exit Sub
         End If
+
+        '  frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
@@ -490,4 +498,6 @@
     Private Sub AccountingExtractToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AccountingExtractToolStripMenuItem.Click
         ExtractDataFromDatabase.ShowDialog()
     End Sub
+
+
 End Class
