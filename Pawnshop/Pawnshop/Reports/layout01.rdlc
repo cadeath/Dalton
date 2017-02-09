@@ -1740,7 +1740,7 @@
               <TextRun>
                 <Value>=Parameters!txtRenewCompute.Value</Value>
                 <Style>
-                  <FontSize>8pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1772,7 +1772,7 @@
               <TextRun>
                 <Value>=Parameters!txtRedeemCompute.Value</Value>
                 <Style>
-                  <FontSize>8pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1804,7 +1804,7 @@
               <TextRun>
                 <Value>=Parameters!txtRenewCompute.Value</Value>
                 <Style>
-                  <FontSize>8pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1836,7 +1836,7 @@
               <TextRun>
                 <Value>=Parameters!txtRedeemCompute.Value</Value>
                 <Style>
-                  <FontSize>8pt</FontSize>
+                  <FontSize>9pt</FontSize>
                 </Style>
               </TextRun>
             </TextRuns>
