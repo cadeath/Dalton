@@ -460,6 +460,7 @@ Public Class ExtractDataFromDatabase
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
 
+
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
             sw.WriteLine("@echo off")
@@ -904,6 +905,13 @@ Public Class ExtractDataFromDatabase
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+
+                Dim tmp_path1 As String = (Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\Daily" & mod_system.BranchCode & "" & filename & ".rar")
+
+                If My.Computer.FileSystem.FileExists(tmp_path1) Then
+                    My.Computer.FileSystem.DeleteFile(tmp_path1)
+                End If
+
                 My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Daily" & mod_system.BranchCode & ".rar", "Daily" & mod_system.BranchCode & "" & filename & ".rar")
 
             Case "Monthly"
@@ -911,6 +919,14 @@ Public Class ExtractDataFromDatabase
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+
+                Dim tmp_path As String = (Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\Monthly" & mod_system.BranchCode & "" & filename & ".rar")
+
+
+                If My.Computer.FileSystem.FileExists(tmp_path) Then
+                    My.Computer.FileSystem.DeleteFile(tmp_path)
+                End If
+
                 My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Monthly" & mod_system.BranchCode & ".rar", "Monthly" & mod_system.BranchCode & "" & filename & ".rar")
 
         End Select
