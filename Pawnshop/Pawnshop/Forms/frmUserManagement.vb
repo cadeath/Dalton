@@ -2,10 +2,7 @@
 
     Private selectedUser As New ComputerUser
     Private moduleName As String = "User Management"
-
-    Private Sub frmUserManagement_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
-        ClearFields()
-    End Sub
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Function PasswordPolicy() As Boolean
         If txtPass1.Text.Length >= 4 And txtPass1.Text.Length <= 8 Then
@@ -17,6 +14,7 @@
     End Function
 
     Private Sub frmUserManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtUser.Focus()
         Dim tmp As New ComputerUser
         tmp.CreateAdministrator()
 
@@ -40,8 +38,16 @@
             txtUser.Text = .UserName
             txtFullname.Text = .FullName
         End With
-
+        lblUserid.Text = idx
         LoadPrivilege()
+
+        Dim fillData As String = "TBL_GAMIT", mysql As String = "SELECT * FROM " & fillData & " WHERE UserID = '" & idx & "'"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If ds.Tables(0).Rows(0).Item("Status") = "1" Then
+            chkEnableDisable.Checked = True
+        Else
+            chkEnableDisable.Checked = False
+        End If
     End Sub
 
     Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit ORDER BY Username ASC")
@@ -64,17 +70,48 @@
     End Sub
 
     Private Sub ClearFields()
+        chkEnableDisable.Checked = False
         txtUser.Text = ""
         txtFullname.Text = ""
         txtPass1.Text = ""
         txtPass2.Text = ""
-
-        lvUsers.Items.Clear()
-
         chkEnAll.Checked = False
         chkSuAll.Checked = False
         chkMaAll.Checked = False
         chkSpAll.Checked = False
+        chkPawn.Checked = False
+        chkCM.Checked = False
+        chkMT.Checked = False
+        chkIns.Checked = False
+        chkLay.Checked = False
+        chkDB.Checked = False
+        chkPOS.Checked = False
+        chkCIO.Checked = False
+        chkAppraiser.Checked = False
+        chkEL.Checked = False
+        chkJE.Checked = False
+        chkCC.Checked = False
+        chkBU.Checked = False
+        chkR1.Checked = False
+        chkR2.Checked = False
+        chkR3.Checked = False
+        chkR4.Checked = False
+        chkVUM.Checked = False
+        chkVR.Checked = False
+        chkOS.Checked = False
+        chkUM.Checked = False
+        chkUR.Checked = False
+        chkUS.Checked = False
+        chkBorrowings.Checked = False
+        chkResetPassword.Checked = False
+        chkCashInBank.Checked = False
+        chkCashOutBank.Checked = False
+        chkVoid.Checked = False
+        chkPullOut.Checked = False
+        chkMigrate.Checked = False
+        chkPrivilege.Checked = False
+        chkReturn.Checked = False
+        chkStockOut.Checked = False
 
         btnAdd.Text = "&Add"
     End Sub
@@ -90,34 +127,40 @@
         priv &= IIf(chkDB.Checked, 1, 0)
         priv &= IIf(chkPOS.Checked, 1, 0)
         priv &= IIf(chkCIO.Checked, 1, 0)
+        priv &= IIf(chkAppraiser.Checked, 1, 0)
         priv &= "|"
 
         'Supervisor
-        Dim listChk() As CheckBox = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
+        Dim listChk() As CheckBox = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS, chkStockOut, chkReturn}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
+
         Next
         priv &= "|"
 
         'Manager
-        listChk = {chkUM, chkUR, chkUS, chkBorrowings}
+        listChk = {chkUM, chkUR, chkUS, chkBorrowings, chkResetPassword}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
+
         Next
         priv &= "|"
 
         'Special
-        listChk = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate}
+        listChk = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate, chkPrivilege}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
         Next
+
         Return priv
+
     End Function
 
     Private Sub LoadPrivilege()
         If selectedUser.Privilege = "PDuNxp8S9q0=" Then
             chkEnAll.Checked = True : chkSuAll.Checked = True
             chkMaAll.Checked = True : chkSpAll.Checked = True
+
             tbPrivileges.Enabled = False
             Exit Sub
         End If
@@ -129,22 +172,23 @@
                 Dim chkList() As CheckBox = {}
                 Select Case y
                     Case 0 'Encoder
-                        chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO}
+                        chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO, chkAppraiser}
                         Console.WriteLine("Encoder Length: " & privParts(y).Length)
                     Case 1 'Supervisor
-                        chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
+                        chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS, chkStockOut, chkReturn}
                         Console.WriteLine("Supervisor Length: " & privParts(y).Length)
                     Case 2 'Manager
-                        chkList = {chkUM, chkUR, chkUS, chkBorrowings}
+                        chkList = {chkUM, chkUR, chkUS, chkBorrowings, chkResetPassword}
                         Console.WriteLine("Manager Length: " & privParts(y).Length)
                     Case 3 'Special
-                        chkList = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate}
+                        chkList = {chkCashInBank, chkCashOutBank, chkVoid, chkPullOut, chkMigrate, chkPrivilege}
                         Console.WriteLine("Special Length: " & privParts(y).Length)
                 End Select
 
                 chkList(x).Checked = IIf(privParts(y).Substring(x, 1) = "1", True, False)
             Next
         Next
+
     End Sub
 
 #Region "SelectAll"
@@ -164,6 +208,7 @@
                 chkDB.Checked = tabStat
                 chkPOS.Checked = tabStat
                 chkCIO.Checked = tabStat
+                chkAppraiser.Checked = tabStat
             Case "Supervisor"
                 tabStat = chkSuAll.Checked
                 chkEL.Checked = tabStat
@@ -177,12 +222,15 @@
                 chkR2.Checked = tabStat
                 chkR3.Checked = tabStat
                 chkR4.Checked = tabStat
+                chkStockOut.Checked = tabStat
+                chkReturn.Checked = tabStat
             Case "Manager"
                 tabStat = chkMaAll.Checked
                 chkUM.Checked = tabStat
                 chkUR.Checked = tabStat
                 chkUS.Checked = tabStat
                 chkBorrowings.Checked = tabStat
+                chkResetPassword.Checked = tabStat
             Case "Special"
                 tabStat = chkSpAll.Checked
                 chkCashInBank.Checked = tabStat
@@ -190,6 +238,8 @@
                 chkVoid.Checked = tabStat
                 chkPullOut.Checked = tabStat
                 chkMigrate.Checked = tabStat
+                chkPrivilege.Checked = tabStat
+
         End Select
     End Sub
 
@@ -213,18 +263,40 @@
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
+
+   Private Function CheckUsername() As Boolean
+        Dim mySql As String, ds As DataSet
+        mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
+        ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count >= 1 Then
+            MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
         Return True
     End Function
+
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        diagOTP.FormType = diagOTP.OTPType.UserManagement
-        If Not CheckOTP() Then Exit Sub
+        If btnAdd.Text = "&Add" Then
+            If CheckUsername() = False Then Exit Sub
+            If Not PasswordPolicy() Then Exit Sub
+            If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
+        Else
+            If chkEnableDisable.Checked = True Then
+                selectedUser.DeleteUser(True)
+            Else
+                selectedUser.DeleteUser(False)
+            End If
+            LoadActive()
+        End If
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.UserManagement
+            If Not CheckOTP() Then Exit Sub
+        Else
+            AddUserManagement()
+        End If
+
     End Sub
     Friend Sub AddUserManagement()
-        If Not PasswordPolicy() Then Exit Sub
         If btnAdd.Text = "&Add" Then
             Console.WriteLine("Priv is " & Privileger())
             Dim tmpUser As New ComputerUser
@@ -235,37 +307,55 @@
             tmpUser.Privilege = Privileger()
             tmpUser.UpdatePrivilege()
             tmpUser.EncoderID = UserID
+            tmpUser.UserStatus = 1
 
             tmpUser.SaveUser()
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
         Else
-            If EncryptString(txtPass1.Text) <> selectedUser.Password And txtPass2.Text = "" Then
-                MsgBox("Please input the password before changing", MsgBoxStyle.Critical, moduleName)
-                txtPass1.Focus()
-                Exit Sub
-            End If
-            If txtPass1.Text <> txtPass2.Text And Not txtPass2.Text = "" Then
-                MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
-                Exit Sub
-            End If
-            With selectedUser
-                .FullName = txtFullname.Text
-                .Password = txtPass1.Text
-                .Privilege = Privileger()
-                .UpdatePrivilege()
 
-                .SaveUser(False)
+            If Not txtPass1.Text = "" Then
+                If txtPass1.Text <> txtPass2.Text And Not txtPass2.Text = "" Then
+                    MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
+                    Exit Sub
+                ElseIf txtPass2.Text = "" Then
+                    MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
+                    Exit Sub
+                End If
+            ElseIf Not txtPass2.Text = "" Then
+                If txtPass1.Text <> txtPass2.Text And Not txtPass2.Text = "" Then
+                    MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
+                    Exit Sub
+                ElseIf txtPass1.Text = "" Then
+                    MsgBox("Password is not MATCHED", MsgBoxStyle.Critical, moduleName)
+                    Exit Sub
+                End If
+            End If
+
+            With selectedUser
+                If Not txtPass1.Text = "" Then
+                    .FullName = txtFullname.Text
+                    .Password = txtPass1.Text
+                    .Privilege = Privileger()
+                    .UpdatePrivilege()
+                    .SaveUser(False, txtPass1.Text)
+                Else
+                    .FullName = txtFullname.Text
+                    .Privilege = Privileger()
+                    .UpdatePrivilege()
+                    .SaveUser(False)
+                End If
             End With
 
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
-        End If
-
-        ClearFields()
-        LoadActive()
+            End If
+            ClearFields()
+            LoadActive()
     End Sub
     Private Sub lvUsers_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUsers.DoubleClick
         LoadUser()
         EditMode()
+        ResetPassword()
+        UserCanPrivilege()
     End Sub
 
     Private Sub SaveMode()
@@ -274,6 +364,7 @@
     End Sub
 
     Private Sub EditMode()
+        chkEnableDisable.Enabled = True
         btnAdd.Text = "&Update"
         txtUser.ReadOnly = True
         txtPass1.Text = ""
@@ -282,4 +373,100 @@
         txtPass1.Focus()
     End Sub
 
+    Private Sub ResetPassword()
+        If POSuser.canResetPassword Then
+            txtPass1.Enabled = True
+            txtPass2.Enabled = True
+            txtPass1.Text = ""
+            txtPass2.Text = ""
+        Else
+            txtPass1.Enabled = False
+            txtPass2.Enabled = False
+        End If
+        txtPass1.Focus()
+    End Sub
+
+    Private Sub UserCanPrivilege()
+        If POSuser.canAddPrivilege Then
+            chkPawn.Enabled = True
+            chkCM.Enabled = True
+            chkMT.Enabled = True
+            chkIns.Enabled = True
+            chkLay.Enabled = True
+            chkDB.Enabled = True
+            chkPOS.Enabled = True
+            chkCIO.Enabled = True
+            chkAppraiser.Enabled = True
+            chkEnAll.Enabled = True
+            chkEL.Enabled = True
+            chkJE.Enabled = True
+            chkCC.Enabled = True
+            chkBU.Enabled = True
+            chkR1.Enabled = True
+            chkR2.Enabled = True
+            chkR3.Enabled = True
+            chkR4.Enabled = True
+            chkVUM.Enabled = True
+            chkVR.Enabled = True
+            chkOS.Enabled = True
+            chkSuAll.Enabled = True
+            chkUM.Enabled = True
+            chkUR.Enabled = True
+            chkUS.Enabled = True
+            chkBorrowings.Enabled = True
+            chkResetPassword.Enabled = True
+            chkMaAll.Enabled = True
+            chkCashInBank.Enabled = True
+            chkCashOutBank.Enabled = True
+            chkVoid.Enabled = True
+            chkPullOut.Enabled = True
+            chkMigrate.Enabled = True
+            chkPrivilege.Enabled = True
+            chkSuAll.Enabled = True
+            chkStockOut.Enabled = True
+            chkReturn.Enabled = True
+        Else
+            chkPawn.Enabled = False
+            chkCM.Enabled = False
+            chkMT.Enabled = False
+            chkIns.Enabled = False
+            chkLay.Enabled = False
+            chkDB.Enabled = False
+            chkPOS.Enabled = False
+            chkCIO.Enabled = False
+            chkAppraiser.Enabled = False
+            chkEnAll.Enabled = False
+            chkEL.Enabled = False
+            chkJE.Enabled = False
+            chkCC.Enabled = False
+            chkBU.Enabled = False
+            chkR1.Enabled = False
+            chkR2.Enabled = False
+            chkR3.Enabled = False
+            chkR4.Enabled = False
+            chkVUM.Enabled = False
+            chkVR.Enabled = False
+            chkOS.Enabled = False
+            chkSuAll.Enabled = False
+            chkUM.Enabled = False
+            chkUR.Enabled = False
+            chkUS.Enabled = False
+            chkBorrowings.Enabled = False
+            chkResetPassword.Enabled = False
+            chkMaAll.Enabled = False
+            chkCashInBank.Enabled = False
+            chkCashOutBank.Enabled = False
+            chkVoid.Enabled = False
+            chkPullOut.Enabled = False
+            chkMigrate.Enabled = False
+            chkPrivilege.Enabled = False
+            chkSuAll.Enabled = False
+            chkStockOut.Enabled = False
+            chkReturn.Enabled = False
+        End If
+    End Sub
+
+    Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
+        CheckUsername()
+    End Sub
 End Class

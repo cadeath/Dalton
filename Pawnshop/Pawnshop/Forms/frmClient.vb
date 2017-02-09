@@ -20,6 +20,7 @@ Public Class frmClient
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
@@ -62,18 +63,14 @@ Public Class frmClient
         txtSearch.Text = ""
         lvClient.Items.Clear()
     End Sub
-    ''' <summary>
-    ''' This method set frmotherForm to true.
-    ''' </summary>
-    ''' <param name="src"></param>
-    ''' <param name="frmOrigin"></param>
-    ''' <remarks></remarks>
+
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
         fromOtherForm = True
         btnSelect.Visible = True
         txtSearch.Text = src
         frmOrig = frmOrigin
     End Sub
+
     ''' <summary>
     ''' This method load all client information and show to the listview.
     ''' </summary>
@@ -129,6 +126,7 @@ Public Class frmClient
             btnSearch.PerformClick()
         End If
     End Sub
+
     ''' <summary>
     ''' This button will show client information in the client form.
     ''' </summary>
@@ -172,6 +170,7 @@ Public Class frmClient
         frmClientInformation.Show()
 
     End Sub
+
     ''' <summary>
     ''' This button will search the specific client information.
     ''' Load the information to the listview.
@@ -180,20 +179,31 @@ Public Class frmClient
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        If txtSearch.Text = "" Then Exit Sub
+        If txtSearch.Text.Length <= 3 Then
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Client Search")
+        Else
+      
+        Dim secured_str As String = txtSearch.Text
+        secured_str = DreadKnight(secured_str)
+        Dim strWords As String() = secured_str.Split(New Char() {" "c})
+        Dim name As String
 
-        Dim src As String = txtSearch.Text
+        Dim src As String = secured_str
         Dim mySql As String = "SELECT * FROM VIEW_CLIENT " & vbCrLf
         mySql &= " WHERE "
-        mySql &= String.Format("UPPER(FirstName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-        mySql &= String.Format("UPPER(MiddleName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-        mySql &= String.Format("UPPER(LastName) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(Addr_Brgy) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
         mySql &= String.Format("UPPER(Addr_City) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-        mySql &= String.Format("UPPER(Phone1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-        mySql &= String.Format("UPPER(Phone2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-        mySql &= String.Format("UPPER(Phone_Others) LIKE UPPER('%{0}%') " & vbCrLf, src)
-        'mySql &= "isSelect = 1 or isSelect is NULL" & vbCrLf
+        mySql &= String.Format("Phone1 LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Phone2 LIKE '%{0}%' OR " & vbCrLf, src)
+        mySql &= String.Format("Phone_Others LIKE '%{0}%' OR" & vbCrLf, src)
+        For Each name In strWords
+            mySql &= vbCr & " UPPER(LastName ||' '|| FirstName ||' '|| MiddleName) LIKE UPPER('%" & name & "%') and "
+            mySql &= vbCr & "UPPER(FirstName ||' '|| MiddleName ||' '|| LastName) LIKE UPPER('%" & name & "%') and "
+            If name Is strWords.Last Then
+                mySql &= vbCr & " UPPER(FirstName ||' '|| LastName ||' '|| MiddleName) LIKE UPPER('%" & name & "%') "
+                Exit For
+            End If
+        Next
         mySql &= "ORDER BY LastName ASC, FirstName ASC"
 
         Console.WriteLine("SQL: " & mySql)
@@ -213,7 +223,8 @@ Public Class frmClient
         Next
 
         MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
-        lvClient.Items(0).Focused = True
+            lvClient.Items(0).Focused = True
+        End If
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
@@ -222,6 +233,7 @@ Public Class frmClient
         If lvClient.SelectedItems.Count = 0 Then
             lvClient.Items(0).Focused = True
         End If
+
         Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
         GetClient = New Client
         GetClient.LoadClient(idx)
@@ -251,4 +263,7 @@ Public Class frmClient
         End If
     End Sub
 
+    Private Sub lvClient_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvClient.SelectedIndexChanged
+
+    End Sub
 End Class

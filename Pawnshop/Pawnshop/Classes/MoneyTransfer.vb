@@ -2,6 +2,8 @@
 
     Private fillData As String = "tblMoneyTransfer"
     Private fillData1 As String = "tbl_DailyTimeLog"
+    Private filldata2 As String = "tblJournal"
+
 #Region "Variables"
     Private _id As Integer
     Private _ref As String
@@ -16,6 +18,7 @@
     Private _netAmount As Double = 0
     Private _encoderID As Integer
     Private _status As String
+    Private _bracket As String
 #End Region
 
 #Region "Properties"
@@ -156,6 +159,15 @@
             Return _encoderID
         End Get
     End Property
+
+    Public Property Bracket As String
+        Set(ByVal value As String)
+            _bracket = value
+        End Set
+        Get
+            Return _bracket
+        End Get
+    End Property
 #End Region
 
 #Region "Procedures and Functions"
@@ -219,6 +231,7 @@
             .Item("Status") = _status
             .Item("EncoderID") = _encoderID
             .Item("SystemInfo") = Now
+            .Item("Bracket") = _bracket
         End With
         ds.Tables(fillData).Rows.Add(dsNewRow)
 
@@ -233,7 +246,7 @@
         ds.Tables(0).Rows(0).Item("Status") = "V"
         ds.Tables(0).Rows(0).Item("Remarks") = reason
         database.SaveEntry(ds, False)
-
+        Dim tmpMoneyTransfer As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
     
         Dim MoneyTransID As Integer = frmMTlist.lvMoneyTransfer.FocusedItem.Tag
         Me.LoadById(_id)
@@ -260,10 +273,52 @@
             Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
                 SrcStr = "GPRS_R|Ref# " & _ref
         End Select
+        Dim strModname1 As String, strModname2 As String
+        Select Case frmMTlist.lblModname.Text
+            Case "Cebuana Llhuiller OUT"
+                strModname1 = "PERA LINK OUT"
+            Case "Cebuana Llhuiller IN"
+                strModname1 = "PERA LINK IN"
+            Case "Pera Padala - PMFTC OUT"
+                strModname1 = "Pera Padala OUT"
+            Case "Pera Padala - PMFTC IN"
+                strModname1 = "Pera Padala IN"
+            Case "Western Union - Local OUT", "Western Union - Intl OUT"
+                strModname1 = "Western Union OUT"
+                strModname2 = "Western Union OUT"
+            Case "Western Union - Local IN", "Western Union - Intl IN"
+                strModname1 = "Western Union IN"
+                strModname2 = "Western Union IN"
+            Case "GPRS - GPRS to GPRS OUT", "GPRS - GPRS to Smart Money OUT", "GPRS - GPRS to BANK (UCPB/PNB) OUT", "GPRS - GPRS to BANK (BDO/Chinabank) OUT", _
+                    "GPRS - GPRS to BANK (DBP) OUT", "GPRS - GPRS to BANK (MetroBank) OUT", "GPRS - GPRS to BANK (Maybank/LandBank) OUT", _
+                    "GPRS - iREMIT to GPRS OUT", "GPRS - NYBP/Transfast to GPRS OUT", "GPRS - GPRS to Moneygram OUT"
+                strModname1 = "GPRS OUT"
+            Case "GPRS - GPRS to GPRS IN", "GPRS - GPRS to Smart Money IN", "GPRS - GPRS to BANK (UCPB/PNB) IN", "GPRS - GPRS to BANK (BDO/Chinabank) IN", _
+                "GPRS - GPRS to BANK (DBP) IN", "GPRS - GPRS to BANK (MetroBank) IN", "GPRS - GPRS to BANK (Maybank/LandBank) IN", _
+                "GPRS - iREMIT to GPRS IN", "GPRS - NYBP/Transfast to GPRS IN", "GPRS - GPRS to Moneygram IN"
+                strModname1 = "GPRS IN"
+            Case "GPRS - Smartmoney To GPRS IN", "GPRS - Moneygram to GPRS IN"
+                strModname1 = "GPRS OUT"
+            Case Else
+                strModname1 = frmMTlist.lblModname.Text
+                strModname2 = frmMTlist.lblModname.Text
+        End Select
 
-        RemoveJournal(transID:=MoneyTransID, srcStr:=SrcStr)
 
-        RemoveDailyTimeLog(MoneyTransID)
+        Dim mySql2 As String = "SELECT * FROM " & fillData1 & " WHERE HASCUSTOMER = '1' AND UPPER(MOD_NAME) LIKE UPPER('%" & strModname1 & "%') AND TRANSID =" & MoneyTransID
+        Dim ds2 As DataSet = LoadSQL(mySql2, fillData1)
+        Dim SrvTypDailyTimelog As String = ds2.Tables(0).Rows(0).Item("MOD_NAME")
+        
+        Dim mySql3 As String = "SELECT * FROM " & filldata2 & " WHERE UPPER(TRANSTYPE) LIKE UPPER('%" & strModname2 & "%') AND TRANSID =" & MoneyTransID
+        Dim ds3 As DataSet = LoadSQL(mySql3, filldata2)
+        Dim SrvTypjOURNAL As String = ds3.Tables(0).Rows(0).Item("TransType")
+
+        Dim NewOtp As New ClassOtp("VOID MONEYTRANSFER", diagOTP.txtPIN.Text, SrcStr)
+        TransactionVoidSave(strModname1, tmpMoneyTransfer, POSuser.UserID, SrcStr & " " & reason)
+
+        RemoveJournal(MoneyTransID, , SrvTypjOURNAL)
+        RemoveDailyTimeLog(MoneyTransID, "1", SrvTypDailyTimelog)
+
         Console.WriteLine(String.Format("Transaction #{0} Void.", ds.Tables(0).Rows(0).Item("RefNum")))
     End Sub
 
@@ -287,5 +342,27 @@
         End If
         Return ds.Tables(0).Rows(0).Item("ID")
     End Function
+
+    Public Function LoadServiceType() As String
+        Dim mysql1 As String = "SELECT * FROM tblmoneytransfer WHERE ID =" & frmMTlist.Label2.Text
+
+        Dim ds As DataSet = LoadSQL(mysql1, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("Servicetype")
+    End Function
+
+    Public Function LoadMoneyTrans() As String
+        Dim mysql1 As String = "SELECT * "
+        mysql1 &= "FROM tblmoneytransfer WHERE ID =" & frmMTlist.Label2.Text
+
+        Dim ds As DataSet = LoadSQL(mysql1, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return 0
+        End If
+        Return ds.Tables(0).Rows(0).Item("MoneyTrans")
+    End Function
+
 #End Region
 End Class

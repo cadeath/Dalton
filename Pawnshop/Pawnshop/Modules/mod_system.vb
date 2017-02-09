@@ -1,4 +1,7 @@
-﻿' Changelog
+﻿
+' Changelog
+' v2 7/28/16
+'  - Added ExtractToExcel
 ' v1.4 2/17/16
 '  - Log Module
 ' v1.3 11/19/15
@@ -9,15 +12,17 @@
 '  - Added decimal . in DigitOnly
 '  - Added isMoney
 
+Imports Microsoft.Office.Interop
 Module mod_system
     ''' <summary>
     ''' This region declare the neccessary variable in this system.
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
+    Dim frmCollection As New FormCollection()
     Public DEV_MODE As Boolean = False
     Public PROTOTYPE As Boolean = False
-    Public ADS_ESKIE As Boolean = True
+    Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
 
     Public CurrentDate As Date = Now
@@ -27,6 +32,7 @@ Module mod_system
     Public branchName As String = GetOption("BranchName")
     Public AREACODE As String = GetOption("BranchArea")
     Public REVOLVING_FUND As String = GetOption("RevolvingFund")
+    Public OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Friend isAuthorized As Boolean = False
     Public backupPath As String = "."
@@ -124,6 +130,7 @@ Module mod_system
             frmMain.dateSet = False
         End If
     End Sub
+
     ''' <summary>
     ''' This function will segregate all data from tblPawn
     ''' where AuctionDate is = to the CurrentDate.
@@ -132,17 +139,30 @@ Module mod_system
     ''' <remarks></remarks>
     Friend Function AutoSegregate() As Boolean
         Console.WriteLine("Entering segregation module")
-        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
-        Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
+        Dim mySql As String = "SELECT * FROM OPT WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
+        Dim ds As DataSet = LoadSQL(mySql, "OPT")
 
         If ds.Tables(0).Rows.Count = 0 Then Return True
 
         Console.WriteLine("Segregating...")
-        For Each dr As DataRow In ds.Tables("tblPawn").Rows
-            Dim tmpPawnItem As New PawnTicket
-            tmpPawnItem.LoadTicketInRow(dr)
-            tmpPawnItem.Status = "S"
-            tmpPawnItem.SaveTicket(False)
+        For Each dr As DataRow In ds.Tables("OPT").Rows
+            'Dim tmpPawnItem As New PawnTicket
+            'tmpPawnItem.LoadTicketInRow(dr)
+            'tmpPawnItem.Status = "S"
+            'tmpPawnItem.SaveTicket(False)
+
+            Dim tmpPawnItem As New PawnTicket2
+            tmpPawnItem.Load_PTid(dr.Item("PawnID"))
+            With tmpPawnItem.PawnItem
+                '.WithdrawDate = CurrentDate
+                .Status = "S"
+                .Save_PawnItem()
+            End With
+            With tmpPawnItem
+                '.Load_PT_row(dr)
+                .Status = "S"
+                .Update_PawnTicket()
+            End With
 
             AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
             AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
@@ -184,6 +204,7 @@ Module mod_system
         Dim mySql As String = "SELECT * FROM " & storeDB
         mySql &= String.Format(" WHERE currentDate = '{0}'", CurrentDate.ToString("MM/dd/yyyy"))
         Dim ds As DataSet = LoadSQL(mySql, storeDB)
+
         'if dataset read data then then cc will hold cashcount in the currentdate
         'the user information will be save.
         If ds.Tables(storeDB).Rows.Count = 1 Then
@@ -255,6 +276,7 @@ Module mod_system
         Return ds.Tables(0).Rows(0).Item("ID")
     End Function
 #End Region
+
     ''' <summary>
     ''' This function has two arguments.
     ''' declaraton UseShellExecute as boolean and RedirectStandardOutput as boolean.
@@ -346,6 +368,7 @@ Module mod_system
 
         Return Not (Char.IsDigit(e.KeyChar))
     End Function
+
     ''' <summary>
     ''' this function check if the input is numeric or character.
     ''' </summary>
@@ -438,6 +461,140 @@ Module mod_system
         database.SaveEntry(ds, False)
         Console.WriteLine("SAP Account Changed")
     End Sub
+
+    ''' <summary>
+    ''' Extract Data from the database
+    ''' </summary>
+    ''' <param name="headers">Array of HEADERS</param>
+    ''' <param name="mySql">SQL Statement</param>
+    ''' <param name="dest">Excel File Destination</param>
+    ''' <remarks></remarks>
+    Friend Sub ExtractToExcel(headers As String(), mySql As String, dest As String)
+        If dest = "" Then Exit Sub
+
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        'Load Excel
+        Dim oXL As New Excel.Application
+        If oXL Is Nothing Then
+            MessageBox.Show("Excel is not properly installed!!")
+            Return
+        End If
+
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oXL = CreateObject("Excel.Application")
+        oXL.Visible = False
+
+        oWB = oXL.Workbooks.Add
+        oSheet = oWB.ActiveSheet
+        oSheet.Name = ExtractDataFromDatabase.lbltransaction.Text
+
+        ' ADD BRANCHCODE
+        InsertArrayElement(headers, 0, "BRANCHCODE")
+
+        ' HEADERS
+        Dim cnt As Integer = 0
+        For Each hr In headers
+            cnt += 1 : oSheet.Cells(1, cnt).value = hr
+        Next
+
+        ' EXTRACTING
+        Console.Write("Extracting")
+        Dim rowCnt As Integer = 2
+        For Each dr As DataRow In ds.Tables(0).Rows
+            For colCnt As Integer = 0 To headers.Count - 1
+                If colCnt = 0 Then
+                    oSheet.Cells(rowCnt, colCnt + 1).value = BranchCode
+                Else
+                    oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
+                End If
+            Next
+            rowCnt += 1
+
+            Console.Write(".")
+            Application.DoEvents()
+        Next
+
+        oWB.SaveAs(dest)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        Console.WriteLine("Data Extracted")
+    End Sub
+
+    Private Sub InsertArrayElement(Of T)( _
+          ByRef sourceArray() As T, _
+          ByVal insertIndex As Integer, _
+          ByVal newValue As T)
+
+        Dim newPosition As Integer
+        Dim counter As Integer
+
+        newPosition = insertIndex
+        If (newPosition < 0) Then newPosition = 0
+        If (newPosition > sourceArray.Length) Then _
+           newPosition = sourceArray.Length
+
+        Array.Resize(sourceArray, sourceArray.Length + 1)
+
+        For counter = sourceArray.Length - 2 To newPosition Step -1
+            sourceArray(counter + 1) = sourceArray(counter)
+        Next counter
+
+        sourceArray(newPosition) = newValue
+    End Sub
+
+    ' HASHTABLE FUNCTIONS
+    Public Function GetIDbyName(name As String, ht As Hashtable) As Integer
+        For Each dt As DictionaryEntry In ht
+            If dt.Value = name Then
+                Return dt.Key
+            End If
+        Next
+
+        Return 0
+    End Function
+
+    Public Function GetNameByID(id As Integer, ht As Hashtable) As String
+        For Each dt As DictionaryEntry In ht
+            If dt.Key = id Then
+                Return dt.Value
+            End If
+        Next
+
+        Return "ES" & "KIE GWA" & "PO"
+    End Function
+    ' END - HASHTABLE FUNCTIONS
+
+    Public Function CheckOTP() As Boolean
+        diagOTP.ShowDialog()
+        diagOTP.TopMost = True
+        'Return False
+        Return True
+    End Function
+
+    Public Function CheckFormActive() As Boolean
+
+        frmCollection = Application.OpenForms()
+        If Application.OpenForms().OfType(Of frmInsurance).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmInsurance").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmPawningItemNew).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmPawningItemNew").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmBorrowing).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmBorrowing").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmMoneyTransfer).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmMoneyTransfer").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmSales).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmSales").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        End If
+
+        Return False
+    End Function
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

@@ -1,4 +1,5 @@
 ﻿Public Class frmDollarList
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -34,7 +35,7 @@
     ''' </summary>
     ''' <param name="mySql"></param>
     ''' <remarks></remarks>
-    Friend Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tblDollar WHERE status= 'A' ORDER BY DOLLARID DESC")
+    Friend Sub LoadActive(Optional ByVal mySql As String = "SELECT FIRST 50 * FROM tblDollar WHERE status= 'A' ORDER BY DOLLARID DESC")
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
@@ -72,6 +73,7 @@
     Private Sub lvDollar_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvDollar.DoubleClick
         btnView.PerformClick()
     End Sub
+
     ''' <summary>
     ''' This button will allow to void transaction.
     ''' </summary>
@@ -80,7 +82,14 @@
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvDollar.SelectedItems.Count = 0 Then Exit Sub
-
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidMoneyExchange
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidMoneyExchange()
+        End If
+    End Sub
+    Friend Sub VoidMoneyExchange()
         Dim tmpLoad As New DollarTransaction
         Dim id As Integer = lvDollar.FocusedItem.Tag
         tmpLoad.LoadDollar(id)
@@ -92,7 +101,14 @@
             MsgBox("You cannot void transactions in a DIFFERENT date", MsgBoxStyle.Critical)
             Exit Sub
         End If
+        Dim filldata As String = "TBLDOLLAR"
+        Dim mysql As String = "SELECT * FROM " & filldata & " WHERE DOLLARID = '" & id & "'"
+        Dim ds As DataSet = LoadSQL(mysql)
+        Dim tmpEncoderID As Integer
+        tmpEncoderID = ds.Tables(0).Rows(0).Item("UserId")
 
+        Dim NewOtp As New ClassOtp("VOID DOLLAR", diagOTP.txtPIN.Text, "DollarID# " & id)
+        TransactionVoidSave("DOLLAR BUYING", tmpEncoderID, POSuser.UserID, "DollarID# " & id & " " & ans)
         tmpLoad.VoidTransaction(ans)
 
         Dim amt As Double = tmpLoad.NetAmount
@@ -109,18 +125,33 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        If txtSearch.Text = "" Then Exit Sub
+        If txtSearch.Text.Length <= 3 Then
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Client Search")
+        Else
+            Dim secured_str As String = txtSearch.Text
+            secured_str = DreadKnight(secured_str)
 
-        Dim mySql As String = "SELECT * FROM tblDollar WHERE "
-        If IsNumeric(txtSearch.Text) Then
-            mySql &= "DollarID = " & txtSearch.Text
-        Else : mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", txtSearch.Text)
-            mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%')", txtSearch.Text)
-            'mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", txtSearch.Text)
+            Dim mySql As String = "SELECT * FROM tblDollar WHERE "
+            If IsNumeric(secured_str) Then
+                mySql &= "DollarID = " & secured_str
+            Else : mySql &= String.Format("UPPER(Fullname) LIKE UPPER('%{0}%') OR ", secured_str)
+                mySql &= String.Format("UPPER(Denomination) LIKE UPPER('%{0}%') OR ", secured_str)
+                mySql &= String.Format("UPPER(Serial) LIKE UPPER('%{0}%') OR ", secured_str)
+                mySql &= String.Format("UPPER(CURRENCY) LIKE UPPER('%{0}%')", secured_str)
+            End If
+            Dim ds As DataSet = LoadSQL(mySql)
+            Console.WriteLine("SQL: " & mySql)
+            Dim MaxRow As Integer = ds.Tables(0).Rows.Count
+            'lvCIO.Items.Clear()
+            If MaxRow <= 0 Then
+                MsgBox("Query not found", MsgBoxStyle.Information)
+                txtSearch.SelectAll()
+                lvDollar.Items.Clear()
+                Exit Sub
+            End If
+            MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Currency")
+            LoadActive(mySql)
         End If
-
-        LoadActive(mySql)
     End Sub
     ''' <summary>
     ''' This keypress will go to search client information form.

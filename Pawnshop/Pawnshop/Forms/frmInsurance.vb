@@ -3,6 +3,7 @@
     Dim curInsurance As New Insurance
     Private currentInsuranceNum As Integer = GetOption("InsuranceLastNum")
     Dim MOD_NAME As String = "INSURANCE"
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         web_ads.AdsDisplay = webAds
@@ -67,7 +68,9 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        frmClient.SearchSelect(txtHolder.Text, FormName.frmInsurance)
+        Dim secured_str As String = txtHolder.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.frmInsurance)
         frmClient.Show()
     End Sub
     ''' <summary>
@@ -155,8 +158,8 @@
 
             .SaveInsurance()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", TransID:=.LoadLastIDNumberInsurance)
-            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", TransID:=.LoadLastIDNumberInsurance)
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", .LoadLastIDNumberInsurance)
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", .LoadLastIDNumberInsurance)
 
             AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount, , , .LoadLastIDNumberInsurance)
         End With
@@ -186,6 +189,7 @@
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         frmInsuranceList.Show()
     End Sub
+
     ''' <summary>
     ''' This button will perform to void the transaction.
     ''' </summary>
@@ -193,6 +197,14 @@
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidInsurance
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidInsurance()
+        End If
+    End Sub
+    Friend Sub VoidInsurance()
         Dim ans As DialogResult = MsgBox("Do you want to void this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -207,12 +219,12 @@
         MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
         Me.Close()
     End Sub
-
     Private Sub txtPT_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress
         'DigitOnly(e)
         If isEnter(e) Then
             btnSave.PerformClick()
         End If
     End Sub
+
 
 End Class

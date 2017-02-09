@@ -72,12 +72,12 @@
           <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemType">
-          <DataField>ItemType</DataField>
+        <Field Name="ItemClass">
+          <DataField>ItemClass</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Category">
-          <DataField>Category</DataField>
+        <Field Name="ItemCategory">
+          <DataField>ItemCategory</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Grams">
@@ -100,12 +100,12 @@
           <DataField>Principal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PullOut">
-          <DataField>PullOut</DataField>
+        <Field Name="WithDrawDate">
+          <DataField>WithDrawDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Interest">
-          <DataField>Interest</DataField>
+        <Field Name="DelayInterest">
+          <DataField>DelayInterest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Appraiser">
@@ -118,6 +118,10 @@
         </Field>
         <Field Name="NewPT">
           <DataField>NewPT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PawnID">
+          <DataField>PawnID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -190,7 +194,7 @@
               <Width>0.46355in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.73959in</Width>
+              <Width>0.67709in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -208,6 +212,7 @@
                             <TextRun>
                               <Value>Count</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -261,6 +266,7 @@
                             <TextRun>
                               <Value>Sum</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -316,8 +322,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!AuctionDate.Value)</Value>
+                              <Value>=Count(Fields!ItemClass.Value)</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
                                 <Format>0;(0);'-'</Format>
                               </Style>
                             </TextRun>
@@ -371,7 +378,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Principal.Value)</Value>
                               <Style>
-                                <FontWeight>Bold</FontWeight>
+                                <FontSize>9pt</FontSize>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                                 <TextDecoration>None</TextDecoration>
                               </Style>
@@ -427,8 +434,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!AuctionDate.Value)</Value>
+                              <Value>=Count(Fields!ItemClass.Value)</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>0;(0);'-'</Format>
                               </Style>
@@ -483,6 +491,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!Principal.Value)</Value>
                               <Style>
+                                <FontSize>9pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>#,0.00;(#,0.00);'-'</Format>
                                 <TextDecoration>None</TextDecoration>
@@ -534,12 +543,12 @@
             <TablixMember>
               <Group Name="Category">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!Category.Value</GroupExpression>
+                  <GroupExpression>=Fields!ItemClass.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!Category.Value</Value>
+                  <Value>=Fields!ItemClass.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixMembers>
@@ -547,14 +556,14 @@
                   <TablixHeader>
                     <Size>0.25in</Size>
                     <CellContents>
-                      <Textbox Name="Category">
+                      <Textbox Name="ItemClass">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!Category.Value</Value>
+                                <Value>=Fields!ItemClass.Value</Value>
                                 <Style>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>
@@ -565,7 +574,7 @@
                             </Style>
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Category</rd:DefaultName>
+                        <rd:DefaultName>ItemClass</rd:DefaultName>
                         <Style>
                           <Border>
                             <Style>Solid</Style>
@@ -680,6 +689,7 @@
                           <TextRun>
                             <Value>=Fields!AuctionDate.Value</Value>
                             <Style>
+                              <FontSize>9pt</FontSize>
                               <Format>dd-MMM-yy</Format>
                             </Style>
                           </TextRun>
@@ -734,6 +744,7 @@
                           <TextRun>
                             <Value>=CountDistinct(Fields!AuctionDate.Value)</Value>
                             <Style>
+                              <FontSize>9pt</FontSize>
                               <FontWeight>Bold</FontWeight>
                             </Style>
                           </TextRun>
@@ -782,7 +793,7 @@
         <Top>0.02083in</Top>
         <Left>0.01563in</Left>
         <Height>1in</Height>
-        <Width>2.06772in</Width>
+        <Width>2.00522in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1029,8 +1040,9 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>SEGREGATED ITEM LIST</Value>
+                  <Value>AUCTION MONTHLY REPORT - JEWELRIES</Value>
                   <Style>
+                    <FontStyle>Italic</FontStyle>
                     <FontSize>8pt</FontSize>
                   </Style>
                 </TextRun>
@@ -1041,9 +1053,9 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox270</rd:DefaultName>
-          <Left>4.2882in</Left>
+          <Left>3.93403in</Left>
           <Height>0.25in</Height>
-          <Width>1.85418in</Width>
+          <Width>2.54168in</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>

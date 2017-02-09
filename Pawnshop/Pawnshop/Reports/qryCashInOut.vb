@@ -8,7 +8,6 @@
 
     Private Sub qryCashInOut_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         LoadCategories()
-       
         'Disable_Functions()
     End Sub
 
@@ -57,8 +56,9 @@
         dsName = "dsCIO"
         mySql = "SELECT * FROM TBLCASHTRANS"
         mySql &= String.Format(" WHERE TransDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
+        mySql &= " AND STATUS <> '0' "
         If (chkIN.Checked Or chkOUT.Checked Or chkOther.Checked) Then
-            mySql &= TypeFilter()
+            mySql &= TypeFilter2()
         End If
 
         Dim addParameter As New Dictionary(Of String, String)
@@ -80,6 +80,7 @@
 
         mySql = "SELECT * FROM TBLCASHTRANS "
         mySql &= String.Format(" WHERE TRANSDATE = '{0}'", cur.ToShortDateString)
+        mySql &= " AND STATUS <> '0' "
         If (chkIN.Checked Or chkOUT.Checked Or chkOther.Checked) Then
             mySql &= TypeFilter2()
         End If
@@ -96,7 +97,7 @@
         Dim receipt As String = "1", disburse As String = "1", tmp As String
         If chkIN.Checked Then receipt = "TYPE = 'Receipt'"
         If chkOUT.Checked Then disburse = "TYPE = 'Disbursement'"
-
+       
         tmp = "("
         tmp &= IIf(chkIN.Checked, receipt, "")
         If chkIN.Checked And chkOUT.Checked Then tmp &= " OR "
@@ -109,9 +110,10 @@
         End If
 
         Return String.Format(" AND ({0})", tmp)
+
     End Function
     Private Function TypeFilter2() As String
-        Dim receipt As String, disburse As String, Other As String, tmp As String
+        Dim receipt As String = "", disburse As String = "", Other As String = "", tmp As String
         If chkIN.Checked Then receipt = "TYPE = 'Receipt'"
         If chkOUT.Checked Then disburse = "TYPE = 'Disbursement'"
         If chkOther.Checked Then Other = "(TYPE <> 'Receipt' AND TYPE <> 'Disbursement')"

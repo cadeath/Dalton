@@ -20,6 +20,8 @@ Public Class frmClientInformation
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClientInformation_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
+        frmClient.Enabled = False
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
@@ -535,34 +537,24 @@ Public Class frmClientInformation
         If Not txtFirstName.Enabled Then Exit Sub
 
         Dim mySql As String
-        mySql = "SELECT "
-        mySql &= vbCrLf & "	C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
-        mySql &= vbCrLf & "    CASE "
-        mySql &= vbCrLf & "    	WHEN C.SUFFIX is Null THEN ''"
-        mySql &= vbCrLf & "        ELSE C.SUFFIX"
-        mySql &= vbCrLf & "    END "
-        mySql &= vbCrLf & "    AS FULLNAME,"
-        mySql &= vbCrLf & "	C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' ||  C.ADDR_PROVINCE AS ADDRESS,"
-        mySql &= vbCrLf & "    C.BIRTHDAY, C.PHONE1, C.PHONE2, P.PAWNTICKET, "
-        mySql &= vbCrLf & "    CASE P.STATUS"
-        mySql &= vbCrLf & "    	WHEN '0' THEN 'RENEWED'"
-        mySql &= vbCrLf & "        WHEN 'R' THEN 'RENEW'"
-        mySql &= vbCrLf & "        WHEN 'L' THEN 'NEW LOAN'"
-        mySql &= vbCrLf & "        WHEN 'V' THEN 'VOID'"
-        mySql &= vbCrLf & "        WHEN 'X' THEN 'REDEEM'"
-        mySql &= vbCrLf & "        WHEN 'S' THEN 'SEGRE'"
-        mySql &= vbCrLf & "        WHEN 'W' THEN 'PULLOUT: ' || CAST(P.PULLOUT AS DATE)"
-        mySql &= vbCrLf & "        ELSE 'STATUS ERROR'"
-        mySql &= vbCrLf & "    END AS STATUS, P.DESCRIPTION, P.ITEMTYPE, CL.CATEGORY,"
-        mySql &= vbCrLf & "    P.LOANDATE, P.PRINCIPAL, P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.PENALTY, USR.USERNAME as APPRAISER"
-        mySql &= vbCrLf & "FROM "
-        mySql &= vbCrLf & "  TBLPAWN P"
-        mySql &= vbCrLf & "	LEFT JOIN TBLCLIENT C"
-        mySql &= vbCrLf & "	ON P.CLIENTID = C.CLIENTID"
-        mySql &= vbCrLf & "    INNER JOIN TBLCLASS CL"
-        mySql &= vbCrLf & "    ON CL.CLASSID = P.CATID"
-        mySql &= vbCrLf & "    LEFT JOIN TBL_GAMIT USR"
-        mySql &= vbCrLf & "    ON USR.USERID = P.APPRAISERID"
+        mySql = "SELECT C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mySql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
+        mySql &= "C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' ||  C.ADDR_PROVINCE AS ADDRESS, "
+        mySql &= "C.BIRTHDAY, C.PHONE1, C.PHONE2, P.PAWNTICKET, CASE P.STATUS	WHEN '0' THEN 'RENEWED' "
+        mySql &= "WHEN 'R' THEN 'RENEW' "
+        mySql &= "WHEN 'L' THEN 'NEW LOAN' "
+        mySql &= "WHEN 'V' THEN 'VOID' "
+        mySql &= "WHEN 'X' THEN 'REDEEM' "
+        mySql &= "WHEN 'S' THEN 'SEGRE' "
+        mySql &= "WHEN 'W' THEN 'PULLOUT: ' || CAST(ITM.WITHDRAWDATE AS DATE)  ELSE 'STATUS ERROR' "
+        mySql &= "END AS STATUS, P.DESCRIPTION, "
+        mySql &= "CLASS.ITEMCATEGORY, ITM.ITEMCLASS, P.LOANDATE, P.PRINCIPAL, "
+        mySql &= "P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.PENALTY, USR.USERNAME as APPRAISER "
+        mySql &= "FROM OPT P "
+        mySql &= "LEFT JOIN TBLCLIENT C ON P.CLIENTID = C.CLIENTID "
+        mySql &= "INNER JOIN OPI ITM ON ITM.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM CLASS ON CLASS.ITEMID = ITM.ITEMID "
+        mySql &= "LEFT JOIN TBL_GAMIT USR ON USR.USERID = P.APPRAISERID "
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & " P.STATUS <> 'V' AND P.CLIENTID = " & SelectedClient.ID
 
@@ -576,6 +568,10 @@ Public Class frmClientInformation
 
         frmReport.ReportInit(mySql, "dsHistory", "Reports\rpt_History.rdlc", repPara)
         frmReport.Show()
+        frmReport.TopMost = True
     End Sub
 
+    Private Sub frmClientInformation_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        frmClient.Enabled = True
+    End Sub
 End Class

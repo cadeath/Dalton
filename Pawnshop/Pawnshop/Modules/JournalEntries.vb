@@ -44,7 +44,9 @@
                 onHold = IIf(.Rows(0).Item("onHold") = 1, True, False)
                 'TransType = IIf(IsDBNull(.Rows(0).Item("TRANSTYPE")), "", .Rows(0).Item("TRANSTYPE"))
             End With
-            If onHold Then MsgBox("AccountCode " & transactionName & " is ON HOLD" & vbCrLf & "Contact your IT DEPARTMENT", MsgBoxStyle.Information)
+            'Removed
+            'No use, only identifying ONHOLD
+            'If onHold Then MsgBox("AccountCode " & transactionName & " is ON HOLD" & vbCrLf & "Contact your IT DEPARTMENT", MsgBoxStyle.Information)
         End If
 
         Dim tblName As String = "tblJournal"
@@ -99,7 +101,7 @@
         Dim i As Integer = 0
         Dim fillData As String = "tblJournal"
         Dim mySql As String = "SELECT * FROM tblJournal WHERE "
-        mySql &= String.Format("TRANSID ='{0}' AND REMARKS LIKE '%{1}%' and TRANSTYPE='{2}'", transID, srcStr, TransType)
+        mySql &= String.Format("TRANSID ='{0}' AND REMARKS LIKE '%{1}%' and TRANSTYPE like '%{2}%'", transID, srcStr, TransType)
 
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         If ds.Tables(fillData).Rows.Count = 0 Then MsgBox("JOURNAL ENTRIES NOT FOUND", MsgBoxStyle.Critical, "DEVELOPER WARNING") : Exit Sub

@@ -32,12 +32,16 @@
           <DataField>ExpiryDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemType">
-          <DataField>ItemType</DataField>
+        <Field Name="AuctionDate">
+          <DataField>AuctionDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Pawner">
-          <DataField>Pawner</DataField>
+        <Field Name="ItemCategory">
+          <DataField>ItemCategory</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Client">
+          <DataField>Client</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="FullAddress">
@@ -52,12 +56,16 @@
           <DataField>Appraisal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Interest">
-          <DataField>Interest</DataField>
+        <Field Name="DelayInterest">
+          <DataField>DelayInterest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="AdvInt">
           <DataField>AdvInt</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Penalty">
+          <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ServiceCharge">
@@ -74,6 +82,22 @@
         </Field>
         <Field Name="ContactNumber">
           <DataField>ContactNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ORNum">
+          <DataField>ORNum</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ORDate">
+          <DataField>ORDate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RenewDue">
+          <DataField>RenewDue</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RedeemDue">
+          <DataField>RedeemDue</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -163,7 +187,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Pawner.Value</Value>
+                <Value>=Fields!Client.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -485,7 +509,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>2.23617in</Top>
+        <Top>2.25006in</Top>
         <Left>0.0576in</Left>
         <Height>0.54167in</Height>
         <Width>4.16949in</Width>
@@ -553,7 +577,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>2.60422in</Top>
         <Left>6.40515in</Left>
-        <Height>0.2882in</Height>
+        <Height>0.18751in</Height>
         <Width>1.03407in</Width>
         <ZIndex>14</ZIndex>
         <Style>
@@ -571,7 +595,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Pawner.Value</Value>
+                <Value>=Fields!Client.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1023,7 +1047,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Pawner.Value</Value>
+                <Value>=Fields!Client.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1413,7 +1437,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>8.46533in</Top>
         <Left>6.38432in</Left>
-        <Height>0.2882in</Height>
+        <Height>0.21529in</Height>
         <Width>1.03407in</Width>
         <ZIndex>41</ZIndex>
         <Style>
@@ -1431,7 +1455,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Pawner.Value</Value>
+                <Value>=Fields!Client.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                 </Style>
@@ -1620,7 +1644,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Pawner.Value</Value>
+                <Value>=Fields!Client.Value</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1903,6 +1927,90 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Image Name="Image5">
+        <Source>Embedded</Source>
+        <Value>Reprint4</Value>
+        <Sizing>Fit</Sizing>
+        <Top>0.20999in</Top>
+        <Left>5.97696in</Left>
+        <Height>0.26514in</Height>
+        <Width>1.06643in</Width>
+        <ZIndex>57</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Parameters!txtReprint.Value.ToString().Contains("Reprint"),false ,true)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Textbox Name="Textbox52">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtRateInPercent.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>2.80562in</Top>
+        <Left>6.40515in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.03407in</Width>
+        <ZIndex>58</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox53">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtRateInPercent.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>8.69451in</Top>
+        <Left>6.38432in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.03407in</Width>
+        <ZIndex>59</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>9.80075in</Height>
     <Style />
@@ -1930,212 +2038,158 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="txtReprint">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="txtRateInPercent">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
-  <Code>Function AmountToWord(ByVal MyNumber)
-Dim Temp
-Dim Rupees, Paisa As String
-Dim DecimalPlace, iCount
-Dim Hundreds, Words As String
-Dim place(9) As String
-place(0) = " Thousand "
-place(2) = " Lakh "
-place(4) = " Crore "
-place(6) = " Arab "
-place(8) = " Kharab "
-On Error Resume Next
-' Convert MyNumber to a string, trimming extra spaces.
-MyNumber = Trim(Str(MyNumber))
+  <Code>Public Shared Function AmountToWord(ByVal Input As Long) As String 'Call this function passing the number you desire to be changed
+    Dim output As String = Nothing
+    If Input &lt; 1000 Then
+            output = FindNumber(Input) 'if its less than 1000 then just look it up
+        Else
+            Dim nparts() As String 'used to break the number up into 3 digit parts
+            Dim n As String = Input 'string version of the number
+            Dim i As Long = Input.ToString.Length 'length of the string to help break it up
 
-' Find decimal place.
-DecimalPlace = InStr(MyNumber, ".")
+            Do Until i - 3 &lt;= 0
+                n = n.Insert(i - 3, ",") 'insert commas to use as splitters
+                i = i - 3 'this insures that we get the correct number of parts
+            Loop
+            nparts = n.Split(",") 'split the string into the array
 
-' If we find decimal place...
-If DecimalPlace &gt; 0 Then
-' Convert Paisa
-Temp = Left(Mid(MyNumber, DecimalPlace + 1) &amp; "00", 2)
-'Paisa = " and " &amp; ConvertTens(Temp) &amp; " Paisa"
-Paisa = ""
+            i = Input.ToString.Length 'return i to initial value for reuse
+            Dim p As Integer = 0 'p for parts, used for finding correct suffix
+            For Each s As String In nparts
+                Dim x As Long = CLng(s) 'x is used to compare the part value to other values
+                p = p + 1
+                If p = nparts.Length Then 'if p = number of elements in the array then we need to do something different
+                    If x &lt;&gt; 0 Then
+                        If CLng(s) &lt; 100 Then
+                            output = output &amp; " And " &amp; FindNumber(CLng(s)) ' look up the number, no suffix 
+                        Else                                                ' required as this is the last part
+                            output = output &amp; " " &amp; FindNumber(CLng(s))
+                        End If
+                    End If
+                Else 'if its not the last element in the array
+                    If x &lt;&gt; 0 Then
+                        If output = Nothing Then 'we have to check this so we don't add a leading space
+                            output = output &amp; FindNumber(CLng(s)) &amp; " " &amp; FindSuffix(i, CLng(s)) 'look up the number and suffix
+                        Else 'spaces must go in the right place
+                            output = output &amp; " " &amp; FindNumber(CLng(s)) &amp; " " &amp; FindSuffix(i, CLng(s)) 'look up the snumber and suffix
+                        End If
+                    End If
+                End If
+                i = i - 3 'reduce the suffix counter by 3 to step down to the next suffix
+            Next
+        End If
+        Return output
+    End Function
 
-' Strip off paisa from remainder to convert.
-MyNumber = Trim(Left(MyNumber, DecimalPlace - 1))
-End If
+    Private Shared Function FindNumber(ByVal Number As Long) As String
+        Dim Words As String = Nothing
+        Dim Digits() As String = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", _
+      "Eight", "Nine", "Ten"}
+        Dim Teens() As String = {"", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", _
+       "Eighteen", "Nineteen"}
 
-'===============================================================
-Dim TM As String ' If MyNumber between Rs.1 To 99 Only.
-TM = Right(MyNumber, 2)
+        If Number &lt; 11 Then
+            Words = Digits(Number)
 
-If Len(MyNumber) &gt; 0 And Len(MyNumber) &lt;= 2 Then
-If Len(TM) = 1 Then
-Words = ConvertDigit(TM)
-AmountToWord = Words &amp; Paisa 
+        ElseIf Number &lt; 20 Then
+            Words = Teens(Number - 10)
 
-Exit Function
+        ElseIf Number = 20 Then
+            Words = "Twenty"
 
-Else
-If Len(TM) = 2 Then
-Words = ConvertTens(TM)
-AmountToWord = Words &amp; Paisa 
-Exit Function
+        ElseIf Number &lt; 30 Then
+            Words = "Twenty " &amp; Digits(Number - 20)
 
-End If
-End If
-End If
-'===============================================================
+        ElseIf Number = 30 Then
+            Words = "Thirty"
 
+        ElseIf Number &lt; 40 Then
+            Words = "Thirty " &amp; Digits(Number - 30)
 
-' Convert last 3 digits of MyNumber to ruppees in word.
-Hundreds = ConvertHundreds(Right(MyNumber, 3))
-' Strip off last three digits
-MyNumber = Left(MyNumber, Len(MyNumber) - 3)
+        ElseIf Number = 40 Then
+            Words = "Fourty"
 
-iCount = 0
-Do While MyNumber &lt;&gt; ""
-'Strip last two digits
-Temp = Right(MyNumber, 2)
-If Len(MyNumber) = 1 Then
+        ElseIf Number &lt; 50 Then
+            Words = "Fourty " &amp; Digits(Number - 40)
 
+        ElseIf Number = 50 Then
+            Words = "Fifty"
 
-If Trim(Words) = "Thousand" Or _
-Trim(Words) = "Lakh Thousand" Or _
-Trim(Words) = "Lakh" Or _
-Trim(Words) = "Crore" Or _
-Trim(Words) = "Crore Lakh Thousand" Or _
-Trim(Words) = "Arab Crore Lakh Thousand" Or _
-Trim(Words) = "Arab" Or _
-Trim(Words) = "Kharab Arab Crore Lakh Thousand" Or _
-Trim(Words) = "Kharab" Then
+        ElseIf Number &lt; 60 Then
+            Words = "Fifty " &amp; Digits(Number - 50)
 
-Words = ConvertDigit(Temp) &amp; place(iCount)
-MyNumber = Left(MyNumber, Len(MyNumber) - 1)
+        ElseIf Number = 60 Then
+            Words = "Sixty"
 
-Else
+        ElseIf Number &lt; 70 Then
+            Words = "Sixty " &amp; Digits(Number - 60)
 
-Words = ConvertDigit(Temp) &amp; place(iCount) &amp; Words
-MyNumber = Left(MyNumber, Len(MyNumber) - 1)
+        ElseIf Number = 70 Then
+            Words = "Seventy"
 
-End If
-Else
+        ElseIf Number &lt; 80 Then
+            Words = "Seventy " &amp; Digits(Number - 70)
 
-If Trim(Words) = "Thousand" Or _
-Trim(Words) = "Lakh Thousand" Or _
-Trim(Words) = "Lakh" Or _
-Trim(Words) = "Crore" Or _
-Trim(Words) = "Crore Lakh Thousand" Or _
-Trim(Words) = "Arab Crore Lakh Thousand" Or _
-Trim(Words) = "Arab" Then
+        ElseIf Number = 80 Then
+            Words = "Eighty"
 
+        ElseIf Number &lt; 90 Then
+            Words = "Eighty " &amp; Digits(Number - 80)
 
-Words = ConvertTens(Temp) &amp; place(iCount)
+        ElseIf Number = 90 Then
+            Words = "Ninety"
 
+        ElseIf Number &lt; 100 Then
+            Words = "Ninety " &amp; Digits(Number - 90)
 
-MyNumber = Left(MyNumber, Len(MyNumber) - 2)
-Else
+        ElseIf Number &lt; 1000 Then
+            Words = Number.ToString
+            Words = Words.Insert(1, ",")
+            Dim wparts As String() = Words.Split(",")
+            Words = FindNumber(wparts(0)) &amp; " " &amp; "Hundred"
+            Dim n As String = FindNumber(wparts(1))
+            If CLng(wparts(1)) &lt;&gt; 0 Then
+                Words = Words &amp; " And " &amp; n
+            End If
+        End If
 
-'=================================================================
-' if only Lakh, Crore, Arab, Kharab
+        Return Words
+    End Function
 
-If Trim(ConvertTens(Temp) &amp; place(iCount)) = "Lakh" Or _
-Trim(ConvertTens(Temp) &amp; place(iCount)) = "Crore" Or _
-Trim(ConvertTens(Temp) &amp; place(iCount)) = "Arab" Then
+    Private Shared Function FindSuffix(ByVal Length As Long, ByVal l As Long) As String
+        Dim word As String
 
-Words = Words
-MyNumber = Left(MyNumber, Len(MyNumber) - 2)
-Else
-Words = ConvertTens(Temp) &amp; place(iCount) &amp; Words
-MyNumber = Left(MyNumber, Len(MyNumber) - 2)
-End If
+        If l &lt;&gt; 0 Then
+            If Length &gt; 15 Then
+                word = "Quantillion"
+            ElseIf Length &gt; 12 Then
+                word = "Trillion"
+            ElseIf Length &gt; 9 Then
+                word = "Billion"
+            ElseIf Length &gt; 6 Then
+                word = "Million"
+            ElseIf Length &gt; 3 Then
+                word = "Thousand"
+            ElseIf Length &gt; 2 Then
+                word = "Hundred"
+            Else
+                word = ""
+            End If
+        Else
+            word = ""
+        End If
 
-End If
-End If
-
-iCount = iCount + 2
-Loop
-
-AmountToWord = Words &amp; Hundreds &amp; Paisa 
-End Function
-
-' Conversion for hundreds
-'*****************************************
-Private Function ConvertHundreds(ByVal MyNumber)
-Dim Result As String
-
-' Exit if there is nothing to convert.
-If Val(MyNumber) = 0 Then Exit Function
-
-' Append leading zeros to number.
-MyNumber = Right("000" &amp; MyNumber, 3)
-
-' Do we have a hundreds place digit to convert?
-If Left(MyNumber, 1) &lt;&gt; "0" Then
-Result = ConvertDigit(Left(MyNumber, 1)) &amp; " Hundreds "
-End If
-
-' Do we have a tens place digit to convert?
-If Mid(MyNumber, 2, 1) &lt;&gt; "0" Then
-Result = Result &amp; ConvertTens(Mid(MyNumber, 2))
-Else
-' If not, then convert the ones place digit.
-Result = Result &amp; ConvertDigit(Mid(MyNumber, 3))
-End If
-
-ConvertHundreds = Trim(Result)
-End Function
-
-' Conversion for tens
-'*****************************************
-Private Function ConvertTens(ByVal MyTens)
-Dim Result As String
-
-' Is value between 10 and 19?
-If Val(Left(MyTens, 1)) = 1 Then
-Select Case Val(MyTens)
-Case 10 : Result = "Ten"
-Case 11 : Result = "Eleven"
-Case 12 : Result = "Twelve"
-Case 13 : Result = "Thirteen"
-Case 14 : Result = "Fourteen"
-Case 15 : Result = "Fifteen"
-Case 16 : Result = "Sixteen"
-Case 17 : Result = "Seventeen"
-Case 18 : Result = "Eighteen"
-Case 19 : Result = "Nineteen"
-Case Else
-End Select
-Else
-' .. otherwise it's between 20 and 99.
-Select Case Val(Left(MyTens, 1))
-Case 2 : Result = "Twenty "
-Case 3 : Result = "Thirty "
-Case 4 : Result = "Forty "
-Case 5 : Result = "Fifty "
-Case 6 : Result = "Sixty "
-Case 7 : Result = "Seventy "
-Case 8 : Result = "Eighty "
-Case 9 : Result = "Ninety "
-Case Else
-End Select
-
-' Convert ones place digit.
-Result = Result &amp; ConvertDigit(Right(MyTens, 1))
-End If
-
-ConvertTens = Result
-End Function
-
-Private Function ConvertDigit(ByVal MyDigit)
-Select Case Val(MyDigit)
-Case 1 : ConvertDigit = "One"
-Case 2 : ConvertDigit = "Two"
-Case 3 : ConvertDigit = "Three"
-Case 4 : ConvertDigit = "Four"
-Case 5 : ConvertDigit = "Five"
-Case 6 : ConvertDigit = "Six"
-Case 7 : ConvertDigit = "Seven"
-Case 8 : ConvertDigit = "Eight"
-Case 9 : ConvertDigit = "Nine"
-Case Else : ConvertDigit = ""
-End Select
-End Function</Code>
+        Return word
+    End Function</Code>
   <Width>7.67047in</Width>
   <Page>
     <Style />
@@ -2170,6 +2224,32 @@ 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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Reprint4">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportID>e61bb4bc-a2b7-40c9-a7e4-24db7e0016f9</rd:ReportID>

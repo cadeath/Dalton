@@ -16,8 +16,10 @@
     Private fillData As String = "TBLCURRENCY"
     Private MODULE_NAME As String = "DOLLAR"
 
-    Private Sub btnsearch_Click(sender As System.Object, e As System.EventArgs) Handles btnsearch.Click
-        frmClient.SearchSelect(TxtName.Text, FormName.frmMoneyExchange)
+    Private Sub btnsearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnsearch.Click
+        Dim secured_str As String = TxtName.Text
+        secured_str = DreadKnight(secured_str)
+        frmClient.SearchSelect(secured_str, FormName.frmMoneyExchange)
         frmClient.Show()
     End Sub
 
@@ -72,7 +74,7 @@
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
-        lockForm = st
+        'lockForm = st
         txtRate.ReadOnly = st
         If st Then
             btnModify.Text = "&Edit"
@@ -139,6 +141,7 @@
 
     Private Sub btnsave_Click(sender As System.Object, e As System.EventArgs) Handles btnsave.Click
         If Not isValid() Then Exit Sub
+        If txtDenomination1.Text = 0 Or txtDenomination1.Text = Nothing Then Exit Sub
         If txtSerial.Text = "" Then
             MsgBox("Please fill the Serial", MsgBoxStyle.Information, "Dollar")
             txtSerial.Focus()
@@ -154,13 +157,13 @@
                 .Customer = dollarClient
                 .Denomination = txtDenomination1.Text
                 .Serial = txtSerial.Text
-                .EncoderID = POSuser.EncoderID
+                .EncoderID = POSuser.UserID
                 .NetAmount = txtTotal.Text.Substring(4)
                 .CURRENCY = txtCurrency1.Text
                 .SaveDollar()
 
-                AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber, , , , "DOLLAR BUYING", TransID:=.LastIDNumber)
-                AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING", , , "DOLLAR BUYING", TransID:=.LastIDNumber)
+                AddJournal(.NetAmount, "Debit", "Cash on Hand - Dollar", "Ref# " & .LastIDNumber, , , , "DOLLAR BUYING", .LastIDNumber)
+                AddJournal(.NetAmount, "Credit", "Revolving Fund", "Ref# " & .LastIDNumber, "DOLLAR BUYING", , , "DOLLAR BUYING", .LastIDNumber)
 
                 AddTimelyLogs(MODULE_NAME, String.Format("{3} - {0} for Php {1} @ Php {2}", txtDenomination1.Text, .NetAmount, .CurrentRate, .CURRENCY), .NetAmount, , , .LastIDNumber)
             End With
@@ -190,10 +193,6 @@
         MoneyExchange = cl
 
     End Sub
-
-
-
-
 
     Private Sub txtTotal_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotal.TextChanged
         If IsNumeric(txtTotalAmount.Text) Then
@@ -260,8 +259,10 @@
 
 
 
-    Private Sub btnSearch1_Click(sender As System.Object, e As System.EventArgs) Handles btnSearch1.Click
-        frmCurrencyList.SearchSelect(txtCurrency.Text, FormName.frmMoneyExchange)
+    Private Sub btnSearch1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch1.Click
+        Dim secured_str As String = txtCurrency.Text
+        secured_str = DreadKnight(secured_str)
+        frmCurrencyList.SearchSelect(secured_str, FormName.frmMoneyExchange)
         frmCurrencyList.Show()
         frmCurrencyList.txtSearch.Text = Me.txtCurrency1.Text.ToString
         frmCurrencyList.btnSearch.PerformClick()
@@ -288,5 +289,4 @@
             btnSearch1.PerformClick()
         End If
     End Sub
-
 End Class

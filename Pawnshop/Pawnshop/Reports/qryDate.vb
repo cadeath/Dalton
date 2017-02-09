@@ -1,5 +1,7 @@
 ﻿Public Class qryDate
 
+    Friend isAuditing As Boolean = False
+
     ' HOW TO ADD NEW REPORT
     ' 1. Create your Report Procedure (Sub)
     ' 2. Add ReportType
@@ -22,18 +24,19 @@
         Insurance = 3
         DollarBuying = 4
         BranchBorrowings = 5
-        OutStanding = 6
-        ItemPullOut = 7
-        MoneyTransfer = 8
-        Hourly = 9
-        HourlySummary = 10
-        DailyInsurance = 11
-        LoanRenew2 = 12
-        MoneyTransferBSP = 13
-        DollarDaily = 14
-        AuditPrinLimit = 15
-        MonthlyTransactionCountSummary = 16
-
+        ItemPullOut = 6
+        MoneyTransfer = 7
+        Hourly = 8
+        HourlySummary = 9
+        DailyInsurance = 10
+        LoanRenew2 = 11
+        MoneyTransferBSP = 12
+        DollarDaily = 13
+        MonthlyTransactionCountSummary = 14
+        MoneyTransferBracketing = 15
+        RenewalBreakDown = 16
+        VoidReportDaily = 17
+        VoidReportMonthly = 18
 
     End Enum
     Friend FormType As ReportType = ReportType.RedeemRenew
@@ -53,8 +56,6 @@
                 DollarBuying()
             Case ReportType.BranchBorrowings
                 Borrowings()
-            Case ReportType.OutStanding
-                Outstanding_Loans()
             Case ReportType.ItemPullOut
                 Item_PullOut()
             Case ReportType.MoneyTransfer
@@ -71,11 +72,16 @@
                 MoneyTransfer_BSP()
             Case ReportType.DollarDaily
                 DailyDollar()
-            Case ReportType.AuditPrinLimit
-                Audit_PrincipalMin()
             Case ReportType.MonthlyTransactionCountSummary
                 TransactionCount()
-           
+            Case ReportType.MoneyTransferBracketing
+                MoneyTransferBracketing()
+            Case ReportType.RenewalBreakDown
+                monthlyRenewalBreakDown()
+            Case ReportType.VoidReportDaily
+                VoidReportDaily()
+            Case ReportType.VoidReportMonthly
+                VoidReportMonthly()
         End Select
     End Sub
 
@@ -119,38 +125,22 @@
                     FormType = ReportType.ItemPullOut
                 Case "Loan Register - New Loan and Renewal 2"
                     FormType = ReportType.LoanRenew2
-                    'Case "Auction Monthly Report"
-                    '    FormType = ReportType.AuctionMonthly
                 Case "Money Transfer (BSP)"
                     FormType = ReportType.MoneyTransferBSP
                 Case "Monthly Transaction Count Summary"
                     FormType = ReportType.MonthlyTransactionCountSummary
+                Case "MoneyTransfer Bracketing"
+                    FormType = ReportType.MoneyTransferBracketing
+                Case "Monthly Renewal Break Down"
+                    FormType = ReportType.RenewalBreakDown
+                Case "Monthly Void Report"
+                    FormType = ReportType.VoidReportMonthly
+
             End Select
         End If
 
         Generate()
     End Sub
-
-    'Private Sub AuctionMonthly()
-    '    Dim mySql As String, dsName As String, rptPath As String
-    '    dsName = "dsAuction" : rptPath = "Reports\rpt_AuctionMonthly.rdlc"
-    '    Dim st As Date = GetFirstDate(monCal.SelectionStart)
-    '    Dim en As Date = GetLastDate(monCal.SelectionStart)
-
-    '    mySql = "SELECT * "
-    '    mySql &= vbCrLf & "FROM PAWNING "
-    '    mySql &= vbCrLf & "WHERE "
-    '    mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-    '    mySql &= vbCrLf & "AND STATUS <> 'RENEWED' AND STATUS <> 'REDEEM' AND STATUS <> 'VOID'"
-
-    '    Dim ds As DataSet = LoadSQL(mySql)
-    '    Dim addPara As New Dictionary(Of String, String)
-    '    addPara.Add("txtMonthOf", "FOR THE MONTH OF " & monCal.SelectionStart.ToString("MMMM yyyy").ToUpper)
-    '    addPara.Add("branchName", branchName)
-
-    '    frmReport.ReportInit(mySql, dsName, rptPath, addPara)
-    '    frmReport.Show()
-    'End Sub
 
     Private Sub Generate_Hourly()
         Dim mySql As String, dsName As String, rptPath As String
@@ -215,12 +205,12 @@
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET = 0 THEN P.ADVINT ELSE 0 END) AS ADV_INT, "
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET = 0 THEN P.NETAMOUNT ELSE 0 END) AS NET_AMOUNT, "
         mySql &= vbCrLf & "    SUM(P.SERVICECHARGE) AS SERVICECHARGE, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.INTEREST + P2.INTEREST ELSE 0 END) AS RENEW_INT, "
+        mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.DELAYINTEREST + P2.DELAYINTEREST ELSE 0 END) AS RENEW_INT, "
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.PENALTY + P2.PENALTY ELSE 0 END) AS RENEW_PEN,    "
         mySql &= vbCrLf & "    SUM(CASE WHEN P.OLDTICKET > 0 THEN P.RENEWDUE + P2.RENEWDUE ELSE 0 END) AS RENEW_DUE, "
         mySql &= vbCrLf & "    COUNT(P.PAWNTICKET) AS PT_CNT "
         mySql &= vbCrLf & "FROM "
-        mySql &= vbCrLf & "    PAWNING P LEFT JOIN PAWNING P2 "
+        mySql &= vbCrLf & "    PAWN_LIST P LEFT JOIN PAWN_LIST P2 "
         mySql &= vbCrLf & "    ON P.OLDTICKET = P2.PAWNTICKET "
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("    P.LOANDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
@@ -252,7 +242,7 @@
 
         mySql = "SELECT * FROM tblInsurance "
         mySql &= String.Format("WHERE transDate BETWEEN '{0}' AND '{1}'", stDate.ToShortDateString, enDate.ToShortDateString)
-
+        mySql &= " AND STATUS <> 'V'"
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDate.ToString("MMMM").ToUpper & " " & enDate.Year)
         rptPara.Add("branchName", branchName)
@@ -266,6 +256,7 @@
 
         mySql = "SELECT * FROM tblInsurance "
         mySql &= String.Format("WHERE transDate = '{0}'", monCal.SelectionStart.ToShortDateString)
+        mySql &= " AND STATUS <> 'V'"
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "Date: " & monCal.SelectionStart.ToString("MMM dd, yyyy"))
@@ -283,17 +274,17 @@
         Dim mySql As String = "SELECT ORDATE, "
         mySql &= vbCrLf & "SUM(CASE WHEN STATUS = 'X' THEN 1 ELSE 0 END) AS COUNT_REDEEM, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN 'X' THEN PRINCIPAL ELSE 0 END) AS PRINCIPAL_REDEEM, "
-        mySql &= vbCrLf & "SUM(CASE STATUS WHEN 'X' THEN INTEREST ELSE 0 END) AS INTEREST_REDEEM, "
+        mySql &= vbCrLf & "SUM(CASE STATUS WHEN 'X' THEN DELAYINTEREST ELSE 0 END) AS INTEREST_REDEEM, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN 'X' THEN PENALTY ELSE 0 END) AS PENALTY_REDEEM, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN 'X' THEN SERVICECHARGE ELSE 0 END) AS SC_REDEEM, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN 'X' THEN REDEEMDUE ELSE 0 END) as TOTAL_REDEEM, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN 1 WHEN 'R' THEN 1 ELSE 0 END) AS COUNT_RENEW, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN PRINCIPAL WHEN 'R' THEN PRINCIPAL ELSE 0 END) AS PRINCIPAL_RENEW, "
-        mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN INTEREST + ADVINT WHEN 'R' THEN INTEREST ELSE 0 END) AS INTEREST_RENEW, "
+        mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN DELAYINTEREST + ADVINT WHEN 'R' THEN DELAYINTEREST ELSE 0 END) AS INTEREST_RENEW, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN PENALTY WHEN 'R' THEN PENALTY ELSE 0 END) AS PENALTY_RENEW, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN SERVICECHARGE ELSE 0 END) AS SC_RENEW, "
         mySql &= vbCrLf & "SUM(CASE STATUS WHEN '0' THEN RENEWDUE WHEN 'R' THEN RENEWDUE ELSE 0 END) AS TOTAL_RENEW "
-        mySql &= vbCrLf & "FROM TBLPAWN "
+        mySql &= vbCrLf & "FROM OPT "
         mySql &= vbCrLf & String.Format("WHERE ORDATE BETWEEN '{0}' AND '{1}' ", selectedDate.Date.ToShortDateString, GetLastDate(selectedDate.Date).ToShortDateString)
         mySql &= vbCrLf & "GROUP BY 1"
 
@@ -314,23 +305,25 @@
         Dim fillData As String = "dsLoanRenew", mySql As String
 
         mySql = "SELECT P.LOANDATE, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'CEL' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS CEL_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'CEL' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS CEL_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'JWL' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS JWL_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P.ITEMTYPE = 'JWL' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS JWL_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN (P.ITEMTYPE = 'APP' OR P.ITEMTYPE = 'BIG') AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS APP_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN (P.ITEMTYPE = 'APP' OR P.ITEMTYPE = 'BIG') AND P.OLDTICKET = 0 THEN P.PRINCIPAL "
-        mySql &= vbCrLf & "    WHEN P.ITEMTYPE = 'BIG' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS APP_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE P.OLDTICKET WHEN 0 THEN 1 ELSE 0 END) AS LOAN_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE P.OLDTICKET WHEN 0 THEN P.PRINCIPAL ELSE 0 END) AS LOAN_PRINCIPAL, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P2.RENEWDUE <> 0 THEN 1 ELSE 0 END) AS RENEW_COUNT, "
-        mySql &= vbCrLf & "    SUM(CASE WHEN P2.RENEWDUE <> 0 THEN P2.PRINCIPAL ELSE 0 END) AS RENEW_PRINCIPAL "
-        mySql &= vbCrLf & "FROM TBLPAWN P "
-        mySql &= vbCrLf & "LEFT JOIN TBLPAWN P2 ON P.OLDTICKET = P2.PAWNTICKET "
-        mySql &= vbCrLf & "WHERE P.STATUS <> 'V' AND "
-        mySql &= vbCrLf & String.Format("P.LOANDATE BETWEEN '{0}' AND '{1}' ", stDay.ToShortDateString, laDay.ToShortDateString)
-        mySql &= vbCrLf & "GROUP BY 1 "
-        mySql &= vbCrLf & "ORDER BY P.LOANDATE ASC "
+        mySql &= "SUM(CASE WHEN ITM.ITEMCATEGORY = 'GADGET' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS CEL_COUNT, "
+        mySql &= "SUM(CASE WHEN ITM.ITEMCATEGORY = 'GADGET' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS CEL_PRINCIPAL, "
+        mySql &= "SUM(CASE WHEN ITM.ITEMCATEGORY = 'JEWELRY' AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS JWL_COUNT, "
+        mySql &= "SUM(CASE WHEN ITM.ITEMCATEGORY = 'JEWELRY' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS JWL_PRINCIPAL, "
+        mySql &= "SUM(CASE WHEN (ITM.ITEMCATEGORY = 'APPLIANCE' OR ITM.ITEMCATEGORY = 'BIG') AND P.OLDTICKET = 0 THEN 1 ELSE 0 END) AS APP_COUNT, "
+        mySql &= "SUM(CASE WHEN (ITM.ITEMCATEGORY = 'APPLIANCE' OR ITM.ITEMCATEGORY = 'BIG') AND P.OLDTICKET = 0 THEN P.PRINCIPAL "
+        mySql &= "WHEN ITM.ITEMCATEGORY='BIG' AND P.OLDTICKET = 0 THEN P.PRINCIPAL ELSE 0 END) AS APP_PRINCIPAL, "
+        mySql &= "SUM(CASE P.OLDTICKET WHEN 0 THEN 1 ELSE 0 END) AS LOAN_COUNT, "
+        mySql &= "SUM(CASE P.OLDTICKET WHEN 0 THEN P.PRINCIPAL ELSE 0 END) AS LOAN_PRINCIPAL, "
+        mySql &= "SUM(CASE WHEN P2.RENEWDUE <> 0 THEN 1 ELSE 0 END) AS RENEW_COUNT, "
+        mySql &= "SUM(CASE WHEN P2.RENEWDUE <> 0 THEN P2.PRINCIPAL ELSE 0 END) AS RENEW_PRINCIPAL "
+        mySql &= "FROM OPT P "
+        mySql &= "LEFT JOIN OPT P2 ON P.OLDTICKET = P2.PAWNTICKET "
+        mySql &= "INNER JOIN OPI I ON I.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = I.ITEMID "
+        mySql &= "WHERE P.STATUS <> 'V' AND "
+        mySql &= "P.LOANDATE BETWEEN '" & stDay & "' AND '" & laDay & "' "
+        mySql &= "GROUP BY 1"
+        mySql &= "ORDER BY P.LOANDATE ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
         rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
@@ -340,57 +333,13 @@
         frmReport.Show()
     End Sub
 
-    Private Sub Outstanding_Loans()
-        Dim dsName As String = "dsOutstanding", mySql As String
-
-        mySql = "SELECT * "
-        mySql &= "FROM "
-        mySql &= "( "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'NEW' OR Status = 'RENEW') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'RENEWED') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'REDEEM') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND ORDATE > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'SEGRE') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL) "
-        mySql &= "  UNION "
-        mySql &= "  SELECT * "
-        mySql &= "  FROM PAWNING "
-        mySql &= "  WHERE (Status = 'WITHDRAW') "
-        mySql &= "  AND LOANDATE <= '" & monCal.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & monCal.SelectionStart.ToShortDateString & "' "
-        mySql &= ") "
-        mySql &= "ORDER BY PAWNTICKET ASC"
-
-        Console.WriteLine(mySql)
-
-
-        Dim addParameters As New Dictionary(Of String, String)
-        addParameters.Add("txtMonthOf", "DATE: " & monCal.SelectionStart.ToString("MMMM dd yyyy").ToUpper)
-        addParameters.Add("branchName", branchName)
-
-        frmReport.ReportInit(mySql, dsName, "Reports\rpt_Outstanding.rdlc", addParameters)
-        frmReport.Show()
-    End Sub
-
     Private Sub Item_PullOut()
         Dim stDay = GetFirstDate(monCal.SelectionStart)
         Dim laDay = GetLastDate(monCal.SelectionEnd)
 
         Dim dsName As String = "dsPullOut", mySql As String = _
-        "SELECT * FROM PAWNING WHERE STATUS = 'WITHDRAW' AND "
-        mySql &= String.Format("PULLOUT BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        "SELECT * FROM PAWN_LIST WHERE STATUS = 'W' AND "
+        mySql &= String.Format("WITHDRAWDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
         Console.WriteLine(mySql)
 
         Dim addParameters As New Dictionary(Of String, String)
@@ -401,7 +350,80 @@
         frmReport.Show()
     End Sub
 
+    Private Sub DailyCashCount_Audit()
+        Dim mySql As String, ds As DataSet
+        Dim latestCashCount As Integer
+
+        ' Get the Latest Cash Count
+        mySql = "SELECT D.CurrentDate, D.MAINTAINBAL, D.INITIALBAL, CC.DENOMINATION, CC.CNT, CC.TOTAL, CC.STATUS, CC.MONEYTYPE"
+        mySql &= vbCrLf & " FROM"
+        mySql &= vbCrLf & " tblCashCount CC"
+        mySql &= vbCrLf & " RIGHT JOIN tblMaintenance M on M.OPT_KEYS = CC.DENOMINATION"
+        mySql &= vbCrLf & " INNER JOIN tblDaily D on D.ID = CC.DailyID"
+        ds = LoadSQL(mySql & " ORDER BY CC.STATUS DESC")
+
+        Console.WriteLine("[DEBUG] " & mySql)
+        latestCashCount = ds.Tables(0).Rows(0).Item("STATUS")
+
+        Dim fillData As String, rptSQL As New Dictionary(Of String, String)
+        Dim subReportSQL As New Dictionary(Of String, String)
+
+        fillData = "dsDaily"
+        mySql = "SELECT * FROM DAILY WHERE "
+        mySql &= String.Format("CURRENTDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        rptSQL.Add(fillData, mySql)
+
+        fillData = "dsDebit"
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
+        mySql &= "FROM JOURNAL_ENTRIES WHERE "
+        mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND DEBIT <> 0 AND TRANSNAME = 'Revolving Fund' AND TODISPLAY = 1 "
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
+        rptSQL.Add(fillData, mySql)
+
+        fillData = "dsCredit"
+        mySql = "SELECT TRANSDATE, TRANSNAME, SUM(DEBIT) AS DEBIT, SUM(CREDIT) AS CREDIT, CCNAME "
+        mySql &= "FROM JOURNAL_ENTRIES WHERE "
+        mySql &= String.Format("TRANSDATE = '{0}'", monCal.SelectionRange.Start.ToShortDateString)
+        mySql &= " AND CREDIT <> 0 AND TRANSNAME = 'Revolving Fund' AND TODISPLAY = 1 "
+        mySql &= " GROUP BY TRANSDATE, TRANSNAME, CCNAME"
+        rptSQL.Add(fillData, mySql)
+
+        'Sub Report
+        fillData = "dsCoin"
+        mySql = "SELECT D.CurrentDate, D.MAINTAINBAL, D.INITIALBAL, CC.DENOMINATION, CC.CNT, CC.TOTAL, CC.STATUS, CC.MONEYTYPE"
+        mySql &= vbCrLf & " FROM"
+        mySql &= vbCrLf & " tblCashCount CC"
+        mySql &= vbCrLf & " RIGHT JOIN tblMaintenance M on M.OPT_KEYS = CC.DENOMINATION"
+        mySql &= vbCrLf & " INNER JOIN tblDaily D on D.ID = CC.DailyID"
+        mySql &= String.Format(" WHERE D.CURRENTDATE = '{0}' AND CC.STATUS = {1}", monCal.SelectionRange.Start.ToShortDateString, latestCashCount)
+        subReportSQL.Add(fillData, mySql)
+
+        fillData = "dsBill"
+        subReportSQL.Add(fillData, mySql & " AND MONEYTYPE = 'COIN'")
+
+        ' Parameters
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtCurrentDate", monCal.SelectionRange.Start.ToShortDateString)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.MultiDbSetReport(rptSQL, "Reports\rpt_CashCountSheet.rdlc", rptPara, 1, subReportSQL)
+        frmReport.Show()
+    End Sub
+
+    Friend Sub AutoDisplay_CashCount(dt As Date)
+        monCal.SetDate(dt)
+
+        DailyCashCount_Audit()
+    End Sub
+
     Private Sub DailyCashCount()
+
+        If isAuditing Then
+            DailyCashCount_Audit()
+            Exit Sub
+        End If
+
         If monCal.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
             If frmMain.dateSet Then
                 MsgBox("Unable to Generate Cash Count Sheet yet", MsgBoxStyle.Information)
@@ -493,6 +515,7 @@
         Dim fillData As String = "dsBorrowings"
         Dim mySql As String = "SELECT * FROM BORROWINGS"
         mySql &= String.Format(" WHERE TRANSDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString)
+        mySql &= " AND STATUS <> 'N/A'"
         mySql &= " ORDER BY TRANSDATE ASC, STATUS ASC"
 
         Dim rptPara As New Dictionary(Of String, String)
@@ -505,14 +528,14 @@
 
     Private Sub TransactionCount()
 
-        Dim StartDay = GetFirstDate(MonCal.SelectionStart)
+        Dim StartDay = GetFirstDate(monCal.SelectionStart)
         Dim EndDay = GetLastDate(monCal.SelectionEnd)
 
         Dim filldata As String = "dsTransactionCount"
         Dim mySql As String = "SELECT LOGS_ID, MOD_NAME, CAST(TIMELY AS DATE)AS TIMELY FROM TBL_DAILYTIMELOG "
         mySql &= "WHERE HASCUSTOMER = '1' AND "
         mySql &= String.Format(" TIMELY BETWEEN '{0}' AND '{1}'", StartDay.ToShortDateString, EndDay.ToShortDateString)
-        'mySql &= "GROUP BY MOD_NAME ORDER BY MOD_NAME"
+        mySql &= " AND REMARKS NOT LIKE '%VOID%'"
 
         Console.WriteLine(mySql)
 
@@ -525,13 +548,37 @@
         frmReport.ReportInit(mySql, filldata, "Reports\rpt_MonthlyTransactionCount.rdlc", addParameters)
         frmReport.Show()
     End Sub
+    Private Sub MoneyTransferBracketing()
 
+        diagMoneyTransferBracketing.st = GetFirstDate(monCal.SelectionStart)
+        diagMoneyTransferBracketing.en = GetLastDate(monCal.SelectionEnd)
+
+        diagMoneyTransferBracketing.Show()
+    End Sub
+
+    Private Sub monthlyRenewalBreakDown()
+        Dim stDay = GetFirstDate(monCal.SelectionStart)
+        Dim laDay = GetLastDate(monCal.SelectionEnd)
+        Dim fillData As String = "dsRenewalBreakDown", mySql As String
+
+        mySql = "SELECT ITM.ITEMCATEGORY,P.ORDATE,P.PRINCIPAL "
+        mySql &= "FROM OPT P INNER JOIN OPI I ON I.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = I.ITEMID "
+        mySql &= "WHERE ORDate BETWEEN '" & stDay & "' AND '" & laDay & "' "
+        mySql &= "AND P.STATUS = '0' "
+        mySql &= "ORDER BY P.ORDATE ASC"
+
+        Dim rptPara As New Dictionary(Of String, String)
+        rptPara.Add("txtMonthOf", "FOR THE MONTH OF " & stDay.ToString("MMMM").ToUpper & " " & stDay.Year)
+        rptPara.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, fillData, "Reports\RenewalBreakDown.rdlc", rptPara)
+        frmReport.Show()
+    End Sub
     ' STEP 4
     Private Function NoFilter() As Boolean
         Select Case FormType
             Case ReportType.DailyCashCount
-                Return True
-            Case ReportType.OutStanding
                 Return True
             Case ReportType.ItemPullOut
                 Return True
@@ -545,7 +592,9 @@
                 Return True
             Case ReportType.DollarDaily
                 Return True
-            Case ReportType.AuditPrinLimit
+            Case ReportType.VoidReportDaily
+                Return True
+            Case ReportType.VoidReportMonthly
                 Return True
         End Select
 
@@ -560,9 +609,45 @@
         End If
     End Sub
 
-    Private Sub Audit_PrincipalMin()
-        Dim MINIMUM_PRINCIPAL As Double = 5000
-        AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCal.SelectionStart.ToShortDateString)
+    Private Sub VoidReportDaily()
+        Dim cur As Date = monCal.SelectionStart
+
+        Dim mySql As String, dsName As String = "dsVoid"
+
+        mySql = "SELECT V.VOID_ID, V.TRANSDATE, V.MOD_NAME, V.REMARKS, G.FULLNAME AS ENCODER, G2.FULLNAME AS VOIDED_BY "
+        mySql &= "FROM TBLVOID V "
+        mySql &= "INNER JOIN TBL_GAMIT G ON G.USERID = V.ENCODER "
+        mySql &= "INNER JOIN TBL_GAMIT G2 ON G2.USERID=V.VOIDED_BY "
+        mySql &= "WHERE V.TRANSDATE = '" & cur & "'"
+
+        Dim addParameters As New Dictionary(Of String, String)
+
+        addParameters.Add("txtMonthOf", "DATE: " & cur.ToShortDateString)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rptVoidReport.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
+
+    Private Sub VoidReportMonthly()
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionEnd)
+
+        Dim mySql As String, dsName As String = "dsVoid"
+
+        mySql = "SELECT V.VOID_ID, V.TRANSDATE, V.MOD_NAME, V.REMARKS, G.FULLNAME AS ENCODER, G2.FULLNAME AS VOIDED_BY "
+        mySql &= "FROM TBLVOID V "
+        mySql &= "INNER JOIN TBL_GAMIT G ON G.USERID = V.ENCODER "
+        mySql &= "INNER JOIN TBL_GAMIT G2 ON G2.USERID=V.VOIDED_BY "
+        mySql &= "WHERE V.TRANSDATE BETWEEN '" & st & "' AND '" & en & "'"
+
+        Dim addParameters As New Dictionary(Of String, String)
+
+        addParameters.Add("txtMonthOf", "From: " & st.ToShortDateString & " To " & en.ToShortDateString)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rptVoidReport.rdlc", addParameters)
+        frmReport.Show()
     End Sub
 
 End Class

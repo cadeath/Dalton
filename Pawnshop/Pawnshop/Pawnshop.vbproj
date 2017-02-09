@@ -97,6 +97,10 @@
     <Reference Include="Google.Authenticator">
       <HintPath>.\Google.Authenticator.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
     </Reference>
@@ -112,6 +116,7 @@
     <Reference Include="System.Data">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Deployment">
       <Private>True</Private>
     </Reference>
@@ -121,6 +126,7 @@
     <Reference Include="System.Runtime.Serialization">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Services">
       <Private>True</Private>
     </Reference>
@@ -142,6 +148,7 @@
     <Reference Include="TOTP">
       <HintPath>.\TOTP.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -157,6 +164,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="AuditConsole\AuditConsole_Controller.vb" />
+    <Compile Include="AuditConsole\db123.vb" />
+    <Compile Include="AuditConsole\frmAuditConsole.Designer.vb">
+      <DependentUpon>frmAuditConsole.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AuditConsole\frmAuditConsole.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AutoPatch\autopatch.vb" />
     <Compile Include="AutoPatch\db1013.vb" />
     <Compile Include="AutoPatch\db121.vb" />
@@ -169,6 +184,9 @@
     <Compile Include="AutoPatch\db12.vb" />
     <Compile Include="AutoPatch\db122.vb" />
     <Compile Include="AutoPatch\db1221.vb" />
+    <Compile Include="AutoPatch\db1222.vb" />
+    <Compile Include="AutoPatch\db1223.vb" />
+    <Compile Include="AutoPatch\db1224.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -177,61 +195,99 @@
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
     <Compile Include="Classes\CollectionID.vb" />
+    <Compile Include="Classes\CollectionItemSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
     <Compile Include="Classes\Currency.vb" />
     <Compile Include="Classes\DollarEntry.vb" />
     <Compile Include="Classes\DollarTransaction.vb" />
     <Compile Include="Classes\IdentificationCard.vb" />
     <Compile Include="Classes\Insurance.vb" />
+    <Compile Include="Classes\ItemClass.vb" />
+    <Compile Include="Classes\ItemSpecs.vb" />
     <Compile Include="Classes\MoneyTransfer.vb" />
     <Compile Include="Classes\MoneyTransferService.vb" />
+    <Compile Include="Classes\PawnCompute.vb" />
     <Compile Include="Classes\PawningDalton.vb" />
     <Compile Include="Classes\PawnTicket.vb" />
     <Compile Include="Classes\RandomKeyGenerator.vb" />
     <Compile Include="Classes\Reporting.vb" />
     <Compile Include="Classes\rptActionReq.vb" />
-    <Compile Include="AutoPatch\DevForm\devClient.Designer.vb" />
-    <Compile Include="AutoPatch\DevForm\devClient.vb">
+    <Compile Include="Developer\devClient.Designer.vb">
+      <DependentUpon>devClient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\devClient.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\devVerifyESK.Designer.vb" />
-    <Compile Include="AutoPatch\DevForm\devVerifyESK.vb">
+    <Compile Include="Developer\devVerifyESK.Designer.vb">
+      <DependentUpon>devVerifyESK.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_encrypt.Designer.vb">
+    <Compile Include="Developer\dev_encrypt.Designer.vb">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_encrypt.vb">
+    <Compile Include="Developer\dev_encrypt.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_ORview.Designer.vb">
+    <Compile Include="Developer\dev_ExtractToExcel.Designer.vb">
+      <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_ExtractToExcel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_FileLoader.Designer.vb">
+      <DependentUpon>dev_FileLoader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_FileLoader.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_NewItem.Designer.vb">
+      <DependentUpon>dev_NewItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_NewItem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_NewPawning.Designer.vb">
+      <DependentUpon>dev_NewPawning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_NewPawning.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_ORview.Designer.vb">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_ORview.vb">
+    <Compile Include="Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_Pawning.Designer.vb">
+    <Compile Include="Developer\dev_Pawning.Designer.vb">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_Pawning.vb">
+    <Compile Include="Developer\dev_Pawning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_print.Designer.vb">
+    <Compile Include="Developer\dev_Pawning2.Designer.vb">
+      <DependentUpon>dev_Pawning2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_Pawning2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_print.Designer.vb">
       <DependentUpon>dev_print.vb</DependentUpon>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_print.vb">
+    <Compile Include="Developer\dev_print.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_report.Designer.vb">
+    <Compile Include="Developer\dev_report.Designer.vb">
       <DependentUpon>dev_report.vb</DependentUpon>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_report.vb">
+    <Compile Include="Developer\dev_report.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_runCmd.Designer.vb">
+    <Compile Include="Developer\dev_runCmd.Designer.vb">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </Compile>
-    <Compile Include="AutoPatch\DevForm\dev_runCmd.vb">
+    <Compile Include="Developer\dev_runCmd.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ab.Designer.vb">
@@ -258,9 +314,125 @@
     <Compile Include="Forms\diagOTP.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\diagOTPv2.Designer.vb">
+      <DependentUpon>diagOTPv2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\diagOTPv2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ExtractDataFromDatabase.Designer.vb">
+      <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ExtractDataFromDatabase.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAdminPanel.Designer.vb">
+      <DependentUpon>frmAdminPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAdminPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBackUpDataSettings.Designer.vb">
+      <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBackUpDataSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.Designer.vb">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmInterestScheme.Designer.vb">
+      <DependentUpon>frmInterestScheme.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInterestScheme.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmInterestSchemeList.Designer.vb">
+      <DependentUpon>frmInterestSchemeList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmInterestSchemeList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmItemList.Designer.vb">
+      <DependentUpon>frmItemList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmItemList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPawningItemNew.Designer.vb">
+      <DependentUpon>frmPawningItemNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPawningItemNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\watermark.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
+      <DependentUpon>dev_Scheme.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InterestScheme\dev_Scheme.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterestScheme\InterestScheme.vb" />
+    <Compile Include="InterestScheme\IntScheme_Lines.vb" />
+    <Compile Include="InterestScheme\Scheme_Interest.vb" />
+    <Compile Include="InterestScheme\Scheme_Load.vb" />
     <Compile Include="Modules\AuditReports.vb" />
-    <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
+    <Compile Include="Modules\PawningScheme.vb" />
+    <Compile Include="Modules\Void.vb" />
+    <Compile Include="OTP\diagGeneralOTP.Designer.vb">
+      <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\diagGeneralOTP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\frmSample.Designer.vb">
+      <DependentUpon>frmSample.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\frmSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\OTPModule.vb" />
+    <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
+      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelMultiline.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel\frm_PanelTextbox.Designer.vb">
+      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelTextbox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panel\frm_PanelYesNo.Designer.vb">
+      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Panel\frm_PanelYesNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PawnModule\CollectionPawnItemSpecs.vb" />
+    <Compile Include="PawnModule\dev_PT_test.Designer.vb">
+      <DependentUpon>dev_PT_test.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PawnModule\dev_PT_test.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PawnModule\PawnCalculation.vb" />
+    <Compile Include="PawnModule\PawnItem.vb" />
+    <Compile Include="PawnModule\PawnItemSpec.vb" />
+    <Compile Include="PawnModule\PawnTicket2.vb" />
+    <Compile Include="Reports\diagMoneyTransferBracketing.Designer.vb">
+      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\diagMoneyTransferBracketing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\diagMT.Designer.vb">
       <DependentUpon>diagMT.vb</DependentUpon>
     </Compile>
@@ -496,18 +668,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="POS\frmItemLookUp.Designer.vb">
-      <DependentUpon>frmItemLookUp.vb</DependentUpon>
-    </Compile>
-    <Compile Include="POS\frmItemLookUp.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="POS\frmPOS.Designer.vb">
-      <DependentUpon>frmPOS.vb</DependentUpon>
-    </Compile>
-    <Compile Include="POS\frmPOS.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Reports\dsPrint.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -528,6 +688,12 @@
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\frmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\frmSalesReport.Designer.vb">
+      <DependentUpon>frmSalesReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmSalesReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\frmSegreList.Designer.vb">
@@ -578,33 +744,178 @@
     <Compile Include="Reports\qrySequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\cItem.vb" />
+    <Compile Include="SalesInventory\CollectionItemData.vb" />
+    <Compile Include="SalesInventory\dev_Menu_SalesInventory.Designer.vb">
+      <DependentUpon>dev_Menu_SalesInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\dev_Menu_SalesInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmIMD.Designer.vb">
+      <DependentUpon>frmIMD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmIMD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmImport_IMD.Designer.vb">
+      <DependentUpon>frmImport_IMD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmImport_IMD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmPLU.Designer.vb">
+      <DependentUpon>frmPLU.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmPLU.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmPrint.Designer.vb">
+      <DependentUpon>frmPrint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmPrint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmSales.Designer.vb">
+      <DependentUpon>frmSales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmSales.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\cItemData.vb" />
+    <Compile Include="SalesInventory\frmInventory.Designer.vb">
+      <DependentUpon>frmInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesOptions.Designer.vb">
+      <DependentUpon>frmSalesOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesStockOut.Designer.vb">
+      <DependentUpon>frmSalesStockOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesStockOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmView_Stock.Designer.vb">
+      <DependentUpon>frmView_Stock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmView_Stock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\InventoryController.vb" />
+    <Compile Include="SalesInventory\SeedItemData.vb" />
+    <Compile Include="Seed\Client_Seed.vb" />
+    <Compile Include="Seed\frmSeed.Designer.vb">
+      <DependentUpon>frmSeed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Seed\frmSeed.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Seed\Pawn.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AutoPatch\DevForm\devClient.resx" />
-    <EmbeddedResource Include="AutoPatch\DevForm\devVerifyESK.resx" />
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_encrypt.resx">
+    <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
+      <DependentUpon>frmAuditConsole.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\devClient.resx">
+      <DependentUpon>devClient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\devVerifyESK.resx">
+      <DependentUpon>devVerifyESK.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_ORview.resx">
+    <EmbeddedResource Include="Developer\dev_ExtractToExcel.resx">
+      <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_FileLoader.resx">
+      <DependentUpon>dev_FileLoader.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_NewItem.resx">
+      <DependentUpon>dev_NewItem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_NewPawning.resx">
+      <DependentUpon>dev_NewPawning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_Pawning.resx">
+    <EmbeddedResource Include="Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_print.resx">
+    <EmbeddedResource Include="Developer\dev_Pawning2.resx">
+      <DependentUpon>dev_Pawning2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_print.resx">
       <DependentUpon>dev_print.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_report.resx">
+    <EmbeddedResource Include="Developer\dev_report.resx">
       <DependentUpon>dev_report.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AutoPatch\DevForm\dev_runCmd.resx">
+    <EmbeddedResource Include="Developer\dev_runCmd.resx">
       <DependentUpon>dev_runCmd.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\diagOTPv2.resx">
+      <DependentUpon>diagOTPv2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ExtractDataFromDatabase.resx">
+      <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAdminPanel.resx">
+      <DependentUpon>frmAdminPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBackUpDataSettings.resx">
+      <DependentUpon>frmBackUpDataSettings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInterestScheme.resx">
+      <DependentUpon>frmInterestScheme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInterestSchemeList.resx">
+      <DependentUpon>frmInterestSchemeList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmItemList.resx">
+      <DependentUpon>frmItemList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
+      <DependentUpon>frmPawningItemNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
+      <DependentUpon>dev_Scheme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
+      <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\frmSample.resx">
+      <DependentUpon>frmSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
+      <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelTextbox.resx">
+      <DependentUpon>frm_PanelTextbox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panel\frm_PanelYesNo.resx">
+      <DependentUpon>frm_PanelYesNo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PawnModule\dev_PT_test.resx">
+      <DependentUpon>dev_PT_test.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionDailyReport.rdlc" />
     <EmbeddedResource Include="Reports\AuctionMonlyreport.rdlc">
@@ -612,6 +923,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AuctionMonthlyReportJWL.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\diagMoneyTransferBracketing.resx">
+      <DependentUpon>diagMoneyTransferBracketing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\diagMT.resx">
       <DependentUpon>diagMT.vb</DependentUpon>
@@ -733,20 +1047,20 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="POS\frmItemLookUp.resx">
-      <DependentUpon>frmItemLookUp.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="POS\frmPOS.resx">
-      <DependentUpon>frmPOS.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSalesReport.resx">
+      <DependentUpon>frmSalesReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryAuction.resx">
       <DependentUpon>qryAuction.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryPullOut_List.resx">
       <DependentUpon>qryPullOut_List.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\RenewalBreakDown.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptDollarTransaction.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -755,6 +1069,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptd_timelySummary.rdlc" />
+    <EmbeddedResource Include="Reports\rptVoidReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_AuctionMonthly.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -767,7 +1084,13 @@
     <EmbeddedResource Include="Reports\rpt_hourlySummary.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_InventoryPOS.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRenew_Monthly2.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MoneyTransferBracketing.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_MonthlyTransactionCount.rdlc">
@@ -790,12 +1113,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout01.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout02.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -871,6 +1196,45 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\_layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\dev_Menu_SalesInventory.resx">
+      <DependentUpon>dev_Menu_SalesInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmIMD.resx">
+      <DependentUpon>frmIMD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmImport_IMD.resx">
+      <DependentUpon>frmImport_IMD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmPLU.resx">
+      <DependentUpon>frmPLU.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmPrint.resx">
+      <DependentUpon>frmPrint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmSales.resx">
+      <DependentUpon>frmSales.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmInventory.resx">
+      <DependentUpon>frmInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmSalesOptions.resx">
+      <DependentUpon>frmSalesOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmSalesStockOut.resx">
+      <DependentUpon>frmSalesStockOut.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmView_Stock.resx">
+      <DependentUpon>frmView_Stock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptReceipt.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_SalesReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Seed\frmSeed.resx">
+      <DependentUpon>frmSeed.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -1000,7 +1364,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

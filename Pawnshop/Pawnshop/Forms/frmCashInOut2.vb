@@ -59,6 +59,7 @@
         CIOtransactions = New CollectionCIO
         btnCashIn.PerformClick()
         LineNum = 1
+        Me.Close()
     End Sub
     ''' <summary>
     ''' add data to listview
@@ -157,7 +158,7 @@
 
         'Load Categories
         mySql = "SELECT DISTINCT Category FROM " & fillData
-        mySql &= String.Format(" WHERE Type = '{0}'", selectedType)
+        mySql &= String.Format(" WHERE Type = '{0}' AND ONHOLD = 0", selectedType)
         ds = LoadSQL(mySql, fillData)
 
         cashInCat = New Hashtable
@@ -168,7 +169,7 @@
 
         ds.Clear()
         mySql = "SELECT DISTINCT Category FROM " & fillData
-        mySql &= " WHERE Type = 'Disbursement'"
+        mySql &= " WHERE Type = 'Disbursement' AND ONHOLD = 0"
         ds = LoadSQL(mySql, fillData)
         cashOutCat = New Hashtable
         cnt = 0
@@ -182,7 +183,7 @@
         ReDim ciTrans(cashInCat.Count - 1)
         For Each el As DictionaryEntry In cashInCat
             mySql = "SELECT * FROM " & fillData
-            mySql &= String.Format(" WHERE TYPE = '{0}' AND CATEGORY = '{1}'", tmpType, el.Value)
+            mySql &= String.Format(" WHERE TYPE = '{0}' AND CATEGORY = '{1}' AND ONHOLD = 0", tmpType, el.Value)
             ds.Clear()
             ds = LoadSQL(mySql, fillData)
             MaxRow = ds.Tables(fillData).Rows.Count - 1
@@ -198,7 +199,7 @@
         ReDim coTrans(cashOutCat.Count - 1)
         For Each el As DictionaryEntry In cashOutCat
             mySql = "SELECT * FROM " & fillData
-            mySql &= String.Format(" WHERE TYPE = '{0}' AND CATEGORY = '{1}'", tmpType, el.Value)
+            mySql &= String.Format(" WHERE TYPE = '{0}' AND CATEGORY = '{1}' AND ONHOLD = 0", tmpType, el.Value)
             ds.Clear()
             ds = LoadSQL(mySql, fillData)
             MaxRow = ds.Tables(fillData).Rows.Count - 1

@@ -1,4 +1,5 @@
 ﻿Public Class frmMTlist
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -21,7 +22,7 @@
     End Sub
 
     Friend Sub LoadActive()
-        Dim mySql As String = "SELECT * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate DESC"
+        Dim mySql As String = "SELECT FIRST 50 * FROM tblMoneyTransfer WHERE Status = 'A' ORDER BY TransDate DESC"
         Dim ds As DataSet
         ds = LoadSQL(mySql)
 
@@ -58,26 +59,32 @@
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        If txtSearch.Text = "" Then Exit Sub
+        If txtSearch.Text.Length <= 3 Then
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Client Search")
+        Else
+            Dim secured_str As String = txtSearch.Text
+            secured_str = DreadKnight(secured_str)
 
-        ' to be added more comprehensive searching
-        Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM tblMoneyTransfer WHERE refNum LIKE '%" & txtSearch.Text & "%' "
-        ds = LoadSQL(mySql)
+            ' to be added more comprehensive searching
+            Dim mySql As String, ds As DataSet
+            mySql = "SELECT * FROM tblMoneyTransfer WHERE refNum LIKE '%" & secured_str & "%' OR "
+            mySql &= "UPPER(RECEIVERNAME) LIKE UPPER('%" & secured_str & "%') OR UPPER(SENDERNAME) LIKE UPPER('%" & secured_str & "%')"
+            ds = LoadSQL(mySql)
 
-        If ds.Tables(0).Rows.Count = 0 Then
-            MsgBox("No result found", MsgBoxStyle.Information)
-            Exit Sub
+            If ds.Tables(0).Rows.Count = 0 Then
+                MsgBox("No result found", MsgBoxStyle.Information)
+                Exit Sub
+            End If
+
+            lvMoneyTransfer.Items.Clear()
+            For Each dr As DataRow In ds.Tables(0).Rows
+                Dim tmpMT As New MoneyTransfer
+                tmpMT.LoadTransactionByRow(dr)
+                AddItem(tmpMT)
+            Next
+
+            MsgBox(ds.Tables(0).Rows.Count & " result found.", MsgBoxStyle.Information)
         End If
-
-        lvMoneyTransfer.Items.Clear()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim tmpMT As New MoneyTransfer
-            tmpMT.LoadTransactionByRow(dr)
-            AddItem(tmpMT)
-        Next
-
-        MsgBox(ds.Tables(0).Rows.Count & " result found.", MsgBoxStyle.Information)
     End Sub
 
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
@@ -100,7 +107,14 @@
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
-
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.VoidMoneyTransfer
+            If Not CheckOTP() Then Exit Sub
+        Else
+            VoidMoneyTransfer()
+        End If
+    End Sub
+    Friend Sub VoidMoneyTransfer()
         Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
         Dim tmpMT As New MoneyTransfer
         tmpMT.LoadTransaction(idx)
@@ -124,7 +138,6 @@
                              MsgBoxStyle.Information, "Transaction Void"))
         LoadActive()
     End Sub
-
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             btnSearch.PerformClick()
@@ -144,6 +157,13 @@
 
         Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
         Dim tmpMT As New MoneyTransfer
+        Dim strMoneyTrans As String
         Label2.Text = idx
+        If tmpMT.LoadMoneyTrans = "0" Then
+            strMoneyTrans = "OUT"
+        ElseIf tmpMT.LoadMoneyTrans = "1" Then
+            strMoneyTrans = "IN"
+        End If
+        lblModname.Text = tmpMT.LoadServiceType + " " + strMoneyTrans
     End Sub
 End Class
