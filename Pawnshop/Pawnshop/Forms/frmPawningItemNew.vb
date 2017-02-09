@@ -254,8 +254,10 @@ Public Class frmPawningItemNew
                 Else
                     PrintNewLoan()
                 End If
+
             Case "R"
                 SaveRenew() : PrintRenew()
+
             Case "X"
                 SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
         End Select
@@ -499,14 +501,9 @@ Public Class frmPawningItemNew
             HitManagement.do_PawningHit(PT_Entry.Pawner, PT_Entry.PawnTicket)
         End With
 
-        AddNumber(DocumentClass.Pawnticket)
+            AddNumber(DocumentClass.Pawnticket)
 
             MsgBox("Item Saved", MsgBoxStyle.Information)
-
-            If MsgBox("Do you want to Add Coi?", _
-                 MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
-                 "Information") = MsgBoxResult.No Then Exit Sub
-            frmAddCoi.Show()
 
         'NewLoan()
         txtCustomer.Focus()
@@ -1406,6 +1403,8 @@ Public Class frmPawningItemNew
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PT_Entry.RenewDue)
         addParameters.Add("txtDescription", descStr)
+        addParameters.Add("txtCoi", GetTotalCoi(PRINT_PTNEW.ToString("000000")))
+
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1483,6 +1482,7 @@ Public Class frmPawningItemNew
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PT_Entry.RedeemDue)
         addParameters.Add("txtDescription", descStr)
+        addParameters.Add("txtCoi", GetTotalCoi(PT_Entry.PawnTicket.ToString("000000")))
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1582,5 +1582,18 @@ Public Class frmPawningItemNew
 
     Private Sub txtAppr_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppr.Leave
         ReComputeInterest()
+    End Sub
+
+    Private Function GetTotalCoi(ByVal Ticket As String) As Integer
+        Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where PAWNTICKET = '" & Ticket & "'"
+        Dim fillData As String = "tblInsurance"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        Return ds.Tables(0).Rows(0).Item("Amount")
+    End Function
+
+    Private Sub btnAddCoi_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddCoi.Click
+        If Not isValid() Then Exit Sub
+        frmAddCoi.Show()
+        frmAddCoi.Ticket = txtTicket.Text
     End Sub
 End Class

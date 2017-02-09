@@ -1,17 +1,27 @@
 ﻿Public Class frmAddCoi
+    Private Ins As Insurance
+    Friend Ticket As String
 
     Private Sub frmAddCoi_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        lvCoi.Items.Clear()
     End Sub
 
     Friend Sub LoadCoi(ByVal Coi As Insurance)
-        For Each lv As ListViewItem In lvCoi.Items
-            If lv.SubItems.text.Contains(Coi.COInumber) Then
+        If Coi.TicketNum <> Ticket Then
+            If Coi.TicketNum <> Nothing Then
+                If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do You Want To Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.No Then Exit Sub
+                AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, )
+            End If
+        End If
 
+        For Each itm As ListViewItem In lvCoi.Items
+            If itm.Text.Contains(Coi.COInumber) Then
+                MsgBox("Duplicate Coi#: " & itm.Text, MsgBoxStyle.Critical, "Warning!")
+                Exit Sub
             End If
         Next
-        With Coi
 
+        With Coi
             Dim lv As ListViewItem = lvCoi.Items.Add(.COInumber)
             lv.SubItems.Add(.ClientName)
             lv.Tag = .COInumber
@@ -23,5 +33,42 @@
         secured_str = DreadKnight(secured_str)
         frmInsuranceList.SearchSelect(secured_str, FormName.Coi)
         frmInsuranceList.Show()
+    End Sub
+
+    Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
+        If lvCoi.Items.Count = 0 Then Exit Sub
+        Ins = New Insurance
+        For Each itm As ListViewItem In lvCoi.Items
+            With Ins
+                .ID = itm.SubItems(0).Text
+                .TicketNum = Ticket
+                .UpdateInsurance()
+            End With
+        Next
+        MsgBox("Successfully Posted", MsgBoxStyle.Information, "Information")
+        Me.Close()
+    End Sub
+
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        frmInsurance.Show()
+        frmInsurance.isCoi = True
+        frmInsurance.btnNew.PerformClick()
+    End Sub
+
+    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub lvCoi_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvCoi.KeyDown
+        If lvCoi.SelectedItems.Count = 0 Then Exit Sub
+
+        If e.KeyCode = Keys.Delete Then
+            For Each itm As ListViewItem In lvCoi.SelectedItems
+                lvCoi.Items.Remove(itm)
+            Next
+
+        End If
     End Sub
 End Class

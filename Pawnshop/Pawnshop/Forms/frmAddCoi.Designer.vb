@@ -30,6 +30,7 @@ Partial Class frmAddCoi
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.btnAdd = New System.Windows.Forms.Button()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -46,7 +47,6 @@ Partial Class frmAddCoi
         'lvCoi
         '
         Me.lvCoi.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.lvCoi.Enabled = False
         Me.lvCoi.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvCoi.FullRowSelect = True
         Me.lvCoi.GridLines = True
@@ -103,15 +103,26 @@ Partial Class frmAddCoi
         Me.txtSearch.Size = New System.Drawing.Size(276, 20)
         Me.txtSearch.TabIndex = 0
         '
+        'btnAdd
+        '
+        Me.btnAdd.Location = New System.Drawing.Point(12, 239)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.TabIndex = 5
+        Me.btnAdd.Text = "&Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
         'frmAddCoi
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(387, 269)
+        Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnPost)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "frmAddCoi"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Add Coi"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
@@ -127,4 +138,5 @@ Partial Class frmAddCoi
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
+    Friend WithEvents btnAdd As System.Windows.Forms.Button
 End Class

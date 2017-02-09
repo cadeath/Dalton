@@ -3,6 +3,7 @@
     Dim curInsurance As New Insurance
     Private currentInsuranceNum As Integer = GetOption("InsuranceLastNum")
     Dim MOD_NAME As String = "INSURANCE"
+    Friend isCoi As Boolean = False
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -217,8 +218,10 @@
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
-        btnNew.PerformClick()
 
+        If isCoi = True Then
+            frmAddCoi.LoadCoi(newInsurance)
+        End If
         Me.Close()
     End Sub
 

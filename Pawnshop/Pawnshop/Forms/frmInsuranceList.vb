@@ -4,8 +4,18 @@
     Private Coi As Insurance
 
     Private Sub frmInsuranceList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ClearFields()
-        LoadInsurance()
+        'ClearFields()
+        'LoadInsurance()
+        lvInsurance.Items.Clear()
+
+        If Not fromOtherForm Then ClearFields() : txtSearch.Focus()
+        txtSearch.Text = IIf(txtSearch.Text <> "", txtSearch.Text, "")
+        If txtSearch.Text <> "" Then
+            btnSearch.PerformClick()
+        Else
+            LoadInsurance()
+        End If
+
     End Sub
 
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
