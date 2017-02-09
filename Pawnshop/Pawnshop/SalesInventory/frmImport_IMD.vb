@@ -132,7 +132,21 @@ unloadObj:
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
         If lvIMD.Items.Count = 0 Then Exit Sub
-        If MsgBox("Do you want to imported everything?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information) = vbYesNo Then
+
+        ' REMOVED due to redundancy on HOT CODE
+        'If MsgBox("Do you want to imported everything?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information) = vbYesNo Then
+        '    Exit Sub
+        'End If
+
+        ' Integrity Check
+        Dim hash = InputBox("HOT CODE", "ENTER HOT CODE")
+        If hash = "" Then Exit Sub
+        If Not hash = security.GetFileMD5(lblFilename.Text) Then
+            ' TODO: JUNMAR
+            ' RECORD HASH VALUE THAT WAS ENCODED IN THE HOT CODE
+            ' SAVE IN AT DAILYTIMELOG
+
+            MsgBox("Invalid HOT CODE", MsgBoxStyle.Critical, "HOT CODE")
             Exit Sub
         End If
 

@@ -1,16 +1,44 @@
 CHANGELOG
-Version 1.4
+Version 1.4.1.13
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
- - Add InvoiceNum, STONum and SalesReturnNum at TBLMAINTENACE
+ - Added Journal in Insurance Close Store
+ - Add InvoiceNum, STONum, SalesReturnNum and CustomerCode at TBLMAINTENACE
  - Add field SALESID and COSTID at TBLITEM
  - Add view STOCK_CARD
- - Add Reports - Inventory Report
+ - Add Reports - Inventory Report, Sales Report, Stockout Report
+ - Add Tools - Sales Extractor
+ - Add new privileges
  - Update TBLCASH and TBLITEM
- - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here)
+ - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here, use the Pullout Module)
  - Can Generate SAP Template Based STO for STOCK OUT
- - Change DB Version 1.2.3.1
+ - Can include void in Sales Transaction
+ - Change DB Version 1.2.3.2
+ - Change System name into Dalton - Integrated System
  - HOLDS AUCTION REDEEM at TBLCASH
+ - Remove Insurance on JE and CashCount
+ - Fix Minor Problems in Company Encryption
+ - Fix Selling Price from 2 decimal places into 6
+ - Fix missing "Appraiser By" in PT
+ - Fix on Re-Transact with 0 selling price having wrong computation
+ - Fix Import STO Error
+ - Fix Import IMD duplication
+ - Fix Journal Sales Return
+ - Fix Export STO Headers and LineNum
+ - Round off Effective Interest Rate in layout
+
+
+Version 1.3.1.1
+ - Fix Bug in Pawned Item Computation
+ - Fix Pawn_list View Full Address
+ - Fix No Display Pawner Name in Triplicate
+ - Fix Amount To Words Indian Language
+ - Fix No Appraiser Display in PT
+ - Fix Display of PT Information in Pawning
+ - Fix Bug in Displaying Pawning History
+ - Fix Error in Journal Redemption
+ - Add Efeective interest Rate in percent in PT Layout
+ - Change Audit Console Layout
 
 Version 1.3.1
  - Fix Reprint Save

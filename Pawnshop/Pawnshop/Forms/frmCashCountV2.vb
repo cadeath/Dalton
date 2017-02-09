@@ -168,6 +168,7 @@
         Dim total As Double = Compute_CashCount()
 
         SaveCashCount()
+        SaveInsuranceInv()
         ' If Executed via Audit Console
         If isAuditing Then
             UpdateCashCount(total)
@@ -267,4 +268,80 @@
         database.SaveEntry(ds, False)
         Console.WriteLine("CashCount data updated")
     End Sub
+
+    Private Sub SaveInsuranceInv()
+        Dim TotalCount As Integer = CInt(GetMaintenanceValue("INS Count"))
+        Dim InsPrice As Integer = GetMaintenanceValue("InsuranceAmount")
+        Dim TotalVal As Integer = TotalCount * InsPrice
+        '= 'TotalCount * 
+        Dim mysql As String = "SELECT * FROM DOC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mysql, "Doc")
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables("Doc").NewRow
+        Dim DocCode As String = "COI# " & CurrentDate.ToString("ddMMyyyy")
+        With dsNewRow
+            .Item("CODE") = DocCode
+            .Item("MOP") = "C"
+            .Item("Customer") = "One-Time Customer"
+            .Item("DOCDATE") = CurrentDate
+            .Item("DOCTOTAL") = TotalVal
+            .Item("USERID") = POSuser.UserID
+        End With
+        ds.Tables("Doc").Rows.Add(dsNewRow)
+        SaveEntry(ds)
+        Dim DOCID As Integer = 0
+
+        mysql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
+        ds = LoadSQL(mysql, fillData)
+        DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
+
+        'Creating DocumentLines
+        mysql = "SELECT * FROM DOCLINES ROWS 1"
+        fillData = "DOCLINES"
+        ds = LoadSQL(mysql, fillData)
+
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("DOCID") = DOCID
+            .Item("ITEMCODE") = "IND 00001"
+            .Item("DESCRIPTION") = "DALTON INSURANCE 25"
+            .Item("QTY") = TotalCount
+            .Item("SALEPRICE") = GetMaintenanceValue("InsuranceAmount")
+            .Item("ROWTOTAL") = TotalVal
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+
+        database.SaveEntry(ds)
+        Dim getLastID As Integer = GetDocLines_LastID()
+        AddJournal(InsPrice * TotalCount, "Debit", "Revolving Fund", "SALES IND 00001", "SALES", , , "SALES", getLastID)
+        AddJournal(InsPrice * TotalCount, "Credit", "Cash Offsetting Account", "SALES IND 00001", , , "SALES OF INVENTORIABLES", "SALES", getLastID)
+        INSCountZero()
+    End Sub
+
+    Private Function GetMaintenanceValue(ByVal Key As String)
+        Try
+            Dim mysql As String = "Select * From tblMaintenance Where Opt_Keys = '" & Key & "'"
+            Dim fillData As String = "tblMaintenance"
+            Dim ds As DataSet = LoadSQL(mysql, fillData)
+            Return ds.Tables(0).Rows(0).Item("Opt_Values")
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
+        Return Nothing
+    End Function
+
+    Private Sub INSCountZero()
+        Dim mysql As String = "Select * From tblMaintenance Where Opt_Keys = 'INS Count'"
+        Dim fillData As String = "tblMaintenance"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        ds.Tables(0).Rows(0).Item("Opt_Values") = 0
+        SaveEntry(ds, False)
+    End Sub
+
+    Private Function GetDocLines_LastID() As Integer
+        Dim mySql As String = "SELECT * FROM DOCLINES ORDER BY DLID DESC ROWS 1"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        Return ds.Tables(0).Rows(0).Item("DLID")
+    End Function
 End Class

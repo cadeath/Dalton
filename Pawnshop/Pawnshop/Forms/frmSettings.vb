@@ -3,7 +3,10 @@
     Private isOTPEnable As Boolean = False
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
+        frmMain.Enabled = False
         lblSAP01.Text = "SAP Code 01"
+        lblSAP02.Text = "SAP Code 02"
         ClearFields()
         PrinterSettings()
     End Sub
@@ -31,6 +34,7 @@
         txtBal.Text = GetOption("MaintainingBalance")
         txtRevolving.Text = GetOption("RevolvingFund")
         txtCashInBank.Text = GetSAPAccount("Cash in Bank")
+        txtCustomerCode.Text = GetOption("CustomerCode")
 
         If locked Then
             txtCode.Enabled = False
@@ -92,6 +96,7 @@
         UpdateOptions("MaintainingBalance", txtBal.Text, isOTPEnable)
         MaintainBal = txtBal.Text
         UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
+        UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text, isOTPEnable)
@@ -138,4 +143,7 @@
     End Sub
 
 
+    Private Sub frmSettings_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        frmMain.Enabled = True
+    End Sub
 End Class

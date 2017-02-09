@@ -18,7 +18,8 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
-    Public DEV_MODE As Boolean = True
+    Dim frmCollection As New FormCollection()
+    Public DEV_MODE As Boolean = False
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
     Public ADS_SHOW As Boolean = False
@@ -576,6 +577,23 @@ Module mod_system
         Return True
     End Function
 
+    Public Function CheckFormActive() As Boolean
+
+        frmCollection = Application.OpenForms()
+        If Application.OpenForms().OfType(Of frmInsurance).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmInsurance").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmPawningItemNew).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmPawningItemNew").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmBorrowing).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmBorrowing").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmMoneyTransfer).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmMoneyTransfer").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmSales).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmSales").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        End If
+
+        Return False
+    End Function
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"

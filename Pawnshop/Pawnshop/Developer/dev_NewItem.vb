@@ -136,7 +136,7 @@
         Dim itemID As Integer = lsClass.Items(idx).ToString
 
         sel_Item = New ItemClass
-        sel_Item.LoadItem(itemID)
+        sel_Item.LoadItem(itemID, 1)
         txtCategory.Text = sel_Item.Category
         txtPrint.Text = sel_Item.PrintLayout
 

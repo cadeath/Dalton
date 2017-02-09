@@ -27,12 +27,13 @@ Partial Class frmPrint
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gbReceipt = New System.Windows.Forms.GroupBox()
+        Me.btnVoid = New System.Windows.Forms.Button()
         Me.btnReprint = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.GroupBox1.SuspendLayout()
+        Me.gbReceipt.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -66,16 +67,26 @@ Partial Class frmPrint
         Me.ColumnHeader3.Text = "Date"
         Me.ColumnHeader3.Width = 100
         '
-        'GroupBox1
+        'gbReceipt
         '
-        Me.GroupBox1.Controls.Add(Me.btnReprint)
-        Me.GroupBox1.Controls.Add(Me.lvReceipt)
-        Me.GroupBox1.Location = New System.Drawing.Point(7, 71)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(590, 230)
-        Me.GroupBox1.TabIndex = 6
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Receipt List"
+        Me.gbReceipt.Controls.Add(Me.btnVoid)
+        Me.gbReceipt.Controls.Add(Me.btnReprint)
+        Me.gbReceipt.Controls.Add(Me.lvReceipt)
+        Me.gbReceipt.Location = New System.Drawing.Point(7, 71)
+        Me.gbReceipt.Name = "gbReceipt"
+        Me.gbReceipt.Size = New System.Drawing.Size(590, 230)
+        Me.gbReceipt.TabIndex = 6
+        Me.gbReceipt.TabStop = False
+        Me.gbReceipt.Text = "Receipt List"
+        '
+        'btnVoid
+        '
+        Me.btnVoid.Location = New System.Drawing.Point(427, 198)
+        Me.btnVoid.Name = "btnVoid"
+        Me.btnVoid.Size = New System.Drawing.Size(75, 23)
+        Me.btnVoid.TabIndex = 7
+        Me.btnVoid.Text = "&Void"
+        Me.btnVoid.UseVisualStyleBackColor = True
         '
         'btnReprint
         '
@@ -83,7 +94,7 @@ Partial Class frmPrint
         Me.btnReprint.Name = "btnReprint"
         Me.btnReprint.Size = New System.Drawing.Size(75, 23)
         Me.btnReprint.TabIndex = 6
-        Me.btnReprint.Text = "Reprint"
+        Me.btnReprint.Text = "&Reprint"
         Me.btnReprint.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -119,10 +130,12 @@ Partial Class frmPrint
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(609, 308)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.gbReceipt)
+        Me.MaximumSize = New System.Drawing.Size(625, 346)
+        Me.MinimumSize = New System.Drawing.Size(625, 346)
         Me.Name = "frmPrint"
-        Me.Text = "frmPrint"
-        Me.GroupBox1.ResumeLayout(False)
+        Me.Text = "Sales List"
+        Me.gbReceipt.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
@@ -132,9 +145,10 @@ Partial Class frmPrint
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents gbReceipt As System.Windows.Forms.GroupBox
     Friend WithEvents btnReprint As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
+    Friend WithEvents btnVoid As System.Windows.Forms.Button
 End Class
