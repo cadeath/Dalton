@@ -100,8 +100,8 @@
           <DataField>Principal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="WithDrawDate">
-          <DataField>WithDrawDate</DataField>
+        <Field Name="PullOut">
+          <DataField>PullOut</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Interest">

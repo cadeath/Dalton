@@ -20,6 +20,7 @@ Public Class frmClient
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 

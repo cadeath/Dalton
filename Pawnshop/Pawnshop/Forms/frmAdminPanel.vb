@@ -180,6 +180,7 @@ Public Class frmAdminPanel
             btnUpdate.Text = "&Edit"
             btnSave.Enabled = False
             btnSave.Text = "&Save"
+            Load_ItemSpecification(SelectedItem)
             ReadOnlyTrue()
         End If
     End Sub
@@ -320,7 +321,7 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub ModCurrency()
-       
+
         fillData = "tblCurrency"
         mySql = "SELECT * FROM " & fillData
         mySql &= " ORDER BY CurrencyID ASC"
@@ -358,7 +359,7 @@ Public Class frmAdminPanel
     End Sub
 
     Sub ExportConfig(ByVal url As String, ByVal serialDS As DataSet)
-        If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
+        'If System.IO.File.Exists(url) Then System.IO.File.Delete(url)
 
         Dim fsEsk As New System.IO.FileStream(url, IO.FileMode.CreateNew)
         Dim esk As New Runtime.Serialization.Formatters.Binary.BinaryFormatter
@@ -551,6 +552,14 @@ Public Class frmAdminPanel
         Dim ans As DialogResult = MsgBox("Do you want to save this Item Class?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        Dim mySql As String = String.Format("SELECT * FROM tblItem WHERE ItemClass = '{0}'", txtClassification.Text)
+        Dim ds As DataSet = LoadSQL(mySql, "TBLITEM")
+
+        If ds.Tables(0).Rows.Count = 1 Then
+            MsgBox("Class already existed", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
         Dim ItemSave As New ItemClass
         Dim ColItemsSpecs As New CollectionItemSpecs
         With ItemSave
@@ -601,7 +610,7 @@ Public Class frmAdminPanel
     End Sub
     '""""""""""""""""""""""""""""""""""""""""""""""""""scheme''''''''''''''""""""""""""""""""""
 
-   
+
     Private Sub btnSearchScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchScheme.Click
 
         Dim secured_str As String = txtsearchscheme.Text
@@ -612,7 +621,7 @@ Public Class frmAdminPanel
         frmInterestSchemeList.SearchSelect(secured_str, FormName.frmPawningV2_InterestScheme)
         frmInterestSchemeList.Show()
 
-      
+
 
         btnUpdate.Enabled = True
         btnEdit.Text = "&Edit"
@@ -638,16 +647,23 @@ Public Class frmAdminPanel
     End Sub
 
     Private Sub btnUpdateScheme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateScheme.Click
-        If Not isValidsceheme() Then Exit Sub
-        lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
-        lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
-        lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
-        lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
-        lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+
+        Try
+            If Not isValidsceheme() Then Exit Sub
+            lvIntscheme.SelectedItems(0).SubItems(1).Text = txtDayFrom.Text
+            lvIntscheme.SelectedItems(0).SubItems(2).Text = txtDayTo.Text
+            lvIntscheme.SelectedItems(0).SubItems(3).Text = txtInterest.Text
+            lvIntscheme.SelectedItems(0).SubItems(4).Text = txtPenalty.Text
+            lvIntscheme.SelectedItems(0).SubItems(5).Text = txtRemarks.Text
+        Catch ex As Exception
+            MsgBox("Data you select has been removed.", MsgBoxStyle.Information)
+        End Try
+
         clearfields1()
         Label18.Text = "Update"
         btnUpdateScheme.Enabled = False
         btnAdd.Enabled = True
+        btnRemove.Enabled = True
     End Sub
 
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
@@ -828,8 +844,15 @@ Public Class frmAdminPanel
             Dim ans As DialogResult = MsgBox("Do you want Cancel?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
             btnEdit.Text = "&Edit"
+            btnEdit.Enabled = False
             btnsavescheme.Enabled = False
-            btnSave.Text = "&Save"
+            btnsavescheme.Text = "&Save"
+            btnsavescheme.Enabled = True
+            lvIntscheme.Items.Clear()
+            txtDescription1.Text = "" : txtDescription1.Enabled = True
+            txtSchemeName.Text = "" : txtSchemeName.Enabled = True
+            btnUpdateScheme.Enabled = False
+            btnRemove.Enabled = False
         End If
     End Sub
 
@@ -884,6 +907,7 @@ Public Class frmAdminPanel
         Label18.Text = "Modify"
         btnAdd.Enabled = False
         btnUpdateScheme.Enabled = True
-        btnRemove.Enabled = True
+        btnRemove.Enabled = False
     End Sub
+
 End Class

@@ -116,6 +116,7 @@
     <Reference Include="System.Data">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Deployment">
       <Private>True</Private>
     </Reference>
@@ -125,6 +126,7 @@
     <Reference Include="System.Runtime.Serialization">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Services">
       <Private>True</Private>
     </Reference>
@@ -185,6 +187,7 @@
     <Compile Include="AutoPatch\db1222.vb" />
     <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="AutoPatch\db1224.vb" />
+    <Compile Include="AutoPatch\db1232.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -222,12 +225,6 @@
     <Compile Include="Developer\devVerifyESK.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Developer\dev_Config.Designer.vb">
-      <DependentUpon>dev_Config.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Developer\dev_Config.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Developer\dev_encrypt.Designer.vb">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </Compile>
@@ -238,6 +235,12 @@
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
     </Compile>
     <Compile Include="Developer\dev_ExtractToExcel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Developer\dev_FileLoader.Designer.vb">
+      <DependentUpon>dev_FileLoader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_FileLoader.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Developer\dev_NewItem.Designer.vb">
@@ -369,22 +372,33 @@
     <Compile Include="Forms\watermark.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
+    <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
-    <Compile Include="InterestScheme\dev_Scheme.vb">
+    <Compile Include="Modules\InterestScheme\dev_Scheme.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterestScheme\InterestScheme.vb" />
-    <Compile Include="InterestScheme\Interest_Config.vb" />
-    <Compile Include="InterestScheme\IntScheme_Lines.vb" />
-    <Compile Include="InterestScheme\Scheme_Interest.vb" />
-    <Compile Include="InterestScheme\Scheme_Load.vb" />
+    <Compile Include="Modules\InterestScheme\InterestScheme.vb" />
+    <Compile Include="Modules\InterestScheme\IntScheme_Lines.vb" />
+    <Compile Include="Modules\InterestScheme\Scheme_Interest.vb" />
+    <Compile Include="Modules\InterestScheme\Scheme_Load.vb" />
     <Compile Include="Modules\AuditReports.vb" />
-    <Compile Include="Modules\OneTimePassword.vb" />
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
     <Compile Include="Modules\Void.vb" />
+    <Compile Include="OTP\diagGeneralOTP.Designer.vb">
+      <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\diagGeneralOTP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\frmSample.Designer.vb">
+      <DependentUpon>frmSample.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\frmSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\OTPModule.vb" />
     <Compile Include="Panel\frm_PanelMultiline.Designer.vb">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
     </Compile>
@@ -655,18 +669,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="POS\frmItemLookUp.Designer.vb">
-      <DependentUpon>frmItemLookUp.vb</DependentUpon>
-    </Compile>
-    <Compile Include="POS\frmItemLookUp.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="POS\frmPOS.Designer.vb">
-      <DependentUpon>frmPOS.vb</DependentUpon>
-    </Compile>
-    <Compile Include="POS\frmPOS.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Reports\dsPrint.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -687,6 +689,12 @@
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\frmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\frmSalesReport.Designer.vb">
+      <DependentUpon>frmSalesReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmSalesReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\frmSegreList.Designer.vb">
@@ -737,11 +745,84 @@
     <Compile Include="Reports\qrySequence.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesInventory\cItem.vb" />
+    <Compile Include="SalesInventory\CollectionItemData.vb" />
+    <Compile Include="SalesInventory\dev_Menu_SalesInventory.Designer.vb">
+      <DependentUpon>dev_Menu_SalesInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\dev_Menu_SalesInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmIMD.Designer.vb">
+      <DependentUpon>frmIMD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmIMD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmImport_IMD.Designer.vb">
+      <DependentUpon>frmImport_IMD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmImport_IMD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmPLU.Designer.vb">
+      <DependentUpon>frmPLU.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmPLU.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmPrint.Designer.vb">
+      <DependentUpon>frmPrint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmPrint.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmSales.Designer.vb">
+      <DependentUpon>frmSales.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmSales.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\cItemData.vb" />
+    <Compile Include="SalesInventory\frmInventory.Designer.vb">
+      <DependentUpon>frmInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesOptions.Designer.vb">
+      <DependentUpon>frmSalesOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesStockOut.Designer.vb">
+      <DependentUpon>frmSalesStockOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmSalesStockOut.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\frmView_Stock.Designer.vb">
+      <DependentUpon>frmView_Stock.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesInventory\frmView_Stock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesInventory\InventoryController.vb" />
+    <Compile Include="SalesInventory\SeedItemData.vb" />
     <Compile Include="Seed\Client_Seed.vb" />
+    <Compile Include="Seed\frmSeed.Designer.vb">
+      <DependentUpon>frmSeed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Seed\frmSeed.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Seed\Pawn.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
       <DependentUpon>frmAuditConsole.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\devClient.resx">
       <DependentUpon>devClient.vb</DependentUpon>
@@ -749,14 +830,14 @@
     <EmbeddedResource Include="Developer\devVerifyESK.resx">
       <DependentUpon>devVerifyESK.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Developer\dev_Config.resx">
-      <DependentUpon>dev_Config.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_encrypt.resx">
       <DependentUpon>dev_encrypt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ExtractToExcel.resx">
       <DependentUpon>dev_ExtractToExcel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_FileLoader.resx">
+      <DependentUpon>dev_FileLoader.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_NewItem.resx">
       <DependentUpon>dev_NewItem.vb</DependentUpon>
@@ -784,6 +865,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ab2.resx">
       <DependentUpon>ab2.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\diagOTP.resx">
       <DependentUpon>diagOTP.vb</DependentUpon>
@@ -815,8 +897,14 @@
     <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
+    <EmbeddedResource Include="Modules\InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
+      <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\frmSample.resx">
+      <DependentUpon>frmSample.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Panel\frm_PanelMultiline.resx">
       <DependentUpon>frm_PanelMultiline.vb</DependentUpon>
@@ -960,14 +1048,11 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="POS\frmItemLookUp.resx">
-      <DependentUpon>frmItemLookUp.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="POS\frmPOS.resx">
-      <DependentUpon>frmPOS.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\d_Remittance.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSalesReport.resx">
+      <DependentUpon>frmSalesReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryAuction.resx">
       <DependentUpon>qryAuction.vb</DependentUpon>
@@ -1000,6 +1085,9 @@
     <EmbeddedResource Include="Reports\rpt_hourlySummary.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_InventoryPOS.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRenew_Monthly2.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -1026,12 +1114,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout01.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\layout02.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1099,6 +1189,9 @@
     <EmbeddedResource Include="Reports\rpt_Segregated.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_StockOutReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -1108,13 +1201,56 @@
     <EmbeddedResource Include="Reports\_layout03.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\dev_Menu_SalesInventory.resx">
+      <DependentUpon>dev_Menu_SalesInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmIMD.resx">
+      <DependentUpon>frmIMD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmImport_IMD.resx">
+      <DependentUpon>frmImport_IMD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmPLU.resx">
+      <DependentUpon>frmPLU.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmPrint.resx">
+      <DependentUpon>frmPrint.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmSales.resx">
+      <DependentUpon>frmSales.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmInventory.resx">
+      <DependentUpon>frmInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmSalesOptions.resx">
+      <DependentUpon>frmSalesOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmSalesStockOut.resx">
+      <DependentUpon>frmSalesStockOut.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesInventory\frmView_Stock.resx">
+      <DependentUpon>frmView_Stock.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptReceipt.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_SalesReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Seed\frmSeed.resx">
+      <DependentUpon>frmSeed.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="backup.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="doc\ExpiryFormat.xls" />
-    <None Include="doc\JournalEntries.xls" />
+    <None Include="doc\ExpiryFormat.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="doc\JournalEntries.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="dsPrint.datasource" />
     <None Include="dsReports.datasource" />
     <None Include="HitManagement\dsHit.xsc">
@@ -1232,7 +1368,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

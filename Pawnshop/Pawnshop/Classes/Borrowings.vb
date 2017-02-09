@@ -155,7 +155,8 @@
         Dim SrvTypDJournal As String = ds2.Tables(0).Rows(0).Item("TRANSTYPE")
         Dim tmpBorrowing As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
 
-        TransactionVoidSave(MoDName, tmpBorrowing, POSuser.UserID)
+        Dim NewOtp As New ClassOtp("VOID BORROWING", diagOTP.txtPIN.Text, "Ref# " & ReferenceNumber)
+        TransactionVoidSave(MoDName, tmpBorrowing, POSuser.UserID, "Ref# " & ReferenceNumber)
 
         If SrvTypDJournal = "BORROW IN" Then
             RemoveJournal(BORROWINGID, , SrvTypDJournal)

@@ -503,19 +503,63 @@
             ElseIf Status = "R" Then
                 ModNAME = "RENEWALS"
             End If
-
+            'ChangeStatus("V")
             Dim curStatus As String = _status
             Dim PTNum As String = String.Format("{0:000000}", PawnTicket)
             If curStatus = "L" Then
                 ChangeStatus("V")
                 Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
                 Dim ds As DataSet = LoadSQL(mysql)
-                Dim tmpEncoderID As Integer
-                tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
-                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
+                Dim tmpEncoderID As Integer, tmpPawnItemID As Integer
+                With ds.Tables(0).Rows(0)
+                    tmpEncoderID = .Item("ENCODERID")
+                    tmpPawnItemID = .Item("PawnItemID")
+                End With
+                ds.Clear()
+                mysql = "Select * from OPI Where PawnItemID = " & tmpPawnItemID
+                ds = LoadSQL(mysql, "OPI")
+                ds.Tables(0).Rows(0).Item("Status") = "V"
+                database.SaveEntry(ds, False)
+
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
+                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
                 Exit Sub
+            ElseIf curStatus = "X" Then
+                Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PawnTicket = " & _oldPT
+                Dim ds As DataSet = LoadSQL(mysql)
+
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
+                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
+
+                If ds.Tables(0).Rows.Count = 1 Then
+                    ChangeStatus("R")
+                Else
+                    ChangeStatus("L")
+                End If
+
+                ds.Clear()
+                mysql = "Select * from OPI Where PawnItemID = " & PawnItem.ID
+                ds = LoadSQL(mysql, "OPI")
+                With ds.Tables(0).Rows(0)
+                    .Item("status") = "A"
+                    .Item("WithDrawDate") = New Date
+                End With
+                database.SaveEntry(ds, False)
+
+            ElseIf curStatus = "R" Then
+                Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PawnTicket = " & _oldPT
+                Dim ds As DataSet = LoadSQL(mysql)
+                If ds.Tables(0).Rows.Count = 1 Then
+                    ChangeStatus("V")
+                End If
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
+                TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
             End If
 
             If curStatus <> "X" Then
@@ -533,46 +577,54 @@
                     RemoveJournal(PawnID, , ModNAME)
                     Exit Sub
                 Else
-                    If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
-                        st = "L"
-                    Else
-                        st = "R"
-                    End If
-                End If
+                    If curStatus = "X" Then
+                        st = "0"
+                    ElseIf curStatus = "R" Then
+                        If IsDBNull(ds.Tables(0).Rows(0).Item("OldTicket")) Or ds.Tables(0).Rows(0).Item("OldTicket") = 0 Then
+                            st = "L"
+                        Else
+                            st = "R"
+                        End If
 
-                ds.Tables(MainTable).Rows(0).Item("Status") = st
+                    End If
+                    End If
+
+                    ds.Tables(MainTable).Rows(0).Item("Status") = st
+                    With ds.Tables(MainTable).Rows(0)
+                        .Item("OrNum") = 0
+                        .Item("OrDate") = New Date
+                        .Item("DAYSOVERDUE") = 0
+                        .Item("DelayInterest") = 0
+                        .Item("Penalty") = 0
+                        .Item("ServiceCharge") = 0
+                        .Item("RenewDue") = 0
+                        .Item("RedeemDue") = 0
+                        .Item("AdvInt") = 0
+                    End With
+                    database.SaveEntry(ds, False)
+                    Dim mysql2 As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
+                    Dim ds2 As DataSet = LoadSQL(mysql2)
+
+                    RemoveJournal(PawnID, , ModNAME)
+                    RemoveDailyTimeLog(PawnID, "1", ModNAME)
+            Else
+                Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PawnID = " & PawnID
+                Dim ds As DataSet = New DataSet
+                ds = LoadSQL(mysql, MainTable)
+                ChangeStatus("L")
                 With ds.Tables(MainTable).Rows(0)
                     .Item("OrNum") = 0
                     .Item("OrDate") = New Date
-                    .Item("DAYSOVERDUE") = 0
-                    .Item("DelayInterest") = 0
-                    .Item("Penalty") = 0
-                    .Item("ServiceCharge") = 0
                     .Item("RenewDue") = 0
                     .Item("RedeemDue") = 0
                     .Item("AdvInt") = 0
                 End With
                 database.SaveEntry(ds, False)
-                Dim mysql2 As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
-                Dim ds2 As DataSet = LoadSQL(mysql2)
-                Dim tmpEncoderID As Integer
-                tmpEncoderID = ds2.Tables(0).Rows(0).Item("ENCODERID")
-                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
-
-                RemoveJournal(PawnID, , ModNAME)
-                RemoveDailyTimeLog(PawnID, "1", ModNAME)
-            Else
-                ChangeStatus("L")
-
-                Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
-                Dim ds As DataSet = LoadSQL(mysql)
-                Dim tmpEncoderID As Integer
-                tmpEncoderID = ds.Tables(0).Rows(0).Item("ENCODERID")
-                TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID)
 
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
             End If
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "VOID TRANSACTION")
         End Try
@@ -612,6 +664,21 @@
         End With
         database.SaveEntry(ds, False)
     End Sub
+
+    Public Function DescriptionWithAppraiser()
+        Dim desc As String = ""
+        desc = Description
+        If desc = "" Then desc = "N/A"
+        desc &= vbCrLf & "Appraised by " & GetUsername(AppraiserID)
+        Return desc
+    End Function
+
+    Private Function GetUsername(ByVal id As Integer) As String
+        Dim loadAppraiser As New ComputerUser
+        loadAppraiser.LoadUser(id)
+
+        Return loadAppraiser.UserName
+    End Function
 #End Region
 
 End Class

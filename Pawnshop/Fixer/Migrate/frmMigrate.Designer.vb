@@ -27,6 +27,7 @@ Partial Class frmMigrate
         Me.pbProgressBar = New System.Windows.Forms.ProgressBar()
         Me.btnFix = New System.Windows.Forms.Button()
         Me.txtData = New System.Windows.Forms.TextBox()
+        Me.oFd = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -36,9 +37,9 @@ Partial Class frmMigrate
         Me.GroupBox1.Controls.Add(Me.pbProgressBar)
         Me.GroupBox1.Controls.Add(Me.btnFix)
         Me.GroupBox1.Controls.Add(Me.txtData)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 1)
+        Me.GroupBox1.Location = New System.Drawing.Point(4, 1)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(294, 90)
+        Me.GroupBox1.Size = New System.Drawing.Size(302, 90)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Database"
@@ -56,28 +57,32 @@ Partial Class frmMigrate
         '
         'pbProgressBar
         '
-        Me.pbProgressBar.Location = New System.Drawing.Point(9, 46)
+        Me.pbProgressBar.Location = New System.Drawing.Point(6, 46)
         Me.pbProgressBar.Maximum = 3000
         Me.pbProgressBar.Name = "pbProgressBar"
-        Me.pbProgressBar.Size = New System.Drawing.Size(198, 23)
+        Me.pbProgressBar.Size = New System.Drawing.Size(209, 23)
         Me.pbProgressBar.TabIndex = 1
         '
         'btnFix
         '
-        Me.btnFix.Location = New System.Drawing.Point(213, 44)
+        Me.btnFix.Location = New System.Drawing.Point(221, 46)
         Me.btnFix.Name = "btnFix"
-        Me.btnFix.Size = New System.Drawing.Size(75, 25)
+        Me.btnFix.Size = New System.Drawing.Size(75, 23)
         Me.btnFix.TabIndex = 0
         Me.btnFix.Text = "Fix"
         Me.btnFix.UseVisualStyleBackColor = True
         '
         'txtData
         '
-        Me.txtData.Location = New System.Drawing.Point(9, 15)
+        Me.txtData.Location = New System.Drawing.Point(6, 15)
         Me.txtData.Name = "txtData"
         Me.txtData.ReadOnly = True
-        Me.txtData.Size = New System.Drawing.Size(279, 20)
+        Me.txtData.Size = New System.Drawing.Size(290, 20)
         Me.txtData.TabIndex = 1
+        '
+        'oFd
+        '
+        Me.oFd.Filter = "Data File |*.fdb"
         '
         'frmMigrate
         '
@@ -98,4 +103,5 @@ Partial Class frmMigrate
     Friend WithEvents pbProgressBar As System.Windows.Forms.ProgressBar
     Friend WithEvents lblPercent As System.Windows.Forms.Label
     Friend WithEvents txtData As System.Windows.Forms.TextBox
+    Friend WithEvents oFd As System.Windows.Forms.OpenFileDialog
 End Class

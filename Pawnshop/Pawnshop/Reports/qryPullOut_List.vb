@@ -25,6 +25,15 @@
         AuditReports.Min_Principal(MINIMUM_PRINCIPAL, monCalendar.SelectionStart.ToShortDateString, cboClass.Text)
     End Sub
 
+    Private Sub PullOut_dates()
+        Dim mySql As String = "SELECT * FROM OPI WHERE STATUS='W'"
+        Dim ds As DataSet = LoadSQL(mySql)
+
+        For Each pullDate As DataRow In ds.Tables(0).Rows
+            MonCalendar.AddMonthlyBoldedDate(pullDate("WITHDRAWDATE"))
+        Next
+    End Sub
+
     Private Sub qryPullOut_List_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         mySql = "SELECT DISTINCT ITEMCATEGORY FROM tblITEM"
         fillData = "tblITEM"
@@ -43,6 +52,7 @@
                 Me.Text = "Oustanding"
             Case DailyReport.Pullout
                 Me.Text = "Item PullOut"
+                PullOut_dates()
             Case DailyReport.AuditReport
                 Me.Text = "Audit Report"
         End Select
@@ -120,15 +130,15 @@
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
             mySql &= "  WHERE (Status = 'S') "
-            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND (WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' OR WITHDRAWDATE IS NULL) "
+            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "'"
 
             mySql &= "  UNION "
             mySql &= "  SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'W') "
-            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
+            mySql &= "  WHERE (Status = 'W') AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "'"
+            mySql &= "  AND WITHDRAWDATE >= '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= ") "
             If cboClass.Text <> "ALL" Then
                 mySql &= " WHERE ITEMCATEGORY = '" & cboClass.Text & "'"
@@ -161,12 +171,12 @@
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
             mySql &= "  WHERE (Status = 'S') "
-            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND (WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' OR WITHDRAWDATE IS NULL) "
+            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "'"
             mySql &= "  UNION "
             mySql &= "  SELECT * "
             mySql &= "  FROM PAWN_LIST "
-            mySql &= "  WHERE (Status = 'W') "
-            mySql &= "  AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "' AND WITHDRAWDATE > '" & monCalendar.SelectionStart.ToShortDateString & "' "
+            mySql &= "  WHERE (Status = 'W') AND LOANDATE <= '" & monCalendar.SelectionStart.ToShortDateString & "'"
+            mySql &= "   AND WITHDRAWDATE >= '" & monCalendar.SelectionStart.ToShortDateString & "' "
             mySql &= ") "
             If cboClass.Text <> "ALL" Then
                 mySql &= " WHERE ITEMCATEGORY = '" & cboClass.Text & "'"

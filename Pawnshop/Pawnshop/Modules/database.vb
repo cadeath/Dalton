@@ -13,7 +13,12 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-    Private DBversion As String = "1.2.2.5" 'Database version.
+
+    ' TODO
+    ' Until Fixer and Patcher is finish for 1.2.3.2
+    ' DBversion will be 1.2.3.1 for the sake of one
+    ' deployed system, GAI
+    Private DBversion As String = "1.2.3.2" 'Database version.
     Private language() As String = _
         {"Connection error failed."} 'verification if the database is connected.
     ''' <summary>
@@ -69,6 +74,7 @@ Friend Module database
     ''' <param name="dsEntry">Database with Table Name as Database Table Name</param>
     ''' <returns>Boolean: Success Result</returns>
     ''' <remarks></remarks>
+
 
     Friend Function SaveEntry(ByVal dsEntry As DataSet, Optional ByVal isNew As Boolean = True) As Boolean
         If dsEntry Is Nothing Then
@@ -231,10 +237,35 @@ Friend Module database
     ''' <param name="key">the key is parameter only data will be read if what is the opt_keys shows in key.</param>
     ''' <param name="value">The value here hold the data from the opt_values.</param>
     ''' <remarks></remarks>
-    Friend Sub UpdateOptions(ByVal key As String, ByVal value As String)
-        Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
+    Friend Sub UpdateOptions(ByVal key As String, ByVal value As String, Optional ByVal OTPEnable As Boolean = False)
+        Dim mySql As String = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "' AND opt_values = '" & value & "'"
+        Dim ds As DataSet = LoadSQL(mySql, "tblMaintenance")
+        If OTPEnable = True Then
+            If ds.Tables("tblMaintenance").Rows.Count = 0 Then
+                Dim mod_name As String = ""
+                Select Case key
+                    Case "PawnLastNum"
+                        mod_name = "Pawning"
+                    Case "BorrowingLastNum"
+                        mod_name = "Borrowing"
+                    Case "InsuranceLastNum"
+                        mod_name = "Insurance"
+                    Case "ORLastNum"
+                        mod_name = "OR"
+                    Case "MEnumLast"
+                        mod_name = "ME"
+                    Case "MRNumLast"
+                        mod_name = "MR"
+                    Case Else
+                        mod_name = key
+                End Select
+                Dim NewOtp As New ClassOtp(mod_name, diagOTP.txtPIN.Text, value, True)
+            End If
+        End If
+        mySql = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
         Dim fillData As String = "tblMaintenance"
-        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        ds.Clear()
+        ds = LoadSQL(mySql, fillData)
 
         If ds.Tables(fillData).Rows.Count = 0 Then
             Dim dsNewRow As DataRow
@@ -258,11 +289,8 @@ Friend Module database
             ds.Tables(fillData).Rows(0).Item("SAPACCOUNT") = value
             SaveEntry(ds, False)
         End If
+
         Console.WriteLine("Option updated. " & key)
     End Sub
-
-
-
-
 
 End Module
