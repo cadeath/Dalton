@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Fixer.frmAddItemMasterCOI
+            Me.MainForm = Global.Fixer.frmReprint
         End Sub
     End Class
 End Namespace

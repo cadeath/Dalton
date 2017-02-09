@@ -218,6 +218,12 @@
     </Compile>
     <Compile Include="ReCompute\PawningDalton.vb" />
     <Compile Include="ReCompute\recompute.vb" />
+    <Compile Include="Reprint\frmReprint.Designer.vb">
+      <DependentUpon>frmReprint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reprint\frmReprint.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Workbook.vb" />
     <Compile Include="Worksheet.vb" />
   </ItemGroup>
@@ -269,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReCompute\frmRecompute.resx">
       <DependentUpon>frmRecompute.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reprint\frmReprint.resx">
+      <DependentUpon>frmReprint.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
