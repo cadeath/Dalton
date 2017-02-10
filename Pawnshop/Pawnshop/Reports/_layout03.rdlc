@@ -650,7 +650,7 @@
                 <Value>=Parameters!txtCoi.Value</Value>
                 <Style>
                   <FontSize>8pt</FontSize>
-                  <Format>#,0.00;(#,0.00);'-'</Format>
+                  <Format>#,0;(#,0);'-'</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -665,6 +665,9 @@
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>17</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Parameters!txtCoi.Value &lt;&gt; 0, false, true)</Hidden>
+        </Visibility>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
@@ -695,6 +698,9 @@
         <Height>0.1875in</Height>
         <Width>1.05209in</Width>
         <ZIndex>18</ZIndex>
+        <Visibility>
+          <Hidden>=IIf(Parameters!txtCoi.Value &lt;&gt; 0, false, true)</Hidden>
+        </Visibility>
         <Style>
           <Border />
           <PaddingLeft>2pt</PaddingLeft>
