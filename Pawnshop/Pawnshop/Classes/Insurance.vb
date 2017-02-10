@@ -179,12 +179,12 @@ Public Class Insurance
         ds.Tables(fillData).Rows(0).Item("Status") = _status
         SaveEntry(ds, False)
 
-        ds.Clear()
-        mySql = "Select * From tblMaintenance Where Opt_Keys = 'INS Count'"
-        ds = LoadSQL(mySql, "tblMaintenance")
-        ds.Tables(0).Rows(0).Item("Opt_Values") = ds.Tables(0).Rows(0).Item("Opt_Values") - 1
-        SaveEntry(ds, False)
-        InventoryController.AddInventory("IND 00001", 1)
+        'ds.Clear()
+        'mySql = "Select * From tblMaintenance Where Opt_Keys = 'INS Count'"
+        'ds = LoadSQL(mySql, "tblMaintenance")
+        'ds.Tables(0).Rows(0).Item("Opt_Values") = ds.Tables(0).Rows(0).Item("Opt_Values") - 1
+        'SaveEntry(ds, False)
+        'InventoryController.AddInventory("IND 00001", 1)
 
         'mySql = "SELECT * FROM DOC WHERE CODE = '" & "COI# " & _coiNo & "'"
         'ds = LoadSQL(mySql, "Doc")

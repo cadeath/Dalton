@@ -28,13 +28,6 @@
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
-        SalesToolStripMenuItem.Enabled = Not st
-        StockInToolStripMenuItem.Enabled = Not st
-        ItemMasterDataToolStripMenuItem.Enabled = Not st
-        '-------------------------------------------------
-        SalesToolStripMenuItem.Enabled = Not st
-        StockInToolStripMenuItem.Enabled = Not st
-        ItemMasterDataToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -62,9 +55,6 @@
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
         VoidReportToolStripMenuItem.Enabled = Not st
-        SalesReportToolStripMenuItem.Enabled = Not st
-        InventoryReportToolStripMenuItem.Enabled = Not st
-        StockoutReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -303,7 +293,7 @@
             Exit Sub
         End If
 
-        frmSales.Show()
+        ' frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
@@ -517,30 +507,30 @@
         ExtractDataFromDatabase.ShowDialog()
     End Sub
 
-    Private Sub SalesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesToolStripMenuItem.Click
+    Private Sub SalesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
         frmExtractor.Show()
     End Sub
 
-    Private Sub SalesReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesReportToolStripMenuItem.Click
+    Private Sub SalesReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmSalesReport.FormType = frmSalesReport.SaleReport.Sale
         frmSalesReport.Show()
     End Sub
 
-    Private Sub InventoryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InventoryReportToolStripMenuItem.Click
+    Private Sub InventoryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
         frmSalesReport.Show()
     End Sub
 
-    Private Sub StockInToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInToolStripMenuItem.Click
+    Private Sub StockInToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmInventory.Show()
     End Sub
 
-    Private Sub ItemMasterDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemMasterDataToolStripMenuItem.Click
+    Private Sub ItemMasterDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmImport_IMD.Show()
     End Sub
 
-    Private Sub StockoutReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockoutReportToolStripMenuItem.Click
+    Private Sub StockoutReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         frmSalesReport.FormType = frmSalesReport.SaleReport.StockOut
         frmSalesReport.Show()
     End Sub

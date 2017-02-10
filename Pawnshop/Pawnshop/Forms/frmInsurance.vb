@@ -158,64 +158,19 @@
 
             .SaveInsurance()
 
-            'AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", .LoadLastIDNumberInsurance)
-            'AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", .LoadLastIDNumberInsurance)
+            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", .LoadLastIDNumberInsurance)
+            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", .LoadLastIDNumberInsurance)
 
             AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount, , , .LoadLastIDNumberInsurance)
         End With
-        Dim mysql As String = "Select * FROM tblMaintenance Where Opt_Keys = 'INS Count'"
-        Dim fillData As String = "tblMaintenance"
-        Dim ds As DataSet = LoadSQL(mysql, fillData)
-        ds.Tables(0).Rows(0).Item("Opt_Values") = ds.Tables(0).Rows(0).Item("Opt_Values") + 1
-        SaveEntry(ds, False)
-        InventoryController.DeductInventory("IND 00001", 1)
-        'Dim mySql As String = "SELECT * FROM DOC ROWS 1"
-        'Dim fillData As String = "DOC"
-
-        'Dim ds As DataSet = LoadSQL(mySql, fillData)
-        'Dim dsNewRow As DataRow
-        'dsNewRow = ds.Tables(fillData).NewRow
-        'With dsNewRow
-        '    .Item("CODE") = "COI# " & txtCoi.Text
-        '    .Item("MOP") = "C"
-        '    .Item("CUSTOMER") = txtHolder.Text
-        '    .Item("DOCDATE") = CurrentDate
-        '    .Item("NOVAT") = 25
-        '    .Item("VATRATE") = 25
-        '    .Item("VATTOTAL") = 25
-        '    .Item("DOCTOTAL") = 25
-        '    .Item("USERID") = POSuser.UserID
-        'End With
-        'ds.Tables(fillData).Rows.Add(dsNewRow)
-        'database.SaveEntry(ds)
-        'Dim DOCID As Integer = 0
-
-        'mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
-        'ds = LoadSQL(mySql, fillData)
-        'DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
-
-        ''Creating DocumentLines
-        'mySql = "SELECT * FROM DOCLINES ROWS 1"
-        'fillData = "DOCLINES"
-        'ds = LoadSQL(mySql, fillData)
-
-        'Dim itm As New cItemData
-        'dsNewRow = ds.Tables(fillData).NewRow
-        'With dsNewRow
-        '    .Item("DOCID") = DOCID
-        '    .Item("ITEMCODE") = "IND 00001"
-        '    .Item("DESCRIPTION") = "DALTON INSURANCE 25"
-        '    .Item("QTY") = 1
-        '    .Item("UNITPRICE") = 25
-        '    .Item("SALEPRICE") = 25
-        '    .Item("ROWTOTAL") = 25
-        'End With
-        'ds.Tables(fillData).Rows.Add(dsNewRow)
-
-        'database.SaveEntry(ds)
+        'Dim mysql As String = "Select * FROM tblMaintenance Where Opt_Keys = 'INS Count'"
+        'Dim fillData As String = "tblMaintenance"
+        'Dim ds As DataSet = LoadSQL(mysql, fillData)
+        'ds.Tables(0).Rows(0).Item("Opt_Values") = ds.Tables(0).Rows(0).Item("Opt_Values") + 1
+        'SaveEntry(ds, False)
         'InventoryController.DeductInventory("IND 00001", 1)
 
-        UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
+        'UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
         btnNew.PerformClick()
 

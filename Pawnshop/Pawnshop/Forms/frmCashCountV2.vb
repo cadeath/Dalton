@@ -168,7 +168,7 @@
         Dim total As Double = Compute_CashCount()
 
         SaveCashCount()
-        SaveInsuranceInv()
+        'SaveInsuranceInv()
         ' If Executed via Audit Console
         If isAuditing Then
             UpdateCashCount(total)
