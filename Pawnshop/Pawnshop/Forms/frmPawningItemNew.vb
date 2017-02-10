@@ -860,7 +860,7 @@ Public Class frmPawningItemNew
             LockFields(True)
             btnSave.Enabled = False : btnRenew.Enabled = True
             btnRedeem.Enabled = True : btnPrint.Enabled = True
-            btnVoid.Enabled = True
+            btnVoid.Enabled = True : btnAddCoi.Enabled = False
         End If
 
         ChangeForm()
@@ -969,6 +969,7 @@ Public Class frmPawningItemNew
             transactionType = "D"
             btnSave.Enabled = False
             btnPrint.Enabled = True
+            btnAddCoi.Enabled = False
             Load_PawnTicket(PT_Entry)
             Exit Sub
         End If
@@ -980,6 +981,7 @@ Public Class frmPawningItemNew
         Renew()
         btnPrint.Enabled = False
         btnSave.Enabled = True
+        btnAddCoi.Enabled = True
         btnRenew.Text = "&Cancel"
 
     End Sub
@@ -1133,6 +1135,7 @@ Public Class frmPawningItemNew
         If POSuser.canVoid Then btnVoid.Enabled = Not st
         btnSave.Enabled = Not st
         lvSpec.Enabled = Not st
+        btnAddCoi.Enabled = Not st
     End Sub
 
     Private Sub PrintNewLoan()
@@ -1354,6 +1357,7 @@ Public Class frmPawningItemNew
             transactionType = "D"
             btnSave.Enabled = False
             btnPrint.Enabled = True
+            btnAddCoi.Enabled = False
 
             Load_PawnTicket(PT_Entry)
             Exit Sub
@@ -1367,6 +1371,7 @@ Public Class frmPawningItemNew
         btnPrint.Enabled = False
         btnSave.Enabled = True
         btnRedeem.Text = "&Cancel"
+        btnAddCoi.Enabled = True
     End Sub
 
     Private Sub do_RenewOR()
@@ -1405,8 +1410,7 @@ Public Class frmPawningItemNew
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PT_Entry.RenewDue)
         addParameters.Add("txtDescription", descStr)
-        addParameters.Add("txtCoi", GetTotalCoi(PRINT_PTNEW.ToString("000000")))
-
+        addParameters.Add("txtCoi", GetTotalCoi(String.Format("PT#{0:000000}", PRINT_PTNEW)))
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1484,7 +1488,7 @@ Public Class frmPawningItemNew
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PT_Entry.RedeemDue)
         addParameters.Add("txtDescription", descStr)
-        addParameters.Add("txtCoi", GetTotalCoi(PT_Entry.PawnTicket.ToString("000000")))
+        addParameters.Add("txtCoi", GetTotalCoi(String.Format("PT#{0:000000}", PT_Entry.PawnTicket)))
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")

@@ -41,7 +41,7 @@
         For Each itm As ListViewItem In lvCoi.Items
             With Ins
                 .ID = itm.SubItems(0).Text
-                .TicketNum = Ticket
+                .TicketNum = String.Format("PT#{0:000000}", Ticket)
                 .UpdateInsurance()
             End With
         Next
