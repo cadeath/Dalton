@@ -70,7 +70,7 @@ Public Class frmExtractor
         Dim header3() As String = {"RecordKey", "ItemCode", "Quantity", "WhsCode", "IntrSerial"}
 
         mySql = "SELECT T0.DOCDATE, T1.* FROM DOC T0 INNER JOIN DOCLINES T1 ON T0.DOCID = T1.DOCID "
-        mySql &= String.Format("WHERE T0.DOCDATE = '{0}' AND T0.STATUS = 1 AND T1.ITEMCODE <> 'RECALL00' AND ", cd.ToString("MM/dd/yyyy"))
+        mySql &= String.Format("WHERE T0.DOCDATE = '{0}' AND T0.STATUS = '1' AND T1.ITEMCODE <> 'RECALL00' AND ", cd.ToString("MM/dd/yyyy"))
         mySql &= String.Format("(T0.DOCTYPE = 0 OR T0.DOCTYPE = 1) AND T0.STATUS <> 'V'", cd.ToString("MM/dd/yyyy"))
         ds = LoadSQL(mySql)
 
