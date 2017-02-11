@@ -484,7 +484,7 @@ Partial Class frmMain
         Me.btnPOS.Name = "btnPOS"
         Me.btnPOS.Size = New System.Drawing.Size(137, 90)
         Me.btnPOS.TabIndex = 25
-        Me.btnPOS.Text = "POS"
+        Me.btnPOS.Text = "Inventory System"
         Me.btnPOS.UseVisualStyleBackColor = True
         '
         'btnBranch
@@ -622,7 +622,7 @@ Partial Class frmMain
         Me.MainMenuStrip = Me.msMenu
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Pawnshop System"
+        Me.Text = "Dalton Integrated System"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.msMenu.ResumeLayout(False)
         Me.msMenu.PerformLayout()

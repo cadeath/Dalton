@@ -187,6 +187,7 @@
     <Compile Include="AutoPatch\db1222.vb" />
     <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="AutoPatch\db1224.vb" />
+    <Compile Include="AutoPatch\db1232.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -371,16 +372,16 @@
     <Compile Include="Forms\watermark.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="InterestScheme\dev_Scheme.Designer.vb">
+    <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
-    <Compile Include="InterestScheme\dev_Scheme.vb">
+    <Compile Include="Modules\InterestScheme\dev_Scheme.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterestScheme\InterestScheme.vb" />
-    <Compile Include="InterestScheme\IntScheme_Lines.vb" />
-    <Compile Include="InterestScheme\Scheme_Interest.vb" />
-    <Compile Include="InterestScheme\Scheme_Load.vb" />
+    <Compile Include="Modules\InterestScheme\InterestScheme.vb" />
+    <Compile Include="Modules\InterestScheme\IntScheme_Lines.vb" />
+    <Compile Include="Modules\InterestScheme\Scheme_Interest.vb" />
+    <Compile Include="Modules\InterestScheme\Scheme_Load.vb" />
     <Compile Include="Modules\AuditReports.vb" />
     <Compile Include="Modules\otp.vb" />
     <Compile Include="Modules\PawningScheme.vb" />
@@ -896,7 +897,7 @@
     <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterestScheme\dev_Scheme.resx">
+    <EmbeddedResource Include="Modules\InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
@@ -1186,6 +1187,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_Segregated.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_StockOutReport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\sq_MoneyTransfer.rdlc">

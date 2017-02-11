@@ -1,5 +1,4 @@
-﻿
-' Changelog
+﻿' Changelog
 ' v2 7/28/16
 '  - Added ExtractToExcel
 ' v1.4 2/17/16

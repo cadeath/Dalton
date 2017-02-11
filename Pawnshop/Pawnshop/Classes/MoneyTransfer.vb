@@ -273,7 +273,7 @@
             Case "GPRS - Smartmoney To GPRS", "GPRS - Moneygram to GPRS"
                 SrcStr = "GPRS_R|Ref# " & _ref
         End Select
-        Dim strModname1 As String, strModname2 As String
+        Dim strModname1 As String = "", strModname2 As String = ""
         Select Case frmMTlist.lblModname.Text
             Case "Cebuana Llhuiller OUT"
                 strModname1 = "PERA LINK OUT"
