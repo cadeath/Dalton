@@ -443,8 +443,8 @@ Public Class ExtractDataFromDatabase
           vbCrLf & "	ON E.USERID = O.ENCODERID	" & _
           vbCrLf & "	INNER JOIN OPI I	" & _
           vbCrLf & "	ON I.PAWNITEMID = O.PAWNITEMID	" & _
-         vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & "ORDER BY O.LOANDATE ASC;"
+          vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
+          vbCrLf & "ORDER BY O.LOANDATE ASC;"
 
         ' TODO: ELLIE
         ' PLEASE ARRANGE THIS HEADERS IN A MANNER THAT THE ACCOUNTING CAN EASILY READ
@@ -459,6 +459,7 @@ Public Class ExtractDataFromDatabase
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
+
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -663,10 +664,10 @@ Public Class ExtractDataFromDatabase
        vbCrLf & "Case M.MONEYTRANS" & _
        vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
        vbCrLf & "END AS MONEYTRANS, M.TRANSDATE, " & _
-        vbCrLf & " M.SERVICECHARGE, " & _
+       vbCrLf & " M.SERVICECHARGE, " & _
        vbCrLf & "M.SERVICETYPE, " & _
        vbCrLf & "Case M.STATUS" & _
-         vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
+       vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
        vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
        vbCrLf & " ELSE 'N/A'" & _
        vbCrLf & " END AS STATUS,M.NETAMOUNT," & _
@@ -677,13 +678,13 @@ Public Class ExtractDataFromDatabase
        vbCrLf & "ELSE RefNum END as RefNum," & _
        vbCrLf & "M.REMARKS," & _
        vbCrLf & " M.TRANSID," & _
-     vbCrLf & "M.SYSTEMINFO" & _
+       vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
        vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
-        vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & " ORDER BY M.TRANSDATE;"
+       vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
+       vbCrLf & " ORDER BY M.TRANSDATE;"
 
         Dim headers() As String = _
 {" ID", "RECIEVERID", "RECEIVERNAME", "SENDERID", "SENDERNAME", "AMOUNT", "COMMISSION", " ENCODER", " LOCATION", " MONEYTRANS", _
@@ -904,6 +905,13 @@ Public Class ExtractDataFromDatabase
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+
+                Dim tmp_path1 As String = (Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\Daily" & mod_system.BranchCode & "" & filename & ".rar")
+
+                If My.Computer.FileSystem.FileExists(tmp_path1) Then
+                    My.Computer.FileSystem.DeleteFile(tmp_path1)
+                End If
+
                 My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Daily" & mod_system.BranchCode & ".rar", "Daily" & mod_system.BranchCode & "" & filename & ".rar")
 
             Case "Monthly"
@@ -911,6 +919,14 @@ Public Class ExtractDataFromDatabase
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+
+                Dim tmp_path As String = (Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\Monthly" & mod_system.BranchCode & "" & filename & ".rar")
+
+
+                If My.Computer.FileSystem.FileExists(tmp_path) Then
+                    My.Computer.FileSystem.DeleteFile(tmp_path)
+                End If
+
                 My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Monthly" & mod_system.BranchCode & ".rar", "Monthly" & mod_system.BranchCode & "" & filename & ".rar")
 
         End Select
