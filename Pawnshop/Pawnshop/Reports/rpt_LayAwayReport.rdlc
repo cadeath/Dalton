@@ -1465,6 +1465,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1476,7 +1477,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Penalty</Value>
+                              <Value>Amount</Value>
                               <Style>
                                 <FontStyle>Italic</FontStyle>
                               </Style>

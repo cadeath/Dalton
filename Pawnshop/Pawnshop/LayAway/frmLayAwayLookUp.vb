@@ -13,7 +13,7 @@
         Dim mysql As String, Name As String
         Dim strWords As String() = Search.Split(New Char() {" "c})
         If Search <> "" Then
-            mysql = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+            mysql = "Select LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
             mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
@@ -32,7 +32,7 @@
 
             Next
         Else
-            mysql = "Select First 50 LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || C.SUFFIX AS FULLNAME, "
+            mysql = "Select First 50 LY.LAYID, LY.DOCDATE, LY.FORFEITDATE, C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
             mysql &= "LY.ITEMCODE, ITM.DESCRIPTION , LY.PRICE, LY.STATUS, "
             mysql &= "LY.BALANCE "
             mysql &= "From TBLLAYAWAY LY "
