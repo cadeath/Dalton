@@ -24,7 +24,7 @@
         With Coi
             Dim lv As ListViewItem = lvCoi.Items.Add(.COInumber)
             lv.SubItems.Add(.ClientName)
-            lv.Tag = .COInumber
+            lv.Tag = .ID
         End With
     End Sub
 
@@ -40,7 +40,7 @@
         Ins = New Insurance
         For Each itm As ListViewItem In lvCoi.Items
             With Ins
-                .ID = itm.SubItems(0).Text
+                .ID = itm.Tag
                 .TicketNum = String.Format("PT#{0:000000}", Ticket)
                 .UpdateInsurance()
             End With
