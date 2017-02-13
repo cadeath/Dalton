@@ -36,7 +36,6 @@ Partial Class frmInsuranceList
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnView = New System.Windows.Forms.Button()
         Me.lbltransID = New System.Windows.Forms.Label()
-        Me.btnAdd = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -149,22 +148,11 @@ Partial Class frmInsuranceList
         Me.lbltransID.Text = "TransactionID"
         Me.lbltransID.Visible = False
         '
-        'btnAdd
-        '
-        Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Location = New System.Drawing.Point(338, 357)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(77, 37)
-        Me.btnAdd.TabIndex = 5
-        Me.btnAdd.Text = "&Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
         'frmInsuranceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(591, 403)
-        Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lbltransID)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnCancel)
@@ -192,5 +180,4 @@ Partial Class frmInsuranceList
     Friend WithEvents btnView As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
     Friend WithEvents lbltransID As System.Windows.Forms.Label
-    Friend WithEvents btnAdd As System.Windows.Forms.Button
 End Class

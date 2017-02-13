@@ -1,6 +1,7 @@
 ﻿Public Class frmAddCoi
     Private Ins As Insurance
     Friend Ticket As String
+    Friend Client As String
 
     Private Sub frmAddCoi_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lvCoi.Items.Clear()
@@ -12,6 +13,11 @@
                 If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do You Want To Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.No Then Exit Sub
                 AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, )
             End If
+        End If
+
+        If Coi.ClientName <> Client Then
+            MsgBox("Invalid Customer ", MsgBoxStyle.Critical, "Warning!")
+            Exit Sub
         End If
 
         For Each itm As ListViewItem In lvCoi.Items

@@ -130,4 +130,5 @@
         Dim tmpMT As New Insurance
         lbltransID.Text = idx
     End Sub
+
 End Class
