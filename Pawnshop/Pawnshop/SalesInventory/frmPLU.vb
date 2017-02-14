@@ -41,7 +41,7 @@
         Dim lv As ListViewItem = lvItem.FindItemWithText(ItemCode)
         lv.SubItems(1).Text = loadITEM.Description
         lv.SubItems(2).Text = loadITEM.Category
-        lv.SubItems(3).Text = loadITEM.UnitOfMeasure
+        lv.SubItems(3).Text = loadITEM.UnitofMeasure
         lv.SubItems(4).Text = loadITEM.onHand
         If fromSales Then lv.SubItems(5).Text = ToCurrency(loadITEM.SalePrice)
         If fromInventory Then lv.SubItems(5).Text = ToCurrency(loadITEM.UnitPrice)
@@ -89,7 +89,7 @@
             If src <> "" Then
                 mySql &= vbCrLf & " AND ("
                 If IsNumeric(src) Then
-                    mySql &= String.Format("PT.PAWNTICKET = {0} OR ", src)
+                    mySql &= String.Format("PT.PAWNTICKET LIKE '%{0}%' OR ", src)
                 End If
                 mySql &= String.Format("LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(src).ToLower)
                 mySql &= ")"
@@ -97,20 +97,22 @@
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         Else
-            mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' ORDER BY ITEMCODE ASC"
+            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 ORDER BY ITEMCODE ASC"
 
             If src <> "" Then
                 mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"
                 mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00'", src.ToLower)
+                'mySql &= " AND onHand <> 0"
+                mySql &= " ORDER BY ITEMCODE ASC"
             End If
 
-            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
+            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001'")
         End If
 
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
         If MaxResult = 0 Then Exit Sub
 
-        If DEV_MODE Then Console.WriteLine("SQL: " & mySql)
+        Console.WriteLine("SQL: " & mySql)
 
         'If Not txtCode.Text = "" Then Exit Sub
         dbReaderOpen()
@@ -206,23 +208,47 @@
         Console.WriteLine(lvItem.SelectedItems(0).Index)
         Dim idx As Integer = lvItem.SelectedItems(0).Index
 
-
         Dim selected_Itm As New cItemData
         selected_Itm = queued_IMD.Item(idx)
         If selected_Itm.onHold Then
             MsgBox("ITEM IS CURRENTLY ONHOLD", MsgBoxStyle.Critical)
             Exit Sub
         End If
+        Dim hasSelected As Boolean = False
 
         If selected_Itm.SalePrice = 0 Or isRedeem Then
-            Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
-            While Not IsNumeric(tmp)
-                tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
-                If tmp = "" Then Exit Sub
-            End While
-            
-            Dim customPrice As Double = CDbl(tmp)
-            selected_Itm.SalePrice = customPrice
+
+            For Each AddedItems As ListViewItem In frmSales.lvSale.Items
+
+                If AddedItems.Text = selected_Itm.ItemCode Then
+                    hasSelected = True
+                    Exit For
+                End If
+            Next
+
+            If hasSelected = False Then
+                Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                While Not IsNumeric(tmp)
+                    tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                    If tmp = "" Then Exit Sub
+                End While
+
+                Dim customPrice As Double = CDbl(tmp)
+                selected_Itm.SalePrice = customPrice
+            Else
+                If isRedeem Then
+                    Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                    While Not IsNumeric(tmp)
+                        tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                        If tmp = "" Then Exit Sub
+                    End While
+
+                    Dim customPrice As Double = CDbl(tmp)
+                    selected_Itm.SalePrice = customPrice
+                Else
+                    selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                End If
+            End If
         End If
 
         Dim UnitPrice As Double = 0
@@ -234,14 +260,18 @@
             If isRedeem Then qtyItm = 1
             selected_Itm.Quantity = qtyItm
 
-            frmSales.AddItem(selected_Itm)
+            If isRedeem = True Then
+                frmSales.AddItem(selected_Itm, True)
+            Else
+                frmSales.AddItem(selected_Itm)
+            End If
             frmSales.ClearSearch()
         Else
             ' Inventory IN
             'frmInventoryIn.AddItem(selected_Itm, qtyItm, UnitPrice)
             'frmInventoryIn.ClearSearch()
         End If
-        
+
         Me.Close()
     End Sub
 

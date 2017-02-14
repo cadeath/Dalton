@@ -367,7 +367,7 @@ Public Class frmMigrate
             Dim MigEarlyRedeem As Integer = dr.Item("EarlyRedeem")
             Dim MigDayOverDue As Integer = dr.Item("DaysOverDue")
             Dim MigRenewCount As Integer = dr.Item("RenewalCnt")
-            Dim MigCheckSum As String
+            Dim MigCheckSum As String = ""
             If Not IsDBNull(dr.Item("int_checksum")) Then MigCheckSum = dr.Item("int_checksum")
 
             'Search OldTicket in OPT
@@ -423,8 +423,10 @@ Public Class frmMigrate
                         Case "X"
                             .Item("WithDrawDate") = MigOrDate
                             .Item("Status") = MigStatus
-                        Case Else
+                        Case "L", "0", "R"
                             .Item("Status") = "A"
+                        Case Else
+                            .Item("Status") = MigStatus
                     End Select
                 End With
                 SaveEntry(DsOpi, False)
@@ -902,7 +904,7 @@ Public Class frmMigrate
         Pawn_List &= vbCrLf & "P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, "
         Pawn_List &= vbCrLf & "C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         Pawn_List &= vbCrLf & "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT, C.PHONE1 AS CONTACTNUMBER, "
-        Pawn_List &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_ZIP as FULLADDRESS, "
+        Pawn_List &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
         Pawn_List &= vbCrLf & "ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, "
         Pawn_List &= vbCrLf & "P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, "
         Pawn_List &= vbCrLf & "P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, "

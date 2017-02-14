@@ -12,7 +12,6 @@
             If desc = "" Then desc = "N/A"
             desc &= vbCrLf & "Appraised by " & GetUsername(pt.AppraiserID) 'BUG FIXED
         End If
-
         Return desc
     End Function
 
@@ -45,7 +44,7 @@
                 Case "7" : subStr = "L"
                 Case "8" : subStr = "T"
                 Case "9" : subStr = "O"
-                Case "10" : subStr = "N"
+                Case "0" : subStr = "N"
             End Select
 
             newStr &= subStr

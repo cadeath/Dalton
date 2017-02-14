@@ -22,6 +22,8 @@ Public Class diagOTP
         VoidMoneyExchange = 6
         VoidCashInOut = 7
         Pullout = 8
+        VoidSales = 9
+        Inventory = 10
     End Enum
 
     Friend FormType As OTPType = OTPType.UserManagement
@@ -45,6 +47,11 @@ Public Class diagOTP
                 frmCIO_List.VoidCIO()
             Case OTPType.Pullout
                 qryPullOut.Show()
+            Case OTPType.VoidSales
+                frmPrint.Void()
+            Case OTPType.Inventory
+                frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
+                frmSalesReport.Show()
         End Select
     End Sub
 

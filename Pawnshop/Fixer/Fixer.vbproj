@@ -104,6 +104,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Add INS Count\frmAddItemMasterCOI.Designer.vb">
+      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Add INS Count\frmAddItemMasterCOI.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CashInBank\update_cashinbank.vb" />
     <Compile Include="database.vb" />
     <Compile Include="CashInBank\frmMain2.Designer.vb">
@@ -118,6 +124,12 @@
     <Compile Include="FixDailyTimeModname\frmFixModname.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FixDoclineDecimal\frmFixDoclineDecimal.Designer.vb">
+      <DependentUpon>frmFixDoclineDecimal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FixDoclineDecimal\frmFixDoclineDecimal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FixInterestHistory\frmFixIntHistory.Designer.vb">
       <DependentUpon>frmFixIntHistory.vb</DependentUpon>
     </Compile>
@@ -128,6 +140,12 @@
       <DependentUpon>frmFixJournalAndDailyTimeLog.vb</DependentUpon>
     </Compile>
     <Compile Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FixPawnlistView\frmFixView.Designer.vb">
+      <DependentUpon>frmFixView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FixPawnlistView\frmFixView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Fix_ORrenewedItem.vb" />
@@ -204,14 +222,23 @@
     <Compile Include="Worksheet.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Add INS Count\frmAddItemMasterCOI.resx">
+      <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FixDailyTimeModname\frmFixModname.resx">
       <DependentUpon>frmFixModname.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FixDoclineDecimal\frmFixDoclineDecimal.resx">
+      <DependentUpon>frmFixDoclineDecimal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixInterestHistory\frmFixIntHistory.resx">
       <DependentUpon>frmFixIntHistory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FixJournalAndDailyTimeLog\frmFixJournalAndDailyTimeLog.resx">
       <DependentUpon>frmFixJournalAndDailyTimeLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FixPawnlistView\frmFixView.resx">
+      <DependentUpon>frmFixView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
@@ -317,6 +344,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -5,12 +5,12 @@
         If Not POSuser.canSegregatedReport Then
             mySql = "SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
-            mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER FROM PAWN_LIST WHERE Status = 'S' AND "
-            mySql &= String.Format("EXPIRYDATE <= '{0}'", monCalendar.SelectionStart.ToShortDateString)
+            mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER FROM PAWN_LIST WHERE STATUS <> 'V' AND "
+            mySql &= String.Format("WITHDRAWDATE < '{0}' AND AUCTIONDATE > '{0}' ", monCalendar.SelectionStart.ToShortDateString)
 
         Else
-            mySql = "SELECT * FROM PAWN_LIST WHERE Status = 'S' AND "
-            mySql &= String.Format("EXPIRYDATE <= '{0}'", monCalendar.SelectionStart.ToShortDateString)
+            mySql = "SELECT * FROM PAWN_LIST WHERE STATUS <> 'V' AND "
+            mySql &= String.Format("WITHDRAWDATE < '{0}' AND AUCTIONDATE > '{0}' ", monCalendar.SelectionStart.ToShortDateString)
         End If
         Dim ds As DataSet = LoadSQL(mySql)
 

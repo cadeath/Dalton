@@ -22,7 +22,6 @@ Public Class frmExtractor
     End Sub
 
     Private Sub frmExtractor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        FormInit()
         'Load Path
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
     End Sub
@@ -55,6 +54,13 @@ Public Class frmExtractor
     Private Sub PTU_File()
         If FormType <> ExtractType.PTUFile Then Exit Sub
 
+        If MonCalendar.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
+            If frmMain.dateSet Then
+                MsgBox("Unable to Generate PTU File yet", MsgBoxStyle.Information, "System")
+                Exit Sub
+            End If
+        End If
+
         Dim mySql As String, ds As DataSet
         Dim cd As Date = MonCalendar.SelectionRange.Start
         Dim CustomerCode As String = GetOption("CustomerCode")
@@ -64,7 +70,8 @@ Public Class frmExtractor
         Dim header3() As String = {"RecordKey", "ItemCode", "Quantity", "WhsCode", "IntrSerial"}
 
         mySql = "SELECT T0.DOCDATE, T1.* FROM DOC T0 INNER JOIN DOCLINES T1 ON T0.DOCID = T1.DOCID "
-        mySql &= String.Format("WHERE T0.DOCDATE = '{0}' AND T0.STATUS = 1 AND T1.ITEMCODE <> 'RECALL00'", cd.ToString("MM/dd/yyyy"))
+        mySql &= String.Format("WHERE T0.DOCDATE = '{0}' AND T0.STATUS = '1' AND T1.ITEMCODE <> 'RECALL00' AND ", cd.ToString("MM/dd/yyyy"))
+        mySql &= String.Format("(T0.DOCTYPE = 0 OR T0.DOCTYPE = 1) AND T0.STATUS <> 'V'", cd.ToString("MM/dd/yyyy"))
         ds = LoadSQL(mySql)
 
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub
@@ -128,6 +135,8 @@ Public Class frmExtractor
             oSheet.Cells(1, col).value = hd
             col += 1
         Next
+
+        FormInit()
 
         Dim verified_url As String
         If txtPath.Text.Split(".").Count > 1 Then
@@ -243,14 +252,14 @@ Public Class frmExtractor
         Select Case FormType
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                sfdPath.FileName = String.Format("{1}{0}.xls", CurrentDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Expiry"
             Case ExtractType.JournalEntry
                 Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", CurrentDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
                 Me.Text &= " - Journal Entry"
             Case ExtractType.PTUFile
-                sfdPath.FileName = String.Format("{0}{1}.PTU", sd.ToString("yyyyMMdd"), BranchCode) 'BranchCode + Date
+                sfdPath.FileName = String.Format("{0}{1}.PTU", CurrentDate.ToString("yyyyMMdd"), BranchCode) 'BranchCode + Date
                 Me.Text &= " - PTU File"
         End Select
 
@@ -560,6 +569,8 @@ Public Class frmExtractor
             AddProgress()
             Application.DoEvents()
         Next
+
+        FormInit()
 
         Dim verified_url As String
         Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
