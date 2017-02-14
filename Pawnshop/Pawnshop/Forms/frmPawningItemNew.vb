@@ -1409,7 +1409,7 @@ Public Class frmPawningItemNew
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PT_Entry.PawnTicket, PT_Entry.RenewDue)
         addParameters.Add("txtPayment", paymentStr)
-        addParameters.Add("dblTotalDue", PT_Entry.RenewDue)
+        addParameters.Add("dblTotalDue", PT_Entry.RenewDue + CDbl(GetTotalCoi()))
         addParameters.Add("txtDescription", descStr)
         addParameters.Add("txtCoi", GetTotalCoi)
 
@@ -1487,9 +1487,8 @@ Public Class frmPawningItemNew
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PT_Entry.PawnTicket, PT_Entry.RedeemDue)
         addParameters.Add("txtPayment", paymentStr)
-        addParameters.Add("dblTotalDue", PT_Entry.RedeemDue)
+        addParameters.Add("dblTotalDue", PT_Entry.RedeemDue + CDbl(GetTotalCoi()))
         addParameters.Add("txtDescription", descStr)
-        'addParameters.Add("txtCoi", GetTotalCoi(String.Format("PT#{0:000000}", PT_Entry.PawnTicket)))
         addParameters.Add("txtCoi", GetTotalCoi)
 
         If Reprint = True Then
