@@ -515,14 +515,16 @@ Public Class frmPawningItemNew
     Private Sub dateChange(selectedClass As ItemClass)
         If selectedClass Is Nothing Then Exit Sub
 
-        Select Case selectedClass.ClassName
-            Case "CELLPHONE", "TABLET"
-                txtExpiry.Text = txtMatu.Text
-                txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
-            Case Else
-                txtExpiry.Text = CurrentDate.AddDays(119).ToShortDateString
-                txtAuction.Text = CurrentDate.AddDays(152).ToShortDateString
-        End Select
+        'Select Case selectedClass.ClassName
+        '    Case "CELLPHONE", "TABLET"
+        '        txtExpiry.Text = txtMatu.Text
+        '        txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
+        '    Case Else
+        '        txtExpiry.Text = CurrentDate.AddDays(119).ToShortDateString
+        '        txtAuction.Text = CurrentDate.AddDays(152).ToShortDateString
+        'End Select
+        txtExpiry.Text = CurrentDate.AddDays(119).ToShortDateString
+        txtAuction.Text = CurrentDate.AddDays(152).ToShortDateString
 
         ReComputeInterest()
     End Sub
