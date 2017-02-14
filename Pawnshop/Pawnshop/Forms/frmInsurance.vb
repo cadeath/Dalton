@@ -142,7 +142,7 @@
     ''' <remarks></remarks>
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
-       
+
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Posting")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -163,8 +163,14 @@
 
             AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount, , , .LoadLastIDNumberInsurance)
         End With
+        'Dim mysql As String = "Select * FROM tblMaintenance Where Opt_Keys = 'INS Count'"
+        'Dim fillData As String = "tblMaintenance"
+        'Dim ds As DataSet = LoadSQL(mysql, fillData)
+        'ds.Tables(0).Rows(0).Item("Opt_Values") = ds.Tables(0).Rows(0).Item("Opt_Values") + 1
+        'SaveEntry(ds, False)
+        'InventoryController.DeductInventory("IND 00001", 1)
 
-        UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
+        'UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
         btnNew.PerformClick()
 

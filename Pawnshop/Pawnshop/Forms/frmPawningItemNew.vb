@@ -1175,6 +1175,10 @@ Public Class frmPawningItemNew
         total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
         total = total * GetInt(30)
         total = total / PT_Entry.NetAmount
+        total = total * 100
+
+        total = Math.Round(total, 2, MidpointRounding.AwayFromZero)
+
         addParameters.Add("txtRateInPercent", total)
 
         If Reprint = True Then
@@ -1264,6 +1268,9 @@ Public Class frmPawningItemNew
         total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
         total = total * GetInt(30)
         total = total / PT_Entry.NetAmount
+        total = total * 100
+
+        total = Math.Round(total, 2, MidpointRounding.AwayFromZero)
         addParameters.Add("txtRateInPercent", total)
 
         ' Add Monthly Computation

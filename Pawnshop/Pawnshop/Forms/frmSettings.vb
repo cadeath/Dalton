@@ -6,6 +6,7 @@
         Me.TopMost = True
         frmMain.Enabled = False
         lblSAP01.Text = "SAP Code 01"
+        ' lblSAP02.Text = "SAP Code 02"
         ClearFields()
         PrinterSettings()
     End Sub
@@ -33,6 +34,7 @@
         txtBal.Text = GetOption("MaintainingBalance")
         txtRevolving.Text = GetOption("RevolvingFund")
         txtCashInBank.Text = GetSAPAccount("Cash in Bank")
+        ' txtCustomerCode.Text = GetOption("CustomerCode")
 
         If locked Then
             txtCode.Enabled = False
@@ -48,7 +50,7 @@
         txtInsurance.Text = GetOption("InsuranceLastNum")
         txtMENum.Text = GetOption("MEnumLast")
         txtMRNum.Text = GetOption("MRNumLast")
-        txtCashInvoice.Text = GetOption("InvoiceNum")
+        'txtCashInvoice.Text = GetOption("InvoiceNum")
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -94,6 +96,7 @@
         UpdateOptions("MaintainingBalance", txtBal.Text, isOTPEnable)
         MaintainBal = txtBal.Text
         UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
+        ' UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text, isOTPEnable)
@@ -102,7 +105,7 @@
         UpdateOptions("InsuranceLastNum", txtInsurance.Text, isOTPEnable)
         UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
         UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
-        UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
+        '  UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)

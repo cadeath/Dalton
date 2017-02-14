@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmFixDoclineDecimal
+Partial Class frmAddItemMasterCOI
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,49 +24,47 @@ Partial Class frmFixDoclineDecimal
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnFix = New System.Windows.Forms.Button()
-        Me.txtData = New System.Windows.Forms.TextBox()
-        Me.ofdDB = New System.Windows.Forms.OpenFileDialog()
+        Me.txtDB = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.btnFix)
-        Me.GroupBox1.Controls.Add(Me.txtData)
-        Me.GroupBox1.Location = New System.Drawing.Point(6, 4)
+        Me.GroupBox1.Controls.Add(Me.txtDB)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(302, 70)
+        Me.GroupBox1.Size = New System.Drawing.Size(277, 77)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Database"
         '
         'btnFix
         '
-        Me.btnFix.Location = New System.Drawing.Point(221, 41)
+        Me.btnFix.Location = New System.Drawing.Point(191, 45)
         Me.btnFix.Name = "btnFix"
         Me.btnFix.Size = New System.Drawing.Size(75, 23)
-        Me.btnFix.TabIndex = 0
+        Me.btnFix.TabIndex = 20
         Me.btnFix.Text = "Fix"
         Me.btnFix.UseVisualStyleBackColor = True
         '
-        'txtData
+        'txtDB
         '
-        Me.txtData.Location = New System.Drawing.Point(6, 15)
-        Me.txtData.Name = "txtData"
-        Me.txtData.ReadOnly = True
-        Me.txtData.Size = New System.Drawing.Size(290, 20)
-        Me.txtData.TabIndex = 1
+        Me.txtDB.Location = New System.Drawing.Point(6, 19)
+        Me.txtDB.Name = "txtDB"
+        Me.txtDB.Size = New System.Drawing.Size(260, 20)
+        Me.txtDB.TabIndex = 16
         '
-        'frmFixDoclineDecimal
+        'frmAddItemMasterCOI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(314, 78)
+        Me.ClientSize = New System.Drawing.Size(282, 87)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmFixDoclineDecimal"
+        Me.Name = "frmAddItemMasterCOI"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Fix Decimal"
+        Me.Text = "Add Item COI"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
@@ -74,6 +72,5 @@ Partial Class frmFixDoclineDecimal
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnFix As System.Windows.Forms.Button
-    Friend WithEvents txtData As System.Windows.Forms.TextBox
-    Friend WithEvents ofdDB As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents txtDB As System.Windows.Forms.TextBox
 End Class
