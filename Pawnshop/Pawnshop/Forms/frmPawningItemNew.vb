@@ -51,6 +51,7 @@ Public Class frmPawningItemNew
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Reprint As Boolean = False
     Private ReadyToPrint As Boolean = False
+    Friend Coi As Hashtable
 
     Private Sub ClearFields()
         mod_system.isAuthorized = False
@@ -1410,7 +1411,7 @@ Public Class frmPawningItemNew
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PT_Entry.RenewDue)
         addParameters.Add("txtDescription", descStr)
-        'addParameters.Add("txtCoi", GetTotalCoi(String.Format("PT#{0:000000}", PRINT_PTNEW)))
+        addParameters.Add("txtCoi", GetTotalCoi)
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1488,7 +1489,8 @@ Public Class frmPawningItemNew
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PT_Entry.RedeemDue)
         addParameters.Add("txtDescription", descStr)
-        addParameters.Add("txtCoi", GetTotalCoi(String.Format("PT#{0:000000}", PT_Entry.PawnTicket)))
+        'addParameters.Add("txtCoi", GetTotalCoi(String.Format("PT#{0:000000}", PT_Entry.PawnTicket)))
+        addParameters.Add("txtCoi", GetTotalCoi)
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1590,18 +1592,23 @@ Public Class frmPawningItemNew
         ReComputeInterest()
     End Sub
 
-    Private Function GetTotalCoi(ByVal Ticket As String) As Integer
-        Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where TRANSDATE = '" & CurrentDate.ToShortDateString & "' AND PAWNTICKET = '" & Ticket & "'"
-        Dim fillData As String = "tblInsurance"
-        Dim ds As DataSet = LoadSQL(mysql, fillData)
-        If IsDBNull(ds.Tables(0).Rows(0).Item("Amount")) Then Return 0
-        Return ds.Tables(0).Rows(0).Item("Amount")
+    Private Function GetTotalCoi() As Integer
+        'Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where TRANSDATE = '" & CurrentDate.ToShortDateString & "' AND PAWNTICKET = '" & Ticket & "'"
+        'Dim fillData As String = "tblInsurance"
+        'Dim ds As DataSet = LoadSQL(mysql, fillData)
+        'If IsDBNull(ds.Tables(0).Rows(0).Item("Amount")) Then Return 0
+        'Return ds.Tables(0).Rows(0).Item("Amount")
+
+        Dim CoiCount As Integer = Coi.Count
+        CoiCount = CoiCount * GetOption("InsuranceAmount")
+        Return CoiCount
     End Function
 
     Private Sub btnAddCoi_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddCoi.Click
         If Not isValid() Then Exit Sub
         frmAddCoi.Show()
         frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
-        frmAddCoi.Ticket = txtTicket.Text
+        frmAddCoi.Ticket = String.Format("PT#{0:000000}", txtTicket.Text)
+
     End Sub
 End Class
