@@ -2,6 +2,7 @@
     Private Ins As Insurance
     Friend Ticket As String
     Friend Client As String
+    Private CollectCoi As CollectionCoi
 
     Private Sub frmAddCoi_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         lvCoi.Items.Clear()
@@ -44,12 +45,14 @@
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If lvCoi.Items.Count = 0 Then Exit Sub
         Ins = New Insurance
+        CollectCoi.Clear()
         For Each itm As ListViewItem In lvCoi.Items
             With Ins
                 .ID = itm.Tag
                 .TicketNum = String.Format("PT#{0:000000}", Ticket)
                 .UpdateInsurance()
             End With
+            CollectCoi.Add(itm.Tag)
         Next
         MsgBox("Successfully Posted", MsgBoxStyle.Information, "Information")
         Me.Close()

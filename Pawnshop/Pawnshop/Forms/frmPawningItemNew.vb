@@ -1410,7 +1410,7 @@ Public Class frmPawningItemNew
         addParameters.Add("txtPayment", paymentStr)
         addParameters.Add("dblTotalDue", PT_Entry.RenewDue)
         addParameters.Add("txtDescription", descStr)
-        addParameters.Add("txtCoi", GetTotalCoi(String.Format("PT#{0:000000}", PRINT_PTNEW)))
+        'addParameters.Add("txtCoi", GetTotalCoi(String.Format("PT#{0:000000}", PRINT_PTNEW)))
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1591,7 +1591,7 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Function GetTotalCoi(ByVal Ticket As String) As Integer
-        Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where PAWNTICKET = '" & Ticket & "'"
+        Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where TRANSDATE = '" & CurrentDate.ToShortDateString & "' AND PAWNTICKET = '" & Ticket & "'"
         Dim fillData As String = "tblInsurance"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
         If IsDBNull(ds.Tables(0).Rows(0).Item("Amount")) Then Return 0
