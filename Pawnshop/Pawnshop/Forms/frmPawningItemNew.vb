@@ -238,32 +238,33 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If unableToSave Then Exit Sub
-        If Not CheckAuth() Then Exit Sub
-        If Not isValid() And transactionType = "L" Then
-            MsgBox("I think you are missing something", MsgBoxStyle.Critical)
-            Exit Sub
-        End If
-        If MsgBox("Do you want to save this transaction?", _
-                  MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
-                  "Saving...") = MsgBoxResult.No Then Exit Sub
+        TagCoi()
+        'If unableToSave Then Exit Sub
+        'If Not CheckAuth() Then Exit Sub
+        'If Not isValid() And transactionType = "L" Then
+        '    MsgBox("I think you are missing something", MsgBoxStyle.Critical)
+        '    Exit Sub
+        'End If
+        'If MsgBox("Do you want to save this transaction?", _
+        '          MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
+        '          "Saving...") = MsgBoxResult.No Then Exit Sub
 
-        Select Case transactionType
-            Case "L"
-                SaveNewLoan()
-                If ReadyToPrint = False Then
-                    Exit Sub
-                Else
-                    PrintNewLoan()
-                End If
+        'Select Case transactionType
+        '    Case "L"
+        '        SaveNewLoan()
+        '        If ReadyToPrint = False Then
+        '            Exit Sub
+        '        Else
+        '            PrintNewLoan()
+        '        End If
 
-            Case "R"
-                SaveRenew() : PrintRenew()
+        '    Case "R"
+        '        SaveRenew() : PrintRenew()
 
-            Case "X"
-                SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
-        End Select
-        Me.Close()
+        '    Case "X"
+        '        SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
+        'End Select
+        'Me.Close()
     End Sub
 
     Private Sub SaveRedeem()
@@ -1615,7 +1616,7 @@ Public Class frmPawningItemNew
     Private Sub TagCoi()
         Ins = New Insurance
         For Each ht As DictionaryEntry In Coi
-
+            Console.WriteLine("Hashtable Value: " & ht.Value)
         Next
     End Sub
 End Class
