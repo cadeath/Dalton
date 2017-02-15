@@ -1616,7 +1616,10 @@ Public Class frmPawningItemNew
     Private Sub TagCoi()
         Ins = New Insurance
         For Each ht As DictionaryEntry In Coi
-            Console.WriteLine("Hashtable Value: " & ht.Value)
+            With Ins
+                .ID = ht.Key
+            End With
+            Console.WriteLine("Hashtable Value: " & ht.Key)
         Next
     End Sub
 End Class
