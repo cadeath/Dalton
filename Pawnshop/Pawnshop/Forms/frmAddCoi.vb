@@ -11,7 +11,7 @@
     Friend Sub LoadCoi(ByVal Coi As Insurance)
         If Coi.TicketNum <> Ticket Then
             If Coi.TicketNum <> Nothing Then
-                If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do You Want To Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.No Then Exit Sub
+                If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do you want yo Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.No Then Exit Sub
                 AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, )
             End If
         End If
@@ -44,17 +44,16 @@
 
     Private Sub btnPost_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPost.Click
         If lvCoi.Items.Count = 0 Then Exit Sub
-        Ins = New Insurance
+        'Ins = New Insurance
         For Each itm As ListViewItem In lvCoi.Items
-            With Ins
-                .ID = itm.Tag
-                .TicketNum = String.Format("PT#{0:000000}", Ticket)
-                .UpdateInsurance()
-            End With
+            'With Ins
+            '    .ID = itm.Tag
+            '    .TicketNum = String.Format("PT#{0:000000}", Ticket)
+            '    .UpdateInsurance()
+            'End With
             CollectCoi.Add(itm.Tag, itm.SubItems(0).Text)
-            Console.WriteLine("InsuranceID #: " & itm.Tag & " and " & "Coi # " & itm.SubItems(0).Text)
         Next
-        MsgBox("Successfully Posted", MsgBoxStyle.Information, "Information")
+        MsgBox("Coi Successfully Tag", MsgBoxStyle.Information, "Information")
         frmPawningItemNew.Coi = CollectCoi
         Me.Close()
     End Sub

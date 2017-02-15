@@ -52,6 +52,7 @@ Public Class frmPawningItemNew
     Private Reprint As Boolean = False
     Private ReadyToPrint As Boolean = False
     Friend Coi As Hashtable
+    Private Ins As Insurance
 
     Private Sub ClearFields()
         mod_system.isAuthorized = False
@@ -1609,5 +1610,12 @@ Public Class frmPawningItemNew
         frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
         frmAddCoi.Ticket = String.Format("PT#{0:000000}", txtTicket.Text)
 
+    End Sub
+
+    Private Sub TagCoi()
+        Ins = New Insurance
+        For Each ht As DictionaryEntry In Coi
+
+        Next
     End Sub
 End Class
