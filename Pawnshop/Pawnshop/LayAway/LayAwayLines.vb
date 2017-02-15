@@ -172,7 +172,7 @@
 
     Friend Function GetSumPayments()
         Dim mysql As String = "Select Sum(amount) as Amount, SUM(PENALTY)AS Penalty "
-        mysql &= "From tblLayLines Where Status <> 0 And LayID = '" & _layID & "'"
+        mysql &= "From tblLayLines Where Status = '1' And LayID = '" & _layID & "'"
         Dim fillData As String = "tblLayLines"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
         Dim Payments As Double = 0
