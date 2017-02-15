@@ -1,5 +1,4 @@
 ﻿Public Class frmAddCoi
-    Private Ins As Insurance
     Friend Ticket As String
     Friend Client As String
     Private CollectCoi As New Hashtable

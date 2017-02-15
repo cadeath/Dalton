@@ -1609,7 +1609,6 @@ Public Class frmPawningItemNew
         If Not isValid() Then Exit Sub
         frmAddCoi.Show()
         frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
-        frmAddCoi.Ticket = String.Format("PT#{0:000000}", txtTicket.Text)
 
     End Sub
 
@@ -1618,6 +1617,8 @@ Public Class frmPawningItemNew
         For Each ht As DictionaryEntry In Coi
             With Ins
                 .ID = ht.Key
+                .TicketNum = String.Format("PT#{0:000000}", txtTicket.Text)
+                .UpdateInsurance()
             End With
             Console.WriteLine("Hashtable Value: " & ht.Key)
         Next
