@@ -214,45 +214,45 @@
                 lay.ItemOnLayMode(txtItemCode.Text, False)
                 InventoryController.DeductInventory(lay.ItemCode, 1)
 
-                'Dim mySql As String = "SELECT * FROM DOC ROWS 1"
-                'Dim fillData As String = "DOC"
-                'Dim ds As DataSet = LoadSQL(mySql, fillData)
-                'Dim dsNewRow As DataRow
-                'dsNewRow = ds.Tables(fillData).NewRow
-                'With dsNewRow
-                '    .Item("DOCTYPE") = 0
-                '    .Item("CODE") = String.Format("{1}#{0:000000}", InvoiceNum, "INV")
-                '    .Item("MOP") = "C"
-                '    .Item("CUSTOMER") = txtCustomer.Text
-                '    .Item("DOCDATE") = CurrentDate
-                '    .Item("DOCTOTAL") = lblCost.Text
-                '    .Item("USERID") = POSuser.UserID
-                'End With
-                'ds.Tables(fillData).Rows.Add(dsNewRow)
-                'database.SaveEntry(ds)
+                Dim mySql As String = "SELECT * FROM DOC ROWS 1"
+                Dim fillData As String = "DOC"
+                Dim ds As DataSet = LoadSQL(mySql, fillData)
+                Dim dsNewRow As DataRow
+                dsNewRow = ds.Tables(fillData).NewRow
+                With dsNewRow
+                    .Item("DOCTYPE") = 0
+                    .Item("CODE") = String.Format("{1}#{0:000000}", InvoiceNum, "INV")
+                    .Item("MOP") = "C"
+                    .Item("CUSTOMER") = txtCustomer.Text
+                    .Item("DOCDATE") = CurrentDate
+                    .Item("DOCTOTAL") = lblCost.Text
+                    .Item("USERID") = POSuser.UserID
+                End With
+                ds.Tables(fillData).Rows.Add(dsNewRow)
+                database.SaveEntry(ds)
 
-                'Dim DOCID As Integer = 0
-                'mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
-                'ds = LoadSQL(mySql, fillData)
-                'DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
+                Dim DOCID As Integer = 0
+                mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
+                ds = LoadSQL(mySql, fillData)
+                DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
 
 
-                'mySql = "SELECT * FROM DOCLINES ROWS 1"
-                'fillData = "DOCLINES"
-                'ds = LoadSQL(mySql, fillData)
+                mySql = "SELECT * FROM DOCLINES ROWS 1"
+                fillData = "DOCLINES"
+                ds = LoadSQL(mySql, fillData)
 
-                'dsNewRow = ds.Tables(fillData).NewRow
-                'With dsNewRow
-                '    .Item("DOCID") = DOCID
-                '    .Item("ITEMCODE") = txtItemCode.Text
-                '    .Item("DESCRIPTION") = txtDescription.Text
-                '    .Item("QTY") = 1
-                '    .Item("SALEPRICE") = lblCost.Text
-                '    .Item("ROWTOTAL") = lblCost.Text
-                'End With
-                'ds.Tables(fillData).Rows.Add(dsNewRow)
+                dsNewRow = ds.Tables(fillData).NewRow
+                With dsNewRow
+                    .Item("DOCID") = DOCID
+                    .Item("ITEMCODE") = txtItemCode.Text
+                    .Item("DESCRIPTION") = txtDescription.Text
+                    .Item("QTY") = 1
+                    .Item("SALEPRICE") = lblCost.Text
+                    .Item("ROWTOTAL") = lblCost.Text
+                End With
+                ds.Tables(fillData).Rows.Add(dsNewRow)
 
-                'database.SaveEntry(ds)
+                database.SaveEntry(ds)
             Else
 
                 'Add Journal For Payment
