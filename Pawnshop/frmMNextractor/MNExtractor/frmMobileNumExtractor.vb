@@ -4,12 +4,10 @@ Public Class frmMobileNumExtractor
     Dim dest As String = My.Computer.FileSystem.SpecialDirectories.Desktop
     Dim BranchCode As String
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
-        OFDD.ShowDialog()
+    Const DBPATH As String = "\W3W1LH4CKU.FDB"
+    Dim readValue = My.Computer.Registry.GetValue(
+  "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
 
-        txtPath.Text = OFDD.FileName
-        database.dbName = txtPath.Text
-    End Sub
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
@@ -17,7 +15,7 @@ Public Class frmMobileNumExtractor
         Dim str As String = txtPath.Text
         If str.Contains(".FDB") = True Then
 
-            If dbName <> "W3W1LH4CKU.FDB" Then
+            If dbName <> str Then
                 MsgBox("Invalid file name." & vbCrLf & "Please try again", MsgBoxStyle.Critical, "")
                 txtPath.Text = ""
                 database.dbName = ""
@@ -130,4 +128,14 @@ Public Class frmMobileNumExtractor
     End Sub
 
   
+    Private Sub frmMobileNumExtractor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        LoadPath()
+    End Sub
+
+
+    Private Sub LoadPath()
+        Dim firebird As String = readValue & DBPATH
+        database.dbName = firebird
+        txtPath.Text = firebird
+    End Sub
 End Class

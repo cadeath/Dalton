@@ -23,21 +23,11 @@ Partial Class frmMobileNumExtractor
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMobileNumExtractor))
-        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.lblPath = New System.Windows.Forms.Label()
         Me.txtPath = New System.Windows.Forms.TextBox()
         Me.btnExtract = New System.Windows.Forms.Button()
         Me.OFDD = New System.Windows.Forms.OpenFileDialog()
         Me.SuspendLayout()
-        '
-        'btnBrowse
-        '
-        Me.btnBrowse.Location = New System.Drawing.Point(367, 13)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(40, 23)
-        Me.btnBrowse.TabIndex = 0
-        Me.btnBrowse.Text = " . . ."
-        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'lblPath
         '
@@ -52,7 +42,8 @@ Partial Class frmMobileNumExtractor
         '
         Me.txtPath.Location = New System.Drawing.Point(98, 14)
         Me.txtPath.Name = "txtPath"
-        Me.txtPath.Size = New System.Drawing.Size(261, 21)
+        Me.txtPath.ReadOnly = True
+        Me.txtPath.Size = New System.Drawing.Size(309, 21)
         Me.txtPath.TabIndex = 2
         '
         'btnExtract
@@ -78,7 +69,6 @@ Partial Class frmMobileNumExtractor
         Me.Controls.Add(Me.btnExtract)
         Me.Controls.Add(Me.txtPath)
         Me.Controls.Add(Me.lblPath)
-        Me.Controls.Add(Me.btnBrowse)
         Me.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -89,7 +79,6 @@ Partial Class frmMobileNumExtractor
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents lblPath As System.Windows.Forms.Label
     Friend WithEvents txtPath As System.Windows.Forms.TextBox
     Friend WithEvents btnExtract As System.Windows.Forms.Button
