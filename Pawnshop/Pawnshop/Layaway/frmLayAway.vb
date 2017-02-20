@@ -201,75 +201,72 @@
             layLines.LoadByLayID(tmpLayID)
             If lblBalance.Text = 0 Then
                 Dim AllPayments As Double
-                If layLines.GetSumPayments = txtAmount.Text Then
-                    AllPayments = Val(lblCost.Text) - Val(lblBalance.Text)
-                Else
                     AllPayments = layLines.GetSumPayments
-                End If
-                'If Full Paid Add Journal for Full Paid
-                AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
-                AddJournal(AllPayments - txtAmount.Text, "Debit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY ADVANCES", layLines.LayLinesLastID)
-                AddJournal(AllPayments - CInt(Val(lblPenalty.Text)), "Credit", "Cash Offsetting Account", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
 
-                'if Transaction have penalty
-                If lblPenalty.Text <> "" Then
-                    AddJournal(CInt(Val(lblPenalty.Text)), "Credit", "Income from Penalty on Layaway", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
-                End If
+                    'If Full Paid Add Journal for Full Paid
+                    AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
+                    AddJournal(AllPayments - txtAmount.Text, "Debit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY ADVANCES", layLines.LayLinesLastID)
+                    AddJournal(AllPayments - CInt(Val(lblPenalty.Text)), "Credit", "Cash Offsetting Account", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
 
-                lay.ItemOnLayMode(txtItemCode.Text, False)
-                InventoryController.DeductInventory(lay.ItemCode, 1)
+                    'if Transaction have penalty
+                    If lblPenalty.Text <> "" Then
+                        AddJournal(CInt(Val(lblPenalty.Text)), "Credit", "Income from Penalty on Layaway", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+                    End If
 
-                Dim mySql As String = "SELECT * FROM DOC ROWS 1"
-                Dim fillData As String = "DOC"
-                Dim ds As DataSet = LoadSQL(mySql, fillData)
-                Dim dsNewRow As DataRow
-                dsNewRow = ds.Tables(fillData).NewRow
-                With dsNewRow
-                    .Item("DOCTYPE") = 0
-                    .Item("CODE") = String.Format("{1}#{0:000000}", InvoiceNum, "INV")
-                    .Item("MOP") = "C"
-                    .Item("CUSTOMER") = txtCustomer.Text
-                    .Item("DOCDATE") = CurrentDate
-                    .Item("DOCTOTAL") = lblCost.Text
-                    .Item("USERID") = POSuser.UserID
-                End With
-                ds.Tables(fillData).Rows.Add(dsNewRow)
-                database.SaveEntry(ds)
+                    lay.ItemOnLayMode(txtItemCode.Text, False)
+                    InventoryController.DeductInventory(lay.ItemCode, 1)
 
-                Dim DOCID As Integer = 0
-                mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
-                ds = LoadSQL(mySql, fillData)
-                DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
+                    Dim mySql As String = "SELECT * FROM DOC ROWS 1"
+                    Dim fillData As String = "DOC"
+                    Dim ds As DataSet = LoadSQL(mySql, fillData)
+                    Dim dsNewRow As DataRow
+                    dsNewRow = ds.Tables(fillData).NewRow
+                    With dsNewRow
+                        .Item("DOCTYPE") = 0
+                        .Item("CODE") = String.Format("{1}#{0:000000}", InvoiceNum, "INV")
+                        .Item("MOP") = "C"
+                        .Item("CUSTOMER") = txtCustomer.Text
+                        .Item("DOCDATE") = CurrentDate
+                        .Item("DOCTOTAL") = lblCost.Text
+                        .Item("USERID") = POSuser.UserID
+                    End With
+                    ds.Tables(fillData).Rows.Add(dsNewRow)
+                    database.SaveEntry(ds)
+
+                    Dim DOCID As Integer = 0
+                    mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
+                    ds = LoadSQL(mySql, fillData)
+                    DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
 
 
-                mySql = "SELECT * FROM DOCLINES ROWS 1"
-                fillData = "DOCLINES"
-                ds = LoadSQL(mySql, fillData)
+                    mySql = "SELECT * FROM DOCLINES ROWS 1"
+                    fillData = "DOCLINES"
+                    ds = LoadSQL(mySql, fillData)
 
-                dsNewRow = ds.Tables(fillData).NewRow
-                With dsNewRow
-                    .Item("DOCID") = DOCID
-                    .Item("ITEMCODE") = txtItemCode.Text
-                    .Item("DESCRIPTION") = txtDescription.Text
-                    .Item("QTY") = 1
-                    .Item("SALEPRICE") = lblCost.Text
-                    .Item("ROWTOTAL") = lblCost.Text
-                End With
-                ds.Tables(fillData).Rows.Add(dsNewRow)
+                    dsNewRow = ds.Tables(fillData).NewRow
+                    With dsNewRow
+                        .Item("DOCID") = DOCID
+                        .Item("ITEMCODE") = txtItemCode.Text
+                        .Item("DESCRIPTION") = txtDescription.Text
+                        .Item("QTY") = 1
+                        .Item("SALEPRICE") = lblCost.Text
+                        .Item("ROWTOTAL") = lblCost.Text
+                    End With
+                    ds.Tables(fillData).Rows.Add(dsNewRow)
 
-                database.SaveEntry(ds)
+                    database.SaveEntry(ds)
             Else
 
-                'Add Journal For Payment
-                AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
-                AddJournal(txtAmount.Text, "Credit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+                    'Add Journal For Payment
+                    AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
+                    AddJournal(txtAmount.Text, "Credit", "Advances from customer", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
 
-                'if Transaction Have Penalty
-                If lblPenalty.Text <> "" Then
-                    AddJournal(lblPenalty.Text, "Credit", "Income from Penalty", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+                    'if Transaction Have Penalty
+                    If lblPenalty.Text <> "" Then
+                        AddJournal(lblPenalty.Text, "Credit", "Income from Penalty", "LAYAWAY " & lay.ItemCode, , , "LAY-AWAY PAYMENTS", "LAYAWAY", layLines.LayLinesLastID)
+                    End If
+
                 End If
-
-            End If
 
         Else
             With lay
