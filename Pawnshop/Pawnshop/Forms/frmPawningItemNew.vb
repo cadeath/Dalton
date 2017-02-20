@@ -521,7 +521,7 @@ Public Class frmPawningItemNew
         If selectedClass Is Nothing Then Exit Sub
 
         Select Case selectedClass.ClassName
-            Case "CELLPHONE", "TABLET"
+            Case "TABLET"
                 txtExpiry.Text = txtMatu.Text
                 txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
             Case Else
