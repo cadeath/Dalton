@@ -1598,9 +1598,11 @@ Public Class frmPawningItemNew
         'Dim ds As DataSet = LoadSQL(mysql, fillData)
         'If IsDBNull(ds.Tables(0).Rows(0).Item("Amount")) Then Return 0
         'Return ds.Tables(0).Rows(0).Item("Amount")
-
-        Dim CoiCount As Integer = Coi.Count
+        Dim CoiCount As Integer
+        If Coi Is Nothing Then Return 0
+        CoiCount = Coi.Count
         CoiCount = CoiCount * GetOption("InsuranceAmount")
+
         Return CoiCount
     End Function
 
