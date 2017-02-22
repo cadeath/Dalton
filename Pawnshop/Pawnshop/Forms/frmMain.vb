@@ -75,10 +75,11 @@
         doSegregate = AutoSegregate()
     End Sub
 
-    Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Console.WriteLine("NewMaster: :" & EncryptString("192.164.0.200:2236"))
-        Console.WriteLine("File: " & EncryptString("noLock"))
+    Private Sub frmMain_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Click
+        MrFaust.CheckList()
+    End Sub
 
+    Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Generate_QR()
         Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, " <<DEVELOPER MODE>>", "")
         Me.Text &= IIf(mod_system.PROTOTYPE, " !!PROTOTYPE!!", "")
@@ -111,7 +112,7 @@
         web_ads.AdsDisplay = webAds
         web_ads.Ads_Initialization()
 
-        GhoulConnect()
+        'GhoulConnect()
     End Sub
 
     Friend Sub CheckStoreStatus()

@@ -3,7 +3,7 @@
 Module mysql_database
 
     Friend SERVER As String = "127.0.0.1" 'mrfaust.hopto.org
-    Friend PORT As Integer = 3306
+    Friend PORT As Integer = 8000 '3306
     Friend DATABASE As String = "dis2"
     Friend USER As String = "sysdis"
     Friend PASSWORD As String = "eskiegwapo123"
@@ -12,6 +12,14 @@ Module mysql_database
     Private conStr As String
 
     Private _ERR1 As String = "Unable to connect to any of the specified MySQL hosts"
+
+    Friend Function HTTP_SERVER(ByVal uri As String) As String
+        Dim tPort As String = ""
+
+        If PORT <> 80 Then tPort = ":" & PORT
+
+        Return "http://" & SERVER & tPort & "/" & uri
+    End Function
 
     Friend Function mySqlDBopen() As Boolean
         conStr = String.Format("DATABASE={0};PORT={1};USER={2};PASSWORD={3}", DATABASE, PORT, USER, PASSWORD)
