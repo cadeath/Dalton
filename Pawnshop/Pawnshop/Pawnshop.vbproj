@@ -191,6 +191,7 @@
     <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="AutoPatch\db1224.vb" />
     <Compile Include="AutoPatch\db1232.vb" />
+    <Compile Include="CentralOffice\MrFaust.vb" />
     <Compile Include="CentralOffice\mysql_database.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />

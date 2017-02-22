@@ -4,13 +4,12 @@ Module mysql_database
 
     Friend SERVER As String = "127.0.0.1" 'mrfaust.hopto.org
     Friend PORT As Integer = 3306
-    Friend DATABASE As String = "dotnetmysql"
+    Friend DATABASE As String = "dis2"
     Friend USER As String = "sysdis"
     Friend PASSWORD As String = "eskiegwapo123"
 
     Friend conMySql As MySqlConnection
     Private conStr As String
-
 
     Private _ERR1 As String = "Unable to connect to any of the specified MySQL hosts"
 
