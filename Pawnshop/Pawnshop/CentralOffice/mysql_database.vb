@@ -2,7 +2,7 @@
 
 Module mysql_database
 
-    Friend SERVER As String = "127.0.0.1" 'mrfaust.hopto.org
+    Friend SERVER As String = "192.164.0.126" 'mrfaust.hopto.org
     Friend PORT As Integer = 8000 '3306
     Friend DATABASE As String = "dis2"
     Friend USER As String = "sysdis"

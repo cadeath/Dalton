@@ -76,10 +76,12 @@
     End Sub
 
     Private Sub frmMain_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Click
-        MrFaust.CheckList()
+        'MrFaust.CheckList()
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        MrFaust.CheckList()
+
         'Generate_QR()
         Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, " <<DEVELOPER MODE>>", "")
         Me.Text &= IIf(mod_system.PROTOTYPE, " !!PROTOTYPE!!", "")
