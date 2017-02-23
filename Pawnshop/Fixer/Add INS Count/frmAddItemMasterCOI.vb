@@ -47,4 +47,5 @@
     Private Sub frmAddItemMasterCOI_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadPath()
     End Sub
+
 End Class

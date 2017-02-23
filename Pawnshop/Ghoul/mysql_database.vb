@@ -25,7 +25,7 @@ Module mysql_database
     End Function
 
     Friend Function mySqlDBopen() As Boolean
-        conStr = String.Format("DATABASE={0};PORT={1};USER={2};PASSWORD={3}", DATABASE, WEB_PORT, USER, PASSWORD)
+        conStr = String.Format("DATABASE={0};PORT={1};USER={2};PASSWORD={3}", DATABASE, DB_PORT, USER, PASSWORD)
         conMySql = New MySqlConnection
         conMySql.ConnectionString = conStr
 
