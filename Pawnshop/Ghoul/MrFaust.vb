@@ -2,13 +2,12 @@
 Imports System.Timers
 Imports System.Threading
 
-
 Module MrFaust
 
     Const PING_URI As String = "ping"
 
-    Const DELAY_MIN_MINUTES As Integer = 1
-    Const DELAY_MAX_MINUTES As Integer = 5
+    Const DELAY_MIN_MINUTES As Integer = 5
+    Const DELAY_MAX_MINUTES As Integer = 10
 
     Friend Sub CheckList()
         Dim th_ping As New Thread(AddressOf do_ping)
@@ -21,12 +20,13 @@ Module MrFaust
 
     Private Sub CommandParsing(ByVal cmd As String)
         If cmd = "OK" Then Exit Sub
+        If cmd = "CLOSE" Then Console.WriteLine("Connection closed...")
         If Not cmd.Contains(":") Then Exit Sub
 
         Dim Code As String = cmd.Split(":")(0)
         Select Case Code
             Case "CCDATE" 'CashCount Date
-
+                cmdFunctions.do_ccSave(cmd.Split(":")(1))
         End Select
     End Sub
 
@@ -36,9 +36,9 @@ Module MrFaust
 
     Private Sub start_ping()
         delay = GetRand(DELAY_MIN_MINUTES, DELAY_MAX_MINUTES)
-        delay = delay * 1000 * 60 'for the Minutes
+        delay = delay * 1000 '* 60 'for the Minutes
 
-        Console.WriteLine("Ping wait: " & delay / 1000 / 60)
+        Console.WriteLine("Ping wait: " & delay / 1000)
         ping_delay = New Timers.Timer
         ping_delay.Interval = delay
         AddHandler ping_delay.Elapsed, New ElapsedEventHandler(AddressOf ping_now)
@@ -65,5 +65,5 @@ Module MrFaust
         Return respond
     End Function
 #End Region
-    
+
 End Module

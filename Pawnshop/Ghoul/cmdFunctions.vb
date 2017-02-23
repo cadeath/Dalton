@@ -81,6 +81,8 @@ Module cmdFunctions
     End Function
 
     Public Function SendRequest(ByVal uri As String, ByVal jsonDataBytes As Byte(), ByVal contentType As String, ByVal method As String) As String
+        On Error GoTo not_responding
+
         Dim req As WebRequest = WebRequest.Create(uri)
         req.ContentType = contentType
         req.Method = method
@@ -99,6 +101,9 @@ Module cmdFunctions
         response.Close()
 
         Return res
+
+not_responding:
+        Return "CLOSE"
     End Function
 #End Region
 
