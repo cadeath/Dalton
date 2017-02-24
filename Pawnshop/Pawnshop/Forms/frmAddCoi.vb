@@ -10,30 +10,31 @@
     Friend Sub LoadCoi(ByVal Coi As Insurance)
         If Coi.TicketNum <> Ticket Then
             If Coi.TicketNum <> Nothing Then
-                If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do you want yo Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.No Then
-                    AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, )
+                If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do you want yo Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.Yes Then
+                    AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, Coi.TicketNum)
+                Else
                     Exit Sub
                 End If
             End If
-        End If
+            End If
 
-        If Coi.ClientName <> Client Then
-            MsgBox("Invalid Customer ", MsgBoxStyle.Critical, "Warning!")
-            Exit Sub
-        End If
-
-        For Each itm As ListViewItem In lvCoi.Items
-            If itm.Text.Contains(Coi.COInumber) Then
-                MsgBox("Duplicate Coi#: " & itm.Text, MsgBoxStyle.Critical, "Warning!")
+            If Coi.ClientName <> Client Then
+                MsgBox("Invalid Customer ", MsgBoxStyle.Critical, "Warning!")
                 Exit Sub
             End If
-        Next
 
-        With Coi
-            Dim lv As ListViewItem = lvCoi.Items.Add(.COInumber)
-            lv.SubItems.Add(.ClientName)
-            lv.Tag = .ID
-        End With
+            For Each itm As ListViewItem In lvCoi.Items
+                If itm.Text.Contains(Coi.COInumber) Then
+                    MsgBox("Duplicate Coi#: " & itm.Text, MsgBoxStyle.Critical, "Warning!")
+                    Exit Sub
+                End If
+            Next
+
+            With Coi
+                Dim lv As ListViewItem = lvCoi.Items.Add(.COInumber)
+                lv.SubItems.Add(.ClientName)
+                lv.Tag = .ID
+            End With
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
