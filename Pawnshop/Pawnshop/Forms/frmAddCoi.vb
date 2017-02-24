@@ -10,8 +10,10 @@
     Friend Sub LoadCoi(ByVal Coi As Insurance)
         If Coi.TicketNum <> Ticket Then
             If Coi.TicketNum <> Nothing Then
-                If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do you want yo Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.No Then Exit Sub
-                AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, )
+                If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do you want yo Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.No Then
+                    AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, )
+                    Exit Sub
+                End If
             End If
         End If
 
