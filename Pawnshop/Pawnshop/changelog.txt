@@ -1,5 +1,10 @@
 CHANGELOG
+
+Version 1.4.3
+ - Add LayAway Module
+
 Version 1.4.1.13
+
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
  - Added Journal in Insurance Close Store
@@ -9,6 +14,7 @@ Version 1.4.1.13
  - Add Reports - Inventory Report, Sales Report, Stockout Report
  - Add Tools - Sales Extractor
  - Add new privileges
+ - Added Journal in Insurance Close Store
  - Update TBLCASH and TBLITEM
  - Can transact SALES, AUCTION REDEEM, IMD, STOCK IN/OUT (Item Pullout is not included here, use the Pullout Module)
  - Can Generate SAP Template Based STO for STOCK OUT
@@ -27,6 +33,7 @@ Version 1.4.1.13
  - Fix Export STO Headers and LineNum
  - Round off Effective Interest Rate in layout
  - Fix Accounting Extract Module Cannot notify if file already exists
+
 
 Version 1.3.1.1
  - Fix Bug in Pawned Item Computation

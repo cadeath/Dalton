@@ -293,7 +293,6 @@ Public Class frmAdminPanel
     Private Sub Modcash()
         fillData = "tblCash"
         mySql = "SELECT * FROM " & fillData
-        mySql &= " WHERE CashID <> 0"
         mySql &= " ORDER BY CashID ASC"
 
         ds = LoadSQL(mySql, fillData)

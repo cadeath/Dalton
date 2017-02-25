@@ -8,12 +8,15 @@ Public Class frmSales
         Auction = 2
         Returns = 3
         StockOut = 4
+        LayAway = 5
     End Enum
 
     Friend TransactionMode As TransType
     Friend ht_BroughtItems As New Hashtable
 
-    Private ORNUM As Double = GetOption("InvoiceNum")
+    Private InvoiceNum As Double = GetOption("InvoiceNum")
+    Private ReturnNum As Double = GetOption("SalesReturnNum")
+    Private StockOutNum As Double = GetOption("STONum")
     Private PRINTER_PT As String = GetOption("PRINTER")
     Private VAT As Double = 0
     Private DOC_TYPE As Integer = 0 '0 - SALES, 4 - StockOut
@@ -22,6 +25,14 @@ Public Class frmSales
     Private DOC_TOTAL As Double = 0
 
     Private canTransact As Boolean = True
+
+    'Friend LayCustomer As Integer
+    'Friend LayItemCode As String
+    'Friend LayCost As Integer
+    'Friend LayBalance As Integer
+    'Friend LayAmount As Integer
+    'Friend LayID As Integer
+    'Friend LayisOld As Boolean
 
     Private Sub frmSales_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
         If DEV_MODE Then Pawn.Populate()
@@ -57,14 +68,17 @@ Public Class frmSales
         Dim prefix As String = ""
         Dim ControlNum As Integer = 0
 
-        ControlNum = ORNUM
+
         Select Case TransactionMode
             Case TransType.Returns
                 prefix = "RET"
+                ControlNum = ReturnNum
             Case TransType.Cash, TransType.Check, TransType.Auction
                 prefix = "INV"
+                ControlNum = InvoiceNum
             Case TransType.StockOut
                 prefix = "STO"
+                ControlNum = StockOutNum
         End Select
 
         Dim uniq As String = String.Format("'{1}#{0:000000}'", ControlNum, prefix)
@@ -221,12 +235,14 @@ Public Class frmSales
         End If
     End Sub
 
+
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         frmPLU.Show()
         frmPLU.From_Sales()
 
         IS_AUCTIONREDEEM()
 
+        If TransactionMode = TransType.LayAway Then frmPLU.isLayAway = True
         If txtSearch.Text.Length > 0 Then frmPLU.SearchSelect(txtSearch.Text) : Exit Sub
 
         frmPLU.Load_PLU()
@@ -246,8 +262,8 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbPLU_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPLU.Click
+        If TransactionMode = TransType.LayAway Then frmPLU.isLayAway = True
         frmPLU.Show()
-
         frmPLU.Load_PLU()
     End Sub
 
@@ -307,11 +323,10 @@ Public Class frmSales
         If Not MsgBox("Do you want to POST?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "POSTING...") = vbYes Then
             Exit Sub
         End If
-
         CheckOR()
         If Not canTransact Then Exit Sub
 
-        If lvSale.Items.Count = 0 Then Exit Sub
+        If lvSale.Items.Count = 0 Then MsgBox("Nothing to be Post!", MsgBoxStyle.Critical, "Error") : Exit Sub
 
         Dim mySql As String, fillData As String
         Dim getLastID As Integer = 0
@@ -354,14 +369,16 @@ Public Class frmSales
         Select Case TransactionMode
             Case TransType.Returns
                 prefix = "RET"
+                DocCode = String.Format("{1}#{0:000000}", ReturnNum, prefix)
             Case TransType.Cash, TransType.Check, TransType.Auction
                 prefix = "INV"
+                DocCode = String.Format("{1}#{0:000000}", InvoiceNum, prefix)
             Case TransType.StockOut
                 prefix = "STO"
+                DocCode = String.Format("{1}#{0:000000}", StockOutNum, prefix)
         End Select
 
         With dsNewRow
-            DocCode = String.Format("{1}#{0:000000}", ORNUM, prefix)
             .Item("DOCTYPE") = DOC_TYPE
             .Item("CODE") = DocCode
             .Item("MOP") = GetModesOfPayment(TransactionMode)
@@ -492,15 +509,18 @@ Public Class frmSales
     End Function
 
     Private Sub ItemPosted()
-        ORNUM += 1 'INCREMENT ORNUMBER
+
 
         Select Case TransactionMode
             Case TransType.Returns
-                UpdateOptions("SalesReturnNum", ORNUM)
+                ReturnNum += 1 'INCREMENT Return Control Number
+                UpdateOptions("SalesReturnNum", ReturnNum)
             Case TransType.Cash, TransType.Check, TransType.Auction
-                UpdateOptions("InvoiceNum", ORNUM)
+                InvoiceNum += 1 'INCREMENT Invoice Control Number
+                UpdateOptions("InvoiceNum", InvoiceNum)
             Case TransType.StockOut
-                UpdateOptions("STONum", ORNUM)
+                StockOutNum += 1 'INCREMENT Stock Out Control Number
+                UpdateOptions("STONum", StockOutNum)
         End Select
 
         ht_BroughtItems.Clear()
@@ -579,7 +599,11 @@ Public Class frmSales
     End Function
 
     Private Sub tsbReceipt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbReceipt.Click
-        frmPrint.Show()
+        If TransactionMode = TransType.LayAway Then
+            frmLayAwayLookUp.Show()
+        Else
+            frmPrint.Show()
+        End If
     End Sub
 
     Private Sub Label1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label1.DoubleClick
@@ -637,11 +661,11 @@ Public Class frmSales
     Private Sub Load_ORNUM()
         Select Case TransactionMode
             Case TransType.Returns
-                ORNUM = GetOption("SalesReturnNum")
+                ReturnNum = GetOption("SalesReturnNum")
             Case TransType.Cash, TransType.Check, TransType.Auction
-                ORNUM = GetOption("InvoiceNum")
+                InvoiceNum = GetOption("InvoiceNum")
             Case TransType.StockOut
-                ORNUM = GetOption("STONum")
+                StockOutNum = GetOption("STONum")
         End Select
     End Sub
 
@@ -681,6 +705,13 @@ Public Class frmSales
         DOC_TYPE = 0
     End Sub
 
+    Private Sub Load_asLayAway()
+        lblMode.Text = "LAYAWAY"
+        TransactionMode = TransType.LayAway
+        lblSearch.Text = "ITEM:"
+        DOC_TYPE = 0
+    End Sub
+
     Private Function ShiftMode() As Boolean
         If lvSale.Items.Count = 0 Then Return True
 
@@ -694,4 +725,46 @@ Public Class frmSales
     End Function
 #End Region
 
+    Private Sub tsbtnLay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnLay.Click
+        If Not (POSuser.isSuperUser Or POSuser.canLayAway) Then
+            MsgBox("You don't have access to the Layaway", MsgBoxStyle.Critical, "Authorization Invalid")
+            Exit Sub
+        Else
+            If ShiftMode() Then
+                Load_asLayAway()
+            End If
+        End If
+    End Sub
+
+    'Private Sub LayAwaySearch(ByVal Search As String)
+    '    Try
+    '    Dim mysql As String
+    '    mysql = "Select * From tbllayAway Where Balance <> 0 And UPPER(ItemCode) = UPPER('" & Search & "')"
+    '    Dim ds As DataSet = LoadSQL(mysql)
+
+    '    If ds.Tables(0).Rows.Count = 0 Then
+    '        mysql = "Select * From ItemMaster Where isLayAway <> '0' "
+    '        If Search <> "" Then mysql &= " And UPPER(ItemCode) = UPPER('" & Search & "')"
+    '        ds.Clear()
+    '        ds = LoadSQL(mysql, "ItemMaster")
+    '        If ds.Tables(0).Rows.Count = 0 Then MsgBox("No Item Found!", MsgBoxStyle.Information, "Lay Away") : Exit Sub
+
+    '        With frmPLU
+    '            .Show()
+    '            .isLayAway = True
+    '        End With
+
+    '        If Search <> "" Then
+    '            frmPLU.Load_PLU(Search)
+    '        Else
+    '            frmPLU.Load_PLU()
+    '        End If
+    '    Else
+    '        frmLayAway.Show()
+    '        frmLayAway.LoadExistInfo(ds.Tables(0).Rows(0).Item("LayID"))
+    '    End If
+    '    Catch ex As Exception
+    '        MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+    '    End Try
+    'End Sub
 End Class
