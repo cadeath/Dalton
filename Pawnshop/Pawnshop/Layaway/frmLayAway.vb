@@ -201,7 +201,12 @@
             layLines.LoadByLayID(tmpLayID)
             If lblBalance.Text = 0 Then
                 Dim AllPayments As Double
+                If Val(lblCost.Text) <> layLines.GetSumPayments Then
+                    AllPayments = Val(lblCost.Text) - Val(lblBalance.Text)
+                Else
+
                     AllPayments = layLines.GetSumPayments
+                End If
 
                     'If Full Paid Add Journal for Full Paid
                     AddJournal(txtAmount.Text, "Debit", "Revolving Fund", "LAYAWAY " & lay.ItemCode, "LAYAWAY", , , "LAYAWAY", layLines.LayLinesLastID)
