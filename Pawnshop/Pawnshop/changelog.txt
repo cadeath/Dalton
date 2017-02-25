@@ -2,6 +2,7 @@ CHANGELOG
 
 Version 1.4.3
  - Add LayAway Module
+ - Add Function if Full Paid Record to Inventory Sales
 
 Version 1.4.1.13
 
