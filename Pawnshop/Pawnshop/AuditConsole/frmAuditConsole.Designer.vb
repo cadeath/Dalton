@@ -45,12 +45,21 @@ Partial Class frmAuditConsole
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnImport = New System.Windows.Forms.Button()
+        Me.txtPath = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.ofdINV_AD = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -253,6 +262,7 @@ Partial Class frmAuditConsole
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Location = New System.Drawing.Point(6, 5)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -282,6 +292,69 @@ Partial Class frmAuditConsole
         Me.TabPage2.Text = "Access Code"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.GroupBox4)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(489, 345)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Inventory Adjustment"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.btnImport)
+        Me.GroupBox4.Controls.Add(Me.txtPath)
+        Me.GroupBox4.Controls.Add(Me.Label7)
+        Me.GroupBox4.Controls.Add(Me.btnBrowse)
+        Me.GroupBox4.Location = New System.Drawing.Point(6, 6)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(477, 83)
+        Me.GroupBox4.TabIndex = 0
+        Me.GroupBox4.TabStop = False
+        '
+        'btnImport
+        '
+        Me.btnImport.Location = New System.Drawing.Point(408, 48)
+        Me.btnImport.Name = "btnImport"
+        Me.btnImport.Size = New System.Drawing.Size(63, 23)
+        Me.btnImport.TabIndex = 3
+        Me.btnImport.Text = "Import"
+        Me.btnImport.UseVisualStyleBackColor = True
+        '
+        'txtPath
+        '
+        Me.txtPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPath.Location = New System.Drawing.Point(42, 17)
+        Me.txtPath.Name = "txtPath"
+        Me.txtPath.ReadOnly = True
+        Me.txtPath.Size = New System.Drawing.Size(360, 22)
+        Me.txtPath.TabIndex = 2
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(7, 21)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(29, 13)
+        Me.Label7.TabIndex = 1
+        Me.Label7.Text = "Path"
+        '
+        'btnBrowse
+        '
+        Me.btnBrowse.Location = New System.Drawing.Point(408, 17)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(63, 23)
+        Me.btnBrowse.TabIndex = 0
+        Me.btnBrowse.Text = ". . ."
+        Me.btnBrowse.UseVisualStyleBackColor = True
+        '
+        'ofdINV_AD
+        '
+        Me.ofdINV_AD.Filter = "Excel 2003|*.xls|Excel 2007|*.xlsx"
+        '
         'frmAuditConsole
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -302,6 +375,9 @@ Partial Class frmAuditConsole
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -327,4 +403,11 @@ Partial Class frmAuditConsole
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnImport As System.Windows.Forms.Button
+    Friend WithEvents txtPath As System.Windows.Forms.TextBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents ofdINV_AD As System.Windows.Forms.OpenFileDialog
 End Class
