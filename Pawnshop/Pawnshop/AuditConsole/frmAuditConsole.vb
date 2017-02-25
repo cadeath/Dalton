@@ -63,6 +63,11 @@ Public Class frmAuditConsole
     Private Sub Inv_adjustment()
         If txtPath.Text = "" Then Exit Sub
 
+        If MsgBox("Do you want to import this adjustments?", _
+                    MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information) = vbYesNo Then
+            Exit Sub
+        End If
+
         Dim oXL As New Excel.Application
         Dim oWB As Excel.Workbook
         Dim oSheet As Excel.Worksheet
@@ -91,6 +96,21 @@ Public Class frmAuditConsole
                     Dim ONHAND As Integer = ds.Tables(0).Rows(0).Item("ONHAND")
 
                     If oSheet.Cells(cnt, 5).value = "Y" Then
+
+                        Dim mysql_itm_Hist As String = "SELECT * FROM ITEM_HISTORY"
+                        Dim ds_itm_hist As DataSet = LoadSQL(mysql_itm_Hist, "ITEM_HISTORY")
+
+                        Dim dsnewrow As DataRow
+                        dsnewrow = ds_itm_hist.Tables(0).NewRow
+                        With dsnewrow
+                            .Item("ITEM_ID") = ds.Tables(0).Rows(0).Item("ItemID")
+                            .Item("ENDING_QTY") = ONHAND
+                            .Item("Date_Created") = Now
+                            .Item("Created_by") = POSuser.UserID
+                        End With
+                        ds_itm_hist.Tables(0).Rows.Add(dsnewrow)
+                        database.SaveEntry(ds_itm_hist)
+
                         With ds.Tables(0).Rows(0)
                             .Item("ONHAND") = 0
                         End With
@@ -104,7 +124,6 @@ Public Class frmAuditConsole
 
                     Else
                         With ds.Tables(0).Rows(0)
-
                             .Item("UPDATE_TIME") = Now
                             .Item("ONHAND") = ONHAND + oSheet.Cells(cnt, 4).value
                         End With
@@ -113,8 +132,6 @@ Public Class frmAuditConsole
                 End If
 
             End With
-
-
         Next
         Me.Enabled = True
 
@@ -126,7 +143,7 @@ Public Class frmAuditConsole
 
         txtPath.Text = ""
 
-        MsgBox("Adjustments successfully executed.", MsgBoxStyle.Information, "Adjustment")
+        MsgBox("Adjustments successfully imported.", MsgBoxStyle.Information, "Adjustment")
 
     End Sub
 
