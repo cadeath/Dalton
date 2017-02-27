@@ -75,7 +75,7 @@ Module cmdFunctions
 #Region "System Functions"
     Public Function GetRand(ByVal min As Integer, ByVal max As Integer) As Integer
         Dim randomInt As Integer
-        Dim myRand As New Random
+        Static myRand As New Random
         randomInt = myRand.Next(min, max)
         Return randomInt
     End Function

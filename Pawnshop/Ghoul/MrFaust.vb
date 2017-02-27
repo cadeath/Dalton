@@ -6,8 +6,8 @@ Module MrFaust
 
     Const PING_URI As String = "ping"
 
-    Const DELAY_MIN_MINUTES As Integer = 5
-    Const DELAY_MAX_MINUTES As Integer = 10
+    Const DELAY_MIN_MINUTES As Integer = 10
+    Const DELAY_MAX_MINUTES As Integer = 15
 
     Friend Sub CheckList()
         Dim th_ping As New Thread(AddressOf do_ping)
@@ -36,9 +36,9 @@ Module MrFaust
 
     Private Sub start_ping()
         delay = GetRand(DELAY_MIN_MINUTES, DELAY_MAX_MINUTES)
-        delay = delay * 1000 '* 60 'for the Minutes
+        delay = delay * 1000 * 60 'for the Minutes
 
-        Console.WriteLine("Ping wait: " & delay / 1000)
+        Console.WriteLine("Ping wait: " & delay / 1000 / 60)
         ping_delay = New Timers.Timer
         ping_delay.Interval = delay
         AddHandler ping_delay.Elapsed, New ElapsedEventHandler(AddressOf ping_now)
