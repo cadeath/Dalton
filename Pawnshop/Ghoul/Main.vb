@@ -12,7 +12,7 @@
     Private Sub Initialization()
         DIS_FOLDER = LoadPath()
         'database.dbName = DIS_FOLDER
-        database.dbName = "F:\cadeath\Desktop\Migration\DALTON\B2\DI1\W3W1LH4CKU.FDB"
+        database.dbName = "F:\cadeath\Desktop\Migration\DALTON\B4\SHA\W3W1LH4CKU.FDB"
     End Sub
 
     ''' <summary>
