@@ -23,10 +23,9 @@ Module cmdFunctions
     End Sub
 
     Private Sub save_ccData(ByVal dt As Date, ByVal dsCC As DataSet)
+        If mySqlDBopen() Then Exit Sub
+
         Console.WriteLine(">>Saving to Server")
-
-        mySqlDBopen()
-
         Dim mySql As String = "SELECT * FROM cashcounts "
         mySql &= vbCrLf & String.Format("WHERE ccdate = '{0}' AND branch_code = '{1}'", dt.ToString("M/d/yy"), BranchCode)
         Console.WriteLine("SQL: " & mySql)

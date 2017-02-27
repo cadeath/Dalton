@@ -2,13 +2,13 @@
 
 Module mysql_database
 
-    Friend DB_SERVER As String = "192.164.0.126" 'mrfaust.hopto.org
+    Friend DB_SERVER As String = "192.164.0.188" 'mrfaust.hopto.org
     Friend DB_PORT As Integer = 3306
-    Friend DATABASE As String = "dis2"
-    Friend USER As String = "sysdis"
-    Friend PASSWORD As String = "eskiegwapo123"
+    Friend DATABASE As String = "newdb"
+    Friend USER As String = "root"
+    Friend PASSWORD As String = ""
 
-    Friend WEB_SERVER As String = "192.164.0.126"
+    Friend WEB_SERVER As String = "192.164.0.188"
     Friend WEB_PORT As Integer = 8000
 
     Friend conMySql As MySqlConnection
@@ -25,7 +25,7 @@ Module mysql_database
     End Function
 
     Friend Function mySqlDBopen() As Boolean
-        conStr = String.Format("DATABASE={0};PORT={1};USER={2};PASSWORD={3}", DATABASE, DB_PORT, USER, PASSWORD)
+        conStr = String.Format("SERVER={4};DATABASE={0};PORT={1};USER={2};PASSWORD={3}", DATABASE, DB_PORT, USER, PASSWORD, DB_SERVER)
         conMySql = New MySqlConnection
         conMySql.ConnectionString = conStr
 

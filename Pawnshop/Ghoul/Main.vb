@@ -12,6 +12,7 @@
     Private Sub Initialization()
         DIS_FOLDER = LoadPath()
         database.dbName = DIS_FOLDER & "\W3W1LH4CKU.FDB"
+        'MsgBox(database.dbName)
         'database.dbName = "F:\cadeath\Desktop\Migration\DALTON\B4\SHA\W3W1LH4CKU.FDB"
     End Sub
 
