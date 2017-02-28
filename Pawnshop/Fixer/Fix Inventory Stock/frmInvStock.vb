@@ -31,12 +31,35 @@
     End Sub
 
     Private Sub FixInventory()
-        Dim fix As String = "Update ItemMaster set onHand = 1 Where onHand >= 2 And "
+        Dim fix As String = "Select * From ITEMMASTER "
+        fix &= "Where onHand >= 2 And "
         fix &= "ItemCode Not Like '%SMT%' "
         fix &= "And ItemCode Not Like '%IND%' "
+        Dim fillFix As String = "ItemMaster"
+        Dim fixDs As DataSet = LoadSQL(fix, fillFix)
 
-        RunCommand(fix)
+        For Each dr In fixDs.Tables(0).Rows
 
+            Dim mysql As String = "Select * From ItemMaster Where ItemCode = '" & dr.item("ItemCode") & "'"
+            Dim filldata As String = "ItemMaster"
+            Dim ds As DataSet = LoadSQL(mysql, filldata)
+            ds.Tables(filldata).Rows(0).Item("onHand") = 1
+            SaveEntry(ds, False)
+
+            Dim dsNewRow As DataRow
+            mySql = "SELECT * FROM DOCLINES ROWS 1"
+            fillData = "DOCLINES"
+            ds = LoadSQL(mySql, fillData)
+            dsNewRow = ds.Tables(fillData).NewRow
+            With dsNewRow
+                .Item("DOCID") = 569
+                .Item("ITEMCODE") = dr.item("ItemCode")
+                .Item("DESCRIPTION") = dr.item("Description")
+                .Item("QTY") = 1
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+        Next
     End Sub
 
 End Class
