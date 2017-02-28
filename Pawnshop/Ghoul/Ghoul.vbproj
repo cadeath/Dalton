@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="cmdFunctions.vb" />
+    <Compile Include="Configure.vb" />
     <Compile Include="database.vb" />
     <Compile Include="frmGhoul.Designer.vb">
       <DependentUpon>frmGhoul.vb</DependentUpon>

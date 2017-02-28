@@ -2,14 +2,14 @@
 
 Module mysql_database
 
-    Friend DB_SERVER As String = "192.164.0.188" 'mrfaust.hopto.org
-    Friend DB_PORT As Integer = 3306
-    Friend DATABASE As String = "newdb"
-    Friend USER As String = "root"
-    Friend PASSWORD As String = ""
+    Private _dbServer As String = Configure.DB_SERVER
+    Friend _dbPort As Integer = Configure.DB_PORT
+    Friend _dbName As String = Configure.DATABASE
+    Friend _user As String = Configure.USER
+    Friend _password As String = Configure.PASSWORD
 
-    Friend WEB_SERVER As String = "192.164.0.188"
-    Friend WEB_PORT As Integer = 8000
+    Friend _webServer As String = Configure.WEB_SERVER
+    Friend _webPort As Integer = Configure.WEB_PORT
 
     Friend conMySql As MySqlConnection
     Private conStr As String
@@ -19,13 +19,13 @@ Module mysql_database
     Friend Function HTTP_SERVER(ByVal uri As String) As String
         Dim tPort As String = ""
 
-        If WEB_PORT <> 80 Then tPort = ":" & WEB_PORT
+        If _webPort <> 80 Then tPort = ":" & _webPort
 
-        Return "http://" & WEB_SERVER & tPort & "/" & uri
+        Return "http://" & _webServer & tPort & "/" & uri
     End Function
 
     Friend Function mySqlDBopen() As Boolean
-        conStr = String.Format("SERVER={4};DATABASE={0};PORT={1};USER={2};PASSWORD={3}", DATABASE, DB_PORT, USER, PASSWORD, DB_SERVER)
+        conStr = String.Format("SERVER={0};DATABASE={1};PORT={2};USER={3};PASSWORD={4}", _dbServer, _dbName, _dbPort, _user, _password)
         conMySql = New MySqlConnection
         conMySql.ConnectionString = conStr
 

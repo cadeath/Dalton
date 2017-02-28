@@ -14,7 +14,7 @@ Module MrFaust
         th_ping.Start()
 
         While True
-            System.Threading.Thread.Sleep(1000 * 60)
+            System.Threading.Thread.Sleep(3000)
         End While
     End Sub
 
@@ -36,9 +36,9 @@ Module MrFaust
 
     Private Sub start_ping()
         delay = GetRand(DELAY_MIN_MINUTES, DELAY_MAX_MINUTES)
-        delay = delay * 1000 * 60 'for the Minutes
+        delay = delay * 1000 '* 60 'for the Minutes
 
-        Console.WriteLine("Ping wait: " & delay / 1000 / 60)
+        Console.WriteLine("Ping wait: " & delay / 1000 & "s")
         ping_delay = New Timers.Timer
         ping_delay.Interval = delay
         AddHandler ping_delay.Elapsed, New ElapsedEventHandler(AddressOf ping_now)

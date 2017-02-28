@@ -23,7 +23,7 @@ Module cmdFunctions
     End Sub
 
     Private Sub save_ccData(ByVal dt As Date, ByVal dsCC As DataSet)
-        If mySqlDBopen() Then Exit Sub
+        If Not mySqlDBopen() Then Exit Sub
 
         Console.WriteLine(">>Saving to Server")
         Dim mySql As String = "SELECT * FROM cashcounts "
