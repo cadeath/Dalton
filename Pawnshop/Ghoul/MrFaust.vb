@@ -7,7 +7,7 @@ Module MrFaust
     Const PING_URI As String = "ping"
 
     Const DELAY_MIN_MINUTES As Integer = 10
-    Const DELAY_MAX_MINUTES As Integer = 15
+    Const DELAY_MAX_MINUTES As Integer = 30
 
     Friend Sub CheckList()
         Dim th_ping As New Thread(AddressOf do_ping)
