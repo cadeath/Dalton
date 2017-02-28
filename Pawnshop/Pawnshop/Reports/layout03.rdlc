@@ -577,7 +577,7 @@
         <rd:DefaultName>Textbox1</rd:DefaultName>
         <Top>2.60422in</Top>
         <Left>6.40515in</Left>
-        <Height>0.2882in</Height>
+        <Height>0.27431in</Height>
         <Width>1.03407in</Width>
         <ZIndex>14</ZIndex>
         <Style>
@@ -1841,9 +1841,7 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!txtRenewCompute.Value</Value>
-                <Style>
-                  <FontSize>8pt</FontSize>
-                </Style>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -1873,9 +1871,7 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!txtRedeemCompute.Value</Value>
-                <Style>
-                  <FontSize>8pt</FontSize>
-                </Style>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -1905,9 +1901,7 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!txtRenewCompute.Value</Value>
-                <Style>
-                  <FontSize>8pt</FontSize>
-                </Style>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -1937,9 +1931,7 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!txtRedeemCompute.Value</Value>
-                <Style>
-                  <FontSize>8pt</FontSize>
-                </Style>
+                <Style />
               </TextRun>
             </TextRuns>
             <Style />
@@ -2029,6 +2021,72 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox56">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtRateInPercent.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>2.87853in</Top>
+        <Left>6.40515in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.03407in</Width>
+        <ZIndex>60</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox57">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!txtRateInPercent.Value</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <Format>#,0.00;(#,0.00);'-'</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Left</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox1</rd:DefaultName>
+        <Top>8.75353in</Top>
+        <Left>6.38432in</Left>
+        <Height>0.20833in</Height>
+        <Width>1.03407in</Width>
+        <ZIndex>61</ZIndex>
+        <Style>
+          <Border />
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>9.80075in</Height>
     <Style />
@@ -2067,6 +2125,10 @@
     <ReportParameter Name="txtRenewCompute">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="txtRateInPercent">
+      <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

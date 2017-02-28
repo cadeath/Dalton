@@ -51,6 +51,8 @@ Public Class frmPawningItemNew
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     Private Reprint As Boolean = False
     Private ReadyToPrint As Boolean = False
+    Friend Coi As Hashtable
+    Private Ins As Insurance
 
     Private Sub ClearFields()
         mod_system.isAuthorized = False
@@ -227,7 +229,7 @@ Public Class frmPawningItemNew
         If txtPrincipal.Text = "" Then txtPrincipal.Focus() : Return False
         If CDbl(txtPrincipal.Text) > CDbl(txtAppr.Text) Then MsgBox("Principal is greater than Appraisal", MsgBoxStyle.Critical) : txtAppr.Focus() : Return False
         'If Not mod_system.isAuthorized Then CheckAuth() : Return False
-        If cboAppraiser.Text = "" Then MsgBox("Please select Appraiser", MsgBoxStyle.Critical) : cboAppraiser.Focus() : Return False
+        If cboAppraiser.Text = "" Then cboAppraiser.Focus() : Return False
 
             If Not IsNumeric(txtAppr.Text) Then txtAppr.Focus() : Return False
             If Not IsNumeric(txtPrincipal.Text) Then txtPrincipal.Focus() : Return False
@@ -245,7 +247,7 @@ Public Class frmPawningItemNew
         If MsgBox("Do you want to save this transaction?", _
                   MsgBoxStyle.YesNo + MsgBoxStyle.Information, _
                   "Saving...") = MsgBoxResult.No Then Exit Sub
-
+        TagCoi()
         Select Case transactionType
             Case "L"
                 SaveNewLoan()
@@ -254,8 +256,10 @@ Public Class frmPawningItemNew
                 Else
                     PrintNewLoan()
                 End If
+
             Case "R"
                 SaveRenew() : PrintRenew()
+
             Case "X"
                 SaveRedeem() : If Not PAUSE_OR Then do_RedeemOR()
         End Select
@@ -499,9 +503,10 @@ Public Class frmPawningItemNew
             HitManagement.do_PawningHit(PT_Entry.Pawner, PT_Entry.PawnTicket)
         End With
 
-        AddNumber(DocumentClass.Pawnticket)
+            AddNumber(DocumentClass.Pawnticket)
 
-        MsgBox("Item Saved", MsgBoxStyle.Information)
+            MsgBox("Item Saved", MsgBoxStyle.Information)
+
         'NewLoan()
         txtCustomer.Focus()
         If frmPawning.Visible And Not frmPawning.isMoreThan100 Then
@@ -516,7 +521,7 @@ Public Class frmPawningItemNew
         If selectedClass Is Nothing Then Exit Sub
 
         Select Case selectedClass.ClassName
-            Case "CELLPHONE", "TABLET"
+            Case "TABLET"
                 txtExpiry.Text = txtMatu.Text
                 txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
             Case Else
@@ -554,7 +559,7 @@ Public Class frmPawningItemNew
             'REMANTIC NO ADVANCE INTEREST
             If PT_Entry.AdvanceInterest = 0 Then
                 isDPJ = False
-                isOldItem = Not isDPJ
+                'isOldItem = Not isDPJ
             End If
         End If
 
@@ -575,6 +580,7 @@ Public Class frmPawningItemNew
         txtAdv.Text = MoneyFormat(AdvanceInterest)
         txtNet.Text = MoneyFormat(NetAmount)
         isEarlyRedeem = AutoCompute.isEarlyRedeem
+        isOldItem = Not isDPJ
 
         If transactionType = "R" Or transactionType = "X" Then
             GenerateORNum()
@@ -759,10 +765,6 @@ Public Class frmPawningItemNew
         End If
     End Sub
 
-    Private Sub txtPrincipal_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPrincipal.KeyUp
-        ReComputeInterest()
-    End Sub
-
     Private Sub frmPawningItemNew_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearFields()
         LoadAppraisers()
@@ -860,8 +862,17 @@ Public Class frmPawningItemNew
             LockFields(True)
             btnSave.Enabled = False : btnRenew.Enabled = True
             btnRedeem.Enabled = True : btnPrint.Enabled = True
-            btnVoid.Enabled = True
+            btnVoid.Enabled = True : btnAddCoi.Enabled = False
         End If
+
+        ChangeForm()
+        If PT_Entry.Status = "R" Then Me.Text &= " [RENEW]"
+        If PT_Entry.Status = "0" Then Me.Text &= " [INACTIVE/RENEWED]"
+        If PT_Entry.Status = "X" Then Me.Text &= " [REDEEMED]"
+        If PT_Entry.Status = "S" Then Me.Text &= " [SEGREGATED]"
+        If PT_Entry.Status = "W" Then Me.Text &= " [WITHDRAW] - Pull Out: " & PT_Entry.PawnItem.WithdrawDate.ToShortDateString
+        If PT_Entry.Status = "V" Then Me.Text &= " [VOIDED]"
+
         Select Case pt.Status
             Case "0", "S", "W", "V"
                 LockFields(1)
@@ -960,6 +971,7 @@ Public Class frmPawningItemNew
             transactionType = "D"
             btnSave.Enabled = False
             btnPrint.Enabled = True
+            btnAddCoi.Enabled = False
             Load_PawnTicket(PT_Entry)
             Exit Sub
         End If
@@ -971,6 +983,7 @@ Public Class frmPawningItemNew
         Renew()
         btnPrint.Enabled = False
         btnSave.Enabled = True
+        btnAddCoi.Enabled = True
         btnRenew.Text = "&Cancel"
 
     End Sub
@@ -1124,6 +1137,7 @@ Public Class frmPawningItemNew
         If POSuser.canVoid Then btnVoid.Enabled = Not st
         btnSave.Enabled = Not st
         lvSpec.Enabled = Not st
+        btnAddCoi.Enabled = Not st
     End Sub
 
     Private Sub PrintNewLoan()
@@ -1164,6 +1178,15 @@ Public Class frmPawningItemNew
         End If
         addParameters.Add("txtItemInterest", GetInt(30) * 100)
         addParameters.Add("txtUsername", POSuser.FullName)
+
+        Dim total As Double
+        total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
+        total = total * GetInt(30)
+        total = total / PT_Entry.NetAmount
+        total = total * 100
+
+        total = Math.Round(total, 2, MidpointRounding.AwayFromZero)
+        addParameters.Add("txtRateInPercent", total)
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1248,6 +1271,15 @@ Public Class frmPawningItemNew
         addParameters.Add("txtOLDPT", "PT# " & PT_Entry.OldTicket.ToString("000000"))
         addParameters.Add("txtUsername", POSuser.FullName)
 
+        Dim total As Double
+        total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
+        total = total * GetInt(30)
+        total = total / PT_Entry.NetAmount
+        total = total * 100
+
+        total = Math.Round(total, 2, MidpointRounding.AwayFromZero)
+        addParameters.Add("txtRateInPercent", total)
+
         ' Add Monthly Computation
         Dim strCompute As String
         strCompute = "Renew: " & DisplayComputation(PT_Entry, "Renew")
@@ -1327,6 +1359,7 @@ Public Class frmPawningItemNew
             transactionType = "D"
             btnSave.Enabled = False
             btnPrint.Enabled = True
+            btnAddCoi.Enabled = False
 
             Load_PawnTicket(PT_Entry)
             Exit Sub
@@ -1340,6 +1373,7 @@ Public Class frmPawningItemNew
         btnPrint.Enabled = False
         btnSave.Enabled = True
         btnRedeem.Text = "&Cancel"
+        btnAddCoi.Enabled = True
     End Sub
 
     Private Sub do_RenewOR()
@@ -1376,8 +1410,9 @@ Public Class frmPawningItemNew
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PT_Entry.PawnTicket, PT_Entry.RenewDue)
         addParameters.Add("txtPayment", paymentStr)
-        addParameters.Add("dblTotalDue", PT_Entry.RenewDue)
+        addParameters.Add("dblTotalDue", PT_Entry.RenewDue + CDbl(GetTotalCoi()))
         addParameters.Add("txtDescription", descStr)
+        addParameters.Add("txtCoi", GetTotalCoi)
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1453,8 +1488,9 @@ Public Class frmPawningItemNew
         paymentStr = _
         String.Format("PT# {0:000000} with a payment amount of Php {1:#,##0.00}", PT_Entry.PawnTicket, PT_Entry.RedeemDue)
         addParameters.Add("txtPayment", paymentStr)
-        addParameters.Add("dblTotalDue", PT_Entry.RedeemDue)
+        addParameters.Add("dblTotalDue", PT_Entry.RedeemDue + CDbl(GetTotalCoi()))
         addParameters.Add("txtDescription", descStr)
+        addParameters.Add("txtCoi", GetTotalCoi)
 
         If Reprint = True Then
             addParameters.Add("txtReprint", "Reprint")
@@ -1533,5 +1569,61 @@ Public Class frmPawningItemNew
         End With
         ds.Tables("TBLREPRINT").Rows.Add(dsNewRow)
         database.SaveEntry(ds)
+    End Sub
+
+    Private Sub txtPrincipal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.Leave
+        ReComputeInterest()
+    End Sub
+
+    Private Sub ChangeForm()
+        Select Case transactionType
+            Case "D"
+                lblTransaction.Text = "Ticket Information"
+            Case "L"
+                lblTransaction.Text = "New Loan"
+            Case "R"
+                lblTransaction.Text = "Renew"
+            Case "X"
+                lblTransaction.Text = "Redeem"
+        End Select
+    End Sub
+
+    Private Sub txtAppr_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppr.Leave
+        ReComputeInterest()
+    End Sub
+
+    Private Function GetTotalCoi() As Integer
+        'Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where TRANSDATE = '" & CurrentDate.ToShortDateString & "' AND PAWNTICKET = '" & Ticket & "'"
+        'Dim fillData As String = "tblInsurance"
+        'Dim ds As DataSet = LoadSQL(mysql, fillData)
+        'If IsDBNull(ds.Tables(0).Rows(0).Item("Amount")) Then Return 0
+        'Return ds.Tables(0).Rows(0).Item("Amount")
+        Dim CoiCount As Integer
+        If Coi Is Nothing Then Return 0
+        CoiCount = Coi.Count
+        CoiCount = CoiCount * GetOption("InsuranceAmount")
+
+        Return CoiCount
+    End Function
+
+    Private Sub btnAddCoi_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddCoi.Click
+        If Not isValid() Then Exit Sub
+        frmAddCoi.Show()
+        frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
+        frmAddCoi.Ticket = String.Format("PT#{0:000000}", txtTicket.Text)
+
+    End Sub
+
+    Private Sub TagCoi()
+        If Coi Is Nothing Then Exit Sub
+        Ins = New Insurance
+        For Each ht As DictionaryEntry In Coi
+            With Ins
+                .ID = ht.Key
+                .TicketNum = String.Format("PT#{0:000000}", txtTicket.Text)
+                .UpdateInsurance()
+            End With
+            Console.WriteLine("Hashtable Key: " & ht.Key & "Coi#: " & ht.Value)
+        Next
     End Sub
 End Class

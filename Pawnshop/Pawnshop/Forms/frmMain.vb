@@ -64,6 +64,7 @@
         VoidReportToolStripMenuItem.Enabled = Not st
         SalesReportToolStripMenuItem.Enabled = Not st
         InventoryReportToolStripMenuItem.Enabled = Not st
+        StockoutReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -527,8 +528,13 @@
     End Sub
 
     Private Sub InventoryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InventoryReportToolStripMenuItem.Click
-        frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
-        frmSalesReport.Show()
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.Inventory
+            If Not CheckOTP() Then Exit Sub
+        Else
+            frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
+            frmSalesReport.Show()
+        End If
     End Sub
 
     Private Sub StockInToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInToolStripMenuItem.Click
@@ -537,5 +543,10 @@
 
     Private Sub ItemMasterDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemMasterDataToolStripMenuItem.Click
         frmImport_IMD.Show()
+    End Sub
+
+    Private Sub StockoutReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockoutReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockOut
+        frmSalesReport.Show()
     End Sub
 End Class

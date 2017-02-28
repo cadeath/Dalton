@@ -271,6 +271,7 @@
 
     Private Sub SaveInsuranceInv()
         Dim TotalCount As Integer = CInt(GetMaintenanceValue("INS Count"))
+        If TotalCount = 0 Then Exit Sub
         Dim InsPrice As Integer = GetMaintenanceValue("InsuranceAmount")
         Dim TotalVal As Integer = TotalCount * InsPrice
         '= 'TotalCount * 
@@ -300,7 +301,6 @@
         fillData = "DOCLINES"
         ds = LoadSQL(mysql, fillData)
 
-        Dim itm As New cItemData
         dsNewRow = ds.Tables(fillData).NewRow
         With dsNewRow
             .Item("DOCID") = DOCID

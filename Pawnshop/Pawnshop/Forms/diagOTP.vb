@@ -23,6 +23,7 @@ Public Class diagOTP
         VoidCashInOut = 7
         Pullout = 8
         VoidSales = 9
+        Inventory = 10
     End Enum
 
     Friend FormType As OTPType = OTPType.UserManagement
@@ -48,6 +49,10 @@ Public Class diagOTP
                 qryPullOut.Show()
             Case OTPType.VoidSales
                 frmPrint.Void()
+            Case OTPType.Inventory
+                frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
+                frmSalesReport.Show()
+                frmSalesReport.TopMost = True
         End Select
     End Sub
 
