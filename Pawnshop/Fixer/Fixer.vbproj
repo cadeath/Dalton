@@ -110,6 +110,12 @@
     <Compile Include="Add INS Count\frmAddItemMasterCOI.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CashInBank\frmFixRevolvingFund.Designer.vb">
+      <DependentUpon>frmFixRevolvingFund.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CashInBank\frmFixRevolvingFund.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CashInBank\update_cashinbank.vb" />
     <Compile Include="database.vb" />
     <Compile Include="CashInBank\frmMain2.Designer.vb">
@@ -230,6 +236,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Add INS Count\frmAddItemMasterCOI.resx">
       <DependentUpon>frmAddItemMasterCOI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CashInBank\frmFixRevolvingFund.resx">
+      <DependentUpon>frmFixRevolvingFund.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Fix Inventory Stock\frmInvStock.resx">
       <DependentUpon>frmInvStock.vb</DependentUpon>
