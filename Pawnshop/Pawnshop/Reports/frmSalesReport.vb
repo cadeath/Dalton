@@ -10,7 +10,7 @@
         StockOutMonthly = 5
         StockInMonthly = 6
     End Enum
-    Friend FormType As SaleReport = SaleReport.Sale
+    Friend FormType As SaleReport = SaleReport.SalesMonthly
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
         If cboReportType.Visible Then

@@ -586,6 +586,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>dsStockOut</DataSetName>
+        <Top>0.125in</Top>
         <Height>0.5in</Height>
         <Width>9.53125in</Width>
         <Style>
@@ -619,7 +620,7 @@
   <Width>9.53125in</Width>
   <Page>
     <PageHeader>
-      <Height>1.11458in</Height>
+      <Height>1.14931in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -978,6 +979,17 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
+        <Line Name="Line1">
+          <Top>1.14931in</Top>
+          <Height>0in</Height>
+          <Width>9.53125in</Width>
+          <ZIndex>9</ZIndex>
+          <Style>
+            <Border>
+              <Style>Solid</Style>
+            </Border>
+          </Style>
+        </Line>
       </ReportItems>
       <Style>
         <Border>

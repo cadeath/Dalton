@@ -554,4 +554,8 @@
         frmSalesReport.FormType = frmSalesReport.SaleReport.StockIn
         frmSalesReport.Show()
     End Sub
+
+    Private Sub MonthlyInventoryReportsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyInventoryReportsToolStripMenuItem.Click
+        frmSalesReport.Show()
+    End Sub
 End Class
