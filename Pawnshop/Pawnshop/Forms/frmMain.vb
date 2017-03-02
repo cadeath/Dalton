@@ -549,4 +549,9 @@
         frmSalesReport.FormType = frmSalesReport.SaleReport.StockOut
         frmSalesReport.Show()
     End Sub
+
+    Private Sub StockInReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockIn
+        frmSalesReport.Show()
+    End Sub
 End Class

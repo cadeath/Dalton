@@ -4,6 +4,7 @@
         Sale = 0
         Inventory = 1
         StockOut = 2
+        StockIn = 3
     End Enum
     Friend FormType As SaleReport = SaleReport.Sale
 
@@ -15,6 +16,8 @@
                 InventoryReport()
             Case SaleReport.StockOut
                 StockOutReport()
+            Case SaleReport.StockIn
+                StockInReport()
         End Select
     End Sub
 
@@ -104,6 +107,23 @@
         Dim dic As New Dictionary(Of String, String)
         dic.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
         dic.Add("branchName", branchName)
+        dic.Add("txtStock", "Stock Out Report")
+
+        frmReport.ReportInit(mySql, "dsStockOut", "Reports\rpt_StockOutReport.rdlc", dic)
+        frmReport.Show()
+    End Sub
+
+    Private Sub StockInReport()
+        Dim mySql As String
+        mySql = "SELECT I.REFNUM as CODE, I.PARTNER as CUSTOMER,  IL.ITEMCODE, "
+        mySql &= "IL.DESCRIPTION, IL.QTY "
+        mySql &= "FROM INVLINES IL INNER JOIN INV I ON I.DOCID = IL.DOCID "
+        mySql &= "Where I.DOCDATE = '" & monCal.SelectionStart.ToShortDateString & "'"
+
+        Dim dic As New Dictionary(Of String, String)
+        dic.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
+        dic.Add("branchName", branchName)
+        dic.Add("txtStock", "Stock In Report")
 
         frmReport.ReportInit(mySql, "dsStockOut", "Reports\rpt_StockOutReport.rdlc", dic)
         frmReport.Show()
