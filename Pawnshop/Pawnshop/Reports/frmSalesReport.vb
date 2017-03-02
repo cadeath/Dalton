@@ -5,10 +5,26 @@
         Inventory = 1
         StockOut = 2
         StockIn = 3
+
+        SalesMonthly = 4
+        StockOutMonthly = 5
+        StockInMonthly = 6
     End Enum
     Friend FormType As SaleReport = SaleReport.Sale
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
+        If cboReportType.Visible Then
+            Select Case cboReportType.Text
+                Case "Sales Report"
+                    FormType = SaleReport.SalesMonthly
+                Case "StockOut Report"
+                    FormType = SaleReport.StockOutMonthly
+                Case "StockIn Report"
+                    FormType = SaleReport.StockInMonthly
+
+            End Select
+        End If
+
         Select Case FormType
             Case SaleReport.Sale
                 SalesReport()
@@ -18,6 +34,14 @@
                 StockOutReport()
             Case SaleReport.StockIn
                 StockInReport()
+
+
+            Case SaleReport.SalesMonthly
+
+            Case SaleReport.StockOutMonthly
+
+            Case SaleReport.StockInMonthly
+
         End Select
     End Sub
 
@@ -88,6 +112,12 @@
     End Sub
 
     Private Sub frmSalesReport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        If NoFilter() Then
+            cboReportType.Visible = False
+        Else
+            cboReportType.Visible = True
+        End If
+
         Select Case FormType
             Case SaleReport.Sale
                 Me.Text = "Sales Report"
@@ -95,6 +125,8 @@
                 Me.Text = "Inventory Report"
             Case SaleReport.StockOut
                 Me.Text = "StockOut Report"
+            Case SaleReport.StockIn
+                Me.Text = "Stock In Report"
         End Select
     End Sub
 
@@ -129,4 +161,24 @@
         frmReport.Show()
     End Sub
 
+
+    Private Function NoFilter() As Boolean
+        Select Case FormType
+            Case SaleReport.Sale
+                Return True
+            Case SaleReport.StockOut
+                Return True
+                'Case SaleReport.LayAway
+                '    Return True
+            Case SaleReport.Inventory
+                Return True
+            Case SaleReport.StockIn
+                Return True
+                'Case SaleReport.Forfeit
+                '    Return True
+                'Case SaleReport.LayawayList
+                '    Return True
+        End Select
+        Return False
+    End Function
 End Class
