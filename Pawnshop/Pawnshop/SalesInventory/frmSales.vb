@@ -67,12 +67,14 @@ Public Class frmSales
                 prefix = "STO"
         End Select
 
-        mySql &= String.Format("'{1}#{0:000000}'", ControlNum, prefix)
+        Dim uniq As String = String.Format("'{1}#{0:000000}'", ControlNum, prefix)
+        mySql &= uniq
+
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             canTransact = False
-            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical)
+            MsgBox("NUMBER ALREADY EXISTED" + vbCrLf + "PLEASE BE ADVICED", MsgBoxStyle.Critical, uniq)
         End If
     End Sub
 
@@ -113,14 +115,17 @@ Public Class frmSales
                     .SubItems(2).Text += itm.Quantity
                 End If
 
-                ItemAmount = (itm.SalePrice * itm.Quantity)
+                'ItemAmount = (itm.SalePrice * itm.Quantity)
+                ItemAmount = (.SubItems(2).Text * .SubItems(3).Text)
 
                 If TransactionMode = TransType.Auction Then
                     .SubItems(2).Text = ItemAmount
                 Else
-                    .SubItems(4).Text = (ItemAmount + CDbl(.SubItems(4).Text)).ToString("#,##0.00")
+                    '.SubItems(4).Text = (ItemAmount + CDbl(.SubItems(4).Text)).ToString("#,##0.00")
+                    .SubItems(4).Text = ItemAmount.ToString("#,##0.00")
                 End If
             End With
+
         Else
             'If NEW
             Dim lv As ListViewItem = lvSale.Items.Add(itm.ItemCode)
@@ -139,15 +144,10 @@ Public Class frmSales
         Else
             ht_BroughtItems.Add(src_idx, itm)
         End If
-
-        If TransactionMode = TransType.Auction Then
             DOC_TOTAL = 0
             For Each lv As ListViewItem In lvSale.Items
                 DOC_TOTAL += CDbl(lv.SubItems(4).Text)
-            Next
-        Else
-            DOC_TOTAL += ItemAmount
-        End If
+        Next
 
         Display_Total(DOC_TOTAL)
     End Sub
@@ -260,8 +260,10 @@ Public Class frmSales
     End Sub
 
     Private Sub lvSale_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvSale.KeyDown
-        If e.KeyCode = Keys.Delete Then
+        If lvSale.SelectedItems.Count = 0 Then Exit Sub
 
+        If e.KeyCode = Keys.Delete Then
+            If TransactionMode = TransType.Auction Then Exit Sub
             Dim idx As Integer = lvSale.FocusedItem.Index
             If Not IsNumeric(lvSale.Items(idx).SubItems(2).Text) Then
                 Log_Report(String.Format("[SALES DELETE] {0} have an NON-NUMERIC QTY", lvSale.Items(idx).Text))
@@ -271,14 +273,18 @@ Public Class frmSales
 
             Console.WriteLine("Removing " & lvSale.Items(idx).Text)
 
-            Dim itm As New cItemData
-            itm.ItemCode = lvSale.Items(idx).Text
-            itm.Load_Item()
+            If MsgBox("Do you want remove this item?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + vbDefaultButton2, "Removing...") = vbYes Then
+                Dim itm As New cItemData
+                itm.ItemCode = lvSale.Items(idx).Text
+                itm.Load_Item()
 
-            DOC_TOTAL -= itm.SalePrice * CDbl(lvSale.Items(idx).SubItems(2).Text)
-            ht_BroughtItems.Remove(itm.ItemCode)
-            lvSale.Items(idx).Remove()
+                DOC_TOTAL -= CDbl(lvSale.Items(idx).SubItems(3).Text) * CDbl(lvSale.Items(idx).SubItems(2).Text)
+                ht_BroughtItems.Remove(itm.ItemCode)
+                lvSale.Items(idx).Remove()
 
+            Else
+                Exit Sub
+            End If
             Display_Total(DOC_TOTAL)
         End If
     End Sub
@@ -425,8 +431,8 @@ Public Class frmSales
             ' JOURNAL ENTRY
             getLastID = GetDocLines_LastID()
             If TransactionMode = TransType.Returns Then
-                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES", getLastID)
-                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
+                AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Cash Offsetting Account", "SALES " & itm.ItemCode, , , "SALES OF INVENTORIABLES", "SALES RETURN", getLastID)
+                AddJournal(itm.SalePrice * itm.Quantity, "Credit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES RETURN", getLastID)
             Else
                 If TransactionMode <> TransType.Auction Then
                     AddJournal(itm.SalePrice * itm.Quantity, "Debit", "Revolving Fund", "SALES " & itm.ItemCode, "SALES", , , "SALES", getLastID)
@@ -552,8 +558,13 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbSalesReturn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSalesReturn.Click
-        If ShiftMode() Then
-            Load_asReturns()
+        If Not (POSuser.isSuperUser Or POSuser.canReturn) Then
+            MsgBox("You don't have access to the Return", MsgBoxStyle.Critical, "Authorization Invalid")
+            Exit Sub
+        Else
+            If ShiftMode() Then
+                Load_asReturns()
+            End If
         End If
     End Sub
 
@@ -568,7 +579,7 @@ Public Class frmSales
     End Function
 
     Private Sub tsbReceipt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbReceipt.Click
-        'frmReceipt.Show()
+        frmPrint.Show()
     End Sub
 
     Private Sub Label1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label1.DoubleClick
@@ -612,20 +623,13 @@ Public Class frmSales
     End Sub
 
     Private Sub tsbtnOut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbtnOut.Click
-        If ShiftMode() Then
-            'OTPStockOut_Initialization()
-
-            'If Not OTPDisable Then
-            '    diagGeneralOTP.GeneralOTP = OtpSettings
-            '    diagGeneralOTP.ShowDialog()
-            '    If Not diagGeneralOTP.isCorrect Then
-            '        Exit Sub
-            '    Else
-            '        Load_asStockOut()
-            '    End If
-            'End If
-
-            Load_asStockOut()
+        If Not (POSuser.isSuperUser Or POSuser.canStockOut) Then
+            MsgBox("You don't have access to the StockOut", MsgBoxStyle.Critical, "Authorization Invalid")
+            Exit Sub
+        Else
+            If ShiftMode() Then
+                Load_asStockOut()
+            End If
         End If
     End Sub
 

@@ -142,31 +142,67 @@ Public Class frmPrint
 
         ds.Tables(0).Rows(0).Item("STATUS") = "V"
         SaveEntry(ds, False)
+        Dim isSales As Boolean = False
+        If ds.Tables(0).Rows(0).Item("DOCTYPE") = "0" Or ds.Tables(0).Rows(0).Item("DOCTYPE") = "1" Then isSales = True
 
         Dim EncoderID As String = ds.Tables(0).Rows(0).Item("USERID")
-        Dim TransactionName As String = "SALES"
+        Dim TransactionName As String
         Dim NewOtp As New ClassOtp("VOID SALES", diagOTP.txtPIN.Text, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
+        If isSales = True Then
+            TransactionName = "SALES"
+        Else
+            TransactionName = "RECALL"
+        End If
+            TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
 
-        ds.Clear()
-        mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
-        ds = LoadSQL(mysql, "Doclines")
+            ds.Clear()
+            mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
+            ds = LoadSQL(mysql, "Doclines")
 
-        For Each dr As DataRow In ds.Tables(0).Rows
-            AddItemOnMaster(dr)
-            TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "Doclines ID: " & dr.Item("DLID"))
-            RemoveJournal(dr.Item("DLID"), , TransactionName)
-        Next
-       
-        'MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
-        Me.Close()
+            If isSales = True Then
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    AddItemOnMaster(dr)
+                    RemoveJournal(dr.Item("DLID"), , TransactionName)
+                Next
+            Else
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    AddItemOnMaster(dr, True)
+                    RemoveJournal(dr.Item("DLID"), , "RECALL")
+                    RemoveJournal(dr.Item("DLID"), , "COSRECALL")
+                Next
+            End If
+            'MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
+            Me.Close()
     End Sub
 
-    Private Sub AddItemOnMaster(ByVal dr As DataRow)
-        Dim mysql As String = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & dr.Item("ITEMCODE") & "'"
-        Dim ds As DataSet = LoadSQL(mysql, "ITEMMASTER")
-        With ds.Tables(0).Rows(0)
-            .Item("OnHand") = .Item("Onhand") + dr.Item("Qty")
-        End With
-        database.SaveEntry(ds, False)
+    Private Sub AddItemOnMaster(ByVal dr As DataRow, Optional ByVal isSale As Boolean = False)
+        If isSale = True Then
+            Dim trimPT As String = dr.Item("DESCRIPTION")
+            trimPT = trimPT.Remove(0, 3)
+            trimPT = trimPT.Substring(0, 7)
+            Dim mysql As String = "SELECT * FROM OPT WHERE PAWNTICKET = '" & trimPT & "'"
+            Dim ds As DataSet = LoadSQL(mysql, "OPT")
+            ds.Tables(0).Rows(0).Item("STATUS") = "S"
+            database.SaveEntry(ds, False)
+
+            mysql = "SELECT * FROM OPI WHERE PAWNITEMID = '" & ds.Tables(0).Rows(0).Item("PAWNITEMID") & "'"
+            ds.Clear()
+            ds = LoadSQL(mysql, "OPI")
+            Dim WithDrawDate As Date = Nothing
+            With ds.Tables(0).Rows(0)
+                .Item("STATUS") = "S"
+                .Item("WITHDRAWDATE") = WithDrawDate
+            End With
+            database.SaveEntry(ds, False)
+
+        Else
+            Dim mysql As String = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & dr.Item("ITEMCODE") & "'"
+            Dim ds As DataSet = LoadSQL(mysql, "ITEMMASTER")
+            With ds.Tables(0).Rows(0)
+                .Item("OnHand") = .Item("Onhand") + dr.Item("Qty")
+            End With
+            database.SaveEntry(ds, False)
+        End If
     End Sub
+
 End Class

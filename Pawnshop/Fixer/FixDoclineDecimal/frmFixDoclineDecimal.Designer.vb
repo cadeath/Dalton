@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmFixView
+Partial Class frmFixDoclineDecimal
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -25,6 +25,7 @@ Partial Class frmFixView
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnFix = New System.Windows.Forms.Button()
         Me.txtData = New System.Windows.Forms.TextBox()
+        Me.ofdDB = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -32,16 +33,16 @@ Partial Class frmFixView
         '
         Me.GroupBox1.Controls.Add(Me.btnFix)
         Me.GroupBox1.Controls.Add(Me.txtData)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 4)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(302, 75)
+        Me.GroupBox1.Size = New System.Drawing.Size(302, 70)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Database"
         '
         'btnFix
         '
-        Me.btnFix.Location = New System.Drawing.Point(221, 46)
+        Me.btnFix.Location = New System.Drawing.Point(221, 41)
         Me.btnFix.Name = "btnFix"
         Me.btnFix.Size = New System.Drawing.Size(75, 23)
         Me.btnFix.TabIndex = 0
@@ -56,16 +57,16 @@ Partial Class frmFixView
         Me.txtData.Size = New System.Drawing.Size(290, 20)
         Me.txtData.TabIndex = 1
         '
-        'frmFixView
+        'frmFixDoclineDecimal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(308, 86)
+        Me.ClientSize = New System.Drawing.Size(314, 78)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmFixView"
+        Me.Name = "frmFixDoclineDecimal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Fix Pawn"
+        Me.Text = "Fix Decimal"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
@@ -74,4 +75,5 @@ Partial Class frmFixView
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnFix As System.Windows.Forms.Button
     Friend WithEvents txtData As System.Windows.Forms.TextBox
+    Friend WithEvents ofdDB As System.Windows.Forms.OpenFileDialog
 End Class
