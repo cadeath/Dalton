@@ -2,6 +2,8 @@
 Public Class frmAuditConsole
 
     Private MEMO_MINIMUM As Double = 5000
+    Const INTEGRITY_CHECK As String = "tk8Gi7kcqIdbdWq8mdFv1wWG5XwYy98lfHcRNWxKmkhtgtBTpA2FaO9L3uAViOHu"
+
 
     Private Sub btnVault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVault.Click
         Dim AMOUNT_MIN As Double
@@ -83,6 +85,10 @@ Public Class frmAuditConsole
             checkHeaders(cnt) = oSheet.Cells(1, cnt + 1).value
         Next : checkHeaders(MaxColumn) = oWB.Worksheets(1).name
 
+        If Not TemplateIntegrityCheck(checkHeaders) Then
+            MsgBox("Template was tampered", MsgBoxStyle.Critical)
+        End If
+
         Me.Enabled = False
         For cnt = 2 To MaxEntries
             Dim ImportedItem As New cItemData
@@ -152,4 +158,19 @@ Public Class frmAuditConsole
 
         txtPath.Text = ofdINV_AD.FileName
     End Sub
+
+    Friend Function TemplateIntegrityCheck(ByVal headers() As String) As Boolean
+        Dim mergeHeaders As String = ""
+        For Each head In headers
+            mergeHeaders &= head
+        Next
+
+        Console.WriteLine("Header Check " & HashString(mergeHeaders))
+
+        If HashString(mergeHeaders) = INTEGRITY_CHECK Then
+            Return True
+        End If
+
+        Return False
+    End Function
 End Class
