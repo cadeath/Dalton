@@ -1465,7 +1465,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2170,7 +2169,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>LAYAWAY REPORT</Value>
+                  <Value>LAYAWAY PAYMENTS REPORT</Value>
                   <Style>
                     <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
@@ -2184,7 +2183,7 @@
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Height>0.25in</Height>
-          <Width>2.4375in</Width>
+          <Width>3.51042in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -2342,7 +2341,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Layaway Report</Value>
+                  <Value>Layaway Payments Report</Value>
                   <Style>
                     <FontWeight>Bold</FontWeight>
                     <Format>#,0;(#,0)</Format>
@@ -2356,9 +2355,9 @@
           </Paragraphs>
           <rd:DefaultName>Textbox184</rd:DefaultName>
           <Top>0.02778in</Top>
-          <Left>3.66146in</Left>
+          <Left>3.42188in</Left>
           <Height>0.25in</Height>
-          <Width>2.11459in</Width>
+          <Width>2.78124in</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>

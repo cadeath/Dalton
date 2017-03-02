@@ -572,4 +572,9 @@
         frmSalesReport.FormType = frmSalesReport.SaleReport.Forfeit
         frmSalesReport.Show()
     End Sub
+
+    Private Sub LayawayListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LayawayListToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.LayawayList
+        frmSalesReport.Show()
+    End Sub
 End Class
