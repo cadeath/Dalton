@@ -72,6 +72,7 @@ Partial Class frmMain
         Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InventoryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StockoutReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StockInReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -101,7 +102,6 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
-        Me.StockInReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -401,6 +401,12 @@ Partial Class frmMain
         Me.StockoutReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.StockoutReportToolStripMenuItem.Text = "Sto&ckout Report"
         '
+        'StockInReportToolStripMenuItem
+        '
+        Me.StockInReportToolStripMenuItem.Name = "StockInReportToolStripMenuItem"
+        Me.StockInReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.StockInReportToolStripMenuItem.Text = "Stock In Report"
+        '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
@@ -653,12 +659,6 @@ Partial Class frmMain
         Me.bannerSize.TabIndex = 9
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
-        '
-        'StockInReportToolStripMenuItem
-        '
-        Me.StockInReportToolStripMenuItem.Name = "StockInReportToolStripMenuItem"
-        Me.StockInReportToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
-        Me.StockInReportToolStripMenuItem.Text = "Stock In Report"
         '
         'frmMain
         '
