@@ -4,13 +4,20 @@
         Sale = 0
         Inventory = 1
         StockOut = 2
-        LayAway = 3
+        StockIn = 3
+
+
         SalesMonthly = 4
-        StockOutMontly = 5
-        LayAwayMontly = 6
-        Forfeit = 7
-        ForfeitMonthly = 8
-        LayawayList = 9
+        StockOutMonthly = 5
+        StockInMonthly = 6
+       
+
+ 	LayAway = 7
+ 	LayAwayMontly = 8
+        Forfeit = 9
+        ForfeitMonthly = 10
+        LayawayList = 11
+
     End Enum
     Friend FormType As SaleReport = SaleReport.SalesMonthly
 
@@ -21,36 +28,59 @@
             Select Case cboReportType.Text
                 Case "Sales Report"
                     FormType = SaleReport.SalesMonthly
+
                 Case "StockOut Report"
                     FormType = SaleReport.StockOutMontly
+
+		Case "StockIn Report"
+                    FormType = SaleReport.StockInMonthly
+
                 Case "LayAway Payments Report"
                     FormType = SaleReport.LayAwayMontly
+
                 Case "Forfeit List"
                     FormType = SaleReport.ForfeitMonthly
             End Select
         End If
-       
+
+
         Select Case FormType
             Case SaleReport.Sale
                 SalesReport()
+
             Case SaleReport.SalesMonthly
                 SalesReportMonthly()
+
             Case SaleReport.Inventory
                 InventoryReport()
+
             Case SaleReport.StockOut
                 StockOutReport()
+
             Case SaleReport.StockOutMontly
                 StockOutMonthlyReport()
+
             Case SaleReport.LayAway
                 LayAwayReport()
+
             Case SaleReport.LayAwayMontly
                 LayAwayMonthlyReport()
+
             Case SaleReport.Forfeit
                 ForfeitReport()
+
             Case SaleReport.ForfeitMonthly
                 ForfeitMonthly()
+
             Case SaleReport.LayawayList
                 LayawayList()
+
+            Case SaleReport.StockIn
+                StockInReport()
+
+            Case SaleReport.StockInMonthly
+                StockInReportMonthly()
+
         End Select
 
     End Sub
@@ -152,7 +182,7 @@
         frmReport.Show()
     End Sub
 
-    Private Function NoFilter() As Boolean
+	Private Function NoFilter() As Boolean
         Select Case FormType
             Case SaleReport.Sale
                 Return True
@@ -169,7 +199,7 @@
         End Select
         Return False
     End Function
-        
+
 
     Private Sub frmSalesReport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If NoFilter() Then
@@ -181,14 +211,22 @@
         Select Case FormType
             Case SaleReport.Sale, SaleReport.SalesMonthly
                 Me.Text = "Sales Report"
+
             Case SaleReport.Inventory
                 Me.Text = "Inventory Report"
+
             Case SaleReport.StockOut, SaleReport.StockOutMontly
                 Me.Text = "StockOut Report"
+
             Case SaleReport.LayAway, SaleReport.LayAwayMontly, SaleReport.LayawayList
                 Me.Text = "LayAway Report"
+
             Case SaleReport.Forfeit, SaleReport.ForfeitMonthly
                 Me.Text = "Forfeit List"
+
+            Case SaleReport.StockIn
+                Me.Text = "Stock In Report"
+
         End Select
     End Sub
 
@@ -201,6 +239,7 @@
         Dim dic As New Dictionary(Of String, String)
         dic.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
         dic.Add("branchName", branchName)
+        dic.Add("txtStock", "Stock Out Report")
 
         frmReport.ReportInit(mySql, "dsStockOut", "Reports\rpt_StockOutReport.rdlc", dic)
         frmReport.Show()
@@ -218,6 +257,8 @@
         Dim dic As New Dictionary(Of String, String)
         dic.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
         dic.Add("branchName", branchName)
+        dic.Add("txtStock", "Stock Out Report")
+
 
         frmReport.ReportInit(mySql, "dsStockOut", "Reports\rpt_StockOutReport.rdlc", dic)
         frmReport.Show()
@@ -281,13 +322,27 @@
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
         mysql &= "WHERE L.STATUS = '0' AND L.FORFEITDATE = '" & monCal.SelectionStart.ToShortDateString & "'"
 
+ 	frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
+        frmReport.Show()
+    End Sub
+
+    Private Sub StockInReport()
+        Dim mySql As String
+        mySql = "SELECT I.REFNUM as CODE, I.PARTNER as CUSTOMER,  IL.ITEMCODE, "
+        mySql &= "IL.DESCRIPTION, IL.QTY "
+        mySql &= "FROM INVLINES IL INNER JOIN INV I ON I.DOCID = IL.DOCID "
+        mySql &= "Where I.DOCDATE = '" & monCal.SelectionStart.ToShortDateString & "'"
+
+
         Dim dic As New Dictionary(Of String, String)
         dic.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
         dic.Add("branchName", branchName)
+ 	dic.Add("txtStock", "Stock In Report")
 
-        frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
+        frmReport.ReportInit(mySql, "dsStockOut", "Reports\rpt_StockOutReport.rdlc", dic)
         frmReport.Show()
     End Sub
+       
 
     Private Sub ForfeitMonthly()
         Dim st As Date = GetFirstDate(monCal.SelectionStart)
@@ -301,11 +356,26 @@
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
         mysql &= "WHERE L.STATUS = '0' AND L.FORFEITDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "'"
 
-        Dim dic As New Dictionary(Of String, String)
+  	Dim dic As New Dictionary(Of String, String)
         dic.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
         dic.Add("branchName", branchName)
 
         frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
+        frmReport.Show()
+    End Sub
+
+    Private Sub StockInReportMonthly()
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionEnd)
+        Dim mySql As String
+        mySql = "SELECT I.REFNUM as CODE, I.PARTNER as CUSTOMER,  IL.ITEMCODE, "
+        mySql &= "IL.DESCRIPTION, IL.QTY "
+        mySql &= "FROM INVLINES IL INNER JOIN INV I ON I.DOCID = IL.DOCID "
+        mySql &= "Where I.DOCDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "' "
+
+ 	dic.Add("txtStock", "Stock In Report")
+
+        frmReport.ReportInit(mySql, "dsStockOut", "Reports\rpt_StockOutReport.rdlc", dic)
         frmReport.Show()
     End Sub
 
@@ -326,4 +396,26 @@
         frmReport.ReportInit(mysql, "dsLayawayList", "Reports\rpt_layawayList.rdlc", dic)
         frmReport.Show()
     End Sub
+
+
+    Private Function NoFilter() As Boolean
+        Select Case FormType
+            Case SaleReport.Sale
+                Return True
+            Case SaleReport.StockOut
+                Return True
+                'Case SaleReport.LayAway
+                '    Return True
+            Case SaleReport.Inventory
+                Return True
+            Case SaleReport.StockIn
+                Return True
+                'Case SaleReport.Forfeit
+                '    Return True
+                'Case SaleReport.LayawayList
+                '    Return True
+        End Select
+        Return False
+    End Function
+
 End Class

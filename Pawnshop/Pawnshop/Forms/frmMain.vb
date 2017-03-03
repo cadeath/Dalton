@@ -559,14 +559,21 @@
         frmSalesReport.Show()
     End Sub
 
+
     Private Sub LayawayReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LayawayReportToolStripMenuItem.Click
         frmSalesReport.FormType = frmSalesReport.SaleReport.LayAway
+	 frmSalesReport.Show()
+    End Sub
+
+    Private Sub StockInReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockIn
         frmSalesReport.Show()
     End Sub
 
     Private Sub MonthlyInventoryReportsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyInventoryReportsToolStripMenuItem.Click
         frmSalesReport.Show()
     End Sub
+
 
     Private Sub ForfeitReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForfeitReportToolStripMenuItem.Click
         frmSalesReport.FormType = frmSalesReport.SaleReport.Forfeit
@@ -577,4 +584,5 @@
         frmSalesReport.FormType = frmSalesReport.SaleReport.LayawayList
         frmSalesReport.Show()
     End Sub
+
 End Class
