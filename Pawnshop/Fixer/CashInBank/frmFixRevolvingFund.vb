@@ -126,7 +126,7 @@
             Case "SUB"
                 AccountCode = "_SYS00000001122"
             Case Else
-                MsgBox(Branch & " Not Found!", MsgBoxStyle.Critical, "ERROR PLEASE CONTACT MIS Dept") : Exit Sub
+                MsgBox(Branch & " NOT FOUND!", MsgBoxStyle.Critical, "ERROR PLEASE CONTACT MIS") : Application.Exit()
         End Select
 
         InsertSAPCount(AccountCode)
