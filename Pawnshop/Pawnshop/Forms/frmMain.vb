@@ -67,7 +67,7 @@
         SalesReportToolStripMenuItem.Enabled = Not st
         InventoryReportToolStripMenuItem.Enabled = Not st
         StockoutReportToolStripMenuItem.Enabled = Not st
-        LayawayReportToolStripMenuItem.Enabled = Not st
+        'LayawayReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -559,12 +559,6 @@
         frmSalesReport.Show()
     End Sub
 
-
-    Private Sub LayawayReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LayawayReportToolStripMenuItem.Click
-        frmSalesReport.FormType = frmSalesReport.SaleReport.LayAway
-	 frmSalesReport.Show()
-    End Sub
-
     Private Sub StockInReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInReportToolStripMenuItem.Click
         frmSalesReport.FormType = frmSalesReport.SaleReport.StockIn
         frmSalesReport.Show()
@@ -574,9 +568,8 @@
         frmSalesReport.Show()
     End Sub
 
-
-    Private Sub ForfeitReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForfeitReportToolStripMenuItem.Click
-        frmSalesReport.FormType = frmSalesReport.SaleReport.Forfeit
+    Private Sub LayawayPaymentReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LayawayPaymentReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.LayAway
         frmSalesReport.Show()
     End Sub
 
@@ -585,4 +578,8 @@
         frmSalesReport.Show()
     End Sub
 
+    Private Sub ForfeitLayawayReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForfeitLayawayReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.Forfeit
+        frmSalesReport.Show()
+    End Sub
 End Class

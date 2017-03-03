@@ -32,7 +32,7 @@
                 Case "StockOut Report"
                     FormType = SaleReport.StockOutMonthly
 
-		Case "StockIn Report"
+                Case "StockIn Report"
                     FormType = SaleReport.StockInMonthly
 
                 Case "LayAway Payments Report"
@@ -384,44 +384,24 @@
         frmReport.Show()
     End Sub
 
-
     Private Function NoFilter() As Boolean
         Select Case FormType
             Case SaleReport.Sale
                 Return True
             Case SaleReport.StockOut
                 Return True
-                'Case SaleReport.LayAway
-                '    Return True
+            Case SaleReport.LayAway
+                Return True
             Case SaleReport.Inventory
                 Return True
             Case SaleReport.StockIn
                 Return True
-                'Case SaleReport.Forfeit
-                '    Return True
-                'Case SaleReport.LayawayList
-                '    Return True
+            Case SaleReport.Forfeit
+                Return True
+            Case SaleReport.LayawayList
+                Return True
         End Select
         Return False
     End Function
-
-    'Private Function NoFilter() As Boolean
-    '       Select Case FormType
-    '           Case SaleReport.Sale
-    '               Return True
-    '           Case SaleReport.StockOut
-    '               Return True
-    '           Case SaleReport.LayAway
-    '               Return True
-    '           Case SaleReport.Inventory
-    '               Return True
-    '           Case SaleReport.Forfeit
-    '               Return True
-    '           Case SaleReport.LayawayList
-    '               Return True
-    '       End Select
-    '       Return False
-    '   End Function
-
 
 End Class
