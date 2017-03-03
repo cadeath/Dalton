@@ -1,12 +1,13 @@
 ﻿Public Class frmFixRevolvingFund
     Const DBPATH As String = "\W3W1LH4CKU.FDB"
+    Private AccountCode As String = String.Empty
 
     Private Sub btnFix_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFix.Click
         Disable(1)
         Try
             FixRevolvingFund()
 
-            MsgBox("Succesful Updated", MsgBoxStyle.Information, "System")
+            MsgBox("Account Code: " & AccountCode & " Succesful Updated", MsgBoxStyle.Information, "System")
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "E R R O R")
         End Try
@@ -32,11 +33,11 @@
 
     Private Sub FixRevolvingFund()
         Dim Branch As String = GetOption("BranchCode")
-        Dim AccountCode As String = String.Empty
+
         Select Case Branch
             Case "AL1"
                 AccountCode = "_SYS00000000054"
-            Case "Al2"
+            Case "AL2"
                 AccountCode = "_SYS00000000055"
             Case "CAG"
                 AccountCode = "_SYS00000000059"
@@ -125,7 +126,7 @@
             Case "SUB"
                 AccountCode = "_SYS00000001122"
             Case Else
-                MsgBox(Branch & " Not Found!", MsgBoxStyle.Critical, "ERROR") : Exit Sub
+                MsgBox(Branch & " Not Found!", MsgBoxStyle.Critical, "ERROR PLEASE CONTACT MIS Dept") : Exit Sub
         End Select
 
         InsertSAPCount(AccountCode)
