@@ -30,7 +30,7 @@
                     FormType = SaleReport.SalesMonthly
 
                 Case "StockOut Report"
-                    FormType = SaleReport.StockOutMontly
+                    FormType = SaleReport.StockOutMonthly
 
 		Case "StockIn Report"
                     FormType = SaleReport.StockInMonthly
@@ -57,7 +57,7 @@
             Case SaleReport.StockOut
                 StockOutReport()
 
-            Case SaleReport.StockOutMontly
+            Case SaleReport.StockOutMonthly
                 StockOutMonthlyReport()
 
             Case SaleReport.LayAway
@@ -182,25 +182,6 @@
         frmReport.Show()
     End Sub
 
-	Private Function NoFilter() As Boolean
-        Select Case FormType
-            Case SaleReport.Sale
-                Return True
-            Case SaleReport.StockOut
-                Return True
-            Case SaleReport.LayAway
-                Return True
-            Case SaleReport.Inventory
-                Return True
-            Case SaleReport.Forfeit
-                Return True
-            Case SaleReport.LayawayList
-                Return True
-        End Select
-        Return False
-    End Function
-
-
     Private Sub frmSalesReport_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If NoFilter() Then
             cboReportType.Visible = False
@@ -215,7 +196,7 @@
             Case SaleReport.Inventory
                 Me.Text = "Inventory Report"
 
-            Case SaleReport.StockOut, SaleReport.StockOutMontly
+            Case SaleReport.StockOut, SaleReport.StockOutMonthly
                 Me.Text = "StockOut Report"
 
             Case SaleReport.LayAway, SaleReport.LayAwayMontly, SaleReport.LayawayList
@@ -322,7 +303,31 @@
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
         mysql &= "WHERE L.STATUS = '0' AND L.FORFEITDATE = '" & monCal.SelectionStart.ToShortDateString & "'"
 
- 	frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
+        Dim dic As New Dictionary(Of String, String)
+        dic.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
+        dic.Add("branchName", branchName)
+
+        frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
+        frmReport.Show()
+    End Sub
+
+    Private Sub ForfeitMonthly()
+        Dim st As Date = GetFirstDate(monCal.SelectionStart)
+        Dim en As Date = GetLastDate(monCal.SelectionEnd)
+        Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
+        mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
+        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, L.BALANCE "
+        mysql &= "FROM TBLLAYAWAY L "
+        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
+        mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
+        mysql &= "WHERE L.STATUS = '0' AND L.FORFEITDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "'"
+
+        Dim dic As New Dictionary(Of String, String)
+        dic.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
+        dic.Add("branchName", branchName)
+
+        frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
         frmReport.Show()
     End Sub
 
@@ -337,30 +342,9 @@
         Dim dic As New Dictionary(Of String, String)
         dic.Add("txtMonthOf", monCal.SelectionStart.ToShortDateString)
         dic.Add("branchName", branchName)
- 	dic.Add("txtStock", "Stock In Report")
+        dic.Add("txtStock", "Stock In Report")
 
         frmReport.ReportInit(mySql, "dsStockOut", "Reports\rpt_StockOutReport.rdlc", dic)
-        frmReport.Show()
-    End Sub
-       
-
-    Private Sub ForfeitMonthly()
-        Dim st As Date = GetFirstDate(monCal.SelectionStart)
-        Dim en As Date = GetLastDate(monCal.SelectionEnd)
-        Dim mysql As String = "SELECT L.LAYID, L.DOCDATE, L.FORFEITDATE, "
-        mysql &= "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
-        mysql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
-        mysql &= "ITM.ITEMCODE, ITM.DESCRIPTION, L.PRICE, L.STATUS, L.BALANCE "
-        mysql &= "FROM TBLLAYAWAY L "
-        mysql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = L.CUSTOMERID "
-        mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = L.ITEMCODE "
-        mysql &= "WHERE L.STATUS = '0' AND L.FORFEITDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "'"
-
-  	Dim dic As New Dictionary(Of String, String)
-        dic.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
-        dic.Add("branchName", branchName)
-
-        frmReport.ReportInit(mysql, "dsForfeit", "Reports\rpt_ForfeitLayaway.rdlc", dic)
         frmReport.Show()
     End Sub
 
@@ -373,7 +357,10 @@
         mySql &= "FROM INVLINES IL INNER JOIN INV I ON I.DOCID = IL.DOCID "
         mySql &= "Where I.DOCDATE BETWEEN '" & st.ToShortDateString & "' AND '" & en.ToShortDateString & "' "
 
- 	dic.Add("txtStock", "Stock In Report")
+        Dim dic As New Dictionary(Of String, String)
+        dic.Add("txtMonthOf", "FOR THE MONTH OF " + st.ToString("MMMM yyyy"))
+        dic.Add("branchName", branchName)
+        dic.Add("txtStock", "Stock In Report")
 
         frmReport.ReportInit(mySql, "dsStockOut", "Reports\rpt_StockOutReport.rdlc", dic)
         frmReport.Show()
@@ -417,5 +404,24 @@
         End Select
         Return False
     End Function
+
+    'Private Function NoFilter() As Boolean
+    '       Select Case FormType
+    '           Case SaleReport.Sale
+    '               Return True
+    '           Case SaleReport.StockOut
+    '               Return True
+    '           Case SaleReport.LayAway
+    '               Return True
+    '           Case SaleReport.Inventory
+    '               Return True
+    '           Case SaleReport.Forfeit
+    '               Return True
+    '           Case SaleReport.LayawayList
+    '               Return True
+    '       End Select
+    '       Return False
+    '   End Function
+
 
 End Class
