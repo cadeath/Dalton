@@ -15,6 +15,8 @@
             AddItemMasterCoi()
             AddInsuranceCount()
 
+            ItemHistory()
+
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
         Catch ex As Exception
@@ -214,5 +216,17 @@
             End With
             SaveEntry(ds, False)
         End If
+    End Sub
+
+    Private Sub ItemHistory()
+        Dim ItemTable As String = "CREATE TABLE ITEM_HISTORY ( "
+        ItemTable &= "ID BIGINT NOT NULL, "
+        ItemTable &= "ITEM_ID INTEGER NOT NULL, "
+        ItemTable &= "REMARKS VARCHAR(50) CHARACTER SET NONE NOT NULL, "
+        ItemTable &= "DATE_CREATED TIMESTAMP NOT NULL, "
+        ItemTable &= "CREATED_BY VARCHAR(50) NOT NULL); "
+
+        RunCommand(ItemTable)
+        AutoIncrement_ID("ITEM_HISTORY", "ID")
     End Sub
 End Module

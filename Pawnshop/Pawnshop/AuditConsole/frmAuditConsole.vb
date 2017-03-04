@@ -87,69 +87,73 @@ Public Class frmAuditConsole
 
         If Not TemplateIntegrityCheck(checkHeaders) Then
             MsgBox("Template was tampered", MsgBoxStyle.Critical)
+            GoTo unloadObj
         End If
 
         Me.Enabled = False
+
+        Console.WriteLine("Checking ItemCode to be adjust....")
         For cnt = 2 To MaxEntries
-            Dim ImportedItem As New cItemData
-            With ImportedItem
-                Dim mysql As String = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & oSheet.Cells(cnt, 2).Value & "'"
-                Dim ds As DataSet = LoadSQL(mysql, "ITEMMASTER")
-
-                If ds.Tables(0).Rows.Count = 0 Then
-                    On Error Resume Next
-                Else
-                    Dim ONHAND As Integer = ds.Tables(0).Rows(0).Item("ONHAND")
-
-                    If oSheet.Cells(cnt, 5).value = "Y" Then
-
-                        Dim mysql_itm_Hist As String = "SELECT * FROM ITEM_HISTORY"
-                        Dim ds_itm_hist As DataSet = LoadSQL(mysql_itm_Hist, "ITEM_HISTORY")
-
-                        Dim dsnewrow As DataRow
-                        dsnewrow = ds_itm_hist.Tables(0).NewRow
-                        With dsnewrow
-                            .Item("ITEM_ID") = ds.Tables(0).Rows(0).Item("ItemID")
-                            .Item("ENDING_QTY") = ONHAND
-                            .Item("Date_Created") = Now
-                            .Item("Created_by") = POSuser.UserID
-                        End With
-                        ds_itm_hist.Tables(0).Rows.Add(dsnewrow)
-                        database.SaveEntry(ds_itm_hist)
-
-                        With ds.Tables(0).Rows(0)
-                            .Item("ONHAND") = 0
-                        End With
-                        database.SaveEntry(ds, False)
-
-                        With ds.Tables(0).Rows(0)
-                            .Item("UPDATE_TIME") = Now
-                            .Item("ONHAND") = oSheet.Cells(cnt, 4).value
-                        End With
-                        database.SaveEntry(ds, False)
-
-                    Else
-                        With ds.Tables(0).Rows(0)
-                            .Item("UPDATE_TIME") = Now
-                            .Item("ONHAND") = ONHAND + oSheet.Cells(cnt, 4).value
-                        End With
-                        database.SaveEntry(ds, False)
-                    End If
-                End If
-
-            End With
+            If Not CheckItemCode(oSheet.Cells(cnt, 2).Value) Then MsgBox("No ItemCode " & oSheet.Cells(cnt, 2).Value & " Found!", MsgBoxStyle.Critical, "Please Check ItemCode") : Exit Sub
         Next
+
+        Console.WriteLine("Adjusting Inventory....")
+        For cnt = 2 To MaxEntries
+
+            Dim mysql As String = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & oSheet.Cells(cnt, 2).Value & "'"
+            Dim ds As DataSet = LoadSQL(mysql, "ITEMMASTER")
+
+            Dim ONHAND As Integer = ds.Tables(0).Rows(0).Item("ONHAND")
+
+            Dim mysql_itm_Hist As String = "SELECT * FROM ITEM_HISTORY"
+            Dim ds_itm_hist As DataSet = LoadSQL(mysql_itm_Hist, "ITEM_HISTORY")
+
+            Dim dsnewrow As DataRow
+            dsnewrow = ds_itm_hist.Tables(0).NewRow
+            With dsnewrow
+                .Item("ITEM_ID") = ds.Tables(0).Rows(0).Item("ItemID")
+                .Item("Remarks") = "Old Qty " & ONHAND & " New Qty " & oSheet.Cells(cnt, 4).Value
+                .Item("Date_Created") = Now
+                .Item("Created_by") = POSuser.UserID
+            End With
+            ds_itm_hist.Tables(0).Rows.Add(dsnewrow)
+            database.SaveEntry(ds_itm_hist)
+
+            If oSheet.Cells(cnt, 5).value = "Y" Then
+
+                With ds.Tables(0).Rows(0)
+                    .Item("ONHAND") = 0
+                End With
+                database.SaveEntry(ds, False)
+
+                With ds.Tables(0).Rows(0)
+                    .Item("UPDATE_TIME") = Now
+                    .Item("ONHAND") = oSheet.Cells(cnt, 4).value
+                End With
+                database.SaveEntry(ds, False)
+
+            Else
+                With ds.Tables(0).Rows(0)
+                    .Item("UPDATE_TIME") = Now
+                    .Item("ONHAND") = ONHAND + oSheet.Cells(cnt, 4).value
+                End With
+                database.SaveEntry(ds, False)
+            End If
+
+        Next
+
         Me.Enabled = True
 
-
-        oSheet = Nothing
-        oWB = Nothing
-        oXL.Quit()
-        oXL = Nothing
 
         txtPath.Text = ""
 
         MsgBox("Adjustments successfully imported.", MsgBoxStyle.Information, "Adjustment")
+
+unloadObj:
+        oSheet = Nothing
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
 
     End Sub
 
@@ -172,5 +176,15 @@ Public Class frmAuditConsole
         End If
 
         Return False
+    End Function
+
+    Private Function CheckItemCode(ByVal itemCode As String) As Boolean
+        Dim mysql As String = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & itemCode & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "ITEMMASTER")
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return False
+        End If
+        Return True
     End Function
 End Class

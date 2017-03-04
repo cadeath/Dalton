@@ -353,7 +353,7 @@ Partial Class frmAuditConsole
         '
         'ofdINV_AD
         '
-        Me.ofdINV_AD.Filter = "Excel 2003|*.xls|Excel 2007|*.xlsx"
+        Me.ofdINV_AD.Filter = "Excel 2007|*.xlsx"
         '
         'frmAuditConsole
         '
