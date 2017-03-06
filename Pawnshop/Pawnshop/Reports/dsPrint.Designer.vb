@@ -333,11 +333,10 @@ Partial Public Class dsPrint
             End If
         End If
         Me.tableReceipt = CType(MyBase.Tables("Receipt"),ReceiptDataTable)
-        If (initTable = True) Then
-
-        End If
-        If (Not (Me.tableReceipt) Is Nothing) Then
-            Me.tableReceipt.InitVars()
+        If (initTable = true) Then
+            If (Not (Me.tableReceipt) Is Nothing) Then
+                Me.tableReceipt.InitVars
+            End If
         End If
     End Sub
     
@@ -492,7 +491,8 @@ Partial Public Class dsPrint
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class PawnTicketDataTable
-        Inherits Global.System.Data.TypedTableBase(Of PawnTicketRow)
+        Inherits Global.System.Data.DataTable
+        Implements Global.System.Collections.IEnumerable
         
         Private columnPawnID As Global.System.Data.DataColumn
         
@@ -818,6 +818,12 @@ Partial Public Class dsPrint
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overridable Function GetEnumerator() As Global.System.Collections.IEnumerator Implements Global.System.Collections.IEnumerable.GetEnumerator
+            Return Me.Rows.GetEnumerator
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Overrides Function Clone() As Global.System.Data.DataTable
             Dim cln As PawnTicketDataTable = CType(MyBase.Clone,PawnTicketDataTable)
             cln.InitVars
@@ -1039,7 +1045,8 @@ Partial Public Class dsPrint
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class Hourly_RecordsDataTable
-        Inherits Global.System.Data.TypedTableBase(Of Hourly_RecordsRow)
+        Inherits Global.System.Data.DataTable
+        Implements Global.System.Collections.IEnumerable
         
         Private columnMOD_NAME As Global.System.Data.DataColumn
         
@@ -1169,6 +1176,12 @@ Partial Public Class dsPrint
             rowHourly_RecordsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowHourly_RecordsRow)
             Return rowHourly_RecordsRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overridable Function GetEnumerator() As Global.System.Collections.IEnumerator Implements Global.System.Collections.IEnumerable.GetEnumerator
+            Return Me.Rows.GetEnumerator
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1343,7 +1356,8 @@ Partial Public Class dsPrint
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class DT_HOURLYDataTable
-        Inherits Global.System.Data.TypedTableBase(Of DT_HOURLYRow)
+        Inherits Global.System.Data.DataTable
+        Implements Global.System.Collections.IEnumerable
         
         Private columnLOGS_ID As Global.System.Data.DataColumn
         
@@ -1483,6 +1497,12 @@ Partial Public Class dsPrint
             rowDT_HOURLYRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowDT_HOURLYRow)
             Return rowDT_HOURLYRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overridable Function GetEnumerator() As Global.System.Collections.IEnumerator Implements Global.System.Collections.IEnumerable.GetEnumerator
+            Return Me.Rows.GetEnumerator
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1660,7 +1680,8 @@ Partial Public Class dsPrint
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class DT_HOURLY2DataTable
-        Inherits Global.System.Data.TypedTableBase(Of DT_HOURLY2Row)
+        Inherits Global.System.Data.DataTable
+        Implements Global.System.Collections.IEnumerable
         
         Private columnDT_HOUR As Global.System.Data.DataColumn
         
@@ -1760,6 +1781,12 @@ Partial Public Class dsPrint
             rowDT_HOURLY2Row.ItemArray = columnValuesArray
             Me.Rows.Add(rowDT_HOURLY2Row)
             Return rowDT_HOURLY2Row
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overridable Function GetEnumerator() As Global.System.Collections.IEnumerator Implements Global.System.Collections.IEnumerable.GetEnumerator
+            Return Me.Rows.GetEnumerator
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1925,7 +1952,8 @@ Partial Public Class dsPrint
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class NEWLOAN_RENEWDataTable
-        Inherits Global.System.Data.TypedTableBase(Of NEWLOAN_RENEWRow)
+        Inherits Global.System.Data.DataTable
+        Implements Global.System.Collections.IEnumerable
         
         Private columnLOANDATE As Global.System.Data.DataColumn
         
@@ -2095,6 +2123,12 @@ Partial Public Class dsPrint
             rowNEWLOAN_RENEWRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowNEWLOAN_RENEWRow)
             Return rowNEWLOAN_RENEWRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overridable Function GetEnumerator() As Global.System.Collections.IEnumerator Implements Global.System.Collections.IEnumerable.GetEnumerator
+            Return Me.Rows.GetEnumerator
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2281,7 +2315,8 @@ Partial Public Class dsPrint
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class POS_INVENTORYDataTable
-        Inherits Global.System.Data.TypedTableBase(Of POS_INVENTORYRow)
+        Inherits Global.System.Data.DataTable
+        Implements Global.System.Collections.IEnumerable
         
         Private columnITEMCODE As Global.System.Data.DataColumn
         
@@ -2421,6 +2456,12 @@ Partial Public Class dsPrint
             rowPOS_INVENTORYRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPOS_INVENTORYRow)
             Return rowPOS_INVENTORYRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overridable Function GetEnumerator() As Global.System.Collections.IEnumerator Implements Global.System.Collections.IEnumerable.GetEnumerator
+            Return Me.Rows.GetEnumerator
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2598,7 +2639,8 @@ Partial Public Class dsPrint
     <Global.System.Serializable(),  _
      Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
     Partial Public Class ReceiptDataTable
-        Inherits Global.System.Data.TypedTableBase(Of ReceiptRow)
+        Inherits Global.System.Data.DataTable
+        Implements Global.System.Collections.IEnumerable
         
         Private columnDocID As Global.System.Data.DataColumn
         
@@ -2865,6 +2907,12 @@ Partial Public Class dsPrint
             rowReceiptRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowReceiptRow)
             Return rowReceiptRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overridable Function GetEnumerator() As Global.System.Collections.IEnumerator Implements Global.System.Collections.IEnumerable.GetEnumerator
+            Return Me.Rows.GetEnumerator
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

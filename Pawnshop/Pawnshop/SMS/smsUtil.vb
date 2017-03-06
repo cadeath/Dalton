@@ -5,7 +5,7 @@ Imports OneApi.Config
 Module smsUtil
 
     Private _user As String = "Eskie"
-    Private _password As String = "eskie123"
+    Private _password As String = "eskiegwapo123"
     Private _sender As String = "PGC"
 
     Friend Sub SendSMS(ByVal num As String, ByVal msg As String)
