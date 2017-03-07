@@ -2,8 +2,9 @@
 Public Class frmAuditConsole
 
     Private MEMO_MINIMUM As Double = 5000
-    Const INTEGRITY_CHECK As String = "tk8Gi7kcqIdbdWq8mdFv1wWG5XwYy98lfHcRNWxKmkhtgtBTpA2FaO9L3uAViOHu"
-
+    Const INTEGRITY_CHECK As String = "tk8Gi7kcqIdbdWq8mdFv1wWG5XwYy98lrnLcjMltIjCKoPcEu9xqIQ=="
+    Private ItemHT As New Hashtable
+    Private ORNUM As Double = GetOption("InvoiceNum")
 
     Private Sub btnVault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVault.Click
         Dim AMOUNT_MIN As Double
@@ -59,6 +60,7 @@ Public Class frmAuditConsole
     End Sub
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+        ItemHT.Clear()
         Inv_adjustment()
     End Sub
 
@@ -92,58 +94,135 @@ Public Class frmAuditConsole
 
         Me.Enabled = False
 
-        Console.WriteLine("Checking ItemCode to be adjust....")
         For cnt = 2 To MaxEntries
+            ItemHT.Add(oSheet.Cells(cnt, 2).Value, oSheet.Cells(cnt, 4).Value)
             If Not CheckItemCode(oSheet.Cells(cnt, 2).Value) Then MsgBox("No ItemCode " & oSheet.Cells(cnt, 2).Value & " Found!", MsgBoxStyle.Critical, "Please Check ItemCode") : Exit Sub
         Next
 
-        Console.WriteLine("Adjusting Inventory....")
-        For cnt = 2 To MaxEntries
+        If chkZeroOut.Checked = True Then
 
-            Dim mysql As String = "SELECT * FROM ITEMMASTER WHERE ITEMCODE = '" & oSheet.Cells(cnt, 2).Value & "'"
-            Dim ds As DataSet = LoadSQL(mysql, "ITEMMASTER")
+            Dim mySql As String = "SELECT * FROM DOC ROWS 1"
+            Dim fillData As String = "DOC"
 
-            Dim ONHAND As Integer = ds.Tables(0).Rows(0).Item("ONHAND")
+            Dim ds As DataSet = LoadSQL(mySql, fillData)
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(fillData).NewRow
 
-            Dim mysql_itm_Hist As String = "SELECT * FROM ITEM_HISTORY"
-            Dim ds_itm_hist As DataSet = LoadSQL(mysql_itm_Hist, "ITEM_HISTORY")
-
-            Dim dsnewrow As DataRow
-            dsnewrow = ds_itm_hist.Tables(0).NewRow
-            With dsnewrow
-                .Item("ITEM_ID") = ds.Tables(0).Rows(0).Item("ItemID")
-                .Item("Remarks") = "Old Qty " & ONHAND & " New Qty " & oSheet.Cells(cnt, 4).Value
-                .Item("Date_Created") = Now
-                .Item("Created_by") = POSuser.UserID
+            With dsNewRow
+                .Item("DOCTYPE") = 4
+                .Item("CODE") = String.Format("{1}#{0:000000}", ORNUM, "STO")
+                .Item("MOP") = "S"
+                .Item("CUSTOMER") = "01"
+                .Item("DOCDATE") = CurrentDate
+                .Item("USERID") = POSuser.UserID
+                .Item("REMARKS") = "Adjust"
             End With
-            ds_itm_hist.Tables(0).Rows.Add(dsnewrow)
-            database.SaveEntry(ds_itm_hist)
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
 
-            If oSheet.Cells(cnt, 5).value = "Y" Then
+            Dim DOCID As Integer = 0
+            mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
+            ds = LoadSQL(mySql, fillData)
+            DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
 
-                With ds.Tables(0).Rows(0)
-                    .Item("ONHAND") = 0
+            Dim onHand As Double = 0
+
+            For cnt = 2 To MaxEntries
+                mySql = "Select * From ItemMaster Where ItemCode = '" & oSheet.Cells(cnt, 2).Value & "'"
+                ds = LoadSQL(mySql, "ItemMaster")
+                onHand = ds.Tables(0).Rows(0).Item("ONHAND")
+
+                mySql = "SELECT * FROM DOCLINES ROWS 1"
+                fillData = "DOCLINES"
+                ds = LoadSQL(mySql, fillData)
+                dsNewRow = ds.Tables(fillData).NewRow
+                With dsNewRow
+                    .Item("DOCID") = DOCID
+                    .Item("ITEMCODE") = oSheet.Cells(cnt, 2).Value
+                    .Item("DESCRIPTION") = oSheet.Cells(cnt, 3).Value
+                    .Item("QTY") = onHand
                 End With
-                database.SaveEntry(ds, False)
+                ds.Tables(fillData).Rows.Add(dsNewRow)
+                database.SaveEntry(ds)
+                InventoryController.DeductInventory(oSheet.Cells(cnt, 2).Value, onHand)
+            Next
 
-                With ds.Tables(0).Rows(0)
-                    .Item("UPDATE_TIME") = Now
-                    .Item("ONHAND") = oSheet.Cells(cnt, 4).value
+            mySql = "SELECT * FROM INV ROWS 1"
+            ds = LoadSQL(mySql, "INV")
+            dsNewRow = ds.Tables(0).NewRow
+            With dsNewRow
+                .Item("DOCNUM") = CurrentDate.ToString("ddMMyyyy") 'Date number
+                .Item("DOCDATE") = CurrentDate
+                .Item("PARTNER") = "HEAD OFFICE"
+                .Item("REFNUM") = CurrentDate.ToString("ddMMyyyy")
+            End With
+            ds.Tables("INV").Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+
+            mySql = "SELECT * FROM INV ORDER BY DOCID DESC ROWS 1"
+            ds = LoadSQL(mySql)
+            DOCID = ds.Tables(0).Rows(0).Item("DOCID")
+
+            For cnt = 2 To MaxEntries
+                ' Add Document Lines
+                mySql = "SELECT * FROM INVLINES ROWS 1"
+                ds = LoadSQL(mySql, "INVLINES")
+                dsNewRow = ds.Tables(0).NewRow
+                With dsNewRow
+                    .Item("DOCID") = DOCID
+                    .Item("ITEMCODE") = oSheet.Cells(cnt, 2).Value
+                    .Item("DESCRIPTION") = oSheet.Cells(cnt, 3).Value
+                    .Item("QTY") = oSheet.Cells(cnt, 4).Value
+                    .Item("REMARKS") = "UPLOADED DATED " & CurrentDate
                 End With
-                database.SaveEntry(ds, False)
+                ds.Tables("INVLINES").Rows.Add(dsNewRow)
+                database.SaveEntry(ds)
 
-            Else
-                With ds.Tables(0).Rows(0)
-                    .Item("UPDATE_TIME") = Now
-                    .Item("ONHAND") = ONHAND + oSheet.Cells(cnt, 4).value
+                AddInventory(oSheet.Cells(cnt, 2).Value, oSheet.Cells(cnt, 4).Value)
+            Next
+        Else
+            Dim mysql As String
+            Dim ds As DataSet
+            Dim dsNewRow As DataRow
+            Dim DOCID As Integer
+            mySql = "SELECT * FROM INV ROWS 1"
+            ds = LoadSQL(mySql, "INV")
+            dsNewRow = ds.Tables(0).NewRow
+            With dsNewRow
+                .Item("DOCNUM") = CurrentDate.ToString("ddMMyyyy") 'Date number
+                .Item("DOCDATE") = CurrentDate
+                .Item("PARTNER") = "HEAD OFFICE"
+                .Item("REFNUM") = CurrentDate.ToString("ddMMyyyy")
+            End With
+            ds.Tables("INV").Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+
+            mySql = "SELECT * FROM INV ORDER BY DOCID DESC ROWS 1"
+            ds = LoadSQL(mySql)
+            DOCID = ds.Tables(0).Rows(0).Item("DOCID")
+
+            For cnt = 2 To MaxEntries
+                ' Add Document Lines
+                mySql = "SELECT * FROM INVLINES ROWS 1"
+                ds = LoadSQL(mySql, "INVLINES")
+                dsNewRow = ds.Tables(0).NewRow
+                With dsNewRow
+                    .Item("DOCID") = DOCID
+                    .Item("ITEMCODE") = oSheet.Cells(cnt, 2).Value
+                    .Item("DESCRIPTION") = oSheet.Cells(cnt, 3).Value
+                    .Item("QTY") = oSheet.Cells(cnt, 4).Value
+                    .Item("REMARKS") = "UPLOADED DATED " & CurrentDate
                 End With
-                database.SaveEntry(ds, False)
-            End If
+                ds.Tables("INVLINES").Rows.Add(dsNewRow)
+                database.SaveEntry(ds)
 
-        Next
+                AddInventory(oSheet.Cells(cnt, 2).Value, oSheet.Cells(cnt, 4).Value)
+            Next
+
+        End If
+
 
         Me.Enabled = True
-
 
         txtPath.Text = ""
 

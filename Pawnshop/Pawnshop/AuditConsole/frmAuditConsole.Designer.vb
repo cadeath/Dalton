@@ -52,6 +52,7 @@ Partial Class frmAuditConsole
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.ofdINV_AD = New System.Windows.Forms.OpenFileDialog()
+        Me.chkZeroOut = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -305,6 +306,7 @@ Partial Class frmAuditConsole
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.chkZeroOut)
         Me.GroupBox4.Controls.Add(Me.btnImport)
         Me.GroupBox4.Controls.Add(Me.txtPath)
         Me.GroupBox4.Controls.Add(Me.Label7)
@@ -354,6 +356,16 @@ Partial Class frmAuditConsole
         'ofdINV_AD
         '
         Me.ofdINV_AD.Filter = "Excel 2007|*.xlsx"
+        '
+        'chkZeroOut
+        '
+        Me.chkZeroOut.AutoSize = True
+        Me.chkZeroOut.Location = New System.Drawing.Point(42, 52)
+        Me.chkZeroOut.Name = "chkZeroOut"
+        Me.chkZeroOut.Size = New System.Drawing.Size(115, 17)
+        Me.chkZeroOut.TabIndex = 4
+        Me.chkZeroOut.Text = "Inventory Zero Out"
+        Me.chkZeroOut.UseVisualStyleBackColor = True
         '
         'frmAuditConsole
         '
@@ -410,4 +422,5 @@ Partial Class frmAuditConsole
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents btnBrowse As System.Windows.Forms.Button
     Friend WithEvents ofdINV_AD As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents chkZeroOut As System.Windows.Forms.CheckBox
 End Class
