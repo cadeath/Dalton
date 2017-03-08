@@ -59,7 +59,9 @@ Public Class frmAuditConsole
     End Sub
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
+        btnImport.Enabled = False
         Inv_adjustment()
+        btnImport.Enabled = True
     End Sub
 
     Private Sub Inv_adjustment()
@@ -90,12 +92,10 @@ Public Class frmAuditConsole
             GoTo unloadObj
         End If
 
-        Me.Enabled = False
         Dim RefNum As Integer
-
         For cnt = 2 To MaxEntries
             RefNum = oSheet.Cells(cnt, 5).Value
-            If Not CheckSTO(RefNum) Then Exit Sub
+            If Not CheckSTO(RefNum) Then MsgBox("Please Check STO", MsgBoxStyle.Critical, "Error") : Exit Sub
             If Not CheckItemCode(oSheet.Cells(cnt, 2).Value) Then MsgBox("No ItemCode " & oSheet.Cells(cnt, 2).Value & " Found!", MsgBoxStyle.Critical, "Please Check ItemCode") : Exit Sub
         Next
 
@@ -236,7 +236,6 @@ unloadObj:
         oWB = Nothing
         oXL.Quit()
         oXL = Nothing
-
     End Sub
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
@@ -275,7 +274,7 @@ unloadObj:
         Dim fillData As String = "Inv"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
 
-        If ds.Tables(0).Rows.Count >= 1 Then MsgBox("Please Check STO", MsgBoxStyle.Critical, "Error") : Return False
+        If ds.Tables(0).Rows.Count >= 1 Then Return False
         Return True
     End Function
 End Class
