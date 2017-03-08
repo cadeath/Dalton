@@ -11,6 +11,7 @@
 
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
+        btnOK.Enabled = False
         Try
 
             If Not isValid() Then Exit Sub
@@ -23,9 +24,11 @@
             MsgBox("Item Posted", MsgBoxStyle.Information, "LayAway")
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
-             End Try
+        End Try
         Me.Close()
+        btnOK.Enabled = True
     End Sub
+
 
     Private Sub frmLayAway_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearText()
