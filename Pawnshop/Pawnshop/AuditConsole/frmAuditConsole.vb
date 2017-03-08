@@ -2,7 +2,7 @@
 Public Class frmAuditConsole
 
     Private MEMO_MINIMUM As Double = 5000
-    Const INTEGRITY_CHECK As String = "tk8Gi7kcqIdbdWq8mdFv1wWG5XwYy98lrnLcjMltIjCKoPcEu9xqIQ=="
+    Const INTEGRITY_CHECK As String = "tk8Gi7kcqIdbdWq8mdFv1wWG5XwYy98lrnLcjMltIjBjURKuzj/j5maX2T5tuE6g"
     Private STONum As Double = GetOption("STONum")
 
     Private Sub btnVault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVault.Click
@@ -64,7 +64,6 @@ Public Class frmAuditConsole
 
     Private Sub Inv_adjustment()
         If txtPath.Text = "" Then Exit Sub
-        If Not CheckSTO(CurrentDate.ToString("ddMMyyyy")) Then Exit Sub
 
         If MsgBox("Do you want to import this adjustments?", _
                     MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information) = vbYesNo Then
@@ -92,8 +91,11 @@ Public Class frmAuditConsole
         End If
 
         Me.Enabled = False
+        Dim RefNum As Integer
 
         For cnt = 2 To MaxEntries
+            RefNum = oSheet.Cells(cnt, 5).Value
+            If Not CheckSTO(RefNum) Then Exit Sub
             If Not CheckItemCode(oSheet.Cells(cnt, 2).Value) Then MsgBox("No ItemCode " & oSheet.Cells(cnt, 2).Value & " Found!", MsgBoxStyle.Critical, "Please Check ItemCode") : Exit Sub
         Next
 
@@ -150,10 +152,10 @@ Public Class frmAuditConsole
             ds = LoadSQL(mySql, "INV")
             dsNewRow = ds.Tables(0).NewRow
             With dsNewRow
-                .Item("DOCNUM") = CurrentDate.ToString("ddMMyyyy") 'Date number
+                .Item("DOCNUM") = RefNum
                 .Item("DOCDATE") = CurrentDate
                 .Item("PARTNER") = "HEAD OFFICE"
-                .Item("REFNUM") = CurrentDate.ToString("ddMMyyyy")
+                .Item("REFNUM") = RefNum
             End With
             ds.Tables("INV").Rows.Add(dsNewRow)
             database.SaveEntry(ds)
@@ -190,10 +192,10 @@ Public Class frmAuditConsole
             ds = LoadSQL(mySql, "INV")
             dsNewRow = ds.Tables(0).NewRow
             With dsNewRow
-                .Item("DOCNUM") = CurrentDate.ToString("ddMMyyyy") 'Date number
+                .Item("DOCNUM") = RefNum
                 .Item("DOCDATE") = CurrentDate
                 .Item("PARTNER") = "HEAD OFFICE"
-                .Item("REFNUM") = CurrentDate.ToString("ddMMyyyy")
+                .Item("REFNUM") = RefNum
             End With
             ds.Tables("INV").Rows.Add(dsNewRow)
             database.SaveEntry(ds)
