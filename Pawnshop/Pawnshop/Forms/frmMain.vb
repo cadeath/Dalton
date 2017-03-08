@@ -508,7 +508,8 @@
             Else
                 frmAuditConsole.Show()
             End If
-
+        Else
+            frmAuditConsole.Show()
         End If
 
     End Sub
