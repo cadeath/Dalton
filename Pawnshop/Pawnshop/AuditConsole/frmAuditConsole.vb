@@ -3,8 +3,7 @@ Public Class frmAuditConsole
 
     Private MEMO_MINIMUM As Double = 5000
     Const INTEGRITY_CHECK As String = "tk8Gi7kcqIdbdWq8mdFv1wWG5XwYy98lrnLcjMltIjCKoPcEu9xqIQ=="
-    Private ItemHT As New Hashtable
-    Private ORNUM As Double = GetOption("InvoiceNum")
+    Private STONum As Double = GetOption("STONum")
 
     Private Sub btnVault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVault.Click
         Dim AMOUNT_MIN As Double
@@ -60,12 +59,12 @@ Public Class frmAuditConsole
     End Sub
 
     Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
-        ItemHT.Clear()
         Inv_adjustment()
     End Sub
 
     Private Sub Inv_adjustment()
         If txtPath.Text = "" Then Exit Sub
+        If Not CheckSTO(CurrentDate.ToString("ddMMyyyy")) Then Exit Sub
 
         If MsgBox("Do you want to import this adjustments?", _
                     MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information) = vbYesNo Then
@@ -95,7 +94,6 @@ Public Class frmAuditConsole
         Me.Enabled = False
 
         For cnt = 2 To MaxEntries
-            ItemHT.Add(oSheet.Cells(cnt, 2).Value, oSheet.Cells(cnt, 4).Value)
             If Not CheckItemCode(oSheet.Cells(cnt, 2).Value) Then MsgBox("No ItemCode " & oSheet.Cells(cnt, 2).Value & " Found!", MsgBoxStyle.Critical, "Please Check ItemCode") : Exit Sub
         Next
 
@@ -110,7 +108,7 @@ Public Class frmAuditConsole
 
             With dsNewRow
                 .Item("DOCTYPE") = 4
-                .Item("CODE") = String.Format("{1}#{0:000000}", ORNUM, "STO")
+                .Item("CODE") = String.Format("{1}#{0:000000}", STONum, "STO")
                 .Item("MOP") = "S"
                 .Item("CUSTOMER") = "01"
                 .Item("DOCDATE") = CurrentDate
@@ -144,7 +142,8 @@ Public Class frmAuditConsole
                 End With
                 ds.Tables(fillData).Rows.Add(dsNewRow)
                 database.SaveEntry(ds)
-                InventoryController.DeductInventory(oSheet.Cells(cnt, 2).Value, onHand)
+                DeductInventory(oSheet.Cells(cnt, 2).Value, onHand)
+
             Next
 
             mySql = "SELECT * FROM INV ROWS 1"
@@ -180,6 +179,8 @@ Public Class frmAuditConsole
 
                 AddInventory(oSheet.Cells(cnt, 2).Value, oSheet.Cells(cnt, 4).Value)
             Next
+            STONum += 1
+            UpdateOptions("STONum", STONum)
         Else
             Dim mysql As String
             Dim ds As DataSet
@@ -264,6 +265,15 @@ unloadObj:
         If ds.Tables(0).Rows.Count = 0 Then
             Return False
         End If
+        Return True
+    End Function
+
+    Private Function CheckSTO(ByVal DocNum As Integer) As Boolean
+        Dim mysql As String = "Select * From Inv Where DocNum = '" & DocNum & "'"
+        Dim fillData As String = "Inv"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+
+        If ds.Tables(0).Rows.Count >= 1 Then MsgBox("Please Check STO", MsgBoxStyle.Critical, "Error") : Return False
         Return True
     End Function
 End Class

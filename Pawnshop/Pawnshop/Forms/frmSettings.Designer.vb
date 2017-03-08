@@ -59,6 +59,8 @@ Partial Class frmSettings
         Me.printerPT = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtSTONum = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -240,6 +242,8 @@ Partial Class frmSettings
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtSTONum)
+        Me.GroupBox1.Controls.Add(Me.Label15)
         Me.GroupBox1.Controls.Add(Me.txtCashInvoice)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.txtMRNum)
@@ -256,7 +260,7 @@ Partial Class frmSettings
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Location = New System.Drawing.Point(293, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(230, 236)
+        Me.GroupBox1.Size = New System.Drawing.Size(230, 271)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Next Control Number"
@@ -445,6 +449,25 @@ Partial Class frmSettings
         Me.Label7.TabIndex = 17
         Me.Label7.Text = "Pawn Ticket"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(17, 218)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(67, 16)
+        Me.Label15.TabIndex = 27
+        Me.Label15.Text = "STO Num"
+        '
+        'txtSTONum
+        '
+        Me.txtSTONum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSTONum.Location = New System.Drawing.Point(110, 215)
+        Me.txtSTONum.Name = "txtSTONum"
+        Me.txtSTONum.Size = New System.Drawing.Size(100, 22)
+        Me.txtSTONum.TabIndex = 28
+        Me.txtSTONum.Text = "35"
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -505,4 +528,6 @@ Partial Class frmSettings
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents lblSAP02 As System.Windows.Forms.Label
     Friend WithEvents txtCustomerCode As System.Windows.Forms.TextBox
+    Friend WithEvents txtSTONum As System.Windows.Forms.TextBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
 End Class

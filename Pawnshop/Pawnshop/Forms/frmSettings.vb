@@ -51,6 +51,7 @@
         txtMENum.Text = GetOption("MEnumLast")
         txtMRNum.Text = GetOption("MRNumLast")
         txtCashInvoice.Text = GetOption("InvoiceNum")
+        txtSTONum.Text = GetOption("STONum")
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -106,6 +107,7 @@
         UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
         UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
         UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
+        UpdateOptions("STONum", txtSTONum.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)
