@@ -141,6 +141,8 @@
         mysql &= "INNER JOIN ITEMMASTER ITM ON ITM.ITEMCODE = LY.ITEMCODE "
         mysql &= "WHERE LY.BALANCE <> 0 AND LY.ITEMCODE = '" & ItemCode & "' "
         Dim ds As DataSet = LoadSQL(mysql)
+        If ds.Tables(0).Rows.Count = 0 Then MsgBox("ItemCode Not Found!", MsgBoxStyle.Critical, "Error") : Exit Sub
+
         With ds.Tables(0).Rows(0)
             Customer = New Client
             Customer.LoadClient(.Item("CUSTOMERID"))
