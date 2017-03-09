@@ -28,7 +28,13 @@
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
         AccountingExtractToolStripMenuItem.Enabled = Not st
+        SalesToolStripMenuItem.Enabled = Not st
+        StockInToolStripMenuItem.Enabled = Not st
+        ItemMasterDataToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
+        SalesToolStripMenuItem.Enabled = Not st
+        StockInToolStripMenuItem.Enabled = Not st
+        ItemMasterDataToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -56,6 +62,9 @@
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
         VoidReportToolStripMenuItem.Enabled = Not st
+        SalesReportToolStripMenuItem.Enabled = Not st
+        InventoryReportToolStripMenuItem.Enabled = Not st
+        StockoutReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -246,6 +255,15 @@
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
             POSuser = Nothing
+            Dim formNames As New List(Of String)
+            For Each Form In My.Application.OpenForms
+                If Form.Name <> "frmMain" Or Not Form.name <> "frmLogin" Then
+                    formNames.Add(Form.Name)
+                End If
+            Next
+            For Each currentFormName As String In formNames
+                Application.OpenForms(currentFormName).Close()
+            Next
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
             frmLogin.Show()
@@ -285,7 +303,7 @@
             Exit Sub
         End If
 
-        '  frmSales.Show()
+        frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
@@ -499,5 +517,45 @@
         ExtractDataFromDatabase.ShowDialog()
     End Sub
 
+    Private Sub SalesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesToolStripMenuItem.Click
+        frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
+        frmExtractor.Show()
+    End Sub
 
+    Private Sub SalesReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.Sale
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub InventoryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InventoryReportToolStripMenuItem.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.Inventory
+            If Not CheckOTP() Then Exit Sub
+        Else
+            frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
+            frmSalesReport.Show()
+        End If
+    End Sub
+
+    Private Sub StockInToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInToolStripMenuItem.Click
+        frmInventory.Show()
+    End Sub
+
+    Private Sub ItemMasterDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemMasterDataToolStripMenuItem.Click
+        frmImport_IMD.Show()
+    End Sub
+
+    Private Sub StockoutReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockoutReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockOut
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub StockInReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockIn
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub MonthlyInventoryReportsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyInventoryReportsToolStripMenuItem.Click
+        frmSalesReport.Show()
+    End Sub
 End Class

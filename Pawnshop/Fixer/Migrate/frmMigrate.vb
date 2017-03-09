@@ -367,7 +367,7 @@ Public Class frmMigrate
             Dim MigEarlyRedeem As Integer = dr.Item("EarlyRedeem")
             Dim MigDayOverDue As Integer = dr.Item("DaysOverDue")
             Dim MigRenewCount As Integer = dr.Item("RenewalCnt")
-            Dim MigCheckSum As String
+            Dim MigCheckSum As String = ""
             If Not IsDBNull(dr.Item("int_checksum")) Then MigCheckSum = dr.Item("int_checksum")
 
             'Search OldTicket in OPT

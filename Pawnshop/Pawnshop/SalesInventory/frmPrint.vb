@@ -146,29 +146,33 @@ Public Class frmPrint
         If ds.Tables(0).Rows(0).Item("DOCTYPE") = "0" Or ds.Tables(0).Rows(0).Item("DOCTYPE") = "1" Then isSales = True
 
         Dim EncoderID As String = ds.Tables(0).Rows(0).Item("USERID")
-        Dim TransactionName As String = "SALES"
+        Dim TransactionName As String
         Dim NewOtp As New ClassOtp("VOID SALES", diagOTP.txtPIN.Text, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
-
-        ds.Clear()
-        mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
-        ds = LoadSQL(mysql, "Doclines")
-
-        If isSales = False Then
-            For Each dr As DataRow In ds.Tables(0).Rows
-                AddItemOnMaster(dr)
-                TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "Doclines ID: " & dr.Item("DLID"))
-                RemoveJournal(dr.Item("DLID"), , TransactionName)
-            Next
+        If isSales = True Then
+            TransactionName = "SALES"
         Else
-            For Each dr As DataRow In ds.Tables(0).Rows
-                AddItemOnMaster(dr, True)
-                TransactionVoidSave("RECALL", EncoderID, POSuser.UserID, "Doclines ID: " & dr.Item("DLID"))
-                RemoveJournal(dr.Item("DLID"), , "RECALL")
-                RemoveJournal(dr.Item("DLID"), , "COSRECALL")
-            Next
+            TransactionName = "RECALL"
         End If
-        'MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
-        Me.Close()
+            TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
+
+            ds.Clear()
+            mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
+            ds = LoadSQL(mysql, "Doclines")
+
+            If isSales = True Then
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    AddItemOnMaster(dr)
+                    RemoveJournal(dr.Item("DLID"), , TransactionName)
+                Next
+            Else
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    AddItemOnMaster(dr, True)
+                    RemoveJournal(dr.Item("DLID"), , "RECALL")
+                    RemoveJournal(dr.Item("DLID"), , "COSRECALL")
+                Next
+            End If
+            'MsgBox("Transaction VOIDED", MsgBoxStyle.Information)
+            Me.Close()
     End Sub
 
     Private Sub AddItemOnMaster(ByVal dr As DataRow, Optional ByVal isSale As Boolean = False)

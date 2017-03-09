@@ -23,6 +23,8 @@ Partial Class frmSettings
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblSAP02 = New System.Windows.Forms.Label()
+        Me.txtCustomerCode = New System.Windows.Forms.TextBox()
         Me.txtCashInBank = New System.Windows.Forms.TextBox()
         Me.lblSAP01 = New System.Windows.Forms.Label()
         Me.txtRevolving = New System.Windows.Forms.TextBox()
@@ -64,6 +66,8 @@ Partial Class frmSettings
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.lblSAP02)
+        Me.GroupBox2.Controls.Add(Me.txtCustomerCode)
         Me.GroupBox2.Controls.Add(Me.txtCashInBank)
         Me.GroupBox2.Controls.Add(Me.lblSAP01)
         Me.GroupBox2.Controls.Add(Me.txtRevolving)
@@ -78,10 +82,29 @@ Partial Class frmSettings
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(275, 236)
+        Me.GroupBox2.Size = New System.Drawing.Size(275, 286)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Branch"
+        '
+        'lblSAP02
+        '
+        Me.lblSAP02.AutoSize = True
+        Me.lblSAP02.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSAP02.Location = New System.Drawing.Point(7, 230)
+        Me.lblSAP02.Name = "lblSAP02"
+        Me.lblSAP02.Size = New System.Drawing.Size(101, 16)
+        Me.lblSAP02.TabIndex = 22
+        Me.lblSAP02.Text = "Customer Code"
+        '
+        'txtCustomerCode
+        '
+        Me.txtCustomerCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCustomerCode.Location = New System.Drawing.Point(6, 249)
+        Me.txtCustomerCode.Name = "txtCustomerCode"
+        Me.txtCustomerCode.Size = New System.Drawing.Size(249, 22)
+        Me.txtCustomerCode.TabIndex = 21
+        Me.txtCustomerCode.Text = "10000"
         '
         'txtCashInBank
         '
@@ -199,7 +222,7 @@ Partial Class frmSettings
         '
         'btnClose
         '
-        Me.btnClose.Location = New System.Drawing.Point(723, 211)
+        Me.btnClose.Location = New System.Drawing.Point(725, 261)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(85, 37)
         Me.btnClose.TabIndex = 3
@@ -208,7 +231,7 @@ Partial Class frmSettings
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(629, 211)
+        Me.btnUpdate.Location = New System.Drawing.Point(638, 261)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(81, 37)
         Me.btnUpdate.TabIndex = 2
@@ -426,7 +449,7 @@ Partial Class frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(813, 257)
+        Me.ClientSize = New System.Drawing.Size(822, 310)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnUpdate)
@@ -480,4 +503,6 @@ Partial Class frmSettings
     Friend WithEvents lblSAP01 As System.Windows.Forms.Label
     Friend WithEvents txtCashInvoice As System.Windows.Forms.TextBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents lblSAP02 As System.Windows.Forms.Label
+    Friend WithEvents txtCustomerCode As System.Windows.Forms.TextBox
 End Class
