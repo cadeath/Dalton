@@ -1,0 +1,3 @@
+LAYAWAY
+_SYS00000001030		Advances from customer
+_SYS00000000329		Miscellaneous Income
