@@ -89,7 +89,7 @@
             If src <> "" Then
                 mySql &= vbCrLf & " AND ("
                 If IsNumeric(src) Then
-                    mySql &= String.Format("PT.PAWNTICKET = {0} OR ", src)
+                    mySql &= String.Format("PT.PAWNTICKET LIKE '%{0}%' OR ", src)
                 End If
                 mySql &= String.Format("LOWER(PT.DESCRIPTION) LIKE '%{0}%'", DreadKnight(src).ToLower)
                 mySql &= ")"
@@ -97,7 +97,7 @@
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
         Else
-            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND onHand <> 0 ORDER BY ITEMCODE ASC"
+            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 ORDER BY ITEMCODE ASC"
 
             If src <> "" Then
                 mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"
@@ -106,13 +106,13 @@
                 mySql &= " ORDER BY ITEMCODE ASC"
             End If
 
-            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00'")
+            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001'")
         End If
 
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
         If MaxResult = 0 Then Exit Sub
 
-        If DEV_MODE Then Console.WriteLine("SQL: " & mySql)
+        Console.WriteLine("SQL: " & mySql)
 
         'If Not txtCode.Text = "" Then Exit Sub
         dbReaderOpen()

@@ -12,6 +12,9 @@
             Fields_Added()
             Views_Adding()
 
+            AddItemMasterCoi()
+            AddInsuranceCount()
+
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
         Catch ex As Exception
@@ -23,10 +26,10 @@
         Console.WriteLine("Commencing adding views...")
 
         strSql = "CREATE VIEW STOCK_CARD("
-        strSql &= vbCrLf & "  DOCTYPE, DOCDATE, REFNUM, ITEMCODE, DESCRIPTION, QTY)"
+        strSql &= vbCrLf & "  DOCTYPE, DOCDATE, REFNUM, ITEMCODE, DESCRIPTION, QTY, STATUS)"
         strSql &= vbCrLf & "AS "
         strSql &= vbCrLf & "SELECT "
-        strSql &= vbCrLf & " 'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY "
+        strSql &= vbCrLf & " 'IN' AS DOCTYPE, I.DOCDATE, I.REFNUM, IL.ITEMCODE, IL.DESCRIPTION, IL.QTY, I.DOCSTATUS AS STATUS"
         strSql &= vbCrLf & "FROM "
         strSql &= vbCrLf & " INVLINES IL "
         strSql &= vbCrLf & " INNER JOIN INV I "
@@ -43,11 +46,12 @@
         strSql &= vbCrLf & "        WHEN 3 THEN 'RETURNS' "
         strSql &= vbCrLf & "        WHEN 4 THEN 'STOCKOUT' "
         strSql &= vbCrLf & "    END "
-        strSql &= vbCrLf & " ) , D.DOCDATE, D.CODE AS REFNUM, DL.ITEMCODE, DL.DESCRIPTION, DL.QTY "
+        strSql &= vbCrLf & " ) , D.DOCDATE, D.CODE AS REFNUM, DL.ITEMCODE, DL.DESCRIPTION, DL.QTY, D.STATUS "
         strSql &= vbCrLf & "FROM "
         strSql &= vbCrLf & " DOCLINES DL "
         strSql &= vbCrLf & " INNER JOIN DOC D "
-        strSql &= vbCrLf & " ON D.DOCID = DL.DOCID; "
+        strSql &= vbCrLf & " ON D.DOCID = DL.DOCID "
+        strSql &= vbCrLf & "WHERE D.STATUS <> 'V'"
         RunCommand(strSql)
     End Sub
 
@@ -165,5 +169,50 @@
         AutoIncrement_ID("INVLINES", "INVID")
         AutoIncrement_ID("DOC", "DOCID")
         AutoIncrement_ID("DOCLINES", "DLID")
+    End Sub
+
+    Private Sub AddItemMasterCoi()
+        Dim mysql As String = "Select * From ItemMaster Where ItemCode = 'IND 00001'"
+        Dim fillData As String = "ItemMaster"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If ds.Tables(0).Rows().Count = 1 Then
+            With ds.Tables(0).Rows(0)
+                .Item("ITEMCODE") = "IND 00001"
+                .Item("DESCRIPTION") = "DALTON INSURANCE 25"
+            End With
+            SaveEntry(ds, False)
+        Else
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(0).NewRow
+            With dsNewRow
+                .Item("ITEMCODE") = "IND 00001"
+                .Item("DESCRIPTION") = "DALTON INSURANCE 25"
+            End With
+            ds.Tables(0).Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+        End If
+    End Sub
+
+    Private Sub AddInsuranceCount()
+        Dim mysql As String = "Select * from tblMaintenance Where Opt_keys = 'INS Count'"
+        Dim filldata As String = "tblMaintenance"
+        Dim ds As DataSet = LoadSQL(mysql, filldata)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Dim dsNewRow As DataRow
+            dsNewRow = ds.Tables(0).NewRow
+            With dsNewRow
+                .Item("Opt_keys") = "INS Count"
+                .Item("Opt_Values") = "0"
+            End With
+            ds.Tables(0).Rows.Add(dsNewRow)
+            database.SaveEntry(ds)
+        Else
+            With ds.Tables(0).Rows(0)
+                .Item("Opt_keys") = "INS Count"
+                .Item("Opt_Values") = "0"
+            End With
+            SaveEntry(ds, False)
+        End If
     End Sub
 End Module
