@@ -516,7 +516,7 @@ Public Class frmPawningItemNew
         If selectedClass Is Nothing Then Exit Sub
 
         Select Case selectedClass.ClassName
-            Case "CELLPHONE", "TABLET"
+            Case "TABLET"
                 txtExpiry.Text = txtMatu.Text
                 txtAuction.Text = CurrentDate.AddDays(62).ToShortDateString
             Case Else
@@ -1175,6 +1175,9 @@ Public Class frmPawningItemNew
         total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
         total = total * GetInt(30)
         total = total / PT_Entry.NetAmount
+        total = total * 100
+
+        total = Math.Round(total, 2, MidpointRounding.AwayFromZero)
         addParameters.Add("txtRateInPercent", total)
 
         If Reprint = True Then
@@ -1264,6 +1267,9 @@ Public Class frmPawningItemNew
         total = PT_Entry.AdvanceInterest + PT_Entry.ServiceCharge
         total = total * GetInt(30)
         total = total / PT_Entry.NetAmount
+        total = total * 100
+
+        total = Math.Round(total, 2, MidpointRounding.AwayFromZero)
         addParameters.Add("txtRateInPercent", total)
 
         ' Add Monthly Computation

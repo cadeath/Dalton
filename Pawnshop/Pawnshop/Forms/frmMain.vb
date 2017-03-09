@@ -530,8 +530,13 @@
     End Sub
 
     Private Sub InventoryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InventoryReportToolStripMenuItem.Click
-        frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
-        frmSalesReport.Show()
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.Inventory
+            If Not CheckOTP() Then Exit Sub
+        Else
+            frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
+            frmSalesReport.Show()
+        End If
     End Sub
 
     Private Sub StockInToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInToolStripMenuItem.Click
@@ -544,6 +549,15 @@
 
     Private Sub StockoutReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockoutReportToolStripMenuItem.Click
         frmSalesReport.FormType = frmSalesReport.SaleReport.StockOut
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub StockInReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockIn
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub MonthlyInventoryReportsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyInventoryReportsToolStripMenuItem.Click
         frmSalesReport.Show()
     End Sub
 End Class

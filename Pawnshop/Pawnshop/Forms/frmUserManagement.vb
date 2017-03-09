@@ -266,7 +266,7 @@ Public Class frmUserManagement
 
     Private Function CheckUsername() As Boolean
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
+        mySql = "SELECT * FROM TBL_GAMIT WHERE STATUS = '1' AND UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
