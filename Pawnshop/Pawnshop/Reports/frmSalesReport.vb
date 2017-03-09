@@ -12,8 +12,8 @@
         StockInMonthly = 6
        
 
- 	LayAway = 7
- 	LayAwayMontly = 8
+        LayAway = 7
+        LayAwayMontly = 8
         Forfeit = 9
         ForfeitMonthly = 10
         LayawayList = 11
