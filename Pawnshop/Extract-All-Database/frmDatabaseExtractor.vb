@@ -1,13 +1,19 @@
 ﻿Imports System.IO
+Imports Microsoft.Office.Interop
+
+
 Public Class frmDatabseExtractor
     Dim headers As String()
-
+    Dim Counter As Integer = 0
     Dim mysql As New Hashtable
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         FBD.ShowDialog()
         txtSource.Text = FBD.SelectedPath
         dir.ProcessDirectory(txtSource.Text)
+
+        Counter = LV_DBList.Items.Count
+        ToolCount.Text = Counter
     End Sub
 
     Private Sub OFD_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs)
@@ -18,11 +24,13 @@ Public Class frmDatabseExtractor
         If LV_DBList.Items.Count = 0 Then Exit Sub
 
         SFD.ShowDialog()
+        Dim maxEntries As Integer = 0
 
         Dim COUNT As Integer = LV_DBList.Items.Count
         Dim countx As Integer = 0
 
         For Each lv As ListViewItem In LV_DBList.Items
+            Me.Enabled = False
             countx += 1
 
             If COUNT = 0 Then Exit For
@@ -36,37 +44,49 @@ Public Class frmDatabseExtractor
                 If ds.Tables(0).Rows.Count <= 0 Then GoTo NexTStep
             Catch ex As Exception
                 MsgBox("Check the sql.")
+                Me.Enabled = True
+                Exit Sub
             End Try
 
-                Dim tmpTextbox As New TextBox
-                Dim idx As Integer = 0
-                For Each c As DataColumn In ds.Tables(0).Columns
-                    idx += 1
-                    tmpTextbox.AppendText(c.ColumnName & " ")
-                Next
-                Dim mid As String = tmpTextbox.Text.Trim
-                headers = mid.Split(CChar(" "))
+            Dim tmpTextbox As New TextBox
+            Dim idx As Integer = 0
+            For Each c As DataColumn In ds.Tables(0).Columns
+                idx += 1
+                tmpTextbox.AppendText(c.ColumnName & " ")
+            Next
+            Dim mid As String = tmpTextbox.Text.Trim
+            headers = mid.Split(CChar(" "))
 
-                ExtractToExcel(headers, txtQuery.Text, SFD.FileName, countx)
+            ToolCount.Text = COUNT
+
+            ExtractToExcel(headers, txtQuery.Text, SFD.FileName, countx)
+
 NexTStep:
         Next
 
+
+        Convert(SFD.FileName)
+
         MsgBox("Successfully Extracted.", MsgBoxStyle.Information, "Extract")
+        Me.Enabled = True
         LV_DBList.Items.Clear()
         txtSource.Text = ""
+        txtQuery.Text = ""
+        If File.Exists(SFD.FileName) Then
+            File.Delete(SFD.FileName)
+        End If
+
     End Sub
 
 
     Private Sub Gen_Query()
 
-        Dim stDate As Date = GetFirstDate(monCal.SelectionRange.Start)
-        Dim enDate As Date = GetLastDate(monCal.SelectionRange.End)
-        Dim selDate As Date = monCal.SelectionStart.ToShortDateString
+        Dim stDate As Date = Now
 
         Dim ExtractType As String() = {"LOANS", "Vault_INV"}
 
         Dim mysql As New dir
-        Dim Vault_SQL As String() = {mysql.new_loan(stDate, enDate), mysql.Vault(selDate)}
+        Dim Vault_SQL As String() = {mysql.new_loan(stDate, stDate), mysql.Vault(stDate)}
 
         For i As Integer = 0 To ExtractType.Count - 1
             Dim lv As ListViewItem = LVQuery.Items.Add(ExtractType(i))
@@ -85,7 +105,47 @@ NexTStep:
 
     End Sub
 
+    Private Sub Convert(ByVal S As String)
+        Dim oFSO, oInputFile, oOutputFile
+        Dim oStr As String
+        oFSO = CreateObject("Scripting.FileSystemObject")
 
+        Dim oInfo As New ProcessStartInfo
+        Dim oExcel As New Excel.Application
+        Dim oWorkBook As Excel.Workbook
 
+        oInfo.CreateNoWindow = False
+        With oExcel
+            .Visible = False
+            .DisplayAlerts = False
+        End With
 
+        If System.IO.File.Exists(Replace(S, "xls", "csv")) = True Then
+            System.IO.File.Delete(Replace(S, "xls", "csv"))
+            GoTo x
+        Else
+x:
+            oWorkBook = oExcel.Workbooks.Open(S)
+            oWorkBook = oExcel.Workbooks.Open(S)
+
+            oWorkBook.SaveAs(Filename:=Replace(S, "xls", "csv"), FileFormat:=Microsoft.Office.Interop.Excel.XlFileFormat.xlTextMSDOS)
+
+            oWorkBook.Close()
+            oExcel.DisplayAlerts = False
+            oExcel.Quit()
+
+            oInputFile = oFSO.OpenTextFile(Replace(S, "xls", "csv"))
+            oStr = oInputFile.ReadAll
+            oStr = Replace(oStr, vbTab, ",")
+
+            oOutputFile = oFSO.CreateTextFile(Replace(S, "xls", "csv"), True)
+            oOutputFile.Write(oStr)
+        End If
+
+        If File.Exists(S) Then
+            File.Delete(S)
+        End If
+    End Sub
+
+ 
 End Class

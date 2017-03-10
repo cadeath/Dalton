@@ -128,7 +128,8 @@ Module mod_system
         If i = 1 Then
 
             Dim ds As DataSet = LoadSQL(mySql)
-
+            frmDatabseExtractor.ProgressBar1.Value = 0
+            frmDatabseExtractor.ProgressBar1.Maximum = ds.Tables(0).Rows.Count
             'Load Excel
             Dim oXL As New Excel.Application
             If oXL Is Nothing Then
@@ -169,9 +170,12 @@ Module mod_system
                 rowCnt += 1
 
                 Console.Write(".")
+                frmDatabseExtractor.ProgressBar1.Value = frmDatabseExtractor.ProgressBar1.Value + 1
                 Application.DoEvents()
+                frmDatabseExtractor.lblStatus.Text = String.Format("{0}%", ((frmDatabseExtractor.ProgressBar1.Value / frmDatabseExtractor.ProgressBar1.Maximum) * 100).ToString("F2"))
             Next
 
+            frmDatabseExtractor.ProgressBar1.Minimum = 0 : frmDatabseExtractor.ProgressBar1.Value = 0 : frmDatabseExtractor.lblStatus.Text = "0.00%"
             oWB.SaveAs(dest)
             oSheet = Nothing
             oWB.Close(False)
@@ -183,7 +187,8 @@ Module mod_system
         Else
 
             Dim ds As DataSet = LoadSQL(mySql)
-
+            frmDatabseExtractor.ProgressBar1.Value = 0
+            frmDatabseExtractor.ProgressBar1.Maximum = ds.Tables(0).Rows.Count
 
             Dim xls As New Excel.Application
             Dim book As Excel.Workbook
@@ -218,10 +223,12 @@ Module mod_system
                 rowCnt += 1
 
                 Console.Write(".")
+                frmDatabseExtractor.ProgressBar1.Value = frmDatabseExtractor.ProgressBar1.Value + 1
                 Application.DoEvents()
+                frmDatabseExtractor.lblStatus.Text = String.Format("{0}%", ((frmDatabseExtractor.ProgressBar1.Value / frmDatabseExtractor.ProgressBar1.Maximum) * 100).ToString("F2"))
             Next
 
-
+            frmDatabseExtractor.ProgressBar1.Minimum = 0 : frmDatabseExtractor.ProgressBar1.Value = 0 : frmDatabseExtractor.lblStatus.Text = "0.00%"
             book.Save()
             xls.Workbooks.Close()
             xls.Quit()

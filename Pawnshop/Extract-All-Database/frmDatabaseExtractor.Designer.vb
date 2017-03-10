@@ -29,22 +29,23 @@ Partial Class frmDatabseExtractor
         Me.LVQuery = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.LV_DBList = New System.Windows.Forms.ListView()
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.FBD = New System.Windows.Forms.FolderBrowserDialog()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
-        Me.monCal = New System.Windows.Forms.MonthCalendar()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolCount = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.txtQuery = New Extract_All_Database.watermark()
         Me.txtSource = New Extract_All_Database.watermark()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnBrowse
         '
-        Me.btnBrowse.Location = New System.Drawing.Point(419, 11)
+        Me.btnBrowse.Location = New System.Drawing.Point(557, 14)
         Me.btnBrowse.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(40, 30)
@@ -63,7 +64,7 @@ Partial Class frmDatabseExtractor
         '
         'btnExtract
         '
-        Me.btnExtract.Location = New System.Drawing.Point(536, 273)
+        Me.btnExtract.Location = New System.Drawing.Point(472, 366)
         Me.btnExtract.Name = "btnExtract"
         Me.btnExtract.Size = New System.Drawing.Size(126, 26)
         Me.btnExtract.TabIndex = 3
@@ -74,9 +75,10 @@ Partial Class frmDatabseExtractor
         '
         Me.GroupBox1.Controls.Add(Me.LVQuery)
         Me.GroupBox1.Controls.Add(Me.txtQuery)
+        Me.GroupBox1.Controls.Add(Me.LV_DBList)
         Me.GroupBox1.Location = New System.Drawing.Point(14, 48)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(454, 307)
+        Me.GroupBox1.Size = New System.Drawing.Size(583, 315)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         '
@@ -85,9 +87,9 @@ Partial Class frmDatabseExtractor
         Me.LVQuery.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
         Me.LVQuery.FullRowSelect = True
         Me.LVQuery.GridLines = True
-        Me.LVQuery.Location = New System.Drawing.Point(12, 14)
+        Me.LVQuery.Location = New System.Drawing.Point(10, 14)
         Me.LVQuery.Name = "LVQuery"
-        Me.LVQuery.Size = New System.Drawing.Size(427, 162)
+        Me.LVQuery.Size = New System.Drawing.Size(565, 133)
         Me.LVQuery.TabIndex = 9
         Me.LVQuery.UseCompatibleStateImageBehavior = False
         Me.LVQuery.View = System.Windows.Forms.View.Details
@@ -102,23 +104,14 @@ Partial Class frmDatabseExtractor
         Me.ColumnHeader2.Text = "Default Query"
         Me.ColumnHeader2.Width = 479
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.LV_DBList)
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 522)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(101, 58)
-        Me.GroupBox2.TabIndex = 8
-        Me.GroupBox2.TabStop = False
-        '
         'LV_DBList
         '
         Me.LV_DBList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4})
         Me.LV_DBList.FullRowSelect = True
         Me.LV_DBList.GridLines = True
-        Me.LV_DBList.Location = New System.Drawing.Point(6, 13)
+        Me.LV_DBList.Location = New System.Drawing.Point(420, 253)
         Me.LV_DBList.Name = "LV_DBList"
-        Me.LV_DBList.Size = New System.Drawing.Size(216, 149)
+        Me.LV_DBList.Size = New System.Drawing.Size(155, 46)
         Me.LV_DBList.TabIndex = 7
         Me.LV_DBList.UseCompatibleStateImageBehavior = False
         Me.LV_DBList.View = System.Windows.Forms.View.Details
@@ -126,33 +119,50 @@ Partial Class frmDatabseExtractor
         'ColumnHeader4
         '
         Me.ColumnHeader4.Text = "Database List"
-        Me.ColumnHeader4.Width = 482
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(477, 74)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(80, 16)
-        Me.Label2.TabIndex = 10
-        Me.Label2.Text = "Select Date:"
+        Me.ColumnHeader4.Width = 568
         '
         'SFD
         '
-        Me.SFD.Filter = "CSV|*.csv"
+        Me.SFD.Filter = "Excel WorkBook|*.xls"
         '
-        'monCal
+        'lblStatus
         '
-        Me.monCal.Location = New System.Drawing.Point(480, 99)
-        Me.monCal.Name = "monCal"
-        Me.monCal.TabIndex = 11
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Location = New System.Drawing.Point(1, 373)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(46, 16)
+        Me.lblStatus.TabIndex = 7
+        Me.lblStatus.Text = "Status"
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.AutoSize = False
+        Me.StatusStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ProgressBar1, Me.ToolCount})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 394)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(609, 25)
+        Me.StatusStrip1.TabIndex = 8
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'ToolCount
+        '
+        Me.ToolCount.Name = "ToolCount"
+        Me.ToolCount.Size = New System.Drawing.Size(40, 20)
+        Me.ToolCount.Text = "Count"
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.AutoSize = False
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(300, 19)
         '
         'txtQuery
         '
-        Me.txtQuery.Location = New System.Drawing.Point(12, 182)
+        Me.txtQuery.Location = New System.Drawing.Point(9, 153)
         Me.txtQuery.Multiline = True
         Me.txtQuery.Name = "txtQuery"
-        Me.txtQuery.Size = New System.Drawing.Size(427, 115)
+        Me.txtQuery.Size = New System.Drawing.Size(565, 156)
         Me.txtQuery.TabIndex = 8
         Me.txtQuery.WatermarkColor = System.Drawing.Color.Gray
         Me.txtQuery.WatermarkText = "Query here . . ."
@@ -161,7 +171,7 @@ Partial Class frmDatabseExtractor
         '
         Me.txtSource.Location = New System.Drawing.Point(64, 18)
         Me.txtSource.Name = "txtSource"
-        Me.txtSource.Size = New System.Drawing.Size(350, 22)
+        Me.txtSource.Size = New System.Drawing.Size(487, 22)
         Me.txtSource.TabIndex = 2
         Me.txtSource.WatermarkColor = System.Drawing.Color.Gray
         Me.txtSource.WatermarkText = "Source Path . . ."
@@ -171,10 +181,9 @@ Partial Class frmDatabseExtractor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(717, 371)
-        Me.Controls.Add(Me.monCal)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.ClientSize = New System.Drawing.Size(609, 419)
+        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnExtract)
         Me.Controls.Add(Me.txtSource)
@@ -187,7 +196,8 @@ Partial Class frmDatabseExtractor
         Me.Text = "Database Extractor"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -199,14 +209,15 @@ Partial Class frmDatabseExtractor
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents LVQuery As System.Windows.Forms.ListView
     Friend WithEvents txtQuery As Extract_All_Database.watermark
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents LV_DBList As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents FBD As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents SFD As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents monCal As System.Windows.Forms.MonthCalendar
+    Friend WithEvents lblStatus As System.Windows.Forms.Label
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolCount As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ProgressBar1 As System.Windows.Forms.ToolStripProgressBar
 
 End Class

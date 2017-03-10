@@ -39,11 +39,11 @@ Public Class dir
     End Sub
 
     Public Shared Sub ProcessFile(ByVal path As String)
-        Console.WriteLine("Processed file '{0}'.", path)
-        If path.Contains(".rar") = True Then
-            On Error Resume Next
-        Else
+        If path.Contains(".FDB") = True Then
             Dim lv As ListViewItem = frmDatabseExtractor.LV_DBList.Items.Add(path)
+            Console.WriteLine("Processed file '{0}'.", path)
+        Else
+            On Error Resume Next
         End If
     End Sub
 
@@ -76,7 +76,7 @@ Public Class dir
     End Function
 
     Friend Function Vault(ByVal d1 As Date) As String
-        Dim d As Date = d.ToShortDateString
+        Dim d As Date = d1.ToShortDateString
 
         Dim sql_vault = "SELECT * FROM (" & _
         "	SELECT *   FROM PAWN_LIST   WHERE Status = 'L'" & _
