@@ -37,4 +37,9 @@ Module smsUtil
         End If
     End Sub
 
+    Friend Sub do_expiry_sms()
+        Dim mySql As String
+        mySql = "SELECT * FROM OPT WHERE EXPIRYDATE = '{0}' AND STATUS <> 'V'"
+    End Sub
+
 End Module
