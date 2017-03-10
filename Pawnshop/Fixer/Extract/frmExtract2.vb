@@ -5,26 +5,27 @@ Public Class frmExtract2
     Private path As String
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
-        If txtPath.Text = "" Then Exit Sub
-        Disable(1)
-        Dim text As String = ""
-        Dim files() As String = IO.Directory.GetFiles(txtPath.Text, "*.FDB")
+        'If txtPath.Text = "" Then Exit Sub
+        'Disable(1)
+        'Dim text As String = ""
+        'Dim files() As String = IO.Directory.GetFiles(txtPath.Text, "*.FDB")
 
-        For Each sFile As String In files
-            database.dbName = sFile
-            Dim ds As DataSet = LoadSQL(txtQuery.Text)
+        'For Each sFile As String In files
+        '    database.dbName = sFile
+        '    Dim ds As DataSet = LoadSQL(txtQuery.Text)
 
-            pbProgress.Maximum = ds.Tables(0).Rows.Count
-            LoadQuery()
-            pbProgress.Value = pbProgress.Minimum
-        Next
+        '    pbProgress.Maximum = ds.Tables(0).Rows.Count
+        '    LoadQuery()
+        '    pbProgress.Value = pbProgress.Minimum
+        'Next
 
-        Dim ans As DialogResult = MsgBox("Successfully Data Converted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2)
-        If ans = Windows.Forms.DialogResult.OK Then
-            pbProgress.Value = pbProgress.Minimum
-        End If
+        'Dim ans As DialogResult = MsgBox("Successfully Data Converted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2)
+        'If ans = Windows.Forms.DialogResult.OK Then
+        '    pbProgress.Value = pbProgress.Minimum
+        'End If
 
-        Disable(0)
+        'Disable(0)
+        frmSampleExtract.Show()
     End Sub
 
     Private Sub Disable(ByVal st As Boolean)
