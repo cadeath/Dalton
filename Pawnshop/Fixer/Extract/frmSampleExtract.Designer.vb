@@ -113,6 +113,7 @@ Partial Class frmSampleExtract
         Me.Controls.Add(Me.txtPath)
         Me.Controls.Add(Me.btnBrowseData)
         Me.Name = "frmSampleExtract"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Data Extractor"
         Me.ResumeLayout(False)
         Me.PerformLayout()
