@@ -68,7 +68,7 @@ Partial Class Extract
         Me.GroupBox1.Controls.Add(Me.txtPath)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(873, 208)
+        Me.GroupBox1.Size = New System.Drawing.Size(647, 208)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Information"
@@ -105,7 +105,7 @@ Partial Class Extract
         Me.lbTableName.FormattingEnabled = True
         Me.lbTableName.Location = New System.Drawing.Point(398, 52)
         Me.lbTableName.Name = "lbTableName"
-        Me.lbTableName.Size = New System.Drawing.Size(469, 121)
+        Me.lbTableName.Size = New System.Drawing.Size(237, 121)
         Me.lbTableName.TabIndex = 6
         '
         'txtHeader
@@ -194,7 +194,7 @@ Partial Class Extract
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(949, 262)
+        Me.ClientSize = New System.Drawing.Size(666, 262)
         Me.Controls.Add(Me.pbProgress)
         Me.Controls.Add(Me.btnExtract)
         Me.Controls.Add(Me.GroupBox1)

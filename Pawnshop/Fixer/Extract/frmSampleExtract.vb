@@ -4,6 +4,7 @@ Imports Microsoft.Office.Interop
 Public Class frmSampleExtract
     Private HashPath As New Hashtable
     Private path As String
+    Private CurrentDate As Date = Now
 
     Private Sub btnBrowseData_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseData.Click
         If Not fbdBackup.ShowDialog = Windows.Forms.DialogResult.OK Then Exit Sub
@@ -31,16 +32,18 @@ Public Class frmSampleExtract
         Console.WriteLine("Processed file '{0}'.", path)
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtExtract.Click
+    Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
+        btnExtract.Enabled = False
         ProcessDirectory(txtPath.Text)
         LoadQuery()
+        btnExtract.Enabled = True
     End Sub
 
     Private Sub LoadQuery()
         Try
             Dim mysql As String = "" & txtQuery.Text & ""
 
-            sfdPath.FileName = String.Format("{0}.xlsx", "Sample")
+            sfdPath.FileName = String.Format("{0}.xlsx", "Consolidate" & CurrentDate.ToString("MMddyyyy"))
             path = txtSavePath.Text & "\" & sfdPath.FileName
             ExtractToExcell(mysql, path, HashPath)
 
@@ -71,30 +74,30 @@ Public Class frmSampleExtract
             oXL = CreateObject("Excel.Application")
             oXL.Visible = False
 
-                oWB = oXL.Workbooks.Add
-                oSheet = oWB.ActiveSheet
-                oSheet.Name = "Consolidate"
+            oWB = oXL.Workbooks.Add
+            oSheet = oWB.ActiveSheet
+            oSheet.Name = "Consolidate"
 
+            Dim PbMaxValue As Integer = 0
+            For Each hash As DictionaryEntry In ht
+                database.dbName = hash.Value
+                Dim ds As DataSet = LoadSQL(mySql)
+                PbMaxValue += ds.Tables(0).Rows.Count
+                Console.WriteLine("Progress Bar Value " & PbMaxValue)
+            Next
+            pbProgress.Maximum = PbMaxValue
             For Each hash As DictionaryEntry In ht
                 database.dbName = hash.Value
                 Dim rowCnt As Integer
                 Dim ds As DataSet = LoadSQL(mySql)
                 Dim tmpTableName As New TextBox, tmp As String
 
-                If lbTableName.Items.Count < 1 Then
-
-                    For Each dt In ds.Tables
-                        For Each column In dt.Columns
-                            tmpTableName.AppendText(column.ColumnName & " ")
-                        Next
+                For Each dt In ds.Tables
+                    For Each column In dt.Columns
+                        tmpTableName.AppendText(column.ColumnName & " ")
                     Next
-                Else
+                Next
 
-                    For Each obj In lbTableName.Items
-                        tmpTableName.AppendText(obj.ToString & " ")
-                    Next
-
-                End If
                 tmp = tmpTableName.Text.TrimEnd
 
                 Dim tmpCount() As String = tmp.Split(CChar(" "))
@@ -111,7 +114,7 @@ Public Class frmSampleExtract
 
 
                 ' EXTRACTING
-                Console.Write("Extracting")
+                Console.WriteLine("Extracting")
                 rowCnt += 2
                 For Each dr As DataRow In ds.Tables(0).Rows
                     For colCnt As Integer = 0 To tmpCount.Count - 1
@@ -121,12 +124,13 @@ Public Class frmSampleExtract
                             oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
                         End If
                     Next
-                    'pbProgress.Value = pbProgress.Value + 1
+                    pbProgress.Value = pbProgress.Value + 1
                     rowCnt += 1
 
                     Console.Write(".")
                     Application.DoEvents()
                 Next
+                rowCnt -= 2
                 Application.DoEvents()
             Next
             oWB.SaveAs(dest)
