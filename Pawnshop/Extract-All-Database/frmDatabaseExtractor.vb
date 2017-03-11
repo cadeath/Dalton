@@ -37,15 +37,18 @@ Public Class frmDatabseExtractor
             COUNT -= 1
 
             database.dbName = lv.SubItems(0).Text
-
-            Dim ds As DataSet = LoadSQL(txtQuery.Text)
+            Dim ds As DataSet
 
             Try
-                If ds.Tables(0).Rows.Count <= 0 Then GoTo NexTStep
+                ds = LoadSQL(txtQuery.Text)
+                If ds.Tables(0).Rows.Count = 0 Then
+                    GoTo NexTStep
+                End If
+
             Catch ex As Exception
-                MsgBox("Check the sql.")
-                Me.Enabled = True
-                Exit Sub
+                If MsgBox("Check the sql.", MsgBoxStyle.OkOnly) = MsgBoxResult.Ok Then
+                    GoTo nextSTEPTODO
+                End If
             End Try
 
             Dim tmpTextbox As New TextBox
@@ -67,14 +70,18 @@ NexTStep:
 
         Convert(SFD.FileName)
 
+        If File.Exists(SFD.FileName) Then
+            File.Delete(SFD.FileName)
+        End If
+
         MsgBox("Successfully Extracted.", MsgBoxStyle.Information, "Extract")
+
+nextSTEPTODO:
         Me.Enabled = True
         LV_DBList.Items.Clear()
         txtSource.Text = ""
         txtQuery.Text = ""
-        If File.Exists(SFD.FileName) Then
-            File.Delete(SFD.FileName)
-        End If
+        
 
     End Sub
 
@@ -125,6 +132,10 @@ NexTStep:
             GoTo x
         Else
 x:
+            If Not File.Exists(S) Then
+                Exit Sub
+            End If
+
             oWorkBook = oExcel.Workbooks.Open(S)
             oWorkBook = oExcel.Workbooks.Open(S)
 
