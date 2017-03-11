@@ -11,11 +11,11 @@ Module smsUtil
     Private _initFile As String = "dalton.esk"
 
     Friend Sub SendSMS(ByVal num As String, ByVal msg As String)
-        Dim config As New Configuration(_user, _password)
+        Dim config As New Configuration(_smsUser, _smsPassword)
         Dim smsClient As New OneApi.Client.Impl.SMSClient(config)
 
         Dim smsRequest As SMSRequest
-        smsRequest = New SMSRequest(_sender, msg, num)
+        smsRequest = New SMSRequest(_smsSender, msg, num)
 
         Dim rqId As String = smsClient.SmsMessagingClient.SendSMS(smsRequest).ToString
         Console.WriteLine("Sent")
