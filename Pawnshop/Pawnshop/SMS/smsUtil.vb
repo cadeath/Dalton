@@ -4,17 +4,11 @@ Imports OneApi.Config
 
 Module smsUtil
 
-<<<<<<< HEAD
     Private _smsUser As String = "Eskie"
     Private _smsPassword As String = "eskiegwapo"
     Private _smsSender As String = "DALTON"
     Private smsReady As Boolean = False
     Private _initFile As String = "dalton.esk"
-=======
-    Private _user As String = "Eskie"
-    Private _password As String = "eskiegwapo123"
-    Private _sender As String = "PGC"
->>>>>>> parent of 144b28f7... UPDATE
 
     Friend Sub SendSMS(ByVal num As String, ByVal msg As String)
         Dim config As New Configuration(_user, _password)
@@ -26,6 +20,21 @@ Module smsUtil
         Dim rqId As String = smsClient.SmsMessagingClient.SendSMS(smsRequest).ToString
         Console.WriteLine("Sent")
         Console.WriteLine("ID:" & rqId)
+    End Sub
+
+    Private Sub SMS_Init()
+        Dim ini As New IniFile
+
+        If System.IO.File.Exists(_initFile) Then
+            ini.Load(_initFile)
+
+            With ini.GetSection("ACCOUNT")
+                _smsUser = .GetKey("User").Value
+                _smsPassword = DecryptString(.GetKey("Password").Value)
+            End With
+
+            smsReady = True
+        End If
     End Sub
 
 End Module
