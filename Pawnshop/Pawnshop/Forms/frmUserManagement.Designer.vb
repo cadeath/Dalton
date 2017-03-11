@@ -48,6 +48,8 @@ Partial Class frmUserManagement
         Me.chkCM = New System.Windows.Forms.CheckBox()
         Me.chkPawn = New System.Windows.Forms.CheckBox()
         Me.tbSupervisor = New System.Windows.Forms.TabPage()
+        Me.chkReturn = New System.Windows.Forms.CheckBox()
+        Me.chkStockOut = New System.Windows.Forms.CheckBox()
         Me.chkOS = New System.Windows.Forms.CheckBox()
         Me.chkVR = New System.Windows.Forms.CheckBox()
         Me.chkVUM = New System.Windows.Forms.CheckBox()
@@ -77,8 +79,6 @@ Partial Class frmUserManagement
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
         Me.lblUserid = New System.Windows.Forms.Label()
-        Me.chkStockOut = New System.Windows.Forms.CheckBox()
-        Me.chkReturn = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -347,6 +347,26 @@ Partial Class frmUserManagement
         Me.tbSupervisor.TabIndex = 1
         Me.tbSupervisor.Text = "Supervisor"
         Me.tbSupervisor.UseVisualStyleBackColor = True
+        '
+        'chkReturn
+        '
+        Me.chkReturn.AutoSize = True
+        Me.chkReturn.Location = New System.Drawing.Point(108, 104)
+        Me.chkReturn.Name = "chkReturn"
+        Me.chkReturn.Size = New System.Drawing.Size(58, 17)
+        Me.chkReturn.TabIndex = 14
+        Me.chkReturn.Text = "Return"
+        Me.chkReturn.UseVisualStyleBackColor = True
+        '
+        'chkStockOut
+        '
+        Me.chkStockOut.AutoSize = True
+        Me.chkStockOut.Location = New System.Drawing.Point(13, 104)
+        Me.chkStockOut.Name = "chkStockOut"
+        Me.chkStockOut.Size = New System.Drawing.Size(71, 17)
+        Me.chkStockOut.TabIndex = 13
+        Me.chkStockOut.Text = "StockOut"
+        Me.chkStockOut.UseVisualStyleBackColor = True
         '
         'chkOS
         '
@@ -653,26 +673,6 @@ Partial Class frmUserManagement
         Me.lblUserid.TabIndex = 12
         Me.lblUserid.Text = "UserID"
         Me.lblUserid.Visible = False
-        '
-        'chkStockOut
-        '
-        Me.chkStockOut.AutoSize = True
-        Me.chkStockOut.Location = New System.Drawing.Point(13, 104)
-        Me.chkStockOut.Name = "chkStockOut"
-        Me.chkStockOut.Size = New System.Drawing.Size(71, 17)
-        Me.chkStockOut.TabIndex = 13
-        Me.chkStockOut.Text = "StockOut"
-        Me.chkStockOut.UseVisualStyleBackColor = True
-        '
-        'chkReturn
-        '
-        Me.chkReturn.AutoSize = True
-        Me.chkReturn.Location = New System.Drawing.Point(108, 104)
-        Me.chkReturn.Name = "chkReturn"
-        Me.chkReturn.Size = New System.Drawing.Size(58, 17)
-        Me.chkReturn.TabIndex = 14
-        Me.chkReturn.Text = "Return"
-        Me.chkReturn.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '

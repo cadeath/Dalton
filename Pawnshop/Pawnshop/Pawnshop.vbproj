@@ -818,6 +818,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Pawn.vb" />
+    <Compile Include="UserManagement\frmFullUserManagement.Designer.vb">
+      <DependentUpon>frmFullUserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagement\frmFullUserManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -1239,6 +1245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Seed\frmSeed.resx">
       <DependentUpon>frmSeed.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserManagement\frmFullUserManagement.resx">
+      <DependentUpon>frmFullUserManagement.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
