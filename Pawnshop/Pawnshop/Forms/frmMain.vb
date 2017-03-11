@@ -75,10 +75,25 @@
         doSegregate = AutoSegregate()
     End Sub
 
-    Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'smsUtil.SendSMS("639257977559", "Success!!!")
-        smsUtil.SendSMS("639101756191", "HEHEHE")
+    Private Sub Sample_Text()
+        Dim msg As String = "This is a sample message from DIS (Dalton Integrated System) Prototype. Please be advice - SenderID testing"
+        'smsUtil.SendSMS("639360944853", msg) 'Don2
+        'smsUtil.SendSMS("639257977559", msg) 'Eskie
+        'smsUtil.SendSMS("639363678923", msg) 'Emz
+        'smsUtil.SendSMS("639553491069", msg) 'Irish
+        'smsUtil.SendSMS("639553491065", msg) 'Neimrod
+        'smsUtil.SendSMS("639999403288", msg) 'PTU
+        'smsUtil.SendSMS("639228072094", msg) 'LYU
+        'smsUtil.SendSMS("639228323324", msg) 'PTU
 
+        'Console.WriteLine("Sample texting sent")
+    End Sub
+
+    Private Sub frmMain_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DoubleClick
+        Sample_Text()
+    End Sub
+
+    Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'Generate_QR()
         Me.Text = My.Application.Info.Title & " | Version " & Me.GetType.Assembly.GetName.Version.ToString & IIf(mod_system.DEV_MODE, " <<DEVELOPER MODE>>", "")
         Me.Text &= IIf(mod_system.PROTOTYPE, " !!PROTOTYPE!!", "")

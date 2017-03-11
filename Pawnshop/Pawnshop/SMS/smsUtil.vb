@@ -5,7 +5,7 @@ Imports OneApi.Config
 Module smsUtil
 
     Private _smsUser As String = "Eskie"
-    Private _smsPassword As String = "eskiegwapo123"
+    Private _smsPassword As String = "eskiegwapo"
     Private _smsSender As String = "DALTON"
     Private smsReady As Boolean = False
     Private _initFile As String = "dalton.esk"
