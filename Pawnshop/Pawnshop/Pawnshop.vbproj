@@ -112,7 +112,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="OneApi">
-      <HintPath>..\..\..\oneapi-dot-net\OneApi\bin\Debug\OneApi.dll</HintPath>
+      <HintPath>..\..\..\..\oneapi-dot-net\OneApi\bin\Debug\OneApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
@@ -376,7 +378,6 @@
     <Compile Include="Forms\watermark.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Modules\IniFileVb.vb" />
     <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
@@ -823,12 +824,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Pawn.vb" />
-    <Compile Include="SMS\frmSMSnotice.Designer.vb">
-      <DependentUpon>frmSMSnotice.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SMS\frmSMSnotice.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="SMS\smsUtil.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -1251,9 +1246,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Seed\frmSeed.resx">
       <DependentUpon>frmSeed.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SMS\frmSMSnotice.resx">
-      <DependentUpon>frmSMSnotice.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
