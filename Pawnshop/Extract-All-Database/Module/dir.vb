@@ -21,6 +21,7 @@ Public Class dir
 
 
     Public Shared Sub ProcessDirectory(ByVal targetDirectory As String)
+        If targetDirectory = "" Then Exit Sub
         Dim fileEntries As String() = Directory.GetFiles(targetDirectory)
         Dim fileName As String
 

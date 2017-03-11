@@ -22,6 +22,7 @@ Partial Class frmDatabseExtractor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDatabseExtractor))
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnExtract = New System.Windows.Forms.Button()
@@ -29,15 +30,15 @@ Partial Class frmDatabseExtractor
         Me.LVQuery = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.txtQuery = New Extract_All_Database.watermark()
         Me.LV_DBList = New System.Windows.Forms.ListView()
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.FBD = New System.Windows.Forms.FolderBrowserDialog()
         Me.SFD = New System.Windows.Forms.SaveFileDialog()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolCount = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
-        Me.txtQuery = New Extract_All_Database.watermark()
+        Me.ToolCount = New System.Windows.Forms.ToolStripStatusLabel()
         Me.txtSource = New Extract_All_Database.watermark()
         Me.GroupBox1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -104,6 +105,16 @@ Partial Class frmDatabseExtractor
         Me.ColumnHeader2.Text = "Default Query"
         Me.ColumnHeader2.Width = 479
         '
+        'txtQuery
+        '
+        Me.txtQuery.Location = New System.Drawing.Point(9, 153)
+        Me.txtQuery.Multiline = True
+        Me.txtQuery.Name = "txtQuery"
+        Me.txtQuery.Size = New System.Drawing.Size(565, 156)
+        Me.txtQuery.TabIndex = 8
+        Me.txtQuery.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtQuery.WatermarkText = "Query here . . ."
+        '
         'LV_DBList
         '
         Me.LV_DBList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4})
@@ -145,27 +156,17 @@ Partial Class frmDatabseExtractor
         Me.StatusStrip1.TabIndex = 8
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'ToolCount
-        '
-        Me.ToolCount.Name = "ToolCount"
-        Me.ToolCount.Size = New System.Drawing.Size(40, 20)
-        Me.ToolCount.Text = "Count"
-        '
         'ProgressBar1
         '
         Me.ProgressBar1.AutoSize = False
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(300, 19)
         '
-        'txtQuery
+        'ToolCount
         '
-        Me.txtQuery.Location = New System.Drawing.Point(9, 153)
-        Me.txtQuery.Multiline = True
-        Me.txtQuery.Name = "txtQuery"
-        Me.txtQuery.Size = New System.Drawing.Size(565, 156)
-        Me.txtQuery.TabIndex = 8
-        Me.txtQuery.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtQuery.WatermarkText = "Query here . . ."
+        Me.ToolCount.Name = "ToolCount"
+        Me.ToolCount.Size = New System.Drawing.Size(40, 20)
+        Me.ToolCount.Text = "Count"
         '
         'txtSource
         '
@@ -190,9 +191,11 @@ Partial Class frmDatabseExtractor
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnBrowse)
         Me.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmDatabseExtractor"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Database Extractor"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
