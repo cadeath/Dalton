@@ -118,12 +118,6 @@
     <Compile Include="Extract\Extract.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extract\frmExtract2.Designer.vb">
-      <DependentUpon>frmExtract2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Extract\frmExtract2.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Extract\frmSampleExtract.Designer.vb">
       <DependentUpon>frmSampleExtract.vb</DependentUpon>
     </Compile>
@@ -236,9 +230,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Extract\Extract.resx">
       <DependentUpon>Extract.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Extract\frmExtract2.resx">
-      <DependentUpon>frmExtract2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Extract\frmSampleExtract.resx">
       <DependentUpon>frmSampleExtract.vb</DependentUpon>

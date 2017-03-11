@@ -2,8 +2,8 @@
 Imports Microsoft.Office.Interop
 
 Public Class frmSampleExtract
-    Private HashPath As New Hashtable
-    Private path As String
+    Private HT As New Hashtable
+    Private dest As String
     Private CurrentDate As Date = Now
 
     Private Sub btnBrowseData_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseData.Click
@@ -12,28 +12,32 @@ Public Class frmSampleExtract
     End Sub
 
     Public Sub ProcessDirectory(ByVal targetDirectory As String)
-        Dim fileEntries As String() = Directory.GetFiles(targetDirectory, "*.FDB")
-        Dim fileName As String
-        For Each fileName In fileEntries
-            ProcessFile(fileName)
+            Dim fileEntries As String() = Directory.GetFiles(targetDirectory, "*.FDB")
 
-        Next fileName
-        Dim subdirectoryEntries As String() = Directory.GetDirectories(targetDirectory)
-        Dim subdirectory As String
-        For Each subdirectory In subdirectoryEntries
-            ProcessDirectory(subdirectory)
+            Dim fileName As String
+            For Each fileName In fileEntries
+                ProcessFile(fileName)
 
-        Next subdirectory
+            Next fileName
+            Dim subdirectoryEntries As String() = Directory.GetDirectories(targetDirectory)
+            Dim subdirectory As String
+            For Each subdirectory In subdirectoryEntries
+                ProcessDirectory(subdirectory)
 
+            Next subdirectory
     End Sub
 
     Public Sub ProcessFile(ByVal path As String)
-        HashPath.Add(path, path)
+        HT.Add(path, path)
         Console.WriteLine("Processed file '{0}'.", path)
     End Sub
 
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
+        If txtQuery.Text = "" Then Exit Sub
+        If txtPath.Text = "" Then Exit Sub
+
         btnExtract.Enabled = False
+        HT.Clear()
         ProcessDirectory(txtPath.Text)
         LoadQuery()
         btnExtract.Enabled = True
@@ -44,11 +48,94 @@ Public Class frmSampleExtract
             Dim mysql As String = "" & txtQuery.Text & ""
 
             sfdPath.FileName = String.Format("{0}.xlsx", "Consolidate" & CurrentDate.ToString("MMddyyyy"))
-            path = txtSavePath.Text & "\" & sfdPath.FileName
-            ExtractToExcell(mysql, path, HashPath)
+            dest = txtSavePath.Text & "\" & sfdPath.FileName
+
+            If dest = "" Then Exit Sub
+
+            'Load Excel
+            Dim oXL As New Excel.Application
+            If oXL Is Nothing Then
+                MessageBox.Show("Excel is not properly installed!!")
+                Return
+            End If
+
+            Dim oWB As Excel.Workbook
+            Dim oSheet As Excel.Worksheet
+
+            oXL = CreateObject("Excel.Application")
+            oXL.Visible = False
+
+            oWB = oXL.Workbooks.Add
+            oSheet = oWB.ActiveSheet
+            oSheet.Name = "Consolidate"
+
+            Dim PbMaxValue As Integer = 0
+            For Each hash As DictionaryEntry In ht
+                database.dbName = hash.Value
+                Dim ds As DataSet = LoadSQL(mysql)
+                PbMaxValue += ds.Tables(0).Rows.Count
+                Console.WriteLine("Progress Bar Value " & PbMaxValue)
+            Next
+            pbProgress.Maximum = PbMaxValue
+            For Each hash As DictionaryEntry In ht
+                database.dbName = hash.Value
+                Dim rowCnt As Integer
+                Dim ds As DataSet = LoadSQL(mysql)
+                Dim tmpTableName As New TextBox, tmp As String
+
+                For Each dt In ds.Tables
+                    For Each column In dt.Columns
+                        tmpTableName.AppendText(column.ColumnName & " ")
+                    Next
+                Next
+
+                tmp = tmpTableName.Text.TrimEnd
+
+                Dim tmpCount() As String = tmp.Split(CChar(" "))
+                ds = LoadSQL(mysql)
+
+                ' ADD BRANCHCODE
+                InsertArrayElement(tmpCount, 0, "BRANCHCODE")
+
+                ' HEADERS
+                Dim cnt As Integer = 0
+                For Each hr In tmpCount
+                    cnt += 1 : oSheet.Cells(1, cnt).value = hr
+                Next
+
+
+                ' EXTRACTING
+                Console.WriteLine("Extracting " & GetOption("BranchCode"))
+                rowCnt += 2
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    For colCnt As Integer = 0 To tmpCount.Count - 1
+                        If colCnt = 0 Then
+                            oSheet.Cells(rowCnt, colCnt + 1).value = GetOption("BranchCode")
+                        Else
+                            oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
+                        End If
+                    Next
+                    pbProgress.Value = pbProgress.Value + 1
+                    rowCnt += 1
+
+                    Console.Write(".")
+                    Application.DoEvents()
+                Next
+                rowCnt -= 2
+                Application.DoEvents()
+            Next
+            oWB.SaveAs(dest)
+            oSheet = Nothing
+            oWB.Close(False)
+            oWB = Nothing
+            oXL.Quit()
+            oXL = Nothing
+
+            Console.WriteLine("Data Extracted")
 
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Critical)
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+            Exit Sub
         End Try
 
         Dim ans As DialogResult = MsgBox("Successfully Data Converted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly + MsgBoxStyle.DefaultButton2)
