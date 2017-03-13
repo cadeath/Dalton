@@ -1,4 +1,8 @@
 CHANGELOG
+Version 1.5
+ - Add SMS Module for Expiry Items
+ - Add TABLE SMS
+
 Version 1.4.1.15
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
