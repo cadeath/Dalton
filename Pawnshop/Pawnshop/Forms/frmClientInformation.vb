@@ -296,6 +296,8 @@ Public Class frmClientInformation
             End If
         End If
 
+        If txtCP1.Text = "" OrElse txtCP1.TextLength < 11 Then MsgBox("Please Enter Cellphone #", MsgBoxStyle.Information, "Validation") : txtCP1.Focus() : Return False
+
         Return True
     End Function
     ''' <summary>

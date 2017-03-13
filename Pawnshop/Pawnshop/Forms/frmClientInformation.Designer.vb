@@ -426,6 +426,7 @@ Partial Class frmClientInformation
         '
         Me.txtCP1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCP1.Location = New System.Drawing.Point(126, 24)
+        Me.txtCP1.MaxLength = 16
         Me.txtCP1.Name = "txtCP1"
         Me.txtCP1.Size = New System.Drawing.Size(165, 22)
         Me.txtCP1.TabIndex = 11
