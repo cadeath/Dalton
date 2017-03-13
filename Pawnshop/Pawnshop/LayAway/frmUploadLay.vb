@@ -2,6 +2,8 @@
 
 Public Class frmUploadLay
     Private InvoiceNum As Double = GetOption("InvoiceNum")
+    Const INTEGRITY_CHECK As String = "9nKFB3fmcquH6o6jI4BvqCce/N3Zbdt1BZ0Tgt3nUMQwuaS4Cd3etV0JbvO6jHFN"
+
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         lvLayAway.Items.Clear()
@@ -28,6 +30,11 @@ Public Class frmUploadLay
         For cnt As Integer = 0 To MaxColumn - 1
             checkHeaders(cnt) = oSheet.Cells(1, cnt + 1).value
         Next : checkHeaders(MaxColumn) = oWB.Worksheets(1).name
+
+        If Not TemplateCheck(checkHeaders) Then
+            MsgBox("Wrong File or Template was tampered", MsgBoxStyle.Critical, "Error")
+            GoTo unloadObj
+        End If
 
         Me.Enabled = False
         For cnt = 2 To MaxEntries
@@ -141,5 +148,15 @@ unloadObj:
         Next
 
         Return True
+    End Function
+
+    Private Function TemplateCheck(ByVal headers() As String) As Boolean
+        Dim mergeHeaders As String = ""
+        For Each head In headers
+            mergeHeaders &= head
+        Next
+        Console.WriteLine("Template " & HashString(mergeHeaders))
+        If HashString(mergeHeaders) = INTEGRITY_CHECK Then Return True
+        Return False
     End Function
 End Class

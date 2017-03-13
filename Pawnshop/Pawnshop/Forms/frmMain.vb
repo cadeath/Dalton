@@ -53,6 +53,9 @@
         CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
         AuctionMonthlyJewelryReportToolStripMenuItem.Enabled = Not st 'Auction MOnthly
         MonthlyInventoryReportsToolStripMenuItem.Enabled = Not st
+
+        MonthlySegrregatedListToolStripMenuItem.Enabled = Not st
+
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
         AuditReportToolStripMenuItem.Enabled = Not st
@@ -68,6 +71,8 @@
         InventoryReportToolStripMenuItem.Enabled = Not st
         StockoutReportToolStripMenuItem.Enabled = Not st
         'LayawayReportToolStripMenuItem.Enabled = Not st
+        StockInReportToolStripMenuItem.Enabled = Not st
+
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -374,6 +379,7 @@
     End Sub
 
     Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
+        frmSegreList.FormType = frmSegreList.SegreReport.Daily
         frmSegreList.Show()
     End Sub
 
@@ -568,6 +574,7 @@
         frmSalesReport.Show()
     End Sub
 
+
     Private Sub LayawayPaymentReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LayawayPaymentReportToolStripMenuItem.Click
         frmSalesReport.FormType = frmSalesReport.SaleReport.LayAway
         frmSalesReport.Show()
@@ -581,5 +588,10 @@
     Private Sub ForfeitLayawayReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForfeitLayawayReportToolStripMenuItem.Click
         frmSalesReport.FormType = frmSalesReport.SaleReport.Forfeit
         frmSalesReport.Show()
+
+    Private Sub MonthlySegrregatedListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlySegrregatedListToolStripMenuItem.Click
+        frmSegreList.FormType = frmSegreList.SegreReport.Monthly
+        frmSegreList.Show()
+
     End Sub
 End Class
