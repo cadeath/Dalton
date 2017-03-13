@@ -2,7 +2,7 @@
 
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
-
+    Friend doExpiry As Boolean = False
 
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
@@ -75,7 +75,18 @@
         doSegregate = AutoSegregate()
     End Sub
 
+    Private Sub ExecuteExpiry()
+        If doExpiry Then
+            Exit Sub
+        End If
+
+        frmSMSnotice.Show()
+        doExpiry = True
+    End Sub
+
     Private Sub Sample_Text()
+        If Not DEV_MODE Then Exit Sub
+
         Dim msg As String = "This is a sample message from DIS (Dalton Integrated System) Prototype. Please be advice - SenderID testing"
         'smsUtil.SendSMS("639360944853", msg) 'Don2
         'smsUtil.SendSMS("639257977559", msg) 'Eskie
@@ -249,6 +260,7 @@
         If dateSet Then
             tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
             If Not doSegregate Then ExecuteSegregate()
+            ExecuteExpiry()
         Else
             tsCurrentDate.Text = "Date not set"
         End If

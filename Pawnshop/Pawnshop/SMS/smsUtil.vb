@@ -54,51 +54,71 @@ Module smsUtil
         End If
     End Sub
 
-    Friend Sub do_DisplayExpiry(ByVal lv As ListView, ByVal noti As Form)
-        Dim th As New Threading.Thread(Sub() displayExpiry(lv, noti))
+    Friend Sub do_DisplayExpiry(ByVal lv As ListView)
+        Dim th As New Threading.Thread(Sub() displayExpiry(lv))
         th.Start()
     End Sub
 
-    Private Sub displayExpiry(ByVal lvExp As ListView, ByVal notiForm As Form)
-        If ExpiryList.Count > 0 Then
+    Private Sub FormActive(ByVal st As Boolean)
+        With frmSMSnotice
+            .lvExpiry.Enabled = st
+            .btnAll.Enabled = st
+            .btnSend.Enabled = st
+            .btnCancel.Enabled = st
+        End With
+    End Sub
 
-            For Each pt In ExpiryList
-                With pt
+    Private Delegate Sub displayExpiry_callback(ByVal lv As ListView)
+    Private Sub displayExpiry(ByVal lvExp As ListView)
+        If lvExp.InvokeRequired Then
+            lvExp.Invoke(New displayExpiry_callback(AddressOf displayExpiry), lvExp)
+        Else
+            lvExp.Items.Clear()
+
+            FormActive(False)
+            If ExpiryList.Count > 0 Then
+
+                For Each pt In ExpiryList
+                    With pt
+                        Dim lv As ListViewItem = lvExp.Items.Add(.PawnTicket)
+                        lv.SubItems.Add(String.Format("{0} {1}", .Pawner.FirstName, .Pawner.LastName))
+                        lv.SubItems.Add(cleanup_contact(pt))
+                        lv.SubItems.Add(.PawnItem.ItemClass.ClassName)
+                        lv.SubItems.Add(.Principal.ToString("#,##0.00"))
+                    End With
+
+                    Application.DoEvents()
+                Next
+
+                Exit Sub
+            End If
+
+            Dim mySql As String = _
+                String.Format("SELECT * FROM PAWN_LIST WHERE (EXPIRYDATE <= '{0}' AND AUCTIONDATE > '{0}') AND (STATUS = 'L' OR STATUS = 'R')", CurrentDate.ToString("M/d/yyyy"))
+            mySql &= vbCrLf & "ORDER BY LOANDATE ASC"
+            Console.WriteLine(mySql)
+
+            Dim ds As DataSet = LoadSQL(mySql)
+            If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
+            For Each dr As DataRow In ds.Tables(0).Rows
+                Dim ptExpired As New PawnTicket2
+                ptExpired.Load_PTid(dr("PAWNID"))
+
+                With ptExpired
                     Dim lv As ListViewItem = lvExp.Items.Add(.PawnTicket)
                     lv.SubItems.Add(String.Format("{0} {1}", .Pawner.FirstName, .Pawner.LastName))
-                    lv.SubItems.Add(cleanup_contact(pt))
+                    lv.SubItems.Add(cleanup_contact(ptExpired))
                     lv.SubItems.Add(.PawnItem.ItemClass.ClassName)
                     lv.SubItems.Add(.Principal.ToString("#,##0.00"))
                 End With
+
+                ExpiryList.Add(ptExpired)
+                Application.DoEvents()
             Next
 
-            Exit Sub
+            FormActive(True)
         End If
-
-        Dim mySql As String = _
-            String.Format("SELECT * FROM PAWN_LIST WHERE (EXPIRYDATE <= '{0}' AND AUCTIONDATE > '{0}') AND (STATUS <> 'V' OR STATUS <> 'W' OR STATUS <> 'X')", CurrentDate)
-        mySql &= vbCrLf & "ORDER BY LOANDATE ASC"
-        Console.WriteLine(mySql)
-
-        Dim ds As DataSet = LoadSQL(mySql)
-        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
-
-        For Each dr As DataRow In ds.Tables(0).Rows
-            Dim ptExpired As New PawnTicket2
-            ptExpired.Load_PT_row(dr)
-
-            With ptExpired
-                Dim lv As ListViewItem = lvExp.Items.Add(.PawnTicket)
-                lv.SubItems.Add(String.Format("{0} {1}", .Pawner.FirstName, .Pawner.LastName))
-                lv.SubItems.Add(cleanup_contact(ptExpired))
-                lv.SubItems.Add(.PawnItem.ItemClass.ClassName)
-                lv.SubItems.Add(.Principal.ToString("#,##0.00"))
-            End With
-
-            ExpiryList.Add(ptExpired)
-        Next
-
-        notiForm.Show()
     End Sub
 
     Private Function cleanup_contact(ByVal pt As PawnTicket2) As String
