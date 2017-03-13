@@ -11,6 +11,10 @@ Module smsUtil
     Private _initFile As String = "dalton.esk"
 
     Friend Sub SendSMS(ByVal num As String, ByVal msg As String)
+        If Not isReady() Then
+
+            Exit Sub
+        End If
         Dim config As New Configuration(_smsUser, _smsPassword)
         Dim smsClient As New OneApi.Client.Impl.SMSClient(config)
 
@@ -31,6 +35,17 @@ Module smsUtil
             With ini.GetSection("ACCOUNT")
                 _smsUser = .GetKey("User").Value
                 _smsPassword = DecryptString(.GetKey("Password").Value)
+            End With
+
+            smsReady = True
+        Else
+            System.IO.File.Create(_initFile).Dispose()
+
+            ini.Load(_initFile)
+            With ini
+                .AddSection("ACCOUNT").AddKey("User").Value = _smsUser
+                .AddSection("ACCOUNT").AddKey("Password").Value = EncryptString(_smsPassword)
+                .Save(_initFile)
             End With
 
             smsReady = True
