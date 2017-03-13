@@ -18,10 +18,10 @@
             End If
             End If
 
-            If Coi.ClientName <> Client Then
-                MsgBox("Invalid Customer ", MsgBoxStyle.Critical, "Warning!")
-                Exit Sub
-            End If
+        'If Coi.ClientName <> Client Then
+        '    MsgBox("Invalid Customer ", MsgBoxStyle.Critical, "Warning!")
+        '    Exit Sub
+        'End If
 
             For Each itm As ListViewItem In lvCoi.Items
                 If itm.Text.Contains(Coi.COInumber) Then
