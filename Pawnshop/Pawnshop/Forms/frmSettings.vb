@@ -35,6 +35,7 @@
         txtRevolving.Text = GetOption("RevolvingFund")
         txtCashInBank.Text = GetSAPAccount("Cash in Bank")
         txtCustomerCode.Text = GetOption("CustomerCode")
+        txtBranchAddr.Text = GetOption("Branch Address")
 
         If locked Then
             txtCode.Enabled = False
@@ -51,6 +52,8 @@
         txtMENum.Text = GetOption("MEnumLast")
         txtMRNum.Text = GetOption("MRNumLast")
         txtCashInvoice.Text = GetOption("InvoiceNum")
+        txtReturnNum.Text = GetOption("SalesReturnNum")
+        txtStockOutNum.Text = GetOption("STONum")
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -97,6 +100,7 @@
         MaintainBal = txtBal.Text
         UpdateSAPAccount("Cash in Bank", txtCashInBank.Text)
         UpdateOptions("CustomerCode", txtCustomerCode.Text, isOTPEnable)
+        UpdateOptions("Branch Address", txtBranchAddr.Text, isOTPEnable)
 
         'Second
         UpdateOptions("PawnLastNum", txtPawnTicket.Text, isOTPEnable)
@@ -106,6 +110,8 @@
         UpdateOptions("MEnumLast", txtMENum.Text, isOTPEnable)
         UpdateOptions("MRNumLast", txtMRNum.Text, isOTPEnable)
         UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
+        UpdateOptions("SalesReturnNum", txtReturnNum.Text, isOTPEnable)
+        UpdateOptions("STONum", txtStockOutNum.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)
@@ -126,7 +132,7 @@
         ds.Tables(fillData).Rows(0).Item("MaintainBal") = txtBal.Text
         SaveEntry(ds, False)
     End Sub
-    Private Sub txtBal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBal.KeyPress
+    Private Sub txtBal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
     End Sub
 
@@ -146,4 +152,5 @@
     Private Sub frmSettings_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         frmMain.Enabled = True
     End Sub
+
 End Class
