@@ -62,7 +62,6 @@ Public Class diagOTP
             Case OTPType.Inventory
                 frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
                 frmSalesReport.Show()
-
         End Select
     End Sub
 
