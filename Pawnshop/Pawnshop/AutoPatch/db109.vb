@@ -23,7 +23,7 @@
                 mySql = "ALTER TABLE TBL_DAILYTIMELOG ADD PRIMARY KEY (LOGS_ID);"
                 RunCommand(mySql)
 
-                mySql = "CREATE GENERATOR TBL_DAILYTIMELOG_LOGS_ID_GEN; "
+                mySql = "CREATE GENERATOR TBL_DAILYTIMELOG_LOGS_ID_GEN; 
                 RunCommand(mySql)
 
                 mySql = "CREATE TRIGGER BI_TBL_DAILYTIMELOG_LOGS_ID FOR TBL_DAILYTIMELOG "
