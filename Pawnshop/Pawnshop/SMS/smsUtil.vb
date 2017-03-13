@@ -1,4 +1,5 @@
-﻿Imports OneApi
+﻿Imports System
+Imports OneApi
 Imports OneApi.Model
 Imports OneApi.Config
 
@@ -9,6 +10,7 @@ Module smsUtil
     Private _smsSender As String = "DALTON"
     Private smsReady As Boolean = False
     Private _initFile As String = "dalton.esk"
+    Friend ExpiryList As New CollectionPawnTicket
 
     Friend Sub SendSMS(ByVal num As String, ByVal msg As String)
         If Not isReady() Then
@@ -52,9 +54,29 @@ Module smsUtil
         End If
     End Sub
 
-    Friend Sub displayExpiry(ByVal lvExp As ListView, ByVal notiForm As Form)
+    Friend Sub do_DisplayExpiry(ByVal lv As ListView, ByVal noti As Form)
+        Dim th As New Threading.Thread(Sub() displayExpiry(lv, noti))
+        th.Start()
+    End Sub
+
+    Private Sub displayExpiry(ByVal lvExp As ListView, ByVal notiForm As Form)
+        If ExpiryList.Count > 0 Then
+
+            For Each pt In ExpiryList
+                With pt
+                    Dim lv As ListViewItem = lvExp.Items.Add(.PawnTicket)
+                    lv.SubItems.Add(String.Format("{0} {1}", .Pawner.FirstName, .Pawner.LastName))
+                    lv.SubItems.Add(cleanup_contact(pt))
+                    lv.SubItems.Add(.PawnItem.ItemClass.ClassName)
+                    lv.SubItems.Add(.Principal.ToString("#,##0.00"))
+                End With
+            Next
+
+            Exit Sub
+        End If
+
         Dim mySql As String = _
-            String.Format("SELECT * FROM PAWN_LIST WHERE EXPIRYDATE = '{0}' AND STATUS <> 'V'", CurrentDate)
+            String.Format("SELECT * FROM PAWN_LIST WHERE (EXPIRYDATE <= '{0}' AND AUCTIONDATE > '{0}') AND (STATUS <> 'V' OR STATUS <> 'W' OR STATUS <> 'X')", CurrentDate)
         mySql &= vbCrLf & "ORDER BY LOANDATE ASC"
         Console.WriteLine(mySql)
 
@@ -63,7 +85,7 @@ Module smsUtil
 
         For Each dr As DataRow In ds.Tables(0).Rows
             Dim ptExpired As New PawnTicket2
-            ptExpired.Load_PTid(dr("PAWNID"))
+            ptExpired.Load_PT_row(dr)
 
             With ptExpired
                 Dim lv As ListViewItem = lvExp.Items.Add(.PawnTicket)
@@ -72,6 +94,8 @@ Module smsUtil
                 lv.SubItems.Add(.PawnItem.ItemClass.ClassName)
                 lv.SubItems.Add(.Principal.ToString("#,##0.00"))
             End With
+
+            ExpiryList.Add(ptExpired)
         Next
 
         notiForm.Show()

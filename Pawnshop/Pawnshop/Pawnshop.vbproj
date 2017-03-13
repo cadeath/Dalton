@@ -200,6 +200,7 @@
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
+    <Compile Include="Classes\CollectionPawnTicket.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\CollectionItemSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
