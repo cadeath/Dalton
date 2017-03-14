@@ -74,10 +74,16 @@
         If Not locked Then
             UpdateSetting()
         Else
+            OTPSettings_Initialization()
+
             If Not OTPDisable Then
-                diagOTP.FormType = diagOTP.OTPType.Settings
-                isOTPEnable = True
-                If Not CheckOTP() Then Exit Sub
+                diagGeneralOTP.GeneralOTP = OtpSettings
+                diagGeneralOTP.ShowDialog()
+                If Not diagGeneralOTP.isCorrect Then
+                    Exit Sub
+                Else
+                    UpdateSetting()
+                End If
             Else
                 UpdateSetting()
             End If

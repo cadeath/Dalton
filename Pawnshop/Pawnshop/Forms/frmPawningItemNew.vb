@@ -1317,9 +1317,23 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidPawning
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidPawning()
+        'End If
+
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidPawning
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isCorrect Then
+                Exit Sub
+            Else
+                VoidPawning()
+            End If
         Else
             VoidPawning()
         End If

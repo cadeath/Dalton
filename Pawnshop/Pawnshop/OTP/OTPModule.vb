@@ -19,92 +19,12 @@ Module OTPModule
         End If
     End Sub
 
-    Friend Sub OTPVoidPawning_Initialization()
+    Friend Sub OTPVoiding_Initialization()
         If OTPDisable Then Exit Sub
 
         OtpSettings = New OneTimePassword
-        OtpSettings.AppName = "Dalton - OTP Void Pawning"
-        OtpSettings.SecretCode = "OTPVoidPawning"
-        OtpSettings.Setup("marzxxx90@gmail.com")
-        Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-
-        If DEV_MODE Then
-            OtpSettings.Setup("eskie@pgc-itdept.org")
-            Console.WriteLine("QRCode: " & OtpSettings.ManualCode)
-            Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-        End If
-    End Sub
-
-    Friend Sub OTPVoidInsurance_Initialization()
-        If OTPDisable Then Exit Sub
-
-        OtpSettings = New OneTimePassword
-        OtpSettings.AppName = "Dalton - OTP Void Insurance"
-        OtpSettings.SecretCode = "OTPVoidInsurance"
-        OtpSettings.Setup("marzxxx90@gmail.com")
-        Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-
-        If DEV_MODE Then
-            OtpSettings.Setup("eskie@pgc-itdept.org")
-            Console.WriteLine("QRCode: " & OtpSettings.ManualCode)
-            Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-        End If
-    End Sub
-
-    Friend Sub OTPVoidBranch_Initialization()
-        If OTPDisable Then Exit Sub
-
-        OtpSettings = New OneTimePassword
-        OtpSettings.AppName = "Dalton - OTP Void Branch To Branch"
-        OtpSettings.SecretCode = "OTPVoidBranch"
-        OtpSettings.Setup("marzxxx90@gmail.com")
-        Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-
-        If DEV_MODE Then
-            OtpSettings.Setup("eskie@pgc-itdept.org")
-            Console.WriteLine("QRCode: " & OtpSettings.ManualCode)
-            Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-        End If
-    End Sub
-
-    Friend Sub OTPVoidMoneyTransfer_Initialization()
-        If OTPDisable Then Exit Sub
-
-        OtpSettings = New OneTimePassword
-        OtpSettings.AppName = "Dalton - OTP Void Money Transfer"
-        OtpSettings.SecretCode = "OTPVoidMoneyTransfer"
-        OtpSettings.Setup("marzxxx90@gmail.com")
-        Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-
-        If DEV_MODE Then
-            OtpSettings.Setup("eskie@pgc-itdept.org")
-            Console.WriteLine("QRCode: " & OtpSettings.ManualCode)
-            Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-        End If
-    End Sub
-
-    Friend Sub OTPVoidMoneyExchange_Initialization()
-        If OTPDisable Then Exit Sub
-
-        OtpSettings = New OneTimePassword
-        OtpSettings.AppName = "Dalton - OTP Void Money Exchange"
-        OtpSettings.SecretCode = "OTPVoidMoneyExchange"
-        OtpSettings.Setup("marzxxx90@gmail.com")
-        Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-
-        If DEV_MODE Then
-            OtpSettings.Setup("eskie@pgc-itdept.org")
-            Console.WriteLine("QRCode: " & OtpSettings.ManualCode)
-            Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
-        End If
-    End Sub
-
-    Friend Sub OTPVoidCashInOut_Initialization()
-        If OTPDisable Then Exit Sub
-
-        OtpSettings = New OneTimePassword
-        OtpSettings.AppName = "Dalton - OTP Void Cash In / Out"
-        OtpSettings.SecretCode = "OTPVoidCashInOut"
+        OtpSettings.AppName = "Dalton - OTP Voiding"
+        OtpSettings.SecretCode = "OTPVoiding"
         OtpSettings.Setup("marzxxx90@gmail.com")
         Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
 
@@ -147,6 +67,7 @@ Module OTPModule
         End If
     End Sub
 
+
     Friend Sub OTPStockOut_Initialization()
         If OTPDisable Then Exit Sub
 
@@ -162,4 +83,5 @@ Module OTPModule
             Console.WriteLine("QRCode URL: " & OtpSettings.QRCode_URL)
         End If
     End Sub
+
 End Module
