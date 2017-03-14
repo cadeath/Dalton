@@ -63,6 +63,7 @@ Public Class diagOTP
                 frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
                 frmSalesReport.Show()
 
+                frmSalesReport.TopMost = True
         End Select
     End Sub
 
