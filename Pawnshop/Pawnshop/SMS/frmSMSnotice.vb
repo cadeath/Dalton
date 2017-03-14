@@ -105,8 +105,8 @@
 
                 Dim dr As DataRow = ExpiryCache.Select("PAWNTICKET = " & pawner.Text)(0)
 
-                'Console.WriteLine(pawner.SubItems(1).Text & ">" & pawner.SubItems(2).Text)
-                'Console.WriteLine("MSG: " & MessageBuilder(TextMessage, dr))
+                Console.WriteLine(pawner.SubItems(1).Text & ">" & pawner.SubItems(2).Text)
+                Console.WriteLine("MSG: " & MessageBuilder(TextMessage, dr))
                 'smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
             Next
 

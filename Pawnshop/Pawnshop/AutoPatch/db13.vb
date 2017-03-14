@@ -55,7 +55,6 @@
         createView &= vbCrLf & "LEFT JOIN TBL_GAMIT USR "
         createView &= vbCrLf & "ON USR.USERID = P.APPRAISERID;"
 
-        Console.WriteLine(createView)
         RunCommand(dropView)
         RunCommand(createView)
 
