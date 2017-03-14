@@ -6,7 +6,7 @@
 ''' <remarks>NOTE: Privilege PDuNxp8S9q0= means SUPER USER</remarks>
 Public Class Sys_user
 
-    Private maintable As String = "tbl_users"
+    Private maintable As String = "tbl_user_default"
     Private subTable As String = "tbluser_history"
     Private mySql As String = String.Empty
 
@@ -81,12 +81,12 @@ Public Class Sys_user
         End Set
     End Property
 
-    Private _CONTACTNO As Integer
-    Public Property CONTACTNO() As Integer
+    Private _CONTACTNO As String
+    Public Property CONTACTNO() As String
         Get
             Return _CONTACTNO
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             _CONTACTNO = value
         End Set
     End Property
@@ -162,6 +162,16 @@ Public Class Sys_user
         End Set
     End Property
 
+    Private _systeminfo As Date
+    Public Property systeminfo() As Date
+        Get
+            Return _systeminfo
+        End Get
+        Set(ByVal value As Date)
+            _systeminfo = value
+        End Set
+    End Property
+
     Private _EXPIRYDATE As Date
     Public Property EXPIRYDATE() As Date
         Get
@@ -172,8 +182,15 @@ Public Class Sys_user
         End Set
     End Property
 
-  
-
+    Private _DAYSCOUNT As Integer
+    Public Property DAYSCOUNT() As Integer
+        Get
+            Return _DAYSCOUNT
+        End Get
+        Set(ByVal value As Integer)
+            _DAYSCOUNT = value
+        End Set
+    End Property
     '""""""""""""""""""""""""""""""''''''''''''''''''Subtable''''''''""""""""""""""""
 
     Private _USER_HISTORYID As Integer
@@ -186,17 +203,32 @@ Public Class Sys_user
         End Set
     End Property
 
+    Private _COUNTER As Integer
+    Public Property COUNTER() As Integer
+        Get
+            Return _COUNTER
+        End Get
+        Set(ByVal value As Integer)
+            _COUNTER = value
+        End Set
+    End Property
 
+    Private _DATE_CREATED As Date
+    Public Property DATE_CREATED() As Date
+        Get
+            Return _DATE_CREATED
+        End Get
+        Set(ByVal value As Date)
+            _DATE_CREATED = value
+        End Set
 
+    End Property
 #End Region
-
-
-
 
 #Region "Procedures and Functions"
 
     Friend Function add_USER() As Boolean
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE PRIVILEGE_TYPE = '{0}'", _USERPASS)
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", _USERPASS)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         If ds.Tables(maintable).Rows.Count > 0 Then
@@ -212,31 +244,89 @@ Public Class Sys_user
             .Item("MIDDLENAME") = _MIDDLENAME
             .Item("LASTNAME") = _LASTNAME
             .Item("USERPASS") = EncryptString(_USERPASS)
-            .Item("EMAIL_ADDRESS") = _CONTACTNO
+            .Item("EMAIL_ADDRESS") = _EMAIL_ADDRESS
+            .Item("CONTACTNO") = _CONTACTNO
             .Item("BIRTHDAY") = _BIRTHDAY
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
-            .Item("PRIVILEGE") = _privilege
-            .Item("LASTLOGIN") = _AGE
-            .Item("ENCODERID") = _encoderID
-            .Item("EXPIRYDATE") = _EXPIRYDATE
-            .Item("SYSTEMINFO") = Now
-            .Item("STATUS") = _UserStatus
+            'Item("PRIVILEGE") = _privilege
+            '.Item("LASTLOGIN") = _AGE
+            '.Item("ENCODERID") = _encoderID
+            .Item("EXPIRYDATE") = Now.AddDays(90)
+            .Item("SYSTEMINFO") = Now.ToShortDateString
+            .Item("DAYS_COUNT") = 0
+            .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
         database.SaveEntry(ds)
 
+        mySql = "SELECT * FROM " & maintable & " ORDER BY USERID DESC ROWS 1"
+        Dim ds1 As DataSet = LoadSQL(mySql, maintable)
+        _ID = ds1.Tables(0).Rows(0).Item("USERID")
+        _USERPASS = ds1.Tables(0).Rows(0).Item("USERPASS")
+
         mySql = "SELECT * FROM " & subTable
-        Dim ds1 As DataSet = LoadSQL(mySql, subTable)
-
+        Dim ds2 As DataSet = LoadSQL(mySql, subTable)
         Dim dr As DataRow
-        dr = ds.Tables(subTable).NewRow
+        dr = ds2.Tables(subTable).NewRow
         With dr
-
+            .Item("USERID") = _ID
+            .Item("USERPASS") = _USERPASS
+            .Item("COUNTER") = 1
+            .Item("DATE_CREATED") = Now.ToShortDateString
         End With
+        ds2.Tables(subTable).Rows.Add(dr)
+        database.SaveEntry(ds2)
 
         Return True
     End Function
 
+    Friend Function dsUSEr() As DataSet
+        Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT"
+        Dim ds As DataSet = LoadSQL(mysql, "TBL_USER_DEFAULT")
+        Return ds
+    End Function
+
+    Friend Sub Users(ByVal id As Integer)
+        Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT WHERE USERID = '" & id & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "TBL_USER_DEFAULT")
+
+        Load_user_All_Rows(ds.Tables(0).Rows(0))
+    End Sub
+
+    Friend Sub Load_user_All_Rows(ByVal dR As DataRow)
+        On Error Resume Next
+
+        With dR
+            _ID = .Item("USERID")
+            _USERNAME = .Item("USERNAME")
+            _FIRSTNAME = .Item("FIRSTNAME")
+            _MIDDLENAME = IIf(IsDBNull(.Item("MIDDLENAME")), "", .Item("MIDDLENAME"))
+            _LASTNAME = .Item("LASTNAME")
+            _USERPASS = .Item("USERPASS")
+            _EMAIL_ADDRESS = .Item("EMAIL_ADDRESS")
+            _CONTACTNO = .Item("CONTACTNO")
+            _BIRTHDAY = .Item("BIRTHDAY")
+            _GENDER = .Item("GENDER")
+            _AGE = .Item("AGE")
+            _privilege = IIf(IsDBNull(.Item("PRIVILEGE")), "", .Item("PRIVILEGE"))
+            _lastLogin = IIf(IsDBNull(.Item("LASTLOGIN")), "", .Item("LASTLOGIN"))
+            _EXPIRYDATE = .Item("EXPIRYDATE")
+            _systeminfo = .Item("SYSTEMINFO")
+            _DAYSCOUNT = .Item("DAYS_COUNT")
+            _UserStatus = .Item("STATUS")
+        End With
+    End Sub
+
+    Friend Sub User_Expiration()
+        Dim ds As DataSet = dsUSEr()
+        For Each dr As DataRow In ds.Tables(0).Rows
+            With dr
+                .Item("DAYS_COUNT") = .Item("DAYS_COUNT") + 1
+            End With
+            database.SaveEntry(ds, False)
+        Next
+    End Sub
+  
 #End Region
 End Class
