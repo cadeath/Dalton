@@ -83,4 +83,15 @@
         Next
     End Sub
 
+    Private Sub btnSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSend.Click
+        displayStatus(String.Format("Sending Messages to {0} client{1}", lvExpiry.CheckedItems.Count, IIf(lvExpiry.CheckedItems.Count > 1, "s", "")))
+    End Sub
+
+    Private Sub displayStatus(ByVal str As String)
+        frmMain.statusStrip.Items("tssOthers").Text = str
+    End Sub
+
+    Private Sub do_MassTexting()
+
+    End Sub
 End Class

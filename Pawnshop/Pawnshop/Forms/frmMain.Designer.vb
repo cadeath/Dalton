@@ -104,6 +104,7 @@ Partial Class frmMain
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
         Me.ExpiryListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tssOthers = New System.Windows.Forms.ToolStripStatusLabel()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -621,7 +622,7 @@ Partial Class frmMain
         '
         'statusStrip
         '
-        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser})
+        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser, Me.tssOthers})
         Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
         Me.statusStrip.Size = New System.Drawing.Size(1063, 22)
@@ -673,6 +674,11 @@ Partial Class frmMain
         Me.ExpiryListToolStripMenuItem.Name = "ExpiryListToolStripMenuItem"
         Me.ExpiryListToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.ExpiryListToolStripMenuItem.Text = "Expiry List"
+        '
+        'tssOthers
+        '
+        Me.tssOthers.Name = "tssOthers"
+        Me.tssOthers.Size = New System.Drawing.Size(0, 17)
         '
         'frmMain
         '
@@ -791,6 +797,7 @@ Partial Class frmMain
     Friend WithEvents StockInReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyInventoryReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tssOthers As System.Windows.Forms.ToolStripStatusLabel
 
 
 

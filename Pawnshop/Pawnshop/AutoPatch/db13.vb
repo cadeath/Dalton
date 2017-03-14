@@ -7,6 +7,7 @@
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
+            Update_Maintenance()
             Modify_View_PawnList()
             Add_Field_Sent_Notice()
             Add_Table_SMS()
@@ -16,6 +17,10 @@
         Catch ex As Exception
             Log_Report(String.Format("[{0}]" & ex.ToString, LATEST_VERSION))
         End Try
+    End Sub
+
+    Private Sub Update_Maintenance()
+        UpdateOptions("SMS_MSG", "HI %LASTNAME%, YOUR PT#%PT% WILL BE AUCTION ON %AUCTIONDATE%. Please settle it before that date.")
     End Sub
 
     Private Sub Modify_View_PawnList()
