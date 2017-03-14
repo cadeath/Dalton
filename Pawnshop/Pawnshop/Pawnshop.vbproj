@@ -193,11 +193,8 @@
     <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="AutoPatch\db1224.vb" />
     <Compile Include="AutoPatch\db1232.vb" />
-<<<<<<< HEAD
     <Compile Include="AutoPatch\db13.vb" />
-=======
     <Compile Include="AutoPatch\db124.vb" />
->>>>>>> refs/remotes/origin/Settings-Module-#111
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
