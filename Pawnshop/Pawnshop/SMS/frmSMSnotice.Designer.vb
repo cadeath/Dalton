@@ -22,7 +22,7 @@ Partial Class frmSMSnotice
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"151543", "Eskie Maquilang", "092579775595", "Ring", "1000"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"151543", "Eskie Maquilang", "092579775595", "Ring", "1000"}, -1)
         Me.lvExpiry = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -41,8 +41,8 @@ Partial Class frmSMSnotice
         Me.lvExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvExpiry.FullRowSelect = True
         Me.lvExpiry.GridLines = True
-        ListViewItem2.StateImageIndex = 0
-        Me.lvExpiry.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem2})
+        ListViewItem1.StateImageIndex = 0
+        Me.lvExpiry.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvExpiry.Location = New System.Drawing.Point(12, 12)
         Me.lvExpiry.Name = "lvExpiry"
         Me.lvExpiry.Size = New System.Drawing.Size(688, 250)
@@ -73,6 +73,7 @@ Partial Class frmSMSnotice
         'ColumnHeader5
         '
         Me.ColumnHeader5.Text = "Principal"
+        Me.ColumnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeader5.Width = 83
         '
         'btnAll
@@ -114,6 +115,7 @@ Partial Class frmSMSnotice
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmSMSnotice"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Expiry Notification"
         Me.ResumeLayout(False)
 

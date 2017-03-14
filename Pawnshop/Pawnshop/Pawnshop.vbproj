@@ -825,6 +825,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Pawn.vb" />
+    <Compile Include="SMS\diagChangeNum.Designer.vb">
+      <DependentUpon>diagChangeNum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\diagChangeNum.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SMS\frmSMSnotice.Designer.vb">
       <DependentUpon>frmSMSnotice.vb</DependentUpon>
     </Compile>
@@ -1254,6 +1260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Seed\frmSeed.resx">
       <DependentUpon>frmSeed.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SMS\diagChangeNum.resx">
+      <DependentUpon>diagChangeNum.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SMS\frmSMSnotice.resx">
       <DependentUpon>frmSMSnotice.vb</DependentUpon>

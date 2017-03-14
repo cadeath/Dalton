@@ -11,7 +11,7 @@ Module smsUtil
     Private smsReady As Boolean = False
     Private _initFile As String = "dalton.esk"
     Friend ExpiryList As New CollectionPawnTicket
-    Friend ExpiryCache As DataTable
+    Friend ExpiryCache As New DataTable
 
     Friend Sub SendSMS(ByVal num As String, ByVal msg As String)
         If Not isReady() Then
@@ -64,15 +64,8 @@ Module smsUtil
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub
 
-        ExpiryCache.Clear()
+        Console.WriteLine("Count: " & ds.Tables(0).Rows.Count)
         ExpiryCache = ds.Tables(0)
-        'For Each dr As DataRow In ds.Tables(0).Rows
-        '    Dim ptExpired As New PawnTicket2
-        '    ptExpired.Load_PTid(dr("PAWNID"))
-
-        '    ExpiryList.Add(ptExpired)
-        '    Application.DoEvents()
-        'Next
 
         If frmNoti Is Nothing Then Exit Sub
         frmNoti.Show()

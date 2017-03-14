@@ -80,7 +80,7 @@
             Exit Sub
         End If
 
-        Load_Expiry()
+        Load_Expiry(frmSMSnotice)
         doExpiry = True
     End Sub
 
