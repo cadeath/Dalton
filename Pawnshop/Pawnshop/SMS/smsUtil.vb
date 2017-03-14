@@ -128,4 +128,22 @@ Module smsUtil
 
         Return "INV-" & str
     End Function
+
+    Friend Function MessageBuilder(ByVal msg As String, ByVal dr As DataRow) As String
+        For Each colName As DataColumn In dr.Table.Columns
+            Dim sanitize As String
+
+            If msg.Contains(String.Format("%{0}%", colName.ToString)) Then
+                If colName.DataType = GetType(System.DateTime) Then
+                    sanitize = dr(colName)
+                Else
+                    sanitize = dr(colName)
+                End If
+
+                msg = msg.Replace(String.Format("%{0}%", colName.ToString), sanitize)
+            End If
+        Next
+
+        Return msg
+    End Function
 End Module

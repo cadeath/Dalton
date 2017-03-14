@@ -84,14 +84,34 @@
     End Sub
 
     Private Sub btnSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSend.Click
-        displayStatus(String.Format("Sending Messages to {0} client{1}", lvExpiry.CheckedItems.Count, IIf(lvExpiry.CheckedItems.Count > 1, "s", "")))
+        If lvExpiry.CheckedItems.Count <= 0 Then Exit Sub
+        frmMain.displayStatus(String.Format("Sending Messages to {0} client{1}", lvExpiry.CheckedItems.Count, IIf(lvExpiry.CheckedItems.Count > 1, "s", "")))
+
+        'Dim th As New Threading.Thread(AddressOf do_MassTexting)
+        Dim th = New Threading.Thread(AddressOf do_MassTexting)
+        th.SetApartmentState(Threading.ApartmentState.STA)
+        th.Start()
     End Sub
 
-    Private Sub displayStatus(ByVal str As String)
-        frmMain.statusStrip.Items("tssOthers").Text = str
-    End Sub
-
+    Private Delegate Sub doMassTexting_callback()
     Private Sub do_MassTexting()
+        If lvExpiry.InvokeRequired Then
+            lvExpiry.Invoke(New doMassTexting_callback(AddressOf do_MassTexting))
+        Else
+            Dim TextMessage As String = GetOption("SMS_MSG")
 
+            For Each pawner As ListViewItem In lvExpiry.CheckedItems
+                If pawner.SubItems(2).Text.Contains("INV") Then Continue For
+
+                Dim dr As DataRow = ExpiryCache.Select("PAWNTICKET = " & pawner.Text)(0)
+
+                'Console.WriteLine(pawner.SubItems(1).Text & ">" & pawner.SubItems(2).Text)
+                'Console.WriteLine("MSG: " & MessageBuilder(TextMessage, dr))
+                smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
+            Next
+
+            frmMain.displayStatus("Sending Expiry List Completed")
+            Me.Close()
+        End If
     End Sub
 End Class

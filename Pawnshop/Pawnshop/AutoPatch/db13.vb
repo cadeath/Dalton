@@ -20,7 +20,7 @@
     End Sub
 
     Private Sub Update_Maintenance()
-        UpdateOptions("SMS_MSG", "HI %LASTNAME%, YOUR PT#%PT% WILL BE AUCTION ON %AUCTIONDATE%. Please settle it before that date.")
+        UpdateOptions("SMS_MSG", "HI %CLIENT%, YOUR PT#%PAWNTICKET% WILL BE AUCTION ON %AUCTIONDATE%. Please settle it before that date.")
     End Sub
 
     Private Sub Modify_View_PawnList()
@@ -74,6 +74,8 @@
         sms &= vbCrLf & "  PAWNTICKET INTEGER DEFAULT '0' NOT NULL,"
         sms &= vbCrLf & "  CLIENTID INTEGER DEFAULT '0' NOT NULL,"
         sms &= vbCrLf & "  SMS_MSG VARCHAR(200),"
+        sms &= vbCrLf & "  SENT_BY SMALLINT,"
+        sms &= vbCrLf & "  REMARKS VARCHAR(255),"
         sms &= vbCrLf & "  CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0) NOT NULL);"
 
         RunCommand(sms)

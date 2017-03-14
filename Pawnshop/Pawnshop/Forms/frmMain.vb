@@ -79,10 +79,10 @@
         If doExpiry Then
             Exit Sub
         End If
+        doExpiry = True
 
         frmSMSnotice.autoStart = True
         Load_Expiry(frmSMSnotice)
-        doExpiry = True
     End Sub
 
     Private Sub Sample_Text()
@@ -593,5 +593,16 @@
 
     Private Sub ExpiryListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryListToolStripMenuItem.Click
         frmSMSnotice.Show()
+    End Sub
+
+    Private Delegate Sub displayStatus_callback(ByVal str As String)
+    Friend Sub displayStatus(ByVal str As String)
+        statusStrip.Items("tssOthers").Text = str
+
+        'If statusStrip.InvokeRequired Then
+        '    statusStrip.Invoke(New displayStatus_callback(AddressOf displayStatus), str)
+        'Else
+        '    statusStrip.Items("tssOthers").Text = str
+        'End If
     End Sub
 End Class
