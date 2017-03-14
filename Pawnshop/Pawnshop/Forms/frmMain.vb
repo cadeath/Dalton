@@ -80,7 +80,7 @@
             Exit Sub
         End If
 
-        frmSMSnotice.Show()
+        Load_Expiry()
         doExpiry = True
     End Sub
 

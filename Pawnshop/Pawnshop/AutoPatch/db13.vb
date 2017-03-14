@@ -7,6 +7,7 @@
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
+            Modify_View_PawnList()
             Add_Field_Sent_Notice()
             Add_Table_SMS()
 
@@ -15,6 +16,41 @@
         Catch ex As Exception
             Log_Report(String.Format("[{0}]" & ex.ToString, LATEST_VERSION))
         End Try
+    End Sub
+
+    Private Sub Modify_View_PawnList()
+        Dim dropView As String = "DROP VIEW PAWN_LIST;"
+        Dim createView As String
+        createView = "CREATE VIEW PAWN_LIST("
+        createView &= vbCrLf & "  PAWNID,  PAWNTICKET,  LOANDATE,  MATUDATE,  EXPIRYDATE,  AUCTIONDATE,"
+        createView &= vbCrLf & "  CLIENTID,  CLIENT,  CONTACTNUMBER,  FULLADDRESS,  ITEMCLASS,  ITEMCATEGORY,  DESCRIPTION,"
+        createView &= vbCrLf & "  OLDTICKET,  ORNUM,  ORDATE,  PRINCIPAL,  DELAYINTEREST,  ADVINT,  SERVICECHARGE,  "
+        createView &= vbCrLf & "  NETAMOUNT,  RENEWDUE,  REDEEMDUE,  APPRAISAL,  PENALTY,"
+        createView &= vbCrLf & "  STATUS,  WITHDRAWDATE,  APPRAISER)"
+        createView &= vbCrLf & "AS"
+        createView &= vbCrLf & "SELECT "
+        createView &= vbCrLf & "P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, "
+        createView &= vbCrLf & "C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        createView &= vbCrLf & "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT, C.PHONE1 AS CONTACTNUMBER, "
+        createView &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE || ' ' || C.ADDR_ZIP as FULLADDRESS, "
+        createView &= vbCrLf & "ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, "
+        createView &= vbCrLf & "P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, "
+        createView &= vbCrLf & "P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, "
+        createView &= vbCrLf & "P.STATUS, ITM.WITHDRAWDATE, USR.USERNAME AS APPRAISER "
+        createView &= vbCrLf & "FROM OPT P "
+        createView &= vbCrLf & "INNER JOIN TBLCLIENT C "
+        createView &= vbCrLf & "ON P.CLIENTID = C.CLIENTID "
+        createView &= vbCrLf & "INNER JOIN OPI ITM "
+        createView &= vbCrLf & "ON ITM.PAWNITEMID = P.PAWNITEMID "
+        createView &= vbCrLf & "INNER JOIN TBLITEM CLASS "
+        createView &= vbCrLf & "ON CLASS.ITEMID = ITM.ITEMID "
+        createView &= vbCrLf & "LEFT JOIN TBL_GAMIT USR "
+        createView &= vbCrLf & "ON USR.USERID = P.APPRAISERID;"
+
+        RunCommand(dropView)
+        RunCommand(createView)
+
+        Console.WriteLine("View Modified")
     End Sub
 
     Private Sub Add_Field_Sent_Notice()

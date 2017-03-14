@@ -11,6 +11,7 @@ Module smsUtil
     Private smsReady As Boolean = False
     Private _initFile As String = "dalton.esk"
     Friend ExpiryList As New CollectionPawnTicket
+    Friend ExpiryCache As DataTable
 
     Friend Sub SendSMS(ByVal num As String, ByVal msg As String)
         If Not isReady() Then
@@ -54,83 +55,39 @@ Module smsUtil
         End If
     End Sub
 
-    Friend Sub do_DisplayExpiry(ByVal lv As ListView)
-        Dim th As New Threading.Thread(Sub() displayExpiry(lv))
-        th.Start()
-    End Sub
-
-    Private Sub FormActive(ByVal st As Boolean)
-        With frmSMSnotice
-            .lvExpiry.Enabled = st
-            .btnAll.Enabled = st
-            .btnSend.Enabled = st
-            .btnCancel.Enabled = st
-        End With
-    End Sub
-
-    Private Delegate Sub displayExpiry_callback(ByVal lv As ListView)
-    Private Sub displayExpiry(ByVal lvExp As ListView)
-        If lvExp.InvokeRequired Then
-            lvExp.Invoke(New displayExpiry_callback(AddressOf displayExpiry), lvExp)
-        Else
-            lvExp.Items.Clear()
-
-            FormActive(False)
-            If ExpiryList.Count > 0 Then
-
-                For Each pt In ExpiryList
-                    With pt
-                        Dim lv As ListViewItem = lvExp.Items.Add(.PawnTicket)
-                        lv.SubItems.Add(String.Format("{0} {1}", .Pawner.FirstName, .Pawner.LastName))
-                        lv.SubItems.Add(cleanup_contact(pt))
-                        lv.SubItems.Add(.PawnItem.ItemClass.ClassName)
-                        lv.SubItems.Add(.Principal.ToString("#,##0.00"))
-                    End With
-
-                    Application.DoEvents()
-                Next
-
-                Exit Sub
-            End If
-
-            Dim mySql As String = _
+    Friend Sub Load_Expiry(Optional ByVal frmNoti As Form = Nothing)
+        Dim mySql As String = _
                 String.Format("SELECT * FROM PAWN_LIST WHERE (EXPIRYDATE <= '{0}' AND AUCTIONDATE > '{0}') AND (STATUS = 'L' OR STATUS = 'R')", CurrentDate.ToString("M/d/yyyy"))
-            mySql &= vbCrLf & "ORDER BY LOANDATE ASC"
-            Console.WriteLine(mySql)
+        mySql &= vbCrLf & "ORDER BY LOANDATE ASC"
+        Console.WriteLine(mySql)
 
-            Dim ds As DataSet = LoadSQL(mySql)
-            If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+        Dim ds As DataSet = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
 
-            For Each dr As DataRow In ds.Tables(0).Rows
-                Dim ptExpired As New PawnTicket2
-                ptExpired.Load_PTid(dr("PAWNID"))
+        ExpiryCache.Clear()
+        ExpiryCache = ds.Tables(0)
+        'For Each dr As DataRow In ds.Tables(0).Rows
+        '    Dim ptExpired As New PawnTicket2
+        '    ptExpired.Load_PTid(dr("PAWNID"))
 
-                With ptExpired
-                    Dim lv As ListViewItem = lvExp.Items.Add(.PawnTicket)
-                    lv.SubItems.Add(String.Format("{0} {1}", .Pawner.FirstName, .Pawner.LastName))
-                    lv.SubItems.Add(cleanup_contact(ptExpired))
-                    lv.SubItems.Add(.PawnItem.ItemClass.ClassName)
-                    lv.SubItems.Add(.Principal.ToString("#,##0.00"))
-                End With
+        '    ExpiryList.Add(ptExpired)
+        '    Application.DoEvents()
+        'Next
 
-                ExpiryList.Add(ptExpired)
-                Application.DoEvents()
-            Next
-
-            FormActive(True)
-        End If
+        If frmNoti Is Nothing Then Exit Sub
+        frmNoti.Show()
     End Sub
 
-    Private Function cleanup_contact(ByVal pt As PawnTicket2) As String
+    Friend Function cleanup_contact(ByVal cl As Client) As String
         Dim c1 As String, c2 As String, c3 As String
 
         'Validate Contact Numbers
-        c1 = validate_cp(pt.Pawner.Cellphone1)
-        c2 = validate_cp(pt.Pawner.Cellphone2)
-        c3 = validate_cp(pt.Pawner.OtherNumber)
+        c1 = validate_cp(cl.Cellphone1)
+        c2 = validate_cp(cl.Cellphone2)
+        c3 = validate_cp(cl.OtherNumber)
 
         If c1 = "INVALID" And c2 = "INVALID" And c3 = "INVALID" Then
-            Return String.Format("INVALID>{0}|{1}|{2}", c1, c2, c3)
+            Return String.Format("{0}|{1}|{2}", c1, c2, c3)
         End If
 
         If c1 <> "INVALID" Then
@@ -176,6 +133,6 @@ Module smsUtil
         End If
 
 
-        Return "INVALID"
+        Return "INV-" & str
     End Function
 End Module
