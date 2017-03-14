@@ -107,7 +107,7 @@
 
                 'Console.WriteLine(pawner.SubItems(1).Text & ">" & pawner.SubItems(2).Text)
                 'Console.WriteLine("MSG: " & MessageBuilder(TextMessage, dr))
-                smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
+                'smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
             Next
 
             frmMain.displayStatus("Sending Expiry List Completed")

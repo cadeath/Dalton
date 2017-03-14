@@ -864,7 +864,7 @@
     <Compile Include="SMS\frmSMSnotice.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SMS\IniFileVb.vb" />
+    <Compile Include="Modules\IniFileVb.vb" />
     <Compile Include="SMS\smsUtil.vb" />
   </ItemGroup>
   <ItemGroup>

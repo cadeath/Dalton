@@ -57,7 +57,7 @@ Module smsUtil
 
     Friend Sub Load_Expiry(Optional ByVal frmNoti As Form = Nothing)
         Dim mySql As String = _
-                String.Format("SELECT * FROM PAWN_LIST WHERE (EXPIRYDATE <= '{0}' AND AUCTIONDATE > '{0}') AND (STATUS = 'L' OR STATUS = 'R')", CurrentDate.ToString("M/d/yyyy"))
+                String.Format("SELECT * FROM PAWN_LIST WHERE (EXPIRYDATE <= '{0}' AND AUCTIONDATE > '{0}') AND (STATUS = 'L' OR STATUS = 'R') AND SENT_NOTICE = 0", CurrentDate.ToString("M/d/yyyy"))
         mySql &= vbCrLf & "ORDER BY LOANDATE ASC"
         Console.WriteLine(mySql)
 

@@ -7,10 +7,11 @@
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
         Try
-            Update_Maintenance()
-            Modify_View_PawnList()
+
             Add_Field_Sent_Notice()
             Add_Table_SMS()
+            Modify_View_PawnList()
+            Update_Maintenance()
 
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
@@ -26,12 +27,14 @@
     Private Sub Modify_View_PawnList()
         Dim dropView As String = "DROP VIEW PAWN_LIST;"
         Dim createView As String
+
         createView = "CREATE VIEW PAWN_LIST("
         createView &= vbCrLf & "  PAWNID,  PAWNTICKET,  LOANDATE,  MATUDATE,  EXPIRYDATE,  AUCTIONDATE,"
-        createView &= vbCrLf & "  CLIENTID,  CLIENT,  CONTACTNUMBER,  FULLADDRESS,  ITEMCLASS,  ITEMCATEGORY,  DESCRIPTION,"
-        createView &= vbCrLf & "  OLDTICKET,  ORNUM,  ORDATE,  PRINCIPAL,  DELAYINTEREST,  ADVINT,  SERVICECHARGE,  "
+        createView &= vbCrLf & "  CLIENTID,  CLIENT,  CONTACTNUMBER,  FULLADDRESS,"
+        createView &= vbCrLf & "  ITEMCLASS,  ITEMCATEGORY,  DESCRIPTION,  OLDTICKET,  ORNUM,  ORDATE,"
+        createView &= vbCrLf & "  PRINCIPAL,  DELAYINTEREST,  ADVINT,  SERVICECHARGE,"
         createView &= vbCrLf & "  NETAMOUNT,  RENEWDUE,  REDEEMDUE,  APPRAISAL,  PENALTY,"
-        createView &= vbCrLf & "  STATUS,  WITHDRAWDATE,  APPRAISER)"
+        createView &= vbCrLf & "  STATUS,  WITHDRAWDATE,  APPRAISER,  SENT_NOTICE )"
         createView &= vbCrLf & "AS"
         createView &= vbCrLf & "SELECT "
         createView &= vbCrLf & "P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, "
@@ -41,7 +44,7 @@
         createView &= vbCrLf & "ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, "
         createView &= vbCrLf & "P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, "
         createView &= vbCrLf & "P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, "
-        createView &= vbCrLf & "P.STATUS, ITM.WITHDRAWDATE, USR.USERNAME AS APPRAISER "
+        createView &= vbCrLf & "P.STATUS, ITM.WITHDRAWDATE, USR.USERNAME AS APPRAISER, P.SENT_NOTICE "
         createView &= vbCrLf & "FROM OPT P "
         createView &= vbCrLf & "INNER JOIN TBLCLIENT C "
         createView &= vbCrLf & "ON P.CLIENTID = C.CLIENTID "
@@ -52,6 +55,7 @@
         createView &= vbCrLf & "LEFT JOIN TBL_GAMIT USR "
         createView &= vbCrLf & "ON USR.USERID = P.APPRAISERID;"
 
+        Console.WriteLine(createView)
         RunCommand(dropView)
         RunCommand(createView)
 
