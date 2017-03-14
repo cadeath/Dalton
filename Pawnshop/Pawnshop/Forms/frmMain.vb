@@ -641,6 +641,7 @@ Public Class frmMain
         frmSalesReport.FormType = frmSalesReport.SaleReport.Forfeit
         frmSalesReport.Show()
 
+    End Sub
     Private Sub MonthlySegrregatedListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlySegrregatedListToolStripMenuItem.Click
         frmSegreList.FormType = frmSegreList.SegreReport.Monthly
         frmSegreList.Show()
