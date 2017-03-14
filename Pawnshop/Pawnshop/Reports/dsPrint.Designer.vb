@@ -355,15 +355,14 @@ Partial Public Class dsPrint
             If (Not (Me.tableReceipt) Is Nothing) Then
                 Me.tableReceipt.InitVars
             End If
-<<<<<<< HEAD
-=======
+
         End If
         Me.tableLayAway = CType(MyBase.Tables("LayAway"),LayAwayDataTable)
         If (initTable = true) Then
             If (Not (Me.tableLayAway) Is Nothing) Then
                 Me.tableLayAway.InitVars
             End If
->>>>>>> refs/remotes/origin/Settings-Module-#111
+
         End If
     End Sub
     
