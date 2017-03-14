@@ -107,9 +107,23 @@
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidMoneyTransfer
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidMoneyTransfer()
+        'End If
+
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidMoneyTransfer
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isCorrect Then
+                Exit Sub
+            Else
+                VoidMoneyTransfer()
+            End If
         Else
             VoidMoneyTransfer()
         End If
