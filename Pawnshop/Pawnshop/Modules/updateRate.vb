@@ -1,4 +1,7 @@
-﻿Imports System.Data.Odbc
+﻿' VERSION 1.1
+'  - blah blah
+
+Imports System.Data.Odbc
 
 Module updateRate
     Private dsRate As DataSet
@@ -6,6 +9,9 @@ Module updateRate
     Private isFailed As Boolean = False
     Private fillData As String, mySql As String
 
+    ' TODO: JUNMAR
+    ' ERROR BINDING ON WRONG/TAMPERED CIR
+    ' RECORD ANY TAMPERING
     Sub do_RateUpdate(ByVal url As String, Optional ByVal dbSrc As String = "")
         Dim fs As New System.IO.FileStream(url, IO.FileMode.Open)
         Dim bf As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
@@ -14,12 +20,15 @@ Module updateRate
             dsRate = bf.Deserialize(fs)
         Catch ex As Exception
             MsgBox("It seems the file is being tampered.", MsgBoxStyle.Critical)
+            Log_Report(String.Format("[{0}] - ", url) & ex.ToString)
             fs.Close()
             isFailed = True
+            If isFailed Then Exit Sub
         End Try
         fs.Close()
+
         For Each tbl As DataTable In dsRate.Tables
-            If isFailed Then Exit Sub
+
             fillData = tbl.TableName
             mySql = "SELECT * FROM " & fillData
             If dbSrc <> "" Then database.dbName = dbSrc
@@ -32,6 +41,11 @@ Module updateRate
                 MaxDS = ds.Tables(fillData).Rows.Count
                 MaxRate = dsRate.Tables(fillData).Rows.Count
                 Console.WriteLine("Table " & fillData & " found.")
+
+                If MaxDS > MaxRate Then
+                    MsgBox("Unable to update this module", MsgBoxStyle.Critical)
+                    Exit Sub
+                End If
             Catch ex As Exception
                 Select Case ErrCheck(ex.ToString)
                     Case "Table not found"
@@ -46,12 +60,12 @@ Module updateRate
             Dim i As Integer = 0
             Dim ID As String = ds.Tables(fillData).Columns.Item(0).ColumnName
 
-
+          
             'Remove Excessive entries
-            Console.WriteLine("Checking excessive entries")
-            ds = LoadSQL(mySql, fillData)
-            mySql = "DELETE FROM " & fillData
-            mySql &= " WHERE " & ID & " > " & (0)
+            'Console.WriteLine("Checking excessive entries")
+            'ds = LoadSQL(mySql, fillData)
+            'mySql = "DELETE FROM " & fillData
+            'mySql &= " WHERE " & ID & " > " & (0)
 
             ds.Clear()
             ds = LoadSQL(mySql, fillData)
@@ -90,7 +104,8 @@ Module updateRate
             Next
             Dim SetGenerator As String = String.Format("SET GENERATOR {0}_{1}_GEN TO {2}", fillData, ID, dsRate.Tables(fillData).Rows.Count)
             RunCommand(SetGenerator)
-        Next
+            Next
+        MsgBox("System Updated", MsgBoxStyle.Information)
     End Sub
     Private Function ErrCheck(ByVal str As String) As String
         If str.Contains("Table unknown") Then
@@ -120,4 +135,5 @@ Module updateRate
 
         System.Threading.Thread.Sleep(1000)
     End Sub
+
 End Module

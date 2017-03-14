@@ -110,6 +110,8 @@
         chkPullOut.Checked = False
         chkMigrate.Checked = False
         chkPrivilege.Checked = False
+        chkReturn.Checked = False
+        chkStockOut.Checked = False
 
         btnAdd.Text = "&Add"
     End Sub
@@ -129,7 +131,7 @@
         priv &= "|"
 
         'Supervisor
-        Dim listChk() As CheckBox = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
+        Dim listChk() As CheckBox = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS, chkStockOut, chkReturn}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
 
@@ -173,7 +175,7 @@
                         chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO, chkAppraiser}
                         Console.WriteLine("Encoder Length: " & privParts(y).Length)
                     Case 1 'Supervisor
-                        chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
+                        chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS, chkStockOut, chkReturn}
                         Console.WriteLine("Supervisor Length: " & privParts(y).Length)
                     Case 2 'Manager
                         chkList = {chkUM, chkUR, chkUS, chkBorrowings, chkResetPassword}
@@ -220,6 +222,8 @@
                 chkR2.Checked = tabStat
                 chkR3.Checked = tabStat
                 chkR4.Checked = tabStat
+                chkStockOut.Checked = tabStat
+                chkReturn.Checked = tabStat
             Case "Manager"
                 tabStat = chkMaAll.Checked
                 chkUM.Checked = tabStat
@@ -262,7 +266,7 @@
 
    Private Function CheckUsername() As Boolean
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
+        mySql = "SELECT * FROM TBL_GAMIT WHERE STATUS = '1' AND UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -419,6 +423,8 @@
             chkMigrate.Enabled = True
             chkPrivilege.Enabled = True
             chkSuAll.Enabled = True
+            chkStockOut.Enabled = True
+            chkReturn.Enabled = True
         Else
             chkPawn.Enabled = False
             chkCM.Enabled = False
@@ -455,6 +461,8 @@
             chkMigrate.Enabled = False
             chkPrivilege.Enabled = False
             chkSuAll.Enabled = False
+            chkStockOut.Enabled = False
+            chkReturn.Enabled = False
         End If
     End Sub
 

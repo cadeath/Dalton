@@ -31,43 +31,50 @@ Public Class ExtractDataFromDatabase
         Dim laDay = GetLastDate(MonCalendar.SelectionEnd)
 
         Dim mySql As String
-        mySql = " SELECT P.PAWNID,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,G.FULLNAME AS APPRAISER,P.ADVINT," & _
-        vbCrLf & "P.APPRAISAL,CLASS.CATEGORY, " & _
-        vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,E.FULLNAME, P.EVAT, " & _
-        vbCrLf & "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT," & _
-        vbCrLf & " P.LESSPRINCIPAL,P.AUCTIONDATE, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
-        vbCrLf & " P.OLDTICKET," & _
-        vbCrLf & "Case" & _
-        vbCrLf & "WHEN P.ORDATE = '01/01/0001' THEN ''" & _
-        vbCrLf & "ELSE P.ORDATE END AS ORDATE," & _
-        vbCrLf & " P.ORNUM,  P.PAWNTICKET,	" & _
-        vbCrLf & " P.PENALTY, P.PRINCIPAL, P.PULLOUT, P.REDEEMDUE	,P.RENEWDUE," & _
-        vbCrLf & " P.SERVICECHARGE," & _
-        vbCrLf & "Case P.STATUS" & _
-        vbCrLf & " WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' " & _
-        vbCrLf & "WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' WHEN 'W' THEN 'WITHDRAW' " & _
-        vbCrLf & "WHEN 'X' THEN 'REDEEM' WHEN 'S' THEN 'SEGRE' " & _
-        vbCrLf & "ELSE 'N/A' END AS STATUS,P.SYSTEMINFO" & _
-        vbCrLf & "FROM TBLPAWN P" & _
-        vbCrLf & "INNER JOIN TBLCLASS CLASS" & _
-        vbCrLf & "ON CLASS.CLASSID = P.CATID" & _
-        vbCrLf & "LEFT JOIN TBL_GAMIT G" & _
-        vbCrLf & "ON G.USERID = P.APPRAISERID" & _
-         vbCrLf & "LEFT JOIN TBL_GAMIT E" & _
-        vbCrLf & "ON E.USERID = P.ENCODERID" & _
-        vbCrLf & "INNER JOIN TBLCLIENT C" & _
-        vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
-       vbCrLf & String.Format(" WHERE LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
-       vbCrLf & "ORDER BY P.LOANDATE ASC;"
+        mySql = "	SELECT O.PAWNID,PAWNTICKET,OLDTICKET,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,	" & _
+          vbCrLf & "	CL.FIRSTNAME || ' ' || CL.LASTNAME AS CLAIMER,G.FULLNAME AS APPRAISER,	" & _
+          vbCrLf & "	E.FULLNAME AS ENCODER,I.ITEMCLASS,O.APPRAISAL,O.PRINCIPAL,O.NETAMOUNT,	" & _
+          vbCrLf & "	O.DESCRIPTION,O.DAYSOVERDUE,O.DELAYINTEREST,O.ADVINT,O.EARLYREDEEM,O.LOANDATE,	" & _
+          vbCrLf & "	O.MATUDATE,O.EXPIRYDATE,O.AUCTIONDATE, " & _
+          vbCrLf & "Case " & _
+          vbCrLf & "WHEN O.ORDATE = '01/01/0001' THEN '' " & _
+          vbCrLf & "ELSE O.ORDATE END AS ORDATE," & _
+          vbCrLf & " O.ORNUM, O.PENALTY, " & _
+          vbCrLf & "	Case O.STATUS	" & _
+          vbCrLf & "	WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' 	" & _
+          vbCrLf & "	WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' 	" & _
+          vbCrLf & "	WHEN 'W' THEN 'WITHDRAW'WHEN 'X' THEN 'REDEEM'	" & _
+          vbCrLf & "	 WHEN 'S' THEN 'SEGRE' ELSE 'N/A' END AS STATUS,	" & _
+          vbCrLf & "	O.RENEWDUE,O.REDEEMDUE,I.WITHDRAWDATE,	" & _
+          vbCrLf & "	Case I.STATUS	" & _
+          vbCrLf & "	WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' 	" & _
+          vbCrLf & "	WHEN 'S' THEN 'SEGRE' WHEN 'W' THEN 'WITHDRAW' 	" & _
+          vbCrLf & "	WHEN 'X' THEN 'REDEEM' ELSE 'N/A' END AS ITEMSTATUS,	" & _
+          vbCrLf & "	I.RENEWALCNT,	" & _
+          vbCrLf & "	O.SERVICECHARGE,O.CREATED_AT,O.UPDATED_AT	" & _
+          vbCrLf & "	FROM OPT O	" & _
+          vbCrLf & "	INNER JOIN TBLCLIENT C	" & _
+          vbCrLf & "	ON C.CLIENTID =O.CLIENTID	" & _
+          vbCrLf & "	LEFT JOIN TBLCLIENT CL	" & _
+          vbCrLf & "	ON CL.CLIENTID =O.CLAIMERID	" & _
+          vbCrLf & "	LEFT JOIN TBL_GAMIT G	" & _
+          vbCrLf & "	ON G.USERID = O.APPRAISERID	" & _
+          vbCrLf & "	LEFT JOIN TBL_GAMIT E	" & _
+          vbCrLf & "	ON E.USERID = O.ENCODERID	" & _
+          vbCrLf & "	INNER JOIN OPI I	" & _
+          vbCrLf & "	ON I.PAWNITEMID = O.PAWNITEMID	" & _
+          vbCrLf & String.Format(" WHERE O.LOANDATE BETWEEN '{0}' AND '{1}'", stDay.ToShortDateString, laDay.ToShortDateString) & _
+          vbCrLf & "ORDER BY O.LOANDATE ASC;"
 
         ' TODO: ELLIE
         ' PLEASE ARRANGE THIS HEADERS IN A MANNER THAT THE ACCOUNTING CAN EASILY READ
         ' IF YOU DONT UNDERSTAND, BETTER USE THE PAWNING VIEW FIELD ARRANGEMENT.
         Dim headers() As String = _
-         {"PAWNID", "CLIENTNAME", "APPRAISER", "ADVANCEINTEREST", "APPRAISAL", "CATEGORY", "DAYSOVERDUE", _
-          "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
-          "KARAT", "LESSPRINCIPAL", "AUCTIONDATE", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", _
-          "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS", "SYSTEMINFO"}
+         {"PAWNID", "PAWNTICKET", "OLDTICKET", "CLIENTNAME", "CLAIMER", "APPRAISER", "ENCODER", "ITEMCLASS", _
+          "APPRAISAL", "PRINCIPAL", "NETAMOUNT", "DESCRIPTION", "DAYSOVERDUE", "DELAYINTEREST", "ADVINT", _
+          "EARLYREDEEM", "LOANDATE", "MATUDATE", "EXPIRYDATE", "AUCTIONDATE", "ORDATE", "ORNUM", _
+          "PENALTY", "STATUS", "RENEWDUE", "REDEEMDUE", "WITHDRAWDATE", "ITEMSTATUS", "RENEWALCNT", _
+           "SERVICECHARGE", "CREATED_AT", "UPDATE_AT"}
 
 
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
@@ -404,47 +411,55 @@ Public Class ExtractDataFromDatabase
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
         Dim mySql As String
-        mySql = " SELECT P.PAWNID,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,G.FULLNAME AS APPRAISER,P.ADVINT," & _
-        vbCrLf & "P.APPRAISAL,CLASS.CATEGORY, " & _
-        vbCrLf & " P.DAYSOVERDUE, P.DELAYINT, P.DESCRIPTION,P.EARLYREDEEM ,E.FULLNAME, P.EVAT, " & _
-        vbCrLf & "P.EXPIRYDATE, P.GRAMS,P.INTEREST, P.ITEMTYPE, P.KARAT," & _
-        vbCrLf & " P.LESSPRINCIPAL,P.AUCTIONDATE, P.LOANDATE ,P.MATUDATE, P.NETAMOUNT," & _
-        vbCrLf & " P.OLDTICKET," & _
-        vbCrLf & "Case" & _
-        vbCrLf & "WHEN P.ORDATE = '01/01/0001' THEN ''" & _
-        vbCrLf & "ELSE P.ORDATE END AS ORDATE," & _
-        vbCrLf & " P.ORNUM,  P.PAWNTICKET,	" & _
-        vbCrLf & " P.PENALTY, P.PRINCIPAL, P.PULLOUT, P.REDEEMDUE	,P.RENEWDUE," & _
-        vbCrLf & " P.SERVICECHARGE," & _
-        vbCrLf & "Case P.STATUS" & _
-        vbCrLf & " WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' " & _
-        vbCrLf & "WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' WHEN 'W' THEN 'WITHDRAW' " & _
-        vbCrLf & "WHEN 'X' THEN 'REDEEM' WHEN 'S' THEN 'SEGRE' " & _
-        vbCrLf & "ELSE 'N/A' END AS STATUS,P.SYSTEMINFO" & _
-        vbCrLf & "FROM TBLPAWN P" & _
-        vbCrLf & "INNER JOIN TBLCLASS CLASS" & _
-        vbCrLf & "ON CLASS.CLASSID = P.CATID" & _
-        vbCrLf & "LEFT JOIN TBL_GAMIT G" & _
-        vbCrLf & "ON G.USERID = P.APPRAISERID" & _
-         vbCrLf & "LEFT JOIN TBL_GAMIT E" & _
-        vbCrLf & "ON E.USERID = P.ENCODERID" & _
-        vbCrLf & "INNER JOIN TBLCLIENT C" & _
-        vbCrLf & "ON C.CLIENTID =P.CLIENTID" & _
-        vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & "ORDER BY P.LOANDATE ASC;"
+        mySql = "	SELECT O.PAWNID,PAWNTICKET,OLDTICKET,C.FIRSTNAME || ' ' || C.LASTNAME AS CLIENT,	" & _
+          vbCrLf & "	CL.FIRSTNAME || ' ' || CL.LASTNAME AS CLAIMER,G.FULLNAME AS APPRAISER,	" & _
+          vbCrLf & "	E.FULLNAME AS ENCODER,I.ITEMCLASS,O.APPRAISAL,O.PRINCIPAL,O.NETAMOUNT,	" & _
+          vbCrLf & "	O.DESCRIPTION,O.DAYSOVERDUE,O.DELAYINTEREST,O.ADVINT,O.EARLYREDEEM,O.LOANDATE,	" & _
+          vbCrLf & "	O.MATUDATE,O.EXPIRYDATE,O.AUCTIONDATE, " & _
+          vbCrLf & "Case " & _
+          vbCrLf & "WHEN O.ORDATE = '01/01/0001' THEN '' " & _
+          vbCrLf & "ELSE O.ORDATE END AS ORDATE," & _
+          vbCrLf & " O.ORNUM, O.PENALTY, " & _
+          vbCrLf & "	Case O.STATUS	" & _
+          vbCrLf & "	WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' 	" & _
+          vbCrLf & "	WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' 	" & _
+          vbCrLf & "	WHEN 'W' THEN 'WITHDRAW'WHEN 'X' THEN 'REDEEM'	" & _
+          vbCrLf & "	 WHEN 'S' THEN 'SEGRE' ELSE 'N/A' END AS STATUS,	" & _
+          vbCrLf & "	O.RENEWDUE,O.REDEEMDUE,I.WITHDRAWDATE,	" & _
+          vbCrLf & "	Case I.STATUS	" & _
+          vbCrLf & "	WHEN 'A' THEN 'ACTIVE' WHEN 'V' THEN 'VOID' 	" & _
+          vbCrLf & "	WHEN 'S' THEN 'SEGRE' WHEN 'W' THEN 'WITHDRAW' 	" & _
+          vbCrLf & "	WHEN 'X' THEN 'REDEEM' ELSE 'N/A' END AS ITEMSTATUS,	" & _
+          vbCrLf & "	I.RENEWALCNT,	" & _
+          vbCrLf & "	O.SERVICECHARGE,O.CREATED_AT,O.UPDATED_AT	" & _
+          vbCrLf & "	FROM OPT O	" & _
+          vbCrLf & "	INNER JOIN TBLCLIENT C	" & _
+          vbCrLf & "	ON C.CLIENTID =O.CLIENTID	" & _
+          vbCrLf & "	LEFT JOIN TBLCLIENT CL	" & _
+          vbCrLf & "	ON CL.CLIENTID =O.CLAIMERID	" & _
+          vbCrLf & "	LEFT JOIN TBL_GAMIT G	" & _
+          vbCrLf & "	ON G.USERID = O.APPRAISERID	" & _
+          vbCrLf & "	LEFT JOIN TBL_GAMIT E	" & _
+          vbCrLf & "	ON E.USERID = O.ENCODERID	" & _
+          vbCrLf & "	INNER JOIN OPI I	" & _
+          vbCrLf & "	ON I.PAWNITEMID = O.PAWNITEMID	" & _
+          vbCrLf & String.Format(" WHERE LOANDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
+          vbCrLf & "ORDER BY O.LOANDATE ASC;"
 
         ' TODO: ELLIE
-        ' PLEASE ARRANGE EVERYTHING
+        ' PLEASE ARRANGE THIS HEADERS IN A MANNER THAT THE ACCOUNTING CAN EASILY READ
+        ' IF YOU DONT UNDERSTAND, BETTER USE THE PAWNING VIEW FIELD ARRANGEMENT.
         Dim headers() As String = _
-         {"PAWNID", "CLIENTNAME", "APPRAISER", "ADVANCEINTEREST", "APPRAISAL", "CATEGORY", "DAYSOVERDUE", _
-          "DELAYINT", "DESCRIPTION", "EARLYREDEEM", "ENCODERID", "EVAT", "EXPIRYDATE", "GRAMS", "INTEREST", "ITEMTYPE", _
-          "KARAT", "LESSPRINCIPAL", "AUCTIONDATE", "LOANDATE", "MATUDATE", "NETAMOUNT", "OLDTICKET", "ORDATE", "ORNUM", _
-          "PAWNTICKET", "PENALTY", "PRINCIPAL", "PULLOUT", "REDEEMDUE", "RENEWDUE", "SERVICECHARGE", "STATUS", "SYSTEMINFO"}
-
-
+         {"PAWNID", "PAWNTICKET", "OLDTICKET", "CLIENTNAME", "CLAIMER", "APPRAISER", "ENCODER", "ITEMCLASS", _
+          "APPRAISAL", "PRINCIPAL", "NETAMOUNT", "DESCRIPTION", "DAYSOVERDUE", "DELAYINTEREST", "ADVINT", _
+          "EARLYREDEEM", "LOANDATE", "MATUDATE", "EXPIRYDATE", "AUCTIONDATE", "ORDATE", "ORNUM", _
+          "PENALTY", "STATUS", "RENEWDUE", "REDEEMDUE", "WITHDRAWDATE", "ITEMSTATUS", "RENEWALCNT", _
+           "SERVICECHARGE", "CREATED_AT", "UPDATE_AT"}
+        
         sfdPath.FileName = String.Format("{2}{1}{0}.xlsx", sd.ToString("MMddyyyy"), BranchCode, "Pawning")  'BranchCode + Date
         verified_url = appPath & "\" & sfdPath.FileName
         ExtractToExcel(headers, mySql, verified_url)
+
 
         txtpath1.Text = txtpath1.Text
         Using sw As StreamWriter = File.CreateText("Extract.bat")
@@ -649,10 +664,10 @@ Public Class ExtractDataFromDatabase
        vbCrLf & "Case M.MONEYTRANS" & _
        vbCrLf & "WHEN 0 THEN 'SENDIN' WHEN 1 THEN 'PAYOUT' ELSE 'NA'" & _
        vbCrLf & "END AS MONEYTRANS, M.TRANSDATE, " & _
-        vbCrLf & " M.SERVICECHARGE, " & _
+       vbCrLf & " M.SERVICECHARGE, " & _
        vbCrLf & "M.SERVICETYPE, " & _
        vbCrLf & "Case M.STATUS" & _
-         vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
+       vbCrLf & "WHEN 'A' THEN 'ACTIVE'" & _
        vbCrLf & "  WHEN 'V' THEN 'VOID'" & _
        vbCrLf & " ELSE 'N/A'" & _
        vbCrLf & " END AS STATUS,M.NETAMOUNT," & _
@@ -663,13 +678,13 @@ Public Class ExtractDataFromDatabase
        vbCrLf & "ELSE RefNum END as RefNum," & _
        vbCrLf & "M.REMARKS," & _
        vbCrLf & " M.TRANSID," & _
-     vbCrLf & "M.SYSTEMINFO" & _
+       vbCrLf & "M.SYSTEMINFO" & _
        vbCrLf & " FROM TBLMONEYTRANSFER M" & _
        vbCrLf & "LEFT JOIN TBL_GAMIT G ON G.USERID = M.ENCODERID" & _
        vbCrLf & "INNER JOIN TBLCLIENT C ON  M.SENDERID = C.CLIENTID" & _
        vbCrLf & "INNER JOIN TBLCLIENT R ON  M.RECEIVERID = R.CLIENTID" & _
-        vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
-        vbCrLf & " ORDER BY M.TRANSDATE;"
+       vbCrLf & String.Format("WHERE M.TRANSDATE = '{0}'", MonCalendar.SelectionRange.Start.ToShortDateString) & _
+       vbCrLf & " ORDER BY M.TRANSDATE;"
 
         Dim headers() As String = _
 {" ID", "RECIEVERID", "RECEIVERNAME", "SENDERID", "SENDERNAME", "AMOUNT", "COMMISSION", " ENCODER", " LOCATION", " MONEYTRANS", _
@@ -712,24 +727,59 @@ Public Class ExtractDataFromDatabase
         lbltransaction.Text = "Outstanding"
         lblTransactioName.Text = "Wait While Data is Extracting . . ."
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
-       
+
         Dim mySql As String
         mySql = "	SELECT PAWNTICKET,LOANDATE,MATUDATE,EXPIRYDATE,	"
-        mySql &= "	  AUCTIONDATE,CLIENT,FULLADDRESS,	"
-        mySql &= "	  DESCRIPTION,ORNUM,	"
+        mySql &= "	AUCTIONDATE,CLIENT,FULLADDRESS,	DESCRIPTION, ORNUM, "
         mySql &= "	  CASE WHEN ORDATE = '01/01/0001' THEN ''	"
         mySql &= "	  ELSE ORDATE END AS ORDATE,OLDTICKET,NETAMOUNT,	"
-        mySql &= "	  RENEWDUE,REDEEMDUE,APPRAISAL,PRINCIPAL,INTEREST,ADVINT,SERVICECHARGE,	"
-        mySql &= "	  PENALTY,ITEMTYPE,CATEGORY,	"
-        mySql &= "	  GRAMS, KARAT,STATUS,PULLOUT,APPRAISER	"
-        mySql &= "FROM (   SELECT *   FROM PAWNING   WHERE (Status = 'NEW' OR Status = 'RENEW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'RENEWED')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'REDEEM')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "'   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'SEGRE')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND (PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' OR PULLOUT IS NULL)   UNION   SELECT *   FROM PAWNING   WHERE (Status = 'WITHDRAW')   AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND PULLOUT > '" & MonCalendar.SelectionStart.ToShortDateString & "' ) ORDER BY PAWNTICKET ASC"
-
+        mySql &= "	  RENEWDUE,REDEEMDUE,APPRAISAL,PRINCIPAL,	"
+        mySql &= "	  DELAYINTEREST,ADVINT,SERVICECHARGE,	"
+        mySql &= "	  PENALTY,ITEMCATEGORY,ITEMCLASS,	"
+        mySql &= "	  Case STATUS	"
+        mySql &= "	WHEN '0' THEN 'RENEWED' WHEN 'R' THEN 'RENEW' 	"
+        mySql &= "	WHEN 'L' THEN 'NEW' WHEN 'V' THEN 'VOID' 	"
+        mySql &= "	WHEN 'W' THEN 'WITHDRAW'WHEN 'X' THEN 'REDEEM'	"
+        mySql &= "	 WHEN 'S' THEN 'SEGRE' ELSE 'N/A' END AS STATUS,	"
+        mySql &= "	WITHDRAWDATE,APPRAISER	"
+        mySql &= "FROM "
+        mySql &= "( "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWN_LIST "
+        mySql &= "  WHERE (Status = 'L') "
+        mySql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWN_LIST "
+        mySql &= "  WHERE (Status = 'R') "
+        mySql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWN_LIST "
+        mySql &= "  WHERE (Status = '0') "
+        mySql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWN_LIST "
+        mySql &= "  WHERE (Status = 'X') "
+        mySql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND ORDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWN_LIST "
+        mySql &= "  WHERE (Status = 'S') "
+        mySql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND (WITHDRAWDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "' OR WITHDRAWDATE IS NULL) "
+        mySql &= "  UNION "
+        mySql &= "  SELECT * "
+        mySql &= "  FROM PAWN_LIST "
+        mySql &= "  WHERE (Status = 'W') "
+        mySql &= "  AND LOANDATE <= '" & MonCalendar.SelectionStart.ToShortDateString & "' AND WITHDRAWDATE > '" & MonCalendar.SelectionStart.ToShortDateString & "' "
+        mySql &= ") "
 
         Dim headers() As String = _
             {"PAWNTICKET", "LOANDATE", "MATUDATE", "EXPIRYDATE", "AUCTIONDATE", "CLIENTNAME", "FULLADDRESS", _
              "DESCRIPTION", "ORNUM", "ORDATE", "OLDTICKET", "NETAMOUNT", "RENEWDUE", "REDEEMDUE", "APPRAISAL", "PRINCIPAL", _
-             "INTEREST", "ADVANCEINTEREST", "SERVICECHARGE", "PENALTY", "ITEMTYPE", "CATEGORY", "GRAMS", "KARAT", "STATUS", _
-             "PULLOUT", "APPRAISER"}
+             "DELAYINTEREST", "ADVINT", "SERVICECHARGE", "PENALTY", "ITEMCATEGORY", "ITEMCLASS", "STATUS", _
+             "WITHDRAWDATE", "APPRAISER"}
 
         Dim verified_url As String
         Dim str As String = "Outstanding"
@@ -855,6 +905,13 @@ Public Class ExtractDataFromDatabase
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+
+                Dim tmp_path1 As String = (Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\Daily" & mod_system.BranchCode & "" & filename & ".rar")
+
+                If My.Computer.FileSystem.FileExists(tmp_path1) Then
+                    My.Computer.FileSystem.DeleteFile(tmp_path1)
+                End If
+
                 My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Daily" & mod_system.BranchCode & ".rar", "Daily" & mod_system.BranchCode & "" & filename & ".rar")
 
             Case "Monthly"
@@ -862,6 +919,14 @@ Public Class ExtractDataFromDatabase
                 MsgBox("Data Extracted...", MsgBoxStyle.Information)
                 MsgBox("Thank you...", MsgBoxStyle.Information)
                 btnExtract.Enabled = True
+
+                Dim tmp_path As String = (Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\Monthly" & mod_system.BranchCode & "" & filename & ".rar")
+
+
+                If My.Computer.FileSystem.FileExists(tmp_path) Then
+                    My.Computer.FileSystem.DeleteFile(tmp_path)
+                End If
+
                 My.Computer.FileSystem.RenameFile(txtpath1.Text & "\Monthly" & mod_system.BranchCode & ".rar", "Monthly" & mod_system.BranchCode & "" & filename & ".rar")
 
         End Select

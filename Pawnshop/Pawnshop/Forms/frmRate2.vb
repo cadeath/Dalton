@@ -20,7 +20,6 @@ Public Class frmRate2
         Disable(1)
         updateRate.do_RateUpdate(txtConfig.Text)
         Disable(0)
-        MsgBox("System Updated", MsgBoxStyle.Information)
         Me.Close()
     End Sub
 

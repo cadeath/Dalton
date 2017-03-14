@@ -1,11 +1,14 @@
 ﻿Imports Microsoft.Office.Interop
 Imports System.Data.Odbc
+
 Public Class frmExtractor
     Enum ExtractType As Integer
         Expiry = 0
         JournalEntry = 1
         MoneyTransferBSP = 2
+        PTUFile = 3
     End Enum
+
     Friend FormType As ExtractType = ExtractType.Expiry
 
     Private Sub txtPath_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPath.DoubleClick
@@ -19,10 +22,10 @@ Public Class frmExtractor
     End Sub
 
     Private Sub frmExtractor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        FormInit()
         'Load Path
         txtPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
     End Sub
+
     ''' <summary>
     ''' this method will select what you want to extract.
     ''' </summary>
@@ -42,8 +45,120 @@ Public Class frmExtractor
                 Console.WriteLine("Money Transfer BSP Activated")
                 sfdPath.FileName = String.Format("MTBSP{0}{1}.xls", selectedDate.ToString("yyyyMMM"), BranchCode) 'MTBSP + Date + BranchCode
                 Me.Text &= " - BSP Report"
+            Case ExtractType.PTUFile
+                sfdPath.FileName = String.Format("{1}{0}.PTU", selectedDate.ToString("yyyyMMdd"), BranchCode) 'BranchCode + Date
+                Me.Text &= " - PTU File"
         End Select
     End Sub
+
+    Private Sub PTU_File()
+        If FormType <> ExtractType.PTUFile Then Exit Sub
+
+        If MonCalendar.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
+            If frmMain.dateSet Then
+                MsgBox("Unable to Generate PTU File yet", MsgBoxStyle.Information, "System")
+                Exit Sub
+            End If
+        End If
+
+        Dim mySql As String, ds As DataSet
+        Dim cd As Date = MonCalendar.SelectionRange.Start
+        Dim CustomerCode As String = GetOption("CustomerCode")
+        Dim header1() As String = {"RecordKey", "CardCode", "DocDate"}
+        Dim header2() As String = {"RecordKey", "ItemCode", "ItemName", "Quantity", "Price", "Discount", "WhsCode", _
+                                   "OcrCode", "OcrCode2", "OcrCode3", "OcrCode4", "OcrCode5", "TaxCode"}
+        Dim header3() As String = {"RecordKey", "ItemCode", "Quantity", "WhsCode", "IntrSerial"}
+
+        mySql = "SELECT T0.DOCDATE, T1.* FROM DOC T0 INNER JOIN DOCLINES T1 ON T0.DOCID = T1.DOCID "
+        mySql &= String.Format("WHERE T0.DOCDATE = '{0}' AND T0.STATUS = '1' AND T1.ITEMCODE <> 'RECALL00' AND ", cd.ToString("MM/dd/yyyy"))
+        mySql &= String.Format("(T0.DOCTYPE = 0 OR T0.DOCTYPE = 1) AND T0.STATUS <> 'V'", cd.ToString("MM/dd/yyyy"))
+        ds = LoadSQL(mySql)
+
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
+        'Sheet 1
+        Dim oXL As New Excel.Application
+        If oXL Is Nothing Then
+            MessageBox.Show("Excel is not properly installed!!")
+            Exit Sub
+        End If
+
+        Dim oWB As Excel.Workbook
+        Dim oSheet As Excel.Worksheet
+
+        oXL = CreateObject("Excel.Application")
+        oXL.Visible = False
+
+        oWB = oXL.Workbooks.Add
+        oSheet = oWB.ActiveSheet
+        'oSheet.Name = ExtractDataFromDatabase.lbltransaction.Text 'Assuming its name is "Sheet 1"
+
+        Dim col As Integer = 1
+        For Each hd In header1
+            oSheet.Cells(1, col).value = hd
+            col += 1
+        Next
+        oSheet.Cells(2, 1).value = 1
+        oSheet.Cells(2, 2).value = CustomerCode
+        oSheet.Cells(2, 3).value = cd
+
+        oSheet = oWB.Sheets(2)
+        'Sheet 2
+        For cnt As Integer = 0 To ds.Tables(0).Rows.Count
+            If cnt = 0 Then
+                col = 1
+                For Each hd In header2
+                    oSheet.Cells(cnt + 1, col).value = hd
+                    col += 1
+                Next
+            Else
+                With ds.Tables(0).Rows(cnt - 1)
+                    oSheet.Cells(cnt + 1, 1).value = 1
+                    oSheet.Cells(cnt + 1, 2).value = .Item("ITEMCODE")
+                    oSheet.Cells(cnt + 1, 3).value = .Item("DESCRIPTION")
+                    oSheet.Cells(cnt + 1, 4).value = .Item("QTY")
+                    oSheet.Cells(cnt + 1, 5).value = .Item("SALEPRICE")
+                    oSheet.Cells(cnt + 1, 6).value = 0
+                    oSheet.Cells(cnt + 1, 7).value = BranchCode
+                    oSheet.Cells(cnt + 1, 8).value = AREACODE
+                    oSheet.Cells(cnt + 1, 9).value = BranchCode
+                    oSheet.Cells(cnt + 1, 10).value = "OPE"
+                    oSheet.Cells(cnt + 1, 13).value = "OVAT-E"
+                End With
+            End If
+        Next
+
+        oSheet = oWB.Sheets(3)
+        'Sheet 3
+        col = 1
+        For Each hd In header3
+            oSheet.Cells(1, col).value = hd
+            col += 1
+        Next
+
+        FormInit()
+
+        Dim verified_url As String
+        If txtPath.Text.Split(".").Count > 1 Then
+            If txtPath.Text.Split(".")(1).Length = 3 Then
+                verified_url = txtPath.Text
+            Else
+                verified_url = txtPath.Text & "/" & sfdPath.FileName
+            End If
+        Else
+            verified_url = txtPath.Text & "/" & sfdPath.FileName
+        End If
+
+        oWB.SaveAs(verified_url)
+        oSheet = Nothing
+        oWB.Close(False)
+        oWB = Nothing
+        oXL.Quit()
+        oXL = Nothing
+
+        MsgBox("Sales Extracted", MsgBoxStyle.Information)
+    End Sub
+
     ''' <summary>
     ''' This button will extract the desired extract type.
     ''' </summary>
@@ -53,22 +168,23 @@ Public Class frmExtractor
     Private Sub btnExtract_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExtract.Click
         If txtPath.Text = "" Then Exit Sub
 
+        btnExtract.Enabled = False
         If FormType = ExtractType.Expiry Then
-            btnExtract.Enabled = False
             ExtractExpiry()
         ElseIf FormType = ExtractType.MoneyTransferBSP Then
-            btnExtract.Enabled = False
             MoneyTransferBSP()
+        ElseIf FormType = ExtractType.PTUFile Then
+            PTU_File()
         Else
             Dim ans As MsgBoxResult = _
                 MsgBox("We will only use the Starting Date." & vbCrLf & "Do you want to continue?", _
                        vbYesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
-            btnExtract.Enabled = False
             If ans = MsgBoxResult.No Then btnExtract.Enabled = True : Exit Sub
             ExtractJournalEntry2()
         End If
         btnExtract.Enabled = True
     End Sub
+
     ''' <summary>
     ''' This method will extract journal entry and load the excel.
     ''' </summary>
@@ -136,12 +252,15 @@ Public Class frmExtractor
         Select Case FormType
             Case ExtractType.Expiry
                 Console.WriteLine("Expiry Type Activated")
-                sfdPath.FileName = String.Format("{1}{0}.xls", sd.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
+                sfdPath.FileName = String.Format("{1}{0}.xls", CurrentDate.ToString("MMddyyyy"), BranchCode)  'BranchCode + Date
                 Me.Text &= " - Expiry"
             Case ExtractType.JournalEntry
                 Console.WriteLine("Journal Entry Type Activated")
-                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", sd.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
+                sfdPath.FileName = String.Format("JRNL{0}{1}.xls", CurrentDate.ToString("yyyyMMdd"), BranchCode) 'JRNL + Date + BranchCode
                 Me.Text &= " - Journal Entry"
+            Case ExtractType.PTUFile
+                sfdPath.FileName = String.Format("{0}{1}.PTU", CurrentDate.ToString("yyyyMMdd"), BranchCode) 'BranchCode + Date
+                Me.Text &= " - PTU File"
         End Select
 
         Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
@@ -164,6 +283,7 @@ Public Class frmExtractor
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
+
     Private Sub ExtractJournalEntry2()
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
@@ -295,6 +415,7 @@ Public Class frmExtractor
 
         MsgBox("Journal Entries Extracted", MsgBoxStyle.Information)
     End Sub
+
     ''' <summary>
     ''' This method will select between date range.
     ''' search the items by date
@@ -375,6 +496,7 @@ Public Class frmExtractor
 
         MsgBox("Data Saved", MsgBoxStyle.Information)
     End Sub
+
     ''' <summary>
     ''' This method will extract the expiry date and then load the excel
     ''' </summary>
@@ -383,12 +505,18 @@ Public Class frmExtractor
         Dim sd As Date = MonCalendar.SelectionStart
         Dim ed As Date = MonCalendar.SelectionEnd
 
-        Dim mySql As String = "SELECT * FROM EXPIRY_LIST"
-        mySql &= vbCr & " WHERE "
+        Dim mySql As String = "SELECT P.*, ITM.ITEMCATEGORY, PITM.ITEMCLASS, C.*, U.USERNAME FROM OPT P "
+        mySql &= "INNER JOIN tblClient C on P.clientid = C.clientid "
+        mySql &= "INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
+        mySql &= "INNER JOIN OPI PITM ON PITM.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = PITM.ITEMID "
+        mySql &= "WHERE "
+        mySql &= "(P.Status = 'L' or P.Status = 'R') AND "
+        mySql &= "(CHAR_LENGTH(C.Phone1) = 11 OR CHAR_LENGTH(C.Phone2) = 11) AND "
         mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", GetFirstDate(sd).ToShortDateString, GetLastDate(ed).ToShortDateString)
 
         Dim ds_expiry As DataSet = LoadSQL(mySql)
-
+        Console.Write(mySql)
         'Load Excel
         Dim oXL As New Excel.Application
         Dim oWB As Excel.Workbook
@@ -402,65 +530,47 @@ Public Class frmExtractor
 
         pbLoading.Maximum = ds_expiry.Tables(0).Rows.Count
         pbLoading.Value = 0
-        While rid < ds_expiry.Tables(0).Rows.Count
-            With ds_expiry.Tables(0).Rows(rid)
+        For i As Integer = 0 To ds_expiry.Tables(0).Rows.Count - 1
+            With ds_expiry.Tables(0).Rows(i)
                 oSheet.Cells(rid, 1).value = .Item("PawnID").ToString
                 oSheet.Cells(rid, 2).value = .Item("PawnTicket").ToString
                 oSheet.Cells(rid, 3).value = .Item("LoanDate").ToString 'TransDate
                 oSheet.Cells(rid, 4).value = .Item("FirstName").ToString & _
                     " " & .Item("LastName").ToString 'Pawner
-                oSheet.Cells(rid, 5).value = ds_expiry.Tables(0).Rows(rid).Item("Addr_Street").ToString & _
-                    " " & ds_expiry.Tables(0).Rows(rid).Item("Addr_Brgy").ToString 'Addr1
+                oSheet.Cells(rid, 5).value = ds_expiry.Tables(0).Rows(i).Item("Addr_Street").ToString & _
+                    " " & ds_expiry.Tables(0).Rows(i).Item("Addr_Brgy").ToString 'Addr1
                 oSheet.Cells(rid, 6).value = .Item("Addr_City").ToString 'Addr2
                 oSheet.Cells(rid, 7).value = .Item("Addr_Province").ToString 'Addr3
                 oSheet.Cells(rid, 8).value = .Item("Addr_Zip").ToString 'Zip
-                oSheet.Cells(rid, 9).value = .Item("ItemType").ToString 'ItemType
-                oSheet.Cells(rid, 10).value = .Item("Grams").ToString 'Grams
+                oSheet.Cells(rid, 9).value = .Item("ItemCategory").ToString 'ItemCategory
                 oSheet.Cells(rid, 11).value = "1" 'NoPCS
                 oSheet.Cells(rid, 12).value = .Item("Description").ToString 'DESC1
-                'oSheet.Cells(rid, 13).value = .Item("PawnTicket").ToString 'DESC2
-                'oSheet.Cells(rid, 14).value = .Item("PawnTicket").ToString 'DESC3
-                'oSheet.Cells(rid, 15).value = .Item("PawnTicket").ToString 'DESC4
                 oSheet.Cells(rid, 16).value = "0" 'NOMONTH
                 oSheet.Cells(rid, 17).value = .Item("MATUDATE").ToString 'MATUDATE
                 oSheet.Cells(rid, 18).value = .Item("EXPIRYDATE").ToString 'EXPIDATE
                 oSheet.Cells(rid, 19).value = .Item("AUCTIONDATE").ToString 'AUCTDATE
-                'oSheet.Cells(rid, 20).value = .Item("Interest").ToString 'INT_RATE
                 oSheet.Cells(rid, 21).value = .Item("Appraisal").ToString 'APPRAISAL
                 oSheet.Cells(rid, 22).value = .Item("Principal").ToString 'PRINCIPAL
-                oSheet.Cells(rid, 23).value = .Item("Interest").ToString 'INT_AMOUNT
+                oSheet.Cells(rid, 23).value = .Item("DelayInterest").ToString 'INT_AMOUNT
                 oSheet.Cells(rid, 24).value = .Item("ServiceCharge").ToString 'SRV_CHARGE
-                oSheet.Cells(rid, 25).value = .Item("Evat").ToString 'VAT
-                'oSheet.Cells(rid, 26).value = .Item("PawnTicket").ToString 'DOC_STAMP
                 oSheet.Cells(rid, 27).value = .Item("NetAmount").ToString 'NET_AMOUNT
                 oSheet.Cells(rid, 28).value = .Item("Username").ToString 'USER
                 oSheet.Cells(rid, 29).value = .Item("Status").ToString 'STATUS
-                'oSheet.Cells(rid, 30).value = .Item("PawnTicket").ToString 'NEW NUM
                 oSheet.Cells(rid, 31).value = .Item("OLDTICKET").ToString 'OLD NUM
                 oSheet.Cells(rid, 32).value = .Item("ORNUM").ToString 'RCT NO
-                'oSheet.Cells(rid, 33).value = .Item("PawnTicket").ToString 'CLOSE DATE
-                'oSheet.Cells(rid, 34).value = .Item("PawnTicket").ToString 'TRANSFER_DATE
-                'oSheet.Cells(rid, 35).value = .Item("PawnTicket").ToString 'DATE_CREATED
-                'oSheet.Cells(rid, 36).value = .Item("PawnTicket").ToString 'CANCEL
-                'oSheet.Cells(rid, 37).value = .Item("PawnTicket").ToString 'DATE CANCEL
-                'oSheet.Cells(rid, 38).value = .Item("PawnTicket").ToString 'ISBEGBAL
                 oSheet.Cells(rid, 39).value = "'" & .Item("PHONE1").ToString 'PHONE_NO
                 oSheet.Cells(rid, 40).value = .Item("BIRTHDAY").ToString 'BIRTHDAY
                 oSheet.Cells(rid, 41).value = .Item("SEX").ToString 'SEX
-                oSheet.Cells(rid, 42).value = .Item("KARAT").ToString 'KARAT
-                oSheet.Cells(rid, 43).value = .Item("KARAT").ToString 'KARAT1
-                oSheet.Cells(rid, 44).value = .Item("GRAMS").ToString 'GRAMS1
                 oSheet.Cells(rid, 45).value = .Item("APPRAISAL").ToString 'APPRAISAL1
-                'oSheet.Cells(rid, 46).value = .Item("PawnTicket").ToString 'APPRAISEDBY1
-                'oSheet.Cells(rid, 47).value = .Item("PawnTicket").ToString 'DATE_REAPPRAISAL1
-                oSheet.Cells(rid, 48).value = .Item("Category").ToString 'ITEMDESC
-                'oSheet.Cells(rid, 49).value = .Item("PawnTicket").ToString 'ESKIE
+                oSheet.Cells(rid, 48).value = .Item("ITEMCLASS").ToString 'ITEMDESC
             End With
 
             rid += 1
             AddProgress()
             Application.DoEvents()
-        End While
+        Next
+
+        FormInit()
 
         Dim verified_url As String
         Console.WriteLine("Split Count: " & txtPath.Text.Split(".").Count)
@@ -499,4 +609,5 @@ Public Class frmExtractor
 
         Return KeyGen.Generate()
     End Function
+
 End Class

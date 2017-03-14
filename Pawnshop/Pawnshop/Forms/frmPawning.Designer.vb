@@ -52,8 +52,6 @@ Partial Class frmPawning
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -149,7 +147,7 @@ Partial Class frmPawning
         '
         'webAds
         '
-        Me.webAds.Location = New System.Drawing.Point(483, 76)
+        Me.webAds.Location = New System.Drawing.Point(483, 92)
         Me.webAds.MinimumSize = New System.Drawing.Size(20, 20)
         Me.webAds.Name = "webAds"
         Me.webAds.ScrollBarsEnabled = False
@@ -168,7 +166,7 @@ Partial Class frmPawning
         Me.lvPawners.Location = New System.Drawing.Point(15, 166)
         Me.lvPawners.MultiSelect = False
         Me.lvPawners.Name = "lvPawners"
-        Me.lvPawners.Size = New System.Drawing.Size(847, 313)
+        Me.lvPawners.Size = New System.Drawing.Size(847, 288)
         Me.lvPawners.TabIndex = 1
         Me.lvPawners.UseCompatibleStateImageBehavior = False
         Me.lvPawners.View = System.Windows.Forms.View.Details
@@ -179,7 +177,8 @@ Partial Class frmPawning
         '
         'ColumnHeader2
         '
-        Me.ColumnHeader2.Text = "Item Type"
+        Me.ColumnHeader2.Text = "Class"
+        Me.ColumnHeader2.Width = 71
         '
         'ColumnHeader3
         '
@@ -258,7 +257,7 @@ Partial Class frmPawning
         '
         Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnView.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnView.Location = New System.Drawing.Point(708, 533)
+        Me.btnView.Location = New System.Drawing.Point(781, 460)
         Me.btnView.Name = "btnView"
         Me.btnView.Size = New System.Drawing.Size(75, 23)
         Me.btnView.TabIndex = 6
@@ -337,30 +336,6 @@ Partial Class frmPawning
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Red - Withdraw [Redeem/Pullout]"
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label5.Location = New System.Drawing.Point(661, 13)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(59, 13)
-        Me.Label5.TabIndex = 13
-        Me.Label5.Text = "PawningID"
-        Me.Label5.Visible = False
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label6.Location = New System.Drawing.Point(735, 13)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(37, 13)
-        Me.Label6.TabIndex = 14
-        Me.Label6.Text = "Status"
-        Me.Label6.Visible = False
-        '
         'frmPawning
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -380,8 +355,6 @@ Partial Class frmPawning
         Me.Controls.Add(Me.btnLoan)
         Me.Controls.Add(Me.lvPawners)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
         Me.KeyPreview = True
         Me.Name = "frmPawning"
         Me.Text = "Pawning"
@@ -423,7 +396,5 @@ Partial Class frmPawning
     Friend WithEvents rbPawnTicket As System.Windows.Forms.RadioButton
     Friend WithEvents rbAll As System.Windows.Forms.RadioButton
 
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
 
 End Class

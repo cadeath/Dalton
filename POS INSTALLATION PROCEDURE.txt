@@ -1,0 +1,5 @@
+1. Load the 1.2.3.1 System Database
+2. Open the Pawnshop.exe
+3. wait until the patch is completed
+4. Load Rate files tblCash-v14-121416.cir and version14_pos-12142016.cir
+5. Done

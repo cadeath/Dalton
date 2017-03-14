@@ -74,7 +74,7 @@
     End Sub
 
     Private Sub LockFields(ByVal st As Boolean)
-        lockForm = st
+        'lockForm = st
         txtRate.ReadOnly = st
         If st Then
             btnModify.Text = "&Edit"

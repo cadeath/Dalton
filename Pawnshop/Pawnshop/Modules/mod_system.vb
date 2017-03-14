@@ -18,6 +18,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
+    Dim frmCollection As New FormCollection()
     Public DEV_MODE As Boolean = False
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
@@ -128,6 +129,7 @@ Module mod_system
             frmMain.dateSet = False
         End If
     End Sub
+
     ''' <summary>
     ''' This function will segregate all data from tblPawn
     ''' where AuctionDate is = to the CurrentDate.
@@ -136,17 +138,30 @@ Module mod_system
     ''' <remarks></remarks>
     Friend Function AutoSegregate() As Boolean
         Console.WriteLine("Entering segregation module")
-        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
-        Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
+        Dim mySql As String = "SELECT * FROM OPT WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
+        Dim ds As DataSet = LoadSQL(mySql, "OPT")
 
         If ds.Tables(0).Rows.Count = 0 Then Return True
 
         Console.WriteLine("Segregating...")
-        For Each dr As DataRow In ds.Tables("tblPawn").Rows
-            Dim tmpPawnItem As New PawnTicket
-            tmpPawnItem.LoadTicketInRow(dr)
-            tmpPawnItem.Status = "S"
-            tmpPawnItem.SaveTicket(False)
+        For Each dr As DataRow In ds.Tables("OPT").Rows
+            'Dim tmpPawnItem As New PawnTicket
+            'tmpPawnItem.LoadTicketInRow(dr)
+            'tmpPawnItem.Status = "S"
+            'tmpPawnItem.SaveTicket(False)
+
+            Dim tmpPawnItem As New PawnTicket2
+            tmpPawnItem.Load_PTid(dr.Item("PawnID"))
+            With tmpPawnItem.PawnItem
+                '.WithdrawDate = CurrentDate
+                .Status = "S"
+                .Save_PawnItem()
+            End With
+            With tmpPawnItem
+                '.Load_PT_row(dr)
+                .Status = "S"
+                .Update_PawnTicket()
+            End With
 
             AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
             AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
@@ -352,6 +367,7 @@ Module mod_system
 
         Return Not (Char.IsDigit(e.KeyChar))
     End Function
+
     ''' <summary>
     ''' this function check if the input is numeric or character.
     ''' </summary>
@@ -532,11 +548,51 @@ Module mod_system
         sourceArray(newPosition) = newValue
     End Sub
 
+    ' HASHTABLE FUNCTIONS
+    Public Function GetIDbyName(name As String, ht As Hashtable) As Integer
+        For Each dt As DictionaryEntry In ht
+            If dt.Value = name Then
+                Return dt.Key
+            End If
+        Next
+
+        Return 0
+    End Function
+
+    Public Function GetNameByID(id As Integer, ht As Hashtable) As String
+        For Each dt As DictionaryEntry In ht
+            If dt.Key = id Then
+                Return dt.Value
+            End If
+        Next
+
+        Return "ES" & "KIE GWA" & "PO"
+    End Function
+    ' END - HASHTABLE FUNCTIONS
+
     Public Function CheckOTP() As Boolean
-        diagOTP.Show()
+        diagOTP.ShowDialog()
         diagOTP.TopMost = True
         'Return False
         Return True
+    End Function
+
+    Public Function CheckFormActive() As Boolean
+
+        frmCollection = Application.OpenForms()
+        If Application.OpenForms().OfType(Of frmInsurance).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmInsurance").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmPawningItemNew).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmPawningItemNew").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmBorrowing).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmBorrowing").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmMoneyTransfer).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmMoneyTransfer").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmSales).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmSales").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        End If
+
+        Return False
     End Function
 
 #Region "Log Module"

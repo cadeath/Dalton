@@ -387,7 +387,6 @@ Public Class frmPawnItem
         End If
 
         Notify_Renewal(PawnItem)
-
         Redeem("R")
         PrintButton(0)
         btnSave.Enabled = True
@@ -483,6 +482,7 @@ Public Class frmPawnItem
         Dim ds As DataSet, mySql As String = "SELECT DAYFROM, DAYTO, ITEMTYPE, INTEREST, PENALTY, REMARKS FROM TBLINT"
         ds = LoadSQL(mySql)
         Pawn_IntHash = GetMD5(ds)
+        MsgBox(GetMD5(ds))
 
         Storing_Hash(Pawn_IntHash)
 
@@ -1675,6 +1675,4 @@ Public Class frmPawnItem
 
         Return disp
     End Function
-
- 
 End Class

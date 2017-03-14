@@ -23,14 +23,14 @@
         Dim st As Date = GetFirstDate(monCal.SelectionStart)
         Dim en As Date = GetLastDate(monCal.SelectionStart)
 
-        mySql = "select count(CATEGORY) as CountCategory,LOANDATE, AUCTIONDATE, CATEGORY, ITEMTYPE,PRINCIPAL"
-        mySql &= vbCrLf & "from TBLPAWN"
-        mySql &= vbCrLf & "inner join tblclass on TBLPAWN.CATID =  TBLCLASS.CLASSID"
-        mySql &= vbCrLf & " where"
-        mySql &= vbCrLf & String.Format("auctiondate BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-        mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
-        mySql &= vbCrLf & "GROUP BY CATEGORY, LOANDATE, AUCTIONDATE, ITEMTYPE, PRINCIPAL"
-        mySql &= vbCrLf & "ORDER BY LOANDATE ASC"
+        mySql = "SELECT COUNT(ITM.ITEMCLASS) AS COUNTCATEGORY, P.LOANDATE, P.AUCTIONDATE, ITM.ITEMCLASS, "
+        mySql &= "CLASS.ITEMCATEGORY, P.PRINCIPAL FROM OPT P "
+        mySql &= "INNER JOIN OPI ITM ON ITM.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM CLASS "
+        mySql &= " ON CLASS.ITEMID = ITM.ITEMID "
+        mySql &= String.Format("WHERE P.AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
+        mySql &= " AND P.STATUS <> '0' AND P.STATUS <> 'X' AND P.STATUS <> 'V' "
+        mySql &= "GROUP BY ITM.ITEMCLASS, P.LOANDATE, P.AUCTIONDATE, CLASS.ITEMCATEGORY, P.PRINCIPAL "
 
 
         Dim ds As DataSet = LoadSQL(mySql)
@@ -48,18 +48,12 @@
         Dim st As Date = GetFirstDate(monCal.SelectionStart)
         Dim en As Date = GetLastDate(monCal.SelectionStart)
 
-
-        mySql = "SELECT P.AUCTIONDATE, C.CATEGORY, P.ITEMTYPE, P.PRINCIPAL,TYPE"
-        mySql &= vbCrLf & "FROM TBLPAWN P "
-        mySql &= vbCrLf & "  INNER JOIN TBLCLASS C"
-        mySql &= vbCrLf & "  ON C.CLASSID = P.CATID"
-        mySql &= vbCrLf & "WHERE"
-        mySql &= vbCrLf & "  (P.STATUS = 'L' OR P.STATUS = 'W' OR P.STATUS = 'S')"
-        mySql &= vbCrLf & "  AND TYPE = 'JWL'"
-        mySql &= vbCrLf & String.Format("  AND P.AUCTIONDATE BETWEEN '{0}' AND '{1}'", st.ToShortDateString, en.ToShortDateString)
-        mySql &= vbCrLf & "GROUP BY P.AUCTIONDATE, C.CATEGORY, P.ITEMTYPE, P.PRINCIPAL,TYPE "
-        mySql &= vbCrLf & "ORDER BY P.AUCTIONDATE ASC"
-
+        mySql = "SELECT P.LOANDATE, P.AUCTIONDATE, ITM.ITEMCLASS, CLASS.ITEMCATEGORY, 
+        mySql &= "P.PRINCIPAL FROM OPT P INNER JOIN OPI ITM ON ITM.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM CLASS  ON CLASS.ITEMID = ITM.ITEMID "
+        mySql &= "WHERE CLASS.ITEMCATEGORY = 'JEWELRY' AND P.STATUS <> '0' AND P.STATUS <> 'X' AND P.STATUS <> 'V' "
+        mySql &= String.Format("AND P.AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
+        mySql &= "GROUP BY ITM.ITEMCLASS, P.LOANDATE, P.AUCTIONDATE, CLASS.ITEMCATEGORY, P.PRINCIPAL "
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim addPara As New Dictionary(Of String, String)
@@ -78,10 +72,10 @@
         Dim en As Date = GetLastDate(monCal.SelectionStart)
 
         mySql = "SELECT * "
-        mySql &= vbCrLf & "FROM PAWNING "
+        mySql &= vbCrLf & "FROM PAWN_LIST "
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}' ", st.ToShortDateString, en.ToShortDateString)
-        mySql &= vbCrLf & "AND STATUS <> 'RENEWED' AND STATUS <> 'REDEEM' AND STATUS <> 'VOID'"
+        mySql &= vbCrLf & "AND STATUS <> '0' AND STATUS <> 'X' AND STATUS <> 'V'"
 
         Dim ds As DataSet = LoadSQL(mySql)
         Dim addPara As New Dictionary(Of String, String)

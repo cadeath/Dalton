@@ -177,12 +177,23 @@ Public Class Insurance
         InsuranceID = frmInsurance.lbltransid.Text
 
         ds.Tables(fillData).Rows(0).Item("Status") = _status
+        SaveEntry(ds, False)
 
-        database.SaveEntry(ds, False)
+        ds.Clear()
+        mySql = "Select * From tblMaintenance Where Opt_Keys = 'INS Count'"
+        ds = LoadSQL(mySql, "tblMaintenance")
+        ds.Tables(0).Rows(0).Item("Opt_Values") = ds.Tables(0).Rows(0).Item("Opt_Values") - 1
+        SaveEntry(ds, False)
+        InventoryController.AddInventory("IND 00001", 1)
 
-        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID)
+        'mySql = "SELECT * FROM DOC WHERE CODE = '" & "COI# " & _coiNo & "'"
+        'ds = LoadSQL(mySql, "Doc")
+        'ds.Tables(0).Rows(0).Item("Status") = "V"
+        'SaveEntry(ds, False)
+        'InventoryController.AddInventory("IND 00001", 1)
 
-        RemoveJournal(InsuranceID, , TransactionName)
+        Dim NewOtp As New ClassOtp("VOID INSURANCE", diagOTP.txtPIN.Text, "COI# " & COInumber)
+        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "COI# " & COInumber)
         RemoveDailyTimeLog(InsuranceID, "1", TransactionName)
     End Sub
 
@@ -196,7 +207,16 @@ Public Class Insurance
         Return ds.Tables(0).Rows(0).Item("INSURANCEID")
     End Function
 
+    Friend Sub UpdateInsurance()
+        Dim mysql As String = "Select * From TBLINSURANCE Where INSURANCEID = " & _id
+        Dim fillData As String = "TBLINSURANCE"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
 
+        With ds.Tables(fillData).Rows(0)
+            .Item("Pawnticket") = _refNum
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
 #End Region
 
 End Class
