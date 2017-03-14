@@ -106,6 +106,7 @@ Partial Class frmMain
         Me.LayawayListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayawayPaymentReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForfeitLayawayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlySegrregatedListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -293,7 +294,8 @@ Partial Class frmMain
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.AuctionMonthlyJewelryReportToolStripMenuItem, Me.MonthlyInventoryReportsToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.AuditReportToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.DollarReportToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.VoidReportToolStripMenuItem, Me.SalesReportToolStripMenuItem, Me.InventoryReportToolStripMenuItem, Me.StockoutReportToolStripMenuItem, Me.StockInReportToolStripMenuItem, Me.LayawayPaymentReportToolStripMenuItem, Me.LayawayListToolStripMenuItem, Me.ForfeitLayawayReportToolStripMenuItem, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.SequenceToolStripMenuItem, Me.CashInOutSummaryToolStripMenuItem, Me.AuctionMonthlyJewelryReportToolStripMenuItem, Me.MonthlySegrregatedListToolStripMenuItem, Me.MonthlyInventoryReportsToolStripMenuItem, Me.ToolStripSeparator5, Me.OutstandingToolStripMenuItem, Me.AuditReportToolStripMenuItem, Me.LoanRegisterToolStripMenuItem, Me.MoneyTransferToolStripMenuItem, Me.InsuranceToolStripMenuItem, Me.DollarReportToolStripMenuItem, Me.CashInOutToolStripMenuItem, Me.SegregatedListToolStripMenuItem, Me.ItemPulloutToolStripMenuItem1, Me.VoidReportToolStripMenuItem, Me.SalesReportToolStripMenuItem, Me.InventoryReportToolStripMenuItem, Me.StockoutReportToolStripMenuItem, Me.StockInReportToolStripMenuItem, Me.ToolStripSeparator4, Me.HourlyReportToolStripMenuItem, Me.HourlySummaryToolStripMenuItem, Me.DailyCashCountToolStripMenuItem})
+
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
         Me.ReportToolStripMenuItem.Text = "&Report"
@@ -670,6 +672,7 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
+
         'LayawayListToolStripMenuItem
         '
         Me.LayawayListToolStripMenuItem.Name = "LayawayListToolStripMenuItem"
@@ -687,6 +690,13 @@ Partial Class frmMain
         Me.ForfeitLayawayReportToolStripMenuItem.Name = "ForfeitLayawayReportToolStripMenuItem"
         Me.ForfeitLayawayReportToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.ForfeitLayawayReportToolStripMenuItem.Text = "Forfeit Layaway Report"
+
+        'MonthlySegrregatedListToolStripMenuItem
+        '
+        Me.MonthlySegrregatedListToolStripMenuItem.Name = "MonthlySegrregatedListToolStripMenuItem"
+        Me.MonthlySegrregatedListToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.MonthlySegrregatedListToolStripMenuItem.Text = "Monthly Segrregated List"
+
         '
         'frmMain
         '
@@ -803,10 +813,14 @@ Partial Class frmMain
     Friend WithEvents ItemMasterDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents StockoutReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyInventoryReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
     Friend WithEvents StockInReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LayawayPaymentReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LayawayListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ForfeitLayawayReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
+
+    Friend WithEvents MonthlySegrregatedListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 
