@@ -33,6 +33,26 @@
 
     End Sub
 
+    Private Sub Do_IntHistory()
+        Dim ADD_INTHIST As String
+        ADD_INTHIST = "CREATE TABLE TBLINT_HISTORY ("
+        ADD_INTHIST &= vbCrLf & "  INTID BIGINT NOT NULL,"
+        ADD_INTHIST &= vbCrLf & "  DAYFROM INTEGER DEFAULT '0' NOT NULL,"
+        ADD_INTHIST &= vbCrLf & "  DAYTO SMALLINT DEFAULT '0' NOT NULL,"
+        ADD_INTHIST &= vbCrLf & "  ITEMTYPE VARCHAR(3) DEFAULT '' NOT NULL,"
+        ADD_INTHIST &= vbCrLf & "  INTEREST DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
+        ADD_INTHIST &= vbCrLf & "  PENALTY DECIMAL(12, 2) DEFAULT '0.0' NOT NULL,"
+        ADD_INTHIST &= vbCrLf & "  REMARKS VARCHAR(100),"
+        ADD_INTHIST &= vbCrLf & "  CHECKSUM VARCHAR(50) DEFAULT '' NOT NULL,"
+        ADD_INTHIST &= vbCrLf & "  UPDATE_DATE DATE);"
+
+        RunCommand(ADD_INTHIST)
+        RunCommand("ALTER TABLE TBLINT_HISTORY ADD PRIMARY KEY (INTID);")
+
+        AutoIncrement_ID("TBLINT_HISTORY", "INTID")
+    End Sub
+
+
     Friend Sub Create_User_table()
         If ifTblExist("TBL_USER_DEFAULT") Then
             Exit Sub
@@ -54,7 +74,7 @@
         Try
             RunCommand(TBL_USERRULE)
 
-            RunCommand("ALTER TABLE TBL_USER_DEFAULT ADD PRIMARY KEY (USERID) USING INDEX RDB$PRIMARY18;")
+            RunCommand("ALTER TABLE TBL_USER_DEFAULT ADD PRIMARY KEY (USERID);")
 
             TBL_USERRULE = "CREATE TRIGGER BI_TBL_USER_DEFAULT_USERID FOR TBL_USER_DEFAULT"
             TBL_USERRULE &= vbCrLf & "ACTIVE BEFORE INSERT "
@@ -62,7 +82,7 @@
             TBL_USERRULE &= vbCrLf & "AS "
             TBL_USERRULE &= vbCrLf & "BEGIN "
             TBL_USERRULE &= vbCrLf & "IF (NEW.USERID IS NULL) THEN "
-            TBL_USERRULE &= vbCrLf & "NEW.USERID = GEN_ID(TBL_USER_DEFAULT_USERID_GEN1, 1); "
+            TBL_USERRULE &= vbCrLf & "NEW.USERID = GEN_ID(TBL_USER_DEFAULT_USERID_GEN, 1); "
             TBL_USERRULE &= vbCrLf & "END "
 
             RunCommand(TBL_USERRULE)
@@ -87,8 +107,8 @@
         RunCommand(TBL_USERRULE)
 
         Try
-            TBL_USERRULE = "ALTER TABLE TBLUSER_HISTORY ADD PRIMARY KEY (USER_HISTID) USING INDEX RDB$PRIMARY110;"
-            RunCommand(TBL_USERRULE)
+
+            RunCommand("ALTER TABLE TBLUSER_HISTORY ADD PRIMARY KEY (USER_HISTID);")
 
             TBL_USERRULE = "CREATE TRIGGER BI_TBLUSER_HISTORY_USER_HISTID FOR TBLUSER_HISTORY"
             TBL_USERRULE &= vbCrLf & "ACTIVE BEFORE INSERT "

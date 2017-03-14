@@ -50,7 +50,7 @@ Partial Class frmUserManagement
         Me.txtPassword = New UserManagementEnhancement.watermark()
         Me.txtLastname = New UserManagementEnhancement.watermark()
         Me.txtMiddlename = New UserManagementEnhancement.watermark()
-        Me.Watermark2 = New UserManagementEnhancement.watermark()
+        Me.txtFirstname = New UserManagementEnhancement.watermark()
         Me.txtUsername = New UserManagementEnhancement.watermark()
         Me.tbControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -92,7 +92,7 @@ Partial Class frmUserManagement
         Me.GroupBox1.Controls.Add(Me.txtPassword)
         Me.GroupBox1.Controls.Add(Me.txtLastname)
         Me.GroupBox1.Controls.Add(Me.txtMiddlename)
-        Me.GroupBox1.Controls.Add(Me.Watermark2)
+        Me.GroupBox1.Controls.Add(Me.txtFirstname)
         Me.GroupBox1.Controls.Add(Me.txtUsername)
         Me.GroupBox1.Controls.Add(Me.chkShowPassword)
         Me.GroupBox1.Controls.Add(Me.btnCreateAccount)
@@ -113,7 +113,7 @@ Partial Class frmUserManagement
         '
         Me.chkShowPassword.AutoSize = True
         Me.chkShowPassword.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkShowPassword.Location = New System.Drawing.Point(280, 178)
+        Me.chkShowPassword.Location = New System.Drawing.Point(279, 180)
         Me.chkShowPassword.Name = "chkShowPassword"
         Me.chkShowPassword.Size = New System.Drawing.Size(139, 21)
         Me.chkShowPassword.TabIndex = 19
@@ -357,14 +357,14 @@ Partial Class frmUserManagement
         Me.txtMiddlename.WatermarkColor = System.Drawing.Color.Gray
         Me.txtMiddlename.WatermarkText = "Middlename"
         '
-        'Watermark2
+        'txtFirstname
         '
-        Me.Watermark2.Location = New System.Drawing.Point(21, 66)
-        Me.Watermark2.Name = "Watermark2"
-        Me.Watermark2.Size = New System.Drawing.Size(201, 29)
-        Me.Watermark2.TabIndex = 21
-        Me.Watermark2.WatermarkColor = System.Drawing.Color.Gray
-        Me.Watermark2.WatermarkText = "Firstname"
+        Me.txtFirstname.Location = New System.Drawing.Point(21, 66)
+        Me.txtFirstname.Name = "txtFirstname"
+        Me.txtFirstname.Size = New System.Drawing.Size(201, 29)
+        Me.txtFirstname.TabIndex = 21
+        Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtFirstname.WatermarkText = "Firstname"
         '
         'txtUsername
         '
@@ -421,7 +421,7 @@ Partial Class frmUserManagement
     Friend WithEvents txtPassword As UserManagementEnhancement.watermark
     Friend WithEvents txtLastname As UserManagementEnhancement.watermark
     Friend WithEvents txtMiddlename As UserManagementEnhancement.watermark
-    Friend WithEvents Watermark2 As UserManagementEnhancement.watermark
+    Friend WithEvents txtFirstname As UserManagementEnhancement.watermark
     Friend WithEvents txtUsername As UserManagementEnhancement.watermark
 
 End Class

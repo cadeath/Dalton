@@ -78,6 +78,29 @@
         User_rule_mod.Create_User_table()
         User_rule_mod.Create_User_history()
 
-        MsgBox("")
+        Dim result As DialogResult = MsgBox("Do you want save this account?", MsgBoxStyle.YesNo, "Adding Account")
+        If result = vbNo Then
+            Exit Sub
+        End If
+
+
+
+        MsgBox("Account successfully added.", MsgBoxStyle.Information, "Adding Account")
     End Sub
+
+    Private Function IsValid() As Boolean
+        If txtUsername.Text = "" Then txtUsername.Focus() : Return False
+        If txtFirstname.Text = "" Then txtFirstname.Focus() : Return False
+        If txtMiddlename.Text = "" Then txtMiddlename.Focus() : Return False
+        If txtLastname.Text = "" Then txtLastname.Focus() : Return False
+        If txtPassword.Text = "" Then txtPassword.Focus() : Return False
+        If txtPasword1.Text = "" Then txtPasword1.Focus() : Return False
+        If txtEmailaddress.Text = "" Then txtEmailaddress.Focus() : Return False
+        If txtContactnumber.Text = "" Then txtContactnumber.Focus() : Return False
+        If txtContactnumber.TextLength < 11 Then MsgBox("Contact Number is not less than 11 digit.") : txtContactnumber.Focus() : Return False
+        If rbFemale.Checked = False And rbMale.Checked = False Then MsgBox("Select gender type", MsgBoxStyle.Information, "") : Return False
+        If txtPassword.Text <> txtPasword1.Text Then MsgBox("Password not matched!", MsgBoxStyle.Critical, "Warning") & _ 
+          : txtPassword.Focus() : Return False
+
+    End Function
 End Class

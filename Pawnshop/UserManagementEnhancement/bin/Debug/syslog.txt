@@ -451,3 +451,126 @@ attempt to store duplicate value (visible to active transactions) in unique inde
    at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
    at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
    at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:32:41] [CREATE TRIGGER BI_TBL_USER_DEFAULT_USERID FOR TBL_USER_DEFAULT
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+IF (NEW.USERID IS NULL) THEN 
+NEW.USERID = GEN_ID(TBL_USER_DEFAULT_USERID_GEN1, 1); 
+END ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 47
+generator TBL_USER_DEFAULT_USERID_GEN1 is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:32:46] [CREATE TRIGGER BI_TBLUSER_HISTORY_USER_HISTID FOR TBLUSER_HISTORY
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+IF (NEW.USER_HISTID IS NULL) THEN 
+NEW.USER_HISTID = GEN_ID(TBLUSER_HISTORY_USER_HISTID_GEN, 1); 
+END ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 55
+generator TBLUSER_HISTORY_USER_HISTID_GEN is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:35:08] [CREATE TRIGGER BI_TBL_USER_DEFAULT_USERID FOR TBL_USER_DEFAULT
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+IF (NEW.USERID IS NULL) THEN 
+NEW.USERID = GEN_ID(TBL_USER_DEFAULT_USERID_GEN1, 1); 
+END ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 47
+generator TBL_USER_DEFAULT_USERID_GEN1 is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:38:54] [ALTER TABLE TBL_USER_DEFAULT ADD PRIMARY KEY (USERID);] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+STORE RDB$RELATION_CONSTRAINTS failed
+action cancelled by trigger (3) to preserve data integrity
+Attempt to define a second PRIMARY KEY for the same table
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:40:44] [CREATE GENERATOR TBL_USER_DEFAULT_USERID_GEN; ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+DEFINE GENERATOR failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_11"
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:42:08] [CREATE GENERATOR TBL_USER_DEFAULT_USERID_GEN; ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]unsuccessful metadata update
+DEFINE GENERATOR failed
+attempt to store duplicate value (visible to active transactions) in unique index "RDB$INDEX_11"
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:43:39] [CREATE TRIGGER BI_TBL_USER_DEFAULT_USERID FOR TBL_USER_DEFAULT
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+IF (NEW.USERID IS NULL) THEN 
+NEW.USERID = GEN_ID(TBL_USER_DEFAULT_USERID_GEN1, 1); 
+END ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 47
+generator TBL_USER_DEFAULT_USERID_GEN1 is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:45:44] [CREATE TRIGGER BI_TBL_USER_DEFAULT_USERID FOR TBL_USER_DEFAULT
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+IF (NEW.USERID IS NULL) THEN 
+NEW.USERID = GEN_ID(TBL_USER_DEFAULT_USERID_GEN1, 1); 
+END ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 47
+generator TBL_USER_DEFAULT_USERID_GEN1 is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:58:57] [CREATE TRIGGER BI_TBLUSER_HISTORY_USER_HISTID FOR TBLUSER_HISTORY
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+IF (NEW.USER_HISTID IS NULL) THEN 
+NEW.USER_HISTID = GEN_ID(TBLUSER_HISTORY_USER_HISTID_GEN, 1); 
+END ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 55
+generator TBLUSER_HISTORY_USER_HISTID_GEN is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
+[03/14/2017 09:59:57] [CREATE TRIGGER BI_TBLUSER_HISTORY_USER_HISTID FOR TBLUSER_HISTORY
+ACTIVE BEFORE INSERT 
+POSITION 0 
+AS 
+BEGIN 
+IF (NEW.USER_HISTID IS NULL) THEN 
+NEW.USER_HISTID = GEN_ID(TBLUSER_HISTORY_USER_HISTID_GEN, 1); 
+END ] - System.Data.Odbc.OdbcException (0x80131937): ERROR [HY000] [ODBC Firebird Driver][Firebird]invalid request BLR at offset 55
+generator TBLUSER_HISTORY_USER_HISTID_GEN is not defined
+   at System.Data.Odbc.OdbcConnection.HandleError(OdbcHandle hrHandle, RetCode retcode)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader, Object[] methodArguments, SQL_API odbcApiMethod)
+   at System.Data.Odbc.OdbcCommand.ExecuteReaderObject(CommandBehavior behavior, String method, Boolean needReader)
+   at System.Data.Odbc.OdbcCommand.ExecuteNonQuery()
+   at UserManagementEnhancement.autopatch.RunCommand(String sql) in C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\UserManagementEnhancement\Module\autopatch.vb:line 14
