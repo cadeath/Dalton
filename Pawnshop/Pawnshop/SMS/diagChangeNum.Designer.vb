@@ -22,33 +22,34 @@ Partial Class diagChangeNum
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.lblClient = New System.Windows.Forms.Label()
+        Me.txtNewNumber = New System.Windows.Forms.TextBox()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblClient
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(207, 20)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Change Number for XXXXX"
+        Me.lblClient.AutoSize = True
+        Me.lblClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblClient.Location = New System.Drawing.Point(12, 9)
+        Me.lblClient.Name = "lblClient"
+        Me.lblClient.Size = New System.Drawing.Size(158, 15)
+        Me.lblClient.TabIndex = 0
+        Me.lblClient.Text = "Change Number for XXXXX"
         '
-        'TextBox1
+        'txtNewNumber
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(12, 32)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(207, 22)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "09257977559"
+        Me.txtNewNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNewNumber.Location = New System.Drawing.Point(12, 32)
+        Me.txtNewNumber.Name = "txtNewNumber"
+        Me.txtNewNumber.Size = New System.Drawing.Size(207, 22)
+        Me.txtNewNumber.TabIndex = 1
+        Me.txtNewNumber.Text = "09257977559"
         '
         'btnCancel
         '
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Location = New System.Drawing.Point(144, 60)
         Me.btnCancel.Name = "btnCancel"
@@ -76,8 +77,8 @@ Partial Class diagChangeNum
         Me.ClientSize = New System.Drawing.Size(230, 105)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtNewNumber)
+        Me.Controls.Add(Me.lblClient)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "diagChangeNum"
@@ -87,8 +88,8 @@ Partial Class diagChangeNum
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents lblClient As System.Windows.Forms.Label
+    Friend WithEvents txtNewNumber As System.Windows.Forms.TextBox
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnUpdate As System.Windows.Forms.Button
 End Class

@@ -29,9 +29,10 @@ Partial Class frmSMSnotice
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.btnAll = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSend = New System.Windows.Forms.Button()
+        Me.btnChange = New System.Windows.Forms.Button()
+        Me.chkAll = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'lvExpiry
@@ -43,9 +44,9 @@ Partial Class frmSMSnotice
         Me.lvExpiry.GridLines = True
         ListViewItem1.StateImageIndex = 0
         Me.lvExpiry.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
-        Me.lvExpiry.Location = New System.Drawing.Point(12, 12)
+        Me.lvExpiry.Location = New System.Drawing.Point(12, 33)
         Me.lvExpiry.Name = "lvExpiry"
-        Me.lvExpiry.Size = New System.Drawing.Size(688, 250)
+        Me.lvExpiry.Size = New System.Drawing.Size(688, 229)
         Me.lvExpiry.TabIndex = 0
         Me.lvExpiry.UseCompatibleStateImageBehavior = False
         Me.lvExpiry.View = System.Windows.Forms.View.Details
@@ -76,15 +77,6 @@ Partial Class frmSMSnotice
         Me.ColumnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeader5.Width = 83
         '
-        'btnAll
-        '
-        Me.btnAll.Location = New System.Drawing.Point(12, 268)
-        Me.btnAll.Name = "btnAll"
-        Me.btnAll.Size = New System.Drawing.Size(75, 40)
-        Me.btnAll.TabIndex = 1
-        Me.btnAll.Text = "&Select All"
-        Me.btnAll.UseVisualStyleBackColor = True
-        '
         'btnCancel
         '
         Me.btnCancel.Location = New System.Drawing.Point(625, 268)
@@ -103,21 +95,42 @@ Partial Class frmSMSnotice
         Me.btnSend.Text = "&Send"
         Me.btnSend.UseVisualStyleBackColor = True
         '
+        'btnChange
+        '
+        Me.btnChange.Location = New System.Drawing.Point(12, 268)
+        Me.btnChange.Name = "btnChange"
+        Me.btnChange.Size = New System.Drawing.Size(86, 40)
+        Me.btnChange.TabIndex = 4
+        Me.btnChange.Text = "&Change Num"
+        Me.btnChange.UseVisualStyleBackColor = True
+        '
+        'chkAll
+        '
+        Me.chkAll.AutoSize = True
+        Me.chkAll.Location = New System.Drawing.Point(12, 12)
+        Me.chkAll.Name = "chkAll"
+        Me.chkAll.Size = New System.Drawing.Size(70, 17)
+        Me.chkAll.TabIndex = 5
+        Me.chkAll.Text = "Select All"
+        Me.chkAll.UseVisualStyleBackColor = True
+        '
         'frmSMSnotice
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(714, 318)
+        Me.Controls.Add(Me.chkAll)
+        Me.Controls.Add(Me.btnChange)
         Me.Controls.Add(Me.btnSend)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnAll)
         Me.Controls.Add(Me.lvExpiry)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmSMSnotice"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Expiry Notification"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents lvExpiry As System.Windows.Forms.ListView
@@ -126,7 +139,8 @@ Partial Class frmSMSnotice
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents btnAll As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnSend As System.Windows.Forms.Button
+    Friend WithEvents btnChange As System.Windows.Forms.Button
+    Friend WithEvents chkAll As System.Windows.Forms.CheckBox
 End Class

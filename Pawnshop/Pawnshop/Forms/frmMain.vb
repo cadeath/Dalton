@@ -80,6 +80,7 @@
             Exit Sub
         End If
 
+        frmSMSnotice.autoStart = True
         Load_Expiry(frmSMSnotice)
         doExpiry = True
     End Sub
@@ -180,6 +181,7 @@
             MsgBoxAuthoriation("You don't have access to Expiry Generator")
             Exit Sub
         End If
+        MsgBox("Please be information that this function is obsolete", MsgBoxStyle.Information)
 
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
@@ -587,5 +589,9 @@
 
     Private Sub MonthlyInventoryReportsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyInventoryReportsToolStripMenuItem.Click
         frmSalesReport.Show()
+    End Sub
+
+    Private Sub ExpiryListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryListToolStripMenuItem.Click
+        frmSMSnotice.Show()
     End Sub
 End Class

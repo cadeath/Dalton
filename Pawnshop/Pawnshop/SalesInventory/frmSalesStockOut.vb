@@ -42,8 +42,8 @@
 
     Private Sub btnAccept_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAccept.Click
         Me.DialogResult = Windows.Forms.DialogResult.OK
-            m_Branch = cboLocation.Text
-            m_Particulars = txtParticular.Text
+        m_Branch = cboLocation.Text
+        m_Particulars = txtParticular.Text
         Me.Close()
     End Sub
 

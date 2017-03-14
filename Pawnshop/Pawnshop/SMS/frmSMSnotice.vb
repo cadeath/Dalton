@@ -1,4 +1,7 @@
 ﻿Public Class frmSMSnotice
+    Dim checkSwitch As Boolean = True
+    Friend autoStart As Boolean = False
+
     Private Sub frmSMSnotice_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Load_Expiry()
     End Sub
@@ -16,9 +19,9 @@
 
     Private Sub FormState(ByVal st As Boolean)
         lvExpiry.Enabled = st
-        btnAll.Enabled = st
         btnCancel.Enabled = st
         btnSend.Enabled = st
+        btnChange.Enabled = st
     End Sub
 
     Private Delegate Sub do_display_callback()
@@ -28,7 +31,7 @@
         Else
             If ExpiryCache.Rows.Count <= 0 Then Exit Sub
 
-            Me.Hide()
+            If autoStart Then Me.Hide()
             FormState(False)
             For Each dr As DataRow In ExpiryCache.Rows
                 Dim pawner As New Client
@@ -44,12 +47,40 @@
                 Application.DoEvents()
             Next
             FormState(True)
-            Me.Show()
+            If autoStart Then Me.Show()
         End If
     End Sub
 
-    Private Sub lvExpiry_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvExpiry.DoubleClick
+    Private Sub btnChange_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChange.Click
+        If lvExpiry.SelectedItems.Count = 0 Then Exit Sub
         Dim idx As Integer = lvExpiry.FocusedItem.Index
 
+        Dim updatedNumber(0) As String
+        Dim passValue(1) As String
+        passValue(0) = lvExpiry.Items(idx).SubItems(2).Text
+        passValue(1) = lvExpiry.Items(idx).SubItems(1).Text
+        If diagChangeNum.ShowDialog(updatedNumber, passValue) <> Windows.Forms.DialogResult.OK Then
+            Exit Sub
+        End If
+
+        Dim id As Integer = ExpiryCache.Rows(idx).Item("clientID")
+        Dim cl As New Client
+        cl.LoadClient(id)
+        cl.Cellphone1 = updatedNumber(0)
+        cl.ModifyClient()
+        lvExpiry.Items(idx).SubItems(2).Text = cleanup_contact(cl)
+
+        MsgBox("Number Updated", MsgBoxStyle.Information)
     End Sub
+
+    Private Sub lvExpiry_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvExpiry.DoubleClick
+        btnChange.PerformClick()
+    End Sub
+
+    Private Sub chkAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkAll.CheckedChanged
+        For Each lv As ListViewItem In lvExpiry.Items
+            lv.Checked = chkAll.Checked
+        Next
+    End Sub
+
 End Class

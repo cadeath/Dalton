@@ -58,6 +58,7 @@ Partial Class frmMain
         Me.SequenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CashInOutSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AuctionMonthlyJewelryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MonthlyInventoryReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.OutstandingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AuditReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -77,7 +78,6 @@ Partial Class frmMain
         Me.HourlyReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HourlySummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DailyCashCountToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MonthlyInventoryReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -103,6 +103,7 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
+        Me.ExpiryListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.msMenu.SuspendLayout()
         CType(Me.pbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pInfo.SuspendLayout()
@@ -194,7 +195,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.AccountingExtractToolStripMenuItem, Me.ToolStripSeparator2, Me.SalesToolStripMenuItem, Me.StockInToolStripMenuItem, Me.ItemMasterDataToolStripMenuItem, Me.ToolStripSeparator6, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryListToolStripMenuItem, Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.AccountingExtractToolStripMenuItem, Me.ToolStripSeparator2, Me.SalesToolStripMenuItem, Me.StockInToolStripMenuItem, Me.ItemMasterDataToolStripMenuItem, Me.ToolStripSeparator6, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -319,6 +320,12 @@ Partial Class frmMain
         Me.AuctionMonthlyJewelryReportToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.AuctionMonthlyJewelryReportToolStripMenuItem.Text = " Auction Monthly"
         '
+        'MonthlyInventoryReportsToolStripMenuItem
+        '
+        Me.MonthlyInventoryReportsToolStripMenuItem.Name = "MonthlyInventoryReportsToolStripMenuItem"
+        Me.MonthlyInventoryReportsToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
+        Me.MonthlyInventoryReportsToolStripMenuItem.Text = "Monthly Inventory Reports"
+        '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
@@ -430,12 +437,6 @@ Partial Class frmMain
         Me.DailyCashCountToolStripMenuItem.Name = "DailyCashCountToolStripMenuItem"
         Me.DailyCashCountToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.DailyCashCountToolStripMenuItem.Text = "&Daily Cash Count"
-        '
-        'MonthlyInventoryReportsToolStripMenuItem
-        '
-        Me.MonthlyInventoryReportsToolStripMenuItem.Name = "MonthlyInventoryReportsToolStripMenuItem"
-        Me.MonthlyInventoryReportsToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
-        Me.MonthlyInventoryReportsToolStripMenuItem.Text = "Monthly Inventory Reports"
         '
         'AboutToolStripMenuItem
         '
@@ -667,6 +668,12 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
+        'ExpiryListToolStripMenuItem
+        '
+        Me.ExpiryListToolStripMenuItem.Name = "ExpiryListToolStripMenuItem"
+        Me.ExpiryListToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.ExpiryListToolStripMenuItem.Text = "Expiry List"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -783,6 +790,7 @@ Partial Class frmMain
     Friend WithEvents StockoutReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents StockInReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyInventoryReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 
 
