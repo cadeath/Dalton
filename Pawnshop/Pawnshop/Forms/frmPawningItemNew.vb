@@ -1317,9 +1317,23 @@ Public Class frmPawningItemNew
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidPawning
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidPawning()
+        'End If
+
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidPawning
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isCorrect Then
+                Exit Sub
+            Else
+                VoidPawning()
+            End If
         Else
             VoidPawning()
         End If
@@ -1571,6 +1585,7 @@ Public Class frmPawningItemNew
         database.SaveEntry(ds)
     End Sub
 
+
     Private Sub txtPrincipal_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPrincipal.Leave
         ReComputeInterest()
     End Sub
@@ -1591,6 +1606,7 @@ Public Class frmPawningItemNew
     Private Sub txtAppr_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAppr.Leave
         ReComputeInterest()
     End Sub
+
 
     Private Function GetTotalCoi() As Integer
         'Dim mysql As String = "Select Sum(Amount)as Amount from tblInsurance Where TRANSDATE = '" & CurrentDate.ToShortDateString & "' AND PAWNTICKET = '" & Ticket & "'"
@@ -1626,4 +1642,5 @@ Public Class frmPawningItemNew
             Console.WriteLine("Hashtable Key: " & ht.Key & "Coi#: " & ht.Value)
         Next
     End Sub
+
 End Class
