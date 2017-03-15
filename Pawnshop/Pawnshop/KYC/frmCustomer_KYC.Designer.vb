@@ -240,7 +240,7 @@ Partial Class frmCustomer_KYC
         'lblAge
         '
         Me.lblAge.AutoSize = True
-        Me.lblAge.Location = New System.Drawing.Point(127, 172)
+        Me.lblAge.Location = New System.Drawing.Point(129, 172)
         Me.lblAge.Name = "lblAge"
         Me.lblAge.Size = New System.Drawing.Size(31, 16)
         Me.lblAge.TabIndex = 42
@@ -399,7 +399,7 @@ Partial Class frmCustomer_KYC
         '
         'txtNationality
         '
-        Me.txtNationality.Location = New System.Drawing.Point(465, 170)
+        Me.txtNationality.Location = New System.Drawing.Point(490, 170)
         Me.txtNationality.Name = "txtNationality"
         Me.txtNationality.Size = New System.Drawing.Size(208, 22)
         Me.txtNationality.TabIndex = 12
@@ -408,7 +408,7 @@ Partial Class frmCustomer_KYC
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(463, 154)
+        Me.Label19.Location = New System.Drawing.Point(488, 154)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(79, 16)
         Me.Label19.TabIndex = 26
@@ -419,7 +419,7 @@ Partial Class frmCustomer_KYC
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.Location = New System.Drawing.Point(594, 125)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(81, 18)
+        Me.Label13.Size = New System.Drawing.Size(104, 18)
         Me.Label13.TabIndex = 25
         Me.Label13.Text = "Zip Code"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -469,7 +469,7 @@ Partial Class frmCustomer_KYC
         Me.cboZip2.FormattingEnabled = True
         Me.cboZip2.Location = New System.Drawing.Point(594, 98)
         Me.cboZip2.Name = "cboZip2"
-        Me.cboZip2.Size = New System.Drawing.Size(81, 24)
+        Me.cboZip2.Size = New System.Drawing.Size(104, 24)
         Me.cboZip2.TabIndex = 9
         Me.cboZip2.Text = "ELLIE GWAPO"
         '
@@ -522,7 +522,7 @@ Partial Class frmCustomer_KYC
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.Location = New System.Drawing.Point(591, 49)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(81, 18)
+        Me.Label12.Size = New System.Drawing.Size(104, 18)
         Me.Label12.TabIndex = 14
         Me.Label12.Text = "Zip Code"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -572,7 +572,7 @@ Partial Class frmCustomer_KYC
         Me.cboZip1.FormattingEnabled = True
         Me.cboZip1.Location = New System.Drawing.Point(592, 25)
         Me.cboZip1.Name = "cboZip1"
-        Me.cboZip1.Size = New System.Drawing.Size(81, 24)
+        Me.cboZip1.Size = New System.Drawing.Size(104, 24)
         Me.cboZip1.TabIndex = 4
         Me.cboZip1.Text = "ELLIE GWAPO"
         '
@@ -622,16 +622,16 @@ Partial Class frmCustomer_KYC
         '
         'txtBdayPlace
         '
-        Me.txtBdayPlace.Location = New System.Drawing.Point(201, 170)
+        Me.txtBdayPlace.Location = New System.Drawing.Point(243, 170)
         Me.txtBdayPlace.Name = "txtBdayPlace"
-        Me.txtBdayPlace.Size = New System.Drawing.Size(260, 22)
+        Me.txtBdayPlace.Size = New System.Drawing.Size(243, 22)
         Me.txtBdayPlace.TabIndex = 11
         Me.txtBdayPlace.Text = "ELLIE GWAPO"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(200, 154)
+        Me.Label6.Location = New System.Drawing.Point(242, 154)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(68, 16)
         Me.Label6.TabIndex = 2
