@@ -24,6 +24,7 @@ Public Class diag_loading
             If pbLoading.Value < pbLoading.Maximum Then
                 pbLoading.Value += 1
                 lblStatus.Text = String.Format("{0}%{1}", ((pbLoading.Value / pbLoading.Maximum) * 100).ToString("F2"), " Complete")
+                Application.DoEvents()
             End If
         End If
     End Sub
@@ -32,4 +33,5 @@ Public Class diag_loading
         Me.TopMost = True
         frmMain.Enabled = False
     End Sub
+
 End Class

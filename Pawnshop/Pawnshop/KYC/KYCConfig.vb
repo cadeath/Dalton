@@ -26,6 +26,7 @@
 
     Friend Sub KYC_Initialization()
         If ifTblExist(CUSTOMER_TABLE) Then Exit Sub
+        diag_loading.Show()
         Create_Tables()
         MigrateClients_Info()
     End Sub
@@ -78,8 +79,11 @@
 
     Private Sub Create_Tables()
         diag_loading.Cursor = Cursors.WaitCursor
+        diag_loading.Set_Bar(6)
+        diag_loading.Reset_Bar()
+
         Dim mySql As String, primaryKey As String
-        diag_loading.Show()
+
         ' CUSTOMER TABLE
         mySql = "CREATE TABLE " & CUSTOMER_TABLE & " ("
         mySql &= vbCrLf & "  ID BIGINT NOT NULL,"
@@ -107,8 +111,11 @@
         mySql &= vbCrLf & "  CLIENT_IMG VARCHAR(75));"
         primaryKey = "ALTER TABLE " & CUSTOMER_TABLE & " ADD PRIMARY KEY (ID);"
 
-        RunCommand(mySql)
-        AutoIncrement_ID(CUSTOMER_TABLE, "ID")
+        Console.WriteLine("Start creating...")
+        RunCommand(mySql) : diag_loading.Add_Bar()
+        AutoIncrement_ID(CUSTOMER_TABLE, "ID") : diag_loading.Add_Bar()
+        Console.WriteLine("Customer table done.")
+        Application.DoEvents()
 
         ' PHONE ID
         mySql = "CREATE TABLE " & CUSTOMER_ID & " ("
@@ -119,8 +126,9 @@
         mySql &= vbCrLf & "  ISPRIMARY SMALLINT DEFAULT '0' NOT NULL);"
         primaryKey = "ALTER TABLE KYC_ID ADD PRIMARY KEY (ID);"
 
-        RunCommand(mySql)
-        AutoIncrement_ID(CUSTOMER_ID, "ID")
+        RunCommand(mySql) : diag_loading.Add_Bar()
+        AutoIncrement_ID(CUSTOMER_ID, "ID") : diag_loading.Add_Bar()
+        Application.DoEvents()
 
         ' PHONE TABLE
         mySql = "CREATE TABLE " & CUSTOMER_PHONE & " ("
@@ -130,8 +138,10 @@
         mySql &= vbCrLf & "  ISPRIMARY SMALLINT DEFAULT '0' NOT NULL);"
         primaryKey = "ALTER TABLE KYC_PHONE ADD PRIMARY KEY (PHONEID);"
 
-        RunCommand(mySql)
-        AutoIncrement_ID(CUSTOMER_PHONE, "PHONEID")
+        RunCommand(mySql) : diag_loading.Add_Bar()
+        AutoIncrement_ID(CUSTOMER_PHONE, "PHONEID") : diag_loading.Add_Bar()
+        Application.DoEvents()
+
     End Sub
 
 
@@ -149,6 +159,7 @@
     ' TODO
     ' AutoMigrate information
     Private Sub MigrateClients_Info()
+        'diag_loading.Show()
 
         mysql = "SELECT * FROM " & oldClient & " ORDER BY CLIENTID ASC"
         Dim Clds As DataSet = LoadSQL(mysql, oldClient)
@@ -194,7 +205,7 @@
                         i += 1
 
                         If i = 1 Then
-                           Add_Phone(phne, clDR.Item("CLIENTID"), True)
+                            Add_Phone(phne, clDR.Item("CLIENTID"), True)
 
                             phneCOUNT += 1
                         Else
