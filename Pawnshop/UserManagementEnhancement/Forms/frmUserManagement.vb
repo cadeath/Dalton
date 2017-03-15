@@ -21,17 +21,16 @@
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtUsername.Focus()
-
         If Not ifTblExist("TBL_USER_DEFAULT") Then
-            Create()
+            Exit Sub
         End If
-       
         Load_users()
     End Sub
 
     Private Sub Load_users()
         Dim s_user As New Sys_user
 
+        lvUserList.Items.Clear()
         With s_user
             For Each dr As DataRow In .dsUSEr.Tables(0).Rows
                 .Users(dr.Item("USERID"))
@@ -45,6 +44,7 @@
     Private Sub Create()
         User_rule_mod.Create_User_table()
         User_rule_mod.Create_User_history()
+        User_rule_mod.Create_User_Rule_Table()
     End Sub
 
     Private Sub Load_Privileges()
@@ -90,15 +90,40 @@
             Next
         End With
 
-
+        Load_users()
         MsgBox("Successfully Saved.", MsgBoxStyle.Information, "Save")
     End Sub
 
-    Private Sub dgRulePrivilege_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgRulePrivilege.CellContentClick
+    Private Sub btnCreateAccount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateAccount.Click
+
+        If btnCreateAccount.Text = "&Create Account" Then
+            Save()
+        ElseIf btnCreateAccount.Text = "&Edit" Then
+            btnCreateAccount.Text = "&Update"
+            GroupBox1.Enabled = True
+        Else
+            update_user()
+        End If
 
     End Sub
 
-    Private Sub btnCreateAccount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateAccount.Click
+    Function UppercaseFirstLetter(ByVal val As String) As String
+        ' Test for nothing or empty.
+        If String.IsNullOrEmpty(val) Then
+            Return val
+        End If
+
+        ' Convert to character array.
+        Dim array() As Char = val.ToCharArray
+
+        ' Uppercase first character.
+        array(0) = Char.ToUpper(array(0))
+
+        ' Return new string.
+        Return New String(array)
+    End Function
+
+    Private Sub Save()
         If Not IsValid() Then Exit Sub
 
         Dim result As DialogResult = MsgBox("Do you want save this account?", MsgBoxStyle.YesNo, "Adding Account")
@@ -109,10 +134,10 @@
         Create()
 
         With Save_user
-            .USERNAME = txtUsername.Text
-            .FIRSTNAME = txtFirstname.Text
-            .MIDDLENAME = txtMiddlename.Text
-            .LASTNAME = txtLastname.Text
+            .USERNAME = UppercaseFirstLetter(txtUsername.Text)
+            .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
+            .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
+            .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
             .USERPASS = txtPassword.Text
             .EMAIL_ADDRESS = txtEmailaddress.Text
             .CONTACTNO = num
@@ -130,8 +155,46 @@
             Exit Sub
         End If
 
+        Load_users()
+        ClearFields("")
         MsgBox("Account successfully added.", MsgBoxStyle.Information, "Adding Account")
     End Sub
+
+    Private Sub update_user()
+        If Not IsValid() Then Exit Sub
+
+        Dim result As DialogResult = MsgBox("Do you want update this account?", MsgBoxStyle.YesNo, "Updating Account")
+        If result = vbNo Then Exit Sub
+        Dim num As String = txtContactnumber.Text
+        num = num.Replace("-", "")
+
+        With Save_user
+            .USERNAME = UppercaseFirstLetter(txtUsername.Text)
+            .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
+            .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
+            .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
+            .USERPASS = txtPassword.Text
+            .EMAIL_ADDRESS = txtEmailaddress.Text
+            .CONTACTNO = num
+            .BIRTHDAY = txtBirthday.Text
+
+            If rbFemale.Checked Then
+                .GENDER = rbFemale.Text
+            Else
+                .GENDER = rbMale.Text
+            End If
+            .AGE = GetCurrentAge(txtBirthday.Text)
+        End With
+
+        If Not Save_user.Update_USER Then
+            Exit Sub
+        End If
+
+        Load_users()
+        ClearFields("")
+        MsgBox("Account successfully updated.", MsgBoxStyle.Information, "Updating Account")
+    End Sub
+
 
     Private Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
         Dim charPos() As Integer = {}
@@ -219,11 +282,17 @@
             Else
                 rbFemale.Checked = True
             End If
-
+            SYSTEM_USERID = .ID
         End With
+
+
+        btnCreateAccount.Text = "&Edit"
+        GroupBox1.Enabled = False
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim count As Integer() = {1, 2, 3}
         Dim tmpuser As New Sys_user
 
@@ -236,4 +305,31 @@
 
         Next
     End Sub
+
+    Private Sub ClearFields(ByVal str As String)
+        txtUsername.Text = str
+        txtFirstname.Text = str
+        txtMiddlename.Text = str
+        txtLastname.Text = str
+        txtPassword.Text = str
+        txtPasword1.Text = str
+        txtEmailaddress.Text = str
+        txtContactnumber.Text = str
+        txtBirthday.Text = Now.ToShortDateString
+        rbFemale.Checked = False
+        rbMale.Checked = False
+        GroupBox1.Enabled = True
+        btnCreateAccount.Text = "&Create Account"
+    End Sub
+
+    Private Sub btnCancell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancell.Click
+        Dim result As DialogResult = MsgBox("Do you want to cancel?", MsgBoxStyle.YesNo, "Cancel")
+        If result = vbNo Then
+            Exit Sub
+        End If
+        ClearFields("")
+
+    End Sub
+
+   
 End Class

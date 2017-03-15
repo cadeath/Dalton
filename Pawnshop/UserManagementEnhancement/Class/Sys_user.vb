@@ -203,16 +203,6 @@ Public Class Sys_user
         End Set
     End Property
 
-    Private _COUNTER As Integer
-    Public Property COUNTER() As Integer
-        Get
-            Return _COUNTER
-        End Get
-        Set(ByVal value As Integer)
-            _COUNTER = value
-        End Set
-    End Property
-
     Private _DATE_CREATED As Date
     Public Property DATE_CREATED() As Date
         Get
@@ -250,11 +240,11 @@ Public Class Sys_user
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
             'Item("PRIVILEGE") = _privilege
-            '.Item("LASTLOGIN") = _AGE
+            .Item("LASTLOGIN") = Now
             '.Item("ENCODERID") = _encoderID
-            .Item("EXPIRYDATE") = Now.AddDays(90)
-            .Item("SYSTEMINFO") = Now.ToShortDateString
-            .Item("DAYS_COUNT") = IsnotUsed
+            .Item("EXPIRYDATE") = Now.AddDays(Expiration_count)
+            .Item("SYSTEMINFO") = Now
+            .Item("DAYS_COUNT") = D_deactivate
             .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
@@ -272,12 +262,117 @@ Public Class Sys_user
         With dr
             .Item("USERID") = _ID
             .Item("USERPASS") = _USERPASS
-            .Item("COUNTER") = 1
-            .Item("DATE_CREATED") = Now.ToShortDateString
         End With
         ds2.Tables(subTable).Rows.Add(dr)
         database.SaveEntry(ds2)
 
+        Return True
+    End Function
+
+    Friend Function Update_USER() As Boolean
+        _ID = SYSTEM_USERID
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", _ID)
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        If ds.Tables(0).Rows(0).Item("USERPASS") = EncryptString(_USERPASS) Then
+            MsgBox("The password you've entered is already taken." & vbCrLf & _
+                  "Please try again.", MsgBoxStyle.Critical, "Error")
+            Return False
+        End If
+
+        If Not Check_Pass_IfExists(_ID, EncryptString(_USERPASS)) Then
+            MsgBox("The password you've entered is already taken." & vbCrLf & _
+                   "Please try again.", MsgBoxStyle.Critical, "Error")
+            Return False
+        End If
+
+        With ds.Tables(0).Rows(0)
+            .Item("USERNAME") = _USERNAME
+            .Item("FIRSTNAME") = _FIRSTNAME
+            .Item("MIDDLENAME") = _MIDDLENAME
+            .Item("LASTNAME") = _LASTNAME
+            .Item("USERPASS") = EncryptString(_USERPASS)
+            .Item("EMAIL_ADDRESS") = _EMAIL_ADDRESS
+            .Item("CONTACTNO") = _CONTACTNO
+            .Item("BIRTHDAY") = _BIRTHDAY
+            .Item("GENDER") = _GENDER
+            .Item("AGE") = _AGE
+            .Item("PRIVILEGE") = _privilege
+            .Item("LASTLOGIN") = Now
+            .Item("EXPIRYDATE") = Now.AddDays(90)
+            .Item("SYSTEMINFO") = Now
+            .Item("DAYS_COUNT") = D_deactivate
+            .Item("STATUS") = 1
+        End With
+        database.SaveEntry(ds, False)
+
+        mySql = String.Format("SELECT * FROM " & subTable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
+        Dim ds1 As DataSet = LoadSQL(mySql, subTable)
+        Dim i As Integer = 0
+
+        If ds1.Tables(0).Rows.Count > 0 Then
+            With ds1.Tables(0).Rows(0)
+                .Item("USERPASS") = EncryptString(_USERPASS)
+                .Item("DATE_CREATED") = Now
+            End With
+            database.SaveEntry(ds1, False)
+
+        Else
+            Dim dr As DataRow
+            dr = ds1.Tables(subTable).NewRow
+            With dr
+                .Item("USERID") = _ID
+                .Item("USERPASS") = EncryptString(_USERPASS)
+                .Item("DATE_CREATED") = Now
+            End With
+            ds1.Tables(subTable).Rows.Add(dr)
+            database.SaveEntry(ds1)
+        End If
+
+        Return True
+    End Function
+
+    Friend Function Check_Pass_IfExists(ByVal idx As Integer, ByVal passwd As String) As Boolean
+        mySql = "SELECT * FROM " & subTable & " WHERE USERID  = " & idx & ""
+        Dim ds As DataSet = LoadSQL(mySql, subTable)
+        Dim u_pass As New List(Of String)()
+
+        If ds.Tables.Count >= 5 Then
+            For Each dr As DataRow In ds.Tables(0).Rows
+                With dr
+                    Console.WriteLine(.Item("USERPASS"))
+                    u_pass.Add(.Item("USERPASS"))
+                End With
+            Next
+
+            'select string min and max string in the list
+            Dim U_pass1 As New List(Of String)()
+            Dim count As Integer = 0
+            For Each pass In u_pass
+                count += 1
+                If count = 1 Then
+                    U_pass1.Add(pass)
+                ElseIf count = u_pass.Count Then
+                    U_pass1.Add(pass)
+                End If
+            Next
+
+
+            For Each pass1 In U_pass1
+                If passwd = pass1 Then
+                    Return True
+                End If
+            Next
+            Return True
+        End If
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            With dr
+                If passwd = .Item("USERPASS") Then
+                    Return False
+                End If
+            End With
+        Next
         Return True
     End Function
 
@@ -340,6 +435,17 @@ Public Class Sys_user
             End With
             database.SaveEntry(ds, False)
         Next
+    End Sub
+
+    Friend Sub Back_to_MAXDAYS(ByVal upass As String)
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        With ds.Tables(0).Rows(0)
+            .Item("DAYS_COUNT") = D_deactivate
+        End With
+        database.SaveEntry(ds, False)
+        Console.WriteLine("Max Days updated.")
     End Sub
 
     Friend Function Count_LOCKDOWN(ByVal c As Integer) As Boolean

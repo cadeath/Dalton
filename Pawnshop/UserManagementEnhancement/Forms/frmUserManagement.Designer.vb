@@ -24,17 +24,26 @@ Partial Class frmUserManagement
     Private Sub InitializeComponent()
         Me.tbControl = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.btnCancell = New System.Windows.Forms.Button()
         Me.lvUserList = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtPasword1 = New UserManagementEnhancement.watermark()
+        Me.txtContactnumber = New UserManagementEnhancement.watermark()
+        Me.txtEmailaddress = New UserManagementEnhancement.watermark()
+        Me.txtPassword = New UserManagementEnhancement.watermark()
+        Me.txtLastname = New UserManagementEnhancement.watermark()
+        Me.txtMiddlename = New UserManagementEnhancement.watermark()
+        Me.txtFirstname = New UserManagementEnhancement.watermark()
+        Me.txtUsername = New UserManagementEnhancement.watermark()
         Me.chkShowPassword = New System.Windows.Forms.CheckBox()
-        Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.rbMale = New System.Windows.Forms.RadioButton()
         Me.rbFemale = New System.Windows.Forms.RadioButton()
         Me.txtBirthday = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgRulePrivilege = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -47,15 +56,6 @@ Partial Class frmUserManagement
         Me.btnCancelAP = New System.Windows.Forms.Button()
         Me.btnSaveAP = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtPasword1 = New UserManagementEnhancement.watermark()
-        Me.txtContactnumber = New UserManagementEnhancement.watermark()
-        Me.txtEmailaddress = New UserManagementEnhancement.watermark()
-        Me.txtPassword = New UserManagementEnhancement.watermark()
-        Me.txtLastname = New UserManagementEnhancement.watermark()
-        Me.txtMiddlename = New UserManagementEnhancement.watermark()
-        Me.txtFirstname = New UserManagementEnhancement.watermark()
-        Me.txtUsername = New UserManagementEnhancement.watermark()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.tbControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -79,8 +79,10 @@ Partial Class frmUserManagement
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.btnCancell)
         Me.TabPage1.Controls.Add(Me.lvUserList)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
+        Me.TabPage1.Controls.Add(Me.btnCreateAccount)
         Me.TabPage1.Location = New System.Drawing.Point(4, 39)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -88,6 +90,18 @@ Partial Class frmUserManagement
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Registration"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'btnCancell
+        '
+        Me.btnCancell.BackColor = System.Drawing.Color.White
+        Me.btnCancell.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancell.Location = New System.Drawing.Point(501, 402)
+        Me.btnCancell.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnCancell.Name = "btnCancell"
+        Me.btnCancell.Size = New System.Drawing.Size(202, 37)
+        Me.btnCancell.TabIndex = 19
+        Me.btnCancell.Text = "&Cancel"
+        Me.btnCancell.UseVisualStyleBackColor = False
         '
         'lvUserList
         '
@@ -113,7 +127,6 @@ Partial Class frmUserManagement
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.txtPasword1)
         Me.GroupBox1.Controls.Add(Me.txtContactnumber)
         Me.GroupBox1.Controls.Add(Me.txtEmailaddress)
@@ -123,7 +136,6 @@ Partial Class frmUserManagement
         Me.GroupBox1.Controls.Add(Me.txtFirstname)
         Me.GroupBox1.Controls.Add(Me.txtUsername)
         Me.GroupBox1.Controls.Add(Me.chkShowPassword)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAccount)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.rbMale)
         Me.GroupBox1.Controls.Add(Me.rbFemale)
@@ -132,10 +144,85 @@ Partial Class frmUserManagement
         Me.GroupBox1.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(284, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(434, 435)
+        Me.GroupBox1.Size = New System.Drawing.Size(434, 380)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sign Up"
+        '
+        'txtPasword1
+        '
+        Me.txtPasword1.Location = New System.Drawing.Point(21, 178)
+        Me.txtPasword1.Name = "txtPasword1"
+        Me.txtPasword1.Size = New System.Drawing.Size(245, 29)
+        Me.txtPasword1.TabIndex = 5
+        Me.txtPasword1.UseSystemPasswordChar = True
+        Me.txtPasword1.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPasword1.WatermarkText = "Re-enter password"
+        '
+        'txtContactnumber
+        '
+        Me.txtContactnumber.Location = New System.Drawing.Point(21, 253)
+        Me.txtContactnumber.MaxLength = 13
+        Me.txtContactnumber.Name = "txtContactnumber"
+        Me.txtContactnumber.Size = New System.Drawing.Size(398, 29)
+        Me.txtContactnumber.TabIndex = 8
+        Me.txtContactnumber.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtContactnumber.WatermarkText = "Contact Number"
+        '
+        'txtEmailaddress
+        '
+        Me.txtEmailaddress.Location = New System.Drawing.Point(21, 213)
+        Me.txtEmailaddress.Name = "txtEmailaddress"
+        Me.txtEmailaddress.Size = New System.Drawing.Size(398, 29)
+        Me.txtEmailaddress.TabIndex = 7
+        Me.txtEmailaddress.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtEmailaddress.WatermarkText = "Email Address"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Location = New System.Drawing.Point(21, 141)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(398, 29)
+        Me.txtPassword.TabIndex = 4
+        Me.txtPassword.UseSystemPasswordChar = True
+        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPassword.WatermarkText = "Password"
+        '
+        'txtLastname
+        '
+        Me.txtLastname.Location = New System.Drawing.Point(21, 104)
+        Me.txtLastname.Name = "txtLastname"
+        Me.txtLastname.Size = New System.Drawing.Size(398, 29)
+        Me.txtLastname.TabIndex = 3
+        Me.txtLastname.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtLastname.WatermarkText = "Lastname"
+        '
+        'txtMiddlename
+        '
+        Me.txtMiddlename.Location = New System.Drawing.Point(228, 66)
+        Me.txtMiddlename.Name = "txtMiddlename"
+        Me.txtMiddlename.Size = New System.Drawing.Size(191, 29)
+        Me.txtMiddlename.TabIndex = 2
+        Me.txtMiddlename.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtMiddlename.WatermarkText = "Middlename"
+        '
+        'txtFirstname
+        '
+        Me.txtFirstname.Location = New System.Drawing.Point(21, 66)
+        Me.txtFirstname.Name = "txtFirstname"
+        Me.txtFirstname.Size = New System.Drawing.Size(201, 29)
+        Me.txtFirstname.TabIndex = 1
+        Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtFirstname.WatermarkText = "Firstname"
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Location = New System.Drawing.Point(21, 28)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(398, 29)
+        Me.txtUsername.TabIndex = 0
+        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtUsername.WatermarkText = "Username"
         '
         'chkShowPassword
         '
@@ -147,18 +234,6 @@ Partial Class frmUserManagement
         Me.chkShowPassword.TabIndex = 6
         Me.chkShowPassword.Text = "Show Password"
         Me.chkShowPassword.UseVisualStyleBackColor = True
-        '
-        'btnCreateAccount
-        '
-        Me.btnCreateAccount.BackColor = System.Drawing.Color.White
-        Me.btnCreateAccount.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCreateAccount.Location = New System.Drawing.Point(217, 389)
-        Me.btnCreateAccount.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnCreateAccount.Name = "btnCreateAccount"
-        Me.btnCreateAccount.Size = New System.Drawing.Size(202, 37)
-        Me.btnCreateAccount.TabIndex = 12
-        Me.btnCreateAccount.Text = "Create Account"
-        Me.btnCreateAccount.UseVisualStyleBackColor = False
         '
         'Label2
         '
@@ -213,6 +288,18 @@ Partial Class frmUserManagement
         Me.Label1.Size = New System.Drawing.Size(78, 22)
         Me.Label1.TabIndex = 14
         Me.Label1.Text = "Birthday"
+        '
+        'btnCreateAccount
+        '
+        Me.btnCreateAccount.BackColor = System.Drawing.Color.White
+        Me.btnCreateAccount.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCreateAccount.Location = New System.Drawing.Point(295, 402)
+        Me.btnCreateAccount.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnCreateAccount.Name = "btnCreateAccount"
+        Me.btnCreateAccount.Size = New System.Drawing.Size(202, 37)
+        Me.btnCreateAccount.TabIndex = 12
+        Me.btnCreateAccount.Text = "&Create Account"
+        Me.btnCreateAccount.UseVisualStyleBackColor = False
         '
         'TabPage2
         '
@@ -331,95 +418,11 @@ Partial Class frmUserManagement
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         '
-        'txtPasword1
-        '
-        Me.txtPasword1.Location = New System.Drawing.Point(21, 178)
-        Me.txtPasword1.Name = "txtPasword1"
-        Me.txtPasword1.Size = New System.Drawing.Size(245, 29)
-        Me.txtPasword1.TabIndex = 5
-        Me.txtPasword1.UseSystemPasswordChar = True
-        Me.txtPasword1.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPasword1.WatermarkText = "Re-enter password"
-        '
-        'txtContactnumber
-        '
-        Me.txtContactnumber.Location = New System.Drawing.Point(21, 253)
-        Me.txtContactnumber.MaxLength = 13
-        Me.txtContactnumber.Name = "txtContactnumber"
-        Me.txtContactnumber.Size = New System.Drawing.Size(398, 29)
-        Me.txtContactnumber.TabIndex = 8
-        Me.txtContactnumber.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtContactnumber.WatermarkText = "Contact Number"
-        '
-        'txtEmailaddress
-        '
-        Me.txtEmailaddress.Location = New System.Drawing.Point(21, 213)
-        Me.txtEmailaddress.Name = "txtEmailaddress"
-        Me.txtEmailaddress.Size = New System.Drawing.Size(398, 29)
-        Me.txtEmailaddress.TabIndex = 7
-        Me.txtEmailaddress.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtEmailaddress.WatermarkText = "Email Address"
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Location = New System.Drawing.Point(21, 141)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(398, 29)
-        Me.txtPassword.TabIndex = 4
-        Me.txtPassword.UseSystemPasswordChar = True
-        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPassword.WatermarkText = "Password"
-        '
-        'txtLastname
-        '
-        Me.txtLastname.Location = New System.Drawing.Point(21, 104)
-        Me.txtLastname.Name = "txtLastname"
-        Me.txtLastname.Size = New System.Drawing.Size(398, 29)
-        Me.txtLastname.TabIndex = 3
-        Me.txtLastname.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtLastname.WatermarkText = "Lastname"
-        '
-        'txtMiddlename
-        '
-        Me.txtMiddlename.Location = New System.Drawing.Point(228, 66)
-        Me.txtMiddlename.Name = "txtMiddlename"
-        Me.txtMiddlename.Size = New System.Drawing.Size(191, 29)
-        Me.txtMiddlename.TabIndex = 2
-        Me.txtMiddlename.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtMiddlename.WatermarkText = "Middlename"
-        '
-        'txtFirstname
-        '
-        Me.txtFirstname.Location = New System.Drawing.Point(21, 66)
-        Me.txtFirstname.Name = "txtFirstname"
-        Me.txtFirstname.Size = New System.Drawing.Size(201, 29)
-        Me.txtFirstname.TabIndex = 1
-        Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtFirstname.WatermarkText = "Firstname"
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Location = New System.Drawing.Point(21, 28)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(398, 29)
-        Me.txtUsername.TabIndex = 0
-        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtUsername.WatermarkText = "Username"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(56, 369)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 39)
-        Me.Button1.TabIndex = 19
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(750, 527)
+        Me.ClientSize = New System.Drawing.Size(754, 527)
         Me.Controls.Add(Me.tbControl)
         Me.Name = "frmUserManagement"
         Me.Text = "User Management"
@@ -466,6 +469,6 @@ Partial Class frmUserManagement
     Friend WithEvents lvUserList As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnCancell As System.Windows.Forms.Button
 
 End Class
