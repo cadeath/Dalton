@@ -228,7 +228,7 @@ Public Class Sys_user
 #Region "Procedures and Functions"
 
     Friend Function add_USER() As Boolean
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", _USERPASS)
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         If ds.Tables(maintable).Rows.Count > 0 Then
@@ -254,7 +254,7 @@ Public Class Sys_user
             '.Item("ENCODERID") = _encoderID
             .Item("EXPIRYDATE") = Now.AddDays(90)
             .Item("SYSTEMINFO") = Now.ToShortDateString
-            .Item("DAYS_COUNT") = 0
+            .Item("DAYS_COUNT") = IsnotUsed
             .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
@@ -318,15 +318,38 @@ Public Class Sys_user
         End With
     End Sub
 
-    Friend Sub User_Expiration()
+    Friend Function CheckAccount_Expiration(ByVal u_PASS As String) As Boolean
+        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'"
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        With ds.Tables(0).Rows(0)
+            If .Item("EXPIRYDATE") = Now.ToShortDateString Then
+                MsgBox("Your account has been expired," & vbCrLf & _
+                       "Please Contact MIS for assistance.", MsgBoxStyle.Exclamation, "Expiration")
+                Return False
+            End If
+        End With
+        Return True
+    End Function
+
+    Friend Sub Count_days()
         Dim ds As DataSet = dsUSEr()
         For Each dr As DataRow In ds.Tables(0).Rows
             With dr
-                .Item("DAYS_COUNT") = .Item("DAYS_COUNT") + 1
+                .Item("DAYS_COUNT") = .Item("DAYS_COUNT") - 1
             End With
             database.SaveEntry(ds, False)
         Next
     End Sub
-  
+
+    Friend Function Count_LOCKDOWN(ByVal c As Integer) As Boolean
+        Dim wrongLogin As Integer = c
+
+        If wrongLogin = 3 Then
+            Return False
+        End If
+
+        Return True
+    End Function
 #End Region
 End Class

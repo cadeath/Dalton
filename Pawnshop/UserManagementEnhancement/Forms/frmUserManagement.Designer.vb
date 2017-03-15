@@ -24,6 +24,9 @@ Partial Class frmUserManagement
     Private Sub InitializeComponent()
         Me.tbControl = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.lvUserList = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.chkShowPassword = New System.Windows.Forms.CheckBox()
         Me.btnCreateAccount = New System.Windows.Forms.Button()
@@ -34,19 +37,16 @@ Partial Class frmUserManagement
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgRulePrivilege = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.btnCancelAP = New System.Windows.Forms.Button()
         Me.btnSaveAP = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.lvUserList = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.txtPasword1 = New UserManagementEnhancement.watermark()
         Me.txtContactnumber = New UserManagementEnhancement.watermark()
         Me.txtEmailaddress = New UserManagementEnhancement.watermark()
@@ -55,6 +55,7 @@ Partial Class frmUserManagement
         Me.txtMiddlename = New UserManagementEnhancement.watermark()
         Me.txtFirstname = New UserManagementEnhancement.watermark()
         Me.txtUsername = New UserManagementEnhancement.watermark()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.tbControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -88,8 +89,31 @@ Partial Class frmUserManagement
         Me.TabPage1.Text = "Registration"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'lvUserList
+        '
+        Me.lvUserList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lvUserList.FullRowSelect = True
+        Me.lvUserList.GridLines = True
+        Me.lvUserList.Location = New System.Drawing.Point(3, 18)
+        Me.lvUserList.Name = "lvUserList"
+        Me.lvUserList.Size = New System.Drawing.Size(275, 421)
+        Me.lvUserList.TabIndex = 1
+        Me.lvUserList.UseCompatibleStateImageBehavior = False
+        Me.lvUserList.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "#"
+        Me.ColumnHeader1.Width = 31
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Name"
+        Me.ColumnHeader2.Width = 239
+        '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.txtPasword1)
         Me.GroupBox1.Controls.Add(Me.txtContactnumber)
         Me.GroupBox1.Controls.Add(Me.txtEmailaddress)
@@ -213,6 +237,30 @@ Partial Class frmUserManagement
         Me.dgRulePrivilege.Size = New System.Drawing.Size(712, 405)
         Me.dgRulePrivilege.TabIndex = 0
         '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Privilege Type"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 220
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "No Access"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 160
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Read Only"
+        Me.Column3.Name = "Column3"
+        Me.Column3.Width = 160
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Full Access"
+        Me.Column4.Name = "Column4"
+        Me.Column4.Width = 160
+        '
         'btnCancel
         '
         Me.btnCancel.BackColor = System.Drawing.Color.White
@@ -282,52 +330,6 @@ Partial Class frmUserManagement
         Me.GroupBox2.Size = New System.Drawing.Size(431, 126)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Privilege Type"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 220
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "No Access"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 160
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Read Only"
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 160
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Full Access"
-        Me.Column4.Name = "Column4"
-        Me.Column4.Width = 160
-        '
-        'lvUserList
-        '
-        Me.lvUserList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.lvUserList.FullRowSelect = True
-        Me.lvUserList.GridLines = True
-        Me.lvUserList.Location = New System.Drawing.Point(3, 18)
-        Me.lvUserList.Name = "lvUserList"
-        Me.lvUserList.Size = New System.Drawing.Size(275, 421)
-        Me.lvUserList.TabIndex = 1
-        Me.lvUserList.UseCompatibleStateImageBehavior = False
-        Me.lvUserList.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Text = "#"
-        Me.ColumnHeader1.Width = 31
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Text = "Name"
-        Me.ColumnHeader2.Width = 239
         '
         'txtPasword1
         '
@@ -404,6 +406,15 @@ Partial Class frmUserManagement
         Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
         Me.txtUsername.WatermarkText = "Username"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(56, 369)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 39)
+        Me.Button1.TabIndex = 19
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -455,5 +466,6 @@ Partial Class frmUserManagement
     Friend WithEvents lvUserList As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class

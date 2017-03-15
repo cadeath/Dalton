@@ -20,15 +20,12 @@
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         txtUsername.Focus()
 
         If Not ifTblExist("TBL_USER_DEFAULT") Then
-            Exit Sub
+            Create()
         End If
-        Dim tmpuser As New Sys_user
-        tmpuser.User_Expiration()
-
+       
         Load_users()
     End Sub
 
@@ -127,9 +124,11 @@
                 .GENDER = rbMale.Text
             End If
             .AGE = GetCurrentAge(txtBirthday.Text)
-
-            .add_USER()
         End With
+
+        If Not Save_user.add_USER Then
+            Exit Sub
+        End If
 
         MsgBox("Account successfully added.", MsgBoxStyle.Information, "Adding Account")
     End Sub
@@ -222,5 +221,19 @@
             End If
 
         End With
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Dim count As Integer() = {1, 2, 3}
+        Dim tmpuser As New Sys_user
+
+        For Each c In count
+            If Not tmpuser.Count_LOCKDOWN(c) Then
+
+            Else
+                On Error Resume Next
+            End If
+
+        Next
     End Sub
 End Class

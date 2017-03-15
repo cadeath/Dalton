@@ -2,6 +2,7 @@
 Imports Microsoft.Office.Interop
 Module mod_system
     Public Expiration_count As Integer = 90
+    Public IsnotUsed As Integer = 30
 
     Public Function CommandPrompt(ByVal app As String, ByVal args As String) As String
         Dim oProcess As New Process()
