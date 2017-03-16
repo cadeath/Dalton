@@ -85,8 +85,19 @@
 
     Private Sub btnSend_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSend.Click
         If lvExpiry.CheckedItems.Count <= 0 Then Exit Sub
-        frmMain.displayStatus(String.Format("Sending Messages to {0} client{1}", lvExpiry.CheckedItems.Count, IIf(lvExpiry.CheckedItems.Count > 1, "s", "")))
 
+        For Each chk As ListViewItem In lvExpiry.CheckedItems
+            If chk.SubItems(2).Text.Contains("INV") Then
+                chk.Checked = False
+                chk.BackColor = Color.MistyRose
+            End If
+        Next
+
+        Dim msgCnt As Integer = lvExpiry.CheckedItems.Count
+        Dim msg As String = String.Format("We will be sending {0} client{1}", msgCnt, IIf(msgCnt > 1, "s", "")) + vbCrLf + "Please confirm"
+        If MsgBox(msg, MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Confirmation") = MsgBoxResult.No Then Exit Sub
+
+        frmMain.displayStatus(String.Format("Sending Messages to {0} client{1}", msgCnt, IIf(msgCnt > 1, "s", "")))
         'Dim th As New Threading.Thread(AddressOf do_MassTexting)
         Dim th = New Threading.Thread(AddressOf do_MassTexting)
         th.SetApartmentState(Threading.ApartmentState.STA)
@@ -99,15 +110,29 @@
             lvExpiry.Invoke(New doMassTexting_callback(AddressOf do_MassTexting))
         Else
             Dim TextMessage As String = GetOption("SMS_MSG")
+            Dim finalCnt As Integer = lvExpiry.CheckedItems.Count
 
+            Me.Hide()
             For Each pawner As ListViewItem In lvExpiry.CheckedItems
                 If pawner.SubItems(2).Text.Contains("INV") Then Continue For
 
                 Dim dr As DataRow = ExpiryCache.Select("PAWNTICKET = " & pawner.Text)(0)
+                Dim text_msg As String = MessageBuilder(TextMessage, dr)
+                Dim remarks As String = "TESTING REMARKS"
 
                 Console.WriteLine(pawner.SubItems(1).Text & ">" & pawner.SubItems(2).Text)
-                Console.WriteLine("MSG: " & MessageBuilder(TextMessage, dr))
-                'smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
+                Console.WriteLine("MSG: " & text_msg)
+
+                remarks = smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
+                remarks = IIf(remarks.Contains("messageStatus=MessageAccepted,"), "SENT", remarks)
+
+                Dim notified As New PawnTicket2
+                notified.Load_PawnTicket(pawner.Text)
+                notified.ConfirmNotification(text_msg, remarks)
+
+                finalCnt -= 1
+                frmMain.displayStatus(String.Format("Sending... {0} recipient{1} remaining", finalCnt, IIf(finalCnt > 1, "s", "")))
+                Application.DoEvents()
             Next
 
             frmMain.displayStatus("Sending Expiry List Completed")
