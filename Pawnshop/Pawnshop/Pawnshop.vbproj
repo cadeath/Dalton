@@ -1136,6 +1136,7 @@
     <EmbeddedResource Include="Reports\rpt_CashInOut.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_ExpirySingle.rdlc" />
     <EmbeddedResource Include="Reports\rpt_ForfeitLayaway.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
