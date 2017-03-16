@@ -47,8 +47,6 @@ Partial Class frmUserManagement
         Me.btnCancelAP = New System.Windows.Forms.Button()
         Me.btnSaveAP = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.txtPasword1 = New UserManagementEnhancement.watermark()
         Me.txtContactnumber = New UserManagementEnhancement.watermark()
         Me.txtEmailaddress = New UserManagementEnhancement.watermark()
@@ -57,12 +55,15 @@ Partial Class frmUserManagement
         Me.txtMiddlename = New UserManagementEnhancement.watermark()
         Me.txtFirstname = New UserManagementEnhancement.watermark()
         Me.txtUsername = New UserManagementEnhancement.watermark()
+        Me.dgRulePrivilege = New System.Windows.Forms.DataGridView()
+        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tbControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbControl
@@ -230,9 +231,9 @@ Partial Class frmUserManagement
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.Silver
-        Me.TabPage2.Controls.Add(Me.DataGridView1)
         Me.TabPage2.Controls.Add(Me.Label5)
         Me.TabPage2.Controls.Add(Me.lvALL_user_list)
+        Me.TabPage2.Controls.Add(Me.dgRulePrivilege)
         Me.TabPage2.Controls.Add(Me.btnCancel)
         Me.TabPage2.Controls.Add(Me.btnSave)
         Me.TabPage2.Location = New System.Drawing.Point(4, 39)
@@ -343,20 +344,6 @@ Partial Class frmUserManagement
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1})
-        Me.DataGridView1.Location = New System.Drawing.Point(319, 71)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(335, 150)
-        Me.DataGridView1.TabIndex = 13
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Column1"
-        Me.Column1.Name = "Column1"
-        '
         'txtPasword1
         '
         Me.txtPasword1.Location = New System.Drawing.Point(21, 178)
@@ -432,6 +419,32 @@ Partial Class frmUserManagement
         Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
         Me.txtUsername.WatermarkText = "Username"
         '
+        'dgRulePrivilege
+        '
+        Me.dgRulePrivilege.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgRulePrivilege.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2})
+        Me.dgRulePrivilege.Location = New System.Drawing.Point(292, 45)
+        Me.dgRulePrivilege.Name = "dgRulePrivilege"
+        Me.dgRulePrivilege.RowHeadersVisible = False
+        Me.dgRulePrivilege.Size = New System.Drawing.Size(427, 366)
+        Me.dgRulePrivilege.TabIndex = 0
+        '
+        'Column2
+        '
+        Me.Column2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Column2.HeaderText = "Access Type"
+        Me.Column2.Items.AddRange(New Object() {"No Access", "Read Only", "Full Access"})
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 200
+        '
+        'Column1
+        '
+        Me.Column1.Frozen = True
+        Me.Column1.HeaderText = "Privilege Type"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.Width = 220
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -447,7 +460,7 @@ Partial Class frmUserManagement
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -484,7 +497,8 @@ Partial Class frmUserManagement
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnSave As System.Windows.Forms.Button
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents dgRulePrivilege As System.Windows.Forms.DataGridView
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
 
 End Class

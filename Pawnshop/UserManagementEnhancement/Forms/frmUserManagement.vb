@@ -57,7 +57,7 @@
 
         Try
 
-            DataGridView1.Rows.Clear()
+            dgRulePrivilege.Rows.Clear()
             For Each dr As DataRow In ds.Tables(0).Rows
                 AddPriv(dr)
             Next
@@ -72,7 +72,7 @@
         With dr
             Dim a As String = .Item("Privilege_Type").ToString
             Dim b As String = .Item("Access_Type").ToString
-            DataGridView1.Rows.Add(a)
+            dgRulePrivilege.Rows.Add(a)
         End With
     End Sub
 
@@ -319,7 +319,7 @@
     End Sub
 
   
-    Private Sub dgRulePrivilege_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+    Private Sub dgRulePrivilege_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgRulePrivilege.CellContentClick
         If e.ColumnIndex = CheckState.Checked Then
 
         End If
