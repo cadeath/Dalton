@@ -327,6 +327,12 @@
     <Compile Include="Forms\ExtractDataFromDatabase.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\frmAddCoi.Designer.vb">
+      <DependentUpon>frmAddCoi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAddCoi.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\frmAdminPanel.Designer.vb">
       <DependentUpon>frmAdminPanel.vb</DependentUpon>
     </Compile>
@@ -875,6 +881,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ExtractDataFromDatabase.resx">
       <DependentUpon>ExtractDataFromDatabase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAddCoi.resx">
+      <DependentUpon>frmAddCoi.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAdminPanel.resx">
       <DependentUpon>frmAdminPanel.vb</DependentUpon>

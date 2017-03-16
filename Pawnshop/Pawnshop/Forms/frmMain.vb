@@ -51,6 +51,8 @@
         SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
         CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
         AuctionMonthlyJewelryReportToolStripMenuItem.Enabled = Not st 'Auction MOnthly
+        MonthlyInventoryReportsToolStripMenuItem.Enabled = Not st
+        MonthlySegrregatedListToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
         AuditReportToolStripMenuItem.Enabled = Not st
@@ -65,6 +67,7 @@
         SalesReportToolStripMenuItem.Enabled = Not st
         InventoryReportToolStripMenuItem.Enabled = Not st
         StockoutReportToolStripMenuItem.Enabled = Not st
+        StockInReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -365,6 +368,7 @@
     End Sub
 
     Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
+        frmSegreList.FormType = frmSegreList.SegreReport.Daily
         frmSegreList.Show()
     End Sub
 
@@ -558,5 +562,10 @@
 
     Private Sub MonthlyInventoryReportsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyInventoryReportsToolStripMenuItem.Click
         frmSalesReport.Show()
+    End Sub
+
+    Private Sub MonthlySegrregatedListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlySegrregatedListToolStripMenuItem.Click
+        frmSegreList.FormType = frmSegreList.SegreReport.Monthly
+        frmSegreList.Show()
     End Sub
 End Class
