@@ -14,7 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>false</Install>
@@ -37,7 +38,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -109,6 +110,10 @@
     </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="OneApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\OneApi.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>True</Private>
@@ -188,6 +193,7 @@
     <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="AutoPatch\db1224.vb" />
     <Compile Include="AutoPatch\db1232.vb" />
+    <Compile Include="AutoPatch\db13.vb" />
     <Compile Include="AutoPatch\db124.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
@@ -196,6 +202,7 @@
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
+    <Compile Include="Classes\CollectionPawnTicket.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\CollectionItemSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
@@ -845,6 +852,20 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Pawn.vb" />
+    <Compile Include="SMS\diagChangeNum.Designer.vb">
+      <DependentUpon>diagChangeNum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\diagChangeNum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SMS\frmSMSnotice.Designer.vb">
+      <DependentUpon>frmSMSnotice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\frmSMSnotice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\IniFileVb.vb" />
+    <Compile Include="SMS\smsUtil.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -1288,8 +1309,15 @@
     <EmbeddedResource Include="Seed\frmSeed.resx">
       <DependentUpon>frmSeed.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SMS\diagChangeNum.resx">
+      <DependentUpon>diagChangeNum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SMS\frmSMSnotice.resx">
+      <DependentUpon>frmSMSnotice.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="backup.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1381,6 +1409,18 @@
     </Content>
     <Content Include="Antialiasfactory-Jewelry-Stone-Ring.ico" />
     <Content Include="changelog.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\log4net.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\OneApi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\RestSharp.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Rar.exe">

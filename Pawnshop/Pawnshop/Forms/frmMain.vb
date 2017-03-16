@@ -4,8 +4,8 @@ Public Class frmMain
 
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
+    Friend doExpiry As Boolean = False
     Friend doForfeitItem As Boolean = False
-
 
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
@@ -83,6 +83,32 @@ Public Class frmMain
 
     Private Sub ExecuteSegregate()
         doSegregate = AutoSegregate()
+    End Sub
+
+    Private Sub ExecuteExpiry()
+        If doExpiry Then
+            Exit Sub
+        End If
+        doExpiry = True
+
+        frmSMSnotice.autoStart = True
+        Load_Expiry(frmSMSnotice)
+    End Sub
+
+    Private Sub Sample_Text()
+        If Not DEV_MODE Then Exit Sub
+
+        Dim msg As String = "This is a sample message from DIS (Dalton Integrated System) Prototype. Please be advice - SenderID testing"
+        'smsUtil.SendSMS("639360944853", msg) 'Don2
+        'smsUtil.SendSMS("639257977559", msg) 'Eskie
+        'smsUtil.SendSMS("639363678923", msg) 'Emz
+        'smsUtil.SendSMS("639553491069", msg) 'Irish
+        'smsUtil.SendSMS("639553491065", msg) 'Neimrod
+        'smsUtil.SendSMS("639999403288", msg) 'PTU
+        'smsUtil.SendSMS("639228072094", msg) 'LYU
+        'smsUtil.SendSMS("639228323324", msg) 'PTU
+
+        'Console.WriteLine("Sample texting sent")
     End Sub
 
     Private Sub ExecuteForfeiting()
@@ -165,6 +191,7 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to Expiry Generator")
             Exit Sub
         End If
+        MsgBox("Please be information that this function is obsolete", MsgBoxStyle.Information)
 
         frmExtractor.FormType = frmExtractor.ExtractType.Expiry
         frmExtractor.Show()
@@ -264,8 +291,8 @@ Public Class frmMain
         If dateSet Then
             tsCurrentDate.Text = CurrentDate.ToLongDateString & " " & Now.ToString("T")
             If Not doSegregate Then ExecuteSegregate()
+            ExecuteExpiry()
             If Not doForfeitItem Then ExecuteForfeiting()
-
         Else
             tsCurrentDate.Text = "Date not set"
         End If
@@ -626,6 +653,20 @@ Public Class frmMain
         frmSalesReport.Show()
     End Sub
 
+    Private Sub ExpiryListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryListToolStripMenuItem.Click
+        frmSMSnotice.Show()
+    End Sub
+
+    Private Delegate Sub displayStatus_callback(ByVal str As String)
+    Friend Sub displayStatus(ByVal str As String)
+        statusStrip.Items("tssOthers").Text = str
+
+        'If statusStrip.InvokeRequired Then
+        '    statusStrip.Invoke(New displayStatus_callback(AddressOf displayStatus), str)
+        'Else
+        '    statusStrip.Items("tssOthers").Text = str
+        'End If
+    End Sub
 
     Private Sub LayawayPaymentReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LayawayPaymentReportToolStripMenuItem.Click
         frmSalesReport.FormType = frmSalesReport.SaleReport.LayAway
@@ -645,6 +686,5 @@ Public Class frmMain
     Private Sub MonthlySegrregatedListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlySegrregatedListToolStripMenuItem.Click
         frmSegreList.FormType = frmSegreList.SegreReport.Monthly
         frmSegreList.Show()
-
     End Sub
 End Class

@@ -1,4 +1,6 @@
-﻿Public Class PawnTicket2
+﻿'VERSION 1.2
+' - Added SENT_NOTICE (isNotify)
+Public Class PawnTicket2
 
     Private MainTable As String = "OPT"
     Private ds As DataSet, mysql As String = ""
@@ -294,6 +296,16 @@
         End Set
     End Property
 
+    Private _isNotify As Boolean
+    Public Property isNotify() As Boolean
+        Get
+            Return _isNotify
+        End Get
+        Set(ByVal value As Boolean)
+            _isNotify = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures and Functions"
@@ -339,6 +351,7 @@
             .Item("REDEEMDUE") = _redeemDue
             .Item("SERVICECHARGE") = _serviceCharge
             .Item("CREATED_AT") = Now.ToShortDateString
+            .Item("SENT_NOTICE") = _isNotify
         End With
 
         ds.Tables(MainTable).Rows.Add(dsNewRow)
@@ -379,6 +392,7 @@
             .Item("REDEEMDUE") = _redeemDue
             .Item("SERVICECHARGE") = _serviceCharge
             .Item("UPDATED_AT") = Now.ToShortDateString
+            .Item("SENT_NOTICE") = _isNotify
         End With
 
         database.SaveEntry(ds, False)
@@ -433,6 +447,7 @@
             _renewDue = .Item("RENEWDUE")
             _redeemDue = .Item("REDEEMDUE")
             _serviceCharge = .Item("SERVICECHARGE")
+            _isNotify = .Item("SENT_NOTICE")
 
             If Not IsDBNull(.Item("CREATED_AT")) Then _created_At = .Item("CREATED_AT")
             If Not IsDBNull(.Item("UPDATED_AT")) Then _updated_At = .Item("UPDATED_AT")
@@ -587,26 +602,26 @@
                         End If
 
                     End If
-                    End If
+                End If
 
-                    ds.Tables(MainTable).Rows(0).Item("Status") = st
-                    With ds.Tables(MainTable).Rows(0)
-                        .Item("OrNum") = 0
-                        .Item("OrDate") = New Date
-                        .Item("DAYSOVERDUE") = 0
-                        .Item("DelayInterest") = 0
-                        .Item("Penalty") = 0
-                        .Item("ServiceCharge") = 0
-                        .Item("RenewDue") = 0
-                        .Item("RedeemDue") = 0
-                        .Item("AdvInt") = 0
-                    End With
-                    database.SaveEntry(ds, False)
-                    Dim mysql2 As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
-                    Dim ds2 As DataSet = LoadSQL(mysql2)
+                ds.Tables(MainTable).Rows(0).Item("Status") = st
+                With ds.Tables(MainTable).Rows(0)
+                    .Item("OrNum") = 0
+                    .Item("OrDate") = New Date
+                    .Item("DAYSOVERDUE") = 0
+                    .Item("DelayInterest") = 0
+                    .Item("Penalty") = 0
+                    .Item("ServiceCharge") = 0
+                    .Item("RenewDue") = 0
+                    .Item("RedeemDue") = 0
+                    .Item("AdvInt") = 0
+                End With
+                database.SaveEntry(ds, False)
+                Dim mysql2 As String = "SELECT * FROM " & MainTable & " WHERE PAWNID = '" & PawnID & "'"
+                Dim ds2 As DataSet = LoadSQL(mysql2)
 
-                    RemoveJournal(PawnID, , ModNAME)
-                    RemoveDailyTimeLog(PawnID, "1", ModNAME)
+                RemoveJournal(PawnID, , ModNAME)
+                RemoveDailyTimeLog(PawnID, "1", ModNAME)
             Else
                 Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PawnID = " & PawnID
                 Dim ds As DataSet = New DataSet
@@ -632,8 +647,8 @@
 
     Public Sub ChangeStatus(ByVal str As String)
         Dim ds As DataSet, mysql As String
-        mySql = "SELECT * FROM " & MainTable & " WHERE PawnID = " & _PawnID
-        ds = LoadSQL(mySql, MainTable)
+        mysql = "SELECT * FROM " & MainTable & " WHERE PawnID = " & _PawnID
+        ds = LoadSQL(mysql, MainTable)
 
         Console.WriteLine("PawnID: " & PawnID)
         Console.WriteLine("PawnTicket: " & PawnTicket)

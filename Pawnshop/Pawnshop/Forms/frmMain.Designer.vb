@@ -103,6 +103,8 @@ Partial Class frmMain
         Me.tmrCurrent = New System.Windows.Forms.Timer(Me.components)
         Me.webAds = New System.Windows.Forms.WebBrowser()
         Me.bannerSize = New System.Windows.Forms.PictureBox()
+        Me.ExpiryListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tssOthers = New System.Windows.Forms.ToolStripStatusLabel()
         Me.LayawayListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LayawayPaymentReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ForfeitLayawayReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -198,7 +200,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.AccountingExtractToolStripMenuItem, Me.ToolStripSeparator2, Me.SalesToolStripMenuItem, Me.StockInToolStripMenuItem, Me.ItemMasterDataToolStripMenuItem, Me.ToolStripSeparator6, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExpiryListToolStripMenuItem, Me.ExpiryGeneratorToolStripMenuItem, Me.JournalEntriesToolStripMenuItem, Me.BSPReportToolStripMenuItem, Me.CashCountToolStripMenuItem, Me.ItemPulloutToolStripMenuItem, Me.ORManagerToolStripMenuItem, Me.AccountingExtractToolStripMenuItem, Me.ToolStripSeparator2, Me.SalesToolStripMenuItem, Me.StockInToolStripMenuItem, Me.ItemMasterDataToolStripMenuItem, Me.ToolStripSeparator6, Me.BackupToolStripMenuItem, Me.AuditConsoleToolStripMenuItem, Me.ConsoleToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -625,7 +627,7 @@ Partial Class frmMain
         '
         'statusStrip
         '
-        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser})
+        Me.statusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsCurrentDate, Me.tsUser, Me.tssOthers})
         Me.statusStrip.Location = New System.Drawing.Point(0, 581)
         Me.statusStrip.Name = "statusStrip"
         Me.statusStrip.Size = New System.Drawing.Size(1063, 22)
@@ -672,7 +674,16 @@ Partial Class frmMain
         Me.bannerSize.TabStop = False
         Me.bannerSize.Visible = False
         '
-
+        'ExpiryListToolStripMenuItem
+        '
+        Me.ExpiryListToolStripMenuItem.Name = "ExpiryListToolStripMenuItem"
+        Me.ExpiryListToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.ExpiryListToolStripMenuItem.Text = "Expiry List"
+        '
+        'tssOthers
+        '
+        Me.tssOthers.Name = "tssOthers"
+        Me.tssOthers.Size = New System.Drawing.Size(0, 17)
         'LayawayListToolStripMenuItem
         '
         Me.LayawayListToolStripMenuItem.Name = "LayawayListToolStripMenuItem"
@@ -696,7 +707,6 @@ Partial Class frmMain
         Me.MonthlySegrregatedListToolStripMenuItem.Name = "MonthlySegrregatedListToolStripMenuItem"
         Me.MonthlySegrregatedListToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.MonthlySegrregatedListToolStripMenuItem.Text = "Monthly Segrregated List"
-
         '
         'frmMain
         '
@@ -813,6 +823,8 @@ Partial Class frmMain
     Friend WithEvents ItemMasterDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents StockoutReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MonthlyInventoryReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExpiryListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tssOthers As System.Windows.Forms.ToolStripStatusLabel
 
     Friend WithEvents StockInReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LayawayPaymentReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
