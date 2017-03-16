@@ -115,7 +115,7 @@
                 AccountCode = "_SYS00000000948"
             Case "MAI"
                 AccountCode = "_SYS00000000997"
-            Case "MLA"
+            Case "MLG"
                 AccountCode = "_SYS00000001064"
             Case "SHA"
                 AccountCode = "_SYS00000001079"
