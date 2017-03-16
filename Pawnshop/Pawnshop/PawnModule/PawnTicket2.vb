@@ -497,6 +497,34 @@ Public Class PawnTicket2
         Return Description
     End Function
 
+    Public Sub ConfirmNotification(ByVal msg As String, ByVal req As String)
+        _isNotify = True
+        Me.Update_PawnTicket()
+
+        Dim mySql As String = "SELECT * FROM SMS WHERE PAWNID = " & _PawnID
+        Dim dsName As String = "SMS"
+        Dim ds As DataSet = LoadSQL(mySql, dsName)
+        If ds.Tables(0).Rows.Count > 0 Then
+            MsgBox("PAWNTICKET #" & _ticket.ToString("00000") & " already been notified" + vbCrLf + "Please be advice", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(dsName).NewRow
+        With dsNewRow
+            .Item("SMSDATE") = CurrentDate
+            .Item("PAWNID") = _PawnID
+            .Item("PAWNTICKET") = _ticket
+            .Item("CLIENTID") = _pawner.ID
+            .Item("SMS_MSG") = msg
+            .Item("SENT_BY") = POSuser.UserID
+            .Item("REMARKS") = req
+            .Item("CREATED_AT") = Now
+        End With
+        ds.Tables(dsName).Rows.Add(dsNewRow)
+        database.SaveEntry(ds)
+    End Sub
+
     Private Function GetShortCode(ByVal ItemSpec As PawnItemSpec) As String
         For Each spec As ItemSpecs In _pawnItem.ItemClass.ItemSpecifications
             If spec.SpecName = ItemSpec.SpecName Then

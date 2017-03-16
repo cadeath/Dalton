@@ -13,10 +13,10 @@ Module smsUtil
     Friend ExpiryList As New CollectionPawnTicket
     Friend ExpiryCache As New DataTable
 
-    Friend Sub SendSMS(ByVal num As String, ByVal msg As String)
+    Friend Function SendSMS(ByVal num As String, ByVal msg As String) As String
         If Not isReady() Then
             MsgBox("SMS Initialization not yet ready", MsgBoxStyle.Critical)
-            Exit Sub
+            Return "FAILED"
         End If
         Dim config As New Configuration(_smsUser, _smsPassword)
         Dim smsClient As New OneApi.Client.Impl.SMSClient(config)
@@ -27,7 +27,9 @@ Module smsUtil
         Dim rqId As String = smsClient.SmsMessagingClient.SendSMS(smsRequest).ToString
         Console.WriteLine("Sent")
         Console.WriteLine("ID:" & rqId)
-    End Sub
+
+        Return rqId
+    End Function
 
     Private Sub SMS_Init()
         Dim ini As New IniFile
