@@ -26,12 +26,12 @@ Public Class User_rule
         End Set
     End Property
 
-    Private _Access_Type As Boolean
-    Public Property Access_Type() As Boolean
+    Private _Access_Type As String
+    Public Property Access_Type() As String
         Get
             Return _Access_Type
         End Get
-        Set(ByVal value As Boolean)
+        Set(ByVal value As String)
             _Access_Type = value
         End Set
     End Property

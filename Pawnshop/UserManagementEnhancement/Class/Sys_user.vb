@@ -336,8 +336,9 @@ Public Class Sys_user
         mySql = "SELECT * FROM " & subTable & " WHERE USERID  = " & idx & ""
         Dim ds As DataSet = LoadSQL(mySql, subTable)
         Dim u_pass As New List(Of String)()
+        '  Dim dsCount As Integer = ds.Tables(0).Rows.Count
 
-        If ds.Tables.Count >= 5 Then
+        If ds.Tables(0).Rows.Count >= 5 Then
             For Each dr As DataRow In ds.Tables(0).Rows
                 With dr
                     Console.WriteLine(.Item("USERPASS"))
@@ -420,7 +421,7 @@ Public Class Sys_user
         With ds.Tables(0).Rows(0)
             If .Item("EXPIRYDATE") = Now.ToShortDateString Then
                 MsgBox("Your account has been expired," & vbCrLf & _
-                       "Please Contact MIS for assistance.", MsgBoxStyle.Exclamation, "Expiration")
+                       "Please Contact ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
                 Return False
             End If
         End With

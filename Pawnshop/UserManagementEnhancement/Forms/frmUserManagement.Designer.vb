@@ -29,14 +29,6 @@ Partial Class frmUserManagement
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.txtPasword1 = New UserManagementEnhancement.watermark()
-        Me.txtContactnumber = New UserManagementEnhancement.watermark()
-        Me.txtEmailaddress = New UserManagementEnhancement.watermark()
-        Me.txtPassword = New UserManagementEnhancement.watermark()
-        Me.txtLastname = New UserManagementEnhancement.watermark()
-        Me.txtMiddlename = New UserManagementEnhancement.watermark()
-        Me.txtFirstname = New UserManagementEnhancement.watermark()
-        Me.txtUsername = New UserManagementEnhancement.watermark()
         Me.chkShowPassword = New System.Windows.Forms.CheckBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.rbMale = New System.Windows.Forms.RadioButton()
@@ -45,23 +37,32 @@ Partial Class frmUserManagement
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.dgRulePrivilege = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lvALL_user_list = New System.Windows.Forms.ListView()
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.btnCancelAP = New System.Windows.Forms.Button()
         Me.btnSaveAP = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.txtPasword1 = New UserManagementEnhancement.watermark()
+        Me.txtContactnumber = New UserManagementEnhancement.watermark()
+        Me.txtEmailaddress = New UserManagementEnhancement.watermark()
+        Me.txtPassword = New UserManagementEnhancement.watermark()
+        Me.txtLastname = New UserManagementEnhancement.watermark()
+        Me.txtMiddlename = New UserManagementEnhancement.watermark()
+        Me.txtFirstname = New UserManagementEnhancement.watermark()
+        Me.txtUsername = New UserManagementEnhancement.watermark()
         Me.tbControl.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbControl
@@ -149,81 +150,6 @@ Partial Class frmUserManagement
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sign Up"
         '
-        'txtPasword1
-        '
-        Me.txtPasword1.Location = New System.Drawing.Point(21, 178)
-        Me.txtPasword1.Name = "txtPasword1"
-        Me.txtPasword1.Size = New System.Drawing.Size(245, 29)
-        Me.txtPasword1.TabIndex = 5
-        Me.txtPasword1.UseSystemPasswordChar = True
-        Me.txtPasword1.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPasword1.WatermarkText = "Re-enter password"
-        '
-        'txtContactnumber
-        '
-        Me.txtContactnumber.Location = New System.Drawing.Point(21, 253)
-        Me.txtContactnumber.MaxLength = 13
-        Me.txtContactnumber.Name = "txtContactnumber"
-        Me.txtContactnumber.Size = New System.Drawing.Size(398, 29)
-        Me.txtContactnumber.TabIndex = 8
-        Me.txtContactnumber.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtContactnumber.WatermarkText = "Contact Number"
-        '
-        'txtEmailaddress
-        '
-        Me.txtEmailaddress.Location = New System.Drawing.Point(21, 213)
-        Me.txtEmailaddress.Name = "txtEmailaddress"
-        Me.txtEmailaddress.Size = New System.Drawing.Size(398, 29)
-        Me.txtEmailaddress.TabIndex = 7
-        Me.txtEmailaddress.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtEmailaddress.WatermarkText = "Email Address"
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Location = New System.Drawing.Point(21, 141)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(398, 29)
-        Me.txtPassword.TabIndex = 4
-        Me.txtPassword.UseSystemPasswordChar = True
-        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPassword.WatermarkText = "Password"
-        '
-        'txtLastname
-        '
-        Me.txtLastname.Location = New System.Drawing.Point(21, 104)
-        Me.txtLastname.Name = "txtLastname"
-        Me.txtLastname.Size = New System.Drawing.Size(398, 29)
-        Me.txtLastname.TabIndex = 3
-        Me.txtLastname.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtLastname.WatermarkText = "Lastname"
-        '
-        'txtMiddlename
-        '
-        Me.txtMiddlename.Location = New System.Drawing.Point(228, 66)
-        Me.txtMiddlename.Name = "txtMiddlename"
-        Me.txtMiddlename.Size = New System.Drawing.Size(191, 29)
-        Me.txtMiddlename.TabIndex = 2
-        Me.txtMiddlename.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtMiddlename.WatermarkText = "Middlename"
-        '
-        'txtFirstname
-        '
-        Me.txtFirstname.Location = New System.Drawing.Point(21, 66)
-        Me.txtFirstname.Name = "txtFirstname"
-        Me.txtFirstname.Size = New System.Drawing.Size(201, 29)
-        Me.txtFirstname.TabIndex = 1
-        Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtFirstname.WatermarkText = "Firstname"
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Location = New System.Drawing.Point(21, 28)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(398, 29)
-        Me.txtUsername.TabIndex = 0
-        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtUsername.WatermarkText = "Username"
-        '
         'chkShowPassword
         '
         Me.chkShowPassword.AutoSize = True
@@ -304,7 +230,9 @@ Partial Class frmUserManagement
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.Silver
-        Me.TabPage2.Controls.Add(Me.dgRulePrivilege)
+        Me.TabPage2.Controls.Add(Me.DataGridView1)
+        Me.TabPage2.Controls.Add(Me.Label5)
+        Me.TabPage2.Controls.Add(Me.lvALL_user_list)
         Me.TabPage2.Controls.Add(Me.btnCancel)
         Me.TabPage2.Controls.Add(Me.btnSave)
         Me.TabPage2.Location = New System.Drawing.Point(4, 39)
@@ -314,39 +242,36 @@ Partial Class frmUserManagement
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Privilege"
         '
-        'dgRulePrivilege
+        'Label5
         '
-        Me.dgRulePrivilege.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgRulePrivilege.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
-        Me.dgRulePrivilege.Location = New System.Drawing.Point(6, 6)
-        Me.dgRulePrivilege.Name = "dgRulePrivilege"
-        Me.dgRulePrivilege.RowHeadersVisible = False
-        Me.dgRulePrivilege.Size = New System.Drawing.Size(712, 405)
-        Me.dgRulePrivilege.TabIndex = 0
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(8, 24)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(77, 16)
+        Me.Label5.TabIndex = 12
+        Me.Label5.Text = "User Name:"
         '
-        'Column1
+        'lvALL_user_list
         '
-        Me.Column1.HeaderText = "Privilege Type"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 220
+        Me.lvALL_user_list.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader6})
+        Me.lvALL_user_list.FullRowSelect = True
+        Me.lvALL_user_list.GridLines = True
+        Me.lvALL_user_list.Location = New System.Drawing.Point(9, 45)
+        Me.lvALL_user_list.Name = "lvALL_user_list"
+        Me.lvALL_user_list.Size = New System.Drawing.Size(277, 366)
+        Me.lvALL_user_list.TabIndex = 11
+        Me.lvALL_user_list.UseCompatibleStateImageBehavior = False
+        Me.lvALL_user_list.View = System.Windows.Forms.View.Details
         '
-        'Column2
+        'ColumnHeader5
         '
-        Me.Column2.HeaderText = "No Access"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 160
+        Me.ColumnHeader5.Text = "#"
+        Me.ColumnHeader5.Width = 31
         '
-        'Column3
+        'ColumnHeader6
         '
-        Me.Column3.HeaderText = "Read Only"
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 160
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Full Access"
-        Me.Column4.Name = "Column4"
-        Me.Column4.Width = 160
+        Me.ColumnHeader6.Text = "Name"
+        Me.ColumnHeader6.Width = 237
         '
         'btnCancel
         '
@@ -418,6 +343,95 @@ Partial Class frmUserManagement
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1})
+        Me.DataGridView1.Location = New System.Drawing.Point(319, 71)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(335, 150)
+        Me.DataGridView1.TabIndex = 13
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Column1"
+        Me.Column1.Name = "Column1"
+        '
+        'txtPasword1
+        '
+        Me.txtPasword1.Location = New System.Drawing.Point(21, 178)
+        Me.txtPasword1.Name = "txtPasword1"
+        Me.txtPasword1.Size = New System.Drawing.Size(245, 29)
+        Me.txtPasword1.TabIndex = 5
+        Me.txtPasword1.UseSystemPasswordChar = True
+        Me.txtPasword1.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPasword1.WatermarkText = "Re-enter password"
+        '
+        'txtContactnumber
+        '
+        Me.txtContactnumber.Location = New System.Drawing.Point(21, 253)
+        Me.txtContactnumber.MaxLength = 13
+        Me.txtContactnumber.Name = "txtContactnumber"
+        Me.txtContactnumber.Size = New System.Drawing.Size(398, 29)
+        Me.txtContactnumber.TabIndex = 8
+        Me.txtContactnumber.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtContactnumber.WatermarkText = "Contact Number"
+        '
+        'txtEmailaddress
+        '
+        Me.txtEmailaddress.Location = New System.Drawing.Point(21, 213)
+        Me.txtEmailaddress.Name = "txtEmailaddress"
+        Me.txtEmailaddress.Size = New System.Drawing.Size(398, 29)
+        Me.txtEmailaddress.TabIndex = 7
+        Me.txtEmailaddress.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtEmailaddress.WatermarkText = "Email Address"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Location = New System.Drawing.Point(21, 141)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(398, 29)
+        Me.txtPassword.TabIndex = 4
+        Me.txtPassword.UseSystemPasswordChar = True
+        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPassword.WatermarkText = "Password"
+        '
+        'txtLastname
+        '
+        Me.txtLastname.Location = New System.Drawing.Point(21, 104)
+        Me.txtLastname.Name = "txtLastname"
+        Me.txtLastname.Size = New System.Drawing.Size(398, 29)
+        Me.txtLastname.TabIndex = 3
+        Me.txtLastname.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtLastname.WatermarkText = "Lastname"
+        '
+        'txtMiddlename
+        '
+        Me.txtMiddlename.Location = New System.Drawing.Point(228, 66)
+        Me.txtMiddlename.Name = "txtMiddlename"
+        Me.txtMiddlename.Size = New System.Drawing.Size(191, 29)
+        Me.txtMiddlename.TabIndex = 2
+        Me.txtMiddlename.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtMiddlename.WatermarkText = "Middlename"
+        '
+        'txtFirstname
+        '
+        Me.txtFirstname.Location = New System.Drawing.Point(21, 66)
+        Me.txtFirstname.Name = "txtFirstname"
+        Me.txtFirstname.Size = New System.Drawing.Size(201, 29)
+        Me.txtFirstname.TabIndex = 1
+        Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtFirstname.WatermarkText = "Firstname"
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Location = New System.Drawing.Point(21, 28)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(398, 29)
+        Me.txtUsername.TabIndex = 0
+        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtUsername.WatermarkText = "Username"
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -431,8 +445,9 @@ Partial Class frmUserManagement
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
-        CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -446,10 +461,6 @@ Partial Class frmUserManagement
     Friend WithEvents rbFemale As System.Windows.Forms.RadioButton
     Friend WithEvents txtBirthday As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents dgRulePrivilege As System.Windows.Forms.DataGridView
-    Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents btnCancelAP As System.Windows.Forms.Button
     Friend WithEvents btnSaveAP As System.Windows.Forms.Button
@@ -462,13 +473,18 @@ Partial Class frmUserManagement
     Friend WithEvents txtMiddlename As UserManagementEnhancement.watermark
     Friend WithEvents txtFirstname As UserManagementEnhancement.watermark
     Friend WithEvents txtUsername As UserManagementEnhancement.watermark
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents lvUserList As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents btnCancell As System.Windows.Forms.Button
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents lvALL_user_list As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewComboBoxColumn
 
 End Class

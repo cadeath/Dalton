@@ -24,6 +24,7 @@
         If Not ifTblExist("TBL_USER_DEFAULT") Then
             Exit Sub
         End If
+        'Load_Privileges()
         Load_users()
     End Sub
 
@@ -36,6 +37,9 @@
                 .Users(dr.Item("USERID"))
                 Dim lv As ListViewItem = lvUserList.Items.Add(.ID)
                 lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
+
+                Dim lv1 As ListViewItem = lvALL_user_list.Items.Add(.ID)
+                lv1.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
             Next
         End With
 
@@ -51,9 +55,25 @@
         Dim mysql As String = "SELECT * FROM TBL_USERRULE"
         Dim ds As DataSet = LoadSQL(mysql, "TBL_USERRULE")
 
-        For Each dr As DataRow In ds.Tables(0).Rows
-            dgRulePrivilege.Rows.Add(dr.Item("PRIVILEGE_TYPE"))
-        Next
+        Try
+
+            DataGridView1.Rows.Clear()
+            For Each dr As DataRow In ds.Tables(0).Rows
+                AddPriv(dr)
+            Next
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub AddPriv(ByVal dr As DataRow)
+
+        With dr
+            Dim a As String = .Item("Privilege_Type").ToString
+            Dim b As String = .Item("Access_Type").ToString
+            DataGridView1.Rows.Add(a)
+        End With
     End Sub
 
     Private Sub chkShowPassword_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkShowPassword.CheckedChanged
@@ -75,21 +95,18 @@
         User_rule_mod.Create_User_Rule_Table()
 
         With Save_userRule
-            For Each dg As DataGridViewRow In dgRulePrivilege.Rows
+            For Each dg As DataGridViewRow In DataGridView1.Rows
+                If dg.Cells(0).Value = "" Then
+                    Exit For
+                End If
+
                 .Privilege_Type = dg.Cells(0).Value
-                If dg.Cells(1).Value = True Then
-                    .Access_Type = True
-                ElseIf dg.Cells(2).Value = True Then
-                    .Access_Type = True
-                Else
-                    .Access_Type = True
-                End If
-                If .adpri_Save(dg.Cells(0).Value) Then
-                    Console.WriteLine("Save.")
-                End If
+                .Access_Type = dg.Cells(1).Value
+                .adpri_Save(.Privilege_Type)
             Next
         End With
 
+        lvALL_user_list.Items.Clear()
         Load_users()
         MsgBox("Successfully Saved.", MsgBoxStyle.Information, "Save")
     End Sub
@@ -107,21 +124,7 @@
 
     End Sub
 
-    Function UppercaseFirstLetter(ByVal val As String) As String
-        ' Test for nothing or empty.
-        If String.IsNullOrEmpty(val) Then
-            Return val
-        End If
-
-        ' Convert to character array.
-        Dim array() As Char = val.ToCharArray
-
-        ' Uppercase first character.
-        array(0) = Char.ToUpper(array(0))
-
-        ' Return new string.
-        Return New String(array)
-    End Function
+  
 
     Private Sub Save()
         If Not IsValid() Then Exit Sub
@@ -134,7 +137,7 @@
         Create()
 
         With Save_user
-            .USERNAME = UppercaseFirstLetter(txtUsername.Text)
+            .USERNAME = txtUsername.Text
             .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
             .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
@@ -169,7 +172,7 @@
         num = num.Replace("-", "")
 
         With Save_user
-            .USERNAME = UppercaseFirstLetter(txtUsername.Text)
+            .USERNAME = txtUsername.Text
             .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
             .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
@@ -200,7 +203,7 @@
         Dim charPos() As Integer = {}
         If PhoneField.Text = Nothing Then Return
 
-        Select Case PhoneField.Text.Substring(0, 1)
+        Select Case txtContactnumber.Text.Substring(0, 1)
             Case "0"
                 charPos = {4, 8}
             Case "9"
@@ -211,7 +214,7 @@
                 charPos = {2, 6, 10} '63-919-797-7559
         End Select
         If isPhone Then
-            Select Case PhoneField.Text.Substring(0, 1)
+            Select Case txtContactnumber.Text.Substring(0, 1)
                 Case "0"
                     charPos = {3, 7}
                 Case Else
@@ -220,9 +223,9 @@
         End If
 
         For Each pos In charPos
-            If PhoneField.TextLength = pos And Not e.KeyChar = vbBack Then
-                PhoneField.Text &= "-"
-                PhoneField.SelectionStart = pos + 1
+            If txtContactnumber.TextLength = pos And Not e.KeyChar = vbBack Then
+                txtContactnumber.Text &= "-"
+                txtContactnumber.SelectionStart = pos + 1
             End If
         Next
     End Sub
@@ -254,6 +257,7 @@
             Return True
         End If
 
+        If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
         Return True
     End Function
 
@@ -290,22 +294,6 @@
         GroupBox1.Enabled = False
     End Sub
 
-
-
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim count As Integer() = {1, 2, 3}
-        Dim tmpuser As New Sys_user
-
-        For Each c In count
-            If Not tmpuser.Count_LOCKDOWN(c) Then
-
-            Else
-                On Error Resume Next
-            End If
-
-        Next
-    End Sub
-
     Private Sub ClearFields(ByVal str As String)
         txtUsername.Text = str
         txtFirstname.Text = str
@@ -328,8 +316,16 @@
             Exit Sub
         End If
         ClearFields("")
-
     End Sub
 
-   
+  
+    Private Sub dgRulePrivilege_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs)
+        If e.ColumnIndex = CheckState.Checked Then
+
+        End If
+    End Sub
+
+    Private Sub TabPage2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabPage2.Click
+        Load_Privileges()
+    End Sub
 End Class
