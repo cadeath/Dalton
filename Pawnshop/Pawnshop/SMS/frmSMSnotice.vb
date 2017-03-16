@@ -123,14 +123,15 @@
                 Console.WriteLine(pawner.SubItems(1).Text & ">" & pawner.SubItems(2).Text)
                 Console.WriteLine("MSG: " & text_msg)
 
-                smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
+                remarks = smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
+                remarks = IIf(remarks.Contains("messageStatus=MessageAccepted,"), "SENT", remarks)
 
                 Dim notified As New PawnTicket2
                 notified.Load_PawnTicket(pawner.Text)
                 notified.ConfirmNotification(text_msg, remarks)
 
                 finalCnt -= 1
-                frmMain.displayStatus(String.Format("Sending... {0} recipient{0} remaining", finalCnt, IIf(finalCnt > 1, "s", "")))
+                frmMain.displayStatus(String.Format("Sending... {0} recipient{1} remaining", finalCnt, IIf(finalCnt > 1, "s", "")))
                 Application.DoEvents()
             Next
 
