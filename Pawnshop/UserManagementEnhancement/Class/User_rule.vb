@@ -41,13 +41,17 @@ Public Class User_rule
 
 #Region "Procedures and Functions"
 
-    Friend Function adpri_Save(ByVal priv_type As String) As Boolean
+    Friend Sub adpri_Save(ByVal priv_type As String)
         mySql = String.Format("SELECT * FROM " & fillData & " WHERE PRIVILEGE_TYPE = '{0}'", priv_type)
         Dim ds As DataSet = LoadSQL(mySql, fillData)
 
         If ds.Tables(0).Rows.Count > 0 Then
-            MsgBox("This Privilege type is already Exists.", MsgBoxStyle.Critical, "Warning")
-            Return False
+            With ds.Tables(0).Rows(0)
+                .Item("Privilege_type") = _Privilege_Type
+                .Item("Access_Type") = _Access_Type
+            End With
+            database.SaveEntry(ds, False)
+            Exit Sub
         End If
 
         Dim dsnewRow As DataRow
@@ -58,9 +62,7 @@ Public Class User_rule
         End With
         ds.Tables(0).Rows.Add(dsnewRow)
         database.SaveEntry(ds)
-
-        Return True
-    End Function
+    End Sub
 
 #End Region
 End Class

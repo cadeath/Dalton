@@ -2,35 +2,25 @@
 
     Dim Save_userRule As New User_rule
     Dim Save_user As New Sys_user
+    Dim Add_user_Privilege As New Sys_user
 
+    Dim priv_list As New List(Of String)()
 
-    Private Sub btnSaveAP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveAP.Click
-        'Dim adPriv_save As New User_rule
-
-        'With adPriv_save
-        '    .Privilege_Type = txtPrivilegeType.Text
-        '    .Access_Level = txtAccessLevel.Text
-        'End With
-
-        'If Not adPriv_save.adpri_Save(txtPrivilegeType.Text) Then
-        '    Exit Sub
-        'End If
-
-        'MsgBox("Successfully saved.", MsgBoxStyle.Information, "")
-    End Sub
+    Dim privilege_chunk As New TextBox
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtUsername.Focus()
         If Not ifTblExist("TBL_USER_DEFAULT") Then
             Exit Sub
         End If
-        'Load_Privileges()
+        Load_Privileges()
         Load_users()
     End Sub
 
     Private Sub Load_users()
         Dim s_user As New Sys_user
 
+        lvALL_user_list.Items.Clear()
         lvUserList.Items.Clear()
         With s_user
             For Each dr As DataRow In .dsUSEr.Tables(0).Rows
@@ -56,24 +46,14 @@
         Dim ds As DataSet = LoadSQL(mysql, "TBL_USERRULE")
 
         Try
-
             dgRulePrivilege.Rows.Clear()
             For Each dr As DataRow In ds.Tables(0).Rows
-                AddPriv(dr)
+                dgRulePrivilege.Rows.Add(dr.Item("Privilege_Type"), dr.Item("Access_Type"))
             Next
         Catch ex As Exception
 
         End Try
 
-    End Sub
-
-    Private Sub AddPriv(ByVal dr As DataRow)
-
-        With dr
-            Dim a As String = .Item("Privilege_Type").ToString
-            Dim b As String = .Item("Access_Type").ToString
-            dgRulePrivilege.Rows.Add(a)
-        End With
     End Sub
 
     Private Sub chkShowPassword_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkShowPassword.CheckedChanged
@@ -87,15 +67,19 @@
     End Sub
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If lvALL_user_list.SelectedItems.Count = 0 Then lvALL_user_list.Focus() : Exit Sub
+        ' If Not IsEmpty() Then Exit Sub
+
         Dim result As DialogResult = MsgBox("Do you want to save this privilege?", MsgBoxStyle.YesNo, "Save")
         If result = MsgBoxResult.No Then
+            Load_users()
             Exit Sub
         End If
 
         User_rule_mod.Create_User_Rule_Table()
 
         With Save_userRule
-            For Each dg As DataGridViewRow In DataGridView1.Rows
+            For Each dg As DataGridViewRow In dgRulePrivilege.Rows
                 If dg.Cells(0).Value = "" Then
                     Exit For
                 End If
@@ -103,13 +87,45 @@
                 .Privilege_Type = dg.Cells(0).Value
                 .Access_Type = dg.Cells(1).Value
                 .adpri_Save(.Privilege_Type)
+                priv_list.Add(.Access_Type)
             Next
         End With
 
+        For Each itm As String In priv_list
+            If itm.ToString = "No Access" Then
+                privilege_chunk.AppendText(0)
+            ElseIf itm.ToString = "Read Only" Then
+                privilege_chunk.AppendText(2)
+            Else
+                privilege_chunk.AppendText(1)
+            End If
+        Next
+
+        Dim str_priv As String = privilege_chunk.Text
+        Console.WriteLine("Privilege: ", str_priv)
+
+        Dim idx As Integer = lvALL_user_list.FocusedItem.Text
+        With Add_user_Privilege
+            .Privilege = str_priv
+            .Save_Privilege(idx)
+        End With
+
+        priv_list.Clear()
+        privilege_chunk.Clear()
         lvALL_user_list.Items.Clear()
         Load_users()
         MsgBox("Successfully Saved.", MsgBoxStyle.Information, "Save")
     End Sub
+
+    Private Function IsEmpty() As Boolean
+        For Each rw As DataGridViewRow In dgRulePrivilege.Rows
+            If rw.Cells(1).Value = "" Then MsgBox("Access Type must be filled up.", MsgBoxStyle.Exclamation, "Warning") : Return False
+            If rw.Cells(0).Value = "" Then
+                On Error Resume Next
+            End If
+        Next
+        Return True
+    End Function
 
     Private Sub btnCreateAccount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateAccount.Click
 
@@ -318,14 +334,6 @@
         ClearFields("")
     End Sub
 
-  
-    Private Sub dgRulePrivilege_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgRulePrivilege.CellContentClick
-        If e.ColumnIndex = CheckState.Checked Then
-
-        End If
-    End Sub
-
-    Private Sub TabPage2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabPage2.Click
-        Load_Privileges()
-    End Sub
+   
+   
 End Class

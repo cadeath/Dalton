@@ -414,6 +414,16 @@ Public Class Sys_user
         End With
     End Sub
 
+    Friend Sub Save_Privilege(ByVal idx As Integer)
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", idx)
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        With ds.Tables(0).Rows(0)
+            .Item("PRIVILEGE") = _privilege
+        End With
+        database.SaveEntry(ds, False)
+    End Sub
+
     Friend Function CheckAccount_Expiration(ByVal u_PASS As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
