@@ -5,6 +5,7 @@ Imports OneApi.Config
 
 Module smsUtil
 
+    Private _active As Boolean = True
     Private _smsUser As String = "Eskie"
     Private _smsPassword As String = "eskiegwapo123"
     Private _smsSender As String = "DALTON"
@@ -18,13 +19,17 @@ Module smsUtil
             MsgBox("SMS Initialization not yet ready", MsgBoxStyle.Critical)
             Return "FAILED"
         End If
+
+        If Not _active Then Return "NOT ACTIVE"
+        Dim rqId As String = "SENT"
         Dim config As New Configuration(_smsUser, _smsPassword)
         Dim smsClient As New OneApi.Client.Impl.SMSClient(config)
 
-        Dim smsRequest As SMSRequest
-        smsRequest = New SMSRequest(_smsSender, msg, num)
+        'Comment Line this when not testing...
+        'Dim smsRequest As SMSRequest
+        'smsRequest = New SMSRequest(_smsSender, msg, num)
+        'rqId = smsClient.SmsMessagingClient.SendSMS(smsRequest).ToString
 
-        Dim rqId As String = smsClient.SmsMessagingClient.SendSMS(smsRequest).ToString
         Console.WriteLine("Sent")
         Console.WriteLine("ID:" & rqId)
 
