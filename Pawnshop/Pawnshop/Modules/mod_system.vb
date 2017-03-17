@@ -577,6 +577,7 @@ Module mod_system
         Return True
     End Function
 
+
     Public Function CheckFormActive() As Boolean
 
         frmCollection = Application.OpenForms()
