@@ -3,6 +3,7 @@
     Dim curInsurance As New Insurance
     Private currentInsuranceNum As Integer = GetOption("InsuranceLastNum")
     Dim MOD_NAME As String = "INSURANCE"
+    Friend isCoi As Boolean = False
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -108,18 +109,18 @@
     ''' </summary>
     ''' <param name="id"></param>
     ''' <remarks></remarks>
-    Friend Sub LoadInsurance(ByVal id As Integer)
-        Dim getInsurance As New Insurance
-        getInsurance.LoadInsurance(id)
+    Friend Sub LoadInsurance(ByVal Ins As Insurance)
+        'Dim getInsurance As New Insurance
+        'getInsurance.LoadInsurance(id)
 
-        LoadHolder(getInsurance.Client)
-        txtCoi.Text = getInsurance.COInumber
-        dtpDate.Value = getInsurance.TransactionDate
-        dtpExpiry.Value = getInsurance.ValidDate
-        txtAmount.Text = getInsurance.Amount
+        LoadHolder(Ins.Client)
+        txtCoi.Text = Ins.COInumber
+        dtpDate.Value = Ins.TransactionDate
+        dtpExpiry.Value = Ins.ValidDate
+        txtAmount.Text = Ins.Amount
 
         lbltransid.Text = frmInsuranceList.lbltransID.Text
-        curInsurance = getInsurance
+        curInsurance = Ins
         btnVoid.Enabled = True
         txtPT.Enabled = False
     End Sub
@@ -169,56 +170,15 @@
         ds.Tables(0).Rows(0).Item("Opt_Values") = ds.Tables(0).Rows(0).Item("Opt_Values") + 1
         SaveEntry(ds, False)
         InventoryController.DeductInventory("IND 00001", 1)
-        'Dim mySql As String = "SELECT * FROM DOC ROWS 1"
-        'Dim fillData As String = "DOC"
 
-        'Dim ds As DataSet = LoadSQL(mySql, fillData)
-        'Dim dsNewRow As DataRow
-        'dsNewRow = ds.Tables(fillData).NewRow
-        'With dsNewRow
-        '    .Item("CODE") = "COI# " & txtCoi.Text
-        '    .Item("MOP") = "C"
-        '    .Item("CUSTOMER") = txtHolder.Text
-        '    .Item("DOCDATE") = CurrentDate
-        '    .Item("NOVAT") = 25
-        '    .Item("VATRATE") = 25
-        '    .Item("VATTOTAL") = 25
-        '    .Item("DOCTOTAL") = 25
-        '    .Item("USERID") = POSuser.UserID
-        'End With
-        'ds.Tables(fillData).Rows.Add(dsNewRow)
-        'database.SaveEntry(ds)
-        'Dim DOCID As Integer = 0
-
-        'mySql = "SELECT * FROM DOC ORDER BY DOCID DESC ROWS 1"
-        'ds = LoadSQL(mySql, fillData)
-        'DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
-
-        ''Creating DocumentLines
-        'mySql = "SELECT * FROM DOCLINES ROWS 1"
-        'fillData = "DOCLINES"
-        'ds = LoadSQL(mySql, fillData)
-
-        'Dim itm As New cItemData
-        'dsNewRow = ds.Tables(fillData).NewRow
-        'With dsNewRow
-        '    .Item("DOCID") = DOCID
-        '    .Item("ITEMCODE") = "IND 00001"
-        '    .Item("DESCRIPTION") = "DALTON INSURANCE 25"
-        '    .Item("QTY") = 1
-        '    .Item("UNITPRICE") = 25
-        '    .Item("SALEPRICE") = 25
-        '    .Item("ROWTOTAL") = 25
-        'End With
-        'ds.Tables(fillData).Rows.Add(dsNewRow)
-
-        'database.SaveEntry(ds)
-        'InventoryController.DeductInventory("IND 00001", 1)
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
-        btnNew.PerformClick()
 
+        If isCoi = True Then
+            curInsurance.LoadInsurance(curInsurance.LoadLastIDNumberInsurance)
+            frmAddCoi.LoadCoi(curInsurance)
+        End If
         Me.Close()
     End Sub
 
@@ -238,6 +198,8 @@
     End Sub
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        'frmInsuranceList.Show()
+        frmInsuranceList.SearchSelect("", FormName.frmInsurance)
         frmInsuranceList.Show()
     End Sub
 
@@ -290,6 +252,4 @@
             btnSave.PerformClick()
         End If
     End Sub
-
-
 End Class

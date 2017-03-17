@@ -17,6 +17,11 @@
         frmPawningV2_Claimer = 12
         frmPawningV2_SpecsValue = 13
         frmPawningV2_InterestScheme = 14
+
+        Coi = 15
+        layAway = 16
+        layAwayExist = 17
+
     End Enum
 
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
@@ -40,6 +45,11 @@
                 frmPawningItemNew.LoadClient(cl)
             Case FormName.frmPawningV2_Claimer
                 frmPawningItemNew.LoadCliamer(cl)
+
+            Case FormName.layAway
+                frmLayAway.LoadClient(cl)
+            Case FormName.layAwayExist
+                frmAddCustomer.LoadClient(cl)
         End Select
     End Sub
 
@@ -64,6 +74,15 @@
         Select Case gotoForm
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadCurrencyall(cr)
+        End Select
+    End Sub
+
+    Friend Sub ReloadFormFromInsurance(ByVal gotoForm As FormName, ByVal Ins As Insurance)
+        Select Case gotoForm
+            Case FormName.Coi
+                frmAddCoi.LoadCoi(Ins)
+            Case FormName.frmInsurance
+                frmInsurance.LoadInsurance(Ins)
         End Select
     End Sub
 End Module
