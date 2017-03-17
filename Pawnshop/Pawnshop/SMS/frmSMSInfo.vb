@@ -41,6 +41,7 @@
             lblPawner.Text = String.Format("{0} {1}", .Item("FIRSTNAME"), .Item("LASTNAME"))
             lblLoan.Text = ptDisplay.LoanDate.ToString("M/d/yyyy")
             lblMatu.Text = ptDisplay.MaturityDate.ToString("M/d/yyyy")
+            lblExpiry.Text = ptDisplay.ExpiryDate.ToString("M/d/yyyy")
             lblAuction.Text = ptDisplay.AuctionDate.ToString("M/d/yyyy")
             lblSMS.Text = .Item("SMS_MSG")
             lblSMSdate.Text = DateTime.Parse(.Item("SMSDATE")).ToString("MMMM d, yyyy")
@@ -50,7 +51,18 @@
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
         If _sqlPrint = "" Then Exit Sub
 
-        frmReport.ReportInit(_sqlPrint, "dsSingle", "Reports\rpt_ExpirySingle.rdlc")
+        frmReport.ReportInit(_sqlPrint, "dsSingle", "Reports\rpt_ExpirySingle.rdlc", , False)
         frmReport.Show()
+    End Sub
+
+    Private Sub frmSMSInfo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        txtPT.Text = ""
+        lblPawner.Text = ""
+        lblLoan.Text = ""
+        lblMatu.Text = ""
+        lblExpiry.Text = ""
+        lblAuction.Text = ""
+        lblSMS.Text = ""
+        lblSMSdate.Text = ""
     End Sub
 End Class

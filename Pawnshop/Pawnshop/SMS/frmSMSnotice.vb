@@ -96,12 +96,14 @@
         Dim msgCnt As Integer = lvExpiry.CheckedItems.Count
         Dim msg As String = String.Format("We will be sending {0} client{1}", msgCnt, IIf(msgCnt > 1, "s", "")) + vbCrLf + "Please confirm"
         If MsgBox(msg, MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Confirmation") = MsgBoxResult.No Then Exit Sub
+        If msgCnt < 1 Then Exit Sub
 
         frmMain.displayStatus(String.Format("Sending Messages to {0} client{1}", msgCnt, IIf(msgCnt > 1, "s", "")))
         'Dim th As New Threading.Thread(AddressOf do_MassTexting)
         Dim th = New Threading.Thread(AddressOf do_MassTexting)
         th.SetApartmentState(Threading.ApartmentState.STA)
         th.Start()
+        FormState(False)
     End Sub
 
     Private Delegate Sub doMassTexting_callback()
@@ -139,6 +141,7 @@
                 Application.DoEvents()
             Next
 
+            smsUtil.Load_Expiry()
             frmMain.displayStatus("Sending Expiry List Completed")
             Me.Close()
         End If
