@@ -175,7 +175,9 @@
             ds.Tables(fillData).Rows.Add(dsNewRow)
             database.SaveEntry(ds, True)
         Next
-
+        Dim Count As Integer = GetOption("PulloutNum")
+        Count += 1
+        UpdateOptions("PulloutNum", Count)
         MsgBox("Items has been pull out", MsgBoxStyle.Information)
         Me.Close()
     End Sub
