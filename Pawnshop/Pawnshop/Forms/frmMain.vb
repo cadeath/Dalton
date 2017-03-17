@@ -687,4 +687,8 @@ Public Class frmMain
         frmSegreList.FormType = frmSegreList.SegreReport.Monthly
         frmSegreList.Show()
     End Sub
+
+    Private Sub SMSListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSListToolStripMenuItem.Click
+        frmSMSInfo.Show()
+    End Sub
 End Class

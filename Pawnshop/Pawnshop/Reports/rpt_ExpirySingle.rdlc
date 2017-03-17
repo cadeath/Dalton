@@ -9,13 +9,7 @@
       <rd:DataSourceID>a7092d25-e5f8-4f15-b187-a8fcf7872d2a</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="dsExpiry">
-      <Query>
-        <DataSourceName />
-        <CommandText />
-      </Query>
-    </DataSet>
+  <DataSets>    
     <DataSet Name="dsSingle">
       <Fields>
         <Field Name="SMSDATE">

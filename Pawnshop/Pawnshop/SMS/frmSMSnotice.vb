@@ -126,12 +126,16 @@
                 remarks = smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
                 remarks = IIf(remarks.Contains("messageStatus=MessageAccepted,"), "SENT", remarks)
 
-                Dim notified As New PawnTicket2
-                notified.Load_PawnTicket(pawner.Text)
-                notified.ConfirmNotification(text_msg, remarks)
+                If remarks = "SENT" Then
+                    Dim notified As New PawnTicket2
+                    notified.Load_PawnTicket(pawner.Text)
+                    notified.ConfirmNotification(text_msg, remarks)
+                Else
+                    Log_Report(String.Format("FAILED TO SEND: PT#{0} - {1}", pawner.Text, remarks))
+                End If
 
                 finalCnt -= 1
-                frmMain.displayStatus(String.Format("Sending... {0} recipient{1} remaining", finalCnt, IIf(finalCnt > 1, "s", "")))
+                frmMain.displayStatus(String.Format("{2}... {0} recipient{1} remaining", finalCnt, IIf(finalCnt > 1, "s", ""), IIf(remarks = "SENT", "Sending", "Failed")))
                 Application.DoEvents()
             Next
 
