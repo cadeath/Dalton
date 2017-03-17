@@ -136,10 +136,44 @@
         Dim ans As DialogResult = MsgBox("Do you want to post this transactions?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information)
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
+        mySql = "Select * From PulloutDoc"
+        fillData = "PulloutDoc"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables(fillData).NewRow
+        With dsNewRow
+            .Item("DocDate") = CurrentDate
+            .Item("ControlNum") = GetOption("PulloutNum")
+            .Item("Pulloutby") = UserID
+        End With
+        ds.Tables(fillData).Rows.Add(dsNewRow)
+        database.SaveEntry(ds, True)
+
+        mySql = "Select * From PulloutDoc Order By DocID ASC"
+        ds = LoadSQL(mySql, fillData)
+        Dim LastID As Integer = ds.Tables(0).Rows(0).Item("DocID")
+
         For Each itm As ListViewItem In lvPullOut.Items
             Dim pt As New PawnTicket2
             pt.Load_PTid(itm.Tag)
             pt.PullOut(CurrentDate)
+
+            mySql = "Select * From PulloutLines"
+            fillData = "PulloutLines"
+            ds = LoadSQL(mySql, fillData)
+            dsNewRow = ds.Tables(fillData).NewRow
+            With dsNewRow
+                .Item("DocID") = LastID
+                .Item("Pawnticket") = pt.PawnTicket
+                .Item("loandate") = pt.LoanDate
+                .Item("ExpiryDate") = pt.ExpiryDate
+                .Item("Description") = pt.Description
+                .Item("Principal") = pt.Principal
+                .Item("PawnerName") = String.Format("{0} {1}" & IIf(pt.Pawner.Suffix <> "", "," & pt.Pawner.Suffix, ""), pt.Pawner.FirstName, pt.Pawner.LastName)
+                .Item("Appraiser") = GetAppraiserName(pt.AppraiserID)
+            End With
+            ds.Tables(fillData).Rows.Add(dsNewRow)
+            database.SaveEntry(ds, True)
         Next
 
         MsgBox("Items has been pull out", MsgBoxStyle.Information)
@@ -171,7 +205,10 @@
         End If
     End Sub
 
-    Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
-
-    End Sub
+    Private Function GetAppraiserName(ByVal ID As Integer) As String
+        mySql = "Select * From tbl_gamit Where UserID = " & ID
+        fillData = "tbl_gamit"
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        Return ds.Tables(0).Rows(0).Item("FullName")
+    End Function
 End Class

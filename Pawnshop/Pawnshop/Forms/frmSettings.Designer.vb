@@ -26,8 +26,9 @@ Partial Class frmSettings
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtPulloutNum = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.txtStockOutNum = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.txtReturnNum = New System.Windows.Forms.TextBox()
@@ -46,6 +47,7 @@ Partial Class frmSettings
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtPawnTicket = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtBranchAddr = New System.Windows.Forms.TextBox()
@@ -71,8 +73,8 @@ Partial Class frmSettings
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -118,19 +120,10 @@ Partial Class frmSettings
         Me.TabPage1.Text = "Control Number"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.GroupBox2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(300, 372)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Branch"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtPulloutNum)
+        Me.GroupBox1.Controls.Add(Me.Label18)
         Me.GroupBox1.Controls.Add(Me.txtStockOutNum)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.txtReturnNum)
@@ -151,10 +144,29 @@ Partial Class frmSettings
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Location = New System.Drawing.Point(6, 6)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(230, 282)
+        Me.GroupBox1.Size = New System.Drawing.Size(230, 335)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Next Control Number"
+        '
+        'txtPulloutNum
+        '
+        Me.txtPulloutNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPulloutNum.Location = New System.Drawing.Point(124, 276)
+        Me.txtPulloutNum.Name = "txtPulloutNum"
+        Me.txtPulloutNum.Size = New System.Drawing.Size(100, 22)
+        Me.txtPulloutNum.TabIndex = 31
+        Me.txtPulloutNum.Text = "90"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(6, 279)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(79, 16)
+        Me.Label18.TabIndex = 32
+        Me.Label18.Text = "Pullout Num"
         '
         'txtStockOutNum
         '
@@ -326,6 +338,17 @@ Partial Class frmSettings
         Me.Label10.Size = New System.Drawing.Size(81, 16)
         Me.Label10.TabIndex = 16
         Me.Label10.Text = "Pawn Ticket"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.GroupBox2)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(300, 372)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Branch"
+        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -576,13 +599,12 @@ Partial Class frmSettings
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmSettings"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Settings"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
@@ -638,4 +660,6 @@ Partial Class frmSettings
     Friend WithEvents printerPT As System.Windows.Forms.ComboBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents txtPulloutNum As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
 End Class

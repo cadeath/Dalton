@@ -54,6 +54,7 @@
         txtCashInvoice.Text = GetOption("InvoiceNum")
         txtReturnNum.Text = GetOption("SalesReturnNum")
         txtStockOutNum.Text = GetOption("STONum")
+        txtPulloutNum.Text = GetOption("PulloutNum")
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -79,11 +80,7 @@
             If Not OTPDisable Then
                 diagGeneralOTP.GeneralOTP = OtpSettings
                 diagGeneralOTP.ShowDialog()
-                If Not diagGeneralOTP.isCorrect Then
-                    Exit Sub
-                Else
-                    UpdateSetting()
-                End If
+                If Not diagGeneralOTP.isCorrect Then Exit Sub
             Else
                 UpdateSetting()
             End If
@@ -118,6 +115,7 @@
         UpdateOptions("InvoiceNum", txtCashInvoice.Text, isOTPEnable)
         UpdateOptions("SalesReturnNum", txtReturnNum.Text, isOTPEnable)
         UpdateOptions("STONum", txtStockOutNum.Text, isOTPEnable)
+        UpdateOptions("PulloutNum", txtPulloutNum.Text, isOTPEnable)
 
         'Third
         UpdateOptions("PrinterPT", printerPT.Text, isOTPEnable)
