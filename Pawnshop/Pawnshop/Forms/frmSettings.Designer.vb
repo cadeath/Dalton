@@ -26,7 +26,6 @@ Partial Class frmSettings
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtStockOutNum = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -46,6 +45,7 @@ Partial Class frmSettings
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtPawnTicket = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtBranchAddr = New System.Windows.Forms.TextBox()
@@ -71,8 +71,8 @@ Partial Class frmSettings
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -117,17 +117,6 @@ Partial Class frmSettings
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Control Number"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.GroupBox2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(300, 372)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Branch"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -326,6 +315,17 @@ Partial Class frmSettings
         Me.Label10.Size = New System.Drawing.Size(81, 16)
         Me.Label10.TabIndex = 16
         Me.Label10.Text = "Pawn Ticket"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.GroupBox2)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(300, 372)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Branch"
+        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -576,13 +576,12 @@ Partial Class frmSettings
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.Name = "frmSettings"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Settings"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
