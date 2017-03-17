@@ -80,7 +80,13 @@
             If Not OTPDisable Then
                 diagGeneralOTP.GeneralOTP = OtpSettings
                 diagGeneralOTP.ShowDialog()
-                If Not diagGeneralOTP.isCorrect Then Exit Sub
+                diagGeneralOTP.TopMost = True
+                If Not diagGeneralOTP.isCorrect Then
+                    Exit Sub
+                Else
+                    UpdateSetting()
+                End If
+
             Else
                 UpdateSetting()
             End If
