@@ -13,23 +13,19 @@
         If Not ifTblExist("TBL_USER_DEFAULT") Then
             Exit Sub
         End If
-        Load_Privileges()
+        Load_Privileges(False)
         Load_users()
     End Sub
 
     Private Sub Load_users()
         Dim s_user As New Sys_user
 
-        lvALL_user_list.Items.Clear()
         lvUserList.Items.Clear()
         With s_user
             For Each dr As DataRow In .dsUSEr.Tables(0).Rows
                 .Users(dr.Item("USERID"))
                 Dim lv As ListViewItem = lvUserList.Items.Add(.ID)
                 lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
-
-                Dim lv1 As ListViewItem = lvALL_user_list.Items.Add(.ID)
-                lv1.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
             Next
         End With
 
@@ -39,20 +35,26 @@
         User_rule_mod.Create_User_table()
         User_rule_mod.Create_User_history()
         User_rule_mod.Create_User_Rule_Table()
+        User_rule_mod.Create_User_LINE()
     End Sub
 
-    Private Sub Load_Privileges()
-        Dim mysql As String = "SELECT * FROM TBL_USERRULE"
-        Dim ds As DataSet = LoadSQL(mysql, "TBL_USERRULE")
+    Private Sub Load_Privileges(ByVal IS_UPDATE As Boolean)
 
-        Try
-            dgRulePrivilege.Rows.Clear()
-            For Each dr As DataRow In ds.Tables(0).Rows
-                dgRulePrivilege.Rows.Add(dr.Item("Privilege_Type"), dr.Item("Access_Type"))
-            Next
-        Catch ex As Exception
+        If IS_UPDATE = False Then
+            Dim mysql As String = "SELECT * FROM TBL_USERRULE"
+            Dim ds As DataSet = LoadSQL(mysql, "TBL_USERRULE")
 
-        End Try
+            Try
+                dgRulePrivilege.Rows.Clear()
+                For Each dr As DataRow In ds.Tables(0).Rows
+                    dgRulePrivilege.Rows.Add(dr.Item("Privilege_Type"), dr.Item("Access_Type"))
+                Next
+            Catch ex As Exception
+
+            End Try
+        Else
+            Populate_to_txtFields()
+        End If
 
     End Sub
 
@@ -64,57 +66,6 @@
             txtPassword.UseSystemPasswordChar = True
             txtPasword1.UseSystemPasswordChar = True
         End If
-    End Sub
-
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If lvALL_user_list.SelectedItems.Count = 0 Then lvALL_user_list.Focus() : Exit Sub
-        ' If Not IsEmpty() Then Exit Sub
-
-        Dim result As DialogResult = MsgBox("Do you want to save this privilege?", MsgBoxStyle.YesNo, "Save")
-        If result = MsgBoxResult.No Then
-            Load_users()
-            Exit Sub
-        End If
-
-        User_rule_mod.Create_User_Rule_Table()
-
-        With Save_userRule
-            For Each dg As DataGridViewRow In dgRulePrivilege.Rows
-                If dg.Cells(0).Value = "" Then
-                    Exit For
-                End If
-
-                .Privilege_Type = dg.Cells(0).Value
-                .Access_Type = dg.Cells(1).Value
-                .adpri_Save(.Privilege_Type)
-                priv_list.Add(.Access_Type)
-            Next
-        End With
-
-        For Each itm As String In priv_list
-            If itm.ToString = "No Access" Then
-                privilege_chunk.AppendText(0)
-            ElseIf itm.ToString = "Read Only" Then
-                privilege_chunk.AppendText(2)
-            Else
-                privilege_chunk.AppendText(1)
-            End If
-        Next
-
-        Dim str_priv As String = privilege_chunk.Text
-        Console.WriteLine("Privilege: ", str_priv)
-
-        Dim idx As Integer = lvALL_user_list.FocusedItem.Text
-        With Add_user_Privilege
-            .Privilege = str_priv
-            .Save_Privilege(idx)
-        End With
-
-        priv_list.Clear()
-        privilege_chunk.Clear()
-        lvALL_user_list.Items.Clear()
-        Load_users()
-        MsgBox("Successfully Saved.", MsgBoxStyle.Information, "Save")
     End Sub
 
     Private Function IsEmpty() As Boolean
@@ -140,7 +91,6 @@
 
     End Sub
 
-  
 
     Private Sub Save()
         If Not IsValid() Then Exit Sub
@@ -174,9 +124,18 @@
             Exit Sub
         End If
 
-        Load_users()
-        ClearFields("")
-        MsgBox("Account successfully added.", MsgBoxStyle.Information, "Adding Account")
+        With Save_user
+            For Each row As DataGridViewRow In dgRulePrivilege.Rows
+                .USERID = .GETUSERID
+                .PRIVILEGE_TYPE = row.Cells(1).Value
+                .ACCESSTYPE = row.Cells(2).Value
+                .Save_Privilege(row.Cells(0).Value)
+            Next
+        End With
+
+            Load_users()
+            ClearFields("")
+            MsgBox("Account successfully added.", MsgBoxStyle.Information, "Adding Account")
     End Sub
 
     Private Sub update_user()
@@ -208,6 +167,15 @@
         If Not Save_user.Update_USER Then
             Exit Sub
         End If
+
+        With Save_user
+            For Each row As DataGridViewRow In dgRulePrivilege.Rows
+                .USERID = .GETUSERID
+                .PRIVILEGE_TYPE = row.Cells(1).Value
+                .ACCESSTYPE = row.Cells(2).Value
+                .Save_Privilege(row.Cells(0).Value)
+            Next
+        End With
 
         Load_users()
         ClearFields("")
@@ -275,11 +243,15 @@
 
         If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
         Return True
+
+        For Each row As DataGridViewRow In dgRulePrivilege.Rows
+            If row.Cells(2).Value = "" Then Exit Function
+        Next
     End Function
 
 
     Private Sub lvUserList_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUserList.DoubleClick
-        Populate_to_txtFields()
+        Load_Privileges(True)
     End Sub
 
     Private Sub Populate_to_txtFields()
@@ -303,6 +275,8 @@
                 rbFemale.Checked = True
             End If
             SYSTEM_USERID = .ID
+
+            .LOAD_USERLINE_ROWS(SYSTEM_USERID)
         End With
 
 
@@ -324,6 +298,7 @@
         rbMale.Checked = False
         GroupBox1.Enabled = True
         btnCreateAccount.Text = "&Create Account"
+        Load_Privileges(False)
     End Sub
 
     Private Sub btnCancell_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancell.Click
@@ -336,4 +311,5 @@
 
    
    
+ 
 End Class

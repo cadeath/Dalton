@@ -1,13 +1,11 @@
 ﻿Imports DeathCodez.Security
 
-''' <summary>
-''' NOTE: Privilege PDuNxp8S9q0= means SUPER USER
-''' </summary>
-''' <remarks>NOTE: Privilege PDuNxp8S9q0= means SUPER USER</remarks>
+
 Public Class Sys_user
 
     Private maintable As String = "tbl_user_default"
     Private subTable As String = "tbluser_history"
+    Private MAIN_LINE As String = "TBL_USERLINE"
     Private mySql As String = String.Empty
 
 #Region "Properties"
@@ -122,16 +120,6 @@ Public Class Sys_user
         End Set
     End Property
 
-    Private _privilege As String
-    Public Property Privilege() As String
-        Get
-            Return _privilege
-        End Get
-        Set(ByVal value As String)
-            _privilege = value
-        End Set
-    End Property
-
     Private _lastLogin As Date
     Public Property LastLogin() As Date
         Get
@@ -211,7 +199,68 @@ Public Class Sys_user
         Set(ByVal value As Date)
             _DATE_CREATED = value
         End Set
+    End Property
+    '""""""""""""""""""""""""""""""""""""""""""""""""""""""""""user line"""""""""""""""""""'''''
 
+    Private _USERLINE_ID As Integer
+    Public Property USERLINE_ID() As Integer
+        Get
+            Return _USERLINE_ID
+        End Get
+        Set(ByVal value As Integer)
+            _USERLINE_ID = value
+        End Set
+    End Property
+
+    Private _USERID As Integer
+    Public Property USERID() As Integer
+        Get
+            Return _USERID
+        End Get
+        Set(ByVal value As Integer)
+            _USERID = value
+        End Set
+    End Property
+
+    Private _PRIVILEGE_TYPE As String
+    Public Property PRIVILEGE_TYPE() As String
+        Get
+            Return _PRIVILEGE_TYPE
+        End Get
+        Set(ByVal value As String)
+            _PRIVILEGE_TYPE = value
+        End Set
+    End Property
+
+    Private _ACCESSTYPE As String
+    Public Property ACCESSTYPE() As String
+        Get
+            Return _ACCESSTYPE
+        End Get
+        Set(ByVal value As String)
+            _ACCESSTYPE = value
+        End Set
+    End Property
+
+
+    Private _DATE_CREATED_LINE As Date
+    Public Property DATE_CREATED_LINE() As Date
+        Get
+            Return _DATE_CREATED_LINE
+        End Get
+        Set(ByVal value As Date)
+            _DATE_CREATED_LINE = value
+        End Set
+    End Property
+
+    Private _DATE_UPDATED_LINE As Date
+    Public Property DATE_UPDATED_LINE() As Date
+        Get
+            Return _DATE_UPDATED_LINE
+        End Get
+        Set(ByVal value As Date)
+            _DATE_UPDATED_LINE = value
+        End Set
     End Property
 #End Region
 
@@ -239,7 +288,6 @@ Public Class Sys_user
             .Item("BIRTHDAY") = _BIRTHDAY
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
-            'Item("PRIVILEGE") = _privilege
             .Item("LASTLOGIN") = Now
             '.Item("ENCODERID") = _encoderID
             .Item("EXPIRYDATE") = Now.AddDays(Expiration_count)
@@ -275,9 +323,10 @@ Public Class Sys_user
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         If ds.Tables(0).Rows(0).Item("USERPASS") = EncryptString(_USERPASS) Then
-            MsgBox("The password you've entered is already taken." & vbCrLf & _
-                  "Please try again.", MsgBoxStyle.Critical, "Error")
-            Return False
+            Console.WriteLine("cURRENT PASSWORD")
+            'MsgBox("The password you've entered is already taken." & vbCrLf & _
+            '      "Please try again.", MsgBoxStyle.Critical, "Error")
+            'Return False
         End If
 
         If Not Check_Pass_IfExists(_ID, EncryptString(_USERPASS)) Then
@@ -297,7 +346,6 @@ Public Class Sys_user
             .Item("BIRTHDAY") = _BIRTHDAY
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
-            .Item("PRIVILEGE") = _privilege
             .Item("LASTLOGIN") = Now
             .Item("EXPIRYDATE") = Now.AddDays(90)
             .Item("SYSTEMINFO") = Now
@@ -405,7 +453,6 @@ Public Class Sys_user
             _BIRTHDAY = .Item("BIRTHDAY")
             _GENDER = .Item("GENDER")
             _AGE = .Item("AGE")
-            _privilege = IIf(IsDBNull(.Item("PRIVILEGE")), "", .Item("PRIVILEGE"))
             _lastLogin = IIf(IsDBNull(.Item("LASTLOGIN")), "", .Item("LASTLOGIN"))
             _EXPIRYDATE = .Item("EXPIRYDATE")
             _systeminfo = .Item("SYSTEMINFO")
@@ -415,14 +462,62 @@ Public Class Sys_user
     End Sub
 
     Friend Sub Save_Privilege(ByVal idx As Integer)
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", idx)
+        mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE_ID = '{0}'", idx)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
-        With ds.Tables(0).Rows(0)
-            .Item("PRIVILEGE") = _privilege
-        End With
-        database.SaveEntry(ds, False)
+        Dim isNew As Boolean
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            isNew = True
+
+            Dim dsnewrow As DataRow
+            dsnewrow = ds.Tables(0).NewRow
+            With dsnewrow
+                .Item("USERID") = idx
+                .Item("PRIVILEGE_TYPE") = _PRIVILEGE_TYPE
+                .Item("ACCESS_TYPE") = _ACCESSTYPE
+                .Item("DATE_CREATED_LINE") = Now.ToShortDateString
+                .Item("DATE_UPDATED_LINE") = Now.ToShortDateString
+            End With
+            ds.Tables(0).Rows.Add(dsnewrow)
+
+        Else
+            isNew = False
+            With ds.Tables(0).Rows(0)
+                .Item("PRIVILEGE_TYPE") = _PRIVILEGE_TYPE
+                .Item("ACCESS_TYPE") = _ACCESSTYPE
+                .Item("DATE_UPDATED_LINE") = Now.ToShortDateString
+            End With
+        End If
+        database.SaveEntry(ds, isNew)
     End Sub
+    Friend Sub LOAD_USERLINE_ROWS(ByVal IDX As Integer)
+        mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE ={}", IDX)
+        Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+            Load_userLINE_BY_Rows(dr)
+        Next
+    End Sub
+
+    Friend Sub Load_userLINE_BY_Rows(ByVal dR As DataRow)
+        On Error Resume Next
+        With dR
+            _USERLINE_ID = .Item("USERLINE_ID")
+            _USERID = .Item("USERID")
+            _PRIVILEGE_TYPE = .Item("PRIVILEGE_TYPE")
+            _ACCESSTYPE = .Item("ACCESS_TYPE")
+            _DATE_UPDATED_LINE = .Item("DATE_CREATED_LINE")
+            _DATE_CREATED_LINE = .Item("DATE_UPDATED_LINE")
+        End With
+        frmUserManagement.dgRulePrivilege.Rows.Add(_USERLINE_ID, _PRIVILEGE_TYPE, _ACCESSTYPE)
+    End Sub
+
+    Friend Function GETUSERID() As Integer
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS ='{0}'", _USERPASS)
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+        Return ds.Tables(0).Rows(0).Item("USERID")
+    End Function
 
     Friend Function CheckAccount_Expiration(ByVal u_PASS As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'"

@@ -23,17 +23,8 @@ Partial Class frmUserManagement
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.lvALL_user_list = New System.Windows.Forms.ListView()
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.dgRulePrivilege = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewComboBoxColumn = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.btnCancell = New System.Windows.Forms.Button()
         Me.lvUserList = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -44,6 +35,7 @@ Partial Class frmUserManagement
         Me.rbFemale = New System.Windows.Forms.RadioButton()
         Me.txtBirthday = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnCancell = New System.Windows.Forms.Button()
         Me.btnCreateAccount = New System.Windows.Forms.Button()
         Me.tbControl = New System.Windows.Forms.TabControl()
         Me.txtPasword1 = New UserManagementEnhancement.watermark()
@@ -54,6 +46,9 @@ Partial Class frmUserManagement
         Me.txtMiddlename = New UserManagementEnhancement.watermark()
         Me.txtFirstname = New UserManagementEnhancement.watermark()
         Me.txtUsername = New UserManagementEnhancement.watermark()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
@@ -64,122 +59,35 @@ Partial Class frmUserManagement
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.Silver
-        Me.TabPage2.Controls.Add(Me.Label5)
-        Me.TabPage2.Controls.Add(Me.lvALL_user_list)
         Me.TabPage2.Controls.Add(Me.dgRulePrivilege)
-        Me.TabPage2.Controls.Add(Me.btnCancel)
-        Me.TabPage2.Controls.Add(Me.btnSave)
         Me.TabPage2.Location = New System.Drawing.Point(4, 39)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(724, 460)
+        Me.TabPage2.Size = New System.Drawing.Size(724, 414)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Privilege"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(8, 24)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(77, 16)
-        Me.Label5.TabIndex = 12
-        Me.Label5.Text = "User Name:"
-        '
-        'lvALL_user_list
-        '
-        Me.lvALL_user_list.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader6})
-        Me.lvALL_user_list.FullRowSelect = True
-        Me.lvALL_user_list.GridLines = True
-        Me.lvALL_user_list.Location = New System.Drawing.Point(9, 45)
-        Me.lvALL_user_list.Name = "lvALL_user_list"
-        Me.lvALL_user_list.Size = New System.Drawing.Size(277, 366)
-        Me.lvALL_user_list.TabIndex = 11
-        Me.lvALL_user_list.UseCompatibleStateImageBehavior = False
-        Me.lvALL_user_list.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "#"
-        Me.ColumnHeader5.Width = 31
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Name"
-        Me.ColumnHeader6.Width = 237
         '
         'dgRulePrivilege
         '
         Me.dgRulePrivilege.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgRulePrivilege.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.DataGridViewComboBoxColumn})
-        Me.dgRulePrivilege.Location = New System.Drawing.Point(292, 45)
+        Me.dgRulePrivilege.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
+        Me.dgRulePrivilege.Location = New System.Drawing.Point(135, 5)
         Me.dgRulePrivilege.Name = "dgRulePrivilege"
         Me.dgRulePrivilege.RowHeadersVisible = False
-        Me.dgRulePrivilege.Size = New System.Drawing.Size(427, 366)
+        Me.dgRulePrivilege.Size = New System.Drawing.Size(433, 402)
         Me.dgRulePrivilege.TabIndex = 0
-        '
-        'Column1
-        '
-        Me.Column1.Frozen = True
-        Me.Column1.HeaderText = "Privilege Type"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 220
-        '
-        'DataGridViewComboBoxColumn
-        '
-        Me.DataGridViewComboBoxColumn.HeaderText = "Access Type"
-        Me.DataGridViewComboBoxColumn.Items.AddRange(New Object() {"No Access", "Read Only", "Full Access"})
-        Me.DataGridViewComboBoxColumn.Name = "DataGridViewComboBoxColumn"
-        Me.DataGridViewComboBoxColumn.Width = 200
-        '
-        'btnCancel
-        '
-        Me.btnCancel.BackColor = System.Drawing.Color.White
-        Me.btnCancel.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(575, 417)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(144, 37)
-        Me.btnCancel.TabIndex = 6
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = False
-        '
-        'btnSave
-        '
-        Me.btnSave.BackColor = System.Drawing.Color.White
-        Me.btnSave.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(427, 420)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(144, 37)
-        Me.btnSave.TabIndex = 5
-        Me.btnSave.Text = "Save rules"
-        Me.btnSave.UseVisualStyleBackColor = False
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.btnCancell)
         Me.TabPage1.Controls.Add(Me.lvUserList)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
-        Me.TabPage1.Controls.Add(Me.btnCreateAccount)
         Me.TabPage1.Location = New System.Drawing.Point(4, 39)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(724, 460)
+        Me.TabPage1.Size = New System.Drawing.Size(724, 414)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Registration"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'btnCancell
-        '
-        Me.btnCancell.BackColor = System.Drawing.Color.White
-        Me.btnCancell.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancell.Location = New System.Drawing.Point(501, 402)
-        Me.btnCancell.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.btnCancell.Name = "btnCancell"
-        Me.btnCancell.Size = New System.Drawing.Size(202, 37)
-        Me.btnCancell.TabIndex = 19
-        Me.btnCancell.Text = "&Cancel"
-        Me.btnCancell.UseVisualStyleBackColor = False
         '
         'lvUserList
         '
@@ -188,7 +96,7 @@ Partial Class frmUserManagement
         Me.lvUserList.GridLines = True
         Me.lvUserList.Location = New System.Drawing.Point(3, 18)
         Me.lvUserList.Name = "lvUserList"
-        Me.lvUserList.Size = New System.Drawing.Size(275, 421)
+        Me.lvUserList.Size = New System.Drawing.Size(275, 368)
         Me.lvUserList.TabIndex = 1
         Me.lvUserList.UseCompatibleStateImageBehavior = False
         Me.lvUserList.View = System.Windows.Forms.View.Details
@@ -292,11 +200,23 @@ Partial Class frmUserManagement
         Me.Label1.TabIndex = 14
         Me.Label1.Text = "Birthday"
         '
+        'btnCancell
+        '
+        Me.btnCancell.BackColor = System.Drawing.Color.White
+        Me.btnCancell.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancell.Location = New System.Drawing.Point(538, 474)
+        Me.btnCancell.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.btnCancell.Name = "btnCancell"
+        Me.btnCancell.Size = New System.Drawing.Size(202, 37)
+        Me.btnCancell.TabIndex = 19
+        Me.btnCancell.Text = "&Cancel"
+        Me.btnCancell.UseVisualStyleBackColor = False
+        '
         'btnCreateAccount
         '
         Me.btnCreateAccount.BackColor = System.Drawing.Color.White
         Me.btnCreateAccount.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCreateAccount.Location = New System.Drawing.Point(295, 402)
+        Me.btnCreateAccount.Location = New System.Drawing.Point(332, 474)
         Me.btnCreateAccount.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.btnCreateAccount.Name = "btnCreateAccount"
         Me.btnCreateAccount.Size = New System.Drawing.Size(202, 37)
@@ -313,7 +233,7 @@ Partial Class frmUserManagement
         Me.tbControl.Name = "tbControl"
         Me.tbControl.Padding = New System.Drawing.Point(20, 10)
         Me.tbControl.SelectedIndex = 0
-        Me.tbControl.Size = New System.Drawing.Size(732, 503)
+        Me.tbControl.Size = New System.Drawing.Size(732, 457)
         Me.tbControl.TabIndex = 5
         '
         'txtPasword1
@@ -391,16 +311,36 @@ Partial Class frmUserManagement
         Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
         Me.txtUsername.WatermarkText = "Username"
         '
+        'Column1
+        '
+        Me.Column1.HeaderText = "#"
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 30
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "PRIVILEGE TYPE"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 220
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "ACCESS TYPE"
+        Me.Column3.Items.AddRange(New Object() {"Full Access", "Read Only", "No Access"})
+        Me.Column3.Name = "Column3"
+        Me.Column3.Width = 180
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(754, 527)
+        Me.Controls.Add(Me.btnCancell)
         Me.Controls.Add(Me.tbControl)
+        Me.Controls.Add(Me.btnCreateAccount)
         Me.Name = "frmUserManagement"
         Me.Text = "User Management"
         Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
         CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
@@ -410,13 +350,7 @@ Partial Class frmUserManagement
 
     End Sub
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents lvALL_user_list As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents dgRulePrivilege As System.Windows.Forms.DataGridView
-    Friend WithEvents btnCancel As System.Windows.Forms.Button
-    Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents btnCancell As System.Windows.Forms.Button
     Friend WithEvents lvUserList As System.Windows.Forms.ListView
@@ -440,6 +374,7 @@ Partial Class frmUserManagement
     Friend WithEvents btnCreateAccount As System.Windows.Forms.Button
     Friend WithEvents tbControl As System.Windows.Forms.TabControl
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewComboBoxColumn As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewComboBoxColumn
 
 End Class

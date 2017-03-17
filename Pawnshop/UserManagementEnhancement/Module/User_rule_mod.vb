@@ -8,8 +8,7 @@
         Dim TBL_USERRULE As String
         TBL_USERRULE = "CREATE TABLE TBL_USERRULE ("
         TBL_USERRULE &= vbCrLf & "  USERRULE_ID BIGINT NOT NULL,"
-        TBL_USERRULE &= vbCrLf & "   PRIVILEGE_TYPE VARCHAR(50) NOT NULL,"
-        TBL_USERRULE &= vbCrLf & "  ACCESS_TYPE VARCHAR(15) NOT NULL);"
+        TBL_USERRULE &= vbCrLf & "   PRIVILEGE_TYPE VARCHAR(50) NOT NULL);"
 
 
         Try
@@ -22,6 +21,30 @@
 
     End Sub
 
+    Friend Sub Create_User_LINE()
+        If ifTblExist("TBL_USERLINE") Then
+            Exit Sub
+        End If
+
+        Dim TBL_USERRULE As String
+        TBL_USERRULE = "CREATE TABLE TBL_USERLINE ("
+        TBL_USERRULE &= vbCrLf & "  USERLINE_ID BIGINT NOT NULL,"
+        TBL_USERRULE &= vbCrLf & "   USERID INTEGER NOT NULL,"
+        TBL_USERRULE &= vbCrLf & "   PRIVILEGE_TYPE VARCHAR(50) NOT NULL,"
+        TBL_USERRULE &= vbCrLf & "  ACCESS_TYPE VARCHAR(15) NOT NULL,"
+        TBL_USERRULE &= vbCrLf & "  DATE_UPDATED_LINE DATE NOT NULL,"
+        TBL_USERRULE &= vbCrLf & "  DATE_CREATED_LINE DATE NOT NULL);"
+
+        Try
+            RunCommand(TBL_USERRULE)
+            AutoIncrement_ID("TBL_USERLINE", "USERLINE_ID")
+        Catch ex As Exception
+            Console.WriteLine("Sql error.")
+            Exit Sub
+        End Try
+
+    End Sub
+    'is expire field to be added
     Friend Sub Create_User_table()
         If ifTblExist("TBL_USER_DEFAULT") Then
             Exit Sub
