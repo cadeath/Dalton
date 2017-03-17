@@ -221,7 +221,7 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.ShowDialog()
+            diagGeneralOTP.Show()
             diagGeneralOTP.TopMost = True
             If Not diagGeneralOTP.isCorrect Then
                 Exit Sub
