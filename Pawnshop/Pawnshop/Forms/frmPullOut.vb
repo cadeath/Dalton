@@ -159,9 +159,8 @@
             pt.PullOut(CurrentDate)
 
             mySql = "Select * From PulloutLines"
-            fillData = "PulloutLines"
-            ds = LoadSQL(mySql, fillData)
-            dsNewRow = ds.Tables(fillData).NewRow
+            ds = LoadSQL(mySql, "PulloutLines")
+            dsNewRow = ds.Tables("PulloutLines").NewRow
             With dsNewRow
                 .Item("DocID") = LastID
                 .Item("Pawnticket") = pt.PawnTicket
@@ -172,11 +171,13 @@
                 .Item("PawnerName") = String.Format("{0} {1}" & IIf(pt.Pawner.Suffix <> "", "," & pt.Pawner.Suffix, ""), pt.Pawner.FirstName, pt.Pawner.LastName)
                 .Item("Appraiser") = GetAppraiserName(pt.AppraiserID)
             End With
-            ds.Tables(fillData).Rows.Add(dsNewRow)
+            ds.Tables("PulloutLines").Rows.Add(dsNewRow)
             database.SaveEntry(ds, True)
         Next
+
         Dim Count As Integer = GetOption("PulloutNum")
         Count += 1
+
         UpdateOptions("PulloutNum", Count)
         MsgBox("Items has been pull out", MsgBoxStyle.Information)
         Me.Close()
