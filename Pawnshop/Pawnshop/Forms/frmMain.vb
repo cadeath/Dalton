@@ -516,8 +516,9 @@ Public Class frmMain
         OTPItemPullout_Initialization()
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.Show()
-            If Not diagGeneralOTP.isCorrect Then
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 qryPullOut.Show()

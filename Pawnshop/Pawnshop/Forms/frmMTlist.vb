@@ -118,9 +118,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.Show()
             diagGeneralOTP.TopMost = True
-            If Not diagGeneralOTP.isCorrect Then
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 VoidMoneyTransfer()

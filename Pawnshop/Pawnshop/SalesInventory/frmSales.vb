@@ -348,8 +348,9 @@ Public Class frmSales
                 OTPStockOut_Initialization()
 
                 diagGeneralOTP.GeneralOTP = OtpSettings
+                diagGeneralOTP.TopMost = True
                 diagGeneralOTP.ShowDialog()
-                If Not diagGeneralOTP.isCorrect Then
+                If Not diagGeneralOTP.isValid Then
                     Exit Sub
                 End If
             End If

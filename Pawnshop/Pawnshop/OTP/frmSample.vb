@@ -5,8 +5,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 frmSettings.Show()
@@ -20,8 +21,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 frmPawningItemNew.Show()
@@ -35,8 +37,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 frmInsurance.Show()
@@ -50,8 +53,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 frmBorrowBrowse.Show()
@@ -65,8 +69,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 frmMoneyTransfer.Show()
@@ -80,8 +85,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 frmmoneyexchange.Show()
@@ -95,8 +101,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 frmCashCountV2.Show()
@@ -110,8 +117,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 qryPullOut.Show()
@@ -125,8 +133,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 frmUserManagement.Show()
