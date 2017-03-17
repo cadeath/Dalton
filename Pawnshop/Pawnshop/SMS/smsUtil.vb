@@ -5,6 +5,7 @@ Imports OneApi.Config
 
 Module smsUtil
 
+    Private _active As Boolean = False
     Private _smsUser As String = "Eskie"
     Private _smsPassword As String = "eskiegwapo123"
     Private _smsSender As String = "DALTON"
@@ -18,6 +19,8 @@ Module smsUtil
             MsgBox("SMS Initialization not yet ready", MsgBoxStyle.Critical)
             Return "FAILED"
         End If
+
+        If Not _active Then Return "NOT ACTIVE"
         Dim config As New Configuration(_smsUser, _smsPassword)
         Dim smsClient As New OneApi.Client.Impl.SMSClient(config)
 

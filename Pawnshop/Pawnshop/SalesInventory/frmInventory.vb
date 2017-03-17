@@ -58,7 +58,7 @@ Public Class frmInventory
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
         Dim ptuFile As String
-        Dim vText As String, vstring(-1) As String
+        Dim vText As String = "", vstring(-1) As String
         Dim idx As Integer = 1, tmpDocID As Integer = 0
         WhsCode = "" : STODate = Nothing
 

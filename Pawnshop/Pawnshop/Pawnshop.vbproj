@@ -858,6 +858,12 @@
     <Compile Include="SMS\diagChangeNum.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SMS\frmSMSInfo.Designer.vb">
+      <DependentUpon>frmSMSInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\frmSMSInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SMS\frmSMSnotice.Designer.vb">
       <DependentUpon>frmSMSnotice.vb</DependentUpon>
     </Compile>
@@ -1312,6 +1318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SMS\diagChangeNum.resx">
       <DependentUpon>diagChangeNum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SMS\frmSMSInfo.resx">
+      <DependentUpon>frmSMSInfo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SMS\frmSMSnotice.resx">
       <DependentUpon>frmSMSnotice.vb</DependentUpon>
