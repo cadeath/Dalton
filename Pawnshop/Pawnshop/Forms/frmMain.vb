@@ -516,7 +516,7 @@ Public Class frmMain
         OTPItemPullout_Initialization()
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
-            diagGeneralOTP.ShowDialog()
+            diagGeneralOTP.Show()
             If Not diagGeneralOTP.isCorrect Then
                 Exit Sub
             Else
