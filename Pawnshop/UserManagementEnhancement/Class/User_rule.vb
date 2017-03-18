@@ -48,7 +48,6 @@ Public Class User_rule
         If ds.Tables(0).Rows.Count > 0 Then
             With ds.Tables(0).Rows(0)
                 .Item("Privilege_type") = _Privilege_Type
-                .Item("Access_Type") = _Access_Type
             End With
             database.SaveEntry(ds, False)
             Exit Sub
@@ -58,7 +57,6 @@ Public Class User_rule
         dsnewRow = ds.Tables(fillData).NewRow
         With dsnewRow
             .Item("Privilege_type") = _Privilege_Type
-            .Item("Access_Type") = _Access_Type
         End With
         ds.Tables(0).Rows.Add(dsnewRow)
         database.SaveEntry(ds)

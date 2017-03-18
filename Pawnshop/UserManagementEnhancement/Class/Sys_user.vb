@@ -435,7 +435,7 @@ Public Class Sys_user
         Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT WHERE USERID = '" & id & "'"
         Dim ds As DataSet = LoadSQL(mysql, "TBL_USER_DEFAULT")
 
-        Load_user_All_Rows(ds.Tables(0).Rows(0))
+        Load_user_All_Rows(ds.Tables(maintable).Rows(0))
     End Sub
 
     Friend Sub Load_user_All_Rows(ByVal dR As DataRow)
@@ -463,27 +463,27 @@ Public Class Sys_user
 
     Friend Sub Save_Privilege(ByVal idx As Integer)
         mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE_ID = '{0}'", idx)
-        Dim ds As DataSet = LoadSQL(mySql, maintable)
+        Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
 
         Dim isNew As Boolean
 
-        If ds.Tables(0).Rows.Count = 0 Then
+        If ds.Tables(MAIN_LINE).Rows.Count = 0 Then
             isNew = True
 
             Dim dsnewrow As DataRow
-            dsnewrow = ds.Tables(0).NewRow
+            dsnewrow = ds.Tables(MAIN_LINE).NewRow
             With dsnewrow
-                .Item("USERID") = idx
+                .Item("USERID") = _USERID
                 .Item("PRIVILEGE_TYPE") = _PRIVILEGE_TYPE
                 .Item("ACCESS_TYPE") = _ACCESSTYPE
                 .Item("DATE_CREATED_LINE") = Now.ToShortDateString
                 .Item("DATE_UPDATED_LINE") = Now.ToShortDateString
             End With
-            ds.Tables(0).Rows.Add(dsnewrow)
+            ds.Tables(MAIN_LINE).Rows.Add(dsnewrow)
 
         Else
             isNew = False
-            With ds.Tables(0).Rows(0)
+            With ds.Tables(MAIN_LINE).Rows(0)
                 .Item("PRIVILEGE_TYPE") = _PRIVILEGE_TYPE
                 .Item("ACCESS_TYPE") = _ACCESSTYPE
                 .Item("DATE_UPDATED_LINE") = Now.ToShortDateString
@@ -491,8 +491,9 @@ Public Class Sys_user
         End If
         database.SaveEntry(ds, isNew)
     End Sub
+
     Friend Sub LOAD_USERLINE_ROWS(ByVal IDX As Integer)
-        mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE ={}", IDX)
+        mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERID ={0}", IDX)
         Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
 
         For Each dr As DataRow In ds.Tables(0).Rows

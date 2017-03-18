@@ -10,10 +10,18 @@
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtUsername.Focus()
+
+        User_rule_mod.Create_User_Rule_Table()
+        populate_priv()
+
+        Load_Privileges(False)
+
+        VERIFY_EXPIRATION()
+
         If Not ifTblExist("TBL_USER_DEFAULT") Then
             Exit Sub
         End If
-        Load_Privileges(False)
+
         Load_users()
     End Sub
 
@@ -34,20 +42,34 @@
     Private Sub Create()
         User_rule_mod.Create_User_table()
         User_rule_mod.Create_User_history()
-        User_rule_mod.Create_User_Rule_Table()
         User_rule_mod.Create_User_LINE()
+    End Sub
+
+    Private Sub populate_priv()
+        Dim ID As Integer() = {1, 2, 3}
+        Dim PRIVILEGE_TYPE As String() = {"Pawning", "Usermanagment", "Money Transfer"}
+
+        Dim populate_privs As New User_rule
+        For i As Integer = 0 To 2
+            With populate_privs
+                .ID = ID(i)
+                .Privilege_Type = PRIVILEGE_TYPE(i)
+                .adpri_Save(.Privilege_Type)
+            End With
+        Next
+        Console.WriteLine("Privilege successfulle added to tbl_user_rule")
     End Sub
 
     Private Sub Load_Privileges(ByVal IS_UPDATE As Boolean)
 
         If IS_UPDATE = False Then
-            Dim mysql As String = "SELECT * FROM TBL_USERRULE"
+            Dim mysql As String = "SELECT * FROM TBL_USERRULE ORDER BY USERRULE_ID"
             Dim ds As DataSet = LoadSQL(mysql, "TBL_USERRULE")
 
             Try
                 dgRulePrivilege.Rows.Clear()
                 For Each dr As DataRow In ds.Tables(0).Rows
-                    dgRulePrivilege.Rows.Add(dr.Item("Privilege_Type"), dr.Item("Access_Type"))
+                    dgRulePrivilege.Rows.Add(dr.Item("USERRULE_ID"), dr.Item("Privilege_Type"))
                 Next
             Catch ex As Exception
 
@@ -129,6 +151,8 @@
                 .USERID = .GETUSERID
                 .PRIVILEGE_TYPE = row.Cells(1).Value
                 .ACCESSTYPE = row.Cells(2).Value
+
+                If .PRIVILEGE_TYPE = "" Then Exit For
                 .Save_Privilege(row.Cells(0).Value)
             Next
         End With
@@ -237,16 +261,17 @@
 
         If txtContactnumber.Text <> "" Then
             If txtContactnumber.TextLength < 11 Then MsgBox("Contact Number is not less than 11 digit.", MsgBoxStyle.Exclamation, "Warning") : txtContactnumber.Focus() : Return False
-        Else
-            Return True
         End If
 
-        If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
-        Return True
+        If dgRulePrivilege.Rows.Count = 0 Then Return False
 
         For Each row As DataGridViewRow In dgRulePrivilege.Rows
-            If row.Cells(2).Value = "" Then Exit Function
+            If row.Cells(2).Value = "" Then Return False
         Next
+
+        If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
+
+        Return True
     End Function
 
 
@@ -276,6 +301,7 @@
             End If
             SYSTEM_USERID = .ID
 
+            dgRulePrivilege.Rows.Clear()
             .LOAD_USERLINE_ROWS(SYSTEM_USERID)
         End With
 
@@ -310,6 +336,15 @@
     End Sub
 
    
-   
- 
+
+    Private Sub CHKISEXPIRED_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CHKISEXPIRED.CheckedChanged
+        VERIFY_EXPIRATION()
+    End Sub
+
+    Private Sub VERIFY_EXPIRATION()
+        If CHKISEXPIRED.Checked = False Then
+            txtAddDays.Enabled = False : Exit Sub
+        End If
+        txtAddDays.Enabled = True
+    End Sub
 End Class
