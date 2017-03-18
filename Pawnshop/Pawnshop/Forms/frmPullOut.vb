@@ -1,4 +1,6 @@
-﻿Public Class qryPullOut
+﻿Imports Microsoft.Reporting.WinForms
+
+Public Class qryPullOut
 
     Private fillData As String = "OPT"
     Private mySql As String = ""
@@ -95,7 +97,7 @@
     End Sub
 
     Private Sub btnGetPull_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGetPull.Click
-        If lvPullOut.items.Count <= 0 Then Exit Sub
+        If lvPullOut.Items.Count <= 0 Then Exit Sub
 
         Dim idx As Integer = lvPullOut.FocusedItem.Tag
         Dim segPT As New PawnTicket2
@@ -180,6 +182,10 @@
 
         UpdateOptions("PulloutNum", Count)
         MsgBox("Items has been pull out", MsgBoxStyle.Information)
+
+        If MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + _
+                  MsgBoxStyle.DefaultButton2, "Print") = MsgBoxResult.No Then Exit Sub
+        PrintPullout()
         Me.Close()
     End Sub
 
@@ -214,4 +220,20 @@
         Dim ds As DataSet = LoadSQL(mySql, fillData)
         Return ds.Tables(0).Rows(0).Item("FullName")
     End Function
+
+    Private Sub PrintPullout()
+        mySql = " Select PL.Pawnticket, PL.Loandate, PL.ExpiryDate, PL.PawnerName, PL.Description, PL.Appraiser, PD.DocDate as WithDrawDate, "
+        mySql &= "From PulloutDoc PD "
+        mySql &= "Inner Join PullLines PL on PL.DocID = PD.DocID  Where PD.DocDate = '" & CurrentDate & "'"
+
+        Dim dsName As String = "dsPullOut"
+        Dim addParameters As New Dictionary(Of String, String)
+
+        addParameters.Add("txtMonthOf", "DATE: " & CurrentDate)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", addParameters)
+        frmReport.Show()
+    End Sub
+
 End Class
