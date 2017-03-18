@@ -24,7 +24,7 @@ Partial Class frmSMSInfo
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnSearch = New System.Windows.Forms.Button()
-        Me.lblAuction = New System.Windows.Forms.Label()
+        Me.lblExpiry = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.lblMatu = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -40,13 +40,17 @@ Partial Class frmSMSInfo
         Me.lblSMSdate = New System.Windows.Forms.Label()
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.lblAuction = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.lblAuction)
+        Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.btnSearch)
+        Me.GroupBox1.Controls.Add(Me.lblExpiry)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.lblMatu)
         Me.GroupBox1.Controls.Add(Me.Label6)
@@ -58,7 +62,7 @@ Partial Class frmSMSInfo
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(350, 138)
+        Me.GroupBox1.Size = New System.Drawing.Size(350, 159)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Pawn Info"
@@ -72,17 +76,17 @@ Partial Class frmSMSInfo
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
-        'lblAuction
+        'lblExpiry
         '
-        Me.lblAuction.BackColor = System.Drawing.Color.White
-        Me.lblAuction.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblAuction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAuction.Location = New System.Drawing.Point(96, 109)
-        Me.lblAuction.Name = "lblAuction"
-        Me.lblAuction.Size = New System.Drawing.Size(248, 20)
-        Me.lblAuction.TabIndex = 11
-        Me.lblAuction.Text = "Eskie Maquilang"
-        Me.lblAuction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblExpiry.BackColor = System.Drawing.Color.White
+        Me.lblExpiry.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblExpiry.Location = New System.Drawing.Point(96, 109)
+        Me.lblExpiry.Name = "lblExpiry"
+        Me.lblExpiry.Size = New System.Drawing.Size(248, 20)
+        Me.lblExpiry.TabIndex = 11
+        Me.lblExpiry.Text = "Eskie Maquilang"
+        Me.lblExpiry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label8
         '
@@ -90,9 +94,9 @@ Partial Class frmSMSInfo
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(6, 111)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(87, 16)
+        Me.Label8.Size = New System.Drawing.Size(80, 16)
         Me.Label8.TabIndex = 10
-        Me.Label8.Text = "Auction Date:"
+        Me.Label8.Text = "Expiry Date:"
         '
         'lblMatu
         '
@@ -198,7 +202,6 @@ Partial Class frmSMSInfo
         Me.lblSMS.Size = New System.Drawing.Size(248, 99)
         Me.lblSMS.TabIndex = 10
         Me.lblSMS.Text = "Eskie Maquilang"
-        Me.lblSMS.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label11
         '
@@ -239,12 +242,34 @@ Partial Class frmSMSInfo
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
         '
+        'lblAuction
+        '
+        Me.lblAuction.BackColor = System.Drawing.Color.White
+        Me.lblAuction.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblAuction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAuction.Location = New System.Drawing.Point(96, 131)
+        Me.lblAuction.Name = "lblAuction"
+        Me.lblAuction.Size = New System.Drawing.Size(248, 20)
+        Me.lblAuction.TabIndex = 14
+        Me.lblAuction.Text = "Eskie Maquilang"
+        Me.lblAuction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(6, 133)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(87, 16)
+        Me.Label5.TabIndex = 13
+        Me.Label5.Text = "Auction Date:"
+        '
         'frmSMSInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(709, 166)
+        Me.ClientSize = New System.Drawing.Size(709, 175)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.lblSMSdate)
@@ -265,7 +290,7 @@ Partial Class frmSMSInfo
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
-    Friend WithEvents lblAuction As System.Windows.Forms.Label
+    Friend WithEvents lblExpiry As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents lblMatu As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
@@ -281,4 +306,6 @@ Partial Class frmSMSInfo
     Friend WithEvents lblSMSdate As System.Windows.Forms.Label
     Friend WithEvents btnPrint As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents lblAuction As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

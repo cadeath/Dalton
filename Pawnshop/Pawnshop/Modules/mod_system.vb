@@ -615,6 +615,44 @@ Module mod_system
         Return True
     End Function
 
+    ''' <summary>
+    ''' This method will separate the phone number.
+    ''' </summary>
+    ''' <param name="PhoneField"></param>
+    ''' <param name="e"></param>
+    ''' <param name="isPhone"></param>
+    ''' <remarks></remarks>
+    Friend Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
+        Dim charPos() As Integer = {}
+        If PhoneField.Text = Nothing Then Return
+
+        Select Case PhoneField.Text.Substring(0, 1)
+            Case "0"
+                charPos = {4, 8}
+            Case "9"
+                charPos = {3, 7} '922-797-7559
+            Case "+"
+                charPos = {3, 7, 11} '+63-919-797-7559
+            Case "6"
+                charPos = {2, 6, 10} '63-919-797-7559
+        End Select
+        If isPhone Then
+            Select Case PhoneField.Text.Substring(0, 1)
+                Case "0"
+                    charPos = {3, 7}
+                Case Else
+                    charPos = {2, 6}
+            End Select
+        End If
+
+        For Each pos In charPos
+            If PhoneField.TextLength = pos And Not e.KeyChar = vbBack Then
+                PhoneField.Text &= "-"
+                PhoneField.SelectionStart = pos + 1
+            End If
+        Next
+    End Sub
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()

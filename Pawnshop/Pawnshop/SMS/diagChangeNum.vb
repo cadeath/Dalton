@@ -26,4 +26,8 @@
         Me.Close()
     End Sub
 
+    Private Sub txtNewNumber_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtNewNumber.KeyPress
+        DigitOnly(e)
+        PhoneSeparator(txtNewNumber, e)
+    End Sub
 End Class
