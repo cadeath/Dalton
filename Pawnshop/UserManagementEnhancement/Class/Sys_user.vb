@@ -160,33 +160,43 @@ Public Class Sys_user
         End Set
     End Property
 
-    Private _EXPIRYDATE As Date
-    Public Property EXPIRYDATE() As Date
+    Private _PASSWORD_AGE As Date
+    Public Property PASSWORD_AGE() As Date
         Get
-            Return _EXPIRYDATE
+            Return _PASSWORD_AGE
         End Get
         Set(ByVal value As Date)
-            _EXPIRYDATE = value
+            _PASSWORD_AGE = value
         End Set
     End Property
 
-    Private _ISEXPIRED As Boolean
-    Public Property ISEXPIRED() As Boolean
+    Private _ISEXPIRED As Integer
+    Public Property ISEXPIRED() As Integer
         Get
             Return _ISEXPIRED
         End Get
-        Set(ByVal value As Boolean)
+        Set(ByVal value As Integer)
             _ISEXPIRED = value
         End Set
     End Property
 
-    Private _DAYSCOUNT As Integer
-    Public Property DAYSCOUNT() As Integer
+    Private _HasFailed_attemp As Integer
+    Public Property HasFailed_attemp() As Integer
         Get
-            Return _DAYSCOUNT
+            Return _HasFailed_attemp
         End Get
         Set(ByVal value As Integer)
-            _DAYSCOUNT = value
+            _HasFailed_attemp = value
+        End Set
+    End Property
+
+    Private _PASSWORD_EXPIRY As Date
+    Public Property PASSWORD_EXPIRY() As Date
+        Get
+            Return _PASSWORD_EXPIRY
+        End Get
+        Set(ByVal value As Date)
+            _PASSWORD_EXPIRY = value
         End Set
     End Property
     '""""""""""""""""""""""""""""""''''''''''''''''''Subtable''''''''""""""""""""""""
@@ -276,7 +286,7 @@ Public Class Sys_user
 
 #Region "Procedures and Functions"
 
-    Friend Function add_USER() As Boolean
+    Friend Function add_USER(Optional ByVal IS_EXPIRE As Boolean = True) As Boolean
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
@@ -300,10 +310,11 @@ Public Class Sys_user
             .Item("AGE") = _AGE
             .Item("LASTLOGIN") = Now
             '.Item("ENCODERID") = _encoderID
-            .Item("EXPIRYDATE") = Now.AddDays(Expiration_count)
+            .Item("PASSWORD_AGE") = Now.AddDays(PASSWORD_AGE_COUNT)
             .Item("SYSTEMINFO") = Now
-            .Item("DAYS_COUNT") = D_deactivate
-            .Item("ISEXPIRED") = ISEXPIRED
+            .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
+            .Item("ISEXPIRED") = _ISEXPIRED
+            .Item("HasField_attemp") = _HasFailed_attemp
             .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
@@ -328,16 +339,14 @@ Public Class Sys_user
         Return True
     End Function
 
-    Friend Function Update_USER() As Boolean
-        _ID = SYSTEM_USERID
+    Friend Function Update_USER(Optional ByVal IS_EXPIRE As Boolean = True) As Boolean
+
+
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", _ID)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         If ds.Tables(0).Rows(0).Item("USERPASS") = EncryptString(_USERPASS) Then
             Console.WriteLine("cURRENT PASSWORD")
-            'MsgBox("The password you've entered is already taken." & vbCrLf & _
-            '      "Please try again.", MsgBoxStyle.Critical, "Error")
-            'Return False
         End If
 
         If Not Check_Pass_IfExists(_ID, EncryptString(_USERPASS)) Then
@@ -358,11 +367,12 @@ Public Class Sys_user
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
             .Item("LASTLOGIN") = Now
-            .Item("EXPIRYDATE") = Now.AddDays(90)
+            .Item("PASSWORD_AGE") = Now.AddDays(90)
             .Item("SYSTEMINFO") = Now
-            .Item("DAYS_COUNT") = D_deactivate
+            .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "")
             .Item("ISEXPIRED") = ISEXPIRED
-            .Item("STATUS") = 1
+            .Item("HasField_attemp") = _HasFailed_attemp
+            .Item("STATUS") = _UserStatus
         End With
         database.SaveEntry(ds, False)
 
@@ -466,9 +476,9 @@ Public Class Sys_user
             _GENDER = .Item("GENDER")
             _AGE = .Item("AGE")
             _lastLogin = IIf(IsDBNull(.Item("LASTLOGIN")), "", .Item("LASTLOGIN"))
-            _EXPIRYDATE = .Item("EXPIRYDATE")
+            _PASSWORD_AGE = .Item("PASSWORD_AGE")
             _systeminfo = .Item("SYSTEMINFO")
-            _DAYSCOUNT = .Item("DAYS_COUNT")
+            _PASSWORD_EXPIRY = .Item("PASSWORD_EXPIRY")
             _ISEXPIRED = .Item("ISEXPIRED")
             _UserStatus = .Item("STATUS")
         End With
@@ -538,7 +548,7 @@ Public Class Sys_user
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         With ds.Tables(0).Rows(0)
-            If .Item("EXPIRYDATE") = Now.ToShortDateString Then
+            If .Item("PASSWORD_AGE") = Now.ToShortDateString Then
                 MsgBox("Your account has been expired," & vbCrLf & _
                        "Please Contact ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
                 Return False
@@ -562,7 +572,7 @@ Public Class Sys_user
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         With ds.Tables(0).Rows(0)
-            .Item("DAYS_COUNT") = D_deactivate
+            .Item("PASSWORD_EXPIRY") = PASSWORD_EXPIRY_COUNT
         End With
         database.SaveEntry(ds, False)
         Console.WriteLine("Max Days updated.")

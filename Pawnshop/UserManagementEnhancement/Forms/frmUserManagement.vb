@@ -10,6 +10,7 @@
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtUsername.Focus()
+        ChkInactivateUser.Visible = False
 
         User_rule_mod.Create_User_Rule_Table()
         populate_priv()
@@ -140,10 +141,32 @@
                 .GENDER = rbMale.Text
             End If
             .AGE = GetCurrentAge(txtBirthday.Text)
+
+            PASSWORD_AGE_COUNT = txtPasswordAge.Text
+
+
+            If chkIsHasFailed_attemp.Checked = True Then
+                .HasFailed_attemp = 1
+            Else
+                .HasFailed_attemp = 0
+            End If
+
+            If CHKISEXPIRED.Checked = True Then
+                PASSWORD_EXPIRY_COUNT = txtAddDays.Text
+                .ISEXPIRED = 1
+            Else
+                .ISEXPIRED = 0
+            End If
         End With
 
-        If Not Save_user.add_USER Then
-            Exit Sub
+        If CHKISEXPIRED.Checked = True Then
+            If Not Save_user.add_USER() Then
+                Exit Sub
+            End If
+        Else
+            If Not Save_user.add_USER(False) Then
+                Exit Sub
+            End If
         End If
 
         With Save_user
@@ -171,6 +194,7 @@
         num = num.Replace("-", "")
 
         With Save_user
+            .ID = lvUserList.FocusedItem.Text
             .USERNAME = txtUsername.Text
             .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
@@ -186,6 +210,22 @@
                 .GENDER = rbMale.Text
             End If
             .AGE = GetCurrentAge(txtBirthday.Text)
+
+            PASSWORD_AGE_COUNT = txtPasswordAge.Text
+
+
+            If chkIsHasFailed_attemp.Checked = True Then
+                .HasFailed_attemp = 1
+            Else
+                .HasFailed_attemp = 0
+            End If
+
+            If CHKISEXPIRED.Checked = True Then
+                PASSWORD_EXPIRY_COUNT = txtAddDays.Text
+                .ISEXPIRED = 1
+            Else
+                .ISEXPIRED = 0
+            End If
         End With
 
         If Not Save_user.Update_USER Then
@@ -268,6 +308,7 @@
         For Each row As DataGridViewRow In dgRulePrivilege.Rows
             If row.Cells(2).Value = "" Then Return False
         Next
+        If txtPasswordAge.Text = "" Then txtPasswordAge.Focus() : Return False
 
         If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
 
@@ -299,6 +340,24 @@
             Else
                 rbFemale.Checked = True
             End If
+
+            If .PASSWORD_EXPIRY <> "01/01/0001" Then
+                txtAddDays.Text = (Now.AddDays(-7).Subtract(.PASSWORD_AGE)).TotalDays
+            End If
+            txtPasswordAge.Text = (Now.AddDays(-7).Subtract(.PASSWORD_AGE)).TotalDays
+
+            If .ISEXPIRED = 1 Then
+                CHKISEXPIRED.Checked = True
+            Else
+                CHKISEXPIRED.Checked = False
+            End If
+
+            If .HasFailed_attemp = 1 Then
+                chkIsHasFailed_attemp.Checked = True
+            Else
+                chkIsHasFailed_attemp.Checked = False
+            End If
+
             SYSTEM_USERID = .ID
 
             dgRulePrivilege.Rows.Clear()
