@@ -170,6 +170,16 @@ Public Class Sys_user
         End Set
     End Property
 
+    Private _ISEXPIRED As Boolean
+    Public Property ISEXPIRED() As Boolean
+        Get
+            Return _ISEXPIRED
+        End Get
+        Set(ByVal value As Boolean)
+            _ISEXPIRED = value
+        End Set
+    End Property
+
     Private _DAYSCOUNT As Integer
     Public Property DAYSCOUNT() As Integer
         Get
@@ -293,6 +303,7 @@ Public Class Sys_user
             .Item("EXPIRYDATE") = Now.AddDays(Expiration_count)
             .Item("SYSTEMINFO") = Now
             .Item("DAYS_COUNT") = D_deactivate
+            .Item("ISEXPIRED") = ISEXPIRED
             .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
@@ -350,6 +361,7 @@ Public Class Sys_user
             .Item("EXPIRYDATE") = Now.AddDays(90)
             .Item("SYSTEMINFO") = Now
             .Item("DAYS_COUNT") = D_deactivate
+            .Item("ISEXPIRED") = ISEXPIRED
             .Item("STATUS") = 1
         End With
         database.SaveEntry(ds, False)
@@ -457,6 +469,7 @@ Public Class Sys_user
             _EXPIRYDATE = .Item("EXPIRYDATE")
             _systeminfo = .Item("SYSTEMINFO")
             _DAYSCOUNT = .Item("DAYS_COUNT")
+            _ISEXPIRED = .Item("ISEXPIRED")
             _UserStatus = .Item("STATUS")
         End With
     End Sub
