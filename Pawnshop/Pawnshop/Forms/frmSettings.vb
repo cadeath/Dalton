@@ -139,25 +139,44 @@
         ds.Tables(fillData).Rows(0).Item("MaintainBal") = txtBal.Text
         SaveEntry(ds, False)
     End Sub
-    Private Sub txtBal_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtOR_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtBorrow_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        DigitOnly(e)
-    End Sub
-
-    Private Sub txtInsurance_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
-        DigitOnly(e)
-    End Sub
-
-
+  
     Private Sub frmSettings_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         frmMain.Enabled = True
     End Sub
 
+    Private Sub txtPawnTicket_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPawnTicket.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtOR_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOR.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtBorrow_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBorrow.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtInsurance_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtInsurance.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtMENum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMENum.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtMRNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMRNum.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtCashInvoice_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCashInvoice.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtReturnNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtReturnNum.KeyPress
+        DigitOnly(e)
+    End Sub
+
+    Private Sub txtStockOutNum_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtStockOutNum.KeyPress
+        DigitOnly(e)
+    End Sub
 End Class
