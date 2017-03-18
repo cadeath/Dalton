@@ -96,12 +96,14 @@
         Dim msgCnt As Integer = lvExpiry.CheckedItems.Count
         Dim msg As String = String.Format("We will be sending {0} client{1}", msgCnt, IIf(msgCnt > 1, "s", "")) + vbCrLf + "Please confirm"
         If MsgBox(msg, MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Confirmation") = MsgBoxResult.No Then Exit Sub
+        If msgCnt < 1 Then Exit Sub
 
         frmMain.displayStatus(String.Format("Sending Messages to {0} client{1}", msgCnt, IIf(msgCnt > 1, "s", "")))
         'Dim th As New Threading.Thread(AddressOf do_MassTexting)
         Dim th = New Threading.Thread(AddressOf do_MassTexting)
         th.SetApartmentState(Threading.ApartmentState.STA)
         th.Start()
+        FormState(False)
     End Sub
 
     Private Delegate Sub doMassTexting_callback()
@@ -126,15 +128,20 @@
                 remarks = smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
                 remarks = IIf(remarks.Contains("messageStatus=MessageAccepted,"), "SENT", remarks)
 
-                Dim notified As New PawnTicket2
-                notified.Load_PawnTicket(pawner.Text)
-                notified.ConfirmNotification(text_msg, remarks)
+                If remarks = "SENT" Then
+                    Dim notified As New PawnTicket2
+                    notified.Load_PawnTicket(pawner.Text)
+                    notified.ConfirmNotification(text_msg, remarks)
+                Else
+                    Log_Report(String.Format("FAILED TO SEND: PT#{0} - {1}", pawner.Text, remarks))
+                End If
 
                 finalCnt -= 1
-                frmMain.displayStatus(String.Format("Sending... {0} recipient{1} remaining", finalCnt, IIf(finalCnt > 1, "s", "")))
+                frmMain.displayStatus(String.Format("{2}... {0} recipient{1} remaining", finalCnt, IIf(finalCnt > 1, "s", ""), IIf(remarks = "SENT", "Sending", "Failed")))
                 Application.DoEvents()
             Next
 
+            smsUtil.Load_Expiry()
             frmMain.displayStatus("Sending Expiry List Completed")
             Me.Close()
         End If

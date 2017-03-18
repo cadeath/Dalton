@@ -24,6 +24,7 @@ Public Class frmMain
         End If
 
         'Tools
+        ExpiryListToolStripMenuItem.Enabled = Not st
         ExpiryGeneratorToolStripMenuItem.Enabled = Not st
         JournalEntriesToolStripMenuItem.Enabled = Not st
         CashCountToolStripMenuItem.Enabled = Not st
@@ -57,6 +58,7 @@ Public Class frmMain
         MonthlyInventoryReportsToolStripMenuItem.Enabled = Not st
 
         MonthlySegrregatedListToolStripMenuItem.Enabled = Not st
+        SMSListToolStripMenuItem.Enabled = Not st
 
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
@@ -688,5 +690,9 @@ Public Class frmMain
     Private Sub MonthlySegrregatedListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlySegrregatedListToolStripMenuItem.Click
         frmSegreList.FormType = frmSegreList.SegreReport.Monthly
         frmSegreList.Show()
+    End Sub
+
+    Private Sub SMSListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSListToolStripMenuItem.Click
+        frmSMSInfo.Show()
     End Sub
 End Class

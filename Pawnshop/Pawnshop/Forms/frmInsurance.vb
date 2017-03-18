@@ -107,7 +107,6 @@
     ''' <summary>
     ''' This method will load data into text fields.
     ''' </summary>
-    ''' <param name="id"></param>
     ''' <remarks></remarks>
     Friend Sub LoadInsurance(ByVal Ins As Insurance)
         'Dim getInsurance As New Insurance

@@ -332,7 +332,7 @@ Public Class frmSales
         Dim getLastID As Integer = 0
         Dim Remarks As String = ""
         Dim unsec_Customer As String = lblCustomer.Text
-        Dim prefix As String = "", DocCode As String
+        Dim prefix As String = "", DocCode As String = ""
 
         ' SALES RETURN
         If TransactionMode = TransType.Returns Then Remarks = InputBox("PARTICULARS", "Particulars")
