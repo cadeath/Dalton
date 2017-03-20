@@ -180,26 +180,6 @@ Public Class Sys_user
         End Set
     End Property
 
-    Private _HasFailed_attemp As Integer
-    Public Property HasFailed_attemp() As Integer
-        Get
-            Return _HasFailed_attemp
-        End Get
-        Set(ByVal value As Integer)
-            _HasFailed_attemp = value
-        End Set
-    End Property
-
-    Private _NumOf_Failed_attemp As Integer
-    Public Property NumOf_Failed_attemp() As Integer
-        Get
-            Return _NumOf_Failed_attemp
-        End Get
-        Set(ByVal value As Integer)
-            _NumOf_Failed_attemp = value
-        End Set
-    End Property
-
     Private _PASSWORD_EXPIRY As Date
     Public Property PASSWORD_EXPIRY() As Date
         Get
@@ -324,8 +304,6 @@ Public Class Sys_user
             .Item("SYSTEMINFO") = Now
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = _ISEXPIRED
-            .Item("HasFailed_attemp") = _HasFailed_attemp
-            .Item("NUM_OF_FAILED_ATTEMP") = _NumOf_Failed_attemp
             .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
@@ -391,8 +369,6 @@ nextLINETODO:
             .Item("SYSTEMINFO") = Now
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = ISEXPIRED
-            .Item("HasFailed_attemp") = _HasFailed_attemp
-            .Item("NUM_OF_FAILED_ATTEMP") = _NumOf_Failed_attemp
             .Item("STATUS") = _UserStatus
         End With
         database.SaveEntry(ds, False)
@@ -516,8 +492,6 @@ nextLINETODO:
             _systeminfo = .Item("SYSTEMINFO")
             _PASSWORD_EXPIRY = .Item("PASSWORD_EXPIRY")
             _ISEXPIRED = .Item("ISEXPIRED")
-            _HasFailed_attemp = .Item("HasFailed_attemp")
-            _NumOf_Failed_attemp = .Item("NUM_OF_FAILED_ATTEMP")
             _UserStatus = .Item("STATUS")
         End With
     End Sub
@@ -581,10 +555,28 @@ nextLINETODO:
         Dim ds As DataSet = LoadSQL(mySql, maintable)
         Return ds.Tables(0).Rows(0).Item("USERID")
     End Function
+#End Region
+
+#Region "Login functions"
+    Friend Function LogUser(ByVal uName As String, ByVal pWrd As String) As Boolean
+        mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE USERNAME ='{0}'" & _
+                              "AND USERPASS = '{1}'", uName, EncryptString(pWrd))
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        If ds.Tables(0).Rows.Count = 0 Then Return False
+
+        Users(ds.Tables(0).Rows(0).Item("USERID"))
+        Return True
+    End Function
+
 
     Friend Function CheckAccount_Expiration(ByVal u_PASS As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return True
+        End If
 
         With ds.Tables(0).Rows(0)
             If .Item("PASSWORD_AGE") = Now.ToShortDateString Then

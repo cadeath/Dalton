@@ -9,8 +9,6 @@
         TBL_USERRULE = "CREATE TABLE TBL_USERRULE ("
         TBL_USERRULE &= vbCrLf & "  USERRULE_ID BIGINT NOT NULL,"
         TBL_USERRULE &= vbCrLf & "   PRIVILEGE_TYPE VARCHAR(50) NOT NULL);"
-
-
         Try
             RunCommand(TBL_USERRULE)
             AutoIncrement_ID("TBL_USERRULE", "USERRULE_ID")
@@ -18,7 +16,6 @@
             Console.WriteLine("Sql error.")
             Exit Sub
         End Try
-
     End Sub
 
     Friend Sub Create_User_LINE()
@@ -61,7 +58,7 @@
         TBL_USERRULE &= vbCrLf & " LASTLOGIN TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0),"
         TBL_USERRULE &= vbCrLf & " PASSWORD_AGE DATE NOT NULL,SYSTEMINFO TIMESTAMP DEFAULT CURRENT_TIMESTAMP(0),"
         TBL_USERRULE &= vbCrLf & " PASSWORD_EXPIRY DATE,ISEXPIRED VARCHAR(1) NOT NULL,"
-        TBL_USERRULE &= vbCrLf & " HasFailed_attemp VARCHAR(1) NOT NULL,NUM_OF_FAILED_ATTEMP INTEGER,STATUS VARCHAR(1) NOT NULL);"
+        TBL_USERRULE &= vbCrLf & " STATUS VARCHAR(1) NOT NULL);"
 
 
         Try

@@ -20,6 +20,8 @@
         ChkInactivateUser.Visible = False
         lblStatus.Visible = False
 
+        Populate_Failed_Attemp() 'ADD Row to Maintenance
+
         User_rule_mod.Create_User_Rule_Table()
         populate_priv()
 
@@ -157,9 +159,6 @@
 
             PASSWORD_AGE_COUNT = txtPasswordAge.Text
 
-            .HasFailed_attemp = IIf(chkIsHasFailed_attemp.Checked, 1, 0)
-            .NumOf_Failed_attemp = IIf(chkIsHasFailed_attemp.Checked, txtFailedAttemp.Text, 0)
-
 
             If CHKISEXPIRED.Checked = True Then
                 PASSWORD_EXPIRY_COUNT = txtAddDays.Text
@@ -229,9 +228,6 @@
             .AGE = GetCurrentAge(txtBirthday.Text)
 
             PASSWORD_AGE_COUNT = txtPasswordAge.Text
-
-            .HasFailed_attemp = IIf(chkIsHasFailed_attemp.Checked, 1, 0)
-            .NumOf_Failed_attemp = IIf(chkIsHasFailed_attemp.Checked, txtFailedAttemp.Text, 0)
 
             If CHKISEXPIRED.Checked = True Then
                 PASSWORD_EXPIRY_COUNT = IIf(txtAddDays.Text, txtAddDays.Text, 0)
@@ -353,9 +349,6 @@
             If txtAddDays.Text = "" Then txtAddDays.Focus() : Return False
         End If
 
-        If chkIsHasFailed_attemp.Checked = True Then
-            If txtFailedAttemp.Text = "" Then txtFailedAttemp.Focus() : Return False
-        End If
         Return True
     End Function
 
@@ -404,14 +397,6 @@
                 CHKISEXPIRED.Checked = False
             End If
 
-            If .HasFailed_attemp = 1 Then
-                chkIsHasFailed_attemp.Checked = True
-                txtFailedAttemp.Text = .NumOf_Failed_attemp
-            Else
-                chkIsHasFailed_attemp.Checked = False
-                txtFailedAttemp.Text = ""
-            End If
-
             lblStatus.Visible = True
             If .UserStatus = 0 Then
                 lblStatus.Text = "User Status: Inactive"
@@ -443,7 +428,7 @@
 
         Dim Diff1 As System.TimeSpan = date1.Subtract(Now)
 
-        Dim TotRemDays = (Int(Diff1.TotalDays))
+        Dim TotRemDays = (Int(Diff1.TotalDays)) + 1
         Return TotRemDays
     End Function
 
@@ -465,7 +450,6 @@
         txtPasswordAge.Text = str
         txtFailedAttemp.Text = str
 
-        chkIsHasFailed_attemp.Checked = False
         CHKISEXPIRED.Checked = False
         ChkInactivateUser.Visible = False
 
@@ -498,14 +482,6 @@
             txtAddDays.Enabled = False : Exit Sub
         End If
         txtAddDays.Enabled = True
-    End Sub
-
-    Private Sub chkIsHasFailed_attemp_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkIsHasFailed_attemp.CheckedChanged
-        If chkIsHasFailed_attemp.Checked = False Then
-            txtFailedAttemp.Enabled = False
-        Else
-            txtFailedAttemp.Enabled = True
-        End If
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
@@ -546,4 +522,53 @@
         Load_ALL_users()
         tbControl.SelectedTab = TabPage1
     End Sub
+
+    Private Sub btnSaveSettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveSettings.Click
+        If txtFailedAttemp.Text = "" Then Exit Sub
+        If rbDisable.Checked = False And rbEnable.Checked = False Then Exit Sub
+
+        Dim data As String() = {"FailedAttempNum", "IsFailedAtemp"}
+
+
+        For Each itm In data
+            Dim mysql As String = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS ='" & itm & "'"
+            Dim ds As DataSet = LoadSQL(mysql, "TBLMAINTENANCE")
+
+            With ds.Tables(0).Rows(0)
+                .Item("OPT_VALUES") = txtFailedAttemp.Text
+
+                .Item("") = IIf(rbEnable.Checked, rbEnable.Text, rbDisable.Text)
+            End With
+            database.SaveEntry(ds, False)
+        Next
+        
+        txtFailedAttemp.Text = ""
+        MsgBox("Successfully Saved.", MsgBoxStyle.Information, "Updated")
+    End Sub
+
+    Private Sub Populate_Failed_Attemp()
+        Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
+
+        For Each itm In opt_keys
+
+            Dim mysql As String = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS ='" & itm & "'"
+            Dim ds As DataSet = LoadSQL(mysql, "TBLMAINTENANCE")
+
+            If ds.Tables(0).Rows.Count = 0 Then
+                Dim dsnewrow As DataRow
+                dsnewrow = ds.Tables(0).NewRow
+                dsnewrow.Item("OPT_KEYS") = itm
+                ds.Tables(0).Rows.Add(dsnewrow)
+                database.SaveEntry(ds)
+            Else
+                With ds.Tables(0).Rows(0)
+                    .Item("OPT_KEYS") = itm
+                End With
+                database.SaveEntry(ds, False)
+            End If
+        Next
+
+    End Sub
+
+
 End Class
