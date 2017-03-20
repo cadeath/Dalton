@@ -8,6 +8,7 @@
 
     Dim privilege_chunk As New TextBox
     Dim i As Integer
+    Dim tmpID As Integer
 
     Enum MODULES
         LOAD = 0
@@ -151,23 +152,14 @@
             .CONTACTNO = num
             .BIRTHDAY = txtBirthday.Text
 
-            If rbFemale.Checked Then
-                .GENDER = rbFemale.Text
-            Else
-                .GENDER = rbMale.Text
-            End If
+            .GENDER = IIf(rbMale.Checked, rbMale.Text, rbFemale.Text)
             .AGE = GetCurrentAge(txtBirthday.Text)
 
             PASSWORD_AGE_COUNT = txtPasswordAge.Text
 
+            .HasFailed_attemp = IIf(chkIsHasFailed_attemp.Checked, 1, 0)
+            .NumOf_Failed_attemp = IIf(chkIsHasFailed_attemp.Checked, txtFailedAttemp.Text, 0)
 
-            If chkIsHasFailed_attemp.Checked = True Then
-                .HasFailed_attemp = 1
-                .NumOf_Failed_attemp = txtFailedAttemp.Text
-            Else
-                .HasFailed_attemp = 0
-                .NumOf_Failed_attemp = 0
-            End If
 
             If CHKISEXPIRED.Checked = True Then
                 PASSWORD_EXPIRY_COUNT = txtAddDays.Text
@@ -198,9 +190,10 @@
             Next
         End With
 
-            Load_users()
-            ClearFields("")
-            MsgBox("Account successfully added.", MsgBoxStyle.Information, "Adding Account")
+        Load_users()
+        Load_ALL_users()
+        ClearFields("")
+        MsgBox("Account successfully saved.", MsgBoxStyle.Information, "Saving Account")
     End Sub
 
     Private Sub update_user()
@@ -212,7 +205,11 @@
         num = num.Replace("-", "")
 
         With Save_user
-            .ID = lvUserList.FocusedItem.Text
+            If i = 0 Then
+                .ID = tmpID
+            Else
+                .ID = tmpID
+            End If
             .USERNAME = txtUsername.Text
             .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
@@ -227,23 +224,14 @@
             .CONTACTNO = num
             .BIRTHDAY = txtBirthday.Text
 
-            If rbFemale.Checked Then
-                .GENDER = rbFemale.Text
-            Else
-                .GENDER = rbMale.Text
-            End If
+            .GENDER = IIf(rbMale.Checked, rbMale.Text, rbFemale.Text)
+
             .AGE = GetCurrentAge(txtBirthday.Text)
 
             PASSWORD_AGE_COUNT = txtPasswordAge.Text
 
-
-            If chkIsHasFailed_attemp.Checked = True Then
-                .HasFailed_attemp = 1
-                .NumOf_Failed_attemp = txtFailedAttemp.Text
-            Else
-                .HasFailed_attemp = 0
-                .NumOf_Failed_attemp = 0
-            End If
+            .HasFailed_attemp = IIf(chkIsHasFailed_attemp.Checked, 1, 0)
+            .NumOf_Failed_attemp = IIf(chkIsHasFailed_attemp.Checked, txtFailedAttemp.Text, 0)
 
             If CHKISEXPIRED.Checked = True Then
                 PASSWORD_EXPIRY_COUNT = IIf(txtAddDays.Text, txtAddDays.Text, 0)
@@ -251,7 +239,6 @@
             Else
                 .ISEXPIRED = 0
             End If
-
 
             If ChkInactivateUser.Checked = True Then
                 .UserStatus = 0
@@ -270,7 +257,6 @@
             End If
         End If
        
-
         With Save_user
             For Each row As DataGridViewRow In dgRulePrivilege.Rows
                 .PRIVILEGE_TYPE = row.Cells(1).Value
@@ -280,6 +266,7 @@
         End With
 
         Load_users()
+        Load_ALL_users()
         ClearFields("")
         MsgBox("Account successfully updated.", MsgBoxStyle.Information, "Updating Account")
     End Sub
@@ -384,8 +371,10 @@
         With user
             If i = 0 Then
                 .Users(lvUserList.FocusedItem.Text)
+                tmpID = lvUserList.FocusedItem.Text
             Else
                 .Users(lvALL_USER_LIST.FocusedItem.Text)
+                tmpID = lvALL_USER_LIST.FocusedItem.Text
             End If
 
             txtUsername.Text = .USERNAME
@@ -426,8 +415,10 @@
             lblStatus.Visible = True
             If .UserStatus = 0 Then
                 lblStatus.Text = "User Status: Inactive"
+                ChkInactivateUser.Checked = True
             Else
                 lblStatus.Text = "User Status: Active"
+                ChkInactivateUser.Checked = False
             End If
 
             'Global variable
@@ -528,7 +519,7 @@
         Dim s_user As New Sys_user
 
         If txtSearch.Text <> "" Then
-            Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT US WHERE US.FIRSTNAME LIKE '%" & txtSearch.Text & "%'"
+            Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT US WHERE UPPER(US.FIRSTNAME) LIKE UPPER('%" & txtSearch.Text & "%')"
             ds = LoadSQL(mysql, "TBL_DEFAULT_USER")
         Else
             Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT WHERE STATUS <> 0"
@@ -543,6 +534,7 @@
                 lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
                 lv.SubItems.Add(.EMAIL_ADDRESS)
             Next
+            txtSearch.Text = Nothing
         End With
 
     End Sub
