@@ -7,7 +7,7 @@ Public Class Sys_user
     Private subTable As String = "tbluser_history"
     Private MAIN_LINE As String = "TBL_USERLINE"
     Private mySql As String = String.Empty
-
+    Dim Passwd_update As Boolean = True
 #Region "Properties"
     Private _ID As Integer
     Public Property ID() As Integer
@@ -190,6 +190,16 @@ Public Class Sys_user
         End Set
     End Property
 
+    Private _NumOf_Failed_attemp As Integer
+    Public Property NumOf_Failed_attemp() As Integer
+        Get
+            Return _NumOf_Failed_attemp
+        End Get
+        Set(ByVal value As Integer)
+            _NumOf_Failed_attemp = value
+        End Set
+    End Property
+
     Private _PASSWORD_EXPIRY As Date
     Public Property PASSWORD_EXPIRY() As Date
         Get
@@ -314,7 +324,8 @@ Public Class Sys_user
             .Item("SYSTEMINFO") = Now
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = _ISEXPIRED
-            .Item("HasField_attemp") = _HasFailed_attemp
+            .Item("HasFailed_attemp") = _HasFailed_attemp
+            .Item("NUM_OF_FAILED_ATTEMP") = _NumOf_Failed_attemp
             .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
@@ -345,22 +356,31 @@ Public Class Sys_user
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", _ID)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
+
         If ds.Tables(0).Rows(0).Item("USERPASS") = EncryptString(_USERPASS) Then
             Console.WriteLine("cURRENT PASSWORD")
         End If
 
-        If Not Check_Pass_IfExists(_ID, EncryptString(_USERPASS)) Then
-            MsgBox("The password you've entered is already taken." & vbCrLf & _
-                   "Please try again.", MsgBoxStyle.Critical, "Error")
-            Return False
+        If _USERPASS = "" Then
+            Passwd_update = False
+            GoTo nextLINETODO
+        Else
+            If Not Check_Pass_IfExists(_ID, EncryptString(_USERPASS)) Then
+                MsgBox("The password you've entered is already taken." & vbCrLf & _
+                       "Please try again.", MsgBoxStyle.Critical, "Validate")
+                Return False
+            End If
         End If
+
+
+nextLINETODO:
 
         With ds.Tables(0).Rows(0)
             .Item("USERNAME") = _USERNAME
             .Item("FIRSTNAME") = _FIRSTNAME
             .Item("MIDDLENAME") = _MIDDLENAME
             .Item("LASTNAME") = _LASTNAME
-            .Item("USERPASS") = EncryptString(_USERPASS)
+            .Item("USERPASS") = IIf(Passwd_update, EncryptString(_USERPASS), tmpPassword)
             .Item("EMAIL_ADDRESS") = _EMAIL_ADDRESS
             .Item("CONTACTNO") = _CONTACTNO
             .Item("BIRTHDAY") = _BIRTHDAY
@@ -371,7 +391,8 @@ Public Class Sys_user
             .Item("SYSTEMINFO") = Now
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "")
             .Item("ISEXPIRED") = ISEXPIRED
-            .Item("HasField_attemp") = _HasFailed_attemp
+            .Item("HasFailed_attemp") = _HasFailed_attemp
+            .Item("NUM_OF_FAILED_ATTEMP") = _NumOf_Failed_attemp
             .Item("STATUS") = _UserStatus
         End With
         database.SaveEntry(ds, False)
@@ -403,10 +424,10 @@ Public Class Sys_user
     End Function
 
     Friend Function Check_Pass_IfExists(ByVal idx As Integer, ByVal passwd As String) As Boolean
+
         mySql = "SELECT * FROM " & subTable & " WHERE USERID  = " & idx & ""
         Dim ds As DataSet = LoadSQL(mySql, subTable)
         Dim u_pass As New List(Of String)()
-        '  Dim dsCount As Integer = ds.Tables(0).Rows.Count
 
         If ds.Tables(0).Rows.Count >= 5 Then
             For Each dr As DataRow In ds.Tables(0).Rows
@@ -416,7 +437,7 @@ Public Class Sys_user
                 End With
             Next
 
-            'select string min and max string in the list
+            'selecting min and max string in the list
             Dim U_pass1 As New List(Of String)()
             Dim count As Integer = 0
             For Each pass In u_pass
@@ -428,21 +449,36 @@ Public Class Sys_user
                 End If
             Next
 
-
             For Each pass1 In U_pass1
                 If passwd = pass1 Then
                     Return True
                 End If
             Next
+
+            'Verifying password if already used by another user.
+            For Each dr As DataRow In dsUSEr.Tables(0).Rows
+                If passwd = dr.Item("USERPASS") Then
+                    Return False
+                End If
+            Next
             Return True
         End If
 
+        'Verifying password in his/her password if already exists.
+        'Count password less than 5
         For Each dr As DataRow In ds.Tables(0).Rows
             With dr
                 If passwd = .Item("USERPASS") Then
                     Return False
                 End If
             End With
+        Next
+
+        'Verifying password if already used by another user.
+        For Each dr As DataRow In dsUSEr.Tables(0).Rows
+            If passwd = dr.Item("USERPASS") Then
+                Return False
+            End If
         Next
         Return True
     End Function
@@ -480,6 +516,8 @@ Public Class Sys_user
             _systeminfo = .Item("SYSTEMINFO")
             _PASSWORD_EXPIRY = .Item("PASSWORD_EXPIRY")
             _ISEXPIRED = .Item("ISEXPIRED")
+            _HasFailed_attemp = .Item("HasFailed_attemp")
+            _NumOf_Failed_attemp = .Item("NUM_OF_FAILED_ATTEMP")
             _UserStatus = .Item("STATUS")
         End With
     End Sub
@@ -538,7 +576,7 @@ Public Class Sys_user
     End Sub
 
     Friend Function GETUSERID() As Integer
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS ='{0}'", _USERPASS)
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS ='{0}'", tmpPassword)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
         Return ds.Tables(0).Rows(0).Item("USERID")
     End Function

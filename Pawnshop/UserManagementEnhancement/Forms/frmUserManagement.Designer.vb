@@ -43,6 +43,8 @@ Partial Class frmUserManagement
         Me.tbControl = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkIsHasFailed_attemp = New System.Windows.Forms.CheckBox()
+        Me.ChkInactivateUser = New System.Windows.Forms.CheckBox()
         Me.CHKISEXPIRED = New System.Windows.Forms.CheckBox()
         Me.txtPasword1 = New UserManagementEnhancement.watermark()
         Me.txtContactnumber = New UserManagementEnhancement.watermark()
@@ -54,8 +56,7 @@ Partial Class frmUserManagement
         Me.txtUsername = New UserManagementEnhancement.watermark()
         Me.txtPasswordAge = New UserManagementEnhancement.watermark()
         Me.txtAddDays = New UserManagementEnhancement.watermark()
-        Me.ChkInactivateUser = New System.Windows.Forms.CheckBox()
-        Me.chkIsHasFailed_attemp = New System.Windows.Forms.CheckBox()
+        Me.txtFailedAttemp = New UserManagementEnhancement.watermark()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
@@ -280,16 +281,39 @@ Partial Class frmUserManagement
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GroupBox2.Controls.Add(Me.txtFailedAttemp)
         Me.GroupBox2.Controls.Add(Me.chkIsHasFailed_attemp)
         Me.GroupBox2.Controls.Add(Me.ChkInactivateUser)
         Me.GroupBox2.Controls.Add(Me.txtPasswordAge)
         Me.GroupBox2.Controls.Add(Me.txtAddDays)
         Me.GroupBox2.Controls.Add(Me.CHKISEXPIRED)
-        Me.GroupBox2.Location = New System.Drawing.Point(149, 6)
+        Me.GroupBox2.Location = New System.Drawing.Point(175, 6)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(458, 402)
+        Me.GroupBox2.Size = New System.Drawing.Size(390, 402)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
+        '
+        'chkIsHasFailed_attemp
+        '
+        Me.chkIsHasFailed_attemp.AutoSize = True
+        Me.chkIsHasFailed_attemp.Checked = True
+        Me.chkIsHasFailed_attemp.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkIsHasFailed_attemp.Location = New System.Drawing.Point(12, 163)
+        Me.chkIsHasFailed_attemp.Name = "chkIsHasFailed_attemp"
+        Me.chkIsHasFailed_attemp.Size = New System.Drawing.Size(171, 20)
+        Me.chkIsHasFailed_attemp.TabIndex = 4
+        Me.chkIsHasFailed_attemp.Text = "Has attemp failed count?"
+        Me.chkIsHasFailed_attemp.UseVisualStyleBackColor = True
+        '
+        'ChkInactivateUser
+        '
+        Me.ChkInactivateUser.AutoSize = True
+        Me.ChkInactivateUser.Location = New System.Drawing.Point(12, 226)
+        Me.ChkInactivateUser.Name = "ChkInactivateUser"
+        Me.ChkInactivateUser.Size = New System.Drawing.Size(112, 20)
+        Me.ChkInactivateUser.TabIndex = 3
+        Me.ChkInactivateUser.Text = "Inactivate User"
+        Me.ChkInactivateUser.UseVisualStyleBackColor = True
         '
         'CHKISEXPIRED
         '
@@ -382,9 +406,9 @@ Partial Class frmUserManagement
         '
         Me.txtPasswordAge.BackColor = System.Drawing.SystemColors.Window
         Me.txtPasswordAge.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPasswordAge.Location = New System.Drawing.Point(12, 135)
+        Me.txtPasswordAge.Location = New System.Drawing.Point(12, 128)
         Me.txtPasswordAge.Name = "txtPasswordAge"
-        Me.txtPasswordAge.Size = New System.Drawing.Size(391, 29)
+        Me.txtPasswordAge.Size = New System.Drawing.Size(368, 29)
         Me.txtPasswordAge.TabIndex = 2
         Me.txtPasswordAge.WatermarkColor = System.Drawing.Color.Gray
         Me.txtPasswordAge.WatermarkText = "Enter number days password's expiration"
@@ -393,32 +417,23 @@ Partial Class frmUserManagement
         '
         Me.txtAddDays.BackColor = System.Drawing.SystemColors.Window
         Me.txtAddDays.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddDays.Location = New System.Drawing.Point(12, 97)
+        Me.txtAddDays.Location = New System.Drawing.Point(12, 93)
         Me.txtAddDays.Name = "txtAddDays"
-        Me.txtAddDays.Size = New System.Drawing.Size(391, 29)
+        Me.txtAddDays.Size = New System.Drawing.Size(368, 29)
         Me.txtAddDays.TabIndex = 1
         Me.txtAddDays.WatermarkColor = System.Drawing.Color.Gray
         Me.txtAddDays.WatermarkText = "Enter number of days to inactive account"
         '
-        'ChkInactivateUser
+        'txtFailedAttemp
         '
-        Me.ChkInactivateUser.AutoSize = True
-        Me.ChkInactivateUser.Location = New System.Drawing.Point(12, 203)
-        Me.ChkInactivateUser.Name = "ChkInactivateUser"
-        Me.ChkInactivateUser.Size = New System.Drawing.Size(112, 20)
-        Me.ChkInactivateUser.TabIndex = 3
-        Me.ChkInactivateUser.Text = "Inactivate User"
-        Me.ChkInactivateUser.UseVisualStyleBackColor = True
-        '
-        'chkIsHasFailed_attemp
-        '
-        Me.chkIsHasFailed_attemp.AutoSize = True
-        Me.chkIsHasFailed_attemp.Location = New System.Drawing.Point(12, 174)
-        Me.chkIsHasFailed_attemp.Name = "chkIsHasFailed_attemp"
-        Me.chkIsHasFailed_attemp.Size = New System.Drawing.Size(171, 20)
-        Me.chkIsHasFailed_attemp.TabIndex = 4
-        Me.chkIsHasFailed_attemp.Text = "Has attemp failed count?"
-        Me.chkIsHasFailed_attemp.UseVisualStyleBackColor = True
+        Me.txtFailedAttemp.BackColor = System.Drawing.SystemColors.Window
+        Me.txtFailedAttemp.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFailedAttemp.Location = New System.Drawing.Point(12, 189)
+        Me.txtFailedAttemp.Name = "txtFailedAttemp"
+        Me.txtFailedAttemp.Size = New System.Drawing.Size(368, 29)
+        Me.txtFailedAttemp.TabIndex = 5
+        Me.txtFailedAttemp.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtFailedAttemp.WatermarkText = "Enter number of failed attemp"
         '
         'frmUserManagement
         '
@@ -476,5 +491,6 @@ Partial Class frmUserManagement
     Friend WithEvents CHKISEXPIRED As System.Windows.Forms.CheckBox
     Friend WithEvents ChkInactivateUser As System.Windows.Forms.CheckBox
     Friend WithEvents chkIsHasFailed_attemp As System.Windows.Forms.CheckBox
+    Friend WithEvents txtFailedAttemp As UserManagementEnhancement.watermark
 
 End Class

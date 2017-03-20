@@ -107,7 +107,9 @@
             Save()
         ElseIf btnCreateAccount.Text = "&Edit" Then
             btnCreateAccount.Text = "&Update"
+            GroupBox2.Enabled = True
             GroupBox1.Enabled = True
+            dgRulePrivilege.Enabled = True
         Else
             update_user()
         End If
@@ -130,6 +132,11 @@
             .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
             .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
+
+            If txtPassword.Text <> "" Then
+                tmpPassword = EncryptString(txtPassword.Text)
+            End If
+
             .USERPASS = txtPassword.Text
             .EMAIL_ADDRESS = txtEmailaddress.Text
             .CONTACTNO = num
@@ -147,8 +154,10 @@
 
             If chkIsHasFailed_attemp.Checked = True Then
                 .HasFailed_attemp = 1
+                .NumOf_Failed_attemp = txtFailedAttemp.Text
             Else
                 .HasFailed_attemp = 0
+                .NumOf_Failed_attemp = 0
             End If
 
             If CHKISEXPIRED.Checked = True Then
@@ -199,6 +208,11 @@
             .FIRSTNAME = UppercaseFirstLetter(txtFirstname.Text)
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
             .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
+
+            If txtPassword.Text <> "" Then
+                tmpPassword = EncryptString(txtPassword.Text)
+            End If
+
             .USERPASS = txtPassword.Text
             .EMAIL_ADDRESS = txtEmailaddress.Text
             .CONTACTNO = num
@@ -216,21 +230,30 @@
 
             If chkIsHasFailed_attemp.Checked = True Then
                 .HasFailed_attemp = 1
+                .NumOf_Failed_attemp = txtFailedAttemp.Text
             Else
                 .HasFailed_attemp = 0
+                .NumOf_Failed_attemp = 0
             End If
 
             If CHKISEXPIRED.Checked = True Then
-                PASSWORD_EXPIRY_COUNT = txtAddDays.Text
+                PASSWORD_EXPIRY_COUNT = IIf(txtAddDays.Text, txtAddDays.Text, 0)
                 .ISEXPIRED = 1
             Else
                 .ISEXPIRED = 0
             End If
         End With
 
-        If Not Save_user.Update_USER Then
-            Exit Sub
+        If CHKISEXPIRED.Checked = True Then
+            If Not Save_user.Update_USER() Then
+                Exit Sub
+            End If
+        Else
+            If Not Save_user.Update_USER(False) Then
+                Exit Sub
+            End If
         End If
+       
 
         With Save_user
             For Each row As DataGridViewRow In dgRulePrivilege.Rows
@@ -288,8 +311,21 @@
         If txtUsername.Text = "" Then txtUsername.Focus() : Return False
         If txtFirstname.Text = "" Then txtFirstname.Focus() : Return False
         If txtLastname.Text = "" Then txtLastname.Focus() : Return False
-        If txtPassword.Text = "" Then txtPassword.Focus() : Return False
-        If txtPasword1.Text = "" Then txtPasword1.Focus() : Return False
+
+
+        If btnCreateAccount.Text <> "&Create Account" Then
+
+            If txtPassword.Text <> "" Then
+                If txtPassword.Text <> txtPasword1.Text Then MsgBox("Password not matched!", MsgBoxStyle.Exclamation, "Warning") _
+        : txtPassword.Focus() : Return False
+            End If
+        Else
+            If txtPassword.Text = "" Then txtPassword.Focus() : Return False
+            If txtPasword1.Text = "" Then txtPasword1.Focus() : Return False
+            If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
+        End If
+
+       
         If txtEmailaddress.Text = "" Then txtEmailaddress.Focus() : Return False
 
         If rbFemale.Checked = False And rbMale.Checked = False Then MsgBox("Select gender type", MsgBoxStyle.Exclamation, "Warning") : Return False
@@ -310,8 +346,6 @@
         Next
         If txtPasswordAge.Text = "" Then txtPasswordAge.Focus() : Return False
 
-        If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
-
         Return True
     End Function
 
@@ -329,8 +363,6 @@
             txtFirstname.Text = .FIRSTNAME
             txtMiddlename.Text = .MIDDLENAME
             txtLastname.Text = .LASTNAME
-            txtPassword.Text = DecryptString(.USERPASS)
-            txtPasword1.Text = DecryptString(.USERPASS)
             txtEmailaddress.Text = .EMAIL_ADDRESS
             txtContactnumber.Text = .CONTACTNO
             txtBirthday.Text = .BIRTHDAY
@@ -341,10 +373,12 @@
                 rbFemale.Checked = True
             End If
 
+
             If .PASSWORD_EXPIRY <> "01/01/0001" Then
-                txtAddDays.Text = (Now.AddDays(-7).Subtract(.PASSWORD_AGE)).TotalDays
+                txtAddDays.Text = Date_Calculation(.PASSWORD_EXPIRY) + 2
             End If
-            txtPasswordAge.Text = (Now.AddDays(-7).Subtract(.PASSWORD_AGE)).TotalDays
+
+            txtPasswordAge.Text = Date_Calculation(.PASSWORD_AGE) + 1
 
             If .ISEXPIRED = 1 Then
                 CHKISEXPIRED.Checked = True
@@ -354,20 +388,38 @@
 
             If .HasFailed_attemp = 1 Then
                 chkIsHasFailed_attemp.Checked = True
+                txtFailedAttemp.Text = .NumOf_Failed_attemp
             Else
                 chkIsHasFailed_attemp.Checked = False
+                txtFailedAttemp.Text = .NumOf_Failed_attemp
             End If
 
+            'Global variable
             SYSTEM_USERID = .ID
+            tmpPassword = .USERPASS
 
             dgRulePrivilege.Rows.Clear()
-            .LOAD_USERLINE_ROWS(SYSTEM_USERID)
+            .LOAD_USERLINE_ROWS(.ID)
         End With
 
+        ChkInactivateUser.Visible = True
 
         btnCreateAccount.Text = "&Edit"
         GroupBox1.Enabled = False
+        GroupBox2.Enabled = False
+        dgRulePrivilege.Enabled = False
     End Sub
+
+    Private Function Date_Calculation(ByVal EXPIRATE_DATE As Date) As Integer
+        Dim ValidDate As Date = CDate(EXPIRATE_DATE)
+        Dim date1 As New System.DateTime(ValidDate.Year, ValidDate.Month, ValidDate.Day)
+
+        Dim Diff1 As System.TimeSpan = date1.Subtract(Now)
+
+        Dim TotRemDays = (Int(Diff1.TotalDays))
+        Return TotRemDays
+    End Function
+
 
     Private Sub ClearFields(ByVal str As String)
         txtUsername.Text = str
@@ -381,8 +433,21 @@
         txtBirthday.Text = Now.ToShortDateString
         rbFemale.Checked = False
         rbMale.Checked = False
+
+        txtAddDays.Text = str
+        txtPasswordAge.Text = str
+
+        chkIsHasFailed_attemp.Checked = False
+        CHKISEXPIRED.Checked = False
+        ChkInactivateUser.Visible = False
+
         GroupBox1.Enabled = True
+        GroupBox2.Enabled = True
+
+        dgRulePrivilege.Enabled = True
+
         btnCreateAccount.Text = "&Create Account"
+
         Load_Privileges(False)
     End Sub
 
@@ -394,7 +459,6 @@
         ClearFields("")
     End Sub
 
-   
 
     Private Sub CHKISEXPIRED_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CHKISEXPIRED.CheckedChanged
         VERIFY_EXPIRATION()
@@ -405,5 +469,14 @@
             txtAddDays.Enabled = False : Exit Sub
         End If
         txtAddDays.Enabled = True
+
+        If chkIsHasFailed_attemp.Checked = False Then
+            txtFailedAttemp.Enabled = False : Exit Sub
+        End If
+        txtFailedAttemp.Enabled = True
+    End Sub
+
+    Private Sub chkIsHasFailed_attemp_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkIsHasFailed_attemp.CheckedChanged
+        VERIFY_EXPIRATION()
     End Sub
 End Class
