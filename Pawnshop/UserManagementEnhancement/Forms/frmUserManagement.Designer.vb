@@ -43,9 +43,16 @@ Partial Class frmUserManagement
         Me.tbControl = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblStatus = New System.Windows.Forms.Label()
         Me.chkIsHasFailed_attemp = New System.Windows.Forms.CheckBox()
         Me.ChkInactivateUser = New System.Windows.Forms.CheckBox()
         Me.CHKISEXPIRED = New System.Windows.Forms.CheckBox()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.lvALL_USER_LIST = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.txtPasword1 = New UserManagementEnhancement.watermark()
         Me.txtContactnumber = New UserManagementEnhancement.watermark()
         Me.txtEmailaddress = New UserManagementEnhancement.watermark()
@@ -54,9 +61,11 @@ Partial Class frmUserManagement
         Me.txtMiddlename = New UserManagementEnhancement.watermark()
         Me.txtFirstname = New UserManagementEnhancement.watermark()
         Me.txtUsername = New UserManagementEnhancement.watermark()
+        Me.txtFailedAttemp = New UserManagementEnhancement.watermark()
         Me.txtPasswordAge = New UserManagementEnhancement.watermark()
         Me.txtAddDays = New UserManagementEnhancement.watermark()
-        Me.txtFailedAttemp = New UserManagementEnhancement.watermark()
+        Me.txtSearch = New UserManagementEnhancement.watermark()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
@@ -64,6 +73,7 @@ Partial Class frmUserManagement
         Me.tbControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabPage2
@@ -259,6 +269,7 @@ Partial Class frmUserManagement
         Me.tbControl.Controls.Add(Me.TabPage1)
         Me.tbControl.Controls.Add(Me.TabPage2)
         Me.tbControl.Controls.Add(Me.TabPage3)
+        Me.tbControl.Controls.Add(Me.TabPage4)
         Me.tbControl.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbControl.Location = New System.Drawing.Point(12, 11)
         Me.tbControl.Name = "tbControl"
@@ -281,6 +292,7 @@ Partial Class frmUserManagement
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GroupBox2.Controls.Add(Me.lblStatus)
         Me.GroupBox2.Controls.Add(Me.txtFailedAttemp)
         Me.GroupBox2.Controls.Add(Me.chkIsHasFailed_attemp)
         Me.GroupBox2.Controls.Add(Me.ChkInactivateUser)
@@ -293,11 +305,18 @@ Partial Class frmUserManagement
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Location = New System.Drawing.Point(13, 259)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(77, 16)
+        Me.lblStatus.TabIndex = 8
+        Me.lblStatus.Text = "User Status"
+        '
         'chkIsHasFailed_attemp
         '
         Me.chkIsHasFailed_attemp.AutoSize = True
-        Me.chkIsHasFailed_attemp.Checked = True
-        Me.chkIsHasFailed_attemp.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkIsHasFailed_attemp.Location = New System.Drawing.Point(12, 163)
         Me.chkIsHasFailed_attemp.Name = "chkIsHasFailed_attemp"
         Me.chkIsHasFailed_attemp.Size = New System.Drawing.Size(171, 20)
@@ -308,7 +327,7 @@ Partial Class frmUserManagement
         'ChkInactivateUser
         '
         Me.ChkInactivateUser.AutoSize = True
-        Me.ChkInactivateUser.Location = New System.Drawing.Point(12, 226)
+        Me.ChkInactivateUser.Location = New System.Drawing.Point(12, 227)
         Me.ChkInactivateUser.Name = "ChkInactivateUser"
         Me.ChkInactivateUser.Size = New System.Drawing.Size(112, 20)
         Me.ChkInactivateUser.TabIndex = 3
@@ -326,6 +345,55 @@ Partial Class frmUserManagement
         Me.CHKISEXPIRED.TabIndex = 0
         Me.CHKISEXPIRED.Text = "Is account will expired?"
         Me.CHKISEXPIRED.UseVisualStyleBackColor = True
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.Label4)
+        Me.TabPage4.Controls.Add(Me.lvALL_USER_LIST)
+        Me.TabPage4.Controls.Add(Me.Label3)
+        Me.TabPage4.Controls.Add(Me.txtSearch)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 39)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(724, 414)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Find User"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'lvALL_USER_LIST
+        '
+        Me.lvALL_USER_LIST.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lvALL_USER_LIST.FullRowSelect = True
+        Me.lvALL_USER_LIST.Location = New System.Drawing.Point(9, 64)
+        Me.lvALL_USER_LIST.Name = "lvALL_USER_LIST"
+        Me.lvALL_USER_LIST.Size = New System.Drawing.Size(709, 344)
+        Me.lvALL_USER_LIST.TabIndex = 2
+        Me.lvALL_USER_LIST.UseCompatibleStateImageBehavior = False
+        Me.lvALL_USER_LIST.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "#"
+        Me.ColumnHeader3.Width = 41
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Name"
+        Me.ColumnHeader4.Width = 350
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Email Address"
+        Me.ColumnHeader5.Width = 305
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(6, 21)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(49, 16)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "Search"
         '
         'txtPasword1
         '
@@ -402,6 +470,17 @@ Partial Class frmUserManagement
         Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
         Me.txtUsername.WatermarkText = "Username"
         '
+        'txtFailedAttemp
+        '
+        Me.txtFailedAttemp.BackColor = System.Drawing.SystemColors.Window
+        Me.txtFailedAttemp.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFailedAttemp.Location = New System.Drawing.Point(12, 189)
+        Me.txtFailedAttemp.Name = "txtFailedAttemp"
+        Me.txtFailedAttemp.Size = New System.Drawing.Size(368, 29)
+        Me.txtFailedAttemp.TabIndex = 5
+        Me.txtFailedAttemp.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtFailedAttemp.WatermarkText = "Enter number of failed attemp"
+        '
         'txtPasswordAge
         '
         Me.txtPasswordAge.BackColor = System.Drawing.SystemColors.Window
@@ -424,16 +503,24 @@ Partial Class frmUserManagement
         Me.txtAddDays.WatermarkColor = System.Drawing.Color.Gray
         Me.txtAddDays.WatermarkText = "Enter number of days to inactive account"
         '
-        'txtFailedAttemp
+        'txtSearch
         '
-        Me.txtFailedAttemp.BackColor = System.Drawing.SystemColors.Window
-        Me.txtFailedAttemp.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFailedAttemp.Location = New System.Drawing.Point(12, 189)
-        Me.txtFailedAttemp.Name = "txtFailedAttemp"
-        Me.txtFailedAttemp.Size = New System.Drawing.Size(368, 29)
-        Me.txtFailedAttemp.TabIndex = 5
-        Me.txtFailedAttemp.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtFailedAttemp.WatermarkText = "Enter number of failed attemp"
+        Me.txtSearch.Location = New System.Drawing.Point(61, 18)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(657, 22)
+        Me.txtSearch.TabIndex = 1
+        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtSearch.WatermarkText = "Search . . ."
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(284, 43)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(153, 14)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "Double Click to Edit Information"
         '
         'frmUserManagement
         '
@@ -454,6 +541,8 @@ Partial Class frmUserManagement
         Me.TabPage3.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -492,5 +581,14 @@ Partial Class frmUserManagement
     Friend WithEvents ChkInactivateUser As System.Windows.Forms.CheckBox
     Friend WithEvents chkIsHasFailed_attemp As System.Windows.Forms.CheckBox
     Friend WithEvents txtFailedAttemp As UserManagementEnhancement.watermark
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents lblStatus As System.Windows.Forms.Label
+    Friend WithEvents lvALL_USER_LIST As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents txtSearch As UserManagementEnhancement.watermark
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 
 End Class

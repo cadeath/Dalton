@@ -7,10 +7,17 @@
     Dim priv_list As New List(Of String)()
 
     Dim privilege_chunk As New TextBox
+    Dim i As Integer
+
+    Enum MODULES
+        LOAD = 0
+        SEARCH = 1
+    End Enum
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtUsername.Focus()
         ChkInactivateUser.Visible = False
+        lblStatus.Visible = False
 
         User_rule_mod.Create_User_Rule_Table()
         populate_priv()
@@ -24,14 +31,18 @@
         End If
 
         Load_users()
+        Load_ALL_users()
     End Sub
 
     Private Sub Load_users()
         Dim s_user As New Sys_user
 
+        Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT WHERE STATUS <> 0"
+        Dim ds As DataSet = LoadSQL(mysql, "TBL_DEFAULT_USER")
+
         lvUserList.Items.Clear()
         With s_user
-            For Each dr As DataRow In .dsUSEr.Tables(0).Rows
+            For Each dr As DataRow In ds.Tables(0).Rows
                 .Users(dr.Item("USERID"))
                 Dim lv As ListViewItem = lvUserList.Items.Add(.ID)
                 lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
@@ -120,7 +131,7 @@
     Private Sub Save()
         If Not IsValid() Then Exit Sub
 
-        Dim result As DialogResult = MsgBox("Do you want save this account?", MsgBoxStyle.YesNo, "Adding Account")
+        Dim result As DialogResult = MsgBox("Do you want save this account?", MsgBoxStyle.YesNo, "Saving Account")
         If result = vbNo Then Exit Sub
         Dim num As String = txtContactnumber.Text
         num = num.Replace("-", "")
@@ -133,9 +144,7 @@
             .MIDDLENAME = UppercaseFirstLetter(txtMiddlename.Text)
             .LASTNAME = UppercaseFirstLetter(txtLastname.Text)
 
-            If txtPassword.Text <> "" Then
-                tmpPassword = EncryptString(txtPassword.Text)
-            End If
+            tmpPassword = EncryptString(txtPassword.Text)
 
             .USERPASS = txtPassword.Text
             .EMAIL_ADDRESS = txtEmailaddress.Text
@@ -166,6 +175,7 @@
             Else
                 .ISEXPIRED = 0
             End If
+
         End With
 
         If CHKISEXPIRED.Checked = True Then
@@ -180,12 +190,11 @@
 
         With Save_user
             For Each row As DataGridViewRow In dgRulePrivilege.Rows
-                .USERID = .GETUSERID
                 .PRIVILEGE_TYPE = row.Cells(1).Value
                 .ACCESSTYPE = row.Cells(2).Value
 
                 If .PRIVILEGE_TYPE = "" Then Exit For
-                .Save_Privilege(row.Cells(0).Value)
+                .Save_Privilege(row.Cells(0).Value, True)
             Next
         End With
 
@@ -242,6 +251,13 @@
             Else
                 .ISEXPIRED = 0
             End If
+
+
+            If ChkInactivateUser.Checked = True Then
+                .UserStatus = 0
+            Else
+                .UserStatus = 1
+            End If
         End With
 
         If CHKISEXPIRED.Checked = True Then
@@ -257,10 +273,9 @@
 
         With Save_user
             For Each row As DataGridViewRow In dgRulePrivilege.Rows
-                .USERID = .GETUSERID
                 .PRIVILEGE_TYPE = row.Cells(1).Value
                 .ACCESSTYPE = row.Cells(2).Value
-                .Save_Privilege(row.Cells(0).Value)
+                .Save_Privilege(row.Cells(0).Value, False)
             Next
         End With
 
@@ -325,7 +340,7 @@
             If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
         End If
 
-       
+
         If txtEmailaddress.Text = "" Then txtEmailaddress.Focus() : Return False
 
         If rbFemale.Checked = False And rbMale.Checked = False Then MsgBox("Select gender type", MsgBoxStyle.Exclamation, "Warning") : Return False
@@ -342,15 +357,24 @@
         If dgRulePrivilege.Rows.Count = 0 Then Return False
 
         For Each row As DataGridViewRow In dgRulePrivilege.Rows
-            If row.Cells(2).Value = "" Then Return False
+            If row.Cells(2).Value = "" Then tbControl.SelectedTab = TabPage2 : Return False
         Next
-        If txtPasswordAge.Text = "" Then txtPasswordAge.Focus() : Return False
 
+        If txtPasswordAge.Text = "" Then tbControl.SelectedTab = TabPage3 : txtPasswordAge.Focus() : Return False
+
+        If CHKISEXPIRED.Checked = True Then
+            If txtAddDays.Text = "" Then txtAddDays.Focus() : Return False
+        End If
+
+        If chkIsHasFailed_attemp.Checked = True Then
+            If txtFailedAttemp.Text = "" Then txtFailedAttemp.Focus() : Return False
+        End If
         Return True
     End Function
 
 
     Private Sub lvUserList_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUserList.DoubleClick
+        i = MODULES.LOAD
         Load_Privileges(True)
     End Sub
 
@@ -358,7 +382,12 @@
         Dim user As New Sys_user
 
         With user
-            .Users(lvUserList.FocusedItem.Text)
+            If i = 0 Then
+                .Users(lvUserList.FocusedItem.Text)
+            Else
+                .Users(lvALL_USER_LIST.FocusedItem.Text)
+            End If
+
             txtUsername.Text = .USERNAME
             txtFirstname.Text = .FIRSTNAME
             txtMiddlename.Text = .MIDDLENAME
@@ -375,10 +404,10 @@
 
 
             If .PASSWORD_EXPIRY <> "01/01/0001" Then
-                txtAddDays.Text = Date_Calculation(.PASSWORD_EXPIRY) + 2
+                txtAddDays.Text = Date_Calculation(.PASSWORD_EXPIRY)
             End If
 
-            txtPasswordAge.Text = Date_Calculation(.PASSWORD_AGE) + 1
+            txtPasswordAge.Text = Date_Calculation(.PASSWORD_AGE)
 
             If .ISEXPIRED = 1 Then
                 CHKISEXPIRED.Checked = True
@@ -391,7 +420,14 @@
                 txtFailedAttemp.Text = .NumOf_Failed_attemp
             Else
                 chkIsHasFailed_attemp.Checked = False
-                txtFailedAttemp.Text = .NumOf_Failed_attemp
+                txtFailedAttemp.Text = ""
+            End If
+
+            lblStatus.Visible = True
+            If .UserStatus = 0 Then
+                lblStatus.Text = "User Status: Inactive"
+            Else
+                lblStatus.Text = "User Status: Active"
             End If
 
             'Global variable
@@ -436,6 +472,7 @@
 
         txtAddDays.Text = str
         txtPasswordAge.Text = str
+        txtFailedAttemp.Text = str
 
         chkIsHasFailed_attemp.Checked = False
         CHKISEXPIRED.Checked = False
@@ -445,6 +482,7 @@
         GroupBox2.Enabled = True
 
         dgRulePrivilege.Enabled = True
+        lblStatus.Visible = False
 
         btnCreateAccount.Text = "&Create Account"
 
@@ -469,14 +507,51 @@
             txtAddDays.Enabled = False : Exit Sub
         End If
         txtAddDays.Enabled = True
-
-        If chkIsHasFailed_attemp.Checked = False Then
-            txtFailedAttemp.Enabled = False : Exit Sub
-        End If
-        txtFailedAttemp.Enabled = True
     End Sub
 
     Private Sub chkIsHasFailed_attemp_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkIsHasFailed_attemp.CheckedChanged
-        VERIFY_EXPIRATION()
+        If chkIsHasFailed_attemp.Checked = False Then
+            txtFailedAttemp.Enabled = False
+        Else
+            txtFailedAttemp.Enabled = True
+        End If
+    End Sub
+
+    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        If isEnter(e) Then
+            Load_ALL_users()
+        End If
+    End Sub
+
+    Private Sub Load_ALL_users()
+        Dim ds As DataSet
+        Dim s_user As New Sys_user
+
+        If txtSearch.Text <> "" Then
+            Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT US WHERE US.FIRSTNAME LIKE '%" & txtSearch.Text & "%'"
+            ds = LoadSQL(mysql, "TBL_DEFAULT_USER")
+        Else
+            Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT WHERE STATUS <> 0"
+            ds = LoadSQL(mysql, "TBL_DEFAULT_USER")
+        End If
+
+        lvALL_USER_LIST.Items.Clear()
+        With s_user
+            For Each dr As DataRow In ds.Tables(0).Rows
+                .Users(dr.Item("USERID"))
+                Dim lv As ListViewItem = lvALL_USER_LIST.Items.Add(.ID)
+                lv.SubItems.Add(.FIRSTNAME & " " + .MIDDLENAME & " " + .LASTNAME)
+                lv.SubItems.Add(.EMAIL_ADDRESS)
+            Next
+        End With
+
+    End Sub
+
+    
+    Private Sub lvALL_USER_LIST_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvALL_USER_LIST.DoubleClick
+        i = MODULES.SEARCH
+        Load_Privileges(True)
+        Load_ALL_users()
+        tbControl.SelectedTab = TabPage1
     End Sub
 End Class

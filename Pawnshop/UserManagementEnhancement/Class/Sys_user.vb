@@ -389,7 +389,7 @@ nextLINETODO:
             .Item("LASTLOGIN") = Now
             .Item("PASSWORD_AGE") = Now.AddDays(90)
             .Item("SYSTEMINFO") = Now
-            .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "")
+            .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = ISEXPIRED
             .Item("HasFailed_attemp") = _HasFailed_attemp
             .Item("NUM_OF_FAILED_ATTEMP") = _NumOf_Failed_attemp
@@ -522,14 +522,15 @@ nextLINETODO:
         End With
     End Sub
 
-    Friend Sub Save_Privilege(ByVal idx As Integer)
+    Friend Sub Save_Privilege(ByVal idx As Integer, ByVal isNew As Boolean)
         mySql = String.Format("SELECT * FROM " & MAIN_LINE & " WHERE USERLINE_ID = '{0}'", idx)
         Dim ds As DataSet = LoadSQL(mySql, MAIN_LINE)
 
-        Dim isNew As Boolean
 
-        If ds.Tables(MAIN_LINE).Rows.Count = 0 Then
-            isNew = True
+        If isNew Then
+            mySql = "SELECT * FROM " & maintable & " ORDER BY USERID DESC ROWS 1"
+            Dim ds1 As DataSet = LoadSQL(mySql, maintable)
+            _USERID = ds1.Tables(0).Rows(0).Item("USERID")
 
             Dim dsnewrow As DataRow
             dsnewrow = ds.Tables(MAIN_LINE).NewRow
