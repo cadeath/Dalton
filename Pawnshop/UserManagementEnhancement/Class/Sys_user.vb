@@ -366,7 +366,7 @@ nextLINETODO:
             .Item("AGE") = _AGE
             .Item("LASTLOGIN") = Now
             .Item("PASSWORD_AGE") = Now.AddDays(90)
-            .Item("SYSTEMINFO") = Now
+            ' .Item("SYSTEMINFO") = Now
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = ISEXPIRED
             .Item("STATUS") = _UserStatus
@@ -570,8 +570,9 @@ nextLINETODO:
     End Function
 
 
-    Friend Function CheckAccount_Expiration(ByVal u_PASS As String) As Boolean
-        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'"
+    Friend Function CheckAccount_Expiration(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
+        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
+                "AND UPPER(USERNAME) = UPPER('" & uNAME & "')"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         If ds.Tables(0).Rows.Count = 0 Then
@@ -579,24 +580,33 @@ nextLINETODO:
         End If
 
         With ds.Tables(0).Rows(0)
-            If .Item("PASSWORD_AGE") = Now.ToShortDateString Then
-                MsgBox("Your account has been expired," & vbCrLf & _
-                       "Please Contact ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
+            If Now.ToShortDateString > .Item("PASSWORD_AGE") Then
+                MsgBox("You reached the MAXIMUM DAYS account expiration," & vbCrLf & _
+                       "Please Contact SYSYTEM ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
                 Return False
             End If
         End With
         Return True
     End Function
 
-    Friend Sub Count_days()
-        Dim ds As DataSet = dsUSEr()
-        For Each dr As DataRow In ds.Tables(0).Rows
-            With dr
-                .Item("DAYS_COUNT") = .Item("DAYS_COUNT") - 1
-            End With
-            database.SaveEntry(ds, False)
-        Next
-    End Sub
+    Friend Function EXPIRY_COUNTDOWN(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
+        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
+                 "AND UPPER(USERNAME) = UPPER('" & uNAME & "')"
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Return True
+        End If
+
+        With ds.Tables(0).Rows(0)
+            If Now.ToShortDateString > .Item("PASSWORD_EXPIRY") Then
+                MsgBox("You reached MINIMUM DAYS account expiration," & vbCrLf & _
+                       "Please Contact SYSTEM ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
+                Return False
+            End If
+        End With
+        Return True
+    End Function
 
     Friend Sub Back_to_MAXDAYS(ByVal upass As String)
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
