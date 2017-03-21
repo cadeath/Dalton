@@ -20,6 +20,7 @@
     End Enum
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         txtUsername.Focus()
         ChkInactivateUser.Visible = False
         lblStatus.Visible = False
@@ -121,7 +122,6 @@
     End Function
 
     Private Sub btnCreateAccount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateAccount.Click
-
         If btnCreateAccount.Text = "&Create Account" Then
             Save()
         ElseIf btnCreateAccount.Text = "&Edit" Then
@@ -172,6 +172,7 @@
                 .ISEXPIRED = 0
             End If
 
+            .COUNTER = txtAddDays.Text
         End With
 
         If CHKISEXPIRED.Checked = True Then
@@ -246,6 +247,8 @@
             Else
                 .UserStatus = 1
             End If
+
+            .COUNTER = txtAddDays.Text
         End With
 
         If CHKISEXPIRED.Checked = True Then

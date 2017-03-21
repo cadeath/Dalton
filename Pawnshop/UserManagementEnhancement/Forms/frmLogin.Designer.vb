@@ -22,31 +22,11 @@ Partial Class frmLogin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtUsername = New UserManagementEnhancement.watermark()
-        Me.txtPassword = New UserManagementEnhancement.watermark()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
+        Me.txtPassword = New UserManagementEnhancement.watermark()
+        Me.txtUsername = New UserManagementEnhancement.watermark()
         Me.SuspendLayout()
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUsername.Location = New System.Drawing.Point(40, 42)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(243, 26)
-        Me.txtUsername.TabIndex = 0
-        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtUsername.WatermarkText = "Username"
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(40, 80)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(243, 26)
-        Me.txtPassword.TabIndex = 1
-        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPassword.WatermarkText = "Password"
         '
         'btnLogin
         '
@@ -72,17 +52,39 @@ Partial Class frmLogin
         Me.btnExit.Text = "&Exit"
         Me.btnExit.UseVisualStyleBackColor = False
         '
+        'txtPassword
+        '
+        Me.txtPassword.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Location = New System.Drawing.Point(40, 80)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(243, 26)
+        Me.txtPassword.TabIndex = 1
+        Me.txtPassword.UseSystemPasswordChar = True
+        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPassword.WatermarkText = "Password"
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUsername.Location = New System.Drawing.Point(40, 42)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(243, 26)
+        Me.txtUsername.TabIndex = 0
+        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtUsername.WatermarkText = "Username"
+        '
         'frmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
-        Me.ClientSize = New System.Drawing.Size(312, 203)
+        Me.ClientSize = New System.Drawing.Size(313, 199)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUsername)
         Me.Name = "frmLogin"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Login"
         Me.ResumeLayout(False)
         Me.PerformLayout()

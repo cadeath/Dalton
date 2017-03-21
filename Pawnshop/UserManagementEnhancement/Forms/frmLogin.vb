@@ -29,7 +29,9 @@
             MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Exit Sub
         End If
 
+        SYSTEM_USERIDX = user_Login.ID
         MsgBox("Welcome, " & UppercaseFirstLetter(user_Login.USERNAME) & "", MsgBoxStyle.Information, "Login")
+        Me.Close()
     End Sub
 
 
@@ -56,5 +58,13 @@
     Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If Not ChkIf_reached_MaxAttemp() Then MsgBox("You account is temporarily locked," _
             & vbCrLf & "please contact the system administrator for assistance!", MsgBoxStyle.Exclamation, "Locked") : Me.Close()
+    End Sub
+
+    Private Sub txtPassword_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
+        If isEnter(e) Then btnLogin.PerformClick()
+    End Sub
+
+    Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
+        End
     End Sub
 End Class

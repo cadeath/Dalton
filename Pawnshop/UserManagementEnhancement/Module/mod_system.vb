@@ -6,6 +6,9 @@ Module mod_system
     Public SYSTEM_USERID As Integer = 0
     Public tmpPassword As String = ""
 
+    Public selected_USEr As New Sys_user
+    Public SYSTEM_USERIDX As String = selected_USEr.ID
+
     Public Function CommandPrompt(ByVal app As String, ByVal args As String) As String
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo(app, args)

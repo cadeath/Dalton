@@ -150,6 +150,16 @@ Public Class Sys_user
         End Set
     End Property
 
+    Private _COUNTER As Integer
+    Public Property COUNTER() As Integer
+        Get
+            Return _COUNTER
+        End Get
+        Set(ByVal value As Integer)
+            _COUNTER = value
+        End Set
+    End Property
+
     Private _systeminfo As Date
     Public Property systeminfo() As Date
         Get
@@ -285,6 +295,11 @@ Public Class Sys_user
             Return False
         End If
 
+        If Not Check_USERNAME_IfExists(_USERNAME, "SAVE") Then
+            MsgBox("The username you've entered is already taken." & vbCrLf & _
+                   "Please try again.", MsgBoxStyle.Critical, "Validate") : Return False
+        End If
+
         Dim dsnewRow As DataRow
         dsnewRow = ds.Tables(maintable).NewRow
         With dsnewRow
@@ -304,6 +319,7 @@ Public Class Sys_user
             .Item("SYSTEMINFO") = Now
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = _ISEXPIRED
+            .Item("EXPIRY_COUNTER") = _COUNTER
             .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
@@ -334,19 +350,21 @@ Public Class Sys_user
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", _ID)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
-
-        If ds.Tables(0).Rows(0).Item("USERPASS") = EncryptString(_USERPASS) Then
+        If ds.Tables(maintable).Rows(0).Item("USERNAME") = USERNAME Then
             Console.WriteLine("cURRENT PASSWORD")
         End If
 
+        If Not Check_USERNAME_IfExists(_USERNAME, , _ID) Then
+            MsgBox("The username you've entered is already taken." & vbCrLf & _
+                   "Please try again.", MsgBoxStyle.Critical, "Validate") : Return False
+        End If
+
         If _USERPASS = "" Then
-            Passwd_update = False
-            GoTo nextLINETODO
+            Passwd_update = False : GoTo nextLINETODO
         Else
             If Not Check_Pass_IfExists(_ID, EncryptString(_USERPASS)) Then
                 MsgBox("The password you've entered is already taken." & vbCrLf & _
-                       "Please try again.", MsgBoxStyle.Critical, "Validate")
-                Return False
+                       "Please try again.", MsgBoxStyle.Critical, "Validate") : Return False
             End If
         End If
 
@@ -369,6 +387,7 @@ nextLINETODO:
             ' .Item("SYSTEMINFO") = Now
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = ISEXPIRED
+            .Item("EXPIRY_COUNTER") = _COUNTER
             .Item("STATUS") = _UserStatus
         End With
         database.SaveEntry(ds, False)
@@ -459,6 +478,37 @@ nextLINETODO:
         Return True
     End Function
 
+    Friend Function Check_USERNAME_IfExists(ByVal uNAME As String, Optional ByVal isSave As String = "", Optional ByVal idx As Integer = 0) As Boolean
+        Dim ds As DataSet
+
+        If isSave = "SAVE" Then
+            mySql = "SELECT * FROM " & maintable & " WHERE USERNAME = '" & uNAME & "'"
+            ds = LoadSQL(mySql, maintable)
+        Else
+            mySql = "SELECT * FROM " & maintable & " WHERE USERID = '" & idx & "' AND USERNAME = '" & uNAME & "'"
+            ds = LoadSQL(mySql, maintable)
+        End If
+
+        If isSave = "SAVE" Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                Return False
+            End If
+        Else
+            If ds.Tables(0).Rows.Count > 0 Then
+                Return True
+            End If
+
+        End If
+
+
+        For Each dr As DataRow In dsUSEr.Tables(0).Rows
+            If uNAME = dr.Item("USERNAME") Then
+                Return False
+            End If
+        Next
+        Return True
+    End Function
+
     Friend Function dsUSEr() As DataSet
         Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT"
         Dim ds As DataSet = LoadSQL(mysql, "TBL_USER_DEFAULT")
@@ -492,6 +542,7 @@ nextLINETODO:
             _systeminfo = .Item("SYSTEMINFO")
             _PASSWORD_EXPIRY = .Item("PASSWORD_EXPIRY")
             _ISEXPIRED = .Item("ISEXPIRED")
+            _COUNTER = .Item("EXPIRY_COUNTER")
             _UserStatus = .Item("STATUS")
         End With
     End Sub
@@ -604,6 +655,18 @@ nextLINETODO:
                        "Please Contact SYSTEM ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
                 Return False
             End If
+        End With
+        Return True
+    End Function
+
+    Friend Function Back_to_max_if_Login(ByVal Uname As String, ByVal pNAME As String) As Boolean
+        mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(pNAME) & "'" & _
+                 "AND UPPER(USERNAME) = UPPER('" & Uname & "')"
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        With ds.Tables(0).Rows(0)
+            .Item("LASTLOGIN") = Now
+            .Item("PASSWORD_EXPIRY") = Now
         End With
         Return True
     End Function

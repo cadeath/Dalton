@@ -24,9 +24,6 @@ Partial Class frmUserManagement
     Private Sub InitializeComponent()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgRulePrivilege = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.lvUserList = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -65,12 +62,15 @@ Partial Class frmUserManagement
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtSearch = New UserManagementEnhancement.watermark()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.rbDisable = New System.Windows.Forms.RadioButton()
+        Me.rbEnable = New System.Windows.Forms.RadioButton()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.btnSaveSettings = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtFailedAttemp = New UserManagementEnhancement.watermark()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.rbEnable = New System.Windows.Forms.RadioButton()
-        Me.rbDisable = New System.Windows.Forms.RadioButton()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
@@ -98,30 +98,11 @@ Partial Class frmUserManagement
         Me.dgRulePrivilege.AllowUserToAddRows = False
         Me.dgRulePrivilege.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgRulePrivilege.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
-        Me.dgRulePrivilege.Location = New System.Drawing.Point(135, 5)
+        Me.dgRulePrivilege.Location = New System.Drawing.Point(160, 6)
         Me.dgRulePrivilege.Name = "dgRulePrivilege"
         Me.dgRulePrivilege.RowHeadersVisible = False
-        Me.dgRulePrivilege.Size = New System.Drawing.Size(433, 402)
+        Me.dgRulePrivilege.Size = New System.Drawing.Size(409, 402)
         Me.dgRulePrivilege.TabIndex = 0
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "#"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 30
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "PRIVILEGE TYPE"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 220
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "ACCESS TYPE"
-        Me.Column3.Items.AddRange(New Object() {"Full Access", "Read Only", "No Access"})
-        Me.Column3.Name = "Column3"
-        Me.Column3.Width = 180
         '
         'TabPage1
         '
@@ -407,10 +388,10 @@ Partial Class frmUserManagement
         'txtPasswordAge
         '
         Me.txtPasswordAge.BackColor = System.Drawing.SystemColors.Window
-        Me.txtPasswordAge.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPasswordAge.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPasswordAge.Location = New System.Drawing.Point(12, 128)
         Me.txtPasswordAge.Name = "txtPasswordAge"
-        Me.txtPasswordAge.Size = New System.Drawing.Size(368, 29)
+        Me.txtPasswordAge.Size = New System.Drawing.Size(368, 26)
         Me.txtPasswordAge.TabIndex = 2
         Me.txtPasswordAge.WatermarkColor = System.Drawing.Color.Gray
         Me.txtPasswordAge.WatermarkText = "Enter number days password's expiration"
@@ -418,10 +399,10 @@ Partial Class frmUserManagement
         'txtAddDays
         '
         Me.txtAddDays.BackColor = System.Drawing.SystemColors.Window
-        Me.txtAddDays.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAddDays.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddDays.Location = New System.Drawing.Point(12, 93)
         Me.txtAddDays.Name = "txtAddDays"
-        Me.txtAddDays.Size = New System.Drawing.Size(368, 29)
+        Me.txtAddDays.Size = New System.Drawing.Size(368, 26)
         Me.txtAddDays.TabIndex = 1
         Me.txtAddDays.WatermarkColor = System.Drawing.Color.Gray
         Me.txtAddDays.WatermarkText = "Enter number of days to inactive account"
@@ -522,6 +503,37 @@ Partial Class frmUserManagement
         Me.TabPage5.Text = "Settings"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'rbDisable
+        '
+        Me.rbDisable.AutoSize = True
+        Me.rbDisable.Location = New System.Drawing.Point(284, 76)
+        Me.rbDisable.Name = "rbDisable"
+        Me.rbDisable.Size = New System.Drawing.Size(69, 20)
+        Me.rbDisable.TabIndex = 24
+        Me.rbDisable.TabStop = True
+        Me.rbDisable.Text = "Disable"
+        Me.rbDisable.UseVisualStyleBackColor = True
+        '
+        'rbEnable
+        '
+        Me.rbEnable.AutoSize = True
+        Me.rbEnable.Location = New System.Drawing.Point(206, 76)
+        Me.rbEnable.Name = "rbEnable"
+        Me.rbEnable.Size = New System.Drawing.Size(66, 20)
+        Me.rbEnable.TabIndex = 23
+        Me.rbEnable.TabStop = True
+        Me.rbEnable.Text = "Enable"
+        Me.rbEnable.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(17, 76)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(179, 16)
+        Me.Label6.TabIndex = 22
+        Me.Label6.Text = "Enable/Disable Failed Attemp"
+        '
         'btnSaveSettings
         '
         Me.btnSaveSettings.BackColor = System.Drawing.Color.White
@@ -554,36 +566,26 @@ Partial Class frmUserManagement
         Me.txtFailedAttemp.WatermarkColor = System.Drawing.Color.Gray
         Me.txtFailedAttemp.WatermarkText = "Enter number of failed attemp"
         '
-        'Label6
+        'Column1
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(17, 76)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(179, 16)
-        Me.Label6.TabIndex = 22
-        Me.Label6.Text = "Enable/Disable Failed Attemp"
+        Me.Column1.HeaderText = "#"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column1.Width = 5
         '
-        'rbEnable
+        'Column2
         '
-        Me.rbEnable.AutoSize = True
-        Me.rbEnable.Location = New System.Drawing.Point(206, 76)
-        Me.rbEnable.Name = "rbEnable"
-        Me.rbEnable.Size = New System.Drawing.Size(66, 20)
-        Me.rbEnable.TabIndex = 23
-        Me.rbEnable.TabStop = True
-        Me.rbEnable.Text = "Enable"
-        Me.rbEnable.UseVisualStyleBackColor = True
+        Me.Column2.HeaderText = "PRIVILEGE TYPE"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 220
         '
-        'rbDisable
+        'Column3
         '
-        Me.rbDisable.AutoSize = True
-        Me.rbDisable.Location = New System.Drawing.Point(284, 76)
-        Me.rbDisable.Name = "rbDisable"
-        Me.rbDisable.Size = New System.Drawing.Size(69, 20)
-        Me.rbDisable.TabIndex = 24
-        Me.rbDisable.TabStop = True
-        Me.rbDisable.Text = "Disable"
-        Me.rbDisable.UseVisualStyleBackColor = True
+        Me.Column3.HeaderText = "ACCESS TYPE"
+        Me.Column3.Items.AddRange(New Object() {"Full Access", "Read Only", "No Access"})
+        Me.Column3.Name = "Column3"
+        Me.Column3.Width = 180
         '
         'frmUserManagement
         '
@@ -593,7 +595,9 @@ Partial Class frmUserManagement
         Me.Controls.Add(Me.btnCancell)
         Me.Controls.Add(Me.tbControl)
         Me.Controls.Add(Me.btnCreateAccount)
+        Me.MaximizeBox = False
         Me.Name = "frmUserManagement"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "User Management"
         Me.TabPage2.ResumeLayout(False)
         CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).EndInit()
@@ -635,9 +639,6 @@ Partial Class frmUserManagement
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnCreateAccount As System.Windows.Forms.Button
     Friend WithEvents tbControl As System.Windows.Forms.TabControl
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents txtPasswordAge As UserManagementEnhancement.watermark
@@ -660,5 +661,8 @@ Partial Class frmUserManagement
     Friend WithEvents rbDisable As System.Windows.Forms.RadioButton
     Friend WithEvents rbEnable As System.Windows.Forms.RadioButton
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewComboBoxColumn
 
 End Class
