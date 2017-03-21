@@ -120,9 +120,23 @@ Public Class frmPrint
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidSales
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    Void()
+        'End If
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidSales
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                Void()
+            End If
         Else
             Void()
         End If
