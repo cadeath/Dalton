@@ -120,6 +120,7 @@ Public Class frmPrint
     End Sub
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
+        If lvReceipt.SelectedItems.Count = 0 Then Exit Sub
         'If Not OTPDisable Then
         '    diagOTP.FormType = diagOTP.OTPType.VoidSales
         '    If Not CheckOTP() Then Exit Sub
