@@ -608,17 +608,6 @@ nextLINETODO:
         Return True
     End Function
 
-    Friend Sub Back_to_MAXDAYS(ByVal upass As String)
-        mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
-        Dim ds As DataSet = LoadSQL(mySql, maintable)
-
-        With ds.Tables(0).Rows(0)
-            .Item("PASSWORD_EXPIRY") = PASSWORD_EXPIRY_COUNT
-        End With
-        database.SaveEntry(ds, False)
-        Console.WriteLine("Max Days updated.")
-    End Sub
-
     Friend Sub Populate_Failed_Attemp()
         Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
 
