@@ -609,14 +609,52 @@ nextLINETODO:
         Console.WriteLine("Max Days updated.")
     End Sub
 
-    Friend Function Count_LOCKDOWN(ByVal c As Integer) As Boolean
-        Dim wrongLogin As Integer = c
+    Friend Sub Populate_Failed_Attemp()
+        Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
 
-        If wrongLogin = 3 Then
-            Return False
-        End If
+        For Each itm In opt_keys
 
-        Return True
-    End Function
+            Dim mysql As String = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS ='" & itm & "'"
+            Dim ds As DataSet = LoadSQL(mysql, "TBLMAINTENANCE")
+
+            If ds.Tables(0).Rows.Count = 0 Then
+                Dim dsnewrow As DataRow
+                dsnewrow = ds.Tables(0).NewRow
+                dsnewrow.Item("OPT_KEYS") = itm
+                ds.Tables(0).Rows.Add(dsnewrow)
+                database.SaveEntry(ds)
+            Else
+                With ds.Tables(0).Rows(0)
+                    .Item("OPT_KEYS") = itm
+                End With
+                database.SaveEntry(ds, False)
+            End If
+        Next
+    End Sub
+
+    Friend Sub Load_Failed_attemp()
+        Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
+        For Each ITM In opt_keys
+            mySql = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS = '" & ITM & "'"
+            Dim ds As DataSet = LoadSQL(mySql, "TBLMAINTENANCE")
+
+            If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
+            If ITM = "FailedAttempNum" Then
+                With ds.Tables(0).Rows(0)
+                    frmUserManagement.txtFailedAttemp.Text = .Item("OPT_VALUES")
+                End With
+            Else
+                With ds.Tables(0).Rows(0)
+                    If .Item("OPT_VALUES") = "Disable" Then
+                        frmUserManagement.rbDisable.Checked = True
+                    Else
+                        frmUserManagement.rbEnable.Checked = True
+                    End If
+
+                End With
+            End If
+        Next
+    End Sub
 #End Region
 End Class

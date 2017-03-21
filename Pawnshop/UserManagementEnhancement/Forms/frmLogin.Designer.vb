@@ -22,32 +22,11 @@ Partial Class frmLogin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtUsername = New UserManagementEnhancement.watermark()
-        Me.txtPassword = New UserManagementEnhancement.watermark()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.txtPassword = New UserManagementEnhancement.watermark()
+        Me.txtUsername = New UserManagementEnhancement.watermark()
         Me.SuspendLayout()
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUsername.Location = New System.Drawing.Point(46, 30)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(235, 29)
-        Me.txtUsername.TabIndex = 0
-        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtUsername.WatermarkText = "Username"
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(46, 79)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(235, 29)
-        Me.txtPassword.TabIndex = 1
-        Me.txtPassword.UseSystemPasswordChar = True
-        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPassword.WatermarkText = "Password"
         '
         'btnLogin
         '
@@ -72,6 +51,27 @@ Partial Class frmLogin
         Me.btnCancel.TabIndex = 14
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Location = New System.Drawing.Point(46, 79)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(235, 29)
+        Me.txtPassword.TabIndex = 1
+        Me.txtPassword.UseSystemPasswordChar = True
+        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtPassword.WatermarkText = "Password"
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUsername.Location = New System.Drawing.Point(46, 30)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(235, 29)
+        Me.txtUsername.TabIndex = 0
+        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
+        Me.txtUsername.WatermarkText = "Username"
         '
         'frmLogin
         '

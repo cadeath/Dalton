@@ -3,12 +3,16 @@
     Dim Save_userRule As New User_rule
     Dim Save_user As New Sys_user
     Dim Add_user_Privilege As New Sys_user
+    Dim Failed_attmp As New Sys_user
+    Dim Load_Failed As New Sys_user
 
     Dim priv_list As New List(Of String)()
 
     Dim privilege_chunk As New TextBox
     Dim i As Integer
     Dim tmpID As Integer
+
+    Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
 
     Enum MODULES
         LOAD = 0
@@ -20,14 +24,15 @@
         ChkInactivateUser.Visible = False
         lblStatus.Visible = False
 
-        Populate_Failed_Attemp() 'ADD Row to Maintenance
+        Failed_attmp.Populate_Failed_Attemp() 'ADD Row to Maintenance
+        Load_Failed.Load_Failed_attemp()
 
         User_rule_mod.Create_User_Rule_Table()
-        populate_priv()
+        populate_priv() 'TEMPORARY DATA
 
         Load_Privileges(False)
 
-        VERIFY_EXPIRATION()
+        IS_EXPIRE()
 
         If Not ifTblExist("TBL_USER_DEFAULT") Then
             Exit Sub
@@ -474,10 +479,10 @@
 
 
     Private Sub CHKISEXPIRED_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CHKISEXPIRED.CheckedChanged
-        VERIFY_EXPIRATION()
+        IS_EXPIRE()
     End Sub
 
-    Private Sub VERIFY_EXPIRATION()
+    Private Sub IS_EXPIRE()
         If CHKISEXPIRED.Checked = False Then
             txtAddDays.Enabled = False : Exit Sub
         End If
@@ -527,47 +532,30 @@
         If txtFailedAttemp.Text = "" Then Exit Sub
         If rbDisable.Checked = False And rbEnable.Checked = False Then Exit Sub
 
-        Dim data As String() = {"FailedAttempNum", "IsFailedAtemp"}
-
-
-        For Each itm In data
+        For Each itm In opt_keys
             Dim mysql As String = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS ='" & itm & "'"
             Dim ds As DataSet = LoadSQL(mysql, "TBLMAINTENANCE")
 
-            With ds.Tables(0).Rows(0)
-                .Item("OPT_VALUES") = txtFailedAttemp.Text
+            If itm = "FailedAttempNum" Then
+                With ds.Tables(0).Rows(0)
+                    .Item("OPT_VALUES") = txtFailedAttemp.Text
+                End With
 
-                .Item("") = IIf(rbEnable.Checked, rbEnable.Text, rbDisable.Text)
-            End With
+            Else
+                database.SaveEntry(ds, False)
+
+                With ds.Tables(0).Rows(0)
+                    .Item("OPT_VALUES") = IIf(rbEnable.Checked, rbEnable.Text, rbDisable.Text)
+                End With
+            End If
             database.SaveEntry(ds, False)
         Next
         
         txtFailedAttemp.Text = ""
+        rbDisable.Checked = False
+        rbEnable.Checked = False
+        Load_Failed.Load_Failed_attemp()
         MsgBox("Successfully Saved.", MsgBoxStyle.Information, "Updated")
-    End Sub
-
-    Private Sub Populate_Failed_Attemp()
-        Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
-
-        For Each itm In opt_keys
-
-            Dim mysql As String = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS ='" & itm & "'"
-            Dim ds As DataSet = LoadSQL(mysql, "TBLMAINTENANCE")
-
-            If ds.Tables(0).Rows.Count = 0 Then
-                Dim dsnewrow As DataRow
-                dsnewrow = ds.Tables(0).NewRow
-                dsnewrow.Item("OPT_KEYS") = itm
-                ds.Tables(0).Rows.Add(dsnewrow)
-                database.SaveEntry(ds)
-            Else
-                With ds.Tables(0).Rows(0)
-                    .Item("OPT_KEYS") = itm
-                End With
-                database.SaveEntry(ds, False)
-            End If
-        Next
-
     End Sub
 
 
