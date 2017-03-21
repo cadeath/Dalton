@@ -70,6 +70,7 @@
             lv.Text = .Item("LayID")
 
             If .Item("BALANCE") = 0 Then lv.BackColor = Color.Red
+            If .Item("Status") = "V" Then lv.BackColor = Color.Gray
         End With
     End Sub
 
