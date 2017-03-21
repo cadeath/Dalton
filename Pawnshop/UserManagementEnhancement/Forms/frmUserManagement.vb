@@ -12,8 +12,6 @@
     Dim i As Integer
     Dim tmpID As Integer
 
-    Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
-
     Enum MODULES
         LOAD = 0
         SEARCH = 1
@@ -24,9 +22,6 @@
         txtUsername.Focus()
         ChkInactivateUser.Visible = False
         lblStatus.Visible = False
-
-        Failed_attmp.Populate_Failed_Attemp() 'ADD Row to Maintenance
-        Load_Failed.Load_Failed_attemp()
 
         User_rule_mod.Create_User_Rule_Table()
         populate_priv() 'TEMPORARY DATA
@@ -129,6 +124,7 @@
             GroupBox2.Enabled = True
             GroupBox1.Enabled = True
             dgRulePrivilege.Enabled = True
+            cboUSerType.Enabled = True
         Else
             update_user()
         End If
@@ -173,6 +169,15 @@
             End If
 
             .COUNTER = txtAddDays.Text
+
+            If txtFailedAttemp.Text = "" Then
+                .FAILEDATTEMPNUM = 0
+            Else
+                .FAILEDATTEMPNUM = txtFailedAttemp.Text
+            End If
+
+            .FAILEDATTEMPSTAT = IIf(rbEnable.Checked, rbEnable.Text, rbDisable.Text)
+            .USERTYPE = cboUSerType.Text
         End With
 
         If CHKISEXPIRED.Checked = True Then
@@ -249,6 +254,15 @@
             End If
 
             .COUNTER = txtAddDays.Text
+
+            If txtFailedAttemp.Text = "" Then
+                .FAILEDATTEMPNUM = 0
+            Else
+                .FAILEDATTEMPNUM = txtFailedAttemp.Text
+            End If
+
+            .FAILEDATTEMPSTAT = IIf(rbEnable.Checked, rbEnable.Text, rbDisable.Text)
+            .USERTYPE = cboUSerType.Text
         End With
 
         If CHKISEXPIRED.Checked = True Then
@@ -357,6 +371,8 @@
             If txtAddDays.Text = "" Then txtAddDays.Focus() : Return False
         End If
 
+        If cboUSerType.Text = "" Then tbControl.SelectedTab = TabPage2 : cboUSerType.Focus() : Return False
+
         Return True
     End Function
 
@@ -414,6 +430,16 @@
                 ChkInactivateUser.Checked = False
             End If
 
+            txtAddDays.Text = .COUNTER
+            txtFailedAttemp.Text = .FAILEDATTEMPNUM
+
+            If .FAILEDATTEMPSTAT = "Disable" Then
+                rbDisable.Checked = True
+            Else
+                rbEnable.Checked = True
+            End If
+            cboUSerType.Text = .USERTYPE
+
             'Global variable
             SYSTEM_USERID = .ID
             tmpPassword = .USERPASS
@@ -428,6 +454,7 @@
         GroupBox1.Enabled = False
         GroupBox2.Enabled = False
         dgRulePrivilege.Enabled = False
+        cboUSerType.Enabled = False
     End Sub
 
     Private Function Date_Calculation(ByVal EXPIRATE_DATE As Date) As Integer
@@ -466,6 +493,8 @@
 
         dgRulePrivilege.Enabled = True
         lblStatus.Visible = False
+
+        cboUSerType.SelectedItem = Nothing
 
         btnCreateAccount.Text = "&Create Account"
 
@@ -530,36 +559,5 @@
         Load_ALL_users()
         tbControl.SelectedTab = TabPage1
     End Sub
-
-    Private Sub btnSaveSettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveSettings.Click
-        If txtFailedAttemp.Text = "" Then Exit Sub
-        If rbDisable.Checked = False And rbEnable.Checked = False Then Exit Sub
-
-        For Each itm In opt_keys
-            Dim mysql As String = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS ='" & itm & "'"
-            Dim ds As DataSet = LoadSQL(mysql, "TBLMAINTENANCE")
-
-            If itm = "FailedAttempNum" Then
-                With ds.Tables(0).Rows(0)
-                    .Item("OPT_VALUES") = txtFailedAttemp.Text
-                End With
-
-            Else
-                database.SaveEntry(ds, False)
-
-                With ds.Tables(0).Rows(0)
-                    .Item("OPT_VALUES") = IIf(rbEnable.Checked, rbEnable.Text, rbDisable.Text)
-                End With
-            End If
-            database.SaveEntry(ds, False)
-        Next
-        
-        txtFailedAttemp.Text = ""
-        rbDisable.Checked = False
-        rbEnable.Checked = False
-        Load_Failed.Load_Failed_attemp()
-        MsgBox("Successfully Saved.", MsgBoxStyle.Information, "Updated")
-    End Sub
-
-
+   
 End Class

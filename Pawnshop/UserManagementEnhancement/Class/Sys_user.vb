@@ -8,6 +8,7 @@ Public Class Sys_user
     Private MAIN_LINE As String = "TBL_USERLINE"
     Private mySql As String = String.Empty
     Dim Passwd_update As Boolean = True
+
 #Region "Properties"
     Private _ID As Integer
     Public Property ID() As Integer
@@ -160,6 +161,26 @@ Public Class Sys_user
         End Set
     End Property
 
+    Private _FAILEDATTEMPNUM As Integer
+    Public Property FAILEDATTEMPNUM() As Integer
+        Get
+            Return _FAILEDATTEMPNUM
+        End Get
+        Set(ByVal value As Integer)
+            _FAILEDATTEMPNUM = value
+        End Set
+    End Property
+
+    Private _FAILEDATTEMPSTAT As String
+    Public Property FAILEDATTEMPSTAT() As String
+        Get
+            Return _FAILEDATTEMPSTAT
+        End Get
+        Set(ByVal value As String)
+            _FAILEDATTEMPSTAT = value
+        End Set
+    End Property
+
     Private _systeminfo As Date
     Public Property systeminfo() As Date
         Get
@@ -199,6 +220,17 @@ Public Class Sys_user
             _PASSWORD_EXPIRY = value
         End Set
     End Property
+
+    Private _USERTYPE As String
+    Public Property USERTYPE() As String
+        Get
+            Return _USERTYPE
+        End Get
+        Set(ByVal value As String)
+            _USERTYPE = value
+        End Set
+    End Property
+
     '""""""""""""""""""""""""""""""''''''''''''''''''Subtable''''''''""""""""""""""""
 
     Private _USER_HISTORYID As Integer
@@ -320,6 +352,9 @@ Public Class Sys_user
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = _ISEXPIRED
             .Item("EXPIRY_COUNTER") = _COUNTER
+            .Item("FAILEDATTEMPNUM") = _FAILEDATTEMPNUM
+            .Item("FAILEDATTEMPSTAT") = _FAILEDATTEMPSTAT
+            .Item("USERTYPE") = _USERTYPE
             .Item("STATUS") = 1
         End With
         ds.Tables(maintable).Rows.Add(dsnewRow)
@@ -388,6 +423,9 @@ nextLINETODO:
             .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = ISEXPIRED
             .Item("EXPIRY_COUNTER") = _COUNTER
+            .Item("FAILEDATTEMPNUM") = _FAILEDATTEMPNUM
+            .Item("FAILEDATTEMPSTAT") = _FAILEDATTEMPSTAT
+            .Item("USERTYPE") = _USERTYPE
             .Item("STATUS") = _UserStatus
         End With
         database.SaveEntry(ds, False)
@@ -543,6 +581,9 @@ nextLINETODO:
             _PASSWORD_EXPIRY = .Item("PASSWORD_EXPIRY")
             _ISEXPIRED = .Item("ISEXPIRED")
             _COUNTER = .Item("EXPIRY_COUNTER")
+            _FAILEDATTEMPNUM = .Item("FAILEDATTEMPNUM")
+            _FAILEDATTEMPSTAT = .Item("FAILEDATTEMPSTAT")
+            _USERTYPE = .Item("USERTYPE")
             _UserStatus = .Item("STATUS")
         End With
     End Sub
@@ -610,8 +651,19 @@ nextLINETODO:
 
 #Region "Login functions"
     Friend Function LogUser(ByVal uName As String, ByVal pWrd As String) As Boolean
-        mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE USERNAME ='{0}'" & _
-                              "AND USERPASS = '{1}'", uName, EncryptString(pWrd))
+        mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}')" & _
+                              "AND USERPASS = '{1}' AND STATUS = 1", uName, EncryptString(pWrd))
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        If ds.Tables(0).Rows.Count = 0 Then Return False
+
+        Users(ds.Tables(0).Rows(0).Item("USERID"))
+        Return True
+    End Function
+
+    Friend Function Check_username(ByVal uName As String) As Boolean
+        mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}') AND STATUS <>'0'", uName)
+
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         If ds.Tables(0).Rows.Count = 0 Then Return False
@@ -659,6 +711,25 @@ nextLINETODO:
         Return True
     End Function
 
+    Friend Function GET_FAILED_ATTEMP_NUM(ByVal uNAME As String) As Integer
+        mySql = "SELECT * FROM " & maintable & " WHERE UPPER(USERNAME) = UPPER('" & uNAME & "') AND STATUS <> '0'"
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+        If ds.Tables(0).Rows.Count = 0 Then Return 0
+
+        Return ds.Tables(0).Rows(0).Item("FAILEDATTEMPNUM")
+    End Function
+
+    Friend Function UPDATE_F_ATTMP(ByVal uNAME As String) As Boolean
+        mySql = "SELECT * FROM " & maintable & " WHERE USERNAME = '" & uNAME & "' AND STATUS <> '0'"
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        With ds.Tables(0).Rows(0)
+            .Item("STATUS") = "0"
+        End With
+        database.SaveEntry(ds, False)
+        Return True
+    End Function
+
     Friend Function Back_to_max_if_Login(ByVal Uname As String, ByVal pNAME As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(pNAME) & "'" & _
                  "AND UPPER(USERNAME) = UPPER('" & Uname & "')"
@@ -666,57 +737,10 @@ nextLINETODO:
 
         With ds.Tables(0).Rows(0)
             .Item("LASTLOGIN") = Now
-            .Item("PASSWORD_EXPIRY") = Now
+            .Item("PASSWORD_EXPIRY") = Now.AddDays(.Item("COUNTER"))
         End With
         Return True
     End Function
 
-    Friend Sub Populate_Failed_Attemp()
-        Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
-
-        For Each itm In opt_keys
-
-            Dim mysql As String = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS ='" & itm & "'"
-            Dim ds As DataSet = LoadSQL(mysql, "TBLMAINTENANCE")
-
-            If ds.Tables(0).Rows.Count = 0 Then
-                Dim dsnewrow As DataRow
-                dsnewrow = ds.Tables(0).NewRow
-                dsnewrow.Item("OPT_KEYS") = itm
-                ds.Tables(0).Rows.Add(dsnewrow)
-                database.SaveEntry(ds)
-            Else
-                With ds.Tables(0).Rows(0)
-                    .Item("OPT_KEYS") = itm
-                End With
-                database.SaveEntry(ds, False)
-            End If
-        Next
-    End Sub
-
-    Friend Sub Load_Failed_attemp()
-        Dim opt_keys As String() = {"FailedAttempNum", "IsFailedAtemp"}
-        For Each ITM In opt_keys
-            mySql = "SELECT * FROM TBLMAINTENANCE WHERE OPT_KEYS = '" & ITM & "'"
-            Dim ds As DataSet = LoadSQL(mySql, "TBLMAINTENANCE")
-
-            If ds.Tables(0).Rows.Count = 0 Then Exit Sub
-
-            If ITM = "FailedAttempNum" Then
-                With ds.Tables(0).Rows(0)
-                    frmUserManagement.txtFailedAttemp.Text = .Item("OPT_VALUES")
-                End With
-            Else
-                With ds.Tables(0).Rows(0)
-                    If .Item("OPT_VALUES") = "Disable" Then
-                        frmUserManagement.rbDisable.Checked = True
-                    Else
-                        frmUserManagement.rbEnable.Checked = True
-                    End If
-
-                End With
-            End If
-        Next
-    End Sub
 #End Region
 End Class
