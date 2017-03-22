@@ -53,7 +53,9 @@ Public Class frmMain
         'Reports
         MonthlyToolStripMenuItem.Enabled = Not st
         DailyToolStripMenuItem.Enabled = Not st
-        OthersToolStripMenuItem.Enabled = Not st
+        HourlyReportToolStripMenuItem.Enabled = Not st
+        HourlySummaryToolStripMenuItem.Enabled = Not st
+        DailyCashCountToolStripMenuItem.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()
