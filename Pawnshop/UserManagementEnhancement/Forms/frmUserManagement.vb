@@ -1,5 +1,4 @@
 ﻿Public Class frmUserManagement
-
     Dim Save_userRule As New User_rule
     Dim Save_user As New Sys_user
     Dim Add_user_Privilege As New Sys_user
@@ -17,8 +16,7 @@
         SEARCH = 1
     End Enum
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+    Private Sub frmUserManagement1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         txtUsername.Focus()
         ChkInactivateUser.Visible = False
         lblStatus.Visible = False
@@ -106,16 +104,6 @@
         End If
     End Sub
 
-    Private Function IsEmpty() As Boolean
-        For Each rw As DataGridViewRow In dgRulePrivilege.Rows
-            If rw.Cells(1).Value = "" Then MsgBox("Access Type must be filled up.", MsgBoxStyle.Exclamation, "Warning") : Return False
-            If rw.Cells(0).Value = "" Then
-                On Error Resume Next
-            End If
-        Next
-        Return True
-    End Function
-
     Private Sub btnCreateAccount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateAccount.Click
         If btnCreateAccount.Text = "&Create Account" Then
             Save()
@@ -128,9 +116,7 @@
         Else
             update_user()
         End If
-
     End Sub
-
 
     Private Sub Save()
         If Not IsValid() Then Exit Sub
@@ -274,7 +260,7 @@
                 Exit Sub
             End If
         End If
-       
+
         With Save_user
             For Each row As DataGridViewRow In dgRulePrivilege.Rows
                 .PRIVILEGE_TYPE = row.Cells(1).Value
@@ -288,7 +274,6 @@
         ClearFields("")
         MsgBox("Account successfully updated.", MsgBoxStyle.Information, "Updating Account")
     End Sub
-
 
     Private Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
         Dim charPos() As Integer = {}
@@ -321,7 +306,7 @@
         Next
     End Sub
 
-    Private Sub txtContactnumber_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+    Private Sub txtContactnumber_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtContactnumber.KeyPress
         DigitOnly(e)
         PhoneSeparator(txtContactnumber, e)
     End Sub
@@ -376,8 +361,7 @@
         Return True
     End Function
 
-
-    Private Sub lvUserList_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvUserList.DoubleClick
+    Private Sub lvUserList_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvUserList.DoubleClick
         i = MODULES.LOAD
         Load_Privileges(True)
     End Sub
@@ -509,7 +493,6 @@
         ClearFields("")
     End Sub
 
-
     Private Sub CHKISEXPIRED_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CHKISEXPIRED.CheckedChanged
         IS_EXPIRE()
     End Sub
@@ -521,7 +504,7 @@
         txtAddDays.Enabled = True
     End Sub
 
-    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
+    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then
             Load_ALL_users()
         End If
@@ -552,12 +535,14 @@
 
     End Sub
 
-    
-    Private Sub lvALL_USER_LIST_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvALL_USER_LIST.DoubleClick
+    Private Sub lvALL_USER_LIST_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvALL_USER_LIST.DoubleClick
         i = MODULES.SEARCH
         Load_Privileges(True)
         Load_ALL_users()
         tbControl.SelectedTab = TabPage1
     End Sub
-   
+
+    Private Sub txtFailedAttemp_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFailedAttemp.KeyPress
+        DigitOnly(e)
+    End Sub
 End Class
