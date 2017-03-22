@@ -3,15 +3,14 @@ Version 1.5
  - Add SMS Module for Expiry Items
  - Add TABLE SMS
  - Modify Pawn_List VIEW
-
-Version 1.4.3
  - Added LayAway Module
  - Added Function if Full Paid Record to Inventory Sales
  - Added Layaway List Report (Active layaway)
  - Fix Wrong Journal in Layaway Penalty
-
-Version 1.4.2.1
  - Added Insurance in OR Layout
+ - Added Separated OTP
+ - Added Branch Address Option in Settings
+ - Fix Different Control # for STO, Inv, Return
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES

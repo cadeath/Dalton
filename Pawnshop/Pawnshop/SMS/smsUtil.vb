@@ -26,9 +26,9 @@ Module smsUtil
         Dim smsClient As New OneApi.Client.Impl.SMSClient(config)
 
         'Comment Line this when not testing...
-        'Dim smsRequest As SMSRequest
-        'smsRequest = New SMSRequest(_smsSender, msg, num)
-        'rqId = smsClient.SmsMessagingClient.SendSMS(smsRequest).ToString
+        Dim smsRequest As SMSRequest
+        smsRequest = New SMSRequest(_smsSender, msg, num)
+        rqId = smsClient.SmsMessagingClient.SendSMS(smsRequest).ToString
 
         Console.WriteLine("Sent")
         Console.WriteLine("ID:" & rqId)
@@ -66,7 +66,7 @@ Module smsUtil
         Dim mySql As String = _
                 String.Format("SELECT * FROM PAWN_LIST WHERE (EXPIRYDATE <= '{0}' AND AUCTIONDATE > '{0}') AND (STATUS = 'L' OR STATUS = 'R') AND SENT_NOTICE = 0", CurrentDate.ToString("M/d/yyyy"))
         mySql &= vbCrLf & "ORDER BY LOANDATE ASC"
-        Console.WriteLine(mySql)
+        'Console.WriteLine(mySql)
 
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub

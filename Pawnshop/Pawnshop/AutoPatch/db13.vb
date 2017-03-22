@@ -21,7 +21,8 @@
     End Sub
 
     Private Sub Update_Maintenance()
-        UpdateOptions("SMS_MSG", "HI %CLIENT%, YOUR PT#%PAWNTICKET% WILL BE AUCTION ON %AUCTIONDATE%. Please settle it before that date.")
+        UpdateOptions("SMS_MSG", "Magandang Araw po, pinapaalala po namin na ang inyung sangla na may PT#%PAWNTICKET% ay huling araw na po para irenew o tubusin.Last day po ay %AUCTIONDATE%.Salamat po")
+
     End Sub
 
     Private Sub Modify_View_PawnList()
