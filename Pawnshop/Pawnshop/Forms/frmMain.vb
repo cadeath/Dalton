@@ -662,19 +662,18 @@ Public Class frmMain
     End Sub
 
     'Hourly Report
-    Private Sub HourlyReportToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlyReportToolStripMenuItem1.Click
+    Private Sub HourlyReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlyReportToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.Hourly
         qryDate.Show()
     End Sub
 
-    Private Sub HourlySummaryToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlySummaryToolStripMenuItem1.Click
+    Private Sub HourlySummaryToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HourlySummaryToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.HourlySummary
         qryDate.Show()
     End Sub
 
-    Private Sub DailyCashCountToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem1.Click
+    Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.Show()
     End Sub
-
 End Class
