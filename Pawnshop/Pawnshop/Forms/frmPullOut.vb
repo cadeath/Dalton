@@ -151,7 +151,7 @@ Public Class qryPullOut
         ds.Tables(fillData).Rows.Add(dsNewRow)
         database.SaveEntry(ds, True)
 
-        mySql = "Select * From PulloutDoc Order By DocID ASC"
+        mySql = "Select * From PulloutDoc Order By DocID DESC"
         ds = LoadSQL(mySql, fillData)
         Dim LastID As Integer = ds.Tables(0).Rows(0).Item("DocID")
 
@@ -218,18 +218,20 @@ Public Class qryPullOut
         mySql = "Select * From tbl_gamit Where UserID = " & ID
         fillData = "tbl_gamit"
         Dim ds As DataSet = LoadSQL(mySql, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then Return 0
+
         Return ds.Tables(0).Rows(0).Item("FullName")
     End Function
 
     Private Sub PrintPullout()
-        mySql = " Select PL.Pawnticket, PL.Loandate, PL.ExpiryDate, PL.PawnerName, PL.Description, PL.Appraiser, PD.DocDate as WithDrawDate, "
+        mySql = " Select PL.Pawnticket, PL.Loandate, PL.ExpiryDate, PL.PawnerName, PL.Description, PL.Appraiser, PD.DocDate as WithDrawDate, PL.Principal "
         mySql &= "From PulloutDoc PD "
-        mySql &= "Inner Join PullLines PL on PL.DocID = PD.DocID  Where PD.DocDate = '" & CurrentDate & "'"
+        mySql &= "Inner Join PullOutLines PL on PL.DocID = PD.DocID  Where PD.DocDate = '" & CurrentDate.ToShortDateString & "'"
 
         Dim dsName As String = "dsPullOut"
         Dim addParameters As New Dictionary(Of String, String)
 
-        addParameters.Add("txtMonthOf", "DATE: " & CurrentDate)
+        addParameters.Add("txtMonthOf", "DATE: " & CurrentDate.ToShortDateString)
         addParameters.Add("branchName", branchName)
 
         frmReport.ReportInit(mySql, dsName, "Reports\rpt_ItemPullout.rdlc", addParameters)
