@@ -1,8 +1,9 @@
 CHANGELOG
-Version 1.5
+Version 1.5.0.1
  - Add SMS Module for Expiry Items
  - Add TABLE SMS
  - Modify Pawn_List VIEW
+ - Failed Sending
  - Added LayAway Module
  - Added Function if Full Paid Record to Inventory Sales
  - Added Layaway List Report (Active layaway)

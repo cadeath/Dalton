@@ -25,13 +25,14 @@ Module smsUtil
         Dim config As New Configuration(_smsUser, _smsPassword)
         Dim smsClient As New OneApi.Client.Impl.SMSClient(config)
 
-        'Comment Line this when not testing...
+
         Dim smsRequest As SMSRequest
         smsRequest = New SMSRequest(_smsSender, msg, num)
-        rqId = smsClient.SmsMessagingClient.SendSMS(smsRequest).ToString
+        smsClient.SmsMessagingClient.SendSMS(smsRequest)
+        rqId = smsClient.SmsMessagingClient.GetDeliveryReports.ToString
 
-        Console.WriteLine("Sent")
-        Console.WriteLine("ID:" & rqId)
+
+        Console.WriteLine("Report:" & rqId)
 
         Return rqId
     End Function
@@ -71,7 +72,6 @@ Module smsUtil
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub
 
-        Console.WriteLine("Count: " & ds.Tables(0).Rows.Count)
         ExpiryCache = ds.Tables(0)
 
         If frmNoti Is Nothing Then Exit Sub
