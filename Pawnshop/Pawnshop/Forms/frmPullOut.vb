@@ -219,7 +219,7 @@ Public Class qryPullOut
         mySql = "Select * From tbl_gamit Where UserID = " & ID
         fillData = "tbl_gamit"
         Dim ds As DataSet = LoadSQL(mySql, fillData)
-        If ds.Tables(0).Rows.Count = 0 Then Return 0
+        If ds.Tables(0).Rows.Count = 0 Then Return "N/A"
 
         Return ds.Tables(0).Rows(0).Item("FullName")
     End Function
