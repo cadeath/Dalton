@@ -185,7 +185,8 @@ Public Class qryPullOut
 
         If MsgBox("Do you want to print?", MsgBoxStyle.YesNo + MsgBoxStyle.Information + _
                   MsgBoxStyle.DefaultButton2, "Print") = MsgBoxResult.No Then Exit Sub
-        PrintPullout()
+
+        PrintPullout(LastID)
         Me.Close()
     End Sub
 
@@ -223,10 +224,11 @@ Public Class qryPullOut
         Return ds.Tables(0).Rows(0).Item("FullName")
     End Function
 
-    Private Sub PrintPullout()
+    Private Sub PrintPullout(ByVal DocID As Integer)
         mySql = " Select PL.Pawnticket, PL.Loandate, PL.ExpiryDate, PL.PawnerName, PL.Description, PL.Appraiser, PD.DocDate as WithDrawDate, PL.Principal "
         mySql &= "From PulloutDoc PD "
-        mySql &= "Inner Join PullOutLines PL on PL.DocID = PD.DocID  Where PD.DocDate = '" & CurrentDate.ToShortDateString & "'"
+        mySql &= "Inner Join PullOutLines PL on PL.DocID = PD.DocID  Where PD.DocDate = '" & CurrentDate.ToShortDateString & "' "
+        mySql &= "And PD.DocID = " & DocID
 
         Dim dsName As String = "dsPullOut"
         Dim addParameters As New Dictionary(Of String, String)
