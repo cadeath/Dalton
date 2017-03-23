@@ -126,7 +126,8 @@
                 Console.WriteLine("MSG: " & text_msg)
 
                 remarks = smsUtil.SendSMS(pawner.SubItems(2).Text, MessageBuilder(TextMessage, dr))
-                remarks = IIf(remarks.Contains("messageStatus=MessageAccepted,"), "SENT", remarks)
+                remarks = IIf(remarks.Contains("status=DeliveredToTerminal,"), "SENT", remarks)
+                remarks = IIf(remarks.Contains("{deliveryReports=}"), "SENT", remarks)
 
                 If remarks = "SENT" Then
                     Dim notified As New PawnTicket2

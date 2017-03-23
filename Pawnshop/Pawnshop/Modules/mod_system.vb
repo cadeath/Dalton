@@ -663,7 +663,7 @@ Module mod_system
         If Not System.IO.File.Exists(LOG_FILE) Then CreateLog()
 
         Dim recorded_log As String = _
-            String.Format("[{0}] " & str, Now.ToString("MM/dd/yyyy HH:mm:ss"))
+            String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss")) & str
 
         Dim fs As New System.IO.FileStream(LOG_FILE, IO.FileMode.Append, IO.FileAccess.Write)
         Dim fw As New System.IO.StreamWriter(fs)
