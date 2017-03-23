@@ -51,6 +51,8 @@
         txtMENum.Text = GetOption("MEnumLast")
         txtMRNum.Text = GetOption("MRNumLast")
         txtCashInvoice.Text = GetOption("InvoiceNum")
+        txtReturnNum.Text = GetOption("SalesReturnNum")
+        txtStockOutNum.Text = GetOption("STONum")
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
