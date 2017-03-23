@@ -28,8 +28,13 @@ Module smsUtil
 
         Dim smsRequest As SMSRequest
         smsRequest = New SMSRequest(_smsSender, msg, num)
-        smsClient.SmsMessagingClient.SendSMS(smsRequest)
-        rqId = smsClient.SmsMessagingClient.GetDeliveryReports.ToString
+        Try
+            smsClient.SmsMessagingClient.SendSMS(smsRequest)
+            rqId = smsClient.SmsMessagingClient.GetDeliveryReports.ToString
+        Catch ex As Exception
+            rqId = ex.ToString
+        End Try
+        
 
 
         Console.WriteLine("Report:" & rqId)
