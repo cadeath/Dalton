@@ -97,6 +97,7 @@ Partial Class frmPawningItemNew
         Me.grpClaimer = New System.Windows.Forms.GroupBox()
         Me.btnSearchClaimer = New System.Windows.Forms.Button()
         Me.txtClaimer = New System.Windows.Forms.TextBox()
+        Me.btnAddCoi = New System.Windows.Forms.Button()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -360,9 +361,9 @@ Partial Class frmPawningItemNew
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(841, 464)
+        Me.btnCancel.Location = New System.Drawing.Point(866, 464)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(88, 33)
+        Me.btnCancel.Size = New System.Drawing.Size(63, 33)
         Me.btnCancel.TabIndex = 24
         Me.btnCancel.Text = "&Close"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -387,9 +388,9 @@ Partial Class frmPawningItemNew
         'btnRedeem
         '
         Me.btnRedeem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRedeem.Location = New System.Drawing.Point(446, 464)
+        Me.btnRedeem.Location = New System.Drawing.Point(437, 464)
         Me.btnRedeem.Name = "btnRedeem"
-        Me.btnRedeem.Size = New System.Drawing.Size(88, 33)
+        Me.btnRedeem.Size = New System.Drawing.Size(78, 33)
         Me.btnRedeem.TabIndex = 23
         Me.btnRedeem.Text = "&Redeem"
         Me.btnRedeem.UseVisualStyleBackColor = True
@@ -397,9 +398,9 @@ Partial Class frmPawningItemNew
         'btnVoid
         '
         Me.btnVoid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVoid.Location = New System.Drawing.Point(557, 464)
+        Me.btnVoid.Location = New System.Drawing.Point(608, 464)
         Me.btnVoid.Name = "btnVoid"
-        Me.btnVoid.Size = New System.Drawing.Size(88, 33)
+        Me.btnVoid.Size = New System.Drawing.Size(75, 33)
         Me.btnVoid.TabIndex = 25
         Me.btnVoid.Text = "&Void"
         Me.btnVoid.UseVisualStyleBackColor = True
@@ -409,7 +410,7 @@ Partial Class frmPawningItemNew
         Me.btnRenew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRenew.Location = New System.Drawing.Point(352, 464)
         Me.btnRenew.Name = "btnRenew"
-        Me.btnRenew.Size = New System.Drawing.Size(88, 33)
+        Me.btnRenew.Size = New System.Drawing.Size(79, 33)
         Me.btnRenew.TabIndex = 22
         Me.btnRenew.Text = "Rene&w"
         Me.btnRenew.UseVisualStyleBackColor = True
@@ -417,9 +418,9 @@ Partial Class frmPawningItemNew
         'btnSave
         '
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(747, 464)
+        Me.btnSave.Location = New System.Drawing.Point(777, 464)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(88, 33)
+        Me.btnSave.Size = New System.Drawing.Size(83, 33)
         Me.btnSave.TabIndex = 21
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -751,9 +752,9 @@ Partial Class frmPawningItemNew
         'btnPrint
         '
         Me.btnPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint.Location = New System.Drawing.Point(653, 464)
+        Me.btnPrint.Location = New System.Drawing.Point(694, 464)
         Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(88, 33)
+        Me.btnPrint.Size = New System.Drawing.Size(77, 33)
         Me.btnPrint.TabIndex = 28
         Me.btnPrint.Text = "&Print"
         Me.btnPrint.UseVisualStyleBackColor = True
@@ -843,12 +844,23 @@ Partial Class frmPawningItemNew
         Me.txtClaimer.TabIndex = 1
         Me.txtClaimer.Text = "Claimer"
         '
+        'btnAddCoi
+        '
+        Me.btnAddCoi.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddCoi.Location = New System.Drawing.Point(521, 464)
+        Me.btnAddCoi.Name = "btnAddCoi"
+        Me.btnAddCoi.Size = New System.Drawing.Size(80, 33)
+        Me.btnAddCoi.TabIndex = 35
+        Me.btnAddCoi.Text = "&Add Coi"
+        Me.btnAddCoi.UseVisualStyleBackColor = True
+        '
         'frmPawningItemNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(935, 503)
+        Me.Controls.Add(Me.btnAddCoi)
         Me.Controls.Add(Me.grpClaimer)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
@@ -959,4 +971,5 @@ Partial Class frmPawningItemNew
     Friend WithEvents txtClaimer As System.Windows.Forms.TextBox
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnAddCoi As System.Windows.Forms.Button
 End Class

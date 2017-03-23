@@ -1,5 +1,11 @@
 CHANGELOG
+
+Version 1.4.2.1
+ - Added Insurance in OR Layout
+
+
 Version 1.4.1.15
+
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
  - Added Journal in Insurance Close Store

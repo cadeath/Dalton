@@ -52,6 +52,7 @@ Public Class diagOTP
             Case OTPType.Inventory
                 frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
                 frmSalesReport.Show()
+                frmSalesReport.TopMost = True
         End Select
     End Sub
 

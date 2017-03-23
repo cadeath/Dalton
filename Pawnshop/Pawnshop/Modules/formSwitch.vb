@@ -17,6 +17,8 @@
         frmPawningV2_Claimer = 12
         frmPawningV2_SpecsValue = 13
         frmPawningV2_InterestScheme = 14
+
+        Coi = 15
     End Enum
 
     Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Client)
@@ -64,6 +66,15 @@
         Select Case gotoForm
             Case FormName.frmMoneyExchange
                 frmmoneyexchange.LoadCurrencyall(cr)
+        End Select
+    End Sub
+
+    Friend Sub ReloadFormFromInsurance(ByVal gotoForm As FormName, ByVal Ins As Insurance)
+        Select Case gotoForm
+            Case FormName.Coi
+                frmAddCoi.LoadCoi(Ins)
+            Case FormName.frmInsurance
+                frmInsurance.LoadInsurance(Ins)
         End Select
     End Sub
 End Module

@@ -615,7 +615,9 @@ Expiry</Value>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=IIF(Fields!Status.Value.ToString= "RENEWED",Fields!OldTicket.Value ,Fields!PawnTicket.Value)</Value>
+
+                              <Value>=Fields!PawnTicket.Value</Value>
+
                               <Style>
                                 <Format>000000</Format>
                               </Style>
