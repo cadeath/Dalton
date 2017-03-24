@@ -23,6 +23,8 @@ Partial Class frmSMSInfo
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblAuction = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.lblExpiry = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -40,8 +42,6 @@ Partial Class frmSMSInfo
         Me.lblSMSdate = New System.Windows.Forms.Label()
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
-        Me.lblAuction = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -66,6 +66,28 @@ Partial Class frmSMSInfo
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Pawn Info"
+        '
+        'lblAuction
+        '
+        Me.lblAuction.BackColor = System.Drawing.Color.White
+        Me.lblAuction.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblAuction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAuction.Location = New System.Drawing.Point(96, 131)
+        Me.lblAuction.Name = "lblAuction"
+        Me.lblAuction.Size = New System.Drawing.Size(248, 20)
+        Me.lblAuction.TabIndex = 14
+        Me.lblAuction.Text = "Eskie Maquilang"
+        Me.lblAuction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(6, 133)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(87, 16)
+        Me.Label5.TabIndex = 13
+        Me.Label5.Text = "Auction Date:"
         '
         'btnSearch
         '
@@ -241,28 +263,6 @@ Partial Class frmSMSInfo
         Me.btnClose.TabIndex = 14
         Me.btnClose.Text = "&Close"
         Me.btnClose.UseVisualStyleBackColor = True
-        '
-        'lblAuction
-        '
-        Me.lblAuction.BackColor = System.Drawing.Color.White
-        Me.lblAuction.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lblAuction.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAuction.Location = New System.Drawing.Point(96, 131)
-        Me.lblAuction.Name = "lblAuction"
-        Me.lblAuction.Size = New System.Drawing.Size(248, 20)
-        Me.lblAuction.TabIndex = 14
-        Me.lblAuction.Text = "Eskie Maquilang"
-        Me.lblAuction.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(6, 133)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(87, 16)
-        Me.Label5.TabIndex = 13
-        Me.Label5.Text = "Auction Date:"
         '
         'frmSMSInfo
         '
