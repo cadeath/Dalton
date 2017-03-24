@@ -65,4 +65,10 @@
         lblSMS.Text = ""
         lblSMSdate.Text = ""
     End Sub
+
+    Private Sub txtPT_KeyPress1(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtPT.KeyPress
+        If isEnter(e) Then
+            btnSearch.PerformClick()
+        End If
+    End Sub
 End Class
