@@ -212,6 +212,8 @@
             SaveEntry(ds, False)
             Dim ItemCode As String = ds.Tables(0).Rows(0).Item("ItemCode")
 
+            TransactionVoidSave("Layaway Plan", ds.Tables(0).Rows(0).Item("Encoder"), POSuser.UserID, "ID# " & ID & " ItemCode: " & ItemCode)
+
             mysql = "Select * From tblLayLines Where LayID = " & ID
             fillData = "tblLayLines"
             ds = LoadSQL(mysql, fillData)

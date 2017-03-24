@@ -299,8 +299,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 AddUserManagement()

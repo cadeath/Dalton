@@ -1328,8 +1328,9 @@ Public Class frmPawningItemNew
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 VoidPawning()
@@ -1623,7 +1624,6 @@ Public Class frmPawningItemNew
     End Function
 
     Private Sub btnAddCoi_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddCoi.Click
-        If Not isValid() Then Exit Sub
         frmAddCoi.Show()
         frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
         frmAddCoi.Ticket = String.Format("PT#{0:000000}", txtTicket.Text)

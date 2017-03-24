@@ -173,4 +173,23 @@ Friend Module database
 
         System.Threading.Thread.Sleep(1000)
     End Sub
+
+    Friend Sub AutoIncrement_ID(ByVal tbl As String, ByVal id As String)
+        Dim GENERATOR As String
+        GENERATOR = String.Format("CREATE GENERATOR {0}_{1}_GEN; ", tbl, id)
+        RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("SET GENERATOR ""{0}_{1}_GEN"" TO 0;", tbl, id)
+        RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("CREATE TRIGGER ""{0}_{1}_TRG"" FOR ""{0}""", tbl, id)
+        GENERATOR &= vbCrLf & "ACTIVE BEFORE INSERT POSITION 0 AS"
+        GENERATOR &= vbCrLf & "BEGIN"
+        GENERATOR &= vbCrLf & String.Format("IF (NEW.""{1}"" IS NULL) THEN NEW.""{1}"" = GEN_ID(""{0}_{1}_GEN"", 1);", tbl, id)
+        GENERATOR &= vbCrLf & "END;"
+        RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("ALTER TABLE {0} ADD PRIMARY KEY ({1});", tbl, id)
+        RunCommand(GENERATOR) 'ADDING PRIMARY KEY
+    End Sub
 End Module

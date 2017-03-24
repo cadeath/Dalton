@@ -432,6 +432,12 @@
     <Compile Include="OTP\diagGeneralOTP.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OTP\frmOTPManager.Designer.vb">
+      <DependentUpon>frmOTPManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\frmOTPManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="OTP\frmSample.Designer.vb">
       <DependentUpon>frmSample.vb</DependentUpon>
     </Compile>
@@ -971,6 +977,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\frmOTPManager.resx">
+      <DependentUpon>frmOTPManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\frmSample.resx">
       <DependentUpon>frmSample.vb</DependentUpon>

@@ -142,8 +142,8 @@
                 Application.DoEvents()
             Next
 
-            smsUtil.Load_Expiry()
             frmMain.displayStatus("Sending Expiry List Completed")
+            smsUtil.Load_Expiry()
             Me.Close()
         End If
     End Sub
