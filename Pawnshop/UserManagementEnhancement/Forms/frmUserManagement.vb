@@ -42,6 +42,8 @@
         Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT WHERE STATUS <> 0"
         Dim ds As DataSet = LoadSQL(mysql, "TBL_DEFAULT_USER")
 
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+
         lvUserList.Items.Clear()
         With s_user
             For Each dr As DataRow In ds.Tables(0).Rows
@@ -589,4 +591,6 @@
         txtFailedAttemp.Enabled = True
         txtFailedAttemp.Text = ""
     End Sub
+
+  
 End Class

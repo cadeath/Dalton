@@ -7,7 +7,7 @@ Module mod_system
     Public tmpPassword As String = ""
 
     Public selected_USEr As New Sys_user
-    Public SYSTEM_USERIDX As String = selected_USEr.ID
+    Public IDX As Integer = 0
 
     Public Function CommandPrompt(ByVal app As String, ByVal args As String) As String
         Dim oProcess As New Process()

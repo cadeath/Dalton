@@ -345,8 +345,8 @@ Public Class Sys_user
             .Item("BIRTHDAY") = _BIRTHDAY
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
+            .Item("ENCODERID") = IIf(IDX <> 0, IDX, 0)
             .Item("LASTLOGIN") = Now
-            '.Item("ENCODERID") = _encoderID
 
             If PASSWORD_AGE_COUNT = 0 Then
                 .Item("PASSWORD_AGE") = "01/01/0001"
@@ -423,6 +423,7 @@ nextLINETODO:
             .Item("BIRTHDAY") = _BIRTHDAY
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
+            .Item("ENCODERID") = IIf(IDX <> 0, IDX, 0)
             .Item("LASTLOGIN") = Now
 
             If PASSWORD_AGE_COUNT = 0 Then
@@ -567,7 +568,7 @@ nextLINETODO:
 
     Friend Sub Users(ByVal id As Integer)
         Dim mysql As String = "SELECT * FROM TBL_USER_DEFAULT WHERE USERID = '" & id & "'"
-        Dim ds As DataSet = LoadSQL(mysql, "TBL_USER_DEFAULT")
+        Dim ds As DataSet = LoadSQL(mysql, maintable)
 
         Load_user_All_Rows(ds.Tables(maintable).Rows(0))
     End Sub
@@ -587,6 +588,7 @@ nextLINETODO:
             _BIRTHDAY = .Item("BIRTHDAY")
             _GENDER = .Item("GENDER")
             _AGE = .Item("AGE")
+            _encoderID = .Item("ENCODERID")
             _lastLogin = IIf(IsDBNull(.Item("LASTLOGIN")), "", .Item("LASTLOGIN"))
             _PASSWORD_AGE = .Item("PASSWORD_AGE")
             _systeminfo = .Item("SYSTEMINFO")
@@ -670,21 +672,19 @@ nextLINETODO:
         If ds.Tables(0).Rows.Count = 0 Then Return False
 
         Users(ds.Tables(0).Rows(0).Item("USERID"))
-        Back_to_max_if_Login(uName, pWrd)
         Return True
     End Function
 
     Friend Function Check_username(ByVal uName As String) As Boolean
-        mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}') AND STATUS <>'0'", uName)
-
+        mySql = String.Format("SELECT USERID,USERNAME,USERPASS FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}') AND STATUS <>'1'", uName)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
-        If ds.Tables(0).Rows.Count = 0 Then Return False
+        If ds.Tables(0).Rows.Count > 0 Then
+            Return False
+        End If
 
-        Users(ds.Tables(0).Rows(0).Item("USERID"))
         Return True
     End Function
-
 
     Friend Function CheckPass_Age_Expiration(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
@@ -743,28 +743,50 @@ nextLINETODO:
     End Function
 
     Friend Function UPDATE_F_ATTMP(ByVal uNAME As String) As Boolean
-        mySql = "SELECT * FROM " & maintable & " WHERE USERNAME = '" & uNAME & "' AND STATUS <> '0'"
+        mySql = "SELECT * FROM " & maintable & " WHERE UPPER(USERNAME) = UPPER('" & uNAME & "') AND STATUS <> '0'"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         With ds.Tables(0).Rows(0)
             .Item("STATUS") = "0"
-            .Item("FailedAttempStat") = "Disable"
         End With
         database.SaveEntry(ds, False)
         Return True
     End Function
 
-    Friend Sub Back_to_max_if_Login(ByVal Uname As String, ByVal pNAME As String)
+    Friend Sub Back_to_max_if_Login(ByVal Uname As String, ByVal pNAME As String, Optional ByVal isExpired As Boolean = True)
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(pNAME) & "'" & _
                  "AND UPPER(USERNAME) = UPPER('" & Uname & "')"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         With ds.Tables(0).Rows(0)
             .Item("LASTLOGIN") = Now
-            .Item("PASSWORD_EXPIRY") = Now.AddDays(.Item("EXPIRY_COUNTER"))
+            .Item("PASSWORD_EXPIRY") = IIf(isExpired, Now.AddDays(.Item("EXPIRY_COUNTER")), "01/01/0001")
         End With
         database.SaveEntry(ds, False)
     End Sub
 
+    Friend Function chECK_If_SuperAdmin(ByVal uName As String) As Boolean
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE UPPER(USERNAME) =UPPER('{0}')", uName)
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        If ds.Tables(0).Rows.Count = 0 Then Return False
+
+        If ds.Tables(0).Rows(0).Item("USERTYPE") = "Admin" Then
+            Return True
+        Else
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Friend Function Get_Current_loginID() As Integer
+        mySql = String.Format("SELECT * FROM " & maintable & " WHERE LastLogin <> '{0}' ORDER BY LASTLOGIN DESC ROWS 1", Now)
+        Dim ds As DataSet = LoadSQL(mySql, maintable)
+
+        If ds.Tables(0).Rows.Count = 0 Then Return 0
+
+        Return ds.Tables(0).Rows(0).Item("USERID")
+    End Function
 #End Region
 End Class
