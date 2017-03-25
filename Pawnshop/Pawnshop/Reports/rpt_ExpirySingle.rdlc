@@ -9,7 +9,7 @@
       <rd:DataSourceID>a7092d25-e5f8-4f15-b187-a8fcf7872d2a</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>    
+  <DataSets>
     <DataSet Name="dsSingle">
       <Fields>
         <Field Name="SMSDATE">
@@ -186,7 +186,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!SMSDATE.Value, "dsSingle")</Value>
+                <Value>=CDate(First(Fields!SMSDATE.Value, "dsSingle")).ToShortDateString</Value>
                 <Style />
               </TextRun>
             </TextRuns>
