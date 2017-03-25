@@ -12,6 +12,7 @@ Version 1.5.0.1
  - Added Separated OTP
  - Added Branch Address Option in Settings
  - Fix Different Control # for STO, Inv, Return
+ - Added Inventory Adjustment
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES
