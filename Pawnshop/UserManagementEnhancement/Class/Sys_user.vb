@@ -658,6 +658,7 @@ nextLINETODO:
         If ds.Tables(0).Rows.Count = 0 Then Return False
 
         Users(ds.Tables(0).Rows(0).Item("USERID"))
+        Back_to_max_if_Login(uName, pWrd)
         Return True
     End Function
 
@@ -730,17 +731,17 @@ nextLINETODO:
         Return True
     End Function
 
-    Friend Function Back_to_max_if_Login(ByVal Uname As String, ByVal pNAME As String) As Boolean
+    Friend Sub Back_to_max_if_Login(ByVal Uname As String, ByVal pNAME As String)
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(pNAME) & "'" & _
                  "AND UPPER(USERNAME) = UPPER('" & Uname & "')"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
         With ds.Tables(0).Rows(0)
             .Item("LASTLOGIN") = Now
-            .Item("PASSWORD_EXPIRY") = Now.AddDays(.Item("COUNTER"))
+            .Item("PASSWORD_EXPIRY") = Now.AddDays(.Item("EXPIRY_COUNTER"))
         End With
-        Return True
-    End Function
+        database.SaveEntry(ds, False)
+    End Sub
 
 #End Region
 End Class

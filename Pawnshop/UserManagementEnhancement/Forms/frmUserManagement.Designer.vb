@@ -23,6 +23,8 @@ Partial Class frmUserManagement
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cboUSerType = New System.Windows.Forms.ComboBox()
         Me.dgRulePrivilege = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -58,20 +60,6 @@ Partial Class frmUserManagement
         Me.Label3 = New System.Windows.Forms.Label()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.txtPasword1 = New UserManagementEnhancement.watermark()
-        Me.txtContactnumber = New UserManagementEnhancement.watermark()
-        Me.txtEmailaddress = New UserManagementEnhancement.watermark()
-        Me.txtPassword = New UserManagementEnhancement.watermark()
-        Me.txtLastname = New UserManagementEnhancement.watermark()
-        Me.txtMiddlename = New UserManagementEnhancement.watermark()
-        Me.txtFirstname = New UserManagementEnhancement.watermark()
-        Me.txtUsername = New UserManagementEnhancement.watermark()
-        Me.txtFailedAttemp = New UserManagementEnhancement.watermark()
-        Me.txtPasswordAge = New UserManagementEnhancement.watermark()
-        Me.txtAddDays = New UserManagementEnhancement.watermark()
-        Me.txtSearch = New UserManagementEnhancement.watermark()
-        Me.cboUSerType = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgRulePrivilege, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
@@ -95,6 +83,25 @@ Partial Class frmUserManagement
         Me.TabPage2.Size = New System.Drawing.Size(724, 401)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Access"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(6, 139)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(66, 16)
+        Me.Label5.TabIndex = 2
+        Me.Label5.Text = "User Type"
+        '
+        'cboUSerType
+        '
+        Me.cboUSerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboUSerType.FormattingEnabled = True
+        Me.cboUSerType.Items.AddRange(New Object() {"Admin", "User"})
+        Me.cboUSerType.Location = New System.Drawing.Point(6, 158)
+        Me.cboUSerType.Name = "cboUSerType"
+        Me.cboUSerType.Size = New System.Drawing.Size(253, 24)
+        Me.cboUSerType.TabIndex = 1
         '
         'dgRulePrivilege
         '
@@ -164,20 +171,6 @@ Partial Class frmUserManagement
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.txtPasword1)
-        Me.GroupBox1.Controls.Add(Me.txtContactnumber)
-        Me.GroupBox1.Controls.Add(Me.txtEmailaddress)
-        Me.GroupBox1.Controls.Add(Me.txtPassword)
-        Me.GroupBox1.Controls.Add(Me.txtLastname)
-        Me.GroupBox1.Controls.Add(Me.txtMiddlename)
-        Me.GroupBox1.Controls.Add(Me.txtFirstname)
-        Me.GroupBox1.Controls.Add(Me.txtUsername)
-        Me.GroupBox1.Controls.Add(Me.chkShowPassword)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.rbMale)
-        Me.GroupBox1.Controls.Add(Me.rbFemale)
-        Me.GroupBox1.Controls.Add(Me.txtBirthday)
-        Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(284, 6)
         Me.GroupBox1.Name = "GroupBox1"
@@ -303,15 +296,6 @@ Partial Class frmUserManagement
         'GroupBox2
         '
         Me.GroupBox2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.GroupBox2.Controls.Add(Me.rbDisable)
-        Me.GroupBox2.Controls.Add(Me.rbEnable)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.Label8)
-        Me.GroupBox2.Controls.Add(Me.txtFailedAttemp)
-        Me.GroupBox2.Controls.Add(Me.ChkInactivateUser)
-        Me.GroupBox2.Controls.Add(Me.txtPasswordAge)
-        Me.GroupBox2.Controls.Add(Me.txtAddDays)
-        Me.GroupBox2.Controls.Add(Me.CHKISEXPIRED)
         Me.GroupBox2.Location = New System.Drawing.Point(175, 6)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(390, 389)
@@ -383,10 +367,6 @@ Partial Class frmUserManagement
         '
         'TabPage4
         '
-        Me.TabPage4.Controls.Add(Me.Label4)
-        Me.TabPage4.Controls.Add(Me.lvALL_USER_LIST)
-        Me.TabPage4.Controls.Add(Me.Label3)
-        Me.TabPage4.Controls.Add(Me.txtSearch)
         Me.TabPage4.Location = New System.Drawing.Point(4, 39)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
@@ -399,7 +379,7 @@ Partial Class frmUserManagement
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(284, 43)
+        Me.Label4.Location = New System.Drawing.Point(284, 47)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(153, 14)
         Me.Label4.TabIndex = 3
@@ -454,142 +434,6 @@ Partial Class frmUserManagement
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(65, 17)
         Me.lblStatus.Text = "User Status"
-        '
-        'txtPasword1
-        '
-        Me.txtPasword1.Location = New System.Drawing.Point(21, 178)
-        Me.txtPasword1.Name = "txtPasword1"
-        Me.txtPasword1.Size = New System.Drawing.Size(245, 29)
-        Me.txtPasword1.TabIndex = 5
-        Me.txtPasword1.UseSystemPasswordChar = True
-        Me.txtPasword1.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPasword1.WatermarkText = "Re-enter password"
-        '
-        'txtContactnumber
-        '
-        Me.txtContactnumber.Location = New System.Drawing.Point(21, 253)
-        Me.txtContactnumber.MaxLength = 13
-        Me.txtContactnumber.Name = "txtContactnumber"
-        Me.txtContactnumber.Size = New System.Drawing.Size(398, 29)
-        Me.txtContactnumber.TabIndex = 8
-        Me.txtContactnumber.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtContactnumber.WatermarkText = "Contact Number"
-        '
-        'txtEmailaddress
-        '
-        Me.txtEmailaddress.Location = New System.Drawing.Point(21, 213)
-        Me.txtEmailaddress.Name = "txtEmailaddress"
-        Me.txtEmailaddress.Size = New System.Drawing.Size(398, 29)
-        Me.txtEmailaddress.TabIndex = 7
-        Me.txtEmailaddress.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtEmailaddress.WatermarkText = "Email Address"
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Location = New System.Drawing.Point(21, 141)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(398, 29)
-        Me.txtPassword.TabIndex = 4
-        Me.txtPassword.UseSystemPasswordChar = True
-        Me.txtPassword.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPassword.WatermarkText = "Password"
-        '
-        'txtLastname
-        '
-        Me.txtLastname.Location = New System.Drawing.Point(21, 104)
-        Me.txtLastname.Name = "txtLastname"
-        Me.txtLastname.Size = New System.Drawing.Size(398, 29)
-        Me.txtLastname.TabIndex = 3
-        Me.txtLastname.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtLastname.WatermarkText = "Lastname"
-        '
-        'txtMiddlename
-        '
-        Me.txtMiddlename.Location = New System.Drawing.Point(228, 66)
-        Me.txtMiddlename.Name = "txtMiddlename"
-        Me.txtMiddlename.Size = New System.Drawing.Size(191, 29)
-        Me.txtMiddlename.TabIndex = 2
-        Me.txtMiddlename.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtMiddlename.WatermarkText = "Middlename"
-        '
-        'txtFirstname
-        '
-        Me.txtFirstname.Location = New System.Drawing.Point(21, 66)
-        Me.txtFirstname.Name = "txtFirstname"
-        Me.txtFirstname.Size = New System.Drawing.Size(201, 29)
-        Me.txtFirstname.TabIndex = 1
-        Me.txtFirstname.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtFirstname.WatermarkText = "Firstname"
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Location = New System.Drawing.Point(21, 28)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(398, 29)
-        Me.txtUsername.TabIndex = 0
-        Me.txtUsername.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtUsername.WatermarkText = "Username"
-        '
-        'txtFailedAttemp
-        '
-        Me.txtFailedAttemp.BackColor = System.Drawing.SystemColors.Window
-        Me.txtFailedAttemp.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFailedAttemp.Location = New System.Drawing.Point(129, 171)
-        Me.txtFailedAttemp.Name = "txtFailedAttemp"
-        Me.txtFailedAttemp.Size = New System.Drawing.Size(251, 26)
-        Me.txtFailedAttemp.TabIndex = 25
-        Me.txtFailedAttemp.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtFailedAttemp.WatermarkText = "Enter number of failed attemp"
-        '
-        'txtPasswordAge
-        '
-        Me.txtPasswordAge.BackColor = System.Drawing.SystemColors.Window
-        Me.txtPasswordAge.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPasswordAge.Location = New System.Drawing.Point(12, 134)
-        Me.txtPasswordAge.Name = "txtPasswordAge"
-        Me.txtPasswordAge.Size = New System.Drawing.Size(368, 26)
-        Me.txtPasswordAge.TabIndex = 2
-        Me.txtPasswordAge.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtPasswordAge.WatermarkText = "Enter number days password's expiration"
-        '
-        'txtAddDays
-        '
-        Me.txtAddDays.BackColor = System.Drawing.SystemColors.Window
-        Me.txtAddDays.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddDays.Location = New System.Drawing.Point(12, 96)
-        Me.txtAddDays.Name = "txtAddDays"
-        Me.txtAddDays.Size = New System.Drawing.Size(368, 26)
-        Me.txtAddDays.TabIndex = 1
-        Me.txtAddDays.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtAddDays.WatermarkText = "Enter number of days to inactive account"
-        '
-        'txtSearch
-        '
-        Me.txtSearch.Location = New System.Drawing.Point(61, 18)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(657, 22)
-        Me.txtSearch.TabIndex = 1
-        Me.txtSearch.WatermarkColor = System.Drawing.Color.Gray
-        Me.txtSearch.WatermarkText = "Search . . ."
-        '
-        'cboUSerType
-        '
-        Me.cboUSerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboUSerType.FormattingEnabled = True
-        Me.cboUSerType.Items.AddRange(New Object() {"Admin", "User"})
-        Me.cboUSerType.Location = New System.Drawing.Point(6, 158)
-        Me.cboUSerType.Name = "cboUSerType"
-        Me.cboUSerType.Size = New System.Drawing.Size(253, 24)
-        Me.cboUSerType.TabIndex = 1
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(6, 139)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(66, 16)
-        Me.Label5.TabIndex = 2
-        Me.Label5.Text = "User Type"
         '
         'frmUserManagement
         '

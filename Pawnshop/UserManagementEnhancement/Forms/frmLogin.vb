@@ -12,7 +12,11 @@
 
         user_Login = New Sys_user
 
-        If Not user_Login.Check_username(uName) Then MsgBox("This account is either not register or locked.", MsgBoxStyle.Critical, "Information") : Exit Sub
+        If Not user_Login.Check_username(uName) Then
+            Clearfield()
+            MsgBox("This account is either not register or locked.", MsgBoxStyle.Critical, "Validate") : Exit Sub
+        End If
+
 
         Failed_attemp = user_Login.GET_FAILED_ATTEMP_NUM(uName)
 
@@ -21,26 +25,29 @@
         If Not user_Login.EXPIRY_COUNTDOWN(uName, pName) Then Exit Sub 'Minimum days expiration
 
         If Not user_Login.LogUser(uName, pName) Then
+
             If user_Login.USERTYPE = "Admin" Then
                 i += 1
                 If i > Failed_attemp Then
                     MsgBox("You have reached the MAXIMUM logins. This is a recording.", MsgBoxStyle.Critical)
-                    Exit Sub
+                    Clearfield()
+                    End
                 End If
                 MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Exit Sub
             End If
+
             i += 1
             If i > Failed_attemp Then
-                MsgBox("You reached the MAXIMUM logins this is a recording." & vbCrLf & vbCrLf & "Your account temporarily locked.", MsgBoxStyle.Exclamation, "Locked")
+                MsgBox("You reached the MAXIMUM logins this is a recording." & vbCrLf & vbCrLf & "Your account temporarily locked.", MsgBoxStyle.Critical, "Locked")
+                Clearfield()
                 user_Login.UPDATE_F_ATTMP(uName)
-                Exit Sub
-                Me.Close()
+                End
             End If
             MsgBox("Invalid username or password!", MsgBoxStyle.Exclamation, "Invalid") : Exit Sub
         End If
 
         SYSTEM_USERIDX = user_Login.ID
-        MsgBox("Welcome, " & UppercaseFirstLetter(user_Login.USERNAME) & "", MsgBoxStyle.Information, "Login")
+        MsgBox(String.Format("Welcome {0}, you login as {1}", UppercaseFirstLetter(user_Login.USERNAME), user_Login.USERTYPE & "", MsgBoxStyle.Information, "Login"))
         Me.Close()
     End Sub
 
@@ -51,5 +58,10 @@
 
     Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
         End
+    End Sub
+
+    Private Sub Clearfield()
+        txtUsername.Text = ""
+        txtPassword.Text = ""
     End Sub
 End Class

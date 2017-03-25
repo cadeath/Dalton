@@ -321,7 +321,7 @@
         Next
     End Sub
 
-    Private Sub txtContactnumber_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtContactnumber.KeyPress
+    Private Sub txtContactnumber_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         DigitOnly(e)
         PhoneSeparator(txtContactnumber, e)
     End Sub
@@ -521,7 +521,7 @@
         txtAddDays.Enabled = True
     End Sub
 
-    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+    Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         If isEnter(e) Then
             Load_ALL_users()
         End If
