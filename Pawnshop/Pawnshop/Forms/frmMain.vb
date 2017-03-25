@@ -448,6 +448,7 @@ Public Class frmMain
                 Exit Sub
             Else
                 qryPullOut.Show()
+                Dim NewOtp As New ClassOtp("PullOut", diagGeneralOTP.txtPIN.Text)
             End If
         Else
             qryPullOut.Show()
@@ -631,6 +632,7 @@ Public Class frmMain
             Else
                 frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
                 frmSalesReport.Show()
+                Dim NewOtp As New ClassOtp("Inventory Report", diagGeneralOTP.txtPIN.Text)
             End If
         Else
             frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory

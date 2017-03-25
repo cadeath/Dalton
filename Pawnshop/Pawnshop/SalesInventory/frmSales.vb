@@ -353,6 +353,8 @@ Public Class frmSales
                 If Not diagGeneralOTP.isValid Then
                     Exit Sub
                 End If
+
+                Dim NewOtp As New ClassOtp("Stockout", diagOTP.txtPIN.Text)
             End If
 
             unsec_Customer = retVal(0) 'Branch

@@ -162,14 +162,13 @@ Public Class frmPrint
 
         Dim EncoderID As String = ds.Tables(0).Rows(0).Item("USERID")
         Dim TransactionName As String
-        Dim NewOtp As New ClassOtp("VOID SALES", diagOTP.txtPIN.Text, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
+        Dim NewOtp As New ClassOtp("VOID SALES", diagGeneralOTP.txtPIN.Text, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
         If isSales = True Then
             TransactionName = "SALES"
         Else
             TransactionName = "RECALL"
         End If
-            TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
-
+        TransactionVoidSave(TransactionName, EncoderID, POSuser.UserID, "DOCID: " & ds.Tables(0).Rows(0).Item("DocID"))
             ds.Clear()
             mysql = "SELECT * FROM DOCLINES WHERE DOCID = '" & idx & "' "
             ds = LoadSQL(mysql, "Doclines")

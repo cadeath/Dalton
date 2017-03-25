@@ -564,7 +564,7 @@ Public Class PawnTicket2
                 ds.Tables(0).Rows(0).Item("Status") = "V"
                 database.SaveEntry(ds, False)
 
-                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagGeneralOTP.txtPIN.Text, "PT# " & PawnTicket)
                 TransactionVoidSave(ModNAME, tmpEncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
@@ -573,7 +573,7 @@ Public Class PawnTicket2
                 Dim mysql As String = "SELECT * FROM " & MainTable & " WHERE PawnTicket = " & _oldPT
                 Dim ds As DataSet = LoadSQL(mysql)
 
-                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagGeneralOTP.txtPIN.Text, "PT# " & PawnTicket)
                 TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)
@@ -599,7 +599,7 @@ Public Class PawnTicket2
                 If ds.Tables(0).Rows.Count = 1 Then
                     ChangeStatus("V")
                 End If
-                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagOTP.txtPIN.Text, "PT# " & PawnTicket)
+                Dim NewOtp As New ClassOtp("VOID " & ModNAME, diagGeneralOTP.txtPIN.Text, "PT# " & PawnTicket)
                 TransactionVoidSave(ModNAME, EncoderID, POSuser.UserID, "PT# " & PawnTicket)
                 RemoveJournal(PawnID, , ModNAME)
                 RemoveDailyTimeLog(PawnID, "1", ModNAME)

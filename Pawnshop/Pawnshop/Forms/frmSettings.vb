@@ -1,6 +1,6 @@
 ﻿Public Class frmSettings
     Private locked As Boolean = IIf(GetOption("LOCKED") = "YES", True, False)
-    Private isOTPEnable As Boolean = False
+    Private isOTPEnable As Boolean
 
     Private Sub frmSettings_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.TopMost = True
@@ -9,6 +9,7 @@
         lblSAP02.Text = "SAP Code 02"
         ClearFields()
         PrinterSettings()
+        isOTPEnable = False
     End Sub
 
     Private Sub PrinterSettings()
@@ -74,6 +75,7 @@
         If Not locked Then
             UpdateSetting()
         Else
+            isOTPEnable = True
             OTPSettings_Initialization()
 
             If Not OTPDisable Then
