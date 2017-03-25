@@ -11,7 +11,7 @@
         If Coi.TicketNum <> Ticket Then
             If Coi.TicketNum <> Nothing Then
                 If MsgBox("Coi Already Have Reference # " & vbCrLf & "Do you want yo Tag", MsgBoxStyle.YesNo, "Verification") = MsgBoxResult.Yes Then
-                    AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, Coi.TicketNum)
+                    AddTimelyLogs("TAGGING COI", "New Ref. Num " & Ticket, , , "Old Ref. Num " & Coi.TicketNum, Coi.ID)
                 Else
                     Exit Sub
                 End If

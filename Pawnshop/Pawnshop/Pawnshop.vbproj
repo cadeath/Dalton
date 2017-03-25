@@ -14,7 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>false</Install>
@@ -110,6 +111,10 @@
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="OneApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\OneApi.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
@@ -188,6 +193,8 @@
     <Compile Include="AutoPatch\db1223.vb" />
     <Compile Include="AutoPatch\db1224.vb" />
     <Compile Include="AutoPatch\db1232.vb" />
+    <Compile Include="AutoPatch\db13.vb" />
+    <Compile Include="AutoPatch\db124.vb" />
     <Compile Include="Classes\Borrowings.vb" />
     <Compile Include="Classes\CashInOut.vb" />
     <Compile Include="Classes\CashInOutTransaction.vb" />
@@ -195,6 +202,7 @@
     <Compile Include="Classes\Client.vb" />
     <Compile Include="Classes\clsConversion.vb" />
     <Compile Include="Classes\CollectionCIO.vb" />
+    <Compile Include="Classes\CollectionPawnTicket.vb" />
     <Compile Include="Classes\CollectionID.vb" />
     <Compile Include="Classes\CollectionItemSpecs.vb" />
     <Compile Include="Classes\ComputerUser.vb" />
@@ -378,6 +386,32 @@
     <Compile Include="Forms\watermark.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Layaway\frmAddCustomer.Designer.vb">
+      <DependentUpon>frmAddCustomer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Layaway\frmAddCustomer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layaway\frmLayAway.Designer.vb">
+      <DependentUpon>frmLayAway.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Layaway\frmLayAway.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layaway\frmLayAwayPaymentList.Designer.vb">
+      <DependentUpon>frmLayAwayPaymentList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Layaway\frmLayAwayPaymentList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layaway\frmUploadLay.Designer.vb">
+      <DependentUpon>frmUploadLay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Layaway\frmUploadLay.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layaway\LayAway.vb" />
+    <Compile Include="Layaway\LayAwayLines.vb" />
     <Compile Include="Modules\InterestScheme\dev_Scheme.Designer.vb">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </Compile>
@@ -396,6 +430,12 @@
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
     </Compile>
     <Compile Include="OTP\diagGeneralOTP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OTP\frmOTPManager.Designer.vb">
+      <DependentUpon>frmOTPManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OTP\frmOTPManager.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OTP\frmSample.Designer.vb">
@@ -492,18 +532,6 @@
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmInsuranceList.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmLayAwayLookUp.Designer.vb">
-      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmLayAwayLookUp.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmLayAway.Designer.vb">
-      <DependentUpon>frmLayAway.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\frmLayAway.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmBorrowBrowse.Designer.vb">
@@ -771,6 +799,12 @@
     <Compile Include="SalesInventory\frmImport_IMD.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Layaway\frmLayAwayLookUp.Designer.vb">
+      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Layaway\frmLayAwayLookUp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SalesInventory\frmPLU.Designer.vb">
       <DependentUpon>frmPLU.vb</DependentUpon>
     </Compile>
@@ -824,6 +858,26 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Pawn.vb" />
+    <Compile Include="SMS\diagChangeNum.Designer.vb">
+      <DependentUpon>diagChangeNum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\diagChangeNum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SMS\frmSMSInfo.Designer.vb">
+      <DependentUpon>frmSMSInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\frmSMSInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SMS\frmSMSnotice.Designer.vb">
+      <DependentUpon>frmSMSnotice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\frmSMSnotice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\IniFileVb.vb" />
+    <Compile Include="SMS\smsUtil.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AuditConsole\frmAuditConsole.resx">
@@ -906,11 +960,26 @@
     <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Layaway\frmAddCustomer.resx">
+      <DependentUpon>frmAddCustomer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layaway\frmLayAway.resx">
+      <DependentUpon>frmLayAway.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layaway\frmLayAwayPaymentList.resx">
+      <DependentUpon>frmLayAwayPaymentList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layaway\frmUploadLay.resx">
+      <DependentUpon>frmUploadLay.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\InterestScheme\dev_Scheme.resx">
       <DependentUpon>dev_Scheme.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OTP\frmOTPManager.resx">
+      <DependentUpon>frmOTPManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\frmSample.resx">
       <DependentUpon>frmSample.vb</DependentUpon>
@@ -986,9 +1055,6 @@
     <EmbeddedResource Include="Forms\frmInsuranceList.resx">
       <DependentUpon>frmInsuranceList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLayAwayLookUp.resx">
-      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBorrowBrowse.resx">
       <DependentUpon>frmBorrowBrowse.vb</DependentUpon>
     </EmbeddedResource>
@@ -1010,9 +1076,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInsurance.resx">
       <DependentUpon>frmInsurance.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmLayAway.resx">
-      <DependentUpon>frmLayAway.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
@@ -1088,6 +1151,12 @@
     <EmbeddedResource Include="Reports\rpt_CashInOut.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_ExpirySingle.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_ForfeitLayaway.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_History.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -1095,6 +1164,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_InventoryPOS.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_LayawayList.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_LayAwayReport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_LoanRenew_Monthly2.rdlc">
@@ -1219,6 +1294,9 @@
     <EmbeddedResource Include="SalesInventory\frmImport_IMD.resx">
       <DependentUpon>frmImport_IMD.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Layaway\frmLayAwayLookUp.resx">
+      <DependentUpon>frmLayAwayLookUp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SalesInventory\frmPLU.resx">
       <DependentUpon>frmPLU.vb</DependentUpon>
     </EmbeddedResource>
@@ -1249,8 +1327,18 @@
     <EmbeddedResource Include="Seed\frmSeed.resx">
       <DependentUpon>frmSeed.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SMS\diagChangeNum.resx">
+      <DependentUpon>diagChangeNum.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SMS\frmSMSInfo.resx">
+      <DependentUpon>frmSMSInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SMS\frmSMSnotice.resx">
+      <DependentUpon>frmSMSnotice.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="backup.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1344,6 +1432,18 @@
     <Content Include="changelog.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="lib\log4net.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Newtonsoft.Json.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\OneApi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\RestSharp.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Rar.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1377,6 +1477,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

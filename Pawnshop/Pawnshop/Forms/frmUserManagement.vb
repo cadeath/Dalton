@@ -288,9 +288,24 @@
             End If
             LoadActive()
         End If
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.UserManagement
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    AddUserManagement()
+        'End If
+
+        OTPUser_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.UserManagement
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                AddUserManagement()
+            End If
         Else
             AddUserManagement()
         End If

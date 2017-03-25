@@ -13,12 +13,7 @@ Friend Module database
     Friend fbDataSet As New DataSet
     Friend conStr As String = String.Empty
 
-
-    ' TODO
-    ' Until Fixer and Patcher is finish for 1.2.3.2
-    ' DBversion will be 1.2.3.1 for the sake of one
-    ' deployed system, GAI
-    Private DBversion As String = "1.2.3.2" 'Database version.
+    Private DBversion As String = "1.3" 'Database version.
     Private language() As String = _
         {"Connection error failed."} 'verification if the database is connected.
     ''' <summary>
@@ -74,8 +69,6 @@ Friend Module database
     ''' <param name="dsEntry">Database with Table Name as Database Table Name</param>
     ''' <returns>Boolean: Success Result</returns>
     ''' <remarks></remarks>
-
-
     Friend Function SaveEntry(ByVal dsEntry As DataSet, Optional ByVal isNew As Boolean = True) As Boolean
         If dsEntry Is Nothing Then
             Return False
