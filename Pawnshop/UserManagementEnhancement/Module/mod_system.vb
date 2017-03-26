@@ -1,8 +1,8 @@
 ﻿
 Imports Microsoft.Office.Interop
 Module mod_system
-    Public PASSWORD_AGE_COUNT As Integer = 90
-    Public PASSWORD_EXPIRY_COUNT As Integer = 30
+    Public PASSWORD_AGE_COUNT As Integer = 0
+    Public PASSWORD_EXPIRY_COUNT As Integer = 0
     Public SYSTEM_USERID As Integer = 0
     Public tmpPassword As String = ""
 

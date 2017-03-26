@@ -318,7 +318,7 @@ Public Class Sys_user
 
 #Region "Procedures and Functions"
 
-    Friend Function add_USER(Optional ByVal IS_EXPIRE As Boolean = True) As Boolean
+    Friend Function add_USER(Optional ByVal ISACCT_EXPIRE As Boolean = True, Optional ByVal ISPASS_AGE_EXPIRE As Boolean = True) As Boolean
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERPASS = '{0}'", EncryptString(_USERPASS))
         Dim ds As DataSet = LoadSQL(mySql, maintable)
 
@@ -347,9 +347,15 @@ Public Class Sys_user
             .Item("AGE") = _AGE
             .Item("LASTLOGIN") = Now
             '.Item("ENCODERID") = _encoderID
-            .Item("PASSWORD_AGE") = Now.AddDays(PASSWORD_AGE_COUNT)
+
+            If PASSWORD_AGE_COUNT = 0 Then
+                .Item("PASSWORD_AGE") = "01/01/0001"
+            Else
+                .Item("PASSWORD_AGE") = Now.AddDays(PASSWORD_AGE_COUNT)
+            End If
+
             .Item("SYSTEMINFO") = Now
-            .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
+            .Item("PASSWORD_EXPIRY") = IIf(ISACCT_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = _ISEXPIRED
             .Item("EXPIRY_COUNTER") = _COUNTER
             .Item("FAILEDATTEMPNUM") = _FAILEDATTEMPNUM
@@ -379,8 +385,8 @@ Public Class Sys_user
         Return True
     End Function
 
-    Friend Function Update_USER(Optional ByVal IS_EXPIRE As Boolean = True) As Boolean
-
+    Friend Function Update_USER(Optional ByVal ISACCT_EXPIRE As Boolean = True) As Boolean
+        Dim ISPASS_AGE_EXPIRE As Boolean = True
 
         mySql = String.Format("SELECT * FROM " & maintable & " WHERE USERID = '{0}'", _ID)
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -418,9 +424,15 @@ nextLINETODO:
             .Item("GENDER") = _GENDER
             .Item("AGE") = _AGE
             .Item("LASTLOGIN") = Now
-            .Item("PASSWORD_AGE") = Now.AddDays(90)
+
+            If PASSWORD_AGE_COUNT = 0 Then
+                .Item("PASSWORD_AGE") = "01/01/0001"
+            Else
+                .Item("PASSWORD_AGE") = Now.AddDays(PASSWORD_AGE_COUNT)
+            End If
+
             ' .Item("SYSTEMINFO") = Now
-            .Item("PASSWORD_EXPIRY") = IIf(IS_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
+            .Item("PASSWORD_EXPIRY") = IIf(ISACCT_EXPIRE, Now.AddDays(PASSWORD_EXPIRY_COUNT), "01/01/0001")
             .Item("ISEXPIRED") = ISEXPIRED
             .Item("EXPIRY_COUNTER") = _COUNTER
             .Item("FAILEDATTEMPNUM") = _FAILEDATTEMPNUM
@@ -674,7 +686,7 @@ nextLINETODO:
     End Function
 
 
-    Friend Function CheckAccount_Expiration(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
+    Friend Function CheckPass_Age_Expiration(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
                 "AND UPPER(USERNAME) = UPPER('" & uNAME & "')"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -684,6 +696,11 @@ nextLINETODO:
         End If
 
         With ds.Tables(0).Rows(0)
+
+            If .Item("PASSWORD_AGE") = "01/01/0001" Then
+                Return True
+            End If
+
             If Now.ToShortDateString > .Item("PASSWORD_AGE") Then
                 MsgBox("You reached the MAXIMUM DAYS account expiration," & vbCrLf & _
                        "Please Contact SYSYTEM ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")
@@ -693,7 +710,7 @@ nextLINETODO:
         Return True
     End Function
 
-    Friend Function EXPIRY_COUNTDOWN(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
+    Friend Function Chk_Account_EXPIRY_COUNTDOWN(ByVal uNAME As String, ByVal u_PASS As String) As Boolean
         mySql = "SELECT * FROM " & maintable & " WHERE USERPASS = '" & EncryptString(u_PASS) & "'" & _
                  "AND UPPER(USERNAME) = UPPER('" & uNAME & "')"
         Dim ds As DataSet = LoadSQL(mySql, maintable)
@@ -703,6 +720,11 @@ nextLINETODO:
         End If
 
         With ds.Tables(0).Rows(0)
+
+            If .Item("PASSWORD_EXPIRY") = "01/01/0001" Then
+                Return True
+            End If
+
             If Now.ToShortDateString > .Item("PASSWORD_EXPIRY") Then
                 MsgBox("You reached MINIMUM DAYS account expiration," & vbCrLf & _
                        "Please Contact SYSTEM ADMINISTRATOR for assistance.", MsgBoxStyle.Exclamation, "Expiration")

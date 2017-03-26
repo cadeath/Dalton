@@ -20,4 +20,6 @@
     Private Sub MsgBoxAuthoriation(ByVal msg As String)
         MsgBox(msg, MsgBoxStyle.Critical, "Authorization Invalid")
     End Sub
+
+
 End Class

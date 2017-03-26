@@ -26,7 +26,7 @@
 
         Load_Privileges(False)
 
-        IS_EXPIRE()
+        ' IS_EXPIRE()
 
         If Not ifTblExist("TBL_USER_DEFAULT") Then
             Exit Sub
@@ -104,6 +104,15 @@
         End If
     End Sub
 
+    Public Function ValidateEmail(ByVal strCheck As String) As Boolean
+        Try
+            Dim vEmailAddress As New System.Net.Mail.MailAddress(strCheck)
+        Catch ex As Exception
+            Return False
+        End Try
+        Return True
+    End Function
+
     Private Sub btnCreateAccount_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateAccount.Click
         If btnCreateAccount.Text = "&Create Account" Then
             Save()
@@ -149,12 +158,12 @@
 
             If CHKISEXPIRED.Checked = True Then
                 PASSWORD_EXPIRY_COUNT = txtAddDays.Text
+                .COUNTER = txtAddDays.Text
                 .ISEXPIRED = 1
             Else
+                .COUNTER = 0
                 .ISEXPIRED = 0
             End If
-
-            .COUNTER = txtAddDays.Text
 
             If txtFailedAttemp.Text = "" Then
                 .FAILEDATTEMPNUM = 0
@@ -162,7 +171,7 @@
                 .FAILEDATTEMPNUM = txtFailedAttemp.Text
             End If
 
-            .FAILEDATTEMPSTAT = IIf(rbEnable.Checked, rbEnable.Text, rbDisable.Text)
+            .FAILEDATTEMPSTAT = IIf(chkFailedAttemp.Checked, "Enable", "Disable")
             .USERTYPE = cboUSerType.Text
         End With
 
@@ -228,8 +237,10 @@
 
             If CHKISEXPIRED.Checked = True Then
                 PASSWORD_EXPIRY_COUNT = IIf(txtAddDays.Text, txtAddDays.Text, 0)
+                .COUNTER = txtAddDays.Text
                 .ISEXPIRED = 1
             Else
+                .COUNTER = 0
                 .ISEXPIRED = 0
             End If
 
@@ -247,7 +258,7 @@
                 .FAILEDATTEMPNUM = txtFailedAttemp.Text
             End If
 
-            .FAILEDATTEMPSTAT = IIf(rbEnable.Checked, rbEnable.Text, rbDisable.Text)
+            .FAILEDATTEMPSTAT = IIf(chkFailedAttemp.Checked, "Enable", "Disable")
             .USERTYPE = cboUSerType.Text
         End With
 
@@ -327,7 +338,8 @@
         Else
             If txtPassword.Text = "" Then txtPassword.Focus() : Return False
             If txtPasword1.Text = "" Then txtPasword1.Focus() : Return False
-            If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
+            If txtPassword.TextLength < 6 Then MsgBox("Password atleast 6 or above combinations.", _
+                MsgBoxStyle.Critical, "Error") : txtPassword.Focus() : Return False
         End If
 
 
@@ -341,7 +353,8 @@
         If GetCurrentAge(txtBirthday.Text) < 18 Then MsgBox("Age must be 18 and above.", MsgBoxStyle.Exclamation, "Warning") : Return False
 
         If txtContactnumber.Text <> "" Then
-            If txtContactnumber.TextLength < 11 Then MsgBox("Contact Number is not less than 11 digit.", MsgBoxStyle.Exclamation, "Warning") : txtContactnumber.Focus() : Return False
+            If txtContactnumber.TextLength < 11 Then MsgBox("Contact Number is not less than 11 digit.", _
+                MsgBoxStyle.Exclamation, "Warning") : txtContactnumber.Focus() : Return False
         End If
 
         If dgRulePrivilege.Rows.Count = 0 Then Return False
@@ -357,6 +370,9 @@
         End If
 
         If cboUSerType.Text = "" Then tbControl.SelectedTab = TabPage2 : cboUSerType.Focus() : Return False
+
+        If Not ValidateEmail(txtEmailaddress.Text) Then txtEmailaddress.Focus() : tbControl.SelectedTab = TabPage1 _
+            : MsgBox("Email is not valid!", MsgBoxStyle.Critical, "Error") : Return False
 
         Return True
     End Function
@@ -397,7 +413,14 @@
                 txtAddDays.Text = Date_Calculation(.PASSWORD_EXPIRY)
             End If
 
-            txtPasswordAge.Text = Date_Calculation(.PASSWORD_AGE)
+            If .PASSWORD_AGE = "01/01/0001" Then
+                chkPasswrdAge.Checked = False
+            Else
+                chkPasswrdAge.Checked = True
+                txtPasswordAge.Text = Date_Calculation(.PASSWORD_AGE)
+            End If
+
+
 
             If .ISEXPIRED = 1 Then
                 CHKISEXPIRED.Checked = True
@@ -417,10 +440,10 @@
             txtAddDays.Text = .COUNTER
             txtFailedAttemp.Text = .FAILEDATTEMPNUM
 
-            If .FAILEDATTEMPSTAT = "Disable" Then
-                rbDisable.Checked = True
+            If .FAILEDATTEMPSTAT = "Enable" Then
+                chkFailedAttemp.Checked = True
             Else
-                rbEnable.Checked = True
+                chkFailedAttemp.Checked = False
             End If
             cboUSerType.Text = .USERTYPE
 
@@ -499,9 +522,11 @@
 
     Private Sub IS_EXPIRE()
         If CHKISEXPIRED.Checked = False Then
+            txtAddDays.Text = 0
             txtAddDays.Enabled = False : Exit Sub
         End If
         txtAddDays.Enabled = True
+        txtAddDays.Text = ""
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
@@ -544,5 +569,24 @@
 
     Private Sub txtFailedAttemp_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFailedAttemp.KeyPress
         DigitOnly(e)
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPasswrdAge.CheckedChanged
+        If chkPasswrdAge.Checked = False Then
+            txtPasswordAge.Text = 0
+            txtPasswordAge.Enabled = False : Exit Sub
+        End If
+        txtPasswordAge.Enabled = True
+        txtPasswordAge.Text = ""
+    End Sub
+
+  
+    Private Sub chkFailedAttemp_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkFailedAttemp.CheckedChanged
+        If chkFailedAttemp.Checked = False Then
+            txtFailedAttemp.Text = 0
+            txtFailedAttemp.Enabled = False : Exit Sub
+        End If
+        txtFailedAttemp.Enabled = True
+        txtFailedAttemp.Text = ""
     End Sub
 End Class
