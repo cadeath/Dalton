@@ -43,6 +43,8 @@
                 lv.SubItems.Add(cleanup_contact(pawner))
                 lv.SubItems.Add(dr("ITEMCLASS"))
                 lv.SubItems.Add(principal.ToString("#,##0.00"))
+                lv.SubItems.Add(dr("EXPIRYDATE"))
+                lv.SubItems.Add(dr("AUCTIONDATE"))
 
                 Application.DoEvents()
             Next

@@ -252,7 +252,7 @@ Friend Module database
                     Case Else
                         mod_name = key
                 End Select
-                Dim NewOtp As New ClassOtp(mod_name, diagOTP.txtPIN.Text, value, True)
+                Dim NewOtp As New ClassOtp(mod_name, diagGeneralOTP.txtPIN.Text, value, True)
             End If
         End If
         mySql = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"
