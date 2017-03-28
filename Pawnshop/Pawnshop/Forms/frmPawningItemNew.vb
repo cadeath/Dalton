@@ -200,6 +200,7 @@ Public Class frmPawningItemNew
                 frm_PanelTextbox.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelTextbox.retID = idx
                 frm_PanelTextbox.inputType = tmpSpec.SpecType
+                frm_PanelTextbox.txtSearch.Text = lvSpec.Items(idx).SubItems(1).Text
                 frm_PanelTextbox.ShowDialog()
             Case "Yes/No"
                 frm_PanelYesNo.DisplaySpecs(lvSpec.FocusedItem.Text)
@@ -208,6 +209,7 @@ Public Class frmPawningItemNew
             Case "MultiLine"
                 frm_PanelMultiline.DisplaySpecs(lvSpec.FocusedItem.Text)
                 frm_PanelMultiline.retID = idx
+                frm_PanelMultiline.txtSearch.Text = lvSpec.Items(idx).SubItems(1).Text
                 frm_PanelMultiline.ShowDialog()
         End Select
     End Sub
