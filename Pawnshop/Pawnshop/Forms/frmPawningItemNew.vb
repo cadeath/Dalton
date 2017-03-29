@@ -1627,7 +1627,7 @@ Public Class frmPawningItemNew
 
     Private Sub btnAddCoi_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddCoi.Click
         frmAddCoi.Show()
-        frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
+        ' frmAddCoi.Client = String.Format("{0} {1}", Pawner.FirstName, Pawner.LastName)
         frmAddCoi.Ticket = String.Format("PT#{0:000000}", txtTicket.Text)
 
     End Sub
