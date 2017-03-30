@@ -30,4 +30,5 @@
         DigitOnly(e)
         PhoneSeparator(txtNewNumber, e)
     End Sub
+
 End Class
