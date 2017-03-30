@@ -62,6 +62,8 @@
                 ds.Tables(fillData).Rows.Add(dsNewRow)
                 database.SaveEntry(ds)
                 Console.WriteLine("Entry saved")
+            Else
+                Log_Report("Duplicate pin# " & PIN & " Transaction " & ModName & " Remarks " & Remarks)
             End If
         Else
             Dim dsNewRow As DataRow

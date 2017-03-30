@@ -326,6 +326,7 @@
 
             tmpUser.SaveUser()
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
+            Dim NewOtp As New ClassOtp("Adding User", diagGeneralOTP.txtPIN.Text, "Username " & tmpUser.UserName)
         Else
 
             If Not txtPass1.Text = "" Then
@@ -360,7 +361,7 @@
                     .SaveUser(False)
                 End If
             End With
-
+            Dim NewOtp As New ClassOtp("Update User", diagGeneralOTP.txtPIN.Text, "Updating user " & selectedUser.UserName)
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
             End If
             ClearFields()

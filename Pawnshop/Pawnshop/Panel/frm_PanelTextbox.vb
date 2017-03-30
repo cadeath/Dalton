@@ -23,7 +23,7 @@
     End Sub
 
     Private Sub frm_PanelTextbox_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        txtSearch.Clear()
+        'txtSearch.Clear()
         txtSearch.Focus()
         If inputType = "String" Then
             isNumber = False

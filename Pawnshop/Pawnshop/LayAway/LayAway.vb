@@ -213,6 +213,7 @@
             Dim ItemCode As String = ds.Tables(0).Rows(0).Item("ItemCode")
 
             TransactionVoidSave("Layaway Plan", ds.Tables(0).Rows(0).Item("Encoder"), POSuser.UserID, "ID# " & ID & " ItemCode: " & ItemCode)
+            Dim NewOtp As New ClassOtp("Layaway Plan", diagGeneralOTP.txtPIN.Text, "LayawayID " & ID)
 
             mysql = "Select * From tblLayLines Where LayID = " & ID
             fillData = "tblLayLines"

@@ -12,7 +12,9 @@ Version 1.5.0.4
  - Can ReSend Failed Sending
  - Fix Wrong Journal in Layaway Penalty
  - Fix Different Control # for STO, Inv, Return
+ - Added Inventory Adjustment
  - Modify Pawn_List VIEW
+
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES

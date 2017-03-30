@@ -178,7 +178,7 @@
         database.SaveEntry(ds, False)
         Dim tmpCIO As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
 
-        Dim NewOtp As New ClassOtp("VOID " & lblCategory.Text, diagOTP.txtPIN.Text, "CashIn/OutID# " & id)
+        Dim NewOtp As New ClassOtp("VOID " & lblCategory.Text, diagGeneralOTP.txtPIN.Text, "CashIn/OutID# " & id)
         TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID, "CashIn/OutID# " & id)
 
             RemoveJournal(CashID, , Transactiontype)
