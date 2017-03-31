@@ -135,7 +135,6 @@
                     FormType = ReportType.RenewalBreakDown
                 Case "Monthly Void Report"
                     FormType = ReportType.VoidReportMonthly
-
             End Select
         End If
 
@@ -650,4 +649,5 @@
         frmReport.Show()
     End Sub
 
+    
 End Class
