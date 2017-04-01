@@ -1,6 +1,8 @@
 CHANGELOG
 Version 1.5.0.5
  - Quick View on Pawnticket
+ - Added Daily & Monthly Expiry List
+ - Fix Adjustment Zero Inventory
 
 Version 1.5.0.4
  - Added Icon

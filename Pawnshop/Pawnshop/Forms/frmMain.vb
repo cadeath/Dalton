@@ -553,10 +553,6 @@ Public Class frmMain
         frmSalesReport.Show()
     End Sub
 
-    Private Sub SMSNoticeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSNoticeToolStripMenuItem.Click
-        frmSMSInfo.Show()
-    End Sub
-
 
     'Daily Report
     Private Sub OutstandingToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OutstandingToolStripMenuItem1.Click
@@ -679,5 +675,19 @@ Public Class frmMain
     Private Sub DailyCashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DailyCashCountToolStripMenuItem.Click
         qryDate.FormType = qryDate.ReportType.DailyCashCount
         qryDate.Show()
+    End Sub
+
+    Private Sub MonthlyExpiryListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyExpiryListToolStripMenuItem.Click
+        frmSMSList.FormType = frmSMSList.ReportType.MonthlyExpiry
+        frmSMSList.Show()
+    End Sub
+
+    Private Sub ExpiryListToolStripMenuItem2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExpiryListToolStripMenuItem2.Click
+        frmSMSList.FormType = frmSMSList.ReportType.DailyExpiry
+        frmSMSList.Show()
+    End Sub
+
+    Private Sub SMSNoticeToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SMSNoticeToolStripMenuItem1.Click
+        frmSMSInfo.Show()
     End Sub
 End Class

@@ -125,29 +125,26 @@ Public Class frmAuditConsole
             ds = LoadSQL(mySql, fillData)
             DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
 
-            Dim onHand As Double = 0
+            Dim sqlUpdate As String = "UPDATE ITEMMASTER SET ONHAND = 0"
+            RunCommand(sqlUpdate)
 
-            For cnt = 2 To MaxEntries
-                mySql = "Select * From ItemMaster Where ItemCode = '" & oSheet.Cells(cnt, 2).Value & "'"
-                ds = LoadSQL(mySql, "ItemMaster")
-                onHand = ds.Tables(0).Rows(0).Item("ONHAND")
+            mySql = "SELECT * FROM ITEMMASTER"
+            ds = LoadSQL(mySql, "ITEMMASTER")
 
-                mySql = "SELECT * FROM DOCLINES ROWS 1"
-                fillData = "DOCLINES"
-                ds = LoadSQL(mySql, fillData)
-                dsNewRow = ds.Tables(fillData).NewRow
+            For Each dr As DataRow In ds.Tables(0).Rows
+                mySql = "SELECT * FROM DOCLINES "
+                ds = LoadSQL(mySql, "DOCLINES")
+                dsNewRow = ds.Tables("DOCLINES").NewRow
                 With dsNewRow
                     .Item("DOCID") = DOCID
-                    .Item("ITEMCODE") = oSheet.Cells(cnt, 2).Value
-                    .Item("DESCRIPTION") = oSheet.Cells(cnt, 3).Value
-                    .Item("QTY") = onHand
+                    .Item("ITEMCODE") = dr.Item("ItemCode")
+                    .Item("DESCRIPTION") = dr.Item("Description")
+                    .Item("QTY") = dr.Item("OnHand")
                 End With
-                ds.Tables(fillData).Rows.Add(dsNewRow)
+                ds.Tables("DOCLINES").Rows.Add(dsNewRow)
                 database.SaveEntry(ds)
-                DeductInventory(oSheet.Cells(cnt, 2).Value, onHand)
-
             Next
-
+           
             mySql = "SELECT * FROM INV ROWS 1"
             ds = LoadSQL(mySql, "INV")
             dsNewRow = ds.Tables(0).NewRow
@@ -188,8 +185,8 @@ Public Class frmAuditConsole
             Dim ds As DataSet
             Dim dsNewRow As DataRow
             Dim DOCID As Integer
-            mySql = "SELECT * FROM INV ROWS 1"
-            ds = LoadSQL(mySql, "INV")
+            mysql = "SELECT * FROM INV ROWS 1"
+            ds = LoadSQL(mysql, "INV")
             dsNewRow = ds.Tables(0).NewRow
             With dsNewRow
                 .Item("DOCNUM") = RefNum
@@ -200,14 +197,14 @@ Public Class frmAuditConsole
             ds.Tables("INV").Rows.Add(dsNewRow)
             database.SaveEntry(ds)
 
-            mySql = "SELECT * FROM INV ORDER BY DOCID DESC ROWS 1"
-            ds = LoadSQL(mySql)
+            mysql = "SELECT * FROM INV ORDER BY DOCID DESC ROWS 1"
+            ds = LoadSQL(mysql)
             DOCID = ds.Tables(0).Rows(0).Item("DOCID")
 
             For cnt = 2 To MaxEntries
                 ' Add Document Lines
-                mySql = "SELECT * FROM INVLINES ROWS 1"
-                ds = LoadSQL(mySql, "INVLINES")
+                mysql = "SELECT * FROM INVLINES ROWS 1"
+                ds = LoadSQL(mysql, "INVLINES")
                 dsNewRow = ds.Tables(0).NewRow
                 With dsNewRow
                     .Item("DOCID") = DOCID

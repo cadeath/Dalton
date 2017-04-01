@@ -737,6 +737,12 @@
     <Compile Include="Reports\frmSegreList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\frmSMSList.Designer.vb">
+      <DependentUpon>frmSMSList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\frmSMSList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\qryAuction.Designer.vb">
       <DependentUpon>qryAuction.vb</DependentUpon>
     </Compile>
@@ -1132,6 +1138,9 @@
     <EmbeddedResource Include="Reports\frmSalesReport.resx">
       <DependentUpon>frmSalesReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\frmSMSList.resx">
+      <DependentUpon>frmSMSList.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\qryAuction.resx">
       <DependentUpon>qryAuction.vb</DependentUpon>
     </EmbeddedResource>
@@ -1155,6 +1164,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_CashInOut.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_ExpiryList.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpt_ExpirySingle.rdlc">
