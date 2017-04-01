@@ -13,6 +13,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Patcher", "Patcher\Patcher.
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "FileIntegrityCheck", "FileIntegrityCheck\FileIntegrityCheck.vbproj", "{C8BAA410-8491-40AB-84B2-8FFCEB275B40}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "KYC", "KYC\KYC.vbproj", "{0AE4ABE8-2543-438F-9E98-FE97BB012D98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -43,6 +45,10 @@ Global
 		{C8BAA410-8491-40AB-84B2-8FFCEB275B40}.Debug|x86.Build.0 = Debug|x86
 		{C8BAA410-8491-40AB-84B2-8FFCEB275B40}.Release|x86.ActiveCfg = Release|x86
 		{C8BAA410-8491-40AB-84B2-8FFCEB275B40}.Release|x86.Build.0 = Release|x86
+		{0AE4ABE8-2543-438F-9E98-FE97BB012D98}.Debug|x86.ActiveCfg = Debug|x86
+		{0AE4ABE8-2543-438F-9E98-FE97BB012D98}.Debug|x86.Build.0 = Debug|x86
+		{0AE4ABE8-2543-438F-9E98-FE97BB012D98}.Release|x86.ActiveCfg = Release|x86
+		{0AE4ABE8-2543-438F-9E98-FE97BB012D98}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
