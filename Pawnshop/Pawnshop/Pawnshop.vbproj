@@ -261,6 +261,12 @@
     <Compile Include="Developer\dev_ORview.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Developer\dev_Parse.Designer.vb">
+      <DependentUpon>dev_Parse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Developer\dev_Parse.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Developer\dev_Pawning.Designer.vb">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
     </Compile>
@@ -853,6 +859,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_ORview.resx">
       <DependentUpon>dev_ORview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Developer\dev_Parse.resx">
+      <DependentUpon>dev_Parse.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Developer\dev_Pawning.resx">
       <DependentUpon>dev_Pawning.vb</DependentUpon>
