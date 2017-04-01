@@ -28,6 +28,7 @@
         mySql &= "INNER JOIN TBLCLIENT C ON C.CLIENTID = M.CLIENTID "
         mySql &= "INNER JOIN OPT P ON P.PAWNID = M.PAWNID "
         mySql &= "WHERE M.SMSDATE BETWEEN '" & st & "' AND '" & en & "'"
+        mySql &= "ORDER BY M.SMSDATE ASC"
 
         Dim addParameters As New Dictionary(Of String, String)
 
