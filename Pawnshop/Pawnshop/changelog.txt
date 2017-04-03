@@ -4,6 +4,7 @@ Version 1.5.0.5
  - Added Daily & Monthly Expiry List
  - Fix Adjustment Zero Inventory
  - Add Menus 1 Date Segrate List
+ - Layaway Reports Sort by Date
 
 Version 1.5.0.4
  - Added Icon
