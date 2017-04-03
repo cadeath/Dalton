@@ -23,29 +23,41 @@ Public Class dev_Parse
                 strParse = mc(index).Value.Substring(0, mc(index).Value.IndexOf(":")).Trim({"["c})
 
                 'Nagkuha ug Fields Information
-                Console.WriteLine("Trim String " & mc(index).Value.Substring(mc(index).Value.IndexOf(":")).Trim({"]"c}))
-                strTrim = mc(index).Value.Substring(mc(index).Value.IndexOf(":")).Trim({"]"c})
+                Console.WriteLine("Trim String: " & mc(index).Value.Substring(mc(index).Value.IndexOf(":") + 1).Trim({"]"c}))
+                strTrim = mc(index).Value.Substring(mc(index).Value.IndexOf(":") + 1).Trim({"]"c}).Trim({" "c})
+
+                If Not isValidKey(strParse) Then Exit Sub
 
                 SMSHash.Add(strParse, strTrim)
             Next
-            SaveSMS()
         End If
 
+        If SMSHash.Count = 0 Then Exit Sub
+
+        Dim mysql As String = "Select * from SmsRegister"
+        Dim ds As DataSet = LoadSQL(mysql, "SmsRegister")
+        Dim dsNewRow As DataRow
+        dsNewRow = ds.Tables("SmsRegister").NewRow
+        With dsNewRow
+            .Item("Fname") = SMSHash("FNAME")
+            .Item("Lname") = SMSHash("LNAME")
+            .Item("Mname") = SMSHash("MNAME")
+            .Item("SMSNumber") = SMSHash("NUMBER")
+        End With
+        ds.Tables("SmsRegister").Rows.Add(dsNewRow)
+        SaveEntry(ds)
+
+        MsgBox("Success")
+        SMSHash.Clear()
     End Sub
 
-    Private Sub SaveSMS()
-        'Dim mysql As String = "Select * from SmsRegister"
-        'Dim ds As DataSet = LoadSQL(mysql, "SmsRegister")
-        'Dim dsNewRow As DataRow
-        'dsNewRow = ds.Tables("SmsRegister").NewRow
-        'With dsNewRow
-        '    .Item("Fname") = _userName
-        '    .Item("Lname") = Encrypt(_password)
-        '    .Item("Mname") = _fullName
-        '    .Item("SMSNumber") = _fullName
-        'End With
-        'ds.Tables("SmsRegister").Rows.Add(dsNewRow)
-        'SaveEntry(ds)
 
-    End Sub
+    Private Function isValidKey(ByVal Keys As String) As Boolean
+        Dim KeysCollection() As String = {"FNAME", "MNAME", "LNAME", "NUMBER"}
+
+        If KeysCollection.Contains(Keys) Then Return True
+
+        Return False
+    End Function
+
 End Class
