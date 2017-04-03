@@ -21,11 +21,11 @@
             mySql = "SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER FROM PAWN_LIST WHERE  (STATUS = 'S' OR STATUS = 'W') AND "
-            mySql &= String.Format("AUCTIONDATE = '{0}'", monCalendar.SelectionStart.ToShortDateString)
+            mySql &= String.Format("AUCTIONDATE = '{0}'", monCalendar.SelectionStart.AddDays(-1).ToShortDateString)
 
         Else
             mySql = "SELECT * FROM PAWN_LIST WHERE (STATUS = 'S' OR STATUS = 'W') AND "
-            mySql &= String.Format("AUCTIONDATE = '{0}'", monCalendar.SelectionStart.ToShortDateString)
+            mySql &= String.Format("AUCTIONDATE = '{0}'", monCalendar.SelectionStart.AddDays(-1).ToShortDateString)
         End If
         Dim ds As DataSet = LoadSQL(mySql)
 
@@ -45,11 +45,11 @@
             mySql = "SELECT PAWNTICKET, LOANDATE, MATUDATE, EXPIRYDATE, AUCTIONDATE, CLIENT, FULLADDRESS, DESCRIPTION, ORNUM, ORDATE, OLDTICKET, "
             mySql &= "NETAMOUNT, RENEWDUE, REDEEMDUE, APPRAISAL, DELAYINTEREST, ADVINT, SERVICECHARGE, PENALTY, "
             mySql &= "ITEMCLASS, ITEMCATEGORY, STATUS, WITHDRAWDATE, APPRAISER FROM PAWN_LIST WHERE  (STATUS = 'S' OR STATUS = 'W') AND "
-            mySql &= String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}'", st.ToShortDateString, en.ToShortDateString)
+            mySql &= String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}'", st.AddDays(-1).ToShortDateString, en.AddDays(-1).ToShortDateString)
 
         Else
             mySql = "SELECT * FROM PAWN_LIST WHERE (STATUS = 'S' OR STATUS = 'W') AND "
-            mySql &= String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}'", st.ToShortDateString, en.ToShortDateString)
+            mySql &= String.Format("AUCTIONDATE BETWEEN '{0}' AND '{1}'", st.AddDays(-1).ToShortDateString, en.AddDays(-1).ToShortDateString)
         End If
         Dim ds As DataSet = LoadSQL(mySql)
 
