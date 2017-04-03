@@ -13,8 +13,6 @@
             Modify_View_PawnList()
             Update_Maintenance()
 
-            BranchAddress()
-
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
         Catch ex As Exception
@@ -88,21 +86,5 @@
         AutoIncrement_ID("SMS", "SMSID")
 
         Console.WriteLine("Table SMS Created")
-    End Sub
-
-    Private Sub BranchAddress()
-        Dim mysql As String = "Select * from tblMaintenance Where Opt_keys = 'Branch Address'"
-        Dim filldata As String = "tblMaintenance"
-        Dim ds As DataSet = LoadSQL(mysql, filldata)
-
-        If ds.Tables(0).Rows.Count = 0 Then
-            Dim dsNewRow As DataRow
-            dsNewRow = ds.Tables(0).NewRow
-            With dsNewRow
-                .Item("Opt_keys") = "Branch Address"
-            End With
-            ds.Tables(0).Rows.Add(dsNewRow)
-            database.SaveEntry(ds)
-        End If
     End Sub
 End Module

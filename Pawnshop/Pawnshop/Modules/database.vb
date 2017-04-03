@@ -217,7 +217,7 @@ Friend Module database
             Dim ds As DataSet = LoadSQL(mySql)
             ret = ds.Tables(0).Rows(0).Item("opt_values")
         Catch ex As Exception
-            ret = 0
+            ret = " "
         End Try
 
         Return ret
