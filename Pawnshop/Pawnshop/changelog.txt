@@ -5,6 +5,7 @@ Version 1.5.0.5
  - Fix Adjustment Zero Inventory
  - Add Menus 1 Date Segrate List
  - Layaway Reports Sort by Date
+ - Add Branch Address in Maintenance
 
 Version 1.5.0.4
  - Added Icon
