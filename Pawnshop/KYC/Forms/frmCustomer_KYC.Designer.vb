@@ -22,6 +22,7 @@ Partial Class frmCustomer
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"GSIS", "544489G15SD"}, -1)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtFName = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -31,24 +32,18 @@ Partial Class frmCustomer
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -60,20 +55,35 @@ Partial Class frmCustomer
         Me.ComboBox8 = New System.Windows.Forms.ComboBox()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -82,9 +92,9 @@ Partial Class frmCustomer
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(100, 18)
+        Me.Label1.Size = New System.Drawing.Size(82, 18)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "FULL NAME"
+        Me.Label1.Text = "Customer"
         '
         'txtFName
         '
@@ -201,164 +211,115 @@ Partial Class frmCustomer
         Me.TabPage1.Text = "Basic Information"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'Label22
         '
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(617, 289)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Identification"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(422, 248)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(36, 13)
+        Me.Label22.TabIndex = 38
+        Me.Label22.Text = "Profile"
         '
-        'Button1
+        'RadioButton3
         '
-        Me.Button1.Location = New System.Drawing.Point(562, 397)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 32)
-        Me.Button1.TabIndex = 8
-        Me.Button1.Text = "&Cancel"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(558, 265)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(52, 17)
+        Me.RadioButton3.TabIndex = 37
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "HIGH"
+        Me.RadioButton3.UseVisualStyleBackColor = True
         '
-        'Button2
+        'RadioButton2
         '
-        Me.Button2.Location = New System.Drawing.Point(481, 397)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 32)
-        Me.Button2.TabIndex = 9
-        Me.Button2.Text = "&Save"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(481, 265)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(71, 17)
+        Me.RadioButton2.TabIndex = 36
+        Me.RadioButton2.Text = "NORMAL"
+        Me.RadioButton2.UseVisualStyleBackColor = True
         '
-        'Label5
+        'RadioButton1
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(13, 140)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(45, 13)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Birthday"
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Checked = True
+        Me.RadioButton1.Location = New System.Drawing.Point(425, 264)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(50, 17)
+        Me.RadioButton1.TabIndex = 35
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "LOW"
+        Me.RadioButton1.UseVisualStyleBackColor = True
         '
-        'DateTimePicker1
+        'TextBox7
         '
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker1.Location = New System.Drawing.Point(16, 156)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(108, 20)
-        Me.DateTimePicker1.TabIndex = 1
+        Me.TextBox7.Location = New System.Drawing.Point(395, 198)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(208, 20)
+        Me.TextBox7.TabIndex = 34
         '
-        'Label6
+        'Label21
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(128, 140)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(54, 13)
-        Me.Label6.TabIndex = 2
-        Me.Label6.Text = "Birthplace"
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(392, 182)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(80, 13)
+        Me.Label21.TabIndex = 33
+        Me.Label21.Text = "Source of Fund"
         '
-        'TextBox3
+        'Button5
         '
-        Me.TextBox3.Location = New System.Drawing.Point(131, 156)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(260, 20)
-        Me.TextBox3.TabIndex = 3
+        Me.Button5.Location = New System.Drawing.Point(178, 224)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(29, 23)
+        Me.Button5.TabIndex = 32
+        Me.Button5.Text = "-"
+        Me.Button5.UseVisualStyleBackColor = True
         '
-        'TextBox4
+        'Button3
         '
-        Me.TextBox4.Location = New System.Drawing.Point(16, 25)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox4.TabIndex = 5
+        Me.Button3.Location = New System.Drawing.Point(178, 195)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(29, 23)
+        Me.Button3.TabIndex = 30
+        Me.Button3.Text = "+"
+        Me.Button3.UseVisualStyleBackColor = True
         '
-        'Label7
+        'Label20
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(13, 9)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(84, 13)
-        Me.Label7.TabIndex = 4
-        Me.Label7.Text = "Present Address"
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(16, 181)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(84, 13)
+        Me.Label20.TabIndex = 29
+        Me.Label20.Text = "Contact Number"
         '
-        'ComboBox1
+        'ComboBox9
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(143, 24)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 6
+        Me.ComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+        Me.ComboBox9.FormattingEnabled = True
+        Me.ComboBox9.Location = New System.Drawing.Point(16, 197)
+        Me.ComboBox9.Name = "ComboBox9"
+        Me.ComboBox9.Size = New System.Drawing.Size(156, 85)
+        Me.ComboBox9.TabIndex = 28
         '
-        'ComboBox2
+        'TextBox6
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(270, 24)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox2.TabIndex = 7
+        Me.TextBox6.Location = New System.Drawing.Point(395, 156)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(208, 20)
+        Me.TextBox6.TabIndex = 27
         '
-        'ComboBox3
+        'Label19
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(395, 25)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox3.TabIndex = 8
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(522, 25)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(81, 21)
-        Me.ComboBox4.TabIndex = 9
-        '
-        'Label8
-        '
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(16, 48)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(121, 18)
-        Me.Label8.TabIndex = 10
-        Me.Label8.Text = "Street"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'Label9
-        '
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(143, 48)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(121, 18)
-        Me.Label9.TabIndex = 11
-        Me.Label9.Text = "Barangay"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'Label10
-        '
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(270, 49)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(121, 18)
-        Me.Label10.TabIndex = 12
-        Me.Label10.Text = "City"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'Label11
-        '
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(397, 49)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(119, 18)
-        Me.Label11.TabIndex = 13
-        Me.Label11.Text = "Province"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'Label12
-        '
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(522, 49)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(81, 18)
-        Me.Label12.TabIndex = 14
-        Me.Label12.Text = "Zip Code"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(392, 140)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(56, 13)
+        Me.Label19.TabIndex = 26
+        Me.Label19.Text = "Nationality"
         '
         'Label13
         '
@@ -458,115 +419,240 @@ Partial Class frmCustomer
         Me.Label18.TabIndex = 15
         Me.Label18.Text = "Permanent Address"
         '
-        'TextBox6
+        'Label12
         '
-        Me.TextBox6.Location = New System.Drawing.Point(395, 156)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(208, 20)
-        Me.TextBox6.TabIndex = 27
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(522, 49)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(81, 18)
+        Me.Label12.TabIndex = 14
+        Me.Label12.Text = "Zip Code"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'Label19
+        'Label11
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(392, 140)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(56, 13)
-        Me.Label19.TabIndex = 26
-        Me.Label19.Text = "Nationality"
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(397, 49)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(119, 18)
+        Me.Label11.TabIndex = 13
+        Me.Label11.Text = "Province"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'ComboBox9
+        'Label10
         '
-        Me.ComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.ComboBox9.FormattingEnabled = True
-        Me.ComboBox9.Location = New System.Drawing.Point(16, 197)
-        Me.ComboBox9.Name = "ComboBox9"
-        Me.ComboBox9.Size = New System.Drawing.Size(156, 85)
-        Me.ComboBox9.TabIndex = 28
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(270, 49)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(121, 18)
+        Me.Label10.TabIndex = 12
+        Me.Label10.Text = "City"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'Label20
+        'Label9
         '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(16, 181)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(84, 13)
-        Me.Label20.TabIndex = 29
-        Me.Label20.Text = "Contact Number"
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(143, 48)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(121, 18)
+        Me.Label9.TabIndex = 11
+        Me.Label9.Text = "Barangay"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'Button3
+        'Label8
         '
-        Me.Button3.Location = New System.Drawing.Point(178, 195)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(29, 23)
-        Me.Button3.TabIndex = 30
-        Me.Button3.Text = "+"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(16, 48)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(121, 18)
+        Me.Label8.TabIndex = 10
+        Me.Label8.Text = "Street"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'Button5
+        'ComboBox4
         '
-        Me.Button5.Location = New System.Drawing.Point(178, 224)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(29, 23)
-        Me.Button5.TabIndex = 32
-        Me.Button5.Text = "-"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(522, 25)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(81, 21)
+        Me.ComboBox4.TabIndex = 9
         '
-        'TextBox7
+        'ComboBox3
         '
-        Me.TextBox7.Location = New System.Drawing.Point(395, 198)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(208, 20)
-        Me.TextBox7.TabIndex = 34
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Location = New System.Drawing.Point(395, 25)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox3.TabIndex = 8
         '
-        'Label21
+        'ComboBox2
         '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(392, 182)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(80, 13)
-        Me.Label21.TabIndex = 33
-        Me.Label21.Text = "Source of Fund"
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(270, 24)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox2.TabIndex = 7
         '
-        'RadioButton1
+        'ComboBox1
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(425, 264)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(50, 17)
-        Me.RadioButton1.TabIndex = 35
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "LOW"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(143, 24)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.TabIndex = 6
         '
-        'RadioButton2
+        'TextBox4
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(481, 265)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(71, 17)
-        Me.RadioButton2.TabIndex = 36
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "NORMAL"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.TextBox4.Location = New System.Drawing.Point(16, 25)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(121, 20)
+        Me.TextBox4.TabIndex = 5
         '
-        'RadioButton3
+        'Label7
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(558, 265)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(52, 17)
-        Me.RadioButton3.TabIndex = 37
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "HIGH"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(13, 9)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(84, 13)
+        Me.Label7.TabIndex = 4
+        Me.Label7.Text = "Present Address"
         '
-        'Label22
+        'TextBox3
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(422, 248)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(36, 13)
-        Me.Label22.TabIndex = 38
-        Me.Label22.Text = "Profile"
+        Me.TextBox3.Location = New System.Drawing.Point(131, 156)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(260, 20)
+        Me.TextBox3.TabIndex = 3
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(128, 140)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(54, 13)
+        Me.Label6.TabIndex = 2
+        Me.Label6.Text = "Birthplace"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimePicker1.Location = New System.Drawing.Point(16, 156)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(108, 20)
+        Me.DateTimePicker1.TabIndex = 1
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(13, 140)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(45, 13)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Birthday"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.Button4)
+        Me.TabPage2.Controls.Add(Me.ListView1)
+        Me.TabPage2.Controls.Add(Me.TextBox8)
+        Me.TabPage2.Controls.Add(Me.Label24)
+        Me.TabPage2.Controls.Add(Me.ComboBox10)
+        Me.TabPage2.Controls.Add(Me.Label23)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(617, 289)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Identification"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(562, 397)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 32)
+        Me.Button1.TabIndex = 8
+        Me.Button1.Text = "&Cancel"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(481, 397)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 32)
+        Me.Button2.TabIndex = 9
+        Me.Button2.Text = "&Save"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(6, 14)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(43, 16)
+        Me.Label23.TabIndex = 0
+        Me.Label23.Text = "Type:"
+        '
+        'ComboBox10
+        '
+        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox10.FormattingEnabled = True
+        Me.ComboBox10.Location = New System.Drawing.Point(88, 13)
+        Me.ComboBox10.Name = "ComboBox10"
+        Me.ComboBox10.Size = New System.Drawing.Size(221, 21)
+        Me.ComboBox10.TabIndex = 1
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(6, 45)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(75, 16)
+        Me.Label24.TabIndex = 2
+        Me.Label24.Text = "ID Number:"
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(88, 44)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(221, 20)
+        Me.TextBox8.TabIndex = 3
+        Me.TextBox8.Text = "AG5D150G5"
+        '
+        'ListView1
+        '
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView1.FullRowSelect = True
+        Me.ListView1.GridLines = True
+        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5})
+        Me.ListView1.Location = New System.Drawing.Point(9, 70)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(300, 213)
+        Me.ListView1.TabIndex = 4
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "TYPE"
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "NUMBER"
+        Me.ColumnHeader2.Width = 227
+        '
+        'Button4
+        '
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(315, 70)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(85, 43)
+        Me.Button4.TabIndex = 5
+        Me.Button4.Text = "Set as Primary"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'frmCustomer
         '
@@ -590,6 +676,8 @@ Partial Class frmCustomer
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -644,5 +732,13 @@ Partial Class frmCustomer
     Friend WithEvents RadioButton3 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+    Friend WithEvents ListView1 As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
+    Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents ComboBox10 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 
 End Class
