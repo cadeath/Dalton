@@ -22,68 +22,71 @@ Partial Class frmCustomer
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"GSIS", "544489G15SD"}, -1)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"GSIS", "544489G15SD"}, -1)
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCustomer))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtFName = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtMName = New System.Windows.Forms.TextBox()
+        Me.txtLName = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tpBasic = New System.Windows.Forms.TabPage()
         Me.Label22 = New System.Windows.Forms.Label()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.rbHigh = New System.Windows.Forms.RadioButton()
+        Me.rbNormal = New System.Windows.Forms.RadioButton()
+        Me.rbLow = New System.Windows.Forms.RadioButton()
+        Me.txtSrcFund = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.cboPhone = New System.Windows.Forms.ComboBox()
+        Me.txtNationality = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.cboZip2 = New System.Windows.Forms.ComboBox()
+        Me.cboProv2 = New System.Windows.Forms.ComboBox()
+        Me.cboCity2 = New System.Windows.Forms.ComboBox()
+        Me.cboBrgy2 = New System.Windows.Forms.ComboBox()
+        Me.txtSt2 = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.cboZip1 = New System.Windows.Forms.ComboBox()
+        Me.cboProv1 = New System.Windows.Forms.ComboBox()
+        Me.cboCity1 = New System.Windows.Forms.ComboBox()
+        Me.cboBrgy1 = New System.Windows.Forms.ComboBox()
+        Me.txtSt1 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtBdayPlace = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.dtpBday = New System.Windows.Forms.DateTimePicker()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.tpID = New System.Windows.Forms.TabPage()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.cboGender = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        Me.tpBasic.SuspendLayout()
+        Me.tpID.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -105,23 +108,23 @@ Partial Class frmCustomer
         Me.txtFName.TabIndex = 1
         Me.txtFName.Text = "Eskie Cirrus James"
         '
-        'TextBox1
+        'txtMName
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(268, 30)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(176, 22)
-        Me.TextBox1.TabIndex = 2
-        Me.TextBox1.Text = "Eskie Cirrus James"
+        Me.txtMName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMName.Location = New System.Drawing.Point(268, 30)
+        Me.txtMName.Name = "txtMName"
+        Me.txtMName.Size = New System.Drawing.Size(176, 22)
+        Me.txtMName.TabIndex = 2
+        Me.txtMName.Text = "Eskie Cirrus James"
         '
-        'TextBox2
+        'txtLName
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(450, 30)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(176, 22)
-        Me.TextBox2.TabIndex = 3
-        Me.TextBox2.Text = "Eskie Cirrus James"
+        Me.txtLName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLName.Location = New System.Drawing.Point(450, 30)
+        Me.txtLName.Name = "txtLName"
+        Me.txtLName.Size = New System.Drawing.Size(176, 22)
+        Me.txtLName.TabIndex = 3
+        Me.txtLName.Text = "Eskie Cirrus James"
         '
         'Label2
         '
@@ -155,61 +158,63 @@ Partial Class frmCustomer
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.tpBasic)
+        Me.TabControl1.Controls.Add(Me.tpID)
         Me.TabControl1.Location = New System.Drawing.Point(12, 76)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(625, 315)
         Me.TabControl1.TabIndex = 7
         '
-        'TabPage1
+        'tpBasic
         '
-        Me.TabPage1.Controls.Add(Me.Label22)
-        Me.TabPage1.Controls.Add(Me.RadioButton3)
-        Me.TabPage1.Controls.Add(Me.RadioButton2)
-        Me.TabPage1.Controls.Add(Me.RadioButton1)
-        Me.TabPage1.Controls.Add(Me.TextBox7)
-        Me.TabPage1.Controls.Add(Me.Label21)
-        Me.TabPage1.Controls.Add(Me.Button5)
-        Me.TabPage1.Controls.Add(Me.Button3)
-        Me.TabPage1.Controls.Add(Me.Label20)
-        Me.TabPage1.Controls.Add(Me.ComboBox9)
-        Me.TabPage1.Controls.Add(Me.TextBox6)
-        Me.TabPage1.Controls.Add(Me.Label19)
-        Me.TabPage1.Controls.Add(Me.Label13)
-        Me.TabPage1.Controls.Add(Me.Label14)
-        Me.TabPage1.Controls.Add(Me.Label15)
-        Me.TabPage1.Controls.Add(Me.Label16)
-        Me.TabPage1.Controls.Add(Me.Label17)
-        Me.TabPage1.Controls.Add(Me.ComboBox5)
-        Me.TabPage1.Controls.Add(Me.ComboBox6)
-        Me.TabPage1.Controls.Add(Me.ComboBox7)
-        Me.TabPage1.Controls.Add(Me.ComboBox8)
-        Me.TabPage1.Controls.Add(Me.TextBox5)
-        Me.TabPage1.Controls.Add(Me.Label18)
-        Me.TabPage1.Controls.Add(Me.Label12)
-        Me.TabPage1.Controls.Add(Me.Label11)
-        Me.TabPage1.Controls.Add(Me.Label10)
-        Me.TabPage1.Controls.Add(Me.Label9)
-        Me.TabPage1.Controls.Add(Me.Label8)
-        Me.TabPage1.Controls.Add(Me.ComboBox4)
-        Me.TabPage1.Controls.Add(Me.ComboBox3)
-        Me.TabPage1.Controls.Add(Me.ComboBox2)
-        Me.TabPage1.Controls.Add(Me.ComboBox1)
-        Me.TabPage1.Controls.Add(Me.TextBox4)
-        Me.TabPage1.Controls.Add(Me.Label7)
-        Me.TabPage1.Controls.Add(Me.TextBox3)
-        Me.TabPage1.Controls.Add(Me.Label6)
-        Me.TabPage1.Controls.Add(Me.DateTimePicker1)
-        Me.TabPage1.Controls.Add(Me.Label5)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(617, 289)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Basic Information"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.tpBasic.Controls.Add(Me.cboGender)
+        Me.tpBasic.Controls.Add(Me.Label25)
+        Me.tpBasic.Controls.Add(Me.Label22)
+        Me.tpBasic.Controls.Add(Me.rbHigh)
+        Me.tpBasic.Controls.Add(Me.rbNormal)
+        Me.tpBasic.Controls.Add(Me.rbLow)
+        Me.tpBasic.Controls.Add(Me.txtSrcFund)
+        Me.tpBasic.Controls.Add(Me.Label21)
+        Me.tpBasic.Controls.Add(Me.Button5)
+        Me.tpBasic.Controls.Add(Me.Button3)
+        Me.tpBasic.Controls.Add(Me.Label20)
+        Me.tpBasic.Controls.Add(Me.cboPhone)
+        Me.tpBasic.Controls.Add(Me.txtNationality)
+        Me.tpBasic.Controls.Add(Me.Label19)
+        Me.tpBasic.Controls.Add(Me.Label13)
+        Me.tpBasic.Controls.Add(Me.Label14)
+        Me.tpBasic.Controls.Add(Me.Label15)
+        Me.tpBasic.Controls.Add(Me.Label16)
+        Me.tpBasic.Controls.Add(Me.Label17)
+        Me.tpBasic.Controls.Add(Me.cboZip2)
+        Me.tpBasic.Controls.Add(Me.cboProv2)
+        Me.tpBasic.Controls.Add(Me.cboCity2)
+        Me.tpBasic.Controls.Add(Me.cboBrgy2)
+        Me.tpBasic.Controls.Add(Me.txtSt2)
+        Me.tpBasic.Controls.Add(Me.Label18)
+        Me.tpBasic.Controls.Add(Me.Label12)
+        Me.tpBasic.Controls.Add(Me.Label11)
+        Me.tpBasic.Controls.Add(Me.Label10)
+        Me.tpBasic.Controls.Add(Me.Label9)
+        Me.tpBasic.Controls.Add(Me.Label8)
+        Me.tpBasic.Controls.Add(Me.cboZip1)
+        Me.tpBasic.Controls.Add(Me.cboProv1)
+        Me.tpBasic.Controls.Add(Me.cboCity1)
+        Me.tpBasic.Controls.Add(Me.cboBrgy1)
+        Me.tpBasic.Controls.Add(Me.txtSt1)
+        Me.tpBasic.Controls.Add(Me.Label7)
+        Me.tpBasic.Controls.Add(Me.txtBdayPlace)
+        Me.tpBasic.Controls.Add(Me.Label6)
+        Me.tpBasic.Controls.Add(Me.dtpBday)
+        Me.tpBasic.Controls.Add(Me.Label5)
+        Me.tpBasic.Location = New System.Drawing.Point(4, 22)
+        Me.tpBasic.Name = "tpBasic"
+        Me.tpBasic.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpBasic.Size = New System.Drawing.Size(617, 289)
+        Me.tpBasic.TabIndex = 0
+        Me.tpBasic.Text = "Basic Information"
+        Me.tpBasic.UseVisualStyleBackColor = True
         '
         'Label22
         '
@@ -220,45 +225,45 @@ Partial Class frmCustomer
         Me.Label22.TabIndex = 38
         Me.Label22.Text = "Profile"
         '
-        'RadioButton3
+        'rbHigh
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(558, 265)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(52, 17)
-        Me.RadioButton3.TabIndex = 37
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "HIGH"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.rbHigh.AutoSize = True
+        Me.rbHigh.Location = New System.Drawing.Point(558, 265)
+        Me.rbHigh.Name = "rbHigh"
+        Me.rbHigh.Size = New System.Drawing.Size(52, 17)
+        Me.rbHigh.TabIndex = 37
+        Me.rbHigh.TabStop = True
+        Me.rbHigh.Text = "HIGH"
+        Me.rbHigh.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'rbNormal
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(481, 265)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(71, 17)
-        Me.RadioButton2.TabIndex = 36
-        Me.RadioButton2.Text = "NORMAL"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.rbNormal.AutoSize = True
+        Me.rbNormal.Location = New System.Drawing.Point(481, 265)
+        Me.rbNormal.Name = "rbNormal"
+        Me.rbNormal.Size = New System.Drawing.Size(71, 17)
+        Me.rbNormal.TabIndex = 36
+        Me.rbNormal.Text = "NORMAL"
+        Me.rbNormal.UseVisualStyleBackColor = True
         '
-        'RadioButton1
+        'rbLow
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Checked = True
-        Me.RadioButton1.Location = New System.Drawing.Point(425, 264)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(50, 17)
-        Me.RadioButton1.TabIndex = 35
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "LOW"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.rbLow.AutoSize = True
+        Me.rbLow.Checked = True
+        Me.rbLow.Location = New System.Drawing.Point(425, 264)
+        Me.rbLow.Name = "rbLow"
+        Me.rbLow.Size = New System.Drawing.Size(50, 17)
+        Me.rbLow.TabIndex = 35
+        Me.rbLow.TabStop = True
+        Me.rbLow.Text = "LOW"
+        Me.rbLow.UseVisualStyleBackColor = True
         '
-        'TextBox7
+        'txtSrcFund
         '
-        Me.TextBox7.Location = New System.Drawing.Point(395, 198)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(208, 20)
-        Me.TextBox7.TabIndex = 34
+        Me.txtSrcFund.Location = New System.Drawing.Point(395, 198)
+        Me.txtSrcFund.Name = "txtSrcFund"
+        Me.txtSrcFund.Size = New System.Drawing.Size(208, 20)
+        Me.txtSrcFund.TabIndex = 34
         '
         'Label21
         '
@@ -296,21 +301,21 @@ Partial Class frmCustomer
         Me.Label20.TabIndex = 29
         Me.Label20.Text = "Contact Number"
         '
-        'ComboBox9
+        'cboPhone
         '
-        Me.ComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.ComboBox9.FormattingEnabled = True
-        Me.ComboBox9.Location = New System.Drawing.Point(16, 197)
-        Me.ComboBox9.Name = "ComboBox9"
-        Me.ComboBox9.Size = New System.Drawing.Size(156, 85)
-        Me.ComboBox9.TabIndex = 28
+        Me.cboPhone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+        Me.cboPhone.FormattingEnabled = True
+        Me.cboPhone.Location = New System.Drawing.Point(16, 197)
+        Me.cboPhone.Name = "cboPhone"
+        Me.cboPhone.Size = New System.Drawing.Size(156, 85)
+        Me.cboPhone.TabIndex = 28
         '
-        'TextBox6
+        'txtNationality
         '
-        Me.TextBox6.Location = New System.Drawing.Point(395, 156)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(208, 20)
-        Me.TextBox6.TabIndex = 27
+        Me.txtNationality.Location = New System.Drawing.Point(395, 156)
+        Me.txtNationality.Name = "txtNationality"
+        Me.txtNationality.Size = New System.Drawing.Size(208, 20)
+        Me.txtNationality.TabIndex = 27
         '
         'Label19
         '
@@ -371,44 +376,44 @@ Partial Class frmCustomer
         Me.Label17.Text = "Street"
         Me.Label17.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'ComboBox5
+        'cboZip2
         '
-        Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Location = New System.Drawing.Point(522, 82)
-        Me.ComboBox5.Name = "ComboBox5"
-        Me.ComboBox5.Size = New System.Drawing.Size(81, 21)
-        Me.ComboBox5.TabIndex = 20
+        Me.cboZip2.FormattingEnabled = True
+        Me.cboZip2.Location = New System.Drawing.Point(522, 82)
+        Me.cboZip2.Name = "cboZip2"
+        Me.cboZip2.Size = New System.Drawing.Size(81, 21)
+        Me.cboZip2.TabIndex = 20
         '
-        'ComboBox6
+        'cboProv2
         '
-        Me.ComboBox6.FormattingEnabled = True
-        Me.ComboBox6.Location = New System.Drawing.Point(395, 82)
-        Me.ComboBox6.Name = "ComboBox6"
-        Me.ComboBox6.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox6.TabIndex = 19
+        Me.cboProv2.FormattingEnabled = True
+        Me.cboProv2.Location = New System.Drawing.Point(395, 82)
+        Me.cboProv2.Name = "cboProv2"
+        Me.cboProv2.Size = New System.Drawing.Size(121, 21)
+        Me.cboProv2.TabIndex = 19
         '
-        'ComboBox7
+        'cboCity2
         '
-        Me.ComboBox7.FormattingEnabled = True
-        Me.ComboBox7.Location = New System.Drawing.Point(270, 81)
-        Me.ComboBox7.Name = "ComboBox7"
-        Me.ComboBox7.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox7.TabIndex = 18
+        Me.cboCity2.FormattingEnabled = True
+        Me.cboCity2.Location = New System.Drawing.Point(270, 81)
+        Me.cboCity2.Name = "cboCity2"
+        Me.cboCity2.Size = New System.Drawing.Size(121, 21)
+        Me.cboCity2.TabIndex = 18
         '
-        'ComboBox8
+        'cboBrgy2
         '
-        Me.ComboBox8.FormattingEnabled = True
-        Me.ComboBox8.Location = New System.Drawing.Point(143, 81)
-        Me.ComboBox8.Name = "ComboBox8"
-        Me.ComboBox8.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox8.TabIndex = 17
+        Me.cboBrgy2.FormattingEnabled = True
+        Me.cboBrgy2.Location = New System.Drawing.Point(143, 81)
+        Me.cboBrgy2.Name = "cboBrgy2"
+        Me.cboBrgy2.Size = New System.Drawing.Size(121, 21)
+        Me.cboBrgy2.TabIndex = 17
         '
-        'TextBox5
+        'txtSt2
         '
-        Me.TextBox5.Location = New System.Drawing.Point(16, 82)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox5.TabIndex = 16
+        Me.txtSt2.Location = New System.Drawing.Point(16, 82)
+        Me.txtSt2.Name = "txtSt2"
+        Me.txtSt2.Size = New System.Drawing.Size(121, 20)
+        Me.txtSt2.TabIndex = 16
         '
         'Label18
         '
@@ -469,44 +474,44 @@ Partial Class frmCustomer
         Me.Label8.Text = "Street"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'ComboBox4
+        'cboZip1
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(522, 25)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(81, 21)
-        Me.ComboBox4.TabIndex = 9
+        Me.cboZip1.FormattingEnabled = True
+        Me.cboZip1.Location = New System.Drawing.Point(522, 25)
+        Me.cboZip1.Name = "cboZip1"
+        Me.cboZip1.Size = New System.Drawing.Size(81, 21)
+        Me.cboZip1.TabIndex = 9
         '
-        'ComboBox3
+        'cboProv1
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(395, 25)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox3.TabIndex = 8
+        Me.cboProv1.FormattingEnabled = True
+        Me.cboProv1.Location = New System.Drawing.Point(395, 25)
+        Me.cboProv1.Name = "cboProv1"
+        Me.cboProv1.Size = New System.Drawing.Size(121, 21)
+        Me.cboProv1.TabIndex = 8
         '
-        'ComboBox2
+        'cboCity1
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(270, 24)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox2.TabIndex = 7
+        Me.cboCity1.FormattingEnabled = True
+        Me.cboCity1.Location = New System.Drawing.Point(270, 24)
+        Me.cboCity1.Name = "cboCity1"
+        Me.cboCity1.Size = New System.Drawing.Size(121, 21)
+        Me.cboCity1.TabIndex = 7
         '
-        'ComboBox1
+        'cboBrgy1
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(143, 24)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 6
+        Me.cboBrgy1.FormattingEnabled = True
+        Me.cboBrgy1.Location = New System.Drawing.Point(143, 24)
+        Me.cboBrgy1.Name = "cboBrgy1"
+        Me.cboBrgy1.Size = New System.Drawing.Size(121, 21)
+        Me.cboBrgy1.TabIndex = 6
         '
-        'TextBox4
+        'txtSt1
         '
-        Me.TextBox4.Location = New System.Drawing.Point(16, 25)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox4.TabIndex = 5
+        Me.txtSt1.Location = New System.Drawing.Point(16, 25)
+        Me.txtSt1.Name = "txtSt1"
+        Me.txtSt1.Size = New System.Drawing.Size(121, 20)
+        Me.txtSt1.TabIndex = 5
         '
         'Label7
         '
@@ -517,12 +522,12 @@ Partial Class frmCustomer
         Me.Label7.TabIndex = 4
         Me.Label7.Text = "Present Address"
         '
-        'TextBox3
+        'txtBdayPlace
         '
-        Me.TextBox3.Location = New System.Drawing.Point(131, 156)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(260, 20)
-        Me.TextBox3.TabIndex = 3
+        Me.txtBdayPlace.Location = New System.Drawing.Point(131, 156)
+        Me.txtBdayPlace.Name = "txtBdayPlace"
+        Me.txtBdayPlace.Size = New System.Drawing.Size(260, 20)
+        Me.txtBdayPlace.TabIndex = 3
         '
         'Label6
         '
@@ -533,13 +538,13 @@ Partial Class frmCustomer
         Me.Label6.TabIndex = 2
         Me.Label6.Text = "Birthplace"
         '
-        'DateTimePicker1
+        'dtpBday
         '
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker1.Location = New System.Drawing.Point(16, 156)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(108, 20)
-        Me.DateTimePicker1.TabIndex = 1
+        Me.dtpBday.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpBday.Location = New System.Drawing.Point(16, 156)
+        Me.dtpBday.Name = "dtpBday"
+        Me.dtpBday.Size = New System.Drawing.Size(108, 20)
+        Me.dtpBday.TabIndex = 1
         '
         'Label5
         '
@@ -550,76 +555,31 @@ Partial Class frmCustomer
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Birthday"
         '
-        'TabPage2
+        'tpID
         '
-        Me.TabPage2.Controls.Add(Me.Button4)
-        Me.TabPage2.Controls.Add(Me.ListView1)
-        Me.TabPage2.Controls.Add(Me.TextBox8)
-        Me.TabPage2.Controls.Add(Me.Label24)
-        Me.TabPage2.Controls.Add(Me.ComboBox10)
-        Me.TabPage2.Controls.Add(Me.Label23)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(617, 289)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Identification"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.tpID.Controls.Add(Me.Button4)
+        Me.tpID.Controls.Add(Me.ListView1)
+        Me.tpID.Controls.Add(Me.TextBox8)
+        Me.tpID.Controls.Add(Me.Label24)
+        Me.tpID.Controls.Add(Me.ComboBox10)
+        Me.tpID.Controls.Add(Me.Label23)
+        Me.tpID.Location = New System.Drawing.Point(4, 22)
+        Me.tpID.Name = "tpID"
+        Me.tpID.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpID.Size = New System.Drawing.Size(617, 289)
+        Me.tpID.TabIndex = 1
+        Me.tpID.Text = "Identification"
+        Me.tpID.UseVisualStyleBackColor = True
         '
-        'Button1
+        'Button4
         '
-        Me.Button1.Location = New System.Drawing.Point(562, 397)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 32)
-        Me.Button1.TabIndex = 8
-        Me.Button1.Text = "&Cancel"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(481, 397)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 32)
-        Me.Button2.TabIndex = 9
-        Me.Button2.Text = "&Save"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(6, 14)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(43, 16)
-        Me.Label23.TabIndex = 0
-        Me.Label23.Text = "Type:"
-        '
-        'ComboBox10
-        '
-        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox10.FormattingEnabled = True
-        Me.ComboBox10.Location = New System.Drawing.Point(88, 13)
-        Me.ComboBox10.Name = "ComboBox10"
-        Me.ComboBox10.Size = New System.Drawing.Size(221, 21)
-        Me.ComboBox10.TabIndex = 1
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(6, 45)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(75, 16)
-        Me.Label24.TabIndex = 2
-        Me.Label24.Text = "ID Number:"
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Location = New System.Drawing.Point(88, 44)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(221, 20)
-        Me.TextBox8.TabIndex = 3
-        Me.TextBox8.Text = "AG5D150G5"
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.Location = New System.Drawing.Point(315, 70)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(85, 43)
+        Me.Button4.TabIndex = 5
+        Me.Button4.Text = "Set as Primary"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'ListView1
         '
@@ -627,7 +587,7 @@ Partial Class frmCustomer
         Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
-        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5})
+        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.ListView1.Location = New System.Drawing.Point(9, 70)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(300, 213)
@@ -644,94 +604,157 @@ Partial Class frmCustomer
         Me.ColumnHeader2.Text = "NUMBER"
         Me.ColumnHeader2.Width = 227
         '
-        'Button4
+        'TextBox8
         '
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(315, 70)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(85, 43)
-        Me.Button4.TabIndex = 5
-        Me.Button4.Text = "Set as Primary"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.TextBox8.Location = New System.Drawing.Point(88, 44)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(221, 20)
+        Me.TextBox8.TabIndex = 3
+        Me.TextBox8.Text = "AG5D150G5"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(6, 45)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(75, 16)
+        Me.Label24.TabIndex = 2
+        Me.Label24.Text = "ID Number:"
+        '
+        'ComboBox10
+        '
+        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox10.FormattingEnabled = True
+        Me.ComboBox10.Location = New System.Drawing.Point(88, 13)
+        Me.ComboBox10.Name = "ComboBox10"
+        Me.ComboBox10.Size = New System.Drawing.Size(221, 21)
+        Me.ComboBox10.TabIndex = 1
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(6, 14)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(43, 16)
+        Me.Label23.TabIndex = 0
+        Me.Label23.Text = "Type:"
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(562, 397)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 32)
+        Me.btnCancel.TabIndex = 8
+        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(481, 397)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 32)
+        Me.btnSave.TabIndex = 9
+        Me.btnSave.Text = "&Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(252, 182)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(42, 13)
+        Me.Label25.TabIndex = 39
+        Me.Label25.Text = "Gender"
+        '
+        'cboGender
+        '
+        Me.cboGender.FormattingEnabled = True
+        Me.cboGender.Location = New System.Drawing.Point(255, 195)
+        Me.cboGender.Name = "cboGender"
+        Me.cboGender.Size = New System.Drawing.Size(121, 21)
+        Me.cboGender.TabIndex = 40
         '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(649, 439)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtLName)
+        Me.Controls.Add(Me.txtMName)
         Me.Controls.Add(Me.txtFName)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frmCustomer"
         Me.Text = "Customer Information"
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
+        Me.tpBasic.ResumeLayout(False)
+        Me.tpBasic.PerformLayout()
+        Me.tpID.ResumeLayout(False)
+        Me.tpID.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtFName As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtMName As System.Windows.Forms.TextBox
+    Friend WithEvents txtLName As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents tpBasic As System.Windows.Forms.TabPage
+    Friend WithEvents tpID As System.Windows.Forms.TabPage
+    Friend WithEvents btnCancel As System.Windows.Forms.Button
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents txtBdayPlace As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpBday As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtSt1 As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox4 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboZip1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboProv1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboCity1 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboBrgy1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox5 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox6 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox7 As System.Windows.Forms.ComboBox
-    Friend WithEvents ComboBox8 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
+    Friend WithEvents cboZip2 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboProv2 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboCity2 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboBrgy2 As System.Windows.Forms.ComboBox
+    Friend WithEvents txtSt2 As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents txtNationality As System.Windows.Forms.TextBox
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox9 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboPhone As System.Windows.Forms.ComboBox
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
+    Friend WithEvents txtSrcFund As System.Windows.Forms.TextBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents RadioButton3 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
-    Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
+    Friend WithEvents rbHigh As System.Windows.Forms.RadioButton
+    Friend WithEvents rbNormal As System.Windows.Forms.RadioButton
+    Friend WithEvents rbLow As System.Windows.Forms.RadioButton
     Friend WithEvents ListView1 As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
@@ -740,5 +763,7 @@ Partial Class frmCustomer
     Friend WithEvents ComboBox10 As System.Windows.Forms.ComboBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
     Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents cboGender As System.Windows.Forms.ComboBox
+    Friend WithEvents Label25 As System.Windows.Forms.Label
 
 End Class
