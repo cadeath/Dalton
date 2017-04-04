@@ -10,7 +10,7 @@ Version 1.5.0.5
  - Fix Segre List
  - Added Monitoring for OPT
  - Added Function for Deleting Wrong Item in Inventory
- - Added Log for Tampered Item Master
+ - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
 
 Version 1.5.0.4
  - Added Icon
