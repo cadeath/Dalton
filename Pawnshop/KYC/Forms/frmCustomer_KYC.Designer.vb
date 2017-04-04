@@ -591,7 +591,7 @@ Partial Class frmCustomer
         'btnPrimary
         '
         Me.btnPrimary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrimary.Location = New System.Drawing.Point(315, 70)
+        Me.btnPrimary.Location = New System.Drawing.Point(525, 70)
         Me.btnPrimary.Name = "btnPrimary"
         Me.btnPrimary.Size = New System.Drawing.Size(85, 43)
         Me.btnPrimary.TabIndex = 3
@@ -607,7 +607,7 @@ Partial Class frmCustomer
         Me.lvID.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
         Me.lvID.Location = New System.Drawing.Point(9, 70)
         Me.lvID.Name = "lvID"
-        Me.lvID.Size = New System.Drawing.Size(300, 213)
+        Me.lvID.Size = New System.Drawing.Size(510, 213)
         Me.lvID.TabIndex = 2
         Me.lvID.UseCompatibleStateImageBehavior = False
         Me.lvID.View = System.Windows.Forms.View.Details
@@ -615,17 +615,18 @@ Partial Class frmCustomer
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "TYPE"
+        Me.ColumnHeader1.Width = 263
         '
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "NUMBER"
-        Me.ColumnHeader2.Width = 227
+        Me.ColumnHeader2.Width = 235
         '
         'txtIDNum
         '
         Me.txtIDNum.Location = New System.Drawing.Point(88, 44)
         Me.txtIDNum.Name = "txtIDNum"
-        Me.txtIDNum.Size = New System.Drawing.Size(221, 20)
+        Me.txtIDNum.Size = New System.Drawing.Size(431, 20)
         Me.txtIDNum.TabIndex = 1
         Me.txtIDNum.Text = "AG5D150G5"
         '
@@ -643,9 +644,10 @@ Partial Class frmCustomer
         '
         Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboType.FormattingEnabled = True
+        Me.cboType.Items.AddRange(New Object() {"Passport", "Driver's License", "PRC ID", "NBI Clearance", "Police Clearance", "Postal ID", "Voter's ID", "Brgy Certification", "GSIS", "SSS", "Senior Citizen Card", "OWWA ID", "OFW ID", "Seaman's Book", "Alien Cretification/Immigrant Certification of Registration", "AFP ID", "HDMF ID", "NCWDP", "DSWD Certification", "Integrated Bar of the Philippines ID", "Company ID under BSP, SEC or IC"})
         Me.cboType.Location = New System.Drawing.Point(88, 13)
         Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(221, 21)
+        Me.cboType.Size = New System.Drawing.Size(431, 21)
         Me.cboType.TabIndex = 0
         '
         'Label23

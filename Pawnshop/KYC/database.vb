@@ -7,7 +7,7 @@
 Friend Module database
     Public con As OdbcConnection
     Public ReaderCon As OdbcConnection
-    Friend dbName As String = "KYC.FDB" 'Final
+    Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet
@@ -30,9 +30,6 @@ Friend Module database
         Catch ex As Exception
             con.Dispose()
             MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Connecting Error")
-            Log_Report(ex.Message.ToString)
-            Log_Report(String.Format("User: {0}", fbUser))
-            Log_Report(String.Format("Database: {0}", dbName))
             Exit Sub
         End Try
     End Sub
@@ -114,7 +111,6 @@ Friend Module database
             con.Close()
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
-            Log_Report(String.Format("[{0}] - ", sql) & ex.ToString)
             con.Dispose()
             Exit Sub
         End Try
@@ -158,7 +154,6 @@ Friend Module database
         Catch ex As Exception
             Console.WriteLine(">>>>>" & mySql)
             MsgBox(ex.ToString)
-            Log_Report("LoadSQL - " & ex.ToString)
             ds = Nothing
         End Try
 
@@ -192,7 +187,6 @@ Friend Module database
         Catch ex As Exception
             ReaderCon.Dispose()
             MsgBox(language(0) + vbCrLf + ex.Message.ToString, vbCritical, "Connecting Error")
-            Log_Report(ex.Message.ToString)
             Exit Sub
         End Try
     End Sub
@@ -252,7 +246,7 @@ Friend Module database
                     Case Else
                         mod_name = key
                 End Select
-                Dim NewOtp As New ClassOtp(mod_name, diagGeneralOTP.txtPIN.Text, "Old " & GetOption(key) & " New " & value, True)
+                'Dim NewOtp As New ClassOtp(mod_name, diagGeneralOTP.txtPIN.Text, "Old " & GetOption(key) & " New " & value, True)
             End If
         End If
         mySql = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"

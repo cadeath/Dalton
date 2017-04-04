@@ -75,8 +75,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\Collections_ID.vb" />
     <Compile Include="Class\Customer.vb" />
+    <Compile Include="Class\IdentificationCard.vb" />
+    <Compile Include="Class\PhoneNumber.vb" />
     <Compile Include="Config.vb" />
+    <Compile Include="database.vb" />
     <Compile Include="Forms\frmCustomer_KYC.vb">
       <SubType>Form</SubType>
     </Compile>
