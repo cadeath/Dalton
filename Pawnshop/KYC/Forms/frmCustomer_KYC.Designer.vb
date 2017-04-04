@@ -84,6 +84,8 @@ Partial Class frmCustomer
         Me.Label23 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnRemove = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -218,7 +220,9 @@ Partial Class frmCustomer
         '
         'cboGender
         '
+        Me.cboGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboGender.FormattingEnabled = True
+        Me.cboGender.Items.AddRange(New Object() {"Male", "Female"})
         Me.cboGender.Location = New System.Drawing.Point(255, 195)
         Me.cboGender.Name = "cboGender"
         Me.cboGender.Size = New System.Drawing.Size(121, 21)
@@ -574,6 +578,8 @@ Partial Class frmCustomer
         '
         'tpID
         '
+        Me.tpID.Controls.Add(Me.btnRemove)
+        Me.tpID.Controls.Add(Me.btnAdd)
         Me.tpID.Controls.Add(Me.btnPrimary)
         Me.tpID.Controls.Add(Me.lvID)
         Me.tpID.Controls.Add(Me.txtIDNum)
@@ -678,6 +684,24 @@ Partial Class frmCustomer
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'btnAdd
+        '
+        Me.btnAdd.Location = New System.Drawing.Point(525, 119)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(85, 38)
+        Me.btnAdd.TabIndex = 4
+        Me.btnAdd.Text = "&Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'btnRemove
+        '
+        Me.btnRemove.Location = New System.Drawing.Point(525, 163)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(85, 38)
+        Me.btnRemove.TabIndex = 5
+        Me.btnRemove.Text = "&Remove"
+        Me.btnRemove.UseVisualStyleBackColor = True
+        '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -767,5 +791,7 @@ Partial Class frmCustomer
     Friend WithEvents btnPrimary As System.Windows.Forms.Button
     Friend WithEvents cboGender As System.Windows.Forms.ComboBox
     Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents btnRemove As System.Windows.Forms.Button
+    Friend WithEvents btnAdd As System.Windows.Forms.Button
 
 End Class
