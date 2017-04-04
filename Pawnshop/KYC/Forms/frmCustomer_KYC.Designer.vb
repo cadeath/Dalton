@@ -41,8 +41,8 @@ Partial Class frmCustomer
         Me.rbLow = New System.Windows.Forms.RadioButton()
         Me.txtSrcFund = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnNega = New System.Windows.Forms.Button()
+        Me.btnPlus = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.cboPhone = New System.Windows.Forms.ComboBox()
         Me.txtNationality = New System.Windows.Forms.TextBox()
@@ -74,13 +74,13 @@ Partial Class frmCustomer
         Me.dtpBday = New System.Windows.Forms.DateTimePicker()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.tpID = New System.Windows.Forms.TabPage()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.btnPrimary = New System.Windows.Forms.Button()
+        Me.lvID = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.txtIDNum = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
+        Me.cboType = New System.Windows.Forms.ComboBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
@@ -176,8 +176,8 @@ Partial Class frmCustomer
         Me.tpBasic.Controls.Add(Me.rbLow)
         Me.tpBasic.Controls.Add(Me.txtSrcFund)
         Me.tpBasic.Controls.Add(Me.Label21)
-        Me.tpBasic.Controls.Add(Me.Button5)
-        Me.tpBasic.Controls.Add(Me.Button3)
+        Me.tpBasic.Controls.Add(Me.btnNega)
+        Me.tpBasic.Controls.Add(Me.btnPlus)
         Me.tpBasic.Controls.Add(Me.Label20)
         Me.tpBasic.Controls.Add(Me.cboPhone)
         Me.tpBasic.Controls.Add(Me.txtNationality)
@@ -291,23 +291,23 @@ Partial Class frmCustomer
         Me.Label21.TabIndex = 33
         Me.Label21.Text = "Source of Fund"
         '
-        'Button5
+        'btnNega
         '
-        Me.Button5.Location = New System.Drawing.Point(178, 224)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(29, 23)
-        Me.Button5.TabIndex = 32
-        Me.Button5.Text = "-"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.btnNega.Location = New System.Drawing.Point(178, 224)
+        Me.btnNega.Name = "btnNega"
+        Me.btnNega.Size = New System.Drawing.Size(29, 23)
+        Me.btnNega.TabIndex = 32
+        Me.btnNega.Text = "-"
+        Me.btnNega.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnPlus
         '
-        Me.Button3.Location = New System.Drawing.Point(178, 195)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(29, 23)
-        Me.Button3.TabIndex = 30
-        Me.Button3.Text = "+"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnPlus.Location = New System.Drawing.Point(178, 195)
+        Me.btnPlus.Name = "btnPlus"
+        Me.btnPlus.Size = New System.Drawing.Size(29, 23)
+        Me.btnPlus.TabIndex = 30
+        Me.btnPlus.Text = "+"
+        Me.btnPlus.UseVisualStyleBackColor = True
         '
         'Label20
         '
@@ -574,11 +574,11 @@ Partial Class frmCustomer
         '
         'tpID
         '
-        Me.tpID.Controls.Add(Me.Button4)
-        Me.tpID.Controls.Add(Me.ListView1)
-        Me.tpID.Controls.Add(Me.TextBox8)
+        Me.tpID.Controls.Add(Me.btnPrimary)
+        Me.tpID.Controls.Add(Me.lvID)
+        Me.tpID.Controls.Add(Me.txtIDNum)
         Me.tpID.Controls.Add(Me.Label24)
-        Me.tpID.Controls.Add(Me.ComboBox10)
+        Me.tpID.Controls.Add(Me.cboType)
         Me.tpID.Controls.Add(Me.Label23)
         Me.tpID.Location = New System.Drawing.Point(4, 22)
         Me.tpID.Name = "tpID"
@@ -588,29 +588,29 @@ Partial Class frmCustomer
         Me.tpID.Text = "Identification"
         Me.tpID.UseVisualStyleBackColor = True
         '
-        'Button4
+        'btnPrimary
         '
-        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(315, 70)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(85, 43)
-        Me.Button4.TabIndex = 5
-        Me.Button4.Text = "Set as Primary"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnPrimary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPrimary.Location = New System.Drawing.Point(315, 70)
+        Me.btnPrimary.Name = "btnPrimary"
+        Me.btnPrimary.Size = New System.Drawing.Size(85, 43)
+        Me.btnPrimary.TabIndex = 3
+        Me.btnPrimary.Text = "Set as Primary"
+        Me.btnPrimary.UseVisualStyleBackColor = True
         '
-        'ListView1
+        'lvID
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
-        Me.ListView1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
-        Me.ListView1.Location = New System.Drawing.Point(9, 70)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(300, 213)
-        Me.ListView1.TabIndex = 4
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
+        Me.lvID.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lvID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lvID.FullRowSelect = True
+        Me.lvID.GridLines = True
+        Me.lvID.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1})
+        Me.lvID.Location = New System.Drawing.Point(9, 70)
+        Me.lvID.Name = "lvID"
+        Me.lvID.Size = New System.Drawing.Size(300, 213)
+        Me.lvID.TabIndex = 2
+        Me.lvID.UseCompatibleStateImageBehavior = False
+        Me.lvID.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader1
         '
@@ -621,13 +621,13 @@ Partial Class frmCustomer
         Me.ColumnHeader2.Text = "NUMBER"
         Me.ColumnHeader2.Width = 227
         '
-        'TextBox8
+        'txtIDNum
         '
-        Me.TextBox8.Location = New System.Drawing.Point(88, 44)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(221, 20)
-        Me.TextBox8.TabIndex = 3
-        Me.TextBox8.Text = "AG5D150G5"
+        Me.txtIDNum.Location = New System.Drawing.Point(88, 44)
+        Me.txtIDNum.Name = "txtIDNum"
+        Me.txtIDNum.Size = New System.Drawing.Size(221, 20)
+        Me.txtIDNum.TabIndex = 1
+        Me.txtIDNum.Text = "AG5D150G5"
         '
         'Label24
         '
@@ -639,14 +639,14 @@ Partial Class frmCustomer
         Me.Label24.TabIndex = 2
         Me.Label24.Text = "ID Number:"
         '
-        'ComboBox10
+        'cboType
         '
-        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox10.FormattingEnabled = True
-        Me.ComboBox10.Location = New System.Drawing.Point(88, 13)
-        Me.ComboBox10.Name = "ComboBox10"
-        Me.ComboBox10.Size = New System.Drawing.Size(221, 21)
-        Me.ComboBox10.TabIndex = 1
+        Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboType.FormattingEnabled = True
+        Me.cboType.Location = New System.Drawing.Point(88, 13)
+        Me.cboType.Name = "cboType"
+        Me.cboType.Size = New System.Drawing.Size(221, 21)
+        Me.cboType.TabIndex = 0
         '
         'Label23
         '
@@ -747,22 +747,22 @@ Partial Class frmCustomer
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents cboPhone As System.Windows.Forms.ComboBox
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents btnNega As System.Windows.Forms.Button
+    Friend WithEvents btnPlus As System.Windows.Forms.Button
     Friend WithEvents txtSrcFund As System.Windows.Forms.TextBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label22 As System.Windows.Forms.Label
     Friend WithEvents rbHigh As System.Windows.Forms.RadioButton
     Friend WithEvents rbNormal As System.Windows.Forms.RadioButton
     Friend WithEvents rbLow As System.Windows.Forms.RadioButton
-    Friend WithEvents ListView1 As System.Windows.Forms.ListView
+    Friend WithEvents lvID As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
+    Friend WithEvents txtIDNum As System.Windows.Forms.TextBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox10 As System.Windows.Forms.ComboBox
+    Friend WithEvents cboType As System.Windows.Forms.ComboBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
-    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents btnPrimary As System.Windows.Forms.Button
     Friend WithEvents cboGender As System.Windows.Forms.ComboBox
     Friend WithEvents Label25 As System.Windows.Forms.Label
 
