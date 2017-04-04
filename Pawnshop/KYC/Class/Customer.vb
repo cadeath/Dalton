@@ -5,6 +5,8 @@
 Public Class Customer
 
     Const CUSTOMER_TABLE As String = "KYC_CUSTOMERS"
+    Const CUSTOMER_ID As String = "KYC_ID"
+    Const CUSTOMER_PHONE As String = "KYC_PHONE"
 
 #Region "Properties"
     Private _firstName As String

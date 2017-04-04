@@ -33,6 +33,8 @@ Partial Class frmCustomer
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tpBasic = New System.Windows.Forms.TabPage()
+        Me.cboGender = New System.Windows.Forms.ComboBox()
+        Me.Label25 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.rbHigh = New System.Windows.Forms.RadioButton()
         Me.rbNormal = New System.Windows.Forms.RadioButton()
@@ -82,8 +84,6 @@ Partial Class frmCustomer
         Me.Label23 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.cboGender = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -216,6 +216,23 @@ Partial Class frmCustomer
         Me.tpBasic.Text = "Basic Information"
         Me.tpBasic.UseVisualStyleBackColor = True
         '
+        'cboGender
+        '
+        Me.cboGender.FormattingEnabled = True
+        Me.cboGender.Location = New System.Drawing.Point(255, 195)
+        Me.cboGender.Name = "cboGender"
+        Me.cboGender.Size = New System.Drawing.Size(121, 21)
+        Me.cboGender.TabIndex = 40
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(252, 182)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(42, 13)
+        Me.Label25.TabIndex = 39
+        Me.Label25.Text = "Gender"
+        '
         'Label22
         '
         Me.Label22.AutoSize = True
@@ -295,7 +312,7 @@ Partial Class frmCustomer
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(16, 181)
+        Me.Label20.Location = New System.Drawing.Point(16, 182)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(84, 13)
         Me.Label20.TabIndex = 29
@@ -658,23 +675,6 @@ Partial Class frmCustomer
         Me.btnSave.TabIndex = 9
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(252, 182)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(42, 13)
-        Me.Label25.TabIndex = 39
-        Me.Label25.Text = "Gender"
-        '
-        'cboGender
-        '
-        Me.cboGender.FormattingEnabled = True
-        Me.cboGender.Location = New System.Drawing.Point(255, 195)
-        Me.cboGender.Name = "cboGender"
-        Me.cboGender.Size = New System.Drawing.Size(121, 21)
-        Me.cboGender.TabIndex = 40
         '
         'frmCustomer
         '
