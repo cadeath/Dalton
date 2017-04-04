@@ -37,9 +37,7 @@ Public Class frmImport_IMD
         Next : checkHeaders(MaxColumn) = oWB.Worksheets(1).name
 
         If Not TemplateIntegrityCheck(checkHeaders) Then
-            ' TODO: JUNMAR
-            ' LOG ANY DATA
-
+            AddTimelyLogs("IMPORT MASTER DATA", "Template was tampered", , False, , 0)
             MsgBox("Template was tampered", MsgBoxStyle.Critical)
             GoTo unloadObj
         End If
