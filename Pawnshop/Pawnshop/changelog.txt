@@ -6,6 +6,12 @@ Version 1.5.0.5
  - Add Menus 1 Date Segrate List
  - Layaway Reports Sort by Date
  - Add Branch Address in Maintenance
+ - Fix No Segre in Outstanding
+ - Fix Segre List
+ - Added Monitoring for OPT
+ - Added Function for Deleting Wrong Item in Inventory
+ - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
+ - Added Separated OPT Generator
 
 Version 1.5.0.4
  - Added Icon
@@ -13,6 +19,7 @@ Version 1.5.0.4
  - Added TABLE SMS
  - Added Insurance in OR Layout
  - Added Separated OTP
+ - Added Insurance in pawning
  - Added Branch Address Option in Settings
  - Added LayAway Module
  - Added Function if Full Paid Record to Inventory Sales
@@ -22,7 +29,6 @@ Version 1.5.0.4
  - Fix Different Control # for STO, Inv, Return
  - Added Inventory Adjustment
  - Modify Pawn_List VIEW
-
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES

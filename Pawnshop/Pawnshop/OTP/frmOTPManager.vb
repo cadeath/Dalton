@@ -3,7 +3,7 @@
     Private strAppname As String
 
     Private Sub btnGenerate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGenerate.Click
-        If Not isValid() Then Exit Sub
+        If Not isValid() Then MsgBox("Please check the fields", MsgBoxStyle.Critical, "Error") : Exit Sub
 
         If rbInventory.Checked = True Then
             strcode = "OTPInventory"
@@ -31,7 +31,6 @@
 
         End If
 
-        If strAppname Is Nothing OrElse strcode Is Nothing Then MsgBox("Select OTP Module", MsgBoxStyle.Information, "Error") : Exit Sub
         SetOTP(txtEmail.Text, strAppname, strcode)
     End Sub
 
@@ -49,7 +48,7 @@
     Private Function isValid() As Boolean
         If txtEmail.Text = "" Then Return False
         If Not (txtEmail.Text.Contains("@") And txtEmail.Text.Contains(".")) Then Return False
-
+        If strcode = String.Empty OrElse strAppname = String.Empty Then Return False
 
         Return True
     End Function

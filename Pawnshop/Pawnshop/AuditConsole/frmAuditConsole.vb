@@ -125,9 +125,6 @@ Public Class frmAuditConsole
             ds = LoadSQL(mySql, fillData)
             DOCID = ds.Tables(fillData).Rows(0).Item("DOCID")
 
-            Dim sqlUpdate As String = "UPDATE ITEMMASTER SET ONHAND = 0"
-            RunCommand(sqlUpdate)
-
             mySql = "SELECT * FROM ITEMMASTER"
             ds = LoadSQL(mySql, "ITEMMASTER")
 
@@ -144,7 +141,11 @@ Public Class frmAuditConsole
                 ds.Tables("DOCLINES").Rows.Add(dsNewRow)
                 database.SaveEntry(ds)
             Next
-           
+
+            Dim sqlUpdate As String = "UPDATE ITEMMASTER SET ONHAND = 0"
+            RunCommand(sqlUpdate)
+
+
             mySql = "SELECT * FROM INV ROWS 1"
             ds = LoadSQL(mySql, "INV")
             dsNewRow = ds.Tables(0).NewRow
