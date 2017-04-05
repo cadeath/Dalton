@@ -233,8 +233,6 @@ Public Class Customer
         End Set
     End Property
 
-    ' PHONE HAS A DIFFERENT TABLE
-    ' ID HAS A DIFFERENT TABLE
     Private _custIDs As Collections_ID
     Public Property CustomersIDs() As Collections_ID
         Get
@@ -242,6 +240,16 @@ Public Class Customer
         End Get
         Set(ByVal value As Collections_ID)
             _custIDs = value
+        End Set
+    End Property
+
+    Private _custPhones As Collections_Phone
+    Public Property CustomersPhone() As Collections_Phone
+        Get
+            Return _custPhones
+        End Get
+        Set(ByVal value As Collections_Phone)
+            _custPhones = value
         End Set
     End Property
 
@@ -336,6 +344,26 @@ Public Class Customer
                     .Item("ID_NUMBER") = id.IDNumber
                 End With
                 ds.Tables(CUSTOMER_ID).Rows.Add(dsNewRow)
+            Next
+
+            database.SaveEntry(ds)
+        End If
+
+        If _custPhones.Count > 0 Then
+            mySql = "SELECT * FROM " & CUSTOMER_PHONE & " WHERE CUSTID = " & lastCustomerID
+
+            ' NEW PHONES
+            ds.Clear()
+            ds = LoadSQL(mySql, CUSTOMER_PHONE)
+            Dim dsNewRow As DataRow
+            For Each ph As PhoneNumber In _custPhones
+                dsNewRow = ds.Tables(CUSTOMER_PHONE).NewRow
+                With dsNewRow
+                    .Item("CUSTID") = lastCustomerID
+                    .Item("PHONENUMBER") = ph.PhoneNumber
+                    .Item("ISPRIMARY") = IIf(ph.isPrimary > 0, True, False)
+                End With
+                ds.Tables(CUSTOMER_PHONE).Rows.Add(dsNewRow)
             Next
 
             database.SaveEntry(ds)

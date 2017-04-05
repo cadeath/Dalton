@@ -63,7 +63,6 @@
         cboType.SelectedIndex = 0
         txtIDNum.Text = ""
         lvID.Items.Clear()
-
     End Sub
 
     Private Sub btnPlus_Click(sender As System.Object, e As System.EventArgs) Handles btnPlus.Click

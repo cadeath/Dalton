@@ -74,6 +74,8 @@ Partial Class frmCustomer
         Me.dtpBday = New System.Windows.Forms.DateTimePicker()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.tpID = New System.Windows.Forms.TabPage()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnPrimary = New System.Windows.Forms.Button()
         Me.lvID = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -84,8 +86,6 @@ Partial Class frmCustomer
         Me.Label23 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnRemove = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -594,6 +594,24 @@ Partial Class frmCustomer
         Me.tpID.Text = "Identification"
         Me.tpID.UseVisualStyleBackColor = True
         '
+        'btnRemove
+        '
+        Me.btnRemove.Location = New System.Drawing.Point(525, 163)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(85, 38)
+        Me.btnRemove.TabIndex = 5
+        Me.btnRemove.Text = "&Remove"
+        Me.btnRemove.UseVisualStyleBackColor = True
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Location = New System.Drawing.Point(525, 119)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(85, 38)
+        Me.btnAdd.TabIndex = 4
+        Me.btnAdd.Text = "&Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
         'btnPrimary
         '
         Me.btnPrimary.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -683,24 +701,6 @@ Partial Class frmCustomer
         Me.btnSave.TabIndex = 9
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Location = New System.Drawing.Point(525, 119)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(85, 38)
-        Me.btnAdd.TabIndex = 4
-        Me.btnAdd.Text = "&Add"
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
-        'btnRemove
-        '
-        Me.btnRemove.Location = New System.Drawing.Point(525, 163)
-        Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(85, 38)
-        Me.btnRemove.TabIndex = 5
-        Me.btnRemove.Text = "&Remove"
-        Me.btnRemove.UseVisualStyleBackColor = True
         '
         'frmCustomer
         '
