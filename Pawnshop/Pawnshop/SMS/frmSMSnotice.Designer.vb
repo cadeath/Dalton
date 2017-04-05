@@ -30,12 +30,13 @@ Partial Class frmSMSnotice
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSend = New System.Windows.Forms.Button()
         Me.btnChange = New System.Windows.Forms.Button()
         Me.chkAll = New System.Windows.Forms.CheckBox()
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnView = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lvExpiry
@@ -53,7 +54,7 @@ Partial Class frmSMSnotice
         Me.lvExpiry.Location = New System.Drawing.Point(12, 33)
         Me.lvExpiry.Name = "lvExpiry"
         Me.lvExpiry.Size = New System.Drawing.Size(776, 225)
-        Me.lvExpiry.TabIndex = 0
+        Me.lvExpiry.TabIndex = 1
         Me.lvExpiry.UseCompatibleStateImageBehavior = False
         Me.lvExpiry.View = System.Windows.Forms.View.Details
         '
@@ -83,46 +84,6 @@ Partial Class frmSMSnotice
         Me.ColumnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeader5.Width = 83
         '
-        'btnCancel
-        '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.Location = New System.Drawing.Point(713, 264)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 40)
-        Me.btnCancel.TabIndex = 3
-        Me.btnCancel.Text = "&Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'btnSend
-        '
-        Me.btnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSend.Location = New System.Drawing.Point(632, 264)
-        Me.btnSend.Name = "btnSend"
-        Me.btnSend.Size = New System.Drawing.Size(75, 40)
-        Me.btnSend.TabIndex = 2
-        Me.btnSend.Text = "&Send"
-        Me.btnSend.UseVisualStyleBackColor = True
-        '
-        'btnChange
-        '
-        Me.btnChange.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnChange.Location = New System.Drawing.Point(12, 264)
-        Me.btnChange.Name = "btnChange"
-        Me.btnChange.Size = New System.Drawing.Size(86, 40)
-        Me.btnChange.TabIndex = 4
-        Me.btnChange.Text = "&Change Num"
-        Me.btnChange.UseVisualStyleBackColor = True
-        '
-        'chkAll
-        '
-        Me.chkAll.AutoSize = True
-        Me.chkAll.Location = New System.Drawing.Point(12, 12)
-        Me.chkAll.Name = "chkAll"
-        Me.chkAll.Size = New System.Drawing.Size(70, 17)
-        Me.chkAll.TabIndex = 5
-        Me.chkAll.Text = "Select All"
-        Me.chkAll.UseVisualStyleBackColor = True
-        '
         'ColumnHeader6
         '
         Me.ColumnHeader6.Text = "Expiry Date"
@@ -133,11 +94,62 @@ Partial Class frmSMSnotice
         Me.ColumnHeader7.Text = "Auction Date"
         Me.ColumnHeader7.Width = 95
         '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Location = New System.Drawing.Point(713, 264)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 40)
+        Me.btnCancel.TabIndex = 5
+        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnSend
+        '
+        Me.btnSend.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSend.Location = New System.Drawing.Point(632, 264)
+        Me.btnSend.Name = "btnSend"
+        Me.btnSend.Size = New System.Drawing.Size(75, 40)
+        Me.btnSend.TabIndex = 4
+        Me.btnSend.Text = "&Send"
+        Me.btnSend.UseVisualStyleBackColor = True
+        '
+        'btnChange
+        '
+        Me.btnChange.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnChange.Location = New System.Drawing.Point(12, 264)
+        Me.btnChange.Name = "btnChange"
+        Me.btnChange.Size = New System.Drawing.Size(86, 40)
+        Me.btnChange.TabIndex = 2
+        Me.btnChange.Text = "&Change Num"
+        Me.btnChange.UseVisualStyleBackColor = True
+        '
+        'chkAll
+        '
+        Me.chkAll.AutoSize = True
+        Me.chkAll.Location = New System.Drawing.Point(12, 12)
+        Me.chkAll.Name = "chkAll"
+        Me.chkAll.Size = New System.Drawing.Size(70, 17)
+        Me.chkAll.TabIndex = 0
+        Me.chkAll.Text = "Select All"
+        Me.chkAll.UseVisualStyleBackColor = True
+        '
+        'btnView
+        '
+        Me.btnView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnView.Location = New System.Drawing.Point(104, 264)
+        Me.btnView.Name = "btnView"
+        Me.btnView.Size = New System.Drawing.Size(86, 40)
+        Me.btnView.TabIndex = 3
+        Me.btnView.Text = "&View"
+        Me.btnView.UseVisualStyleBackColor = True
+        '
         'frmSMSnotice
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(802, 314)
+        Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.chkAll)
         Me.Controls.Add(Me.btnChange)
         Me.Controls.Add(Me.btnSend)
@@ -165,4 +177,5 @@ Partial Class frmSMSnotice
     Friend WithEvents chkAll As System.Windows.Forms.CheckBox
     Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnView As System.Windows.Forms.Button
 End Class

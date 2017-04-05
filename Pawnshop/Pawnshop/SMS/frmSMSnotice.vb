@@ -76,7 +76,7 @@
     End Sub
 
     Private Sub lvExpiry_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvExpiry.DoubleClick
-        btnChange.PerformClick()
+        btnView.PerformClick()
     End Sub
 
     Private Sub chkAll_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkAll.CheckedChanged
@@ -148,5 +148,16 @@
             smsUtil.Load_Expiry()
             Me.Close()
         End If
+    End Sub
+
+    Private Sub btnView_Click(sender As System.Object, e As System.EventArgs) Handles btnView.Click
+        If lvExpiry.SelectedItems.Count <> 1 Then Exit Sub
+
+        diagQuickView_PT.Load_Pawnticket(lvExpiry.FocusedItem.Text)
+        diagQuickView_PT.ShowDialog()
+    End Sub
+
+    Private Sub lvExpiry_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvExpiry.SelectedIndexChanged
+
     End Sub
 End Class

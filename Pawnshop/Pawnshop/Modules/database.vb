@@ -217,7 +217,7 @@ Friend Module database
             Dim ds As DataSet = LoadSQL(mySql)
             ret = ds.Tables(0).Rows(0).Item("opt_values")
         Catch ex As Exception
-            ret = 0
+            ret = " "
         End Try
 
         Return ret
@@ -252,7 +252,7 @@ Friend Module database
                     Case Else
                         mod_name = key
                 End Select
-                Dim NewOtp As New ClassOtp(mod_name, diagGeneralOTP.txtPIN.Text, value, True)
+                Dim NewOtp As New ClassOtp(mod_name, diagGeneralOTP.txtPIN.Text, "Old " & GetOption(key) & " New " & value, True)
             End If
         End If
         mySql = "SELECT * FROM tblMaintenance WHERE opt_keys = '" & key & "'"

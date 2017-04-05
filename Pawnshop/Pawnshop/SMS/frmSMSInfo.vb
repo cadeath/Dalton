@@ -50,8 +50,12 @@
 
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
         If _sqlPrint = "" Then Exit Sub
+        Dim addParameters As New Dictionary(Of String, String)
 
-        frmReport.ReportInit(_sqlPrint, "dsSingle", "Reports\rpt_ExpirySingle.rdlc", , False)
+        addParameters.Add("txtMonthOf", CurrentDate.ToShortDateString)
+        addParameters.Add("branchName", branchName)
+
+        frmReport.ReportInit(_sqlPrint, "dsSingle", "Reports\rpt_ExpirySingle.rdlc", addParameters, False)
         frmReport.Show()
     End Sub
 
