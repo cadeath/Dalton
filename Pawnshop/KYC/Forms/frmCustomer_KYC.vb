@@ -118,7 +118,7 @@
         cboGender.Text = "Female"
         txtSrcFund.Text = ""
 
-        cboPhone.Items.Clear()
+        lstPhone.Items.Clear()
         rbLow.Checked = True
 
         'IDENTIFY
@@ -137,14 +137,14 @@
     End Sub
 
     Private Sub btnPlus_Click(sender As System.Object, e As System.EventArgs) Handles btnPlus.Click
-        If cboPhone.Text = "" Then Exit Sub
+        If txtPhone.Text = "" Then Exit Sub
 
-        cboPhone.Items.Add(cboPhone.Text)
-        cboPhone.Text = ""
+        lstPhone.Items.Add(txtPhone.Text)
+        txtPhone.Text = ""
     End Sub
 
     Private Sub btnNega_Click(sender As System.Object, e As System.EventArgs) Handles btnNega.Click
-        cboPhone.Items.Remove(cboPhone.SelectedItem)
+        lstPhone.Items.Remove(lstPhone.SelectedItem)
     End Sub
 
     Private Sub btnTest_Click(sender As System.Object, e As System.EventArgs) Handles btnTest.Click
@@ -252,6 +252,6 @@
 
     Private Sub btnSetPri_Click(sender As System.Object, e As System.EventArgs) Handles btnSetPri.Click
         If lstPhone.SelectedItems.Count = 0 Then Exit Sub
-
+        Dim str As String = lstPhone.SelectedItems.Item(0)
     End Sub
 End Class

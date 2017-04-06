@@ -740,6 +740,7 @@ Partial Class frmCustomer
         'lstPhone
         '
         Me.lstPhone.FormattingEnabled = True
+        Me.lstPhone.Items.AddRange(New Object() {"aw", "aw", "wg", "wge"})
         Me.lstPhone.Location = New System.Drawing.Point(16, 210)
         Me.lstPhone.Name = "lstPhone"
         Me.lstPhone.Size = New System.Drawing.Size(150, 69)
