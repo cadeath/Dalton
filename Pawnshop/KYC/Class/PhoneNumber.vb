@@ -40,4 +40,8 @@
         End Set
     End Property
 
+    Public Sub SetPrimary()
+        _isPrimary = True
+    End Sub
+
 End Class

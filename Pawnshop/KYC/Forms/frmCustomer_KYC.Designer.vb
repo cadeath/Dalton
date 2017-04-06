@@ -57,7 +57,7 @@ Partial Class frmCustomer
         Me.cboCity2 = New System.Windows.Forms.ComboBox()
         Me.cboBrgy2 = New System.Windows.Forms.ComboBox()
         Me.txtSt2 = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
+        Me.lblTheSame = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -86,6 +86,7 @@ Partial Class frmCustomer
         Me.Label23 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnTest = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -194,7 +195,7 @@ Partial Class frmCustomer
         Me.tpBasic.Controls.Add(Me.cboCity2)
         Me.tpBasic.Controls.Add(Me.cboBrgy2)
         Me.tpBasic.Controls.Add(Me.txtSt2)
-        Me.tpBasic.Controls.Add(Me.Label18)
+        Me.tpBasic.Controls.Add(Me.lblTheSame)
         Me.tpBasic.Controls.Add(Me.Label12)
         Me.tpBasic.Controls.Add(Me.Label11)
         Me.tpBasic.Controls.Add(Me.Label10)
@@ -436,14 +437,14 @@ Partial Class frmCustomer
         Me.txtSt2.Size = New System.Drawing.Size(121, 20)
         Me.txtSt2.TabIndex = 16
         '
-        'Label18
+        'lblTheSame
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(13, 66)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(99, 13)
-        Me.Label18.TabIndex = 15
-        Me.Label18.Text = "Permanent Address"
+        Me.lblTheSame.AutoSize = True
+        Me.lblTheSame.Location = New System.Drawing.Point(13, 66)
+        Me.lblTheSame.Name = "lblTheSame"
+        Me.lblTheSame.Size = New System.Drawing.Size(343, 13)
+        Me.lblTheSame.TabIndex = 15
+        Me.lblTheSame.Text = "Permanent Address (Double Click here if it is the same with the Present)"
         '
         'Label12
         '
@@ -702,11 +703,21 @@ Partial Class frmCustomer
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'btnTest
+        '
+        Me.btnTest.Location = New System.Drawing.Point(12, 397)
+        Me.btnTest.Name = "btnTest"
+        Me.btnTest.Size = New System.Drawing.Size(75, 32)
+        Me.btnTest.TabIndex = 10
+        Me.btnTest.Text = "Test"
+        Me.btnTest.UseVisualStyleBackColor = True
+        '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(649, 439)
+        Me.Controls.Add(Me.btnTest)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.TabControl1)
@@ -763,7 +774,7 @@ Partial Class frmCustomer
     Friend WithEvents cboCity2 As System.Windows.Forms.ComboBox
     Friend WithEvents cboBrgy2 As System.Windows.Forms.ComboBox
     Friend WithEvents txtSt2 As System.Windows.Forms.TextBox
-    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents lblTheSame As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
@@ -793,5 +804,6 @@ Partial Class frmCustomer
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents btnRemove As System.Windows.Forms.Button
     Friend WithEvents btnAdd As System.Windows.Forms.Button
+    Friend WithEvents btnTest As System.Windows.Forms.Button
 
 End Class

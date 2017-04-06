@@ -75,4 +75,65 @@
     Private Sub btnNega_Click(sender As System.Object, e As System.EventArgs) Handles btnNega.Click
         cboPhone.Items.Remove(cboPhone.SelectedItem)
     End Sub
+
+    Private Sub btnTest_Click(sender As System.Object, e As System.EventArgs) Handles btnTest.Click
+        AddCustomer()
+        Console.WriteLine("Saved")
+        ModifyInfo()
+    End Sub
+
+    Private Sub ModifyInfo()
+        'Search Name
+        Dim Eskie As New Customer
+        Eskie.FindCustomerByName("Eskie")
+        Eskie.Load_CustomerByID()
+
+        Console.WriteLine(String.Format("{0} {1} is loaded.", Eskie.FirstName, Eskie.LastName))
+    End Sub
+
+    Private Sub AddCustomer()
+        Dim test As New Customer
+        test.FirstName = "Eskie"
+        test.LastName = "Maquilang"
+        test.PresentBarangay = "Lagao"
+        test.PresentCity = "GSC"
+        test.PresentProvince = "South Cotabato"
+        test.PermanentBarangay = "Lagao"
+        test.PermanentCity = "GSC"
+        test.PermanentProvince = "South Cotabato"
+        test.Nationality = "Filipino"
+        test.Sex = 1 'TODO: Change to Male Female
+
+        Dim compID As New IdentificationCard
+        Dim globePlan As New PhoneNumber
+        Dim sunPlan As New PhoneNumber
+
+        compID.IDType = "Passport"
+        compID.IDNumber = "PR 48194"
+        compID.SetPrimary()
+
+        globePlan.PhoneNumber = "09171263481"
+        sunPlan.PhoneNumber = "09257977559"
+        sunPlan.SetPrimary()
+
+        Dim EskieIDs As New Collections_ID
+        EskieIDs.Add(compID)
+
+        Dim EskiePhones As New Collections_Phone
+        EskiePhones.Add(globePlan)
+        EskiePhones.Add(sunPlan)
+
+        test.CustomersIDs = EskieIDs
+        test.CustomersPhone = EskiePhones
+
+        test.Save()
+    End Sub
+
+    Private Sub lblTheSame_DoubleClick(sender As Object, e As System.EventArgs) Handles lblTheSame.DoubleClick
+        txtSt2.Text = txtSt1.Text
+        cboBrgy2.Text = cboBrgy1.Text
+        cboCity2.Text = cboCity1.Text
+        cboProv2.Text = cboProv2.Text
+        cboZip2.Text = cboZip1.Text
+    End Sub
 End Class

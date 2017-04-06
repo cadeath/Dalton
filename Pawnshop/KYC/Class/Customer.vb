@@ -40,7 +40,7 @@ Public Class Customer
     End Property
 
     Private _lastName As String
-    Public Property lastName() As String
+    Public Property LastName() As String
         Get
             Return _lastName
         End Get
@@ -223,15 +223,21 @@ Public Class Customer
         End Set
     End Property
 
-    Private _rank As Integer
-    Public Property Rank() As Integer
+    Enum RankNumber As Integer
+        Low = 0
+        Medium = 1
+        High = 2
+    End Enum
+    Private _rank As RankNumber
+    Public Property Rank() As RankNumber
         Get
             Return _rank
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As RankNumber)
             _rank = value
         End Set
     End Property
+
 
     Private _custIDs As Collections_ID
     Public Property CustomersIDs() As Collections_ID
@@ -283,7 +289,7 @@ Public Class Customer
                 .Item("ZIP2") = _addrZip2
 
                 .Item("BIRTHDAY") = _birthday
-                .Item("BIRTHDAYPLACE") = _birthplace
+                .Item("BIRTHPLACE") = _birthplace
                 .Item("NATIONALITY") = _nationality
                 .Item("GENDER") = _gender
                 .Item("SRCFUND") = _sourceOfFund
@@ -319,57 +325,148 @@ Public Class Customer
         ' PHASE 2
         ' Saving the IDs and Phones
 
-        ' TODO
-        ' Include the Phones
         If _custIDs.Count <= 0 Then Exit Sub
 
         Dim lastCustomerID As Integer = 0
         mySql = "SELECT * FROM " & CUSTOMER_TABLE & " ORDER BY ID DESC ROWS 1"
         ds.Clear()
-        ds = LoadSQL(mySql)
+        ds = LoadSQL(mySql, CUSTOMER_TABLE)
         lastCustomerID = ds.Tables(CUSTOMER_TABLE).Rows(0).Item("ID")
 
         If _custIDs.Count > 0 Then
             mySql = "SELECT * FROM " & CUSTOMER_ID & " WHERE CUSTID = " & lastCustomerID
 
-            ' NEW IDs
             ds.Clear()
             ds = LoadSQL(mySql, CUSTOMER_ID)
+
             Dim dsNewRow As DataRow
             For Each id As IdentificationCard In _custIDs
-                dsNewRow = ds.Tables(CUSTOMER_ID).NewRow
-                With dsNewRow
-                    .Item("CUSTID") = lastCustomerID
-                    .Item("ID_TYPE") = id.IDType
-                    .Item("ID_NUMBER") = id.IDNumber
-                End With
-                ds.Tables(CUSTOMER_ID).Rows.Add(dsNewRow)
+                If id.ID = 0 Then
+                    ' NEW ENTRIES
+                    dsNewRow = ds.Tables(CUSTOMER_ID).NewRow
+                    With dsNewRow
+                        .Item("CUSTID") = lastCustomerID
+                        .Item("ID_TYPE") = id.IDType
+                        .Item("ID_NUMBER") = id.IDNumber
+                        .Item("ISPRIMARY") = IIf(id.isPrimary, 1, 0)
+                    End With
+                    ds.Tables(CUSTOMER_ID).Rows.Add(dsNewRow)
+                Else
+                    ' UPDATE/MODIFY ENTRIES
+                    Dim row As DataRow
+                    row = ds.Tables(CUSTOMER_ID).Select("ID = " & id.ID)(0)
+                    row("ID_TYPE") = id.IDType
+                    row("ID_NUMBER") = id.IDNumber
+                    row("ISPRIMARY") = IIf(id.isPrimary, 1, 0)
+                End If
             Next
 
             database.SaveEntry(ds)
+
         End If
 
         If _custPhones.Count > 0 Then
             mySql = "SELECT * FROM " & CUSTOMER_PHONE & " WHERE CUSTID = " & lastCustomerID
 
-            ' NEW PHONES
             ds.Clear()
             ds = LoadSQL(mySql, CUSTOMER_PHONE)
             Dim dsNewRow As DataRow
             For Each ph As PhoneNumber In _custPhones
-                dsNewRow = ds.Tables(CUSTOMER_PHONE).NewRow
-                With dsNewRow
-                    .Item("CUSTID") = lastCustomerID
-                    .Item("PHONENUMBER") = ph.PhoneNumber
-                    .Item("ISPRIMARY") = IIf(ph.isPrimary > 0, True, False)
-                End With
-                ds.Tables(CUSTOMER_PHONE).Rows.Add(dsNewRow)
+
+                If ph.PhoneID = 0 Then
+                    ' NEW ENTRIES
+                    dsNewRow = ds.Tables(CUSTOMER_PHONE).NewRow
+                    With dsNewRow
+                        .Item("CUSTID") = lastCustomerID
+                        .Item("PHONENUMBER") = ph.PhoneNumber
+                        .Item("ISPRIMARY") = IIf(ph.isPrimary, 1, 0)
+                    End With
+                    ds.Tables(CUSTOMER_PHONE).Rows.Add(dsNewRow)
+                Else
+                    ' UPDATE/MODIFY ENTRIES
+                    Dim row As DataRow
+                    row = ds.Tables(CUSTOMER_PHONE).Select("PHONEID = " & ph.PhoneID)(0)
+                    row("PHONENUMBER") = ph.PhoneNumber
+                    row("ISPRIMARY") = IIf(ph.isPrimary, 1, 0)
+                End If
+                
             Next
 
             database.SaveEntry(ds)
         End If
     End Sub
 
+    Public Sub Load_CustomerByID(Optional id As Integer = 0)
+        If id = 0 Then id = _id
+
+        Dim mySql As String = "SELECT * FROM " & CUSTOMER_TABLE & " WHERE ID = " & id
+        Dim ds As DataSet = LoadSQL(mySql, CUSTOMER_TABLE)
+
+        If ds.Tables(0).Rows.Count = 0 Then Exit Sub
+        With ds.Tables(0).Rows(0)
+            _firstName = .Item("FIRSTNAME")
+            _middleName = .Item("MIDNAME")
+            _lastName = .Item("LASTNAME")
+            _addrStreet1 = .Item("STREET1")
+            _addrBrgy1 = .Item("BRGY1")
+            _addrCity1 = .Item("CITY1")
+            _addrProvince1 = .Item("PROVINCE1")
+            _addrZip1 = .Item("ZIP1")
+            _addrStreet2 = .Item("STREET2")
+            _addrBrgy2 = .Item("BRGY2")
+            _addrCity2 = .Item("CITY2")
+            _addrProvince2 = .Item("PROVINCE2")
+            _addrZip2 = .Item("ZIP2")
+
+            _birthday = .Item("BIRTHDAY")
+            _birthplace = .Item("BIRTHPLACE")
+            _nationality = .Item("NATIONALITY")
+            _gender = .Item("GENDER")
+            _sourceOfFund = .Item("SRCFUND")
+            _rank = .Item("RANK")
+        End With
+
+        ' Loading Collections
+        mySql = "SELECT * FROM " & CUSTOMER_PHONE & " WHERE CUSTID = " & _id
+        mySql &= " ORDER BY ID ASC"
+        ds = LoadSQL(mySql) : _custPhones.Clear()
+        For Each cp As DataRow In ds.Tables(0).Rows
+            Dim tmpCP As New PhoneNumber
+            tmpCP.PhoneID = cp("PHONEID")
+            tmpCP.CustomerID = cp("CUSTID")
+            tmpCP.PhoneNumber = cp("PHONENUMBER")
+            tmpCP.isPrimary = IIf(cp("ISPRIMARY") > 0, True, False)
+            _custPhones.Add(tmpCP)
+        Next
+
+        mySql = "SELECT * FROM " & CUSTOMER_ID & " WHERE CUSTID = " & _id
+        mySql &= " ORDER BY ID ASC"
+        ds = LoadSQL(mySql) : _custIDs.Clear()
+        For Each cID As DataRow In ds.Tables(0).Rows
+            Dim tmpID As New IdentificationCard
+            tmpID.ID = cID("ID")
+            tmpID.CustomerID = cID("CUSTID")
+            tmpID.IDType = cID("ID_TYPE")
+            tmpID.IDNumber = cID("ID_NUMBER")
+            tmpID.isPrimary = IIf(cID("ISPRIMARY") > 0, True, False)
+            _custIDs.Add(tmpID)
+        Next
+
+        Console.WriteLine(String.Format("CustomerID: {0} is loaded.", id))
+    End Sub
+
+    Public Function FindCustomerByName(str As String) As DataSet
+        Dim ds As DataSet
+        Dim mySql As String = "SELECT * FROM " & CUSTOMER_TABLE
+        mySql &= String.Format(" WHERE FIRSTNAME LIKE '%{0}%' OR MIDNAME LIKE '%{0}%' OR LASTNAME LIKE '%{0}%'", str)
+        mySql &= " ORDER BY ID ASC"
+
+        ds = LoadSQL(mySql, CUSTOMER_TABLE)
+        If ds.Tables(0).Rows.Count = 1 Then _
+            _id = ds.Tables(0).Rows(0).Item("ID")
+
+        Return ds
+    End Function
 #End Region
 
 End Class
