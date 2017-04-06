@@ -37,9 +37,7 @@ Public Class frmImport_IMD
         Next : checkHeaders(MaxColumn) = oWB.Worksheets(1).name
 
         If Not TemplateIntegrityCheck(checkHeaders) Then
-            ' TODO: JUNMAR
-            ' LOG ANY DATA
-
+            AddTimelyLogs("IMPORT MASTER DATA", "Template was tampered", , False, "IMD Template has been modify", )
             MsgBox("Template was tampered", MsgBoxStyle.Critical)
             GoTo unloadObj
         End If
@@ -145,10 +143,7 @@ unloadObj:
         Dim hash = InputBox("HOT CODE", "ENTER HOT CODE")
         If hash = "" Then Exit Sub
         If Not hash = security.GetFileMD5(lblFilename.Text) Then
-            ' TODO: JUNMAR
-            ' RECORD HASH VALUE THAT WAS ENCODED IN THE HOT CODE
-            ' SAVE IN AT DAILYTIMELOG
-
+            AddTimelyLogs("IMPORT MASTER DATA", "INVALID HOT CODE", , False, "HOT CODE: " & hash, )
             MsgBox("Invalid HOT CODE", MsgBoxStyle.Critical, "HOT CODE")
             Exit Sub
         End If

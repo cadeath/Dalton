@@ -11,11 +11,9 @@
 
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
+        If Not isValid() Then Exit Sub
         btnOK.Enabled = False
         Try
-
-            If Not isValid() Then Exit Sub
-
             Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Posting")
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -100,7 +98,6 @@
 
     Private Function isValid() As Boolean
         If isNewLayAway = True Then
-
             If Item Is Nothing Then MsgBox("No Item Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
             If Customer Is Nothing Then MsgBox("No Customer Selected", MsgBoxStyle.Exclamation, "Not Valid!") : Return False
 
@@ -129,7 +126,6 @@
         End If
 
         If CInt(Val(lblBalance.Text)) < 0 Then MsgBox("Invalid Amount", MsgBoxStyle.Information, "Error") : Return False
-
         Return True
     End Function
 
@@ -312,6 +308,7 @@
     End Sub
 
     Private Sub Compute()
+        If txtAmount.Text = "." Then txtAmount.Clear() : Exit Sub
         If txtAmount.Text <> "" Then
             lblBalance.Text = tmpBalance - txtAmount.Text
         Else

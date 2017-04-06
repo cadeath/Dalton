@@ -107,7 +107,6 @@
     ''' <summary>
     ''' This method will load data into text fields.
     ''' </summary>
-    ''' <param name="id"></param>
     ''' <remarks></remarks>
     Friend Sub LoadInsurance(ByVal Ins As Insurance)
         'Dim getInsurance As New Insurance
@@ -221,8 +220,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 VoidInsurance()

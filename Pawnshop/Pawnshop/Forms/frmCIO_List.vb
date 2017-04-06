@@ -178,7 +178,7 @@
         database.SaveEntry(ds, False)
         Dim tmpCIO As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
 
-        Dim NewOtp As New ClassOtp("VOID " & lblCategory.Text, diagOTP.txtPIN.Text, "CashIn/OutID# " & id)
+        Dim NewOtp As New ClassOtp("VOID " & lblCategory.Text, diagGeneralOTP.txtPIN.Text, "CashIn/OutID# " & id)
         TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID, "CashIn/OutID# " & id)
 
             RemoveJournal(CashID, , Transactiontype)
@@ -219,8 +219,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 VoidCIO()

@@ -1,19 +1,36 @@
 CHANGELOG
+Version 1.5.0.5
+ - Quick View on Pawnticket
+ - Added Daily & Monthly Expiry List
+ - Fix Adjustment Zero Inventory
+ - Add Menus 1 Date Segrate List
+ - Layaway Reports Sort by Date
+ - Add Branch Address in Maintenance
+ - Fix No Segre in Outstanding
+ - Fix Segre List
+ - Added Monitoring for OPT
+ - Added Function for Deleting Wrong Item in Inventory
+ - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
+ - Added Separated OPT Generator
 
-
-Version 1.4.3
+Version 1.5.0.4
+ - Added Icon
+ - Added SMS Module for Expiry Items
+ - Added TABLE SMS
+ - Added Insurance in OR Layout
+ - Added Separated OTP
+ - Added Insurance in pawning
+ - Added Branch Address Option in Settings
  - Added LayAway Module
  - Added Function if Full Paid Record to Inventory Sales
  - Added Layaway List Report (Active layaway)
+ - Can ReSend Failed Sending
  - Fix Wrong Journal in Layaway Penalty
-
-Version 1.4.2.1
- - Added Insurance in OR Layout
-
-
+ - Fix Different Control # for STO, Inv, Return
+ - Added Inventory Adjustment
+ - Modify Pawn_List VIEW
 
 Version 1.4.1.15
-
  - Added Tables INV, INVLINES
  - Added Tables ITEMMASTER, DOC, DOCLINES
  - Added Journal in Insurance Close Store
@@ -43,7 +60,6 @@ Version 1.4.1.15
  - Fix Export STO Headers and LineNum
  - Round off Effective Interest Rate in layout
  - Fix Accounting Extract Module Cannot notify if file already exists
-
 
 Version 1.3.1.1
  - Fix Bug in Pawned Item Computation

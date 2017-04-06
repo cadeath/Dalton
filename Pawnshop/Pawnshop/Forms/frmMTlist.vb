@@ -118,8 +118,9 @@
 
         If Not OTPDisable Then
             diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
             diagGeneralOTP.ShowDialog()
-            If Not diagGeneralOTP.isCorrect Then
+            If Not diagGeneralOTP.isValid Then
                 Exit Sub
             Else
                 VoidMoneyTransfer()
@@ -171,7 +172,7 @@
 
         Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
         Dim tmpMT As New MoneyTransfer
-        Dim strMoneyTrans As String
+        Dim strMoneyTrans As String = ""
         Label2.Text = idx
         If tmpMT.LoadMoneyTrans = "0" Then
             strMoneyTrans = "OUT"

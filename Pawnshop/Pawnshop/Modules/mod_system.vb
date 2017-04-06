@@ -577,6 +577,7 @@ Module mod_system
         Return True
     End Function
 
+
     Public Function CheckFormActive() As Boolean
 
         frmCollection = Application.OpenForms()
@@ -596,7 +597,7 @@ Module mod_system
     End Function
 
     Friend Function DoForfeitingItem() As Boolean
-        Dim mysql As String = "Select * From tblLayAway Where Status = 1 And ForfeitDate < '" & CurrentDate.ToShortDateString & "' And Balance > 0"
+        Dim mysql As String = "Select * From tblLayAway Where Status = '1' And ForfeitDate < '" & CurrentDate.ToShortDateString & "' And Balance > 0"
         Dim fillData As String = "tblLayAway"
         Dim ds As DataSet = LoadSQL(mysql, fillData)
         If ds.Tables(0).Rows.Count = 0 Then Return True
@@ -614,6 +615,44 @@ Module mod_system
         Return True
     End Function
 
+    ''' <summary>
+    ''' This method will separate the phone number.
+    ''' </summary>
+    ''' <param name="PhoneField"></param>
+    ''' <param name="e"></param>
+    ''' <param name="isPhone"></param>
+    ''' <remarks></remarks>
+    Friend Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
+        Dim charPos() As Integer = {}
+        If PhoneField.Text = Nothing Then Return
+
+        Select Case PhoneField.Text.Substring(0, 1)
+            Case "0"
+                charPos = {4, 8}
+            Case "9"
+                charPos = {3, 7} '922-797-7559
+            Case "+"
+                charPos = {3, 7, 11} '+63-919-797-7559
+            Case "6"
+                charPos = {2, 6, 10} '63-919-797-7559
+        End Select
+        If isPhone Then
+            Select Case PhoneField.Text.Substring(0, 1)
+                Case "0"
+                    charPos = {3, 7}
+                Case Else
+                    charPos = {2, 6}
+            End Select
+        End If
+
+        For Each pos In charPos
+            If PhoneField.TextLength = pos And Not e.KeyChar = vbBack Then
+                PhoneField.Text &= "-"
+                PhoneField.SelectionStart = pos + 1
+            End If
+        Next
+    End Sub
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
@@ -625,7 +664,7 @@ Module mod_system
         If Not System.IO.File.Exists(LOG_FILE) Then CreateLog()
 
         Dim recorded_log As String = _
-            String.Format("[{0}] " & str, Now.ToString("MM/dd/yyyy HH:mm:ss"))
+            String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss")) & str
 
         Dim fs As New System.IO.FileStream(LOG_FILE, IO.FileMode.Append, IO.FileAccess.Write)
         Dim fw As New System.IO.StreamWriter(fs)
