@@ -228,30 +228,30 @@ Public Class frmClient
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        If lvClient.Items.Count = 0 Then Exit Sub
+        'If lvClient.Items.Count = 0 Then Exit Sub
 
-        If lvClient.SelectedItems.Count = 0 Then
-            lvClient.Items(0).Focused = True
-        End If
+        'If lvClient.SelectedItems.Count = 0 Then
+        '    lvClient.Items(0).Focused = True
+        'End If
 
-        Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
-        GetClient = New Client
-        GetClient.LoadClient(idx)
+        'Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
+        'GetClient = New Client
+        'GetClient.LoadClient(idx)
 
-        formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
+        'formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
 
-        Me.Close()
+        'Me.Close()
     End Sub
 
-    Friend Sub AutoSelect(ByVal cl As Client)
-        If Not fromOtherForm Then
-            txtSearch.Text = cl.FirstName
-            Exit Sub
-        End If
+    'Friend Sub AutoSelect(ByVal cl As Client)
+    '    If Not fromOtherForm Then
+    '        txtSearch.Text = cl.FirstName
+    '        Exit Sub
+    '    End If
 
-        formSwitch.ReloadFormFromSearch(frmOrig, cl)
-        Me.Close()
-    End Sub
+    '    formSwitch.ReloadFormFromSearch(frmOrig, cl)
+    '    Me.Close()
+    'End Sub
 
     Private Sub lvClient_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvClient.KeyPress
         If isEnter(e) Then

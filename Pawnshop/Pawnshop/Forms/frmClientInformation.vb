@@ -317,8 +317,8 @@ Public Class frmClientInformation
         End If
 
         'frmClient.btnSearch.PerformClick()
-        tmpClient.LoadClient(tmpClient.ID)
-        frmClient.AutoSelect(tmpClient)
+        'tmpClient.LoadClient(tmpClient.ID)
+        'frmClient.AutoSelect(tmpClient)
         Me.Close()
     End Sub
     ''' <summary>

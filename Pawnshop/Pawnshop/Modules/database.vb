@@ -7,7 +7,7 @@
 Friend Module database
     Public con As OdbcConnection
     Public ReaderCon As OdbcConnection
-    Friend dbName As String = "KYC.FDB" 'Final
+    Friend dbName As String = "W3W1LH4CKU.FDB" 'Final
     Friend fbUser As String = "SYSDBA"
     Friend fbPass As String = "masterkey"
     Friend fbDataSet As New DataSet

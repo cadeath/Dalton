@@ -71,8 +71,10 @@
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Dim secured_str As String = txtHolder.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.frmInsurance)
-        frmClient.Show()
+        'frmClient.SearchSelect(secured_str, FormName.frmInsurance)
+        'frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.frmInsurance)
+        frmClientNew.Show()
     End Sub
     ''' <summary>
     ''' This method will send client information to text fields.

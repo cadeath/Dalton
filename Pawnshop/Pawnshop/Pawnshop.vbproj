@@ -386,6 +386,42 @@
     <Compile Include="Forms\watermark.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="KYC\Class\Collections_ID.vb" />
+    <Compile Include="KYC\Class\Collections_Phone.vb" />
+    <Compile Include="KYC\Class\Customer.vb" />
+    <Compile Include="KYC\Class\IdentificationCard.vb" />
+    <Compile Include="KYC\Class\PhoneNumber.vb" />
+    <Compile Include="KYC\Client Migrate\ColMigrate_Phone.vb" />
+    <Compile Include="KYC\Client Migrate\diag_loading.Designer.vb">
+      <DependentUpon>diag_loading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\Client Migrate\diag_loading.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\Client Migrate\frmClientMigrate.Designer.vb">
+      <DependentUpon>frmClientMigrate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\Client Migrate\frmClientMigrate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\Client Migrate\MigrateCustomer.vb" />
+    <Compile Include="KYC\Client Migrate\MigrateIdentificationCard.vb" />
+    <Compile Include="KYC\Client Migrate\MigratePhoneNumber.vb" />
+    <Compile Include="KYC\Client Migrate\Migrate_ID.vb" />
+    <Compile Include="KYC\frmClientNew.Designer.vb">
+      <DependentUpon>frmClientNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\frmClientNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\frmCustomer_KYC.Designer.vb">
+      <DependentUpon>frmCustomer_KYC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="KYC\frmCustomer_KYC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KYC\KYCConfig.vb" />
+    <Compile Include="KYC\ModCamera.vb" />
     <Compile Include="Layaway\frmAddCustomer.Designer.vb">
       <DependentUpon>frmAddCustomer.vb</DependentUpon>
     </Compile>
@@ -971,6 +1007,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPawningItemNew.resx">
       <DependentUpon>frmPawningItemNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\Client Migrate\diag_loading.resx">
+      <DependentUpon>diag_loading.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\Client Migrate\frmClientMigrate.resx">
+      <DependentUpon>frmClientMigrate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\frmClientNew.resx">
+      <DependentUpon>frmClientNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KYC\frmCustomer_KYC.resx">
+      <DependentUpon>frmCustomer_KYC.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layaway\frmAddCustomer.resx">
       <DependentUpon>frmAddCustomer.vb</DependentUpon>

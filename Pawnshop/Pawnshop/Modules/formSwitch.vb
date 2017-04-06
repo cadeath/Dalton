@@ -53,6 +53,35 @@
         End Select
     End Sub
 
+    'Friend Sub ReloadFormFromSearch(ByVal gotoForm As FormName, ByVal cl As Customer)
+    '    Select Case gotoForm
+    '        Case FormName.devForm
+    '            ' devClient.LoadClientInfo(cl)
+    '            'Case FormName.frmMTSend
+    '            '    frmMoneyTransfer.LoadSenderInfo(cl)
+    '            'Case FormName.frmInsurance
+    '            '    frmInsurance.LoadHolder(cl)
+    '            'Case FormName.frmMTReceive
+    '            '    frmMoneyTransfer.LoadReceiverInfo(cl)
+    '            'Case FormName.frmPawnItem
+    '            '    frmPawnItem.LoadClient(cl)
+    '            'Case FormName.frmDollarSimple
+    '            '    frmDollorSimple.LoadClient(cl)
+    '            'Case FormName.frmMoneyExchange
+    '            '    frmmoneyexchange.LoadClient(cl)
+
+    '            'Case FormName.frmPawningV2_Client
+    '            '    frmPawningItemNew.LoadClient(cl)
+    '            'Case FormName.frmPawningV2_Claimer
+    '            '    frmPawningItemNew.LoadCliamer(cl)
+
+    '            'Case FormName.layAway
+    '            '    frmLayAway.LoadClient(cl)
+    '            'Case FormName.layAwayExist
+    '            '    frmAddCustomer.LoadClient(cl)
+    '    End Select
+    'End Sub
+
     Friend Sub ReloadFormFromItemList(gotoForm As FormName, Selected_Specs As ItemClass)
         Select Case gotoForm
             Case FormName.frmPawningV2_Specs
