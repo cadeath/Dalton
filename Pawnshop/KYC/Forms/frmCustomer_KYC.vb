@@ -93,7 +93,6 @@
             If rbHigh.Checked Then _
                 .Rank = Customer.RankNumber.High
 
-
         End With
     End Sub
 
