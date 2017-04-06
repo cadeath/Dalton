@@ -479,7 +479,7 @@ Public Class frmMain
 
         AuditModule_Initialization()
 
-        If Not OTPDisable Then
+        If Not isOTPOn("Audit") Then
             diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
             If Not diagOTPv2.isCorrect Then
