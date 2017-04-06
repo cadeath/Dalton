@@ -12,6 +12,7 @@ Version 1.5.0.5
  - Added Function for Deleting Wrong Item in Inventory
  - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
  - Added Separated OPT Generator
+ - Added OTP Interface & OTP Control
 
 Version 1.5.0.4
  - Added Icon

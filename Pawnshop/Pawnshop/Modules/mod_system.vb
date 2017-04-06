@@ -653,6 +653,16 @@ Module mod_system
         Next
     End Sub
 
+    Public Function isOTPOn(ByVal Modname As String) As Boolean
+        Dim mysql As String = "Select * From OTPControl Where Modname = '" & Modname & "'"
+        Dim ds As DataSet = LoadSQL(mysql, "OTPCOntrol")
+
+        If ds.Tables(0).Rows(0).Item("Status") = 1 Then Return False
+
+        Return True
+    End Function
+
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()

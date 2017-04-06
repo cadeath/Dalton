@@ -78,7 +78,7 @@
             isOTPEnable = True
             OTPSettings_Initialization()
 
-            If Not OTPDisable Then
+            If Not isOTPOn("Settings") Then
                 diagGeneralOTP.GeneralOTP = OtpSettings
                 diagGeneralOTP.TopMost = True
                 diagGeneralOTP.ShowDialog()

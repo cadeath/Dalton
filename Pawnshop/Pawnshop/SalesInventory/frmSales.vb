@@ -344,7 +344,7 @@ Public Class frmSales
                 Exit Sub
             End If
 
-            If Not OTPDisable Then
+            If Not isOTPOn("Stockout") Then
                 OTPStockOut_Initialization()
 
                 diagGeneralOTP.GeneralOTP = OtpSettings
