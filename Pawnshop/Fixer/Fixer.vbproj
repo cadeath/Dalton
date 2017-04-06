@@ -105,6 +105,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CashInBank\update_cashinbank.vb" />
+    <Compile Include="CIR Reader\frmCIRReader.Designer.vb">
+      <DependentUpon>frmCIRReader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CIR Reader\frmCIRReader.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="database.vb" />
     <Compile Include="CashInBank\frmMain2.Designer.vb">
       <DependentUpon>frmMain2.vb</DependentUpon>
@@ -228,6 +234,9 @@
     <Compile Include="Worksheet.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CIR Reader\frmCIRReader.resx">
+      <DependentUpon>frmCIRReader.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Extract\Extract.resx">
       <DependentUpon>Extract.vb</DependentUpon>
     </EmbeddedResource>
