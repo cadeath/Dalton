@@ -96,7 +96,7 @@ Public Class Customer
     End Property
 
     Private _addrStreet2 As String
-    Public Property PemanentStreet() As String
+    Public Property PermanentStreet() As String
         Get
             Return _addrStreet2
         End Get

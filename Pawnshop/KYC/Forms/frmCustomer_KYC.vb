@@ -5,6 +5,10 @@
     Const BLOCK_AGE As Integer = 7
     Const NOT_MINOR As Integer = 18
 
+    Friend REQUIRED_ID As Boolean = False
+
+    Private CustomerPhones As Collections_Phone
+
     Private Sub frmCustomer_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         CACHE_MANAGEMENT()
 
@@ -15,23 +19,78 @@
         Me.Close()
     End Sub
 
-    Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
+    ' TODO:
+    ' Don't allow to continue if REQUIRED_ID is TRUE but no ID
+    ' Unfill asterisk signs
+    Private Function FormVerification() As Boolean
+        Dim errMsg As String = "Please fillup the form completely"
+
+        ' AGE VALIDATION ============================================
         Dim possible_age As Integer = (Now.Year - dtpBday.Value.Year)
 
-        Console.WriteLine("AGE: " & possible_age)
         If ALLOW_MINORS Then
             If possible_age <= BLOCK_AGE Then
                 Console.WriteLine("TOO YOUNG")
-                Exit Sub
+                Return False
             End If
         Else
             If possible_age < NOT_MINOR Then
                 Console.WriteLine("NO MINOR IS ALLOWED")
-                Exit Sub
+                Return False
             End If
         End If
+        ' END - AGE VALIDATION ======================================
 
-        Console.WriteLine("PASS")
+        If Trim(txtFName.Text) = "" Then
+            MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+            Return False
+        End If
+
+        If Trim(txtLName.Text) = "" Then
+            MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
+        If Not FormVerification() Then Exit Sub
+
+        Dim NewCustomer As New Customer
+        With NewCustomer
+            .FirstName = txtFName.Text
+            .MiddleName = txtMName.Text
+            .LastName = txtLName.Text
+
+            .PresentStreet = txtSt1.Text
+            .PresentBarangay = cboBrgy1.Text
+            .PresentCity = cboCity1.Text
+            .PresentProvince = cboProv1.Text
+            .PresentZipCode = cboZip1.Text
+
+            .PermanentStreet = txtSt2.Text
+            .PermanentBarangay = cboBrgy2.Text
+            .PermanentCity = cboCity2.Text
+            .PermanentProvince = cboProv2.Text
+            .PermanentZipCode = cboZip2.Text
+
+            .Birthday = dtpBday.Value
+            .BirthPlace = txtBdayPlace.Text
+            .Nationality = txtNationality.Text
+            .NatureOfWork = txtWork.Text
+            .SourceOfFund = txtSrcFund.Text
+
+            .Sex = IIf(cboGender.Text = "Male", 1, 0)
+            If rbLow.Checked Then _
+                .Rank = Customer.RankNumber.Low
+            If rbNormal.Checked Then _
+                .Rank = Customer.RankNumber.Medium
+            If rbHigh.Checked Then _
+                .Rank = Customer.RankNumber.High
+
+
+        End With
     End Sub
 
     Private Sub ClearFields()
@@ -55,7 +114,7 @@
         dtpBday.Value = Now
         txtBdayPlace.Text = ""
         txtWork.Text = ""
-        txtNationality.Text = ""
+        txtNationality.Text = "FILIPINO"
         cboGender.Text = "Female"
         txtSrcFund.Text = ""
 
@@ -190,4 +249,9 @@
 
         Return Me.DialogResult
     End Function
+
+    Private Sub btnSetPri_Click(sender As System.Object, e As System.EventArgs) Handles btnSetPri.Click
+        If lstPhone.SelectedItems.Count = 0 Then Exit Sub
+
+    End Sub
 End Class

@@ -80,7 +80,7 @@
     <Compile Include="Class\Customer.vb" />
     <Compile Include="Class\IdentificationCard.vb" />
     <Compile Include="Class\PhoneNumber.vb" />
-    <Compile Include="Config.vb" />
+    <Compile Include="KYCConfig.vb" />
     <Compile Include="database.vb" />
     <Compile Include="Forms\frmCustomer_KYC.vb">
       <SubType>Form</SubType>

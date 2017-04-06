@@ -33,6 +33,8 @@ Partial Class frmCustomer
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tpBasic = New System.Windows.Forms.TabPage()
+        Me.txtWork = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.cboGender = New System.Windows.Forms.ComboBox()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -44,7 +46,6 @@ Partial Class frmCustomer
         Me.btnNega = New System.Windows.Forms.Button()
         Me.btnPlus = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.cboPhone = New System.Windows.Forms.ComboBox()
         Me.txtNationality = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -87,8 +88,9 @@ Partial Class frmCustomer
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnTest = New System.Windows.Forms.Button()
-        Me.txtWork = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
+        Me.btnSetPri = New System.Windows.Forms.Button()
+        Me.lstPhone = New System.Windows.Forms.ListBox()
+        Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -138,7 +140,7 @@ Partial Class frmCustomer
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(246, 18)
         Me.Label2.TabIndex = 4
-        Me.Label2.Text = "First Name"
+        Me.Label2.Text = "First Name *"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label3
@@ -158,7 +160,7 @@ Partial Class frmCustomer
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(179, 18)
         Me.Label4.TabIndex = 6
-        Me.Label4.Text = "Last Name"
+        Me.Label4.Text = "Last Name *"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'TabControl1
@@ -173,6 +175,9 @@ Partial Class frmCustomer
         '
         'tpBasic
         '
+        Me.tpBasic.Controls.Add(Me.txtPhone)
+        Me.tpBasic.Controls.Add(Me.lstPhone)
+        Me.tpBasic.Controls.Add(Me.btnSetPri)
         Me.tpBasic.Controls.Add(Me.txtWork)
         Me.tpBasic.Controls.Add(Me.Label18)
         Me.tpBasic.Controls.Add(Me.cboGender)
@@ -186,7 +191,6 @@ Partial Class frmCustomer
         Me.tpBasic.Controls.Add(Me.btnNega)
         Me.tpBasic.Controls.Add(Me.btnPlus)
         Me.tpBasic.Controls.Add(Me.Label20)
-        Me.tpBasic.Controls.Add(Me.cboPhone)
         Me.tpBasic.Controls.Add(Me.txtNationality)
         Me.tpBasic.Controls.Add(Me.Label19)
         Me.tpBasic.Controls.Add(Me.Label13)
@@ -222,6 +226,22 @@ Partial Class frmCustomer
         Me.tpBasic.TabIndex = 0
         Me.tpBasic.Text = "Basic Information"
         Me.tpBasic.UseVisualStyleBackColor = True
+        '
+        'txtWork
+        '
+        Me.txtWork.Location = New System.Drawing.Point(213, 187)
+        Me.txtWork.Name = "txtWork"
+        Me.txtWork.Size = New System.Drawing.Size(176, 20)
+        Me.txtWork.TabIndex = 31
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(210, 171)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(173, 13)
+        Me.Label18.TabIndex = 41
+        Me.Label18.Text = "Nature of Work/Business/Position*"
         '
         'cboGender
         '
@@ -296,9 +316,9 @@ Partial Class frmCustomer
         Me.Label21.AutoSize = True
         Me.Label21.Location = New System.Drawing.Point(210, 210)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(80, 13)
+        Me.Label21.Size = New System.Drawing.Size(84, 13)
         Me.Label21.TabIndex = 33
-        Me.Label21.Text = "Source of Fund"
+        Me.Label21.Text = "Source of Fund*"
         '
         'btnNega
         '
@@ -327,15 +347,6 @@ Partial Class frmCustomer
         Me.Label20.TabIndex = 29
         Me.Label20.Text = "Contact Number"
         '
-        'cboPhone
-        '
-        Me.cboPhone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.cboPhone.FormattingEnabled = True
-        Me.cboPhone.Location = New System.Drawing.Point(16, 184)
-        Me.cboPhone.Name = "cboPhone"
-        Me.cboPhone.Size = New System.Drawing.Size(156, 98)
-        Me.cboPhone.TabIndex = 28
-        '
         'txtNationality
         '
         Me.txtNationality.Location = New System.Drawing.Point(395, 140)
@@ -348,9 +359,9 @@ Partial Class frmCustomer
         Me.Label19.AutoSize = True
         Me.Label19.Location = New System.Drawing.Point(392, 124)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(56, 13)
+        Me.Label19.Size = New System.Drawing.Size(63, 13)
         Me.Label19.TabIndex = 26
-        Me.Label19.Text = "Nationality"
+        Me.Label19.Text = "Nationality *"
         '
         'Label13
         '
@@ -369,7 +380,7 @@ Partial Class frmCustomer
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(119, 18)
         Me.Label14.TabIndex = 24
-        Me.Label14.Text = "Province"
+        Me.Label14.Text = "Province *"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label15
@@ -379,7 +390,7 @@ Partial Class frmCustomer
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(121, 18)
         Me.Label15.TabIndex = 23
-        Me.Label15.Text = "City"
+        Me.Label15.Text = "City *"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label16
@@ -389,7 +400,7 @@ Partial Class frmCustomer
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(121, 18)
         Me.Label16.TabIndex = 22
-        Me.Label16.Text = "Barangay"
+        Me.Label16.Text = "Barangay *"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label17
@@ -467,7 +478,7 @@ Partial Class frmCustomer
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(119, 18)
         Me.Label11.TabIndex = 13
-        Me.Label11.Text = "Province"
+        Me.Label11.Text = "Province *"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label10
@@ -477,7 +488,7 @@ Partial Class frmCustomer
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(121, 18)
         Me.Label10.TabIndex = 12
-        Me.Label10.Text = "City"
+        Me.Label10.Text = "City *"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label9
@@ -487,7 +498,7 @@ Partial Class frmCustomer
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(121, 18)
         Me.Label9.TabIndex = 11
-        Me.Label9.Text = "Barangay"
+        Me.Label9.Text = "Barangay *"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label8
@@ -577,9 +588,9 @@ Partial Class frmCustomer
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(13, 124)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(45, 13)
+        Me.Label5.Size = New System.Drawing.Size(52, 13)
         Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Birthday"
+        Me.Label5.Text = "Birthday *"
         '
         'tpID
         '
@@ -716,21 +727,30 @@ Partial Class frmCustomer
         Me.btnTest.Text = "Test"
         Me.btnTest.UseVisualStyleBackColor = True
         '
-        'txtWork
+        'btnSetPri
         '
-        Me.txtWork.Location = New System.Drawing.Point(213, 187)
-        Me.txtWork.Name = "txtWork"
-        Me.txtWork.Size = New System.Drawing.Size(176, 20)
-        Me.txtWork.TabIndex = 31
+        Me.btnSetPri.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSetPri.Location = New System.Drawing.Point(178, 243)
+        Me.btnSetPri.Name = "btnSetPri"
+        Me.btnSetPri.Size = New System.Drawing.Size(29, 23)
+        Me.btnSetPri.TabIndex = 31
+        Me.btnSetPri.Text = "P"
+        Me.btnSetPri.UseVisualStyleBackColor = True
         '
-        'Label18
+        'lstPhone
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(210, 171)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(169, 13)
-        Me.Label18.TabIndex = 41
-        Me.Label18.Text = "Nature of Work/Business/Position"
+        Me.lstPhone.FormattingEnabled = True
+        Me.lstPhone.Location = New System.Drawing.Point(16, 210)
+        Me.lstPhone.Name = "lstPhone"
+        Me.lstPhone.Size = New System.Drawing.Size(150, 69)
+        Me.lstPhone.TabIndex = 29
+        '
+        'txtPhone
+        '
+        Me.txtPhone.Location = New System.Drawing.Point(16, 184)
+        Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.Size = New System.Drawing.Size(150, 20)
+        Me.txtPhone.TabIndex = 28
         '
         'frmCustomer
         '
@@ -803,7 +823,6 @@ Partial Class frmCustomer
     Friend WithEvents txtNationality As System.Windows.Forms.TextBox
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents cboPhone As System.Windows.Forms.ComboBox
     Friend WithEvents btnNega As System.Windows.Forms.Button
     Friend WithEvents btnPlus As System.Windows.Forms.Button
     Friend WithEvents txtSrcFund As System.Windows.Forms.TextBox
@@ -827,5 +846,8 @@ Partial Class frmCustomer
     Friend WithEvents btnTest As System.Windows.Forms.Button
     Friend WithEvents txtWork As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents btnSetPri As System.Windows.Forms.Button
+    Friend WithEvents txtPhone As System.Windows.Forms.TextBox
+    Friend WithEvents lstPhone As System.Windows.Forms.ListBox
 
 End Class
