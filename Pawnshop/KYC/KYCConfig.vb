@@ -52,7 +52,7 @@
         Dim ds As DataSet
 
         ds = LoadSQL(mySql)
-        If ds.Tables(0).Rows.Count = 0 Then Return Nothing
+        If ds.Tables(0).Rows.Count = 0 Then Return {""}
 
         For Each dr As DataRow In ds.Tables(0).Rows
             lst.Add(dr(colName))

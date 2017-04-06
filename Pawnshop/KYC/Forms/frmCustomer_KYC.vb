@@ -9,6 +9,10 @@
 
     Private CustomerPhones As Collections_Phone
 
+    Private Sub frmCustomer_Click(sender As Object, e As System.EventArgs) Handles Me.Click
+
+    End Sub
+
     Private Sub frmCustomer_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         CACHE_MANAGEMENT()
 
@@ -128,16 +132,16 @@
         lvID.Items.Clear()
 
         cboBrgy1.Items.AddRange(listBarangay.ToArray)
-        cboBrgy2.Items.Add(listBarangay.ToArray)
+        cboBrgy2.Items.AddRange(listBarangay.ToArray)
 
-        cboCity1.Items.Add(listCity.ToArray)
-        cboCity2.Items.Add(listCity.ToArray)
+        cboCity1.Items.AddRange(listCity.ToArray)
+        cboCity2.Items.AddRange(listCity.ToArray)
 
-        cboProv1.Items.Add(listProvince.ToArray)
-        cboProv2.Items.Add(listProvince.ToArray)
+        cboProv1.Items.AddRange(listProvince.ToArray)
+        cboProv2.Items.AddRange(listProvince.ToArray)
 
-        cboZip1.Items.Add(listZip.ToArray)
-        cboZip2.Items.Add(listZip.ToArray)
+        cboZip1.Items.AddRange(listZip.ToArray)
+        cboZip2.Items.AddRange(listZip.ToArray)
     End Sub
 
     Private Sub btnPlus_Click(sender As System.Object, e As System.EventArgs) Handles btnPlus.Click
