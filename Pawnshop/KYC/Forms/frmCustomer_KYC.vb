@@ -115,7 +115,8 @@
         txtBdayPlace.Text = ""
         txtWork.Text = ""
         txtNationality.Text = "FILIPINO"
-        cboGender.Text = "Female"
+        cboGender.SelectedItem = 0
+        Console.WriteLine(cboGender.Items.Count)
         txtSrcFund.Text = ""
 
         lstPhone.Items.Clear()
@@ -126,14 +127,17 @@
         txtIDNum.Text = ""
         lvID.Items.Clear()
 
-        cboBrgy1.Items.Add(listBarangay)
-        cboBrgy2.Items.Add(listBarangay)
+        cboBrgy1.Items.AddRange(listBarangay.ToArray)
+        cboBrgy2.Items.Add(listBarangay.ToArray)
 
-        cboCity1.Items.Add(listCity)
-        cboCity2.Items.Add(listCity)
+        cboCity1.Items.Add(listCity.ToArray)
+        cboCity2.Items.Add(listCity.ToArray)
 
-        cboZip1.Items.Add(listZip)
-        cboZip2.Items.Add(listZip)
+        cboProv1.Items.Add(listProvince.ToArray)
+        cboProv2.Items.Add(listProvince.ToArray)
+
+        cboZip1.Items.Add(listZip.ToArray)
+        cboZip2.Items.Add(listZip.ToArray)
     End Sub
 
     Private Sub btnPlus_Click(sender As System.Object, e As System.EventArgs) Handles btnPlus.Click

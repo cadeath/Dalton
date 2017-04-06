@@ -33,6 +33,9 @@ Partial Class frmCustomer
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tpBasic = New System.Windows.Forms.TabPage()
+        Me.txtPhone = New System.Windows.Forms.TextBox()
+        Me.lstPhone = New System.Windows.Forms.ListBox()
+        Me.btnSetPri = New System.Windows.Forms.Button()
         Me.txtWork = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.cboGender = New System.Windows.Forms.ComboBox()
@@ -88,9 +91,6 @@ Partial Class frmCustomer
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnTest = New System.Windows.Forms.Button()
-        Me.btnSetPri = New System.Windows.Forms.Button()
-        Me.lstPhone = New System.Windows.Forms.ListBox()
-        Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -226,6 +226,32 @@ Partial Class frmCustomer
         Me.tpBasic.TabIndex = 0
         Me.tpBasic.Text = "Basic Information"
         Me.tpBasic.UseVisualStyleBackColor = True
+        '
+        'txtPhone
+        '
+        Me.txtPhone.Location = New System.Drawing.Point(16, 184)
+        Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.Size = New System.Drawing.Size(150, 20)
+        Me.txtPhone.TabIndex = 28
+        '
+        'lstPhone
+        '
+        Me.lstPhone.FormattingEnabled = True
+        Me.lstPhone.Items.AddRange(New Object() {"aw", "aw", "wg", "wge"})
+        Me.lstPhone.Location = New System.Drawing.Point(16, 210)
+        Me.lstPhone.Name = "lstPhone"
+        Me.lstPhone.Size = New System.Drawing.Size(150, 69)
+        Me.lstPhone.TabIndex = 29
+        '
+        'btnSetPri
+        '
+        Me.btnSetPri.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSetPri.Location = New System.Drawing.Point(178, 243)
+        Me.btnSetPri.Name = "btnSetPri"
+        Me.btnSetPri.Size = New System.Drawing.Size(29, 23)
+        Me.btnSetPri.TabIndex = 31
+        Me.btnSetPri.Text = "P"
+        Me.btnSetPri.UseVisualStyleBackColor = True
         '
         'txtWork
         '
@@ -702,6 +728,7 @@ Partial Class frmCustomer
         '
         'btnCancel
         '
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Location = New System.Drawing.Point(562, 397)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 32)
@@ -727,36 +754,11 @@ Partial Class frmCustomer
         Me.btnTest.Text = "Test"
         Me.btnTest.UseVisualStyleBackColor = True
         '
-        'btnSetPri
-        '
-        Me.btnSetPri.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSetPri.Location = New System.Drawing.Point(178, 243)
-        Me.btnSetPri.Name = "btnSetPri"
-        Me.btnSetPri.Size = New System.Drawing.Size(29, 23)
-        Me.btnSetPri.TabIndex = 31
-        Me.btnSetPri.Text = "P"
-        Me.btnSetPri.UseVisualStyleBackColor = True
-        '
-        'lstPhone
-        '
-        Me.lstPhone.FormattingEnabled = True
-        Me.lstPhone.Items.AddRange(New Object() {"aw", "aw", "wg", "wge"})
-        Me.lstPhone.Location = New System.Drawing.Point(16, 210)
-        Me.lstPhone.Name = "lstPhone"
-        Me.lstPhone.Size = New System.Drawing.Size(150, 69)
-        Me.lstPhone.TabIndex = 29
-        '
-        'txtPhone
-        '
-        Me.txtPhone.Location = New System.Drawing.Point(16, 184)
-        Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.Size = New System.Drawing.Size(150, 20)
-        Me.txtPhone.TabIndex = 28
-        '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(649, 439)
         Me.Controls.Add(Me.btnTest)
         Me.Controls.Add(Me.btnSave)

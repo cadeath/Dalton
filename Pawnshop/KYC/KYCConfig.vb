@@ -3,6 +3,7 @@
     Friend LOAD_CACHE As Boolean = False
     Friend listBarangay As List(Of String)
     Friend listCity As List(Of String)
+    Friend listProvince As List(Of String)
     Friend listZip As List(Of String)
 
     Friend Const CUSTOMER_TABLE As String = "KYC_CUSTOMERS"
@@ -16,32 +17,48 @@
 
     Friend Sub CACHE_MANAGEMENT()
         If LOAD_CACHE Then Exit Sub
+        Dim mySql As String
 
-        listBarangay = AddList("BRGY1")
-        listBarangay.AddRange(AddList("BRGY2"))
+        mySql = "SELECT DISTINCT BRGY1 AS ""BRGY"" FROM KYC_CUSTOMERS "
+        mySql &= vbCrLf & "UNION"
+        mySql &= vbCrLf & "SELECT DISTINCT BRGY2 FROM KYC_CUSTOMERS"
+        listBarangay = New List(Of String)
+        listBarangay.AddRange(AddList(mySql, "BRGY"))
 
-        listCity = AddList("CITY1")
-        listCity.AddRange(AddList("CITY2"))
+        mySql = "SELECT DISTINCT CITY1 AS ""CITY"" FROM KYC_CUSTOMERS "
+        mySql &= vbCrLf & "UNION"
+        mySql &= vbCrLf & "SELECT DISTINCT CITY2 FROM KYC_CUSTOMERS"
+        listCity = New List(Of String)
+        listCity.AddRange(AddList(mySql, "CITY"))
 
-        listZip = AddList("ZIP1")
-        listZip.AddRange(AddList("ZIP2"))
+        mySql = "SELECT DISTINCT PROVINCE1 AS ""PROVINCE"" FROM KYC_CUSTOMERS "
+        mySql &= vbCrLf & "UNION"
+        mySql &= vbCrLf & "SELECT DISTINCT PROVINCE2 FROM KYC_CUSTOMERS"
+        listProvince = New List(Of String)
+        listProvince.AddRange(AddList(mySql, "PROVINCE"))
+
+        mySql = "SELECT DISTINCT ZIP1 AS ""ZIP"" FROM KYC_CUSTOMERS "
+        mySql &= vbCrLf & "UNION"
+        mySql &= vbCrLf & "SELECT DISTINCT ZIP2 FROM KYC_CUSTOMERS"
+        listZip = New List(Of String)
+        listZip.AddRange(AddList(mySql, "ZIP"))
 
         LOAD_CACHE = True
+        Console.WriteLine("Cache already loaded...")
     End Sub
 
-    Private Function AddList(colName As String) As List(Of String)
+    Private Function AddList(mySql As String, colName As String) As Array
         Dim lst As New List(Of String)
-        Dim mySql As String, ds As DataSet
+        Dim ds As DataSet
 
-
-        mySql = String.Format("SELECT DISTINCT {0} FROM {1} ORDER BY {0} ASC", colName, CUSTOMER_TABLE)
         ds = LoadSQL(mySql)
+        If ds.Tables(0).Rows.Count = 0 Then Return Nothing
 
         For Each dr As DataRow In ds.Tables(0).Rows
             lst.Add(dr(colName))
         Next
 
-        Return lst
+        Return lst.ToArray
     End Function
 
 
