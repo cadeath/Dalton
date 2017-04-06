@@ -41,7 +41,8 @@
             Dim i As Integer = 0
 
             For clm As Integer = 0 To dsRate.Tables(fillData).Columns.Count - 1
-                AddaColumn("Columns " & clm)
+
+                AddaColumn(dsRate.Tables(fillData).Columns.Item(clm).ToString)
             Next
 
             For Each dr As DataRow In dsRate.Tables(fillData).Rows
