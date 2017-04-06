@@ -4,10 +4,6 @@
 ''' <remarks></remarks>
 Public Class Customer
 
-    Const CUSTOMER_TABLE As String = "KYC_CUSTOMERS"
-    Const CUSTOMER_ID As String = "KYC_ID"
-    Const CUSTOMER_PHONE As String = "KYC_PHONE"
-
 #Region "Properties"
     Private _id As Integer
     Public Property CustomerID() As Integer
@@ -392,7 +388,7 @@ Public Class Customer
                     row("PHONENUMBER") = ph.PhoneNumber
                     row("ISPRIMARY") = IIf(ph.isPrimary, 1, 0)
                 End If
-                
+
             Next
 
             database.SaveEntry(ds)

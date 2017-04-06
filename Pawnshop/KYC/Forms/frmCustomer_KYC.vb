@@ -6,6 +6,8 @@
     Const NOT_MINOR As Integer = 18
 
     Private Sub frmCustomer_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        CACHE_MANAGEMENT()
+
         ClearFields()
     End Sub
 
@@ -64,6 +66,15 @@
         cboType.SelectedIndex = 0
         txtIDNum.Text = ""
         lvID.Items.Clear()
+
+        cboBrgy1.Items.Add(listBarangay)
+        cboBrgy2.Items.Add(listBarangay)
+
+        cboCity1.Items.Add(listCity)
+        cboCity2.Items.Add(listCity)
+
+        cboZip1.Items.Add(listZip)
+        cboZip2.Items.Add(listZip)
     End Sub
 
     Private Sub btnPlus_Click(sender As System.Object, e As System.EventArgs) Handles btnPlus.Click
@@ -156,8 +167,13 @@
     End Sub
 
     Private Sub load_Customer(cl As Customer)
-        ' TODO:
-        ' Load Customer Information in ReadOnly and Edit Ready Form
+        ClearFields()
+        txtFName.Text = cl.FirstName
+        txtMName.Text = cl.MiddleName
+        txtLName.Text = cl.LastName
+
+        txtSt1.Text = cl.PresentStreet
+        cboBrgy1.Text = cl.PresentBarangay
     End Sub
 
     Enum FormRule As Integer
@@ -166,9 +182,6 @@
         EditEntry = 2
     End Enum
     Public Overloads Function ShowDialog(ByVal returnValue As String, ByVal arr As Customer, frmType As FormRule) As DialogResult
-        'txtNewNumber.Text = IIf(arr(0).Contains("INV"), "", arr(0))
-        'lblClient.Text = "Change Number for " & arr(1)
-
         load_Customer(arr)
 
         Me.ShowDialog()
