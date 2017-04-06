@@ -52,6 +52,7 @@
 
         dtpBday.Value = Now
         txtBdayPlace.Text = ""
+        txtWork.Text = ""
         txtNationality.Text = ""
         cboGender.Text = "Female"
         txtSrcFund.Text = ""
@@ -89,6 +90,21 @@
         Eskie.Load_CustomerByID()
 
         Console.WriteLine(String.Format("{0} {1} is loaded.", Eskie.FirstName, Eskie.LastName))
+        Dim newCP As New PhoneNumber
+        newCP.PhoneNumber = "09226847559"
+        newCP.CustomerID = Eskie.CustomerID
+        newCP.SetPrimary()
+
+        Eskie.CustomersPhone.Add(newCP)
+        'EDIT
+        Eskie.CustomersPhone.byID(2).PhoneNumber = "SUNCHANGE"
+
+        Eskie.Save()
+
+        For Each cp As PhoneNumber In Eskie.CustomersPhone
+            Console.WriteLine("CP: " & cp.PhoneNumber)
+        Next
+
     End Sub
 
     Private Sub AddCustomer()
@@ -102,7 +118,9 @@
         test.PermanentCity = "GSC"
         test.PermanentProvince = "South Cotabato"
         test.Nationality = "Filipino"
-        test.Sex = 1 'TODO: Change to Male Female
+        test.Sex = Customer.Gender.Male
+        test.NatureOfWork = "IT"
+        test.SourceOfFund = "WORK"
 
         Dim compID As New IdentificationCard
         Dim globePlan As New PhoneNumber
@@ -136,4 +154,27 @@
         cboProv2.Text = cboProv2.Text
         cboZip2.Text = cboZip1.Text
     End Sub
+
+    Private Sub load_Customer(cl As Customer)
+        ' TODO:
+        ' Load Customer Information in ReadOnly and Edit Ready Form
+    End Sub
+
+    Enum FormRule As Integer
+        ViewEntry = 0
+        NewEntry = 1
+        EditEntry = 2
+    End Enum
+    Public Overloads Function ShowDialog(ByVal returnValue As String, ByVal arr As Customer, frmType As FormRule) As DialogResult
+        'txtNewNumber.Text = IIf(arr(0).Contains("INV"), "", arr(0))
+        'lblClient.Text = "Change Number for " & arr(1)
+
+        load_Customer(arr)
+
+        Me.ShowDialog()
+        If frmType = FormRule.ViewEntry Then _
+            returnValue = "OK"
+
+        Return Me.DialogResult
+    End Function
 End Class

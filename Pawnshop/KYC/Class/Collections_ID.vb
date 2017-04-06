@@ -26,4 +26,16 @@
             List.RemoveAt(index)
         End If
     End Sub
+
+    Public ReadOnly Property byID(id As Integer) As IdentificationCard
+        Get
+            For Each CustID As IdentificationCard In Me.List
+                If CustID.ID = id Then
+                    Return CustID
+                End If
+            Next
+
+            Return Nothing
+        End Get
+    End Property
 End Class

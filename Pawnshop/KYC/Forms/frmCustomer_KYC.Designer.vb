@@ -87,6 +87,8 @@ Partial Class frmCustomer
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnTest = New System.Windows.Forms.Button()
+        Me.txtWork = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -171,6 +173,8 @@ Partial Class frmCustomer
         '
         'tpBasic
         '
+        Me.tpBasic.Controls.Add(Me.txtWork)
+        Me.tpBasic.Controls.Add(Me.Label18)
         Me.tpBasic.Controls.Add(Me.cboGender)
         Me.tpBasic.Controls.Add(Me.Label25)
         Me.tpBasic.Controls.Add(Me.Label22)
@@ -224,15 +228,15 @@ Partial Class frmCustomer
         Me.cboGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboGender.FormattingEnabled = True
         Me.cboGender.Items.AddRange(New Object() {"Male", "Female"})
-        Me.cboGender.Location = New System.Drawing.Point(255, 195)
+        Me.cboGender.Location = New System.Drawing.Point(481, 184)
         Me.cboGender.Name = "cboGender"
         Me.cboGender.Size = New System.Drawing.Size(121, 21)
-        Me.cboGender.TabIndex = 40
+        Me.cboGender.TabIndex = 33
         '
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(252, 182)
+        Me.Label25.Location = New System.Drawing.Point(478, 171)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(42, 13)
         Me.Label25.TabIndex = 39
@@ -253,7 +257,7 @@ Partial Class frmCustomer
         Me.rbHigh.Location = New System.Drawing.Point(558, 265)
         Me.rbHigh.Name = "rbHigh"
         Me.rbHigh.Size = New System.Drawing.Size(52, 17)
-        Me.rbHigh.TabIndex = 37
+        Me.rbHigh.TabIndex = 36
         Me.rbHigh.TabStop = True
         Me.rbHigh.Text = "HIGH"
         Me.rbHigh.UseVisualStyleBackColor = True
@@ -264,7 +268,7 @@ Partial Class frmCustomer
         Me.rbNormal.Location = New System.Drawing.Point(481, 265)
         Me.rbNormal.Name = "rbNormal"
         Me.rbNormal.Size = New System.Drawing.Size(71, 17)
-        Me.rbNormal.TabIndex = 36
+        Me.rbNormal.TabIndex = 35
         Me.rbNormal.Text = "NORMAL"
         Me.rbNormal.UseVisualStyleBackColor = True
         '
@@ -275,22 +279,22 @@ Partial Class frmCustomer
         Me.rbLow.Location = New System.Drawing.Point(425, 264)
         Me.rbLow.Name = "rbLow"
         Me.rbLow.Size = New System.Drawing.Size(50, 17)
-        Me.rbLow.TabIndex = 35
+        Me.rbLow.TabIndex = 34
         Me.rbLow.TabStop = True
         Me.rbLow.Text = "LOW"
         Me.rbLow.UseVisualStyleBackColor = True
         '
         'txtSrcFund
         '
-        Me.txtSrcFund.Location = New System.Drawing.Point(395, 198)
+        Me.txtSrcFund.Location = New System.Drawing.Point(213, 226)
         Me.txtSrcFund.Name = "txtSrcFund"
-        Me.txtSrcFund.Size = New System.Drawing.Size(208, 20)
-        Me.txtSrcFund.TabIndex = 34
+        Me.txtSrcFund.Size = New System.Drawing.Size(178, 20)
+        Me.txtSrcFund.TabIndex = 32
         '
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(392, 182)
+        Me.Label21.Location = New System.Drawing.Point(210, 210)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(80, 13)
         Me.Label21.TabIndex = 33
@@ -298,26 +302,26 @@ Partial Class frmCustomer
         '
         'btnNega
         '
-        Me.btnNega.Location = New System.Drawing.Point(178, 224)
+        Me.btnNega.Location = New System.Drawing.Point(178, 213)
         Me.btnNega.Name = "btnNega"
         Me.btnNega.Size = New System.Drawing.Size(29, 23)
-        Me.btnNega.TabIndex = 32
+        Me.btnNega.TabIndex = 30
         Me.btnNega.Text = "-"
         Me.btnNega.UseVisualStyleBackColor = True
         '
         'btnPlus
         '
-        Me.btnPlus.Location = New System.Drawing.Point(178, 195)
+        Me.btnPlus.Location = New System.Drawing.Point(178, 184)
         Me.btnPlus.Name = "btnPlus"
         Me.btnPlus.Size = New System.Drawing.Size(29, 23)
-        Me.btnPlus.TabIndex = 30
+        Me.btnPlus.TabIndex = 29
         Me.btnPlus.Text = "+"
         Me.btnPlus.UseVisualStyleBackColor = True
         '
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(16, 182)
+        Me.Label20.Location = New System.Drawing.Point(16, 163)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(84, 13)
         Me.Label20.TabIndex = 29
@@ -327,14 +331,14 @@ Partial Class frmCustomer
         '
         Me.cboPhone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboPhone.FormattingEnabled = True
-        Me.cboPhone.Location = New System.Drawing.Point(16, 197)
+        Me.cboPhone.Location = New System.Drawing.Point(16, 184)
         Me.cboPhone.Name = "cboPhone"
-        Me.cboPhone.Size = New System.Drawing.Size(156, 85)
+        Me.cboPhone.Size = New System.Drawing.Size(156, 98)
         Me.cboPhone.TabIndex = 28
         '
         'txtNationality
         '
-        Me.txtNationality.Location = New System.Drawing.Point(395, 156)
+        Me.txtNationality.Location = New System.Drawing.Point(395, 140)
         Me.txtNationality.Name = "txtNationality"
         Me.txtNationality.Size = New System.Drawing.Size(208, 20)
         Me.txtNationality.TabIndex = 27
@@ -342,7 +346,7 @@ Partial Class frmCustomer
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(392, 140)
+        Me.Label19.Location = New System.Drawing.Point(392, 124)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(56, 13)
         Me.Label19.TabIndex = 26
@@ -546,7 +550,7 @@ Partial Class frmCustomer
         '
         'txtBdayPlace
         '
-        Me.txtBdayPlace.Location = New System.Drawing.Point(131, 156)
+        Me.txtBdayPlace.Location = New System.Drawing.Point(131, 140)
         Me.txtBdayPlace.Name = "txtBdayPlace"
         Me.txtBdayPlace.Size = New System.Drawing.Size(260, 20)
         Me.txtBdayPlace.TabIndex = 3
@@ -554,7 +558,7 @@ Partial Class frmCustomer
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(128, 140)
+        Me.Label6.Location = New System.Drawing.Point(128, 124)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(54, 13)
         Me.Label6.TabIndex = 2
@@ -563,7 +567,7 @@ Partial Class frmCustomer
         'dtpBday
         '
         Me.dtpBday.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpBday.Location = New System.Drawing.Point(16, 156)
+        Me.dtpBday.Location = New System.Drawing.Point(16, 140)
         Me.dtpBday.Name = "dtpBday"
         Me.dtpBday.Size = New System.Drawing.Size(108, 20)
         Me.dtpBday.TabIndex = 1
@@ -571,7 +575,7 @@ Partial Class frmCustomer
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(13, 140)
+        Me.Label5.Location = New System.Drawing.Point(13, 124)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(45, 13)
         Me.Label5.TabIndex = 0
@@ -712,6 +716,22 @@ Partial Class frmCustomer
         Me.btnTest.Text = "Test"
         Me.btnTest.UseVisualStyleBackColor = True
         '
+        'txtWork
+        '
+        Me.txtWork.Location = New System.Drawing.Point(213, 187)
+        Me.txtWork.Name = "txtWork"
+        Me.txtWork.Size = New System.Drawing.Size(176, 20)
+        Me.txtWork.TabIndex = 31
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(210, 171)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(169, 13)
+        Me.Label18.TabIndex = 41
+        Me.Label18.Text = "Nature of Work/Business/Position"
+        '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -805,5 +825,7 @@ Partial Class frmCustomer
     Friend WithEvents btnRemove As System.Windows.Forms.Button
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnTest As System.Windows.Forms.Button
+    Friend WithEvents txtWork As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
 
 End Class

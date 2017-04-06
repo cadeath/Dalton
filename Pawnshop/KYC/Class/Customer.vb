@@ -149,17 +149,18 @@ Public Class Customer
         End Set
     End Property
 
-    Private Enum Gender As Integer
+    Enum Gender As Integer
         Male = 1
         Female = 0
     End Enum
-    Private _gender As Integer
-    Public Property Sex() As Integer
+
+    Private _sex As Gender
+    Public Property Sex() As Gender
         Get
-            Return _gender
+            Return _sex
         End Get
-        Set(ByVal value As Integer)
-            _gender = value
+        Set(ByVal value As Gender)
+            _sex = value
         End Set
     End Property
 
@@ -290,8 +291,9 @@ Public Class Customer
 
                 .Item("BIRTHDAY") = _birthday
                 .Item("BIRTHPLACE") = _birthplace
+                .Item("WORK") = _natureOfWork
                 .Item("NATIONALITY") = _nationality
-                .Item("GENDER") = _gender
+                .Item("GENDER") = IIf(_sex = Gender.Male, "M", "F")
                 .Item("SRCFUND") = _sourceOfFund
                 .Item("RANK") = _rank
             End With
@@ -313,9 +315,10 @@ Public Class Customer
                 .Item("ZIP2") = _addrZip2
 
                 .Item("BIRTHDAY") = _birthday
-                .Item("BIRTHDAYPLACE") = _birthplace
+                .Item("BIRTHPLACE") = _birthplace
+                .Item("WORK") = _natureOfWork
                 .Item("NATIONALITY") = _nationality
-                .Item("GENDER") = _gender
+                .Item("GENDER") = IIf(_sex = Gender.Male, "M", "F")
                 .Item("SRCFUND") = _sourceOfFund
                 .Item("RANK") = _rank
             End With
@@ -420,16 +423,19 @@ Public Class Customer
 
             _birthday = .Item("BIRTHDAY")
             _birthplace = .Item("BIRTHPLACE")
+            _natureOfWork = .Item("WORK")
             _nationality = .Item("NATIONALITY")
-            _gender = .Item("GENDER")
+            _sex = IIf(.Item("GENDER") = "M", 1, 0)
             _sourceOfFund = .Item("SRCFUND")
             _rank = .Item("RANK")
         End With
 
         ' Loading Collections
         mySql = "SELECT * FROM " & CUSTOMER_PHONE & " WHERE CUSTID = " & _id
-        mySql &= " ORDER BY ID ASC"
-        ds = LoadSQL(mySql) : _custPhones.Clear()
+        mySql &= " ORDER BY PHONEID ASC"
+        ds = LoadSQL(mySql)
+
+        _custPhones = New Collections_Phone
         For Each cp As DataRow In ds.Tables(0).Rows
             Dim tmpCP As New PhoneNumber
             tmpCP.PhoneID = cp("PHONEID")
@@ -441,7 +447,9 @@ Public Class Customer
 
         mySql = "SELECT * FROM " & CUSTOMER_ID & " WHERE CUSTID = " & _id
         mySql &= " ORDER BY ID ASC"
-        ds = LoadSQL(mySql) : _custIDs.Clear()
+        ds = LoadSQL(mySql)
+
+        _custIDs = New Collections_ID
         For Each cID As DataRow In ds.Tables(0).Rows
             Dim tmpID As New IdentificationCard
             tmpID.ID = cID("ID")

@@ -26,4 +26,16 @@
             List.RemoveAt(index)
         End If
     End Sub
+
+    Public ReadOnly Property byID(id As Integer) As PhoneNumber
+        Get
+            For Each cp As PhoneNumber In Me.List
+                If cp.PhoneID = id Then
+                    Return cp
+                End If
+            Next
+
+            Return Nothing
+        End Get
+    End Property
 End Class
