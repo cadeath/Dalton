@@ -13,7 +13,7 @@
         CACHE_MANAGEMENT()
         ClearFields()
 
-        Populate()
+        'Populate()
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
@@ -460,5 +460,17 @@
 
         lvID.FocusedItem.Remove()
         Remove_ID(idx)
+    End Sub
+
+    Private Sub btnPrimary_Click(sender As System.Object, e As System.EventArgs) Handles btnPrimary.Click
+        If lvID.SelectedItems.Count = 0 Then Exit Sub
+        Dim idx As Integer = lvID.FocusedItem.Index
+
+        For Each lv As ListViewItem In lvID.Items
+            lv.BackColor = Nothing
+        Next
+
+        SetPrimary_ID(idx)
+        lvID.FocusedItem.BackColor = Color.ForestGreen
     End Sub
 End Class
