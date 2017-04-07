@@ -6,17 +6,14 @@
     Const NOT_MINOR As Integer = 18
 
     Friend REQUIRED_ID As Boolean = False
-    Private CustomerPhones As Collections_Phone
-    Private CustomerIDs As Collections_ID
-
-    Private Sub frmCustomer_Click(sender As Object, e As System.EventArgs) Handles Me.Click
-
-    End Sub
+    Private CustomerPhones As New Collections_Phone
+    Private CustomerIDs As New Collections_ID
 
     Private Sub frmCustomer_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         CACHE_MANAGEMENT()
-
         ClearFields()
+
+        'Populate()
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
@@ -164,21 +161,32 @@
         cboZip2.Items.AddRange(listZip.ToArray)
     End Sub
 
+    ' TODO: JUNMAR
+    ' Please provide phone number verification
+    ' You might copy it in our existing client
+    ' management module.
     Private Sub btnPlus_Click(sender As System.Object, e As System.EventArgs) Handles btnPlus.Click
         If txtPhone.Text = "" Then Exit Sub
 
+        Add_Phone(txtPhone.Text)
         lstPhone.Items.Add(txtPhone.Text)
         txtPhone.Text = ""
     End Sub
 
     Private Sub btnNega_Click(sender As System.Object, e As System.EventArgs) Handles btnNega.Click
         lstPhone.Items.Remove(lstPhone.SelectedItem)
+        Remove_Phone(lstPhone.SelectedItem)
     End Sub
 
     Private Sub btnTest_Click(sender As System.Object, e As System.EventArgs) Handles btnTest.Click
-        AddCustomer()
-        Console.WriteLine("Saved")
-        ModifyInfo()
+        'AddCustomer()
+        'Console.WriteLine("Saved")
+        'ModifyInfo()
+
+        Console.WriteLine("In the Collection:")
+        For Each ph As PhoneNumber In CustomerPhones
+            Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
+        Next
     End Sub
 
     Private Sub ModifyInfo()
@@ -296,6 +304,7 @@
             lstPhone.Items(idx) = ModifyStr
 
         lstPhone.Items(priIdx) = primaryNumber & "[P]"
+        SetPrimary_Phone(lstPhone.Items(priIdx))
     End Sub
 
     Private Sub txtPhone_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtPhone.KeyPress
@@ -307,6 +316,7 @@
 #Region "Phone Collections"
     Private Sub Add_Phone(num As String, Optional isPrimary As Boolean = False)
         If isPrimary Then clearPhonePrimary()
+        num = removePriFunction(num)
 
         Dim newPhone As New PhoneNumber
         newPhone.PhoneNumber = num
@@ -326,10 +336,50 @@
         Next
     End Sub
 
+    Private Sub SetPrimary_Phone(num As String)
+        num = removePriFunction(num)
+        clearPhonePrimary()
+
+        For Each ph As PhoneNumber In CustomerPhones
+            If num = ph.PhoneNumber Then
+                ph.isPrimary = True
+            End If
+        Next
+    End Sub
+
+    Private Sub Remove_Phone(num As String)
+        num = removePriFunction(num)
+        Dim idx As Integer = 0, found As Boolean = False
+
+        For Each ph As PhoneNumber In CustomerPhones
+            If num = ph.PhoneNumber Then
+                found = True
+                Exit For
+            End If
+            idx += 1
+        Next
+
+        If found Then CustomerPhones.Remove(idx)
+    End Sub
+
     Private Sub clearPhonePrimary()
         For Each ph As PhoneNumber In CustomerPhones
             ph.isPrimary = False
         Next
     End Sub
+
+    Private Function removePriFunction(str As String) As String
+        Return str.Replace("[P]", "")
+    End Function
 #End Region
+
+    Private Sub Populate()
+        lstPhone.Items.Clear()
+        Dim iniPhone As String() = {"0918", "0919", "0920", "0921", "0922", "0923"}
+        lstPhone.Items.AddRange(iniPhone)
+
+        For Each x As String In iniPhone
+            Add_Phone(x)
+        Next
+    End Sub
 End Class
