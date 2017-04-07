@@ -13,7 +13,7 @@
         CACHE_MANAGEMENT()
         ClearFields()
 
-        'Populate()
+        Populate()
     End Sub
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
@@ -107,6 +107,8 @@
             If rbHigh.Checked Then _
                 .Rank = Customer.RankNumber.High
 
+            AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
+
             .CustomersPhone = CustomerPhones
             .CustomersIDs = CustomerIDs
             .Save()
@@ -184,8 +186,11 @@
         'ModifyInfo()
 
         Console.WriteLine("In the Collection:")
-        For Each ph As PhoneNumber In CustomerPhones
-            Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
+        'For Each ph As PhoneNumber In CustomerPhones
+        '    Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
+        'Next
+        For Each id As IdentificationCard In CustomerIDs
+            Console.WriteLine(String.Format("{0} >> {1} - {2}", id.IDType, id.IDNumber, id.isPrimary))
         Next
     End Sub
 
@@ -314,6 +319,16 @@
     End Sub
 
 #Region "Phone Collections"
+    Private Sub AutoSetPrimary_Phone()
+        For Each ph As PhoneNumber In CustomerPhones
+            If ph.isPrimary Then
+                Exit Sub
+            End If
+        Next
+
+        CustomerPhones.Item(0).SetPrimary()
+    End Sub
+
     Private Sub Add_Phone(num As String, Optional isPrimary As Boolean = False)
         If isPrimary Then clearPhonePrimary()
         num = removePriFunction(num)
@@ -325,6 +340,7 @@
         CustomerPhones.Add(newPhone)
     End Sub
 
+    ' if not required, remove
     Private Sub Edit_Phone(origin As String, newnum As String, Optional isPrimary As Boolean = False)
         If isPrimary Then clearPhonePrimary()
 
@@ -373,13 +389,76 @@
     End Function
 #End Region
 
-    Private Sub Populate()
-        lstPhone.Items.Clear()
-        Dim iniPhone As String() = {"0918", "0919", "0920", "0921", "0922", "0923"}
-        lstPhone.Items.AddRange(iniPhone)
-
-        For Each x As String In iniPhone
-            Add_Phone(x)
+#Region "ID Collections"
+    Private Sub AutoSetPrimary_IDs()
+        For Each id As IdentificationCard In CustomerIDs
+            If id.isPrimary Then
+                Exit Sub
+            End If
         Next
+
+        CustomerIDs.Item(0).SetPrimary()
+    End Sub
+
+    Private Sub Add_ID(typ As String, refNum As String, Optional isPrimary As Boolean = False)
+        Dim newID As New IdentificationCard
+        newID.IDType = typ
+        newID.IDNumber = refNum
+        newID.isPrimary = isPrimary
+
+        CustomerIDs.Add(newID)
+    End Sub
+
+    Private Sub SetPrimary_ID(index As Integer)
+        clearIDPrimary()
+        CustomerIDs.Item(index).isPrimary = True
+    End Sub
+
+    Private Sub Remove_ID(index As Integer)
+        CustomerIDs.Remove(index)
+    End Sub
+
+    Private Sub clearIDPrimary()
+        For Each nopri As IdentificationCard In CustomerIDs
+            nopri.isPrimary = False
+        Next
+    End Sub
+#End Region
+
+    Private Sub Populate()
+        Dim type As String() = {"PASSPORT", "DRIVER", "VOTERS"}
+        Dim number() As String = {"NUMBER1", "NUMBER2", "NUMBER3", "NUMBER4", "NUMBER5"}
+
+        For cnt As Integer = 0 To number.Count - 1
+            Dim tmpID As New IdentificationCard
+            tmpID.IDType = type(rndInt(0, 2))
+            tmpID.IDNumber = number(cnt)
+            CustomerIDs.Add(tmpID)
+
+            Dim lv As ListViewItem = lvID.Items.Add(tmpID.IDType)
+            lv.SubItems.Add(tmpID.IDNumber)
+        Next
+    End Sub
+
+    Private Function rndInt(min As Integer, max As Integer) As Integer
+        Return CInt(Math.Ceiling(Rnd() * max)) + min
+    End Function
+
+    Private Sub btnAdd_Click(sender As System.Object, e As System.EventArgs) Handles btnAdd.Click
+        Dim lv As ListViewItem = lvID.Items.Add(cboType.Text)
+        lv.SubItems.Add(txtIDNum.Text)
+
+        Add_ID(cboType.Text, txtIDNum.Text)
+
+        cboType.SelectedIndex = 0
+        txtIDNum.Text = ""
+    End Sub
+
+    Private Sub btnRemove_Click(sender As System.Object, e As System.EventArgs) Handles btnRemove.Click
+        If lvID.SelectedItems.Count = 0 Then Exit Sub
+        Dim idx As Integer = lvID.FocusedItem.Index
+
+        lvID.FocusedItem.Remove()
+        Remove_ID(idx)
     End Sub
 End Class
