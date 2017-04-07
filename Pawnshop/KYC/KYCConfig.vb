@@ -61,8 +61,6 @@
         Return lst.ToArray
     End Function
 
-    ' TODO
-    ' AutoPatch to Create Tables for this Branch
     Private Sub Create_Tables()
         Dim mySql As String, primaryKey As String
 
@@ -91,8 +89,11 @@
         mySql &= vbCrLf & "  RANK SMALLINT DEFAULT '0' NOT NULL);"
         primaryKey = "ALTER TABLE " & CUSTOMER_TABLE & " ADD PRIMARY KEY (ID);"
 
+        RunCommand(mySql)
+        AutoIncrement_ID(CUSTOMER_TABLE, "ID")
+
         ' PHONE ID
-        mySql = "CREATE TABLE KYC_ID ("
+        mySql = "CREATE TABLE " & CUSTOMER_ID & " ("
         mySql &= vbCrLf & "  ID INTEGER NOT NULL,"
         mySql &= vbCrLf & "  CUSTID BIGINT DEFAULT '0' NOT NULL,"
         mySql &= vbCrLf & "  ID_TYPE VARCHAR(20),"
@@ -100,14 +101,19 @@
         mySql &= vbCrLf & "  ISPRIMARY SMALLINT DEFAULT '0' NOT NULL);"
         primaryKey = "ALTER TABLE KYC_ID ADD PRIMARY KEY (ID);"
 
+        RunCommand(mySql)
+        AutoIncrement_ID(CUSTOMER_ID, "ID")
+
         ' PHONE TABLE
-        mySql = "CREATE TABLE KYC_PHONE ("
+        mySql = "CREATE TABLE " & CUSTOMER_PHONE & " ("
         mySql &= vbCrLf & "  PHONEID BIGINT NOT NULL,"
         mySql &= vbCrLf & "  CUSTID BIGINT DEFAULT '0' NOT NULL,"
         mySql &= vbCrLf & "  PHONENUMBER VARCHAR(20),"
         mySql &= vbCrLf & "  ISPRIMARY SMALLINT DEFAULT '0' NOT NULL);"
         primaryKey = "ALTER TABLE KYC_PHONE ADD PRIMARY KEY (PHONEID);"
 
+        RunCommand(mySql)
+        AutoIncrement_ID(CUSTOMER_PHONE, "PHONEID")
 
     End Sub
 
