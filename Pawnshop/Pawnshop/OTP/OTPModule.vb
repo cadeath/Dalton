@@ -4,7 +4,6 @@ Module OTPModule
     Friend OtpSettings As OneTimePassword
 
     Friend Sub OTPSettings_Initialization()
-        If OTPDisable Then Exit Sub
 
         SetOTP("Settings")
 
@@ -16,7 +15,6 @@ Module OTPModule
     End Sub
 
     Friend Sub OTPVoiding_Initialization()
-        If OTPDisable Then Exit Sub
 
         SetOTP("Voiding")
 
@@ -28,7 +26,7 @@ Module OTPModule
     End Sub
 
     Friend Sub OTPItemPullout_Initialization()
-        If OTPDisable Then Exit Sub
+
         SetOTP("Pullout")
 
         If DEV_MODE Then
@@ -39,7 +37,6 @@ Module OTPModule
     End Sub
 
     Friend Sub OTPUser_Initialization()
-        If OTPDisable Then Exit Sub
 
         SetOTP("User Management")
 
@@ -52,7 +49,6 @@ Module OTPModule
 
 
     Friend Sub OTPStockOut_Initialization()
-        If OTPDisable Then Exit Sub
 
         SetOTP("Stockout")
 
@@ -64,7 +60,6 @@ Module OTPModule
     End Sub
 
     Friend Sub OTPInventory_Initialization()
-        If OTPDisable Then Exit Sub
 
         SetOTP("Inventory")
 
