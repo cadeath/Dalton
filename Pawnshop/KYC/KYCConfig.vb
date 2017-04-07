@@ -64,6 +64,50 @@
     ' TODO
     ' AutoPatch to Create Tables for this Branch
     Private Sub Create_Tables()
+        Dim mySql As String, primaryKey As String
+
+        ' CUSTOMER TABLE
+        mySql = "CREATE TABLE " & CUSTOMER_TABLE & " ("
+        mySql &= vbCrLf & "  ID BIGINT NOT NULL,"
+        mySql &= vbCrLf & "  FIRSTNAME VARCHAR(150),"
+        mySql &= vbCrLf & "  MIDNAME VARCHAR(50) DEFAULT '' NOT NULL,"
+        mySql &= vbCrLf & "  LASTNAME VARCHAR(50),"
+        mySql &= vbCrLf & "  STREET1 VARCHAR(50) DEFAULT '' NOT NULL,"
+        mySql &= vbCrLf & "  BRGY1 VARCHAR(50),"
+        mySql &= vbCrLf & "  CITY1 VARCHAR(50),"
+        mySql &= vbCrLf & "  PROVINCE1 VARCHAR(50),"
+        mySql &= vbCrLf & "  ZIP1 VARCHAR(4) DEFAULT '' NOT NULL,"
+        mySql &= vbCrLf & "  STREET2 VARCHAR(50) DEFAULT '' NOT NULL,"
+        mySql &= vbCrLf & "  BRGY2 VARCHAR(50),"
+        mySql &= vbCrLf & "  CITY2 VARCHAR(50),"
+        mySql &= vbCrLf & "  PROVINCE2 VARCHAR(50),"
+        mySql &= vbCrLf & "  ZIP2 VARCHAR(4) DEFAULT '' NOT NULL,"
+        mySql &= vbCrLf & "  BIRTHDAY DATE DEFAULT CURRENT_TIMESTAMP(0) NOT NULL,"
+        mySql &= vbCrLf & "  BIRTHPLACE VARCHAR(255) DEFAULT '' NOT NULL,"
+        mySql &= vbCrLf & "  NATUREOFWORK VARCHAR(100),"
+        mySql &= vbCrLf & "  NATIONALITY VARCHAR(20),"
+        mySql &= vbCrLf & "  GENDER VARCHAR(1) DEFAULT 'F' NOT NULL,"
+        mySql &= vbCrLf & "  SRCFUND VARCHAR(50),"
+        mySql &= vbCrLf & "  RANK SMALLINT DEFAULT '0' NOT NULL);"
+        primaryKey = "ALTER TABLE " & CUSTOMER_TABLE & " ADD PRIMARY KEY (ID);"
+
+        ' PHONE ID
+        mySql = "CREATE TABLE KYC_ID ("
+        mySql &= vbCrLf & "  ID INTEGER NOT NULL,"
+        mySql &= vbCrLf & "  CUSTID BIGINT DEFAULT '0' NOT NULL,"
+        mySql &= vbCrLf & "  ID_TYPE VARCHAR(20),"
+        mySql &= vbCrLf & "  ID_NUMBER VARCHAR(255),"
+        mySql &= vbCrLf & "  ISPRIMARY SMALLINT DEFAULT '0' NOT NULL);"
+        primaryKey = "ALTER TABLE KYC_ID ADD PRIMARY KEY (ID);"
+
+        ' PHONE TABLE
+        mySql = "CREATE TABLE KYC_PHONE ("
+        mySql &= vbCrLf & "  PHONEID BIGINT NOT NULL,"
+        mySql &= vbCrLf & "  CUSTID BIGINT DEFAULT '0' NOT NULL,"
+        mySql &= vbCrLf & "  PHONENUMBER VARCHAR(20),"
+        mySql &= vbCrLf & "  ISPRIMARY SMALLINT DEFAULT '0' NOT NULL);"
+        primaryKey = "ALTER TABLE KYC_PHONE ADD PRIMARY KEY (PHONEID);"
+
 
     End Sub
 

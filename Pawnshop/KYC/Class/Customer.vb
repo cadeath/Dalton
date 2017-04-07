@@ -287,7 +287,7 @@ Public Class Customer
 
                 .Item("BIRTHDAY") = _birthday
                 .Item("BIRTHPLACE") = _birthplace
-                .Item("WORK") = _natureOfWork
+                .Item("NATUREOFWORK") = _natureOfWork
                 .Item("NATIONALITY") = _nationality
                 .Item("GENDER") = IIf(_sex = Gender.Male, "M", "F")
                 .Item("SRCFUND") = _sourceOfFund
@@ -312,7 +312,7 @@ Public Class Customer
 
                 .Item("BIRTHDAY") = _birthday
                 .Item("BIRTHPLACE") = _birthplace
-                .Item("WORK") = _natureOfWork
+                .Item("NATUREOFWORK") = _natureOfWork
                 .Item("NATIONALITY") = _nationality
                 .Item("GENDER") = IIf(_sex = Gender.Male, "M", "F")
                 .Item("SRCFUND") = _sourceOfFund
@@ -419,7 +419,7 @@ Public Class Customer
 
             _birthday = .Item("BIRTHDAY")
             _birthplace = .Item("BIRTHPLACE")
-            _natureOfWork = .Item("WORK")
+            _natureOfWork = .Item("NATUREOFWORK")
             _nationality = .Item("NATIONALITY")
             _sex = IIf(.Item("GENDER") = "M", 1, 0)
             _sourceOfFund = .Item("SRCFUND")
