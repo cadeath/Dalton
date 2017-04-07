@@ -280,6 +280,56 @@
 
     Private Sub btnSetPri_Click(sender As System.Object, e As System.EventArgs) Handles btnSetPri.Click
         If lstPhone.SelectedItems.Count = 0 Then Exit Sub
-        Dim str As String = lstPhone.SelectedItems.Item(0)
+        Dim primaryNumber As String = lstPhone.SelectedItems.Item(0)
+        Dim priIdx As Integer = lstPhone.SelectedIndex
+        Dim idx As Integer = 0
+        Dim ModifyStr As String = ""
+
+        For Each str As String In lstPhone.Items
+            If str.Contains("[P]") Then
+                ModifyStr = str.Replace("[P]", "")
+                idx = lstPhone.Items.IndexOf(str)
+            End If
+        Next
+
+        If ModifyStr <> "" Then _
+            lstPhone.Items(idx) = ModifyStr
+
+        lstPhone.Items(priIdx) = primaryNumber & "[P]"
     End Sub
+
+    Private Sub txtPhone_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtPhone.KeyPress
+        If Asc(e.KeyChar) = 13 Then
+            btnPlus.PerformClick()
+        End If
+    End Sub
+
+#Region "Phone Collections"
+    Private Sub Add_Phone(num As String, Optional isPrimary As Boolean = False)
+        If isPrimary Then clearPhonePrimary()
+
+        Dim newPhone As New PhoneNumber
+        newPhone.PhoneNumber = num
+        newPhone.isPrimary = isPrimary
+
+        CustomerPhones.Add(newPhone)
+    End Sub
+
+    Private Sub Edit_Phone(origin As String, newnum As String, Optional isPrimary As Boolean = False)
+        If isPrimary Then clearPhonePrimary()
+
+        For Each ph As PhoneNumber In CustomerPhones
+            If origin = ph.PhoneNumber Then
+                ph.PhoneNumber = newnum
+                ph.isPrimary = isPrimary
+            End If
+        Next
+    End Sub
+
+    Private Sub clearPhonePrimary()
+        For Each ph As PhoneNumber In CustomerPhones
+            ph.isPrimary = False
+        Next
+    End Sub
+#End Region
 End Class

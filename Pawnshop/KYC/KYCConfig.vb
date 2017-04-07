@@ -61,11 +61,14 @@
         Return lst.ToArray
     End Function
 
-
+    ' TODO
+    ' AutoPatch to Create Tables for this Branch
     Private Sub Create_Tables()
 
     End Sub
 
+    ' TODO
+    ' AutoMigrate information
     Private Sub MigrateClients_Info()
 
     End Sub
