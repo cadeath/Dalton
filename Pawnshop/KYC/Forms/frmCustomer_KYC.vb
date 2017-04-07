@@ -6,8 +6,8 @@
     Const NOT_MINOR As Integer = 18
 
     Friend REQUIRED_ID As Boolean = False
-
     Private CustomerPhones As Collections_Phone
+    Private CustomerIDs As Collections_ID
 
     Private Sub frmCustomer_Click(sender As Object, e As System.EventArgs) Handles Me.Click
 
@@ -23,9 +23,6 @@
         Me.Close()
     End Sub
 
-    ' TODO:
-    ' Don't allow to continue if REQUIRED_ID is TRUE but no ID
-    ' Unfill asterisk signs
     Private Function FormVerification() As Boolean
         Dim errMsg As String = "Please fillup the form completely"
 
@@ -45,12 +42,32 @@
         End If
         ' END - AGE VALIDATION ======================================
 
-        If Trim(txtFName.Text) = "" Then
+        If Trim(txtFName.Text) = "" Or Trim(txtLName.Text) = "" Then
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
             Return False
         End If
 
-        If Trim(txtLName.Text) = "" Then
+        If Trim(cboBrgy1.Text) = "" Or Trim(cboCity1.Text) = "" Or Trim(cboProv1.Text) = "" Then
+            MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+            Return False
+        End If
+
+        If Trim(cboBrgy2.Text) = "" Or Trim(cboCity2.Text) = "" Or Trim(cboProv2.Text) = "" Then
+            MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+            Return False
+        End If
+
+        If Trim(txtNationality.Text) = "" Then
+            MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+            Return False
+        End If
+
+        If Trim(txtWork.Text) = "" Or Trim(txtSrcFund.Text) = "" Then
+            MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
+            Return False
+        End If
+
+        If lvID.Items.Count = 0 And REQUIRED_ID Then
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
             Return False
         End If
@@ -92,6 +109,10 @@
                 .Rank = Customer.RankNumber.Medium
             If rbHigh.Checked Then _
                 .Rank = Customer.RankNumber.High
+
+            .CustomersPhone = CustomerPhones
+            .CustomersIDs = CustomerIDs
+            .Save()
 
         End With
     End Sub
