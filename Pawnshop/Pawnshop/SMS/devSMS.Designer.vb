@@ -89,7 +89,7 @@ Partial Class devSMS
         Me.txtMsg.Name = "txtMsg"
         Me.txtMsg.Size = New System.Drawing.Size(269, 108)
         Me.txtMsg.TabIndex = 6
-        Me.txtMsg.Text = "THIS IS JUST A TEST"
+        Me.txtMsg.Text = "REPORT: TESTING"
         '
         'btnSend
         '
