@@ -13,6 +13,7 @@ Version 1.5.0.5
  - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
  - Added Separated OPT Generator
  - Added OTP Interface & OTP Control
+ - Change Inventory Merchandise Sap Account
 
 Version 1.5.0.4
  - Added Icon
