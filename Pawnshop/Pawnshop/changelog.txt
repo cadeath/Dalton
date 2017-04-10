@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.5.0.6
+- Added Journal Entries Block if not close store
+
 Version 1.5.0.5
  - Quick View on Pawnticket
  - Added Daily & Monthly Expiry List
