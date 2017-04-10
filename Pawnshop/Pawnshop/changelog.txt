@@ -1,10 +1,8 @@
 CHANGELOG
-Version 1.5.0.5
+Version 1.5.0.7
  - Quick View on Pawnticket
  - Added Daily & Monthly Expiry List
  - Fix Adjustment Zero Inventory
-
-Version 1.5.0.4
  - Added Icon
  - Added SMS Module for Expiry Items
  - Added TABLE SMS
@@ -19,6 +17,7 @@ Version 1.5.0.4
  - Fix Different Control # for STO, Inv, Return
  - Added Inventory Adjustment
  - Modify Pawn_List VIEW
+ - Record Failed SMS Properly
 
 
 Version 1.4.1.15
