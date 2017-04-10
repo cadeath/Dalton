@@ -285,6 +285,14 @@ Public Class frmExtractor
     End Sub
 
     Private Sub ExtractJournalEntry2()
+
+        If MonCalendar.SelectionRange.Start.ToShortDateString = CurrentDate.ToShortDateString Then
+            If frmMain.dateSet Then
+                MsgBox("Unable to Generate Journal File yet", MsgBoxStyle.Information, "System")
+                Exit Sub
+            End If
+        End If
+
         Dim sd As Date = MonCalendar.SelectionStart, lineNum As Integer = 0
 
         Dim mySql As String = "SELECT J.JRL_TRANSDATE as TRANSDATE, C.TRANSNAME, C.SAPACCOUNT, J.JRL_DEBIT AS DEBIT, J.JRL_CREDIT AS CREDIT, J.CCNAME, J.STATUS, J.TRANSTYPE " & _

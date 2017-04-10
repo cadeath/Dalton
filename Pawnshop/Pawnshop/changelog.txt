@@ -1,13 +1,29 @@
 CHANGELOG
 Version 1.5.0.7
- - Quick View on Pawnticket
+ - Add Branch Address in Maintenance
+ - Add Menus 1 Date Segrate List
+ - Added Journal Entries Block if not close store
+ - Added Daily & Monthly Expiry List
+ - Added Monitoring for OPT
+ - Added Function for Deleting Wrong Item in Inventory
+ - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
+ - Added Separated OPT Generator
  - Added Daily & Monthly Expiry List
  - Fix Adjustment Zero Inventory
+ - Fix Adjustment Zero Inventory
+ - Fix No Segre in Outstanding
+ - Fix Segre List
+ - Quick View on Pawnticket
+ - Layaway Reports Sort by Date
+ - Change Inventory Merchandise Sap Account
+
+Version 1.5.0.4
  - Added Icon
  - Added SMS Module for Expiry Items
  - Added TABLE SMS
  - Added Insurance in OR Layout
  - Added Separated OTP
+ - Added Insurance in pawning
  - Added Branch Address Option in Settings
  - Added LayAway Module
  - Added Function if Full Paid Record to Inventory Sales
@@ -18,7 +34,6 @@ Version 1.5.0.7
  - Added Inventory Adjustment
  - Modify Pawn_List VIEW
  - Record Failed SMS Properly
-
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES
