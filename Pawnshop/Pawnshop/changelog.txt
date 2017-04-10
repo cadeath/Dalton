@@ -1,4 +1,7 @@
 CHANGELOG
+Version 1.5.0.6
+- Added Journal Entries Block if not close store
+
 Version 1.5.0.5
  - Quick View on Pawnticket
  - Added Daily & Monthly Expiry List
@@ -13,7 +16,6 @@ Version 1.5.0.5
  - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
  - Added Separated OPT Generator
  - Change Inventory Merchandise Sap Account
- - Added Journal Entries Block if not close store
 
 Version 1.5.0.4
  - Added Icon
