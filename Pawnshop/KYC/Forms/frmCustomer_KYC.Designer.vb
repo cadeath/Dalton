@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmCustomer
+Partial Class frmCustomer_KYC
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class frmCustomer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"GSIS", "544489G15SD"}, -1)
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCustomer))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCustomer_KYC))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtFName = New System.Windows.Forms.TextBox()
         Me.txtMName = New System.Windows.Forms.TextBox()
@@ -91,9 +91,14 @@ Partial Class frmCustomer
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnTest = New System.Windows.Forms.Button()
+        Me.btnCamera = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ClientImage = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.ClientImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -754,12 +759,44 @@ Partial Class frmCustomer
         Me.btnTest.Text = "Test"
         Me.btnTest.UseVisualStyleBackColor = True
         '
-        'frmCustomer
+        'btnCamera
+        '
+        Me.btnCamera.Location = New System.Drawing.Point(30, 152)
+        Me.btnCamera.Name = "btnCamera"
+        Me.btnCamera.Size = New System.Drawing.Size(114, 37)
+        Me.btnCamera.TabIndex = 12
+        Me.btnCamera.Text = "Open Camera"
+        Me.btnCamera.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.ClientImage)
+        Me.GroupBox1.Controls.Add(Me.btnCamera)
+        Me.GroupBox1.Location = New System.Drawing.Point(643, 93)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(171, 201)
+        Me.GroupBox1.TabIndex = 14
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Customer Picture"
+        '
+        'ClientImage
+        '
+        Me.ClientImage.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.ClientImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ClientImage.Location = New System.Drawing.Point(6, 17)
+        Me.ClientImage.Name = "ClientImage"
+        Me.ClientImage.Size = New System.Drawing.Size(159, 129)
+        Me.ClientImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.ClientImage.TabIndex = 11
+        Me.ClientImage.TabStop = False
+        '
+        'frmCustomer_KYC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(649, 439)
+        Me.ClientSize = New System.Drawing.Size(826, 435)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnTest)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
@@ -774,13 +811,15 @@ Partial Class frmCustomer
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "frmCustomer"
+        Me.Name = "frmCustomer_KYC"
         Me.Text = "Customer Information"
         Me.TabControl1.ResumeLayout(False)
         Me.tpBasic.ResumeLayout(False)
         Me.tpBasic.PerformLayout()
         Me.tpID.ResumeLayout(False)
         Me.tpID.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        CType(Me.ClientImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -852,5 +891,8 @@ Partial Class frmCustomer
     Friend WithEvents btnSetPri As System.Windows.Forms.Button
     Friend WithEvents txtPhone As System.Windows.Forms.TextBox
     Friend WithEvents lstPhone As System.Windows.Forms.ListBox
+    Friend WithEvents btnCamera As System.Windows.Forms.Button
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents ClientImage As System.Windows.Forms.PictureBox
 
 End Class

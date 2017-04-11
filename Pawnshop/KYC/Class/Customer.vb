@@ -1,4 +1,6 @@
-﻿''' <summary>
+﻿Imports System.IO
+
+''' <summary>
 ''' This Class is made for the purpose of KYC Compliance
 ''' </summary>
 ''' <remarks></remarks>
@@ -256,6 +258,16 @@ Public Class Customer
         End Set
     End Property
 
+    Private _CImage As String
+    Public Property CImage() As String
+        Get
+            Return _CImage
+        End Get
+        Set(ByVal value As String)
+            _CImage = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -292,6 +304,7 @@ Public Class Customer
                 .Item("GENDER") = IIf(_sex = Gender.Male, "M", "F")
                 .Item("SRCFUND") = _sourceOfFund
                 .Item("RANK") = _rank
+                .Item("CLIENT_IMG") = _CImage
             End With
             ds.Tables(CUSTOMER_TABLE).Rows.Add(dsNewRow)
         Else
@@ -317,6 +330,7 @@ Public Class Customer
                 .Item("GENDER") = IIf(_sex = Gender.Male, "M", "F")
                 .Item("SRCFUND") = _sourceOfFund
                 .Item("RANK") = _rank
+                .Item("CLIENT_IMG") = _CImage
             End With
         End If
         database.SaveEntry(ds, isNew)
@@ -395,7 +409,7 @@ Public Class Customer
         End If
     End Sub
 
-    Public Sub Load_CustomerByID(Optional id As Integer = 0)
+    Public Sub Load_CustomerByID(Optional ByVal id As Integer = 0)
         If id = 0 Then id = _id
 
         Dim mySql As String = "SELECT * FROM " & CUSTOMER_TABLE & " WHERE ID = " & id
@@ -424,6 +438,7 @@ Public Class Customer
             _sex = IIf(.Item("GENDER") = "M", 1, 0)
             _sourceOfFund = .Item("SRCFUND")
             _rank = .Item("RANK")
+            _CImage = .Item("CLIENT_IMG")
         End With
 
         ' Loading Collections
@@ -459,7 +474,7 @@ Public Class Customer
         Console.WriteLine(String.Format("CustomerID: {0} is loaded.", id))
     End Sub
 
-    Public Function FindCustomerByName(str As String) As DataSet
+    Public Function FindCustomerByName(ByVal str As String) As DataSet
         Dim ds As DataSet
         Dim mySql As String = "SELECT * FROM " & CUSTOMER_TABLE
         mySql &= String.Format(" WHERE FIRSTNAME LIKE '%{0}%' OR MIDNAME LIKE '%{0}%' OR LASTNAME LIKE '%{0}%'", str)
@@ -470,6 +485,21 @@ Public Class Customer
             _id = ds.Tables(0).Rows(0).Item("ID")
 
         Return ds
+    End Function
+
+    Friend Function FindCusomterImage(ByVal hshValue As String) As Image
+
+        For Each LogFile In Directory.GetFiles(frmCustomer_KYC.SRC)
+            Dim i As String = GetFileMD5(LogFile)
+
+            If i <> hshValue Then
+                On Error Resume Next
+            Else
+                Return Image.FromFile(LogFile)
+            End If
+        Next
+
+        Return Image.FromFile(hshValue)
     End Function
 #End Region
 

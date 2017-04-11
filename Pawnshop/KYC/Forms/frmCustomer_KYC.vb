@@ -1,4 +1,6 @@
-﻿Public Class frmCustomer
+﻿Imports System.IO
+
+Public Class frmCustomer_KYC
 
     Friend ALLOW_MINORS As Boolean = True
 
@@ -9,14 +11,17 @@
     Private CustomerPhones As New Collections_Phone
     Private CustomerIDs As New Collections_ID
 
-    Private Sub frmCustomer_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Friend SRC As String = Application.StartupPath & "\ClientImage"
+    Dim FlName As String = "", Ext As String = ".EAM"
+
+    Private Sub frmCustomer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CACHE_MANAGEMENT()
         ClearFields()
 
         'Populate()
     End Sub
 
-    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
 
@@ -69,11 +74,27 @@
             Return False
         End If
 
+        If ClientImage.Image Is Nothing Then
+            MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information") : Return False
+        End If
+
         Return True
     End Function
 
-    Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
+    Private Sub SaveCImg()
+
+        If Not Directory.Exists(SRC) Then
+            Directory.CreateDirectory(SRC)
+        End If
+
+        FlName = FileName()
+        ClientImage.Image.Save(SRC & "\" & FlName & Ext)
+    End Sub
+
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not FormVerification() Then Exit Sub
+
+        SaveCImg()
 
         Dim NewCustomer As New Customer
         With NewCustomer
@@ -106,6 +127,8 @@
                 .Rank = Customer.RankNumber.Medium
             If rbHigh.Checked Then _
                 .Rank = Customer.RankNumber.High
+
+            .CImage = GetFileMD5(SRC & "\" & FlName & Ext)
 
             AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
 
@@ -161,13 +184,14 @@
 
         cboZip1.Items.AddRange(listZip.ToArray)
         cboZip2.Items.AddRange(listZip.ToArray)
+        Call ClosePreviewWindow()
     End Sub
 
     ' TODO: JUNMAR
     ' Please provide phone number verification
     ' You might copy it in our existing client
     ' management module.
-    Private Sub btnPlus_Click(sender As System.Object, e As System.EventArgs) Handles btnPlus.Click
+    Private Sub btnPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPlus.Click
         If txtPhone.Text = "" Then Exit Sub
 
         Add_Phone(txtPhone.Text)
@@ -175,12 +199,12 @@
         txtPhone.Text = ""
     End Sub
 
-    Private Sub btnNega_Click(sender As System.Object, e As System.EventArgs) Handles btnNega.Click
+    Private Sub btnNega_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNega.Click
         lstPhone.Items.Remove(lstPhone.SelectedItem)
         Remove_Phone(lstPhone.SelectedItem)
     End Sub
 
-    Private Sub btnTest_Click(sender As System.Object, e As System.EventArgs) Handles btnTest.Click
+    Private Sub btnTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTest.Click
         'AddCustomer()
         'Console.WriteLine("Saved")
         'ModifyInfo()
@@ -258,7 +282,7 @@
         test.Save()
     End Sub
 
-    Private Sub lblTheSame_DoubleClick(sender As Object, e As System.EventArgs) Handles lblTheSame.DoubleClick
+    Private Sub lblTheSame_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lblTheSame.DoubleClick
         txtSt2.Text = txtSt1.Text
         cboBrgy2.Text = cboBrgy1.Text
         cboCity2.Text = cboCity1.Text
@@ -266,7 +290,7 @@
         cboZip2.Text = cboZip1.Text
     End Sub
 
-    Private Sub load_Customer(cl As Customer)
+    Private Sub load_Customer(ByVal cl As Customer)
         ClearFields()
         txtFName.Text = cl.FirstName
         txtMName.Text = cl.MiddleName
@@ -281,7 +305,7 @@
         NewEntry = 1
         EditEntry = 2
     End Enum
-    Public Overloads Function ShowDialog(ByVal returnValue As String, ByVal arr As Customer, frmType As FormRule) As DialogResult
+    Public Overloads Function ShowDialog(ByVal returnValue As String, ByVal arr As Customer, ByVal frmType As FormRule) As DialogResult
         load_Customer(arr)
 
         Me.ShowDialog()
@@ -291,7 +315,7 @@
         Return Me.DialogResult
     End Function
 
-    Private Sub btnSetPri_Click(sender As System.Object, e As System.EventArgs) Handles btnSetPri.Click
+    Private Sub btnSetPri_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSetPri.Click
         If lstPhone.SelectedItems.Count = 0 Then Exit Sub
         Dim primaryNumber As String = lstPhone.SelectedItems.Item(0)
         Dim priIdx As Integer = lstPhone.SelectedIndex
@@ -312,7 +336,7 @@
         SetPrimary_Phone(lstPhone.Items(priIdx))
     End Sub
 
-    Private Sub txtPhone_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtPhone.KeyPress
+    Private Sub txtPhone_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPhone.KeyPress
         If Asc(e.KeyChar) = 13 Then
             btnPlus.PerformClick()
         End If
@@ -329,7 +353,7 @@
         CustomerPhones.Item(0).SetPrimary()
     End Sub
 
-    Private Sub Add_Phone(num As String, Optional isPrimary As Boolean = False)
+    Private Sub Add_Phone(ByVal num As String, Optional ByVal isPrimary As Boolean = False)
         If isPrimary Then clearPhonePrimary()
         num = removePriFunction(num)
 
@@ -341,7 +365,7 @@
     End Sub
 
     ' if not required, remove
-    Private Sub Edit_Phone(origin As String, newnum As String, Optional isPrimary As Boolean = False)
+    Private Sub Edit_Phone(ByVal origin As String, ByVal newnum As String, Optional ByVal isPrimary As Boolean = False)
         If isPrimary Then clearPhonePrimary()
 
         For Each ph As PhoneNumber In CustomerPhones
@@ -352,7 +376,7 @@
         Next
     End Sub
 
-    Private Sub SetPrimary_Phone(num As String)
+    Private Sub SetPrimary_Phone(ByVal num As String)
         num = removePriFunction(num)
         clearPhonePrimary()
 
@@ -363,7 +387,7 @@
         Next
     End Sub
 
-    Private Sub Remove_Phone(num As String)
+    Private Sub Remove_Phone(ByVal num As String)
         num = removePriFunction(num)
         Dim idx As Integer = 0, found As Boolean = False
 
@@ -384,7 +408,7 @@
         Next
     End Sub
 
-    Private Function removePriFunction(str As String) As String
+    Private Function removePriFunction(ByVal str As String) As String
         Return str.Replace("[P]", "")
     End Function
 #End Region
@@ -400,7 +424,7 @@
         CustomerIDs.Item(0).SetPrimary()
     End Sub
 
-    Private Sub Add_ID(typ As String, refNum As String, Optional isPrimary As Boolean = False)
+    Private Sub Add_ID(ByVal typ As String, ByVal refNum As String, Optional ByVal isPrimary As Boolean = False)
         Dim newID As New IdentificationCard
         newID.IDType = typ
         newID.IDNumber = refNum
@@ -409,12 +433,12 @@
         CustomerIDs.Add(newID)
     End Sub
 
-    Private Sub SetPrimary_ID(index As Integer)
+    Private Sub SetPrimary_ID(ByVal index As Integer)
         clearIDPrimary()
         CustomerIDs.Item(index).isPrimary = True
     End Sub
 
-    Private Sub Remove_ID(index As Integer)
+    Private Sub Remove_ID(ByVal index As Integer)
         CustomerIDs.Remove(index)
     End Sub
 
@@ -440,11 +464,11 @@
         Next
     End Sub
 
-    Private Function rndInt(min As Integer, max As Integer) As Integer
+    Private Function rndInt(ByVal min As Integer, ByVal max As Integer) As Integer
         Return CInt(Math.Ceiling(Rnd() * max)) + min
     End Function
 
-    Private Sub btnAdd_Click(sender As System.Object, e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Dim lv As ListViewItem = lvID.Items.Add(cboType.Text)
         lv.SubItems.Add(txtIDNum.Text)
 
@@ -454,7 +478,7 @@
         txtIDNum.Text = ""
     End Sub
 
-    Private Sub btnRemove_Click(sender As System.Object, e As System.EventArgs) Handles btnRemove.Click
+    Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
         If lvID.SelectedItems.Count = 0 Then Exit Sub
         Dim idx As Integer = lvID.FocusedItem.Index
 
@@ -462,7 +486,7 @@
         Remove_ID(idx)
     End Sub
 
-    Private Sub btnPrimary_Click(sender As System.Object, e As System.EventArgs) Handles btnPrimary.Click
+    Private Sub btnPrimary_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrimary.Click
         If lvID.SelectedItems.Count = 0 Then Exit Sub
         Dim idx As Integer = lvID.FocusedItem.Index
 
@@ -473,4 +497,43 @@
         SetPrimary_ID(idx)
         lvID.FocusedItem.BackColor = Color.ForestGreen
     End Sub
+
+    Private Sub btnCamera_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCamera.Click
+        If btnCamera.Text = "Open Camera" Then
+            Call OpenPreviewWindow()
+            btnCamera.Text = "Capture"
+
+        ElseIf btnCamera.Text = "Capture" Then
+            Dim Data As IDataObject
+            Dim Bmap As Image
+            SendMessage(hHwnd, WM_Cap_EDIT_COPY, 0, 0)
+            Data = Clipboard.GetDataObject()
+            If Data.GetDataPresent(GetType(System.Drawing.Bitmap)) Then
+                Bmap = CType(Data.GetData(GetType(System.Drawing.Bitmap)), Image)
+                ClientImage.Image = Bmap
+                Call ClosePreviewWindow()
+            End If
+            btnCamera.Text = "Open Camera"
+
+            Call ClosePreviewWindow()
+
+        End If
+    End Sub
+
+
+
+    'Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    '    SaveCImg()
+    '    'Dim c As New Customer
+    '    'With c
+    '    '    ClientImage.Image = .FindCusomterImage("Rwu9XIONbUsIbHODAaGU2A==")
+
+    '    'End With
+
+    '    'Dim filename As String = System.IO.Path.Combine("C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\KYC\bin\Debug\ClientImage\hgkVAQip9LmYM4LwUHSt.eam")
+    '    'ClientImage.Image = Image.FromFile(filename)
+
+    'End Sub
+
+  
 End Class
