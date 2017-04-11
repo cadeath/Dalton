@@ -148,13 +148,13 @@
                     strCategory = "BDO ATM"
             Case "INVENTORY IN", "AUCTION REDEEM", "Commission from SMART MONEY Cash Out", "FUND REPLENISHMENT", "DEPOSIT OF EXCESS FUND"
                 strCategory = "CASH IN/OUT"
-            Case "PETTY CASH "
+            Case "PETTY CASH ", "LAY-AWAY PAYMENTS"
                 strCategory = "CASH IN/OUT"
             Case "TICKETING - GPRS", "GPRS LOADING", "GPRS - BILL PAYMENT"
                 strCategory = "GPRS"
                 Case "SMART MONEY PADALA"
                     strCategory = "SMARTMONEY IN"
-            Case "SALES OF INVENTORIABLES", "LAY-AWAY PAYMENTS"
+            Case "SALES OF INVENTORIABLES"
                 strCategory = "SALES OF INV"
             Case "ECPAY - LOAD", "ECPAY - Bills Payment"
                 strCategory = "ECPAY"
@@ -175,7 +175,11 @@
                 MsgBox("You cannot void transaction in a DIFFERENT date", MsgBoxStyle.Critical)
                 Exit Sub
             End If
-            database.SaveEntry(ds, False)
+        database.SaveEntry(ds, False)
+        Dim tmpCIO As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
+
+        Dim NewOtp As New ClassOtp("VOID " & lblCategory.Text, diagOTP.txtPIN.Text, "CashIn/OutID# " & id)
+        TransactionVoidSave(lblCategory.Text, tmpCIO, POSuser.UserID, "CashIn/OutID# " & id)
 
             RemoveJournal(CashID, , Transactiontype)
             RemoveDailyTimeLog(CashID, "1", SrvTypDailyTimelog)
@@ -195,13 +199,6 @@
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If isEnter(e) Then btnSearch.PerformClick()
     End Sub
-
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
 
     ''' <summary>
     ''' This button void the transaction.

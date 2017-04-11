@@ -3,6 +3,7 @@
     Friend dateSet As Boolean = False
     Friend doSegregate As Boolean = False
 
+
     Friend Sub NotYetLogin(Optional ByVal st As Boolean = True)
         pButton.Enabled = Not st
 
@@ -26,6 +27,14 @@
         BSPReportToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem.Enabled = Not st
         ORManagerToolStripMenuItem.Enabled = Not st
+        AccountingExtractToolStripMenuItem.Enabled = Not st
+        SalesToolStripMenuItem.Enabled = Not st
+        StockInToolStripMenuItem.Enabled = Not st
+        ItemMasterDataToolStripMenuItem.Enabled = Not st
+        '-------------------------------------------------
+        SalesToolStripMenuItem.Enabled = Not st
+        StockInToolStripMenuItem.Enabled = Not st
+        ItemMasterDataToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         BackupToolStripMenuItem.Enabled = Not st
         AuditConsoleToolStripMenuItem.Enabled = Not st
@@ -42,6 +51,8 @@
         SequenceToolStripMenuItem.Enabled = Not st 'Sequence Report
         CashInOutSummaryToolStripMenuItem.Enabled = Not st 'Cash InOut Summary
         AuctionMonthlyJewelryReportToolStripMenuItem.Enabled = Not st 'Auction MOnthly
+        MonthlyInventoryReportsToolStripMenuItem.Enabled = Not st
+        MonthlySegrregatedListToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         OutstandingToolStripMenuItem.Enabled = Not st
         AuditReportToolStripMenuItem.Enabled = Not st
@@ -52,6 +63,11 @@
         CashInOutToolStripMenuItem.Enabled = Not st
         SegregatedListToolStripMenuItem.Enabled = Not st
         ItemPulloutToolStripMenuItem1.Enabled = Not st
+        VoidReportToolStripMenuItem.Enabled = Not st
+        SalesReportToolStripMenuItem.Enabled = Not st
+        InventoryReportToolStripMenuItem.Enabled = Not st
+        StockoutReportToolStripMenuItem.Enabled = Not st
+        StockInReportToolStripMenuItem.Enabled = Not st
         '-------------------------------------------------
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
@@ -118,7 +134,10 @@
             Exit Sub
         End If
 
+        If CheckFormActive() Then Exit Sub
+
         frmSettings.Show()
+
     End Sub
 
     Private Sub UserManagementToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserManagementToolStripMenuItem.Click
@@ -200,10 +219,6 @@
         frmClient.Show()
     End Sub
 
-    Private Sub pbLogo_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles pbLogo.DoubleClick
-        devClient.Show()
-    End Sub
-
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
@@ -243,6 +258,15 @@
             If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
             POSuser = Nothing
+            Dim formNames As New List(Of String)
+            For Each Form In My.Application.OpenForms
+                If Form.Name <> "frmMain" Or Not Form.name <> "frmLogin" Then
+                    formNames.Add(Form.Name)
+                End If
+            Next
+            For Each currentFormName As String In formNames
+                Application.OpenForms(currentFormName).Close()
+            Next
             MsgBox("Thank you!", MsgBoxStyle.Information)
             NotYetLogin()
             frmLogin.Show()
@@ -267,7 +291,7 @@
     Private Sub btnLayAway_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLayAway.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        If DEV_MODE Then dev_Pawning.Show()
+        If DEV_MODE Then dev_Pawning2.Show()
         If (POSuser.isSuperUser Or Not POSuser.canLayAway) Then
             MsgBoxAuthoriation("You don't have access to Lay away.")
             Exit Sub
@@ -281,6 +305,8 @@
             MsgBoxAuthoriation("You don't have access to POS")
             Exit Sub
         End If
+
+        frmSales.Show()
     End Sub
 
     Private Sub CashCountToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CashCountToolStripMenuItem.Click
@@ -315,7 +341,8 @@
             MsgBoxAuthoriation("You don't have access to the Console")
             Exit Sub
         End If
-        frmMIS.Show()
+        'frmMIS.Show()
+        frmAdminPanel.Show()
     End Sub
 
     Private Sub ClosingStoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClosingStoreToolStripMenuItem.Click
@@ -341,6 +368,7 @@
     End Sub
 
     Private Sub SegregatedListToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SegregatedListToolStripMenuItem.Click
+        frmSegreList.FormType = frmSegreList.SegreReport.Daily
         frmSegreList.Show()
     End Sub
 
@@ -398,9 +426,15 @@
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem.Click
-        If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
+        'If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
-        qryPullOut.Show()
+        'qryPullOut.Show()
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.Pullout
+            If Not CheckOTP() Then Exit Sub
+        Else
+            qryPullOut.Show()
+        End If
     End Sub
 
     Private Sub ItemPulloutToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemPulloutToolStripMenuItem1.Click
@@ -460,7 +494,12 @@
         frmChangePassword.Show()
     End Sub
 
-    Private Sub AuditConsoleToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
+    Private Sub VoidReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VoidReportToolStripMenuItem.Click
+        qryDate.FormType = qryDate.ReportType.VoidReportDaily
+        qryDate.Show()
+
+    End Sub
+    Private Sub AuditConsoleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AuditConsoleToolStripMenuItem.Click
         If Not dateSet Then MsgBox("Please Open the Store" & vbCrLf & "File > Open Store", MsgBoxStyle.Critical, "Store Closed") : Exit Sub
 
         AuditModule_Initialization()
@@ -468,9 +507,64 @@
         If Not OTPDisable Then
             diagOTPv2.GeneralOTP = AuditOTP
             diagOTPv2.ShowDialog()
-            If Not diagOTPv2.isCorrect Then Exit Sub
+            If Not diagOTPv2.isCorrect Then
+                Exit Sub
+            Else
+                frmAuditConsole.Show()
+            End If
+
         End If
 
-        frmAuditConsole.Show()
+    End Sub
+
+    Private Sub AccountingExtractToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AccountingExtractToolStripMenuItem.Click
+        ExtractDataFromDatabase.ShowDialog()
+    End Sub
+
+    Private Sub SalesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesToolStripMenuItem.Click
+        frmExtractor.FormType = frmExtractor.ExtractType.PTUFile
+        frmExtractor.Show()
+    End Sub
+
+    Private Sub SalesReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalesReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.Sale
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub InventoryReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles InventoryReportToolStripMenuItem.Click
+        If Not OTPDisable Then
+            diagOTP.FormType = diagOTP.OTPType.Inventory
+            If Not CheckOTP() Then Exit Sub
+        Else
+            frmSalesReport.FormType = frmSalesReport.SaleReport.Inventory
+            frmSalesReport.Show()
+        End If
+    End Sub
+
+    Private Sub StockInToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInToolStripMenuItem.Click
+        frmInventory.Show()
+    End Sub
+
+    Private Sub ItemMasterDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ItemMasterDataToolStripMenuItem.Click
+        frmImport_IMD.Show()
+    End Sub
+
+    Private Sub StockoutReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockoutReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockOut
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub StockInReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StockInReportToolStripMenuItem.Click
+        frmSalesReport.FormType = frmSalesReport.SaleReport.StockIn
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub MonthlyInventoryReportsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlyInventoryReportsToolStripMenuItem.Click
+        frmSalesReport.Show()
+    End Sub
+
+    Private Sub MonthlySegrregatedListToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MonthlySegrregatedListToolStripMenuItem.Click
+        frmSegreList.FormType = frmSegreList.SegreReport.Monthly
+        frmSegreList.Show()
     End Sub
 End Class

@@ -68,6 +68,7 @@ Partial Class frmUserManagement
         Me.chkUR = New System.Windows.Forms.CheckBox()
         Me.chkUM = New System.Windows.Forms.CheckBox()
         Me.tbSpecial = New System.Windows.Forms.TabPage()
+        Me.chkEnableDisable = New System.Windows.Forms.CheckBox()
         Me.chkPrivilege = New System.Windows.Forms.CheckBox()
         Me.chkMigrate = New System.Windows.Forms.CheckBox()
         Me.chkPullOut = New System.Windows.Forms.CheckBox()
@@ -75,8 +76,9 @@ Partial Class frmUserManagement
         Me.chkSpAll = New System.Windows.Forms.CheckBox()
         Me.chkCashOutBank = New System.Windows.Forms.CheckBox()
         Me.chkCashInBank = New System.Windows.Forms.CheckBox()
-        Me.btnDelete = New System.Windows.Forms.Button()
         Me.lblUserid = New System.Windows.Forms.Label()
+        Me.chkStockOut = New System.Windows.Forms.CheckBox()
+        Me.chkReturn = New System.Windows.Forms.CheckBox()
         Me.tbPrivileges.SuspendLayout()
         Me.tbEncoder.SuspendLayout()
         Me.tbSupervisor.SuspendLayout()
@@ -183,7 +185,7 @@ Partial Class frmUserManagement
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(517, 258)
+        Me.btnAdd.Location = New System.Drawing.Point(598, 258)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 9
@@ -324,6 +326,8 @@ Partial Class frmUserManagement
         '
         'tbSupervisor
         '
+        Me.tbSupervisor.Controls.Add(Me.chkReturn)
+        Me.tbSupervisor.Controls.Add(Me.chkStockOut)
         Me.tbSupervisor.Controls.Add(Me.chkOS)
         Me.tbSupervisor.Controls.Add(Me.chkVR)
         Me.tbSupervisor.Controls.Add(Me.chkVUM)
@@ -542,6 +546,7 @@ Partial Class frmUserManagement
         '
         'tbSpecial
         '
+        Me.tbSpecial.Controls.Add(Me.chkEnableDisable)
         Me.tbSpecial.Controls.Add(Me.chkPrivilege)
         Me.tbSpecial.Controls.Add(Me.chkMigrate)
         Me.tbSpecial.Controls.Add(Me.chkPullOut)
@@ -556,6 +561,17 @@ Partial Class frmUserManagement
         Me.tbSpecial.TabIndex = 3
         Me.tbSpecial.Text = "Special"
         Me.tbSpecial.UseVisualStyleBackColor = True
+        '
+        'chkEnableDisable
+        '
+        Me.chkEnableDisable.AutoSize = True
+        Me.chkEnableDisable.Enabled = False
+        Me.chkEnableDisable.Location = New System.Drawing.Point(160, 35)
+        Me.chkEnableDisable.Name = "chkEnableDisable"
+        Me.chkEnableDisable.Size = New System.Drawing.Size(130, 17)
+        Me.chkEnableDisable.TabIndex = 16
+        Me.chkEnableDisable.Text = "Enable / Disable User"
+        Me.chkEnableDisable.UseVisualStyleBackColor = True
         '
         'chkPrivilege
         '
@@ -627,25 +643,36 @@ Partial Class frmUserManagement
         Me.chkCashInBank.Text = "Cash In (Bank)"
         Me.chkCashInBank.UseVisualStyleBackColor = True
         '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(598, 258)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
-        Me.btnDelete.TabIndex = 11
-        Me.btnDelete.Text = "&Delete"
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
         'lblUserid
         '
         Me.lblUserid.AutoSize = True
         Me.lblUserid.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserid.Location = New System.Drawing.Point(297, 258)
+        Me.lblUserid.Location = New System.Drawing.Point(293, 258)
         Me.lblUserid.Name = "lblUserid"
         Me.lblUserid.Size = New System.Drawing.Size(56, 16)
         Me.lblUserid.TabIndex = 12
         Me.lblUserid.Text = "UserID"
         Me.lblUserid.Visible = False
+        '
+        'chkStockOut
+        '
+        Me.chkStockOut.AutoSize = True
+        Me.chkStockOut.Location = New System.Drawing.Point(13, 104)
+        Me.chkStockOut.Name = "chkStockOut"
+        Me.chkStockOut.Size = New System.Drawing.Size(71, 17)
+        Me.chkStockOut.TabIndex = 13
+        Me.chkStockOut.Text = "StockOut"
+        Me.chkStockOut.UseVisualStyleBackColor = True
+        '
+        'chkReturn
+        '
+        Me.chkReturn.AutoSize = True
+        Me.chkReturn.Location = New System.Drawing.Point(108, 104)
+        Me.chkReturn.Name = "chkReturn"
+        Me.chkReturn.Size = New System.Drawing.Size(58, 17)
+        Me.chkReturn.TabIndex = 14
+        Me.chkReturn.Text = "Return"
+        Me.chkReturn.UseVisualStyleBackColor = True
         '
         'frmUserManagement
         '
@@ -653,7 +680,6 @@ Partial Class frmUserManagement
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(767, 289)
         Me.Controls.Add(Me.lblUserid)
-        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.tbPrivileges)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnClose)
@@ -735,6 +761,8 @@ Partial Class frmUserManagement
     Friend WithEvents chkAppraiser As System.Windows.Forms.CheckBox
     Friend WithEvents chkResetPassword As System.Windows.Forms.CheckBox
     Friend WithEvents chkPrivilege As System.Windows.Forms.CheckBox
-    Friend WithEvents btnDelete As System.Windows.Forms.Button
     Friend WithEvents lblUserid As System.Windows.Forms.Label
+    Friend WithEvents chkEnableDisable As System.Windows.Forms.CheckBox
+    Friend WithEvents chkReturn As System.Windows.Forms.CheckBox
+    Friend WithEvents chkStockOut As System.Windows.Forms.CheckBox
 End Class

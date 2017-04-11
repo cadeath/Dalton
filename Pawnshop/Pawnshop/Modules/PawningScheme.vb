@@ -2,7 +2,7 @@
 
     Friend CELScheme As Boolean = True
 
-    Friend Sub Notify_Renewal(PawnNotify As PawnTicket)
+    Friend Sub Notify_Renewal(ByVal PawnNotify As PawnTicket)
 
         Dim mySql As String = String.Format("SELECT * FROM TBLCLASS WHERE CLASSID = {0}", PawnNotify.CategoryID)
         Dim ds As DataSet = LoadSQL(mySql)

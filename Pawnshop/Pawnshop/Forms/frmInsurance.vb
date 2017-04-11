@@ -3,6 +3,7 @@
     Dim curInsurance As New Insurance
     Private currentInsuranceNum As Integer = GetOption("InsuranceLastNum")
     Dim MOD_NAME As String = "INSURANCE"
+    Friend isCoi As Boolean = False
     'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub frmInsurance_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -108,18 +109,18 @@
     ''' </summary>
     ''' <param name="id"></param>
     ''' <remarks></remarks>
-    Friend Sub LoadInsurance(ByVal id As Integer)
-        Dim getInsurance As New Insurance
-        getInsurance.LoadInsurance(id)
+    Friend Sub LoadInsurance(ByVal Ins As Insurance)
+        'Dim getInsurance As New Insurance
+        'getInsurance.LoadInsurance(id)
 
-        LoadHolder(getInsurance.Client)
-        txtCoi.Text = getInsurance.COInumber
-        dtpDate.Value = getInsurance.TransactionDate
-        dtpExpiry.Value = getInsurance.ValidDate
-        txtAmount.Text = getInsurance.Amount
+        LoadHolder(Ins.Client)
+        txtCoi.Text = Ins.COInumber
+        dtpDate.Value = Ins.TransactionDate
+        dtpExpiry.Value = Ins.ValidDate
+        txtAmount.Text = Ins.Amount
 
         lbltransid.Text = frmInsuranceList.lbltransID.Text
-        curInsurance = getInsurance
+        curInsurance = Ins
         btnVoid.Enabled = True
         txtPT.Enabled = False
     End Sub
@@ -142,7 +143,7 @@
     ''' <remarks></remarks>
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If Not isValid() Then Exit Sub
-       
+
         Dim ans As DialogResult = MsgBox("Do you want to post this transaction?", MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2 + MsgBoxStyle.Information, "Posting")
         If ans = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -158,16 +159,26 @@
 
             .SaveInsurance()
 
-            AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", .LoadLastIDNumberInsurance)
-            AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", .LoadLastIDNumberInsurance)
+            'AddJournal(.Amount, "Debit", "Revolving Fund", "COI# " & .COInumber, "INSURANCE", , , "INSURANCE", .LoadLastIDNumberInsurance)
+            'AddJournal(.Amount, "Credit", "Cash Offsetting Account", "COI# " & .COInumber, , , , "INSURANCE", .LoadLastIDNumberInsurance)
 
             AddTimelyLogs(MOD_NAME, "COI# " & .COInumber.ToString("0000000"), .Amount, , , .LoadLastIDNumberInsurance)
         End With
+        Dim mysql As String = "Select * FROM tblMaintenance Where Opt_Keys = 'INS Count'"
+        Dim fillData As String = "tblMaintenance"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        ds.Tables(0).Rows(0).Item("Opt_Values") = ds.Tables(0).Rows(0).Item("Opt_Values") + 1
+        SaveEntry(ds, False)
+        InventoryController.DeductInventory("IND 00001", 1)
+
 
         UpdateOptions("InsuranceLastNum", CInt(txtCoi.Text) + 1)
         MsgBox("Entry Saved", MsgBoxStyle.Information)
-        btnNew.PerformClick()
 
+        If isCoi = True Then
+            curInsurance.LoadInsurance(curInsurance.LoadLastIDNumberInsurance)
+            frmAddCoi.LoadCoi(curInsurance)
+        End If
         Me.Close()
     End Sub
 
@@ -187,14 +198,11 @@
     End Sub
 
     Private Sub btnBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowse.Click
+        'frmInsuranceList.Show()
+        frmInsuranceList.SearchSelect("", FormName.frmInsurance)
         frmInsuranceList.Show()
     End Sub
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
+
     ''' <summary>
     ''' This button will perform to void the transaction.
     ''' </summary>
@@ -230,5 +238,4 @@
             btnSave.PerformClick()
         End If
     End Sub
-
 End Class

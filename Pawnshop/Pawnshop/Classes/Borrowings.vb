@@ -153,6 +153,10 @@
         Dim mySql2 As String = "SELECT * FROM " & filldata1 & " WHERE TRANSID =" & BORROWINGID
         Dim ds2 As DataSet = LoadSQL(mySql2, filldata1)
         Dim SrvTypDJournal As String = ds2.Tables(0).Rows(0).Item("TRANSTYPE")
+        Dim tmpBorrowing As Integer = ds.Tables(0).Rows(0).Item("ENCODERID")
+
+        Dim NewOtp As New ClassOtp("VOID BORROWING", diagOTP.txtPIN.Text, "Ref# " & ReferenceNumber)
+        TransactionVoidSave(MoDName, tmpBorrowing, POSuser.UserID, "Ref# " & ReferenceNumber)
 
         If SrvTypDJournal = "BORROW IN" Then
             RemoveJournal(BORROWINGID, , SrvTypDJournal)
