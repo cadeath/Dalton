@@ -24,34 +24,26 @@ Module deploy
     End Function
 
     Friend Sub ParseXML(src As String)
-        Dim m_xmlr As XmlTextReader
-        'Create the XML Reader
-        m_xmlr = New XmlTextReader(src)
-        'Disable whitespace so that you don't have to read over whitespaces
-        m_xmlr.WhitespaceHandling = WhitespaceHandling.None
-        'read the xml declaration and advance to family tag
-        m_xmlr.Read()
-        'read the family tag
-        m_xmlr.Read()
-        'Load the Loop
-        While Not m_xmlr.EOF
-            'Go to the name tag
-            m_xmlr.Read()
-            'if not start element exit while loop
-            If Not m_xmlr.IsStartElement() Then
-                Exit While
-            End If
-            'Get the Gender Attribute Value
-            Dim installType = m_xmlr.GetAttribute("type")
-            'Read elements firstname and lastname
-            m_xmlr.Read()
-            'Get the firstName Element Value
-            Dim fileVersion = m_xmlr.ReadElementString("version")
-            'Write Result to the Console
-            Console.WriteLine(String.Format("{0} - {1}", installType, fileVersion))
-            Console.Write(vbCrLf)
-        End While
-        'close the reader
-        m_xmlr.Close()
+        Try
+            Dim m_xmld As XmlDocument
+            Dim m_nodelist As XmlNodeList
+            Dim m_node As XmlNode
+
+            m_xmld = New XmlDocument
+            m_xmld.Load(src)
+            m_nodelist = m_xmld.SelectNodes("/dis")
+
+            For Each m_node In m_nodelist
+                Dim file_version = m_node.Attributes.GetNamedItem("version").Value
+                Dim file_type = m_node.ChildNodes.Item(0).Attributes("type").Value
+                Dim url = m_node.SelectNodes("file").Item(0).Value
+
+                Console.WriteLine("Version: " & file_version)
+                Console.WriteLine("Type: " & file_type)
+                Console.WriteLine("URL: " & url)
+            Next
+        Catch ex As Exception
+            Console.WriteLine(ex.ToString)
+        End Try
     End Sub
 End Module

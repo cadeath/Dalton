@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dis>
-	<exefile type="installer">
-		<version>1.0.0.1</version>
+<dis version="1.0.0.1">
+	<file type="installer">
 		<url>http://localhost/dis.exe</url>
-	</exefile>
-	<exefile type="patch">
-		<version>1.0.0.1</version>
+	</file>
+	<file type="patch">
 		<url1>http://localhost/pawnshop.exe</url1>
 		<url2>http://localhost/eskey.dll</url2>
 		<url3>http://localhost/rpt_update.rdlc</url3>
-		<url3-dir>Reports/rpt_update.rdlc</url3-dir>
-	</exefile>
+		<url3-dir parent-node="url3">Reports/rpt_update.rdlc</url3-dir>
+	</file>
 </dis>
