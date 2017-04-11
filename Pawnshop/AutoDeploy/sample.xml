@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dis>
+	<exefile type="installer">
+		<version>1.0.0.1</version>
+		<url>http://localhost/dis.exe</url>
+	</exefile>
+	<exefile type="patch">
+		<version>1.0.0.1</version>
+		<url1>http://localhost/pawnshop.exe</url1>
+		<url2>http://localhost/eskey.dll</url2>
+		<url3>http://localhost/rpt_update.rdlc</url3>
+		<url3-dir>Reports/rpt_update.rdlc</url3-dir>
+	</exefile>
+</dis>
