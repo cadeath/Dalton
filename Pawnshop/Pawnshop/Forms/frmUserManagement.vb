@@ -288,9 +288,24 @@
             End If
             LoadActive()
         End If
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.UserManagement
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    AddUserManagement()
+        'End If
+
+        OTPUser_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.UserManagement
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                AddUserManagement()
+            End If
         Else
             AddUserManagement()
         End If
@@ -311,6 +326,7 @@
 
             tmpUser.SaveUser()
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
+            Dim NewOtp As New ClassOtp("Adding User", diagGeneralOTP.txtPIN.Text, "Username " & tmpUser.UserName)
         Else
 
             If Not txtPass1.Text = "" Then
@@ -345,7 +361,7 @@
                     .SaveUser(False)
                 End If
             End With
-
+            Dim NewOtp As New ClassOtp("Update User", diagGeneralOTP.txtPIN.Text, "Updating user " & selectedUser.UserName)
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
             End If
             ClearFields()
