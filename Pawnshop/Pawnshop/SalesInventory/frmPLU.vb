@@ -6,6 +6,7 @@
     Private fromSales As Boolean = True
     Private fromInventory As Boolean = False
     Private isRedeem As Boolean = False
+    Friend isLayAway As Boolean = False
 
     Friend Sub From_Sales()
         Me.fromSales = True
@@ -28,6 +29,9 @@
 
     Private Sub frmPLU_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ClearField()
+        If isLayAway = True Then
+            btnStock.Text = "Payments"
+        End If
     End Sub
 
     Friend Sub RefreshList(Optional ByVal ItemCode As String = "")
@@ -74,8 +78,8 @@
         Dim quickLoader As Integer = 0
         Dim mySql As String
         Dim ds As DataSet
-
         lvItem.Items.Clear()
+
         queued_IMD.Clear()
 
         If isRedeem Then
@@ -96,17 +100,26 @@
             End If
 
             ds = LoadSQL("SELECT COUNT(*) FROM OPT WHERE STATUS = 'S'")
+        ElseIf isLayAway Then
+
+            mySql = "Select FIRST 100 * FROM ITEMMASTER WHERE isLayAway <> 0 "
+            If src <> "" Then
+                mySql = "Select * From ItemMaster Where isLayAway <> 0 "
+                mySql &= "AND (Upper(ItemCode) LIKE Upper('%" & src & "%') OR UPPER(DESCRIPTION) LIKE UPPER('%" & src & "%')) "
+            End If
+
+            ds = LoadSQL("Select Count(*) From ItemMaster Where isLayAway <> 0 ")
         Else
-            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 ORDER BY ITEMCODE ASC"
+            mySql = "SELECT FIRST 100 * FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onHand <> 0 AND OnLayAway <> 1 ORDER BY ITEMCODE ASC"
 
             If src <> "" Then
                 mySql = "SELECT * FROM ITEMMASTER WHERE onHold = 0"
-                mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00'", src.ToLower)
-                'mySql &= " AND onHand <> 0"
+                mySql &= String.Format(" AND (LOWER(ITEMCODE) LIKE '%{0}%' OR LOWER(DESCRIPTION) LIKE '%{0}%' OR LOWER(CATEGORIES) LIKE '%{0}%' OR LOWER(SUBCAT) LIKE '%{0}%' OR LOWER(BARCODE) LIKE '%{0}%') AND ItemCode <> 'RECALL00' ", src.ToLower)
+                mySql &= " AND onLayAway <> 1 "
                 mySql &= " ORDER BY ITEMCODE ASC"
             End If
 
-            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001'")
+            ds = LoadSQL("SELECT COUNT(*) FROM ITEMMASTER WHERE onHold = 0 AND ItemCode <> 'RECALL00' AND ItemCode <> 'IND 00001' AND onLayAway <> 1")
         End If
 
         Dim MaxResult As Integer = ds.Tables(0).Rows(0).Item(0)
@@ -176,6 +189,8 @@
         lv.SubItems.Add(itm.UnitofMeasure)
         lv.SubItems.Add(IIf(isRedeem, 1, itm.onHand))
         lv.SubItems.Add(ToCurrency(itm.SalePrice))
+
+        If itm.OnLayAway Then lv.BackColor = Color.Yellow
     End Sub
 
     Private Sub ClearField()
@@ -207,6 +222,7 @@
 
         Console.WriteLine(lvItem.SelectedItems(0).Index)
         Dim idx As Integer = lvItem.SelectedItems(0).Index
+        Dim LayAmount As Double = 0
 
         Dim selected_Itm As New cItemData
         selected_Itm = queued_IMD.Item(idx)
@@ -216,28 +232,21 @@
         End If
         Dim hasSelected As Boolean = False
 
-        If selected_Itm.SalePrice = 0 Or isRedeem Then
+        If selected_Itm.OnLayAway = False Then
 
-            For Each AddedItems As ListViewItem In frmSales.lvSale.Items
+            If selected_Itm.SalePrice = 0 Or isRedeem Then
 
-                If AddedItems.Text = selected_Itm.ItemCode Then
-                    hasSelected = True
-                    Exit For
-                End If
-            Next
+                For Each AddedItems As ListViewItem In frmSales.lvSale.Items
 
-            If hasSelected = False Then
-                Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
-                While Not IsNumeric(tmp)
-                    tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
-                    If tmp = "" Then Exit Sub
-                End While
+                    If AddedItems.Text = selected_Itm.ItemCode Then
+                        hasSelected = True
+                        Exit For
+                    End If
+                Next
 
-                Dim customPrice As Double = CDbl(tmp)
-                selected_Itm.SalePrice = customPrice
-            Else
-                If isRedeem Then
-                    Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                If hasSelected = False Then
+                    Dim tmp As String = String.Empty
+                    'InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                     While Not IsNumeric(tmp)
                         tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
                         If tmp = "" Then Exit Sub
@@ -245,33 +254,49 @@
 
                     Dim customPrice As Double = CDbl(tmp)
                     selected_Itm.SalePrice = customPrice
+                    LayAmount = customPrice
                 Else
-                    selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                    If isRedeem Then
+                        Dim tmp As String = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                        While Not IsNumeric(tmp)
+                            tmp = InputBox("Enter Price", "Custom Price", selected_Itm.SalePrice)
+                            If tmp = "" Then Exit Sub
+                        End While
+
+                        Dim customPrice As Double = CDbl(tmp)
+                        selected_Itm.SalePrice = customPrice
+                    Else
+                        selected_Itm.SalePrice = frmSales.lvSale.FindItemWithText(selected_Itm.ItemCode).SubItems(4).Text.ToString
+                    End If
                 End If
             End If
-        End If
 
-        Dim UnitPrice As Double = 0
-        If fromInventory Then
-            UnitPrice = InputBox("Price: ", "Custom Unit Price", selected_Itm.UnitPrice)
-        End If
-
-        If fromSales Then
-            If isRedeem Then qtyItm = 1
-            selected_Itm.Quantity = qtyItm
-
-            If isRedeem = True Then
-                frmSales.AddItem(selected_Itm, True)
-            Else
-                frmSales.AddItem(selected_Itm)
+            Dim UnitPrice As Double = 0
+            If fromInventory Then
+                UnitPrice = InputBox("Price: ", "Custom Unit Price", selected_Itm.UnitPrice)
             End If
-            frmSales.ClearSearch()
-        Else
-            ' Inventory IN
-            'frmInventoryIn.AddItem(selected_Itm, qtyItm, UnitPrice)
-            'frmInventoryIn.ClearSearch()
-        End If
 
+            If isLayAway = True Then
+                frmLayAway.Show()
+                frmLayAway.LoadItemEncode(selected_Itm)
+                frmLayAway.isNewLayAway = True
+            Else
+                If fromSales Then
+                    If isRedeem Then qtyItm = 1
+                    selected_Itm.Quantity = qtyItm
+
+                    If isRedeem = True Then
+                        frmSales.AddItem(selected_Itm, True)
+                    Else
+                        frmSales.AddItem(selected_Itm)
+                    End If
+                    frmSales.ClearSearch()
+                End If
+            End If
+        Else
+            frmLayAway.Show()
+            frmLayAway.LoadExistInfo(selected_Itm.ItemCode)
+        End If
         Me.Close()
     End Sub
 
@@ -310,9 +335,14 @@
         Dim idx As Integer
         idx = lvItem.FocusedItem.Index
         Console.WriteLine(lvItem.Items(idx).Text)
+        If isLayAway = True Then
+            If lvItem.SelectedItems.Count = 0 Then Exit Sub
 
-        frmView_Stock.Load_ItemCode(lvItem.Items(idx).Text)
-        frmView_Stock.Show()
-
+            frmLayAwayPaymentList.Show()
+            frmLayAwayPaymentList.LoadListPayment(lvItem.Items(idx).Text)
+        Else
+            frmView_Stock.Load_ItemCode(lvItem.Items(idx).Text)
+            frmView_Stock.Show()
+        End If
     End Sub
 End Class

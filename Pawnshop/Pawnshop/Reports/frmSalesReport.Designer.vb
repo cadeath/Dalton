@@ -36,7 +36,9 @@ Partial Class frmSalesReport
         'btnGenerate
         '
         Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGenerate.Location = New System.Drawing.Point(73, 206)
+
+        Me.btnGenerate.Location = New System.Drawing.Point(70, 200)
+
         Me.btnGenerate.Name = "btnGenerate"
         Me.btnGenerate.Size = New System.Drawing.Size(88, 49)
         Me.btnGenerate.TabIndex = 8
@@ -47,8 +49,9 @@ Partial Class frmSalesReport
         '
         Me.cboReportType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboReportType.FormattingEnabled = True
-        Me.cboReportType.Items.AddRange(New Object() {"Sales Report", "StockOut Report", "StockIn Report"})
-        Me.cboReportType.Location = New System.Drawing.Point(5, 179)
+        Me.cboReportType.Items.AddRange(New Object() {"Sales Report", "StockOut Report", "StockIn Report", "LayAway Payments Report", "Forfeit List"})
+        Me.cboReportType.Location = New System.Drawing.Point(5, 173)
+
         Me.cboReportType.Name = "cboReportType"
         Me.cboReportType.Size = New System.Drawing.Size(227, 21)
         Me.cboReportType.TabIndex = 9
@@ -57,7 +60,8 @@ Partial Class frmSalesReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(238, 260)
+        Me.ClientSize = New System.Drawing.Size(238, 254)
+
         Me.Controls.Add(Me.cboReportType)
         Me.Controls.Add(Me.btnGenerate)
         Me.Controls.Add(Me.monCal)
