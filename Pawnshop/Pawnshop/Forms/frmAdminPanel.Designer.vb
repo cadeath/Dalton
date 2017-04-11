@@ -108,6 +108,23 @@ Partial Class frmAdminPanel
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cboModuleName = New System.Windows.Forms.ComboBox()
         Me.btnExport = New System.Windows.Forms.Button()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.btnCopy = New System.Windows.Forms.Button()
+        Me.txtQRURL = New System.Windows.Forms.TextBox()
+        Me.txtManual = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.btnGenerate = New System.Windows.Forms.Button()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.rbInventory = New System.Windows.Forms.RadioButton()
+        Me.rbPullout = New System.Windows.Forms.RadioButton()
+        Me.rbStockout = New System.Windows.Forms.RadioButton()
+        Me.rbUserManagement = New System.Windows.Forms.RadioButton()
+        Me.rbVoiding = New System.Windows.Forms.RadioButton()
+        Me.rbSettings = New System.Windows.Forms.RadioButton()
         Me.lblModuleName = New System.Windows.Forms.Label()
         Me.lblReferenceNumber = New System.Windows.Forms.Label()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
@@ -127,6 +144,9 @@ Partial Class frmAdminPanel
         Me.TabPage2.SuspendLayout()
         Me.lblModname.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -239,6 +259,7 @@ Partial Class frmAdminPanel
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
@@ -965,6 +986,194 @@ Partial Class frmAdminPanel
         Me.btnExport.Text = "Export"
         Me.btnExport.UseVisualStyleBackColor = True
         '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.GroupBox8)
+        Me.TabPage4.Controls.Add(Me.GroupBox7)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(1143, 433)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "OTP Generator"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.Controls.Add(Me.btnCopy)
+        Me.GroupBox8.Controls.Add(Me.txtQRURL)
+        Me.GroupBox8.Controls.Add(Me.txtManual)
+        Me.GroupBox8.Controls.Add(Me.Label19)
+        Me.GroupBox8.Controls.Add(Me.Label20)
+        Me.GroupBox8.Controls.Add(Me.btnGenerate)
+        Me.GroupBox8.Controls.Add(Me.txtEmail)
+        Me.GroupBox8.Controls.Add(Me.Label21)
+        Me.GroupBox8.Location = New System.Drawing.Point(193, 3)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(477, 167)
+        Me.GroupBox8.TabIndex = 12
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "One-Time Password"
+        '
+        'btnCopy
+        '
+        Me.btnCopy.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCopy.Location = New System.Drawing.Point(445, 73)
+        Me.btnCopy.Name = "btnCopy"
+        Me.btnCopy.Size = New System.Drawing.Size(26, 23)
+        Me.btnCopy.TabIndex = 7
+        Me.btnCopy.Text = "C"
+        Me.btnCopy.UseVisualStyleBackColor = True
+        '
+        'txtQRURL
+        '
+        Me.txtQRURL.BackColor = System.Drawing.Color.White
+        Me.txtQRURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtQRURL.ForeColor = System.Drawing.SystemColors.WindowText
+        Me.txtQRURL.Location = New System.Drawing.Point(98, 73)
+        Me.txtQRURL.Name = "txtQRURL"
+        Me.txtQRURL.ReadOnly = True
+        Me.txtQRURL.Size = New System.Drawing.Size(341, 22)
+        Me.txtQRURL.TabIndex = 6
+        Me.txtQRURL.Text = "eskie@pgc-itdept.org"
+        '
+        'txtManual
+        '
+        Me.txtManual.BackColor = System.Drawing.Color.White
+        Me.txtManual.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtManual.Location = New System.Drawing.Point(98, 48)
+        Me.txtManual.Name = "txtManual"
+        Me.txtManual.ReadOnly = True
+        Me.txtManual.Size = New System.Drawing.Size(373, 22)
+        Me.txtManual.TabIndex = 5
+        Me.txtManual.Text = "eskie@pgc-itdept.org"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(16, 78)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(38, 16)
+        Me.Label19.TabIndex = 4
+        Me.Label19.Text = "URL:"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(16, 53)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(55, 16)
+        Me.Label20.TabIndex = 3
+        Me.Label20.Text = "Manual:"
+        '
+        'btnGenerate
+        '
+        Me.btnGenerate.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGenerate.Location = New System.Drawing.Point(389, 111)
+        Me.btnGenerate.Name = "btnGenerate"
+        Me.btnGenerate.Size = New System.Drawing.Size(82, 44)
+        Me.btnGenerate.TabIndex = 2
+        Me.btnGenerate.Text = "&Generate"
+        Me.btnGenerate.UseVisualStyleBackColor = True
+        '
+        'txtEmail
+        '
+        Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmail.Location = New System.Drawing.Point(98, 20)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(373, 22)
+        Me.txtEmail.TabIndex = 1
+        Me.txtEmail.Text = "eskie@pgc-itdept.org"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(6, 25)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(96, 16)
+        Me.Label21.TabIndex = 0
+        Me.Label21.Text = "Email Address"
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.rbInventory)
+        Me.GroupBox7.Controls.Add(Me.rbPullout)
+        Me.GroupBox7.Controls.Add(Me.rbStockout)
+        Me.GroupBox7.Controls.Add(Me.rbUserManagement)
+        Me.GroupBox7.Controls.Add(Me.rbVoiding)
+        Me.GroupBox7.Controls.Add(Me.rbSettings)
+        Me.GroupBox7.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(184, 167)
+        Me.GroupBox7.TabIndex = 11
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "OTP Module"
+        '
+        'rbInventory
+        '
+        Me.rbInventory.AutoSize = True
+        Me.rbInventory.Location = New System.Drawing.Point(6, 134)
+        Me.rbInventory.Name = "rbInventory"
+        Me.rbInventory.Size = New System.Drawing.Size(80, 20)
+        Me.rbInventory.TabIndex = 12
+        Me.rbInventory.TabStop = True
+        Me.rbInventory.Text = "Inventory"
+        Me.rbInventory.UseVisualStyleBackColor = True
+        '
+        'rbPullout
+        '
+        Me.rbPullout.AutoSize = True
+        Me.rbPullout.Location = New System.Drawing.Point(6, 111)
+        Me.rbPullout.Name = "rbPullout"
+        Me.rbPullout.Size = New System.Drawing.Size(66, 20)
+        Me.rbPullout.TabIndex = 11
+        Me.rbPullout.TabStop = True
+        Me.rbPullout.Text = "Pullout"
+        Me.rbPullout.UseVisualStyleBackColor = True
+        '
+        'rbStockout
+        '
+        Me.rbStockout.AutoSize = True
+        Me.rbStockout.Location = New System.Drawing.Point(6, 88)
+        Me.rbStockout.Name = "rbStockout"
+        Me.rbStockout.Size = New System.Drawing.Size(78, 20)
+        Me.rbStockout.TabIndex = 10
+        Me.rbStockout.TabStop = True
+        Me.rbStockout.Text = "Stockout"
+        Me.rbStockout.UseVisualStyleBackColor = True
+        '
+        'rbUserManagement
+        '
+        Me.rbUserManagement.AutoSize = True
+        Me.rbUserManagement.Location = New System.Drawing.Point(6, 19)
+        Me.rbUserManagement.Name = "rbUserManagement"
+        Me.rbUserManagement.Size = New System.Drawing.Size(137, 20)
+        Me.rbUserManagement.TabIndex = 7
+        Me.rbUserManagement.TabStop = True
+        Me.rbUserManagement.Text = "User Management"
+        Me.rbUserManagement.UseVisualStyleBackColor = True
+        '
+        'rbVoiding
+        '
+        Me.rbVoiding.AutoSize = True
+        Me.rbVoiding.Location = New System.Drawing.Point(6, 65)
+        Me.rbVoiding.Name = "rbVoiding"
+        Me.rbVoiding.Size = New System.Drawing.Size(72, 20)
+        Me.rbVoiding.TabIndex = 9
+        Me.rbVoiding.TabStop = True
+        Me.rbVoiding.Text = "Voiding"
+        Me.rbVoiding.UseVisualStyleBackColor = True
+        '
+        'rbSettings
+        '
+        Me.rbSettings.AutoSize = True
+        Me.rbSettings.Location = New System.Drawing.Point(6, 42)
+        Me.rbSettings.Name = "rbSettings"
+        Me.rbSettings.Size = New System.Drawing.Size(74, 20)
+        Me.rbSettings.TabIndex = 8
+        Me.rbSettings.TabStop = True
+        Me.rbSettings.Text = "Settings"
+        Me.rbSettings.UseVisualStyleBackColor = True
+        '
         'lblModuleName
         '
         Me.lblModuleName.AutoSize = True
@@ -1043,6 +1252,11 @@ Partial Class frmAdminPanel
         Me.lblModname.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.TabPage4.ResumeLayout(False)
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.grpSearch.ResumeLayout(False)
         Me.grpSearch.PerformLayout()
         Me.ResumeLayout(False)
@@ -1147,5 +1361,22 @@ Partial Class frmAdminPanel
     Friend WithEvents btncLoseScheme As System.Windows.Forms.Button
     Friend WithEvents btnsavescheme As System.Windows.Forms.Button
     Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents rbInventory As System.Windows.Forms.RadioButton
+    Friend WithEvents rbPullout As System.Windows.Forms.RadioButton
+    Friend WithEvents rbStockout As System.Windows.Forms.RadioButton
+    Friend WithEvents rbUserManagement As System.Windows.Forms.RadioButton
+    Friend WithEvents rbVoiding As System.Windows.Forms.RadioButton
+    Friend WithEvents rbSettings As System.Windows.Forms.RadioButton
+    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtQRURL As System.Windows.Forms.TextBox
+    Friend WithEvents txtManual As System.Windows.Forms.TextBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents btnGenerate As System.Windows.Forms.Button
+    Friend WithEvents txtEmail As System.Windows.Forms.TextBox
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents btnCopy As System.Windows.Forms.Button
 
 End Class

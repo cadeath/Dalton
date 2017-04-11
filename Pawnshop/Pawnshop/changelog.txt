@@ -1,19 +1,14 @@
 CHANGELOG
-Version 1.5.0.5
- - Quick View on Pawnticket
- - Added Daily & Monthly Expiry List
- - Fix Adjustment Zero Inventory
- - Add Menus 1 Date Segrate List
- - Layaway Reports Sort by Date
+
+Version 1.5.0.7
  - Add Branch Address in Maintenance
- - Fix No Segre in Outstanding
- - Fix Segre List
+ - Add Menus 1 Date Segrate List
+ - Added Journal Entries Block if not close store
+ - Added Daily & Monthly Expiry List
  - Added Monitoring for OPT
  - Added Function for Deleting Wrong Item in Inventory
  - Added Log for Tampered Item Master, Invalid Hot Code of IMD & STO 
  - Added Separated OPT Generator
-
-Version 1.5.0.4
  - Added Icon
  - Added SMS Module for Expiry Items
  - Added TABLE SMS
@@ -24,11 +19,19 @@ Version 1.5.0.4
  - Added LayAway Module
  - Added Function if Full Paid Record to Inventory Sales
  - Added Layaway List Report (Active layaway)
- - Can ReSend Failed Sending
+ - Added Inventory Adjustment
+ - Fix Pawn_List View Include Barangay in Patch
  - Fix Wrong Journal in Layaway Penalty
  - Fix Different Control # for STO, Inv, Return
- - Added Inventory Adjustment
+ - Fix Adjustment Zero Inventory
+ - Fix No Segre in Outstanding
+ - Fix Segre List
  - Modify Pawn_List VIEW
+ - Record Failed SMS Properly
+ - Quick View on Pawnticket
+ - Layaway Reports Sort by Date
+ - Change Inventory Merchandise Sap Account
+ - Can ReSend Failed Sending
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES

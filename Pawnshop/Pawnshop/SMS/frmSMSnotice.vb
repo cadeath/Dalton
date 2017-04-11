@@ -136,7 +136,12 @@
                     notified.Load_PawnTicket(pawner.Text)
                     notified.ConfirmNotification(text_msg, remarks)
                 Else
-                    Log_Report(String.Format("FAILED TO SEND: PT#{0} - {1}", pawner.Text, remarks))
+                    If remarks.Contains("status=DeliveryImpossible,") Then
+                        Log_Report(String.Format("FAILED TO SEND: PT#{0}", pawner.Text))
+                    Else
+                        Log_Report(String.Format("FAILED TO SEND: PT#{0} - {1}", pawner.Text, remarks))
+                    End If
+
                 End If
 
                 finalCnt -= 1

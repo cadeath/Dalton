@@ -433,12 +433,6 @@
     <Compile Include="OTP\diagGeneralOTP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OTP\frmOTPManager.Designer.vb">
-      <DependentUpon>frmOTPManager.vb</DependentUpon>
-    </Compile>
-    <Compile Include="OTP\frmOTPManager.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="OTP\frmSample.Designer.vb">
       <DependentUpon>frmSample.vb</DependentUpon>
     </Compile>
@@ -865,6 +859,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Seed\Pawn.vb" />
+    <Compile Include="SMS\devSMS.Designer.vb">
+      <DependentUpon>devSMS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SMS\devSMS.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SMS\diagChangeNum.Designer.vb">
       <DependentUpon>diagChangeNum.vb</DependentUpon>
     </Compile>
@@ -990,9 +990,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\diagGeneralOTP.resx">
       <DependentUpon>diagGeneralOTP.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OTP\frmOTPManager.resx">
-      <DependentUpon>frmOTPManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OTP\frmSample.resx">
       <DependentUpon>frmSample.vb</DependentUpon>
@@ -1345,6 +1342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Seed\frmSeed.resx">
       <DependentUpon>frmSeed.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SMS\devSMS.resx">
+      <DependentUpon>devSMS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SMS\diagChangeNum.resx">
       <DependentUpon>diagChangeNum.vb</DependentUpon>
