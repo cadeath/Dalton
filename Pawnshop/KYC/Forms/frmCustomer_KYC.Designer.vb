@@ -94,6 +94,8 @@ Partial Class frmCustomer_KYC
         Me.btnCamera = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ClientImage = New System.Windows.Forms.PictureBox()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.txtSuffix = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -790,12 +792,33 @@ Partial Class frmCustomer_KYC
         Me.ClientImage.TabIndex = 11
         Me.ClientImage.TabStop = False
         '
+        'Label26
+        '
+        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.Location = New System.Drawing.Point(559, 55)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(179, 18)
+        Me.Label26.TabIndex = 16
+        Me.Label26.Text = "Suffix"
+        Me.Label26.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'txtSuffix
+        '
+        Me.txtSuffix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSuffix.Location = New System.Drawing.Point(632, 30)
+        Me.txtSuffix.Name = "txtSuffix"
+        Me.txtSuffix.Size = New System.Drawing.Size(43, 22)
+        Me.txtSuffix.TabIndex = 15
+        Me.txtSuffix.Text = "Jr"
+        '
         'frmCustomer_KYC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(826, 435)
+        Me.Controls.Add(Me.Label26)
+        Me.Controls.Add(Me.txtSuffix)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnTest)
         Me.Controls.Add(Me.btnSave)
@@ -894,5 +917,7 @@ Partial Class frmCustomer_KYC
     Friend WithEvents btnCamera As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents ClientImage As System.Windows.Forms.PictureBox
+    Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents txtSuffix As System.Windows.Forms.TextBox
 
 End Class

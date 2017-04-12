@@ -12,13 +12,6 @@ Imports System.Security.Cryptography
 
 Module security
 
-    Dim prng As New Random
-    Const minCH As Integer = 15 'minimum chars in random string
-    Const maxCH As Integer = 20 'maximum chars in random string
-
-    Const randCH As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-
-
     Friend Function HashString(ByVal src As String) As String
         Return Encrypt(src)
     End Function
@@ -67,12 +60,4 @@ Module security
         Return Convert.ToBase64String(fileByte)
     End Function
 
-
-    Friend Function FileName() As String
-        Dim sb As New System.Text.StringBuilder
-        For i As Integer = 1 To prng.Next(minCH, maxCH + 1)
-            sb.Append(randCH.Substring(prng.Next(0, randCH.Length), 1))
-        Next
-        Return sb.ToString()
-    End Function
 End Module

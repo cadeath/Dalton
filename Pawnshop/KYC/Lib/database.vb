@@ -280,4 +280,27 @@ Friend Module database
         Console.WriteLine("Option updated. " & key)
     End Sub
 
+
+#Region "Log Module"
+    Const LOG_FILE As String = "syslog.txt"
+    Private Sub CreateLog()
+        Dim fsEsk As New System.IO.FileStream(LOG_FILE, IO.FileMode.CreateNew)
+        fsEsk.Close()
+    End Sub
+
+    Friend Sub Log_Report(ByVal str As String)
+        If Not System.IO.File.Exists(LOG_FILE) Then CreateLog()
+
+        Dim recorded_log As String = _
+            String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss")) & str
+
+        Dim fs As New System.IO.FileStream(LOG_FILE, IO.FileMode.Append, IO.FileAccess.Write)
+        Dim fw As New System.IO.StreamWriter(fs)
+        fw.WriteLine(recorded_log)
+        fw.Close()
+        fs.Close()
+        Console.WriteLine("Recorded")
+    End Sub
+#End Region
+
 End Module

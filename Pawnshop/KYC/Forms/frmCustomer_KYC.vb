@@ -11,7 +11,7 @@ Public Class frmCustomer_KYC
     Private CustomerPhones As New Collections_Phone
     Private CustomerIDs As New Collections_ID
 
-    Friend SRC As String = Application.StartupPath & "\ClientImage"
+    Private SRC As String = Application.StartupPath & "\ClientImage"
     Dim FlName As String = "", Ext As String = ".EAM"
 
     Private Sub frmCustomer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -81,26 +81,22 @@ Public Class frmCustomer_KYC
         Return True
     End Function
 
-    Private Sub SaveCImg()
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If Not FormVerification() Then Exit Sub
 
         If Not Directory.Exists(SRC) Then
             Directory.CreateDirectory(SRC)
         End If
 
+GenerateRandOmString:
         FlName = FileName()
-        ClientImage.Image.Save(SRC & "\" & FlName & Ext)
-    End Sub
-
-    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-        If Not FormVerification() Then Exit Sub
-
-        SaveCImg()
 
         Dim NewCustomer As New Customer
         With NewCustomer
             .FirstName = txtFName.Text
             .MiddleName = txtMName.Text
             .LastName = txtLName.Text
+            .Suffix = txtSuffix.Text
 
             .PresentStreet = txtSt1.Text
             .PresentBarangay = cboBrgy1.Text
@@ -128,7 +124,13 @@ Public Class frmCustomer_KYC
             If rbHigh.Checked Then _
                 .Rank = Customer.RankNumber.High
 
-            .CImage = GetFileMD5(SRC & "\" & FlName & Ext)
+
+            If Not .FindImgIfExists(SRC & "\" & FlName & Ext) Then
+                GoTo GenerateRandOmString
+            End If
+
+            ClientImage.Image.Save(SRC & "\" & FlName & Ext)
+            .CImage = FlName & Ext & "|" & GetFileMD5(SRC & "\" & FlName & Ext)
 
             AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
 
@@ -137,12 +139,54 @@ Public Class frmCustomer_KYC
             .Save()
 
         End With
+
+        MsgBox("Successfully saved.", MsgBoxStyle.Information, "Save")
+        ClearFields()
+    End Sub
+
+    ''' <summary>
+    ''' This method will separate the phone number.
+    ''' </summary>
+    ''' <param name="PhoneField"></param>
+    ''' <param name="e"></param>
+    ''' <param name="isPhone"></param>
+    ''' <remarks></remarks>
+    Friend Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
+        Dim charPos() As Integer = {}
+        If PhoneField.Text = Nothing Then Return
+
+        Select Case PhoneField.Text.Substring(0, 1)
+            Case "0"
+                charPos = {4, 8}
+            Case "9"
+                charPos = {3, 7} '922-797-7559
+            Case "+"
+                charPos = {3, 7, 11} '+63-919-797-7559
+            Case "6"
+                charPos = {2, 6, 10} '63-919-797-7559
+        End Select
+        If isPhone Then
+            Select Case PhoneField.Text.Substring(0, 1)
+                Case "0"
+                    charPos = {3, 7}
+                Case Else
+                    charPos = {2, 6}
+            End Select
+        End If
+
+        For Each pos In charPos
+            If PhoneField.TextLength = pos And Not e.KeyChar = vbBack Then
+                PhoneField.Text &= "-"
+                PhoneField.SelectionStart = pos + 1
+            End If
+        Next
     End Sub
 
     Private Sub ClearFields()
         txtFName.Text = ""
         txtMName.Text = ""
         txtLName.Text = ""
+        txtSuffix.Text = ""
 
         'BASIC 
         txtSt1.Text = ""
@@ -184,6 +228,7 @@ Public Class frmCustomer_KYC
 
         cboZip1.Items.AddRange(listZip.ToArray)
         cboZip2.Items.AddRange(listZip.ToArray)
+        ClientImage.Image = Nothing
         Call ClosePreviewWindow()
     End Sub
 
@@ -295,6 +340,7 @@ Public Class frmCustomer_KYC
         txtFName.Text = cl.FirstName
         txtMName.Text = cl.MiddleName
         txtLName.Text = cl.LastName
+        txtSuffix.Text = cl.Suffix
 
         txtSt1.Text = cl.PresentStreet
         cboBrgy1.Text = cl.PresentBarangay
@@ -337,6 +383,8 @@ Public Class frmCustomer_KYC
     End Sub
 
     Private Sub txtPhone_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPhone.KeyPress
+        PhoneSeparator(txtPhone, e)
+
         If Asc(e.KeyChar) = 13 Then
             btnPlus.PerformClick()
         End If

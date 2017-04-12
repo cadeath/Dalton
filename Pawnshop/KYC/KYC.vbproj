@@ -84,6 +84,12 @@
     <Compile Include="Class\Customer.vb" />
     <Compile Include="Class\IdentificationCard.vb" />
     <Compile Include="Class\PhoneNumber.vb" />
+    <Compile Include="Forms\frmClientMigrate.Designer.vb">
+      <DependentUpon>frmClientMigrate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmClientMigrate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="KYCConfig.vb" />
     <Compile Include="Lib\autopatch.vb" />
     <Compile Include="Lib\database.vb" />
@@ -94,6 +100,7 @@
       <DependentUpon>frmCustomer_KYC.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Lib\db15.vb" />
     <Compile Include="Lib\ModCamera.vb" />
     <Compile Include="Lib\security.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -113,6 +120,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\frmClientMigrate.resx">
+      <DependentUpon>frmClientMigrate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCustomer_KYC.resx">
       <DependentUpon>frmCustomer_KYC.vb</DependentUpon>
     </EmbeddedResource>

@@ -1,5 +1,9 @@
 Module ModCamera
+    Dim prng As New Random
+    Const minCH As Integer = 15 'minimum chars in random string
+    Const maxCH As Integer = 20 'maximum chars in random string
 
+    Const randCH As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
     Public Const WM_Cap As Short = &H400S
     Public Const WM_Cap_Paki_CONNECT As Integer = WM_Cap + 10
@@ -46,4 +50,13 @@ Module ModCamera
         SendMessage(hHwnd, WM_Cap_Paki_DISCONNECT, iDevice, 0)
         DestroyWindow(hHwnd)
     End Sub
+
+
+    Friend Function FileName() As String
+        Dim sb As New System.Text.StringBuilder
+        For i As Integer = 1 To prng.Next(minCH, maxCH + 1)
+            sb.Append(randCH.Substring(prng.Next(0, randCH.Length), 1))
+        Next
+        Return sb.ToString()
+    End Function
 End Module

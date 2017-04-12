@@ -1,0 +1,2 @@
+[04/12/2017 09:07:12] FileName already Exists: C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\KYC\bin\Debug\ClientImage\Ellie.EAM.
+[04/12/2017 09:07:28] FileName already Exists: C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\KYC\bin\Debug\ClientImage\Ellie.EAM.

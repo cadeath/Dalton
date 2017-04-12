@@ -2,7 +2,7 @@
 
 Module autopatch
     Public Sub Patch_if_Patchable()
-        
+        db15.PatchUp()
 
     End Sub
 

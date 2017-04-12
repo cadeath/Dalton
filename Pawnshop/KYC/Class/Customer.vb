@@ -5,6 +5,9 @@
 ''' </summary>
 ''' <remarks></remarks>
 Public Class Customer
+    Private SRC As String = Application.StartupPath & "\ClientImage"
+    Dim indexof As String
+    Dim lastindexof As String
 
 #Region "Properties"
     Private _id As Integer
@@ -44,6 +47,16 @@ Public Class Customer
         End Get
         Set(ByVal value As String)
             _lastName = value
+        End Set
+    End Property
+
+    Private _suffix As String
+    Public Property Suffix() As String
+        Get
+            Return _suffix
+        End Get
+        Set(ByVal value As String)
+            _suffix = value
         End Set
     End Property
 
@@ -268,6 +281,16 @@ Public Class Customer
         End Set
     End Property
 
+    Private _cPUREIMAGE As Image
+    Public Property CPUREIMAGE As Image
+        Get
+            Return _cPUREIMAGE
+        End Get
+        Set(ByVal value As Image)
+            _cPUREIMAGE = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Procedures"
@@ -286,6 +309,7 @@ Public Class Customer
                 .Item("FIRSTNAME") = _firstName
                 .Item("MIDNAME") = _middleName
                 .Item("LASTNAME") = _lastName
+                .Item("Suffix") = _suffix
                 .Item("STREET1") = _addrStreet1
                 .Item("BRGY1") = _addrBrgy1
                 .Item("CITY1") = _addrCity1
@@ -312,6 +336,7 @@ Public Class Customer
                 .Item("FIRSTNAME") = _firstName
                 .Item("MIDNAME") = _middleName
                 .Item("LASTNAME") = _lastName
+                .Item("Suffix") = _suffix
                 .Item("STREET1") = _addrStreet1
                 .Item("BRGY1") = _addrBrgy1
                 .Item("CITY1") = _addrCity1
@@ -420,6 +445,7 @@ Public Class Customer
             _firstName = .Item("FIRSTNAME")
             _middleName = .Item("MIDNAME")
             _lastName = .Item("LASTNAME")
+            _suffix = .Item("Suffix")
             _addrStreet1 = .Item("STREET1")
             _addrBrgy1 = .Item("BRGY1")
             _addrCity1 = .Item("CITY1")
@@ -439,6 +465,24 @@ Public Class Customer
             _sourceOfFund = .Item("SRCFUND")
             _rank = .Item("RANK")
             _CImage = .Item("CLIENT_IMG")
+
+
+            indexof = SRC & "\" & _CImage.Substring(0, _CImage.IndexOf("|"c))
+            lastindexof = _CImage.Substring(_CImage.LastIndexOf("|"c)).Trim("|")
+
+
+            If File.Exists(indexof) Then
+                If ChkFileIntegrity(lastindexof, indexof) Then
+                    _cPUREIMAGE = Image.FromFile(indexof)
+                Else
+                    MsgBox("Image file was tampered.", MsgBoxStyle.Critical, "Error")
+                    Exit Sub
+                End If
+            Else
+                MsgBox("Unable to load image file.", MsgBoxStyle.Critical, "Error")
+                Exit Sub
+            End If
+
         End With
 
         ' Loading Collections
@@ -487,19 +531,27 @@ Public Class Customer
         Return ds
     End Function
 
-    Friend Function FindCusomterImage(ByVal hshValue As String) As Image
+    Friend Function FindImgIfExists(ByVal randstr As String) As Boolean
 
-        For Each LogFile In Directory.GetFiles(frmCustomer_KYC.SRC)
-            Dim i As String = GetFileMD5(LogFile)
-
-            If i <> hshValue Then
-                On Error Resume Next
-            Else
-                Return Image.FromFile(LogFile)
+        For Each LogFile In Directory.GetFiles(SRC)
+            If LogFile = randstr Then
+                Log_Report(String.Format("FileName already Exists: {0}.", randstr))
+                Return False
             End If
         Next
 
-        Return Image.FromFile(hshValue)
+        Return True
+    End Function
+
+    Private Function ChkFileIntegrity(ByVal srcDB As String, ByVal srcFolder As String) As Boolean
+        Dim srcIMG As String = GetFileMD5(srcFolder)
+
+        If srcIMG <> srcDB Then
+            Return False
+        Else
+            Return True
+        End If
+        Return True
     End Function
 #End Region
 
