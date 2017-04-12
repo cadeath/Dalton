@@ -14,7 +14,7 @@ Public Class frmBackUpDataSettings
         Using sw As StreamWriter = File.CreateText("backup.bat")
             sw.WriteLine("@echo off")
             sw.WriteLine("title cdt-S0ft - MANUAL BACKUP")
-            sw.WriteLine("echo PLEASE CLOSE THE PAWNSHOP SYSTEM")
+            sw.WriteLine("echo PLEASE CLOSE THE Dalton Integrated System")
             sw.WriteLine("pause")
             sw.WriteLine("echo PLEASE WAIT WHILE SYSTEM IS BACKING UP")
             sw.WriteLine("rar a " & txtData.Text & "\" & mod_system.BranchCode & ".rar -agMMddyyyy W3W1LH4CKU.FDB -hp" _
