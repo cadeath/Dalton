@@ -14,8 +14,14 @@ Module autopatch
         db1221.PatchUp()
         db1222.PatchUp()
         db1223.PatchUp()
+        db1224.PatchUp()
 
+        ' FOR v1.3
+        db1232.PatchUp()
+        db124.PatchUp()
 
+        ' FOR v1.5
+        db13.PatchUp()
 
         DBVERSION = GetOption("DBVersion")
     End Sub
@@ -93,5 +99,8 @@ err:
         GENERATOR &= vbCrLf & String.Format("IF (NEW.""{1}"" IS NULL) THEN NEW.""{1}"" = GEN_ID(""{0}_{1}_GEN"", 1);", tbl, id)
         GENERATOR &= vbCrLf & "END;"
         RunCommand(GENERATOR)
+
+        GENERATOR = String.Format("ALTER TABLE {0} ADD PRIMARY KEY ({1});", tbl, id)
+        RunCommand(GENERATOR) 'ADDING PRIMARY KEY
     End Sub
 End Module

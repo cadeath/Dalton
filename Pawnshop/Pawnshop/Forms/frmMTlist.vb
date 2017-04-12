@@ -1,5 +1,5 @@
 ﻿Public Class frmMTlist
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
@@ -105,18 +105,26 @@
         btnView.PerformClick()
     End Sub
 
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
-
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvMoneyTransfer.SelectedItems.Count = 0 Then Exit Sub
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.VoidMoneyTransfer
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidMoneyTransfer()
+        'End If
+
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.VoidMoneyTransfer
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                VoidMoneyTransfer()
+            End If
         Else
             VoidMoneyTransfer()
         End If
@@ -164,7 +172,7 @@
 
         Dim idx As Integer = lvMoneyTransfer.FocusedItem.Tag
         Dim tmpMT As New MoneyTransfer
-        Dim strMoneyTrans As String
+        Dim strMoneyTrans As String = ""
         Label2.Text = idx
         If tmpMT.LoadMoneyTrans = "0" Then
             strMoneyTrans = "OUT"

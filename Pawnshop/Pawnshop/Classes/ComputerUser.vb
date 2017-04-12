@@ -80,6 +80,15 @@ Public Class ComputerUser
         End Set
     End Property
 
+    Private _UserStatus As Integer
+    Public Property UserStatus() As Integer
+        Get
+            Return _UserStatus
+        End Get
+        Set(ByVal value As Integer)
+            _UserStatus = value
+        End Set
+    End Property
 #End Region
 
 #Region "Privileges"
@@ -249,6 +258,22 @@ Public Class ComputerUser
         End Get
     End Property
 
+    Private _stockout As Boolean
+    Public ReadOnly Property canStockOut() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _stockout
+        End Get
+    End Property
+
+    Private _POSreturn As Boolean
+    Public ReadOnly Property canReturn() As Boolean
+        Get
+            If isSuperUser Then Return isSuperUser
+            Return _POSreturn
+        End Get
+    End Property
+
     'Manager
     Private _userManagement As Boolean
     Public ReadOnly Property canUserManage() As Boolean
@@ -377,9 +402,11 @@ Public Class ComputerUser
         _viewUserManagement = IIf(parts(y).Substring(8, 1) = "1", True, False)
         _viewRates = IIf(parts(y).Substring(9, 1) = "1", True, False)
         _openStore = IIf(parts(y).Substring(10, 1) = "1", True, False)
+        _stockout = IIf(parts(y).Substring(11, 1) = "1", True, False)
+        _POSreturn = IIf(parts(y).Substring(12, 1) = "1", True, False)
 
         privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _
-                    _viewUserManagement, _viewRates, _openStore}
+                    _viewUserManagement, _viewRates, _openStore, _stockout, _POSreturn}
         For Each var As Boolean In privList
             If var Then _level = "Supervisor"
         Next
@@ -421,8 +448,8 @@ Public Class ComputerUser
 
             For cnt As Integer = 0 To TabCnt - 1
                 Select Case cnt
-                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio}
-                    Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                    Case 0 : privList = {_pawn, _clientList, _moneyTransfer, _insurance, _layAway, _dollarBuying, _pos, _cio, _appraiser}
+                    Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore, _stockout, _POSreturn}
                     Case 2 : privList = {_userManagement, _updateRates, _settings, _borrow}
                     Case 3 : privList = {_cashInBank, _cashOutBank, _void, _pullOut, _migrate}
 
@@ -488,7 +515,7 @@ Public Class ComputerUser
                         finalChunk &= "0"
                     Next
                     finalChunk &= "|"
-                Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore}
+                Case 1 : privList = {_expiryList, _journalEntries, _cashCount, _backUp, _ItemPulloutReport, _SegregatedReport, _OutstandingReport, _viewUserManagement, _viewUserManagement, _viewRates, _openStore, _stockout, _POSreturn}
                     finalChunk &= privChunk.Split("|")(cnt)
                     For y = privChunk.Split("|")(cnt).Length To privList.Length - 1
                         finalChunk &= "0"
@@ -521,7 +548,6 @@ Public Class ComputerUser
             _privilege = .Item("Privilege")
             If Not IsDBNull(.Item("LastLogin")) Then _lastLogin = .Item("LastLogin")
         End With
-
         getPrivilege()
     End Sub
 
@@ -541,6 +567,7 @@ Public Class ComputerUser
                 '.Item("LastLogin") = _lastLogin 'First Login no Last Login
                 .Item("EncoderID") = _encoderID
                 .Item("SystemInfo") = Now.Date
+                .Item("STATUS") = _UserStatus
             End With
             ds.Tables(fillData).Rows.Add(dsNewRow)
         Else
@@ -563,13 +590,14 @@ Public Class ComputerUser
         Dim ds As DataSet = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub
 
+
         LoadUserByRow(ds.Tables(0).Rows(0))
         Console.WriteLine(String.Format("[ComputerUser] UserID {0} - {1} Loaded", _userID, _userName))
     End Sub
 
     Public Function LoginUser(ByVal user As String, ByVal password As String) As Boolean
         mySql = "SELECT UserID, LOWER(Username) FROM " & fillData
-        mySql &= vbCrLf & String.Format(" WHERE LOWER(Username) = LOWER('{0}') AND UserPass = '{1}'", user, Encrypt(password))
+        mySql &= vbCrLf & String.Format(" WHERE LOWER(Username) = LOWER('{0}') AND UserPass = '{1}' AND STATUS <> '0'", user, Encrypt(password))
         Dim ds As DataSet
 
         ds = LoadSQL(mySql)
@@ -595,6 +623,18 @@ Public Class ComputerUser
         ds.Tables(fillData).Rows(0).Item("USERPASS") = Encrypt(_password)
         SaveEntry(ds, False)
     End Sub
-    
+
+    Public Sub DeleteUser(ByVal Status As Boolean)
+        Dim mySql As String = "SELECT * FROM tbl_Gamit WHERE USERID = " & _userID
+        Dim ds As DataSet = LoadSQL(mySql, fillData)
+        If Status = True Then
+            ds.Tables(fillData).Rows(0).Item("STATUS") = "1"
+        Else
+            ds.Tables(fillData).Rows(0).Item("STATUS") = "0"
+        End If
+        SaveEntry(ds, False)
+        ' End If
+    End Sub
+
 #End Region
 End Class

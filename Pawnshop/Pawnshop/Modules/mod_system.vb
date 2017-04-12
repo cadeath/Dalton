@@ -18,6 +18,7 @@ Module mod_system
     ''' </summary>
     ''' <remarks></remarks>
 #Region "Global Variables"
+    Dim frmCollection As New FormCollection()
     Public DEV_MODE As Boolean = False
     Public PROTOTYPE As Boolean = False
     Public ADS_ESKIE As Boolean = False
@@ -128,6 +129,7 @@ Module mod_system
             frmMain.dateSet = False
         End If
     End Sub
+
     ''' <summary>
     ''' This function will segregate all data from tblPawn
     ''' where AuctionDate is = to the CurrentDate.
@@ -136,17 +138,30 @@ Module mod_system
     ''' <remarks></remarks>
     Friend Function AutoSegregate() As Boolean
         Console.WriteLine("Entering segregation module")
-        Dim mySql As String = "SELECT * FROM tblPawn WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
-        Dim ds As DataSet = LoadSQL(mySql, "tblPawn")
+        Dim mySql As String = "SELECT * FROM OPT WHERE AuctionDate < '" & CurrentDate.Date & "' AND (Status = 'L' OR Status = 'R')"
+        Dim ds As DataSet = LoadSQL(mySql, "OPT")
 
         If ds.Tables(0).Rows.Count = 0 Then Return True
 
         Console.WriteLine("Segregating...")
-        For Each dr As DataRow In ds.Tables("tblPawn").Rows
-            Dim tmpPawnItem As New PawnTicket
-            tmpPawnItem.LoadTicketInRow(dr)
-            tmpPawnItem.Status = "S"
-            tmpPawnItem.SaveTicket(False)
+        For Each dr As DataRow In ds.Tables("OPT").Rows
+            'Dim tmpPawnItem As New PawnTicket
+            'tmpPawnItem.LoadTicketInRow(dr)
+            'tmpPawnItem.Status = "S"
+            'tmpPawnItem.SaveTicket(False)
+
+            Dim tmpPawnItem As New PawnTicket2
+            tmpPawnItem.Load_PTid(dr.Item("PawnID"))
+            With tmpPawnItem.PawnItem
+                '.WithdrawDate = CurrentDate
+                .Status = "S"
+                .Save_PawnItem()
+            End With
+            With tmpPawnItem
+                '.Load_PT_row(dr)
+                .Status = "S"
+                .Update_PawnTicket()
+            End With
 
             AddJournal(tmpPawnItem.Principal, "Debit", "Inventory Merchandise - Segregated", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
             AddJournal(tmpPawnItem.Principal, "Credit", "Inventory Merchandise - Loan", "Segregated - PT#" & tmpPawnItem.PawnTicket, False, , , "Segregate", dailyID)
@@ -352,6 +367,7 @@ Module mod_system
 
         Return Not (Char.IsDigit(e.KeyChar))
     End Function
+
     ''' <summary>
     ''' this function check if the input is numeric or character.
     ''' </summary>
@@ -472,7 +488,10 @@ Module mod_system
 
         oWB = oXL.Workbooks.Add
         oSheet = oWB.ActiveSheet
-        oSheet.Name = "OUTSTANDING"
+        oSheet.Name = ExtractDataFromDatabase.lbltransaction.Text
+
+        ' ADD BRANCHCODE
+        InsertArrayElement(headers, 0, "BRANCHCODE")
 
         ' HEADERS
         Dim cnt As Integer = 0
@@ -485,7 +504,11 @@ Module mod_system
         Dim rowCnt As Integer = 2
         For Each dr As DataRow In ds.Tables(0).Rows
             For colCnt As Integer = 0 To headers.Count - 1
-                oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt)
+                If colCnt = 0 Then
+                    oSheet.Cells(rowCnt, colCnt + 1).value = BranchCode
+                Else
+                    oSheet.Cells(rowCnt, colCnt + 1).value = dr(colCnt - 1) 'dr(colCnt - 1) move the column by -1
+                End If
             Next
             rowCnt += 1
 
@@ -503,6 +526,133 @@ Module mod_system
         Console.WriteLine("Data Extracted")
     End Sub
 
+    Private Sub InsertArrayElement(Of T)( _
+          ByRef sourceArray() As T, _
+          ByVal insertIndex As Integer, _
+          ByVal newValue As T)
+
+        Dim newPosition As Integer
+        Dim counter As Integer
+
+        newPosition = insertIndex
+        If (newPosition < 0) Then newPosition = 0
+        If (newPosition > sourceArray.Length) Then _
+           newPosition = sourceArray.Length
+
+        Array.Resize(sourceArray, sourceArray.Length + 1)
+
+        For counter = sourceArray.Length - 2 To newPosition Step -1
+            sourceArray(counter + 1) = sourceArray(counter)
+        Next counter
+
+        sourceArray(newPosition) = newValue
+    End Sub
+
+    ' HASHTABLE FUNCTIONS
+    Public Function GetIDbyName(name As String, ht As Hashtable) As Integer
+        For Each dt As DictionaryEntry In ht
+            If dt.Value = name Then
+                Return dt.Key
+            End If
+        Next
+
+        Return 0
+    End Function
+
+    Public Function GetNameByID(id As Integer, ht As Hashtable) As String
+        For Each dt As DictionaryEntry In ht
+            If dt.Key = id Then
+                Return dt.Value
+            End If
+        Next
+
+        Return "ES" & "KIE GWA" & "PO"
+    End Function
+    ' END - HASHTABLE FUNCTIONS
+
+    Public Function CheckOTP() As Boolean
+        diagOTP.ShowDialog()
+        diagOTP.TopMost = True
+        'Return False
+        Return True
+    End Function
+
+
+    Public Function CheckFormActive() As Boolean
+
+        frmCollection = Application.OpenForms()
+        If Application.OpenForms().OfType(Of frmInsurance).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmInsurance").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmPawningItemNew).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmPawningItemNew").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmBorrowing).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmBorrowing").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmMoneyTransfer).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmMoneyTransfer").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        ElseIf Application.OpenForms().OfType(Of frmSales).Any Then
+            MsgBox("Please close the " & Application.OpenForms.Item("frmSales").Text & " form", MsgBoxStyle.OkOnly) : Return True
+        End If
+
+        Return False
+    End Function
+
+    Friend Function DoForfeitingItem() As Boolean
+        Dim mysql As String = "Select * From tblLayAway Where Status = '1' And ForfeitDate < '" & CurrentDate.ToShortDateString & "' And Balance > 0"
+        Dim fillData As String = "tblLayAway"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If ds.Tables(0).Rows.Count = 0 Then Return True
+
+        For Each dr In ds.Tables(0).Rows()
+            Dim lay As New LayAway
+            With lay
+                .LoadByID(dr.item("LayID"))
+                .ForfeitLayAway()
+                .ItemOnLayMode(dr.item("ItemCode"), False)
+            End With
+
+        Next
+
+        Return True
+    End Function
+
+    ''' <summary>
+    ''' This method will separate the phone number.
+    ''' </summary>
+    ''' <param name="PhoneField"></param>
+    ''' <param name="e"></param>
+    ''' <param name="isPhone"></param>
+    ''' <remarks></remarks>
+    Friend Sub PhoneSeparator(ByVal PhoneField As TextBox, ByVal e As KeyPressEventArgs, Optional ByVal isPhone As Boolean = False)
+        Dim charPos() As Integer = {}
+        If PhoneField.Text = Nothing Then Return
+
+        Select Case PhoneField.Text.Substring(0, 1)
+            Case "0"
+                charPos = {4, 8}
+            Case "9"
+                charPos = {3, 7} '922-797-7559
+            Case "+"
+                charPos = {3, 7, 11} '+63-919-797-7559
+            Case "6"
+                charPos = {2, 6, 10} '63-919-797-7559
+        End Select
+        If isPhone Then
+            Select Case PhoneField.Text.Substring(0, 1)
+                Case "0"
+                    charPos = {3, 7}
+                Case Else
+                    charPos = {2, 6}
+            End Select
+        End If
+
+        For Each pos In charPos
+            If PhoneField.TextLength = pos And Not e.KeyChar = vbBack Then
+                PhoneField.Text &= "-"
+                PhoneField.SelectionStart = pos + 1
+            End If
+        Next
+    End Sub
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
@@ -514,7 +664,7 @@ Module mod_system
         If Not System.IO.File.Exists(LOG_FILE) Then CreateLog()
 
         Dim recorded_log As String = _
-            String.Format("[{0}] " & str, Now.ToString("MM/dd/yyyy HH:mm:ss"))
+            String.Format("[{0}] ", Now.ToString("MM/dd/yyyy HH:mm:ss")) & str
 
         Dim fs As New System.IO.FileStream(LOG_FILE, IO.FileMode.Append, IO.FileAccess.Write)
         Dim fw As New System.IO.StreamWriter(fs)

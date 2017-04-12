@@ -1,6 +1,6 @@
 ﻿Public Class frmBorrowBrowse
 
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
     ' Version 1.1
     ' - Check branchCode
     ''' <summary>
@@ -71,20 +71,7 @@
         txtOut.Text = lvBorrowings.SelectedItems(0).SubItems(3).Text
         txtParticular.Text = tmpBB.Remarks
     End Sub
-
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
-    ''' <summary>
-    ''' click button to not valid the transaction or to cancel
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-
+   
     Public Sub GetBorrowingID()
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
         Dim ID As Integer
@@ -96,10 +83,25 @@
 
     Private Sub btnVoid_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnVoid.Click
         If lvBorrowings.SelectedItems.Count = 0 Then Exit Sub
+        'If Not OTPDisable Then
+        '    btnView.PerformClick()
+        '    diagOTP.FormType = diagOTP.OTPType.VoidBranchToBranch
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    VoidBorrowing()
+        'End If
+
+        OTPVoiding_Initialization()
+
         If Not OTPDisable Then
-            btnView.PerformClick()
-            diagOTP.FormType = diagOTP.OTPType.VoidBranchToBranch
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                VoidBorrowing()
+            End If
         Else
             VoidBorrowing()
         End If

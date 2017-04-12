@@ -3,7 +3,7 @@
     Dim mousex As Integer
     Dim mousey As Integer
 
-    Private Sub pbClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pbClose.Click
+    Private Sub pbClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         End
     End Sub
     ''' <summary>
@@ -12,7 +12,7 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub pbHeader_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pbHeader.MouseDown
+    Private Sub pbHeader_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         drag = True
         mousex = Windows.Forms.Cursor.Position.X - Me.Left
         mousey = Windows.Forms.Cursor.Position.Y - Me.Top
@@ -23,14 +23,14 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub pbHeader_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pbHeader.MouseMove
+    Private Sub pbHeader_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If drag Then
             Me.Top = Windows.Forms.Cursor.Position.Y - mousey
             Me.Left = Windows.Forms.Cursor.Position.X - mousex
         End If
     End Sub
 
-    Private Sub pbHeader_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pbHeader.MouseUp
+    Private Sub pbHeader_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         drag = False
     End Sub
     ''' <summary>
@@ -39,7 +39,7 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
+    Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         End
     End Sub
     ''' <summary>
@@ -48,7 +48,8 @@
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        txtUser.Focus()
         CheckUsers()
     End Sub
     ''' <summary>
@@ -116,5 +117,9 @@
         frmMain.NotYetLogin(False)
         frmMain.CheckStoreStatus()
         Me.Close()
+    End Sub
+
+    Private Sub btnExit_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
+        End
     End Sub
 End Class

@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Dalton - Pawnshop System")> 
+<Assembly: AssemblyTitle("Dalton Integrated System")> 
 <Assembly: AssemblyDescription("Dalton Pawnshop and Jewelry")> 
 <Assembly: AssemblyCompany("Perfecto Group of Companies")> 
 <Assembly: AssemblyProduct("Pawnshop")> 
@@ -31,6 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-
-<Assembly: AssemblyVersion("1.2.3.5")> 
-<Assembly: AssemblyFileVersion("1.2.3.5")> 
+<Assembly: AssemblyVersion("1.5.0.7")> 
+<Assembly: AssemblyFileVersion("1.5.0.7")> 

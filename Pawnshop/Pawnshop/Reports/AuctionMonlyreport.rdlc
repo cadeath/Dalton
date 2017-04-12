@@ -72,12 +72,12 @@
           <DataField>Penalty</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ItemType">
-          <DataField>ItemType</DataField>
+        <Field Name="ItemClass">
+          <DataField>ItemClass</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Category">
-          <DataField>Category</DataField>
+        <Field Name="ItemCategory">
+          <DataField>ItemCategory</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Grams">
@@ -100,12 +100,12 @@
           <DataField>Principal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PullOut">
-          <DataField>PullOut</DataField>
+        <Field Name="WithDrawDate">
+          <DataField>WithDrawDate</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Interest">
-          <DataField>Interest</DataField>
+        <Field Name="DelayInterest">
+          <DataField>DelayInterest</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Appraiser">
@@ -118,6 +118,10 @@
         </Field>
         <Field Name="NewPT">
           <DataField>NewPT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PawnID">
+          <DataField>PawnID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -401,7 +405,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!ItemType.Value)</Value>
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -507,7 +511,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!ItemType.Value)</Value>
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -618,7 +622,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!ItemType.Value)</Value>
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -728,7 +732,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Count(Fields!ItemType.Value)</Value>
+                              <Value>=Count(Fields!ItemCategory.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
@@ -838,25 +842,25 @@
             <TablixMember>
               <Group Name="ItemType">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!ItemType.Value</GroupExpression>
+                  <GroupExpression>=Fields!ItemCategory.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
               <SortExpressions>
                 <SortExpression>
-                  <Value>=Fields!ItemType.Value</Value>
+                  <Value>=Fields!ItemCategory.Value</Value>
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
                 <Size>0.19792in</Size>
                 <CellContents>
-                  <Textbox Name="ItemType">
+                  <Textbox Name="ItemCategory">
                     <CanGrow>true</CanGrow>
                     <KeepTogether>true</KeepTogether>
                     <Paragraphs>
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=Fields!ItemType.Value</Value>
+                            <Value>=Fields!ItemCategory.Value</Value>
                             <Style>
                               <FontSize>8pt</FontSize>
                               <FontWeight>Bold</FontWeight>
@@ -868,7 +872,7 @@
                         </Style>
                       </Paragraph>
                     </Paragraphs>
-                    <rd:DefaultName>ItemType</rd:DefaultName>
+                    <rd:DefaultName>ItemCategory</rd:DefaultName>
                     <Style>
                       <Border>
                         <Style>None</Style>
@@ -891,6 +895,7 @@
                       <PaddingBottom>2pt</PaddingBottom>
                     </Style>
                   </Textbox>
+                  <rd:Selected>true</rd:Selected>
                 </CellContents>
               </TablixHeader>
               <TablixMembers>

@@ -2,7 +2,7 @@
 
     Private selectedUser As New ComputerUser
     Private moduleName As String = "User Management"
-    Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
+    'Private OTPDisable As Boolean = IIf(GetOption("OTP") = "YES", True, False)
 
     Private Function PasswordPolicy() As Boolean
         If txtPass1.Text.Length >= 4 And txtPass1.Text.Length <= 8 Then
@@ -40,6 +40,14 @@
         End With
         lblUserid.Text = idx
         LoadPrivilege()
+
+        Dim fillData As String = "TBL_GAMIT", mysql As String = "SELECT * FROM " & fillData & " WHERE UserID = '" & idx & "'"
+        Dim ds As DataSet = LoadSQL(mysql, fillData)
+        If ds.Tables(0).Rows(0).Item("Status") = "1" Then
+            chkEnableDisable.Checked = True
+        Else
+            chkEnableDisable.Checked = False
+        End If
     End Sub
 
     Private Sub LoadActive(Optional ByVal mySql As String = "SELECT * FROM tbl_gamit ORDER BY Username ASC")
@@ -62,6 +70,7 @@
     End Sub
 
     Private Sub ClearFields()
+        chkEnableDisable.Checked = False
         txtUser.Text = ""
         txtFullname.Text = ""
         txtPass1.Text = ""
@@ -101,6 +110,8 @@
         chkPullOut.Checked = False
         chkMigrate.Checked = False
         chkPrivilege.Checked = False
+        chkReturn.Checked = False
+        chkStockOut.Checked = False
 
         btnAdd.Text = "&Add"
     End Sub
@@ -120,7 +131,7 @@
         priv &= "|"
 
         'Supervisor
-        Dim listChk() As CheckBox = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
+        Dim listChk() As CheckBox = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS, chkStockOut, chkReturn}
         For Each e In listChk
             priv &= IIf(e.Checked, 1, 0)
 
@@ -164,7 +175,7 @@
                         chkList = {chkPawn, chkCM, chkMT, chkIns, chkLay, chkDB, chkPOS, chkCIO, chkAppraiser}
                         Console.WriteLine("Encoder Length: " & privParts(y).Length)
                     Case 1 'Supervisor
-                        chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS}
+                        chkList = {chkEL, chkJE, chkCC, chkBU, chkR1, chkR2, chkR3, chkR4, chkVUM, chkVR, chkOS, chkStockOut, chkReturn}
                         Console.WriteLine("Supervisor Length: " & privParts(y).Length)
                     Case 2 'Manager
                         chkList = {chkUM, chkUR, chkUS, chkBorrowings, chkResetPassword}
@@ -211,6 +222,8 @@
                 chkR2.Checked = tabStat
                 chkR3.Checked = tabStat
                 chkR4.Checked = tabStat
+                chkStockOut.Checked = tabStat
+                chkReturn.Checked = tabStat
             Case "Manager"
                 tabStat = chkMaAll.Checked
                 chkUM.Checked = tabStat
@@ -251,16 +264,9 @@
         Me.Close()
     End Sub
 
-    Private Function CheckOTP() As Boolean
-        diagOTP.Show()
-        diagOTP.TopMost = True
-        Return False
-        Return True
-    End Function
-
    Private Function CheckUsername() As Boolean
         Dim mySql As String, ds As DataSet
-        mySql = "SELECT * FROM TBL_GAMIT WHERE UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
+        mySql = "SELECT * FROM TBL_GAMIT WHERE STATUS = '1' AND UPPER(USERNAME) = UPPER('" & txtUser.Text & "')"
         ds = LoadSQL(mySql)
         If ds.Tables(0).Rows.Count >= 1 Then
             MessageBox.Show("Username Already Exist!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -274,10 +280,32 @@
             If CheckUsername() = False Then Exit Sub
             If Not PasswordPolicy() Then Exit Sub
             If txtFullname.Text = "" Or txtUser.Text = "" Then Exit Sub
+        Else
+            If chkEnableDisable.Checked = True Then
+                selectedUser.DeleteUser(True)
+            Else
+                selectedUser.DeleteUser(False)
+            End If
+            LoadActive()
         End If
+        'If Not OTPDisable Then
+        '    diagOTP.FormType = diagOTP.OTPType.UserManagement
+        '    If Not CheckOTP() Then Exit Sub
+        'Else
+        '    AddUserManagement()
+        'End If
+
+        OTPUser_Initialization()
+
         If Not OTPDisable Then
-            diagOTP.FormType = diagOTP.OTPType.UserManagement
-            If Not CheckOTP() Then Exit Sub
+            diagGeneralOTP.GeneralOTP = OtpSettings
+            diagGeneralOTP.TopMost = True
+            diagGeneralOTP.ShowDialog()
+            If Not diagGeneralOTP.isValid Then
+                Exit Sub
+            Else
+                AddUserManagement()
+            End If
         Else
             AddUserManagement()
         End If
@@ -294,9 +322,11 @@
             tmpUser.Privilege = Privileger()
             tmpUser.UpdatePrivilege()
             tmpUser.EncoderID = UserID
+            tmpUser.UserStatus = 1
 
             tmpUser.SaveUser()
             MsgBox(tmpUser.UserName & " added", MsgBoxStyle.Information, moduleName)
+            Dim NewOtp As New ClassOtp("Adding User", diagGeneralOTP.txtPIN.Text, "Username " & tmpUser.UserName)
         Else
 
             If Not txtPass1.Text = "" Then
@@ -331,7 +361,7 @@
                     .SaveUser(False)
                 End If
             End With
-
+            Dim NewOtp As New ClassOtp("Update User", diagGeneralOTP.txtPIN.Text, "Updating user " & selectedUser.UserName)
             MsgBox(selectedUser.UserName & " updated", MsgBoxStyle.Information)
             End If
             ClearFields()
@@ -350,6 +380,7 @@
     End Sub
 
     Private Sub EditMode()
+        chkEnableDisable.Enabled = True
         btnAdd.Text = "&Update"
         txtUser.ReadOnly = True
         txtPass1.Text = ""
@@ -408,6 +439,8 @@
             chkMigrate.Enabled = True
             chkPrivilege.Enabled = True
             chkSuAll.Enabled = True
+            chkStockOut.Enabled = True
+            chkReturn.Enabled = True
         Else
             chkPawn.Enabled = False
             chkCM.Enabled = False
@@ -444,36 +477,12 @@
             chkMigrate.Enabled = False
             chkPrivilege.Enabled = False
             chkSuAll.Enabled = False
+            chkStockOut.Enabled = False
+            chkReturn.Enabled = False
         End If
     End Sub
 
     Private Sub txtUser_PreviewKeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles txtUser.PreviewKeyDown
         CheckUsername()
-    End Sub
-
-    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
-        If Not OTPDisable Then
-            LoadUser()
-            diagOTP.FormType = diagOTP.OTPType.UserManagementDelete
-            If Not CheckOTP() Then Exit Sub
-        End If
-    End Sub
-
-    Friend Sub UserDelete()
-        dbOpen()
-        Dim filldata As String = "TBL_GAMIT"
-        Dim mysql As String = "DELETE FROM " & filldata & " WHERE USERID = '" & lblUserid.Text & "'"
-        Dim Command As New Odbc.OdbcCommand
-        Command.Connection = con
-        Command.CommandText = mysql
-        Command.ExecuteNonQuery()
-
-        MsgBox("User " & txtFullname.Text & " Deleted", MsgBoxStyle.Question, moduleName)
-        LoadActive()
-        dbClose()
-    End Sub
-
-    Private Sub lvUsers_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles lvUsers.SelectedIndexChanged
-
     End Sub
 End Class

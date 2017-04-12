@@ -428,7 +428,7 @@ Public Class frmMoneyTransfer
             End If
         End If
 
-        Dim fillData As String = "tblCharge", strType As String, strBracket As String
+        Dim fillData As String = "tblCharge", strType As String = "", strBracket As String
         Dim strAmount As String = txtAmount.Text
 
         If cboType.Text = "Cebuana Llhuiller" Then
@@ -864,4 +864,5 @@ Public Class frmMoneyTransfer
             btnPost.PerformClick()
         End If
     End Sub
+
 End Class
