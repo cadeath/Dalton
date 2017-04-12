@@ -1,0 +1,5 @@
+Send Result
+SendMessageResult {clientCorrelator=1902362723961255249, sendMessageResults=SendMessageResultItem {messageStatus=MessageAccepted, messageId=1902362723961255251, senderAddress=DALTON, destinationAddress=639363678923}, resourceReference=resourceURL = http://oneapi.infobip.com/1/smsmessaging/outbound/DALTON/requests/1902362723961255249/deliveryInfos}
+
+Delivery Report
+DeliveryReportList {deliveryReports=DeliveryReport {messageId=1902364986750545883, sentDate=3/23/2017 10:34:58 AM, doneDate=3/23/2017 10:35:05 AM, status=DeliveredToTerminal, price=0.0110}}
