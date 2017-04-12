@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 
 Public Class frmCustomer_KYC
-
     Friend ALLOW_MINORS As Boolean = True
 
     Const BLOCK_AGE As Integer = 7
@@ -584,4 +583,5 @@ GenerateRandOmString:
     'End Sub
 
   
+
 End Class

@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.KYC.frmCustomer_KYC
+            Me.MainForm = Global.KYC.frmClientMigrate
         End Sub
     End Class
 End Namespace

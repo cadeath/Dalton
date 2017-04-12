@@ -84,10 +84,13 @@
     <Compile Include="Class\Customer.vb" />
     <Compile Include="Class\IdentificationCard.vb" />
     <Compile Include="Class\PhoneNumber.vb" />
-    <Compile Include="Forms\frmClientMigrate.Designer.vb">
+    <Compile Include="Migrate\Migrate_ID.vb" />
+    <Compile Include="Migrate\ColMigrate_Phone.vb" />
+    <Compile Include="Migrate\MigrateCustomer.vb" />
+    <Compile Include="Migrate\frmClientMigrate.Designer.vb">
       <DependentUpon>frmClientMigrate.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmClientMigrate.vb">
+    <Compile Include="Migrate\frmClientMigrate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KYCConfig.vb" />
@@ -103,6 +106,8 @@
     <Compile Include="Lib\db15.vb" />
     <Compile Include="Lib\ModCamera.vb" />
     <Compile Include="Lib\security.vb" />
+    <Compile Include="Migrate\MigrateIdentificationCard.vb" />
+    <Compile Include="Migrate\MigratePhoneNumber.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -120,7 +125,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\frmClientMigrate.resx">
+    <EmbeddedResource Include="Migrate\frmClientMigrate.resx">
       <DependentUpon>frmClientMigrate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCustomer_KYC.resx">
