@@ -59,14 +59,10 @@ Public Class frmCustomer_KYC
             lstPhone.Items.Add(itm)
         Next
 
-        For Each id As IdentificationCard In cus.CustomersPhone
-            If id.isPrimary = True Then lvID.BackColor = Color.Green
-            lstPhone.Items.Add(id.IDNumber)
-        Next
         'loading IDS
-        'For Each itm In cus.CustomersIDs
-        '    lvID.Items.Add(itm)
-        'Next
+        For Each itm In cus.CustomersIDs
+            lvID.Items.Add(itm)
+        Next
 
         SelectedCustomer = cus
 
@@ -659,5 +655,10 @@ GenerateRandOmString:
     '    'ClientImage.Image = Image.FromFile(filename)
 
     'End Sub
-   
+
+  
+
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+
+    End Sub
 End Class
