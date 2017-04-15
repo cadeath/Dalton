@@ -13,11 +13,85 @@ Public Class frmCustomer_KYC
     Private SRC As String = Application.StartupPath & "\ClientImage"
     Dim FlName As String = "", Ext As String = ".EAM"
 
+    Private lockForm As Boolean = False
+    Friend FormOrigin As Form
+    Friend SelectedCustomer As Customer 'Holds Customer
+
     Private Sub frmCustomer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CACHE_MANAGEMENT()
         ClearFields()
 
         'Populate()
+    End Sub
+
+    Friend Sub LoadClientInForm(ByVal cus As Customer)
+        If cus.FirstName = "" Then Exit Sub
+
+        ' Display select buttons
+        'btnIDSelect.Visible = True
+        'btnSelect.Visible = True
+
+        txtFName.Text = cus.FirstName
+        txtMName.Text = cus.MiddleName
+        txtLName.Text = cus.LastName
+        txtSuffix.Text = cus.Suffix
+
+        txtSt1.Text = cus.PresentStreet
+        cboBrgy1.Text = cus.PresentBarangay
+        cboCity1.Text = cus.PresentCity
+        cboProv1.Text = cus.PresentProvince
+        cboZip1.Text = cus.PresentZipCode
+
+        txtSt2.Text = cus.PermanentStreet
+        cboBrgy2.Text = cus.PermanentBarangay
+        cboCity2.Text = cus.PermanentCity
+        cboProv2.Text = cus.PresentProvince
+        cboZip2.Text = cus.PermanentZipCode
+
+        cboGender.Text = IIf(cus.Sex = 1, "Male", "Female")
+
+        dtpBday.Value = IIf(cus.Birthday.Date > dtpBday.MinDate, cus.Birthday.Date, dtpBday.MinDate)
+        txtBdayPlace.Text = cus.BirthPlace
+        txtNationality.Text = cus.Nationality
+
+        'loading Phones
+        For Each itm In cus.CustomersPhone
+            lstPhone.Items.Add(itm)
+        Next
+
+        'loading IDS
+        For Each itm In cus.CustomersIDs
+            lvID.Items.Add(itm)
+        Next
+
+        SelectedCustomer = cus
+
+        ComputeBirthday()
+        LockFields(True)
+    End Sub
+
+    Friend Sub ComputeBirthday()
+        lblAge.Text = "N/A"
+        lblAge.Text = GetCurrentAge(dtpBday.Value) & " years old"
+    End Sub
+
+    Private Sub LockFields(ByVal st As Boolean)
+        lockForm = st
+
+        Console.WriteLine(txtFName.BackColor)
+        txtFName.ReadOnly = st
+        txtMName.ReadOnly = st
+        txtLName.ReadOnly = st
+        txtSuffix.ReadOnly = st
+
+        'tbID
+        TabControl1.Enabled = st
+
+        If st Then
+            btnSave.Text = "&Modify"
+        Else
+            btnSave.Text = "&Save"
+        End If
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -250,16 +324,16 @@ GenerateRandOmString:
 
     Private Sub btnTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTest.Click
         'AddCustomer()
-        'Console.WriteLine("Saved")
-        'ModifyInfo()
+        ''Console.WriteLine("Saved")
+        ''ModifyInfo()
 
-        Console.WriteLine("In the Collection:")
-        'For Each ph As PhoneNumber In CustomerPhones
-        '    Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
-        'Next
-        For Each id As IdentificationCard In CustomerIDs
-            Console.WriteLine(String.Format("{0} >> {1} - {2}", id.IDType, id.IDNumber, id.isPrimary))
-        Next
+        'Console.WriteLine("In the Collection:")
+        ''For Each ph As PhoneNumber In CustomerPhones
+        ''    Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
+        ''Next
+        ''For Each id As IdentificationCard In CustomerIDs
+        ''    Console.WriteLine(String.Format("{0} >> {1} - {2}", id.IDType, id.IDNumber, id.isPrimary))
+        ''Next
     End Sub
 
     Private Sub ModifyInfo()
@@ -584,4 +658,7 @@ GenerateRandOmString:
 
   
 
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+
+    End Sub
 End Class

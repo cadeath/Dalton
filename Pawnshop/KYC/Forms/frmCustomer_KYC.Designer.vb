@@ -96,6 +96,8 @@ Partial Class frmCustomer_KYC
         Me.ClientImage = New System.Windows.Forms.PictureBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtSuffix = New System.Windows.Forms.TextBox()
+        Me.lblAge = New System.Windows.Forms.Label()
+        Me.btnSelect = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -183,6 +185,7 @@ Partial Class frmCustomer_KYC
         '
         'tpBasic
         '
+        Me.tpBasic.Controls.Add(Me.lblAge)
         Me.tpBasic.Controls.Add(Me.txtPhone)
         Me.tpBasic.Controls.Add(Me.lstPhone)
         Me.tpBasic.Controls.Add(Me.btnSetPri)
@@ -384,7 +387,7 @@ Partial Class frmCustomer_KYC
         '
         'txtNationality
         '
-        Me.txtNationality.Location = New System.Drawing.Point(395, 170)
+        Me.txtNationality.Location = New System.Drawing.Point(465, 170)
         Me.txtNationality.Name = "txtNationality"
         Me.txtNationality.Size = New System.Drawing.Size(208, 22)
         Me.txtNationality.TabIndex = 27
@@ -392,7 +395,7 @@ Partial Class frmCustomer_KYC
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(393, 154)
+        Me.Label19.Location = New System.Drawing.Point(463, 154)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(79, 16)
         Me.Label19.TabIndex = 26
@@ -596,7 +599,7 @@ Partial Class frmCustomer_KYC
         '
         'txtBdayPlace
         '
-        Me.txtBdayPlace.Location = New System.Drawing.Point(131, 170)
+        Me.txtBdayPlace.Location = New System.Drawing.Point(201, 170)
         Me.txtBdayPlace.Name = "txtBdayPlace"
         Me.txtBdayPlace.Size = New System.Drawing.Size(260, 22)
         Me.txtBdayPlace.TabIndex = 3
@@ -604,7 +607,7 @@ Partial Class frmCustomer_KYC
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(130, 154)
+        Me.Label6.Location = New System.Drawing.Point(200, 154)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(68, 16)
         Me.Label6.TabIndex = 2
@@ -816,12 +819,32 @@ Partial Class frmCustomer_KYC
         Me.txtSuffix.TabIndex = 15
         Me.txtSuffix.Text = "Jr"
         '
+        'lblAge
+        '
+        Me.lblAge.AutoSize = True
+        Me.lblAge.Location = New System.Drawing.Point(127, 172)
+        Me.lblAge.Name = "lblAge"
+        Me.lblAge.Size = New System.Drawing.Size(31, 16)
+        Me.lblAge.TabIndex = 42
+        Me.lblAge.Text = "N/A"
+        '
+        'btnSelect
+        '
+        Me.btnSelect.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSelect.Location = New System.Drawing.Point(658, 449)
+        Me.btnSelect.Name = "btnSelect"
+        Me.btnSelect.Size = New System.Drawing.Size(75, 32)
+        Me.btnSelect.TabIndex = 17
+        Me.btnSelect.Text = "&Select"
+        Me.btnSelect.UseVisualStyleBackColor = True
+        '
         'frmCustomer_KYC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(907, 493)
+        Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.txtSuffix)
         Me.Controls.Add(Me.GroupBox1)
@@ -924,5 +947,7 @@ Partial Class frmCustomer_KYC
     Friend WithEvents ClientImage As System.Windows.Forms.PictureBox
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents txtSuffix As System.Windows.Forms.TextBox
+    Friend WithEvents lblAge As System.Windows.Forms.Label
+    Friend WithEvents btnSelect As System.Windows.Forms.Button
 
 End Class

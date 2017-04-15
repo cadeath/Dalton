@@ -10,7 +10,7 @@
     Friend listProvince As List(Of String)
     Friend listZip As List(Of String)
 
-    Friend Const CUSTOMER_TABLE As String = "KYC_C"
+    Friend Const CUSTOMER_TABLE As String = "KYC_CUSTOMERS"
     Friend Const CUSTOMER_ID As String = "KYC_ID"
     Friend Const CUSTOMER_PHONE As String = "KYC_PHONE"
 
@@ -163,7 +163,14 @@
                 .FirstName = clDR.Item("FIRSTNAME")
                 .MiddleName = clDR.Item("MIDDLENAME")
                 .LastName = clDR.Item("LASTNAME")
-                .Suffix = clDR.Item("SUFFIX")
+                If IsDBNull(clDR.Item("SUFFIX")) Then
+                    .Suffix = ""
+                Else
+                    .Suffix = clDR.Item("SUFFIX")
+                End If
+
+
+                '.Suffix = IIf(clDR.Item("SUFFIX") = "", clDR.Item("SUFFIX"), "")
 
                 .PresentStreet = clDR.Item("ADDR_STREET")
                 .PresentBarangay = clDR.Item("ADDR_BRGY")

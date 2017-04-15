@@ -442,6 +442,7 @@ Public Class Customer
 
         If ds.Tables(0).Rows.Count = 0 Then Exit Sub
         With ds.Tables(0).Rows(0)
+            _id = .Item("ID")
             _firstName = .Item("FIRSTNAME")
             _middleName = .Item("MIDNAME")
             _lastName = .Item("LASTNAME")

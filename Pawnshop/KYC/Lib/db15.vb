@@ -80,4 +80,21 @@
 
         Console.WriteLine("Table KYC_ID Created")
     End Sub
+
+
+    Friend Function DreadKnight(ByVal str As String, Optional ByVal special As String = Nothing) As String
+        str = str.Replace("'", "''")
+        str = str.Replace("""", """""")
+
+        If special <> Nothing Then
+            str = str.Replace(special, "")
+        End If
+
+        Return str
+    End Function
+
+
+    Sub populate(ByVal frm As Form)
+
+    End Sub
 End Module
