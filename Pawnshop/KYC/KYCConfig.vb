@@ -149,7 +149,7 @@
     ' AutoMigrate information
     Private Sub MigrateClients_Info()
 
-        diag_loading.ShowDialog()
+        diag_loading.Show()
 
         mysql = "SELECT * FROM " & oldClient & " ORDER BY CLIENTID ASC"
         Dim Clds As DataSet = LoadSQL(mysql, oldClient)

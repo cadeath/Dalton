@@ -55,13 +55,17 @@ Public Class frmCustomer_KYC
         txtNationality.Text = cus.Nationality
 
         'loading Phones
-        For Each itm In cus.CustomersPhone
-            lstPhone.Items.Add(itm)
+        For Each id As IdentificationCard In cus.CustomersIDs
+            If id.isPrimary = True Then lvID.BackColor = Color.Green
+            Dim lv As ListViewItem = lvID.Items.Add(id.IDType)
+            lv.SubItems.Add(id.IDNumber)
         Next
-
         'loading IDS
-        For Each itm In cus.CustomersIDs
-            lvID.Items.Add(itm)
+        For Each itm As PhoneNumber In cus.CustomersPhone
+            If itm.isPrimary = True Then
+                lstPhone.BackColor = Color.Green
+            End If
+            lstPhone.Items.Add(itm.PhoneNumber)
         Next
 
         SelectedCustomer = cus

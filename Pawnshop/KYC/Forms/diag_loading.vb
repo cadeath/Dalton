@@ -2,11 +2,7 @@
 
 Public Class diag_loading
 
-    Private Sub diag_loading_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    Friend Sub Set_Bar(val As Integer)
+    Friend Sub Set_Bar(ByVal val As Integer)
         pbLoading.Maximum = val
     End Sub
 
@@ -29,5 +25,9 @@ Public Class diag_loading
                 pbLoading.Value += 1
             End If
         End If
+    End Sub
+
+    Private Sub diag_loading_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
     End Sub
 End Class
