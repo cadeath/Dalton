@@ -84,6 +84,12 @@
     <Compile Include="Class\Customer.vb" />
     <Compile Include="Class\IdentificationCard.vb" />
     <Compile Include="Class\PhoneNumber.vb" />
+    <Compile Include="Forms\diag_loading.Designer.vb">
+      <DependentUpon>diag_loading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\diag_loading.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Migrate\Migrate_ID.vb" />
     <Compile Include="Migrate\ColMigrate_Phone.vb" />
     <Compile Include="Migrate\MigrateCustomer.vb" />
@@ -125,6 +131,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\diag_loading.resx">
+      <DependentUpon>diag_loading.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrate\frmClientMigrate.resx">
       <DependentUpon>frmClientMigrate.vb</DependentUpon>
     </EmbeddedResource>
