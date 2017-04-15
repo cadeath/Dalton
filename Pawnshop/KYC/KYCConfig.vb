@@ -148,11 +148,16 @@
     ' TODO
     ' AutoMigrate information
     Private Sub MigrateClients_Info()
+
+        diag_loading.ShowDialog()
+
         mysql = "SELECT * FROM " & oldClient & " ORDER BY CLIENTID ASC"
         Dim Clds As DataSet = LoadSQL(mysql, oldClient)
 
         If Clds.Tables(0).Rows.Count = 0 Then Exit Sub
 
+        diag_loading.Set_Bar(Clds.Tables(0).Rows.Count)
+        diag_loading.Reset_Bar()
         Dim kyc As New MigrateCustomer
         For Each clDR As DataRow In Clds.Tables(0).Rows
             CustomerPhones.Clear()
@@ -218,9 +223,11 @@
                 .Save()
 
                 kycCustomerGenerator = clDR.Item("CLIENTID")
+                diag_loading.Add_Bar()
             End With
         Next
 
+        diag_loading.Close()
         IDGerator(kycCustomerGenerator, kycIDCustomerGenerator)
     End Sub
 

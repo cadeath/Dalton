@@ -84,11 +84,18 @@
     <Compile Include="Class\Customer.vb" />
     <Compile Include="Class\IdentificationCard.vb" />
     <Compile Include="Class\PhoneNumber.vb" />
+<<<<<<< HEAD
     <Compile Include="formSwitch.vb" />
     <Compile Include="Forms\frmClientNew.Designer.vb">
       <DependentUpon>frmClientNew.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmClientNew.vb">
+=======
+    <Compile Include="Forms\diag_loading.Designer.vb">
+      <DependentUpon>diag_loading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\diag_loading.vb">
+>>>>>>> origin/KYC
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Migrate\Migrate_ID.vb" />
@@ -132,8 +139,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <EmbeddedResource Include="Forms\frmClientNew.resx">
       <DependentUpon>frmClientNew.vb</DependentUpon>
+=======
+    <EmbeddedResource Include="Forms\diag_loading.resx">
+      <DependentUpon>diag_loading.vb</DependentUpon>
+>>>>>>> origin/KYC
     </EmbeddedResource>
     <EmbeddedResource Include="Migrate\frmClientMigrate.resx">
       <DependentUpon>frmClientMigrate.vb</DependentUpon>
