@@ -146,7 +146,7 @@ Public Class frmClientNew
         frmCustomer_KYC.Show()
         frmCustomer_KYC.LoadClientInForm(tmpCus)
         frmCustomer_KYC.btnSelect.Visible = False
-        Me.Close()
+        ' Me.Close()
     End Sub
     ''' <summary>
     ''' doubleclick specific data in the listview and show thier information in the client form.
