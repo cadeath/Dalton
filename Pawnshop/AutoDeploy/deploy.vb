@@ -11,6 +11,7 @@ Module deploy
     Friend pbDownload As ProgressBar
     Friend lblStatus As Label
 
+    Friend isFinished As Boolean = True
     Private onDownload As Boolean = False
 
     Private Sub backup_Database(Optional isRestore As Boolean = False)
@@ -33,7 +34,7 @@ Module deploy
 
     Friend Sub ReadingConfig(src As String)
         'src = PATH
-
+        isFinished = False
         Try
             Dim m_xmld As XmlDocument
             Dim m_nodelist As XmlNodeList
@@ -53,21 +54,22 @@ Module deploy
                 Case "installer"
                     m_node = m_nodelist.Item(0).ChildNodes(0)
 
-                    'Dim url = m_node.ChildNodes(0).InnerText
-                    'download_File(url)
-
                     For Each url In m_node
-                        While onDownload
-                            Application.DoEvents()
-                        End While
-
                         Dim str As String = "Download " & url.innerText & "..."
                         Console.WriteLine(str)
 
                         displayStatus(str)
                         download_File(url.innerText)
+
+                        ' One download at a time
+                        While onDownload
+                            Application.DoEvents()
+                        End While
                     Next
+
                 Case "patch"
+                    'Redownload the xml
+                    download_File(src)
                     m_node = m_nodelist.Item(0).ChildNodes(0)
 
                     'Dim url = m_node.ChildNodes(0).InnerText
@@ -99,6 +101,7 @@ Module deploy
 
             Console.WriteLine(ex.ToString)
         End Try
+        isFinished = True
     End Sub
 
     Private Sub displayStatus(str As String)
@@ -124,7 +127,7 @@ Module deploy
         Try
             Dim dlFile As New WebClient
 
-            If pbDownload Is Nothing Or lblStatus Is Nothing Then
+            If Not pbDownload Is Nothing Or Not lblStatus Is Nothing Then
                 AddHandler dlFile.DownloadFileCompleted, AddressOf dlFile_DownloadFileCompleted
                 AddHandler dlFile.DownloadProgressChanged, AddressOf dlFile_DownloadProgressChanged
             End If

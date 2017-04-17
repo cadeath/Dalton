@@ -9,9 +9,9 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("AutoDeploy")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("AutoDeploy")> 
+<Assembly: AssemblyDescription("Deployment Manager")> 
+<Assembly: AssemblyCompany("Stealth Assassin")> 
+<Assembly: AssemblyProduct("deploy-mngr")> 
 <Assembly: AssemblyCopyright("Copyright ©  2017")> 
 <Assembly: AssemblyTrademark("")> 
 
