@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dis version="1.0.0.1">
+	<file type="installer">
+		<url>http://localhost/downloads/sample.exe</url>
+		<url>http://localhost/downloads/21.pdf</url>
+	</file>
+</dis>

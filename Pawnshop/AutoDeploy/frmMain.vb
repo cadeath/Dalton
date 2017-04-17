@@ -5,6 +5,11 @@
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-        deploy.ParseXML("sample.xml")
+        Button1.Enabled = False
+        deploy.pbDownload = pbUpdate
+        deploy.lblStatus = Label1
+        deploy.ReadingConfig("http://localhost/installer.xml")
+
+        Button1.Enabled = True
     End Sub
 End Class
