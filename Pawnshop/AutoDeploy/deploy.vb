@@ -67,6 +67,28 @@ Module deploy
                         displayStatus(str)
                         download_File(url.innerText)
                     Next
+                Case "patch"
+                    m_node = m_nodelist.Item(0).ChildNodes(0)
+
+                    'Dim url = m_node.ChildNodes(0).InnerText
+                    'download_File(url)
+
+                    ' TODO
+                    ' Identify if it is for download only or Include Parent DIR
+                    Console.WriteLine(m_node.ChildNodes(0).LocalName)
+
+                    'For Each url In m_node
+                    '    While onDownload
+                    '        Application.DoEvents()
+                    '    End While
+
+
+                    '    Dim str As String = "Download " & url.innerText & "..."
+                    '    Console.WriteLine(str)
+
+                    '    displayStatus(str)
+                    '    'download_File(url.innerText)
+                    'Next
             End Select
 
         Catch ex As Exception
