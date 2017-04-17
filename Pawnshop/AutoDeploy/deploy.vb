@@ -78,26 +78,26 @@ Module deploy
 
                     ' TODO
                     ' Identify if it is for download only or Include Parent DIR
-                    Console.WriteLine(m_node.ChildNodes(3).LocalName)
 
                     For Each url As XmlNode In m_node
                         If url.LocalName.Contains("-dir") Then
                             Dim fileName = url.Attributes.GetNamedItem("src").Value
                             Dim fSrc = url.Attributes.GetNamedItem("src").Value
+                            Dim fDst = url.InnerText
 
                             fileName = fileName.Split("/")(fileName.Split("/").Count - 1)
                             If Not System.IO.File.Exists(TMP & "/" & fileName) Then _
-                                download_File(fSrc, url.InnerText)
+                                download_File(fSrc, TMP & "/" & url.InnerText)
 
                             'Create DIR
-                            Dim splitCnt As Integer = fSrc.Split("/").Count
+                            Dim splitCnt As Integer = fDst.Split("/").Count - 1
                             Dim splitI As Integer = 0
-                            For Each srcDir In fSrc.Split("/")
+                            For Each srcDir In fDst.Split("/")
                                 If Not System.IO.Directory.Exists(srcDir) And splitI <> splitCnt Then _
                                     System.IO.Directory.CreateDirectory(srcDir)
 
                                 If splitI = splitCnt Then
-
+                                    System.IO.File.Move(TMP & "/" & url.InnerText, fDst)
                                 End If
                                 splitI += 1
                             Next
