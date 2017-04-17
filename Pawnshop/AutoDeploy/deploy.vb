@@ -32,44 +32,56 @@ Module deploy
     End Function
 
     Friend Sub ReadingConfig(src As String)
-        src = PATH
+        'src = PATH
 
-        'Try
-        Dim m_xmld As XmlDocument
-        Dim m_nodelist As XmlNodeList
-        Dim m_node As XmlNode
+        Try
+            Dim m_xmld As XmlDocument
+            Dim m_nodelist As XmlNodeList
+            Dim m_node As XmlNode
 
-        m_xmld = New XmlDocument
-        m_xmld.Load(src)
-        m_nodelist = m_xmld.SelectNodes("/dis")
+            m_xmld = New XmlDocument
+            m_xmld.Load(src)
+            m_nodelist = m_xmld.SelectNodes("/dis")
 
-        Dim m_version = m_nodelist.Item(0).Attributes.GetNamedItem("version").Value
-        Dim m_type = m_nodelist.Item(0).ChildNodes.Item(0).Attributes.GetNamedItem("type").Value
+            Dim m_version = m_nodelist.Item(0).Attributes.GetNamedItem("version").Value
+            Dim m_type = m_nodelist.Item(0).ChildNodes.Item(0).Attributes.GetNamedItem("type").Value
 
-        Console.WriteLine("Version: " & m_version)
-        Console.WriteLine("Type: " & m_type)
+            Console.WriteLine("Version: " & m_version)
+            Console.WriteLine("Type: " & m_type)
 
-        Select Case m_type
-            Case "installer"
-                m_node = m_nodelist.Item(0).ChildNodes(0)
-                For Each url In m_node
-                    While onDownload
-                        Application.DoEvents()
-                    End While
+            Select Case m_type
+                Case "installer"
+                    m_node = m_nodelist.Item(0).ChildNodes(0)
 
-                    Dim str As String = "Download " & url.innerText & "..."
-                    Console.WriteLine(str)
+                    'Dim url = m_node.ChildNodes(0).InnerText
+                    'download_File(url)
 
-                    ' TODO
-                    ' Download the URL installed
-                    lblStatus.Text = str
-                    download_File(url.innerText)
-                Next
-        End Select
+                    For Each url In m_node
+                        While onDownload
+                            Application.DoEvents()
+                        End While
 
-        'Catch ex As Exception
-        '    Console.WriteLine(ex.ToString)
-        'End Try
+                        Dim str As String = "Download " & url.innerText & "..."
+                        Console.WriteLine(str)
+
+                        displayStatus(str)
+                        download_File(url.innerText)
+                    Next
+            End Select
+
+        Catch ex As Exception
+            If ex.ToString.Contains("No connection could be made because the target machine actively refused") Then
+                Console.WriteLine("Unable to connect to the remote server")
+                Exit Sub
+            End If
+
+            Console.WriteLine(ex.ToString)
+        End Try
+    End Sub
+
+    Private Sub displayStatus(str As String)
+        If lblStatus Is Nothing Then Exit Sub
+        lblStatus.Text = str
     End Sub
 
     Private Sub download_File(src As String, Optional dst As String = "")
@@ -89,17 +101,23 @@ Module deploy
         onDownload = True
         Try
             Dim dlFile As New WebClient
-            AddHandler dlFile.DownloadProgressChanged, AddressOf dlFile_DownloadProgressChanged
-            AddHandler dlFile.DownloadFileCompleted, AddressOf dlFile_DownloadFileCompleted
+
+            If pbDownload Is Nothing Or lblStatus Is Nothing Then
+                AddHandler dlFile.DownloadFileCompleted, AddressOf dlFile_DownloadFileCompleted
+                AddHandler dlFile.DownloadProgressChanged, AddressOf dlFile_DownloadProgressChanged
+            End If
+
             dlFile.DownloadFileAsync(New Uri(src), dst)
 
-            lblStatus.Text = "Downloading " & src.Split("/")(src.Split("/").Count - 1) & "..."
+            displayStatus("Downloading " & src.Split("/")(src.Split("/").Count - 1) & "...")
         Catch ex As Exception
             onDownload = False
         End Try
     End Sub
 
     Private Sub dlFile_DownloadProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs)
+        If pbDownload Is Nothing Then Exit Sub
+
         Dim bytesIn As Double = Double.Parse(e.BytesReceived.ToString)
         Dim totalBytes As Double = Double.Parse(e.TotalBytesToReceive.ToString)
         Dim percentage As Double = bytesIn / totalBytes * 100
@@ -107,9 +125,15 @@ Module deploy
         pbDownload.Value = CInt(Math.Truncate(percentage).ToString)
     End Sub
 
-    Private Sub dlFile_DownloadFileCompleted(sender As Object, e As DownloadDataCompletedEventArgs)
+    Private Sub dlFile_DownloadFileCompleted(sender As Object, e As ComponentModel.AsyncCompletedEventArgs)
         onDownload = False
-        lblStatus.Text = "Download Completed."
-        Console.WriteLine("Download Completed.")
+        
+        If e.Error Is Nothing Then
+            displayStatus("Download Completed.")
+            Console.WriteLine("Download Completed.")
+        Else
+            ' TODO
+            ' Log Report to record possible errors
+        End If
     End Sub
 End Module
