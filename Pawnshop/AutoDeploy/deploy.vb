@@ -97,7 +97,7 @@ Module deploy
                                     System.IO.Directory.CreateDirectory(srcDir)
 
                                 If splitI = splitCnt Then
-                                    System.IO.File.Move(TMP & "/" & url.InnerText, fDst)
+                                    System.IO.File.Move(TMP & "/" & fileName, fDst)
                                 End If
                                 splitI += 1
                             Next
