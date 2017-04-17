@@ -13,24 +13,23 @@ Public Class frmCustomer_KYC
     Private SRC As String = Application.StartupPath & "\ClientImage"
     Dim FlName As String = "", Ext As String = ".EAM"
 
-    Private lockForm As Boolean = False
+    Private lockForm As Boolean = False, IDX As Integer
     Friend FormOrigin As Form
     Friend SelectedCustomer As Customer 'Holds Customer
+    Friend isNew As Boolean = True
+    Private notNewPic As Boolean = True
 
     Private Sub frmCustomer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CACHE_MANAGEMENT()
         ClearFields()
 
-        'Populate()
+        ' Populate()
     End Sub
 
     Friend Sub LoadClientInForm(ByVal cus As Customer)
         If cus.FirstName = "" Then Exit Sub
 
-        ' Display select buttons
-        'btnIDSelect.Visible = True
-        'btnSelect.Visible = True
-
+        IDX = cus.CustomerID
         txtFName.Text = cus.FirstName
         txtMName.Text = cus.MiddleName
         txtLName.Text = cus.LastName
@@ -53,25 +52,56 @@ Public Class frmCustomer_KYC
         dtpBday.Value = IIf(cus.Birthday.Date > dtpBday.MinDate, cus.Birthday.Date, dtpBday.MinDate)
         txtBdayPlace.Text = cus.BirthPlace
         txtNationality.Text = cus.Nationality
+        txtWork.Text = cus.NatureOfWork
+        txtSrcFund.Text = cus.SourceOfFund
+
 
         'loading Phones
+
+        Dim CUSIDNFTN As New IdentificationCard
+
         For Each id As IdentificationCard In cus.CustomersIDs
-            If id.isPrimary = True Then lvID.BackColor = Color.Green
             Dim lv As ListViewItem = lvID.Items.Add(id.IDType)
             lv.SubItems.Add(id.IDNumber)
-        Next
-        'loading IDS
-        For Each itm As PhoneNumber In cus.CustomersPhone
-            If itm.isPrimary = True Then
-                lstPhone.BackColor = Color.Green
+
+            CUSIDNFTN.ID = id.ID
+            CUSIDNFTN.CustomerID = id.CustomerID
+            CUSIDNFTN.IDType = id.IDType
+            CUSIDNFTN.IDNumber = id.IDNumber
+            CUSIDNFTN.isPrimary = IIf(id.isPrimary > 0, True, False)
+            CustomerIDs.Add(CUSIDNFTN)
+
+
+            MsgBox(CustomerIDs.Count)
+            If id.isPrimary = True Then
+                lv.BackColor = Color.Green
+            Else
+                Add_ID(id.IDType, id.IDNumber)
             End If
-            lstPhone.Items.Add(itm.PhoneNumber)
+
         Next
+
+
+        'loading IDS
+
+        Dim CUSPHONE As New PhoneNumber
+        For Each itm As PhoneNumber In cus.CustomersPhone
+            lstPhone.Items.Add(itm.PhoneNumber)
+            CUSPHONE.PhoneID = itm.PhoneID
+            CUSPHONE.CustomerID = itm.CustomerID
+            CUSPHONE.PhoneNumber = itm.PhoneNumber
+            CUSPHONE.isPrimary = IIf(itm.isPrimary > 0, True, False)
+            CustomerPhones.Add(CUSPHONE)
+
+        Next
+
+        ClientImage.Image = cus.CPUREIMAGE
+        FlName = cus.CImage.Substring(0, cus.CImage.IndexOf("|"c))
 
         SelectedCustomer = cus
 
         ComputeBirthday()
-        LockFields(True)
+        LockFields(False)
     End Sub
 
     Friend Sub ComputeBirthday()
@@ -90,8 +120,9 @@ Public Class frmCustomer_KYC
 
         'tbID
         TabControl1.Enabled = st
+        grpCusPic.Enabled = st
 
-        If st Then
+        If Not st Then
             btnSave.Text = "&Modify"
         Else
             btnSave.Text = "&Save"
@@ -159,6 +190,19 @@ Public Class frmCustomer_KYC
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If btnSave.Text = "&Modify" Then
+            LockFields(True)
+            isNew = False : Exit Sub
+        End If
+
+        If isNew Then
+            SaveCustomer() : Exit Sub
+        End If
+
+        UpdateCustomer()
+    End Sub
+
+    Private Sub SaveCustomer()
         If Not FormVerification() Then Exit Sub
 
         If Not Directory.Exists(SRC) Then
@@ -169,6 +213,7 @@ GenerateRandOmString:
         FlName = FileName()
 
         Dim NewCustomer As New Customer
+
         With NewCustomer
             .FirstName = txtFName.Text
             .MiddleName = txtMName.Text
@@ -202,12 +247,12 @@ GenerateRandOmString:
                 .Rank = Customer.RankNumber.High
 
 
-            If Not .FindImgIfExists(SRC & "\" & FlName & Ext) Then
+            If Not .FindRanStrIfExists(SRC & "\" & FlName & Ext) Then
                 GoTo GenerateRandOmString
             End If
 
-            ClientImage.Image.Save(SRC & "\" & FlName & Ext)
-            .CImage = FlName & Ext & "|" & GetFileMD5(SRC & "\" & FlName & Ext)
+            ClientImage.Image.Save(String.Format("{0}{1}{2}{3}", SRC, "\", FlName, Ext))
+            .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
 
             AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
 
@@ -221,6 +266,80 @@ GenerateRandOmString:
         ClearFields()
     End Sub
 
+    Private Sub UpdateCustomer()
+        If Not FormVerification() Then Exit Sub
+
+        If Not Directory.Exists(SRC) Then
+            Directory.CreateDirectory(SRC)
+        End If
+
+        Dim NewCustomer As New Customer
+
+        With NewCustomer
+            .CustomerID = IDX
+            .FirstName = txtFName.Text
+            .MiddleName = txtMName.Text
+            .LastName = txtLName.Text
+            .Suffix = txtSuffix.Text
+
+            .PresentStreet = txtSt1.Text
+            .PresentBarangay = cboBrgy1.Text
+            .PresentCity = cboCity1.Text
+            .PresentProvince = cboProv1.Text
+            .PresentZipCode = cboZip1.Text
+
+            .PermanentStreet = txtSt2.Text
+            .PermanentBarangay = cboBrgy2.Text
+            .PermanentCity = cboCity2.Text
+            .PermanentProvince = cboProv2.Text
+            .PermanentZipCode = cboZip2.Text
+
+            .Birthday = dtpBday.Value
+            .BirthPlace = txtBdayPlace.Text
+            .Nationality = txtNationality.Text
+            .NatureOfWork = txtWork.Text
+            .SourceOfFund = txtSrcFund.Text
+
+            .Sex = IIf(cboGender.Text = "Male", 1, 0)
+            If rbLow.Checked Then _
+                .Rank = Customer.RankNumber.Low
+            If rbNormal.Checked Then _
+                .Rank = Customer.RankNumber.Medium
+            If rbHigh.Checked Then _
+                .Rank = Customer.RankNumber.High
+
+FLNME:
+            If Not notNewPic Then
+                If Not NewCustomer.FindRanStrIfExists(SRC & "\" & FlName) Then
+                    FlName = FileName() : GoTo FLNME
+                End If
+            End If
+
+            If Not notNewPic Then
+                ClientImage.Image.Save(String.Format("{0}{1}{2}{3}", SRC, "\", FlName, Ext))
+            End If
+
+
+            If Not notNewPic Then
+                .CImage = String.Format("{0}{1}{2}{3}", FlName, Ext, "|", GetFileMD5(SRC & "\" & FlName & Ext))
+            Else
+                .CImage = String.Format("{0}{1}{2}", FlName, "|", GetFileMD5(SRC & "\" & FlName))
+            End If
+
+
+            AutoSetPrimary_Phone() 'If no PRIMARY for PHONE
+
+            .CustomersPhone = CustomerPhones
+            .CustomersIDs = CustomerIDs
+            MsgBox(CustomerIDs.Count)
+            .Save()
+
+        End With
+
+        MsgBox("Successfully updated.", MsgBoxStyle.Information, "Update")
+
+        ClearFields()
+    End Sub
     ''' <summary>
     ''' This method will separate the phone number.
     ''' </summary>
@@ -316,10 +435,15 @@ GenerateRandOmString:
     Private Sub btnPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPlus.Click
         If txtPhone.Text = "" Then Exit Sub
 
-        Add_Phone(txtPhone.Text)
+        Add_Phone(CLEANPHNO(txtPhone.Text))
         lstPhone.Items.Add(txtPhone.Text)
         txtPhone.Text = ""
     End Sub
+
+    Private Function CLEANPHNO(ByVal PHONE As String) As String
+        Dim PHNO As String = PHONE.Replace("-", "")
+        Return PHNO
+    End Function
 
     Private Sub btnNega_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNega.Click
         lstPhone.Items.Remove(lstPhone.SelectedItem)
@@ -327,17 +451,17 @@ GenerateRandOmString:
     End Sub
 
     Private Sub btnTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTest.Click
-        'AddCustomer()
+        ' AddCustomer()
         ''Console.WriteLine("Saved")
-        ''ModifyInfo()
+        ModifyInfo()
 
         'Console.WriteLine("In the Collection:")
-        ''For Each ph As PhoneNumber In CustomerPhones
-        ''    Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
-        ''Next
-        ''For Each id As IdentificationCard In CustomerIDs
-        ''    Console.WriteLine(String.Format("{0} >> {1} - {2}", id.IDType, id.IDNumber, id.isPrimary))
-        ''Next
+        'For Each ph As PhoneNumber In CustomerPhones
+        '    Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
+        'Next
+        'For Each id As IdentificationCard In CustomerIDs
+        '    Console.WriteLine(String.Format("{0} >> {1} - {2}", id.IDType, id.IDNumber, id.isPrimary))
+        'Next
     End Sub
 
     Private Sub ModifyInfo()
@@ -640,8 +764,8 @@ GenerateRandOmString:
             End If
             btnCamera.Text = "Open Camera"
 
+            notNewPic = False : FlName = FileName()
             Call ClosePreviewWindow()
-
         End If
     End Sub
 
@@ -662,7 +786,8 @@ GenerateRandOmString:
 
   
 
-    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
+    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
+
 End Class

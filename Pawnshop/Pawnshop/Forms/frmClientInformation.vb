@@ -539,4 +539,5 @@ Public Class frmClientInformation
         frmClient.Enabled = True
     End Sub
 
+   
 End Class

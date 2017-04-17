@@ -20,7 +20,7 @@ Public Class frmClientNew
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
+        ' Me.TopMost = True
         'web_ads.AdsDisplay = webAds
         'web_ads.Ads_Initialization()
 
@@ -49,8 +49,13 @@ Public Class frmClientNew
         Dim lv As ListViewItem = lvClient.Items.Add(cus.CustomerID)
         lv.SubItems.Add(String.Format("{0}, {1} {2}", cus.LastName, cus.FirstName, cus.MiddleName))
         lv.SubItems.Add(String.Format("{0} {1} {2}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity))
-        lv.SubItems.Add(String.Format("{0} {1} {2}", cus.PermanentStreet, cus.PermanentBarangay, cus.PermanentCity))
-        'lv.SubItems.Add(cus.Cellphone)
+
+        For Each Ph As PhoneNumber In cus.CustomersPhone
+            If Ph.isPrimary = True Then
+                lv.SubItems.Add(Ph.PhoneNumber)
+            End If
+        Next
+
         lv.ImageKey = "imgMale"
         If cus.Sex = 0 Then
             lv.ImageKey = "imgFemale"
@@ -143,10 +148,9 @@ Public Class frmClientNew
         Dim tmpCus As New Customer
         tmpCus.Load_CustomerByID(cusID)
 
+
         frmCustomer_KYC.Show()
         frmCustomer_KYC.LoadClientInForm(tmpCus)
-        frmCustomer_KYC.btnSelect.Visible = False
-        ' Me.Close()
     End Sub
     ''' <summary>
     ''' doubleclick specific data in the listview and show thier information in the client form.
@@ -181,7 +185,7 @@ Public Class frmClientNew
     ''' <remarks></remarks>
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         If txtSearch.Text.Length <= 3 Then
-            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Client Search")
+            MsgBox("3 Characters Below Not Allowed.", MsgBoxStyle.Exclamation, "Customer Search")
         Else
 
             Dim secured_str As String = txtSearch.Text
@@ -190,18 +194,18 @@ Public Class frmClientNew
             Dim name As String
 
             Dim src As String = secured_str
-            Dim mySql As String = "SELECT * FROM VIEW_CLIENT " & vbCrLf
+            Dim mySql As String = "SELECT * FROM CUSTOMER_VIEW " & vbCrLf
             mySql &= " WHERE "
-            mySql &= String.Format("UPPER(Addr_Brgy) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-            mySql &= String.Format("UPPER(Addr_City) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-            mySql &= String.Format("Phone1 LIKE '%{0}%' OR " & vbCrLf, src)
-            mySql &= String.Format("Phone2 LIKE '%{0}%' OR " & vbCrLf, src)
-            mySql &= String.Format("Phone_Others LIKE '%{0}%' OR" & vbCrLf, src)
+            mySql &= String.Format("UPPER(BRGY1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+            mySql &= String.Format("UPPER(CITY1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+            mySql &= String.Format("PHONENUMBER LIKE '%{0}%' OR " & vbCrLf, src)
+            mySql &= String.Format("UPPER(BRGY2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
+            mySql &= String.Format("UPPER(CITY2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
             For Each name In strWords
-                mySql &= vbCr & " UPPER(LastName ||' '|| FirstName ||' '|| MiddleName) LIKE UPPER('%" & name & "%') and "
-                mySql &= vbCr & "UPPER(FirstName ||' '|| MiddleName ||' '|| LastName) LIKE UPPER('%" & name & "%') and "
+                mySql &= vbCr & " UPPER(LastName ||' '|| FirstName ||' '|| MIDNAME) LIKE UPPER('%" & name & "%') and "
+                mySql &= vbCr & "UPPER(FirstName ||' '|| MIDNAME ||' '|| LastName) LIKE UPPER('%" & name & "%') and "
                 If name Is strWords.Last Then
-                    mySql &= vbCr & " UPPER(FirstName ||' '|| LastName ||' '|| MiddleName) LIKE UPPER('%" & name & "%') "
+                    mySql &= vbCr & " UPPER(FirstName ||' '|| LastName ||' '|| MIDNAME) LIKE UPPER('%" & name & "%') "
                     Exit For
                 End If
             Next
@@ -217,13 +221,13 @@ Public Class frmClientNew
             End If
 
             lvClient.Items.Clear()
-            'For Each clientRow As DataRow In ds.Tables(0).Rows
-            '    Dim tmpCustomer As New Customer
-            '    tmpCustomer.LoadClientByRow(clientRow)
-            '    AddItem(tmpClient)
-            'Next
+            For Each CustomerRow As DataRow In ds.Tables(0).Rows
+                Dim tmpCustomer As New Customer
+                tmpCustomer.Load_CustomerByID(CustomerRow.Item(0))
+                AddItem(tmpCustomer)
+            Next
 
-            MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Client")
+            MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Customer")
             lvClient.Items(0).Focused = True
         End If
     End Sub

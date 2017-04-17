@@ -366,7 +366,13 @@ Public Class Customer
         If _custIDs.Count <= 0 Then Exit Sub
 
         Dim lastCustomerID As Integer = 0
-        mySql = "SELECT * FROM " & CUSTOMER_TABLE & " ORDER BY ID DESC ROWS 1"
+
+        If _id = 0 Then
+            mySql = "SELECT * FROM " & CUSTOMER_TABLE & " ORDER BY ID DESC ROWS 1"
+        Else
+            mySql = "SELECT * FROM " & CUSTOMER_TABLE & " WHERE ID = " & _id
+        End If
+
         ds.Clear()
         ds = LoadSQL(mySql, CUSTOMER_TABLE)
         lastCustomerID = ds.Tables(CUSTOMER_TABLE).Rows(0).Item("ID")
@@ -446,7 +452,7 @@ Public Class Customer
             _firstName = .Item("FIRSTNAME")
             _middleName = .Item("MIDNAME")
             _lastName = .Item("LASTNAME")
-            _suffix = .Item("Suffix")
+            _suffix = IIf(IsDBNull(.Item("Suffix")), "", .Item("Suffix"))
             _addrStreet1 = .Item("STREET1")
             _addrBrgy1 = .Item("BRGY1")
             _addrCity1 = .Item("CITY1")
@@ -465,8 +471,9 @@ Public Class Customer
             _sex = IIf(.Item("GENDER") = "M", 1, 0)
             _sourceOfFund = .Item("SRCFUND")
             _rank = .Item("RANK")
-            _CImage = .Item("CLIENT_IMG")
+            _CImage = IIf(IsDBNull(.Item("CLIENT_IMG")), "", .Item("CLIENT_IMG"))
 
+            If _CImage = "" Then GoTo NEXTLINE
 
             indexof = SRC & "\" & _CImage.Substring(0, _CImage.IndexOf("|"c))
             lastindexof = _CImage.Substring(_CImage.LastIndexOf("|"c)).Trim("|")
@@ -485,6 +492,7 @@ Public Class Customer
             End If
 
         End With
+NEXTLINE:
 
         ' Loading Collections
         mySql = "SELECT * FROM " & CUSTOMER_PHONE & " WHERE CUSTID = " & _id
@@ -519,6 +527,7 @@ Public Class Customer
         Console.WriteLine(String.Format("CustomerID: {0} is loaded.", id))
     End Sub
 
+
     Public Function FindCustomerByName(ByVal str As String) As DataSet
         Dim ds As DataSet
         Dim mySql As String = "SELECT * FROM " & CUSTOMER_TABLE
@@ -532,7 +541,7 @@ Public Class Customer
         Return ds
     End Function
 
-    Friend Function FindImgIfExists(ByVal randstr As String) As Boolean
+    Friend Function FindRanStrIfExists(ByVal randstr As String) As Boolean
 
         For Each LogFile In Directory.GetFiles(SRC)
             If LogFile = randstr Then

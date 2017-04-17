@@ -33,6 +33,7 @@ Partial Class frmCustomer_KYC
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tpBasic = New System.Windows.Forms.TabPage()
+        Me.lblAge = New System.Windows.Forms.Label()
         Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.lstPhone = New System.Windows.Forms.ListBox()
         Me.btnSetPri = New System.Windows.Forms.Button()
@@ -92,16 +93,14 @@ Partial Class frmCustomer_KYC
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnTest = New System.Windows.Forms.Button()
         Me.btnCamera = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpCusPic = New System.Windows.Forms.GroupBox()
         Me.ClientImage = New System.Windows.Forms.PictureBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtSuffix = New System.Windows.Forms.TextBox()
-        Me.lblAge = New System.Windows.Forms.Label()
-        Me.btnSelect = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpCusPic.SuspendLayout()
         CType(Me.ClientImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -237,6 +236,15 @@ Partial Class frmCustomer_KYC
         Me.tpBasic.TabIndex = 0
         Me.tpBasic.Text = "Basic Information"
         Me.tpBasic.UseVisualStyleBackColor = True
+        '
+        'lblAge
+        '
+        Me.lblAge.AutoSize = True
+        Me.lblAge.Location = New System.Drawing.Point(127, 172)
+        Me.lblAge.Name = "lblAge"
+        Me.lblAge.Size = New System.Drawing.Size(31, 16)
+        Me.lblAge.TabIndex = 42
+        Me.lblAge.Text = "N/A"
         '
         'txtPhone
         '
@@ -778,16 +786,16 @@ Partial Class frmCustomer_KYC
         Me.btnCamera.Text = "Open Camera"
         Me.btnCamera.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'grpCusPic
         '
-        Me.GroupBox1.Controls.Add(Me.ClientImage)
-        Me.GroupBox1.Controls.Add(Me.btnCamera)
-        Me.GroupBox1.Location = New System.Drawing.Point(724, 98)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(171, 201)
-        Me.GroupBox1.TabIndex = 14
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Customer Picture"
+        Me.grpCusPic.Controls.Add(Me.ClientImage)
+        Me.grpCusPic.Controls.Add(Me.btnCamera)
+        Me.grpCusPic.Location = New System.Drawing.Point(724, 98)
+        Me.grpCusPic.Name = "grpCusPic"
+        Me.grpCusPic.Size = New System.Drawing.Size(171, 201)
+        Me.grpCusPic.TabIndex = 14
+        Me.grpCusPic.TabStop = False
+        Me.grpCusPic.Text = "Customer Picture"
         '
         'ClientImage
         '
@@ -819,35 +827,15 @@ Partial Class frmCustomer_KYC
         Me.txtSuffix.TabIndex = 15
         Me.txtSuffix.Text = "Jr"
         '
-        'lblAge
-        '
-        Me.lblAge.AutoSize = True
-        Me.lblAge.Location = New System.Drawing.Point(127, 172)
-        Me.lblAge.Name = "lblAge"
-        Me.lblAge.Size = New System.Drawing.Size(31, 16)
-        Me.lblAge.TabIndex = 42
-        Me.lblAge.Text = "N/A"
-        '
-        'btnSelect
-        '
-        Me.btnSelect.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSelect.Location = New System.Drawing.Point(658, 449)
-        Me.btnSelect.Name = "btnSelect"
-        Me.btnSelect.Size = New System.Drawing.Size(75, 32)
-        Me.btnSelect.TabIndex = 17
-        Me.btnSelect.Text = "&Select"
-        Me.btnSelect.UseVisualStyleBackColor = True
-        '
         'frmCustomer_KYC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(907, 493)
-        Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.txtSuffix)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.grpCusPic)
         Me.Controls.Add(Me.btnTest)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
@@ -869,7 +857,7 @@ Partial Class frmCustomer_KYC
         Me.tpBasic.PerformLayout()
         Me.tpID.ResumeLayout(False)
         Me.tpID.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
+        Me.grpCusPic.ResumeLayout(False)
         CType(Me.ClientImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -943,11 +931,10 @@ Partial Class frmCustomer_KYC
     Friend WithEvents txtPhone As System.Windows.Forms.TextBox
     Friend WithEvents lstPhone As System.Windows.Forms.ListBox
     Friend WithEvents btnCamera As System.Windows.Forms.Button
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents grpCusPic As System.Windows.Forms.GroupBox
     Friend WithEvents ClientImage As System.Windows.Forms.PictureBox
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents txtSuffix As System.Windows.Forms.TextBox
     Friend WithEvents lblAge As System.Windows.Forms.Label
-    Friend WithEvents btnSelect As System.Windows.Forms.Button
 
 End Class
