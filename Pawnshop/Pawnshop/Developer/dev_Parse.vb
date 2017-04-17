@@ -9,7 +9,10 @@ Public Class dev_Parse
     Private mc As System.Text.RegularExpressions.MatchCollection
 
     Private Sub btnParse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnParse.Click
-        Parser(txtParse.Text)
+        ' Parser(txtParse.Text)
+        For Each Str As String In Parser(txtParse.Text)
+            Console.WriteLine("Parsed String " & Str)
+        Next
     End Sub
 
     Private Function Parser(ByVal StrText As String) As ArrayList

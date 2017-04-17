@@ -167,6 +167,12 @@
     <Compile Include="frmMainFixer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Mal\frmFixMal.Designer.vb">
+      <DependentUpon>frmFixMal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Mal\frmFixMal.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Migrate\frmLoading.Designer.vb">
       <DependentUpon>frmLoading.vb</DependentUpon>
     </Compile>
@@ -266,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainFixer.resx">
       <DependentUpon>frmMainFixer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mal\frmFixMal.resx">
+      <DependentUpon>frmFixMal.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrate\frmLoading.resx">
       <DependentUpon>frmLoading.vb</DependentUpon>
