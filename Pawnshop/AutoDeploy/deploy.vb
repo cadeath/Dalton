@@ -36,6 +36,7 @@ Module deploy
         'src = PATH
         isFinished = False
         Try
+            Dim str As String = ""
             Dim m_xmld As XmlDocument
             Dim m_nodelist As XmlNodeList
             Dim m_node As XmlNode
@@ -55,7 +56,7 @@ Module deploy
                     m_node = m_nodelist.Item(0).ChildNodes(0)
 
                     For Each url In m_node
-                        Dim str As String = "Download " & url.innerText & "..."
+                        str = "Download " & url.innerText & "..."
                         Console.WriteLine(str)
 
                         displayStatus(str)
@@ -77,7 +78,40 @@ Module deploy
 
                     ' TODO
                     ' Identify if it is for download only or Include Parent DIR
-                    Console.WriteLine(m_node.ChildNodes(0).LocalName)
+                    Console.WriteLine(m_node.ChildNodes(3).LocalName)
+
+                    For Each url As XmlNode In m_node
+                        If url.LocalName.Contains("-dir") Then
+                            Dim fileName = url.Attributes.GetNamedItem("src").Value
+                            Dim fSrc = url.Attributes.GetNamedItem("src").Value
+
+                            fileName = fileName.Split("/")(fileName.Split("/").Count - 1)
+                            If Not System.IO.File.Exists(TMP & "/" & fileName) Then _
+                                download_File(fSrc, url.InnerText)
+
+                            'Create DIR
+                            Dim splitCnt As Integer = fSrc.Split("/").Count
+                            Dim splitI As Integer = 0
+                            For Each srcDir In fSrc.Split("/")
+                                If Not System.IO.Directory.Exists(srcDir) And splitI <> splitCnt Then _
+                                    System.IO.Directory.CreateDirectory(srcDir)
+
+                                If splitI = splitCnt Then
+
+                                End If
+                                splitI += 1
+                            Next
+                        Else
+                            str = "Download " & url.InnerText & "..."
+                            displayStatus(str)
+                            download_File(url.InnerText)
+                        End If
+
+                        ' One download at a time
+                        While onDownload
+                            Application.DoEvents()
+                        End While
+                    Next
 
                     'For Each url In m_node
                     '    While onDownload
