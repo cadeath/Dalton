@@ -23,19 +23,22 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnStart = New System.Windows.Forms.Button()
         Me.pbUpdate = New System.Windows.Forms.ProgressBar()
         Me.lblUpdate = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'Button1
+        'btnStart
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 389)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(78, 44)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnStart.BackColor = System.Drawing.Color.Tomato
+        Me.btnStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnStart.ForeColor = System.Drawing.Color.White
+        Me.btnStart.Location = New System.Drawing.Point(12, 389)
+        Me.btnStart.Name = "btnStart"
+        Me.btnStart.Size = New System.Drawing.Size(78, 44)
+        Me.btnStart.TabIndex = 0
+        Me.btnStart.Text = "&START"
+        Me.btnStart.UseVisualStyleBackColor = False
         '
         'pbUpdate
         '
@@ -63,7 +66,7 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(799, 460)
         Me.Controls.Add(Me.lblUpdate)
         Me.Controls.Add(Me.pbUpdate)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnStart)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -73,7 +76,7 @@ Partial Class frmMain
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnStart As System.Windows.Forms.Button
     Friend WithEvents pbUpdate As System.Windows.Forms.ProgressBar
     Friend WithEvents lblUpdate As System.Windows.Forms.Label
 

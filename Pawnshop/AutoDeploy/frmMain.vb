@@ -1,7 +1,7 @@
 ﻿Public Class frmMain
 
-    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-        Button1.Enabled = False
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles btnStart.Click
+        btnStart.Enabled = False
         deploy.pbDownload = pbUpdate
         deploy.lblStatus = lblUpdate
         'deploy.ReadingConfig("http://localhost/installer.xml")
@@ -12,6 +12,6 @@
             Application.DoEvents()
         End While
 
-        Button1.Enabled = True
+        btnStart.Enabled = True
     End Sub
 End Class
