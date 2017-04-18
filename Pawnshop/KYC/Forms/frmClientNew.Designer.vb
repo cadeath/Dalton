@@ -28,7 +28,7 @@ Partial Class frmClientNew
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.lvClient = New System.Windows.Forms.ListView()
+        Me.lvCustomer = New System.Windows.Forms.ListView()
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -86,23 +86,23 @@ Partial Class frmClientNew
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "What are you looking for?"
         '
-        'lvClient
+        'lvCustomer
         '
-        Me.lvClient.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.lvCustomer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lvClient.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
-        Me.lvClient.FullRowSelect = True
-        Me.lvClient.GridLines = True
-        Me.lvClient.LargeImageList = Me.imgClient
-        Me.lvClient.Location = New System.Drawing.Point(13, 86)
-        Me.lvClient.MultiSelect = False
-        Me.lvClient.Name = "lvClient"
-        Me.lvClient.Size = New System.Drawing.Size(739, 245)
-        Me.lvClient.SmallImageList = Me.imgClient
-        Me.lvClient.TabIndex = 1
-        Me.lvClient.UseCompatibleStateImageBehavior = False
-        Me.lvClient.View = System.Windows.Forms.View.Details
+        Me.lvCustomer.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
+        Me.lvCustomer.FullRowSelect = True
+        Me.lvCustomer.GridLines = True
+        Me.lvCustomer.LargeImageList = Me.imgClient
+        Me.lvCustomer.Location = New System.Drawing.Point(13, 86)
+        Me.lvCustomer.MultiSelect = False
+        Me.lvCustomer.Name = "lvCustomer"
+        Me.lvCustomer.Size = New System.Drawing.Size(739, 245)
+        Me.lvCustomer.SmallImageList = Me.imgClient
+        Me.lvCustomer.TabIndex = 1
+        Me.lvCustomer.UseCompatibleStateImageBehavior = False
+        Me.lvCustomer.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader4
         '
@@ -192,7 +192,7 @@ Partial Class frmClientNew
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.btnView)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.lvClient)
+        Me.Controls.Add(Me.lvCustomer)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.webAds)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -208,7 +208,7 @@ Partial Class frmClientNew
     Friend WithEvents txtSearch As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnSearch As System.Windows.Forms.Button
-    Friend WithEvents lvClient As System.Windows.Forms.ListView
+    Friend WithEvents lvCustomer As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader

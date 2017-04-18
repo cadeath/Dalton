@@ -23,7 +23,8 @@ Public Class frmCustomer_KYC
         CACHE_MANAGEMENT()
         ClearFields()
 
-        ' Populate()
+        'ELLIEPOPULATEINFO()
+        'Populate()
     End Sub
 
     Friend Sub LoadClientInForm(ByVal cus As Customer)
@@ -55,48 +56,47 @@ Public Class frmCustomer_KYC
         txtWork.Text = cus.NatureOfWork
         txtSrcFund.Text = cus.SourceOfFund
 
+        'loading IDS
 
-        'loading Phones
+        For Each CUSIDNFTN In cus.CustomersIDs
+            Dim ids As New IdentificationCard
+            Dim lv As ListViewItem = lvID.Items.Add(CUSIDNFTN.IDType)
+            lv.SubItems.Add(CUSIDNFTN.IDNumber)
 
-        Dim CUSIDNFTN As New IdentificationCard
+            ids.ID = CUSIDNFTN.ID
+            ids.CustomerID = CUSIDNFTN.CustomerID
+            ids.IDType = CUSIDNFTN.IDType
+            ids.IDNumber = CUSIDNFTN.IDNumber
+            ids.isPrimary = IIf(CUSIDNFTN.isPrimary > 0, True, False)
+            CustomerIDs.Add(ids)
 
-        For Each id As IdentificationCard In cus.CustomersIDs
-            Dim lv As ListViewItem = lvID.Items.Add(id.IDType)
-            lv.SubItems.Add(id.IDNumber)
-
-            CUSIDNFTN.ID = id.ID
-            CUSIDNFTN.CustomerID = id.CustomerID
-            CUSIDNFTN.IDType = id.IDType
-            CUSIDNFTN.IDNumber = id.IDNumber
-            CUSIDNFTN.isPrimary = IIf(id.isPrimary > 0, True, False)
-            CustomerIDs.Add(CUSIDNFTN)
-
-
-            MsgBox(CustomerIDs.Count)
-            If id.isPrimary = True Then
+            If CUSIDNFTN.isPrimary = True Then
                 lv.BackColor = Color.Green
-            Else
-                Add_ID(id.IDType, id.IDNumber)
             End If
-
         Next
 
 
-        'loading IDS
+        ' loading Phones
 
-        Dim CUSPHONE As New PhoneNumber
-        For Each itm As PhoneNumber In cus.CustomersPhone
-            lstPhone.Items.Add(itm.PhoneNumber)
-            CUSPHONE.PhoneID = itm.PhoneID
-            CUSPHONE.CustomerID = itm.CustomerID
-            CUSPHONE.PhoneNumber = itm.PhoneNumber
-            CUSPHONE.isPrimary = IIf(itm.isPrimary > 0, True, False)
-            CustomerPhones.Add(CUSPHONE)
+        For Each phone In cus.CustomersPhone
+            Dim ph As New PhoneNumber
+            lstPhone.Items.Add(phone.PhoneNumber)
 
+            ph.PhoneID = phone.PhoneID
+            ph.CustomerID = phone.CustomerID
+            ph.PhoneNumber = phone.PhoneNumber
+            ph.isPrimary = IIf(phone.isPrimary > 0, True, False)
+            CustomerPhones.Add(ph)
         Next
 
         ClientImage.Image = cus.CPUREIMAGE
-        FlName = cus.CImage.Substring(0, cus.CImage.IndexOf("|"c))
+
+        If cus.CImage = "" Then
+            FlName = ""
+        Else
+            FlName = cus.CImage.Substring(0, cus.CImage.IndexOf("|"c))
+        End If
+
 
         SelectedCustomer = cus
 
@@ -113,10 +113,10 @@ Public Class frmCustomer_KYC
         lockForm = st
 
         Console.WriteLine(txtFName.BackColor)
-        txtFName.ReadOnly = st
-        txtMName.ReadOnly = st
-        txtLName.ReadOnly = st
-        txtSuffix.ReadOnly = st
+        txtFName.ReadOnly = Not st
+        txtMName.ReadOnly = Not st
+        txtLName.ReadOnly = Not st
+        txtSuffix.ReadOnly = Not st
 
         'tbID
         TabControl1.Enabled = st
@@ -142,47 +142,56 @@ Public Class frmCustomer_KYC
         If ALLOW_MINORS Then
             If possible_age <= BLOCK_AGE Then
                 Console.WriteLine("TOO YOUNG")
+                TabControl1.SelectedTab = tpBasic
                 Return False
             End If
         Else
             If possible_age < NOT_MINOR Then
                 Console.WriteLine("NO MINOR IS ALLOWED")
+                TabControl1.SelectedTab = tpBasic
                 Return False
             End If
         End If
         ' END - AGE VALIDATION ======================================
 
         If Trim(txtFName.Text) = "" Or Trim(txtLName.Text) = "" Then
+            TabControl1.SelectedTab = tpBasic
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
             Return False
         End If
 
         If Trim(cboBrgy1.Text) = "" Or Trim(cboCity1.Text) = "" Or Trim(cboProv1.Text) = "" Then
+            TabControl1.SelectedTab = tpBasic
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
             Return False
         End If
 
         If Trim(cboBrgy2.Text) = "" Or Trim(cboCity2.Text) = "" Or Trim(cboProv2.Text) = "" Then
+            TabControl1.SelectedTab = tpBasic
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
             Return False
         End If
 
         If Trim(txtNationality.Text) = "" Then
+            TabControl1.SelectedTab = tpBasic
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
             Return False
         End If
 
         If Trim(txtWork.Text) = "" Or Trim(txtSrcFund.Text) = "" Then
+            TabControl1.SelectedTab = tpBasic
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
             Return False
         End If
 
-        If lvID.Items.Count = 0 And REQUIRED_ID Then
+        If lvID.Items.Count = 0 Or REQUIRED_ID Then
+            TabControl1.SelectedTab = tpID
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information")
             Return False
         End If
 
         If ClientImage.Image Is Nothing Then
+            TabControl1.SelectedTab = tpBasic
             MsgBox(errMsg, MsgBoxStyle.OkOnly, "KYC - Customer Information") : Return False
         End If
 
@@ -190,6 +199,7 @@ Public Class frmCustomer_KYC
     End Function
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+
         If btnSave.Text = "&Modify" Then
             LockFields(True)
             isNew = False : Exit Sub
@@ -258,8 +268,10 @@ GenerateRandOmString:
 
             .CustomersPhone = CustomerPhones
             .CustomersIDs = CustomerIDs
-            .Save()
 
+            If Not .Save() Then
+                Exit Sub
+            End If
         End With
 
         MsgBox("Successfully saved.", MsgBoxStyle.Information, "Save")
@@ -331,8 +343,11 @@ FLNME:
 
             .CustomersPhone = CustomerPhones
             .CustomersIDs = CustomerIDs
-            MsgBox(CustomerIDs.Count)
-            .Save()
+
+            If Not .Save() Then
+                Exit Sub
+            End If
+
 
         End With
 
@@ -434,9 +449,11 @@ FLNME:
     ' management module.
     Private Sub btnPlus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPlus.Click
         If txtPhone.Text = "" Then Exit Sub
+        If CLEANPHNO(txtPhone.Text).Length < 11 Then _
+            MsgBox("Phone must not less than 11 digits.", MsgBoxStyle.Critical, "") : Exit Sub
 
         Add_Phone(CLEANPHNO(txtPhone.Text))
-        lstPhone.Items.Add(txtPhone.Text)
+        lstPhone.Items.Add(CLEANPHNO(txtPhone.Text))
         txtPhone.Text = ""
     End Sub
 
@@ -446,23 +463,29 @@ FLNME:
     End Function
 
     Private Sub btnNega_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNega.Click
+        If lstPhone.SelectedItems.Count = 0 Then Exit Sub
+
         lstPhone.Items.Remove(lstPhone.SelectedItem)
-        Remove_Phone(lstPhone.SelectedItem)
+
+        For Each Item As Object In lstPhone.SelectedItems
+            Remove_Phone(Item.ToString)
+        Next
+
     End Sub
 
-    Private Sub btnTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTest.Click
-        ' AddCustomer()
-        ''Console.WriteLine("Saved")
-        ModifyInfo()
+    'Private Sub btnTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTest.Click
+    '    '  AddCustomer()
+    '    ''Console.WriteLine("Saved")
+    '    ' ModifyInfo()
 
-        'Console.WriteLine("In the Collection:")
-        'For Each ph As PhoneNumber In CustomerPhones
-        '    Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
-        'Next
-        'For Each id As IdentificationCard In CustomerIDs
-        '    Console.WriteLine(String.Format("{0} >> {1} - {2}", id.IDType, id.IDNumber, id.isPrimary))
-        'Next
-    End Sub
+    '    'Console.WriteLine("In the Collection:")
+    '    'For Each ph As PhoneNumber In CustomerPhones
+    '    '    Console.WriteLine(ph.PhoneNumber & " - " & ph.isPrimary)
+    '    'Next
+    '    'For Each id As IdentificationCard In CustomerIDs
+    '    '    Console.WriteLine(String.Format("{0} >> {1} - {2}", id.IDType, id.IDNumber, id.isPrimary))
+    '    'Next
+    'End Sub
 
     Private Sub ModifyInfo()
         'Search Name
@@ -585,6 +608,7 @@ FLNME:
 
     Private Sub txtPhone_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPhone.KeyPress
         PhoneSeparator(txtPhone, e)
+        DigitOnly(e)
 
         If Asc(e.KeyChar) = 13 Then
             btnPlus.PerformClick()
@@ -748,6 +772,12 @@ FLNME:
     End Sub
 
     Private Sub btnCamera_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCamera.Click
+        If ClientImage.Image Is Nothing Then
+        Else
+            Dim result As DialogResult = MsgBox("Do you want capture again or change the picture?", MsgBoxStyle.YesNo, "Validation")
+            If result = vbNo Then Exit Sub
+        End If
+
         If btnCamera.Text = "Open Camera" Then
             Call OpenPreviewWindow()
             btnCamera.Text = "Capture"
@@ -768,26 +798,66 @@ FLNME:
             Call ClosePreviewWindow()
         End If
     End Sub
-
-
-
-    'Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-    '    SaveCImg()
-    '    'Dim c As New Customer
-    '    'With c
-    '    '    ClientImage.Image = .FindCusomterImage("Rwu9XIONbUsIbHODAaGU2A==")
-
-    '    'End With
-
-    '    'Dim filename As String = System.IO.Path.Combine("C:\Users\MISGWAPOHON\Documents\DALTON\Dalton\Pawnshop\KYC\bin\Debug\ClientImage\hgkVAQip9LmYM4LwUHSt.eam")
-    '    'ClientImage.Image = Image.FromFile(filename)
-
-    'End Sub
-
   
 
-    Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ELLIEPOPULATEINFO()
 
+        txtFName.Text = "ELLIE"
+        txtMName.Text = "ARDIENTE"
+        txtLName.Text = "MISIONA"
+        txtSt1.Text = "LABOS"
+        cboBrgy1.Text = "CITY HEIGHTS"
+        cboCity1.Text = "GENSAN"
+        cboProv1.Text = "SOUTH COT."
+        cboZip1.Text = "9500"
+
+        txtSt2.Text = "LABOS"
+        cboBrgy2.Text = "CITY HEIGHTS"
+        cboCity2.Text = "GENSAN"
+        cboProv2.Text = "SOUTH COT."
+        cboZip2.Text = "9500"
+        dtpBday.Text = "12/11/1992"
+        txtWork.Text = "PROGRAMMER"
+        txtSrcFund.Text = "WORK"
+        cboGender.Text = "MALE"
+        txtBdayPlace.Text = "Davao Del Sur"
     End Sub
 
+    Private Sub btnHistory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHistory.Click
+        If Not txtFName.Enabled Then Exit Sub
+
+        Dim mySql As String
+        mySql = "SELECT C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mySql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
+        mySql &= "C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' ||  C.ADDR_PROVINCE AS ADDRESS, "
+        mySql &= "C.BIRTHDAY, C.PHONE1, C.PHONE2, P.PAWNTICKET, CASE P.STATUS	WHEN '0' THEN 'RENEWED' "
+        mySql &= "WHEN 'R' THEN 'RENEW' "
+        mySql &= "WHEN 'L' THEN 'NEW LOAN' "
+        mySql &= "WHEN 'V' THEN 'VOID' "
+        mySql &= "WHEN 'X' THEN 'REDEEM' "
+        mySql &= "WHEN 'S' THEN 'SEGRE' "
+        mySql &= "WHEN 'W' THEN 'PULLOUT: ' || CAST(ITM.WITHDRAWDATE AS DATE)  ELSE 'STATUS ERROR' "
+        mySql &= "END AS STATUS, P.DESCRIPTION, "
+        mySql &= "CLASS.ITEMCATEGORY, ITM.ITEMCLASS, P.LOANDATE, P.PRINCIPAL, "
+        mySql &= "P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.PENALTY, USR.USERNAME as APPRAISER "
+        mySql &= "FROM OPT P "
+        mySql &= "LEFT JOIN TBLCLIENT C ON P.CLIENTID = C.CLIENTID "
+        mySql &= "INNER JOIN OPI ITM ON ITM.PAWNITEMID = P.PAWNITEMID "
+        mySql &= "INNER JOIN TBLITEM CLASS ON CLASS.ITEMID = ITM.ITEMID "
+        mySql &= "LEFT JOIN TBL_GAMIT USR ON USR.USERID = P.APPRAISERID "
+        mySql &= vbCrLf & "WHERE "
+        mySql &= vbCrLf & " P.STATUS <> 'V' AND P.CLIENTID = " & SelectedCustomer.CustomerID
+
+        Console.WriteLine(mySql)
+
+        Dim repPara As New Dictionary(Of String, String)
+        repPara.Add("txtFullname", String.Format("{0} {1} {2}", txtFName.Text, txtLName.Text, txtSuffix.Text))
+        repPara.Add("txtBirthday", dtpBday.Text)
+        repPara.Add("txtAddr", String.Format("{0} {1} {2} {3}", txtSt1.Text, cboBrgy1.Text, cboCity1.Text, cboProv1.Text))
+        '    repPara.Add("txtContact", String.Join(", ", txtCP1.Text, txtCP2.Text))
+
+        frmReport.ReportInit(mySql, "dsHistory", "Reports\rpt_History.rdlc", repPara)
+        frmReport.Show()
+        frmReport.TopMost = True
+    End Sub
 End Class

@@ -61,17 +61,4 @@ Module security
     End Function
 
 
-    Friend Function GetCurrentAge(ByVal dob As Date) As Integer
-        Dim age As Integer
-        age = Today.Year - dob.Year
-        If (dob > Today.AddYears(-age)) Then age -= 1
-        Return age
-    End Function
-
-    Friend Function isEnter(ByVal e As KeyPressEventArgs) As Boolean
-        If Asc(e.KeyChar) = 13 Then
-            Return True
-        End If
-        Return False
-    End Function
 End Module

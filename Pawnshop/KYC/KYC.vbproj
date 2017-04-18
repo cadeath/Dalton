@@ -84,6 +84,7 @@
     <Compile Include="Class\Customer.vb" />
     <Compile Include="Class\IdentificationCard.vb" />
     <Compile Include="Class\PhoneNumber.vb" />
+    <Compile Include="ComputerUser.vb" />
     <Compile Include="formSwitch.vb" />
     <Compile Include="Forms\diag_loading.Designer.vb">
       <DependentUpon>diag_loading.vb</DependentUpon>
@@ -95,6 +96,12 @@
       <DependentUpon>frmClientNew.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmClientNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReport.Designer.vb">
+      <DependentUpon>frmReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Migrate\Migrate_ID.vb" />
@@ -121,6 +128,7 @@
     <Compile Include="Lib\security.vb" />
     <Compile Include="Migrate\MigrateIdentificationCard.vb" />
     <Compile Include="Migrate\MigratePhoneNumber.vb" />
+    <Compile Include="mod_system.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -136,6 +144,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="web_ads.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\diag_loading.resx">
@@ -143,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmClientNew.resx">
       <DependentUpon>frmClientNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReport.resx">
+      <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrate\frmClientMigrate.resx">
       <DependentUpon>frmClientMigrate.vb</DependentUpon>

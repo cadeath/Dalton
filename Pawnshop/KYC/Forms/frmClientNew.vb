@@ -11,24 +11,24 @@
 Public Class frmClientNew
 
     Dim fromOtherForm As Boolean = False
-    Friend GetClient As Customer
+    Friend GetCustomer As Customer
     Dim frmOrig As formSwitch.FormName
     ''' <summary>
-    ''' load client information to the listview.
+    ''' load Customer information to the listview.
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmClient_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ' Me.TopMost = True
-        'web_ads.AdsDisplay = webAds
-        'web_ads.Ads_Initialization()
+        'Me.TopMost = True
+        web_ads.AdsDisplay = webAds
+        web_ads.Ads_Initialization()
 
         If Not fromOtherForm Then ClearField()
 
         If txtSearch.Text = "" Then
             Dim th As Thread
-            th = New Thread(AddressOf LoadClients)
+            th = New Thread(AddressOf LoadCustomer)
             th.Start()
         End If
 
@@ -46,7 +46,7 @@ Public Class frmClientNew
     ''' <param name="cus"></param>
     ''' <remarks></remarks>
     Private Sub AddItem(ByVal cus As Customer)
-        Dim lv As ListViewItem = lvClient.Items.Add(cus.CustomerID)
+        Dim lv As ListViewItem = lvCustomer.Items.Add(cus.CustomerID)
         lv.SubItems.Add(String.Format("{0}, {1} {2}", cus.LastName, cus.FirstName, cus.MiddleName))
         lv.SubItems.Add(String.Format("{0} {1} {2}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity))
 
@@ -67,7 +67,7 @@ Public Class frmClientNew
     ''' <remarks></remarks>
     Private Sub ClearField()
         txtSearch.Text = ""
-        lvClient.Items.Clear()
+        lvCustomer.Items.Clear()
     End Sub
 
     Friend Sub SearchSelect(ByVal src As String, ByVal frmOrigin As formSwitch.FormName)
@@ -82,14 +82,14 @@ Public Class frmClientNew
     ''' </summary>
     ''' <remarks></remarks>
     Private Delegate Sub LoadClient_delegate()
-    Friend Sub LoadClients()
+    Friend Sub LoadCustomer()
         'On Error Resume Next
 
-        If lvClient.InvokeRequired Then
-            lvClient.Invoke(New LoadClient_delegate(AddressOf LoadClients))
+        If lvCustomer.InvokeRequired Then
+            lvCustomer.Invoke(New LoadClient_delegate(AddressOf LoadCustomer))
         Else
-            lvClient.Enabled = False
-            lvClient.BackColor = Color.White
+            lvCustomer.Enabled = False
+            lvCustomer.BackColor = Color.White
             btnView.Enabled = False
             txtSearch.ReadOnly = True
             btnSearch.Enabled = False
@@ -99,7 +99,7 @@ Public Class frmClientNew
             Dim mySql As String = String.Format("SELECT FIRST 100 * FROM {0} ORDER BY LastName ASC, FirstName ASC", CUSTOMER_TABLE)
             Dim ds As DataSet = LoadSQL(mySql, CUSTOMER_TABLE)
 
-            lvClient.Items.Clear()
+            lvCustomer.Items.Clear()
             For Each pawner As DataRow In ds.Tables(0).Rows
                 Dim tmpCustomer As New Customer
                 tmpCustomer.Load_CustomerByID(pawner.Item("ID"))
@@ -108,7 +108,7 @@ Public Class frmClientNew
                 Application.DoEvents()
             Next
 
-            lvClient.Enabled = True
+            lvCustomer.Enabled = True
             btnView.Enabled = True
             txtSearch.ReadOnly = False
             btnSearch.Enabled = True
@@ -139,10 +139,10 @@ Public Class frmClientNew
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub btnView_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnView.Click
-        If lvClient.SelectedItems.Count <= 0 Then Exit Sub
+        If lvCustomer.SelectedItems.Count <= 0 Then Exit Sub
 
         Dim cusID As Integer
-        cusID = lvClient.FocusedItem.Text
+        cusID = lvCustomer.FocusedItem.Text
         Console.WriteLine("CustomerID : " & cusID)
 
         Dim tmpCus As New Customer
@@ -158,7 +158,7 @@ Public Class frmClientNew
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub lvClient_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvClient.DoubleClick
+    Private Sub lvClient_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvCustomer.DoubleClick
         If Not fromOtherForm Then
             btnView.PerformClick()
         Else
@@ -173,7 +173,6 @@ Public Class frmClientNew
     ''' <remarks></remarks>
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         frmCustomer_KYC.Show()
-
     End Sub
 
     ''' <summary>
@@ -220,7 +219,7 @@ Public Class frmClientNew
                 Exit Sub
             End If
 
-            lvClient.Items.Clear()
+            lvCustomer.Items.Clear()
             For Each CustomerRow As DataRow In ds.Tables(0).Rows
                 Dim tmpCustomer As New Customer
                 tmpCustomer.Load_CustomerByID(CustomerRow.Item(0))
@@ -228,22 +227,22 @@ Public Class frmClientNew
             Next
 
             MsgBox(MaxRow & " result found", MsgBoxStyle.Information, "Search Customer")
-            lvClient.Items(0).Focused = True
+            lvCustomer.Items(0).Focused = True
         End If
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click
-        If lvClient.Items.Count = 0 Then Exit Sub
+        If lvCustomer.Items.Count = 0 Then Exit Sub
 
-        If lvClient.SelectedItems.Count = 0 Then
-            lvClient.Items(0).Focused = True
+        If lvCustomer.SelectedItems.Count = 0 Then
+            lvCustomer.Items(0).Focused = True
         End If
 
-        Dim idx As Integer = CInt(lvClient.FocusedItem.Text)
-        GetClient = New Customer
-        GetClient.Load_CustomerByID(idx)
+        Dim idx As Integer = CInt(lvCustomer.FocusedItem.Text)
+        GetCustomer = New Customer
+        GetCustomer.Load_CustomerByID(idx)
 
-        formSwitch.ReloadFormFromSearch(frmOrig, GetClient)
+        formSwitch.ReloadFormFromSearch(frmOrig, GetCustomer)
 
         Me.Close()
     End Sub
@@ -258,7 +257,7 @@ Public Class frmClientNew
         Me.Close()
     End Sub
 
-    Private Sub lvClient_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvClient.KeyPress
+    Private Sub lvCustomer_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles lvCustomer.KeyPress
         If isEnter(e) Then
             If fromOtherForm Then
                 btnSelect.PerformClick()
@@ -268,7 +267,7 @@ Public Class frmClientNew
         End If
     End Sub
 
-    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
+    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvCustomer.SelectedIndexChanged
 
     End Sub
 End Class

@@ -294,7 +294,11 @@ Public Class Customer
 #End Region
 
 #Region "Procedures"
-    Public Sub Save()
+    Public Function Save() As Boolean
+        If _id = 0 Then
+            If Not ChkIfCustExists(_firstName, _lastName, _birthday, _middleName) Then Return False
+        End If
+
         Dim mySql As String = "SELECT * FROM " & CUSTOMER_TABLE & " WHERE ID = " & _id
         Dim ds As DataSet = LoadSQL(mySql, CUSTOMER_TABLE), isNew As Boolean = False
 
@@ -363,7 +367,7 @@ Public Class Customer
         ' PHASE 2
         ' Saving the IDs and Phones
 
-        If _custIDs.Count <= 0 Then Exit Sub
+        If _custIDs.Count <= 0 Then Return False
 
         Dim lastCustomerID As Integer = 0
 
@@ -438,7 +442,8 @@ Public Class Customer
 
             database.SaveEntry(ds)
         End If
-    End Sub
+        Return True
+    End Function
 
     Public Sub Load_CustomerByID(Optional ByVal id As Integer = 0)
         If id = 0 Then id = _id
@@ -539,6 +544,29 @@ NEXTLINE:
             _id = ds.Tables(0).Rows(0).Item("ID")
 
         Return ds
+    End Function
+
+    Private Function ChkIfCustExists(ByVal fname As String, ByVal lname As String, ByVal bday As Date, Optional ByVal mname As String = "") As Boolean
+        Dim mySql As String = String.Format("SELECT * FROM " & CUSTOMER_TABLE & " WHERE FIRSTNAME = '{0}' AND MIDNAME = '{1}' " _
+                                           & "AND LASTNAME ='{2}' AND BIRTHDAY = '{3}'", fname, mname, lname, bday.ToShortDateString)
+        Dim ds As DataSet = LoadSQL(mySql, CUSTOMER_TABLE)
+
+        If ds.Tables(0).Rows.Count = 0 Then
+            Dim mySql1 As String = String.Format("SELECT * FROM " & CUSTOMER_TABLE & " WHERE FIRSTNAME = '{0}' " _
+                                         & "AND LASTNAME ='{1}' AND BIRTHDAY = '{2}'", fname, lname, bday.ToShortDateString)
+            Dim ds1 As DataSet = LoadSQL(mySql1, CUSTOMER_TABLE)
+
+            If ds1.Tables(0).Rows.Count >= 1 Then
+                MsgBox("This customer was already registered" & vbCrLf & _
+                       "Please try to search this customer!", MsgBoxStyle.Critical, "Error") : Return False
+            End If
+        End If
+
+        If ds.Tables(0).Rows.Count >= 1 Then
+            MsgBox("This customer was already registered" & vbCrLf & _
+                   "Please try to search this customer!", MsgBoxStyle.Critical, "Error") : Return False
+        End If
+        Return True
     End Function
 
     Friend Function FindRanStrIfExists(ByVal randstr As String) As Boolean
