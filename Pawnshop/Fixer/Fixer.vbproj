@@ -342,6 +342,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bug_fix.ico" />
+    <Content Include="Iconarchive-Red-Orb-Alphabet-Hash.ico" />
     <Content Include="infographic-fix.ico" />
   </ItemGroup>
   <ItemGroup>
