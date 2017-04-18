@@ -12,7 +12,9 @@ Module deploy
     Friend lblStatus As Label
 
     Friend isFinished As Boolean = True
+    Friend CurrentVersion As Version
     Private onDownload As Boolean = False
+
 
     Private Sub backup_Database(Optional isRestore As Boolean = False)
         If isRestore Then
@@ -27,9 +29,11 @@ Module deploy
         End If
     End Sub
 
-    Private Function Get_DatabaseVersion() As String
-        Dim myFileVersionInfo As FileVersionInfo = FileVersionInfo.GetVersionInfo(DATABASE)
-        Return myFileVersionInfo.FileVersion
+    Private Function GetExeVersion(src As String) As Version
+        If CurrentVersion Is Nothing Then _
+            CurrentVersion = Version.Parse(FileVersionInfo.GetVersionInfo(src).FileVersion)
+
+        Return CurrentVersion
     End Function
 
     Friend Sub ReadingConfig(src As String)
@@ -50,6 +54,9 @@ Module deploy
 
             Console.WriteLine("Version: " & m_version)
             Console.WriteLine("Type: " & m_type)
+
+            If Version.Parse(m_version).CompareTo(GetExeVersion("AutoDeploy.exe")) <= 0 Then _
+                Exit Sub
 
             Select Case m_type
                 Case "installer"
