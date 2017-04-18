@@ -76,7 +76,6 @@
     End Function
 
     Private Sub Create_Tables()
-        diag_loading.lblStatus.Text = "Creating KYC tables please wait..."
         diag_loading.Show()
         Dim mySql As String, primaryKey As String
 
