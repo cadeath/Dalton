@@ -28,4 +28,7 @@ Public Class diag_loading
         End If
     End Sub
 
+    Private Sub diag_loading_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.TopMost = True
+    End Sub
 End Class

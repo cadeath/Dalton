@@ -21,6 +21,7 @@
 
     Private Sub OFDMigrate_FileOk(ByVal sender As System.Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles OFDMigrate.FileOk
         database.dbName = OFDMigrate.FileName
+        txtPath.Text = database.dbName
     End Sub
 
     Private Sub bgMigrate_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgMigrate.RunWorkerCompleted

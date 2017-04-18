@@ -76,6 +76,8 @@
     End Function
 
     Private Sub Create_Tables()
+        diag_loading.lblStatus.Text = "Creating KYC tables please wait..."
+        diag_loading.Show()
         Dim mySql As String, primaryKey As String
 
         ' CUSTOMER TABLE
@@ -130,7 +132,6 @@
 
         RunCommand(mySql)
         AutoIncrement_ID(CUSTOMER_PHONE, "PHONEID")
-
     End Sub
 
 
@@ -148,8 +149,6 @@
     ' TODO
     ' AutoMigrate information
     Private Sub MigrateClients_Info()
-
-        diag_loading.Show()
 
         mysql = "SELECT * FROM " & oldClient & " ORDER BY CLIENTID ASC"
         Dim Clds As DataSet = LoadSQL(mysql, oldClient)
@@ -228,8 +227,8 @@
             End With
         Next
 
-        diag_loading.Close()
         IDGerator(kycCustomerGenerator, kycIDCustomerGenerator)
+        diag_loading.Close()
     End Sub
 
     Private Sub IDGerator(ByVal ClientIDX As Integer, ByVal IDentification As Integer)
