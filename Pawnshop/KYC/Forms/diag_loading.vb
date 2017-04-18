@@ -23,21 +23,9 @@ Public Class diag_loading
         Else
             If pbLoading.Value < pbLoading.Maximum Then
                 pbLoading.Value += 1
+                lblStatus.Text = String.Format("{0}%", ((pbLoading.Value / pbLoading.Maximum) * 100).ToString("F2"))
             End If
         End If
     End Sub
 
-    Private Sub diag_loading_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.TopMost = True
-      
-      
-    End Sub
-
-    Private Sub diag_loading_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Click
-        Set_Bar(1000)
-        Reset_Bar()
-        For i As Integer = 0 To 1000
-            Add_Bar()
-        Next
-    End Sub
 End Class

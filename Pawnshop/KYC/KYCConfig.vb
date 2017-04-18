@@ -158,6 +158,8 @@
 
         diag_loading.Set_Bar(Clds.Tables(0).Rows.Count)
         diag_loading.Reset_Bar()
+
+        frmClientMigrate.pBMigrate.Maximum = Clds.Tables(0).Rows.Count
         Dim kyc As New MigrateCustomer
         For Each clDR As DataRow In Clds.Tables(0).Rows
             CustomerPhones.Clear()
@@ -173,9 +175,6 @@
                 Else
                     .Suffix = clDR.Item("SUFFIX")
                 End If
-
-
-                '.Suffix = IIf(clDR.Item("SUFFIX") = "", clDR.Item("SUFFIX"), "")
 
                 .PresentStreet = clDR.Item("ADDR_STREET")
                 .PresentBarangay = clDR.Item("ADDR_BRGY")
@@ -223,7 +222,9 @@
                 .Save()
 
                 kycCustomerGenerator = clDR.Item("CLIENTID")
+
                 diag_loading.Add_Bar()
+                Application.DoEvents()
             End With
         Next
 
@@ -249,6 +250,20 @@
         mysql &= vbCrLf & "BEGIN "
         mysql &= vbCrLf & "  IF (NEW.ID IS NULL) THEN "
         mysql &= vbCrLf & "      NEW.ID = GEN_ID(CUSTOMER_ID_default_ID_GEN, " & IDentification + 1 & "); "
+        mysql &= vbCrLf & "END; "
+        RunCommand(mysql)
+
+        mysql = "SELECT * FROM " & CUSTOMER_PHONE
+        Dim ds As DataSet = LoadSQL(mysql, CUSTOMER_PHONE)
+        Dim phROW As Integer = ds.Tables(0).Rows.Count
+
+        mysql = "CREATE TRIGGER BI_KYC_PHONE_default_PHONEID FOR KYC_PHONE_default "
+        mysql &= vbCrLf & "ACTIVE BEFORE INSERT "
+        mysql &= vbCrLf & "POSITION 0 "
+        mysql &= vbCrLf & "AS "
+        mysql &= vbCrLf & "BEGIN "
+        mysql &= vbCrLf & "  IF (NEW.PHONEID IS NULL) THEN "
+        mysql &= vbCrLf & "      NEW.PHONEID = GEN_ID(KYC_PHONE_default_ID_GEN, " & phROW + 1 & "); "
         mysql &= vbCrLf & "END; "
         RunCommand(mysql)
     End Sub

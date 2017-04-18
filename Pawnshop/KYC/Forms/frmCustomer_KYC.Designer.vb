@@ -97,6 +97,7 @@ Partial Class frmCustomer_KYC
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtSuffix = New System.Windows.Forms.TextBox()
         Me.btnHistory = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tpBasic.SuspendLayout()
         Me.tpID.SuspendLayout()
@@ -253,6 +254,7 @@ Partial Class frmCustomer_KYC
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.Size = New System.Drawing.Size(150, 22)
         Me.txtPhone.TabIndex = 13
+        Me.txtPhone.Text = "ELLIE GWAPO"
         '
         'lstPhone
         '
@@ -280,6 +282,7 @@ Partial Class frmCustomer_KYC
         Me.txtWork.Name = "txtWork"
         Me.txtWork.Size = New System.Drawing.Size(176, 22)
         Me.txtWork.TabIndex = 16
+        Me.txtWork.Text = "ELLIE GWAPO"
         '
         'Label18
         '
@@ -357,6 +360,7 @@ Partial Class frmCustomer_KYC
         Me.txtSrcFund.Name = "txtSrcFund"
         Me.txtSrcFund.Size = New System.Drawing.Size(178, 22)
         Me.txtSrcFund.TabIndex = 17
+        Me.txtSrcFund.Text = "ELLIE GWAPO"
         '
         'Label21
         '
@@ -400,6 +404,7 @@ Partial Class frmCustomer_KYC
         Me.txtNationality.Name = "txtNationality"
         Me.txtNationality.Size = New System.Drawing.Size(208, 22)
         Me.txtNationality.TabIndex = 12
+        Me.txtNationality.Text = "ELLIE GWAPO"
         '
         'Label19
         '
@@ -467,6 +472,7 @@ Partial Class frmCustomer_KYC
         Me.cboZip2.Name = "cboZip2"
         Me.cboZip2.Size = New System.Drawing.Size(81, 24)
         Me.cboZip2.TabIndex = 9
+        Me.cboZip2.Text = "ELLIE GWAPO"
         '
         'cboProv2
         '
@@ -475,6 +481,7 @@ Partial Class frmCustomer_KYC
         Me.cboProv2.Name = "cboProv2"
         Me.cboProv2.Size = New System.Drawing.Size(134, 24)
         Me.cboProv2.TabIndex = 8
+        Me.cboProv2.Text = "ELLIE GWAPO"
         '
         'cboCity2
         '
@@ -483,6 +490,7 @@ Partial Class frmCustomer_KYC
         Me.cboCity2.Name = "cboCity2"
         Me.cboCity2.Size = New System.Drawing.Size(135, 24)
         Me.cboCity2.TabIndex = 7
+        Me.cboCity2.Text = "ELLIE GWAPO"
         '
         'cboBrgy2
         '
@@ -491,6 +499,7 @@ Partial Class frmCustomer_KYC
         Me.cboBrgy2.Name = "cboBrgy2"
         Me.cboBrgy2.Size = New System.Drawing.Size(140, 24)
         Me.cboBrgy2.TabIndex = 6
+        Me.cboBrgy2.Text = "ELLIE GWAPO"
         '
         'txtSt2
         '
@@ -498,6 +507,7 @@ Partial Class frmCustomer_KYC
         Me.txtSt2.Name = "txtSt2"
         Me.txtSt2.Size = New System.Drawing.Size(138, 22)
         Me.txtSt2.TabIndex = 5
+        Me.txtSt2.Text = "ELLIE GWAPO"
         '
         'lblTheSame
         '
@@ -565,6 +575,7 @@ Partial Class frmCustomer_KYC
         Me.cboZip1.Name = "cboZip1"
         Me.cboZip1.Size = New System.Drawing.Size(81, 24)
         Me.cboZip1.TabIndex = 4
+        Me.cboZip1.Text = "ELLIE GWAPO"
         '
         'cboProv1
         '
@@ -573,6 +584,7 @@ Partial Class frmCustomer_KYC
         Me.cboProv1.Name = "cboProv1"
         Me.cboProv1.Size = New System.Drawing.Size(132, 24)
         Me.cboProv1.TabIndex = 3
+        Me.cboProv1.Text = "ELLIE GWAPO"
         '
         'cboCity1
         '
@@ -581,6 +593,7 @@ Partial Class frmCustomer_KYC
         Me.cboCity1.Name = "cboCity1"
         Me.cboCity1.Size = New System.Drawing.Size(136, 24)
         Me.cboCity1.TabIndex = 2
+        Me.cboCity1.Text = "ELLIE GWAPO"
         '
         'cboBrgy1
         '
@@ -589,6 +602,7 @@ Partial Class frmCustomer_KYC
         Me.cboBrgy1.Name = "cboBrgy1"
         Me.cboBrgy1.Size = New System.Drawing.Size(144, 24)
         Me.cboBrgy1.TabIndex = 1
+        Me.cboBrgy1.Text = "ELLIE GWAPO"
         '
         'txtSt1
         '
@@ -613,6 +627,7 @@ Partial Class frmCustomer_KYC
         Me.txtBdayPlace.Name = "txtBdayPlace"
         Me.txtBdayPlace.Size = New System.Drawing.Size(260, 22)
         Me.txtBdayPlace.TabIndex = 11
+        Me.txtBdayPlace.Text = "ELLIE GWAPO"
         '
         'Label6
         '
@@ -830,12 +845,22 @@ Partial Class frmCustomer_KYC
         Me.btnHistory.Text = "&History"
         Me.btnHistory.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(796, 354)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 18
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmCustomer_KYC
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(907, 493)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnHistory)
         Me.Controls.Add(Me.Label26)
         Me.Controls.Add(Me.txtSuffix)
@@ -939,5 +964,6 @@ Partial Class frmCustomer_KYC
     Friend WithEvents txtSuffix As System.Windows.Forms.TextBox
     Friend WithEvents lblAge As System.Windows.Forms.Label
     Friend WithEvents btnHistory As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class

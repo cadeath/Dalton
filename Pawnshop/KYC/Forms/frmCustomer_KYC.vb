@@ -23,7 +23,7 @@ Public Class frmCustomer_KYC
         CACHE_MANAGEMENT()
         ClearFields()
 
-        'ELLIEPOPULATEINFO()
+        ' ELLIEPOPULATEINFO()
         'Populate()
     End Sub
 
@@ -420,6 +420,7 @@ FLNME:
         Console.WriteLine(cboGender.Items.Count)
         txtSrcFund.Text = ""
 
+        txtPhone.Text = ""
         lstPhone.Items.Clear()
         rbLow.Checked = True
 
@@ -854,10 +855,18 @@ FLNME:
         repPara.Add("txtFullname", String.Format("{0} {1} {2}", txtFName.Text, txtLName.Text, txtSuffix.Text))
         repPara.Add("txtBirthday", dtpBday.Text)
         repPara.Add("txtAddr", String.Format("{0} {1} {2} {3}", txtSt1.Text, cboBrgy1.Text, cboCity1.Text, cboProv1.Text))
-        '    repPara.Add("txtContact", String.Join(", ", txtCP1.Text, txtCP2.Text))
+
+        Dim TXT As New TextBox
+        For Each Item As Object In lstPhone.Items
+            TXT.AppendText(Item.ToString & ",")
+        Next
+
+        repPara.Add("txtContact", TXT.Text.TrimEnd(",", ","))
 
         frmReport.ReportInit(mySql, "dsHistory", "Reports\rpt_History.rdlc", repPara)
         frmReport.Show()
         frmReport.TopMost = True
     End Sub
+
+  
 End Class
