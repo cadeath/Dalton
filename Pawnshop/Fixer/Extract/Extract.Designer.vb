@@ -170,6 +170,9 @@ Partial Class Extract
         '
         Me.ofd.Filter = "Data | *.fdb"
         '
+        'sfdPath
+        '
+        '
         'btnUpdate
         '
         Me.btnUpdate.Location = New System.Drawing.Point(532, 220)
