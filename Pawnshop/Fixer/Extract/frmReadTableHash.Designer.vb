@@ -23,13 +23,13 @@ Partial Class frmReadTableHash
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.brnBrowse = New System.Windows.Forms.Button()
         Me.txtPath = New System.Windows.Forms.TextBox()
+        Me.brnBrowse = New System.Windows.Forms.Button()
         Me.lvData = New System.Windows.Forms.ListView()
         Me.txtQuery = New System.Windows.Forms.TextBox()
         Me.txtRead = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtHash = New System.Windows.Forms.TextBox()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -45,6 +45,14 @@ Partial Class frmReadTableHash
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
+        'txtPath
+        '
+        Me.txtPath.Location = New System.Drawing.Point(6, 19)
+        Me.txtPath.Name = "txtPath"
+        Me.txtPath.ReadOnly = True
+        Me.txtPath.Size = New System.Drawing.Size(308, 20)
+        Me.txtPath.TabIndex = 1
+        '
         'brnBrowse
         '
         Me.brnBrowse.Location = New System.Drawing.Point(320, 17)
@@ -54,21 +62,13 @@ Partial Class frmReadTableHash
         Me.brnBrowse.Text = " . . ."
         Me.brnBrowse.UseVisualStyleBackColor = True
         '
-        'txtPath
-        '
-        Me.txtPath.Location = New System.Drawing.Point(6, 19)
-        Me.txtPath.Name = "txtPath"
-        Me.txtPath.ReadOnly = True
-        Me.txtPath.Size = New System.Drawing.Size(308, 20)
-        Me.txtPath.TabIndex = 1
-        '
         'lvData
         '
         Me.lvData.FullRowSelect = True
         Me.lvData.GridLines = True
-        Me.lvData.Location = New System.Drawing.Point(12, 195)
+        Me.lvData.Location = New System.Drawing.Point(12, 160)
         Me.lvData.Name = "lvData"
-        Me.lvData.Size = New System.Drawing.Size(771, 223)
+        Me.lvData.Size = New System.Drawing.Size(771, 258)
         Me.lvData.TabIndex = 1
         Me.lvData.UseCompatibleStateImageBehavior = False
         Me.lvData.View = System.Windows.Forms.View.Details
@@ -78,7 +78,7 @@ Partial Class frmReadTableHash
         Me.txtQuery.Location = New System.Drawing.Point(12, 76)
         Me.txtQuery.Multiline = True
         Me.txtQuery.Name = "txtQuery"
-        Me.txtQuery.Size = New System.Drawing.Size(682, 113)
+        Me.txtQuery.Size = New System.Drawing.Size(682, 78)
         Me.txtQuery.TabIndex = 2
         '
         'txtRead
@@ -92,7 +92,7 @@ Partial Class frmReadTableHash
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.TextBox1)
+        Me.GroupBox2.Controls.Add(Me.txtHash)
         Me.GroupBox2.Location = New System.Drawing.Point(393, 12)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(390, 58)
@@ -100,13 +100,13 @@ Partial Class frmReadTableHash
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Hash Value"
         '
-        'TextBox1
+        'txtHash
         '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 19)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(378, 20)
-        Me.TextBox1.TabIndex = 2
+        Me.txtHash.Location = New System.Drawing.Point(6, 19)
+        Me.txtHash.Name = "txtHash"
+        Me.txtHash.ReadOnly = True
+        Me.txtHash.Size = New System.Drawing.Size(378, 20)
+        Me.txtHash.TabIndex = 2
         '
         'ofd
         '
@@ -140,6 +140,6 @@ Partial Class frmReadTableHash
     Friend WithEvents txtQuery As System.Windows.Forms.TextBox
     Friend WithEvents txtRead As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtHash As System.Windows.Forms.TextBox
     Friend WithEvents ofd As System.Windows.Forms.OpenFileDialog
 End Class

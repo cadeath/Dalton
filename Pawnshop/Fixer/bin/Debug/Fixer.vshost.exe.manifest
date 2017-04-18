@@ -43,14 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Fixer.exe" size="470528">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DeathCodez.dll" size="12800">
+      <assemblyIdentity name="DeathCodez" version="1.0.0.1" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>GsXF0jya6u7Oa1BfYyMSlexcwQU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Fixer.exe" size="471552">
       <assemblyIdentity name="Fixer" version="2.0.0.1" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ypdxJ8jnIklh8W4gZ/jJVU40z0o=</dsig:DigestValue>
+        <dsig:DigestValue>2/qln9fnfDeT9C9hra0J9Xw+2Tw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -80,6 +80,9 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DeathCodez">
+      <HintPath>.\DeathCodez.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -130,6 +133,7 @@
     <Compile Include="Extract\frmSampleExtract.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Extract\security.vb" />
     <Compile Include="FixDailyTimeModname\frmFixModname.Designer.vb">
       <DependentUpon>frmFixModname.vb</DependentUpon>
     </Compile>
