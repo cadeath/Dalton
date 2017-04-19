@@ -9,32 +9,22 @@
         txtPath.Text = ofd.FileName
     End Sub
 
-    Private Sub txtRead_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRead.Click
+    Private Sub txtRead_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRead.Click
         database.dbName = txtPath.Text
         'lbTableName.Items.Clear()
         If txtQuery.Text = "" Then Exit Sub
-        Dim mysql As String = " " & txtQuery.Text & ""
-        Dim ds As DataSet = LoadSQL(mysql)
 
-        For Each dt In ds.Tables
+        Try
 
-            'For Each column As DataColumn In dt.Columns
-            '    Dim NewCH As New ColumnHeader
+            Dim mysql As String = " " & txtQuery.Text & ""
+            Dim ds As DataSet = LoadSQL(mysql)
 
-            '    NewCH.Text = column.ColumnName
-            '    lvData.Columns.Add(NewCH)
-
-            'Next
-            ''Dim lv As ListViewItem = lvData.Items.Add()
-            'For Each row As DataRow In dt.rows
-            '    For i As Integer = 0 To dt.row.count - 1
-            '        Console.WriteLine("rows " & row.Item(i))
-            '    Next
-
-            'Next
-            ShowDataInLvw(dt, ds)
-        Next
-
+            For Each dt In ds.Tables
+                ShowDataInLvw(dt, ds)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
     End Sub
 
     Public Sub ShowDataInLvw(ByVal data As DataTable, ByVal ds As DataSet)
@@ -55,4 +45,23 @@
         txtHash.Text = security.GetMD5(ds)
     End Sub
 
+    Private Sub btnMatch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMatch.Click
+        If txtHash.Text = txtMatch.Text Then
+            MsgBox("Value match", MsgBoxStyle.Information, "Hash Matching . . .")
+        Else
+            MsgBox("Value not match", MsgBoxStyle.Critical, "Hash Matching . . .")
+        End If
+    End Sub
+
+    Private Sub txtMatch_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMatch.KeyPress
+        If isEnter(e) Then
+            btnMatch.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtQuery_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtQuery.KeyDown
+        If e.KeyCode = Keys.Enter AndAlso e.Control Then
+            btnRead.PerformClick()
+        End If
+    End Sub
 End Class

@@ -28,10 +28,12 @@ Partial Class frmReadTableHash
         Me.brnBrowse = New System.Windows.Forms.Button()
         Me.lvData = New System.Windows.Forms.ListView()
         Me.txtQuery = New System.Windows.Forms.TextBox()
-        Me.txtRead = New System.Windows.Forms.Button()
+        Me.btnRead = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtHash = New System.Windows.Forms.TextBox()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
+        Me.txtMatch = New System.Windows.Forms.TextBox()
+        Me.btnMatch = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -42,7 +44,7 @@ Partial Class frmReadTableHash
         Me.GroupBox1.Controls.Add(Me.brnBrowse)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(375, 58)
+        Me.GroupBox1.Size = New System.Drawing.Size(375, 84)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         '
@@ -67,7 +69,7 @@ Partial Class frmReadTableHash
         '
         Me.lvData.FullRowSelect = True
         Me.lvData.GridLines = True
-        Me.lvData.Location = New System.Drawing.Point(12, 160)
+        Me.lvData.Location = New System.Drawing.Point(12, 102)
         Me.lvData.Name = "lvData"
         Me.lvData.Size = New System.Drawing.Size(771, 258)
         Me.lvData.TabIndex = 1
@@ -76,27 +78,29 @@ Partial Class frmReadTableHash
         '
         'txtQuery
         '
-        Me.txtQuery.Location = New System.Drawing.Point(12, 76)
+        Me.txtQuery.Location = New System.Drawing.Point(393, 18)
         Me.txtQuery.Multiline = True
         Me.txtQuery.Name = "txtQuery"
-        Me.txtQuery.Size = New System.Drawing.Size(682, 78)
+        Me.txtQuery.Size = New System.Drawing.Size(301, 78)
         Me.txtQuery.TabIndex = 2
         '
-        'txtRead
+        'btnRead
         '
-        Me.txtRead.Location = New System.Drawing.Point(700, 85)
-        Me.txtRead.Name = "txtRead"
-        Me.txtRead.Size = New System.Drawing.Size(83, 38)
-        Me.txtRead.TabIndex = 2
-        Me.txtRead.Text = "R&ead"
-        Me.txtRead.UseVisualStyleBackColor = True
+        Me.btnRead.Location = New System.Drawing.Point(700, 18)
+        Me.btnRead.Name = "btnRead"
+        Me.btnRead.Size = New System.Drawing.Size(83, 30)
+        Me.btnRead.TabIndex = 2
+        Me.btnRead.Text = "R&ead"
+        Me.btnRead.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.btnMatch)
+        Me.GroupBox2.Controls.Add(Me.txtMatch)
         Me.GroupBox2.Controls.Add(Me.txtHash)
-        Me.GroupBox2.Location = New System.Drawing.Point(393, 12)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 366)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(390, 58)
+        Me.GroupBox2.Size = New System.Drawing.Size(771, 58)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Hash Value"
@@ -106,20 +110,36 @@ Partial Class frmReadTableHash
         Me.txtHash.Location = New System.Drawing.Point(6, 19)
         Me.txtHash.Name = "txtHash"
         Me.txtHash.ReadOnly = True
-        Me.txtHash.Size = New System.Drawing.Size(378, 20)
+        Me.txtHash.Size = New System.Drawing.Size(357, 20)
         Me.txtHash.TabIndex = 2
         '
         'ofd
         '
         Me.ofd.Filter = "Data | *.fdb"
         '
+        'txtMatch
+        '
+        Me.txtMatch.Location = New System.Drawing.Point(369, 19)
+        Me.txtMatch.Name = "txtMatch"
+        Me.txtMatch.Size = New System.Drawing.Size(313, 20)
+        Me.txtMatch.TabIndex = 3
+        '
+        'btnMatch
+        '
+        Me.btnMatch.Location = New System.Drawing.Point(688, 13)
+        Me.btnMatch.Name = "btnMatch"
+        Me.btnMatch.Size = New System.Drawing.Size(77, 30)
+        Me.btnMatch.TabIndex = 4
+        Me.btnMatch.Text = "&Match"
+        Me.btnMatch.UseVisualStyleBackColor = True
+        '
         'frmReadTableHash
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(795, 430)
+        Me.ClientSize = New System.Drawing.Size(788, 425)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.txtRead)
+        Me.Controls.Add(Me.btnRead)
         Me.Controls.Add(Me.txtQuery)
         Me.Controls.Add(Me.lvData)
         Me.Controls.Add(Me.GroupBox1)
@@ -140,8 +160,10 @@ Partial Class frmReadTableHash
     Friend WithEvents brnBrowse As System.Windows.Forms.Button
     Friend WithEvents lvData As System.Windows.Forms.ListView
     Friend WithEvents txtQuery As System.Windows.Forms.TextBox
-    Friend WithEvents txtRead As System.Windows.Forms.Button
+    Friend WithEvents btnRead As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents txtHash As System.Windows.Forms.TextBox
     Friend WithEvents ofd As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents btnMatch As System.Windows.Forms.Button
+    Friend WithEvents txtMatch As System.Windows.Forms.TextBox
 End Class
