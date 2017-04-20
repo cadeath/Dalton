@@ -30,10 +30,11 @@ Partial Class frmReadTableHash
         Me.txtQuery = New System.Windows.Forms.TextBox()
         Me.btnRead = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtHash = New System.Windows.Forms.TextBox()
-        Me.ofd = New System.Windows.Forms.OpenFileDialog()
-        Me.txtMatch = New System.Windows.Forms.TextBox()
         Me.btnMatch = New System.Windows.Forms.Button()
+        Me.txtMatch = New System.Windows.Forms.TextBox()
+        Me.ofd = New System.Windows.Forms.OpenFileDialog()
+        Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
+        Me.txtHash = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -95,34 +96,15 @@ Partial Class frmReadTableHash
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtHash)
         Me.GroupBox2.Controls.Add(Me.btnMatch)
         Me.GroupBox2.Controls.Add(Me.txtMatch)
-        Me.GroupBox2.Controls.Add(Me.txtHash)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 366)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(771, 58)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Hash Value"
-        '
-        'txtHash
-        '
-        Me.txtHash.Location = New System.Drawing.Point(6, 19)
-        Me.txtHash.Name = "txtHash"
-        Me.txtHash.ReadOnly = True
-        Me.txtHash.Size = New System.Drawing.Size(357, 20)
-        Me.txtHash.TabIndex = 2
-        '
-        'ofd
-        '
-        Me.ofd.Filter = "Data | *.fdb"
-        '
-        'txtMatch
-        '
-        Me.txtMatch.Location = New System.Drawing.Point(369, 19)
-        Me.txtMatch.Name = "txtMatch"
-        Me.txtMatch.Size = New System.Drawing.Size(313, 20)
-        Me.txtMatch.TabIndex = 3
         '
         'btnMatch
         '
@@ -132,6 +114,29 @@ Partial Class frmReadTableHash
         Me.btnMatch.TabIndex = 4
         Me.btnMatch.Text = "&Match"
         Me.btnMatch.UseVisualStyleBackColor = True
+        '
+        'txtMatch
+        '
+        Me.txtMatch.Location = New System.Drawing.Point(381, 19)
+        Me.txtMatch.Name = "txtMatch"
+        Me.txtMatch.Size = New System.Drawing.Size(301, 20)
+        Me.txtMatch.TabIndex = 3
+        '
+        'ofd
+        '
+        Me.ofd.Filter = "Data | *.fdb"
+        '
+        'fbdBackup
+        '
+        Me.fbdBackup.SelectedPath = "C:\"
+        '
+        'txtHash
+        '
+        Me.txtHash.Location = New System.Drawing.Point(13, 19)
+        Me.txtHash.Name = "txtHash"
+        Me.txtHash.ReadOnly = True
+        Me.txtHash.Size = New System.Drawing.Size(362, 20)
+        Me.txtHash.TabIndex = 5
         '
         'frmReadTableHash
         '
@@ -162,8 +167,9 @@ Partial Class frmReadTableHash
     Friend WithEvents txtQuery As System.Windows.Forms.TextBox
     Friend WithEvents btnRead As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents txtHash As System.Windows.Forms.TextBox
     Friend WithEvents ofd As System.Windows.Forms.OpenFileDialog
     Friend WithEvents btnMatch As System.Windows.Forms.Button
     Friend WithEvents txtMatch As System.Windows.Forms.TextBox
+    Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
+    Friend WithEvents txtHash As System.Windows.Forms.TextBox
 End Class
