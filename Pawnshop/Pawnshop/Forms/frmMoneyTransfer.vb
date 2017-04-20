@@ -1,8 +1,8 @@
 ﻿Imports System.Data.Odbc
 Public Class frmMoneyTransfer
 
-    Dim senderClient As Client
-    Dim receiverClient As Client
+    Dim senderClient As Customer
+    Dim receiverClient As Customer
     Private currentMe As Integer = GetOption("MEnumLast")
     Private currentMr As Integer = GetOption("MRNumLast")
     Dim moneytransferIDNumber As MoneyTransfer
@@ -241,8 +241,8 @@ Public Class frmMoneyTransfer
         End If
         Dim secured_str As String = txtSender.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.frmMTSend)
-        frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.frmMTSend)
+        frmClientNew.Show()
     End Sub
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
@@ -653,24 +653,34 @@ Public Class frmMoneyTransfer
         Me.Close()
     End Sub
 
-    Friend Sub LoadSenderInfo(ByVal cl As Client)
-        txtSender.Text = String.Format("{0} {1}", cl.FirstName, cl.LastName)
-        txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)
-        txtSenderID.Text = cl.IDType
-        txtSenderIDNum.Text = cl.IDNumber
+    Friend Sub LoadSenderInfo(ByVal cus As Customer)
+        txtSender.Text = String.Format("{0} {1}", cus.FirstName, cus.LastName)
+        txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity, cus.PresentProvince)
 
-        senderClient = cl
+        For Each id As NewIdentificationCard In cus.CustomersIDs
+            If id.isPrimary > 0 Then
+                txtSenderID.Text = id.IDType
+                txtSenderIDNum.Text = id.IDNumber
+            End If
+        Next
+
+        senderClient = cus
         txtReceiver.Focus()
     End Sub
 
-    Friend Sub LoadReceiverInfo(ByVal cl As Client)
-        txtReceiver.Text = String.Format("{0} {1}", cl.FirstName, cl.LastName)
-        txtReceiverAddr.Text = String.Format("{0} {1} {2} {3}", cl.AddressSt, cl.AddressBrgy, cl.AddressCity, cl.AddressProvince)
-        txtReceiverID.Text = cl.IDType
-        txtReceiverIDNum.Text = cl.IDNumber
+    Friend Sub LoadReceiverInfo(ByVal cus As Customer)
+        txtSender.Text = String.Format("{0} {1}", cus.FirstName, cus.LastName)
+        txtSenderAddr.Text = String.Format("{0} {1} {2} {3}", cus.PresentStreet, cus.PresentBarangay, cus.PresentCity, cus.PresentProvince)
 
-        receiverClient = cl
-        txtRefNum.Focus()
+        For Each id As NewIdentificationCard In cus.CustomersIDs
+            If id.isPrimary > 0 Then
+                txtSenderID.Text = id.IDType
+                txtSenderIDNum.Text = id.IDNumber
+            End If
+        Next
+
+        senderClient = cus
+        txtReceiver.Focus()
     End Sub
 
     Private Sub btnSearchReceiver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchReceiver.Click
@@ -681,8 +691,8 @@ Public Class frmMoneyTransfer
         End If
         Dim secured_str As String = txtReceiver.Text
         secured_str = DreadKnight(secured_str)
-        frmClient.SearchSelect(secured_str, FormName.frmMTReceive)
-        frmClient.Show()
+        frmClientNew.SearchSelect(secured_str, FormName.frmMTReceive)
+        frmClientNew.Show()
     End Sub
 
     Private Sub txtAmount_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAmount.KeyPress

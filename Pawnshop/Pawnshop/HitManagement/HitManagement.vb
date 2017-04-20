@@ -7,9 +7,9 @@
     Const HIT_MAX As Integer = 3
     Friend Const dsName As String = "TBLHIT"
 
-    Friend Sub do_PawningHit(cl As Client, pt As Single)
-        CLID = cl.ID
-        FULLNAME = String.Format("{0}, {1} {2}", cl.LastName, cl.FirstName, cl.Suffix)
+    Friend Sub do_PawningHit(ByVal cus As Customer, ByVal pt As Single)
+        CLID = cus.CustomerID
+        FULLNAME = String.Format("{0}, {1} {2}", cus.LastName, cus.FirstName, cus.Suffix)
 
         Dim ds As DataSet
         Dim mySql As String = "SELECT * FROM OPT "

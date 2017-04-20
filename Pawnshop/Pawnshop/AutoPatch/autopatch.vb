@@ -23,6 +23,9 @@ Module autopatch
         ' FOR v1.5
         db13.PatchUp()
 
+        ' FOR KYC
+        KYC_Initialization()
+
         DBVERSION = GetOption("DBVersion")
     End Sub
 

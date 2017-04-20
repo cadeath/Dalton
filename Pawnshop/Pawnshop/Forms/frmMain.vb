@@ -231,7 +231,7 @@ Public Class frmMain
             MsgBoxAuthoriation("You don't have access to Client Management")
             Exit Sub
         End If
-        frmClient.Show()
+        frmClientNew.Show()
     End Sub
 
     Private Sub btnPawning_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPawning.Click

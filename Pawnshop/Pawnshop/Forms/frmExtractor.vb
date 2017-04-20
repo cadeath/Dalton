@@ -514,7 +514,7 @@ Public Class frmExtractor
         Dim ed As Date = MonCalendar.SelectionEnd
 
         Dim mySql As String = "SELECT P.*, ITM.ITEMCATEGORY, PITM.ITEMCLASS, C.*, U.USERNAME FROM OPT P "
-        mySql &= "INNER JOIN tblClient C on P.clientid = C.clientid "
+        mySql &= "INNER JOIN " & CUSTOMER_TABLE & " C on P.clientid = C.ID "
         mySql &= "INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
         mySql &= "INNER JOIN OPI PITM ON PITM.PAWNITEMID = P.PAWNITEMID "
         mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = PITM.ITEMID "
@@ -545,11 +545,11 @@ Public Class frmExtractor
                 oSheet.Cells(rid, 3).value = .Item("LoanDate").ToString 'TransDate
                 oSheet.Cells(rid, 4).value = .Item("FirstName").ToString & _
                     " " & .Item("LastName").ToString 'Pawner
-                oSheet.Cells(rid, 5).value = ds_expiry.Tables(0).Rows(i).Item("Addr_Street").ToString & _
-                    " " & ds_expiry.Tables(0).Rows(i).Item("Addr_Brgy").ToString 'Addr1
-                oSheet.Cells(rid, 6).value = .Item("Addr_City").ToString 'Addr2
-                oSheet.Cells(rid, 7).value = .Item("Addr_Province").ToString 'Addr3
-                oSheet.Cells(rid, 8).value = .Item("Addr_Zip").ToString 'Zip
+                oSheet.Cells(rid, 5).value = ds_expiry.Tables(0).Rows(i).Item("STREET1").ToString & _
+                    " " & ds_expiry.Tables(0).Rows(i).Item("BRGY1").ToString 'Addr1
+                oSheet.Cells(rid, 6).value = .Item("CITY1").ToString 'Addr2
+                oSheet.Cells(rid, 7).value = .Item("PROVINCE1").ToString 'Addr3
+                oSheet.Cells(rid, 8).value = .Item("ZIP1").ToString 'Zip
                 oSheet.Cells(rid, 9).value = .Item("ItemCategory").ToString 'ItemCategory
                 oSheet.Cells(rid, 11).value = "1" 'NoPCS
                 oSheet.Cells(rid, 12).value = .Item("Description").ToString 'DESC1
@@ -568,7 +568,7 @@ Public Class frmExtractor
                 oSheet.Cells(rid, 32).value = .Item("ORNUM").ToString 'RCT NO
                 oSheet.Cells(rid, 39).value = "'" & .Item("PHONE1").ToString 'PHONE_NO
                 oSheet.Cells(rid, 40).value = .Item("BIRTHDAY").ToString 'BIRTHDAY
-                oSheet.Cells(rid, 41).value = .Item("SEX").ToString 'SEX
+                oSheet.Cells(rid, 41).value = .Item("GENDER").ToString 'SEX
                 oSheet.Cells(rid, 45).value = .Item("APPRAISAL").ToString 'APPRAISAL1
                 oSheet.Cells(rid, 48).value = .Item("ITEMCLASS").ToString 'ITEMDESC
             End With
