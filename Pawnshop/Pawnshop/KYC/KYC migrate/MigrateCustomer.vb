@@ -353,7 +353,6 @@ NEXTLINE:
 
         For Each ph As MigratePhoneNumber In _custPhones
 
-            MsgBox(ph.PhoneNumber)
             dsNewRowPH = ds.Tables(CUSTOMER_PHONE).NewRow
             With dsNewRowPH
                 .Item("CUSTID") = ph.CustomerID

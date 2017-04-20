@@ -513,14 +513,16 @@ Public Class frmExtractor
         Dim sd As Date = MonCalendar.SelectionStart
         Dim ed As Date = MonCalendar.SelectionEnd
 
-        Dim mySql As String = "SELECT P.*, ITM.ITEMCATEGORY, PITM.ITEMCLASS, C.*, U.USERNAME FROM OPT P "
+        Dim mySql As String = "SELECT P.*, ITM.ITEMCATEGORY, PITM.ITEMCLASS, C.*, "
+        mySql &= "U.USERNAME FROM OPT P "
         mySql &= "INNER JOIN " & CUSTOMER_TABLE & " C on P.clientid = C.ID "
         mySql &= "INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
         mySql &= "INNER JOIN OPI PITM ON PITM.PAWNITEMID = P.PAWNITEMID "
         mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = PITM.ITEMID "
+        mySql &= "LEFT JOIN " & CUSTOMER_PHONE & " PH ON PH.CUSTID = P.CLIENTID "
         mySql &= "WHERE "
         mySql &= "(P.Status = 'L' or P.Status = 'R') AND "
-        mySql &= "(CHAR_LENGTH(C.Phone1) = 11 OR CHAR_LENGTH(C.Phone2) = 11) AND "
+        mySql &= "(CHAR_LENGTH(PH.PHONENUMBER) = 10) AND PHNE.ISPRIMARY > 0 AND "
         mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", GetFirstDate(sd).ToShortDateString, GetLastDate(ed).ToShortDateString)
 
         Dim ds_expiry As DataSet = LoadSQL(mySql)

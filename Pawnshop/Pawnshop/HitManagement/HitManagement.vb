@@ -48,7 +48,7 @@
         mySql &= vbCrLf & "P.PAWNTICKET, CASE WHEN P.OLDTICKET = 0  THEN P.PRINCIPAL ELSE 0 END AS PRINCIPAL"
         mySql &= vbCrLf & "FROM TBLHIT H "
         mySql &= vbCrLf & "INNER JOIN OPT P ON P.CLIENTID = H.PAWNID "
-        mySql &= vbCrLf & "INNER JOIN TBLCLIENT C ON C.CLIENTID = P.CLIENTID"
+        mySql &= vbCrLf & "INNER JOIN " & CUSTOMER_TABLE & " C ON C.ID = P.CLIENTID"
         mySql &= vbCrLf & "WHERE "
         mySql &= vbCrLf & String.Format(" H.HIT_DATE = '{0}'", dt.ToShortDateString)
         Return mySql
