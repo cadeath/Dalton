@@ -37,6 +37,10 @@ Public Class frmReadTableHash
         If txtQuery.Text = "" Then Exit Sub
         Try
             ProcessDirectory(txtPath.Text)
+
+            lvData.Items.Clear()
+            lvData.Columns.Clear()
+
             Dim mysql As String = " " & txtQuery.Text & ""
             database.dbName = HT.Values(0)
             Dim dsHead As DataSet = LoadSQL(mysql)
@@ -126,5 +130,11 @@ Public Class frmReadTableHash
 
     Private Sub lvData_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvData.DoubleClick
         If lvData.SelectedItems.Count <= 0 Then Exit Sub
+
+        For Each itm As ListViewItem In lvData.SelectedItems
+            txtHash.Text = itm.SubItems(getCindex("Hash Value")).Text
+        Next
+
     End Sub
+
 End Class

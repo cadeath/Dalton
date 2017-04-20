@@ -30,11 +30,11 @@ Partial Class frmReadTableHash
         Me.txtQuery = New System.Windows.Forms.TextBox()
         Me.btnRead = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtHash = New System.Windows.Forms.TextBox()
         Me.btnMatch = New System.Windows.Forms.Button()
         Me.txtMatch = New System.Windows.Forms.TextBox()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
-        Me.txtHash = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -106,6 +106,14 @@ Partial Class frmReadTableHash
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Hash Value"
         '
+        'txtHash
+        '
+        Me.txtHash.Location = New System.Drawing.Point(13, 19)
+        Me.txtHash.Name = "txtHash"
+        Me.txtHash.ReadOnly = True
+        Me.txtHash.Size = New System.Drawing.Size(362, 20)
+        Me.txtHash.TabIndex = 5
+        '
         'btnMatch
         '
         Me.btnMatch.Location = New System.Drawing.Point(688, 13)
@@ -130,19 +138,11 @@ Partial Class frmReadTableHash
         '
         Me.fbdBackup.SelectedPath = "C:\"
         '
-        'txtHash
-        '
-        Me.txtHash.Location = New System.Drawing.Point(13, 19)
-        Me.txtHash.Name = "txtHash"
-        Me.txtHash.ReadOnly = True
-        Me.txtHash.Size = New System.Drawing.Size(362, 20)
-        Me.txtHash.TabIndex = 5
-        '
         'frmReadTableHash
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(788, 425)
+        Me.ClientSize = New System.Drawing.Size(787, 425)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnRead)
         Me.Controls.Add(Me.txtQuery)
