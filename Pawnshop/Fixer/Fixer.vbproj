@@ -65,7 +65,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>bug_fix.ico</ApplicationIcon>
+    <ApplicationIcon>Iconarchive-Red-Orb-Alphabet-Hash.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>C9A1A1F2AFF424A2DDD1A6E600DB49E39F84B9B1</ManifestCertificateThumbprint>

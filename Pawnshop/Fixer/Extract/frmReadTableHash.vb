@@ -38,38 +38,48 @@ Public Class frmReadTableHash
         Try
             ProcessDirectory(txtPath.Text)
 
-            lvData.Items.Clear()
-            lvData.Columns.Clear()
-
+            ClearListView()
             Dim mysql As String = " " & txtQuery.Text & ""
             database.dbName = HT.Values(0)
             Dim dsHead As DataSet = LoadSQL(mysql)
 
-            For Each dt In dsHead.Tables
-                For Each col As DataColumn In dt.Columns
-                    lvData.Columns.Add(col.ToString)
-                Next
+            If chkOnly.Checked = True Then
+                lvData.Columns.Add("Branch")
                 lvData.Columns.Add("Hash Value")
-            Next
+
+            Else
+
+                For Each dt In dsHead.Tables
+                    For Each col As DataColumn In dt.Columns
+                        lvData.Columns.Add(col.ToString)
+                    Next
+                    lvData.Columns.Add("Hash Value")
+                Next
+            End If
 
             For Each hash As DictionaryEntry In HT
                 database.dbName = hash.Value
                 Dim ds As DataSet = LoadSQL(mysql)
 
-                For Each dt In ds.Tables
-                    'ShowDataInLvw(dt, ds)
-                    For Each row As DataRow In dt.Rows
-                        Dim lst As ListViewItem
-                        lst = lvData.Items.Add(row(0))
-                        For i As Integer = 1 To dt.Columns.Count - 1
-                            Console.WriteLine("ItemRows: " & row(i).ToString)
-                            lst.SubItems.Add(row(i).ToString)
+                If chkOnly.Checked = True Then
+                    Dim lst As ListViewItem = lvData.Items.Add(GetOption("BranchCode"))
+                    lst.SubItems.Add(security.GetMD5(FieldsOnly(ds)))
+                Else
+
+                    For Each dt In ds.Tables
+                        For Each row As DataRow In dt.Rows
+                            Dim lst As ListViewItem = lvData.Items.Add(row(0))
+                            For i As Integer = 1 To dt.Columns.Count - 1
+                                Console.WriteLine("ItemRows: " & row(i).ToString)
+                                lst.SubItems.Add(row(i).ToString)
+                            Next
+                            lst.SubItems.Add(security.GetMD5(ds))
                         Next
-                        lst.SubItems.Add(security.GetMD5(ds))
                     Next
-                Next
+                End If
 
             Next
+
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
@@ -77,14 +87,14 @@ Public Class frmReadTableHash
     End Sub
 
     'Private Sub ShowDataInLvw(ByVal data As DataTable, ByVal ds As DataSet)
-    '    lvData.Items.Clear()
-    '    'For Each col As DataColumn In data.Columns
-    '    '    lvData.Columns.Add(col.ToString)
-    '    'Next
+    '    lvNewData.Items.Clear()
+    '    For Each col As DataColumn In data.Columns
+    '        lvNewData.Columns.Add(col.ToString)
+    '    Next
 
     '    For Each row As DataRow In data.Rows
     '        Dim lst As ListViewItem
-    '        lst = lvData.Items.Add(row(0))
+    '        lst = lvNewData.Items.Add(row(0))
     '        For i As Integer = 1 To data.Columns.Count - 1
     '            Console.WriteLine("ItemRows: " & row(i).ToString)
     '            lst.SubItems.Add(row(i).ToString)
@@ -92,7 +102,7 @@ Public Class frmReadTableHash
     '    Next
 
     '    'txtHash.Text = security.GetMD5(ds)
-    'End Sub
+    ' End Sub
 
     Private Sub btnMatch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMatch.Click
         For Each itm As ListViewItem In lvData.Items
@@ -137,4 +147,20 @@ Public Class frmReadTableHash
 
     End Sub
 
+    Private Sub ClearListView()
+        lvData.Columns.Clear()
+        lvData.Items.Clear()
+    End Sub
+
+    Private Function FieldsOnly(ByVal ds As DataSet) As DataSet
+        For i As Int32 = 1 To ds.Tables(0).Rows.Count
+            ds.Tables(0).Rows.RemoveAt(0)
+        Next
+        Return ds
+    End Function
+
+    Private Sub Disable(ByVal st As Boolean)
+        txtQuery.Enabled = Not st
+        btnRead.Enabled = Not st
+    End Sub
 End Class

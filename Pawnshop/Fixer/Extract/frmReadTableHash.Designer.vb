@@ -35,6 +35,7 @@ Partial Class frmReadTableHash
         Me.txtMatch = New System.Windows.Forms.TextBox()
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
+        Me.chkOnly = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -138,11 +139,24 @@ Partial Class frmReadTableHash
         '
         Me.fbdBackup.SelectedPath = "C:\"
         '
+        'chkOnly
+        '
+        Me.chkOnly.AutoSize = True
+        Me.chkOnly.Checked = True
+        Me.chkOnly.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkOnly.Location = New System.Drawing.Point(702, 54)
+        Me.chkOnly.Name = "chkOnly"
+        Me.chkOnly.Size = New System.Drawing.Size(77, 17)
+        Me.chkOnly.TabIndex = 4
+        Me.chkOnly.Text = "Fields Only"
+        Me.chkOnly.UseVisualStyleBackColor = True
+        '
         'frmReadTableHash
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(787, 425)
+        Me.Controls.Add(Me.chkOnly)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnRead)
         Me.Controls.Add(Me.txtQuery)
@@ -172,4 +186,5 @@ Partial Class frmReadTableHash
     Friend WithEvents txtMatch As System.Windows.Forms.TextBox
     Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents txtHash As System.Windows.Forms.TextBox
+    Friend WithEvents chkOnly As System.Windows.Forms.CheckBox
 End Class
