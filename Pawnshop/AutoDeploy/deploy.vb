@@ -32,9 +32,16 @@ Module deploy
     Private url_hash As Hashtable
 
     Friend Sub Setup()
+        btnOnHold.Enabled = False
         LoadPath()
 
         readConfig_v2(HOST & CONFIG)
+
+        While Not isFinished
+            Application.DoEvents()
+        End While
+
+        btnOnHold.Enabled = True
     End Sub
 
     Private Sub LoadPath()
@@ -63,13 +70,6 @@ Module deploy
             My.Computer.FileSystem.RenameFile(DATABASE, "_" & DATABASE)
         End If
     End Sub
-
-    Private Function GetExeVersion(src As String) As Version
-        If CurrentVersion Is Nothing Then _
-            CurrentVersion = Version.Parse(FileVersionInfo.GetVersionInfo(src).FileVersion)
-
-        Return CurrentVersion
-    End Function
 
     Private Sub readConfig_v2(src As String)
         Dim m_xmld As XmlDocument
@@ -109,7 +109,7 @@ Module deploy
         End While
 
         If updateProcedure = Procedure.Installer Then
-            runInSilent(TMP & "/" & stablePath.Split("/")(stablePath.PadLeft("/").Count - 1))
+            runInSilent(TMP & "/" & stablePath.Split("/")(stablePath.Split("/").Count - 1))
 
         End If
     End Sub
@@ -139,103 +139,6 @@ Module deploy
                 Application.DoEvents()
             End While
         Next
-    End Sub
-
-
-    'Private Sub ReadingConfig(src As String)
-    '    'src = PATH
-    '    isFinished = False
-    '    Try
-    '        Dim str As String = ""
-    '        Dim m_xmld As XmlDocument
-    '        Dim m_nodelist As XmlNodeList
-    '        Dim m_node As XmlNode
-
-    '        m_xmld = New XmlDocument
-    '        m_xmld.Load(src)
-    '        m_nodelist = m_xmld.SelectNodes("/dis")
-
-    '        Dim m_version = m_nodelist.Item(0).Attributes.GetNamedItem("version").Value
-    '        Dim m_type = m_nodelist.Item(0).ChildNodes.Item(0).Attributes.GetNamedItem("type").Value
-
-    '        Console.WriteLine("Version: " & m_version)
-    '        Console.WriteLine("Type: " & m_type)
-
-    '        If Version.Parse(m_version).CompareTo(GetExeVersion("AutoDeploy.exe")) <= 0 Then _
-    '            Exit Sub
-
-    '        Select Case m_type
-    '            Case "installer"
-    '                m_node = m_nodelist.Item(0).ChildNodes(0)
-
-    '                For Each url In m_node
-    '                    str = "Download " & url.innerText & "..."
-    '                    Console.WriteLine(str)
-
-    '                    displayStatus(str)
-    '                    download_File(url.innerText)
-
-    '                    ' One download at a time
-    '                    While onDownload
-    '                        Application.DoEvents()
-    '                    End While
-    '                Next
-
-    '            Case "patch"
-    '                'Redownload the xml
-    '                download_File(src)
-    '                m_node = m_nodelist.Item(0).ChildNodes(0)
-
-    '                For Each url As XmlNode In m_node
-    '                    If url.LocalName.Contains("-dir") Then
-    '                        Dim fileName = url.Attributes.GetNamedItem("src").Value
-    '                        Dim fSrc = url.Attributes.GetNamedItem("src").Value
-    '                        Dim fDst = url.InnerText
-
-    '                        fileName = fileName.Split("/")(fileName.Split("/").Count - 1)
-    '                        If Not System.IO.File.Exists(TMP & "/" & fileName) Then _
-    '                            download_File(fSrc, TMP & "/" & url.InnerText)
-
-    '                        'Create DIR
-    '                        Dim splitCnt As Integer = fDst.Split("/").Count - 1
-    '                        Dim splitI As Integer = 0
-    '                        For Each srcDir In fDst.Split("/")
-    '                            If Not System.IO.Directory.Exists(srcDir) And splitI <> splitCnt Then _
-    '                                System.IO.Directory.CreateDirectory(srcDir)
-
-    '                            If splitI = splitCnt Then
-    '                                System.IO.File.Move(TMP & "/" & fileName, fDst)
-    '                            End If
-    '                            splitI += 1
-    '                        Next
-    '                    Else
-    '                        str = "Download " & url.InnerText & "..."
-    '                        displayStatus(str)
-    '                        download_File(url.InnerText)
-    '                    End If
-
-    '                    ' One download at a time
-    '                    While onDownload
-    '                        Application.DoEvents()
-    '                    End While
-    '                Next
-
-    '        End Select
-
-    '    Catch ex As Exception
-    '        If ex.ToString.Contains("No connection could be made because the target machine actively refused") Then
-    '            Console.WriteLine("Unable to connect to the remote server")
-    '            Exit Sub
-    '        End If
-
-    '        Console.WriteLine(ex.ToString)
-    '    End Try
-    '    isFinished = True
-    'End Sub
-
-    Private Sub displayStatus(str As String)
-        If lblStatus Is Nothing Then Exit Sub
-        lblStatus.Text = str
     End Sub
 
     Private Sub download_File(src As String, Optional dst As String = "")
@@ -291,9 +194,7 @@ Module deploy
         End If
     End Sub
 
-    Private Sub runInSilent(cmd_file As String)
-        CommandPrompt(cmd_file, "/LOG=""AutoLog.log"" /SILENT")
-        isFinished = True
-        Console.WriteLine("Completed")
-    End Sub
+    Friend Function GetMainExe() As String
+        Return programPath & EXEFILE
+    End Function
 End Module

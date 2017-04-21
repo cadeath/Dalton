@@ -7,7 +7,7 @@
     ''' <param name="args">args is the parameter that hold nonmodifiable value.</param>
     ''' <returns>return soutput after reading every transaction.</returns>
     ''' <remarks></remarks>
-    Public Function CommandPrompt(ByVal app As String, ByVal args As String) As String
+    Friend Function CommandPrompt(ByVal app As String, ByVal args As String) As String
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo(app, args)
         oStartInfo.UseShellExecute = False
@@ -25,4 +25,22 @@
 
         Return sOutput
     End Function
+
+    Friend Function GetExeVersion(src As String) As Version
+        If CurrentVersion Is Nothing Then _
+            CurrentVersion = Version.Parse(FileVersionInfo.GetVersionInfo(src).FileVersion)
+
+        Return CurrentVersion
+    End Function
+
+    Friend Sub displayStatus(str As String)
+        If lblStatus Is Nothing Then Exit Sub
+        lblStatus.Text = str
+    End Sub
+
+    Friend Sub runInSilent(cmd_file As String)
+        CommandPrompt(cmd_file, "/LOG=""AutoLog.log"" /SILENT")
+        isFinished = True
+        Console.WriteLine("Completed")
+    End Sub
 End Module
