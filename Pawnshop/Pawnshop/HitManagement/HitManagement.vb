@@ -43,8 +43,13 @@
 
     Friend Function Generate_HitReport(dt As Date) As String
         Dim mySql As String
-        mySql = "SELECT DISTINCT H.HIT_DATE, H.PAWNID, H.PAWNER, C.BIRTHDAY, C.PHONE1, C.PHONE2,"
-        mySql &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' || C.ADDR_PROVINCE AS FULLADDRESS,"
+        mySql = "SELECT DISTINCT H.HIT_DATE, H.PAWNID, H.PAWNER, C.BIRTHDAY, "
+        mySql &= vbCrLf & "(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1 "
+        mySql &= vbCrLf & "THEN PH.PHONENUMBER WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)  "
+        mySql &= vbCrLf & "THEN PH.PHONENUMBER ELSE NULL END)AS CONTACTNUMBER "
+        mySql &= vbCrLf & "FROM KYC_PHONE PH LEFT JOIN KYC_CUSTOMERS CC ON CC.ID = PH.CUSTID "
+        mySql &= vbCrLf & "WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' AND PH.CUSTID =CC.ID ROWS 1), "
+        mySql &= vbCrLf & "C.STREET1 || ' ' || C.BRGY1 || ' ' || C.CITY1 || ' ' || C.PROVINCE1 AS FULLADDRESS,"
         mySql &= vbCrLf & "P.PAWNTICKET, CASE WHEN P.OLDTICKET = 0  THEN P.PRINCIPAL ELSE 0 END AS PRINCIPAL"
         mySql &= vbCrLf & "FROM TBLHIT H "
         mySql &= vbCrLf & "INNER JOIN OPT P ON P.CLIENTID = H.PAWNID "

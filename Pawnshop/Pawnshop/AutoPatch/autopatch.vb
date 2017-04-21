@@ -26,6 +26,9 @@ Module autopatch
         ' FOR KYC
         KYC_Initialization()
 
+        'ModifyViews
+        db15.PatchUp()
+
         DBVERSION = GetOption("DBVersion")
     End Sub
 

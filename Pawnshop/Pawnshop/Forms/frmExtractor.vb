@@ -514,15 +514,20 @@ Public Class frmExtractor
         Dim ed As Date = MonCalendar.SelectionEnd
 
         Dim mySql As String = "SELECT P.*, ITM.ITEMCATEGORY, PITM.ITEMCLASS, C.*, "
+        mySql &= "(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1 "
+        mySql &= "THEN PH.PHONENUMBER "
+        mySql &= "WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER "
+        mySql &= "ELSE NULL END)AS CONTACTNUMBER "
+        mySql &= "FROM KYC_PHONE PH "
+        mySql &= "LEFT JOIN KYC_CUSTOMERS CC ON CC.ID = PH.CUSTID "
+        mySql &= "WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' AND PH.CUSTID =CC.ID ROWS 1),"
         mySql &= "U.USERNAME FROM OPT P "
         mySql &= "INNER JOIN " & CUSTOMER_TABLE & " C on P.clientid = C.ID "
         mySql &= "INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
         mySql &= "INNER JOIN OPI PITM ON PITM.PAWNITEMID = P.PAWNITEMID "
         mySql &= "INNER JOIN TBLITEM ITM ON ITM.ITEMID = PITM.ITEMID "
-        mySql &= "LEFT JOIN " & CUSTOMER_PHONE & " PH ON PH.CUSTID = P.CLIENTID "
         mySql &= "WHERE "
         mySql &= "(P.Status = 'L' or P.Status = 'R') AND "
-        mySql &= "(CHAR_LENGTH(PH.PHONENUMBER) = 10) AND PHNE.ISPRIMARY > 0 AND "
         mySql &= vbCr & String.Format("EXPIRYDATE BETWEEN '{0}' AND '{1}'", GetFirstDate(sd).ToShortDateString, GetLastDate(ed).ToShortDateString)
 
         Dim ds_expiry As DataSet = LoadSQL(mySql)
@@ -568,7 +573,7 @@ Public Class frmExtractor
                 oSheet.Cells(rid, 29).value = .Item("Status").ToString 'STATUS
                 oSheet.Cells(rid, 31).value = .Item("OLDTICKET").ToString 'OLD NUM
                 oSheet.Cells(rid, 32).value = .Item("ORNUM").ToString 'RCT NO
-                oSheet.Cells(rid, 39).value = "'" & .Item("PHONE1").ToString 'PHONE_NO
+                oSheet.Cells(rid, 39).value = "'" & .Item("CONTACTNUMBER").ToString 'PHONE_NO
                 oSheet.Cells(rid, 40).value = .Item("BIRTHDAY").ToString 'BIRTHDAY
                 oSheet.Cells(rid, 41).value = .Item("GENDER").ToString 'SEX
                 oSheet.Cells(rid, 45).value = .Item("APPRAISAL").ToString 'APPRAISAL1
