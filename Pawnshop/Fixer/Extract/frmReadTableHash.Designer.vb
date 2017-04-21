@@ -36,6 +36,7 @@ Partial Class frmReadTableHash
         Me.ofd = New System.Windows.Forms.OpenFileDialog()
         Me.fbdBackup = New System.Windows.Forms.FolderBrowserDialog()
         Me.chkOnly = New System.Windows.Forms.CheckBox()
+        Me.pbProcess = New System.Windows.Forms.ProgressBar()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -151,11 +152,19 @@ Partial Class frmReadTableHash
         Me.chkOnly.Text = "Fields Only"
         Me.chkOnly.UseVisualStyleBackColor = True
         '
+        'pbProcess
+        '
+        Me.pbProcess.Location = New System.Drawing.Point(12, 427)
+        Me.pbProcess.Name = "pbProcess"
+        Me.pbProcess.Size = New System.Drawing.Size(771, 23)
+        Me.pbProcess.TabIndex = 5
+        '
         'frmReadTableHash
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(787, 425)
+        Me.ClientSize = New System.Drawing.Size(787, 452)
+        Me.Controls.Add(Me.pbProcess)
         Me.Controls.Add(Me.chkOnly)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.btnRead)
@@ -165,7 +174,7 @@ Partial Class frmReadTableHash
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmReadTableHash"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Read Table"
+        Me.Text = "Read & Hash Table"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -187,4 +196,5 @@ Partial Class frmReadTableHash
     Friend WithEvents fbdBackup As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents txtHash As System.Windows.Forms.TextBox
     Friend WithEvents chkOnly As System.Windows.Forms.CheckBox
+    Friend WithEvents pbProcess As System.Windows.Forms.ProgressBar
 End Class

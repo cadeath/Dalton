@@ -35,6 +35,7 @@ Public Class frmReadTableHash
 
     Private Sub txtRead_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRead.Click
         If txtQuery.Text = "" Then Exit Sub
+        Disable(1)
         Try
             ProcessDirectory(txtPath.Text)
 
@@ -42,6 +43,23 @@ Public Class frmReadTableHash
             Dim mysql As String = " " & txtQuery.Text & ""
             database.dbName = HT.Values(0)
             Dim dsHead As DataSet = LoadSQL(mysql)
+
+
+            Dim PbMaxValue As Integer = 0
+            If chkOnly.Checked = True Then
+
+                PbMaxValue = HT.Count
+
+            Else
+
+                For Each hash As DictionaryEntry In HT
+                    database.dbName = hash.Value
+                    Dim ds As DataSet = LoadSQL(mysql)
+                    PbMaxValue += ds.Tables(0).Rows.Count
+                Next
+
+            End If
+            pbProcess.Maximum = PbMaxValue
 
             If chkOnly.Checked = True Then
                 lvData.Columns.Add("Branch")
@@ -62,8 +80,11 @@ Public Class frmReadTableHash
                 Dim ds As DataSet = LoadSQL(mysql)
 
                 If chkOnly.Checked = True Then
+
                     Dim lst As ListViewItem = lvData.Items.Add(GetOption("BranchCode"))
                     lst.SubItems.Add(security.GetMD5(FieldsOnly(ds)))
+                    pbProcess.Value += 1
+
                 Else
 
                     For Each dt In ds.Tables
@@ -74,6 +95,8 @@ Public Class frmReadTableHash
                                 lst.SubItems.Add(row(i).ToString)
                             Next
                             lst.SubItems.Add(security.GetMD5(ds))
+                            pbProcess.Value += 1
+
                         Next
                     Next
                 End If
@@ -84,6 +107,8 @@ Public Class frmReadTableHash
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
         HT.Clear()
+        pbProcess.Value = pbProcess.Minimum
+        Disable(0)
     End Sub
 
     'Private Sub ShowDataInLvw(ByVal data As DataTable, ByVal ds As DataSet)
@@ -123,6 +148,7 @@ Public Class frmReadTableHash
                 Return x
             End If
         Next
+
         Return -1
     End Function
 
