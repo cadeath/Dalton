@@ -1,6 +1,6 @@
 ﻿Public Class frmMain
 
-    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles btnStart.Click
+    Private Sub btnStart_Click(sender As System.Object, e As System.EventArgs) Handles btnStart.Click
         deploy.pbDownload = pbUpdate
         deploy.lblStatus = lblUpdate
         deploy.btnOnHold = btnStart
@@ -11,8 +11,12 @@
         End While
 
         Dim app As String = GetMainExe()
+        Dim lastFwdSl As Integer = app.LastIndexOf("/")
+        Dim ch As String = app.Substring(0, lastFwdSl)
+        Dim lastExe As String = app.Substring(lastFwdSl + 1)
 
-        Process.Start(app)
+        ChDir(ch)
+        Process.Start(lastExe)
         End
     End Sub
 End Class

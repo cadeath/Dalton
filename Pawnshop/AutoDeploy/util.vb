@@ -15,6 +15,7 @@
         oStartInfo.WindowStyle = ProcessWindowStyle.Hidden
         oStartInfo.CreateNoWindow = True
         oProcess.StartInfo = oStartInfo
+        oProcess.StartInfo.Verb = "runas"
 
         oProcess.Start()
 

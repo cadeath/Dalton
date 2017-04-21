@@ -97,7 +97,7 @@ Module deploy
             Console.WriteLine("Exe Version: " & GetExeVersion(exe_path).ToString)
 
             ' Loading Files
-            downloading_data(m_nodelist)
+            'downloading_data(m_nodelist)
         ElseIf updateProcedure = Procedure.Installer Then
             ' Execute Fresh Install
 
