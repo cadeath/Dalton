@@ -28,6 +28,7 @@ Module deploy
 
     Private stablePath As String
     Private installerPath As String
+    Private url_hash As Hashtable
 
     Friend Sub Setup()
         LoadPath()
@@ -75,13 +76,49 @@ Module deploy
         Dim m_nodelist As XmlNodeList
         Dim m_node As XmlNode
 
+        Dim new_version As Version
+
         m_xmld = New XmlDocument
         m_xmld.Load(src)
         m_nodelist = m_xmld.SelectNodes("/dis")
 
         stablePath = m_nodelist.Item(0).ChildNodes(1).InnerText
+        new_version = Version.Parse(m_nodelist.Item(0).Attributes.GetNamedItem("version").Value)
+
         Console.WriteLine("Installer: " & stablePath)
+        Console.WriteLine("Latest Version: " & stablePath)
+
+        updateProcedure = Procedure.Idle
+        If updateProcedure = Procedure.Idle Then
+            ' Execute Patch or Install
+
+            'Version Checker
+
+            downloading_data(m_nodelist)
+        ElseIf updateProcedure = Procedure.Installer Then
+            ' Execute Fresh Install
+
+            download_File(stablePath)
+        End If
     End Sub
+
+    Private Sub downloading_data(xml As XmlNodeList)
+        Dim configType = xml.Item(0).ChildNodes.Item(0).Attributes.GetNamedItem("type").Value
+        Dim fileNode = xml.Item(0).ChildNodes.Item(0).ChildNodes
+
+        Select Case configType
+            Case "patch"
+                updateProcedure = Procedure.Patch
+            Case "installer"
+                updateProcedure = Procedure.Installer
+        End Select
+
+        Console.WriteLine("Config: " & configType)
+        For Each nd As XmlNode In fileNode
+            Console.WriteLine("URL: " & nd.InnerText)
+        Next
+    End Sub
+
 
     'Private Sub ReadingConfig(src As String)
     '    'src = PATH
