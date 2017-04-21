@@ -15,6 +15,10 @@
         Dim ch As String = app.Substring(0, lastFwdSl)
         Dim lastExe As String = app.Substring(lastFwdSl + 1)
 
+        If ch = "" Then
+            MsgBox("FAILED TO DOWNLOAD AND RUN APPLICATION", MsgBoxStyle.Critical, "ERROR 00000")
+            Exit Sub
+        End If
         ChDir(ch)
         Process.Start(lastExe)
         End

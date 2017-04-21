@@ -7,7 +7,7 @@ Module deploy
     Const DATABASE As String = "W3W1LH4CKU.FDB"     'DATABASE NAME
     Const CONFIG As String = "disconfig.xml"        'CONFIG FILE
     Const TMP As String = "tmp"                     'TEMPORARY FOLDER
-    Const HOST As String = "http://192.164.0.118/"      'REMOTE HOST
+    Const HOST As String = "http://192.164.0.118/"  'REMOTE HOST
     Const EXEFILE As String = "/pawnshop.exe"
 
     Friend pbDownload As ProgressBar
@@ -29,6 +29,7 @@ Module deploy
 
     Private stablePath As String
     Private programPath As String
+    Private configType As String
     Private url_hash As Hashtable
 
     Friend Sub Setup()
@@ -79,9 +80,18 @@ Module deploy
         Dim new_version As Version
 
         m_xmld = New XmlDocument
-        m_xmld.Load(src)
-        m_nodelist = m_xmld.SelectNodes("/dis")
+        Try
+            m_xmld.Load(src)
+        Catch ex As Exception
+            If ex.ToString.Contains("Unable to connect to the remote server") Then
+                Console.WriteLine("Server is down!")
+            Else
+                Console.WriteLine(ex.ToString)
+            End If
+            Exit Sub
+        End Try
 
+        m_nodelist = m_xmld.SelectNodes("/dis")
         stablePath = m_nodelist.Item(0).ChildNodes(1).InnerText
         new_version = Version.Parse(m_nodelist.Item(0).Attributes.GetNamedItem("version").Value)
 
@@ -92,12 +102,23 @@ Module deploy
             ' Execute Patch or Install
 
             Dim exe_path As String = programPath & EXEFILE
+            Dim current_version As Version = GetExeVersion(exe_path)
             ' Version Checker
             Console.WriteLine("Exe Path: " & exe_path)
-            Console.WriteLine("Exe Version: " & GetExeVersion(exe_path).ToString)
+            Console.WriteLine("Exe Version: " & current_version.ToString)
+            Console.WriteLine("New Version: " & new_version.ToString)
+            Console.WriteLine("Compare: " & new_version.CompareTo(current_version))
 
-            ' Loading Files
-            'downloading_data(m_nodelist)
+
+            If new_version.CompareTo(current_version) > 0 Then
+                ' Loading Files
+                downloading_data(m_nodelist)
+
+                ' TODO
+                ' ADD AUTO PATCH OR AUTO INSTALL
+            Else
+                Console.WriteLine("SAME VERSION! NO NEW UPATES")
+            End If
         ElseIf updateProcedure = Procedure.Installer Then
             ' Execute Fresh Install
 
@@ -115,8 +136,8 @@ Module deploy
     End Sub
 
     Private Sub downloading_data(xml As XmlNodeList)
-        Dim configType = xml.Item(0).ChildNodes.Item(0).Attributes.GetNamedItem("type").Value
         Dim fileNode = xml.Item(0).ChildNodes.Item(0).ChildNodes
+        configType = xml.Item(0).ChildNodes.Item(0).Attributes.GetNamedItem("type").Value
 
         Select Case configType
             Case "patch"
