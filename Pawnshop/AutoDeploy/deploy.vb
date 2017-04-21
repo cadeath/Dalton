@@ -8,6 +8,7 @@ Module deploy
     Const CONFIG As String = "disconfig.xml"        'CONFIG FILE
     Const TMP As String = "tmp"                     'TEMPORARY FOLDER
     Const HOST As String = "http://localhost/"      'REMOTE HOST
+    Const EXEFILE As String = "/pawnshop.exe"
 
     Friend pbDownload As ProgressBar
     Friend lblStatus As Label
@@ -27,15 +28,13 @@ Module deploy
     End Enum
 
     Private stablePath As String
-    Private installerPath As String
+    Private programPath As String
     Private url_hash As Hashtable
 
     Friend Sub Setup()
         LoadPath()
 
-        If updateProcedure = Procedure.Installer Then
-            readConfig_v2(HOST & CONFIG)
-        End If
+        readConfig_v2(HOST & CONFIG)
     End Sub
 
     Private Sub LoadPath()
@@ -48,6 +47,7 @@ Module deploy
             updateProcedure = Procedure.Installer
         Else
             updateProcedure = Procedure.Idle
+            programPath = readValue
         End If
     End Sub
 
@@ -74,7 +74,7 @@ Module deploy
     Private Sub readConfig_v2(src As String)
         Dim m_xmld As XmlDocument
         Dim m_nodelist As XmlNodeList
-        Dim m_node As XmlNode
+        'Dim m_node As XmlNode
 
         Dim new_version As Version
 
@@ -88,12 +88,13 @@ Module deploy
         Console.WriteLine("Installer: " & stablePath)
         Console.WriteLine("Latest Version: " & stablePath)
 
-        updateProcedure = Procedure.Idle
         If updateProcedure = Procedure.Idle Then
             ' Execute Patch or Install
 
-            ' TODO
+            Dim exe_path As String = programPath & EXEFILE
             ' Version Checker
+            Console.WriteLine("Exe Path: " & exe_path)
+            Console.WriteLine("Exe Version: " & GetExeVersion(exe_path).ToString)
 
             ' Loading Files
             downloading_data(m_nodelist)
@@ -106,6 +107,11 @@ Module deploy
         While onDownload
             Application.DoEvents()
         End While
+
+        If updateProcedure = Procedure.Installer Then
+            runInSilent(TMP & "/" & stablePath.Split("/")(stablePath.PadLeft("/").Count - 1))
+
+        End If
     End Sub
 
     Private Sub downloading_data(xml As XmlNodeList)
@@ -283,5 +289,11 @@ Module deploy
             ' TODO
             ' Log Report to record possible errors
         End If
+    End Sub
+
+    Private Sub runInSilent(cmd_file As String)
+        CommandPrompt(cmd_file, "/LOG=""AutoLog.log"" /SILENT")
+        isFinished = True
+        Console.WriteLine("Completed")
     End Sub
 End Module
