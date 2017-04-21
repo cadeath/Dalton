@@ -4,17 +4,31 @@ Imports System.Xml
 
 Module deploy
 
-    Const DATABASE As String = "W3W1LH4CKU.FDB"
-    Const PATH As String = "installer.xml"
-    Const TMP As String = "tmp"
+    Const DATABASE As String = "W3W1LH4CKU.FDB" 'DATABASE NAME
+    Const PATH As String = "installer.xml"      'CONFIG FILE
+    Const TMP As String = "tmp"                 'TEMPORARY FOLDER
+    Const HOST As String = "http://localhost"   'REMOTE HOST
 
     Friend pbDownload As ProgressBar
     Friend lblStatus As Label
+    Friend btnOnHold As Button
 
     Friend isFinished As Boolean = True
     Friend CurrentVersion As Version
     Private onDownload As Boolean = False
 
+    Friend Sub Setup()
+        LoadPath()
+    End Sub
+
+    Private Sub LoadPath()
+        Dim readValue = My.Computer.Registry.GetValue(
+    "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
+
+        Console.WriteLine("Path: " & readValue)
+        If readValue = "" Then _
+            Console.WriteLine("No Value")
+    End Sub
 
     Private Sub backup_Database(Optional isRestore As Boolean = False)
         If isRestore Then
@@ -175,7 +189,7 @@ Module deploy
 
     Private Sub dlFile_DownloadFileCompleted(sender As Object, e As ComponentModel.AsyncCompletedEventArgs)
         onDownload = False
-        
+
         If e.Error Is Nothing Then
             displayStatus("Download Completed.")
             Console.WriteLine("Download Completed.")
