@@ -26,6 +26,7 @@ Module deploy
         None = 9
     End Enum
 
+    Private stablePath As String
     Private installerPath As String
 
     Friend Sub Setup()
@@ -78,8 +79,8 @@ Module deploy
         m_xmld.Load(src)
         m_nodelist = m_xmld.SelectNodes("/dis")
 
-        installerPath = m_nodelist.Item(0).ChildNodes(1).InnerText
-        Console.WriteLine("Installer: " & installerPath)
+        stablePath = m_nodelist.Item(0).ChildNodes(1).InnerText
+        Console.WriteLine("Installer: " & stablePath)
     End Sub
 
     'Private Sub ReadingConfig(src As String)
