@@ -92,14 +92,20 @@ Module deploy
         If updateProcedure = Procedure.Idle Then
             ' Execute Patch or Install
 
-            'Version Checker
+            ' TODO
+            ' Version Checker
 
+            ' Loading Files
             downloading_data(m_nodelist)
         ElseIf updateProcedure = Procedure.Installer Then
             ' Execute Fresh Install
 
             download_File(stablePath)
         End If
+
+        While onDownload
+            Application.DoEvents()
+        End While
     End Sub
 
     Private Sub downloading_data(xml As XmlNodeList)
@@ -113,9 +119,19 @@ Module deploy
                 updateProcedure = Procedure.Installer
         End Select
 
+        url_hash = New Hashtable
+
         Console.WriteLine("Config: " & configType)
         For Each nd As XmlNode In fileNode
-            Console.WriteLine("URL: " & nd.InnerText)
+            Console.WriteLine(String.Format("{0} > {1}", nd.LocalName, nd.InnerText))
+            url_hash.Add(nd.LocalName, nd.InnerText)
+            If Not nd.LocalName.Contains("dir") Then
+                download_File(nd.InnerText)
+            End If
+
+            While onDownload
+                Application.DoEvents()
+            End While
         Next
     End Sub
 
