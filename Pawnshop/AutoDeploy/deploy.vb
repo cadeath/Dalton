@@ -7,7 +7,7 @@ Module deploy
     Const DATABASE As String = "W3W1LH4CKU.FDB"     'DATABASE NAME
     Const CONFIG As String = "disconfig.xml"        'CONFIG FILE
     Const TMP As String = "tmp"                     'TEMPORARY FOLDER
-    Const HOST As String = "http://localhost/"      'REMOTE HOST
+    Const HOST As String = "http://192.164.0.118/"      'REMOTE HOST
     Const EXEFILE As String = "/pawnshop.exe"
 
     Friend pbDownload As ProgressBar
@@ -195,6 +195,11 @@ Module deploy
     End Sub
 
     Friend Function GetMainExe() As String
+        If programPath = Nothing Then
+            Dim readValue = My.Computer.Registry.GetValue(
+    "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
+            programPath = readValue
+        End If
         Return programPath & EXEFILE
     End Function
 End Module
