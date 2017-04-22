@@ -25,4 +25,16 @@
         Process.Start(lastExe)
         End
     End Sub
+
+    Private Sub DirTest()
+        Dim readValue = _
+            My.Computer.Registry.GetValue( _
+                "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", _
+                "InstallPath", Nothing)
+
+        If readValue = Nothing Then Exit Sub
+        If Not System.IO.Directory.Exists(readValue & "/ESKIE/CIRRUS") Then
+            System.IO.Directory.CreateDirectory(readValue & "/ESKIE/CIRRUS")
+        End If
+    End Sub
 End Class

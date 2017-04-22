@@ -181,10 +181,12 @@ Module deploy
                     url_hash = New Hashtable
                     For Each url As XmlNode In disVersionFiles
                         Console.WriteLine(url.LocalName & " - " & url.InnerText)
-                        url_hash.Add(url.LocalName, GetFilename_URL(url.InnerText))
                         If Not url.LocalName.Contains("dir") Then
+                            url_hash.Add(url.LocalName, GetFilename_URL(url.InnerText))
                             download_File(url.InnerText)
                             waitingToFinish_download()
+                        Else
+                            url_hash.Add(url.LocalName, url.InnerText)
                         End If
                     Next
 
@@ -197,14 +199,14 @@ Module deploy
                         If url_hash.ContainsKey(keyCheck) Then
                             Dim tPath As String = GetValue_Key(url_hash, keyCheck)
 
-                            If Not Directory.Exists(tPath) Then _
-                                Directory.CreateDirectory(tPath)
+                            If Not Directory.Exists(programPath & "/" & PathOnly(tPath)) Then _
+                                Directory.CreateDirectory(programPath & "/" & PathOnly(tPath))
 
                             Dim originalDIR = Directory.GetCurrentDirectory
-                            If File.Exists(programPath & "/" & dlFile.Value) Then _
-                                File.Delete(programPath & "/" & dlFile.Value)
+                            If File.Exists(programPath & "/" & tPath) Then _
+                                File.Delete(programPath & "/" & tPath)
 
-                            File.Move(TMP & "\" & dlFile.Value, programPath & "/" & dlFile.Value)
+                            File.Move(TMP & "\" & dlFile.Value, programPath & "/" & tPath)
                         Else
                             If File.Exists(programPath & "/" & dlFile.Value) Then _
                                 File.Delete(programPath & "/" & dlFile.Value)

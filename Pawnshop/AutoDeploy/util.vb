@@ -87,6 +87,11 @@ Module util
         Return Nothing
     End Function
 
+    Friend Function PathOnly(str As String) As String
+        Dim lastIdx As Integer = str.LastIndexOf("/")
+        Return str.Substring(0, lastIdx)
+    End Function
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
