@@ -184,10 +184,6 @@ Module deploy
                     runInSilent("unins000.exe", , "UNINSTALLLOG.log")
                     ResetDIR()
 
-                    While Not CleaningFolder(programPath)
-                        Application.DoEvents()
-                    End While
-
                     ' INSTALLING
                     ChDir(mainDIR & "/" & TMP)
                     runInSilent(stable_exefilename, programPath, "INSTALL.log")

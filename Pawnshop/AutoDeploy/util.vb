@@ -27,6 +27,7 @@
         'oProcess.StartInfo.Verb = "runas"
 
         oProcess.Start()
+        oProcess.WaitForExit()
 
         Dim sOutput As String
         Using oStreamReader As System.IO.StreamReader = oProcess.StandardOutput
@@ -69,13 +70,6 @@
             My.Computer.FileSystem.RenameFile(filename, "_" & filename)
         End If
     End Sub
-
-    Friend Function CleaningFolder(path As String) As Boolean
-        While System.IO.Directory.GetFiles(path).Length > 0
-            Application.DoEvents()
-        End While
-        Return True
-    End Function
 
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
