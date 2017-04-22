@@ -33,6 +33,7 @@ Version 1.5.0.7
  - Layaway Reports Sort by Date
  - Change Inventory Merchandise Sap Account
  - Can ReSend Failed Sending
+ - fix SMS notification cannot view not enough specs
 
 Version 1.4.1.15
  - Added Tables INV, INVLINES
