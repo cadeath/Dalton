@@ -26,12 +26,6 @@
 
     Friend Sub KYC_Initialization()
         If ifTblExist(CUSTOMER_TABLE) Then Exit Sub
-        mysql = "SELECT * FROM " & oldClient & " ORDER BY CLIENTID ASC"
-        Dim Clds As DataSet = LoadSQL(mysql, oldClient)
-
-        diag_loading.Show()
-        diag_loading.Set_Bar(1 + Clds.Tables(0).Rows.Count)
-
         Create_Tables()
         MigrateClients_Info()
     End Sub
@@ -83,8 +77,9 @@
     End Function
 
     Private Sub Create_Tables()
+        diag_loading.Cursor = Cursors.WaitCursor
         Dim mySql As String, primaryKey As String
-        diag_loading.Add_Bar()
+        diag_loading.Show()
         ' CUSTOMER TABLE
         mySql = "CREATE TABLE " & CUSTOMER_TABLE & " ("
         mySql &= vbCrLf & "  ID BIGINT NOT NULL,"
@@ -137,8 +132,6 @@
 
         RunCommand(mySql)
         AutoIncrement_ID(CUSTOMER_PHONE, "PHONEID")
-
-
     End Sub
 
 
@@ -162,8 +155,8 @@
 
         If Clds.Tables(0).Rows.Count = 0 Then Exit Sub
 
-        'diag_loading.Set_Bar(1 + Clds.Tables(0).Rows.Count)
-        'diag_loading.Reset_Bar()
+        diag_loading.Set_Bar(Clds.Tables(0).Rows.Count)
+        diag_loading.Reset_Bar()
 
         Dim kyc As New MigrateCustomer
         For Each clDR As DataRow In Clds.Tables(0).Rows
@@ -246,6 +239,8 @@
         If MsgBox("Patch comleted.", MsgBoxStyle.OkOnly, "") Then diag_loading.pbLoading.Value = 0
         frmMain.Enabled = True
         diag_loading.Close()
+
+        diag_loading.Cursor = Cursors.Default
     End Sub
 
     Private Sub AutoSetPrimary_Phone()

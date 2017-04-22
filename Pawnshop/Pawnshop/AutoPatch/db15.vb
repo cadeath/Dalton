@@ -13,6 +13,7 @@
             Modify_PrintPawning()
             Modify_LoanRegister()
             Modify_ExpiryList()
+            Create_CustomerVIEW()
 
             Database_Update(LATEST_VERSION)
             Log_Report(String.Format("SYSTEM PATCHED UP FROM {0} TO {1}", ALLOWABLE_VERSION, LATEST_VERSION))
@@ -194,4 +195,21 @@
 
         Console.WriteLine("View Modified")
     End Sub
+
+
+    Private Sub Create_CustomerVIEW()
+        Dim createCustView As String
+
+        createCustView = "	CREATE VIEW CUSTOMER_VIEW(	"
+        createCustView &= vbCrLf & " ID,FIRSTNAME,MIDNAME,LASTNAME,SUFFIX,STREET1, BRGY1,CITY1,PROVINCE1,ZIP1,STREET2,	"
+        createCustView &= vbCrLf & " BRGY2,CITY2,PROVINCE2,ZIP2,BIRTHDAY,BIRTHPLACE,NATUREOFWORK,NATIONALITY,	"
+        createCustView &= vbCrLf & " GENDER,SRCFUND,RANK,CLIENT_IMG)	"
+        createCustView &= vbCrLf & " AS	"
+        createCustView &= vbCrLf & " SELECT cl.* FROM KYC_CUSTOMERS cl;	"
+
+        RunCommand(createCustView)
+
+        Console.WriteLine("View Modified")
+    End Sub
+
 End Module
