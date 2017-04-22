@@ -109,6 +109,7 @@ Module deploy
             m_xmld = New XmlDocument
             m_xmld.XmlResolver = Nothing
             m_xmld.Load(src)
+
         Catch ex As Exception
             If ex.ToString.Contains("Unable to connect to the remote server") Then
                 Console.WriteLine("Server is down!")
@@ -160,7 +161,10 @@ Module deploy
                 Next
 
                 If Not version_found Then
-                    MsgBox(String.Format("VERSION {0} IS NOT FOUND IN THE CONFIGURATION FILE", current_version.ToString) + vbCrLf + "CONTACT YOUR MIS DEPARTMENT", MsgBoxStyle.Critical, "PATCH ERROR")
+                    MsgBox( _
+                        String.Format("VERSION {0} IS NOT FOUND IN THE CONFIGURATION FILE", _
+                                      current_version.ToString) + vbCrLf + "CONTACT YOUR MIS DEPARTMENT", _
+                                  MsgBoxStyle.Critical, "PATCH ERROR")
                     Exit Sub
                 End If
 
@@ -198,6 +202,7 @@ Module deploy
                     ResetDIR()
 
                     backup_Everything(True)
+                    updateProcedure = Procedure.Idle
                 End If
             Else
                 Console.WriteLine("SAME VERSION! NO NEW UPATES")
@@ -208,7 +213,7 @@ Module deploy
 
             dirdInstallPath.ShowDialog()
             If dirdInstallPath.SelectedPath = "" Then Exit Sub
-        installPath = dirdInstallPath.SelectedPath
+            installPath = dirdInstallPath.SelectedPath
         End If
 
         waitingToFinish_download()
