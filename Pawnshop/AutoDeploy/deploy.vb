@@ -10,6 +10,8 @@ Module deploy
     Const TMP As String = "tmp"                     'TEMPORARY FOLDER
     Const HOST As String = "http://192.164.0.118/"  'REMOTE HOST
     Const EXEFILE As String = "/pawnshop.exe"
+    Const SYSLOG As String = "syslog.txt"
+    Const BACKUPBAT As String = "backup.bat"
 
     Friend pbDownload As ProgressBar                ' Progress bar for effects
     Friend lblStatus As Label                       ' Display the status
@@ -81,16 +83,17 @@ Module deploy
     End Sub
 
     Private Sub backup_Everything(Optional isRestore As Boolean = False)
+        ChDir(programPath)
         If isRestore Then
-            If Not System.IO.File.Exists("_" & DATABASE) Then Exit Sub
-            If System.IO.File.Exists(DATABASE) Then
-                My.Computer.FileSystem.DeleteFile(DATABASE)
-            End If
-            My.Computer.FileSystem.RenameFile("_" & DATABASE, DATABASE)
+            backupFile(DATABASE, True)
+            backupFile(BACKUPBAT, True)
+            backupFile(SYSLOG, True)
         Else
-            If Not System.IO.File.Exists(DATABASE) Then Exit Sub
-            My.Computer.FileSystem.RenameFile(DATABASE, "_" & DATABASE)
+            backupFile(DATABASE)
+            backupFile(BACKUPBAT)
+            backupFile(SYSLOG)
         End If
+        ResetDIR()
     End Sub
 
     Private Sub readConfig_v2(src As String)
@@ -118,7 +121,6 @@ Module deploy
         stablePath = m_nodelist.Item(0).ChildNodes(1).InnerText
         new_version = Version.Parse(m_nodelist.Item(0).Attributes.GetNamedItem("version").Value)
 
-        Console.WriteLine("Installer: " & stablePath)
         Console.WriteLine("Latest Version: " & stablePath)
 
         If updateProcedure = Procedure.Idle Then
@@ -134,18 +136,58 @@ Module deploy
 
 
             If new_version.CompareTo(current_version) > 0 Then
-                ' Loading Files
-                downloading_data(m_nodelist)
+                ' Checking Procedure to be executed
+                Dim version_found As Boolean = False
+                Dim DISversions = m_nodelist.Item(0).ChildNodes(0).ChildNodes
+                Dim disVersionFiles As XmlNode = Nothing
 
+                For Each vr As XmlNode In DISversions
+                    Console.WriteLine(String.Format("{0} - {1}", vr.Attributes.GetNamedItem("version").Value, vr.Attributes.GetNamedItem("type").Value))
+                    Dim browse_version As Version = Version.Parse(vr.Attributes.GetNamedItem("version").Value)
+                    If browse_version.CompareTo(current_version) = 0 Then
+                        version_found = True
+                        Select Case vr.Attributes.GetNamedItem("type").Value
+                            Case "patch"
+                                updateProcedure = Procedure.Patch
+                                disVersionFiles = vr.Item(0)
+                            Case "install"
+                                updateProcedure = Procedure.Installer
+                        End Select
+                        Exit For
+                    End If
+                Next
+
+                If Not version_found Then
+                    MsgBox(String.Format("VERSION {0} IS NOT FOUND IN THE CONFIGURATION FILE", current_version.ToString) + vbCrLf + "CONTACT YOUR MIS DEPARTMENT", MsgBoxStyle.Critical, "PATCH ERROR")
+                    Exit Sub
+                End If
+
+                ' FOR PATCH
+                If updateProcedure = Procedure.Patch Then
+                    For Each url As XmlNode In disVersionFiles
+                        Console.WriteLine(url.LocalName & " - " & url.InnerText)
+                    Next
+                End If
+
+                ' FOR INSTALL
                 If updateProcedure = Procedure.Installer Then
+                    Dim stable_exefilename As String = stablePath.Split("/")(stablePath.Split("/").Count - 1)
+
                     download_File(stablePath)
 
                     waitingToFinish_download()
                     backup_Everything()
 
-                    Console.WriteLine(installPath)
-                    ChDir(installPath)
+                    Console.WriteLine(programPath)
+                    ChDir(programPath)
                     runInSilent("unins000.exe", , "UNINSTALLLOG.log")
+                    ResetDIR()
+
+                    ChDir(mainDIR & "/" & TMP)
+                    runInSilent(stable_exefilename, programPath, "INSTALL.log")
+                    ResetDIR()
+
+                    backup_Everything(True)
                 End If
             Else
                 Console.WriteLine("SAME VERSION! NO NEW UPATES")
@@ -158,39 +200,13 @@ Module deploy
             installPath = dirdInstallPath.SelectedPath
         End If
 
-        waitingToFinish_download
+        waitingToFinish_download()
 
         If updateProcedure = Procedure.Installer Then
             ChDir(TMP)
-            runInSilent(stablePath.Split("/")(stablePath.Split("/").Count - 1), "D:\dalton", "INSTALL.log")
+            runInSilent(stablePath.Split("/")(stablePath.Split("/").Count - 1), installPath, "INSTALL.log")
             ResetDIR()
         End If
-    End Sub
-
-    Private Sub downloading_data(xml As XmlNodeList)
-        Dim fileNode = xml.Item(0).ChildNodes.Item(0).ChildNodes
-        configType = xml.Item(0).ChildNodes.Item(0).Attributes.GetNamedItem("type").Value
-
-        Console.WriteLine("Config: " & configType)
-        Select Case configType
-            Case "patch"
-                updateProcedure = Procedure.Patch
-
-                url_hash = New Hashtable
-
-                For Each nd As XmlNode In fileNode
-                    Console.WriteLine(String.Format("{0} > {1}", nd.LocalName, nd.InnerText))
-                    url_hash.Add(nd.LocalName, nd.InnerText)
-                    If Not nd.LocalName.Contains("dir") Then
-                        download_File(nd.InnerText)
-                    End If
-
-                    waitingToFinish_download()
-                Next
-            Case "installer"
-                updateProcedure = Procedure.Installer
-        End Select
-
     End Sub
 
     Private Sub download_File(src As String, Optional dst As String = "")

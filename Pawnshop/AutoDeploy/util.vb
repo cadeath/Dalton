@@ -56,6 +56,20 @@
         Console.WriteLine("Completed")
     End Sub
 
+    Friend Sub backupFile(filename As String, Optional isRestore As Boolean = False)
+        If isRestore Then
+            If System.IO.File.Exists(filename) Then System.IO.File.Delete(filename)
+
+            If System.IO.File.Exists("_" & filename) Then _
+            My.Computer.FileSystem.RenameFile("_" & filename, filename)
+        Else
+            If System.IO.File.Exists("_" & filename) Then System.IO.File.Delete("_" & filename)
+
+            If System.IO.File.Exists(filename) Then _
+            My.Computer.FileSystem.RenameFile(filename, "_" & filename)
+        End If
+    End Sub
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()
