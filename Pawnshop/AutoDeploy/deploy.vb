@@ -166,6 +166,9 @@ Module deploy
 
                 ' FOR PATCH
                 If updateProcedure = Procedure.Patch Then
+                    ' TODO
+                    ' PATCHING
+                    ' DOWNLOAD FILES AND OVERWRITE
                     For Each url As XmlNode In disVersionFiles
                         Console.WriteLine(url.LocalName & " - " & url.InnerText)
                     Next
@@ -292,21 +295,27 @@ Module deploy
     Private Delegate Sub do_waiting_callback()
     Private Sub do_waiting(ins As Boolean)
         Dim LOGFILE As String
+        Dim CURDIR As String
 
         If ins Then
             LOGFILE = "INSTALL.log"
+            CURDIR = mainDIR & "/" & TMP
         Else
             LOGFILE = "UNINSTALLLOG.log"
+            CURDIR = programPath
         End If
 
-        ChDir(mainDIR & "/" & TMP)
+        ChDir(CURDIR)
         Dim lastLine As String = ""
 
-        Console.Write("Checking logs...")
+        Console.Write("Checking logs")
         While Not lastLine.Contains("Log closed.")
-            lastLine = File.ReadLines(LOGFILE).Last
+            Try
+                lastLine = File.ReadLines(LOGFILE).Last
+            Catch ex As Exception
+                Console.Write(".")
+            End Try
 
-            Console.Write(".")
             System.Threading.Thread.Sleep(100)
         End While
         Console.WriteLine()
