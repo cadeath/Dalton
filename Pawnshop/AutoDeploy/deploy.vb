@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.IO
 Imports System.Net
 Imports System.Xml
 
@@ -33,6 +34,7 @@ Module deploy
     Private programPath As String
     Private configType As String
     Private url_hash As Hashtable
+    Private mainDIR = Directory.GetCurrentDirectory
 
     Friend Sub Setup()
 
@@ -57,10 +59,10 @@ Module deploy
         ' REMOVE ON FINAL
         ' THIS IS TO TEST FRESH INSTALL
         ' AUTO UNINSTALL
-        If readValue <> "" Then
-            UninstallTMP(readValue)
-            readValue = ""
-        End If
+        'If readValue <> "" Then
+        '    UninstallTMP(readValue)
+        '    readValue = ""
+        'End If
         ' --END - ROF --
 
 
@@ -76,6 +78,7 @@ Module deploy
     Private Sub UninstallTMP(src As String)
         ChDir(src)
         CommandPrompt("unins000.exe", "/SILENT")
+        ResetDIR()
     End Sub
 
     Private Sub backup_Database(Optional isRestore As Boolean = False)
@@ -100,6 +103,8 @@ Module deploy
 
         m_xmld = New XmlDocument
         Try
+            m_xmld = New XmlDocument
+            m_xmld.XmlResolver = Nothing
             m_xmld.Load(src)
         Catch ex As Exception
             If ex.ToString.Contains("Unable to connect to the remote server") Then
@@ -140,11 +145,10 @@ Module deploy
             End If
         ElseIf updateProcedure = Procedure.Installer Then
             ' Execute Fresh Install
+            download_File(stablePath)
 
             dirdInstallPath.ShowDialog()
             installPath = dirdInstallPath.SelectedPath
-
-            download_File(stablePath)
         End If
 
         waitingToFinish_download
@@ -152,7 +156,7 @@ Module deploy
         If updateProcedure = Procedure.Installer Then
             ChDir(TMP)
             runInSilent(stablePath.Split("/")(stablePath.Split("/").Count - 1), "D:\dalton")
-
+            ResetDIR()
         End If
     End Sub
 
@@ -247,5 +251,9 @@ Module deploy
         While onDownload
             Application.DoEvents()
         End While
+    End Sub
+
+    Private Sub ResetDIR()
+        ChDir(mainDIR)
     End Sub
 End Module

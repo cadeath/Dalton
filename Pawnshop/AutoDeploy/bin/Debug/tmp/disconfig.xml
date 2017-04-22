@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dis version="1.0.0.1">
-	<file type="patch">
-		<url1>http://localhost/downloads/sample.exe</url1>
-		<url2>http://localhost/downloads/21.pdf</url2>
-		<url3>http://localhost/downloads/sampleIcon.ico</url3>
-		<url3-dir parent-node="url3">Icon/sampleIcon.ico</url3-dir>
-	</file>
-</dis>
