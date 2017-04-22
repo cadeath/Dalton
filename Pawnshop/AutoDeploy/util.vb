@@ -48,8 +48,8 @@
         lblStatus.Text = str
     End Sub
 
-    Friend Sub runInSilent(cmd_file As String)
-        CommandPrompt(cmd_file, "/LOG=""AutoLog.log"" /SILENT")
+    Friend Sub runInSilent(cmd_file As String, Optional dest As String = "")
+        CommandPrompt(cmd_file, "/LOG=""AutoLog.log"" /SILENT " & IIf(dest = "", "", "/DIR=""" & dest & """"))
         isFinished = True
         Console.WriteLine("Completed")
     End Sub

@@ -10,13 +10,15 @@ Module deploy
     Const HOST As String = "http://192.164.0.118/"  'REMOTE HOST
     Const EXEFILE As String = "/pawnshop.exe"
 
-    Friend pbDownload As ProgressBar
-    Friend lblStatus As Label
-    Friend btnOnHold As Button
+    Friend pbDownload As ProgressBar                ' Progress bar for effects
+    Friend lblStatus As Label                       ' Display the status
+    Friend btnOnHold As Button                      ' Buttong that will be HOLD while everything is not finish
+    Friend dirdInstallPath As New FolderBrowserDialog ' Path where to be install
 
     Friend isFinished As Boolean = True
     Friend CurrentVersion As Version
     Private onDownload As Boolean = False
+    Private installPath As String
 
     Private updateProcedure As Procedure
     Enum Procedure As Integer
@@ -33,6 +35,7 @@ Module deploy
     Private url_hash As Hashtable
 
     Friend Sub Setup()
+
         btnOnHold.Enabled = False
         LoadPath()
 
@@ -50,6 +53,17 @@ Module deploy
     "HKEY_LOCAL_MACHINE\Software\cdt-S0ft\Pawnshop", "InstallPath", Nothing)
 
         Console.WriteLine("Path: " & readValue)
+
+        ' REMOVE ON FINAL
+        ' THIS IS TO TEST FRESH INSTALL
+        ' AUTO UNINSTALL
+        If readValue <> "" Then
+            UninstallTMP(readValue)
+            readValue = ""
+        End If
+        ' --END - ROF --
+
+
         If readValue = "" Then
             Console.WriteLine("No Value")
             updateProcedure = Procedure.Installer
@@ -57,6 +71,11 @@ Module deploy
             updateProcedure = Procedure.Idle
             programPath = readValue
         End If
+    End Sub
+
+    Private Sub UninstallTMP(src As String)
+        ChDir(src)
+        CommandPrompt("unins000.exe", "/SILENT")
     End Sub
 
     Private Sub backup_Database(Optional isRestore As Boolean = False)
@@ -73,7 +92,7 @@ Module deploy
     End Sub
 
     Private Sub readConfig_v2(src As String)
-        Dim m_xmld As XmlDocument
+        Dim m_xmld As New XmlDocument
         Dim m_nodelist As XmlNodeList
         'Dim m_node As XmlNode
 
@@ -122,15 +141,17 @@ Module deploy
         ElseIf updateProcedure = Procedure.Installer Then
             ' Execute Fresh Install
 
+            dirdInstallPath.ShowDialog()
+            installPath = dirdInstallPath.SelectedPath
+
             download_File(stablePath)
         End If
 
-        While onDownload
-            Application.DoEvents()
-        End While
+        waitingToFinish_download
 
         If updateProcedure = Procedure.Installer Then
-            runInSilent(TMP & "/" & stablePath.Split("/")(stablePath.Split("/").Count - 1))
+            ChDir(TMP)
+            runInSilent(stablePath.Split("/")(stablePath.Split("/").Count - 1), "D:\dalton")
 
         End If
     End Sub
@@ -156,9 +177,7 @@ Module deploy
                 download_File(nd.InnerText)
             End If
 
-            While onDownload
-                Application.DoEvents()
-            End While
+            waitingToFinish_download
         Next
     End Sub
 
@@ -223,4 +242,10 @@ Module deploy
         End If
         Return programPath & EXEFILE
     End Function
+
+    Private Sub waitingToFinish_download()
+        While onDownload
+            Application.DoEvents()
+        End While
+    End Sub
 End Module
