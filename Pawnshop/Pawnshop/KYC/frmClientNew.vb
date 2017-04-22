@@ -197,7 +197,6 @@ Public Class frmClientNew
             mySql &= " WHERE "
             mySql &= String.Format("UPPER(BRGY1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
             mySql &= String.Format("UPPER(CITY1) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
-            mySql &= String.Format("PHONENUMBER LIKE '%{0}%' OR " & vbCrLf, src)
             mySql &= String.Format("UPPER(BRGY2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
             mySql &= String.Format("UPPER(CITY2) LIKE UPPER('%{0}%') OR " & vbCrLf, src)
             For Each name In strWords
