@@ -77,6 +77,16 @@ Module util
         Return str.Split("/")(str.Split("/").Count - 1)
     End Function
 
+    Friend Function GetValue_Key(ht As Hashtable, key As String) As String
+        For Each dt As DictionaryEntry In ht
+            If dt.Key = key Then
+                Return dt.Value
+            End If
+        Next
+
+        Return Nothing
+    End Function
+
 #Region "Log Module"
     Const LOG_FILE As String = "syslog.txt"
     Private Sub CreateLog()

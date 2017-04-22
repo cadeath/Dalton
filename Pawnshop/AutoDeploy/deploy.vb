@@ -195,7 +195,7 @@ Module deploy
 
                         Dim keyCheck As String = dlFile.Key & "-dir"
                         If url_hash.ContainsKey(keyCheck) Then
-                            Dim tPath As String = url_hash.Keys(keyCheck)
+                            Dim tPath As String = GetValue_Key(url_hash, keyCheck)
 
                             If Not Directory.Exists(tPath) Then _
                                 Directory.CreateDirectory(tPath)
