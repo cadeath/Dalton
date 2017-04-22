@@ -153,7 +153,7 @@
         mysql = "SELECT * FROM " & oldClient & " ORDER BY CLIENTID ASC"
         Dim Clds As DataSet = LoadSQL(mysql, oldClient)
 
-        If Clds.Tables(0).Rows.Count = 0 Then Exit Sub
+        If Clds.Tables(0).Rows.Count = 0 Then diag_loading.Close() : frmMain.Enabled = True : Exit Sub
 
         diag_loading.Set_Bar(Clds.Tables(0).Rows.Count)
         diag_loading.Reset_Bar()
