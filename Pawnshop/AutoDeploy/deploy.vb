@@ -65,7 +65,6 @@ Module deploy
         'End If
         ' --END - ROF --
 
-
         If readValue = "" Then
             Console.WriteLine("No Value")
             updateProcedure = Procedure.Installer
@@ -81,7 +80,7 @@ Module deploy
         ResetDIR()
     End Sub
 
-    Private Sub backup_Database(Optional isRestore As Boolean = False)
+    Private Sub backup_Everything(Optional isRestore As Boolean = False)
         If isRestore Then
             If Not System.IO.File.Exists("_" & DATABASE) Then Exit Sub
             If System.IO.File.Exists(DATABASE) Then
@@ -138,8 +137,16 @@ Module deploy
                 ' Loading Files
                 downloading_data(m_nodelist)
 
-                ' TODO
-                ' ADD AUTO PATCH OR AUTO INSTALL
+                If updateProcedure = Procedure.Installer Then
+                    download_File(stablePath)
+
+                    waitingToFinish_download()
+                    backup_Everything()
+
+                    Console.WriteLine(installPath)
+                    ChDir(installPath)
+                    runInSilent("unins000.exe", , "UNINSTALLLOG.log")
+                End If
             Else
                 Console.WriteLine("SAME VERSION! NO NEW UPATES")
             End If
@@ -155,7 +162,7 @@ Module deploy
 
         If updateProcedure = Procedure.Installer Then
             ChDir(TMP)
-            runInSilent(stablePath.Split("/")(stablePath.Split("/").Count - 1), "D:\dalton")
+            runInSilent(stablePath.Split("/")(stablePath.Split("/").Count - 1), "D:\dalton", "INSTALL.log")
             ResetDIR()
         End If
     End Sub
@@ -164,25 +171,26 @@ Module deploy
         Dim fileNode = xml.Item(0).ChildNodes.Item(0).ChildNodes
         configType = xml.Item(0).ChildNodes.Item(0).Attributes.GetNamedItem("type").Value
 
+        Console.WriteLine("Config: " & configType)
         Select Case configType
             Case "patch"
                 updateProcedure = Procedure.Patch
+
+                url_hash = New Hashtable
+
+                For Each nd As XmlNode In fileNode
+                    Console.WriteLine(String.Format("{0} > {1}", nd.LocalName, nd.InnerText))
+                    url_hash.Add(nd.LocalName, nd.InnerText)
+                    If Not nd.LocalName.Contains("dir") Then
+                        download_File(nd.InnerText)
+                    End If
+
+                    waitingToFinish_download()
+                Next
             Case "installer"
                 updateProcedure = Procedure.Installer
         End Select
 
-        url_hash = New Hashtable
-
-        Console.WriteLine("Config: " & configType)
-        For Each nd As XmlNode In fileNode
-            Console.WriteLine(String.Format("{0} > {1}", nd.LocalName, nd.InnerText))
-            url_hash.Add(nd.LocalName, nd.InnerText)
-            If Not nd.LocalName.Contains("dir") Then
-                download_File(nd.InnerText)
-            End If
-
-            waitingToFinish_download
-        Next
     End Sub
 
     Private Sub download_File(src As String, Optional dst As String = "")
