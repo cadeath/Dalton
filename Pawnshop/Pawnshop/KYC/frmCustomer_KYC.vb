@@ -841,10 +841,16 @@ FLNME:
         If Not txtFName.Enabled Then Exit Sub
 
         Dim mySql As String
-        mySql = "SELECT C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
+        mySql = "SELECT C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || "
         mySql &= "CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS FULLNAME, "
-        mySql &= "C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY || ' ' ||  C.ADDR_PROVINCE AS ADDRESS, "
-        mySql &= "C.BIRTHDAY, C.PHONE1, C.PHONE2, P.PAWNTICKET, CASE P.STATUS	WHEN '0' THEN 'RENEWED' "
+        mySql &= "C.STREET1 || ' ' || C.BRGY1 || ' ' || C.CITY1 || ' ' ||  C.PROVINCE1 AS ADDRESS, "
+        mySql &= "C.BIRTHDAY,"
+        mySql &= "(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1	"
+        mySql &= "	THEN PH.PHONENUMBER WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER	"
+        mySql &= "	ELSE NULL END)AS CONTACTNUMBER FROM KYC_PHONE PH LEFT JOIN KYC_CUSTOMERS CC ON CC.ID = PH.CUSTID "
+        mySql &= "	WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' AND PH.ISPRIMARY = 1	"
+        mySql &= "	OR CHAR_LENGTH(PH.PHONENUMBER)=11 AND PH.CUSTID =CC.ID ORDER BY PH.ISPRIMARY DESC ROWS 1),	"
+        mySql &= "P.PAWNTICKET, CASE P.STATUS	WHEN '0' THEN 'RENEWED' "
         mySql &= "WHEN 'R' THEN 'RENEW' "
         mySql &= "WHEN 'L' THEN 'NEW LOAN' "
         mySql &= "WHEN 'V' THEN 'VOID' "
@@ -855,7 +861,7 @@ FLNME:
         mySql &= "CLASS.ITEMCATEGORY, ITM.ITEMCLASS, P.LOANDATE, P.PRINCIPAL, "
         mySql &= "P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.PENALTY, USR.USERNAME as APPRAISER "
         mySql &= "FROM OPT P "
-        mySql &= "LEFT JOIN TBLCLIENT C ON P.CLIENTID = C.CLIENTID "
+        mySql &= "LEFT JOIN " & CUSTOMER_TABLE & " C ON P.CLIENTID = C.ID "
         mySql &= "INNER JOIN OPI ITM ON ITM.PAWNITEMID = P.PAWNITEMID "
         mySql &= "INNER JOIN TBLITEM CLASS ON CLASS.ITEMID = ITM.ITEMID "
         mySql &= "LEFT JOIN TBL_GAMIT USR ON USR.USERID = P.APPRAISERID "
@@ -871,10 +877,10 @@ FLNME:
 
         Dim TXT As New TextBox
         For Each Item As Object In lstPhone.Items
-            TXT.AppendText(Item.ToString & ",")
+            TXT.AppendText(Item.ToString & "/")
         Next
 
-        repPara.Add("txtContact", TXT.Text.TrimEnd(",", ","))
+        repPara.Add("txtContact", TXT.Text.TrimEnd("/", "/"))
 
         frmReport.ReportInit(mySql, "dsHistory", "Reports\rpt_History.rdlc", repPara)
         frmReport.Show()
