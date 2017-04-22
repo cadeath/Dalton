@@ -37,6 +37,7 @@ Module deploy
     Private configType As String
     Private url_hash As Hashtable
     Private mainDIR = Directory.GetCurrentDirectory
+    Private _isReady As Boolean = False
 
     Friend Sub Setup()
 
@@ -78,7 +79,7 @@ Module deploy
 
     Private Sub UninstallTMP(src As String)
         ChDir(src)
-        CommandPrompt("unins000.exe", "/SILENT")
+        CommandPrompt("unins000.exe", "/SILENT /LOG=""D:/UNINSTALL.LOG""")
         ResetDIR()
     End Sub
 
@@ -134,7 +135,6 @@ Module deploy
             Console.WriteLine("New Version: " & new_version.ToString)
             Console.WriteLine("Compare: " & new_version.CompareTo(current_version))
 
-
             If new_version.CompareTo(current_version) > 0 Then
                 ' Checking Procedure to be executed
                 Dim version_found As Boolean = False
@@ -149,7 +149,9 @@ Module deploy
                         Select Case vr.Attributes.GetNamedItem("type").Value
                             Case "patch"
                                 updateProcedure = Procedure.Patch
-                                disVersionFiles = vr.Item(0)
+
+                                Console.WriteLine(vr.ChildNodes(0).LocalName)
+                                disVersionFiles = vr
                             Case "install"
                                 updateProcedure = Procedure.Installer
                         End Select
@@ -179,12 +181,15 @@ Module deploy
                     backup_Everything()
 
                     ' UNINSTALLING
-                    Console.WriteLine(programPath)
+                    displayStatus("Uninstalling...")
                     ChDir(programPath)
-                    runInSilent("unins000.exe", , "UNINSTALLLOG.log")
+                    runInSilent("unins000.exe", , programPath & "/UNINSTALLLOG.log")
                     ResetDIR()
 
+                    waitWhenDone(False)
+
                     ' INSTALLING
+                    displayStatus("Installing...")
                     ChDir(mainDIR & "/" & TMP)
                     runInSilent(stable_exefilename, programPath, "INSTALL.log")
                     ResetDIR()
@@ -199,7 +204,8 @@ Module deploy
             download_File(stablePath)
 
             dirdInstallPath.ShowDialog()
-            installPath = dirdInstallPath.SelectedPath
+            If dirdInstallPath.SelectedPath = "" Then Exit Sub
+        installPath = dirdInstallPath.SelectedPath
         End If
 
         waitingToFinish_download()
@@ -282,4 +288,45 @@ Module deploy
     Private Sub ResetDIR()
         ChDir(mainDIR)
     End Sub
+
+    Private Delegate Sub do_waiting_callback()
+    Private Sub do_waiting(ins As Boolean)
+        Dim LOGFILE As String
+
+        If ins Then
+            LOGFILE = "INSTALL.log"
+        Else
+            LOGFILE = "UNINSTALLLOG.log"
+        End If
+
+        ChDir(mainDIR & "/" & TMP)
+        Dim lastLine As String = ""
+
+        Console.Write("Checking logs...")
+        While Not lastLine.Contains("Log closed.")
+            lastLine = File.ReadLines(LOGFILE).Last
+
+            Console.Write(".")
+            System.Threading.Thread.Sleep(100)
+        End While
+        Console.WriteLine()
+        Console.WriteLine("Found!")
+
+        ResetDIR()
+
+        _isReady = True
+    End Sub
+
+    Private Function waitWhenDone(Optional isInstall As Boolean = True) As Boolean
+        
+        Dim th As Threading.Thread
+        th = New Threading.Thread(Sub() do_waiting(isInstall))
+        th.Start()
+
+        While Not _isReady
+            Application.DoEvents()
+        End While
+
+        Return True
+    End Function
 End Module

@@ -1,4 +1,6 @@
-﻿Module util
+﻿Imports System.IO
+
+Module util
     ''' <summary>
     ''' This function has two arguments.
     ''' declaraton UseShellExecute as boolean and RedirectStandardOutput as boolean.
@@ -16,7 +18,6 @@
             Return Nothing
         End If
 
-
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo(app, args)
         oStartInfo.UseShellExecute = False
@@ -28,6 +29,7 @@
 
         oProcess.Start()
         oProcess.WaitForExit()
+        Console.WriteLine("Command executed")
 
         Dim sOutput As String
         Using oStreamReader As System.IO.StreamReader = oProcess.StandardOutput
