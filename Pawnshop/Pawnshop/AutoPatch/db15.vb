@@ -6,6 +6,7 @@
 
     Sub PatchUp()
         If Not isPatchable(ALLOWABLE_VERSION) Then Exit Sub
+        frmMain.Cursor = Cursors.WaitCursor
         Try
             Modify_View_PawnList()
             Modify_MoneyTransfer()
@@ -18,6 +19,7 @@
         Catch ex As Exception
             Log_Report(String.Format("[{0}]" & ex.ToString, LATEST_VERSION))
         End Try
+        frmMain.Cursor = Cursors.Default
     End Sub
 
 
@@ -26,24 +28,33 @@
         Dim dropView As String = "DROP VIEW PAWN_LIST;"
         Dim createView As String
 
-        createView = "CREATE VIEW PAWN_LIST("
-        createView &= vbCrLf & " PAWNID,PAWNTICKET,LOANDATE,MATUDATE,EXPIRYDATE,AUCTIONDATE,CLIENTID,CLIENT,CONTACTNUMBER,"
-        createView &= vbCrLf & " FULLADDRESS,ITEMCLASS,ITEMCATEGORY, DESCRIPTION,OLDTICKET,ORNUM,ORDATE,PRINCIPAL,DELAYINTEREST,"
-        createView &= vbCrLf & "  ADVINT,SERVICECHARGE,NETAMOUNT,RENEWDUE,REDEEMDUE,APPRAISAL,PENALTY,STATUS,WITHDRAWDATE,APPRAISER,SENT_NOTICE) "
-        createView &= vbCrLf & " AS "
-        createView &= vbCrLf & " SELECT "
-        createView &= vbCrLf & " P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE,"
-        createView &= vbCrLf & " C.CLIENTID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT,"
-        createView &= vbCrLf & " (SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1 THEN PH.PHONENUMBER "
-        createView &= vbCrLf & " WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER ELSE NULL END)AS CONTACTNUMBER FROM KYC_PHONE PH "
-        createView &= vbCrLf & " LEFT JOIN KYC_CUSTOMERS CC ON CC.ID = PH.CUSTID WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' AND PH.CUSTID =CC.ID ROWS 1) "
-        createView &= vbCrLf & " ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, "
-        createView &= vbCrLf & " P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, P.STATUS, ITM.WITHDRAWDATE, USR.USERNAME AS APPRAISER, P.SENT_NOTICE "
-        createView &= vbCrLf & " FROM OPT P INNER JOIN TBLCLIENT C ON P.CLIENTID = C.CLIENTID INNER JOIN OPI ITM ON ITM.PAWNITEMID = P.PAWNITEMID "
-        createView &= vbCrLf & " INNER JOIN TBLITEM CLASS ON CLASS.ITEMID = ITM.ITEMID LEFT JOIN TBL_GAMIT USR ON USR.USERID = P.APPRAISERID;"
+        createView = "	CREATE VIEW PAWN_LIST(		"
+        createView &= vbCrLf & "	PAWNID,PAWNTICKET,LOANDATE,MATUDATE,EXPIRYDATE,AUCTIONDATE,ID,CLIENT,CONTACTNUMBER,FULLADDRESS,ITEMCLASS,"
+        createView &= vbCrLf & "	ITEMCATEGORY,DESCRIPTION,OLDTICKET, ORNUM,ORDATE,PRINCIPAL, DELAYINTEREST,ADVINT,SERVICECHARGE,NETAMOUNT,"
+        createView &= vbCrLf & "	RENEWDUE,REDEEMDUE,APPRAISAL,PENALTY,STATUS,WITHDRAWDATE,APPRAISER,SENT_NOTICE)	"
+        createView &= vbCrLf & "	AS	"
+        createView &= vbCrLf & "	SELECT "
+        createView &= vbCrLf & "	P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.AUCTIONDATE, "
+        createView &= vbCrLf & "	C.ID, C.FIRSTNAME || ' ' || C.LASTNAME || ' ' || 		"
+        createView &= vbCrLf & "	CASE WHEN C.SUFFIX is Null THEN '' ELSE C.SUFFIX END AS CLIENT, "
+        createView &= vbCrLf & "	(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1	"
+        createView &= vbCrLf & "	THEN PH.PHONENUMBER WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER	"
+        createView &= vbCrLf & "	ELSE NULL END)AS CONTACTNUMBER FROM KYC_PHONE PH LEFT JOIN KYC_CUSTOMERS CC ON CC.ID = PH.CUSTID "
+        createView &= vbCrLf & "	WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' AND PH.ISPRIMARY = 1	"
+        createView &= vbCrLf & "	OR CHAR_LENGTH(PH.PHONENUMBER)=11 AND PH.CUSTID =CC.ID ORDER BY PH.ISPRIMARY DESC ROWS 1),	"
+        createView &= vbCrLf & "	C.STREET1 || ' ' || C.CITY1 || ' ' || C.PROVINCE1 || ' ' || C.ZIP1 as FULLADDRESS, 		"
+        createView &= vbCrLf & "	ITM.ITEMCLASS, CLASS.ITEMCATEGORY, P.DESCRIPTION, "
+        createView &= vbCrLf & "	P.OLDTICKET, P.ORNUM, P.ORDATE, P.PRINCIPAL, P.DELAYINTEREST, P.ADVINT, P.SERVICECHARGE, "
+        createView &= vbCrLf & "	P.NETAMOUNT, P.RENEWDUE, P.REDEEMDUE, P.APPRAISAL,P.PENALTY, "
+        createView &= vbCrLf & "	P.STATUS, ITM.WITHDRAWDATE, USR.USERNAME AS APPRAISER, P.SENT_NOTICE "
+        createView &= vbCrLf & "	FROM OPT P INNER JOIN KYC_CUSTOMERS C "
+        createView &= vbCrLf & "	ON P.CLIENTID = C.ID INNER JOIN OPI ITM "
+        createView &= vbCrLf & "	ON ITM.PAWNITEMID = P.PAWNITEMID INNER JOIN TBLITEM CLASS "
+        createView &= vbCrLf & "	ON CLASS.ITEMID = ITM.ITEMID LEFT JOIN TBL_GAMIT USR ON USR.USERID = P.APPRAISERID;	"
 
 
-        'RunCommand(dropView)
+
+        RunCommand(dropView)
         RunCommand(createView)
 
         Console.WriteLine("View Modified")
@@ -53,28 +64,45 @@
         Dim dropView As String = "DROP VIEW MONEY_TRANSFER;"
         Dim createMTView As String
 
-        createMTView = "CREATE VIEW MONEY_TRANSFER("
-        createMTView &= vbCrLf & "   SERVICETYPE,TRANSDATE,MONEYTRANS, REFNUM,PAYOUT,SENDOUT,SERVICECHARGE,COMMISSION,NETAMOUNT,"
-        createMTView &= vbCrLf & "   SENDERNAME,S_ADDR,RECEIVERNAME,R_ADDR,LOCATION) "
-        createMTView &= vbCrLf & "AS "
-        createMTView &= vbCrLf & "SELECT "
-        createMTView &= vbCrLf & "MT.ServiceType, MT.TransDate, "
-        createMTView &= vbCrLf & "Case MoneyTrans WHEN 1 THEN 'PAYOUT' WHEN 0 THEN 'SENDIN' "
-        createMTView &= vbCrLf & " ELSE 'NA' END AS MoneyTrans,"
-        createMTView &= vbCrLf & " CASE WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 0 THEN 'ME# ' || LPAD(TransID,5,0)"
-        createMTView &= vbCrLf & "WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 1 "
-        createMTView &= vbCrLf & " THEN 'MR# ' || LPAD(TransID,5,0) ELSE RefNum END as RefNum, "
-        createMTView &= vbCrLf & "Case MoneyTrans "
-        createMTView &= vbCrLf & " WHEN 1 THEN AMOUNT ELSE 0 END AS PAYOUT,Case MoneyTrans "
-        createMTView &= vbCrLf & " WHEN 0 THEN AMOUNT ELSE 0 END AS SENDOUT,"
-        createMTView &= vbCrLf & "  MT.ServiceCharge, MT.Commission, MT.NETAMOUNT, MT.SENDERNAME,"
-        createMTView &= vbCrLf & "C.ADDR_STREET || ' ' || C.ADDR_BRGY || ' ' || C.ADDR_CITY AS S_ADDR"
-        createMTView &= vbCrLf & "MT.RECEIVERNAME,  "
-        createMTView &= vbCrLf & " R.ADDR_STREET || ' ' || R.ADDR_BRGY || ' ' || R.ADDR_CITY AS R_ADDR, "
-        createMTView &= vbCrLf & "MT.LOCATION FROM TBLMONEYTRANSFER MT "
-        createMTView &= vbCrLf & "INNER JOIN TBLCLIENT C ON  MT.SENDERID = C.CLIENTID "
-        createMTView &= vbCrLf & "INNER JOIN TBLCLIENT RON  MT.RECEIVERID = R.CLIENTID "
-        createMTView &= vbCrLf & "WHERE Status = 'A'; "
+        createMTView = "	CREATE VIEW MONEY_TRANSFER(	"
+        createMTView &= vbCrLf & "	  SERVICETYPE,TRANSDATE,MONEYTRANS,REFNUM,PAYOUT,SENDOUT,SERVICECHARGE,COMMISSION,	"
+        createMTView &= vbCrLf & "	  NETAMOUNT,SENDERNAME,S_ADDR,RECEIVERNAME,R_ADDR,LOCATION)	"
+        createMTView &= vbCrLf & "	AS	"
+        createMTView &= vbCrLf & "	SELECT 	"
+        createMTView &= vbCrLf & "	MT.ServiceType, MT.TransDate,"
+        createMTView &= vbCrLf & "	CASE MoneyTrans "
+        createMTView &= vbCrLf & "	WHEN 0 THEN 'SENDIN'	"
+        createMTView &= vbCrLf & "	WHEN 1 THEN 'PAYOUT' "
+        createMTView &= vbCrLf & "	ELSE 'NA' "
+        createMTView &= vbCrLf & "	END AS MoneyTrans,	"
+        createMTView &= vbCrLf & "	CASE		"
+        createMTView &= vbCrLf & "	WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 0		"
+        createMTView &= vbCrLf & "	THEN 'ME# ' || LPAD(TransID,5,0)		"
+        createMTView &= vbCrLf & "	WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 1		"
+        createMTView &= vbCrLf & "	THEN 'MR# ' || LPAD(TransID,5,0)		"
+        createMTView &= vbCrLf & "	ELSE RefNum END as RefNum,		"
+        createMTView &= vbCrLf & "	CASE MoneyTrans		"
+        createMTView &= vbCrLf & "	WHEN 1 THEN AMOUNT 		"
+        createMTView &= vbCrLf & "	ELSE 0 END AS PAYOUT,		"
+        createMTView &= vbCrLf & "	CASE MoneyTrans		"
+        createMTView &= vbCrLf & "	WHEN 0 THEN AMOUNT 		"
+        createMTView &= vbCrLf & "	ELSE 0 END AS SENDOUT,		"
+        createMTView &= vbCrLf & "	MT.ServiceCharge,		"
+        createMTView &= vbCrLf & "	MT.Commission,		"
+        createMTView &= vbCrLf & "	MT.NETAMOUNT, MT.SENDERNAME, 		"
+        createMTView &= vbCrLf & "	C.STREET1 || ' ' || C.BRGY1 || ' ' || C.CITY1 AS S_ADDR, "
+        createMTView &= vbCrLf & "	MT.RECEIVERNAME, 		"
+        createMTView &= vbCrLf & "	R.ADDR_STREET || ' ' || R.ADDR_BRGY || ' ' || R.ADDR_CITY AS R_ADDR,"
+        createMTView &= vbCrLf & "	MT.LOCATION	"
+        createMTView &= vbCrLf & "	FROM "
+        createMTView &= vbCrLf & "	TBLMONEYTRANSFER MT	"
+        createMTView &= vbCrLf & "	INNER JOIN KYC_CUSTOMERS C	"
+        createMTView &= vbCrLf & "	ON  MT.SENDERID = C.ID	"
+        createMTView &= vbCrLf & "	INNER JOIN TBLCLIENT R	"
+        createMTView &= vbCrLf & "	ON  MT.RECEIVERID = R.CLIENTID	"
+        createMTView &= vbCrLf & "	WHERE "
+        createMTView &= vbCrLf & "	Status = 'A';"
+
 
         RunCommand(dropView)
         RunCommand(createMTView)
@@ -86,22 +114,26 @@
         Dim dropView As String = "DROP VIEW PRINT_PAWNING;"
         Dim createPawningPrint As String
 
-        createPawningPrint = "CREATE VIEW PRINT_PAWNING("
-        createPawningPrint &= vbCrLf & "  PAWNID,PAWNTICKET,LOANDATE,MATUDATE,EXPIRYDATE,ITEMTYPE,PAWNER,FULLADDRESS,PRINCIPAL,APPRAISAL,"
-        createPawningPrint &= vbCrLf & " INTEREST,ADVINT,SERVICECHARGE,NETAMOUNT,DESCRIPTION,CONTACTNUMBER,ORNUM,ORDATE,PENALTY,RENEWDUE,REDEEMDUE) "
-        createPawningPrint &= vbCrLf & "AS "
-        createPawningPrint &= vbCrLf & "SELECT "
-        createPawningPrint &= vbCrLf & " P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.ITEMTYPE,  "
-        createPawningPrint &= vbCrLf & " C.FIRSTNAME || ' ' || C.LASTNAME AS PAWNER, "
-        createPawningPrint &= vbCrLf & "C.STREET1 || ' ' || C.BRGY1 || ' ' || C.CITY1 AS FULLADDRESS,"
-        createPawningPrint &= vbCrLf & "P.PRINCIPAL, P.APPRAISAL, P.INTEREST, P.ADVINT, P.SERVICECHARGE,"
-        createPawningPrint &= vbCrLf & "P.NETAMOUNT, P.DESCRIPTION, "
-        createPawningPrint &= vbCrLf & "(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1 THEN PH.PHONENUMBER "
-        createPawningPrint &= vbCrLf & "WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER "
-        createPawningPrint &= vbCrLf & " ELSE NULL END)AS CONTACTNUMBER "
-        createPawningPrint &= vbCrLf & " FROM KYC_PHONE PH WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' ROWS 1), "
-        createPawningPrint &= vbCrLf & " P.ORNUM, P.ORDATE, P.PENALTY, P.RENEWDUE, P.REDEEMDUE "
-        createPawningPrint &= vbCrLf & "FROM TBLPAWN P INNER JOIN KYC_CUSTOMERS C ON C.ID = P.CLIENTID;"
+        createPawningPrint = "	CREATE VIEW PRINT_PAWNING( "
+        createPawningPrint &= vbCrLf & "	PAWNID,PAWNTICKET,LOANDATE,MATUDATE,EXPIRYDATE,ITEMTYPE,PAWNER,FULLADDRESS,PRINCIPAL,"
+        createPawningPrint &= vbCrLf & "	APPRAISAL,INTEREST,ADVINT,SERVICECHARGE,NETAMOUNT, DESCRIPTION,CONTACTNUMBER,ORNUM,ORDATE,"
+        createPawningPrint &= vbCrLf & "	PENALTY,RENEWDUE,REDEEMDUE)	"
+        createPawningPrint &= vbCrLf & "	AS	"
+        createPawningPrint &= vbCrLf & "	SELECT 	"
+        createPawningPrint &= vbCrLf & "	P.PAWNID, P.PAWNTICKET, P.LOANDATE, P.MATUDATE, P.EXPIRYDATE, P.ITEMTYPE, "
+        createPawningPrint &= vbCrLf & "	C.FIRSTNAME || ' ' || C.LASTNAME AS PAWNER, 		"
+        createPawningPrint &= vbCrLf & "	C.STREET1 || ' ' || C.BRGY1 || ' ' || C.CITY1 AS FULLADDRESS,"
+        createPawningPrint &= vbCrLf & "	P.PRINCIPAL, P.APPRAISAL, P.INTEREST, P.ADVINT, P.SERVICECHARGE,"
+        createPawningPrint &= vbCrLf & "	P.NETAMOUNT, P.DESCRIPTION, 		"
+        createPawningPrint &= vbCrLf & "	(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1	"
+        createPawningPrint &= vbCrLf & "	THEN PH.PHONENUMBER WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER "
+        createPawningPrint &= vbCrLf & "	ELSE NULL END)AS CONTACTNUMBER FROM KYC_PHONE PH LEFT JOIN KYC_CUSTOMERS CC ON CC.ID = PH.CUSTID "
+        createPawningPrint &= vbCrLf & "	WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' AND PH.ISPRIMARY = 1	"
+        createPawningPrint &= vbCrLf & "	OR CHAR_LENGTH(PH.PHONENUMBER)=11 AND PH.CUSTID =CC.ID ORDER BY PH.ISPRIMARY DESC ROWS 1),"
+        createPawningPrint &= vbCrLf & "	P.ORNUM, P.ORDATE, P.PENALTY, P.RENEWDUE, P.REDEEMDUE "
+        createPawningPrint &= vbCrLf & "	FROM TBLPAWN P 	"
+        createPawningPrint &= vbCrLf & "	INNER JOIN KYC_CUSTOMERS C ON C.ID = P.CLIENTID; "
+
 
         RunCommand(dropView)
         RunCommand(createPawningPrint)
@@ -134,60 +166,32 @@
 
     Private Sub Modify_ExpiryList()
         Dim dropView As String = "DROP VIEW EXPIRY_LIST;"
-        Dim createLoanRegister As String
+        Dim createExpiryList As String
 
-        createLoanRegister = "CREATE VIEW EXPIRY_LIST("
-        createLoanRegister &= vbCrLf & " PAWNID,PAWNTICKET,CLIENTID,LOANDATE,MATUDATE,EXPIRYDATE,AUCTIONDATE,ITEMTYPE, CATID,DESCRIPTION,"
-        createLoanRegister &= vbCrLf & " KARAT,GRAMS,APPRAISAL,PRINCIPAL, INTEREST,NETAMOUNT,EVAT,APPRAISERID,OLDTICKET,ORNUM,ORDATE,LESSPRINCIPAL,"
-        createLoanRegister &= vbCrLf & " DAYSOVERDUE,DELAYINT,PENALTY,SERVICECHARGE,RENEWDUE,REDEEMDUE,STATUS,PULLOUT,SYSTEMINFO,ENCODERID,ADVINT,CATEGORY,"
-        createLoanRegister &= vbCrLf & " CLIENTID1,MIDDLENAME,ID,FIRSTNAME,MIDNAME,LASTNAME,ADDR_STREET,SUFFIX,STREET1,BRGY1,CITY1,PROVINCE1,ZIP1,STREET2,BRGY2,CITY2,PROVINCE2,"
-        createLoanRegister &= vbCrLf & "ZIP2,BIRTHDAY,BIRTHPLACE,NATUREOFWORK,NATIONALITY,GENDER,SRCFUND,RANK,CLIENT_IMG,CONTACTNUMBER,USERNAME) "
-        createLoanRegister &= vbCrLf & "AS "
-        createLoanRegister &= vbCrLf & "SELECT "
-        createLoanRegister &= vbCrLf & " P.*, CL.CATEGORY, C.*,  "
-        createLoanRegister &= vbCrLf & " (SELECT (CASE  "
-        createLoanRegister &= vbCrLf & "WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1 THEN PH.PHONENUMBER "
-        createLoanRegister &= vbCrLf & "WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER "
-        createLoanRegister &= vbCrLf & "ELSE NULL END)AS CONTACTNUMBER "
-        createLoanRegister &= vbCrLf & "FROM KYC_PHONE PH LEFT JOIN KYC_CUSTOMERS CC ON CC.ID = PH.CUSTID "
-        createLoanRegister &= vbCrLf & "WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' AND PH.CUSTID =CC.ID ROWS 1), "
-        createLoanRegister &= vbCrLf & "U.USERNAME FROM tblPawn P "
-        createLoanRegister &= vbCrLf & "INNER JOIN KYC_CUSTOMERS C on P.clientid = C.ID "
-        createLoanRegister &= vbCrLf & "INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
-        createLoanRegister &= vbCrLf & "INNER JOIN tblClass CL ON CL.CLASSID = P.CATID "
-        createLoanRegister &= vbCrLf & "WHERE(P.Status = 'L' or P.Status = 'R'); "
+        createExpiryList = "	CREATE VIEW EXPIRY_LIST(		"
+        createExpiryList &= vbCrLf & "	PAWNID,PAWNTICKET,CLIENTID,LOANDATE,MATUDATE,EXPIRYDATE,AUCTIONDATE,ITEMTYPE,CATID,DESCRIPTION,KARAT,	"
+        createExpiryList &= vbCrLf & "	GRAMS,APPRAISAL,PRINCIPAL,INTEREST,NETAMOUNT,EVAT,APPRAISERID,OLDTICKET,ORNUM,ORDATE,LESSPRINCIPAL,	"
+        createExpiryList &= vbCrLf & "	DAYSOVERDUE,DELAYINT,PENALTY,SERVICECHARGE,RENEWDUE,REDEEMDUE,STATUS,PULLOUT,SYSTEMINFO,ENCODERID,ADVINT,	"
+        createExpiryList &= vbCrLf & "	CATEGORY,CLIENTID1,MIDDLENAME,ID,FIRSTNAME,MIDNAME,LASTNAME,ADDR_STREET,SUFFIX,STREET1,BRGY1,CITY1,PROVINCE1,	"
+        createExpiryList &= vbCrLf & "	ZIP1,STREET2,BRGY2,CITY2,PROVINCE2,ZIP2,BIRTHDAY,BIRTHPLACE,NATUREOFWORK,NATIONALITY,GENDER,SRCFUND,RANK,	"
+        createExpiryList &= vbCrLf & "	CLIENT_IMG,CONTACTNUMBER,USERNAME)	"
+        createExpiryList &= vbCrLf & "	AS		"
+        createExpiryList &= vbCrLf & "	SELECT P.*, CL.CATEGORY, C.*,		"
+        createExpiryList &= vbCrLf & "	(SELECT (CASE WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11)AND PH.ISPRIMARY = 1	"
+        createExpiryList &= vbCrLf & "	THEN PH.PHONENUMBER WHEN (CHAR_LENGTH(PH.PHONENUMBER)=11) THEN PH.PHONENUMBER	"
+        createExpiryList &= vbCrLf & "	ELSE NULL END)AS CONTACTNUMBER FROM KYC_PHONE PH LEFT JOIN KYC_CUSTOMERS CC ON CC.ID = PH.CUSTID	"
+        createExpiryList &= vbCrLf & "	WHERE CHAR_LENGTH(PH.PHONENUMBER)='11' AND PH.ISPRIMARY = 1	"
+        createExpiryList &= vbCrLf & "	OR CHAR_LENGTH(PH.PHONENUMBER)=11 AND PH.CUSTID =CC.ID ORDER BY PH.ISPRIMARY DESC ROWS 1),	"
+        createExpiryList &= vbCrLf & "	U.USERNAME FROM tblPawn P		"
+        createExpiryList &= vbCrLf & "	INNER JOIN KYC_CUSTOMERS C on P.clientid = C.ID	"
+        createExpiryList &= vbCrLf & "	INNER JOIN tbl_Gamit U on U.USERID = P.ENCODERID "
+        createExpiryList &= vbCrLf & "	INNER JOIN tblClass CL ON CL.CLASSID = P.CATID	"
+        createExpiryList &= vbCrLf & "	WHERE (P.Status = 'L' or P.Status = 'R'); "
+
+
         RunCommand(dropView)
-        RunCommand(createLoanRegister)
+        RunCommand(createExpiryList)
 
         Console.WriteLine("View Modified")
     End Sub
 End Module
-
-
-'CREATE VIEW MONEY_TRANSFER(
-'  SERVICETYPE,TRANSDATE,
-'  MONEYTRANS,
-'  REFNUM,
-'  PAYOUT,
-'  SENDOUT,
-'  SERVICECHARGE,
-'  COMMISSION,
-'  NETAMOUNT,
-'  SENDERNAME,
-'  S_ADDR,
-'  RECEIVERNAME,
-'  R_ADDR,
-'  LOCATION)
-'AS
-'SELECT 
-'  MT.ServiceType, MT.TransDate,
-'    CASE MoneyTrans WHEN 1 THEN 'PAYOUT' WHEN 0 THEN 'SENDIN' ELSE 'NA' END AS MoneyTrans,
-'    CASE WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 0 THEN 'ME# ' || LPAD(TransID,5,0)
-'    WHEN ServiceType = 'Pera Padala' AND MoneyTrans = 1 THEN 'MR# ' || LPAD(TransID,5,0) ELSE RefNum END as RefNum,
-'    CASE MoneyTrans WHEN 1 THEN AMOUNT ELSE 0 END AS PAYOUT,
-'    CASE MoneyTrans WHEN 0 THEN AMOUNT ELSE 0 END AS SENDOUT,
-'    MT.ServiceCharge,MT.Commission,MT.NETAMOUNT, MT.SENDERNAME, C.STREET1 || ' ' || C.BRGY1 || ' ' || C.CITY1 AS S_ADDR, 
-'    MT.RECEIVERNAME, R.STREET2 || ' ' || R.BRGY2 || ' ' || R.CITY2 AS R_ADDR,MT.LOCATION
-'FROM TBLMONEYTRANSFER MT INNER JOIN KYC_CUSTOMERS C
-'  ON  MT.SENDERID = C.ID INNER JOIN KYC_CUSTOMERS R
-'  ON  MT.RECEIVERID = R.ID WHERE Status = 'A';

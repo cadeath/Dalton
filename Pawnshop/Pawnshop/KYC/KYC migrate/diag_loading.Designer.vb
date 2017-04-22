@@ -47,6 +47,7 @@ Partial Class diag_loading
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(367, 52)
+        Me.ControlBox = False
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.pbLoading)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
