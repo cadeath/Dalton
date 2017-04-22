@@ -12,14 +12,20 @@
 
         'Loading ItemClass Specifications
         txtClass.Text = display_pawnticket.PawnItem.ItemClass.ClassName
-        Dim specCnt As Integer = 0
-        For Each spec As ItemSpecs In display_pawnticket.PawnItem.ItemClass.ItemSpecifications
-            Dim pawnSpecs As PawnItemSpec = display_pawnticket.PawnItem.PawnItemSpecs.Item(specCnt)
+        'Dim specCnt As Integer = 0
+        'For Each spec As ItemSpecs In display_pawnticket.PawnItem.ItemClass.ItemSpecifications
+        '    Dim pawnSpecs As PawnItemSpec = display_pawnticket.PawnItem.PawnItemSpecs.Item(specCnt)
+
+        '    Dim lv As ListViewItem = lvSpecs.Items.Add(spec.SpecName)
+        '    lv.SubItems.Add(pawnSpecs.SpecsValue)
+
+        '    specCnt += 1
+        'Next
+
+        For Each spec As PawnItemSpec In display_pawnticket.PawnItem.PawnItemSpecs
 
             Dim lv As ListViewItem = lvSpecs.Items.Add(spec.SpecName)
-            lv.SubItems.Add(pawnSpecs.SpecsValue)
-
-            specCnt += 1
+            lv.SubItems.Add(spec.SpecsValue)
         Next
 
         With display_pawnticket

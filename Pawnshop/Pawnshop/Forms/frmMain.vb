@@ -56,6 +56,7 @@ Public Class frmMain
         HourlyReportToolStripMenuItem.Enabled = Not st
         HourlySummaryToolStripMenuItem.Enabled = Not st
         DailyCashCountToolStripMenuItem.Enabled = Not st
+        SMSNoticeToolStripMenuItem1.Enabled = Not st
     End Sub
 
     Private Sub ExecuteSegregate()
